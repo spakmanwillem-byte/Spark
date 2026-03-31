@@ -50,6 +50,15 @@ Herbouw Spark AI met modulaire architectuur om API mismatches tussen backend en 
   - Session management met heartbeat
   - 100% test coverage
 
+- **Future-Proof Dashboard Layout**
+  - Inklapbare sidebar navigatie
+  - 4 secties: WORKSPACE, SPARK AI, MODULES, BEHEER
+  - "Soon" badges voor geplande modules
+  - Admin-only menu items
+  - Stat cards met gradients
+  - Placeholder pagina's voor alle routes
+  - Responsive design
+
 ## Backlog (Geprioriteerd)
 
 ### P0 - Kritiek (Volgende sessie)

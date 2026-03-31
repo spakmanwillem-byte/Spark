@@ -140,6 +140,7 @@ class SnapNLPService:
 
     def _format_result(self, entry, match_type, matched_word=None):
         lagen = entry.get("lagen", {}) or {}
+        wh = entry.get("context_5wh", {}) or {}
         return {
             "id": entry.get("id"),
             "begrip": entry.get("begrip"),
@@ -151,6 +152,14 @@ class SnapNLPService:
             "belangrijkheid": entry.get("belangrijkheid", 0),
             "match_type": match_type,
             "matched_word": matched_word,
+            "context_5wh": {
+                "wie": wh.get("wie", ""),
+                "wat": wh.get("wat", ""),
+                "waar": wh.get("waar", ""),
+                "wanneer": wh.get("wanneer", ""),
+                "waarom": wh.get("waarom", ""),
+                "hoe": wh.get("hoe", ""),
+            },
         }
 
     def _extract_meaningful_words(self, text):

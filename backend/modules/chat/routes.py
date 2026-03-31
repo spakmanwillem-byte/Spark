@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from .snap_service import SnapNLPService
+from .emotion_service import EmotionDetectionService
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -41,9 +42,15 @@ async def process_message(req: ChatMessage):
         "message": "",
         "knowledge_matches": [],
         "sentiment": snap.detect_sentiment(text),
+        "emotion": None,
         "unknown_words": [],
         "snap_suggestions": [],
     }
+
+    # 0. Emotie detectie (hybride: static + learned van knowledge cards)
+    emotion = EmotionDetectionService.detect_emotion(text)
+    if emotion:
+        response["emotion"] = emotion
 
     # 1. Trigger checks
     if snap.detect_greeting(text):
@@ -75,17 +82,20 @@ async def process_message(req: ChatMessage):
 
     if matches:
         response["knowledge_matches"] = matches
-        # Gebruik het beste match voor het antwoord
         best = matches[0]
         laag1 = best.get("laag1", "")
+        # Emotie prefix toevoegen als gedetecteerd
+        prefix = ""
+        if emotion and emotion.get("empathic_response"):
+            prefix = emotion["empathic_response"] + "\n\n"
         if laag1:
             if len(matches) == 1:
-                response["message"] = f"**{best['begrip']}**: {laag1}"
+                response["message"] = f"{prefix}**{best['begrip']}**: {laag1}"
             else:
                 parts = [f"**{m['begrip']}**: {m['laag1']}" for m in matches if m.get('laag1')]
-                response["message"] = "\n\n".join(parts) if parts else f"Ik ken '{best['begrip']}' maar heb nog geen uitleg."
+                response["message"] = prefix + ("\n\n".join(parts) if parts else f"Ik ken '{best['begrip']}' maar heb nog geen uitleg.")
         else:
-            response["message"] = f"Ik ken '{best['begrip']}' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?"
+            response["message"] = f"{prefix}Ik ken '{best['begrip']}' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?"
         response["type"] = "knowledge"
     else:
         # 3. Geen match - detecteer onbekende woorden voor snap suggesties
@@ -139,3 +149,28 @@ async def lookup_knowledge(query: str):
     if not result:
         return {"found": False, "query": query}
     return {"found": True, "query": query, "result": result}
+
+
+@router.get("/emotions/state")
+async def get_emotion_state():
+    """Spark's huidige emotionele staat"""
+    return EmotionDetectionService.get_spark_state()
+
+
+@router.get("/emotions/all")
+async def get_all_emotions():
+    """Alle Spark emotie definities (happy, angry, etc met sub-emoties)"""
+    return EmotionDetectionService.get_spark_emotions()
+
+
+@router.get("/emotions/learned")
+async def get_learned_emotions():
+    """Hoeveel emotie woorden geleerd uit knowledge cards"""
+    return EmotionDetectionService.get_learned_counts()
+
+
+@router.post("/emotions/detect")
+async def detect_emotion(req: ChatMessage):
+    """Detecteer emotie in tekst (test endpoint)"""
+    result = EmotionDetectionService.detect_emotion(req.message)
+    return {"detected": result is not None, "emotion": result}

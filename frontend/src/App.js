@@ -15,6 +15,9 @@ import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { RoadmapPage } from "./components/workspace/RoadmapPage";
+import { DagboekPage } from "./components/workspace/DagboekPage";
+import { NotitiesPage } from "./components/workspace/NotitiesPage";
+import { LeaderboardPage } from "./components/modules/LeaderboardPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
 import { InstellingenPage } from "./components/admin/InstellingenPage";
@@ -35,6 +38,8 @@ function AppContent() {
       '/knowledge': 'knowledge',
       '/calendar': 'calendar',
       '/roadmap': 'roadmap',
+      '/dagboek': 'dagboek',
+      '/notities': 'notities',
       '/spark/brain': 'spark-brain',
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
@@ -42,6 +47,7 @@ function AppContent() {
       '/modules/trader': 'trader',
       '/modules/achievements': 'achievements',
       '/modules/wallet': 'wallet',
+      '/modules/leaderboard': 'leaderboard',
       '/modules/community': 'community',
       '/modules/integrations': 'integrations',
       '/profiel': 'profiel',
@@ -104,6 +110,12 @@ function AppContent() {
         return <KennisbankPage onNavigate={handleNavigate} />;
       case 'roadmap':
         return <RoadmapPage onNavigate={handleNavigate} />;
+      case 'dagboek':
+        return <DagboekPage onNavigate={handleNavigate} />;
+      case 'notities':
+        return <NotitiesPage onNavigate={handleNavigate} />;
+      case 'leaderboard':
+        return <LeaderboardPage onNavigate={handleNavigate} />;
       case 'integrations':
         return <IntegratiesPage onNavigate={handleNavigate} />;
       case 'achievements':

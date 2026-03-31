@@ -7,6 +7,7 @@ import { DashboardPage } from "./components/dashboard/DashboardPage";
 import { TraderPage } from "./components/modules/TraderPage";
 import { UsersAdminPage } from "./components/admin/UsersAdminPage";
 import { UserProfilePage } from "./components/profile/UserProfilePage";
+import { AnalyticsPage } from "./components/admin/AnalyticsPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -75,6 +76,8 @@ function AppContent() {
         return <UsersAdminPage onNavigate={handleNavigate} />;
       case 'profiel':
         return <UserProfilePage onNavigate={handleNavigate} />;
+      case 'analytics':
+        return <AnalyticsPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

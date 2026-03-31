@@ -3,105 +3,130 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Map, CheckCircle, Clock, Circle, ChevronRight, ChevronDown,
   Rocket, Target, Flag, Star, Zap, Brain, Shield, Globe,
-  Package, MessageSquare, Coins, Users, BarChart3, Layers
+  Package, MessageSquare, Coins, Users, BarChart3, Layers,
+  BookOpen, StickyNote, BookHeart, Award, Wallet, Trophy,
+  Settings, Puzzle, Calendar, Home, TrendingUp, Link2, Sparkles
 } from 'lucide-react';
 
 const phases = [
   {
     id: 'phase-0',
-    title: 'Phase 0: Core Foundation',
+    title: 'Phase 0: Core Setup',
     status: 'done',
-    progress: 100,
     color: '#22c55e',
     icon: Shield,
-    period: 'Q1 2026',
+    period: 'Maart 2026',
     items: [
-      { title: 'FastAPI backend met JSON storage', status: 'done' },
-      { title: 'Auth module (login, users, gradaties)', status: 'done' },
+      { title: 'FastAPI backend met JSON storage (geen MongoDB)', status: 'done' },
       { title: 'React frontend met dark theme', status: 'done' },
-      { title: 'Sidebar navigatie met secties', status: 'done' },
-      { title: 'Dashboard met live data kaarten', status: 'done' },
+      { title: 'Auth module (login, users, gradaties)', status: 'done' },
+      { title: 'Sidebar navigatie (4 secties)', status: 'done' },
     ],
   },
   {
     id: 'phase-1',
-    title: 'Phase 1: Knowledge & Workspace',
+    title: 'Phase 1: Workspace',
     status: 'done',
-    progress: 100,
     color: '#22c55e',
-    icon: Brain,
-    period: 'Q1 2026',
+    icon: Home,
+    period: 'Maart 2026',
     items: [
-      { title: 'Kennisbank zoekengine (2400+ kaarten)', status: 'done' },
-      { title: 'Knowledge card CRUD met 4 lagen', status: 'done' },
-      { title: 'Gesprekken (Spark AI, Community, Privé)', status: 'done' },
+      { title: 'Dashboard met live data kaarten', status: 'done' },
+      { title: 'Gesprekken (Spark AI / Community / Privé tabs)', status: 'done' },
+      { title: 'Kennisbank zoekengine (2400+ kaarten, CRUD)', status: 'done' },
       { title: 'Agenda module', status: 'done' },
-      { title: 'Emotie analyse systeem', status: 'done' },
-      { title: 'Verbanden / Knowledge Graph', status: 'done' },
-      { title: 'Triggers beheer', status: 'done' },
+      { title: 'Dagboek met mood tracking', status: 'done' },
+      { title: 'Notities & Taken (hybrid)', status: 'done' },
+      { title: 'Roadmap overzicht', status: 'done' },
     ],
   },
   {
     id: 'phase-2',
-    title: 'Phase 2: Modules & Gamification',
+    title: 'Phase 2: Spark AI',
     status: 'done',
-    progress: 100,
     color: '#22c55e',
-    icon: Package,
-    period: 'Q1 2026',
+    icon: Brain,
+    period: 'Maart 2026',
     items: [
-      { title: 'Achievements systeem (13 milestones, XP)', status: 'done' },
-      { title: 'Integraties (bestandsbrowser + sandbox)', status: 'done' },
-      { title: 'Wallet overzicht', status: 'done' },
-      { title: 'Trader interface', status: 'done' },
-      { title: 'Instellingen (6 tabs)', status: 'done' },
-      { title: 'Analytics dashboard', status: 'done' },
+      { title: 'Triggers beheer (toevoegen/verwijderen)', status: 'done' },
+      { title: 'Emotie analyse systeem', status: 'done' },
+      { title: 'Verbanden / Knowledge Graph', status: 'done' },
+      { title: 'Spark Brain (identiteit & persoonlijkheid)', status: 'planned' },
     ],
   },
   {
     id: 'phase-3',
-    title: 'Phase 3: Backend Integratie',
+    title: 'Phase 3: Modules',
+    status: 'done',
+    color: '#22c55e',
+    icon: Package,
+    period: 'Maart 2026',
+    items: [
+      { title: 'Trader interface', status: 'done' },
+      { title: 'Achievements (13 milestones, XP, rarity)', status: 'done' },
+      { title: 'Leaderboard (ranglijst + podium)', status: 'done' },
+      { title: 'Wallet overzicht', status: 'done' },
+      { title: 'Integraties (bestandsbrowser + module sandbox)', status: 'done' },
+    ],
+  },
+  {
+    id: 'phase-4',
+    title: 'Phase 4: Beheer',
+    status: 'done',
+    color: '#22c55e',
+    icon: Settings,
+    period: 'Maart 2026',
+    items: [
+      { title: 'Mijn Profiel pagina', status: 'done' },
+      { title: 'Gebruikers admin', status: 'done' },
+      { title: 'Analytics (Systeem / Network / Layer)', status: 'done' },
+      { title: 'Instellingen (6 tabs: Algemeen, Beeld, Geluid, Integraties, Features, Tips)', status: 'done' },
+    ],
+  },
+  {
+    id: 'phase-5',
+    title: 'Phase 5: Backend Koppeling',
     status: 'active',
-    progress: 15,
     color: '#f59e0b',
     icon: Zap,
     period: 'Q2 2026',
     items: [
-      { title: 'Instellingen API (opslaan/laden)', status: 'planned' },
-      { title: 'Wallet API koppelen aan oude data', status: 'planned' },
+      { title: 'Dagboek API (opslaan/laden entries)', status: 'planned' },
+      { title: 'Notities & Taken API (CRUD + sync)', status: 'planned' },
+      { title: 'Instellingen API (settings.json)', status: 'planned' },
+      { title: 'Wallet koppelen aan oude wallet data', status: 'planned' },
       { title: 'Trader API met live data', status: 'planned' },
       { title: 'Agenda persistent opslaan', status: 'planned' },
+      { title: 'Leaderboard berekenen uit echte user data', status: 'planned' },
       { title: 'Gesprekken opslaan in JSON', status: 'planned' },
       { title: 'Analytics met echte metrics', status: 'planned' },
     ],
   },
   {
-    id: 'phase-4',
-    title: 'Phase 4: AI & Communicatie',
+    id: 'phase-6',
+    title: 'Phase 6: Spark Brain & AI',
     status: 'planned',
-    progress: 0,
     color: '#3b82f6',
-    icon: MessageSquare,
+    icon: Brain,
     period: 'Q2-Q3 2026',
     items: [
-      { title: 'Spark Brain - AI conversatie engine', status: 'planned' },
+      { title: 'Spark Brain identiteit beheer', status: 'planned' },
+      { title: 'AI conversatie engine', status: 'planned' },
       { title: 'TTS / STT integratie', status: 'planned' },
-      { title: 'Community module', status: 'planned' },
       { title: 'Notificatie systeem', status: 'planned' },
       { title: 'Externe integraties (Bitvavo, Telegram)', status: 'planned' },
     ],
   },
   {
-    id: 'phase-5',
-    title: 'Phase 5: Deployment & Polish',
+    id: 'phase-7',
+    title: 'Phase 7: Deployment & Polish',
     status: 'planned',
-    progress: 0,
     color: '#a855f7',
     icon: Rocket,
     period: 'Q3 2026',
     items: [
       { title: 'Standalone deployment setup', status: 'planned' },
-      { title: 'Data backup & restore systeem', status: 'planned' },
+      { title: 'Data backup & restore', status: 'planned' },
       { title: 'Performance optimalisatie', status: 'planned' },
       { title: 'Documentatie & handleiding', status: 'planned' },
       { title: 'Beveiligingsaudit', status: 'planned' },
@@ -110,12 +135,14 @@ const phases = [
 ];
 
 export function RoadmapPage({ onNavigate }) {
-  const [expandedPhase, setExpandedPhase] = useState('phase-3');
+  const [expandedPhase, setExpandedPhase] = useState(
+    phases.find(p => p.status === 'active')?.id || phases[0].id
+  );
 
   const totalItems = phases.reduce((a, p) => a + p.items.length, 0);
   const doneItems = phases.reduce((a, p) => a + p.items.filter(i => i.status === 'done').length, 0);
-  const activePhase = phases.find(p => p.status === 'active');
   const overallPct = Math.round((doneItems / totalItems) * 100);
+  const activePhase = phases.find(p => p.status === 'active');
 
   return (
     <MainLayout activePage="roadmap" onNavigate={onNavigate}>
@@ -139,7 +166,7 @@ export function RoadmapPage({ onNavigate }) {
               <h2 className="text-lg font-bold text-white">Totale Voortgang</h2>
               <p className="text-xs text-slate-400 mt-0.5">
                 {doneItems} van {totalItems} taken afgerond
-                {activePhase && <span className="text-amber-400 ml-2">Huidige fase: {activePhase.title}</span>}
+                {activePhase && <span className="text-amber-400 ml-2">Nu: {activePhase.title}</span>}
               </p>
             </div>
             <div className="text-right">
@@ -149,13 +176,16 @@ export function RoadmapPage({ onNavigate }) {
           <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
             <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${overallPct}%`, background: 'linear-gradient(90deg, #22c55e, #f59e0b, #a855f7)' }} />
           </div>
-          {/* Mini phase indicators */}
-          <div className="flex gap-2 mt-3">
-            {phases.map(p => (
-              <div key={p.id} className="flex-1 h-1.5 rounded-full" style={{
-                background: p.status === 'done' ? p.color : p.status === 'active' ? `${p.color}60` : '#1e293b'
-              }} />
-            ))}
+          <div className="flex gap-1.5 mt-3">
+            {phases.map(p => {
+              const pDone = p.items.filter(i => i.status === 'done').length;
+              const pPct = p.items.length > 0 ? (pDone / p.items.length) * 100 : 0;
+              return (
+                <div key={p.id} className="flex-1 h-1.5 rounded-full overflow-hidden bg-slate-800">
+                  <div className="h-full rounded-full" style={{ width: `${pPct}%`, background: p.color }} />
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -165,10 +195,10 @@ export function RoadmapPage({ onNavigate }) {
             const isExpanded = expandedPhase === phase.id;
             const PhaseIcon = phase.icon;
             const doneCount = phase.items.filter(i => i.status === 'done').length;
+            const phasePct = phase.items.length > 0 ? Math.round((doneCount / phase.items.length) * 100) : 0;
 
             return (
               <div key={phase.id} className="relative">
-                {/* Timeline connector */}
                 {idx < phases.length - 1 && (
                   <div className="absolute left-[19px] top-[56px] w-0.5 h-[calc(100%-32px)] z-0" style={{
                     background: phase.status === 'done' ? '#22c55e40' : '#1e293b'
@@ -185,7 +215,6 @@ export function RoadmapPage({ onNavigate }) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    {/* Phase icon */}
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{
                       background: phase.status === 'done' ? `${phase.color}15` : phase.status === 'active' ? `${phase.color}20` : '#1e293b',
                       border: phase.status === 'active' ? `2px solid ${phase.color}40` : 'none',
@@ -212,7 +241,7 @@ export function RoadmapPage({ onNavigate }) {
                       </div>
                       <div className="flex items-center gap-3 mt-1.5">
                         <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden max-w-[200px]">
-                          <div className="h-full rounded-full transition-all" style={{ width: `${phase.progress}%`, background: phase.color }} />
+                          <div className="h-full rounded-full transition-all" style={{ width: `${phasePct}%`, background: phase.color }} />
                         </div>
                         <span className="text-[10px] text-slate-500">{doneCount}/{phase.items.length}</span>
                       </div>
@@ -225,7 +254,6 @@ export function RoadmapPage({ onNavigate }) {
                   </div>
                 </button>
 
-                {/* Expanded items */}
                 {isExpanded && (
                   <div className="ml-5 pl-5 border-l-2 mt-1 space-y-1 py-2" style={{ borderColor: `${phase.color}30` }}>
                     {phase.items.map((item, i) => (

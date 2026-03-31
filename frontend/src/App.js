@@ -17,6 +17,7 @@ import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
 import { InstellingenPage } from "./components/admin/InstellingenPage";
+import { WalletPage } from "./components/modules/WalletPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -105,6 +106,8 @@ function AppContent() {
         return <AchievementsPage onNavigate={handleNavigate} />;
       case 'settings':
         return <InstellingenPage onNavigate={handleNavigate} />;
+      case 'wallet':
+        return <WalletPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

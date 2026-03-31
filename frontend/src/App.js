@@ -8,6 +8,7 @@ import { TraderPage } from "./components/modules/TraderPage";
 import { UsersAdminPage } from "./components/admin/UsersAdminPage";
 import { UserProfilePage } from "./components/profile/UserProfilePage";
 import { AnalyticsPage } from "./components/admin/AnalyticsPage";
+import { EmotiesPage } from "./components/spark/EmotiesPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -78,6 +79,8 @@ function AppContent() {
         return <UserProfilePage onNavigate={handleNavigate} />;
       case 'analytics':
         return <AnalyticsPage onNavigate={handleNavigate} />;
+      case 'emotions':
+        return <EmotiesPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

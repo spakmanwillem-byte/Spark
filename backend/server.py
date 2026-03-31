@@ -50,6 +50,10 @@ app.include_router(auth_router, prefix="/api")
 from modules.knowledge import knowledge_router
 app.include_router(knowledge_router, prefix="/api")
 
+# Module 3: Files & Module Sandbox
+from modules.files import files_router
+app.include_router(files_router, prefix="/api")
+
 # Module 3: Chat/Spark Brain (later)
 # from modules.chat import chat_router
 # app.include_router(chat_router, prefix="/api")

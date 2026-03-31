@@ -14,6 +14,7 @@ import { TriggersPage } from "./components/spark/TriggersPage";
 import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
+import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -96,6 +97,8 @@ function AppContent() {
         return <GesprekkenPage onNavigate={handleNavigate} />;
       case 'knowledge':
         return <KennisbankPage onNavigate={handleNavigate} />;
+      case 'integrations':
+        return <IntegratiesPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

@@ -3,7 +3,7 @@ import {
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
-  BookOpen, Settings, Shield, Wallet, Trophy, Bell
+  BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -30,6 +30,7 @@ export const navigationConfig = {
   modules: {
     label: 'MODULES',
     items: [
+      { id: 'trader', label: 'Trader', icon: TrendingUp, path: '/modules/trader' },
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
       { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet' },
       { id: 'community', label: 'Community', icon: UsersRound, path: '/modules/community' },

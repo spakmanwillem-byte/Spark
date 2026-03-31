@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { LoginForm } from "./components/auth/LoginForm";
 import { DashboardPage } from "./components/dashboard/DashboardPage";
+import { TraderPage } from "./components/modules/TraderPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -23,6 +24,7 @@ function AppContent() {
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
       '/spark/connections': 'connections',
+      '/modules/trader': 'trader',
       '/modules/achievements': 'achievements',
       '/modules/wallet': 'wallet',
       '/modules/community': 'community',
@@ -61,8 +63,17 @@ function AppContent() {
     return <LoginForm />;
   }
 
-  // Logged in - show dashboard with active page
-  return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
+  // Logged in - show appropriate page based on activePage
+  const renderPage = () => {
+    switch (activePage) {
+      case 'trader':
+        return <TraderPage onNavigate={handleNavigate} />;
+      default:
+        return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
+    }
+  };
+
+  return renderPage();
 }
 
 function App() {

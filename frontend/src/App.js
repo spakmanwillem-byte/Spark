@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { LoginForm } from "./components/auth/LoginForm";
 import { DashboardPage } from "./components/dashboard/DashboardPage";
 import { TraderPage } from "./components/modules/TraderPage";
+import { UsersAdminPage } from "./components/admin/UsersAdminPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -68,6 +69,8 @@ function AppContent() {
     switch (activePage) {
       case 'trader':
         return <TraderPage onNavigate={handleNavigate} />;
+      case 'users':
+        return <UsersAdminPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

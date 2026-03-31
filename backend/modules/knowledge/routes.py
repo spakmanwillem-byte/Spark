@@ -1,0 +1,69 @@
+"""
+Knowledge Routes - API endpoints voor kennisbank
+"""
+from fastapi import APIRouter, HTTPException, Query
+from typing import Optional
+from .service import KnowledgeService
+
+router = APIRouter(prefix="/knowledge", tags=["knowledge"])
+service = KnowledgeService()
+
+
+@router.get("/all")
+async def get_all_knowledge(
+    search: Optional[str] = Query(None),
+    status_filter: Optional[str] = Query("all"),
+    sort_by: Optional[str] = Query("recent"),
+    importance: Optional[str] = Query("all"),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(50, ge=1, le=200),
+):
+    """Get all knowledge entries with search, filter, sort and pagination"""
+    result = service.get_all(
+        search=search,
+        status_filter=status_filter,
+        sort_by=sort_by,
+        importance=importance,
+        page=page,
+        per_page=per_page,
+    )
+    return result
+
+
+@router.get("/stats")
+async def get_knowledge_stats():
+    """Get knowledge base statistics"""
+    return service.get_stats()
+
+
+@router.get("/tags")
+async def get_all_tags():
+    """Get all unique tags"""
+    return {"tags": service.get_all_tags()}
+
+
+@router.get("/{entry_id}")
+async def get_knowledge_entry(entry_id: str):
+    """Get single knowledge entry by ID"""
+    entry = service.get_by_id(entry_id)
+    if not entry:
+        raise HTTPException(status_code=404, detail="Entry niet gevonden")
+    return entry
+
+
+@router.put("/{entry_id}")
+async def update_knowledge_entry(entry_id: str, data: dict):
+    """Update a knowledge entry"""
+    updated = service.update_entry(entry_id, data)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Entry niet gevonden")
+    return {"status": "ok", "message": "Entry bijgewerkt"}
+
+
+@router.delete("/{entry_id}")
+async def delete_knowledge_entry(entry_id: str):
+    """Delete a knowledge entry permanently"""
+    deleted = service.delete_entry(entry_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Entry niet gevonden")
+    return {"status": "ok", "message": "Entry verwijderd"}

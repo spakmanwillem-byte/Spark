@@ -46,9 +46,9 @@ app.add_middleware(
 from modules.auth import auth_router
 app.include_router(auth_router, prefix="/api")
 
-# Module 2: Knowledge (later)
-# from modules.knowledge import knowledge_router
-# app.include_router(knowledge_router, prefix="/api")
+# Module 2: Knowledge (kennisbank)
+from modules.knowledge import knowledge_router
+app.include_router(knowledge_router, prefix="/api")
 
 # Module 3: Chat/Spark Brain (later)
 # from modules.chat import chat_router

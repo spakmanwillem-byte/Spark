@@ -13,6 +13,7 @@ import { VerbandenPage } from "./components/spark/VerbandenPage";
 import { TriggersPage } from "./components/spark/TriggersPage";
 import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
+import { KennisbankPage } from "./components/workspace/KennisbankPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -93,6 +94,8 @@ function AppContent() {
         return <AgendaPage onNavigate={handleNavigate} />;
       case 'chat':
         return <GesprekkenPage onNavigate={handleNavigate} />;
+      case 'knowledge':
+        return <KennisbankPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

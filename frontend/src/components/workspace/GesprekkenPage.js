@@ -5,8 +5,10 @@ import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Heart, Smile, MoreHorizontal, Phone, Video,
   Image, Paperclip, Mic, ChevronDown, Star, Circle,
-  Bot, User, Clock, Check, CheckCheck, Hash
+  Bot, User, Clock, Check, CheckCheck, Hash, BookOpen, Zap
 } from 'lucide-react';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 const initialConversations = {
   spark: [
@@ -55,7 +57,7 @@ export function GesprekkenPage({ onNavigate }) {
 
   useEffect(() => { scrollToBottom(); }, [sparkMessages, activeTab]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!newMessage.trim()) return;
     const userMsg = {
       id: sparkMessages.length + 1,
@@ -67,20 +69,34 @@ export function GesprekkenPage({ onNavigate }) {
     setNewMessage('');
 
     if (activeTab === 'spark') {
-      setTimeout(() => {
-        const responses = [
-          'Interessant! Daar kan ik je zeker mee helpen.',
-          'Laat me even nadenken... Ja, ik heb een idee!',
-          'Goede vraag! Hier is wat ik erover weet.',
-          'Ik begrijp wat je bedoelt. Zal ik het uitleggen?',
-        ];
-        setSparkMessages(prev => [...prev, {
-          id: prev.length + 1,
+      // Echte API call naar Snap/NLP engine
+      try {
+        const res = await fetch(`${API}/api/chat/message`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: newMessage, user_naam: user?.naam || 'Gebruiker' }),
+        });
+        const data = await res.json();
+        
+        const sparkMsg = {
+          id: Date.now(),
           role: 'spark',
-          message: responses[Math.floor(Math.random() * responses.length)],
-          time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
+          message: data.message || 'Hmm, daar moet ik even over nadenken.',
+          time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
+          type: data.type,
+          knowledge_matches: data.knowledge_matches || [],
+          unknown_words: data.unknown_words || [],
+          snap_suggestions: data.snap_suggestions || [],
+          sentiment: data.sentiment,
+        };
+        setSparkMessages(prev => [...prev, sparkMsg]);
+      } catch (e) {
+        setSparkMessages(prev => [...prev, {
+          id: Date.now(), role: 'spark',
+          message: 'Er ging iets mis met de verbinding. Probeer het opnieuw.',
+          time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
         }]);
-      }, 1000);
+      }
     }
   };
 
@@ -341,6 +357,19 @@ function ChatInput({ value, onChange, onSend, placeholder, accent }) {
 /* === Spark AI message bubble === */
 function SparkBubble({ msg }) {
   const isUser = msg.role === 'user';
+  const hasMatches = msg.knowledge_matches && msg.knowledge_matches.length > 0;
+  const hasSnaps = msg.snap_suggestions && msg.snap_suggestions.length > 0;
+
+  const handleSnap = async (word) => {
+    try {
+      await fetch(`${API}/api/chat/snap`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ concept: word, context: '', user_naam: 'Willem' }),
+      });
+    } catch (e) { console.error(e); }
+  };
+
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div className={`flex items-end gap-2 max-w-[80%] md:max-w-[65%] ${isUser ? 'flex-row-reverse' : ''}`}>
@@ -349,13 +378,36 @@ function SparkBubble({ msg }) {
             <Sparkles className="w-3.5 h-3.5 text-white" />
           </div>
         )}
-        <div className={`px-4 py-2.5 rounded-2xl ${
-          isUser
-            ? 'bg-amber-500 text-white rounded-br-md'
-            : 'bg-slate-800 text-white rounded-bl-md'
-        }`}>
-          <p className="text-sm leading-relaxed">{msg.message}</p>
-          <p className={`text-[10px] mt-1 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>{msg.time}</p>
+        <div>
+          <div className={`px-4 py-2.5 rounded-2xl ${
+            isUser
+              ? 'bg-amber-500 text-white rounded-br-md'
+              : 'bg-slate-800 text-white rounded-bl-md'
+          }`}>
+            <p className="text-sm leading-relaxed whitespace-pre-line">{msg.message}</p>
+            <p className={`text-[10px] mt-1 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>{msg.time}</p>
+          </div>
+          {/* Knowledge matches badges */}
+          {hasMatches && (
+            <div className="flex flex-wrap gap-1 mt-1.5 ml-1">
+              {msg.knowledge_matches.map((m, i) => (
+                <span key={i} className="text-[10px] px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded-full flex items-center gap-1">
+                  <BookOpen className="w-2.5 h-2.5" /> {m.begrip}
+                </span>
+              ))}
+            </div>
+          )}
+          {/* Snap suggestions */}
+          {hasSnaps && (
+            <div className="flex flex-wrap gap-1 mt-1.5 ml-1">
+              {msg.snap_suggestions.map((w, i) => (
+                <button key={i} onClick={() => handleSnap(w)}
+                  className="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-400 rounded-full flex items-center gap-1 hover:bg-blue-500/20 transition-colors">
+                  <Zap className="w-2.5 h-2.5" /> Snap: {w}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

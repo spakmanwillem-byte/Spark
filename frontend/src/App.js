@@ -10,6 +10,7 @@ import { UserProfilePage } from "./components/profile/UserProfilePage";
 import { AnalyticsPage } from "./components/admin/AnalyticsPage";
 import { EmotiesPage } from "./components/spark/EmotiesPage";
 import { VerbandenPage } from "./components/spark/VerbandenPage";
+import { TriggersPage } from "./components/spark/TriggersPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -84,6 +85,8 @@ function AppContent() {
         return <EmotiesPage onNavigate={handleNavigate} />;
       case 'connections':
         return <VerbandenPage onNavigate={handleNavigate} />;
+      case 'triggers':
+        return <TriggersPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

@@ -54,6 +54,10 @@ app.include_router(knowledge_router, prefix="/api")
 from modules.files import files_router
 app.include_router(files_router, prefix="/api")
 
+# Module 4: Achievements
+from modules.achievements import achievements_router
+app.include_router(achievements_router, prefix="/api")
+
 # Module 3: Chat/Spark Brain (later)
 # from modules.chat import chat_router
 # app.include_router(chat_router, prefix="/api")

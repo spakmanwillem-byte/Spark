@@ -15,6 +15,7 @@ import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
+import { AchievementsPage } from "./components/modules/AchievementsPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -99,6 +100,8 @@ function AppContent() {
         return <KennisbankPage onNavigate={handleNavigate} />;
       case 'integrations':
         return <IntegratiesPage onNavigate={handleNavigate} />;
+      case 'achievements':
+        return <AchievementsPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

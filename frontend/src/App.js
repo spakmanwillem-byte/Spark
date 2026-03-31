@@ -6,6 +6,7 @@ import { LoginForm } from "./components/auth/LoginForm";
 import { DashboardPage } from "./components/dashboard/DashboardPage";
 import { TraderPage } from "./components/modules/TraderPage";
 import { UsersAdminPage } from "./components/admin/UsersAdminPage";
+import { UserProfilePage } from "./components/profile/UserProfilePage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -30,6 +31,7 @@ function AppContent() {
       '/modules/wallet': 'wallet',
       '/modules/community': 'community',
       '/modules/integrations': 'integrations',
+      '/profiel': 'profiel',
       '/admin/users': 'users',
       '/admin/analytics': 'analytics',
       '/admin/settings': 'settings',
@@ -71,6 +73,8 @@ function AppContent() {
         return <TraderPage onNavigate={handleNavigate} />;
       case 'users':
         return <UsersAdminPage onNavigate={handleNavigate} />;
+      case 'profiel':
+        return <UserProfilePage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

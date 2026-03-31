@@ -3,7 +3,7 @@ import {
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
-  BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp
+  BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -40,6 +40,7 @@ export const navigationConfig = {
   admin: {
     label: 'BEHEER',
     items: [
+      { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },

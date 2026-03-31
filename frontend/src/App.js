@@ -14,6 +14,7 @@ import { TriggersPage } from "./components/spark/TriggersPage";
 import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
+import { RoadmapPage } from "./components/workspace/RoadmapPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
 import { InstellingenPage } from "./components/admin/InstellingenPage";
@@ -33,6 +34,7 @@ function AppContent() {
       '/chat': 'chat',
       '/knowledge': 'knowledge',
       '/calendar': 'calendar',
+      '/roadmap': 'roadmap',
       '/spark/brain': 'spark-brain',
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
@@ -100,6 +102,8 @@ function AppContent() {
         return <GesprekkenPage onNavigate={handleNavigate} />;
       case 'knowledge':
         return <KennisbankPage onNavigate={handleNavigate} />;
+      case 'roadmap':
+        return <RoadmapPage onNavigate={handleNavigate} />;
       case 'integrations':
         return <IntegratiesPage onNavigate={handleNavigate} />;
       case 'achievements':

@@ -3,7 +3,7 @@ import {
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
-  BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User
+  BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -16,6 +16,7 @@ export const navigationConfig = {
       { id: 'chat', label: 'Gesprekken', icon: MessageSquare, path: '/chat' },
       { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
+      { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
     ]
   },
   spark: {

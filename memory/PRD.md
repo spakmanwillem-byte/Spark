@@ -1,101 +1,81 @@
-# Spark Core 2.0 - PRD (Product Requirements Document)
+# Spark Core 2.0 - PRD
 
-## Originele Probleemstelling
-Herbouw Spark AI met modulaire architectuur om API mismatches tussen backend en frontend te voorkomen. Gelaagde opbouw: elke module volledig afmaken (backend + frontend) voordat naar volgende module wordt gegaan.
-
-## Architectuur Principes
-- **Modulair**: Elke module is zelfstandig
-- **Geen afhankelijkheden**: Modules lopen niet door elkaar
-- **API Contract**: Backend API volledig AF → dan pas frontend
-- **JSON Storage**: Geen MongoDB, bestaande data behouden
-
-## Gebruikerspersona's
-1. **Beheerder (Gradatie 1)** - Volledige toegang, masterkey
-2. **Familie (Gradatie 2)** - Familiegerelateerde functies
-3. **Goede vrienden (Gradatie 3)** - Community + onderhoud
-4. **Externe collega's (Gradatie 4)** - Community Plus
-5. **Communityleden (Gradatie 5)** - Basis functies
-6. **Klanten (Gradatie 6)** - Klantspecifieke functies
-7. **Onbekenden (Gradatie 7)** - Alleen registratie
-
-## Kernvereisten
-
-### Stap 0: Core Setup ✅
-- [x] server.py (entrypoint)
-- [x] config/settings.py
-- [x] modules/core/storage.py (JSON layer)
-
-### Stap 1: Auth Module ✅
-- [x] Backend: modules/auth/service.py
-- [x] Backend: modules/auth/routes.py
-- [x] Backend: modules/auth/models.py
-- [x] Frontend: api/index.js
-- [x] Frontend: context/AuthContext.js
-- [x] Frontend: components/auth/LoginForm.js
-- [x] Frontend: components/dashboard/Dashboard.js
-- [x] Sessie management (heartbeat)
-- [x] Gradatie systeem
-
-## Geïmplementeerd
-
-### 31 maart 2026
-- **Spark Core 2.0 Foundation**
-  - Nieuwe modulaire backend architectuur
-  - JSON storage layer (thread-safe)
-  - Auth module volledig (backend + frontend)
-  - Dark theme UI met Spark branding
-  - Login/logout flow
-  - Dashboard met profiel, modules, statistieken
-  - Gradatie systeem (7 niveaus)
-  - Session management met heartbeat
-  - 100% test coverage
-
-- **Future-Proof Dashboard Layout**
-  - Inklapbare sidebar navigatie
-  - 4 secties: WORKSPACE, SPARK AI, MODULES, BEHEER
-  - "Soon" badges voor geplande modules
-  - Admin-only menu items
-  - Stat cards met gradients
-  - Placeholder pagina's voor alle routes
-  - Responsive design
-
-## Backlog (Geprioriteerd)
-
-### P0 - Kritiek (Volgende sessie)
-- [ ] Knowledge Module (backend)
-- [ ] Knowledge Module (frontend)
-
-### P1 - Hoog
-- [ ] Chat/Spark Brain Module (backend)
-- [ ] Chat/Spark Brain Module (frontend)
-- [ ] Conversation history
-
-### P2 - Medium
-- [ ] Admin Panel
-- [ ] User Management UI
-- [ ] Settings Module
-- [ ] Notes Module
-
-### P3 - Laag
-- [ ] Achievements Module
-- [ ] Wallet Module
-- [ ] Community Module
-- [ ] Game Module
-
-## Volgende Taken
-1. Knowledge Module Backend
-   - /api/knowledge routes
-   - CRUD voor knowledge entries
-   - 3-lagen systeem (laag1, laag2, laag3)
-   - Tags en metadata
-
-2. Knowledge Module Frontend
-   - Knowledge browser component
-   - Search functionaliteit
-   - Entry detail view
+## Origineel Verzoek
+Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder cloud of MongoDB. Alle data in lokale JSON bestanden. Dark-themed dashboard met expandable sidebar, draggable cards, en specifieke secties.
 
 ## Tech Stack
-- **Backend**: FastAPI, Python 3.x
-- **Frontend**: React 19, Tailwind CSS
-- **Storage**: JSON files (geen MongoDB)
-- **Auth**: Custom JWT-less session (sleutelwoord based)
+- **Backend**: FastAPI + JSON file storage (geen MongoDB!)
+- **Frontend**: React + Tailwind CSS + Lucide icons
+- **Auth**: JWT token-based met lokale users.json
+- **Storage**: `/app/backend/data/*.json`
+
+## Architectuur
+```
+/app/backend/
+  ├── modules/auth/     (login, users, gradaties)
+  ├── modules/knowledge/ (kennisbank CRUD + zoeken)
+  ├── modules/files/    (bestandsbrowser + module sandbox)
+  ├── modules/achievements/ (XP + milestone tracking)
+  └── data/             (alle JSON bestanden)
+
+/app/frontend/src/
+  ├── components/layout/     (MainLayout met sidebar)
+  ├── components/dashboard/  (Dashboard overzicht)
+  ├── components/workspace/  (Gesprekken, Kennisbank, Agenda)
+  ├── components/spark/      (Emoties, Verbanden, Triggers)
+  ├── components/modules/    (Trader, Achievements, Integraties)
+  ├── components/admin/      (Analytics, UsersAdmin, Instellingen)
+  └── components/profile/    (UserProfile)
+```
+
+## Voltooide Pagina's
+
+### WORKSPACE
+- [x] Dashboard - Overzicht met live data kaarten (kennisbank stats, triggers, systeem status, verbanden graph, users, bestanden, agenda, gesprekken)
+- [x] Gesprekken - Chat met tabs (Spark AI, Community, Privé) in top banner
+- [x] Kennisbank - Zoekengine voor 2424+ knowledge cards met filter/sort/edit/delete + detail modal
+- [x] Agenda - Kalender met afspraken
+
+### SPARK AI
+- [x] Spark Brain - Knowledge graph placeholder
+- [x] Triggers - Trigger woorden beheer
+- [x] Emoties - Emotie analyse systeem
+- [x] Verbanden - Knowledge graph visualisatie
+
+### MODULES
+- [x] Trader - Trading interface
+- [x] Achievements - XP & milestones (9/13 unlocked, 26.350 XP, live data)
+- [x] Integraties - Bestandsbrowser (105 bestanden) + Module Sandbox (aanmaken/testen/integreren)
+- [ ] Wallet - Placeholder
+- [ ] Community - Placeholder
+
+### BEHEER
+- [x] Mijn Profiel - User profiel pagina
+- [x] Gebruikers - Admin users beheer
+- [x] Analytics - Systeem/Network/Layer tabs
+- [x] Instellingen - 6 tabs: Algemeen, Beeld, Geluid, Integraties, Features, Tips & Hulp (frontend-only, backend later)
+
+## API Endpoints
+- `POST /api/auth/login` - Inloggen
+- `GET /api/auth/users` - Alle gebruikers
+- `GET /api/auth/me` - Huidige user
+- `GET /api/knowledge/all` - Kennisbank zoeken (search, filter, sort, paginatie)
+- `GET /api/knowledge/stats` - Kennisbank statistieken
+- `GET/PUT/DELETE /api/knowledge/{id}` - Kaart CRUD
+- `GET /api/files/tree` - Bestandsboom
+- `GET /api/files/content` - Bestand lezen
+- `POST /api/files/save` - Bestand opslaan met syntax validatie
+- `GET /api/modules/list` - Sandbox modules
+- `POST /api/modules/create` - Module aanmaken
+- `POST /api/modules/test` - Module testen
+- `GET /api/achievements/all` - Alle achievements
+- `GET /api/achievements/progress/{user_id}` - User voortgang + retroactive unlock
+
+## Backlog
+- [ ] Backend API koppelen aan Instellingen pagina (opslaan/laden settings.json)
+- [ ] Wallet pagina invullen
+- [ ] Community pagina invullen
+- [ ] Spark Brain pagina invullen
+- [ ] Backend API wire-up voor gemockte UI's (Trader, Analytics, etc.)
+
+## Datum: 31 maart 2026

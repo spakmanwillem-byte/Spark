@@ -16,6 +16,7 @@ import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
+import { InstellingenPage } from "./components/admin/InstellingenPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -102,6 +103,8 @@ function AppContent() {
         return <IntegratiesPage onNavigate={handleNavigate} />;
       case 'achievements':
         return <AchievementsPage onNavigate={handleNavigate} />;
+      case 'settings':
+        return <InstellingenPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

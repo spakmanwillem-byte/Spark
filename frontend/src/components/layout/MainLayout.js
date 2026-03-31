@@ -8,53 +8,60 @@ import {
 import { useAuth } from '../../context/AuthContext';
 
 // Navigation configuration - easy to extend
-const navigationConfig = {
+export const navigationConfig = {
   workspace: {
     label: 'WORKSPACE',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/' },
-      { id: 'chat', label: 'Gesprekken', icon: MessageSquare, path: '/chat', status: 'planned' },
-      { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge', status: 'planned' },
-      { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar', status: 'planned' },
+      { id: 'chat', label: 'Gesprekken', icon: MessageSquare, path: '/chat' },
+      { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
+      { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
     ]
   },
   spark: {
     label: 'SPARK AI',
     items: [
-      { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain', status: 'planned' },
-      { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers', status: 'planned' },
-      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions', status: 'planned' },
-      { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections', status: 'planned' },
+      { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
+      { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
+      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
+      { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },
     ]
   },
   modules: {
     label: 'MODULES',
     items: [
-      { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements', status: 'planned' },
-      { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet', status: 'planned' },
-      { id: 'community', label: 'Community', icon: UsersRound, path: '/modules/community', status: 'planned' },
-      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations', status: 'planned' },
+      { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
+      { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet' },
+      { id: 'community', label: 'Community', icon: UsersRound, path: '/modules/community' },
+      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },
   admin: {
     label: 'BEHEER',
     items: [
-      { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', status: 'planned', adminOnly: true },
-      { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', status: 'planned', adminOnly: true },
-      { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings', status: 'planned' },
+      { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
+      { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
+      { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
     ]
   }
 };
 
-export function MainLayout({ children, activePage = 'dashboard' }) {
+// Get page info by id
+export const getPageInfo = (pageId) => {
+  for (const section of Object.values(navigationConfig)) {
+    const item = section.items.find(i => i.id === pageId);
+    if (item) return { ...item, section: section.label };
+  }
+  return null;
+};
+
+export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activePageId, setActivePageId] = useState(activePage);
 
   const handleNavClick = (item) => {
-    if (item.status !== 'planned') {
-      setActivePageId(item.id);
-      // Navigation will be handled by parent/router
+    if (onNavigate) {
+      onNavigate(item.id, item.path);
     }
   };
 
@@ -62,11 +69,11 @@ export function MainLayout({ children, activePage = 'dashboard' }) {
     <div className="min-h-screen bg-slate-950 flex">
       {/* Sidebar */}
       <aside 
-        className={`${sidebarCollapsed ? 'w-20' : 'w-64'} bg-slate-900/50 border-r border-slate-800 flex flex-col transition-all duration-300 ease-in-out`}
+        className={`${sidebarCollapsed ? 'w-20' : 'w-64'} bg-slate-900/50 border-r border-slate-800 flex flex-col transition-all duration-300 ease-in-out flex-shrink-0`}
       >
         {/* Logo */}
         <div className="h-16 flex items-center px-4 border-b border-slate-800">
-          <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20 cursor-pointer" onClick={() => onNavigate && onNavigate('dashboard', '/')}>
             <Zap className="w-5 h-5 text-white" />
           </div>
           {!sidebarCollapsed && (
@@ -96,7 +103,7 @@ export function MainLayout({ children, activePage = 'dashboard' }) {
                     <NavItem 
                       key={item.id}
                       item={item}
-                      isActive={activePageId === item.id}
+                      isActive={activePage === item.id}
                       isCollapsed={sidebarCollapsed}
                       onClick={() => handleNavClick(item)}
                     />
@@ -159,19 +166,15 @@ export function MainLayout({ children, activePage = 'dashboard' }) {
 // Navigation Item Component
 function NavItem({ item, isActive, isCollapsed, onClick }) {
   const Icon = item.icon;
-  const isPlanned = item.status === 'planned';
 
   return (
     <button
       onClick={onClick}
-      disabled={isPlanned}
       className={`
-        w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all
+        w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer
         ${isActive 
           ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' 
-          : isPlanned
-            ? 'text-slate-600 cursor-not-allowed'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+          : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
         }
         ${isCollapsed ? 'justify-center' : ''}
       `}
@@ -180,14 +183,7 @@ function NavItem({ item, isActive, isCollapsed, onClick }) {
     >
       <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : ''}`} />
       {!isCollapsed && (
-        <>
-          <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
-          {isPlanned && (
-            <span className="text-[10px] px-1.5 py-0.5 bg-slate-800 text-slate-500 rounded">
-              Soon
-            </span>
-          )}
-        </>
+        <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
       )}
     </button>
   );

@@ -1,0 +1,125 @@
+{
+  "passed": 15,
+  "failed": 2,
+  "details": [
+    {
+      "test": "Vraag met lidwoord",
+      "status": "PASS",
+      "input": "Wat is een auto?",
+      "expected": "Auto",
+      "actual": "Auto"
+    },
+    {
+      "test": "Vraag zonder lidwoord",
+      "status": "PASS",
+      "input": "Wat is liefde?",
+      "expected": "Liefde",
+      "actual": "Liefde"
+    },
+    {
+      "test": "Hoe-vraag",
+      "status": "PASS",
+      "input": "Hoe werkt blockchain?",
+      "expected": "Blockchain",
+      "actual": "Blockchain"
+    },
+    {
+      "test": "Vertel-statement",
+      "status": "PASS",
+      "input": "Vertel over fotosynthese",
+      "expected": "Fotosynthese",
+      "actual": "Fotosynthese"
+    },
+    {
+      "test": "Wie-vraag (filosofisch)",
+      "status": "PASS",
+      "input": "Wie is tijd",
+      "expected": "Tijd",
+      "actual": "Tijd"
+    },
+    {
+      "test": "Lowercase concept",
+      "status": "FAIL",
+      "input": "blockchain",
+      "expected": "Blockchain",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Uppercase concept (blijft uppercase)",
+      "status": "FAIL",
+      "input": "AUTO",
+      "expected": "AUTO",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Correct gekapitaliseerd concept",
+      "status": "PASS",
+      "input": "Respect",
+      "expected": "Respect",
+      "actual": "Respect"
+    },
+    {
+      "test": "Voegwoord",
+      "status": "PASS",
+      "input": "en",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Lidwoord",
+      "status": "PASS",
+      "input": "de",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Lidwoord",
+      "status": "PASS",
+      "input": "het",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Hulpwerkwoord",
+      "status": "PASS",
+      "input": "is",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Grammaticaal patroon",
+      "status": "PASS",
+      "input": "wat is",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Opvulwoord",
+      "status": "PASS",
+      "input": "nou ja",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    },
+    {
+      "test": "Concept met lidwoord",
+      "status": "PASS",
+      "input": "de appel",
+      "expected": "Appel",
+      "actual": "Appel"
+    },
+    {
+      "test": "Concept met onbepaald lidwoord",
+      "status": "PASS",
+      "input": "een hond",
+      "expected": "Hond",
+      "actual": "Hond"
+    },
+    {
+      "test": "Zin met voornaamwoord",
+      "status": "PASS",
+      "input": "ik loop",
+      "expected": "REJECT",
+      "actual": "REJECT"
+    }
+  ]
+}

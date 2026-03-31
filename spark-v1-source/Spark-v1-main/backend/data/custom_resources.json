@@ -1,0 +1,49 @@
+{
+  "resources": [
+    {
+      "id": "wood",
+      "name": "Hout",
+      "icon": "🪵",
+      "weight": 2.5,
+      "volume": 5,
+      "description": "Basis bouwmateriaal",
+      "is_default": true
+    },
+    {
+      "id": "stone",
+      "name": "Steen",
+      "icon": "🪨",
+      "weight": 10,
+      "volume": 3,
+      "description": "Zwaar bouwmateriaal",
+      "is_default": true
+    },
+    {
+      "id": "fish",
+      "name": "Vis",
+      "icon": "🐟",
+      "weight": 0.5,
+      "volume": 1,
+      "description": "Voedsel",
+      "is_default": true
+    },
+    {
+      "id": "grain",
+      "name": "Graan",
+      "icon": "🌾",
+      "weight": 1,
+      "volume": 2,
+      "description": "Basisgewas voor voedsel",
+      "is_default": true
+    },
+    {
+      "id": "planks",
+      "name": "Planken",
+      "icon": "📐",
+      "weight": 3,
+      "volume": 4,
+      "description": "Verwerkt hout",
+      "is_default": true
+    }
+  ]
+}

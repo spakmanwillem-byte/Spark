@@ -1,0 +1,85 @@
+{
+  "user_id": "user-f619dfd9",
+  "total_conversations": 2,
+  "conversations": [
+    {
+      "id": "conv-aad7981f",
+      "timestamp": "2026-03-08T10:58:18.816773",
+      "user_id": "user-f619dfd9",
+      "user_message": "Ik ben Maurice Maas en mijn sleutelwoord is Koken doe maar",
+      "spark_response": "✅ Account aangemaakt! Hoi Maurice! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Maurice Maas"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 11,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Maurice",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-1a0027f6",
+      "timestamp": "2026-03-08T10:58:49.307276",
+      "user_id": "user-f619dfd9",
+      "user_message": "Ik ben Maurice Maas en mijn sleutelwoord is Koken doe maar",
+      "spark_response": "Hoi Maurice! 😊\n📊 Gradatie: 7\n💬 Welkom terug!\n\nHoe gaat het?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Maurice Maas"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 11,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Maurice",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "last_updated": "2026-03-08T10:58:49.316449"
+}

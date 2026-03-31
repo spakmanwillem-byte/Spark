@@ -1,0 +1,85 @@
+{
+  "user_id": "user-ef3bac9b",
+  "total_conversations": 2,
+  "conversations": [
+    {
+      "id": "conv-ca6e24f3",
+      "timestamp": "2026-03-15T07:15:59.772631",
+      "user_id": "user-ef3bac9b",
+      "user_message": "Ik ben Joy Spakman Sleutelwoord Vrolijk",
+      "spark_response": "✅ Account aangemaakt! Hoi Joy! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?\n\n🌟 Elke dag leer ik iets nieuws. Vandaag misschien van jou?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Joy Spakman"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "positief",
+        "is_question": false,
+        "command": null,
+        "word_count": 6,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Joy",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-5e3778b2",
+      "timestamp": "2026-03-15T07:17:15.464756",
+      "user_id": "user-ef3bac9b",
+      "user_message": "Ik ben Nick Sleutelwoord Vriend",
+      "spark_response": "Hey Joy! Interessant! Vertel me meer, dan kan ik ervan leren.\n\n🔗 Graph Context (verbanden):\n  • samen is een voorbeeld van Vriendschap\n  • samen is een voorbeeld van Verbanden\n  • samen is een voorbeeld van Samenleving.",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "ben Nick Sleutelwoord"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "vrienden",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 5,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Joy",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "last_updated": "2026-03-15T07:17:15.471220"
+}

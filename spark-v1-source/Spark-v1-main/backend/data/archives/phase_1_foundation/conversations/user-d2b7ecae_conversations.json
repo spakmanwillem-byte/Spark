@@ -1,0 +1,85 @@
+{
+  "user_id": "user-d2b7ecae",
+  "total_conversations": 2,
+  "conversations": [
+    {
+      "id": "conv-6f9f4af9",
+      "timestamp": "2026-03-12T07:49:32.245067",
+      "user_id": "user-d2b7ecae",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "✅ Account aangemaakt! Hoi Goedemorgen! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [],
+          "locaties": [
+            "Spark"
+          ],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Locaties",
+          "sub_klasse": "Steden",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 2,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Goedemorgen",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-a341a2d0",
+      "timestamp": "2026-03-13T08:17:54.695180",
+      "user_id": "user-d2b7ecae",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Welkom terug, Goedemorgen! 😊\n📊 Gradatie: 7\n\nHoe is het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [],
+          "locaties": [
+            "Spark"
+          ],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Locaties",
+          "sub_klasse": "Steden",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 2,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Goedemorgen",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "last_updated": "2026-03-13T08:17:54.719812"
+}

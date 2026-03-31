@@ -1,0 +1,74 @@
+{
+  "run_id": "run_user-001_BCH_1774602133",
+  "user_id": "user-001",
+  "coin": "BCH",
+  "start_time": "2026-03-27T09:02:13.151417",
+  "config": {
+    "bb_period": 20,
+    "bb_std_dev": 2,
+    "trade_amount": 5.0,
+    "trailing_profit": 0.01,
+    "trailing_stop": 0.004,
+    "max_loss_lock": 0.03,
+    "interval": "1h"
+  },
+  "candles": [
+    {
+      "timestamp": 1774602000000,
+      "open": "403.81",
+      "high": "403.81",
+      "low": "403.81",
+      "close": "403.81",
+      "volume": "0.01998371"
+    }
+  ],
+  "decisions_v1": [
+    {
+      "timestamp": 1774602000000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 403.81
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03,
+        "interval": "1h"
+      }
+    }
+  ],
+  "decisions_v2": [],
+  "position_state": {
+    "position_type": "NONE",
+    "entry_price": null,
+    "entry_time": null,
+    "highest_price": null,
+    "trade_amount": 5.0,
+    "trailing_stop_active": false
+  },
+  "trading_locked": false,
+  "total_pnl": 0.0,
+  "trade_history": [],
+  "status": "active",
+  "last_update": "2026-03-27T09:02:17.476016"
+}

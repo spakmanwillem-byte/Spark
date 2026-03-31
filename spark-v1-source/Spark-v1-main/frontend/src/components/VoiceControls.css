@@ -1,0 +1,115 @@
+.voice-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.voice-controls.unsupported {
+  padding: 8px;
+  background: rgba(255, 100, 100, 0.1);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #ff6464;
+}
+
+.voice-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.voice-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.voice-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.voice-button.recording {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.voice-button.processing {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  cursor: wait;
+}
+
+.voice-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 20px rgba(245, 87, 108, 0.6);
+  }
+}
+
+.recording-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.voice-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 100, 100, 0.15);
+  border: 1px solid rgba(255, 100, 100, 0.3);
+  border-radius: 8px;
+  color: #ff6464;
+  font-size: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+.voice-error button {
+  background: none;
+  border: none;
+  color: #ff6464;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.voice-error button:hover {
+  opacity: 1;
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}

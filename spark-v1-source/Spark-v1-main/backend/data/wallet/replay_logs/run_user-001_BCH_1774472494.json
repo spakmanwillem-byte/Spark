@@ -1,0 +1,352 @@
+{
+  "run_id": "run_user-001_BCH_1774472494",
+  "user_id": "user-001",
+  "coin": "BCH",
+  "start_time": "2026-03-25T21:01:34.064288",
+  "config": {
+    "bb_period": 20,
+    "bb_std_dev": 2,
+    "trade_amount": 5.0,
+    "trailing_profit": 0.01,
+    "trailing_stop": 0.004,
+    "max_loss_lock": 0.03
+  },
+  "candles": [
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.43",
+      "volume": "0.27481859"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.43",
+      "volume": "0.27481859"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.43",
+      "volume": "0.27481859"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.43",
+      "volume": "0.27481859"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.29",
+      "volume": "0.641286"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.29",
+      "volume": "0.641286"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.29",
+      "volume": "0.641286"
+    },
+    {
+      "timestamp": 1774472400000,
+      "open": "409.29",
+      "high": "409.43",
+      "low": "409.29",
+      "close": "409.29",
+      "volume": "0.641286"
+    }
+  ],
+  "decisions_v1": [
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.43
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.43
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.43
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.43
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.29
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.29
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.29
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    },
+    {
+      "timestamp": 1774472400000,
+      "action": "HOLD",
+      "confidence": 0.0,
+      "indicators": {
+        "bb": null,
+        "rsi": null,
+        "price": 409.29
+      },
+      "reason": "Onvoldoende data voor Bollinger Bands",
+      "position_update": {
+        "position_type": "NONE",
+        "entry_price": null,
+        "entry_time": null,
+        "highest_price": null,
+        "trade_amount": 5.0,
+        "trailing_stop_active": false
+      },
+      "pnl": {
+        "pnl_eur": 0,
+        "pnl_percent": 0
+      },
+      "lock_triggered": false,
+      "config_used": {
+        "bb_period": 20,
+        "bb_std_dev": 2,
+        "trade_amount": 5.0,
+        "trailing_profit": 0.01,
+        "trailing_stop": 0.004,
+        "max_loss_lock": 0.03
+      }
+    }
+  ],
+  "decisions_v2": [],
+  "position_state": {
+    "position_type": "NONE",
+    "entry_price": null,
+    "entry_time": null,
+    "highest_price": null,
+    "trade_amount": 5.0,
+    "trailing_stop_active": false
+  },
+  "trading_locked": false,
+  "total_pnl": 0.0,
+  "trade_history": [],
+  "status": "active",
+  "last_update": "2026-03-25T21:02:44.570279"
+}

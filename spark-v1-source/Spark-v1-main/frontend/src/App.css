@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🎨 Dynamic Theme Variables - Change with Spark's Mood */
+:root {
+  /* Default Theme (Green/Happy) */
+  --color-primary: #4CAF50;
+  --color-primary-light: #81C784;
+  --color-primary-dark: #388E3C;
+  --color-accent: #66BB6A;
+  --color-glow: rgba(76, 175, 80, 0.5);
+  
+  /* Background & Text (constant) */
+  --color-bg: #0a0a0a;
+  --color-text: #ffffff;
+  
+  /* Transition speed */
+  --theme-transition: all 0.8s ease-in-out;
+}
+
+/* Apply transitions to elements that use theme colors */
+* {
+  transition: background-color 0.8s ease-in-out, 
+              border-color 0.8s ease-in-out,
+              box-shadow 0.8s ease-in-out;
+}
+
+/* Heartbeat Animation */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100px);
+  }
+}
+
+.heartbeat-line {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* Pulse effect for avatar border */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(8px);
+  }
+}
+
+.animate-pulse {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Bounce delays */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.7);
+}

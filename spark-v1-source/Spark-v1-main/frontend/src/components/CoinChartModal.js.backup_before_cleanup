@@ -1,0 +1,881 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceDot } from 'recharts';
+import { CacheHelper } from '../utils/cacheHelper';
+
+const CoinChartModal = ({ coin, onClose }) => {
+  const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [timeframe, setTimeframe] = useState('7d');
+  
+  // Mode: 'view' of 'monitor' (alleen voor BCH)
+  const [mode, setMode] = useState('view');
+  
+  // Live Monitor state
+  const [runId, setRunId] = useState(null);
+  const [decisions, setDecisions] = useState([]);
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const [lastDecision, setLastDecision] = useState(null);
+  const [isMonitoring, setIsMonitoring] = useState(false);
+  const [totalPnl, setTotalPnl] = useState(0);
+  const [tradeAmountEur, setTradeAmountEur] = useState(5.0); // Potje waarde
+  
+  // Marker validation tracking
+  const [candleCount, setCandleCount] = useState(0);
+  const [buySellCount, setBuySellCount] = useState(0);
+  const [showMarkerWarning, setShowMarkerWarning] = useState(false);
+  const [showUIMismatch, setShowUIMismatch] = useState(false);
+  
+  // Ref to track polling interval ID
+  const pollingIntervalRef = useRef(null);
+  
+  // Candle countdown state
+  const [candleCountdown, setCandleCountdown] = useState({ minutes: 0, seconds: 0, percentage: 0 });
+  
+  // BCH is default for Willem's strategy (ma/di dip, do/vr/za opbouw)
+  const DEFAULT_COIN = 'BCH';
+  
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  // Stop monitoring and clear interval
+  const stopMonitoring = () => {
+    console.log('🛑 Stopping monitoring and clearing interval');
+    setIsMonitoring(false);
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
+  };
+
+  // Handle modal close - stop monitoring first, then close
+  const handleClose = () => {
+    console.log('❌ Closing modal - stopping all activity');
+    stopMonitoring();
+    onClose();
+  };
+
+  // ESC key handler
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        console.log('⌨️ ESC key pressed');
+        handleClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);  // Empty deps - alleen mount/unmount
+
+  // Load chart data + AUTO-REFRESH elke minuut
+  useEffect(() => {
+    if (coin) {
+      loadChartData();
+      
+      // Auto-refresh elke minuut voor live updates
+      const refreshInterval = setInterval(() => {
+        console.log('🔄 Live refresh:', coin, timeframe);
+        loadChartData();
+      }, 60000); // 60 seconden
+      
+      return () => clearInterval(refreshInterval);
+    }
+  }, [coin, timeframe]);
+
+  useEffect(() => {
+    if (mode === 'monitor') {
+      // Monitor mode: clear state maar start niet auto
+      setDecisions([]);
+      setLastDecision(null);
+      setCurrentPosition(null);
+      setIsMonitoring(false);
+    }
+  }, [mode]);
+
+  const loadChartData = async () => {
+    const cacheKey = `candles_${coin}_${timeframe}`;
+    
+    // 1. Check cache first (stale-while-revalidate)
+    const cached = CacheHelper.get(cacheKey, true); // Allow stale
+    if (cached) {
+      // Show cached data IMMEDIATELY
+      setChartData(cached.data);
+      setLoading(false);
+      
+      // If not stale, we're done!
+      if (!cached.isStale) {
+        return;
+      }
+      // If stale, continue fetching fresh data in background
+    } else {
+      // No cache, show loading
+      setLoading(true);
+    }
+    
+    // 2. Fetch fresh data (in background if we showed cached)
+    try {
+      setError(null);
+      
+      const timeframeConfig = {
+        '5m': { interval: '5m', limit: 100 },
+        '15m': { interval: '15m', limit: 96 },
+        '30m': { interval: '30m', limit: 48 },
+        '1h': { interval: '1h', limit: 24 },
+        '24h': { interval: '1h', limit: 24 },
+        '7d': { interval: '1h', limit: 168 },
+        '30d': { interval: '1d', limit: 30 }
+      };
+      
+      const config = timeframeConfig[timeframe];
+      const market = `${coin}-EUR`;
+      
+      const response = await fetch(
+        `${API}/api/bitvavo/candles?market=${market}&interval=${config.interval}&limit=${config.limit}`
+      );
+      const data = await response.json();
+      
+      if (data.success && data.candles) {
+        const transformed = data.candles.map((candle, index) => ({
+          index,
+          time: new Date(candle.timestamp).toLocaleString('nl-NL', {
+            month: 'short',
+            day: 'numeric',
+            hour: timeframe === '24h' ? '2-digit' : undefined,
+            minute: timeframe === '24h' ? '2-digit' : undefined
+          }),
+          price: parseFloat(candle.close),
+          fullDate: new Date(candle.timestamp),
+          timestamp: candle.timestamp
+        }));
+        
+        setChartData(transformed);
+        
+        // 3. Cache the fresh data
+        CacheHelper.set(cacheKey, transformed, 'candles');
+      } else {
+        setError(data.error || 'Kon chart data niet laden');
+      }
+    } catch (err) {
+      setError('Fout bij ophalen chart data: ' + err.message);
+      
+      // If error and no cached data was shown, clear chart
+      if (!cached) {
+        setChartData([]);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ============================================================================
+  // LIVE MONITOR FUNCTIONS (Decision Engine Integration)
+  // ============================================================================
+
+  const startLiveMonitor = async () => {
+    try {
+      setError(null);
+      
+      // Gebruik current timeframe (niet hardcoded)
+      // Geen auto-switch - user kiest zelf
+      
+      // Map display timeframe naar Bitvavo interval
+      const intervalMap = {
+        '5m': '5m',
+        '15m': '15m',
+        '30m': '30m',
+        '1h': '1h',
+        '24h': '1h',
+        '7d': '1h',
+        '30d': '1d'
+      };
+      
+      const interval = intervalMap[timeframe] || '1h';
+      
+      // Start nieuwe monitoring sessie met gekozen interval
+      const response = await fetch(
+        `${API}/api/bitvavo/live-monitor/start?user_id=user-001&coin=BCH&interval=${interval}`,
+        { method: 'POST' }
+      );
+      const data = await response.json();
+      
+      if (data.success) {
+        setRunId(data.run_id);
+        setIsMonitoring(true);
+        setDecisions([]);
+        setTotalPnl(0);
+        setCurrentPosition(null);
+        setLastDecision(null);
+        
+        // Reset validation tracking
+        setCandleCount(0);
+        setBuySellCount(0);
+        setShowMarkerWarning(false);
+        setShowUIMismatch(false);
+        
+        // Fetch eerste candle direct
+        fetchLiveCandle(data.run_id);
+      } else {
+        setError('Kon monitoring niet starten: ' + data.error);
+      }
+    } catch (err) {
+      setError('Fout bij starten monitoring: ' + err.message);
+    }
+  };
+
+  const fetchLiveCandle = async (currentRunId) => {
+    const activeRunId = currentRunId || runId;
+    if (!activeRunId) return;
+    
+    try {
+      const response = await fetch(
+        `${API}/api/bitvavo/live-monitor/candle?run_id=${activeRunId}&user_id=user-001`
+      );
+      const data = await response.json();
+      
+      if (data.success) {
+        const action = data.decision.action;
+        
+        // Update trade amount from response
+        if (data.trade_amount_eur) {
+          setTradeAmountEur(data.trade_amount_eur);
+        }
+        
+        // Update decisions array
+        setDecisions(prev => [...prev, {
+          timestamp: data.candle.timestamp,
+          action: action,
+          confidence: data.decision.confidence,
+          reason: data.decision.reason,
+          price: parseFloat(data.candle.close),
+          trade_amount_eur: data.trade_amount_eur || 5.0
+        }]);
+        
+        setLastDecision(data.decision);
+        setCurrentPosition(data.position_state);
+        setTotalPnl(data.total_pnl || 0);
+        
+        // Update chart data met nieuwe candle
+        const newPoint = {
+          index: chartData.length,
+          time: new Date(data.candle.timestamp).toLocaleString('nl-NL', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }),
+          price: parseFloat(data.candle.close),
+          timestamp: data.candle.timestamp
+        };
+        setChartData(prev => [...prev, newPoint]);
+        
+        // Marker validation tracking
+        const newCandleCount = candleCount + 1;
+        const newBuySellCount = (action === 'BUY' || action === 'SELL') ? buySellCount + 1 : buySellCount;
+        
+        setCandleCount(newCandleCount);
+        if (action === 'BUY' || action === 'SELL') {
+          setBuySellCount(newBuySellCount);
+        }
+        
+        // Check na 30 candles
+        if (newCandleCount >= 30 && !showMarkerWarning && !showUIMismatch) {
+          if (newBuySellCount === 0) {
+            // Geen BUY/SELL decisions gemaakt
+            console.warn('⚠️ Warning: No BUY/SELL markers after 30 candles - only HOLD decisions');
+            setShowMarkerWarning(true);
+          } else {
+            // Er zijn WEL BUY/SELL decisions - check of ze zichtbaar zijn
+            // Check hoeveel decision timestamps matchen met chartData
+            const buySellDecisions = decisions.filter(d => d.action === 'BUY' || d.action === 'SELL');
+            const chartTimestamps = chartData.map(c => c.timestamp);
+            const visibleMarkers = buySellDecisions.filter(d => chartTimestamps.includes(d.timestamp)).length;
+            
+            if (visibleMarkers === 0) {
+              console.error('🔴 UI Mismatch: Decisions exist but markers not visible on chart', {
+                buySellCount: newBuySellCount,
+                visibleMarkers: visibleMarkers,
+                decisions: buySellDecisions,
+                chartTimestamps: chartTimestamps
+              });
+              setShowUIMismatch(true);
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Fout bij ophalen candle:', err);
+    }
+  };
+
+  const stopLiveMonitor = () => {
+    stopMonitoring();
+  };
+
+  const replayRun = async () => {
+    if (!runId) return;
+    
+    try {
+      setError(null);
+      
+      const response = await fetch(
+        `${API}/api/bitvavo/replay/run?run_id=${runId}`,
+        { method: 'POST' }
+      );
+      const data = await response.json();
+      
+      if (data.success) {
+        alert(`✅ Replay compleet!\n\nReproduceerbaarheid: ${data.reproducibility_percent.toFixed(1)}%\n${data.matches} matches, ${data.mismatches} verschillen`);
+      } else {
+        setError('Replay failed: ' + data.error);
+      }
+    } catch (err) {
+      setError('Fout bij replay: ' + err.message);
+    }
+  };
+
+  // Candle countdown timer
+  useEffect(() => {
+    if (!isMonitoring) return;
+    
+    const updateCountdown = () => {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      
+      // Assume 15-min interval for now (can be made dynamic)
+      const intervalMinutes = 15;
+      const nextCandleMinute = Math.ceil((minutes + 1) / intervalMinutes) * intervalMinutes;
+      
+      let minutesLeft = nextCandleMinute - minutes - 1;
+      let secondsLeft = 60 - seconds;
+      
+      if (secondsLeft === 60) {
+        minutesLeft += 1;
+        secondsLeft = 0;
+      }
+      
+      // Handle hour rollover
+      if (nextCandleMinute >= 60) {
+        minutesLeft = 59 - minutes;
+      }
+      
+      // Calculate percentage (0-100)
+      const totalSeconds = intervalMinutes * 60;
+      const elapsedSeconds = (minutes % intervalMinutes) * 60 + seconds;
+      const percentage = (elapsedSeconds / totalSeconds) * 100;
+      
+      setCandleCountdown({
+        minutes: Math.max(0, minutesLeft),
+        seconds: Math.max(0, secondsLeft),
+        percentage: Math.min(100, Math.max(0, percentage))
+      });
+    };
+    
+    // Update immediately
+    updateCountdown();
+    
+    // Update every second
+    const timer = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(timer);
+  }, [isMonitoring]);
+
+  // Auto-fetch bij monitoring - WITH PROPER CLEANUP
+  useEffect(() => {
+    // Clear any existing interval first
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
+    
+    // Start new interval if monitoring is active
+    if (isMonitoring && runId) {
+      console.log('▶️ Starting polling interval (10 sec)');
+      pollingIntervalRef.current = setInterval(() => {
+        fetchLiveCandle();
+      }, 10000); // 10 sec
+    }
+    
+    // Cleanup on unmount or when monitoring stops
+    return () => {
+      if (pollingIntervalRef.current) {
+        console.log('🛑 Cleanup: Stopping fetchLiveCandle interval');
+        clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
+      }
+    };
+  }, [isMonitoring, runId]);
+
+  const renderCustomDot = (props) => {
+    const { cx, cy, payload } = props;
+    
+    // Live Monitor mode: toon decision markers
+    if (mode === 'monitor' && decisions.length > 0) {
+      const decision = decisions.find(d => d.timestamp === payload.timestamp);
+      if (decision) {
+        if (decision.action === 'BUY') {
+          return <circle cx={cx} cy={cy} r={7} fill="#10B981" stroke="#fff" strokeWidth={2} />;
+        } else if (decision.action === 'SELL') {
+          return <circle cx={cx} cy={cy} r={7} fill="#EF4444" stroke="#fff" strokeWidth={2} />;
+        }
+      }
+    }
+    
+    return null;
+  };
+
+  if (!coin) return null;
+
+  const prices = chartData.map(d => d.price);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  const priceChange = chartData.length > 0 
+    ? ((chartData[chartData.length - 1].price - chartData[0].price) / chartData[0].price * 100).toFixed(2)
+    : 0;
+
+  // Close handlers - SIMPLIFIED
+  const handleOverlayClick = (e) => {
+    // Only close if clicking the backdrop itself
+    if (e.target.classList.contains('modal-backdrop')) {
+      console.log('🖱️ Overlay clicked');
+      handleClose();
+    }
+  };
+
+  return (
+    <div 
+      className="modal-backdrop fixed inset-0 bg-black/80 flex items-center justify-center z-[9999] p-4"
+      onClick={handleOverlayClick}
+    >
+      <div 
+        className="bg-gray-900 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-auto border border-gray-700 relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button - hoogste z-index */}
+        <button
+          onClick={handleClose}
+          className="absolute top-2 right-2 text-white bg-red-600 hover:bg-red-700 text-2xl font-bold rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+          style={{ 
+            pointerEvents: 'auto',
+            zIndex: 99999
+          }}
+          type="button"
+          title="Sluiten (ESC)"
+        >
+          ✕
+        </button>
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-700 pr-16">
+          <div>
+            <h2 className="text-2xl font-bold text-white">{coin}/EUR</h2>
+            {chartData.length > 0 && (
+              <div className="flex items-center gap-3 mt-2">
+                <span className="text-3xl font-bold text-white">
+                  €{chartData[chartData.length - 1].price.toLocaleString('nl-NL', { 
+                    minimumFractionDigits: 2, 
+                    maximumFractionDigits: 2 
+                  })}
+                </span>
+                <span className={`text-lg font-semibold ${
+                  priceChange >= 0 ? 'text-green-400' : 'text-red-400'
+                }`}>
+                  {priceChange >= 0 ? '↑' : '↓'} {Math.abs(priceChange)}%
+                </span>
+              </div>
+            )}
+          </div>
+          {/* Kruisje is nu absolute positioned bovenaan */}
+        </div>
+
+        {/* Mode Toggle + Timeframe */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-700 flex-wrap gap-4">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setMode('view')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                mode === 'view'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+              }`}
+            >
+              📊 View
+            </button>
+            {coin === 'BCH' && (
+              <button
+                onClick={() => setMode('monitor')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  mode === 'monitor'
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                }`}
+              >
+                🤖 Monitor (Meekijken)
+              </button>
+            )}
+          </div>
+          
+          <div className="flex gap-2">
+            {['5m', '15m', '30m', '1h', '24h', '7d', '30d'].map(tf => (
+              <button
+                key={tf}
+                onClick={() => !isMonitoring && setTimeframe(tf)}
+                disabled={isMonitoring}
+                className={`px-3 py-2 rounded-lg font-medium transition-colors ${
+                  timeframe === tf
+                    ? 'bg-gray-700 text-white'
+                    : isMonitoring
+                    ? 'bg-gray-800 text-gray-600 cursor-not-allowed'
+                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                }`}
+                title={isMonitoring ? `Monitor gebruikt ${timeframe} interval` : ''}
+              >
+                {tf.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Live Monitor Panel */}
+        {mode === 'monitor' && (
+          <div className="p-6 bg-orange-900/20 border-b border-orange-700/50 space-y-4">
+            {/* Inkoop Banner - Wordt getoond bij BUY decisions */}
+            {lastDecision && lastDecision.action === 'BUY' && (
+              <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border-2 border-green-500 rounded-lg p-4 mb-4 animate-pulse">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl">🟢</span>
+                  <div className="flex-1">
+                    <div className="text-green-400 font-bold text-lg">
+                      💰 INKOOP ACTIEF!
+                    </div>
+                    <div className="text-green-300 text-sm mt-1">
+                      Pot {currentPosition?.current_pot || 1}/10 • €{tradeAmountEur.toFixed(2)} ingekocht
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-white font-bold text-xl">
+                      €{chartData.length > 0 ? chartData[chartData.length - 1].price.toFixed(2) : '0.00'}
+                    </div>
+                    <div className="text-green-300 text-xs">Entry Price</div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="flex items-start gap-3">
+              <span className="text-3xl">🤖</span>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-orange-400 mb-2">
+                  Decision Engine - Live Monitor
+                </h3>
+                <div className="text-gray-300 text-sm">
+                  <strong>Strategie:</strong> 10-Potjes (€5→€10) + Bollinger Midline + 4% Buffer + Weekdag Awareness
+                  {isMonitoring && (
+                    <span className="ml-3 px-2 py-0.5 bg-orange-700/30 rounded text-orange-300 text-xs font-semibold">
+                      {timeframe.toUpperCase()} interval
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Controls */}
+            <div className="flex items-center gap-3 flex-wrap">
+              {!isMonitoring ? (
+                <button
+                  onClick={startLiveMonitor}
+                  className="px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg font-medium"
+                >
+                  ▶️ Start Monitoring
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={stopLiveMonitor}
+                    className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium"
+                  >
+                    ⏹️ Stop
+                  </button>
+                  <button
+                    onClick={replayRun}
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium"
+                  >
+                    🔄 Replay Run
+                  </button>
+                  
+                  {/* Trading Reset Button */}
+                  <button
+                    onClick={async () => {
+                      if (!window.confirm('⚠️ Position Reset\n\nDit reset de interne trading state.\n\nGebruik dit voor:\n- Gemiste offline trades\n- Edge cases\n- Manual override\n\nDoorgaan?')) return;
+                      
+                      try {
+                        const response = await fetch(
+                          `${API}/api/bitvavo/live-trading/reset-position?user_id=user-001&run_id=${runId}&reason=manual_reset&force_sell=false`,
+                          { method: 'POST' }
+                        );
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                          alert(`✅ Position Reset!\n\n${data.message}`);
+                          // Refresh position state
+                          fetchLiveCandle(runId);
+                        } else {
+                          alert(`❌ Reset failed: ${data.message}`);
+                        }
+                      } catch (err) {
+                        alert(`❌ Error: ${err.message}`);
+                      }
+                    }}
+                    className="px-4 py-3 bg-yellow-600 hover:bg-yellow-500 text-white rounded-lg font-medium"
+                    title="Reset position (gemiste trades, offline, edge cases)"
+                  >
+                    ↺ Reset Position
+                  </button>
+                </>
+              )}
+              
+              {runId && (
+                <div className="text-gray-400 text-sm">
+                  Run ID: <span className="font-mono text-gray-300">{runId.slice(0, 8)}</span>
+                </div>
+              )}
+            </div>
+            
+            {/* Candle Countdown Timer */}
+            {isMonitoring && (
+              <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-700/50 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">⏱️</span>
+                    <span className="text-purple-300 font-semibold">Volgende Candle Over:</span>
+                  </div>
+                  <div className="text-3xl font-bold font-mono text-white">
+                    {String(candleCountdown.minutes).padStart(2, '0')}:{String(candleCountdown.seconds).padStart(2, '0')}
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="relative h-3 bg-gray-800/50 rounded-full overflow-hidden">
+                  <div 
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500 to-emerald-400 transition-all duration-1000 ease-linear rounded-full"
+                    style={{ width: `${candleCountdown.percentage}%` }}
+                  />
+                </div>
+                
+                <div className="mt-2 text-xs text-gray-400 text-center">
+                  {timeframe.toUpperCase()} interval - Automatische strategie evaluatie
+                </div>
+              </div>
+            )}
+            
+            {/* Decision Info */}
+            {lastDecision && (
+              <div className="bg-gray-800/50 rounded-lg p-4 space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm font-semibold text-gray-400">Laatste Beslissing:</div>
+                  <div className="flex gap-2">
+                    {/* Minimum Vloer Indicator */}
+                    {chartData.length > 0 && chartData[chartData.length - 1].price < 400 && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-yellow-900/30 border border-yellow-700/50 rounded-lg">
+                        <span className="text-yellow-400 text-xs font-semibold">⚠️ Prijs onder €400 minimum vloer</span>
+                      </div>
+                    )}
+                    {showMarkerWarning && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-orange-900/30 border border-orange-700/50 rounded-lg">
+                        <span className="text-orange-400 text-xs font-semibold">⚠️ Alleen HOLD na {candleCount} candles</span>
+                      </div>
+                    )}
+                    {showUIMismatch && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-red-900/30 border border-red-700/50 rounded-lg">
+                        <span className="text-red-400 text-xs font-semibold">🔴 UI mismatch: markers niet zichtbaar</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 flex-wrap">
+                  <div>
+                    <span className="text-gray-400 text-sm">Actie: </span>
+                    <span className={`font-bold text-lg ${
+                      lastDecision.action === 'BUY' ? 'text-green-400' :
+                      lastDecision.action === 'SELL' ? 'text-red-400' :
+                      'text-gray-400'
+                    }`}>
+                      {lastDecision.action === 'BUY' ? '🟢 KOOP' :
+                       lastDecision.action === 'SELL' ? '🔴 VERKOOP' :
+                       '⚪ HOLD'}
+                    </span>
+                  </div>
+                  
+                  {lastDecision.action === 'BUY' && (
+                    <div>
+                      <span className="text-gray-400 text-sm">Potje: </span>
+                      <span className="font-bold text-yellow-400">
+                        €{tradeAmountEur.toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {currentPosition && currentPosition.position_type !== 'NONE' && (
+                    <>
+                      <div>
+                        <span className="text-gray-400 text-sm">Entry: </span>
+                        <span className="font-bold text-white">
+                          €{currentPosition.entry_price?.toFixed(2)}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-gray-400 text-sm">Positie: </span>
+                        <span className="font-bold text-green-400">OPEN</span>
+                      </div>
+                    </>
+                  )}
+                  
+                  {(!currentPosition || currentPosition.position_type === 'NONE') && (
+                    <div>
+                      <span className="text-gray-400 text-sm">Positie: </span>
+                      <span className="font-bold text-gray-500">CLOSED</span>
+                    </div>
+                  )}
+                </div>
+                
+                {lastDecision.reason && (
+                  <div className="text-xs text-gray-400 mt-2">
+                    {lastDecision.reason}
+                  </div>
+                )}
+                
+                {totalPnl !== 0 && (
+                  <div className="mt-2 pt-2 border-t border-gray-700">
+                    <span className="text-gray-400 text-sm">Total PnL: </span>
+                    <span className={`font-bold ${totalPnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      {totalPnl >= 0 ? '+' : ''}€{totalPnl.toFixed(2)}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Chart */}
+        <div className="p-6">
+          {loading && (
+            <div className="h-96 flex items-center justify-center">
+              <p className="text-gray-400">Laden...</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="h-96 flex items-center justify-center">
+              <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4">
+                <p className="text-red-300">❌ {error}</p>
+              </div>
+            </div>
+          )}
+
+          {!loading && !error && chartData.length > 0 && (
+            <div className="h-96">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis 
+                    dataKey="time" 
+                    stroke="#9CA3AF"
+                    tick={{ fill: '#9CA3AF' }}
+                  />
+                  <YAxis 
+                    domain={[minPrice * 0.98, maxPrice * 1.02]}
+                    stroke="#9CA3AF"
+                    tick={{ fill: '#9CA3AF' }}
+                    tickFormatter={(value) => `€${value.toFixed(2)}`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#1F2937', 
+                      border: '1px solid #374151',
+                      borderRadius: '8px',
+                      color: '#fff'
+                    }}
+                    formatter={(value) => [`€${value.toFixed(2)}`, 'Prijs']}
+                  />
+                  {/* Hoofd lijn (basis kleur) */}
+                  <Line 
+                    type="monotone" 
+                    dataKey="price" 
+                    stroke={mode === 'monitor' ? '#9CA3AF' : '#3B82F6'}
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 6 }}
+                    isAnimationActive={false}
+                  />
+                  
+                  {/* Groene segmenten bij BUY */}
+                  {mode === 'monitor' && (
+                    <Line
+                      type="monotone"
+                      dataKey={(entry) => entry.action === 'BUY' ? entry.price : null}
+                      stroke="#10B981"
+                      strokeWidth={4}
+                      dot={false}
+                      connectNulls={false}
+                      isAnimationActive={false}
+                    />
+                  )}
+                  
+                  {/* Rode segmenten bij SELL */}
+                  {mode === 'monitor' && (
+                    <Line
+                      type="monotone"
+                      dataKey={(entry) => entry.action === 'SELL' ? entry.price : null}
+                      stroke="#EF4444"
+                      strokeWidth={4}
+                      dot={false}
+                      connectNulls={false}
+                      isAnimationActive={false}
+                    />
+                  )}
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          )}
+        </div>
+
+        {/* Footer Stats */}
+        {chartData.length > 0 && mode === 'view' && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 border-t border-gray-700">
+            <div className="bg-gray-800 rounded-lg p-4">
+              <div className="text-gray-400 text-sm mb-1">Hoogste</div>
+              <div className="text-white font-bold">
+                €{maxPrice.toLocaleString('nl-NL', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+            <div className="bg-gray-800 rounded-lg p-4">
+              <div className="text-gray-400 text-sm mb-1">Laagste</div>
+              <div className="text-white font-bold">
+                €{minPrice.toLocaleString('nl-NL', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+            <div className="bg-gray-800 rounded-lg p-4">
+              <div className="text-gray-400 text-sm mb-1">Verschil</div>
+              <div className="text-white font-bold">
+                €{(maxPrice - minPrice).toLocaleString('nl-NL', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+            <div className="bg-gray-800 rounded-lg p-4">
+              <div className="text-gray-400 text-sm mb-1">Verandering</div>
+              <div className={`font-bold ${priceChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {priceChange >= 0 ? '+' : ''}{priceChange}%
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CoinChartModal;

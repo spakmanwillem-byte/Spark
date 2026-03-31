@@ -1,0 +1,118 @@
+{
+  "user_id": "user-209f0cd3",
+  "total_conversations": 3,
+  "conversations": [
+    {
+      "id": "conv-dc978f24",
+      "timestamp": "2026-03-18T08:09:18.127207",
+      "user_id": "user-209f0cd3",
+      "user_message": "Ik ben Nick Teeuwen Sleutelwoord Trein",
+      "spark_response": "✅ Account aangemaakt! Hoi Nick! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Nick Teeuwen"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 6,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Nick",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-399ceb33",
+      "timestamp": "2026-03-18T08:09:36.166789",
+      "user_id": "user-209f0cd3",
+      "user_message": "ja",
+      "spark_response": "Je bent al ingelogd! 😊",
+      "analysis": {
+        "entities": {
+          "personen": [],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Algemeen",
+          "sub_klasse": "Onbekend",
+          "confidence": 0.0,
+          "labels": {}
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": "yes_response",
+        "word_count": 1,
+        "has_entities": false
+      },
+      "metadata": {
+        "user_naam": "Nick",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-a4ed0de1",
+      "timestamp": "2026-03-18T08:11:54.180462",
+      "user_id": "user-209f0cd3",
+      "user_message": "Ik ben Nick Teeuwen Sleutelwoord Trein",
+      "spark_response": "Welkom terug, Nick! 😊\n📊 Gradatie: 4\n\nHoe is het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Nick Teeuwen"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 6,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Nick",
+        "gesprek_nummer": 3
+      }
+    }
+  ],
+  "last_updated": "2026-03-18T08:11:54.187343"
+}

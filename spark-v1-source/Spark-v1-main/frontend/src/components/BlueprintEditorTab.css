@@ -1,0 +1,457 @@
+/* ===== BLUEPRINT EDITOR STYLES ===== */
+
+.blueprint-editor {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.blueprint-header {
+  margin-bottom: 30px;
+}
+
+.blueprint-header h1 {
+  margin: 0 0 8px 0;
+  color: #4CAF50;
+}
+
+.blueprint-header p {
+  margin: 0;
+  color: #888;
+}
+
+/* ===== TABS ===== */
+
+.blueprint-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #333;
+}
+
+.blueprint-tabs button {
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.blueprint-tabs button:hover {
+  color: #4CAF50;
+}
+
+.blueprint-tabs button.active {
+  color: #4CAF50;
+  border-bottom-color: #4CAF50;
+}
+
+/* ===== PANELS ===== */
+
+.panel {
+  background: rgba(26, 26, 26, 0.95);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  color: #fff;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-primary {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #f44336 !important;
+  color: white;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  background: #555;
+  color: white;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+/* ===== BUILDINGS GRID ===== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.building-card {
+  background: rgba(38, 50, 66, 0.95);
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s;
+}
+
+.building-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.card-header h3 {
+  margin: 0 0 4px 0;
+  color: #fff;
+  font-size: 18px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+}
+
+.badge-small {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  background: #4CAF50;
+  color: white;
+  margin-left: 8px;
+}
+
+.card-description {
+  color: #bbb;
+  font-size: 14px;
+  margin-bottom: 12px;
+  min-height: 40px;
+}
+
+.card-section {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.card-section strong {
+  color: #4CAF50;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.resource-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.resource-badge {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid #4CAF50;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #4CAF50;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #555;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.card-actions button:hover {
+  background: #666;
+}
+
+/* ===== RESOURCES TABLE ===== */
+
+.resources-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resources-table thead {
+  background: rgba(76, 175, 80, 0.2);
+}
+
+.resources-table th {
+  padding: 12px;
+  text-align: left;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.resources-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ddd;
+}
+
+.resources-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.icon-cell {
+  font-size: 24px;
+  text-align: center;
+}
+
+/* ===== ACTIONS GRID ===== */
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.action-card {
+  background: rgba(38, 50, 66, 0.95);
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.action-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.action-card h3 {
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+
+.action-card p {
+  color: #bbb;
+  font-size: 14px;
+  margin: 0 0 12px 0;
+}
+
+.action-card code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #4CAF50;
+}
+
+/* ===== MODAL ===== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 2px solid #333;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #4CAF50;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.btn-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ===== FORM ===== */
+
+.modal-form {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: monospace;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid #333;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* ===== LOADING ===== */
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 24px;
+  color: #888;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .resources-table {
+    font-size: 12px;
+  }
+
+  .resources-table th,
+  .resources-table td {
+    padding: 8px;
+  }
+}

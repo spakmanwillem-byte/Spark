@@ -1,0 +1,94 @@
+{
+  "title": "Identity System - Critical Rules",
+  "version": "1.0",
+  "created_at": "2026-03-24T18:20:40.969264",
+  "philosophy": "Structuur geven aan organische groei - niet opschonen",
+  "layer_separation": {
+    "description": "Drie kritieke lagen die GESCHEIDEN moeten blijven",
+    "layers": {
+      "auth_layer": {
+        "purpose": "Login, database, achievements, highscores",
+        "example": {
+          "name": "Willem Spakman",
+          "keyword": "appelsap",
+          "usage": "Backend authentication only"
+        }
+      },
+      "display_layer": {
+        "purpose": "AI-output, UI, representatie",
+        "example": {
+          "name": "De Willem",
+          "usage": "Frontend display, chat messages, UI labels"
+        }
+      },
+      "system_layer": {
+        "purpose": "Data-koppeling, referenties",
+        "example": {
+          "id": "user-001",
+          "usage": "Database queries, relationships, tracking"
+        }
+      }
+    }
+  },
+  "critical_rules": [
+    {
+      "id": "CR-001",
+      "rule": "naam ≠ identiteit ≠ data-koppeling",
+      "explanation": "Deze 3 concepten zijn NIET uitwisselbaar",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CR-002",
+      "rule": "ALTIJD op user_id matchen, NOOIT op naam",
+      "explanation": "Namen kunnen veranderen, IDs niet. Gebruik system_id voor alle data-koppelingen",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CR-003",
+      "rule": "display_name is alleen visueel",
+      "explanation": "'De Willem' is voor UI/UX, gebruik niet voor queries of matching",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CR-004",
+      "rule": "Achievements en highscores → user_id",
+      "explanation": "Gebruik ALTIJD user_id voor tracking, niet naam",
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "CR-005",
+      "rule": "Organische groei is waardevol",
+      "explanation": "Incomplete metadata, variatie in data, inferred values zijn acceptabel - het is geen vervuiling maar groei",
+      "severity": "MEDIUM"
+    }
+  ],
+  "examples": {
+    "correct_user_lookup": {
+      "description": "Hoe een gebruiker ophalen",
+      "code": "user = db.users.find_one({'id': user_id}, {'_id': 0})",
+      "never_do": "user = db.users.find_one({'naam': 'De Willem'})"
+    },
+    "correct_achievement_save": {
+      "description": "Hoe achievement opslaan",
+      "code": "achievement = {'user_id': user_id, 'type': 'xp', 'value': 100}",
+      "never_do": "achievement = {'naam': 'De Willem', 'type': 'xp'}"
+    },
+    "correct_display": {
+      "description": "Hoe naam tonen in UI",
+      "code": "display_name = user_data['display_layer']['display_name']",
+      "result": "De Willem"
+    }
+  },
+  "migration_notes": {
+    "existing_code": "Check alle queries op naam-matching",
+    "refactor_needed": "Replace naam-matching met user_id-matching",
+    "backwards_compat": "Temporarily support beide, maar log warnings"
+  },
+  "testing_checklist": [
+    "✓ Login werkt met auth_name (Willem Spakman)",
+    "✓ Display toont display_name (De Willem)",
+    "✓ Achievements linken naar user_id (user-001)",
+    "✓ Highscores gebruiken user_id, niet naam",
+    "✓ KB entries linken naar user_id indien relevant"
+  ]
+}

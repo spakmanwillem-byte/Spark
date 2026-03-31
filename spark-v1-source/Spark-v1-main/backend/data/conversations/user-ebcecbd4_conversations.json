@@ -1,0 +1,49 @@
+{
+  "user_id": "user-ebcecbd4",
+  "total_conversations": 1,
+  "conversations": [
+    {
+      "id": "conv-c33232d8",
+      "timestamp": "2026-03-21T17:12:06.262844",
+      "user_id": "user-ebcecbd4",
+      "user_message": "Ik ben Willem en mijn sleutelwoord is test123",
+      "spark_response": "✅ Account aangemaakt! Hoi Willem! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?\n\n🤖 Beep boop - oh wacht, ik ben geen robot, ik ben Spark!",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "ben Willem",
+            "Willem"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": [
+            "Willem"
+          ]
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 8,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Willem",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "last_updated": "2026-03-21T17:12:06.271493"
+}

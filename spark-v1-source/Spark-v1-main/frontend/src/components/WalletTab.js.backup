@@ -1,0 +1,311 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './WalletTab.css';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+const WalletTab = ({ userData }) => {
+  const [walletData, setWalletData] = useState(null);
+  const [depositAmount, setDepositAmount] = useState('');
+  const [depositMessage, setDepositMessage] = useState('');
+  const [withdrawAmount, setWithdrawAmount] = useState('');
+  const [iban, setIban] = useState('');
+  const [ibanName, setIbanName] = useState('');
+  const [showDepositForm, setShowDepositForm] = useState(false);
+  const [showWithdrawForm, setShowWithdrawForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (userData) {
+      loadWalletData();
+    }
+  }, [userData]);
+
+  const loadWalletData = async () => {
+    try {
+      const response = await axios.get(`${API}/wallet/${userData.id}`);
+      if (response.data.success) {
+        setWalletData(response.data);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading wallet:', error);
+      setLoading(false);
+    }
+  };
+
+  const handleDepositRequest = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await axios.post(`${API}/wallet/deposit/request`, {
+        user_id: userData.id,
+        amount: parseFloat(depositAmount),
+        message: depositMessage
+      });
+
+      if (response.data.success) {
+        alert(`Storting aangevraagd! Maak over naar:\nIBAN: ${response.data.transaction.payment_info.iban}\nReferentie: ${response.data.transaction.payment_info.reference}`);
+        setDepositAmount('');
+        setDepositMessage('');
+        setShowDepositForm(false);
+        loadWalletData();
+      }
+    } catch (error) {
+      console.error('Error requesting deposit:', error);
+      alert('Fout bij aanvragen storting');
+    }
+  };
+
+  const handleWithdrawRequest = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await axios.post(`${API}/wallet/withdraw/request`, {
+        user_id: userData.id,
+        amount: parseFloat(withdrawAmount),
+        iban: iban,
+        iban_name: ibanName
+      });
+
+      if (response.data.success) {
+        alert('Opname aangevraagd! Je ontvangt een bevestiging zodra deze is verwerkt.');
+        setWithdrawAmount('');
+        setIban('');
+        setIbanName('');
+        setShowWithdrawForm(false);
+        loadWalletData();
+      }
+    } catch (error) {
+      console.error('Error requesting withdrawal:', error);
+      alert('Fout bij aanvragen opname');
+    }
+  };
+
+  if (!userData) {
+    return (
+      <div className="wallet-tab">
+        <h2>💰 Wallet</h2>
+        <p>Login om je wallet te bekijken</p>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="wallet-tab">
+        <h2>💰 Wallet</h2>
+        <p>Laden...</p>
+      </div>
+    );
+  }
+
+  const wallet = walletData?.wallet || {};
+  const transactions = walletData?.recent_transactions || [];
+
+  return (
+    <div className="wallet-tab">
+      <div className="wallet-header">
+        <h2>💰 Mijn Wallet</h2>
+        <div className="wallet-balance">
+          <div className="balance-label">Saldo</div>
+          <div className="balance-amount">€ {wallet.balance?.toFixed(2) || '0.00'}</div>
+        </div>
+      </div>
+
+      <div className="wallet-stats">
+        <div className="stat-card">
+          <div className="stat-icon">📥</div>
+          <div className="stat-info">
+            <div className="stat-label">Totaal Gestort</div>
+            <div className="stat-value">€ {wallet.total_deposited?.toFixed(2) || '0.00'}</div>
+          </div>
+        </div>
+        
+        <div className="stat-card">
+          <div className="stat-icon">📤</div>
+          <div className="stat-info">
+            <div className="stat-label">Totaal Opgenomen</div>
+            <div className="stat-value">€ {wallet.total_withdrawn?.toFixed(2) || '0.00'}</div>
+          </div>
+        </div>
+        
+        <div className="stat-card">
+          <div className="stat-icon">💝</div>
+          <div className="stat-info">
+            <div className="stat-label">Totaal Gedoneerd</div>
+            <div className="stat-value">€ {wallet.total_donated?.toFixed(2) || '0.00'}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="wallet-actions">
+        <button 
+          className="action-btn deposit-btn"
+          onClick={() => setShowDepositForm(!showDepositForm)}
+        >
+          📥 Geld Storten
+        </button>
+        
+        <button 
+          className="action-btn withdraw-btn"
+          onClick={() => setShowWithdrawForm(!showWithdrawForm)}
+          disabled={wallet.balance <= 0}
+        >
+          📤 Geld Opnemen
+        </button>
+      </div>
+
+      {showDepositForm && (
+        <div className="transaction-form">
+          <h3>📥 Storting Aanvragen</h3>
+          <form onSubmit={handleDepositRequest}>
+            <div className="form-group">
+              <label>Bedrag (€)</label>
+              <input
+                type="number"
+                step="0.01"
+                min="1"
+                value={depositAmount}
+                onChange={(e) => setDepositAmount(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <label>Bericht (optioneel)</label>
+              <textarea
+                value={depositMessage}
+                onChange={(e) => setDepositMessage(e.target.value)}
+                placeholder="Waarom stort je?"
+                rows="3"
+              />
+            </div>
+            
+            <div className="form-actions">
+              <button type="submit" className="submit-btn">Aanvragen</button>
+              <button 
+                type="button" 
+                className="cancel-btn"
+                onClick={() => setShowDepositForm(false)}
+              >
+                Annuleren
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {showWithdrawForm && (
+        <div className="transaction-form">
+          <h3>📤 Opname Aanvragen</h3>
+          <form onSubmit={handleWithdrawRequest}>
+            <div className="form-group">
+              <label>Bedrag (€)</label>
+              <input
+                type="number"
+                step="0.01"
+                min="1"
+                max={wallet.balance}
+                value={withdrawAmount}
+                onChange={(e) => setWithdrawAmount(e.target.value)}
+                required
+              />
+              <small>Max: € {wallet.balance?.toFixed(2)}</small>
+            </div>
+            
+            <div className="form-group">
+              <label>IBAN Rekeningnummer</label>
+              <input
+                type="text"
+                value={iban}
+                onChange={(e) => setIban(e.target.value)}
+                placeholder="NL12 ABCD 1234 5678 90"
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <label>Naam Rekeninghouder</label>
+              <input
+                type="text"
+                value={ibanName}
+                onChange={(e) => setIbanName(e.target.value)}
+                placeholder="Jouw naam"
+                required
+              />
+            </div>
+            
+            <div className="form-actions">
+              <button type="submit" className="submit-btn">Aanvragen</button>
+              <button 
+                type="button" 
+                className="cancel-btn"
+                onClick={() => setShowWithdrawForm(false)}
+              >
+                Annuleren
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div className="transactions-section">
+        <h3>📋 Recente Transacties</h3>
+        
+        {transactions.length === 0 ? (
+          <div className="no-transactions">
+            <p>Nog geen transacties</p>
+          </div>
+        ) : (
+          <div className="transactions-list">
+            {transactions.map((tx) => (
+              <div key={tx.id} className={`transaction-item ${tx.type}`}>
+                <div className="transaction-icon">
+                  {tx.type === 'deposit' && '📥'}
+                  {tx.type === 'withdrawal' && '📤'}
+                  {tx.type === 'donation' && '💝'}
+                  {tx.type === 'reward' && '🎁'}
+                </div>
+                
+                <div className="transaction-details">
+                  <div className="transaction-type">
+                    {tx.type === 'deposit' && 'Storting'}
+                    {tx.type === 'withdrawal' && 'Opname'}
+                    {tx.type === 'donation' && 'Donatie'}
+                    {tx.type === 'reward' && 'Beloning'}
+                  </div>
+                  <div className="transaction-date">
+                    {new Date(tx.created_at).toLocaleDateString('nl-NL')}
+                  </div>
+                </div>
+                
+                <div className="transaction-amount">
+                  {tx.type === 'withdrawal' ? '-' : '+'}€ {tx.amount.toFixed(2)}
+                </div>
+                
+                <div className={`transaction-status status-${tx.status}`}>
+                  {tx.status === 'pending' && '⏳ In behandeling'}
+                  {tx.status === 'approved' && '✅ Goedgekeurd'}
+                  {tx.status === 'rejected' && '❌ Geweigerd'}
+                  {tx.status === 'completed' && '✅ Voltooid'}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="wallet-info">
+        <h3>ℹ️ Informatie</h3>
+        <ul>
+          <li>💶 <strong>Placeholder Systeem:</strong> Dit is een test-versie. Geen echt geld wordt overgemaakt.</li>
+          <li>⏱️ <strong>Verwerkingstijd:</strong> Stortingen worden handmatig goedgekeurd door de admin.</li>
+          <li>🔒 <strong>Veilig:</strong> Alle transacties worden gelogd en beveiligd opgeslagen.</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default WalletTab;

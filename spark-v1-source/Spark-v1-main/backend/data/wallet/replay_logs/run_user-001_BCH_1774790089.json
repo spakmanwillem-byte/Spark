@@ -1,0 +1,30 @@
+{
+  "run_id": "run_user-001_BCH_1774790089",
+  "user_id": "user-001",
+  "coin": "BCH",
+  "start_time": "2026-03-29T13:14:49.830020",
+  "config": {
+    "bb_period": 20,
+    "bb_std_dev": 2,
+    "trade_amount": 5.0,
+    "trailing_profit": 0.01,
+    "trailing_stop": 0.004,
+    "max_loss_lock": 0.03,
+    "interval": "1h"
+  },
+  "candles": [],
+  "decisions_v1": [],
+  "decisions_v2": [],
+  "position_state": {
+    "position_type": "NONE",
+    "entry_price": null,
+    "entry_time": null,
+    "highest_price": null,
+    "trade_amount": 5.0,
+    "trailing_stop_active": false
+  },
+  "trading_locked": false,
+  "total_pnl": 0.0,
+  "trade_history": [],
+  "status": "active"
+}

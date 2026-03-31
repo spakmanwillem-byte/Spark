@@ -1,0 +1,46 @@
+{
+  "user_id": "user-f727dfa6",
+  "total_conversations": 1,
+  "conversations": [
+    {
+      "id": "conv-2a5c7de4",
+      "timestamp": "2026-03-25T23:12:06.487280",
+      "user_id": "user-f727dfa6",
+      "user_message": "Hoi Spark",
+      "spark_response": "✅ Account aangemaakt! Hoi Hoi! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Hoi Spark"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 2,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Hoi",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "last_updated": "2026-03-25T23:12:06.493334"
+}

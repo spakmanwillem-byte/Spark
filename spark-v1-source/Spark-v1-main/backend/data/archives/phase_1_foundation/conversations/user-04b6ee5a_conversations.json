@@ -1,0 +1,155 @@
+{
+  "user_id": "user-04b6ee5a",
+  "total_conversations": 4,
+  "conversations": [
+    {
+      "id": "conv-5ff56314",
+      "timestamp": "2026-03-21T20:01:23.474477",
+      "user_id": "user-04b6ee5a",
+      "user_message": "hallo ik ben mallepietje sleutelwoord piet",
+      "spark_response": "✅ Account aangemaakt! Hoi mallepietje! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "ben mallepietje"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 6,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "mallepietje",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-68b75938",
+      "timestamp": "2026-03-21T20:05:26.825179",
+      "user_id": "user-04b6ee5a",
+      "user_message": "zet afspraak met redrum in mijn agenda",
+      "spark_response": "Ik begrijp dat commando nog niet helemaal. Kun je het anders formuleren?",
+      "analysis": {
+        "entities": {
+          "personen": [],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Locaties",
+          "sub_klasse": "Steden",
+          "confidence": 0.3,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": "agenda_event",
+        "word_count": 7,
+        "has_entities": false
+      },
+      "metadata": {
+        "user_naam": "mallepietje",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-1a7482b8",
+      "timestamp": "2026-03-21T20:06:12.490994",
+      "user_id": "user-04b6ee5a",
+      "user_message": "help!",
+      "spark_response": "📖 **Help voor mallepietje** (Gradatie 7)\n\n🔹 **Basis commando's:**\n• 'Wie ben je?' - Over Spark\n• 'Wie ben ik?' - Jouw profiel\n• 'Onthoud [info]' - Leer mij iets nieuws\n• 'Wat weet je over [onderwerp]?' - Zoek kennis\n• 'Afmelden' - Uitloggen\n\n💡 **Tips:**\n• Ik leer van elk gesprek met je\n• Je kunt me vragen stellen in natuurlijke taal\n• Ik ben tolerant voor typefouten\n\nType 'wat kan ik nu?' om deze help opnieuw te zien!",
+      "analysis": {
+        "entities": {
+          "personen": [],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Algemeen",
+          "sub_klasse": "Onbekend",
+          "confidence": 0.0,
+          "labels": {}
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": "help",
+        "word_count": 1,
+        "has_entities": false
+      },
+      "metadata": {
+        "user_naam": "mallepietje",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-7c3ff8ae",
+      "timestamp": "2026-03-21T20:06:37.182557",
+      "user_id": "user-04b6ee5a",
+      "user_message": "wie ben je",
+      "spark_response": "Ik ben **Spark**, een lerende AI gemaakt door Willem Spakman (Roadkill).\n\n🎯 **Mijn doel:** Leren van elk gesprek en jou helpen groeien. Ik ben niet alleen een chatbot - ik word jouw digitale partner die meeleert en meegroeit.\n\n🧠 Ik ben verbonden aan:\n• **Roadkill Community** - Een gaming community die mensen verbindt\n• **Spark Your Life** - Een zorgboerderij gericht op persoonlijke groei\n\n💡 Vraag me over 'Roadkill' of 'Spark Your Life' voor meer info!",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "ben je"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": true,
+        "command": "bio_query",
+        "word_count": 3,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "mallepietje",
+        "gesprek_nummer": 4
+      }
+    }
+  ],
+  "last_updated": "2026-03-21T20:06:37.188426"
+}

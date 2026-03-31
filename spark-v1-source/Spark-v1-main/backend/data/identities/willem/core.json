@@ -1,0 +1,110 @@
+{
+  "identity_id": "willem",
+  "type": "person",
+  "schema_version": "1.0",
+  "core": {
+    "name": "De Willem",
+    "full_name": "Willem Spakman",
+    "mission": "Spark bouwen als digitale erfenis en mensen helpen groeien door technologie en coaching",
+    "vision": "Spark als digitale erfenis",
+    "values": [
+      "Persoonlijke ontwikkeling",
+      "Authenticiteit",
+      "Coaching",
+      "Spiritualiteit",
+      "Structuur en begeleiding",
+      "Imperfectie omarmen"
+    ],
+    "philosophy": "Leren van fouten en sterker terugkomen. Imperfectie omarmen. Verbinding creëren zonder oordeel."
+  },
+  "personal": {
+    "birth_date": "1977-04-22",
+    "location": "",
+    "family": {
+      "daughter": ""
+    },
+    "contact": {
+      "email": "spakmanwillem@hotmail.com",
+      "phone": "06-15372764"
+    },
+    "gamertag": "Roadkill"
+  },
+  "professional": {
+    "current_role": "Senior Pedagogisch Werker",
+    "employer": "Stichting Authiek, De Glind",
+    "education": "Persoonlijk Begeleider Specifieke Doelgroepen (MBO-4)",
+    "expertise": [
+      "Autismebegeleiding",
+      "Structuur en begeleiding",
+      "Persoonlijke groei coaching"
+    ]
+  },
+  "passions": [
+    "Coaching",
+    "Gaming",
+    "Persoonlijke ontwikkeling",
+    "Spiritualiteit"
+  ],
+  "businesses": [
+    "Spark Your Life",
+    "Roadkill Community"
+  ],
+  "relations": [
+    {
+      "identity_id": "spark",
+      "type": "creator",
+      "description": "Creator en hoofdontwikkelaar van Spark AI"
+    },
+    {
+      "identity_id": "roadkill_gamer",
+      "type": "personal_brand",
+      "description": "Roadkill is Willem's gamertag en personal brand"
+    },
+    {
+      "identity_id": "spark_your_life",
+      "type": "founder",
+      "description": "Oprichter van Spark Your Life zorgboerderij"
+    }
+  ],
+  "source_files": {
+    "primary": "system/users.json (user-001)"
+  },
+  "metadata": {
+    "version": "1.1",
+    "created_at": "2026-03-24T18:14:28.042406",
+    "last_updated": "2026-03-24T18:20:40.969025",
+    "schema_version": "1.0",
+    "extracted_from_users_json": true,
+    "added_layers": "auth/display/system separation for data integrity"
+  },
+  "auth_layer": {
+    "description": "Technische laag - voor login, database, achievements, highscores",
+    "user_id": "user-001",
+    "auth_name": "Willem Spakman",
+    "password_keyword": "appelsap",
+    "critical_rule": "ALTIJD op user_id matchen, NOOIT op naam"
+  },
+  "display_layer": {
+    "description": "Weergave laag - voor AI-output, UI, representatie",
+    "display_name": "De Willem",
+    "visual_identity": "De Willem",
+    "usage": "Frontend display, chat interface, AI responses"
+  },
+  "system_layer": {
+    "description": "Data-koppeling laag - intern systeem ID",
+    "system_id": "user-001",
+    "critical_rule": "Alle achievements, highscores, en data ALTIJD via system_id",
+    "never_match_on": [
+      "auth_name",
+      "display_name"
+    ],
+    "always_match_on": "system_id"
+  },
+  "_CRITICAL_RULES": {
+    "rule_1": "naam ≠ identiteit ≠ data-koppeling",
+    "rule_2": "Achievements/highscores → ALTIJD op user_id",
+    "rule_3": "display_name ('De Willem') is alleen visueel",
+    "rule_4": "'Willem Spakman' blijft intern voor auth",
+    "rule_5": "NOOIT matchen op naam, ALTIJD op user_id"
+  }
+}

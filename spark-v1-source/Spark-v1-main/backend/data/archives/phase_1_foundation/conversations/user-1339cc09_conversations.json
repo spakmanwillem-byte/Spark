@@ -1,0 +1,46 @@
+{
+  "user_id": "user-1339cc09",
+  "total_conversations": 1,
+  "conversations": [
+    {
+      "id": "conv-b1bab1c5",
+      "timestamp": "2026-03-24T14:49:26.820872",
+      "user_id": "user-1339cc09",
+      "user_message": "Hallo Spark",
+      "spark_response": "✅ Account aangemaakt! Hoi Hallo! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?\n\n👥 Ik ken nu 9 mensen!",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "Hallo Spark"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 2,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Hallo",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "last_updated": "2026-03-24T14:49:26.827049"
+}

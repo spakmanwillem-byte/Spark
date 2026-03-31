@@ -1,0 +1,639 @@
+.game-tab {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  color: white;
+  overflow-y: auto;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #1e3a5f, #2c5f8d);
+  border-bottom: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.layout-edit-toggle {
+  padding: 8px 16px;
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  color: #4CAF50;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.layout-edit-toggle:hover {
+  background: rgba(76, 175, 80, 0.3);
+  transform: scale(1.05);
+}
+
+.layout-edit-toggle.active {
+  background: #FFD700;
+  border-color: #FFD700;
+  color: #000;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+}
+
+.game-day-indicator {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+}
+
+/* VERTICALE LAYOUT - Canvas boven, UI onder */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.game-canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#game-canvas {
+  border: 3px solid rgba(76, 175, 80, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  background: #000;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Stats ONDER canvas (horizontaal gerangschikt) */
+.game-stats {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.needs-section,
+.inventory-section,
+.game-info,
+.game-help {
+  background: rgba(38, 50, 66, 0.9);
+  border-radius: 12px;
+  padding: 16px;
+  border: 2px solid rgba(76, 175, 80, 0.3);
+  flex: 1;
+  min-width: 250px;
+}
+
+.needs-section h3,
+.inventory-section h3,
+.game-info h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #4CAF50;
+}
+
+.need-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.need-label {
+  min-width: 80px;
+  font-size: 14px;
+}
+
+.bar-container {
+  flex: 1;
+  height: 20px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bar-fill.hunger {
+  background: linear-gradient(90deg, #FF9800, #FF5722);
+}
+
+.bar-fill.thirst {
+  background: linear-gradient(90deg, #2196F3, #03A9F4);
+}
+
+.need-value {
+  min-width: 50px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: #aaa;
+}
+
+.stat-value {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.game-help h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #4CAF50;
+}
+
+.game-help p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Loading & Error states */
+.game-loading,
+.game-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 20px;
+}
+
+.spinner {
+  border: 4px solid rgba(76, 175, 80, 0.2);
+  border-top: 4px solid #4CAF50;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.game-error button {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.game-error button:hover {
+  background: #45a049;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .game-stats {
+    flex-direction: column;
+  }
+  
+  #game-canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* NEW: Time & Status UI Elements */
+.ui-section {
+  background: rgba(38, 50, 66, 0.7);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.ui-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #4CAF50;
+  border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+  padding-bottom: 6px;
+}
+
+.time-display {
+  text-align: center;
+}
+
+.time-main {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFD700;
+  margin-bottom: 4px;
+}
+
+.time-phase {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Health & Energy Bars */
+.stat-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stat-bar-row .stat-label {
+  min-width: 90px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.bar-container-new {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar-fill-new {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.health-bar-new {
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.energy-bar-new {
+  background: linear-gradient(90deg, #f1c40f, #f39c12);
+}
+
+.bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Status Badges */
+.status-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 1px solid;
+}
+
+.sleeping-badge {
+  background: rgba(100, 100, 255, 0.2);
+  border-color: rgba(100, 100, 255, 0.5);
+  color: #88f;
+}
+
+.fleeing-badge {
+  background: rgba(255, 100, 100, 0.2);
+  border-color: rgba(255, 100, 100, 0.5);
+  color: #f88;
+}
+
+.building-badge {
+  background: rgba(255, 165, 0, 0.2);
+  border-color: rgba(255, 165, 0, 0.5);
+  color: #ffa500;
+}
+
+.gathering-badge {
+  background: rgba(139, 69, 19, 0.2);
+  border-color: rgba(139, 69, 19, 0.5);
+  color: #d4a574;
+}
+
+.fishing-badge {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: rgba(33, 150, 243, 0.5);
+  color: #64b5f6;
+}
+
+.exploring-badge {
+  background: rgba(156, 39, 176, 0.2);
+  border-color: rgba(156, 39, 176, 0.5);
+  color: #ba68c8;
+}
+
+.walking-badge {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.5);
+  color: #ffd54f;
+}
+
+.idle-badge {
+  background: rgba(158, 158, 158, 0.2);
+  border-color: rgba(158, 158, 158, 0.5);
+  color: #bdbdbd;
+}
+
+.active-badge {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: rgba(76, 175, 80, 0.5);
+  color: #4CAF50;
+}
+
+/* Hunger & Thirst Bars */
+.hunger-bar-new {
+  background: linear-gradient(90deg, #27ae60, #229954);
+}
+
+.thirst-bar-new {
+  background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+
+/* ===== FACTION PANELS - Horizontaal onder game stats ===== */
+.faction-panels {
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  z-index: 10;
+}
+
+.faction-panels-title {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin: 0 0 12px 0;
+  padding: 10px;
+  background: rgba(26, 26, 26, 0.95);
+  border-radius: 8px;
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.faction-panel {
+  background: rgba(38, 50, 66, 0.95);
+  border-radius: 12px;
+  border: 2px solid;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.faction-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.faction-header {
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.faction-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.faction-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faction-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faction-stat:last-child {
+  border-bottom: none;
+}
+
+.faction-stat .label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.faction-stat .value {
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* ===== LEGEND PANEL - Uitklapbaar & SLEEPBAAR ===== */
+.legend-container {
+  position: fixed;
+  z-index: 200;
+  user-select: none;
+}
+
+.legend-toggle {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  cursor: grab;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.legend-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.6);
+}
+
+.legend-toggle:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.legend-panel {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 340px;
+  max-height: 600px;
+  overflow-y: auto;
+  background: rgba(26, 26, 26, 0.98);
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.3s ease;
+  pointer-events: all;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.legend-header {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.legend-content {
+  padding: 16px;
+}
+
+.legend-category {
+  margin-bottom: 20px;
+}
+
+.legend-category:last-child {
+  margin-bottom: 0;
+}
+
+.legend-category-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.legend-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.legend-description {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.legend-description strong {
+  color: #fff;
+  font-weight: bold;
+}
+
+.legend-description small {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Responsive aanpassingen */
+@media (max-width: 1024px) {
+  .faction-panels {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .faction-panel {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .legend-container {
+    bottom: 80px;
+  }
+  
+  .legend-panel {
+    width: 90vw;
+    max-width: 340px;
+  }
+}

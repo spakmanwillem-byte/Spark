@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Environment Test</title>
+</head>
+<body>
+    <h1>Environment Variables Test</h1>
+    <div id="output"></div>
+    <script>
+        const output = document.getElementById('output');
+        const backendUrl = '%REACT_APP_BACKEND_URL%';
+        output.innerHTML = `
+            <p><strong>REACT_APP_BACKEND_URL (build-time):</strong> ${backendUrl}</p>
+            <p><strong>Note:</strong> If you see %REACT_APP_BACKEND_URL%, the env var was not injected during build</p>
+        `;
+    </script>
+</body>
+</html>

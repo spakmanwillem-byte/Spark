@@ -1,0 +1,79 @@
+/* Admin Panel Styling */
+
+/* Section Group Titles */
+.admin-section-group {
+  margin-bottom: 24px;
+}
+
+.admin-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0 8px 12px 8px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Admin Button Groups */
+.admin-button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Admin Buttons - Enhanced Hover */
+.admin-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.admin-btn:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.admin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.admin-btn:active {
+  transform: translateY(0);
+}
+
+/* Active State */
+.admin-btn.active {
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive State */
+.admin-btn.inactive {
+  background: rgba(71, 85, 105, 0.3) !important;
+  color: rgba(156, 163, 175, 1) !important;
+}
+
+.admin-btn.inactive:hover {
+  background: rgba(71, 85, 105, 0.4) !important;
+  transform: translateY(-1px);
+}

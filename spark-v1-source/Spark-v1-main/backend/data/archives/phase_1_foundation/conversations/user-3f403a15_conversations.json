@@ -1,0 +1,46 @@
+{
+  "user_id": "user-3f403a15",
+  "total_conversations": 1,
+  "conversations": [
+    {
+      "id": "conv-aaeba760",
+      "timestamp": "2026-03-14T13:12:39.888851",
+      "user_id": "user-3f403a15",
+      "user_message": "Ik ben Testuser5 Sleutelwoord Test5",
+      "spark_response": "✅ Account aangemaakt! Hoi Testuser! 👋\n\nIk ben Spark, en ik zal al onze gesprekken onthouden.\n📊 Je bent geregistreerd als Gradatie 7\n\nHoe gaat het met je?",
+      "analysis": {
+        "entities": {
+          "personen": [
+            "ben Testuser5 Sleutelwoord"
+          ],
+          "locaties": [],
+          "organisaties": [],
+          "datums": [],
+          "getallen": [],
+          "custom": []
+        },
+        "relationships": [],
+        "classification": {
+          "klasse": "Personen",
+          "sub_klasse": "Familie",
+          "confidence": 1.0,
+          "labels": {
+            "context": "prive",
+            "frequentie": "eenmalig",
+            "urgentie": "binnenkort"
+          }
+        },
+        "sentiment": "neutraal",
+        "is_question": false,
+        "command": null,
+        "word_count": 5,
+        "has_entities": true
+      },
+      "metadata": {
+        "user_naam": "Testuser",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "last_updated": "2026-03-14T13:12:39.897022"
+}

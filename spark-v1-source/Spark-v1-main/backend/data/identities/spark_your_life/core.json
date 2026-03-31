@@ -1,0 +1,87 @@
+{
+  "identity_id": "spark_your_life",
+  "type": "social_enterprise",
+  "schema_version": "1.0",
+  "core": {
+    "name": "Spark Your Life",
+    "type": "Zorgboerderij",
+    "tagline": "Voor mensen die tussen wal en schip vallen",
+    "description": "Spark Your Life is een zorgboerderij voor mensen die tussen wal en schip vallen.",
+    "founder": "Willem Spakman"
+  },
+  "mission": "Het bevorderen van zelfredzaamheid, persoonlijke groei, en verbinding tussen mensen door middel van coaching, begeleiding, en inspirerende omgevingen zoals de zorgboerderij.",
+  "vision": "Een inclusieve plek waar iedereen die tussen wal en schip valt kan groeien en ontwikkelen",
+  "approach": {
+    "core_method": "Zingevende arbeid in de natuur + persoonlijke coaching + ondersteunende community",
+    "components": [
+      "Zingevende arbeid in de natuur",
+      "Persoonlijke coaching",
+      "Ondersteunende community",
+      "Inspirerende omgevingen"
+    ]
+  },
+  "target_audience": {
+    "primary": "Mensen die tussen wal en schip vallen",
+    "specific": [
+      "Mensen die nergens bij horen",
+      "Uitgeslotenen",
+      "Mensen die hulp nodig hebben",
+      "Mensen die door de mazen van het net vallen"
+    ],
+    "note": "KB laag3 had incomplete velden - aangevuld met context uit andere lagen"
+  },
+  "services": {
+    "primary": [
+      "Coaching",
+      "Begeleiding",
+      "Zorgboerderij"
+    ],
+    "focus_areas": [
+      "Zelfredzaamheid bevorderen",
+      "Persoonlijke groei ondersteunen",
+      "Verbinding tussen mensen creëren"
+    ]
+  },
+  "funding_model": {
+    "primary_source": "Roadkill Shop merchandise sales",
+    "mechanism": "Community supporters kopen merch om zorgboerderij te financieren"
+  },
+  "values": [
+    "Zelfredzaamheid",
+    "Persoonlijke groei",
+    "Verbinding",
+    "Inclusiviteit",
+    "Respect voor iedereen",
+    "Veerkracht"
+  ],
+  "relations": [
+    {
+      "identity_id": "willem",
+      "type": "founded_by",
+      "description": "Willem's droom en project"
+    },
+    {
+      "identity_id": "roadkill_shop",
+      "type": "funded_by",
+      "description": "Primaire financiering via merchandise verkoop"
+    },
+    {
+      "identity_id": "roadkill_community",
+      "type": "supported_by",
+      "description": "Community van supporters die bijdragen"
+    }
+  ],
+  "kb_sources": {
+    "primary": "6fde8072-7e2d-45a4-ad55-1417fbaabe73",
+    "source_type": "bio",
+    "detected_by": "Willem Spakman",
+    "note": "Laag3 was incomplete (had lege velden) - aangevuld met context"
+  },
+  "metadata": {
+    "created_at": "2026-03-24T18:12:31.988697",
+    "last_updated": "2026-03-24T18:12:31.988698",
+    "version": "1.0",
+    "extracted_from_kb": true,
+    "incomplete_source_handled": true
+  }
+}

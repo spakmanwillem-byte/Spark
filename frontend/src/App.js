@@ -11,6 +11,7 @@ import { AnalyticsPage } from "./components/admin/AnalyticsPage";
 import { EmotiesPage } from "./components/spark/EmotiesPage";
 import { VerbandenPage } from "./components/spark/VerbandenPage";
 import { TriggersPage } from "./components/spark/TriggersPage";
+import { AgendaPage } from "./components/workspace/AgendaPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -87,6 +88,8 @@ function AppContent() {
         return <VerbandenPage onNavigate={handleNavigate} />;
       case 'triggers':
         return <TriggersPage onNavigate={handleNavigate} />;
+      case 'calendar':
+        return <AgendaPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

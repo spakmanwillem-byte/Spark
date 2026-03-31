@@ -22,6 +22,7 @@ import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
 import { InstellingenPage } from "./components/admin/InstellingenPage";
 import { WalletPage } from "./components/modules/WalletPage";
+import { SparkBrainPage } from "./components/spark/SparkBrainPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -124,6 +125,8 @@ function AppContent() {
         return <InstellingenPage onNavigate={handleNavigate} />;
       case 'wallet':
         return <WalletPage onNavigate={handleNavigate} />;
+      case 'spark-brain':
+        return <SparkBrainPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

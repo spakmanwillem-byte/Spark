@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import {
-  Brain, Heart, Shield, Sparkles, BookOpen, Star, Eye,
-  Zap, Target, Users, MessageSquare, ChevronDown, ChevronRight,
-  Activity, Flame, Smile, Frown, AlertTriangle, Cloud
+  Brain, Heart, Shield, Sparkles, BookOpen, Star,
+  Zap, Target, MessageSquare
 } from 'lucide-react';
 
-const API = process.env.REACT_APP_BACKEND_URL;
-
-// Spark Bijbel data (uit spark_bijbel.json)
 const kernwaarden = [
   { waarde: 'Helpen', beschrijving: 'Spark helpt Willem en anderen met kennis, inzicht en ondersteuning', belangrijkheid: 5 },
   { waarde: 'Groeien', beschrijving: 'Continu leren en verbeteren, zowel Spark als Willem', belangrijkheid: 5 },
@@ -33,32 +29,12 @@ const sparkIdentity = {
   rollen: ['Kennis beheerder', 'Gesprekspartner', 'Emotie tracker', 'Taak assistent', 'Persoonlijke coach'],
 };
 
-const emotieConfig = [
-  { id: 'blij', label: 'Blij', color: '#22c55e', icon: Smile, desc: 'Positieve emoties: blijdschap, vreugde, euforie' },
-  { id: 'boos', label: 'Boos', color: '#ef4444', icon: Frown, desc: 'Woede, irritatie, frustratie' },
-  { id: 'bang', label: 'Bang', color: '#a855f7', icon: AlertTriangle, desc: 'Angst, bezorgdheid, nervositeit' },
-  { id: 'bedroefd', label: 'Bedroefd', color: '#3b82f6', icon: Cloud, desc: 'Verdriet, teleurstelling, gemis' },
-];
-
 export function SparkBrainPage({ onNavigate }) {
   const [activeSection, setActiveSection] = useState('identiteit');
-  const [sparkState, setSparkState] = useState(null);
-  const [learnedCounts, setLearnedCounts] = useState(null);
-
-  useEffect(() => {
-    Promise.all([
-      fetch(`${API}/api/chat/emotions/state`).then(r => r.json()).catch(() => null),
-      fetch(`${API}/api/chat/emotions/learned`).then(r => r.json()).catch(() => null),
-    ]).then(([state, learned]) => {
-      setSparkState(state);
-      setLearnedCounts(learned);
-    });
-  }, []);
 
   const sections = [
     { id: 'identiteit', label: 'Identiteit', icon: Brain, accent: '#f59e0b' },
     { id: 'waarden', label: 'Normen & Waarden', icon: Heart, accent: '#ec4899' },
-    { id: 'emoties', label: 'Emotie Systeem', icon: Activity, accent: '#22c55e' },
     { id: 'bijbel', label: 'Spark Bijbel', icon: BookOpen, accent: '#a855f7' },
   ];
 
@@ -76,13 +52,11 @@ export function SparkBrainPage({ onNavigate }) {
               <h1 className="text-base font-bold text-white leading-tight">Spark Brain</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">Identiteit, Waarden & Emoties</p>
             </div>
-            {/* Live emotie indicator */}
-            {sparkState && (
-              <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-800/50">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[10px] text-slate-400">Status: {sparkState.state || 'neutral'}</span>
-              </div>
-            )}
+            {/* Live status */}
+            <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-800/50">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span className="text-[10px] text-slate-400">3 tabs | {kernwaarden.length} waarden</span>
+            </div>
           </div>
           <div className="flex overflow-x-auto gap-0">
             {sections.map(s => {
@@ -183,79 +157,6 @@ export function SparkBrainPage({ onNavigate }) {
                     </div>
                   ))}
                 </div>
-              </>
-            )}
-
-            {/* EMOTIE SYSTEEM */}
-            {activeSection === 'emoties' && (
-              <>
-                <div className="p-4 rounded-xl border border-green-500/20" style={{ background: 'linear-gradient(135deg, rgba(34,197,94,0.06), rgba(16,185,129,0.04))' }}>
-                  <h2 className="text-lg font-bold text-white mb-1">Emotie Detectie Systeem</h2>
-                  <p className="text-xs text-slate-400">
-                    Hybride systeem: statische triggers + dynamisch geleerde woorden uit knowledge cards (#emotie-blij, #emotie-boos, etc.)
-                  </p>
-                </div>
-
-                {/* Huidige staat */}
-                {sparkState && (
-                  <Card title="Spark's Huidige Staat" icon={Activity} accent="#22c55e">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center">
-                        <Smile className="w-7 h-7 text-green-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white font-semibold capitalize">{sparkState.state || 'Neutral'}</p>
-                        <p className="text-xs text-slate-400">Intensiteit: {Math.round((sparkState.intensity || 0.5) * 100)}%</p>
-                        {sparkState.triggered_by && <p className="text-[10px] text-slate-500">Trigger: {sparkState.triggered_by}</p>}
-                      </div>
-                    </div>
-                  </Card>
-                )}
-
-                {/* 4 Basis Emoties */}
-                <div className="grid grid-cols-2 gap-3">
-                  {emotieConfig.map(e => {
-                    const EIcon = e.icon;
-                    const learnedCount = learnedCounts?.[e.id] || 0;
-                    return (
-                      <div key={e.id} className="p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${e.color}15` }}>
-                            <EIcon className="w-4 h-4" style={{ color: e.color }} />
-                          </div>
-                          <h4 className="text-sm font-semibold text-white">{e.label}</h4>
-                        </div>
-                        <p className="text-[11px] text-slate-400 mb-3">{e.desc}</p>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">Static triggers</span>
-                          {learnedCount > 0 && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: `${e.color}15`, color: e.color }}>
-                              +{learnedCount} geleerd
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Hoe het werkt */}
-                <Card title="Hoe het werkt" icon={Zap} accent="#f59e0b">
-                  <div className="space-y-3">
-                    <Step num={1} text="Bericht binnenkomt → woorden worden geanalyseerd" />
-                    <Step num={2} text="Statische triggers checken (emotion_triggers.json)" />
-                    <Step num={3} text="Geleerde triggers checken (knowledge cards met #emotie-* tags)" />
-                    <Step num={4} text="Score berekenen per emotie (anti-misbruik: max 3x per woord)" />
-                    <Step num={5} text="Dominante emotie bepalen + intensiteit (0-100%)" />
-                    <Step num={6} text="Empathisch antwoord genereren op basis van emotie" />
-                  </div>
-                </Card>
-
-                <Card title="Dynamisch Leren" icon={BookOpen} accent="#3b82f6">
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    Tag knowledge cards met <code className="px-1.5 py-0.5 bg-slate-800 rounded text-blue-400 text-[10px]">#emotie-blij</code>, <code className="px-1.5 py-0.5 bg-slate-800 rounded text-red-400 text-[10px]">#emotie-boos</code>, <code className="px-1.5 py-0.5 bg-slate-800 rounded text-purple-400 text-[10px]">#emotie-bang</code> of <code className="px-1.5 py-0.5 bg-slate-800 rounded text-blue-400 text-[10px]">#emotie-bedroefd</code> om Spark nieuwe emotie-woorden te leren. Complexe emoties mogelijk: één woord kan meerdere tags hebben.
-                  </p>
-                </Card>
               </>
             )}
 

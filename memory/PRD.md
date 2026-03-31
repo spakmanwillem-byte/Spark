@@ -22,23 +22,23 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Roadmap - Fase-overzicht
 
 ### SPARK AI
-- [x] Triggers
-- [x] Emoties
-- [x] Verbanden
-- [ ] Spark Brain (placeholder)
+- [x] Spark Brain - Identiteit, Normen & Waarden, Spark Bijbel (3 tabs)
+- [x] Triggers - Trigger woord lijsten beheren
+- [x] Emoties - Volledig emotie detectie systeem (4 tabs: Overzicht, Live Detectie, Sub-Emoties, Hoe het werkt)
+- [x] Verbanden - Knowledge Graph placeholder
 
 ### MODULES
 - [x] Trader
 - [x] Achievements (13 milestones, XP)
 - [x] Leaderboard
-- [x] Wallet
+- [x] Wallet (UI only - mocked)
 - [x] Integraties (bestandsbrowser + sandbox)
 
 ### BEHEER
 - [x] Mijn Profiel
 - [x] Gebruikers
 - [x] Analytics
-- [x] Instellingen (6 tabs)
+- [x] Instellingen (6 tabs - UI only)
 
 ## API Endpoints
 - Auth: POST /api/auth/login, GET /api/auth/users, GET /api/auth/me
@@ -46,12 +46,12 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - Files: GET /api/files/tree, GET /api/files/content, POST /api/files/save
 - Modules: GET/POST/DELETE /api/modules/*
 - Achievements: GET /api/achievements/all, GET /api/achievements/progress/{user_id}
-- **Chat/Snap**: POST /api/chat/message, POST /api/chat/snap, GET /api/chat/lookup/{query}
+- Chat/Snap: POST /api/chat/message, POST /api/chat/snap, GET /api/chat/lookup/{query}
+- Emoties: GET /api/chat/emotions/state, GET /api/chat/emotions/all, GET /api/chat/emotions/learned, POST /api/chat/emotions/detect
 
 ## Backlog
-- [ ] Spark Brain pagina invullen
-- [ ] Backend koppelen aan: Instellingen, Dagboek, Notities, Agenda
-- [ ] Wallet koppelen aan oude data
-- [ ] Disambiguation (bank zitten vs bank geld)
+- [ ] Backend koppelen aan: Instellingen, Dagboek, Notities, Agenda, Wallet
+- [ ] Bank/Geld module (disambiguation: bank zitten vs bank geld)
+- [ ] Placeholder verificatie: cross-reference spark-v1-source data
 
-## Datum: 31 maart 2026
+## Datum: 1 april 2026

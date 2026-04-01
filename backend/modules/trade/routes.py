@@ -1,14 +1,16 @@
 """
-Trade Routes - Trade history, positions, Bitvavo credentials
-Schema v1:
-  trade_history/user-001.json: {trades: [{trade_id, run_id, timestamp, action, market, amount, price, filled, status, mock, success}]}
+Trade Routes - Trade history, positions, Bitvavo credentials, monitoring, candles, tickers
 """
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
+from modules.trade.monitor import (
+    get_monitor, fetch_candles, fetch_tickers,
+    execute_mock_trade, execute_real_trade, WATCHLIST_COINS,
+)
 
 router = APIRouter(prefix="/trade", tags=["trade"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"
@@ -25,6 +27,23 @@ class TraderSettings(BaseModel):
     market: Optional[str] = "BCH-EUR"
     use_mock: Optional[bool] = True
     auto_trade: Optional[bool] = False
+
+
+class MonitorStartRequest(BaseModel):
+    interval: Optional[int] = 60
+    market: Optional[str] = "BCH-EUR"
+    candle_interval: Optional[str] = "1h"
+    user_id: Optional[str] = "user-001"
+    auto_trade: Optional[bool] = False
+    trade_amount: Optional[float] = 5.0
+    use_mock: Optional[bool] = True
+
+
+class QuickTradeRequest(BaseModel):
+    market: str = "BCH-EUR"
+    side: str = "buy"
+    amount: float = 5.0
+    use_mock: bool = True
 
 
 @router.get("/history/{user_id}")
@@ -132,3 +151,75 @@ async def update_trader_settings(user_id: str, updates: TraderSettings):
     settings_file.parent.mkdir(parents=True, exist_ok=True)
     save_json(settings_file, settings)
     return {"success": True, "settings": settings["trader"]}
+
+
+# ============================================================
+# CANDLES & TICKERS (Bitvavo Public API - no auth needed)
+# ============================================================
+
+@router.get("/candles")
+async def get_candles(
+    market: str = Query("BCH-EUR"),
+    interval: str = Query("1h"),
+    limit: int = Query(30, ge=1, le=200),
+):
+    candles = fetch_candles(market, interval, limit)
+    return {"success": len(candles) > 0, "market": market, "interval": interval, "candles": candles}
+
+
+@router.get("/tickers")
+async def get_tickers(coins: str = Query(None)):
+    coin_list = coins.split(",") if coins else WATCHLIST_COINS
+    tickers = fetch_tickers(coin_list)
+    return {"success": len(tickers) > 0, "tickers": tickers}
+
+
+# ============================================================
+# QUICK TRADE (Execute buy/sell)
+# ============================================================
+
+@router.post("/execute/{user_id}")
+async def execute_trade(user_id: str, req: QuickTradeRequest):
+    if req.use_mock:
+        result = execute_mock_trade(user_id, req.market, req.side, req.amount)
+    else:
+        result = execute_real_trade(user_id, req.market, req.side, req.amount)
+    return result
+
+
+# ============================================================
+# MONITOR (Start/Stop/Pause background trading monitor)
+# ============================================================
+
+@router.post("/monitor/start")
+async def monitor_start(req: MonitorStartRequest = MonitorStartRequest()):
+    monitor = get_monitor()
+    return monitor.start(
+        interval=req.interval,
+        market=req.market,
+        candle_interval=req.candle_interval,
+        user_id=req.user_id,
+        auto_trade=req.auto_trade,
+        trade_amount=req.trade_amount,
+        use_mock=req.use_mock,
+    )
+
+
+@router.post("/monitor/stop")
+async def monitor_stop():
+    return get_monitor().stop()
+
+
+@router.post("/monitor/pause")
+async def monitor_pause():
+    return get_monitor().pause()
+
+
+@router.get("/monitor/status")
+async def monitor_status():
+    return {"success": True, "status": get_monitor().get_status()}
+
+
+@router.get("/monitor/decisions")
+async def monitor_decisions(limit: int = Query(50)):
+    return {"success": True, "decisions": get_monitor().get_decisions(limit)}

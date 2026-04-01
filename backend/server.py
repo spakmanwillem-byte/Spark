@@ -102,6 +102,11 @@ app.include_router(trade_router, prefix="/api")
 from modules.accounting import accounting_router
 app.include_router(accounting_router, prefix="/api")
 
+# Module 16: Shop
+from modules.shop import shop_router
+app.include_router(shop_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

@@ -1,0 +1,117 @@
+{
+  "summary": "Iteration 10: Shop (Winkel) Token System + Trader Page New Features - ALL TESTS PASSED. Backend: 13/13 pytest tests passed. Frontend: All new features working correctly - Token shop with balance display, purchase flow, 15m candle interval, countdown timer, BCH-EUR locked chart.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: GET /api/shop/items returns 6 shop items with token prices",
+    "Backend: GET /api/shop/balance/user-001 returns current token balance (4 tokens after test purchases)",
+    "Backend: POST /api/shop/buy/user-001 with priority-support deducts 3 tokens and returns success",
+    "Backend: POST /api/shop/buy/user-001 with ai-boost returns 'Item niet beschikbaar' error",
+    "Backend: POST /api/shop/buy/user-001 with insufficient tokens returns 'Onvoldoende tokens' error",
+    "Backend: GET /api/shop/purchases/user-001 returns purchase history (3 purchases)",
+    "Backend: GET /api/trade/candles?market=BCH-EUR&interval=15m&limit=10 returns 15-minute candle data",
+    "Backend: GET /api/trade/candles?market=BCH-EUR&interval=1h&limit=10 returns 1-hour candle data",
+    "Backend: GET /api/trade/candles?market=BCH-EUR&interval=4h&limit=10 returns 4-hour candle data",
+    "Backend: GET /api/trade/candles?market=BCH-EUR&interval=1d&limit=10 returns daily candle data",
+    "Backend: GET /api/trade/stats/user-001 still returns trade statistics (regression)",
+    "Backend: GET /api/trade/tickers still returns live prices (regression)",
+    "Backend: GET /api/trade/monitor/status still returns monitor status (regression)",
+    "Frontend: WinkelPage shows token balance badge in header (4 tokens)",
+    "Frontend: WinkelPage displays 6 shop items with correct prices",
+    "Frontend: WinkelPage 'Kopen' button deducts tokens and shows success message",
+    "Frontend: WinkelPage items too expensive show 'Te weinig tokens' disabled button",
+    "Frontend: WinkelPage unavailable items show 'Binnenkort' (AI Boost)",
+    "Frontend: TraderPage shows BCH-EUR as fixed chart title (no dropdown selector)",
+    "Frontend: TraderPage has 4 interval buttons: 15m, 1h, 4h, 1d",
+    "Frontend: TraderPage shows countdown timer with MM:SS format next to chart title",
+    "Frontend: TraderPage 15m interval loads 15-minute candle data and updates countdown label",
+    "Frontend: WalletPage shows updated token balance after shop purchases (4 tokens)",
+    "Frontend: Navigation between pages works correctly (no regression)"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_shop_and_trader_features.py",
+    "/app/test_reports/pytest/pytest_shop_trader.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/backend/tests/test_shop_and_trader_features.py"
+  ],
+  "success_rate": {
+    "backend": "100% (13/13 tests passed)",
+    "frontend": "100% (all features working)"
+  },
+  "test_credentials": {
+    "naam": "Willem",
+    "sleutelwoord": "Appelsap",
+    "user_id": "user-001"
+  },
+  "seed_data_creation": "None - using existing data. User-001 token balance: started at 11, now 4 after test purchases.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Three new features tested this iteration: 1) Shop (Winkel) with token purchases - 6 items (custom-emoji 5t, kleur-thema 8t, priority-support 3t, extra-storage 4t, ai-boost 15t unavailable, gift-card 2t). User-001 has 4 tokens remaining. 2) 15-minute candle interval added to TraderPage. 3) Countdown timer shows time remaining until current candle closes (MM:SS format with interval label). 4) Chart is BCH-EUR only (no market dropdown). Data-testids: winkel-page, token-balance, shop-item-{id}, buy-{id}, purchase-result, trade-page, interval-15m/1h/4h/1d, candle-countdown. Token data in /app/backend/data/wallet/user_wallets.json. Shop purchases in /app/backend/data/shop/purchases.json.",
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": [],
+    "note": "All candle and ticker data comes from live Bitvavo public API. Shop uses JSON file storage."
+  },
+  "features_tested": {
+    "shop_items_api": {
+      "status": "PASS",
+      "endpoint": "GET /api/shop/items",
+      "items": ["custom-emoji (5t)", "kleur-thema (8t)", "priority-support (3t)", "extra-storage (4t)", "ai-boost (15t, unavailable)", "gift-card (2t)"]
+    },
+    "shop_balance_api": {
+      "status": "PASS",
+      "endpoint": "GET /api/shop/balance/{user_id}",
+      "current_balance": "4 tokens"
+    },
+    "shop_buy_api": {
+      "status": "PASS",
+      "endpoint": "POST /api/shop/buy/{user_id}",
+      "tested": ["Successful purchase (priority-support, gift-card)", "Unavailable item error (ai-boost)", "Insufficient tokens error"]
+    },
+    "shop_purchases_api": {
+      "status": "PASS",
+      "endpoint": "GET /api/shop/purchases/{user_id}",
+      "purchases_count": 3
+    },
+    "candle_15m_interval": {
+      "status": "PASS",
+      "endpoint": "GET /api/trade/candles?interval=15m",
+      "data_source": "Bitvavo public API (live)"
+    },
+    "frontend_winkel_page": {
+      "status": "PASS",
+      "features": ["Token balance badge", "6 shop items", "Kopen buttons", "Te weinig tokens disabled", "Binnenkort for unavailable", "Purchase success message", "Balance updates after purchase"]
+    },
+    "frontend_trader_countdown": {
+      "status": "PASS",
+      "features": ["Countdown timer MM:SS format", "Interval label (15 min, 1 uur, etc.)", "Updates when interval changes"]
+    },
+    "frontend_trader_intervals": {
+      "status": "PASS",
+      "buttons": ["15m", "1h", "4h", "1d"],
+      "note": "All 4 interval buttons present and functional"
+    },
+    "frontend_bch_eur_locked": {
+      "status": "PASS",
+      "note": "Chart shows BCH-EUR as fixed title, no market dropdown selector"
+    },
+    "wallet_token_display": {
+      "status": "PASS",
+      "note": "Wallet page shows updated token balance (4 tokens) in Betaalmethoden section"
+    },
+    "regression_tests": {
+      "status": "PASS",
+      "tested": ["Trade stats API", "Tickers API", "Monitor status API", "Navigation between pages"]
+    }
+  }
+}

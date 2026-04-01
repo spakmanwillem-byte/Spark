@@ -3,12 +3,16 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   TrendingUp, TrendingDown, Activity, DollarSign,
   ArrowUpRight, ArrowDownRight, Clock, Play, Pause, Square,
-  BarChart2, PieChart, RefreshCw, Eye,
+  BarChart2, PieChart, RefreshCw, Eye, Timer,
   Settings, Key, Link, GripVertical, Loader2, Zap, Radio
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+// Interval durations in ms
+const INTERVAL_MS = { '15m': 15*60*1000, '1h': 60*60*1000, '4h': 4*60*60*1000, '1d': 24*60*60*1000 };
+const INTERVAL_LABELS = { '15m': '15 min', '1h': '1 uur', '4h': '4 uur', '1d': '1 dag' };
 
 export function TraderPage({ onNavigate }) {
   const { user } = useAuth();
@@ -26,6 +30,9 @@ export function TraderPage({ onNavigate }) {
   const [candles, setCandles] = useState([]);
   const [candleMarket, setCandleMarket] = useState('BCH-EUR');
   const [candleInterval, setCandleInterval] = useState('1h');
+
+  // Countdown
+  const [countdown, setCountdown] = useState('');
 
   // Monitor
   const [monitorStatus, setMonitorStatus] = useState(null);
@@ -86,6 +93,22 @@ export function TraderPage({ onNavigate }) {
 
   // Reload candles when market/interval changes
   useEffect(() => { loadLiveData(); }, [candleMarket, candleInterval, loadLiveData]);
+
+  // Countdown timer - time until current candle closes
+  useEffect(() => {
+    const intervalMs = INTERVAL_MS[candleInterval] || 3600000;
+    const tick = () => {
+      const now = Date.now();
+      const elapsed = now % intervalMs;
+      const remaining = intervalMs - elapsed;
+      const mins = Math.floor(remaining / 60000);
+      const secs = Math.floor((remaining % 60000) / 1000);
+      setCountdown(`${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [candleInterval]);
 
   // Monitor controls
   const startMonitor = async () => {
@@ -176,17 +199,16 @@ export function TraderPage({ onNavigate }) {
                   <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <BarChart2 className="w-4 h-4 text-amber-400" />
-                      <select data-testid="chart-market-select" value={candleMarket} onChange={e => setCandleMarket(e.target.value)}
-                        className="bg-transparent text-sm font-semibold text-white focus:outline-none cursor-pointer">
-                        <option value="BCH-EUR" className="bg-slate-900">BCH-EUR</option>
-                        <option value="BTC-EUR" className="bg-slate-900">BTC-EUR</option>
-                        <option value="ETH-EUR" className="bg-slate-900">ETH-EUR</option>
-                        <option value="SOL-EUR" className="bg-slate-900">SOL-EUR</option>
-                        <option value="ADA-EUR" className="bg-slate-900">ADA-EUR</option>
-                      </select>
+                      <span className="text-sm font-semibold text-white">BCH-EUR</span>
+                      {/* Countdown */}
+                      <div data-testid="candle-countdown" className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">
+                        <Timer className="w-3 h-3 text-amber-400" />
+                        <span className="text-[10px] font-mono text-amber-400">{countdown}</span>
+                        <span className="text-[9px] text-slate-500">{INTERVAL_LABELS[candleInterval]}</span>
+                      </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      {['1h', '4h', '1d'].map(iv => (
+                      {['15m', '1h', '4h', '1d'].map(iv => (
                         <button key={iv} data-testid={`interval-${iv}`} onClick={() => setCandleInterval(iv)}
                           className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all ${candleInterval === iv ? 'bg-amber-500/20 text-amber-400' : 'text-slate-500 hover:text-slate-300'}`}>
                           {iv}
@@ -277,8 +299,8 @@ export function TraderPage({ onNavigate }) {
                       const change = t.open > 0 ? ((t.last - t.open) / t.open * 100) : 0;
                       const isUp = change >= 0;
                       return (
-                        <button key={t.market} data-testid={`watch-${t.symbol}`} onClick={() => { setCandleMarket(t.market); setQtMarket(t.market); }}
-                          className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors ${candleMarket === t.market ? 'bg-amber-500/10 border border-amber-500/20' : 'hover:bg-slate-800/50'}`}>
+                        <button key={t.market} data-testid={`watch-${t.symbol}`} onClick={() => setQtMarket(t.market)}
+                          className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors ${qtMarket === t.market ? 'bg-amber-500/10 border border-amber-500/20' : 'hover:bg-slate-800/50'}`}>
                           <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold">{t.symbol[0]}</div>
                           <div className="flex-1 text-left">
                             <p className="text-xs font-medium text-white">{t.symbol}</p>

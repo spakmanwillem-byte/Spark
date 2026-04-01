@@ -62,9 +62,25 @@ app.include_router(achievements_router, prefix="/api")
 from modules.chat import chat_router
 app.include_router(chat_router, prefix="/api")
 
-# Module 3: Chat/Spark Brain (later)
-# from modules.chat import chat_router
-# app.include_router(chat_router, prefix="/api")
+# Module 6: Agenda
+from modules.agenda import agenda_router
+app.include_router(agenda_router, prefix="/api")
+
+# Module 7: Notes & Tasks
+from modules.notes import notes_router
+app.include_router(notes_router, prefix="/api")
+
+# Module 8: Triggers (consolidated)
+from modules.triggers import triggers_router
+app.include_router(triggers_router, prefix="/api")
+
+# Module 9: Persons (persoonskaarten)
+from modules.persons import persons_router
+app.include_router(persons_router, prefix="/api")
+
+# Module 10: Dagboek
+from modules.dagboek import dagboek_router
+app.include_router(dagboek_router, prefix="/api")
 
 
 # ============== HEALTH & ROOT ==============

@@ -38,7 +38,7 @@ export const navigationConfig = {
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
       { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard' },
       { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/modules/wallet' },
-      { id: 'community', label: 'Community', icon: UsersRound, path: '/modules/community' },
+      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
       { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },

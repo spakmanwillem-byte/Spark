@@ -24,6 +24,8 @@ import { InstellingenPage } from "./components/admin/InstellingenPage";
 import { WalletPage } from "./components/modules/WalletPage";
 import { SparkBrainPage } from "./components/spark/SparkBrainPage";
 import { PersoonsPage } from "./components/modules/PersoonsPage";
+import { WinkelPage } from "./components/modules/WinkelPage";
+import { BoekhoudPage } from "./components/modules/BoekhoudPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -46,10 +48,13 @@ function AppContent() {
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
       '/spark/connections': 'connections',
-      '/modules/trader': 'trader',
+      '/modules/trader': 'trade',
+      '/modules/trade': 'trade',
       '/modules/achievements': 'achievements',
       '/modules/wallet': 'wallet',
       '/modules/leaderboard': 'leaderboard',
+      '/modules/winkel': 'winkel',
+      '/modules/boekhouding': 'boekhouding',
       '/modules/community': 'persons',
       '/modules/persons': 'persons',
       '/modules/integrations': 'integrations',
@@ -91,7 +96,7 @@ function AppContent() {
   // Logged in - show appropriate page based on activePage
   const renderPage = () => {
     switch (activePage) {
-      case 'trader':
+      case 'trade':
         return <TraderPage onNavigate={handleNavigate} />;
       case 'users':
         return <UsersAdminPage onNavigate={handleNavigate} />;
@@ -131,6 +136,10 @@ function AppContent() {
         return <SparkBrainPage onNavigate={handleNavigate} />;
       case 'persons':
         return <PersoonsPage onNavigate={handleNavigate} />;
+      case 'winkel':
+        return <WinkelPage onNavigate={handleNavigate} />;
+      case 'boekhouding':
+        return <BoekhoudPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

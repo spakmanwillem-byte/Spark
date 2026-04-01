@@ -7,32 +7,33 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - **Backend**: FastAPI + JSON file storage (geen MongoDB!)
 - **Frontend**: React + Tailwind CSS + Lucide icons
 - **Auth**: JWT token-based met lokale users.json
-- **Storage**: `/app/backend/data/*.json`
 - **NLP**: Standalone Snap engine (geen spaCy/Levenshtein)
 
-## Voltooide Pagina's (ALLES MET ECHTE API)
+## Voltooide Pagina's (ALLES MET ECHTE API tenzij anders vermeld)
 
 ### WORKSPACE
 - [x] Dashboard - Live data kaarten
 - [x] Gesprekken - Chat met Snap/NLP engine
-- [x] Kennisbank - 2424+ kaarten zoeken/bewerken
+- [x] Kennisbank - 2424+ kaarten
 - [x] Agenda - Week kalender + events CRUD
 - [x] Dagboek - Mood tracking + entries CRUD
-- [x] Notities & Taken - Hybrid met tabs, notes+tasks CRUD
+- [x] Notities & Taken - Hybrid notes+tasks CRUD
 - [x] Roadmap - Fase-overzicht
 
 ### SPARK AI
-- [x] Spark Brain - Identiteit (v1 data), Normen & Waarden (11 kernwaarden, 6 normen), Spark Bijbel (11 items + reactie voorbeelden)
-- [x] Triggers - 258 triggers in 27 groepen (conversatie, kalender, emotie, admin, systeem)
-- [x] Emoties - Volledig emotie detectie systeem (4 tabs)
-- [x] Verbanden - Knowledge Graph: 2424 nodes, 11757 edges, interactieve SVG visualisatie, clusters, statistieken
+- [x] Spark Brain - Identiteit (v1), Normen & Waarden (11 waarden, 6 normen), Spark Bijbel
+- [x] Triggers - 258 triggers in 27 groepen
+- [x] Emoties - Emotie detectie systeem (4 tabs)
+- [x] Verbanden - Knowledge Graph (2424 nodes, 11757 edges, SVG visual, clusters, stats)
 
 ### MODULES
-- [x] Trader
+- [x] Trade - 287 BCH-EUR trades, stats, Bitvavo integratie, trader settings
+- [x] Wallet - 1000 Spark Tokens, 250 Credits, €15.40, 4 entiteiten, transacties
+- [x] Winkel - Shop met items (HARDCODED - geen backend store)
+- [x] Boekhouding - 4 kasboeken (Spark Core, SYL, Roadkill Merch, Persoonlijk), transaction CRUD, BTW
 - [x] Achievements (13 milestones, XP)
 - [x] Leaderboard
-- [x] Wallet (UI only - mocked)
-- [x] Persoonskaarten - 6 personen, gradatie groepering, relatie tracking
+- [x] Persoonskaarten - 6 personen, gradaties, relaties
 - [x] Integraties (bestandsbrowser + sandbox)
 
 ### BEHEER
@@ -42,8 +43,8 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Instellingen (6 tabs - UI only)
 
 ## Backlog
-- [ ] Backend koppelen aan: Instellingen, Wallet
-- [ ] Bank/Geld module
+- [ ] Backend koppelen aan: Instellingen
+- [ ] Winkel backend (store API)
 - [ ] Cross-reference met spark-v1-source voor gemiste features
 
 ## Datum: 1 april 2026

@@ -105,7 +105,7 @@ export function TraderPage({ onNavigate }) {
             <button onClick={loadData} className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
               <RefreshCw className="w-4 h-4 text-slate-400" />
             </button>
-            <button onClick={() => setActiveView(activeView === 'bitvavo' ? 'dashboard' : 'bitvavo')}
+            <button data-testid="trade-settings-toggle" onClick={(e) => { e.stopPropagation(); setActiveView(activeView === 'bitvavo' ? 'dashboard' : 'bitvavo'); }}
               className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
               <Settings className="w-4 h-4 text-slate-400" />
             </button>

@@ -14,17 +14,17 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 
 ### WORKSPACE
 - [x] Dashboard - Live data kaarten
-- [x] Gesprekken - Chat met Snap/NLP engine (Spark AI, Community, Privé)
+- [x] Gesprekken - Chat met Snap/NLP engine
 - [x] Kennisbank - 2424+ kaarten zoeken/bewerken
-- [x] Agenda - Week kalender + events CRUD (API: `/api/agenda/events/{user_id}`)
-- [x] Dagboek - Mood tracking + entries CRUD (API: `/api/dagboek/entries/{user_id}`)
-- [x] Notities & Taken - Hybrid met tabs, notes+tasks CRUD (API: `/api/notes/*`)
+- [x] Agenda - Week kalender + events CRUD (API gekoppeld)
+- [x] Dagboek - Mood tracking + entries CRUD (API gekoppeld)
+- [x] Notities & Taken - Hybrid met tabs, notes+tasks CRUD (API gekoppeld)
 - [x] Roadmap - Fase-overzicht
 
 ### SPARK AI
-- [x] Spark Brain - Identiteit, Normen & Waarden, Spark Bijbel (3 tabs)
-- [x] Triggers - Alle trigger lijsten geconsolideerd: 258 triggers in 27 groepen (API: `/api/triggers/all`)
-- [x] Emoties - Volledig emotie detectie systeem (4 tabs: Overzicht, Live Detectie, Sub-Emoties, Hoe het werkt)
+- [x] Spark Brain - Identiteit, Normen & Waarden, Spark Bijbel (echte v1 data via /api/spark/full)
+- [x] Triggers - 258 triggers in 27 groepen geconsolideerd (API gekoppeld)
+- [x] Emoties - Volledig emotie detectie systeem (4 tabs, API gekoppeld)
 - [x] Verbanden - Knowledge Graph placeholder
 
 ### MODULES
@@ -32,33 +32,33 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Achievements (13 milestones, XP)
 - [x] Leaderboard
 - [x] Wallet (UI only - mocked)
-- [x] Persoonskaarten - 6 personen, gradatie groepering, relatie tracking (API: `/api/persons/*`)
+- [x] Persoonskaarten - 6 personen, gradatie groepering, relatie tracking (API gekoppeld)
 - [x] Integraties (bestandsbrowser + sandbox)
 
 ### BEHEER
 - [x] Mijn Profiel
-- [x] Gebruikers
+- [x] Gebruikers - Met gradatie overzicht (7 levels) + personalia editing (naam, volledige_naam, rol, gradatie met rechten)
 - [x] Analytics
 - [x] Instellingen (6 tabs - UI only)
 
-## API Endpoints (alle werkend)
-- Auth: POST /api/auth/login, GET /api/auth/users, GET /api/auth/me
-- Knowledge: GET/PUT/DELETE /api/knowledge/*, GET /api/knowledge/stats
+## Alle API Endpoints
+- Auth: POST /api/auth/login, GET /api/auth/users, GET /api/auth/me, PUT /api/auth/users/{id}, GET /api/auth/gradaties
+- Knowledge: GET/PUT/DELETE /api/knowledge/*
 - Files: GET /api/files/tree, GET /api/files/content, POST /api/files/save
-- Modules: GET/POST/DELETE /api/modules/*
-- Achievements: GET /api/achievements/all, GET /api/achievements/progress/{user_id}
-- Chat/Snap: POST /api/chat/message, POST /api/chat/snap, GET /api/chat/lookup/{query}
-- Emoties: GET /api/chat/emotions/state, GET /api/chat/emotions/all, GET /api/chat/emotions/learned, POST /api/chat/emotions/detect
+- Achievements: GET /api/achievements/*
+- Chat/Snap: POST /api/chat/message, POST /api/chat/snap
+- Emoties: GET /api/chat/emotions/state|all|learned, POST /api/chat/emotions/detect
 - Agenda: GET/POST/PUT/DELETE /api/agenda/events/{user_id}
 - Dagboek: GET/POST/PUT/DELETE /api/dagboek/entries/{user_id}
 - Notes: GET/POST/PUT/DELETE /api/notes/*, /api/notes/tasks/*
 - Triggers: GET /api/triggers/all, GET /api/triggers/by-type/{type}
 - Persons: GET/POST/PUT/DELETE /api/persons/cards/{user_id}, GET /api/persons/relationships/{user_id}
+- Spark Core: GET /api/spark/identity, GET /api/spark/bijbel, GET /api/spark/full
 
 ## Backlog
 - [ ] Backend koppelen aan: Instellingen, Wallet
 - [ ] Bank/Geld module
-- [ ] Placeholder verificatie: cross-reference spark-v1-source data
-- [ ] Verbanden pagina (Knowledge Graph) van placeholder naar werkend
+- [ ] Placeholder verificatie: cross-reference spark-v1-source
+- [ ] Verbanden pagina (Knowledge Graph)
 
 ## Datum: 1 april 2026

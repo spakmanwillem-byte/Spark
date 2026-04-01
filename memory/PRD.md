@@ -7,7 +7,13 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - **Backend**: FastAPI + JSON file storage (geen MongoDB!)
 - **Frontend**: React + Tailwind CSS + Lucide icons
 - **Auth**: JWT token-based met lokale users.json
-- **Externe API**: Bitvavo publieke API (candles, tickers - geen auth nodig)
+- **Externe API**: Bitvavo publieke API (candles, tickers)
+
+## Token Systeem
+- User-001 (Willem): 11 tokens
+- Spark System (user-000): Treasury 49989 tokens
+- Tokens worden besteed in Winkel, teruggestort naar Spark treasury
+- Opnames via wallet reduceren tokens proportioneel
 
 ## Voltooide Pagina's
 
@@ -18,43 +24,30 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Spark Brain, Triggers, Emoties, Verbanden (Knowledge Graph)
 
 ### MODULES
-- [x] **Trade** - Crypto Trader met:
-  - Live candle grafiek (OHLC) via Bitvavo API, interval selectie (1h/4h/1d), markt selectie
-  - Watchlist: BCH, BTC, ETH, SOL, ADA live prijzen + 24h % change
-  - Monitor systeem: Background thread, Start/Stop/Pause, Bollinger Band decision engine, auto-trade optie
-  - Snel Handelen: Koop/Verkoop uitvoeren (mock of live), resultaat feedback
-  - Bitvavo integratie tab (API credentials + instellingen)
-  - 287+ historische BCH-EUR trades
-- [x] **Wallet** - Spark Tokens, Credits, EUR saldo, Opname systeem, Transactie Geschiedenis, Spark Card
-- [x] Winkel (hardcoded frontend)
+- [x] **Trade** - Crypto Trader:
+  - BCH-EUR candle grafiek (OHLC) via Bitvavo API
+  - Interval: 15m, 1h, 4h, 1d + countdown timer per candle
+  - Watchlist: BCH, BTC, ETH, SOL, ADA live prijzen
+  - Monitor: Background thread, Start/Stop/Pause, Bollinger Band engine
+  - Snel Handelen: Koop/Verkoop (mock/live)
+  - Bitvavo integratie tab
+- [x] **Wallet** - Tokens, Credits, EUR saldo, Opname systeem, Transacties, Spark Card
+- [x] **Winkel** - Shop met token aankopen (6 items, token balance, purchase flow)
 - [x] Boekhouding - 4 kasboeken
 - [x] Achievements, Leaderboard, Persoonskaarten, Integraties
 
 ### BEHEER
 - [x] Mijn Profiel, Gebruikers, Analytics, Instellingen
 
-## Recent Voltooid (1 april 2026)
-- [x] Wallet UI hersteld met originele layout + echte API data, entiteiten verwijderd
-- [x] Trader UI hersteld + 4 nieuwe features:
-  - Live Bitvavo candle grafiek (BCH/BTC/ETH/SOL/ADA)
-  - Watchlist met 5 coins + live prijzen
-  - Monitor systeem met start/stop/pause + decision engine
-  - Werkend Snel Handelen panel (mock trades)
-- [x] Opname endpoint (POST /api/wallet/withdraw/{user_id})
-- [x] Testing iteratie 9: 100% backend + 100% frontend
-
-## API Endpoints (Trade)
-- GET /api/trade/candles?market=X&interval=X&limit=X (Bitvavo publiek)
-- GET /api/trade/tickers (5 coins live)
-- POST /api/trade/execute/{user_id} (mock/live trade)
-- POST /api/trade/monitor/start|stop|pause
-- GET /api/trade/monitor/status|decisions
+## API Endpoints
+- `/api/shop/items|balance|buy|purchases` (Winkel token systeem)
+- `/api/trade/candles|tickers|execute|monitor/*` (Trading + monitoring)
+- `/api/wallet/user|transactions|withdraw` (Wallet)
 
 ## Backlog
-- [ ] Winkel backend (store API koppelen)
-- [ ] BTW-rapportage (automatisch BTW rapport)
-- [ ] Instellingen backend koppeling
-- [ ] Live Bitvavo trading (met echte API keys - user koppelt zelf)
-- [ ] Cross-reference met spark-v1-source voor gemiste features
+- [ ] BTW-rapportage
+- [ ] Instellingen backend
+- [ ] Live Bitvavo trading (met echte API keys)
+- [ ] Cross-reference spark-v1-source
 
 ## Datum: 1 april 2026

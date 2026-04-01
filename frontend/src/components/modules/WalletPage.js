@@ -20,14 +20,17 @@ export function WalletPage({ onNavigate }) {
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawing, setWithdrawing] = useState(false);
+  const [roar, setRoar] = useState(null);
 
   const loadData = () => {
     Promise.all([
       fetch(`${API}/api/wallet/user/${userId}`).then(r => r.json()).catch(() => ({})),
       fetch(`${API}/api/wallet/transactions/${userId}?limit=100`).then(r => r.json()).catch(() => ({ transactions: [] })),
-    ]).then(([w, t]) => {
+      fetch(`${API}/api/shop/token/balance/${userId}`).then(r => r.json()).catch(() => null),
+    ]).then(([w, t, r]) => {
       setWallet(w);
       setTransactions(t.transactions || []);
+      setRoar(r);
       setLoading(false);
     });
   };
@@ -175,9 +178,9 @@ export function WalletPage({ onNavigate }) {
               </div>
               {/* Quick assets */}
               <div className="flex gap-4 mt-4 pt-3 border-t border-slate-800">
-                <MiniAsset icon={Coins} label="Tokens" value={(wallet?.spark_tokens || 0).toLocaleString()} color="#f59e0b" />
-                <MiniAsset icon={Star} label="Credits" value={(wallet?.credits || 0).toLocaleString()} color="#a855f7" />
-                <MiniAsset icon={TrendingUp} label="Activity" value={(wallet?.activity_score || 0).toLocaleString()} color="#06b6d4" />
+                <MiniAsset icon={Coins} label="ROAR Tokens" value={roar ? roar.roar_balance.toString() : '0'} color="#f59e0b" />
+                <MiniAsset icon={Star} label="ROAR Waarde" value={roar ? `\u20AC${roar.value_eur.toFixed(2)}` : '\u20AC0'} color="#a855f7" />
+                <MiniAsset icon={TrendingUp} label="Token Prijs" value={roar ? `\u20AC${roar.price_per_token.toFixed(2)}` : '\u20AC5.08'} color="#06b6d4" />
                 <MiniAsset icon={CircleDollarSign} label="Verdiend" value={`\u20AC${(wallet?.earned_total || 0).toFixed(2)}`} color="#22c55e" />
               </div>
             </div>
@@ -303,7 +306,7 @@ export function WalletPage({ onNavigate }) {
               <div className="p-4 space-y-2">
                 <PaymentMethod label="Spark Card" sub="**** 0842" active icon={CreditCard} />
                 <PaymentMethod label="Bank Overboeking" sub="NL12 ABCD ****" icon={Banknote} />
-                <PaymentMethod label="Tokens" sub={`${(wallet?.spark_tokens || 0).toLocaleString()} beschikbaar`} icon={Coins} />
+                <PaymentMethod label="Tokens" sub={roar ? `${roar.roar_balance} ROAR (\u20AC${roar.value_eur.toFixed(2)})` : '0 ROAR'} icon={Coins} />
                 <button className="w-full py-2 text-xs text-slate-500 hover:text-amber-400 transition-colors flex items-center justify-center gap-1">
                   <Plus className="w-3 h-3" /> Methode Toevoegen
                 </button>

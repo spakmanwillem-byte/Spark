@@ -107,6 +107,11 @@ from modules.shop import shop_router
 app.include_router(shop_router, prefix="/api")
 
 
+# Module 17: Bots & Community
+from modules.bots import bots_router
+app.include_router(bots_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

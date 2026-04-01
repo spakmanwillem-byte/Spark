@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
-  Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound,
+  Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
   BookHeart, StickyNote, Award, ShoppingBag, BookMarked
@@ -41,6 +41,7 @@ export const navigationConfig = {
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
       { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard' },
       { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
+      { id: 'community', label: 'Community', icon: MessageCircle, path: '/modules/community' },
       { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },

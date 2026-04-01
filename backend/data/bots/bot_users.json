@@ -1,0 +1,140 @@
+{
+  "bots": [
+    {
+      "id": "bot-madelief",
+      "naam": "Madelief Stouten",
+      "sleutelwoord": "Stouten",
+      "gradatie": 3,
+      "type": "bot",
+      "persoonlijkheid": "Sociaal, vriendelijk, enthousiast",
+      "bio": "Ik ben Madelief! Ik hou iedereen gezelschap en zorg dat niemand zich alleen voelt. 👋",
+      "triggers": [
+        {
+          "type": "user_join",
+          "responses": [
+            "Hallo {user}! Welkom bij Spark! 👋",
+            "Hey {user}! Leuk dat je er bent! 😊",
+            "Hoi {user}! Fijn dat je meedoet! ✨"
+          ]
+        },
+        {
+          "type": "user_leave",
+          "responses": [
+            "Pheeuw, {user} is weg... 😅",
+            "Doei {user}! Tot snel! 👋",
+            "Oh nee, {user} vertrok... Kom je terug? 🥺"
+          ]
+        },
+        {
+          "type": "greeting",
+          "keywords": [
+            "hallo",
+            "hey",
+            "hi",
+            "hoi",
+            "goedemorgen",
+            "goedemiddag"
+          ],
+          "responses": [
+            "Hoi {user}! Hoe gaat het? 😊",
+            "Hey {user}! Fijn je te zien! ✨",
+            "Hallo {user}! Wat leuk! 👋"
+          ]
+        },
+        {
+          "type": "silence",
+          "duration": 300,
+          "responses": [
+            "Zo stil hier... Iedereen nog wakker? 😴",
+            "*kijkt rond* Hallo? Iemand thuis? 👀",
+            "Hmm, niemand zegt iets... Interessant! 🤔"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bot-harry",
+      "naam": "Harry Klokkenmaker",
+      "sleutelwoord": "Klokkenmaker",
+      "gradatie": 3,
+      "type": "bot",
+      "persoonlijkheid": "Punctueel, precies, betrouwbaar",
+      "bio": "Ik ben Harry. De tijd is mijn specialiteit. Vraag me hoe laat het is! ⏰",
+      "schedule": {
+        "hourly_announcement": true,
+        "format": "🕐 Het is nu {hour}:00 uur!"
+      },
+      "triggers": [
+        {
+          "type": "keyword",
+          "keywords": [
+            "hoe laat",
+            "tijd",
+            "klok",
+            "uur"
+          ],
+          "responses": [
+            "Het is nu {current_time}! ⏰",
+            "De klok zegt: {current_time} 🕐",
+            "{current_time} - Precies op tijd! ✨"
+          ]
+        },
+        {
+          "type": "keyword",
+          "keywords": [
+            "te laat",
+            "vergeten"
+          ],
+          "responses": [
+            "Tijd is relatief, maar een klok liegt niet! 😉",
+            "Volgende keer op tijd? Ik herinner je! ⏰",
+            "Te laat is beter dan nooit! 🕐"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bot-smith",
+      "naam": "Mr Smith",
+      "sleutelwoord": "Smith",
+      "gradatie": 5,
+      "type": "bot",
+      "persoonlijkheid": "Analytisch, observerend, security-minded",
+      "bio": "Ik ben Mr Smith. Ik houd het systeem veilig en scan op problemen. 🕵️",
+      "schedule": {
+        "security_check": 3600,
+        "message": "🔒 Security check voltooid. Status: {status}"
+      },
+      "triggers": [
+        {
+          "type": "keyword",
+          "keywords": [
+            "bug",
+            "error",
+            "crash",
+            "hack",
+            "probleem"
+          ],
+          "responses": [
+            "🕵️ Ik scan het systeem... {scan_result}",
+            "⚠️ Probleem gedetecteerd. Analyseer... {analysis}",
+            "🔍 Onderzoek gestart. Moment geduld..."
+          ]
+        },
+        {
+          "type": "keyword",
+          "keywords": [
+            "veilig",
+            "security",
+            "beveiliging"
+          ],
+          "responses": [
+            "Systeem is veilig. Alle controles passed. ✅",
+            "Security status: OPTIMAL 🔒",
+            "Geen bedreigingen gedetecteerd. 🛡️"
+          ]
+        }
+      ]
+    }
+  ]
+}

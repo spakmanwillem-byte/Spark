@@ -26,6 +26,7 @@ import { SparkBrainPage } from "./components/spark/SparkBrainPage";
 import { PersoonsPage } from "./components/modules/PersoonsPage";
 import { WinkelPage } from "./components/modules/WinkelPage";
 import { BoekhoudPage } from "./components/modules/BoekhoudPage";
+import { CommunityPage } from "./components/workspace/CommunityPage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -55,7 +56,7 @@ function AppContent() {
       '/modules/leaderboard': 'leaderboard',
       '/modules/winkel': 'winkel',
       '/modules/boekhouding': 'boekhouding',
-      '/modules/community': 'persons',
+      '/modules/community': 'community',
       '/modules/persons': 'persons',
       '/modules/integrations': 'integrations',
       '/profiel': 'profiel',
@@ -140,6 +141,8 @@ function AppContent() {
         return <WinkelPage onNavigate={handleNavigate} />;
       case 'boekhouding':
         return <BoekhoudPage onNavigate={handleNavigate} />;
+      case 'community':
+        return <CommunityPage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

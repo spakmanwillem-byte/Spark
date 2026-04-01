@@ -16,14 +16,14 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Dashboard - Live data kaarten
 - [x] Gesprekken - Chat met Snap/NLP engine (Spark AI, Community, Privé)
 - [x] Kennisbank - 2424+ kaarten zoeken/bewerken
-- [x] Agenda
-- [x] Dagboek - Mood tracking
-- [x] Notities & Taken - Hybrid met tabs
+- [x] Agenda - Week kalender + events CRUD (API: `/api/agenda/events/{user_id}`)
+- [x] Dagboek - Mood tracking + entries CRUD (API: `/api/dagboek/entries/{user_id}`)
+- [x] Notities & Taken - Hybrid met tabs, notes+tasks CRUD (API: `/api/notes/*`)
 - [x] Roadmap - Fase-overzicht
 
 ### SPARK AI
 - [x] Spark Brain - Identiteit, Normen & Waarden, Spark Bijbel (3 tabs)
-- [x] Triggers - Trigger woord lijsten beheren
+- [x] Triggers - Alle trigger lijsten geconsolideerd: 258 triggers in 27 groepen (API: `/api/triggers/all`)
 - [x] Emoties - Volledig emotie detectie systeem (4 tabs: Overzicht, Live Detectie, Sub-Emoties, Hoe het werkt)
 - [x] Verbanden - Knowledge Graph placeholder
 
@@ -32,6 +32,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Achievements (13 milestones, XP)
 - [x] Leaderboard
 - [x] Wallet (UI only - mocked)
+- [x] Persoonskaarten - 6 personen, gradatie groepering, relatie tracking (API: `/api/persons/*`)
 - [x] Integraties (bestandsbrowser + sandbox)
 
 ### BEHEER
@@ -40,7 +41,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Analytics
 - [x] Instellingen (6 tabs - UI only)
 
-## API Endpoints
+## API Endpoints (alle werkend)
 - Auth: POST /api/auth/login, GET /api/auth/users, GET /api/auth/me
 - Knowledge: GET/PUT/DELETE /api/knowledge/*, GET /api/knowledge/stats
 - Files: GET /api/files/tree, GET /api/files/content, POST /api/files/save
@@ -48,10 +49,16 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - Achievements: GET /api/achievements/all, GET /api/achievements/progress/{user_id}
 - Chat/Snap: POST /api/chat/message, POST /api/chat/snap, GET /api/chat/lookup/{query}
 - Emoties: GET /api/chat/emotions/state, GET /api/chat/emotions/all, GET /api/chat/emotions/learned, POST /api/chat/emotions/detect
+- Agenda: GET/POST/PUT/DELETE /api/agenda/events/{user_id}
+- Dagboek: GET/POST/PUT/DELETE /api/dagboek/entries/{user_id}
+- Notes: GET/POST/PUT/DELETE /api/notes/*, /api/notes/tasks/*
+- Triggers: GET /api/triggers/all, GET /api/triggers/by-type/{type}
+- Persons: GET/POST/PUT/DELETE /api/persons/cards/{user_id}, GET /api/persons/relationships/{user_id}
 
 ## Backlog
-- [ ] Backend koppelen aan: Instellingen, Dagboek, Notities, Agenda, Wallet
-- [ ] Bank/Geld module (disambiguation: bank zitten vs bank geld)
+- [ ] Backend koppelen aan: Instellingen, Wallet
+- [ ] Bank/Geld module
 - [ ] Placeholder verificatie: cross-reference spark-v1-source data
+- [ ] Verbanden pagina (Knowledge Graph) van placeholder naar werkend
 
 ## Datum: 1 april 2026

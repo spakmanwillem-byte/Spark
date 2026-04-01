@@ -344,37 +344,30 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
 
-                {/* Gradatie / Ranks */}
+                {/* Gradatie Overzicht */}
                 <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                     <Award className="w-4 h-4 text-amber-400" />
-                    Gradatie
+                    Gradatie Systeem
                   </h3>
-                  <div className="space-y-2">
-                    {[1, 2, 3, 4, 5].map(level => (
-                      <div key={level} className="flex items-center gap-3">
-                        <div className="flex">
-                          {[1, 2, 3, 4, 5].map(star => (
-                            <Star 
-                              key={star}
-                              className={`w-3 h-3 ${
-                                star <= level 
-                                  ? 'text-amber-400 fill-amber-400' 
-                                  : 'text-slate-700'
-                              }`}
-                            />
-                          ))}
+                  <div className="space-y-1.5">
+                    {gradaties.map(g => {
+                      const isHuidig = g.niveau === selectedUser.gradatie;
+                      const gColor = g.niveau === 1 ? '#f59e0b' : g.niveau === 2 ? '#ec4899' : g.niveau <= 4 ? '#3b82f6' : g.niveau <= 5 ? '#22c55e' : '#64748b';
+                      return (
+                        <div key={g.niveau} className={`flex items-center gap-2 p-2 rounded-lg transition-colors ${isHuidig ? 'border' : ''}`}
+                          style={isHuidig ? { background: `${gColor}10`, borderColor: `${gColor}30` } : {}}>
+                          <div className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold flex-shrink-0" style={{ background: `${gColor}15`, color: gColor }}>
+                            {g.niveau}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className={`text-xs font-medium truncate ${isHuidig ? 'text-white' : 'text-slate-400'}`}>{g.titel}</p>
+                            <p className="text-[9px] text-slate-600 truncate">{g.toegang?.length || 0} rechten</p>
+                          </div>
+                          {isHuidig && <span className="text-[9px] px-1.5 py-0.5 rounded font-medium" style={{ background: `${gColor}15`, color: gColor }}>Huidig</span>}
                         </div>
-                        <span className={`text-sm ${
-                          (8 - selectedUser.gradatie) >= level ? 'text-white' : 'text-slate-600'
-                        }`}>
-                          {level}/5
-                        </span>
-                        {(8 - selectedUser.gradatie) === level && (
-                          <span className="text-xs text-amber-400">← Huidig</span>
-                        )}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -410,49 +403,90 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
 
-                {/* Edit Form */}
+                {/* Edit Form - Personalia */}
                 <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                     <Edit3 className="w-4 h-4 text-amber-400" />
-                    Gebruiker Bewerken
+                    Personalia Bewerken
                   </h3>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs text-slate-400 mb-1">Naam</label>
+                      <input 
+                        data-testid="edit-naam"
+                        type="text"
+                        value={editMode ? editForm.naam || '' : selectedUser.naam || ''}
+                        onChange={(e) => editMode && setEditForm({...editForm, naam: e.target.value})}
+                        disabled={!editMode}
+                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none disabled:opacity-50 text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs text-slate-400 mb-1">Volledige Naam</label>
+                      <input 
+                        data-testid="edit-volledige-naam"
+                        type="text"
+                        value={editMode ? editForm.volledige_naam || '' : selectedUser.volledige_naam || ''}
+                        onChange={(e) => editMode && setEditForm({...editForm, volledige_naam: e.target.value})}
+                        disabled={!editMode}
+                        placeholder="Volledige naam"
+                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none disabled:opacity-50 text-sm"
+                      />
+                    </div>
+
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Rol / Functie</label>
                       <input 
+                        data-testid="edit-rol"
                         type="text"
                         value={editMode ? editForm.rol || '' : selectedUser.rol || ''}
                         onChange={(e) => editMode && setEditForm({...editForm, rol: e.target.value})}
                         disabled={!editMode}
-                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none disabled:opacity-50"
+                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none disabled:opacity-50 text-sm"
                       />
                     </div>
                     
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Gradatie</label>
                       <select 
+                        data-testid="edit-gradatie"
                         value={editMode ? editForm.gradatie : selectedUser.gradatie}
                         onChange={(e) => editMode && setEditForm({...editForm, gradatie: parseInt(e.target.value)})}
                         disabled={!editMode}
-                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-amber-500 focus:outline-none disabled:opacity-50"
+                        className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-amber-500 focus:outline-none disabled:opacity-50 text-sm"
                       >
                         {gradaties.map(g => (
                           <option key={g.niveau} value={g.niveau}>
-                            {g.niveau} - {g.titel}
+                            G{g.niveau} — {g.titel}
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <input type="checkbox" id="masterkey" className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-amber-500" />
-                      <label htmlFor="masterkey" className="text-sm text-slate-400">Masterkey toegang</label>
-                    </div>
+                    {/* Gradatie info voor geselecteerde */}
+                    {(() => {
+                      const g = getGradatieInfo(editMode ? editForm.gradatie : selectedUser.gradatie);
+                      return g?.beschrijving ? (
+                        <div className="p-3 bg-slate-800/30 rounded-lg border border-slate-700/30">
+                          <p className="text-[10px] text-amber-400 mb-1">{g.titel}</p>
+                          <p className="text-[11px] text-slate-400">{g.beschrijving}</p>
+                          {g.toegang?.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {g.toegang.map((t, i) => (
+                                <span key={i} className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-500">{t}</span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ) : null;
+                    })()}
 
                     <button 
+                      data-testid="edit-save-btn"
                       onClick={editMode ? handleEditSave : handleEditStart}
-                      className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors"
+                      className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors text-sm"
                     >
                       {editMode ? 'Wijzigingen Opslaan' : 'Bewerken'}
                     </button>

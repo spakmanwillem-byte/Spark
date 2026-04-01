@@ -82,6 +82,10 @@ app.include_router(persons_router, prefix="/api")
 from modules.dagboek import dagboek_router
 app.include_router(dagboek_router, prefix="/api")
 
+# Module 11: Spark Core (identity, bijbel)
+from modules.spark import router as spark_router
+app.include_router(spark_router, prefix="/api")
+
 
 # ============== HEALTH & ROOT ==============
 

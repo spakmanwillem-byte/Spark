@@ -1,0 +1,31 @@
+{
+  "notifications": [
+    {
+      "id": "notif-1",
+      "user_id": "user-001",
+      "title": "Welkom bij Spark Core 2.0",
+      "message": "Alle modules zijn geport vanuit V1!",
+      "type": "info",
+      "read": true,
+      "timestamp": "2026-04-01T08:00:00+00:00"
+    },
+    {
+      "id": "notif-2",
+      "user_id": "all",
+      "title": "ROAR Token Update",
+      "message": "Systeem gereset. Tokens behouden, waarde wordt herberekend bij nieuwe stortingen.",
+      "type": "warning",
+      "read": true,
+      "timestamp": "2026-04-01T10:00:00+00:00"
+    },
+    {
+      "id": "notif-3",
+      "user_id": "user-001",
+      "title": "Community Chat Live",
+      "message": "Madelief, Harry en Mr Smith zijn online! Stuur een bericht.",
+      "type": "success",
+      "read": true,
+      "timestamp": "2026-04-01T10:30:00+00:00"
+    }
+  ]
+}

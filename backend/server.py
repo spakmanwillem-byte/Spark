@@ -112,6 +112,15 @@ from modules.bots import bots_router
 app.include_router(bots_router, prefix="/api")
 
 
+# Module 18: Voice (STT/TTS)
+from modules.voice import router as voice_router
+app.include_router(voice_router, prefix="/api")
+
+# Module 19: Profile, Roadmap, Notifications, Spark Profile
+from modules.profile import router as profile_router
+app.include_router(profile_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

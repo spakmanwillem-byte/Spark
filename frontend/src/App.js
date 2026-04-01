@@ -27,6 +27,7 @@ import { PersoonsPage } from "./components/modules/PersoonsPage";
 import { WinkelPage } from "./components/modules/WinkelPage";
 import { BoekhoudPage } from "./components/modules/BoekhoudPage";
 import { CommunityPage } from "./components/workspace/CommunityPage";
+import { VoicePage } from "./components/workspace/VoicePage";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -59,6 +60,7 @@ function AppContent() {
       '/modules/community': 'community',
       '/modules/persons': 'persons',
       '/modules/integrations': 'integrations',
+      '/workspace/voice': 'voice',
       '/profiel': 'profiel',
       '/admin/users': 'users',
       '/admin/analytics': 'analytics',
@@ -143,6 +145,8 @@ function AppContent() {
         return <BoekhoudPage onNavigate={handleNavigate} />;
       case 'community':
         return <CommunityPage onNavigate={handleNavigate} />;
+      case 'voice':
+        return <VoicePage onNavigate={handleNavigate} />;
       default:
         return <DashboardPage activePage={activePage} onNavigate={handleNavigate} />;
     }

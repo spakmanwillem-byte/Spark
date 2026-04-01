@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { 
   User, Edit3, Save, X, Heart, Target, AlertTriangle,
   Eye, Ear, Brain, Smile, Globe, MessageCircle, 
-  ChevronRight, Star, Award, Settings, Camera
+  ChevronRight, Star, Award, Settings, Camera, MapPin, Phone, Mail
 } from 'lucide-react';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 export function UserProfilePage({ onNavigate }) {
   const { user } = useAuth();
+  const userId = user?.id || 'user-001';
   const [editMode, setEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState('algemeen');
+  const [saving, setSaving] = useState(false);
+  const [extProfile, setExtProfile] = useState({});
+
+  // Load extended profile from API
+  useEffect(() => {
+    fetch(`${API}/api/profile/extended/${userId}`)
+      .then(r => r.json())
+      .then(d => { if (d.profile) setExtProfile(d.profile); })
+      .catch(() => {});
+  }, [userId]);
+
+  const saveProfile = async () => {
+    setSaving(true);
+    await fetch(`${API}/api/profile/extended/${userId}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(extProfile),
+    });
+    setSaving(false);
+  };
+
+  const updateField = (key, val) => setExtProfile(prev => ({ ...prev, [key]: val }));
 
   // User persona data (will be stored per user later)
   const [personaData, setPersonaData] = useState({
@@ -136,43 +160,29 @@ export function UserProfilePage({ onNavigate }) {
                   ACHTERGROND
                 </h3>
                 <div className="space-y-3">
-                  <InputField label="Beroep" value={personaData.beroep} placeholder="Functie / Werk" />
-                  <InputField label="Opleiding" value={personaData.opleiding} placeholder="Hoogste opleiding" />
-                  <InputField label="Rol" value={user?.rol || ''} disabled />
-                  <InputField label="Gradatie" value={`${user?.gradatie || 7}`} disabled />
-                  
-                  <div className="pt-3 border-t border-slate-700">
-                    <p className="text-xs text-slate-500 mb-2">Status</p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">Actief</span>
-                      <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded">Lid</span>
-                    </div>
-                  </div>
+                  <InputField label="Volledige Naam" value={extProfile.volledige_naam || ''} placeholder="Voor- en achternaam" onChange={v => updateField('volledige_naam', v)} />
+                  <InputField label="Email" value={extProfile.email || ''} placeholder="email@voorbeeld.nl" onChange={v => updateField('email', v)} />
+                  <InputField label="Telefoon" value={extProfile.telefoon || ''} placeholder="+31 6 ..." onChange={v => updateField('telefoon', v)} />
+                  <InputField label="Geboortedatum" value={extProfile.geboortedatum || ''} placeholder="DD-MM-JJJJ" onChange={v => updateField('geboortedatum', v)} />
+                  <InputField label="Nationaliteit" value={extProfile.nationaliteit || ''} placeholder="Nederlands" onChange={v => updateField('nationaliteit', v)} />
                 </div>
               </div>
 
-              {/* Column 3: Extra Info Fields */}
+              {/* Column 3: Adres & Noodcontact */}
               <div className="bg-slate-800/50 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-amber-400 mb-4">EXTRA INFORMATIE</h3>
-                <div className="space-y-2">
-                  {[
-                    'Interesses',
-                    'Hobby\'s', 
-                    'Vaardigheden',
-                    'Talen',
-                    'Ervaring',
-                    'Certificaten',
-                    'Notities'
-                  ].map((field, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0"></span>
-                      <input 
-                        type="text"
-                        placeholder={field}
-                        className="flex-1 bg-slate-700/50 border-none rounded px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                      />
-                    </div>
-                  ))}
+                <h3 className="text-sm font-semibold text-amber-400 mb-4 flex items-center gap-2">
+                  <MapPin className="w-4 h-4" /> ADRES & CONTACT
+                </h3>
+                <div className="space-y-3">
+                  <InputField label="Straat + Nr" value={extProfile.straat || ''} placeholder="Straatnaam 1" onChange={v => updateField('straat', v)} />
+                  <InputField label="Postcode" value={extProfile.postcode || ''} placeholder="1234 AB" onChange={v => updateField('postcode', v)} />
+                  <InputField label="Plaats" value={extProfile.plaats || ''} placeholder="Amsterdam" onChange={v => updateField('plaats', v)} />
+                  <InputField label="Land" value={extProfile.land || ''} placeholder="Nederland" onChange={v => updateField('land', v)} />
+                  <div className="pt-3 border-t border-slate-700">
+                    <p className="text-[10px] text-red-400/60 uppercase tracking-wider mb-2">Noodcontact</p>
+                    <InputField label="Naam" value={extProfile.noodcontact_naam || ''} placeholder="Contact naam" onChange={v => updateField('noodcontact_naam', v)} />
+                    <InputField label="Telefoon" value={extProfile.noodcontact_telefoon || ''} placeholder="+31 6 ..." onChange={v => updateField('noodcontact_telefoon', v)} />
+                  </div>
                 </div>
               </div>
 
@@ -306,9 +316,10 @@ export function UserProfilePage({ onNavigate }) {
               <button className="px-6 py-2 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors">
                 Annuleren
               </button>
-              <button className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl hover:from-amber-400 hover:to-orange-500 transition-all flex items-center gap-2">
+              <button data-testid="profile-save" onClick={saveProfile} disabled={saving}
+                className="px-6 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-xl hover:from-amber-400 hover:to-orange-500 transition-all flex items-center gap-2 disabled:opacity-50">
                 <Save className="w-4 h-4" />
-                Opslaan
+                {saving ? 'Opslaan...' : 'Opslaan'}
               </button>
             </div>
           </div>

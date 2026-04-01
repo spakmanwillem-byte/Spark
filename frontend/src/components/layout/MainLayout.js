@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
-  Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle,
+  Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
   BookHeart, StickyNote, Award, ShoppingBag, BookMarked
@@ -20,6 +20,7 @@ export const navigationConfig = {
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
       { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
+      { id: 'voice', label: 'Voice', icon: Volume2, path: '/workspace/voice' },
     ]
   },
   spark: {
@@ -68,6 +69,27 @@ export const getPageInfo = (pageId) => {
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [notifs, setNotifs] = useState([]);
+
+  const userId = user?.id || 'user-001';
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  React.useEffect(() => {
+    fetch(`${API}/api/notifications/${userId}`)
+      .then(r => r.json())
+      .then(d => { setUnreadCount(d.unread_count || 0); setNotifs(d.notifications || []); })
+      .catch(() => {});
+  }, [userId, API]);
+
+  const markAllRead = () => {
+    fetch(`${API}/api/notifications/${userId}/read-all`, { method: 'POST' }).then(() => {
+      setUnreadCount(0);
+      setNotifs(prev => prev.map(n => ({ ...n, read: true })));
+    });
+    setShowNotifs(false);
+  };
 
   const handleNavClick = (item) => {
     if (onNavigate) {
@@ -166,7 +188,41 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto relative">
+        {/* Top bar with notifications */}
+        <div className="absolute top-3 right-4 z-30 flex items-center gap-2">
+          <div className="relative">
+            <button data-testid="notification-bell" onClick={() => setShowNotifs(!showNotifs)}
+              className="p-2 bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl transition-colors relative">
+              <Bell className="w-4 h-4 text-slate-400" />
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[9px] font-bold text-white flex items-center justify-center">
+                  {unreadCount}
+                </span>
+              )}
+            </button>
+            {showNotifs && (
+              <div className="absolute right-0 mt-2 w-80 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+                  <span className="text-sm font-semibold text-white">Meldingen</span>
+                  {unreadCount > 0 && (
+                    <button onClick={markAllRead} className="text-[10px] text-amber-400 hover:underline">Alles gelezen</button>
+                  )}
+                </div>
+                <div className="max-h-72 overflow-y-auto">
+                  {notifs.map(n => (
+                    <div key={n.id} className={`px-4 py-3 border-b border-slate-800/50 ${n.read ? 'opacity-50' : ''}`}>
+                      <p className="text-xs font-medium text-white">{n.title}</p>
+                      <p className="text-[10px] text-slate-400 mt-0.5">{n.message}</p>
+                      <p className="text-[9px] text-slate-600 mt-1">{n.timestamp ? new Date(n.timestamp).toLocaleString('nl-NL') : ''}</p>
+                    </div>
+                  ))}
+                  {notifs.length === 0 && <p className="px-4 py-6 text-center text-xs text-slate-500">Geen meldingen</p>}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
         {children}
       </main>
     </div>

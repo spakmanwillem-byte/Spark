@@ -11,23 +11,26 @@ export function SparkBrainPage({ onNavigate }) {
   const [activeSection, setActiveSection] = useState('identiteit');
   const [identity, setIdentity] = useState(null);
   const [bijbel, setBijbel] = useState(null);
+  const [sparkProfile, setSparkProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API}/api/spark/full`)
-      .then(r => r.json())
-      .then(d => {
-        setIdentity(d.identity || {});
-        setBijbel(d.bijbel || {});
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    Promise.all([
+      fetch(`${API}/api/spark/full`).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/spark/profile`).then(r => r.json()).catch(() => ({ profile: {} })),
+    ]).then(([d, p]) => {
+      setIdentity(d.identity || {});
+      setBijbel(d.bijbel || {});
+      setSparkProfile(p.profile || {});
+      setLoading(false);
+    });
   }, []);
 
   const sections = [
     { id: 'identiteit', label: 'Identiteit', icon: Brain, accent: '#f59e0b' },
     { id: 'waarden', label: 'Normen & Waarden', icon: Heart, accent: '#ec4899' },
     { id: 'bijbel', label: 'Spark Bijbel', icon: BookOpen, accent: '#a855f7' },
+    { id: 'profiel', label: 'Spark Profiel', icon: Star, accent: '#06b6d4' },
   ];
 
   const kernwaarden = bijbel?.kernwaarden || [];
@@ -261,6 +264,10 @@ export function SparkBrainPage({ onNavigate }) {
               </>
             )}
 
+            {activeSection === 'profiel' && sparkProfile && (
+              <SparkProfileView profile={sparkProfile} />
+            )}
+
           </div>
         </div>
       </div>
@@ -363,6 +370,54 @@ function BijbelItem({ item }) {
           {item.toegevoegd_op && <p className="text-[10px] text-slate-600">Toegevoegd: {new Date(item.toegevoegd_op).toLocaleDateString('nl-NL')}</p>}
         </div>
       )}
+    </div>
+  );
+}
+
+function SparkProfileView({ profile }) {
+  const renderObject = (obj, depth = 0) => {
+    if (!obj || typeof obj !== 'object') return <span className="text-xs text-slate-300">{String(obj)}</span>;
+    if (Array.isArray(obj)) {
+      return (
+        <ul className="space-y-1 ml-2">
+          {obj.map((item, i) => (
+            <li key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
+              <span className="text-amber-500 mt-0.5">-</span>
+              {typeof item === 'object' ? renderObject(item, depth + 1) : String(item)}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    return (
+      <div className={`space-y-2 ${depth > 0 ? 'ml-2 pl-2 border-l border-slate-800' : ''}`}>
+        {Object.entries(obj).map(([key, val]) => (
+          <div key={key}>
+            <p className="text-[10px] text-amber-400/60 uppercase tracking-wider mb-0.5">{key.replace(/_/g, ' ')}</p>
+            {typeof val === 'object' ? renderObject(val, depth + 1) : <p className="text-xs text-slate-300">{String(val)}</p>}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const sections = Object.entries(profile).filter(([k]) => k !== 'basis');
+  return (
+    <div className="space-y-4">
+      {profile.basis && (
+        <Card title={`${profile.basis.naam} - ${profile.basis.versie || ''}`} icon={Star} accent="#06b6d4">
+          <div className="grid grid-cols-2 gap-3 text-xs">
+            {Object.entries(profile.basis).map(([k, v]) => (
+              <div key={k}><span className="text-slate-500">{k}:</span> <span className="text-white ml-1">{String(v)}</span></div>
+            ))}
+          </div>
+        </Card>
+      )}
+      {sections.map(([key, val]) => (
+        <Card key={key} title={key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} icon={Sparkles} accent="#06b6d4">
+          {renderObject(val)}
+        </Card>
+      ))}
     </div>
   );
 }

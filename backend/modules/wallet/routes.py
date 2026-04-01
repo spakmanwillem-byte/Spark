@@ -22,6 +22,11 @@ class DepositRequest(BaseModel):
     message: Optional[str] = None
 
 
+class WithdrawRequest(BaseModel):
+    amount: float
+    message: Optional[str] = None
+
+
 @router.get("/user/{user_id}")
 async def get_user_wallet(user_id: str):
     user_wallets = load_json(DATA_DIR / "user_wallets.json", default={"user_wallets": {}})
@@ -69,6 +74,38 @@ async def create_deposit(user_id: str, req: DepositRequest):
     wallets["transactions"].append(tx)
     save_json(DATA_DIR / "wallets.json", wallets)
     return {"success": True, "transaction": tx}
+
+
+@router.post("/withdraw/{user_id}")
+async def create_withdrawal(user_id: str, req: WithdrawRequest):
+    wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
+    user_w = wallets.get("wallets", {}).get(user_id, {"balance": 0})
+    if req.amount > user_w.get("balance", 0):
+        return {"success": False, "error": "Onvoldoende saldo"}
+    tx = {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "type": "withdrawal",
+        "amount": req.amount,
+        "status": "completed",
+        "message": req.message or "Opname",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    wallets["transactions"].append(tx)
+    if user_id not in wallets["wallets"]:
+        wallets["wallets"][user_id] = {"balance": 0, "total_deposited": 0, "total_withdrawn": 0, "total_donated": 0}
+    wallets["wallets"][user_id]["balance"] = round(user_w.get("balance", 0) - req.amount, 2)
+    wallets["wallets"][user_id]["total_withdrawn"] = round(user_w.get("total_withdrawn", 0) + req.amount, 2)
+    # Also reduce spark tokens proportionally
+    user_wallets = load_json(DATA_DIR / "user_wallets.json", default={"user_wallets": {}})
+    uw = user_wallets.get("user_wallets", {}).get(user_id, {})
+    if uw.get("wallet"):
+        token_reduction = int(req.amount * 10)
+        uw["wallet"]["spark_tokens"] = max(0, uw["wallet"].get("spark_tokens", 0) - token_reduction)
+        user_wallets["user_wallets"][user_id] = uw
+        save_json(DATA_DIR / "user_wallets.json", user_wallets)
+    save_json(DATA_DIR / "wallets.json", wallets)
+    return {"success": True, "transaction": tx, "new_balance": wallets["wallets"][user_id]["balance"]}
 
 
 @router.get("/entities")

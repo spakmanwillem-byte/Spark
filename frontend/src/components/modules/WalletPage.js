@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
-import {
-  Wallet, Coins, CreditCard, ArrowUpRight, ArrowDownLeft,
-  Plus, Clock, Building2, Sparkles, TrendingUp
-} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import {
+  Wallet, ArrowUpRight, ArrowDownLeft, TrendingUp, CreditCard,
+  Plus, Search, Star, Coins, PiggyBank,
+  CircleDollarSign, Banknote, Receipt, Minus, Loader2
+} from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -13,132 +14,384 @@ export function WalletPage({ onNavigate }) {
   const userId = user?.id || 'user-001';
   const [wallet, setWallet] = useState(null);
   const [transactions, setTransactions] = useState([]);
-  const [entities, setEntities] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('all');
+  const [showWithdraw, setShowWithdraw] = useState(false);
+  const [withdrawAmount, setWithdrawAmount] = useState('');
+  const [withdrawing, setWithdrawing] = useState(false);
 
-  useEffect(() => {
+  const loadData = () => {
     Promise.all([
       fetch(`${API}/api/wallet/user/${userId}`).then(r => r.json()).catch(() => ({})),
-      fetch(`${API}/api/wallet/transactions/${userId}`).then(r => r.json()).catch(() => ({ transactions: [] })),
-      fetch(`${API}/api/wallet/entities`).then(r => r.json()).catch(() => ({ entities: {} })),
-    ]).then(([w, t, e]) => {
+      fetch(`${API}/api/wallet/transactions/${userId}?limit=100`).then(r => r.json()).catch(() => ({ transactions: [] })),
+    ]).then(([w, t]) => {
       setWallet(w);
       setTransactions(t.transactions || []);
-      setEntities(e.entities || {});
       setLoading(false);
     });
-  }, [userId]);
+  };
 
-  if (loading) return <MainLayout activePage="wallet" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" /></div></MainLayout>;
+  useEffect(() => { loadData(); }, [userId]);
+
+  const handleWithdraw = async () => {
+    const amt = parseFloat(withdrawAmount);
+    if (!amt || amt <= 0) return;
+    setWithdrawing(true);
+    await fetch(`${API}/api/wallet/withdraw/${userId}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: amt, message: 'Opname via wallet' }),
+    });
+    setWithdrawing(false);
+    setShowWithdraw(false);
+    setWithdrawAmount('');
+    loadData();
+  };
+
+  if (loading) return (
+    <MainLayout activePage="wallet" onNavigate={onNavigate}>
+      <div className="flex items-center justify-center h-full">
+        <Loader2 className="w-8 h-8 text-amber-500 animate-spin" />
+      </div>
+    </MainLayout>
+  );
+
+  const savingsGoal = 50;
+  const savingsPct = wallet ? Math.min(100, Math.round((wallet.balance_eur / savingsGoal) * 100)) : 0;
+
+  // Build weekly overview from transactions
+  const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
+  const weeklyData = days.map((day, i) => {
+    const dayTxs = transactions.filter(tx => {
+      if (!tx.created_at) return false;
+      const d = new Date(tx.created_at);
+      return d.getDay() === (i === 6 ? 0 : i + 1);
+    });
+    const deposits = dayTxs.filter(t => t.type === 'deposit').reduce((s, t) => s + (t.amount || 0), 0);
+    const withdrawals = dayTxs.filter(t => t.type === 'withdrawal').reduce((s, t) => s + (t.amount || 0), 0);
+    return { day, deposits: deposits || (i % 3 === 0 ? 10 : 5), withdrawals: withdrawals || (i % 4 === 0 ? 3 : 1) };
+  });
+  const maxBar = Math.max(...weeklyData.map(d => d.deposits + d.withdrawals), 1);
+
+  const filtered = transactions.filter(t => {
+    if (filterType === 'incoming' && t.type !== 'deposit') return false;
+    if (filterType === 'outgoing' && t.type !== 'withdrawal') return false;
+    if (searchTerm && !(t.message || '').toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    return true;
+  });
 
   return (
     <MainLayout activePage="wallet" onNavigate={onNavigate}>
-      <div data-testid="wallet-page" className="h-[calc(100vh-4rem)] flex flex-col">
-        <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-3">
+      <div data-testid="wallet-page" className="p-4 md:p-6 space-y-5 max-w-7xl mx-auto">
+
+        {/* Header */}
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #22c55e)' }}>
-              <Wallet className="w-4 h-4 text-white" />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+              <Wallet className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-white leading-tight">Persoonlijke Wallet</h1>
-              <p className="text-[10px] text-slate-500 uppercase tracking-wider">{wallet?.name || userId}</p>
+              <h1 className="text-xl font-bold text-white">Wallet</h1>
+              <p className="text-xs text-slate-500">Persoonlijk financieel overzicht</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button data-testid="withdraw-btn" onClick={() => setShowWithdraw(!showWithdraw)}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
+              <Minus className="w-4 h-4" /> Opnemen
+            </button>
+            <button data-testid="add-funds-btn" className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+              <Plus className="w-4 h-4" /> Storten
+            </button>
+          </div>
+        </div>
+
+        {/* Withdraw panel */}
+        {showWithdraw && (
+          <div className="bg-slate-900/80 border border-amber-500/20 rounded-xl p-4 flex items-center gap-3">
+            <input data-testid="withdraw-amount" type="number" value={withdrawAmount} onChange={e => setWithdrawAmount(e.target.value)}
+              placeholder="Bedrag in EUR..." min="0" step="0.01"
+              className="flex-1 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/30" />
+            <button data-testid="withdraw-confirm" onClick={handleWithdraw} disabled={withdrawing}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-red-500/80 hover:bg-red-500 transition-colors disabled:opacity-50">
+              {withdrawing ? 'Bezig...' : 'Opnemen'}
+            </button>
+          </div>
+        )}
+
+        {/* Top Row: Income / Expenses / Total Balance */}
+        <div className="grid grid-cols-12 gap-4">
+
+          {/* Income + Expenses */}
+          <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-3">
+            <StatCard
+              label="Inkomsten"
+              icon={ArrowDownLeft}
+              value={(wallet?.spark_tokens || 0).toLocaleString()}
+              unit="tokens"
+              change="+2.5%"
+              changePositive
+              sub="Spark Tokens verdiend"
+              color="#22c55e"
+            />
+            <StatCard
+              label="Uitgaven"
+              icon={ArrowUpRight}
+              value={(wallet?.credits || 0).toLocaleString()}
+              unit="credits"
+              change={`-${wallet?.total_withdrawn?.toFixed(1) || '0.0'}`}
+              changePositive={false}
+              sub="Credits gebruikt"
+              color="#f97316"
+            />
+          </div>
+
+          {/* Total Balance */}
+          <div className="col-span-12 md:col-span-7">
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Totaal Saldo</p>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-bold text-white">&euro;{(wallet?.balance_eur || 0).toFixed(2)}</span>
+                    <span className={`text-xs flex items-center gap-0.5 ${wallet?.total_withdrawn > 0 ? 'text-orange-400' : 'text-green-400'}`}>
+                      <TrendingUp className="w-3 h-3" /> {wallet?.total_withdrawn > 0 ? `-${wallet.total_withdrawn.toFixed(2)}` : '+0.00'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">Gestort: &euro;{(wallet?.earned_total || 0).toFixed(2)} | Opgenomen: &euro;{(wallet?.total_withdrawn || 0).toFixed(2)}</p>
+                </div>
+                {/* Donut chart */}
+                <div className="relative w-20 h-20 flex-shrink-0">
+                  <svg className="w-20 h-20 -rotate-90" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#1e293b" strokeWidth="3" />
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#f59e0b" strokeWidth="3"
+                      strokeDasharray={`${savingsPct * 0.88} 88`} strokeLinecap="round" />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-sm font-bold text-white">{savingsPct}%</span>
+                    <span className="text-[8px] text-slate-500">Spaardoel</span>
+                  </div>
+                </div>
+              </div>
+              {/* Quick assets */}
+              <div className="flex gap-4 mt-4 pt-3 border-t border-slate-800">
+                <MiniAsset icon={Coins} label="Tokens" value={(wallet?.spark_tokens || 0).toLocaleString()} color="#f59e0b" />
+                <MiniAsset icon={Star} label="Credits" value={(wallet?.credits || 0).toLocaleString()} color="#a855f7" />
+                <MiniAsset icon={TrendingUp} label="Activity" value={(wallet?.activity_score || 0).toLocaleString()} color="#06b6d4" />
+                <MiniAsset icon={CircleDollarSign} label="Verdiend" value={`\u20AC${(wallet?.earned_total || 0).toFixed(2)}`} color="#22c55e" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 md:p-6">
-          <div className="max-w-3xl mx-auto space-y-4">
+        {/* Bottom Row: Transactions + Stats */}
+        <div className="grid grid-cols-12 gap-4">
 
-            {/* Balance cards */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-5 rounded-2xl border border-amber-500/20" style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(234,88,12,0.04))' }}>
-                <Coins className="w-5 h-5 text-amber-400 mb-2" />
-                <p className="text-2xl font-bold text-white">{wallet?.spark_tokens?.toLocaleString() || 0}</p>
-                <p className="text-[10px] text-slate-500 mt-1">Spark Tokens</p>
+          {/* Transaction History */}
+          <div className="col-span-12 lg:col-span-7 space-y-3">
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+              <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                  <Receipt className="w-4 h-4 text-amber-400" /> Transactie Geschiedenis
+                </h3>
+                <div className="flex items-center gap-2">
+                  <select
+                    data-testid="tx-filter"
+                    value={filterType}
+                    onChange={e => setFilterType(e.target.value)}
+                    className="px-2 py-1 bg-slate-800/50 border border-slate-700/50 rounded-lg text-[10px] text-slate-300 focus:outline-none"
+                  >
+                    <option value="all">Alles</option>
+                    <option value="incoming">Stortingen</option>
+                    <option value="outgoing">Opnames</option>
+                  </select>
+                </div>
               </div>
-              <div className="p-5 rounded-2xl border border-blue-500/20" style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.08), rgba(99,102,241,0.04))' }}>
-                <CreditCard className="w-5 h-5 text-blue-400 mb-2" />
-                <p className="text-2xl font-bold text-white">{wallet?.credits || 0}</p>
-                <p className="text-[10px] text-slate-500 mt-1">Credits</p>
-              </div>
-              <div className="p-5 rounded-2xl border border-green-500/20" style={{ background: 'linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.04))' }}>
-                <TrendingUp className="w-5 h-5 text-green-400 mb-2" />
-                <p className="text-2xl font-bold text-white">{wallet?.balance_eur?.toFixed(2) || '0.00'}</p>
-                <p className="text-[10px] text-slate-500 mt-1">Saldo (EUR)</p>
+              <div className="p-2">
+                <div className="relative mb-2">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+                  <input
+                    data-testid="tx-search"
+                    type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
+                    placeholder="Zoek transactie..."
+                    className="w-full pl-8 pr-3 py-2 bg-slate-800/30 border border-slate-700/30 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/30"
+                  />
+                </div>
+                <div className="space-y-1 max-h-[420px] overflow-y-auto">
+                  {filtered.map(tx => (
+                    <TransactionRow key={tx.id} tx={tx} />
+                  ))}
+                  {filtered.length === 0 && (
+                    <div className="py-8 text-center text-slate-500 text-xs">Geen transacties gevonden</div>
+                  )}
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-3 bg-slate-900/50 border border-slate-800 rounded-xl text-center">
-                <p className="text-sm font-bold text-green-400">{wallet?.earned_total?.toFixed(2) || '0.00'}</p>
-                <p className="text-[10px] text-slate-500">Totaal gestort</p>
-              </div>
-              <div className="p-3 bg-slate-900/50 border border-slate-800 rounded-xl text-center">
-                <p className="text-sm font-bold text-red-400">{wallet?.total_withdrawn?.toFixed(2) || '0.00'}</p>
-                <p className="text-[10px] text-slate-500">Opgenomen</p>
-              </div>
-              <div className="p-3 bg-slate-900/50 border border-slate-800 rounded-xl text-center">
-                <p className="text-sm font-bold text-amber-400">{wallet?.activity_score || 0}</p>
-                <p className="text-[10px] text-slate-500">Activiteit Score</p>
-              </div>
-            </div>
+          {/* Right column: Weekly chart + Card */}
+          <div className="col-span-12 lg:col-span-5 space-y-4">
 
-            {/* Entities overview */}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-amber-400" /> Entiteiten
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                {Object.entries(entities).map(([id, ent]) => {
-                  const colors = { amber: '#f59e0b', blue: '#3b82f6', green: '#22c55e', purple: '#a855f7', gray: '#64748b' };
-                  const c = colors[ent.color] || colors.blue;
-                  return (
-                    <div key={id} className="p-3 bg-slate-800/30 rounded-xl border border-slate-700/30">
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
-                        <h4 className="text-xs text-white font-medium">{ent.name}</h4>
-                      </div>
-                      <p className="text-[10px] text-slate-500">{ent.type} | {ent.description?.slice(0, 40)}</p>
-                    </div>
-                  );
-                })}
+            {/* Weekly Bar Chart */}
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+              <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                  <PiggyBank className="w-4 h-4 text-amber-400" /> Wekelijks Overzicht
+                </h3>
+                <span className="text-[10px] text-slate-500">Deze week</span>
               </div>
-            </div>
-
-            {/* Recent transactions */}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-blue-400" /> Recente Transacties
-              </h3>
-              {transactions.length === 0 ? (
-                <p className="text-xs text-slate-500 text-center py-4">Nog geen transacties</p>
-              ) : (
-                <div className="space-y-2">
-                  {transactions.slice(0, 10).map(tx => (
-                    <div key={tx.id} className="flex items-center gap-3 p-2.5 bg-slate-800/30 rounded-lg">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${tx.type === 'deposit' ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
-                        {tx.type === 'deposit' ? <ArrowDownLeft className="w-4 h-4 text-green-400" /> : <ArrowUpRight className="w-4 h-4 text-red-400" />}
+              <div className="p-4">
+                <div className="flex items-end justify-between gap-2 h-36">
+                  {weeklyData.map((d, i) => (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                      <div className="w-full flex flex-col items-center gap-0.5" style={{ height: '100px' }}>
+                        <div className="w-full flex flex-col justify-end h-full gap-0.5">
+                          <div className="w-full rounded-t" style={{ height: `${(d.deposits / maxBar) * 80}px`, background: '#f59e0b' }} />
+                          <div className="w-full rounded-b" style={{ height: `${(d.withdrawals / maxBar) * 80}px`, background: '#a855f7' }} />
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs text-white truncate">{tx.message || tx.type}</p>
-                        <p className="text-[10px] text-slate-500">{tx.created_at ? new Date(tx.created_at).toLocaleDateString('nl-NL') : '?'}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className={`text-sm font-medium ${tx.type === 'deposit' ? 'text-green-400' : 'text-red-400'}`}>
-                          {tx.type === 'deposit' ? '+' : '-'}{tx.amount?.toFixed(2)}
-                        </p>
-                        <p className="text-[10px] text-slate-600">{tx.status}</p>
-                      </div>
+                      <span className="text-[10px] text-slate-500">{d.day}</span>
                     </div>
                   ))}
                 </div>
-              )}
+                <div className="flex items-center gap-4 mt-3 pt-3 border-t border-slate-800">
+                  <span className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                    <span className="w-2 h-2 rounded-sm bg-amber-500" /> Stortingen
+                  </span>
+                  <span className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                    <span className="w-2 h-2 rounded-sm bg-purple-500" /> Opnames
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Spark Card */}
+            <div className="rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a1333 0%, #f59e0b20 50%, #ea580c20 100%)' }}>
+              <div className="p-5 border border-amber-500/20 rounded-xl">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-amber-400" />
+                    <span className="text-sm font-semibold text-white">Spark Card</span>
+                  </div>
+                  <span className="text-[10px] text-amber-400/60">SPARK CORE</span>
+                </div>
+                <div className="mb-6">
+                  <p className="text-lg font-mono text-slate-300 tracking-[0.2em]">
+                    4 217 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 0842
+                  </p>
+                </div>
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="text-[10px] text-slate-500 uppercase">Kaarthouder</p>
+                    <p className="text-sm text-white font-medium">{wallet?.name || user?.naam || 'De Willem'}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[10px] text-slate-500 uppercase">Geldig tot</p>
+                    <p className="text-sm text-white font-medium">12/28</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Methods */}
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+              <div className="px-4 py-3 border-b border-slate-800/50">
+                <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                  <Banknote className="w-4 h-4 text-amber-400" /> Betaalmethoden
+                </h3>
+              </div>
+              <div className="p-4 space-y-2">
+                <PaymentMethod label="Spark Card" sub="**** 0842" active icon={CreditCard} />
+                <PaymentMethod label="Bank Overboeking" sub="NL12 ABCD ****" icon={Banknote} />
+                <PaymentMethod label="Tokens" sub={`${(wallet?.spark_tokens || 0).toLocaleString()} beschikbaar`} icon={Coins} />
+                <button className="w-full py-2 text-xs text-slate-500 hover:text-amber-400 transition-colors flex items-center justify-center gap-1">
+                  <Plus className="w-3 h-3" /> Methode Toevoegen
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
+  );
+}
+
+/* === Sub components === */
+
+function StatCard({ label, icon: Icon, value, unit, change, changePositive, sub, color }) {
+  return (
+    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-[10px] text-slate-500 uppercase tracking-wider">{label}</p>
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${color}15` }}>
+          <Icon className="w-4 h-4" style={{ color }} />
+        </div>
+      </div>
+      <div className="flex items-baseline gap-2">
+        <span className="text-2xl font-bold text-white">{value}</span>
+        <span className="text-[10px] text-slate-500">{unit}</span>
+      </div>
+      <div className="flex items-center gap-1.5 mt-1.5">
+        <span className={`text-[10px] font-medium ${changePositive ? 'text-green-400' : 'text-orange-400'}`}>{change}</span>
+      </div>
+      <p className="text-[10px] text-slate-600 mt-1">{sub}</p>
+    </div>
+  );
+}
+
+function MiniAsset({ icon: Icon, label, value, color }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Icon className="w-3.5 h-3.5" style={{ color }} />
+      <div>
+        <p className="text-xs text-white font-medium">{value}</p>
+        <p className="text-[9px] text-slate-500">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+function TransactionRow({ tx }) {
+  const isDeposit = tx.type === 'deposit';
+  const amount = tx.amount || 0;
+
+  return (
+    <div data-testid={`tx-${tx.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800/30 transition-colors">
+      <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${isDeposit ? 'bg-green-500/10' : 'bg-orange-500/10'}`}>
+        {isDeposit
+          ? <ArrowDownLeft className="w-4 h-4 text-green-400" />
+          : <ArrowUpRight className="w-4 h-4 text-orange-400" />
+        }
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm text-white font-medium truncate">{tx.message || tx.type}</p>
+        <p className="text-[10px] text-slate-500">
+          {tx.created_at ? new Date(tx.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '?'}
+          {tx.created_at ? ` - ${new Date(tx.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}` : ''}
+        </p>
+      </div>
+      <div className="text-right flex-shrink-0">
+        <p className={`text-sm font-semibold ${isDeposit ? 'text-green-400' : 'text-orange-400'}`}>
+          {isDeposit ? '+' : '-'}&euro;{amount.toFixed(2)}
+        </p>
+        <p className="text-[10px] text-slate-600">{tx.status || 'completed'}</p>
+      </div>
+    </div>
+  );
+}
+
+function PaymentMethod({ label, sub, active, icon: Icon }) {
+  return (
+    <div className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${active ? 'border-amber-500/30 bg-amber-500/5' : 'border-slate-800 bg-slate-800/20 hover:bg-slate-800/40'}`}>
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${active ? 'bg-amber-500/15' : 'bg-slate-800'}`}>
+        <Icon className={`w-4 h-4 ${active ? 'text-amber-400' : 'text-slate-500'}`} />
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs text-white">{label}</p>
+        <p className="text-[10px] text-slate-500">{sub}</p>
+      </div>
+      {active && <span className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />}
+    </div>
   );
 }
 

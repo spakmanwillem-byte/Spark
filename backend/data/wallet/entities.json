@@ -2,61 +2,48 @@
   "entities": {
     "spark_core": {
       "id": "spark_core",
-      "name": "Spark Core",
+      "name": "Spark AI",
       "type": "system",
-      "icon": "🧠",
-      "description": "Core systeem infrastructuur & ontwikkeling",
+      "description": "Spark Core trading & ontwikkeling. Saldo = Bitvavo wallet.",
       "wallets": {
         "crypto": {
           "provider": "bitvavo",
-          "user_id": "user-001",
+          "balance_eur": 50.80,
           "enabled": true
-        },
-        "fiat": {
-          "balance_eur": 0,
-          "manual": true
         }
       },
-      "purpose": "Infrastructure & Development",
+      "purpose": "Trading & Infrastructure",
       "owner": "system",
-      "color": "blue",
+      "color": "amber",
       "created_at": 1711372800
     },
     "spark_your_life": {
       "id": "spark_your_life",
-      "name": "Spark Your Life",
+      "name": "Spark Zorgboerderij",
       "type": "project",
-      "icon": "✨",
-      "description": "Impact project & community funding",
+      "description": "Impact project & zorgboerderij",
       "wallets": {
-        "donations": {
+        "bank": {
+          "iban": "NL43 INGB 0006 6836 13",
           "balance_eur": 0,
-          "total_received": 0
-        },
-        "fiat": {
-          "balance_eur": 0,
-          "manual": true
+          "provider": "ING"
         }
       },
-      "purpose": "Social Impact & Community",
+      "purpose": "Social Impact & Zorg",
       "owner": "spark_core",
       "color": "purple",
       "created_at": 1711372800
     },
     "roadkill_merch": {
       "id": "roadkill_merch",
-      "name": "Roadkill Merch",
+      "name": "Roadkill Shop",
       "type": "business",
-      "icon": "👕",
-      "description": "Merchandise & product sales",
+      "description": "Merchandise verkoop (caps, hoodies, sets)",
       "wallets": {
-        "revenue": {
+        "bank": {
+          "iban": "NL43 INGB 0006 6836 13",
           "balance_eur": 0,
-          "total_sales": 0
-        },
-        "expenses": {
-          "balance_eur": 0,
-          "total_costs": 0
+          "provider": "ING"
         }
       },
       "purpose": "Revenue Generation",
@@ -66,16 +53,10 @@
     },
     "personal_willem": {
       "id": "personal_willem",
-      "name": "Persoonlijk",
+      "name": "Mijn Prive",
       "type": "personal",
-      "icon": "👤",
-      "description": "Willem's persoonlijke vermogen",
+      "description": "Willem's persoonlijke financien",
       "wallets": {
-        "crypto": {
-          "provider": "manual",
-          "balance_eur": 0,
-          "is_personal": true
-        },
         "fiat": {
           "balance_eur": 0,
           "manual": true

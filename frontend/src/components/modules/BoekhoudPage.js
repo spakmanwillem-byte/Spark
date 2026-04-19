@@ -7,7 +7,7 @@ import {
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-const entityColors = { spark_core: '#f59e0b', spark_your_life: '#3b82f6', roadkill_merch: '#22c55e', personal_willem: '#a855f7' };
+const entityColors = { spark_core: '#f59e0b', spark_your_life: '#a855f7', roadkill_merch: '#22c55e', personal_willem: '#64748b' };
 
 export function BoekhoudPage({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('overzicht');
@@ -178,10 +178,14 @@ export function BoekhoudPage({ onNavigate }) {
                           </div>
                           <div className="flex-1">
                             <h3 className="text-sm font-semibold text-white">{kb.name}</h3>
-                            <p className="text-[10px] text-slate-500">{kb.type} | {kb.tx_count} transacties</p>
+                            <p className="text-[10px] text-slate-500">
+                              {kb.type} | {kb.tx_count} transacties
+                              {kb.bank_info?.iban && <span className="ml-2 text-slate-400">| {kb.bank_info.iban}</span>}
+                              {kb.bank_info?.provider === 'Bitvavo' && <span className="ml-2 text-cyan-400">| Bitvavo</span>}
+                            </p>
                           </div>
                           <div className="text-right">
-                            <p className={`text-lg font-bold ${kb.saldo >= 0 ? 'text-green-400' : 'text-red-400'}`}>{kb.saldo.toFixed(2)}</p>
+                            <p className={`text-lg font-bold ${kb.saldo >= 0 ? 'text-green-400' : 'text-red-400'}`}>&euro;{kb.saldo.toFixed(2)}</p>
                             <p className="text-[10px] text-slate-500">Saldo</p>
                           </div>
                         </div>

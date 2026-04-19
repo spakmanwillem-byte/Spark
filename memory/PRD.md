@@ -20,18 +20,23 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - Groeit mee met trading winst van de monitor bot
 - Alleen hele tokens kopen/verkopen
 
-## Roadkill Shop (NIEUW - 19 april 2026)
+## Roadkill Shop
 - **Merch producten**: Roadkill Cap (€17.50), Roadkill Hoodie (€55), Hoodie+Broek Set (€85)
 - **ROAR Token** als apart product (dynamische prijs)
 - Winkelwagen systeem met bestellen
 - Bestellingen worden automatisch geboekt in kasboek (Roadkill Merch entity)
 - Wallet saldo check bij bestellen
 
+## Kasboeken (4 stuks)
+1. **Spark AI** — Bitvavo wallet (€50.80 startkapitaal)
+2. **Spark Zorgboerderij** — IBAN: NL43 INGB 0006 6836 13
+3. **Roadkill Shop** — IBAN: NL43 INGB 0006 6836 13
+4. **Mijn Prive** — Persoonlijk vermogen
+
 ## Bot Systeem
 - Madelief Stouten: sociaal, reageert op groeten
 - Harry Klokkenmaker: tijdsmelding, reageert op "hoe laat"
 - Mr Smith: security, reageert op bugs/errors
-- Bots reageren automatisch op keyword triggers in community chat
 
 ## Voltooide Pagina's
 
@@ -42,12 +47,12 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Spark Brain, Triggers, Emoties, Verbanden
 
 ### MODULES
-- [x] Trade (BCH candles 15m/1h/4h/1d, countdown, watchlist, monitor, snel handelen)
+- [x] Trade (BCH candles, countdown, watchlist, monitor, snel handelen)
 - [x] Wallet (EUR, ROAR, opnames, transacties, Spark Card)
 - [x] Winkel (Roadkill Merch shop + ROAR Token, winkelwagen, bestelsysteem)
-- [x] Boekhouding (4 kasboeken: Spark Core, Spark Your Life, Roadkill Merch, Persoonlijk)
+- [x] Boekhouding (4 kasboeken met IBAN/Bitvavo info)
 - [x] Achievements, Leaderboard, Persoonskaarten
-- [x] Community (bot chat, keyword triggers, V1 berichten)
+- [x] Community (bot chat, keyword triggers)
 - [x] Integraties
 
 ### BEHEER
@@ -57,7 +62,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [ ] Bitvavo API keys koppelen (echte trades + saldo ophalen)
 - [ ] BTW-rapportage
 - [ ] Instellingen backend
-- [ ] Backtesting module (V1 data beschikbaar)
+- [ ] Backtesting module
 - [ ] Knowledge Quiz
 - [ ] Knowledge kaarten context-antwoorden (Spark-stijl)
 

@@ -128,6 +128,16 @@ async def get_kasboeken():
         etxs = [t for t in data.get("transactions", []) if t.get("entity_id", "spark_core") == eid]
         income = sum(t["amount"] for t in etxs if t["type"] == "income")
         expenses = sum(t["amount"] for t in etxs if t["type"] == "expense")
+        # Wallet/bank info
+        wallets = ent.get("wallets", {})
+        bank_info = None
+        for wkey, wval in wallets.items():
+            if isinstance(wval, dict) and wval.get("iban"):
+                bank_info = {"iban": wval["iban"], "provider": wval.get("provider", "")}
+                break
+            if isinstance(wval, dict) and wval.get("provider") == "bitvavo":
+                bank_info = {"provider": "Bitvavo", "balance": wval.get("balance_eur", 0)}
+                break
         kasboeken.append({
             "id": eid,
             "name": ent.get("name", eid),
@@ -138,5 +148,6 @@ async def get_kasboeken():
             "expenses": round(expenses, 2),
             "saldo": round(income - expenses, 2),
             "tx_count": len(etxs),
+            "bank_info": bank_info,
         })
     return {"kasboeken": kasboeken}

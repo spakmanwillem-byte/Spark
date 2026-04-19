@@ -183,6 +183,11 @@ export function UserProfilePage({ onNavigate }) {
                     <InputField label="Naam" value={extProfile.noodcontact_naam || ''} placeholder="Contact naam" onChange={v => updateField('noodcontact_naam', v)} />
                     <InputField label="Telefoon" value={extProfile.noodcontact_telefoon || ''} placeholder="+31 6 ..." onChange={v => updateField('noodcontact_telefoon', v)} />
                   </div>
+                  <div className="pt-3 border-t border-slate-700">
+                    <p className="text-[10px] text-green-400/60 uppercase tracking-wider mb-2">Bankrekening</p>
+                    <InputField label="IBAN" value={extProfile.iban || ''} placeholder="NL00 BANK 0000 0000 00" onChange={v => updateField('iban', v)} />
+                    <InputField label="Bank" value={extProfile.bank_provider || ''} placeholder="ING, Rabobank, ABN..." onChange={v => updateField('bank_provider', v)} />
+                  </div>
                 </div>
               </div>
 

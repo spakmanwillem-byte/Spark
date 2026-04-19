@@ -210,6 +210,8 @@ class ProfileExtended(BaseModel):
     plaats: Optional[str] = None
     land: Optional[str] = None
     bio: Optional[str] = None
+    iban: Optional[str] = None
+    bank_provider: Optional[str] = None
 
 
 @router.get("/profile/extended/{user_id}")

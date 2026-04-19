@@ -120,12 +120,15 @@ async def get_categories():
 
 
 @router.get("/kasboeken")
-async def get_kasboeken():
+async def get_kasboeken(user_id: str = None):
     entities = load_json(ENTITIES_FILE, default={"entities": {}}).get("entities", {})
     data = load_json(TX_FILE, default={"transactions": []})
     kasboeken = []
     for eid, ent in entities.items():
         etxs = [t for t in data.get("transactions", []) if t.get("entity_id", "spark_core") == eid]
+        # Persoonlijk kasboek: filter op user_id
+        if eid == "personal_willem" and user_id:
+            etxs = [t for t in etxs if t.get("user_id") == user_id]
         income = sum(t["amount"] for t in etxs if t["type"] == "income")
         expenses = sum(t["amount"] for t in etxs if t["type"] == "expense")
         # Wallet/bank info
@@ -138,6 +141,12 @@ async def get_kasboeken():
             if isinstance(wval, dict) and wval.get("provider") == "bitvavo":
                 bank_info = {"provider": "Bitvavo", "balance": wval.get("balance_eur", 0)}
                 break
+        # Persoonlijk kasboek: haal IBAN uit user profiel
+        if eid == "personal_willem" and user_id and not bank_info:
+            profile_file = Path(__file__).parent.parent.parent / "data" / "users" / user_id / "profile.json"
+            profile = load_json(profile_file, default={})
+            if profile.get("iban"):
+                bank_info = {"iban": profile["iban"], "provider": profile.get("bank_provider", "")}
         kasboeken.append({
             "id": eid,
             "name": ent.get("name", eid),

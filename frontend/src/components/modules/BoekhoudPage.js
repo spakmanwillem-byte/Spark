@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { useAuth } from '../../context/AuthContext';
 import {
   BookMarked, Plus, Trash2, ArrowUpRight, ArrowDownLeft,
   Building2, TrendingUp, TrendingDown, Filter, X
@@ -10,6 +11,8 @@ const API = process.env.REACT_APP_BACKEND_URL;
 const entityColors = { spark_core: '#f59e0b', spark_your_life: '#a855f7', roadkill_merch: '#22c55e', personal_willem: '#64748b' };
 
 export function BoekhoudPage({ onNavigate }) {
+  const { user } = useAuth();
+  const userId = user?.id || 'user-001';
   const [activeTab, setActiveTab] = useState('overzicht');
   const [kasboeken, setKasboeken] = useState([]);
   const [summary, setSummary] = useState(null);
@@ -22,7 +25,7 @@ export function BoekhoudPage({ onNavigate }) {
 
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/api/accounting/kasboeken`).then(r => r.json()).catch(() => ({ kasboeken: [] })),
+      fetch(`${API}/api/accounting/kasboeken?user_id=${userId}`).then(r => r.json()).catch(() => ({ kasboeken: [] })),
       fetch(`${API}/api/accounting/summary`).then(r => r.json()).catch(() => ({})),
       fetch(`${API}/api/accounting/transactions`).then(r => r.json()).catch(() => ({ transactions: [] })),
       fetch(`${API}/api/accounting/categories`).then(r => r.json()).catch(() => ({ income: [], expense: [] })),
@@ -33,7 +36,7 @@ export function BoekhoudPage({ onNavigate }) {
       setCategories(c);
       setLoading(false);
     });
-  }, []);
+  }, [userId]);
 
   const addTransaction = async () => {
     if (!newTx.amount || !newTx.description.trim()) return;

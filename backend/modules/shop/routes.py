@@ -1,11 +1,11 @@
 """
-Shop Routes - ROAR Token Winkel
-Token = product. Prijs dynamisch op basis van Bitvavo Spark Core trading pot waarde.
-User koopt tokens met EUR uit wallet. Token = aandeel in Spark Core waarde.
+Shop Routes - Roadkill Winkel + ROAR Token
+Producten: Merch (caps, hoodies) + ROAR tokens (dynamische prijs).
+Winkelwagen + bestellingen. Kasboek koppeling per entity.
 """
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 import uuid
@@ -17,6 +17,8 @@ ROAR_FILE = DATA_DIR / "roar" / "roar_balances.json"
 WALLET_FILE = DATA_DIR / "wallet" / "wallets.json"
 FINANCIAL_FILE = DATA_DIR / "financial" / "transactions.json"
 POTJES_FILE = DATA_DIR / "financial" / "user_potjes.json"
+PRODUCTS_FILE = DATA_DIR / "shop" / "products.json"
+ACCOUNTING_FILE = DATA_DIR / "accounting" / "transactions.json"
 
 TOTAL_SUPPLY = 1_000_000
 BASE_PRICE = 5.08  # Vaste prijs voor eerste 10 tokens
@@ -282,3 +284,160 @@ async def get_potjes(user_id: str):
     data = load_json(POTJES_FILE, default={"users": {}})
     user_data = data.get("users", {}).get(user_id, {})
     return {"success": True, "user_id": user_id, "potjes": user_data}
+
+
+
+# ============================================================
+# PRODUCTEN CATALOG
+# ============================================================
+
+@router.get("/products")
+async def get_products():
+    """Alle winkel producten ophalen"""
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    products = data.get("products", [])
+    # ROAR token prijs dynamisch updaten
+    price = get_dynamic_price()
+    for p in products:
+        if p.get("dynamic_price"):
+            p["price"] = price
+    return {"success": True, "products": products}
+
+
+@router.get("/products/{product_id}")
+async def get_product(product_id: str):
+    """Enkel product ophalen"""
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    for p in data.get("products", []):
+        if p["id"] == product_id:
+            if p.get("dynamic_price"):
+                p["price"] = get_dynamic_price()
+            return {"success": True, "product": p}
+    return {"success": False, "error": "Product niet gevonden"}
+
+
+# ============================================================
+# BESTELLINGEN (Merch)
+# ============================================================
+
+class OrderItem(BaseModel):
+    product_id: str
+    quantity: int = 1
+
+
+class CreateOrderRequest(BaseModel):
+    items: List[OrderItem]
+    shipping_name: Optional[str] = None
+    shipping_address: Optional[str] = None
+    notes: Optional[str] = None
+
+
+@router.post("/orders/{user_id}")
+async def create_order(user_id: str, req: CreateOrderRequest):
+    """Bestelling plaatsen - trekt af van wallet, boekt in kasboek"""
+    data = load_json(PRODUCTS_FILE, default={"products": [], "orders": []})
+    products = {p["id"]: p for p in data.get("products", [])}
+
+    # Bouw order items
+    order_items = []
+    total = 0.0
+    for item in req.items:
+        prod = products.get(item.product_id)
+        if not prod:
+            return {"success": False, "error": f"Product {item.product_id} niet gevonden"}
+        if not prod.get("in_stock", True):
+            return {"success": False, "error": f"{prod['name']} is niet op voorraad"}
+        if prod.get("category") == "token":
+            return {"success": False, "error": "ROAR tokens koop je via de Token sectie"}
+
+        price = prod["price"]
+        line_total = round(price * item.quantity, 2)
+        total += line_total
+        order_items.append({
+            "product_id": item.product_id,
+            "name": prod["name"],
+            "price": price,
+            "quantity": item.quantity,
+            "line_total": line_total,
+            "entity_id": prod.get("entity_id", "roadkill_merch"),
+        })
+
+    total = round(total, 2)
+
+    # Check wallet saldo
+    wallets = load_json(WALLET_FILE, default={"wallets": {}, "transactions": []})
+    user_wallet = wallets.get("wallets", {}).get(user_id, {"balance": 0})
+    if user_wallet.get("balance", 0) < total:
+        return {
+            "success": False,
+            "error": f"Onvoldoende saldo. Heb {user_wallet.get('balance', 0):.2f}, nodig {total:.2f}",
+        }
+
+    # Maak order aan
+    order_id = str(uuid.uuid4())[:8]
+    now = datetime.now(timezone.utc).isoformat()
+    order = {
+        "id": order_id,
+        "user_id": user_id,
+        "items": order_items,
+        "total": total,
+        "status": "besteld",
+        "shipping_name": req.shipping_name,
+        "shipping_address": req.shipping_address,
+        "notes": req.notes,
+        "created_at": now,
+    }
+
+    # Trek af van wallet
+    wallets["wallets"][user_id]["balance"] = round(user_wallet["balance"] - total, 2)
+    wallet_tx = {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "type": "purchase",
+        "amount": total,
+        "message": f"Bestelling #{order_id}: {', '.join(i['name'] for i in order_items)}",
+        "created_at": now,
+        "status": "completed",
+    }
+    wallets["transactions"].append(wallet_tx)
+    save_json(WALLET_FILE, wallets)
+
+    # Boek in kasboek per entity
+    accounting = load_json(ACCOUNTING_FILE, default={"transactions": []})
+    for item in order_items:
+        acc_tx = {
+            "id": str(uuid.uuid4()),
+            "type": "income",
+            "category": "Sales",
+            "amount": item["line_total"],
+            "description": f"Verkoop: {item['quantity']}x {item['name']} (order #{order_id})",
+            "entity_id": item["entity_id"],
+            "date": now,
+            "btw_percentage": 21,
+            "btw_amount": round(item["line_total"] * 0.21, 2),
+            "created_at": now,
+        }
+        accounting["transactions"].append(acc_tx)
+    save_json(ACCOUNTING_FILE, accounting)
+
+    # Sla order op
+    if "orders" not in data:
+        data["orders"] = []
+    data["orders"].append(order)
+    save_json(PRODUCTS_FILE, data)
+
+    return {
+        "success": True,
+        "message": f"Bestelling #{order_id} geplaatst!",
+        "order": order,
+        "new_balance": wallets["wallets"][user_id]["balance"],
+    }
+
+
+@router.get("/orders/{user_id}")
+async def get_orders(user_id: str):
+    """Bestellingen van gebruiker ophalen"""
+    data = load_json(PRODUCTS_FILE, default={"orders": []})
+    orders = [o for o in data.get("orders", []) if o.get("user_id") == user_id]
+    orders.sort(key=lambda o: o.get("created_at", ""), reverse=True)
+    return {"success": True, "orders": orders}

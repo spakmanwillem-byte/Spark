@@ -1,0 +1,55 @@
+{
+  "products": [
+    {
+      "id": "roadkill-cap",
+      "name": "Roadkill Cap",
+      "description": "Zwarte cap met geborduurd Roadkill logo. One size fits all.",
+      "price": 17.50,
+      "category": "merch",
+      "image_icon": "hat",
+      "in_stock": true,
+      "cost_breakdown": {
+        "cap": 7.50,
+        "logo": 3.00,
+        "margin": 7.00
+      },
+      "tags": ["kleding", "accessoire"],
+      "entity_id": "roadkill_merch"
+    },
+    {
+      "id": "roadkill-hoodie",
+      "name": "Roadkill Hoodie",
+      "description": "Premium hoodie met groot Roadkill print op de rug. Zwart, unisex.",
+      "price": 55.00,
+      "category": "merch",
+      "image_icon": "shirt",
+      "in_stock": true,
+      "tags": ["kleding"],
+      "entity_id": "roadkill_merch"
+    },
+    {
+      "id": "roadkill-hoodie-broek-set",
+      "name": "Hoodie + Broek Set",
+      "description": "Complete Roadkill outfit. Hoodie en joggingbroek met subtiel logo.",
+      "price": 85.00,
+      "category": "merch",
+      "image_icon": "package",
+      "in_stock": true,
+      "tags": ["kleding", "set"],
+      "entity_id": "roadkill_merch"
+    },
+    {
+      "id": "roar-token",
+      "name": "ROAR Token",
+      "description": "Aandeel in Spark Core. Prijs beweegt mee met trading resultaten.",
+      "price": 5.08,
+      "category": "token",
+      "image_icon": "coin",
+      "in_stock": true,
+      "dynamic_price": true,
+      "tags": ["investering", "token"],
+      "entity_id": "spark_core"
+    }
+  ],
+  "orders": []
+}

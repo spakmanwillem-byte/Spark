@@ -40,18 +40,18 @@ export function WinkelPage({ onNavigate }) {
 
   useEffect(() => { loadData(); }, [loadData]);
 
-  // Auto-calculate
+  // Auto-calculate - alleen hele tokens
   const price = tokenInfo?.price_eur || 5.08;
-  const eurVal = inputMode === 'eur' ? parseFloat(inputEur) || 0 : (parseFloat(inputTokens) || 0) * price;
-  const tokenVal = inputMode === 'tokens' ? parseFloat(inputTokens) || 0 : (parseFloat(inputEur) || 0) / price;
+  const isFixed = tokenInfo?.price_model === 'fixed';
+  const tokensUntilDynamic = tokenInfo?.tokens_until_dynamic || 0;
+  const eurVal = inputMode === 'eur' ? parseFloat(inputEur) || 0 : (parseInt(inputTokens) || 0) * price;
+  const tokenVal = inputMode === 'tokens' ? parseInt(inputTokens) || 0 : Math.floor((parseFloat(inputEur) || 0) / price);
 
   const executeTrade = async () => {
-    if (eurVal <= 0 && tokenVal <= 0) return;
+    if (tokenVal <= 0) return;
     setExecuting(true); setResult(null);
     const endpoint = mode === 'buy' ? 'buy' : 'sell';
-    const body = mode === 'buy'
-      ? (inputMode === 'eur' ? { amount_eur: eurVal } : { amount_tokens: tokenVal })
-      : { amount_tokens: tokenVal };
+    const body = { amount_tokens: tokenVal };
 
     const res = await fetch(`${API}/api/shop/token/${endpoint}/${userId}`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -117,7 +117,12 @@ export function WinkelPage({ onNavigate }) {
                   <h2 className="text-lg font-bold text-white">ROAR</h2>
                   <p className="text-xs text-slate-400">Spark Core Aandeel Token</p>
                   <p className="text-3xl font-bold text-amber-400 mt-2">&euro;{price.toFixed(2)}</p>
-                  <p className="text-[10px] text-slate-500 mt-1">Prijs = Spark Core waarde / circulerende tokens</p>
+                  <p className="text-[10px] text-slate-500 mt-1">
+                    {isFixed ? `Vaste prijs (nog ${tokensUntilDynamic} tokens)` : 'Dynamische prijs = Spark Core / tokens'}
+                  </p>
+                  {tokenInfo?.bitvavo_balance > 0 && (
+                    <p className="text-[10px] text-cyan-400 mt-1">Bitvavo: &euro;{tokenInfo.bitvavo_balance.toFixed(2)}</p>
+                  )}
                 </div>
                 <div className="flex items-center justify-between text-[10px] text-slate-400 pt-3 border-t border-slate-800">
                   <span>Jouw bezit: <b className="text-white">{roarBal} ROAR</b></span>
@@ -154,13 +159,13 @@ export function WinkelPage({ onNavigate }) {
                     <input data-testid="input-eur" type="number" value={inputEur} onChange={e => setInputEur(e.target.value)}
                       placeholder={price.toFixed(2)} step="0.01" min="0"
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500" />
-                    <p className="text-[10px] text-slate-500 mt-1">= {tokenVal.toFixed(4)} ROAR tokens</p>
+                    <p className="text-[10px] text-slate-500 mt-1">= {tokenVal} ROAR tokens (hele tokens)</p>
                   </div>
                 ) : (
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">Aantal Tokens</label>
+                    <label className="block text-xs text-slate-400 mb-1">Aantal Tokens (heel)</label>
                     <input data-testid="input-tokens" type="number" value={inputTokens} onChange={e => setInputTokens(e.target.value)}
-                      placeholder="1" step="0.01" min="0"
+                      placeholder="1" step="1" min="1"
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500" />
                     <p className="text-[10px] text-slate-500 mt-1">= &euro;{eurVal.toFixed(2)}</p>
                   </div>
@@ -170,23 +175,29 @@ export function WinkelPage({ onNavigate }) {
                 <div className="p-3 bg-slate-800/50 rounded-lg space-y-1">
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-400">Prijs per token</span>
-                    <span className="text-white">&euro;{price.toFixed(2)}</span>
+                    <span className="text-white">&euro;{price.toFixed(2)} {isFixed ? '(vast)' : '(dynamisch)'}</span>
                   </div>
+                  {isFixed && tokensUntilDynamic > 0 && (
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-400">Nog vast</span>
+                      <span className="text-amber-400">{tokensUntilDynamic} tokens tot dynamisch</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-400">{mode === 'buy' ? 'Je betaalt' : 'Je ontvangt'}</span>
                     <span className="text-white">&euro;{eurVal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-400">{mode === 'buy' ? 'Je ontvangt' : 'Je verkoopt'}</span>
-                    <span className="text-amber-400">{tokenVal.toFixed(4)} ROAR</span>
+                    <span className="text-amber-400">{tokenVal} ROAR</span>
                   </div>
                 </div>
 
-                <button data-testid="execute-trade" onClick={executeTrade} disabled={executing || (eurVal <= 0 && tokenVal <= 0)}
+                <button data-testid="execute-trade" onClick={executeTrade} disabled={executing || tokenVal <= 0}
                   className={`w-full py-3 rounded-xl text-sm font-semibold text-white transition-all disabled:opacity-50 ${
                     mode === 'buy' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'
                   }`}>
-                  {executing ? 'Bezig...' : mode === 'buy' ? `${tokenVal.toFixed(2)} ROAR Kopen` : `${tokenVal.toFixed(2)} ROAR Verkopen`}
+                  {executing ? 'Bezig...' : mode === 'buy' ? `${tokenVal} ROAR Kopen` : `${tokenVal} ROAR Verkopen`}
                 </button>
 
                 {result && (
@@ -269,7 +280,8 @@ export function WinkelPage({ onNavigate }) {
               <h3 className="text-sm font-semibold text-white mb-2">Hoe werkt het?</h3>
               <div className="space-y-2 text-[11px] text-slate-400">
                 <p><b className="text-amber-400">ROAR Token</b> = aandeel in Spark Core. Elke token vertegenwoordigt een deel van de totale waarde.</p>
-                <p><b className="text-white">Dynamische prijs</b> = Totale Spark Core waarde / circulerende tokens. Stijgt als Spark meer waard wordt door trading.</p>
+                <p><b className="text-white">Prijsmodel</b> = Eerste 10 tokens: vaste prijs van &euro;5,08. Daarna dynamisch (Spark Core waarde / circulerende tokens).</p>
+                <p><b className="text-cyan-400">Alleen hele tokens</b> = Je koopt/verkoopt altijd hele ROAR tokens. Wisselgeld gaat naar Spark Core kapitaal.</p>
                 <p><b className="text-green-400">Kopen</b> = EUR uit je wallet wordt omgezet naar ROAR tokens. <b className="text-red-400">Verkopen</b> = ROAR terug naar EUR.</p>
               </div>
             </div>

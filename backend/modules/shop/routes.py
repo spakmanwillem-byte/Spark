@@ -19,7 +19,8 @@ FINANCIAL_FILE = DATA_DIR / "financial" / "transactions.json"
 POTJES_FILE = DATA_DIR / "financial" / "user_potjes.json"
 
 TOTAL_SUPPLY = 1_000_000
-BASE_PRICE = 5.08  # Fallback prijs
+BASE_PRICE = 5.08  # Vaste prijs voor eerste 10 tokens
+FIXED_PRICE_LIMIT = 10  # Na 10 tokens: dynamische prijs
 
 
 def get_roar_data():
@@ -30,30 +31,47 @@ def save_roar_data(data):
     save_json(ROAR_FILE, data)
 
 
+def get_circulating():
+    """Bereken circulerende tokens (alles behalve user-000/spark treasury)"""
+    roar = get_roar_data()
+    return sum(
+        bal for uid, bal in roar.get("balances", {}).items()
+        if uid != "user-000"
+    )
+
+
+def get_spark_core_value():
+    """
+    Spark Core totale waarde = alle deposits + trading profits - withdrawals.
+    Dit is het bedrag op Bitvavo.
+    """
+    fin = load_json(FINANCIAL_FILE, default={"transactions": []})
+    total_value = 0.0
+    for tx in fin.get("transactions", []):
+        if tx["type"] == "deposit":
+            total_value += tx.get("amount_eur", 0)
+        elif tx["type"] == "profit":
+            total_value += tx.get("amount_eur", 0)
+        elif tx["type"] == "withdrawal":
+            total_value -= tx.get("amount_eur", 0)
+    return total_value
+
+
 def get_dynamic_price():
     """
-    Dynamische ROAR prijs gebaseerd op Spark Core totale waarde / circulerende tokens.
-    Fallback: €5.08. Stijgt naarmate Spark Core meer waard wordt door trading.
+    ROAR prijs model:
+    - Eerste 10 tokens: vaste prijs van €5.08
+    - Na 10 tokens: dynamisch = Spark Core waarde / circulerende tokens
     """
+    circulating = get_circulating()
+
+    # Zolang er minder dan 10 tokens in omloop zijn: vaste prijs
+    if circulating < FIXED_PRICE_LIMIT:
+        return BASE_PRICE
+
+    # Dynamische prijs na 10 tokens
     try:
-        # Spark Core totale waarde = alle deposits + trading profits
-        fin = load_json(FINANCIAL_FILE, default={"transactions": []})
-        total_value = 0.0
-        for tx in fin.get("transactions", []):
-            if tx["type"] == "deposit":
-                total_value += tx.get("amount_eur", 0)
-            elif tx["type"] == "profit":
-                total_value += tx.get("amount_eur", 0)
-            elif tx["type"] == "withdrawal":
-                total_value -= tx.get("amount_eur", 0)
-
-        # Circulerende tokens (alles behalve user-000/spark)
-        roar = get_roar_data()
-        circulating = sum(
-            bal for uid, bal in roar.get("balances", {}).items()
-            if uid != "user-000"
-        )
-
+        total_value = get_spark_core_value()
         if circulating > 0 and total_value > 0:
             return round(total_value / circulating, 2)
     except Exception:
@@ -63,11 +81,11 @@ def get_dynamic_price():
 
 class BuyTokenRequest(BaseModel):
     amount_eur: Optional[float] = None
-    amount_tokens: Optional[float] = None
+    amount_tokens: Optional[int] = None  # Alleen hele tokens
 
 
 class SellTokenRequest(BaseModel):
-    amount_tokens: float
+    amount_tokens: int  # Alleen hele tokens
 
 
 # ============================================================
@@ -78,9 +96,11 @@ class SellTokenRequest(BaseModel):
 async def get_token_price():
     """Huidige ROAR token prijs"""
     price = get_dynamic_price()
+    circulating = get_circulating()
     roar = get_roar_data()
-    circulating = sum(bal for uid, bal in roar.get("balances", {}).items() if uid != "user-000")
     spark_balance = roar.get("balances", {}).get("user-000", 0)
+    spark_core_value = get_spark_core_value()
+    is_fixed = circulating < FIXED_PRICE_LIMIT
 
     return {
         "success": True,
@@ -89,7 +109,12 @@ async def get_token_price():
         "total_supply": TOTAL_SUPPLY,
         "circulating": circulating,
         "spark_treasury": spark_balance,
+        "spark_core_value": round(spark_core_value, 2),
         "market_cap": round(circulating * price, 2),
+        "price_model": "fixed" if is_fixed else "dynamic",
+        "fixed_price_limit": FIXED_PRICE_LIMIT,
+        "tokens_until_dynamic": max(0, FIXED_PRICE_LIMIT - circulating),
+        "bitvavo_balance": round(spark_core_value, 2),
     }
 
 
@@ -125,15 +150,17 @@ async def get_token_history(user_id: str):
 
 @router.post("/token/buy/{user_id}")
 async def buy_tokens(user_id: str, req: BuyTokenRequest):
-    """Koop ROAR tokens met EUR uit wallet"""
+    """Koop ROAR tokens met EUR uit wallet - alleen hele tokens"""
     price = get_dynamic_price()
 
-    # Bereken amounts
-    if req.amount_eur and req.amount_eur > 0:
-        amount_eur = round(req.amount_eur, 2)
-        amount_tokens = round(amount_eur / price, 6)
-    elif req.amount_tokens and req.amount_tokens > 0:
-        amount_tokens = round(req.amount_tokens, 6)
+    # Bereken amounts - alleen hele tokens
+    if req.amount_tokens and req.amount_tokens > 0:
+        amount_tokens = int(req.amount_tokens)
+        amount_eur = round(amount_tokens * price, 2)
+    elif req.amount_eur and req.amount_eur > 0:
+        amount_tokens = int(req.amount_eur / price)  # Afronden naar beneden
+        if amount_tokens < 1:
+            return {"success": False, "error": f"Minimaal 1 token nodig. Prijs: {price}"}
         amount_eur = round(amount_tokens * price, 2)
     else:
         return {"success": False, "error": "Geef amount_eur of amount_tokens op"}
@@ -144,7 +171,7 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     if user_wallet.get("balance", 0) < amount_eur:
         return {
             "success": False,
-            "error": f"Onvoldoende EUR saldo. Heb €{user_wallet.get('balance', 0):.2f}, nodig €{amount_eur:.2f}",
+            "error": f"Onvoldoende EUR saldo. Heb {user_wallet.get('balance', 0):.2f}, nodig {amount_eur:.2f}",
         }
 
     # Check Spark ROAR supply
@@ -157,9 +184,9 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     # 1. Deduct EUR
     wallets["wallets"][user_id]["balance"] = round(user_wallet["balance"] - amount_eur, 2)
 
-    # 2. Transfer ROAR
-    roar["balances"]["user-000"] = round(spark_bal - amount_tokens, 6)
-    roar["balances"][user_id] = round(roar.get("balances", {}).get(user_id, 0) + amount_tokens, 6)
+    # 2. Transfer ROAR (hele tokens)
+    roar["balances"]["user-000"] = spark_bal - amount_tokens
+    roar["balances"][user_id] = roar.get("balances", {}).get(user_id, 0) + amount_tokens
 
     # 3. Log transaction
     tx = {
@@ -169,7 +196,7 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
         "amount_eur": amount_eur,
         "token_amount": amount_tokens,
         "price_per_token": price,
-        "description": f"{amount_tokens} ROAR gekocht @ €{price}",
+        "description": f"{amount_tokens} ROAR gekocht @ {price}",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "completed",
     }
@@ -184,7 +211,7 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
 
     return {
         "success": True,
-        "message": f"{amount_tokens} ROAR gekocht voor €{amount_eur}",
+        "message": f"{amount_tokens} ROAR gekocht voor {amount_eur}",
         "transaction": tx,
         "new_roar_balance": roar["balances"][user_id],
         "new_eur_balance": wallets["wallets"][user_id]["balance"],
@@ -194,9 +221,11 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
 
 @router.post("/token/sell/{user_id}")
 async def sell_tokens(user_id: str, req: SellTokenRequest):
-    """Verkoop ROAR tokens terug naar Spark voor EUR"""
+    """Verkoop ROAR tokens terug naar Spark voor EUR - alleen hele tokens"""
     price = get_dynamic_price()
-    amount_tokens = round(req.amount_tokens, 6)
+    amount_tokens = int(req.amount_tokens)
+    if amount_tokens < 1:
+        return {"success": False, "error": "Minimaal 1 token verkopen"}
     amount_eur = round(amount_tokens * price, 2)
 
     # Check ROAR saldo
@@ -206,8 +235,8 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
         return {"success": False, "error": f"Onvoldoende ROAR. Heb {user_roar}, wil {amount_tokens} verkopen"}
 
     # Execute
-    roar["balances"][user_id] = round(user_roar - amount_tokens, 6)
-    roar["balances"]["user-000"] = round(roar.get("balances", {}).get("user-000", 0) + amount_tokens, 6)
+    roar["balances"][user_id] = user_roar - amount_tokens
+    roar["balances"]["user-000"] = roar.get("balances", {}).get("user-000", 0) + amount_tokens
 
     wallets = load_json(WALLET_FILE, default={"wallets": {}, "transactions": []})
     if user_id not in wallets.get("wallets", {}):
@@ -221,7 +250,7 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
         "amount_eur": amount_eur,
         "token_amount": amount_tokens,
         "price_per_token": price,
-        "description": f"{amount_tokens} ROAR verkocht @ €{price}",
+        "description": f"{amount_tokens} ROAR verkocht @ {price}",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "completed",
     }
@@ -235,7 +264,7 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
 
     return {
         "success": True,
-        "message": f"{amount_tokens} ROAR verkocht voor €{amount_eur}",
+        "message": f"{amount_tokens} ROAR verkocht voor {amount_eur}",
         "transaction": tx,
         "new_roar_balance": roar["balances"].get(user_id, 0),
         "new_eur_balance": wallets["wallets"][user_id]["balance"],

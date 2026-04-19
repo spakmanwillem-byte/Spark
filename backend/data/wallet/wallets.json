@@ -2,202 +2,34 @@
   "wallets": {
     "user-001": {
       "balance": 0,
-      "created_at": "2026-03-18T08:33:50.675148",
-      "total_deposited": 20.32,
-      "total_withdrawn": 20.32,
-      "total_donated": 0.0
-    },
-    "TEST_user_1c15662c": {
-      "balance": 0,
-      "created_at": "2026-03-18T08:34:44.393185",
-      "total_deposited": 0.0,
-      "total_withdrawn": 0.0,
-      "total_donated": 0.0
-    },
-    "TEST_user_ef3c55a6": {
-      "balance": 0,
-      "created_at": "2026-03-18T08:34:44.662443",
-      "total_deposited": 0.0,
-      "total_withdrawn": 0.0,
-      "total_donated": 0.0
-    },
-    "TEST_user_21f0c2ab": {
-      "balance": 0,
-      "created_at": "2026-03-18T08:35:10.830913",
-      "total_deposited": 0.0,
-      "total_withdrawn": 0.0,
-      "total_donated": 0.0
-    },
-    "TEST_user_466909ec": {
-      "balance": 0,
-      "created_at": "2026-03-18T08:38:07.876908",
-      "total_deposited": 0.0,
-      "total_withdrawn": 0.0,
-      "total_donated": 0.0
-    },
-    "TEST_user_2a70d14d": {
-      "balance": 0,
-      "created_at": "2026-03-18T08:38:08.141027",
-      "total_deposited": 0.0,
-      "total_withdrawn": 0.0,
-      "total_donated": 0.0
+      "created_at": "2026-03-29T20:00:00+00:00",
+      "total_deposited": 30.00,
+      "total_withdrawn": 0,
+      "total_donated": 0
     }
   },
   "transactions": [
     {
-      "id": "b8916cb3-ef2a-4008-ac84-9bfc20b13577",
+      "id": "genesis-deposit-001",
       "user_id": "user-001",
       "type": "deposit",
-      "amount": 100.0,
-      "status": "pending",
-      "message": "Test deposit",
-      "created_at": "2026-03-18T08:34:05.226985",
-      "payment_info": {
-        "method": "bank_transfer",
-        "iban": "NL12 ABCD 1234 5678 90",
-        "reference": "SPARK-USER-001-20260318"
-      }
-    },
-    {
-      "id": "91e69830-f062-4406-b821-791c4d579b6b",
-      "user_id": "user-001",
-      "type": "deposit",
-      "amount": 50.0,
-      "status": "pending",
-      "message": "TEST_deposit_request",
-      "created_at": "2026-03-18T08:34:44.527273",
-      "payment_info": {
-        "method": "bank_transfer",
-        "iban": "NL12 ABCD 1234 5678 90",
-        "reference": "SPARK-USER-001-20260318"
-      }
-    },
-    {
-      "id": "b88b2481-e582-4dfe-ae7c-fe47edd358c0",
-      "user_id": "user-001",
-      "type": "deposit",
-      "amount": 50.0,
-      "status": "pending",
-      "message": "TEST_deposit_request",
-      "created_at": "2026-03-18T08:38:08.011384",
-      "payment_info": {
-        "method": "bank_transfer",
-        "iban": "NL12 ABCD 1234 5678 90",
-        "reference": "SPARK-USER-001-20260318"
-      }
-    },
-    {
-      "id": "b2a4572f-2e12-4110-876b-7e2e6392d9e7",
-      "user_id": "user-001",
-      "type": "deposit",
-      "amount": 10.0,
-      "status": "pending",
-      "message": null,
-      "created_at": "2026-03-29T20:02:49.185127",
-      "payment_info": {
-        "method": "bank_transfer",
-        "iban": "NL12 ABCD 1234 5678 90",
-        "reference": "SPARK-USER-001-20260329"
-      }
-    },
-    {
-      "id": "5d067da2-4069-4896-ad57-92f823bb3f48",
-      "user_id": "user-001",
-      "type": "withdrawal",
-      "amount": 1.5,
+      "amount": 30.00,
       "status": "completed",
-      "message": "Test opname",
-      "created_at": "2026-04-01T09:23:13.662595+00:00"
+      "message": "Storting op Bitvavo - startkapitaal",
+      "created_at": "2026-03-29T20:00:00+00:00"
     },
     {
-      "id": "92349673-ab66-43af-9669-cf63cf3c6bc8",
-      "user_id": "user-001",
-      "type": "withdrawal",
-      "amount": 0.5,
-      "status": "completed",
-      "message": "Test withdrawal",
-      "created_at": "2026-04-01T09:26:31.483837+00:00"
-    },
-    {
-      "id": "57c49ab3-3a23-4486-aae5-bc77d0042402",
-      "user_id": "user-001",
-      "type": "withdrawal",
-      "amount": 0.25,
-      "status": "completed",
-      "message": "Opname via wallet",
-      "created_at": "2026-04-01T09:30:36.891880+00:00"
-    },
-    {
-      "id": "97a8a89e-3b56-4305-a858-58a959136228",
-      "user_id": "user-001",
-      "type": "withdrawal",
-      "amount": 0.1,
-      "status": "completed",
-      "message": "TEST_withdrawal",
-      "created_at": "2026-04-01T09:31:19.307796+00:00"
-    },
-    {
-      "id": "7ff83dda-56fd-4a02-9aca-d3e6ba4c0431",
-      "user_id": "user-001",
-      "type": "withdrawal",
-      "amount": 0.1,
-      "status": "completed",
-      "message": "TEST_withdrawal",
-      "created_at": "2026-04-01T09:31:33.439318+00:00"
-    },
-    {
-      "id": "6498d212-cbea-4339-b36b-05a25772046a",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 3.01,
-      "token_amount": 0.5,
-      "price_per_token": 6.02,
-      "description": "0.5 ROAR verkocht @ \u20ac6.02",
-      "timestamp": "2026-04-01T10:07:04.632959+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "ef752eec-044b-45d0-9ede-c33e132b1ae0",
+      "id": "genesis-buy-001",
       "user_id": "user-001",
       "type": "buy_roar",
-      "amount_eur": 6.31,
-      "token_amount": 1.0,
-      "price_per_token": 6.31,
-      "description": "1.0 ROAR gekocht @ \u20ac6.31",
-      "timestamp": "2026-04-01T10:07:08.922979+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "98b32e1b-6ad5-43cc-bd1b-bdc067070914",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 0.0,
-      "token_amount": 0.0,
-      "price_per_token": 5.76,
-      "description": "0.0 ROAR verkocht @ \u20ac5.76",
-      "timestamp": "2026-04-01T10:07:50.535145+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "4db21abf-b458-46d7-bf33-ca2f183ea4f4",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 0.58,
-      "token_amount": 0.1,
-      "price_per_token": 5.76,
-      "description": "0.1 ROAR verkocht @ \u20ac5.76",
-      "timestamp": "2026-04-01T10:07:50.730533+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "8a13df16-af59-4d77-aa06-899eab34d57a",
-      "user_id": "user-001",
-      "type": "buy_roar",
-      "amount_eur": 0.58,
-      "token_amount": 0.1,
-      "price_per_token": 5.81,
-      "description": "0.1 ROAR gekocht @ \u20ac5.81",
-      "timestamp": "2026-04-01T10:07:50.920990+00:00",
+      "amount": 25.40,
+      "amount_eur": 25.40,
+      "token_amount": 5,
+      "price_per_token": 5.08,
+      "message": "5 ROAR tokens gekocht @ 5.08",
+      "description": "5 ROAR tokens gekocht @ vaste prijs 5.08",
+      "timestamp": "2026-03-29T20:01:00+00:00",
+      "created_at": "2026-03-29T20:01:00+00:00",
       "status": "completed"
     }
   ]

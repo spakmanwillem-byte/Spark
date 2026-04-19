@@ -355,8 +355,9 @@ function MiniAsset({ icon: Icon, label, value, color }) {
 }
 
 function TransactionRow({ tx }) {
-  const isDeposit = tx.type === 'deposit';
-  const amount = tx.amount || 0;
+  const isDeposit = tx.type === 'deposit' || tx.type === 'buy_roar';
+  const amount = tx.amount || tx.amount_eur || 0;
+  const label = tx.message || tx.description || tx.type;
 
   return (
     <div data-testid={`tx-${tx.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800/30 transition-colors">
@@ -367,10 +368,10 @@ function TransactionRow({ tx }) {
         }
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-white font-medium truncate">{tx.message || tx.type}</p>
+        <p className="text-sm text-white font-medium truncate">{label}</p>
         <p className="text-[10px] text-slate-500">
-          {tx.created_at ? new Date(tx.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '?'}
-          {tx.created_at ? ` - ${new Date(tx.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}` : ''}
+          {(tx.created_at || tx.timestamp) ? new Date(tx.created_at || tx.timestamp).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '?'}
+          {(tx.created_at || tx.timestamp) ? ` - ${new Date(tx.created_at || tx.timestamp).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}` : ''}
         </p>
       </div>
       <div className="text-right flex-shrink-0">

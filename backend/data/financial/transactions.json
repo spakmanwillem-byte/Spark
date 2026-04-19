@@ -1,153 +1,33 @@
 {
   "transactions": [
     {
-      "id": "bbe73d73-81e5-4512-a13d-634cfd8e8cc6",
+      "id": "genesis-deposit-001",
       "user_id": "user-001",
       "type": "deposit",
-      "amount_eur": 10.16,
+      "amount_eur": 30.00,
       "token_amount": 0,
       "price_per_token": 0,
-      "description": "Initial deposit - clean start",
-      "timestamp": "2026-03-29T21:33:42.237335+00:00",
+      "description": "Storting op Bitvavo - startkapitaal",
+      "timestamp": "2026-03-29T20:00:00+00:00",
       "status": "completed"
     },
     {
-      "id": "5237ba3c-cca8-4b1e-b6c7-12fdc18e2ea3",
+      "id": "genesis-buy-001",
       "user_id": "user-001",
       "type": "buy_roar",
-      "amount_eur": 10.16,
-      "token_amount": 2.0,
+      "amount_eur": 25.40,
+      "token_amount": 5,
       "price_per_token": 5.08,
-      "description": "Bought 2 ROAR tokens",
-      "timestamp": "2026-03-29T21:33:42.237335+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "610aecd9-0267-439b-bc56-dd5e9519a041",
-      "user_id": "user-001",
-      "type": "deposit",
-      "amount_eur": 47.27,
-      "token_amount": 0,
-      "price_per_token": 0,
-      "description": "Bijstorting - voor 8 potjes + extra token (\u20ac47.27 in wallet, \u20ac3.53 direct naar Core)",
-      "timestamp": "2026-03-30T20:32:44.285819+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "79dc671c-3c67-4d05-856b-69ad7a17c2ef",
-      "user_id": "user-001",
-      "type": "buy_roar",
-      "amount_eur": 40.64,
-      "token_amount": 8.0,
-      "price_per_token": 5.08,
-      "description": "8 potjes gekocht - vaste prijs \u20ac5,08",
-      "timestamp": "2026-03-30T20:32:44.447757+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "1b031da4-df47-441a-be93-8a88bc327bb6",
-      "user_id": "user-001",
-      "type": "buy_roar",
-      "amount_eur": 6.63,
-      "token_amount": 1.0,
-      "price_per_token": 6.63,
-      "description": "Token #11 - dynamische prijs (heel token)",
-      "timestamp": "2026-03-30T20:36:06.625514+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "ff9babed-60b2-4ca9-b199-1e2dbcc1f529",
-      "user_id": "user-000",
-      "type": "profit",
-      "amount_eur": 3.53,
-      "token_amount": 0,
-      "price_per_token": 0,
-      "description": "Restbedrag naar Core - geen extra tokens",
-      "timestamp": "2026-03-30T20:36:06.625529+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "trading-profit-bitvavo-001",
-      "user_id": "user-000",
-      "type": "profit",
-      "amount_eur": 5.31,
-      "token_amount": 0,
-      "price_per_token": 0,
-      "description": "Trading winst Bitvavo",
-      "timestamp": "2026-03-30T21:00:00.000000+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "6498d212-cbea-4339-b36b-05a25772046a",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 3.01,
-      "token_amount": 0.5,
-      "price_per_token": 6.02,
-      "description": "0.5 ROAR verkocht @ \u20ac6.02",
-      "timestamp": "2026-04-01T10:07:04.632959+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "ef752eec-044b-45d0-9ede-c33e132b1ae0",
-      "user_id": "user-001",
-      "type": "buy_roar",
-      "amount_eur": 6.31,
-      "token_amount": 1.0,
-      "price_per_token": 6.31,
-      "description": "1.0 ROAR gekocht @ \u20ac6.31",
-      "timestamp": "2026-04-01T10:07:08.922979+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "98b32e1b-6ad5-43cc-bd1b-bdc067070914",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 0.0,
-      "token_amount": 0.0,
-      "price_per_token": 5.76,
-      "description": "0.0 ROAR verkocht @ \u20ac5.76",
-      "timestamp": "2026-04-01T10:07:50.535145+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "4db21abf-b458-46d7-bf33-ca2f183ea4f4",
-      "user_id": "user-001",
-      "type": "sell_roar",
-      "amount_eur": 0.58,
-      "token_amount": 0.1,
-      "price_per_token": 5.76,
-      "description": "0.1 ROAR verkocht @ \u20ac5.76",
-      "timestamp": "2026-04-01T10:07:50.730533+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "8a13df16-af59-4d77-aa06-899eab34d57a",
-      "user_id": "user-001",
-      "type": "buy_roar",
-      "amount_eur": 0.58,
-      "token_amount": 0.1,
-      "price_per_token": 5.81,
-      "description": "0.1 ROAR gekocht @ \u20ac5.81",
-      "timestamp": "2026-04-01T10:07:50.920990+00:00",
-      "status": "completed"
-    },
-    {
-      "id": "withdrawal-bitvavo-all",
-      "user_id": "user-000",
-      "type": "withdrawal",
-      "amount_eur": 66.27,
-      "token_amount": 0,
-      "price_per_token": 0,
-      "description": "Alles opgenomen van Bitvavo",
-      "timestamp": "2026-04-01T10:00:00+00:00",
+      "description": "5 ROAR tokens gekocht @ vaste prijs 5.08",
+      "timestamp": "2026-03-29T20:01:00+00:00",
       "status": "completed"
     }
   ],
   "roar_config": {
     "total_supply": 1000000,
     "initial_price": 5.08,
-    "current_price": 5.08,
-    "trading_progress": 0
+    "fixed_price_limit": 10,
+    "spark_capital_note": "Wisselgeld 4.60 is Spark Core begin kapitaal (inbegrepen in de 30 storting)",
+    "description": "Eerste 10 tokens vast op 5.08, daarna dynamisch (Spark Core waarde / circulerende tokens)"
   }
 }

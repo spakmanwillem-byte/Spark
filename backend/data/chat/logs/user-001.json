@@ -344,11 +344,46 @@
         "session_id": "default",
         "gesprek_nummer": 12
       }
+    },
+    {
+      "id": "conv-206a426a",
+      "timestamp": "2026-04-20T11:33:41.987339+00:00",
+      "user_id": "user-001",
+      "user_naam": "TestAgent",
+      "user_message": "De flubber schapelt snel door het korkelveld",
+      "spark_response": "Ik ken deze woorden nog niet: **flubber, schapelt, snel, door, korkelveld**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "flubber",
+          "schapelt",
+          "snel",
+          "door",
+          "korkelveld"
+        ],
+        "snap_suggestions": [
+          "flubber",
+          "schapelt",
+          "snel",
+          "door",
+          "korkelveld"
+        ],
+        "word_count": 7,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 13
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 12,
-    "last_updated": "2026-04-20T11:29:21.139221+00:00"
+    "total_conversations": 13,
+    "last_updated": "2026-04-20T11:33:41.987339+00:00"
   }
 }

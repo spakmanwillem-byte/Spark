@@ -615,6 +615,21 @@
           "completed_date": "2026-04-20",
           "notes": "NLP las alleen context_5wh (NL, 18 kaarten ingevuld) terwijl data in ws5 (Engels, 2398 kaarten) staat. Fix in snap_service.py _format_result: leest nu BEIDE velden met NL eerst + Engelse fallback. Geen data gewijzigd, alleen lees-logica. Alle 2398 kaarten leveren nu 5W+H in chat-response.",
           "discovery": "20 apr 2026: chat-response stuurde meestal lege context_5wh terug ondanks ingevulde kaarten. Ontdekt bij inhoudelijke kaart-inspectie."
+        },
+        {
+          "id": "v3_012",
+          "titel": "Homoniem-disambiguatie (bank 💰 vs bank 🪑)",
+          "status": "vision",
+          "priority": "low",
+          "progress": 0,
+          "created_date": "2026-04-20",
+          "notes": "Dubbele woorden met verschillende betekenis moeten gescheiden kaarten krijgen of disambiguatie in begrip-veld (bv. 'bank (geld)' vs 'bank (meubel)'). Nu pakt multi_lookup de eerste match op belangrijkheid. Mogelijke fix: als meerdere kaarten met zelfde begrip bestaan, vraagt Spark 'Welke bank bedoel je?' of gebruikt context uit rest van zin om te kiezen.",
+          "discovery": "20 apr 2026: user noteerde 'bank (geld), bank (meubel) nog niet opgelost, is voor later'.",
+          "triggers": [
+            "homoniem",
+            "ambigu",
+            "disambiguatie"
+          ]
         }
       ]
     },

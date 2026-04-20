@@ -13,6 +13,7 @@ from modules.trade.monitor import (
     fetch_bitvavo_balance, sync_bitvavo_orders,
 )
 from modules.trade import potjes as potjes_svc
+from modules.trade import context_service
 
 router = APIRouter(prefix="/trade", tags=["trade"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"
@@ -275,3 +276,46 @@ async def reset_potjes_cycle(user_id: str):
     """Reset last_buy_cycle marker (handmatig, voor debugging)"""
     potjes_svc.reset_last_buy_cycle(user_id)
     return {"success": True, "message": "Buy cycle gereset"}
+
+
+# ============================================================
+# LEERMODULE - Trading Context (S/R, market state, patterns)
+# ============================================================
+
+@router.get("/context/{market}")
+async def get_context(market: str, refresh: bool = False):
+    """Haal context op voor market (uit cache of regenereer)."""
+    if not refresh:
+        cached = context_service.get_cached(market)
+        if cached:
+            return {"success": True, "context": cached, "from_cache": True}
+    # Regenereer: 2 jaar 1h candles
+    candles = fetch_candles(market, interval="1h", limit=1000)
+    if not candles:
+        return {"success": False, "error": "Geen candle data beschikbaar"}
+    context = context_service.analyze(candles, market=market)
+    context_service.save_cache(market, context)
+    return {"success": True, "context": context, "from_cache": False}
+
+
+@router.post("/context/refresh-all")
+async def refresh_all_contexts():
+    """Regenereer context voor alle leer-coins (BCH, BTC, ETH, SOL, ADA)."""
+    results = {}
+    for market in context_service.LEARNING_COINS:
+        try:
+            candles = fetch_candles(market, interval="1h", limit=1000)
+            if not candles:
+                results[market] = {"success": False, "error": "Geen data"}
+                continue
+            context = context_service.analyze(candles, market=market)
+            context_service.save_cache(market, context)
+            results[market] = {
+                "success": True,
+                "supports": len(context.get("support_levels", [])),
+                "resistances": len(context.get("resistance_levels", [])),
+                "trend": context.get("market_state", {}).get("trend"),
+            }
+        except Exception as e:
+            results[market] = {"success": False, "error": str(e)}
+    return {"success": True, "results": results}

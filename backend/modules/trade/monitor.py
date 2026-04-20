@@ -588,6 +588,9 @@ class MonitorService:
                         # 10-Potjes mode: check open positions eerst voor SELL,
                         # dan BUY voor MAX 1 potje per cycle
                         from modules.trade import potjes as potjes_svc
+                        from modules.trade import context_service
+                        # Haal context uit cache (leermodule weegt confidence)
+                        market_context = context_service.get_cached(self._market)
                         user_potjes = potjes_svc.get_potjes(self._user_id)
                         price = latest["close"]
                         actions_this_cycle = []
@@ -620,6 +623,9 @@ class MonitorService:
 
                         # 2. Check BUY: alleen 1 potje per cycle
                         buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
+                        # Pas leermodule context toe op BUY decision
+                        if market_context:
+                            buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
                         if buy_decision["action"] == "BUY":
                             available = potjes_svc.get_available_pot(self._user_id, self._cycles)
                             if available and self._auto_trade:
@@ -640,7 +646,12 @@ class MonitorService:
                         decision["execution"] = " | ".join(actions_this_cycle) if actions_this_cycle else ""
                         decision["potjes_summary"] = potjes_svc.get_summary(self._user_id)
                     else:
+                        from modules.trade import context_service
+                        market_context = context_service.get_cached(self._market)
                         decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
+                        # Apply leermodule context
+                        if market_context:
+                            decision = context_service.apply_context_to_decision(decision, market_context, latest["close"])
                         decision["cycle"] = self._cycles
                         decision["timestamp"] = datetime.now(timezone.utc).isoformat()
                         decision["executed"] = False

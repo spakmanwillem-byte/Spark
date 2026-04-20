@@ -4,7 +4,7 @@ import {
   TrendingUp, TrendingDown, Activity, DollarSign,
   ArrowUpRight, ArrowDownRight, Clock, Play, Pause, Square,
   BarChart2, PieChart, RefreshCw, Eye, Timer,
-  Settings, Key, Link, GripVertical, Loader2, Zap, Radio
+  Settings, Key, Link, GripVertical, Loader2, Zap, Radio, Brain
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -45,6 +45,10 @@ export function TraderPage({ onNavigate }) {
   // Potjes
   const [potjes, setPotjes] = useState(null);
   const [usePotjes, setUsePotjes] = useState(false);
+
+  // Leermodule - Market Context
+  const [marketContext, setMarketContext] = useState(null);
+  const [contextLoading, setContextLoading] = useState(false);
 
   // Quick trade
   const [qtMarket, setQtMarket] = useState('BCH-EUR');
@@ -89,7 +93,18 @@ export function TraderPage({ onNavigate }) {
     fetch(`${API}/api/trade/potjes/${userId}`).then(r => r.json()).then(d => setPotjes(d)).catch(() => {});
   }, [userId]);
 
-  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); loadPotjes(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes]);
+  const loadContext = useCallback(() => {
+    fetch(`${API}/api/trade/context/${candleMarket}`).then(r => r.json()).then(d => setMarketContext(d)).catch(() => {});
+  }, [candleMarket]);
+
+  const refreshAllContexts = async () => {
+    setContextLoading(true);
+    await fetch(`${API}/api/trade/context/refresh-all`, { method: 'POST' });
+    loadContext();
+    setContextLoading(false);
+  };
+
+  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); loadPotjes(); loadContext(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadContext]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
@@ -366,6 +381,7 @@ export function TraderPage({ onNavigate }) {
                         )}
                       </h3>
                       <div className="flex items-center gap-3 text-[10px]">
+                        <span className="text-slate-400">Tier: <span className="text-amber-400 font-bold">{potjes.summary?.current_tier}</span></span>
                         <span className="text-slate-400">Totaal: <span className="text-white font-medium">€{potjes.summary?.total_capital?.toFixed(2)}</span></span>
                         <span className="text-slate-400">Open: <span className="text-amber-400">{potjes.summary?.open_positions}</span>/{potjes.summary?.pot_count}</span>
                         <span className={`${potjes.summary?.total_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
@@ -376,6 +392,18 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
+                    {/* Tier progress bar */}
+                    {potjes.summary?.next_tier_threshold && (
+                      <div className="px-4 pt-3 pb-1">
+                        <div className="flex items-center justify-between text-[10px] text-slate-500 mb-1">
+                          <span>Tier {potjes.summary.current_tier + 1} bij €{potjes.summary.next_tier_threshold}</span>
+                          <span>{potjes.summary.progress_to_next_tier}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all" style={{ width: `${Math.min(100, potjes.summary.progress_to_next_tier)}%` }} />
+                        </div>
+                      </div>
+                    )}
                     <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2">
                       {potjes.potjes?.map(p => {
                         const open = p.position?.is_open;
@@ -409,6 +437,104 @@ export function TraderPage({ onNavigate }) {
                         Overflow pool: €{potjes.summary.overflow_pool.toFixed(2)} (voor nieuwe potjes)
                       </div>
                     )}
+                  </div>
+                )}
+
+                {/* Market Insights (Leermodule) */}
+                {marketContext?.success && (
+                  <div className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden">
+                    <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                      <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                        <Brain className="w-4 h-4 text-purple-400" /> Market Insights
+                        {marketContext.context?.market_state?.trend && (
+                          <span className={`text-[9px] px-1.5 py-0.5 rounded uppercase ${
+                            marketContext.context.market_state.trend === 'bull' ? 'bg-green-500/20 text-green-400' :
+                            marketContext.context.market_state.trend === 'bear' ? 'bg-red-500/20 text-red-400' :
+                            'bg-slate-700 text-slate-400'
+                          }`}>
+                            {marketContext.context.market_state.trend}
+                          </span>
+                        )}
+                        <span className="text-[9px] text-slate-600">{marketContext.context?.market}</span>
+                      </h3>
+                      <button data-testid="refresh-context-btn" onClick={refreshAllContexts} disabled={contextLoading}
+                        className="text-[10px] text-purple-400 hover:text-purple-300 flex items-center gap-1 disabled:opacity-50">
+                        <RefreshCw className={`w-3 h-3 ${contextLoading ? 'animate-spin' : ''}`} /> {contextLoading ? 'Leren...' : 'Refresh alle coins'}
+                      </button>
+                    </div>
+                    <div className="p-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {/* Support levels */}
+                      <div>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Support</p>
+                        {marketContext.context?.support_levels?.length > 0 ? (
+                          <div className="space-y-1">
+                            {marketContext.context.support_levels.slice(0, 3).map((s, i) => (
+                              <div key={i} className="flex items-center justify-between px-2 py-1 bg-green-500/10 border border-green-500/20 rounded">
+                                <span className="text-xs text-green-400 font-medium">€{s.price}</span>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-[9px] text-slate-500">{s.bounces}x</span>
+                                  <span className="text-[9px] text-green-400">{(s.strength * 100).toFixed(0)}%</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : <p className="text-[10px] text-slate-600">Geen data</p>}
+                      </div>
+                      {/* Resistance levels */}
+                      <div>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Weerstand</p>
+                        {marketContext.context?.resistance_levels?.length > 0 ? (
+                          <div className="space-y-1">
+                            {marketContext.context.resistance_levels.slice(0, 3).map((r, i) => (
+                              <div key={i} className="flex items-center justify-between px-2 py-1 bg-red-500/10 border border-red-500/20 rounded">
+                                <span className="text-xs text-red-400 font-medium">€{r.price}</span>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-[9px] text-slate-500">{r.tests}x</span>
+                                  <span className="text-[9px] text-red-400">{(r.strength * 100).toFixed(0)}%</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : <p className="text-[10px] text-slate-600">Geen data</p>}
+                      </div>
+                      {/* Patterns */}
+                      <div>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Patronen</p>
+                        <div className="space-y-1">
+                          {marketContext.context?.market_state && (
+                            <div className="flex items-center justify-between px-2 py-1 bg-slate-800/50 rounded">
+                              <span className="text-[10px] text-slate-400">Momentum</span>
+                              <span className={`text-[10px] font-medium ${marketContext.context.market_state.momentum_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                {marketContext.context.market_state.momentum_pct >= 0 ? '+' : ''}{marketContext.context.market_state.momentum_pct}%
+                              </span>
+                            </div>
+                          )}
+                          {marketContext.context?.patterns?.volatility && (
+                            <div className="flex items-center justify-between px-2 py-1 bg-slate-800/50 rounded">
+                              <span className="text-[10px] text-slate-400">Volatiliteit</span>
+                              <span className="text-[10px] text-white capitalize">{marketContext.context.patterns.volatility.state}</span>
+                            </div>
+                          )}
+                          {(() => {
+                            const patterns = marketContext.context?.patterns?.weekday_patterns;
+                            if (!patterns) return null;
+                            const days = Object.entries(patterns).filter(([_, p]) => p.bias !== 'neutral').slice(0, 2);
+                            return days.map(([day, p]) => (
+                              <div key={day} className={`flex items-center justify-between px-2 py-1 rounded ${p.bias === 'bullish' ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
+                                <span className="text-[10px] text-slate-400 capitalize">{day}</span>
+                                <span className={`text-[10px] ${p.bias === 'bullish' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {p.avg_change_pct >= 0 ? '+' : ''}{p.avg_change_pct}%
+                                </span>
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-4 py-2 border-t border-slate-800 text-[10px] text-slate-600 flex items-center justify-between">
+                      <span>{marketContext.context?.candles_analyzed || 0} candles geanalyseerd</span>
+                      <span>Cache: {marketContext.context?.cache_age_hours?.toFixed(1) || 0}h oud</span>
+                    </div>
                   </div>
                 )}
               </div>

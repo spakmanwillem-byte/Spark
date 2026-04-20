@@ -1,140 +1,222 @@
 {
-  "description": "Potjes systeem - Tracking van totaal fund (extern) vs gebruikt/beschikbaar (intern)",
   "users": {
     "user-001": {
-      "potjes_config": {
-        "total_fund_eur": 50.8,
-        "external_location": "bitvavo",
-        "potje_value_eur": 5.08,
-        "total_potjes": 10,
-        "note": "Fund staat op Bitvavo - Spark tracked alleen gebruik"
-      },
-      "status": {
-        "used_count": 10,
-        "available_count": 0,
-        "used_eur": 50.8,
-        "available_eur": 0,
-        "last_updated": "2026-03-30T19:00:00+00:00"
-      },
+      "user_id": "user-001",
+      "market": "BCH-EUR",
       "potjes": [
         {
-          "potje_id": 1,
-          "status": "used",
-          "run_id": "run_user-001_BCH_1774489771",
-          "date_used": "2026-03-26T01:50:50",
-          "trade_value_eur": 4.71,
-          "note": "Eerste trade - variatie door marktprijs normaal"
+          "id": "pot-001",
+          "index": 0,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 2,
-          "status": "used",
-          "run_id": "run_user-001_BCH_1774493528",
-          "date_used": "2026-03-30T12:08:16",
-          "trade_value_eur": 5.02,
-          "note": "Tweede trade - variatie door marktprijs normaal"
+          "id": "pot-002",
+          "index": 1,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 3,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-003",
+          "index": 2,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 4,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-004",
+          "index": 3,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 5,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-005",
+          "index": 4,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 6,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-006",
+          "index": 5,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 7,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-007",
+          "index": 6,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 8,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-008",
+          "index": 7,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 9,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-009",
+          "index": 8,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         },
         {
-          "potje_id": 10,
-          "status": "used",
-          "reserved_for": null,
-          "used_for": "tokens",
-          "date_used": "2026-03-30T19:30:00+00:00",
-          "note": "Omgezet naar ROAR token"
+          "id": "pot-010",
+          "index": 9,
+          "capital": 5.08,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-04-20T01:28:38.807333+00:00",
+          "last_action": null
         }
       ],
-      "history": [
-        {
-          "timestamp": "2026-03-30T19:00:00+00:00",
-          "action": "initial_setup",
-          "description": "Potjes systeem opgezet - 10 potjes van €5,08, 2 gebruikt, 8 beschikbaar"
-        },
-        {
-          "timestamp": "2026-03-26T01:50:50",
-          "action": "potje_used",
-          "potje_id": 1,
-          "run_id": "run_user-001_BCH_1774489771",
-          "trade_value_eur": 4.71
-        },
-        {
-          "timestamp": "2026-03-30T12:08:16",
-          "action": "potje_used",
-          "potje_id": 2,
-          "run_id": "run_user-001_BCH_1774493528",
-          "trade_value_eur": 5.02
-        },
-        {
-          "timestamp": "2026-03-30T19:30:00+00:00",
-          "action": "potjes_converted_to_tokens",
-          "potjes": [
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ],
-          "total_roar_tokens": 11,
-          "description": "8 potjes omgezet naar ROAR tokens (11 totaal inclusief token #11)"
-        }
-      ]
+      "last_buy_cycle": null,
+      "created_at": "2026-04-20T01:28:38.807333+00:00"
     }
   }
 }

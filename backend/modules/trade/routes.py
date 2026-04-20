@@ -12,6 +12,7 @@ from modules.trade.monitor import (
     execute_mock_trade, execute_real_trade, WATCHLIST_COINS,
     fetch_bitvavo_balance, sync_bitvavo_orders,
 )
+from modules.trade import potjes as potjes_svc
 
 router = APIRouter(prefix="/trade", tags=["trade"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"
@@ -38,6 +39,7 @@ class MonitorStartRequest(BaseModel):
     auto_trade: Optional[bool] = False
     trade_amount: Optional[float] = 5.0
     use_mock: Optional[bool] = True
+    use_potjes: Optional[bool] = False
 
 
 class QuickTradeRequest(BaseModel):
@@ -224,6 +226,7 @@ async def monitor_start(req: MonitorStartRequest = MonitorStartRequest()):
         auto_trade=req.auto_trade,
         trade_amount=req.trade_amount,
         use_mock=req.use_mock,
+        use_potjes=req.use_potjes,
     )
 
 
@@ -245,3 +248,30 @@ async def monitor_status():
 @router.get("/monitor/decisions")
 async def monitor_decisions(limit: int = Query(50)):
     return {"success": True, "decisions": get_monitor().get_decisions(limit)}
+
+
+# ============================================================
+# POTJES SYSTEEM (10 onafhankelijke potjes)
+# ============================================================
+
+@router.get("/potjes/{user_id}")
+async def get_user_potjes(user_id: str):
+    """Haal potjes overzicht op"""
+    return {
+        "success": True,
+        "summary": potjes_svc.get_summary(user_id),
+        "potjes": potjes_svc.get_potjes(user_id)["potjes"],
+    }
+
+
+@router.post("/potjes/{user_id}/expand")
+async def expand_user_potjes(user_id: str):
+    """Breid potjes uit vanuit overflow pool (wanneer alle potjes op max staan)"""
+    return potjes_svc.expand_potjes(user_id)
+
+
+@router.post("/potjes/{user_id}/reset-cycle")
+async def reset_potjes_cycle(user_id: str):
+    """Reset last_buy_cycle marker (handmatig, voor debugging)"""
+    potjes_svc.reset_last_buy_cycle(user_id)
+    return {"success": True, "message": "Buy cycle gereset"}

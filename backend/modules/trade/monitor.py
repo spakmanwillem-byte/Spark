@@ -485,12 +485,15 @@ class MonitorService:
         self._auto_trade = False
         self._trade_amount = 5.0
         self._use_mock = True
-        # Position state for trailing stop
+        # Position state for trailing stop (single-pot mode)
         self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
+        # Potjes mode: als True, gebruik 10-potjes systeem
+        self._use_potjes = False
 
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: str = "user-001",
-              auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = True) -> Dict:
+              auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = True,
+              use_potjes: bool = False) -> Dict:
         with self._lock:
             if self._running:
                 return {"success": False, "message": "Monitor draait al", "status": self.get_status()}
@@ -501,6 +504,7 @@ class MonitorService:
             self._auto_trade = auto_trade
             self._trade_amount = trade_amount
             self._use_mock = use_mock
+            self._use_potjes = use_potjes
             self._stop_event.clear()
             self._running = True
             self._paused = False
@@ -509,7 +513,8 @@ class MonitorService:
             self._decisions = []
             self._thread = threading.Thread(target=self._loop, daemon=True)
             self._thread.start()
-            return {"success": True, "message": f"Monitor gestart ({candle_interval} candles)", "status": self.get_status()}
+            mode = "10-potjes" if use_potjes else "single"
+            return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode)", "status": self.get_status()}
 
     def stop(self) -> Dict:
         with self._lock:
@@ -551,6 +556,7 @@ class MonitorService:
             "uptime_seconds": uptime,
             "thread_alive": self._thread.is_alive() if self._thread else False,
             "position": self._position,
+            "use_potjes": self._use_potjes,
         }
 
     def get_decisions(self, limit: int = 50) -> List[Dict]:
@@ -578,46 +584,93 @@ class MonitorService:
                         if len(context_candles) > 50:
                             context_candles.pop(0)
 
-                    decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
-                    decision["cycle"] = self._cycles
-                    decision["timestamp"] = datetime.now(timezone.utc).isoformat()
-                    decision["executed"] = False
+                    if self._use_potjes:
+                        # 10-Potjes mode: check open positions eerst voor SELL,
+                        # dan BUY voor MAX 1 potje per cycle
+                        from modules.trade import potjes as potjes_svc
+                        user_potjes = potjes_svc.get_potjes(self._user_id)
+                        price = latest["close"]
+                        actions_this_cycle = []
 
-                    # Apply position state updates from decision
-                    pos_update = decision.get("position_update", {})
-                    if pos_update.get("close"):
-                        # We gaan verkopen; sluit de positie na uitvoering
-                        pass  # position wordt na SELL exec gereset
-                    elif pos_update.get("highest_price") is not None:
-                        self._position["highest_price"] = pos_update["highest_price"]
-                        self._position["trailing_active"] = pos_update.get("trailing_active", self._position.get("trailing_active", False))
+                        # 1. Voor elke open potje: check of trailing stop moet triggeren
+                        for pot in user_potjes["potjes"]:
+                            if not pot["position"]["is_open"]:
+                                continue
+                            potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
+                            pos = pot["position"]
+                            entry = pos["entry_price"]
+                            highest = max(pos.get("highest_price", entry), price)
+                            profit_pct = (price - entry) / entry
+                            bruto = pot["capital"] * profit_pct
+                            fees = pot["capital"] * BITVAVO_TAKER_FEE * 2
+                            netto = bruto - fees
+                            trailing_active = pos.get("trailing_active", False) or profit_pct >= 0.01
+                            drop_from_high = (highest - price) / highest if highest else 0
 
-                    # Auto trade
-                    if self._auto_trade and decision["action"] in ("BUY", "SELL"):
-                        # Extra guard: BUY alleen als geen positie, SELL alleen als positie open
-                        can_execute = (decision["action"] == "BUY" and not self._position["is_open"]) or \
-                                      (decision["action"] == "SELL" and self._position["is_open"])
-                        if can_execute:
-                            if self._use_mock:
-                                result = execute_mock_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                            if trailing_active and drop_from_high >= 0.004 and netto >= 0.01:
+                                # SELL deze potje
+                                if self._auto_trade:
+                                    if self._use_mock:
+                                        result = execute_mock_trade(self._user_id, self._market, "SELL", pot["capital"])
+                                    else:
+                                        result = execute_real_trade(self._user_id, self._market, "SELL", pot["capital"])
+                                    if result.get("success"):
+                                        close_result = potjes_svc.close_pot(self._user_id, pot["id"], price)
+                                        actions_this_cycle.append(f"SELL {pot['id']} @ €{price:.2f} netto €{close_result.get('netto', 0):+.3f}")
+
+                        # 2. Check BUY: alleen 1 potje per cycle
+                        buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
+                        if buy_decision["action"] == "BUY":
+                            available = potjes_svc.get_available_pot(self._user_id, self._cycles)
+                            if available and self._auto_trade:
+                                if self._use_mock:
+                                    result = execute_mock_trade(self._user_id, self._market, "BUY", available["capital"])
+                                else:
+                                    result = execute_real_trade(self._user_id, self._market, "BUY", available["capital"])
+                                if result.get("success"):
+                                    potjes_svc.open_pot(self._user_id, available["id"], price, self._cycles)
+                                    actions_this_cycle.append(f"BUY {available['id']} @ €{price:.2f}")
+                            elif not available:
+                                buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"
+
+                        decision = buy_decision
+                        decision["cycle"] = self._cycles
+                        decision["timestamp"] = datetime.now(timezone.utc).isoformat()
+                        decision["executed"] = len(actions_this_cycle) > 0
+                        decision["execution"] = " | ".join(actions_this_cycle) if actions_this_cycle else ""
+                        decision["potjes_summary"] = potjes_svc.get_summary(self._user_id)
+                    else:
+                        decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
+                        decision["cycle"] = self._cycles
+                        decision["timestamp"] = datetime.now(timezone.utc).isoformat()
+                        decision["executed"] = False
+
+                        # Apply position state updates from decision
+                        pos_update = decision.get("position_update", {})
+                        if pos_update.get("close"):
+                            pass
+                        elif pos_update.get("highest_price") is not None:
+                            self._position["highest_price"] = pos_update["highest_price"]
+                            self._position["trailing_active"] = pos_update.get("trailing_active", self._position.get("trailing_active", False))
+
+                        # Auto trade (single-position mode)
+                        if self._auto_trade and decision["action"] in ("BUY", "SELL"):
+                            can_execute = (decision["action"] == "BUY" and not self._position["is_open"]) or \
+                                          (decision["action"] == "SELL" and self._position["is_open"])
+                            if can_execute:
+                                if self._use_mock:
+                                    result = execute_mock_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                                else:
+                                    result = execute_real_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                                decision["executed"] = result.get("success", False)
+                                decision["execution"] = result.get("message", "")
+                                if decision["executed"]:
+                                    if decision["action"] == "BUY":
+                                        self._position = {"is_open": True, "entry_price": decision.get("price", self._last_price), "highest_price": decision.get("price", self._last_price), "trailing_active": False}
+                                    else:
+                                        self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
                             else:
-                                result = execute_real_trade(self._user_id, self._market, decision["action"], self._trade_amount)
-                            decision["executed"] = result.get("success", False)
-                            decision["execution"] = result.get("message", "")
-
-                            # Update position na succesvolle trade
-                            if decision["executed"]:
-                                if decision["action"] == "BUY":
-                                    self._position = {
-                                        "is_open": True,
-                                        "entry_price": decision.get("price", self._last_price),
-                                        "highest_price": decision.get("price", self._last_price),
-                                        "trailing_active": False,
-                                    }
-                                else:  # SELL
-                                    self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
-                        else:
-                            decision["execution"] = f"Skipped: {'al in positie' if decision['action'] == 'BUY' else 'geen open positie'}"
+                                decision["execution"] = f"Skipped: {'al in positie' if decision['action'] == 'BUY' else 'geen open positie'}"
 
                     self._decisions.append(decision)
                     if len(self._decisions) > 200:

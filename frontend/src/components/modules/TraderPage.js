@@ -42,6 +42,10 @@ export function TraderPage({ onNavigate }) {
   // Live Bitvavo balance
   const [bvBalance, setBvBalance] = useState(null);
 
+  // Potjes
+  const [potjes, setPotjes] = useState(null);
+  const [usePotjes, setUsePotjes] = useState(false);
+
   // Quick trade
   const [qtMarket, setQtMarket] = useState('BCH-EUR');
   const [qtSide, setQtSide] = useState('buy');
@@ -81,7 +85,11 @@ export function TraderPage({ onNavigate }) {
     fetch(`${API}/api/trade/bitvavo/balance/${userId}`).then(r => r.json()).then(d => setBvBalance(d)).catch(() => {});
   }, [userId]);
 
-  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance]);
+  const loadPotjes = useCallback(() => {
+    fetch(`${API}/api/trade/potjes/${userId}`).then(r => r.json()).then(d => setPotjes(d)).catch(() => {});
+  }, [userId]);
+
+  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); loadPotjes(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
@@ -126,9 +134,11 @@ export function TraderPage({ onNavigate }) {
         interval: 30, market: candleMarket, candle_interval: candleInterval,
         user_id: userId, auto_trade: settings.auto_trade || false,
         trade_amount: settings.trade_amount || 5, use_mock: settings.use_mock !== false,
+        use_potjes: usePotjes,
       }),
     });
     loadMonitorStatus();
+    if (usePotjes) loadPotjes();
   };
   const stopMonitor = async () => { await fetch(`${API}/api/trade/monitor/stop`, { method: 'POST' }); loadMonitorStatus(); };
   const pauseMonitor = async () => { await fetch(`${API}/api/trade/monitor/pause`, { method: 'POST' }); loadMonitorStatus(); };
@@ -204,7 +214,7 @@ export function TraderPage({ onNavigate }) {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {bvBalance.balances.map(b => (
+                  {bvBalance.balances.filter(b => (b.value_eur ?? 0) >= 0.01 || b.symbol === 'EUR').map(b => (
                     <div key={b.symbol} data-testid={`balance-${b.symbol}`} className="bg-slate-900/50 rounded-xl p-3">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-bold text-white">{b.symbol}</span>
@@ -215,6 +225,11 @@ export function TraderPage({ onNavigate }) {
                     </div>
                   ))}
                 </div>
+                {bvBalance.balances.filter(b => (b.value_eur ?? 0) < 0.01 && b.symbol !== 'EUR').length > 0 && (
+                  <p className="text-[10px] text-slate-600 mt-2">
+                    + {bvBalance.balances.filter(b => (b.value_eur ?? 0) < 0.01 && b.symbol !== 'EUR').length} stofjes verborgen (&lt;€0,01)
+                  </p>
+                )}
               </div>
             )}
             {bvBalance && !bvBalance.success && (
@@ -270,6 +285,14 @@ export function TraderPage({ onNavigate }) {
                       <Radio className="w-4 h-4 text-amber-400" /> Monitor
                     </h3>
                     <div className="flex items-center gap-2">
+                      {/* Potjes toggle */}
+                      {!monitorStatus?.running && (
+                        <label className="flex items-center gap-1.5 text-[10px] text-slate-400 cursor-pointer select-none">
+                          <input type="checkbox" data-testid="toggle-potjes-mode" checked={usePotjes} onChange={e => setUsePotjes(e.target.checked)}
+                            className="w-3 h-3 accent-amber-500" />
+                          10-Potjes
+                        </label>
+                      )}
                       {!monitorStatus?.running ? (
                         <button data-testid="monitor-start" onClick={startMonitor}
                           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-medium bg-green-500/20 text-green-400 hover:bg-green-500/30 transition-colors">
@@ -332,9 +355,63 @@ export function TraderPage({ onNavigate }) {
                     )}
                   </div>
                 </div>
+                {/* Potjes Panel (toont altijd als data aanwezig) */}
+                {potjes?.success && (
+                  <div className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden">
+                    <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                      <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                        <PieChart className="w-4 h-4 text-amber-400" /> 10-Potjes Systeem
+                        {monitorStatus?.use_potjes && monitorStatus?.running && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/20 text-green-400">ACTIEF</span>
+                        )}
+                      </h3>
+                      <div className="flex items-center gap-3 text-[10px]">
+                        <span className="text-slate-400">Totaal: <span className="text-white font-medium">€{potjes.summary?.total_capital?.toFixed(2)}</span></span>
+                        <span className="text-slate-400">Open: <span className="text-amber-400">{potjes.summary?.open_positions}</span>/{potjes.summary?.pot_count}</span>
+                        <span className={`${potjes.summary?.total_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          P&L: €{potjes.summary?.total_pnl?.toFixed(3)}
+                        </span>
+                        <button onClick={loadPotjes} className="text-slate-500 hover:text-white">
+                          <RefreshCw className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2">
+                      {potjes.potjes?.map(p => {
+                        const open = p.position?.is_open;
+                        const pnl = p.stats?.total_pnl || 0;
+                        return (
+                          <div key={p.id} data-testid={`pot-${p.id}`}
+                            className={`rounded-xl p-2.5 border ${open ? 'bg-amber-500/10 border-amber-500/30' : 'bg-slate-800/30 border-slate-700'}`}>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[10px] font-bold text-white">{p.id}</span>
+                              <span className="text-[9px] text-slate-400">€{p.capital?.toFixed(2)}</span>
+                            </div>
+                            {open ? (
+                              <div>
+                                <p className="text-[9px] text-amber-400">IN POSITIE</p>
+                                <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>
+                                {p.position.trailing_active && <p className="text-[9px] text-green-400">🔒 trailing</p>}
+                              </div>
+                            ) : (
+                              <p className="text-[9px] text-slate-500">Vrij</p>
+                            )}
+                            <div className="flex justify-between mt-1">
+                              <span className="text-[9px] text-slate-500">{p.stats?.trades || 0} trades</span>
+                              <span className={`text-[9px] ${pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>€{pnl.toFixed(3)}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    {potjes.summary?.overflow_pool > 0 && (
+                      <div className="px-4 py-2 border-t border-slate-800 text-[10px] text-slate-500">
+                        Overflow pool: €{potjes.summary.overflow_pool.toFixed(2)} (voor nieuwe potjes)
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-
-              {/* Right: Watchlist + Recent Trades */}
               <div className="lg:col-span-4 space-y-4">
 
                 {/* Watchlist */}

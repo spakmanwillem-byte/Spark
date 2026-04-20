@@ -930,6 +930,135 @@ function BitvavoSettings({ userId, status, settings }) {
           </div>
         )}
       </div>
+
+      {/* Donaties / Deposits */}
+      <DonationsPanel userId={userId} />
+    </div>
+  );
+}
+
+/* === Donaties / Deposits component === */
+function DonationsPanel({ userId }) {
+  const [deposits, setDeposits] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [amount, setAmount] = useState('');
+  const [depType, setDepType] = useState('donation');
+  const [source, setSource] = useState('');
+  const [description, setDescription] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  const load = async () => {
+    const res = await fetch(`${API}/api/trade/deposits/${userId}`).then(r => r.json()).catch(() => ({ deposits: [] }));
+    setDeposits(res);
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line
+
+  const save = async () => {
+    if (!amount || parseFloat(amount) <= 0) return;
+    setSaving(true);
+    await fetch(`${API}/api/trade/deposits/${userId}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount_eur: parseFloat(amount),
+        type: depType,
+        source: source.trim() || 'onbekend',
+        description: description.trim(),
+      }),
+    });
+    setAmount(''); setSource(''); setDescription(''); setShowForm(false);
+    await load();
+    setSaving(false);
+  };
+
+  const remove = async (id) => {
+    await fetch(`${API}/api/trade/deposits/${userId}/${id}`, { method: 'DELETE' });
+    await load();
+  };
+
+  const totals = deposits?.totals || {};
+
+  return (
+    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+          <DollarSign className="w-4 h-4 text-purple-400" /> Donaties & Deposits
+        </h3>
+        <button data-testid="add-deposit-btn" onClick={() => setShowForm(!showForm)}
+          className="text-[11px] px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+          {showForm ? 'Annuleer' : '+ Toevoegen'}
+        </button>
+      </div>
+      <p className="text-[11px] text-slate-400 mb-3">
+        Registreer extern geld (donatie, eigen storting, opname). Baseline wordt automatisch bijgewerkt zodat P&L zuiver trading-winst blijft.
+      </p>
+
+      {/* Totalen */}
+      <div className="grid grid-cols-3 gap-2 mb-3 text-center">
+        <div className="bg-slate-800/30 rounded-lg p-2">
+          <p className="text-[9px] text-slate-500 uppercase">Donaties</p>
+          <p className="text-xs font-bold text-purple-400">€{(totals.donations ?? 0).toFixed(2)}</p>
+        </div>
+        <div className="bg-slate-800/30 rounded-lg p-2">
+          <p className="text-[9px] text-slate-500 uppercase">Eigen storting</p>
+          <p className="text-xs font-bold text-cyan-400">€{(totals.deposits ?? 0).toFixed(2)}</p>
+        </div>
+        <div className="bg-slate-800/30 rounded-lg p-2">
+          <p className="text-[9px] text-slate-500 uppercase">Opnames</p>
+          <p className="text-xs font-bold text-orange-400">€{(totals.withdrawals ?? 0).toFixed(2)}</p>
+        </div>
+      </div>
+
+      {/* Form */}
+      {showForm && (
+        <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-3 space-y-2 mb-3">
+          <div className="flex gap-2">
+            {['donation', 'deposit', 'withdrawal'].map(t => (
+              <button key={t} data-testid={`dep-type-${t}`} onClick={() => setDepType(t)}
+                className={`flex-1 py-1.5 rounded text-[10px] uppercase tracking-wider font-medium ${
+                  depType === t ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                }`}>
+                {t === 'donation' ? 'Donatie' : t === 'deposit' ? 'Storting' : 'Opname'}
+              </button>
+            ))}
+          </div>
+          <input data-testid="dep-amount" type="number" step="0.01" placeholder="Bedrag in EUR" value={amount} onChange={e => setAmount(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+          <input data-testid="dep-source" type="text" placeholder="Van wie? (bv. Harry)" value={source} onChange={e => setSource(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+          <input data-testid="dep-description" type="text" placeholder="Omschrijving (verantwoording)" value={description} onChange={e => setDescription(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+          <button data-testid="save-deposit-btn" onClick={save} disabled={saving || !amount}
+            className="w-full py-2 rounded-lg bg-purple-500 hover:bg-purple-600 text-white text-xs font-medium disabled:opacity-50">
+            {saving ? 'Opslaan...' : 'Registreren & baseline bijwerken'}
+          </button>
+        </div>
+      )}
+
+      {/* Lijst */}
+      {deposits?.deposits?.length > 0 ? (
+        <div className="space-y-1 max-h-48 overflow-y-auto">
+          {deposits.deposits.slice().reverse().map(d => (
+            <div key={d.id} data-testid={`dep-${d.id}`} className="flex items-center justify-between px-3 py-2 bg-slate-800/30 rounded-lg">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded uppercase ${
+                    d.type === 'donation' ? 'bg-purple-500/20 text-purple-400' :
+                    d.type === 'deposit' ? 'bg-cyan-500/20 text-cyan-400' :
+                    'bg-orange-500/20 text-orange-400'
+                  }`}>{d.type === 'donation' ? 'Donatie' : d.type === 'deposit' ? 'Storting' : 'Opname'}</span>
+                  <span className="text-xs text-white font-medium">€{d.amount_eur.toFixed(2)}</span>
+                  <span className="text-[10px] text-slate-500">van {d.source}</span>
+                </div>
+                {d.description && <p className="text-[10px] text-slate-500 mt-0.5 truncate">{d.description}</p>}
+              </div>
+              <button onClick={() => remove(d.id)} className="text-[10px] text-red-400/70 hover:text-red-400 ml-2">×</button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-[10px] text-slate-600 text-center py-2">Nog geen deposits/donaties</p>
+      )}
     </div>
   );
 }

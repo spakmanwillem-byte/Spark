@@ -142,6 +142,118 @@ async def set_baseline(user_id: str, req: BaselineSetRequest):
     return {"success": True, "baseline": data[user_id]}
 
 
+# ============================================================
+# DEPOSITS / DONATIES — Externe geldtoevoegingen (niet trading)
+# ============================================================
+
+class DepositRequest(BaseModel):
+    amount_eur: float
+    type: str  # "donation", "deposit", "withdrawal"
+    source: Optional[str] = None  # Bv. "Harry", "eigen rekening"
+    description: Optional[str] = None
+    timestamp: Optional[str] = None
+
+
+@router.get("/deposits/{user_id}")
+async def get_deposits(user_id: str):
+    """Lijst alle donaties/deposits/withdrawals voor user."""
+    dep_file = DATA_DIR.parent / "trade" / "deposits.json"
+    data = load_json(dep_file, default={})
+    user_deps = data.get(user_id, [])
+    totals = {
+        "donations": sum(d["amount_eur"] for d in user_deps if d["type"] == "donation"),
+        "deposits": sum(d["amount_eur"] for d in user_deps if d["type"] == "deposit"),
+        "withdrawals": sum(d["amount_eur"] for d in user_deps if d["type"] == "withdrawal"),
+    }
+    totals["net_external"] = round(totals["donations"] + totals["deposits"] - totals["withdrawals"], 2)
+    return {"success": True, "deposits": user_deps, "totals": totals}
+
+
+@router.post("/deposits/{user_id}")
+async def add_deposit(user_id: str, req: DepositRequest):
+    """
+    Registreer een externe geldtoevoeging (donatie, deposit, withdrawal).
+    Effect: baseline wordt automatisch bijgewerkt zodat P&L niet scheef trekt.
+
+    Voorbeeld: Harry doneert €10
+      -> baseline gaat van €50.80 naar €60.80
+      -> live_pnl (balance - baseline) blijft correct (alleen trading-winst)
+    """
+    dep_file = DATA_DIR.parent / "trade" / "deposits.json"
+    dep_file.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(dep_file, default={})
+    deposits = data.get(user_id, [])
+
+    if req.type not in ("donation", "deposit", "withdrawal"):
+        return {"success": False, "error": "Type moet: donation, deposit of withdrawal"}
+
+    entry = {
+        "id": f"dep-{len(deposits) + 1:04d}",
+        "timestamp": req.timestamp or datetime.now(timezone.utc).isoformat(),
+        "type": req.type,
+        "amount_eur": req.amount_eur,
+        "source": req.source or "onbekend",
+        "description": req.description or "",
+    }
+    deposits.append(entry)
+    data[user_id] = deposits
+    save_json(dep_file, data)
+
+    # Update baseline: +donation/deposit, -withdrawal
+    baseline_file = DATA_DIR.parent / "trade" / "capital_baseline.json"
+    baseline_data = load_json(baseline_file, default={})
+    current_baseline = baseline_data.get(user_id, {}).get("baseline_eur", 0.0)
+    if req.type == "withdrawal":
+        new_baseline = round(current_baseline - req.amount_eur, 2)
+    else:
+        new_baseline = round(current_baseline + req.amount_eur, 2)
+    baseline_data[user_id] = {
+        "baseline_eur": new_baseline,
+        "set_at": datetime.now(timezone.utc).isoformat(),
+        "note": f"Auto-update via {req.type}: {req.description or req.source or 'geen beschrijving'}",
+    }
+    save_json(baseline_file, baseline_data)
+
+    return {
+        "success": True,
+        "deposit": entry,
+        "baseline_updated": {
+            "old": current_baseline,
+            "new": new_baseline,
+            "delta": round(new_baseline - current_baseline, 2),
+        },
+    }
+
+
+@router.delete("/deposits/{user_id}/{deposit_id}")
+async def delete_deposit(user_id: str, deposit_id: str):
+    """Verwijder een deposit entry (en corrigeer baseline)."""
+    dep_file = DATA_DIR.parent / "trade" / "deposits.json"
+    data = load_json(dep_file, default={})
+    deposits = data.get(user_id, [])
+    entry = next((d for d in deposits if d["id"] == deposit_id), None)
+    if not entry:
+        return {"success": False, "error": "Niet gevonden"}
+    deposits = [d for d in deposits if d["id"] != deposit_id]
+    data[user_id] = deposits
+    save_json(dep_file, data)
+    # Correct baseline in reverse
+    baseline_file = DATA_DIR.parent / "trade" / "capital_baseline.json"
+    baseline_data = load_json(baseline_file, default={})
+    current = baseline_data.get(user_id, {}).get("baseline_eur", 0.0)
+    if entry["type"] == "withdrawal":
+        new_baseline = round(current + entry["amount_eur"], 2)
+    else:
+        new_baseline = round(current - entry["amount_eur"], 2)
+    baseline_data[user_id] = {
+        "baseline_eur": new_baseline,
+        "set_at": datetime.now(timezone.utc).isoformat(),
+        "note": f"Correctie door verwijderen {entry['type']} #{deposit_id}",
+    }
+    save_json(baseline_file, baseline_data)
+    return {"success": True, "removed": entry, "new_baseline": new_baseline}
+
+
 @router.get("/markets/{user_id}")
 async def get_available_markets(user_id: str):
     data = load_json(DATA_DIR / "trade_history" / f"{user_id}.json", default={"trades": []})

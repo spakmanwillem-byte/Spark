@@ -69,6 +69,10 @@ async def get_trade_stats(user_id: str):
     total_sell_eur = sum(t.get("amount", 0) for t in sells)
     avg_buy_price = sum(t.get("price", 0) for t in buys) / max(len(buys), 1)
     avg_sell_price = sum(t.get("price", 0) for t in sells) / max(len(sells), 1)
+    # Fee-aware profit calculation
+    total_fees = sum(float(t.get("fee", 0) or 0) for t in trades if (t.get("fee_currency") or "EUR") == "EUR")
+    bruto_pnl = total_sell_eur - total_buy_eur
+    netto_pnl = bruto_pnl - total_fees
     return {
         "total_trades": len(trades),
         "buys": len(buys),
@@ -78,7 +82,10 @@ async def get_trade_stats(user_id: str):
         "total_sell_eur": round(total_sell_eur, 2),
         "avg_buy_price": round(avg_buy_price, 2),
         "avg_sell_price": round(avg_sell_price, 2),
-        "profit_loss": round(total_sell_eur - total_buy_eur, 2),
+        "total_fees_eur": round(total_fees, 2),
+        "bruto_pnl": round(bruto_pnl, 2),
+        "profit_loss": round(netto_pnl, 2),  # Netto na fees (backwards compat key)
+        "netto_pnl": round(netto_pnl, 2),
         "mock_trades": sum(1 for t in trades if t.get("mock")),
         "real_trades": sum(1 for t in trades if not t.get("mock")),
     }

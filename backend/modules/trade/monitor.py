@@ -166,6 +166,8 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             filled = float(result.get("filledAmount", 0))
             filled_quote = float(result.get("filledAmountQuote", 0))
             avg_price = filled_quote / filled if filled > 0 else 0
+            fee_paid = float(result.get("feePaid", 0))
+            fee_currency = result.get("feeCurrency", "EUR")
 
             trade_id = result.get("orderId", str(uuid.uuid4())[:8])
             now = datetime.now(timezone.utc).isoformat()
@@ -183,6 +185,8 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
                 "mock": False,
                 "success": True,
                 "error": None,
+                "fee": fee_paid,
+                "fee_currency": fee_currency,
             }
 
             history_file = DATA_DIR / "wallet" / "trade_history" / f"{user_id}.json"
@@ -190,7 +194,7 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             data["trades"].append(trade)
             save_json(history_file, data)
 
-            return {"success": True, "trade": trade, "message": f"LIVE {side.upper()} uitgevoerd @ €{avg_price:.2f}"}
+            return {"success": True, "trade": trade, "message": f"LIVE {side.upper()} uitgevoerd @ €{avg_price:.2f} (fee €{fee_paid:.4f})"}
         else:
             return {"success": False, "error": f"Bitvavo API error: {resp.status_code} - {resp.text}"}
     except Exception as e:
@@ -335,10 +339,22 @@ def sync_bitvavo_orders(user_id: str, market: Optional[str] = None) -> Dict:
     }
 
 
-def _simple_decision(candles: List[Dict]) -> Dict:
+# Bitvavo taker fee (market orders)
+BITVAVO_TAKER_FEE = 0.0025  # 0.25%
+
+
+def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade_amount: float = 5.0) -> Dict:
     """
-    Simple Bollinger Band-like decision engine.
-    Uses last 20 candles to compute mean/std, then checks if price is near lower/upper band.
+    Decision engine with trailing stop + fee-aware profit guard.
+    - Enters LONG bij prijs onder lower Bollinger band (2σ)
+    - Activeert trailing stop bij +1% winst
+    - Verkoopt bij -0.4% drop vanaf hoogste punt, MITS netto winst na fees > €0.01
+    - NOOIT verkopen met verlies (Willem's regel)
+
+    Args:
+        candles: Laatste N candles (min 5)
+        position: Huidige positie state (None = geen positie)
+        trade_amount: EUR bedrag per trade
     """
     if len(candles) < 5:
         return {"action": "HOLD", "reason": "Te weinig data", "confidence": 0}
@@ -351,38 +367,90 @@ def _simple_decision(candles: List[Dict]) -> Dict:
     lower = mean - 2 * std
     upper = mean + 2 * std
 
-    if price <= lower:
+    base = {
+        "price": price,
+        "mean": round(mean, 2),
+        "lower": round(lower, 2),
+        "upper": round(upper, 2),
+    }
+
+    # ========== HEBBEN WE EEN POSITIE? ==========
+    if position and position.get("is_open"):
+        entry = position["entry_price"]
+        highest = max(position.get("highest_price", entry), price)
+        profit_pct = (price - entry) / entry
+        # Absolute winst in EUR (bruto)
+        bruto_profit = trade_amount * profit_pct
+        # Fees: 0.25% buy + 0.25% sell = 0.5% van trade amount
+        total_fees = trade_amount * BITVAVO_TAKER_FEE * 2
+        netto_profit = bruto_profit - total_fees
+
+        # Trailing stop activation: +1%
+        trailing_active = position.get("trailing_active", False) or profit_pct >= 0.01
+        # Trailing stop trigger: -0.4% from high
+        drop_from_high = (highest - price) / highest if highest else 0
+
+        if trailing_active and drop_from_high >= 0.004:
+            # Guard: nooit verkopen bij verlies na fees
+            if netto_profit >= 0.01:
+                return {
+                    **base,
+                    "action": "SELL",
+                    "reason": f"Trailing stop @ €{price:.2f} (drop -{drop_from_high*100:.2f}% van €{highest:.2f}). Netto: €{netto_profit:.3f}",
+                    "confidence": 0.95,
+                    "netto_profit": round(netto_profit, 3),
+                    "bruto_profit": round(bruto_profit, 3),
+                    "fees": round(total_fees, 4),
+                    "position_update": {"close": True, "highest_price": highest, "trailing_active": trailing_active},
+                }
+            else:
+                # Winst te klein voor fees, reset trailing en wacht opnieuw
+                return {
+                    **base,
+                    "action": "HOLD",
+                    "reason": f"Drop -{drop_from_high*100:.2f}% maar netto €{netto_profit:.3f} <€0.01. Reset trailing.",
+                    "confidence": 0.2,
+                    "netto_profit": round(netto_profit, 3),
+                    "position_update": {"highest_price": highest, "trailing_active": False},
+                }
+
+        # Nog in positie, nog geen exit signaal
         return {
-            "action": "BUY",
-            "reason": f"Prijs €{price:.2f} onder lower band €{lower:.2f}",
-            "confidence": min(0.9, (lower - price) / std + 0.5),
-            "price": price,
-            "mean": round(mean, 2),
-            "lower": round(lower, 2),
-            "upper": round(upper, 2),
-        }
-    elif price >= upper:
-        return {
-            "action": "SELL",
-            "reason": f"Prijs €{price:.2f} boven upper band €{upper:.2f}",
-            "confidence": min(0.9, (price - upper) / std + 0.5),
-            "price": price,
-            "mean": round(mean, 2),
-            "lower": round(lower, 2),
-            "upper": round(upper, 2),
-        }
-    else:
-        band_pos = (price - lower) / (upper - lower) if (upper - lower) > 0 else 0.5
-        return {
+            **base,
             "action": "HOLD",
-            "reason": f"Prijs €{price:.2f} in band ({band_pos:.0%})",
-            "confidence": 0.3,
-            "price": price,
-            "mean": round(mean, 2),
-            "lower": round(lower, 2),
-            "upper": round(upper, 2),
-            "band_position": round(band_pos, 2),
+            "reason": f"In positie @ €{entry:.2f}. Nu €{price:.2f} ({profit_pct*100:+.2f}%). Netto €{netto_profit:+.3f}. Trailing: {'AAN' if trailing_active else 'wacht op +1%'}",
+            "confidence": 0.5,
+            "netto_profit": round(netto_profit, 3),
+            "position_update": {"highest_price": highest, "trailing_active": trailing_active},
         }
+
+    # ========== GEEN POSITIE: ZOEK BUY SIGNAAL ==========
+    if price <= lower:
+        # Te dicht bij upper? Geen ruimte voor winst
+        distance_from_upper = (upper - price) / upper if upper > 0 else 1
+        if distance_from_upper < 0.015:  # Minder dan 1.5% ruimte tot upper
+            return {
+                **base,
+                "action": "HOLD",
+                "reason": f"Lower band geraakt maar te dicht bij upper ({distance_from_upper*100:.1f}% ruimte) — geen winstpotentieel",
+                "confidence": 0.2,
+            }
+        return {
+            **base,
+            "action": "BUY",
+            "reason": f"Prijs €{price:.2f} onder lower band €{lower:.2f}. Ruimte tot upper: {distance_from_upper*100:.1f}%",
+            "confidence": min(0.9, (lower - price) / std + 0.5),
+            "position_update": {"open": True, "entry_price": price},
+        }
+
+    band_pos = (price - lower) / (upper - lower) if (upper - lower) > 0 else 0.5
+    return {
+        **base,
+        "action": "HOLD",
+        "reason": f"Prijs €{price:.2f} in band ({band_pos:.0%}). Wacht op lower band.",
+        "confidence": 0.3,
+        "band_position": round(band_pos, 2),
+    }
 
 
 class MonitorService:
@@ -417,6 +485,8 @@ class MonitorService:
         self._auto_trade = False
         self._trade_amount = 5.0
         self._use_mock = True
+        # Position state for trailing stop
+        self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
 
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: str = "user-001",
@@ -480,6 +550,7 @@ class MonitorService:
             "start_time": self._start_time.isoformat() if self._start_time else None,
             "uptime_seconds": uptime,
             "thread_alive": self._thread.is_alive() if self._thread else False,
+            "position": self._position,
         }
 
     def get_decisions(self, limit: int = 50) -> List[Dict]:
@@ -507,19 +578,46 @@ class MonitorService:
                         if len(context_candles) > 50:
                             context_candles.pop(0)
 
-                    decision = _simple_decision(context_candles)
+                    decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
                     decision["cycle"] = self._cycles
                     decision["timestamp"] = datetime.now(timezone.utc).isoformat()
                     decision["executed"] = False
 
+                    # Apply position state updates from decision
+                    pos_update = decision.get("position_update", {})
+                    if pos_update.get("close"):
+                        # We gaan verkopen; sluit de positie na uitvoering
+                        pass  # position wordt na SELL exec gereset
+                    elif pos_update.get("highest_price") is not None:
+                        self._position["highest_price"] = pos_update["highest_price"]
+                        self._position["trailing_active"] = pos_update.get("trailing_active", self._position.get("trailing_active", False))
+
                     # Auto trade
                     if self._auto_trade and decision["action"] in ("BUY", "SELL"):
-                        if self._use_mock:
-                            result = execute_mock_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                        # Extra guard: BUY alleen als geen positie, SELL alleen als positie open
+                        can_execute = (decision["action"] == "BUY" and not self._position["is_open"]) or \
+                                      (decision["action"] == "SELL" and self._position["is_open"])
+                        if can_execute:
+                            if self._use_mock:
+                                result = execute_mock_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                            else:
+                                result = execute_real_trade(self._user_id, self._market, decision["action"], self._trade_amount)
+                            decision["executed"] = result.get("success", False)
+                            decision["execution"] = result.get("message", "")
+
+                            # Update position na succesvolle trade
+                            if decision["executed"]:
+                                if decision["action"] == "BUY":
+                                    self._position = {
+                                        "is_open": True,
+                                        "entry_price": decision.get("price", self._last_price),
+                                        "highest_price": decision.get("price", self._last_price),
+                                        "trailing_active": False,
+                                    }
+                                else:  # SELL
+                                    self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
                         else:
-                            result = execute_real_trade(self._user_id, self._market, decision["action"], self._trade_amount)
-                        decision["executed"] = result.get("success", False)
-                        decision["execution"] = result.get("message", "")
+                            decision["execution"] = f"Skipped: {'al in positie' if decision['action'] == 'BUY' else 'geen open positie'}"
 
                     self._decisions.append(decision)
                     if len(self._decisions) > 200:

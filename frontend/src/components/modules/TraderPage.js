@@ -224,11 +224,12 @@ export function TraderPage({ onNavigate }) {
             )}
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               <QuickStat label="Totaal Trades" value={stats?.total_trades || 0} icon={Activity} color="#06b6d4" />
               <QuickStat label="Gekocht" value={`\u20AC${stats?.total_buy_eur || 0}`} subtext={`${stats?.buys || 0} buys`} icon={ArrowDownRight} color="#22c55e" />
               <QuickStat label="Verkocht" value={`\u20AC${stats?.total_sell_eur || 0}`} subtext={`${stats?.sells || 0} sells`} icon={ArrowUpRight} color="#ef4444" />
-              <QuickStat label="Winst/Verlies" value={`\u20AC${stats?.profit_loss || 0}`} icon={DollarSign} color={stats?.profit_loss >= 0 ? '#22c55e' : '#ef4444'} />
+              <QuickStat label="Fees betaald" value={`\u20AC${stats?.total_fees_eur || 0}`} subtext="0.25% per trade" icon={DollarSign} color="#f59e0b" />
+              <QuickStat label="Netto P&L" value={`\u20AC${stats?.netto_pnl ?? stats?.profit_loss ?? 0}`} subtext={`Bruto: \u20AC${stats?.bruto_pnl ?? 0}`} icon={TrendingUp} color={(stats?.netto_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />
             </div>
 
             {/* Main 3-col Grid */}
@@ -292,12 +293,18 @@ export function TraderPage({ onNavigate }) {
                     {monitorStatus?.running ? (
                       <div className="space-y-3">
                         {/* Status bar */}
-                        <div className="flex items-center gap-4 text-[10px]">
+                        <div className="flex items-center gap-4 text-[10px] flex-wrap">
                           <span className="flex items-center gap-1 text-green-400"><span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Actief</span>
                           <span className="text-slate-400">Cyclus #{monitorStatus.cycles}</span>
                           <span className="text-slate-400">{monitorStatus.market} ({monitorStatus.candle_interval})</span>
                           <span className="text-slate-400">Prijs: €{monitorStatus.last_price?.toFixed(2)}</span>
                           {monitorStatus.auto_trade && <span className="text-amber-400">Auto-trade AAN</span>}
+                          {monitorStatus.position?.is_open && (
+                            <span className="px-2 py-0.5 rounded bg-green-500/20 text-green-400">
+                              LONG @ €{monitorStatus.position.entry_price?.toFixed(2)}
+                              {monitorStatus.position.trailing_active && ' 🔒 trailing'}
+                            </span>
+                          )}
                           <span className="text-slate-500 ml-auto">{monitorStatus.uptime_seconds ? `${Math.floor(monitorStatus.uptime_seconds)}s` : ''}</span>
                         </div>
                         {/* Decisions */}

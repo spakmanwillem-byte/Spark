@@ -77,6 +77,66 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const [showNotifs, setShowNotifs] = useState(false);
   const [notifs, setNotifs] = useState([]);
 
+  // Drag-to-reorder sidebar items (per sectie)
+  const [customOrder, setCustomOrder] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('sidebarOrder') || '{}');
+    } catch {
+      return {};
+    }
+  });
+  const [dragState, setDragState] = useState(null); // { sectionKey, itemId }
+
+  const saveOrder = (next) => {
+    setCustomOrder(next);
+    localStorage.setItem('sidebarOrder', JSON.stringify(next));
+  };
+
+  const applyCustomOrder = (sectionKey, items) => {
+    const order = customOrder[sectionKey];
+    if (!order || !Array.isArray(order)) return items;
+    const byId = Object.fromEntries(items.map(i => [i.id, i]));
+    const ordered = order.map(id => byId[id]).filter(Boolean);
+    // Voeg nieuwe items toe die nog niet in custom order staan
+    const known = new Set(order);
+    const newItems = items.filter(i => !known.has(i.id));
+    return [...ordered, ...newItems];
+  };
+
+  const handleDragStart = (sectionKey, itemId) => {
+    setDragState({ sectionKey, itemId });
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (sectionKey, targetItemId) => {
+    if (!dragState || dragState.sectionKey !== sectionKey || dragState.itemId === targetItemId) {
+      setDragState(null);
+      return;
+    }
+    const currentItems = applyCustomOrder(sectionKey, navigationConfig[sectionKey].items);
+    const ids = currentItems.map(i => i.id);
+    const fromIdx = ids.indexOf(dragState.itemId);
+    const toIdx = ids.indexOf(targetItemId);
+    if (fromIdx < 0 || toIdx < 0) {
+      setDragState(null);
+      return;
+    }
+    const next = [...ids];
+    const [moved] = next.splice(fromIdx, 1);
+    next.splice(toIdx, 0, moved);
+    saveOrder({ ...customOrder, [sectionKey]: next });
+    setDragState(null);
+  };
+
+  const resetOrder = () => {
+    localStorage.removeItem('sidebarOrder');
+    setCustomOrder({});
+  };
+
   // Drag-to-resize
   React.useEffect(() => {
     if (!isResizing) return;
@@ -150,8 +210,11 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4 px-3">
           {Object.entries(navigationConfig).map(([key, section]) => {
-            // Filter admin-only items for non-admins
-            const visibleItems = section.items.filter(item => !item.adminOnly || isAdmin);
+            // Filter admin-only items voor non-admins + pas custom volgorde toe
+            const visibleItems = applyCustomOrder(
+              key,
+              section.items.filter(item => !item.adminOnly || isAdmin)
+            );
             if (visibleItems.length === 0) return null;
 
             return (
@@ -163,18 +226,32 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
                 )}
                 <div className="space-y-1">
                   {visibleItems.map(item => (
-                    <NavItem 
+                    <NavItem
                       key={item.id}
                       item={item}
                       isActive={activePage === item.id}
                       isCollapsed={sidebarCollapsed}
                       onClick={() => handleNavClick(item)}
+                      draggable={!sidebarCollapsed}
+                      isDragging={dragState?.itemId === item.id}
+                      onDragStart={() => handleDragStart(key, item.id)}
+                      onDragOver={handleDragOver}
+                      onDrop={() => handleDrop(key, item.id)}
+                      onDragEnd={() => setDragState(null)}
                     />
                   ))}
                 </div>
               </div>
             );
           })}
+          {/* Reset volgorde knop */}
+          {!sidebarCollapsed && Object.keys(customOrder).length > 0 && (
+            <button onClick={resetOrder}
+              data-testid="reset-sidebar-order"
+              className="w-full mt-2 text-[10px] text-slate-600 hover:text-amber-400 transition-colors px-3 py-1">
+              ↺ Reset menuvolgorde
+            </button>
+          )}
         </nav>
 
         {/* User & Collapse */}
@@ -270,29 +347,57 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   );
 }
 
-// Navigation Item Component
-function NavItem({ item, isActive, isCollapsed, onClick }) {
+// Navigation Item Component (drag-and-drop)
+function NavItem({ item, isActive, isCollapsed, onClick, draggable, isDragging, onDragStart, onDragOver, onDrop, onDragEnd }) {
   const Icon = item.icon;
+  const [dragOver, setDragOver] = React.useState(false);
 
   return (
-    <button
-      onClick={onClick}
-      className={`
-        w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer
-        ${isActive 
-          ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' 
-          : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+    <div
+      draggable={!!draggable}
+      onDragStart={(e) => {
+        e.dataTransfer.effectAllowed = 'move';
+        onDragStart && onDragStart();
+      }}
+      onDragOver={(e) => {
+        if (onDragOver) {
+          onDragOver(e);
+          setDragOver(true);
         }
-        ${isCollapsed ? 'justify-center' : ''}
-      `}
-      title={isCollapsed ? item.label : undefined}
-      data-testid={`nav-${item.id}`}
+      }}
+      onDragLeave={() => setDragOver(false)}
+      onDrop={() => {
+        setDragOver(false);
+        onDrop && onDrop();
+      }}
+      onDragEnd={() => {
+        setDragOver(false);
+        onDragEnd && onDragEnd();
+      }}
+      className={`group relative ${dragOver ? 'ring-1 ring-amber-500/40 rounded-xl' : ''} ${isDragging ? 'opacity-40' : ''}`}
     >
-      <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : ''}`} />
-      {!isCollapsed && (
-        <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
-      )}
-    </button>
+      <button
+        onClick={onClick}
+        className={`
+          w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer
+          ${isActive
+            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+            : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+          }
+          ${isCollapsed ? 'justify-center' : ''}
+        `}
+        title={isCollapsed ? item.label : (draggable ? `${item.label} (sleep om te verplaatsen)` : item.label)}
+        data-testid={`nav-${item.id}`}
+      >
+        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : ''}`} />
+        {!isCollapsed && (
+          <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
+        )}
+        {!isCollapsed && draggable && (
+          <span className="opacity-0 group-hover:opacity-100 text-slate-600 text-xs transition-opacity cursor-grab active:cursor-grabbing">⋮⋮</span>
+        )}
+      </button>
+    </div>
   );
 }
 

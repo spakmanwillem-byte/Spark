@@ -76,6 +76,23 @@ async def get_trade_stats(user_id: str):
     total_fees = sum(float(t.get("fee", 0) or 0) for t in trades if (t.get("fee_currency") or "EUR") == "EUR")
     bruto_pnl = total_sell_eur - total_buy_eur
     netto_pnl = bruto_pnl - total_fees
+
+    # Live P&L vs baseline kapitaal
+    baseline_data = load_json(DATA_DIR.parent / "trade" / "capital_baseline.json", default={})
+    user_baseline = baseline_data.get(user_id, {})
+    baseline_eur = user_baseline.get("baseline_eur")
+    live_pnl = None
+    live_balance = None
+    if baseline_eur is not None:
+        try:
+            from modules.trade.monitor import fetch_bitvavo_balance
+            bv = fetch_bitvavo_balance(user_id)
+            if bv.get("success"):
+                live_balance = bv.get("total_eur")
+                live_pnl = round(live_balance - baseline_eur, 2)
+        except Exception:
+            pass
+
     return {
         "total_trades": len(trades),
         "buys": len(buys),
@@ -87,11 +104,42 @@ async def get_trade_stats(user_id: str):
         "avg_sell_price": round(avg_sell_price, 2),
         "total_fees_eur": round(total_fees, 2),
         "bruto_pnl": round(bruto_pnl, 2),
-        "profit_loss": round(netto_pnl, 2),  # Netto na fees (backwards compat key)
+        "profit_loss": round(netto_pnl, 2),
         "netto_pnl": round(netto_pnl, 2),
         "mock_trades": sum(1 for t in trades if t.get("mock")),
         "real_trades": sum(1 for t in trades if not t.get("mock")),
+        # Nieuwe velden
+        "baseline_eur": baseline_eur,
+        "live_balance": live_balance,
+        "live_pnl": live_pnl,
+        "baseline_set_at": user_baseline.get("set_at"),
     }
+
+
+@router.get("/baseline/{user_id}")
+async def get_baseline(user_id: str):
+    data = load_json(DATA_DIR.parent / "trade" / "capital_baseline.json", default={})
+    return {"success": True, "baseline": data.get(user_id)}
+
+
+class BaselineSetRequest(BaseModel):
+    baseline_eur: float
+    note: Optional[str] = None
+
+
+@router.post("/baseline/{user_id}")
+async def set_baseline(user_id: str, req: BaselineSetRequest):
+    """Zet/update startkapitaal baseline. Live P&L = Bitvavo balance - baseline."""
+    baseline_file = DATA_DIR.parent / "trade" / "capital_baseline.json"
+    baseline_file.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(baseline_file, default={})
+    data[user_id] = {
+        "baseline_eur": req.baseline_eur,
+        "set_at": datetime.now(timezone.utc).isoformat(),
+        "note": req.note or "Manueel ingesteld",
+    }
+    save_json(baseline_file, data)
+    return {"success": True, "baseline": data[user_id]}
 
 
 @router.get("/markets/{user_id}")

@@ -302,6 +302,24 @@ def get_summary(user_id: str) -> Dict:
     total_wins = sum(p["stats"]["wins"] for p in potjes)
     current_tier = user.get("current_tier", _current_tier(potjes))
     next_threshold = _tier_trigger_threshold(current_tier)
+
+    # Live Bitvavo balance + baseline P&L
+    live_balance = None
+    live_pnl = None
+    baseline = None
+    try:
+        baseline_file = Path(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
+        baseline_data = load_json(baseline_file, default={})
+        baseline = baseline_data.get(user_id, {}).get("baseline_eur")
+        from modules.trade.monitor import fetch_bitvavo_balance
+        bv = fetch_bitvavo_balance(user_id)
+        if bv.get("success"):
+            live_balance = bv.get("total_eur")
+            if baseline is not None and live_balance is not None:
+                live_pnl = round(live_balance - baseline, 2)
+    except Exception:
+        pass
+
     return {
         "pot_count": len(potjes),
         "total_capital": round(total_capital, 2),
@@ -316,4 +334,8 @@ def get_summary(user_id: str) -> Dict:
         "current_tier": current_tier,
         "next_tier_threshold": next_threshold,
         "progress_to_next_tier": round((total_capital + user.get("overflow_pool", 0.0)) / next_threshold * 100, 1) if next_threshold else 0,
+        # Live metrics
+        "live_balance": live_balance,
+        "live_pnl": live_pnl,
+        "baseline_eur": baseline,
     }

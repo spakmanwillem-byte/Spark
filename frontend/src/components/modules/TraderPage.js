@@ -389,10 +389,15 @@ export function TraderPage({ onNavigate }) {
                       </h3>
                       <div className="flex items-center gap-3 text-[10px]">
                         <span className="text-slate-400">Tier: <span className="text-amber-400 font-bold">{potjes.summary?.current_tier}</span></span>
-                        <span className="text-slate-400">Totaal: <span className="text-white font-medium">€{potjes.summary?.total_capital?.toFixed(2)}</span></span>
+                        <span className="text-slate-400">
+                          Live: <span className="text-white font-medium">€{(potjes.summary?.live_balance ?? potjes.summary?.total_capital)?.toFixed(2)}</span>
+                          {potjes.summary?.baseline_eur && (
+                            <span className="text-slate-500"> / €{potjes.summary.baseline_eur.toFixed(2)}</span>
+                          )}
+                        </span>
                         <span className="text-slate-400">Open: <span className="text-amber-400">{potjes.summary?.open_positions}</span>/{potjes.summary?.pot_count}</span>
-                        <span className={`${potjes.summary?.total_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                          P&L: €{potjes.summary?.total_pnl?.toFixed(3)}
+                        <span className={`${(potjes.summary?.live_pnl ?? 0) >= 0 ? 'text-green-400' : 'text-red-400'} font-medium`}>
+                          P&L: {potjes.summary?.live_pnl != null ? `€${potjes.summary.live_pnl >= 0 ? '+' : ''}${potjes.summary.live_pnl.toFixed(2)}` : `€${potjes.summary?.total_pnl?.toFixed(3)}`}
                         </span>
                         <button onClick={loadPotjes} className="text-slate-500 hover:text-white">
                           <RefreshCw className="w-3 h-3" />

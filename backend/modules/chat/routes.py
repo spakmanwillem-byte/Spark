@@ -97,16 +97,42 @@ async def process_message(req: ChatMessage):
         else:
             response["message"] = f"{prefix}Ik ken '{best['begrip']}' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?"
         response["type"] = "knowledge"
+
+        # Check of er naast de matches ook onbekende woorden in de zin staan
+        matched_words = set(m.get("matched_word", "").lower() for m in matches)
+        matched_begrippen = set(m.get("begrip", "").lower() for m in matches)
+        meaningful = snap._extract_meaningful_words(text)
+        index = snap._get_index()
+        still_unknown = [w for w in meaningful if w not in index and w not in matched_words and not any(w.startswith(b) or b.startswith(w) for b in matched_begrippen)]
+        if still_unknown:
+            created = []
+            for word in still_unknown[:5]:
+                result = snap.create_word_snap(word, text, req.user_naam)
+                if result:
+                    created.append(result["begrip"])
+            if created:
+                response["snap_suggestions"] = created
+                response["message"] += f"\n\nNieuw geleerd: **{', '.join(created)}** (opgeslagen als kaarten)"
     else:
-        # 3. Geen match - detecteer onbekende woorden voor snap suggesties
+        # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)
         index = snap._get_index()
         unknown = [w for w in meaningful if w not in index]
 
         if unknown:
+            # Automatisch snaps aanmaken voor onbekende woorden
+            created_snaps = []
+            for word in unknown[:5]:
+                result = snap.create_word_snap(word, text, req.user_naam)
+                if result:
+                    created_snaps.append(result["begrip"])
+
             response["unknown_words"] = unknown
-            response["snap_suggestions"] = unknown[:5]
-            response["message"] = f"Hmm, ik ken deze woorden nog niet: {', '.join(unknown)}. Zal ik ze opslaan als nieuwe kaarten?"
+            response["snap_suggestions"] = created_snaps
+            if created_snaps:
+                response["message"] = f"Ik ken deze woorden nog niet: **{', '.join(created_snaps)}**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!"
+            else:
+                response["message"] = f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}."
             response["type"] = "unknown"
         else:
             # Gewoon antwoord als er niks te matchen valt

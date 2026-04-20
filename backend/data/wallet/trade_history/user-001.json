@@ -1,4 +1,35 @@
 {
   "user_id": "user-001",
-  "trades": []
+  "trades": [
+    {
+      "trade_id": "71ad350b",
+      "run_id": "manual",
+      "timestamp": "2026-04-19T22:17:44.501522+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "MOCK-BUY-71ad350b",
+      "amount": 5.08,
+      "price": 371.04,
+      "filled": 5.08,
+      "status": "filled",
+      "mock": true,
+      "success": true,
+      "error": null
+    },
+    {
+      "trade_id": "5a06a934",
+      "run_id": "manual",
+      "timestamp": "2026-04-19T22:30:31.014982+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "MOCK-BUY-5a06a934",
+      "amount": 5.08,
+      "price": 370.82,
+      "filled": 5.08,
+      "status": "filled",
+      "mock": true,
+      "success": true,
+      "error": null
+    }
+  ]
 }

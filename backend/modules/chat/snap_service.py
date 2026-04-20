@@ -27,7 +27,20 @@ STOPWOORDEN = {
     "hun", "nog", "bij", "na", "al", "wel", "geen", "uit", "tot", "over",
     "hem", "haar", "zou", "worden", "heeft", "had", "kan", "dit", "zo",
     "was", "ben", "ik", "je", "jij", "hij", "zij", "wij", "mij", "we",
-    "ze", "wat", "wie", "hoe", "waar", "ja", "nee", "ok", "oké"
+    "ze", "wat", "wie", "hoe", "waar", "ja", "nee", "ok", "oké",
+    "zijn", "zal", "wil", "moet", "mag", "doe", "gaat", "komt", "heb",
+    "meer", "veel", "heel", "erg", "best", "mooi", "goed", "cool",
+    "slecht", "leuk", "fijn", "lekker", "naar", "even", "toch", "dus",
+    "want", "omdat", "toen", "hier", "daar", "alles", "iets", "niks",
+    "nooit", "altijd", "soms", "vaak", "weer", "eens", "twee", "drie",
+    "echt", "heel", "super", "gewoon", "alleen", "samen", "graag",
+    "nieuwe", "andere", "eigen", "grote", "kleine", "lang", "kort",
+    "mijn", "jouw", "zijn", "haar", "ons", "onze", "hun", "welke",
+    "deze", "die", "dit", "dat", "elk", "elke", "alle", "beide",
+    "uitleg", "voorbeeld", "informatie", "info", "bedoel", "bedoelt",
+    "vergelijk", "vergelijken", "verklaar", "verklaren", "beschrijf",
+    "weet", "weten", "denk", "denken", "vind", "vinden", "lijkt",
+    "maak", "maken", "geef", "geven", "krijg", "krijgen", "neem",
 }
 
 
@@ -106,10 +119,11 @@ class SnapNLPService:
             best_word, best_entry = found[0]
             return self._format_result(best_entry, "word_match", matched_word=best_word)
 
-        # 3. Substring zoeken (langzamer, maar vangnet)
-        for begrip, entries in index.items():
-            if q in begrip or begrip in q:
-                return self._format_result(entries[0], "partial")
+        # 3. Startswith zoeken (strikter dan substring)
+        if len(q) >= 5:
+            for begrip, entries in index.items():
+                if begrip.startswith(q) or q.startswith(begrip):
+                    return self._format_result(entries[0], "partial")
 
         return None
 
@@ -168,14 +182,15 @@ class SnapNLPService:
         return [w for w in words if w not in STOPWOORDEN and len(w) > 2]
 
     def _find_in_index(self, word, index):
-        """Zoek een woord in de index - ook als substring van begrip"""
+        """Zoek een woord in de index - alleen als het woord het begin van het begrip is of exact matcht"""
         # Exact match
         if word in index:
             return index[word]
-        # Substring: 'roadkill' matcht 'Roadkill (gamertag)'
-        for begrip, entries in index.items():
-            if word in begrip:
-                return entries
+        # Alleen matchen als het woord minimaal 5 chars is EN het begrip ermee begint
+        if len(word) >= 5:
+            for begrip, entries in index.items():
+                if begrip.startswith(word) or word.startswith(begrip):
+                    return entries
         return None
 
     # ========== SNAP CREATION ==========
@@ -278,22 +293,34 @@ class SnapNLPService:
     def detect_greeting(self, text):
         text_lower = text.lower().strip()
         greetings = self.triggers.get("greeting", {}).get("triggers", [])
-        return any(g in text_lower for g in greetings)
+        words = set(re.findall(r'\b\w+\b', text_lower))
+        return any(g in words for g in greetings)
 
     def detect_thanks(self, text):
         text_lower = text.lower().strip()
         thanks = self.triggers.get("thanks", {}).get("triggers", [])
-        return any(t in text_lower for t in thanks)
+        words = set(re.findall(r'\b\w+\b', text_lower))
+        return any(t in words for t in thanks)
 
     def detect_goodbye(self, text):
         text_lower = text.lower().strip()
         byes = self.triggers.get("goodbye", {}).get("triggers", [])
-        return any(b in text_lower for b in byes)
+        words = set(re.findall(r'\b\w+\b', text_lower))
+        return any(b in words for b in byes)
 
     def detect_how_are_you(self, text):
         text_lower = text.lower().strip()
         triggers = self.triggers.get("how_are_you", {}).get("triggers", [])
-        return any(t in text_lower for t in triggers)
+        # Multi-word triggers need substring match, single words need word boundary
+        for t in triggers:
+            if ' ' in t:
+                if t in text_lower:
+                    return True
+            else:
+                words = set(re.findall(r'\b\w+\b', text_lower))
+                if t in words:
+                    return True
+        return False
 
     def get_trigger_response(self, trigger_type):
         """Geeft een random response voor een trigger type"""

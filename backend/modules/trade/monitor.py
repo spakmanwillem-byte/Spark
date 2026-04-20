@@ -32,6 +32,7 @@ WATCHLIST_NAMES = {
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 SETTINGS_DIR = DATA_DIR / "users"
+MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 
 
 def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Dict]:
@@ -513,8 +514,55 @@ class MonitorService:
             self._decisions = []
             self._thread = threading.Thread(target=self._loop, daemon=True)
             self._thread.start()
+            self._persist_state()
             mode = "10-potjes" if use_potjes else "single"
             return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode)", "status": self.get_status()}
+
+    def _persist_state(self):
+        """Save monitor config to disk for auto-resume after restart."""
+        try:
+            MONITOR_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            state = {
+                "running": self._running,
+                "interval": self._interval,
+                "market": self._market,
+                "candle_interval": self._candle_interval,
+                "user_id": self._user_id,
+                "auto_trade": self._auto_trade,
+                "trade_amount": self._trade_amount,
+                "use_mock": self._use_mock,
+                "use_potjes": self._use_potjes,
+                "last_persisted": datetime.now(timezone.utc).isoformat(),
+            }
+            with open(MONITOR_STATE_FILE, "w") as f:
+                json.dump(state, f, indent=2)
+        except Exception as e:
+            logger.warning(f"Monitor state persist failed: {e}")
+
+    def resume_if_was_running(self) -> Dict:
+        """Herstart monitor na backend restart, als hij draaide."""
+        if not MONITOR_STATE_FILE.exists():
+            return {"resumed": False, "reason": "Geen state file"}
+        try:
+            with open(MONITOR_STATE_FILE) as f:
+                state = json.load(f)
+            if not state.get("running"):
+                return {"resumed": False, "reason": "Was niet running"}
+            result = self.start(
+                interval=state["interval"],
+                market=state["market"],
+                candle_interval=state["candle_interval"],
+                user_id=state["user_id"],
+                auto_trade=state["auto_trade"],
+                trade_amount=state["trade_amount"],
+                use_mock=state["use_mock"],
+                use_potjes=state.get("use_potjes", False),
+            )
+            logger.info(f"Monitor auto-resumed: {state['market']} {state['candle_interval']} potjes={state.get('use_potjes')}")
+            return {"resumed": True, "status": result}
+        except Exception as e:
+            logger.error(f"Auto-resume failed: {e}")
+            return {"resumed": False, "error": str(e)}
 
     def stop(self) -> Dict:
         with self._lock:
@@ -526,6 +574,7 @@ class MonitorService:
             if self._thread and self._thread.is_alive():
                 self._thread.join(timeout=5)
             self._thread = None
+            self._persist_state()  # Save: running=false so auto-resume skips
             return {"success": True, "message": "Monitor gestopt", "status": self.get_status()}
 
     def pause(self) -> Dict:

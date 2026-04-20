@@ -177,6 +177,17 @@ async def startup():
     print("   ⏳ Knowledge (pending)")
     print("   ⏳ Chat (pending)")
     print("=" * 50)
+    # Auto-resume trade monitor als die draaide voor crash/restart
+    try:
+        from modules.trade.monitor import get_monitor
+        result = get_monitor().resume_if_was_running()
+        if result.get("resumed"):
+            print(f"   🔄 Trade monitor auto-resumed")
+        else:
+            print(f"   ⏸  Trade monitor: {result.get('reason', 'idle')}")
+    except Exception as e:
+        print(f"   ⚠️  Trade monitor resume failed: {e}")
+    print("=" * 50)
 
 
 @app.on_event("shutdown")

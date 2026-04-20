@@ -946,13 +946,26 @@ function DonationsPanel({ userId }) {
   const [source, setSource] = useState('');
   const [description, setDescription] = useState('');
   const [saving, setSaving] = useState(false);
+  const [tokenInfo, setTokenInfo] = useState(null);
 
   const load = async () => {
     const res = await fetch(`${API}/api/trade/deposits/${userId}`).then(r => r.json()).catch(() => ({ deposits: [] }));
     setDeposits(res);
+    const tok = await fetch(`${API}/api/shop/token/price`).then(r => r.json()).catch(() => null);
+    setTokenInfo(tok);
   };
 
   useEffect(() => { load(); }, []); // eslint-disable-line
+
+  // Impact preview
+  const amountNum = parseFloat(amount) || 0;
+  const currentPrice = tokenInfo?.price_eur || 0;
+  const currentBalance = tokenInfo?.bitvavo_balance || 0;
+  const circulating = tokenInfo?.circulating || 1;
+  const delta = depType === 'withdrawal' ? -amountNum : amountNum;
+  const newBalance = currentBalance + delta;
+  const newPrice = circulating > 0 ? (newBalance / circulating) : currentPrice;
+  const priceImpact = newPrice - currentPrice;
 
   const save = async () => {
     if (!amount || parseFloat(amount) <= 0) return;
@@ -1028,6 +1041,23 @@ function DonationsPanel({ userId }) {
             className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
           <input data-testid="dep-description" type="text" placeholder="Omschrijving (verantwoording)" value={description} onChange={e => setDescription(e.target.value)}
             className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+
+          {/* Impact preview op ROAR token prijs */}
+          {amountNum > 0 && tokenInfo && (
+            <div className={`p-2.5 rounded-lg border ${priceImpact >= 0 ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+              <p className="text-[10px] text-slate-400 mb-1">Effect op ROAR token:</p>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-slate-400">€{currentPrice.toFixed(2)}</span>
+                <span className={priceImpact >= 0 ? 'text-green-400' : 'text-red-400'}>
+                  → €{newPrice.toFixed(2)} ({priceImpact >= 0 ? '+' : ''}€{priceImpact.toFixed(2)})
+                </span>
+              </div>
+              <p className="text-[9px] text-slate-500 mt-1">
+                {circulating} circulerende tokens • Jouw {circulating} stuk(s) = {priceImpact >= 0 ? '+' : ''}€{(priceImpact * circulating).toFixed(2)}
+              </p>
+            </div>
+          )}
+
           <button data-testid="save-deposit-btn" onClick={save} disabled={saving || !amount}
             className="w-full py-2 rounded-lg bg-purple-500 hover:bg-purple-600 text-white text-xs font-medium disabled:opacity-50">
             {saving ? 'Opslaan...' : 'Registreren & baseline bijwerken'}

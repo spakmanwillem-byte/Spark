@@ -4,8 +4,8 @@ import { AuthAPI } from '../../api';
 import { 
   Users, User, Star, Calendar, BarChart2, Edit3, 
   Trash2, Shield, Clock, MessageSquare, Award,
-  TrendingUp, Heart, ChevronRight, Search, Plus,
-  Check, X, Save
+  TrendingUp, Heart, ChevronRight, ChevronDown, Search, Plus,
+  Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot
 } from 'lucide-react';
 
 export function UsersAdminPage({ onNavigate }) {
@@ -21,6 +21,21 @@ export function UsersAdminPage({ onNavigate }) {
   const [createForm, setCreateForm] = useState({ naam: '', sleutelwoord: '', volledige_naam: '' });
   const [createError, setCreateError] = useState(null);
   const [creating, setCreating] = useState(false);
+
+  // Detail tab (overview | persons | logs)
+  const [detailTab, setDetailTab] = useState('overview');
+
+  // Persoonskaarten per user (juist schema: persons, gradatie, relatie, tags)
+  const [personCards, setPersonCards] = useState([]);
+  const [cardLoading, setCardLoading] = useState(false);
+
+  // Gesprekslogs per user
+  const [chatLogs, setChatLogs] = useState([]);
+  const [logStats, setLogStats] = useState(null);
+  const [logsLoading, setLogsLoading] = useState(false);
+  const [logSearch, setLogSearch] = useState('');
+  const [logChannel, setLogChannel] = useState(null);
+  const [expandedLogId, setExpandedLogId] = useState(null);
 
   // Load users and gradaties
   useEffect(() => {
@@ -48,7 +63,46 @@ export function UsersAdminPage({ onNavigate }) {
     setSelectedUser(user);
     setEditMode(false);
     setEditForm({});
+    setDetailTab('overview');
   };
+
+  // Load persoonskaarten op tab-switch
+  useEffect(() => {
+    if (detailTab !== 'persons' || !selectedUser) return;
+    const load = async () => {
+      setCardLoading(true);
+      try {
+        const API = process.env.REACT_APP_BACKEND_URL;
+        const res = await fetch(`${API}/api/persons/cards/${selectedUser.id}`).then(r => r.json());
+        setPersonCards(res.persons || []);
+      } catch (e) { console.error(e); }
+      setCardLoading(false);
+    };
+    load();
+  }, [detailTab, selectedUser]);
+
+  // Load gesprekslogs op tab-switch
+  useEffect(() => {
+    if (detailTab !== 'logs' || !selectedUser) return;
+    const load = async () => {
+      setLogsLoading(true);
+      try {
+        const API = process.env.REACT_APP_BACKEND_URL;
+        const params = new URLSearchParams();
+        params.append('limit', '100');
+        if (logSearch) params.append('search', logSearch);
+        if (logChannel) params.append('channel', logChannel);
+        const [logsRes, statsRes] = await Promise.all([
+          fetch(`${API}/api/chat/logs/${selectedUser.id}?${params}`).then(r => r.json()),
+          fetch(`${API}/api/chat/logs/${selectedUser.id}/stats`).then(r => r.json()),
+        ]);
+        setChatLogs(logsRes.conversations || []);
+        setLogStats(statsRes);
+      } catch (e) { console.error(e); }
+      setLogsLoading(false);
+    };
+    load();
+  }, [detailTab, selectedUser, logSearch, logChannel]);
 
   const handleCreateUser = async () => {
     setCreateError(null);
@@ -208,17 +262,49 @@ export function UsersAdminPage({ onNavigate }) {
         {selectedUser && (
           <div className="flex-1 overflow-y-auto p-6">
             <div className="max-w-5xl mx-auto">
-              {/* Link naar persoonskaarten van deze user */}
-              <button
-                data-testid="view-person-cards"
-                onClick={() => {
-                  try { sessionStorage.setItem('persons_view_user', selectedUser.id); } catch {}
-                  onNavigate && onNavigate('persons', '/modules/persons');
-                }}
-                className="mb-4 flex items-center gap-2 text-xs text-pink-400 hover:text-pink-300 transition-colors"
-              >
-                <Heart className="w-3.5 h-3.5" /> Bekijk persoonskaarten van {selectedUser.naam} →
-              </button>
+              {/* Detail tabs */}
+              <div className="flex items-center gap-1 mb-4 border-b border-slate-800">
+                <button data-testid="tab-overview" onClick={() => setDetailTab('overview')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+                    detailTab === 'overview' ? 'text-amber-400 border-amber-400' : 'text-slate-500 border-transparent hover:text-white'
+                  }`}>
+                  Overzicht
+                </button>
+                <button data-testid="tab-persons" onClick={() => setDetailTab('persons')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                    detailTab === 'persons' ? 'text-amber-400 border-amber-400' : 'text-slate-500 border-transparent hover:text-white'
+                  }`}>
+                  <Heart className="w-3.5 h-3.5" /> Persoonskaarten
+                </button>
+                <button data-testid="tab-logs" onClick={() => setDetailTab('logs')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                    detailTab === 'logs' ? 'text-amber-400 border-amber-400' : 'text-slate-500 border-transparent hover:text-white'
+                  }`}>
+                  <MessageSquare className="w-3.5 h-3.5" /> Gesprekslog
+                </button>
+              </div>
+
+              {detailTab === 'persons' && (
+                <PersonCardsView user={selectedUser} cards={personCards} loading={cardLoading} />
+              )}
+
+              {detailTab === 'logs' && (
+                <ChatLogsView
+                  user={selectedUser}
+                  logs={chatLogs}
+                  stats={logStats}
+                  loading={logsLoading}
+                  search={logSearch}
+                  setSearch={setLogSearch}
+                  channel={logChannel}
+                  setChannel={setLogChannel}
+                  expandedId={expandedLogId}
+                  setExpandedId={setExpandedLogId}
+                />
+              )}
+
+              {detailTab === 'overview' && (
+              <>
               {/* Top Row */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 {/* User Profile Card */}
@@ -545,6 +631,8 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
               </div>
+              </>
+              )}
             </div>
           </div>
         )}
@@ -599,6 +687,235 @@ export function UsersAdminPage({ onNavigate }) {
 }
 
 // (PersonCardsTab verwijderd — was dubbel; PersoonsPage heeft nu admin-modus)
+
+// =====================================================
+// Persoonskaarten weergave — juiste schema (persons met naam/relatie/gradatie/tags)
+// =====================================================
+const GRADATIE_COLORS = {
+  1: { bg: 'bg-red-500/10', text: 'text-red-400', label: 'Beheerder' },
+  2: { bg: 'bg-amber-500/10', text: 'text-amber-400', label: 'Familie' },
+  3: { bg: 'bg-green-500/10', text: 'text-green-400', label: 'Vriend' },
+  4: { bg: 'bg-blue-500/10', text: 'text-blue-400', label: 'Kennis' },
+  5: { bg: 'bg-slate-500/10', text: 'text-slate-400', label: 'Onbekend' },
+};
+
+function PersonCardsView({ user, cards, loading }) {
+  if (loading) return <div className="text-center py-12 text-xs text-slate-500">Persoonskaarten laden...</div>;
+  if (!cards || cards.length === 0) {
+    return (
+      <div className="text-center py-12 bg-slate-900/30 border border-slate-800 rounded-xl">
+        <Heart className="w-10 h-10 text-slate-700 mx-auto mb-3" />
+        <p className="text-sm text-slate-400 mb-1">{user.naam} heeft nog geen persoonskaarten</p>
+        <p className="text-xs text-slate-600">Kaarten worden aangemaakt wanneer {user.naam} personen noemt in gesprekken</p>
+      </div>
+    );
+  }
+  const byGradatie = cards.reduce((acc, c) => {
+    const g = c.gradatie || 5;
+    if (!acc[g]) acc[g] = [];
+    acc[g].push(c);
+    return acc;
+  }, {});
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-sm font-semibold text-white">Persoonskaarten van <span className="text-amber-400">{user.naam}</span></h3>
+        <p className="text-xs text-slate-500 mt-0.5">{cards.length} relaties, gegroepeerd per gradatie</p>
+      </div>
+      {[1, 2, 3, 4, 5].map(g => {
+        const group = byGradatie[g];
+        if (!group || group.length === 0) return null;
+        const style = GRADATIE_COLORS[g];
+        return (
+          <div key={g}>
+            <p className={`text-[10px] uppercase tracking-wider mb-2 font-semibold ${style.text}`}>
+              Gradatie {g} — {style.label} ({group.length})
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {group.map(p => (
+                <div key={p.id} data-testid={`person-${p.id}`}
+                  className={`${style.bg} border border-slate-800 rounded-xl p-3 hover:border-slate-700 transition-colors`}>
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center flex-shrink-0">
+                      <span className={`text-sm font-bold ${style.text}`}>{(p.naam || '?').charAt(0).toUpperCase()}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white truncate">
+                        {p.volledige_naam || p.naam}
+                        {p.is_user && <span className="ml-1.5 text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">USER</span>}
+                      </p>
+                      {p.relatie && <p className={`text-xs ${style.text}`}>{p.relatie}</p>}
+                      {p.notes && <p className="text-xs text-slate-500 mt-1 line-clamp-2">{p.notes}</p>}
+                      {p.tags && p.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-1.5">
+                          {p.tags.map((t, i) => (
+                            <span key={i} className="text-[9px] px-1.5 py-0.5 bg-slate-800 text-slate-400 rounded">{t}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// =====================================================
+// Gesprekslog weergave in user detail panel
+// =====================================================
+const CHANNEL_STYLES = {
+  spark: { icon: Sparkles, color: '#f59e0b', label: 'Spark' },
+  community: { icon: Users, color: '#a855f7', label: 'Community' },
+  prive: { icon: Lock, color: '#06b6d4', label: 'Privé' },
+};
+
+function ChatLogsView({ user, logs, stats, loading, search, setSearch, channel, setChannel, expandedId, setExpandedId }) {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-sm font-semibold text-white">Gesprekslog van <span className="text-amber-400">{user.naam}</span></h3>
+        <p className="text-xs text-slate-500 mt-0.5">{stats?.total || 0} gesprekken gelogd • gem. {stats?.avg_words || 0} woorden</p>
+      </div>
+
+      {/* Stats cards */}
+      {stats && stats.total > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="bg-slate-800/40 rounded-lg px-3 py-2">
+            <p className="text-[9px] text-slate-500 uppercase">Spark</p>
+            <p className="text-sm font-bold text-amber-400">{stats.channels?.spark || 0}</p>
+          </div>
+          <div className="bg-slate-800/40 rounded-lg px-3 py-2">
+            <p className="text-[9px] text-slate-500 uppercase">Community</p>
+            <p className="text-sm font-bold text-purple-400">{stats.channels?.community || 0}</p>
+          </div>
+          <div className="bg-slate-800/40 rounded-lg px-3 py-2">
+            <p className="text-[9px] text-slate-500 uppercase">Snaps gegenereerd</p>
+            <p className="text-sm font-bold text-blue-400">{stats.snap_count || 0}</p>
+          </div>
+          <div className="bg-slate-800/40 rounded-lg px-3 py-2">
+            <p className="text-[9px] text-slate-500 uppercase">Triggers</p>
+            <p className="text-sm font-bold text-white">{Object.values(stats.triggers || {}).reduce((a, b) => a + b, 0)}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Filters */}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="relative flex-1 min-w-[180px] max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+          <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+            placeholder="Zoek in berichten..."
+            className="w-full pl-8 pr-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none" />
+        </div>
+        {Object.entries(CHANNEL_STYLES).map(([key, cfg]) => {
+          const Icon = cfg.icon;
+          const active = channel === key;
+          return (
+            <button key={key} onClick={() => setChannel(active ? null : key)}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
+                active ? 'text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+              }`}
+              style={active ? { background: cfg.color } : undefined}>
+              <Icon className="w-3 h-3" /> {cfg.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Logs */}
+      {loading ? (
+        <div className="text-center py-12 text-xs text-slate-500">Logs laden...</div>
+      ) : logs.length === 0 ? (
+        <div className="text-center py-12 bg-slate-900/30 border border-slate-800 rounded-xl">
+          <MessageSquare className="w-10 h-10 text-slate-700 mx-auto mb-3" />
+          <p className="text-sm text-slate-400">
+            {stats?.total === 0 ? `${user.naam} heeft nog geen gesprekken` : 'Geen gesprekken matchen filter'}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+          {logs.map(c => {
+            const cfg = CHANNEL_STYLES[c.channel] || CHANNEL_STYLES.spark;
+            const Icon = cfg.icon;
+            const analysis = c.analysis || {};
+            const expanded = expandedId === c.id;
+            const ts = new Date(c.timestamp).toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' });
+            return (
+              <div key={c.id} className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+                <button onClick={() => setExpandedId(expanded ? null : c.id)}
+                  className="w-full flex items-start gap-3 p-3 text-left hover:bg-slate-900/80 transition-colors">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${cfg.color}20` }}>
+                    <Icon className="w-3 h-3" style={{ color: cfg.color }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] font-medium" style={{ color: cfg.color }}>#{c.metadata?.gesprek_nummer}</span>
+                      <span className="text-[10px] text-slate-500">{ts}</span>
+                      {analysis.trigger_type && <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">{analysis.trigger_type}</span>}
+                      {(analysis.snap_suggestions || []).length > 0 && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400">snap</span>}
+                      {(analysis.knowledge_matches || []).length > 0 && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/20 text-green-400">match</span>}
+                    </div>
+                    <p className="text-sm text-white truncate">{c.user_message}</p>
+                    <p className="text-xs text-slate-400 truncate mt-0.5">→ {c.spark_response}</p>
+                  </div>
+                  {expanded ? <ChevronDown className="w-4 h-4 text-slate-500" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                </button>
+                {expanded && (
+                  <div className="border-t border-slate-800 p-3 bg-slate-950/40 space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      <div>
+                        <p className="text-[9px] text-slate-500 uppercase mb-1">{c.user_naam}</p>
+                        <p className="text-xs text-white bg-slate-800/50 p-2 rounded whitespace-pre-wrap">{c.user_message}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] text-slate-500 uppercase mb-1">Spark</p>
+                        <p className="text-xs text-white bg-amber-500/10 p-2 rounded whitespace-pre-wrap">{c.spark_response}</p>
+                      </div>
+                    </div>
+                    {(analysis.knowledge_matches || []).length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        <span className="text-[9px] text-slate-500">Matches:</span>
+                        {analysis.knowledge_matches.map((m, i) => (
+                          <span key={i} className="text-[9px] px-1.5 py-0.5 bg-green-500/10 text-green-400 rounded flex items-center gap-0.5">
+                            <BookOpen className="w-2.5 h-2.5" />{m.begrip}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {(analysis.snap_suggestions || []).length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        <span className="text-[9px] text-slate-500">Geleerd:</span>
+                        {analysis.snap_suggestions.map((s, i) => (
+                          <span key={i} className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 text-blue-400 rounded flex items-center gap-0.5">
+                            <Zap className="w-2.5 h-2.5" />{s}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {analysis.bots_reacted && analysis.bots_reacted.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        <span className="text-[9px] text-slate-500">Bots reageerden:</span>
+                        {analysis.bots_reacted.map((b, i) => <span key={i} className="text-[9px] px-1.5 py-0.5 bg-purple-500/10 text-purple-400 rounded flex items-center gap-0.5">
+                          <Bot className="w-2.5 h-2.5" />{b}
+                        </span>)}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // Progress Bar Component
 function ProgressBar({ label, value, max, color }) {

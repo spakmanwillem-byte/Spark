@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Brain, Heart, BookOpen, Star,
   Zap, Target, MessageSquare, ChevronDown, ChevronRight,
-  Plus, Edit3, Trash2, X, Save
+  Plus, Edit3, Trash2, X, Save, Sparkles, Shield
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;

@@ -146,12 +146,28 @@ async def update_user(user_id: str, updates: dict):
 @router.delete("/users/{user_id}")
 async def delete_user(user_id: str):
     """
-    Delete user
+    Delete user. user-001 (admin) kan niet verwijderd worden.
     """
+    if user_id == "user-001":
+        raise HTTPException(status_code=403, detail="Admin gebruiker kan niet verwijderd worden")
+
     if not AuthService.delete_user(user_id):
         raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
-    
+
     return {"success": True}
+
+
+@router.post("/users/{user_id}/reset-password")
+async def reset_password(user_id: str, new_sleutelwoord: Optional[str] = None):
+    """
+    Reset sleutelwoord van gebruiker. Default: 'Welkom01'.
+    Gebruik query-param ?new_sleutelwoord=... voor custom.
+    """
+    nw = new_sleutelwoord or "Welkom01"
+    result = AuthService.reset_password(user_id, nw)
+    if not result:
+        raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
+    return {"success": True, "sleutelwoord": result, "message": f"Sleutelwoord gereset naar '{result}'"}
 
 
 # ============== GRADATIE ==============

@@ -81,6 +81,25 @@ export const AuthAPI = {
   },
 
   /**
+   * Verwijder user (admin user-001 is beschermd)
+   */
+  deleteUser: async (userId) => {
+    const response = await axios.delete(`${API}/auth/users/${userId}`);
+    return response.data;
+  },
+
+  /**
+   * Reset sleutelwoord van user (default: Welkom01)
+   */
+  resetPassword: async (userId, newSleutelwoord = null) => {
+    const url = newSleutelwoord
+      ? `${API}/auth/users/${userId}/reset-password?new_sleutelwoord=${encodeURIComponent(newSleutelwoord)}`
+      : `${API}/auth/users/${userId}/reset-password`;
+    const response = await axios.post(url);
+    return response.data;
+  },
+
+  /**
    * Haal gradaties op
    */
   getGradaties: async () => {

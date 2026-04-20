@@ -248,22 +248,37 @@ class AuthService:
     @staticmethod
     def delete_user(user_id: str) -> bool:
         """
-        Delete user
-        
-        Args:
-            user_id: User ID
-            
-        Returns:
-            True if deleted
+        Delete user.
+        Bescherming: user-001 (admin/Willem) kan niet verwijderd worden.
         """
+        if user_id == "user-001":
+            return False
+
         users = AuthService.get_all_users()
         original_len = len(users)
         users = [u for u in users if u.get("id") != user_id]
-        
+
         if len(users) < original_len:
             return AuthService._save_users(users)
-        
+
         return False
+
+    @staticmethod
+    def reset_password(user_id: str, new_sleutelwoord: str = "Welkom01") -> Optional[str]:
+        """
+        Reset sleutelwoord van een gebruiker.
+        Standaard wordt het op 'Welkom01' gezet (voor reset-verzoeken).
+        Returns het nieuwe sleutelwoord bij succes, None bij falen.
+        """
+        users = AuthService.get_all_users()
+        for user in users:
+            if user.get("id") == user_id:
+                user["sleutelwoord"] = new_sleutelwoord
+                user["sleutelwoord_reset_op"] = datetime.utcnow().isoformat()
+                if AuthService._save_users(users):
+                    print(f"[AUTH] Password reset: {user.get('naam')} -> {new_sleutelwoord}")
+                    return new_sleutelwoord
+        return None
     
     # ============== GRADATIE SYSTEM ==============
     

@@ -5,7 +5,7 @@ import {
   Users, User, Star, Calendar, BarChart2, Edit3, 
   Trash2, Shield, Clock, MessageSquare, Award,
   TrendingUp, Heart, ChevronRight, ChevronDown, Search, Plus,
-  Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot
+  Check, X, Save, Sparkles, Lock, BookOpen, Zap, Filter, Bot, KeyRound
 } from 'lucide-react';
 
 export function UsersAdminPage({ onNavigate }) {
@@ -150,6 +150,35 @@ export function UsersAdminPage({ onNavigate }) {
       setEditMode(false);
     } catch (err) {
       console.error('Failed to update user:', err);
+    }
+  };
+
+  const handleDeleteUser = async (user) => {
+    if (!user) return;
+    if (user.id === 'user-001') {
+      alert('Admin gebruiker (Willem) kan niet verwijderd worden.');
+      return;
+    }
+    if (!confirm(`Weet je zeker dat je "${user.naam}" permanent wilt verwijderen?\n\nDit verwijdert ook alle persoonskaarten en gesprekslogs die aan deze gebruiker gekoppeld zijn.`)) return;
+    try {
+      await AuthAPI.deleteUser(user.id);
+      const usersRes = await AuthAPI.getUsers();
+      const remaining = usersRes.users || [];
+      setUsers(remaining);
+      setSelectedUser(remaining[0] || null);
+    } catch (err) {
+      alert(err?.response?.data?.detail || 'Kon gebruiker niet verwijderen');
+    }
+  };
+
+  const handleResetPassword = async (user) => {
+    if (!user) return;
+    if (!confirm(`Sleutelwoord van "${user.naam}" resetten naar 'Welkom01'?\n\nDe gebruiker kan hiermee direct inloggen.`)) return;
+    try {
+      const res = await AuthAPI.resetPassword(user.id);
+      alert(`✓ Gelukt — sleutelwoord voor ${user.naam} is nu: ${res.sleutelwoord}`);
+    } catch (err) {
+      alert(err?.response?.data?.detail || 'Kon sleutelwoord niet resetten');
     }
   };
 
@@ -516,16 +545,34 @@ export function UsersAdminPage({ onNavigate }) {
                 <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-white mb-4">Acties</h3>
                   <div className="grid grid-cols-2 gap-3 mb-4">
-                    <button className="py-3 bg-amber-500/20 text-amber-400 rounded-xl font-medium hover:bg-amber-500/30 transition-colors flex items-center justify-center gap-2">
+                    <button
+                      data-testid="action-bericht"
+                      className="py-3 bg-amber-500/20 text-amber-400 rounded-xl font-medium hover:bg-amber-500/30 transition-colors flex items-center justify-center gap-2"
+                    >
                       <MessageSquare className="w-4 h-4" /> Bericht
                     </button>
-                    <button className="py-3 bg-slate-800 text-slate-300 rounded-xl font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
-                      <Shield className="w-4 h-4" /> Rechten
+                    <button
+                      data-testid="action-reset-password"
+                      onClick={() => handleResetPassword(selectedUser)}
+                      className="py-3 bg-blue-500/10 text-blue-400 rounded-xl font-medium hover:bg-blue-500/20 transition-colors flex items-center justify-center gap-2"
+                      title="Reset sleutelwoord naar Welkom01"
+                    >
+                      <KeyRound className="w-4 h-4" /> Reset WW
                     </button>
-                    <button className="py-3 bg-slate-800 text-slate-300 rounded-xl font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+                    <button
+                      data-testid="action-historie"
+                      onClick={() => setDetailTab('logs')}
+                      className="py-3 bg-slate-800 text-slate-300 rounded-xl font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2"
+                    >
                       <Clock className="w-4 h-4" /> Historie
                     </button>
-                    <button className="py-3 bg-red-500/10 text-red-400 rounded-xl font-medium hover:bg-red-500/20 transition-colors flex items-center justify-center gap-2">
+                    <button
+                      data-testid="action-delete-user"
+                      onClick={() => handleDeleteUser(selectedUser)}
+                      disabled={selectedUser?.id === 'user-001'}
+                      className="py-3 bg-red-500/10 text-red-400 rounded-xl font-medium hover:bg-red-500/20 transition-colors flex items-center justify-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                      title={selectedUser?.id === 'user-001' ? 'Admin kan niet verwijderd worden' : 'Verwijder deze gebruiker'}
+                    >
                       <Trash2 className="w-4 h-4" /> Verwijder
                     </button>
                   </div>

@@ -44,12 +44,28 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 ### BEHEER
 - [x] Mijn Profiel (incl. IBAN/bank), Gebruikers, Analytics, Instellingen
 
+## Recente toevoegingen
+- [x] Live Bitvavo trading (API keys, P&L met fees, trailing stop)
+- [x] 10-Potjes trading systeem met exponentiële volume-scaling
+- [x] Trading Context engine (S/R, trend, patronen)
+- [x] Donaties/Deposits tracker voor baseline P&L
+- [x] Draggable sidebar (reorderable nav items)
+- [x] User Admin: Add user modal + Persoonskaarten per user
+- [x] Chat Archive systeem (per-user gesprekslogs)
+- [x] Knowledge Snap systeem
+- [x] Spark Brain Bijbel CRUD endpoints (POST/PUT/DELETE /api/spark/bijbel/{section})
+- [x] **Users admin**: Verwijder knop (admin user-001 beschermd) + Reset WW knop (default Welkom01) [20 apr 2026]
+
 ## Backlog
-- [ ] Bitvavo API keys koppelen (echte trades + saldo)
+- [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)
+- [ ] 5 Test accounts voor NLP live-test (moeder, dochter, zusje, zusje's dochter, oud-collega)
+- [ ] Baseline scan rapport (triggers, knowledge cards, NLP-woordenschat vóór test)
+- [ ] Intent-laag: chat queries → live data acties (bv. "Heb je winst?" → Bitvavo P&L)
+- [ ] Triggers simplificeren (1 trigger = 1 woord, NLP synoniemen)
 - [ ] BTW-rapportage
-- [ ] Instellingen backend
 - [ ] Backtesting module
 - [ ] Knowledge Quiz
 - [ ] Knowledge kaarten context-antwoorden (Spark-stijl)
+- [ ] Core Protection & Sandbox Split (v4.1 roadmap)
 
-## Datum: 19 april 2026
+## Datum: 20 april 2026

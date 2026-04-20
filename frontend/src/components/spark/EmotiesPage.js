@@ -65,7 +65,7 @@ export function EmotiesPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="emotions" onNavigate={onNavigate}>
-      <div data-testid="emoties-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="emoties-page" className="h-full flex flex-col">
 
         {/* Banner */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">

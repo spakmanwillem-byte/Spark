@@ -77,7 +77,7 @@ export function VerbandenPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="connections" onNavigate={onNavigate}>
-      <div data-testid="verbanden-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="verbanden-page" className="h-full flex flex-col">
         {/* Banner */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">

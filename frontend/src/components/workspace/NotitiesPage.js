@@ -95,7 +95,7 @@ export function NotitiesPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="notities" onNavigate={onNavigate}>
-      <div data-testid="notities-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="notities-page" className="h-full flex flex-col">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #22c55e)' }}>

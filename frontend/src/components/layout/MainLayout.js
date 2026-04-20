@@ -68,9 +68,40 @@ export const getPageInfo = (pageId) => {
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    const stored = parseInt(localStorage.getItem('sidebarWidth') || '256', 10);
+    return isNaN(stored) ? 256 : Math.min(Math.max(stored, 200), 420);
+  });
+  const [isResizing, setIsResizing] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifs, setShowNotifs] = useState(false);
   const [notifs, setNotifs] = useState([]);
+
+  // Drag-to-resize
+  React.useEffect(() => {
+    if (!isResizing) return;
+    const handleMove = (e) => {
+      const w = Math.min(Math.max(e.clientX, 200), 420);
+      setSidebarWidth(w);
+    };
+    const handleUp = () => {
+      setIsResizing(false);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mouseup', handleUp);
+    };
+  }, [isResizing]);
+
+  React.useEffect(() => {
+    localStorage.setItem('sidebarWidth', String(sidebarWidth));
+  }, [sidebarWidth]);
 
   const userId = user?.id || 'user-001';
   const API = process.env.REACT_APP_BACKEND_URL;
@@ -97,10 +128,11 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex">
+    <div className="h-screen bg-slate-950 flex overflow-hidden">
       {/* Sidebar */}
       <aside 
-        className={`${sidebarCollapsed ? 'w-20' : 'w-64'} bg-slate-900/50 border-r border-slate-800 flex flex-col transition-all duration-300 ease-in-out flex-shrink-0`}
+        className="bg-slate-900/50 border-r border-slate-800 flex flex-col flex-shrink-0 relative"
+        style={{ width: sidebarCollapsed ? 80 : sidebarWidth, transition: isResizing ? 'none' : 'width 300ms ease-in-out' }}
       >
         {/* Logo */}
         <div className="h-16 flex items-center px-4 border-b border-slate-800">
@@ -184,10 +216,20 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
             )}
           </button>
         </div>
+
+        {/* Drag handle to resize */}
+        {!sidebarCollapsed && (
+          <div
+            data-testid="sidebar-resize-handle"
+            onMouseDown={(e) => { e.preventDefault(); setIsResizing(true); }}
+            className="absolute top-0 right-0 w-1.5 h-full cursor-col-resize hover:bg-amber-500/30 transition-colors z-10"
+            title="Sleep om sidebar breder te maken"
+          />
+        )}
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto relative">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden relative">
         {/* Top bar with notifications */}
         <div className="absolute top-3 right-4 z-30 flex items-center gap-2">
           <div className="relative">

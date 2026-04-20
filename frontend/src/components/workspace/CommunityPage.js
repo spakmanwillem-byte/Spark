@@ -68,7 +68,7 @@ export function CommunityPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="community" onNavigate={onNavigate}>
-      <div data-testid="community-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="community-page" className="h-full flex flex-col">
 
         {/* Header */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 py-3">

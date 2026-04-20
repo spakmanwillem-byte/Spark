@@ -72,7 +72,7 @@ export function PersoonsPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="persons" onNavigate={onNavigate}>
-      <div data-testid="persoons-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="persoons-page" className="h-full flex flex-col">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-3">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>

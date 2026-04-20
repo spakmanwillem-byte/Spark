@@ -18,7 +18,7 @@ export function IntegratiesPage({ onNavigate }) {
 
   return (
     <MainLayout activePage="integrations" onNavigate={onNavigate}>
-      <div data-testid="integraties-page" className="h-[calc(100vh-4rem)] flex flex-col">
+      <div data-testid="integraties-page" className="h-full flex flex-col">
         {/* Top banner with tabs */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">

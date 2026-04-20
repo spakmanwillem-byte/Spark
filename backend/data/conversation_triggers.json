@@ -81,5 +81,46 @@
     "creator": "System",
     "version": "1.1",
     "last_updated": "2026-03-24T18:40:00Z"
+  },
+  "rejection": {
+    "triggers": [
+      "nee dat bedoel ik niet",
+      "dat bedoel ik niet",
+      "niet dat",
+      "niet die",
+      "ik zoek wat anders",
+      "ik bedoel wat anders",
+      "verkeerde",
+      "verkeerd",
+      "dat klopt niet",
+      "klopt niet",
+      "niet correct",
+      "fout"
+    ],
+    "responses": [
+      "Bedoel je een ander '{begrip}'? Dan maak ik daar een nieuwe kaart voor.",
+      "Ah, je zoekt een andere '{begrip}'? Ik kan er eentje aanmaken.",
+      "Oké, dus niet deze '{begrip}'. Is het een andere betekenis?"
+    ]
+  },
+  "confirmation": {
+    "triggers": [
+      "ja",
+      "jep",
+      "yep",
+      "yes",
+      "klopt",
+      "precies",
+      "inderdaad",
+      "eindelijk",
+      "zeker",
+      "absoluut",
+      "jawel"
+    ],
+    "responses": [
+      "Top! Ik heb een nieuwe kaart '{begrip}' aangemaakt. Vul je de betekenis aan?",
+      "Gelukt — nieuwe '{begrip}' snap opgeslagen. +{xp} XP voor jou!",
+      "Mooi, ik leer weer iets nieuws. +{xp} XP erbij!"
+    ]
   }
 }

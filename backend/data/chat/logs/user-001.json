@@ -379,11 +379,159 @@
         "session_id": "default",
         "gesprek_nummer": 13
       }
+    },
+    {
+      "id": "conv-0a09a280",
+      "timestamp": "2026-04-20T11:44:21.030962+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een koffie",
+      "spark_response": "**Koffie (drinken)**: Koffie is een warme drank gemaakt van gemalen en gebrande koffiebonen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Koffie (drinken)"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 14
+      }
+    },
+    {
+      "id": "conv-c6d17d49",
+      "timestamp": "2026-04-20T11:44:21.182396+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee dat bedoel ik niet",
+      "spark_response": "Bedoel je een ander 'Koffie (drinken)'? Dan maak ik daar een nieuwe kaart voor.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "homonym_reject",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "homonym_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 15
+      }
+    },
+    {
+      "id": "conv-0e88cd66",
+      "timestamp": "2026-04-20T11:44:21.562008+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Gelukt — nieuwe 'Koffie (drinken)' snap opgeslagen. +15 XP voor jou!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "homonym_confirm",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "Koffie (drinken)"
+        ],
+        "word_count": 1,
+        "response_type": "homonym_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 16
+      }
+    },
+    {
+      "id": "conv-27cadcdf",
+      "timestamp": "2026-04-20T11:44:40.351821+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is koffie",
+      "spark_response": "**Koffie (drinken)**: Koffie is een warme drank gemaakt van gemalen en gebrande koffiebonen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Koffie (drinken)"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 17
+      }
+    },
+    {
+      "id": "conv-6e90d1a4",
+      "timestamp": "2026-04-20T11:44:40.496918+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dat bedoel ik niet",
+      "spark_response": "Bedoel je een ander 'Koffie (drinken)'? Dan maak ik daar een nieuwe kaart voor.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "homonym_reject",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "homonym_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 18
+      }
+    },
+    {
+      "id": "conv-76bb7aad",
+      "timestamp": "2026-04-20T11:44:40.632194+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 19
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 13,
-    "last_updated": "2026-04-20T11:33:41.987339+00:00"
+    "total_conversations": 19,
+    "last_updated": "2026-04-20T11:44:40.632194+00:00"
   }
 }

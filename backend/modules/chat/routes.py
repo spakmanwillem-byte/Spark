@@ -4,12 +4,18 @@ Chat Routes - Spark AI chat met Snap/NLP knowledge lookup
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
+import random
 from .snap_service import SnapNLPService
 from .emotion_service import EmotionDetectionService
 from . import chat_log_service
+from . import session_state
+from . import xp_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
+
+# XP beloning voor homoniem-disambiguatie (v3_013)
+HOMONYM_XP_BONUS = 15
 
 
 class ChatMessage(BaseModel):
@@ -55,6 +61,59 @@ async def process_message(req: ChatMessage):
     if emotion:
         response["emotion"] = emotion
 
+    # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
+    state = session_state.get_state(req.user_id) if req.user_id else {}
+
+    # -- CONFIRMATION flow: user zei eerder "nee" en Spark vroeg "bedoel je een andere X?"
+    if state.get("awaiting_homonym_confirm") and snap.detect_confirmation(text):
+        begrip = state.get("last_begrip", "")
+        original_id = state.get("last_entry_id")
+        if begrip:
+            new_entry = snap.create_homonym_variant(begrip, req.user_naam or "Gebruiker", original_id)
+            # XP grant (v3_013)
+            xp_result = xp_service.grant_xp(
+                req.user_id,
+                HOMONYM_XP_BONUS,
+                reason=f"Homoniem-disambiguatie: '{begrip}'"
+            ) if req.user_id else {"success": False}
+
+            responses = snap.triggers.get("confirmation", {}).get("responses", [])
+            tmpl = random.choice(responses) if responses else "Top! Nieuwe kaart '{begrip}' aangemaakt. +{xp} XP!"
+            response["message"] = tmpl.format(begrip=begrip, xp=HOMONYM_XP_BONUS)
+            response["type"] = "homonym_created"
+            response["snap_suggestions"] = [begrip]
+            response["homonym"] = {
+                "new_entry_id": new_entry["id"],
+                "original_id": original_id,
+                "xp_granted": HOMONYM_XP_BONUS if xp_result.get("success") else 0,
+            }
+            session_state.clear_state(req.user_id)
+            _save_log(req, response, "homonym_confirm")
+            return response
+
+    # -- REJECTION flow: user zegt "nee dat bedoel ik niet" op vorig antwoord
+    if state.get("last_begrip") and snap.detect_rejection(text):
+        begrip = state.get("last_begrip")
+        # Markeer awaiting confirmation, laatste begrip en entry_id blijven staan
+        session_state.set_state(
+            req.user_id,
+            awaiting_homonym_confirm=True,
+            last_begrip=begrip,
+            last_entry_id=state.get("last_entry_id"),
+        )
+        responses = snap.triggers.get("rejection", {}).get("responses", [])
+        tmpl = random.choice(responses) if responses else "Bedoel je een ander '{begrip}'?"
+        response["message"] = tmpl.format(begrip=begrip)
+        response["type"] = "homonym_question"
+        response["homonym"] = {"awaiting_confirm": True, "begrip": begrip}
+        _save_log(req, response, "homonym_reject")
+        return response
+
+    # Als user NIET bevestigt na een rejection-vraag → wis de awaiting flag
+    if state.get("awaiting_homonym_confirm") and not snap.detect_confirmation(text):
+        session_state.clear_state(req.user_id)
+        # Flow valt door naar normale verwerking
+
     # 1. Trigger checks
     trigger_type = None
     if snap.detect_greeting(text):
@@ -95,6 +154,14 @@ async def process_message(req: ChatMessage):
     if matches:
         response["knowledge_matches"] = matches
         best = matches[0]
+        # Sla laatste begrip op in state — voor rejection-flow (v3_012)
+        if req.user_id:
+            session_state.set_state(
+                req.user_id,
+                last_begrip=best.get("begrip", ""),
+                last_entry_id=best.get("id"),
+                awaiting_homonym_confirm=False,
+            )
         laag1 = best.get("laag1", "")
         # Emotie prefix toevoegen als gedetecteerd
         prefix = ""

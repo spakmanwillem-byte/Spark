@@ -619,11 +619,11 @@
         {
           "id": "v3_012",
           "titel": "Homoniem-disambiguatie via 'nee dat bedoel ik niet'-flow",
-          "status": "vision",
+          "status": "done",
           "priority": "medium",
-          "progress": 0,
+          "progress": 100,
           "created_date": "2026-04-20",
-          "notes": "Elegante flow: als user ontkennend reageert op een antwoord ('nee, dat bedoel ik niet'), vraagt Spark 'Bedoel je een andere [onderwerp]?'. Bij bevestiging → nieuwe snap voor zelfde begrip aangemaakt (duplicaat toegestaan, wordt via context/belangrijkheid onderscheiden). Geen complexe disambiguatie-UI nodig — conversatie lost het op. Koppelt aan v3_010 (5W+H conversatietool) om de nieuwe kaart direct te verrijken: 'Wat is dit voor soort bank?'.",
+          "notes": "Elegante flow: als user ontkennend reageert op een antwoord ('nee, dat bedoel ik niet'), vraagt Spark 'Bedoel je een andere [onderwerp]?'. Bij bevestiging → nieuwe snap voor zelfde begrip aangemaakt (duplicaat toegestaan, wordt via context/belangrijkheid onderscheiden). Geen complexe disambiguatie-UI nodig — conversatie lost het op. Koppelt aan v3_010 (5W+H conversatietool) om de nieuwe kaart direct te verrijken: 'Wat is dit voor soort bank?'.\n\n✅ GEÏMPLEMENTEERD 2026-04-20: rejection + confirmation triggers toegevoegd, session_state.py bijhoudt last_begrip/awaiting_confirm, homonym_variant snaps krijgen related_to + 'homonym_variant' tag, user krijgt 15 XP via xp_service.",
           "discovery": "20 apr 2026: user noteerde 'bank (geld), bank (meubel) nog niet opgelost, is voor later'.",
           "triggers": [
             "homoniem",
@@ -640,16 +640,17 @@
             "6. Spark maakt NIEUWE snap aan voor begrip (duplicate toegestaan)",
             "7. Achievement-event: user krijgt XP voor 'Spark geleerd' (v3_013)",
             "8. Optional: 5W+H tegenvragen om nieuwe kaart direct te vullen"
-          ]
+          ],
+          "completed_date": "2026-04-20"
         },
         {
           "id": "v3_013",
           "titel": "Achievement: 'Spark Leraar' — XP voor leren via snaps",
-          "status": "vision",
+          "status": "done",
           "priority": "medium",
-          "progress": 0,
+          "progress": 100,
           "created_date": "2026-04-20",
-          "notes": "User krijgt achievement-XP wanneer hun input leidt tot een nieuwe snap of een homoniem-disambiguatie (v3_012). Motiveert users om Spark te leren. Zorg voor anti-abuse: XP alleen bij kwaliteitsvolle snaps (bv. user vult binnen X dagen laag1 of 5W+H van eigen snap aan = bonus-XP, anders geen XP).",
+          "notes": "User krijgt achievement-XP wanneer hun input leidt tot een nieuwe snap of een homoniem-disambiguatie (v3_012). Motiveert users om Spark te leren. Zorg voor anti-abuse: XP alleen bij kwaliteitsvolle snaps (bv. user vult binnen X dagen laag1 of 5W+H van eigen snap aan = bonus-XP, anders geen XP).\n\n✅ GEÏMPLEMENTEERD 2026-04-20: rejection + confirmation triggers toegevoegd, session_state.py bijhoudt last_begrip/awaiting_confirm, homonym_variant snaps krijgen related_to + 'homonym_variant' tag, user krijgt 15 XP via xp_service.",
           "discovery": "20 apr 2026: user inzicht — 'je krijgt zo ineens veel snaps erbij vanuit een user, ik had immers achievements, komen die woorden dan wel als punten bij die user?'. Symbiotisch: user leert Spark, Spark beloont user.",
           "depends_on": [
             "v3_012 (homoniem-flow)",
@@ -660,7 +661,8 @@
             "Homoniem-disambiguatie geeft bonus-XP (zeldzamer, waardevoller)",
             "Leaderboard toont 'Top Spark Leraren'",
             "Anti-abuse: lege/nonsens-snaps geven geen XP (vereist status=reviewed of laag1 ingevuld)"
-          ]
+          ],
+          "completed_date": "2026-04-20"
         }
       ]
     },

@@ -325,6 +325,68 @@ class SnapNLPService:
                     return True
         return False
 
+    def detect_rejection(self, text):
+        """Detecteer of user 'nee dat bedoel ik niet' zegt."""
+        text_lower = text.lower().strip()
+        triggers = self.triggers.get("rejection", {}).get("triggers", [])
+        for t in triggers:
+            if ' ' in t:
+                if t in text_lower:
+                    return True
+            else:
+                words = set(re.findall(r'\b\w+\b', text_lower))
+                if t in words:
+                    return True
+        return False
+
+    def detect_confirmation(self, text):
+        """Detecteer of user 'ja/jep/klopt' zegt (korte bevestiging)."""
+        text_lower = text.lower().strip()
+        # Whole-message match voor korte bevestigingen
+        triggers = self.triggers.get("confirmation", {}).get("triggers", [])
+        # Sanitize: strip punctuation aan einde
+        stripped = re.sub(r'[.!?,\s]+$', '', text_lower)
+        if stripped in triggers:
+            return True
+        # Ook substring match voor korte berichten ('<=30 chars)
+        if len(text_lower) <= 30:
+            words = set(re.findall(r'\b\w+\b', text_lower))
+            if any(t in words for t in triggers if ' ' not in t):
+                return True
+        return False
+
+    def create_homonym_variant(self, begrip, user_naam, original_id=None):
+        """
+        Maak een duplicate snap voor een bestaand begrip (homoniem).
+        Geeft de nieuwe kaart een 'homonym_variant' tag + link naar origineel.
+        """
+        entry = {
+            "id": f"snap-{uuid.uuid4().hex[:8]}",
+            "begrip": begrip,
+            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
+            "tags": ["knowledge-snap", "homonym_variant", "auto-generated"],
+            "bron": "homonym-disambiguation",
+            "detected_by": user_naam,
+            "detected_at": datetime.now(timezone.utc).isoformat(),
+            "status": "draft",
+            "belangrijkheid": 2,
+            "usage_count": 0,
+            "topic": "",
+            "snap_context": f"Homoniem van '{begrip}' — user gaf aan andere betekenis te bedoelen",
+            "related_to": original_id,
+            "metadata": {
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "created_via": "homonym_flow",
+                "is_sentence": False,
+            },
+        }
+        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+        data["knowledge_entries"].append(entry)
+        save_json(KNOWLEDGE_FILE, data)
+        self.invalidate_cache()
+        return entry
+
     def get_trigger_response(self, trigger_type):
         """Geeft een random response voor een trigger type"""
         import random

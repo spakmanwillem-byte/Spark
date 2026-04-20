@@ -141,6 +141,21 @@ async def get_kasboeken(user_id: str = None):
             if isinstance(wval, dict) and wval.get("provider") == "bitvavo":
                 bank_info = {"provider": "Bitvavo", "balance": wval.get("balance_eur", 0)}
                 break
+        # Spark Core: saldo komt LIVE van Bitvavo
+        if eid == "spark_core":
+            try:
+                from modules.shop.routes import get_bitvavo_balance_cached
+                live = get_bitvavo_balance_cached()
+                if live is not None:
+                    saldo_override = live
+                    if bank_info:
+                        bank_info["balance"] = live
+                else:
+                    saldo_override = None
+            except Exception:
+                saldo_override = None
+        else:
+            saldo_override = None
         # Persoonlijk kasboek: haal IBAN uit user profiel
         if eid == "personal_willem" and user_id and not bank_info:
             profile_file = Path(__file__).parent.parent.parent / "data" / "users" / user_id / "profile.json"
@@ -155,8 +170,9 @@ async def get_kasboeken(user_id: str = None):
             "color": ent.get("color", "blue"),
             "income": round(income, 2),
             "expenses": round(expenses, 2),
-            "saldo": round(income - expenses, 2),
+            "saldo": round(saldo_override if saldo_override is not None else (income - expenses), 2),
             "tx_count": len(etxs),
             "bank_info": bank_info,
+            "live": saldo_override is not None,
         })
     return {"kasboeken": kasboeken}

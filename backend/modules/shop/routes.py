@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
+import time
 import uuid
 from modules.core.storage import load_json, save_json
 
@@ -23,6 +24,9 @@ ACCOUNTING_FILE = DATA_DIR / "accounting" / "transactions.json"
 TOTAL_SUPPLY = 1_000_000
 BASE_PRICE = 5.08  # Vaste prijs voor eerste 10 tokens
 FIXED_PRICE_LIMIT = 10  # Na 10 tokens: dynamische prijs
+
+# Cache voor live Bitvavo balance (30s)
+_bitvavo_cache = {"value": None, "timestamp": 0}
 
 
 def get_roar_data():
@@ -42,11 +46,35 @@ def get_circulating():
     )
 
 
+def get_bitvavo_balance_cached(user_id: str = "user-001") -> Optional[float]:
+    """Haal live Bitvavo balance op met 30s cache. Returns None bij fout."""
+    now = time.time()
+    if _bitvavo_cache["value"] is not None and (now - _bitvavo_cache["timestamp"]) < 30:
+        return _bitvavo_cache["value"]
+    try:
+        from modules.trade.monitor import fetch_bitvavo_balance
+        result = fetch_bitvavo_balance(user_id)
+        if result.get("success"):
+            total = result.get("total_eur", 0)
+            _bitvavo_cache["value"] = total
+            _bitvavo_cache["timestamp"] = now
+            return total
+    except Exception:
+        pass
+    return None
+
+
 def get_spark_core_value():
     """
-    Spark Core totale waarde = alle deposits + trading profits - withdrawals.
-    Dit is het bedrag op Bitvavo.
+    Spark Core totale waarde = LIVE Bitvavo balance (primair) OF
+    deposits + trading profits - withdrawals uit financial file (fallback).
     """
+    # PRIMAIR: Live Bitvavo balance
+    live = get_bitvavo_balance_cached()
+    if live is not None and live > 0:
+        return live
+
+    # FALLBACK: Bereken uit financial transactions
     fin = load_json(FINANCIAL_FILE, default={"transactions": []})
     total_value = 0.0
     for tx in fin.get("transactions", []):
@@ -62,20 +90,21 @@ def get_spark_core_value():
 def get_dynamic_price():
     """
     ROAR prijs model:
-    - Eerste 10 tokens: vaste prijs van €5.08
-    - Na 10 tokens: dynamisch = Spark Core waarde / circulerende tokens
+    - Tot en met 10 tokens: bodemprijs €5.08 (starterprijs)
+    - Boven dat: dynamisch = Spark Core (Bitvavo) waarde / circulerende tokens
+    - Als Bitvavo stijgt door trading → token prijs stijgt mee
     """
     circulating = get_circulating()
 
-    # Zolang er minder dan 10 tokens in omloop zijn: vaste prijs
-    if circulating < FIXED_PRICE_LIMIT:
-        return BASE_PRICE
-
-    # Dynamische prijs na 10 tokens
+    # Altijd dynamische berekening als Spark Core waarde bekend is
     try:
         total_value = get_spark_core_value()
         if circulating > 0 and total_value > 0:
-            return round(total_value / circulating, 2)
+            dynamic = round(total_value / circulating, 2)
+            # Bodem op BASE_PRICE zolang nog weinig tokens uitstaan
+            if circulating <= FIXED_PRICE_LIMIT:
+                return max(dynamic, BASE_PRICE)
+            return dynamic
     except Exception:
         pass
     return BASE_PRICE

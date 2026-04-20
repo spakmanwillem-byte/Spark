@@ -13,8 +13,22 @@ const gradatieLabels = { 1: 'Beheerder', 2: 'Familie', 3: 'Vriend', 4: 'Kennis',
 const gradatieColors = { 1: '#f59e0b', 2: '#ec4899', 3: '#22c55e', 4: '#3b82f6', 5: '#64748b' };
 
 export function PersoonsPage({ onNavigate }) {
-  const { user } = useAuth();
-  const userId = user?.id || 'user-001';
+  const { user, isAdmin } = useAuth();
+  const ownerUserId = user?.id || 'user-001';
+  // Admin kan een andere user selecteren om zijn persoonskaarten te zien
+  const [viewUserId, setViewUserId] = useState(() => {
+    try {
+      const stored = sessionStorage.getItem('persons_view_user');
+      if (stored) {
+        sessionStorage.removeItem('persons_view_user');
+        return stored;
+      }
+    } catch {}
+    return ownerUserId;
+  });
+  const [allUsers, setAllUsers] = useState([]);
+  const userId = viewUserId;
+
   const [persons, setPersons] = useState([]);
   const [relationships, setRelationships] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +37,14 @@ export function PersoonsPage({ onNavigate }) {
   const [newPerson, setNewPerson] = useState({ naam: '', relatie: '', gradatie: 5, tags: '' });
   const [expandedId, setExpandedId] = useState(null);
 
+  // Laad users lijst voor admin dropdown
   useEffect(() => {
+    if (!isAdmin) return;
+    fetch(`${API}/api/auth/users`).then(r => r.json()).then(d => setAllUsers(d.users || [])).catch(() => {});
+  }, [isAdmin]);
+
+  useEffect(() => {
+    setLoading(true);
     Promise.all([
       fetch(`${API}/api/persons/cards/${userId}`).then(r => r.json()).catch(() => ({ persons: [] })),
       fetch(`${API}/api/persons/relationships/${userId}`).then(r => r.json()).catch(() => ({ relationships: [] })),
@@ -82,6 +103,22 @@ export function PersoonsPage({ onNavigate }) {
               <h1 className="text-base font-bold text-white leading-tight">Persoonskaarten</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{persons.length} personen | {relationships.length} relaties</p>
             </div>
+            {/* Admin: user selector */}
+            {isAdmin && allUsers.length > 0 && (
+              <select
+                data-testid="admin-user-selector"
+                value={viewUserId}
+                onChange={(e) => setViewUserId(e.target.value)}
+                className="ml-4 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:border-pink-500"
+                title="Bekijk persoonskaarten van andere gebruiker (admin)"
+              >
+                {allUsers.map(u => (
+                  <option key={u.id} value={u.id}>
+                    {u.naam}{u.id === ownerUserId ? ' (jij)' : ''}
+                  </option>
+                ))}
+              </select>
+            )}
             <button data-testid="add-person-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #ec4899, #a855f7)' }}>
               <Plus className="w-3.5 h-3.5" /> Nieuw
             </button>

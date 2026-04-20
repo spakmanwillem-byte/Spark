@@ -22,15 +22,6 @@ export function UsersAdminPage({ onNavigate }) {
   const [createError, setCreateError] = useState(null);
   const [creating, setCreating] = useState(false);
 
-  // Detail tab (overview | persons)
-  const [detailTab, setDetailTab] = useState('overview');
-
-  // Persoonskaarten per user
-  const [personCards, setPersonCards] = useState([]);
-  const [cardLoading, setCardLoading] = useState(false);
-  const [showAddCard, setShowAddCard] = useState(false);
-  const [cardForm, setCardForm] = useState({ name: '', relationship: '', notes: '' });
-
   // Load users and gradaties
   useEffect(() => {
     const loadData = async () => {
@@ -57,23 +48,7 @@ export function UsersAdminPage({ onNavigate }) {
     setSelectedUser(user);
     setEditMode(false);
     setEditForm({});
-    setDetailTab('overview');
   };
-
-  // Load persoonskaarten wanneer tab switch naar 'persons'
-  useEffect(() => {
-    if (detailTab !== 'persons' || !selectedUser) return;
-    const loadCards = async () => {
-      setCardLoading(true);
-      try {
-        const API = process.env.REACT_APP_BACKEND_URL;
-        const res = await fetch(`${API}/api/persons/cards/${selectedUser.id}`).then(r => r.json());
-        setPersonCards(res.cards || []);
-      } catch (e) { console.error(e); }
-      setCardLoading(false);
-    };
-    loadCards();
-  }, [detailTab, selectedUser]);
 
   const handleCreateUser = async () => {
     setCreateError(null);
@@ -98,33 +73,6 @@ export function UsersAdminPage({ onNavigate }) {
       setCreateError(err?.response?.data?.detail || 'Kon gebruiker niet aanmaken');
     }
     setCreating(false);
-  };
-
-  const handleAddCard = async () => {
-    if (!cardForm.name.trim() || !selectedUser) return;
-    try {
-      const API = process.env.REACT_APP_BACKEND_URL;
-      await fetch(`${API}/api/persons/cards/${selectedUser.id}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: cardForm.name.trim(),
-          relationship: cardForm.relationship.trim() || 'kennis',
-          notes: cardForm.notes.trim(),
-        }),
-      });
-      const res = await fetch(`${API}/api/persons/cards/${selectedUser.id}`).then(r => r.json());
-      setPersonCards(res.cards || []);
-      setCardForm({ name: '', relationship: '', notes: '' });
-      setShowAddCard(false);
-    } catch (e) { console.error(e); }
-  };
-
-  const handleDeleteCard = async (cardId) => {
-    try {
-      const API = process.env.REACT_APP_BACKEND_URL;
-      await fetch(`${API}/api/persons/cards/${selectedUser.id}/${cardId}`, { method: 'DELETE' });
-      setPersonCards(prev => prev.filter(c => c.id !== cardId));
-    } catch (e) { console.error(e); }
   };
 
   const handleEditStart = () => {
@@ -260,47 +208,17 @@ export function UsersAdminPage({ onNavigate }) {
         {selectedUser && (
           <div className="flex-1 overflow-y-auto p-6">
             <div className="max-w-5xl mx-auto">
-              {/* Detail tabs */}
-              <div className="flex items-center gap-1 mb-4 border-b border-slate-800">
-                <button
-                  data-testid="tab-overview"
-                  onClick={() => setDetailTab('overview')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-                    detailTab === 'overview'
-                      ? 'text-amber-400 border-amber-400'
-                      : 'text-slate-500 border-transparent hover:text-white'
-                  }`}
-                >
-                  Overzicht
-                </button>
-                <button
-                  data-testid="tab-persons"
-                  onClick={() => setDetailTab('persons')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
-                    detailTab === 'persons'
-                      ? 'text-amber-400 border-amber-400'
-                      : 'text-slate-500 border-transparent hover:text-white'
-                  }`}
-                >
-                  <Heart className="w-3.5 h-3.5" />
-                  Persoonskaarten
-                </button>
-              </div>
-
-              {detailTab === 'persons' ? (
-                <PersonCardsTab
-                  user={selectedUser}
-                  cards={personCards}
-                  loading={cardLoading}
-                  showAdd={showAddCard}
-                  setShowAdd={setShowAddCard}
-                  form={cardForm}
-                  setForm={setCardForm}
-                  onAdd={handleAddCard}
-                  onDelete={handleDeleteCard}
-                />
-              ) : (
-              <>
+              {/* Link naar persoonskaarten van deze user */}
+              <button
+                data-testid="view-person-cards"
+                onClick={() => {
+                  try { sessionStorage.setItem('persons_view_user', selectedUser.id); } catch {}
+                  onNavigate && onNavigate('persons', '/modules/persons');
+                }}
+                className="mb-4 flex items-center gap-2 text-xs text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                <Heart className="w-3.5 h-3.5" /> Bekijk persoonskaarten van {selectedUser.naam} →
+              </button>
               {/* Top Row */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 {/* User Profile Card */}
@@ -627,8 +545,6 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
               </div>
-              </>
-              )}
             </div>
           </div>
         )}
@@ -682,77 +598,7 @@ export function UsersAdminPage({ onNavigate }) {
   );
 }
 
-// Persoonskaarten tab per user
-function PersonCardsTab({ user, cards, loading, showAdd, setShowAdd, form, setForm, onAdd, onDelete }) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-sm font-semibold text-white">
-            Persoonskaarten van <span className="text-amber-400">{user.naam}</span>
-          </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Wie kent {user.naam}? Relaties en context voor Spark.
-          </p>
-        </div>
-        <button data-testid="add-card-btn" onClick={() => setShowAdd(!showAdd)}
-          className="px-3 py-1.5 bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors">
-          <Plus className="w-3.5 h-3.5" /> {showAdd ? 'Annuleer' : 'Nieuwe kaart'}
-        </button>
-      </div>
-
-      {showAdd && (
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-2">
-          <input data-testid="card-name" type="text" placeholder="Naam (bv. Heidi)"
-            value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white" />
-          <input data-testid="card-relationship" type="text" placeholder="Relatie (bv. moeder)"
-            value={form.relationship} onChange={e => setForm({ ...form, relationship: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white" />
-          <textarea data-testid="card-notes" placeholder="Notities..."
-            value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} rows={2}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white resize-none" />
-          <button data-testid="save-card-btn" onClick={onAdd} disabled={!form.name.trim()}
-            className="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-medium disabled:opacity-50">
-            Kaart toevoegen
-          </button>
-        </div>
-      )}
-
-      {loading ? (
-        <div className="text-center py-12 text-xs text-slate-500">Kaarten laden...</div>
-      ) : cards.length === 0 ? (
-        <div className="text-center py-12 bg-slate-900/30 border border-slate-800 rounded-xl">
-          <Heart className="w-10 h-10 text-slate-700 mx-auto mb-3" />
-          <p className="text-sm text-slate-400 mb-1">Nog geen persoonskaarten</p>
-          <p className="text-xs text-slate-600">Voeg mensen toe die {user.naam} kent</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {cards.map(c => (
-            <div key={c.id} data-testid={`card-${c.id}`}
-              className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-amber-500/30 transition-colors group relative">
-              <button onClick={() => onDelete(c.id)}
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-red-400/70 hover:text-red-400 transition-opacity">
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-sm font-bold text-amber-400">{c.name?.charAt(0)?.toUpperCase() || '?'}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">{c.name}</p>
-                  <p className="text-xs text-amber-400">{c.relationship || 'kennis'}</p>
-                  {c.notes && <p className="text-xs text-slate-500 mt-1 line-clamp-2">{c.notes}</p>}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+// (PersonCardsTab verwijderd — was dubbel; PersoonsPage heeft nu admin-modus)
 
 // Progress Bar Component
 function ProgressBar({ label, value, max, color }) {

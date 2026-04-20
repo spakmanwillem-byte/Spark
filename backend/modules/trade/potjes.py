@@ -118,7 +118,28 @@ def _init_potjes(user_id: str) -> Dict:
 
 def get_potjes(user_id: str) -> Dict:
     data = _load(user_id)
-    return data["users"][user_id]
+    user = data["users"][user_id]
+    # Verrijk elk potje met live_value: als gesloten → aandeel in live balance
+    try:
+        baseline_file = Path(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
+        baseline_data = load_json(baseline_file, default={})
+        baseline = baseline_data.get(user_id, {}).get("baseline_eur")
+        from modules.trade.monitor import fetch_bitvavo_balance
+        bv = fetch_bitvavo_balance(user_id)
+        live_balance = bv.get("total_eur") if bv.get("success") else None
+    except Exception:
+        live_balance = None
+        baseline = None
+
+    if live_balance is not None and baseline and baseline > 0:
+        # Growth factor: live / baseline. Elke potje live_value = capital * growth
+        growth = live_balance / baseline
+        for p in user["potjes"]:
+            p["live_value"] = round(p["capital"] * growth, 4)
+    else:
+        for p in user["potjes"]:
+            p["live_value"] = p["capital"]
+    return user
 
 
 def get_available_pot(user_id: str, current_cycle: int) -> Optional[Dict]:

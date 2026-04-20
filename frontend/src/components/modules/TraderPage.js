@@ -420,12 +420,16 @@ export function TraderPage({ onNavigate }) {
                       {potjes.potjes?.map(p => {
                         const open = p.position?.is_open;
                         const pnl = p.stats?.total_pnl || 0;
+                        const liveValue = p.live_value ?? p.capital;
+                        const hasGrowth = Math.abs(liveValue - p.capital) >= 0.005;
                         return (
                           <div key={p.id} data-testid={`pot-${p.id}`}
                             className={`rounded-xl p-2.5 border ${open ? 'bg-amber-500/10 border-amber-500/30' : 'bg-slate-800/30 border-slate-700'}`}>
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-[10px] font-bold text-white">{p.id}</span>
-                              <span className="text-[9px] text-slate-400">€{p.capital?.toFixed(2)}</span>
+                              <span className={`text-[9px] font-medium ${hasGrowth ? (liveValue > p.capital ? 'text-green-400' : 'text-red-400') : 'text-slate-400'}`}>
+                                €{liveValue.toFixed(2)}
+                              </span>
                             </div>
                             {open ? (
                               <div>

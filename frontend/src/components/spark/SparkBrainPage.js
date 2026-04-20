@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import {
-  Brain, Heart, Shield, Sparkles, BookOpen, Star,
-  Zap, Target, MessageSquare, ChevronDown, ChevronRight
+  Brain, Heart, BookOpen, Star,
+  Zap, Target, MessageSquare, ChevronDown, ChevronRight,
+  Plus, Edit3, Trash2, X, Save
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -13,6 +14,15 @@ export function SparkBrainPage({ onNavigate }) {
   const [bijbel, setBijbel] = useState(null);
   const [sparkProfile, setSparkProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Editor state
+  const [editor, setEditor] = useState(null); // { section, mode: 'add'|'edit', identifier, data }
+
+  const loadBijbel = async () => {
+    const d = await fetch(`${API}/api/spark/full`).then(r => r.json()).catch(() => ({}));
+    setIdentity(d.identity || {});
+    setBijbel(d.bijbel || {});
+  };
 
   useEffect(() => {
     Promise.all([
@@ -25,6 +35,27 @@ export function SparkBrainPage({ onNavigate }) {
       setLoading(false);
     });
   }, []);
+
+  const saveItem = async () => {
+    if (!editor) return;
+    const { section, mode, identifier, data, value } = editor;
+    const url = mode === 'add'
+      ? `${API}/api/spark/bijbel/${section}`
+      : `${API}/api/spark/bijbel/${section}/${identifier}`;
+    const method = mode === 'add' ? 'POST' : 'PUT';
+    await fetch(url, {
+      method, headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: data || {}, value }),
+    });
+    setEditor(null);
+    await loadBijbel();
+  };
+
+  const deleteItem = async (section, identifier) => {
+    if (!confirm('Dit item permanent verwijderen?')) return;
+    await fetch(`${API}/api/spark/bijbel/${section}/${identifier}`, { method: 'DELETE' });
+    await loadBijbel();
+  };
 
   const sections = [
     { id: 'identiteit', label: 'Identiteit', icon: Brain, accent: '#f59e0b' },

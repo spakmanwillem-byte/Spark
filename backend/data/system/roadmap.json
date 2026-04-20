@@ -618,17 +618,48 @@
         },
         {
           "id": "v3_012",
-          "titel": "Homoniem-disambiguatie (bank 💰 vs bank 🪑)",
+          "titel": "Homoniem-disambiguatie via 'nee dat bedoel ik niet'-flow",
           "status": "vision",
-          "priority": "low",
+          "priority": "medium",
           "progress": 0,
           "created_date": "2026-04-20",
-          "notes": "Dubbele woorden met verschillende betekenis moeten gescheiden kaarten krijgen of disambiguatie in begrip-veld (bv. 'bank (geld)' vs 'bank (meubel)'). Nu pakt multi_lookup de eerste match op belangrijkheid. Mogelijke fix: als meerdere kaarten met zelfde begrip bestaan, vraagt Spark 'Welke bank bedoel je?' of gebruikt context uit rest van zin om te kiezen.",
+          "notes": "Elegante flow: als user ontkennend reageert op een antwoord ('nee, dat bedoel ik niet'), vraagt Spark 'Bedoel je een andere [onderwerp]?'. Bij bevestiging → nieuwe snap voor zelfde begrip aangemaakt (duplicaat toegestaan, wordt via context/belangrijkheid onderscheiden). Geen complexe disambiguatie-UI nodig — conversatie lost het op. Koppelt aan v3_010 (5W+H conversatietool) om de nieuwe kaart direct te verrijken: 'Wat is dit voor soort bank?'.",
           "discovery": "20 apr 2026: user noteerde 'bank (geld), bank (meubel) nog niet opgelost, is voor later'.",
           "triggers": [
             "homoniem",
-            "ambigu",
-            "disambiguatie"
+            "disambiguatie",
+            "negative-feedback",
+            "rejection-detection"
+          ],
+          "flow": [
+            "1. Spark geeft antwoord uit kaart A",
+            "2. User: 'nee dat bedoel ik niet' / 'niet dat' / 'ik zoek wat anders'",
+            "3. Spark detecteert rejection + referentie naar laatste begrip",
+            "4. Spark: 'Bedoel je een andere [begrip]?'",
+            "5. User: 'ja' (varianten: 'jep', 'yes', 'eindelijk', 'klopt')",
+            "6. Spark maakt NIEUWE snap aan voor begrip (duplicate toegestaan)",
+            "7. Achievement-event: user krijgt XP voor 'Spark geleerd' (v3_013)",
+            "8. Optional: 5W+H tegenvragen om nieuwe kaart direct te vullen"
+          ]
+        },
+        {
+          "id": "v3_013",
+          "titel": "Achievement: 'Spark Leraar' — XP voor leren via snaps",
+          "status": "vision",
+          "priority": "medium",
+          "progress": 0,
+          "created_date": "2026-04-20",
+          "notes": "User krijgt achievement-XP wanneer hun input leidt tot een nieuwe snap of een homoniem-disambiguatie (v3_012). Motiveert users om Spark te leren. Zorg voor anti-abuse: XP alleen bij kwaliteitsvolle snaps (bv. user vult binnen X dagen laag1 of 5W+H van eigen snap aan = bonus-XP, anders geen XP).",
+          "discovery": "20 apr 2026: user inzicht — 'je krijgt zo ineens veel snaps erbij vanuit een user, ik had immers achievements, komen die woorden dan wel als punten bij die user?'. Symbiotisch: user leert Spark, Spark beloont user.",
+          "depends_on": [
+            "v3_012 (homoniem-flow)",
+            "bestaand achievements-systeem"
+          ],
+          "acceptance": [
+            "Snap-creatie triggert user-XP event",
+            "Homoniem-disambiguatie geeft bonus-XP (zeldzamer, waardevoller)",
+            "Leaderboard toont 'Top Spark Leraren'",
+            "Anti-abuse: lege/nonsens-snaps geven geen XP (vereist status=reviewed of laag1 ingevuld)"
           ]
         }
       ]

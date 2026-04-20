@@ -10,6 +10,7 @@ from modules.core.storage import load_json, save_json
 from modules.trade.monitor import (
     get_monitor, fetch_candles, fetch_tickers,
     execute_mock_trade, execute_real_trade, WATCHLIST_COINS,
+    fetch_bitvavo_balance, sync_bitvavo_orders,
 )
 
 router = APIRouter(prefix="/trade", tags=["trade"])
@@ -121,10 +122,24 @@ async def get_bitvavo_status(user_id: str):
     settings_file = SETTINGS_DIR / user_id / "settings.json"
     settings = load_json(settings_file, default={})
     bitvavo = settings.get("integrations", {}).get("bitvavo", {})
+    api_key = bitvavo.get("api_key", "")
     return {
-        "connected": bool(bitvavo.get("api_key")),
+        "connected": bool(api_key) and not api_key.startswith("TEST_"),
+        "placeholder": api_key.startswith("TEST_"),
         "connected_at": bitvavo.get("connected_at"),
     }
+
+
+@router.get("/bitvavo/balance/{user_id}")
+async def get_bitvavo_balance(user_id: str):
+    """Live Bitvavo account balances (all coins + EUR) with current EUR values."""
+    return fetch_bitvavo_balance(user_id)
+
+
+@router.post("/bitvavo/sync/{user_id}")
+async def sync_bitvavo(user_id: str, market: Optional[str] = None):
+    """Importeer trade history vanuit Bitvavo naar lokale trade_history."""
+    return sync_bitvavo_orders(user_id, market)
 
 
 @router.get("/settings/{user_id}")

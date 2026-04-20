@@ -197,6 +197,144 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
         return {"success": False, "error": str(e)}
 
 
+def _bitvavo_signed_get(api_key: str, api_secret: str, endpoint: str, params: str = "") -> Dict:
+    """Helper: signed GET request to Bitvavo API."""
+    timestamp = int(time.time() * 1000)
+    full_endpoint = endpoint + (f"?{params}" if params else "")
+    msg = str(timestamp) + "GET" + full_endpoint
+    sig = hmac.new(api_secret.encode(), msg.encode(), hashlib.sha256).hexdigest()
+    headers = {
+        "Bitvavo-Access-Key": api_key,
+        "Bitvavo-Access-Signature": sig,
+        "Bitvavo-Access-Timestamp": str(timestamp),
+    }
+    url = f"https://api.bitvavo.com{full_endpoint}"
+    resp = requests.get(url, headers=headers, timeout=10)
+    if resp.status_code == 200:
+        return {"success": True, "data": resp.json()}
+    return {"success": False, "error": f"Bitvavo {resp.status_code}: {resp.text}"}
+
+
+def fetch_bitvavo_balance(user_id: str) -> Dict:
+    """Fetch live Bitvavo account balances (all coins)."""
+    settings = load_json(SETTINGS_DIR / user_id / "settings.json", default={})
+    bitvavo = settings.get("integrations", {}).get("bitvavo", {})
+    api_key = bitvavo.get("api_key")
+    api_secret = bitvavo.get("api_secret")
+    if not api_key or not api_secret:
+        return {"success": False, "error": "Geen Bitvavo API credentials"}
+    if api_key.startswith("TEST_"):
+        return {"success": False, "error": "Placeholder API keys gedetecteerd - voer echte Bitvavo keys in via Trader → Settings"}
+
+    result = _bitvavo_signed_get(api_key, api_secret, "/v2/balance")
+    if not result.get("success"):
+        return result
+
+    balances = result["data"]
+    # Enrich with EUR value using tickers
+    non_zero = [b for b in balances if float(b.get("available", 0)) + float(b.get("inOrder", 0)) > 0]
+    symbols = [b["symbol"] for b in non_zero if b["symbol"] != "EUR"]
+    price_map = {}
+    if symbols:
+        tickers = fetch_tickers(symbols)
+        price_map = {t["symbol"]: t["last"] for t in tickers}
+
+    enriched = []
+    total_eur = 0.0
+    for b in non_zero:
+        sym = b["symbol"]
+        available = float(b.get("available", 0))
+        in_order = float(b.get("inOrder", 0))
+        total_amount = available + in_order
+        if sym == "EUR":
+            eur_value = total_amount
+        else:
+            eur_value = total_amount * price_map.get(sym, 0)
+        total_eur += eur_value
+        enriched.append({
+            "symbol": sym,
+            "available": available,
+            "in_order": in_order,
+            "total": total_amount,
+            "price_eur": price_map.get(sym, 1.0 if sym == "EUR" else 0),
+            "value_eur": round(eur_value, 2),
+        })
+    enriched.sort(key=lambda x: x["value_eur"], reverse=True)
+    return {"success": True, "balances": enriched, "total_eur": round(total_eur, 2)}
+
+
+def sync_bitvavo_orders(user_id: str, market: Optional[str] = None) -> Dict:
+    """
+    Fetch executed trades from Bitvavo and add missing ones to local trade history.
+    Uses the /v2/trades endpoint which lists all fills per market.
+    """
+    settings = load_json(SETTINGS_DIR / user_id / "settings.json", default={})
+    bitvavo = settings.get("integrations", {}).get("bitvavo", {})
+    api_key = bitvavo.get("api_key")
+    api_secret = bitvavo.get("api_secret")
+    if not api_key or not api_secret:
+        return {"success": False, "error": "Geen Bitvavo API credentials"}
+    if api_key.startswith("TEST_"):
+        return {"success": False, "error": "Placeholder API keys gedetecteerd"}
+
+    # Determine markets to sync: explicit, or all markets where user holds a balance
+    markets_to_sync = [market] if market else []
+    if not markets_to_sync:
+        bal = fetch_bitvavo_balance(user_id)
+        if bal.get("success"):
+            markets_to_sync = [f"{b['symbol']}-EUR" for b in bal["balances"] if b["symbol"] != "EUR"]
+        if not markets_to_sync:
+            markets_to_sync = ["BCH-EUR"]
+
+    history_file = DATA_DIR / "wallet" / "trade_history" / f"{user_id}.json"
+    history = load_json(history_file, default={"trades": []})
+    existing_ids = {t.get("order_id") or t.get("trade_id") for t in history["trades"]}
+
+    imported = 0
+    errors = []
+    for m in markets_to_sync:
+        result = _bitvavo_signed_get(api_key, api_secret, "/v2/trades", f"market={m}&limit=500")
+        if not result.get("success"):
+            errors.append(f"{m}: {result.get('error')}")
+            continue
+        for fill in result["data"]:
+            fill_id = fill.get("id")
+            if fill_id in existing_ids:
+                continue
+            amount = float(fill.get("amount", 0))
+            price = float(fill.get("price", 0))
+            side = fill.get("side", "buy").upper()
+            trade = {
+                "trade_id": fill_id,
+                "run_id": "bitvavo_sync",
+                "timestamp": datetime.fromtimestamp(fill.get("timestamp", 0) / 1000, tz=timezone.utc).isoformat(),
+                "action": side,
+                "market": m,
+                "order_id": fill.get("orderId", fill_id),
+                "amount": round(amount * price, 8),  # EUR quote value
+                "price": price,
+                "filled": amount,
+                "status": "filled",
+                "mock": False,
+                "success": True,
+                "error": None,
+                "fee": float(fill.get("fee", 0)),
+                "fee_currency": fill.get("feeCurrency", "EUR"),
+            }
+            history["trades"].append(trade)
+            existing_ids.add(fill_id)
+            imported += 1
+
+    save_json(history_file, history)
+    return {
+        "success": True,
+        "imported": imported,
+        "total_trades": len(history["trades"]),
+        "markets_synced": markets_to_sync,
+        "errors": errors,
+    }
+
+
 def _simple_decision(candles: List[Dict]) -> Dict:
     """
     Simple Bollinger Band-like decision engine.

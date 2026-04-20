@@ -39,6 +39,9 @@ export function TraderPage({ onNavigate }) {
   const [decisions, setDecisions] = useState([]);
   const monitorPollRef = useRef(null);
 
+  // Live Bitvavo balance
+  const [bvBalance, setBvBalance] = useState(null);
+
   // Quick trade
   const [qtMarket, setQtMarket] = useState('BCH-EUR');
   const [qtSide, setQtSide] = useState('buy');
@@ -74,7 +77,11 @@ export function TraderPage({ onNavigate }) {
     fetch(`${API}/api/trade/monitor/decisions?limit=20`).then(r => r.json()).then(d => setDecisions(d.decisions || [])).catch(() => {});
   }, []);
 
-  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); }, [loadCoreData, loadLiveData, loadMonitorStatus]);
+  const loadBalance = useCallback(() => {
+    fetch(`${API}/api/trade/bitvavo/balance/${userId}`).then(r => r.json()).then(d => setBvBalance(d)).catch(() => {});
+  }, [userId]);
+
+  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
@@ -156,7 +163,11 @@ export function TraderPage({ onNavigate }) {
             </div>
             <div>
               <h1 className="text-xl font-bold text-white">Crypto Trader</h1>
-              <p className="text-xs text-slate-400">{stats?.total_trades || 0} trades | {tickers[0] ? `BCH €${tickers[0].last}` : 'Laden...'}</p>
+              <p className="text-xs text-slate-400">
+                {stats?.total_trades || 0} trades
+                {bvBalance?.success && <span className="ml-2 text-green-400">| Bitvavo: €{bvBalance.total_eur?.toFixed(2)}</span>}
+                {' | '}{tickers[0] ? `BCH €${tickers[0].last}` : 'Laden...'}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -180,6 +191,38 @@ export function TraderPage({ onNavigate }) {
           <BitvavoSettings userId={userId} status={bitvavoStatus} settings={traderSettings} />
         ) : (
           <>
+            {/* Live Bitvavo Portfolio */}
+            {bvBalance?.success && bvBalance.balances?.length > 0 && (
+              <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/5 border border-green-500/20 rounded-2xl p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                    <DollarSign className="w-4 h-4 text-green-400" /> Live Bitvavo Portfolio
+                  </h3>
+                  <div className="text-right">
+                    <p className="text-[10px] text-slate-400">Totaal</p>
+                    <p className="text-lg font-bold text-green-400">€{bvBalance.total_eur?.toFixed(2)}</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {bvBalance.balances.map(b => (
+                    <div key={b.symbol} data-testid={`balance-${b.symbol}`} className="bg-slate-900/50 rounded-xl p-3">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-bold text-white">{b.symbol}</span>
+                        <span className="text-[10px] text-green-400">€{b.value_eur?.toFixed(2)}</span>
+                      </div>
+                      <p className="text-[10px] text-slate-500">{b.total?.toFixed(6)} {b.symbol}</p>
+                      {b.symbol !== 'EUR' && <p className="text-[9px] text-slate-600">@ €{b.price_eur?.toFixed(2)}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {bvBalance && !bvBalance.success && (
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-[11px] text-amber-400 flex items-center gap-2">
+                <Key className="w-3.5 h-3.5" /> Live Bitvavo saldo niet beschikbaar: {bvBalance.error}
+              </div>
+            )}
+
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <QuickStat label="Totaal Trades" value={stats?.total_trades || 0} icon={Activity} color="#06b6d4" />
@@ -508,6 +551,22 @@ function BitvavoSettings({ userId, status, settings }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  // Live editable settings
+  const [useMock, setUseMock] = useState(settings?.use_mock !== false);
+  const [autoTrade, setAutoTrade] = useState(!!settings?.auto_trade);
+  const [tradeAmount, setTradeAmount] = useState(settings?.trade_amount || 5);
+  const [settingsSaved, setSettingsSaved] = useState(false);
+
+  // Sync state
+  const [syncing, setSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState(null);
+
+  useEffect(() => {
+    setUseMock(settings?.use_mock !== false);
+    setAutoTrade(!!settings?.auto_trade);
+    setTradeAmount(settings?.trade_amount || 5);
+  }, [settings]);
+
   const saveCredentials = async () => {
     if (!apiKey.trim() || !apiSecret.trim()) return;
     setSaving(true);
@@ -517,6 +576,23 @@ function BitvavoSettings({ userId, status, settings }) {
     });
     setSaving(false); setSaved(true);
     setApiKey(''); setApiSecret('');
+  };
+
+  const saveTraderSettings = async () => {
+    await fetch(`${API}/api/trade/settings/${userId}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ use_mock: useMock, auto_trade: autoTrade, trade_amount: parseFloat(tradeAmount) || 5 }),
+    });
+    setSettingsSaved(true);
+    setTimeout(() => setSettingsSaved(false), 2000);
+  };
+
+  const syncOrders = async () => {
+    setSyncing(true); setSyncResult(null);
+    const res = await fetch(`${API}/api/trade/bitvavo/sync/${userId}`, { method: 'POST' })
+      .then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
+    setSyncResult(res);
+    setSyncing(false);
   };
 
   return (
@@ -530,9 +606,13 @@ function BitvavoSettings({ userId, status, settings }) {
         <div className="space-y-3">
           <div className="flex items-center gap-2 p-2.5 bg-slate-800/30 rounded-lg">
             <span className="text-[10px] text-slate-500">Status:</span>
-            {status?.connected
-              ? <span className="text-[10px] text-green-400 font-medium">Verbonden</span>
-              : <span className="text-[10px] text-red-400 font-medium">Niet verbonden</span>}
+            {status?.connected ? (
+              <span className="text-[10px] text-green-400 font-medium">Verbonden (LIVE)</span>
+            ) : status?.placeholder ? (
+              <span className="text-[10px] text-amber-400 font-medium">Placeholder keys - voer echte keys in</span>
+            ) : (
+              <span className="text-[10px] text-red-400 font-medium">Niet verbonden</span>
+            )}
           </div>
           <input data-testid="bitvavo-key" type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} placeholder="API Key..."
             className="w-full px-3 py-2.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500" />
@@ -544,21 +624,83 @@ function BitvavoSettings({ userId, status, settings }) {
           </button>
         </div>
       </div>
+
+      {/* Trader instellingen - editable */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
         <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2"><Settings className="w-4 h-4 text-slate-400" /> Trader Instellingen</h3>
-        <div className="space-y-2">
-          {[
-            ['Trade bedrag', `€${settings?.trade_amount || 5}`],
-            ['Markt', settings?.market || 'BCH-EUR'],
-            ['Mock modus', settings?.use_mock !== false ? 'Aan' : 'Uit (LIVE)'],
-            ['Auto trade', settings?.auto_trade ? 'Aan' : 'Uit'],
-          ].map(([label, val]) => (
-            <div key={label} className="flex items-center justify-between p-2.5 bg-slate-800/30 rounded-lg">
-              <span className="text-xs text-slate-400">{label}</span>
-              <span className="text-xs text-white font-medium">{val}</span>
+        <div className="space-y-3">
+          {/* Mock / LIVE toggle */}
+          <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            <div>
+              <span className="text-xs text-white font-medium">Handelsmodus</span>
+              <p className="text-[10px] text-slate-500 mt-0.5">
+                {useMock ? 'Mock: trades worden gesimuleerd' : 'LIVE: echte Bitvavo orders'}
+              </p>
             </div>
-          ))}
+            <button data-testid="toggle-mock" onClick={() => setUseMock(!useMock)}
+              className={`relative w-14 h-7 rounded-full transition-colors ${useMock ? 'bg-blue-500' : 'bg-green-500'}`}>
+              <span className={`absolute top-0.5 w-6 h-6 rounded-full bg-white transition-all ${useMock ? 'left-0.5' : 'left-7'}`} />
+              <span className="absolute inset-0 flex items-center justify-center text-[9px] font-bold text-white/80 pointer-events-none">
+                {useMock ? 'MOCK' : 'LIVE'}
+              </span>
+            </button>
+          </div>
+
+          {/* Auto trade toggle */}
+          <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            <div>
+              <span className="text-xs text-white font-medium">Auto-trade</span>
+              <p className="text-[10px] text-slate-500 mt-0.5">Monitor voert BUY/SELL automatisch uit bij signaal</p>
+            </div>
+            <button data-testid="toggle-auto-trade" onClick={() => setAutoTrade(!autoTrade)}
+              className={`relative w-14 h-7 rounded-full transition-colors ${autoTrade ? 'bg-amber-500' : 'bg-slate-700'}`}>
+              <span className={`absolute top-0.5 w-6 h-6 rounded-full bg-white transition-all ${autoTrade ? 'left-7' : 'left-0.5'}`} />
+            </button>
+          </div>
+
+          {/* Trade amount */}
+          <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            <div>
+              <span className="text-xs text-white font-medium">Trade bedrag (EUR)</span>
+              <p className="text-[10px] text-slate-500 mt-0.5">Per order bij auto-trade</p>
+            </div>
+            <input data-testid="trade-amount-input" type="number" step="0.5" min="1" value={tradeAmount} onChange={e => setTradeAmount(e.target.value)}
+              className="w-24 px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white text-right focus:outline-none focus:border-amber-500" />
+          </div>
+
+          {!useMock && (
+            <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-[11px] text-red-300">
+              ⚠️ <strong>LIVE modus actief</strong> — trades gebruiken echte Bitvavo API met echt geld. Controleer alles goed voordat je Auto-trade aanzet!
+            </div>
+          )}
+
+          <button data-testid="save-trader-settings" onClick={saveTraderSettings}
+            className="w-full py-2.5 rounded-lg text-xs font-medium text-white bg-amber-500 hover:bg-amber-600 transition-colors">
+            {settingsSaved ? 'Opgeslagen ✓' : 'Instellingen opslaan'}
+          </button>
         </div>
+      </div>
+
+      {/* Sync Bitvavo orders */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2"><RefreshCw className="w-4 h-4 text-cyan-400" /> Order Historie Sync</h3>
+        <p className="text-[11px] text-slate-400 mb-3">
+          Importeer je echte Bitvavo aankopen/verkopen naar Spark's lokale trade historie. Handig voor orders die buiten Spark zijn gedaan (bv. je 10 BCH potjes).
+        </p>
+        <button data-testid="sync-bitvavo-btn" onClick={syncOrders} disabled={syncing || !status?.connected}
+          className="w-full py-2.5 rounded-lg text-xs font-medium text-white bg-cyan-500 hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          {syncing ? 'Bezig met synchroniseren...' : status?.connected ? 'Sync Bitvavo orders' : 'Eerst API keys invoeren'}
+        </button>
+        {syncResult && (
+          <div className={`mt-3 p-3 rounded-lg text-[11px] ${syncResult.success ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-red-500/10 border border-red-500/20 text-red-400'}`}>
+            {syncResult.success
+              ? `${syncResult.imported} nieuwe trades geïmporteerd (totaal: ${syncResult.total_trades}). Markten: ${syncResult.markets_synced?.join(', ')}`
+              : `Fout: ${syncResult.error}`}
+            {syncResult.errors?.length > 0 && (
+              <ul className="mt-1 ml-4 list-disc">{syncResult.errors.map((e, i) => <li key={i}>{e}</li>)}</ul>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

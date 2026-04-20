@@ -1,48 +1,46 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
-import { 
+import {
   MessageSquare, Send, Plus, Search, Users, Lock,
-  Sparkles, Heart, Smile, MoreHorizontal, Phone, Video,
-  Image, Paperclip, Mic, ChevronDown, Star, Circle,
-  Bot, User, Clock, Check, CheckCheck, Hash, BookOpen, Zap
+  Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
+  Shield, Timer
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-const initialConversations = {
-  spark: [
-    { id: 1, role: 'spark', message: 'Hallo! Ik ben Spark, je persoonlijke AI assistent. Hoe kan ik je vandaag helpen?', time: '09:00' },
-    { id: 2, role: 'user', message: 'Hey Spark! Kun je me helpen met de knowledge base?', time: '09:01' },
-    { id: 3, role: 'spark', message: 'Natuurlijk! De Knowledge Base bevat momenteel 1,847 entries verdeeld over 3 lagen. Wat wil je precies weten of toevoegen?', time: '09:01' },
-  ],
-  community: [
-    { id: 1, user: 'Maurice', avatar: 'M', message: 'Heeft iemand ervaring met de nieuwe trigger functie?', time: '14:30', color: '#a855f7' },
-    { id: 2, user: 'Lisa', avatar: 'L', message: 'Ja! Werkt super goed voor begroetingen', time: '14:32', color: '#ec4899' },
-    { id: 3, user: 'Tom', avatar: 'T', message: 'Ik heb een paar custom triggers toegevoegd, delen?', time: '14:35', color: '#06b6d4' },
-    { id: 4, user: 'Anna', avatar: 'A', message: 'Graag! Deel ze in het Ideeën kanaal', time: '14:40', color: '#10b981' },
-  ],
-  prive: [
-    { id: 1, contact: 'Harry', avatar: 'H', lastMessage: 'Tot morgen!', time: '16:45', unread: 0, online: true, color: '#22c55e' },
-    { id: 2, contact: 'Sandra', avatar: 'S', lastMessage: 'Die analyse ziet er goed uit', time: '15:30', unread: 2, online: false, color: '#f59e0b' },
-    { id: 3, contact: 'Peter', avatar: 'P', lastMessage: 'Kan je de docs delen?', time: 'Gisteren', unread: 0, online: true, color: '#3b82f6' },
-  ]
+const BOT_COLORS = {
+  'bot-madelief': { bg: 'bg-pink-500/10', text: 'text-pink-400', border: 'border-pink-500/20', icon: Sparkles, accent: '#ec4899' },
+  'bot-harry': { bg: 'bg-cyan-500/10', text: 'text-cyan-400', border: 'border-cyan-500/20', icon: Timer, accent: '#06b6d4' },
+  'bot-smith': { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', icon: Shield, accent: '#10b981' },
 };
 
-const communityRooms = [
-  { id: 'algemeen', name: 'Algemeen', members: 12 },
-  { id: 'ontwikkelaars', name: 'Ontwikkelaars', members: 5 },
-  { id: 'support', name: 'Support', members: 8 },
-  { id: 'ideeen', name: 'Ideeën', members: 15 },
+const initialSparkMessages = [
+  { id: 1, role: 'spark', message: 'Hallo! Ik ben Spark, je persoonlijke AI assistent. Hoe kan ik je vandaag helpen?', time: '09:00' },
+];
+
+const initialPriveContacts = [
+  { id: 1, contact: 'Harry', avatar: 'H', lastMessage: 'Tot morgen!', time: '16:45', unread: 0, online: true, color: '#22c55e' },
+  { id: 2, contact: 'Sandra', avatar: 'S', lastMessage: 'Die analyse ziet er goed uit', time: '15:30', unread: 2, online: false, color: '#f59e0b' },
+  { id: 3, contact: 'Peter', avatar: 'P', lastMessage: 'Kan je de docs delen?', time: 'Gisteren', unread: 0, online: true, color: '#3b82f6' },
 ];
 
 export function GesprekkenPage({ onNavigate }) {
   const { user } = useAuth();
+  const userId = user?.id || 'user-001';
+  const userName = user?.naam || 'Gebruiker';
+
   const [activeTab, setActiveTab] = useState('spark');
-  const [sparkMessages, setSparkMessages] = useState(initialConversations.spark);
+  const [sparkMessages, setSparkMessages] = useState(initialSparkMessages);
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
-  const [selectedRoom, setSelectedRoom] = useState('algemeen');
+
+  // Community bot state
+  const [communityMessages, setCommunityMessages] = useState([]);
+  const [bots, setBots] = useState([]);
+  const [communityLoading, setCommunityLoading] = useState(false);
+  const [sendingCommunity, setSendingCommunity] = useState(false);
+
   const messagesEndRef = useRef(null);
 
   const tabs = [
@@ -55,32 +53,42 @@ export function GesprekkenPage({ onNavigate }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => { scrollToBottom(); }, [sparkMessages, activeTab]);
+  useEffect(() => { scrollToBottom(); }, [sparkMessages, communityMessages, activeTab]);
+
+  // Load community bot data when tab becomes active
+  useEffect(() => {
+    if (activeTab !== 'community') return;
+    setCommunityLoading(true);
+    Promise.all([
+      fetch(`${API}/api/bots/community/messages?limit=100`).then(r => r.json()).catch(() => ({ messages: [] })),
+      fetch(`${API}/api/bots/list`).then(r => r.json()).catch(() => ({ bots: [] })),
+    ]).then(([m, b]) => {
+      setCommunityMessages((m.messages || []).reverse());
+      setBots(b.bots || []);
+      setCommunityLoading(false);
+    });
+  }, [activeTab]);
 
   const handleSend = async () => {
     if (!newMessage.trim()) return;
-    const userMsg = {
-      id: sparkMessages.length + 1,
-      role: 'user',
-      message: newMessage,
-      time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
-    };
-    setSparkMessages(prev => [...prev, userMsg]);
+    const text = newMessage.trim();
     setNewMessage('');
 
     if (activeTab === 'spark') {
-      // Echte API call naar Snap/NLP engine
+      const userMsg = {
+        id: Date.now(), role: 'user', message: text,
+        time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
+      };
+      setSparkMessages(prev => [...prev, userMsg]);
       try {
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: newMessage, user_naam: user?.naam || 'Gebruiker' }),
+          body: JSON.stringify({ message: text, user_naam: userName, user_id: userId }),
         });
         const data = await res.json();
-        
-        const sparkMsg = {
-          id: Date.now(),
-          role: 'spark',
+        setSparkMessages(prev => [...prev, {
+          id: Date.now() + 1, role: 'spark',
           message: data.message || 'Hmm, daar moet ik even over nadenken.',
           time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
           type: data.type,
@@ -88,19 +96,28 @@ export function GesprekkenPage({ onNavigate }) {
           unknown_words: data.unknown_words || [],
           snap_suggestions: data.snap_suggestions || [],
           sentiment: data.sentiment,
-        };
-        setSparkMessages(prev => [...prev, sparkMsg]);
+        }]);
       } catch (e) {
         setSparkMessages(prev => [...prev, {
-          id: Date.now(), role: 'spark',
+          id: Date.now() + 1, role: 'spark',
           message: 'Er ging iets mis met de verbinding. Probeer het opnieuw.',
           time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
         }]);
       }
+    } else if (activeTab === 'community') {
+      if (sendingCommunity) return;
+      setSendingCommunity(true);
+      const res = await fetch(`${API}/api/bots/community/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, user_id: userId, user_name: userName }),
+      }).then(r => r.json()).catch(() => ({ success: false }));
+      if (res.success) {
+        setCommunityMessages(prev => [...prev, res.message, ...(res.bot_responses || [])]);
+      }
+      setSendingCommunity(false);
     }
   };
-
-  const activeTabData = tabs.find(t => t.id === activeTab);
 
   return (
     <MainLayout activePage="chat" onNavigate={onNavigate}>
@@ -161,45 +178,54 @@ export function GesprekkenPage({ onNavigate }) {
             </div>
           )}
 
-          {/* --- COMMUNITY TAB --- */}
+          {/* --- COMMUNITY TAB (BOTS) --- */}
           {activeTab === 'community' && (
             <>
-              {/* Room list sidebar */}
+              {/* Bots sidebar */}
               <div className="w-52 md:w-60 bg-slate-900/40 border-r border-slate-800 flex flex-col flex-shrink-0">
                 <div className="p-3">
-                  <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold mb-2 px-2">Kanalen</p>
-                  {communityRooms.map(room => (
-                    <button
-                      key={room.id}
-                      data-testid={`room-${room.id}`}
-                      onClick={() => setSelectedRoom(room.id)}
-                      className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors mb-0.5 ${
-                        selectedRoom === room.id
-                          ? 'bg-purple-500/15 text-purple-300'
-                          : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
-                      }`}
-                    >
-                      <Hash className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span className="truncate">{room.name}</span>
-                      <span className="ml-auto text-[10px] text-slate-600">{room.members}</span>
-                    </button>
-                  ))}
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold mb-2 px-2">Bots online</p>
+                  {bots.length === 0 && (
+                    <p className="text-[11px] text-slate-600 px-2">Geen bots geladen</p>
+                  )}
+                  {bots.map(bot => {
+                    const style = BOT_COLORS[bot.id] || { bg: 'bg-slate-800', text: 'text-slate-400', border: 'border-slate-700', icon: Bot };
+                    const BotIcon = style.icon;
+                    return (
+                      <div
+                        key={bot.id}
+                        data-testid={`bot-${bot.id}`}
+                        className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm mb-1 ${style.bg} border ${style.border}`}
+                      >
+                        <BotIcon className={`w-3.5 h-3.5 flex-shrink-0 ${style.text}`} />
+                        <span className={`truncate text-xs ${style.text}`}>{bot.naam.split(' ')[0]}</span>
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               {/* Community messages */}
               <div className="flex-1 flex flex-col">
-                <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
-                  {initialConversations.community.map(msg => (
-                    <CommunityBubble key={msg.id} msg={msg} />
-                  ))}
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">
+                  {communityLoading ? (
+                    <p className="text-center text-slate-500 text-xs">Berichten laden...</p>
+                  ) : communityMessages.length === 0 ? (
+                    <p className="text-center text-slate-500 text-xs">Nog geen berichten. Typ iets om te starten!</p>
+                  ) : (
+                    communityMessages.map(msg => (
+                      <CommunityBubble key={msg.id} msg={msg} isOwn={msg.user_id === userId} />
+                    ))
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
                 <ChatInput
                   value={newMessage}
                   onChange={setNewMessage}
                   onSend={handleSend}
-                  placeholder="Typ een bericht..."
+                  placeholder="Typ een bericht aan de bots..."
                   accent="#a855f7"
+                  disabled={sendingCommunity}
                 />
               </div>
             </>
@@ -208,7 +234,6 @@ export function GesprekkenPage({ onNavigate }) {
           {/* --- PRIVÉ TAB --- */}
           {activeTab === 'prive' && (
             <>
-              {/* Contacts sidebar */}
               <div className="w-52 md:w-64 bg-slate-900/40 border-r border-slate-800 flex flex-col flex-shrink-0">
                 <div className="p-3">
                   <div className="relative mb-3">
@@ -221,7 +246,7 @@ export function GesprekkenPage({ onNavigate }) {
                     />
                   </div>
                   <div className="space-y-1">
-                    {initialConversations.prive.map(c => (
+                    {initialPriveContacts.map(c => (
                       <button
                         key={c.id}
                         data-testid={`contact-${c.contact.toLowerCase()}`}
@@ -257,7 +282,6 @@ export function GesprekkenPage({ onNavigate }) {
                   </div>
                 </div>
               </div>
-              {/* Private chat area */}
               <div className="flex-1 flex flex-col">
                 {!selectedContact ? (
                   <div className="flex-1 flex items-center justify-center">
@@ -270,7 +294,6 @@ export function GesprekkenPage({ onNavigate }) {
                   </div>
                 ) : (
                   <>
-                    {/* Contact header */}
                     <div className="h-14 px-5 flex items-center justify-between border-b border-slate-800 bg-slate-900/30 flex-shrink-0">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: selectedContact.color }}>
@@ -293,7 +316,6 @@ export function GesprekkenPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
-                    {/* Placeholder chat area */}
                     <div className="flex-1 overflow-y-auto p-6 flex items-center justify-center">
                       <div className="text-center">
                         <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: selectedContact.color }}>
@@ -321,30 +343,32 @@ export function GesprekkenPage({ onNavigate }) {
   );
 }
 
-/* === Reusable chat input === */
-function ChatInput({ value, onChange, onSend, placeholder, accent }) {
+/* === Chat input in framed container === */
+function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false }) {
   return (
-    <div className="p-3 border-t border-slate-800 bg-slate-900/30 flex-shrink-0">
-      <div className="flex items-center gap-2">
-        <button data-testid="attach-btn" className="p-2 hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0">
+    <div className="p-4 bg-slate-900/20 border-t border-slate-800 flex-shrink-0">
+      <div
+        className="flex items-center gap-2 max-w-4xl mx-auto bg-slate-800/60 border border-slate-700/60 rounded-2xl px-2 py-1.5 shadow-lg focus-within:border-slate-600 transition-colors"
+        style={{ '--accent': accent }}
+      >
+        <button data-testid="attach-btn" className="p-2 hover:bg-slate-700/50 rounded-xl transition-colors flex-shrink-0">
           <Plus className="w-4 h-4 text-slate-400" />
         </button>
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            data-testid="chat-input"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && onSend()}
-            placeholder={placeholder}
-            className="w-full px-4 py-2.5 bg-slate-800/50 border border-slate-700/50 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
-            style={{ '--tw-ring-color': accent }}
-          />
-        </div>
+        <input
+          type="text"
+          data-testid="chat-input"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && !disabled && onSend()}
+          placeholder={placeholder}
+          disabled={disabled}
+          className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none px-2 py-2 disabled:opacity-50"
+        />
         <button
           data-testid="send-btn"
           onClick={onSend}
-          className="p-2.5 rounded-xl transition-all flex-shrink-0"
+          disabled={disabled || !value.trim()}
+          className="p-2.5 rounded-xl transition-all flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ background: accent }}
         >
           <Send className="w-4 h-4 text-white" />
@@ -387,7 +411,6 @@ function SparkBubble({ msg }) {
             <p className="text-sm leading-relaxed whitespace-pre-line">{msg.message}</p>
             <p className={`text-[10px] mt-1 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>{msg.time}</p>
           </div>
-          {/* Knowledge matches badges */}
           {hasMatches && (
             <div className="flex flex-wrap gap-1 mt-1.5 ml-1">
               {msg.knowledge_matches.map((m, i) => (
@@ -397,7 +420,6 @@ function SparkBubble({ msg }) {
               ))}
             </div>
           )}
-          {/* Snap suggestions */}
           {hasSnaps && (
             <div className="flex flex-wrap gap-1 mt-1.5 ml-1">
               {msg.snap_suggestions.map((w, i) => (
@@ -414,20 +436,37 @@ function SparkBubble({ msg }) {
   );
 }
 
-/* === Community message bubble === */
-function CommunityBubble({ msg }) {
+/* === Community (bot) message bubble === */
+function CommunityBubble({ msg, isOwn }) {
+  const isBot = msg.is_bot;
+  const style = BOT_COLORS[msg.user_id] || {};
+  const BotIcon = style.icon || Bot;
+
   return (
-    <div className="flex items-start gap-2.5">
-      <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: msg.color }}>
-        <span className="text-white text-[10px] font-bold">{msg.avatar}</span>
+    <div data-testid={`community-msg-${msg.id}`} className={`flex gap-2.5 ${isOwn ? 'flex-row-reverse' : ''}`}>
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+        isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
+      }`}>
+        {isBot
+          ? <BotIcon className={`w-4 h-4 ${style.text || 'text-slate-400'}`} />
+          : <span className={`text-[11px] font-bold ${isOwn ? 'text-amber-400' : 'text-slate-400'}`}>{(msg.user_name || 'U').charAt(0)}</span>}
       </div>
-      <div>
+      <div className={`max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
         <div className="flex items-center gap-2 mb-0.5">
-          <span className="text-xs font-medium text-white">{msg.user}</span>
-          <span className="text-[10px] text-slate-500">{msg.time}</span>
+          <span className={`text-[10px] font-medium ${isBot ? (style.text || 'text-slate-400') : isOwn ? 'text-amber-400' : 'text-slate-300'}`}>
+            {msg.user_name}
+          </span>
+          {isBot && <span className="text-[8px] px-1 py-0.5 rounded bg-slate-800 text-slate-500">BOT</span>}
+          <span className="text-[9px] text-slate-600">
+            {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : ''}
+          </span>
         </div>
-        <div className="px-3.5 py-2 bg-slate-800 rounded-2xl rounded-tl-md">
-          <p className="text-sm text-white leading-relaxed">{msg.message}</p>
+        <div className={`inline-block px-3 py-2 rounded-xl text-sm ${
+          isBot ? `${style.bg || 'bg-slate-800/50'} border ${style.border || 'border-slate-700'} ${style.text || 'text-slate-300'}`
+            : isOwn ? 'bg-amber-500/15 border border-amber-500/20 text-white'
+            : 'bg-slate-800/50 border border-slate-700 text-slate-200'
+        }`}>
+          {msg.message}
         </div>
       </div>
     </div>

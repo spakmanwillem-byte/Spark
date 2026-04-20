@@ -50,11 +50,224 @@
         "session_id": "default",
         "gesprek_nummer": 2
       }
+    },
+    {
+      "id": "conv-cb110db7",
+      "timestamp": "2026-04-20T11:02:06.753925+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-00a56a1c",
+      "timestamp": "2026-04-20T11:02:21.690839+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil je wat dingen leren",
+      "spark_response": "**Leren**: Leren is het proces waarbij iemand nieuwe kennis, vaardigheden of begrip krijgt.\n\nNieuw geleerd: **dingen** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Leren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "dingen"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-bcd3b5cd",
+      "timestamp": "2026-04-20T11:03:04.701350+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat zou jij als eerste willen leren",
+      "spark_response": "**Leren**: Leren is het proces waarbij iemand nieuwe kennis, vaardigheden of begrip krijgt.\n\nNieuw geleerd: **eerste, willen** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Leren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "eerste",
+          "willen"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-b931ddc8",
+      "timestamp": "2026-04-20T11:04:31.645314+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ah ik zie dat jij je roadmap raadpleegt",
+      "spark_response": "Ik ken deze woorden nog niet: **zie, roadmap, raadpleegt**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "zie",
+          "roadmap",
+          "raadpleegt"
+        ],
+        "snap_suggestions": [
+          "zie",
+          "roadmap",
+          "raadpleegt"
+        ],
+        "word_count": 8,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-7c615aef",
+      "timestamp": "2026-04-20T11:06:05.042464+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik zie dat het gespek weg is als ik schakel in het gesprek tussen tabs in je sidebar",
+      "spark_response": "Ik ken 'zie' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **gespek, weg, schakel, tabs, sidebar** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zie"
+          },
+          {
+            "begrip": "Gesprekgeschiedenis"
+          },
+          {
+            "begrip": "Tussenmuur"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gespek",
+          "weg",
+          "schakel",
+          "tabs",
+          "sidebar"
+        ],
+        "word_count": 18,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-0d8cb91e",
+      "timestamp": "2026-04-20T11:06:28.530527+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dat moeten wij maken",
+      "spark_response": "Ik ken deze woorden nog niet: **moeten**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "moeten"
+        ],
+        "snap_suggestions": [
+          "moeten"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-1acb010f",
+      "timestamp": "2026-04-20T11:07:39.690034+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Al reageer je niet geheel correct. je maakt mij wel blij.",
+      "spark_response": "**Correctie**: Correctie is het aanpassen van iets om het te verbeteren of te herstellen.\n\n**Blij**: Blij is een gevoel van vreugde of tevredenheid.\n\nNieuw geleerd: **reageer, geheel, maakt** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Correctie"
+          },
+          {
+            "begrip": "Blij"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "reageer",
+          "geheel",
+          "maakt"
+        ],
+        "word_count": 11,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 9
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 2,
-    "last_updated": "2026-04-20T10:10:28.353425+00:00"
+    "total_conversations": 9,
+    "last_updated": "2026-04-20T11:07:39.690034+00:00"
   }
 }

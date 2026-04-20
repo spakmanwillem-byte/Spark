@@ -388,7 +388,9 @@ export function TraderPage({ onNavigate }) {
                         )}
                       </h3>
                       <div className="flex items-center gap-3 text-[10px]">
-                        <span className="text-slate-400">Tier: <span className="text-amber-400 font-bold">{potjes.summary?.current_tier}</span></span>
+                        <span className="text-slate-400">
+                          <span className="text-amber-400 font-bold">{potjes.summary?.pot_count}</span> × €{potjes.summary?.current_max_per_pot}
+                        </span>
                         <span className="text-slate-400">
                           Live: <span className="text-white font-medium">€{(potjes.summary?.live_balance ?? potjes.summary?.total_capital)?.toFixed(2)}</span>
                           {potjes.summary?.baseline_eur && (
@@ -404,15 +406,15 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
-                    {/* Tier progress bar */}
-                    {potjes.summary?.next_tier_threshold && (
+                    {/* Expansie progress bar naar volgende potje */}
+                    {potjes.summary?.next_pot_cost && (
                       <div className="px-4 pt-3 pb-1">
                         <div className="flex items-center justify-between text-[10px] text-slate-500 mb-1">
-                          <span>Tier {potjes.summary.current_tier + 1} bij €{potjes.summary.next_tier_threshold}</span>
-                          <span>{potjes.summary.progress_to_next_tier}%</span>
+                          <span>Potje #{potjes.summary.next_pot_number} (€{potjes.summary.next_pot_max}) bij €{potjes.summary.next_pot_cost} overflow</span>
+                          <span>{potjes.summary.expansion_progress_pct}%</span>
                         </div>
                         <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all" style={{ width: `${Math.min(100, potjes.summary.progress_to_next_tier)}%` }} />
+                          <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all" style={{ width: `${Math.min(100, potjes.summary.expansion_progress_pct)}%` }} />
                         </div>
                       </div>
                     )}

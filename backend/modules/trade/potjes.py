@@ -17,49 +17,41 @@ from modules.core.storage import load_json, save_json
 POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
 
 START_AMOUNT = 5.08
-MAX_POT_SIZE = 10.0
 DEFAULT_POT_COUNT = 10
+INITIAL_MAX = 10.0  # tier 1: 10 potjes à max €10
 BITVAVO_TAKER_FEE = 0.0025
 
-# Niet-lineaire expansie: bij €108 (tier 1 compleet + 8% buffer)
-# start tier 2 met grotere potjes. Elke tier verdubbelt pot-grootte.
-TIER_TRIGGER_MULTIPLIER = 1.08  # 8% buffer over tier-capaciteit
-TIER_GROWTH_FACTOR = 2.0  # pot-grootte verdubbelt per tier
-POTJES_PER_TIER = 5  # aantal nieuwe potjes per tier
+# Groei-regel: N potjes → max €N per potje → totaal €N²
+# Bij uitbreiding: bestaande potjes groeien mee naar nieuwe maximum
 
 
-def _tier_config(tier: int) -> Dict:
+def _max_size_for_count(pot_count: int) -> float:
     """
-    Tier 1: 10 potjes, start €5.08, max €10
-    Tier 2: +5 potjes, start €10, max €20 (trigger bij €108 totaal)
-    Tier 3: +5 potjes, start €20, max €40 (trigger bij €216 totaal)
-    Tier N: +5 potjes, start = €5.08 * 2^(N-1), max = €10 * 2^(N-1)
+    Max size per potje op basis van totaal aantal potjes.
+    - Tot 10 potjes: €10 per potje (starter tier)
+    - 11 potjes: €11 per potje
+    - 12 potjes: €12 per potje
+    - N potjes: €N per potje
     """
-    if tier == 1:
-        return {"count": DEFAULT_POT_COUNT, "start": START_AMOUNT, "max": MAX_POT_SIZE}
-    factor = TIER_GROWTH_FACTOR ** (tier - 1)
-    return {"count": POTJES_PER_TIER, "start": round(START_AMOUNT * factor, 2), "max": round(MAX_POT_SIZE * factor, 2)}
+    if pot_count <= DEFAULT_POT_COUNT:
+        return INITIAL_MAX
+    return float(pot_count)
 
 
-def _current_tier(potjes: List[Dict]) -> int:
-    """Bepaal huidige tier op basis van hoogste potje max."""
-    if not potjes:
-        return 1
-    max_size = max(p.get("max_size", MAX_POT_SIZE) for p in potjes)
-    tier = 1
-    while MAX_POT_SIZE * (TIER_GROWTH_FACTOR ** (tier - 1)) < max_size:
-        tier += 1
-    return tier
-
-
-def _tier_trigger_threshold(tier: int) -> float:
-    """Totaal capital waarop volgende tier moet starten."""
-    # Som van alle tiers tot en met `tier`:
-    total = 0.0
-    for t in range(1, tier + 1):
-        cfg = _tier_config(t)
-        total += cfg["count"] * cfg["max"]
-    return round(total * TIER_TRIGGER_MULTIPLIER, 2)
+def _expansion_cost(current_count: int) -> float:
+    """
+    Kosten om van N naar N+1 potjes te gaan:
+    - Groei alle N potjes van €N naar €(N+1): +€1 per potje = N
+    - Nieuwe potje #(N+1) = €(N+1)
+    - Totaal: N + (N+1) = 2N+1
+    """
+    if current_count < DEFAULT_POT_COUNT:
+        return 0  # Niet mogelijk
+    if current_count == DEFAULT_POT_COUNT:
+        # Van 10 × €10 naar 11 × €11: +€1 × 10 + €11 = €21
+        return 2 * DEFAULT_POT_COUNT + 1  # = 21
+    # Van N × €N naar (N+1) × €(N+1): +€1 × N + €(N+1) = 2N+1
+    return 2 * current_count + 1
 
 
 def _load(user_id: str) -> Dict:
@@ -77,17 +69,15 @@ def _save(data: Dict):
 
 
 def _init_potjes(user_id: str) -> Dict:
-    """Maak initiële 10 potjes à €5.08 voor user."""
+    """Maak initiële 10 potjes à €5.08 voor user. Groeien tot max €10 per potje."""
     now = datetime.now(timezone.utc).isoformat()
-    cfg = _tier_config(1)
     potjes = []
-    for i in range(cfg["count"]):
+    for i in range(DEFAULT_POT_COUNT):
         potjes.append({
             "id": f"pot-{i+1:03d}",
             "index": i,
-            "tier": 1,
-            "capital": cfg["start"],
-            "max_size": cfg["max"],
+            "capital": START_AMOUNT,
+            "max_size": INITIAL_MAX,
             "position": {
                 "is_open": False,
                 "entry_price": None,
@@ -111,7 +101,6 @@ def _init_potjes(user_id: str) -> Dict:
         "potjes": potjes,
         "last_buy_cycle": None,
         "overflow_pool": 0.0,
-        "current_tier": 1,
         "created_at": now,
     }
 
@@ -212,7 +201,7 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             # Update capital (cap at MAX_POT_SIZE, overflow gaat in overflow bucket)
             new_capital = capital + netto
             overflow = 0.0
-            pot_max = p.get("max_size", MAX_POT_SIZE)
+            pot_max = p.get("max_size", INITIAL_MAX)
             if new_capital > pot_max:
                 overflow = new_capital - pot_max
                 new_capital = pot_max
@@ -235,7 +224,22 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             user.setdefault("overflow_pool", 0.0)
             user["overflow_pool"] = round(user["overflow_pool"] + overflow, 4)
             _save(data)
-            return {"pot": p, "netto": round(netto, 4), "overflow": overflow}
+            # Probeer automatisch te expanderen als mogelijk
+            auto_expansion = None
+            try:
+                # Reload om geupdate overflow te zien
+                check_data = _load(user_id)
+                check_user = check_data["users"][user_id]
+                check_potjes = check_user["potjes"]
+                check_count = len(check_potjes)
+                check_max = _max_size_for_count(check_count)
+                all_max = all(cp["capital"] >= check_max - 0.01 for cp in check_potjes)
+                check_cost = _expansion_cost(check_count)
+                if all_max and check_user.get("overflow_pool", 0) >= check_cost:
+                    auto_expansion = expand_potjes(user_id)
+            except Exception:
+                pass
+            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion}
     return {}
 
 
@@ -249,66 +253,75 @@ def reset_last_buy_cycle(user_id: str):
 
 def expand_potjes(user_id: str) -> Dict:
     """
-    Niet-lineaire expansie via tier-systeem:
-    - Tier 1: 10 potjes × €10 max (€100 cap)
-    - Tier 2 trigger: totaal capital ≥ €108 → +5 potjes × €20 max
-    - Tier 3 trigger: totaal capital ≥ €216 → +5 potjes × €40 max
-    - Elke tier verdubbelt pot-grootte (volume-gedreven)
+    Groeiregel: N potjes → max €N per potje.
+    - Check: alle potjes op huidig max?
+    - Check: overflow ≥ expansion cost (2N+1)?
+    - Expansie: alle bestaande potjes groeien naar €(N+1) (+€1 elk),
+                nieuwe potje #(N+1) = €(N+1)
     """
     data = _load(user_id)
     user = data["users"][user_id]
     potjes = user["potjes"]
-    current_tier = user.get("current_tier", _current_tier(potjes))
-    total_capital = sum(p["capital"] for p in potjes) + user.get("overflow_pool", 0.0)
-    threshold = _tier_trigger_threshold(current_tier)
-
-    if total_capital < threshold:
-        return {
-            "expanded": 0,
-            "reason": f"Tier {current_tier+1} vereist €{threshold:.2f} (huidig: €{total_capital:.2f})",
-            "current_tier": current_tier,
-            "next_tier_threshold": threshold,
-        }
-
-    # Expand naar volgende tier
-    next_tier = current_tier + 1
-    cfg = _tier_config(next_tier)
-
-    # Hoeveel nieuwe potjes kunnen we financieren uit huidige capital?
+    current_count = len(potjes)
+    current_max = _max_size_for_count(current_count)
     overflow = user.get("overflow_pool", 0.0)
-    pots_affordable = int(overflow / cfg["start"])
-    if pots_affordable == 0:
+
+    # Alle potjes op max?
+    all_at_max = all(p["capital"] >= current_max - 0.01 for p in potjes)
+    if not all_at_max:
+        under_max = [p["id"] for p in potjes if p["capital"] < current_max - 0.01]
         return {
             "expanded": 0,
-            "reason": f"Overflow pool €{overflow:.2f} te klein voor tier {next_tier} potje (€{cfg['start']:.2f})",
+            "reason": f"Niet alle potjes op €{current_max} ({len(under_max)} nog niet vol)",
+            "current_count": current_count,
+            "current_max": current_max,
         }
 
-    now = datetime.now(timezone.utc).isoformat()
-    start_idx = len(potjes)
-    added = 0
-    for i in range(min(cfg["count"], pots_affordable)):
-        potjes.append({
-            "id": f"pot-{start_idx + i + 1:03d}",
-            "index": start_idx + i,
-            "tier": next_tier,
-            "capital": cfg["start"],
-            "max_size": cfg["max"],
-            "position": {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False, "entry_time": None},
-            "market": user.get("market", "BCH-EUR"),
-            "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
-            "created_at": now,
-            "last_action": None,
-        })
-        added += 1
+    # Genoeg overflow?
+    cost = _expansion_cost(current_count)
+    if overflow < cost:
+        return {
+            "expanded": 0,
+            "reason": f"Overflow €{overflow:.2f} < benodigd €{cost} voor potje {current_count + 1}",
+            "overflow": overflow,
+            "cost_needed": cost,
+        }
 
-    user["overflow_pool"] = round(overflow - (added * cfg["start"]), 4)
-    user["current_tier"] = next_tier
+    # Expansie!
+    new_count = current_count + 1
+    new_max = _max_size_for_count(new_count)
+    now = datetime.now(timezone.utc).isoformat()
+
+    # Groei alle bestaande potjes naar new_max
+    for p in potjes:
+        p["max_size"] = new_max
+        # Als er ruimte is: vul op tot new_max (uit overflow)
+        needed = new_max - p["capital"]
+        if needed > 0:
+            p["capital"] = round(p["capital"] + needed, 4)
+
+    # Voeg nieuwe potje toe
+    potjes.append({
+        "id": f"pot-{new_count:03d}",
+        "index": current_count,
+        "capital": new_max,
+        "max_size": new_max,
+        "position": {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False, "entry_time": None},
+        "market": user.get("market", "BCH-EUR"),
+        "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+        "created_at": now,
+        "last_action": None,
+    })
+
+    user["overflow_pool"] = round(overflow - cost, 4)
     _save(data)
     return {
-        "expanded": added,
-        "new_tier": next_tier,
-        "new_pot_size": cfg["max"],
+        "expanded": 1,
+        "new_count": new_count,
+        "new_max": new_max,
+        "cost": cost,
         "overflow_left": user["overflow_pool"],
+        "message": f"Potje #{new_count} toegevoegd! Alle {new_count} potjes nu €{new_max}",
     }
 
 
@@ -321,8 +334,10 @@ def get_summary(user_id: str) -> Dict:
     total_pnl = sum(p["stats"]["total_pnl"] for p in potjes)
     total_trades = sum(p["stats"]["trades"] for p in potjes)
     total_wins = sum(p["stats"]["wins"] for p in potjes)
-    current_tier = user.get("current_tier", _current_tier(potjes))
-    next_threshold = _tier_trigger_threshold(current_tier)
+    count = len(potjes)
+    current_max = _max_size_for_count(count)
+    cost_to_next = _expansion_cost(count)
+    overflow = user.get("overflow_pool", 0.0)
 
     # Live Bitvavo balance + baseline P&L
     live_balance = None
@@ -342,19 +357,23 @@ def get_summary(user_id: str) -> Dict:
         pass
 
     return {
-        "pot_count": len(potjes),
+        "pot_count": count,
         "total_capital": round(total_capital, 2),
+        "current_max_per_pot": current_max,
         "open_positions": open_count,
         "closed_positions": closed_count,
         "total_pnl": round(total_pnl, 4),
         "total_trades": total_trades,
         "win_rate": round(total_wins / total_trades * 100, 1) if total_trades else 0,
-        "overflow_pool": round(user.get("overflow_pool", 0.0), 4),
+        "overflow_pool": round(overflow, 4),
         "last_buy_cycle": user.get("last_buy_cycle"),
         "market": user.get("market", "BCH-EUR"),
-        "current_tier": current_tier,
-        "next_tier_threshold": next_threshold,
-        "progress_to_next_tier": round((total_capital + user.get("overflow_pool", 0.0)) / next_threshold * 100, 1) if next_threshold else 0,
+        # Groei info
+        "next_pot_cost": cost_to_next,
+        "next_pot_number": count + 1,
+        "next_pot_max": _max_size_for_count(count + 1),
+        "can_expand": overflow >= cost_to_next and all(p["capital"] >= current_max - 0.01 for p in potjes),
+        "expansion_progress_pct": round(min(100, (overflow / cost_to_next) * 100), 1) if cost_to_next else 0,
         # Live metrics
         "live_balance": live_balance,
         "live_pnl": live_pnl,

@@ -4,7 +4,7 @@ import {
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
-  BookHeart, StickyNote, Award, ShoppingBag, BookMarked
+  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -15,6 +15,7 @@ export const navigationConfig = {
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/' },
       { id: 'chat', label: 'Gesprekken', icon: MessageSquare, path: '/chat' },
+      { id: 'archief', label: 'Archief', icon: Archive, path: '/archief' },
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
@@ -48,8 +49,8 @@ export const navigationConfig = {
     label: 'BEHEER',
     items: [
       { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
-      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
+      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
     ]

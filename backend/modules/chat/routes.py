@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import Optional
 from .snap_service import SnapNLPService
 from .emotion_service import EmotionDetectionService
+from . import chat_log_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -15,6 +16,8 @@ class ChatMessage(BaseModel):
     message: str
     user_naam: Optional[str] = "Gebruiker"
     user_id: Optional[str] = None
+    channel: Optional[str] = "spark"
+    session_id: Optional[str] = None
 
 
 class SnapRequest(BaseModel):
@@ -53,28 +56,37 @@ async def process_message(req: ChatMessage):
         response["emotion"] = emotion
 
     # 1. Trigger checks
+    trigger_type = None
     if snap.detect_greeting(text):
         resp = snap.get_trigger_response("greeting")
         response["type"] = "greeting"
         response["message"] = resp or f"Hallo {req.user_naam}! Hoe kan ik je helpen?"
+        trigger_type = "greeting"
+        _save_log(req, response, trigger_type)
         return response
 
     if snap.detect_thanks(text):
         resp = snap.get_trigger_response("thanks")
         response["type"] = "thanks"
         response["message"] = resp or "Graag gedaan!"
+        trigger_type = "thanks"
+        _save_log(req, response, trigger_type)
         return response
 
     if snap.detect_how_are_you(text):
         resp = snap.get_trigger_response("how_are_you")
         response["type"] = "how_are_you"
         response["message"] = resp or "Goed! Ik ben bezig om te leren en groeien."
+        trigger_type = "how_are_you"
+        _save_log(req, response, trigger_type)
         return response
 
     if snap.detect_goodbye(text):
         resp = snap.get_trigger_response("goodbye")
         response["type"] = "goodbye"
         response["message"] = resp or f"Tot ziens {req.user_naam}!"
+        trigger_type = "goodbye"
+        _save_log(req, response, trigger_type)
         return response
 
     # 2. Knowledge lookup - zoek alle begrippen in de zin
@@ -143,7 +155,60 @@ async def process_message(req: ChatMessage):
                 response["message"] = "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!"
                 response["type"] = "general"
 
+    _save_log(req, response, None)
     return response
+
+
+def _save_log(req: "ChatMessage", response: dict, trigger_type):
+    """Save gesprek naar user log."""
+    if not req.user_id:
+        return
+    chat_log_service.save_message(
+        user_id=req.user_id,
+        user_naam=req.user_naam or "Gebruiker",
+        user_message=req.message,
+        spark_response=response.get("message", ""),
+        analysis={
+            "sentiment": response.get("sentiment"),
+            "emotion": response.get("emotion"),
+            "trigger_type": trigger_type,
+            "knowledge_matches": [{"begrip": m.get("begrip")} for m in response.get("knowledge_matches", [])],
+            "unknown_words": response.get("unknown_words", []),
+            "snap_suggestions": response.get("snap_suggestions", []),
+            "word_count": len(req.message.split()),
+            "response_type": response.get("type"),
+        },
+        channel=req.channel or "spark",
+        session_id=req.session_id,
+    )
+
+
+# ============================================================
+# CHAT LOGS / ARCHIEF
+# ============================================================
+
+@router.get("/logs/{user_id}")
+async def get_chat_logs(user_id: str, limit: int = 50, offset: int = 0,
+                        search: Optional[str] = None, channel: Optional[str] = None,
+                        has_trigger: Optional[bool] = None, has_snap: Optional[bool] = None):
+    return chat_log_service.get_logs(user_id, limit, offset, search, channel, has_trigger, has_snap)
+
+
+@router.get("/logs/{user_id}/stats")
+async def get_chat_log_stats(user_id: str):
+    return chat_log_service.get_stats(user_id)
+
+
+@router.get("/logs")
+async def list_all_log_users():
+    """Admin: lijst alle users die logs hebben."""
+    return {"users": chat_log_service.list_all_users_with_logs()}
+
+
+@router.delete("/logs/{user_id}/{conv_id}")
+async def delete_log(user_id: str, conv_id: str):
+    success = chat_log_service.delete_conversation(user_id, conv_id)
+    return {"success": success}
 
 
 @router.post("/snap")

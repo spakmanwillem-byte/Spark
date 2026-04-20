@@ -137,6 +137,25 @@ async def send_community_message(msg: ChatMessage):
     data["messages"].extend(bot_responses)
     save_json(COMMUNITY_FILE, data)
 
+    # Log naar user's gesprekslog
+    try:
+        from modules.chat import chat_log_service
+        combined_bot_response = " | ".join(br.get("message", "") for br in bot_responses) if bot_responses else "(geen bot reactie)"
+        chat_log_service.save_message(
+            user_id=msg.user_id,
+            user_naam=msg.user_name,
+            user_message=msg.message,
+            spark_response=combined_bot_response,
+            analysis={
+                "bots_reacted": [br.get("user_name") for br in bot_responses],
+                "bot_count": len(bot_responses),
+                "word_count": len(msg.message.split()),
+            },
+            channel="community",
+        )
+    except Exception:
+        pass
+
     return {
         "success": True,
         "message": user_msg,

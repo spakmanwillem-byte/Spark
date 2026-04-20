@@ -13,6 +13,7 @@ import { VerbandenPage } from "./components/spark/VerbandenPage";
 import { TriggersPage } from "./components/spark/TriggersPage";
 import { AgendaPage } from "./components/workspace/AgendaPage";
 import { GesprekkenPage } from "./components/workspace/GesprekkenPage";
+import { ArchiefPage } from "./components/workspace/ArchiefPage";
 import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { RoadmapPage } from "./components/workspace/RoadmapPage";
 import { DagboekPage } from "./components/workspace/DagboekPage";
@@ -117,6 +118,8 @@ function AppContent() {
         return <AgendaPage onNavigate={handleNavigate} />;
       case 'chat':
         return <GesprekkenPage onNavigate={handleNavigate} />;
+      case 'archief':
+        return <ArchiefPage onNavigate={handleNavigate} />;
       case 'knowledge':
         return <KennisbankPage onNavigate={handleNavigate} />;
       case 'roadmap':

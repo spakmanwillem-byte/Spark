@@ -1,0 +1,60 @@
+{
+  "user_id": "user-001",
+  "conversations": [
+    {
+      "id": "conv-21fa7d5c",
+      "timestamp": "2026-04-20T10:10:28.129024+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-bde32395",
+      "timestamp": "2026-04-20T10:10:28.353425+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat is fotosynthese",
+      "spark_response": "**Fotosynthese**: Fotosynthese is het proces waarbij planten licht omzetten in energie.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Fotosynthese"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-001",
+    "total_conversations": 2,
+    "last_updated": "2026-04-20T10:10:28.353425+00:00"
+  }
+}

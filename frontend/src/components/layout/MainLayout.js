@@ -15,7 +15,6 @@ export const navigationConfig = {
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/' },
       { id: 'chat', label: 'Gesprekken', icon: MessageSquare, path: '/chat' },
-      { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
@@ -27,6 +26,7 @@ export const navigationConfig = {
     label: 'SPARK AI',
     items: [
       { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
+      { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
       { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
       { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
       { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },
@@ -41,7 +41,6 @@ export const navigationConfig = {
       { id: 'boekhouding', label: 'Boekhouding', icon: BookMarked, path: '/modules/boekhouding' },
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
       { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard' },
-      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
       { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },
@@ -49,6 +48,7 @@ export const navigationConfig = {
     label: 'BEHEER',
     items: [
       { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
+      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },
@@ -77,7 +77,8 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const [showNotifs, setShowNotifs] = useState(false);
   const [notifs, setNotifs] = useState([]);
 
-  // Drag-to-reorder sidebar items (per sectie)
+  // Drag-to-reorder sidebar items (per sectie + cross-sectie)
+  // Format: { sectionKey: [{id, fromSection}] } — fromSection geeft aan waar item origineel vandaan kwam
   const [customOrder, setCustomOrder] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('sidebarOrder') || '{}');
@@ -85,26 +86,66 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
       return {};
     }
   });
-  const [dragState, setDragState] = useState(null); // { sectionKey, itemId }
+  const [dragState, setDragState] = useState(null); // { sectionKey, itemId, fromSection }
 
   const saveOrder = (next) => {
     setCustomOrder(next);
     localStorage.setItem('sidebarOrder', JSON.stringify(next));
   };
 
-  const applyCustomOrder = (sectionKey, items) => {
-    const order = customOrder[sectionKey];
-    if (!order || !Array.isArray(order)) return items;
-    const byId = Object.fromEntries(items.map(i => [i.id, i]));
-    const ordered = order.map(id => byId[id]).filter(Boolean);
-    // Voeg nieuwe items toe die nog niet in custom order staan
-    const known = new Set(order);
-    const newItems = items.filter(i => !known.has(i.id));
-    return [...ordered, ...newItems];
+  // Zoek waar een item standaard thuishoort
+  const findOriginalSection = (itemId) => {
+    for (const [key, section] of Object.entries(navigationConfig)) {
+      if (section.items.find(i => i.id === itemId)) return key;
+    }
+    return null;
+  };
+
+  // Zoek een item (volledig object) op basis van ID, ongeacht sectie
+  const findItemById = (itemId) => {
+    for (const section of Object.values(navigationConfig)) {
+      const item = section.items.find(i => i.id === itemId);
+      if (item) return item;
+    }
+    return null;
+  };
+
+  // Pas custom volgorde toe, inclusief cross-sectie relocations
+  const getItemsForSection = (sectionKey) => {
+    const customForSection = customOrder[sectionKey];
+    // Alle items die hun originele sectie verlaten hebben (staan nu ergens anders)
+    const relocatedOut = new Set();
+    for (const [sk, entries] of Object.entries(customOrder)) {
+      if (!Array.isArray(entries)) continue;
+      for (const entry of entries) {
+        const id = typeof entry === 'string' ? entry : entry.id;
+        const fromSection = typeof entry === 'object' ? entry.fromSection : findOriginalSection(id);
+        if (fromSection && fromSection !== sk) {
+          relocatedOut.add(id);
+        }
+      }
+    }
+
+    if (customForSection && Array.isArray(customForSection)) {
+      const ordered = customForSection
+        .map(entry => {
+          const id = typeof entry === 'string' ? entry : entry.id;
+          return findItemById(id);
+        })
+        .filter(Boolean);
+      // Voeg nieuwe defaults toe die nog niet in custom order staan (en niet verhuisd zijn)
+      const knownIds = new Set(customForSection.map(e => typeof e === 'string' ? e : e.id));
+      const extras = navigationConfig[sectionKey].items.filter(
+        i => !knownIds.has(i.id) && !relocatedOut.has(i.id)
+      );
+      return [...ordered, ...extras];
+    }
+    // Geen custom order: gewoon defaults, minus de items die naar andere secties zijn verhuisd
+    return navigationConfig[sectionKey].items.filter(i => !relocatedOut.has(i.id));
   };
 
   const handleDragStart = (sectionKey, itemId) => {
-    setDragState({ sectionKey, itemId });
+    setDragState({ sectionKey, itemId, fromSection: sectionKey });
   };
 
   const handleDragOver = (e) => {
@@ -112,23 +153,71 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
     e.dataTransfer.dropEffect = 'move';
   };
 
-  const handleDrop = (sectionKey, targetItemId) => {
-    if (!dragState || dragState.sectionKey !== sectionKey || dragState.itemId === targetItemId) {
-      setDragState(null);
-      return;
+  // Drop op een specifiek item: plaats vóór dat item
+  const handleDropOnItem = (targetSectionKey, targetItemId) => {
+    if (!dragState) { setDragState(null); return; }
+    if (dragState.itemId === targetItemId && dragState.sectionKey === targetSectionKey) {
+      setDragState(null); return;
     }
-    const currentItems = applyCustomOrder(sectionKey, navigationConfig[sectionKey].items);
-    const ids = currentItems.map(i => i.id);
-    const fromIdx = ids.indexOf(dragState.itemId);
-    const toIdx = ids.indexOf(targetItemId);
-    if (fromIdx < 0 || toIdx < 0) {
-      setDragState(null);
-      return;
+
+    // Haal ID lijsten op van source + target
+    const next = { ...customOrder };
+
+    const getIdList = (sk) => {
+      const existing = next[sk];
+      if (Array.isArray(existing)) {
+        return existing.map(e => typeof e === 'string' ? e : e.id);
+      }
+      return getItemsForSection(sk).map(i => i.id);
+    };
+
+    const sourceIds = getIdList(dragState.sectionKey);
+    const targetIds = getIdList(targetSectionKey);
+
+    // Verwijder uit source
+    const sourceFiltered = sourceIds.filter(id => id !== dragState.itemId);
+
+    // Voeg in target in vóór target item
+    const targetIdx = targetIds.indexOf(targetItemId);
+    let newTargetIds;
+    if (dragState.sectionKey === targetSectionKey) {
+      // Same section reorder
+      newTargetIds = sourceFiltered;
+      const newIdx = newTargetIds.indexOf(targetItemId);
+      newTargetIds = [...newTargetIds];
+      const insertAt = newIdx >= 0 ? newIdx : newTargetIds.length;
+      newTargetIds.splice(insertAt, 0, dragState.itemId);
+    } else {
+      newTargetIds = [...targetIds];
+      const insertAt = targetIdx >= 0 ? targetIdx : newTargetIds.length;
+      newTargetIds.splice(insertAt, 0, dragState.itemId);
+      next[dragState.sectionKey] = sourceFiltered;
     }
-    const next = [...ids];
-    const [moved] = next.splice(fromIdx, 1);
-    next.splice(toIdx, 0, moved);
-    saveOrder({ ...customOrder, [sectionKey]: next });
+    next[targetSectionKey] = newTargetIds;
+
+    saveOrder(next);
+    setDragState(null);
+  };
+
+  // Drop op het einde van een sectie (lege ruimte)
+  const handleDropOnSection = (targetSectionKey) => {
+    if (!dragState) { setDragState(null); return; }
+    if (dragState.sectionKey === targetSectionKey) { setDragState(null); return; }
+
+    const next = { ...customOrder };
+    const getIdList = (sk) => {
+      const existing = next[sk];
+      if (Array.isArray(existing)) return existing.map(e => typeof e === 'string' ? e : e.id);
+      return getItemsForSection(sk).map(i => i.id);
+    };
+
+    const sourceIds = getIdList(dragState.sectionKey);
+    const targetIds = getIdList(targetSectionKey);
+
+    next[dragState.sectionKey] = sourceIds.filter(id => id !== dragState.itemId);
+    next[targetSectionKey] = [...targetIds, dragState.itemId];
+
+    saveOrder(next);
     setDragState(null);
   };
 
@@ -210,15 +299,23 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4 px-3">
           {Object.entries(navigationConfig).map(([key, section]) => {
-            // Filter admin-only items voor non-admins + pas custom volgorde toe
-            const visibleItems = applyCustomOrder(
-              key,
-              section.items.filter(item => !item.adminOnly || isAdmin)
-            );
-            if (visibleItems.length === 0) return null;
+            // Pas custom volgorde + cross-sectie relocations toe
+            const allItems = getItemsForSection(key);
+            // Filter admin-only items voor non-admins
+            const visibleItems = allItems.filter(item => !item.adminOnly || isAdmin);
 
             return (
-              <div key={key} className="mb-6">
+              <div
+                key={key}
+                className="mb-6"
+                onDragOver={handleDragOver}
+                onDrop={(e) => {
+                  // Alleen drop-op-sectie activeren als we niet op een specifiek item droppen
+                  if (e.target === e.currentTarget || e.target.closest('[data-section-empty]')) {
+                    handleDropOnSection(key);
+                  }
+                }}
+              >
                 {!sidebarCollapsed && (
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mb-2">
                     {section.label}
@@ -236,10 +333,21 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
                       isDragging={dragState?.itemId === item.id}
                       onDragStart={() => handleDragStart(key, item.id)}
                       onDragOver={handleDragOver}
-                      onDrop={() => handleDrop(key, item.id)}
+                      onDrop={() => handleDropOnItem(key, item.id)}
                       onDragEnd={() => setDragState(null)}
                     />
                   ))}
+                  {/* Drop zone aan einde van sectie */}
+                  {!sidebarCollapsed && dragState && dragState.sectionKey !== key && (
+                    <div
+                      data-section-empty
+                      onDragOver={handleDragOver}
+                      onDrop={() => handleDropOnSection(key)}
+                      className="h-10 rounded-xl border-2 border-dashed border-amber-500/30 bg-amber-500/5 flex items-center justify-center text-[10px] text-amber-400"
+                    >
+                      Laat hier los in {section.label}
+                    </div>
+                  )}
                 </div>
               </div>
             );

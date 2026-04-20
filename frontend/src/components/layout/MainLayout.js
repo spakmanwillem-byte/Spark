@@ -48,7 +48,6 @@ export const navigationConfig = {
     label: 'BEHEER',
     items: [
       { id: 'profiel', label: 'Mijn Profiel', icon: User, path: '/profiel' },
-      { id: 'persons', label: 'Persoonskaarten', icon: UsersRound, path: '/modules/persons' },
       { id: 'users', label: 'Gebruikers', icon: Users, path: '/admin/users', adminOnly: true },
       { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/admin/analytics', adminOnly: true },
       { id: 'settings', label: 'Instellingen', icon: Settings, path: '/admin/settings' },

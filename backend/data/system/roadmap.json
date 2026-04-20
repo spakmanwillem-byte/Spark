@@ -561,6 +561,60 @@
           "status": "vision",
           "priority": "low",
           "progress": 0
+        },
+        {
+          "id": "v3_009",
+          "titel": "Context-laag: Zin-snaps met cross-linking",
+          "status": "vision",
+          "priority": "medium",
+          "progress": 0,
+          "created_date": "2026-04-20",
+          "notes": "Naast woord-snaps ook de hele zin als aparte context-kaart opslaan, gekoppeld aan de woord-snaps die erin voorkomen via 'related_snaps: [ids]'. Zo kan Spark verbanden onthouden: 'Fikkie is de hond van tante Bea'. create_sentence_snap() bestaat al in snap_service.py maar wordt niet aangeroepen in de chat-flow.",
+          "discovery": "20 apr 2026 tijdens NLP live-test: Spark maakt woord-snaps voor onbekende woorden (perongeluk goed), maar verliest relaties tussen begrippen in dezelfde zin. Context-kaart = 4e laag naast Trigger/Intent/Knowledge.",
+          "triggers": [
+            "context-kaart",
+            "zin-snap",
+            "parallelle kennis"
+          ],
+          "acceptance": [
+            "create_sentence_snap aangeroepen in chat-flow wanneer >=2 woord-snaps in 1 zin",
+            "related_snaps: [ids] veld koppelt zin- en woord-snaps",
+            "UI toont gekoppelde kaarten als 'verwante context' bij woord-snap"
+          ]
+        },
+        {
+          "id": "v3_010",
+          "titel": "5W+H als conversatie-tool (niet alleen display)",
+          "status": "vision",
+          "priority": "high",
+          "progress": 0,
+          "created_date": "2026-04-20",
+          "notes": "5W+H actief inzetten om user te helpen tot antwoord te komen. Als user een vage vraag stelt, kan Spark terugvragen: 'Wie bedoel je?' 'Wanneer gebeurde dat?' 'Waar?' — systematisch de user begeleiden door de 5W+H om zelf helderheid te krijgen. Ook vice versa: als een kaart weinig 5W+H ingevuld heeft en user stelt een vraag die een specifieke W nodig heeft, vraagt Spark die info actief.",
+          "discovery": "20 apr 2026: user inzicht — 'als mensen een gesprek beginnen willen ze wat de w kan helpen met antwoord geven of maken. Iemand moet zichzelf soms de 5 W afvragen EN hoe om tot een antwoord te komen.' 5W+H is dus geen passief display-veld, maar een conversatie-motor.",
+          "triggers": [
+            "5W+H conversation",
+            "guiding questions",
+            "answer building"
+          ],
+          "acceptance": [
+            "Spark detecteert vage vraag → stelt 1-2 gerichte W-vragen",
+            "Na antwoord user: 5W+H wordt automatisch in kaart aangevuld",
+            "'Help me denken'-modus: Spark loopt systematisch door W-Wie/Wat/etc",
+            "Ondergrens: voorkom zeurderigheid — max 2 tegenvragen per turn"
+          ],
+          "depends_on": [
+            "v3_009 (context-laag)"
+          ]
+        },
+        {
+          "id": "v3_011",
+          "titel": "BUGFIX: 5W+H veld-naming (ws5 Engels vs context_5wh NL)",
+          "status": "done",
+          "priority": "critical",
+          "progress": 100,
+          "completed_date": "2026-04-20",
+          "notes": "NLP las alleen context_5wh (NL, 18 kaarten ingevuld) terwijl data in ws5 (Engels, 2398 kaarten) staat. Fix in snap_service.py _format_result: leest nu BEIDE velden met NL eerst + Engelse fallback. Geen data gewijzigd, alleen lees-logica. Alle 2398 kaarten leveren nu 5W+H in chat-response.",
+          "discovery": "20 apr 2026: chat-response stuurde meestal lege context_5wh terug ondanks ingevulde kaarten. Ontdekt bij inhoudelijke kaart-inspectie."
         }
       ]
     },

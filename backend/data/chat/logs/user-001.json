@@ -263,11 +263,92 @@
         "session_id": "default",
         "gesprek_nummer": 9
       }
+    },
+    {
+      "id": "conv-191b2b99",
+      "timestamp": "2026-04-20T11:29:05.632187+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een peer?",
+      "spark_response": "Ik ken deze woorden nog niet: **peer**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "peer"
+        ],
+        "snap_suggestions": [
+          "peer"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 10
+      }
+    },
+    {
+      "id": "conv-cb25435e",
+      "timestamp": "2026-04-20T11:29:13.901477+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat betekent samen",
+      "spark_response": "Ik ken deze woorden nog niet: **betekent**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "betekent"
+        ],
+        "snap_suggestions": [
+          "betekent"
+        ],
+        "word_count": 3,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 11
+      }
+    },
+    {
+      "id": "conv-b279ec45",
+      "timestamp": "2026-04-20T11:29:21.139221+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is koffie",
+      "spark_response": "**Koffie (drinken)**: Koffie is een warme drank gemaakt van gemalen en gebrande koffiebonen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Koffie (drinken)"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 12
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 9,
-    "last_updated": "2026-04-20T11:07:39.690034+00:00"
+    "total_conversations": 12,
+    "last_updated": "2026-04-20T11:29:21.139221+00:00"
   }
 }

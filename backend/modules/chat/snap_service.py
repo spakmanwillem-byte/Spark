@@ -154,7 +154,10 @@ class SnapNLPService:
 
     def _format_result(self, entry, match_type, matched_word=None):
         lagen = entry.get("lagen", {}) or {}
-        wh = entry.get("context_5wh", {}) or {}
+        # Lees zowel ws5 (Engels, 2398 kaarten) als context_5wh (NL, 18 kaarten).
+        # ws5 krijgt voorrang omdat 99% van data daar staat; NL is fallback/backfill.
+        ws5 = entry.get("ws5", {}) or {}
+        wh_nl = entry.get("context_5wh", {}) or {}
         return {
             "id": entry.get("id"),
             "begrip": entry.get("begrip"),
@@ -167,12 +170,12 @@ class SnapNLPService:
             "match_type": match_type,
             "matched_word": matched_word,
             "context_5wh": {
-                "wie": wh.get("wie", ""),
-                "wat": wh.get("wat", ""),
-                "waar": wh.get("waar", ""),
-                "wanneer": wh.get("wanneer", ""),
-                "waarom": wh.get("waarom", ""),
-                "hoe": wh.get("hoe", ""),
+                "wie": wh_nl.get("wie") or ws5.get("who") or "",
+                "wat": wh_nl.get("wat") or ws5.get("what") or "",
+                "waar": wh_nl.get("waar") or ws5.get("where") or "",
+                "wanneer": wh_nl.get("wanneer") or ws5.get("when") or "",
+                "waarom": wh_nl.get("waarom") or ws5.get("why") or "",
+                "hoe": wh_nl.get("hoe") or ws5.get("how") or "",
             },
         }
 

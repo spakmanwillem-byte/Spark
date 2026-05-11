@@ -24,6 +24,24 @@ APP_ROOT = Path(__file__).parent.parent.parent
 # Process-start timestamp voor uptime
 _START_TIME = time.time()
 
+# In-memory recent requests tracker (laatste 50)
+_RECENT_REQUESTS: list = []
+_MAX_RECENT = 50
+
+
+def track_request(ip: str, method: str, path: str, status: int, duration_ms: float):
+    """Aangeroepen vanuit middleware om recente requests te tonen."""
+    _RECENT_REQUESTS.append({
+        "ip": ip,
+        "method": method,
+        "path": path,
+        "status": status,
+        "duration_ms": round(duration_ms, 1),
+        "ts": time.time(),
+    })
+    if len(_RECENT_REQUESTS) > _MAX_RECENT:
+        del _RECENT_REQUESTS[:-_MAX_RECENT]
+
 
 def _dir_size(path: Path) -> int:
     """Recursieve grootte van directory in bytes (volgt geen symlinks)."""
@@ -315,3 +333,126 @@ def get_system_info():
         pass
 
     return info
+
+
+# ============================================================
+# LIVE NETWORK INFO
+# ============================================================
+
+# Bewaar vorige meting voor delta-rate berekening
+_PREV_NET = {"ts": None, "sent": 0, "recv": 0}
+
+
+@router.get("/network-info")
+def get_network_info():
+    """
+    Live netwerk-info: interfaces, IPs, counters, throughput rate, recente requests.
+    """
+    if not HAS_PSUTIL:
+        return {"error": "psutil niet beschikbaar"}
+
+    # Interfaces met adressen
+    interfaces = []
+    addrs = psutil.net_if_addrs()
+    stats = psutil.net_if_stats()
+    for ifname, addr_list in addrs.items():
+        ipv4 = None
+        ipv6 = None
+        mac = None
+        for a in addr_list:
+            if a.family == socket.AF_INET:
+                ipv4 = a.address
+            elif a.family == socket.AF_INET6:
+                ipv6 = a.address
+            elif a.family == psutil.AF_LINK:
+                mac = a.address
+        st = stats.get(ifname)
+        interfaces.append({
+            "name": ifname,
+            "ipv4": ipv4,
+            "ipv6": ipv6 if ipv6 and not ipv6.startswith("fe80") else None,
+            "mac": mac,
+            "is_up": st.isup if st else None,
+            "speed_mbps": st.speed if st and st.speed > 0 else None,
+            "mtu": st.mtu if st else None,
+        })
+
+    # Totale counters
+    net = psutil.net_io_counters()
+    total = {
+        "bytes_sent": net.bytes_sent,
+        "bytes_recv": net.bytes_recv,
+        "sent_human": _human_bytes(net.bytes_sent),
+        "recv_human": _human_bytes(net.bytes_recv),
+        "packets_sent": net.packets_sent,
+        "packets_recv": net.packets_recv,
+        "errin": net.errin,
+        "errout": net.errout,
+        "dropin": net.dropin,
+        "dropout": net.dropout,
+    }
+
+    # Rate (bytes/sec sinds vorige call)
+    now = time.time()
+    rate_sent_bps = 0
+    rate_recv_bps = 0
+    if _PREV_NET["ts"] is not None:
+        elapsed = now - _PREV_NET["ts"]
+        if elapsed > 0:
+            rate_sent_bps = max(0, (net.bytes_sent - _PREV_NET["sent"]) / elapsed)
+            rate_recv_bps = max(0, (net.bytes_recv - _PREV_NET["recv"]) / elapsed)
+    _PREV_NET["ts"] = now
+    _PREV_NET["sent"] = net.bytes_sent
+    _PREV_NET["recv"] = net.bytes_recv
+
+    # Per-interface counters
+    per_if = []
+    if_counters = psutil.net_io_counters(pernic=True)
+    for ifname, c in if_counters.items():
+        per_if.append({
+            "name": ifname,
+            "sent_human": _human_bytes(c.bytes_sent),
+            "recv_human": _human_bytes(c.bytes_recv),
+            "bytes_sent": c.bytes_sent,
+            "bytes_recv": c.bytes_recv,
+        })
+
+    # Connections (kan permission denied geven in container — vang af)
+    conn_counts = {"ESTABLISHED": 0, "LISTEN": 0, "TIME_WAIT": 0, "OTHER": 0}
+    try:
+        for c in psutil.net_connections(kind="inet"):
+            s = c.status
+            if s in conn_counts:
+                conn_counts[s] += 1
+            else:
+                conn_counts["OTHER"] += 1
+    except (psutil.AccessDenied, PermissionError):
+        conn_counts = None  # niet beschikbaar in container
+
+    # Recente requests (laatste 20)
+    recent = sorted(_RECENT_REQUESTS[-20:], key=lambda r: r["ts"], reverse=True)
+    recent_formatted = []
+    for r in recent:
+        age = now - r["ts"]
+        if age < 60:
+            age_str = f"{int(age)}s geleden"
+        elif age < 3600:
+            age_str = f"{int(age // 60)}m geleden"
+        else:
+            age_str = f"{int(age // 3600)}u geleden"
+        recent_formatted.append({**r, "age_str": age_str})
+
+    return {
+        "interfaces": interfaces,
+        "total": total,
+        "throughput": {
+            "sent_bps": rate_sent_bps,
+            "recv_bps": rate_recv_bps,
+            "sent_human": _human_bytes(rate_sent_bps) + "/s",
+            "recv_human": _human_bytes(rate_recv_bps) + "/s",
+        },
+        "per_interface": per_if,
+        "connections": conn_counts,
+        "recent_requests": recent_formatted,
+        "recent_count": len(_RECENT_REQUESTS),
+    }

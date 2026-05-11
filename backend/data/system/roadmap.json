@@ -781,6 +781,16 @@
           "depends_on": [
             "psutil 7.2.2 toegevoegd aan requirements.txt"
           ]
+        },
+        {
+          "id": "v3_023",
+          "titel": "Analytics > NETWORK live + LAYER markeren als in-ontwikkeling",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "NETWORK tab: alle mock-data vervangen door echte psutil + request-tracker middleware. Toont: throughput-rate (bytes/sec, delta tussen calls), totale bytes/packets/errors, interfaces met IPv4/MAC/speed/MTU/up-status, verbindingen per status, per-interface counters, én laatste 20 API requests met method/path/status/duration/IP via track_requests middleware. Auto-refresh elke 3 sec. LAYER tab: gemarkeerd als 'In ontwikkeling' met uitleg-banner. Oude mock-content blijft zichtbaar maar 40% opacity + pointer-events disabled — niet meer per ongeluk te gebruiken voor beslissingen.",
+          "discovery": "11 mei 2026: user vroeg of Network live is en wilde Layer markeren omdat die wordt herwerkt."
         }
       ]
     },

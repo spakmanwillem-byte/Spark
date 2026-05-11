@@ -234,8 +234,192 @@ function SystemTab({ info }) {
   );
 }
 
-// Network Tab Content
+// Network Tab Content — ECHT (psutil + request tracker middleware)
 function NetworkTab() {
+  const [info, setInfo] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchIt = () => fetch(`${API}/api/analytics/network-info`).then(r => r.json()).then(setInfo).catch(() => {});
+    fetchIt();
+    const t = setInterval(fetchIt, 3000);
+    return () => clearInterval(t);
+  }, []);
+
+  if (!info) return <div className="text-center py-16 text-slate-500">Network info laden...</div>;
+  if (info.error) return <div className="text-center py-16 text-red-400">{info.error}</div>;
+
+  const { interfaces, total, throughput, per_interface, connections, recent_requests } = info;
+
+  return (
+    <div data-testid="analytics-network-tab" className="space-y-6">
+      {/* Throughput + Total stats */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard label="Inkomend (rate)" value={throughput.recv_human} icon={ArrowDown} color="cyan" />
+        <StatCard label="Uitgaand (rate)" value={throughput.sent_human} icon={ArrowUp} color="purple" />
+        <StatCard label="Totaal ontvangen" value={total.recv_human} icon={Database} color="green" sub={`${total.packets_recv.toLocaleString('nl-NL')} packets`} />
+        <StatCard label="Totaal verzonden" value={total.sent_human} icon={Database} color="amber" sub={`${total.packets_sent.toLocaleString('nl-NL')} packets`} />
+      </div>
+
+      {/* Interfaces + Connections */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Interfaces */}
+        <div className="lg:col-span-2 bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+          <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+            <Network className="w-4 h-4 text-cyan-400" />
+            Netwerk Interfaces
+          </h3>
+          <div className="space-y-3">
+            {interfaces.map(i => {
+              const counter = per_interface.find(c => c.name === i.name);
+              return (
+                <div key={i.name} className="flex items-center gap-4 p-3 bg-slate-800/40 rounded-xl">
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${i.is_up ? 'bg-green-500' : 'bg-red-500'}`} />
+                    <span className="text-sm font-mono text-white w-20">{i.name}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-slate-300 font-mono truncate" title={i.ipv4 || ''}>
+                      {i.ipv4 || '—'}
+                    </p>
+                    <p className="text-[10px] text-slate-500 font-mono truncate">
+                      {i.mac || ''} {i.speed_mbps && ` · ${i.speed_mbps} Mbps`} {i.mtu && ` · MTU ${i.mtu}`}
+                    </p>
+                  </div>
+                  {counter && (
+                    <div className="text-right text-[11px] flex-shrink-0">
+                      <p className="text-cyan-400">↓ {counter.recv_human}</p>
+                      <p className="text-purple-400">↑ {counter.sent_human}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Connections */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+          <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-cyan-400" />
+            Verbindingen
+          </h3>
+          {connections ? (
+            <div className="space-y-2">
+              <ConnRow label="Established" value={connections.ESTABLISHED} color="green" />
+              <ConnRow label="Listen" value={connections.LISTEN} color="cyan" />
+              <ConnRow label="Time-wait" value={connections.TIME_WAIT} color="amber" />
+              <ConnRow label="Overig" value={connections.OTHER} color="slate" />
+              {/* Errors */}
+              <div className="pt-3 mt-3 border-t border-slate-800">
+                <p className="text-[10px] text-slate-500 uppercase mb-2">Fouten</p>
+                <ConnRow label="In" value={total.errin} color={total.errin > 0 ? 'red' : 'green'} />
+                <ConnRow label="Out" value={total.errout} color={total.errout > 0 ? 'red' : 'green'} />
+                <ConnRow label="Drop in" value={total.dropin} color={total.dropin > 0 ? 'red' : 'green'} />
+                <ConnRow label="Drop out" value={total.dropout} color={total.dropout > 0 ? 'red' : 'green'} />
+              </div>
+            </div>
+          ) : (
+            <p className="text-xs text-slate-500 text-center py-6">
+              Verbinding-info niet beschikbaar (geen rechten in container)
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Recente requests — ECHT via middleware */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+          <Activity className="w-4 h-4 text-cyan-400" />
+          Recente API requests
+          <span className="text-[10px] text-slate-500 ml-2">(laatste {recent_requests.length} van {info.recent_count})</span>
+        </h3>
+        {recent_requests.length === 0 ? (
+          <p className="text-xs text-slate-500 text-center py-6">Nog geen requests sinds backend start</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs text-slate-500 border-b border-slate-700">
+                  <th className="pb-2">Wanneer</th>
+                  <th className="pb-2">Method</th>
+                  <th className="pb-2">Path</th>
+                  <th className="pb-2">Status</th>
+                  <th className="pb-2">Tijd</th>
+                  <th className="pb-2">IP</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recent_requests.map((r, i) => (
+                  <tr key={i} className="border-b border-slate-800/40 last:border-0">
+                    <td className="py-2 text-slate-500 text-xs">{r.age_str}</td>
+                    <td className="py-2">
+                      <span className={`px-1.5 py-0.5 rounded text-[10px] ${
+                        r.method === 'GET' ? 'bg-cyan-500/20 text-cyan-400' :
+                        r.method === 'POST' ? 'bg-amber-500/20 text-amber-400' :
+                        r.method === 'DELETE' ? 'bg-red-500/20 text-red-400' :
+                        r.method === 'PUT' ? 'bg-purple-500/20 text-purple-400' :
+                        'bg-slate-700 text-slate-400'
+                      }`}>{r.method}</span>
+                    </td>
+                    <td className="py-2 text-slate-300 font-mono text-xs truncate max-w-[280px]" title={r.path}>{r.path}</td>
+                    <td className="py-2">
+                      <span className={`px-1.5 py-0.5 rounded text-[10px] ${
+                        r.status < 300 ? 'bg-green-500/20 text-green-400' :
+                        r.status < 400 ? 'bg-blue-500/20 text-blue-400' :
+                        r.status < 500 ? 'bg-amber-500/20 text-amber-400' :
+                        'bg-red-500/20 text-red-400'
+                      }`}>{r.status}</span>
+                    </td>
+                    <td className="py-2 text-slate-500 text-xs">{r.duration_ms}ms</td>
+                    <td className="py-2 text-slate-500 font-mono text-xs">{r.ip}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatCard({ label, value, icon: Icon, color, sub }) {
+  const bgs = {
+    cyan: 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400',
+    purple: 'bg-purple-500/10 border-purple-500/20 text-purple-400',
+    green: 'bg-green-500/10 border-green-500/20 text-green-400',
+    amber: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
+  };
+  return (
+    <div className={`${bgs[color]} border rounded-2xl p-4`}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[10px] text-slate-400 uppercase tracking-wider">{label}</span>
+        <Icon className="w-4 h-4" />
+      </div>
+      <p className="text-2xl font-bold text-white truncate">{value}</p>
+      {sub && <p className="text-[10px] text-slate-500 mt-1 truncate">{sub}</p>}
+    </div>
+  );
+}
+
+function ConnRow({ label, value, color }) {
+  const dotColors = {
+    green: 'bg-green-500', cyan: 'bg-cyan-500', amber: 'bg-amber-500',
+    red: 'bg-red-500', slate: 'bg-slate-500',
+  };
+  return (
+    <div className="flex items-center justify-between py-1.5">
+      <div className="flex items-center gap-2">
+        <span className={`w-2 h-2 rounded-full ${dotColors[color]}`} />
+        <span className="text-xs text-slate-400">{label}</span>
+      </div>
+      <span className="text-sm text-white font-mono">{value}</span>
+    </div>
+  );
+}
+
+// === Old NetworkTab (replaced) ===
+function _OldNetworkTab() {
   const connections = [
     { type: 'WebSocket', count: 12, status: 'active', latency: '23ms' },
     { type: 'HTTP/REST', count: 456, status: 'active', latency: '45ms' },
@@ -383,8 +567,30 @@ function NetworkTab() {
   );
 }
 
-// Layer Tab Content
+// Layer Tab Content — IN ONTWIKKELING (mock data, niet betrouwbaar)
 function LayerTab() {
+  return (
+    <div data-testid="analytics-layer-tab" className="space-y-6">
+      <div className="bg-amber-500/5 border border-amber-500/30 rounded-2xl p-6 text-center">
+        <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-3" />
+        <h3 className="text-lg font-bold text-white mb-2">In ontwikkeling</h3>
+        <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+          De LAYER-tab toont een architectuur-overzicht (lagen, modules, dependencies, data-flow).
+          De data hieronder is <strong className="text-amber-400">mock-data uit een eerdere versie</strong> en
+          komt niet overeen met de huidige codebase. Wordt herwerkt zodra de hoofdmodules klaar zijn.
+        </p>
+        <p className="text-[10px] text-slate-600 mt-3">
+          Voor echte module-inventaris: scan <code className="bg-slate-800 px-1.5 py-0.5 rounded">/app/backend/modules/</code>
+        </p>
+      </div>
+      <div className="opacity-40 pointer-events-none">
+        <_OldLayerTab />
+      </div>
+    </div>
+  );
+}
+
+function _OldLayerTab() {
   const layers = [
     {
       name: 'Presentatie Laag',

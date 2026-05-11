@@ -39,6 +39,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Request tracking middleware (voor analytics > network tab)
+import time as _time
+from fastapi import Request as _Request
+
+@app.middleware("http")
+async def track_requests(request: _Request, call_next):
+    start = _time.time()
+    response = await call_next(request)
+    duration_ms = (_time.time() - start) * 1000
+    # Skip de tracking-endpoint zelf om recursie/spam te voorkomen
+    path = request.url.path
+    if path.startswith("/api/analytics/network-info"):
+        return response
+    try:
+        from modules.analytics.routes import track_request
+        client_ip = request.client.host if request.client else "?"
+        track_request(client_ip, request.method, path, response.status_code, duration_ms)
+    except Exception:
+        pass
+    return response
+
 # ============== MODULE IMPORTS ==============
 # Modules worden hier 1 voor 1 toegevoegd als ze klaar zijn
 

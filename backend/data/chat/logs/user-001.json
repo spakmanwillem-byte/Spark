@@ -677,11 +677,119 @@
         "session_id": "default",
         "gesprek_nummer": 25
       }
+    },
+    {
+      "id": "conv-2b382f46",
+      "timestamp": "2026-05-11T22:20:58.273054+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 26
+      }
+    },
+    {
+      "id": "conv-9401925b",
+      "timestamp": "2026-05-11T22:21:37.733492+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Heb jij ook een andere openingszin",
+      "spark_response": "**O**: De chemische afkorting voor zuurstof is O.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "O"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 27
+      }
+    },
+    {
+      "id": "conv-c0b19e6b",
+      "timestamp": "2026-05-11T22:22:13.055467+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil eigenlijk gewoon met je praten",
+      "spark_response": "Ik ken deze woorden nog niet: **eigenlijk, praten**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "eigenlijk",
+          "praten"
+        ],
+        "snap_suggestions": [
+          "eigenlijk",
+          "praten"
+        ],
+        "word_count": 7,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 28
+      }
+    },
+    {
+      "id": "conv-5db521ae",
+      "timestamp": "2026-05-11T22:24:12.058873+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Fijn, dan zal ik de kaarten beantwoorden.",
+      "spark_response": "**Kaart**: Kaart is een visuele weergave van een gebied of systeem\n\nNieuw geleerd: **beantwoorden** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Kaart"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "beantwoorden"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 29
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 25,
-    "last_updated": "2026-05-07T19:23:50.292662+00:00"
+    "total_conversations": 29,
+    "last_updated": "2026-05-11T22:24:12.058873+00:00"
   }
 }

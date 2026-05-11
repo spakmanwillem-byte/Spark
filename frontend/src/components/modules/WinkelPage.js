@@ -22,6 +22,7 @@ export function WinkelPage({ onNavigate }) {
   const [ordering, setOrdering] = useState(false);
   const [orderResult, setOrderResult] = useState(null);
   const [activeTab, setActiveTab] = useState('merch');
+  const [digitalSubTab, setDigitalSubTab] = useState('storage');
 
   // Token buy state
   const [tokenQty, setTokenQty] = useState('1');
@@ -149,12 +150,11 @@ export function WinkelPage({ onNavigate }) {
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* Main Tabs: Fysiek vs Digitaal */}
         <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 border border-slate-800">
           {[
-            { id: 'merch', label: 'Merch', icon: Tag },
-            { id: 'storage', label: 'Opslag', icon: HardDrive },
-            { id: 'tokens', label: 'ROAR Tokens', icon: Coins },
+            { id: 'merch', label: 'Merch', icon: Tag, hint: 'Fysieke producten' },
+            { id: 'digital', label: 'Digitaal', icon: Package, hint: 'Token & opslag' },
           ].map(tab => (
             <button key={tab.id} data-testid={`shop-tab-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
@@ -164,10 +164,33 @@ export function WinkelPage({ onNavigate }) {
                   : 'text-slate-500 hover:text-slate-300'
               }`}>
               <tab.icon className="w-3.5 h-3.5" />
-              {tab.label}
+              <span>{tab.label}</span>
+              <span className="hidden md:inline text-[10px] text-slate-600">· {tab.hint}</span>
             </button>
           ))}
         </div>
+
+        {/* Sub-tabs voor digitaal */}
+        {activeTab === 'digital' && (
+          <div className="flex gap-2 px-1">
+            {[
+              { id: 'storage', label: 'Opslag', icon: HardDrive, color: '#3b82f6' },
+              { id: 'tokens', label: 'ROAR Token', icon: Coins, color: '#f59e0b' },
+            ].map(sub => (
+              <button key={sub.id} data-testid={`shop-subtab-${sub.id}`}
+                onClick={() => setDigitalSubTab(sub.id)}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[11px] font-medium transition-all ${
+                  digitalSubTab === sub.id
+                    ? 'bg-slate-800 text-white border border-slate-700'
+                    : 'text-slate-500 hover:text-slate-300 border border-transparent'
+                }`}
+                style={{ color: digitalSubTab === sub.id ? sub.color : undefined }}>
+                <sub.icon className="w-3 h-3" />
+                {sub.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* MERCH TAB */}
         {activeTab === 'merch' && (
@@ -216,8 +239,8 @@ export function WinkelPage({ onNavigate }) {
           </div>
         )}
 
-        {/* OPSLAG TAB */}
-        {activeTab === 'storage' && (
+        {/* OPSLAG (sub van digitaal) */}
+        {activeTab === 'digital' && digitalSubTab === 'storage' && (
           <StorageTab
             products={storageProducts}
             storageStats={storageStats}
@@ -226,8 +249,8 @@ export function WinkelPage({ onNavigate }) {
           />
         )}
 
-        {/* ROAR TOKENS TAB */}
-        {activeTab === 'tokens' && (
+        {/* ROAR TOKENS (sub van digitaal) */}
+        {activeTab === 'digital' && digitalSubTab === 'tokens' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Token Info */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">

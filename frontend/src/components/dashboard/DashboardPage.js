@@ -16,6 +16,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const [fileStats, setFileStats] = useState(null);
   const [userStats, setUserStats] = useState(null);
   const [systemHealth, setSystemHealth] = useState(null);
+  const [storageStats, setStorageStats] = useState(null);
 
   useEffect(() => {
     if (activePage !== 'dashboard') return;
@@ -25,13 +26,15 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       fetch(`${API}/api/files/tree`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/auth/users`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/system/health`).then(r => r.json()).catch(() => null),
-    ]).then(([kb, files, users, health]) => {
+      user?.id ? fetch(`${API}/api/archive/${user.id}/stats`).then(r => r.json()).catch(() => null) : null,
+    ]).then(([kb, files, users, health, storage]) => {
       setKnowledgeStats(kb);
       setFileStats(files);
       setUserStats(users);
       setSystemHealth(health);
+      setStorageStats(storage);
     });
-  }, [activePage]);
+  }, [activePage, user?.id]);
 
   const pageInfo = getPageInfo(activePage);
   const PageIcon = pageInfo?.icon || Activity;
@@ -238,29 +241,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
               </div>
             </Card>
 
-            {/* Files */}
-            <Card title="Bestanden" icon={FileCode} accent="#a855f7" onClick={() => onNavigate('integrations', '/modules/integrations')}>
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400">Backend</span>
-                  <span className="text-xs text-white font-medium">{backendFiles} bestanden</span>
-                </div>
-                <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full bg-blue-500" style={{ width: `${totalFiles > 0 ? (backendFiles/totalFiles)*100 : 0}%` }} />
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400">Frontend</span>
-                  <span className="text-xs text-white font-medium">{frontendFiles} bestanden</span>
-                </div>
-                <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full bg-purple-500" style={{ width: `${totalFiles > 0 ? (frontendFiles/totalFiles)*100 : 0}%` }} />
-                </div>
-                <div className="pt-1 flex items-center justify-between text-[10px] text-slate-500">
-                  <span>Totaal</span>
-                  <span className="text-slate-300">{totalFiles}</span>
-                </div>
-              </div>
-            </Card>
+            {/* Mijn Opslag */}
+            <StorageCard storageStats={storageStats} onNavigate={onNavigate} />
 
             {/* Agenda Quick */}
             <Card title="Agenda" icon={Calendar} accent="#f97316" onClick={() => onNavigate('calendar', '/calendar')}>
@@ -309,6 +291,113 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
         </div>
       </div>
     </MainLayout>
+  );
+}
+
+/* === Storage Card (eigen opslag met breakdown chart) === */
+function StorageCard({ storageStats, onNavigate }) {
+  const q = storageStats?.quota || {};
+  const baseGb = q.base_gb || 0;
+  const purchasedGb = q.purchased_gb || 0;
+  const giftGb = q.gift_gb || 0;
+  const totalGb = q.total_gb || 1;
+  const usedBytes = q.used_bytes || 0;
+  const totalBytes = q.total_bytes || 1;
+  const usedPercent = q.used_percent || 0;
+  const totalFiles = storageStats?.total_files || 0;
+
+  // Bytes formatter
+  const fmtBytes = (n) => {
+    if (!n) return '0 B';
+    const u = ['B','KB','MB','GB'];
+    const i = Math.min(Math.floor(Math.log(n) / Math.log(1024)), 3);
+    return `${(n / Math.pow(1024, i)).toFixed(i === 0 ? 0 : 1)} ${u[i]}`;
+  };
+
+  // Breakdown bar segments (percentages van totaal)
+  const basePct = (baseGb / totalGb) * 100;
+  const purchasedPct = (purchasedGb / totalGb) * 100;
+  const giftPct = (giftGb / totalGb) * 100;
+
+  const colors = {
+    base: '#3b82f6',      // blauw — basis
+    purchased: '#22c55e', // groen — gekocht
+    gift: '#ec4899',      // roze — cadeau
+    used: '#f59e0b',      // oranje — gebruikt
+  };
+
+  return (
+    <div data-testid="storage-card"
+      className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden cursor-pointer hover:border-slate-600 transition-colors"
+      onClick={() => onNavigate('archief', '/archief')}>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800/50">
+        <div className="flex items-center gap-2">
+          <HardDrive className="w-4 h-4" style={{ color: '#3b82f6' }} />
+          <h3 className="text-sm font-semibold text-white">Mijn Opslag</h3>
+        </div>
+        <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{
+          background: usedPercent > 90 ? '#ef444415' : '#22c55e15',
+          color: usedPercent > 90 ? '#ef4444' : '#22c55e',
+        }}>
+          {totalGb}GB
+        </span>
+      </div>
+      <div className="p-4 space-y-3">
+        {/* Quota breakdown bar */}
+        <div>
+          <div className="flex items-baseline justify-between mb-1.5">
+            <span className="text-xs text-slate-400">
+              {fmtBytes(usedBytes)} <span className="text-slate-600">van</span> {fmtBytes(totalBytes)}
+            </span>
+            <span className="text-xs font-medium" style={{ color: colors.used }}>{usedPercent}%</span>
+          </div>
+          {/* Gestapeld: basis | gekocht | cadeau */}
+          <div className="h-3 bg-slate-800 rounded-full overflow-hidden flex relative">
+            {basePct > 0 && <div style={{ width: `${basePct}%`, background: colors.base }} title={`Basis: ${baseGb}GB`} />}
+            {purchasedPct > 0 && <div style={{ width: `${purchasedPct}%`, background: colors.purchased }} title={`Gekocht: ${purchasedGb}GB`} />}
+            {giftPct > 0 && <div style={{ width: `${giftPct}%`, background: colors.gift }} title={`Cadeau: ${giftGb}GB`} />}
+            {/* Used overlay */}
+            <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-amber-400/30 to-amber-500/60 border-r-2 border-amber-400"
+              style={{ width: `${Math.min(usedPercent, 100)}%` }} />
+          </div>
+        </div>
+
+        {/* Legend met cijfers */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="p-2 rounded-lg" style={{ background: `${colors.base}10`, border: `1px solid ${colors.base}30` }}>
+            <div className="flex items-center gap-1 mb-0.5">
+              <span className="w-2 h-2 rounded-full" style={{ background: colors.base }} />
+              <span className="text-[9px] text-slate-400 uppercase tracking-wider">Basis</span>
+            </div>
+            <p className="text-sm font-bold text-white">{baseGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+          </div>
+          <div className="p-2 rounded-lg" style={{ background: `${colors.purchased}10`, border: `1px solid ${colors.purchased}30` }}>
+            <div className="flex items-center gap-1 mb-0.5">
+              <span className="w-2 h-2 rounded-full" style={{ background: colors.purchased }} />
+              <span className="text-[9px] text-slate-400 uppercase tracking-wider">Gekocht</span>
+            </div>
+            <p className="text-sm font-bold text-white">{purchasedGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+          </div>
+          <div className="p-2 rounded-lg" style={{ background: `${colors.gift}10`, border: `1px solid ${colors.gift}30` }}>
+            <div className="flex items-center gap-1 mb-0.5">
+              <span className="w-2 h-2 rounded-full" style={{ background: colors.gift }} />
+              <span className="text-[9px] text-slate-400 uppercase tracking-wider">Cadeau</span>
+            </div>
+            <p className="text-sm font-bold text-white">{giftGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+          </div>
+        </div>
+
+        {/* Bottom: totaal files + upgrade-CTA */}
+        <div className="flex items-center justify-between pt-2 border-t border-slate-800/50">
+          <span className="text-[10px] text-slate-500">{totalFiles} bestanden opgeslagen</span>
+          <button onClick={(e) => { e.stopPropagation(); onNavigate('winkel', '/modules/winkel'); }}
+            data-testid="storage-upgrade-btn"
+            className="flex items-center gap-1 text-[10px] text-amber-400 hover:text-amber-300 font-medium">
+            <Plus className="w-3 h-3" /> Koop extra
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

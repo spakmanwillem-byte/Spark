@@ -3,6 +3,7 @@ User Archive Routes - per-user persoonlijke opslag
 Categorieën: bestanden | foto | geluiden | filmpjes (auto-detect via extensie)
 Storage: /app/backend/data/users/{user_id}/archive/{category}/
 Index:   /app/backend/data/users/{user_id}/archive/_index.json
+Quota:   /app/backend/data/users/{user_id}/archive/_quota.json
 """
 import os
 import uuid
@@ -21,6 +22,10 @@ router = APIRouter(prefix="/archive", tags=["user-archive"])
 
 BASE_DIR = Path(__file__).parent.parent.parent / "data" / "users"
 MAX_SIZE_BYTES = 50 * 1024 * 1024  # 50MB per file
+
+# Quota systeem
+GB = 1024 * 1024 * 1024
+BASE_QUOTA_GB = 1  # iedere user krijgt 1GB gratis
 
 # Categorie detectie op basis van extensie
 EXT_MAP = {
@@ -55,6 +60,10 @@ def _index_file(user_id: str) -> Path:
     return _user_dir(user_id) / "_index.json"
 
 
+def _quota_file(user_id: str) -> Path:
+    return _user_dir(user_id) / "_quota.json"
+
+
 def _load_index(user_id: str) -> List[dict]:
     data = load_json(_index_file(user_id), default={"files": []})
     return data.get("files", [])
@@ -68,8 +77,49 @@ def _save_index(user_id: str, files: List[dict]):
     })
 
 
+def _load_quota(user_id: str) -> dict:
+    """
+    Quota structuur:
+    {
+      base_gb: 1,            # gratis basis
+      purchased_gb: 0,       # gekocht via shop
+      gift_gb: 0,            # cadeau gekregen (events/admin)
+      events: [ {type, gb, reason, granted_at} ]
+    }
+    """
+    default = {
+        "user_id": user_id,
+        "base_gb": BASE_QUOTA_GB,
+        "purchased_gb": 0,
+        "gift_gb": 0,
+        "events": [],
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    data = load_json(_quota_file(user_id), default=default)
+    # Garandeer alle velden bestaan
+    for k, v in default.items():
+        if k not in data:
+            data[k] = v
+    return data
+
+
+def _save_quota(user_id: str, q: dict):
+    q["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(_quota_file(user_id), q)
+
+
+def _used_bytes(user_id: str) -> int:
+    files = _load_index(user_id)
+    return sum(f.get("size_bytes", 0) for f in files)
+
+
+def _quota_bytes(quota: dict) -> int:
+    total_gb = (quota.get("base_gb", 0) or 0) + (quota.get("purchased_gb", 0) or 0) + (quota.get("gift_gb", 0) or 0)
+    return int(total_gb * GB)
+
+
 # ============================================================
-# UPLOAD
+# UPLOAD (met quota check)
 # ============================================================
 
 @router.post("/{user_id}/upload")
@@ -88,6 +138,18 @@ async def upload_file(
         raise HTTPException(413, f"Bestand te groot (max {MAX_SIZE_BYTES // 1024 // 1024}MB)")
     if len(content) == 0:
         raise HTTPException(400, "Leeg bestand")
+
+    # Quota enforcement
+    quota = _load_quota(user_id)
+    used = _used_bytes(user_id)
+    available = _quota_bytes(quota) - used
+    if len(content) > available:
+        total_gb = (quota.get("base_gb", 0) or 0) + (quota.get("purchased_gb", 0) or 0) + (quota.get("gift_gb", 0) or 0)
+        raise HTTPException(
+            413,
+            f"Opslaglimiet bereikt. Je hebt {total_gb}GB, "
+            f"{round(used / GB, 2)}GB gebruikt. Koop extra opslag in de Winkel."
+        )
 
     original_name = file.filename or "untitled"
     category = _detect_category(original_name)
@@ -258,14 +320,15 @@ async def delete_file(user_id: str, file_id: str):
 
 
 # ============================================================
-# STATS (los endpoint voor dashboard)
+# STATS (los endpoint voor dashboard) - met quota info
 # ============================================================
 
 @router.get("/{user_id}/stats")
 async def get_stats(user_id: str):
-    """Quick stats voor user archief."""
+    """Quick stats voor user archief — inclusief quota breakdown."""
     _user_dir(user_id)
     files = _load_index(user_id)
+    quota = _load_quota(user_id)
     counts = {cat: 0 for cat in CATEGORIES}
     total_bytes = 0
     for f in files:
@@ -273,10 +336,85 @@ async def get_stats(user_id: str):
         if cat in counts:
             counts[cat] += 1
         total_bytes += f.get("size_bytes", 0)
+
+    total_gb = (quota.get("base_gb", 0) or 0) + (quota.get("purchased_gb", 0) or 0) + (quota.get("gift_gb", 0) or 0)
+    quota_bytes = int(total_gb * GB)
+
     return {
         "user_id": user_id,
         "total_files": len(files),
         "total_size_bytes": total_bytes,
         "counts": counts,
         "categories": CATEGORIES,
+        "quota": {
+            "base_gb": quota.get("base_gb", 0),
+            "purchased_gb": quota.get("purchased_gb", 0),
+            "gift_gb": quota.get("gift_gb", 0),
+            "total_gb": total_gb,
+            "total_bytes": quota_bytes,
+            "used_bytes": total_bytes,
+            "available_bytes": max(0, quota_bytes - total_bytes),
+            "used_percent": round((total_bytes / quota_bytes * 100), 2) if quota_bytes > 0 else 0,
+            "events": quota.get("events", [])[-10:],  # laatste 10 events
+        }
+    }
+
+
+# ============================================================
+# QUOTA — ophalen + uitbreiden via aankoop / cadeau
+# ============================================================
+
+class StorageGrant(BaseModel):
+    gb: int  # hoeveel GB toevoegen
+    source: str  # "purchase" of "gift"
+    reason: Optional[str] = ""
+
+
+@router.get("/{user_id}/quota")
+async def get_quota(user_id: str):
+    """Lees alleen de quota info van een user."""
+    _user_dir(user_id)
+    quota = _load_quota(user_id)
+    used = _used_bytes(user_id)
+    total_gb = (quota.get("base_gb", 0) or 0) + (quota.get("purchased_gb", 0) or 0) + (quota.get("gift_gb", 0) or 0)
+    return {
+        "user_id": user_id,
+        **{k: v for k, v in quota.items() if k != "events"},
+        "total_gb": total_gb,
+        "total_bytes": int(total_gb * GB),
+        "used_bytes": used,
+        "events": quota.get("events", []),
+    }
+
+
+@router.post("/{user_id}/quota/grant")
+async def grant_storage(user_id: str, body: StorageGrant):
+    """
+    Voeg opslag toe aan user.
+    source = 'purchase' → purchased_gb groeit
+    source = 'gift'     → gift_gb groeit
+    """
+    if body.gb <= 0:
+        raise HTTPException(400, "GB moet > 0 zijn")
+    if body.source not in ("purchase", "gift"):
+        raise HTTPException(400, "source moet 'purchase' of 'gift' zijn")
+
+    _user_dir(user_id)
+    quota = _load_quota(user_id)
+    field = "purchased_gb" if body.source == "purchase" else "gift_gb"
+    quota[field] = (quota.get(field, 0) or 0) + body.gb
+    quota.setdefault("events", []).append({
+        "type": body.source,
+        "gb": body.gb,
+        "reason": body.reason or ("Storage aankoop" if body.source == "purchase" else "Cadeau"),
+        "granted_at": datetime.now(timezone.utc).isoformat(),
+    })
+    _save_quota(user_id, quota)
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "added_gb": body.gb,
+        "source": body.source,
+        "new_total_gb": (quota.get("base_gb", 0) or 0) + (quota.get("purchased_gb", 0) or 0) + (quota.get("gift_gb", 0) or 0),
     }

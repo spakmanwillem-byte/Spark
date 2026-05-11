@@ -663,6 +663,16 @@
             "Anti-abuse: lege/nonsens-snaps geven geen XP (vereist status=reviewed of laag1 ingevuld)"
           ],
           "completed_date": "2026-04-20"
+        },
+        {
+          "id": "v3_014",
+          "titel": "Storage quota systeem (basis/gekocht/cadeau)",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Per-user 1GB basisopslag in persoonlijk archief. Quota model: base_gb + purchased_gb + gift_gb. Upload geweigerd bij overschrijding (HTTP 413). Shop product 'storage-1gb' (€10) voegt direct 1GB toe na aankoop. Admin endpoint POST /api/archive/{user_id}/quota/grant voor cadeau (events). Dashboard widget toont breakdown met kleuren: blauw=basis, groen=gekocht, roze=cadeau, oranje=gebruikt. Events worden gelogd voor zichtbaarheid van geschiedenis.",
+          "discovery": "11 mei 2026: user wenst persoonlijke opslagruimte met aankoop + cadeau-mogelijkheid als gamification."
         }
       ]
     },

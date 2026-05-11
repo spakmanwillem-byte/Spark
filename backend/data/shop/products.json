@@ -4,38 +4,46 @@
       "id": "roadkill-cap",
       "name": "Roadkill Cap",
       "description": "Zwarte cap met geborduurd Roadkill logo. One size fits all.",
-      "price": 17.50,
+      "price": 17.5,
       "category": "merch",
       "image_icon": "hat",
       "in_stock": true,
       "cost_breakdown": {
-        "cap": 7.50,
-        "logo": 3.00,
-        "margin": 7.00
+        "cap": 7.5,
+        "logo": 3.0,
+        "margin": 7.0
       },
-      "tags": ["kleding", "accessoire"],
+      "tags": [
+        "kleding",
+        "accessoire"
+      ],
       "entity_id": "roadkill_merch"
     },
     {
       "id": "roadkill-hoodie",
       "name": "Roadkill Hoodie",
       "description": "Premium hoodie met groot Roadkill print op de rug. Zwart, unisex.",
-      "price": 55.00,
+      "price": 55.0,
       "category": "merch",
       "image_icon": "shirt",
       "in_stock": true,
-      "tags": ["kleding"],
+      "tags": [
+        "kleding"
+      ],
       "entity_id": "roadkill_merch"
     },
     {
       "id": "roadkill-hoodie-broek-set",
       "name": "Hoodie + Broek Set",
       "description": "Complete Roadkill outfit. Hoodie en joggingbroek met subtiel logo.",
-      "price": 85.00,
+      "price": 85.0,
       "category": "merch",
       "image_icon": "package",
       "in_stock": true,
-      "tags": ["kleding", "set"],
+      "tags": [
+        "kleding",
+        "set"
+      ],
       "entity_id": "roadkill_merch"
     },
     {
@@ -47,9 +55,53 @@
       "image_icon": "coin",
       "in_stock": true,
       "dynamic_price": true,
-      "tags": ["investering", "token"],
+      "tags": [
+        "investering",
+        "token"
+      ],
       "entity_id": "spark_core"
+    },
+    {
+      "id": "storage-1gb",
+      "name": "1GB Opslag Pack",
+      "description": "Voeg 1GB extra opslag toe aan je persoonlijk archief. Direct beschikbaar na aankoop.",
+      "price": 10.0,
+      "category": "storage",
+      "entity_id": "spark_ai",
+      "in_stock": true,
+      "icon": "HardDrive",
+      "color": "#3b82f6",
+      "metadata": {
+        "gb_amount": 1,
+        "grants": "storage_purchased"
+      }
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "87dda8df",
+      "user_id": "user-001",
+      "items": [
+        {
+          "product_id": "storage-1gb",
+          "name": "1GB Opslag Pack",
+          "price": 10.0,
+          "quantity": 1,
+          "line_total": 10.0,
+          "entity_id": "spark_ai",
+          "category": "storage",
+          "metadata": {
+            "gb_amount": 1,
+            "grants": "storage_purchased"
+          }
+        }
+      ],
+      "total": 10.0,
+      "status": "besteld",
+      "shipping_name": null,
+      "shipping_address": null,
+      "notes": null,
+      "created_at": "2026-05-11T20:10:36.099158+00:00"
+    }
+  ]
 }

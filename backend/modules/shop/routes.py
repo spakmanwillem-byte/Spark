@@ -389,6 +389,8 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             "quantity": item.quantity,
             "line_total": line_total,
             "entity_id": prod.get("entity_id", "roadkill_merch"),
+            "category": prod.get("category", "merch"),
+            "metadata": prod.get("metadata", {}),
         })
 
     total = round(total, 2)
@@ -455,11 +457,34 @@ async def create_order(user_id: str, req: CreateOrderRequest):
     data["orders"].append(order)
     save_json(PRODUCTS_FILE, data)
 
+    # Activeer storage-items DIRECT (intern API-call zou ook werken, maar direct is sneller)
+    storage_granted_gb = 0
+    for item in order_items:
+        if item.get("category") == "storage":
+            gb_per_unit = (item.get("metadata") or {}).get("gb_amount", 1)
+            total_gb = gb_per_unit * item.get("quantity", 1)
+            try:
+                from modules.user_archive.routes import _load_quota, _save_quota, _user_dir
+                _user_dir(user_id)
+                quota = _load_quota(user_id)
+                quota["purchased_gb"] = (quota.get("purchased_gb", 0) or 0) + total_gb
+                quota.setdefault("events", []).append({
+                    "type": "purchase",
+                    "gb": total_gb,
+                    "reason": f"Aankoop: {item['name']} (order #{order_id})",
+                    "granted_at": now,
+                })
+                _save_quota(user_id, quota)
+                storage_granted_gb += total_gb
+            except Exception as e:
+                print(f"[SHOP] Storage activeren mislukt: {e}")
+
     return {
         "success": True,
         "message": f"Bestelling #{order_id} geplaatst!",
         "order": order,
         "new_balance": wallets["wallets"][user_id]["balance"],
+        "storage_granted_gb": storage_granted_gb,
     }
 
 

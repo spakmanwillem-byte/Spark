@@ -248,8 +248,12 @@ class AuthService:
     @staticmethod
     def delete_user(user_id: str) -> bool:
         """
-        Delete user.
+        Delete user + alle gekoppelde persoonlijke data.
         Bescherming: user-001 (admin/Willem) kan niet verwijderd worden.
+
+        Cascade-delete:
+        - data/chat/logs/{user_id}.json (gesprekslogs)
+        - data/users/{user_id}/         (persoonlijk archief + quota)
         """
         if user_id == "user-001":
             return False
@@ -258,10 +262,35 @@ class AuthService:
         original_len = len(users)
         users = [u for u in users if u.get("id") != user_id]
 
-        if len(users) < original_len:
-            return AuthService._save_users(users)
+        if len(users) >= original_len:
+            return False
 
-        return False
+        if not AuthService._save_users(users):
+            return False
+
+        # Cascade-delete persoonlijke data
+        import shutil
+        BASE = Path(__file__).parent.parent.parent / "data"
+
+        # 1. Chat-logs
+        chat_log = BASE / "chat" / "logs" / f"{user_id}.json"
+        if chat_log.exists():
+            try:
+                chat_log.unlink()
+                print(f"[AUTH] Cascade: chat log gewist voor {user_id}")
+            except OSError as e:
+                print(f"[AUTH] Kon chat log niet verwijderen: {e}")
+
+        # 2. Archief + quota + bestanden
+        archive_dir = BASE / "users" / user_id
+        if archive_dir.exists():
+            try:
+                shutil.rmtree(archive_dir)
+                print(f"[AUTH] Cascade: archief gewist voor {user_id}")
+            except OSError as e:
+                print(f"[AUTH] Kon archief niet verwijderen: {e}")
+
+        return True
 
     @staticmethod
     def reset_password(user_id: str, new_sleutelwoord: str = "Welkom01") -> Optional[str]:

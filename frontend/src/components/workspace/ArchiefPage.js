@@ -3,7 +3,8 @@ import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
   Archive, Search, Upload, Trash2, X, File as FileIcon,
-  Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive
+  Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive,
+  MessageSquare, Lock, Calendar
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -13,6 +14,7 @@ const CATEGORIES = [
   { id: 'foto', label: 'Foto', icon: ImageIcon, color: '#22c55e', accept: 'image/*' },
   { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7', accept: 'audio/*' },
   { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899', accept: 'video/*' },
+  { id: 'gesprekken', label: 'Gesprekken', icon: MessageSquare, color: '#06b6d4', accept: null }, // read-only
 ];
 
 function formatBytes(n) {
@@ -31,23 +33,46 @@ export function ArchiefPage({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('bestanden');
   const [files, setFiles] = useState([]);
   const [stats, setStats] = useState(null);
+  const [conversations, setConversations] = useState([]);
+  const [chatStats, setChatStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [expandedConv, setExpandedConv] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const params = new URLSearchParams();
-    params.append('category', activeTab);
-    if (search) params.append('q', search);
-    try {
-      const res = await fetch(`${API}/api/archive/${userId}?${params}`).then(r => r.json());
-      setFiles(res.files || []);
-      setStats(res.stats || null);
-    } catch (e) { console.error(e); }
+    if (activeTab === 'gesprekken') {
+      // Read-only: gesprekslogs ophalen
+      const params = new URLSearchParams({ limit: '200' });
+      if (search) params.append('search', search);
+      try {
+        const [logsRes, sRes] = await Promise.all([
+          fetch(`${API}/api/chat/logs/${userId}?${params}`).then(r => r.json()),
+          fetch(`${API}/api/chat/logs/${userId}/stats`).then(r => r.json()),
+        ]);
+        setConversations(logsRes.conversations || []);
+        setChatStats(sRes);
+        // Stats ook bij gesprekken-tab tonen we de file stats voor counters
+        const fileStatRes = await fetch(`${API}/api/archive/${userId}/stats`).then(r => r.json()).catch(() => null);
+        setStats(fileStatRes);
+      } catch (e) { console.error(e); }
+    } else {
+      const params = new URLSearchParams();
+      params.append('category', activeTab);
+      if (search) params.append('q', search);
+      try {
+        const res = await fetch(`${API}/api/archive/${userId}?${params}`).then(r => r.json());
+        setFiles(res.files || []);
+        setStats(res.stats || null);
+        // Ook chat stats laden zodat tab-counter klopt
+        const cs = await fetch(`${API}/api/chat/logs/${userId}/stats`).then(r => r.json()).catch(() => null);
+        setChatStats(cs);
+      } catch (e) { console.error(e); }
+    }
     setLoading(false);
   }, [userId, activeTab, search]);
 
@@ -129,13 +154,19 @@ export function ArchiefPage({ onNavigate }) {
 
             <div className="ml-auto flex items-center gap-2">
               <input ref={fileInputRef} type="file" data-testid="archief-file-input"
-                onChange={handleUpload} className="hidden" accept={activeCat.accept} />
-              <button data-testid="archief-upload-btn"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-60">
-                <Upload className="w-3.5 h-3.5" /> {uploading ? 'Uploaden...' : 'Upload bestand'}
-              </button>
+                onChange={handleUpload} className="hidden" accept={activeCat.accept || '*'} />
+              {activeTab !== 'gesprekken' ? (
+                <button data-testid="archief-upload-btn"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-60">
+                  <Upload className="w-3.5 h-3.5" /> {uploading ? 'Uploaden...' : 'Upload bestand'}
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/60 border border-slate-700 rounded-lg text-xs text-slate-400" title="Gesprekken kunnen niet handmatig worden toegevoegd of verwijderd">
+                  <Lock className="w-3.5 h-3.5" /> Read-only
+                </div>
+              )}
             </div>
           </div>
 
@@ -149,7 +180,9 @@ export function ArchiefPage({ onNavigate }) {
           <div className="flex overflow-x-auto gap-0">
             {CATEGORIES.map(c => {
               const isActive = activeTab === c.id;
-              const count = stats?.counts?.[c.id] ?? 0;
+              const count = c.id === 'gesprekken'
+                ? (chatStats?.total ?? 0)
+                : (stats?.counts?.[c.id] ?? 0);
               return (
                 <button key={c.id} data-testid={`archief-tab-${c.id}`}
                   onClick={() => setActiveTab(c.id)}
@@ -184,6 +217,14 @@ export function ArchiefPage({ onNavigate }) {
 
             {loading ? (
               <div className="text-center py-16 text-xs text-slate-500">Laden...</div>
+            ) : activeTab === 'gesprekken' ? (
+              <ConversationsView
+                conversations={conversations}
+                chatStats={chatStats}
+                search={search}
+                expandedConv={expandedConv}
+                setExpandedConv={setExpandedConv}
+              />
             ) : files.length === 0 ? (
               <EmptyState category={activeCat} search={search} onUpload={() => fileInputRef.current?.click()} />
             ) : (
@@ -325,3 +366,110 @@ function FileCard({ file, userId, category, isEditing, editForm, setEditForm, on
 }
 
 export default ArchiefPage;
+
+/* === Conversations View (read-only chat-log archief) === */
+function ConversationsView({ conversations, chatStats, search, expandedConv, setExpandedConv }) {
+  if (!conversations || conversations.length === 0) {
+    return (
+      <div className="text-center py-16">
+        <MessageSquare className="w-12 h-12 text-slate-700 mx-auto mb-3" />
+        <p className="text-sm text-slate-400 mb-1">
+          {search ? `Geen gesprekken matchen "${search}"` : 'Nog geen gesprekken gearchiveerd'}
+        </p>
+        <p className="text-xs text-slate-600">
+          Praat met Spark om hier je gesprekslogs te zien
+        </p>
+      </div>
+    );
+  }
+
+  const total = chatStats?.total || conversations.length;
+  const snapCount = chatStats?.snap_count || 0;
+  const avgWords = chatStats?.avg_words || 0;
+
+  return (
+    <div className="space-y-3">
+      {/* Privacy banner */}
+      <div className="flex items-start gap-2 p-3 bg-cyan-500/5 border border-cyan-500/20 rounded-xl">
+        <Lock className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+        <div className="text-[11px] text-slate-400 leading-relaxed">
+          <p className="text-cyan-300 font-medium mb-0.5">Privé gesprekken</p>
+          <p>Deze gesprekken zijn alleen voor jou. Spark gebruikt context (zoals onbekende woorden) om kennis te bouwen, maar het persoonlijke gesprek zelf blijft privé. Logs kunnen niet handmatig verwijderd worden — alleen bij het verwijderen van je account.</p>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="p-2.5 rounded-lg bg-slate-900/50 border border-slate-800">
+          <p className="text-[9px] text-slate-500 uppercase tracking-wider">Gesprekken</p>
+          <p className="text-lg font-bold text-white">{total}</p>
+        </div>
+        <div className="p-2.5 rounded-lg bg-slate-900/50 border border-slate-800">
+          <p className="text-[9px] text-slate-500 uppercase tracking-wider">Met snaps</p>
+          <p className="text-lg font-bold text-cyan-400">{snapCount}</p>
+        </div>
+        <div className="p-2.5 rounded-lg bg-slate-900/50 border border-slate-800">
+          <p className="text-[9px] text-slate-500 uppercase tracking-wider">Avg woorden</p>
+          <p className="text-lg font-bold text-white">{avgWords}</p>
+        </div>
+      </div>
+
+      {/* Lijst */}
+      <div className="space-y-2">
+        {conversations.map(c => {
+          const isExpanded = expandedConv === c.id;
+          const ts = new Date(c.timestamp).toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' });
+          const hasSnap = c.analysis?.snap_suggestions?.length > 0;
+          return (
+            <div key={c.id} data-testid={`conv-${c.id}`}
+              className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
+              <button onClick={() => setExpandedConv(isExpanded ? null : c.id)}
+                className="w-full text-left px-3 py-2.5">
+                <div className="flex items-start gap-2">
+                  <Calendar className="w-3 h-3 text-slate-500 flex-shrink-0 mt-1" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] text-slate-500">{ts}</span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{c.channel || 'spark'}</span>
+                      {hasSnap && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400">
+                          +{c.analysis.snap_suggestions.length} snap
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-white truncate">
+                      <span className="text-amber-400">Jij:</span> {c.user_message}
+                    </p>
+                    {!isExpanded && c.spark_response && (
+                      <p className="text-xs text-slate-500 truncate mt-0.5">
+                        <span className="text-cyan-400">Spark:</span> {c.spark_response}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </button>
+              {isExpanded && (
+                <div className="px-3 pb-3 pt-1 border-t border-slate-800/50 space-y-2">
+                  <div className="bg-slate-800/40 rounded-lg p-2.5">
+                    <p className="text-[10px] text-cyan-400 mb-1 font-medium">Spark:</p>
+                    <p className="text-xs text-slate-300 whitespace-pre-wrap">{c.spark_response || '(geen antwoord)'}</p>
+                  </div>
+                  {c.analysis?.knowledge_matches?.length > 0 && (
+                    <div className="text-[10px] text-slate-500">
+                      Kennis gebruikt: {c.analysis.knowledge_matches.map(m => m.begrip).join(', ')}
+                    </div>
+                  )}
+                  {c.analysis?.snap_suggestions?.length > 0 && (
+                    <div className="text-[10px] text-cyan-400">
+                      Snaps gemaakt: {c.analysis.snap_suggestions.join(', ')}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

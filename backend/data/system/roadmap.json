@@ -714,6 +714,19 @@
             "Gradatie-based zichtbaarheid (admin/normaal/test-user)",
             "Mijn aankopen widget (orders historie)"
           ]
+        },
+        {
+          "id": "v3_018",
+          "titel": "Gesprekken-tab in Persoonlijk Archief (read-only) + cascade-delete",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "5e tab 'Gesprekken' in Archief: read-only weergave van eigen chat-logs met Spark. Privacy-banner: 'Spark gebruikt context om kennis te bouwen, maar persoonlijke gesprek blijft privé'. Geen upload, geen handmatige delete — alleen verwijderd bij account-delete (cascade). Cascade-delete geïmplementeerd in auth.service.delete_user(): wist /data/chat/logs/{id}.json én /data/users/{id}/ folder. End-to-end getest: aanmaken → chat → archief → delete → alles weg.",
+          "discovery": "11 mei 2026: user wil eigen gesprekslogs zien als persoonlijke kennisbron tussen hem en Spark, gescheiden van massa-knowledge.",
+          "linked_to_future": [
+            "Module: duplicaat-info-filter (privacy door letterlijk dubbele info eruit te halen)"
+          ]
         }
       ]
     },

@@ -791,6 +791,35 @@
           "completed_date": "2026-05-11",
           "notes": "NETWORK tab: alle mock-data vervangen door echte psutil + request-tracker middleware. Toont: throughput-rate (bytes/sec, delta tussen calls), totale bytes/packets/errors, interfaces met IPv4/MAC/speed/MTU/up-status, verbindingen per status, per-interface counters, én laatste 20 API requests met method/path/status/duration/IP via track_requests middleware. Auto-refresh elke 3 sec. LAYER tab: gemarkeerd als 'In ontwikkeling' met uitleg-banner. Oude mock-content blijft zichtbaar maar 40% opacity + pointer-events disabled — niet meer per ongeluk te gebruiken voor beslissingen.",
           "discovery": "11 mei 2026: user vroeg of Network live is en wilde Layer markeren omdat die wordt herwerkt."
+        },
+        {
+          "id": "v3_024",
+          "titel": "Systeem Archief in Instellingen (Bestanden/Foto/Geluiden/Filmpjes/Dialogen)",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Tweede archief naast het user-gebonden archief: systeem-brede admin-opslag onder Beheer > Instellingen > Archief. 5 categorieën (zelfde 4 als user + nieuwe 'Dialogen'). Storage: /app/backend/data/system_archive/{cat}/. Geen quota (admin-opslag). Endpoint /api/system-archive/sounds staat klaar voor toekomstige koppeling met Instellingen > Geluid soundmappings (niet gedaan om bestaande mock niet te slopen).",
+          "discovery": "11 mei 2026: user wil systeem-archief naast user-archief, plus dialoog-import voor leer-materiaal."
+        },
+        {
+          "id": "v3_025",
+          "titel": "Dialoog-leermodule (scan + tag-gebaseerd contextueel leren)",
+          "status": "vision",
+          "priority": "high",
+          "progress": 0,
+          "created_date": "2026-05-11",
+          "notes": "Op basis van dialogen-archief: module die geüploade dialogen scant en Spark leert hoe gesprekken contextueel verlopen. Gebruikt de tags (rauw/afscheid/vreugde/delen/verdrietig/boos/humor/conflict/vriendschap/familie/liefde/professioneel/informeel/filosofisch) als context-labels. Per dialoog: extract zinsstructuur, antwoord-patronen, emotie-flow, tempo/lengte. Resulteert in 'response-style-library' die Spark kan raadplegen bij vergelijkbare situaties. Dialoog-files hebben al scan_status='pending' veld klaar staan.",
+          "discovery": "11 mei 2026: user vroeg of via dialoog-uploads Spark kan leren hoe contextueel een gesprek gaat en hoe hij zou kunnen reageren. Idee: tags helpen Spark per situatie type de juiste 'toon' te kiezen.",
+          "depends_on": [
+            "v3_024 (systeem-archief met dialoog-categorie)"
+          ],
+          "acceptance": [
+            "Endpoint /api/dialog-learning/scan/{file_id} verwerkt 1 dialoog",
+            "Output: response-templates per tag",
+            "Spark kan bij chat reageren in stijl van een tag (test-prompt: 'praat in afscheid-stijl')",
+            "Privacy: alleen dialogen die admin upload, niet user-gesprekken"
+          ]
         }
       ]
     },

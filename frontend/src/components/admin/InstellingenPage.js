@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { useAuth } from '../../context/AuthContext';
+import { SystemArchive } from './SystemArchive';
 import {
   Settings, Monitor, Volume2, Link2, Sparkles, HelpCircle,
   Save, Shield, Clock, Bug, RefreshCw, Palette, Sun, Moon,
   Mic, Speech, Music, Upload, Play, Trash2, Edit3, Plus,
   Keyboard, MessageSquare, Brain, Trophy, ChevronDown, ChevronRight,
   Zap, Globe, Wifi, Database, Server, Bell, Eye, EyeOff,
-  ToggleLeft, ToggleRight
+  ToggleLeft, ToggleRight, Archive
 } from 'lucide-react';
 
 export function InstellingenPage({ onNavigate }) {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('algemeen');
   const [saving, setSaving] = useState(false);
 
@@ -50,6 +53,7 @@ export function InstellingenPage({ onNavigate }) {
     { id: 'algemeen', label: 'Algemeen', icon: Settings, accent: '#f59e0b' },
     { id: 'beeld', label: 'Beeld', icon: Palette, accent: '#a855f7' },
     { id: 'geluid', label: 'Geluid', icon: Volume2, accent: '#3b82f6' },
+    { id: 'archief', label: 'Archief', icon: Archive, accent: '#10b981' },
     { id: 'integraties', label: 'Integraties', icon: Link2, accent: '#06b6d4' },
     { id: 'features', label: 'Features', icon: Sparkles, accent: '#22c55e' },
     { id: 'tips', label: 'Tips & Hulp', icon: HelpCircle, accent: '#f97316' },
@@ -186,6 +190,11 @@ export function InstellingenPage({ onNavigate }) {
 
                 <SaveButton saving={saving} onClick={handleSave} />
               </>
+            )}
+
+            {/* ====== ARCHIEF (Systeem) ====== */}
+            {activeTab === 'archief' && (
+              <SystemArchive currentUserId={user?.id} />
             )}
 
             {/* ====== INTEGRATIES ====== */}

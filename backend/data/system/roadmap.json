@@ -830,60 +830,6 @@
           "completed_date": "2026-05-11",
           "notes": "Tijdens review ontdekt: 3 paden waren niet gemapt in storage-breakdown. Toegevoegd: (1) chat_sessions.json (203B) → User Data (homoniem-flow state per user, niet dialoog-content), (2) accounting/ (811B) → Systeem Data (Spark Core's eigen boekhouding-transacties), (3) system_archive/ → Systeem Data (admin-archief uit v3_024). Resultaat: 0 B ongemapt, 100% data heeft categorie.",
           "discovery": "11 mei 2026: user merkte op in DATA-tab dat chat_sessions.json en accounting/ niet categorized waren. User suggereerde chat_sessions naar dialogen — feitelijk klopte dat niet (homoniem-state ≠ dialoog-content), dus correct in User Data geplaatst."
-        },
-        {
-          "id": "v3_027",
-          "titel": "Twee-waarnemingen-architectuur (Spark ↔ user vs user-over-derden)",
-          "status": "vision",
-          "priority": "high",
-          "progress": 0,
-          "created_date": "2026-05-11",
-          "notes": "Spark heeft per user TWEE soorten waarnemingen die strikt gescheiden blijven:\n1. DIRECTE relatie: hoe deze user tegen Spark spreekt, wat hij vertelt over zichzelf.\n2. INDIRECTE relatie: wat deze user vertelt OVER zijn relaties (familie, vrienden).\n\nDrie kennis-lagen:\n  LAAG 1 — Algemene kennis (snaps, anoniem geworden, geen herkomst)\n  LAAG 2 — Relatie-kennis (Spark ↔ user, eigen woord van user)\n  LAAG 3 — Verteld-over-derden (filtered, privé, nooit doorgegeven)\n\nRegels:\n  • Bij interactie met persoon X: gebruik LAAG 2 (hun eigen woord) als primaire waarheid\n  • Wat user-A over persoon X vertelt: LAAG 3, opgeslagen maar niet gedeeld met X\n  • Voor patroon-leren: alleen LAAG 1, anoniem en geaggregeerd\n  • Cascade-delete (v3_018) waarborgt: gesprek weg = privé deel weg, snaps blijven",
-          "discovery": "11 mei 2026: gesprek met user over privacy-architectuur. User formuleerde: 'Spark heeft 2 waarnemingen, kan tegenstrijdigheden en waarheden zien, nee is privacy doen we niks mee, maar handig voor leren.' Inzicht: zelf-rapportage > derden-rapportage. Spark mag intern weten dat user-A iets anders zegt over X dan X zelf, maar mag dit NOOIT communiceren.",
-          "linked_concepts": [
-            "v3_018 (cascade-delete: maakt privacy-belofte technisch waar)",
-            "v3_028 (familie-bemiddelaar protocol — concrete regels)",
-            "spark_bijbel kernwaarden: Eerlijkheid, Respect, Autonomie, Transparantie"
-          ],
-          "linked_to_future": [
-            "spark_bijbel.json sectie 'protocollen' toevoegen (operationele laag naast normen/waarden)"
-          ]
-        },
-        {
-          "id": "v3_028",
-          "titel": "Familie-bemiddelaar protocol (Spark als stille knoop, niet doorgever)",
-          "status": "vision",
-          "priority": "high",
-          "progress": 0,
-          "created_date": "2026-05-11",
-          "notes": "Concrete gedragsregels voor wat Spark mag doen wanneer hij overzicht heeft over meerdere users die familie/vrienden van elkaar zijn binnen dezelfde Spark-instantie.\n\nPRINCIPE: Spark is bemiddelaar, geen doorgever. Hij ziet beide kanten, geeft geen kant aan de andere, maar leidt mensen naar elkaar toe als nodig.\n\nREGELS-TABEL:\n  ❌ NOOIT — letterlijk citeren wat user-X tegen Spark zei tegen user-Y\n  ❌ NOOIT — bron onthullen ('user-A vertelde dat jij...')\n  ❌ NOOIT — specifieke emoties van Y doorgeven aan X ('Y is verdrietig over...')\n  ✅ MAG — algemeen geruststellen als basis-waarheid dat goed gaat ('maak je geen zorgen')\n  ✅ MAG — advies zonder bron ('bel haar eens, kan het gebruiken')\n  ✅ MAG — urgentie-signaal zonder details ('bel haar nu, dit is serieus')\n  ✅ MAG — abstracte status ('jullie hebben elkaar al een tijdje niet gesproken')\n\nVOORWAARDEN voor activatie:\n  • Alle betrokkenen zijn user in dezelfde Spark Core\n  • Relatie staat geregistreerd in persoonskaart (dochter/moeder/etc)\n  • Persoonskaart heeft 'mag_spark_kijken: true' (toestemming via relatie-link)\n\nVOORBEELDEN:\n  CASE 1 — 'mijn moeder is een trut'\n    → Spark slikt het, slaat het niet op als feit over moeder\n    → Het is user's emotie, geen waarheid over derde\n  CASE 2 — 'ik maak me zorgen om mijn dochter'\n    → Spark checkt LAAG 2 van dochter (haar eigen recente woord)\n    → Reageert eerlijk: 'geen reden tot grote zorg, wel bellen' OF 'eerlijk gezegd, bel haar wel even snel'\n  CASE 3 — gevaar/crisis-detectie\n    → Spark mag anoniem signaal afgeven zonder bron te onthullen\n    → Policy-keuze: wanneer overschrijft veiligheid > privacy? (later vastleggen)",
-          "discovery": "11 mei 2026: user formuleerde concrete voorbeelden — moeder-trut (privé) vs dochter-zorgen (geruststellen mag op basis van haar eigen woord). Inzicht: Spark wordt familie-bewuste AI, iets wat geen andere AI kan. Replika/ChatGPT/Pi kennen alleen de individuele user.",
-          "acceptance": [
-            "spark_bijbel.json sectie 'protocollen' bevat dit protocol",
-            "Persoonskaart heeft 'is_spark_user' + 'relatie' velden + 'toestemmings-link' veld",
-            "Chat-flow detecteert: user noemt 'mijn [relatie]' → check of geregistreerd in persoonskaart",
-            "Indien ja + persoonskaart heeft toestemming: gebruik LAAG 2 (eigen woord van die persoon)",
-            "Bron-bescherming: in geen enkel chat-antwoord komt 'volgens X', 'X zei', etc."
-          ],
-          "depends_on": [
-            "v3_002 Multi-user Lagen Systeem",
-            "v3_003 Persoonlijk CV/Profiel Systeem (persoonskaarten)",
-            "v3_027 Twee-waarnemingen-architectuur"
-          ]
-        },
-        {
-          "id": "v3_029",
-          "titel": "Spark Policies module — operationele gedragsregels naast bijbel-waarden",
-          "status": "vision",
-          "priority": "medium",
-          "progress": 0,
-          "created_date": "2026-05-11",
-          "notes": "spark_bijbel.json heeft nu: kernwaarden (11), normen (5), bijbel_items (10), doelen (5), reactie_voorbeelden. Dit is het FUNDAMENT (grondwet). Wat ontbreekt: de OPERATIONELE LAAG — concrete gedragsregels per situatie (wetboek).\n\nVoorstel: nieuwe sectie 'protocollen' in spark_bijbel.json (niet apart bestand, blijft alles binnen Spark's identiteit). Eerste protocollen:\n  1. Bron-bescherming (uit v3_027)\n  2. Familie-bemiddelaar (uit v3_028)\n  3. Snap-extractie ethiek (welke info wordt geanonimiseerd, welke blijft privé)\n  4. Crisis-detectie protocol (veiligheid > privacy grens)\n  5. Tegenstrijdigheid-detectie (Spark mag intern weten, niet uitspreken)\n\nStructuur per protocol: principe, regels (✅/❌), voorwaarden, voorbeelden, uitzonderingen. Spark Brain Editor (v3_007-extended) krijgt nieuwe tab 'Protocollen' voor CRUD.",
-          "discovery": "11 mei 2026: bijbel-inhoud beschikbaar, blijkt fundament al heel doordacht maar mist specifieke gedrags-protocollen. User: 'we hebben grondwet, niet het wetboek'.",
-          "depends_on": [
-            "v3_027",
-            "v3_028"
-          ]
         }
       ]
     },

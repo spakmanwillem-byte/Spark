@@ -4,8 +4,11 @@ import {
   Activity, Cpu, HardDrive, MemoryStick, Wifi, Server,
   Database, Globe, Users, MessageSquare, Clock, TrendingUp,
   Layers, Network, Monitor, Zap, BarChart2, PieChart,
-  ArrowUp, ArrowDown, CheckCircle, AlertCircle, RefreshCw
+  ArrowUp, ArrowDown, CheckCircle, AlertCircle, RefreshCw,
+  ChevronRight, FolderOpen
 } from 'lucide-react';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 export function AnalyticsPage({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('systeem');
@@ -31,6 +34,7 @@ export function AnalyticsPage({ onNavigate }) {
 
   const tabs = [
     { id: 'systeem', label: 'SYSTEEM', icon: Monitor },
+    { id: 'data', label: 'DATA', icon: PieChart },
     { id: 'network', label: 'NETWORK', icon: Network },
     { id: 'layer', label: 'LAYER', icon: Layers },
   ];
@@ -74,6 +78,7 @@ export function AnalyticsPage({ onNavigate }) {
 
         {/* Tab Content */}
         {activeTab === 'systeem' && <SystemTab stats={systemStats} />}
+        {activeTab === 'data' && <DataTab />}
         {activeTab === 'network' && <NetworkTab />}
         {activeTab === 'layer' && <LayerTab />}
       </div>
@@ -655,3 +660,259 @@ function FlowItem({ from, to, type, color, reverse }) {
 }
 
 export default AnalyticsPage;
+
+// ============================================================
+// DATA TAB — Storage breakdown met donut chart
+// ============================================================
+function DataTab() {
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [activeCategory, setActiveCategory] = React.useState(null); // 'system' | 'user' | 'ongemapt'
+
+  React.useEffect(() => {
+    fetch(`${API}/api/analytics/storage-breakdown`)
+      .then(r => r.json())
+      .then(d => { setData(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="text-center py-16 text-slate-500">Laden...</div>;
+  if (!data) return <div className="text-center py-16 text-red-400">Geen data beschikbaar</div>;
+
+  // Top-level segments voor outer ring
+  const topSegments = data.categories.map(c => ({
+    id: c.id,
+    label: c.label,
+    color: c.color,
+    value: c.size_bytes,
+    percent: c.percent_of_total,
+  })).concat([{
+    id: 'ongemapt',
+    label: data.ongemapt.label,
+    color: data.ongemapt.color,
+    value: data.ongemapt.size_bytes,
+    percent: data.ongemapt.percent_of_total,
+  }]);
+
+  // Inner ring: sub-segmenten van actieve categorie
+  let innerSegments = [];
+  let innerLabel = '';
+  if (activeCategory === 'system' || activeCategory === 'user') {
+    const cat = data.categories.find(c => c.id === activeCategory);
+    if (cat) {
+      innerSegments = cat.segments.filter(s => s.size_bytes > 0).map(s => ({
+        id: s.id, label: s.label, color: s.color, value: s.size_bytes,
+        percent: cat.size_bytes ? (s.size_bytes / cat.size_bytes * 100) : 0,
+      }));
+      innerLabel = cat.label;
+    }
+  } else if (activeCategory === 'ongemapt') {
+    innerSegments = data.ongemapt.items.filter(i => i.size_bytes > 0).map(i => ({
+      id: i.name, label: i.name, color: '#475569', value: i.size_bytes,
+      percent: data.ongemapt.size_bytes ? (i.size_bytes / data.ongemapt.size_bytes * 100) : 0,
+    }));
+    innerLabel = data.ongemapt.label;
+  }
+
+  return (
+    <div data-testid="analytics-data-tab" className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-bold text-white">Data Opslag</h2>
+          <p className="text-xs text-slate-400">Totaal {data.total_human} verdeeld over categorieën</p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs text-slate-500 uppercase tracking-wider">Locatie</p>
+          <p className="text-sm font-mono text-slate-300">/backend/data</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Donut chart */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 flex flex-col items-center">
+          <DonutChart
+            segments={topSegments}
+            innerSegments={innerSegments}
+            activeId={activeCategory}
+            onSelect={setActiveCategory}
+            centerLabel={data.total_human}
+            centerSub="totaal"
+            innerLabel={innerLabel}
+          />
+          {/* Legend top */}
+          <div className="w-full mt-4 space-y-1.5">
+            {topSegments.map(s => (
+              <button key={s.id} data-testid={`storage-cat-${s.id}`}
+                onClick={() => setActiveCategory(activeCategory === s.id ? null : s.id)}
+                className={`w-full flex items-center gap-2 p-2 rounded-lg text-xs transition-all ${
+                  activeCategory === s.id ? 'bg-slate-800 border border-slate-700' : 'hover:bg-slate-800/50'
+                }`}>
+                <span className="w-2.5 h-2.5 rounded-sm" style={{ background: s.color }} />
+                <span className="text-slate-300 flex-1 text-left">{s.label}</span>
+                <span className="text-slate-500">{formatBytes(s.value)}</span>
+                <span className="text-slate-600 w-12 text-right">{s.percent}%</span>
+                <ChevronRight className={`w-3 h-3 text-slate-500 transition-transform ${activeCategory === s.id ? 'rotate-90' : ''}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Detail panel */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+          {activeCategory ? (
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <FolderOpen className="w-4 h-4 text-cyan-400" />
+                <h3 className="text-sm font-bold text-white">{innerLabel}</h3>
+                <span className="ml-auto text-[10px] text-slate-500">{innerSegments.length} onderdelen</span>
+              </div>
+              {innerSegments.length === 0 ? (
+                <p className="text-xs text-slate-500 text-center py-8">Geen onderdelen met data</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {innerSegments.map(s => (
+                    <div key={s.id} className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-800/40">
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: s.color }} />
+                      <span className="text-xs text-slate-300 flex-1 truncate">{s.label}</span>
+                      <span className="text-[10px] text-slate-500 w-16 text-right">{formatBytes(s.value)}</span>
+                      <span className="text-[10px] text-slate-600 w-12 text-right">{s.percent.toFixed(1)}%</span>
+                    </div>
+                  ))}
+                  {/* Sub-progress bar */}
+                  <div className="mt-3 h-2 bg-slate-800 rounded-full overflow-hidden flex">
+                    {innerSegments.map(s => (
+                      <div key={s.id} style={{ width: `${s.percent}%`, background: s.color }} title={`${s.label}: ${formatBytes(s.value)}`} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <PieChart className="w-12 h-12 text-slate-700 mx-auto mb-2" />
+              <p className="text-sm text-slate-400">Klik op een categorie</p>
+              <p className="text-[10px] text-slate-600 mt-1">Om de detail-opsplitsing te zien</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Insights row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <InsightCard icon={Database} color="cyan" label="Grootste post"
+          value={topSegments[0]?.label || '—'}
+          sub={`${formatBytes(topSegments[0]?.value || 0)} (${topSegments[0]?.percent}%)`} />
+        <InsightCard icon={Users} color="amber" label="User data"
+          value={formatBytes(data.categories.find(c => c.id === 'user')?.size_bytes || 0)}
+          sub={`${data.categories.find(c => c.id === 'user')?.percent_of_total || 0}% van totaal`} />
+        <InsightCard icon={AlertCircle} color="slate" label="Ongemapt"
+          value={data.ongemapt.size_human}
+          sub={data.ongemapt.items.length > 0 ? `${data.ongemapt.items.length} bestanden` : 'volledig gemapt'} />
+      </div>
+    </div>
+  );
+}
+
+function DonutChart({ segments, innerSegments, activeId, onSelect, centerLabel, centerSub, innerLabel }) {
+  const size = 260;
+  const cx = size / 2;
+  const cy = size / 2;
+  const outerR = 110;
+  const outerW = 28;
+  const innerR = 70;
+  const innerW = 22;
+
+  const total = segments.reduce((s, x) => s + x.value, 0) || 1;
+  const innerTotal = innerSegments.reduce((s, x) => s + x.value, 0) || 1;
+
+  // Helper: arc path
+  const arc = (cx, cy, r, w, startAngle, endAngle) => {
+    const sa = (startAngle - 90) * Math.PI / 180;
+    const ea = (endAngle - 90) * Math.PI / 180;
+    const r2 = r - w;
+    const x1 = cx + r * Math.cos(sa), y1 = cy + r * Math.sin(sa);
+    const x2 = cx + r * Math.cos(ea), y2 = cy + r * Math.sin(ea);
+    const x3 = cx + r2 * Math.cos(ea), y3 = cy + r2 * Math.sin(ea);
+    const x4 = cx + r2 * Math.cos(sa), y4 = cy + r2 * Math.sin(sa);
+    const large = endAngle - startAngle > 180 ? 1 : 0;
+    return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${x3} ${y3} A ${r2} ${r2} 0 ${large} 0 ${x4} ${y4} Z`;
+  };
+
+  // Render outer ring
+  let outerAngle = 0;
+  const outerPaths = segments.map(s => {
+    const pct = s.value / total;
+    const start = outerAngle;
+    outerAngle += pct * 360;
+    const end = outerAngle;
+    if (pct === 0) return null;
+    return (
+      <path key={s.id}
+        d={arc(cx, cy, outerR, outerW, start, end)}
+        fill={s.color}
+        opacity={activeId === null || activeId === s.id ? 1 : 0.3}
+        style={{ cursor: 'pointer', transition: 'opacity 0.2s' }}
+        onClick={() => onSelect(activeId === s.id ? null : s.id)}>
+        <title>{s.label}: {formatBytes(s.value)} ({s.percent}%)</title>
+      </path>
+    );
+  });
+
+  // Render inner ring (only if a category is selected)
+  let innerAngle = 0;
+  const innerPaths = innerSegments.map(s => {
+    const pct = s.value / innerTotal;
+    const start = innerAngle;
+    innerAngle += pct * 360;
+    const end = innerAngle;
+    if (pct === 0) return null;
+    return (
+      <path key={s.id}
+        d={arc(cx, cy, innerR, innerW, start, end)}
+        fill={s.color}>
+        <title>{s.label}: {formatBytes(s.value)}</title>
+      </path>
+    );
+  });
+
+  return (
+    <div className="relative" style={{ width: size, height: size }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        {outerPaths}
+        {innerSegments.length > 0 && innerPaths}
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <p className="text-2xl font-bold text-white">{centerLabel}</p>
+        <p className="text-[10px] text-slate-500 uppercase tracking-wider">{centerSub}</p>
+        {innerLabel && <p className="text-[9px] text-cyan-400 mt-1">{innerLabel}</p>}
+      </div>
+    </div>
+  );
+}
+
+function InsightCard({ icon: Icon, color, label, value, sub }) {
+  const colors = {
+    cyan: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+    amber: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+    slate: 'text-slate-400 bg-slate-500/10 border-slate-500/20',
+  };
+  return (
+    <div className={`p-3 rounded-xl border ${colors[color]}`}>
+      <div className="flex items-center gap-2 mb-1">
+        <Icon className="w-3.5 h-3.5" />
+        <span className="text-[10px] uppercase tracking-wider opacity-80">{label}</span>
+      </div>
+      <p className="text-sm font-bold text-white truncate">{value}</p>
+      <p className="text-[10px] text-slate-500 truncate">{sub}</p>
+    </div>
+  );
+}
+
+function formatBytes(n) {
+  if (!n) return '0 B';
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 ** 2) return `${(n / 1024).toFixed(1)} KB`;
+  if (n < 1024 ** 3) return `${(n / (1024 ** 2)).toFixed(1)} MB`;
+  return `${(n / (1024 ** 3)).toFixed(2)} GB`;
+}

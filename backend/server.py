@@ -57,6 +57,9 @@ app.include_router(files_router, prefix="/api")
 from modules.user_archive import user_archive_router
 app.include_router(user_archive_router, prefix="/api")
 
+from modules.analytics import analytics_router
+app.include_router(analytics_router, prefix="/api")
+
 # Module 4: Achievements
 from modules.achievements import achievements_router
 app.include_router(achievements_router, prefix="/api")

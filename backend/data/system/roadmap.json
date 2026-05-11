@@ -753,6 +753,21 @@
             "Thema-detectie (terugkerende onderwerpen)",
             "Pattern-recognition over tijd"
           ]
+        },
+        {
+          "id": "v3_021",
+          "titel": "Analytics > DATA tab: storage breakdown donut chart",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Nieuwe tab DATA in Analytics. Backend: GET /api/analytics/storage-breakdown leest werkelijke disk-grootte per folder/bestand en categoriseert in Systeem Data vs Gebruikers Data met sub-segmenten. Frontend: SVG donut chart met dubbele ring (buiten=categorie, binnen=sub-segmenten van actieve cat). Klikbare legenda + detail-paneel met percentages. Insights: grootste post, user-data totaal, ongemapt-counter.",
+          "discovery": "11 mei 2026: ontdekt tijdens implementatie dat enkele bestanden (achievements.json, conversation_triggers.json, spark_identity.json, keywords.json) niet gemapt waren — user's vermoeden 'er is ook data die op deze manier niet gelogd wordt' klopte. Toegevoegd.",
+          "stats_inzichten": [
+            "Kennisbank = 88.6% van alle data (68MB van 77MB)",
+            "User Data 0.03% — groeit pas met meer users/gesprekken",
+            "Verbanden-graph 9.4% — tweede grootste post"
+          ]
         }
       ]
     },

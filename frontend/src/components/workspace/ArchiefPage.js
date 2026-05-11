@@ -1,183 +1,208 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
-  Archive, Search, Filter, Download, Trash2, ChevronDown, ChevronRight,
-  Bot, Users, Lock, Sparkles, Zap, BookOpen, Heart, MessageSquare, X
+  Archive, Search, Upload, Trash2, X, File as FileIcon,
+  Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-const channelConfig = {
-  spark: { label: 'Spark AI', icon: Sparkles, color: '#f59e0b' },
-  community: { label: 'Community', icon: Users, color: '#a855f7' },
-  prive: { label: 'Privé', icon: Lock, color: '#06b6d4' },
-};
+const CATEGORIES = [
+  { id: 'bestanden', label: 'Bestanden', icon: FileIcon, color: '#64748b', accept: '*' },
+  { id: 'foto', label: 'Foto', icon: ImageIcon, color: '#22c55e', accept: 'image/*' },
+  { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7', accept: 'audio/*' },
+  { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899', accept: 'video/*' },
+];
+
+function formatBytes(n) {
+  if (!n) return '0 B';
+  const k = 1024;
+  const u = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(n) / Math.log(k));
+  return `${(n / Math.pow(k, i)).toFixed(i === 0 ? 0 : 1)} ${u[i]}`;
+}
 
 export function ArchiefPage({ onNavigate }) {
-  const { user, isAdmin } = useAuth();
-  const ownId = user?.id || 'user-001';
-  const [viewUserId, setViewUserId] = useState(ownId);
-  const [allUsers, setAllUsers] = useState([]);
+  const { user } = useAuth();
+  const userId = user?.id || 'user-001';
+  const fileInputRef = useRef(null);
 
-  const [logs, setLogs] = useState([]);
+  const [activeTab, setActiveTab] = useState('bestanden');
+  const [files, setFiles] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const [search, setSearch] = useState('');
-  const [channel, setChannel] = useState(null);
-  const [hasTrigger, setHasTrigger] = useState(false);
-  const [hasSnap, setHasSnap] = useState(false);
-  const [expandedId, setExpandedId] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({});
 
   const load = useCallback(async () => {
     setLoading(true);
     const params = new URLSearchParams();
-    params.append('limit', '200');
-    if (search) params.append('search', search);
-    if (channel) params.append('channel', channel);
-    if (hasTrigger) params.append('has_trigger', 'true');
-    if (hasSnap) params.append('has_snap', 'true');
+    params.append('category', activeTab);
+    if (search) params.append('q', search);
     try {
-      const [logsRes, statsRes] = await Promise.all([
-        fetch(`${API}/api/chat/logs/${viewUserId}?${params}`).then(r => r.json()),
-        fetch(`${API}/api/chat/logs/${viewUserId}/stats`).then(r => r.json()),
-      ]);
-      setLogs(logsRes.conversations || []);
-      setStats(statsRes);
+      const res = await fetch(`${API}/api/archive/${userId}?${params}`).then(r => r.json());
+      setFiles(res.files || []);
+      setStats(res.stats || null);
     } catch (e) { console.error(e); }
     setLoading(false);
-  }, [viewUserId, search, channel, hasTrigger, hasSnap]);
+  }, [userId, activeTab, search]);
 
   useEffect(() => { load(); }, [load]);
 
-  useEffect(() => {
-    if (!isAdmin) return;
-    fetch(`${API}/api/auth/users`).then(r => r.json()).then(d => setAllUsers(d.users || [])).catch(() => {});
-  }, [isAdmin]);
-
-  const deleteLog = async (id) => {
-    if (!confirm('Dit gesprek permanent verwijderen?')) return;
-    await fetch(`${API}/api/chat/logs/${viewUserId}/${id}`, { method: 'DELETE' });
-    load();
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadError(null);
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch(`${API}/api/archive/${userId}/upload`, { method: 'POST', body: fd });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: 'Upload mislukt' }));
+        throw new Error(err.detail || 'Upload mislukt');
+      }
+      const data = await res.json();
+      // Switch naar tab waarin het bestand terechtkwam
+      if (data.file?.category && data.file.category !== activeTab) {
+        setActiveTab(data.file.category);
+      }
+      await load();
+    } catch (err) {
+      setUploadError(err.message || 'Upload fout');
+    }
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const exportLogs = () => {
-    const blob = new Blob([JSON.stringify(logs, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `gesprekslog_${viewUserId}_${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const deleteFile = async (fileId) => {
+    if (!confirm('Dit bestand permanent verwijderen?')) return;
+    await fetch(`${API}/api/archive/${userId}/${fileId}`, { method: 'DELETE' });
+    await load();
   };
 
-  const clearFilters = () => {
-    setSearch(''); setChannel(null); setHasTrigger(false); setHasSnap(false);
+  const startEdit = (f) => {
+    setEditingId(f.id);
+    setEditForm({
+      original_name: f.original_name || '',
+      description: f.description || '',
+      tags: (f.tags || []).join(', '),
+    });
   };
+
+  const saveEdit = async () => {
+    await fetch(`${API}/api/archive/${userId}/${editingId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        original_name: editForm.original_name,
+        description: editForm.description,
+        tags: editForm.tags.split(',').map(t => t.trim()).filter(Boolean),
+      }),
+    });
+    setEditingId(null);
+    await load();
+  };
+
+  const activeCat = CATEGORIES.find(c => c.id === activeTab) || CATEGORIES[0];
 
   return (
     <MainLayout activePage="archief" onNavigate={onNavigate}>
       <div data-testid="archief-page" className="h-full flex flex-col">
-        {/* Header */}
-        <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-3">
+
+        {/* Banner */}
+        <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #64748b, #475569)' }}>
               <Archive className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-white leading-tight">Gesprekken Archief</h1>
+              <h1 className="text-base font-bold text-white leading-tight">Persoonlijk Archief</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">
-                {stats?.total || 0} gesprekken gelogd
+                Eigen opslag voor {user?.naam || 'gebruiker'} · {stats?.total_files || 0} bestanden · {formatBytes(stats?.total_size_bytes || 0)}
               </p>
             </div>
-            {isAdmin && allUsers.length > 0 && (
-              <select data-testid="archief-user-selector" value={viewUserId}
-                onChange={(e) => setViewUserId(e.target.value)}
-                className="ml-4 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:outline-none">
-                {allUsers.map(u => <option key={u.id} value={u.id}>{u.naam}{u.id === ownId ? ' (jij)' : ''}</option>)}
-              </select>
-            )}
-            <button onClick={exportLogs} disabled={logs.length === 0}
-              data-testid="export-logs-btn"
-              className="ml-auto flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-slate-300 disabled:opacity-40">
-              <Download className="w-3.5 h-3.5" /> Export
-            </button>
+
+            <div className="ml-auto flex items-center gap-2">
+              <input ref={fileInputRef} type="file" data-testid="archief-file-input"
+                onChange={handleUpload} className="hidden" accept={activeCat.accept} />
+              <button data-testid="archief-upload-btn"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-60">
+                <Upload className="w-3.5 h-3.5" /> {uploading ? 'Uploaden...' : 'Upload bestand'}
+              </button>
+            </div>
           </div>
 
-          {/* Stats cards */}
-          {stats && stats.total > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-3">
-              <StatCard label="Totaal" value={stats.total} />
-              <StatCard label="Spark" value={stats.channels?.spark || 0} color="#f59e0b" />
-              <StatCard label="Community" value={stats.channels?.community || 0} color="#a855f7" />
-              <StatCard label="Snaps" value={stats.snap_count || 0} color="#3b82f6" />
-              <StatCard label="Gem. woorden" value={stats.avg_words || 0} />
+          {uploadError && (
+            <div className="mb-3 px-3 py-2 bg-red-500/10 border border-red-500/30 rounded-lg text-xs text-red-400">
+              {uploadError}
             </div>
           )}
 
-          {/* Filters */}
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="relative flex-1 min-w-[180px] max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
-              <input data-testid="archief-search" type="text" value={search} onChange={e => setSearch(e.target.value)}
-                placeholder="Zoek in gesprekken..."
-                className="w-full pl-8 pr-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
-            </div>
-            {Object.entries(channelConfig).map(([key, cfg]) => {
-              const Icon = cfg.icon;
-              const active = channel === key;
+          {/* Tabs */}
+          <div className="flex overflow-x-auto gap-0">
+            {CATEGORIES.map(c => {
+              const isActive = activeTab === c.id;
+              const count = stats?.counts?.[c.id] ?? 0;
               return (
-                <button key={key} data-testid={`filter-${key}`} onClick={() => setChannel(active ? null : key)}
-                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                    active ? 'text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
-                  }`}
-                  style={active ? { background: cfg.color } : undefined}>
-                  <Icon className="w-3 h-3" /> {cfg.label}
+                <button key={c.id} data-testid={`archief-tab-${c.id}`}
+                  onClick={() => setActiveTab(c.id)}
+                  className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
+                  style={{ color: isActive ? c.color : '#94a3b8' }}>
+                  <c.icon className="w-3.5 h-3.5" />
+                  {c.label}
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 ml-0.5">{count}</span>
+                  {isActive && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full" style={{ background: c.color }} />}
                 </button>
               );
             })}
-            <button data-testid="filter-snap" onClick={() => setHasSnap(!hasSnap)}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                hasSnap ? 'bg-blue-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
-              }`}>
-              <Zap className="w-3 h-3" /> Met snap
-            </button>
-            <button data-testid="filter-trigger" onClick={() => setHasTrigger(!hasTrigger)}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                hasTrigger ? 'bg-amber-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
-              }`}>
-              Trigger
-            </button>
-            {(search || channel || hasTrigger || hasSnap) && (
-              <button onClick={clearFilters} className="text-xs text-slate-500 hover:text-white flex items-center gap-1">
-                <X className="w-3 h-3" /> Reset
-              </button>
-            )}
           </div>
         </div>
 
-        {/* Lijst */}
+        {/* Search + Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
-          <div className="max-w-4xl mx-auto space-y-2">
+          <div className="max-w-5xl mx-auto">
+            {/* Search */}
+            <div className="relative mb-4 max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+              <input data-testid="archief-search" type="text"
+                value={search} onChange={e => setSearch(e.target.value)}
+                placeholder={`Zoek in ${activeCat.label.toLowerCase()} (naam, beschrijving, tags)...`}
+                className="w-full pl-8 pr-8 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+              {search && (
+                <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
             {loading ? (
               <div className="text-center py-16 text-xs text-slate-500">Laden...</div>
-            ) : logs.length === 0 ? (
-              <div className="text-center py-16">
-                <Archive className="w-12 h-12 text-slate-700 mx-auto mb-3" />
-                <p className="text-sm text-slate-400 mb-1">
-                  {stats?.total === 0 ? 'Nog geen gesprekken gelogd' : 'Geen gesprekken matchen de filters'}
-                </p>
-                {stats?.total === 0 && (
-                  <p className="text-xs text-slate-600">Start een gesprek in Gesprekken → Spark AI om te beginnen</p>
-                )}
-              </div>
+            ) : files.length === 0 ? (
+              <EmptyState category={activeCat} search={search} onUpload={() => fileInputRef.current?.click()} />
             ) : (
-              logs.map(c => (
-                <LogEntry key={c.id} conv={c} expanded={expandedId === c.id}
-                  onToggle={() => setExpandedId(expandedId === c.id ? null : c.id)}
-                  onDelete={() => deleteLog(c.id)} />
-              ))
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {files.map(f => (
+                  <FileCard key={f.id}
+                    file={f}
+                    userId={userId}
+                    category={activeCat}
+                    isEditing={editingId === f.id}
+                    editForm={editForm}
+                    setEditForm={setEditForm}
+                    onStartEdit={() => startEdit(f)}
+                    onSave={saveEdit}
+                    onCancel={() => setEditingId(null)}
+                    onDelete={() => deleteFile(f.id)}
+                  />
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -186,110 +211,115 @@ export function ArchiefPage({ onNavigate }) {
   );
 }
 
-function StatCard({ label, value, color }) {
+function EmptyState({ category, search, onUpload }) {
+  const Icon = category.icon;
   return (
-    <div className="bg-slate-800/40 rounded-lg px-3 py-2">
-      <p className="text-[9px] text-slate-500 uppercase tracking-wider">{label}</p>
-      <p className="text-sm font-bold" style={{ color: color || '#fff' }}>{value}</p>
-    </div>
-  );
-}
-
-function LogEntry({ conv, expanded, onToggle, onDelete }) {
-  const cfg = channelConfig[conv.channel] || channelConfig.spark;
-  const Icon = cfg.icon;
-  const analysis = conv.analysis || {};
-  const ts = new Date(conv.timestamp);
-  const timeStr = ts.toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' });
-  const hasSnap = (analysis.snap_suggestions || []).length > 0;
-  const hasMatches = (analysis.knowledge_matches || []).length > 0;
-  const trigger = analysis.trigger_type;
-
-  return (
-    <div data-testid={`log-${conv.id}`}
-      className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
-      <button onClick={onToggle} className="w-full flex items-start gap-3 p-3 text-left">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${cfg.color}20` }}>
-          <Icon className="w-3.5 h-3.5" style={{ color: cfg.color }} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-0.5">
-            <span className="text-[10px] font-medium" style={{ color: cfg.color }}>#{conv.metadata?.gesprek_nummer}</span>
-            <span className="text-[10px] text-slate-500">{timeStr}</span>
-            {trigger && <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">{trigger}</span>}
-            {hasSnap && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400">snap</span>}
-            {hasMatches && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/20 text-green-400">match</span>}
-          </div>
-          <p className="text-sm text-white truncate">{conv.user_message}</p>
-          <p className="text-xs text-slate-400 truncate mt-0.5">→ {conv.spark_response}</p>
-        </div>
-        {expanded ? <ChevronDown className="w-4 h-4 text-slate-500 flex-shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0" />}
-      </button>
-      {expanded && (
-        <div className="border-t border-slate-800 p-4 bg-slate-950/30 space-y-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div>
-              <p className="text-[10px] text-slate-500 uppercase mb-1">{conv.user_naam}</p>
-              <p className="text-sm text-white bg-slate-800/50 p-2 rounded-lg whitespace-pre-wrap">{conv.user_message}</p>
-            </div>
-            <div>
-              <p className="text-[10px] text-slate-500 uppercase mb-1">Spark</p>
-              <p className="text-sm text-white bg-amber-500/10 p-2 rounded-lg whitespace-pre-wrap">{conv.spark_response}</p>
-            </div>
-          </div>
-          {/* Analysis */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px]">
-            {analysis.sentiment && <AnalysisCell label="Sentiment" value={analysis.sentiment} />}
-            {analysis.emotion?.emotion && <AnalysisCell label="Emotie" value={analysis.emotion.emotion} />}
-            {trigger && <AnalysisCell label="Trigger" value={trigger} color="#f59e0b" />}
-            <AnalysisCell label="Woorden" value={analysis.word_count} />
-            {analysis.response_type && <AnalysisCell label="Type" value={analysis.response_type} />}
-          </div>
-          {hasMatches && (
-            <div>
-              <p className="text-[10px] text-slate-500 uppercase mb-1 flex items-center gap-1"><BookOpen className="w-3 h-3" /> Knowledge matches</p>
-              <div className="flex flex-wrap gap-1">
-                {analysis.knowledge_matches.map((m, i) => (
-                  <span key={i} className="text-[10px] px-2 py-0.5 bg-green-500/10 text-green-400 rounded">{m.begrip}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {hasSnap && (
-            <div>
-              <p className="text-[10px] text-slate-500 uppercase mb-1 flex items-center gap-1"><Zap className="w-3 h-3" /> Geleerde woorden</p>
-              <div className="flex flex-wrap gap-1">
-                {analysis.snap_suggestions.map((s, i) => (
-                  <span key={i} className="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-400 rounded">{s}</span>
-                ))}
-              </div>
-            </div>
-          )}
-          {analysis.bots_reacted && analysis.bots_reacted.length > 0 && (
-            <div>
-              <p className="text-[10px] text-slate-500 uppercase mb-1">Bots reageerden</p>
-              <div className="flex flex-wrap gap-1">
-                {analysis.bots_reacted.map((b, i) => <span key={i} className="text-[10px] px-2 py-0.5 bg-purple-500/10 text-purple-400 rounded">{b}</span>)}
-              </div>
-            </div>
-          )}
-          <div className="flex justify-end pt-2 border-t border-slate-800/50">
-            <button onClick={onDelete}
-              className="flex items-center gap-1 px-2 py-1 text-[10px] text-red-400 hover:bg-red-500/10 rounded-lg transition-colors">
-              <Trash2 className="w-3 h-3" /> Gesprek verwijderen
-            </button>
-          </div>
-        </div>
+    <div className="text-center py-16">
+      <Icon className="w-12 h-12 text-slate-700 mx-auto mb-3" />
+      <p className="text-sm text-slate-400 mb-1">
+        {search ? `Geen ${category.label.toLowerCase()} matchen "${search}"` : `Nog geen ${category.label.toLowerCase()}`}
+      </p>
+      {!search && (
+        <>
+          <p className="text-xs text-slate-600 mb-4">Upload je eerste bestand om te beginnen</p>
+          <button onClick={onUpload}
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs">
+            <Upload className="w-3.5 h-3.5" /> Upload {category.label.toLowerCase()}
+          </button>
+        </>
       )}
     </div>
   );
 }
 
-function AnalysisCell({ label, value, color }) {
+function FileCard({ file, userId, category, isEditing, editForm, setEditForm, onStartEdit, onSave, onCancel, onDelete }) {
+  const Icon = category.icon;
+  const downloadUrl = `${API}${file.download_url}`;
+  const ts = new Date(file.uploaded_at).toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' });
+
+  // Preview voor foto/audio/video
+  const renderPreview = () => {
+    if (file.category === 'foto') {
+      return <img src={downloadUrl} alt={file.original_name} className="w-full h-32 object-cover rounded-lg bg-slate-800" loading="lazy" />;
+    }
+    if (file.category === 'geluiden') {
+      return <audio src={downloadUrl} controls className="w-full mt-2" preload="none" />;
+    }
+    if (file.category === 'filmpjes') {
+      return <video src={downloadUrl} controls className="w-full h-32 rounded-lg bg-black" preload="none" />;
+    }
+    return null;
+  };
+
   return (
-    <div className="bg-slate-800/30 rounded-lg px-2 py-1.5">
-      <p className="text-[9px] text-slate-500 uppercase">{label}</p>
-      <p className="text-xs font-medium" style={{ color: color || '#fff' }}>{value}</p>
+    <div data-testid={`file-card-${file.id}`} className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
+      {renderPreview()}
+      <div className="p-3">
+        {isEditing ? (
+          <div className="space-y-2">
+            <input type="text" value={editForm.original_name}
+              onChange={e => setEditForm({ ...editForm, original_name: e.target.value })}
+              className="w-full px-2 py-1 bg-slate-800 border border-slate-700 rounded text-sm text-white" />
+            <input type="text" value={editForm.description}
+              onChange={e => setEditForm({ ...editForm, description: e.target.value })}
+              placeholder="Beschrijving"
+              className="w-full px-2 py-1 bg-slate-800 border border-slate-700 rounded text-xs text-white" />
+            <input type="text" value={editForm.tags}
+              onChange={e => setEditForm({ ...editForm, tags: e.target.value })}
+              placeholder="tags, komma-gescheiden"
+              className="w-full px-2 py-1 bg-slate-800 border border-slate-700 rounded text-xs text-white" />
+            <div className="flex gap-2">
+              <button data-testid={`save-${file.id}`} onClick={onSave}
+                className="flex-1 py-1 bg-green-500/20 text-green-400 rounded text-xs flex items-center justify-center gap-1">
+                <Save className="w-3 h-3" /> Opslaan
+              </button>
+              <button onClick={onCancel}
+                className="flex-1 py-1 bg-slate-800 text-slate-400 rounded text-xs flex items-center justify-center gap-1">
+                <X className="w-3 h-3" /> Annuleren
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-start gap-2 mb-1">
+              <Icon className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: category.color }} />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate" title={file.original_name}>{file.original_name}</p>
+                <p className="text-[10px] text-slate-500">{formatBytes(file.size_bytes)} · {ts}</p>
+              </div>
+            </div>
+            {file.description && (
+              <p className="text-xs text-slate-400 mt-1.5 mb-1">{file.description}</p>
+            )}
+            {file.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-1.5">
+                {file.tags.map((t, i) => (
+                  <span key={i} className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 flex items-center gap-0.5">
+                    <Tag className="w-2 h-2" />{t}
+                  </span>
+                ))}
+              </div>
+            )}
+            <div className="flex items-center gap-1 mt-2 pt-2 border-t border-slate-800/50">
+              <a href={downloadUrl} download={file.original_name}
+                data-testid={`download-${file.id}`}
+                className="flex items-center gap-1 px-2 py-1 text-[10px] text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors">
+                <Download className="w-3 h-3" /> Download
+              </a>
+              <button onClick={onStartEdit}
+                data-testid={`edit-${file.id}`}
+                className="flex items-center gap-1 px-2 py-1 text-[10px] text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors">
+                <Edit3 className="w-3 h-3" /> Bewerk
+              </button>
+              <button onClick={onDelete}
+                data-testid={`delete-${file.id}`}
+                className="flex items-center gap-1 px-2 py-1 text-[10px] text-red-400 hover:bg-red-500/10 rounded transition-colors ml-auto">
+                <Trash2 className="w-3 h-3" /> Verwijder
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

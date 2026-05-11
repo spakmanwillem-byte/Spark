@@ -527,11 +527,161 @@
         "session_id": "default",
         "gesprek_nummer": 19
       }
+    },
+    {
+      "id": "conv-202f4154",
+      "timestamp": "2026-04-21T14:04:45.104268+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 20
+      }
+    },
+    {
+      "id": "conv-f94e8a4a",
+      "timestamp": "2026-05-07T19:22:44.752942+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 21
+      }
+    },
+    {
+      "id": "conv-68c6b833",
+      "timestamp": "2026-05-07T19:22:56.815624+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wilde alleen hallo zeggen",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 22
+      }
+    },
+    {
+      "id": "conv-271f8f3b",
+      "timestamp": "2026-05-07T19:23:11.796274+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Weet ji wat een boom is",
+      "spark_response": "**Boom**: Een boom is een grote plant met een stevige stam, takken en bladeren.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boom"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 23
+      }
+    },
+    {
+      "id": "conv-ef98e535",
+      "timestamp": "2026-05-07T19:23:33.115855+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "auto",
+      "spark_response": "**Auto**: Een auto is een voertuig met een motor dat wordt gebruikt om mensen of goederen over de weg te vervoeren.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Auto"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 24
+      }
+    },
+    {
+      "id": "conv-763cb000",
+      "timestamp": "2026-05-07T19:23:50.292662+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Step",
+      "spark_response": "Ik ken deze woorden nog niet: **step**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "step"
+        ],
+        "snap_suggestions": [
+          "step"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 25
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 19,
-    "last_updated": "2026-04-20T11:44:40.632194+00:00"
+    "total_conversations": 25,
+    "last_updated": "2026-05-07T19:23:50.292662+00:00"
   }
 }

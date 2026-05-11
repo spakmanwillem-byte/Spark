@@ -42,6 +42,7 @@ function AppContent() {
     const pathMap = {
       '/': 'dashboard',
       '/chat': 'chat',
+      '/archief': 'archief',
       '/knowledge': 'knowledge',
       '/calendar': 'calendar',
       '/roadmap': 'roadmap',

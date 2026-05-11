@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Link2, Search, ZoomIn, ZoomOut, Maximize2,
   ChevronDown, ChevronRight, X, Target, Layers,
-  GitBranch, Circle, ArrowRight, BarChart3
+  GitBranch, Circle, ArrowRight, BarChart3, RefreshCw
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -34,10 +34,37 @@ export function VerbandenPage({ onNavigate }) {
   const [neighborhood, setNeighborhood] = useState(null);
   const [loadingNeighborhood, setLoadingNeighborhood] = useState(false);
   const [expandedCluster, setExpandedCluster] = useState(null);
+  const [rebuilding, setRebuilding] = useState(false);
+  const [rebuildMsg, setRebuildMsg] = useState(null);
 
-  useEffect(() => {
+  const loadStats = useCallback(() => {
     fetch(`${API}/api/graph/stats`).then(r => r.json()).then(setStats).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
+
+  const handleRebuild = async () => {
+    if (rebuilding) return;
+    if (!window.confirm('Knowledge Graph volledig herbouwen vanuit knowledge_base.json? Dit kan even duren.')) return;
+    setRebuilding(true);
+    setRebuildMsg(null);
+    try {
+      const res = await fetch(`${API}/api/graph/rebuild`, { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        setRebuildMsg(`Graph herbouwd: ${data.nodes} nodes, ${data.edges} edges (${data.entries_scanned} entries gescand)`);
+        loadStats();
+      } else {
+        setRebuildMsg('Herbouw mislukt');
+      }
+    } catch (e) {
+      setRebuildMsg(`Fout: ${e.message}`);
+    }
+    setRebuilding(false);
+    setTimeout(() => setRebuildMsg(null), 6000);
+  };
 
   const handleSearch = async (q) => {
     setSearchQuery(q);
@@ -84,13 +111,28 @@ export function VerbandenPage({ onNavigate }) {
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #06b6d4, #3b82f6)' }}>
               <Link2 className="w-4 h-4 text-white" />
             </div>
-            <div>
+            <div className="flex-1">
               <h1 className="text-base font-bold text-white leading-tight">Verbanden</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">
                 {stats ? `${stats.total_nodes} nodes | ${stats.total_edges} edges | ${stats.avg_connections} gem. verbindingen` : 'Laden...'}
               </p>
             </div>
+            <button
+              data-testid="graph-rebuild-btn"
+              onClick={handleRebuild}
+              disabled={rebuilding}
+              title="Knowledge Graph volledig herbouwen vanuit knowledge_base"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-[11px] hover:bg-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${rebuilding ? 'animate-spin' : ''}`} />
+              {rebuilding ? 'Herbouwen…' : 'Rebuild Graph'}
+            </button>
           </div>
+          {rebuildMsg && (
+            <div data-testid="graph-rebuild-msg" className="mb-2 px-3 py-1.5 rounded-md text-[11px] bg-cyan-500/10 border border-cyan-500/20 text-cyan-200">
+              {rebuildMsg}
+            </div>
+          )}
           <div className="flex overflow-x-auto gap-0">
             {tabs.map(t => {
               const isActive = activeTab === t.id;

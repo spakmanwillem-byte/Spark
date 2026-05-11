@@ -69,6 +69,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Analytics > NETWORK + LAYER** (v3_023): NETWORK live via middleware-tracker, LAYER gemarkeerd in-ontwikkeling [11 mei 2026]
 - [x] **Systeem Archief in Instellingen** (v3_024): Bestanden/Foto/Geluiden/Filmpjes/**Dialogen** met 20 tags [11 mei 2026]
 - [x] **Storage mapping fix** (v3_026): chat_sessions + accounting + system_archive gecategoriseerd, 0 B ongemapt [11 mei 2026]
+- [x] **Knowledge Graph auto-sync** (v3_027): nieuwe snaps (word/sentence/homonym) updaten direct nodes.json + edges.json; shared-tag edges (≤20/node) + sterke homonym_variant edge; Rebuild Graph knop op Verbanden voor volledige herbouw [11 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

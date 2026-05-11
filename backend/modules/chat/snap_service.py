@@ -14,6 +14,7 @@ import uuid
 from pathlib import Path
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
+from modules.graph.sync_service import upsert_node_from_entry
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
@@ -240,6 +241,12 @@ class SnapNLPService:
         save_json(KNOWLEDGE_FILE, data)
         self.invalidate_cache()
 
+        # Graph auto-sync: voeg node toe + bereken edges via shared tags
+        try:
+            upsert_node_from_entry(entry)
+        except Exception as ex:
+            print(f"[graph-sync] word-snap upsert failed: {ex}")
+
         return entry
 
     def create_sentence_snap(self, sentence, context, user_naam):
@@ -276,6 +283,12 @@ class SnapNLPService:
         data["knowledge_entries"].append(entry)
         save_json(KNOWLEDGE_FILE, data)
         self.invalidate_cache()
+
+        # Graph auto-sync
+        try:
+            upsert_node_from_entry(entry)
+        except Exception as ex:
+            print(f"[graph-sync] sentence-snap upsert failed: {ex}")
 
         return entry
 
@@ -385,6 +398,13 @@ class SnapNLPService:
         data["knowledge_entries"].append(entry)
         save_json(KNOWLEDGE_FILE, data)
         self.invalidate_cache()
+
+        # Graph auto-sync (homonym variant — krijgt sterke 'homonym_variant' edge)
+        try:
+            upsert_node_from_entry(entry)
+        except Exception as ex:
+            print(f"[graph-sync] homonym-variant upsert failed: {ex}")
+
         return entry
 
     def get_trigger_response(self, trigger_type):

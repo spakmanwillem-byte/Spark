@@ -820,6 +820,16 @@
             "Spark kan bij chat reageren in stijl van een tag (test-prompt: 'praat in afscheid-stijl')",
             "Privacy: alleen dialogen die admin upload, niet user-gesprekken"
           ]
+        },
+        {
+          "id": "v3_026",
+          "titel": "Analytics DATA-mapping: ongemapt-bestanden gecategoriseerd",
+          "status": "done",
+          "priority": "low",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Tijdens review ontdekt: 3 paden waren niet gemapt in storage-breakdown. Toegevoegd: (1) chat_sessions.json (203B) → User Data (homoniem-flow state per user, niet dialoog-content), (2) accounting/ (811B) → Systeem Data (Spark Core's eigen boekhouding-transacties), (3) system_archive/ → Systeem Data (admin-archief uit v3_024). Resultaat: 0 B ongemapt, 100% data heeft categorie.",
+          "discovery": "11 mei 2026: user merkte op in DATA-tab dat chat_sessions.json en accounting/ niet categorized waren. User suggereerde chat_sessions naar dialogen — feitelijk klopte dat niet (homoniem-state ≠ dialoog-content), dus correct in User Data geplaatst."
         }
       ]
     },

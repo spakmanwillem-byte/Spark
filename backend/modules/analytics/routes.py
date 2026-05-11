@@ -104,6 +104,8 @@ SEGMENTS = {
             {"id": "keywords",     "label": "Keywords",           "path": "keywords.json",            "color": "#0891b2"},
             {"id": "conv_trig",    "label": "Chat triggers",      "path": "conversation_triggers.json","color": "#f59e0b"},
             {"id": "spark_id",     "label": "Spark identiteit",   "path": "spark_identity.json",      "color": "#8b5cf6"},
+            {"id": "accounting",   "label": "Boekhouding",        "path": "accounting",                "color": "#16a34a"},
+            {"id": "system_arch",  "label": "Systeem Archief (admin)", "path": "system_archive",       "color": "#f59e0b"},
         ],
     },
     "user": {
@@ -116,6 +118,7 @@ SEGMENTS = {
             {"id": "persons",       "label": "Persoonskaarten",        "path": "persons",     "color": "#ec4899"},
             {"id": "profile",       "label": "User profielen",         "path": "profile",     "color": "#a855f7"},
             {"id": "achievements",  "label": "Achievements/XP",        "path": "achievements","color": "#fbbf24"},
+            {"id": "chat_sessions", "label": "Chat sessies (homoniem-state)", "path": "chat_sessions.json", "color": "#06b6d4"},
         ],
     },
 }

@@ -61,7 +61,14 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Persoonlijk Archief** (v3_007): 4 categorieën (Bestanden/Foto/Geluiden/Filmpjes), per-user opslag, indexed search, inline previews [11 mei 2026]
 - [x] **Storage quota systeem** (v3_014): 1GB basis, koop/cadeau, breakdown chart op dashboard [11 mei 2026]
 - [x] **Winkel herindeling** (v3_016): Hoofdtab Merch/Digitaal + sub-tabs Opslag/Token, product_type veld voor boekhouding [11 mei 2026]
-- [x] **Dashboard "Mijn Opslag" widget** (v3_017): user-gebonden, breakdown met kleurenlegenda [11 mei 2026]
+- [x] **Dashboard "Mijn Opslag" widget** (v3_017, in_progress): user-gebonden, breakdown met kleurenlegenda [11 mei 2026]
+- [x] **Gesprekken in Archief** (v3_018): read-only tab + cascade-delete bij account-verwijderen [11 mei 2026]
+- [x] **Gesprekken hiërarchisch** (v3_019): Jaar > Maand > Dag, automatische toekomst-jaar in december [11 mei 2026]
+- [x] **Analytics > DATA tab** (v3_021): storage breakdown donut chart met klikbare segmenten [11 mei 2026]
+- [x] **Analytics > SYSTEEM tab** (v3_022): echte psutil-data, portable (werkt na zip-uitpakken) [11 mei 2026]
+- [x] **Analytics > NETWORK + LAYER** (v3_023): NETWORK live via middleware-tracker, LAYER gemarkeerd in-ontwikkeling [11 mei 2026]
+- [x] **Systeem Archief in Instellingen** (v3_024): Bestanden/Foto/Geluiden/Filmpjes/**Dialogen** met 20 tags [11 mei 2026]
+- [x] **Storage mapping fix** (v3_026): chat_sessions + accounting + system_archive gecategoriseerd, 0 B ongemapt [11 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)
@@ -72,13 +79,15 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [ ] 5W+H als conversatie-tool, niet alleen display (v3_010)
 - [ ] Intent-laag: chat queries → live data acties (bv. "Heb je winst?" → Bitvavo P&L)
 - [ ] Triggers simplificeren (1 trigger = 1 woord, NLP synoniemen)
+- [ ] Dag-samenvatting + Trigger-clustering (v3_020)
+- [ ] Dialoog-leermodule (v3_025): scan + tag-gebaseerde response-style-library
+- [ ] Soundmappings koppelen: Instellingen > Geluid leest uit system_archive/sounds
+- [ ] LAYER tab herwerken naar echte module-inventaris
 - [ ] BTW-rapportage + sales-report endpoint per product_type
-- [ ] Backtesting module
-- [ ] Knowledge Quiz
-- [ ] Knowledge kaarten context-antwoorden (Spark-stijl)
-- [ ] Admin UI: "Cadeau GB" knop in UsersAdmin (geen curl meer)
+- [ ] Backtesting module, Knowledge Quiz
+- [ ] Admin UI: "Cadeau GB" knop in UsersAdmin
 - [ ] Event-triggers voor automatisch storage cadeau (100 snaps → 500MB)
-- [ ] Homoniem-flow tweaks: context-binding < 60 sec voor "ja"-acceptatie
+- [ ] Homoniem-flow: context-binding < 60 sec voor "ja"-acceptatie
 - [ ] Core Protection & Sandbox Split (v4.1 roadmap)
 
 ## Datum: 11 mei 2026

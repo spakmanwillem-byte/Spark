@@ -1,12 +1,28 @@
 """
 Analytics routes — storage breakdown (systeem vs user data)
++ live system info (CPU, geheugen, schijf, netwerk, OS, Python)
 """
+import os
+import platform
+import socket
+import sys
+import time
 from pathlib import Path
 from fastapi import APIRouter
+
+try:
+    import psutil
+    HAS_PSUTIL = True
+except ImportError:
+    HAS_PSUTIL = False
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
+APP_ROOT = Path(__file__).parent.parent.parent
+
+# Process-start timestamp voor uptime
+_START_TIME = time.time()
 
 
 def _dir_size(path: Path) -> int:
@@ -169,3 +185,133 @@ def storage_breakdown():
             "color": "#475569",
         }
     }
+
+
+# ============================================================
+# LIVE SYSTEM INFO (psutil-based, dynamisch — werkt overal)
+# ============================================================
+
+def _format_uptime(seconds: float) -> str:
+    seconds = int(seconds)
+    days = seconds // 86400
+    hours = (seconds % 86400) // 3600
+    minutes = (seconds % 3600) // 60
+    parts = []
+    if days: parts.append(f"{days}d")
+    if hours: parts.append(f"{hours}u")
+    if minutes or not parts: parts.append(f"{minutes}m")
+    return " ".join(parts)
+
+
+@router.get("/system-info")
+def get_system_info():
+    """
+    Live runtime info van het systeem waar Spark op draait.
+    Volledig dynamisch — werkt op elke machine, ook na verplaatsing via zip.
+    """
+    info = {
+        "host": {
+            "hostname": socket.gethostname(),
+            "platform": platform.system(),
+            "platform_release": platform.release(),
+            "platform_version": platform.version(),
+            "architecture": platform.machine(),
+            "processor": platform.processor() or platform.machine(),
+            "python_version": sys.version.split()[0],
+            "python_implementation": platform.python_implementation(),
+        },
+        "app": {
+            "root": str(APP_ROOT),
+            "uptime_seconds": int(time.time() - _START_TIME),
+            "uptime_human": _format_uptime(time.time() - _START_TIME),
+        },
+        "psutil_available": HAS_PSUTIL,
+    }
+
+    if not HAS_PSUTIL:
+        return info
+
+    # CPU
+    cpu_freq = psutil.cpu_freq()
+    info["cpu"] = {
+        "percent": psutil.cpu_percent(interval=0.3),
+        "count_logical": psutil.cpu_count(logical=True),
+        "count_physical": psutil.cpu_count(logical=False),
+        "freq_current_mhz": round(cpu_freq.current, 1) if cpu_freq else None,
+        "freq_max_mhz": round(cpu_freq.max, 1) if cpu_freq and cpu_freq.max else None,
+        "per_core_percent": psutil.cpu_percent(interval=0, percpu=True),
+    }
+
+    # Geheugen
+    mem = psutil.virtual_memory()
+    info["memory"] = {
+        "total_bytes": mem.total,
+        "available_bytes": mem.available,
+        "used_bytes": mem.used,
+        "percent": mem.percent,
+        "total_human": _human_bytes(mem.total),
+        "used_human": _human_bytes(mem.used),
+        "available_human": _human_bytes(mem.available),
+    }
+
+    # Schijf — uitlezen van waar Spark daadwerkelijk staat
+    disk = psutil.disk_usage(str(APP_ROOT))
+    # Probeer fstype/device te detecteren
+    disk_type = "unknown"
+    disk_device = "unknown"
+    try:
+        partitions = psutil.disk_partitions(all=False)
+        app_path = str(APP_ROOT.resolve())
+        # Match longest mountpoint prefix
+        best = None
+        for p in partitions:
+            if app_path.startswith(p.mountpoint):
+                if best is None or len(p.mountpoint) > len(best.mountpoint):
+                    best = p
+        if best:
+            disk_type = best.fstype or "unknown"
+            disk_device = best.device
+    except (PermissionError, OSError):
+        pass
+
+    info["disk"] = {
+        "mount": str(APP_ROOT),
+        "device": disk_device,
+        "fs_type": disk_type,
+        "total_bytes": disk.total,
+        "used_bytes": disk.used,
+        "free_bytes": disk.free,
+        "percent": disk.percent,
+        "total_human": _human_bytes(disk.total),
+        "used_human": _human_bytes(disk.used),
+        "free_human": _human_bytes(disk.free),
+    }
+
+    # Netwerk
+    net = psutil.net_io_counters()
+    info["network"] = {
+        "bytes_sent": net.bytes_sent,
+        "bytes_recv": net.bytes_recv,
+        "sent_human": _human_bytes(net.bytes_sent),
+        "recv_human": _human_bytes(net.bytes_recv),
+        "packets_sent": net.packets_sent,
+        "packets_recv": net.packets_recv,
+        "interfaces": list(psutil.net_if_addrs().keys()),
+    }
+
+    # Process info (deze Spark process zelf)
+    try:
+        proc = psutil.Process(os.getpid())
+        info["process"] = {
+            "pid": proc.pid,
+            "name": proc.name(),
+            "memory_used_bytes": proc.memory_info().rss,
+            "memory_used_human": _human_bytes(proc.memory_info().rss),
+            "cpu_percent": proc.cpu_percent(interval=0.1),
+            "threads": proc.num_threads(),
+            "create_time": proc.create_time(),
+        }
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
+        pass
+
+    return info

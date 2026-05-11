@@ -768,6 +768,19 @@
             "User Data 0.03% — groeit pas met meer users/gesprekken",
             "Verbanden-graph 9.4% — tweede grootste post"
           ]
+        },
+        {
+          "id": "v3_022",
+          "titel": "Analytics > SYSTEEM tab: echte runtime info via psutil (portable)",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Mock-waarden vervangen door echte data via psutil + platform modules. CPU%, geheugen%, disk%, netwerk-totals, OS, architectuur, Python-versie, app-pad, uptime, process-info — alles dynamisch uitgelezen. Werkt op elke machine waar Spark draait, ook na verplaatsing via zip. Auto-refresh elke 5 sec. Bonus: Schijf-kaart toont device + fs_type + totaal/gebruikt/vrij. Spark Process kaart toont PID, RAM (RSS), CPU, threads. Geen botsing meer met DATA tab — die toont eigen-data verdeling, deze toont host-systeem.",
+          "discovery": "11 mei 2026: user wees op botsing: 'kader opslag — is die gekoppeld aan data of dubbel?'. Antwoord: was mock. Fix: SYSTEEM tab = host runtime info, DATA tab = eigen data verdeling. Twee verschillende vragen, twee aparte kaders.",
+          "depends_on": [
+            "psutil 7.2.2 toegevoegd aan requirements.txt"
+          ]
         }
       ]
     },

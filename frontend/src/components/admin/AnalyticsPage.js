@@ -12,25 +12,16 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export function AnalyticsPage({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('systeem');
-  const [systemStats, setSystemStats] = useState({
-    cpu: 45,
-    memory: 62,
-    storage: 78,
-    network: 23,
-  });
+  const [systemInfo, setSystemInfo] = useState(null);
 
-  // Simulate live updates
+  // Live system info — refresh elke 5 sec wanneer SYSTEEM tab actief is
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSystemStats(prev => ({
-        cpu: Math.min(100, Math.max(10, prev.cpu + (Math.random() - 0.5) * 10)),
-        memory: Math.min(100, Math.max(20, prev.memory + (Math.random() - 0.5) * 5)),
-        storage: prev.storage, // Storage doesn't change often
-        network: Math.min(100, Math.max(5, prev.network + (Math.random() - 0.5) * 15)),
-      }));
-    }, 2000);
+    if (activeTab !== 'systeem') return;
+    const fetchInfo = () => fetch(`${API}/api/analytics/system-info`).then(r => r.json()).then(setSystemInfo).catch(() => {});
+    fetchInfo();
+    const interval = setInterval(fetchInfo, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [activeTab]);
 
   const tabs = [
     { id: 'systeem', label: 'SYSTEEM', icon: Monitor },
@@ -77,7 +68,7 @@ export function AnalyticsPage({ onNavigate }) {
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'systeem' && <SystemTab stats={systemStats} />}
+        {activeTab === 'systeem' && <SystemTab info={systemInfo} />}
         {activeTab === 'data' && <DataTab />}
         {activeTab === 'network' && <NetworkTab />}
         {activeTab === 'layer' && <LayerTab />}
@@ -86,52 +77,68 @@ export function AnalyticsPage({ onNavigate }) {
   );
 }
 
-// System Tab Content
-function SystemTab({ stats }) {
-  const systemInfo = [
+// System Tab Content — gebruikt echte runtime info via psutil
+function SystemTab({ info }) {
+  if (!info) {
+    return <div className="text-center py-16 text-slate-500">Systeem info ophalen...</div>;
+  }
+
+  const cpu = info.cpu || { percent: 0, count_physical: '?', count_logical: '?' };
+  const mem = info.memory || { percent: 0, used_human: '—', total_human: '—' };
+  const disk = info.disk || { percent: 0, used_human: '—', total_human: '—', device: '?', fs_type: '?' };
+  const net = info.network || { sent_human: '—', recv_human: '—' };
+  const host = info.host || {};
+  const proc = info.process;
+
+  const systemInfoRows = [
     { label: 'Platform', value: 'Spark Core 2.0', icon: Zap },
-    { label: 'Versie', value: 'v2.0.0-stable', icon: CheckCircle },
-    { label: 'Server', value: 'FastAPI / Python 3.11', icon: Server },
-    { label: 'Frontend', value: 'React 19 / TailwindCSS', icon: Monitor },
-    { label: 'Database', value: 'JSON Storage Layer', icon: Database },
-    { label: 'Uptime', value: '99.9% (30 dagen)', icon: Clock },
+    { label: 'Host OS', value: `${host.platform || '?'} ${host.platform_release || ''}`.trim(), icon: Server },
+    { label: 'Architectuur', value: host.architecture || '?', icon: Cpu },
+    { label: 'Hostname', value: host.hostname || '?', icon: Globe },
+    { label: 'Python', value: `${host.python_implementation || ''} ${host.python_version || ''}`.trim(), icon: Database },
+    { label: 'App-pad', value: info.app?.root || '?', icon: FolderOpen },
+    { label: 'Uptime', value: info.app?.uptime_human || '?', icon: Clock },
   ];
 
   return (
-    <div className="space-y-6">
-      {/* Resource Monitors */}
+    <div data-testid="analytics-systeem-tab" className="space-y-6">
+      {/* Resource Monitors — ECHT (psutil) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <ResourceCard 
-          label="CPU Gebruik" 
-          value={stats.cpu} 
+        <ResourceCard
+          label="CPU Gebruik"
+          value={Math.round(cpu.percent)}
           icon={Cpu}
           color="cyan"
           unit="%"
+          sub={`${cpu.count_physical} core${cpu.count_physical === 1 ? '' : 's'} · ${cpu.count_logical} threads`}
         />
-        <ResourceCard 
-          label="Geheugen" 
-          value={stats.memory} 
+        <ResourceCard
+          label="Geheugen"
+          value={Math.round(mem.percent)}
           icon={MemoryStick}
           color="purple"
           unit="%"
+          sub={`${mem.used_human} / ${mem.total_human}`}
         />
-        <ResourceCard 
-          label="Opslag" 
-          value={stats.storage} 
+        <ResourceCard
+          label="Opslag (schijf)"
+          value={Math.round(disk.percent)}
           icon={HardDrive}
           color="amber"
           unit="%"
+          sub={`${disk.used_human} / ${disk.total_human}`}
         />
-        <ResourceCard 
-          label="Netwerk" 
-          value={stats.network} 
+        <ResourceCard
+          label="Netwerk"
+          value={net.bytes_sent && net.bytes_recv ? Math.round(((net.bytes_sent + net.bytes_recv) / (1024 ** 3))) : 0}
           icon={Wifi}
           color="green"
-          unit="Mbps"
+          unit="GB"
+          sub={`↑${net.sent_human} ↓${net.recv_human}`}
         />
       </div>
 
-      {/* System Info & Performance */}
+      {/* System Info & Disk detail */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* System Information */}
         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
@@ -140,68 +147,87 @@ function SystemTab({ stats }) {
             Systeem Informatie
           </h3>
           <div className="space-y-3">
-            {systemInfo.map((item, idx) => (
+            {systemInfoRows.map((item, idx) => (
               <div key={idx} className="flex items-center justify-between py-2 border-b border-slate-800 last:border-0">
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-slate-400 flex-shrink-0">
                   <item.icon className="w-4 h-4" />
                   <span className="text-sm">{item.label}</span>
                 </div>
-                <span className="text-sm text-white font-medium">{item.value}</span>
+                <span className="text-xs text-white font-medium font-mono truncate ml-2" title={item.value}>{item.value}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Performance Graph */}
-        <div className="lg:col-span-2 bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        {/* Disk detail */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-            <Activity className="w-4 h-4 text-cyan-400" />
-            Performance Monitor
+            <HardDrive className="w-4 h-4 text-amber-400" />
+            Schijf
           </h3>
-          <div className="h-48 flex items-end gap-1">
-            {Array.from({ length: 30 }).map((_, i) => {
-              const height = 20 + Math.random() * 60;
-              return (
-                <div 
-                  key={i}
-                  className="flex-1 bg-gradient-to-t from-cyan-500/50 to-cyan-500/10 rounded-t transition-all hover:from-cyan-500 hover:to-cyan-500/30"
-                  style={{ height: `${height}%` }}
-                />
-              );
-            })}
-          </div>
-          <div className="flex justify-between mt-3 text-xs text-slate-500">
-            <span>30 min geleden</span>
-            <span>20 min</span>
-            <span>10 min</span>
-            <span>Nu</span>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between py-2 border-b border-slate-800">
+              <span className="text-sm text-slate-400">Device</span>
+              <span className="text-xs text-white font-mono">{disk.device}</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-slate-800">
+              <span className="text-sm text-slate-400">Bestandssysteem</span>
+              <span className="text-xs text-white font-mono">{disk.fs_type}</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-slate-800">
+              <span className="text-sm text-slate-400">Totaal</span>
+              <span className="text-xs text-white">{disk.total_human}</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-slate-800">
+              <span className="text-sm text-slate-400">Gebruikt</span>
+              <span className="text-xs text-amber-400">{disk.used_human}</span>
+            </div>
+            <div className="flex items-center justify-between py-2">
+              <span className="text-sm text-slate-400">Vrij</span>
+              <span className="text-xs text-green-400">{disk.free_human}</span>
+            </div>
+            {/* Progress */}
+            <div className="pt-2">
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: `${disk.percent}%` }} />
+              </div>
+              <p className="text-[10px] text-slate-500 mt-1.5 text-right">{disk.percent}% gebruikt</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Modules Status */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
-        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-          <Server className="w-4 h-4 text-cyan-400" />
-          Module Status
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {[
-            { name: 'Auth', status: 'online' },
-            { name: 'Storage', status: 'online' },
-            { name: 'Knowledge', status: 'pending' },
-            { name: 'Chat', status: 'pending' },
-            { name: 'Trader', status: 'online' },
-            { name: 'Analytics', status: 'online' },
-          ].map((module, idx) => (
-            <div key={idx} className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-xl">
-              <span className={`w-2 h-2 rounded-full ${
-                module.status === 'online' ? 'bg-green-500' : 
-                module.status === 'pending' ? 'bg-amber-500' : 'bg-red-500'
-              }`} />
-              <span className="text-sm text-slate-300">{module.name}</span>
+        {/* Process info */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+          <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+            <Activity className="w-4 h-4 text-cyan-400" />
+            Spark Process
+          </h3>
+          {proc ? (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between py-2 border-b border-slate-800">
+                <span className="text-sm text-slate-400">PID</span>
+                <span className="text-xs text-white font-mono">{proc.pid}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-slate-800">
+                <span className="text-sm text-slate-400">Naam</span>
+                <span className="text-xs text-white">{proc.name}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-slate-800">
+                <span className="text-sm text-slate-400">Geheugen (RSS)</span>
+                <span className="text-xs text-purple-400">{proc.memory_used_human}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-slate-800">
+                <span className="text-sm text-slate-400">CPU</span>
+                <span className="text-xs text-cyan-400">{Math.round(proc.cpu_percent)}%</span>
+              </div>
+              <div className="flex items-center justify-between py-2">
+                <span className="text-sm text-slate-400">Threads</span>
+                <span className="text-xs text-white">{proc.threads}</span>
+              </div>
             </div>
-          ))}
+          ) : (
+            <p className="text-xs text-slate-500 text-center py-8">Process info niet beschikbaar</p>
+          )}
         </div>
       </div>
     </div>
@@ -584,7 +610,7 @@ function LayerTab() {
 }
 
 // Helper Components
-function ResourceCard({ label, value, icon: Icon, color, unit }) {
+function ResourceCard({ label, value, icon: Icon, color, unit, sub }) {
   const colorClasses = {
     cyan: 'from-cyan-500 to-cyan-400',
     purple: 'from-purple-500 to-purple-400',
@@ -605,11 +631,12 @@ function ResourceCard({ label, value, icon: Icon, color, unit }) {
         <span className="text-xs text-slate-500 uppercase">{label}</span>
         <Icon className={`w-5 h-5 text-${color}-400`} />
       </div>
-      <div className="text-3xl font-bold text-white mb-3">
+      <div className="text-3xl font-bold text-white mb-1">
         {Math.round(value)}<span className="text-lg text-slate-400">{unit}</span>
       </div>
+      {sub && <p className="text-[10px] text-slate-500 mb-2 truncate" title={sub}>{sub}</p>}
       <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-        <div 
+        <div
           className={`h-full bg-gradient-to-r ${colorClasses[color]} rounded-full transition-all duration-500`}
           style={{ width: `${Math.min(value, 100)}%` }}
         />

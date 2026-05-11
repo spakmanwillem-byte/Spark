@@ -183,3 +183,10 @@ async def search_graph(q: str = Query(..., min_length=1)):
             results.append({**n, "score": score})
     results.sort(key=lambda x: -x["score"])
     return {"results": results[:30], "total": len(results)}
+
+
+@router.post("/rebuild")
+async def rebuild_graph():
+    """Volledige herbouw van nodes + edges vanuit knowledge_base."""
+    from .sync_service import rebuild_graph_full
+    return rebuild_graph_full()

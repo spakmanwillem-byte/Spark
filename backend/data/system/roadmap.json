@@ -550,10 +550,11 @@
         {
           "id": "v3_007",
           "titel": "File Upload & Sharing",
-          "status": "vision",
+          "status": "done",
           "priority": "medium",
-          "progress": 0,
-          "notes": "Echte file upload in Bestanden tab"
+          "progress": 100,
+          "notes": "Gerealiseerd als Persoonlijk Archief module (`/api/archive`). Per-user storage onder /data/users/{user_id}/archive/{categorie}/. 4 categorieën met auto-detectie: bestanden, foto, geluiden, filmpjes. Indexed search per categorie (naam, beschrijving, tags). Inline previews (img/audio/video), download/edit/delete, metadata bewerken. Quota-enforcement via v3_014 (storage quota systeem).",
+          "completed_date": "2026-05-11"
         },
         {
           "id": "v3_008",
@@ -673,6 +674,46 @@
           "completed_date": "2026-05-11",
           "notes": "Per-user 1GB basisopslag in persoonlijk archief. Quota model: base_gb + purchased_gb + gift_gb. Upload geweigerd bij overschrijding (HTTP 413). Shop product 'storage-1gb' (€10) voegt direct 1GB toe na aankoop. Admin endpoint POST /api/archive/{user_id}/quota/grant voor cadeau (events). Dashboard widget toont breakdown met kleuren: blauw=basis, groen=gekocht, roze=cadeau, oranje=gebruikt. Events worden gelogd voor zichtbaarheid van geschiedenis.",
           "discovery": "11 mei 2026: user wenst persoonlijke opslagruimte met aankoop + cadeau-mogelijkheid als gamification."
+        },
+        {
+          "id": "v3_015",
+          "titel": "Users Admin: Reset Wachtwoord + Verwijder",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "completed_date": "2026-04-20",
+          "notes": "Beheerder kan via Gebruikers > Acties: (1) sleutelwoord resetten naar 'Welkom01' via POST /api/auth/users/{id}/reset-password, en (2) gebruiker verwijderen via DELETE. Admin user-001 (Willem) is beschermd: delete returnt 403. Reset-events worden gelogd met sleutelwoord_reset_op timestamp."
+        },
+        {
+          "id": "v3_016",
+          "titel": "Winkel herindeling: Fysiek vs Digitaal (boekhouding-ready)",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Hoofdtabs: Merch (fysiek) | Digitaal. Onder Digitaal sub-tabs: Opslag · ROAR Token. Elk product heeft nu `product_type` veld: 'physical' of 'digital'. Voorbereid voor boekhouding-module (BTW-tarieven verschillen, marges, etc.). Bestaande Merch- en Token-flows ongewijzigd.",
+          "depends_on": [
+            "v3_014 (storage quota)"
+          ],
+          "linked_to_future": [
+            "Boekhouding-module: sales-report endpoint per product_type"
+          ]
+        },
+        {
+          "id": "v3_017",
+          "titel": "Dashboard: per-user widgets (Mijn Opslag toegevoegd)",
+          "status": "in_progress",
+          "priority": "high",
+          "progress": 30,
+          "started_date": "2026-05-11",
+          "notes": "Eerste user-gebonden widget op dashboard: 'Mijn Opslag' met breakdown-chart (basis blauw / gekocht groen / cadeau roze / gebruikt oranje). TOEKOMST: dashboard moet meer user-id-gebonden worden met zichtbaarheid per gradatie (wie ziet wat, op basis van rol/rechten). Andere widgets moeten ook user-scoped worden.",
+          "todo": [
+            "Knowledge stats per-user filteren",
+            "Persoonlijke gesprekken-teller",
+            "Achievements/XP widget",
+            "Gradatie-based zichtbaarheid (admin/normaal/test-user)",
+            "Mijn aankopen widget (orders historie)"
+          ]
         }
       ]
     },

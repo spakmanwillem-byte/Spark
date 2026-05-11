@@ -55,17 +55,30 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] Knowledge Snap systeem
 - [x] Spark Brain Bijbel CRUD endpoints (POST/PUT/DELETE /api/spark/bijbel/{section})
 - [x] **Users admin**: Verwijder knop (admin user-001 beschermd) + Reset WW knop (default Welkom01) [20 apr 2026]
+- [x] **Homoniem-flow** (v3_012): rejection + confirmation triggers, 'bedoel je een andere X?', auto-creatie variant snap [20 apr 2026]
+- [x] **Spark Leraar achievement** (v3_013): +15 XP voor homoniem-disambiguatie via xp_service [20 apr 2026]
+- [x] **5W+H veld-bugfix** (v3_011): NLP leest nu ws5+context_5wh, 2398 kaarten leveren rijke context [20 apr 2026]
+- [x] **Persoonlijk Archief** (v3_007): 4 categorieën (Bestanden/Foto/Geluiden/Filmpjes), per-user opslag, indexed search, inline previews [11 mei 2026]
+- [x] **Storage quota systeem** (v3_014): 1GB basis, koop/cadeau, breakdown chart op dashboard [11 mei 2026]
+- [x] **Winkel herindeling** (v3_016): Hoofdtab Merch/Digitaal + sub-tabs Opslag/Token, product_type veld voor boekhouding [11 mei 2026]
+- [x] **Dashboard "Mijn Opslag" widget** (v3_017): user-gebonden, breakdown met kleurenlegenda [11 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)
 - [ ] 5 Test accounts voor NLP live-test (moeder, dochter, zusje, zusje's dochter, oud-collega)
 - [ ] Baseline scan rapport (triggers, knowledge cards, NLP-woordenschat vóór test)
+- [ ] Dashboard verder user-id-gradatie-gebonden maken (v3_017 in progress)
+- [ ] Context-laag: zin-snaps met cross-linking (v3_009)
+- [ ] 5W+H als conversatie-tool, niet alleen display (v3_010)
 - [ ] Intent-laag: chat queries → live data acties (bv. "Heb je winst?" → Bitvavo P&L)
 - [ ] Triggers simplificeren (1 trigger = 1 woord, NLP synoniemen)
-- [ ] BTW-rapportage
+- [ ] BTW-rapportage + sales-report endpoint per product_type
 - [ ] Backtesting module
 - [ ] Knowledge Quiz
 - [ ] Knowledge kaarten context-antwoorden (Spark-stijl)
+- [ ] Admin UI: "Cadeau GB" knop in UsersAdmin (geen curl meer)
+- [ ] Event-triggers voor automatisch storage cadeau (100 snaps → 500MB)
+- [ ] Homoniem-flow tweaks: context-binding < 60 sec voor "ja"-acceptatie
 - [ ] Core Protection & Sandbox Split (v4.1 roadmap)
 
-## Datum: 20 april 2026
+## Datum: 11 mei 2026

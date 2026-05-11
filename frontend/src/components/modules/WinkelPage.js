@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   ShoppingBag, Coins, Plus, Minus, ShoppingCart, X,
   Package, Tag, Truck, CreditCard, Loader2, Check,
-  TrendingUp, ChevronRight
+  TrendingUp, ChevronRight, HardDrive, Gift
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -15,6 +15,7 @@ export function WinkelPage({ onNavigate }) {
   const [products, setProducts] = useState([]);
   const [tokenInfo, setTokenInfo] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
+  const [storageStats, setStorageStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -33,10 +34,12 @@ export function WinkelPage({ onNavigate }) {
       fetch(`${API}/api/shop/token/price`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/shop/token/balance/${userId}`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/wallet/user/${userId}`).then(r => r.json()).catch(() => null),
-    ]).then(([prods, price, bal, wallet]) => {
+      fetch(`${API}/api/archive/${userId}/stats`).then(r => r.json()).catch(() => null),
+    ]).then(([prods, price, bal, wallet, storage]) => {
       setProducts(prods.products || []);
       setTokenInfo(price);
       setUserBalance({ ...bal, wallet_eur: wallet?.balance_eur || 0 });
+      setStorageStats(storage);
       setLoading(false);
     });
   }, [userId]);
@@ -44,6 +47,7 @@ export function WinkelPage({ onNavigate }) {
   useEffect(() => { loadData(); }, [loadData]);
 
   const merchProducts = products.filter(p => p.category === 'merch');
+  const storageProducts = products.filter(p => p.category === 'storage');
   const tokenProduct = products.find(p => p.category === 'token');
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -149,6 +153,7 @@ export function WinkelPage({ onNavigate }) {
         <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 border border-slate-800">
           {[
             { id: 'merch', label: 'Merch', icon: Tag },
+            { id: 'storage', label: 'Opslag', icon: HardDrive },
             { id: 'tokens', label: 'ROAR Tokens', icon: Coins },
           ].map(tab => (
             <button key={tab.id} data-testid={`shop-tab-${tab.id}`}
@@ -209,6 +214,16 @@ export function WinkelPage({ onNavigate }) {
               <div className="py-12 text-center text-slate-500 text-sm">Geen producten beschikbaar</div>
             )}
           </div>
+        )}
+
+        {/* OPSLAG TAB */}
+        {activeTab === 'storage' && (
+          <StorageTab
+            products={storageProducts}
+            storageStats={storageStats}
+            walletBalance={walletBalance}
+            addToCart={addToCart}
+          />
         )}
 
         {/* ROAR TOKENS TAB */}
@@ -389,3 +404,150 @@ export function WinkelPage({ onNavigate }) {
 }
 
 export default WinkelPage;
+
+// ============================================================
+// Storage Tab — koop opslag + zie huidige quota breakdown
+// ============================================================
+function StorageTab({ products, storageStats, walletBalance, addToCart }) {
+  const q = storageStats?.quota || {};
+  const baseGb = q.base_gb || 0;
+  const purchasedGb = q.purchased_gb || 0;
+  const giftGb = q.gift_gb || 0;
+  const totalGb = q.total_gb || 1;
+  const usedBytes = q.used_bytes || 0;
+  const totalBytes = q.total_bytes || 1;
+  const usedPercent = q.used_percent || 0;
+
+  const fmtBytes = (n) => {
+    if (!n) return '0 B';
+    const u = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.min(Math.floor(Math.log(n) / Math.log(1024)), 3);
+    return `${(n / Math.pow(1024, i)).toFixed(i === 0 ? 0 : 1)} ${u[i]}`;
+  };
+
+  const basePct = (baseGb / totalGb) * 100;
+  const purchasedPct = (purchasedGb / totalGb) * 100;
+  const giftPct = (giftGb / totalGb) * 100;
+  const events = (q.events || []).slice(-5).reverse();
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Huidige opslag - status card */}
+      <div data-testid="storage-status-card" className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="p-5 text-center" style={{ background: 'linear-gradient(135deg, #1a1333 0%, #3b82f610 50%, #06b6d408 100%)' }}>
+          <div className="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)' }}>
+            <HardDrive className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-lg font-bold text-white">Jouw Opslag</h2>
+          <p className="text-3xl font-bold text-blue-400 mt-2">{totalGb} GB</p>
+          <p className="text-[10px] text-slate-500 mt-1">{fmtBytes(usedBytes)} van {fmtBytes(totalBytes)} gebruikt</p>
+        </div>
+
+        <div className="p-5 space-y-3">
+          {/* Gestapelde balk */}
+          <div>
+            <div className="flex justify-between text-[10px] text-slate-500 mb-1.5">
+              <span>Verdeling</span>
+              <span style={{ color: usedPercent > 90 ? '#ef4444' : '#22c55e' }}>{usedPercent}% gebruikt</span>
+            </div>
+            <div className="h-3 bg-slate-800 rounded-full overflow-hidden flex relative">
+              {basePct > 0 && <div style={{ width: `${basePct}%`, background: '#3b82f6' }} title={`Basis: ${baseGb}GB`} />}
+              {purchasedPct > 0 && <div style={{ width: `${purchasedPct}%`, background: '#22c55e' }} title={`Gekocht: ${purchasedGb}GB`} />}
+              {giftPct > 0 && <div style={{ width: `${giftPct}%`, background: '#ec4899' }} title={`Cadeau: ${giftGb}GB`} />}
+              <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-amber-400/30 to-amber-500/60 border-r-2 border-amber-400"
+                style={{ width: `${Math.min(usedPercent, 100)}%` }} />
+            </div>
+          </div>
+
+          {/* Legenda */}
+          <div className="grid grid-cols-3 gap-2">
+            <div className="p-2 rounded-lg" style={{ background: '#3b82f610', border: '1px solid #3b82f630' }}>
+              <div className="flex items-center gap-1 mb-0.5">
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-[9px] text-slate-400 uppercase">Basis</span>
+              </div>
+              <p className="text-sm font-bold text-white">{baseGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+            </div>
+            <div className="p-2 rounded-lg" style={{ background: '#22c55e10', border: '1px solid #22c55e30' }}>
+              <div className="flex items-center gap-1 mb-0.5">
+                <span className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-[9px] text-slate-400 uppercase">Gekocht</span>
+              </div>
+              <p className="text-sm font-bold text-white">{purchasedGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+            </div>
+            <div className="p-2 rounded-lg" style={{ background: '#ec489910', border: '1px solid #ec489930' }}>
+              <div className="flex items-center gap-1 mb-0.5">
+                <span className="w-2 h-2 rounded-full bg-pink-500" />
+                <span className="text-[9px] text-slate-400 uppercase">Cadeau</span>
+              </div>
+              <p className="text-sm font-bold text-white">{giftGb}<span className="text-[10px] text-slate-500 ml-0.5">GB</span></p>
+            </div>
+          </div>
+
+          {/* Recent events */}
+          {events.length > 0 && (
+            <div className="pt-3 border-t border-slate-800">
+              <p className="text-[10px] text-slate-500 uppercase mb-2">Geschiedenis</p>
+              <div className="space-y-1.5">
+                {events.map((e, i) => {
+                  const isGift = e.type === 'gift';
+                  return (
+                    <div key={i} className="flex items-center gap-2 text-[11px]">
+                      {isGift ? <Gift className="w-3 h-3 text-pink-400 flex-shrink-0" /> : <ShoppingBag className="w-3 h-3 text-green-400 flex-shrink-0" />}
+                      <span className="text-slate-300 truncate flex-1">{e.reason}</span>
+                      <span className="font-medium" style={{ color: isGift ? '#ec4899' : '#22c55e' }}>+{e.gb}GB</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Producten lijst */}
+      <div className="space-y-4">
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-white flex items-center gap-2 mb-1">
+            <Plus className="w-4 h-4 text-blue-400" /> Extra opslag kopen
+          </h3>
+          <p className="text-[11px] text-slate-500 mb-4">Voeg ruimte toe wanneer je nodig hebt. Direct beschikbaar na aankoop.</p>
+
+          {products.length === 0 ? (
+            <p className="text-sm text-slate-500 text-center py-6">Geen opslagproducten beschikbaar</p>
+          ) : (
+            <div className="space-y-3">
+              {products.map(p => (
+                <div key={p.id} data-testid={`storage-product-${p.id}`}
+                  className="flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-blue-500/40 transition-colors">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #3b82f6, #06b6d4)' }}>
+                    <HardDrive className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-bold text-white">{p.name}</h4>
+                    <p className="text-[11px] text-slate-400 line-clamp-2">{p.description}</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-lg font-bold text-white">&euro;{p.price.toFixed(2)}</p>
+                    <button data-testid={`add-${p.id}`}
+                      onClick={() => addToCart(p)}
+                      disabled={!p.in_stock}
+                      className="mt-1 flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-40">
+                      <Plus className="w-3 h-3" /> In wagen
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-4 p-3 bg-slate-800/30 rounded-lg text-[10px] text-slate-500 space-y-1">
+            <p><b className="text-blue-400">Basis: 1GB gratis</b> per gebruiker, automatisch toegekend.</p>
+            <p><b className="text-pink-400">Cadeau-opslag</b> kan worden toegekend via events of door beheer.</p>
+            <p>Saldo: <span className="text-white">&euro;{walletBalance.toFixed(2)}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

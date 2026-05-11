@@ -727,6 +727,16 @@
           "linked_to_future": [
             "Module: duplicaat-info-filter (privacy door letterlijk dubbele info eruit te halen)"
           ]
+        },
+        {
+          "id": "v3_019",
+          "titel": "Gesprekken-archief: hiërarchische tijdsstructuur (Jaar > Maand > Dag)",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "completed_date": "2026-05-11",
+          "notes": "Gesprekken-tab in Persoonlijk Archief toont nu boomstructuur: jaartabs bovenaan, klik maand → uitklap met dagen, klik dag → uitklap met gesprekken (tijdstip + snap-indicator). Weekday-prefix (Do, Vr, etc) bij dag-naam. Automatische toekomst-voorbereiding: vanaf 1 december wordt volgend jaar als placeholder-tab getoond, dus op 1 dec 2026 verschijnt 2027 vanzelf, op 1 dec 2027 verschijnt 2028, etc. Geen handmatige actie nodig — werkt door zolang de app draait.",
+          "discovery": "11 mei 2026: user wil tijdgebonden navigatie door eigen gesprekken voor lange-termijn herinneringen."
         }
       ]
     },

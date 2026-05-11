@@ -4,10 +4,12 @@ import { useAuth } from '../../context/AuthContext';
 import {
   Archive, Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive,
-  MessageSquare, Lock, Calendar
+  MessageSquare, Lock, Calendar, ChevronRight, ChevronDown
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+const MAANDEN = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
 
 const CATEGORIES = [
   { id: 'bestanden', label: 'Bestanden', icon: FileIcon, color: '#64748b', accept: '*' },
@@ -367,8 +369,50 @@ function FileCard({ file, userId, category, isEditing, editForm, setEditForm, on
 
 export default ArchiefPage;
 
-/* === Conversations View (read-only chat-log archief) === */
+/* === Conversations View — hiërarchisch Jaar > Maand > Dag === */
 function ConversationsView({ conversations, chatStats, search, expandedConv, setExpandedConv }) {
+  // Groepeer alle gesprekken op jaar > maand > dag
+  const tree = React.useMemo(() => {
+    const t = {};
+    for (const c of conversations) {
+      const d = new Date(c.timestamp);
+      const y = d.getFullYear();
+      const m = d.getMonth(); // 0-11
+      const dd = d.getDate();
+      if (!t[y]) t[y] = {};
+      if (!t[y][m]) t[y][m] = {};
+      if (!t[y][m][dd]) t[y][m][dd] = [];
+      t[y][m][dd].push(c);
+    }
+    return t;
+  }, [conversations]);
+
+  // Beschikbare jaren (gesorteerd nieuwste eerst).
+  // Bonus: in december ook al automatisch volgend jaar tonen als placeholder.
+  const availableYears = React.useMemo(() => {
+    const set = new Set(Object.keys(tree).map(Number));
+    const now = new Date();
+    set.add(now.getFullYear());
+    if (now.getMonth() === 11) {
+      set.add(now.getFullYear() + 1); // 1 dec → volgend jaar zichtbaar
+    }
+    return [...set].sort((a, b) => b - a);
+  }, [tree]);
+
+  const [activeYear, setActiveYear] = useState(availableYears[0] || new Date().getFullYear());
+  const [openMonths, setOpenMonths] = useState({}); // {2026-4: true}
+  const [openDays, setOpenDays] = useState({});     // {2026-4-7: true}
+
+  // Sync activeYear als nieuwe jaren binnenkomen
+  useEffect(() => {
+    if (!availableYears.includes(activeYear) && availableYears.length > 0) {
+      setActiveYear(availableYears[0]);
+    }
+  }, [availableYears, activeYear]);
+
+  const toggleMonth = (y, m) => setOpenMonths(s => ({ ...s, [`${y}-${m}`]: !s[`${y}-${m}`] }));
+  const toggleDay = (y, m, d) => setOpenDays(s => ({ ...s, [`${y}-${m}-${d}`]: !s[`${y}-${m}-${d}`] }));
+
   if (!conversations || conversations.length === 0) {
     return (
       <div className="text-center py-16">
@@ -376,9 +420,7 @@ function ConversationsView({ conversations, chatStats, search, expandedConv, set
         <p className="text-sm text-slate-400 mb-1">
           {search ? `Geen gesprekken matchen "${search}"` : 'Nog geen gesprekken gearchiveerd'}
         </p>
-        <p className="text-xs text-slate-600">
-          Praat met Spark om hier je gesprekslogs te zien
-        </p>
+        <p className="text-xs text-slate-600">Praat met Spark om hier je gesprekslogs te zien</p>
       </div>
     );
   }
@@ -386,6 +428,10 @@ function ConversationsView({ conversations, chatStats, search, expandedConv, set
   const total = chatStats?.total || conversations.length;
   const snapCount = chatStats?.snap_count || 0;
   const avgWords = chatStats?.avg_words || 0;
+
+  // Data voor actief jaar (kan leeg zijn als toekomst-jaar)
+  const yearData = tree[activeYear] || {};
+  const monthsInYear = Object.keys(yearData).map(Number).sort((a, b) => b - a); // nieuwste maand eerst
 
   return (
     <div className="space-y-3">
@@ -414,62 +460,148 @@ function ConversationsView({ conversations, chatStats, search, expandedConv, set
         </div>
       </div>
 
-      {/* Lijst */}
-      <div className="space-y-2">
-        {conversations.map(c => {
-          const isExpanded = expandedConv === c.id;
-          const ts = new Date(c.timestamp).toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' });
-          const hasSnap = c.analysis?.snap_suggestions?.length > 0;
+      {/* Jaar tabs */}
+      <div className="flex flex-wrap gap-1 border-b border-slate-800 pb-1">
+        {availableYears.map(y => {
+          const yearTotal = tree[y] ? Object.values(tree[y]).reduce((s, mObj) =>
+            s + Object.values(mObj).reduce((sd, arr) => sd + arr.length, 0), 0) : 0;
+          const isActive = y === activeYear;
+          const isFuture = y > new Date().getFullYear();
           return (
-            <div key={c.id} data-testid={`conv-${c.id}`}
-              className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
-              <button onClick={() => setExpandedConv(isExpanded ? null : c.id)}
-                className="w-full text-left px-3 py-2.5">
-                <div className="flex items-start gap-2">
-                  <Calendar className="w-3 h-3 text-slate-500 flex-shrink-0 mt-1" />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-[10px] text-slate-500">{ts}</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{c.channel || 'spark'}</span>
-                      {hasSnap && (
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400">
-                          +{c.analysis.snap_suggestions.length} snap
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-white truncate">
-                      <span className="text-amber-400">Jij:</span> {c.user_message}
-                    </p>
-                    {!isExpanded && c.spark_response && (
-                      <p className="text-xs text-slate-500 truncate mt-0.5">
-                        <span className="text-cyan-400">Spark:</span> {c.spark_response}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </button>
-              {isExpanded && (
-                <div className="px-3 pb-3 pt-1 border-t border-slate-800/50 space-y-2">
-                  <div className="bg-slate-800/40 rounded-lg p-2.5">
-                    <p className="text-[10px] text-cyan-400 mb-1 font-medium">Spark:</p>
-                    <p className="text-xs text-slate-300 whitespace-pre-wrap">{c.spark_response || '(geen antwoord)'}</p>
-                  </div>
-                  {c.analysis?.knowledge_matches?.length > 0 && (
-                    <div className="text-[10px] text-slate-500">
-                      Kennis gebruikt: {c.analysis.knowledge_matches.map(m => m.begrip).join(', ')}
-                    </div>
-                  )}
-                  {c.analysis?.snap_suggestions?.length > 0 && (
-                    <div className="text-[10px] text-cyan-400">
-                      Snaps gemaakt: {c.analysis.snap_suggestions.join(', ')}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+            <button key={y} data-testid={`year-tab-${y}`}
+              onClick={() => setActiveYear(y)}
+              className={`px-3 py-1.5 rounded-t-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                isActive
+                  ? 'bg-cyan-500/15 text-cyan-300 border-b-2 border-cyan-400'
+                  : 'text-slate-500 hover:text-slate-300'
+              }`}
+              title={isFuture ? `${y} — nog geen gesprekken (placeholder)` : undefined}>
+              {y}
+              <span className={`text-[9px] px-1.5 py-0.5 rounded ${isActive ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-800 text-slate-500'}`}>
+                {yearTotal}
+              </span>
+            </button>
           );
         })}
       </div>
+
+      {/* Maanden + dagen */}
+      {monthsInYear.length === 0 ? (
+        <div className="text-center py-12">
+          <Calendar className="w-10 h-10 text-slate-700 mx-auto mb-2" />
+          <p className="text-sm text-slate-400">Nog geen gesprekken in {activeYear}</p>
+          <p className="text-[10px] text-slate-600 mt-1">
+            {activeYear > new Date().getFullYear()
+              ? 'Dit jaar staat klaar voor toekomstige gesprekken'
+              : 'Start een gesprek met Spark om hier iets te zien'}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-1.5">
+          {monthsInYear.map(mIdx => {
+            const days = yearData[mIdx];
+            const dayKeys = Object.keys(days).map(Number).sort((a, b) => b - a);
+            const monthTotal = dayKeys.reduce((s, d) => s + days[d].length, 0);
+            const monthKey = `${activeYear}-${mIdx}`;
+            const monthOpen = !!openMonths[monthKey];
+            return (
+              <div key={mIdx} data-testid={`month-${activeYear}-${mIdx}`}
+                className="bg-slate-900/30 border border-slate-800/60 rounded-lg overflow-hidden">
+                <button onClick={() => toggleMonth(activeYear, mIdx)}
+                  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-800/40 text-left">
+                  {monthOpen ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                  <span className="text-sm font-medium text-white flex-1">{MAANDEN[mIdx]}</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400">
+                    {monthTotal} gesprek{monthTotal === 1 ? '' : 'ken'}
+                  </span>
+                </button>
+
+                {monthOpen && (
+                  <div className="px-3 pb-2 space-y-1">
+                    {dayKeys.map(dd => {
+                      const convs = days[dd];
+                      const dayKey = `${activeYear}-${mIdx}-${dd}`;
+                      const dayOpen = !!openDays[dayKey];
+                      const dayDate = new Date(activeYear, mIdx, dd);
+                      const weekday = ['Zo','Ma','Di','Wo','Do','Vr','Za'][dayDate.getDay()];
+                      return (
+                        <div key={dd} data-testid={`day-${dayKey}`}
+                          className="bg-slate-950/40 rounded-md border border-slate-800/50">
+                          <button onClick={() => toggleDay(activeYear, mIdx, dd)}
+                            className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-slate-800/40 text-left">
+                            {dayOpen ? <ChevronDown className="w-3 h-3 text-slate-600" /> : <ChevronRight className="w-3 h-3 text-slate-600" />}
+                            <span className="text-[10px] text-slate-500 w-6">{weekday}</span>
+                            <span className="text-sm text-slate-300 flex-1">{dd} {MAANDEN[mIdx].toLowerCase()}</span>
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
+                              {convs.length}
+                            </span>
+                          </button>
+                          {dayOpen && (
+                            <div className="px-2 pb-2 space-y-1">
+                              {convs.map(c => {
+                                const isExpanded = expandedConv === c.id;
+                                const ts = new Date(c.timestamp).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+                                const hasSnap = c.analysis?.snap_suggestions?.length > 0;
+                                return (
+                                  <div key={c.id} data-testid={`conv-${c.id}`}
+                                    className="bg-slate-900/60 border border-slate-800 rounded-md">
+                                    <button onClick={() => setExpandedConv(isExpanded ? null : c.id)}
+                                      className="w-full text-left px-2.5 py-2">
+                                      <div className="flex items-start gap-2">
+                                        <span className="text-[10px] text-slate-500 mt-0.5 w-9 flex-shrink-0">{ts}</span>
+                                        <div className="flex-1 min-w-0">
+                                          <div className="flex items-center gap-2 mb-0.5">
+                                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{c.channel || 'spark'}</span>
+                                            {hasSnap && (
+                                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400">
+                                                +{c.analysis.snap_suggestions.length} snap
+                                              </span>
+                                            )}
+                                          </div>
+                                          <p className="text-xs text-white truncate">
+                                            <span className="text-amber-400">Jij:</span> {c.user_message}
+                                          </p>
+                                          {!isExpanded && c.spark_response && (
+                                            <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                                              <span className="text-cyan-400">Spark:</span> {c.spark_response}
+                                            </p>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </button>
+                                    {isExpanded && (
+                                      <div className="px-2.5 pb-2 pt-1 border-t border-slate-800/50 space-y-1.5">
+                                        <div className="bg-slate-800/40 rounded p-2">
+                                          <p className="text-[10px] text-cyan-400 mb-1 font-medium">Spark:</p>
+                                          <p className="text-xs text-slate-300 whitespace-pre-wrap">{c.spark_response || '(geen antwoord)'}</p>
+                                        </div>
+                                        {c.analysis?.knowledge_matches?.length > 0 && (
+                                          <div className="text-[10px] text-slate-500">
+                                            Kennis gebruikt: {c.analysis.knowledge_matches.map(m => m.begrip).join(', ')}
+                                          </div>
+                                        )}
+                                        {c.analysis?.snap_suggestions?.length > 0 && (
+                                          <div className="text-[10px] text-cyan-400">
+                                            Snaps gemaakt: {c.analysis.snap_suggestions.join(', ')}
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

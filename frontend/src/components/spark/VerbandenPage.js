@@ -36,6 +36,7 @@ export function VerbandenPage({ onNavigate }) {
   const [expandedCluster, setExpandedCluster] = useState(null);
   const [rebuilding, setRebuilding] = useState(false);
   const [rebuildMsg, setRebuildMsg] = useState(null);
+  const [rebuildConfirm, setRebuildConfirm] = useState(false);
 
   const loadStats = useCallback(() => {
     fetch(`${API}/api/graph/stats`).then(r => r.json()).then(setStats).catch(() => {});
@@ -47,9 +48,16 @@ export function VerbandenPage({ onNavigate }) {
 
   const handleRebuild = async () => {
     if (rebuilding) return;
-    if (!window.confirm('Knowledge Graph volledig herbouwen vanuit knowledge_base.json? Dit kan even duren.')) return;
+    // Two-step confirm zonder browser-popup
+    if (!rebuildConfirm) {
+      setRebuildConfirm(true);
+      setRebuildMsg('Klik nogmaals op "Bevestig herbouw" om de Knowledge Graph volledig opnieuw op te bouwen.');
+      setTimeout(() => { setRebuildConfirm(false); setRebuildMsg(null); }, 5000);
+      return;
+    }
+    setRebuildConfirm(false);
     setRebuilding(true);
-    setRebuildMsg(null);
+    setRebuildMsg('Herbouwen bezig… dit kan 5-15 seconden duren.');
     try {
       const res = await fetch(`${API}/api/graph/rebuild`, { method: 'POST' });
       const data = await res.json();
@@ -57,13 +65,13 @@ export function VerbandenPage({ onNavigate }) {
         setRebuildMsg(`Graph herbouwd: ${data.nodes} nodes, ${data.edges} edges (${data.entries_scanned} entries gescand)`);
         loadStats();
       } else {
-        setRebuildMsg('Herbouw mislukt');
+        setRebuildMsg('Herbouw mislukt — controleer de server logs.');
       }
     } catch (e) {
       setRebuildMsg(`Fout: ${e.message}`);
     }
     setRebuilding(false);
-    setTimeout(() => setRebuildMsg(null), 6000);
+    setTimeout(() => setRebuildMsg(null), 8000);
   };
 
   const handleSearch = async (q) => {
@@ -106,7 +114,7 @@ export function VerbandenPage({ onNavigate }) {
     <MainLayout activePage="connections" onNavigate={onNavigate}>
       <div data-testid="verbanden-page" className="h-full flex flex-col">
         {/* Banner */}
-        <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0">
+        <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 pt-3 pb-0 pr-16">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #06b6d4, #3b82f6)' }}>
               <Link2 className="w-4 h-4 text-white" />
@@ -122,10 +130,14 @@ export function VerbandenPage({ onNavigate }) {
               onClick={handleRebuild}
               disabled={rebuilding}
               title="Knowledge Graph volledig herbouwen vanuit knowledge_base"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-[11px] hover:bg-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[11px] font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-colors ${
+                rebuildConfirm
+                  ? 'border-amber-500/40 bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 animate-pulse'
+                  : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20'
+              }`}
             >
               <RefreshCw className={`w-3.5 h-3.5 ${rebuilding ? 'animate-spin' : ''}`} />
-              {rebuilding ? 'Herbouwen…' : 'Rebuild Graph'}
+              {rebuilding ? 'Herbouwen…' : (rebuildConfirm ? 'Bevestig herbouw' : 'Rebuild Graph')}
             </button>
           </div>
           {rebuildMsg && (

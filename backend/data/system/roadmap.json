@@ -2183,6 +2183,14 @@
         "priority": "critical",
         "progress": 100,
         "completed_date": "2026-03-16"
+      },
+      {
+        "id": "v3_303a",
+        "titel": "Trigger-zinnen lijst voor Event Extraction",
+        "beschrijving": "Concrete zin-patronen verzamelen die agenda-intentie aangeven (bv. 'ik heb afspraak', 'maandag om x uur', 'moet langs bij'). Combineer met bestaande calendar_triggers.json + keywords.tijd. Wordt uitgewerkt bij start v3_303.",
+        "status": "todo",
+        "priority": "medium",
+        "notes": "User werkt zelf uit voor live NLP test"
       }
     ]
   },
@@ -2554,6 +2562,22 @@
           "Inside jokes",
           "Personal milestones"
         ]
+      },
+      {
+        "id": "v4_001a",
+        "titel": "Self-state trigger v1 (analytics-aware respons)",
+        "beschrijving": "Spark antwoordt op 'hoe gaat het met jou' adhv health-score 0-100. Drempels: >=75 alles goed, 50-74 het gaat wel, 25-49 niet makkelijk, <25 niet goed. Met emotie-staartje. (Onderdeel van Personality Layer)",
+        "status": "in_progress",
+        "priority": "medium",
+        "notes": "Drempels vastgesteld: 75/50/25"
+      },
+      {
+        "id": "v4_003",
+        "titel": "Admin self-state met log-toegang (gradatie 1/2)",
+        "beschrijving": "Voor gradatie 1 en 2 admins: bij self-state vraag extra contextuele logs tonen (errors, network, snap-flow). Welke logs precies = later uitwerken.",
+        "status": "todo",
+        "priority": "low",
+        "notes": "User noemde: 'later uitwerken'"
       }
     ]
   },
@@ -3132,6 +3156,7 @@
     "2026-03-28: MongoDB VERWIJDERD - Spark Core werkt met Python + JSON. Simpel houden. motor/pymongo dependencies verwijderd.",
     "2026-03-28: v4.1 COMPLEET - Module Sandbox live. 3-Layer Architecture (Trigger→NLP→Knowledge) vastgelegd. Response field toegevoegd aan cards.",
     "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
-    "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn)."
+    "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn).",
+    "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)"
   ]
 }

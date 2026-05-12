@@ -10,6 +10,7 @@ from .emotion_service import EmotionDetectionService
 from . import chat_log_service
 from . import session_state
 from . import xp_service
+from . import self_state_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -132,6 +133,17 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, trigger_type)
         return response
 
+    # Self-state moet VOOR how_are_you komen — specifieker (jij/spark) wint
+    if snap.detect_self_state(text):
+        state = self_state_service.compute_health_score()
+        msg = self_state_service.build_response(state, req.user_naam)
+        response["type"] = "self_state"
+        response["message"] = msg
+        response["self_state"] = state
+        trigger_type = "self_state"
+        _save_log(req, response, trigger_type)
+        return response
+
     if snap.detect_how_are_you(text):
         resp = snap.get_trigger_response("how_are_you")
         response["type"] = "how_are_you"
@@ -192,6 +204,10 @@ async def process_message(req: ChatMessage):
             if created:
                 response["snap_suggestions"] = created
                 response["message"] += f"\n\nNieuw geleerd: **{', '.join(created)}** (opgeslagen als kaarten)"
+                # Auto-zin-snap (v3_028): bewaar de hele zin als context-anker
+                sentence_result = snap.create_sentence_snap(text, text, req.user_naam)
+                if sentence_result:
+                    response.setdefault("snap_sentence", sentence_result["begrip"])
     else:
         # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)
@@ -210,6 +226,10 @@ async def process_message(req: ChatMessage):
             response["snap_suggestions"] = created_snaps
             if created_snaps:
                 response["message"] = f"Ik ken deze woorden nog niet: **{', '.join(created_snaps)}**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!"
+                # Auto-zin-snap (v3_028): bewaar de hele zin als context-anker
+                sentence_result = snap.create_sentence_snap(text, text, req.user_naam)
+                if sentence_result:
+                    response["snap_sentence"] = sentence_result["begrip"]
             else:
                 response["message"] = f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}."
             response["type"] = "unknown"

@@ -122,5 +122,24 @@
       "Gelukt — nieuwe '{begrip}' snap opgeslagen. +{xp} XP voor jou!",
       "Mooi, ik leer weer iets nieuws. +{xp} XP erbij!"
     ]
+  },
+  "self_state": {
+    "triggers": [
+      "hoe gaat het met spark",
+      "hoe gaat het met jou",
+      "hoe voel je je",
+      "hoe voel jij je",
+      "hoe is het met jou",
+      "hoe is het met spark",
+      "gaat het met jou",
+      "gaat het met spark",
+      "alles goed met jou",
+      "alles goed met spark",
+      "hoe gaat het met je",
+      "hoe is het met je"
+    ],
+    "responses": [],
+    "doel": "Self-state trigger - Spark beantwoordt vanuit eigen analytics-status (v4_001a)",
+    "responses_dynamic": true
   }
 }

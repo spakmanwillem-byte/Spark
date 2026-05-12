@@ -854,11 +854,92 @@
         "session_id": "default",
         "gesprek_nummer": 32
       }
+    },
+    {
+      "id": "conv-89827544",
+      "timestamp": "2026-05-12T00:49:04.966554+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe gaat het met jou?",
+      "spark_response": "Gaat redelijk, ik moet wat harder werken dan normaal. Dank je voor het vragen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 33
+      }
+    },
+    {
+      "id": "conv-d10660a0",
+      "timestamp": "2026-05-12T00:49:05.085663+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "alles goed?",
+      "spark_response": "Goed! Ik ben bezig om te leren en groeien. 😊",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 34
+      }
+    },
+    {
+      "id": "conv-5e1f8715",
+      "timestamp": "2026-05-12T00:49:06.310349+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Maandag heb ik xanderbloep_1778546945 bij de tandarts in Groningen om 12 uur",
+      "spark_response": "**Maan**: De maan is de natuurlijke satelliet die rond de aarde draait.\n\n**Groningen**: Groningen is een stad in het noorden van Nederland en de hoofdstad van de provincie Groningen.\n\n**Uur**: Een uur is een meeteenheid van tijd.\n\nNieuw geleerd: **tandarts** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Maan"
+          },
+          {
+            "begrip": "Groningen"
+          },
+          {
+            "begrip": "Uur"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "tandarts"
+        ],
+        "word_count": 12,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 35
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 32,
-    "last_updated": "2026-05-12T00:15:20.002923+00:00"
+    "total_conversations": 35,
+    "last_updated": "2026-05-12T00:49:06.310349+00:00"
   }
 }

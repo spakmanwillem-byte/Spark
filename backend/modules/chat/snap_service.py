@@ -338,6 +338,18 @@ class SnapNLPService:
                     return True
         return False
 
+    def detect_self_state(self, text):
+        """
+        Detecteer of user specifiek vraagt hoe het met SPARK/JOU gaat.
+        Specifieker dan how_are_you (die ook 'alles goed?' generiek vangt).
+        """
+        text_lower = text.lower().strip()
+        triggers = self.triggers.get("self_state", {}).get("triggers", [])
+        for t in triggers:
+            if t in text_lower:
+                return True
+        return False
+
     def detect_rejection(self, text):
         """Detecteer of user 'nee dat bedoel ik niet' zegt."""
         text_lower = text.lower().strip()

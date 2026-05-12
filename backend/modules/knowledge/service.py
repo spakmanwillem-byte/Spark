@@ -172,4 +172,10 @@ class KnowledgeService:
         if len(new_entries) == len(entries):
             return False
         self._save_entries(new_entries)
+        # Graph auto-sync: verwijder node + edges
+        try:
+            from modules.graph.sync_service import remove_node
+            remove_node(entry_id)
+        except Exception as ex:
+            print(f"[graph-sync] delete remove_node failed: {ex}")
         return True

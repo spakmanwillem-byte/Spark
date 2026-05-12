@@ -125,13 +125,20 @@ export function KennisbankPage({ onNavigate }) {
   };
 
   const deleteEntry = async (id, begrip) => {
-    if (!window.confirm(`"${begrip}" permanent verwijderen?`)) return;
     try {
-      await fetch(`${API}/api/knowledge/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API}/api/knowledge/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const txt = await res.text();
+        alert(`Verwijderen mislukt (${res.status}): ${txt}`);
+        return;
+      }
       closeDetail();
       fetchEntries();
       fetchStats();
-    } catch (e) { console.error('Delete error:', e); }
+    } catch (e) {
+      console.error('Delete error:', e);
+      alert(`Fout bij verwijderen: ${e.message}`);
+    }
   };
 
   const filterButtons = [
@@ -374,6 +381,8 @@ function KnowledgeCard({ entry, onClick }) {
 
 /* === Detail Modal === */
 function DetailModal({ detailData, detailLoading, isEditing, editForm, setEditForm, onClose, onStartEdit, onSaveEdit, onCancelEdit, onDelete }) {
+  const [confirmDelete, setConfirmDelete] = React.useState(false);
+
   if (detailLoading || !detailData) {
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50" onClick={onClose}>
@@ -557,10 +566,23 @@ function DetailModal({ detailData, detailLoading, isEditing, editForm, setEditFo
           </button>
           <button
             data-testid="delete-btn"
-            onClick={() => onDelete(detailData.id, detailData.begrip)}
-            className="px-4 py-2.5 bg-red-500/10 text-red-400 rounded-xl text-sm hover:bg-red-500/20 transition-colors flex items-center gap-2"
+            onClick={() => {
+              if (!confirmDelete) {
+                setConfirmDelete(true);
+                setTimeout(() => setConfirmDelete(false), 4000);
+                return;
+              }
+              setConfirmDelete(false);
+              onDelete(detailData.id, detailData.begrip);
+            }}
+            className={`px-4 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2 ${
+              confirmDelete
+                ? 'bg-red-500/30 text-red-200 hover:bg-red-500/50 animate-pulse font-semibold'
+                : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+            }`}
           >
             <Trash2 className="w-4 h-4" />
+            {confirmDelete && <span className="text-xs">Bevestig</span>}
           </button>
           <button onClick={onClose} className="px-5 py-2.5 bg-slate-800 text-slate-300 rounded-xl text-sm hover:bg-slate-700 transition-colors">
             Sluiten

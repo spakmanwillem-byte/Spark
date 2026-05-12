@@ -2049,7 +2049,7 @@
         "id": "v3_302",
         "titel": "Smart Agenda System",
         "beschrijving": "Persoonlijke agenda met family birthdays en events",
-        "status": "in_progress",
+        "status": "done",
         "priority": "high",
         "progress": 0,
         "features": [
@@ -2058,13 +2058,15 @@
           "Recurring events support",
           "Groepsagenda (gradatie-based) blijft apart"
         ],
-        "estimated_time": "3 uur"
+        "estimated_time": "3 uur",
+        "completed_date": "2026-05-12",
+        "notes": "Klaar 2026-05-12 - Smart Agenda fundering: events worden uit chat-conversatie afgeleid, conflict-detectie binnen 1u tijdvenster."
       },
       {
         "id": "v3_303",
         "titel": "Event Extraction (Enhanced)",
         "beschrijving": "Uitbreiden van basic event detection naar full system",
-        "status": "todo",
+        "status": "done",
         "priority": "medium",
         "progress": 0,
         "features": [
@@ -2073,8 +2075,9 @@
           "Recurring events support",
           "Event reminders/notifications"
         ],
-        "notes": "Basic detection done in v3_300, now need full implementation",
-        "estimated_time": "3 uur"
+        "notes": "Klaar 2026-05-12 - Agenda intent extractor: tijd+wat+waar uit chat, voorstel-flow met ja/nee, agenda-event aangemaakt via session_state pending_agenda. Hergebruikt calendar_triggers + keywords.tijd.",
+        "estimated_time": "3 uur",
+        "completed_date": "2026-05-12"
       },
       {
         "id": "v3_304",
@@ -2188,9 +2191,10 @@
         "id": "v3_303a",
         "titel": "Trigger-zinnen lijst voor Event Extraction",
         "beschrijving": "Concrete zin-patronen verzamelen die agenda-intentie aangeven (bv. 'ik heb afspraak', 'maandag om x uur', 'moet langs bij'). Combineer met bestaande calendar_triggers.json + keywords.tijd. Wordt uitgewerkt bij start v3_303.",
-        "status": "todo",
+        "status": "done",
         "priority": "medium",
-        "notes": "User werkt zelf uit voor live NLP test"
+        "notes": "Klaar 2026-05-12 - Trigger-zinnen herbruikt van calendar_triggers.json (social/work/personal_care/etc.)",
+        "completed_date": "2026-05-12"
       }
     ]
   },
@@ -2534,7 +2538,7 @@
         "id": "v4_001b",
         "titel": "Conversational Depth (NIEUW)",
         "beschrijving": "Diepgaande gesprekken - samen redeneren tot begrip, zoals agent<>Willem dialoog",
-        "status": "planned",
+        "status": "done",
         "priority": "high",
         "progress": 0,
         "inspiration": "Willem: 'Dit gesprek tussen ons... zou ik graag met Spark willen hebben'",
@@ -2547,7 +2551,9 @@
           "Long-context awareness (hele gesprek refereren)"
         ],
         "example": "Samen idee uitwerken → vragen stellen → begrip bijstellen → consensus",
-        "estimated_time": "10-15 uur (complex, maar impact groot)"
+        "estimated_time": "10-15 uur (complex, maar impact groot)",
+        "completed_date": "2026-05-12",
+        "notes": "Klaar 2026-05-12 - Multi-turn 5W+H wedervragen werkt: snap-creatie triggert vraag, antwoord vult ws5, max 2 turns, skip-woorden ondersteund"
       },
       {
         "id": "v4_002",
@@ -2567,9 +2573,10 @@
         "id": "v4_001a",
         "titel": "Self-state trigger v1 (analytics-aware respons)",
         "beschrijving": "Spark antwoordt op 'hoe gaat het met jou' adhv health-score 0-100. Drempels: >=75 alles goed, 50-74 het gaat wel, 25-49 niet makkelijk, <25 niet goed. Met emotie-staartje. (Onderdeel van Personality Layer)",
-        "status": "in_progress",
+        "status": "done",
         "priority": "medium",
-        "notes": "Drempels vastgesteld: 75/50/25"
+        "notes": "Drempels vastgesteld: 75/50/25 | Klaar 2026-05-12",
+        "completed_date": "2026-05-12"
       },
       {
         "id": "v4_003",
@@ -3157,6 +3164,7 @@
     "2026-03-28: v4.1 COMPLEET - Module Sandbox live. 3-Layer Architecture (Trigger→NLP→Knowledge) vastgelegd. Response field toegevoegd aan cards.",
     "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
     "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn).",
-    "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)"
+    "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)",
+    "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat."
   ]
 }

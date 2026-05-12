@@ -70,6 +70,11 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Systeem Archief in Instellingen** (v3_024): Bestanden/Foto/Geluiden/Filmpjes/**Dialogen** met 20 tags [11 mei 2026]
 - [x] **Storage mapping fix** (v3_026): chat_sessions + accounting + system_archive gecategoriseerd, 0 B ongemapt [11 mei 2026]
 - [x] **Knowledge Graph auto-sync** (v3_027): nieuwe snaps (word/sentence/homonym) updaten direct nodes.json + edges.json; shared-tag edges (≤20/node) + sterke homonym_variant edge; Rebuild Graph knop op Verbanden voor volledige herbouw [11 mei 2026]
+- [x] **Auto-zin-snap bij chat** (v3_028): nieuwe zin met onbekende woorden → ook hele zin als context-snap (tag context-zin, status draft, is_sentence True) [12 mei 2026]
+- [x] **Verwijderknop fix Kennisbank** (v3_029): 2-staps inline bevestiging (geen window.confirm meer) + graph-node mee verwijderen [12 mei 2026]
+- [x] **Self-state trigger v1** (v4_001a): analytics-aware respons op "hoe gaat het met jou", drempels 75/50/25 met emotie-staartje [12 mei 2026]
+- [x] **Multi-turn 5W+H wedervragen** (v4_001b): bij nieuwe snap stelt Spark gerichte vraag (wat/wanneer/waar/wie/waarom/hoe), antwoord vult ws5, max 2 turns, skip-woorden ondersteund [12 mei 2026]
+- [x] **Agenda intent-extractor** (v3_302+v3_303): tijd+activiteit+locatie uit chat → voorstel-flow ja/nee → automatisch agenda-event, conflict-detectie binnen 1u [12 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

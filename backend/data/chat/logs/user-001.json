@@ -935,11 +935,293 @@
         "session_id": "default",
         "gesprek_nummer": 35
       }
+    },
+    {
+      "id": "conv-bc17df7a",
+      "timestamp": "2026-05-12T00:56:59.286850+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vandaag heb ik een qoofla_1778547417 gezien",
+      "spark_response": "**Vandaag was druk**: De gebruiker geeft aan dat de dag intens of vol was.\n\nNieuw geleerd: **gezien** (opgeslagen als kaarten)\n\nWat betekent 'gezien' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vandaag was druk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gezien"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 36
+      }
+    },
+    {
+      "id": "conv-f42312e8",
+      "timestamp": "2026-05-12T00:56:59.746218+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "het is een soort knuffelvogel",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'gezien' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 37
+      }
+    },
+    {
+      "id": "conv-d0527ae6",
+      "timestamp": "2026-05-12T00:57:00.142879+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren tijdens de wandeling",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 38
+      }
+    },
+    {
+      "id": "conv-ceaf2580",
+      "timestamp": "2026-05-12T00:57:24.184823+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "mijn buurman heeft een glubble",
+      "spark_response": "Ik ken deze woorden nog niet: **buurman, glubble**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nKan je in het kort uitleggen wat 'glubble' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "buurman",
+          "glubble"
+        ],
+        "snap_suggestions": [
+          "buurman",
+          "glubble"
+        ],
+        "word_count": 5,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 39
+      }
+    },
+    {
+      "id": "conv-e7a49ed1",
+      "timestamp": "2026-05-12T00:57:24.350953+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "weet niet",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 40
+      }
+    },
+    {
+      "id": "conv-3b5bea48",
+      "timestamp": "2026-05-12T01:01:01.569198+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "maandag om 12 uur heb ik tandarts in Groningen",
+      "spark_response": "Ik hoorde dat je een **tandarts** in Groningen hebt (maandag 12 uur). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 41
+      }
+    },
+    {
+      "id": "conv-7ecf68a9",
+      "timestamp": "2026-05-12T01:01:01.707013+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Genoteerd! 'tandarts' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 42
+      }
+    },
+    {
+      "id": "conv-051a19ca",
+      "timestamp": "2026-05-12T01:01:24.158179+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "morgen om 14:30 moet ik naar Amsterdam afspreken",
+      "spark_response": "Ik hoorde dat je een **afspreken** in Amsterdam hebt (morgen 14:30). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 43
+      }
+    },
+    {
+      "id": "conv-2d964e9d",
+      "timestamp": "2026-05-12T01:01:24.368432+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee laat maar",
+      "spark_response": "Oké, ik laat het zo. Niks in je agenda gezet.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "agenda_declined"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 44
+      }
+    },
+    {
+      "id": "conv-c2918ffa",
+      "timestamp": "2026-05-12T01:01:24.693709+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo Spark",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 45
+      }
+    },
+    {
+      "id": "conv-489f995e",
+      "timestamp": "2026-05-12T01:01:26.008463+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vandaag voel ik me goed",
+      "spark_response": "Leuk! Vertel me meer\n\n**Vandaag was druk**: De gebruiker geeft aan dat de dag intens of vol was.\n\nNieuw geleerd: **voel** (opgeslagen als kaarten)\n\nWat betekent 'voel' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vandaag was druk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "voel"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 46
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 35,
-    "last_updated": "2026-05-12T00:49:06.310349+00:00"
+    "total_conversations": 46,
+    "last_updated": "2026-05-12T01:01:26.008463+00:00"
   }
 }

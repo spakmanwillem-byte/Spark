@@ -4,6 +4,7 @@ Chat Routes - Spark AI chat met Snap/NLP knowledge lookup
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime, timezone
 import random
 from .snap_service import SnapNLPService
 from .emotion_service import EmotionDetectionService
@@ -11,6 +12,8 @@ from . import chat_log_service
 from . import session_state
 from . import xp_service
 from . import self_state_service
+from . import wedervraag_service
+from . import agenda_intent_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -64,6 +67,74 @@ async def process_message(req: ChatMessage):
 
     # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
     state = session_state.get_state(req.user_id) if req.user_id else {}
+
+    # 0a. AGENDA-PROPOSAL-FLOW (v3_303): wachten op ja/nee voor genoteerd voorstel
+    pending_agenda = state.get("pending_agenda")
+    if pending_agenda:
+        if snap.detect_confirmation(text):
+            # Maak agenda-event
+            import uuid
+            from pathlib import Path as _Path
+            from modules.core.storage import load_json as _lj, save_json as _sj
+            ag_file = _Path(__file__).parent.parent.parent / "data" / "agenda" / f"{req.user_id}.json"
+            ag_data = _lj(ag_file, default={"events": []})
+            new_event = {
+                "id": str(uuid.uuid4())[:8],
+                "titel": pending_agenda.get("wat") or "Afspraak",
+                "beschrijving": f"Genoteerd via chat: {pending_agenda.get('raw_text','')}",
+                "date": pending_agenda["datetime_iso"],
+                "location": pending_agenda.get("waar", ""),
+                "reminder": False,
+                "status": "upcoming",
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "source": "chat-intent",
+            }
+            ag_data["events"].append(new_event)
+            _sj(ag_file, ag_data)
+            session_state.set_state(req.user_id, pending_agenda=None)
+            response["type"] = "agenda_created"
+            response["message"] = f"Genoteerd! '{new_event['titel']}' staat in je agenda."
+            response["agenda_event"] = new_event
+            _save_log(req, response, "agenda_created")
+            return response
+        elif snap.detect_rejection(text) or wedervraag_service.is_skip(text):
+            session_state.set_state(req.user_id, pending_agenda=None)
+            response["type"] = "agenda_declined"
+            response["message"] = "Oké, ik laat het zo. Niks in je agenda gezet."
+            _save_log(req, response, "agenda_declined")
+            return response
+        # Geen ja/nee — laat staan, val door
+
+    # 0c. WEDERVRAAG-FLOW (v4_001b) — als Spark in vorige beurt een 5W+H vraag stelde
+    pending_wv = state.get("pending_wedervraag")
+    if pending_wv and not snap.detect_rejection(text):
+        # User wil stoppen?
+        if wedervraag_service.is_skip(text):
+            session_state.set_state(req.user_id, pending_wedervraag=None)
+            response["type"] = "wedervraag_skip"
+            response["message"] = "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen."
+            _save_log(req, response, "wedervraag_skip")
+            return response
+        # Antwoord opslaan in ws5 van die snap
+        ok = wedervraag_service.apply_answer(
+            pending_wv["entry_id"], pending_wv["field"], text
+        )
+        if ok:
+            # Volgende veld vragen, of afronden
+            next_step = wedervraag_service.continue_flow(pending_wv)
+            if next_step:
+                session_state.set_state(req.user_id, pending_wedervraag=next_step)
+                response["type"] = "wedervraag"
+                response["message"] = f"Dank je! Genoteerd. {next_step['question']}"
+                response["wedervraag"] = next_step
+                _save_log(req, response, "wedervraag")
+                return response
+            else:
+                session_state.set_state(req.user_id, pending_wedervraag=None)
+                response["type"] = "wedervraag_done"
+                response["message"] = "Dank je! De kaart heb ik bijgewerkt."
+                _save_log(req, response, "wedervraag_done")
+                return response
 
     # -- CONFIRMATION flow: user zei eerder "nee" en Spark vroeg "bedoel je een andere X?"
     if state.get("awaiting_homonym_confirm") and snap.detect_confirmation(text):
@@ -160,6 +231,27 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, trigger_type)
         return response
 
+    # 1.5 AGENDA INTENT DETECTIE (v3_303) — vóór knowledge lookup
+    # Als zin tijd + (wat/waar) bevat → voorstel om te noteren
+    if req.user_id:
+        intent = agenda_intent_service.detect_agenda_intent(text)
+        if intent.get("has_intent"):
+            has_conflict = agenda_intent_service.has_agenda_conflict(req.user_id, intent["datetime_iso"])
+            pending = {
+                "datetime_iso": intent["datetime_iso"],
+                "raw_time": intent.get("raw_time"),
+                "wat": intent.get("wat"),
+                "waar": intent.get("waar"),
+                "raw_text": text,
+                "has_conflict": has_conflict,
+            }
+            session_state.set_state(req.user_id, pending_agenda=pending)
+            response["type"] = "agenda_proposal"
+            response["message"] = agenda_intent_service.build_proposal_message(intent, has_conflict)
+            response["agenda_intent"] = pending
+            _save_log(req, response, "agenda_proposal")
+            return response
+
     # 2. Knowledge lookup - zoek alle begrippen in de zin
     matches = snap.multi_lookup(text)
 
@@ -197,10 +289,12 @@ async def process_message(req: ChatMessage):
         still_unknown = [w for w in meaningful if w not in index and w not in matched_words and not any(w.startswith(b) or b.startswith(w) for b in matched_begrippen)]
         if still_unknown:
             created = []
+            last_entry = None
             for word in still_unknown[:5]:
                 result = snap.create_word_snap(word, text, req.user_naam)
                 if result:
                     created.append(result["begrip"])
+                    last_entry = result
             if created:
                 response["snap_suggestions"] = created
                 response["message"] += f"\n\nNieuw geleerd: **{', '.join(created)}** (opgeslagen als kaarten)"
@@ -208,6 +302,13 @@ async def process_message(req: ChatMessage):
                 sentence_result = snap.create_sentence_snap(text, text, req.user_naam)
                 if sentence_result:
                     response.setdefault("snap_sentence", sentence_result["begrip"])
+                # Wedervraag (v4_001b): vraag 5W+H verrijking op nieuwste snap
+                if last_entry and req.user_id:
+                    wv = wedervraag_service.kick_off(last_entry)
+                    if wv:
+                        session_state.set_state(req.user_id, pending_wedervraag=wv)
+                        response["message"] += f"\n\n{wv['question']}"
+                        response["wedervraag"] = wv
     else:
         # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)
@@ -217,10 +318,12 @@ async def process_message(req: ChatMessage):
         if unknown:
             # Automatisch snaps aanmaken voor onbekende woorden
             created_snaps = []
+            last_entry = None
             for word in unknown[:5]:
                 result = snap.create_word_snap(word, text, req.user_naam)
                 if result:
                     created_snaps.append(result["begrip"])
+                    last_entry = result
 
             response["unknown_words"] = unknown
             response["snap_suggestions"] = created_snaps
@@ -230,6 +333,13 @@ async def process_message(req: ChatMessage):
                 sentence_result = snap.create_sentence_snap(text, text, req.user_naam)
                 if sentence_result:
                     response["snap_sentence"] = sentence_result["begrip"]
+                # Wedervraag (v4_001b): vraag 5W+H verrijking op nieuwste snap
+                if last_entry and req.user_id:
+                    wv = wedervraag_service.kick_off(last_entry)
+                    if wv:
+                        session_state.set_state(req.user_id, pending_wedervraag=wv)
+                        response["message"] += f"\n\n{wv['question']}"
+                        response["wedervraag"] = wv
             else:
                 response["message"] = f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}."
             response["type"] = "unknown"

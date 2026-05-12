@@ -2585,6 +2585,15 @@
         "status": "todo",
         "priority": "low",
         "notes": "User noemde: 'later uitwerken'"
+      },
+      {
+        "id": "v4_005",
+        "titel": "Self-scan commando (Knowledge Scan)",
+        "beschrijving": "Admin-commando (gradatie 1/2) via chat: 'scan alle knowledge kaarten op onderwerpen'. Spark scant zijn eigen ws5-velden + tags op woorden zonder eigen kaart en maakt draft-snaps aan (tag scan-discovered). Max 100 per scan, sortering op signaal-sterkte.",
+        "status": "done",
+        "priority": "medium",
+        "completed_date": "2026-05-12",
+        "notes": "Eerste scan vond 7000+ kandidaat-woorden in 2453 bestaande kaarten."
       }
     ]
   },
@@ -3165,6 +3174,7 @@
     "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
     "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn).",
     "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)",
-    "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat."
+    "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat.",
+    "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando."
   ]
 }

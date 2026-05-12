@@ -14,6 +14,7 @@ from . import xp_service
 from . import self_state_service
 from . import wedervraag_service
 from . import agenda_intent_service
+from . import scan_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -204,6 +205,32 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, trigger_type)
         return response
 
+    # Admin scan-command (v4_005): "scan alle knowledge kaarten op onderwerpen"
+    if scan_service.detect_scan_command(text):
+        # Admin-gated: alleen gradatie 1 of 2
+        gradatie = _get_user_gradatie(req.user_id)
+        if gradatie not in (1, 2):
+            response["type"] = "scan_denied"
+            response["message"] = "Sorry, het scan-commando is alleen voor admin (gradatie 1 of 2)."
+            _save_log(req, response, "scan_denied")
+            return response
+        result = scan_service.scan_for_new_subjects(user_naam=req.user_naam or "Spark", max_create=100)
+        msg_parts = [
+            f"Scan klaar! Ik heb mijn eigen {result['scanned_cards']} kaarten doorgenomen.",
+            f"Kandidaat-woorden gevonden: **{result['candidates_found']}**.",
+            f"Nieuwe draft-snaps aangemaakt: **{result['new_snaps_created']}** (limiet was {result['max_create_cap']}).",
+        ]
+        if result["sample_words"]:
+            msg_parts.append(f"Voorbeelden: {', '.join(result['sample_words'])}.")
+        if result["capped"]:
+            msg_parts.append("Er waren meer kandidaten dan de limiet — draai het commando nogmaals om de rest op te pakken.")
+        msg_parts.append("Bekijk ze in Kennisbank → Onbeantwoord (tag `scan-discovered`).")
+        response["type"] = "scan_result"
+        response["message"] = "\n\n".join(msg_parts)
+        response["scan_result"] = result
+        _save_log(req, response, "scan_result")
+        return response
+
     # Self-state moet VOOR how_are_you komen — specifieker (jij/spark) wint
     if snap.detect_self_state(text):
         state = self_state_service.compute_health_score()
@@ -378,6 +405,19 @@ def _save_log(req: "ChatMessage", response: dict, trigger_type):
         channel=req.channel or "spark",
         session_id=req.session_id,
     )
+
+
+def _get_user_gradatie(user_id):
+    """Haal gradatie van user op. Return None als niet gevonden."""
+    if not user_id:
+        return None
+    from pathlib import Path as _P
+    from modules.core.storage import load_json as _lj
+    data = _lj(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+    for u in data.get("users", []):
+        if u.get("id") == user_id:
+            return u.get("gradatie")
+    return None
 
 
 # ============================================================

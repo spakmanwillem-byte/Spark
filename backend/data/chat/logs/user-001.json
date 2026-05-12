@@ -1217,11 +1217,34 @@
         "session_id": "default",
         "gesprek_nummer": 46
       }
+    },
+    {
+      "id": "conv-e20ffd3f",
+      "timestamp": "2026-05-12T01:26:14.242241+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "scan alle knowledge kaarten op onderwerpen",
+      "spark_response": "Scan klaar! Ik heb mijn eigen 2553 kaarten doorgenomen.\n\nKandidaat-woorden gevonden: **7402**.\n\nNieuwe draft-snaps aangemaakt: **100** (limiet was 100).\n\nVoorbeelden: gevoel, ecosystemen, verwerking, beslissingen, internet, stellen, verwerken, apparaat, natuurlijke, object.\n\nEr waren meer kandidaten dan de limiet — draai het commando nogmaals om de rest op te pakken.\n\nBekijk ze in Kennisbank → Onbeantwoord (tag `scan-discovered`).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "scan_result",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "scan_result"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 47
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 46,
-    "last_updated": "2026-05-12T01:01:26.008463+00:00"
+    "total_conversations": 47,
+    "last_updated": "2026-05-12T01:26:14.242241+00:00"
   }
 }

@@ -2594,6 +2594,15 @@
         "priority": "medium",
         "completed_date": "2026-05-12",
         "notes": "Eerste scan vond 7000+ kandidaat-woorden in 2453 bestaande kaarten."
+      },
+      {
+        "id": "v4_006",
+        "titel": "Compositional Reasoning (samengestelde woorden)",
+        "beschrijving": "Spark splitst onbekende samengestelde woorden in 2 bekende delen, erft tags, detecteert conflicten tussen topics en stelt verhelderingsvraag. Voorbeeld: 'suikerspin' → 'suiker'(voeding) + 'spin'(dier) → 'klinkt tegenstrijdig — wat is het?'. Krijgt voorrang boven losse partial-matches.",
+        "status": "done",
+        "priority": "high",
+        "completed_date": "2026-05-12",
+        "notes": "Sluit ook partial-match bug af (3-char acroniemen matchten op lange woorden)."
       }
     ]
   },
@@ -3175,6 +3184,7 @@
     "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn).",
     "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)",
     "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat.",
-    "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando."
+    "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando.",
+    "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten)."
   ]
 }

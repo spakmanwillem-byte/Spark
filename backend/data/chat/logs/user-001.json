@@ -1240,11 +1240,216 @@
         "session_id": "default",
         "gesprek_nummer": 47
       }
+    },
+    {
+      "id": "conv-25bbafa0",
+      "timestamp": "2026-05-12T01:39:18.649714+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren heb ik een suikerspin gegeten",
+      "spark_response": "Ik hoorde dat je een **heb** hebt (gisteren). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 48
+      }
+    },
+    {
+      "id": "conv-81aacd89",
+      "timestamp": "2026-05-12T01:39:54.135948+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren heb ik een suikerspin gegeten bij mijn moeder",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'voel'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 49
+      }
+    },
+    {
+      "id": "conv-26305f19",
+      "timestamp": "2026-05-12T01:40:03.780258+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren heb ik een suikerspin gegeten",
+      "spark_response": "**Gist**: Gist is een micro-organisme dat suikers omzet en daarbij gas produceert, waardoor deeg kan rijzen.\n\n**SUI**: SUI is een digitale munt.\n\nNieuw geleerd: **gegeten** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'gegeten' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Gist"
+          },
+          {
+            "begrip": "SUI"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gegeten"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 50
+      }
+    },
+    {
+      "id": "conv-790f0b90",
+      "timestamp": "2026-05-12T01:40:33.370000+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "honingbij",
+      "spark_response": "**Honing**: Honing is een zoete, stroperige stof die door bijen wordt gemaakt uit bloemnectar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Honing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 51
+      }
+    },
+    {
+      "id": "conv-3a8505bf",
+      "timestamp": "2026-05-12T01:41:17.562999+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "honingbij",
+      "spark_response": "**Honing**: Honing is een zoete, stroperige stof die door bijen wordt gemaakt uit bloemnectar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Honing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 52
+      }
+    },
+    {
+      "id": "conv-afa02b0e",
+      "timestamp": "2026-05-12T01:42:11.246651+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een honingbij?",
+      "spark_response": "**Honing**: Honing is een zoete, stroperige stof die door bijen wordt gemaakt uit bloemnectar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Honing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 53
+      }
+    },
+    {
+      "id": "conv-d4338ea0",
+      "timestamp": "2026-05-12T01:42:35.787184+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een suikerspin?",
+      "spark_response": "Ik ken 'suikerspin' niet, maar ik herken er 'suiker' (voeding) en 'spin' (dier) in. Dat klinkt tegenstrijdig — wat is een 'suikerspin' eigenlijk?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "compositional",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "compositional"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 54
+      }
+    },
+    {
+      "id": "conv-b8bfdfee",
+      "timestamp": "2026-05-12T01:42:48.257923+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "het is voedsel, zoet spul dat je op de kermis krijgt",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 55
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 47,
-    "last_updated": "2026-05-12T01:26:14.242241+00:00"
+    "total_conversations": 55,
+    "last_updated": "2026-05-12T01:42:48.257923+00:00"
   }
 }

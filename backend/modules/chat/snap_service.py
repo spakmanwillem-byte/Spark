@@ -123,7 +123,7 @@ class SnapNLPService:
         # 3. Startswith zoeken (strikter dan substring)
         if len(q) >= 5:
             for begrip, entries in index.items():
-                if begrip.startswith(q) or q.startswith(begrip):
+                if len(begrip) >= 5 and (begrip.startswith(q) or q.startswith(begrip)):
                     return self._format_result(entries[0], "partial")
 
         return None
@@ -190,19 +190,23 @@ class SnapNLPService:
         # Exact match
         if word in index:
             return index[word]
-        # Alleen matchen als het woord minimaal 5 chars is EN het begrip ermee begint
+        # Partial match: ALLEEN als BEIDE woord en begrip minstens 5 chars zijn
+        # (voorkomt dat "SUI" matcht op "suikerspin", of "Gist" op "gisteren")
         if len(word) >= 5:
             for begrip, entries in index.items():
-                if begrip.startswith(word) or word.startswith(begrip):
+                if len(begrip) >= 5 and (begrip.startswith(word) or word.startswith(begrip)):
                     return entries
         return None
 
     # ========== SNAP CREATION ==========
 
-    def create_word_snap(self, concept, context, user_naam):
+    def create_word_snap(self, concept, context, user_naam, extra_tags=None, decomposed_from=None):
         """
         Maak een woord-snap: placeholder kaart voor onbekend begrip.
         Checkt duplicaten. Retourneert None als het al bestaat of een stopwoord is.
+
+        extra_tags: extra tags die overgeërfd worden (bv. van decompositie)
+        decomposed_from: list van begrippen waar dit woord uit is afgeleid
         """
         concept = concept.strip()
         if not concept or len(concept) < 2:
@@ -217,13 +221,21 @@ class SnapNLPService:
         if concept.lower() in index:
             return None
 
+        tags = ["knowledge-snap", "auto-generated"]
+        if extra_tags:
+            for t in extra_tags:
+                if t and t not in tags:
+                    tags.append(t)
+        if decomposed_from:
+            tags.append("compositional")
+
         # Maak snap entry (zelfde structuur als oude systeem)
         entry = {
             "id": f"snap-{uuid.uuid4().hex[:8]}",
             "begrip": concept,
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
             "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
-            "tags": ["knowledge-snap", "auto-generated"],
+            "tags": tags,
             "bron": "auto-detected",
             "detected_by": user_naam,
             "detected_at": datetime.now(timezone.utc).isoformat(),
@@ -232,7 +244,12 @@ class SnapNLPService:
             "usage_count": 0,
             "topic": "",
             "snap_context": context[:200] if context else "",
-            "metadata": {"created_at": datetime.now(timezone.utc).isoformat(), "created_via": "snap", "is_sentence": False},
+            "metadata": {
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "created_via": "snap",
+                "is_sentence": False,
+                **({"decomposed_from": decomposed_from} if decomposed_from else {}),
+            },
         }
 
         # Opslaan

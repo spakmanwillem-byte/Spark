@@ -15,6 +15,7 @@ from . import self_state_service
 from . import wedervraag_service
 from . import agenda_intent_service
 from . import scan_service
+from . import compositional_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -279,6 +280,51 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "agenda_proposal")
             return response
 
+    # 1.6 COMPOSITIONAL PRE-CHECK (v4_006): woord met 2 bekende delen krijgt voorrang
+    # boven losse partial-match (suikerspin = suiker+spin, niet 'lijkt op suiker')
+    def _lookup_exact(w):
+        idx = snap._get_index()
+        hits = idx.get(w)
+        return hits[0] if hits else None
+    meaningful_words = snap._extract_meaningful_words(text)
+    compositional_hit = None
+    for w in meaningful_words:
+        if _lookup_exact(w):
+            continue  # exact bekend, geen behoefte aan split
+        decomp = compositional_service.find_best_decomposition(w, _lookup_exact)
+        if decomp:
+            compositional_hit = {"word": w, "decomp": decomp}
+            break
+    if compositional_hit:
+        word = compositional_hit["word"]
+        decomp = compositional_hit["decomp"]
+        extra_tags = decomp["analysis"]["suggested_tags"]
+        parts = [decomp["candidate"]["left"], decomp["candidate"]["right"]]
+        new_entry = snap.create_word_snap(
+            word, text, req.user_naam,
+            extra_tags=extra_tags,
+            decomposed_from=parts,
+        )
+        response["type"] = "compositional"
+        response["message"] = decomp["message"]
+        response["compositional"] = {
+            "word": word,
+            "left": parts[0],
+            "right": parts[1],
+            "analysis": decomp["analysis"],
+            "new_snap_id": new_entry["id"] if new_entry else None,
+        }
+        if new_entry and req.user_id:
+            session_state.set_state(req.user_id, pending_wedervraag={
+                "entry_id": new_entry["id"],
+                "field": "what",
+                "question": decomp["message"],
+                "asked_count": 1,
+                "max_questions": 1,
+            })
+        _save_log(req, response, "compositional")
+        return response
+
     # 2. Knowledge lookup - zoek alle begrippen in de zin
     matches = snap.multi_lookup(text)
 
@@ -343,14 +389,35 @@ async def process_message(req: ChatMessage):
         unknown = [w for w in meaningful if w not in index]
 
         if unknown:
-            # Automatisch snaps aanmaken voor onbekende woorden
+            # Compositional reasoning (v4_006): probeer onbekend woord op te splitsen
+            # in bekende delen vóór het opslaan als 'leeg' snap.
+            def _lookup_known(w):
+                idx = snap._get_index()
+                hits = idx.get(w)
+                return hits[0] if hits else None
+            decomp_results = []
+
             created_snaps = []
             last_entry = None
             for word in unknown[:5]:
-                result = snap.create_word_snap(word, text, req.user_naam)
-                if result:
-                    created_snaps.append(result["begrip"])
-                    last_entry = result
+                decomp = compositional_service.find_best_decomposition(word, _lookup_known)
+                if decomp:
+                    extra_tags = decomp["analysis"]["suggested_tags"]
+                    parts = [decomp["candidate"]["left"], decomp["candidate"]["right"]]
+                    result = snap.create_word_snap(
+                        word, text, req.user_naam,
+                        extra_tags=extra_tags,
+                        decomposed_from=parts,
+                    )
+                    if result:
+                        created_snaps.append(result["begrip"])
+                        last_entry = result
+                        decomp_results.append({"word": word, "decomp": decomp})
+                else:
+                    result = snap.create_word_snap(word, text, req.user_naam)
+                    if result:
+                        created_snaps.append(result["begrip"])
+                        last_entry = result
 
             response["unknown_words"] = unknown
             response["snap_suggestions"] = created_snaps
@@ -360,8 +427,28 @@ async def process_message(req: ChatMessage):
                 sentence_result = snap.create_sentence_snap(text, text, req.user_naam)
                 if sentence_result:
                     response["snap_sentence"] = sentence_result["begrip"]
-                # Wedervraag (v4_001b): vraag 5W+H verrijking op nieuwste snap
-                if last_entry and req.user_id:
+                # Compositional vraag (v4_006) wint van standaard wedervraag
+                if decomp_results and req.user_id:
+                    first_decomp = decomp_results[0]
+                    response["message"] += f"\n\n{first_decomp['decomp']['message']}"
+                    response["compositional"] = {
+                        "word": first_decomp["word"],
+                        "left": first_decomp["decomp"]["candidate"]["left"],
+                        "right": first_decomp["decomp"]["candidate"]["right"],
+                        "analysis": first_decomp["decomp"]["analysis"],
+                    }
+                    # Pending wedervraag op 'what' veld zodat user-antwoord landt
+                    target_entry = next((e for e in [last_entry] if e and e["begrip"] == first_decomp["word"]), last_entry)
+                    if target_entry:
+                        session_state.set_state(req.user_id, pending_wedervraag={
+                            "entry_id": target_entry["id"],
+                            "field": "what",
+                            "question": first_decomp["decomp"]["message"],
+                            "asked_count": 1,
+                            "max_questions": 1,
+                        })
+                # Wedervraag (v4_001b): vraag 5W+H verrijking — alleen als geen compositional
+                elif last_entry and req.user_id:
                     wv = wedervraag_service.kick_off(last_entry)
                     if wv:
                         session_state.set_state(req.user_id, pending_wedervraag=wv)

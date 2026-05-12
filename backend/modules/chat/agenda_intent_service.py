@@ -139,11 +139,20 @@ def detect_agenda_intent(text: str) -> dict:
     Return dict {has_intent, wanneer, wat, waar, raw_time, datetime_iso}
     of {has_intent: False}.
 
-    Een agenda-intentie vereist tenminste een tijd-aanduiding EN
-    (een action_verb of een locatie).
+    Een agenda-intentie vereist:
+    - tijd-aanduiding IN DE TOEKOMST
+    - EN een action_verb of locatie
     """
     when_iso, raw_time = extract_datetime(text)
     if not when_iso:
+        return {"has_intent": False}
+
+    # Alleen toekomst — verleden tijd ('gisteren', 'eergisteren') is geen agenda-intent
+    try:
+        target = datetime.fromisoformat(when_iso)
+        if target < datetime.now():
+            return {"has_intent": False}
+    except Exception:
         return {"has_intent": False}
 
     wat = extract_what(text)

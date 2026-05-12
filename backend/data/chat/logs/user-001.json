@@ -2091,11 +2091,103 @@
         "session_id": "default",
         "gesprek_nummer": 80
       }
+    },
+    {
+      "id": "conv-c7c39d6a",
+      "timestamp": "2026-05-12T09:09:26.485126+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil kaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **actie**)_\n\nWat is **actie** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 81
+      }
+    },
+    {
+      "id": "conv-af644955",
+      "timestamp": "2026-05-12T09:09:26.917135+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wanneer informatie of personen belangrijk worden",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWanneer komt **actie** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 82
+      }
+    },
+    {
+      "id": "conv-41bf6b01",
+      "timestamp": "2026-05-12T09:09:27.327302+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "morgen ga ik naar Amsterdam",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWaar hoort **actie** bij — locatie of plek?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 83
+      }
+    },
+    {
+      "id": "conv-be6c12bb",
+      "timestamp": "2026-05-12T09:09:27.733203+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo dit is een test antwoord",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWie is er bij **actie** betrokken?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 84
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 80,
-    "last_updated": "2026-05-12T08:55:53.533529+00:00"
+    "total_conversations": 84,
+    "last_updated": "2026-05-12T09:09:27.733203+00:00"
   }
 }

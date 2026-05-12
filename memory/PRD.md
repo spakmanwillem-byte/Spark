@@ -81,6 +81,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Admin kaart-invul sessie** (v4_008): "ik wil kaarten invullen" → Spark loopt door 50 onbeantwoorde kaarten, vraagt 6 W+H velden per kaart, skip/stop ondersteund, tag sessie-ingevuld toegevoegd [12 mei 2026]
 - [x] **NL ws5 keys migratie** (v4_009a): EN keys (who/what/when/where/why/how) → NL (wie/wat/wanneer/waar/waarom/hoe); context_5wh data gemerged in ws5 en context_5wh verwijderd. Backup bewaard. 14.702 velden hernoemd, 86 gemerged [12 mei 2026]
 - [x] **Bijdrage-portaal** (v4_009): nieuwe Workspace-tab waar gradatie 1-5 onbeantwoorde kaarten invullen. Fair-share claim (1 per user, 24u TTL, oudste verbeurt). Admin review tab voor goedkeuring. XP +25 per goedgekeurde kaart bij ≥75% gevuld. 4 nieuwe achievements toegevoegd [12 mei 2026]
+- [x] **Bijdragen UI-restructure** (v4_009b): Bijdragen verplaatst van eigen sidebar-tab naar 4de sub-tab onder Notities & Taken (Alles/Notities/Taken/Bijdragen). Uitgebreide start-triggers voor chat: "ik wil een kaart invullen", "kenniskaarten invullen" en 20+ varianten [12 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

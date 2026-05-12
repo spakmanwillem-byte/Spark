@@ -2233,11 +2233,339 @@
         "session_id": "default",
         "gesprek_nummer": 86
       }
+    },
+    {
+      "id": "conv-82c66d2c",
+      "timestamp": "2026-05-12T10:01:15.034850+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark een goedemiddag",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 87
+      }
+    },
+    {
+      "id": "conv-dc010bae",
+      "timestamp": "2026-05-12T10:01:31.987399+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark een goede middag",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 88
+      }
+    },
+    {
+      "id": "conv-6611064b",
+      "timestamp": "2026-05-12T10:01:45.603373+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark een goedemorgen",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 89
+      }
+    },
+    {
+      "id": "conv-4363c518",
+      "timestamp": "2026-05-12T10:01:59.892850+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark een goede morgen",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 90
+      }
+    },
+    {
+      "id": "conv-674ee41e",
+      "timestamp": "2026-05-12T10:02:15.489563+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil een kaart invullen",
+      "spark_response": "**Kaart**: Kaart is een visuele weergave van een gebied of systeem\n\nNieuw geleerd: **invullen** (opgeslagen als kaarten)\n\nWat houdt 'invullen' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Kaart"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "invullen"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 91
+      }
+    },
+    {
+      "id": "conv-77268e91",
+      "timestamp": "2026-05-12T10:02:37.593448+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil kaarten invullen",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'invullen'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 92
+      }
+    },
+    {
+      "id": "conv-32128ca6",
+      "timestamp": "2026-05-12T10:02:58.691086+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil kenniskaarten invullen",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 93
+      }
+    },
+    {
+      "id": "conv-ac890d50",
+      "timestamp": "2026-05-12T10:04:02.084132+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kenniskaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **actie**)_\n\nWat is **actie** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 94
+      }
+    },
+    {
+      "id": "conv-b9cc871e",
+      "timestamp": "2026-05-12T10:07:14.279251+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Een doelgerichte handeling die verandering of beweging veroorzaakt.",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWanneer komt **actie** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 95
+      }
+    },
+    {
+      "id": "conv-b795d3e1",
+      "timestamp": "2026-05-12T10:07:37.727010+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wanneer iets uitgevoerd wordt om een resultaat of reactie te bereiken.",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWaar hoort **actie** bij — locatie of plek?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 96
+      }
+    },
+    {
+      "id": "conv-9876c47e",
+      "timestamp": "2026-05-12T10:07:48.445867+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "In communicatie, technologie, werk, natuur en dagelijkse situaties.",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWie is er bij **actie** betrokken?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 97
+      }
+    },
+    {
+      "id": "conv-0c58930f",
+      "timestamp": "2026-05-12T10:08:46.172152+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mensen, dieren, machines, systemen en biologische of chemische processen die handelingen of veranderingen veroorzaken.",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nWaarom is **actie** belangrijk of relevant?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 14,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 98
+      }
+    },
+    {
+      "id": "conv-643e10c1",
+      "timestamp": "2026-05-12T10:09:05.166199+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Om doelen te bereiken, processen te beïnvloeden of verandering te veroorzaken.",
+      "spark_response": "_(Kaart 1/50: **actie**)_\n\nHoe werkt **actie** of hoe ervaar je het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 99
+      }
+    },
+    {
+      "id": "conv-0cd522ad",
+      "timestamp": "2026-05-12T10:09:14.140587+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Door fysieke, mentale, digitale, biologische of chemische handelingen en reacties uit te voeren.",
+      "spark_response": "_(Kaart 2/50: **acties**)_\n\nWat is **acties** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 100
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 86,
-    "last_updated": "2026-05-12T09:50:40.213830+00:00"
+    "total_conversations": 100,
+    "last_updated": "2026-05-12T10:09:14.140587+00:00"
   }
 }

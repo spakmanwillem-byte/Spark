@@ -19,7 +19,6 @@ export const navigationConfig = {
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
-      { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, path: '/bijdragen' },
       { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
       { id: 'voice', label: 'Voice', icon: Volume2, path: '/workspace/voice' },
     ]

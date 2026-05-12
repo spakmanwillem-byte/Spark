@@ -3,8 +3,9 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   StickyNote, Plus, Search, Trash2,
   Tag, Clock, ListTodo, FileText, Save,
-  Circle, CheckCircle
+  Circle, CheckCircle, HandHeart
 } from 'lucide-react';
+import { BijdragenPage } from './BijdragenPage';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const priorities = { high: { label: 'Hoog', color: '#ef4444' }, medium: { label: 'Normaal', color: '#f59e0b' }, low: { label: 'Laag', color: '#3b82f6' } };
@@ -116,11 +117,12 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'all', label: 'Alles', icon: FileText, count: items.length },
               { id: 'notes', label: 'Notities', icon: StickyNote, count: notesTotal },
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
+              { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, count: null },
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
                 className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors"
                 style={{ color: viewMode === t.id ? '#f59e0b' : '#94a3b8' }}>
-                <t.icon className="w-3.5 h-3.5" /> {t.label} ({t.count})
+                <t.icon className="w-3.5 h-3.5" /> {t.label}{t.count !== null ? ` (${t.count})` : ''}
                 {viewMode === t.id && <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-amber-500" />}
               </button>
             ))}
@@ -128,6 +130,11 @@ export function NotitiesPage({ onNavigate }) {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
+          {viewMode === 'bijdragen' ? (
+            <div className="-m-4 md:-m-6 h-full">
+              <BijdragenPage embedded={true} />
+            </div>
+          ) : (
           <div className="max-w-3xl mx-auto space-y-4">
             {showNew && (
               <div className="p-4 bg-slate-900/60 border border-amber-500/20 rounded-xl space-y-3">
@@ -214,6 +221,7 @@ export function NotitiesPage({ onNavigate }) {
               </div>
             )}
           </div>
+          )}
         </div>
       </div>
     </MainLayout>

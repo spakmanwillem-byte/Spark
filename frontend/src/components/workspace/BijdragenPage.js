@@ -13,7 +13,7 @@ const FIELDS = [
   { key: 'hoe', label: 'Hoe', placeholder: 'Hoe werkt dit of hoe ervaar je het?' },
 ];
 
-function BijdragenPage() {
+function BijdragenPage({ embedded = false }) {
   const { user } = useAuth();
   const userId = user?.id;
   const allowed = [1, 2, 3, 4, 5].includes(user?.gradatie);
@@ -177,19 +177,18 @@ function BijdragenPage() {
   };
 
   if (!allowed) {
-    return (
-      <MainLayout>
-        <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-          <AlertCircle className="w-12 h-12 text-amber-400 mb-4" />
-          <h2 className="text-xl text-white mb-2">Bijdragen niet beschikbaar</h2>
-          <p className="text-slate-400 text-sm">Dit portaal is alleen voor gebruikers t/m gradatie 5.</p>
-        </div>
-      </MainLayout>
+    const inner = (
+      <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+        <AlertCircle className="w-12 h-12 text-amber-400 mb-4" />
+        <h2 className="text-xl text-white mb-2">Bijdragen niet beschikbaar</h2>
+        <p className="text-slate-400 text-sm">Dit portaal is alleen voor gebruikers t/m gradatie 5.</p>
+      </div>
     );
+    return embedded ? inner : <MainLayout>{inner}</MainLayout>;
   }
 
-  return (
-    <MainLayout>
+  const content = (
+    <>
       <div data-testid="bijdragen-page" className="flex flex-col h-full overflow-hidden">
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 p-4">
           <div className="flex items-center gap-3">
@@ -370,8 +369,10 @@ function BijdragenPage() {
           )}
         </div>
       </div>
-    </MainLayout>
+    </>
   );
+
+  return embedded ? content : <MainLayout>{content}</MainLayout>;
 }
 
 export default BijdragenPage;

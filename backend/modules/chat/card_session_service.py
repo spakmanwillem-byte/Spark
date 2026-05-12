@@ -33,15 +33,27 @@ FIELD_QUESTIONS = {
 # Triggers om sessie te starten
 START_TRIGGERS = [
     "ik wil kaarten invullen",
+    "ik wil een kaart invullen",
     "laten we kaarten invullen",
     "kaarten invullen",
+    "kaart invullen",
+    "kenniskaarten invullen",
+    "kenniskaart invullen",
+    "kennis kaarten invullen",
+    "kennis kaart invullen",
+    "ik wil kenniskaarten invullen",
+    "ik wil kennis kaarten invullen",
     "start kaartsessie",
     "start kaart sessie",
     "start kaarten sessie",
     "vul kaarten in",
-    "spark help me kaarten",
+    "vul kaart in",
     "kaarten doen",
+    "kennis invullen",
     "begin met kaarten",
+    "begin kaartsessie",
+    "spark help me kaarten",
+    "wil kaarten invullen",
 ]
 
 STOP_WORDS = {

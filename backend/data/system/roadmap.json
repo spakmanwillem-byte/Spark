@@ -2612,6 +2612,15 @@
         "priority": "medium",
         "completed_date": "2026-05-12",
         "notes": "Tag spontaan-verrijkt toegevoegd. Zin-snaps (context-zin) gefilterd uit lookup-index zodat ze niet matchen op losse woorden."
+      },
+      {
+        "id": "v4_008",
+        "titel": "Admin kaart-invul sessie",
+        "beschrijving": "Admin (gradatie 1/2) start via chat 'ik wil kaarten invullen' een sessie waarin Spark per kaart alle 6 W+H velden vraagt (what/when/where/who/why/how). Skip-woorden slaan veld over, stop-woorden pauzeren sessie. Queue van max 50 onbeantwoorde kaarten met 'auto-generated' tag. Antwoorden krijgen tag 'sessie-ingevuld'; admin verwijdert later 'auto-generated' voor finale goedkeuring.",
+        "status": "done",
+        "priority": "high",
+        "completed_date": "2026-05-12",
+        "notes": "Hergebruikt session_state. Stop = pauzeren (kan later voortzetten), niet wissen."
       }
     ]
   },
@@ -3195,6 +3204,7 @@
     "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat.",
     "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando.",
     "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten).",
-    "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten)."
+    "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten).",
+    "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in."
   ]
 }

@@ -17,6 +17,7 @@ from . import agenda_intent_service
 from . import scan_service
 from . import compositional_service
 from . import spontaneous_w_service
+from . import card_session_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -118,6 +119,63 @@ async def process_message(req: ChatMessage):
             return response
         # Geen ja/nee — laat staan, val door
 
+    # 0e. KAART-SESSIE FLOW (v4_008): admin loopt door onbeantwoorde kaarten
+    pending_card_session = state.get("pending_card_session")
+    if pending_card_session:
+        if card_session_service.is_stop(text):
+            session_state.set_state(req.user_id, pending_card_session=None)
+            response["type"] = "card_session_stopped"
+            response["message"] = "Oké, sessie gepauzeerd. Voortzetten? Typ 'ik wil kaarten invullen' om verder te gaan."
+            _save_log(req, response, "card_session_stopped")
+            return response
+        # Skip → markeer veld als overgeslagen voor huidige kaart
+        if card_session_service.is_skip(text):
+            cur_field = pending_card_session.get("current_field")
+            if cur_field:
+                skipped = pending_card_session.get("skipped_fields_for_card", [])
+                if cur_field not in skipped:
+                    skipped.append(cur_field)
+                pending_card_session["skipped_fields_for_card"] = skipped
+        else:
+            # Antwoord opslaan in huidig veld
+            cur_card = None
+            queue = pending_card_session.get("queue", [])
+            idx = pending_card_session.get("current_index", 0)
+            if idx < len(queue):
+                cur_card = queue[idx]
+            cur_field = pending_card_session.get("current_field")
+            if cur_card and cur_field:
+                card_session_service.apply_answer(cur_card, cur_field, text)
+        # Volgende vraag bepalen
+        next_q = card_session_service.next_question(pending_card_session)
+        if next_q.get("done"):
+            session_state.set_state(req.user_id, pending_card_session=None)
+            response["type"] = "card_session_done"
+            response["message"] = (
+                f"Klaar! Sessie afgerond. Alle {pending_card_session.get('total', 0)} kaarten "
+                "doorlopen. Tag 'sessie-ingevuld' staat op de bewerkte kaarten. "
+                "Loop ze door in Kennisbank → Onbeantwoord om de 'auto-generated' tag eraf te halen."
+            )
+            _save_log(req, response, "card_session_done")
+            return response
+        # Sla state op (incl. mogelijk geüpdate skipped/current_field/current_index)
+        session_state.set_state(req.user_id, pending_card_session=pending_card_session)
+        progress = next_q.get("card_progress", (0, 0))
+        response["type"] = "card_session_question"
+        response["message"] = (
+            f"_(Kaart {progress[0]}/{progress[1]}: **{next_q['begrip']}**)_\n\n"
+            f"{next_q['question']}\n\n"
+            f"_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_"
+        )
+        response["card_session"] = {
+            "card_id": next_q["card_id"],
+            "begrip": next_q["begrip"],
+            "field": next_q["field"],
+            "progress": progress,
+        }
+        _save_log(req, response, "card_session_question")
+        return response
+
     # 0c. WEDERVRAAG-FLOW (v4_001b) — als Spark in vorige beurt een 5W+H vraag stelde
     pending_wv = state.get("pending_wedervraag")
     if pending_wv and not snap.detect_rejection(text):
@@ -215,6 +273,40 @@ async def process_message(req: ChatMessage):
         response["message"] = resp or "Graag gedaan!"
         trigger_type = "thanks"
         _save_log(req, response, trigger_type)
+        return response
+
+    # Admin kaart-sessie start (v4_008): "ik wil kaarten invullen"
+    if card_session_service.detect_start_command(text):
+        gradatie = _get_user_gradatie(req.user_id)
+        if gradatie not in (1, 2):
+            response["type"] = "card_session_denied"
+            response["message"] = "Sorry, het kaarten-invullen sessie is alleen voor admin (gradatie 1 of 2)."
+            _save_log(req, response, "card_session_denied")
+            return response
+        sess = card_session_service.start_session(max_items=50)
+        if sess.get("done") or not sess.get("queue"):
+            response["type"] = "card_session_empty"
+            response["message"] = "Er zijn op dit moment geen onbeantwoorde kaarten met lege velden. Top!"
+            _save_log(req, response, "card_session_empty")
+            return response
+        first_q = card_session_service.next_question(sess)
+        session_state.set_state(req.user_id, pending_card_session=sess)
+        progress = first_q.get("card_progress", (0, 0))
+        response["type"] = "card_session_started"
+        response["message"] = (
+            f"Top! Ik heb **{sess['total']} kaart(en)** klaar staan om in te vullen. "
+            f"We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n"
+            f"_(Kaart {progress[0]}/{progress[1]}: **{first_q['begrip']}**)_\n\n"
+            f"{first_q['question']}\n\n"
+            f"_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_"
+        )
+        response["card_session"] = {
+            "card_id": first_q["card_id"],
+            "begrip": first_q["begrip"],
+            "field": first_q["field"],
+            "progress": progress,
+        }
+        _save_log(req, response, "card_session_started")
         return response
 
     # Admin scan-command (v4_005): "scan alle knowledge kaarten op onderwerpen"

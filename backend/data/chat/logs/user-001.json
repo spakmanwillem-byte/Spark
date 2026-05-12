@@ -1721,11 +1721,381 @@
         "session_id": "default",
         "gesprek_nummer": 65
       }
+    },
+    {
+      "id": "conv-36998f42",
+      "timestamp": "2026-05-12T01:59:15.507709+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil kaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **aandacht**)_\n\nWat is **aandacht** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 66
+      }
+    },
+    {
+      "id": "conv-9f91b40c",
+      "timestamp": "2026-05-12T01:59:15.931044+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "een gewerveld dier dat ademt",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nWanneer komt **aandacht** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 67
+      }
+    },
+    {
+      "id": "conv-0fcff1c2",
+      "timestamp": "2026-05-12T01:59:16.142332+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nWaar hoort **aandacht** bij — locatie of plek?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 68
+      }
+    },
+    {
+      "id": "conv-2375acb8",
+      "timestamp": "2026-05-12T01:59:16.379498+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "stop",
+      "spark_response": "Oké, sessie gepauzeerd. Voortzetten? Typ 'ik wil kaarten invullen' om verder te gaan.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_stopped",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_stopped"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 69
+      }
+    },
+    {
+      "id": "conv-9e4c3acd",
+      "timestamp": "2026-05-12T01:59:43.111605+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 70
+      }
+    },
+    {
+      "id": "conv-6bc9bb74",
+      "timestamp": "2026-05-12T01:59:51.566196+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil kaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **aandacht**)_\n\nWanneer komt **aandacht** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 71
+      }
+    },
+    {
+      "id": "conv-627c10ec",
+      "timestamp": "2026-05-12T02:18:04.596864+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wanneer informatie, gebeurtenissen of personen belangrijk worden gevonden.",
+      "spark_response": "**Wanneer**: “Wanneer” is een vraagwoord dat naar tijd vraagt.\n\n**Belangrijk**: Belangrijk betekent dat iets waarde heeft of aandacht verdient.\n\nNieuw geleerd: **gevonden** (opgeslagen als kaarten)\n\nWat houdt 'gevonden' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Wanneer"
+          },
+          {
+            "begrip": "gebeurtenissen"
+          },
+          {
+            "begrip": "personen"
+          },
+          {
+            "begrip": "Belangrijk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gevonden"
+        ],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 72
+      }
+    },
+    {
+      "id": "conv-68f6de5d",
+      "timestamp": "2026-05-12T02:19:06.947450+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Iets dat ontdekt, teruggevonden of herkend is.",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nWaar hoort **aandacht** bij — locatie of plek?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 73
+      }
+    },
+    {
+      "id": "conv-62d3330e",
+      "timestamp": "2026-05-12T02:20:15.140005+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "In gesprekken, leren, werk, sociale situaties en digitale systemen.",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nWie is er bij **aandacht** betrokken?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 74
+      }
+    },
+    {
+      "id": "conv-0e5ff703",
+      "timestamp": "2026-05-12T02:20:45.652745+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mensen, leerlingen, gebruikers en intelligente systemen.",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nWaarom is **aandacht** belangrijk of relevant?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 75
+      }
+    },
+    {
+      "id": "conv-829a76e7",
+      "timestamp": "2026-05-12T02:21:18.644111+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Om informatie beter te begrijpen, te verwerken of betrokkenheid te tonen.",
+      "spark_response": "_(Kaart 1/50: **aandacht**)_\n\nHoe werkt **aandacht** of hoe ervaar je het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 76
+      }
+    },
+    {
+      "id": "conv-20ef3741",
+      "timestamp": "2026-05-12T02:21:36.033618+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Door bewust of automatisch focus en concentratie op iets te richten.",
+      "spark_response": "_(Kaart 2/50: **actie**)_\n\nWat is **actie** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 77
+      }
+    },
+    {
+      "id": "conv-ef77b45f",
+      "timestamp": "2026-05-12T03:28:17.297258+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goede morgen Spark",
+      "spark_response": "**Goedemorgen schoonheid**: Een warme en persoonlijke begroeting met een compliment.\n\n**Morgen**: Morgen betekent de dag na vandaag of het begin van een nieuwe dag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Goedemorgen schoonheid"
+          },
+          {
+            "begrip": "Morgen"
+          },
+          {
+            "begrip": "spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 78
+      }
+    },
+    {
+      "id": "conv-243662ed",
+      "timestamp": "2026-05-12T08:55:02.003184+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark. Een goedemorgen",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 79
+      }
+    },
+    {
+      "id": "conv-b1ef50fb",
+      "timestamp": "2026-05-12T08:55:53.533529+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil met je kenniskaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **actie**)_\n\nWat is **actie** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 80
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 65,
-    "last_updated": "2026-05-12T01:53:23.639947+00:00"
+    "total_conversations": 80,
+    "last_updated": "2026-05-12T08:55:53.533529+00:00"
   }
 }

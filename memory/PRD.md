@@ -75,6 +75,10 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Self-state trigger v1** (v4_001a): analytics-aware respons op "hoe gaat het met jou", drempels 75/50/25 met emotie-staartje [12 mei 2026]
 - [x] **Multi-turn 5W+H wedervragen** (v4_001b): bij nieuwe snap stelt Spark gerichte vraag (wat/wanneer/waar/wie/waarom/hoe), antwoord vult ws5, max 2 turns, skip-woorden ondersteund [12 mei 2026]
 - [x] **Agenda intent-extractor** (v3_302+v3_303): tijd+activiteit+locatie uit chat → voorstel-flow ja/nee → automatisch agenda-event, conflict-detectie binnen 1u [12 mei 2026]
+- [x] **Self-scan commando** (v4_005): admin chat-commando "scan alle knowledge kaarten op onderwerpen" → Spark scant eigen ws5+tags op woorden zonder snap, max 100 per run met tag scan-discovered [12 mei 2026]
+- [x] **Compositional Reasoning** (v4_006): onbekend samengesteld woord → split in 2 bekende delen → tags erven, conflict-detectie ("suiker+spin tegenstrijdig — wat is het?") [12 mei 2026]
+- [x] **Spontane W-vulling** (v4_007): vrije zin "gisteren bij mijn moeder" → vult ws5.when/where/who van actieve snap (alleen auto-generated, geen overschrijven, terloopse hint) [12 mei 2026]
+- [x] **Admin kaart-invul sessie** (v4_008): "ik wil kaarten invullen" → Spark loopt door 50 onbeantwoorde kaarten, vraagt 6 W+H velden per kaart, skip/stop ondersteund, tag sessie-ingevuld toegevoegd [12 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

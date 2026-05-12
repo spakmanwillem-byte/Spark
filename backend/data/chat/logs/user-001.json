@@ -785,11 +785,80 @@
         "session_id": "default",
         "gesprek_nummer": 29
       }
+    },
+    {
+      "id": "conv-1ee47c8e",
+      "timestamp": "2026-05-12T00:14:35.541266+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 30
+      }
+    },
+    {
+      "id": "conv-6c9d59e5",
+      "timestamp": "2026-05-12T00:15:02.018583+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil weten hoe het met je is",
+      "spark_response": "Goede vraag! Daar heb ik helaas nog geen antwoord op. Wil je het toevoegen aan de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 31
+      }
+    },
+    {
+      "id": "conv-bc1e335f",
+      "timestamp": "2026-05-12T00:15:20.002923+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja graag",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 32
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 29,
-    "last_updated": "2026-05-11T22:24:12.058873+00:00"
+    "total_conversations": 32,
+    "last_updated": "2026-05-12T00:15:20.002923+00:00"
   }
 }

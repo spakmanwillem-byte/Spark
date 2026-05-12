@@ -79,6 +79,8 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
 - [x] **Compositional Reasoning** (v4_006): onbekend samengesteld woord → split in 2 bekende delen → tags erven, conflict-detectie ("suiker+spin tegenstrijdig — wat is het?") [12 mei 2026]
 - [x] **Spontane W-vulling** (v4_007): vrije zin "gisteren bij mijn moeder" → vult ws5.when/where/who van actieve snap (alleen auto-generated, geen overschrijven, terloopse hint) [12 mei 2026]
 - [x] **Admin kaart-invul sessie** (v4_008): "ik wil kaarten invullen" → Spark loopt door 50 onbeantwoorde kaarten, vraagt 6 W+H velden per kaart, skip/stop ondersteund, tag sessie-ingevuld toegevoegd [12 mei 2026]
+- [x] **NL ws5 keys migratie** (v4_009a): EN keys (who/what/when/where/why/how) → NL (wie/wat/wanneer/waar/waarom/hoe); context_5wh data gemerged in ws5 en context_5wh verwijderd. Backup bewaard. 14.702 velden hernoemd, 86 gemerged [12 mei 2026]
+- [x] **Bijdrage-portaal** (v4_009): nieuwe Workspace-tab waar gradatie 1-5 onbeantwoorde kaarten invullen. Fair-share claim (1 per user, 24u TTL, oudste verbeurt). Admin review tab voor goedkeuring. XP +25 per goedgekeurde kaart bij ≥75% gevuld. 4 nieuwe achievements toegevoegd [12 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

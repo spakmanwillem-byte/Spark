@@ -2621,6 +2621,23 @@
         "priority": "high",
         "completed_date": "2026-05-12",
         "notes": "Hergebruikt session_state. Stop = pauzeren (kan later voortzetten), niet wissen."
+      },
+      {
+        "id": "v4_009",
+        "titel": "Bijdrage-portaal + NL ws5 migratie",
+        "beschrijving": "Workspace-tab 'Bijdragen' waar gradatie 1-5 onbeantwoorde kaarten kunnen invullen. Fair-share claim (1 actieve per user, 24u TTL, oudste verbeurt bij volle pool). Submit ≥75% gevuld = XP-eligible. Admin (gradatie 1-2) keurt goed/af in zelfde pagina. ws5 keys gemigreerd van EN naar NL (wie/wat/wanneer/waar/waarom/hoe), context_5wh gemerged en verwijderd. 4 nieuwe achievements: Eerste Bijdrage, Sprinter (10), Volledige Maker (100% kaart), Honderd (100 kaarten).",
+        "status": "done",
+        "priority": "high",
+        "completed_date": "2026-05-12",
+        "notes": "Migratie veilig: 14.702 EN-velden hernoemd, 86 gemerged uit context_5wh, 2393 context_5wh dicts verwijderd. Backup pre_nl.json bewaard."
+      },
+      {
+        "id": "v4_010",
+        "titel": "Antwoord-markering [info] + confidence-score",
+        "beschrijving": "Gebruiker markeert antwoord met [haken] zodat Spark niet hoeft te raden uit triggers. Omliggende woorden ('moeilijk/zeker/vermoed') geven confidence-score (laag/medium/hoog). Filter in kennisbank op confidence. Spark verwijst in chat naar lage-confidence info met voorzichtigheid.",
+        "status": "planned",
+        "priority": "medium",
+        "notes": "Door user genoemd; roadmap-item voor later."
       }
     ]
   },
@@ -3205,6 +3222,7 @@
     "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando.",
     "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten).",
     "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten).",
-    "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in."
+    "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in.",
+    "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned."
   ]
 }

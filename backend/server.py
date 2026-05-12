@@ -92,6 +92,9 @@ app.include_router(achievements_router, prefix="/api")
 from modules.chat import chat_router
 app.include_router(chat_router, prefix="/api")
 
+from modules.contributions.routes import router as contributions_router
+app.include_router(contributions_router)
+
 # Module 6: Agenda
 from modules.agenda import agenda_router
 app.include_router(agenda_router, prefix="/api")

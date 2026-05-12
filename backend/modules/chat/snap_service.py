@@ -160,10 +160,8 @@ class SnapNLPService:
 
     def _format_result(self, entry, match_type, matched_word=None):
         lagen = entry.get("lagen", {}) or {}
-        # Lees zowel ws5 (Engels, 2398 kaarten) als context_5wh (NL, 18 kaarten).
-        # ws5 krijgt voorrang omdat 99% van data daar staat; NL is fallback/backfill.
+        # NL keys na migratie
         ws5 = entry.get("ws5", {}) or {}
-        wh_nl = entry.get("context_5wh", {}) or {}
         return {
             "id": entry.get("id"),
             "begrip": entry.get("begrip"),
@@ -176,12 +174,12 @@ class SnapNLPService:
             "match_type": match_type,
             "matched_word": matched_word,
             "context_5wh": {
-                "wie": wh_nl.get("wie") or ws5.get("who") or "",
-                "wat": wh_nl.get("wat") or ws5.get("what") or "",
-                "waar": wh_nl.get("waar") or ws5.get("where") or "",
-                "wanneer": wh_nl.get("wanneer") or ws5.get("when") or "",
-                "waarom": wh_nl.get("waarom") or ws5.get("why") or "",
-                "hoe": wh_nl.get("hoe") or ws5.get("how") or "",
+                "wie": ws5.get("wie", ""),
+                "wat": ws5.get("wat", ""),
+                "waar": ws5.get("waar", ""),
+                "wanneer": ws5.get("wanneer", ""),
+                "waarom": ws5.get("waarom", ""),
+                "hoe": ws5.get("hoe", ""),
             },
         }
 
@@ -239,7 +237,7 @@ class SnapNLPService:
             "id": f"snap-{uuid.uuid4().hex[:8]}",
             "begrip": concept,
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
             "tags": tags,
             "bron": "auto-detected",
             "detected_by": user_naam,
@@ -288,7 +286,7 @@ class SnapNLPService:
             "id": f"snap-{uuid.uuid4().hex[:8]}",
             "begrip": sentence,
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
             "tags": ["knowledge-snap", "auto-generated", "context-zin"],
             "bron": "auto-detected",
             "detected_by": user_naam,
@@ -411,7 +409,7 @@ class SnapNLPService:
             "id": f"snap-{uuid.uuid4().hex[:8]}",
             "begrip": begrip,
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
             "tags": ["knowledge-snap", "homonym_variant", "auto-generated"],
             "bron": "homonym-disambiguation",
             "detected_by": user_naam,

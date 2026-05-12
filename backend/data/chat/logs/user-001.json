@@ -2183,11 +2183,61 @@
         "session_id": "default",
         "gesprek_nummer": 84
       }
+    },
+    {
+      "id": "conv-321c693b",
+      "timestamp": "2026-05-12T09:50:39.765834+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is aandacht?",
+      "spark_response": "**Aandacht**: Aandacht betekent dat iemand bewust focus of concentratie richt op iets of iemand.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Aandacht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 85
+      }
+    },
+    {
+      "id": "conv-bf721704",
+      "timestamp": "2026-05-12T09:50:40.213830+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil kaarten invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **actie**)_\n\nWat is **actie** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 86
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 84,
-    "last_updated": "2026-05-12T09:09:27.733203+00:00"
+    "total_conversations": 86,
+    "last_updated": "2026-05-12T09:50:40.213830+00:00"
   }
 }

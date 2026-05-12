@@ -97,7 +97,7 @@ export function KennisbankPage({ onNavigate }) {
       topic: detailData.topic || '',
       tags: (detailData.tags || []).join(', '),
       belangrijkheid: detailData.belangrijkheid || 3,
-      ws5: detailData.ws5 || { who: '', what: '', when: '', where: '', why: '', how: '' },
+      ws5: detailData.ws5 || { wie: '', wat: '', wanneer: '', waar: '', waarom: '', hoe: '' },
     });
     setIsEditing(true);
   };
@@ -400,12 +400,12 @@ function DetailModal({ detailData, detailLoading, isEditing, editForm, setEditFo
   ];
 
   const ws5Fields = [
-    { key: 'who', label: 'Wie', dutch: detailData.context_5wh?.wie },
-    { key: 'what', label: 'Wat', dutch: detailData.context_5wh?.wat },
-    { key: 'when', label: 'Wanneer', dutch: detailData.context_5wh?.wanneer },
-    { key: 'where', label: 'Waar', dutch: detailData.context_5wh?.waar },
-    { key: 'why', label: 'Waarom', dutch: detailData.context_5wh?.waarom },
-    { key: 'how', label: 'Hoe', dutch: detailData.context_5wh?.hoe },
+    { key: 'wie', label: 'Wie', value: detailData.ws5?.wie || detailData.context_5wh?.wie || '' },
+    { key: 'wat', label: 'Wat', value: detailData.ws5?.wat || detailData.context_5wh?.wat || '' },
+    { key: 'wanneer', label: 'Wanneer', value: detailData.ws5?.wanneer || detailData.context_5wh?.wanneer || '' },
+    { key: 'waar', label: 'Waar', value: detailData.ws5?.waar || detailData.context_5wh?.waar || '' },
+    { key: 'waarom', label: 'Waarom', value: detailData.ws5?.waarom || detailData.context_5wh?.waarom || '' },
+    { key: 'hoe', label: 'Hoe', value: detailData.ws5?.hoe || detailData.context_5wh?.hoe || '' },
   ];
 
   if (isEditing && editForm) {
@@ -538,15 +538,15 @@ function DetailModal({ detailData, detailLoading, isEditing, editForm, setEditFo
             </div>
           </div>
 
-          {/* 5WH Context */}
-          {detailData.context_5wh && Object.values(detailData.context_5wh).some(v => v) && (
+          {/* 5W+H Context */}
+          {ws5Fields.some(f => f.value) && (
             <div className="border-t border-slate-800 pt-4 mt-2">
-              <p className="text-xs text-slate-500 mb-3">5W Context</p>
+              <p className="text-xs text-slate-500 mb-3">5W+H Context</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {ws5Fields.map(f => f.dutch && (
+                {ws5Fields.map(f => f.value && (
                   <div key={f.key} className="p-2 bg-slate-800/50 rounded-lg">
                     <p className="text-[10px] text-slate-500 uppercase">{f.label}</p>
-                    <p className="text-xs text-slate-300 mt-0.5">{f.dutch}</p>
+                    <p className="text-xs text-slate-300 mt-0.5">{f.value}</p>
                   </div>
                 ))}
               </div>

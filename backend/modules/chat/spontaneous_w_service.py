@@ -8,7 +8,7 @@ Veiligheidsregels (alle 4 moeten kloppen, anders gebeurt er niks):
 1. Er moet een 'last_entry_id' in session_state staan (binnen 10 min)
 2. Die snap moet nog tag 'auto-generated' hebben (= niet door admin goedgekeurd)
 3. Alleen LEGE ws5-velden worden gevuld (geen overschrijven)
-4. Alleen 'who', 'when', 'where' — niet why/how/what (te subjectief)
+4. Alleen 'wie', 'wanneer', 'waar' — niet waarom/hoe/wat (te subjectief)
 
 Patronen:
 - when: gisteren/morgen/maandag/dinsdag/.. + 'X uur' + datum
@@ -70,20 +70,20 @@ def extract_w_fields(text: str) -> dict:
     # WHEN — relatieve woorden
     for w in RELATIVE_TIME:
         if re.search(rf"\b{w}\b", text_lower):
-            result["when"] = w
+            result["wanneer"] = w
             break
-    if "when" not in result:
+    if "wanneer" not in result:
         for d in DAGEN_NL:
             if re.search(rf"\b{d}\b", text_lower):
-                result["when"] = d
+                result["wanneer"] = d
                 break
     # Tijd-spec ("om 14:30" of "om 14 uur") als extra
-    if "when" in result:
+    if "wanneer" in result:
         m = re.search(r"\bom\s+(\d{1,2})(?:[:.](\d{2}))?\s*(?:uur|u\b)?", text_lower)
         if m:
             hour = m.group(1)
             mnt = m.group(2) or "00"
-            result["when"] += f" om {hour}:{mnt}"
+            result["wanneer"] += f" om {hour}:{mnt}"
 
     # WHERE — preposition + hoofdletterwoord (orig case voor detectie)
     for prep in LOC_PREPS:
@@ -92,20 +92,20 @@ def extract_w_fields(text: str) -> dict:
             text,
         )
         if m:
-            result["where"] = m.group(1).strip()
+            result["waar"] = m.group(1).strip()
             break
 
     # WHO — 'met mijn X' / 'bij mijn X' met familie-woord
     m = re.search(r"\b(?:met|bij)\s+mijn\s+([a-zéèêëïüöà]+)", text_lower)
     if m and m.group(1) in FAMILY_WORDS:
-        result["who"] = f"mijn {m.group(1)}"
+        result["wie"] = f"mijn {m.group(1)}"
     else:
         # 'met X' waarbij X een bekende persoonsnaam is
         namen = _load_persoon_namen()
         if namen:
             m = re.search(r"\b(?:met|bij|samen met)\s+([A-Z][a-zéèêëïüöà]+)", text)
             if m and m.group(1).lower() in namen:
-                result["who"] = m.group(1)
+                result["wie"] = m.group(1)
 
     return result
 
@@ -156,10 +156,10 @@ def build_hint(filled: dict) -> str:
     if not filled:
         return ""
     parts = []
-    if "when" in filled:
-        parts.append(f"wanneer: {filled['when']}")
-    if "where" in filled:
-        parts.append(f"waar: {filled['where']}")
-    if "who" in filled:
-        parts.append(f"wie: {filled['who']}")
+    if "wanneer" in filled:
+        parts.append(f"wanneer: {filled['wanneer']}")
+    if "waar" in filled:
+        parts.append(f"waar: {filled['waar']}")
+    if "wie" in filled:
+        parts.append(f"wie: {filled['wie']}")
     return f"_(terloops genoteerd → {', '.join(parts)})_"

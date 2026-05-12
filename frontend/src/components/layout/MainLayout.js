@@ -4,7 +4,7 @@ import {
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
-  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive
+  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -19,6 +19,7 @@ export const navigationConfig = {
       { id: 'calendar', label: 'Agenda', icon: Calendar, path: '/calendar' },
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
+      { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, path: '/bijdragen' },
       { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
       { id: 'voice', label: 'Voice', icon: Volume2, path: '/workspace/voice' },
     ]

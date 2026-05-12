@@ -20,14 +20,14 @@ from modules.core.storage import load_json, save_json
 KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 
 # Vraag-volgorde + sjablonen (vriendelijk, korte vragen)
-FIELDS_ORDER = ["what", "when", "where", "who", "why", "how"]
+FIELDS_ORDER = ["wat", "wanneer", "waar", "wie", "waarom", "hoe"]
 FIELD_QUESTIONS = {
-    "what": "Wat is **{begrip}** kort gezegd?",
-    "when": "Wanneer komt **{begrip}** voor of speelt het?",
-    "where": "Waar hoort **{begrip}** bij — locatie of plek?",
-    "who": "Wie is er bij **{begrip}** betrokken?",
-    "why": "Waarom is **{begrip}** belangrijk of relevant?",
-    "how": "Hoe werkt **{begrip}** of hoe ervaar je het?",
+    "wat": "Wat is **{begrip}** kort gezegd?",
+    "wanneer": "Wanneer komt **{begrip}** voor of speelt het?",
+    "waar": "Waar hoort **{begrip}** bij — locatie of plek?",
+    "wie": "Wie is er bij **{begrip}** betrokken?",
+    "waarom": "Waarom is **{begrip}** belangrijk of relevant?",
+    "hoe": "Hoe werkt **{begrip}** of hoe ervaar je het?",
 }
 
 # Triggers om sessie te starten

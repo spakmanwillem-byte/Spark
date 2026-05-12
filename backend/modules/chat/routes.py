@@ -421,7 +421,7 @@ async def process_message(req: ChatMessage):
         if new_entry and req.user_id:
             session_state.set_state(req.user_id, pending_wedervraag={
                 "entry_id": new_entry["id"],
-                "field": "what",
+                "field": "wat",
                 "question": decomp["message"],
                 "asked_count": 1,
                 "max_questions": 1,
@@ -541,12 +541,12 @@ async def process_message(req: ChatMessage):
                         "right": first_decomp["decomp"]["candidate"]["right"],
                         "analysis": first_decomp["decomp"]["analysis"],
                     }
-                    # Pending wedervraag op 'what' veld zodat user-antwoord landt
+                    # Pending wedervraag op 'wat' veld zodat user-antwoord landt
                     target_entry = next((e for e in [last_entry] if e and e["begrip"] == first_decomp["word"]), last_entry)
                     if target_entry:
                         session_state.set_state(req.user_id, pending_wedervraag={
                             "entry_id": target_entry["id"],
-                            "field": "what",
+                            "field": "wat",
                             "question": first_decomp["decomp"]["message"],
                             "asked_count": 1,
                             "max_questions": 1,

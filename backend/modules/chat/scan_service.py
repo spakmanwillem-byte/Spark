@@ -50,7 +50,7 @@ def scan_for_new_subjects(user_naam: str = "Spark", max_create: int = 100):
 
     # Verzamel kandidaat-woorden met bron-tracking
     candidates = {}  # word -> {sources: set, parent_begrippen: set}
-    ws5_fields = ("who", "what", "when", "where", "why", "how")
+    ws5_fields = ("wie", "wat", "wanneer", "waar", "waarom", "hoe")
 
     for e in entries:
         parent = (e.get("begrip") or "").strip()
@@ -95,7 +95,7 @@ def scan_for_new_subjects(user_naam: str = "Spark", max_create: int = 100):
             "id": f"snap-{uuid.uuid4().hex[:8]}",
             "begrip": word,
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"who": "", "what": "", "when": "", "where": "", "why": "", "how": ""},
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
             "tags": ["knowledge-snap", "auto-generated", "scan-discovered"],
             "bron": f"scan-from-existing-cards (bron: {sample_parent[:50]})",
             "detected_by": user_naam,

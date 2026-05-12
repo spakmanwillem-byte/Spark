@@ -19,36 +19,36 @@ KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "l
 
 # Prioriteit-volgorde: welke velden vragen we eerst?
 # (Wat/Wanneer/Waar zijn meest concreet, Wie/Waarom/Hoe meer reflectief)
-FIELD_PRIORITY = ["what", "when", "where", "who", "why", "how"]
+FIELD_PRIORITY = ["wat", "wanneer", "waar", "wie", "waarom", "hoe"]
 
 # Vraagsjablonen per veld (NL, vriendelijke toon)
 QUESTION_TEMPLATES = {
-    "what": [
+    "wat": [
         "Kan je in het kort uitleggen wat '{begrip}' precies is?",
         "Wat houdt '{begrip}' eigenlijk in?",
         "Wat betekent '{begrip}' voor jou?",
     ],
-    "when": [
+    "wanneer": [
         "Wanneer kwam '{begrip}' ter sprake?",
         "Wanneer was dat met '{begrip}'?",
         "Wanneer speelt '{begrip}' een rol?",
     ],
-    "where": [
+    "waar": [
         "Waar speelt '{begrip}' zich af?",
         "Op welke plek hoort '{begrip}' bij?",
         "Waar komt '{begrip}' meestal voor?",
     ],
-    "who": [
+    "wie": [
         "Wie is er bij '{begrip}' betrokken?",
         "Met wie heeft '{begrip}' te maken?",
         "Over wie gaat '{begrip}'?",
     ],
-    "why": [
+    "waarom": [
         "Waarom is '{begrip}' belangrijk?",
         "Waarom noem je '{begrip}'?",
         "Wat maakt '{begrip}' relevant voor jou?",
     ],
-    "how": [
+    "hoe": [
         "Hoe werkt '{begrip}' precies?",
         "Hoe pak je '{begrip}' aan?",
         "Hoe ervaar je '{begrip}'?",

@@ -3,16 +3,20 @@
   "_version": "2.0",
   "_created": "2026-03-12",
   "_note": "Vervangen met word-based achievements. Oude achievements bewaard in legacy_achievements backup.",
-  
   "achievement_types": {
     "words": {
       "name": "Woord Leren",
       "description": "Achievements voor woorden die je Spark hebt geleerd",
       "icon": "📚",
       "xp_multiplier": 1.5
+    },
+    "contributions": {
+      "name": "Bijdragen",
+      "description": "Achievements voor kennisbank-bijdragen via portaal",
+      "icon": "🤝",
+      "xp_multiplier": 1.0
     }
   },
-  
   "achievements": [
     {
       "id": "words_10",
@@ -143,9 +147,49 @@
       "xp_reward": 50000,
       "icon": "💎",
       "rarity": "mythic"
+    },
+    {
+      "id": "contrib_1",
+      "type": "contributions",
+      "name": "Eerste Bijdrage",
+      "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+      "milestone": 1,
+      "xp_reward": 50,
+      "icon": "🌱",
+      "rarity": "common"
+    },
+    {
+      "id": "contrib_10",
+      "type": "contributions",
+      "name": "Sprinter",
+      "description": "10 goedgekeurde bijdragen.",
+      "milestone": 10,
+      "xp_reward": 150,
+      "icon": "🏃",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "contrib_full",
+      "type": "contributions",
+      "name": "Volledige Maker",
+      "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+      "milestone": 1,
+      "xp_reward": 100,
+      "icon": "💎",
+      "rarity": "rare",
+      "trigger": "100%"
+    },
+    {
+      "id": "contrib_100",
+      "type": "contributions",
+      "name": "Honderd",
+      "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+      "milestone": 100,
+      "xp_reward": 500,
+      "icon": "🎯",
+      "rarity": "epic"
     }
   ],
-  
   "meta": {
     "total_achievements": 13,
     "total_xp_available": 141850,

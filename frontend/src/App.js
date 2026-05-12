@@ -18,6 +18,7 @@ import { KennisbankPage } from "./components/workspace/KennisbankPage";
 import { RoadmapPage } from "./components/workspace/RoadmapPage";
 import { DagboekPage } from "./components/workspace/DagboekPage";
 import { NotitiesPage } from "./components/workspace/NotitiesPage";
+import { BijdragenPage } from "./components/workspace/BijdragenPage";
 import { LeaderboardPage } from "./components/modules/LeaderboardPage";
 import { IntegratiesPage } from "./components/modules/IntegratiesPage";
 import { AchievementsPage } from "./components/modules/AchievementsPage";
@@ -48,6 +49,7 @@ function AppContent() {
       '/roadmap': 'roadmap',
       '/dagboek': 'dagboek',
       '/notities': 'notities',
+      '/bijdragen': 'bijdragen',
       '/spark/brain': 'spark-brain',
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
@@ -129,6 +131,8 @@ function AppContent() {
         return <DagboekPage onNavigate={handleNavigate} />;
       case 'notities':
         return <NotitiesPage onNavigate={handleNavigate} />;
+      case 'bijdragen':
+        return <BijdragenPage onNavigate={handleNavigate} />;
       case 'leaderboard':
         return <LeaderboardPage onNavigate={handleNavigate} />;
       case 'integrations':

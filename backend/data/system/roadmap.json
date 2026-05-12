@@ -2638,6 +2638,23 @@
         "status": "planned",
         "priority": "medium",
         "notes": "Door user genoemd; roadmap-item voor later."
+      },
+      {
+        "id": "v4_009c",
+        "titel": "Bijdragen uitbreiding: lagen 1-4 + belangrijkheid",
+        "beschrijving": "Card-sessie en bijdrage-portaal uitgebreid van 6 ws5-velden naar 11 velden: 6 ws5 + 4 lagen + 1 belangrijkheid (1-5 sterren). Lagen-vragen verschillen per type: woord-snap krijgt uitleg-niveaus, zin-snap krijgt reactie-niveaus. Belangrijkheid via cijfer 1-5 in chat of sterren-klikken in portaal.",
+        "status": "done",
+        "priority": "high",
+        "completed_date": "2026-05-12",
+        "notes": "XP-verhouding ongewijzigd (25 XP bij ≥75% van 11 velden). Later differentieren per type veld."
+      },
+      {
+        "id": "v4_011",
+        "titel": "Lagen-reacties koppelen aan triggers",
+        "beschrijving": "Voor zin-snaps: laag 1-4 zijn Spark's reacties op die context. Idee: bind deze automatisch als trigger-respons in conversation_triggers indien matchend patroon.",
+        "status": "planned",
+        "priority": "medium",
+        "notes": "Door user genoemd bij v4_009c bouw."
       }
     ]
   },
@@ -3223,6 +3240,7 @@
     "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten).",
     "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten).",
     "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in.",
-    "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned."
+    "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned.",
+    "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned."
   ]
 }

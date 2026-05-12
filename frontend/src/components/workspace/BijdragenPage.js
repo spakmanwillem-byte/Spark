@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
-import { HandHeart, SkipForward, Send, Award, Clock, CheckCircle, XCircle, RefreshCw, AlertCircle } from 'lucide-react';
+import { HandHeart, SkipForward, Send, Award, Clock, CheckCircle, XCircle, RefreshCw, AlertCircle, Star } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const FIELDS = [
@@ -11,6 +11,18 @@ const FIELDS = [
   { key: 'wie', label: 'Wie', placeholder: 'Wie is er bij betrokken?' },
   { key: 'waarom', label: 'Waarom', placeholder: 'Waarom is dit belangrijk of relevant?' },
   { key: 'hoe', label: 'Hoe', placeholder: 'Hoe werkt dit of hoe ervaar je het?' },
+];
+const LAGEN_WOORD = [
+  { key: 'laag1', label: 'Laag 1 — Kort', placeholder: 'Eén korte zin die het uitlegt' },
+  { key: 'laag2', label: 'Laag 2 — Context', placeholder: 'Iets meer context, een paragraafje' },
+  { key: 'laag3', label: 'Laag 3 — Uitgebreid', placeholder: 'Uitgebreide achtergrond, meer detail' },
+  { key: 'laag4', label: 'Laag 4 — Diepte', placeholder: 'Diepere betekenis of kernwaarde' },
+];
+const LAGEN_ZIN = [
+  { key: 'laag1', label: 'Reactie 1 — Kort', placeholder: 'Kort antwoord wat Spark hierop zou geven' },
+  { key: 'laag2', label: 'Reactie 2 — Uitgebreider', placeholder: 'Iets uitgebreidere reactie' },
+  { key: 'laag3', label: 'Reactie 3 — In detail', placeholder: 'Gedetailleerde reactie van Spark' },
+  { key: 'laag4', label: 'Reactie 4 — Diep', placeholder: 'Diepere reactie of kernwaarde van Spark' },
 ];
 
 function BijdragenPage({ embedded = false }) {
@@ -24,6 +36,9 @@ function BijdragenPage({ embedded = false }) {
   const [error, setError] = useState(null);
   const [card, setCard] = useState(null);
   const [ws5, setWs5] = useState({ wat: '', wanneer: '', waar: '', wie: '', waarom: '', hoe: '' });
+  const [lagen, setLagen] = useState({ laag1: '', laag2: '', laag3: '', laag4: '' });
+  const [belangrijkheid, setBelangrijkheid] = useState(null);
+  const [isSentence, setIsSentence] = useState(false);
   const [stats, setStats] = useState(null);
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState(null);
@@ -39,6 +54,9 @@ function BijdragenPage({ embedded = false }) {
       if (data.success && data.card) {
         setCard(data.card);
         setWs5({ ...{ wat: '', wanneer: '', waar: '', wie: '', waarom: '', hoe: '' }, ...(data.card.ws5 || {}) });
+        setLagen({ ...{ laag1: '', laag2: '', laag3: '', laag4: '' }, ...(data.card.lagen || {}) });
+        setBelangrijkheid(data.card.belangrijkheid ?? null);
+        setIsSentence(!!data.card.is_sentence);
       } else {
         setCard(null);
         setError(data.message || 'Geen kaarten beschikbaar.');
@@ -117,21 +135,30 @@ function BijdragenPage({ embedded = false }) {
   };
 
   // Auto-save tussentijds wanneer veld blur
-  const saveField = async (field) => {
+  const saveField = async (category, field) => {
     if (!card || saving) return;
     setSaving(true);
     try {
+      const body = { user_id: userId, card_id: card.id };
+      if (category === 'ws5') body.ws5 = { [field]: ws5[field] };
+      if (category === 'laag') body.lagen = { [field]: lagen[field] };
+      if (category === 'belangrijkheid') body.belangrijkheid = belangrijkheid;
       await fetch(`${API}/api/contributions/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, card_id: card.id, ws5: { [field]: ws5[field] } }),
+        body: JSON.stringify(body),
       });
     } catch { /* silent */ }
     setSaving(false);
   };
 
-  const filledCount = FIELDS.filter(f => (ws5[f.key] || '').trim()).length;
-  const percentage = Math.round((filledCount / FIELDS.length) * 100);
+  const ws5FilledCount = FIELDS.filter(f => (ws5[f.key] || '').trim()).length;
+  const lagenFilledCount = (isSentence ? LAGEN_ZIN : LAGEN_WOORD).filter(L => (lagen[L.key] || '').trim()).length;
+  const belangFilled = belangrijkheid !== null && belangrijkheid !== undefined ? 1 : 0;
+  const totalFilled = ws5FilledCount + lagenFilledCount + belangFilled;
+  const totalMax = 11;
+  const percentage = Math.round((totalFilled / totalMax) * 100);
+  const filledCount = totalFilled; // alias for existing code
 
   const onSubmit = async () => {
     if (!card || filledCount < 1) return;
@@ -141,7 +168,7 @@ function BijdragenPage({ embedded = false }) {
       const res = await fetch(`${API}/api/contributions/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, card_id: card.id, ws5 }),
+        body: JSON.stringify({ user_id: userId, card_id: card.id, ws5, lagen, belangrijkheid }),
       });
       const data = await res.json();
       if (data.success) {
@@ -312,6 +339,7 @@ function BijdragenPage({ embedded = false }) {
               </div>
 
               <div className="space-y-3">
+                <p className="text-xs uppercase tracking-wider text-amber-300/80 mt-2">5W + Hoe</p>
                 {FIELDS.map(f => (
                   <div key={f.key} data-testid={`field-${f.key}`} className="bg-slate-900/40 border border-slate-800 rounded-lg p-3">
                     <label className="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">{f.label}</label>
@@ -319,13 +347,53 @@ function BijdragenPage({ embedded = false }) {
                       data-testid={`input-${f.key}`}
                       value={ws5[f.key]}
                       onChange={e => setWs5({ ...ws5, [f.key]: e.target.value })}
-                      onBlur={() => saveField(f.key)}
+                      onBlur={() => saveField('ws5', f.key)}
                       placeholder={f.placeholder}
                       className="w-full bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 resize-none"
                       rows={2}
                     />
                   </div>
                 ))}
+
+                <p className="text-xs uppercase tracking-wider text-amber-300/80 mt-4">
+                  {isSentence ? 'Reacties (4 lagen)' : 'Lagen 1-4 (uitleg-niveaus)'}
+                </p>
+                {(isSentence ? LAGEN_ZIN : LAGEN_WOORD).map(L => (
+                  <div key={L.key} data-testid={`laag-${L.key}`} className="bg-slate-900/40 border border-slate-800 rounded-lg p-3">
+                    <label className="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">{L.label}</label>
+                    <textarea
+                      data-testid={`input-${L.key}`}
+                      value={lagen[L.key]}
+                      onChange={e => setLagen({ ...lagen, [L.key]: e.target.value })}
+                      onBlur={() => saveField('laag', L.key)}
+                      placeholder={L.placeholder}
+                      className="w-full bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 resize-none"
+                      rows={L.key === 'laag1' ? 2 : 3}
+                    />
+                  </div>
+                ))}
+
+                <p className="text-xs uppercase tracking-wider text-amber-300/80 mt-4">Belangrijkheid</p>
+                <div data-testid="belangrijkheid-row" className="bg-slate-900/40 border border-slate-800 rounded-lg p-3">
+                  <label className="block text-xs text-slate-400 mb-2">Hoeveel sterren? (1 = niet belangrijk, 5 = heel belangrijk)</label>
+                  <div className="flex items-center gap-1.5">
+                    {[1, 2, 3, 4, 5].map(n => (
+                      <button
+                        key={n}
+                        data-testid={`star-${n}`}
+                        type="button"
+                        onClick={() => { setBelangrijkheid(n); saveField('belangrijkheid'); }}
+                        className="transition-transform hover:scale-110"
+                        title={`${n} sterren`}
+                      >
+                        <Star className={`w-7 h-7 ${(belangrijkheid || 0) >= n ? 'text-amber-400 fill-amber-400' : 'text-slate-600'}`} />
+                      </button>
+                    ))}
+                    {belangrijkheid !== null && belangrijkheid !== undefined && (
+                      <span className="ml-3 text-xs text-slate-400">{belangrijkheid}/5</span>
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-5 flex gap-3 sticky bottom-0 bg-slate-950/90 backdrop-blur-sm py-3">
@@ -337,7 +405,7 @@ function BijdragenPage({ embedded = false }) {
                   style={{ background: filledCount === 0 ? '#374151' : 'linear-gradient(135deg, #10b981, #059669)' }}
                 >
                   <Send className="w-4 h-4" />
-                  Voltooien ({percentage}%){percentage >= 75 ? ' — XP!' : ''}
+                  Voltooien ({percentage}%, {totalFilled}/{totalMax}){percentage >= 75 ? ' — XP!' : ''}
                 </button>
                 <button
                   data-testid="bijdragen-skip-btn"

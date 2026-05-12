@@ -55,13 +55,17 @@ def _admin_gate(user_id):
 class SaveRequest(BaseModel):
     user_id: str
     card_id: str
-    ws5: dict
+    ws5: Optional[dict] = None
+    lagen: Optional[dict] = None
+    belangrijkheid: Optional[int] = None
 
 
 class SubmitRequest(BaseModel):
     user_id: str
     card_id: str
-    ws5: dict
+    ws5: Optional[dict] = None
+    lagen: Optional[dict] = None
+    belangrijkheid: Optional[int] = None
 
 
 class SkipRequest(BaseModel):
@@ -96,6 +100,9 @@ def next_card(user_id: str):
             "topic": card.get("topic", ""),
             "tags": card.get("tags", []),
             "ws5": card.get("ws5") or {},
+            "lagen": card.get("lagen") or {},
+            "belangrijkheid": card.get("belangrijkheid"),
+            "is_sentence": "context-zin" in (card.get("tags") or []) or (card.get("metadata") or {}).get("is_sentence", False),
             "snap_context": card.get("snap_context", ""),
             "bron": card.get("bron", ""),
         },
@@ -105,16 +112,16 @@ def next_card(user_id: str):
 @router.post("/save")
 def save(req: SaveRequest):
     _gate(req.user_id)
-    card = save_partial(req.card_id, req.ws5 or {})
+    card = save_partial(req.card_id, req.ws5 or {}, req.lagen, req.belangrijkheid)
     if not card:
         raise HTTPException(404, "Kaart niet gevonden.")
-    return {"success": True, "ws5": card.get("ws5")}
+    return {"success": True, "ws5": card.get("ws5"), "lagen": card.get("lagen"), "belangrijkheid": card.get("belangrijkheid")}
 
 
 @router.post("/submit")
 def submit(req: SubmitRequest):
     _gate(req.user_id)
-    result = submit_for_review(req.user_id, req.card_id, req.ws5 or {})
+    result = submit_for_review(req.user_id, req.card_id, req.ws5 or {}, req.lagen, req.belangrijkheid)
     if not result.get("success"):
         raise HTTPException(400, result.get("error", "submit_failed"))
     return result

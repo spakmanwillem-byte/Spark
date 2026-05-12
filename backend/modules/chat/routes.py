@@ -83,13 +83,13 @@ async def process_message(req: ChatMessage):
             response["message"] = "Oké, sessie gepauzeerd. Voortzetten? Typ 'ik wil kaarten invullen' om verder te gaan."
             _save_log(req, response, "card_session_stopped")
             return response
-        # Skip → markeer veld als overgeslagen voor huidige kaart
+        # Skip → markeer huidig veld als overgeslagen
         if card_session_service.is_skip(text):
-            cur_field = pending_card_session.get("current_field")
-            if cur_field:
+            cur_field_key = pending_card_session.get("current_field")  # bv "ws5.wat"
+            if cur_field_key:
                 skipped = pending_card_session.get("skipped_fields_for_card", [])
-                if cur_field not in skipped:
-                    skipped.append(cur_field)
+                if cur_field_key not in skipped:
+                    skipped.append(cur_field_key)
                 pending_card_session["skipped_fields_for_card"] = skipped
         else:
             # Antwoord opslaan in huidig veld
@@ -98,9 +98,17 @@ async def process_message(req: ChatMessage):
             idx = pending_card_session.get("current_index", 0)
             if idx < len(queue):
                 cur_card = queue[idx]
-            cur_field = pending_card_session.get("current_field")
-            if cur_card and cur_field:
-                card_session_service.apply_answer(cur_card, cur_field, text)
+            cur_field_key = pending_card_session.get("current_field")  # "ws5.wat" of "laag.laag1" of "belangrijkheid.belangrijkheid"
+            if cur_card and cur_field_key and "." in cur_field_key:
+                cat, key = cur_field_key.split(".", 1)
+                ok = card_session_service.apply_answer(cur_card, cat, key, text)
+                if not ok and cat == "belangrijkheid":
+                    # User gaf geen cijfer 1-5 — vraag opnieuw
+                    response["type"] = "card_session_invalid"
+                    response["message"] = "Geef een cijfer tussen 1 en 5 (bv. '3'). Of typ 'skip' om over te slaan."
+                    _save_log(req, response, "card_session_invalid")
+                    session_state.set_state(req.user_id, pending_card_session=pending_card_session)
+                    return response
         # Volgende vraag bepalen
         next_q = card_session_service.next_question(pending_card_session)
         if next_q.get("done"):
@@ -124,6 +132,7 @@ async def process_message(req: ChatMessage):
         response["card_session"] = {
             "card_id": next_q["card_id"],
             "begrip": next_q["begrip"],
+            "category": next_q.get("category"),
             "field": next_q["field"],
             "progress": progress,
         }
@@ -304,6 +313,7 @@ async def process_message(req: ChatMessage):
         response["card_session"] = {
             "card_id": first_q["card_id"],
             "begrip": first_q["begrip"],
+            "category": first_q.get("category"),
             "field": first_q["field"],
             "progress": progress,
         }

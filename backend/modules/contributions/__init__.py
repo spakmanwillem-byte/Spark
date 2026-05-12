@@ -140,10 +140,8 @@ def get_card(card_id: str) -> dict:
     return None
 
 
-def save_partial(card_id: str, field_updates: dict) -> dict:
-    """Sla partial ws5-updates op (alleen niet-lege strings). Return updated card."""
-    if not field_updates:
-        return get_card(card_id)
+def save_partial(card_id: str, field_updates: dict, lagen_updates: dict = None, belangrijkheid: int = None) -> dict:
+    """Sla partial ws5 + lagen + belangrijkheid updates op. Return updated card."""
     data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
     entries = data.get("knowledge_entries", [])
     target = None
@@ -153,29 +151,45 @@ def save_partial(card_id: str, field_updates: dict) -> dict:
             break
     if not target:
         return None
-    ws5 = target.get("ws5") or {f: "" for f in FIELDS}
-    for f, v in field_updates.items():
-        if f in FIELDS and isinstance(v, str):
-            ws5[f] = v.strip()[:300]
-    target["ws5"] = ws5
+    # ws5
+    if field_updates:
+        ws5 = target.get("ws5") or {f: "" for f in FIELDS}
+        for f, v in field_updates.items():
+            if f in FIELDS and isinstance(v, str):
+                ws5[f] = v.strip()[:300]
+        target["ws5"] = ws5
+    # lagen
+    if lagen_updates:
+        lagen = target.get("lagen") or {"laag1": "", "laag2": "", "laag3": "", "laag4": ""}
+        for L, v in lagen_updates.items():
+            if L in ("laag1", "laag2", "laag3", "laag4") and isinstance(v, str):
+                lagen[L] = v.strip()[:600]
+        target["lagen"] = lagen
+    # belangrijkheid
+    if belangrijkheid is not None:
+        try:
+            n = int(belangrijkheid)
+            if 1 <= n <= 5:
+                target["belangrijkheid"] = n
+        except (ValueError, TypeError):
+            pass
     save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
     return target
 
 
-def submit_for_review(user_id: str, card_id: str, ws5_data: dict) -> dict:
-    """
-    Markeer kaart als ingediend voor admin review.
-    - Sla ws5 op
-    - Tag 'pending-review' + tag user-{user_id}-bijdrage
-    - Release claim
-    - Return: {success, fields_filled, percentage, eligible_for_xp}
-    """
-    target = save_partial(card_id, ws5_data or {})
+def submit_for_review(user_id: str, card_id: str, ws5_data: dict, lagen_data: dict = None, belangrijkheid: int = None) -> dict:
+    """Markeer kaart als ingediend voor admin review."""
+    target = save_partial(card_id, ws5_data or {}, lagen_data, belangrijkheid)
     if not target:
         return {"success": False, "error": "card_not_found"}
     ws5 = target.get("ws5") or {}
-    filled_count = sum(1 for f in FIELDS if (ws5.get(f) or "").strip())
-    percentage = round(filled_count / len(FIELDS) * 100)
+    lagen = target.get("lagen") or {}
+    ws5_filled = sum(1 for f in FIELDS if (ws5.get(f) or "").strip())
+    lagen_filled = sum(1 for L in ("laag1", "laag2", "laag3", "laag4") if (lagen.get(L) or "").strip())
+    belang_filled = 1 if target.get("belangrijkheid") is not None else 0
+    total_filled = ws5_filled + lagen_filled + belang_filled
+    total_max = len(FIELDS) + 4 + 1  # 6 ws5 + 4 lagen + 1 belangrijkheid = 11
+    percentage = round(total_filled / total_max * 100)
 
     data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
     for e in data["knowledge_entries"]:
@@ -187,12 +201,13 @@ def submit_for_review(user_id: str, card_id: str, ws5_data: dict) -> dict:
             if contrib_tag not in tags:
                 tags.append(contrib_tag)
             e["tags"] = tags
-            # Houd bij wie de bijdrage deed + % gevuld
             meta = e.get("metadata") or {}
             meta["contribution"] = {
                 "user_id": user_id,
                 "submitted_at": _now(),
-                "fields_filled": filled_count,
+                "fields_filled": total_filled,
+                "ws5_filled": ws5_filled,
+                "lagen_filled": lagen_filled,
                 "percentage": percentage,
             }
             e["metadata"] = meta
@@ -201,7 +216,7 @@ def submit_for_review(user_id: str, card_id: str, ws5_data: dict) -> dict:
     release_claim(user_id, reason="submitted")
     return {
         "success": True,
-        "fields_filled": filled_count,
+        "fields_filled": total_filled,
         "percentage": percentage,
         "eligible_for_xp": percentage >= 75,
     }

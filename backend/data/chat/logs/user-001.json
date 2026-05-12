@@ -2561,11 +2561,287 @@
         "session_id": "default",
         "gesprek_nummer": 100
       }
+    },
+    {
+      "id": "conv-badf3533",
+      "timestamp": "2026-05-12T10:38:24.691844+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil een kaart invullen",
+      "spark_response": "Top! Ik heb **50 kaart(en)** klaar staan om in te vullen. We gaan ze 1 voor 1 doen, 6 vragen per kaart (W+H).\n\n_(Kaart 1/50: **acties**)_\n\nWat is **acties** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_started",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "card_session_started"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 101
+      }
+    },
+    {
+      "id": "conv-a8654fd1",
+      "timestamp": "2026-05-12T10:38:25.139573+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "een korte test definitie",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWanneer komt **acties** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 102
+      }
+    },
+    {
+      "id": "conv-0e9dd266",
+      "timestamp": "2026-05-12T10:38:51.028827+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWaar hoort **acties** bij — locatie of plek?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 103
+      }
+    },
+    {
+      "id": "conv-573d0926",
+      "timestamp": "2026-05-12T10:38:51.256769+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWie is er bij **acties** betrokken?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 104
+      }
+    },
+    {
+      "id": "conv-df2841f4",
+      "timestamp": "2026-05-12T10:38:51.483525+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWaarom is **acties** belangrijk of relevant?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 105
+      }
+    },
+    {
+      "id": "conv-70d49ee4",
+      "timestamp": "2026-05-12T10:38:51.663290+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nHoe werkt **acties** of hoe ervaar je het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 106
+      }
+    },
+    {
+      "id": "conv-4f35213a",
+      "timestamp": "2026-05-12T10:38:51.866609+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nHoe leg je **acties** in één korte zin uit?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 107
+      }
+    },
+    {
+      "id": "conv-f2b1e887",
+      "timestamp": "2026-05-12T10:38:52.088701+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nVertel iets meer over **acties** — wat is de context erbij?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 108
+      }
+    },
+    {
+      "id": "conv-aaaaa084",
+      "timestamp": "2026-05-12T10:38:52.357476+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWat is de uitgebreide achtergrond van **acties**?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 109
+      }
+    },
+    {
+      "id": "conv-eb1127c1",
+      "timestamp": "2026-05-12T10:38:52.536709+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 1/50: **acties**)_\n\nWat is de diepere betekenis of waarde van **acties** voor jou?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 110
+      }
+    },
+    {
+      "id": "conv-e1dc7c9f",
+      "timestamp": "2026-05-12T10:38:52.790586+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "skip",
+      "spark_response": "_(Kaart 2/50: **activiteiten**)_\n\nWat is **activiteiten** kort gezegd?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 111
+      }
+    },
+    {
+      "id": "conv-4f3b1721",
+      "timestamp": "2026-05-12T10:38:53.192024+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "4",
+      "spark_response": "_(Kaart 2/50: **activiteiten**)_\n\nWanneer komt **activiteiten** voor of speelt het?\n\n_(antwoord, of typ 'skip' om dit veld over te slaan, 'stop' om te pauzeren)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "card_session_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "card_session_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 112
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 100,
-    "last_updated": "2026-05-12T10:09:14.140587+00:00"
+    "total_conversations": 112,
+    "last_updated": "2026-05-12T10:38:53.192024+00:00"
   }
 }

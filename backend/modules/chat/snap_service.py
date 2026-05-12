@@ -69,9 +69,14 @@ class SnapNLPService:
         return data.get("knowledge_entries", [])
 
     def _build_index(self, entries):
-        """Bouw een snelle lookup index op begrip (lowercase)"""
+        """Bouw een snelle lookup index op begrip (lowercase).
+        Zin-snaps (tag 'context-zin') worden uit de lookup-index gehouden zodat
+        ze niet matchen op losse woorden in een nieuwe zin."""
         index = {}
         for e in entries:
+            tags = e.get("tags") or []
+            if "context-zin" in tags or (e.get("metadata") or {}).get("is_sentence"):
+                continue
             begrip = (e.get("begrip") or "").lower().strip()
             if begrip:
                 if begrip not in index:

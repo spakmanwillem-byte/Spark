@@ -1445,11 +1445,287 @@
         "session_id": "default",
         "gesprek_nummer": 55
       }
+    },
+    {
+      "id": "conv-f92cf5a5",
+      "timestamp": "2026-05-12T01:50:58.574437+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vandaag heb ik een ploemfa gezien",
+      "spark_response": "Ik hoorde dat je een **heb** hebt (vandaag). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 56
+      }
+    },
+    {
+      "id": "conv-1bab0d70",
+      "timestamp": "2026-05-12T01:50:58.810356+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren bij mijn moeder",
+      "spark_response": "Ik ken 'gisteren heb ik een suikerspin gegeten' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gisteren heb ik een suikerspin gegeten"
+          },
+          {
+            "begrip": "Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 57
+      }
+    },
+    {
+      "id": "conv-9efdc778",
+      "timestamp": "2026-05-12T01:51:16.833102+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik dacht aan een zumzum",
+      "spark_response": "Ik ken deze woorden nog niet: **dacht, zumzum**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nKan je in het kort uitleggen wat 'zumzum' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "dacht",
+          "zumzum"
+        ],
+        "snap_suggestions": [
+          "dacht",
+          "zumzum"
+        ],
+        "word_count": 5,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 58
+      }
+    },
+    {
+      "id": "conv-57314740",
+      "timestamp": "2026-05-12T01:51:17.057095+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "het was gisteren bij mijn moeder",
+      "spark_response": "Ik ken 'gisteren heb ik een suikerspin gegeten' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gisteren heb ik een suikerspin gegeten"
+          },
+          {
+            "begrip": "Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 59
+      }
+    },
+    {
+      "id": "conv-81b94fd6",
+      "timestamp": "2026-05-12T01:52:13.303419+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik dacht aan klabberdoes",
+      "spark_response": "Ik ken 'dacht' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **klabberdoes** (opgeslagen als kaarten)\n\nWat houdt 'klabberdoes' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dacht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "klabberdoes"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 60
+      }
+    },
+    {
+      "id": "conv-378b4fe7",
+      "timestamp": "2026-05-12T01:52:14.856548+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "het was gisteren bij mijn moeder",
+      "spark_response": "**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\nNieuw geleerd: **gisteren** (opgeslagen als kaarten)\n\nWat houdt 'gisteren' eigenlijk in?\n\n_(terloops genoteerd → wanneer: gisteren, wie: mijn moeder)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gisteren"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 61
+      }
+    },
+    {
+      "id": "conv-edb9354d",
+      "timestamp": "2026-05-12T01:53:04.467055+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kweeple",
+      "spark_response": "Ik ken deze woorden nog niet: **kweeple**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat houdt 'kweeple' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "kweeple"
+        ],
+        "snap_suggestions": [
+          "kweeple"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 62
+      }
+    },
+    {
+      "id": "conv-3470dd58",
+      "timestamp": "2026-05-12T01:53:04.847696+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "morgen ga ik naar Antwerpen met mijn buurman",
+      "spark_response": "Ik hoorde dat je een **ga** in Antwerpen hebt (morgen). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 63
+      }
+    },
+    {
+      "id": "conv-54cfeacf",
+      "timestamp": "2026-05-12T01:53:21.509425+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vandaag bij de supermarkt",
+      "spark_response": "Ik hoorde dat je een **supermarkt** hebt (vandaag). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 64
+      }
+    },
+    {
+      "id": "conv-c65c4003",
+      "timestamp": "2026-05-12T01:53:23.639947+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "gisteren in Den Haag met mijn moeder",
+      "spark_response": "Ik ken 'gisteren' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **den, haag** (opgeslagen als kaarten)\n\nWat betekent 'haag' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gisteren"
+          },
+          {
+            "begrip": "Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "den",
+          "haag"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 65
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 55,
-    "last_updated": "2026-05-12T01:42:48.257923+00:00"
+    "total_conversations": 65,
+    "last_updated": "2026-05-12T01:53:23.639947+00:00"
   }
 }

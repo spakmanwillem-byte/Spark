@@ -2603,6 +2603,15 @@
         "priority": "high",
         "completed_date": "2026-05-12",
         "notes": "Sluit ook partial-match bug af (3-char acroniemen matchten op lange woorden)."
+      },
+      {
+        "id": "v4_007",
+        "titel": "Spontane W-vulling (vrije zin)",
+        "beschrijving": "Wanneer user in vrije zin Wie/Wanneer/Waar noemt, vult Spark stilletjes lege ws5-velden van de actieve snap. Veiligheidsregels: alleen 'auto-generated' kaarten, alleen lege velden, geen overschrijven, terloopse hint in respons. Persoonskaarten-namen worden hergebruikt voor who-detectie.",
+        "status": "done",
+        "priority": "medium",
+        "completed_date": "2026-05-12",
+        "notes": "Tag spontaan-verrijkt toegevoegd. Zin-snaps (context-zin) gefilterd uit lookup-index zodat ze niet matchen op losse woorden."
       }
     ]
   },
@@ -3185,6 +3194,7 @@
     "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)",
     "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat.",
     "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando.",
-    "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten)."
+    "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten).",
+    "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten)."
   ]
 }

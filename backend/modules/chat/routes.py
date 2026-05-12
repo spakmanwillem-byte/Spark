@@ -16,6 +16,7 @@ from . import wedervraag_service
 from . import agenda_intent_service
 from . import scan_service
 from . import compositional_service
+from . import spontaneous_w_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -69,6 +70,16 @@ async def process_message(req: ChatMessage):
 
     # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
     state = session_state.get_state(req.user_id) if req.user_id else {}
+
+    # 0d. SPONTANE W-VULLING (v4_007): stille verrijking van actieve snap
+    # Veiligheid: alleen op last_entry_id, alleen als nog auto-generated, alleen lege velden
+    spontaneous_hint = ""
+    if req.user_id and state.get("last_entry_id"):
+        sp_fields = spontaneous_w_service.extract_w_fields(text)
+        if sp_fields:
+            filled = spontaneous_w_service.apply_to_active_card(state["last_entry_id"], sp_fields)
+            if filled:
+                spontaneous_hint = "\n\n" + spontaneous_w_service.build_hint(filled)
 
     # 0a. AGENDA-PROPOSAL-FLOW (v3_303): wachten op ja/nee voor genoteerd voorstel
     pending_agenda = state.get("pending_agenda")
@@ -446,14 +457,16 @@ async def process_message(req: ChatMessage):
                             "question": first_decomp["decomp"]["message"],
                             "asked_count": 1,
                             "max_questions": 1,
-                        })
+                        }, last_entry_id=target_entry["id"], last_begrip=target_entry["begrip"])
                 # Wedervraag (v4_001b): vraag 5W+H verrijking — alleen als geen compositional
                 elif last_entry and req.user_id:
                     wv = wedervraag_service.kick_off(last_entry)
                     if wv:
-                        session_state.set_state(req.user_id, pending_wedervraag=wv)
+                        session_state.set_state(req.user_id, pending_wedervraag=wv, last_entry_id=last_entry["id"], last_begrip=last_entry["begrip"])
                         response["message"] += f"\n\n{wv['question']}"
                         response["wedervraag"] = wv
+                    else:
+                        session_state.set_state(req.user_id, last_entry_id=last_entry["id"], last_begrip=last_entry["begrip"])
             else:
                 response["message"] = f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}."
             response["type"] = "unknown"
@@ -465,6 +478,11 @@ async def process_message(req: ChatMessage):
             else:
                 response["message"] = "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!"
                 response["type"] = "general"
+
+    # Append spontane W-hint (v4_007) als er stilletjes iets is bijgewerkt
+    if spontaneous_hint and response.get("message"):
+        response["message"] = response["message"] + spontaneous_hint
+        response["spontaneous_w_filled"] = True
 
     _save_log(req, response, None)
     return response

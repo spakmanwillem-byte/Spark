@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 60,
+    "progress": 62,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2716,6 +2716,15 @@
         "progress": 100,
         "completed_date": "2026-05-13",
         "beschrijving": "spark_vocab.json met 5 emoties × 4 intenties (begroeting/bedanken/afscheid/reactie) = 20 lijsten + 5 algemene categorieën (twijfel, enthousiasme, zelfspot, openers, afsluiters). Elke lijst start met 4 woorden. Vocab CRUD endpoints op /api/spark/vocab. Vocab verschijnt in Triggers-pagina als type 'vocab' (paars) met inline add/delete chip-knoppen zodat user lijsten zelf kan aanpassen."
+      },
+      {
+        "id": "v4_013c",
+        "titel": "Statische strings naar JSON + alle trigger-lijsten editable",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-13",
+        "beschrijving": "Alle hard-coded fallback-strings uit chat/routes.py verplaatst naar system_fallback.json (general_fallback, unknown_words_partial, wedervraag_done/skip, agenda_declined, card_session_stopped/empty/denied, scan_denied). Nieuwe fallback_service.pick(key, default) helper. Triggers-pagina: ALLE groepen (conversation/calendar/emotion/admin/system/vocab) editable met inline add/delete chips voor triggers EN responses-lijsten. Generieke CRUD-endpoint /api/triggers/edit/{kind}/{key}/add + DELETE met support voor emotion-dict, responses_only system-groepen."
       }
     ],
     "last_updated": "2026-05-13"
@@ -3241,7 +3250,7 @@
     ],
     "in_progress": [
       "v3.2 - Spark AI Mini Survival Game - Fase 3 (85% complete)",
-      "v4.0 - Personality & Conversational Depth (60% complete)"
+      "v4.0 - Personality & Conversational Depth (62% complete)"
     ],
     "upcoming": [
       "v4_010 [info]-haakjes + v4_012 tone-aware bijbel-responses",
@@ -3307,6 +3316,7 @@
     "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned.",
     "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned.",
     "2026-05-13: v4_011 Conversationele Diepte VOLTOOID (laag 2/3/4 via 'vertel meer', 'leg dieper uit', etc + sentence-snap fuzzy match). v4_011a Emotie-tag flex matching (losse #emotie+#blij/boos/bang/bedroefd/neutraal tags). v4_011b Spark Bijbel CRUD + chat-integratie (13 self-question intents). 4 backlog items toegevoegd: v4_012 tone-aware, v4_013 persoonlijkheid-laag (Fase C), v4_014 reactie-voorbeelden editor, v4_015 duplicaat bijbel opruimen.",
-    "2026-05-13: v4_013a Spark Vocab VOLTOOID — woordenlijsten (5 emoties × 4 intenties + 5 algemene categorieën, 100 woorden seed) beheerbaar via Triggers-pagina met inline add/delete. v4_013 hernoemd naar v4_013b (response composer)."
+    "2026-05-13: v4_013a Spark Vocab VOLTOOID — woordenlijsten (5 emoties × 4 intenties + 5 algemene categorieën, 100 woorden seed) beheerbaar via Triggers-pagina met inline add/delete. v4_013 hernoemd naar v4_013b (response composer).",
+    "2026-05-13: v4_013c VOLTOOID — statische strings uit routes.py naar system_fallback.json + fallback_service helper. ALLE trigger-groepen (conv/cal/emo/admin/system/vocab) editable in Triggers-pagina via generieke /api/triggers/edit/{kind}/{key}/add+DELETE."
   ]
 }

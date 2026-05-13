@@ -19,6 +19,7 @@ from . import compositional_service
 from . import spontaneous_w_service
 from . import card_session_service
 from . import bijbel_lookup_service
+from . import fallback_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -81,7 +82,10 @@ async def process_message(req: ChatMessage):
         if card_session_service.is_stop(text):
             session_state.set_state(req.user_id, pending_card_session=None)
             response["type"] = "card_session_stopped"
-            response["message"] = "Oké, sessie gepauzeerd. Voortzetten? Typ 'ik wil kaarten invullen' om verder te gaan."
+            response["message"] = fallback_service.pick(
+                "card_session_stopped",
+                "Oké, sessie gepauzeerd. Voortzetten? Typ 'ik wil kaarten invullen' om verder te gaan.",
+            )
             _save_log(req, response, "card_session_stopped")
             return response
         # Skip → markeer huidig veld als overgeslagen
@@ -182,7 +186,9 @@ async def process_message(req: ChatMessage):
         elif snap.detect_rejection(text) or wedervraag_service.is_skip(text):
             session_state.set_state(req.user_id, pending_agenda=None)
             response["type"] = "agenda_declined"
-            response["message"] = "Oké, ik laat het zo. Niks in je agenda gezet."
+            response["message"] = fallback_service.pick(
+                "agenda_declined", "Oké, ik laat het zo. Niks in je agenda gezet."
+            )
             _save_log(req, response, "agenda_declined")
             return response
         # Geen ja/nee — laat staan, val door
@@ -194,7 +200,10 @@ async def process_message(req: ChatMessage):
         if wedervraag_service.is_skip(text):
             session_state.set_state(req.user_id, pending_wedervraag=None)
             response["type"] = "wedervraag_skip"
-            response["message"] = "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen."
+            response["message"] = fallback_service.pick(
+                "wedervraag_skip",
+                "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+            )
             _save_log(req, response, "wedervraag_skip")
             return response
         # Antwoord opslaan in ws5 van die snap
@@ -214,7 +223,9 @@ async def process_message(req: ChatMessage):
             else:
                 session_state.set_state(req.user_id, pending_wedervraag=None)
                 response["type"] = "wedervraag_done"
-                response["message"] = "Dank je! De kaart heb ik bijgewerkt."
+                response["message"] = fallback_service.pick(
+                    "wedervraag_done", "Dank je! De kaart heb ik bijgewerkt."
+                )
                 _save_log(req, response, "wedervraag_done")
                 return response
 
@@ -291,13 +302,19 @@ async def process_message(req: ChatMessage):
         gradatie = _get_user_gradatie(req.user_id)
         if gradatie not in (1, 2):
             response["type"] = "card_session_denied"
-            response["message"] = "Sorry, het kaarten-invullen sessie is alleen voor admin (gradatie 1 of 2)."
+            response["message"] = fallback_service.pick(
+                "card_session_denied",
+                "Sorry, de kaart-invul sessie is alleen voor admin (gradatie 1 of 2).",
+            )
             _save_log(req, response, "card_session_denied")
             return response
         sess = card_session_service.start_session(max_items=50)
         if sess.get("done") or not sess.get("queue"):
             response["type"] = "card_session_empty"
-            response["message"] = "Er zijn op dit moment geen onbeantwoorde kaarten met lege velden. Top!"
+            response["message"] = fallback_service.pick(
+                "card_session_empty",
+                "Er zijn op dit moment geen onbeantwoorde kaarten met lege velden. Top!",
+            )
             _save_log(req, response, "card_session_empty")
             return response
         first_q = card_session_service.next_question(sess)
@@ -327,7 +344,9 @@ async def process_message(req: ChatMessage):
         gradatie = _get_user_gradatie(req.user_id)
         if gradatie not in (1, 2):
             response["type"] = "scan_denied"
-            response["message"] = "Sorry, het scan-commando is alleen voor admin (gradatie 1 of 2)."
+            response["message"] = fallback_service.pick(
+                "scan_denied", "Sorry, het scan-commando is alleen voor admin (gradatie 1 of 2)."
+            )
             _save_log(req, response, "scan_denied")
             return response
         result = scan_service.scan_for_new_subjects(user_naam=req.user_naam or "Spark", max_create=100)
@@ -684,15 +703,25 @@ async def process_message(req: ChatMessage):
                     else:
                         session_state.set_state(req.user_id, last_entry_id=last_entry["id"], last_begrip=last_entry["begrip"])
             else:
-                response["message"] = f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}."
+                response["message"] = fallback_service.pick(
+                    "unknown_words_partial",
+                    f"Hmm, ik ken deze woorden nog niet helemaal: {', '.join(unknown)}.",
+                    words=", ".join(unknown),
+                )
             response["type"] = "unknown"
         else:
             # Gewoon antwoord als er niks te matchen valt
             if snap.is_question(text):
-                response["message"] = "Goede vraag! Daar heb ik helaas nog geen antwoord op. Wil je het toevoegen aan de Kennisbank?"
+                response["message"] = fallback_service.pick(
+                    "topic_not_found",
+                    "Goede vraag! Daar heb ik helaas nog geen antwoord op. Wil je het toevoegen aan de Kennisbank?",
+                )
                 response["type"] = "question"
             else:
-                response["message"] = "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!"
+                response["message"] = fallback_service.pick(
+                    "general_fallback",
+                    "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+                )
                 response["type"] = "general"
 
     # Append spontane W-hint (v4_007) als er stilletjes iets is bijgewerkt

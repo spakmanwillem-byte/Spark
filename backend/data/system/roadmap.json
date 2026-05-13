@@ -1732,13 +1732,13 @@
     }
   },
   "metadata": {
-    "completed": 71,
+    "completed": 51,
     "in_progress": 1,
-    "todo": 1,
-    "planned": 3,
-    "vision": 25,
-    "total_items": 116,
-    "last_updated": "2026-03-28T17:00:00.000000",
+    "todo": 5,
+    "planned": 10,
+    "vision": 7,
+    "total_items": 74,
+    "last_updated": "2026-05-13T13:44:39.666479+00:00",
     "notes": [
       "v0.9: Refactoring + stabiliteit afgerond",
       "v1.0: ✅ MVP 100% COMPLEET!",
@@ -1753,9 +1753,9 @@
       "v4.1: 🔍 REALITY CHECK - Module Sandbox, 3-Layer Architecture (Trigger→NLP→Knowledge), File Browser, Navigation, Help modal (100%)",
       "v5.0: 🌍 VISION - Spark Ecosystem (Knowledge→Items, Pool economie, 5 Facties, Learn-to-Earn, Game Sandbox vs Module Sandbox)"
     ],
-    "total_items_today": 4,
+    "total_items_today": 3,
     "blocked": 0,
-    "current_phase": "v4.1",
+    "current_phase": "v4.0 - Personality & Conversational Depth",
     "archive_location": "/app/backend/data/archives/",
     "latest_archive": "phase_1_foundation"
   },
@@ -2515,8 +2515,8 @@
   "v4.0": {
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
-    "status": "planned",
-    "progress": 0,
+    "status": "in_progress",
+    "progress": 58,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2651,12 +2651,65 @@
       {
         "id": "v4_011",
         "titel": "Lagen-reacties koppelen aan triggers",
-        "beschrijving": "Voor zin-snaps: laag 1-4 zijn Spark's reacties op die context. Idee: bind deze automatisch als trigger-respons in conversation_triggers indien matchend patroon.",
+        "beschrijving": "Conversationele Diepte: Spark gebruikt laag2/3/4 via natuurlijke triggers ('vertel meer', 'leg dieper uit', 'ga dieper', expliciete 'laag 2/3/4'). Sentence-snap fuzzy match met 3+ woordoverlap = conversationele reactie. Hint na knowledge-match wanneer diepere lagen gevuld zijn.",
+        "status": "done",
+        "priority": "medium",
+        "notes": "Door user genoemd bij v4_009c bouw.",
+        "progress": 100,
+        "completed_date": "2026-05-13"
+      },
+      {
+        "id": "v4_011a",
+        "titel": "Emotie-tag flex matching",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-13",
+        "beschrijving": "Losse tags #emotie + #blij/boos/bang/bedroefd/neutraal op dezelfde kaart worden nu herkend door emotion_service. Neutraal toegevoegd als 5e emotie. Status-filter verwijderd (draft kaarten tellen mee). 81 blij + 68 neutraal woorden direct geleerd uit bestaande kaarten."
+      },
+      {
+        "id": "v4_011b",
+        "titel": "Spark Bijbel CRUD + Chat-integratie (Fase B)",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-13",
+        "beschrijving": "SECTION_SCHEMAS uitgebreid met ws5/lagen/tags/sterren/voorbeelden. Nieuwe bijbel_lookup_service.py detecteert 13 self-question intents (voorkeur blij/boos/bang/bedroefd, missie/visie/doel/functie/filosofie/geloof/behoefte/waarde/norm). Tag-match op kernwaarden+normen+bijbel_items met identity-fallback. Frontend editor-modal met alle velden, +/edit/delete knoppen per item."
+      },
+      {
+        "id": "v4_012",
+        "titel": "Tone-aware responses via Bijbel-tags",
         "status": "planned",
         "priority": "medium",
-        "notes": "Door user genoemd bij v4_009c bouw."
+        "progress": 0,
+        "beschrijving": "Spark past antwoord-toon aan op gedetecteerde user-emotie door eerst in Spark Bijbel naar tags zoals #empathie/#zorg/#peptalk te zoeken, voordat hij terugvalt op statische empathic_responses uit emotion_triggers.json."
+      },
+      {
+        "id": "v4_013",
+        "titel": "Persoonlijkheid-laag — Stopwoorden + spark_vocab (Fase C)",
+        "status": "planned",
+        "priority": "medium",
+        "progress": 0,
+        "beschrijving": "Stopwoorden uit snap_service.py naar /data/personality/stopwoorden.json (editable). Nieuwe spark_vocab.json met categorieën (begroetingen, enthousiast, twijfel, afsluiters) zodat Spark dialect/eigen stem uit JSON put i.p.v. statische strings in code."
+      },
+      {
+        "id": "v4_014",
+        "titel": "Reactie-voorbeelden editable in Spark Bijbel UI",
+        "status": "planned",
+        "priority": "low",
+        "progress": 0,
+        "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
+      },
+      {
+        "id": "v4_015",
+        "titel": "Duplicaat spark_bijbel.json opruimen",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "beschrijving": "Duplicaat /data/spark_bijbel.json (root) opruimen — canonical pad is /data/personality/spark_bijbel.json. Root-versie verwijderen of symlinken."
       }
-    ]
+    ],
+    "last_updated": "2026-05-13"
   },
   "v5.0": {
     "naam": "🎓 Learning & Adaptation",
@@ -2815,13 +2868,13 @@
       "v3.0 - Smart Analysis Pipeline",
       "v3.1 - Validation & Optimization"
     ],
-    "current_phase": "v3.3 - User Dashboard & Layout (75% done)",
-    "next_major_milestone": "v3.3 complete → 'Mijn Profiel' fully functional",
-    "total_done": 94,
+    "current_phase": "v4.0 - Personality & Conversational Depth (58% done)",
+    "next_major_milestone": "v4_010 [info] explicit-answer brackets + v4_012 tone-aware bijbel responses",
+    "total_done": 51,
     "total_in_progress": 1,
-    "total_planned": 15,
-    "total_vision": 8,
-    "last_updated": "2026-03-13T18:35:00Z",
+    "total_planned": 10,
+    "total_vision": 7,
+    "last_updated": "2026-05-13T13:44:39.666519+00:00",
     "notes": [
       "v0.9: Refactoring + stabiliteit afgerond",
       "v1.0: ✅ MVP 100% COMPLEET! Admin panel fully working, UI responsive, gradatie management",
@@ -3178,9 +3231,11 @@
       "v4.1 - Reality Check & Module Sandbox (Stoppenkast)"
     ],
     "in_progress": [
-      "v3.2 - Spark AI Mini Survival Game - Fase 3 (85% complete)"
+      "v3.2 - Spark AI Mini Survival Game - Fase 3 (85% complete)",
+      "v4.0 - Personality & Conversational Depth (58% complete)"
     ],
     "upcoming": [
+      "v4_010 [info]-haakjes + v4_012 tone-aware bijbel-responses",
       "v3.2 completion - Actor Movement & Territory Claiming",
       "v3.3 - Warehouse & Economie Systeem",
       "v3.4 - Handelssysteem & Factiemechanismen"
@@ -3241,6 +3296,7 @@
     "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten).",
     "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in.",
     "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned.",
-    "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned."
+    "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned.",
+    "2026-05-13: v4_011 Conversationele Diepte VOLTOOID (laag 2/3/4 via 'vertel meer', 'leg dieper uit', etc + sentence-snap fuzzy match). v4_011a Emotie-tag flex matching (losse #emotie+#blij/boos/bang/bedroefd/neutraal tags). v4_011b Spark Bijbel CRUD + chat-integratie (13 self-question intents). 4 backlog items toegevoegd: v4_012 tone-aware, v4_013 persoonlijkheid-laag (Fase C), v4_014 reactie-voorbeelden editor, v4_015 duplicaat bijbel opruimen."
   ]
 }

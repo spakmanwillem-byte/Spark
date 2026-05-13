@@ -373,6 +373,43 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, trigger_type)
         return response
 
+    # 1.4 DIEPERE UITLEG FLOW (v4_011) — user vraagt om laag 2/3/4 van laatste begrip
+    if req.user_id and state.get("last_entry_id"):
+        deeper = snap.detect_deeper_request(text)
+        if deeper is not None:
+            cur_depth = int(state.get("current_depth") or 1)
+            target = deeper if deeper > 0 else min(cur_depth + 1, 4)
+            target = max(1, min(target, 4))
+            entry = snap.get_entry_by_id(state["last_entry_id"])
+            if entry:
+                actual_depth, layer_text, fallback = snap.get_layer(entry, target)
+                begrip = entry.get("begrip", "")
+                if layer_text:
+                    depth_labels = {1: "kort", 2: "uitgebreider", 3: "diepgaand", 4: "essentieel"}
+                    label = depth_labels.get(actual_depth, f"laag {actual_depth}")
+                    prefix = ""
+                    if fallback and target > actual_depth:
+                        prefix = f"_(Laag {target} is nog leeg, dit is laag {actual_depth} — {label})_\n\n"
+                    response["type"] = "knowledge_deeper"
+                    response["message"] = f"{prefix}**{begrip}** _(laag {actual_depth} — {label})_: {layer_text}"
+                    response["knowledge_matches"] = [snap._format_result(entry, "deeper")]
+                    session_state.set_state(
+                        req.user_id,
+                        last_begrip=begrip,
+                        last_entry_id=entry.get("id"),
+                        current_depth=actual_depth,
+                    )
+                    _save_log(req, response, "knowledge_deeper")
+                    return response
+                else:
+                    response["type"] = "knowledge_deeper_empty"
+                    response["message"] = (
+                        f"Ik heb voor **{begrip}** nog geen diepere uitleg in laag {target}. "
+                        "Wil je het aanvullen in de Kennisbank of via de Bijdragen-portal?"
+                    )
+                    _save_log(req, response, "knowledge_deeper_empty")
+                    return response
+
     # 1.5 AGENDA INTENT DETECTIE (v3_303) — vóór knowledge lookup
     # Als zin tijd + (wat/waar) bevat → voorstel om te noteren
     if req.user_id:
@@ -440,18 +477,50 @@ async def process_message(req: ChatMessage):
         return response
 
     # 2. Knowledge lookup - zoek alle begrippen in de zin
+    # 2a. ZIN-SNAP HIGH-CONFIDENCE MATCH (v4_011, Optie B): als 3+ woorden
+    # overlappen met een opgeslagen contextzin die gevulde lagen heeft, krijgt
+    # die zin voorrang op losse woord-lookup (anders eet 'gisteren' de hele zin op).
+    sent_match_strong = snap.lookup_sentence_match(text, min_overlap=3, min_ratio=0.5)
+    if sent_match_strong:
+        layer_text = ""
+        used_depth = 1
+        for d in (1, 2, 3, 4):
+            t = sent_match_strong.get(f"laag{d}", "")
+            if t:
+                layer_text = t
+                used_depth = d
+                break
+        prefix = ""
+        if emotion and emotion.get("empathic_response"):
+            prefix = emotion["empathic_response"] + "\n\n"
+        response["type"] = "sentence_reply"
+        response["message"] = (
+            f"{prefix}_(Dit doet me denken aan: \"{sent_match_strong['begrip']}\")_\n\n{layer_text}"
+        )
+        response["knowledge_matches"] = [sent_match_strong]
+        if req.user_id:
+            session_state.set_state(
+                req.user_id,
+                last_begrip=sent_match_strong.get("begrip", ""),
+                last_entry_id=sent_match_strong.get("id"),
+                current_depth=used_depth,
+            )
+        _save_log(req, response, "sentence_reply")
+        return response
+
     matches = snap.multi_lookup(text)
 
     if matches:
         response["knowledge_matches"] = matches
         best = matches[0]
-        # Sla laatste begrip op in state — voor rejection-flow (v3_012)
+        # Sla laatste begrip op in state — voor rejection-flow (v3_012) + reset depth
         if req.user_id:
             session_state.set_state(
                 req.user_id,
                 last_begrip=best.get("begrip", ""),
                 last_entry_id=best.get("id"),
                 awaiting_homonym_confirm=False,
+                current_depth=1,
             )
         laag1 = best.get("laag1", "")
         # Emotie prefix toevoegen als gedetecteerd
@@ -464,6 +533,9 @@ async def process_message(req: ChatMessage):
             else:
                 parts = [f"**{m['begrip']}**: {m['laag1']}" for m in matches if m.get('laag1')]
                 response["message"] = prefix + ("\n\n".join(parts) if parts else f"Ik ken '{best['begrip']}' maar heb nog geen uitleg.")
+            # Diepere-laag-hint als laag2/3/4 gevuld is
+            if any(best.get(k) for k in ("laag2", "laag3", "laag4")):
+                response["message"] += "\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_"
         else:
             response["message"] = f"{prefix}Ik ken '{best['begrip']}' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?"
         response["type"] = "knowledge"
@@ -497,6 +569,34 @@ async def process_message(req: ChatMessage):
                         response["message"] += f"\n\n{wv['question']}"
                         response["wedervraag"] = wv
     else:
+        # 2b. ZIN-SNAP FUZZY MATCH (v4_011, Optie B): probeer een eerder
+        # opgeslagen contextzin te vinden met overlap in betekenisvolle woorden.
+        sent_match = snap.lookup_sentence_match(text)
+        if sent_match:
+            # Pak hoogste gevulde laag (laag1 prioriteit → val terug op hogere)
+            layer_text = ""
+            used_depth = 1
+            for d in (1, 2, 3, 4):
+                t = sent_match.get(f"laag{d}", "")
+                if t:
+                    layer_text = t
+                    used_depth = d
+                    break
+            response["type"] = "sentence_reply"
+            response["message"] = (
+                f"_(Lijkt op een zin die ik eerder leerde: \"{sent_match['begrip']}\")_\n\n{layer_text}"
+            )
+            response["knowledge_matches"] = [sent_match]
+            if req.user_id:
+                session_state.set_state(
+                    req.user_id,
+                    last_begrip=sent_match.get("begrip", ""),
+                    last_entry_id=sent_match.get("id"),
+                    current_depth=used_depth,
+                )
+            _save_log(req, response, "sentence_reply")
+            return response
+
         # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)
         index = snap._get_index()

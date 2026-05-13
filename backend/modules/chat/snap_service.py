@@ -168,6 +168,7 @@ class SnapNLPService:
             "laag1": lagen.get("laag1", ""),
             "laag2": lagen.get("laag2", ""),
             "laag3": lagen.get("laag3", ""),
+            "laag4": lagen.get("laag4", ""),
             "topic": entry.get("topic", ""),
             "tags": entry.get("tags", []),
             "belangrijkheid": entry.get("belangrijkheid", 0),
@@ -182,6 +183,109 @@ class SnapNLPService:
                 "hoe": ws5.get("hoe", ""),
             },
         }
+
+    # ========== DEEP LAYERS & SENTENCE-SNAP MATCH (v4_011) ==========
+
+    def get_entry_by_id(self, entry_id):
+        """Haal een kaart op id uit de kennisbank."""
+        if not entry_id:
+            return None
+        entries = self._load_knowledge()
+        for e in entries:
+            if e.get("id") == entry_id:
+                return e
+        return None
+
+    def get_layer(self, entry, depth):
+        """Geef de tekst van een specifieke laag terug (laag1..laag4).
+        Fallback-keten: als gevraagde laag leeg is, val terug op de hoogste
+        wèl-gevulde laag <= depth. Geeft tuple (laag_nr, tekst, fallback_used)."""
+        if not entry:
+            return (depth, "", False)
+        lagen = entry.get("lagen", {}) or {}
+        depth = max(1, min(int(depth or 1), 4))
+        key = f"laag{depth}"
+        text = (lagen.get(key) or "").strip()
+        if text:
+            return (depth, text, False)
+        # Fallback: hoogste lagere laag die wel inhoud heeft
+        for d in range(depth - 1, 0, -1):
+            t = (lagen.get(f"laag{d}") or "").strip()
+            if t:
+                return (d, t, True)
+        return (depth, "", False)
+
+    def detect_deeper_request(self, text):
+        """Detecteer of user vraagt om een DIEPERE uitleg van het laatste begrip.
+
+        Geeft None of een int (gevraagde laag 2..4) terug.
+        - 'vertel meer', 'meer info', 'leg dieper uit', 'verdieping' → +1 t.o.v. huidig
+        - 'laag 2/3/4', 'tweede/derde/vierde laag' → expliciete diepte
+        """
+        t = text.lower().strip()
+        # Expliciete laag-nummers
+        explicit = {
+            "laag 2": 2, "laag 3": 3, "laag 4": 4,
+            "tweede laag": 2, "derde laag": 3, "vierde laag": 4,
+            "laag2": 2, "laag3": 3, "laag4": 4,
+        }
+        for key, lvl in explicit.items():
+            if key in t:
+                return lvl
+        # Generieke "dieper / meer" triggers → +1 vanaf huidige laag (door caller toegepast)
+        deeper_patterns = [
+            "vertel meer", "vertel me meer", "meer info", "meer informatie",
+            "meer hierover", "meer over dit", "meer over dat",
+            "leg dieper uit", "leg uit dieper", "dieper uitleggen", "dieper uit",
+            "diepere uitleg", "diepere betekenis", "diepere context",
+            "verdieping", "verdiep", "uitgebreidere uitleg", "uitgebreider",
+            "ga dieper", "vertel meer hierover", "vertel verder",
+            "leg meer uit", "wat nog meer", "ga verder",
+        ]
+        for p in deeper_patterns:
+            if p in t:
+                return -1  # signaal: +1 t.o.v. huidige diepte
+        return None
+
+    def lookup_sentence_match(self, text, min_overlap=2, min_ratio=0.5):
+        """Fuzzy match op `context-zin` snaps via woord-overlap.
+
+        Geeft beste sentence-snap entry terug die gevulde lagen heeft.
+        Vereisten:
+        - minimaal `min_overlap` betekenisvolle woorden gedeeld
+        - overlap-ratio (gedeelde/totaal in user-tekst) >= min_ratio
+        - de sentence-snap heeft minstens één laag gevuld
+        """
+        entries = self._load_knowledge()
+        user_words = set(self._extract_meaningful_words(text))
+        if len(user_words) < min_overlap:
+            return None
+        best = None
+        best_score = 0
+        for e in entries:
+            tags = e.get("tags") or []
+            is_sent = "context-zin" in tags or (e.get("metadata") or {}).get("is_sentence")
+            if not is_sent:
+                continue
+            lagen = e.get("lagen", {}) or {}
+            if not any((lagen.get(k) or "").strip() for k in ("laag1", "laag2", "laag3", "laag4")):
+                continue
+            sent_words = set(self._extract_meaningful_words(e.get("begrip", "")))
+            if not sent_words:
+                continue
+            overlap = user_words & sent_words
+            if len(overlap) < min_overlap:
+                continue
+            ratio = len(overlap) / max(1, len(user_words))
+            if ratio < min_ratio:
+                continue
+            score = len(overlap) * 10 + (e.get("belangrijkheid", 0) or 0)
+            if score > best_score:
+                best_score = score
+                best = e
+        if not best:
+            return None
+        return self._format_result(best, "sentence_match", matched_word=None)
 
     def _extract_meaningful_words(self, text):
         """Haal betekenisvolle woorden uit tekst (geen stopwoorden)"""

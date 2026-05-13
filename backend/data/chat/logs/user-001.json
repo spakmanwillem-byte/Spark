@@ -2837,11 +2837,555 @@
         "session_id": "default",
         "gesprek_nummer": 112
       }
+    },
+    {
+      "id": "conv-e2217a4b",
+      "timestamp": "2026-05-12T10:55:48.739853+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 113
+      }
+    },
+    {
+      "id": "conv-69cbdcef",
+      "timestamp": "2026-05-12T10:56:10.723054+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe is het met je?",
+      "spark_response": "Gaat redelijk, ik moet wat harder werken dan normaal. Dank je voor het vragen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 114
+      }
+    },
+    {
+      "id": "conv-2d6a32d6",
+      "timestamp": "2026-05-12T10:56:31.598099+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik wat te doen vandaag",
+      "spark_response": "Ik ken 'doen' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "doen"
+          },
+          {
+            "begrip": "Vandaag was druk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 115
+      }
+    },
+    {
+      "id": "conv-df8e9378",
+      "timestamp": "2026-05-12T10:56:47.600256+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee, mss later",
+      "spark_response": "Tot ziens De Willem!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 116
+      }
+    },
+    {
+      "id": "conv-993f712b",
+      "timestamp": "2026-05-12T10:56:58.301712+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik blijf wel",
+      "spark_response": "Ik ken deze woorden nog niet: **blijf**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat houdt 'blijf' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "blijf"
+        ],
+        "snap_suggestions": [
+          "blijf"
+        ],
+        "word_count": 3,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 117
+      }
+    },
+    {
+      "id": "conv-a20af625",
+      "timestamp": "2026-05-12T10:57:54.170613+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Blijf betekent dat iemand of iets op dezelfde plek, toestand of situatie blijft en niet weggaat of verandert.",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'blijf' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 18,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 118
+      }
+    },
+    {
+      "id": "conv-e64f6fab",
+      "timestamp": "2026-05-12T10:58:20.125423+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wanneer iets aanwezig, actief of onveranderd blijft.",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 119
+      }
+    },
+    {
+      "id": "conv-b26b112a",
+      "timestamp": "2026-05-12T10:58:33.814963+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan",
+      "spark_response": "Ik ken deze woorden nog niet: **gedaan**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat betekent 'gedaan' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "gedaan"
+        ],
+        "snap_suggestions": [
+          "gedaan"
+        ],
+        "word_count": 2,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 120
+      }
+    },
+    {
+      "id": "conv-63fd6cbc",
+      "timestamp": "2026-05-12T11:17:36.862451+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wil je",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 121
+      }
+    },
+    {
+      "id": "conv-aef0212f",
+      "timestamp": "2026-05-12T16:36:31.682017+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is het met je",
+      "spark_response": "Het gaat oké, niet top maar prima werkbaar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 122
+      }
+    },
+    {
+      "id": "conv-55a28df3",
+      "timestamp": "2026-05-12T16:37:05.709788+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kan ik je helpen",
+      "spark_response": "Ik ken deze woorden nog niet: **helpen**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat houdt 'helpen' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "helpen"
+        ],
+        "snap_suggestions": [
+          "helpen"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 123
+      }
+    },
+    {
+      "id": "conv-50022b97",
+      "timestamp": "2026-05-12T17:45:30.014645+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is het met je",
+      "spark_response": "Gaat redelijk, ik moet wat harder werken dan normaal. Dank je voor het vragen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 124
+      }
+    },
+    {
+      "id": "conv-e57acb22",
+      "timestamp": "2026-05-12T17:45:47.955443+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "werken is gezond",
+      "spark_response": "**werken**: Werken betekent activiteiten uitvoeren om een doel, resultaat of functie te bereiken.\n\n**Gezondheid**: Gezondheid is de toestand waarin lichaam en geest goed functioneren.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "werken"
+          },
+          {
+            "begrip": "Gezondheid"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 125
+      }
+    },
+    {
+      "id": "conv-7d200f77",
+      "timestamp": "2026-05-12T17:46:19.923279+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kan ik je helpen",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 126
+      }
+    },
+    {
+      "id": "conv-cadd0c0f",
+      "timestamp": "2026-05-12T17:46:57.839695+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 127
+      }
+    },
+    {
+      "id": "conv-6d7f921e",
+      "timestamp": "2026-05-12T17:47:01.935462+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 128
+      }
+    },
+    {
+      "id": "conv-b1df7806",
+      "timestamp": "2026-05-12T17:47:31.956739+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn dat je kennis elke dag groeit",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 129
+      }
+    },
+    {
+      "id": "conv-e61b8d94",
+      "timestamp": "2026-05-12T17:48:06.536886+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel mij hoe ik je kan helpen",
+      "spark_response": "**Vertel een verhaal**: De gebruiker vraagt om een verhaal.\n\n**helpen**: Helpen betekent ondersteuning geven zodat iemand of iets een doel, oplossing of verbetering kan bereiken.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vertel een verhaal"
+          },
+          {
+            "begrip": "helpen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 130
+      }
+    },
+    {
+      "id": "conv-952e32a0",
+      "timestamp": "2026-05-12T17:48:52.907270+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee ik wil jouw helpen",
+      "spark_response": "**helpen**: Helpen betekent ondersteuning geven zodat iemand of iets een doel, oplossing of verbetering kan bereiken.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "helpen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 131
+      }
+    },
+    {
+      "id": "conv-90c5b7aa",
+      "timestamp": "2026-05-12T17:49:12.904841+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja dat klopt",
+      "spark_response": "**Klopt**: Een bevestiging dat iets juist is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Klopt"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 132
+      }
+    },
+    {
+      "id": "conv-44459601",
+      "timestamp": "2026-05-12T17:49:45.104369+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil jouw helpen je zelf te verbeteren",
+      "spark_response": "**helpen**: Helpen betekent ondersteuning geven zodat iemand of iets een doel, oplossing of verbetering kan bereiken.\n\n**Verbeteren**: Verbeteren betekent iets beter maken dan het eerst was.\n\nNieuw geleerd: **zelf** (opgeslagen als kaarten)\n\nWat betekent 'zelf' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "helpen"
+          },
+          {
+            "begrip": "Verbeteren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "zelf"
+        ],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 133
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 112,
-    "last_updated": "2026-05-12T10:38:53.192024+00:00"
+    "total_conversations": 133,
+    "last_updated": "2026-05-12T17:49:45.104369+00:00"
   }
 }

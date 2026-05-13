@@ -205,3 +205,87 @@ async def delete_bijbel_item(section: str, identifier: str):
     data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
     save_json(BIJBEL_FILE, data)
     return {"success": True, "section": section, "remaining": len(items)}
+
+
+# ============================================================
+# SPARK VOCAB (v4_013) — woordenlijsten voor antwoord-variatie
+# ============================================================
+
+VOCAB_FILE = DATA_DIR / "spark_vocab.json"
+
+
+class VocabWord(BaseModel):
+    word: str
+
+
+@router.get("/vocab")
+async def get_vocab():
+    """Volledige spark_vocab.json."""
+    return load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+
+
+def _resolve_vocab_path(data: dict, group: str, key: str):
+    """Resolve (data[group][key] is List[str]) of (data[group][emotion][key]).
+    Returns (parent_dict, list_key) or raises HTTPException."""
+    if group not in data:
+        raise HTTPException(404, f"Groep '{group}' niet gevonden")
+    if group == "emoties":
+        # key format: emotion.intent → bv 'blij.reactie'
+        if "." not in key:
+            raise HTTPException(400, "Voor emoties: gebruik 'emotion.intent' (bv. 'blij.reactie')")
+        em, intent = key.split(".", 1)
+        emotie = data["emoties"].get(em)
+        if not isinstance(emotie, dict):
+            raise HTTPException(404, f"Emotie '{em}' niet gevonden")
+        if intent not in emotie or not isinstance(emotie[intent], list):
+            raise HTTPException(404, f"Intent '{intent}' niet gevonden bij {em}")
+        return emotie, intent
+    # algemeen: key is direct
+    cat = data[group]
+    if key not in cat or not isinstance(cat[key], list):
+        raise HTTPException(404, f"Categorie '{key}' niet gevonden in {group}")
+    return cat, key
+
+
+@router.post("/vocab/{group}/{key:path}/add")
+async def add_vocab_word(group: str, key: str, body: VocabWord):
+    """Voeg een woord toe aan een vocab-lijst. key voor emoties = 'emotion.intent'."""
+    data = load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+    parent, list_key = _resolve_vocab_path(data, group, key)
+    word = (body.word or "").strip()
+    if not word:
+        raise HTTPException(400, "Woord mag niet leeg zijn")
+    if word in parent[list_key]:
+        return {"success": False, "message": "Woord bestaat al", "list": parent[list_key]}
+    parent[list_key].append(word)
+    data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
+    save_json(VOCAB_FILE, data)
+    return {"success": True, "list": parent[list_key]}
+
+
+@router.delete("/vocab/{group}/{key:path}/{word}")
+async def delete_vocab_word(group: str, key: str, word: str):
+    """Verwijder een woord uit een vocab-lijst."""
+    data = load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+    parent, list_key = _resolve_vocab_path(data, group, key)
+    before = len(parent[list_key])
+    parent[list_key] = [w for w in parent[list_key] if w != word]
+    if len(parent[list_key]) == before:
+        raise HTTPException(404, f"Woord '{word}' niet gevonden")
+    data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
+    save_json(VOCAB_FILE, data)
+    return {"success": True, "list": parent[list_key]}
+
+
+@router.put("/vocab/{group}/{key:path}")
+async def replace_vocab_list(group: str, key: str, body: dict):
+    """Vervang een hele lijst (body: {'words': [...]})."""
+    words = body.get("words", [])
+    if not isinstance(words, list):
+        raise HTTPException(400, "Body moet {'words': [...]} zijn")
+    data = load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+    parent, list_key = _resolve_vocab_path(data, group, key)
+    parent[list_key] = [str(w).strip() for w in words if str(w).strip()]
+    data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
+    save_json(VOCAB_FILE, data)
+    return {"success": True, "list": parent[list_key]}

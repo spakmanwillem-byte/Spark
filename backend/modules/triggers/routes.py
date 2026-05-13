@@ -10,6 +10,7 @@ router = APIRouter(prefix="/triggers", tags=["triggers"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 TRIGGERS_DIR = DATA_DIR / "triggers"
 EMOTIONS_DIR = DATA_DIR / "emotions"
+VOCAB_FILE = DATA_DIR / "personality" / "spark_vocab.json"
 
 
 @router.get("/all")
@@ -84,6 +85,37 @@ async def get_all_triggers():
             "responses": val.get("responses", []) if isinstance(val, dict) else [],
             "color": "slate",
         }
+
+    # Spark vocab (v4_013) — woordenlijsten voor antwoord-variatie
+    vocab = load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+    intent_label = {"begroeting": "Begroet", "bedanken": "Bedanken",
+                    "afscheid": "Afscheid", "reactie": "Reactie"}
+    for emotion, intents in (vocab.get("emoties") or {}).items():
+        if not isinstance(intents, dict):
+            continue
+        for intent, words in intents.items():
+            if not isinstance(words, list):
+                continue
+            result[f"vocab_emotie_{emotion}_{intent}"] = {
+                "type": "vocab",
+                "label": f"{emotion.title()} — {intent_label.get(intent, intent.title())}",
+                "triggers": words,
+                "responses": [],
+                "color": "violet",
+                "vocab_path": f"emoties/{emotion}.{intent}",
+                "editable": True,
+            }
+    for cat, words in (vocab.get("algemeen") or {}).items():
+        if isinstance(words, list):
+            result[f"vocab_algemeen_{cat}"] = {
+                "type": "vocab",
+                "label": f"Algemeen — {cat.title()}",
+                "triggers": words,
+                "responses": [],
+                "color": "violet",
+                "vocab_path": f"algemeen/{cat}",
+                "editable": True,
+            }
 
     return {
         "trigger_groups": result,

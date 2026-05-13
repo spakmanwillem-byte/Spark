@@ -88,6 +88,7 @@ Herbouw "Spark AI" als "Spark Core 2.0" - volledig standalone, modulair, zonder 
   - Backend: SECTION_SCHEMAS uitgebreid met ws5/lagen/tags/sterren/voorbeelden. GET /api/spark/bijbel auto-migreert items zonder id. `kernwaarden` heeft nu ook id_field.
   - Chat: nieuwe `bijbel_lookup_service.py` detecteert 13 self-question intents (voorkeur_blij/boos/bang/bedroefd, missie, visie, doel, functie, filosofie, geloof, behoefte, waarde, norm). Self-ref vereist ('je/jij/jouw/spark'). Antwoord uit kernwaarden/normen/bijbel_items via tag-match, met fallback naar identity.doel of identity.filosofie.
   - Frontend: SparkBrainPage editor-modal met velden naam/beschrijving/belangrijkheid(sterren)/tags/lagen 1-4/ws5/voorbeelden. + knoppen op Kernwaarden, Normen en Bijbel-items. Edit/delete knoppen per item. NormCard expandable [13 mei 2026]
+- [x] **Spark Vocab — woordenlijsten** (v4_013a, Fase C deel 1): `/data/personality/spark_vocab.json` met 5 emoties × 4 intenties (begroeting/bedanken/afscheid/reactie) + 5 algemene categorieën (twijfel, enthousiasme, zelfspot, openers, afsluiters), 100 woorden seed. CRUD endpoints op `/api/spark/vocab`. Vocab geïntegreerd in Triggers-pagina als type 'vocab' (paars) met inline add/delete chips — user kan elke lijst zelf personaliseren [13 mei 2026]
 
 ## Backlog
 - [ ] Spark Brain Bijbel Editor UI (frontend add/edit modals voor kernwaarden/normen/bijbel/doelen)

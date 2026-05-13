@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import {
-  Zap, Search, ChevronDown, ChevronRight, X, Tag,
-  MessageSquare, Calendar as CalIcon, Heart, Shield, Settings
+  Zap, Search, ChevronDown, ChevronRight, X, Tag, Plus,
+  MessageSquare, Calendar as CalIcon, Heart, Shield, Settings, Sparkles
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -11,6 +11,7 @@ const typeConfig = {
   conversation: { label: 'Conversatie', color: '#f59e0b', icon: MessageSquare },
   calendar: { label: 'Kalender', color: '#3b82f6', icon: CalIcon },
   emotion: { label: 'Emotie', color: '#ec4899', icon: Heart },
+  vocab: { label: 'Spark Vocab', color: '#a855f7', icon: Sparkles },
   admin: { label: 'Admin', color: '#ef4444', icon: Shield },
   system: { label: 'Systeem', color: '#64748b', icon: Settings },
 };
@@ -22,17 +23,37 @@ export function TriggersPage({ onNavigate }) {
   const [expandedList, setExpandedList] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
+  const [addInput, setAddInput] = useState('');
+
+  const reloadAll = async () => {
+    const d = await fetch(`${API}/api/triggers/all`).then(r => r.json()).catch(() => ({}));
+    setGroups(d.trigger_groups || {});
+    setStats(d.stats || {});
+  };
 
   useEffect(() => {
-    fetch(`${API}/api/triggers/all`)
-      .then(r => r.json())
-      .then(d => {
-        setGroups(d.trigger_groups || {});
-        setStats(d.stats || {});
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    reloadAll().finally(() => setLoading(false));
   }, []);
+
+  const addVocabWord = async (vocabPath, word) => {
+    if (!word.trim()) return;
+    const [group, key] = vocabPath.split('/');
+    await fetch(`${API}/api/spark/vocab/${group}/${encodeURIComponent(key)}/add`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ word: word.trim() }),
+    });
+    setAddInput('');
+    await reloadAll();
+  };
+
+  const deleteVocabWord = async (vocabPath, word) => {
+    const [group, key] = vocabPath.split('/');
+    await fetch(`${API}/api/spark/vocab/${group}/${encodeURIComponent(key)}/${encodeURIComponent(word)}`, {
+      method: 'DELETE',
+    });
+    await reloadAll();
+  };
 
   const filteredEntries = Object.entries(groups).filter(([key, group]) => {
     if (filterType !== 'all' && group.type !== filterType) return false;
@@ -96,7 +117,7 @@ export function TriggersPage({ onNavigate }) {
                 const cfg = typeConfig[group.type] || typeConfig.system;
                 return (
                   <div key={key} data-testid={`trigger-group-${key}`} className={`border rounded-xl overflow-hidden transition-all ${isExpanded ? 'border-slate-700' : 'border-slate-800'} bg-slate-900/50`}>
-                    <button onClick={() => setExpandedList(isExpanded ? null : key)}
+                    <button onClick={() => { setExpandedList(isExpanded ? null : key); setAddInput(''); }}
                       className="w-full flex items-center justify-between p-3 hover:bg-slate-800/20 transition-colors">
                       <div className="flex items-center gap-2.5">
                         {isExpanded ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
@@ -118,14 +139,47 @@ export function TriggersPage({ onNavigate }) {
                           {group.triggers.map((trigger, idx) => {
                             const score = group.trigger_scores?.[trigger];
                             return (
-                              <span key={idx} className="text-[11px] px-2 py-1 rounded-lg border flex items-center gap-1"
+                              <span key={idx} data-testid={`trigger-chip-${trigger}`} className="text-[11px] px-2 py-1 rounded-lg border flex items-center gap-1"
                                 style={{ background: `${cfg.color}08`, color: cfg.color, borderColor: `${cfg.color}25` }}>
                                 {trigger}
                                 {score !== undefined && <span className="text-[9px] opacity-60">({score})</span>}
+                                {group.editable && (
+                                  <button
+                                    data-testid={`del-vocab-${trigger}`}
+                                    onClick={() => deleteVocabWord(group.vocab_path, trigger)}
+                                    className="ml-1 hover:opacity-80"
+                                    title="Verwijder">
+                                    <X className="w-3 h-3" />
+                                  </button>
+                                )}
                               </span>
                             );
                           })}
+                          {group.editable && group.triggers.length === 0 && (
+                            <span className="text-[11px] text-slate-500 italic">Nog leeg — voeg woorden toe ↓</span>
+                          )}
                         </div>
+                        {/* Add input voor editable groepen (vocab) */}
+                        {group.editable && (
+                          <div className="flex gap-2 mb-2">
+                            <input
+                              data-testid={`add-vocab-input-${key}`}
+                              type="text"
+                              value={expandedList === key ? addInput : ''}
+                              onChange={e => setAddInput(e.target.value)}
+                              onKeyDown={e => {
+                                if (e.key === 'Enter') { e.preventDefault(); addVocabWord(group.vocab_path, addInput); }
+                              }}
+                              placeholder="Nieuw woord/zin toevoegen..."
+                              className="flex-1 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5 text-[11px] text-white placeholder-slate-500 focus:outline-none focus:border-violet-500" />
+                            <button
+                              data-testid={`add-vocab-btn-${key}`}
+                              onClick={() => addVocabWord(group.vocab_path, addInput)}
+                              className="px-2 py-1.5 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-300 text-[11px] flex items-center gap-1">
+                              <Plus className="w-3 h-3" /> Toevoegen
+                            </button>
+                          </div>
+                        )}
                         {/* Responses if any */}
                         {group.responses && group.responses.length > 0 && (
                           <div className="mt-2 pt-2 border-t border-slate-800/50">

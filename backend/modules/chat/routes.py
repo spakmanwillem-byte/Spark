@@ -18,6 +18,7 @@ from . import scan_service
 from . import compositional_service
 from . import spontaneous_w_service
 from . import card_session_service
+from . import bijbel_lookup_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -475,6 +476,18 @@ async def process_message(req: ChatMessage):
             })
         _save_log(req, response, "compositional")
         return response
+
+    # 1.7 SPARK SELF-QUESTION (v4_011, Bijbel-integratie): user vraagt
+    # naar Spark's eigen voorkeur/missie/doel/waarden/normen → antwoord uit Bijbel.
+    self_intent = bijbel_lookup_service.detect_self_question(text)
+    if self_intent:
+        reply = bijbel_lookup_service.compose_reply(self_intent)
+        if reply:
+            response["type"] = "bijbel_reply"
+            response["message"] = reply
+            response["bijbel_intent"] = self_intent
+            _save_log(req, response, "bijbel_reply")
+            return response
 
     # 2. Knowledge lookup - zoek alle begrippen in de zin
     # 2a. ZIN-SNAP HIGH-CONFIDENCE MATCH (v4_011, Optie B): als 3+ woorden

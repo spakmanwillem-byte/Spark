@@ -30,7 +30,14 @@ class EmotionDetectionService:
 
     @staticmethod
     def _load_learned_triggers():
-        """Laad geleerde emotie triggers uit knowledge cards met #emotie-* tags"""
+        """Laad geleerde emotie triggers uit knowledge cards met emotie-tags.
+
+        Ondersteunt drie tag-patronen:
+        1. Single tag: 'emotie-blij' / '#emotie-blij' (oude stijl)
+        2. Combo tag : 'emotie blij' (één tag met spatie)
+        3. Twee losse tags: 'emotie' + 'blij' op dezelfde kaart (user-stijl v4_011)
+        Geldige emoties: blij, boos, bang, bedroefd, neutraal.
+        """
         import time
         now = time.time()
         if (EmotionDetectionService._learned_cache and
@@ -40,22 +47,39 @@ class EmotionDetectionService:
         data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
         entries = data.get("knowledge_entries", [])
 
-        learned = {"blij": {}, "boos": {}, "bang": {}, "bedroefd": {}}
+        learned = {"blij": {}, "boos": {}, "bang": {}, "bedroefd": {}, "neutraal": {}}
+        valid_emotions = set(learned.keys())
         emotie_map = {
             "emotie-blij": "blij", "#emotie-blij": "blij",
             "emotie-boos": "boos", "#emotie-boos": "boos",
             "emotie-bang": "bang", "#emotie-bang": "bang",
             "emotie-bedroefd": "bedroefd", "#emotie-bedroefd": "bedroefd",
+            "emotie-neutraal": "neutraal", "#emotie-neutraal": "neutraal",
+            "emotie blij": "blij", "emotie boos": "boos", "emotie bang": "bang",
+            "emotie bedroefd": "bedroefd", "emotie neutraal": "neutraal",
         }
 
         for entry in entries:
-            if entry.get("status") != "active":
+            # Geen status-filter meer — draft kaarten tellen ook mee voor leren
+            begrip = (entry.get("begrip") or "").lower().strip()
+            if not begrip:
                 continue
-            begrip = (entry.get("begrip") or "").lower()
-            for tag in entry.get("tags", []):
-                tag_lower = tag.lower().strip()
-                if tag_lower in emotie_map:
-                    learned[emotie_map[tag_lower]][begrip] = 3
+            tag_set = set()
+            for tag in entry.get("tags", []) or []:
+                tag_set.add(tag.lower().strip().lstrip("#").strip())
+            matched_emotion = None
+            for tag in tag_set:
+                if tag in emotie_map:
+                    matched_emotion = emotie_map[tag]
+                    break
+            # Patroon 3: losse 'emotie' + één van de 5 emotie-namen
+            if not matched_emotion and "emotie" in tag_set:
+                for em in valid_emotions:
+                    if em in tag_set:
+                        matched_emotion = em
+                        break
+            if matched_emotion:
+                learned[matched_emotion][begrip] = 3
 
         EmotionDetectionService._learned_cache = learned
         EmotionDetectionService._learned_cache_time = now

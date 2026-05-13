@@ -207,32 +207,62 @@ export function SparkBrainPage({ onNavigate }) {
                 </div>
 
                 {/* Kernwaarden */}
-                <div className="space-y-2">
-                  {kernwaarden.map((kw, i) => (
-                    <WaardeCard key={kw.id || i} kw={kw} />
-                  ))}
-                </div>
+                <Card
+                  title={`Kernwaarden (${kernwaarden.length})`}
+                  icon={Heart}
+                  accent="#ec4899"
+                  action={
+                    <button
+                      data-testid="add-kernwaarde-btn"
+                      onClick={() => setEditor({ section: 'kernwaarden', mode: 'add', data: { belangrijkheid: 3 } })}
+                      className="flex items-center gap-1 px-2 py-1 rounded-md bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 text-[11px] font-medium transition-colors">
+                      <Plus className="w-3 h-3" /> Nieuwe waarde
+                    </button>
+                  }
+                >
+                  <div className="space-y-2">
+                    {kernwaarden.map((kw, i) => (
+                      <WaardeCard
+                        key={kw.id || i}
+                        kw={kw}
+                        onEdit={() => setEditor({ section: 'kernwaarden', mode: 'edit', identifier: kw.id || String(i), data: kw })}
+                        onDelete={() => deleteItem('kernwaarden', kw.id || String(i))}
+                      />
+                    ))}
+                    {kernwaarden.length === 0 && (
+                      <p className="text-xs text-slate-500 italic">Nog geen kernwaarden — klik 'Nieuwe waarde' om Spark zijn kernwaarden te geven.</p>
+                    )}
+                  </div>
+                </Card>
 
                 {/* Normen */}
-                {normen.length > 0 && (
-                  <Card title={`Normen (${normen.length})`} icon={Shield} accent="#ef4444">
-                    <div className="space-y-2">
-                      {normen.map((n, i) => (
-                        <div key={n.id || i} className="p-3 bg-slate-800/30 rounded-xl border border-slate-700/30">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="text-sm text-white font-medium">{n.norm}</h4>
-                            <div className="flex gap-0.5">
-                              {[1, 2, 3, 4, 5].map(s => (
-                                <Star key={s} className={`w-2.5 h-2.5 ${s <= (n.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
-                              ))}
-                            </div>
-                          </div>
-                          <p className="text-[11px] text-slate-400">{n.beschrijving}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </Card>
-                )}
+                <Card
+                  title={`Normen (${normen.length})`}
+                  icon={Shield}
+                  accent="#ef4444"
+                  action={
+                    <button
+                      data-testid="add-norm-btn"
+                      onClick={() => setEditor({ section: 'normen', mode: 'add', data: { belangrijkheid: 3 } })}
+                      className="flex items-center gap-1 px-2 py-1 rounded-md bg-red-500/15 hover:bg-red-500/25 text-red-300 text-[11px] font-medium transition-colors">
+                      <Plus className="w-3 h-3" /> Nieuwe norm
+                    </button>
+                  }
+                >
+                  <div className="space-y-2">
+                    {normen.map((n, i) => (
+                      <NormCard
+                        key={n.id || i}
+                        n={n}
+                        onEdit={() => setEditor({ section: 'normen', mode: 'edit', identifier: n.id || String(i), data: n })}
+                        onDelete={() => deleteItem('normen', n.id || String(i))}
+                      />
+                    ))}
+                    {normen.length === 0 && (
+                      <p className="text-xs text-slate-500 italic">Nog geen normen toegevoegd.</p>
+                    )}
+                  </div>
+                </Card>
               </>
             )}
 
@@ -245,15 +275,33 @@ export function SparkBrainPage({ onNavigate }) {
                 </div>
 
                 {/* Bijbel items */}
-                {bijbelItems.length > 0 && (
-                  <Card title={`Levenswijsheden (${bijbelItems.length})`} icon={BookOpen} accent="#a855f7">
-                    <div className="space-y-2">
-                      {bijbelItems.map((item, i) => (
-                        <BijbelItem key={item.id || i} item={item} />
-                      ))}
-                    </div>
-                  </Card>
-                )}
+                <Card
+                  title={`Levenswijsheden (${bijbelItems.length})`}
+                  icon={BookOpen}
+                  accent="#a855f7"
+                  action={
+                    <button
+                      data-testid="add-bijbel-btn"
+                      onClick={() => setEditor({ section: 'bijbel_items', mode: 'add', data: { belangrijkheid: 3 } })}
+                      className="flex items-center gap-1 px-2 py-1 rounded-md bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 text-[11px] font-medium transition-colors">
+                      <Plus className="w-3 h-3" /> Nieuwe wijsheid
+                    </button>
+                  }
+                >
+                  <div className="space-y-2">
+                    {bijbelItems.map((item, i) => (
+                      <BijbelItem
+                        key={item.id || i}
+                        item={item}
+                        onEdit={() => setEditor({ section: 'bijbel_items', mode: 'edit', identifier: item.id || String(i), data: item })}
+                        onDelete={() => deleteItem('bijbel_items', item.id || String(i))}
+                      />
+                    ))}
+                    {bijbelItems.length === 0 && (
+                      <p className="text-xs text-slate-500 italic">Nog geen levenswijsheden.</p>
+                    )}
+                  </div>
+                </Card>
 
                 {/* Reactie voorbeelden */}
                 {Object.keys(reactieVoorbeelden).length > 0 && (
@@ -302,44 +350,67 @@ export function SparkBrainPage({ onNavigate }) {
           </div>
         </div>
       </div>
+      {editor && (
+        <BijbelEditor
+          editor={editor}
+          onClose={() => setEditor(null)}
+          onSave={saveItem}
+          onChange={(patch) => setEditor(prev => ({ ...prev, data: { ...prev.data, ...patch } }))}
+        />
+      )}
     </MainLayout>
   );
 }
 
-function Card({ title, icon: Icon, accent, children }) {
+function Card({ title, icon: Icon, accent, action, children }) {
   return (
     <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
       <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-800/50">
         <Icon className="w-4 h-4" style={{ color: accent }} />
-        <h3 className="text-sm font-semibold text-white">{title}</h3>
+        <h3 className="text-sm font-semibold text-white flex-1">{title}</h3>
+        {action}
       </div>
       <div className="p-4">{children}</div>
     </div>
   );
 }
 
-function WaardeCard({ kw }) {
+function WaardeCard({ kw, onEdit, onDelete }) {
   const [open, setOpen] = useState(false);
-  const hasDetail = kw.voorbeelden?.length > 0 || kw.ws5 || kw.tags?.length > 0;
+  const hasDetail = kw.voorbeelden?.length > 0 || kw.ws5 || kw.tags?.length > 0 || kw.lagen;
+  const lagen = kw.lagen || {};
   return (
     <div data-testid={`waarde-${kw.id || kw.waarde}`} className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
-      <button onClick={() => hasDetail && setOpen(!open)} className="w-full flex items-start gap-3 p-4 text-left">
-        <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: kw.belangrijkheid >= 5 ? '#ec489915' : '#64748b15' }}>
-          <Heart className="w-4 h-4" style={{ color: kw.belangrijkheid >= 5 ? '#ec4899' : '#94a3b8' }} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <h4 className="text-sm font-semibold text-white">{kw.waarde}</h4>
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map(s => (
-                <Star key={s} className={`w-3 h-3 ${s <= kw.belangrijkheid ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
-              ))}
-            </div>
+      <div className="w-full flex items-start gap-3 p-4">
+        <button onClick={() => hasDetail && setOpen(!open)} className="flex-1 flex items-start gap-3 text-left">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: kw.belangrijkheid >= 5 ? '#ec489915' : '#64748b15' }}>
+            <Heart className="w-4 h-4" style={{ color: kw.belangrijkheid >= 5 ? '#ec4899' : '#94a3b8' }} />
           </div>
-          <p className="text-xs text-slate-400 leading-relaxed">{kw.beschrijving}</p>
-        </div>
-        {hasDetail && (open ? <ChevronDown className="w-4 h-4 text-slate-500 flex-shrink-0 mt-1" /> : <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-1" />)}
-      </button>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h4 className="text-sm font-semibold text-white">{kw.waarde}</h4>
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map(s => (
+                  <Star key={s} className={`w-3 h-3 ${s <= (kw.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
+                ))}
+              </div>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">{kw.beschrijving}</p>
+            {kw.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-1.5">
+                {kw.tags.slice(0, 6).map((t, i) => <span key={i} className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-400">#{t}</span>)}
+              </div>
+            )}
+          </div>
+          {hasDetail && (open ? <ChevronDown className="w-4 h-4 text-slate-500 flex-shrink-0 mt-1" /> : <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-1" />)}
+        </button>
+        {(onEdit || onDelete) && (
+          <div className="flex flex-col gap-1 flex-shrink-0">
+            {onEdit && <button data-testid={`edit-waarde-${kw.id}`} onClick={onEdit} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-amber-400 transition-colors"><Edit3 className="w-3.5 h-3.5" /></button>}
+            {onDelete && <button data-testid={`del-waarde-${kw.id}`} onClick={onDelete} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>}
+          </div>
+        )}
+      </div>
       {open && (
         <div className="px-4 pb-4 space-y-2 border-t border-slate-800/50 pt-2">
           {kw.voorbeelden?.length > 0 && (
@@ -350,22 +421,25 @@ function WaardeCard({ kw }) {
               ))}
             </div>
           )}
-          {kw.ws5 && (
+          {Object.values(lagen).some(v => v) && (
+            <div>
+              <p className="text-[10px] text-purple-400 uppercase tracking-wider mb-1">Lagen</p>
+              {['laag1','laag2','laag3','laag4'].map(k => lagen[k] && (
+                <p key={k} className="text-[11px] text-slate-400 pl-3 border-l-2 border-purple-500/20 mb-1"><span className="text-purple-400 font-medium">{k}:</span> {lagen[k]}</p>
+              ))}
+            </div>
+          )}
+          {kw.ws5 && Object.values(kw.ws5).some(v => v) && (
             <div>
               <p className="text-[10px] text-amber-400 uppercase tracking-wider mb-1">5W+H</p>
               <div className="grid grid-cols-2 gap-1.5">
-                {Object.entries(kw.ws5).filter(([k]) => k !== 'how').map(([k, v]) => (
+                {Object.entries(kw.ws5).filter(([,v]) => v).map(([k, v]) => (
                   <div key={k} className="p-1.5 bg-slate-800/30 rounded text-[10px]">
                     <span className="text-amber-400 font-medium uppercase">{k}: </span>
-                    <span className="text-slate-400">{String(v).slice(0, 60)}</span>
+                    <span className="text-slate-400">{String(v).slice(0, 80)}</span>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-          {kw.tags?.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {kw.tags.map((t, i) => <span key={i} className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-500">#{t}</span>)}
             </div>
           )}
         </div>
@@ -374,23 +448,106 @@ function WaardeCard({ kw }) {
   );
 }
 
-function BijbelItem({ item }) {
+function NormCard({ n, onEdit, onDelete }) {
   const [open, setOpen] = useState(false);
+  const lagen = n.lagen || {};
+  const hasDetail = n.voorbeelden?.length > 0 || n.ws5 || n.tags?.length > 0 || Object.values(lagen).some(v=>v);
+  return (
+    <div data-testid={`norm-${n.id}`} className="p-3 bg-slate-800/30 rounded-xl border border-slate-700/30">
+      <div className="flex items-start gap-2">
+        <button onClick={() => hasDetail && setOpen(!open)} className="flex-1 text-left">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <h4 className="text-sm text-white font-medium">{n.norm}</h4>
+            <div className="flex gap-0.5">
+              {[1, 2, 3, 4, 5].map(s => (
+                <Star key={s} className={`w-2.5 h-2.5 ${s <= (n.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
+              ))}
+            </div>
+          </div>
+          <p className="text-[11px] text-slate-400">{n.beschrijving}</p>
+          {n.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1.5">
+              {n.tags.slice(0,6).map((t,i)=><span key={i} className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-400">#{t}</span>)}
+            </div>
+          )}
+        </button>
+        <div className="flex flex-col gap-1 flex-shrink-0">
+          {onEdit && <button data-testid={`edit-norm-${n.id}`} onClick={onEdit} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-amber-400 transition-colors"><Edit3 className="w-3.5 h-3.5" /></button>}
+          {onDelete && <button data-testid={`del-norm-${n.id}`} onClick={onDelete} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>}
+        </div>
+      </div>
+      {open && (
+        <div className="mt-3 pt-2 border-t border-slate-700/30 space-y-2">
+          {Object.values(lagen).some(v=>v) && (
+            <div>
+              <p className="text-[10px] text-purple-400 uppercase tracking-wider mb-1">Lagen</p>
+              {['laag1','laag2','laag3','laag4'].map(k => lagen[k] && (
+                <p key={k} className="text-[11px] text-slate-400 pl-3 border-l-2 border-purple-500/20 mb-1"><span className="text-purple-400 font-medium">{k}:</span> {lagen[k]}</p>
+              ))}
+            </div>
+          )}
+          {n.ws5 && Object.values(n.ws5).some(v=>v) && (
+            <div className="grid grid-cols-2 gap-1.5">
+              {Object.entries(n.ws5).filter(([,v])=>v).map(([k, v]) => (
+                <div key={k} className="p-1.5 bg-slate-800/40 rounded text-[10px]">
+                  <span className="text-amber-400 font-medium uppercase">{k}: </span>
+                  <span className="text-slate-400">{String(v).slice(0, 80)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BijbelItem({ item, onEdit, onDelete }) {
+  const [open, setOpen] = useState(false);
+  const lagen = item.lagen || {};
   return (
     <div className="bg-slate-800/30 rounded-xl border border-slate-700/30 overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-3 text-left">
-        <div>
-          <h4 className="text-sm text-white font-medium">{item.naam}</h4>
-          <p className="text-[10px] text-slate-500">{item.beschrijving?.slice(0, 80)}{item.beschrijving?.length > 80 ? '...' : ''}</p>
+      <div className="flex items-start gap-2 p-3">
+        <button onClick={() => setOpen(!open)} className="flex-1 flex items-center justify-between text-left">
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h4 className="text-sm text-white font-medium">{item.naam}</h4>
+              {item.belangrijkheid != null && (
+                <div className="flex gap-0.5">
+                  {[1,2,3,4,5].map(s => (
+                    <Star key={s} className={`w-2.5 h-2.5 ${s <= (item.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
+                  ))}
+                </div>
+              )}
+            </div>
+            <p className="text-[10px] text-slate-500">{item.beschrijving?.slice(0, 80)}{item.beschrijving?.length > 80 ? '...' : ''}</p>
+            {item.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-1">
+                {item.tags.slice(0,6).map((t,i)=><span key={i} className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-400">#{t}</span>)}
+              </div>
+            )}
+          </div>
+          {open ? <ChevronDown className="w-4 h-4 text-slate-500" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+        </button>
+        <div className="flex flex-col gap-1 flex-shrink-0">
+          {onEdit && <button data-testid={`edit-bijbel-${item.id}`} onClick={onEdit} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-amber-400 transition-colors"><Edit3 className="w-3.5 h-3.5" /></button>}
+          {onDelete && <button data-testid={`del-bijbel-${item.id}`} onClick={onDelete} className="p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>}
         </div>
-        {open ? <ChevronDown className="w-4 h-4 text-slate-500" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
-      </button>
+      </div>
       {open && (
         <div className="px-3 pb-3 space-y-2 border-t border-slate-700/30 pt-2">
-          <p className="text-xs text-slate-400">{item.beschrijving}</p>
-          {item.ws5 && (
+          {item.beschrijving && <p className="text-xs text-slate-400">{item.beschrijving}</p>}
+          {Object.values(lagen).some(v=>v) && (
+            <div>
+              <p className="text-[10px] text-purple-400 uppercase tracking-wider mb-1">Lagen</p>
+              {['laag1','laag2','laag3','laag4'].map(k => lagen[k] && (
+                <p key={k} className="text-[11px] text-slate-400 pl-3 border-l-2 border-purple-500/20 mb-1"><span className="text-purple-400 font-medium">{k}:</span> {lagen[k]}</p>
+              ))}
+            </div>
+          )}
+          {item.ws5 && Object.values(item.ws5).some(v=>v) && (
             <div className="grid grid-cols-2 gap-1.5">
-              {Object.entries(item.ws5).map(([k, v]) => (
+              {Object.entries(item.ws5).filter(([,v])=>v).map(([k, v]) => (
                 <div key={k} className="p-1.5 bg-slate-800/40 rounded text-[10px]">
                   <span className="text-purple-400 font-medium uppercase">{k}: </span>
                   <span className="text-slate-400">{String(v).slice(0, 80)}</span>
@@ -449,6 +606,138 @@ function SparkProfileView({ profile }) {
           {renderObject(val)}
         </Card>
       ))}
+    </div>
+  );
+}
+
+function BijbelEditor({ editor, onClose, onSave, onChange }) {
+  const { section, mode, data = {} } = editor;
+  const titleKey = section === 'kernwaarden' ? 'waarde' : section === 'normen' ? 'norm' : 'naam';
+  const sectionLabels = {
+    kernwaarden: { title: 'Kernwaarde', accent: '#ec4899', titleField: 'Waarde-naam', titlePlaceholder: 'bv. Helpen, Eerlijkheid, Groei' },
+    normen: { title: 'Norm', accent: '#ef4444', titleField: 'Norm', titlePlaceholder: 'bv. Respecteer iedereens grenzen' },
+    bijbel_items: { title: 'Levenswijsheid', accent: '#a855f7', titleField: 'Naam', titlePlaceholder: 'bv. Roadkill-mantra' },
+  };
+  const meta = sectionLabels[section] || sectionLabels.bijbel_items;
+  const lagen = data.lagen || {};
+  const ws5 = data.ws5 || {};
+  const tags = Array.isArray(data.tags) ? data.tags : [];
+  const voorbeelden = Array.isArray(data.voorbeelden) ? data.voorbeelden : [];
+  const [tagInput, setTagInput] = useState('');
+  const [voorbeeldInput, setVoorbeeldInput] = useState('');
+
+  const setLag = (k, v) => onChange({ lagen: { ...lagen, [k]: v } });
+  const setWs5 = (k, v) => onChange({ ws5: { ...ws5, [k]: v } });
+  const addTag = () => { const t = tagInput.trim().replace(/^#/, ''); if (t && !tags.includes(t)) onChange({ tags: [...tags, t] }); setTagInput(''); };
+  const removeTag = (t) => onChange({ tags: tags.filter(x => x !== t) });
+  const addVoorbeeld = () => { const v = voorbeeldInput.trim(); if (v) onChange({ voorbeelden: [...voorbeelden, v] }); setVoorbeeldInput(''); };
+  const removeVoorbeeld = (i) => onChange({ voorbeelden: voorbeelden.filter((_, idx) => idx !== i) });
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" data-testid="bijbel-editor-modal">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800" style={{ borderTopColor: meta.accent, borderTopWidth: 2 }}>
+          <h3 className="text-base font-bold text-white">{mode === 'add' ? `Nieuwe ${meta.title}` : `Bewerk ${meta.title}`}</h3>
+          <button onClick={onClose} data-testid="editor-close-btn" className="p-1 rounded hover:bg-slate-800 text-slate-400"><X className="w-4 h-4" /></button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          {/* Naam */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">{meta.titleField}</label>
+            <input data-testid="editor-title-input" type="text" value={data[titleKey] || ''}
+              onChange={e => onChange({ [titleKey]: e.target.value })}
+              placeholder={meta.titlePlaceholder}
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+          </div>
+          {/* Beschrijving */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">Korte beschrijving</label>
+            <textarea data-testid="editor-beschrijving-input" rows={2} value={data.beschrijving || ''}
+              onChange={e => onChange({ beschrijving: e.target.value })}
+              placeholder="Eén à twee zinnen die de kern weergeven"
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+          </div>
+          {/* Belangrijkheid */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">Belangrijkheid (1-5)</label>
+            <div className="flex gap-1 mt-1">
+              {[1,2,3,4,5].map(s => (
+                <button key={s} data-testid={`star-${s}`} type="button" onClick={() => onChange({ belangrijkheid: s })} className="p-1">
+                  <Star className={`w-5 h-5 ${s <= (data.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Tags */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">Tags <span className="text-slate-600 normal-case">— bv. blij, missie, doel — gebruikt door chat</span></label>
+            <div className="flex flex-wrap gap-1.5 mt-1">
+              {tags.map(t => (
+                <span key={t} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-500/15 text-pink-300 text-[11px]">
+                  #{t}
+                  <button onClick={() => removeTag(t)} className="hover:text-red-400"><X className="w-3 h-3" /></button>
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-2 mt-2">
+              <input data-testid="editor-tag-input" type="text" value={tagInput} onChange={e => setTagInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                placeholder="tag (bv. blij, missie, doel)"
+                className="flex-1 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+              <button onClick={addTag} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs">+ Tag</button>
+            </div>
+          </div>
+          {/* Lagen */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">Uitleg in 4 lagen <span className="text-slate-600 normal-case">— oppervlakkig → diep</span></label>
+            <div className="space-y-2 mt-1">
+              {['laag1','laag2','laag3','laag4'].map((k, i) => (
+                <textarea key={k} data-testid={`editor-${k}`} rows={2} value={lagen[k] || ''}
+                  onChange={e => setLag(k, e.target.value)}
+                  placeholder={['Korte definitie','Iets uitgebreider','Diepere context','Essentie / kernbetekenis'][i]}
+                  className="w-full bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+              ))}
+            </div>
+          </div>
+          {/* 5W+H */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">5W+H</label>
+            <div className="grid grid-cols-2 gap-2 mt-1">
+              {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
+                <input key={k} data-testid={`editor-ws5-${k}`} type="text" value={ws5[k] || ''}
+                  onChange={e => setWs5(k, e.target.value)}
+                  placeholder={k.charAt(0).toUpperCase() + k.slice(1)}
+                  className="bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+              ))}
+            </div>
+          </div>
+          {/* Voorbeelden */}
+          <div>
+            <label className="text-[11px] text-slate-400 uppercase tracking-wider">Voorbeelden</label>
+            <div className="space-y-1 mt-1">
+              {voorbeelden.map((v, i) => (
+                <div key={i} className="flex items-center gap-2 p-2 bg-slate-800/40 rounded-lg">
+                  <span className="text-xs text-slate-300 flex-1">{v}</span>
+                  <button onClick={() => removeVoorbeeld(i)} className="text-slate-500 hover:text-red-400"><X className="w-3 h-3" /></button>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2 mt-2">
+              <input data-testid="editor-voorbeeld-input" type="text" value={voorbeeldInput} onChange={e => setVoorbeeldInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addVoorbeeld())}
+                placeholder="Concreet voorbeeld in 1 zin"
+                className="flex-1 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-slate-500" />
+              <button onClick={addVoorbeeld} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs">+ Voorbeeld</button>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-end gap-2 px-5 py-3 border-t border-slate-800">
+          <button onClick={onClose} className="px-4 py-2 rounded-lg text-xs text-slate-300 hover:bg-slate-800">Annuleer</button>
+          <button data-testid="editor-save-btn" onClick={onSave} className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium text-white" style={{ background: meta.accent }}>
+            <Save className="w-3.5 h-3.5" /> {mode === 'add' ? 'Toevoegen' : 'Opslaan'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

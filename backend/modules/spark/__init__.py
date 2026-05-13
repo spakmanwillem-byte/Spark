@@ -23,15 +23,25 @@ async def get_identity():
 
 @router.get("/bijbel")
 async def get_bijbel():
-    """Spark Bijbel: kernwaarden, normen, doelen, reactie voorbeelden"""
-    return load_json(BIJBEL_FILE, default={})
+    """Spark Bijbel: kernwaarden, normen, doelen, reactie voorbeelden.
+    Auto-migratie: items zonder id krijgen een id zodat CRUD werkt."""
+    data = load_json(BIJBEL_FILE, default={})
+    changed = False
+    for section in ("kernwaarden", "normen", "bijbel_items"):
+        for item in data.get(section, []):
+            if isinstance(item, dict) and not item.get("id"):
+                item["id"] = uuid.uuid4().hex[:8]
+                changed = True
+    if changed:
+        save_json(BIJBEL_FILE, data)
+    return data
 
 
 @router.get("/full")
 async def get_full_profile():
     """Combined identity + bijbel for SparkBrainPage"""
     identity = load_json(DATA_DIR / "spark_identity.json", default={})
-    bijbel = load_json(BIJBEL_FILE, default={})
+    bijbel = await get_bijbel()
     return {
         "identity": identity,
         "bijbel": bijbel,
@@ -42,13 +52,46 @@ async def get_full_profile():
 # BIJBEL EDIT - kernwaarden / normen / bijbel_items / doelen
 # ============================================================
 
-# Velden per sectie
+# Velden per sectie (v4_011: ws5/lagen/tags/sterren toegevoegd voor chat-integratie)
 SECTION_SCHEMAS = {
-    "kernwaarden": {"id_field": None, "keys": ["waarde", "beschrijving", "voorbeelden"]},
-    "normen": {"id_field": "id", "keys": ["norm", "beschrijving", "belangrijkheid", "voorbeelden"]},
-    "bijbel_items": {"id_field": "id", "keys": ["naam", "beschrijving", "onderwerp"]},
+    "kernwaarden": {
+        "id_field": "id",
+        "keys": ["waarde", "beschrijving", "voorbeelden", "belangrijkheid", "ws5", "lagen", "tags"],
+    },
+    "normen": {
+        "id_field": "id",
+        "keys": ["norm", "beschrijving", "belangrijkheid", "voorbeelden", "ws5", "lagen", "tags"],
+    },
+    "bijbel_items": {
+        "id_field": "id",
+        "keys": ["naam", "beschrijving", "onderwerp", "belangrijkheid", "voorbeelden", "ws5", "lagen", "tags"],
+    },
     "doelen": {"id_field": None, "keys": None},  # list of strings
 }
+
+
+_DEFAULT_WS5 = {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""}
+_DEFAULT_LAGEN = {"laag1": "", "laag2": "", "laag3": "", "laag4": ""}
+
+
+def _ensure_defaults(item: dict, schema_keys) -> dict:
+    """Vul ws5/lagen/tags/belangrijkheid/voorbeelden defaults in als velden in schema."""
+    if "ws5" in schema_keys and "ws5" not in item:
+        item["ws5"] = dict(_DEFAULT_WS5)
+    elif "ws5" in item and isinstance(item["ws5"], dict):
+        # Merge zodat alle 6 keys bestaan
+        item["ws5"] = {**_DEFAULT_WS5, **item["ws5"]}
+    if "lagen" in schema_keys and "lagen" not in item:
+        item["lagen"] = dict(_DEFAULT_LAGEN)
+    elif "lagen" in item and isinstance(item["lagen"], dict):
+        item["lagen"] = {**_DEFAULT_LAGEN, **item["lagen"]}
+    if "tags" in schema_keys and "tags" not in item:
+        item["tags"] = []
+    if "voorbeelden" in schema_keys and "voorbeelden" not in item:
+        item["voorbeelden"] = []
+    if "belangrijkheid" in schema_keys and "belangrijkheid" not in item:
+        item["belangrijkheid"] = 3
+    return item
 
 
 class BijbelItem(BaseModel):
@@ -83,6 +126,7 @@ async def add_bijbel_item(section: str, body: BijbelItem):
         item = dict(body.data)
         if schema["id_field"]:
             item = _ensure_id(item)
+        item = _ensure_defaults(item, schema.get("keys") or [])
         items.append(item)
 
     data[section] = items

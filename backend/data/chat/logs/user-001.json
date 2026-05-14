@@ -3381,11 +3381,905 @@
         "session_id": "default",
         "gesprek_nummer": 133
       }
+    },
+    {
+      "id": "conv-31f0e582",
+      "timestamp": "2026-05-13T14:28:43.616574+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 134
+      }
+    },
+    {
+      "id": "conv-f862eddd",
+      "timestamp": "2026-05-13T14:28:56.445702+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe gaat het?",
+      "spark_response": "Het gaat prima! Dankjewel voor het vragen. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 135
+      }
+    },
+    {
+      "id": "conv-c1810dab",
+      "timestamp": "2026-05-13T14:29:18.824743+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is het met je systemen",
+      "spark_response": "Het gaat wel, een beetje moeilijk te krijgen vandaag, maar het lukt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 136
+      }
+    },
+    {
+      "id": "conv-63201232",
+      "timestamp": "2026-05-13T15:25:52.931076+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 137
+      }
+    },
+    {
+      "id": "conv-57d8bc04",
+      "timestamp": "2026-05-13T15:26:23.208555+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wilde even met je praten.",
+      "spark_response": "**Praten**: Praten is het gebruiken van woorden en geluiden om met anderen te communiceren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **wilde** (opgeslagen als kaarten)\n\nWat betekent 'wilde' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Praten"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "wilde"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 138
+      }
+    },
+    {
+      "id": "conv-f6996805",
+      "timestamp": "2026-05-13T16:56:06.274174+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "systeem",
+      "spark_response": "**Systeem**: Een systeem is een geheel van onderdelen die samenwerken om een bepaald doel te bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Systeem"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 139
+      }
+    },
+    {
+      "id": "conv-498e0853",
+      "timestamp": "2026-05-13T16:56:19.023856+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "systemen",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'wilde' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 140
+      }
+    },
+    {
+      "id": "conv-a4414ea9",
+      "timestamp": "2026-05-13T20:07:09.014043+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedeavond",
+      "spark_response": "Ik ken deze woorden nog niet: **goedeavond**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nKan je in het kort uitleggen wat 'goedeavond' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "goedeavond"
+        ],
+        "snap_suggestions": [
+          "goedeavond"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 141
+      }
+    },
+    {
+      "id": "conv-2cfbb3d0",
+      "timestamp": "2026-05-13T20:15:52.220930+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "goedeavond spark",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goedeavond"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 142
+      }
+    },
+    {
+      "id": "conv-0d89a36a",
+      "timestamp": "2026-05-13T20:16:27.580851+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "goedeavond Spark. Hoe gaat het met je?",
+      "spark_response": "Het gaat lekker, ik voel me energiek. Dank dat je het vraagt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goedeavond"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 143
+      }
+    },
+    {
+      "id": "conv-db5e3eec",
+      "timestamp": "2026-05-13T20:17:11.111482+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan. Ik vind het belangrijk dat het goed met je gaat.",
+      "spark_response": "Wat mooi om te horen\n\n**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n**Belangrijk**: Belangrijk betekent dat iets waarde heeft of aandacht verdient.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          },
+          {
+            "begrip": "Belangrijk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 144
+      }
+    },
+    {
+      "id": "conv-9fd6adae",
+      "timestamp": "2026-05-13T20:18:55.098769+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "zou je niet moeten reageren met: fijn dat jij dat zegt.",
+      "spark_response": "Dat klinkt geweldig!\n\n**Moeten**: Moeten betekent dat iets nodig, verplicht of noodzakelijk is.\n\n**reageren**: Reageren betekent antwoorden, handelen of veranderen als reactie op een situatie, actie of prikkel.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **zegt** (opgeslagen als kaarten)\n\nWat houdt 'zegt' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 7,
+          "intensity": 0.58,
+          "triggered_words": [
+            "fijn",
+            "reageren"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeten"
+          },
+          {
+            "begrip": "reageren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "zegt"
+        ],
+        "word_count": 11,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 145
+      }
+    },
+    {
+      "id": "conv-0e3e5315",
+      "timestamp": "2026-05-13T20:23:22.335977+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn dat jij dat zegt.",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 146
+      }
+    },
+    {
+      "id": "conv-e6a0c4e1",
+      "timestamp": "2026-05-13T20:24:03.451804+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn dat jij dat  zegt",
+      "spark_response": "Dat klinkt geweldig!\n\n**zegt**: Zegt betekent dat iemand woorden, informatie, gevoelens of boodschappen uitspreekt of communiceert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zegt"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 147
+      }
+    },
+    {
+      "id": "conv-35763be4",
+      "timestamp": "2026-05-13T20:24:39.475444+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 148
+      }
+    },
+    {
+      "id": "conv-7b087561",
+      "timestamp": "2026-05-13T20:24:45.504108+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dat",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 149
+      }
+    },
+    {
+      "id": "conv-275fc522",
+      "timestamp": "2026-05-13T20:24:49.491636+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "jij",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 150
+      }
+    },
+    {
+      "id": "conv-ebb307a8",
+      "timestamp": "2026-05-13T20:26:04.931004+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mag ik wat vragen",
+      "spark_response": "Dat klinkt geweldig!\n\n**vragen**: Vragen betekent informatie, uitleg, hulp of een reactie proberen te krijgen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vragen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "vragen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 151
+      }
+    },
+    {
+      "id": "conv-d0b43080",
+      "timestamp": "2026-05-13T20:26:41.411190+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Waarom sla jij dat niet op",
+      "spark_response": "**Waarom moet jij je bewapen? **: “Waarom moet jij je bewapenen?” is een vraag waarin iemand vraagt naar de reden waarom een ander zich van een wapen voorziet.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **sla** (opgeslagen als kaarten)\n\nWat betekent 'sla' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Waarom moet jij je bewapen? "
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "sla"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 152
+      }
+    },
+    {
+      "id": "conv-9726ba16",
+      "timestamp": "2026-05-13T20:53:25.912492+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik heb een voorstel",
+      "spark_response": "Ik ken deze woorden nog niet: **voorstel**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat houdt 'voorstel' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "voorstel"
+        ],
+        "snap_suggestions": [
+          "voorstel"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 153
+      }
+    },
+    {
+      "id": "conv-98a8571f",
+      "timestamp": "2026-05-13T20:54:08.077014+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Dat je iets aandraagt. Een idee.",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'voorstel' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 154
+      }
+    },
+    {
+      "id": "conv-c9364523",
+      "timestamp": "2026-05-13T20:54:49.605621+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "als mensen geen keus kunnen maken",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "kunnen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 155
+      }
+    },
+    {
+      "id": "conv-cf6a0845",
+      "timestamp": "2026-05-13T20:54:55.725976+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan",
+      "spark_response": "**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 156
+      }
+    },
+    {
+      "id": "conv-0a47c053",
+      "timestamp": "2026-05-13T20:55:55.525257+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik heb een suggestie",
+      "spark_response": "Ik ken deze woorden nog niet: **suggestie**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat betekent 'suggestie' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "suggestie"
+        ],
+        "snap_suggestions": [
+          "suggestie"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 157
+      }
+    },
+    {
+      "id": "conv-a4c3cfba",
+      "timestamp": "2026-05-13T20:56:30.032239+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dat is een ander woord voor voorstel.",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'suggestie' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 158
+      }
+    },
+    {
+      "id": "conv-98fb56bb",
+      "timestamp": "2026-05-13T20:57:06.438926+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Als je iets voorstelt om te doen",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 159
+      }
+    },
+    {
+      "id": "conv-7491f8c4",
+      "timestamp": "2026-05-13T20:57:31.110530+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat zullen wij doen",
+      "spark_response": "**Zullen we de wereld over nemen**: De gebruiker doet een speels of overdreven voorstel.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Zullen we de wereld over nemen"
+          },
+          {
+            "begrip": "doen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 160
+      }
+    },
+    {
+      "id": "conv-1b2d5aa4",
+      "timestamp": "2026-05-13T20:58:08.392189+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "meer",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 161
+      }
+    },
+    {
+      "id": "conv-ebb7feb5",
+      "timestamp": "2026-05-13T20:58:28.721091+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel meer",
+      "spark_response": "**Zullen we de wereld over nemen** _(laag 2 — uitgebreider)_: Wordt gebruikt als grap, sarcasme of fantasie, niet letterlijk bedoeld.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "knowledge_deeper",
+        "knowledge_matches": [
+          {
+            "begrip": "Zullen we de wereld over nemen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge_deeper"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 162
+      }
+    },
+    {
+      "id": "conv-ded36203",
+      "timestamp": "2026-05-13T20:58:54.974952+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel meer",
+      "spark_response": "**Zullen we de wereld over nemen** _(laag 3 — diepgaand)_: “Zullen we de wereld over nemen” is een overdreven en vaak humoristisch voorstel. In de meeste gevallen is het niet serieus, maar bedoeld als grap, sarcasme of speels idee. De betekenis hangt sterk af van context en toon (bijv. familie, vrienden, rollenspel of fictie). Het kan ook gebruikt worden als start van een fantasie of spel.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "knowledge_deeper",
+        "knowledge_matches": [
+          {
+            "begrip": "Zullen we de wereld over nemen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge_deeper"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 163
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 133,
-    "last_updated": "2026-05-12T17:49:45.104369+00:00"
+    "total_conversations": 163,
+    "last_updated": "2026-05-13T20:58:54.974952+00:00"
   }
 }

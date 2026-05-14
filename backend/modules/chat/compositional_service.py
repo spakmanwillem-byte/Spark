@@ -9,8 +9,7 @@ Strategie:
 1. Probeer alle 2-deel splits van het woord (min 3 chars per deel)
 2. Voor elk paar: zoek bestaande snaps op
 3. Vergelijk tags/topic per kant
-4. Conflict (verschillende topics) → vraag user wat het is
-5. Geen conflict → erfde tags als suggestie, maak snap met decomposed_from metadata
+4. Conflict (verschillende topics) → vraag user wat het == 5. Geen conflict → erfde tags als suggestie, maak snap met decomposed_from metadata
 """
 from typing import Optional
 

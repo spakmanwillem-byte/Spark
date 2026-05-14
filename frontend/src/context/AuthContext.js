@@ -39,6 +39,14 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  const logout = useCallback(() => {
+    if (user) {
+      AuthAPI.logout(user.id).catch(() => {});
+    }
+    setUser(null);
+    localStorage.removeItem(STORAGE_KEY);
+  }, [user]);
+
   // Heartbeat to keep session alive
   useEffect(() => {
     if (!user) return;
@@ -51,7 +59,7 @@ export function AuthProvider({ children }) {
     }, HEARTBEAT_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [user]);
+  }, [user, logout]);
 
   const login = useCallback(async (naam, sleutelwoord, masterkey = null) => {
     setError(null);
@@ -71,14 +79,6 @@ export function AuthProvider({ children }) {
       return { success: false, message: msg };
     }
   }, []);
-
-  const logout = useCallback(() => {
-    if (user) {
-      AuthAPI.logout(user.id).catch(() => {});
-    }
-    setUser(null);
-    localStorage.removeItem(STORAGE_KEY);
-  }, [user]);
 
   const refreshUser = useCallback(async () => {
     if (!user) return;

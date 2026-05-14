@@ -44,7 +44,7 @@ QUESTION_TEMPLATES = {
         "Over wie gaat '{begrip}'?",
     ],
     "waarom": [
-        "Waarom is '{begrip}' belangrijk?",
+        "Waarom == '{begrip}' belangrijk?",
         "Waarom noem je '{begrip}'?",
         "Wat maakt '{begrip}' relevant voor jou?",
     ],

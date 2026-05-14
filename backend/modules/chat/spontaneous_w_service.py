@@ -111,7 +111,7 @@ def extract_w_fields(text: str) -> dict:
 
 
 def _is_card_unapproved(entry: dict) -> bool:
-    """Kaart is 'nog niet goedgekeurd' als 'auto-generated' tag aanwezig is."""
+    """Kaart == 'nog niet goedgekeurd' als 'auto-generated' tag aanwezig is."""
     tags = entry.get("tags") or []
     return "auto-generated" in tags
 

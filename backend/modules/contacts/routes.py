@@ -145,6 +145,9 @@ async def list_contacts(user_id: str) -> Dict:
         uid = u.get("id")
         if not uid or uid == user_id:
             continue  # niet zichzelf
+        # Spark AI niet als prive-contact tonen (heeft eigen tab "Spark AI")
+        if uid == "user-000" or (u.get("rol") or "").startswith("AI Assistant"):
+            continue
 
         is_bot = _is_bot(u)
         target_grad = u.get("gradatie", 7) or 7
@@ -265,6 +268,29 @@ async def send_message(req: SendMessage) -> Dict:
     }
     data["messages"] = data.get("messages", []) + [msg]
     save_json(fp, data)
+
+    # Snap-systeem + Shadow Observer (v4_contacts_002) — leer ook uit privé-gesprekken
+    # Niet-blokkerend: chat mag nooit breken door snap/shadow
+    try:
+        from modules.chat.snap_service import SnapNLPService
+        from modules.chat import shadow_observer
+        snap = SnapNLPService()
+        sentiment = snap.detect_sentiment(req.text)
+        meaningful = snap._extract_meaningful_words(req.text) if hasattr(snap, "_extract_meaningful_words") else []
+        shadow_response = {
+            "type": "prive_message",
+            "message": req.text[:200],
+            "sentiment": sentiment,
+            "unknown_words": [],
+            "knowledge_matches": [],
+            "channel": "prive",
+            "to_user_id": req.to_user_id,
+            "is_bot_target": _is_bot(recipient),
+            "meaningful_words": meaningful[:15],
+        }
+        shadow_observer.record(req.from_user_id, req.text, shadow_response, "prive")
+    except Exception:
+        pass
 
     # Bot auto-reply (eenvoudig: vraag aan chat-route met channel=prive zou kunnen,
     # nu simpel: bot stuurt directe acknowledgement)

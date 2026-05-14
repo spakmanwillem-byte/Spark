@@ -2898,9 +2898,18 @@
           "/app/backend/server.py (router)",
           "/app/frontend/src/components/workspace/GesprekkenPage.js (Privé tab herbouw)"
         ]
+      },
+      {
+        "id": "v4_contacts_002",
+        "titel": "Privé contacts polish: Spark uitsluiten + Snap/Shadow hook",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "beschrijving": "Spark AI (user-000 + rol 'AI Assistant...') verwijderd uit Privé contactlijst (heeft eigen tab). Privé-berichten triggeren nu Snap-woord extractie (_extract_meaningful_words) + Shadow Observer event (channel='prive', is_bot_target flag) — self-learning werkt nu over ALLE conversaties heen, niet alleen Spark AI tab.",
+        "voltooid_op": "2026-05-14"
       }
     ],
-    "last_updated": "2026-05-14T10:35:11.368549",
+    "last_updated": "2026-05-14T10:39:41.461806",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

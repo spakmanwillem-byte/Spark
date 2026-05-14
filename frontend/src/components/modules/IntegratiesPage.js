@@ -3,7 +3,8 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Search, FolderOpen, FileCode, FilePlus, Package, Play, Link2, Trash2,
   Save, X, ChevronRight, Code, AlertTriangle, CheckCircle, Lock,
-  Plus, TestTube, Puzzle, Eye, FileText, Loader2
+  Plus, TestTube, Puzzle, Eye, FileText, Loader2,
+  Archive, Download, Upload, Clock, RotateCcw
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -14,6 +15,7 @@ export function IntegratiesPage({ onNavigate }) {
   const tabs = [
     { id: 'files', label: 'Bestanden', icon: FolderOpen, accent: '#3b82f6' },
     { id: 'sandbox', label: 'Module Sandbox', icon: Package, accent: '#a855f7' },
+    { id: 'backup', label: 'Backup Systeem', icon: Archive, accent: '#10b981' },
   ];
 
   return (
@@ -54,6 +56,7 @@ export function IntegratiesPage({ onNavigate }) {
         <div className="flex-1 overflow-hidden">
           {activeTab === 'files' && <FileBrowser />}
           {activeTab === 'sandbox' && <ModuleSandbox />}
+          {activeTab === 'backup' && <BackupPanel />}
         </div>
       </div>
     </MainLayout>
@@ -450,3 +453,405 @@ function ModuleSandbox() {
 }
 
 export default IntegratiesPage;
+
+
+/* ================================================================ */
+/*  BACKUP PANEL  -  v4_backup_001                                   */
+/* ================================================================ */
+function BackupPanel() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(null); // 'mark' | 'full' | 'changes' | 'preview' | 'restore'
+  const [toast, setToast] = useState(null);
+  const [restoreFile, setRestoreFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const showToast = (msg, type = 'info') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 4000);
+  };
+
+  const loadStatus = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API}/api/backup/status`);
+      const data = await res.json();
+      setStatus(data);
+    } catch (e) {
+      showToast('Status kon niet geladen worden', 'error');
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { loadStatus(); }, [loadStatus]);
+
+  const markDeployed = async () => {
+    if (!window.confirm('Markeer huidige status als "laatste deploy"?\n\nVanaf nu wordt elk gewijzigd bestand opgenomen in de "Wijzigingen sinds deploy" backup.')) return;
+    setBusy('mark');
+    try {
+      const res = await fetch(`${API}/api/backup/mark-deployed`, { method: 'POST' });
+      const data = await res.json();
+      if (data.ok) {
+        showToast('Deploy-marker gezet', 'success');
+        await loadStatus();
+      } else {
+        showToast('Markeren mislukt', 'error');
+      }
+    } catch (e) { showToast('Fout: ' + e.message, 'error'); }
+    setBusy(null);
+  };
+
+  const downloadZip = async (type) => {
+    setBusy(type);
+    try {
+      const url = type === 'full' ? `${API}/api/backup/download/full` : `${API}/api/backup/download/changes`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Download mislukt');
+      const blob = await res.blob();
+      const dlUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = dlUrl;
+      // Probeer bestandsnaam uit header te halen
+      const cd = res.headers.get('Content-Disposition') || '';
+      const m = cd.match(/filename="?([^";]+)"?/);
+      a.download = m ? m[1] : `spark_backup_${type}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(dlUrl);
+      showToast(`Download gestart: ${a.download}`, 'success');
+    } catch (e) { showToast('Download fout: ' + e.message, 'error'); }
+    setBusy(null);
+  };
+
+  const previewRestore = async (file) => {
+    setRestoreFile(file);
+    setPreview(null);
+    setBusy('preview');
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch(`${API}/api/backup/restore/preview`, { method: 'POST', body: form });
+      const data = await res.json();
+      if (res.ok) {
+        setPreview(data);
+      } else {
+        showToast(data.detail || 'Preview mislukt', 'error');
+        setRestoreFile(null);
+      }
+    } catch (e) {
+      showToast('Preview fout: ' + e.message, 'error');
+      setRestoreFile(null);
+    }
+    setBusy(null);
+  };
+
+  const doRestore = async () => {
+    if (!restoreFile) return;
+    setBusy('restore');
+    setShowConfirm(false);
+    try {
+      const form = new FormData();
+      form.append('file', restoreFile);
+      form.append('confirm', 'true');
+      const res = await fetch(`${API}/api/backup/restore`, { method: 'POST', body: form });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        showToast(`Restore klaar: ${data.created_count} nieuw, ${data.overwritten_count} overschreven`, 'success');
+        setRestoreFile(null);
+        setPreview(null);
+        await loadStatus();
+      } else {
+        showToast(data.detail || 'Restore mislukt', 'error');
+      }
+    } catch (e) { showToast('Restore fout: ' + e.message, 'error'); }
+    setBusy(null);
+  };
+
+  if (loading) {
+    return <div className="flex-1 flex items-center justify-center"><Loader2 className="w-6 h-6 text-emerald-400 animate-spin" /></div>;
+  }
+
+  const marker = status?.marker || {};
+  const hasMarker = !!marker.marked_at;
+
+  return (
+    <div data-testid="backup-panel" className="h-full overflow-y-auto p-6 space-y-6">
+      {/* Toast */}
+      {toast && (
+        <div data-testid="backup-toast" className={`fixed top-20 right-6 z-50 px-4 py-3 rounded-lg shadow-lg text-sm font-medium ${
+          toast.type === 'success' ? 'bg-emerald-500/90 text-white' :
+          toast.type === 'error' ? 'bg-red-500/90 text-white' : 'bg-slate-700/90 text-white'
+        }`}>
+          {toast.msg}
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="max-w-4xl">
+        <div className="flex items-center gap-3 mb-2">
+          <Archive className="w-6 h-6 text-emerald-400" />
+          <h2 className="text-xl font-bold text-white">Spark Backup Systeem</h2>
+        </div>
+        <p className="text-sm text-slate-400">
+          Download alle Spark-data als ZIP naar je computer. Werkt zonder externe database — past bij offline-first filosofie.
+          Restore is altijd <strong className="text-emerald-300">merge-only</strong> (overschrijft of voegt toe, verwijdert nooit).
+        </p>
+      </div>
+
+      {/* Status card */}
+      <div className="max-w-4xl bg-slate-900/40 border border-slate-800 rounded-xl p-5">
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <Clock className="w-4 h-4 text-emerald-400" />
+              Status
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">Wat zit er in het systeem en wat is er veranderd sinds laatste deploy.</p>
+          </div>
+          <button
+            data-testid="backup-refresh"
+            onClick={loadStatus}
+            className="text-xs text-slate-400 hover:text-white flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-800/50"
+          >
+            <RotateCcw className="w-3 h-3" /> Vernieuwen
+          </button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          <Stat label="Bestanden totaal" value={status?.total_files ?? 0} accent="text-blue-300" />
+          <Stat label="Gewijzigd sinds deploy" value={status?.changed_files_count ?? 0} accent="text-emerald-300" />
+          <Stat
+            label="Laatste deploy"
+            value={hasMarker ? new Date(marker.marked_at).toLocaleString('nl-NL') : 'Niet ingesteld'}
+            accent={hasMarker ? 'text-slate-200' : 'text-amber-300'}
+            small
+          />
+        </div>
+
+        <button
+          data-testid="backup-mark-deployed"
+          onClick={markDeployed}
+          disabled={busy === 'mark'}
+          className="w-full text-sm font-medium px-4 py-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-200 hover:bg-amber-500/20 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          {busy === 'mark' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Clock className="w-4 h-4" />}
+          Markeer huidige status als "laatste deploy"
+        </button>
+        <p className="text-[11px] text-slate-500 mt-2">
+          Klik hier <strong className="text-amber-200">direct na een succesvolle deploy</strong>. Vanaf dat moment telt elk gewijzigd bestand mee in de "Wijzigingen"-backup.
+        </p>
+      </div>
+
+      {/* Download buttons */}
+      <div className="max-w-4xl grid md:grid-cols-2 gap-4">
+        <DownloadCard
+          testid="backup-download-changes"
+          icon={Download}
+          title="Alleen wijzigingen (aanbevolen)"
+          subtitle={`${status?.changed_files_count ?? 0} bestand(en) sinds laatste deploy`}
+          desc="Kleine ZIP met alleen bestanden die zijn aangepast na je deploy-marker. Snel te downloaden en mergen."
+          color="emerald"
+          loading={busy === 'changes'}
+          disabled={!hasMarker && (status?.changed_files_count ?? 0) > 50}
+          warning={!hasMarker ? 'Geen deploy-marker — alles wordt als "gewijzigd" gezien.' : null}
+          onClick={() => downloadZip('changes')}
+        />
+        <DownloadCard
+          testid="backup-download-full"
+          icon={Archive}
+          title="Volledige backup"
+          subtitle={`${status?.total_files ?? 0} bestanden`}
+          desc="Complete ZIP van alle Spark-data (data/ + memory/). Groter maar volledig."
+          color="blue"
+          loading={busy === 'full'}
+          onClick={() => downloadZip('full')}
+        />
+      </div>
+
+      {/* Restore */}
+      <div className="max-w-4xl bg-slate-900/40 border border-slate-800 rounded-xl p-5">
+        <h3 className="text-sm font-semibold text-white flex items-center gap-2 mb-1">
+          <Upload className="w-4 h-4 text-purple-400" />
+          Backup terugzetten (merge)
+        </h3>
+        <p className="text-xs text-slate-500 mb-4">
+          Sleep een ZIP hierheen, bekijk wat er gemerged wordt, bevestig daarna. <strong className="text-emerald-300">Niets wordt verwijderd</strong> — alleen nieuwe en gewijzigde bestanden worden toegepast.
+        </p>
+
+        <label data-testid="backup-restore-upload" className="block border-2 border-dashed border-slate-700 hover:border-purple-500/50 rounded-lg p-6 text-center cursor-pointer transition-colors">
+          <input
+            type="file"
+            accept=".zip"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) previewRestore(f);
+              e.target.value = '';
+            }}
+          />
+          <Upload className="w-6 h-6 text-slate-500 mx-auto mb-2" />
+          <p className="text-sm text-slate-300">
+            {restoreFile ? <span className="text-purple-300">{restoreFile.name}</span> : 'Klik om een .zip te kiezen'}
+          </p>
+          <p className="text-[11px] text-slate-500 mt-1">Geen automatische restore — je krijgt eerst een preview.</p>
+        </label>
+
+        {busy === 'preview' && (
+          <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
+            <Loader2 className="w-4 h-4 animate-spin" /> ZIP wordt geanalyseerd...
+          </div>
+        )}
+
+        {preview && (
+          <div data-testid="backup-preview" className="mt-4 bg-slate-950/50 border border-slate-800 rounded-lg p-4">
+            <p className="text-xs text-slate-400 mb-3">
+              Preview voor <strong className="text-white">{preview.summary?.filename}</strong> ({Math.round((preview.summary?.size_bytes || 0) / 1024)} KB)
+            </p>
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              <PreviewStat label="Nieuw" count={preview.summary?.new_count} color="text-emerald-300" />
+              <PreviewStat label="Wijzigen" count={preview.summary?.modified_count} color="text-amber-300" />
+              <PreviewStat label="Identiek" count={preview.summary?.identical_count} color="text-slate-400" />
+              <PreviewStat label="Overgeslagen" count={preview.summary?.skipped_count} color="text-red-300" />
+            </div>
+
+            {preview.summary?.modified_count > 0 && (
+              <details className="text-xs text-slate-400 mb-2">
+                <summary className="cursor-pointer hover:text-white">Te wijzigen bestanden ({preview.summary.modified_count})</summary>
+                <ul className="mt-2 max-h-40 overflow-y-auto space-y-1">
+                  {(preview.details?.modified || []).slice(0, 100).map((f, i) => (
+                    <li key={i} className="text-amber-200/80 truncate">~ {f.path}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
+            {preview.summary?.new_count > 0 && (
+              <details className="text-xs text-slate-400 mb-3">
+                <summary className="cursor-pointer hover:text-white">Nieuwe bestanden ({preview.summary.new_count})</summary>
+                <ul className="mt-2 max-h-40 overflow-y-auto space-y-1">
+                  {(preview.details?.new || []).slice(0, 100).map((f, i) => (
+                    <li key={i} className="text-emerald-300/80 truncate">+ {f.path}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
+
+            <div className="flex gap-2 mt-3">
+              <button
+                data-testid="backup-restore-confirm"
+                onClick={() => setShowConfirm(true)}
+                disabled={busy === 'restore' || (preview.summary?.new_count + preview.summary?.modified_count) === 0}
+                className="flex-1 px-4 py-2 text-sm font-medium rounded-lg bg-purple-500/20 border border-purple-500/40 text-purple-200 hover:bg-purple-500/30 disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {busy === 'restore' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                Merge toepassen
+              </button>
+              <button
+                data-testid="backup-restore-cancel"
+                onClick={() => { setRestoreFile(null); setPreview(null); }}
+                className="px-4 py-2 text-sm text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50"
+              >
+                Annuleren
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Changed files preview list */}
+      {(status?.changed_files?.length ?? 0) > 0 && (
+        <div className="max-w-4xl bg-slate-900/40 border border-slate-800 rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-white mb-3">Gewijzigde bestanden ({status.changed_files_count})</h3>
+          <div className="max-h-60 overflow-y-auto space-y-1 text-xs">
+            {status.changed_files.slice(0, 200).map((f, i) => (
+              <div key={i} className="flex justify-between gap-3 text-slate-400 hover:text-slate-200 py-1 border-b border-slate-800/40">
+                <span className="truncate font-mono">{f.path}</span>
+                <span className="text-slate-600 text-[10px] whitespace-nowrap">{new Date(f.mtime).toLocaleString('nl-NL')}</span>
+              </div>
+            ))}
+            {status.changed_files_count > 200 && (
+              <p className="text-[11px] text-slate-500 text-center pt-2">... en nog {status.changed_files_count - 200} meer</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Confirm dialog */}
+      {showConfirm && preview && (
+        <div data-testid="backup-confirm-dialog" className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="bg-slate-900 border border-purple-500/40 rounded-xl p-6 max-w-md w-full">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle className="w-5 h-5 text-amber-400" />
+              <h4 className="text-base font-semibold text-white">Bevestig merge</h4>
+            </div>
+            <p className="text-sm text-slate-300 mb-2">
+              <strong className="text-emerald-300">{preview.summary?.new_count}</strong> nieuwe bestanden worden toegevoegd,
+              <strong className="text-amber-300"> {preview.summary?.modified_count}</strong> bestaande bestanden worden overschreven.
+            </p>
+            <p className="text-xs text-slate-500 mb-4">
+              Lokale bestanden die niet in de ZIP zitten blijven onaangetast. Deze actie is niet automatisch terug te draaien — maak eerst een volledige backup als je twijfelt.
+            </p>
+            <div className="flex gap-2">
+              <button
+                data-testid="backup-confirm-yes"
+                onClick={doRestore}
+                className="flex-1 px-4 py-2 text-sm font-medium rounded-lg bg-purple-500 hover:bg-purple-600 text-white"
+              >
+                Ja, merge toepassen
+              </button>
+              <button
+                data-testid="backup-confirm-no"
+                onClick={() => setShowConfirm(false)}
+                className="px-4 py-2 text-sm text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50"
+              >
+                Annuleren
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Stat({ label, value, accent, small }) {
+  return (
+    <div className="bg-slate-950/50 border border-slate-800 rounded-lg p-3">
+      <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">{label}</p>
+      <p className={`${small ? 'text-xs' : 'text-xl'} font-bold ${accent}`}>{value}</p>
+    </div>
+  );
+}
+
+function PreviewStat({ label, count, color }) {
+  return (
+    <div className="bg-slate-900/60 rounded-md p-2 text-center">
+      <p className={`text-lg font-bold ${color}`}>{count ?? 0}</p>
+      <p className="text-[10px] text-slate-500 uppercase tracking-wider">{label}</p>
+    </div>
+  );
+}
+
+function DownloadCard({ testid, icon: Icon, title, subtitle, desc, color, loading, disabled, warning, onClick }) {
+  const colorMap = {
+    emerald: 'border-emerald-500/30 hover:border-emerald-500/60 text-emerald-300 bg-emerald-500/5',
+    blue: 'border-blue-500/30 hover:border-blue-500/60 text-blue-300 bg-blue-500/5',
+  };
+  return (
+    <button
+      data-testid={testid}
+      onClick={onClick}
+      disabled={loading || disabled}
+      className={`text-left p-4 rounded-xl border transition-all disabled:opacity-50 disabled:cursor-not-allowed ${colorMap[color]}`}
+    >
+      <div className="flex items-center gap-2 mb-1">
+        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Icon className="w-5 h-5" />}
+        <h4 className="text-sm font-semibold text-white">{title}</h4>
+      </div>
+      <p className="text-xs text-slate-400 mb-2">{subtitle}</p>
+      <p className="text-[11px] text-slate-500 leading-relaxed">{desc}</p>
+      {warning && <p className="text-[11px] text-amber-300 mt-2">⚠ {warning}</p>}
+    </button>
+  );
+}

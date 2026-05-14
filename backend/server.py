@@ -153,6 +153,10 @@ app.include_router(voice_router, prefix="/api")
 from modules.profile import router as profile_router
 app.include_router(profile_router, prefix="/api")
 
+# Module 20: Backup (export/import van alle Spark data)
+from modules.backup import backup_router
+app.include_router(backup_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

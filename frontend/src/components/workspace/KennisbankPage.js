@@ -10,7 +10,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export function KennisbankPage({ onNavigate }) {
   const [entries, setEntries] = useState([]);
-  const [stats, setStats] = useState({ total: 0, answered: 0, unanswered: 0, te_herzien: 0 });
+  const [stats, setStats] = useState({ total: 0, answered: 0, unanswered: 0, te_herzien: 0, review_pending: 0 });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -141,11 +141,97 @@ export function KennisbankPage({ onNavigate }) {
     }
   };
 
+  // ============== v4_019 REVIEW MODE ==============
+  const [reviewEntry, setReviewEntry] = useState(null);
+  const [reviewLoading, setReviewLoading] = useState(false);
+  const [reviewForm, setReviewForm] = useState(null);
+  const [reviewSavedMsg, setReviewSavedMsg] = useState('');
+
+  const loadReviewEntry = useCallback(async (afterId = null) => {
+    setReviewLoading(true);
+    setReviewSavedMsg('');
+    try {
+      const url = afterId
+        ? `${API}/api/knowledge/review/next?after_id=${afterId}`
+        : `${API}/api/knowledge/review/next`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.entry) {
+        const e = data.entry;
+        const lagen = e.lagen || {};
+        setReviewEntry(e);
+        setReviewForm({
+          begrip: e.begrip || '',
+          laag1: lagen.laag1 || '',
+          laag2: lagen.laag2 || '',
+          laag3: lagen.laag3 || '',
+          laag4: lagen.laag4 || '',
+          topic: e.topic || '',
+          tags: (e.tags || []).join(', '),
+          belangrijkheid: e.belangrijkheid || 3,
+          kaart_type: e.kaart_type || 'concept',
+          ws5: e.ws5 || { wie: '', wat: '', wanneer: '', waar: '', waarom: '', hoe: '' },
+        });
+      } else {
+        setReviewEntry(null);
+        setReviewForm(null);
+      }
+    } catch (err) { console.error('Review load error:', err); }
+    setReviewLoading(false);
+  }, []);
+
+  // Wanneer user op Review-pill klikt → eerste kaart automatisch laden
+  useEffect(() => {
+    if (statusFilter === 'review' && !reviewEntry) loadReviewEntry();
+    if (statusFilter !== 'review') { setReviewEntry(null); setReviewForm(null); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusFilter]);
+
+  const reviewSave = async (alsoNext = true) => {
+    if (!reviewEntry || !reviewForm) return;
+    try {
+      await fetch(`${API}/api/knowledge/${reviewEntry.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          begrip: reviewForm.begrip,
+          lagen: { laag1: reviewForm.laag1, laag2: reviewForm.laag2, laag3: reviewForm.laag3, laag4: reviewForm.laag4 },
+          topic: reviewForm.topic,
+          tags: reviewForm.tags.split(',').map(t => t.trim()).filter(Boolean),
+          belangrijkheid: reviewForm.belangrijkheid,
+          kaart_type: reviewForm.kaart_type,
+          ws5: reviewForm.ws5,
+        }),
+      });
+      await fetch(`${API}/api/knowledge/${reviewEntry.id}/review`, { method: 'POST' });
+      setReviewSavedMsg('Opgeslagen ✓');
+      fetchStats();
+      if (alsoNext) {
+        await loadReviewEntry(reviewEntry.id);
+      }
+    } catch (err) { console.error('Review save error:', err); }
+  };
+
+  const reviewSkip = async () => {
+    if (!reviewEntry) return;
+    await loadReviewEntry(reviewEntry.id);
+  };
+
+  const reviewMarkOnly = async () => {
+    // Markeer als gereviewd zonder bewerkingen op te slaan (kaart was al goed)
+    if (!reviewEntry) return;
+    await fetch(`${API}/api/knowledge/${reviewEntry.id}/review`, { method: 'POST' });
+    fetchStats();
+    await loadReviewEntry(reviewEntry.id);
+  };
+  // ============== EINDE REVIEW MODE ==============
+
   const filterButtons = [
     { id: 'all', label: 'Alles', count: stats.total, color: '#f59e0b' },
     { id: 'unanswered', label: 'Onbeantwoord', count: stats.unanswered, color: '#f97316' },
     { id: 'answered', label: 'Beantwoord', count: stats.answered, color: '#22c55e' },
     { id: 'te-herzien', label: 'Te Herzien', count: stats.te_herzien, color: '#ef4444' },
+    { id: 'review', label: 'Review', count: stats.review_pending, color: '#a855f7' },
   ];
 
   const sortOptions = [
@@ -172,7 +258,7 @@ export function KennisbankPage({ onNavigate }) {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {filterButtons.map(f => (
             <button
               key={f.id}
@@ -193,7 +279,8 @@ export function KennisbankPage({ onNavigate }) {
           ))}
         </div>
 
-        {/* Search + Sort */}
+        {/* Search + Sort (verborgen in review-mode) */}
+        {statusFilter !== 'review' && (<>
         <div className="flex gap-3 items-center">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -239,8 +326,10 @@ export function KennisbankPage({ onNavigate }) {
           <span>{total.toLocaleString()} resultaten</span>
           <span>Pagina {page} van {totalPages}</span>
         </div>
+        </>)}
 
-        {/* Entries List */}
+        {/* Entries List (verborgen in review-mode) */}
+        {statusFilter !== 'review' && (
         <div className="space-y-2">
           {loading ? (
             <div className="py-20 text-center">
@@ -262,9 +351,26 @@ export function KennisbankPage({ onNavigate }) {
             ))
           )}
         </div>
+        )}
+
+        {/* v4_019 Review Panel */}
+        {statusFilter === 'review' && (
+          <ReviewPanel
+            entry={reviewEntry}
+            form={reviewForm}
+            setForm={setReviewForm}
+            loading={reviewLoading}
+            savedMsg={reviewSavedMsg}
+            onSaveNext={() => reviewSave(true)}
+            onSaveStay={() => reviewSave(false)}
+            onSkip={reviewSkip}
+            onMarkOnly={reviewMarkOnly}
+            queueTotal={stats.review_pending}
+          />
+        )}
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {statusFilter !== 'review' && totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 pt-2">
             <button
               data-testid="prev-page"
@@ -327,6 +433,148 @@ export function KennisbankPage({ onNavigate }) {
         )}
       </div>
     </MainLayout>
+  );
+}
+
+/* === v4_019 Review Panel === */
+function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSaveStay, onSkip, onMarkOnly, queueTotal }) {
+  if (loading) {
+    return (
+      <div className="py-20 text-center">
+        <div className="w-8 h-8 border-3 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-slate-500 text-sm">Volgende kaart laden...</p>
+      </div>
+    );
+  }
+  if (!entry || !form) {
+    return (
+      <div className="py-20 text-center bg-slate-900/40 border border-purple-500/20 rounded-xl">
+        <CheckCircle className="w-12 h-12 text-purple-400 mx-auto mb-3" />
+        <p className="text-white text-lg font-semibold mb-1">Alle kaarten zijn gereviewd!</p>
+        <p className="text-slate-400 text-sm">Goed bezig. Tijd voor iets anders.</p>
+      </div>
+    );
+  }
+  const meta = entry.metadata || {};
+  const reviewCount = meta.review_count || 0;
+  const setLag = (key, val) => setForm(prev => ({ ...prev, [key]: val }));
+  const setW5 = (k, v) => setForm(prev => ({ ...prev, ws5: { ...prev.ws5, [k]: v } }));
+
+  const fmt = (iso) => iso ? new Date(iso).toLocaleDateString('nl-NL') : '—';
+
+  return (
+    <div data-testid="review-panel" className="bg-slate-900/50 border border-purple-500/30 rounded-2xl overflow-hidden">
+      {/* Header */}
+      <div className="px-5 py-4 border-b border-purple-500/20 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.08), rgba(236,72,153,0.04))' }}>
+        <div>
+          <div className="flex items-center gap-2 text-[10px] text-purple-300 uppercase tracking-wider mb-1">
+            <Eye className="w-3 h-3" /> Review modus
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-400">{queueTotal?.toLocaleString() || 0} kaarten te gaan</span>
+          </div>
+          <h2 className="text-lg font-bold text-white">{entry.begrip}</h2>
+        </div>
+        <div className="text-right text-[10px] text-slate-500 space-y-0.5">
+          <div>Aangemaakt: <span className="text-slate-400">{fmt(meta.created_at || entry.detected_at)}</span></div>
+          <div>Bijgewerkt: <span className="text-slate-400">{fmt(meta.updated_at)}</span></div>
+          <div>Reviews: <span className="text-purple-300">{reviewCount}×</span></div>
+        </div>
+      </div>
+
+      {/* Body — alle velden inline editable */}
+      <div className="p-5 space-y-4 max-h-[60vh] overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label className="text-[10px] text-slate-400 uppercase tracking-wider">Begrip</label>
+            <input data-testid="rev-begrip" type="text" value={form.begrip} onChange={e => setLag('begrip', e.target.value)}
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+          </div>
+          <div>
+            <label className="text-[10px] text-slate-400 uppercase tracking-wider">Kaart type</label>
+            <select data-testid="rev-kaart-type" value={form.kaart_type || 'concept'} onChange={e => setLag('kaart_type', e.target.value)}
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+              {['concept','recept','procedure','dialogue','blueprint','emotional_pattern','context'].map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label className="text-[10px] text-slate-400 uppercase tracking-wider">Lagen 1-4</label>
+          <div className="space-y-2 mt-1">
+            {[1,2,3,4].map(n => (
+              <textarea key={n} data-testid={`rev-laag${n}`} rows={2} value={form[`laag${n}`]}
+                onChange={e => setLag(`laag${n}`, e.target.value)}
+                placeholder={['Korte definitie','Uitgebreider','Diepere context','Essentie / kern'][n-1]}
+                className="w-full bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="text-[10px] text-slate-400 uppercase tracking-wider">5W+H</label>
+          <div className="grid grid-cols-2 gap-2 mt-1">
+            {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
+              <input key={k} data-testid={`rev-ws5-${k}`} type="text" value={form.ws5[k] || ''}
+                onChange={e => setW5(k, e.target.value)}
+                placeholder={k.charAt(0).toUpperCase() + k.slice(1)}
+                className="bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label className="text-[10px] text-slate-400 uppercase tracking-wider">Tags <span className="text-slate-600">(komma-gescheiden)</span></label>
+            <input data-testid="rev-tags" type="text" value={form.tags} onChange={e => setLag('tags', e.target.value)}
+              placeholder="bv. emotie, blij, doel"
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+          </div>
+          <div>
+            <label className="text-[10px] text-slate-400 uppercase tracking-wider">Topic</label>
+            <input data-testid="rev-topic" type="text" value={form.topic} onChange={e => setLag('topic', e.target.value)}
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+          </div>
+        </div>
+
+        <div>
+          <label className="text-[10px] text-slate-400 uppercase tracking-wider">Belangrijkheid (1-5)</label>
+          <div className="flex gap-1 mt-1">
+            {[1,2,3,4,5].map(s => (
+              <button key={s} data-testid={`rev-star-${s}`} type="button" onClick={() => setLag('belangrijkheid', s)} className="p-1">
+                <Star className={`w-5 h-5 ${s <= (form.belangrijkheid || 0) ? 'text-amber-400 fill-current' : 'text-slate-700'}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer — actie-knoppen */}
+      <div className="px-5 py-3 border-t border-slate-800 bg-slate-900/40 flex items-center justify-between gap-2 flex-wrap">
+        <div className="flex items-center gap-2 text-xs">
+          {savedMsg && <span className="text-green-400">{savedMsg}</span>}
+        </div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <button data-testid="rev-skip" onClick={onSkip} className="px-3 py-2 rounded-lg text-xs text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+            Overslaan
+          </button>
+          <button data-testid="rev-mark-only" onClick={onMarkOnly}
+            className="px-3 py-2 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            title="Kaart is goed zoals hij is — alleen review-stempel zetten">
+            Goedgekeurd, volgende
+          </button>
+          <button data-testid="rev-save-stay" onClick={onSaveStay}
+            className="px-3 py-2 rounded-lg text-xs bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 transition-colors">
+            <Save className="w-3.5 h-3.5 inline -mt-0.5 mr-1" /> Opslaan
+          </button>
+          <button data-testid="rev-save-next" onClick={onSaveNext}
+            className="px-4 py-2 rounded-lg text-xs font-medium text-white transition-colors flex items-center gap-1.5"
+            style={{ background: 'linear-gradient(135deg, #a855f7, #ec4899)' }}>
+            <Save className="w-3.5 h-3.5" /> Opslaan & volgende
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

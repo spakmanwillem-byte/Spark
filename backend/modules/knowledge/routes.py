@@ -42,6 +42,16 @@ async def get_all_tags():
     return {"tags": service.get_all_tags()}
 
 
+@router.get("/review/next")
+async def get_next_review_entry(after_id: Optional[str] = Query(None)):
+    """v4_019: pak volgende kaart voor de Review-flow.
+    Nooit-gereviewd eerst, daarna langst-niet-gereviewd."""
+    entry = service.get_next_review(after_id=after_id)
+    if not entry:
+        return {"entry": None, "message": "Geen kaarten meer om te reviewen."}
+    return {"entry": entry}
+
+
 @router.get("/{entry_id}")
 async def get_knowledge_entry(entry_id: str):
     """Get single knowledge entry by ID"""
@@ -67,3 +77,16 @@ async def delete_knowledge_entry(entry_id: str):
     if not deleted:
         raise HTTPException(status_code=404, detail="Entry niet gevonden")
     return {"status": "ok", "message": "Entry verwijderd"}
+
+
+@router.post("/{entry_id}/review")
+async def mark_entry_reviewed(entry_id: str):
+    """v4_019: registreer een review (zet reviewed_at + verhoog review_count)."""
+    entry = service.mark_reviewed(entry_id)
+    if not entry:
+        raise HTTPException(status_code=404, detail="Entry niet gevonden")
+    return {
+        "status": "ok",
+        "reviewed_at": (entry.get("metadata") or {}).get("reviewed_at"),
+        "review_count": (entry.get("metadata") or {}).get("review_count"),
+    }

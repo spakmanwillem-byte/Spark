@@ -2,10 +2,15 @@
 Knowledge Service - Business logic voor kennisbank
 Leest en schrijft naar knowledge_base.json
 """
+from datetime import datetime, timezone
 from pathlib import Path
 from modules.core.storage import load_json, save_json
 
 KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat()
 
 
 class KnowledgeService:
@@ -14,7 +19,10 @@ class KnowledgeService:
         return data.get("knowledge_entries", [])
 
     def _save_entries(self, entries):
-        save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+        # Preserve root metadata (schema_version, valid_kaart_types, etc.)
+        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+        data["knowledge_entries"] = entries
+        save_json(KNOWLEDGE_FILE, data)
 
     def _needs_audit(self, entry):
         if entry.get("type") == "action":
@@ -46,11 +54,17 @@ class KnowledgeService:
         answered = sum(1 for e in entries if self._is_answered(e))
         unanswered = total - answered
         te_herzien = sum(1 for e in entries if self._needs_audit(e))
+        # v4_019: Review-pending = nog nooit gereviewd (reviewed_at == null) — alle kaarten
+        review_pending = sum(
+            1 for e in entries
+            if not ((e.get("metadata") or {}).get("reviewed_at"))
+        )
         return {
             "total": total,
             "answered": answered,
             "unanswered": unanswered,
             "te_herzien": te_herzien,
+            "review_pending": review_pending,
         }
 
     def get_all_tags(self):
@@ -74,6 +88,10 @@ class KnowledgeService:
             entries = [e for e in entries if self._is_answered(e)]
         elif status_filter == "te-herzien":
             entries = [e for e in entries if self._needs_audit(e)]
+        elif status_filter == "review":
+            # v4_019: Review-mode = nog nooit gereviewd of langst geleden gereviewd
+            # Sortering wordt verderop forced toegepast
+            sort_by = "review-priority"
 
         # Search
         if search and search.strip():
@@ -105,6 +123,16 @@ class KnowledgeService:
             entries.sort(key=lambda e: e.get("belangrijkheid") or 0, reverse=True)
         elif sort_by == "importance-low":
             entries.sort(key=lambda e: e.get("belangrijkheid") or 0)
+        elif sort_by == "review-priority":
+            # Nooit gereviewd eerst (reviewed_at == None), daarna oudste reviewed_at,
+            # binnen gelijke groep: oudste created_at eerst (oudste kaarten dus eerst).
+            def review_key(e):
+                m = e.get("metadata") or {}
+                reviewed = m.get("reviewed_at")
+                created = m.get("created_at") or e.get("detected_at") or ""
+                # None reviewed → sorteer-key '' zodat ze bovenaan staan
+                return (reviewed or "", created)
+            entries.sort(key=review_key)
 
         total = len(entries)
         start = (page - 1) * per_page
@@ -126,9 +154,14 @@ class KnowledgeService:
                 "tags": e.get("tags", []),
                 "belangrijkheid": e.get("belangrijkheid", 0),
                 "type": e.get("type"),
+                "kaart_type": e.get("kaart_type") or "concept",
                 "status": e.get("status"),
                 "is_answered": self._is_answered(e),
                 "needs_audit": self._needs_audit(e),
+                "reviewed_at": (e.get("metadata") or {}).get("reviewed_at"),
+                "review_count": (e.get("metadata") or {}).get("review_count") or 0,
+                "created_at": (e.get("metadata") or {}).get("created_at") or e.get("detected_at"),
+                "updated_at": (e.get("metadata") or {}).get("updated_at"),
             })
 
         return {
@@ -150,21 +183,45 @@ class KnowledgeService:
         entries = self._load_entries()
         for i, e in enumerate(entries):
             if e.get("id") == entry_id:
-                if "begrip" in data:
-                    entries[i]["begrip"] = data["begrip"]
-                if "lagen" in data:
-                    entries[i]["lagen"] = data["lagen"]
-                if "topic" in data:
-                    entries[i]["topic"] = data["topic"]
-                if "tags" in data:
-                    entries[i]["tags"] = data["tags"]
-                if "belangrijkheid" in data:
-                    entries[i]["belangrijkheid"] = data["belangrijkheid"]
-                if "ws5" in data:
-                    entries[i]["ws5"] = data["ws5"]
+                for fld in ("begrip", "lagen", "topic", "tags", "belangrijkheid", "ws5", "kaart_type"):
+                    if fld in data:
+                        entries[i][fld] = data[fld]
+                # Stamp updated_at
+                m = entries[i].setdefault("metadata", {})
+                m["updated_at"] = _now_iso()
+                if "created_at" not in m:
+                    m["created_at"] = e.get("detected_at") or m["updated_at"]
                 self._save_entries(entries)
                 return True
         return False
+
+    def mark_reviewed(self, entry_id):
+        """v4_019: registreer een review-actie zonder content te wijzigen."""
+        entries = self._load_entries()
+        for i, e in enumerate(entries):
+            if e.get("id") == entry_id:
+                m = entries[i].setdefault("metadata", {})
+                m["reviewed_at"] = _now_iso()
+                m["review_count"] = int(m.get("review_count") or 0) + 1
+                self._save_entries(entries)
+                return entries[i]
+        return None
+
+    def get_next_review(self, after_id=None):
+        """v4_019: pak volgende kaart om te reviewen (nooit-reviewed eerst,
+        daarna langst-niet-reviewed). Indien after_id meegegeven: sla die over."""
+        entries = self._load_entries()
+        def key(e):
+            m = e.get("metadata") or {}
+            reviewed = m.get("reviewed_at")
+            created = m.get("created_at") or e.get("detected_at") or ""
+            return (reviewed or "", created)
+        entries.sort(key=key)
+        for e in entries:
+            if after_id and e.get("id") == after_id:
+                continue
+            return e
+        return None
 
     def delete_entry(self, entry_id):
         entries = self._load_entries()

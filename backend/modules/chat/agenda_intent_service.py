@@ -58,11 +58,13 @@ def _load_keywords():
 
 # ---- Tijd-extractie ----
 
-def extract_datetime(text: str):
+def extract_datetime(text: str, now: datetime = None):
     """
     Return (date_str ISO, raw_phrase, dag_woord, tijd_woord) of (None, None, None, None).
-    Splitst output zodat de message-bouwer 'morgen' en '14:00' apart kan gebruiken.
+    `now` is de referentie-tijd (per user-tijdzone). Default = server-tijd.
     """
+    if now is None:
+        now = datetime.now()
     text_lower = text.lower()
     base_date = None
     dag_woord = ""
@@ -72,10 +74,10 @@ def extract_datetime(text: str):
     # v4_024: Dagdeel-woorden hebben ingebouwde default-tijd
     for w, (offset, h, m) in DAGDELEN.items():
         if re.search(rf"\b{w}\b", text_lower):
-            base_date = (datetime.now() + timedelta(days=offset)).date()
+            base_date = (now + timedelta(days=offset)).date()
             dag_woord = w
             if w in ("straks", "later"):
-                later = datetime.now() + timedelta(hours=2)
+                later = now + timedelta(hours=2)
                 default_hour, default_minute = later.hour, later.minute
             else:
                 default_hour, default_minute = h, m
@@ -85,19 +87,19 @@ def extract_datetime(text: str):
     if base_date is None:
         for w, offset in RELATIVE.items():
             if re.search(rf"\b{w}\b", text_lower):
-                base_date = (datetime.now() + timedelta(days=offset)).date()
+                base_date = (now + timedelta(days=offset)).date()
                 dag_woord = w
                 break
 
     # Vaste weekdag
     if base_date is None:
-        today_wd = datetime.now().weekday()
+        today_wd = now.weekday()
         for w, wd in DAGEN.items():
             if re.search(rf"\b{w}\b", text_lower):
                 days_ahead = (wd - today_wd) % 7
                 if days_ahead == 0:
                     days_ahead = 7
-                base_date = (datetime.now() + timedelta(days=days_ahead)).date()
+                base_date = (now + timedelta(days=days_ahead)).date()
                 dag_woord = w
                 break
 
@@ -230,22 +232,37 @@ def extract_where(text: str) -> str:
 
 # ---- Intent-detectie ----
 
-def detect_agenda_intent(text: str) -> dict:
+def detect_agenda_intent(text: str, now: datetime = None, user: dict = None) -> dict:
     """
     Return dict {has_intent, dag, tijd, raw_time, wat, waar, datetime_iso, categorie}
     of {has_intent: False}.
 
-    Een agenda-intentie vereist:
-    - tijd-aanduiding IN DE TOEKOMST
-    - EN een action_verb, activiteit, of locatie
+    `now` of `user` mag meegegeven voor tijdzone-correcte parsing.
+    Als user is gegeven en now niet: gebruikt user-tz now().
     """
-    when_iso, raw_time, dag, tijd = extract_datetime(text)
+    if now is None and user is not None:
+        try:
+            from . import user_time_service
+            now = user_time_service.now_for_user(user)
+        except Exception:
+            now = None
+    if now is None:
+        now = datetime.now()
+
+    when_iso, raw_time, dag, tijd = extract_datetime(text, now=now)
     if not when_iso:
         return {"has_intent": False}
 
     try:
         target = datetime.fromisoformat(when_iso)
-        if target < datetime.now():
+        # Maak vergelijkbaar (beide naive of beide aware)
+        if target.tzinfo and not now.tzinfo:
+            target = target.replace(tzinfo=None)
+        elif not target.tzinfo and now.tzinfo:
+            now_cmp = now.replace(tzinfo=None)
+        else:
+            now_cmp = now
+        if target < now_cmp:
             return {"has_intent": False}
     except Exception:
         return {"has_intent": False}
@@ -257,7 +274,6 @@ def detect_agenda_intent(text: str) -> dict:
     if not (wat or waar):
         return {"has_intent": False}
 
-    # v4_024: voorkom duplicaat (waar==wat bij 'naar de kapper' → kapper × 2)
     if waar and waar.lower() == (wat or "").lower():
         waar = ""
 

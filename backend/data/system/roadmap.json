@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 57,
+    "progress": 60,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2784,6 +2784,24 @@
         "progress": 100,
         "completed_date": "2026-05-14",
         "beschrijving": "Drastische upgrade van agenda_intent_service: (1) dagdeel-woorden vanavond/vanmiddag/vannacht/vanochtend/vanmorgen/straks/later met default-tijd (19:00/14:00/22:00/09:00/+2u). (2) 24h-conversie via 's avonds/'s middags/'s nachts/'s ochtends + dagdeel-woord auto-impliceert (vanavond 9u → 21:00). (3) Extra activity-lijst (etentje/feestje/borrel/uitje/klusje/afspraak/etc) naast calendar_triggers. (4) Lowercase plek-detect (oma/opa/kantoor/thuis/tandarts/dokter/kapper). (5) Voorzetsel-keuze (in voor steden, naar de voor diensten, bij voor personen, op voor kantoor/werk). (6) Werkwoord-correcte NL-zinsbouw: GAAT_X voor werkwoorden, HEEFT_NAAMWOORDEN voor zelfstandige. (7) Dubbel-woord voorkomen (kapper×2). (8) Mooie event-titel met format_event_title. Events worden nu opgeslagen mét titel + locatie."
+      },
+      {
+        "id": "v4_025a",
+        "titel": "Time-awareness per user (tijdzone-cascade)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "Nieuwe chat/user_time_service.py: cascade voor tijdzone-bepaling — user.timezone → user.adres.land → user.persoonlijke_info.land → Europe/Amsterdam fallback. Land→tz lookup voor 18 landen. now_for_user() en time_awareness_block(). Agenda-intent gebruikt nu user-tz: 'morgen' = morgen lokaal voor deze user, verleden/toekomst-check tijdzone-correct. Endpoint: GET /api/auth/users/{id}/time-awareness toont weekdag/datum/tijd/dagdeel + tz_source (debug)."
+      },
+      {
+        "id": "v4_025b",
+        "titel": "Login-scherm: Nieuwe gebruiker knop",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "Onder Inloggen-knop nieuwe 'Nieuwe gebruiker — start als gast' knop. Gebruikt naam+sleutelwoord uit zelfde formulier, valideert (>=4 tekens), POST /api/auth/users (default gradatie 7, rol 'Onbekende'), auto-login direct erna. Admin kan later gradatie aanpassen via gradatie-endpoint. Voorbereiding voor Spark-promotor (na v4_015 Observer)."
       }
     ],
     "last_updated": "2026-05-14"
@@ -3382,6 +3400,7 @@
     "2026-05-13: v4_013c VOLTOOID — statische strings uit routes.py naar system_fallback.json + fallback_service helper. ALLE trigger-groepen (conv/cal/emo/admin/system/vocab) editable in Triggers-pagina via generieke /api/triggers/edit/{kind}/{key}/add+DELETE.",
     "2026-05-14: ARCHITECTUUR-VASTLEGGING. 5-lagen model bevestigd (cognitief/persoonlijkheid/gedrag/besluit/observatie). Schema v2.0 toegepast: kaart_type + review-metadata op alle 2679 kaarten. Backlog uitgebreid: v4_019 Review-tab, v4_020 Chain-anchor, v4_021 ruw/verwerkt, v4_022 recept-laag, v4_023 mind-graph view. Volgorde voor doorpakken: Observer → Guards → Insights → Advisor → Composer.",
     "2026-05-14: v4_019 Review-tab VOLTOOID. Paarse pill + ReviewPanel met inline editing, kaart_type dropdown, 4 actie-knoppen. Backend: /api/knowledge/review/next + /{id}/review.",
-    "2026-05-14: v4_024 agenda NLP polish — dagdeel-woorden, 24h via 's avonds, lowercase plekken, betere zinsbouw, format_event_title. Events nu met juiste titel + datum + tijd in agenda."
+    "2026-05-14: v4_024 agenda NLP polish — dagdeel-woorden, 24h via 's avonds, lowercase plekken, betere zinsbouw, format_event_title. Events nu met juiste titel + datum + tijd in agenda.",
+    "2026-05-14: v4_025a time-awareness cascade (user.adres.land → tz) + v4_025b login-scherm 'Nieuwe gebruiker' knop met auto-login (gradatie 7)."
   ]
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Zap, User, Key, Shield, LogIn, AlertCircle } from 'lucide-react';
+import { Zap, User, Key, Shield, LogIn, AlertCircle, UserPlus, CheckCircle } from 'lucide-react';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 export function LoginForm() {
   const { login, error } = useAuth();
@@ -10,10 +12,12 @@ export function LoginForm() {
   const [showMasterkey, setShowMasterkey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [localError, setLocalError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLocalError('');
+    setSuccessMsg('');
     
     if (!naam.trim() || !sleutelwoord.trim()) {
       setLocalError('Vul je naam en sleutelwoord in');
@@ -27,6 +31,43 @@ export function LoginForm() {
     if (!result.success) {
       setLocalError(result.message);
     }
+  };
+
+  // v4_025: Nieuwe gebruiker registratie. Maakt user aan + logt direct in.
+  const handleRegister = async () => {
+    setLocalError('');
+    setSuccessMsg('');
+    if (!naam.trim() || !sleutelwoord.trim()) {
+      setLocalError('Vul je naam en sleutelwoord in om een account te maken');
+      return;
+    }
+    if (sleutelwoord.length < 4) {
+      setLocalError('Sleutelwoord moet minstens 4 tekens zijn');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${API}/api/auth/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ naam: naam.trim(), sleutelwoord }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setLocalError(data.detail || data.message || 'Account aanmaken mislukt');
+        setIsLoading(false);
+        return;
+      }
+      // Account aangemaakt → meteen inloggen
+      setSuccessMsg(`Welkom ${naam}! Je account is aangemaakt (gradatie 7).`);
+      const loginResult = await login(naam, sleutelwoord, null);
+      if (!loginResult.success) {
+        setLocalError('Account is aangemaakt — log nu in.');
+      }
+    } catch (err) {
+      setLocalError('Verbinding mislukt: ' + err.message);
+    }
+    setIsLoading(false);
   };
 
   const displayError = localError || error;
@@ -57,6 +98,13 @@ export function LoginForm() {
               <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <span className="text-sm">{displayError}</span>
+              </div>
+            )}
+            {/* Success Message */}
+            {successMsg && (
+              <div className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-green-400">
+                <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                <span className="text-sm">{successMsg}</span>
               </div>
             )}
 
@@ -133,6 +181,18 @@ export function LoginForm() {
                   Inloggen
                 </>
               )}
+            </button>
+
+            {/* Register Button (v4_025) */}
+            <button
+              type="button"
+              disabled={isLoading}
+              onClick={handleRegister}
+              className="w-full py-3 bg-slate-800/60 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white font-medium rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              data-testid="register-btn"
+            >
+              <UserPlus className="w-4 h-4" />
+              Nieuwe gebruiker — start als gast
             </button>
           </form>
 

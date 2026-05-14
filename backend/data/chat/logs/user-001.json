@@ -4544,11 +4544,34 @@
         "session_id": "default",
         "gesprek_nummer": 173
       }
+    },
+    {
+      "id": "conv-2b5bfed9",
+      "timestamp": "2026-05-14T07:43:47.667070+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "morgen om 14:00 vergadering",
+      "spark_response": "Ik hoorde dat je morgen om 14:00 een vergadering hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 174
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 173,
-    "last_updated": "2026-05-14T06:17:20.634030+00:00"
+    "total_conversations": 174,
+    "last_updated": "2026-05-14T07:43:47.667070+00:00"
   }
 }

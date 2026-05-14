@@ -170,6 +170,20 @@ async def reset_password(user_id: str, new_sleutelwoord: Optional[str] = None):
     return {"success": True, "sleutelwoord": result, "message": f"Sleutelwoord gereset naar '{result}'"}
 
 
+@router.get("/users/{user_id}/time-awareness")
+async def get_time_awareness(user_id: str):
+    """v4_025: Wat denkt Spark dat de tijd is voor deze user?
+    Toont timezone-source, lokale tijd, weekdag en dagdeel."""
+    user = AuthService.get_user_by_id(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
+    try:
+        from modules.chat.user_time_service import time_awareness_block
+        return time_awareness_block(user)
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=f"Fout: {ex}")
+
+
 # ============== GRADATIE ==============
 
 @router.get("/gradaties")

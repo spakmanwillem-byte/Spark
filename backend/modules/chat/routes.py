@@ -433,7 +433,13 @@ async def process_message(req: ChatMessage):
     # 1.5 AGENDA INTENT DETECTIE (v3_303) — vóór knowledge lookup
     # Als zin tijd + (wat/waar) bevat → voorstel om te noteren
     if req.user_id:
-        intent = agenda_intent_service.detect_agenda_intent(text)
+        # v4_025: user ophalen voor tijdzone-correcte parsing
+        try:
+            from modules.auth.service import AuthService as _Auth
+            _user = _Auth.get_user_by_id(req.user_id)
+        except Exception:
+            _user = None
+        intent = agenda_intent_service.detect_agenda_intent(text, user=_user)
         if intent.get("has_intent"):
             has_conflict = agenda_intent_service.has_agenda_conflict(req.user_id, intent["datetime_iso"])
             pending = {

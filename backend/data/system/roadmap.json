@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 62,
+    "progress": 52,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2725,9 +2725,58 @@
         "progress": 100,
         "completed_date": "2026-05-13",
         "beschrijving": "Alle hard-coded fallback-strings uit chat/routes.py verplaatst naar system_fallback.json (general_fallback, unknown_words_partial, wedervraag_done/skip, agenda_declined, card_session_stopped/empty/denied, scan_denied). Nieuwe fallback_service.pick(key, default) helper. Triggers-pagina: ALLE groepen (conversation/calendar/emotion/admin/system/vocab) editable met inline add/delete chips voor triggers EN responses-lijsten. Generieke CRUD-endpoint /api/triggers/edit/{kind}/{key}/add + DELETE met support voor emotion-dict, responses_only system-groepen."
+      },
+      {
+        "id": "v4_018a",
+        "titel": "Knowledge schema 2.0: kaart_type + review-metadata (stil)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "Schema-uitbreiding zonder breaking changes. Toegevoegd: (1) kaart_type-veld op alle 2679 kaarten (default 'concept'); geldige types: concept|recept|procedure|dialogue|blueprint|emotional_pattern|context. (2) metadata-block met created_at, updated_at, reviewed_at, review_count op alle kaarten. Voorbereidend op review-flow (v4_019) en toekomstige type-filtering."
+      },
+      {
+        "id": "v4_019",
+        "titel": "Kennisbank Review-tab — rustige onderhoudsmodus",
+        "status": "planned",
+        "priority": "medium",
+        "progress": 0,
+        "beschrijving": "Nieuwe tab naast Onbeantwoord/Beantwoord/Te herzien: 'Review'. Flow: oudste/minst-gereviewde kaart tonen → inline bewerken (lagen, ws5, tags, type) → opslaan (updated_at+reviewed_at+review_count++) → volgende kaart. Skip-optie. Sortering op (reviewed_at NULL eerst, dan oudste reviewed_at). Geen aparte system — hergebruikt bestaande knowledge CRUD-endpoints + KaartCard component."
+      },
+      {
+        "id": "v4_020",
+        "titel": "Chain niet meer tonen — alleen ankerpunt zichtbaar",
+        "status": "planned",
+        "priority": "medium",
+        "progress": 0,
+        "beschrijving": "Chat-response strikt opsplitsen: 'message' = single antwoord (ankerpunt), 'anchor' = {type, card_id, depth}, 'chain' = [stappen] alleen in admin/dev-view. Standaard chat-UI rendert alleen 'message'. Levert ook de data die Shadow Observer (v4_015) nodig heeft — gratis bijproduct."
+      },
+      {
+        "id": "v4_021",
+        "titel": "Tag-conventie #ruw / #verwerkt + lichte NLP-heuristiek",
+        "status": "planned",
+        "priority": "low",
+        "progress": 0,
+        "beschrijving": "Geen schema-shift: tags '#ruw' / '#verwerkt' als classifier. NLP-hook detecteert intent ('hoe maak ik...' → procedure/recept lookup, 'wat is...' → concept-uitleg, 'bouwschema' → blueprint). Eerst meten via Observer voordat hard gerouteerd wordt."
+      },
+      {
+        "id": "v4_022",
+        "titel": "Recept/Blueprint-laag (apart bestand, gekoppeld via tag)",
+        "status": "planned",
+        "priority": "low",
+        "progress": 0,
+        "beschrijving": "Pas later evalueren: aparte /data/knowledge/recipes.json óf blueprints.json voor procedure-georiënteerde kennis (recepten, bouwschema's, workflows). Pas splitsen wanneer data laat zien dat type 'procedure' echt anders behandeld moet worden. Nu nog gewoon in knowledge_base.json met kaart_type='recept'."
+      },
+      {
+        "id": "v4_023",
+        "titel": "Mind-graph view — 5-lagen architectuur visueel",
+        "status": "vision",
+        "priority": "low",
+        "progress": 0,
+        "beschrijving": "Visualisatie van de 5 lagen (cognitief/persoonlijkheid/gedrag/besluit/observatie) in één graph-view. Voor debugging, dev-inzicht en demo. Pas na Composer + Observer."
       }
     ],
-    "last_updated": "2026-05-13"
+    "last_updated": "2026-05-14"
   },
   "v5.0": {
     "naam": "🎓 Learning & Adaptation",
@@ -2968,7 +3017,9 @@
       "  📊 Knowledge Base: 311 active cards (220 recent toegevoegd!)",
       "  💡 Architecture: Modular, scalable, future-proof voor community features",
       "  📊 Progress: 75% (2/3 items done, Profiel content in progress)"
-    ]
+    ],
+    "architecture_note": "5-lagen architectuur (mei 2026): 1) Cognitief (knowledge_base.json) — wat Spark weet. 2) Persoonlijkheid (spark_bijbel + spark_identity) — wie Spark is. 3) Gedrag (spark_vocab) — hoe Spark praat. 4) Besluit (routes + triggers + guards) — hoe Spark kiest. 5) Observatie (shadow logs — nog te bouwen) — hoe Spark leert zonder direct te beïnvloeden. Hybride reactie-model: Knowledge bepaalt WAT, Vocab bepaalt HOE, Composer is de brug.",
+    "phase_order_post_may2026": "v4_015 Observer → v4_014 Guards → v4_016 Insights → v4_017 Advisor UI → v4_020 Chain-anchor → v4_013b Composer → v4_019 Review-tab → v4_021 #ruw/#verwerkt"
   },
   "v2.0": {
     "naam": "🚀 Foundation Features",
@@ -3250,9 +3301,10 @@
     ],
     "in_progress": [
       "v3.2 - Spark AI Mini Survival Game - Fase 3 (85% complete)",
-      "v4.0 - Personality & Conversational Depth (62% complete)"
+      "v4.0 - Personality & Conversational Depth (52% complete)"
     ],
     "upcoming": [
+      "v4_015 Shadow Observer → v4_014 Guard Layer (priority/cooldown/conflict) → v4_016 Insights",
       "v4_010 [info]-haakjes + v4_012 tone-aware bijbel-responses",
       "v3.2 completion - Actor Movement & Territory Claiming",
       "v3.3 - Warehouse & Economie Systeem",
@@ -3317,6 +3369,7 @@
     "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned.",
     "2026-05-13: v4_011 Conversationele Diepte VOLTOOID (laag 2/3/4 via 'vertel meer', 'leg dieper uit', etc + sentence-snap fuzzy match). v4_011a Emotie-tag flex matching (losse #emotie+#blij/boos/bang/bedroefd/neutraal tags). v4_011b Spark Bijbel CRUD + chat-integratie (13 self-question intents). 4 backlog items toegevoegd: v4_012 tone-aware, v4_013 persoonlijkheid-laag (Fase C), v4_014 reactie-voorbeelden editor, v4_015 duplicaat bijbel opruimen.",
     "2026-05-13: v4_013a Spark Vocab VOLTOOID — woordenlijsten (5 emoties × 4 intenties + 5 algemene categorieën, 100 woorden seed) beheerbaar via Triggers-pagina met inline add/delete. v4_013 hernoemd naar v4_013b (response composer).",
-    "2026-05-13: v4_013c VOLTOOID — statische strings uit routes.py naar system_fallback.json + fallback_service helper. ALLE trigger-groepen (conv/cal/emo/admin/system/vocab) editable in Triggers-pagina via generieke /api/triggers/edit/{kind}/{key}/add+DELETE."
+    "2026-05-13: v4_013c VOLTOOID — statische strings uit routes.py naar system_fallback.json + fallback_service helper. ALLE trigger-groepen (conv/cal/emo/admin/system/vocab) editable in Triggers-pagina via generieke /api/triggers/edit/{kind}/{key}/add+DELETE.",
+    "2026-05-14: ARCHITECTUUR-VASTLEGGING. 5-lagen model bevestigd (cognitief/persoonlijkheid/gedrag/besluit/observatie). Schema v2.0 toegepast: kaart_type + review-metadata op alle 2679 kaarten. Backlog uitgebreid: v4_019 Review-tab, v4_020 Chain-anchor, v4_021 ruw/verwerkt, v4_022 recept-laag, v4_023 mind-graph view. Volgorde voor doorpakken: Observer → Guards → Insights → Advisor → Composer."
   ]
 }

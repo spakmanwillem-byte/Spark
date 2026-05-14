@@ -4275,11 +4275,280 @@
         "session_id": "default",
         "gesprek_nummer": 163
       }
+    },
+    {
+      "id": "conv-91c178c7",
+      "timestamp": "2026-05-14T06:12:40.881656+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 164
+      }
+    },
+    {
+      "id": "conv-b8736993",
+      "timestamp": "2026-05-14T06:13:11.452844+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat staat er op de agenda voor vandaag",
+      "spark_response": "**Agenda afspraak maken**: Een actie om afspraak toe te voegen aan agenda\n\n**Vandaag was druk**: De gebruiker geeft aan dat de dag intens of vol was.\n\nNieuw geleerd: **staat** (opgeslagen als kaarten)\n\nWat betekent 'staat' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Agenda afspraak maken"
+          },
+          {
+            "begrip": "Vandaag was druk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "staat"
+        ],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 165
+      }
+    },
+    {
+      "id": "conv-2858d964",
+      "timestamp": "2026-05-14T06:13:59.693608+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "iets wat vast staat",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'staat' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 166
+      }
+    },
+    {
+      "id": "conv-319f9d50",
+      "timestamp": "2026-05-14T06:14:13.505247+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "geen idee",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 167
+      }
+    },
+    {
+      "id": "conv-a6df1884",
+      "timestamp": "2026-05-14T06:14:36.538339+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn, dank je wel",
+      "spark_response": "Ik ken deze woorden nog niet: **dank**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat betekent 'dank' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "dank"
+        ],
+        "snap_suggestions": [
+          "dank"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 168
+      }
+    },
+    {
+      "id": "conv-d9ed5ca5",
+      "timestamp": "2026-05-14T06:14:57.005107+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "bedanken voor iets",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'dank'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 169
+      }
+    },
+    {
+      "id": "conv-5d50123d",
+      "timestamp": "2026-05-14T06:15:10.781567+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "met dankbaarheid",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 170
+      }
+    },
+    {
+      "id": "conv-865f48f7",
+      "timestamp": "2026-05-14T06:15:22.114608+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan",
+      "spark_response": "Leuk! Vertel me meer\n\n**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 171
+      }
+    },
+    {
+      "id": "conv-b20c0e91",
+      "timestamp": "2026-05-14T06:17:02.660909+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik heb op zondag 17 mei een activiteit. Ik ga samen met Lotus en haar opa en oma naar Helledoorn. Dit is een actractie park",
+      "spark_response": "Ik hoorde dat je een **ga** in Helledoorn hebt (zondag). Er staat niks in je agenda. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "samen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 25,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 172
+      }
+    },
+    {
+      "id": "conv-faef6de6",
+      "timestamp": "2026-05-14T06:17:20.634030+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja graag",
+      "spark_response": "Genoteerd! 'ga' staat in je agenda.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 173
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 163,
-    "last_updated": "2026-05-13T20:58:54.974952+00:00"
+    "total_conversations": 173,
+    "last_updated": "2026-05-14T06:17:20.634030+00:00"
   }
 }

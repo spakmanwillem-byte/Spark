@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 60,
+    "progress": 61,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2802,6 +2802,15 @@
         "progress": 100,
         "completed_date": "2026-05-14",
         "beschrijving": "Onder Inloggen-knop nieuwe 'Nieuwe gebruiker — start als gast' knop. Gebruikt naam+sleutelwoord uit zelfde formulier, valideert (>=4 tekens), POST /api/auth/users (default gradatie 7, rol 'Onbekende'), auto-login direct erna. Admin kan later gradatie aanpassen via gradatie-endpoint. Voorbereiding voor Spark-promotor (na v4_015 Observer)."
+      },
+      {
+        "id": "v4_025c",
+        "titel": "Register: generieke collisie-melding + lengte-check",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "AuthService.create_user verbeterd: (1) minimaal 4 tekens → 'Kies een sleutelwoord met minstens 4 tekens.' (2) Bij naam+sleutelwoord collisie → generieke melding 'Kies een ander sleutelwoord, of kies een sleutelwoord met meer tekens.' — verraadt niet dat de combinatie al bestaat. Security-vriendelijk. Latere uitbreiding: complexiteits-eisen, blacklist, etc."
       }
     ],
     "last_updated": "2026-05-14"
@@ -3401,6 +3410,7 @@
     "2026-05-14: ARCHITECTUUR-VASTLEGGING. 5-lagen model bevestigd (cognitief/persoonlijkheid/gedrag/besluit/observatie). Schema v2.0 toegepast: kaart_type + review-metadata op alle 2679 kaarten. Backlog uitgebreid: v4_019 Review-tab, v4_020 Chain-anchor, v4_021 ruw/verwerkt, v4_022 recept-laag, v4_023 mind-graph view. Volgorde voor doorpakken: Observer → Guards → Insights → Advisor → Composer.",
     "2026-05-14: v4_019 Review-tab VOLTOOID. Paarse pill + ReviewPanel met inline editing, kaart_type dropdown, 4 actie-knoppen. Backend: /api/knowledge/review/next + /{id}/review.",
     "2026-05-14: v4_024 agenda NLP polish — dagdeel-woorden, 24h via 's avonds, lowercase plekken, betere zinsbouw, format_event_title. Events nu met juiste titel + datum + tijd in agenda.",
-    "2026-05-14: v4_025a time-awareness cascade (user.adres.land → tz) + v4_025b login-scherm 'Nieuwe gebruiker' knop met auto-login (gradatie 7)."
+    "2026-05-14: v4_025a time-awareness cascade (user.adres.land → tz) + v4_025b login-scherm 'Nieuwe gebruiker' knop met auto-login (gradatie 7).",
+    "2026-05-14: v4_025c register-collisie generieke melding ('Kies een ander sleutelwoord') + min 4 tekens check."
   ]
 }

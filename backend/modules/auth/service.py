@@ -192,19 +192,22 @@ class AuthService:
         """
         Create new user
         
-        Args:
-            user_data: User creation data
-            
         Returns:
             Tuple of (user_dict, error_message)
         """
+        # v4_025c: minimale eisen aan sleutelwoord (uitbreidbaar later)
+        sleutel = (user_data.sleutelwoord or "").strip()
+        if len(sleutel) < 4:
+            return None, "Kies een sleutelwoord met minstens 4 tekens."
+
         users = AuthService.get_all_users()
-        
-        # Check if exists
+
+        # v4_025c: Bij collisie (naam+sleutelwoord al in gebruik door iemand anders) →
+        # generieke melding zonder te verraden dát hij al bestaat.
         for u in users:
-            if (u.get("naam", "").lower() == user_data.naam.lower() and 
-                u.get("sleutelwoord", "").lower() == user_data.sleutelwoord.lower()):
-                return None, f"Gebruiker {user_data.naam} met dit sleutelwoord bestaat al"
+            if (u.get("naam", "").lower() == user_data.naam.lower() and
+                u.get("sleutelwoord", "").lower() == sleutel.lower()):
+                return None, "Kies een ander sleutelwoord, of kies een sleutelwoord met meer tekens."
         
         # Create new user
         new_user = User(

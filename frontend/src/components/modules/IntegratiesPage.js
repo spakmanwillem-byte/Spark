@@ -502,27 +502,29 @@ function BackupPanel() {
     setBusy(null);
   };
 
-  const downloadZip = async (type) => {
+  const downloadZip = (type) => {
+    // Directe browser-download via API URL.
+    // Backend stuurt Content-Disposition: attachment, browser opent vanzelf "Opslaan als..."
+    // Dit is betrouwbaarder dan fetch+blob voor grote bestanden (>10MB).
     setBusy(type);
     try {
-      const url = type === 'full' ? `${API}/api/backup/download/full` : `${API}/api/backup/download/changes`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Download mislukt');
-      const blob = await res.blob();
-      const dlUrl = window.URL.createObjectURL(blob);
+      const url = type === 'full'
+        ? `${API}/api/backup/download/full`
+        : `${API}/api/backup/download/changes`;
       const a = document.createElement('a');
-      a.href = dlUrl;
-      // Probeer bestandsnaam uit header te halen
-      const cd = res.headers.get('Content-Disposition') || '';
-      const m = cd.match(/filename="?([^";]+)"?/);
-      a.download = m ? m[1] : `spark_backup_${type}.zip`;
+      a.href = url;
+      a.rel = 'noopener';
+      // download-attribuut forceert browser om Content-Disposition filename te respecteren
+      a.download = '';
       document.body.appendChild(a);
       a.click();
       a.remove();
-      window.URL.revokeObjectURL(dlUrl);
-      showToast(`Download gestart: ${a.download}`, 'success');
-    } catch (e) { showToast('Download fout: ' + e.message, 'error'); }
-    setBusy(null);
+      showToast(`Download gestart — check je Downloads map`, 'success');
+    } catch (e) {
+      showToast('Download fout: ' + e.message, 'error');
+    }
+    // Reset busy state na korte tijd (download loopt op de achtergrond)
+    setTimeout(() => setBusy(null), 1500);
   };
 
   const previewRestore = async (file) => {

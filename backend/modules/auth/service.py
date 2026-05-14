@@ -188,26 +188,33 @@ class AuthService:
     # ============== USER MANAGEMENT ==============
     
     @staticmethod
-    def create_user(user_data: UserCreate) -> Tuple[Optional[dict], str]:
+    def create_user(user_data: UserCreate, admin_override: bool = False) -> Tuple[Optional[dict], str]:
         """
         Create new user
         
+        Args:
+          user_data: UserCreate object
+          admin_override: indien True, slaat collisie-check en lengte-eisen over
+                          (voor admin-gemaakte accounts met gedeeld default sleutelwoord)
+
         Returns:
             Tuple of (user_dict, error_message)
         """
-        # v4_025c: minimale eisen aan sleutelwoord (uitbreidbaar later)
         sleutel = (user_data.sleutelwoord or "").strip()
-        if len(sleutel) < 4:
-            return None, "Kies een sleutelwoord met minstens 4 tekens."
 
-        users = AuthService.get_all_users()
+        if not admin_override:
+            # v4_025c: minimale eisen aan sleutelwoord voor self-registration
+            if len(sleutel) < 4:
+                return None, "Kies een sleutelwoord met minstens 4 tekens."
 
-        # v4_025c: Bij collisie (naam+sleutelwoord al in gebruik door iemand anders) →
-        # generieke melding zonder te verraden dát hij al bestaat.
-        for u in users:
-            if (u.get("naam", "").lower() == user_data.naam.lower() and
-                u.get("sleutelwoord", "").lower() == sleutel.lower()):
-                return None, "Kies een ander sleutelwoord, of kies een sleutelwoord met meer tekens."
+            users = AuthService.get_all_users()
+            # Generieke collisie-melding (verraadt bestaan niet)
+            for u in users:
+                if (u.get("naam", "").lower() == user_data.naam.lower() and
+                    u.get("sleutelwoord", "").lower() == sleutel.lower()):
+                    return None, "Kies een ander sleutelwoord, of kies een sleutelwoord met meer tekens."
+        else:
+            users = AuthService.get_all_users()
         
         # Create new user
         new_user = User(
@@ -222,7 +229,7 @@ class AuthService:
         users.append(user_dict)
         
         if AuthService._save_users(users):
-            print(f"[AUTH] New user: {user_data.naam}")
+            print(f"[AUTH] New user: {user_data.naam} (admin_override={admin_override})")
             return user_dict, ""
         
         return None, "Kon gebruiker niet opslaan"

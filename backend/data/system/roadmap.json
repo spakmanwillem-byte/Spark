@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 61,
+    "progress": 62,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2811,6 +2811,15 @@
         "progress": 100,
         "completed_date": "2026-05-14",
         "beschrijving": "AuthService.create_user verbeterd: (1) minimaal 4 tekens → 'Kies een sleutelwoord met minstens 4 tekens.' (2) Bij naam+sleutelwoord collisie → generieke melding 'Kies een ander sleutelwoord, of kies een sleutelwoord met meer tekens.' — verraadt niet dat de combinatie al bestaat. Security-vriendelijk. Latere uitbreiding: complexiteits-eisen, blacklist, etc."
+      },
+      {
+        "id": "v4_025d",
+        "titel": "Admin override voor user-aanmaak + Welkom01 reset behouden",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "create_user krijgt `admin_override` param. Endpoint POST /api/auth/users ondersteunt `?admin_id=<id>` query: indien admin gradatie 1/2 → collisie-check + lengte-eis overgeslagen. Hiermee kan admin meerdere accounts maken met gedeeld 'Welkom01' sleutelwoord (familie/vrienden). Niet-admin krijgt 403. Reset-password endpoint blijft default naar 'Welkom01'. Self-registration via login-scherm blijft veilig (collisie + 4-tekens check)."
       }
     ],
     "last_updated": "2026-05-14"
@@ -3411,6 +3420,7 @@
     "2026-05-14: v4_019 Review-tab VOLTOOID. Paarse pill + ReviewPanel met inline editing, kaart_type dropdown, 4 actie-knoppen. Backend: /api/knowledge/review/next + /{id}/review.",
     "2026-05-14: v4_024 agenda NLP polish — dagdeel-woorden, 24h via 's avonds, lowercase plekken, betere zinsbouw, format_event_title. Events nu met juiste titel + datum + tijd in agenda.",
     "2026-05-14: v4_025a time-awareness cascade (user.adres.land → tz) + v4_025b login-scherm 'Nieuwe gebruiker' knop met auto-login (gradatie 7).",
-    "2026-05-14: v4_025c register-collisie generieke melding ('Kies een ander sleutelwoord') + min 4 tekens check."
+    "2026-05-14: v4_025c register-collisie generieke melding ('Kies een ander sleutelwoord') + min 4 tekens check.",
+    "2026-05-14: v4_025d admin override (?admin_id=user-001) voor user-aanmaak met gedeeld Welkom01 — collisie/lengte-check skipped. Reset blijft Welkom01 default."
   ]
 }

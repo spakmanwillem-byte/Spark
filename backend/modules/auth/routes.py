@@ -116,16 +116,28 @@ async def get_user(user_id: str):
 
 
 @router.post("/users")
-async def create_user(user_data: UserCreate):
+async def create_user(user_data: UserCreate, admin_id: Optional[str] = None):
     """
-    Create new user
+    Create new user.
+
+    - Self-registration (admin_id=None): collisie-check + minstens 4 tekens.
+    - Admin override (?admin_id=<gradatie 1/2 user>): collisie-check + lengte-eis
+      overgeslagen. Hiermee kan admin meerdere accounts maken met gedeeld
+      default-sleutelwoord (bv. 'Welkom01').
     """
-    user, error = AuthService.create_user(user_data)
+    admin_override = False
+    if admin_id:
+        admin_user = AuthService.get_user_by_id(admin_id)
+        if not admin_user or admin_user.get("gradatie", 99) > 2:
+            raise HTTPException(status_code=403, detail="Alleen admin (gradatie 1 of 2) mag override gebruiken.")
+        admin_override = True
+
+    user, error = AuthService.create_user(user_data, admin_override=admin_override)
     
     if error:
         raise HTTPException(status_code=400, detail=error)
     
-    return {"success": True, "user": user}
+    return {"success": True, "user": user, "admin_override": admin_override}
 
 
 @router.put("/users/{user_id}")

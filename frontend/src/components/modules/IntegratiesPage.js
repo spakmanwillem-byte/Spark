@@ -151,7 +151,11 @@ function FileBrowser() {
             <option value="python">Python</option>
             <option value="javascript">JavaScript</option>
             <option value="json">JSON</option>
+            <option value="markdown">Markdown</option>
             <option value="css">CSS</option>
+            <option value="html">HTML</option>
+            <option value="text">Tekst</option>
+            <option value="yaml">YAML</option>
           </select>
         </div>
         <div className="flex-1 overflow-y-auto px-2 pb-2">

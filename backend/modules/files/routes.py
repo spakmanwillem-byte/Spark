@@ -14,9 +14,13 @@ from datetime import datetime, timezone
 
 router = APIRouter(tags=["files"])
 
-ALLOWED_DIRS = ["/app/backend", "/app/frontend/src"]
+ALLOWED_DIRS = ["/app/backend", "/app/frontend/src", "/app/memory"]
 SUPPORTED_EXT = ['.py', '.js', '.jsx', '.json', '.css', '.html', '.md', '.txt', '.yaml', '.yml']
-PROTECTED_FILES = ['/app/backend/.env', '/app/backend/server.py']
+PROTECTED_FILES = [
+    '/app/backend/.env',
+    '/app/backend/server.py',
+    '/app/memory/test_credentials.md',  # bevat admin sleutelwoord — niet via UI bewerken
+]
 SANDBOX_DIR = "/app/backend/sandbox/modules"
 
 

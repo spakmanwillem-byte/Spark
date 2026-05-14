@@ -19,6 +19,26 @@ const initialSparkMessages = [
   { id: 1, role: 'spark', message: 'Hallo! Ik ben Spark, je persoonlijke AI assistent. Hoe kan ik je vandaag helpen?', time: '09:00' },
 ];
 
+// SessionStorage helpers — chat blijft staan tussen page-switches, wist bij logout/tab-close
+const chatStorageKey = (userId) => `spark_chat_session_${userId || 'guest'}`;
+const loadStoredMessages = (userId) => {
+  try {
+    const raw = sessionStorage.getItem(chatStorageKey(userId));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+  } catch {
+    return null;
+  }
+};
+const saveStoredMessages = (userId, messages) => {
+  try {
+    sessionStorage.setItem(chatStorageKey(userId), JSON.stringify(messages));
+  } catch {
+    // Storage quota / private mode — graceful fail
+  }
+};
+
 const initialPriveContacts = [
   { id: 1, contact: 'Harry', avatar: 'H', lastMessage: 'Tot morgen!', time: '16:45', unread: 0, online: true, color: '#22c55e' },
   { id: 2, contact: 'Sandra', avatar: 'S', lastMessage: 'Die analyse ziet er goed uit', time: '15:30', unread: 2, online: false, color: '#f59e0b' },
@@ -31,9 +51,21 @@ export function GesprekkenPage({ onNavigate }) {
   const userName = user?.naam || 'Gebruiker';
 
   const [activeTab, setActiveTab] = useState('spark');
-  const [sparkMessages, setSparkMessages] = useState(initialSparkMessages);
+  // Lazy init: bij eerste render check sessionStorage. Behoud chat tussen page-switches.
+  const [sparkMessages, setSparkMessages] = useState(() => loadStoredMessages(userId) || initialSparkMessages);
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
+
+  // Persist messages naar sessionStorage bij elke wijziging
+  useEffect(() => {
+    saveStoredMessages(userId, sparkMessages);
+  }, [sparkMessages, userId]);
+
+  // Als user wisselt (bv. login als ander account) → laad hun eigen sessie of reset
+  useEffect(() => {
+    const stored = loadStoredMessages(userId);
+    setSparkMessages(stored || initialSparkMessages);
+  }, [userId]);
 
   // Community bot state
   const [communityMessages, setCommunityMessages] = useState([]);

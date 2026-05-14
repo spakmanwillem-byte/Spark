@@ -42,6 +42,12 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => {
     if (user) {
       AuthAPI.logout(user.id).catch(() => {});
+      // Wis Spark chat sessie van deze user (chat staat in sessionStorage)
+      try {
+        sessionStorage.removeItem(`spark_chat_session_${user.id}`);
+      } catch {
+        // Ignore storage errors
+      }
     }
     setUser(null);
     localStorage.removeItem(STORAGE_KEY);

@@ -145,6 +145,28 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, "card_session_question")
         return response
 
+    # 0z2. CHAT RECAP (v4_recap_001) — "wat hebben we gisteren middag besproken?"
+    # Hoge prio: vóór alle andere intent-detectie, ná card-sessie.
+    try:
+        from . import chat_recap_service
+        if chat_recap_service.detect_recap_intent(text):
+            # Laad user voor timezone
+            from pathlib import Path as _P
+            from modules.core.storage import load_json as _lj
+            user_obj = None
+            if req.user_id:
+                udata = _lj(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+                for u in udata.get("users", []):
+                    if u.get("id") == req.user_id:
+                        user_obj = u
+                        break
+            recap = chat_recap_service.build_recap(user_obj, req.user_id, text)
+            response.update(recap)
+            _save_log(req, response, "recap")
+            return response
+    except Exception:
+        pass
+
     # 0d. SPONTANE W-VULLING (v4_007): stille verrijking van actieve snap
     # Veiligheid: alleen op last_entry_id, alleen als nog auto-generated, alleen lege velden
     spontaneous_hint = ""

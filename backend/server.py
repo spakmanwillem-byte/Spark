@@ -157,6 +157,10 @@ app.include_router(profile_router, prefix="/api")
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")
 
+# Module 21: Urgent notifications (glow op sidebar tabs)
+from modules.urgent import urgent_router
+app.include_router(urgent_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

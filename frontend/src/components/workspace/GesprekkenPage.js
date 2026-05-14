@@ -75,6 +75,30 @@ export function GesprekkenPage({ onNavigate }) {
 
   const messagesEndRef = useRef(null);
 
+  // Urgent glow voor sub-tabs (v4_glow_001)
+  const [subTabGlow, setSubTabGlow] = useState({});
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    const fetchUrgent = () => {
+      fetch(`${API}/api/urgent/notifications?user_id=${userId}`)
+        .then(r => r.json())
+        .then(d => {
+          if (cancelled) return;
+          const g = d?.glow || {};
+          setSubTabGlow({
+            spark: g['chat-spark'] || null,
+            community: g['chat-community'] || null,
+            prive: g['chat-prive'] || null,
+          });
+        })
+        .catch(() => {});
+    };
+    fetchUrgent();
+    const interval = setInterval(fetchUrgent, 60_000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [userId]);
+
   const tabs = [
     { id: 'spark', label: 'Spark AI', icon: Bot, accent: '#f59e0b' },
     { id: 'community', label: 'Community', icon: Users, accent: '#a855f7' },
@@ -169,13 +193,18 @@ export function GesprekkenPage({ onNavigate }) {
           <div className="flex">
             {tabs.map(tab => {
               const isActive = activeTab === tab.id;
+              const tabGlow = subTabGlow[tab.id];
+              const glowRing = tabGlow === 'red'
+                ? 'ring-2 ring-red-500/60 rounded-lg animate-pulse'
+                : tabGlow === 'amber' ? 'ring-2 ring-amber-400/40 rounded-lg' : '';
               return (
                 <button
                   key={tab.id}
                   data-testid={`tab-${tab.id}`}
+                  data-glow={tabGlow || undefined}
                   onClick={() => { setActiveTab(tab.id); setSelectedContact(null); }}
-                  className="relative flex items-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors"
-                  style={{ color: isActive ? tab.accent : '#94a3b8' }}
+                  className={`relative flex items-center gap-2 px-5 py-2.5 text-sm font-medium transition-colors ${glowRing}`}
+                  style={{ color: isActive ? tab.accent : (tabGlow === 'red' ? '#fca5a5' : tabGlow === 'amber' ? '#fcd34d' : '#94a3b8') }}
                 >
                   <tab.icon className="w-4 h-4" />
                   {tab.label}

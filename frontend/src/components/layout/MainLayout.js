@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Zap, Home, MessageSquare, Users, Calendar, Brain, 
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
@@ -68,6 +68,27 @@ export const getPageInfo = (pageId) => {
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // Urgent notifications glow (v4_glow_001) — pollt elke 60s
+  const [urgentGlow, setUrgentGlow] = useState({});
+  const [urgentItems, setUrgentItems] = useState([]);
+  useEffect(() => {
+    if (!user?.id) return;
+    const API = process.env.REACT_APP_BACKEND_URL;
+    let cancelled = false;
+    const fetchUrgent = () => {
+      fetch(`${API}/api/urgent/notifications?user_id=${user.id}`)
+        .then(r => r.json())
+        .then(d => {
+          if (cancelled) return;
+          setUrgentGlow(d?.glow || {});
+          setUrgentItems(d?.items || []);
+        })
+        .catch(() => {});
+    };
+    fetchUrgent();
+    const interval = setInterval(fetchUrgent, 60_000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [user?.id]);
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const stored = parseInt(localStorage.getItem('sidebarWidth') || '256', 10);
     return isNaN(stored) ? 256 : Math.min(Math.max(stored, 200), 420);
@@ -322,21 +343,32 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
                   </p>
                 )}
                 <div className="space-y-1">
-                  {visibleItems.map(item => (
-                    <NavItem
-                      key={item.id}
-                      item={item}
-                      isActive={activePage === item.id}
-                      isCollapsed={sidebarCollapsed}
-                      onClick={() => handleNavClick(item)}
-                      draggable={!sidebarCollapsed}
-                      isDragging={dragState?.itemId === item.id}
-                      onDragStart={() => handleDragStart(key, item.id)}
-                      onDragOver={handleDragOver}
-                      onDrop={() => handleDropOnItem(key, item.id)}
-                      onDragEnd={() => setDragState(null)}
-                    />
-                  ))}
+                  {visibleItems.map(item => {
+                    const itemGlow = urgentGlow[item.id];
+                    const itemUrgentCount = urgentItems.filter(it => {
+                      if (item.id === 'chat' || item.id === 'calendar') {
+                        return it.kind === 'agenda';
+                      }
+                      return false;
+                    }).length;
+                    return (
+                      <NavItem
+                        key={item.id}
+                        item={item}
+                        isActive={activePage === item.id}
+                        isCollapsed={sidebarCollapsed}
+                        glow={itemGlow}
+                        glowCount={itemUrgentCount}
+                        onClick={() => handleNavClick(item)}
+                        draggable={!sidebarCollapsed}
+                        isDragging={dragState?.itemId === item.id}
+                        onDragStart={() => handleDragStart(key, item.id)}
+                        onDragOver={handleDragOver}
+                        onDrop={() => handleDropOnItem(key, item.id)}
+                        onDragEnd={() => setDragState(null)}
+                      />
+                    );
+                  })}
                   {/* Drop zone aan einde van sectie */}
                   {!sidebarCollapsed && dragState && dragState.sectionKey !== key && (
                     <div
@@ -456,9 +488,17 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 }
 
 // Navigation Item Component (drag-and-drop)
-function NavItem({ item, isActive, isCollapsed, onClick, draggable, isDragging, onDragStart, onDragOver, onDrop, onDragEnd }) {
+function NavItem({ item, isActive, isCollapsed, glow, glowCount, onClick, draggable, isDragging, onDragStart, onDragOver, onDrop, onDragEnd }) {
   const Icon = item.icon;
   const [dragOver, setDragOver] = React.useState(false);
+
+  // Glow severity → kleur + animatie
+  const glowStyle = glow === 'red'
+    ? 'ring-2 ring-red-500/60 shadow-[0_0_12px_rgba(239,68,68,0.5)] animate-pulse'
+    : glow === 'amber'
+      ? 'ring-2 ring-amber-400/50 shadow-[0_0_10px_rgba(251,191,36,0.35)]'
+      : '';
+  const glowIconColor = glow === 'red' ? 'text-red-400' : glow === 'amber' ? 'text-amber-300' : '';
 
   return (
     <div
@@ -486,22 +526,28 @@ function NavItem({ item, isActive, isCollapsed, onClick, draggable, isDragging, 
     >
       <button
         onClick={onClick}
+        data-glow={glow || undefined}
         className={`
           w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer
           ${isActive
             ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+            : `text-slate-400 hover:text-white hover:bg-slate-800/50 ${glowStyle}`
           }
           ${isCollapsed ? 'justify-center' : ''}
         `}
         title={isCollapsed ? item.label : (draggable ? `${item.label} (sleep om te verplaatsen)` : item.label)}
         data-testid={`nav-${item.id}`}
       >
-        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : ''}`} />
+        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-amber-400' : glowIconColor}`} />
         {!isCollapsed && (
           <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
         )}
-        {!isCollapsed && draggable && (
+        {!isCollapsed && !!glowCount && glowCount > 0 && (
+          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${glow === 'red' ? 'bg-red-500/20 text-red-300' : 'bg-amber-500/20 text-amber-300'}`}>
+            {glowCount}
+          </span>
+        )}
+        {!isCollapsed && draggable && !glow && (
           <span className="opacity-0 group-hover:opacity-100 text-slate-600 text-xs transition-opacity cursor-grab active:cursor-grabbing">⋮⋮</span>
         )}
       </button>

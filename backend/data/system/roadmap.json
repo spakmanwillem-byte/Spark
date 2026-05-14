@@ -2838,9 +2838,55 @@
         "progress": 100,
         "beschrijving": "Stille observator van Spark's chat-gedrag. Logt elke beurt naar /data/shadow/events/YYYY-MM-DD.jsonl + aggregate counters in stats.json. Detecteert correction/confirmation signals via regex. Read-only endpoints: /api/chat/shadow/{stats,recent,unused,corrections,reset}. Niet-blokkerend — chat breekt nooit. Fundament voor Analyser (v4_016) en Advisor UI (v4_017).",
         "voltooid_op": "2026-05-14"
+      },
+      {
+        "id": "v4_recap_001",
+        "titel": "Chat Recap: 'wat hebben we gisteren middag besproken?'",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "beschrijving": "Spark herkent recap-vragen ('wat hebben we vandaag/gisteren/maandag besproken?', 'waar hadden we het over?'). Gebruikt user_time_service voor timezone-aware tijdvensters: ochtend (5-12), middag (12-18), avond (18-23), nacht (23-5). Leest chat logs, extraheert top-5 onderwerpen (uit knowledge_matches, fallback naar keyword extraction). Hoge prio in routes: na card-sessie, voor andere intent detectie.",
+        "voltooid_op": "2026-05-14",
+        "bestanden": [
+          "/app/backend/modules/chat/chat_recap_service.py (nieuw)",
+          "/app/backend/modules/chat/routes.py (intent hook na card-sessie)"
+        ]
+      },
+      {
+        "id": "v4_glow_001",
+        "titel": "Sidebar glow systeem voor urgente items",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "beschrijving": "Nieuwe module /modules/urgent. Endpoint GET /api/urgent/notifications?user_id=X returnt {glow:{chat:'amber',...}, items:[...]}. Frontend polt elke 60s in MainLayout en GesprekkenPage. Severity: amber bij <60 min, red+pulse bij <15 min. Eerste producer: agenda events. Gesprekken sidebar + sub-tabs (Spark/Community/Privé) glowen met badge-count. Uitbreidbaar voor trade/wallet later.",
+        "voltooid_op": "2026-05-14",
+        "bestanden": [
+          "/app/backend/modules/urgent/ (nieuwe module)",
+          "/app/backend/server.py (router registratie)",
+          "/app/frontend/src/components/layout/MainLayout.js (glow polling + NavItem)",
+          "/app/frontend/src/components/workspace/GesprekkenPage.js (subtab glow)"
+        ]
+      },
+      {
+        "id": "v4_chat_persist_001",
+        "titel": "Chat blijft tussen page-switches",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "beschrijving": "sparkMessages in GesprekkenPage gepersisteerd in sessionStorage per user_id. Overleeft page-switches en F5 refreshes. Wist automatisch bij logout via AuthContext.",
+        "voltooid_op": "2026-05-14"
+      },
+      {
+        "id": "v4_shadow_widget_001",
+        "titel": "Shadow Observer widget op dashboard",
+        "status": "done",
+        "priority": "low",
+        "progress": 100,
+        "beschrijving": "Mini Shadow-kader op Dashboard (col-3, onder Gesprekken). Toont events totaal, correcties %, fallback %, top-3 triggers, top-3 ongebruikte items per categorie. Voorlopige plek totdat permanent thuis duidelijk is.",
+        "voltooid_op": "2026-05-14"
       }
     ],
-    "last_updated": "2026-05-14T10:00:02.018352",
+    "last_updated": "2026-05-14T10:21:45.641498",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

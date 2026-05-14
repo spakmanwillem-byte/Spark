@@ -1,28 +1,36 @@
 {
   "totals": {
-    "events": 4,
+    "events": 13,
     "corrections": 1,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 0
+    "knowledge_matches": 2
   },
   "triggers_used": {
     "wedervraag": 1,
     "wedervraag_done": 1,
-    "how_are_you": 1,
-    "agenda_declined": 1
+    "how_are_you": 2,
+    "agenda_declined": 1,
+    "recap": 4,
+    "greeting": 2
   },
   "response_types": {
     "wedervraag": 1,
     "wedervraag_done": 1,
-    "how_are_you": 1,
-    "agenda_declined": 1
+    "how_are_you": 2,
+    "agenda_declined": 1,
+    "recap": 4,
+    "greeting": 2,
+    "knowledge": 2
   },
-  "begrip_used": {},
+  "begrip_used": {
+    "Fotosynthese": 1,
+    "Afspraak": 1
+  },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-14T10:04:41.917529+00:00",
+  "last_event_at": "2026-05-14T10:22:11.098975+00:00",
   "first_event_at": "2026-05-14T10:00:26.498695+00:00"
 }

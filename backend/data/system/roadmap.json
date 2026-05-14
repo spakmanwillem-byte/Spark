@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 56,
+    "progress": 57,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -2775,6 +2775,15 @@
         "priority": "low",
         "progress": 0,
         "beschrijving": "Visualisatie van de 5 lagen (cognitief/persoonlijkheid/gedrag/besluit/observatie) in één graph-view. Voor debugging, dev-inzicht en demo. Pas na Composer + Observer."
+      },
+      {
+        "id": "v4_024",
+        "titel": "Agenda-intent NLP polish",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-14",
+        "beschrijving": "Drastische upgrade van agenda_intent_service: (1) dagdeel-woorden vanavond/vanmiddag/vannacht/vanochtend/vanmorgen/straks/later met default-tijd (19:00/14:00/22:00/09:00/+2u). (2) 24h-conversie via 's avonds/'s middags/'s nachts/'s ochtends + dagdeel-woord auto-impliceert (vanavond 9u → 21:00). (3) Extra activity-lijst (etentje/feestje/borrel/uitje/klusje/afspraak/etc) naast calendar_triggers. (4) Lowercase plek-detect (oma/opa/kantoor/thuis/tandarts/dokter/kapper). (5) Voorzetsel-keuze (in voor steden, naar de voor diensten, bij voor personen, op voor kantoor/werk). (6) Werkwoord-correcte NL-zinsbouw: GAAT_X voor werkwoorden, HEEFT_NAAMWOORDEN voor zelfstandige. (7) Dubbel-woord voorkomen (kapper×2). (8) Mooie event-titel met format_event_title. Events worden nu opgeslagen mét titel + locatie."
       }
     ],
     "last_updated": "2026-05-14"
@@ -3372,6 +3381,7 @@
     "2026-05-13: v4_013a Spark Vocab VOLTOOID — woordenlijsten (5 emoties × 4 intenties + 5 algemene categorieën, 100 woorden seed) beheerbaar via Triggers-pagina met inline add/delete. v4_013 hernoemd naar v4_013b (response composer).",
     "2026-05-13: v4_013c VOLTOOID — statische strings uit routes.py naar system_fallback.json + fallback_service helper. ALLE trigger-groepen (conv/cal/emo/admin/system/vocab) editable in Triggers-pagina via generieke /api/triggers/edit/{kind}/{key}/add+DELETE.",
     "2026-05-14: ARCHITECTUUR-VASTLEGGING. 5-lagen model bevestigd (cognitief/persoonlijkheid/gedrag/besluit/observatie). Schema v2.0 toegepast: kaart_type + review-metadata op alle 2679 kaarten. Backlog uitgebreid: v4_019 Review-tab, v4_020 Chain-anchor, v4_021 ruw/verwerkt, v4_022 recept-laag, v4_023 mind-graph view. Volgorde voor doorpakken: Observer → Guards → Insights → Advisor → Composer.",
-    "2026-05-14: v4_019 Review-tab VOLTOOID. Paarse pill + ReviewPanel met inline editing, kaart_type dropdown, 4 actie-knoppen. Backend: /api/knowledge/review/next + /{id}/review."
+    "2026-05-14: v4_019 Review-tab VOLTOOID. Paarse pill + ReviewPanel met inline editing, kaart_type dropdown, 4 actie-knoppen. Backend: /api/knowledge/review/next + /{id}/review.",
+    "2026-05-14: v4_024 agenda NLP polish — dagdeel-woorden, 24h via 's avonds, lowercase plekken, betere zinsbouw, format_event_title. Events nu met juiste titel + datum + tijd in agenda."
   ]
 }

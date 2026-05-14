@@ -166,7 +166,7 @@ async def process_message(req: ChatMessage):
             ag_data = _lj(ag_file, default={"events": []})
             new_event = {
                 "id": str(uuid.uuid4())[:8],
-                "titel": pending_agenda.get("wat") or "Afspraak",
+                "titel": agenda_intent_service.format_event_title(pending_agenda),
                 "beschrijving": f"Genoteerd via chat: {pending_agenda.get('raw_text','')}",
                 "date": pending_agenda["datetime_iso"],
                 "location": pending_agenda.get("waar", ""),

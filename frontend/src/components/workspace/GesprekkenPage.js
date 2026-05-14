@@ -39,11 +39,9 @@ const saveStoredMessages = (userId, messages) => {
   }
 };
 
-const initialPriveContacts = [
-  { id: 1, contact: 'Harry', avatar: 'H', lastMessage: 'Tot morgen!', time: '16:45', unread: 0, online: true, color: '#22c55e' },
-  { id: 2, contact: 'Sandra', avatar: 'S', lastMessage: 'Die analyse ziet er goed uit', time: '15:30', unread: 2, online: false, color: '#f59e0b' },
-  { id: 3, contact: 'Peter', avatar: 'P', lastMessage: 'Kan je de docs delen?', time: 'Gisteren', unread: 0, online: true, color: '#3b82f6' },
-];
+// Lint: initialPriveContacts is reference data, niet gebruikt na v4_contacts_001 migratie
+// eslint-disable-next-line no-unused-vars
+const _legacy_initialPriveContacts = initialPriveContacts;
 
 export function GesprekkenPage({ onNavigate }) {
   const { user } = useAuth();
@@ -72,6 +70,51 @@ export function GesprekkenPage({ onNavigate }) {
   const [bots, setBots] = useState([]);
   const [communityLoading, setCommunityLoading] = useState(false);
   const [sendingCommunity, setSendingCommunity] = useState(false);
+
+  // Privé contacten + messages (v4_contacts_001)
+  const [priveContacts, setPriveContacts] = useState([]);
+  const [priveLoading, setPriveLoading] = useState(false);
+  const [priveMessages, setPriveMessages] = useState([]);
+  const [priveSearch, setPriveSearch] = useState('');
+  const [sendingPrive, setSendingPrive] = useState(false);
+
+  const loadPriveContacts = async () => {
+    if (!userId) return;
+    setPriveLoading(true);
+    try {
+      const res = await fetch(`${API}/api/contacts/list?user_id=${userId}`);
+      const data = await res.json();
+      setPriveContacts(data.contacts || []);
+    } catch { /* graceful */ }
+    setPriveLoading(false);
+  };
+
+  // Laad contacten als Privé tab geopend
+  useEffect(() => {
+    if (activeTab !== 'prive') return;
+    loadPriveContacts();
+    const interval = setInterval(loadPriveContacts, 30_000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, userId]);
+
+  // Laad messages voor geselecteerd contact
+  const loadPriveMessages = async (contactId) => {
+    if (!contactId) return;
+    try {
+      const res = await fetch(`${API}/api/contacts/messages?user_id=${userId}&contact_id=${contactId}`);
+      const data = await res.json();
+      setPriveMessages(data.messages || []);
+    } catch { /* graceful */ }
+  };
+
+  useEffect(() => {
+    if (activeTab !== 'prive' || !selectedContact?.id) return;
+    loadPriveMessages(selectedContact.id);
+    const interval = setInterval(() => loadPriveMessages(selectedContact.id), 5_000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, selectedContact?.id, userId]);
 
   const messagesEndRef = useRef(null);
 
@@ -109,7 +152,7 @@ export function GesprekkenPage({ onNavigate }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => { scrollToBottom(); }, [sparkMessages, communityMessages, activeTab]);
+  useEffect(() => { scrollToBottom(); }, [sparkMessages, communityMessages, priveMessages, activeTab]);
 
   // Load community bot data when tab becomes active
   useEffect(() => {
@@ -172,6 +215,29 @@ export function GesprekkenPage({ onNavigate }) {
         setCommunityMessages(prev => [...prev, res.message, ...(res.bot_responses || [])]);
       }
       setSendingCommunity(false);
+    } else if (activeTab === 'prive') {
+      if (!selectedContact?.id || sendingPrive) return;
+      setSendingPrive(true);
+      const optimistic = {
+        id: `tmp-${Date.now()}`,
+        from_user_id: userId,
+        from_naam: userName,
+        to_user_id: selectedContact.id,
+        text,
+        ts: new Date().toISOString(),
+      };
+      setPriveMessages(prev => [...prev, optimistic]);
+      try {
+        await fetch(`${API}/api/contacts/send`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ from_user_id: userId, to_user_id: selectedContact.id, text }),
+        });
+        // Re-fetch om bot-reply en echte ids op te halen
+        await loadPriveMessages(selectedContact.id);
+        loadPriveContacts();
+      } catch { /* graceful */ }
+      setSendingPrive(false);
     }
   };
 
@@ -301,46 +367,60 @@ export function GesprekkenPage({ onNavigate }) {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
                     <input
                       type="text"
+                      value={priveSearch}
+                      onChange={e => setPriveSearch(e.target.value)}
                       placeholder="Zoek contact..."
                       data-testid="prive-search"
                       className="w-full pl-8 pr-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:outline-none"
                     />
                   </div>
-                  <div className="space-y-1">
-                    {initialPriveContacts.map(c => (
-                      <button
-                        key={c.id}
-                        data-testid={`contact-${c.contact.toLowerCase()}`}
-                        onClick={() => setSelectedContact(c)}
-                        className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-colors ${
-                          selectedContact?.id === c.id
-                            ? 'bg-cyan-500/10 border border-cyan-500/20'
-                            : 'hover:bg-slate-800/50'
-                        }`}
-                      >
-                        <div className="relative flex-shrink-0">
-                          <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: c.color }}>
-                            <span className="text-white text-xs font-bold">{c.avatar}</span>
+                  {priveLoading && priveContacts.length === 0 ? (
+                    <p className="text-xs text-slate-500 text-center py-4">Contacten laden...</p>
+                  ) : priveContacts.length === 0 ? (
+                    <p className="text-xs text-slate-500 text-center py-4">Geen contacten beschikbaar</p>
+                  ) : (
+                    <div className="space-y-1">
+                      {priveContacts
+                        .filter(c => !priveSearch || c.naam.toLowerCase().includes(priveSearch.toLowerCase()))
+                        .map(c => (
+                        <button
+                          key={c.id}
+                          data-testid={`contact-${c.naam.toLowerCase().replace(/\s+/g,'-')}`}
+                          onClick={() => setSelectedContact(c)}
+                          className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-colors ${
+                            selectedContact?.id === c.id
+                              ? 'bg-cyan-500/10 border border-cyan-500/20'
+                              : 'hover:bg-slate-800/50'
+                          }`}
+                        >
+                          <div className="relative flex-shrink-0">
+                            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: c.color }}>
+                              <span className="text-white text-xs font-bold">{c.avatar}</span>
+                            </div>
+                            {c.online && (
+                              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-slate-900 rounded-full" />
+                            )}
                           </div>
-                          {c.online && (
-                            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-slate-900 rounded-full" />
+                          <div className="flex-1 min-w-0 text-left">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm text-white font-medium truncate flex items-center gap-1">
+                                {c.naam}
+                                {c.is_bot && <span className="text-[9px] px-1 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
+                                {c.is_admin_contact && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">TEAM</span>}
+                              </span>
+                              <span className="text-[10px] text-slate-500 ml-2 flex-shrink-0">{c.last_time}</span>
+                            </div>
+                            <p className="text-xs text-slate-400 truncate">{c.last_message || c.rol}</p>
+                          </div>
+                          {c.unread > 0 && (
+                            <span className="w-4 h-4 rounded-full text-[10px] text-white flex items-center justify-center flex-shrink-0" style={{ background: '#06b6d4' }}>
+                              {c.unread}
+                            </span>
                           )}
-                        </div>
-                        <div className="flex-1 min-w-0 text-left">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-white font-medium truncate">{c.contact}</span>
-                            <span className="text-[10px] text-slate-500 ml-2 flex-shrink-0">{c.time}</span>
-                          </div>
-                          <p className="text-xs text-slate-400 truncate">{c.lastMessage}</p>
-                        </div>
-                        {c.unread > 0 && (
-                          <span className="w-4 h-4 rounded-full text-[10px] text-white flex items-center justify-center flex-shrink-0" style={{ background: '#06b6d4' }}>
-                            {c.unread}
-                          </span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex-1 flex flex-col">
@@ -361,7 +441,11 @@ export function GesprekkenPage({ onNavigate }) {
                           <span className="text-white text-xs font-bold">{selectedContact.avatar}</span>
                         </div>
                         <div>
-                          <h3 className="text-sm font-semibold text-white">{selectedContact.contact}</h3>
+                          <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
+                            {selectedContact.naam}
+                            {selectedContact.is_bot && <span className="text-[9px] px-1 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
+                            {selectedContact.is_admin_contact && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">TEAM</span>}
+                          </h3>
                           <p className={`text-[10px] flex items-center gap-1 ${selectedContact.online ? 'text-green-400' : 'text-slate-500'}`}>
                             <Circle className="w-1.5 h-1.5 fill-current" />
                             {selectedContact.online ? 'Online' : 'Offline'}
@@ -377,21 +461,48 @@ export function GesprekkenPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
-                    <div className="flex-1 overflow-y-auto p-6 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: selectedContact.color }}>
-                          <span className="text-xl font-bold text-white">{selectedContact.avatar}</span>
+                    <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">
+                      {priveMessages.length === 0 ? (
+                        <div className="h-full flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: selectedContact.color }}>
+                              <span className="text-xl font-bold text-white">{selectedContact.avatar}</span>
+                            </div>
+                            <h3 className="text-white font-semibold text-sm">{selectedContact.naam}</h3>
+                            <p className="text-slate-500 text-xs mt-1">Begin een gesprek</p>
+                          </div>
                         </div>
-                        <h3 className="text-white font-semibold text-sm">{selectedContact.contact}</h3>
-                        <p className="text-slate-500 text-xs mt-1">Begin een gesprek</p>
-                      </div>
+                      ) : (
+                        priveMessages.map(m => {
+                          const fromMe = m.from_user_id === userId;
+                          return (
+                            <div key={m.id} className={`flex ${fromMe ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[75%] rounded-2xl px-4 py-2 ${
+                                fromMe
+                                  ? 'bg-cyan-500/15 border border-cyan-500/25 text-cyan-50'
+                                  : 'bg-slate-800/60 border border-slate-700/40 text-slate-100'
+                              }`}>
+                                {!fromMe && (
+                                  <p className="text-[10px] text-slate-400 mb-0.5 font-medium">{m.from_naam}</p>
+                                )}
+                                <p className="text-sm whitespace-pre-wrap">{m.text}</p>
+                                <p className="text-[9px] text-slate-500 mt-1">
+                                  {m.ts ? new Date(m.ts).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : ''}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                      <div ref={messagesEndRef} />
                     </div>
                     <ChatInput
                       value={newMessage}
                       onChange={setNewMessage}
                       onSend={handleSend}
-                      placeholder={`Bericht aan ${selectedContact.contact}...`}
+                      placeholder={`Bericht aan ${selectedContact.naam}...`}
                       accent="#06b6d4"
+                      disabled={sendingPrive}
                     />
                   </>
                 )}

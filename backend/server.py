@@ -161,6 +161,10 @@ app.include_router(backup_router, prefix="/api")
 from modules.urgent import urgent_router
 app.include_router(urgent_router, prefix="/api")
 
+# Module 22: Contacts (privé-berichten + gradatie-zichtbaarheid)
+from modules.contacts import contacts_router
+app.include_router(contacts_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

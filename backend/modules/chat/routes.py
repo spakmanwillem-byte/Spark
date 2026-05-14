@@ -20,6 +20,7 @@ from . import spontaneous_w_service
 from . import card_session_service
 from . import bijbel_lookup_service
 from . import fallback_service
+from . import shadow_observer
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -761,6 +762,11 @@ def _save_log(req: "ChatMessage", response: dict, trigger_type):
         channel=req.channel or "spark",
         session_id=req.session_id,
     )
+    # Shadow Observer (v4_015) — niet-blokkerend, mag chat nooit breken
+    try:
+        shadow_observer.record(req.user_id, req.message, response, trigger_type)
+    except Exception:
+        pass
 
 
 def _get_user_gradatie(user_id):
@@ -858,3 +864,38 @@ async def detect_emotion(req: ChatMessage):
     """Detecteer emotie in tekst (test endpoint)"""
     result = EmotionDetectionService.detect_emotion(req.message)
     return {"detected": result is not None, "emotion": result}
+
+
+
+# ============================================================
+# SHADOW OBSERVER (v4_015) — read-only inzicht
+# ============================================================
+
+@router.get("/shadow/stats")
+async def shadow_stats():
+    """Aggregate counters van Spark's chat-gedrag (triggers, vocab, fallbacks, etc.)"""
+    return shadow_observer.get_stats()
+
+
+@router.get("/shadow/recent")
+async def shadow_recent(limit: int = 50, user_id: Optional[str] = None):
+    """Laatste N chat-events (laatste dag eerst). Filter optioneel op user_id."""
+    return {"events": shadow_observer.get_recent_events(limit=limit, user_id=user_id)}
+
+
+@router.get("/shadow/unused")
+async def shadow_unused():
+    """Items in JSON-bestanden die NOOIT zijn gebruikt — input voor latere Analyser/Advisor."""
+    return shadow_observer.get_unused_items()
+
+
+@router.get("/shadow/corrections")
+async def shadow_corrections(limit: int = 20):
+    """Momenten waarop user 'nee/fout/verkeerd' zei — basis voor zelf-lering."""
+    return {"corrections": shadow_observer.get_correction_examples(limit=limit)}
+
+
+@router.post("/shadow/reset")
+async def shadow_reset():
+    """Admin: reset aggregate stats (events op disk blijven staan)."""
+    return shadow_observer.reset_stats()

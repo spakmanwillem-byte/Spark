@@ -4567,11 +4567,86 @@
         "session_id": "default",
         "gesprek_nummer": 174
       }
+    },
+    {
+      "id": "conv-f7beafbf",
+      "timestamp": "2026-05-14T09:59:19.615551+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo spark, hoe gaat het?",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 175
+      }
+    },
+    {
+      "id": "conv-c4efe42e",
+      "timestamp": "2026-05-14T09:59:20.997901+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee dat klopt niet hoor",
+      "spark_response": "**Klopt**: Een bevestiging dat iets juist is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **hoor** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'hoor' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Klopt"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "hoor"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 176
+      }
+    },
+    {
+      "id": "conv-9ed0b877",
+      "timestamp": "2026-05-14T10:00:26.495007+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "test na shadow",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'hoor' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 177
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 174,
-    "last_updated": "2026-05-14T07:43:47.667070+00:00"
+    "total_conversations": 177,
+    "last_updated": "2026-05-14T10:00:26.495007+00:00"
   }
 }

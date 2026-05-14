@@ -2820,9 +2820,30 @@
         "progress": 100,
         "completed_date": "2026-05-14",
         "beschrijving": "create_user krijgt `admin_override` param. Endpoint POST /api/auth/users ondersteunt `?admin_id=<id>` query: indien admin gradatie 1/2 → collisie-check + lengte-eis overgeslagen. Hiermee kan admin meerdere accounts maken met gedeeld 'Welkom01' sleutelwoord (familie/vrienden). Niet-admin krijgt 403. Reset-password endpoint blijft default naar 'Welkom01'. Self-registration via login-scherm blijft veilig (collisie + 4-tekens check)."
+      },
+      {
+        "id": "v4_backup_001",
+        "titel": "Spark Backup Systeem (export/import ZIP)",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "beschrijving": "Tab 'Backup Systeem' in Integraties. Endpoints: mark-deployed, status, download/full + /changes, restore/preview + /restore. Detectie via filesystem mtime + deploy marker. Merge-only restore (nooit verwijderen). Scope: /app/backend/data/ + /app/memory/.",
+        "voltooid_op": "2026-05-14"
+      },
+      {
+        "id": "v4_shadow_001",
+        "titel": "Shadow Observer + lichte zelf-lering",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "beschrijving": "Stille observator van Spark's chat-gedrag. Logt elke beurt naar /data/shadow/events/YYYY-MM-DD.jsonl + aggregate counters in stats.json. Detecteert correction/confirmation signals via regex. Read-only endpoints: /api/chat/shadow/{stats,recent,unused,corrections,reset}. Niet-blokkerend — chat breekt nooit. Fundament voor Analyser (v4_016) en Advisor UI (v4_017).",
+        "voltooid_op": "2026-05-14"
       }
     ],
-    "last_updated": "2026-05-14"
+    "last_updated": "2026-05-14T10:00:02.018352",
+    "notes_log": [
+      "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
+    ]
   },
   "v5.0": {
     "naam": "🎓 Learning & Adaptation",

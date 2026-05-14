@@ -4642,11 +4642,80 @@
         "session_id": "default",
         "gesprek_nummer": 177
       }
+    },
+    {
+      "id": "conv-54ba355a",
+      "timestamp": "2026-05-14T10:04:41.590767+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 178
+      }
+    },
+    {
+      "id": "conv-8f91ae7f",
+      "timestamp": "2026-05-14T10:04:41.756248+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe gaat het?",
+      "spark_response": "Heel goed! Ik geniet van ons gesprek. 💚",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 179
+      }
+    },
+    {
+      "id": "conv-1e415621",
+      "timestamp": "2026-05-14T10:04:41.913834+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee dat is verkeerd",
+      "spark_response": "Begrepen, sla ik over.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "agenda_declined"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 180
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 177,
-    "last_updated": "2026-05-14T10:00:26.495007+00:00"
+    "total_conversations": 180,
+    "last_updated": "2026-05-14T10:04:41.913834+00:00"
   }
 }

@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 62,
+    "progress": 77,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3015,11 +3015,21 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "Snelhandel panel herontworpen: 4 read-only kaders (Markt, Inzet uit potje, Live prijs, Modus) en één actie-knop 'Koop potje'. Geen bedrag-input meer — komt uit volgende vrije potje. Geen Type-knoppen (verkoop gaat via monitor trailing stop). Geen separate 'Order Plaatsen'. Knop hernoemd naar 'Koop potje'."
+      },
+      {
+        "id": "v4_potje_fix_001",
+        "titel": "Snelhandel UI: potje detectie + nummering",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Twee bugs gefixt: (1) Snelhandel toonde 'Geen vrij potje' omdat UI .find() deed op dict ipv list — nu correct potjes?.potjes?.find(). (2) Alle potjes hadden `nummer: null` — backfilled naar 1 t/m 10 voor alle users. UI sorteert nu op nummer en pakt eerste vrije: 1→2→3 etc. Backend get_available_pot() itereert al correct. Geverifieerd via curl: buy 1→pot1, buy 2→pot2."
       }
     ],
-    "last_updated": "2026-05-15T09:20:00",
+    "last_updated": "2026-05-15T09:30:00",
     "notes_log": [
-      "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
+      "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
+      "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar."
     ]
   },
   "v5.0": {

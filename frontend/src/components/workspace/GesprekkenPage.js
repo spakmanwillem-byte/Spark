@@ -39,10 +39,6 @@ const saveStoredMessages = (userId, messages) => {
   }
 };
 
-// Lint: initialPriveContacts is reference data, niet gebruikt na v4_contacts_001 migratie
-// eslint-disable-next-line no-unused-vars
-const _legacy_initialPriveContacts = initialPriveContacts;
-
 export function GesprekkenPage({ onNavigate }) {
   const { user } = useAuth();
   const userId = user?.id || 'user-001';

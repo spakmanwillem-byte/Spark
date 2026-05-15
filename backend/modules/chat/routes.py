@@ -220,6 +220,14 @@ async def process_message(req: ChatMessage):
             session_state.set_state(req.user_id, pending_clarify={"last_begrip": last_begrip})
             _save_log(req, response, "clarify_question")
             return response
+
+        # Topic overview: "vertel me over X" / "wat heb je over X"
+        matched_topic, topic_q = si.detect_topic_intent(text)
+        if matched_topic and topic_q:
+            out = si.handle_topic_overview(topic_q)
+            response.update(out)
+            _save_log(req, response, "topic_overview")
+            return response
     except Exception:
         pass
 

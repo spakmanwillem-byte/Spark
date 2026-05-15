@@ -170,6 +170,18 @@ export function TraderPage({ onNavigate }) {
     if (res.success) { loadCoreData(); loadLiveData(); }
   };
 
+  // Spark-buy (v4_quickpot_001): pakt vrij potje + start monitor automatisch
+  const executeSparkBuy = async () => {
+    setQtLoading(true); setQtResult(null);
+    const res = await fetch(`${API}/api/trade/quick-buy-potje/${userId}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ market: qtMarket, use_mock: traderSettings?.use_mock !== false, candle_interval: '1h' }),
+    }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
+    setQtResult(res);
+    setQtLoading(false);
+    if (res.success) { loadCoreData(); loadLiveData(); loadMonitorStatus(); if (usePotjes) loadPotjes(); }
+  };
+
   if (loading) return (
     <MainLayout activePage="trade" onNavigate={onNavigate}>
       <div className="flex items-center justify-center h-full"><Loader2 className="w-8 h-8 text-green-500 animate-spin" /></div>
@@ -678,6 +690,17 @@ export function TraderPage({ onNavigate }) {
                     {qtLoading ? 'Bezig...' : 'Order Plaatsen'}
                   </button>
                 </div>
+              </div>
+              {/* Spark-Buy met potje + auto-monitor (v4_quickpot_001) */}
+              <div className="mt-3 pt-3 border-t border-slate-800">
+                <button data-testid="spark-buy-potje" onClick={executeSparkBuy} disabled={qtLoading}
+                  className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:from-emerald-400 hover:to-teal-500 transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2">
+                  <span>⚡</span>
+                  {qtLoading ? 'Spark werkt...' : 'Spark Buy → potje + auto monitor'}
+                </button>
+                <p className="text-[10px] text-slate-500 mt-1.5 text-center">
+                  Spark pakt een vrij potje, koopt op huidige prijs, start de monitor en verkoopt automatisch op winst.
+                </p>
               </div>
               {qtResult && (
                 <div data-testid="quick-trade-result" className={`mt-3 p-3 rounded-xl text-xs ${qtResult.success ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-red-500/10 border border-red-500/20 text-red-400'}`}>

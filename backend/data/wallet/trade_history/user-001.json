@@ -1,9 +1,40 @@
 {
-  "trades": [],
+  "trades": [
+    {
+      "trade_id": "4a45b2e0",
+      "run_id": "manual",
+      "timestamp": "2026-05-15T09:04:34.955160+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "MOCK-BUY-4a45b2e0",
+      "amount": 5.08,
+      "price": 371.07,
+      "filled": 5.08,
+      "status": "filled",
+      "mock": true,
+      "success": true,
+      "error": null
+    },
+    {
+      "trade_id": "0e857d70",
+      "run_id": "manual",
+      "timestamp": "2026-05-15T09:05:22.366913+00:00",
+      "action": "BUY",
+      "market": "BCH-EUR",
+      "order_id": "MOCK-BUY-0e857d70",
+      "amount": 5.08,
+      "price": 371.07,
+      "filled": 5.08,
+      "status": "filled",
+      "mock": true,
+      "success": true,
+      "error": null
+    }
+  ],
   "archived": {
     "archived_at": "2026-04-20T01:44:37.673029+00:00",
     "archived_count": 2401,
     "archive_file": "user-001_archive_pre_spark.json",
-    "note": "Trades van v\u00f3\u00f3r Spark's eigen monitoring. P&L begint fresh vanaf Spark's eerste trade."
+    "note": "Trades van vóór Spark's eigen monitoring. P&L begint fresh vanaf Spark's eerste trade."
   }
 }

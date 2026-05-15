@@ -322,3 +322,90 @@ def handle_clarify(last_begrip: Optional[str]) -> Dict:
         "message": msg,
         "expects": "alternative_word_or_phrase",
     }
+
+
+
+# ============== TOPIC OVERVIEW INTENT (v4_topic_001) ==============
+# "vertel me over X" / "wat heb je over X" / "alles over X"
+_TOPIC_PATTERNS = [
+    r"\bvertel (me |mij )?(eens )?over\s+(.+)$",
+    r"\bwat heb je (allemaal )?over\s+(.+)\?",
+    r"\balles over\s+(.+)$",
+    r"\bwat weet je over\s+(.+)\?",
+    r"\boverzicht\s+(van )?(.+)$",
+]
+KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+
+
+def detect_topic_intent(text: str):
+    """Return (matched, topic_query) tuple."""
+    if not text:
+        return False, None
+    t = text.strip()
+    for pat in _TOPIC_PATTERNS:
+        m = re.search(pat, t, re.IGNORECASE)
+        if m:
+            topic = m.group(m.lastindex).strip().rstrip("?.! ")
+            if topic and len(topic) >= 3:
+                return True, topic
+    return False, None
+
+
+def handle_topic_overview(topic_query: str) -> Dict:
+    """Zoek kaarten met topic of tag matching topic_query. Case-insensitive."""
+    kb = load_json(KB_FILE, default={"knowledge_entries": []})
+    entries = kb.get("knowledge_entries") or kb.get("entries") or []
+    q = topic_query.lower().strip()
+
+    # Match op topic OR tag
+    hits = []
+    for e in entries:
+        topic = (e.get("topic") or "").lower().strip()
+        tags = [t.lower().strip() for t in (e.get("tags") or [])]
+        if topic == q or q in tags:
+            hits.append(e)
+
+    if not hits:
+        # Soft match: substring in topic
+        for e in entries:
+            topic = (e.get("topic") or "").lower().strip()
+            if q in topic and len(topic) > 0:
+                hits.append(e)
+
+    if not hits:
+        return {
+            "type": "topic_overview",
+            "message": f"Ik heb nog niets in mijn kennisbank over **{topic_query}**. Wil je dat ik iets nieuws leer over dit onderwerp?",
+            "topic": topic_query,
+            "count": 0,
+            "begrippen": [],
+        }
+
+    # Sorteer op kwaliteit: status active + ws5 gevuld eerst
+    def _score(e):
+        score = 0
+        if e.get("status") == "active":
+            score += 10
+        if e.get("ws5") and any((e.get("ws5") or {}).values()):
+            score += 5
+        if e.get("lagen") and any((e.get("lagen") or {}).values()):
+            score += 3
+        return -score
+    hits.sort(key=_score)
+
+    # Geef top 5 begrippen
+    sample = hits[:5]
+    begrippen = [e.get("begrip") for e in sample if e.get("begrip")]
+    begrip_str = ", ".join(f"**{b}**" for b in begrippen)
+
+    msg = f"Ik heb **{len(hits)}** kaarten over **{topic_query}** in mijn kennisbank. "
+    if begrippen:
+        msg += f"Een paar: {begrip_str}. Welke wil je dat ik uitleg?"
+    return {
+        "type": "topic_overview",
+        "message": msg,
+        "topic": topic_query,
+        "count": len(hits),
+        "begrippen": begrippen,
+        "preview_ids": [e.get("id") for e in sample],
+    }

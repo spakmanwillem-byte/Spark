@@ -2970,9 +2970,36 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "Nieuwe module smart_intents_service.py met 5 intents: (1) agenda_today = leest agenda, kondigt slim aan 'vandaag niks, morgen X om 11:30'. (2) make_note = 'notitie: ...' / 'noteer: ...' slaat direct op in notes.json. (3) help_overview = 'wat kan je' toont commands + triggerlijst uit JSON. (4) suggest_action = 'wat zullen we doen' combineert agenda + roadmap todo's met prio. (5) clarify_question = 'nee dat bedoel ik niet' triggert vraag 'bedoel je iets anders met X?'. Hooked in routes.py ná recap, vóór andere intent-flows."
+      },
+      {
+        "id": "v4_whitescreen_fix_001",
+        "titel": "Wit scherm fix",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Onused legacy ref `initialPriveContacts is not defined` ReferenceError gefixt in GesprekkenPage.js."
+      },
+      {
+        "id": "v4_quickpot_001",
+        "titel": "Snelhandel: Spark Buy met potje + auto-monitor",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Nieuwe endpoint POST /api/trade/quick-buy-potje/{user_id}. Spark vindt vrij potje, voert buy uit met potje's entry-amount, opent positie en start monitor in potjes-mode automatisch. Frontend krijgt groene 'Spark Buy → potje + auto monitor' knop onder Snelhandel."
+      },
+      {
+        "id": "v4_topic_001",
+        "titel": "Topic-intent 'vertel me over X'",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Smart-intent zoekt kaarten op topic+tag (case-insensitive, ook substring). Sorteert op active+ws5+lagen kwaliteit. Test: technologie→227, emotie→344, voeding→57."
       }
     ],
-    "last_updated": "2026-05-15T08:52:17.912077",
+    "last_updated": "2026-05-15T09:15:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

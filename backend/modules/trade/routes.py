@@ -373,6 +373,81 @@ async def execute_trade(user_id: str, req: QuickTradeRequest):
 
 
 # ============================================================
+# SNELHANDEL MET POTJE — Spark pakt vrij potje + start monitor auto (v4_quickpot_001)
+# ============================================================
+
+class QuickBuyPotjeRequest(BaseModel):
+    market: str = "BCH-EUR"
+    use_mock: bool = True
+    candle_interval: Optional[str] = "1h"
+
+
+@router.post("/quick-buy-potje/{user_id}")
+async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
+    """
+    Spark-assisted buy: pakt eerste vrije potje, voert buy uit, start monitor in potjes-mode.
+    Monitor neemt over voor automatische verkoop op trailing-stop winst-moment.
+    """
+    monitor = get_monitor()
+
+    # 1) Vind vrij potje
+    current_cycle = monitor._cycles if hasattr(monitor, "_cycles") else 0
+    pot = potjes_svc.get_available_pot(user_id, current_cycle)
+    if not pot:
+        return {"success": False, "error": "Geen vrij potje beschikbaar. Alle potjes hebben een open positie."}
+
+    # 2) Huidige prijs ophalen (met mock-fallback bij API down in preview)
+    tickers = fetch_tickers([req.market])
+    price = None
+    if tickers and tickers[0].get("last"):
+        price = float(tickers[0]["last"])
+    elif req.use_mock:
+        # Preview/test fallback: gebruik laatste bekende prijs uit potje of dummy
+        price = float(pot.get("position", {}).get("entry_price") or 300.0)
+    if not price:
+        return {"success": False, "error": f"Kon prijs niet ophalen voor {req.market}"}
+
+    # 3) Buy uitvoeren met potje's eigen entry amount
+    entry_amount = float(pot.get("current_size", pot.get("starting_size", 5.08)))
+    if req.use_mock:
+        trade_result = execute_mock_trade(user_id, req.market, "buy", entry_amount)
+    else:
+        trade_result = execute_real_trade(user_id, req.market, "buy", entry_amount)
+
+    if not trade_result.get("success"):
+        return {"success": False, "error": f"Buy mislukt: {trade_result.get('error', 'onbekend')}", "trade": trade_result}
+
+    # 4) Markeer potje als open
+    pot_opened = potjes_svc.open_pot(user_id, pot["id"], price, current_cycle)
+
+    # 5) Start monitor in potjes-mode als hij nog niet draait
+    monitor_started = False
+    if not monitor._running:
+        monitor.start(
+            interval=60,
+            market=req.market,
+            candle_interval=req.candle_interval or "1h",
+            user_id=user_id,
+            auto_trade=True,
+            trade_amount=entry_amount,
+            use_mock=req.use_mock,
+            use_potjes=True,
+        )
+        monitor_started = True
+
+    return {
+        "success": True,
+        "message": f"Potje #{pot.get('nummer', '?')} geopend @ €{price:.2f}. Spark neemt over en verkoopt automatisch op winst.",
+        "pot": pot_opened,
+        "entry_price": price,
+        "entry_amount": entry_amount,
+        "monitor_started": monitor_started,
+        "monitor_status": monitor.get_status(),
+        "trade": trade_result,
+    }
+
+
+# ============================================================
 # MONITOR (Start/Stop/Pause background trading monitor)
 # ============================================================
 

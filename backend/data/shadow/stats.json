@@ -1,14 +1,14 @@
 {
   "totals": {
-    "events": 26,
+    "events": 33,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 5
+    "knowledge_matches": 12
   },
   "triggers_used": {
-    "wedervraag_done": 1,
-    "wedervraag": 3,
+    "wedervraag_done": 2,
+    "wedervraag": 4,
     "wedervraag_skip": 1,
     "agenda_overview": 4,
     "make_note": 2,
@@ -16,15 +16,15 @@
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
-    "welcome": 1,
+    "welcome": 3,
     "recap": 1,
     "greeting": 1
   },
   "response_types": {
-    "knowledge": 3,
+    "knowledge": 6,
     "unknown": 2,
-    "wedervraag_done": 1,
-    "wedervraag": 3,
+    "wedervraag_done": 2,
+    "wedervraag": 4,
     "wedervraag_skip": 1,
     "agenda_overview": 4,
     "note_created": 2,
@@ -32,7 +32,7 @@
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
-    "welcome": 1,
+    "welcome": 3,
     "recap": 1,
     "greeting": 1,
     "general": 1
@@ -42,12 +42,17 @@
     "Computer": 1,
     "staat": 1,
     "Morgen": 1,
-    "Planning": 1
+    "Planning": 1,
+    "voorstel": 2,
+    "kunnen": 1,
+    "doen": 2,
+    "Zullen we de wereld over nemen": 1,
+    "vandaag": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-15T09:47:52.851339+00:00",
+  "last_event_at": "2026-05-15T09:50:28.474935+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

@@ -12370,11 +12370,223 @@
         "session_id": "default",
         "gesprek_nummer": 470
       }
+    },
+    {
+      "id": "conv-3653acf4",
+      "timestamp": "2026-05-15T09:48:14.659306+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "doe eens een voorstel",
+      "spark_response": "**voorstel**: Een voorstel is een idee, plan of mogelijkheid die iemand aanbiedt om samen over na te denken of op te reageren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "voorstel"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "voorstel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 471
+      }
+    },
+    {
+      "id": "conv-8ca6c6bc",
+      "timestamp": "2026-05-15T09:48:49.079213+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
+      "spark_response": "**voorstel**: Een voorstel is een idee, plan of mogelijkheid die iemand aanbiedt om samen over na te denken of op te reageren.\n\n**kunnen**: Kunnen betekent dat iemand of iets de mogelijkheid, capaciteit of toestemming heeft om iets te doen.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **doet, zouden** (opgeslagen als kaarten)\n\nWat houdt 'zouden' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "kunnen",
+            "voorstel"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "voorstel"
+          },
+          {
+            "begrip": "kunnen"
+          },
+          {
+            "begrip": "doen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "doet",
+          "zouden"
+        ],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 472
+      }
+    },
+    {
+      "id": "conv-ecfa6964",
+      "timestamp": "2026-05-15T09:49:09.653736+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "volgende",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'zouden' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 473
+      }
+    },
+    {
+      "id": "conv-f010ee78",
+      "timestamp": "2026-05-15T09:49:15.547988+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Top, opgeslagen!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 474
+      }
+    },
+    {
+      "id": "conv-00c96400",
+      "timestamp": "2026-05-15T09:49:51.695345+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 475
+      }
+    },
+    {
+      "id": "conv-d31cb52f",
+      "timestamp": "2026-05-15T09:49:51.712587+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 476
+      }
+    },
+    {
+      "id": "conv-d0585962",
+      "timestamp": "2026-05-15T09:50:28.464589+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat zullen wij doen vandaag?",
+      "spark_response": "**Zullen we de wereld over nemen**: De gebruiker doet een speels of overdreven voorstel.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n**vandaag**: Vandaag betekent de huidige dag waarop iemand leeft of spreekt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Zullen we de wereld over nemen"
+          },
+          {
+            "begrip": "doen"
+          },
+          {
+            "begrip": "vandaag"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 477
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 470,
-    "last_updated": "2026-05-15T09:47:52.842040+00:00"
+    "total_conversations": 477,
+    "last_updated": "2026-05-15T09:50:28.464589+00:00"
   }
 }

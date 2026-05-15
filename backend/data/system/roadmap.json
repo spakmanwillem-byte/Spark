@@ -2997,9 +2997,27 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "Smart-intent zoekt kaarten op topic+tag (case-insensitive, ook substring). Sorteert op active+ws5+lagen kwaliteit. Test: technologie→227, emotie→344, voeding→57."
+      },
+      {
+        "id": "v4_topic_normalize_001",
+        "titel": "Kennisbank topics/tags lowercase genormaliseerd",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "769 kaarten bijgewerkt. 75+ case-conflicten opgelost: 'Communicatie' (47) + 'communicatie' (89) → 136 onder 'communicatie'. Idem voor proces, systeem, technologie, taal, etc. Tags ook lowercase met dedupe. Backup op .bak_pre_normalize."
+      },
+      {
+        "id": "v4_snelhandel_002",
+        "titel": "Snelhandel UI vereenvoudigd",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Snelhandel panel herontworpen: 4 read-only kaders (Markt, Inzet uit potje, Live prijs, Modus) en één actie-knop 'Koop potje'. Geen bedrag-input meer — komt uit volgende vrije potje. Geen Type-knoppen (verkoop gaat via monitor trailing stop). Geen separate 'Order Plaatsen'. Knop hernoemd naar 'Koop potje'."
       }
     ],
-    "last_updated": "2026-05-15T09:15:00",
+    "last_updated": "2026-05-15T09:20:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

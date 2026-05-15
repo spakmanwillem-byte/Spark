@@ -640,14 +640,15 @@ export function TraderPage({ onNavigate }) {
               </div>
             </div>
 
-            {/* Quick Trade Panel */}
+            {/* Quick Trade Panel — vereenvoudigd v4_snelhandel_002 */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5">
               <h3 className="text-base font-semibold text-white mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-amber-400" /> Snel Handelen
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                {/* Markt */}
                 <div>
-                  <label className="block text-xs text-slate-400 mb-2">Markt</label>
+                  <label className="block text-xs text-slate-400 mb-2">Markt (coin)</label>
                   <select data-testid="quick-trade-market" value={qtMarket} onChange={e => setQtMarket(e.target.value)}
                     className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 focus:outline-none">
                     <option value="BCH-EUR">BCH-EUR</option>
@@ -657,24 +658,33 @@ export function TraderPage({ onNavigate }) {
                     <option value="ADA-EUR">ADA-EUR</option>
                   </select>
                 </div>
+
+                {/* Inzet — leest uit het volgende vrije potje (read-only) */}
                 <div>
-                  <label className="block text-xs text-slate-400 mb-2">Bedrag (EUR)</label>
-                  <input data-testid="quick-trade-amount" type="number" value={qtAmount} onChange={e => setQtAmount(e.target.value)} placeholder="5.00"
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-xs text-slate-400 mb-2">Type</label>
-                  <div className="flex gap-2">
-                    <button data-testid="quick-trade-buy" onClick={() => setQtSide('buy')}
-                      className={`flex-1 py-3 rounded-xl font-medium transition-colors text-sm ${qtSide === 'buy' ? 'bg-green-500 text-white' : 'bg-green-500/20 text-green-400 hover:bg-green-500/30'}`}>
-                      Koop
-                    </button>
-                    <button data-testid="quick-trade-sell" onClick={() => setQtSide('sell')}
-                      className={`flex-1 py-3 rounded-xl font-medium transition-colors text-sm ${qtSide === 'sell' ? 'bg-red-500 text-white' : 'bg-red-500/20 text-red-400 hover:bg-red-500/30'}`}>
-                      Verkoop
-                    </button>
+                  <label className="block text-xs text-slate-400 mb-2">Inzet (uit potje)</label>
+                  <div data-testid="quick-trade-inzet" className="py-3 px-4 bg-slate-800/60 border border-slate-700/60 rounded-xl text-sm text-white">
+                    {(() => {
+                      const freePot = potjes?.find?.(p => !p?.position?.is_open);
+                      const amt = freePot?.current_size || freePot?.starting_size || 5.08;
+                      return freePot
+                        ? <>€{amt.toFixed(2)} <span className="text-[10px] text-slate-500">(potje {freePot.nummer || freePot.id})</span></>
+                        : <span className="text-amber-400 text-xs">Geen vrij potje</span>;
+                    })()}
                   </div>
                 </div>
+
+                {/* Live prijs */}
+                <div>
+                  <label className="block text-xs text-slate-400 mb-2">Live prijs</label>
+                  <div data-testid="quick-trade-price" className="py-3 px-4 bg-slate-800/60 border border-slate-700/60 rounded-xl text-sm">
+                    {tickers?.[0]?.last
+                      ? <span className="text-emerald-400 font-medium">€{Number(tickers[0].last).toFixed(2)}</span>
+                      : <span className="text-slate-500 text-xs">laden...</span>}
+                    <p className="text-[10px] text-slate-500 mt-0.5">moment van koop</p>
+                  </div>
+                </div>
+
+                {/* Modus: mock/live indicator (no input) */}
                 <div>
                   <label className="block text-xs text-slate-400 mb-2">Modus</label>
                   <div className="flex items-center gap-2 py-3 px-4 bg-slate-800 rounded-xl text-sm">
@@ -684,24 +694,21 @@ export function TraderPage({ onNavigate }) {
                     </span>
                   </div>
                 </div>
-                <div>
-                  <button data-testid="quick-trade-submit" onClick={executeQuickTrade} disabled={qtLoading}
-                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-xl hover:from-amber-400 hover:to-orange-500 transition-all text-sm disabled:opacity-50">
-                    {qtLoading ? 'Bezig...' : 'Order Plaatsen'}
-                  </button>
-                </div>
               </div>
-              {/* Spark-Buy met potje + auto-monitor (v4_quickpot_001) */}
-              <div className="mt-3 pt-3 border-t border-slate-800">
+
+              {/* Koop Potje — enige actie-knop. Spark regelt de rest. */}
+              <div className="mt-4 pt-4 border-t border-slate-800">
                 <button data-testid="spark-buy-potje" onClick={executeSparkBuy} disabled={qtLoading}
-                  className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:from-emerald-400 hover:to-teal-500 transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2">
-                  <span>⚡</span>
-                  {qtLoading ? 'Spark werkt...' : 'Spark Buy → potje + auto monitor'}
+                  className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:from-emerald-400 hover:to-teal-500 transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                  <span className="text-base">⚡</span>
+                  {qtLoading ? 'Spark werkt...' : 'Koop potje'}
                 </button>
-                <p className="text-[10px] text-slate-500 mt-1.5 text-center">
-                  Spark pakt een vrij potje, koopt op huidige prijs, start de monitor en verkoopt automatisch op winst.
+                <p className="text-[10px] text-slate-500 mt-2 text-center leading-relaxed">
+                  Spark pakt het volgende vrije potje, koopt op de live prijs en start direct de monitor.<br/>
+                  Auto-verkoop op winst-moment via trailing stop.
                 </p>
               </div>
+
               {qtResult && (
                 <div data-testid="quick-trade-result" className={`mt-3 p-3 rounded-xl text-xs ${qtResult.success ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-red-500/10 border border-red-500/20 text-red-400'}`}>
                   {qtResult.success ? qtResult.message : `Fout: ${qtResult.error}`}

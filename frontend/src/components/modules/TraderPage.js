@@ -664,11 +664,13 @@ export function TraderPage({ onNavigate }) {
                   <label className="block text-xs text-slate-400 mb-2">Inzet (uit potje)</label>
                   <div data-testid="quick-trade-inzet" className="py-3 px-4 bg-slate-800/60 border border-slate-700/60 rounded-xl text-sm text-white">
                     {(() => {
-                      const freePot = potjes?.find?.(p => !p?.position?.is_open);
-                      const amt = freePot?.current_size || freePot?.starting_size || 5.08;
+                      const list = Array.isArray(potjes?.potjes) ? potjes.potjes : (Array.isArray(potjes) ? potjes : []);
+                      const sorted = [...list].sort((a, b) => (a.nummer || a.index || 0) - (b.nummer || b.index || 0));
+                      const freePot = sorted.find(p => !p?.position?.is_open);
+                      const amt = freePot ? (freePot.current_size || freePot.capital || freePot.starting_size || 5.08) : null;
                       return freePot
-                        ? <>€{amt.toFixed(2)} <span className="text-[10px] text-slate-500">(potje {freePot.nummer || freePot.id})</span></>
-                        : <span className="text-amber-400 text-xs">Geen vrij potje</span>;
+                        ? <>€{amt.toFixed(2)} <span className="text-[10px] text-slate-500">(potje {freePot.nummer || freePot.index + 1})</span></>
+                        : <span className="text-amber-400 text-xs">Alle potjes bezet</span>;
                     })()}
                   </div>
                 </div>

@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 78,
+    "progress": 79,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3042,9 +3042,27 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "Hardcoded fantoom-begroeting 'Hallo! Ik ben Spark...' verwijderd uit frontend. Nieuwe POST /api/chat/welcome endpoint: leest __startup trigger uit conversation_triggers.json (7 templates), kiest random, vervangt {naam} en {dagdeel_groet}, voegt evt suffix 'laatst sprak je me X uur geleden'. Log naar chat_log + Shadow Observer met trigger_type=welcome. Frontend roept aan bij Spark-tab open + lege chat. Voornaam-extractie strip 'De/Den/Van/Der' prefix. Recap intent ziet welkomsten nu terug."
+      },
+      {
+        "id": "v4_te_herzien_remove_001",
+        "titel": "Te Herzien tab verwijderd",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Verouderde Te Herzien filter (gebaseerd op oude type/response veld) verwijderd. Backend: _needs_audit() weg uit service.py, te_herzien stat weg uit /api/knowledge/stats, status_filter 'te-herzien' weg, needs_audit weg uit list response. Frontend: filterButton weg uit KennisbankPage, TE HERZIEN badge weg, stats state cleanup. Spark-context koppeling aan triggers werkt nu via smart_intents_service en conversation_triggers.json — geen losse 'orphan' lijst meer nodig."
+      },
+      {
+        "id": "v4_dagboek_tree_001",
+        "titel": "Dagboek tree-view (jaar → maand → dag)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "DagboekPage entries-lijst vervangen door DagboekTreeView component (gelijke structuur als Archief ConversationsView). Jaar tabs bovenaan (nieuwste eerst, huidig jaar altijd zichtbaar), klik op maand opent dag-lijst, klik op dag opent entries. MONTHS_NL voor Nederlandse maand-labels. Filter (mood + search) blijft werken, daarna gegroepeerd."
       }
     ],
-    "last_updated": "2026-05-15T09:50:00",
+    "last_updated": "2026-05-15T10:00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar."

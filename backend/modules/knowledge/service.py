@@ -24,23 +24,6 @@ class KnowledgeService:
         data["knowledge_entries"] = entries
         save_json(KNOWLEDGE_FILE, data)
 
-    def _needs_audit(self, entry):
-        if entry.get("type") == "action":
-            action = entry.get("action", {})
-            if isinstance(action, dict) and action.get("type") == "placeholder":
-                return True
-        trigger_types = ["greeting", "farewell", "action"]
-        if entry.get("type") in trigger_types:
-            response = entry.get("response")
-            if not response or not isinstance(response, dict) or not response.get("text"):
-                return True
-            text = response.get("text", "")
-            if isinstance(text, list):
-                text = text[0] if text else ""
-            if isinstance(text, str) and len(text) < 10:
-                return True
-        return False
-
     def _is_answered(self, entry):
         lagen = entry.get("lagen", {})
         if not isinstance(lagen, dict):
@@ -53,7 +36,6 @@ class KnowledgeService:
         total = len(entries)
         answered = sum(1 for e in entries if self._is_answered(e))
         unanswered = total - answered
-        te_herzien = sum(1 for e in entries if self._needs_audit(e))
         # v4_019: Review-pending = nog nooit gereviewd (reviewed_at == null) — alle kaarten
         review_pending = sum(
             1 for e in entries
@@ -63,7 +45,6 @@ class KnowledgeService:
             "total": total,
             "answered": answered,
             "unanswered": unanswered,
-            "te_herzien": te_herzien,
             "review_pending": review_pending,
         }
 
@@ -86,8 +67,6 @@ class KnowledgeService:
             entries = [e for e in entries if not self._is_answered(e)]
         elif status_filter == "answered":
             entries = [e for e in entries if self._is_answered(e)]
-        elif status_filter == "te-herzien":
-            entries = [e for e in entries if self._needs_audit(e)]
         elif status_filter == "review":
             # v4_019: Review-mode = nog nooit gereviewd of langst geleden gereviewd
             # Sortering wordt verderop forced toegepast
@@ -157,7 +136,6 @@ class KnowledgeService:
                 "kaart_type": e.get("kaart_type") or "concept",
                 "status": e.get("status"),
                 "is_answered": self._is_answered(e),
-                "needs_audit": self._needs_audit(e),
                 "reviewed_at": (e.get("metadata") or {}).get("reviewed_at"),
                 "review_count": (e.get("metadata") or {}).get("review_count") or 0,
                 "created_at": (e.get("metadata") or {}).get("created_at") or e.get("detected_at"),

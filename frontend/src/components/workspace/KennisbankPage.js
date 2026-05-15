@@ -10,7 +10,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export function KennisbankPage({ onNavigate }) {
   const [entries, setEntries] = useState([]);
-  const [stats, setStats] = useState({ total: 0, answered: 0, unanswered: 0, te_herzien: 0, review_pending: 0 });
+  const [stats, setStats] = useState({ total: 0, answered: 0, unanswered: 0, review_pending: 0 });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -230,7 +230,6 @@ export function KennisbankPage({ onNavigate }) {
     { id: 'all', label: 'Alles', count: stats.total, color: '#f59e0b' },
     { id: 'unanswered', label: 'Onbeantwoord', count: stats.unanswered, color: '#f97316' },
     { id: 'answered', label: 'Beantwoord', count: stats.answered, color: '#22c55e' },
-    { id: 'te-herzien', label: 'Te Herzien', count: stats.te_herzien, color: '#ef4444' },
     { id: 'review', label: 'Review', count: stats.review_pending, color: '#a855f7' },
   ];
 
@@ -593,10 +592,7 @@ function KnowledgeCard({ entry, onClick }) {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-sm font-semibold text-white truncate">{entry.begrip}</h3>
-            {entry.needs_audit && (
-              <span className="text-[10px] px-1.5 py-0.5 bg-red-500/15 text-red-400 rounded font-medium">TE HERZIEN</span>
-            )}
-            {!entry.is_answered && !entry.needs_audit && (
+            {!entry.is_answered && (
               <span className="text-[10px] px-1.5 py-0.5 bg-orange-500/15 text-orange-400 rounded font-medium">ONBEANTWOORD</span>
             )}
           </div>

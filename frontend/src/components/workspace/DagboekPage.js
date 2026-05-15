@@ -131,36 +131,11 @@ export function DagboekPage({ onNavigate }) {
                 className="w-full pl-8 pr-3 py-2 bg-slate-900/60 border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none" />
             </div>
 
-            {/* Entries */}
+            {/* Entries — Tree-view (jaar → maand → dag), zelfde structuur als Archief (v4_dagboek_tree_001) */}
             {filtered.length === 0 ? (
               <div className="py-16 text-center"><BookHeart className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Geen entries gevonden</p></div>
             ) : (
-              <div className="space-y-3">
-                {filtered.map(entry => {
-                  const mood = moods.find(m => m.id === entry.mood) || moods[2];
-                  const MoodIcon = mood.icon;
-                  return (
-                    <div key={entry.id} data-testid={`dagboek-${entry.id}`} className="p-4 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${mood.color}15` }}>
-                          <MoodIcon className="w-4 h-4" style={{ color: mood.color }} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-medium" style={{ color: mood.color }}>{mood.label}</span>
-                            <span className="text-[10px] text-slate-600 flex items-center gap-1"><Clock className="w-2.5 h-2.5" />{new Date(entry.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                            <span className="text-[10px] text-slate-700">{entry.word_count}w</span>
-                          </div>
-                          <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{entry.content}</p>
-                        </div>
-                        <button onClick={() => deleteEntry(entry.id)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors flex-shrink-0">
-                          <X className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <DagboekTreeView entries={filtered} moods={moods} onDelete={deleteEntry} />
             )}
           </div>
         </div>
@@ -170,3 +145,140 @@ export function DagboekPage({ onNavigate }) {
 }
 
 export default DagboekPage;
+
+/* ================================================================ */
+/* DAGBOEK TREE-VIEW (v4_dagboek_tree_001) — jaar → maand → dag      */
+/* Zelfde principe als ArchiefPage ConversationsView                  */
+/* ================================================================ */
+const MONTHS_NL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+
+function DagboekTreeView({ entries, moods, onDelete }) {
+  // Groepeer entries op jaar → maand → dag
+  const tree = React.useMemo(() => {
+    const t = {};
+    for (const e of entries) {
+      const d = new Date(e.created_at);
+      const y = d.getFullYear();
+      const m = d.getMonth();
+      const dd = d.getDate();
+      if (!t[y]) t[y] = {};
+      if (!t[y][m]) t[y][m] = {};
+      if (!t[y][m][dd]) t[y][m][dd] = [];
+      t[y][m][dd].push(e);
+    }
+    return t;
+  }, [entries]);
+
+  const availableYears = React.useMemo(() => {
+    const set = new Set(Object.keys(tree).map(Number));
+    set.add(new Date().getFullYear());
+    return [...set].sort((a, b) => b - a);
+  }, [tree]);
+
+  const [activeYear, setActiveYear] = React.useState(availableYears[0] || new Date().getFullYear());
+  const [openMonths, setOpenMonths] = React.useState({});
+  const [openDays, setOpenDays] = React.useState({});
+
+  React.useEffect(() => {
+    if (!availableYears.includes(activeYear) && availableYears.length > 0) setActiveYear(availableYears[0]);
+  }, [availableYears, activeYear]);
+
+  const toggleMonth = (y, m) => setOpenMonths(s => ({ ...s, [`${y}-${m}`]: !s[`${y}-${m}`] }));
+  const toggleDay = (y, m, d) => setOpenDays(s => ({ ...s, [`${y}-${m}-${d}`]: !s[`${y}-${m}-${d}`] }));
+
+  const yearData = tree[activeYear] || {};
+  const monthsInYear = Object.keys(yearData).map(Number).sort((a, b) => b - a);
+
+  return (
+    <div className="space-y-3">
+      {/* Jaar tabs */}
+      <div className="flex flex-wrap gap-1 border-b border-slate-800 pb-1">
+        {availableYears.map(y => {
+          const yearTotal = tree[y]
+            ? Object.values(tree[y]).reduce((s, mObj) => s + Object.values(mObj).reduce((sd, arr) => sd + arr.length, 0), 0)
+            : 0;
+          const isActive = y === activeYear;
+          return (
+            <button key={y} data-testid={`dagboek-year-${y}`} onClick={() => setActiveYear(y)}
+              className={`text-xs px-3 py-1.5 rounded-t-md transition-colors ${isActive ? 'text-pink-300 bg-pink-500/10 border-t border-x border-pink-500/30' : 'text-slate-500 hover:text-slate-300'}`}>
+              {y} {yearTotal > 0 && <span className="ml-1 text-[10px] text-slate-500">({yearTotal})</span>}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Maand → dag tree */}
+      {monthsInYear.length === 0 ? (
+        <p className="text-xs text-slate-500 text-center py-8">Geen entries in {activeYear}.</p>
+      ) : (
+        <div className="space-y-2">
+          {monthsInYear.map(m => {
+            const monthData = yearData[m];
+            const monthTotal = Object.values(monthData).reduce((s, arr) => s + arr.length, 0);
+            const isMonthOpen = openMonths[`${activeYear}-${m}`];
+            const days = Object.keys(monthData).map(Number).sort((a, b) => b - a);
+            return (
+              <div key={m} className="bg-slate-900/30 border border-slate-800 rounded-lg overflow-hidden">
+                <button onClick={() => toggleMonth(activeYear, m)}
+                  className="w-full px-3 py-2 flex items-center justify-between hover:bg-slate-800/40 transition-colors">
+                  <span className="text-sm text-white font-medium capitalize">{MONTHS_NL[m]}</span>
+                  <span className="text-[10px] text-slate-500">{monthTotal} entries · {isMonthOpen ? '−' : '+'}</span>
+                </button>
+                {isMonthOpen && (
+                  <div className="border-t border-slate-800/60 px-2 py-2 space-y-1">
+                    {days.map(dd => {
+                      const dayEntries = monthData[dd];
+                      const isDayOpen = openDays[`${activeYear}-${m}-${dd}`];
+                      return (
+                        <div key={dd} className="bg-slate-950/40 rounded">
+                          <button onClick={() => toggleDay(activeYear, m, dd)}
+                            className="w-full px-2.5 py-1.5 flex items-center justify-between hover:bg-slate-800/50 rounded transition-colors">
+                            <span className="text-xs text-slate-300">
+                              <strong>{dd}</strong> {MONTHS_NL[m].slice(0, 3)} {activeYear}
+                            </span>
+                            <span className="text-[10px] text-slate-500">{dayEntries.length} · {isDayOpen ? '−' : '+'}</span>
+                          </button>
+                          {isDayOpen && (
+                            <div className="px-2 py-2 space-y-2 border-t border-slate-900/80">
+                              {dayEntries.map(entry => {
+                                const mood = moods.find(m2 => m2.id === entry.mood) || moods[2];
+                                const MoodIcon = mood.icon;
+                                return (
+                                  <div key={entry.id} data-testid={`dagboek-${entry.id}`} className="p-3 bg-slate-900/50 border border-slate-800 rounded-lg">
+                                    <div className="flex items-start gap-3">
+                                      <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${mood.color}15` }}>
+                                        <MoodIcon className="w-3.5 h-3.5" style={{ color: mood.color }} />
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-2 mb-1">
+                                          <span className="text-[10px] font-medium" style={{ color: mood.color }}>{mood.label}</span>
+                                          <span className="text-[10px] text-slate-600 flex items-center gap-1">
+                                            <Clock className="w-2.5 h-2.5" />
+                                            {new Date(entry.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}
+                                          </span>
+                                          <span className="text-[10px] text-slate-700">{entry.word_count}w</span>
+                                        </div>
+                                        <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">{entry.content}</p>
+                                      </div>
+                                      <button onClick={() => onDelete(entry.id)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors flex-shrink-0">
+                                        <X className="w-3.5 h-3.5" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

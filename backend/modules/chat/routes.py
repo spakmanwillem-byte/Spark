@@ -1041,3 +1041,115 @@ async def shadow_corrections(limit: int = 20):
 async def shadow_reset():
     """Admin: reset aggregate stats (events op disk blijven staan)."""
     return shadow_observer.reset_stats()
+
+
+
+# ============================================================
+# WELKOM (v4_welcome_001) — Spark zegt zelf hallo bij login/chat-open
+# Hierdoor weet Spark in zijn log dat hij iets gezegd heeft, dus
+# Chat Recap / Shadow Observer / context-flow werken voor sessie-start.
+# ============================================================
+
+from pydantic import BaseModel as _BM
+
+
+class WelcomeRequest(_BM):
+    user_id: str
+    user_naam: Optional[str] = None
+    session_id: Optional[str] = None
+    silent: Optional[bool] = False  # als True: alleen genereren, niet loggen
+
+
+@router.post("/welcome")
+async def chat_welcome(req: WelcomeRequest):
+    """Genereer een tijd-bewuste welkomstboodschap + log naar chat_log + shadow."""
+    import random
+    from modules.core.storage import load_json as _lj
+    from pathlib import Path as _P
+
+    # User ophalen
+    user = None
+    udata = _lj(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+    for u in udata.get("users", []):
+        if u.get("id") == req.user_id:
+            user = u
+            break
+    naam = req.user_naam or (user or {}).get("naam") or "vriend"
+    # Voornaam zonder achternaam
+    voornaam = naam.split()[0] if naam else "vriend"
+    if voornaam.lower() in ("de", "den", "van", "der"):
+        # "De Willem" → "Willem"
+        parts = naam.split()
+        if len(parts) >= 2:
+            voornaam = parts[1]
+
+    # Tijd-context
+    from . import user_time_service as _uts
+    ta = _uts.time_awareness_block(user)
+    dagdeel = ta.get("dagdeel", "")
+    DAGDEEL_GROET = {
+        "ochtend": "Goedemorgen",
+        "middag": "Goedemiddag",
+        "avond": "Goedenavond",
+        "nacht": "Goedenacht",
+    }
+    dagdeel_groet = DAGDEEL_GROET.get(dagdeel, "Hallo")
+
+    # __startup trigger uitlezen
+    triggers = _lj(_P(__file__).parent.parent.parent / "data" / "triggers" / "conversation_triggers.json", default={})
+    startup = triggers.get("__startup", {}) if isinstance(triggers, dict) else {}
+    responses = startup.get("responses", []) or [
+        "{dagdeel_groet} {naam}. Wat speelt er?",
+    ]
+    template = random.choice(responses)
+    message = template.format(naam=voornaam, dagdeel_groet=dagdeel_groet)
+
+    # Optioneel: contextuele suffix
+    suffix_parts = []
+    # 1) Laatste sessie tijd
+    last = chat_log_service.get_last_conversation(req.user_id) if hasattr(chat_log_service, "get_last_conversation") else None
+    if last:
+        try:
+            from datetime import datetime as _dt, timezone as _tz
+            last_ts = last.get("timestamp")
+            if last_ts:
+                if last_ts.endswith("Z"):
+                    last_ts = last_ts[:-1] + "+00:00"
+                last_dt = _dt.fromisoformat(last_ts)
+                if last_dt.tzinfo is None:
+                    last_dt = last_dt.replace(tzinfo=_tz.utc)
+                hours_ago = (_dt.now(_tz.utc) - last_dt).total_seconds() / 3600
+                if 1 <= hours_ago < 24:
+                    suffix_parts.append(f"_(laatst sprak je me {int(hours_ago)} uur geleden)_")
+                elif hours_ago >= 24 and hours_ago < 24 * 14:
+                    suffix_parts.append(f"_(het is {int(hours_ago/24)} dagen geleden dat we praatten)_")
+        except Exception:
+            pass
+
+    full_message = message + ((" " + " ".join(suffix_parts)) if suffix_parts else "")
+
+    response = {
+        "type": "welcome",
+        "message": full_message,
+        "dagdeel": dagdeel,
+        "dagdeel_groet": dagdeel_groet,
+        "voornaam": voornaam,
+    }
+
+    # Log naar chat_log + shadow (tenzij silent)
+    if not req.silent and req.user_id:
+        try:
+            chat_log_service.save_message(
+                user_id=req.user_id,
+                user_naam=naam,
+                user_message="[system:login]",
+                spark_response=full_message,
+                analysis={"trigger_type": "welcome", "response_type": "welcome", "dagdeel": dagdeel},
+                channel="spark",
+                session_id=req.session_id,
+            )
+            shadow_observer.record(req.user_id, "[system:login]", response, "welcome")
+        except Exception:
+            pass
+
+    return response

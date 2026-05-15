@@ -107,6 +107,14 @@ def get_logs(user_id: str, limit: int = 100, offset: int = 0,
     }
 
 
+def get_last_conversation(user_id: str) -> Optional[Dict]:
+    """Return de laatste conversatie van een user, of None."""
+    data = load_json(_log_file(user_id), default={"conversations": []})
+    convs = data.get("conversations", [])
+    return convs[-1] if convs else None
+
+
+
 def get_stats(user_id: str) -> Dict:
     data = load_json(_log_file(user_id), default={"conversations": []})
     convs = data.get("conversations", [])

@@ -15,9 +15,7 @@ const BOT_COLORS = {
   'bot-smith': { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', icon: Shield, accent: '#10b981' },
 };
 
-const initialSparkMessages = [
-  { id: 1, role: 'spark', message: 'Hallo! Ik ben Spark, je persoonlijke AI assistent. Hoe kan ik je vandaag helpen?', time: '09:00' },
-];
+const initialSparkMessages = [];
 
 // SessionStorage helpers — chat blijft staan tussen page-switches, wist bij logout/tab-close
 const chatStorageKey = (userId) => `spark_chat_session_${userId || 'guest'}`;
@@ -111,6 +109,32 @@ export function GesprekkenPage({ onNavigate }) {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, selectedContact?.id, userId]);
+
+  // Welkomstboodschap ophalen (v4_welcome_001) — alleen 1× per sessie, alleen als chat leeg is
+  useEffect(() => {
+    if (activeTab !== 'spark' || !userId) return;
+    if (sparkMessages.length > 0) return; // al bezig met chat → niet overschrijven
+    let cancelled = false;
+    fetch(`${API}/api/chat/welcome`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, user_naam: userName }),
+    })
+      .then(r => r.json())
+      .then(d => {
+        if (cancelled || !d?.message) return;
+        const msg = {
+          id: Date.now(),
+          role: 'spark',
+          message: d.message,
+          time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
+        };
+        setSparkMessages([msg]);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, userId]);
 
   const messagesEndRef = useRef(null);
 

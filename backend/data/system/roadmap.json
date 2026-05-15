@@ -3033,9 +3033,18 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "36 plural-singular tag-paren gemerged (emoties→emotie, systemen→systeem, processen→proces, dieren→dier, etc) + 5 topic merges. 313 kaarten aangepast, 522 tag-replacements, 17 topic-replacements. Werkwoorden (bouwen/groeien/handelen/werken/serveren/gamen) bewust niet gemerged. Backup: .bak_pre_plural_merge. Resultaten: systeem 231→416, proces 109→171."
+      },
+      {
+        "id": "v4_welcome_001",
+        "titel": "Spark eigen welkomstbericht (geen fantoom-bericht)",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Hardcoded fantoom-begroeting 'Hallo! Ik ben Spark...' verwijderd uit frontend. Nieuwe POST /api/chat/welcome endpoint: leest __startup trigger uit conversation_triggers.json (7 templates), kiest random, vervangt {naam} en {dagdeel_groet}, voegt evt suffix 'laatst sprak je me X uur geleden'. Log naar chat_log + Shadow Observer met trigger_type=welcome. Frontend roept aan bij Spark-tab open + lege chat. Voornaam-extractie strip 'De/Den/Van/Der' prefix. Recap intent ziet welkomsten nu terug."
       }
     ],
-    "last_updated": "2026-05-15T09:35:00",
+    "last_updated": "2026-05-15T09:50:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar."

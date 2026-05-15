@@ -1,4 +1,17 @@
 {
+  "__startup": {
+    "triggers": [],
+    "_note": "Welkomsregels die Spark gebruikt bij login/chat-open. {naam} wordt vervangen door user naam. {dagdeel_groet} door 'Goedemorgen'/'Goedemiddag'/'Goedenavond'/'Goedenacht'.",
+    "responses": [
+      "{dagdeel_groet} {naam}. Waar staat je hoofd vandaag?",
+      "{dagdeel_groet} {naam}. Wat wil je in beweging zetten?",
+      "Hoi {naam}, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "{dagdeel_groet} {naam}. Ik luister.",
+      "{dagdeel_groet} {naam}. Wat speelt er?",
+      "Hallo {naam}. Klaar om iets te leren of door te denken?",
+      "{dagdeel_groet} {naam}. Vertel maar."
+    ]
+  },
   "greeting": {
     "triggers": [
       "hoi",

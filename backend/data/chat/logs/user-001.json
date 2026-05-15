@@ -12272,11 +12272,63 @@
         "session_id": "default",
         "gesprek_nummer": 466
       }
+    },
+    {
+      "id": "conv-4a48a4c0",
+      "timestamp": "2026-05-15T09:39:42.671970+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 467
+      }
+    },
+    {
+      "id": "conv-d6e19b18",
+      "timestamp": "2026-05-15T09:39:42.971920+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat hebben we vandaag besproken",
+      "spark_response": "In de gesprekken van vandaag (tussen 00:00 en 23:59) hebben we **30** berichten uitgewisseld. Onderwerpen: **wat staat er op de agenda voor vandaag**, **voeten**, **vroeg**, **Computer** en **staat**. Wil je dat ik op één daarvan dieper inga?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "hebben"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 468
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 466,
-    "last_updated": "2026-05-15T09:03:42.196608+00:00"
+    "total_conversations": 468,
+    "last_updated": "2026-05-15T09:39:42.971920+00:00"
   }
 }

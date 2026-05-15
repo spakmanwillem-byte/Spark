@@ -35,9 +35,16 @@ _CORRECTION_PATTERNS = [
     r"\b(niet|nee).*(wat|wat ik).*\b(bedoel|zeg|vraag)\b",
     r"\bdat is (fout|verkeerd|niet juist|onjuist)\b",
     r"\b(verkeerd|fout)\b.*\b(antwoord|begrepen)\b",
-    r"\b(snap je niet|begrijp je niet)\b",
+    r"\b(snap je niet|begrijp je niet|snapt me niet)\b",
     r"\bdat klopt niet\b",
     r"\b(probeer opnieuw|opnieuw graag)\b",
+    # v4_shadow_002 — frustratie uit productie:
+    r"\bja maar\b",                                  # "Ja maar dat vroeg ik niet"
+    r"\bdat vroeg ik niet\b",
+    r"\bnergens voor nodig\b",                       # "Dat is nergens voor nodig"
+    r"\b(loopt achter|werkt niet|doet niks)\b",     # "Je klok loopt achter"
+    r"\b(waarom (word|wordt) je)\b",                # "Waarom word je boos"
+    r"\b(luister je wel|hoor je me)\b",
 ]
 _CONFIRM_PATTERNS = [
     r"\b(precies|inderdaad|klopt|exact|juist)\b",

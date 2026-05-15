@@ -216,6 +216,41 @@ async def process_message(req: ChatMessage):
             return response
         # Geen ja/nee — laat staan, val door
 
+    # 0c0. CONSENT-FLOW (v4_consent_001) — vóór W-vragen vraagt Spark eerst "wil je 6 vragen invullen?"
+    pending_consent = state.get("pending_wv_consent")
+    if pending_consent:
+        if snap.detect_confirmation(text):
+            # JA → start echte wedervraag-flow met max 6 vragen
+            from pathlib import Path as _Path
+            from modules.core.storage import load_json as _lj
+            kb = _lj(_Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json", default={"knowledge_entries": []})
+            entry = next((e for e in kb.get("knowledge_entries", []) if e.get("id") == pending_consent["entry_id"]), None)
+            session_state.set_state(req.user_id, pending_wv_consent=None)
+            if entry:
+                wv = wedervraag_service.kick_off(entry, max_questions=6)
+                if wv:
+                    session_state.set_state(req.user_id, pending_wedervraag=wv,
+                                            last_entry_id=entry["id"], last_begrip=entry["begrip"])
+                    response["type"] = "wedervraag"
+                    response["message"] = f"Top! Eerste vraag: {wv['question']}"
+                    response["wedervraag"] = wv
+                    _save_log(req, response, "wedervraag")
+                    return response
+            response["type"] = "wedervraag_done"
+            response["message"] = "Niks meer om in te vullen."
+            _save_log(req, response, "wedervraag_done")
+            return response
+        elif snap.detect_rejection(text) or wedervraag_service.is_skip(text):
+            # NEE → niet doorvragen, lees verder als normaal bericht
+            session_state.set_state(req.user_id, pending_wv_consent=None)
+            response["type"] = "consent_declined"
+            response["message"] = "Oké, ik laat het zo. Je kan de kaart later in de Kennisbank aanvullen."
+            _save_log(req, response, "consent_declined")
+            return response
+        # Anders: user gaf gewoon een vrij antwoord → behandel als normaal bericht
+        # Reset consent state en val door naar de rest van de flow
+        session_state.set_state(req.user_id, pending_wv_consent=None)
+
     # 0c. WEDERVRAAG-FLOW (v4_001b) — als Spark in vorige beurt een 5W+H vraag stelde
     pending_wv = state.get("pending_wedervraag")
     if pending_wv and not snap.detect_rejection(text):
@@ -676,6 +711,10 @@ async def process_message(req: ChatMessage):
             last_entry = None
             for word in unknown[:5]:
                 decomp = compositional_service.find_best_decomposition(word, _lookup_known)
+                # v4_stem_001 — fallback: stem-match als full decomp niet lukt
+                stem_hit = None
+                if not decomp:
+                    stem_hit = compositional_service.find_known_stem(word, _lookup_known)
                 if decomp:
                     extra_tags = decomp["analysis"]["suggested_tags"]
                     parts = [decomp["candidate"]["left"], decomp["candidate"]["right"]]
@@ -688,6 +727,19 @@ async def process_message(req: ChatMessage):
                         created_snaps.append(result["begrip"])
                         last_entry = result
                         decomp_results.append({"word": word, "decomp": decomp})
+                elif stem_hit:
+                    # Stem-match: erfde topic-tag van stem
+                    stem_topic = (stem_hit["stem_entry"].get("topic") or "").strip()
+                    extra_tags = [stem_topic] if stem_topic else []
+                    result = snap.create_word_snap(
+                        word, text, req.user_naam,
+                        extra_tags=extra_tags,
+                        decomposed_from=[stem_hit["stem"]],
+                    )
+                    if result:
+                        created_snaps.append(result["begrip"])
+                        last_entry = result
+                        decomp_results.append({"word": word, "decomp": {"message": stem_hit["message"], "candidate": {"left": stem_hit["stem"], "right": ""}, "analysis": {"stem_only": True}}})
                 else:
                     result = snap.create_word_snap(word, text, req.user_naam)
                     if result:
@@ -722,13 +774,17 @@ async def process_message(req: ChatMessage):
                             "asked_count": 1,
                             "max_questions": 1,
                         }, last_entry_id=target_entry["id"], last_begrip=target_entry["begrip"])
-                # Wedervraag (v4_001b): vraag 5W+H verrijking — alleen als geen compositional
+                # Wedervraag (v4_001b + v4_consent_001): vraag eerst toestemming, dan 6x W+H
                 elif last_entry and req.user_id:
-                    wv = wedervraag_service.kick_off(last_entry)
-                    if wv:
-                        session_state.set_state(req.user_id, pending_wedervraag=wv, last_entry_id=last_entry["id"], last_begrip=last_entry["begrip"])
-                        response["message"] += f"\n\n{wv['question']}"
-                        response["wedervraag"] = wv
+                    # Check of er nog lege W-velden zijn
+                    has_empty = wedervraag_service.pick_next_field(last_entry) is not None
+                    if has_empty:
+                        session_state.set_state(req.user_id,
+                                                pending_wv_consent={"entry_id": last_entry["id"], "begrip": last_entry.get("begrip", "")},
+                                                last_entry_id=last_entry["id"],
+                                                last_begrip=last_entry["begrip"])
+                        response["message"] += f"\n\nWil je 6 vragen beantwoorden om '{last_entry.get('begrip','')}' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)"
+                        response["consent_pending"] = True
                     else:
                         session_state.set_state(req.user_id, last_entry_id=last_entry["id"], last_begrip=last_entry["begrip"])
             else:

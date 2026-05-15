@@ -89,6 +89,16 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
     const interval = setInterval(fetchUrgent, 60_000);
     return () => { cancelled = true; clearInterval(interval); };
   }, [user?.id]);
+
+  // Backend keepalive (v4_keepalive_001) — pingt elke 4 min zodat Emergent pod actief blijft
+  // en de trade monitor blijft draaien wanneer admin is uitgelogd maar tab open.
+  useEffect(() => {
+    const API = process.env.REACT_APP_BACKEND_URL;
+    const ping = () => fetch(`${API}/api/system/health`).catch(() => {});
+    ping();
+    const interval = setInterval(ping, 240_000); // 4 min
+    return () => clearInterval(interval);
+  }, []);
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const stored = parseInt(localStorage.getItem('sidebarWidth') || '256', 10);
     return isNaN(stored) ? 256 : Math.min(Math.max(stored, 200), 420);

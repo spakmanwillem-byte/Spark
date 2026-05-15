@@ -2907,9 +2907,54 @@
         "progress": 100,
         "beschrijving": "Spark AI (user-000 + rol 'AI Assistant...') verwijderd uit Privé contactlijst (heeft eigen tab). Privé-berichten triggeren nu Snap-woord extractie (_extract_meaningful_words) + Shadow Observer event (channel='prive', is_bot_target flag) — self-learning werkt nu over ALLE conversaties heen, niet alleen Spark AI tab.",
         "voltooid_op": "2026-05-14"
+      },
+      {
+        "id": "v4_consent_001",
+        "titel": "5W+H consent flow — eerst ja/nee",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Na nieuw woord-snap vraagt Spark eerst: 'Wil je 6 vragen beantwoorden om X rijker te maken?' Bij 'ja' start de echte wedervraag-flow (max 6 vragen). Bij 'nee/niet nu' netjes stoppen. Vrij antwoord = consent reset, val door naar normale flow."
+      },
+      {
+        "id": "v4_stem_001",
+        "titel": "Stemwoord-match voor onbekende composities",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Als woord onbekend is EN compositional faalt: zoek langste bekende prefix-stam (min 4 chars). Bv. 'voetenbank'→'voet', 'nieuwsgierig'→'nieuws'. Erft de topic-tag van het stamwoord. Spark vraagt: 'Is een voetenbank een soort voet?' "
+      },
+      {
+        "id": "v4_shadow_002",
+        "titel": "Frustratie-detectie uitbreiden",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Shadow Observer pakt nu ook: 'ja maar', 'dat vroeg ik niet', 'nergens voor nodig', 'loopt achter', 'waarom word je'. Gevonden uit productie chatlog van user-001 + Nick."
+      },
+      {
+        "id": "v4_compositional_wording_001",
+        "titel": "'tegenstrijdig' → 'samengesteld'",
+        "status": "done",
+        "priority": "low",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Wording-fix in compositional service: woorden als 'stresstest' worden niet langer 'tegenstrijdig' genoemd maar 'samengesteld'."
+      },
+      {
+        "id": "v4_keepalive_001",
+        "titel": "Frontend keepalive ping (4 min)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "MainLayout pingt elke 4 min /api/system/health zodat Emergent pod actief blijft en trade monitor blijft draaien. Werkt zolang gebruiker tab open heeft. Voor 100% 24/7 monitoring is dedicated server nodig."
       }
     ],
-    "last_updated": "2026-05-14T10:39:41.461806",
+    "last_updated": "2026-05-15T08:32:18.379797",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

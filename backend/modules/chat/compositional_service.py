@@ -90,8 +90,8 @@ def build_decomposition_message(word: str, candidate: dict, analysis: dict) -> s
 
     if analysis["topic_conflict"]:
         return (
-            f"Ik ken '{word}' niet, maar ik herken er '{left}'{lt_str} en '{right}'{rt_str} in. "
-            f"Dat klinkt tegenstrijdig — wat is een '{word}' eigenlijk?"
+            f"Ik ken '{word}' niet, maar herken er '{left}'{lt_str} en '{right}'{rt_str} in. "
+            f"Klinkt als een samengesteld begrip — wat is een '{word}' eigenlijk?"
         )
     if analysis["has_overlap"]:
         common = ", ".join(analysis["common_tags"][:3])
@@ -121,4 +121,68 @@ def find_best_decomposition(word: str, lookup_fn) -> Optional[dict]:
         "candidate": best,
         "analysis": analysis,
         "message": build_decomposition_message(word, best, analysis),
+    }
+
+
+
+# ============================================================
+# v4_stem_001 — Stemwoord-match voor onbekende composities
+# Bv. "voetenbank" niet gevonden → herkent "voet" als bekend stamwoord
+# Bv. "nieuwsgierig" → herkent "nieuws"
+# ============================================================
+def find_known_stem(word: str, lookup_fn) -> Optional[dict]:
+    """
+    Zoek het LANGSTE bekende stamwoord in een onbekend woord.
+    Returns {stem, stem_entry, position, message} of None.
+    Werkt aanvullend op try_decompose voor woorden waar de rest geen geldig woord is.
+    """
+    word = (word or "").lower().strip()
+    if len(word) < 5:
+        return None
+
+    best_stem = None
+    best_entry = None
+    best_pos = None
+
+    # Probeer prefix matches (langst eerst)
+    for length in range(len(word) - 1, 3, -1):  # min 4 char stem, max len-2
+        stem = word[:length]
+        entry = lookup_fn(stem)
+        if entry:
+            best_stem = stem
+            best_entry = entry
+            best_pos = "prefix"
+            break
+
+    # Probeer suffix matches (alleen als prefix niets vond, langst eerst)
+    if not best_stem:
+        for length in range(len(word) - 1, 3, -1):
+            stem = word[-length:]
+            entry = lookup_fn(stem)
+            if entry:
+                best_stem = stem
+                best_entry = entry
+                best_pos = "suffix"
+                break
+
+    if not best_stem:
+        return None
+
+    topic = (best_entry.get("topic") or "").strip()
+    topic_str = f" ({topic})" if topic else ""
+    if best_pos == "prefix":
+        msg = (
+            f"Ik ken '{word}' niet als geheel, maar herken '{best_stem}'{topic_str} erin. "
+            f"Is een '{word}' een soort '{best_stem}'? Of betekent het iets heel anders?"
+        )
+    else:
+        msg = (
+            f"Ik ken '{word}' niet als geheel, maar herken '{best_stem}'{topic_str} aan het eind. "
+            f"Heeft '{word}' daarmee te maken?"
+        )
+    return {
+        "stem": best_stem,
+        "stem_entry": best_entry,
+        "position": best_pos,
+        "message": msg,
     }

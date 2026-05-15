@@ -12324,11 +12324,57 @@
         "session_id": "default",
         "gesprek_nummer": 468
       }
+    },
+    {
+      "id": "conv-ba6153cb",
+      "timestamp": "2026-05-15T09:47:41.409122+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 469
+      }
+    },
+    {
+      "id": "conv-a8c95dde",
+      "timestamp": "2026-05-15T09:47:52.842040+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik weet het niet",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 470
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 468,
-    "last_updated": "2026-05-15T09:39:42.971920+00:00"
+    "total_conversations": 470,
+    "last_updated": "2026-05-15T09:47:52.842040+00:00"
   }
 }

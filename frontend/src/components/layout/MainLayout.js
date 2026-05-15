@@ -65,6 +65,26 @@ export const getPageInfo = (pageId) => {
   return null;
 };
 
+// Per-gradatie zichtbaarheid (v4_gradatie_visibility_001)
+// Grad 1 (eigenaar) + 2 (admin): alle tabs zichtbaar
+// Grad 3: geen Spark AI sectie + geen Integraties + alleen "Mijn Profiel" in Beheer
+// Grad 4-5: zelfde als 3
+// Grad 6: zelfde als 3 + geen Trade + geen Voice
+// Grad 7: zelfde als 6 + geen Archief + geen Dagboek
+const VISIBILITY_RULES = {
+  1: { hideSection: [], hide: [] },
+  2: { hideSection: [], hide: [] },
+  3: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
+  4: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
+  5: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
+  6: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings', 'trade', 'voice'] },
+  7: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings', 'trade', 'voice', 'archief', 'dagboek'] },
+};
+
+export function getVisibilityForGradatie(grad) {
+  return VISIBILITY_RULES[grad] || VISIBILITY_RULES[7];
+}
+
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -330,10 +350,17 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4 px-3">
           {Object.entries(navigationConfig).map(([key, section]) => {
+            // Verberg hele sectie op basis van gradatie (v4_gradatie_visibility_001)
+            const visibility = getVisibilityForGradatie(user?.gradatie);
+            if (visibility.hideSection.includes(key)) return null;
+
             // Pas custom volgorde + cross-sectie relocations toe
             const allItems = getItemsForSection(key);
-            // Filter admin-only items voor non-admins
-            const visibleItems = allItems.filter(item => !item.adminOnly || isAdmin);
+            // Filter admin-only items voor non-admins + gradatie-hides
+            const visibleItems = allItems.filter(item =>
+              (!item.adminOnly || isAdmin) && !visibility.hide.includes(item.id)
+            );
+            if (visibleItems.length === 0) return null;
 
             return (
               <div

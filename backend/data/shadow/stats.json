@@ -1,31 +1,44 @@
 {
   "totals": {
-    "events": 9,
-    "corrections": 1,
+    "events": 19,
+    "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 2
+    "knowledge_matches": 5
   },
   "triggers_used": {
     "wedervraag_done": 1,
     "wedervraag": 3,
-    "wedervraag_skip": 1
+    "wedervraag_skip": 1,
+    "agenda_overview": 4,
+    "make_note": 2,
+    "help_overview": 1,
+    "suggest_action": 1,
+    "clarify_question": 1
   },
   "response_types": {
-    "knowledge": 2,
+    "knowledge": 3,
     "unknown": 2,
     "wedervraag_done": 1,
     "wedervraag": 3,
-    "wedervraag_skip": 1
+    "wedervraag_skip": 1,
+    "agenda_overview": 4,
+    "note_created": 2,
+    "help_overview": 1,
+    "suggest_action": 1,
+    "clarify_question": 1
   },
   "begrip_used": {
     "vroeg": 1,
-    "Computer": 1
+    "Computer": 1,
+    "staat": 1,
+    "Morgen": 1,
+    "Planning": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-15T08:30:42.505547+00:00",
+  "last_event_at": "2026-05-15T08:51:57.161409+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

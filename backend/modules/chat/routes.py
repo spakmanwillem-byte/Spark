@@ -167,6 +167,62 @@ async def process_message(req: ChatMessage):
     except Exception:
         pass
 
+    # 0z3. SMART INTENTS (v4_intents_001) — agenda / notitie / help / suggest / clarify
+    try:
+        from . import smart_intents_service as si
+        # Helper voor user obj
+        def _load_user():
+            if not req.user_id:
+                return None
+            from pathlib import Path as _P
+            from modules.core.storage import load_json as _lj
+            udata = _lj(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+            for u in udata.get("users", []):
+                if u.get("id") == req.user_id:
+                    return u
+            return None
+
+        # Notitie: "maak notitie: ..." — eerst want letterlijke command
+        matched, content = si.detect_note_intent(text)
+        if matched and content:
+            out = si.handle_note(_load_user(), req.user_id, content)
+            response.update(out)
+            _save_log(req, response, "make_note")
+            return response
+
+        # Agenda
+        if si.detect_agenda_intent(text) and req.user_id:
+            out = si.handle_agenda(req.user_id, _load_user(), text)
+            response.update(out)
+            _save_log(req, response, "agenda_overview")
+            return response
+
+        # Help
+        if si.detect_help_intent(text):
+            out = si.handle_help()
+            response.update(out)
+            _save_log(req, response, "help_overview")
+            return response
+
+        # Suggest "wat zullen we doen"
+        if si.detect_suggest_intent(text) and req.user_id:
+            out = si.handle_suggest(req.user_id, _load_user())
+            response.update(out)
+            _save_log(req, response, "suggest_action")
+            return response
+
+        # Clarify "nee dat bedoel ik niet"
+        if si.detect_clarify_intent(text):
+            last_begrip = state.get("last_begrip")
+            out = si.handle_clarify(last_begrip)
+            response.update(out)
+            # Sla state op zodat volgende bericht als 'alternative word' wordt opgepakt
+            session_state.set_state(req.user_id, pending_clarify={"last_begrip": last_begrip})
+            _save_log(req, response, "clarify_question")
+            return response
+    except Exception:
+        pass
+
     # 0d. SPONTANE W-VULLING (v4_007): stille verrijking van actieve snap
     # Veiligheid: alleen op last_entry_id, alleen als nog auto-generated, alleen lege velden
     spontaneous_hint = ""

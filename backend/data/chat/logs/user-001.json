@@ -11930,11 +11930,284 @@
         "session_id": "default",
         "gesprek_nummer": 453
       }
+    },
+    {
+      "id": "conv-e9a401d0",
+      "timestamp": "2026-05-15T08:51:25.875438+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat staat in agenda vandaag",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Bij Hellendoorn** om 11:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 454
+      }
+    },
+    {
+      "id": "conv-94de2ae7",
+      "timestamp": "2026-05-15T08:51:26.044836+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "notitie: bel monteur over verwarming",
+      "spark_response": "📝 Notitie opgeslagen: **bel monteur over verwarming**. Je kan 'm zien in 'Notities & Taken'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "make_note",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "note_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 455
+      }
+    },
+    {
+      "id": "conv-cd9321df",
+      "timestamp": "2026-05-15T08:51:26.198393+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat kan je allemaal?",
+      "spark_response": "Hier is wat ik kan:\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het bij mij?'_\n\n_Daarnaast reageer ik op 6 trigger-types: greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 456
+      }
+    },
+    {
+      "id": "conv-9ba2be55",
+      "timestamp": "2026-05-15T08:51:26.376758+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat zullen we doen?",
+      "spark_response": "📅 Vandaag heb je geen afspraken in de agenda.\n\n🎯 Op de roadmap staan deze open items (prioriteit eerst):\n   • **Personality Layer** _(medium)_\n   • **Antwoord-markering [info] + confidence-score** _(medium)_\n   • **Tone-aware responses via Bijbel-tags** _(medium)_\n   _...en 2 meer in de roadmap-tab._\n\nWelke voelt het meest urgent voor jou nu?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "suggest_action",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "suggest_action"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 457
+      }
+    },
+    {
+      "id": "conv-8ca01ee9",
+      "timestamp": "2026-05-15T08:51:26.656105+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat staat er morgen op de planning",
+      "spark_response": "**staat**: Een staat is de huidige toestand, situatie of conditie waarin iets of iemand zich bevindt.\n\n**Morgen**: Morgen betekent de dag na vandaag of het begin van een nieuwe dag.\n\n**Planning**: Een planning is een overzicht of schema van taken, doelen of gebeurtenissen in een bepaalde volgorde of tijd.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "staat"
+          },
+          {
+            "begrip": "Morgen"
+          },
+          {
+            "begrip": "Planning"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 458
+      }
+    },
+    {
+      "id": "conv-2e8ffbd1",
+      "timestamp": "2026-05-15T08:51:26.784824+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "noteer: koffie kopen na werk",
+      "spark_response": "📝 Notitie opgeslagen: **koffie kopen na werk**. Je kan 'm zien in 'Notities & Taken'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "make_note",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "note_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 459
+      }
+    },
+    {
+      "id": "conv-25e8c2aa",
+      "timestamp": "2026-05-15T08:51:56.654036+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat staat er morgen op de planning",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Bij Hellendoorn** om 11:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 460
+      }
+    },
+    {
+      "id": "conv-b10f3719",
+      "timestamp": "2026-05-15T08:51:56.785039+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat heb ik morgen gepland",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Bij Hellendoorn** om 11:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 461
+      }
+    },
+    {
+      "id": "conv-f42ad976",
+      "timestamp": "2026-05-15T08:51:56.964215+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "heb ik vandaag afspraken",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Overmorgen heb je je eerste afspraak: **Bij Hellendoorn** om 11:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 462
+      }
+    },
+    {
+      "id": "conv-31fa9ed2",
+      "timestamp": "2026-05-15T08:51:57.151923+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "nee dat bedoel ik niet",
+      "spark_response": "Oké — bedoelde je iets anders met **staat**, of bedoelde je een heel ander woord? Geef het andere woord dan typ ik 'm in dezelfde context.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "clarify_question",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "clarify_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 463
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 453,
-    "last_updated": "2026-05-15T08:30:42.496636+00:00"
+    "total_conversations": 463,
+    "last_updated": "2026-05-15T08:51:57.151923+00:00"
   }
 }

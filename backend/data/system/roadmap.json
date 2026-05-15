@@ -2952,9 +2952,27 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "MainLayout pingt elke 4 min /api/system/health zodat Emergent pod actief blijft en trade monitor blijft draaien. Werkt zolang gebruiker tab open heeft. Voor 100% 24/7 monitoring is dedicated server nodig."
+      },
+      {
+        "id": "v4_gradatie_visibility_001",
+        "titel": "Gradatie-gebaseerde tab zichtbaarheid",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "VISIBILITY_RULES in MainLayout. Grad 1&2 zien alles. Grad 3-5 geen Spark AI sectie, geen Integraties, alleen Mijn Profiel in Beheer. Grad 6 idem + geen Trade + geen Voice. Grad 7 idem + geen Archief + geen Dagboek. Lege secties verbergen automatisch."
+      },
+      {
+        "id": "v4_intents_001",
+        "titel": "Smart Chat Intents (agenda/notitie/help/suggest/clarify)",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "voltooid_op": "2026-05-15",
+        "beschrijving": "Nieuwe module smart_intents_service.py met 5 intents: (1) agenda_today = leest agenda, kondigt slim aan 'vandaag niks, morgen X om 11:30'. (2) make_note = 'notitie: ...' / 'noteer: ...' slaat direct op in notes.json. (3) help_overview = 'wat kan je' toont commands + triggerlijst uit JSON. (4) suggest_action = 'wat zullen we doen' combineert agenda + roadmap todo's met prio. (5) clarify_question = 'nee dat bedoel ik niet' triggert vraag 'bedoel je iets anders met X?'. Hooked in routes.py ná recap, vóór andere intent-flows."
       }
     ],
-    "last_updated": "2026-05-15T08:32:18.379797",
+    "last_updated": "2026-05-15T08:52:17.912077",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data)."
     ]

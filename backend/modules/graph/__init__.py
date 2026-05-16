@@ -45,7 +45,7 @@ async def graph_stats():
     for e in edges:
         node_edge_counts[e["source"]] = node_edge_counts.get(e["source"], 0) + 1
         node_edge_counts[e["target"]] = node_edge_counts.get(e["target"], 0) + 1
-    most_connected = sorted(node_edge_counts.items(), key=lambda x: -x[1])[:10]
+    most_connected = sorted(node_edge_counts.items(), key=lambda x: -x[1])[:20]
     node_map = {n["id"]: n["label"] for n in nodes}
     return {
         "total_nodes": len(nodes),

@@ -338,20 +338,26 @@ export function VerbandenPage({ onNavigate }) {
                 </div>
 
                 <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
-                  <h3 className="text-sm font-semibold text-white mb-3">Meest Verbonden</h3>
+                  <h3 className="text-sm font-semibold text-white mb-3">Top 20 Meest Verbonden</h3>
                   <div className="space-y-2">
-                    {stats.most_connected?.map((mc, i) => (
-                      <div key={mc.id} className="flex items-center gap-3">
-                        <span className="text-[10px] text-slate-600 w-6 text-center">{i + 1}</span>
-                        <span className="text-xs text-white flex-1 truncate">{mc.label}</span>
-                        <div className="flex-shrink-0 flex gap-0.5">
-                          {Array.from({ length: Math.min(mc.connections, 20) }).map((_, j) => (
-                            <div key={j} className="w-1.5 h-3 bg-cyan-500/60 rounded-sm" />
-                          ))}
-                        </div>
-                        <span className="text-[10px] text-slate-500 w-12 text-right">{mc.connections}</span>
-                      </div>
-                    ))}
+                    {(() => {
+                      const maxConn = Math.max(1, ...(stats.most_connected || []).map(m => m.connections || 0));
+                      return stats.most_connected?.map((mc, i) => {
+                        const bars = Math.max(1, Math.round((mc.connections / maxConn) * 20));
+                        return (
+                          <div key={mc.id} className="flex items-center gap-3">
+                            <span className="text-[10px] text-slate-600 w-6 text-center">{i + 1}</span>
+                            <span className="text-xs text-white flex-1 truncate">{mc.label}</span>
+                            <div className="flex-shrink-0 flex gap-0.5">
+                              {Array.from({ length: bars }).map((_, j) => (
+                                <div key={j} className="w-1.5 h-3 bg-cyan-500/60 rounded-sm" />
+                              ))}
+                            </div>
+                            <span className="text-[10px] text-slate-500 w-12 text-right">{mc.connections}</span>
+                          </div>
+                        );
+                      });
+                    })()}
                   </div>
                 </div>
               </>

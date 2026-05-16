@@ -3,15 +3,24 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   StickyNote, Plus, Search, Trash2,
   Tag, Clock, ListTodo, FileText, Save,
-  Circle, CheckCircle, HandHeart
+  Circle, CheckCircle, HandHeart, Bug, AlertTriangle
 } from 'lucide-react';
 import { BijdragenPage } from './BijdragenPage';
+import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const priorities = { high: { label: 'Hoog', color: '#ef4444' }, medium: { label: 'Normaal', color: '#f59e0b' }, low: { label: 'Laag', color: '#3b82f6' } };
 const categories = ['Alles', 'Observatie', 'Technisch', 'Taak', 'Idee'];
+const BUG_STATUSES = {
+  nieuw: { label: 'Nieuw', color: '#ef4444' },
+  in_behandeling: { label: 'In behandeling', color: '#f59e0b' },
+  opgelost: { label: 'Opgelost', color: '#22c55e' },
+  afgewezen: { label: 'Afgewezen', color: '#64748b' },
+};
 
 export function NotitiesPage({ onNavigate }) {
+  const { user } = useAuth();
+  const isAdminViewer = (user?.gradatie || 7) <= 2;
   const [notes, setNotes] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +29,10 @@ export function NotitiesPage({ onNavigate }) {
   const [filterCat, setFilterCat] = useState('Alles');
   const [showNew, setShowNew] = useState(false);
   const [newItem, setNewItem] = useState({ type: 'note', titel: '', inhoud: '', categorie: 'Observatie', priority: 'medium' });
+  const [bugs, setBugs] = useState([]);
+  const [showBugForm, setShowBugForm] = useState(false);
+  const [newBug, setNewBug] = useState({ description: '', when: '', page: '' });
+  const [bugSubmitMsg, setBugSubmitMsg] = useState(null);
 
   useEffect(() => {
     Promise.all([
@@ -31,6 +44,15 @@ export function NotitiesPage({ onNavigate }) {
       setLoading(false);
     });
   }, []);
+
+  // Load bugs when admin opens the Bugs tab
+  useEffect(() => {
+    if (viewMode !== 'bugs' || !isAdminViewer || !user?.id) return;
+    fetch(`${API}/api/bugs/list?viewer_id=${user.id}`)
+      .then(r => r.json())
+      .then(d => setBugs(d.bugs || []))
+      .catch(() => setBugs([]));
+  }, [viewMode, isAdminViewer, user?.id]);
 
   // Combine notes and tasks into unified list
   const items = [
@@ -92,6 +114,54 @@ export function NotitiesPage({ onNavigate }) {
   const notesTotal = notes.length;
   const tasksTotal = tasks.length;
 
+  const submitBug = async () => {
+    if (!newBug.description.trim()) {
+      setBugSubmitMsg({ type: 'error', text: 'Omschrijving is verplicht.' });
+      return;
+    }
+    try {
+      const res = await fetch(`${API}/api/bugs/create`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          description: newBug.description,
+          when: newBug.when || null,
+          page: newBug.page || null,
+          created_by_id: user?.id || null,
+          created_by_naam: user?.naam || null,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBugSubmitMsg({ type: 'ok', text: 'Bug verzonden! Je krijgt een bevestiging in je privé-chat met Spark AI.' });
+        setNewBug({ description: '', when: '', page: '' });
+        if (isAdminViewer) setBugs([data.bug, ...bugs]);
+        setTimeout(() => { setShowBugForm(false); setBugSubmitMsg(null); }, 2200);
+      } else {
+        setBugSubmitMsg({ type: 'error', text: 'Verzenden mislukt.' });
+      }
+    } catch {
+      setBugSubmitMsg({ type: 'error', text: 'Netwerkfout. Probeer opnieuw.' });
+    }
+  };
+
+  const updateBugStatus = async (bug, status) => {
+    if (!isAdminViewer || !user?.id) return;
+    const res = await fetch(`${API}/api/bugs/${bug.id}/status`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, viewer_id: user.id }),
+    });
+    const data = await res.json();
+    if (data.success) setBugs(bugs.map(b => b.id === bug.id ? data.bug : b));
+  };
+
+  const deleteBug = async (bug) => {
+    if (!isAdminViewer || !user?.id) return;
+    if (!window.confirm('Bug verwijderen?')) return;
+    const res = await fetch(`${API}/api/bugs/${bug.id}?viewer_id=${user.id}`, { method: 'DELETE' });
+    const data = await res.json();
+    if (data.success) setBugs(bugs.filter(b => b.id !== bug.id));
+  };
+
   if (loading) return <MainLayout activePage="notities" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" /></div></MainLayout>;
 
   return (
@@ -106,7 +176,11 @@ export function NotitiesPage({ onNavigate }) {
               <h1 className="text-base font-bold text-white leading-tight">Notities & Taken</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{notesTotal} notities, {tasksDone}/{tasksTotal} taken klaar</p>
             </div>
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-2">
+              <button data-testid="report-bug-btn" onClick={() => { setShowBugForm(true); setBugSubmitMsg(null); }}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-red-300 border border-red-500/30 bg-red-500/5 hover:bg-red-500/10 transition-colors">
+                <Bug className="w-3.5 h-3.5" /> Bug melden
+              </button>
               <button data-testid="add-note-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #f59e0b, #22c55e)' }}>
                 <Plus className="w-3.5 h-3.5" /> Nieuw
               </button>
@@ -118,6 +192,7 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'notes', label: 'Notities', icon: StickyNote, count: notesTotal },
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
               { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, count: null },
+              ...(isAdminViewer ? [{ id: 'bugs', label: 'Bugs', icon: Bug, count: bugs.length || null }] : []),
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
                 className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors"
@@ -130,9 +205,94 @@ export function NotitiesPage({ onNavigate }) {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
+          {/* Bug-melder modal */}
+          {showBugForm && (
+            <div data-testid="bug-form-modal" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowBugForm(false)}>
+              <div className="w-full max-w-md bg-slate-900 border border-red-500/30 rounded-2xl p-5 space-y-3" onClick={e => e.stopPropagation()}>
+                <div className="flex items-center gap-2">
+                  <div className="w-9 h-9 rounded-lg bg-red-500/15 flex items-center justify-center">
+                    <Bug className="w-4 h-4 text-red-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white">Bug melden</h3>
+                    <p className="text-[10px] text-slate-500">We bekijken het zo snel mogelijk.</p>
+                  </div>
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 uppercase tracking-wider">Omschrijving *</label>
+                  <textarea data-testid="bug-description" value={newBug.description} onChange={e => setNewBug({ ...newBug, description: e.target.value })}
+                    placeholder="Wat ging er mis? Wat verwachtte je en wat zag je?" rows={4}
+                    className="mt-1 w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500/40 resize-none" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 uppercase tracking-wider">Wanneer gebeurde het?</label>
+                  <input data-testid="bug-when" type="text" value={newBug.when} onChange={e => setNewBug({ ...newBug, when: e.target.value })}
+                    placeholder='bv. "vandaag rond 14u" of "16-05 11:30"'
+                    className="mt-1 w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500/40" />
+                  <p className="text-[10px] text-slate-600 mt-1">Hoe nauwkeuriger, hoe makkelijker we het in de logs vinden.</p>
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 uppercase tracking-wider">Waar in de app? (optioneel)</label>
+                  <input data-testid="bug-page" type="text" value={newBug.page} onChange={e => setNewBug({ ...newBug, page: e.target.value })}
+                    placeholder='bv. "Dashboard" of "Snelhandel"'
+                    className="mt-1 w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500/40" />
+                </div>
+                {bugSubmitMsg && (
+                  <div className={`text-xs p-2 rounded-lg ${bugSubmitMsg.type === 'ok' ? 'bg-green-500/10 text-green-300 border border-green-500/30' : 'bg-red-500/10 text-red-300 border border-red-500/30'}`}>
+                    {bugSubmitMsg.text}
+                  </div>
+                )}
+                <div className="flex justify-end gap-2 pt-1">
+                  <button onClick={() => setShowBugForm(false)} className="px-3 py-1.5 text-xs text-slate-400 hover:text-white">Annuleer</button>
+                  <button data-testid="bug-submit" onClick={submitBug} className="px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-red-500 hover:bg-red-600">Verzenden</button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {viewMode === 'bijdragen' ? (
             <div className="-m-4 md:-m-6 h-full">
               <BijdragenPage embedded={true} />
+            </div>
+          ) : viewMode === 'bugs' && isAdminViewer ? (
+            <div className="max-w-3xl mx-auto space-y-2">
+              {bugs.length === 0 ? (
+                <div className="py-16 text-center"><Bug className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Nog geen bugmeldingen.</p></div>
+              ) : bugs.map(b => {
+                const st = BUG_STATUSES[b.status] || BUG_STATUSES.nieuw;
+                return (
+                  <div key={b.id} data-testid={`bug-${b.id}`} className="p-3 bg-slate-900/50 border border-slate-800 rounded-xl">
+                    <div className="flex items-start gap-3">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${st.color}15` }}>
+                        <AlertTriangle className="w-3.5 h-3.5" style={{ color: st.color }} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded font-medium" style={{ background: `${st.color}20`, color: st.color }}>{st.label}</span>
+                          <span className="text-[10px] text-slate-500">{b.created_by_naam || 'Anoniem'}</span>
+                          {b.page && <span className="text-[10px] text-slate-600">· {b.page}</span>}
+                          <span className="text-[10px] text-slate-600 ml-auto flex items-center gap-1">
+                            <Clock className="w-2.5 h-2.5" /> {new Date(b.created_at).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        </div>
+                        <p className="text-sm text-white mt-1 whitespace-pre-wrap">{b.description}</p>
+                        {b.when && <p className="text-[11px] text-slate-400 mt-1">Wanneer: {b.when}</p>}
+                        <div className="flex items-center gap-1 mt-2 flex-wrap">
+                          {Object.entries(BUG_STATUSES).filter(([k]) => k !== b.status).map(([k, v]) => (
+                            <button key={k} data-testid={`bug-status-${k}`} onClick={() => updateBugStatus(b, k)}
+                              className="text-[10px] px-2 py-0.5 rounded border border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white transition-colors">
+                              → {v.label}
+                            </button>
+                          ))}
+                          <button onClick={() => deleteBug(b)} className="ml-auto p-1 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded transition-colors">
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           ) : (
           <div className="max-w-3xl mx-auto space-y-4">

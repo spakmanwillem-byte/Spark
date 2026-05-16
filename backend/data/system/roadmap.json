@@ -2701,6 +2701,16 @@
         "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
       },
       {
+        "id": "v4_bugs_001",
+        "titel": "Bug-melder MVP (iedereen kan melden, gradatie ≤ 2 beheert)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Lite bug-melder voor iedereen via 'Bug melden' knop in Notities-pagina. Backend module /api/bugs (create/list/status/delete) met opslag in /data/bugs/bugs.json. Bevestiging als privé-bericht aan melder vanuit Spark AI (user-000). 'Bugs'-tab alleen zichtbaar voor gradatie ≤ 2. Status-flow: nieuw → in_behandeling → opgelost/afgewezen.",
+        "open_followup": "Gradatie 2 splitsen in 2-fam vs 2-admin zodat familieleden geen bug-meldingen zien (alleen 2-admin moet de Bugs-tab kunnen openen)."
+      },
+      {
         "id": "v4_015",
         "titel": "Duplicaat spark_bijbel.json opruimen",
         "status": "todo",

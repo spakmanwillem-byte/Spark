@@ -166,6 +166,11 @@ from modules.contacts import contacts_router
 app.include_router(contacts_router, prefix="/api")
 
 
+# Module 23: Bugs (bug-meldingen door iedereen, beheer door admins gradatie ≤ 2)
+from modules.bugs import bugs_router
+app.include_router(bugs_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

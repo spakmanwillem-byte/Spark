@@ -16682,14 +16682,18 @@
       "id": "dcef9817-32ce-4bb7-836d-792b0172a310",
       "label": "Wanneer",
       "type": "knowledge",
-      "description": "“Wanneer” is een vraagwoord dat naar tijd vraagt.",
+      "description": "“Wanneer” vraagt naar een moment in de tijd.",
       "tags": [
         "wanneer",
-        "vraagwoord",
         "tijd",
         "timing",
         "volgorde",
-        "gebeurtenis"
+        "gebeurtenis",
+        "planning",
+        "trigger",
+        "proces",
+        "herinnering",
+        "context"
       ],
       "topic": "taal",
       "belangrijkheid": 4
@@ -46371,67 +46375,468 @@
       "belangrijkheid": 3
     },
     {
-      "id": "snap-c630a72b",
-      "label": "zwerpkluit",
-      "type": "knowledge",
-      "description": "",
-      "tags": [
-        "knowledge-snap",
-        "auto-generated"
-      ],
-      "topic": "",
-      "belangrijkheid": 3
-    },
-    {
-      "id": "snap-e1dfcea6",
-      "label": "flonkerflox",
-      "type": "knowledge",
-      "description": "",
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "user-verrijkt"
-      ],
-      "topic": "",
-      "belangrijkheid": 3
-    },
-    {
       "id": "snap-810a3552",
       "label": "doet",
       "type": "knowledge",
-      "description": "",
+      "description": "“Doet” betekent dat iemand of iets een handeling uitvoert.",
       "tags": [
-        "knowledge-snap",
-        "auto-generated"
+        "doet",
+        "doen",
+        "actie",
+        "handeling",
+        "uitvoering",
+        "gedrag",
+        "proces",
+        "activiteit",
+        "effect",
+        "verandering"
       ],
-      "topic": "",
-      "belangrijkheid": 3
+      "topic": "taal",
+      "belangrijkheid": 4
     },
     {
       "id": "snap-bcd8e895",
       "label": "zouden",
       "type": "knowledge",
-      "description": "",
+      "description": "“Zouden” geeft een mogelijkheid, wens, verwachting of voorwaardelijke situatie aan.",
       "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "user-verrijkt"
+        "zouden",
+        "zullen",
+        "mogelijkheid",
+        "toekomst",
+        "hypothese",
+        "keuze",
+        "onzekerheid",
+        "voorstel",
+        "beleefdheid",
+        "planning"
       ],
-      "topic": "",
-      "belangrijkheid": 3
+      "topic": "taal",
+      "belangrijkheid": 4
     },
     {
       "id": "snap-8932b2dc",
       "label": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
       "type": "knowledge",
-      "description": "",
+      "description": "Een vraag om samen ideeën, opties of mogelijke oplossingen te bedenken.",
       "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "context-zin"
+        "voorstel",
+        "samenwerking",
+        "brainstormen",
+        "keuzes",
+        "plannen",
+        "ideeën",
+        "context-zin",
+        "probleemoplossing",
+        "richting",
+        "communicatie",
+        "activiteit"
       ],
-      "topic": "",
+      "topic": "communicatie",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-c79bb525",
+      "label": "net",
+      "type": "knowledge",
+      "description": "Net betekent dat iets kort geleden is gebeurd of nog maar pas begonnen is.",
+      "tags": [
+        "net",
+        "tijd",
+        "recent",
+        "gebeurtenis",
+        "overgang",
+        "context",
+        "volgorde",
+        "bewustzijn"
+      ],
+      "topic": "tijd",
       "belangrijkheid": 2
+    },
+    {
+      "id": "snap-61e0b966",
+      "label": "wakker",
+      "type": "knowledge",
+      "description": "Wakker betekent dat iemand niet meer slaapt en bewust is van de omgeving.",
+      "tags": [
+        "wakker",
+        "slapen",
+        "bewustzijn",
+        "energie",
+        "ochtend",
+        "focus",
+        "landen",
+        "productiviteit",
+        "mens"
+      ],
+      "topic": "bewustzijn",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-8b5b6c9d",
+      "label": "landen",
+      "type": "knowledge",
+      "description": "Landen betekent dat iemand mentaal of emotioneel stabiel en bewust in het moment komt.",
+      "tags": [
+        "landen",
+        "aarden",
+        "bewustzijn",
+        "focus",
+        "rust",
+        "overgang",
+        "wakker",
+        "energie",
+        "prikkels",
+        "productiviteit"
+      ],
+      "topic": "stabiliteit",
+      "belangrijkheid": 4
+    },
+    {
+      "id": "snap-c35f4fa6",
+      "label": "Ik ben net wakker. even landen en koffie drinken.",
+      "type": "knowledge",
+      "description": "Een contextzin die beschrijft dat iemand net wakker is geworden en eerst rustig wil opstarten met koffie en mentale overgang naar activiteit.",
+      "tags": [
+        "wakker",
+        "landen",
+        "koffie",
+        "energie",
+        "ochtend",
+        "routine",
+        "bewustzijn",
+        "focus",
+        "productiviteit",
+        "context"
+      ],
+      "topic": "context",
+      "belangrijkheid": 4
+    },
+    {
+      "id": "snap-1f55c90c",
+      "label": "net",
+      "type": "knowledge",
+      "description": "Een net is een structuur van draden of touwen met openingen ertussen, bedoeld om iets op te vangen, tegen te houden of te dragen.",
+      "tags": [
+        "net",
+        "structuur",
+        "verbinding",
+        "bescherming",
+        "opvang",
+        "netwerk",
+        "visnet",
+        "veiligheid",
+        "ondersteuning",
+        "gereedschap"
+      ],
+      "topic": "structuur",
+      "belangrijkheid": 2
+    },
+    {
+      "id": "snap-1c34fd06",
+      "label": "mijne",
+      "type": "knowledge",
+      "description": "“Mijne” betekent dat iets van jezelf is of bij jezelf hoort.",
+      "tags": [
+        "mijne",
+        "bezit",
+        "verwijzing",
+        "eigendom",
+        "context",
+        "communicatie",
+        "taal",
+        "identiteit"
+      ],
+      "topic": "bezit",
+      "belangrijkheid": 2
+    },
+    {
+      "id": "snap-e7ece50b",
+      "label": "de mijne ook",
+      "type": "knowledge",
+      "description": "Een reactie waarmee iemand aangeeft hetzelfde te hebben, voelen of bedoelen als een ander.",
+      "tags": [
+        "de mijne ook",
+        "context",
+        "vergelijking",
+        "bezit",
+        "overeenkomst",
+        "reactie",
+        "gesprek",
+        "herkenning",
+        "communicatie"
+      ],
+      "topic": "overeenkomst",
+      "belangrijkheid": 2
+    },
+    {
+      "id": "snap-685e8d8d",
+      "label": "gaan",
+      "type": "knowledge",
+      "description": "Gaan betekent bewegen, vertrekken of overgaan van de ene situatie, plaats of toestand naar een andere.",
+      "tags": [
+        "gaan",
+        "beweging",
+        "verandering",
+        "overgang",
+        "vertrek",
+        "richting",
+        "actie",
+        "context",
+        "toestand"
+      ],
+      "topic": "overgang",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-9bd1a535",
+      "label": "zullen we wat gaan ontwerpen",
+      "type": "knowledge",
+      "description": "Een voorstel om samen iets nieuws te bedenken of te maken.",
+      "tags": [
+        "ontwerpen",
+        "gaan",
+        "samenwerking",
+        "creativiteit",
+        "voorstel",
+        "context",
+        "actie",
+        "intentie",
+        "communicatie",
+        "brainstormen"
+      ],
+      "topic": "creativiteit",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-cd2ba519",
+      "label": "Ik ga niet weg :P",
+      "type": "knowledge",
+      "description": "Een informele reactie waarmee iemand aangeeft dat een gesprek nog niet afgelopen is.",
+      "tags": [
+        "ik ga niet weg",
+        "misverstand",
+        "correctie",
+        "humor",
+        "context",
+        "gesprek",
+        "communicatie",
+        "interpretatie",
+        "reactie"
+      ],
+      "topic": "communicatie",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-8471898a",
+      "label": "Speech-to-Text",
+      "type": "knowledge",
+      "description": "Speech-to-Text is technologie die gesproken woorden automatisch omzet naar geschreven tekst.",
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "transcriptie",
+        "communicatie",
+        "ai",
+        "stemherkenning",
+        "taal",
+        "invoer",
+        "context"
+      ],
+      "topic": "spraak",
+      "belangrijkheid": 4
+    },
+    {
+      "id": "snap-576ca20b",
+      "label": "Text-to-Speech",
+      "type": "knowledge",
+      "description": "Text-to-Speech is technologie die geschreven tekst omzet naar gesproken geluid.",
+      "tags": [
+        "text-to-speech",
+        "spraak",
+        "audio",
+        "stem",
+        "communicatie",
+        "ai",
+        "taal",
+        "voorlezen",
+        "stemsyntese",
+        "interactie"
+      ],
+      "topic": "spraak",
+      "belangrijkheid": 4
+    },
+    {
+      "id": "snap-c5ea7ee2",
+      "label": "aanzetten",
+      "type": "knowledge",
+      "description": "Aanzetten betekent iets starten, inschakelen of actief maken.",
+      "tags": [
+        "aanzetten",
+        "inschakelen",
+        "starten",
+        "actief",
+        "activatie",
+        "apparaat",
+        "functie",
+        "proces",
+        "toestand"
+      ],
+      "topic": "toestand",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-18a89266",
+      "label": "Speech-to-Text aanzetten",
+      "type": "knowledge",
+      "description": "Het inschakelen van een functie die gesproken woorden omzet naar tekst.",
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "communicatie",
+        "invoer",
+        "transcriptie",
+        "ai",
+        "context",
+        "stemherkenning"
+      ],
+      "topic": "spraak",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-c112ce31",
+      "label": "uitzetten",
+      "type": "knowledge",
+      "description": "Uitzetten betekent iets stoppen, uitschakelen of inactief maken.",
+      "tags": [
+        "Spark leert dat “uitzetten” een overgang is van actief naar inactief. Hierdoor kan Spark verbanden leggen tussen apparaten",
+        "functies",
+        "processen en toestandsveranderingen."
+      ],
+      "topic": "toestand",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-807b898a",
+      "label": "Speech-to-Text uitzetten",
+      "type": "knowledge",
+      "description": "Het uitschakelen van een functie die gesproken woorden omzet naar tekst.",
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "invoer",
+        "communicatie",
+        "microfoon",
+        "transcriptie",
+        "interactie",
+        "typen"
+      ],
+      "topic": "spraak",
+      "belangrijkheid": 2
+    },
+    {
+      "id": "snap-cb656849",
+      "label": "text",
+      "type": "knowledge",
+      "description": "Text is geschreven taal die informatie, gedachten of communicatie bevat.",
+      "tags": [
+        "text",
+        "tekst",
+        "taal",
+        "communicatie",
+        "informatie",
+        "betekenis",
+        "schrijven",
+        "lezen",
+        "context",
+        "woorden"
+      ],
+      "topic": "taal",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-c025dd20",
+      "label": "speech",
+      "type": "knowledge",
+      "description": "Speech is gesproken taal waarmee informatie, gedachten of emoties worden gecommuniceerd.",
+      "tags": [
+        "speech",
+        "spraak",
+        "communicatie",
+        "stem",
+        "taal",
+        "geluid",
+        "emotie",
+        "uitspraak",
+        "audio",
+        "interactie"
+      ],
+      "topic": "spraak",
+      "belangrijkheid": 4
+    },
+    {
+      "id": "snap-e2f1ed5d",
+      "label": "hahaha",
+      "type": "knowledge",
+      "description": "“Hahaha” is een geschreven vorm van lachen of amusement.",
+      "tags": [
+        "hahaha",
+        "lachen",
+        "humor",
+        "emotie",
+        "communicatie",
+        "plezier",
+        "sociaal",
+        "reactie",
+        "tekst",
+        "sfeer",
+        "uiting"
+      ],
+      "topic": "emotie",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-1ce87011",
+      "label": "lijf",
+      "type": "knowledge",
+      "description": "Het lijf is het fysieke lichaam van een mens of dier.",
+      "tags": [
+        "lijf",
+        "lichaam",
+        "gevoel",
+        "gezondheid",
+        "bewustzijn",
+        "energie",
+        "emoties",
+        "beweging",
+        "mens",
+        "fysiek"
+      ],
+      "topic": "lichaam",
+      "belangrijkheid": 3
+    },
+    {
+      "id": "snap-6f89c0d9",
+      "label": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+      "type": "knowledge",
+      "description": "Een humoristische reactie waarmee iemand aangeeft verward, moe of niet scherp te zijn.",
+      "tags": [
+        "humor",
+        "hoofd",
+        "lijf",
+        "woordspeling",
+        "context",
+        "hahaha",
+        "emotie",
+        "uiting",
+        "zelfspot",
+        "communicatie"
+      ],
+      "topic": "humor",
+      "belangrijkheid": 3
     }
   ]
 }

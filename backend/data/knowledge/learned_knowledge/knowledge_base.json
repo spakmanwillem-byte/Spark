@@ -93271,18 +93271,22 @@
       "id": "dcef9817-32ce-4bb7-836d-792b0172a310",
       "begrip": "Wanneer",
       "lagen": {
-        "laag1": "“Wanneer” is een vraagwoord dat naar tijd vraagt.",
-        "laag2": "Het wordt gebruikt om te weten wanneer iets gebeurt.",
-        "laag3": "“Wanneer” is een vragend voornaamwoord dat verwijst naar een moment of periode in de tijd. Het helpt om gebeurtenissen te plaatsen in volgorde of context.",
-        "laag4": "“Wanneer” activeert tijdsbesef en timing. Het bepaalt wanneer iets start, stopt of plaatsvindt. Binnen Spark kun je “wanneer” zien als een trigger voor timing en volgorde, wat essentieel is voor processen en gebeurtenissen."
+        "laag1": "“Wanneer” vraagt naar een moment in de tijd.",
+        "laag2": "“Wanneer” gebruik je om te weten op welk moment iets gebeurt, gebeurde of gaat gebeuren.",
+        "laag3": "“Wanneer” is een vraagwoord dat verwijst naar tijd, timing of volgorde van gebeurtenissen. Het helpt mensen om acties, processen en herinneringen in een tijdlijn te plaatsen.",
+        "laag4": "Binnen Spark kan “wanneer” gekoppeld worden aan:\n\ntijd\nvolgorde\ngebeurtenissen\nplanning\ntriggers\nherinnering\noorzaak en gevolg\n\n“Wanneer” helpt Spark bepalen op welk moment iets actief, relevant of verbonden is."
       },
       "tags": [
         "wanneer",
-        "vraagwoord",
         "tijd",
         "timing",
         "volgorde",
-        "gebeurtenis"
+        "gebeurtenis",
+        "planning",
+        "trigger",
+        "proces",
+        "herinnering",
+        "context"
       ],
       "gevraagd_door": "Harry Klokkenmaker",
       "gevraagd_op": "2026-03-18T07:05:15.596768",
@@ -93291,12 +93295,12 @@
       "topic": "taal",
       "belangrijkheid": 4,
       "ws5": {
-        "wie": "Mensen (taalgebruikers)",
-        "wat": "Een vraagwoord over tijd",
-        "wanneer": "Bij vragen over tijd of moment",
-        "waar": "In gesproken en geschreven taal",
-        "waarom": "Om te weten wanneer iets gebeurt",
-        "hoe": "Door te verwijzen naar een moment of periode"
+        "wie": "Mensen, systemen of taalmodellen die naar tijd vragen.",
+        "wat": "Een vraagwoord dat verwijst naar een moment, periode of timing.",
+        "wanneer": "Bij vragen over gebeurtenissen, planning, herinneringen of processen.",
+        "waar": "In gesproken taal, geschreven taal, systemen en tijdsgebonden context.",
+        "waarom": "Om gebeurtenissen in tijd en volgorde te begrijpen.",
+        "hoe": "Door te verwijzen naar een specifiek moment, periode of tijdsrelatie."
       },
       "last_edited_by_admin": "Unknown",
       "last_edited_by_user_id": null,
@@ -93315,9 +93319,9 @@
         "themes": [
           "natuur_energie"
         ],
-        "updated_at": "2026-03-01T12:00:00.000000",
-        "reviewed_at": null,
-        "review_count": 0
+        "updated_at": "2026-05-15T10:39:20.569295+00:00",
+        "reviewed_at": "2026-05-15T10:39:30.361903+00:00",
+        "review_count": 3
       },
       "usage_count": 0,
       "voorgestelde_verbanden": [],
@@ -195948,181 +195952,1043 @@
       }
     },
     {
-      "id": "snap-c630a72b",
-      "begrip": "zwerpkluit",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "knowledge-snap",
-        "auto-generated"
-      ],
-      "bron": "auto-detected",
-      "detected_by": "Willem",
-      "detected_at": "2026-05-15T08:28:58.400219+00:00",
-      "status": "draft",
-      "belangrijkheid": 3,
-      "usage_count": 0,
-      "topic": "",
-      "snap_context": "zwerpkluit",
-      "metadata": {
-        "created_at": "2026-05-15T08:28:58.400235+00:00",
-        "created_via": "snap",
-        "is_sentence": false
-      }
-    },
-    {
-      "id": "snap-e1dfcea6",
-      "begrip": "flonkerflox",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "een soort kleurrijk dier",
-        "wanneer": "krakelblop",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "user-verrijkt"
-      ],
-      "bron": "auto-detected",
-      "detected_by": "Willem",
-      "detected_at": "2026-05-15T08:30:18.120670+00:00",
-      "status": "draft",
-      "belangrijkheid": 3,
-      "usage_count": 0,
-      "topic": "",
-      "snap_context": "flonkerflox",
-      "metadata": {
-        "created_at": "2026-05-15T08:30:18.120683+00:00",
-        "created_via": "snap",
-        "is_sentence": false
-      }
-    },
-    {
       "id": "snap-810a3552",
       "begrip": "doet",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "“Doet” betekent dat iemand of iets een handeling uitvoert.",
+        "laag2": "Het woord “doet” wordt gebruikt om aan te geven dat een persoon, dier, systeem of object actief iets uitvoert, veroorzaakt of laat gebeuren.",
+        "laag3": "“Doet” is een vervoeging van het werkwoord “doen”. Het beschrijft een actie, handeling of effect in het heden. Het kan verwijzen naar fysieke acties, mentale processen, gedrag of systeemactiviteiten.\n\nVoorbeelden:\n\n“Hij doet zijn werk.”\n“De computer doet een berekening.”\n“Dat doet pijn.”\n“Wat doet Spark hiermee?”\n\nHet woord wordt breed gebruikt omdat bijna iedere activiteit of uitvoering ermee beschreven kan worden.",
+        "laag4": "Binnen Spark kan “doet” gekoppeld worden aan:\n\nactie\nuitvoering\ngedrag\nproces\neffect\nactiviteit\nreactie\n\nSpark kan herkennen dat er sprake is van een actieve handeling of verandering."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Een persoon, dier, systeem of object dat een handeling uitvoert.",
+        "wat": "Een werkwoordsvorm die een actie of activiteit beschrijft.",
+        "wanneer": "Wanneer iets actief gebeurt of uitgevoerd wordt.",
+        "waar": "In gesproken taal, geschreven taal en systeemprocessen.",
+        "waarom": "Om handelingen, gedrag of effecten te beschrijven.",
+        "hoe": "Door een actie of uitvoering in het heden aan te geven."
       },
       "tags": [
-        "knowledge-snap",
-        "auto-generated"
+        "doet",
+        "doen",
+        "actie",
+        "handeling",
+        "uitvoering",
+        "gedrag",
+        "proces",
+        "activiteit",
+        "effect",
+        "verandering"
       ],
       "bron": "auto-detected",
       "detected_by": "De Willem",
       "detected_at": "2026-05-15T09:48:47.277105+00:00",
       "status": "draft",
-      "belangrijkheid": 3,
+      "belangrijkheid": 4,
       "usage_count": 0,
-      "topic": "",
+      "topic": "taal",
       "snap_context": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
       "metadata": {
         "created_at": "2026-05-15T09:48:47.277110+00:00",
         "created_via": "snap",
-        "is_sentence": false
+        "is_sentence": false,
+        "updated_at": "2026-05-15T11:19:56.088991+00:00"
       }
     },
     {
       "id": "snap-bcd8e895",
       "begrip": "zouden",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "“Zouden” geeft een mogelijkheid, wens, verwachting of voorwaardelijke situatie aan.",
+        "laag2": "Het woord “zouden” wordt gebruikt om iets minder direct of minder zeker te maken. Het kan gaan over plannen, verwachtingen, ideeën, beleefdheid of hypothetische situaties.",
+        "laag3": "“Zouden” is een vervoeging van het werkwoord “zullen” en wordt vaak gebruikt in voorwaardelijke of denkbeeldige situaties. Het woord verzacht uitspraken en maakt ruimte voor onzekerheid, keuze of samenwerking.\n\nVoorbeelden:\n\n“Wij zouden kunnen gaan.”\n“Dat zou helpen.”\n“Zou jij dat willen doen?”\n\nHet woord wordt veel gebruikt bij:\n\nvoorstellen\nvoorspellingen\nbeleefdheid\nmogelijkheden\nhypothetische scenario’s",
+        "laag4": "Binnen Spark kan “zouden” gekoppeld worden aan:\n\nmogelijkheid\ntoekomst\nonzekerheid\nkeuze\nplanning\nhypothese\nsamenwerking\n\nSpark kan herkennen dat een uitspraak niet vaststaand is, maar een mogelijke richting of optie beschrijft."
       },
       "ws5": {
-        "wie": "",
-        "wat": "volgende",
-        "wanneer": "nee",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mensen of systemen die spreken over mogelijkheden of verwachtingen.",
+        "wat": "Een hulpwerkwoord dat een mogelijke of voorwaardelijke situatie aangeeft.",
+        "wanneer": "Bij voorstellen, verwachtingen, beleefde vragen of hypothetische situaties.",
+        "waar": "In gesproken taal, geschreven taal en communicatie.",
+        "waarom": "Om ruimte te geven aan onzekerheid, keuze of beleefdheid.",
+        "hoe": "Door een situatie als mogelijkheid of verwachting te formuleren."
       },
       "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "user-verrijkt"
+        "zouden",
+        "zullen",
+        "mogelijkheid",
+        "toekomst",
+        "hypothese",
+        "keuze",
+        "onzekerheid",
+        "voorstel",
+        "beleefdheid",
+        "planning"
       ],
       "bron": "auto-detected",
       "detected_by": "De Willem",
       "detected_at": "2026-05-15T09:48:47.943355+00:00",
       "status": "draft",
-      "belangrijkheid": 3,
+      "belangrijkheid": 4,
       "usage_count": 0,
-      "topic": "",
+      "topic": "taal",
       "snap_context": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
       "metadata": {
         "created_at": "2026-05-15T09:48:47.943372+00:00",
         "created_via": "snap",
-        "is_sentence": false
+        "is_sentence": false,
+        "updated_at": "2026-05-15T11:18:06.265435+00:00"
       }
     },
     {
       "id": "snap-8932b2dc",
       "begrip": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Een vraag om samen ideeën, opties of mogelijke oplossingen te bedenken.",
+        "laag2": "Deze zin wordt gebruikt wanneer iemand hulp vraagt bij nadenken, plannen of keuzes maken. Het laat zien dat iemand openstaat voor suggesties of samenwerking.",
+        "laag3": "De zin “ik wil dat jij een voorstel doet in wat wij zouden kunnen doen” vraagt om actieve input van een ander persoon of systeem. Het gaat niet alleen om informatie ontvangen, maar om het verkennen van mogelijkheden, richtingen of oplossingen. De nadruk ligt op samenwerking, creativiteit en besluitvorming.",
+        "laag4": "Binnen Spark kan deze context gekoppeld worden aan:\n\nsamenwerking\nbrainstormen\nkeuzes\nplannen\ncreativiteit\nprobleemoplossing\nrichting bepalen\n\nSpark kan herkennen dat de gebruiker geen feitelijke definitie zoekt, maar hulp wil bij het bedenken van opties of vervolgstappen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Een persoon of systeem dat om ideeën of suggesties vraagt.",
+        "wat": "Een verzoek om voorstellen, opties of mogelijke richtingen te bedenken.",
+        "wanneer": "Bij twijfel, planning, samenwerking of behoefte aan nieuwe ideeën.",
+        "waar": "In gesprekken, brainstormsessies, projecten en besluitvorming.",
+        "waarom": "Om samen tot betere keuzes of oplossingen te komen.",
+        "hoe": "Door ideeën, mogelijkheden of strategieën voor te stellen."
       },
       "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "context-zin"
+        "voorstel",
+        "samenwerking",
+        "brainstormen",
+        "keuzes",
+        "plannen",
+        "ideeën",
+        "context-zin",
+        "probleemoplossing",
+        "richting",
+        "communicatie",
+        "activiteit"
       ],
       "bron": "auto-detected",
       "detected_by": "De Willem",
       "detected_at": "2026-05-15T09:48:48.551395+00:00",
       "status": "draft",
-      "belangrijkheid": 2,
+      "belangrijkheid": 3,
       "usage_count": 0,
-      "topic": "",
+      "topic": "communicatie",
       "snap_context": "ik wil dat jij een voorstel doet in wat wij zouden kunnen doen.",
       "metadata": {
         "created_at": "2026-05-15T09:48:48.551412+00:00",
         "created_via": "snap",
-        "is_sentence": true
+        "is_sentence": true,
+        "updated_at": "2026-05-15T11:16:47.557231+00:00"
+      }
+    },
+    {
+      "id": "snap-c79bb525",
+      "begrip": "net",
+      "lagen": {
+        "laag1": "Net betekent dat iets kort geleden is gebeurd of nog maar pas begonnen is.",
+        "laag2": "Mensen gebruiken “net” vaak om aan te geven dat iets vers, recent of direct voorafgaand aan het huidige moment gebeurde. Het woord helpt om tijd en volgorde in gesprekken duidelijk te maken.",
+        "laag3": "“Net” is een tijdsaanduiding die aangeeft dat iets heel kort geleden plaatsvond. Het wordt gebruikt om gebeurtenissen dichtbij het huidige moment te plaatsen.\n\nVoorbeelden:\n\nik ben net wakker\nhij was net weg\nwe hebben net gegeten\nhet is net gebeurd\n\nHet woord geeft context aan:\n\ntijd\novergang\nactualiteit\nrecentheid\nvolgorde van gebeurtenissen\n\n“Net” kan ook andere betekenissen hebben afhankelijk van de context, zoals:\n\nnetjes of precies (“dat past net”)\neen netwerk of gaas (“een visnet”)\n\nIn deze context betekent “net”:\nkort geleden.",
+        "laag4": "Spark gebruikt woorden zoals “net” om tijdsverbanden tussen gebeurtenissen te begrijpen. Hierdoor kan Spark herkennen dat een situatie recent is gebeurd en verband leggen tussen opeenvolgende processen zoals slapen, wakker worden, landen en koffie drinken."
+      },
+      "ws5": {
+        "wie": "Mensen die praten over recente gebeurtenissen of situaties.",
+        "wat": "Een aanduiding dat iets kort geleden is gebeurd.",
+        "wanneer": "Direct voor het huidige moment of kort daarvoor.",
+        "waar": "In gesprekken, verhalen en dagelijkse communicatie.",
+        "waarom": "Om duidelijk te maken dat iets recent of vers gebeurd is.",
+        "hoe": "Door een gebeurtenis in tijd dichtbij het huidige moment te plaatsen."
+      },
+      "tags": [
+        "net",
+        "tijd",
+        "recent",
+        "gebeurtenis",
+        "overgang",
+        "context",
+        "volgorde",
+        "bewustzijn"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:09:49.089123+00:00",
+      "status": "draft",
+      "belangrijkheid": 2,
+      "usage_count": 0,
+      "topic": "tijd",
+      "snap_context": "Ik ben net wakker. even landen en koffie drinken.",
+      "metadata": {
+        "created_at": "2026-05-16T09:09:49.089136+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T09:36:09.790530+00:00"
+      }
+    },
+    {
+      "id": "snap-61e0b966",
+      "begrip": "wakker",
+      "lagen": {
+        "laag1": "Wakker betekent dat iemand niet meer slaapt en bewust is van de omgeving.",
+        "laag2": "Wakker worden is de overgang van slaap naar bewust actief zijn. Mensen worden wakker om te reageren op de wereld, taken uit te voeren en contact te maken met hun omgeving.",
+        "laag3": "Wakker zijn betekent dat de hersenen en het lichaam actief genoeg zijn om bewust informatie te verwerken. Tijdens het wakker worden schakelt het lichaam over van rust naar activiteit. Dit proces kan beïnvloed worden door slaap, licht, geluid, emoties, stress, routine en cafeïne.\n\nMensen kunnen zich verschillend wakker voelen:\n\nenergiek\nmoe\nrustig\nalert\nverward\nproductief\n\n“Wakker worden” wordt ook gebruikt als metafoor voor bewustwording of iets gaan beseffen.",
+        "laag4": "Spark ziet wakker niet alleen als stoppen met slapen, maar als een overgang van toestand. Hierdoor kan Spark verbanden leggen tussen slaap, energie, koffie, focus, landen en productiviteit."
+      },
+      "ws5": {
+        "wie": "Mensen en dieren die slapen en wakker worden.",
+        "wat": "De toestand waarin iemand bewust en actief is.",
+        "wanneer": "Na slaap of rustmomenten.",
+        "waar": "Overal waar levende wezens rusten en actief worden.",
+        "waarom": "Om bewust te functioneren en te reageren op de omgeving.",
+        "hoe": "Door activatie van hersenen en lichaam via biologische processen en prikkels."
+      },
+      "tags": [
+        "wakker",
+        "slapen",
+        "bewustzijn",
+        "energie",
+        "ochtend",
+        "focus",
+        "landen",
+        "productiviteit",
+        "mens"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:09:56.508102+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "bewustzijn",
+      "snap_context": "Ik ben net wakker. even landen en koffie drinken.",
+      "metadata": {
+        "created_at": "2026-05-16T09:09:56.508122+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T09:24:45.889646+00:00"
+      }
+    },
+    {
+      "id": "snap-8b5b6c9d",
+      "begrip": "landen",
+      "lagen": {
+        "laag1": "Landen betekent dat iemand mentaal of emotioneel stabiel en bewust in het moment komt.",
+        "laag2": "Landen gebeurt vaak wanneer iemand van de ene toestand naar de andere gaat. Bijvoorbeeld van slapen naar wakker worden, van chaos naar rust of van afwezigheid naar focus. Het helpt om weer grip, rust en aanwezigheid te voelen.",
+        "laag3": "Landen is een mentaal en emotioneel overgangsproces waarbij iemand zich bewust wordt van zichzelf, de omgeving en de situatie. Het betekent dat iemand van een zwevende, vermoeide, drukke of onrustige toestand terugkomt naar stabiliteit en aanwezigheid.\n\nVoorbeelden:\n\nwakker worden en langzaam actief worden\nna stress weer rustig worden\nconcentratie terugvinden\nwennen aan een nieuwe situatie\njezelf weer “gegrond” voelen\n\nLanden hangt samen met:\n\nbewustzijn\nrust\nfocus\novergang\nenergie\naarden\nprikkelverwerking\nproductiviteit\n\nHet proces kan ondersteund worden door routines zoals koffie drinken, stilte, muziek, douchen, bewegen of even tijd nemen.",
+        "laag4": "Spark ziet landen als een overgang van een instabiele of afwezige toestand naar bewust aanwezig zijn. Hierdoor kan Spark verbanden leggen tussen wakker worden, energie, focus, rust, routine en productiviteit."
+      },
+      "ws5": {
+        "wie": "Mensen die zich aanpassen aan een nieuwe situatie of mentale toestand.",
+        "wat": "Het proces van aarden, wakker worden en bewust in de situatie komen.",
+        "wanneer": "Wanneer iemand van de ene toestand naar de andere gaat, bijvoorbeeld van slapen naar wakker en productief worden.",
+        "waar": "In dagelijkse situaties thuis, op werk of tijdens mentale overgangen.",
+        "waarom": "Om weer bewust aanwezig, stabiel en gefocust te worden.",
+        "hoe": "Door rust, routines, tijd en het verwerken van prikkels en bewustzijn."
+      },
+      "tags": [
+        "landen",
+        "aarden",
+        "bewustzijn",
+        "focus",
+        "rust",
+        "overgang",
+        "wakker",
+        "energie",
+        "prikkels",
+        "productiviteit"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:10:03.601700+00:00",
+      "status": "draft",
+      "belangrijkheid": 4,
+      "usage_count": 0,
+      "topic": "stabiliteit",
+      "snap_context": "Ik ben net wakker. even landen en koffie drinken.",
+      "metadata": {
+        "created_at": "2026-05-16T09:10:03.601720+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T09:32:11.297140+00:00"
+      }
+    },
+    {
+      "id": "snap-c35f4fa6",
+      "begrip": "Ik ben net wakker. even landen en koffie drinken.",
+      "lagen": {
+        "laag1": "Een contextzin die beschrijft dat iemand net wakker is geworden en eerst rustig wil opstarten met koffie en mentale overgang naar activiteit.",
+        "laag2": "De zin laat een natuurlijk overgangsmoment zien tussen slapen en actief worden. “Landen” betekent hier rustig bewust worden van de situatie en jezelf voorbereiden op de dag. Koffie drinken ondersteunt voor veel mensen dit proces van wakker worden en focus opbouwen.",
+        "laag3": "“Ik ben net wakker. Even landen en koffie drinken.” beschrijft een dagelijks menselijk proces waarbij iemand van een slapende toestand naar een bewuste en productieve toestand gaat.\n\nIn deze context betekent:\n\nwakker → bewust worden\nlanden → mentaal stabiliseren en in het moment komen\nkoffie drinken → energie, routine en focus ondersteunen\n\nDe zin bevat meerdere verbonden processen:\n\novergang van rust naar activiteit\nprikkelverwerking\nopbouwen van energie\nochtendroutine\nvoorbereiding op productiviteit\n\nDit soort contextzinnen zijn belangrijk omdat ze laten zien hoe woorden samen betekenis vormen binnen een situatie.",
+        "laag4": "Spark gebruikt contextzinnen om verbanden te leren tussen losse begrippen. Hierdoor leert Spark dat wakker worden, landen, koffie, energie en productiviteit vaak samen voorkomen binnen dezelfde menselijke ervaring."
+      },
+      "ws5": {
+        "wie": "Iemand die net wakker is geworden en rustig wil opstarten.",
+        "wat": "Een overgangsmoment van slapen naar bewust en actief worden.",
+        "wanneer": "In de ochtend of direct na het wakker worden.",
+        "waar": "Thuis of in een rustige omgeving tijdens het opstarten van de dag.",
+        "waarom": "Om rustig te wennen aan de nieuwe situatie en energie op te bouwen.",
+        "hoe": "Door te landen, bewust wakker te worden en bijvoorbeeld koffie te drinken als routine of ondersteuning."
+      },
+      "tags": [
+        "wakker",
+        "landen",
+        "koffie",
+        "energie",
+        "ochtend",
+        "routine",
+        "bewustzijn",
+        "focus",
+        "productiviteit",
+        "context"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:10:11.297298+00:00",
+      "status": "draft",
+      "belangrijkheid": 4,
+      "usage_count": 0,
+      "topic": "context",
+      "snap_context": "Ik ben net wakker. even landen en koffie drinken.",
+      "metadata": {
+        "created_at": "2026-05-16T09:10:11.297318+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T09:34:28.058862+00:00"
+      }
+    },
+    {
+      "id": "snap-1f55c90c",
+      "begrip": "net",
+      "lagen": {
+        "laag1": "Een net is een structuur van draden of touwen met openingen ertussen, bedoeld om iets op te vangen, tegen te houden of te dragen.",
+        "laag2": "Netten worden gebruikt door mensen voor verschillende doelen, zoals vissen, sport, beveiliging, transport en opslag. Door de open structuur kan lucht, water of licht erdoorheen terwijl grotere dingen worden tegengehouden of gevangen.",
+        "laag3": "Een net bestaat uit verbonden draden, touwen of vezels die samen een open patroon vormen. Netten kunnen gemaakt zijn van materiaal zoals nylon, katoen, kunststof of metaal.\n\nVoorbeelden van netten:\n\nvisnet\nvoetbalnet\nklimnet\nveiligheidsnet\nvracht- of aanhangernet\n\nEen net wordt gebruikt om:\n\niets op te vangen\niets tegen te houden\niets te dragen\niets te beschermen\niets te organiseren\n\nDoor de open structuur blijft het vaak licht en flexibel terwijl het toch kracht kan verdelen.\n\nHet woord “net” wordt ook figuurlijk gebruikt, zoals:\n\nsociaal netwerk\ninformatienetwerk\ntussen wal en schip vallen “door de mazen van het net”",
+        "laag4": "Spark leert dat een net een verbindende structuur is die dingen opvangt, beschermt of samenhoudt. Hierdoor kan Spark verbanden leggen tussen fysieke netten, sociale netwerken en systemen van verbinding en ondersteuning."
+      },
+      "ws5": {
+        "wie": "Mensen die netten gebruiken voor werk, sport, veiligheid of transport.",
+        "wat": "Een structuur van draden of vezels met openingen ertussen.",
+        "wanneer": "Wanneer iets gevangen, beschermd, gedragen of tegengehouden moet worden.",
+        "waar": "Bij sportvelden, visserij, transport, bouwplaatsen en opslag.",
+        "waarom": "Om dingen op te vangen, beschermen, verbinden of organiseren.",
+        "hoe": "Door draden of vezels met elkaar te verbinden tot een open maar sterke structuur."
+      },
+      "tags": [
+        "net",
+        "structuur",
+        "verbinding",
+        "bescherming",
+        "opvang",
+        "netwerk",
+        "visnet",
+        "veiligheid",
+        "ondersteuning",
+        "gereedschap"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:36:34.859462+00:00",
+      "status": "draft",
+      "belangrijkheid": 2,
+      "usage_count": 0,
+      "topic": "structuur",
+      "snap_context": "a[[elap",
+      "metadata": {
+        "created_at": "2026-05-16T09:36:34.859482+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T09:40:24.266117+00:00"
+      }
+    },
+    {
+      "id": "snap-1c34fd06",
+      "begrip": "mijne",
+      "lagen": {
+        "laag1": "“Mijne” betekent dat iets van jezelf is of bij jezelf hoort.",
+        "laag2": "“Mijne” wordt gebruikt om bezit, verbondenheid of persoonlijke relatie aan te geven. Het verwijst meestal naar een eerder genoemd object, persoon of situatie.",
+        "laag3": "“Mijne” is een bezittelijk voornaamwoord. Het betekent:\n\nvan mij\ndat hoort bij mij\ndat is mijn versie daarvan\n\nVoorbeelden:\n\nde mijne\ndat is de mijne\nmijn jas is weg, waar is de mijne?\n\nHet woord wordt gebruikt om herhaling te voorkomen:\n\n“mijn telefoon” → “de mijne”\n“mijn auto” → “de mijne”\n\n“Mijne” kan verwijzen naar:\n\nvoorwerpen\ngevoelens\nideeën\nervaringen\nrelaties\n\nDe exacte betekenis hangt af van de context van het gesprek.",
+        "laag4": "Spark leert dat “mijne” verwijst naar eigendom, persoonlijke koppeling of identificatie met iets dat eerder genoemd is. Hierdoor kan Spark context beter volgen tussen zinnen en begrijpen waar iemand naar verwijst."
+      },
+      "ws5": {
+        "wie": "Mensen die praten over iets dat van henzelf is.",
+        "wat": "Een woord dat aangeeft dat iets van jezelf is.",
+        "wanneer": "Wanneer een eerder genoemd object of situatie opnieuw wordt aangewezen.",
+        "waar": "In gesprekken en dagelijkse taal.",
+        "waarom": "Om bezit of persoonlijke verbondenheid aan te geven zonder alles te herhalen.",
+        "hoe": "Door met een bezittelijk woord terug te verwijzen naar iets uit de context."
+      },
+      "tags": [
+        "mijne",
+        "bezit",
+        "verwijzing",
+        "eigendom",
+        "context",
+        "communicatie",
+        "taal",
+        "identiteit"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:37:38.797870+00:00",
+      "status": "draft",
+      "belangrijkheid": 2,
+      "usage_count": 0,
+      "topic": "bezit",
+      "snap_context": "de mijne ook",
+      "metadata": {
+        "created_at": "2026-05-16T09:37:38.797890+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T09:44:08.690277+00:00"
+      }
+    },
+    {
+      "id": "snap-e7ece50b",
+      "begrip": "de mijne ook",
+      "lagen": {
+        "laag1": "Een reactie waarmee iemand aangeeft hetzelfde te hebben, voelen of bedoelen als een ander.",
+        "laag2": "“Mijne” verwijst naar iets dat van jezelf is. In de zin “de mijne ook” vergelijkt iemand zijn eigen situatie, bezit of ervaring met die van een ander. Het is een korte sociale reactie van herkenning of overeenkomst.",
+        "laag3": "“De mijne ook” is een informele contextzin die gebruikt wordt om aan te geven dat iets ook geldt voor jezelf. Het woord “mijne” betekent “van mij” of “die van mij”.\n\nVoorbeelden:\n\n“Mijn telefoon is leeg.” → “De mijne ook.”\n“Mijn hoofd zit vol.” → “De mijne ook.”\n“Mijn koffie is koud.” → “De mijne ook.”\n\nDe zin wordt gebruikt voor:\n\nherkenning\nsociale verbinding\nvergelijking\nbevestiging\ngedeelde ervaring\n\nDe betekenis hangt sterk af van de eerdere context in het gesprek.",
+        "laag4": "Spark leert dat “de mijne ook” verwijst naar een eerdere uitspraak en een overeenkomst aangeeft tussen twee situaties of ervaringen. Hierdoor leert Spark context overnemen uit gesprekken en verbanden leggen tussen personen, objecten en ervaringen."
+      },
+      "ws5": {
+        "wie": "Mensen die reageren op een ervaring, bezit of situatie van iemand anders.",
+        "wat": "Een uitspraak die aangeeft dat hetzelfde ook voor jezelf geldt.",
+        "wanneer": "Tijdens gesprekken waarin ervaringen of eigenschappen worden vergeleken.",
+        "waar": "In dagelijkse communicatie en sociale interacties.",
+        "waarom": "Om herkenning, overeenkomst of verbinding te tonen.",
+        "hoe": "Door te verwijzen naar een eerdere uitspraak en dezelfde situatie op jezelf toe te passen."
+      },
+      "tags": [
+        "de mijne ook",
+        "context",
+        "vergelijking",
+        "bezit",
+        "overeenkomst",
+        "reactie",
+        "gesprek",
+        "herkenning",
+        "communicatie"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T09:37:45.895653+00:00",
+      "status": "draft",
+      "belangrijkheid": 2,
+      "usage_count": 0,
+      "topic": "overeenkomst",
+      "snap_context": "de mijne ook",
+      "metadata": {
+        "created_at": "2026-05-16T09:37:45.895682+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T09:42:55.968147+00:00"
+      }
+    },
+    {
+      "id": "snap-685e8d8d",
+      "begrip": "gaan",
+      "lagen": {
+        "laag1": "Gaan betekent bewegen, vertrekken of overgaan van de ene situatie, plaats of toestand naar een andere.",
+        "laag2": "Mensen gebruiken “gaan” om beweging, verandering of een toekomstige handeling aan te geven. Het woord kan zowel letterlijk als figuurlijk gebruikt worden.",
+        "laag3": "“Gaan” is een werkwoord dat gebruikt wordt voor:\n\nverplaatsen\nvertrekken\nveranderen\nbeginnen\nverlopen\n\nLetterlijke voorbeelden:\n\nik ga naar huis\nzij gaan lopen\nhij gaat weg\n\nFiguurlijke voorbeelden:\n\nhet gaat beter\nik ga slapen\nwe gaan beginnen\nhet gesprek gaat over muziek\n\n“Gaan” kan dus verwijzen naar:\n\nfysieke beweging\nmentale overgang\ntijd\ntoestand\nintentie\nrichting\n\nDe betekenis hangt sterk af van de context waarin het gebruikt wordt.",
+        "laag4": "Spark leert dat “gaan” een overgang of verandering aanduidt tussen situaties, plaatsen of toestanden. Hierdoor kan Spark verbanden leggen tussen beweging, intentie, tijd en context."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren of objecten die bewegen of veranderen.",
+        "wat": "Een handeling van bewegen, vertrekken of veranderen.",
+        "wanneer": "Wanneer iets zich verplaatst, begint of verandert.",
+        "waar": "In fysieke locaties, situaties of mentale toestanden.",
+        "waarom": "Om beweging, verandering of intentie uit te drukken.",
+        "hoe": "Door een overgang van de ene plaats, situatie of toestand naar een andere aan te geven."
+      },
+      "tags": [
+        "gaan",
+        "beweging",
+        "verandering",
+        "overgang",
+        "vertrek",
+        "richting",
+        "actie",
+        "context",
+        "toestand"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:25:36.905670+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "overgang",
+      "snap_context": "zullen we wat gaan zagen",
+      "metadata": {
+        "created_at": "2026-05-16T10:25:36.905681+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:34:02.358626+00:00"
+      }
+    },
+    {
+      "id": "snap-9bd1a535",
+      "begrip": "zullen we wat gaan ontwerpen",
+      "lagen": {
+        "laag1": "Een voorstel om samen iets nieuws te bedenken of te maken.",
+        "laag2": "De zin wordt gebruikt om een gezamenlijke creatieve activiteit te starten. “Gaan” betekent hier niet vertrekken, maar beginnen met een handeling of proces.",
+        "laag3": "“Zullen we wat gaan ontwerpen” is een sociale en creatieve uitnodiging om samen ideeën uit te werken of iets nieuws te creëren.\n\nIn deze context betekent:\n\nzullen we → gezamenlijk voorstel\ngaan → starten of beginnen\nontwerpen → iets bedenken, plannen of creëren\n\nDe zin bevat:\n\nsamenwerking\nintentie\ncreativiteit\novergang naar actie\ngezamenlijke focus\n\nHet woord “gaan” betekent hier dus:\n\nniet weggaan\nmaar een activiteit beginnen\n\nDat laat zien hoe belangrijk context is voor betekenis.",
+        "laag4": "Spark leert dat woorden zoals “gaan” verschillende betekenissen kunnen hebben afhankelijk van de context. Hierdoor leert Spark onderscheid maken tussen vertrekken, starten, veranderen of samenwerken binnen gesprekken."
+      },
+      "ws5": {
+        "wie": "Mensen die samen iets willen bedenken of maken.",
+        "wat": "Mensen die samen iets willen bedenken of maken.",
+        "wanneer": "Wanneer mensen ideeën willen uitwerken of samen iets willen creëren.",
+        "waar": "In gesprekken, brainstorms of creatieve situaties.",
+        "waarom": "Om samen nieuwe ideeën, plannen of ontwerpen te ontwikkelen.",
+        "hoe": "Door een gezamenlijke uitnodiging te doen om een creatieve activiteit te beginnen."
+      },
+      "tags": [
+        "ontwerpen",
+        "gaan",
+        "samenwerking",
+        "creativiteit",
+        "voorstel",
+        "context",
+        "actie",
+        "intentie",
+        "communicatie",
+        "brainstormen"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:25:44.090774+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "creativiteit",
+      "snap_context": "zullen we wat gaan zagen",
+      "metadata": {
+        "created_at": "2026-05-16T10:25:44.090793+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T10:36:27.466943+00:00"
+      }
+    },
+    {
+      "id": "snap-cd2ba519",
+      "begrip": "Ik ga niet weg :P",
+      "lagen": {
+        "laag1": "Een informele reactie waarmee iemand aangeeft dat een gesprek nog niet afgelopen is.",
+        "laag2": "De zin werd gebruikt nadat Spark dacht dat het gesprek beëindigd werd en daarom afscheid nam. Met “Ik ga niet weg :P” corrigeert de gebruiker dat misverstand op een speelse manier.",
+        "laag3": "“Ik ga niet weg :P” is een sociale en informele correctie op een verkeerde interpretatie. Spark dacht dat de gebruiker vertrok of het gesprek beëindigde en reageerde met een afscheid zoals:\n\n“tot ziens”\n“fijne dag”\n\nDe gebruiker bedoelde dat echter niet en gaf met deze zin aan:\n\nhet gesprek gaat nog door\nde interpretatie was fout\nde situatie is luchtig bedoeld\n\nDe “:P” geeft extra context:\n\nspeelsheid\nhumor\ngeen boosheid\nluchtige correctie\n\nDe zin bevat dus:\n\ncontextcorrectie\nsociale feedback\nintentieverduidelijking\nhumor",
+        "laag4": "Spark leert dat niet elke pauze, losse zin of contextwisseling betekent dat een gesprek eindigt. Hierdoor leert Spark beter onderscheid maken tussen afsluiten, pauzeren, corrigeren en doorpraten."
+      },
+      "ws5": {
+        "wie": "Iemand die reageert op een verkeerde interpretatie in een gesprek.",
+        "wat": "Een speelse correctie dat het gesprek nog niet voorbij is.",
+        "wanneer": "Wanneer iemand onterecht denkt dat een gesprek wordt afgesloten.",
+        "waar": "In informele gesprekken en chatcommunicatie.",
+        "waarom": "Om duidelijk te maken dat de persoon nog aanwezig is en verder wil praten.",
+        "hoe": "Door een korte, luchtige reactie met humor of emotionele toon."
+      },
+      "tags": [
+        "ik ga niet weg",
+        "misverstand",
+        "correctie",
+        "humor",
+        "context",
+        "gesprek",
+        "communicatie",
+        "interpretatie",
+        "reactie"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:27:59.509718+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "communicatie",
+      "snap_context": "appesap",
+      "metadata": {
+        "created_at": "2026-05-16T10:27:59.509738+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:32:34.855077+00:00"
+      }
+    },
+    {
+      "id": "snap-8471898a",
+      "begrip": "Speech-to-Text",
+      "lagen": {
+        "laag1": "Speech-to-Text is technologie die gesproken woorden automatisch omzet naar geschreven tekst.",
+        "laag2": "Speech-to-Text maakt het mogelijk om met stem te communiceren in plaats van te typen. Het wordt gebruikt voor toegankelijkheid, snelheid, gemak en interactie met digitale systemen zoals AI-assistenten.",
+        "laag3": "Speech-to-Text is een vorm van spraakherkenning waarbij een systeem gesproken taal analyseert en omzet naar digitale tekst. Het systeem gebruikt audio-invoer via een microfoon en probeert woorden, zinnen en betekenis te herkennen.\n\nHet wordt gebruikt voor:\n\ndicteren\nchatten\nnotities maken\nAI-interactie\nhandsfree bediening\ntoegankelijkheid\n\nSpeech-to-Text hangt samen met:\n\ntaalverwerking\ncontextbegrip\nuitspraak\nmicrofoons\nAI\ncommunicatie\n\nMogelijke uitdagingen:\n\nverkeerde woordherkenning\nachtergrondgeluid\ndialecten\nontbrekende leestekens\ncontextfouten\n\nBinnen gesprekken met AI beïnvloedt Speech-to-Text vaak:\n\nspontaniteit\nsnelheid van communicatie\nnatuurlijke taal\ninterpretatie van context",
+        "laag4": "Spark leert dat Speech-to-Text gesproken communicatie omzet naar tekst en dat gesproken taal andere patronen bevat dan getypte taal. Hierdoor kan Spark beter omgaan met natuurlijke gesprekken, contextfouten en menselijke spreekstijl."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die gesproken taal verwerken.",
+        "wat": "Technologie die spraak omzet naar geschreven tekst.",
+        "wanneer": "Wanneer iemand praat tegen een digitaal systeem of tekst wil dicteren.",
+        "waar": "Op telefoons, computers, AI-systemen en andere apparaten met spraakherkenning.",
+        "waarom": "Om sneller, natuurlijker en toegankelijker te communiceren.",
+        "hoe": "Door audio via een microfoon te analyseren en met spraakherkenning om te zetten naar tekst."
+      },
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "transcriptie",
+        "communicatie",
+        "ai",
+        "stemherkenning",
+        "taal",
+        "invoer",
+        "context"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:44:59.098378+00:00",
+      "status": "draft",
+      "belangrijkheid": 4,
+      "usage_count": 0,
+      "topic": "spraak",
+      "snap_context": "Speech-to-Text aanzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:44:59.098397+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:55:00.965956+00:00"
+      }
+    },
+    {
+      "id": "snap-576ca20b",
+      "begrip": "Text-to-Speech",
+      "lagen": {
+        "laag1": "Text-to-Speech is technologie die geschreven tekst omzet naar gesproken geluid.",
+        "laag2": "Text-to-Speech maakt het mogelijk dat een systeem tekst hardop voorleest. Het wordt gebruikt voor toegankelijkheid, AI-gesprekken, ondersteuning bij lezen en natuurlijke interactie tussen mens en computer.",
+        "laag3": "Text-to-Speech is een technologie waarbij digitale tekst automatisch wordt omgezet naar kunstmatige spraak. Een systeem analyseert woorden, zinnen en taalstructuur en genereert vervolgens gesproken audio.\n\nHet wordt gebruikt voor:\n\nAI-stemmen\nvoorleessoftware\nnavigatiesystemen\ntoegankelijkheid\nvirtuele assistenten\neducatie\n\nText-to-Speech hangt samen met:\n\ntaalverwerking\nstemsyntese\nuitspraak\ncommunicatie\nAI\naudio\n\nModerne systemen proberen ook:\n\nemotie\ntoon\nritme\nnadruk\nnatuurlijkheid\n\nna te bootsen.\n\nMogelijke uitdagingen:\n\nverkeerde uitspraak\nmonotone stemmen\ncontextfouten\nemotionele onnauwkeurigheid\n\nBinnen AI-systemen helpt Text-to-Speech om gesprekken menselijker en directer te maken.",
+        "laag4": "Spark leert dat Text-to-Speech geschreven informatie omzet naar gesproken communicatie. Hierdoor kan Spark interactie ondersteunen via stem, voorlezen en natuurlijke audio-uitvoer."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die tekst laten voorlezen.",
+        "wat": "Technologie die geschreven tekst omzet naar gesproken audio.",
+        "wanneer": "Wanneer tekst hardop afgespeeld of voorgelezen moet worden.",
+        "waar": "Op telefoons, computers, AI-systemen, navigatie en toegankelijkheidssoftware.",
+        "waarom": "Om communicatie natuurlijker, toegankelijker en hoorbaar te maken.",
+        "hoe": "Door tekst te analyseren en via stemsyntese om te zetten naar kunstmatige spraak."
+      },
+      "tags": [
+        "text-to-speech",
+        "spraak",
+        "audio",
+        "stem",
+        "communicatie",
+        "ai",
+        "taal",
+        "voorlezen",
+        "stemsyntese",
+        "interactie"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:45:06.253824+00:00",
+      "status": "draft",
+      "belangrijkheid": 4,
+      "usage_count": 0,
+      "topic": "spraak",
+      "snap_context": "Speech-to-Text aanzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:45:06.253854+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:56:39.394284+00:00"
+      }
+    },
+    {
+      "id": "snap-c5ea7ee2",
+      "begrip": "aanzetten",
+      "lagen": {
+        "laag1": "Aanzetten betekent iets starten, inschakelen of actief maken.",
+        "laag2": "Mensen gebruiken “aanzetten” wanneer een apparaat, functie, proces of activiteit moet beginnen met werken of actief worden.",
+        "laag3": "“Aanzetten” is een handeling waarbij iets van een inactieve naar een actieve toestand gaat.\n\nVoorbeelden:\n\nlicht aanzetten\ncomputer aanzetten\nmuziek aanzetten\ntelevisie aanzetten\nSpeech-to-Text aanzetten\n\nHet woord kan verwijzen naar:\n\nelektriciteit inschakelen\neen functie starten\neen proces activeren\ngeluid of media starten\nactiviteit beginnen\n\n“Aanzetten” hangt vaak samen met:\n\ncontrole\nactivatie\nenergie\ngebruik\ninteractie\nvoorbereiding\n\nDe betekenis hangt af van de context waarin het gebruikt wordt.",
+        "laag4": "Spark leert dat “aanzetten” een overgang is van inactief naar actief. Hierdoor kan Spark verbanden leggen tussen apparaten, functies, processen en toestandsveranderingen."
+      },
+      "ws5": {
+        "wie": "Mensen die apparaten, functies of processen activeren.",
+        "wat": "Het starten of actief maken van iets.",
+        "wanneer": "Wanneer iets gebruikt of gestart moet worden.",
+        "waar": "Bij apparaten, systemen, functies en dagelijkse handelingen.",
+        "waarom": "Om iets te laten werken, gebruiken of activeren.",
+        "hoe": "Door een functie, stroom of proces bewust in te schakelen."
+      },
+      "tags": [
+        "aanzetten",
+        "inschakelen",
+        "starten",
+        "actief",
+        "activatie",
+        "apparaat",
+        "functie",
+        "proces",
+        "toestand"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:45:13.689140+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "toestand",
+      "snap_context": "Speech-to-Text aanzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:45:13.689160+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:53:11.286975+00:00"
+      }
+    },
+    {
+      "id": "snap-18a89266",
+      "begrip": "Speech-to-Text aanzetten",
+      "lagen": {
+        "laag1": "Het inschakelen van een functie die gesproken woorden omzet naar tekst.",
+        "laag2": "Speech-to-Text wordt gebruikt wanneer iemand liever praat dan typt. Het systeem luistert naar gesproken taal en zet dit automatisch om in geschreven tekst voor communicatie of invoer.",
+        "laag3": "“Speech-to-Text aanzetten” betekent dat een spraakherkenningsfunctie wordt geactiveerd. Deze technologie analyseert gesproken geluid en probeert woorden, zinnen en betekenis om te zetten naar digitale tekst.\n\nHet wordt gebruikt voor:\n\nsneller communiceren\nhandsfree invoer\ntoegankelijkheid\nnotities maken\ngesprekken voeren met AI-systemen\n\nDe kwaliteit van Speech-to-Text hangt af van:\n\nuitspraak\nachtergrondgeluid\ntaalherkenning\ncontextbegrip\nmicrofoonkwaliteit\n\nBinnen gesprekken met AI kan Speech-to-Text extra uitdagingen geven:\n\nverkeerde woordherkenning\nontbrekende leestekens\ncontextfouten\nsemantische verwarring",
+        "laag4": "Spark leert dat Speech-to-Text gesproken communicatie omzet naar tekst en dat hierbij interpretatiefouten kunnen ontstaan. Hierdoor leert Spark beter omgaan met context, uitspraakvariaties en natuurlijke gesproken taal."
+      },
+      "ws5": {
+        "wie": "Mensen die gesproken taal willen omzetten naar tekst.",
+        "wat": "Het activeren van een systeem dat spraak omzet naar geschreven tekst.",
+        "wanneer": "Wanneer iemand wil praten in plaats van typen.",
+        "waar": "Op apparaten en systemen met spraakherkenning.",
+        "waarom": "Om sneller, makkelijker of toegankelijker te communiceren.",
+        "hoe": "Door een microfoon en spraakherkenningstechnologie te gebruiken om geluid naar tekst te vertalen."
+      },
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "communicatie",
+        "invoer",
+        "transcriptie",
+        "ai",
+        "context",
+        "stemherkenning"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:45:20.759858+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "spraak",
+      "snap_context": "Speech-to-Text aanzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:45:20.759880+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T10:48:45.790976+00:00"
+      }
+    },
+    {
+      "id": "snap-c112ce31",
+      "begrip": "uitzetten",
+      "lagen": {
+        "laag1": "Uitzetten betekent iets stoppen, uitschakelen of inactief maken.",
+        "laag2": "Mensen gebruiken “uitzetten” wanneer een apparaat, functie, proces of activiteit moet stoppen met werken of actief zijn.",
+        "laag3": "“Uitzetten” is een handeling waarbij iets van een actieve naar een inactieve toestand gaat.\n\nVoorbeelden:\n\nlicht uitzetten\ntelevisie uitzetten\nalarm uitzetten\nSpeech-to-Text uitzetten\nmuziek uitzetten\n\nHet woord kan verwijzen naar:\n\nelektriciteit stoppen\neen functie uitschakelen\neen proces beëindigen\ngeluid stoppen\nactiviteit onderbreken\n\n“Uitzetten” wordt vaak gekoppeld aan:\n\ncontrole\nrust\nenergiebesparing\nfocus\nveiligheid\nbeëindiging van activiteit\n\nDe betekenis hangt af van de context waarin het gebruikt wordt.",
+        "laag4": "Spark leert dat “uitzetten” een overgang is van actief naar inactief. Hierdoor kan Spark verbanden leggen tussen apparaten, functies, processen en toestandsveranderingen."
+      },
+      "ws5": {
+        "wie": "Mensen die controle hebben over apparaten, functies of processen.",
+        "wat": "Het stoppen of uitschakelen van iets actiefs.",
+        "wanneer": "Wanneer iets niet meer nodig is of moet stoppen.",
+        "waar": "Bij apparaten, systemen, functies en dagelijkse handelingen.",
+        "waarom": "Om activiteit te beëindigen, rust te creëren of controle te houden.",
+        "hoe": "Door een functie, stroom of proces bewust te stoppen of uit te schakelen."
+      },
+      "tags": [
+        "Spark leert dat “uitzetten” een overgang is van actief naar inactief. Hierdoor kan Spark verbanden leggen tussen apparaten",
+        "functies",
+        "processen en toestandsveranderingen."
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:45:34.094421+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "toestand",
+      "snap_context": "Speech-to-Text uitzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:45:34.094454+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:51:50.892302+00:00"
+      }
+    },
+    {
+      "id": "snap-807b898a",
+      "begrip": "Speech-to-Text uitzetten",
+      "lagen": {
+        "laag1": "Het uitschakelen van een functie die gesproken woorden omzet naar tekst.",
+        "laag2": "Wanneer Speech-to-Text uitstaat, stopt het systeem met luisteren naar spraak en worden gesproken woorden niet meer automatisch omgezet naar tekst. Mensen schakelen dit uit wanneer ze klaar zijn met praten of weer handmatig willen typen.",
+        "laag3": "“Speech-to-Text uitzetten” betekent dat de spraakherkenningsfunctie wordt gedeactiveerd. Hierdoor verwerkt het systeem geen gesproken invoer meer via de microfoon.\n\nDit gebeurt bijvoorbeeld:\n\nna een gesprek\nwanneer iemand klaar is met dicteren\nom fouten in spraakherkenning te voorkomen\nvoor privacy of rust\nom terug te gaan naar typen\n\nHet uitschakelen van Speech-to-Text verandert de manier van interactie:\n\nvan spreken → typen\nvan audio-invoer → handmatige invoer\n\nBinnen AI-systemen kan dit ook invloed hebben op:\n\ngesprekstempo\ncontextverwerking\nspontane communicatie\nfoutgevoeligheid",
+        "laag4": "Spark leert dat het uitzetten van Speech-to-Text een verandering is van invoermethode en interactiestijl. Hierdoor kan Spark rekening houden met verschillen tussen gesproken en getypte communicatie."
+      },
+      "ws5": {
+        "wie": "Mensen die stoppen met gesproken invoer.",
+        "wat": "Het uitschakelen van spraak-naar-tekstverwerking.",
+        "wanneer": "Wanneer iemand klaar is met praten of terug wil naar typen.",
+        "waar": "Op apparaten en systemen met spraakherkenning.",
+        "waarom": "Om gesproken invoer te stoppen of handmatige controle terug te krijgen.",
+        "hoe": "Door de Speech-to-Text functie of microfoon uit te schakelen."
+      },
+      "tags": [
+        "speech-to-text",
+        "spraak",
+        "tekst",
+        "invoer",
+        "communicatie",
+        "microfoon",
+        "transcriptie",
+        "interactie",
+        "typen"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:45:41.806739+00:00",
+      "status": "draft",
+      "belangrijkheid": 2,
+      "usage_count": 0,
+      "topic": "spraak",
+      "snap_context": "Speech-to-Text uitzetten",
+      "metadata": {
+        "created_at": "2026-05-16T10:45:41.806759+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T10:50:09.100989+00:00"
+      }
+    },
+    {
+      "id": "snap-cb656849",
+      "begrip": "text",
+      "lagen": {
+        "laag1": "Text is geschreven taal die informatie, gedachten of communicatie bevat.",
+        "laag2": "Mensen gebruiken text om ideeën, kennis, emoties en instructies vast te leggen of te delen. Text kan digitaal of op papier bestaan en vormt een basis voor communicatie tussen mensen en systemen.",
+        "laag3": "Text bestaat uit woorden, tekens en zinnen die samen betekenis vormen. Het wordt gebruikt om informatie over te brengen, kennis op te slaan en communicatie mogelijk te maken.\n\nText kan verschillende vormen hebben:\n\nberichten\nboeken\ncode\ndocumenten\nchatgesprekken\ninstructies\nondertiteling\n\nText hangt samen met:\n\ntaal\ncommunicatie\nbetekenis\ncontext\nlezen\nschrijven\ninformatieverwerking\n\nBinnen digitale systemen speelt text een belangrijke rol bij:\n\nAI-interactie\nzoekmachines\ndatabases\ntranscriptie\nspraaktechnologie\n\nDe betekenis van text ontstaat niet alleen door losse woorden, maar ook door context, structuur en relaties tussen zinnen.",
+        "laag4": "Spark leert dat text een structuur van taal en betekenis is waarmee informatie opgeslagen, verwerkt en gecommuniceerd wordt. Hierdoor kan Spark verbanden leggen tussen woorden, context en intentie."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die geschreven informatie gebruiken.",
+        "wat": "Geschreven taal die betekenis en informatie bevat.",
+        "wanneer": "Wanneer informatie opgeslagen, gelezen of gedeeld wordt.",
+        "waar": "In boeken, berichten, documenten, schermen en digitale systemen.",
+        "waarom": "Om kennis, communicatie en betekenis over te brengen.",
+        "hoe": "Door woorden, symbolen en zinnen te combineren tot begrijpelijke taal."
+      },
+      "tags": [
+        "text",
+        "tekst",
+        "taal",
+        "communicatie",
+        "informatie",
+        "betekenis",
+        "schrijven",
+        "lezen",
+        "context",
+        "woorden"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:56:53.489086+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "taal",
+      "snap_context": "apesap",
+      "metadata": {
+        "created_at": "2026-05-16T10:56:53.489108+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:58:32.853983+00:00"
+      }
+    },
+    {
+      "id": "snap-c025dd20",
+      "begrip": "speech",
+      "lagen": {
+        "laag1": "Speech is gesproken taal waarmee informatie, gedachten of emoties worden gecommuniceerd.",
+        "laag2": "Mensen gebruiken speech om direct met anderen of systemen te communiceren via stem, geluid en uitspraak. Speech bevat niet alleen woorden, maar ook toon, emotie, ritme en nadruk.",
+        "laag3": "Speech is een vorm van verbale communicatie waarbij geluid en taal worden gebruikt om betekenis over te brengen. Het ontstaat door spraakorganen zoals de mond, tong en stembanden samen te gebruiken.\n\nSpeech wordt gebruikt voor:\n\ngesprekken\npresentaties\nuitleg\nemoties uiten\nopdrachten geven\ncommunicatie met AI\n\nSpeech bestaat uit:\n\nwoorden\nklanken\nintonatie\nritme\ntempo\nemotionele toon\n\nBinnen technologie hangt speech samen met:\n\nSpeech-to-Text\nText-to-Speech\nstemherkenning\nAI-assistenten\naudioverwerking\n\nSpeech bevat vaak meer context dan tekst alleen, omdat emotie en nadruk extra betekenis kunnen geven.",
+        "laag4": "Spark leert dat speech gesproken communicatie is waarin woorden, geluid en emotionele signalen samen betekenis vormen. Hierdoor kan Spark beter omgaan met natuurlijke gesprekken en menselijke interactie."
+      },
+      "ws5": {
+        "wie": "Mensen en systemen die gesproken taal gebruiken.",
+        "wat": "Gesproken communicatie via stem en geluid.",
+        "wanneer": "Wanneer mensen praten, uitleg geven of communiceren.",
+        "waar": "In gesprekken, presentaties, telefoons, AI-systemen en sociale interacties.",
+        "waarom": "Om informatie, emoties en intenties over te brengen.",
+        "hoe": "Door geluiden en woorden via stem en spraakorganen te vormen en te interpreteren."
+      },
+      "tags": [
+        "speech",
+        "spraak",
+        "communicatie",
+        "stem",
+        "taal",
+        "geluid",
+        "emotie",
+        "uitspraak",
+        "audio",
+        "interactie"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T10:57:02.997413+00:00",
+      "status": "draft",
+      "belangrijkheid": 4,
+      "usage_count": 0,
+      "topic": "spraak",
+      "snap_context": "appesap",
+      "metadata": {
+        "created_at": "2026-05-16T10:57:02.997431+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T10:59:56.002495+00:00"
+      }
+    },
+    {
+      "id": "snap-e2f1ed5d",
+      "begrip": "hahaha",
+      "lagen": {
+        "laag1": "“Hahaha” is een geschreven vorm van lachen of amusement.",
+        "laag2": "Mensen gebruiken “hahaha” in gesprekken om humor, plezier, ontspanning of een luchtige sfeer te tonen. Het helpt om emotie zichtbaar te maken in tekstcommunicatie.",
+        "laag3": "“Hahaha” is een tekstuele representatie van lachen. Het wordt gebruikt in chats, berichten en online communicatie om aan te geven dat iemand iets grappig, ongemakkelijk, absurd of leuk vindt.\n\nDe betekenis kan verschillen afhankelijk van:\n\nhoeveelheid herhaling\ncontext\ntiming\nrelatie tussen personen\n\nVoorbeelden:\n\nhaha → lichte glimlach\nhahaha → duidelijk lachen\nHAHAHA → hard lachen of overdreven reactie\n\n“Hahaha” kan gebruikt worden voor:\n\nhumor\nontspanning\nsociale verbinding\nsarcasme\nspanning verminderen\nvriendelijkheid tonen\n\nHet woord draagt vaak emotionele context die niet direct zichtbaar is in gewone tekst.",
+        "laag4": "Spark leert dat “hahaha” een emotioneel en sociaal signaal is binnen tekstcommunicatie. Hierdoor kan Spark beter herkennen wanneer een gesprek luchtig, grappig of speels bedoeld is."
+      },
+      "ws5": {
+        "wie": "Mensen die reageren op iets grappigs of luchtigs.",
+        "wat": "Een geschreven vorm van lachen.",
+        "wanneer": "Tijdens humor, plezier of sociale interactie.",
+        "waar": "In chats, berichten, sociale media en gesprekken.",
+        "waarom": "Om emotie, humor of ontspanning te tonen.",
+        "hoe": "Door herhaling van klanken die lachen nabootsen in tekstvorm."
+      },
+      "tags": [
+        "hahaha",
+        "lachen",
+        "humor",
+        "emotie",
+        "communicatie",
+        "plezier",
+        "sociaal",
+        "reactie",
+        "tekst",
+        "sfeer",
+        "uiting"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T11:01:33.206610+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "emotie",
+      "snap_context": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+      "metadata": {
+        "created_at": "2026-05-16T11:01:33.206624+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T11:04:53.366194+00:00"
+      }
+    },
+    {
+      "id": "snap-1ce87011",
+      "begrip": "lijf",
+      "lagen": {
+        "laag1": "Het lijf is het fysieke lichaam van een mens of dier.",
+        "laag2": "Mensen gebruiken het woord “lijf” vaak wanneer ze praten over lichamelijke gevoelens, beweging, gezondheid, aanraking of fysieke aanwezigheid. Het woord klinkt meestal persoonlijker en menselijker dan “lichaam”.",
+        "laag3": "Het lijf verwijst naar het fysieke gedeelte van een levend wezen. Het omvat onder andere:\n\nspieren\norganen\nhuid\nbotten\nbeweging\nlichamelijke sensaties\n\n“Mijn lijf” wordt vaak gebruikt in context van:\n\nvermoeidheid\npijn\nontspanning\nemoties voelen\nspanning\ngezondheid\naanraking\nenergie\n\nHet woord heeft vaak een meer gevoelsmatige of persoonlijke lading dan het formelere woord “lichaam”.\n\nVoorbeelden:\n\nmijn lijf is moe\nluisteren naar je lijf\nspanning in je lijf voelen\nje lijf ontspannen\n\nLijf hangt samen met:\n\nbewustzijn\ngevoel\ngezondheid\nbeweging\nemoties\nenergie\nfysieke ervaring",
+        "laag4": "Spark leert dat “lijf” verwijst naar de fysieke en gevoelsmatige kant van een menselijk lichaam. Hierdoor kan Spark verbanden leggen tussen lichamelijke ervaringen, emoties, energie en bewustzijn."
+      },
+      "ws5": {
+        "wie": "Mensen en dieren met een fysiek lichaam.",
+        "wat": "Het fysieke lichaam en de lichamelijke aanwezigheid.",
+        "wanneer": "Wanneer gesproken wordt over fysieke gevoelens, gezondheid of beweging.",
+        "waar": "Overal waar levende wezens zich lichamelijk bevinden.",
+        "waarom": "Om lichamelijke ervaringen, sensaties en fysieke aanwezigheid te beschrijven.",
+        "hoe": "Door spieren, organen, huid en andere lichamelijke processen samen te laten functioneren."
+      },
+      "tags": [
+        "lijf",
+        "lichaam",
+        "gevoel",
+        "gezondheid",
+        "bewustzijn",
+        "energie",
+        "emoties",
+        "beweging",
+        "mens",
+        "fysiek"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T11:01:40.193806+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "lichaam",
+      "snap_context": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+      "metadata": {
+        "created_at": "2026-05-16T11:01:40.193824+00:00",
+        "created_via": "snap",
+        "is_sentence": false,
+        "updated_at": "2026-05-16T11:07:14.973948+00:00"
+      }
+    },
+    {
+      "id": "snap-6f89c0d9",
+      "begrip": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+      "lagen": {
+        "laag1": "Een humoristische reactie waarmee iemand aangeeft verward, moe of niet scherp te zijn.",
+        "laag2": "De zin speelt met de uitdrukking “niet weten waar je hoofd staat”. Door letterlijk te zeggen dat het hoofd “op mijn lijf” staat, ontstaat een grappige en luchtige reactie op mentale vermoeidheid of chaos.",
+        "laag3": "“Waar mijn hoofd staat vandaag? hahaha op mijn lijf” is een speelse contextzin die humor gebruikt rondom mentale toestand en taalgebruik.\n\nNormaal betekent:\n\n“ik weet niet waar mijn hoofd staat”\ndat iemand:\ndruk is\noverprikkeld is\nmoe is\nverward is\nchaos ervaart\n\nIn deze zin wordt dat figuurlijk taalgebruik letterlijk omgedraaid:\n\nwaar staat mijn hoofd?\nop mijn lijf\n\nDaardoor ontstaat humor via:\n\nwoordspeling\nletterlijke interpretatie\nabsurditeit\nzelfspot\n\nDe “hahaha” geeft aan dat:\n\nde uitspraak speels bedoeld is\nde situatie niet zwaar opgevat moet worden\ner een luchtige emotionele toon aanwezig is\n\nDe zin bevat:\n\nhumor\nemotionele uiting\ncontextspel\ntaalverwarring als grap\nsociale ontspanning",
+        "laag4": "Spark leert dat mensen vaak spelen met letterlijke en figuurlijke betekenissen om humor te maken. Hierdoor leert Spark beter omgaan met woordspelingen, zelfspot, emotionele toon en contextuele humor."
+      },
+      "ws5": {
+        "wie": "Iemand die humor gebruikt om een mentale toestand of verwarring uit te drukken.",
+        "wat": "Een grappige woordspeling op de uitdrukking “niet weten waar je hoofd staat”.",
+        "wanneer": "Wanneer iemand zich moe, druk, chaotisch of verward voelt.",
+        "waar": "In informele gesprekken en sociale communicatie.",
+        "waarom": "Om spanning, vermoeidheid of verwarring luchtig en humoristisch uit te drukken.",
+        "hoe": "Door een figuurlijke uitdrukking letterlijk te interpreteren als grap."
+      },
+      "tags": [
+        "humor",
+        "hoofd",
+        "lijf",
+        "woordspeling",
+        "context",
+        "hahaha",
+        "emotie",
+        "uiting",
+        "zelfspot",
+        "communicatie"
+      ],
+      "bron": "auto-detected",
+      "detected_by": "De Willem",
+      "detected_at": "2026-05-16T11:01:47.286886+00:00",
+      "status": "draft",
+      "belangrijkheid": 3,
+      "usage_count": 0,
+      "topic": "humor",
+      "snap_context": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+      "metadata": {
+        "created_at": "2026-05-16T11:01:47.286906+00:00",
+        "created_via": "snap",
+        "is_sentence": true,
+        "updated_at": "2026-05-16T11:08:50.078763+00:00"
       }
     }
   ]

@@ -67,6 +67,10 @@ STOPWORDS = {
 TIME_TOKENS = {"uur", "minuut", "minuten", "seconde", "seconden", "dag", "dagen", "week",
                "weken", "maand", "maanden", "jaar", "jaren"}
 
+# Placeholder-woorden die de user typt als workaround (bv. snap-bug). Geen echte vocab.
+# TODO: zodra snap altijd werkt → "appeflap" als snap-bug oplossen en hier weghalen.
+PLACEHOLDER_TOKENS = {"appeflap", "appelflap"}
+
 WORD_RE = re.compile(r"[a-zA-ZàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ']+")
 
 
@@ -180,7 +184,7 @@ async def unused_vocab(
         for tok in _tokenize(msg):
             if len(tok) < 3:
                 continue
-            if tok in STOPWORDS or tok in TIME_TOKENS:
+            if tok in STOPWORDS or tok in TIME_TOKENS or tok in PLACEHOLDER_TOKENS:
                 continue
             if tok in known:
                 continue

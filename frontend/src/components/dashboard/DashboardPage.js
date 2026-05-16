@@ -10,6 +10,68 @@ import {
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
+// Bouw de "Recente Gesprekken" lijst op uit live data (Spark, Community, Privé)
+function buildRecentChats(sparkLog, community, contacts) {
+  const fmtTime = (iso) => {
+    if (!iso) return '';
+    try {
+      const t = new Date(iso);
+      const now = new Date();
+      const diffMs = now - t;
+      const diffMin = Math.floor(diffMs / 60000);
+      if (diffMin < 1) return 'nu';
+      if (diffMin < 60) return `${diffMin}m`;
+      if (diffMs < 24 * 3600 * 1000) {
+        return t.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+      }
+      return t.toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit' });
+    } catch { return ''; }
+  };
+
+  const items = [];
+
+  // Spark AI laatste gesprek
+  const sparkConv = sparkLog?.conversations?.[0];
+  if (sparkConv) {
+    const msg = sparkConv.user_message || sparkConv.spark_response || '';
+    items.push({
+      from: 'Spark AI',
+      msg: msg.length > 60 ? msg.slice(0, 60) + '…' : msg,
+      time: fmtTime(sparkConv.timestamp),
+      ts: sparkConv.timestamp,
+      color: '#f59e0b',
+    });
+  }
+
+  // Community laatste bericht
+  const commMsg = community?.messages?.[0];
+  if (commMsg) {
+    const txt = commMsg.message || '';
+    items.push({
+      from: commMsg.user_name ? `Community · ${commMsg.user_name}` : 'Community',
+      msg: txt.length > 60 ? txt.slice(0, 60) + '…' : txt,
+      time: fmtTime(commMsg.timestamp),
+      ts: commMsg.timestamp,
+      color: '#a855f7',
+    });
+  }
+
+  // Privé: eerste contact met een last_message
+  const contactList = contacts?.contacts || [];
+  const lastPrive = contactList.find(c => c.last_message);
+  if (lastPrive) {
+    items.push({
+      from: lastPrive.naam || 'Privé',
+      msg: lastPrive.last_message,
+      time: lastPrive.last_time || '',
+      ts: null,
+      color: lastPrive.color || '#3b82f6',
+    });
+  }
+
+  return items;
+}
+
 export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const { user, isAdmin } = useAuth();
   const [knowledgeStats, setKnowledgeStats] = useState(null);
@@ -19,6 +81,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const [storageStats, setStorageStats] = useState(null);
   const [shadowStats, setShadowStats] = useState(null);
   const [shadowUnused, setShadowUnused] = useState(null);
+  const [recentChats, setRecentChats] = useState([]);
 
   useEffect(() => {
     if (activePage !== 'dashboard') return;
@@ -31,7 +94,10 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       user?.id ? fetch(`${API}/api/archive/${user.id}/stats`).then(r => r.json()).catch(() => null) : null,
       fetch(`${API}/api/chat/shadow/stats`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/chat/shadow/unused`).then(r => r.json()).catch(() => null),
-    ]).then(([kb, files, users, health, storage, shadow, unused]) => {
+      user?.id ? fetch(`${API}/api/chat/logs/${user.id}?limit=1`).then(r => r.json()).catch(() => null) : null,
+      fetch(`${API}/api/bots/community/messages?limit=1`).then(r => r.json()).catch(() => null),
+      user?.id ? fetch(`${API}/api/contacts/list?user_id=${user.id}`).then(r => r.json()).catch(() => null) : null,
+    ]).then(([kb, files, users, health, storage, shadow, unused, sparkLog, community, contacts]) => {
       setKnowledgeStats(kb);
       setFileStats(files);
       setUserStats(users);
@@ -39,6 +105,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       setStorageStats(storage);
       setShadowStats(shadow);
       setShadowUnused(unused);
+      setRecentChats(buildRecentChats(sparkLog, community, contacts));
     });
   }, [activePage, user?.id]);
 
@@ -272,11 +339,9 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             {/* Gesprekken */}
             <Card title="Gesprekken" icon={MessageSquare} accent="#06b6d4" onClick={() => onNavigate('chat', '/chat')}>
               <div className="space-y-2">
-                {[
-                  { from: 'Spark AI', msg: 'Hoe kan ik je helpen?', time: 'Nu', color: '#f59e0b' },
-                  { from: 'Community', msg: '4 nieuwe berichten', time: '14:30', color: '#a855f7' },
-                  { from: 'Sandra', msg: 'Die analyse ziet er goed uit', time: '15:30', color: '#3b82f6' },
-                ].map((c, i) => (
+                {recentChats.length === 0 ? (
+                  <p className="text-xs text-slate-500 italic">Nog geen recente gesprekken.</p>
+                ) : recentChats.map((c, i) => (
                   <div key={i} className="flex items-center gap-2.5">
                     <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" style={{ background: c.color }}>
                       {c.from[0]}

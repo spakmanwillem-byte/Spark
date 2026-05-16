@@ -13783,11 +13783,63 @@
         "session_id": "default",
         "gesprek_nummer": 523
       }
+    },
+    {
+      "id": "conv-1fc97412",
+      "timestamp": "2026-05-16T11:43:30.233642+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 524
+      }
+    },
+    {
+      "id": "conv-c278cf61",
+      "timestamp": "2026-05-16T11:44:52.409481+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "test na fixes",
+      "spark_response": "**Test**: Een test is een methode om te controleren of iets goed werkt of klopt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **fixes** (opgeslagen als kaarten)\n\nWat houdt 'fixes' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Test"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "fixes"
+        ],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 525
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 523,
-    "last_updated": "2026-05-16T11:09:06.969557+00:00"
+    "total_conversations": 525,
+    "last_updated": "2026-05-16T11:44:52.409481+00:00"
   }
 }

@@ -65,17 +65,69 @@ def _send_confirmation_pm(bug: dict) -> None:
     fp = PRIVE_DIR / f"{pair[0]}__{pair[1]}.json"
     data = load_json(fp, default={"messages": []})
     when = bug.get("when") or "onbekend tijdstip"
+    page = bug.get("page")
+    desc = (bug.get("description") or "").strip()
+    snippet = desc[:140] + ("…" if len(desc) > 140 else "")
+    ref = f"#{bug['id'][:8]}"
+    lines = [
+        f"Bedankt — je bugmelding {ref} is binnen.",
+        "",
+        f"📝 \"{snippet}\"",
+        f"🕒 Wanneer: {when}",
+    ]
+    if page:
+        lines.append(f"📍 Waar: {page}")
+    lines.append("")
+    lines.append("We bekijken het zo snel mogelijk en houden je hier op de hoogte.")
     msg = {
         "id": f"pm-{uuid.uuid4().hex[:8]}",
         "from_user_id": SPARK_BOT_ID,
         "from_naam": "Spark AI",
         "to_user_id": melder_id,
-        "text": f"Bedankt! Je bugmelding is verzonden ({when}). We bekijken het zo snel mogelijk. Ref: #{bug['id'][:8]}",
+        "text": "\n".join(lines),
         "ts": _now_iso(),
         "unread_by": [melder_id],
         "system": True,
         "kind": "bug_confirmation",
         "bug_id": bug["id"],
+        "bug_ref": ref,
+    }
+    data["messages"] = data.get("messages", []) + [msg]
+    save_json(fp, data)
+
+
+def _send_status_pm(bug: dict, new_status: str, note: Optional[str]) -> None:
+    """Stuur een privé-bericht aan de melder bij status-wijziging."""
+    melder_id = bug.get("created_by_id")
+    if not melder_id or melder_id == SPARK_BOT_ID:
+        return
+    pair = sorted([SPARK_BOT_ID, melder_id])
+    fp = PRIVE_DIR / f"{pair[0]}__{pair[1]}.json"
+    data = load_json(fp, default={"messages": []})
+    ref = f"#{bug['id'][:8]}"
+    status_labels = {
+        "in_behandeling": "wordt nu onderzocht 🔎",
+        "opgelost": "is opgelost ✅",
+        "afgewezen": "is afgewezen ⛔",
+        "nieuw": "is heropend 🔄",
+    }
+    label = status_labels.get(new_status, new_status)
+    lines = [f"Update over je bugmelding {ref}: {label}."]
+    if note:
+        lines.append("")
+        lines.append(f"💬 {note}")
+    msg = {
+        "id": f"pm-{uuid.uuid4().hex[:8]}",
+        "from_user_id": SPARK_BOT_ID,
+        "from_naam": "Spark AI",
+        "to_user_id": melder_id,
+        "text": "\n".join(lines),
+        "ts": _now_iso(),
+        "unread_by": [melder_id],
+        "system": True,
+        "kind": "bug_status_update",
+        "bug_id": bug["id"],
+        "bug_ref": ref,
     }
     data["messages"] = data.get("messages", []) + [msg]
     save_json(fp, data)
@@ -158,6 +210,7 @@ async def update_status(bug_id: str, req: UpdateStatus):
                 "note": req.note,
             })
             save_json(BUGS_FILE, data)
+            _send_status_pm(b, req.status, req.note)
             return {"success": True, "bug": b}
     raise HTTPException(status_code=404, detail="Bug niet gevonden")
 

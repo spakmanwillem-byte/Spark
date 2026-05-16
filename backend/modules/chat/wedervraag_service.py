@@ -11,7 +11,7 @@ Implementeert multi-turn 5W+H verrijking:
 Skip-woorden ("laat maar", "skip", "weet niet") laten de flow stoppen.
 """
 from pathlib import Path
-import random
+import secrets
 import re
 from modules.core.storage import load_json, save_json
 
@@ -97,7 +97,7 @@ def pick_next_field(entry: dict) -> str:
 def build_question(field: str, begrip: str) -> str:
     """Bouw vriendelijke 5W+H vraag voor begrip + leeg veld."""
     templates = QUESTION_TEMPLATES.get(field, [f"Kan je iets meer vertellen over '{begrip}'?"])
-    return random.choice(templates).replace("{begrip}", begrip[:60])
+    return secrets.choice(templates).replace("{begrip}", begrip[:60])
 
 
 def apply_answer(entry_id: str, field: str, answer: str) -> bool:

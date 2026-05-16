@@ -6,7 +6,7 @@ Emotie Detectie Service - Hybride systeem
 4 Basis Emoties: Blij, Boos, Bang, Bedroefd
 Anti-misbruik: Elk woord max 3x per bericht
 """
-import random
+import secrets
 from pathlib import Path
 from collections import Counter
 from modules.core.storage import load_json
@@ -150,7 +150,7 @@ class EmotionDetectionService:
             "source": info["source"],
             "emoji": info["emoji"],
             "color": info["color"],
-            "empathic_response": random.choice(empathic) if empathic else None,
+            "empathic_response": secrets.choice(empathic) if empathic else None,
         }
 
     @staticmethod

@@ -39,10 +39,11 @@ def _save_edges(edges):
 def _invalidate_graph_cache():
     """Reset graph cache in routes module zodat eerstvolgende GET nieuwe data ziet."""
     try:
-        from modules.graph import __init__ as graph_mod  # noqa
-        import modules.graph as gm
-        gm._nodes_cache = None
-        gm._edges_cache = None
+        import sys
+        gm = sys.modules.get("modules.graph")
+        if gm is not None:
+            gm._nodes_cache = None
+            gm._edges_cache = None
     except Exception:
         pass
 

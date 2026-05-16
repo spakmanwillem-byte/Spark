@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import Optional
 from pathlib import Path
 from datetime import datetime, timezone
-import random
+import secrets
 import uuid
 from modules.core.storage import load_json, save_json
 
@@ -37,7 +37,7 @@ def check_bot_triggers(message_text):
             if trigger["type"] == "keyword" and any(kw in msg_lower for kw in keywords):
                 resp_templates = trigger.get("responses", [])
                 if resp_templates:
-                    resp = random.choice(resp_templates)
+                    resp = secrets.choice(resp_templates)
                     resp = resp.replace("{current_time}", now.strftime("%H:%M"))
                     resp = resp.replace("{hour}", str(now.hour))
                     resp = resp.replace("{scan_result}", "Alles lijkt in orde!")
@@ -54,7 +54,7 @@ def check_bot_triggers(message_text):
             elif trigger["type"] == "greeting" and any(kw in msg_lower for kw in trigger.get("keywords", [])):
                 resp_templates = trigger.get("responses", [])
                 if resp_templates:
-                    resp = random.choice(resp_templates)
+                    resp = secrets.choice(resp_templates)
                     responses.append({
                         "id": str(uuid.uuid4()),
                         "user_id": bot["id"],

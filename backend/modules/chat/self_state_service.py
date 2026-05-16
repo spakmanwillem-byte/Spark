@@ -12,7 +12,7 @@ Drempels (door user vastgesteld):
 """
 import psutil
 from pathlib import Path
-import random
+import secrets
 
 APP_ROOT = Path(__file__).parent.parent.parent
 
@@ -94,6 +94,6 @@ def build_response(state: dict, user_naam: str = "") -> str:
     """Kies response uit band-bank, vul {reason} in indien aanwezig."""
     band = state.get("band", "ok")
     options = RESPONSE_BANKS.get(band, RESPONSE_BANKS["ok"])
-    template = random.choice(options)
+    template = secrets.choice(options)
     reason = state.get("reason") or "het systeem draait wat zwaar"
     return template.replace("{reason}", reason)

@@ -2,7 +2,7 @@
 Fallback Service (v4_013c) — Lees random reacties uit system_fallback.json.
 Strings die voorheen hard-coded in routes.py stonden zijn hier centraal beheerd.
 """
-import random
+import secrets
 from pathlib import Path
 from modules.core.storage import load_json
 
@@ -18,7 +18,7 @@ def pick(key: str, default: str = "", **format_kwargs) -> str:
     if not options:
         text = default
     else:
-        text = random.choice(options)
+        text = secrets.choice(options)
     if format_kwargs and "{" in text:
         try:
             text = text.format(**format_kwargs)

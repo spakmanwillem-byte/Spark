@@ -2701,6 +2701,33 @@
         "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
       },
       {
+        "id": "v4_notities_tree_001",
+        "titel": "Notities & Taken — jaar/maand/dag tree-view",
+        "status": "done",
+        "priority": "low",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Notities-pagina krijgt zelfde tree-view (jaar → maand → dag) als Dagboek en Archief. Vandaag wordt automatisch uitgeklapt. Werkt op 'Alles', 'Notities' en 'Taken' tabs. Bijdragen en Bugs blijven hun eigen layout houden."
+      },
+      {
+        "id": "v4_dq_a",
+        "titel": "Code Quality — circulaire imports + secrets",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Circulaire imports opgeruimd: modules/trade/routes.py gebruikt nu relatieve imports (from . import potjes/context_service ipv from modules.trade); modules/graph/sync_service.py gebruikt sys.modules lookup ipv from modules.graph import __init__. Insecure random.choice() vervangen door secrets.choice() in chat/routes, bots/routes, chat/emotion_service, chat/wedervraag_service, chat/self_state_service, chat/fallback_service, chat/snap_service, contributions/__init__."
+      },
+      {
+        "id": "v4_bugs_002",
+        "titel": "Bug-melder — verrijkte PM bevestiging + status-updates",
+        "status": "done",
+        "priority": "low",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Bevestigings-PM verrijkt: citeert omschrijving (max 140 chars), toont ref-nr prominent, toont wanneer + waar (indien opgegeven). Nieuwe status-update PM bij elke status-wijziging (in_behandeling/opgelost/afgewezen) met optionele admin-note. Aangeroepen vanuit PATCH /api/bugs/{id}/status."
+      },
+      {
         "id": "v4_bugs_001",
         "titel": "Bug-melder MVP (iedereen kan melden, gradatie ≤ 2 beheert)",
         "status": "done",

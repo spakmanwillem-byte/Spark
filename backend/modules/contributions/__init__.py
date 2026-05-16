@@ -9,7 +9,7 @@ Fair-share claim systeem voor het Bijdrage-portaal.
 """
 import time
 import uuid
-import random
+import secrets
 from pathlib import Path
 from modules.core.storage import load_json, save_json
 
@@ -112,7 +112,7 @@ def get_or_create_claim(user_id: str) -> dict:
     new_claim = {
         "id": str(uuid.uuid4())[:8],
         "user_id": user_id,
-        "card_id": random.choice(available),
+        "card_id": secrets.choice(available),
         "claimed_at": _now(),
     }
     data["claims"].append(new_claim)

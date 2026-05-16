@@ -7,13 +7,13 @@ from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
-from modules.trade.monitor import (
+from .monitor import (
     get_monitor, fetch_candles, fetch_tickers,
     execute_mock_trade, execute_real_trade, WATCHLIST_COINS,
     fetch_bitvavo_balance, sync_bitvavo_orders,
 )
-from modules.trade import potjes as potjes_svc
-from modules.trade import context_service
+from . import potjes as potjes_svc
+from . import context_service
 
 router = APIRouter(prefix="/trade", tags=["trade"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"

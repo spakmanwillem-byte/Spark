@@ -26,18 +26,20 @@ Dutch (always respond in Dutch).
 - 2026-05-16: Dashboard "Gesprekken" card connected to live data (Spark log + Community + Privé contacts)
 - 2026-05-16: Verbanden Statistieken — backend top 10 → top 20, frontend bars scale dynamically (max relative)
 - 2026-05-16: **Bug-melder MVP (v4_bugs_001)** — anyone can report bugs via "Bug melden" button in Notities; admins (gradatie ≤ 2) see "Bugs" tab; auto private confirmation message from Spark AI to reporter. Open follow-up: split gradatie 2 into fam vs admin.
+- 2026-05-16: **v4_bugs_002** — Enriched bug confirmation PM (cites description, prominent ref, when+where) + new status-update PM on every admin status change with optional note.
+- 2026-05-16: **v4_notities_tree_001** — Notities & Taken tree-view (Year→Month→Day), auto-opens today, same as Dagboek/Archief.
+- 2026-05-16: **v4_dq_a** — Code Quality fixes: circular imports resolved (trade/routes uses relative imports, graph/sync_service uses sys.modules), `random.choice` → `secrets.choice` across chat/bots/contributions modules.
 
 ## In progress / backlog
 ### P0 / Open follow-ups
 - Gradatie 2 splitsen (fam ↔ admin) → fam ziet géén Bugs-tab
-- Notities tree-view (Year→Month→Day) — uitstaand uit vorige fork
 
 ### P1
-- Code Quality fixes: circular imports `modules/trade`, `modules/graph`; missing React hook deps (`AuthContext`, `GesprekkenPage`); literal `is "active"` → `==`; `random` → `secrets` in chat/bots routes
+- Missing React hook deps audit (already lint-clean on AuthContext.js + GesprekkenPage.js)
 - v4_dq_b: Split big components (TraderPage, UsersAdminPage, MainLayout)
 - v4_014: Guard Layer (priority resolver, conflict logger, fallback hierarchy)
-- v4_016: Analyser `/api/spark/insights` (shadow events analysis)
-- v4_017: Advisor UI "Spark Inzichten" page
+- v4_016: Analyser `/api/spark/insights` (shadow events analysis: unused vocab, trigger overlap, recurring unknown words)
+- v4_017: Advisor UI "Spark Inzichten" page (approve/reject analyser suggestions)
 
 ### P2
 - v4_020: Chain-anchor (hide chain-of-thought to debug payload)

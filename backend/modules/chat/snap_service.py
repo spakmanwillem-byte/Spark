@@ -10,6 +10,7 @@ Functionaliteit:
 6. Commando detectie: help, dagboek, triggers etc.
 """
 import re
+import secrets
 import uuid
 from pathlib import Path
 from datetime import datetime, timezone
@@ -547,7 +548,7 @@ class SnapNLPService:
         """Geeft een random response voor een trigger type"""
         import random
         responses = self.triggers.get(trigger_type, {}).get("responses", [])
-        return random.choice(responses) if responses else None
+        return secrets.choice(responses) if responses else None
 
     def is_question(self, text):
         text_lower = text.lower()

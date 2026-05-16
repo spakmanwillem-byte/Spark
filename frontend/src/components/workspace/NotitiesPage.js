@@ -343,42 +343,7 @@ export function NotitiesPage({ onNavigate }) {
             {filtered.length === 0 ? (
               <div className="py-16 text-center"><StickyNote className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Geen items gevonden</p></div>
             ) : (
-              <div className="space-y-2">
-                {filtered.map(item => {
-                  const pri = priorities[item.priority] || priorities.medium;
-                  return (
-                    <div key={item.id} data-testid={`item-${item.id}`} className={`p-3 bg-slate-900/50 border rounded-xl transition-all ${item.done ? 'border-slate-800/50 opacity-60' : 'border-slate-800 hover:border-slate-600'}`}>
-                      <div className="flex items-start gap-3">
-                        {item.type === 'task' ? (
-                          <button onClick={() => toggleDone(item)} className="mt-0.5 flex-shrink-0">
-                            {item.done ? <CheckCircle className="w-5 h-5 text-green-400" /> : <Circle className="w-5 h-5 text-slate-600 hover:text-amber-400" />}
-                          </button>
-                        ) : (
-                          <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${pri.color}15` }}>
-                            <FileText className="w-3 h-3" style={{ color: pri.color }} />
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h4 className={`text-sm font-medium ${item.done ? 'line-through text-slate-500' : 'text-white'}`}>{item.titel}</h4>
-                            <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${pri.color}15`, color: pri.color }}>{pri.label}</span>
-                            {item.categorie && <span className="text-[10px] text-slate-600">{item.categorie}</span>}
-                          </div>
-                          {item.inhoud && <p className="text-xs text-slate-400 mt-1 line-clamp-2">{item.inhoud}</p>}
-                          <div className="flex items-center gap-3 mt-2">
-                            <span className="text-[10px] text-slate-600 flex items-center gap-1"><Clock className="w-2.5 h-2.5" /> {new Date(item.datum || item.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' })}</span>
-                            {item.created_by && <span className="text-[10px] text-slate-600">{item.created_by}</span>}
-                            {(item.tags || []).slice(0, 2).map((t, i) => <span key={i} className="text-[10px] text-slate-600">#{t}</span>)}
-                          </div>
-                        </div>
-                        <button onClick={() => deleteItem(item)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors flex-shrink-0">
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <NotitiesTreeView items={filtered} toggleDone={toggleDone} deleteItem={deleteItem} />
             )}
           </div>
           )}
@@ -389,3 +354,164 @@ export function NotitiesPage({ onNavigate }) {
 }
 
 export default NotitiesPage;
+
+/* ================================================================ */
+/* NOTITIES TREE-VIEW (v4_notities_tree_001) — jaar → maand → dag    */
+/* Zelfde principe als Dagboek/Archief                                */
+/* ================================================================ */
+const MONTHS_NL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+
+function NotitiesTreeView({ items, toggleDone, deleteItem }) {
+  const tree = React.useMemo(() => {
+    const t = {};
+    for (const e of items) {
+      const dStr = e.datum || e.created_at;
+      if (!dStr) continue;
+      const d = new Date(dStr);
+      if (isNaN(d.getTime())) continue;
+      const y = d.getFullYear();
+      const m = d.getMonth();
+      const dd = d.getDate();
+      if (!t[y]) t[y] = {};
+      if (!t[y][m]) t[y][m] = {};
+      if (!t[y][m][dd]) t[y][m][dd] = [];
+      t[y][m][dd].push(e);
+    }
+    return t;
+  }, [items]);
+
+  const availableYears = React.useMemo(() => {
+    const set = new Set(Object.keys(tree).map(Number));
+    set.add(new Date().getFullYear());
+    return [...set].sort((a, b) => b - a);
+  }, [tree]);
+
+  const [activeYear, setActiveYear] = React.useState(availableYears[0] || new Date().getFullYear());
+  const [openMonths, setOpenMonths] = React.useState({});
+  const [openDays, setOpenDays] = React.useState({});
+
+  React.useEffect(() => {
+    if (!availableYears.includes(activeYear) && availableYears.length > 0) setActiveYear(availableYears[0]);
+  }, [availableYears, activeYear]);
+
+  // Auto-open vandaag bij eerste render
+  React.useEffect(() => {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth();
+    const dd = now.getDate();
+    if (tree[y]?.[m]?.[dd]) {
+      setOpenMonths(s => ({ ...s, [`${y}-${m}`]: true }));
+      setOpenDays(s => ({ ...s, [`${y}-${m}-${dd}`]: true }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const toggleMonth = (y, m) => setOpenMonths(s => ({ ...s, [`${y}-${m}`]: !s[`${y}-${m}`] }));
+  const toggleDay = (y, m, d) => setOpenDays(s => ({ ...s, [`${y}-${m}-${d}`]: !s[`${y}-${m}-${d}`] }));
+
+  const yearData = tree[activeYear] || {};
+  const monthsInYear = Object.keys(yearData).map(Number).sort((a, b) => b - a);
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-1 border-b border-slate-800 pb-1">
+        {availableYears.map(y => {
+          const yearTotal = tree[y]
+            ? Object.values(tree[y]).reduce((s, mObj) => s + Object.values(mObj).reduce((sd, arr) => sd + arr.length, 0), 0)
+            : 0;
+          const isActive = y === activeYear;
+          return (
+            <button key={y} data-testid={`notities-year-${y}`} onClick={() => setActiveYear(y)}
+              className={`text-xs px-3 py-1.5 rounded-t-md transition-colors ${isActive ? 'text-amber-300 bg-amber-500/10 border-t border-x border-amber-500/30' : 'text-slate-500 hover:text-slate-300'}`}>
+              {y} {yearTotal > 0 && <span className="ml-1 text-[10px] text-slate-500">({yearTotal})</span>}
+            </button>
+          );
+        })}
+      </div>
+
+      {monthsInYear.length === 0 ? (
+        <p className="text-xs text-slate-500 text-center py-8">Geen items in {activeYear}.</p>
+      ) : (
+        <div className="space-y-2">
+          {monthsInYear.map(m => {
+            const monthData = yearData[m];
+            const monthTotal = Object.values(monthData).reduce((s, arr) => s + arr.length, 0);
+            const isMonthOpen = openMonths[`${activeYear}-${m}`];
+            const days = Object.keys(monthData).map(Number).sort((a, b) => b - a);
+            return (
+              <div key={m} className="bg-slate-900/30 border border-slate-800 rounded-lg overflow-hidden">
+                <button onClick={() => toggleMonth(activeYear, m)}
+                  data-testid={`notities-month-${activeYear}-${m}`}
+                  className="w-full px-3 py-2 flex items-center justify-between hover:bg-slate-800/40 transition-colors">
+                  <span className="text-sm text-white font-medium capitalize">{MONTHS_NL[m]}</span>
+                  <span className="text-[10px] text-slate-500">{monthTotal} items · {isMonthOpen ? '−' : '+'}</span>
+                </button>
+                {isMonthOpen && (
+                  <div className="border-t border-slate-800/60 px-2 py-2 space-y-1">
+                    {days.map(dd => {
+                      const dayItems = monthData[dd];
+                      const isDayOpen = openDays[`${activeYear}-${m}-${dd}`];
+                      return (
+                        <div key={dd} className="bg-slate-950/40 rounded">
+                          <button onClick={() => toggleDay(activeYear, m, dd)}
+                            data-testid={`notities-day-${activeYear}-${m}-${dd}`}
+                            className="w-full px-2.5 py-1.5 flex items-center justify-between hover:bg-slate-800/50 rounded transition-colors">
+                            <span className="text-xs text-slate-300">
+                              <strong>{dd}</strong> {MONTHS_NL[m].slice(0, 3)} {activeYear}
+                            </span>
+                            <span className="text-[10px] text-slate-500">{dayItems.length} · {isDayOpen ? '−' : '+'}</span>
+                          </button>
+                          {isDayOpen && (
+                            <div className="px-2 py-2 space-y-2 border-t border-slate-900/80">
+                              {dayItems.map(item => <NoteItemCard key={item.id} item={item} toggleDone={toggleDone} deleteItem={deleteItem} />)}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NoteItemCard({ item, toggleDone, deleteItem }) {
+  const pri = priorities[item.priority] || priorities.medium;
+  return (
+    <div data-testid={`item-${item.id}`} className={`p-3 bg-slate-900/50 border rounded-xl transition-all ${item.done ? 'border-slate-800/50 opacity-60' : 'border-slate-800 hover:border-slate-600'}`}>
+      <div className="flex items-start gap-3">
+        {item.type === 'task' ? (
+          <button onClick={() => toggleDone(item)} className="mt-0.5 flex-shrink-0">
+            {item.done ? <CheckCircle className="w-5 h-5 text-green-400" /> : <Circle className="w-5 h-5 text-slate-600 hover:text-amber-400" />}
+          </button>
+        ) : (
+          <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${pri.color}15` }}>
+            <FileText className="w-3 h-3" style={{ color: pri.color }} />
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h4 className={`text-sm font-medium ${item.done ? 'line-through text-slate-500' : 'text-white'}`}>{item.titel}</h4>
+            <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${pri.color}15`, color: pri.color }}>{pri.label}</span>
+            {item.categorie && <span className="text-[10px] text-slate-600">{item.categorie}</span>}
+          </div>
+          {item.inhoud && <p className="text-xs text-slate-400 mt-1 whitespace-pre-wrap">{item.inhoud}</p>}
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-[10px] text-slate-600 flex items-center gap-1"><Clock className="w-2.5 h-2.5" /> {new Date(item.datum || item.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}</span>
+            {item.created_by && <span className="text-[10px] text-slate-600">{item.created_by}</span>}
+            {(item.tags || []).slice(0, 2).map((t, i) => <span key={i} className="text-[10px] text-slate-600">#{t}</span>)}
+          </div>
+        </div>
+        <button onClick={() => deleteItem(item)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors flex-shrink-0">
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}

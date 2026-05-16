@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime, timezone
-import random
+import secrets
 from .snap_service import SnapNLPService
 from .emotion_service import EmotionDetectionService
 from . import chat_log_service
@@ -365,7 +365,7 @@ async def process_message(req: ChatMessage):
             ) if req.user_id else {"success": False}
 
             responses = snap.triggers.get("confirmation", {}).get("responses", [])
-            tmpl = random.choice(responses) if responses else "Top! Nieuwe kaart '{begrip}' aangemaakt. +{xp} XP!"
+            tmpl = secrets.choice(responses) if responses else "Top! Nieuwe kaart '{begrip}' aangemaakt. +{xp} XP!"
             response["message"] = tmpl.format(begrip=begrip, xp=HOMONYM_XP_BONUS)
             response["type"] = "homonym_created"
             response["snap_suggestions"] = [begrip]
@@ -389,7 +389,7 @@ async def process_message(req: ChatMessage):
             last_entry_id=state.get("last_entry_id"),
         )
         responses = snap.triggers.get("rejection", {}).get("responses", [])
-        tmpl = random.choice(responses) if responses else "Bedoel je een ander '{begrip}'?"
+        tmpl = secrets.choice(responses) if responses else "Bedoel je een ander '{begrip}'?"
         response["message"] = tmpl.format(begrip=begrip)
         response["type"] = "homonym_question"
         response["homonym"] = {"awaiting_confirm": True, "begrip": begrip}
@@ -1101,7 +1101,7 @@ async def chat_welcome(req: WelcomeRequest):
     responses = startup.get("responses", []) or [
         "{dagdeel_groet} {naam}. Wat speelt er?",
     ]
-    template = random.choice(responses)
+    template = secrets.choice(responses)
     message = template.format(naam=voornaam, dagdeel_groet=dagdeel_groet)
 
     # Optioneel: contextuele suffix

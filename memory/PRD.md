@@ -29,6 +29,7 @@ Dutch (always respond in Dutch).
 - 2026-05-16: **v4_bugs_002** — Enriched bug confirmation PM (cites description, prominent ref, when+where) + new status-update PM on every admin status change with optional note.
 - 2026-05-16: **v4_notities_tree_001** — Notities & Taken tree-view (Year→Month→Day), auto-opens today, same as Dagboek/Archief.
 - 2026-05-16: **v4_dq_a** — Code Quality fixes: circular imports resolved (trade/routes uses relative imports, graph/sync_service uses sys.modules), `random.choice` → `secrets.choice` across chat/bots/contributions modules.
+- 2026-05-16: **v4_016a — Analyser laag 1 (unused-vocab)** — Read-only endpoint `GET /api/spark/insights/unused-vocab` analyseert shadow events en geeft kandidaat-woorden terug die vaak voorkwamen maar niet in vocab/triggers/knowledge zitten. Stopwoorden + tijd-tokens uitgefilterd. Geen wijzigingen, alleen suggesties.
 
 ## In progress / backlog
 ### P0 / Open follow-ups

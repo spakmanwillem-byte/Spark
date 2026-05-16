@@ -2701,6 +2701,16 @@
         "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
       },
       {
+        "id": "v4_016a",
+        "titel": "Analyser laag 1 — Unused vocab kandidaten",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Eerste laag van v4_016 Analyser. Read-only endpoint GET /api/spark/insights/unused-vocab leest shadow events (default 14 dagen), tokeniseert user_msg, filtert tegen vocab (spark_vocab.json) + knowledge base (begrip/tags/topic) + alle trigger-files. Retourneert woorden die ≥ min_count voorkwamen maar niet in een van die bronnen zitten — kandidaten voor toevoeging aan vocab. Stopwoorden + tijd-tokens uitgefilterd. Geen wijzigingen, alleen suggesties.",
+        "open_followup": "Laag 2 = trigger-overlap detectie (welke triggers reageren op dezelfde zinnen). Laag 3 = bijbel-categorieën die nooit gebruikt worden (KOMT LATER zodra bijbel-normaalwaarden gevuld zijn)."
+      },
+      {
         "id": "v4_notities_tree_001",
         "titel": "Notities & Taken — jaar/maand/dag tree-view",
         "status": "done",

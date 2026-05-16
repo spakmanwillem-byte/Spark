@@ -171,6 +171,11 @@ from modules.bugs import bugs_router
 app.include_router(bugs_router, prefix="/api")
 
 
+# Module 24: Insights (v4_016 — Analyser voor Shadow Observer data, read-only)
+from modules.insights import insights_router
+app.include_router(insights_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

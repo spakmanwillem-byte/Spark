@@ -52,6 +52,31 @@ async def get_next_review_entry(after_id: Optional[str] = Query(None)):
     return {"entry": entry}
 
 
+@router.get("/exists")
+async def check_begrip_exists(begrip: str = Query(..., min_length=1)):
+    """v4_kb_create_001: exact-match check op begrip (case-insensitive).
+    Retourneert {exists: bool, match: {id, begrip, topic} | null}."""
+    match = service.exists_begrip(begrip)
+    return {"exists": bool(match), "match": match}
+
+
+@router.post("/create")
+async def create_knowledge_entry(data: dict):
+    """v4_kb_create_001: maak een nieuwe knowledge kaart aan.
+    Body: {begrip (verplicht), topic, tags, lagen, ws5, belangrijkheid, kaart_type}.
+    Faalt met 409 als begrip al bestaat."""
+    entry, err = service.create_entry(data)
+    if err == "begrip_required":
+        raise HTTPException(status_code=400, detail="'begrip' is verplicht")
+    if err == "duplicate":
+        existing = service.exists_begrip(data.get("begrip"))
+        raise HTTPException(
+            status_code=409,
+            detail={"message": "Begrip bestaat al", "match": existing},
+        )
+    return {"status": "ok", "entry": entry}
+
+
 @router.get("/{entry_id}")
 async def get_knowledge_entry(entry_id: str):
     """Get single knowledge entry by ID"""

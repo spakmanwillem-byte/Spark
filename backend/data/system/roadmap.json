@@ -2701,6 +2701,16 @@
         "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
       },
       {
+        "id": "v4_kb_create_001",
+        "titel": "Kennisbank — Nieuwe kaart tab met live duplicate-check",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-16",
+        "beschrijving": "Nieuwe tab 'Nieuwe kaart' naast Alles/Onbeantwoord/Beantwoord/Review in Kennisbank. Full create-form (begrip, topic, tags, lagen 1-4, ws5, belangrijkheid). Live exact-match duplicate-check op begrip-veld (case-insensitive, whitespace-trimmed, één letter verschil = ander concept). Bij match: text rood + waarschuwing + save-knop disabled. Endpoints: GET /api/knowledge/exists + POST /api/knowledge/create. Graph auto-sync bij aanmaken.",
+        "open_followup": "Klik-door naar bestaande kaart bij match (komt met v4_017 advisor flow)."
+      },
+      {
         "id": "v4_016a",
         "titel": "Analyser laag 1 — Unused vocab kandidaten",
         "status": "done",

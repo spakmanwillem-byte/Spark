@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Search, BookOpen, Filter, ChevronDown, ChevronLeft, ChevronRight,
   Star, Edit3, Trash2, X, Save, ArrowUpDown, Tag, Layers, Brain,
-  AlertTriangle, CheckCircle, Eye, Hash
+  AlertTriangle, CheckCircle, Eye, Hash, Plus
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -231,6 +231,7 @@ export function KennisbankPage({ onNavigate }) {
     { id: 'unanswered', label: 'Onbeantwoord', count: stats.unanswered, color: '#f97316' },
     { id: 'answered', label: 'Beantwoord', count: stats.answered, color: '#22c55e' },
     { id: 'review', label: 'Review', count: stats.review_pending, color: '#a855f7' },
+    { id: 'create', label: 'Nieuwe kaart', count: null, color: '#06b6d4' },
   ];
 
   const sortOptions = [
@@ -257,7 +258,7 @@ export function KennisbankPage({ onNavigate }) {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-3">
           {filterButtons.map(f => (
             <button
               key={f.id}
@@ -271,15 +272,19 @@ export function KennisbankPage({ onNavigate }) {
               style={statusFilter === f.id ? { borderColor: f.color, background: `${f.color}15` } : {}}
             >
               <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">{f.label}</p>
-              <p className="text-2xl font-bold" style={{ color: statusFilter === f.id ? f.color : '#e2e8f0' }}>
-                {f.count.toLocaleString()}
-              </p>
+              {f.count === null ? (
+                <Plus className="w-6 h-6" style={{ color: statusFilter === f.id ? f.color : '#94a3b8' }} />
+              ) : (
+                <p className="text-2xl font-bold" style={{ color: statusFilter === f.id ? f.color : '#e2e8f0' }}>
+                  {f.count.toLocaleString()}
+                </p>
+              )}
             </button>
           ))}
         </div>
 
-        {/* Search + Sort (verborgen in review-mode) */}
-        {statusFilter !== 'review' && (<>
+        {/* Search + Sort (verborgen in review/create-mode) */}
+        {statusFilter !== 'review' && statusFilter !== 'create' && (<>
         <div className="flex gap-3 items-center">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -327,8 +332,8 @@ export function KennisbankPage({ onNavigate }) {
         </div>
         </>)}
 
-        {/* Entries List (verborgen in review-mode) */}
-        {statusFilter !== 'review' && (
+        {/* Entries List (verborgen in review/create-mode) */}
+        {statusFilter !== 'review' && statusFilter !== 'create' && (
         <div className="space-y-2">
           {loading ? (
             <div className="py-20 text-center">
@@ -368,8 +373,16 @@ export function KennisbankPage({ onNavigate }) {
           />
         )}
 
+        {/* v4_kb_create_001 Create Panel */}
+        {statusFilter === 'create' && (
+          <CreatePanel
+            onCreated={() => { fetchEntries(); fetchStats(); }}
+            apiBase={API}
+          />
+        )}
+
         {/* Pagination */}
-        {statusFilter !== 'review' && totalPages > 1 && (
+        {statusFilter !== 'review' && statusFilter !== 'create' && totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 pt-2">
             <button
               data-testid="prev-page"
@@ -857,3 +870,184 @@ function Field({ label, sub, value, onChange, multiline, color, small }) {
 }
 
 export default KennisbankPage;
+
+/* ================================================================ */
+/* CREATE PANEL (v4_kb_create_001) — Nieuwe kaart met dup-check     */
+/* ================================================================ */
+function CreatePanel({ onCreated, apiBase }) {
+  const [form, setForm] = useState({
+    begrip: '',
+    topic: '',
+    tags: '',
+    laag1: '',
+    laag2: '',
+    laag3: '',
+    laag4: '',
+    belangrijkheid: 3,
+    ws5: { wie: '', wat: '', wanneer: '', waar: '', waarom: '', hoe: '' },
+  });
+  const [dup, setDup] = useState(null);  // { id, begrip, topic } | null
+  const [checking, setChecking] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [msg, setMsg] = useState(null);  // { type, text }
+
+  // Debounced exact-match check
+  useEffect(() => {
+    const term = form.begrip.trim();
+    if (!term) { setDup(null); return; }
+    setChecking(true);
+    const t = setTimeout(() => {
+      fetch(`${apiBase}/api/knowledge/exists?begrip=${encodeURIComponent(term)}`)
+        .then(r => r.json())
+        .then(d => setDup(d.exists ? d.match : null))
+        .catch(() => setDup(null))
+        .finally(() => setChecking(false));
+    }, 300);
+    return () => { clearTimeout(t); setChecking(false); };
+  }, [form.begrip, apiBase]);
+
+  const isDup = !!dup;
+  const canSave = form.begrip.trim() && !isDup && !saving;
+
+  const handleSave = async () => {
+    if (!canSave) return;
+    setSaving(true);
+    setMsg(null);
+    try {
+      const res = await fetch(`${apiBase}/api/knowledge/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          begrip: form.begrip.trim(),
+          topic: form.topic.trim(),
+          tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+          lagen: { laag1: form.laag1, laag2: form.laag2, laag3: form.laag3, laag4: form.laag4 },
+          belangrijkheid: parseInt(form.belangrijkheid) || 3,
+          ws5: form.ws5,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setMsg({ type: 'ok', text: `Kaart "${data.entry.begrip}" aangemaakt ✓` });
+        setForm({
+          begrip: '', topic: '', tags: '',
+          laag1: '', laag2: '', laag3: '', laag4: '',
+          belangrijkheid: 3,
+          ws5: { wie: '', wat: '', wanneer: '', waar: '', waarom: '', hoe: '' },
+        });
+        setDup(null);
+        onCreated?.();
+        setTimeout(() => setMsg(null), 3000);
+      } else if (res.status === 409) {
+        setMsg({ type: 'err', text: 'Begrip bestaat al — pas het aan of bewerk de bestaande kaart.' });
+      } else {
+        setMsg({ type: 'err', text: data.detail?.message || data.detail || 'Opslaan mislukt' });
+      }
+    } catch {
+      setMsg({ type: 'err', text: 'Netwerkfout. Probeer opnieuw.' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const updateWs5 = (k, v) => setForm(f => ({ ...f, ws5: { ...f.ws5, [k]: v } }));
+
+  return (
+    <div className="space-y-4 max-w-4xl">
+      <div className="p-4 rounded-xl border border-cyan-500/20" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.06), rgba(59,130,246,0.04))' }}>
+        <h2 className="text-lg font-bold text-white mb-1">Nieuwe knowledge kaart</h2>
+        <p className="text-xs text-slate-400">Maak handmatig een kaart aan. Bij exact-match wordt het begrip-veld rood en kun je niet opslaan.</p>
+      </div>
+
+      <div className="p-5 bg-slate-900/40 border border-slate-800 rounded-xl space-y-4">
+        {/* Begrip met dup-check */}
+        <div>
+          <label className="text-xs text-slate-400 block mb-1.5">
+            Onderwerp / Begrip <span className="text-red-400">*</span>
+            {checking && <span className="ml-2 text-[10px] text-slate-500">checken...</span>}
+          </label>
+          <input
+            data-testid="create-begrip"
+            type="text"
+            value={form.begrip}
+            onChange={e => setForm(f => ({ ...f, begrip: e.target.value }))}
+            placeholder="bv. 'Quantum verstrengeling' of 'Mijn fiets'"
+            className={`w-full px-3 py-2 bg-slate-800/50 border rounded-lg text-sm focus:outline-none transition-colors ${
+              isDup
+                ? 'text-red-400 border-red-500/60 focus:border-red-500'
+                : 'text-white border-slate-700/50 focus:border-cyan-500/40'
+            }`}
+          />
+          {isDup && (
+            <p data-testid="dup-warning" className="text-[11px] text-red-400 mt-1.5 flex items-center gap-1.5">
+              <AlertTriangle className="w-3 h-3" />
+              Dit begrip bestaat al — kaart-id <code className="text-[10px] bg-red-500/10 px-1 rounded">{dup.id}</code>
+              {dup.topic && <span className="text-slate-500">· topic: {dup.topic}</span>}
+            </p>
+          )}
+        </div>
+
+        {/* Topic + tags */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <Field label="Topic" value={form.topic} onChange={v => setForm(f => ({ ...f, topic: v }))} />
+          <Field label="Tags (komma-gescheiden)" value={form.tags} onChange={v => setForm(f => ({ ...f, tags: v }))} />
+        </div>
+
+        {/* Lagen */}
+        <div className="space-y-3">
+          <h3 className="text-xs text-slate-400 uppercase tracking-wider">Lagen</h3>
+          <Field label="Laag 1 — kernbetekenis" sub="Korte definitie (1 zin)." value={form.laag1} onChange={v => setForm(f => ({ ...f, laag1: v }))} multiline />
+          <Field label="Laag 2 — uitleg / context" value={form.laag2} onChange={v => setForm(f => ({ ...f, laag2: v }))} multiline />
+          <Field label="Laag 3 — voorbeelden / verbanden" value={form.laag3} onChange={v => setForm(f => ({ ...f, laag3: v }))} multiline />
+          <Field label="Laag 4 — diepe context / nuance" value={form.laag4} onChange={v => setForm(f => ({ ...f, laag4: v }))} multiline />
+        </div>
+
+        {/* WS5 + belangrijkheid */}
+        <div className="space-y-3">
+          <h3 className="text-xs text-slate-400 uppercase tracking-wider">5W + H (optioneel)</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {['wie', 'wat', 'wanneer', 'waar', 'waarom', 'hoe'].map(k => (
+              <Field key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} value={form.ws5[k]} onChange={v => updateWs5(k, v)} small />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <label className="text-xs text-slate-400">Belangrijkheid:</label>
+          <select
+            value={form.belangrijkheid}
+            onChange={e => setForm(f => ({ ...f, belangrijkheid: e.target.value }))}
+            className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white focus:outline-none"
+          >
+            {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+        </div>
+
+        {msg && (
+          <div className={`text-xs p-2.5 rounded-lg border ${
+            msg.type === 'ok'
+              ? 'bg-green-500/10 text-green-300 border-green-500/30'
+              : 'bg-red-500/10 text-red-300 border-red-500/30'
+          }`}>
+            {msg.text}
+          </div>
+        )}
+
+        <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+          <button
+            data-testid="create-save"
+            disabled={!canSave}
+            onClick={handleSave}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              canSave
+                ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
+                : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+            }`}
+          >
+            <Save className="w-4 h-4" /> {saving ? 'Opslaan...' : 'Kaart aanmaken'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

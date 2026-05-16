@@ -214,3 +214,59 @@ class KnowledgeService:
         except Exception as ex:
             print(f"[graph-sync] delete remove_node failed: {ex}")
         return True
+
+    def exists_begrip(self, begrip):
+        """v4_kb_create_001: exact-match check (case-insensitive, whitespace-trimmed).
+        Eén letter anders telt als ander concept."""
+        if not begrip:
+            return None
+        q = str(begrip).strip().lower()
+        if not q:
+            return None
+        for e in self._load_entries():
+            if str(e.get("begrip", "")).strip().lower() == q:
+                return {"id": e.get("id"), "begrip": e.get("begrip"), "topic": e.get("topic", "")}
+        return None
+
+    def create_entry(self, data):
+        """v4_kb_create_001: maak een nieuwe knowledge kaart aan.
+        Faalt met (None, 'duplicate') als begrip al exact bestaat.
+        Velden uit data: begrip (verplicht), topic, tags, lagen, ws5, belangrijkheid, kaart_type.
+        """
+        import uuid
+        begrip = (data.get("begrip") or "").strip()
+        if not begrip:
+            return None, "begrip_required"
+        dup = self.exists_begrip(begrip)
+        if dup:
+            return None, "duplicate"
+        now = _now_iso()
+        entry = {
+            "id": f"kb-{uuid.uuid4().hex[:8]}",
+            "begrip": begrip,
+            "topic": (data.get("topic") or "").strip(),
+            "tags": data.get("tags") or [],
+            "lagen": data.get("lagen") or {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": data.get("ws5") or {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
+            "belangrijkheid": int(data.get("belangrijkheid") or 3),
+            "kaart_type": data.get("kaart_type") or "concept",
+            "is_sentence": False,
+            "bron": "manual",
+            "detected_at": now,
+            "metadata": {
+                "created_at": now,
+                "updated_at": now,
+                "reviewed_at": None,
+                "review_count": 0,
+            },
+        }
+        entries = self._load_entries()
+        entries.append(entry)
+        self._save_entries(entries)
+        # Graph auto-sync
+        try:
+            from modules.graph.sync_service import upsert_node_from_entry
+            upsert_node_from_entry(entry)
+        except Exception as ex:
+            print(f"[graph-sync] create upsert failed: {ex}")
+        return entry, None

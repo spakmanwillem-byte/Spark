@@ -13835,11 +13835,262 @@
         "session_id": "default",
         "gesprek_nummer": 525
       }
+    },
+    {
+      "id": "conv-c21402d3",
+      "timestamp": "2026-05-17T20:42:52.436940+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er? _(het is 1 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 526
+      }
+    },
+    {
+      "id": "conv-c9b9fe53",
+      "timestamp": "2026-05-17T20:43:06.348424+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dat is lang",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 527
+      }
+    },
+    {
+      "id": "conv-0a429a49",
+      "timestamp": "2026-05-17T21:42:12.719130+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is Spark",
+      "spark_response": "**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 528
+      }
+    },
+    {
+      "id": "conv-3da6f75e",
+      "timestamp": "2026-05-17T21:42:24.436763+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie ben jij",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'fixes'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 529
+      }
+    },
+    {
+      "id": "conv-2cc147d0",
+      "timestamp": "2026-05-17T21:42:46.355207+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "net met crash",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 530
+      }
+    },
+    {
+      "id": "conv-c35acb1b",
+      "timestamp": "2026-05-17T21:42:59.442444+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Spark",
+      "spark_response": "**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 531
+      }
+    },
+    {
+      "id": "conv-46c8231d",
+      "timestamp": "2026-05-17T21:43:08.937741+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat kan jij",
+      "spark_response": "Dat weet ik (nog) niet. Wil je dat ik dit onthoud voor later?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 532
+      }
+    },
+    {
+      "id": "conv-c62b7251",
+      "timestamp": "2026-05-17T21:43:17.536838+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 533
+      }
+    },
+    {
+      "id": "conv-5ed1e68a",
+      "timestamp": "2026-05-17T21:43:25.849067+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 534
+      }
+    },
+    {
+      "id": "conv-f6400c4c",
+      "timestamp": "2026-05-18T06:36:16.748954+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat speelt er? _(laatst sprak je me 8 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 535
+      }
+    },
+    {
+      "id": "conv-0d10b7a1",
+      "timestamp": "2026-05-18T11:08:10.340584+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 536
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 525,
-    "last_updated": "2026-05-16T11:44:52.409481+00:00"
+    "total_conversations": 536,
+    "last_updated": "2026-05-18T11:08:10.340584+00:00"
   }
 }

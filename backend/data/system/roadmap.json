@@ -2701,66 +2701,6 @@
         "beschrijving": "Reactie-voorbeelden (nu enkel read-only) editable maken via SparkBrainPage. Inclusief mogelijkheid om eigen 'wanneer_X' situaties toe te voegen."
       },
       {
-        "id": "v5_001",
-        "titel": "Reflective Loop — Spark vraagt 'snap ik je goed?' vóór hij antwoordt",
-        "status": "todo",
-        "priority": "low",
-        "progress": 0,
-        "fase": "v5 — menselijke communicatie laag",
-        "beschrijving": "Tussenlaag tussen NLP en antwoord: Spark interpreteert eerst, valideert dan, reageert pas daarna. Doel: minder fout interpreteren (vooral belangrijk bij memory/legacy — fout = vertrouwensbreuk), meer aanvoelen wat user echt nodig heeft. Idee komt van Willem (geïnspireerd door 'goede communicatie = verificatieproces van betekenis').",
-        "context": "Spark heeft nu wedervraag_service en 5W+H consent — maar dat zit op feiten-niveau ('welke datum?'), niet op behoefte-niveau ('zoek je overzicht of erkenning?'). Deze laag voegt het laatste toe.",
-        "sub_items": [
-          {
-            "id": "v5_001a",
-            "titel": "Behoefte-tags i.p.v. alleen intent-tags",
-            "notes": "Behoeftes naast intents: overzicht, rust, erkenning, structuur, verbinding, autonomie, veiligheid, emotionele support."
-          },
-          {
-            "id": "v5_001b",
-            "titel": "Confidence scoring op interpretaties + DYNAMISCHE drempel",
-            "notes": "Hoge conf (>80%): direct antwoord. Medium (40-80%): zacht inbouwen ('Volgens mij bedoel je X — corrigeer me als het anders is'). Laag (<40%): expliciete wedervraag. ⚠ Drempel is NIET vast: leert per gebruiker en per behoefte. Iemand die kort/direct is krijgt hogere drempel (minder wedervragen). Iemand die diepe context wil krijgt lagere drempel."
-          },
-          {
-            "id": "v5_001c",
-            "titel": "Stilte-modus — wanneer NIET reageren",
-            "notes": "Niet elke uiting is een hulpvraag. 'Ik weet het niet meer' kan ook humor zijn (Willem doet dit constant) of gewoon ventileren. Spark moet leren: erkenning ('hmm, herken ik') > vraag > advies. Trigger: emotionele lading + geen vraagteken + korte zin = waarschijnlijk geen hulpvraag."
-          },
-          {
-            "id": "v5_001d",
-            "titel": "Wedervraag-templates per behoefte-type",
-            "notes": "Bij 'overzicht'-behoefte: 'Wil je dat ik alles op een rij zet?'. Bij 'erkenning': 'Klinkt zwaar — wil je gewoon even kwijt?'. Bij 'structuur': 'Zal ik stappen voorstellen?'. Geen one-size-fits-all wedervraag."
-          }
-        ]
-      },
-      {
-        "id": "v5_002",
-        "titel": "Polyseme kaarten — 1 begrip, N betekenissen (context-velden)",
-        "status": "todo",
-        "priority": "low",
-        "progress": 0,
-        "fase": "v5 — menselijke communicatie laag",
-        "beschrijving": "'Bank' kan meubel/instituut/rustplek/sociale setting zijn. Nu: 1 kaart, statische tags. Doel: schema 3.0 met betekenissen[] array, elk met context_tags. Welke betekenis 'wint' wordt bepaald door context in de chat (recente begrippen, emotie, intent).",
-        "schema_voorstel": {
-          "begrip": "bank",
-          "betekenissen": [
-            {"context_tags": ["zitten", "huis", "meubel"], "laag1": "Zitmeubel..."},
-            {"context_tags": ["geld", "rekening", "financieel"], "laag1": "Financiële instelling..."},
-            {"context_tags": ["rust", "natuur", "parkbank"], "laag1": "Rustplek buiten..."}
-          ]
-        },
-        "open_vraag": "Hoe migreren we 2800+ bestaande kaarten? Waarschijnlijk: alleen kaarten met multiple-meaning detectie krijgen splitsing (handmatig of via analyser-suggestie)."
-      },
-      {
-        "id": "v5_003",
-        "titel": "Interpretation-feedback in Shadow Observer",
-        "status": "todo",
-        "priority": "low",
-        "progress": 0,
-        "fase": "v5 — menselijke communicatie laag",
-        "beschrijving": "Shadow Observer logt nu 'was er een correction signal?' maar niet 'WELKE interpretatie was fout'. Uitbreiding: bij elke beurt registreer ook de gekozen interpretatie + confidence. Als user corrigeert: link aan welke interpretatie verkeerd was. Voedt v5_001b confidence-leren.",
-        "afhankelijk_van": "v5_001b moet bestaan om confidence-waarden te loggen."
-      },
-      {
         "id": "v4_kb_create_001",
         "titel": "Kennisbank — Nieuwe kaart tab met live duplicate-check",
         "status": "done",

@@ -1,14 +1,14 @@
 {
   "totals": {
-    "events": 82,
+    "events": 93,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 36
+    "knowledge_matches": 38
   },
   "triggers_used": {
-    "wedervraag_done": 5,
-    "wedervraag": 7,
+    "wedervraag_done": 6,
+    "wedervraag": 8,
     "wedervraag_skip": 2,
     "agenda_overview": 5,
     "make_note": 2,
@@ -16,18 +16,18 @@
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
-    "welcome": 10,
+    "welcome": 12,
     "recap": 1,
-    "greeting": 2,
+    "greeting": 3,
     "prive": 1,
     "goodbye": 1,
     "knowledge_deeper": 1
   },
   "response_types": {
-    "knowledge": 20,
+    "knowledge": 22,
     "unknown": 8,
-    "wedervraag_done": 5,
-    "wedervraag": 7,
+    "wedervraag_done": 6,
+    "wedervraag": 8,
     "wedervraag_skip": 2,
     "agenda_overview": 5,
     "note_created": 2,
@@ -35,13 +35,14 @@
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
-    "welcome": 10,
+    "welcome": 12,
     "recap": 1,
-    "greeting": 2,
-    "general": 11,
+    "greeting": 3,
+    "general": 14,
     "prive_message": 1,
     "goodbye": 1,
-    "knowledge_deeper": 1
+    "knowledge_deeper": 1,
+    "question": 1
   },
   "begrip_used": {
     "vroeg": 1,
@@ -69,12 +70,13 @@
     "aanzetten": 1,
     "Hoofd": 1,
     "Lichaam": 1,
-    "Test": 1
+    "Test": 1,
+    "Spark": 2
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-16T11:44:52.419716+00:00",
+  "last_event_at": "2026-05-18T11:08:10.521762+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

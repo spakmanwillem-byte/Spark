@@ -31,6 +31,7 @@ Dutch (always respond in Dutch).
 - 2026-05-16: **v4_dq_a** — Code Quality fixes: circular imports resolved (trade/routes uses relative imports, graph/sync_service uses sys.modules), `random.choice` → `secrets.choice` across chat/bots/contributions modules.
 - 2026-05-16: **v4_016a — Analyser laag 1 (unused-vocab)** — Read-only endpoint `GET /api/spark/insights/unused-vocab` analyseert shadow events en geeft kandidaat-woorden terug die vaak voorkwamen maar niet in vocab/triggers/knowledge zitten. Stopwoorden + tijd-tokens uitgefilterd. Geen wijzigingen, alleen suggesties.
 - 2026-05-16: **v4_kb_create_001** — Kennisbank "Nieuwe kaart" tab met live duplicate-check (exact-match). Endpoints `GET /api/knowledge/exists` + `POST /api/knowledge/create`. Full form (begrip + topic + tags + lagen 1-4 + ws5 + belangrijkheid). Bij dup: rode tekst + save-knop disabled. Graph auto-sync.
+- 2026-05-18: **v4_identity_001** — Identity-Intent laag. Spark beantwoordt nu vragen over zichzelf (wie ben je, missie, visie, core, waarom besta je, etc.) uit spark_identity + spark_profile + spark_bijbel + de 3 kaarten Missie/Visie/Core. Plugt vóór alle pending flows in chat/routes.py. 11/11 test-vragen ✅.
 
 ## In progress / backlog
 ### P0 / Open follow-ups

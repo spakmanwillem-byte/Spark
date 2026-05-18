@@ -3132,6 +3132,17 @@
     "progress": 0,
     "items": [
       {
+        "id": "v4_identity_001",
+        "titel": "Identity-Intent laag — Spark beantwoordt vragen over zichzelf",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-18",
+        "beschrijving": "Nieuwe module modules/chat/identity_intent_service.py. Detecteert via regex vragen-over-Spark (wie ben je, wat kan je, jouw missie/visie/core/doel/waarden, waarom besta je, vertel over jezelf, wie maakte je, wat maakt je anders). Bouwt antwoorden uit spark_identity.json + spark_profile.json (biografie.missie/visie/waarden/waarom_gemaakt) + spark_bijbel.kernwaarden + de drie nieuwe kaarten Missie/Visie/Core. Plugt in chat/routes.py vóór alle pending flows, dus identity-vraag werkt ook als user nog in stale wedervraag-state zit. Bij identity-hit wordt pending state ook gecleared (escape hatch).",
+        "patronen": ["wie ben je/jij", "wat kan je/jij/spark", "jouw missie/visie/core/doel", "waarom/waarvoor besta je/jij", "wat zijn je waarden", "vertel over jezelf", "stel je voor", "wie maakte je/jou", "wat maakt je/jou anders"],
+        "11_test_vragen": "Alle 11 test-vragen gaven correct identity_* type antwoorden (geen fallback meer naar 'waarom' + 'bestand')."
+      },
+      {
         "id": "v5_001",
         "titel": "Pattern Learning",
         "beschrijving": "Learn patterns from conversations automatically",

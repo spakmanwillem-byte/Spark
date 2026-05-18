@@ -1,14 +1,14 @@
 {
   "totals": {
-    "events": 93,
+    "events": 117,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 38
+    "knowledge_matches": 47
   },
   "triggers_used": {
     "wedervraag_done": 6,
-    "wedervraag": 8,
+    "wedervraag": 9,
     "wedervraag_skip": 2,
     "agenda_overview": 5,
     "make_note": 2,
@@ -18,16 +18,27 @@
     "topic_overview": 3,
     "welcome": 12,
     "recap": 1,
-    "greeting": 3,
+    "greeting": 4,
     "prive": 1,
     "goodbye": 1,
-    "knowledge_deeper": 1
+    "knowledge_deeper": 1,
+    "bijbel_reply": 1,
+    "identity_intro": 1,
+    "identity_what_can": 2,
+    "identity_missie": 1,
+    "identity_visie": 1,
+    "identity_core": 1,
+    "identity_doel": 3,
+    "identity_intro_full": 1,
+    "identity_maker": 2,
+    "identity_waarden": 1,
+    "identity_uniek": 1
   },
   "response_types": {
-    "knowledge": 22,
+    "knowledge": 28,
     "unknown": 8,
     "wedervraag_done": 6,
-    "wedervraag": 8,
+    "wedervraag": 9,
     "wedervraag_skip": 2,
     "agenda_overview": 5,
     "note_created": 2,
@@ -37,12 +48,23 @@
     "topic_overview": 3,
     "welcome": 12,
     "recap": 1,
-    "greeting": 3,
+    "greeting": 4,
     "general": 14,
     "prive_message": 1,
     "goodbye": 1,
     "knowledge_deeper": 1,
-    "question": 1
+    "question": 2,
+    "bijbel_reply": 1,
+    "identity_intro": 1,
+    "identity_what_can": 2,
+    "identity_missie": 1,
+    "identity_visie": 1,
+    "identity_core": 1,
+    "identity_doel": 3,
+    "identity_intro_full": 1,
+    "identity_maker": 2,
+    "identity_waarden": 1,
+    "identity_uniek": 1
   },
   "begrip_used": {
     "vroeg": 1,
@@ -71,12 +93,17 @@
     "Hoofd": 1,
     "Lichaam": 1,
     "Test": 1,
-    "Spark": 2
+    "Spark": 4,
+    "visie": 1,
+    "Core": 1,
+    "waarom": 2,
+    "Bestand": 2,
+    "Maakt": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-18T11:08:10.521762+00:00",
+  "last_event_at": "2026-05-18T12:05:26.075689+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

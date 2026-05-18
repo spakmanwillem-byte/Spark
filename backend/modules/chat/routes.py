@@ -21,6 +21,7 @@ from . import card_session_service
 from . import bijbel_lookup_service
 from . import fallback_service
 from . import shadow_observer
+from . import identity_intent_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -74,6 +75,21 @@ async def process_message(req: ChatMessage):
 
     # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
     state = session_state.get_state(req.user_id) if req.user_id else {}
+
+    # 0b1. IDENTITY-INTENT (v4_identity_001) — vragen over Spark zelf ("wie ben je", "wat kan je",
+    # "jouw missie/visie/core/doel/waarden") krijgen voorrang vóór alle pending flows.
+    # Dit voorkomt ook dat een stale pending_wedervraag een identity-vraag opvreet.
+    identity_resp = identity_intent_service.try_answer(text, user_naam=req.user_naam)
+    if identity_resp:
+        response.update({
+            "type": identity_resp["type"],
+            "message": identity_resp["message"],
+        })
+        _save_log(req, response, identity_resp["type"])
+        # Bij identity-vraag: clear pending state zodat user uit een stuck flow kan stappen
+        if req.user_id and (state.get("pending_wedervraag") or state.get("pending_card_session") or state.get("pending_wv_consent")):
+            session_state.set_state(req.user_id, pending_wedervraag=None, pending_card_session=None, pending_wv_consent=None)
+        return response
 
     # 0z. KAART-SESSIE FLOW (v4_008): HOOGSTE prioriteit — als sessie actief is,
     # niets anders mag voorrang krijgen. Anders eet bv. agenda-intent of een

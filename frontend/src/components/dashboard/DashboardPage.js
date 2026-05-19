@@ -74,6 +74,8 @@ function buildRecentChats(sparkLog, community, contacts) {
 
 export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const { user, isAdmin } = useAuth();
+  const userGrad = user?.gradatie ?? 7;
+  const isAdminUser = userGrad <= 2; // v4_dashboard_grad_001: 1-2 zien admin widgets
   const [knowledgeStats, setKnowledgeStats] = useState(null);
   const [fileStats, setFileStats] = useState(null);
   const [userStats, setUserStats] = useState(null);
@@ -170,8 +172,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
           </div>
           <div className="flex items-center gap-3">
             <QuickStat icon={BookOpen} value={kbTotal.toLocaleString()} label="Kaarten" color="#f59e0b" />
-            <QuickStat icon={Zap} value="156" label="Triggers" color="#22c55e" />
-            <QuickStat icon={Users} value={totalUsers} label="Users" color="#3b82f6" />
+            {isAdminUser && <QuickStat icon={Zap} value="156" label="Triggers" color="#22c55e" />}
+            {isAdminUser && <QuickStat icon={Users} value={totalUsers} label="Users" color="#3b82f6" />}
             <QuickStat icon={FolderOpen} value={totalFiles} label="Bestanden" color="#a855f7" />
           </div>
         </div>
@@ -201,7 +203,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
               </div>
             </Card>
 
-            {/* Triggers */}
+            {/* Triggers — ADMIN ONLY (gradatie ≤ 2) */}
+            {isAdminUser && (
             <Card title="Triggers" icon={Zap} accent="#22c55e" badge="156 ACTIEF" badgeColor="#22c55e" onClick={() => onNavigate('triggers', '/spark/triggers')}>
               <div className="space-y-2">
                 {[
@@ -220,6 +223,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 ))}
               </div>
             </Card>
+            )}
 
             {/* Emoties */}
             <Card title="Emotie Systeem" icon={Sparkles} accent="#ec4899" onClick={() => onNavigate('emotions', '/spark/emotions')}>
@@ -243,7 +247,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
           {/* === Col 2: System + Verbanden (span 5) === */}
           <div className="col-span-12 lg:col-span-5 space-y-4">
-            {/* System Status */}
+            {/* System Status — ADMIN ONLY */}
+            {isAdminUser && (
             <Card title="Systeem Status" icon={Server} accent="#3b82f6">
               <div className="grid grid-cols-3 gap-3 mb-4">
                 <div className="p-3 bg-slate-800/50 rounded-xl text-center">
@@ -269,6 +274,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 <StatusRow label="Chat / Spark Brain" status="planned" />
               </div>
             </Card>
+            )}
 
             {/* Verbanden / Knowledge Graph */}
             <Card title="Verbanden" icon={Network} accent="#06b6d4" badge={`${kbTotal} nodes`} badgeColor="#06b6d4" onClick={() => onNavigate('connections', '/spark/connections')}>
@@ -296,7 +302,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
           {/* === Col 3: Users + Files + Agenda (span 3) === */}
           <div className="col-span-12 lg:col-span-3 space-y-4">
-            {/* Users */}
+            {/* Users — ADMIN ONLY */}
+            {isAdminUser && (
             <Card title="Gebruikers" icon={Users} accent="#3b82f6" badge={`${totalUsers} actief`} badgeColor="#3b82f6" onClick={() => onNavigate('users', '/admin/users')}>
               <div className="space-y-2">
                 {userList.slice(0, 4).map((u, i) => (
@@ -313,6 +320,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 ))}
               </div>
             </Card>
+            )}
 
             {/* Mijn Opslag */}
             <StorageCard storageStats={storageStats} onNavigate={onNavigate} />
@@ -358,8 +366,10 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
               </div>
             </Card>
 
-            {/* Shadow Observer (v4_shadow_001) — voorlopige plek op dashboard */}
+            {/* Shadow Observer — ADMIN ONLY */}
+            {isAdminUser && (
             <ShadowCard shadowStats={shadowStats} shadowUnused={shadowUnused} />
+            )}
           </div>
 
         </div>

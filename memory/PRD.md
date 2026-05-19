@@ -43,6 +43,7 @@ Dutch (always respond in Dutch).
 - 2026-05-19: **v4_agenda_announce_001** — Spark vermeldt aankomende afspraak (≤60min) in welcome message. Glow ack-flow: klik op nav/tab → POST /api/urgent/acknowledge → glow uit. Ack TTL = event_dt+10min.
 - 2026-05-19: **v4_rel_002** — relation_extraction sync naar persons cards: nieuwe relaties uit chat schrijven nu OOK in `/data/persons/{user_id}.json` (cards UI). Bestaande relations gemigreerd: Arent Pelster (jeugdvriend), Willie Bakker (vader, overleden), Heidi Spakman (moeder), Maurice (vriend i.p.v. collega), Maaike Spakman (zus). Fix maakt sneller zichtbaar in Persoonkaarten UI.
 - 2026-05-19: **v4_notes_002 — user-bound notes/tasks**: `/api/notes/*` heeft nu verplicht `user_id` param + filtert op owner. 403 bij andermans notitie. Bestaande 3 notities gemigreerd naar user-001. Vóór deze fix waren alle notes 1 gedeelde pool voor alle users.
+- 2026-05-19: **v4_dashboard_grad_001 — Dashboard per gradatie**: 4 widgets (Triggers, Systeem Status, Gebruikers, Shadow Observer) + 2 top-stats (Triggers/Users badges) nu alleen zichtbaar voor gradatie ≤ 2. Lower gradaties zien een gestripte, persoonlijke dashboard.
 
 ## In progress / backlog
 ### P0 / Open follow-ups

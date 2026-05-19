@@ -23,35 +23,40 @@
       "id": "person-e92653b6",
       "naam": "Maurice Maas",
       "volledige_naam": "Maurice Maas",
-      "relatie": "collega",
-      "gradatie": 4,
+      "relatie": "vriend",
+      "gradatie": 3,
       "is_user": true,
       "linked_user_id": "user-maurice",
       "tags": [
-        "collega"
+        "collega",
+        "oud-collega",
+        "vriend"
       ],
-      "notes": "",
+      "notes": "Goede vriend, oud-collega",
       "created_by": "user-001",
       "conversation_refs": [],
       "knowledge_refs": [],
       "created_at": "2026-03-15T17:03:38.248244",
-      "updated_at": "2026-03-15T17:03:38.248246"
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
     },
     {
       "id": "person-fac9edb5",
       "naam": "Heidi Spakman",
       "volledige_naam": "Heidi Spakman",
-      "relatie": null,
-      "gradatie": 5,
+      "relatie": "moeder",
+      "gradatie": 2,
       "is_user": false,
       "linked_user_id": null,
-      "tags": [],
+      "tags": [
+        "familie",
+        "moeder"
+      ],
       "notes": "",
       "created_by": "user-001",
       "conversation_refs": [],
       "knowledge_refs": [],
       "created_at": "2026-03-21T18:20:38.611808",
-      "updated_at": "2026-03-21T18:20:38.611814"
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
     },
     {
       "id": "person-1f566774",
@@ -68,11 +73,50 @@
       "knowledge_refs": [],
       "created_at": "2026-03-21T18:21:14.868666",
       "updated_at": "2026-03-21T18:21:14.868671"
+    },
+    {
+      "id": "person-1d1cfbe4",
+      "naam": "Arent Pelster",
+      "volledige_naam": "Arent Pelster",
+      "relatie": "jeugdvriend",
+      "gradatie": 3,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "vriend",
+        "jeugdvriend"
+      ],
+      "notes": "Jeugdvriend",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-05-19T12:06:48.982489+00:00",
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
+    },
+    {
+      "id": "person-b3e48369",
+      "naam": "Willie Bakker",
+      "volledige_naam": "Willie Bakker",
+      "relatie": "vader",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "vader",
+        "overleden"
+      ],
+      "notes": "Vader. Overleden.",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-05-19T12:06:48.982489+00:00",
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_persons": 4,
-    "last_updated": "2026-04-01T09:32:51.289138+00:00"
+    "total_persons": 6,
+    "last_updated": "2026-05-19T12:07:38.526490+00:00"
   }
 }

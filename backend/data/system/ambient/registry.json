@@ -2,12 +2,30 @@
   "loops": [
     {
       "id": "birds_loop_01",
-      "label": "Vogels (bos)",
+      "label": "Vogels 1 (bos)",
       "filename": "birds_loop_01.wav",
       "category": "natuur",
       "ambient_nr": 1,
-      "triggers": ["ambient 1", "ambient1", "vogels", "natuurgeluid"],
+      "triggers": ["ambient 1", "ambient1", "vogels 1", "vogels1"],
       "uploaded_at": "2026-05-19T06:00:00+00:00"
+    },
+    {
+      "id": "birds_loop_02",
+      "label": "Vogels 2 (bos)",
+      "filename": "birds_loop_02.wav",
+      "category": "natuur",
+      "ambient_nr": 2,
+      "triggers": ["ambient 2", "ambient2", "vogels 2", "vogels2"],
+      "uploaded_at": "2026-05-19T07:23:00+00:00"
+    },
+    {
+      "id": "city_amb_loop_01",
+      "label": "Stad (sfeer)",
+      "filename": "city_amb_loop_01.wav",
+      "category": "stad",
+      "ambient_nr": 3,
+      "triggers": ["ambient 3", "ambient3", "stad", "stad 1"],
+      "uploaded_at": "2026-05-19T07:23:00+00:00"
     }
   ]
 }

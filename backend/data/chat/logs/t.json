@@ -523,11 +523,252 @@
         "session_id": "default",
         "gesprek_nummer": 22
       }
+    },
+    {
+      "id": "conv-76beae3b",
+      "timestamp": "2026-05-19T07:24:02.918188+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "ambient 1 aan",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 23
+      }
+    },
+    {
+      "id": "conv-a497b2bd",
+      "timestamp": "2026-05-19T07:24:03.044346+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "ambient 2 aan",
+      "spark_response": "🎵 Speel **Vogels 2 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 24
+      }
+    },
+    {
+      "id": "conv-3787cfd6",
+      "timestamp": "2026-05-19T07:24:03.168679+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "ambient 3 aan",
+      "spark_response": "🎵 Speel **Stad (sfeer)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 25
+      }
+    },
+    {
+      "id": "conv-b603a55a",
+      "timestamp": "2026-05-19T07:24:03.272079+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "stad aan",
+      "spark_response": "🎵 Speel **Stad (sfeer)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "stad"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 26
+      }
+    },
+    {
+      "id": "conv-9706408a",
+      "timestamp": "2026-05-19T07:24:03.406438+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "vogels 2 aan",
+      "spark_response": "🎵 Speel **Vogels 2 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 27
+      }
+    },
+    {
+      "id": "conv-cd2e3dca",
+      "timestamp": "2026-05-19T07:24:03.556138+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "ambient 2 uit",
+      "spark_response": "Achtergrondgeluid uitgezet.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 28
+      }
+    },
+    {
+      "id": "conv-eb3accdc",
+      "timestamp": "2026-05-19T07:25:42.192403+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "sst aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 29
+      }
+    },
+    {
+      "id": "conv-fa29cb5e",
+      "timestamp": "2026-05-19T07:25:42.335636+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "tss aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 30
+      }
+    },
+    {
+      "id": "conv-d447b4c8",
+      "timestamp": "2026-05-19T07:25:42.442828+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "sst uit",
+      "spark_response": "Speech-to-Text uitgezet. Je kunt weer typen 🌝",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 31
+      }
+    },
+    {
+      "id": "conv-bd10e73d",
+      "timestamp": "2026-05-19T07:25:42.569703+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "tss uit",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 32
+      }
     }
   ],
   "metadata": {
     "user_id": "t",
-    "total_conversations": 22,
-    "last_updated": "2026-05-19T07:17:22.365836+00:00"
+    "total_conversations": 32,
+    "last_updated": "2026-05-19T07:25:42.569703+00:00"
   }
 }

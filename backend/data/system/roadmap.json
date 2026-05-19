@@ -3233,6 +3233,17 @@
         }
       },
       {
+        "id": "v4_cache_layer_001",
+        "titel": "Lichte cache-laag voor heavy-read files (knowledge, vocab, triggers, registry)",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "fase": "v4 — performance",
+        "beschrijving": "Idee van Willem (mei 2026): paar MB RAM reserveren voor frequently-read JSON files. Doel: response-tijd chat omlaag, vooral bij 3000+ kennis-kaarten en 7+ trigger files. Pattern: lazy-load on first read, invalidate bij file mtime change of explicit signal. Graph module heeft dit al (_nodes_cache/_edges_cache + sync_service._invalidate_graph_cache). Uitbreiden naar: knowledge_base.json, spark_vocab.json, alle trigger files, ambient registry.",
+        "implementatie_idee": "Module modules/core/file_cache.py met @cached_json(path, max_age_sec=60) decorator. mtime-check pre-read. Maximaal 10 MB cache budget. Reset endpoint POST /api/system/cache/clear voor admin.",
+        "open_keuzes": "TTL vs mtime-based invalidation. Multi-process compat (waarschijnlijk single-process voor nu, niet relevant). Wanneer doen: wanneer chat-respons consistent boven 500ms gaat, of bij >5000 kaarten."
+      },
+      {
         "id": "v4_logout_001",
         "titel": "Logout-bug: clear_state om stale pending flows te voorkomen",
         "status": "done",

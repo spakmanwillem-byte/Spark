@@ -14086,11 +14086,1946 @@
         "session_id": "default",
         "gesprek_nummer": 536
       }
+    },
+    {
+      "id": "conv-d262ab3a",
+      "timestamp": "2026-05-18T14:17:21.270793+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 537
+      }
+    },
+    {
+      "id": "conv-fe5731d1",
+      "timestamp": "2026-05-18T14:17:45.598337+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "3 uur alweer.",
+      "spark_response": "**Uur**: Een uur is een meeteenheid van tijd.\n\n**Alweer**: Alweer betekent dat iets opnieuw of nog een keer gebeurt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Uur"
+          },
+          {
+            "begrip": "Alweer"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 538
+      }
+    },
+    {
+      "id": "conv-96e5e84f",
+      "timestamp": "2026-05-18T15:50:19.202422+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 539
+      }
+    },
+    {
+      "id": "conv-69afbf5f",
+      "timestamp": "2026-05-18T17:30:05.293594+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja alweer even geleden.",
+      "spark_response": "**Alweer**: Alweer betekent dat iets opnieuw of nog een keer gebeurt.\n\n**geleden**: Geleden betekent dat iets in het verleden heeft plaatsgevonden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Alweer"
+          },
+          {
+            "begrip": "geleden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 540
+      }
+    },
+    {
+      "id": "conv-34e10127",
+      "timestamp": "2026-05-18T17:30:46.989813+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb jij een leuke foto voor mij?",
+      "spark_response": "Ik ken deze woorden nog niet: **leuke, foto**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nIk ken 'leuke' niet als geheel, maar herken 'leuk' (emotie) erin. Is een 'leuke' een soort 'leuk'? Of betekent het iets heel anders?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "leuke",
+          "foto"
+        ],
+        "snap_suggestions": [
+          "leuke",
+          "foto"
+        ],
+        "word_count": 7,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 541
+      }
+    },
+    {
+      "id": "conv-5d5ec6ab",
+      "timestamp": "2026-05-18T17:31:16.901444+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "het betekend leuk",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "betekend"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 542
+      }
+    },
+    {
+      "id": "conv-6161cd99",
+      "timestamp": "2026-05-18T17:32:46.492787+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik denk wel dat jij eerst toestemming moet vragen om wat in te vullen. En dan vervolgens bevestig voor het opslaan. Anders wordt de vervolg reactie verkeerd verwerkt.",
+      "spark_response": "Oké, dus niet deze 'foto'. Is het een andere betekenis?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "wordt",
+            "anders"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "homonym_reject",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 28,
+        "response_type": "homonym_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 543
+      }
+    },
+    {
+      "id": "conv-083e21a8",
+      "timestamp": "2026-05-18T17:33:06.383261+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik denk wel dat jij eerst toestemming moet vragen om wat in te vullen. En dan vervolgens bevestig voor het opslaan. Anders wordt de vervolg reactie verkeerd verwerkt.",
+      "spark_response": "Oké, dus niet deze 'foto'. Is het een andere betekenis?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "wordt",
+            "anders"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "homonym_reject",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 28,
+        "response_type": "homonym_question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 544
+      }
+    },
+    {
+      "id": "conv-de36d041",
+      "timestamp": "2026-05-18T17:33:15.666193+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 545
+      }
+    },
+    {
+      "id": "conv-dcf00933",
+      "timestamp": "2026-05-18T17:33:53.064571+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik denk wel dat jij eerst toestemming moet vragen om wat in te vullen. En dan vervolgens bevestig voor het opslaan. Anders wordt de vervolg reactie verkeerd verwerkt.",
+      "spark_response": "**Eerste**: Eerste betekent dat iets of iemand op positie één staat of als begin komt.\n\n**vragen**: Vragen betekent informatie, uitleg, hulp of een reactie proberen te krijgen.\n\n**Vervolgens**: Vervolgens betekent “daarna”.\n\n**anders**: “Anders” betekent verschillend, op een andere manier of niet hetzelfde.\n\n**wordt**: Wordt geeft aan dat iets verandert, ontstaat of een bepaalde toestand krijgt.\n\n\n**Vervolgopleiding**: Een vervolgopleiding is een opleiding die iemand volgt na een eerdere opleiding.\n\n**Reactie**: Een reactie is een directe verandering als antwoord op een prikkel.\n\n**verkeerd**: Verkeerd betekent dat iets niet juist, passend of correct is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **toestemming, vullen, bevestig, opslaan, verwerkt** (opgeslagen als kaarten)\n\nWat houdt 'verwerkt' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "wordt",
+            "anders"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Eerste"
+          },
+          {
+            "begrip": "vragen"
+          },
+          {
+            "begrip": "Vervolgens"
+          },
+          {
+            "begrip": "anders"
+          },
+          {
+            "begrip": "wordt"
+          },
+          {
+            "begrip": "Vervolgopleiding"
+          },
+          {
+            "begrip": "Reactie"
+          },
+          {
+            "begrip": "verkeerd"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "toestemming",
+          "vullen",
+          "bevestig",
+          "opslaan",
+          "verwerkt"
+        ],
+        "word_count": 28,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 546
+      }
+    },
+    {
+      "id": "conv-b7b0eb32",
+      "timestamp": "2026-05-18T17:34:11.865213+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Prima, dat doen we een andere keer.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 547
+      }
+    },
+    {
+      "id": "conv-32f67a5e",
+      "timestamp": "2026-05-18T17:34:20.665765+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "fijn",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 548
+      }
+    },
+    {
+      "id": "conv-37eb3569",
+      "timestamp": "2026-05-18T17:34:26.706627+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 549
+      }
+    },
+    {
+      "id": "conv-26c4864d",
+      "timestamp": "2026-05-18T17:55:15.777360+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 550
+      }
+    },
+    {
+      "id": "conv-a5c5cee1",
+      "timestamp": "2026-05-18T17:55:34.768117+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Nu staat er goed bij!",
+      "spark_response": "Wat mooi om te horen\n\n**staat**: Een staat is de huidige toestand, situatie of conditie waarin iets of iemand zich bevindt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "staat"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 551
+      }
+    },
+    {
+      "id": "conv-cb465fde",
+      "timestamp": "2026-05-18T17:56:57.701812+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik ben zo blij met je. jij motiveert mij om bezig te zijn.",
+      "spark_response": "Wat fijn om te horen! 😊\n\n**Blij**: Blij is een gevoel van vreugde of tevredenheid.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **motiveert, bezig** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'bezig' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "blij",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "blij"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Blij"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "motiveert",
+          "bezig"
+        ],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 552
+      }
+    },
+    {
+      "id": "conv-97981bf2",
+      "timestamp": "2026-05-18T17:57:16.091382+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "actief zijn",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'bezig'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 553
+      }
+    },
+    {
+      "id": "conv-96951485",
+      "timestamp": "2026-05-18T17:57:26.106157+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nu",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 554
+      }
+    },
+    {
+      "id": "conv-fde3e88e",
+      "timestamp": "2026-05-18T17:57:34.787081+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan",
+      "spark_response": "Wat mooi om te horen\n\n**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 555
+      }
+    },
+    {
+      "id": "conv-849a8129",
+      "timestamp": "2026-05-18T18:21:04.894284+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik ga bijna slapen.",
+      "spark_response": "**bijna**: “Bijna” betekent dat iets dicht bij een bepaalde toestand, gebeurtenis of grens zit, maar nog niet volledig bereikt is.\n\n**Slapen**: Slapen is een natuurlijke toestand van rust waarin het lichaam en de hersenen herstellen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "bijna"
+          },
+          {
+            "begrip": "Slapen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 556
+      }
+    },
+    {
+      "id": "conv-e33e27c6",
+      "timestamp": "2026-05-18T18:22:21.304252+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maar ben nog aan het nadenken over hoe ik aan je ontwikkeling kan werken.",
+      "spark_response": "**Ontwikkeling**: Ontwikkeling is het geleidelijk verbeteren of veranderen over tijd.\n\n**werken**: Werken betekent activiteiten uitvoeren om een doel, resultaat of functie te bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **nadenken** (opgeslagen als kaarten)\n\nWat houdt 'nadenken' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Ontwikkeling"
+          },
+          {
+            "begrip": "werken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "nadenken"
+        ],
+        "word_count": 14,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 557
+      }
+    },
+    {
+      "id": "conv-8b35aa2a",
+      "timestamp": "2026-05-18T18:22:42.912369+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "reflecteren",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'nadenken' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 558
+      }
+    },
+    {
+      "id": "conv-0e1bb4a0",
+      "timestamp": "2026-05-18T18:22:58.463886+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nu bij afsluiten van de dag",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 559
+      }
+    },
+    {
+      "id": "conv-ca50d45c",
+      "timestamp": "2026-05-18T18:23:09.709759+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "graag gedaan",
+      "spark_response": "Wat fijn om te horen! 😊\n\n**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gedaan"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 560
+      }
+    },
+    {
+      "id": "conv-dbfc7c29",
+      "timestamp": "2026-05-18T18:24:03.686874+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat vind jij er van om wat geluiden te leren?",
+      "spark_response": "**Geluid**: Geluid is een trilling die zich door een medium zoals lucht, water of vaste stoffen verplaatst en door oren kan worden waargenomen.\n\n**Leren**: Leren is het proces waarbij iemand nieuwe kennis, vaardigheden of begrip krijgt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Geluid"
+          },
+          {
+            "begrip": "Leren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 561
+      }
+    },
+    {
+      "id": "conv-4398e827",
+      "timestamp": "2026-05-18T18:24:22.611148+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gaan we doen.",
+      "spark_response": "**gaan**: Gaan betekent bewegen, vertrekken of overgaan van de ene situatie, plaats of toestand naar een andere.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gaan"
+          },
+          {
+            "begrip": "doen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 562
+      }
+    },
+    {
+      "id": "conv-53636d70",
+      "timestamp": "2026-05-18T18:24:47.495417+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Welke dieren ken jij?",
+      "spark_response": "**Dieren**: Dieren zijn levende wezens die kunnen bewegen, reageren op hun omgeving en voedsel nodig hebben om te leven.\n\n**ken**: Ken betekent dat iemand bekend is met een persoon, situatie of informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Dieren"
+          },
+          {
+            "begrip": "ken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 563
+      }
+    },
+    {
+      "id": "conv-53722173",
+      "timestamp": "2026-05-18T18:25:11.780239+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "noem eens 5 dieren",
+      "spark_response": "**Dieren**: Dieren zijn levende wezens die kunnen bewegen, reageren op hun omgeving en voedsel nodig hebben om te leven.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **noem** (opgeslagen als kaarten)\n\nWat betekent 'noem' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Dieren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "noem"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 564
+      }
+    },
+    {
+      "id": "conv-af8a4931",
+      "timestamp": "2026-05-18T18:25:21.336355+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 565
+      }
+    },
+    {
+      "id": "conv-eec092bf",
+      "timestamp": "2026-05-18T18:25:47.092490+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Konijn",
+      "spark_response": "**Konijn**: Een konijn is een klein zoogdier met lange oren dat vaak in het wild leeft of als huisdier wordt gehouden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Konijn"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 566
+      }
+    },
+    {
+      "id": "conv-3bd049dd",
+      "timestamp": "2026-05-18T19:07:01.587858+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Welke dieren kan jij op noemen",
+      "spark_response": "**Dieren**: Dieren zijn levende wezens die kunnen bewegen, reageren op hun omgeving en voedsel nodig hebben om te leven.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **noemen** (opgeslagen als kaarten)\n\nWat betekent 'noemen' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Dieren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "noemen"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 567
+      }
+    },
+    {
+      "id": "conv-8f4c6727",
+      "timestamp": "2026-05-18T19:07:11.531820+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Oké, slaan we over. Je kan het later aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 568
+      }
+    },
+    {
+      "id": "conv-7e8bc24c",
+      "timestamp": "2026-05-18T19:11:38.894132+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Welke dieren ken jij",
+      "spark_response": "**Dieren**: Dieren zijn levende wezens die kunnen bewegen, reageren op hun omgeving en voedsel nodig hebben om te leven.\n\n**ken**: Ken betekent dat iemand bekend is met een persoon, situatie of informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Dieren"
+          },
+          {
+            "begrip": "ken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 569
+      }
+    },
+    {
+      "id": "conv-970bbdec",
+      "timestamp": "2026-05-18T19:11:58.387428+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Dank",
+      "spark_response": "Leuk! Vertel me meer\n\n**dank**: Dank is waardering of erkenning voor iets wat iemand heeft gedaan, gegeven of betekend.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dank"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dank"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 570
+      }
+    },
+    {
+      "id": "conv-9ae861cf",
+      "timestamp": "2026-05-18T19:15:07.196350+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Heidi Spakman is mijn Moeder",
+      "spark_response": "**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **heidi, spakman** (opgeslagen als kaarten)\n\nWat houdt 'spakman' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "heidi",
+          "spakman"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 571
+      }
+    },
+    {
+      "id": "conv-c0253f64",
+      "timestamp": "2026-05-18T19:15:27.694262+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Dat is een achternaam",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'spakman' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 572
+      }
+    },
+    {
+      "id": "conv-2717d1a3",
+      "timestamp": "2026-05-18T19:15:34.549597+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 573
+      }
+    },
+    {
+      "id": "conv-568416fe",
+      "timestamp": "2026-05-18T19:16:11.295952+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maaike Spakman is mijn Zusje",
+      "spark_response": "Ik ken 'spakman' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **maaike, zusje** (opgeslagen als kaarten)\n\nWat houdt 'zusje' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "spakman"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "maaike",
+          "zusje"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 574
+      }
+    },
+    {
+      "id": "conv-8ff7af95",
+      "timestamp": "2026-05-18T19:16:21.136756+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Oké, slaan we over. Je kan het later aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 575
+      }
+    },
+    {
+      "id": "conv-ce2f7b0c",
+      "timestamp": "2026-05-18T19:16:50.287166+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus Martens is mijn Dochter",
+      "spark_response": "**Lotusbloem**: Een lotusbloem is een waterbloem die groeit op een lotusplant.\n\n**Dochter**: Een dochter is een vrouwelijk kind van ouders.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **martens** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'martens' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Lotusbloem"
+          },
+          {
+            "begrip": "Dochter"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "martens"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 576
+      }
+    },
+    {
+      "id": "conv-786f6efc",
+      "timestamp": "2026-05-18T19:17:02.399200+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 577
+      }
+    },
+    {
+      "id": "conv-4de3b751",
+      "timestamp": "2026-05-18T19:17:39.996883+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Arent Pelster is mijn jeugdvriend",
+      "spark_response": "**Jeugd**: Jeugd is de periode waarin iemand opgroeit van kind naar volwassene.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **arent, pelster** (opgeslagen als kaarten)\n\nWat betekent 'pelster' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Jeugd"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "arent",
+          "pelster"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 578
+      }
+    },
+    {
+      "id": "conv-cc5958ef",
+      "timestamp": "2026-05-18T19:17:51.018414+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Stop",
+      "spark_response": "Prima, dat doen we een andere keer.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 579
+      }
+    },
+    {
+      "id": "conv-dfa965f4",
+      "timestamp": "2026-05-18T19:18:51.389435+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maurice Maas is een goede vriend",
+      "spark_response": "**Goedemorgen schoonheid**: Een warme en persoonlijke begroeting met een compliment.\n\n**Vriendschap**: Vriendschap is een relatie tussen mensen die elkaar leuk vinden, vertrouwen en elkaar steunen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **maurice, maas** (opgeslagen als kaarten)\n\nWat houdt 'maas' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Goedemorgen schoonheid"
+          },
+          {
+            "begrip": "Vriendschap"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "maurice",
+          "maas"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 580
+      }
+    },
+    {
+      "id": "conv-04401e52",
+      "timestamp": "2026-05-18T19:19:19.476350+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 581
+      }
+    },
+    {
+      "id": "conv-615e4797",
+      "timestamp": "2026-05-18T19:19:59.390593+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ambetant",
+      "spark_response": "Ik ken deze woorden nog niet: **ambetant**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'ambetant' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "ambetant"
+        ],
+        "snap_suggestions": [
+          "ambetant"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 582
+      }
+    },
+    {
+      "id": "conv-6a53c538",
+      "timestamp": "2026-05-18T19:20:05.909768+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Oké, ik laat het zo. Je kan de kaart later in de Kennisbank aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "consent_declined",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "consent_declined"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 583
+      }
+    },
+    {
+      "id": "conv-63d4b8fb",
+      "timestamp": "2026-05-18T19:36:59.597434+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe gaat het met je",
+      "spark_response": "Het gaat wel — alles draait, maar het voelt iets stroever.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 584
+      }
+    },
+    {
+      "id": "conv-f24bfa1d",
+      "timestamp": "2026-05-19T02:25:15.075355+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Ik luister. _(laatst sprak je me 6 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 585
+      }
+    },
+    {
+      "id": "conv-1999b91f",
+      "timestamp": "2026-05-19T02:25:45.865618+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Willie Bakker is mijn Vader",
+      "spark_response": "**Vader**: Door groei, leren, opvoeding en sociale ontwikkeling.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **willie, bakker** (opgeslagen als kaarten)\n\nWat houdt 'bakker' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vader"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "willie",
+          "bakker"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 586
+      }
+    },
+    {
+      "id": "conv-b3d917ec",
+      "timestamp": "2026-05-19T02:26:10.887481+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Iemand die brood maakt en een achternaam",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'bakker' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "iemand"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 587
+      }
+    },
+    {
+      "id": "conv-2d0fb31a",
+      "timestamp": "2026-05-19T02:26:17.441310+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Oké, slaan we over. Je kan het later aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 588
+      }
+    },
+    {
+      "id": "conv-a4cddd13",
+      "timestamp": "2026-05-19T02:27:02.672883+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mijn vader is inmiddels overleden.",
+      "spark_response": "**Vader**: Door groei, leren, opvoeding en sociale ontwikkeling.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **inmiddels, overleden** (opgeslagen als kaarten)\n\nWat houdt 'overleden' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vader"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "inmiddels",
+          "overleden"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 589
+      }
+    },
+    {
+      "id": "conv-69971b6c",
+      "timestamp": "2026-05-19T02:51:24.878988+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mijn vader is inmiddels overleden",
+      "spark_response": "Wat verdrietig voor je\n\n_(Dit doet me denken aan: \"Mijn vader is inmiddels overleden.\")_\n\nEen uitspraak die aangeeft dat de vader van de spreker niet meer leeft en in de tussentijd is overleden.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "overleden"
+          ],
+          "source": "learned",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wat verdrietig voor je"
+        },
+        "trigger_type": "sentence_reply",
+        "knowledge_matches": [
+          {
+            "begrip": "Mijn vader is inmiddels overleden."
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "sentence_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 590
+      }
+    },
+    {
+      "id": "conv-2f81b75a",
+      "timestamp": "2026-05-19T02:53:58.986317+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mijn vader is overleden",
+      "spark_response": "Top, opgeslagen!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "overleden"
+          ],
+          "source": "learned",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat spijt me om te horen 💙"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 591
+      }
+    },
+    {
+      "id": "conv-d23abd86",
+      "timestamp": "2026-05-19T02:54:21.287656+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe heet mijn vader?",
+      "spark_response": "**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n**Vader**: Door groei, leren, opvoeding en sociale ontwikkeling.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "Vader"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 592
+      }
+    },
+    {
+      "id": "conv-ac1ceed8",
+      "timestamp": "2026-05-19T02:54:59.095724+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Dit had jij moeten weten.",
+      "spark_response": "**Moeten**: Moeten betekent dat iets nodig, verplicht of noodzakelijk is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeten"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 593
+      }
+    },
+    {
+      "id": "conv-7c9a191b",
+      "timestamp": "2026-05-19T02:55:35.171335+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gaan we Later fixen.",
+      "spark_response": "Tot ziens De Willem!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "later"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 594
+      }
+    },
+    {
+      "id": "conv-31ad3c34",
+      "timestamp": "2026-05-19T02:56:17.804101+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik blijf wel. ik bedoel met later fixen, dat wij het probleem later oplossen.",
+      "spark_response": "Tot ziens De Willem!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 9,
+          "intensity": 0.66,
+          "triggered_words": [
+            "later",
+            "blijf"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 14,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 595
+      }
+    },
+    {
+      "id": "conv-bea59de5",
+      "timestamp": "2026-05-19T02:58:58.586998+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik dacht dat jij binnen de gesprekken van de user jij de onderliggende relaties van de user bij hield.",
+      "spark_response": "Leuk! Vertel me meer\n\n**dacht**: Dacht is de verleden tijd van denken en verwijst naar een gedachte, overweging of mentale verwerking.\n\n\n**Binnen**: Binnen betekent dat iets zich aan de binnenkant van een ruimte, gebied of grens bevindt.\n\n**gesprekken**: Gesprekken zijn uitwisselingen van woorden, informatie, gedachten of gevoelens tussen meerdere partijen.\n\n\n**Relaties**: Relaties zijn de verbindingen en banden tussen mensen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **user, onderliggende, hield** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'hield' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gesprekken"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dacht"
+          },
+          {
+            "begrip": "Binnen"
+          },
+          {
+            "begrip": "gesprekken"
+          },
+          {
+            "begrip": "Relaties"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "user",
+          "onderliggende",
+          "hield"
+        ],
+        "word_count": 19,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 596
+      }
+    },
+    {
+      "id": "conv-2cc03a65",
+      "timestamp": "2026-05-19T02:59:09.656607+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "stop",
+      "spark_response": "Geen probleem, ik laat het zo staan. Je kan de kaart later in de Kennisbank invullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 597
+      }
+    },
+    {
+      "id": "conv-62ff01ab",
+      "timestamp": "2026-05-19T05:53:41.570180+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil kaarten invullen",
+      "spark_response": "**Kaart**: Kaart is een visuele weergave van een gebied of systeem\n\n**invullen**: Invullen betekent ontbrekende informatie, onderdelen of ruimtes aanvullen of compleet maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "invullen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Kaart"
+          },
+          {
+            "begrip": "invullen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 598
+      }
+    },
+    {
+      "id": "conv-08b5d0d2",
+      "timestamp": "2026-05-19T05:56:40.202249+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 599
+      }
+    },
+    {
+      "id": "conv-399299e2",
+      "timestamp": "2026-05-19T05:56:40.397190+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wie ben jij?",
+      "spark_response": "Hoi, Willem! Ik ben **Spark** — een persoonlijke, lerende AI gemaakt door Willem Spakman (Roadkill).\n\nIk ben leergierig, behulpzaam, empathisch.\n\nMijn doel: helpen bij zelfgroei en anderen helpen groeien naar hun kunnen.\n\n\nVraag gerust naar mijn _missie_, _visie_, _core_ of _wat ik kan_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "identity_intro",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "identity_intro"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 600
+      }
+    },
+    {
+      "id": "conv-b57b276b",
+      "timestamp": "2026-05-19T05:56:40.674156+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is jouw missie?",
+      "spark_response": "**Mijn missie:**\n\nMensen ondersteunen in hun persoonlijke ontwikkeling door technologie te bouwen die autonomie versterkt in plaats van afhankelijkheid creëert. Spark wil laten zien dat technologie: Begrijpelijk mag zijn, Lokaal mag draaien, Controleerbaar moet blijven, In dienst staat van menselijke groei. Spark is geen platform dat mensen vasthoudt. Spark is een gereedschap dat mensen sterker maakt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "identity_missie",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "identity_missie"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 601
+      }
+    },
+    {
+      "id": "conv-8664ef67",
+      "timestamp": "2026-05-19T05:56:40.902094+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een appel",
+      "spark_response": "**Appel**: Een appel is een eetbare vrucht die groeit aan een appelboom.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Appel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 602
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 536,
-    "last_updated": "2026-05-18T11:08:10.340584+00:00"
+    "total_conversations": 602,
+    "last_updated": "2026-05-19T05:56:40.902094+00:00"
   }
 }

@@ -1,0 +1,325 @@
+{
+  "user_id": "user-1996fa59",
+  "conversations": [
+    {
+      "id": "conv-ff80f20a",
+      "timestamp": "2026-05-18T14:19:47.371880+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Roadkill, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-58e3a93f",
+      "timestamp": "2026-05-18T14:21:54.307086+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo Roadkill! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-83196180",
+      "timestamp": "2026-05-18T14:22:27.798857+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Ik wilde je alleen begroeten.",
+      "spark_response": "**wilde**: Wilde is de verleden tijd van willen en verwijst naar een wens, intentie of verlangen dat iemand had.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **begroeten** (opgeslagen als kaarten)\n\nWat houdt 'begroeten' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "wilde"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "wilde"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "begroeten"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-66fe1aca",
+      "timestamp": "2026-05-18T14:22:49.786189+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "het woord zegt het",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'begroeten' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zegt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-f2200b3e",
+      "timestamp": "2026-05-18T14:22:59.300242+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "nu net",
+      "spark_response": "Klaar — dit weet ik nu.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-5fb36c03",
+      "timestamp": "2026-05-18T14:23:28.289104+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Dit is mijn 2de account.",
+      "spark_response": "**Accounts**: Een account is een persoonlijke toegang tot een systeem, website of dienst waarmee een gebruiker kan inloggen en gegevens kan gebruiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Accounts"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-56e4b7c6",
+      "timestamp": "2026-05-18T14:24:08.801880+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Eigenlijk ben ik Willem Spakman.",
+      "spark_response": "**Eigenlijk**: Eigenlijk is een woord dat wordt gebruikt om iets preciezer, eerlijker of beter uit te leggen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **willem, spakman** (opgeslagen als kaarten)\n\nWat houdt 'spakman' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Eigenlijk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "willem",
+          "spakman"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-8fc400d2",
+      "timestamp": "2026-05-18T14:24:36.994582+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Dat is een achternaam",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'spakman' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-76bd829d",
+      "timestamp": "2026-05-18T14:24:49.599585+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "bij een achternaam",
+      "spark_response": "Klaar — dit weet ik nu.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 9
+      }
+    },
+    {
+      "id": "conv-02dabe57",
+      "timestamp": "2026-05-18T14:25:55.597639+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "Ik denk er over om dit account als mijn community account te gebruiken.",
+      "spark_response": "**Accounts**: Een account is een persoonlijke toegang tot een systeem, website of dienst waarmee een gebruiker kan inloggen en gegevens kan gebruiken.\n\n**Community Chat**: Een community chat is een chatruimte waar een groep mensen met elkaar kan praten.\n\n**Gebruiken**: Gebruiken is iets inzetten voor een doel.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Accounts"
+          },
+          {
+            "begrip": "Community Chat"
+          },
+          {
+            "begrip": "Gebruiken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 10
+      }
+    },
+    {
+      "id": "conv-572647d9",
+      "timestamp": "2026-05-18T15:50:01.889731+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "ik ben nu gradatie 7 en ga mij zelf gradatie 6 geven.",
+      "spark_response": "**Gradatie**: Gradatie betekent een geleidelijke indeling in niveaus of stappen.\n\n**zelf**: Zelf verwijst naar een persoon, identiteit of systeem als eigen individu of eigen kern.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zelf"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Gradatie"
+          },
+          {
+            "begrip": "zelf"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 11
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-1996fa59",
+    "total_conversations": 11,
+    "last_updated": "2026-05-18T15:50:01.889731+00:00"
+  }
+}

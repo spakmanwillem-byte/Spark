@@ -80,11 +80,25 @@ class AchievementService:
                 newly_unlocked.append(unlock_entry)
 
         # Save if new unlocks
+        # ⚠ FIX 2026-05-19: voorheen overschreef "xp": total_xp de totale user.xp,
+        # waardoor bijdragen-XP (van xp_service.grant_xp) verloren ging. Nu: alleen
+        # achievement-list opslaan en per nieuwe unlock grant_xp aanroepen (optellend + audit log).
         if newly_unlocked:
             self._save_user(user_id, {
                 "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
-                "xp": total_xp,
             })
+            try:
+                from modules.chat import xp_service
+                for u in newly_unlocked:
+                    reward = u.get("xp_reward", 0)
+                    if reward > 0:
+                        xp_service.grant_xp(
+                            user_id=user_id,
+                            amount=reward,
+                            reason=f"Achievement: {u.get('name','?')}",
+                        )
+            except Exception as ex:
+                print(f"[achievements] grant_xp failed: {ex}")
 
         # Find next milestone
         next_milestone = None

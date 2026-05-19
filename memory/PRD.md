@@ -32,6 +32,10 @@ Dutch (always respond in Dutch).
 - 2026-05-16: **v4_016a — Analyser laag 1 (unused-vocab)** — Read-only endpoint `GET /api/spark/insights/unused-vocab` analyseert shadow events en geeft kandidaat-woorden terug die vaak voorkwamen maar niet in vocab/triggers/knowledge zitten. Stopwoorden + tijd-tokens uitgefilterd. Geen wijzigingen, alleen suggesties.
 - 2026-05-16: **v4_kb_create_001** — Kennisbank "Nieuwe kaart" tab met live duplicate-check (exact-match). Endpoints `GET /api/knowledge/exists` + `POST /api/knowledge/create`. Full form (begrip + topic + tags + lagen 1-4 + ws5 + belangrijkheid). Bij dup: rode tekst + save-knop disabled. Graph auto-sync.
 - 2026-05-18: **v4_identity_001** — Identity-Intent laag. Spark beantwoordt nu vragen over zichzelf (wie ben je, missie, visie, core, waarom besta je, etc.) uit spark_identity + spark_profile + spark_bijbel + de 3 kaarten Missie/Visie/Core. Plugt vóór alle pending flows in chat/routes.py. 11/11 test-vragen ✅.
+- 2026-05-19: **v4_logout_001** — Logout endpoint roept nu clear_state aan zodat pending_wedervraag/card_session/wv_consent niet meer hangen blijven na uitloggen.
+- 2026-05-19: **v4_5w_consolidate_001** — Bulk card_session flow deprecated. Per-kaart wedervraag-flow (met consent) is de enige overgebleven 5W-route (zoals genoteerd in note "5w" 18-05).
+- 2026-05-19: **v4_xp_fix_001** — achievements/service.py overschreef user.xp; nu via xp_service.grant_xp (optellend + audit-log).
+- 2026-05-19: **v6_avatar_001 vastgelegd** in roadmap (10 sub-items): Avatar-tab + verhaal-modus + bot-rollen + ziel-verslonden mechaniek + help-tab + externe game-API. Wacht op v5 + gradatie-2-split + normen/waarden volwassen.
 
 ## In progress / backlog
 ### P0 / Open follow-ups

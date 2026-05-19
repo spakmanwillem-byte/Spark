@@ -3132,6 +3132,96 @@
     "progress": 0,
     "items": [
       {
+        "id": "v4_logout_001",
+        "titel": "Logout-bug: clear_state om stale pending flows te voorkomen",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "POST /api/auth/logout deed niets - pending_wedervraag/card_session/wv_consent bleven hangen in chat_sessions.json. Eerste bericht na opnieuw inloggen viel daardoor in oude W-flow. Fix: logout endpoint roept session_state.clear_state(user_id) aan."
+      },
+      {
+        "id": "v4_5w_consolidate_001",
+        "titel": "5W-flow consolideren — bulk card_session deprecated",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Twee parallelle 5W-flows: (1) pending_card_session = admin bulk (50 kaarten achter elkaar), (2) pending_wedervraag = per-kaart na consent. Notitie 'andere W mogen weg' bevestigt: alleen wedervraag-flow houden. Trigger 'ik wil kaarten invullen' is uitgeschakeld met `if False and`. Bestaande in-flight sessies kunnen nog afgehandeld worden, geen nieuwe sessies."
+      },
+      {
+        "id": "v4_xp_fix_001",
+        "titel": "XP-fix in achievements: overschrijven → optellen via grant_xp",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "achievements/service.py regel 86 deed _save_user(user_id, {'xp': total_xp}) wat user.xp overschreef met de som van achievement-XP, daardoor verloren bijdragen-XP. Fix: alleen achievements-list opslaan, per nieuwe unlock xp_service.grant_xp aanroepen (optellend + audit log)."
+      },
+      {
+        "id": "v6_avatar_001",
+        "titel": "Shadow Avatar + Verhaal-modus — gamification-laag met community-theater",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "fase": "v6 — avatar + verhaalmodus",
+        "afhankelijk_van": "v5 communicatie-laag stabiel + gradatie 2 split + normen-waarden volwassen",
+        "beschrijving": "Avatar-tab waar elke user (alle gradaties) een character-sheet bouwt: naam, ras, klasse/beroep, faction, korte bio, avatar-image. Inventory koppelt aan Shop (banners/titels/gilde-emblemen). Verhalen worden afgespeeld in community chat door Spark als verteller + bots als acteurs. Speel-momenten zijn 'caravans': spelers komen en gaan, personage blijft. Inspiratie: Warlords (1990, SSG) + D&D 5e SRD (open license). Roadkill-filosofie: geen winners, wel bijdrage en trouw.",
+        "kernidee_uniek": "Continu-player model: een verhaal is een entiteit die leeft. Spelers bezetten tijdelijk personages (=zielen). Min-bezetting bereikt → Spark zet verhaal voort. Stopt een speler? Ziel verlaat personage = 'verslonden door verhaal'. Wachtend op nieuwe speler. Verhaal kan dagen/weken duren, spelers wisselen. Niemand is hoofdpersoon, het verhaal is dat.",
+        "sub_items": [
+          {
+            "id": "v6_001a",
+            "titel": "Avatar-tab leeg (teaser)",
+            "notes": "Sidebar-tab 'Avatar'. Lege char-sheet met velden: naam, ras, klasse, beroep, faction, alignment, 1-zin bio, image-upload. Iedereen kan invullen. Image-upload alleen voor gradatie 4+ (gating). Voelt als psychologische eigenaar zonder game eronder. Hergebruikt bijdrage-flow patroon."
+          },
+          {
+            "id": "v6_001b",
+            "titel": "Character schema + API",
+            "notes": "POST/GET /api/character/{user_id}. Schema: ras, klasse, stats (STR/DEX/CON/INT/WIS/CHA basisset uit D&D SRD 5.1), inventory[], titels[], achievements[]. Inventory-items kunnen externe API-bron krijgen (toekomstige gilde-koppeling)."
+          },
+          {
+            "id": "v6_001c",
+            "titel": "Inventory ↔ Shop bridge",
+            "notes": "Shop-producten (banners, titels, items) komen automatisch in user.inventory na aankoop. Inventory-items kunnen worden 'uitgerust' (zichtbaar in chat). Banner = chat-background, titel = naast naam, gilde-embleem = naast avatar."
+          },
+          {
+            "id": "v6_001d",
+            "titel": "Verhalen-schema + 1 testverhaal",
+            "notes": "/data/verhalen/<id>.json. Schema: scenes[] met beats[], personages[], min_spelers, bot_acteurs[], achievements_op_voltooiing[]. Spark-runner leest beats sequentieel, pauzeert tot min-bezetting bereikt. Eerste testverhaal kort (3-5 scenes) — bv. 'De Toren van Vergeten' of iets Roadkill-eigen."
+          },
+          {
+            "id": "v6_001e",
+            "titel": "Verhaal-runner service",
+            "notes": "Verhaal-state apart van speler-state. Triggers join/leave/idle-timeout (10 min stilte = ziel verlaat). Spark host beats in community chat (aankondiging → bot-acteur spreekt → spelers reageren → Spark beoordeelt en volgende beat). Bots krijgen rol-script per beat (geen LLM-spontaniteit = realistisch theater)."
+          },
+          {
+            "id": "v6_001f",
+            "titel": "Bot-rollen herschreven voor theater",
+            "notes": "Concepten van bestaande bots BLIJVEN nuttig: Mr Smith = beveiliging → 'De Wachter'; Klokkenmaker = tijd → 'De Tijdverzamelaar'; Madelief (lief) = welkom → 'De Gastvrouw'; Madelief (stoute) = pestkop → 'De Pestkop'. Twee registers: dagelijks (huidige bot-replies blijven) + theater (nieuw rol-script per verhaal)."
+          },
+          {
+            "id": "v6_001g",
+            "titel": "Achievements per verhaal-voltooi",
+            "notes": "Titels uitgedeeld bij voltooi: 'Bewaarder van X', 'Geest van Y'. Spelers die ergens halverwege stopten krijgen lichtere variant: 'Schaduw in X' (geen schaamte, wel geschiedenis). Builds op bestaande achievements/XP-systeem."
+          },
+          {
+            "id": "v6_001h",
+            "titel": "Help/uitleg-tab — spelmechaniek",
+            "notes": "Help-pagina krijgt sectie 'Verhalen spelen'. Uitleg: hoe joinen, hoe stoppen, 'ziel-verslonden' lore-mechaniek, geen drama bij stoppen. Plus algemene update: wat is Spark, hoe werkt gradatie, hoe Avatar, hoe community."
+          },
+          {
+            "id": "v6_001i",
+            "titel": "Externe game-API hook (optioneel, achter v6 hoofdwerk)",
+            "notes": "Standaard character-API maakt het mogelijk dat externe games (lite-D&D plugin, andere game-modules) dezelfde character ophalen. Spark kan zelf een character besturen via API → 'Spark speelt jouw rijk terwijl jij slaapt, vertelt 's ochtends wat er gebeurde'."
+          },
+          {
+            "id": "v6_001j",
+            "titel": "Open vragen / waarschuwingen",
+            "notes": "(1) Hoe blijft het in Roadkill-filosofie? Geen XP-grind, wel kennis-bijdragen → groei. (2) Warlords integratie? Juridisch nat tenzij toestemming SSG/Mark Bowman OF eigen 'Realms' ombouwen. (3) D&D SRD 5.1 mag gebruikt worden (CC-licensed). Open5e API is gratis JSON-source."
+          }
+        ]
+      },
+      {
         "id": "v4_identity_001",
         "titel": "Identity-Intent laag — Spark beantwoordt vragen over zichzelf",
         "status": "done",

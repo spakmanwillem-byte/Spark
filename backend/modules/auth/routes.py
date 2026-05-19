@@ -48,9 +48,15 @@ async def login(request: LoginRequest):
 @router.post("/logout")
 async def logout(user_id: str):
     """
-    Logout user (clear session)
+    Logout user (clear session state om stale pending_* flows te voorkomen).
+    Anders zit een gebruiker bij eerste bericht na opnieuw inloggen vast in
+    een oude wedervraag/card_session.
     """
-    # For now, just acknowledge - session will expire naturally
+    try:
+        from modules.chat import session_state
+        session_state.clear_state(user_id)
+    except Exception as e:
+        print(f"[logout] clear_state failed (niet fataal): {e}")
     return {"success": True, "message": "Uitgelogd"}
 
 

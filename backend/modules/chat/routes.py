@@ -436,7 +436,12 @@ async def process_message(req: ChatMessage):
         return response
 
     # Admin kaart-sessie start (v4_008): "ik wil kaarten invullen"
-    if card_session_service.detect_start_command(text):
+    # ⚠ DEPRECATED 2026-05-19 (notitie "5w"): bulk card_session geeft conflict met
+    # per-kaart wedervraag-flow (met consent). We houden alleen de wedervraag-flow.
+    # Bestaande in-flight pending_card_session sessies blijven werken via state-handler
+    # (lijn ~97), maar nieuwe sessies kunnen niet meer gestart worden via chat.
+    # Re-enablen: vervang `if False and` door `if`.
+    if False and card_session_service.detect_start_command(text):
         gradatie = _get_user_gradatie(req.user_id)
         if gradatie not in (1, 2):
             response["type"] = "card_session_denied"

@@ -35,15 +35,16 @@ export function NotitiesPage({ onNavigate }) {
   const [bugSubmitMsg, setBugSubmitMsg] = useState(null);
 
   useEffect(() => {
+    if (!user?.id) return;
     Promise.all([
-      fetch(`${API}/api/notes/all`).then(r => r.json()).catch(() => ({ notes: [] })),
-      fetch(`${API}/api/notes/tasks`).then(r => r.json()).catch(() => ({ tasks: [] })),
+      fetch(`${API}/api/notes/all?user_id=${user.id}`).then(r => r.json()).catch(() => ({ notes: [] })),
+      fetch(`${API}/api/notes/tasks?user_id=${user.id}`).then(r => r.json()).catch(() => ({ tasks: [] })),
     ]).then(([notesData, tasksData]) => {
       setNotes(notesData.notes || []);
       setTasks(tasksData.tasks || []);
       setLoading(false);
     });
-  }, []);
+  }, [user?.id]);
 
   // Load bugs when admin opens the Bugs tab
   useEffect(() => {
@@ -71,7 +72,7 @@ export function NotitiesPage({ onNavigate }) {
   const toggleDone = async (item) => {
     if (item.type !== 'task') return;
     const newStatus = item.done ? 'todo' : 'done';
-    const res = await fetch(`${API}/api/notes/tasks/update/${item.id}`, {
+    const res = await fetch(`${API}/api/notes/tasks/update/${item.id}?user_id=${user.id}`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus }),
     });
@@ -80,7 +81,9 @@ export function NotitiesPage({ onNavigate }) {
   };
 
   const deleteItem = async (item) => {
-    const url = item.type === 'note' ? `${API}/api/notes/delete/${item.id}` : `${API}/api/notes/tasks/delete/${item.id}`;
+    const url = item.type === 'note'
+      ? `${API}/api/notes/delete/${item.id}?user_id=${user.id}`
+      : `${API}/api/notes/tasks/delete/${item.id}?user_id=${user.id}`;
     const res = await fetch(url, { method: 'DELETE' });
     const data = await res.json();
     if (data.success) {
@@ -94,14 +97,14 @@ export function NotitiesPage({ onNavigate }) {
     if (newItem.type === 'note') {
       const res = await fetch(`${API}/api/notes/create`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titel: newItem.titel, inhoud: newItem.inhoud, categorie: newItem.categorie, priority: newItem.priority }),
+        body: JSON.stringify({ titel: newItem.titel, inhoud: newItem.inhoud, categorie: newItem.categorie, priority: newItem.priority, user_id: user.id }),
       });
       const data = await res.json();
       if (data.success) setNotes([data.note, ...notes]);
     } else {
       const res = await fetch(`${API}/api/notes/tasks/create`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ task: newItem.titel, priority: newItem.priority }),
+        body: JSON.stringify({ task: newItem.titel, priority: newItem.priority, user_id: user.id }),
       });
       const data = await res.json();
       if (data.success) setTasks([...tasks, data.task]);

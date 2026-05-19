@@ -1,9 +1,10 @@
 """
 Notes & Tasks Routes - CRUD
-Notes schema v1: {notes: [{id, titel, inhoud, categorie, tags[], datum, created_by, updated_at}]}
-Tasks schema v1: {tasks: [{id, task, priority, status, created_at, completed_at}]}
+v4_notes_002 — user-bound: notitie/taak hoort bij user_id (default user-001 voor legacy).
+Notes schema: {notes: [{id, user_id, titel, inhoud, categorie, tags[], datum, created_by, updated_at}]}
+Tasks schema: {tasks: [{id, user_id, task, priority, status, created_at, completed_at}]}
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
 from pathlib import Path
@@ -23,6 +24,7 @@ class NoteCreate(BaseModel):
     categorie: str = "Observatie"
     tags: List[str] = []
     priority: str = "medium"
+    user_id: str  # verplicht (geen anonieme notes meer)
 
 
 class NoteUpdate(BaseModel):
@@ -36,6 +38,7 @@ class NoteUpdate(BaseModel):
 class TaskCreate(BaseModel):
     task: str
     priority: str = "medium"
+    user_id: str  # verplicht
 
 
 class TaskUpdate(BaseModel):
@@ -44,26 +47,49 @@ class TaskUpdate(BaseModel):
     status: Optional[str] = None
 
 
+def _filter_by_user(items: list, user_id: str) -> list:
+    """Filter items op user_id. Items zonder user_id worden behandeld als legacy van user-001."""
+    return [it for it in items if (it.get("user_id") or "user-001") == user_id]
+
+
+def _user_naam(user_id: str) -> str:
+    """Lookup user naam voor created_by veld."""
+    try:
+        users = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+        for u in users.get("users", []):
+            if u.get("id") == user_id:
+                return u.get("naam") or user_id
+    except Exception:
+        pass
+    return user_id
+
+
 # ============== NOTES ==============
 
 @router.get("/all")
-async def get_notes():
+async def get_notes(user_id: str):
+    """Notes van DEZE user. user_id is verplicht."""
+    if not user_id:
+        raise HTTPException(400, "user_id is verplicht")
     data = load_json(NOTES_FILE, default={"notes": []})
-    return data
+    return {"notes": _filter_by_user(data.get("notes", []), user_id)}
 
 
 @router.post("/create")
 async def create_note(note: NoteCreate):
+    if not note.user_id:
+        raise HTTPException(400, "user_id is verplicht")
     data = load_json(NOTES_FILE, default={"notes": []})
     new_note = {
         "id": str(uuid.uuid4()),
+        "user_id": note.user_id,
         "titel": note.titel,
         "inhoud": note.inhoud,
         "categorie": note.categorie,
         "tags": note.tags,
         "priority": note.priority,
         "datum": datetime.now(timezone.utc).isoformat(),
-        "created_by": "Willem",
+        "created_by": _user_naam(note.user_id),
         "updated_at": None,
     }
     data["notes"].insert(0, new_note)
@@ -72,10 +98,13 @@ async def create_note(note: NoteCreate):
 
 
 @router.put("/update/{note_id}")
-async def update_note(note_id: str, updates: NoteUpdate):
+async def update_note(note_id: str, updates: NoteUpdate, user_id: str):
+    """Update notitie. user_id moet overeenkomen met owner."""
     data = load_json(NOTES_FILE, default={"notes": []})
     for n in data["notes"]:
         if n["id"] == note_id:
+            if (n.get("user_id") or "user-001") != user_id:
+                raise HTTPException(403, "Niet jouw notitie")
             for k, v in updates.model_dump(exclude_none=True).items():
                 n[k] = v
             n["updated_at"] = datetime.now(timezone.utc).isoformat()
@@ -85,29 +114,40 @@ async def update_note(note_id: str, updates: NoteUpdate):
 
 
 @router.delete("/delete/{note_id}")
-async def delete_note(note_id: str):
+async def delete_note(note_id: str, user_id: str):
     data = load_json(NOTES_FILE, default={"notes": []})
-    before = len(data["notes"])
+    target = None
+    for n in data["notes"]:
+        if n["id"] == note_id:
+            target = n
+            break
+    if not target:
+        return {"success": False, "message": "Notitie niet gevonden"}
+    if (target.get("user_id") or "user-001") != user_id:
+        raise HTTPException(403, "Niet jouw notitie")
     data["notes"] = [n for n in data["notes"] if n["id"] != note_id]
-    if len(data["notes"]) < before:
-        save_json(NOTES_FILE, data)
-        return {"success": True}
-    return {"success": False, "message": "Notitie niet gevonden"}
+    save_json(NOTES_FILE, data)
+    return {"success": True}
 
 
 # ============== TASKS ==============
 
 @router.get("/tasks")
-async def get_tasks():
+async def get_tasks(user_id: str):
+    if not user_id:
+        raise HTTPException(400, "user_id is verplicht")
     data = load_json(TASKS_FILE, default={"tasks": []})
-    return data
+    return {"tasks": _filter_by_user(data.get("tasks", []), user_id)}
 
 
 @router.post("/tasks/create")
 async def create_task(task: TaskCreate):
+    if not task.user_id:
+        raise HTTPException(400, "user_id is verplicht")
     data = load_json(TASKS_FILE, default={"tasks": []})
     new_task = {
         "id": str(uuid.uuid4()),
+        "user_id": task.user_id,
         "task": task.task,
         "priority": task.priority,
         "status": "todo",
@@ -120,10 +160,12 @@ async def create_task(task: TaskCreate):
 
 
 @router.put("/tasks/update/{task_id}")
-async def update_task(task_id: str, updates: TaskUpdate):
+async def update_task(task_id: str, updates: TaskUpdate, user_id: str):
     data = load_json(TASKS_FILE, default={"tasks": []})
     for t in data["tasks"]:
         if t["id"] == task_id:
+            if (t.get("user_id") or "user-001") != user_id:
+                raise HTTPException(403, "Niet jouw taak")
             for k, v in updates.model_dump(exclude_none=True).items():
                 t[k] = v
             if updates.status == "done" and not t.get("completed_at"):
@@ -134,11 +176,17 @@ async def update_task(task_id: str, updates: TaskUpdate):
 
 
 @router.delete("/tasks/delete/{task_id}")
-async def delete_task(task_id: str):
+async def delete_task(task_id: str, user_id: str):
     data = load_json(TASKS_FILE, default={"tasks": []})
-    before = len(data["tasks"])
+    target = None
+    for t in data["tasks"]:
+        if t["id"] == task_id:
+            target = t
+            break
+    if not target:
+        return {"success": False, "message": "Taak niet gevonden"}
+    if (target.get("user_id") or "user-001") != user_id:
+        raise HTTPException(403, "Niet jouw taak")
     data["tasks"] = [t for t in data["tasks"] if t["id"] != task_id]
-    if len(data["tasks"]) < before:
-        save_json(TASKS_FILE, data)
-        return {"success": True}
-    return {"success": False, "message": "Taak niet gevonden"}
+    save_json(TASKS_FILE, data)
+    return {"success": True}

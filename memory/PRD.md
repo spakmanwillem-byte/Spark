@@ -41,6 +41,8 @@ Dutch (always respond in Dutch).
 - 2026-05-19: **v4_vocab_growth_001** — Vocab kandidaten uit kennisbank + approve-flow (`/api/spark/vocab/approve-growth` → algemeen.uit_kennisbank), tags-zonder-kaart endpoint, "Groeien" tab in Spark Brain
 - 2026-05-19: **v4_data_recovery_001** — Atomic save_json (tmp+rename), graph orphan-check + orphan-recover endpoints. 74 weeskaarten hersteld uit graph→KB (waaronder 2 Arent-kaarten die "kwijt" leken)
 - 2026-05-19: **v4_agenda_announce_001** — Spark vermeldt aankomende afspraak (≤60min) in welcome message. Glow ack-flow: klik op nav/tab → POST /api/urgent/acknowledge → glow uit. Ack TTL = event_dt+10min.
+- 2026-05-19: **v4_rel_002** — relation_extraction sync naar persons cards: nieuwe relaties uit chat schrijven nu OOK in `/data/persons/{user_id}.json` (cards UI). Bestaande relations gemigreerd: Arent Pelster (jeugdvriend), Willie Bakker (vader, overleden), Heidi Spakman (moeder), Maurice (vriend i.p.v. collega), Maaike Spakman (zus). Fix maakt sneller zichtbaar in Persoonkaarten UI.
+- 2026-05-19: **v4_notes_002 — user-bound notes/tasks**: `/api/notes/*` heeft nu verplicht `user_id` param + filtert op owner. 403 bij andermans notitie. Bestaande 3 notities gemigreerd naar user-001. Vóór deze fix waren alle notes 1 gedeelde pool voor alle users.
 
 ## In progress / backlog
 ### P0 / Open follow-ups
@@ -50,6 +52,9 @@ Dutch (always respond in Dutch).
 - v4_dq_b: Split big components (TraderPage, UsersAdminPage, MainLayout)
 - v4_014: Guard Layer (priority resolver, conflict logger, fallback hierarchy)
 - v4_017: Advisor UI "Spark Inzichten" page (approve/reject analyser suggestions)
+- **v4_accounting_002 — Boekhouding per user**: refactor `personal_willem` → `personal_{user_id}`. Auto-create privé-kasboek bij eerste login. Definieer rol-toegang per kasboek (system/project/business). Scheiding handhaven: Boekhouding (admin/transacties) vs Wallet (intern Spark-tegoed) vs Bank-koppeling (IBAN per user, future feature).
+- **v4_kb_split_001 — KB-leak naar persons**: detector voor "X is mijn Y" zinnen in KB → migrate naar persons cards. Splitter voor double-meaning cards (Bakker = achternaam + beroep).
+- **v4_snap_dedupe_001 — KB duplicates**: snap_service moet lowercase dedup doen (10 oude duplicates: vergrootglas, balk, klem, etc).
 
 ### P2
 - Enkelvoud/meervoud schema voor begrippen (woord-normalisatie)

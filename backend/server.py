@@ -220,6 +220,31 @@ async def system_health():
     }
 
 
+# Ambient sound serving (v4_actions_001)
+from fastapi.responses import FileResponse
+from pathlib import Path as _Path
+import json as _json
+
+@app.get("/api/system/ambient/list")
+async def list_ambient_loops():
+    """List ambient loops + their triggers (for settings UI)."""
+    reg_path = _Path(__file__).parent / "data" / "system" / "ambient" / "registry.json"
+    if not reg_path.exists():
+        return {"loops": []}
+    return _json.loads(reg_path.read_text())
+
+
+@app.get("/api/system/ambient/{filename}")
+async def serve_ambient(filename: str):
+    """Serve een ambient audio bestand (wav/mp3/ogg)."""
+    safe = _Path(filename).name  # voorkom path traversal
+    fp = _Path(__file__).parent / "data" / "system" / "ambient" / safe
+    if not fp.exists() or not fp.is_file():
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Ambient file niet gevonden")
+    return FileResponse(fp, media_type="audio/wav" if safe.endswith(".wav") else "audio/mpeg")
+
+
 # ============== STARTUP ==============
 
 @app.on_event("startup")

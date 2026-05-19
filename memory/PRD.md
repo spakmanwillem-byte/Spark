@@ -35,6 +35,7 @@ Dutch (always respond in Dutch).
 - 2026-05-19: **v4_logout_001** — Logout endpoint roept nu clear_state aan zodat pending_wedervraag/card_session/wv_consent niet meer hangen blijven na uitloggen.
 - 2026-05-19: **v4_5w_consolidate_001** — Bulk card_session flow deprecated. Per-kaart wedervraag-flow (met consent) is de enige overgebleven 5W-route (zoals genoteerd in note "5w" 18-05).
 - 2026-05-19: **v4_xp_fix_001** — achievements/service.py overschreef user.xp; nu via xp_service.grant_xp (optellend + audit-log).
+- 2026-05-19: **v4_actions_001** — Action-Intent laag: STT + Ambient sound via chat-commando's. Endpoints `/api/system/ambient/list` + `/api/system/ambient/<filename>`. Triggers ("vogels aan", "STT uit", "stilte", etc.) + frontend mic-knop + ambient player (singleton). Vogel-loop in `/data/system/ambient/birds_loop_01.wav`.
 - 2026-05-19: **v6_avatar_001 vastgelegd** in roadmap (10 sub-items): Avatar-tab + verhaal-modus + bot-rollen + ziel-verslonden mechaniek + help-tab + externe game-API. Wacht op v5 + gradatie-2-split + normen/waarden volwassen.
 
 ## In progress / backlog

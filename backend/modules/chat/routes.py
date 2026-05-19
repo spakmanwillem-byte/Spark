@@ -22,6 +22,7 @@ from . import bijbel_lookup_service
 from . import fallback_service
 from . import shadow_observer
 from . import identity_intent_service
+from . import action_intents_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -89,6 +90,22 @@ async def process_message(req: ChatMessage):
         # Bij identity-vraag: clear pending state zodat user uit een stuck flow kan stappen
         if req.user_id and (state.get("pending_wedervraag") or state.get("pending_card_session") or state.get("pending_wv_consent")):
             session_state.set_state(req.user_id, pending_wedervraag=None, pending_card_session=None, pending_wv_consent=None)
+        return response
+
+    # 0b2. ACTION-INTENT (v4_actions_001) — chat-commando's voor app-acties:
+    #      "stt aan/uit", "vogels aan", "stilte". Frontend voert action uit.
+    action_resp = action_intents_service.try_detect(text)
+    if action_resp:
+        response.update({
+            "type": action_resp["type"],
+            "message": action_resp["message"],
+            "action": action_resp["action"],
+        })
+        # Extra payload velden voor frontend
+        for k in ("loop_id", "url", "label"):
+            if k in action_resp:
+                response[k] = action_resp[k]
+        _save_log(req, response, action_resp["type"])
         return response
 
     # 0z. KAART-SESSIE FLOW (v4_008): HOOGSTE prioriteit — als sessie actief is,

@@ -3132,6 +3132,18 @@
     "progress": 0,
     "items": [
       {
+        "id": "v4_actions_001",
+        "titel": "Action-Intent laag — STT + Ambient sound via chat-commando's",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Nieuwe module modules/chat/action_intents_service.py. Detecteert chat-commando's voor app-acties: 'speech-to-text aan/uit', 'microfoon aan/uit', 'ik wil praten/typen', 'vogels aan', 'stilte', 'ambient uit'. Backend retourneert action-veld dat frontend interpreteert (enable_stt/disable_stt/play_ambient/stop_ambient). Plugt vóór alle pending flows, na identity-intent. Triggers gebaseerd op de 3 STT-kaarten + ambient registry.",
+        "ambient_systeem": "Vogel-loop opgeslagen in /data/system/ambient/birds_loop_01.wav (14MB). Registry in /data/system/ambient/registry.json met triggers per loop. Endpoints: GET /api/system/ambient/list (lijst) + GET /api/system/ambient/<filename> (serve). Loops uitbreidbaar door bestand toe te voegen + registry update.",
+        "frontend": "GesprekkenPage.js: Mic-knop verschijnt naast input zodra STT aan. Ambient player draait als singleton via window.__sparkAmbient (blijft afspelen tussen tab-switches). Ambient status-bar boven chat zichtbaar met Stop-knop. STT via MediaRecorder → /api/voice/stt (Whisper) → text wordt in input gezet.",
+        "12_test_triggers": "12 chat-triggers getest: speech-to-text aan/uit, STT aanzetten, microfoon aan/uit, ik wil praten/typen, vogels aan, speel vogels af, zet vogels uit, stilte, ambient uit. Allemaal ✅."
+      },
+      {
         "id": "v4_logout_001",
         "titel": "Logout-bug: clear_state om stale pending flows te voorkomen",
         "status": "done",

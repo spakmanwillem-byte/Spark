@@ -4,10 +4,39 @@ import { useAuth } from '../../context/AuthContext';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
-  Shield, Timer
+  Shield, Timer, Mic, MicOff, Volume2, VolumeX
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+/* Ambient player — singleton via window zodat hij blijft afspelen tussen pagina-switches */
+const getAmbientPlayer = () => {
+  if (typeof window === 'undefined') return null;
+  if (!window.__sparkAmbient) {
+    window.__sparkAmbient = {
+      audio: null,
+      label: null,
+      play(url, label) {
+        try {
+          if (this.audio) { this.audio.pause(); this.audio = null; }
+          const a = new Audio(url);
+          a.loop = true;
+          a.volume = 0.4;
+          a.play().catch(() => {});
+          this.audio = a;
+          this.label = label;
+          window.dispatchEvent(new CustomEvent('spark:ambient', { detail: { playing: true, label } }));
+        } catch {}
+      },
+      stop() {
+        if (this.audio) { try { this.audio.pause(); } catch {} this.audio = null; this.label = null; }
+        window.dispatchEvent(new CustomEvent('spark:ambient', { detail: { playing: false, label: null } }));
+      },
+      isPlaying() { return !!this.audio && !this.audio.paused; },
+    };
+  }
+  return window.__sparkAmbient;
+};
 
 const BOT_COLORS = {
   'bot-madelief': { bg: 'bg-pink-500/10', text: 'text-pink-400', border: 'border-pink-500/20', icon: Sparkles, accent: '#ec4899' },
@@ -47,6 +76,29 @@ export function GesprekkenPage({ onNavigate }) {
   const [sparkMessages, setSparkMessages] = useState(() => loadStoredMessages(userId) || initialSparkMessages);
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
+
+  // v4_actions_001 — STT + ambient state
+  const [sttEnabled, setSttEnabled] = useState(false);
+  const [sttListening, setSttListening] = useState(false);
+  const [ambientPlaying, setAmbientPlaying] = useState(false);
+  const [ambientLabel, setAmbientLabel] = useState(null);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
+  // Sync met singleton ambient state bij eerste render + via events
+  useEffect(() => {
+    const player = getAmbientPlayer();
+    if (player?.isPlaying()) {
+      setAmbientPlaying(true);
+      setAmbientLabel(player.label);
+    }
+    const handler = (e) => {
+      setAmbientPlaying(!!e.detail.playing);
+      setAmbientLabel(e.detail.label || null);
+    };
+    window.addEventListener('spark:ambient', handler);
+    return () => window.removeEventListener('spark:ambient', handler);
+  }, []);
 
   // Persist messages naar sessionStorage bij elke wijziging
   useEffect(() => {
@@ -188,6 +240,42 @@ export function GesprekkenPage({ onNavigate }) {
     });
   }, [activeTab]);
 
+  // v4_actions_001 — STT opname helpers
+  const startSttRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mr = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      audioChunksRef.current = [];
+      mr.ondataavailable = (e) => { if (e.data.size > 0) audioChunksRef.current.push(e.data); };
+      mr.onstop = async () => {
+        const blob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        stream.getTracks().forEach(t => t.stop());
+        const fd = new FormData();
+        fd.append('audio', blob, 'recording.webm');
+        try {
+          const r = await fetch(`${API}/api/voice/stt`, { method: 'POST', body: fd });
+          const data = await r.json();
+          if (data.text) {
+            setNewMessage(prev => (prev ? prev + ' ' : '') + data.text);
+          }
+        } catch (e) { console.error('STT failed', e); }
+      };
+      mediaRecorderRef.current = mr;
+      mr.start();
+      setSttListening(true);
+    } catch (e) {
+      alert('Microfoon niet beschikbaar: ' + e.message);
+    }
+  };
+  const stopSttRecording = async () => {
+    try { mediaRecorderRef.current?.stop(); } catch {}
+    setSttListening(false);
+  };
+  const toggleSttRecord = () => {
+    if (sttListening) stopSttRecording();
+    else startSttRecording();
+  };
+
   const handleSend = async () => {
     if (!newMessage.trim()) return;
     const text = newMessage.trim();
@@ -206,6 +294,20 @@ export function GesprekkenPage({ onNavigate }) {
           body: JSON.stringify({ message: text, user_naam: userName, user_id: userId }),
         });
         const data = await res.json();
+
+        // v4_actions_001 — Frontend voert action uit op basis van backend response
+        if (data.action === 'enable_stt') {
+          setSttEnabled(true);
+        } else if (data.action === 'disable_stt') {
+          setSttEnabled(false);
+          if (sttListening) await stopSttRecording();
+        } else if (data.action === 'play_ambient' && data.url) {
+          const fullUrl = data.url.startsWith('http') ? data.url : `${API}${data.url}`;
+          getAmbientPlayer()?.play(fullUrl, data.label);
+        } else if (data.action === 'stop_ambient') {
+          getAmbientPlayer()?.stop();
+        }
+
         setSparkMessages(prev => [...prev, {
           id: Date.now() + 1, role: 'spark',
           message: data.message || 'Hmm, daar moet ik even over nadenken.',
@@ -309,6 +411,20 @@ export function GesprekkenPage({ onNavigate }) {
           {/* --- SPARK AI TAB --- */}
           {activeTab === 'spark' && (
             <div className="flex-1 flex flex-col">
+              {/* Ambient status bar — alleen zichtbaar wanneer ambient afspeelt */}
+              {ambientPlaying && (
+                <div data-testid="ambient-bar" className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20">
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                  <span className="text-xs text-emerald-300 flex-1">🎵 {ambientLabel || 'Achtergrondgeluid speelt af'}</span>
+                  <button
+                    data-testid="ambient-stop"
+                    onClick={() => getAmbientPlayer()?.stop()}
+                    className="text-[10px] px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1"
+                  >
+                    <VolumeX className="w-3 h-3" /> Stop
+                  </button>
+                </div>
+              )}
               <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
                 {sparkMessages.map(msg => (
                   <SparkBubble key={msg.id} msg={msg} />
@@ -321,6 +437,9 @@ export function GesprekkenPage({ onNavigate }) {
                 onSend={handleSend}
                 placeholder="Vraag Spark iets..."
                 accent="#f59e0b"
+                sttEnabled={sttEnabled}
+                sttListening={sttListening}
+                onSttToggle={toggleSttRecord}
               />
             </div>
           )}
@@ -373,6 +492,9 @@ export function GesprekkenPage({ onNavigate }) {
                   placeholder="Typ een bericht aan de bots..."
                   accent="#a855f7"
                   disabled={sendingCommunity}
+                  sttEnabled={sttEnabled}
+                  sttListening={sttListening}
+                  onSttToggle={toggleSttRecord}
                 />
               </div>
             </>
@@ -523,6 +645,9 @@ export function GesprekkenPage({ onNavigate }) {
                       placeholder={`Bericht aan ${selectedContact.naam}...`}
                       accent="#06b6d4"
                       disabled={sendingPrive}
+                      sttEnabled={sttEnabled}
+                      sttListening={sttListening}
+                      onSttToggle={toggleSttRecord}
                     />
                   </>
                 )}
@@ -536,7 +661,7 @@ export function GesprekkenPage({ onNavigate }) {
 }
 
 /* === Chat input in framed container === */
-function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false }) {
+function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null }) {
   return (
     <div className="p-4 bg-slate-900/20 border-t border-slate-800 flex-shrink-0">
       <div
@@ -546,13 +671,23 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
         <button data-testid="attach-btn" className="p-2 hover:bg-slate-700/50 rounded-xl transition-colors flex-shrink-0">
           <Plus className="w-4 h-4 text-slate-400" />
         </button>
+        {sttEnabled && onSttToggle && (
+          <button
+            data-testid="stt-mic-btn"
+            onClick={onSttToggle}
+            title={sttListening ? 'Stop opname' : 'Spreek in'}
+            className={`p-2 rounded-xl transition-colors flex-shrink-0 ${sttListening ? 'bg-red-500/20 text-red-400 animate-pulse' : 'hover:bg-slate-700/50 text-amber-400'}`}
+          >
+            {sttListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+          </button>
+        )}
         <input
           type="text"
           data-testid="chat-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !disabled && onSend()}
-          placeholder={placeholder}
+          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : placeholder}
           disabled={disabled}
           className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none px-2 py-2 disabled:opacity-50"
         />

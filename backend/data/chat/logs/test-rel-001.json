@@ -1,0 +1,174 @@
+{
+  "user_id": "test-rel-001",
+  "conversations": [
+    {
+      "id": "conv-acc26fea",
+      "timestamp": "2026-05-19T06:25:54.236943+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Mijn moeder Anneke heeft jarig morgen",
+      "spark_response": "**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\n**Morgen**: Morgen betekent de dag na vandaag of het begin van een nieuwe dag.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **anneke, jarig** (opgeslagen als kaarten)\n\nWat houdt 'jarig' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "Morgen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "anneke",
+          "jarig"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-a8412420",
+      "timestamp": "2026-05-19T06:25:54.702153+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Mijn vader Peter werkt in Utrecht",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'jarig'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-ee08278b",
+      "timestamp": "2026-05-19T06:25:55.114174+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Ron is mijn vriend",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-c8fc3195",
+      "timestamp": "2026-05-19T06:25:57.288284+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Mijn zusje Lotte is 8",
+      "spark_response": "Ik ken deze woorden nog niet: **zusje, lotte**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'lotte' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "zusje",
+          "lotte"
+        ],
+        "snap_suggestions": [
+          "zusje",
+          "lotte"
+        ],
+        "word_count": 5,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-8e77e2d0",
+      "timestamp": "2026-05-19T06:25:59.403788+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Mijn goede vriend Klaas komt langs",
+      "spark_response": "**Goedemorgen schoonheid**: Een warme en persoonlijke begroeting met een compliment.\n\n**Vriendschap**: Vriendschap is een relatie tussen mensen die elkaar leuk vinden, vertrouwen en elkaar steunen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **klaas, langs** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'langs' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Goedemorgen schoonheid"
+          },
+          {
+            "begrip": "Vriendschap"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "klaas",
+          "langs"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-525a5163",
+      "timestamp": "2026-05-19T06:25:59.817591+00:00",
+      "user_id": "test-rel-001",
+      "user_naam": "Test",
+      "user_message": "Ron is mijn vriend",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'langs'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-rel-001",
+    "total_conversations": 6,
+    "last_updated": "2026-05-19T06:25:59.817591+00:00"
+  }
+}

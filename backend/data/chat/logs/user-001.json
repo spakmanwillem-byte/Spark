@@ -16021,11 +16021,126 @@
         "session_id": "default",
         "gesprek_nummer": 602
       }
+    },
+    {
+      "id": "conv-5a9f2b90",
+      "timestamp": "2026-05-19T06:25:51.686012+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe laat is het?",
+      "spark_response": "Het is **08:25** (dinsdag 19 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 603
+      }
+    },
+    {
+      "id": "conv-6960cbc4",
+      "timestamp": "2026-05-19T06:25:51.804907+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is de tijd?",
+      "spark_response": "Het is **08:25** (dinsdag 19 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 604
+      }
+    },
+    {
+      "id": "conv-3a1cd799",
+      "timestamp": "2026-05-19T06:25:51.983165+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe laat is het bij mij?",
+      "spark_response": "Het is **08:25** (dinsdag 19 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 605
+      }
+    },
+    {
+      "id": "conv-cecbfcc7",
+      "timestamp": "2026-05-19T06:25:52.135676+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "huidige tijd",
+      "spark_response": "Het is **08:25** (dinsdag 19 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 606
+      }
+    },
+    {
+      "id": "conv-1d7d2798",
+      "timestamp": "2026-05-19T06:25:59.969250+00:00",
+      "user_id": "user-001",
+      "user_naam": "W",
+      "user_message": "help",
+      "spark_response": "Hier is wat ik kan:\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text aan/uit** — _bv. 'stt aan', 'microfoon aan', 'ik wil weer typen'_\n  • **Achtergrondgeluid** — _bv. 'vogels aan', 'stilte', 'ambient uit'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend' — ik onthoud relaties automatisch_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 607
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 602,
-    "last_updated": "2026-05-19T05:56:40.902094+00:00"
+    "total_conversations": 607,
+    "last_updated": "2026-05-19T06:25:59.969250+00:00"
   }
 }

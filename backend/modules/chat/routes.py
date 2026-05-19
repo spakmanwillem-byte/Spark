@@ -23,6 +23,8 @@ from . import fallback_service
 from . import shadow_observer
 from . import identity_intent_service
 from . import action_intents_service
+from . import time_intent_service
+from . import relation_extraction_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -107,6 +109,27 @@ async def process_message(req: ChatMessage):
                 response[k] = action_resp[k]
         _save_log(req, response, action_resp["type"])
         return response
+
+    # 0b3. TIME-INTENT (v4_time_001) — "hoe laat is het?", "welk tijdstip" → tijd in user-tz
+    if time_intent_service.detect(text):
+        user_obj = _get_user_for_time(req.user_id) if req.user_id else None
+        time_resp = time_intent_service.build_answer(user_obj)
+        response.update({"type": time_resp["type"], "message": time_resp["message"]})
+        _save_log(req, response, time_resp["type"])
+        return response
+
+    # 0b4. RELATION EXTRACTION (v4_rel_001) — passieve observer, slaat relaties op
+    # uit zinnen als "mijn moeder Anneke", "Ron is mijn vriend". Loopt parallel,
+    # blokkeert geen andere intents. Returnt lijst van nieuw toegevoegde relaties.
+    new_relations = []
+    if req.user_id and not text.startswith("[system:"):
+        try:
+            new_relations = relation_extraction_service.detect_and_save(req.user_id, text)
+        except Exception as ex:
+            print(f"[relation-extract] failed: {ex}")
+    # Inject nieuwe relaties in response (zichtbaar voor frontend, klein notitie-blokje)
+    if new_relations:
+        response["new_relations"] = new_relations
 
     # 0z. KAART-SESSIE FLOW (v4_008): HOOGSTE prioriteit — als sessie actief is,
     # niets anders mag voorrang krijgen. Anders eet bv. agenda-intent of een
@@ -959,6 +982,19 @@ def _get_user_gradatie(user_id):
     for u in data.get("users", []):
         if u.get("id") == user_id:
             return u.get("gradatie")
+    return None
+
+
+def _get_user_for_time(user_id):
+    """Haal volledig user-record op voor tijdzone-resolutie."""
+    if not user_id:
+        return None
+    from pathlib import Path as _P
+    from modules.core.storage import load_json as _lj
+    data = _lj(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+    for u in data.get("users", []):
+        if u.get("id") == user_id:
+            return u
     return None
 
 

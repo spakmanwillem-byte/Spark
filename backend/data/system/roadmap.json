@@ -3132,6 +3132,54 @@
     "progress": 0,
     "items": [
       {
+        "id": "v4_tts_001",
+        "titel": "Text-to-Speech — Spark spreekt zijn antwoorden uit + ambient ducking",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Triggers: 'tts aan/uit', 'text-to-speech aan/uit', 'ik wil je horen', 'spreek tegen me', 'wees stil', 'stop met praten', 'stem aan/uit'. Backend acties enable_tts/disable_tts. Frontend roept POST /api/voice/tts (OpenAI Nova stem via Emergent LLM key) en speelt MP3 af. Markdown wordt gestript voor cleaner audio. AUTO-DUCK: ambient volume gaat van 0.4 naar 0.08 zodra Spark spreekt, restore on audio.onended. 17/17 test-triggers groen.",
+        "tts_voice": "nova (OpenAI default, NL-vriendelijk)",
+        "open_followup": "Voice-instelling per user (verschillende stemmen). Voice samples van user-001 opslaan voor toekomstige eigen-stem klonen (v6_voice_001)."
+      },
+      {
+        "id": "v4_ambient_renumber_001",
+        "titel": "Ambient genummerd ('ambient 1' ipv 'vogels')",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Stabiele genummerde triggers: 'ambient 1 aan/uit', 'ambient1 aan/uit', 'speel ambient 1'. Naast bestaande woord-triggers (vogels). Registry uitgebreid met ambient_nr veld. Voorkomt spelfouten zoals 'vogeltjes' / 'fluiten'. Toekomstige loops krijgen ambient_nr 2, 3, etc. (regen, oceaan, café)."
+      },
+      {
+        "id": "v4_time_001",
+        "titel": "Time-Intent — 'hoe laat is het?' werkt nu (was beloofd in help, ontbrak in code)",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Spark's help noemde 'hoe laat is het bij mij?' als feature maar dat werkte niet (geen detect_time_intent). Nieuwe module time_intent_service.py. Detecteert 'hoe laat is het', 'wat is de tijd', 'huidige tijd', 'welk tijdstip' en geeft tijd terug in user-tijdzone (via user_time_service.resolve_user_timezone). NL-vertaling van weekdag + maand."
+      },
+      {
+        "id": "v4_rel_001",
+        "titel": "Relation Extraction — auto-detect relaties uit chat",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "Nieuwe module relation_extraction_service.py. Passieve observer: bij elke chat-message extract relaties met patronen 'mijn [rel] [Naam]', '[Naam] is mijn [rel]', '[Naam], mijn [rel]'. 22 relatie-types ondersteund (moeder/vader/zus/broer/oma/opa/dochter/zoon/man/vrouw/partner/vriend/goede vriend/beste vriend/collega/buur/nicht/neef/tante/oom/schoonmoeder/schoonvader). Auto-saved naar /data/persons/{user_id}_relationships.json met dedup. Response.new_relations bevat nieuwe entries voor frontend feedback.",
+        "test_resultaat": "8/8 cases ✅: moeder/vader/zus/vriend/oma + komma-vorm + 'X is mijn Y' + 'koffie zetten' geen false positive."
+      },
+      {
+        "id": "v4_help_update_001",
+        "titel": "Help-commando lijst uitgebreid met STT/ambient/relaties",
+        "status": "done",
+        "priority": "low",
+        "progress": 100,
+        "completed_date": "2026-05-19",
+        "beschrijving": "smart_intents_service.handle_help() commands lijst geüpdatet: 'hoe laat is het', 'wie ben jij/wat is Spark', 'STT aan/uit', 'achtergrondgeluid vogels/stilte', 'relaties noteren (mijn moeder Anneke)'. Plus duidelijker voorbeeld zinnen."
+      },
+      {
         "id": "v4_actions_001",
         "titel": "Action-Intent laag — STT + Ambient sound via chat-commando's",
         "status": "done",
@@ -3142,6 +3190,47 @@
         "ambient_systeem": "Vogel-loop opgeslagen in /data/system/ambient/birds_loop_01.wav (14MB). Registry in /data/system/ambient/registry.json met triggers per loop. Endpoints: GET /api/system/ambient/list (lijst) + GET /api/system/ambient/<filename> (serve). Loops uitbreidbaar door bestand toe te voegen + registry update.",
         "frontend": "GesprekkenPage.js: Mic-knop verschijnt naast input zodra STT aan. Ambient player draait als singleton via window.__sparkAmbient (blijft afspelen tussen tab-switches). Ambient status-bar boven chat zichtbaar met Stop-knop. STT via MediaRecorder → /api/voice/stt (Whisper) → text wordt in input gezet.",
         "12_test_triggers": "12 chat-triggers getest: speech-to-text aan/uit, STT aanzetten, microfoon aan/uit, ik wil praten/typen, vogels aan, speel vogels af, zet vogels uit, stilte, ambient uit. Allemaal ✅."
+      },
+      {
+        "id": "v6_voice_001",
+        "titel": "Voice samples archief — stem-kloon fundament voor toekomst",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "fase": "v6 — avatar + verhaalmodus",
+        "afhankelijk_van": "v4_actions_001 STT live + opslag-keuze door user",
+        "beschrijving": "Bij STT-opnames van user-001 (en evt. anderen die toestemmen) audio-blob bewaren in /data/users/{user_id}/voice_samples/. Doel: trainings-data voor later eigen-stem TTS klonen. NB: lokale taal-toon verschilt — NL legt toon in het midden van de zin, Noors/Duits voorin, rest van de wereld achteraan. Eigen stem-model behoudt deze nuance, generieke TTS verliest het.",
+        "open_keuzes": "Opslag toestemming opt-in (gradatie 1 default ja, anderen vragen). Bestandsformaat: webm of wav. Max-leeftijd: 1 jaar? Min-duur per sample: 3 sec? Volgende sessie uitwerken."
+      },
+      {
+        "id": "v6_avatar_placement_001",
+        "titel": "Avatar-tab plek: onder Beheer / Mijn Profiel / Persoonlijk",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "fase": "v6 — avatar + verhaalmodus",
+        "beschrijving": "Avatar-tab komt NIET als losse sidebar-tab, maar onder bestaande Beheer/Mijn Profiel/Persoonlijk sectie (die nog uitgewerkt moet worden). Hergebruik bestaande layout. Wacht op: (1) Persoonlijk-tab uitwerking, (2) D&D scenario van Willem's collega als basis voor character-sheet velden. Sluit aan op v6_avatar_001."
+      },
+      {
+        "id": "v6_scenario_001",
+        "titel": "D&D testscenario van Willem's collega",
+        "status": "wachten_op_extern",
+        "priority": "low",
+        "progress": 0,
+        "fase": "v6 — avatar + verhaalmodus",
+        "beschrijving": "Willem heeft een collega gevraagd om een uitgewerkt D&D-scenario te maken. Dit wordt de basis voor het eerste verhaal in v6 verhaal-modus (zie v6_avatar_001 sub-item v6_001d). Wachten op aanlevering, dan kunnen we de structuur in /data/verhalen/ omzetten + bot-acteurs rollen toewijzen."
+      },
+      {
+        "id": "v4_open_followups",
+        "titel": "Open follow-ups (afhandeling later)",
+        "status": "todo",
+        "priority": "low",
+        "progress": 0,
+        "items": {
+          "user_kwijt_post_crash": "RESOLVED — was Ron (user-ceeba762), inmiddels weer aangemaakt.",
+          "meer_enkel_fout": "Notitie van Willem: enkel/meervoud-onderscheid voor alle begrippen (zoals werkwoorden). Vraagt grote schema-impact. Wacht op concrete specs van Willem.",
+          "fase_uitleg": "v4 = huidige fase (alles wat afgelopen weken gebouwd). v5 = menselijke communicatie laag (Reflective Loop). v6 = avatar + verhaal-modus. v7 = externe integraties + AI-gilde. Geen ingewikkelde codes, gewoon fase-nummers."
+        }
       },
       {
         "id": "v4_logout_001",

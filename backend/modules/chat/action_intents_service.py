@@ -50,10 +50,30 @@ def _match_any(text: str, patterns) -> bool:
 # ============== AMBIENT ==============
 AMBIENT_OFF_PATTERNS = [
     r"\b(stilte|stil)\b",
+    r"\bambient\s*\d*\s*(uit|stop|af|weg)\b",
     r"\b(stop|zet)\s+(de\s+)?(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s*(uit|af|stop)?\b",
     r"\b(muziek|geluid|loop|ambient|achtergrondgeluid|natuur|vogels|vogeltjes)\s+(uit|stop|weg)\b",
     r"\b(geen|niks)\s+geluid\s*(meer)?\b",
-    r"\bambient\s+(uit|stop)\b",
+]
+
+
+# ============== TTS (text-to-speech: Spark spreekt zijn antwoord uit) ==============
+TTS_ON_PATTERNS = [
+    r"\btext[-\s]?to[-\s]?speech\s+(aan|aanzetten|activeren|start)\b",
+    r"\btts\s+(aan|aanzetten|activeren|start)\b",
+    r"\b(zet|doe)\s+(de\s+)?(tts|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+aan\b",
+    r"\bik\s+wil\s+(je|spark|hem)\s+horen\b",
+    r"\b(spreek|praat)\s+(tegen\s+)?(me|mij|tegen)\b",
+    r"\b(stem|spraak)\s+aan\b",
+    r"\b(zet|doe)\s+(je\s+)?stem\s+aan\b",
+]
+TTS_OFF_PATTERNS = [
+    r"\btext[-\s]?to[-\s]?speech\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
+    r"\btts\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
+    r"\b(zet|doe)\s+(de\s+)?(tts|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+uit\b",
+    r"\b(stop|hou\s+op)\s+(met\s+)?(praten|spreken)\b",
+    r"\b(wees|ben)\s+(stil|stilletjes)\b",
+    r"\b(stem|spraak)\s+uit\b",
 ]
 
 
@@ -67,20 +87,27 @@ def _load_loops():
 
 
 def _detect_ambient_on(text: str) -> Optional[dict]:
-    """Vind een loop waarvan een trigger-woord in de tekst zit + actie-intent.
-    Voorbeelden: 'vogels aan', 'zet vogels aan', 'speel vogels af', 'doe wat natuurgeluid'."""
+    """Vind een loop op basis van genummerde trigger ('ambient1', 'ambient 2') of expliciet woord.
+    Voorbeelden: 'ambient 1 aan', 'ambient2 aan', 'speel ambient 1', 'vogels aan'."""
     t = text.lower()
-    action_words = [
-        r"\baan\b", r"\baanzetten\b", r"\bspeel\b", r"\bafspelen\b",
-        r"\bdoe\b", r"\bzet\b", r"\bstart\b", r"\bbegin\b", r"\bwil\b",
-    ]
+    # 1) Genummerde lookup: 'ambient 1' / 'ambient1' / 'ambient nr 1'
+    m = re.search(r"\bambient\s*(?:nr\.?\s*)?(\d+)\b", t)
+    if m:
+        nr = int(m.group(1))
+        for loop in _load_loops():
+            if loop.get("ambient_nr") == nr:
+                # action-woord nodig om play te triggeren (anders zou 'ambient 1 uit' ook fire)
+                if re.search(r"\b(aan|speel|start|begin|afspelen|wil|doe|zet)\b", t):
+                    return loop
+        return None
+    # 2) Trigger-woord match
+    action_words = [r"\baan\b", r"\bspeel\b", r"\bafspelen\b", r"\bdoe\b", r"\bzet\b", r"\bstart\b", r"\bbegin\b"]
     has_action = any(re.search(p, t) for p in action_words)
     for loop in _load_loops():
         for trig in loop.get("triggers", []):
-            if re.search(rf"\b{re.escape(trig.lower())}\b", t):
-                # Bij directe match op trigger zonder action-woord: vraag bevestiging via toch maar wel afspelen
-                # Vereisen we tenminste één action-woord OF de trigger zelf is een werkwoord ("fluiten")
-                if has_action or trig.lower() in ("fluiten",):
+            tt = trig.lower()
+            if re.search(rf"\b{re.escape(tt)}\b", t):
+                if has_action or "aan" in tt:  # trigger zelf bevat 'aan' bv 'ambient 1'
                     return loop
     return None
 
@@ -105,6 +132,22 @@ def try_detect(text: str) -> Optional[Dict]:
             "action": "enable_stt",
             "message": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
             "type": "action_stt_on",
+        }
+
+    # 2b. TTS off (vóór on)
+    if _match_any(text, TTS_OFF_PATTERNS):
+        return {
+            "action": "disable_tts",
+            "message": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+            "type": "action_tts_off",
+        }
+
+    # 2c. TTS on
+    if _match_any(text, TTS_ON_PATTERNS):
+        return {
+            "action": "enable_tts",
+            "message": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+            "type": "action_tts_on",
         }
 
     # 3. Ambient off

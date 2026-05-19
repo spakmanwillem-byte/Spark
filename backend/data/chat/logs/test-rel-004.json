@@ -1,0 +1,46 @@
+{
+  "user_id": "test-rel-004",
+  "conversations": [
+    {
+      "id": "conv-b3b03a15",
+      "timestamp": "2026-05-19T06:28:36.715012+00:00",
+      "user_id": "test-rel-004",
+      "user_naam": "T",
+      "user_message": "Anneke, mijn moeder, kookt vandaag",
+      "spark_response": "Ik ken 'anneke' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "anneke"
+          },
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "kookt"
+          },
+          {
+            "begrip": "vandaag"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-rel-004",
+    "total_conversations": 1,
+    "last_updated": "2026-05-19T06:28:36.715012+00:00"
+  }
+}

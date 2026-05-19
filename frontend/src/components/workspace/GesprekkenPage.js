@@ -77,13 +77,15 @@ export function GesprekkenPage({ onNavigate }) {
   const [newMessage, setNewMessage] = useState('');
   const [selectedContact, setSelectedContact] = useState(null);
 
-  // v4_actions_001 — STT + ambient state
+  // v4_actions_001 — STT + ambient + TTS state
   const [sttEnabled, setSttEnabled] = useState(false);
   const [sttListening, setSttListening] = useState(false);
   const [ambientPlaying, setAmbientPlaying] = useState(false);
   const [ambientLabel, setAmbientLabel] = useState(null);
+  const [ttsEnabled, setTtsEnabled] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
+  const sparkAudioRef = useRef(null);
 
   // Sync met singleton ambient state bij eerste render + via events
   useEffect(() => {
@@ -276,6 +278,50 @@ export function GesprekkenPage({ onNavigate }) {
     else startSttRecording();
   };
 
+  // v4_tts_001 — speak Spark response via /api/voice/tts + duck ambient
+  const speakSparkResponse = async (text) => {
+    if (!text) return;
+    // Strip markdown for cleaner TTS
+    const clean = text
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/_([^_]+)_/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^[•\-*]\s*/gm, '')
+      .replace(/\n+/g, '. ');
+    try {
+      // Duck ambient (lower volume while Spark spreekt)
+      const player = getAmbientPlayer();
+      const wasPlaying = player?.isPlaying();
+      const origVol = player?.audio?.volume || 0.4;
+      if (wasPlaying && player?.audio) player.audio.volume = 0.08;
+
+      const r = await fetch(`${API}/api/voice/tts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: clean.slice(0, 1000), voice: 'nova', return_format: 'base64' }),
+      });
+      const data = await r.json();
+      if (!data.audio_base64) {
+        if (wasPlaying && player?.audio) player.audio.volume = origVol;
+        return;
+      }
+      // Stop previous if any
+      if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} }
+      const audio = new Audio(`data:audio/mp3;base64,${data.audio_base64}`);
+      audio.volume = 1.0;
+      sparkAudioRef.current = audio;
+      audio.onended = () => {
+        if (wasPlaying && player?.audio) player.audio.volume = origVol;
+      };
+      audio.play().catch(() => {
+        if (wasPlaying && player?.audio) player.audio.volume = origVol;
+      });
+    } catch (e) {
+      console.error('TTS failed', e);
+    }
+  };
+
   const handleSend = async () => {
     if (!newMessage.trim()) return;
     const text = newMessage.trim();
@@ -301,11 +347,21 @@ export function GesprekkenPage({ onNavigate }) {
         } else if (data.action === 'disable_stt') {
           setSttEnabled(false);
           if (sttListening) await stopSttRecording();
+        } else if (data.action === 'enable_tts') {
+          setTtsEnabled(true);
+        } else if (data.action === 'disable_tts') {
+          setTtsEnabled(false);
+          if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} sparkAudioRef.current = null; }
         } else if (data.action === 'play_ambient' && data.url) {
           const fullUrl = data.url.startsWith('http') ? data.url : `${API}${data.url}`;
           getAmbientPlayer()?.play(fullUrl, data.label);
         } else if (data.action === 'stop_ambient') {
           getAmbientPlayer()?.stop();
+        }
+
+        // TTS speak Spark's response — strip markdown for cleaner audio
+        if (ttsEnabled && data.message && data.action !== 'enable_tts') {
+          await speakSparkResponse(data.message);
         }
 
         setSparkMessages(prev => [...prev, {

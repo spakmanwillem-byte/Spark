@@ -47,6 +47,8 @@ STOPWORDS = {
     "en", "of", "maar", "want", "dus", "als", "dan", "toch", "ook", "nog", "wel", "niet",
     "in", "op", "aan", "uit", "om", "tot", "te", "voor", "na", "bij", "van", "met", "naar",
     "over", "onder", "door", "tussen", "tegen", "zonder", "tegenover", "rond", "vanuit",
+    "omdat", "doordat", "zodat", "tijdens", "terwijl", "totdat", "nadat", "voordat",
+    "ondanks", "behalve", "volgens", "binnen", "buiten", "boven", "beneden",
     # vraagwoorden / bijwoorden
     "wat", "wie", "waar", "wanneer", "hoe", "waarom", "welke", "welk",
     "hier", "daar", "ergens", "nergens", "overal", "nu", "toen", "straks", "eerst",
@@ -78,6 +80,32 @@ def _tokenize(text: str) -> List[str]:
     if not text:
         return []
     return [m.group(0).lower().strip("'") for m in WORD_RE.finditer(text)]
+
+
+def _collect_vocab_and_triggers_only() -> Set[str]:
+    """Verzamel woorden uit vocab + triggers (NIET uit knowledge — die willen we juist mineren)."""
+    known: Set[str] = set()
+    vocab = load_json(VOCAB_FILE, default={})
+
+    def _walk(obj):
+        if isinstance(obj, list):
+            for x in obj:
+                _walk(x)
+        elif isinstance(obj, dict):
+            for v in obj.values():
+                _walk(v)
+        elif isinstance(obj, str):
+            for tok in _tokenize(obj):
+                known.add(tok)
+
+    _walk(vocab.get("emoties", {}))
+    _walk(vocab.get("algemeen", {}))
+    for fname in ("conversation_triggers.json", "emotion_triggers.json",
+                  "calendar_triggers.json", "admin_commands.json"):
+        fp = TRIGGERS_DIR / fname
+        if fp.exists():
+            _walk(load_json(fp, default={}))
+    return known
 
 
 def _collect_vocab_words() -> Set[str]:
@@ -213,4 +241,170 @@ async def unused_vocab(
         "unique_unknown_words": len(counter),
         "candidates": candidates,
         "summary": f"{len(candidates)} kandidaat-woorden gevonden ({len(counter)} unieke onbekende woorden in {len(events)} events).",
+    }
+
+
+# ===== v4_vocab_growth_001 — Vocab from Knowledge =====
+# Spark groeit door: kaarten die jij maakt bevatten vaak begrippen die nog niet in zijn
+# vocab/triggers zitten. Dit endpoint mineert kandidaat-woorden uit alle KB-velden
+# (begrip, topic, tags, ws5 wat/waarom/wanneer/wie/waar, lagen 1-4) en filtert
+# vocab/triggers eruit. Resultaat: woorden die Spark zou kunnen leren.
+
+# Velden in een kennis-entry die tekstinhoud bevatten
+_KB_TEXT_FIELDS = ("begrip", "topic", "wat", "waarom", "wanneer", "wie", "waar",
+                   "laag_1", "laag_2", "laag_3", "laag_4", "beschrijving", "context", "notitie")
+
+
+def _walk_kb_entry_text(entry: dict) -> List[str]:
+    """Verzamel alle teksttokens uit één kennis-entry."""
+    tokens: List[str] = []
+    for f in _KB_TEXT_FIELDS:
+        v = entry.get(f)
+        if isinstance(v, str):
+            tokens.extend(_tokenize(v))
+        elif isinstance(v, dict):
+            # ws5 kan dict zijn ({wat: "...", waarom: "..."})
+            for sv in v.values():
+                if isinstance(sv, str):
+                    tokens.extend(_tokenize(sv))
+    # tags = list of strings
+    for tag in entry.get("tags", []) or []:
+        if isinstance(tag, str):
+            tokens.extend(_tokenize(tag))
+    # ws5 als sub-object
+    ws5 = entry.get("ws5") or entry.get("5w") or {}
+    if isinstance(ws5, dict):
+        for sv in ws5.values():
+            if isinstance(sv, str):
+                tokens.extend(_tokenize(sv))
+    # lagen als list
+    lagen = entry.get("lagen") or entry.get("layers") or []
+    if isinstance(lagen, list):
+        for layer in lagen:
+            if isinstance(layer, str):
+                tokens.extend(_tokenize(layer))
+            elif isinstance(layer, dict):
+                for sv in layer.values():
+                    if isinstance(sv, str):
+                        tokens.extend(_tokenize(sv))
+    return tokens
+
+
+@router.get("/vocab-from-knowledge")
+async def vocab_from_knowledge(
+    min_count: int = Query(1, ge=1, description="Min keer voorkomen in kaarten"),
+    limit: int = Query(100, ge=1, le=500, description="Max kandidaten"),
+):
+    """
+    Scan alle knowledge cards en geef kandidaat-woorden terug die niet in
+    vocab/triggers zitten. Spark kan deze leren om zijn taal te laten groeien.
+    """
+    kb = load_json(KB_FILE, default={})
+    entries = kb.get("knowledge_entries", []) or []
+    if not entries:
+        return {
+            "entries_scanned": 0,
+            "candidates": [],
+            "summary": "Geen kenniskaarten gevonden.",
+        }
+
+    known = _collect_vocab_and_triggers_only()
+    counter: Counter = Counter()
+    sources: Dict[str, List[str]] = {}  # word → list of card-begrippen waar gevonden
+
+    for entry in entries:
+        begrip = entry.get("begrip", "")
+        toks = _walk_kb_entry_text(entry)
+        seen_in_entry: Set[str] = set()
+        for tok in toks:
+            if len(tok) < 3 or tok.isdigit():
+                continue
+            if tok in STOPWORDS or tok in TIME_TOKENS:
+                continue
+            if tok in known:
+                continue
+            if tok in seen_in_entry:
+                continue
+            seen_in_entry.add(tok)
+            counter[tok] += 1
+            if tok not in sources:
+                sources[tok] = []
+            if begrip and begrip not in sources[tok] and len(sources[tok]) < 3:
+                sources[tok].append(begrip)
+
+    candidates = []
+    for word, count in counter.most_common(limit * 2):
+        if count < min_count:
+            break
+        candidates.append({
+            "word": word,
+            "count": count,
+            "source_cards": sources.get(word, []),
+        })
+        if len(candidates) >= limit:
+            break
+
+    return {
+        "entries_scanned": len(entries),
+        "unique_candidates": len(counter),
+        "min_count": min_count,
+        "candidates": candidates,
+        "summary": f"{len(candidates)} woorden uit jouw kennisbank zijn nog niet in Spark's vocab/triggers — kandidaten om hem te laten groeien.",
+    }
+
+
+
+@router.get("/tags-without-card")
+async def tags_without_card(min_count: int = Query(1, ge=1), limit: int = Query(200, ge=1, le=2000)):
+    """Welke tags worden gebruikt in de KB maar hebben GEEN eigen begrip-kaart?"""
+    kb = load_json(KB_FILE, default={})
+    entries = kb.get("knowledge_entries", []) or []
+    if not entries:
+        return {"entries_scanned": 0, "candidates": [], "summary": "Geen kaarten gevonden."}
+
+    begrips: Set[str] = set()
+    for e in entries:
+        b = (e.get("begrip", "") or "").strip().lower()
+        if b:
+            begrips.add(b)
+
+    tag_counter: Counter = Counter()
+    tag_sources: Dict[str, List[str]] = {}
+    for e in entries:
+        tags = e.get("tags") or []
+        begrip = e.get("begrip", "") or ""
+        for t in tags:
+            if not isinstance(t, str):
+                continue
+            tt = t.strip().lower()
+            if not tt or len(tt) < 2:
+                continue
+            tag_counter[tt] += 1
+            if tt not in tag_sources:
+                tag_sources[tt] = []
+            if begrip and begrip not in tag_sources[tt] and len(tag_sources[tt]) < 5:
+                tag_sources[tt].append(begrip)
+
+    candidates = []
+    covered = 0
+    for tag, count in tag_counter.most_common():
+        if tag in begrips:
+            covered += 1
+            continue
+        if count < min_count:
+            continue
+        candidates.append({
+            "tag": tag,
+            "count": count,
+            "source_cards": tag_sources.get(tag, []),
+        })
+        if len(candidates) >= limit:
+            break
+
+    return {
+        "entries_scanned": len(entries),
+        "total_unique_tags": len(tag_counter),
+        "tags_with_card": covered,
+        "candidates": candidates,
+        "summary": f"{len(candidates)} tags hebben nog geen eigen kaart (van {len(tag_counter)} unieke tags totaal, {covered} hebben al een kaart).",
     }

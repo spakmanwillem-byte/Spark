@@ -3,6 +3,8 @@ Spark Core - JSON Storage Layer
 Centrale laag voor alle JSON operaties
 """
 import json
+import os
+import tempfile
 from pathlib import Path
 from typing import Any, Optional
 from datetime import datetime
@@ -74,10 +76,27 @@ def save_json(filepath: Path, data: Any, backup: bool = False) -> bool:
                 with open(backup_path, 'w', encoding='utf-8') as f:
                     f.write(backup_data)
             
-            # Write new data
-            with open(filepath, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
-            
+            # Write new data ATOMIC: schrijf eerst naar tmp file, dan rename.
+            # Voorkomt half-geschreven files bij crash/SIGTERM/disk-error.
+            tmp_fd, tmp_path = tempfile.mkstemp(
+                dir=filepath.parent,
+                prefix=f".{filepath.name}.",
+                suffix=".tmp",
+            )
+            try:
+                with os.fdopen(tmp_fd, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=2, ensure_ascii=False)
+                    f.flush()
+                    try: os.fsync(f.fileno())
+                    except OSError: pass
+                # os.replace is atomic op POSIX (en Windows ≥3.3)
+                os.replace(tmp_path, filepath)
+            except Exception:
+                # Clean up tmp on failure
+                try: os.unlink(tmp_path)
+                except OSError: pass
+                raise
+
             return True
             
         except IOError as e:

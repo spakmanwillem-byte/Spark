@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Brain, Heart, BookOpen, Star,
   Zap, Target, MessageSquare, ChevronDown, ChevronRight,
-  Plus, Edit3, Trash2, X, Save, Sparkles, Shield
+  Plus, Edit3, Trash2, X, Save, Sparkles, Shield, Leaf, Check
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -62,6 +62,7 @@ export function SparkBrainPage({ onNavigate }) {
     { id: 'waarden', label: 'Normen & Waarden', icon: Heart, accent: '#ec4899' },
     { id: 'bijbel', label: 'Spark Bijbel', icon: BookOpen, accent: '#a855f7' },
     { id: 'profiel', label: 'Spark Profiel', icon: Star, accent: '#06b6d4' },
+    { id: 'groeien', label: 'Groeien', icon: Leaf, accent: '#22c55e' },
   ];
 
   const kernwaarden = bijbel?.kernwaarden || [];
@@ -345,6 +346,10 @@ export function SparkBrainPage({ onNavigate }) {
 
             {activeSection === 'profiel' && sparkProfile && (
               <SparkProfileView profile={sparkProfile} />
+            )}
+
+            {activeSection === 'groeien' && (
+              <GroeienSection />
             )}
 
           </div>
@@ -743,3 +748,178 @@ function BijbelEditor({ editor, onClose, onSave, onChange }) {
 }
 
 export default SparkBrainPage;
+
+/* === GROEIEN section === */
+function GroeienSection() {
+  const [tab, setTab] = useState('vocab'); // 'vocab' | 'tags' | 'orphans'
+  const [vocabData, setVocabData] = useState(null);
+  const [tagsData, setTagsData] = useState(null);
+  const [orphansData, setOrphansData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(new Set());
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState(null);
+
+  const loadVocab = async () => {
+    setLoading(true); setSelected(new Set());
+    const d = await fetch(`${API}/api/spark/insights/vocab-from-knowledge?limit=100`).then(r => r.json()).catch(() => null);
+    setVocabData(d); setLoading(false);
+  };
+  const loadTags = async () => {
+    setLoading(true); setSelected(new Set());
+    const d = await fetch(`${API}/api/spark/insights/tags-without-card?limit=200`).then(r => r.json()).catch(() => null);
+    setTagsData(d); setLoading(false);
+  };
+  const loadOrphans = async () => {
+    setLoading(true); setSelected(new Set());
+    const d = await fetch(`${API}/api/graph/orphan-check`).then(r => r.json()).catch(() => null);
+    setOrphansData(d); setLoading(false);
+  };
+
+  useEffect(() => {
+    if (tab === 'vocab' && !vocabData) loadVocab();
+    if (tab === 'tags' && !tagsData) loadTags();
+    if (tab === 'orphans' && !orphansData) loadOrphans();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
+
+  const toggle = (key) => {
+    setSelected(s => {
+      const c = new Set(s);
+      if (c.has(key)) c.delete(key); else c.add(key);
+      return c;
+    });
+  };
+
+  const approveVocab = async () => {
+    if (selected.size === 0) return;
+    setBusy(true);
+    const words = Array.from(selected);
+    const r = await fetch(`${API}/api/spark/vocab/approve-growth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ words, source: 'kennisbank' }),
+    }).then(x => x.json()).catch(() => null);
+    setBusy(false);
+    setMsg(r?.success ? `${r.added.length} woord(en) toegevoegd aan Spark's vocab.` : 'Fout bij opslaan');
+    setTimeout(() => setMsg(null), 3500);
+    setSelected(new Set());
+    await loadVocab();
+  };
+
+  const recoverOrphans = async () => {
+    setBusy(true);
+    const r = await fetch(`${API}/api/graph/orphan-recover`, { method: 'POST' }).then(x => x.json()).catch(() => null);
+    setBusy(false);
+    setMsg(r?.message || 'Recovery klaar');
+    setTimeout(() => setMsg(null), 4500);
+    await loadOrphans();
+  };
+
+  const tabs = [
+    { id: 'vocab', label: 'Vocab kandidaten', sub: 'Woorden uit jouw kennisbank' },
+    { id: 'tags', label: 'Tags zonder kaart', sub: 'Veelgebruikte tags die nog géén kaart hebben' },
+    { id: 'orphans', label: 'Weeskaarten', sub: 'In graph, niet in KB (recover)' },
+  ];
+
+  return (
+    <>
+      <div className="p-5 rounded-xl border border-emerald-500/20" style={{ background: 'linear-gradient(135deg, rgba(34,197,94,0.08), rgba(16,185,129,0.04))' }}>
+        <h2 className="text-lg font-bold text-white mb-1 flex items-center gap-2"><Leaf className="w-5 h-5 text-emerald-400" /> Spark laten Groeien</h2>
+        <p className="text-xs text-slate-400">Inzichten uit jouw kennisbank — kandidaten voor vocab, tags die een kaart verdienen, en kaarten die in de graph zitten maar nergens anders.</p>
+      </div>
+
+      <div className="flex gap-2 mb-2">
+        {tabs.map(t => (
+          <button key={t.id} data-testid={`groei-tab-${t.id}`} onClick={() => setTab(t.id)}
+            className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors text-left border ${tab === t.id ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-slate-800/30 border-slate-700/50 text-slate-400 hover:bg-slate-800/60'}`}>
+            <div>{t.label}</div>
+            <div className="text-[10px] opacity-70 mt-0.5">{t.sub}</div>
+          </button>
+        ))}
+      </div>
+
+      {msg && <div data-testid="groei-msg" className="px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs">{msg}</div>}
+
+      {loading && <p className="text-xs text-slate-500 text-center py-6">Aan het analyseren...</p>}
+
+      {/* VOCAB tab */}
+      {tab === 'vocab' && vocabData && !loading && (
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs text-slate-400">{vocabData.summary}</p>
+            <button data-testid="approve-vocab-btn" disabled={busy || selected.size === 0} onClick={approveVocab}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-300 disabled:opacity-30 hover:bg-emerald-500/30">
+              <Check className="w-3.5 h-3.5" /> Voeg {selected.size} toe aan vocab
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto">
+            {(vocabData.candidates || []).map(c => {
+              const checked = selected.has(c.word);
+              return (
+                <label key={c.word} className={`flex items-start gap-2 p-2.5 rounded-lg cursor-pointer transition-colors border ${checked ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-slate-800/30 border-slate-700/40 hover:bg-slate-800/50'}`}>
+                  <input type="checkbox" data-testid={`vocab-cb-${c.word}`} checked={checked} onChange={() => toggle(c.word)} className="mt-1" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-white font-medium">{c.word} <span className="text-[10px] text-slate-500">×{c.count}</span></p>
+                    <p className="text-[10px] text-slate-500 truncate">in: {c.source_cards?.join(', ') || '—'}</p>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* TAGS tab */}
+      {tab === 'tags' && tagsData && !loading && (
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+          <p className="text-xs text-slate-400 mb-3">{tagsData.summary}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto">
+            {(tagsData.candidates || []).map(c => (
+              <div key={c.tag} data-testid={`tag-row-${c.tag}`} className="flex items-start gap-2 p-2.5 rounded-lg bg-slate-800/30 border border-slate-700/40">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-amber-300 font-medium">#{c.tag} <span className="text-[10px] text-slate-500">×{c.count}</span></p>
+                  <p className="text-[10px] text-slate-500 truncate">in: {c.source_cards?.join(', ') || '—'}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ORPHANS tab */}
+      {tab === 'orphans' && orphansData && !loading && (
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-sm text-white font-medium">{orphansData.orphans_count} weeskaarten</p>
+              <p className="text-[10px] text-slate-500">KB: {orphansData.kb_entries} • Graph: {orphansData.graph_knowledge_nodes}</p>
+            </div>
+            {orphansData.orphans_count > 0 && (
+              <button data-testid="recover-orphans-btn" disabled={busy} onClick={recoverOrphans}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-red-500/20 text-red-300 disabled:opacity-30 hover:bg-red-500/30">
+                <Save className="w-3.5 h-3.5" /> Herstel alles
+              </button>
+            )}
+          </div>
+          {orphansData.orphans_count === 0 ? (
+            <p className="text-xs text-emerald-400 text-center py-6">✓ Geen weeskaarten — KB is in sync met de graph.</p>
+          ) : (
+            <div className="space-y-1 max-h-[60vh] overflow-y-auto">
+              {(orphansData.orphans || []).slice(0, 100).map(o => (
+                <div key={o.id} className="flex items-start gap-2 p-2 rounded-lg bg-slate-800/30 border border-slate-700/40">
+                  <Sparkles className="w-3.5 h-3.5 text-red-400 mt-0.5 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-white truncate">{o.label}</p>
+                    <p className="text-[10px] text-slate-500 truncate">{o.id} • tags: {o.tags?.join(', ')}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+

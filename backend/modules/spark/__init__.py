@@ -289,3 +289,35 @@ async def replace_vocab_list(group: str, key: str, body: dict):
     data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
     save_json(VOCAB_FILE, data)
     return {"success": True, "list": parent[list_key]}
+
+
+
+# ===== v4_vocab_growth_001 — Approve vocab kandidaten uit Insights =====
+class VocabApprove(BaseModel):
+    words: List[str]
+    source: Optional[str] = "kennisbank"  # 'kennisbank' of 'shadow'
+
+
+@router.post("/vocab/approve-growth")
+async def approve_vocab_growth(body: VocabApprove):
+    """Voeg goedgekeurde kandidaat-woorden toe aan algemeen.uit_kennisbank (of .uit_chat).
+    Creëert de lijst als die nog niet bestaat. Idempotent (skip duplicates)."""
+    if not body.words:
+        raise HTTPException(400, "Geen woorden meegegeven")
+    bucket = "uit_kennisbank" if body.source != "shadow" else "uit_chat"
+    data = load_json(VOCAB_FILE, default={"emoties": {}, "algemeen": {}})
+    data.setdefault("algemeen", {})
+    if bucket not in data["algemeen"] or not isinstance(data["algemeen"][bucket], list):
+        data["algemeen"][bucket] = []
+    existing = set(data["algemeen"][bucket])
+    added = []
+    for w in body.words:
+        w = (w or "").strip().lower()
+        if not w or w in existing:
+            continue
+        data["algemeen"][bucket].append(w)
+        existing.add(w)
+        added.append(w)
+    data.setdefault("metadata", {})["last_updated"] = datetime.now().isoformat()
+    save_json(VOCAB_FILE, data)
+    return {"success": True, "bucket": bucket, "added": added, "total_in_bucket": len(data["algemeen"][bucket])}

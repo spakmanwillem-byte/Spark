@@ -83,9 +83,40 @@ export function GesprekkenPage({ onNavigate }) {
   const [ambientPlaying, setAmbientPlaying] = useState(false);
   const [ambientLabel, setAmbientLabel] = useState(null);
   const [ttsEnabled, setTtsEnabled] = useState(false);
+  const [ttsSpeaking, setTtsSpeaking] = useState(false); // v4_voice_002 — TTS-glow
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const sparkAudioRef = useRef(null);
+
+  // v4_voice_002 — Silence detection refs + effective settings
+  const audioCtxRef = useRef(null);
+  const analyserRef = useRef(null);
+  const silenceRafRef = useRef(null);
+  const silenceStartRef = useRef(null);
+  const sttStreamRef = useRef(null);
+  const autoSendPendingRef = useRef(false);
+  const voiceLoopRef = useRef(false); // v4_voice_002 — continue voice mode (re-arm mic na TTS)
+  const [voiceCfg, setVoiceCfg] = useState({ stt_silence_sec: 2.0, tts_enabled: false, tts_voice: 'nova', tts_speed: 1.0, tts_auto_play: false });
+
+  // Load user-effective settings (silence threshold, tts voice/speed, etc.)
+  useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/settings/effective/${userId}`)
+      .then(r => r.json())
+      .then(d => {
+        const e = d?.effective || {};
+        setVoiceCfg({
+          stt_silence_sec: Number(e.stt_silence_sec) || 2.0,
+          tts_enabled: !!e.tts_enabled,
+          tts_voice: e.tts_voice || 'nova',
+          tts_speed: Number(e.tts_speed) || 1.0,
+          tts_auto_play: !!e.tts_auto_play,
+        });
+        // Sync TTS toggle uit settings (zodat Spark direct kan spreken als user dat aan heeft staan)
+        if (e.tts_enabled) setTtsEnabled(true);
+      })
+      .catch(() => {});
+  }, [userId]);
 
   // Sync met singleton ambient state bij eerste render + via events
   useEffect(() => {
@@ -100,6 +131,17 @@ export function GesprekkenPage({ onNavigate }) {
     };
     window.addEventListener('spark:ambient', handler);
     return () => window.removeEventListener('spark:ambient', handler);
+  }, []);
+
+  // v4_voice_002 — Cleanup bij unmount (mic stream, audio context, TTS audio)
+  useEffect(() => {
+    return () => {
+      try { mediaRecorderRef.current?.stop(); } catch {}
+      try { sttStreamRef.current?.getTracks()?.forEach(t => t.stop()); } catch {}
+      try { audioCtxRef.current?.close(); } catch {}
+      if (silenceRafRef.current) cancelAnimationFrame(silenceRafRef.current);
+      try { sparkAudioRef.current?.pause(); } catch {}
+    };
   }, []);
 
   // Persist messages naar sessionStorage bij elke wijziging
@@ -216,6 +258,18 @@ export function GesprekkenPage({ onNavigate }) {
     return () => { cancelled = true; clearInterval(interval); };
   }, [userId]);
 
+  // v4_agenda_ack_001: Bij Spark-tab open ack alle urgente agenda items → glow uit
+  useEffect(() => {
+    if (!userId || activeTab !== 'spark') return;
+    if (!subTabGlow.spark) return; // niets te ack'en
+    fetch(`${API}/api/urgent/acknowledge?user_id=${userId}&all_agenda=true`, { method: 'POST' })
+      .then(() => {
+        setSubTabGlow(g => ({ ...g, spark: null }));
+      })
+      .catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, userId, subTabGlow.spark]);
+
   const tabs = [
     { id: 'spark', label: 'Spark AI', icon: Bot, accent: '#f59e0b' },
     { id: 'community', label: 'Community', icon: Users, accent: '#a855f7' },
@@ -242,43 +296,118 @@ export function GesprekkenPage({ onNavigate }) {
     });
   }, [activeTab]);
 
-  // v4_actions_001 — STT opname helpers
-  const startSttRecording = async () => {
+  // v4_actions_001 — STT opname helpers (v4_voice_002: + silence detection + auto-send)
+  const cleanupSilenceDetection = () => {
+    if (silenceRafRef.current) { cancelAnimationFrame(silenceRafRef.current); silenceRafRef.current = null; }
+    try { audioCtxRef.current?.close(); } catch {}
+    audioCtxRef.current = null;
+    analyserRef.current = null;
+    silenceStartRef.current = null;
+  };
+
+  const startSttRecording = async (opts = {}) => {
+    const { autoSendOnSilence = true } = opts;
+    autoSendPendingRef.current = autoSendOnSilence;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      sttStreamRef.current = stream;
       const mr = new MediaRecorder(stream, { mimeType: 'audio/webm' });
       audioChunksRef.current = [];
       mr.ondataavailable = (e) => { if (e.data.size > 0) audioChunksRef.current.push(e.data); };
       mr.onstop = async () => {
         const blob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        stream.getTracks().forEach(t => t.stop());
+        try { stream.getTracks().forEach(t => t.stop()); } catch {}
+        sttStreamRef.current = null;
+        cleanupSilenceDetection();
+        // Skip empty/tiny recordings (under ~3kb = no speech)
+        if (blob.size < 3000) { setSttListening(false); return; }
         const fd = new FormData();
         fd.append('audio', blob, 'recording.webm');
         try {
           const r = await fetch(`${API}/api/voice/stt`, { method: 'POST', body: fd });
           const data = await r.json();
           if (data.text) {
-            setNewMessage(prev => (prev ? prev + ' ' : '') + data.text);
+            const text = data.text.trim();
+            if (autoSendPendingRef.current) {
+              // Auto-send: zet text en stuur direct (zonder Enter)
+              setNewMessage('');
+              setTimeout(() => {
+                setNewMessage(text);
+                setTimeout(() => {
+                  // Trigger send via ref-pattern: we roepen handleSend met text inline
+                  autoSendVoiceMessage(text);
+                }, 50);
+              }, 0);
+            } else {
+              setNewMessage(prev => (prev ? prev + ' ' : '') + text);
+            }
           }
         } catch (e) { console.error('STT failed', e); }
+        setSttListening(false);
       };
       mediaRecorderRef.current = mr;
       mr.start();
       setSttListening(true);
+
+      // === Silence detection via WebAudio AnalyserNode ===
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioCtx();
+        const src = ctx.createMediaStreamSource(stream);
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 1024;
+        src.connect(analyser);
+        audioCtxRef.current = ctx;
+        analyserRef.current = analyser;
+        const data = new Uint8Array(analyser.fftSize);
+        const SILENCE_THRESHOLD = 0.015; // RMS van genormaliseerde [-1,1]
+        const minSpeechMs = 400; // user moet eerst >0.4s spreken
+        let firstSpeechTs = null;
+        const tick = () => {
+          if (!analyserRef.current) return;
+          analyser.getByteTimeDomainData(data);
+          let sum = 0;
+          for (let i = 0; i < data.length; i++) {
+            const v = (data[i] - 128) / 128;
+            sum += v * v;
+          }
+          const rms = Math.sqrt(sum / data.length);
+          const now = performance.now();
+          if (rms > SILENCE_THRESHOLD) {
+            if (!firstSpeechTs) firstSpeechTs = now;
+            silenceStartRef.current = null;
+          } else if (firstSpeechTs && (now - firstSpeechTs) > minSpeechMs) {
+            if (!silenceStartRef.current) silenceStartRef.current = now;
+            const silenceMs = now - silenceStartRef.current;
+            if (silenceMs >= voiceCfg.stt_silence_sec * 1000) {
+              // Stilte voldoende lang → stop recording
+              try { mediaRecorderRef.current?.stop(); } catch {}
+              return; // stop polling
+            }
+          }
+          silenceRafRef.current = requestAnimationFrame(tick);
+        };
+        silenceRafRef.current = requestAnimationFrame(tick);
+      } catch (e) {
+        console.warn('Silence detection unavailable:', e);
+      }
     } catch (e) {
       alert('Microfoon niet beschikbaar: ' + e.message);
+      setSttListening(false);
     }
   };
   const stopSttRecording = async () => {
+    // Manueel stoppen → géén auto-send (gebruiker drukte zelf op stop)
+    autoSendPendingRef.current = false;
     try { mediaRecorderRef.current?.stop(); } catch {}
     setSttListening(false);
   };
   const toggleSttRecord = () => {
     if (sttListening) stopSttRecording();
-    else startSttRecording();
+    else startSttRecording({ autoSendOnSilence: false }); // handmatige klik → géén auto-send
   };
 
-  // v4_tts_001 — speak Spark response via /api/voice/tts + duck ambient
+  // v4_tts_001 — speak Spark response via /api/voice/tts + duck ambient + TTS-glow state
   const speakSparkResponse = async (text) => {
     if (!text) return;
     // Strip markdown for cleaner TTS
@@ -299,7 +428,12 @@ export function GesprekkenPage({ onNavigate }) {
       const r = await fetch(`${API}/api/voice/tts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: clean.slice(0, 1000), voice: 'nova', return_format: 'base64' }),
+        body: JSON.stringify({
+          text: clean.slice(0, 1000),
+          voice: voiceCfg.tts_voice || 'nova',
+          speed: voiceCfg.tts_speed || 1.0,
+          return_format: 'base64',
+        }),
       });
       const data = await r.json();
       if (!data.audio_base64) {
@@ -311,20 +445,45 @@ export function GesprekkenPage({ onNavigate }) {
       const audio = new Audio(`data:audio/mp3;base64,${data.audio_base64}`);
       audio.volume = 1.0;
       sparkAudioRef.current = audio;
+      setTtsSpeaking(true);
       audio.onended = () => {
+        setTtsSpeaking(false);
         if (wasPlaying && player?.audio) player.audio.volume = origVol;
+        rearmMicIfVoiceLoop();
       };
+      audio.onpause = () => setTtsSpeaking(false);
       audio.play().catch(() => {
+        setTtsSpeaking(false);
         if (wasPlaying && player?.audio) player.audio.volume = origVol;
       });
     } catch (e) {
+      setTtsSpeaking(false);
       console.error('TTS failed', e);
     }
   };
 
-  const handleSend = async () => {
-    if (!newMessage.trim()) return;
-    const text = newMessage.trim();
+  // v4_voice_002 — Auto-send wrapper voor voice-input (kan zonder React-state-timing)
+  const autoSendVoiceMessage = (text) => {
+    if (!text || !text.trim()) return;
+    voiceLoopRef.current = true; // mark this conversation as voice-loop → re-arm mic na antwoord
+    setNewMessage(text);
+    setTimeout(() => handleSend(text), 150);
+  };
+
+  // Re-arm mic na Spark's antwoord (en eventueel TTS) als we in voice-loop zitten
+  const rearmMicIfVoiceLoop = () => {
+    if (!voiceLoopRef.current || !sttEnabled) return;
+    setTimeout(() => {
+      if (sttEnabled && !sttListening && voiceLoopRef.current) {
+        startSttRecording({ autoSendOnSilence: true });
+      }
+    }, 400);
+  };
+
+  const handleSend = async (overrideText) => {
+    const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();
+    if (!raw) return;
+    const text = raw;
     setNewMessage('');
 
     if (activeTab === 'spark') {
@@ -344,14 +503,20 @@ export function GesprekkenPage({ onNavigate }) {
         // v4_actions_001 — Frontend voert action uit op basis van backend response
         if (data.action === 'enable_stt') {
           setSttEnabled(true);
+          // v4_voice_002 — Mic direct auto-starten (geen 2e klik), met auto-send op stilte
+          if (!sttListening) {
+            setTimeout(() => startSttRecording({ autoSendOnSilence: true }), 250);
+          }
         } else if (data.action === 'disable_stt') {
           setSttEnabled(false);
+          voiceLoopRef.current = false;
           if (sttListening) await stopSttRecording();
         } else if (data.action === 'enable_tts') {
           setTtsEnabled(true);
         } else if (data.action === 'disable_tts') {
           setTtsEnabled(false);
           if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} sparkAudioRef.current = null; }
+          setTtsSpeaking(false);
         } else if (data.action === 'play_ambient' && data.url) {
           const fullUrl = data.url.startsWith('http') ? data.url : `${API}${data.url}`;
           getAmbientPlayer()?.play(fullUrl, data.label);
@@ -362,6 +527,9 @@ export function GesprekkenPage({ onNavigate }) {
         // TTS speak Spark's response — strip markdown for cleaner audio
         if (ttsEnabled && data.message && data.action !== 'enable_tts') {
           await speakSparkResponse(data.message);
+        } else {
+          // Geen TTS → meteen re-arm mic indien voice-loop
+          rearmMicIfVoiceLoop();
         }
 
         setSparkMessages(prev => [...prev, {
@@ -467,6 +635,26 @@ export function GesprekkenPage({ onNavigate }) {
           {/* --- SPARK AI TAB --- */}
           {activeTab === 'spark' && (
             <div className="flex-1 flex flex-col">
+              {/* v4_voice_002 — TTS-glow indicator (Spark spreekt) */}
+              {ttsSpeaking && (
+                <div data-testid="tts-glow-bar" className="flex items-center gap-2 px-4 py-2 bg-amber-500/10 border-b border-amber-500/30">
+                  <div className="relative flex items-center justify-center">
+                    <span className="absolute w-5 h-5 rounded-full bg-amber-400/40 animate-ping" />
+                    <Volume2 className="w-4 h-4 text-amber-400 relative" />
+                  </div>
+                  <span className="text-xs text-amber-200 flex-1">Spark spreekt...</span>
+                  <button
+                    data-testid="tts-stop-btn"
+                    onClick={() => {
+                      if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} }
+                      setTtsSpeaking(false);
+                    }}
+                    className="text-[10px] px-2 py-0.5 rounded border border-amber-400/40 text-amber-200 hover:bg-amber-500/15 flex items-center gap-1"
+                  >
+                    <VolumeX className="w-3 h-3" /> Stop
+                  </button>
+                </div>
+              )}
               {/* Ambient status bar — alleen zichtbaar wanneer ambient afspeelt */}
               {ambientPlaying && (
                 <div data-testid="ambient-bar" className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20">

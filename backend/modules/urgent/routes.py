@@ -25,6 +25,31 @@ router = APIRouter(prefix="/urgent", tags=["urgent"])
 
 AGENDA_DIR = Path(__file__).parent.parent.parent / "data" / "agenda"
 USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+URGENT_DIR = Path(__file__).parent.parent.parent / "data" / "urgent"
+URGENT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _ack_file(user_id: str) -> Path:
+    return URGENT_DIR / f"acks_{user_id}.json"
+
+
+def _load_acks(user_id: str) -> Dict[str, str]:
+    """Map event_id -> until_iso (UTC). Ack geldig tot event_dt+10min."""
+    return load_json(_ack_file(user_id), default={})
+
+
+def _save_acks(user_id: str, acks: Dict[str, str]):
+    from modules.core.storage import save_json
+    # Prune expired
+    now = datetime.now(timezone.utc)
+    cleaned = {}
+    for eid, until in acks.items():
+        try:
+            if datetime.fromisoformat(until.replace("Z", "+00:00")) > now:
+                cleaned[eid] = until
+        except Exception:
+            pass
+    save_json(_ack_file(user_id), cleaned)
 
 
 def _get_user(user_id: str) -> Optional[dict]:
@@ -66,6 +91,7 @@ def _agenda_glow_for_user(user_id: str) -> List[Dict]:
     user = _get_user(user_id)
     tz_name = user_time_service.resolve_user_timezone(user)
     now_utc = datetime.now(timezone.utc)
+    acks = _load_acks(user_id)
 
     fpath = AGENDA_DIR / f"{user_id}.json"
     data = load_json(fpath, default={"events": []})
@@ -83,10 +109,14 @@ def _agenda_glow_for_user(user_id: str) -> List[Dict]:
             continue
         if diff > 60:  # te ver weg
             continue
+        # Skip als user dit event al heeft acknowledged
+        eid = ev.get("id")
+        if eid and eid in acks:
+            continue
         severity = "red" if diff <= 15 else "amber"
         urgent.append({
             "kind": "agenda",
-            "event_id": ev.get("id"),
+            "event_id": eid,
             "title": ev.get("titel") or ev.get("title") or "Afspraak",
             "minutes_until": round(diff),
             "severity": severity,
@@ -130,3 +160,81 @@ async def get_urgent(user_id: Optional[str] = None) -> Dict:
             _push("calendar", it["severity"])
 
     return {"glow": glow, "items": items, "checked_at": datetime.now(timezone.utc).isoformat()}
+
+
+
+@router.post("/acknowledge")
+async def acknowledge(user_id: str, event_id: Optional[str] = None, all_agenda: bool = False):
+    """
+    Markeer een urgent agenda-event als 'gezien' zodat de glow uitgaat.
+    - event_id: specifiek event acknowledgen
+    - all_agenda=true: alle huidige urgente agenda-items in 1x stoppen met glowen
+    Ack geldt tot event_dt+10min (daarna wordt de ack auto-pruned).
+    """
+    if not user_id:
+        return {"success": False, "error": "user_id vereist"}
+    acks = _load_acks(user_id)
+    urgent_items = _agenda_glow_for_user(user_id) if all_agenda else []
+    targets = []
+    if all_agenda:
+        targets = [it["event_id"] for it in urgent_items if it.get("event_id")]
+    elif event_id:
+        targets = [event_id]
+    if not targets:
+        return {"success": True, "acknowledged": [], "message": "Niets om te acknowledgen"}
+
+    user = _get_user(user_id)
+    tz_name = user_time_service.resolve_user_timezone(user)
+    fpath = AGENDA_DIR / f"{user_id}.json"
+    data = load_json(fpath, default={"events": []})
+    ev_index = {ev.get("id"): ev for ev in data.get("events", []) if ev.get("id")}
+
+    acknowledged = []
+    for eid in targets:
+        ev = ev_index.get(eid)
+        if not ev:
+            continue
+        ev_dt = _parse_event_datetime(ev, tz_name)
+        until = (ev_dt + timedelta(minutes=10)) if ev_dt else (datetime.now(timezone.utc) + timedelta(hours=2))
+        acks[eid] = until.isoformat()
+        acknowledged.append(eid)
+    _save_acks(user_id, acks)
+    return {"success": True, "acknowledged": acknowledged, "count": len(acknowledged)}
+
+
+@router.get("/upcoming-spoken")
+async def upcoming_spoken(user_id: str):
+    """
+    Geeft een door Spark uit te spreken zin voor de eerstvolgende afspraak (binnen 60min).
+    Returnt {message, event_id, minutes_until, starts_at} of {} als geen.
+    Gebruikt door chat/welcome en optioneel polled door frontend.
+    """
+    items = _agenda_glow_for_user(user_id)
+    if not items:
+        return {}
+    # Eerste/dichtstbijzijnde
+    items.sort(key=lambda x: x.get("minutes_until", 999))
+    nxt = items[0]
+    user = _get_user(user_id)
+    tz_name = user_time_service.resolve_user_timezone(user)
+    try:
+        from zoneinfo import ZoneInfo
+        dt_local = datetime.fromisoformat(nxt["starts_at"]).astimezone(ZoneInfo(tz_name))
+        time_str = dt_local.strftime("%H:%M")
+    except Exception:
+        time_str = ""
+    minutes = nxt["minutes_until"]
+    title = nxt["title"]
+    if minutes <= 0:
+        msg = f"Je hebt nu een afspraak: **{title}**."
+    elif minutes <= 15:
+        msg = f"Let op — over {minutes} minuten heb je **{title}** om {time_str}."
+    else:
+        msg = f"Straks om {time_str} heb je een afspraak: **{title}** (over {minutes} min)."
+    return {
+        "message": msg,
+        "event_id": nxt.get("event_id"),
+        "minutes_until": minutes,
+        "title": title,
+        "starts_at": nxt["starts_at"],
+    }

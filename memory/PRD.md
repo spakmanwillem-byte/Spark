@@ -19,54 +19,59 @@ Dutch (always respond in Dutch).
 - 2026-05-15: Shadow Observer (v4_015) + dashboard widget
 - 2026-05-15: Chat session storage + Recap intent + Glow notifications
 - 2026-05-15: Smart Chat Intents (Agenda, topic overview, roadmap check) + 5W+H consent
-- 2026-05-15: Trader keepalive + Snelhandel Quick Buy with Potjes auto-pickup
-- 2026-05-15: Removed obsolete "Te Herzien" tab
+- 2026-05-15: Trader keepalive + Snelhandel Quick Buy met Potjes auto-pickup
 - 2026-05-15: Dagboek tree-view (Year→Month→Day)
 - 2026-05-15: Spark self-aware welcome via system:login event
-- 2026-05-16: Dashboard "Gesprekken" card connected to live data (Spark log + Community + Privé contacts)
-- 2026-05-16: Verbanden Statistieken — backend top 10 → top 20, frontend bars scale dynamically (max relative)
-- 2026-05-16: **Bug-melder MVP (v4_bugs_001)** — anyone can report bugs via "Bug melden" button in Notities; admins (gradatie ≤ 2) see "Bugs" tab; auto private confirmation message from Spark AI to reporter. Open follow-up: split gradatie 2 into fam vs admin.
-- 2026-05-16: **v4_bugs_002** — Enriched bug confirmation PM (cites description, prominent ref, when+where) + new status-update PM on every admin status change with optional note.
-- 2026-05-16: **v4_notities_tree_001** — Notities & Taken tree-view (Year→Month→Day), auto-opens today, same as Dagboek/Archief.
-- 2026-05-16: **v4_dq_a** — Code Quality fixes: circular imports resolved (trade/routes uses relative imports, graph/sync_service uses sys.modules), `random.choice` → `secrets.choice` across chat/bots/contributions modules.
-- 2026-05-16: **v4_016a — Analyser laag 1 (unused-vocab)** — Read-only endpoint `GET /api/spark/insights/unused-vocab` analyseert shadow events en geeft kandidaat-woorden terug die vaak voorkwamen maar niet in vocab/triggers/knowledge zitten. Stopwoorden + tijd-tokens uitgefilterd. Geen wijzigingen, alleen suggesties.
-- 2026-05-16: **v4_kb_create_001** — Kennisbank "Nieuwe kaart" tab met live duplicate-check (exact-match). Endpoints `GET /api/knowledge/exists` + `POST /api/knowledge/create`. Full form (begrip + topic + tags + lagen 1-4 + ws5 + belangrijkheid). Bij dup: rode tekst + save-knop disabled. Graph auto-sync.
-- 2026-05-18: **v4_identity_001** — Identity-Intent laag. Spark beantwoordt nu vragen over zichzelf (wie ben je, missie, visie, core, waarom besta je, etc.) uit spark_identity + spark_profile + spark_bijbel + de 3 kaarten Missie/Visie/Core. Plugt vóór alle pending flows in chat/routes.py. 11/11 test-vragen ✅.
-- 2026-05-19: **v4_logout_001** — Logout endpoint roept nu clear_state aan zodat pending_wedervraag/card_session/wv_consent niet meer hangen blijven na uitloggen.
-- 2026-05-19: **v4_5w_consolidate_001** — Bulk card_session flow deprecated. Per-kaart wedervraag-flow (met consent) is de enige overgebleven 5W-route (zoals genoteerd in note "5w" 18-05).
-- 2026-05-19: **v4_xp_fix_001** — achievements/service.py overschreef user.xp; nu via xp_service.grant_xp (optellend + audit-log).
-- 2026-05-19: **v4_actions_001** — Action-Intent laag: STT + Ambient sound via chat-commando's. Endpoints `/api/system/ambient/list` + `/api/system/ambient/<filename>`. Triggers ("vogels aan", "STT uit", "stilte", etc.) + frontend mic-knop + ambient player (singleton). Vogel-loop in `/data/system/ambient/birds_loop_01.wav`.
-- 2026-05-19: **v4_time_001** — "Hoe laat is het?" werkt nu (was beloofd in help, ontbrak in code). NL-tijd in user-tijdzone.
-- 2026-05-19: **v4_rel_001** — Relation Extraction: auto-detect relaties uit chat ("mijn moeder Anneke", "Ron is mijn vriend"). 22 relatie-types. Saved naar `/data/persons/{user_id}_relationships.json` met dedup. 8/8 cases ✅.
-- 2026-05-19: **v4_help_update_001** — Help-commando lijst uitgebreid met STT/ambient/relaties/identity/tijd.
-- 2026-05-19: **v6_avatar_001 vastgelegd** in roadmap (10 sub-items): Avatar-tab + verhaal-modus + bot-rollen + ziel-verslonden mechaniek + help-tab + externe game-API. Wacht op v5 + gradatie-2-split + normen/waarden volwassen.
+- 2026-05-16: Dashboard "Gesprekken" card live
+- 2026-05-16: Verbanden Statistieken top 20 + dynamic bars
+- 2026-05-16: **v4_bugs_001/002** — Bug-melder MVP + status-update PMs
+- 2026-05-16: **v4_notities_tree_001** — Notities/Taken tree-view
+- 2026-05-16: **v4_dq_a** — Code Quality: circular imports + secrets.choice
+- 2026-05-16: **v4_016a** — Analyser unused-vocab (read-only)
+- 2026-05-16: **v4_kb_create_001** — Kennisbank "Nieuwe kaart" tab + dup-check
+- 2026-05-18: **v4_identity_001** — Identity-Intent laag (Spark over zichzelf)
+- 2026-05-19: **v4_logout_001** — logout clear_state
+- 2026-05-19: **v4_5w_consolidate_001** — bulk card_session flow deprecated
+- 2026-05-19: **v4_xp_fix_001** — achievements via xp_service (optellend)
+- 2026-05-19: **v4_actions_001** — Action-Intent laag: STT + Ambient via chat
+- 2026-05-19: **v4_time_001** — "Hoe laat is het?"
+- 2026-05-19: **v4_rel_001** — Relation Extraction (22 types)
+- 2026-05-19: **v4_settings_001** — Settings architectuur: system.json + user_overrides, gradatie-gating, 19 keys
+- 2026-05-19: **v4_voice_002** — Voice flow upgrade: auto-start mic op (stt aan), 2s stilte-detectie + auto-send (configurable `stt_silence_sec`), TTS-glow indicator, continue voice-loop na Spark antwoord
+- 2026-05-19: **v4_vocab_growth_001** — Vocab kandidaten uit kennisbank + approve-flow (`/api/spark/vocab/approve-growth` → algemeen.uit_kennisbank), tags-zonder-kaart endpoint, "Groeien" tab in Spark Brain
+- 2026-05-19: **v4_data_recovery_001** — Atomic save_json (tmp+rename), graph orphan-check + orphan-recover endpoints. 74 weeskaarten hersteld uit graph→KB (waaronder 2 Arent-kaarten die "kwijt" leken)
+- 2026-05-19: **v4_agenda_announce_001** — Spark vermeldt aankomende afspraak (≤60min) in welcome message. Glow ack-flow: klik op nav/tab → POST /api/urgent/acknowledge → glow uit. Ack TTL = event_dt+10min.
 
 ## In progress / backlog
 ### P0 / Open follow-ups
 - Gradatie 2 splitsen (fam ↔ admin) → fam ziet géén Bugs-tab
 
 ### P1
-- Missing React hook deps audit (already lint-clean on AuthContext.js + GesprekkenPage.js)
 - v4_dq_b: Split big components (TraderPage, UsersAdminPage, MainLayout)
 - v4_014: Guard Layer (priority resolver, conflict logger, fallback hierarchy)
-- v4_016: Analyser `/api/spark/insights` (shadow events analysis: unused vocab, trigger overlap, recurring unknown words)
 - v4_017: Advisor UI "Spark Inzichten" page (approve/reject analyser suggestions)
 
 ### P2
+- Enkelvoud/meervoud schema voor begrippen (woord-normalisatie)
 - v4_020: Chain-anchor (hide chain-of-thought to debug payload)
 - v4_013b: Response Composer (Wat + Hoe)
 
 ### P3
 - v4_018: Export/Import personality packs
+- v6_avatar_001: Avatar-tab + verhaal-modus + ziel-verslonden mechaniek
 
-## Key files
-- `/app/backend/modules/bugs/routes.py` — NEW bug-melder module
-- `/app/backend/server.py` — Module 23 mount
-- `/app/frontend/src/components/workspace/NotitiesPage.js` — Bug-melden knop + Bugs tab
-- `/app/frontend/src/components/dashboard/DashboardPage.js` — live Gesprekken card
-- `/app/frontend/src/components/spark/VerbandenPage.js` — top 20 + dynamic bars
-- `/app/backend/data/notes/notes.json` — bugmelder notitie geupdated (MVP done)
-- `/app/backend/data/system/roadmap.json` — v4_bugs_001 entry toegevoegd
+## Key files (recent)
+- `/app/backend/modules/settings/routes.py` — Settings module
+- `/app/backend/modules/insights/routes.py` — vocab-from-knowledge + tags-without-card
+- `/app/backend/modules/graph/__init__.py` — orphan-check + orphan-recover
+- `/app/backend/modules/urgent/routes.py` — acknowledge + upcoming-spoken
+- `/app/backend/modules/spark/__init__.py` — vocab/approve-growth
+- `/app/backend/modules/core/storage.py` — atomic save (tmp+rename)
+- `/app/backend/modules/chat/routes.py` — welcome met agenda-announce
+- `/app/frontend/src/components/admin/InstellingenPage.js` — real settings API
+- `/app/frontend/src/components/workspace/GesprekkenPage.js` — voice auto-start, silence detect, TTS-glow, agenda ack
+- `/app/frontend/src/components/spark/SparkBrainPage.js` — "Groeien" tab (vocab/tags/orphans)
+- `/app/frontend/src/components/layout/MainLayout.js` — sidebar nav ack flow
 
 ## Tech stack
 React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergentintegrations

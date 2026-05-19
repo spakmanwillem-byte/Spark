@@ -322,6 +322,21 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   };
 
   const handleNavClick = (item) => {
+    // v4_agenda_ack_001: bij klik op chat/calendar nav-item → ack alle urgente agenda items
+    if ((item.id === 'chat' || item.id === 'calendar') && user?.id && urgentGlow[item.id]) {
+      const API = process.env.REACT_APP_BACKEND_URL;
+      fetch(`${API}/api/urgent/acknowledge?user_id=${user.id}&all_agenda=true`, { method: 'POST' })
+        .then(() => {
+          setUrgentGlow(g => {
+            const c = { ...g };
+            delete c[item.id];
+            // ook chat-spark sub-tab glow weg
+            if (item.id === 'chat') delete c['chat-spark'];
+            return c;
+          });
+        })
+        .catch(() => {});
+    }
     if (onNavigate) {
       onNavigate(item.id, item.path);
     }

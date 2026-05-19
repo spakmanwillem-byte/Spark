@@ -1202,6 +1202,15 @@ async def chat_welcome(req: WelcomeRequest):
 
     full_message = message + ((" " + " ".join(suffix_parts)) if suffix_parts else "")
 
+    # v4_agenda_announce_001: Spark meldt aankomende afspraak in welcome
+    try:
+        from modules.urgent.routes import upcoming_spoken as _us
+        upcoming = await _us(req.user_id)
+        if upcoming and upcoming.get("message"):
+            full_message += "\n\n" + upcoming["message"]
+    except Exception:
+        pass
+
     response = {
         "type": "welcome",
         "message": full_message,

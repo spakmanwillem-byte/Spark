@@ -190,3 +190,109 @@ async def rebuild_graph():
     """Volledige herbouw van nodes + edges vanuit knowledge_base."""
     from .sync_service import rebuild_graph_full
     return rebuild_graph_full()
+
+
+
+@router.get("/orphan-check")
+async def orphan_check():
+    """Vind nodes die in de graph zitten maar NIET in knowledge_base.json (weeskaarten)."""
+    kb = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    kb_ids = {e.get("id") for e in kb.get("knowledge_entries", []) if e.get("id")}
+    kb_begrips = {(e.get("begrip", "") or "").strip().lower() for e in kb.get("knowledge_entries", [])}
+    nodes = _load_nodes()
+    orphans = []
+    for n in nodes:
+        nid = n.get("id")
+        label = (n.get("label", "") or "").strip()
+        if not nid or not label:
+            continue
+        if nid in kb_ids or label.lower() in kb_begrips:
+            continue
+        if n.get("type") != "knowledge":
+            continue
+        orphans.append({
+            "id": nid,
+            "label": label,
+            "tags": (n.get("tags") or [])[:6],
+            "description": (n.get("description") or "")[:200],
+        })
+    return {
+        "kb_entries": len(kb.get("knowledge_entries", [])),
+        "graph_knowledge_nodes": sum(1 for n in nodes if n.get("type") == "knowledge"),
+        "orphans_count": len(orphans),
+        "orphans": orphans,
+    }
+
+
+@router.post("/orphan-recover")
+async def orphan_recover():
+    """Herstel alle weeskaarten uit graph terug naar knowledge_base.json."""
+    from datetime import datetime, timezone
+    import shutil
+    info = await orphan_check()
+    orphans = info.get("orphans", [])
+    if not orphans:
+        return {"restored": 0, "message": "Geen weeskaarten gevonden - KB is in sync met graph."}
+
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_path = KNOWLEDGE_FILE.with_suffix(f".backup_orphan_{stamp}.json")
+    try:
+        shutil.copy(KNOWLEDGE_FILE, backup_path)
+    except OSError:
+        pass
+
+    kb = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    nodes = {n.get("id"): n for n in _load_nodes() if n.get("id")}
+    edges = _load_edges()
+    edges_by_node: dict = {}
+    for e in edges:
+        src = e.get("source") or e.get("from")
+        tgt = e.get("target") or e.get("to")
+        if src and tgt:
+            edges_by_node.setdefault(src, []).append(tgt)
+
+    restored = []
+    for o in orphans:
+        nid = o["id"]
+        n = nodes.get(nid, {})
+        label = o["label"]
+        is_sentence = len(label.split()) > 3 or label.endswith((".", "?", "!"))
+        entry = {
+            "id": nid,
+            "begrip": label,
+            "lagen": {"laag1": n.get("description", "") or "", "laag2": "", "laag3": "", "laag4": ""},
+            "tags": n.get("tags", []) or [],
+            "metadata": {
+                "created_at": n.get("created_at") or datetime.now(timezone.utc).isoformat(),
+                "created_via": "recovered-from-graph",
+                "recovery_note": "Hersteld uit graph nodes (weeskaart - was niet in KB)",
+                "recovery_date": datetime.now(timezone.utc).isoformat(),
+                "is_sentence": is_sentence,
+            },
+            "status": "draft",
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
+            "belangrijkheid": 2 if is_sentence else 3,
+            "detected_by": "system-recovery",
+            "topic": "",
+            "type": "knowledge",
+            "learning": {},
+            "bronnen": ["graph-recovery"],
+            "cluster": "",
+            "relaties": edges_by_node.get(nid, []),
+            "usage_count": 0,
+            "voorgestelde_verbanden": [],
+            "bevestigde_verbanden": [],
+            "kaart_type": "snap" if str(nid).startswith("snap-") else "kb",
+        }
+        kb["knowledge_entries"].append(entry)
+        restored.append({"id": nid, "begrip": label})
+
+    from modules.core.storage import save_json
+    save_json(KNOWLEDGE_FILE, kb)
+    return {
+        "restored": len(restored),
+        "backup_file": backup_path.name,
+        "items": restored[:50],
+        "total_kb_entries": len(kb["knowledge_entries"]),
+        "message": f"{len(restored)} weeskaarten hersteld uit de graph.",
+    }

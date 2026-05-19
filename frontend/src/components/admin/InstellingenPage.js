@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { SystemArchive } from './SystemArchive';
@@ -11,43 +11,97 @@ import {
   ToggleLeft, ToggleRight, Archive
 } from 'lucide-react';
 
+const API = process.env.REACT_APP_BACKEND_URL;
+
 export function InstellingenPage({ onNavigate }) {
   const { user } = useAuth();
+  const userId = user?.id;
+  const userGrad = user?.gradatie ?? 7;
   const [activeTab, setActiveTab] = useState('algemeen');
   const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState(null);
 
-  // Local state for all settings (frontend-only for now)
-  const [settings, setSettings] = useState({
-    heartbeat_interval: 30,
-    session_timeout: 5,
-    debug_mode: false,
-    auto_save: true,
-    mood_colors: true,
-    theme: 'dark',
-    notification_sound: true,
-    master_volume: 70,
-    enable_user_sounds: false,
-    tts_enabled: false,
-    tts_voice: 'nova',
-    tts_speed: 1.0,
-    tts_auto_play: false,
-    stt_enabled: false,
-    stt_language: 'nl',
-    stt_push_to_talk: true,
-  });
+  // v4_settings_001: schema + effective settings + overrides from backend
+  const [schema, setSchema] = useState({});
+  const [systemEditGrad, setSystemEditGrad] = useState(1);
+  const [settings, setSettings] = useState({});
+  const [overriddenKeys, setOverriddenKeys] = useState([]);
+  const [dirty, setDirty] = useState({}); // {key: newValue} pending save
+  const [loaded, setLoaded] = useState(false);
 
+  const refresh = useCallback(async () => {
+    if (!userId) return;
+    try {
+      const [schemaR, effR] = await Promise.all([
+        fetch(`${API}/api/settings/schema`).then(r => r.json()),
+        fetch(`${API}/api/settings/effective/${userId}`).then(r => r.json()),
+      ]);
+      setSchema(schemaR.schema || {});
+      setSystemEditGrad(schemaR.system_edit_gradatie_max ?? 1);
+      setSettings(effR.effective || {});
+      setOverriddenKeys(effR.overridden_keys || []);
+      setLoaded(true);
+    } catch (e) { console.error('Settings load failed', e); setLoaded(true); }
+  }, [userId]);
+
+  useEffect(() => { refresh(); }, [refresh]);
+
+  const set = (key, val) => {
+    setSettings(s => ({ ...s, [key]: val }));
+    setDirty(d => ({ ...d, [key]: val }));
+  };
+
+  const canEdit = (key) => {
+    const s = schema[key];
+    if (!s) return false;
+    if (s.scope === 'system') return userGrad <= systemEditGrad;
+    return true; // user-scope: iedereen voor zichzelf
+  };
+
+  const resetKey = async (key) => {
+    if (schema[key]?.scope !== 'user') return;
+    try {
+      await fetch(`${API}/api/settings/user/${userId}/${key}?viewer_id=${userId}`, { method: 'DELETE' });
+      await refresh();
+      setDirty(d => { const c = { ...d }; delete c[key]; return c; });
+    } catch (e) { console.error(e); }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    setSaveMsg(null);
+    const results = { ok: 0, fail: 0, errors: [] };
+    for (const [key, value] of Object.entries(dirty)) {
+      const s = schema[key];
+      if (!s) continue;
+      const endpoint = s.scope === 'system'
+        ? `${API}/api/settings/system/${key}`
+        : `${API}/api/settings/user/${userId}/${key}`;
+      try {
+        const r = await fetch(endpoint, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ value, viewer_id: userId }),
+        });
+        if (r.ok) results.ok++;
+        else { results.fail++; results.errors.push(`${key}: ${r.status}`); }
+      } catch (e) { results.fail++; results.errors.push(`${key}: ${e.message}`); }
+    }
+    setDirty({});
+    await refresh();
+    setSaving(false);
+    setSaveMsg(results.fail === 0
+      ? { type: 'ok', text: `${results.ok} instelling(en) opgeslagen ✓` }
+      : { type: 'err', text: `${results.fail} mislukt: ${results.errors.join(', ')}` });
+    setTimeout(() => setSaveMsg(null), 3500);
+  };
+
+  // Mock sound mappings (later vervangen door echte data)
   const [soundMappings] = useState([
     { id: 1, word: 'succes', file: 'success.mp3', frequency: 'every', play_count: 42 },
     { id: 2, word: 'alarm', file: 'alarm.wav', frequency: 'first_only', play_count: 7 },
     { id: 3, word: 'zagen', file: 'saw_sound.mp3', frequency: 'every_3', play_count: 15 },
   ]);
-
-  const set = (key, val) => setSettings(s => ({ ...s, [key]: val }));
-
-  const handleSave = () => {
-    setSaving(true);
-    setTimeout(() => setSaving(false), 800);
-  };
 
   const tabs = [
     { id: 'algemeen', label: 'Algemeen', icon: Settings, accent: '#f59e0b' },

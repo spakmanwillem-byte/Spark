@@ -176,6 +176,11 @@ from modules.insights import insights_router
 app.include_router(insights_router, prefix="/api")
 
 
+# Module 25: Settings (v4_settings_001 — System + user settings met gradatie-gating)
+from modules.settings import settings_router
+app.include_router(settings_router, prefix="/api")
+
+
 
 # ============== HEALTH & ROOT ==============
 

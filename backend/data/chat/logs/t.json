@@ -764,11 +764,408 @@
         "session_id": "default",
         "gesprek_nummer": 32
       }
+    },
+    {
+      "id": "conv-85b2d8dd",
+      "timestamp": "2026-05-19T07:33:56.792116+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(stt aan)",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 33
+      }
+    },
+    {
+      "id": "conv-dffd3246",
+      "timestamp": "2026-05-19T07:33:56.937503+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(stt uit)",
+      "spark_response": "Speech-to-Text uitgezet. Je kunt weer typen 🌝",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 34
+      }
+    },
+    {
+      "id": "conv-84861b08",
+      "timestamp": "2026-05-19T07:33:57.049265+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(sst aan)",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 35
+      }
+    },
+    {
+      "id": "conv-8ccf29ac",
+      "timestamp": "2026-05-19T07:33:57.157819+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(tts aan)",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 36
+      }
+    },
+    {
+      "id": "conv-88dd13b3",
+      "timestamp": "2026-05-19T07:33:57.291972+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(tts uit)",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 37
+      }
+    },
+    {
+      "id": "conv-3e83c433",
+      "timestamp": "2026-05-19T07:33:57.395947+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "(tss uit)",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 38
+      }
+    },
+    {
+      "id": "conv-4aeef323",
+      "timestamp": "2026-05-19T07:33:57.496450+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "spraak naar text aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 39
+      }
+    },
+    {
+      "id": "conv-195bd1b9",
+      "timestamp": "2026-05-19T07:33:59.643502+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "spraak naar tekst uit",
+      "spark_response": "Ik ken deze woorden nog niet: **spraak, tekst**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'tekst' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "spraak",
+          "tekst"
+        ],
+        "snap_suggestions": [
+          "spraak",
+          "tekst"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 40
+      }
+    },
+    {
+      "id": "conv-7a1d8be5",
+      "timestamp": "2026-05-19T07:33:59.767600+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "text naar spraak aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 41
+      }
+    },
+    {
+      "id": "conv-d0dae4ee",
+      "timestamp": "2026-05-19T07:33:59.886950+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "tekst naar spraak uit",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 42
+      }
+    },
+    {
+      "id": "conv-7530d03c",
+      "timestamp": "2026-05-19T07:34:00.007215+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "stt aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 43
+      }
+    },
+    {
+      "id": "conv-9a765102",
+      "timestamp": "2026-05-19T07:34:00.127411+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 44
+      }
+    },
+    {
+      "id": "conv-6d5feb4a",
+      "timestamp": "2026-05-19T07:34:00.245264+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "microfoon aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 45
+      }
+    },
+    {
+      "id": "conv-319ba1cb",
+      "timestamp": "2026-05-19T07:34:00.350190+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "ik wil je horen",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 46
+      }
+    },
+    {
+      "id": "conv-7f2968d4",
+      "timestamp": "2026-05-19T07:35:37.775611+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "spraak naar tekst aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 47
+      }
+    },
+    {
+      "id": "conv-0e9de208",
+      "timestamp": "2026-05-19T07:35:37.903568+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "spraak naar tekst uit",
+      "spark_response": "Speech-to-Text uitgezet. Je kunt weer typen 🌝",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_stt_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_stt_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 48
+      }
+    },
+    {
+      "id": "conv-20d18e94",
+      "timestamp": "2026-05-19T07:35:38.044314+00:00",
+      "user_id": "t",
+      "user_naam": "T",
+      "user_message": "tekst naar spraak aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 49
+      }
     }
   ],
   "metadata": {
     "user_id": "t",
-    "total_conversations": 32,
-    "last_updated": "2026-05-19T07:25:42.569703+00:00"
+    "total_conversations": 49,
+    "last_updated": "2026-05-19T07:35:38.044314+00:00"
   }
 }

@@ -200,9 +200,9 @@ def handle_help() -> Dict:
         ("Recap van eerder gesprek", "bv. 'wat hebben we gisteren middag besproken?'"),
         ("Mijn tijd / dagdeel", "bv. 'hoe laat is het?' of 'welk tijdstip is het?'"),
         ("Wie ben ik / wat is Spark", "bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'"),
-        ("Speech-to-Text aan/uit", "bv. 'stt aan', 'microfoon aan', 'ik wil weer typen'"),
-        ("Text-to-Speech (Spark spreekt)", "bv. 'tts aan', 'ik wil je horen', 'wees stil'"),
-        ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 1 uit', 'stilte'"),
+        ("Speech-to-Text (jij spreekt)", "bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'"),
+        ("Text-to-Speech (Spark spreekt)", "bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'"),
+        ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'"),
         ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend' — ik onthoud relaties automatisch"),
     ]
     lines = ["Hier is wat ik kan:"]

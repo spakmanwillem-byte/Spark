@@ -23,8 +23,15 @@ AMBIENT_REGISTRY = AMBIENT_DIR / "registry.json"
 
 # ============== STT ==============
 STT_ON_PATTERNS = [
+    # Haakjes-trigger — eenduidig, geen woordconflict
+    r"\(\s*s[ts]t\s+aan\s*\)",
+    r"\(\s*spraak\s+naar\s+te?xt\s+aan\s*\)",
+    r"\(\s*spraak\s+naar\s+tekst\s+aan\s*\)",
+    # Losse varianten
     r"\bspeech[-\s]?to[-\s]?text\s+(aan|aanzetten|activeren|start|aan zetten|aanzettten)\b",
     r"\bs[ts]t\s+(aan|aanzetten|activeren|start)\b",
+    r"\bspraak\s+naar\s+te?xt\s+aan\b",
+    r"\bspraak\s+naar\s+tekst\s+aan\b",
     r"\b(zet|doe)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic)\s+aan\b",
     r"\b(start|activeer)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic|spraak|spraakherkenning)\b",
     r"\bik\s+wil\s+(praten|spreken|inspreken)\b",
@@ -33,8 +40,13 @@ STT_ON_PATTERNS = [
 ]
 
 STT_OFF_PATTERNS = [
+    r"\(\s*s[ts]t\s+uit\s*\)",
+    r"\(\s*spraak\s+naar\s+te?xt\s+uit\s*\)",
+    r"\(\s*spraak\s+naar\s+tekst\s+uit\s*\)",
     r"\bspeech[-\s]?to[-\s]?text\s+(uit|uitzetten|stoppen|stop|deactiveren|uit zetten)\b",
     r"\bs[ts]t\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
+    r"\bspraak\s+naar\s+te?xt\s+uit\b",
+    r"\bspraak\s+naar\s+tekst\s+uit\b",
     r"\b(zet|doe)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic)\s+uit\b",
     r"\b(stop|deactiveer)\s+(de\s+)?(speech[-\s]?to[-\s]?text|s[ts]t|microfoon|micro|mic|spraak|spraakherkenning)\b",
     r"\b(ik\s+wil\s+)?(weer\s+)?typen\b",
@@ -59,8 +71,11 @@ AMBIENT_OFF_PATTERNS = [
 
 # ============== TTS (text-to-speech: Spark spreekt zijn antwoord uit) ==============
 TTS_ON_PATTERNS = [
+    r"\(\s*t[ts]s\s+aan\s*\)",
+    r"\(\s*te?xt\s+naar\s+spraak\s+aan\s*\)",
     r"\btext[-\s]?to[-\s]?speech\s+(aan|aanzetten|activeren|start)\b",
     r"\bt[ts]s\s+(aan|aanzetten|activeren|start)\b",
+    r"\bte?xt\s+naar\s+spraak\s+aan\b",
     r"\b(zet|doe)\s+(de\s+)?(t[ts]s|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+aan\b",
     r"\bik\s+wil\s+(je|spark|hem)\s+horen\b",
     r"\b(spreek|praat)\s+(tegen\s+)?(me|mij|tegen)\b",
@@ -68,8 +83,11 @@ TTS_ON_PATTERNS = [
     r"\b(zet|doe)\s+(je\s+)?stem\s+aan\b",
 ]
 TTS_OFF_PATTERNS = [
+    r"\(\s*t[ts]s\s+uit\s*\)",
+    r"\(\s*te?xt\s+naar\s+spraak\s+uit\s*\)",
     r"\btext[-\s]?to[-\s]?speech\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
     r"\bt[ts]s\s+(uit|uitzetten|stoppen|stop|deactiveren)\b",
+    r"\bte?xt\s+naar\s+spraak\s+uit\b",
     r"\b(zet|doe)\s+(de\s+)?(t[ts]s|text[-\s]?to[-\s]?speech|stem|spraak\s*output)\s+uit\b",
     r"\b(stop|hou\s+op)\s+(met\s+)?(praten|spreken)\b",
     r"\b(wees|ben)\s+(stil|stilletjes)\b",

@@ -153,6 +153,32 @@ async def get_all_triggers():
                 "editable": True,
             }
 
+    # Credits / Dank (v4_dank_001) — bewerkbaar via Triggers UI
+    dank = load_json(DATA_DIR / "system" / "dank.json", default={})
+    if dank:
+        result["credits_namen"] = {
+            "type": "conversation",
+            "label": "Credits — Voornamen",
+            "triggers": dank.get("namen", []),
+            "responses": [],
+            "color": "amber",
+            "edit_path": "credits/namen",
+            "editable": True,
+            "supports_responses": False,
+            "emoji": "💛",
+        }
+        result["credits_extra"] = {
+            "type": "conversation",
+            "label": "Credits — Extra dank (community e.d.)",
+            "triggers": dank.get("extra_dank", []),
+            "responses": [],
+            "color": "amber",
+            "edit_path": "credits/extra_dank",
+            "editable": True,
+            "supports_responses": False,
+            "emoji": "💛",
+        }
+
     return {
         "trigger_groups": result,
         "stats": {
@@ -188,6 +214,7 @@ _KIND_TO_FILE = {
     "emotion":      ("emotions", "emotion_triggers.json"),
     "admin":        ("triggers", "admin_commands.json"),
     "system":       ("triggers", "system_fallback.json"),
+    "credits":      ("system",   "dank.json"),
 }
 
 
@@ -272,6 +299,16 @@ def _get_list_ref(data: dict, kind: str, key: str, field: str):
                     val["responses"] = []
                 return val, "responses"
         raise HTTPException(400, f"Onverwacht type voor system/{key}")
+
+    if kind == "credits":
+        # key = 'namen' of 'extra_dank', altijd opgeslagen als 'triggers' in UI
+        if key not in ("namen", "extra_dank"):
+            raise HTTPException(404, f"Credits-groep '{key}' bestaat niet (gebruik 'namen' of 'extra_dank')")
+        if field != "triggers":
+            raise HTTPException(400, "Credits ondersteunt alleen 'triggers'")
+        if key not in data or not isinstance(data[key], list):
+            data[key] = []
+        return data, key
 
     raise HTTPException(400, f"Onbekend kind: {kind}")
 

@@ -12,6 +12,13 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_dank_002 — Credits in Triggers UI + Lotus Martens**:
+  - Lotus Martens toegevoegd achteraan voornamen-lijst (vóór "iedereen die ik vergeet")
+  - 2 nieuwe groepen in Spark AI → Triggers (filter: Conversatie):
+    - `credits_namen` — Credits — Voornamen (7 items, met X-knop per naam + toevoeg-veld)
+    - `credits_extra` — Credits — Extra dank (community e.d.)
+  - Backend: kind `credits` toegevoegd aan `_KIND_TO_FILE` → maps naar `dank.json`. Edit-endpoints `POST /api/triggers/edit/credits/{namen|extra_dank}/add` en `DELETE /api/triggers/edit/credits/{key}/triggers/{word}` werken
+  - Sparks credits-bericht toont nu: "Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens"
 - 2026-05-20: **v4_dank_001 — Sparks bedank-uiting**:
   - `/data/system/dank.json` met voornamen (Maurice, Nick × 2, Heidi, Ron, Arent), de community, "iedereen die vergeten wordt"
   - `dank_service.py` met 2 detectors:

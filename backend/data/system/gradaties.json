@@ -43,7 +43,11 @@
         "Bibliotheek",
         "Community_functies"
       ],
-      "auto_groei": false
+      "auto_groei": false,
+      "spark_suggest_eligible": true,
+      "groei_voorwaarden": {
+        "beschrijving_groei": "Admin-only: persoonlijke kring"
+      }
     },
     {
       "niveau": 4,
@@ -55,7 +59,13 @@
         "Community_functies",
         "Evenementen"
       ],
-      "auto_groei": false
+      "auto_groei": false,
+      "groei_voorwaarden": {
+        "token_minimum": 1,
+        "beschrijving_groei": "Admin-only handmatig",
+        "van_niveau": 5
+      },
+      "spark_suggest_eligible": false
     },
     {
       "niveau": 5,
@@ -72,7 +82,8 @@
         "van_niveau": 6,
         "gesprekken_minimum": 15,
         "dagen_actief": 30,
-        "vertrouwen_score": 60
+        "vertrouwen_score": 60,
+        "beschrijving_groei": "Gedrag bewezen: 15 gesprekken + 30 dagen + trust ≥ 60"
       }
     },
     {
@@ -88,9 +99,11 @@
       "auto_groei": true,
       "groei_voorwaarden": {
         "van_niveau": 7,
-        "gesprekken_minimum": 5,
-        "dagen_actief": 7,
-        "vertrouwen_score": 30
+        "gesprekken_minimum": 0,
+        "dagen_actief": 0,
+        "vertrouwen_score": 0,
+        "profiel_completeness_min": 0.8,
+        "beschrijving_groei": "User vult ≥ 80% van profiel in → Spark kent basis-info"
       }
     },
     {
@@ -110,6 +123,7 @@
   "metadata": {
     "purpose": "Gradatie systeem voor toegangscontrole",
     "creator": "Willem Spakman",
-    "last_updated": "2025-01-15T00:00:00Z"
+    "last_updated": "2026-05-20T04:51:31.274994+00:00",
+    "notes": "20/05: 7→6 nu via profiel-completeness (≥80%); 5→4 via token-bezit; 4→3 admin-only + Spark mag suggereren."
   }
 }

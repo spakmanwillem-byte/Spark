@@ -2,7 +2,7 @@
 Spark Auth Module - Service Layer
 All authentication logic in one place
 """
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, Dict
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -363,32 +363,90 @@ class AuthService:
         return False
     
     @staticmethod
+    def _profile_completeness(user: dict) -> float:
+        """v4_grad_growth_002: Bereken hoe volledig een user-profiel is (0.0-1.0).
+
+        Velden die meetellen voor 7→6 upgrade:
+        - volledige_naam (basis-naam), geboortedatum, locatie/plaats
+        - adres (straat), postcode, land, telefoon, nationaliteit
+        - noodcontact (naam + telefoon)
+        - geslacht
+        """
+        check_fields = [
+            "volledige_naam", "geboortedatum", "plaats", "straat", "postcode",
+            "land", "telefoon", "nationaliteit", "geslacht",
+        ]
+        filled = 0
+        for f in check_fields:
+            v = user.get(f) or (user.get("profiel") or {}).get(f) or (user.get("adres") or {}).get(f)
+            if isinstance(v, str) and v.strip():
+                filled += 1
+            elif v and not isinstance(v, str):
+                filled += 1
+        # Noodcontact telt als 1 als naam+telefoon gevuld
+        nc = user.get("noodcontact") or {}
+        if isinstance(nc, dict) and (nc.get("naam") and nc.get("telefoon")):
+            filled += 1
+            total = len(check_fields) + 1
+        else:
+            total = len(check_fields) + 1  # noodcontact telt mee in noemer
+        return filled / total if total else 0.0
+
+    @staticmethod
     def check_auto_gradatie_growth(user: dict) -> Optional[int]:
         """
-        Check if user should auto-grow in gradatie
-        
-        Args:
-            user: User dict
-            
-        Returns:
-            New gradatie if should change, None otherwise
+        v4_grad_growth_002: Auto-upgrade pad
+          7 → 6: profiel ≥ 80% gevuld (Spark "kent" jou) — geen tijd/gesprek-eis
+          6 → 5: 15 gesprekken + 30 dagen + trust ≥ 60 (gedrag bewezen)
+          5 → 4: token bezit ≥ 1 (Roarr-token, mechaniek v4_token_potje_001)
+          4 → 3: handmatig door admin (persoonlijke kring); Spark mag suggereren
+          3 → 2 → 1: admin-only, geen auto-groei
         """
         current = user.get("gradatie", 7)
         gesprekken = user.get("gesprekken_count", 0)
         trust = user.get("trust_score", 0)
-        
+
         try:
             registered = datetime.fromisoformat(user.get("registered_date", datetime.utcnow().isoformat()))
             days_active = (datetime.utcnow() - registered).days
-        except:
+        except Exception:
             days_active = 0
-        
-        # Gradatie 7 -> 6
-        if current == 7 and gesprekken >= 5 and days_active >= 7 and trust >= 30:
-            return 6
-        
-        # Gradatie 6 -> 5
+
+        # 7 → 6: profielvolledigheid (jouw nieuwe regel — Spark weet basis-info)
+        if current == 7:
+            completeness = AuthService._profile_completeness(user)
+            if completeness >= 0.80:
+                return 6
+
+        # 6 → 5: behavior-based (oude regel — onveranderd)
         if current == 6 and gesprekken >= 15 and days_active >= 30 and trust >= 60:
             return 5
-        
+
+        # 5 → 4: token bezit ≥ 1 (Roarr-token mechaniek, v4_token_potje_001)
+        # Token systeem bestaat nog niet — fallback: skip tot mechaniek af is.
+        if current == 5:
+            tokens = user.get("tokens", 0) or len(user.get("token_ids", []) or [])
+            if tokens >= 1:
+                return 4
+
+        # 4 → 3 en hoger: admin-only (returneert None)
+        return None
+
+    @staticmethod
+    def suggest_gradatie_promotion(user: dict) -> Optional[Dict]:
+        """v4_grad_suggest_001: Spark mag voorstellen aan admin om user te promoten.
+        Vooral voor 4 → 3 (persoonlijke kring) — beslissing blijft bij admin.
+        """
+        current = user.get("gradatie", 7)
+        if current != 4:
+            return None
+        gesprekken = user.get("gesprekken_count", 0)
+        trust = user.get("trust_score", 0)
+        # Heuristiek: veel positieve interactie + hoge trust
+        if gesprekken >= 50 and trust >= 80:
+            return {
+                "from": 4, "to": 3,
+                "reden": f"{user.get('naam')} heeft {gesprekken} gesprekken en trust {trust}. Misschien je persoonlijke kring waardig?",
+                "admin_action_required": True,
+            }
         return None

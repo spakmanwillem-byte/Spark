@@ -56,6 +56,14 @@ Dutch (always respond in Dutch).
 - 2026-05-20: **v4_grad_titel_001 — Warme gradatie-titels**: gradaties hernoemd van klinisch ("Communityleden", "Klanten", "Onbekenden") naar warm ("Vriend", "Community Plus", "Community Member", "Bekend", "Leert graag kennen"). Backend `/login` retourneert `gradatie_titel` veld. Sidebar/dashboard tonen warme titel ipv "Gradatie X" (nummer alleen voor admins zichtbaar).
 - 2026-05-20: **vocab-growth seed**: 15 natuurlijke woorden toegevoegd uit kennisbank-kandidaten (mensen, communicatie, gedrag, natuur, leven, taal, kennis, tijd, energie, iemand, iedereen, gesprekken, informatie, dieren, ontwikkeling).
 - 2026-05-20: **Roadmap sync**: 20 items toegevoegd aan v4.0 roadmap (11 recent-done + 9 nieuwe planned). v4.0 progress: 75% (62/83 done).
+- 2026-05-20: **v4_grad_growth_002 — Upgrade-pad regels gedocumenteerd**:
+  - **7 → 6**: profiel-completeness ≥ 80% (10 velden: volledige naam, geboortedatum, plaats, straat, postcode, land, telefoon, nationaliteit, geslacht, noodcontact). Spark "kent" basis-info.
+  - **6 → 5**: gedrag-based (oude regel, onveranderd) — 15 gesprekken + 30 dagen + trust ≥ 60
+  - **5 → 4**: Roarr-token bezit ≥ 1 (wacht op v4_token_potje_001 mechaniek)
+  - **4 → 3**: admin-only (jouw persoonlijke kring). Spark mag suggereren via `suggest_gradatie_promotion()` bij ≥ 50 gesprekken + trust ≥ 80
+  - **3 → 2 → 1**: admin-only, geen auto-groei
+  - Trust-score blijft basis voor "betrouwbaarheid + gedragsstabiliteit" zoals user beschrijft
+  - 5 unit-tests groen (zie auth/service.py `check_auto_gradatie_growth`)
 
 ## In progress / backlog
 ### P0 / Open follow-ups

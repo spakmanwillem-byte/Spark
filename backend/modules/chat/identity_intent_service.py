@@ -111,8 +111,9 @@ def build_answer(intent: str, user_naam: Optional[str] = None) -> Optional[Dict]
                     bullets.append(f"• {k.replace('_', ' ').capitalize()}: {v[:80]}")
         if not bullets:
             return None
+        # v4_self_delete_001: extra hint over account delete commando in help
         return {
-            "message": f"Wat ik kan{name_part}:\n\n" + "\n".join(bullets) + "\n\n_Stel me anders gewoon een vraag en kijk wat er gebeurt._",
+            "message": f"Wat ik kan{name_part}:\n\n" + "\n".join(bullets) + "\n\n_Typ **help** voor de volledige commando-lijst. Wil je je account verwijderen? Zeg het gewoon: 'verwijder mijn account'._",
             "type": "identity_what_can",
             "intent": intent,
         }

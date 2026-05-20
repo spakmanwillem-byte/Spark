@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 350,
+    "events": 366,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 157
+    "knowledge_matches": 159
   },
   "triggers_used": {
     "wedervraag_done": 20,
@@ -12,7 +12,7 @@
     "wedervraag_skip": 15,
     "agenda_overview": 5,
     "make_note": 2,
-    "help_overview": 6,
+    "help_overview": 7,
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
@@ -24,7 +24,7 @@
     "knowledge_deeper": 2,
     "bijbel_reply": 1,
     "identity_intro": 3,
-    "identity_what_can": 2,
+    "identity_what_can": 3,
     "identity_missie": 2,
     "identity_visie": 1,
     "identity_core": 1,
@@ -46,17 +46,22 @@
     "action_ambient_off": 10,
     "time_now": 4,
     "action_tts_on": 12,
-    "action_tts_off": 7
+    "action_tts_off": 7,
+    "account_delete_start": 4,
+    "account_delete_step2": 3,
+    "account_delete_done": 2,
+    "account_delete_cancel": 1,
+    "account_delete_blocked_admin": 1
   },
   "response_types": {
-    "knowledge": 87,
-    "unknown": 16,
+    "knowledge": 89,
+    "unknown": 17,
     "wedervraag_done": 20,
     "wedervraag": 26,
     "wedervraag_skip": 15,
     "agenda_overview": 5,
     "note_created": 2,
-    "help_overview": 6,
+    "help_overview": 7,
     "suggest_action": 1,
     "clarify_question": 1,
     "topic_overview": 3,
@@ -70,7 +75,7 @@
     "question": 2,
     "bijbel_reply": 1,
     "identity_intro": 3,
-    "identity_what_can": 2,
+    "identity_what_can": 3,
     "identity_missie": 2,
     "identity_visie": 1,
     "identity_core": 1,
@@ -92,7 +97,13 @@
     "action_ambient_off": 10,
     "time_now": 4,
     "action_tts_on": 12,
-    "action_tts_off": 7
+    "action_tts_off": 7,
+    "account_delete_confirm_1": 4,
+    "account_delete_confirm_2": 3,
+    "account_delete_failed": 1,
+    "account_deleted": 1,
+    "account_delete_cancelled": 1,
+    "account_delete_blocked": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -139,7 +150,7 @@
     "hebt": 1,
     "geleden": 1,
     "Eerste": 1,
-    "vragen": 1,
+    "vragen": 2,
     "Vervolgens": 1,
     "anders": 1,
     "wordt": 1,
@@ -195,12 +206,13 @@
     "oke": 1,
     "Advocaat": 1,
     "hoor": 1,
-    "kijken": 1
+    "kijken": 1,
+    "Hulp": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-20T03:47:07.008391+00:00",
+  "last_event_at": "2026-05-20T08:13:08.776581+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

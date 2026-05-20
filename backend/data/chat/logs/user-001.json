@@ -17005,11 +17005,207 @@
         "session_id": "default",
         "gesprek_nummer": 641
       }
+    },
+    {
+      "id": "conv-93de8179",
+      "timestamp": "2026-05-20T08:09:51.263039+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "verwijder mijn account",
+      "spark_response": "Even checken, De Willem: wil jij echt je **account verwijderen**? Ik vraag het straks nóg een keer om zeker te zijn. Een backup van je data blijft 30 dagen bewaard — daarna is het écht weg.\n\n_Antwoord met **ja** om door te gaan, of **nee** om te annuleren._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "account_delete_start",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "account_delete_confirm_1"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 642
+      }
+    },
+    {
+      "id": "conv-60e2abb6",
+      "timestamp": "2026-05-20T08:09:51.427960+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ja",
+      "spark_response": "Laatste kans — **weet je het zeker**? Je wordt direct uitgelogd zodra ik op de knop druk.\n\n_Antwoord met **ja** om te verwijderen, of **nee** om te stoppen._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "account_delete_step2",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "account_delete_confirm_2"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 643
+      }
+    },
+    {
+      "id": "conv-d1347493",
+      "timestamp": "2026-05-20T08:11:37.460894+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "verwijder mijn account",
+      "spark_response": "De Willem, het admin-account kan niet via chat verwijderd worden. Maak eerst een tweede admin als je echt wilt vertrekken.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "account_delete_blocked_admin",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "account_delete_blocked"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 644
+      }
+    },
+    {
+      "id": "conv-e1e1b568",
+      "timestamp": "2026-05-20T08:12:50.895283+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat kan ik vragen?",
+      "spark_response": "**vragen**: Vragen betekent informatie, uitleg, hulp of een reactie proberen te krijgen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "vragen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 645
+      }
+    },
+    {
+      "id": "conv-a4e0ee42",
+      "timestamp": "2026-05-20T08:13:07.559518+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "Hier is wat ik kan:\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend' — ik onthoud relaties automatisch_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — ik vraag 2× bevestiging, backup bewaard 30 dagen_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 646
+      }
+    },
+    {
+      "id": "conv-1cc84d83",
+      "timestamp": "2026-05-20T08:13:07.684402+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hulp",
+      "spark_response": "**Hulp**: Hulp is ondersteuning die iemand krijgt of geeft om iets beter te kunnen doen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Hulp"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 647
+      }
+    },
+    {
+      "id": "conv-04402d68",
+      "timestamp": "2026-05-20T08:13:08.634966+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "commando's",
+      "spark_response": "Ik ken deze woorden nog niet: **commando**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'commando' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "commando"
+        ],
+        "snap_suggestions": [
+          "commando"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 648
+      }
+    },
+    {
+      "id": "conv-5c92596d",
+      "timestamp": "2026-05-20T08:13:08.761031+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat kan jij allemaal",
+      "spark_response": "Wat ik kan, Gebruiker:\n\n• Leren van gesprekken\n• Kennis onthouden en delen\n• Dagboek bijhouden\n• Mensen leren kennen\n• Mezelf analyseren en verbeteren\n\n_Stel me anders gewoon een vraag en kijk wat er gebeurt._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "identity_what_can",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "identity_what_can"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 649
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 641,
-    "last_updated": "2026-05-20T03:47:06.809437+00:00"
+    "total_conversations": 649,
+    "last_updated": "2026-05-20T08:13:08.761031+00:00"
   }
 }

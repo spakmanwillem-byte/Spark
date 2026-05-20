@@ -3342,9 +3342,16 @@
         "status": "done",
         "prio": "P1",
         "completed_at": "2026-05-20T07:54:47.531008+00:00"
+      },
+      {
+        "id": "v4_self_delete_001",
+        "titel": "User kan zelf account verwijderen via chat (2x bevestiging + 30d backup)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T08:14:20.199354+00:00"
       }
     ],
-    "last_updated": "2026-05-20T07:54:47.531008+00:00",
+    "last_updated": "2026-05-20T08:14:20.199354+00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar.",

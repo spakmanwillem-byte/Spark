@@ -522,6 +522,12 @@ export function GesprekkenPage({ onNavigate }) {
           getAmbientPlayer()?.play(fullUrl, data.label);
         } else if (data.action === 'stop_ambient') {
           getAmbientPlayer()?.stop();
+        } else if (data.action === 'force_logout') {
+          // v4_self_delete_001: account verwijderd → uitloggen + redirect met alert
+          setTimeout(() => {
+            try { localStorage.clear(); sessionStorage.clear(); } catch {}
+            window.location.href = '/?deleted=1';
+          }, 1500);
         }
 
         // TTS speak Spark's response — strip markdown for cleaner audio

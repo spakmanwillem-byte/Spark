@@ -7,6 +7,7 @@ from typing import Optional
 
 from .service import AuthService
 from .models import LoginRequest, LoginResponse, SessionStatus, UserCreate
+from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -181,6 +182,85 @@ async def delete_user(user_id: str):
         raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
 
     return {"success": True}
+
+
+# v4_self_delete_001 — User wist zijn EIGEN account, met 30-dagen backup
+@router.delete("/self-delete/{user_id}")
+async def self_delete_account(user_id: str, confirm: bool = False):
+    """User verwijdert zijn EIGEN account.
+    Maakt backup naar /data/_deleted_users/{user_id}_{ISO}.json (30 dagen bewaard).
+    """
+    if not confirm:
+        raise HTTPException(400, "confirm=true vereist")
+    if user_id == "user-001":
+        raise HTTPException(403, "Admin gebruiker kan niet verwijderd worden")
+    user = AuthService.get_user_by_id(user_id) if hasattr(AuthService, "get_user_by_id") else None
+    if not user:
+        # Fallback: zoek manueel
+        from pathlib import Path as _P
+        users_data = load_json(_P(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+        user = next((u for u in users_data.get("users", []) if u.get("id") == user_id), None)
+    if not user:
+        raise HTTPException(404, "Gebruiker niet gevonden")
+
+    # 1) Backup naar _deleted_users dir
+    from pathlib import Path as _P
+    from datetime import datetime as _dt, timezone as _tz
+    base = _P(__file__).parent.parent.parent / "data"
+    bkp_dir = base / "_deleted_users"
+    bkp_dir.mkdir(parents=True, exist_ok=True)
+    stamp = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    bkp_path = bkp_dir / f"{user_id}_{stamp}.json"
+    # Verzamel alle user-bound data
+    payload = {
+        "user_id": user_id,
+        "deleted_at": _dt.now(_tz.utc).isoformat(),
+        "user_record": user,
+        "files": {},
+    }
+    # Bekende user-gebonden files (best effort)
+    candidates = [
+        f"persons/{user_id}.json",
+        f"persons/{user_id}_relationships.json",
+        f"agenda/{user_id}.json",
+        f"chat/logs/{user_id}.json",
+        f"chat/sessions/{user_id}.json",
+        f"dagboek/{user_id}.json",
+        f"settings/user_{user_id}.json",
+        f"urgent/acks_{user_id}.json",
+        f"users/{user_id}/profile.json",
+        f"users/{user_id}/settings.json",
+    ]
+    for rel in candidates:
+        fp = base / rel
+        if fp.exists():
+            try:
+                payload["files"][rel] = load_json(fp, default=None)
+            except Exception:
+                pass
+    save_json(bkp_path, payload)
+
+    # 2) Auto-cleanup oude backups (>30 dagen)
+    cutoff = _dt.now(_tz.utc).timestamp() - 30 * 86400
+    cleaned = 0
+    for f in bkp_dir.iterdir():
+        try:
+            if f.is_file() and f.stat().st_mtime < cutoff:
+                f.unlink()
+                cleaned += 1
+        except OSError:
+            pass
+
+    # 3) Verwijder echte user record (data files blijven, mocht een admin willen herstellen
+    #    binnen 30 dagen via backup file)
+    AuthService.delete_user(user_id)
+
+    return {
+        "success": True,
+        "message": "Account verwijderd. Backup bewaard voor 30 dagen.",
+        "backup_file": bkp_path.name,
+        "old_backups_cleaned": cleaned,
+    }
 
 
 @router.post("/users/{user_id}/reset-password")

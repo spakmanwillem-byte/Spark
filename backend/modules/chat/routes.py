@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime, timezone
+import os
 import secrets
 from .snap_service import SnapNLPService
 from .emotion_service import EmotionDetectionService
@@ -237,6 +238,132 @@ async def process_message(req: ChatMessage):
                 if u.get("id") == req.user_id:
                     return u
             return None
+
+        # v4_self_delete_001 — Account delete flow (vóór andere intents, en met pending_state)
+        try:
+            from . import session_state as _ss
+            state = _ss.get_state(req.user_id) if req.user_id else {}
+        except Exception:
+            state = {}
+
+        pending = state.get("pending_account_delete") if isinstance(state, dict) else None
+        if pending and req.user_id:
+            # In delete-flow: kijk naar ja/nee
+            if si.is_no(text):
+                out = si.handle_account_delete_cancel()
+                _ss.set_state(req.user_id, pending_account_delete=None)
+                response.update(out)
+                _save_log(req, response, "account_delete_cancel")
+                return response
+            if si.is_yes(text):
+                step = pending.get("step", 1)
+                if step == 1:
+                    out = si.handle_account_delete_confirm()
+                    _ss.set_state(req.user_id, pending_account_delete={"step": 2})
+                    response.update(out)
+                    _save_log(req, response, "account_delete_step2")
+                    return response
+                # step 2 → echt verwijderen
+                user_obj = _load_user()
+                naam = (user_obj or {}).get("naam") or "Vriend"
+                if req.user_id == "user-001":
+                    response.update({
+                        "type": "account_delete_blocked",
+                        "message": f"{naam}, het admin-account kan niet verwijderd worden. Maak eerst een tweede admin als je echt wilt vertrekken.",
+                    })
+                    _ss.set_state(req.user_id, pending_account_delete=None)
+                    _save_log(req, response, "account_delete_blocked")
+                    return response
+                # Voer delete uit via directe service-call (sneller + geen http roundtrip)
+                try:
+                    from pathlib import Path as _P
+                    from datetime import datetime as _dt2, timezone as _tz2
+                    from modules.core.storage import load_json as _lj2, save_json as _sj2
+                    from modules.auth.service import AuthService as _AS
+
+                    _base = _P(__file__).parent.parent.parent / "data"
+                    _bkp_dir = _base / "_deleted_users"
+                    _bkp_dir.mkdir(parents=True, exist_ok=True)
+                    _stamp = _dt2.now(_tz2.utc).strftime("%Y%m%d_%H%M%S")
+                    _bkp_path = _bkp_dir / f"{req.user_id}_{_stamp}.json"
+                    _payload = {
+                        "user_id": req.user_id,
+                        "deleted_at": _dt2.now(_tz2.utc).isoformat(),
+                        "user_record": user_obj,
+                        "files": {},
+                    }
+                    for _rel in [
+                        f"persons/{req.user_id}.json",
+                        f"persons/{req.user_id}_relationships.json",
+                        f"agenda/{req.user_id}.json",
+                        f"chat/logs/{req.user_id}.json",
+                        f"chat/sessions/{req.user_id}.json",
+                        f"dagboek/{req.user_id}.json",
+                        f"settings/user_{req.user_id}.json",
+                        f"urgent/acks_{req.user_id}.json",
+                    ]:
+                        _fp = _base / _rel
+                        if _fp.exists():
+                            try:
+                                _payload["files"][_rel] = _lj2(_fp, default=None)
+                            except Exception:
+                                pass
+                    _sj2(_bkp_path, _payload)
+                    # Cleanup oude backups (>30 dagen)
+                    _cutoff = _dt2.now(_tz2.utc).timestamp() - 30 * 86400
+                    for _f in _bkp_dir.iterdir():
+                        try:
+                            if _f.is_file() and _f.stat().st_mtime < _cutoff:
+                                _f.unlink()
+                        except OSError:
+                            pass
+                    ok = _AS.delete_user(req.user_id)
+                except Exception as e:
+                    print(f"[self-delete] failed: {e}")
+                    ok = False
+                _ss.set_state(req.user_id, pending_account_delete=None)
+                if ok:
+                    response.update({
+                        "type": "account_deleted",
+                        "message": f"Gedaan, {naam}. Je account is verwijderd. Je wordt zo uitgelogd. Tot ziens.",
+                        "action": "force_logout",
+                        "logout_reason": "account_deleted",
+                    })
+                else:
+                    response.update({
+                        "type": "account_delete_failed",
+                        "message": "Er ging iets mis bij het verwijderen. Probeer het via Mijn Profiel of meld het via Bug-melder.",
+                    })
+                _save_log(req, response, "account_delete_done")
+                return response
+            # Niet ja/nee → herhaal vraag
+            response.update({
+                "type": "account_delete_repeat",
+                "message": "Ik begrijp het niet helemaal — antwoord met **ja** of **nee**.",
+            })
+            return response
+
+        # Eerste detectie van delete-intent
+        if si.detect_account_delete_intent(text) and req.user_id:
+            user_obj = _load_user()
+            naam = (user_obj or {}).get("naam") or ""
+            # v4_self_delete_001: admin user-001 mag zichzelf niet verwijderen
+            if req.user_id == "user-001":
+                response.update({
+                    "type": "account_delete_blocked",
+                    "message": f"{naam}, het admin-account kan niet via chat verwijderd worden. Maak eerst een tweede admin als je echt wilt vertrekken.",
+                })
+                _save_log(req, response, "account_delete_blocked_admin")
+                return response
+            out = si.handle_account_delete_start(naam)
+            try:
+                from . import session_state as _ss2
+                _ss2.set_state(req.user_id, pending_account_delete={"step": 1})
+            except Exception:
+                pass
+            response.update(out)
+            _save_log(req, response, "account_delete_start")
+            return response
 
         # Notitie: "maak notitie: ..." — eerst want letterlijke command
         matched, content = si.detect_note_intent(text)

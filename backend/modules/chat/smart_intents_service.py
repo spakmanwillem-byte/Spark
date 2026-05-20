@@ -204,6 +204,7 @@ def handle_help() -> Dict:
         ("Text-to-Speech (Spark spreekt)", "bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'"),
         ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'"),
         ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend' — ik onthoud relaties automatisch"),
+        ("Account verwijderen", "bv. 'verwijder mijn account' — ik vraag 2× bevestiging, backup bewaard 30 dagen"),
     ]
     lines = ["Hier is wat ik kan:"]
     for label, hint in commands:
@@ -414,3 +415,64 @@ def handle_topic_overview(topic_query: str) -> Dict:
         "begrippen": begrippen,
         "preview_ids": [e.get("id") for e in sample],
     }
+
+
+# ============== ACCOUNT DELETE (v4_self_delete_001) ==============
+_DELETE_PATTERNS = [
+    r"\b(verwijder|wis|delete|sluit|stop)\s+(mijn|m'n|me)\s+account\b",
+    r"\b(ik wil|wil)\s+mijn\s+account\s+(verwijder|wissen|opzeggen|deleten|kwijt|weg)",
+    r"\bmijn\s+account\s+(verwijder|wissen|deleten|opzeggen)",
+    r"\b(deactiveer|opheffen|opzeggen)\s+(mijn|m'n|me)\s+account\b",
+    r"\baccount\s+(verwijder|opzeggen|sluiten)\b",
+]
+_YES_PATTERNS = [r"^\s*(ja|yes|jawel|zeker|inderdaad|akkoord|bevestig|ok|oké|prima|doe maar|graag)\b"]
+_NO_PATTERNS = [r"^\s*(nee|nope|niet doen|stop|annuleer|annuleren|cancel|laat maar|nvm)\b"]
+
+
+def detect_account_delete_intent(text: str) -> bool:
+    t = (text or "").lower().strip()
+    return any(re.search(p, t) for p in _DELETE_PATTERNS)
+
+
+def is_yes(text: str) -> bool:
+    t = (text or "").lower().strip()
+    return any(re.search(p, t) for p in _YES_PATTERNS)
+
+
+def is_no(text: str) -> bool:
+    t = (text or "").lower().strip()
+    return any(re.search(p, t) for p in _NO_PATTERNS)
+
+
+def handle_account_delete_start(user_naam: str = "") -> Dict:
+    """Stap 1: vraag eerste bevestiging."""
+    naam = user_naam or "jij"
+    return {
+        "type": "account_delete_confirm_1",
+        "message": (
+            f"Even checken, {naam}: wil jij echt je **account verwijderen**? Ik vraag het straks nóg een keer "
+            f"om zeker te zijn. Een backup van je data blijft 30 dagen bewaard — daarna is het écht weg.\n\n"
+            f"_Antwoord met **ja** om door te gaan, of **nee** om te annuleren._"
+        ),
+        "pending_state": {"flow": "account_delete", "step": 1},
+    }
+
+
+def handle_account_delete_confirm() -> Dict:
+    """Stap 2: tweede bevestiging."""
+    return {
+        "type": "account_delete_confirm_2",
+        "message": (
+            "Laatste kans — **weet je het zeker**? Je wordt direct uitgelogd zodra ik op de knop druk.\n\n"
+            "_Antwoord met **ja** om te verwijderen, of **nee** om te stoppen._"
+        ),
+        "pending_state": {"flow": "account_delete", "step": 2},
+    }
+
+
+def handle_account_delete_cancel() -> Dict:
+    return {
+        "type": "account_delete_cancelled",
+        "message": "Goed, ik laat je account staan. Niks veranderd.",
+    }
+

@@ -13,6 +13,11 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [localError, setLocalError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  // v4_self_delete_001: toon alert na account-delete redirect
+  const [deletedAlert, setDeletedAlert] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return new URLSearchParams(window.location.search).has('deleted');
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,6 +98,26 @@ export function LoginForm() {
         {/* Login Card */}
         <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* v4_self_delete_001 — Account verwijderd melding */}
+            {deletedAlert && (
+              <div className="flex items-start gap-3 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300" data-testid="account-deleted-alert">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium">Account verwijderd</p>
+                  <p className="text-xs text-amber-300/80 mt-1">
+                    Je account is gewist. Een backup blijft 30 dagen bewaard — neem contact op met de beheerder als je dit wilt terugdraaien.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDeletedAlert(false);
+                    window.history.replaceState({}, '', window.location.pathname);
+                  }}
+                  className="text-amber-400 hover:text-amber-200 text-lg leading-none"
+                >×</button>
+              </div>
+            )}
             {/* Error Message */}
             {displayError && (
               <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400">

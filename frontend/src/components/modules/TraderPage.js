@@ -179,7 +179,14 @@ export function TraderPage({ onNavigate }) {
     }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
     setQtResult(res);
     setQtLoading(false);
-    if (res.success) { loadCoreData(); loadLiveData(); loadMonitorStatus(); if (usePotjes) loadPotjes(); }
+    if (res.success) {
+      // v4_potje_refresh_001: quick-buy-potje gebruikt ALTIJD potjes, dus altijd refreshen
+      loadCoreData();
+      loadLiveData();
+      loadMonitorStatus();
+      loadPotjes();
+      loadBalance();
+    }
   };
 
   if (loading) return (

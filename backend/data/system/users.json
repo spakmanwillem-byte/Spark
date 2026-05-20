@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-20T05:44:23.761250",
+      "last_active": "2026-05-20T07:54:05.171442",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -961,16 +961,6 @@
             "unlocked_at": "2026-03-23T19:01:02.376377"
           },
           {
-            "id": "words_2000",
-            "name": "Keeper van het Woord",
-            "description": "Je bewaakt en vergroot Spark's wereld van kennis.",
-            "milestone": 2000,
-            "xp_reward": 10000,
-            "icon": "🗝️",
-            "rarity": "epic",
-            "unlocked_at": "2026-03-31T22:31:01.344955+00:00"
-          },
-          {
             "id": "contrib_1",
             "name": "Eerste Bijdrage",
             "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
@@ -1011,7 +1001,7 @@
             "unlocked_at": "2026-05-14T16:39:38.619897+00:00"
           }
         ],
-        "total_xp_from_achievements": 27150
+        "total_xp_from_achievements": 17150
       },
       "xp": 27150,
       "credits": 0,
@@ -1056,7 +1046,7 @@
       "type": "bot",
       "sleutelwoord": "Welkom01",
       "gradatie": 7,
-      "xp": 720,
+      "xp": 27720,
       "credits": 0,
       "rank": "Bot Assistant",
       "persoonlijke_info": {
@@ -1091,9 +1081,49 @@
             "icon": "🔍",
             "rarity": "common",
             "unlocked_at": "2026-03-17T07:36:47.100247"
+          },
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.407817+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.407829+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.407832+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.407839+00:00"
           }
         ],
-        "total_xp_from_achievements": 150
+        "total_xp_from_achievements": 950
       },
       "profile": {
         "need": "",
@@ -1130,7 +1160,75 @@
         "studierichting": ""
       },
       "hobbies_interesses": {},
-      "sleutelwoord_reset_op": "2026-05-20T04:23:39.095619"
+      "sleutelwoord_reset_op": "2026-05-20T04:23:39.095619",
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.411260+00:00",
+          "total_after": 770
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.415196+00:00",
+          "total_after": 870
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.418537+00:00",
+          "total_after": 1020
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.421804+00:00",
+          "total_after": 1220
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.425036+00:00",
+          "total_after": 1720
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.428238+00:00",
+          "total_after": 2220
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.431943+00:00",
+          "total_after": 3220
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.435224+00:00",
+          "total_after": 5220
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.438625+00:00",
+          "total_after": 10220
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.442532+00:00",
+          "total_after": 17720
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.446094+00:00",
+          "total_after": 27720
+        }
+      ]
     },
     {
       "id": "bot-harry",
@@ -1140,7 +1238,7 @@
       "type": "bot",
       "sleutelwoord": "Welkom01",
       "gradatie": 4,
-      "xp": 740,
+      "xp": 27740,
       "credits": 0,
       "rank": "Bot Assistant",
       "persoonlijke_info": {
@@ -1172,9 +1270,49 @@
             "icon": "🔍",
             "rarity": "common",
             "unlocked_at": "2026-03-19T06:30:37.916537"
+          },
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.450428+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.450440+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.450443+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.450449+00:00"
           }
         ],
-        "total_xp_from_achievements": 150
+        "total_xp_from_achievements": 950
       },
       "profile": {
         "need": "",
@@ -1192,7 +1330,75 @@
         "tags": [],
         "updated_at": "2026-03-18T07:45:20.994131"
       },
-      "sleutelwoord_reset_op": "2026-05-20T04:23:38.981491"
+      "sleutelwoord_reset_op": "2026-05-20T04:23:38.981491",
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.454602+00:00",
+          "total_after": 790
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.458450+00:00",
+          "total_after": 890
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.462374+00:00",
+          "total_after": 1040
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.465972+00:00",
+          "total_after": 1240
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.469645+00:00",
+          "total_after": 1740
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.473124+00:00",
+          "total_after": 2240
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.476538+00:00",
+          "total_after": 3240
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.480383+00:00",
+          "total_after": 5240
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.484178+00:00",
+          "total_after": 10240
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.488270+00:00",
+          "total_after": 17740
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.492199+00:00",
+          "total_after": 27740
+        }
+      ]
     },
     {
       "id": "bot-smith",
@@ -1202,7 +1408,7 @@
       "type": "bot",
       "sleutelwoord": "Welkom01",
       "gradatie": 3,
-      "xp": 800,
+      "xp": 27900,
       "credits": 0,
       "rank": "Bot Security",
       "persoonlijke_info": {
@@ -1224,9 +1430,59 @@
             "icon": "✨",
             "rarity": "common",
             "unlocked_at": "2026-03-18T06:29:06.766883"
+          },
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.496786+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.496796+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.496799+00:00"
+          },
+          {
+            "id": "words_25",
+            "name": "Woord Ontdekker",
+            "description": "Je begint actief nieuwe woorden aan Spark te leren.",
+            "milestone": 25,
+            "xp_reward": 100,
+            "icon": "🔍",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.496801+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.496808+00:00"
           }
         ],
-        "total_xp_from_achievements": 50
+        "total_xp_from_achievements": 950
       },
       "profile": {
         "need": "",
@@ -1244,7 +1500,81 @@
         "tags": [],
         "updated_at": "2026-03-18T07:45:38.042352"
       },
-      "sleutelwoord_reset_op": "2026-05-20T04:23:38.807864"
+      "sleutelwoord_reset_op": "2026-05-20T04:23:38.807864",
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.500721+00:00",
+          "total_after": 850
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.504535+00:00",
+          "total_after": 950
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.508307+00:00",
+          "total_after": 1100
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Woord Ontdekker",
+          "granted_at": "2026-05-20T07:45:53.512041+00:00",
+          "total_after": 1200
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.515994+00:00",
+          "total_after": 1400
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.519648+00:00",
+          "total_after": 1900
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.523492+00:00",
+          "total_after": 2400
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.527438+00:00",
+          "total_after": 3400
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.531300+00:00",
+          "total_after": 5400
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.535041+00:00",
+          "total_after": 10400
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.539042+00:00",
+          "total_after": 17900
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.543033+00:00",
+          "total_after": 27900
+        }
+      ]
     },
     {
       "id": "user-000",
@@ -1377,7 +1707,133 @@
           ],
           "behoud": "Kernidentiteit blijft via Core document"
         }
-      }
+      },
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.547857+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.547867+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.547872+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.547880+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 800
+      },
+      "xp": 27150,
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.552336+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.556253+00:00",
+          "total_after": 150
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Vonk",
+          "granted_at": "2026-05-20T07:45:53.560327+00:00",
+          "total_after": 200
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.564167+00:00",
+          "total_after": 350
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Woord Ontdekker",
+          "granted_at": "2026-05-20T07:45:53.568393+00:00",
+          "total_after": 450
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.572214+00:00",
+          "total_after": 650
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.576403+00:00",
+          "total_after": 1150
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.580273+00:00",
+          "total_after": 1650
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.584541+00:00",
+          "total_after": 2650
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.588414+00:00",
+          "total_after": 4650
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.592656+00:00",
+          "total_after": 9650
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.596442+00:00",
+          "total_after": 17150
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.600498+00:00",
+          "total_after": 27150
+        }
+      ]
     },
     {
       "naam": "Nick Teeuwen",
@@ -1391,7 +1847,142 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 0
+      "xp": 27150,
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.604992+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.605001+00:00"
+          },
+          {
+            "id": "words_10",
+            "name": "Eerste Vonk",
+            "description": "Je hebt Spark zijn eerste nieuwe woorden geleerd.",
+            "milestone": 10,
+            "xp_reward": 50,
+            "icon": "✨",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.605004+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.605006+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.605014+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 850
+      },
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.609400+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.614954+00:00",
+          "total_after": 150
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Vonk",
+          "granted_at": "2026-05-20T07:45:53.619050+00:00",
+          "total_after": 200
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.623647+00:00",
+          "total_after": 350
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Woord Ontdekker",
+          "granted_at": "2026-05-20T07:45:53.628159+00:00",
+          "total_after": 450
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.632537+00:00",
+          "total_after": 650
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.637129+00:00",
+          "total_after": 1150
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.641403+00:00",
+          "total_after": 1650
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.645748+00:00",
+          "total_after": 2650
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.649982+00:00",
+          "total_after": 4650
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.654554+00:00",
+          "total_after": 9650
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.658542+00:00",
+          "total_after": 17150
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.663027+00:00",
+          "total_after": 27150
+        }
+      ]
     },
     {
       "naam": "Roadkill",
@@ -1429,16 +2020,6 @@
             "unlocked_at": "2026-05-18T14:19:59.195428+00:00"
           },
           {
-            "id": "words_10",
-            "name": "Eerste Vonk",
-            "description": "Je hebt Spark zijn eerste nieuwe woorden geleerd.",
-            "milestone": 10,
-            "xp_reward": 50,
-            "icon": "✨",
-            "rarity": "common",
-            "unlocked_at": "2026-05-18T14:19:59.195435+00:00"
-          },
-          {
             "id": "contrib_10",
             "name": "Sprinter",
             "description": "10 goedgekeurde bijdragen.",
@@ -1449,36 +2030,6 @@
             "unlocked_at": "2026-05-18T14:19:59.195441+00:00"
           },
           {
-            "id": "words_25",
-            "name": "Woord Ontdekker",
-            "description": "Je begint actief nieuwe woorden aan Spark te leren.",
-            "milestone": 25,
-            "xp_reward": 100,
-            "icon": "🔍",
-            "rarity": "common",
-            "unlocked_at": "2026-05-18T14:19:59.195445+00:00"
-          },
-          {
-            "id": "words_50",
-            "name": "Lexicon Bouwer",
-            "description": "Spark's woordenschat begint zichtbaar te groeien.",
-            "milestone": 50,
-            "xp_reward": 200,
-            "icon": "📖",
-            "rarity": "uncommon",
-            "unlocked_at": "2026-05-18T14:19:59.195451+00:00"
-          },
-          {
-            "id": "words_100",
-            "name": "Taal Architect",
-            "description": "Je hebt de eerste echte basis van Spark's taal gebouwd.",
-            "milestone": 100,
-            "xp_reward": 500,
-            "icon": "🏗️",
-            "rarity": "uncommon",
-            "unlocked_at": "2026-05-18T14:19:59.195456+00:00"
-          },
-          {
             "id": "contrib_100",
             "name": "Honderd",
             "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
@@ -1487,59 +2038,9 @@
             "icon": "🎯",
             "rarity": "epic",
             "unlocked_at": "2026-05-18T14:19:59.195466+00:00"
-          },
-          {
-            "id": "words_250",
-            "name": "Orakel van Woorden",
-            "description": "Spark begint verbanden tussen begrippen te begrijpen.",
-            "milestone": 250,
-            "xp_reward": 1000,
-            "icon": "🔮",
-            "rarity": "rare",
-            "unlocked_at": "2026-05-18T14:19:59.195472+00:00"
-          },
-          {
-            "id": "words_500",
-            "name": "Half Duizend Meester",
-            "description": "Spark kent al 500 woorden dankzij jouw bijdrage.",
-            "milestone": 500,
-            "xp_reward": 2000,
-            "icon": "👑",
-            "rarity": "rare",
-            "unlocked_at": "2026-05-18T14:19:59.195477+00:00"
-          },
-          {
-            "id": "words_1000",
-            "name": "Bibliotheek Architect",
-            "description": "Je hebt een grote kennisbasis opgebouwd voor Spark.",
-            "milestone": 1000,
-            "xp_reward": 5000,
-            "icon": "🏛️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T14:19:59.195482+00:00"
-          },
-          {
-            "id": "words_1500",
-            "name": "Tempel Bouwer",
-            "description": "De fundamenten van Spark's kennis-tempel staan.",
-            "milestone": 1500,
-            "xp_reward": 7500,
-            "icon": "⛩️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T14:19:59.195487+00:00"
-          },
-          {
-            "id": "words_2000",
-            "name": "Keeper van het Woord",
-            "description": "Je bewaakt en vergroot Spark's wereld van kennis.",
-            "milestone": 2000,
-            "xp_reward": 10000,
-            "icon": "🗝️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T14:19:59.195492+00:00"
           }
         ],
-        "total_xp_from_achievements": 27150
+        "total_xp_from_achievements": 800
       }
     },
     {
@@ -1554,8 +2055,133 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 0,
-      "sleutelwoord_reset_op": "2026-05-20T04:23:38.699370"
+      "xp": 27150,
+      "sleutelwoord_reset_op": "2026-05-20T04:23:38.699370",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.668388+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.668396+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.668401+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.668409+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 800
+      },
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.672800+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.677134+00:00",
+          "total_after": 150
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Vonk",
+          "granted_at": "2026-05-20T07:45:53.681625+00:00",
+          "total_after": 200
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.686207+00:00",
+          "total_after": 350
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Woord Ontdekker",
+          "granted_at": "2026-05-20T07:45:53.690926+00:00",
+          "total_after": 450
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.695507+00:00",
+          "total_after": 650
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.699875+00:00",
+          "total_after": 1150
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.704865+00:00",
+          "total_after": 1650
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.709030+00:00",
+          "total_after": 2650
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.713356+00:00",
+          "total_after": 4650
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.717984+00:00",
+          "total_after": 9650
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.723003+00:00",
+          "total_after": 17150
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.727501+00:00",
+          "total_after": 27150
+        }
+      ]
     },
     {
       "naam": "Marieke",
@@ -1569,8 +2195,133 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 0,
-      "sleutelwoord_reset_op": "2026-05-20T04:23:38.555970"
+      "xp": 27150,
+      "sleutelwoord_reset_op": "2026-05-20T04:23:38.555970",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T07:45:53.732621+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T07:45:53.732631+00:00"
+          },
+          {
+            "id": "contrib_10",
+            "name": "Sprinter",
+            "description": "10 goedgekeurde bijdragen.",
+            "milestone": 10,
+            "xp_reward": 150,
+            "icon": "🏃",
+            "rarity": "uncommon",
+            "unlocked_at": "2026-05-20T07:45:53.732636+00:00"
+          },
+          {
+            "id": "contrib_100",
+            "name": "Honderd",
+            "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+            "milestone": 100,
+            "xp_reward": 500,
+            "icon": "🎯",
+            "rarity": "epic",
+            "unlocked_at": "2026-05-20T07:45:53.732645+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 800
+      },
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T07:45:53.737343+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T07:45:53.742435+00:00",
+          "total_after": 150
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Vonk",
+          "granted_at": "2026-05-20T07:45:53.747004+00:00",
+          "total_after": 200
+        },
+        {
+          "amount": 150,
+          "reason": "Achievement: Sprinter",
+          "granted_at": "2026-05-20T07:45:53.751464+00:00",
+          "total_after": 350
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Woord Ontdekker",
+          "granted_at": "2026-05-20T07:45:53.755857+00:00",
+          "total_after": 450
+        },
+        {
+          "amount": 200,
+          "reason": "Achievement: Lexicon Bouwer",
+          "granted_at": "2026-05-20T07:45:53.760511+00:00",
+          "total_after": 650
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Taal Architect",
+          "granted_at": "2026-05-20T07:45:53.765117+00:00",
+          "total_after": 1150
+        },
+        {
+          "amount": 500,
+          "reason": "Achievement: Honderd",
+          "granted_at": "2026-05-20T07:45:53.769644+00:00",
+          "total_after": 1650
+        },
+        {
+          "amount": 1000,
+          "reason": "Achievement: Orakel van Woorden",
+          "granted_at": "2026-05-20T07:45:53.774614+00:00",
+          "total_after": 2650
+        },
+        {
+          "amount": 2000,
+          "reason": "Achievement: Half Duizend Meester",
+          "granted_at": "2026-05-20T07:45:53.779045+00:00",
+          "total_after": 4650
+        },
+        {
+          "amount": 5000,
+          "reason": "Achievement: Bibliotheek Architect",
+          "granted_at": "2026-05-20T07:45:53.784045+00:00",
+          "total_after": 9650
+        },
+        {
+          "amount": 7500,
+          "reason": "Achievement: Tempel Bouwer",
+          "granted_at": "2026-05-20T07:45:53.788463+00:00",
+          "total_after": 17150
+        },
+        {
+          "amount": 10000,
+          "reason": "Achievement: Keeper van het Woord",
+          "granted_at": "2026-05-20T07:45:53.793048+00:00",
+          "total_after": 27150
+        }
+      ]
     },
     {
       "naam": "Ron",
@@ -1608,16 +2359,6 @@
             "unlocked_at": "2026-05-18T20:04:09.386183+00:00"
           },
           {
-            "id": "words_10",
-            "name": "Eerste Vonk",
-            "description": "Je hebt Spark zijn eerste nieuwe woorden geleerd.",
-            "milestone": 10,
-            "xp_reward": 50,
-            "icon": "✨",
-            "rarity": "common",
-            "unlocked_at": "2026-05-18T20:04:09.386188+00:00"
-          },
-          {
             "id": "contrib_10",
             "name": "Sprinter",
             "description": "10 goedgekeurde bijdragen.",
@@ -1628,36 +2369,6 @@
             "unlocked_at": "2026-05-18T20:04:09.386191+00:00"
           },
           {
-            "id": "words_25",
-            "name": "Woord Ontdekker",
-            "description": "Je begint actief nieuwe woorden aan Spark te leren.",
-            "milestone": 25,
-            "xp_reward": 100,
-            "icon": "🔍",
-            "rarity": "common",
-            "unlocked_at": "2026-05-18T20:04:09.386195+00:00"
-          },
-          {
-            "id": "words_50",
-            "name": "Lexicon Bouwer",
-            "description": "Spark's woordenschat begint zichtbaar te groeien.",
-            "milestone": 50,
-            "xp_reward": 200,
-            "icon": "📖",
-            "rarity": "uncommon",
-            "unlocked_at": "2026-05-18T20:04:09.386199+00:00"
-          },
-          {
-            "id": "words_100",
-            "name": "Taal Architect",
-            "description": "Je hebt de eerste echte basis van Spark's taal gebouwd.",
-            "milestone": 100,
-            "xp_reward": 500,
-            "icon": "🏗️",
-            "rarity": "uncommon",
-            "unlocked_at": "2026-05-18T20:04:09.386202+00:00"
-          },
-          {
             "id": "contrib_100",
             "name": "Honderd",
             "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
@@ -1666,65 +2377,16 @@
             "icon": "🎯",
             "rarity": "epic",
             "unlocked_at": "2026-05-18T20:04:09.386206+00:00"
-          },
-          {
-            "id": "words_250",
-            "name": "Orakel van Woorden",
-            "description": "Spark begint verbanden tussen begrippen te begrijpen.",
-            "milestone": 250,
-            "xp_reward": 1000,
-            "icon": "🔮",
-            "rarity": "rare",
-            "unlocked_at": "2026-05-18T20:04:09.386209+00:00"
-          },
-          {
-            "id": "words_500",
-            "name": "Half Duizend Meester",
-            "description": "Spark kent al 500 woorden dankzij jouw bijdrage.",
-            "milestone": 500,
-            "xp_reward": 2000,
-            "icon": "👑",
-            "rarity": "rare",
-            "unlocked_at": "2026-05-18T20:04:09.386213+00:00"
-          },
-          {
-            "id": "words_1000",
-            "name": "Bibliotheek Architect",
-            "description": "Je hebt een grote kennisbasis opgebouwd voor Spark.",
-            "milestone": 1000,
-            "xp_reward": 5000,
-            "icon": "🏛️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T20:04:09.386216+00:00"
-          },
-          {
-            "id": "words_1500",
-            "name": "Tempel Bouwer",
-            "description": "De fundamenten van Spark's kennis-tempel staan.",
-            "milestone": 1500,
-            "xp_reward": 7500,
-            "icon": "⛩️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T20:04:09.386220+00:00"
-          },
-          {
-            "id": "words_2000",
-            "name": "Keeper van het Woord",
-            "description": "Je bewaakt en vergroot Spark's wereld van kennis.",
-            "milestone": 2000,
-            "xp_reward": 10000,
-            "icon": "🗝️",
-            "rarity": "epic",
-            "unlocked_at": "2026-05-18T20:04:09.386223+00:00"
           }
         ],
-        "total_xp_from_achievements": 27150
+        "total_xp_from_achievements": 800
       }
     }
   ],
   "metadata": {
     "purpose": "Gebruikersdatabase met gradaties en authenticatie",
     "creator": "System",
-    "last_updated": "2026-03-31T08:39:46.408876"
+    "last_updated": "2026-03-31T08:39:46.408876",
+    "last_leaderboard_recalc": "2026-05-20T07:48:50.830507+00:00"
   }
 }

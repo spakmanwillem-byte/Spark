@@ -424,6 +424,24 @@
       "description": "[Trade] Potje toont hardcoded BCH-EUR ook als je BTC kocht — geen visuele scheiding per coin",
       "resolution_note": "v4_potje_market_001: open_pot() bewaart nu market-veld per potje. UI kan straks per potje tonen welke coin erin zit.",
       "resolved_at": "2026-05-20T05:52:51.524441+00:00"
+    },
+    {
+      "id": "bug-leaderboard-mock-20260520075447",
+      "created_at": "2026-05-20T07:54:47.531008+00:00",
+      "created_by": "user-001",
+      "status": "opgelost",
+      "description": "[Leaderboard] Pagina toont mock data ipv echte user-stats",
+      "resolution_note": "v4_leaderboard_001: nieuwe endpoint /api/achievements/leaderboard + frontend gebruikt echte data. Word_count filter per user gefixt (matcht op naam in detected_by). Retro-unlocked XP opgeschoond.",
+      "resolved_at": "2026-05-20T07:54:47.531008+00:00"
+    },
+    {
+      "id": "bug-potje-refresh-20260520075447",
+      "created_at": "2026-05-20T07:54:47.531008+00:00",
+      "created_by": "user-001",
+      "status": "opgelost",
+      "description": "[Trade] Na koop potje verschijnt nieuwe potje-state niet, scherm refresht niet",
+      "resolution_note": "v4_potje_refresh_001: executeSparkBuy laadt nu altijd potjes na succesvolle koop (was: alleen als usePotjes toggle aan stond, terwijl quick-buy-potje ALTIJD potjes gebruikt).",
+      "resolved_at": "2026-05-20T07:54:47.531008+00:00"
     }
   ]
 }

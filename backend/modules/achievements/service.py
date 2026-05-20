@@ -18,11 +18,35 @@ class AchievementService:
         data = load_json(ACHIEVEMENTS_FILE, default={"achievements": []})
         return data.get("achievements", [])
 
-    def _get_word_count(self):
-        """Count active knowledge entries as word count"""
+    def _get_word_count(self, user_id: str = None):
+        """Count active knowledge entries.
+
+        v4_leaderboard_002: filter op user_id wanneer beschikbaar zodat elke user
+        zijn eigen bijdrage telt. KB-entries gebruiken `detected_by` met NAAM, dus we
+        matchen ook op user.naam / user.volledige_naam.
+        Fallback zonder user_id: globaal (legacy / admin context).
+        """
         data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
         entries = data.get("knowledge_entries", [])
-        return len([e for e in entries if e.get("status", "active") == "active"])
+        active = [e for e in entries if e.get("status", "active") in ("active", "draft")]
+        if not user_id:
+            return len(active)
+        user = self._get_user(user_id)
+        if not user:
+            return 0
+        identifiers = {
+            user_id.lower(),
+            (user.get("naam") or "").lower(),
+            (user.get("volledige_naam") or "").lower(),
+        } - {""}
+        own = 0
+        for e in active:
+            cb = (e.get("created_by") or "").lower()
+            db = (e.get("detected_by") or "").lower()
+            meta_cb = ((e.get("metadata", {}) or {}).get("created_by") or "").lower()
+            if cb in identifiers or db in identifiers or meta_cb in identifiers:
+                own += 1
+        return own
 
     def _get_user(self, user_id):
         data = load_json(USERS_FILE, default={"users": []})
@@ -56,7 +80,7 @@ class AchievementService:
             return None
 
         achievements = self._get_achievements()
-        word_count = self._get_word_count()
+        word_count = self._get_word_count(user_id)
 
         # Get unlocked from user data
         user_ach = user.get("achievements", {})

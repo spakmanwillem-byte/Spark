@@ -1855,6 +1855,27 @@
         },
         "notes": "265 regels, rule-based (no LLM calls)",
         "completed_date": "2026-03-11"
+      },
+      {
+        "id": "v3_012",
+        "titel": "Homoniem-flow: detecteer woorden met meerdere betekenissen, vraag user welke",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "historical"
+      },
+      {
+        "id": "v3_013",
+        "titel": "Spark Leraar achievement + XP-bonus (+15) bij homoniem-disambiguatie",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "historical"
+      },
+      {
+        "id": "v3_028",
+        "titel": "Auto-zin-snap: bewaar hele zin als context-anker bij onbekende concepten",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "historical"
       }
     ]
   },
@@ -3532,6 +3553,47 @@
         "titel": "Voice-tab naar Beheer → Features (kader) verplaatsen",
         "status": "open",
         "priority": "low"
+      },
+      {
+        "id": "v4_013",
+        "titel": "Spark Vocab: woordenlijsten voor antwoord-variatie (twijfel/enthousiasme/zelfspot/openers/afsluiters)",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_016",
+        "titel": "Insights Module: analyser voor Shadow Observer data",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_017",
+        "titel": "Advisor UI: 'Spark Inzichten' pagina — toont insights, accepteert/wijst suggesties af",
+        "status": "open",
+        "priority": "medium"
+      },
+      {
+        "id": "v4_025",
+        "titel": "User-time helper: Spark is altijd bewust van juiste lokale tijd per gebruiker",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_grad_suggest_001",
+        "titel": "Gradatie-voorstel: Spark mag admin voorstellen om user te promoten (vooral 4→3)",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_spark_self_001",
+        "titel": "Spark's eigen anker (user-000) — folder + intents 'onthoud voor jezelf' / 'wat heb je geleerd'",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4281,7 +4343,7 @@
     }
   },
   "summary": {
-    "v4.0_progress": "89/124 (72%)",
+    "v4.0_progress": "94/130 (72%)",
     "last_cleanup": "2026-05-20",
     "active_versions": [
       "v4.0"
@@ -4297,7 +4359,9 @@
       "v4_accounting_002",
       "v4_kb_split_001",
       "v4_dq_b"
-    ]
+    ],
+    "last_archeology": "2026-05-20",
+    "code_refs_in_roadmap": "100%"
   },
   "technical_debt": [
     "Harry Klokkenmaker hourly trigger verification pending",

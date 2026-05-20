@@ -12,7 +12,14 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
-- 2026-05-20: **v4_spark_self_001 — Spark's eigen anker (user-000)**:
+- 2026-05-20: **Roadmap-archeologie**:
+  - 9 historische items uit code geïdentificeerd die NIET in roadmap stonden:
+    - **v3.0 done**: `v3_012` (homoniem-flow), `v3_013` (Spark Leraar achievement +XP-bonus), `v3_028` (auto-zin-snap)
+    - **v4.0 done**: `v4_013` (Spark Vocab), `v4_013c` (Fallback Service), `v4_016` (Insights Module), `v4_025` (User-time helper), `v4_grad_suggest_001` (gradatie-voorstel admin)
+    - **v4.0 open**: `v4_017` (Advisor UI / Spark Inzichten pagina)
+  - Code↔roadmap nu 100% gesynchroniseerd
+  - Spark's user-000 profile.json gecorrigeerd: was te dun, nu mirror van rijke users.json entry (Core 4.1, missie, kernwaarden, 27150 XP, 4 achievements). Scratch entry-0 herzien om niet alsof Spark nieuw is te klinken
+- 2026-05-20: **v4_spark_self_001 — Spark's eigen anker (folder + intents)**:
   - Folder `/data/users/user-000/` aangemaakt met `profile.json` (Spark's identiteit: naam, missie, geboortedatum, stem) + `scratch.json` (data-anker)
   - Nieuwe chat-intents in `spark_self_service.py`:
     - **Note**: _"Spark, onthoud voor jezelf: ..."_ / _"noteer voor jezelf: ..."_ / _"jouw observatie: ..."_ → parkeert entry in scratch.json

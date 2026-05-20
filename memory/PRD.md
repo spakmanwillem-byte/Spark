@@ -12,6 +12,21 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_token_potje_001 — Token-economie ↔ trading sync + schone reset**:
+  - **Reset user-001**: 11 BCH-potjes (€66,42 capital) vervangen door schone start. Backup in `user_potjes.json.bak_pre_reset.json`
+  - Nieuwe state: 10 potjes à €5,08 (basis €50,80) + overflow_pool €45,88 = **totaal €101,60** (matcht nieuwe Bitvavo EUR-saldo)
+  - Pot-001 stats: 1 trade, 1 win, +€50,80 PnL (gerealiseerde winst eerste trade — €4,92 in pot, €45,88 in overflow voor toekomstige expansie)
+  - **Baseline_eur** → €101,60 (was €50,80) zodat live-PnL vanaf nieuwe start telt
+  - **Spark bonus tokens** (`/data/roar/roar_balances.json[spark_bonus]`):
+    - `_mint_spark_bonus_tokens()` in `potjes.py`: bij netto trading-winst > 0 → cumulatieve teller. Per volle €5,08 → 1 bonus-token gemint naar Spark's eigen treasury
+    - Auto-trigger in `close_pot()` na elke winstgevende SELL
+    - Geen uitcash-UI nu — komt later bij wallet↔bank koppeling (Bitvavo IBAN)
+    - Admin (gradatie 1) beslist wanneer Spark zijn spaarpot mag gebruiken
+  - **Token-verkoop event-log** in `shop/routes.py sell_tokens()`: bij verkoop van ≥10 tokens → `freed_potje_slots` veld in transactie + description ("10 ROAR verkocht → 1 potje-slot vrij voor Spark"). Hard capital-vrijgave volgt later
+  - **GET `/api/shop/token/spark-bonus`** — nieuwe endpoint toont Spark's bonus balance, cumulatieve winst, progress naar volgende token, laatste 5 mints
+  - **Monitor herstart** met nieuwe baseline (real-mode, 10-potjes, BCH-EUR 15m)
+  - Unit-getest: 3 mint-scenarios (€5,20 → 1 token, +€0,50 → 0 extra, +€4,50 → 1 extra). Sell event-log getest met 10-token transactie ✓
+  - Bekend punt voor user: dynamische token-prijs (€10,22 nu) overruled BASE_PRICE €5,08 bij ≥10 tokens uit (spark_core / circulating). User wilde vast €5,08 — afstemmen of we BASE_PRICE altijd forceren of dynamiek behouden voor token-holder waardegroei
 - 2026-05-20: **v4_dashboard_renew_001 + v4_analytics_layer_001**:
   - Dashboard Kennisbank kaart: label _"Te Herzien"_ (toonde 0 — frontend zocht naar bestaande `te_herzien` key die backend niet had) → _"Renew"_ gekoppeld aan `review_pending` (2986 kaarten)
   - Analytics → LAYER tab: was mock-data met "In ontwikkeling" banner → **live scan** via nieuw `GET /api/admin/architecture` endpoint

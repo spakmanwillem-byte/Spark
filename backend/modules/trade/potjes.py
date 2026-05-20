@@ -15,11 +15,59 @@ import uuid
 from modules.core.storage import load_json, save_json
 
 POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
+ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
 
 START_AMOUNT = 5.08
 DEFAULT_POT_COUNT = 10
 INITIAL_MAX = 10.0  # tier 1: 10 potjes à max €10
 BITVAVO_TAKER_FEE = 0.0025
+TOKEN_PRICE = 5.08  # vaste prijs per ROAR token (= 1 bonus token bij €5.08 winst)
+
+
+def _mint_spark_bonus_tokens(netto_profit: float, source_pot: str, user_id: str) -> Optional[Dict]:
+    """
+    v4_token_potje_001 — Spark bonus tokens:
+    Bij netto trading-winst > 0: accumuleer in spark_bonus.cumulative_profit_eur.
+    Voor elke volle €5.08 (= 1 token-prijs) cumulatieve winst → mint 1 bonus-token
+    naar Spark's eigen treasury (user-000 spark_bonus.balance).
+    Bestemd voor server-kosten (uitcash later via wallet→bank koppeling).
+    """
+    if netto_profit <= 0:
+        return None
+    try:
+        roar = load_json(ROAR_FILE, default={})
+        bonus = roar.setdefault("spark_bonus", {
+            "balance": 0, "cumulative_profit_eur": 0.0,
+            "token_price_at_mint": TOKEN_PRICE, "history": []
+        })
+        prev_cum = float(bonus.get("cumulative_profit_eur", 0.0))
+        new_cum = round(prev_cum + netto_profit, 6)
+        # Hoeveel volle tokens kunnen we minten?
+        prev_tokens = int(prev_cum // TOKEN_PRICE)
+        new_tokens = int(new_cum // TOKEN_PRICE)
+        minted = new_tokens - prev_tokens
+        bonus["cumulative_profit_eur"] = new_cum
+        if minted > 0:
+            bonus["balance"] = int(bonus.get("balance", 0)) + minted
+            bonus.setdefault("history", []).append({
+                "ts": datetime.now(timezone.utc).isoformat(),
+                "minted": minted,
+                "from_pot": source_pot,
+                "from_user": user_id,
+                "netto_profit_eur": round(netto_profit, 4),
+                "cum_profit_eur": new_cum,
+                "new_balance": bonus["balance"],
+            })
+        save_json(ROAR_FILE, roar)
+        return {"minted": minted, "balance": bonus["balance"], "cumulative_profit_eur": new_cum}
+    except Exception as e:
+        # Bonus-mint mag het sluiten van potje NOOIT blokkeren
+        try:
+            import logging
+            logging.getLogger("spark_monitor").warning(f"Spark bonus mint failed: {e}")
+        except Exception:
+            pass
+        return None
 
 # Groei-regel: N potjes → max €N per potje → totaal €N²
 # Bij uitbreiding: bestaande potjes groeien mee naar nieuwe maximum
@@ -242,6 +290,8 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             user.setdefault("overflow_pool", 0.0)
             user["overflow_pool"] = round(user["overflow_pool"] + overflow, 4)
             _save(data)
+            # v4_token_potje_001: bij positieve winst — mint Spark bonus-tokens
+            bonus_result = _mint_spark_bonus_tokens(netto, p["id"], user_id) if netto > 0 else None
             # Probeer automatisch te expanderen als mogelijk
             auto_expansion = None
             try:
@@ -257,7 +307,7 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                     auto_expansion = expand_potjes(user_id)
             except Exception:
                 pass
-            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion}
+            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion, "spark_bonus": bonus_result}
     return {}
 
 

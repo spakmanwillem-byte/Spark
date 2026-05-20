@@ -163,6 +163,36 @@ async def get_token_balance(user_id: str):
     }
 
 
+@router.get("/token/spark-bonus")
+async def get_spark_bonus():
+    """
+    v4_token_potje_001 — Spark's bonus token spaarpot.
+    Earned door trading-winst, 1 bonus-token per €5.08 cumulatieve netto winst.
+    Bestemd voor server-kosten (uitcash via wallet→bank koppeling, later).
+    """
+    roar = get_roar_data()
+    bonus = roar.get("spark_bonus", {
+        "balance": 0, "cumulative_profit_eur": 0.0,
+        "token_price_at_mint": BASE_PRICE, "history": []
+    })
+    price = get_dynamic_price()
+    # Hoeveel tot volgende token?
+    cum = float(bonus.get("cumulative_profit_eur", 0.0))
+    tokens_so_far = int(cum // BASE_PRICE)
+    next_threshold_eur = (tokens_so_far + 1) * BASE_PRICE
+    return {
+        "success": True,
+        "balance": bonus.get("balance", 0),
+        "cumulative_profit_eur": round(cum, 4),
+        "token_price_at_mint": bonus.get("token_price_at_mint", BASE_PRICE),
+        "value_eur_at_current_price": round(bonus.get("balance", 0) * price, 2),
+        "current_token_price": price,
+        "progress_to_next_token_eur": round(next_threshold_eur - cum, 4),
+        "history_count": len(bonus.get("history", [])),
+        "recent_mints": list(reversed(bonus.get("history", [])[-5:])),
+    }
+
+
 @router.get("/token/history/{user_id}")
 async def get_token_history(user_id: str):
     """Aankoop/verkoop geschiedenis"""
@@ -285,6 +315,14 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "completed",
     }
+
+    # v4_token_potje_001 — Token-verkoop event-log:
+    # 10 tokens = 1 potje-equivalent. Log hoeveel potje-slots vrijkomen voor Spark.
+    # Echte capital-vrijgave volgt later bij wallet↔bank koppeling.
+    freed_slots = amount_tokens // 10
+    if freed_slots > 0:
+        tx["freed_potje_slots"] = freed_slots
+        tx["description"] = f"{amount_tokens} ROAR verkocht @ {price} → {freed_slots} potje-slot{'s' if freed_slots > 1 else ''} vrij voor Spark"
 
     fin = load_json(FINANCIAL_FILE, default={"transactions": [], "roar_config": {}})
     fin["transactions"].append(tx)

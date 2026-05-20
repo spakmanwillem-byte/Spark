@@ -12,6 +12,13 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_meetpunt_001 — Trade history reset naar meetpunt**:
+  - Oude `trade_history/user-001.json` (8 oude BUY-trades, geen SELLs → vervormde stats) gearchiveerd als `user-001_archive_pre_reset_*.json`
+  - Nieuwe history: 1 BUY + 1 SELL trade-pair voor pot-001 met exact-berekende fees:
+    - BUY 5,08 EUR @ 305,00 (fee €0,0127)
+    - SELL 56,03 EUR (fee €0,1401) → bruto +€50,95 - fees €0,1528 = **netto +€50,80**
+  - `/api/trade/stats/user-001` toont nu consistent: 2 trades, gekocht €5,08, verkocht €56,03, fees €0,15, netto +€50,80, baseline €101,60, live P/L = live - baseline
+  - Verhaal in lijn: €5,08 basis + €50,80 winst pot-001 + €45,72 idle 9 potjes = €101,60 baseline
 - 2026-05-20: **v4_multi_market_001 — Multi-coin monitor + UI sync fixes**:
   - **Bug fix**: chart-label was hardcoded "BCH-EUR", staat nu dynamisch op `{candleMarket}`. Klik op watchlist-coin → chart switcht direct (`setCandleMarket` toegevoegd aan `onClick`)
   - **Bug fix**: Snelhandel "Live prijs" toonde altijd `tickers[0]` (= BCH), volgt nu `qtMarket` via `tickers.find(x => x.market === qtMarket)`

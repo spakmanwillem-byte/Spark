@@ -12,6 +12,14 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **Help + Roadmap up-to-date**:
+  - `handle_help()` user-commands van 15 → 19 (Testament, Survivalgids, Documenten, Privacy/Cookies/Voorwaarden expliciet)
+  - Admin-extra van 7 → 10 (credits via chat + via UI gesplitst, credits-bonus matching uitleg, Avatar Galerij beheer)
+  - Hint toegevoegd: "Achtergrondgeluid blijft door na F5"
+  - Roadmap: 8 open backlog-items zichtbaar als items (zodat "wat zou je willen doen" ze kan oppakken):
+    - v4_gradatie_split (P0), v4_accounting_002, v4_kb_split_001, v4_snap_dedupe_001, v4_dq_b, v4_legal_pages_001, v4_personal_docs_003, v4_personal_docs_004
+  - Roadmap summary: P0 blockers + P1 open expliciet benoemd
+  - Notes opgeschoond: alleen 9 recente entries van deze sessie
 - 2026-05-20: **v4_personal_docs_002 — Archief-UI integratie**:
   - Nieuwe tab **"Documenten"** in `ArchiefPage.js` naast Bestanden/Foto/Geluiden/Filmpjes/Gesprekken
   - Lijst toont aangemaakte docs (testament/survivalgids/etc) als cards: emoji, titel, versie, secties-aantal, grootte, last_updated

@@ -203,19 +203,25 @@ def handle_help(is_admin: bool = False) -> Dict:
         ("Wie ben ik / wat is Spark", "bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'"),
         ("Speech-to-Text (jij spreekt)", "bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'"),
         ("Text-to-Speech (Spark spreekt)", "bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'"),
-        ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'"),
+        ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5"),
         ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'"),
+        ("Testament aanmaken", "bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'"),
+        ("Survivalgids aanmaken", "bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'"),
+        ("Documenten bekijken", "via Mijn Archief → tab Documenten (JSON download mogelijk)"),
         ("Account verwijderen", "bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen"),
-        ("Wat is de privacy?", "bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'"),
+        ("Privacy / Cookies / Voorwaarden", "bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'"),
         ("Credits", "bv. 'credits' — wie heeft Spark mogelijk gemaakt"),
     ]
 
     # Admin-extra (gradatie ≤ 2)
     admin_commands = [
-        ("Beheer credits-lijst", "bv. 'voeg Nick Teeuwen toe aan de credits', 'verwijder X uit credits'"),
+        ("Beheer credits-lijst via chat", "bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'"),
+        ("Beheer credits-lijst via UI", "Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)"),
+        ("Credits-bonus matching", "Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier"),
         ("Wat zullen we doen? (admin)", "bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items"),
         ("Bugs beheren", "via Beheer → Bug-melder; chat-meldingen lopen via Spark"),
         ("Trigger/Vocab beheer", "via Spark AI → Triggers; alles editable"),
+        ("Avatar Galerij beheer", "via Beheer → Instellingen → Beeld → Avatar Galerij"),
         ("Backup/Restore", "via Beheer → Back-up (ZIP export/import, incl. cache flush)"),
         ("Gradatie-upgrades", "automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)"),
         ("Storage cache stats", "via Beheer dashboard 'Performance' kaart"),

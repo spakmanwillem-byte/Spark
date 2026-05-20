@@ -12,6 +12,14 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_personal_docs_002 — Archief-UI integratie**:
+  - Nieuwe tab **"Documenten"** in `ArchiefPage.js` naast Bestanden/Foto/Geluiden/Filmpjes/Gesprekken
+  - Lijst toont aangemaakte docs (testament/survivalgids/etc) als cards: emoji, titel, versie, secties-aantal, grootte, last_updated
+  - Klik card → detail view met alle secties (gele border-left accent), "📝 leeg" placeholders waar nog niets staat
+  - **Download JSON** knop per doc (export voor backup/migratie)
+  - Aparte sectie "Beschikbaar om aan te maken" toont nog-niet-bestaande types als ghost cards met hint _"maak X aan"_
+  - "Beheer via chat" indicator ipv upload-knop (consistent met dat docs via chat-flow opgebouwd worden)
+  - Klaar voor template-upload later: drop een JSON → vervangt mits structuur matcht
 - 2026-05-20: **v4_personal_docs_001 — Persoonlijke documenten via chat (testament + survivalgids)**:
   - Generiek patroon: `DOC_TYPES` dict met label/emoji/default_secties/triggers — uitbreidbaar voor zorgvolmacht/wensen/levensoverzicht/etc.
   - Storage per user: `/data/users/{user_id}/documents/{doc_type}.json`

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   Archive, Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag, HardDrive,
-  MessageSquare, Lock, Calendar, ChevronRight, ChevronDown
+  MessageSquare, Lock, Calendar, ChevronRight, ChevronDown, FileText
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -16,7 +16,8 @@ const CATEGORIES = [
   { id: 'foto', label: 'Foto', icon: ImageIcon, color: '#22c55e', accept: 'image/*' },
   { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7', accept: 'audio/*' },
   { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899', accept: 'video/*' },
-  { id: 'gesprekken', label: 'Gesprekken', icon: MessageSquare, color: '#06b6d4', accept: null }, // read-only
+  { id: 'documenten', label: 'Documenten', icon: FileText, color: '#f59e0b', accept: null },
+  { id: 'gesprekken', label: 'Gesprekken', icon: MessageSquare, color: '#06b6d4', accept: null },
 ];
 
 function formatBytes(n) {
@@ -44,6 +45,9 @@ export function ArchiefPage({ onNavigate }) {
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [expandedConv, setExpandedConv] = useState(null);
+  const [personalDocs, setPersonalDocs] = useState([]);
+  const [availableDocTypes, setAvailableDocTypes] = useState([]);
+  const [openDoc, setOpenDoc] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -58,9 +62,14 @@ export function ArchiefPage({ onNavigate }) {
         ]);
         setConversations(logsRes.conversations || []);
         setChatStats(sRes);
-        // Stats ook bij gesprekken-tab tonen we de file stats voor counters
         const fileStatRes = await fetch(`${API}/api/archive/${userId}/stats`).then(r => r.json()).catch(() => null);
         setStats(fileStatRes);
+      } catch (e) { console.error(e); }
+    } else if (activeTab === 'documenten') {
+      try {
+        const res = await fetch(`${API}/api/personal-docs/${userId}`).then(r => r.json());
+        setPersonalDocs(res.documents || []);
+        setAvailableDocTypes(res.available_types || []);
       } catch (e) { console.error(e); }
     } else {
       const params = new URLSearchParams();
@@ -157,16 +166,20 @@ export function ArchiefPage({ onNavigate }) {
             <div className="ml-auto flex items-center gap-2">
               <input ref={fileInputRef} type="file" data-testid="archief-file-input"
                 onChange={handleUpload} className="hidden" accept={activeCat.accept || '*'} />
-              {activeTab !== 'gesprekken' ? (
+              {activeTab !== 'gesprekken' && activeTab !== 'documenten' ? (
                 <button data-testid="archief-upload-btn"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploading}
                   className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-60">
                   <Upload className="w-3.5 h-3.5" /> {uploading ? 'Uploaden...' : 'Upload bestand'}
                 </button>
-              ) : (
+              ) : activeTab === 'gesprekken' ? (
                 <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/60 border border-slate-700 rounded-lg text-xs text-slate-400" title="Gesprekken kunnen niet handmatig worden toegevoegd of verwijderd">
                   <Lock className="w-3.5 h-3.5" /> Read-only
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs text-amber-300" title="Documenten beheer je via Spark chat">
+                  <MessageSquare className="w-3.5 h-3.5" /> Beheer via chat
                 </div>
               )}
             </div>
@@ -226,6 +239,15 @@ export function ArchiefPage({ onNavigate }) {
                 search={search}
                 expandedConv={expandedConv}
                 setExpandedConv={setExpandedConv}
+              />
+            ) : activeTab === 'documenten' ? (
+              <DocumentsView
+                userId={userId}
+                docs={personalDocs}
+                availableTypes={availableDocTypes}
+                openDoc={openDoc}
+                setOpenDoc={setOpenDoc}
+                onReload={load}
               />
             ) : files.length === 0 ? (
               <EmptyState category={activeCat} search={search} onUpload={() => fileInputRef.current?.click()} />
@@ -601,6 +623,132 @@ function ConversationsView({ conversations, chatStats, search, expandedConv, set
             );
           })}
         </div>
+      )}
+    </div>
+  );
+}
+
+
+// v4_personal_docs_001 — Persoonlijke documenten (testament/survivalgids/etc)
+function DocumentsView({ userId, docs, availableTypes, openDoc, setOpenDoc, onReload }) {
+  const [fullDoc, setFullDoc] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const open = async (docType) => {
+    setLoading(true);
+    setOpenDoc(docType);
+    try {
+      const res = await fetch(`${API}/api/personal-docs/${userId}/${docType}`).then(r => r.json());
+      setFullDoc(res.document || null);
+    } catch (e) { console.error(e); }
+    setLoading(false);
+  };
+
+  const close = () => { setOpenDoc(null); setFullDoc(null); };
+
+  const downloadJson = () => {
+    if (!fullDoc) return;
+    const blob = new Blob([JSON.stringify(fullDoc, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `${fullDoc.type}-${userId}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  if (openDoc && fullDoc) {
+    return (
+      <div data-testid="docs-detail" className="space-y-4">
+        <div className="flex items-center gap-2 mb-2">
+          <button onClick={close} className="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+            <ChevronRight className="w-3 h-3 rotate-180" /> Terug naar lijst
+          </button>
+          <button onClick={downloadJson}
+            className="ml-auto text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg flex items-center gap-1.5">
+            <Download className="w-3 h-3" /> Download JSON
+          </button>
+        </div>
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <h2 className="text-lg font-bold text-white mb-1">{fullDoc.title}</h2>
+          <p className="text-[10px] text-slate-500 mb-4 uppercase tracking-wider">
+            Versie {fullDoc.version} · {fullDoc.secties?.length || 0} secties · laatst bewerkt {(fullDoc.last_updated || '').slice(0, 16).replace('T', ' ')}
+          </p>
+          <div className="space-y-4">
+            {(fullDoc.secties || []).map((sec, i) => (
+              <div key={sec.id || i} className="border-l-2 border-amber-500/40 pl-3">
+                <h3 className="text-sm font-semibold text-amber-300 mb-1">{sec.titel}</h3>
+                <p className="text-xs text-slate-300 whitespace-pre-wrap">
+                  {sec.tekst || <span className="text-slate-600 italic">(nog leeg — voeg toe via chat)</span>}
+                </p>
+                {sec.notitie && <p className="text-[10px] text-slate-500 mt-1 italic">📝 {sec.notitie}</p>}
+              </div>
+            ))}
+          </div>
+          {fullDoc.notitie_globaal && (
+            <p className="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400 italic">
+              📝 {fullDoc.notitie_globaal}
+            </p>
+          )}
+        </div>
+        <p className="text-[10px] text-slate-500 italic text-center">
+          Bewerken? Zeg in chat: <span className="text-amber-400">"voeg toe aan {fullDoc.type}: ..."</span>
+        </p>
+      </div>
+    );
+  }
+
+  if (loading) return <div className="text-center py-8 text-xs text-slate-500">Document laden...</div>;
+
+  return (
+    <div data-testid="docs-list">
+      {docs.length > 0 && (
+        <>
+          <h3 className="text-xs text-slate-400 uppercase tracking-wider mb-2">Jouw documenten</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+            {docs.map(d => (
+              <button
+                key={d.doc_type} data-testid={`doc-card-${d.doc_type}`}
+                onClick={() => open(d.doc_type)}
+                className="text-left p-4 bg-slate-900/60 border border-slate-800 hover:border-amber-500/40 rounded-xl transition-colors group"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">{d.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-semibold text-white group-hover:text-amber-300">{d.title || d.label}</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      v{d.version} · {d.secties_count} secties · {formatBytes(d.size_bytes)}
+                    </p>
+                    <p className="text-[10px] text-slate-600 mt-0.5">
+                      Bijgewerkt: {(d.last_updated || '').slice(0, 10)}
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-amber-400 flex-shrink-0" />
+                </div>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      <h3 className="text-xs text-slate-400 uppercase tracking-wider mb-2">Beschikbaar om aan te maken</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {availableTypes
+          .filter(t => !docs.find(d => d.doc_type === t.type))
+          .map(t => (
+            <div key={t.type} className="p-4 bg-slate-900/30 border border-dashed border-slate-700 rounded-xl">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl opacity-60">{t.emoji}</span>
+                <h4 className="text-sm font-semibold text-slate-400">{t.label}</h4>
+              </div>
+              <p className="text-[10px] text-slate-500">
+                Zeg in chat: <span className="text-amber-400">"maak {t.type} aan"</span>
+              </p>
+            </div>
+          ))}
+      </div>
+
+      {docs.length === 0 && availableTypes.length === 0 && (
+        <p className="text-center py-12 text-xs text-slate-500">Geen documenten beschikbaar.</p>
       )}
     </div>
   );

@@ -17809,11 +17809,80 @@
         "session_id": "default",
         "gesprek_nummer": 673
       }
+    },
+    {
+      "id": "conv-1550decc",
+      "timestamp": "2026-05-20T11:06:05.268528+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "maak testament aan",
+      "spark_response": "📜 **Testament** aangemaakt en opgeslagen.\n\nSkelet bevat 6 secties. Vul ze één voor één in via:\n_\"voeg toe aan testament: <jouw tekst>\"_\n\nBekijk altijd met _\"bekijk testament\"_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "doc_testament_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "doc_testament_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 674
+      }
+    },
+    {
+      "id": "conv-dd70ac67",
+      "timestamp": "2026-05-20T11:06:05.446523+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "voeg toe aan testament: huis aan Lotus",
+      "spark_response": "📜 Opgeslagen in **Testament** (v2):\n\n_\"huis aan Lotus\"_\n\nBekijk met _\"bekijk testament\"_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "doc_testament_appended",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "doc_testament_appended"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 675
+      }
+    },
+    {
+      "id": "conv-1a1f1361",
+      "timestamp": "2026-05-20T11:06:05.577397+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "maak survivalgids aan",
+      "spark_response": "🧭 **Survivalgids** aangemaakt en opgeslagen.\n\nSkelet bevat 7 secties. Vul ze één voor één in via:\n_\"voeg toe aan survivalgids: <jouw tekst>\"_\n\nBekijk altijd met _\"bekijk survivalgids\"_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "doc_survivalgids_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "doc_survivalgids_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 676
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 673,
-    "last_updated": "2026-05-20T11:01:36.227052+00:00"
+    "total_conversations": 676,
+    "last_updated": "2026-05-20T11:06:05.577397+00:00"
   }
 }

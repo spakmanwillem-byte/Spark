@@ -60,9 +60,18 @@ def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Di
 
 
 def fetch_tickers(coins: List[str] = None) -> List[Dict]:
-    """Fetch live ticker prices from Bitvavo (public, no auth)"""
+    """Fetch live ticker prices from Bitvavo (public, no auth).
+    Accepts either base symbol (e.g. 'BCH') or market (e.g. 'BCH-EUR'). v4_trade_ticker_fix_001"""
     if coins is None:
         coins = WATCHLIST_COINS
+    # Normalize: strip "-EUR" suffix if present so caller mag beide formats geven
+    normalized = []
+    for c in coins:
+        if isinstance(c, str) and "-" in c:
+            normalized.append(c.split("-")[0])
+        else:
+            normalized.append(c)
+    coins = normalized
     results = []
     try:
         url = f"{BITVAVO_URL}/ticker/24h"

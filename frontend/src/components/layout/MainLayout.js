@@ -65,20 +65,22 @@ export const getPageInfo = (pageId) => {
   return null;
 };
 
-// Per-gradatie zichtbaarheid (v4_gradatie_visibility_001)
-// Grad 1 (eigenaar) + 2 (admin): alle tabs zichtbaar
-// Grad 3: geen Spark AI sectie + geen Integraties + alleen "Mijn Profiel" in Beheer
-// Grad 4-5: zelfde als 3
-// Grad 6: zelfde als 3 + geen Trade + geen Voice
-// Grad 7: zelfde als 6 + geen Archief + geen Dagboek
+// Per-gradatie zichtbaarheid (v4_gradatie_visibility_002 — verfijnd op basis van bug-meldingen 19/05)
+// Grad 1 (eigenaar): alle tabs
+// Grad 2 (admin/fam): alle workspace, geen voice-onder-workspace (komt later als kader in Features)
+// Grad 3 (vrienden): geen voice, geen Spark AI sectie, geen Integraties
+// Grad 4 (collega's): zelfde als 3 + geen voice
+// Grad 5: + geen Trade + geen Boekhouding
+// Grad 6: + geen Dagboek
+// Grad 7: + geen Agenda (krijgt Agenda terug bij upgrade naar 6) + geen Archief + geen Boekhouding (heeft Wallet)
 const VISIBILITY_RULES = {
   1: { hideSection: [], hide: [] },
-  2: { hideSection: [], hide: [] },
-  3: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
-  4: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
-  5: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings'] },
-  6: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings', 'trade', 'voice'] },
-  7: { hideSection: ['spark'], hide: ['integrations', 'users', 'analytics', 'settings', 'trade', 'voice', 'archief', 'dagboek'] },
+  2: { hideSection: [], hide: ['voice'] },
+  3: { hideSection: ['spark'], hide: ['voice', 'integrations', 'analytics', 'settings'] },
+  4: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings'] },
+  5: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding'] },
+  6: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek'] },
+  7: { hideSection: ['spark'], hide: ['voice', 'integrations', 'users', 'analytics', 'settings', 'trade', 'boekhouding', 'dagboek', 'archief', 'calendar'] },
 };
 
 export function getVisibilityForGradatie(grad) {

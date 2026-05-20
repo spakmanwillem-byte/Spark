@@ -105,7 +105,7 @@ export function AuthProvider({ children }) {
     logout,
     refreshUser,
     isLoggedIn: !!user,
-    isAdmin: user?.gradatie === 1
+    isAdmin: user?.gradatie != null && user.gradatie <= 2  // v4_admin_grad_001: gradatie 1+2 zijn admin
   };
 
   return (

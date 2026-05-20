@@ -3608,6 +3608,13 @@
         "status": "done",
         "priority": "medium",
         "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_backup_integrity_001",
+        "titel": "Backup ZIP validatie: EOCD + testzip() vóór serveren; Content-Length/SHA256/Files headers; onleesbare files skip",
+        "status": "done",
+        "priority": "high",
+        "done_at": "2026-05-20"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4357,7 +4364,7 @@
     }
   },
   "summary": {
-    "v4.0_progress": "96/132 (73%)",
+    "v4.0_progress": "97/133 (73%)",
     "last_cleanup": "2026-05-20",
     "active_versions": [
       "v4.0"

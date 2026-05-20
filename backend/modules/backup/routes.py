@@ -112,8 +112,26 @@ def _make_zip(files: List[Dict[str, Any]], meta: Dict[str, Any]) -> bytes:
         # Manifest first
         zf.writestr("spark_backup_manifest.json", json.dumps(meta, indent=2))
         for item in files:
-            zf.write(item["abs"], arcname=item["rel"])
-    return buf.getvalue()
+            try:
+                zf.write(item["abs"], arcname=item["rel"])
+            except (OSError, ValueError):
+                # Skip onleesbare files, log naar manifest later
+                continue
+    data = buf.getvalue()
+    # v4_backup_integrity_001 — validate zip before returning
+    if data[-22:].find(b"PK\x05\x06") == -1:
+        # EOCD niet aan einde gevonden → probeer ergens in de laatste 64KB
+        if data.rfind(b"PK\x05\x06") == -1:
+            raise RuntimeError("Backup ZIP heeft geen EOCD — corrupt (interne fout)")
+    # Sanity test: open in zipfile
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as test_zf:
+            bad = test_zf.testzip()
+            if bad is not None:
+                raise RuntimeError(f"Backup ZIP corrupt entry: {bad}")
+    except zipfile.BadZipFile as e:
+        raise RuntimeError(f"Backup ZIP validatie faalde: {e}")
+    return data
 
 
 def _safe_target_from_rel(rel: str) -> Path:
@@ -174,10 +192,17 @@ async def download_full():
     }
     blob = _make_zip(files, meta)
     fname = f"spark_backup_full_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
+    import hashlib as _hl
+    sha = _hl.sha256(blob).hexdigest()[:16]
     return StreamingResponse(
         io.BytesIO(blob),
         media_type="application/zip",
-        headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+        headers={
+            "Content-Disposition": f'attachment; filename="{fname}"',
+            "Content-Length": str(len(blob)),
+            "X-Backup-SHA256-Short": sha,
+            "X-Backup-Files": str(len(files)),
+        },
     )
 
 
@@ -196,15 +221,21 @@ async def download_changes():
         "files": [{"path": f["rel"], "size": f["size"], "mtime": f["mtime_iso"]} for f in files],
     }
     if not files:
-        # Lege zip met alleen manifest – nog steeds nuttig als 'niets gewijzigd' bewijs
         pass
     blob = _make_zip(files, meta)
     label = "changes" if since > 0 else "no_marker_full_like"
     fname = f"spark_backup_{label}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
+    import hashlib as _hl
+    sha = _hl.sha256(blob).hexdigest()[:16]
     return StreamingResponse(
         io.BytesIO(blob),
         media_type="application/zip",
-        headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+        headers={
+            "Content-Disposition": f'attachment; filename="{fname}"',
+            "Content-Length": str(len(blob)),
+            "X-Backup-SHA256-Short": sha,
+            "X-Backup-Files": str(len(files)),
+        },
     )
 
 

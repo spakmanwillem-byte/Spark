@@ -57,6 +57,8 @@ Dutch (always respond in Dutch).
 - 2026-05-20: **vocab-growth seed**: 15 natuurlijke woorden toegevoegd uit kennisbank-kandidaten (mensen, communicatie, gedrag, natuur, leven, taal, kennis, tijd, energie, iemand, iedereen, gesprekken, informatie, dieren, ontwikkeling).
 - 2026-05-20: **Roadmap sync**: 20 items toegevoegd aan v4.0 roadmap (11 recent-done + 9 nieuwe planned). v4.0 progress: 75% (62/83 done).
 - 2026-05-20: **v4_storage_cache_001 — In-memory file cache** (gratis prestatie-upgrade): mtime-based cache in `storage.py` voor files >50KB. Knowledge_base (8MB) + graph nodes (1.2MB) + edges (7MB) worden nu maar 1× geparsd tot file mtime verandert. Cache wordt automatisch geïnvalideerd bij `save_json` of externe writes. **Gemeten winst**: vocab-endpoint 24% sneller, graph-stats 30% sneller, orphan-check 53% sneller. Diagnostics via `GET /api/admin/storage-cache` + `POST /api/admin/storage-cache/clear`. Backup-restore clear cache automatisch.
+- 2026-05-20: **v4_storage_cache_002 — Cache warmup bij startup**: backend laadt KB + graph + vocab + users alvast in geheugen tijdens `@startup` (138ms, 5 files, 15.76 MB). Eerste user-request is meteen warm — geen cold-start latency meer. Log toont `🔥 Cache warmup: 5/5 files in Xms`.
+- 2026-05-20: **Roadmap sync 76%**: v4.0 nu 65/86 done. Toegevoegd: warmgradatie-titels, upgrade-regels, storage cache, cache warmup.
 - 2026-05-20: **v4_grad_growth_002 — Upgrade-pad regels gedocumenteerd**:
   - **7 → 6**: profiel-completeness ≥ 80% (10 velden: volledige naam, geboortedatum, plaats, straat, postcode, land, telefoon, nationaliteit, geslacht, noodcontact). Spark "kent" basis-info.
   - **6 → 5**: gedrag-based (oude regel, onveranderd) — 15 gesprekken + 30 dagen + trust ≥ 60

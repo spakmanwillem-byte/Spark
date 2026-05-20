@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 75,
+    "progress": 76,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3257,15 +3257,40 @@
         "status": "planned",
         "prio": "P3",
         "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_grad_growth_002",
+        "titel": "Auto-upgrade regels gedocumenteerd (7→6 profiel, 5→4 token, 4→3 admin+suggest)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T05:20:01.294816+00:00"
+      },
+      {
+        "id": "v4_storage_cache_001",
+        "titel": "In-memory file cache (KB/graph/edges) - 24-53% sneller per endpoint",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T05:20:01.294816+00:00"
+      },
+      {
+        "id": "v4_storage_cache_002",
+        "titel": "Cache warmup bij startup - 138ms, elimineert cold-start latency",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T05:20:01.294816+00:00"
       }
     ],
-    "last_updated": "2026-05-20T04:39:14.644243+00:00",
+    "last_updated": "2026-05-20T05:20:01.294816+00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar.",
       {
         "at": "2026-05-20T04:39:14.644243+00:00",
         "note": "Sync 20/05: +20 items (recent done + nieuwe planned uit bug-meldingen). v4.0 progress: 75% (62/83)"
+      },
+      {
+        "at": "2026-05-20T05:20:01.294816+00:00",
+        "note": "+3 performance + UX items done. v4.0: 76% (65/86)"
       }
     ]
   },

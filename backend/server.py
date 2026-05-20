@@ -273,6 +273,30 @@ async def startup():
     except Exception as e:
         print(f"   ⚠️  Trade monitor resume failed: {e}")
     print("=" * 50)
+    # v4_storage_cache_002 — Cache warmup: laad grote files alvast in geheugen
+    # Voorkomt cold-start latency op de eerste user request (chat, verbanden, KB-zoek).
+    try:
+        import time as _t
+        from pathlib import Path as _P
+        from modules.core.storage import load_json
+        warmup_files = [
+            _P("/app/backend/data/knowledge/learned_knowledge/knowledge_base.json"),
+            _P("/app/backend/data/graph/nodes.json"),
+            _P("/app/backend/data/graph/edges.json"),
+            _P("/app/backend/data/personality/spark_vocab.json"),
+            _P("/app/backend/data/system/users.json"),
+        ]
+        t0 = _t.perf_counter()
+        loaded = 0
+        for fp in warmup_files:
+            if fp.exists():
+                load_json(fp, default={})
+                loaded += 1
+        dur_ms = round((_t.perf_counter() - t0) * 1000)
+        print(f"   🔥 Cache warmup: {loaded}/{len(warmup_files)} files in {dur_ms}ms (cold-start eliminated)")
+    except Exception as e:
+        print(f"   ⚠️  Cache warmup failed: {e}")
+    print("=" * 50)
 
 
 @app.on_event("shutdown")

@@ -567,28 +567,117 @@ function _OldNetworkTab() {
   );
 }
 
-// Layer Tab Content — IN ONTWIKKELING (mock data, niet betrouwbaar)
+// Layer Tab Content — LIVE DATA via /api/admin/architecture (v4_analytics_layer_001)
 function LayerTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${API}/api/admin/architecture`)
+      .then(r => r.json())
+      .then(d => setData(d))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="text-center py-12 text-xs text-slate-500">Architectuur scannen...</div>;
+  if (!data?.success) return <div className="text-center py-12 text-xs text-red-400">Kon architectuur niet ophalen.</div>;
+
+  const layerColors = [
+    { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', badge: 'bg-cyan-500' },
+    { bg: 'bg-blue-500/10', border: 'border-blue-500/30', badge: 'bg-blue-500' },
+    { bg: 'bg-purple-500/10', border: 'border-purple-500/30', badge: 'bg-purple-500' },
+    { bg: 'bg-amber-500/10', border: 'border-amber-500/30', badge: 'bg-amber-500' },
+  ];
+
+  const sortedModules = [...(data.modules || [])].sort((a, b) => b.routes - a.routes);
+  const topModules = sortedModules.slice(0, 15);
+
   return (
     <div data-testid="analytics-layer-tab" className="space-y-6">
-      <div className="bg-amber-500/5 border border-amber-500/30 rounded-2xl p-6 text-center">
-        <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-3" />
-        <h3 className="text-lg font-bold text-white mb-2">In ontwikkeling</h3>
-        <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-          De LAYER-tab toont een architectuur-overzicht (lagen, modules, dependencies, data-flow).
-          De data hieronder is <strong className="text-amber-400">mock-data uit een eerdere versie</strong> en
-          komt niet overeen met de huidige codebase. Wordt herwerkt zodra de hoofdmodules klaar zijn.
-        </p>
-        <p className="text-[10px] text-slate-600 mt-3">
-          Voor echte module-inventaris: scan <code className="bg-slate-800 px-1.5 py-0.5 rounded">/app/backend/modules/</code>
-        </p>
+      {/* Architectuur Lagen */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 className="text-sm font-semibold text-white mb-6 flex items-center gap-2">
+          <Layers className="w-4 h-4 text-cyan-400" />
+          Architectuur Lagen <span className="text-[10px] text-slate-500 font-normal">(live scan)</span>
+        </h3>
+        <div className="relative space-y-3">
+          {data.layers.map((layer, idx) => {
+            const c = layerColors[idx] || layerColors[3];
+            return (
+              <div key={idx} className={`p-4 rounded-xl border ${c.bg} ${c.border}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white ${c.badge}`}>
+                      {idx + 1}
+                    </span>
+                    <div>
+                      <h4 className="text-white font-medium">{layer.name}</h4>
+                      <p className="text-xs text-slate-400">{layer.description}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-slate-500">{layer.tech}</span>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2 ml-11">
+                  {Object.entries(layer.metrics).map(([k, v]) => (
+                    <span key={k} className="px-2.5 py-1 bg-slate-800/60 rounded text-xs text-slate-300">
+                      <span className="text-slate-500">{k.replace(/_/g, ' ')}:</span>{' '}
+                      <span className="text-white font-semibold">{typeof v === 'number' ? v.toLocaleString() : v}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <div className="absolute left-8 top-12 w-0.5 h-[calc(100%-60px)] bg-gradient-to-b from-cyan-500 via-purple-500 to-amber-500 opacity-30 pointer-events-none" />
+        </div>
       </div>
-      <div className="opacity-40 pointer-events-none">
-        <_OldLayerTab />
+
+      {/* Module Overzicht */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+          <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+            <Database className="w-4 h-4 text-cyan-400" />
+            Backend Modules <span className="text-[10px] text-slate-500 font-normal">({data.modules?.length} totaal — top 15)</span>
+          </h3>
+          <div className="space-y-1.5">
+            {topModules.map(m => (
+              <div key={m.name} className="flex items-center justify-between text-xs px-3 py-2 bg-slate-800/40 hover:bg-slate-800/70 rounded-lg">
+                <span className="text-white font-medium">{m.name}</span>
+                <div className="flex items-center gap-3 text-[11px]">
+                  <span className="text-cyan-400">{m.routes} routes</span>
+                  <span className="text-slate-500">{m.files} files</span>
+                  <span className="text-slate-600">{m.size_kb}KB</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+          <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-purple-400" />
+            Frontend Groups <span className="text-[10px] text-slate-500 font-normal">({data.frontend_groups?.length} groepen)</span>
+          </h3>
+          <div className="space-y-1.5">
+            {data.frontend_groups?.map(g => (
+              <div key={g.group} className="flex items-center justify-between text-xs px-3 py-2 bg-slate-800/40 hover:bg-slate-800/70 rounded-lg">
+                <span className="text-white font-medium capitalize">{g.group}</span>
+                <span className="text-purple-400 text-[11px]">{g.components} components</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <p className="text-[10px] text-slate-600 text-center italic">
+        Live data via <code className="bg-slate-800 px-1.5 py-0.5 rounded">/api/admin/architecture</code> — scant <code className="bg-slate-800 px-1.5 py-0.5 rounded">/app/backend/modules</code> bij elke load.
+      </p>
     </div>
   );
 }
+
+// (oude mock weggehaald)
 
 function _OldLayerTab() {
   const layers = [

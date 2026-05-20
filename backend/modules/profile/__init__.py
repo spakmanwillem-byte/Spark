@@ -343,6 +343,65 @@ async def credits_bonus_sync():
     return {"success": True, **result}
 
 
+# v4_analytics_layer_001 — Echte module-inventaris voor LayerTab
+@router.get("/admin/architecture")
+async def admin_architecture():
+    """Scan /app/backend/modules en geef live overzicht van lagen + modules terug."""
+    from pathlib import Path as _P
+    modules_dir = _P("/app/backend/modules")
+    modules = []
+    for d in sorted(modules_dir.iterdir()):
+        if not d.is_dir() or d.name.startswith("_"):
+            continue
+        py_files = list(d.rglob("*.py"))
+        routes_file = d / "routes.py"
+        init_file = d / "__init__.py"
+        # Count route definitions (rough)
+        route_count = 0
+        for f in (routes_file, init_file):
+            if f.exists():
+                try:
+                    txt = f.read_text(encoding="utf-8", errors="ignore")
+                    route_count += txt.count("@router.")
+                except Exception:
+                    pass
+        modules.append({
+            "name": d.name,
+            "files": len([f for f in py_files if "__pycache__" not in str(f)]),
+            "routes": route_count,
+            "size_kb": round(sum(f.stat().st_size for f in py_files if f.exists()) / 1024, 1),
+        })
+
+    # Tel frontend componenten als snelle inventaris
+    fe_dir = _P("/app/frontend/src/components")
+    fe_groups = []
+    if fe_dir.exists():
+        for d in sorted(fe_dir.iterdir()):
+            if d.is_dir():
+                js_files = [f for f in d.rglob("*.js") if f.is_file()]
+                fe_groups.append({"group": d.name, "components": len(js_files)})
+
+    return {
+        "success": True,
+        "layers": [
+            {"name": "Presentatie Laag", "tech": "React 19 + TailwindCSS",
+             "description": "Frontend UI Components",
+             "metrics": {"groups": len(fe_groups), "total_components": sum(g["components"] for g in fe_groups)}},
+            {"name": "API Laag", "tech": "FastAPI + Pydantic",
+             "description": "REST endpoints onder /api/*",
+             "metrics": {"modules": len(modules), "total_routes": sum(m["routes"] for m in modules)}},
+            {"name": "Service Laag", "tech": "Python services",
+             "description": "Business logic (auth, snap, NLP, chat-intents)",
+             "metrics": {"total_files": sum(m["files"] for m in modules)}},
+            {"name": "Data Laag", "tech": "Lokaal JSON (geen MongoDB)",
+             "description": "JSON files in /app/backend/data/",
+             "metrics": {"total_kb": round(sum(m["size_kb"] for m in modules), 1)}},
+        ],
+        "modules": modules,
+        "frontend_groups": fe_groups,
+    }
+
+
 # v4_personal_docs_001 — Persoonlijke documenten (testament, survivalgids, etc.)
 @router.get("/personal-docs/{user_id}")
 async def list_personal_docs(user_id: str):

@@ -12,6 +12,13 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_dashboard_renew_001 + v4_analytics_layer_001**:
+  - Dashboard Kennisbank kaart: label _"Te Herzien"_ (toonde 0 — frontend zocht naar bestaande `te_herzien` key die backend niet had) → _"Renew"_ gekoppeld aan `review_pending` (2986 kaarten)
+  - Analytics → LAYER tab: was mock-data met "In ontwikkeling" banner → **live scan** via nieuw `GET /api/admin/architecture` endpoint
+    - Scant `/app/backend/modules/` runtime: telt `.py` files, `@router.` decorators, size_kb per module
+    - Scant `/app/frontend/src/components/` voor component-aantal per groep
+    - Toont 4 lagen (Presentatie/API/Service/Data) met live metrics: 30 modules, 231 routes, 91 service files, 659.9 KB
+    - Top-15 backend modules + alle frontend groups als sortable lijst (trade 28 routes, profile 23, chat 17...)
 - 2026-05-20: **Roadmap-archeologie**:
   - 9 historische items uit code geïdentificeerd die NIET in roadmap stonden:
     - **v3.0 done**: `v3_012` (homoniem-flow), `v3_013` (Spark Leraar achievement +XP-bonus), `v3_028` (auto-zin-snap)

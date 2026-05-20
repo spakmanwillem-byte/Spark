@@ -146,7 +146,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const kbTotal = knowledgeStats?.total || 0;
   const kbUnanswered = knowledgeStats?.unanswered || 0;
   const kbAnswered = knowledgeStats?.answered || 0;
-  const kbTeHerzien = knowledgeStats?.te_herzien || 0;
+  const kbReviewPending = knowledgeStats?.review_pending || knowledgeStats?.te_herzien || 0;
   const kbPercent = kbTotal > 0 ? Math.round((kbAnswered / kbTotal) * 100) : 0;
   const totalFiles = fileStats?.total_files || 0;
   const backendFiles = fileStats?.tree?.[0]?.files?.length || 0;
@@ -192,7 +192,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
                 <MiniStat label="Beantwoord" value={kbAnswered.toLocaleString()} color="#22c55e" />
                 <MiniStat label="Onbeantwoord" value={kbUnanswered} color="#f97316" />
-                <MiniStat label="Te Herzien" value={kbTeHerzien} color="#ef4444" />
+                <MiniStat label="Renew" value={kbReviewPending} color="#ef4444" />
               </div>
               {/* Progress bar */}
               <div className="space-y-1.5">

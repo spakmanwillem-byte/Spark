@@ -3622,6 +3622,13 @@
         "status": "done",
         "priority": "medium",
         "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_kb_restore_001",
+        "titel": "KB-kaarten herstel uit B3 productie-snapshot: 2 users (piet/joel123) + 32 verloren detected_by kaarten teruggezet",
+        "status": "done",
+        "priority": "high",
+        "done_at": "2026-05-20"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4371,7 +4378,7 @@
     }
   },
   "summary": {
-    "v4.0_progress": "98/134 (73%)",
+    "v4.0_progress": "99/135 (73%)",
     "last_cleanup": "2026-05-20",
     "active_versions": [
       "v4.0"
@@ -4431,7 +4438,8 @@
     "2026-05-20: Personal docs systeem — testament + survivalgids via chat",
     "2026-05-20: Archief UI — nieuwe Documenten tab met JSON download",
     "2026-05-20: Bug-batch fixes — stop in help, 'ik ken X' relatie, dashboard scope, community snap-candidates",
-    "2026-05-20: Leaderboard guest-feature teruggedraaid (gebaseerd op verkeerde aanname uit productie KB). Backup-integrity + umlaut-dedupe blijven."
+    "2026-05-20: Leaderboard guest-feature teruggedraaid (gebaseerd op verkeerde aanname uit productie KB). Backup-integrity + umlaut-dedupe blijven.",
+    "2026-05-20: KB-restore — piet+joel123 users + 32 verloren KB-kaarten teruggezet uit B3 (19:01) productie-snapshot"
   ],
   "historical_notes": [
     "2026-03-18: v2.5 Spark World toegevoegd - 100x100 wereld met persistentie, play/pause, kennisbank integratie placeholder",

@@ -95,7 +95,8 @@ async def get_trade_stats(user_id: str):
             pass
 
     return {
-        "total_trades": len(trades),
+        # v4_meetpunt_003: 1 BUY + 1 SELL = 1 round-trip trade (geen 2)
+        "total_trades": max(len(buys), len(sells)),
         "buys": len(buys),
         "sells": len(sells),
         "markets": markets,

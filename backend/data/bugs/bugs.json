@@ -406,6 +406,15 @@
       "description": "[Snel Handelen] Kon prijs niet ophalen voor BCH-EUR (en andere markets)",
       "resolution_note": "v4_trade_ticker_fix_001: fetch_tickers() accepteerde geen market-format (\"BCH-EUR\") alleen base symbol (\"BCH\"). Nu beide formaten normaliseren.",
       "resolved_at": "2026-05-20T05:29:42.346531+00:00"
+    },
+    {
+      "id": "bug-bitvavo-operatorid-20260520053923",
+      "created_at": "2026-05-20T05:39:23.649109+00:00",
+      "created_by": "user-001",
+      "status": "opgelost",
+      "description": "[Trade] Buy mislukt: Bitvavo errorCode 203 \"operatorId parameter is required\"",
+      "resolution_note": "v4_trade_operator_id_001: Bitvavo eist sinds 2025 operatorId (int) bij elke order. Body uitgebreid met operatorId=1001 (default, uit settings.integrations.bitvavo.operator_id). Tevens signature-bug gefixt: requests.post nu met data=body_str (was json=body wat dubbele serialisatie deed = potentiele signature mismatch).",
+      "resolved_at": "2026-05-20T05:39:23.649116+00:00"
     }
   ]
 }

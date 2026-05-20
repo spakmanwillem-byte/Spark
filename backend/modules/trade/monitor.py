@@ -152,12 +152,16 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             "market": market,
             "side": side.lower(),
             "orderType": "market",
+            # v4_trade_operator_id_001: Bitvavo verplicht sinds 2025 operatorId (int) bij order endpoints (errorCode 203)
+            "operatorId": int(bitvavo.get("operator_id") or 1001),
         }
         if side.lower() == "buy":
             body["amountQuote"] = str(round(amount_eur, 8))
         else:
             body["amount"] = str(round(amount_eur, 8))
 
+        # CRITICAL: signature moet over EXACT dezelfde body string als verzonden.
+        # We sturen `data=body_str` om dubbele serialisatie te voorkomen.
         body_str = json.dumps(body, separators=(",", ":"))
         endpoint = "/v2/order"
         msg = str(timestamp) + "POST" + endpoint + body_str
@@ -170,7 +174,7 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             "Content-Type": "application/json",
         }
 
-        resp = requests.post(f"{BITVAVO_URL}/order", headers=headers, json=body, timeout=10)
+        resp = requests.post(f"{BITVAVO_URL}/order", headers=headers, data=body_str, timeout=10)
         if resp.status_code == 200:
             result = resp.json()
             filled = float(result.get("filledAmount", 0))

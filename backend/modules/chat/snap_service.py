@@ -18,6 +18,13 @@ from modules.core.storage import load_json, save_json
 from modules.graph.sync_service import upsert_node_from_entry
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
+
+# v4_snap_dedupe_002 — ascii fold zodat 'joel' en 'joël' op dezelfde kaart matchen
+import unicodedata as _ud
+def _ascii_fold(s: str) -> str:
+    if not s:
+        return ""
+    return "".join(c for c in _ud.normalize("NFD", s) if _ud.category(c) != "Mn")
 KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 KEYWORDS_FILE = DATA_DIR / "keywords.json"
 TRIGGERS_FILE = DATA_DIR / "conversation_triggers.json"
@@ -71,8 +78,8 @@ class SnapNLPService:
 
     def _build_index(self, entries):
         """Bouw een snelle lookup index op begrip (lowercase).
-        Zin-snaps (tag 'context-zin') worden uit de lookup-index gehouden zodat
-        ze niet matchen op losse woorden in een nieuwe zin."""
+        v4_snap_dedupe_002: dubbele index op zowel ruwe als ascii-genormaliseerde begrip
+        zodat 'joel' en 'joël' op dezelfde kaarten matchen."""
         index = {}
         for e in entries:
             tags = e.get("tags") or []
@@ -80,9 +87,10 @@ class SnapNLPService:
                 continue
             begrip = (e.get("begrip") or "").lower().strip()
             if begrip:
-                if begrip not in index:
-                    index[begrip] = []
-                index[begrip].append(e)
+                keys = {begrip, _ascii_fold(begrip)}
+                for k in keys:
+                    if k:
+                        index.setdefault(k, []).append(e)
         return index
 
     def _get_index(self):
@@ -106,9 +114,14 @@ class SnapNLPService:
         index = self._get_index()
         q = query.lower().strip()
 
-        # 1. Exacte match
+        # 1. Exacte match (incl. ascii-fold fallback voor umlaut/accenten — v4_snap_dedupe_002)
         if q in index:
             matches = index[q]
+            best = max(matches, key=lambda e: e.get("belangrijkheid", 0))
+            return self._format_result(best, "exact")
+        q_fold = _ascii_fold(q)
+        if q_fold != q and q_fold in index:
+            matches = index[q_fold]
             best = max(matches, key=lambda e: e.get("belangrijkheid", 0))
             return self._format_result(best, "exact")
 
@@ -116,9 +129,12 @@ class SnapNLPService:
         words = self._extract_meaningful_words(q)
         found = []
         for w in words:
-            if w in index:
-                for entry in index[w]:
-                    found.append((w, entry))
+            w_fold = _ascii_fold(w)
+            for k in (w, w_fold) if w_fold != w else (w,):
+                if k in index:
+                    for entry in index[k]:
+                        found.append((w, entry))
+                    break
 
         if found:
             # Sorteer op belangrijkheid
@@ -324,9 +340,12 @@ class SnapNLPService:
         if concept.lower() in STOPWOORDEN:
             return None
 
-        # Duplicate check (exact)
+        # Duplicate check (exact + ascii-fold voor accenten/umlaut — v4_snap_dedupe_002)
         index = self._get_index()
         if concept.lower() in index:
+            return None
+        concept_fold = _ascii_fold(concept.lower())
+        if concept_fold != concept.lower() and concept_fold in index:
             return None
 
         tags = ["knowledge-snap", "auto-generated"]

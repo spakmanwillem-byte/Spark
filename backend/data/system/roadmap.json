@@ -3615,6 +3615,13 @@
         "status": "done",
         "priority": "high",
         "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_snap_dedupe_002",
+        "titel": "Umlaut/accent dedupe in snap-service: 'joel'='joël'='Joël' via ascii-fold (lookup + create_word_snap + index)",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4364,7 +4371,7 @@
     }
   },
   "summary": {
-    "v4.0_progress": "97/133 (73%)",
+    "v4.0_progress": "98/134 (73%)",
     "last_cleanup": "2026-05-20",
     "active_versions": [
       "v4.0"
@@ -4423,7 +4430,8 @@
     "2026-05-20: Help admin/user gesplitst + legal triggers (privacy/cookies/voorwaarden)",
     "2026-05-20: Personal docs systeem — testament + survivalgids via chat",
     "2026-05-20: Archief UI — nieuwe Documenten tab met JSON download",
-    "2026-05-20: Bug-batch fixes — stop in help, 'ik ken X' relatie, dashboard scope, community snap-candidates"
+    "2026-05-20: Bug-batch fixes — stop in help, 'ik ken X' relatie, dashboard scope, community snap-candidates",
+    "2026-05-20: Leaderboard guest-feature teruggedraaid (gebaseerd op verkeerde aanname uit productie KB). Backup-integrity + umlaut-dedupe blijven."
   ],
   "historical_notes": [
     "2026-03-18: v2.5 Spark World toegevoegd - 100x100 wereld met persistentie, play/pause, kennisbank integratie placeholder",

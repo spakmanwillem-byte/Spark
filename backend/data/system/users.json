@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-20T19:43:05.473480",
+      "last_active": "2026-05-20T20:15:07.206668",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -2382,12 +2382,86 @@
         ],
         "total_xp_from_achievements": 800
       }
+    },
+    {
+      "naam": "joel123",
+      "volledige_naam": "joel123",
+      "sleutelwoord": "xQ7mP2vL9z",
+      "gradatie": 3,
+      "rol": "Onbekende",
+      "id": "user-f57a2858",
+      "registered_date": "2026-05-20T14:39:14.636122",
+      "last_active": "2026-05-20T17:25:11.574437",
+      "gesprekken_count": 0,
+      "trust_score": 0,
+      "masterkey": null,
+      "xp": 0,
+      "gradatie_titel": "Leert graag kennen"
+    },
+    {
+      "naam": "piet",
+      "volledige_naam": "piet",
+      "sleutelwoord": "sint",
+      "gradatie": 2,
+      "rol": "Onbekende",
+      "id": "user-9e4172d0",
+      "registered_date": "2026-05-20T16:16:29.584576",
+      "last_active": "2026-05-20T16:27:10.640650",
+      "gesprekken_count": 0,
+      "trust_score": 0,
+      "masterkey": null,
+      "xp": 150,
+      "gradatie_titel": "Leert graag kennen",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T17:02:07.847125+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T17:02:07.847144+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 150
+      },
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T17:02:07.931245+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T17:02:07.938844+00:00",
+          "total_after": 150
+        }
+      ]
     }
   ],
   "metadata": {
     "purpose": "Gebruikersdatabase met gradaties en authenticatie",
     "creator": "System",
     "last_updated": "2026-03-31T08:39:46.408876",
-    "last_leaderboard_recalc": "2026-05-20T07:48:50.830507+00:00"
+    "last_leaderboard_recalc": "2026-05-20T07:48:50.830507+00:00",
+    "last_restore": "2026-05-20 from B3 snapshot (19:01)",
+    "restored_ids": [
+      "user-f57a2858",
+      "user-9e4172d0"
+    ]
   }
 }

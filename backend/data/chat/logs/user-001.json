@@ -18110,11 +18110,155 @@
         "session_id": "default",
         "gesprek_nummer": 685
       }
+    },
+    {
+      "id": "conv-098bbaa1",
+      "timestamp": "2026-05-20T20:07:33.686330+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is joel",
+      "spark_response": "Ik ken 'joel' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "joel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 686
+      }
+    },
+    {
+      "id": "conv-43b4ae8c",
+      "timestamp": "2026-05-20T20:07:34.713103+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is joël",
+      "spark_response": "Ik ken deze woorden nog niet: **joël**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'joël' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "joël"
+        ],
+        "snap_suggestions": [
+          "joël"
+        ],
+        "word_count": 3,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 687
+      }
+    },
+    {
+      "id": "conv-0272d448",
+      "timestamp": "2026-05-20T20:08:35.130750+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is joël",
+      "spark_response": "Ik ken deze woorden nog niet: **joël**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'joël' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "joël"
+        ],
+        "snap_suggestions": [
+          "joël"
+        ],
+        "word_count": 3,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 688
+      }
+    },
+    {
+      "id": "conv-0b2da30e",
+      "timestamp": "2026-05-20T20:09:58.466580+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is joël",
+      "spark_response": "Ik ken 'joël' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "joël"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 689
+      }
+    },
+    {
+      "id": "conv-373eace0",
+      "timestamp": "2026-05-20T20:10:32.291536+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 690
+      }
+    },
+    {
+      "id": "conv-89944b81",
+      "timestamp": "2026-05-20T20:10:32.313016+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 691
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 685,
-    "last_updated": "2026-05-20T19:24:26.210742+00:00"
+    "total_conversations": 691,
+    "last_updated": "2026-05-20T20:10:32.313016+00:00"
   }
 }

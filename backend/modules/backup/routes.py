@@ -307,6 +307,13 @@ async def restore(file: UploadFile = File(...), confirm: str = Form("false")):
         except Exception as e:
             errors.append({"path": name, "error": str(e)})
 
+    # v4_storage_cache_001: invalideer alle cache na restore (extern geschreven files)
+    try:
+        from modules.core.storage import clear_cache
+        clear_cache()
+    except Exception:
+        pass
+
     return {
         "ok": True,
         "created_count": len(created),

@@ -231,3 +231,19 @@ async def update_extended_profile(user_id: str, updates: ProfileExtended):
     data["last_updated"] = datetime.now(timezone.utc).isoformat()
     save_json(profile_file, data)
     return {"success": True, "profile": data}
+
+
+# v4_storage_cache_001 — Cache diagnostics endpoint
+@router.get("/admin/storage-cache")
+async def storage_cache_stats():
+    """Toont welke files in-memory gecached zijn (alleen >50KB worden gecached)."""
+    from modules.core.storage import get_cache_stats
+    return get_cache_stats()
+
+
+@router.post("/admin/storage-cache/clear")
+async def storage_cache_clear():
+    """Forceer cache leeg (debug/recovery)."""
+    from modules.core.storage import clear_cache
+    clear_cache()
+    return {"success": True, "message": "Cache leeggemaakt"}

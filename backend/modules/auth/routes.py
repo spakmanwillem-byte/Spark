@@ -36,7 +36,15 @@ async def login(request: LoginRequest):
     
     # Update activity
     AuthService.heartbeat(user.get("id"))
-    
+
+    # v4_grad_titel_001: voeg gradatie_titel toe voor warme weergave in UI
+    try:
+        ginfo = AuthService.get_gradatie_info(user.get("gradatie", 7))
+        if ginfo:
+            user["gradatie_titel"] = ginfo.get("titel", "")
+    except Exception:
+        pass
+
     return LoginResponse(
         success=True,
         message="Welkom terug!" if not is_masterkey else "Masterkey toegang",

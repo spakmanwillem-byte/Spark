@@ -460,7 +460,7 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">{user?.naam}</p>
-                <p className="text-xs text-slate-500">{user?.rol || `Gradatie ${user?.gradatie}`}</p>
+                <p className="text-xs text-slate-500">{user?.rol || user?.gradatie_titel || (isAdmin ? `Gradatie ${user?.gradatie}` : '')}</p>
               </div>
               <button
                 onClick={logout}

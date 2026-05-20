@@ -2516,7 +2516,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 79,
+    "progress": 75,
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3117,12 +3117,156 @@
         "progress": 100,
         "voltooid_op": "2026-05-15",
         "beschrijving": "DagboekPage entries-lijst vervangen door DagboekTreeView component (gelijke structuur als Archief ConversationsView). Jaar tabs bovenaan (nieuwste eerst, huidig jaar altijd zichtbaar), klik op maand opent dag-lijst, klik op dag opent entries. MONTHS_NL voor Nederlandse maand-labels. Filter (mood + search) blijft werken, daarna gegroepeerd."
+      },
+      {
+        "id": "v4_settings_001",
+        "titel": "Settings architectuur (system.json + user_overrides, 19 keys)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_voice_002",
+        "titel": "Voice flow upgrade (auto-start mic, 2s stilte detectie, TTS-glow)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_vocab_growth_001",
+        "titel": "Vocab kandidaten uit kennisbank + approve-flow + Groeien tab",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_data_recovery_001",
+        "titel": "Atomic save_json + graph orphan-check/recover (74 weeskaarten hersteld)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_agenda_announce_001",
+        "titel": "Spark vermeldt aankomende afspraak in welcome + ack-flow voor glow",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_rel_002",
+        "titel": "Relation extraction sync naar persons cards (Arent/Willie/Heidi/Maaike hersteld)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_notes_002",
+        "titel": "User-bound notes/tasks (was 1 gedeelde pool)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_dashboard_grad_001",
+        "titel": "Dashboard widgets per gradatie (4 widgets admin-only)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_gradatie_visibility_002",
+        "titel": "Tab-finetune per gradatie (12 bug-fixes uit prod feedback)",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_route_guard_001",
+        "titel": "Admin routes guard - non-admin krijgt redirect naar dashboard",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_grad_titel_001",
+        "titel": "Warme gradatie-titels (Familie/Vriend/Community Plus etc) ipv koud nummer",
+        "status": "done",
+        "prio": "P1",
+        "completed_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_bug_004_community_lek",
+        "titel": "Privacy fix: community-bericht lekt naar Spark AI gesprek",
+        "status": "planned",
+        "prio": "P0",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_bug_019_voice_kader",
+        "titel": "Voice tab als kader in Beheer > Features (UI move)",
+        "status": "planned",
+        "prio": "P1",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_token_potje_001",
+        "titel": "Token/potje upgrade-mechaniek (gradatie 5->6 via roarr token + trader rotatie)",
+        "status": "planned",
+        "prio": "P1",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_kb_leak_001",
+        "titel": "KB-leak detector (\"X is mijn Y\") + migrate naar persons cards",
+        "status": "planned",
+        "prio": "P1",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_accounting_002",
+        "titel": "Boekhouding per user (personal_{user_id}) + rol-toegang per kasboek",
+        "status": "planned",
+        "prio": "P1",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_snap_dedup_001",
+        "titel": "snap_service lowercase dedup (10 oude KB duplicates)",
+        "status": "planned",
+        "prio": "P2",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_spark_denkt_ui",
+        "titel": "\"Spark denkt na\" feedback - pulserend icoon + letter-glow streaming",
+        "status": "planned",
+        "prio": "P2",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_emotie_tts_speed",
+        "titel": "Emotie <-> TTS-speed koppeling (boos=fel, bedroefd=traag)",
+        "status": "planned",
+        "prio": "P3",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
+      },
+      {
+        "id": "v4_relatie_promotor",
+        "titel": "Spark polst eens per X dagen \"weet je nog wie X voor jou is?\"",
+        "status": "planned",
+        "prio": "P3",
+        "created_at": "2026-05-20T04:39:14.644243+00:00"
       }
     ],
-    "last_updated": "2026-05-15T10:00:00",
+    "last_updated": "2026-05-20T04:39:14.644243+00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
-      "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar."
+      "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar.",
+      {
+        "at": "2026-05-20T04:39:14.644243+00:00",
+        "note": "Sync 20/05: +20 items (recent done + nieuwe planned uit bug-meldingen). v4.0 progress: 75% (62/83)"
+      }
     ]
   },
   "v5.0": {
@@ -3350,7 +3494,17 @@
         "progress": 100,
         "completed_date": "2026-05-18",
         "beschrijving": "Nieuwe module modules/chat/identity_intent_service.py. Detecteert via regex vragen-over-Spark (wie ben je, wat kan je, jouw missie/visie/core/doel/waarden, waarom besta je, vertel over jezelf, wie maakte je, wat maakt je anders). Bouwt antwoorden uit spark_identity.json + spark_profile.json (biografie.missie/visie/waarden/waarom_gemaakt) + spark_bijbel.kernwaarden + de drie nieuwe kaarten Missie/Visie/Core. Plugt in chat/routes.py vóór alle pending flows, dus identity-vraag werkt ook als user nog in stale wedervraag-state zit. Bij identity-hit wordt pending state ook gecleared (escape hatch).",
-        "patronen": ["wie ben je/jij", "wat kan je/jij/spark", "jouw missie/visie/core/doel", "waarom/waarvoor besta je/jij", "wat zijn je waarden", "vertel over jezelf", "stel je voor", "wie maakte je/jou", "wat maakt je/jou anders"],
+        "patronen": [
+          "wie ben je/jij",
+          "wat kan je/jij/spark",
+          "jouw missie/visie/core/doel",
+          "waarom/waarvoor besta je/jij",
+          "wat zijn je waarden",
+          "vertel over jezelf",
+          "stel je voor",
+          "wie maakte je/jou",
+          "wat maakt je/jou anders"
+        ],
         "11_test_vragen": "Alle 11 test-vragen gaven correct identity_* type antwoorden (geen fallback meer naar 'waarom' + 'bestand')."
       },
       {

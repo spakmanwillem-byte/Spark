@@ -313,7 +313,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-white truncate">{u.naam}</p>
-                      <p className="text-[10px] text-slate-500">Gradatie {u.gradatie}</p>
+                      <p className="text-[10px] text-slate-500">{u.rol || u.gradatie_titel || (isAdminUser ? `Gradatie ${u.gradatie}` : '')}</p>
                     </div>
                     <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
                   </div>

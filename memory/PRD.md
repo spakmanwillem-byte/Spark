@@ -53,6 +53,9 @@ Dutch (always respond in Dutch).
   - Grad 7: + -Agenda -Archief
   - Visueel getest met 4 bestaande users (Harry/Smith/Heidi/Madelief): alle 12 bugs ✓ opgelost
 - 2026-05-20: **v4_route_guard_001 — Admin routes guard** (bug #5): non-admins (gradatie > 2) die op `/admin/users`, `/admin/analytics` of `/admin/settings` URL landen worden automatisch teruggestuurd naar dashboard. Voorkomt witscherm/leeg-pagina na gradatie-wijziging.
+- 2026-05-20: **v4_grad_titel_001 — Warme gradatie-titels**: gradaties hernoemd van klinisch ("Communityleden", "Klanten", "Onbekenden") naar warm ("Vriend", "Community Plus", "Community Member", "Bekend", "Leert graag kennen"). Backend `/login` retourneert `gradatie_titel` veld. Sidebar/dashboard tonen warme titel ipv "Gradatie X" (nummer alleen voor admins zichtbaar).
+- 2026-05-20: **vocab-growth seed**: 15 natuurlijke woorden toegevoegd uit kennisbank-kandidaten (mensen, communicatie, gedrag, natuur, leven, taal, kennis, tijd, energie, iemand, iedereen, gesprekken, informatie, dieren, ontwikkeling).
+- 2026-05-20: **Roadmap sync**: 20 items toegevoegd aan v4.0 roadmap (11 recent-done + 9 nieuwe planned). v4.0 progress: 75% (62/83 done).
 
 ## In progress / backlog
 ### P0 / Open follow-ups

@@ -3278,9 +3278,23 @@
         "status": "done",
         "prio": "P1",
         "completed_at": "2026-05-20T05:20:01.294816+00:00"
+      },
+      {
+        "id": "v4_perf_widget_001",
+        "titel": "Performance card op admin dashboard (cache MB/files + clear button)",
+        "status": "done",
+        "prio": "P2",
+        "completed_at": "2026-05-20T05:26:26.876273+00:00"
+      },
+      {
+        "id": "v4_wallet_cleanup_001",
+        "titel": "Test-data verwijderd uit wallet (€40 fake balance + fake tx, tokens=10 behouden)",
+        "status": "done",
+        "prio": "P2",
+        "completed_at": "2026-05-20T05:26:26.876273+00:00"
       }
     ],
-    "last_updated": "2026-05-20T05:20:01.294816+00:00",
+    "last_updated": "2026-05-20T05:26:26.876273+00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar.",

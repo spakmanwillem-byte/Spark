@@ -12,6 +12,24 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_spark_self_001 — Spark's eigen anker (user-000)**:
+  - Folder `/data/users/user-000/` aangemaakt met `profile.json` (Spark's identiteit: naam, missie, geboortedatum, stem) + `scratch.json` (data-anker)
+  - Nieuwe chat-intents in `spark_self_service.py`:
+    - **Note**: _"Spark, onthoud voor jezelf: ..."_ / _"noteer voor jezelf: ..."_ / _"jouw observatie: ..."_ → parkeert entry in scratch.json
+    - **Read**: _"wat heb je vandaag geleerd?"_ / _"wat zit er in jouw scratch?"_ / _"jouw observaties"_ → toont laatste 5 entries
+  - Entries hebben `kind` (observatie/user_request/etc), `source` (user_naam), `ts`, `tekst`
+  - Help-overzicht uitgebreid met "Spark's eigen anker" command
+  - Klaar voor later: TTS voice-clone metadata, "wat-leer-ik-vandaag" auto-mining, Spark's reflectieve loop (v5)
+- 2026-05-20: **Bug-batch fixes uit user-feedback**:
+  - **#5 Help mist 'stop'**: nu vermeld als _"Stop een lopend proces — bv. 'stop' of 'klaar'"_
+  - **#2 'ik ken Joel' geen relatie**: nieuwe patterns `PATTERN_KEN_NAAM` + `PATTERN_NAAM_KEN_IK` → relatie 'bekende' (`bekende` toegevoegd aan REL_TYPES). Werkt: "ik ken X" / "X ken ik" → auto-extract
+  - **#12 Community-bericht in Spark Dashboard chat**: Dashboard widget gebruikt nu `?channel=spark` filter. `chat-history` endpoint heeft default `channel='spark'` parameter
+  - **#4 Spark leert niet uit community**: `bots/community/send` retourneert nu `snap_candidates[]` (woorden ≥6 letters die niet in KB staan + niet stopwoord). Frontend kan later snap-flow triggeren op klik
+  - **Vocab triggers UI werkt al** — user bewerkte in PRODUCTIE (preview heeft ander dataset). `/api/spark/vocab/{group}/{key}/add` endpoint draait correct. Ook generieke `/api/triggers/edit/vocab/...` route toegevoegd als fallback
+- 2026-05-20: **Roadmap uitgebreid met 7 nieuwe pending items uit bugs**:
+  - v4_potje_acting_as_001 (P1), v4_xp_correction_001 (P2), v4_glow_notify_001 (P1)
+  - v5_parafrase_layer (P3, future), v6_roar_token_001 (P3), v6_grad2_potje_token (P3)
+  - v4_voice_tab_relocate (P2)
 - 2026-05-20: **Help + Roadmap up-to-date**:
   - `handle_help()` user-commands van 15 → 19 (Testament, Survivalgids, Documenten, Privacy/Cookies/Voorwaarden expliciet)
   - Admin-extra van 7 → 10 (credits via chat + via UI gesplitst, credits-bonus matching uitleg, Avatar Galerij beheer)

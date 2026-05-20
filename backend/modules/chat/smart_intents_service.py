@@ -204,6 +204,8 @@ def handle_help(is_admin: bool = False) -> Dict:
         ("Speech-to-Text (jij spreekt)", "bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'"),
         ("Text-to-Speech (Spark spreekt)", "bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'"),
         ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5"),
+        ("Stop een lopend proces", "bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)"),
+        ("Spark's eigen anker", "bv. 'onthoud voor jezelf: ...' (parkeert in Spark's user-000 scratch) of 'wat heb je vandaag geleerd?'"),
         ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'"),
         ("Testament aanmaken", "bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'"),
         ("Survivalgids aanmaken", "bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'"),

@@ -215,6 +215,7 @@ _KIND_TO_FILE = {
     "admin":        ("triggers", "admin_commands.json"),
     "system":       ("triggers", "system_fallback.json"),
     "credits":      ("system",   "dank.json"),
+    "vocab":        ("personality", "spark_vocab.json"),
 }
 
 
@@ -309,6 +310,20 @@ def _get_list_ref(data: dict, kind: str, key: str, field: str):
         if key not in data or not isinstance(data[key], list):
             data[key] = []
         return data, key
+
+    if kind == "vocab":
+        # key kan zijn: "openers", "afsluiters", "twijfel", etc OF "algemeen/openers"
+        if "/" in key:
+            section, subkey = key.split("/", 1)
+        else:
+            section, subkey = "algemeen", key
+        if field != "triggers":
+            raise HTTPException(400, "Vocab ondersteunt alleen 'triggers' (lijst van woorden)")
+        if section not in data or not isinstance(data[section], dict):
+            data[section] = {}
+        if subkey not in data[section] or not isinstance(data[section][subkey], list):
+            data[section][subkey] = []
+        return data[section], subkey
 
     raise HTTPException(400, f"Onbekend kind: {kind}")
 

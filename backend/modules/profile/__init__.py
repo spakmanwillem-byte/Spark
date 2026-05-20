@@ -252,11 +252,14 @@ def _strip_meta(text: str) -> str:
 
 
 @router.get("/profile/chat-history/{user_id}")
-async def get_chat_history(user_id: str, limit: int = 500):
-    """Geef de eigen Spark-chathistorie van een user, schoon en gegroepeerd op jaar→maand→dag."""
+async def get_chat_history(user_id: str, limit: int = 500, channel: Optional[str] = "spark"):
+    """Geef de eigen Spark-chathistorie van een user, schoon en gegroepeerd op jaar→maand→dag.
+    Default channel='spark' om community-berichten niet te tonen in eigen chat-historie."""
     log_file = CHAT_LOG_DIR / f"{user_id}.json"
     data = load_json(log_file, default={"conversations": []})
     convs = data.get("conversations", []) or []
+    if channel:
+        convs = [c for c in convs if c.get("channel", "spark") == channel]
 
     grouped: Dict[str, Dict[str, Dict[str, list]]] = {}
     total = 0

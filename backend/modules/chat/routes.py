@@ -407,6 +407,16 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, out.get("type", "personal_doc"))
             return response
 
+        # Spark Self — Spark's eigen anker (user-000) voor reflecties/notities
+        from . import spark_self_service as sss
+        self_intent = sss.detect_spark_self_intent(text)
+        if self_intent:
+            u = _load_user() or {}
+            out = sss.handle_spark_self(self_intent, user_naam=u.get("naam", "iemand"))
+            response.update(out)
+            _save_log(req, response, out.get("type", "spark_self"))
+            return response
+
         # Suggest "wat zullen we doen" — met dank-intent integratie
         # 0) Credits EDIT: rename/add/remove in dank-lijst (moet voor "credits" anders pakt die het)
         from . import dank_service as ds

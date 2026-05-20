@@ -54,6 +54,7 @@ REL_TYPES = {
     "oom": "familie/oom",
     "schoonmoeder": "familie/schoonmoeder",
     "schoonvader": "familie/schoonvader",
+    "bekende": "bekende",
 }
 
 # Sorteer langste eerst zodat "goede vriend" matched vóór "vriend"
@@ -73,6 +74,13 @@ PATTERN_NAAM_IS_MIJN = re.compile(
 )
 PATTERN_NAAM_KOMMA = re.compile(
     rf"\b{NAAM_REGEX}\s*,\s*[Mm]ijn\s+({REL_REGEX})(?:\s|,|\.|$)"
+)
+# v4_rel_003 — "ik ken X" / "X ken ik" → relatie "bekende" (zwakke link, user kan upgraden)
+PATTERN_KEN_NAAM = re.compile(
+    rf"\b[Ii]k\s+ken\s+{NAAM_REGEX}\b"
+)
+PATTERN_NAAM_KEN_IK = re.compile(
+    rf"\b{NAAM_REGEX}\s+ken\s+ik\b"
 )
 
 # Negatieve woorden die we niet als naam willen
@@ -117,6 +125,11 @@ def extract(text: str) -> List[Dict]:
     for m in PATTERN_NAAM_KOMMA.finditer(text):
         naam, rel_word = m.group(1), m.group(2)
         add(naam, rel_word)
+    # v4_rel_003: "ik ken X" / "X ken ik" → impliciete relatie "bekende"
+    for pat in (PATTERN_KEN_NAAM, PATTERN_NAAM_KEN_IK):
+        for m in pat.finditer(text):
+            naam = m.group(1)
+            add(naam, "bekende")
 
     return findings
 

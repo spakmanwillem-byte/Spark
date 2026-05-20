@@ -3462,6 +3462,76 @@
         "titel": "Extra doc-types: zorgvolmacht, wensen, levensoverzicht",
         "status": "open",
         "priority": "low"
+      },
+      {
+        "id": "v4_help_stop_001",
+        "titel": "Help-overzicht: 'stop' en 'klaar' voor proces-afbreken expliciet vermeld",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_rel_003",
+        "titel": "Relation extraction: 'ik ken X' / 'X ken ik' → impliciete relatie 'bekende'",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_chat_scope_001",
+        "titel": "Dashboard widget toont alleen Spark-conv (channel=spark filter); chat-history endpoint default channel=spark",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_community_snap_001",
+        "titel": "Community-bericht detecteert onbekende woorden (≥6 letters, niet in KB, niet stopwoord) → snap_candidates teruggegeven",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_potje_acting_as_001",
+        "titel": "Admin acting-as alt-user bij potje-buy: UI moet duidelijk maken voor welke user gekocht wordt, en juiste potjes-scope tonen",
+        "status": "open",
+        "priority": "medium"
+      },
+      {
+        "id": "v4_xp_correction_001",
+        "titel": "XP correctie via tag-flag: admin kan 5 woorden taggen 'fout-getagd' om user XP toe te kennen (bv. Joel)",
+        "status": "open",
+        "priority": "low"
+      },
+      {
+        "id": "v4_glow_notify_001",
+        "titel": "Glow/notify bij nieuw community/privé-bericht (zoals nu bij agenda/spark)",
+        "status": "open",
+        "priority": "medium"
+      },
+      {
+        "id": "v5_parafrase_layer",
+        "titel": "Parafrase als interne bewustwordingslaag (v5): bij 'moet even nadenken' interne mogelijke tags genereren",
+        "status": "future",
+        "priority": "low"
+      },
+      {
+        "id": "v6_roar_token_001",
+        "titel": "Gradatie 5→6 vereist Roarr-token (token-economie, potjes als tokens)",
+        "status": "future",
+        "priority": "low"
+      },
+      {
+        "id": "v6_grad2_potje_token",
+        "titel": "Gradatie 2 mag ook potje vullen als token (uitbreiding token-economie)",
+        "status": "future",
+        "priority": "low"
+      },
+      {
+        "id": "v4_voice_tab_relocate",
+        "titel": "Voice-tab naar Beheer → Features (kader) verplaatsen",
+        "status": "open",
+        "priority": "low"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4211,7 +4281,7 @@
     }
   },
   "summary": {
-    "v4.0_progress": "85/113 (75%)",
+    "v4.0_progress": "89/124 (72%)",
     "last_cleanup": "2026-05-20",
     "active_versions": [
       "v4.0"
@@ -4267,7 +4337,8 @@
     "2026-05-20: Ambient overleeft F5 via localStorage + auto-resume",
     "2026-05-20: Help admin/user gesplitst + legal triggers (privacy/cookies/voorwaarden)",
     "2026-05-20: Personal docs systeem — testament + survivalgids via chat",
-    "2026-05-20: Archief UI — nieuwe Documenten tab met JSON download"
+    "2026-05-20: Archief UI — nieuwe Documenten tab met JSON download",
+    "2026-05-20: Bug-batch fixes — stop in help, 'ik ken X' relatie, dashboard scope, community snap-candidates"
   ],
   "historical_notes": [
     "2026-03-18: v2.5 Spark World toegevoegd - 100x100 wereld met persistentie, play/pause, kennisbank integratie placeholder",

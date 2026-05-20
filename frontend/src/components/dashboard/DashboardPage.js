@@ -98,7 +98,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       fetch(`${API}/api/chat/shadow/stats`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/chat/shadow/unused`).then(r => r.json()).catch(() => null),
       fetch(`${API}/api/admin/storage-cache`).then(r => r.json()).catch(() => null),
-      user?.id ? fetch(`${API}/api/chat/logs/${user.id}?limit=1`).then(r => r.json()).catch(() => null) : null,
+      user?.id ? fetch(`${API}/api/chat/logs/${user.id}?limit=1&channel=spark`).then(r => r.json()).catch(() => null) : null,
       fetch(`${API}/api/bots/community/messages?limit=1`).then(r => r.json()).catch(() => null),
       user?.id ? fetch(`${API}/api/contacts/list?user_id=${user.id}`).then(r => r.json()).catch(() => null) : null,
     ]).then(([kb, files, users, health, storage, shadow, unused, perf, sparkLog, community, contacts]) => {

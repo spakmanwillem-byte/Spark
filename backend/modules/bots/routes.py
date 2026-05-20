@@ -137,6 +137,25 @@ async def send_community_message(msg: ChatMessage):
     data["messages"].extend(bot_responses)
     save_json(COMMUNITY_FILE, data)
 
+    # v4_community_snap_001 — Detecteer onbekende woorden in user-bericht
+    # Lichte heuristiek: woorden met >5 letters die NIET in KB staan + niet bot-namen
+    snap_candidates = []
+    try:
+        from modules.core.storage import load_json as _lj
+        from pathlib import Path as _P
+        kb_path = _P("/app/backend/data/knowledge/learned_knowledge/knowledge_base.json")
+        kb = _lj(kb_path, default={})
+        known_concepts = {k.lower() for k in kb.keys()} if isinstance(kb, dict) else set()
+        import re as _re
+        words = _re.findall(r"\b[a-zà-ÿ]{6,}\b", msg.message.lower())
+        # Filter stopwoorden/algemene woorden
+        STOP = {"hebben", "worden", "kunnen", "moeten", "willen", "zullen", "gaan",
+                "vandaag", "morgen", "gister", "altijd", "soms", "eigenlijk", "natuurlijk",
+                "misschien", "waarschijnlijk", "echter", "hierdoor", "daarom"}
+        snap_candidates = list({w for w in words if w not in STOP and w not in known_concepts})[:5]
+    except Exception:
+        snap_candidates = []
+
     # Log naar user's gesprekslog
     try:
         from modules.chat import chat_log_service
@@ -160,4 +179,5 @@ async def send_community_message(msg: ChatMessage):
         "success": True,
         "message": user_msg,
         "bot_responses": bot_responses,
+        "snap_candidates": snap_candidates,
     }

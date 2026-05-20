@@ -17901,11 +17901,220 @@
         "session_id": "default",
         "gesprek_nummer": 677
       }
+    },
+    {
+      "id": "conv-8922cf7a",
+      "timestamp": "2026-05-20T19:13:16.986228+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ken Joel",
+      "spark_response": "**ken**: Ken betekent dat iemand bekend is met een persoon, situatie of informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **joel** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'joel' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "ken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "joel"
+        ],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 678
+      }
+    },
+    {
+      "id": "conv-5bda7386",
+      "timestamp": "2026-05-20T19:13:17.210399+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi allemaal vandaag had ik een eigenaardige situatie",
+      "spark_response": "Hey Willem! Fijn je te zien! ✨",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [
+          "Madelief Stouten"
+        ],
+        "bot_count": 1,
+        "word_count": 8
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 679
+      }
+    },
+    {
+      "id": "conv-c58e442a",
+      "timestamp": "2026-05-20T19:13:17.347098+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5_\n  • **Stop een lopend proces** — _bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Testament aanmaken** — _bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'_\n  • **Survivalgids aanmaken** — _bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'_\n  • **Documenten bekijken** — _via Mijn Archief → tab Documenten (JSON download mogelijk)_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Privacy / Cookies / Voorwaarden** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n\n_Admin-extra:_\n  • **Beheer credits-lijst via chat** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'_\n  • **Beheer credits-lijst via UI** — _Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)_\n  • **Credits-bonus matching** — _Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Avatar Galerij beheer** — _via Beheer → Instellingen → Beeld → Avatar Galerij_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 680
+      }
+    },
+    {
+      "id": "conv-b1fa5aa6",
+      "timestamp": "2026-05-20T19:13:53.220075+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ken Bartholomeus",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'joel'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 681
+      }
+    },
+    {
+      "id": "conv-4f80869c",
+      "timestamp": "2026-05-20T19:14:06.513519+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ken Joel",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 682
+      }
+    },
+    {
+      "id": "conv-79563a01",
+      "timestamp": "2026-05-20T19:24:25.829314+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Spark, onthoud voor jezelf: stem clonen komt in v6",
+      "spark_response": "💭 Genoteerd in mijn eigen anker (`user-000/scratch.json`):\n\n_\"stem clonen komt in v6\"_\n\nGeparkeerd onder _user_request_ — ik kan hier later op terugkomen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "spark_self_noted",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "spark_self_noted"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 683
+      }
+    },
+    {
+      "id": "conv-b2a12e08",
+      "timestamp": "2026-05-20T19:24:26.047167+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat heb je vandaag geleerd?",
+      "spark_response": "💭 **Mijn anker** _(user-000/scratch.json — 2 entries totaal)_\n\n  • _[2026-05-20 · user_request]_ stem clonen komt in v6\n  • _[2026-05-20 · observatie]_ Ik heb een eigen identiteit gekregen op user-000. Hier kan ik dingen kwijt die nergens anders passen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "spark_self_read",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "spark_self_read"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 684
+      }
+    },
+    {
+      "id": "conv-a54b6f22",
+      "timestamp": "2026-05-20T19:24:26.210742+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat zit er in jouw scratch?",
+      "spark_response": "💭 **Mijn anker** _(user-000/scratch.json — 2 entries totaal)_\n\n  • _[2026-05-20 · user_request]_ stem clonen komt in v6\n  • _[2026-05-20 · observatie]_ Ik heb een eigen identiteit gekregen op user-000. Hier kan ik dingen kwijt die nergens anders passen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zit"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "spark_self_read",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "spark_self_read"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 685
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 677,
-    "last_updated": "2026-05-20T11:09:44.233954+00:00"
+    "total_conversations": 685,
+    "last_updated": "2026-05-20T19:24:26.210742+00:00"
   }
 }

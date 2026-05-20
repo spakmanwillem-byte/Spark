@@ -12,6 +12,18 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_legal_help_001 — Help admin/user + legal triggers**:
+  - `handle_help(is_admin)` toont nu **basis-help voor iedereen** + **admin-extra** sectie voor gradatie ≤ 2 (credits beheer, roadmap-bugs flow, trigger/vocab beheer, backup, gradatie-upgrades, storage cache)
+  - Nieuwe legal-intent service (`legal_service.py`) detect: `privacy`, `cookies`, `voorwaarden`
+  - 3 JSON-content files in `/data/system/legal_*.json` (versie 0.1-draft, klaar voor admin om in te vullen):
+    - `legal_privacy.json` — wat slaat Spark op, niet deelt, jouw rechten
+    - `legal_cookies.json` — sessionStorage/localStorage/server-side, geen tracking
+    - `legal_voorwaarden.json` — wat is Spark, aansprakelijkheid, accountregels
+- 2026-05-20: **Roadmap cleanup**:
+  - `technical_debt`: 4 → 3 (oude GameTab/AdminTab refs verwijderd, WS-error weg)
+  - `known_issues`: WebSocket dev-spam verwijderd, alleen KB duplicates blijft
+  - `notes`: 22 → 12 (oude pre-mei items naar `historical_notes` archief)
+  - `summary.v4.0_progress`: 83/104 (80%) na toevoegen van 8 nieuwe done-items deze sessie
 - 2026-05-20: **v4_ambient_persist_001 — Ambient overleeft F5**:
   - Bug: ambient verdween na page-refresh; user moest "stilte" + "ambient 1 aan" opnieuw typen
   - Fix: `getAmbientPlayer()` singleton in `GesprekkenPage.js` persisteert nu `{url, label, volume}` in `localStorage` (key `spark_ambient_state`)

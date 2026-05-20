@@ -3349,6 +3349,62 @@
         "status": "done",
         "prio": "P1",
         "completed_at": "2026-05-20T08:14:20.199354+00:00"
+      },
+      {
+        "id": "v4_profile_revamp_001",
+        "titel": "Mijn Profiel 5-tab revamp (Algemeen/Achtergrond/Persoonlijkheid/Gesprekken/Avatar)",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_avatar_001",
+        "titel": "Avatar systeem: galerij + user portret, Pillow resize 512×512",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_dank_001",
+        "titel": "Sparks bedank-uiting bij vrije keus + credits-vraag",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_dank_002",
+        "titel": "Credits beheerbaar in Spark AI → Triggers",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_dank_003",
+        "titel": "Credits edit via chat (rename/add/remove + disambiguation)",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_dank_004",
+        "titel": "Credits bonus: matched users (grad ≤4) krijgen +10 trust + ×1.2 multiplier",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_ambient_persist_001",
+        "titel": "Ambient overleeft F5 via localStorage + auto-resume bar",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
+      },
+      {
+        "id": "v4_legal_help_001",
+        "titel": "Help admin/user gesplitst + legal triggers (privacy/cookies/voorwaarden) met JSON content",
+        "status": "done",
+        "priority": "medium",
+        "done_at": "2026-05-20"
       }
     ],
     "last_updated": "2026-05-20T08:14:20.199354+00:00",
@@ -4098,55 +4154,20 @@
     }
   },
   "summary": {
-    "completed": [
-      "v0.9 - Stabiliteit & Refactoring",
-      "v1.0 - Spark Foundation (MVP)",
-      "v1.1 - Admin Graph Viewer",
-      "v1.2 - Emotie Management",
-      "v1.3 - Notities Systeem",
-      "v1.4 - Metadata System & Advanced Search",
-      "v1.5 - Triggers & Automation",
-      "v1.6 - Settings & Config",
-      "v1.7 - Logs & Debug",
-      "v1.8 - Geluiden & Feedback",
-      "v1.9 - Knowledge Management Verdieping",
-      "v2.0 - Navigation & Layout",
-      "v2.1 - Achievements & Gamification",
-      "v2.2 - Leaderboard & Competition",
-      "v2.3 - Community Chat",
-      "v2.4 - Profiel & Wallet Management",
-      "v2.5 - Spark AI Mini Survival Game (Fase 1 & 2)",
-      "v4.1 - Reality Check & Module Sandbox (Stoppenkast)"
+    "v4.0_progress": "83/104 (80%)",
+    "last_cleanup": "2026-05-20",
+    "active_versions": [
+      "v4.0"
     ],
-    "in_progress": [
-      "v3.2 - Spark AI Mini Survival Game - Fase 3 (85% complete)",
-      "v4.0 - Personality & Conversational Depth (52% complete)"
-    ],
-    "upcoming": [
-      "v4_015 Shadow Observer → v4_014 Guard Layer (priority/cooldown/conflict) → v4_016 Insights",
-      "v4_010 [info]-haakjes + v4_012 tone-aware bijbel-responses",
-      "v3.2 completion - Actor Movement & Territory Claiming",
-      "v3.3 - Warehouse & Economie Systeem",
-      "v3.4 - Handelssysteem & Factiemechanismen"
-    ],
-    "vision": [
-      "v5.0 - Spark Ecosystem & Economic Model (Knowledge→Items, Pool, 5 Facties, Learn-to-Earn)"
-    ],
-    "completed_phases": [
-      "v0.9 - Code Stabiliteit",
-      "v1.0 - Core Chat & Personality",
-      "v2.0 - Full UI/UX Redesign",
-      "v2.5 - Game Foundation (50x50 world, resources, monuments, Fog of War)",
-      "v3.2 - Building System & Admin Tools"
-    ],
-    "current_phase": "v4.1 - Reality Check & Module Sandbox (100% done)",
-    "next_major_milestone": "Game Prototype Stability → v5.0 Ecosystem Integration"
+    "planned_next": [
+      "v5.0 (polyseme, reflective loop)",
+      "v6.0 (avatar storytelling)"
+    ]
   },
   "technical_debt": [
-    "GameTab.js refactoring needed (530+ lines)",
-    "AdminTab.js extremely large (1295 lines) - consider lazy loading sections",
-    "WebSocket error in console (ws://localhost:443/ws) - non-critical",
-    "Harry Klokkenmaker hourly trigger verification pending"
+    "Harry Klokkenmaker hourly trigger verification pending",
+    "v4_dq_b: Component splits (TraderPage, UsersAdminPage, MainLayout) — alle > 800 regels",
+    "knowledge_base.json ~8MB (in-memory cached) — chunking voor groei later"
   ],
   "architectural_decisions": [
     {
@@ -4165,24 +4186,14 @@
   ],
   "known_issues": [
     {
-      "id": "issue_ws_error",
-      "title": "WebSocket Connection Error",
+      "id": "issue_kb_duplicates",
+      "title": "10 KB duplicate-kaarten (vergrootglas, balk, klem)",
       "priority": "low",
       "status": "open",
-      "description": "Console shows ws://localhost:443/ws connection refused, but app functions normally"
+      "description": "v4_snap_dedupe_001 — old snap-service liet dubbele entries achter"
     }
   ],
   "notes": [
-    "2026-03-18: v2.5 Spark World toegevoegd - 100x100 wereld met persistentie, play/pause, kennisbank integratie placeholder",
-    "2026-03-28: MongoDB VERWIJDERD - Spark Core werkt met Python + JSON. Simpel houden. motor/pymongo dependencies verwijderd.",
-    "2026-03-28: v4.1 COMPLEET - Module Sandbox live. 3-Layer Architecture (Trigger→NLP→Knowledge) vastgelegd. Response field toegevoegd aan cards.",
-    "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
-    "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn).",
-    "2026-05-12: 3 backlog items toegevoegd uit hand-off: v3_303a (trigger-zinnen agenda), v4_001a (self-state v1 in_progress), v4_003 (admin self-state met logs)",
-    "2026-05-12: v4_001a + v4_001b VOLTOOID — Self-state trigger live, Multi-turn 5W+H wedervragen werkt. v3_302 + v3_303 VOLTOOID — Agenda intent-extractor met ja/nee voorstel-flow. Maakt automatisch agenda-events vanuit chat.",
-    "2026-05-12: v4_005 Self-scan commando voltooid. Admin-only (gradatie 1/2). Spark leert uit eigen kaarten via 'scan' chat-commando.",
-    "2026-05-12: v4_006 Compositional Reasoning voltooid. Spark redeneert nu over samengestelde woorden via 2-deel splits. Partial-match strikter (min 5 chars beide kanten).",
-    "2026-05-12: v4_007 Spontane W-vulling voltooid. Spark vult Wie/Wanneer/Waar in op actieve snap zonder de vraag te stellen (alleen op nog-niet-goedgekeurde kaarten).",
     "2026-05-12: v4_008 Kaart-invul sessie voltooid. Admin loopt via chat door onbeantwoorde kaarten en vult alle 6 W+H velden in.",
     "2026-05-12: v4_009 Bijdrage-portaal + NL migratie voltooid. v4_010 [info] markering toegevoegd als planned.",
     "2026-05-12: v4_009c Lagen+belangrijkheid toegevoegd. v4_011 trigger-koppeling planned.",
@@ -4195,5 +4206,12 @@
     "2026-05-14: v4_025a time-awareness cascade (user.adres.land → tz) + v4_025b login-scherm 'Nieuwe gebruiker' knop met auto-login (gradatie 7).",
     "2026-05-14: v4_025c register-collisie generieke melding ('Kies een ander sleutelwoord') + min 4 tekens check.",
     "2026-05-14: v4_025d admin override (?admin_id=user-001) voor user-aanmaak met gedeeld Welkom01 — collisie/lengte-check skipped. Reset blijft Welkom01 default."
+  ],
+  "historical_notes": [
+    "2026-03-18: v2.5 Spark World toegevoegd - 100x100 wereld met persistentie, play/pause, kennisbank integratie placeholder",
+    "2026-03-28: MongoDB VERWIJDERD - Spark Core werkt met Python + JSON. Simpel houden. motor/pymongo dependencies verwijderd.",
+    "2026-03-28: v4.1 COMPLEET - Module Sandbox live. 3-Layer Architecture (Trigger→NLP→Knowledge) vastgelegd. Response field toegevoegd aan cards.",
+    "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
+    "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn)."
   ]
 }

@@ -185,12 +185,13 @@ def detect_help_intent(text: str) -> bool:
     return any(re.search(p, t) for p in _HELP_PATTERNS)
 
 
-def handle_help() -> Dict:
+def handle_help(is_admin: bool = False) -> Dict:
     # Lees triggers + voeg vaste commands toe
     triggers = load_json(TRIGGERS_FILE, default={})
     trigger_keys = list(triggers.keys()) if isinstance(triggers, dict) else []
 
-    commands = [
+    # Basis commands voor iedereen
+    user_commands = [
         ("Vraag iets over een onderwerp", "bv. 'wat is fotosynthese?'"),
         ("Leer me een nieuw woord", "bv. 'voetenbank'"),
         ("Plan een afspraak", "bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'"),
@@ -203,12 +204,36 @@ def handle_help() -> Dict:
         ("Speech-to-Text (jij spreekt)", "bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'"),
         ("Text-to-Speech (Spark spreekt)", "bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'"),
         ("Achtergrondgeluid", "bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'"),
-        ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend' — ik onthoud relaties automatisch"),
-        ("Account verwijderen", "bv. 'verwijder mijn account' — ik vraag 2× bevestiging, backup bewaard 30 dagen"),
+        ("Relaties noteren", "bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'"),
+        ("Account verwijderen", "bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen"),
+        ("Wat is de privacy?", "bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'"),
+        ("Credits", "bv. 'credits' — wie heeft Spark mogelijk gemaakt"),
     ]
-    lines = ["Hier is wat ik kan:"]
-    for label, hint in commands:
-        lines.append(f"  • **{label}** — _{hint}_")
+
+    # Admin-extra (gradatie ≤ 2)
+    admin_commands = [
+        ("Beheer credits-lijst", "bv. 'voeg Nick Teeuwen toe aan de credits', 'verwijder X uit credits'"),
+        ("Wat zullen we doen? (admin)", "bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items"),
+        ("Bugs beheren", "via Beheer → Bug-melder; chat-meldingen lopen via Spark"),
+        ("Trigger/Vocab beheer", "via Spark AI → Triggers; alles editable"),
+        ("Backup/Restore", "via Beheer → Back-up (ZIP export/import, incl. cache flush)"),
+        ("Gradatie-upgrades", "automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)"),
+        ("Storage cache stats", "via Beheer dashboard 'Performance' kaart"),
+    ]
+
+    if is_admin:
+        lines = ["**Help voor jou (admin)**", "", "_Iedereen kan dit:_"]
+        for label, hint in user_commands:
+            lines.append(f"  • **{label}** — _{hint}_")
+        lines.append("")
+        lines.append("_Admin-extra:_")
+        for label, hint in admin_commands:
+            lines.append(f"  • **{label}** — _{hint}_")
+    else:
+        lines = ["Hier is wat ik kan:"]
+        for label, hint in user_commands:
+            lines.append(f"  • **{label}** — _{hint}_")
+
     if trigger_keys:
         sample = ", ".join(trigger_keys[:8])
         lines.append("")

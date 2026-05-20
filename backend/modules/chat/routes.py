@@ -380,11 +380,22 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "agenda_overview")
             return response
 
-        # Help
+        # Help (admin krijgt extra commands)
         if si.detect_help_intent(text):
-            out = si.handle_help()
+            u = _load_user() or {}
+            is_admin = (u.get("gradatie", 99) <= 2)
+            out = si.handle_help(is_admin=is_admin)
             response.update(out)
             _save_log(req, response, "help_overview")
+            return response
+
+        # Legal: privacy / cookies / voorwaarden
+        from . import legal_service as ls
+        legal_kind = ls.detect_legal_intent(text)
+        if legal_kind:
+            out = ls.handle_legal(legal_kind)
+            response.update(out)
+            _save_log(req, response, out.get("type", "legal"))
             return response
 
         # Suggest "wat zullen we doen" — met dank-intent integratie

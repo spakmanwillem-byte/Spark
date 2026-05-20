@@ -17590,11 +17590,103 @@
         "session_id": "default",
         "gesprek_nummer": 664
       }
+    },
+    {
+      "id": "conv-35035f20",
+      "timestamp": "2026-05-20T10:46:30.797838+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Wat is de privacy?** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n\n_Admin-extra:_\n  • **Beheer credits-lijst** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verwijder X uit credits'_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 665
+      }
+    },
+    {
+      "id": "conv-03a1b425",
+      "timestamp": "2026-05-20T10:46:31.107367+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is de privacy beschrijving",
+      "spark_response": "🔒 **Privacy Beschrijving** _(versie 0.1-draft)_\n\nSpark draait standalone op een lokale server. Geen cloud, geen tracking. Wat jij deelt blijft bij jou.\n\n**Wat slaat Spark op?**\n  • Je profielgegevens (alleen wat je zelf invult)\n  • Gesprekken met Spark (alleen op jouw eigen apparaat/server)\n  • Notities, agenda, dagboek (uitsluitend voor jou)\n  • Shadow profile — wat Spark leert uit gesprekken (jij ziet wat hij ziet)\n\n**Wat deelt Spark NIET?**\n  • Niets met externe servers tenzij je een integratie expliciet aanzet (bv. Bitvavo voor trading)\n  • Geen advertenties, geen analytics, geen tracking\n  • Privé-gesprekken zijn écht privé — alleen jij en de andere user zien ze\n\n**Jouw rechten**\n  • Account verwijderen — via chat: 'verwijder mijn account'. Backup 30 dagen bewaard, daarna definitief weg.\n  • Data exporteren — via Beheer → Back-up als ZIP\n  • Spark vergeten — alle Spark-observaties over jou wissen op verzoek\n\n_Voor vragen over privacy: contact via Spark zelf of admin (Willem)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "legal_privacy",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "legal_privacy"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 666
+      }
+    },
+    {
+      "id": "conv-fc57e3e8",
+      "timestamp": "2026-05-20T10:46:31.233188+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat zijn de cookies",
+      "spark_response": "🍪 **Cookies & Opslag** _(versie 0.1-draft)_\n\nSpark gebruikt GEEN tracking-cookies. Wel zijn er enkele technische opslag-mechanismen die strikt nodig zijn voor de werking.\n\n**sessionStorage (browser, tijdelijk)**\n  · _Doel_: Chathistorie van huidige sessie\n  · _Duur_: Wist bij sluiten van tab/browser\n  · _Delen_: Niet gedeeld\n\n**localStorage (browser, blijvend)**\n  · _Doel_: Auth-sessie (user_id), ambient sound state, UI voorkeuren\n  · _Duur_: Tot logout of expliciete wis\n  · _Delen_: Niet gedeeld\n\n**Server-side JSON files**\n  · _Doel_: Permanente opslag van profielen, kennis, agenda, gesprekken\n  · _Duur_: Permanent (tot user account-verwijdering)\n  · _Delen_: Niet gedeeld — strictly local\n\n_Third-party_: Geen third-party cookies. Geen externe analytics. Geen advertentie-netwerken.\n\n_Vragen over cookies/opslag: via Spark zelf of admin._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "legal_cookies",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "legal_cookies"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 667
+      }
+    },
+    {
+      "id": "conv-82b45a17",
+      "timestamp": "2026-05-20T10:46:31.355305+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat zijn de voorwaarden",
+      "spark_response": "📜 **Gebruiksvoorwaarden** _(versie 0.1-draft)_\n\nDoor Spark te gebruiken ga je akkoord met deze voorwaarden. Spark is een persoonlijke AI in ontwikkeling — verwacht geen perfectie, wel groei.\n\n**Wat is Spark?**\nSpark is een offline-first persoonlijke AI-assistent. Geen cloud-LLM, maar een lokale memory- en kennis-machine die met je meegroeit.\n\n**Wat mag je verwachten?**\n  • Spark is in ontwikkeling — bugs kunnen voorkomen (meld ze via Bug-melder!)\n  • Antwoorden zijn gebaseerd op wat Spark weet — niet altijd correct\n  • Spark is geen medisch/juridisch/financieel advies — bij twijfel: vraag een expert\n\n**Wat mag Spark NIET gebruiken voor?**\n  • Spammen, beledigen, of haatberichten\n  • Illegale activiteiten\n  • Misbruik van andere users (bij privé-chat tussen users)\n\n**Account & gradaties**\n  • Iedereen start op gradatie 7 (Onbekend) — Spark leert je kennen\n  • Hogere gradatie = meer features beschikbaar. Groei is automatisch (profiel-completeness, trust, gedrag)\n  • Admin kan in extreme gevallen accounts deactiveren\n\n**Aansprakelijkheid**\nSpark wordt aangeboden 'as is'. Geen garanties. Gebruik op eigen risico. De maker (Willem Spakman / Roadkill Community) is niet aansprakelijk voor schade door (mis)gebruik.\n\n_Vragen of klachten: via Spark zelf of admin._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "legal_voorwaarden",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "legal_voorwaarden"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 668
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 664,
-    "last_updated": "2026-05-20T10:35:47.119155+00:00"
+    "total_conversations": 668,
+    "last_updated": "2026-05-20T10:46:31.355305+00:00"
   }
 }

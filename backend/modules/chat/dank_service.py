@@ -7,11 +7,17 @@ Storage: /app/backend/data/system/dank.json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from modules.core.storage import load_json, save_json
 
 DANK_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "dank.json"
+USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+
+# Credits bonus voor users die in de bedank-lijst staan EN gradatie ≤ 4
+CREDITS_GRADATIE_MAX = 4
+CREDITS_TRUST_BOOST = 10        # one-time, opgeteld bij trust_score (max 100)
+CREDITS_TRUST_MULTIPLIER = 1.2  # toekomstige trust-gains × 1.2
 
 
 # ============================================================
@@ -169,6 +175,74 @@ def _build_thanks_message(reason: str = "free_choice") -> str:
 
 
 # ============================================================
+# CREDITS BONUS — match namen met users, gradatie ≤ 4
+# ============================================================
+
+def _normalize_name(s: str) -> str:
+    return " ".join((s or "").lower().split())
+
+
+def sync_credits_bonus() -> Dict:
+    """Loop alle namen in dank.json door; voor elke naam met spatie (voor+achternaam)
+    die matcht met een user.volledige_naam EN gradatie ≤ CREDITS_GRADATIE_MAX:
+      - zet credits_bonus=True (idempotent)
+      - zet credits_multiplier=1.2
+      - geef one-time +CREDITS_TRUST_BOOST trust (capped 100)
+      - markeer credits_bonus_applied_at
+    Return: {applied: [...], skipped: [...]}
+    """
+    d = _load()
+    namen = d.get("namen", []) or []
+    # Alleen full names (met spatie) kunnen uniek matchen
+    full_names = {_normalize_name(n) for n in namen if " " in n.strip()}
+
+    users_data = load_json(USERS_FILE, default={"users": []})
+    users = users_data.get("users", [])
+
+    applied: List[Dict] = []
+    skipped: List[Dict] = []
+    changed = False
+
+    for u in users:
+        full = _normalize_name(u.get("volledige_naam", ""))
+        if not full or full not in full_names:
+            continue
+        grad = u.get("gradatie", 99)
+        if grad > CREDITS_GRADATIE_MAX:
+            skipped.append({"id": u.get("id"), "naam": u.get("naam"), "reden": f"gradatie {grad} > {CREDITS_GRADATIE_MAX}"})
+            continue
+        if u.get("credits_bonus"):
+            continue  # already bonused
+        # Apply bonus
+        u["credits_bonus"] = True
+        u["credits_multiplier"] = CREDITS_TRUST_MULTIPLIER
+        u["credits_bonus_applied_at"] = datetime.now(timezone.utc).isoformat()
+        old_trust = u.get("trust_score", 0) or 0
+        new_trust = min(old_trust + CREDITS_TRUST_BOOST, 100)
+        u["trust_score"] = new_trust
+        applied.append({
+            "id": u.get("id"), "naam": u.get("naam"), "gradatie": grad,
+            "trust_gain": new_trust - old_trust, "multiplier": CREDITS_TRUST_MULTIPLIER,
+        })
+        changed = True
+
+    if changed:
+        save_json(USERS_FILE, users_data)
+    return {"applied": applied, "skipped": skipped}
+
+
+def _bonus_summary_line(result: Dict) -> str:
+    """Korte natuurlijke vermelding van toegepaste bonussen."""
+    applied = result.get("applied") or []
+    if not applied:
+        return ""
+    names = [a["naam"] for a in applied]
+    if len(names) == 1:
+        return f"\n\n💛 _Ik herken **{names[0]}** in deze lijst — kleine trust-boost en multiplier (×{CREDITS_TRUST_MULTIPLIER}) toegekend._"
+    return f"\n\n💛 _Ik herken **{', '.join(names)}** in deze lijst — elk een trust-boost en multiplier (×{CREDITS_TRUST_MULTIPLIER})._"
+
+
+# ============================================================
 # HANDLERS
 # ============================================================
 
@@ -208,9 +282,11 @@ def handle_credits_edit(edit: Dict[str, str]) -> Dict:
         namen[idx] = new
         d["namen"] = namen
         save_json(DANK_FILE, d)
+        bonus = sync_credits_bonus()
         return {"type": "credits_edit_ok",
-                "message": f"Klaar — **{old}** is nu **{new}** in de credits.\n\nNieuwe lijst: {_format_namen(namen)}.",
-                "response_type": "credits_edit_ok"}
+                "message": f"Klaar — **{old}** is nu **{new}** in de credits.\n\nNieuwe lijst: {_format_namen(namen)}." + _bonus_summary_line(bonus),
+                "response_type": "credits_edit_ok",
+                "bonus": bonus}
 
     if action == "remove":
         name = edit["name"]
@@ -236,9 +312,11 @@ def handle_credits_edit(edit: Dict[str, str]) -> Dict:
         namen.append(name)
         d["namen"] = namen
         save_json(DANK_FILE, d)
+        bonus = sync_credits_bonus()
         return {"type": "credits_edit_ok",
-                "message": f"**{name}** toegevoegd aan credits.\n\nNieuwe lijst: {_format_namen(namen)}.",
-                "response_type": "credits_edit_ok"}
+                "message": f"**{name}** toegevoegd aan credits.\n\nNieuwe lijst: {_format_namen(namen)}." + _bonus_summary_line(bonus),
+                "response_type": "credits_edit_ok",
+                "bonus": bonus}
 
     return {"type": "credits_edit_fail", "message": "Ik snap de bewerking niet.", "response_type": "credits_edit_fail"}
 

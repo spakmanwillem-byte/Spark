@@ -12,6 +12,17 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_dank_004 — Credits bonus voor herkende users**:
+  - Naam in dank.json `namen[]` met spatie (voor+achternaam) wordt gematcht tegen `users.json[].volledige_naam` (case-insensitive)
+  - Match + gradatie ≤ 4 → user krijgt:
+    - `credits_bonus: true` (flag, idempotent)
+    - `credits_multiplier: 1.2` (toekomstige trust-gains × 1.2 via `_trust_carry` accumulator)
+    - One-time `trust_score +10` (capped 100)
+    - Timestamp `credits_bonus_applied_at`
+  - Auto-sync na elke rename/add in credits (via chat of Triggers UI). Spark vermeldt herkenning in chat-bericht.
+  - Admin endpoints: `GET /api/admin/credits-bonus` (status) + `POST /api/admin/credits-bonus/sync` (handmatig)
+  - `update_activity` gebruikt nu `credits_multiplier` met fractional carry (1.2 = +1 met 0.2 carry, na 5× +6 totaal)
+  - Getest: Heidi Spakman (grad 3) toegevoegd → +10 trust, mult 1.2 ✓
 - 2026-05-20: **v4_dank_003 — Credits edit via chat**:
   - Spark verstaat in chat (mits scope-keyword `credits|bedank|dank` in zin):
     - **rename**: _"verander Nick naar Nick Teeuwen in de credits"_, _"wijzig Lotus Martens naar Lotus in bedanklijst"_, _"pas Nick aan naar Nick Teeuwen in credits"_

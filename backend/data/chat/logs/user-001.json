@@ -17499,11 +17499,102 @@
         "session_id": "default",
         "gesprek_nummer": 661
       }
+    },
+    {
+      "id": "conv-07799813",
+      "timestamp": "2026-05-20T10:35:17.764919+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verander Nick naar Nick Teeuwen in de credits",
+      "spark_response": "Er staan 2 keer **Nick** in de lijst (Nick (#2), Nick (#3)). Welke moet **Nick Teeuwen** worden? Zeg bv. _\"de eerste\"_ of _\"die zonder achternaam\"_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_clarify",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "credits_edit_clarify"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 662
+      }
+    },
+    {
+      "id": "conv-7a1f1ab7",
+      "timestamp": "2026-05-20T10:35:32.732905+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "voeg Heidi Spakman toe aan de credits",
+      "spark_response": "**Heidi Spakman** toegevoegd aan credits.\n\nNieuwe lijst: Maurice, Nick ×2, Heidi, Ron, Arent, Lotus Martens en Heidi Spakman.\n\n💛 _Ik herken **Heidi** in deze lijst — kleine trust-boost en multiplier (×1.2) toegekend._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "credits_edit_ok",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "credits_edit_ok"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 663
+      }
+    },
+    {
+      "id": "conv-ee4e9637",
+      "timestamp": "2026-05-20T10:35:47.119155+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder Heidi Spakman uit de credits",
+      "spark_response": "**Heidi Spakman** verwijderd uit credits.\n\nNieuwe lijst: Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "credits_edit_ok",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "credits_edit_ok"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 664
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 661,
-    "last_updated": "2026-05-20T10:28:23.502308+00:00"
+    "total_conversations": 664,
+    "last_updated": "2026-05-20T10:35:47.119155+00:00"
   }
 }

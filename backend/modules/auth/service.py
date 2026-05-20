@@ -180,7 +180,13 @@ class AuthService:
             if user.get("id") == user_id:
                 user["last_active"] = datetime.utcnow().isoformat()
                 user["gesprekken_count"] = user.get("gesprekken_count", 0) + 1
-                user["trust_score"] = min(user.get("trust_score", 0) + 1, 100)
+                # Credits bonus multiplier (v4_dank_004) — users in bedank-lijst krijgen sneller trust
+                mult = user.get("credits_multiplier", 1.0) or 1.0
+                # +1 base, multiplied by credits_multiplier (rounded — but keep float carry)
+                user["_trust_carry"] = (user.get("_trust_carry", 0) or 0) + mult
+                gain = int(user["_trust_carry"])
+                user["_trust_carry"] = user["_trust_carry"] - gain
+                user["trust_score"] = min(user.get("trust_score", 0) + gain, 100)
                 return AuthService._save_users(users)
         
         return False

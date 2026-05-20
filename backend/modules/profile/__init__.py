@@ -308,3 +308,33 @@ async def storage_cache_clear():
     from modules.core.storage import clear_cache
     clear_cache()
     return {"success": True, "message": "Cache leeggemaakt"}
+
+
+# v4_dank_004 — Credits bonus sync (admin)
+@router.get("/admin/credits-bonus")
+async def credits_bonus_status():
+    """Status van credits-bonus per user."""
+    from modules.chat.dank_service import sync_credits_bonus
+    from modules.core.storage import load_json as _lj
+    from pathlib import Path as _P
+    users = _lj(_P("/app/backend/data/system/users.json"), default={"users": []}).get("users", [])
+    bonused = [
+        {
+            "id": u.get("id"), "naam": u.get("naam"),
+            "volledige_naam": u.get("volledige_naam"),
+            "gradatie": u.get("gradatie"),
+            "trust_score": u.get("trust_score"),
+            "multiplier": u.get("credits_multiplier"),
+            "applied_at": u.get("credits_bonus_applied_at"),
+        }
+        for u in users if u.get("credits_bonus")
+    ]
+    return {"success": True, "bonused_users": bonused, "count": len(bonused)}
+
+
+@router.post("/admin/credits-bonus/sync")
+async def credits_bonus_sync():
+    """Re-run de match: nieuwe namen → users met gradatie ≤ 4 krijgen bonus."""
+    from modules.chat.dank_service import sync_credits_bonus
+    result = sync_credits_bonus()
+    return {"success": True, **result}

@@ -35,6 +35,7 @@ class TraderSettings(BaseModel):
 class MonitorStartRequest(BaseModel):
     interval: Optional[int] = 60
     market: Optional[str] = "BCH-EUR"
+    markets: Optional[List[str]] = None   # v4_multi_market_001: lijst van coins ipv enkele
     candle_interval: Optional[str] = "1h"
     user_id: Optional[str] = "user-001"
     auto_trade: Optional[bool] = False
@@ -469,6 +470,7 @@ async def monitor_start(req: MonitorStartRequest = MonitorStartRequest()):
     return monitor.start(
         interval=req.interval,
         market=req.market,
+        markets=req.markets,
         candle_interval=req.candle_interval,
         user_id=req.user_id,
         auto_trade=req.auto_trade,

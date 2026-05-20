@@ -34,9 +34,26 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data"
 SETTINGS_DIR = DATA_DIR / "users"
 MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 
+# v4_multi_market_001: candle cache → vermijdt Bitvavo rate-limit bij multi-coin monitoring.
+# Per (market, interval, limit) bewaar laatst-opgehaalde candles + timestamp.
+# Cache wordt vers gehouden door candle-interval seconden te respecteren.
+_CANDLE_CACHE: Dict[str, Dict] = {}
+_INTERVAL_SECONDS = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400, "1d": 86400}
+
+
+def _cache_ttl(interval: str) -> int:
+    """Cache TTL = candle-interval (in seconden). Pas vernieuwen als nieuwe candle verwacht."""
+    return _INTERVAL_SECONDS.get(interval, 300)
+
 
 def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Dict]:
-    """Fetch candles from Bitvavo public API (no auth needed)"""
+    """Fetch candles from Bitvavo public API met TTL-cache.
+    Cache key: (market, interval, limit). Vernieuwing pas na candle-interval seconden."""
+    cache_key = f"{market}:{interval}:{limit}"
+    now = time.time()
+    cached = _CANDLE_CACHE.get(cache_key)
+    if cached and (now - cached["ts"]) < _cache_ttl(interval):
+        return cached["candles"]
     try:
         url = f"{BITVAVO_URL}/{market}/candles?interval={interval}&limit={limit}"
         resp = requests.get(url, timeout=10)
@@ -53,9 +70,16 @@ def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Di
                         "close": float(c[4]),
                         "volume": float(c[5]),
                     })
+            _CANDLE_CACHE[cache_key] = {"candles": candles, "ts": now}
             return candles
+        # Op rate-limit (429) of andere fout: return laatst-bekende cache als die er is
+        if cached:
+            logger.warning(f"Candle fetch HTTP {resp.status_code} voor {market}, gebruik cache ({len(cached['candles'])} candles)")
+            return cached["candles"]
     except Exception as e:
-        logger.error(f"Candle fetch error: {e}")
+        logger.error(f"Candle fetch error {market}: {e}")
+        if cached:
+            return cached["candles"]
     return []
 
 
@@ -491,11 +515,13 @@ class MonitorService:
         self._start_time = None
         self._cycles = 0
         self._interval = 60
-        self._market = "BCH-EUR"
+        self._market = "BCH-EUR"          # primair (voor status display)
+        self._markets = ["BCH-EUR"]       # v4_multi_market_001: lijst van te monitoren coins
         self._candle_interval = "1h"
         self._user_id = "user-001"
         self._decisions = []
         self._last_price = 0
+        self._last_prices = {}            # v4_multi_market_001: laatste prijs per market
         self._auto_trade = False
         self._trade_amount = 5.0
         self._use_mock = True
@@ -507,12 +533,18 @@ class MonitorService:
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: str = "user-001",
               auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = True,
-              use_potjes: bool = False) -> Dict:
+              use_potjes: bool = False, markets: Optional[List[str]] = None) -> Dict:
         with self._lock:
             if self._running:
                 return {"success": False, "message": "Monitor draait al", "status": self.get_status()}
             self._interval = max(10, min(interval, 86400))
-            self._market = market
+            # v4_multi_market_001: `markets` (lijst) heeft voorrang op `market` (string)
+            if markets:
+                clean = [m.strip().upper() for m in markets if isinstance(m, str) and m.strip()]
+                self._markets = clean if clean else [market]
+            else:
+                self._markets = [market]
+            self._market = self._markets[0]   # primair = eerste voor status display
             self._candle_interval = candle_interval
             self._user_id = user_id
             self._auto_trade = auto_trade
@@ -525,11 +557,13 @@ class MonitorService:
             self._start_time = datetime.now(timezone.utc)
             self._cycles = 0
             self._decisions = []
+            self._last_prices = {}
             self._thread = threading.Thread(target=self._loop, daemon=True)
             self._thread.start()
             self._persist_state()
             mode = "10-potjes" if use_potjes else "single"
-            return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode)", "status": self.get_status()}
+            coin_label = ", ".join(self._markets) if len(self._markets) > 1 else self._markets[0]
+            return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode, {coin_label})", "status": self.get_status()}
 
     def _persist_state(self):
         """Save monitor config to disk for auto-resume after restart."""
@@ -539,6 +573,7 @@ class MonitorService:
                 "running": self._running,
                 "interval": self._interval,
                 "market": self._market,
+                "markets": self._markets,
                 "candle_interval": self._candle_interval,
                 "user_id": self._user_id,
                 "auto_trade": self._auto_trade,
@@ -570,6 +605,7 @@ class MonitorService:
                 trade_amount=state["trade_amount"],
                 use_mock=state["use_mock"],
                 use_potjes=state.get("use_potjes", False),
+                markets=state.get("markets"),
             )
             logger.info(f"Monitor auto-resumed: {state['market']} {state['candle_interval']} potjes={state.get('use_potjes')}")
             return {"resumed": True, "status": result}
@@ -609,11 +645,13 @@ class MonitorService:
             "interval": self._interval,
             "candle_interval": self._candle_interval,
             "market": self._market,
+            "markets": list(self._markets),
             "user_id": self._user_id,
             "auto_trade": self._auto_trade,
             "trade_amount": self._trade_amount,
             "use_mock": self._use_mock,
             "last_price": self._last_price,
+            "last_prices": dict(self._last_prices),
             "start_time": self._start_time.isoformat() if self._start_time else None,
             "uptime_seconds": uptime,
             "thread_alive": self._thread.is_alive() if self._thread else False,
@@ -625,9 +663,16 @@ class MonitorService:
         return list(reversed(self._decisions[-limit:]))
 
     def _loop(self):
-        logger.info(f"Monitor loop started: {self._market} ({self._candle_interval})")
-        context_candles = fetch_candles(self._market, self._candle_interval, 50)
-        logger.info(f"Pre-loaded {len(context_candles)} context candles")
+        logger.info(f"Monitor loop started: markets={self._markets} ({self._candle_interval})")
+        # v4_multi_market_001: context-candles per market apart bijhouden (TTL-cache in fetch_candles)
+        context_per_market: Dict[str, List[Dict]] = {}
+        for mkt in self._markets:
+            try:
+                context_per_market[mkt] = fetch_candles(mkt, self._candle_interval, 50)
+                logger.info(f"Pre-loaded {len(context_per_market[mkt])} candles for {mkt}")
+            except Exception as e:
+                logger.error(f"Initial candle fetch failed for {mkt}: {e}")
+                context_per_market[mkt] = []
 
         while not self._stop_event.is_set():
             if self._paused:
@@ -635,129 +680,20 @@ class MonitorService:
                 continue
 
             self._cycles += 1
+            # v4_multi_market_001: één ticker-call voor ALLE markten samen (anti-rate-limit)
             try:
-                new_candles = fetch_candles(self._market, self._candle_interval, 1)
-                if new_candles:
-                    latest = new_candles[0]
-                    self._last_price = latest["close"]
-
-                    if context_candles and context_candles[-1]["timestamp"] != latest["timestamp"]:
-                        context_candles.append(latest)
-                        if len(context_candles) > 50:
-                            context_candles.pop(0)
-
-                    if self._use_potjes:
-                        # 10-Potjes mode: check open positions eerst voor SELL,
-                        # dan BUY voor MAX 1 potje per cycle
-                        from modules.trade import potjes as potjes_svc
-                        from modules.trade import context_service
-                        # Haal context uit cache (leermodule weegt confidence)
-                        market_context = context_service.get_cached(self._market)
-                        user_potjes = potjes_svc.get_potjes(self._user_id)
-                        price = latest["close"]
-                        actions_this_cycle = []
-
-                        # 1. Voor elke open potje: check of trailing stop moet triggeren
-                        for pot in user_potjes["potjes"]:
-                            if not pot["position"]["is_open"]:
-                                continue
-                            potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
-                            pos = pot["position"]
-                            entry = pos["entry_price"]
-                            highest = max(pos.get("highest_price", entry), price)
-                            profit_pct = (price - entry) / entry
-                            bruto = pot["capital"] * profit_pct
-                            fees = pot["capital"] * BITVAVO_TAKER_FEE * 2
-                            netto = bruto - fees
-                            trailing_active = pos.get("trailing_active", False) or profit_pct >= 0.01
-                            drop_from_high = (highest - price) / highest if highest else 0
-
-                            if trailing_active and drop_from_high >= 0.004 and netto >= 0.01:
-                                # SELL deze potje
-                                if self._auto_trade:
-                                    if self._use_mock:
-                                        result = execute_mock_trade(self._user_id, self._market, "SELL", pot["capital"])
-                                    else:
-                                        result = execute_real_trade(self._user_id, self._market, "SELL", pot["capital"])
-                                    if result.get("success"):
-                                        close_result = potjes_svc.close_pot(self._user_id, pot["id"], price)
-                                        actions_this_cycle.append(f"SELL {pot['id']} @ €{price:.2f} netto €{close_result.get('netto', 0):+.3f}")
-
-                        # 2. Check BUY: alleen 1 potje per cycle
-                        buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
-                        # Pas leermodule context toe op BUY decision
-                        if market_context:
-                            buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
-                        if buy_decision["action"] == "BUY":
-                            available = potjes_svc.get_available_pot(self._user_id, self._cycles)
-                            if available and self._auto_trade:
-                                if self._use_mock:
-                                    result = execute_mock_trade(self._user_id, self._market, "BUY", available["capital"])
-                                else:
-                                    result = execute_real_trade(self._user_id, self._market, "BUY", available["capital"])
-                                if result.get("success"):
-                                    potjes_svc.open_pot(
-                                        self._user_id, available["id"], price, self._cycles,
-                                        trade_id=result.get("trade", {}).get("trade_id"),
-                                        amount_eur=available.get("capital"),
-                                        market=self._market,
-                                    )
-                                    actions_this_cycle.append(f"BUY {available['id']} @ €{price:.2f}")
-                            elif not available:
-                                buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"
-
-                        decision = buy_decision
-                        decision["cycle"] = self._cycles
-                        decision["timestamp"] = datetime.now(timezone.utc).isoformat()
-                        decision["executed"] = len(actions_this_cycle) > 0
-                        decision["execution"] = " | ".join(actions_this_cycle) if actions_this_cycle else ""
-                        decision["potjes_summary"] = potjes_svc.get_summary(self._user_id)
-                    else:
-                        from modules.trade import context_service
-                        market_context = context_service.get_cached(self._market)
-                        decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
-                        # Apply leermodule context
-                        if market_context:
-                            decision = context_service.apply_context_to_decision(decision, market_context, latest["close"])
-                        decision["cycle"] = self._cycles
-                        decision["timestamp"] = datetime.now(timezone.utc).isoformat()
-                        decision["executed"] = False
-
-                        # Apply position state updates from decision
-                        pos_update = decision.get("position_update", {})
-                        if pos_update.get("close"):
-                            pass
-                        elif pos_update.get("highest_price") is not None:
-                            self._position["highest_price"] = pos_update["highest_price"]
-                            self._position["trailing_active"] = pos_update.get("trailing_active", self._position.get("trailing_active", False))
-
-                        # Auto trade (single-position mode)
-                        if self._auto_trade and decision["action"] in ("BUY", "SELL"):
-                            can_execute = (decision["action"] == "BUY" and not self._position["is_open"]) or \
-                                          (decision["action"] == "SELL" and self._position["is_open"])
-                            if can_execute:
-                                if self._use_mock:
-                                    result = execute_mock_trade(self._user_id, self._market, decision["action"], self._trade_amount)
-                                else:
-                                    result = execute_real_trade(self._user_id, self._market, decision["action"], self._trade_amount)
-                                decision["executed"] = result.get("success", False)
-                                decision["execution"] = result.get("message", "")
-                                if decision["executed"]:
-                                    if decision["action"] == "BUY":
-                                        self._position = {"is_open": True, "entry_price": decision.get("price", self._last_price), "highest_price": decision.get("price", self._last_price), "trailing_active": False}
-                                    else:
-                                        self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
-                            else:
-                                decision["execution"] = f"Skipped: {'al in positie' if decision['action'] == 'BUY' else 'geen open positie'}"
-
-                    self._decisions.append(decision)
-                    if len(self._decisions) > 200:
-                        self._decisions.pop(0)
-
-                    logger.info(f"Cycle #{self._cycles} | {self._market} €{self._last_price:.2f} | {decision['action']}")
-
+                base_symbols = [m.split("-")[0] for m in self._markets]
+                ticker_data = fetch_tickers(base_symbols)
+                price_by_market = {t["market"]: t["last"] for t in ticker_data}
             except Exception as e:
-                logger.error(f"Monitor cycle error: {e}")
+                logger.error(f"Ticker fetch error: {e}")
+                price_by_market = {}
+
+            for mkt in list(self._markets):
+                try:
+                    self._run_market_cycle(mkt, context_per_market, price_by_market.get(mkt))
+                except Exception as e:
+                    logger.error(f"Monitor cycle error ({mkt}): {e}")
 
             elapsed = 0
             while elapsed < self._interval and not self._stop_event.is_set():
@@ -765,6 +701,126 @@ class MonitorService:
                 elapsed += 1
 
         logger.info("Monitor loop stopped")
+
+    def _run_market_cycle(self, market: str, context_per_market: Dict[str, List[Dict]], live_price: Optional[float] = None):
+        """v4_multi_market_001: één cycle voor één market. Live prijs uit gedeelde ticker-call.
+        Candles enkel ververst als TTL verstreken (zie fetch_candles cache)."""
+        # Context candles: gebruik cache uit fetch_candles (TTL = candle-interval seconden)
+        context_candles = fetch_candles(market, self._candle_interval, 50)
+        context_per_market[market] = context_candles
+        if not context_candles:
+            return
+
+        price = live_price if live_price is not None else context_candles[-1]["close"]
+        self._last_price = price
+        self._last_prices[market] = price
+
+        if self._use_potjes:
+            from modules.trade import potjes as potjes_svc
+            from modules.trade import context_service
+            market_context = context_service.get_cached(market)
+            user_potjes = potjes_svc.get_potjes(self._user_id)
+            actions_this_cycle = []
+
+            # 1. Voor elke open potje OP DEZE MARKET: check trailing-stop SELL
+            for pot in user_potjes["potjes"]:
+                if not pot["position"]["is_open"]:
+                    continue
+                if pot.get("market") != market:
+                    continue  # andere coin, niet onze price
+                potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
+                pos = pot["position"]
+                entry = pos["entry_price"]
+                highest = max(pos.get("highest_price", entry), price)
+                profit_pct = (price - entry) / entry
+                bruto = pot["capital"] * profit_pct
+                fees = pot["capital"] * BITVAVO_TAKER_FEE * 2
+                netto = bruto - fees
+                trailing_active = pos.get("trailing_active", False) or profit_pct >= 0.01
+                drop_from_high = (highest - price) / highest if highest else 0
+
+                if trailing_active and drop_from_high >= 0.004 and netto >= 0.01:
+                    if self._auto_trade:
+                        if self._use_mock:
+                            result = execute_mock_trade(self._user_id, market, "SELL", pot["capital"])
+                        else:
+                            result = execute_real_trade(self._user_id, market, "SELL", pot["capital"])
+                        if result.get("success"):
+                            close_result = potjes_svc.close_pot(self._user_id, pot["id"], price)
+                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{price:.2f} netto €{close_result.get('netto', 0):+.3f}")
+
+            # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
+            buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
+            if market_context:
+                buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
+            if buy_decision["action"] == "BUY":
+                available = potjes_svc.get_available_pot(self._user_id, self._cycles)
+                if available and self._auto_trade:
+                    if self._use_mock:
+                        result = execute_mock_trade(self._user_id, market, "BUY", available["capital"])
+                    else:
+                        result = execute_real_trade(self._user_id, market, "BUY", available["capital"])
+                    if result.get("success"):
+                        potjes_svc.open_pot(
+                            self._user_id, available["id"], price, self._cycles,
+                            trade_id=result.get("trade", {}).get("trade_id"),
+                            amount_eur=available.get("capital"),
+                            market=market,
+                        )
+                        actions_this_cycle.append(f"BUY {available['id']} ({market}) @ €{price:.2f}")
+                elif not available:
+                    buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"
+
+            decision = buy_decision
+            decision["market"] = market
+            decision["cycle"] = self._cycles
+            decision["timestamp"] = datetime.now(timezone.utc).isoformat()
+            decision["executed"] = len(actions_this_cycle) > 0
+            decision["execution"] = " | ".join(actions_this_cycle) if actions_this_cycle else ""
+            decision["potjes_summary"] = potjes_svc.get_summary(self._user_id)
+        else:
+            from modules.trade import context_service
+            market_context = context_service.get_cached(market)
+            decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
+            if market_context:
+                decision = context_service.apply_context_to_decision(decision, market_context, price)
+            decision["market"] = market
+            decision["cycle"] = self._cycles
+            decision["timestamp"] = datetime.now(timezone.utc).isoformat()
+            decision["executed"] = False
+
+            # Apply position state updates from decision
+            pos_update = decision.get("position_update", {})
+            if pos_update.get("close"):
+                pass
+            elif pos_update.get("highest_price") is not None:
+                self._position["highest_price"] = pos_update["highest_price"]
+                self._position["trailing_active"] = pos_update.get("trailing_active", self._position.get("trailing_active", False))
+
+            # Auto trade (single-position mode) — alleen primaire market
+            if self._auto_trade and decision["action"] in ("BUY", "SELL") and market == self._market:
+                can_execute = (decision["action"] == "BUY" and not self._position["is_open"]) or \
+                              (decision["action"] == "SELL" and self._position["is_open"])
+                if can_execute:
+                    if self._use_mock:
+                        result = execute_mock_trade(self._user_id, market, decision["action"], self._trade_amount)
+                    else:
+                        result = execute_real_trade(self._user_id, market, decision["action"], self._trade_amount)
+                    decision["executed"] = result.get("success", False)
+                    decision["execution"] = result.get("message", "")
+                    if decision["executed"]:
+                        if decision["action"] == "BUY":
+                            self._position = {"is_open": True, "entry_price": price, "highest_price": price, "trailing_active": False}
+                        else:
+                            self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
+                else:
+                    decision["execution"] = f"Skipped: {'al in positie' if decision['action'] == 'BUY' else 'geen open positie'}"
+
+        self._decisions.append(decision)
+        if len(self._decisions) > 200:
+            self._decisions.pop(0)
+
+        logger.info(f"Cycle #{self._cycles} | {market} €{price:.2f} | {decision['action']}")
 
 
 _monitor = MonitorService()

@@ -12,6 +12,17 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_multi_market_001 — Multi-coin monitor + UI sync fixes**:
+  - **Bug fix**: chart-label was hardcoded "BCH-EUR", staat nu dynamisch op `{candleMarket}`. Klik op watchlist-coin → chart switcht direct (`setCandleMarket` toegevoegd aan `onClick`)
+  - **Bug fix**: Snelhandel "Live prijs" toonde altijd `tickers[0]` (= BCH), volgt nu `qtMarket` via `tickers.find(x => x.market === qtMarket)`
+  - **Multi-coin monitor**:
+    - `MonitorService.start()` accepteert nieuw `markets: List[str]` param (legacy `market: str` blijft werken als 1-element)
+    - `_loop()` herschreven: per cycle één ticker-call voor àlle coins (`fetch_tickers(base_symbols)`) + per market een `_run_market_cycle()`. SELL/BUY checks per market, pot.market koppeling voor selectief sluiten
+    - Status response heeft nu `markets: []` + `last_prices: {market: price}` velden
+    - Persist state slaat markets-lijst op zodat auto-resume na backend-restart werkt
+  - **Candle TTL-cache** in `fetch_candles()`: per (market, interval, limit) bewaart laatste fetch + TTL = candle-interval seconden. Bij rate-limit (429) returnt stale cache. Voorkomt Bitvavo ban bij multi-coin monitor
+  - **Frontend**: coin-picker in Monitor-paneel (BCH/BTC/ETH/SOL/ADA toggle), status-bar toont alle actieve markets, beslissingen-lijst toont coin-tag per beslissing
+  - Bekend: tijdens ontwikkelen hebben we Bitvavo rate-limit ban opgelopen (~12 min). Cache + shared-ticker-fix voorkomt herhaling
 - 2026-05-20: **v4_token_potje_001 — Token-economie ↔ trading sync + schone reset**:
   - **Reset user-001**: 11 BCH-potjes (€66,42 capital) vervangen door schone start. Backup in `user_potjes.json.bak_pre_reset.json`
   - Nieuwe state: 10 potjes à €5,08 (basis €50,80) + overflow_pool €45,88 = **totaal €101,60** (matcht nieuwe Bitvavo EUR-saldo)

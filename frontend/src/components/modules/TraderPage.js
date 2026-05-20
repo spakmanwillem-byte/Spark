@@ -46,6 +46,15 @@ export function TraderPage({ onNavigate }) {
   const [potjes, setPotjes] = useState(null);
   const [usePotjes, setUsePotjes] = useState(false);
 
+  // v4_multi_market_001: meerdere coins tegelijk monitoren
+  const [monitorMarkets, setMonitorMarkets] = useState(['BCH-EUR']);
+  const ALL_MARKETS = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR'];
+  const toggleMonitorMarket = (mkt) => {
+    setMonitorMarkets(prev => prev.includes(mkt)
+      ? (prev.length > 1 ? prev.filter(m => m !== mkt) : prev)  // min 1 coin
+      : [...prev, mkt]);
+  };
+
   // Leermodule - Market Context
   const [marketContext, setMarketContext] = useState(null);
   const [contextLoading, setContextLoading] = useState(false);
@@ -146,7 +155,10 @@ export function TraderPage({ onNavigate }) {
     await fetch(`${API}/api/trade/monitor/start`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        interval: 30, market: candleMarket, candle_interval: candleInterval,
+        interval: 30,
+        market: monitorMarkets[0] || candleMarket,
+        markets: monitorMarkets,
+        candle_interval: candleInterval,
         user_id: userId, auto_trade: settings.auto_trade || false,
         trade_amount: settings.trade_amount || 5, use_mock: settings.use_mock !== false,
         use_potjes: usePotjes,
@@ -299,7 +311,7 @@ export function TraderPage({ onNavigate }) {
                   <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <BarChart2 className="w-4 h-4 text-amber-400" />
-                      <span className="text-sm font-semibold text-white">BCH-EUR</span>
+                      <span className="text-sm font-semibold text-white" data-testid="chart-market-label">{candleMarket}</span>
                       {/* Countdown */}
                       <div data-testid="candle-countdown" className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">
                         <Timer className="w-3 h-3 text-amber-400" />
@@ -354,13 +366,37 @@ export function TraderPage({ onNavigate }) {
                     </div>
                   </div>
                   <div className="p-4">
+                    {/* v4_multi_market_001: coin-selectie voor monitor */}
+                    {!monitorStatus?.running && (
+                      <div className="mb-4 pb-3 border-b border-slate-800/50">
+                        <p className="text-[10px] text-slate-500 mb-2">Welke coins monitoren?</p>
+                        <div className="flex flex-wrap gap-1.5" data-testid="monitor-coin-picker">
+                          {ALL_MARKETS.map(mkt => {
+                            const sym = mkt.split('-')[0];
+                            const active = monitorMarkets.includes(mkt);
+                            return (
+                              <button key={mkt} data-testid={`monitor-coin-${sym}`}
+                                onClick={() => toggleMonitorMarket(mkt)}
+                                className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-colors ${active ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-slate-800 text-slate-500 hover:text-slate-300 border border-transparent'}`}>
+                                {sym}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        <p className="text-[9px] text-slate-600 mt-2">Candle interval: {candleInterval} (zelfde voor alle gekozen coins). Tip: 10-Potjes-modus + meerdere coins = Spark vist over alle markten.</p>
+                      </div>
+                    )}
                     {monitorStatus?.running ? (
                       <div className="space-y-3">
                         {/* Status bar */}
                         <div className="flex items-center gap-4 text-[10px] flex-wrap">
                           <span className="flex items-center gap-1 text-green-400"><span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Actief</span>
                           <span className="text-slate-400">Cyclus #{monitorStatus.cycles}</span>
-                          <span className="text-slate-400">{monitorStatus.market} ({monitorStatus.candle_interval})</span>
+                          <span className="text-slate-400">
+                            {Array.isArray(monitorStatus.markets) && monitorStatus.markets.length > 1
+                              ? `${monitorStatus.markets.join(' · ')} (${monitorStatus.candle_interval})`
+                              : `${monitorStatus.market} (${monitorStatus.candle_interval})`}
+                          </span>
                           <span className="text-slate-400">Prijs: €{monitorStatus.last_price?.toFixed(2)}</span>
                           {monitorStatus.auto_trade && <span className="text-amber-400">Auto-trade AAN</span>}
                           {monitorStatus.position?.is_open && (
@@ -378,6 +414,7 @@ export function TraderPage({ onNavigate }) {
                               <span className={`font-bold px-1.5 py-0.5 rounded ${d.action === 'BUY' ? 'bg-green-500/20 text-green-400' : d.action === 'SELL' ? 'bg-red-500/20 text-red-400' : 'bg-slate-700 text-slate-400'}`}>
                                 {d.action}
                               </span>
+                              {d.market && <span className="text-amber-400 text-[9px]">{d.market.split('-')[0]}</span>}
                               <span className="text-white">€{d.price?.toFixed(2)}</span>
                               <span className="text-slate-500 flex-1 truncate">{d.reason}</span>
                               {d.executed && <Zap className="w-3 h-3 text-amber-400" />}
@@ -589,7 +626,7 @@ export function TraderPage({ onNavigate }) {
                       const change = t.open > 0 ? ((t.last - t.open) / t.open * 100) : 0;
                       const isUp = change >= 0;
                       return (
-                        <button key={t.market} data-testid={`watch-${t.symbol}`} onClick={() => setQtMarket(t.market)}
+                        <button key={t.market} data-testid={`watch-${t.symbol}`} onClick={() => { setQtMarket(t.market); setCandleMarket(t.market); }}
                           className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors ${qtMarket === t.market ? 'bg-amber-500/10 border border-amber-500/20' : 'hover:bg-slate-800/50'}`}>
                           <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold">{t.symbol[0]}</div>
                           <div className="flex-1 text-left">
@@ -686,10 +723,13 @@ export function TraderPage({ onNavigate }) {
                 <div>
                   <label className="block text-xs text-slate-400 mb-2">Live prijs</label>
                   <div data-testid="quick-trade-price" className="py-3 px-4 bg-slate-800/60 border border-slate-700/60 rounded-xl text-sm">
-                    {tickers?.[0]?.last
-                      ? <span className="text-emerald-400 font-medium">€{Number(tickers[0].last).toFixed(2)}</span>
-                      : <span className="text-slate-500 text-xs">laden...</span>}
-                    <p className="text-[10px] text-slate-500 mt-0.5">moment van koop</p>
+                    {(() => {
+                      const t = tickers.find(x => x.market === qtMarket) || tickers[0];
+                      return t?.last
+                        ? <span className="text-emerald-400 font-medium">€{Number(t.last) < 1 ? Number(t.last).toFixed(5) : Number(t.last).toFixed(2)}</span>
+                        : <span className="text-slate-500 text-xs">laden...</span>;
+                    })()}
+                    <p className="text-[10px] text-slate-500 mt-0.5">moment van koop · {qtMarket}</p>
                   </div>
                 </div>
 

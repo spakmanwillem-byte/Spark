@@ -343,7 +343,38 @@ async def credits_bonus_sync():
     return {"success": True, **result}
 
 
-# v4_analytics_layer_001 — Echte module-inventaris voor LayerTab
+# v4_roadmap_archeo_001 — Detecteer orphan vX_xxx refs in code (niet in roadmap)
+@router.get("/admin/roadmap-archeology")
+async def roadmap_archeology():
+    """Scan code voor vX_xxx refs en vergelijk met roadmap items."""
+    import re as _re, subprocess as _sp
+    from pathlib import Path as _P
+    result = _sp.run(
+        ["grep", "-rho", "-E", "v[0-9]+_[a-z_0-9]{3,40}", "/app/backend/modules"],
+        capture_output=True, text=True, timeout=30,
+    )
+    code_refs = set()
+    for line in result.stdout.split("\n"):
+        m = _re.match(r"v\d+_[a-z_0-9]+", line.strip())
+        if m and 4 < len(m.group(0)) < 35:
+            code_refs.add(m.group(0))
+    roadmap = load_json(_P("/app/backend/data/system/roadmap.json"), default={})
+    rm_ids = set()
+    for v_data in roadmap.values():
+        if isinstance(v_data, dict):
+            for it in v_data.get("items", []) or []:
+                if isinstance(it, dict) and it.get("id"):
+                    rm_ids.add(it["id"])
+    orphans = sorted(code_refs - rm_ids)
+    unused = sorted(rm_ids - code_refs)
+    return {
+        "success": True,
+        "code_refs_count": len(code_refs),
+        "roadmap_ids_count": len(rm_ids),
+        "orphans_in_code_not_in_roadmap": orphans,
+        "in_roadmap_not_in_code": unused[:30],
+        "sync_percentage": round(100 * len(code_refs & rm_ids) / max(1, len(code_refs)), 1),
+    }
 @router.get("/admin/architecture")
 async def admin_architecture():
     """Scan /app/backend/modules en geef live overzicht van lagen + modules terug."""

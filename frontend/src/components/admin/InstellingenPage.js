@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { SystemArchive } from './SystemArchive';
+import { AvatarGallerySection } from './AvatarGallerySection';
 import {
   Settings, Monitor, Volume2, Link2, Sparkles, HelpCircle,
   Save, Shield, Clock, Bug, RefreshCw, Palette, Sun, Moon,
@@ -192,6 +193,13 @@ export function InstellingenPage({ onNavigate }) {
                   <InfoRow label="Positie" value="Links (vast)" />
                   <InfoRow label="Inklapbaar" value="Ja" />
                   <InfoRow label="Secties" value="Workspace, Spark AI, Modules, Beheer" />
+                </SettingsCard>
+
+                <SettingsCard title="Avatar Galerij" icon={Palette} accent="#a855f7">
+                  <p className="text-xs text-slate-400 mb-3">
+                    Voorbeeld-avatars die <span className="text-purple-300">alle users</span> kunnen kiezen als profielfoto. Eigen user-portretten worden apart opgeslagen en zijn alleen voor het eigen profiel.
+                  </p>
+                  <AvatarGallerySection adminId={userId} isAdmin={userGrad <= 2} />
                 </SettingsCard>
 
                 <SaveButton saving={saving} onClick={handleSave} />

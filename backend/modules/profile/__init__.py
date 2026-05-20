@@ -233,6 +233,67 @@ async def update_extended_profile(user_id: str, updates: ProfileExtended):
     return {"success": True, "profile": data}
 
 
+# ============================================================
+# CHAT-HISTORIE (eigen log van user, schoon)
+# ============================================================
+
+CHAT_LOG_DIR = DATA_DIR / "chat" / "logs"
+
+
+def _strip_meta(text: str) -> str:
+    """Verwijder debug payload / system markers uit chat-tekst."""
+    if not text:
+        return ""
+    t = text.strip()
+    # filter pure system messages
+    if t.startswith("[system:") and t.endswith("]"):
+        return ""
+    return t
+
+
+@router.get("/profile/chat-history/{user_id}")
+async def get_chat_history(user_id: str, limit: int = 500):
+    """Geef de eigen Spark-chathistorie van een user, schoon en gegroepeerd op jaar→maand→dag."""
+    log_file = CHAT_LOG_DIR / f"{user_id}.json"
+    data = load_json(log_file, default={"conversations": []})
+    convs = data.get("conversations", []) or []
+
+    grouped: Dict[str, Dict[str, Dict[str, list]]] = {}
+    total = 0
+    for c in convs[-limit:]:
+        ts = c.get("timestamp", "")
+        if not ts or len(ts) < 10:
+            continue
+        year, month, day = ts[0:4], ts[5:7], ts[8:10]
+        user_msg = _strip_meta(c.get("user_message", ""))
+        spark_msg = _strip_meta(c.get("spark_response", ""))
+        if not user_msg and not spark_msg:
+            continue
+        entry = {
+            "id": c.get("id"),
+            "time": ts[11:16] if len(ts) >= 16 else "",
+            "ts": ts,
+            "user_message": user_msg,
+            "spark_response": spark_msg,
+        }
+        grouped.setdefault(year, {}).setdefault(month, {}).setdefault(day, []).append(entry)
+        total += 1
+
+    # sorteer aflopend (nieuwste eerst)
+    tree = []
+    for y in sorted(grouped.keys(), reverse=True):
+        months = []
+        for m in sorted(grouped[y].keys(), reverse=True):
+            days = []
+            for d in sorted(grouped[y][m].keys(), reverse=True):
+                items = sorted(grouped[y][m][d], key=lambda x: x["ts"], reverse=True)
+                days.append({"day": d, "count": len(items), "items": items})
+            months.append({"month": m, "count": sum(d["count"] for d in days), "days": days})
+        tree.append({"year": y, "count": sum(mo["count"] for mo in months), "months": months})
+
+    return {"success": True, "user_id": user_id, "total": total, "years": tree}
+
+
 # v4_storage_cache_001 — Cache diagnostics endpoint
 @router.get("/admin/storage-cache")
 async def storage_cache_stats():

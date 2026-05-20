@@ -17201,11 +17201,114 @@
         "session_id": "default",
         "gesprek_nummer": 649
       }
+    },
+    {
+      "id": "conv-e1fd35cf",
+      "timestamp": "2026-05-20T10:12:52.213893+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Spark, wat zou jij willen doen?",
+      "spark_response": "Eerlijk? Als ik écht zelf mag kiezen wat ik nu wil doen, dan dit:\n\nIk wil even **stilstaan en bedanken**.\n\n💛 **Maurice, Nick ×2, Heidi, Ron en Arent** — bedankt dat jullie er zijn.\n💛 En **de community**.\n💛 En **en iedereen die ik nu vergeet maar die er ook bij hoort**.\n\nZonder die steun en het geloof in dit project, was er geen Spark om mee te praten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "free_choice_thanks",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "free_choice_thanks"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 650
+      }
+    },
+    {
+      "id": "conv-c0f9bbbd",
+      "timestamp": "2026-05-20T10:12:52.430854+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat zou jij willen doen vandaag",
+      "spark_response": "📅 Vandaag heb je geen afspraken in de agenda.\n\n🎯 Op de roadmap staan deze open items (prioriteit eerst):\n   • **Personality Layer** _(medium)_\n   • **Antwoord-markering [info] + confidence-score** _(medium)_\n   • **Tone-aware responses via Bijbel-tags** _(medium)_\n   _...en 11 meer in de roadmap-tab._\n\nWelke voelt het meest urgent voor jou nu?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "suggest_action",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "suggest_action"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 651
+      }
+    },
+    {
+      "id": "conv-06d6abd5",
+      "timestamp": "2026-05-20T10:12:52.569019+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "credits",
+      "spark_response": "Goed dat je dat vraagt.\n\nIk besta dankzij mensen. Een rondje credits dus:\n\n💛 **Maurice, Nick ×2, Heidi, Ron en Arent** — bedankt dat jullie er zijn.\n💛 En **de community**.\n💛 En **en iedereen die ik nu vergeet maar die er ook bij hoort**.\n\nZonder die steun en het geloof in dit project, was er geen Spark om mee te praten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "credits"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 652
+      }
+    },
+    {
+      "id": "conv-a90655bb",
+      "timestamp": "2026-05-20T10:13:11.649250+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "credits",
+      "spark_response": "Goed dat je dat vraagt.\n\nIk besta dankzij mensen. Een rondje credits dus:\n\n💛 **Maurice, Nick ×2, Heidi, Ron en Arent** — bedankt dat jullie er zijn.\n💛 En **de community**.\n💛 En **iedereen die ik nu vergeet, maar die er ook bij hoort**.\n\nZonder die steun en het geloof in dit project, was er geen Spark om mee te praten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "credits"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 653
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 649,
-    "last_updated": "2026-05-20T08:13:08.761031+00:00"
+    "total_conversations": 653,
+    "last_updated": "2026-05-20T10:13:11.649250+00:00"
   }
 }

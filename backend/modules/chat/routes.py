@@ -387,7 +387,29 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "help_overview")
             return response
 
-        # Suggest "wat zullen we doen"
+        # Suggest "wat zullen we doen" — met dank-intent integratie
+        # 1) Credits-vraag: altijd bedanken
+        from . import dank_service as ds
+        if ds.detect_credits_intent(text):
+            out = ds.handle_credits()
+            response.update(out)
+            _save_log(req, response, "credits")
+            return response
+
+        # 2) Vrije keus "Spark wat zou jij willen doen?" — 1x bedanken, daarna normale suggest
+        if ds.detect_free_choice_intent(text):
+            first = ds.handle_free_choice_first_time()
+            if first is not None:
+                response.update(first)
+                _save_log(req, response, "free_choice_thanks")
+                return response
+            # already thanked → fall through naar normale suggest
+            if req.user_id:
+                out = si.handle_suggest(req.user_id, _load_user())
+                response.update(out)
+                _save_log(req, response, "suggest_action")
+                return response
+
         if si.detect_suggest_intent(text) and req.user_id:
             out = si.handle_suggest(req.user_id, _load_user())
             response.update(out)

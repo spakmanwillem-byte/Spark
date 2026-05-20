@@ -12,6 +12,28 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_dank_001 — Sparks bedank-uiting**:
+  - `/data/system/dank.json` met voornamen (Maurice, Nick × 2, Heidi, Ron, Arent), de community, "iedereen die vergeten wordt"
+  - `dank_service.py` met 2 detectors:
+    - `detect_credits_intent` ("credits", "wie heeft jou gemaakt", "aan wie ben je dankbaar") → **altijd** bedanken, credits_count++
+    - `detect_free_choice_intent` ("Spark wat zou jij willen doen?", "kies zelf") → **1× bedanken** (first_choice_done flag), daarna valt door naar `handle_suggest` (agenda/roadmap)
+  - Geïntegreerd vóór bestaande suggest-intent in `chat/routes.py`
+  - Format: "Maurice, Nick ×2, Heidi, Ron en Arent — bedankt" + extra dank voor community
+- 2026-05-20: **v4_profile_revamp_001 — Mijn Profiel volledig herzien**: 5 tabs in plaats van 3 (Algemeen / Achtergrond / Persoonlijkheid / Gesprekken / Avatar). Elke tab heeft eigen content (was eerst alles op één pagina).
+  - **Algemeen**: avatar-preview, leeftijd/beroep/locatie/opleiding, geslacht, sociale media
+  - **Achtergrond**: NAW + contact + adres + noodcontact + bank (formele identiteit)
+  - **Persoonlijkheid**: 6 sliders + doelen/behoeften/zintuigen/mediagedrag + Pijn/Angst sectie (read-only, Spark observeert)
+  - **Gesprekken**: eigen chat-historie gesorteerd jaar→maand→dag (collapsible tree), system-prompts uitgefilterd. Endpoint `GET /api/profile/chat-history/{user_id}` (649 gesprekken Willem zichtbaar)
+  - **Avatar**: huidige avatar + galerij-kiezer + eigen portret-upload
+- 2026-05-20: **v4_avatar_001 — Avatar systeem**: 
+  - Backend module `/api/avatar/*` (gallery + user portrait + select)
+  - Pillow resize max 512×512 JPEG quality 85 (storage-vriendelijk: 35KB voor 512×512)
+  - System-galerij `/data/system/avatars/` (admin-only beheer, alle users kiezen)
+  - User-portret `/data/users/{id}/avatar.jpg` (scope=profile, niet in algemeen archief)
+  - `users.json[id].avatar = "gallery:{id}" | "user" | null` voor selectie
+  - Admin sectie in **Beheer → Instellingen → Beeld → Avatar Galerij** (upload titel+tags, delete, SEED-badge)
+  - Seed: Roadkill-logo gekopieerd uit user-001 archive naar `/system/avatars/roadkill-logo.jpg`
+
 - 2026-05-13: Spark Vocab editable via Triggers page (v4_013a)
 - 2026-05-13: Static strings → JSON, all trigger lists editable (v4_013c)
 - 2026-05-14: Knowledge schema 2.0 (kaart_type + metadata)

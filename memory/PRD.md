@@ -52,6 +52,7 @@ Dutch (always respond in Dutch).
   - Grad 6: + -Dagboek
   - Grad 7: + -Agenda -Archief
   - Visueel getest met 4 bestaande users (Harry/Smith/Heidi/Madelief): alle 12 bugs ✓ opgelost
+- 2026-05-20: **v4_route_guard_001 — Admin routes guard** (bug #5): non-admins (gradatie > 2) die op `/admin/users`, `/admin/analytics` of `/admin/settings` URL landen worden automatisch teruggestuurd naar dashboard. Voorkomt witscherm/leeg-pagina na gradatie-wijziging.
 
 ## In progress / backlog
 ### P0 / Open follow-ups

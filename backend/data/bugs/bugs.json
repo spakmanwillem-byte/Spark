@@ -299,7 +299,7 @@
       "description": "Als gradatie van user wordt aangepast en user logt eerste keer in dan komt hij in admin tab waar je prfielen beheerd. bij verlaten veranderen naar andere tab niet meer zichtbaar banner zijkant",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-19T15:34:19.642709+00:00",
       "created_by_id": "user-1996fa59",
       "created_by_naam": "Roadkill",
@@ -310,7 +310,9 @@
           "by": "user-1996fa59",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-20T04:23:38.298281+00:00",
+      "resolution_note": "v4_route_guard_001: useEffect-guard in App.js stuurt non-admin (gradatie>2) automatisch terug naar dashboard als URL admin-route is. Voorkomt landing op /admin/users na gradatie-wijziging."
     },
     {
       "id": "116afeec-fa09-4815-9add-344dcaafdcd8",

@@ -33,7 +33,7 @@ import { VoicePage } from "./components/workspace/VoicePage";
 
 // Main App Content with Navigation
 function AppContent() {
-  const { isLoggedIn, loading } = useAuth();
+  const { isLoggedIn, loading, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [activePage, setActivePage] = useState('dashboard');
@@ -83,6 +83,18 @@ function AppContent() {
     setActivePage(pageId);
     navigate(path);
   };
+
+  // v4_route_guard_001 — admin routes alleen voor gradatie ≤ 2 (bug #5)
+  // Als URL een admin-pad is maar user is geen admin → forceer redirect naar dashboard
+  const ADMIN_PAGES = ['users', 'analytics', 'settings'];
+  useEffect(() => {
+    if (!user) return;
+    if (ADMIN_PAGES.includes(activePage) && (user.gradatie ?? 7) > 2) {
+      setActivePage('dashboard');
+      navigate('/', { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, activePage]);
 
   if (loading) {
     return (

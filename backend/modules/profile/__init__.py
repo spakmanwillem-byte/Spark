@@ -338,3 +338,31 @@ async def credits_bonus_sync():
     from modules.chat.dank_service import sync_credits_bonus
     result = sync_credits_bonus()
     return {"success": True, **result}
+
+
+# v4_personal_docs_001 — Persoonlijke documenten (testament, survivalgids, etc.)
+@router.get("/personal-docs/{user_id}")
+async def list_personal_docs(user_id: str):
+    """Geef lijst van persoonlijke documenten van user (testament/survivalgids/etc)."""
+    from modules.chat.personal_docs_service import list_user_docs, DOC_TYPES
+    docs = list_user_docs(user_id)
+    return {
+        "success": True,
+        "documents": docs,
+        "available_types": [
+            {"type": k, "label": v["label"], "emoji": v["emoji"]}
+            for k, v in DOC_TYPES.items()
+        ],
+    }
+
+
+@router.get("/personal-docs/{user_id}/{doc_type}")
+async def get_personal_doc(user_id: str, doc_type: str):
+    """Geef de volledige inhoud van een persoonlijk document."""
+    from modules.chat.personal_docs_service import _doc_file, DOC_TYPES
+    if doc_type not in DOC_TYPES:
+        return {"success": False, "error": f"Onbekend type: {doc_type}"}
+    fp = _doc_file(user_id, doc_type)
+    if not fp.exists():
+        return {"success": False, "error": "Niet gevonden"}
+    return {"success": True, "document": load_json(fp, default={})}

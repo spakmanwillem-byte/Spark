@@ -12,6 +12,20 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_personal_docs_001 — Persoonlijke documenten via chat (testament + survivalgids)**:
+  - Generiek patroon: `DOC_TYPES` dict met label/emoji/default_secties/triggers — uitbreidbaar voor zorgvolmacht/wensen/levensoverzicht/etc.
+  - Storage per user: `/data/users/{user_id}/documents/{doc_type}.json`
+  - Chat-intents per doc-type:
+    - **create**: "maak testament aan" / "survivalgids aanmaken" → skelet met default secties
+    - **append**: "voeg toe aan testament: <tekst>" → nieuwe gedateerde sub-sectie + version++
+    - **show**: "bekijk testament" → mooi geformatteerd
+    - **delete**: "verwijder testament" → soft-delete (rename naar .deleted-{ts}.json)
+  - Default secties:
+    - Testament (6): Persoonsgegevens / Erfgenamen / Legaten / Executeur / Uitvaart / Overige
+    - Survivalgids (7): Contacten / Documenten / Wachtwoorden / Verzekeringen / Bankzaken / Praktisch / Boodschap
+  - API endpoints: `GET /api/personal-docs/{user_id}` (lijst) + `GET /api/personal-docs/{user_id}/{type}` (volledig doc)
+  - Klaar voor archief-integratie (later): documenten kunnen in Mijn Archief → Bestanden tab verschijnen via list-endpoint
+  - Klaar voor template-upload (later): user upload JSON van aanbieder → vervangt JSON mits structuur matched
 - 2026-05-20: **v4_legal_help_001 — Help admin/user + legal triggers**:
   - `handle_help(is_admin)` toont nu **basis-help voor iedereen** + **admin-extra** sectie voor gradatie ≤ 2 (credits beheer, roadmap-bugs flow, trigger/vocab beheer, backup, gradatie-upgrades, storage cache)
   - Nieuwe legal-intent service (`legal_service.py`) detect: `privacy`, `cookies`, `voorwaarden`

@@ -398,6 +398,15 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, out.get("type", "legal"))
             return response
 
+        # Persoonlijke documenten: testament / survivalgids / ...
+        from . import personal_docs_service as pds
+        doc_intent = pds.detect_personal_doc_intent(text)
+        if doc_intent and req.user_id:
+            out = pds.handle_personal_doc(req.user_id, doc_intent)
+            response.update(out)
+            _save_log(req, response, out.get("type", "personal_doc"))
+            return response
+
         # Suggest "wat zullen we doen" — met dank-intent integratie
         # 0) Credits EDIT: rename/add/remove in dank-lijst (moet voor "credits" anders pakt die het)
         from . import dank_service as ds

@@ -131,17 +131,19 @@ def get_potjes(user_id: str) -> Dict:
     return user
 
 
-def get_available_pot(user_id: str, current_cycle: int) -> Optional[Dict]:
+def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool = False) -> Optional[Dict]:
     """
     Vind een potje dat mag kopen:
     - is_open = False (niet in positie)
     - last_buy_cycle != current_cycle (nog geen potje in deze cycle gekocht)
     Returns het eerste vrije potje gesorteerd op nummer (1..10), of None.
     v4_potje_sync_001: sorteer op nummer/index zodat UI en backend dezelfde keuze maken.
+    v4_potje_quickbuy_002: skip_cycle_check voor user-initiated Quick Buy (user mag meerdere
+    potjes openen in dezelfde monitor-cycle).
     """
     user = get_potjes(user_id)
-    if user.get("last_buy_cycle") == current_cycle:
-        return None  # Al een potje gekocht in deze cycle
+    if not skip_cycle_check and user.get("last_buy_cycle") == current_cycle:
+        return None  # Al een potje gekocht in deze cycle (monitor-mode bescherming)
     sorted_potjes = sorted(user["potjes"], key=lambda p: (p.get("nummer") or (p.get("index", 99) + 1)))
     for p in sorted_potjes:
         if not p["position"]["is_open"]:

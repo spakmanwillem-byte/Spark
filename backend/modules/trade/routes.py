@@ -390,11 +390,18 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     """
     monitor = get_monitor()
 
-    # 1) Vind vrij potje
+    # 1) Vind vrij potje (v4_potje_quickbuy_002: skip cycle-check, user-initiated mag meerdere)
     current_cycle = monitor._cycles if hasattr(monitor, "_cycles") else 0
-    pot = potjes_svc.get_available_pot(user_id, current_cycle)
+    pot = potjes_svc.get_available_pot(user_id, current_cycle, skip_cycle_check=True)
     if not pot:
-        return {"success": False, "error": "Geen vrij potje beschikbaar. Alle potjes hebben een open positie."}
+        # Tel hoeveel er open zijn voor een betere foutmelding
+        user_data = potjes_svc.get_potjes(user_id)
+        open_count = sum(1 for p in user_data.get("potjes", []) if p.get("position", {}).get("is_open"))
+        total = len(user_data.get("potjes", []))
+        return {
+            "success": False,
+            "error": f"Geen vrij potje beschikbaar — {open_count}/{total} potjes hebben al een open positie. Wacht tot een potje verkoopt of breid het aantal potjes uit."
+        }
 
     # 2) Huidige prijs ophalen (met mock-fallback bij API down in preview)
     tickers = fetch_tickers([req.market])

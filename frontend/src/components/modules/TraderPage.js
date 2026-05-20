@@ -655,7 +655,7 @@ export function TraderPage({ onNavigate }) {
                     </h3>
                   </div>
                   <div className="p-2 space-y-1 max-h-[280px] overflow-y-auto">
-                    {trades.slice(0, 8).map(trade => (
+                    {trades.filter(t => !t.hidden_in_recent).slice(0, 8).map(trade => (
                       <div key={trade.trade_id} data-testid={`trade-${trade.trade_id}`} className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-800/40 transition-colors">
                         <div className="flex items-center gap-2.5">
                           <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${trade.action === 'BUY' ? 'bg-green-500/20' : 'bg-red-500/20'}`}>

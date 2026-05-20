@@ -12,6 +12,11 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_meetpunt_002 — Recent Trades clean view + multi-coin LIVE**:
+  - BUY-row van meetpunt-paar gevlagd `hidden_in_recent: true`. Frontend `trades.filter(t => !t.hidden_in_recent)` toont nu 1 trade in Recent Trades widget (SELL met +€50,80)
+  - Stats endpoint (`/api/trade/stats`) blijft beide entries gebruiken zodat math klopt (gekocht €5,08 / verkocht €56,03 / fees €0,15 / netto +€50,80)
+  - Multi-coin monitor LIVE gestart op alle 5 watchlist coins (BCH/BTC/ETH/SOL/ADA) — 15m candles, 10-potjes mode, real-trade
+  - Bitvavo IP-ban verlopen, candle TTL-cache + shared ticker-call houden het binnen rate-limits
 - 2026-05-20: **v4_meetpunt_001 — Trade history reset naar meetpunt**:
   - Oude `trade_history/user-001.json` (8 oude BUY-trades, geen SELLs → vervormde stats) gearchiveerd als `user-001_archive_pre_reset_*.json`
   - Nieuwe history: 1 BUY + 1 SELL trade-pair voor pot-001 met exact-berekende fees:

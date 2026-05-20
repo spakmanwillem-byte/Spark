@@ -696,7 +696,12 @@ class MonitorService:
                                 else:
                                     result = execute_real_trade(self._user_id, self._market, "BUY", available["capital"])
                                 if result.get("success"):
-                                    potjes_svc.open_pot(self._user_id, available["id"], price, self._cycles)
+                                    potjes_svc.open_pot(
+                                        self._user_id, available["id"], price, self._cycles,
+                                        trade_id=result.get("trade", {}).get("trade_id"),
+                                        amount_eur=available.get("capital"),
+                                        market=self._market,
+                                    )
                                     actions_this_cycle.append(f"BUY {available['id']} @ €{price:.2f}")
                             elif not available:
                                 buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"

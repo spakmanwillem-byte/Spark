@@ -136,19 +136,25 @@ def get_available_pot(user_id: str, current_cycle: int) -> Optional[Dict]:
     Vind een potje dat mag kopen:
     - is_open = False (niet in positie)
     - last_buy_cycle != current_cycle (nog geen potje in deze cycle gekocht)
-    Returns het eerste vrije potje, of None.
+    Returns het eerste vrije potje gesorteerd op nummer (1..10), of None.
+    v4_potje_sync_001: sorteer op nummer/index zodat UI en backend dezelfde keuze maken.
     """
     user = get_potjes(user_id)
     if user.get("last_buy_cycle") == current_cycle:
         return None  # Al een potje gekocht in deze cycle
-    for p in user["potjes"]:
+    sorted_potjes = sorted(user["potjes"], key=lambda p: (p.get("nummer") or (p.get("index", 99) + 1)))
+    for p in sorted_potjes:
         if not p["position"]["is_open"]:
             return p
     return None
 
 
-def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int) -> Dict:
-    """Open positie in een potje."""
+def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
+             trade_id: Optional[str] = None, amount_eur: Optional[float] = None,
+             market: Optional[str] = None) -> Dict:
+    """Open positie in een potje + log de BUY-trade op het potje zelf.
+    v4_potje_sync_001: trade_count + trade_log bijwerken zodat UI tellertje klopt.
+    v4_potje_market_001: bewaar welke coin gekocht is per potje (was hardcoded BCH-EUR)."""
     data = _load(user_id)
     user = data["users"][user_id]
     now = datetime.now(timezone.utc).isoformat()
@@ -161,7 +167,17 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int) 
                 "trailing_active": False,
                 "entry_time": now,
             }
+            # v4_potje_market_001: leg vast WELKE coin in dit potje zit (BTC-EUR / BCH-EUR / ETH-EUR ...)
+            if market:
+                p["market"] = market
             p["last_action"] = f"BUY @ €{entry_price:.2f}"
+            p.setdefault("stats", {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0})
+            p["stats"]["trades"] = p["stats"].get("trades", 0) + 1
+            p.setdefault("trade_log", []).append({
+                "ts": now, "side": "BUY", "price": entry_price,
+                "amount_eur": amount_eur, "trade_id": trade_id,
+                "market": market or p.get("market"),
+            })
             user["last_buy_cycle"] = current_cycle
             _save(data)
             return p

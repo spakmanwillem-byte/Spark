@@ -415,6 +415,15 @@
       "description": "[Trade] Buy mislukt: Bitvavo errorCode 203 \"operatorId parameter is required\"",
       "resolution_note": "v4_trade_operator_id_001: Bitvavo eist sinds 2025 operatorId (int) bij elke order. Body uitgebreid met operatorId=1001 (default, uit settings.integrations.bitvavo.operator_id). Tevens signature-bug gefixt: requests.post nu met data=body_str (was json=body wat dubbele serialisatie deed = potentiele signature mismatch).",
       "resolved_at": "2026-05-20T05:39:23.649116+00:00"
+    },
+    {
+      "id": "bug-pot-market-20260520055251",
+      "created_at": "2026-05-20T05:52:51.524441+00:00",
+      "created_by": "user-001",
+      "status": "opgelost",
+      "description": "[Trade] Potje toont hardcoded BCH-EUR ook als je BTC kocht — geen visuele scheiding per coin",
+      "resolution_note": "v4_potje_market_001: open_pot() bewaart nu market-veld per potje. UI kan straks per potje tonen welke coin erin zit.",
+      "resolved_at": "2026-05-20T05:52:51.524441+00:00"
     }
   ]
 }

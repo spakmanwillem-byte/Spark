@@ -417,8 +417,13 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     if not trade_result.get("success"):
         return {"success": False, "error": f"Buy mislukt: {trade_result.get('error', 'onbekend')}", "trade": trade_result}
 
-    # 4) Markeer potje als open
-    pot_opened = potjes_svc.open_pot(user_id, pot["id"], price, current_cycle)
+    # 4) Markeer potje als open (v4_potje_market_001: incl. market + trade ref)
+    pot_opened = potjes_svc.open_pot(
+        user_id, pot["id"], price, current_cycle,
+        trade_id=trade_result.get("trade", {}).get("trade_id"),
+        amount_eur=entry_amount,
+        market=req.market,
+    )
 
     # 5) Start monitor in potjes-mode als hij nog niet draait
     monitor_started = False

@@ -9,31 +9,104 @@ import {
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-/* Ambient player — singleton via window zodat hij blijft afspelen tussen pagina-switches */
+/* Ambient player — singleton via window zodat hij blijft afspelen tussen pagina-switches.
+   v4_ambient_persist_001: localStorage persistence over F5/refresh. */
+const AMBIENT_LS_KEY = 'spark_ambient_state';
 const getAmbientPlayer = () => {
   if (typeof window === 'undefined') return null;
   if (!window.__sparkAmbient) {
-    window.__sparkAmbient = {
+    const player = {
       audio: null,
       label: null,
+      url: null,
+      volume: 0.4,
+      pendingResume: false,
+      _saveState() {
+        try {
+          if (this.url) localStorage.setItem(AMBIENT_LS_KEY, JSON.stringify({ url: this.url, label: this.label, volume: this.volume }));
+          else localStorage.removeItem(AMBIENT_LS_KEY);
+        } catch {}
+      },
+      _loadState() {
+        try {
+          const raw = localStorage.getItem(AMBIENT_LS_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch { return null; }
+      },
+      _broadcast() {
+        window.dispatchEvent(new CustomEvent('spark:ambient', { detail: {
+          playing: !!this.audio && !this.audio.paused,
+          paused_pending: this.pendingResume,
+          label: this.label,
+        } }));
+      },
       play(url, label) {
         try {
           if (this.audio) { this.audio.pause(); this.audio = null; }
           const a = new Audio(url);
           a.loop = true;
-          a.volume = 0.4;
-          a.play().catch(() => {});
+          a.volume = this.volume;
+          const playPromise = a.play();
           this.audio = a;
           this.label = label;
-          window.dispatchEvent(new CustomEvent('spark:ambient', { detail: { playing: true, label } }));
+          this.url = url;
+          this.pendingResume = false;
+          this._saveState();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {
+              // Autoplay geweigerd — wacht op user-gesture
+              this.pendingResume = true;
+              this._armResumeListener();
+              this._broadcast();
+            });
+          }
+          this._broadcast();
         } catch {}
       },
       stop() {
-        if (this.audio) { try { this.audio.pause(); } catch {} this.audio = null; this.label = null; }
-        window.dispatchEvent(new CustomEvent('spark:ambient', { detail: { playing: false, label: null } }));
+        if (this.audio) { try { this.audio.pause(); } catch {} this.audio = null; }
+        this.label = null;
+        this.url = null;
+        this.pendingResume = false;
+        this._saveState();
+        this._broadcast();
+      },
+      resume() {
+        if (!this.url) return;
+        if (this.audio && this.audio.paused) {
+          this.audio.play().then(() => {
+            this.pendingResume = false;
+            this._broadcast();
+          }).catch(() => {});
+        } else if (!this.audio) {
+          this.play(this.url, this.label);
+        }
+      },
+      _armResumeListener() {
+        const tryResume = () => {
+          this.resume();
+          if (this.audio && !this.audio.paused) {
+            window.removeEventListener('click', tryResume, true);
+            window.removeEventListener('keydown', tryResume, true);
+            window.removeEventListener('touchstart', tryResume, true);
+          }
+        };
+        window.addEventListener('click', tryResume, true);
+        window.addEventListener('keydown', tryResume, true);
+        window.addEventListener('touchstart', tryResume, true);
       },
       isPlaying() { return !!this.audio && !this.audio.paused; },
+      isPendingResume() { return this.pendingResume; },
+      restoreFromStorage() {
+        const s = this._loadState();
+        if (!s || !s.url || this.audio) return false;
+        this.play(s.url, s.label);
+        return true;
+      },
     };
+    window.__sparkAmbient = player;
+    // Probeer ambient terug te zetten na refresh
+    player.restoreFromStorage();
   }
   return window.__sparkAmbient;
 };
@@ -82,6 +155,7 @@ export function GesprekkenPage({ onNavigate }) {
   const [sttListening, setSttListening] = useState(false);
   const [ambientPlaying, setAmbientPlaying] = useState(false);
   const [ambientLabel, setAmbientLabel] = useState(null);
+  const [ambientPendingResume, setAmbientPendingResume] = useState(false);
   const [ttsEnabled, setTtsEnabled] = useState(false);
   const [ttsSpeaking, setTtsSpeaking] = useState(false); // v4_voice_002 — TTS-glow
   const mediaRecorderRef = useRef(null);
@@ -124,9 +198,13 @@ export function GesprekkenPage({ onNavigate }) {
     if (player?.isPlaying()) {
       setAmbientPlaying(true);
       setAmbientLabel(player.label);
+    } else if (player?.isPendingResume()) {
+      setAmbientPendingResume(true);
+      setAmbientLabel(player.label);
     }
     const handler = (e) => {
       setAmbientPlaying(!!e.detail.playing);
+      setAmbientPendingResume(!!e.detail.paused_pending);
       setAmbientLabel(e.detail.label || null);
     };
     window.addEventListener('spark:ambient', handler);
@@ -661,7 +739,7 @@ export function GesprekkenPage({ onNavigate }) {
                   </button>
                 </div>
               )}
-              {/* Ambient status bar — alleen zichtbaar wanneer ambient afspeelt */}
+              {/* Ambient status bar — zichtbaar wanneer ambient speelt OF wacht op user-gesture (na F5) */}
               {ambientPlaying && (
                 <div data-testid="ambient-bar" className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20">
                   <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
@@ -672,6 +750,26 @@ export function GesprekkenPage({ onNavigate }) {
                     className="text-[10px] px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1"
                   >
                     <VolumeX className="w-3 h-3" /> Stop
+                  </button>
+                </div>
+              )}
+              {!ambientPlaying && ambientPendingResume && (
+                <div data-testid="ambient-resume-bar" className="flex items-center gap-2 px-4 py-2 bg-amber-500/10 border-b border-amber-500/20">
+                  <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="text-xs text-amber-300 flex-1">🎵 {ambientLabel || 'Ambient'} — klik om door te spelen</span>
+                  <button
+                    data-testid="ambient-resume"
+                    onClick={() => getAmbientPlayer()?.resume()}
+                    className="text-[10px] px-2 py-0.5 rounded border border-amber-400/40 text-amber-200 hover:bg-amber-500/15 flex items-center gap-1"
+                  >
+                    <Volume2 className="w-3 h-3" /> Hervatten
+                  </button>
+                  <button
+                    data-testid="ambient-pending-stop"
+                    onClick={() => getAmbientPlayer()?.stop()}
+                    className="text-[10px] px-2 py-0.5 rounded border border-amber-400/40 text-amber-200 hover:bg-amber-500/15 flex items-center gap-1"
+                  >
+                    <VolumeX className="w-3 h-3" /> Stoppen
                   </button>
                 </div>
               )}

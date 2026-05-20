@@ -12,6 +12,13 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_ambient_persist_001 — Ambient overleeft F5**:
+  - Bug: ambient verdween na page-refresh; user moest "stilte" + "ambient 1 aan" opnieuw typen
+  - Fix: `getAmbientPlayer()` singleton in `GesprekkenPage.js` persisteert nu `{url, label, volume}` in `localStorage` (key `spark_ambient_state`)
+  - Bij init: `restoreFromStorage()` probeert direct te starten
+  - Browsers blokkeren autoplay zonder user-gesture na F5 → fallback: nieuwe **amber pending-resume bar** met "🎵 Ambient — klik om door te spelen" + **Hervatten** en **Stoppen** knoppen
+  - Auto-resume: globale `click/keydown/touchstart` listener probeert ambient meteen te starten bij eerste user-actie (ook typen in chatveld telt)
+  - Stop wist localStorage zodat hij niet onverwacht na F5 terugkomt
 - 2026-05-20: **v4_dank_004 — Credits bonus voor herkende users**:
   - Naam in dank.json `namen[]` met spatie (voor+achternaam) wordt gematcht tegen `users.json[].volledige_naam` (case-insensitive)
   - Match + gradatie ≤ 4 → user krijgt:

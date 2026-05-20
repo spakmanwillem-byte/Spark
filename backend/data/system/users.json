@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-20T20:35:59.108891",
+      "last_active": "2026-05-20T20:45:13.016910",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -2395,8 +2395,47 @@
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,
-      "xp": 0,
-      "gradatie_titel": "Leert graag kennen"
+      "xp": 150,
+      "gradatie_titel": "Leert graag kennen",
+      "achievements": {
+        "unlocked": [
+          {
+            "id": "contrib_1",
+            "name": "Eerste Bijdrage",
+            "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+            "milestone": 1,
+            "xp_reward": 50,
+            "icon": "🌱",
+            "rarity": "common",
+            "unlocked_at": "2026-05-20T20:38:25.686882+00:00"
+          },
+          {
+            "id": "contrib_full",
+            "name": "Volledige Maker",
+            "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+            "milestone": 1,
+            "xp_reward": 100,
+            "icon": "💎",
+            "rarity": "rare",
+            "unlocked_at": "2026-05-20T20:38:25.686898+00:00"
+          }
+        ],
+        "total_xp_from_achievements": 150
+      },
+      "xp_events": [
+        {
+          "amount": 50,
+          "reason": "Achievement: Eerste Bijdrage",
+          "granted_at": "2026-05-20T20:38:25.692402+00:00",
+          "total_after": 50
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: Volledige Maker",
+          "granted_at": "2026-05-20T20:38:25.696821+00:00",
+          "total_after": 150
+        }
+      ]
     },
     {
       "naam": "piet",

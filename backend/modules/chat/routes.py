@@ -388,8 +388,16 @@ async def process_message(req: ChatMessage):
             return response
 
         # Suggest "wat zullen we doen" — met dank-intent integratie
-        # 1) Credits-vraag: altijd bedanken
+        # 0) Credits EDIT: rename/add/remove in dank-lijst (moet voor "credits" anders pakt die het)
         from . import dank_service as ds
+        edit = ds.detect_credits_edit_intent(text)
+        if edit:
+            out = ds.handle_credits_edit(edit)
+            response.update(out)
+            _save_log(req, response, out.get("response_type", "credits_edit"))
+            return response
+
+        # 1) Credits-vraag: altijd bedanken
         if ds.detect_credits_intent(text):
             out = ds.handle_credits()
             response.update(out)

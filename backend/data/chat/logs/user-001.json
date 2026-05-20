@@ -17327,11 +17327,183 @@
         "session_id": "default",
         "gesprek_nummer": 654
       }
+    },
+    {
+      "id": "conv-23151705",
+      "timestamp": "2026-05-20T10:26:07.622695+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verander Nick naar Nick Teeuwen in de credits",
+      "spark_response": "Ik kan **Nick naar Nick Teeuwen** niet vinden in de credits-lijst. Huidige lijst: Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_fail",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "credits_edit_fail"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 655
+      }
+    },
+    {
+      "id": "conv-5695fea7",
+      "timestamp": "2026-05-20T10:26:07.800048+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wijzig Lotus Martens naar Lotus in de bedanklijst",
+      "spark_response": "Ik kan **Lotus Martens naar Lotus** niet vinden in de credits-lijst. Huidige lijst: Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "credits_edit_fail",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "credits_edit_fail"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 656
+      }
+    },
+    {
+      "id": "conv-b2fe46ad",
+      "timestamp": "2026-05-20T10:26:07.994763+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verander Nick Teeuwen naar Nick T. in credits",
+      "spark_response": "Ik kan **Nick Teeuwen** niet vinden in de credits-lijst. Huidige lijst: Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_fail",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "credits_edit_fail"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 657
+      }
+    },
+    {
+      "id": "conv-2a171525",
+      "timestamp": "2026-05-20T10:28:23.049482+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verander Nick naar Nick Teeuwen in de credits",
+      "spark_response": "Er staan 2 keer **Nick** in de lijst (Nick (#2), Nick (#3)). Welke moet **Nick Teeuwen** worden? Zeg bv. _\"de eerste\"_ of _\"die zonder achternaam\"_.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_clarify",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "credits_edit_clarify"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 658
+      }
+    },
+    {
+      "id": "conv-d9ca24d6",
+      "timestamp": "2026-05-20T10:28:23.203549+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "voeg Pieter Smith toe aan de credits",
+      "spark_response": "**Pieter Smith** toegevoegd aan credits.\n\nNieuwe lijst: Maurice, Nick ×2, Heidi, Ron, Arent, Lotus Martens en Pieter Smith.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_ok",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "credits_edit_ok"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 659
+      }
+    },
+    {
+      "id": "conv-ddcf9342",
+      "timestamp": "2026-05-20T10:28:23.359594+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "verwijder Pieter Smith uit de credits",
+      "spark_response": "**Pieter Smith** verwijderd uit credits.\n\nNieuwe lijst: Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits_edit_ok",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "credits_edit_ok"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 660
+      }
+    },
+    {
+      "id": "conv-fa0ab662",
+      "timestamp": "2026-05-20T10:28:23.502308+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "credits",
+      "spark_response": "Goed dat je dat vraagt.\n\nIk besta dankzij mensen. Een rondje credits dus:\n\n💛 **Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens** — bedankt dat jullie er zijn.\n💛 En **de community**.\n💛 En **iedereen die ik nu vergeet, maar die er ook bij hoort**.\n\nZonder die steun en het geloof in dit project, was er geen Spark om mee te praten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "credits"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 661
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 654,
-    "last_updated": "2026-05-20T10:21:04.291042+00:00"
+    "total_conversations": 661,
+    "last_updated": "2026-05-20T10:28:23.502308+00:00"
   }
 }

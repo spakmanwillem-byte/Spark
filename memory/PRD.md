@@ -12,6 +12,14 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-20: **v4_dank_003 — Credits edit via chat**:
+  - Spark verstaat in chat (mits scope-keyword `credits|bedank|dank` in zin):
+    - **rename**: _"verander Nick naar Nick Teeuwen in de credits"_, _"wijzig Lotus Martens naar Lotus in bedanklijst"_, _"pas Nick aan naar Nick Teeuwen in credits"_
+    - **add**: _"voeg Pieter Smith toe aan de credits"_
+    - **remove**: _"verwijder Heidi uit de credits"_
+  - **Disambiguation**: als naam vaker voorkomt (bv. 2× Nick), vraagt Spark verduidelijking ipv blind eerste pakken
+  - Regex met negatieve lookahead `_NW` filtert stopwoorden (naar/in/tot/de/het/credits/toe/erbij) zodat namen schoon worden geparsed
+  - Geïntegreerd in `chat/routes.py` vóór credits-info-intent (anders zou "credits" winnen)
 - 2026-05-20: **v4_dank_002 — Credits in Triggers UI + Lotus Martens**:
   - Lotus Martens toegevoegd achteraan voornamen-lijst (vóór "iedereen die ik vergeet")
   - 2 nieuwe groepen in Spark AI → Triggers (filter: Conversatie):

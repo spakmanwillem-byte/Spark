@@ -39,6 +39,33 @@ _CREDITS_PATTERNS = [
     r"\bwie heeft je (geholpen|gesteund)\b",
 ]
 
+# Rename in credits/dank-lijst: "verander X naar Y in de credits"
+# Vereist scope-keyword (credits|bedank|dank) ergens in zin.
+_RENAME_VERB = r"(?:verander(?:de|en)?|wijzig(?:en|de)?|pas .{1,30}? aan|hernoem|maak)"
+_RENAME_SCOPE = r"\b(credits|bedank|bedanklijst|bedanklijstje|dank|danklijst)\b"
+# Name word: niet een stopwoord (naar/in/tot/de/het/credits etc)
+_NW = r"(?!(?:naar|in|tot|aan|uit|de|het|een|toe|erbij|credits|bedank|bedanklijst|bedanklijstje|dank|danklijst|lijst)\b)[A-Za-zÀ-ÿ][\w'\-]*"
+_NAME = rf"{_NW}(?:\s+{_NW}){{0,3}}"
+_RENAME_REGEX = re.compile(
+    rf"{_RENAME_VERB}\s+(?P<old>{_NAME})\s+(?:naar|in|tot)\s+(?P<new>{_NAME})",
+    re.IGNORECASE,
+)
+# Alternatief: "pas X aan naar/tot Y"
+_RENAME_PAS_REGEX = re.compile(
+    rf"\bpas\s+(?P<old>{_NAME})\s+aan\s+(?:naar|tot|in)\s+(?P<new>{_NAME})",
+    re.IGNORECASE,
+)
+# Verwijder uit credits-lijst
+_REMOVE_REGEX = re.compile(
+    rf"(?:verwijder|haal\s+(?:weg\s+)?|wis|delete)\s+(?P<name>{_NAME})",
+    re.IGNORECASE,
+)
+# Voeg toe aan credits-lijst
+_ADD_REGEX = re.compile(
+    rf"(?:voeg(?:\s+toe)?|zet\s+erbij)\s+(?P<name>{_NAME})",
+    re.IGNORECASE,
+)
+
 
 def detect_free_choice_intent(text: str) -> bool:
     t = (text or "").lower().strip()
@@ -48,6 +75,46 @@ def detect_free_choice_intent(text: str) -> bool:
 def detect_credits_intent(text: str) -> bool:
     t = (text or "").lower().strip()
     return any(re.search(p, t) for p in _CREDITS_PATTERNS)
+
+
+def _has_credits_scope(text: str) -> bool:
+    return bool(re.search(_RENAME_SCOPE, (text or "").lower()))
+
+
+def detect_credits_edit_intent(text: str) -> Optional[Dict[str, str]]:
+    """Detecteer rename/add/remove binnen credits-scope.
+    Geeft dict {action, ...} terug of None.
+    Scope-keyword (credits|bedank|dank) is verplicht om kapen te voorkomen."""
+    if not text:
+        return None
+    if not _has_credits_scope(text):
+        return None
+    t = text.strip()
+
+    m = _RENAME_REGEX.search(t) or _RENAME_PAS_REGEX.search(t)
+    if m:
+        old = m.group("old").strip().rstrip(".,!?")
+        new = m.group("new").strip().rstrip(".,!?")
+        # filter common scope words die per ongeluk gevangen worden
+        bad = {"de", "het", "een", "in", "uit", "lijst", "credits", "bedank", "dank"}
+        if old.lower() not in bad and new.lower() not in bad and old.lower() != new.lower():
+            return {"action": "rename", "old": old, "new": new}
+
+    m = _REMOVE_REGEX.search(t)
+    if m:
+        name = m.group("name").strip().rstrip(".,!?")
+        bad = {"de", "het", "een", "lijst", "credits", "bedank", "dank", "uit"}
+        if name.lower() not in bad:
+            return {"action": "remove", "name": name}
+
+    m = _ADD_REGEX.search(t)
+    if m:
+        name = m.group("name").strip().rstrip(".,!?")
+        bad = {"de", "het", "een", "lijst", "credits", "bedank", "dank", "toe"}
+        if name.lower() not in bad:
+            return {"action": "add", "name": name}
+
+    return None
 
 
 # ============================================================
@@ -113,6 +180,67 @@ def handle_credits() -> Dict:
     d["last_credits_ts"] = datetime.now(timezone.utc).isoformat()
     save_json(DANK_FILE, d)
     return {"type": "credits", "message": msg, "response_type": "credits"}
+
+
+def handle_credits_edit(edit: Dict[str, str]) -> Dict:
+    """Voer rename/remove/add uit op dank.json:namen lijst."""
+    d = _load()
+    namen = list(d.get("namen", []) or [])
+    action = edit.get("action")
+
+    if action == "rename":
+        old, new = edit["old"], edit["new"]
+        matches = [i for i, n in enumerate(namen) if n.lower() == old.lower()]
+        if not matches:
+            return {"type": "credits_edit_fail",
+                    "message": f"Ik kan **{old}** niet vinden in de credits-lijst. Huidige lijst: {_format_namen(namen)}.",
+                    "response_type": "credits_edit_fail"}
+        if len(matches) > 1 and not any(n.lower() == new.lower() for n in namen):
+            # Meer dan 1 match en geen unieke indicator → vraag verduidelijking
+            occ = ", ".join(namen[i] + f" (#{i+1})" for i in matches)
+            return {"type": "credits_edit_clarify",
+                    "message": f"Er staan {len(matches)} keer **{old}** in de lijst ({occ}). Welke moet **{new}** worden? Zeg bv. _\"de eerste\"_ of _\"die zonder achternaam\"_.",
+                    "response_type": "credits_edit_clarify",
+                    "pending": {"action": "rename", "old": old, "new": new, "indices": matches}}
+        # Vervang eerste die nog 'kale' versie is (zonder achternaam) als die er is
+        kale = [i for i in matches if " " not in namen[i]]
+        idx = kale[0] if kale else matches[0]
+        namen[idx] = new
+        d["namen"] = namen
+        save_json(DANK_FILE, d)
+        return {"type": "credits_edit_ok",
+                "message": f"Klaar — **{old}** is nu **{new}** in de credits.\n\nNieuwe lijst: {_format_namen(namen)}.",
+                "response_type": "credits_edit_ok"}
+
+    if action == "remove":
+        name = edit["name"]
+        matches = [i for i, n in enumerate(namen) if n.lower() == name.lower()]
+        if not matches:
+            return {"type": "credits_edit_fail",
+                    "message": f"**{name}** staat niet in de credits-lijst.",
+                    "response_type": "credits_edit_fail"}
+        idx = matches[0]
+        removed = namen.pop(idx)
+        d["namen"] = namen
+        save_json(DANK_FILE, d)
+        return {"type": "credits_edit_ok",
+                "message": f"**{removed}** verwijderd uit credits.\n\nNieuwe lijst: {_format_namen(namen)}.",
+                "response_type": "credits_edit_ok"}
+
+    if action == "add":
+        name = edit["name"]
+        if any(n.lower() == name.lower() for n in namen):
+            return {"type": "credits_edit_fail",
+                    "message": f"**{name}** staat al in de credits.",
+                    "response_type": "credits_edit_fail"}
+        namen.append(name)
+        d["namen"] = namen
+        save_json(DANK_FILE, d)
+        return {"type": "credits_edit_ok",
+                "message": f"**{name}** toegevoegd aan credits.\n\nNieuwe lijst: {_format_namen(namen)}.",
+                "response_type": "credits_edit_ok"}
+
+    return {"type": "credits_edit_fail", "message": "Ik snap de bewerking niet.", "response_type": "credits_edit_fail"}
 
 
 def handle_free_choice_first_time() -> Optional[Dict]:

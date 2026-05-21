@@ -15,6 +15,123 @@ from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/wallet", tags=["wallet"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"
+ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
+USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+
+
+# ============================================================
+# v4_wallet_per_user_001 — Ensure wallet per user (idempotent).
+# Wallet-id = user-id (klaar voor latere bank-koppeling).
+# ============================================================
+def ensure_wallet(user_id: str) -> dict:
+    """Maak wallet aan voor user als die nog niet bestaat. Idempotent. Wallet-id = user-id."""
+    wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
+    if user_id not in wallets.get("wallets", {}):
+        wallets.setdefault("wallets", {})[user_id] = {
+            "wallet_id": user_id,
+            "balance": 0.0,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "total_deposited": 0,
+            "total_withdrawn": 0,
+            "total_donated": 0,
+            "iban": None,  # voor latere bank-koppeling
+        }
+        save_json(DATA_DIR / "wallets.json", wallets)
+    return wallets["wallets"][user_id]
+
+
+@router.post("/ensure/{user_id}")
+async def ensure_wallet_endpoint(user_id: str):
+    """Maak wallet als die er nog niet is. Wordt aangeroepen bij login."""
+    w = ensure_wallet(user_id)
+    return {"success": True, "wallet": w}
+
+
+@router.post("/backfill-all")
+async def backfill_all_wallets():
+    """Eenmalige backfill: maak wallets voor alle bestaande users zonder wallet."""
+    users_data = load_json(USERS_FILE, default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    created = []
+    for u in users_list:
+        uid = u.get("id") or u.get("user_id")
+        if not uid:
+            continue
+        wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}, "transactions": []})
+        if uid not in wallets.get("wallets", {}):
+            ensure_wallet(uid)
+            created.append(uid)
+    return {"success": True, "created": created, "total_now": len(load_json(DATA_DIR / "wallets.json").get("wallets", {}))}
+
+
+# ============================================================
+# v4_token_admin_001 — Admin: token grant + revoke per user
+# ============================================================
+class TokenAdminRequest(BaseModel):
+    amount: int = 1
+    reason: Optional[str] = None
+
+
+@router.post("/admin/token/grant/{user_id}")
+async def admin_grant_token(user_id: str, req: TokenAdminRequest):
+    """Admin geeft N tokens aan user (uit Spark treasury user-000)."""
+    n = max(1, int(req.amount))
+    roar = load_json(ROAR_FILE, default={"balances": {}})
+    treasury = int(roar.get("balances", {}).get("user-000", 0))
+    if treasury < n:
+        return {"success": False, "error": f"Treasury heeft maar {treasury} tokens, je vroeg {n}"}
+    roar["balances"]["user-000"] = treasury - n
+    roar["balances"][user_id] = int(roar.get("balances", {}).get(user_id, 0)) + n
+    roar.setdefault("admin_log", []).append({
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "action": "grant", "user_id": user_id, "amount": n, "reason": req.reason
+    })
+    save_json(ROAR_FILE, roar)
+    return {"success": True, "user_id": user_id, "new_balance": roar["balances"][user_id], "treasury_left": roar["balances"]["user-000"]}
+
+
+@router.post("/admin/token/revoke/{user_id}")
+async def admin_revoke_token(user_id: str, req: TokenAdminRequest):
+    """Admin neemt N tokens terug van user → treasury."""
+    n = max(1, int(req.amount))
+    roar = load_json(ROAR_FILE, default={"balances": {}})
+    user_bal = int(roar.get("balances", {}).get(user_id, 0))
+    if user_bal < n:
+        return {"success": False, "error": f"User heeft maar {user_bal} tokens"}
+    roar["balances"][user_id] = user_bal - n
+    roar["balances"]["user-000"] = int(roar.get("balances", {}).get("user-000", 0)) + n
+    roar.setdefault("admin_log", []).append({
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "action": "revoke", "user_id": user_id, "amount": n, "reason": req.reason
+    })
+    save_json(ROAR_FILE, roar)
+    return {"success": True, "user_id": user_id, "new_balance": roar["balances"][user_id]}
+
+
+@router.get("/admin/overview")
+async def admin_wallet_overview():
+    """Per-user overzicht: wallet €, tokens, gradatie. Voor admin UI."""
+    users_data = load_json(USERS_FILE, default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    wallets = load_json(DATA_DIR / "wallets.json", default={"wallets": {}})
+    roar = load_json(ROAR_FILE, default={"balances": {}})
+    rows = []
+    for u in users_list:
+        uid = u.get("id") or u.get("user_id")
+        if not uid:
+            continue
+        w = wallets.get("wallets", {}).get(uid, {})
+        rows.append({
+            "user_id": uid,
+            "naam": u.get("voornaam") or u.get("naam") or u.get("volledige_naam") or uid,
+            "gradatie": u.get("gradatie", 7),
+            "wallet_id": w.get("wallet_id"),
+            "balance_eur": round(float(w.get("balance", 0) or 0), 2),
+            "iban": w.get("iban"),
+            "tokens": int(roar.get("balances", {}).get(uid, 0)),
+        })
+    rows.sort(key=lambda r: (r["gradatie"], r["naam"].lower()))
+    return {"success": True, "rows": rows}
 
 
 class DepositRequest(BaseModel):

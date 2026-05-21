@@ -289,9 +289,36 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             # Overflow → gaat naar overflow_pool (voor later expansie)
             user.setdefault("overflow_pool", 0.0)
             user["overflow_pool"] = round(user["overflow_pool"] + overflow, 4)
+
+            # v4_spark_fee_001: 5% van netto winst (≥ €0.10) → naar Spark wallet (user-000)
+            # Eigenaarschap-check: Spark's eigen bot (user-000) betaalt geen fee aan zichzelf
+            spark_fee = 0.0
+            if netto >= 0.10 and user_id != "user-000":
+                spark_fee = round(netto * 0.05, 4)
+                # Trek af van pot capital
+                p["capital"] = round(p["capital"] - spark_fee, 4)
+                # Voeg toe aan Spark wallet
+                try:
+                    wallet_file = Path(__file__).parent.parent.parent / "data" / "wallet" / "wallets.json"
+                    wal = load_json(wallet_file, default={"wallets": {}})
+                    spark_wal = wal.setdefault("wallets", {}).setdefault("user-000", {
+                        "wallet_id": "user-000", "balance": 0.0,
+                        "created_at": datetime.now(timezone.utc).isoformat(),
+                    })
+                    spark_wal["balance"] = round(float(spark_wal.get("balance", 0)) + spark_fee, 4)
+                    spark_wal.setdefault("fee_log", []).append({
+                        "ts": datetime.now(timezone.utc).isoformat(),
+                        "from_user": user_id, "from_pot": pot_id,
+                        "netto_profit": netto, "fee_eur": spark_fee,
+                    })
+                    save_json(wallet_file, wal)
+                except Exception as e:
+                    import logging
+                    logging.getLogger("spark_fee").warning(f"Spark fee storten faalde: {e}")
+
             _save(data)
-            # v4_token_potje_001: bij positieve winst — mint Spark bonus-tokens
-            bonus_result = _mint_spark_bonus_tokens(netto, p["id"], user_id) if netto > 0 else None
+            # v4_token_potje_001: bij positieve winst — mint Spark bonus-tokens (na fee-aftrek)
+            bonus_result = _mint_spark_bonus_tokens(netto - spark_fee, p["id"], user_id) if netto > 0 else None
             # Probeer automatisch te expanderen als mogelijk
             auto_expansion = None
             try:
@@ -307,7 +334,7 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                     auto_expansion = expand_potjes(user_id)
             except Exception:
                 pass
-            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion, "spark_bonus": bonus_result}
+            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion, "spark_bonus": bonus_result, "spark_fee_eur": spark_fee}
     return {}
 
 

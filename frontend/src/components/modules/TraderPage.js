@@ -747,14 +747,21 @@ export function TraderPage({ onNavigate }) {
 
               {/* Koop Potje — enige actie-knop. Spark regelt de rest. */}
               <div className="mt-4 pt-4 border-t border-slate-800">
-                <button data-testid="spark-buy-potje" onClick={executeSparkBuy} disabled={qtLoading}
-                  className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:from-emerald-400 hover:to-teal-500 transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
-                  <span className="text-base">⚡</span>
-                  {qtLoading ? 'Spark werkt...' : 'Koop potje'}
-                </button>
+                {(user?.gradatie ?? 7) > 1 ? (
+                  <div data-testid="quick-buy-locked" className="w-full py-3.5 bg-slate-800/50 border border-slate-700 text-slate-400 font-medium rounded-xl text-sm flex items-center justify-center gap-2">
+                    🔒 Alleen beheerder kan handmatig potje kopen
+                  </div>
+                ) : (
+                  <button data-testid="spark-buy-potje" onClick={executeSparkBuy} disabled={qtLoading}
+                    className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:from-emerald-400 hover:to-teal-500 transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span className="text-base">⚡</span>
+                    {qtLoading ? 'Spark werkt...' : 'Koop potje'}
+                  </button>
+                )}
                 <p className="text-[10px] text-slate-500 mt-2 text-center leading-relaxed">
-                  Spark pakt het volgende vrije potje, koopt op de live prijs en start direct de monitor.<br/>
-                  Auto-verkoop op winst-moment via trailing stop.
+                  {(user?.gradatie ?? 7) > 1
+                    ? <>Jouw bot draait automatisch zodra je tokens hebt (1 token = 1 potje).</>
+                    : <>Spark pakt het volgende vrije potje, koopt op de live prijs en start direct de monitor.<br/>Auto-verkoop op winst-moment via trailing stop.</>}
                 </p>
               </div>
 

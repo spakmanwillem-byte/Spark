@@ -389,7 +389,18 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     """
     Spark-assisted buy: pakt eerste vrije potje, voert buy uit, start monitor in potjes-mode.
     Monitor neemt over voor automatische verkoop op trailing-stop winst-moment.
+
+    v4_token_gate_001: alleen gradatie ≤ 1 (admin) mag handmatig quick-buy.
+    Lagere gradaties mogen alleen via auto-bot werken wanneer ze tokens bezitten.
     """
+    # Token-gate + admin-lock
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    user_entry = next((u for u in users_list if (u.get("id") or u.get("user_id")) == user_id), None)
+    gradatie = (user_entry or {}).get("gradatie", 7)
+    if gradatie > 1:
+        return {"success": False, "error": "Handmatig potje kopen kan alleen door beheerder (gradatie 1). Jouw bot start automatisch zodra je tokens hebt."}
+
     monitor = get_monitor()
 
     # 1) Vind vrij potje (v4_potje_quickbuy_002: skip cycle-check, user-initiated mag meerdere)
@@ -499,6 +510,62 @@ async def monitor_status():
 @router.get("/monitor/decisions")
 async def monitor_decisions(limit: int = Query(50)):
     return {"success": True, "decisions": get_monitor().get_decisions(limit)}
+
+
+# ============================================================
+# v4_per_user_bot_001 — Per-user bot endpoints
+# ============================================================
+@router.post("/bot/start/{user_id}")
+async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest()):
+    """Start trade-bot voor specifieke user. Token-gate: user moet ≥ 1 token hebben.
+    Spark (user-000) en admin (gradatie 1) zijn uitgezonderd van token-gate."""
+    from .monitor import get_user_monitor
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    user_entry = next((u for u in users_list if (u.get("id") or u.get("user_id")) == user_id), None)
+    gradatie = (user_entry or {}).get("gradatie", 7)
+    if gradatie > 1 and user_id != "user-000":
+        roar = load_json(Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json", default={})
+        tokens = int(roar.get("balances", {}).get(user_id, 0))
+        if tokens < 1:
+            return {"success": False, "error": "Je hebt 0 tokens — bot kan niet starten. 1 token = 1 potje slot."}
+    mon = get_user_monitor(user_id)
+    return mon.start(
+        interval=req.interval,
+        market=req.market,
+        markets=req.markets,
+        candle_interval=req.candle_interval,
+        user_id=user_id,
+        auto_trade=req.auto_trade,
+        trade_amount=req.trade_amount,
+        use_mock=req.use_mock,
+        use_potjes=req.use_potjes,
+    )
+
+
+@router.post("/bot/stop/{user_id}")
+async def bot_stop(user_id: str):
+    from .monitor import get_user_monitor
+    return get_user_monitor(user_id).stop()
+
+
+@router.get("/bot/status/{user_id}")
+async def bot_status(user_id: str):
+    from .monitor import get_user_monitor
+    return {"success": True, "status": get_user_monitor(user_id).get_status()}
+
+
+@router.get("/bot/decisions/{user_id}")
+async def bot_decisions(user_id: str, limit: int = Query(50)):
+    from .monitor import get_user_monitor
+    return {"success": True, "decisions": get_user_monitor(user_id).get_decisions(limit)}
+
+
+@router.get("/admin/bots")
+async def admin_list_bots():
+    """v4_trade_analytics_001: alle user-bots voor admin overzicht."""
+    from .monitor import list_running_bots
+    return {"success": True, "bots": list_running_bots()}
 
 
 # ============================================================

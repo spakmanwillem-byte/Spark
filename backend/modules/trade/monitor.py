@@ -492,22 +492,11 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
 
 
 class MonitorService:
-    """Singleton background monitoring service"""
+    """v4_per_user_bot_001: per-user trade bot.
+    Was singleton, nu instantieerbaar per user-id via MonitorRegistry."""
 
-    _instance = None
-    _lock = threading.Lock()
-
-    def __new__(cls):
-        if cls._instance is None:
-            with cls._lock:
-                if cls._instance is None:
-                    cls._instance = super().__new__(cls)
-        return cls._instance
-
-    def __init__(self):
-        if hasattr(self, "_initialized"):
-            return
-        self._initialized = True
+    def __init__(self, user_id: str = "user-001"):
+        self._lock = threading.Lock()
         self._running = False
         self._paused = False
         self._thread = None
@@ -515,25 +504,26 @@ class MonitorService:
         self._start_time = None
         self._cycles = 0
         self._interval = 60
-        self._market = "BCH-EUR"          # primair (voor status display)
-        self._markets = ["BCH-EUR"]       # v4_multi_market_001: lijst van te monitoren coins
+        self._market = "BCH-EUR"
+        self._markets = ["BCH-EUR"]
         self._candle_interval = "1h"
-        self._user_id = "user-001"
+        self._user_id = user_id
         self._decisions = []
         self._last_price = 0
-        self._last_prices = {}            # v4_multi_market_001: laatste prijs per market
+        self._last_prices = {}
         self._auto_trade = False
         self._trade_amount = 5.0
         self._use_mock = True
-        # Position state for trailing stop (single-pot mode)
         self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
-        # Potjes mode: als True, gebruik 10-potjes systeem
         self._use_potjes = False
 
     def start(self, interval: int = 60, market: str = "BCH-EUR",
-              candle_interval: str = "1h", user_id: str = "user-001",
+              candle_interval: str = "1h", user_id: Optional[str] = None,
               auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = True,
               use_potjes: bool = False, markets: Optional[List[str]] = None) -> Dict:
+        # user_id wordt vastgezet bij instantiatie; argument blijft voor back-compat
+        if user_id and user_id != self._user_id:
+            self._user_id = user_id
         with self._lock:
             if self._running:
                 return {"success": False, "message": "Monitor draait al", "status": self.get_status()}
@@ -823,8 +813,37 @@ class MonitorService:
         logger.info(f"Cycle #{self._cycles} | {market} €{price:.2f} | {decision['action']}")
 
 
-_monitor = MonitorService()
+_monitor = MonitorService(user_id="user-001")
+
+# v4_per_user_bot_001 — Registry van per-user bots
+_registry: Dict[str, MonitorService] = {}
+_registry_lock = threading.Lock()
 
 
 def get_monitor() -> MonitorService:
+    """Back-compat: legacy single-monitor (user-001)"""
     return _monitor
+
+
+def get_user_monitor(user_id: str) -> MonitorService:
+    """v4_per_user_bot_001: haal of maak monitor voor specifieke user."""
+    with _registry_lock:
+        if user_id not in _registry:
+            _registry[user_id] = MonitorService(user_id=user_id)
+        return _registry[user_id]
+
+
+def list_running_bots() -> List[Dict]:
+    """Status van alle actieve bots — voor admin Trade Analytics."""
+    out = []
+    with _registry_lock:
+        bots = list(_registry.values())
+    # Legacy monitor altijd toevoegen indien niet al in registry
+    if _monitor._user_id not in _registry:
+        bots.insert(0, _monitor)
+    for m in bots:
+        try:
+            out.append(m.get_status())
+        except Exception:
+            pass
+    return out

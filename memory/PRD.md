@@ -12,6 +12,17 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-21: **v4_per_user_bot_001 + v4_spark_fee_001 + v4_token_gate_001 + v4_wallet_per_user_001**:
+  - **Per-user tradebot architectuur**: `MonitorService` was singleton, nu instantieerbaar per user-id via `MonitorRegistry` (`get_user_monitor(user_id)`). Legacy `get_monitor()` blijft werken voor backward-compat (Willem's single monitor)
+  - **Token-gate quick-buy**: `/api/trade/quick-buy-potje/{user_id}` controleert nu gradatie ≤ 1 (alleen admin mag handmatig potje kopen). UI: knop disabled met uitleg voor andere users
+  - **Token-gate bot-start**: `/api/trade/bot/start/{user_id}` checkt: gradatie ≤ 1 OF user-000 (Spark) bypass, anders moet user ≥ 1 token hebben (1 token = 1 potje slot)
+  - **5% Spark fee**: `close_pot()` houdt 5% in op netto SELL ≥ €0.10 → naar Spark wallet (user-000). Spark zelf betaalt geen fee aan zichzelf (uitgesloten). Fee gelogd in `wallets.json[user-000].fee_log`
+  - **Wallets per user**: alle 12 users hebben nu wallet met `wallet_id = user_id` (klaar voor latere bank-koppeling). `ensure_wallet()` is idempotent, `POST /api/wallet/backfill-all` ran eenmalig
+  - **Admin UI**: nieuwe "Wallet & Tokens" kaart per user in UsersAdminPage (Overzicht tab) met wallet_id, EUR saldo, ROAR tokens, IBAN-placeholder + knoppen "+1/+10 token", "−1 token". Geblokkeerd voor admin-account zelf
+  - **Admin endpoints**: `POST /api/wallet/admin/token/grant/{uid}`, `revoke/{uid}`, `GET /api/wallet/admin/overview`
+  - **State-update 21 mei**: Willem 0 tokens / €0 / 0 potjes (alles verkocht). Spark 10 tokens / €50.80 / 10 potjes (zijn eigen tradebot start nu). Treasury_pool 999.980 nog uit te geven
+  - **Spark eigen bot** gestart: user-000, 1h candles, 5 coins (BCH/BTC/ETH/SOL/ADA), real-trade, 10-potjes mode
+  - **Trade Analytics endpoint** `GET /api/trade/admin/bots` toont status van alle running bots
 - 2026-05-20: **v4_meetpunt_002 — Recent Trades clean view + multi-coin LIVE**:
   - BUY-row van meetpunt-paar gevlagd `hidden_in_recent: true`. Frontend `trades.filter(t => !t.hidden_in_recent)` toont nu 1 trade in Recent Trades widget (SELL met +€50,80)
   - Stats endpoint (`/api/trade/stats`) blijft beide entries gebruiken zodat math klopt (gekocht €5,08 / verkocht €56,03 / fees €0,15 / netto +€50,80)

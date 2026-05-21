@@ -1,7 +1,8 @@
 {
   "balances": {
-    "user-000": 999990,
-    "user-001": 10
+    "user-000": 10,
+    "user-001": 0,
+    "user-c609d7d1": 0
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -9,9 +10,53 @@
   "transactions": [],
   "spark_bonus": {
     "balance": 0,
-    "cumulative_profit_eur": 0.0,
+    "cumulative_profit_eur": 0.821267,
     "token_price_at_mint": 5.08,
     "history": [],
     "note": "Earned door Spark via trading-winst. 1 bonus-token per €5.08 cumulatieve winst. Bestemd voor server-kosten (uitcash via wallet→bank later)."
-  }
+  },
+  "admin_log": [
+    {
+      "ts": "2026-05-21T11:54:11.163319+00:00",
+      "action": "grant",
+      "user_id": "user-c609d7d1",
+      "amount": 2,
+      "reason": "Test"
+    },
+    {
+      "ts": "2026-05-21T11:54:11.192483+00:00",
+      "action": "revoke",
+      "user_id": "user-c609d7d1",
+      "amount": 1,
+      "reason": "Test rollback"
+    },
+    {
+      "ts": "2026-05-21T11:54:11.262644+00:00",
+      "action": "revoke",
+      "user_id": "user-c609d7d1",
+      "amount": 1,
+      "reason": "Test cleanup"
+    },
+    {
+      "ts": "2026-05-21T12:01:10.100734+00:00",
+      "action": "grant",
+      "user_id": "user-c609d7d1",
+      "amount": 1,
+      "reason": null
+    },
+    {
+      "ts": "2026-05-21T12:01:10.642840+00:00",
+      "action": "revoke",
+      "user_id": "user-c609d7d1",
+      "amount": 1,
+      "reason": null
+    }
+  ],
+  "treasury_pool": 999980,
+  "repair_log": [
+    {
+      "ts": "2026-05-21T11:57:18.258412+00:00",
+      "note": "Willem verkocht alles, Spark gebruikt €50.80 voor eigen 10 potjes (10 tokens own)"
+    }
+  ]
 }

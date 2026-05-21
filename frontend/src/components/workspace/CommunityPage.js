@@ -137,6 +137,7 @@ function ChatBubble({ msg, isOwn }) {
   const avatar = msg.avatar;  // v4_community_avatar_001
   const avatarUrl = avatar?.kind === 'image' && avatar.url ? `${API}${avatar.url}` : null;
   const avatarEmoji = avatar?.kind === 'emoji' ? avatar.emoji : null;
+  const isFallback = !!avatar?.is_fallback;  // v4_avatar_fallback_001 — roadkill logo
 
   return (
     <div data-testid={`msg-${msg.id}`} className={`flex gap-2.5 ${isOwn ? 'flex-row-reverse' : ''}`}>
@@ -145,7 +146,8 @@ function ChatBubble({ msg, isOwn }) {
         avatarUrl ? '' : isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
       }`}>
         {avatarUrl ? (
-          <img src={avatarUrl} alt={msg.user_name} className="w-full h-full object-cover"
+          <img src={avatarUrl} alt={msg.user_name} className={`w-full h-full object-cover ${isFallback ? 'opacity-60 grayscale' : ''}`}
+            title={isFallback ? 'Geen avatar — Roadkill logo fallback' : msg.user_name}
             onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.classList.add(isBot ? 'bg-slate-800' : 'bg-slate-800'); }} />
         ) : avatarEmoji ? (
           <span className="text-lg leading-none">{avatarEmoji}</span>

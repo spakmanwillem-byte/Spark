@@ -34,6 +34,30 @@ MAX_DIM = 512  # max width/height
 QUALITY = 85
 ADMIN_GRAD = 2  # gradatie ≤ 2 mag galerij beheren
 
+# v4_avatar_fallback_001 — Roadkill logo als default fallback wanneer geen avatar gezet is
+ROADKILL_LOGO_ID = "roadkill-logo"
+ROADKILL_LOGO_URL = f"/api/avatar/gallery/{ROADKILL_LOGO_ID}/image"
+
+# v4_avatar_bot_lock_001 — Avatars geclaimd door specifieke bots (title-based, exclusief voor die bot)
+# Maakt het visueel duidelijk (locket-stempel) + voorkomt dat ze door normale users gekozen worden
+def _get_bot_owner(entry: dict) -> Optional[str]:
+    """Return bot user-id als deze avatar exclusief voor een bot is."""
+    if not entry:
+        return None
+    # 1. Expliciete bot_owner tag (toekomstige uploads)
+    explicit = entry.get("bot_owner")
+    if explicit:
+        return explicit
+    # 2. Title-match met bekende bots
+    title = (entry.get("title") or "").strip().lower()
+    title_to_bot = {
+        "harry klokkenmaker": "bot-harry",
+        "madelief stouten": "bot-madelief",
+        "mr smith": "bot-smith",
+        "de boekhouder": "bot-boekhouder",
+    }
+    return title_to_bot.get(title)
+
 
 def _ensure_gallery_dir():
     GALLERY_DIR.mkdir(parents=True, exist_ok=True)
@@ -71,7 +95,16 @@ async def list_gallery():
     """Lijst van systeem-avatars (zichtbaar voor alle users)."""
     _ensure_gallery_dir()
     idx = load_json(GALLERY_INDEX, default={"avatars": []})
-    return {"success": True, "avatars": idx.get("avatars", [])}
+    # Verrijk met bot_owner zodat frontend locket-stempel kan tonen
+    enriched = []
+    for a in idx.get("avatars", []):
+        out = dict(a)
+        owner = _get_bot_owner(a)
+        if owner:
+            out["bot_owner"] = owner
+            out["locked"] = True
+        enriched.append(out)
+    return {"success": True, "avatars": enriched}
 
 
 @router.post("/gallery")
@@ -203,15 +236,24 @@ async def select_avatar(user_id: str, body: AvatarSelect):
     if ref and ref.startswith("gallery:"):
         gid = ref.split(":", 1)[1]
         idx = load_json(GALLERY_INDEX, default={"avatars": []})
-        if not any(a.get("id") == gid for a in idx.get("avatars", [])):
+        entry = next((a for a in idx.get("avatars", []) if a.get("id") == gid), None)
+        if not entry:
             raise HTTPException(404, "Galerij-avatar niet gevonden")
+        # v4_avatar_bot_lock_001: bot-claimed avatar mag alleen door die bot of admin worden gekozen
+        owner = _get_bot_owner(entry)
+        if owner and owner != user_id and not _is_admin(user_id):
+            raise HTTPException(403, f"Deze avatar is exclusief voor {owner}")
     _set_user_avatar(user_id, ref)
     return {"success": True, "avatar_ref": ref}
 
 
 @router.get("/current/{user_id}")
 async def get_current_avatar(user_id: str):
-    """Geef huidige avatar_ref + resolved URL terug."""
+    """Geef huidige avatar_ref + resolved URL terug.
+
+    v4_avatar_fallback_001: als geen avatar gezet → roadkill logo als fallback URL
+    (frontend kan zelf kiezen om de letter-fallback te gebruiken via avatar_ref==null).
+    """
     data = load_json(USERS_FILE, default={"users": []})
     me = next((u for u in data.get("users", []) if u.get("id") == user_id), None)
     if not me:
@@ -224,4 +266,12 @@ async def get_current_avatar(user_id: str):
         gid = ref.split(":", 1)[1]
         if (GALLERY_DIR / f"{gid}.jpg").exists():
             url = f"/api/avatar/gallery/{gid}/image"
-    return {"success": True, "avatar_ref": ref, "url": url}
+    # Fallback naar Roadkill logo wanneer niets gezet
+    fallback_url = ROADKILL_LOGO_URL if (GALLERY_DIR / f"{ROADKILL_LOGO_ID}.jpg").exists() else None
+    return {
+        "success": True,
+        "avatar_ref": ref,
+        "url": url,
+        "fallback_url": fallback_url,
+        "is_fallback": url is None,
+    }

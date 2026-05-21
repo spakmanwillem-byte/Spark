@@ -18762,11 +18762,340 @@
         "session_id": "default",
         "gesprek_nummer": 712
       }
+    },
+    {
+      "id": "conv-22adb56e",
+      "timestamp": "2026-05-21T21:25:32.716092+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat is gisteren in de community besproken?",
+      "spark_response": "**gisteren**: Gisteren betekent de dag vóór vandaag.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **besproken** (opgeslagen als kaarten)\n\nWat houdt 'besproken' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gisteren"
+          },
+          {
+            "begrip": "community"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "besproken"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 713
+      }
+    },
+    {
+      "id": "conv-70d4fbef",
+      "timestamp": "2026-05-21T21:27:01.807508+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat is gisteren in de community besproken?",
+      "spark_response": "📋 **Community-recap gisteren** (2026-05-20)\n• 2 berichten totaal (1 van mensen, 1 van bots)\n• Actief: Willem (1)\n• Onderwerpen: allemaal, vandaag, eigenaardige, situatie\n• Eerste bericht: _Willem: \"hoi allemaal vandaag had ik een eigenaardige situatie\"_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 714
+      }
+    },
+    {
+      "id": "conv-7daff1bd",
+      "timestamp": "2026-05-21T21:27:11.805399+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is Base Line",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'besproken' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 715
+      }
+    },
+    {
+      "id": "conv-240e4ada",
+      "timestamp": "2026-05-21T21:27:26.367539+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over Base Line",
+      "spark_response": "Ik heb **1** kaarten over **Base Line** in mijn kennisbank. Een paar: **Base Line**. Welke wil je dat ik uitleg?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 716
+      }
+    },
+    {
+      "id": "conv-83fa8f31",
+      "timestamp": "2026-05-21T21:29:51.074103+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Wat is gisteren in de community besproken?",
+      "spark_response": "📋 **Community-recap gisteren** (2026-05-20)\n• 2 berichten totaal (1 van mensen, 1 van bots)\n• Actief: Willem (1)\n• Onderwerpen: allemaal, vandaag, eigenaardige, situatie\n• Eerste bericht: _Willem: \"hoi allemaal vandaag had ik een eigenaardige situatie\"_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 717
+      }
+    },
+    {
+      "id": "conv-b4e2f7d8",
+      "timestamp": "2026-05-21T21:29:51.158795+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "community recap",
+      "spark_response": "In de community is **vandaag** (2026-05-21) niets besproken. Stilte!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 718
+      }
+    },
+    {
+      "id": "conv-c90a3a6f",
+      "timestamp": "2026-05-21T21:29:51.246946+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is eergisteren besproken",
+      "spark_response": "📋 **Community-recap eergisteren** (2026-05-19)\n• 1 berichten totaal (1 van mensen, 0 van bots)\n• Actief: Roadkill (1)\n• Onderwerpen: vroeg\n• Eerste bericht: _Roadkill: \"wat vroeg jij dan\"_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 719
+      }
+    },
+    {
+      "id": "conv-59f42f63",
+      "timestamp": "2026-05-21T21:29:56.229466+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel over Base Line",
+      "spark_response": "Ik heb **1** kaarten over **Base Line** in mijn kennisbank. Een paar: **Base Line**. Welke wil je dat ik uitleg?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 720
+      }
+    },
+    {
+      "id": "conv-acf06542",
+      "timestamp": "2026-05-21T21:30:20.050785+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Wat is gisteren in de community besproken?",
+      "spark_response": "📋 **Community-recap gisteren** (2026-05-20)\n• 2 berichten totaal (1 van mensen, 1 van bots)\n• Actief: Willem (1)\n• Onderwerpen: allemaal, vandaag, eigenaardige, situatie\n• Eerste bericht: _Willem: \"hoi allemaal vandaag had ik een eigenaardige situatie\"_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 721
+      }
+    },
+    {
+      "id": "conv-15b686a5",
+      "timestamp": "2026-05-21T21:30:20.221909+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "community recap",
+      "spark_response": "In de community is **vandaag** (2026-05-21) niets besproken. Stilte!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 722
+      }
+    },
+    {
+      "id": "conv-44358132",
+      "timestamp": "2026-05-21T21:30:20.311594+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is eergisteren besproken",
+      "spark_response": "📋 **Community-recap eergisteren** (2026-05-19)\n• 1 berichten totaal (1 van mensen, 0 van bots)\n• Actief: Roadkill (1)\n• Onderwerpen: vroeg\n• Eerste bericht: _Roadkill: \"wat vroeg jij dan\"_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 723
+      }
+    },
+    {
+      "id": "conv-009b4c64",
+      "timestamp": "2026-05-21T21:30:20.796364+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel over Base Line",
+      "spark_response": "Ik heb **1** kaarten over **Base Line** in mijn kennisbank. Een paar: **Base Line**. Welke wil je dat ik uitleg?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 724
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 712,
-    "last_updated": "2026-05-21T21:15:48.761605+00:00"
+    "total_conversations": 724,
+    "last_updated": "2026-05-21T21:30:20.796364+00:00"
   }
 }

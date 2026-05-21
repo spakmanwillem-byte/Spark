@@ -1223,16 +1223,31 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
             <p className="text-[11px] text-slate-500 text-center py-4">Geen galerij-avatars beschikbaar</p>
           ) : (
             <div className="grid grid-cols-5 sm:grid-cols-7 gap-2">
-              {gallery.map(av => (
-                <button key={av.id} onClick={() => selectFromGallery(av.id)} disabled={busy}
-                  data-testid={`gallery-pick-${av.id}`}
-                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                    current.avatar_ref === `gallery:${av.id}` ? 'border-amber-400' : 'border-slate-700 hover:border-amber-400/60'
-                  }`}
-                  title={av.title || av.id}>
-                  <img src={`${apiUrl}/api/avatar/gallery/${av.id}/image`} alt={av.title || ''} className="w-full h-full object-cover" />
-                </button>
-              ))}
+              {gallery.map(av => {
+                const owner = av.bot_owner;
+                const locked = !!av.locked;
+                // Lock-regel: alleen die bot zelf (en admin) mag claimen. Hier is viewer altijd admin in UsersAdminPage.
+                const isWrongOwner = locked && owner && owner !== user?.id;
+                return (
+                  <button key={av.id} onClick={() => selectFromGallery(av.id)} disabled={busy}
+                    data-testid={`gallery-pick-${av.id}`}
+                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      current.avatar_ref === `gallery:${av.id}` ? 'border-amber-400' :
+                      isWrongOwner ? 'border-amber-700/40 hover:border-amber-500' : 'border-slate-700 hover:border-amber-400/60'
+                    }`}
+                    title={locked ? `${av.title || av.id} — exclusief voor ${owner}` : (av.title || av.id)}>
+                    <img src={`${apiUrl}/api/avatar/gallery/${av.id}/image`} alt={av.title || ''}
+                      className={`w-full h-full object-cover ${isWrongOwner ? 'opacity-50' : ''}`} />
+                    {locked && (
+                      <span data-testid={`locket-${av.id}`}
+                        className="absolute top-1 right-1 w-5 h-5 rounded-full bg-amber-500/90 border border-amber-300/60 flex items-center justify-center text-[10px] shadow-md"
+                        title={`Stempel: gereserveerd voor ${owner}`}>
+                        <Lock className="w-2.5 h-2.5 text-slate-950" />
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

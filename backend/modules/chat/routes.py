@@ -380,6 +380,14 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "agenda_overview")
             return response
 
+        # v4_community_recap_001 — "wat is gisteren besproken?"
+        recap_offset = si.detect_community_recap_intent(text)
+        if recap_offset is not None:
+            out = si.handle_community_recap(offset_days=recap_offset)
+            response.update(out)
+            _save_log(req, response, "community_recap")
+            return response
+
         # Help (admin krijgt extra commands)
         if si.detect_help_intent(text):
             u = _load_user() or {}

@@ -509,3 +509,93 @@ def handle_account_delete_cancel() -> Dict:
         "message": "Goed, ik laat je account staan. Niks veranderd.",
     }
 
+
+
+# ============== COMMUNITY RECAP INTENT (v4_community_recap_001) ==============
+_COMMUNITY_RECAP_PATTERNS = [
+    r"\bwat (is|was|werd) (er )?(gisteren|vandaag|eergisteren).{0,40}(besproken|gezegd|gepraat|gepost)\b",
+    r"\bwat (is|was) er (gisteren|vandaag|eergisteren).{0,30}(community|chat)\b",
+    r"\bcommunity (recap|samenvatting|overzicht)\b",
+    r"\b(samenvatting|recap) (van )?(de )?community\b",
+    r"\bwat heeft (de )?community (gisteren|vandaag|eergisteren) (gezegd|besproken)\b",
+    r"\bwat (is|was) er (gisteren|vandaag|eergisteren) (besproken|gezegd|gepraat)\b",
+]
+
+
+def detect_community_recap_intent(text: str) -> Optional[int]:
+    """Returnt offset_days (0=vandaag, 1=gisteren, 2=eergisteren) of None."""
+    t = (text or "").lower()
+    matched = any(re.search(p, t) for p in _COMMUNITY_RECAP_PATTERNS)
+    if not matched:
+        return None
+    if "eergisteren" in t:
+        return 2
+    if "gisteren" in t:
+        return 1
+    return 0
+
+
+def handle_community_recap(offset_days: int = 1) -> Dict:
+    """Roep community recap aan en formatteer voor chat-respons."""
+    from datetime import timedelta
+    target_dt = datetime.now(timezone.utc) - timedelta(days=offset_days)
+    target = target_dt.strftime("%Y-%m-%d")
+
+    community_file = DATA_ROOT / "community" / "messages.json"
+    data = load_json(community_file, default={"messages": []})
+    messages = data.get("messages", [])
+    day_msgs = [m for m in messages if (m.get("timestamp") or "").startswith(target)]
+    day_msgs.sort(key=lambda m: m.get("timestamp", ""))
+
+    label = {0: "vandaag", 1: "gisteren", 2: "eergisteren"}.get(offset_days, target)
+
+    if not day_msgs:
+        return {
+            "type": "community_recap",
+            "message": f"In de community is **{label}** ({target}) niets besproken. Stilte!",
+            "date": target,
+            "total": 0,
+        }
+
+    user_counts: Dict[str, int] = {}
+    bot_count = 0
+    for m in day_msgs:
+        if m.get("is_bot"):
+            bot_count += 1
+        else:
+            name = m.get("user_name") or "Onbekend"
+            user_counts[name] = user_counts.get(name, 0) + 1
+
+    STOP = {"weer", "wordt", "worden", "kunnen", "moeten", "willen", "zullen",
+            "echter", "daarom", "natuurlijk", "iemand", "iedereen", "alleen",
+            "samen", "geweest", "geleden", "tijdens", "vooral"}
+    word_counts: Dict[str, int] = {}
+    for m in day_msgs:
+        if m.get("is_bot"):
+            continue
+        for w in re.findall(r"\b[a-zà-ÿ]{5,}\b", (m.get("message") or "").lower()):
+            if w in STOP:
+                continue
+            word_counts[w] = word_counts.get(w, 0) + 1
+    top_topics = sorted(word_counts.items(), key=lambda x: -x[1])[:5]
+
+    lines = [f"📋 **Community-recap {label}** ({target})"]
+    lines.append(f"• {len(day_msgs)} berichten totaal ({sum(user_counts.values())} van mensen, {bot_count} van bots)")
+    if user_counts:
+        top = sorted(user_counts.items(), key=lambda x: -x[1])[:3]
+        lines.append("• Actief: " + ", ".join(f"{n} ({c})" for n, c in top))
+    if top_topics:
+        lines.append("• Onderwerpen: " + ", ".join(w for w, _ in top_topics))
+    # Voorbeeld-snippet (eerste niet-bot bericht)
+    first_user = next((m for m in day_msgs if not m.get("is_bot")), None)
+    if first_user:
+        snippet = (first_user.get("message") or "")[:120]
+        lines.append(f"• Eerste bericht: _{first_user.get('user_name')}: \"{snippet}\"_")
+    return {
+        "type": "community_recap",
+        "message": "\n".join(lines),
+        "date": target,
+        "total": len(day_msgs),
+        "users": user_counts,
+        "top_topics": [{"word": w, "count": c} for w, c in top_topics],
+    }

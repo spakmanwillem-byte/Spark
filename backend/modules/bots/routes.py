@@ -113,6 +113,7 @@ async def get_community_messages(limit: int = 50):
     udata = load_json(users_file, default={})
     users_list = udata.get("users", []) if isinstance(udata, dict) else []
     avatar_map = {}
+    ROADKILL_FALLBACK = {"kind": "image", "url": "/api/avatar/gallery/roadkill-logo/image", "is_fallback": True}
     for u in users_list:
         uid = u.get("id") or u.get("user_id")
         av = u.get("avatar") or u.get("avatar_ref")
@@ -126,13 +127,20 @@ async def get_community_messages(limit: int = 50):
                 avatar_map[uid] = {"kind": "emoji", "emoji": av.split(":", 1)[1]}
             elif av.startswith("upload:"):
                 avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/user/{uid}/image"}
+            else:
+                # Onbekend formaat → fallback
+                avatar_map[uid] = dict(ROADKILL_FALLBACK)
         else:
-            # Geen avatar veld → check user-upload als fallback
-            avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/user/{uid}/image"}
+            # Geen avatar veld → check user-upload anders roadkill fallback
+            user_img = Path(__file__).parent.parent.parent / "data" / "users" / uid / "avatar.jpg"
+            if user_img.exists():
+                avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/user/{uid}/image"}
+            else:
+                avatar_map[uid] = dict(ROADKILL_FALLBACK)
     enriched = []
     for m in messages[:limit]:
         m = dict(m)
-        m["avatar"] = avatar_map.get(m.get("user_id"))
+        m["avatar"] = avatar_map.get(m.get("user_id")) or dict(ROADKILL_FALLBACK)
         enriched.append(m)
     return {"messages": enriched, "total": len(messages)}
 
@@ -206,4 +214,129 @@ async def send_community_message(msg: ChatMessage):
         "message": user_msg,
         "bot_responses": bot_responses,
         "snap_candidates": snap_candidates,
+    }
+
+
+# ============================================================
+# v4_community_archive_001 — Community chat archief per dag/maand/jaar
+# ============================================================
+def _group_by_date(messages):
+    """Groepeer messages in jaar→maand→dag boom met counts en first/last ts."""
+    tree = {}
+    for m in messages:
+        ts = m.get("timestamp") or ""
+        if not ts or len(ts) < 10:
+            continue
+        try:
+            year = ts[0:4]
+            month = ts[5:7]
+            day = ts[8:10]
+            int(year)
+            int(month)
+            int(day)
+        except Exception:
+            continue
+        tree.setdefault(year, {}).setdefault(month, {}).setdefault(day, {"count": 0, "first": ts, "last": ts})
+        node = tree[year][month][day]
+        node["count"] += 1
+        if ts < node["first"]:
+            node["first"] = ts
+        if ts > node["last"]:
+            node["last"] = ts
+    return tree
+
+
+@router.get("/community/archive")
+async def community_archive(year: Optional[str] = None, month: Optional[str] = None, day: Optional[str] = None):
+    """
+    Returnt jaar→maand→dag-tree van community-berichten.
+    - Geen params: alleen boom-counts
+    - year+month+day: berichten van die dag (chronologisch)
+    """
+    data = load_json(COMMUNITY_FILE, default={"messages": []})
+    messages = data.get("messages", [])
+    tree = _group_by_date(messages)
+    if year and month and day:
+        prefix = f"{year}-{month}-{day}"
+        day_msgs = [m for m in messages if (m.get("timestamp") or "").startswith(prefix)]
+        day_msgs.sort(key=lambda m: m.get("timestamp", ""))
+        return {
+            "tree": tree,
+            "day": prefix,
+            "messages": day_msgs,
+            "count": len(day_msgs),
+        }
+    return {"tree": tree, "total": len(messages)}
+
+
+@router.get("/community/recap")
+async def community_recap(date: Optional[str] = None, offset_days: int = 0):
+    """v4_community_recap_001 — Samenvatting van community-chat op een dag.
+
+    - `date=YYYY-MM-DD` voor expliciete datum
+    - `offset_days=1` voor gisteren (default 0 = vandaag)
+    Returnt human-readable recap + topic-counts + actieve users.
+    """
+    from datetime import timedelta
+    if date:
+        target = date
+    else:
+        target_dt = datetime.now(timezone.utc) - timedelta(days=offset_days)
+        target = target_dt.strftime("%Y-%m-%d")
+
+    data = load_json(COMMUNITY_FILE, default={"messages": []})
+    messages = data.get("messages", [])
+    day_msgs = [m for m in messages if (m.get("timestamp") or "").startswith(target)]
+    day_msgs.sort(key=lambda m: m.get("timestamp", ""))
+
+    user_counts = {}
+    bot_counts = {}
+    for m in day_msgs:
+        name = m.get("user_name") or "Onbekend"
+        if m.get("is_bot"):
+            bot_counts[name] = bot_counts.get(name, 0) + 1
+        else:
+            user_counts[name] = user_counts.get(name, 0) + 1
+
+    # Topic woordtelling (basic): woorden ≥5 letters die niet stopwoord zijn
+    import re
+    STOP = {"weer", "wordt", "worden", "kunnen", "moeten", "willen", "zullen",
+            "vandaag", "morgen", "gister", "echter", "daarom", "natuurlijk",
+            "iemand", "iedereen", "alleen", "samen", "geweest", "geleden",
+            "tijdens", "doorheen", "vooral", "ondanks", "tegelijk"}
+    word_counts = {}
+    for m in day_msgs:
+        if m.get("is_bot"):
+            continue  # focus op user-content
+        for w in re.findall(r"\b[a-zà-ÿ]{5,}\b", (m.get("message") or "").lower()):
+            if w in STOP:
+                continue
+            word_counts[w] = word_counts.get(w, 0) + 1
+    top_topics = sorted(word_counts.items(), key=lambda x: -x[1])[:8]
+
+    # Recap-tekst (Dutch, friendly)
+    if not day_msgs:
+        recap = f"Op {target} is er niets in de community besproken."
+    else:
+        bits = [f"Op {target} zijn er {len(day_msgs)} berichten in de community geplaatst"]
+        if user_counts:
+            top_user = max(user_counts.items(), key=lambda x: x[1])
+            bits.append(f"door {len(user_counts)} mensen (meest: **{top_user[0]}** met {top_user[1]})")
+        if bot_counts:
+            bits.append(f"+ {sum(bot_counts.values())} bot-reacties")
+        if top_topics:
+            bits.append("Onderwerpen: " + ", ".join(t[0] for t in top_topics[:5]))
+        recap = ". ".join(bits) + "."
+
+    return {
+        "date": target,
+        "recap": recap,
+        "total": len(day_msgs),
+        "users": user_counts,
+        "bots": bot_counts,
+        "top_topics": [{"word": w, "count": c} for w, c in top_topics],
+        "messages_preview": [
+            {"user_name": m.get("user_name"), "message": (m.get("message") or "")[:140], "timestamp": m.get("timestamp"), "is_bot": m.get("is_bot", False)}
+            for m in day_msgs[:30]
+        ],
     }

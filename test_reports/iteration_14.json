@@ -1,0 +1,62 @@
+{
+  "summary": "Spark Core 2.0 - Ronde 2 deel 1 + Avatar polish: ALL 14 backend tests passed (avatar gallery locked-bot stempel, roadkill fallback, locked guard 403, admin/owner bypass, community message avatar enrichment, archive tree + day, recap offset/date, chat intents 'gisteren'/'community recap'/'eergisteren', Base Line KB). Frontend tests 15 & 16 PASSED: 3 locket icons (data-testid='locket-*') visible on Harry/Smith/Madelief avatars in gallery; non-bot users (Marieke, Heidi) have no BOT badge on Avatar Beheer card.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend GET /api/avatar/gallery returns 28 avatars, exactly 3 locked (Harry/Smith/Madelief)",
+    "Backend GET /api/avatar/current/user-001 returns is_fallback bool + fallback_url with roadkill-logo path",
+    "Backend PUT /api/avatar/select/user-c609d7d1 (non-admin) with Harry's locked avatar returns 403 mentioning 'bot-harry'",
+    "Backend PUT /api/avatar/select/user-001 (admin) bypasses lock guard (200)",
+    "Backend PUT /api/avatar/select/bot-harry with its own avatar succeeds (200)",
+    "Backend GET /api/bots/community/messages: each message has avatar dict; fallback avatars carry is_fallback=true + url contains roadkill-logo",
+    "Backend GET /api/bots/community/archive returns tree year->month->day with count/first/last per day",
+    "Backend GET /api/bots/community/archive?year=2026&month=03&day=18 returns chronological messages list",
+    "Backend GET /api/bots/community/recap?offset_days=1 returns date+recap+top_topics+users+messages_preview",
+    "Backend GET /api/bots/community/recap?date=2026-03-18 returns Willem Spakman with 6 messages",
+    "Backend POST /api/chat/message 'Wat is gisteren in de community besproken?' -> type=community_recap, msg starts with '📋 **Community-recap gisteren**'",
+    "Backend POST /api/chat/message 'community recap' -> type=community_recap (today, offset 0)",
+    "Backend POST /api/chat/message 'wat is eergisteren besproken' -> type=community_recap with eergisteren context",
+    "Backend POST /api/chat/message 'vertel over Base Line' -> response mentions Base Line concept",
+    "Frontend: Login Willem/Appelsap and navigate to /admin/users",
+    "Frontend: Selecting De Boekhouder bot opens Avatar Beheer card with BOT badge",
+    "Frontend: data-testid='admin-avatar-gallery-btn' opens gallery with 28 thumbnails",
+    "Frontend: 3 elements with data-testid^='locket-' visible (locket-81f84abcc3b5, locket-c872852405d6, locket-c014fc9b7c3e) with golden lock badge",
+    "Frontend: Selecting Marieke (Vriend) shows Avatar Beheer card with NO BOT badge",
+    "Frontend: Selecting Heidi (Vriend) shows Avatar Beheer card with NO BOT badge"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_spark_core_ronde2.py",
+    "/app/test_reports/pytest/pytest_ronde2.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Pre-existing (still present from previous iterations, not blocking): UsersAdminPage.js renders <span> as a child of <option>, causing React hydration warning 'In HTML, <span> cannot be a child of <option>'. Cosmetic only.",
+    "/app/backend/modules/bots/routes.py: ROADKILL_FALLBACK dict is mutated via dict(ROADKILL_FALLBACK) copy each time which is fine, but the is_fallback key is only present on the fallback shape. Frontend code already handles missing-key as falsy (good). Consider always including is_fallback: false for symmetry/clearer contract."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_core_ronde2.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (14/14 tests passed)",
+    "frontend": "100% (test 15 + 16 both verified)"
+  },
+  "test_credentials": {
+    "admin": {"naam": "Willem", "sleutelwoord": "Appelsap", "user_id": "user-001"},
+    "non_admin": {"naam": "Marieke", "sleutelwoord": "Welkom01", "user_id": "user-c609d7d1"}
+  },
+  "seed_data_creation": "Test temporarily set admin avatar to Harry's locked avatar then restored to original. Bot-harry avatar selection was also exercised (already its own avatar). Marieke's avatar untouched because the 403 was correctly thrown before any state change.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Ronde 2 deel 1 + Avatar polish fully validated. Key new endpoints: GET /api/bots/community/archive (tree mode default; with year+month+day returns day messages); GET /api/bots/community/recap (offset_days or date query). Chat intent 'community_recap' detected by smart_intents_service after agenda intent; supports vandaag (offset 0), gisteren (1), eergisteren (2). Locked avatars enforce bot_owner equality - admin (user-001) bypasses. ROADKILL_LOGO_URL = /api/avatar/gallery/roadkill-logo/image. Avatar object on community messages only carries is_fallback when it IS a fallback (key absent for real avatars).",
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  }
+}

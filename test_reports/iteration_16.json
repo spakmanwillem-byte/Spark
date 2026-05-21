@@ -1,0 +1,55 @@
+{
+  "summary": "Spark Core 2.0 - UserAvatar centralisation + bots-no-wallet. ALL 11 acceptance tests PASS (2 backend + 9 frontend). Avatars rendered as real images for users with avatar set (Willem, Madelief, Harry, Smith, Roadkill, De Boekhouder). Roadkill grayscale fallback rendered for all 7 users without avatar (Spark, Heidi, Marieke, Ron, Nick, joel123, piet). Wallet & Tokens card correctly HIDDEN for all bot-* users (verified Harry) and VISIBLE for Spark (user-000, per clarification) and Marieke. Sidebar bottom Willem shows Black Knight image. Privé tab contacts all show avatars; Heidi header shows Roadkill fallback. Community tab bot+own avatars render correctly (verified visually in screenshot).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend Test 10: GET /api/contacts/list?user_id=user-001 → 200, each contact has avatar_ref key; admin-collectief.avatar_ref='emoji:🛡️'; ≥3 bots with gallery:* refs",
+    "Backend Test 11: For temp grad-5 non-admin viewer, admin contacts grouped to single 'Admin' entry with avatar_ref=null (no leak); bots retain gallery refs; admin-collectief not visible",
+    "Frontend Test 1: /admin/users left list — 6 avatar-{uid} elements (user-001/bot-madelief/harry/smith/user-1996fa59/bot-boekhouder) all contain <img>; 7 fallback users render img src=/api/avatar/gallery/roadkill-logo/image with grayscale class",
+    "Frontend Test 2: Harry selection — avatar-bot-harry img count = 2 (list row + detail panel large avatar), no -letter testid present",
+    "Frontend Test 3: Harry selection — wallet-tokens-card count = 0 (correctly hidden for bot)",
+    "Frontend Test 4: Spark (user-000) — badge-spark count = 1 (SPARK CORE badge present), wallet-tokens-card count = 1 (visible with admin notice 'tokens beheren via Spark treasury (user-000) niet via UI.') — matches CLARIFICATION",
+    "Frontend Test 5: Marieke (user-c609d7d1) — wallet-tokens-card count = 1 (visible, not a bot)",
+    "Frontend Test 6: Sidebar bottom avatar-user-001 contains <img>, no -letter variant present",
+    "Frontend Test 7: Privé tab — all 4 bot contacts + Roadkill render avatar-{uid} with <img> child (confirmed: bot-boekhouder, bot-madelief, bot-harry, bot-smith, user-1996fa59)",
+    "Frontend Test 8: Heidi selection in Privé — header avatar-user-64bf063d img count = 2 with src=roadkill-logo + grayscale; no -letter variant",
+    "Frontend Test 9: Community tab — own avatar-user-001 img present; bot message avatars visually verified as real face images in screenshot (Madelief/Harry/Smith faces in bubbles + 'Bots Online' sidebar)"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_avatar_contacts_avatar_ref.py",
+    "/app/test_reports/pytest/pytest_avatar_contacts.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Pre-existing (carried from iter 15, non-blocking): React hydration warning '<span> cannot be a child of <option>' inside UsersAdminPage gradatie <select> dropdown. Cosmetic console noise only.",
+    "Test 11 spec used Marieke (user-c609d7d1, gradatie 3) as 'non-admin viewer' but contacts module treats gradatie ≤ 3 as admin tier. Adjusted test to create a temp gradatie-5 user (cleaned up after). Worth noting in spec: Marieke IS admin tier per contacts/list logic, so admin avatars correctly DO show to her with real names — no leak occurs because she's a designated helpdesk admin.",
+    "CommunityBubble likely renders avatars via UserAvatar but data-testid not propagated per-message (a single bot may produce N messages → N identical testids). Not a bug, just makes per-message testid counting unreliable. Already visually verified, no action needed.",
+    "UserAvatar component is clean (90 lines, well-documented). Final letter fallback only triggered on img onError, which is the correct progressive enhancement strategy."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_avatar_contacts_avatar_ref.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (2/2 tests passed)",
+    "frontend": "100% (9/9 acceptance criteria visually + programmatically verified)"
+  },
+  "test_credentials": {
+    "admin": {"naam": "Willem", "sleutelwoord": "Appelsap", "user_id": "user-001"}
+  },
+  "seed_data_creation": "Backend Test 11 created a temp user (naam=TEST_NonAdmin, gradatie=5) and DELETEd it in the same test's finally block. State restored to baseline after run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "UserAvatar component at /app/frontend/src/components/common/UserAvatar.js renders 4 modes: image (gallery:/user/upload), emoji, fallback (roadkill grayscale), letter (only on img error). data-testid='avatar-{user.id}' for image/emoji/fallback; 'avatar-{id}-letter' for final fallback. Wallet card hidden when id startsWith('bot-') OR type==='bot' — Spark (user-000) NOT affected (per design). Backend contacts /list now exposes 'avatar_ref' field; null for anonymized admin contacts (gradatie ≥ 4 viewers only); 'emoji:🛡️' for admin-collectief. Marieke (gradatie 3) is admin tier for contacts module, NOT a true non-admin — to test anonymization create grad ≥ 4 user.",
+  "rca_of_the_issue": "N/A — no bugs found this iteration. All acceptance criteria met.",
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  }
+}

@@ -7,6 +7,7 @@ import {
   BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { UserAvatar } from '../common/UserAvatar';
 
 // Navigation configuration - easy to extend
 export const navigationConfig = {
@@ -453,11 +454,7 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
           {/* User info */}
           {!sidebarCollapsed && (
             <div className="flex items-center gap-3 px-3 py-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-xs font-bold text-white">
-                  {user?.naam?.charAt(0) || 'U'}
-                </span>
-              </div>
+              <UserAvatar user={user} size="sm" rounded="rounded-lg" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">{user?.naam}</p>
                 <p className="text-xs text-slate-500">{user?.rol || user?.gradatie_titel || (isAdmin ? `Gradatie ${user?.gradatie}` : '')}</p>

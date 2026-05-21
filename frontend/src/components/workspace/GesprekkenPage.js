@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
+import { UserAvatar } from '../common/UserAvatar';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
@@ -884,9 +885,7 @@ export function GesprekkenPage({ onNavigate }) {
                           }`}
                         >
                           <div className="relative flex-shrink-0">
-                            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: c.color }}>
-                              <span className="text-white text-xs font-bold">{c.avatar}</span>
-                            </div>
+                            <UserAvatar user={{id: c.id, naam: c.naam, avatar: c.avatar_ref, gradatie: c.gradatie}} size="md" rounded="rounded-lg" />
                             {c.online && (
                               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-slate-900 rounded-full" />
                             )}
@@ -928,9 +927,7 @@ export function GesprekkenPage({ onNavigate }) {
                   <>
                     <div className="h-14 px-5 flex items-center justify-between border-b border-slate-800 bg-slate-900/30 flex-shrink-0">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: selectedContact.color }}>
-                          <span className="text-white text-xs font-bold">{selectedContact.avatar}</span>
-                        </div>
+                        <UserAvatar user={{id: selectedContact.id, naam: selectedContact.naam, avatar: selectedContact.avatar_ref, gradatie: selectedContact.gradatie}} size="sm" rounded="rounded-lg" />
                         <div>
                           <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
                             {selectedContact.naam}
@@ -957,8 +954,8 @@ export function GesprekkenPage({ onNavigate }) {
                       {priveMessages.length === 0 ? (
                         <div className="h-full flex items-center justify-center">
                           <div className="text-center">
-                            <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: selectedContact.color }}>
-                              <span className="text-xl font-bold text-white">{selectedContact.avatar}</span>
+                            <div className="mx-auto mb-3 inline-block">
+                              <UserAvatar user={{id: selectedContact.id, naam: selectedContact.naam, avatar: selectedContact.avatar_ref, gradatie: selectedContact.gradatie}} size="lg" rounded="rounded-xl" />
                             </div>
                             <h3 className="text-white font-semibold text-sm">{selectedContact.naam}</h3>
                             <p className="text-slate-500 text-xs mt-1">Begin een gesprek</p>
@@ -1118,15 +1115,27 @@ function CommunityBubble({ msg, isOwn }) {
   const isBot = msg.is_bot;
   const style = BOT_COLORS[msg.user_id] || {};
   const BotIcon = style.icon || Bot;
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const avatar = msg.avatar;
+  const avatarUrl = avatar?.kind === 'image' && avatar.url ? `${API}${avatar.url}` : null;
+  const avatarEmoji = avatar?.kind === 'emoji' ? avatar.emoji : null;
+  const isFallback = !!avatar?.is_fallback;
 
   return (
     <div data-testid={`community-msg-${msg.id}`} className={`flex gap-2.5 ${isOwn ? 'flex-row-reverse' : ''}`}>
-      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-        isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
+      <div className={`w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 ${
+        avatarUrl ? '' : isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
       }`}>
-        {isBot
-          ? <BotIcon className={`w-4 h-4 ${style.text || 'text-slate-400'}`} />
-          : <span className={`text-[11px] font-bold ${isOwn ? 'text-amber-400' : 'text-slate-400'}`}>{(msg.user_name || 'U').charAt(0)}</span>}
+        {avatarUrl ? (
+          <img src={avatarUrl} alt={msg.user_name} className={`w-full h-full object-cover ${isFallback ? 'opacity-60 grayscale' : ''}`}
+            title={isFallback ? 'Roadkill logo fallback' : msg.user_name} />
+        ) : avatarEmoji ? (
+          <span className="text-base leading-none">{avatarEmoji}</span>
+        ) : isBot ? (
+          <BotIcon className={`w-4 h-4 ${style.text || 'text-slate-400'}`} />
+        ) : (
+          <span className={`text-[11px] font-bold ${isOwn ? 'text-amber-400' : 'text-slate-400'}`}>{(msg.user_name || 'U').charAt(0)}</span>
+        )}
       </div>
       <div className={`max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
         <div className="flex items-center gap-2 mb-0.5">

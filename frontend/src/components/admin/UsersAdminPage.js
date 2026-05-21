@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { AuthAPI } from '../../api';
+import { UserAvatar } from '../common/UserAvatar';
 import { 
   Users, User, Star, Calendar, BarChart2, Edit3, 
   Trash2, Shield, Clock, MessageSquare, Award,
@@ -305,14 +306,7 @@ export function UsersAdminPage({ onNavigate }) {
                     : 'hover:bg-slate-800/50'
                 }`}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold ${
-                  user.gradatie === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
-                  user.gradatie === 2 ? 'bg-gradient-to-br from-purple-500 to-pink-600' :
-                  user.gradatie <= 4 ? 'bg-gradient-to-br from-blue-500 to-cyan-600' :
-                  'bg-gradient-to-br from-slate-600 to-slate-700'
-                }`}>
-                  {user.naam?.charAt(0) || 'U'}
-                </div>
+                <UserAvatar user={user} size="md" />
                 <div className="flex-1 text-left">
                   <p className="text-sm font-medium text-white truncate">{user.naam}</p>
                   <p className="text-xs text-slate-500">{getGradatieInfo(user.gradatie).titel}</p>
@@ -386,14 +380,7 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                   
                   <div className="text-center mb-4">
-                    <div className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center text-2xl font-bold text-white mb-3 ${
-                      selectedUser.gradatie === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
-                      selectedUser.gradatie === 2 ? 'bg-gradient-to-br from-purple-500 to-pink-600' :
-                      selectedUser.gradatie <= 4 ? 'bg-gradient-to-br from-blue-500 to-cyan-600' :
-                      'bg-gradient-to-br from-slate-600 to-slate-700'
-                    }`}>
-                      {selectedUser.naam?.charAt(0) || 'U'}
-                    </div>
+                    <UserAvatar user={selectedUser} size="xl" rounded="rounded-2xl" className="mx-auto mb-3" />
                     
                     {editMode ? (
                       <input 
@@ -508,8 +495,10 @@ export function UsersAdminPage({ onNavigate }) {
                   </div>
                 </div>
 
-                {/* v4_wallet_admin_001 — Wallet + Tokens Card */}
+                {/* v4_wallet_admin_001 — Wallet + Tokens Card (verborgen voor bots — die hebben geen wallet) */}
                 {(() => {
+                  const isBotUser = (selectedUser.id || '').startsWith('bot-') || selectedUser.type === 'bot';
+                  if (isBotUser) return null;
                   const w = walletOverview[selectedUser.id] || {};
                   const isAdmin = (selectedUser.gradatie ?? 7) <= 1;
                   return (

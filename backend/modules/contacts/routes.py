@@ -187,6 +187,7 @@ async def list_contacts(user_id: str) -> Dict:
             "id": ADMIN_COLLECTIEF_ID,
             "naam": "Admin Collectief",
             "avatar": "🛡️",
+            "avatar_ref": "emoji:🛡️",  # v4_user_avatar_helper_001
             "color": "#f59e0b",
             "online": True,
             "is_bot": False,
@@ -263,6 +264,7 @@ async def list_contacts(user_id: str) -> Dict:
             "id": actual_id,
             "naam": display_name,
             "avatar": _avatar(display_name),
+            "avatar_ref": None if anonymized else u.get("avatar"),  # v4_user_avatar_helper_001
             "color": _color_for(idx),
             "online": _is_online(u),
             "is_bot": is_bot,

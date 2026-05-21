@@ -2539,7 +2539,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": "119/173 (68%)",
+    "progress": "119/175 (68%)",
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3930,6 +3930,22 @@
         "status": "planned",
         "created_at": "2026-05-21T14:13:59.617556+00:00",
         "beschrijving": "Upload .txt/.md script in formaat \"ROLNAAM: tekst\". Spark parseert rollen, koppelt aan bestaande acteurs of stelt nieuwe Bark-bots voor. Stem-cascade per rol automatisch ingesteld. Voor live performance / D&D campaign / verhalen."
+      },
+      {
+        "id": "v4_storage_zones_001",
+        "titel": "Storage-zones expliciet maken (system/spark/user/community/archief)",
+        "priority": "medium",
+        "status": "planned",
+        "created_at": "2026-05-21T14:16:24.954560+00:00",
+        "beschrijving": "Vijf storage-zones bestaan fysiek maar zijn niet expliciet vastgelegd. Maak storage_policy.json met regels per data-type (avatars→system/avatars, sensory-card media→user of community afhankelijk van scope, bark-bot media→system/bots). Plus access-matrix per gradatie."
+      },
+      {
+        "id": "v4_storage_overview_ui_001",
+        "titel": "Storage Overview UI (instellingen tab)",
+        "priority": "low",
+        "status": "planned",
+        "created_at": "2026-05-21T14:16:24.954572+00:00",
+        "beschrijving": "Admin-tab in Instellingen of Beheer: visueel overzicht van zone-grootte (Systeem/Spark/User/Community/Archief). Live cijfers + waarschuwing bij groei. Hergebruikt audit-trail principe."
       }
     ],
     "last_updated": "2026-05-21T12:49:31.199236+00:00",

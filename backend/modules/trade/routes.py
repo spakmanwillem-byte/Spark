@@ -507,12 +507,27 @@ async def monitor_start(req: MonitorStartRequest = MonitorStartRequest()):
 
 @router.post("/monitor/stop")
 async def monitor_stop():
-    return get_monitor().stop()
+    # v4_spark_unstoppable_001: bescherm Spark's legacy monitor
+    mon = get_monitor()
+    try:
+        st = mon.get_status() or {}
+        if st.get("user_id") == "user-000":
+            return {"success": False, "error": "Spark's eigen bot is onstopbaar. Gebruik /api/trade/bot/stop voor andere users."}
+    except Exception:
+        pass
+    return mon.stop()
 
 
 @router.post("/monitor/pause")
 async def monitor_pause():
-    return get_monitor().pause()
+    mon = get_monitor()
+    try:
+        st = mon.get_status() or {}
+        if st.get("user_id") == "user-000":
+            return {"success": False, "error": "Spark's eigen bot kan niet gepauzeerd worden."}
+    except Exception:
+        pass
+    return mon.pause()
 
 
 @router.get("/monitor/status")
@@ -559,6 +574,13 @@ async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest
 @router.post("/bot/stop/{user_id}")
 async def bot_stop(user_id: str):
     from .monitor import get_user_monitor
+    # v4_spark_unstoppable_001: Spark's bot kan niet gestopt worden
+    if user_id == "user-000":
+        return {
+            "success": False,
+            "error": "Spark's eigen handelsbot is onstopbaar — onderdeel van het systeem.",
+            "code": "SPARK_UNSTOPPABLE",
+        }
     return get_user_monitor(user_id).stop()
 
 

@@ -897,6 +897,7 @@ export function GesprekkenPage({ onNavigate }) {
                                 {c.naam}
                                 {c.is_bot && <span className="text-[9px] px-1 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
                                 {c.is_admin_contact && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">TEAM</span>}
+                                {c.is_collective && <span data-testid="badge-admin-collectief" className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">COLLECTIEF</span>}
                               </span>
                               <span className="text-[10px] text-slate-500 ml-2 flex-shrink-0">{c.last_time}</span>
                             </div>
@@ -935,6 +936,7 @@ export function GesprekkenPage({ onNavigate }) {
                             {selectedContact.naam}
                             {selectedContact.is_bot && <span className="text-[9px] px-1 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
                             {selectedContact.is_admin_contact && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">TEAM</span>}
+                            {selectedContact.is_collective && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300">COLLECTIEF</span>}
                           </h3>
                           <p className={`text-[10px] flex items-center gap-1 ${selectedContact.online ? 'text-green-400' : 'text-slate-500'}`}>
                             <Circle className="w-1.5 h-1.5 fill-current" />

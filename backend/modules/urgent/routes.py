@@ -27,6 +27,8 @@ AGENDA_DIR = Path(__file__).parent.parent.parent / "data" / "agenda"
 USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
 URGENT_DIR = Path(__file__).parent.parent.parent / "data" / "urgent"
 URGENT_DIR.mkdir(parents=True, exist_ok=True)
+PRIVE_DIR = Path(__file__).parent.parent.parent / "data" / "chat" / "prive"
+ADMIN_COLLECTIEF_FILE = Path(__file__).parent.parent.parent / "data" / "chat" / "admin-collectief.json"
 
 
 def _ack_file(user_id: str) -> Path:
@@ -125,6 +127,58 @@ def _agenda_glow_for_user(user_id: str) -> List[Dict]:
     return urgent
 
 
+def _prive_glow_for_user(user_id: str) -> List[Dict]:
+    """v4_glow_notify_001 — Tel unread privé-DMs en geef glow severity.
+
+    Logica:
+      • 1-2 unread       → amber
+      • ≥3 unread        → red
+      • boekhouder-DM    → meteen red (financiële trade alert)
+    """
+    if not PRIVE_DIR.exists():
+        return []
+    total_unread = 0
+    from_boekhouder = 0
+    senders: Dict[str, int] = {}
+    for fp in PRIVE_DIR.glob("*.json"):
+        # Filter: alleen conversaties waar user in betrokken is
+        stem = fp.stem
+        if user_id not in stem.split("__"):
+            continue
+        data = load_json(fp, default={"messages": []})
+        for m in data.get("messages", []):
+            if user_id in (m.get("unread_by") or []):
+                total_unread += 1
+                fr = m.get("from_user_id") or ""
+                senders[fr] = senders.get(fr, 0) + 1
+                if fr == "bot-boekhouder":
+                    from_boekhouder += 1
+    if total_unread == 0:
+        return []
+    # Boekhouder-DM = altijd red
+    severity = "red" if (from_boekhouder > 0 or total_unread >= 3) else "amber"
+    top_sender = max(senders.items(), key=lambda x: x[1])[0] if senders else None
+    return [{
+        "kind": "prive_dm",
+        "severity": severity,
+        "unread": total_unread,
+        "from_boekhouder": from_boekhouder,
+        "top_sender": top_sender,
+    }]
+
+
+def _admin_collectief_glow(user_id: str) -> List[Dict]:
+    """v4_admin_collectief_001 — glow voor admin als er unread berichten in admin-collectief staan."""
+    if not ADMIN_COLLECTIEF_FILE.exists():
+        return []
+    data = load_json(ADMIN_COLLECTIEF_FILE, default={"messages": []})
+    unread = sum(1 for m in data.get("messages", []) if user_id in (m.get("unread_by") or []))
+    if unread == 0:
+        return []
+    severity = "red" if unread >= 3 else "amber"
+    return [{"kind": "admin_collectief", "severity": severity, "unread": unread}]
+
+
 @router.get("/notifications")
 async def get_urgent(user_id: Optional[str] = None) -> Dict:
     """
@@ -142,6 +196,11 @@ async def get_urgent(user_id: Optional[str] = None) -> Dict:
     items: List[Dict] = []
     if user_id:
         items.extend(_agenda_glow_for_user(user_id))
+        items.extend(_prive_glow_for_user(user_id))
+        # admin-collectief alleen voor gradatie ≤ 2 (admins)
+        u = _get_user(user_id)
+        if u and (u.get("gradatie") or 7) <= 2:
+            items.extend(_admin_collectief_glow(user_id))
 
     # Aggregeer severity per nav-id (red wint van amber)
     glow: Dict[str, str] = {}
@@ -158,6 +217,13 @@ async def get_urgent(user_id: Optional[str] = None) -> Dict:
             _push("chat", it["severity"])
             _push("chat-spark", it["severity"])  # sub-tab hint
             _push("calendar", it["severity"])
+        elif it["kind"] == "prive_dm":
+            _push("chat", it["severity"])
+            _push("chat-prive", it["severity"])
+        elif it["kind"] == "admin_collectief":
+            _push("chat", it["severity"])
+            _push("chat-prive", it["severity"])
+            _push("chat-admin-collectief", it["severity"])
 
     return {"glow": glow, "items": items, "checked_at": datetime.now(timezone.utc).isoformat()}
 

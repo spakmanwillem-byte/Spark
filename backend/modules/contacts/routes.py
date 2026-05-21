@@ -31,10 +31,28 @@ DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 USERS_FILE = DATA_ROOT / "system" / "users.json"
 PRIVE_DIR = DATA_ROOT / "chat" / "prive"
 PRIVE_DIR.mkdir(parents=True, exist_ok=True)
+ADMIN_COLLECTIEF_ID = "admin-collectief"
+ADMIN_COLLECTIEF_FILE = DATA_ROOT / "chat" / "admin-collectief.json"
 
 ONLINE_WINDOW_MIN = 5  # last_active < 5 min = online
 ADMIN_GRADATIE_MAX = 3  # 1, 2, 3 zijn admin tier
+ADMIN_COLLECTIEF_MAX = 2  # alleen gradatie 1+2 mogen in admin-collectief
 COLORS = ["#f59e0b", "#3b82f6", "#22c55e", "#a855f7", "#ec4899", "#06b6d4", "#84cc16"]
+
+
+def _admin_collectief_members() -> List[dict]:
+    """Alle users met gradatie ≤ 2 die niet bot/Spark zijn."""
+    data = load_json(USERS_FILE, default={"users": []})
+    out = []
+    for u in data.get("users", []):
+        if (u.get("gradatie") or 7) > ADMIN_COLLECTIEF_MAX:
+            continue
+        if _is_bot(u):
+            continue
+        if u.get("id") == "user-000":
+            continue
+        out.append(u)
+    return out
 
 
 # ============== HELPERS ==============
@@ -141,6 +159,46 @@ async def list_contacts(user_id: str) -> Dict:
 
     contacts: List[Dict] = []
     admin_grouped_added = False
+
+    # v4_admin_collectief_001: virtueel "Admin Collectief" contact bovenaan voor admins (grad ≤ 2)
+    if viewer_grad <= ADMIN_COLLECTIEF_MAX:
+        ac_data = load_json(ADMIN_COLLECTIEF_FILE, default={"messages": []})
+        ac_msgs = ac_data.get("messages", [])
+        ac_last = ac_msgs[-1] if ac_msgs else None
+        ac_unread = sum(1 for m in ac_msgs if user_id in (m.get("unread_by") or []))
+        ac_last_time = ""
+        if ac_last:
+            try:
+                t = _parse_iso(ac_last.get("ts"))
+                if t:
+                    delta = _now() - t
+                    if delta < timedelta(minutes=1):
+                        ac_last_time = "nu"
+                    elif delta < timedelta(hours=1):
+                        ac_last_time = f"{int(delta.total_seconds() / 60)}m"
+                    elif delta < timedelta(days=1):
+                        ac_last_time = t.astimezone().strftime("%H:%M")
+                    else:
+                        ac_last_time = t.astimezone().strftime("%d/%m")
+            except Exception:
+                pass
+        members = _admin_collectief_members()
+        contacts.append({
+            "id": ADMIN_COLLECTIEF_ID,
+            "naam": "Admin Collectief",
+            "avatar": "🛡️",
+            "color": "#f59e0b",
+            "online": True,
+            "is_bot": False,
+            "is_admin_contact": False,
+            "is_collective": True,
+            "rol": f"{len(members)} leden",
+            "gradatie": None,
+            "last_message": (ac_last.get("text") or "")[:80] if ac_last else "Privé kanaal voor alle admins",
+            "last_time": ac_last_time,
+            "unread": ac_unread,
+        })
+
     for idx, u in enumerate(data.get("users", [])):
         uid = u.get("id")
         if not uid or uid == user_id:
@@ -224,6 +282,23 @@ async def list_contacts(user_id: str) -> Dict:
 @router.get("/messages")
 async def get_messages(user_id: str, contact_id: str, mark_read: bool = True) -> Dict:
     """Haal alle berichten op tussen user_id en contact_id (oplopend op tijd)."""
+    # v4_admin_collectief_001: speciaal kanaal
+    if contact_id == ADMIN_COLLECTIEF_ID:
+        viewer = _get_user(user_id)
+        if not viewer or (viewer.get("gradatie") or 7) > ADMIN_COLLECTIEF_MAX:
+            raise HTTPException(403, "Alleen admins (gradatie ≤ 2) hebben toegang")
+        data = load_json(ADMIN_COLLECTIEF_FILE, default={"messages": []})
+        msgs = data.get("messages", [])
+        if mark_read and msgs:
+            changed = False
+            for m in msgs:
+                if user_id in (m.get("unread_by") or []):
+                    m["unread_by"] = [x for x in m["unread_by"] if x != user_id]
+                    changed = True
+            if changed:
+                save_json(ADMIN_COLLECTIEF_FILE, data)
+        return {"conv_key": ADMIN_COLLECTIEF_ID, "messages": msgs, "count": len(msgs)}
+
     fp = _conv_file(user_id, contact_id)
     data = load_json(fp, default={"messages": []})
     msgs = data.get("messages", [])
@@ -250,9 +325,35 @@ async def send_message(req: SendMessage) -> Dict:
     if not req.text.strip():
         raise HTTPException(status_code=400, detail="Leeg bericht")
     sender = _get_user(req.from_user_id)
+    if not sender:
+        raise HTTPException(status_code=404, detail="Sender niet gevonden")
+
+    # v4_admin_collectief_001: broadcast naar gedeelde admin-collectief
+    if req.to_user_id == ADMIN_COLLECTIEF_ID:
+        if (sender.get("gradatie") or 7) > ADMIN_COLLECTIEF_MAX:
+            raise HTTPException(403, "Alleen admins (gradatie ≤ 2) mogen posten in admin-collectief")
+        data = load_json(ADMIN_COLLECTIEF_FILE, default={"messages": []})
+        members = _admin_collectief_members()
+        unread_for = [m["id"] for m in members if m.get("id") and m.get("id") != req.from_user_id]
+        msg = {
+            "id": f"ac-{uuid.uuid4().hex[:8]}",
+            "from_user_id": req.from_user_id,
+            "from_naam": sender.get("naam") or "Admin",
+            "to_user_id": ADMIN_COLLECTIEF_ID,
+            "text": req.text.strip(),
+            "ts": _now().isoformat(),
+            "unread_by": unread_for,
+            "channel": "admin-collectief",
+        }
+        data["messages"] = data.get("messages", []) + [msg]
+        if len(data["messages"]) > 500:
+            data["messages"] = data["messages"][-500:]
+        save_json(ADMIN_COLLECTIEF_FILE, data)
+        return {"ok": True, "message": msg, "total": len(data["messages"]), "broadcast_to": len(unread_for)}
+
     recipient = _get_user(req.to_user_id)
-    if not sender or not recipient:
-        raise HTTPException(status_code=404, detail="Sender of recipient niet gevonden")
+    if not recipient:
+        raise HTTPException(status_code=404, detail="Recipient niet gevonden")
 
     fp = _conv_file(req.from_user_id, req.to_user_id)
     data = load_json(fp, default={"messages": []})

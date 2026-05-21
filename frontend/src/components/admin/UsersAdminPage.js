@@ -630,6 +630,12 @@ export function UsersAdminPage({ onNavigate }) {
 
               {/* Bottom Row */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* v4_admin_avatar_001 — Avatar beheer */}
+                <AvatarManagerCard user={selectedUser} apiUrl={API} onChange={() => {
+                  // reload users zodat avatar refs/state up-to-date zijn
+                  AuthAPI.getUsers().then(r => setUsers(r.users || [])).catch(()=>{});
+                }} />
+
                 {/* Action Buttons */}
                 <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-white mb-4">Acties</h3>
@@ -1082,3 +1088,155 @@ function ProgressBar({ label, value, max, color }) {
 }
 
 export default UsersAdminPage;
+
+// ============================================================
+// v4_admin_avatar_001 — Avatar beheer per user (incl. bot-users)
+// ============================================================
+function AvatarManagerCard({ user, apiUrl, onChange }) {
+  const [current, setCurrent] = useState({ avatar_ref: null, url: null });
+  const [gallery, setGallery] = useState([]);
+  const [showPicker, setShowPicker] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [version, setVersion] = useState(0);
+  const fileInputRef = React.useRef(null);
+
+  const isBot = (user?.id || '').startsWith('bot-') || user?.type === 'bot';
+
+  const reload = React.useCallback(async () => {
+    if (!user?.id) return;
+    try {
+      const r = await fetch(`${apiUrl}/api/avatar/current/${user.id}`).then(x => x.json());
+      setCurrent({ avatar_ref: r.avatar_ref, url: r.url });
+      setVersion(v => v + 1);
+    } catch {}
+  }, [user?.id, apiUrl]);
+
+  React.useEffect(() => { reload(); }, [reload]);
+
+  const loadGallery = async () => {
+    try {
+      const r = await fetch(`${apiUrl}/api/avatar/gallery`).then(x => x.json());
+      setGallery(r.avatars || []);
+    } catch {}
+  };
+
+  const handleFile = async (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', f);
+      const res = await fetch(`${apiUrl}/api/avatar/user/${user.id}`, { method: 'POST', body: fd }).then(r => r.json());
+      if (res?.success) {
+        await reload();
+        onChange && onChange();
+      }
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const selectFromGallery = async (avatarId) => {
+    setBusy(true);
+    try {
+      await fetch(`${apiUrl}/api/avatar/select/${user.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar_ref: `gallery:${avatarId}` }),
+      });
+      await reload();
+      onChange && onChange();
+      setShowPicker(false);
+    } finally { setBusy(false); }
+  };
+
+  const clearAvatar = async () => {
+    setBusy(true);
+    try {
+      await fetch(`${apiUrl}/api/avatar/select/${user.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar_ref: null }),
+      });
+      await reload();
+      onChange && onChange();
+    } finally { setBusy(false); }
+  };
+
+  const previewUrl = current.url ? `${apiUrl}${current.url}${current.url.includes('?') ? '&' : '?'}v=${version}` : null;
+
+  return (
+    <div data-testid="admin-avatar-card" className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+      <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+        <Sparkles className="w-4 h-4 text-amber-400" />
+        Avatar Beheer
+        {isBot && <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
+      </h3>
+
+      <div className="flex items-start gap-4">
+        <div className="w-20 h-20 rounded-2xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center flex-shrink-0" data-testid="admin-avatar-preview">
+          {previewUrl ? (
+            <img src={previewUrl} alt={user?.naam} className="w-full h-full object-cover" />
+          ) : (
+            <span className="text-2xl font-bold text-slate-500">{user?.naam?.charAt(0) || '?'}</span>
+          )}
+        </div>
+
+        <div className="flex-1 space-y-2">
+          <p className="text-[11px] text-slate-400">
+            {current.avatar_ref
+              ? `Huidig: ${current.avatar_ref.startsWith('gallery:') ? 'galerij' : 'eigen upload'}`
+              : 'Geen avatar — toont eerste letter'}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" data-testid="admin-avatar-file" />
+            <button onClick={() => fileInputRef.current?.click()} disabled={uploading}
+              data-testid="admin-avatar-upload-btn"
+              className="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 rounded-lg text-xs font-medium transition-colors disabled:opacity-50">
+              {uploading ? 'Uploaden...' : 'Upload nieuwe foto'}
+            </button>
+            <button onClick={() => { if (!showPicker) loadGallery(); setShowPicker(s => !s); }} disabled={busy}
+              data-testid="admin-avatar-gallery-btn"
+              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium transition-colors">
+              {showPicker ? 'Sluit galerij' : 'Kies uit galerij'}
+            </button>
+            {current.avatar_ref && (
+              <button onClick={clearAvatar} disabled={busy}
+                data-testid="admin-avatar-clear-btn"
+                className="px-3 py-1.5 bg-red-500/15 hover:bg-red-500/25 text-red-400 rounded-lg text-xs font-medium transition-colors">
+                Verwijderen
+              </button>
+            )}
+          </div>
+          {isBot && (
+            <p className="text-[10px] text-slate-500 italic">
+              Bot-avatars zijn zichtbaar voor alle users in Community-chat en DMs.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {showPicker && (
+        <div className="mt-4 p-3 bg-slate-800/30 border border-slate-700/40 rounded-xl max-h-64 overflow-y-auto">
+          {gallery.length === 0 ? (
+            <p className="text-[11px] text-slate-500 text-center py-4">Geen galerij-avatars beschikbaar</p>
+          ) : (
+            <div className="grid grid-cols-5 sm:grid-cols-7 gap-2">
+              {gallery.map(av => (
+                <button key={av.id} onClick={() => selectFromGallery(av.id)} disabled={busy}
+                  data-testid={`gallery-pick-${av.id}`}
+                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                    current.avatar_ref === `gallery:${av.id}` ? 'border-amber-400' : 'border-slate-700 hover:border-amber-400/60'
+                  }`}
+                  title={av.title || av.id}>
+                  <img src={`${apiUrl}/api/avatar/gallery/${av.id}/image`} alt={av.title || ''} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}

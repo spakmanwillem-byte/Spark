@@ -288643,6 +288643,48 @@
         "waarom": "Spark blijft zo schoon voor inhoudelijke gesprekken; cijfers worden gedelegeerd",
         "hoe": "Backend service announce_buy / announce_sell, hooked aan potjes.open_pot en close_pot"
       }
+    },
+    {
+      "id": "kb-demo-magisch-boek",
+      "begrip": "magisch boek",
+      "status": "active",
+      "detected_by": "system",
+      "created_by": "system",
+      "created_at": "2026-05-21T14:30:36.833178+00:00",
+      "lagen": {
+        "laag1": "Een oud, in leer gebonden boek met gouden randen — vol met geheimen die alleen Spark begrijpt.",
+        "laag2": "Het wordt vaak getoond aan het begin van een verhaal als symbool van kennis die wakker wordt.",
+        "laag3": "In Spark Core wordt dit boek gebruikt als visuele aankondiging dat een nieuwe vertelling, lesmoment of community-event begint.",
+        "laag4": "Spark associeert het boek met het moment waarop ervaring overgaat in betekenis."
+      },
+      "tags": [
+        "magisch",
+        "boek",
+        "verhaal",
+        "event",
+        "demo"
+      ],
+      "belangrijkheid": 4,
+      "topic": "verhaal",
+      "ws5": {
+        "wie": "Acteur of verteller die het verhaal opent",
+        "wat": "Een ritueel object dat een verhaal symbolisch start",
+        "wanneer": "Bij begin van een D&D-sessie, voorlezing, of community-event",
+        "waar": "Tussen de chat-bubbels als overlay (community / spark-feed / privé)",
+        "waarom": "Om aandacht te focussen en tonen dat iets bijzonders gebeurt",
+        "hoe": "Via event-trigger met fade-in, vasthouden, fade-out + ambient sparkle-sound"
+      },
+      "media": {
+        "image_url": "/api/avatar/gallery/c0a09fe905ba/image",
+        "image_alt": "Magisch boek",
+        "sound_url": "/api/system/ambient/birds_loop_01.wav",
+        "sound_loop": true,
+        "trigger_phrases": [
+          "het verhaal begint",
+          "magisch boek",
+          "de vertelling vangt aan"
+        ]
+      }
     }
   ],
   "repair_log": [

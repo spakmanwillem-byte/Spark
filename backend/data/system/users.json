@@ -1037,7 +1037,9 @@
         }
       ],
       "gradatie_titel": "Beheerder",
-      "avatar": "gallery:cf90e9ea6393"
+      "avatar": "gallery:cf90e9ea6393",
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "id": "bot-madelief",
@@ -1229,7 +1231,9 @@
           "granted_at": "2026-05-20T07:45:53.446094+00:00",
           "total_after": 27720
         }
-      ]
+      ],
+      "rang": "Burger",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "id": "bot-harry",
@@ -1399,7 +1403,9 @@
           "granted_at": "2026-05-20T07:45:53.492199+00:00",
           "total_after": 27740
         }
-      ]
+      ],
+      "rang": "Sergeant",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "id": "bot-smith",
@@ -1575,7 +1581,9 @@
           "granted_at": "2026-05-20T07:45:53.543033+00:00",
           "total_after": 27900
         }
-      ]
+      ],
+      "rang": "Kapitein",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "id": "user-000",
@@ -1834,7 +1842,9 @@
           "granted_at": "2026-05-20T07:45:53.600498+00:00",
           "total_after": 27150
         }
-      ]
+      ],
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "Nick Teeuwen",
@@ -1983,7 +1993,9 @@
           "granted_at": "2026-05-20T07:45:53.663027+00:00",
           "total_after": 27150
         }
-      ]
+      ],
+      "rang": "Kapitein",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "Roadkill",
@@ -2043,7 +2055,9 @@
         ],
         "total_xp_from_achievements": 800
       },
-      "gradatie_titel": "Familie"
+      "gradatie_titel": "Familie",
+      "rang": "Kolonel",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "Heidi",
@@ -2183,7 +2197,9 @@
           "granted_at": "2026-05-20T07:45:53.727501+00:00",
           "total_after": 27150
         }
-      ]
+      ],
+      "rang": "Kapitein",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "Marieke",
@@ -2323,7 +2339,9 @@
           "granted_at": "2026-05-20T07:45:53.793048+00:00",
           "total_after": 27150
         }
-      ]
+      ],
+      "rang": "Kapitein",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "Ron",
@@ -2382,7 +2400,9 @@
           }
         ],
         "total_xp_from_achievements": 800
-      }
+      },
+      "rang": "Kolonel",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "joel123",
@@ -2436,7 +2456,9 @@
           "granted_at": "2026-05-20T20:38:25.696821+00:00",
           "total_after": 150
         }
-      ]
+      ],
+      "rang": "Kapitein",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "naam": "piet",
@@ -2490,7 +2512,9 @@
           "granted_at": "2026-05-20T17:02:07.938844+00:00",
           "total_after": 150
         }
-      ]
+      ],
+      "rang": "Kolonel",
+      "rang_set_by": "auto_from_gradatie"
     },
     {
       "id": "bot-boekhouder",
@@ -2509,7 +2533,9 @@
       "channels": [
         "trade-feed",
         "prive-admin"
-      ]
+      ],
+      "rang": "Kolonel",
+      "rang_set_by": "auto_from_gradatie"
     }
   ],
   "metadata": {
@@ -2521,6 +2547,15 @@
     "restored_ids": [
       "user-f57a2858",
       "user-9e4172d0"
+    ],
+    "rangen_lijst": [
+      "Burger",
+      "Soldaat",
+      "Soldaat 1e klasse",
+      "Sergeant",
+      "Kapitein",
+      "Kolonel",
+      "Generaal"
     ]
   }
 }

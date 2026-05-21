@@ -5,6 +5,7 @@ import {
   MessageCircle, Send, Bot, User, Clock, Users,
   Loader2, Sparkles, Shield, Timer
 } from 'lucide-react';
+import EventOverlay from '../events/EventOverlay';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -69,6 +70,7 @@ export function CommunityPage({ onNavigate }) {
   return (
     <MainLayout activePage="community" onNavigate={onNavigate}>
       <div data-testid="community-page" className="h-full flex flex-col">
+        <EventOverlay target="community" />
 
         {/* Header */}
         <div className="flex-shrink-0 bg-slate-900/80 border-b border-slate-800 px-4 py-3">

@@ -1280,8 +1280,49 @@ function TradeAnalyticsTab() {
     finally { setBusyUser(null); load(); }
   };
 
+  // v5_event_overlay_001 — Demo event trigger
+  const [sensoryCards, setSensoryCards] = React.useState([]);
+  React.useEffect(() => {
+    fetch(`${API}/api/events/sensory-cards`).then(r => r.json()).then(d => setSensoryCards(d.cards || [])).catch(() => {});
+  }, []);
+  const triggerDemoEvent = async (cardId, target) => {
+    await fetch(`${API}/api/events/trigger`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ card_id: cardId, target, duration_ms: 8000, triggered_by: 'admin' })
+    });
+  };
+
   return (
     <div data-testid="analytics-trade-tab" className="space-y-6">
+      {/* v5_event_overlay_001 — Demo Event Trigger */}
+      {sensoryCards.length > 0 && (
+        <div className="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-6">
+          <h3 className="text-base font-semibold text-white mb-3 flex items-center gap-2">
+            🎭 Event Overlay test
+          </h3>
+          <p className="text-xs text-slate-400 mb-4">
+            Klik een knop om een KB-kaart als overlay te tonen op het gekozen kanaal.
+            Werkt nu echt — ga na het klikken naar Community pagina om het te zien.
+          </p>
+          {sensoryCards.map(c => (
+            <div key={c.id} className="flex flex-wrap items-center gap-3 mb-2">
+              <span className="text-sm text-amber-400 font-medium min-w-[140px]">{c.begrip}</span>
+              {c.has_image && <span className="text-[10px] text-cyan-400">🖼️ image</span>}
+              {c.has_sound && <span className="text-[10px] text-pink-400">🔊 sound</span>}
+              <div className="flex gap-2 ml-auto">
+                {['community', 'spark_feed', 'spark_prive'].map(t => (
+                  <button key={t} data-testid={`trigger-event-${c.id}-${t}`}
+                    onClick={() => triggerDemoEvent(c.id, t)}
+                    className="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 rounded-lg text-[10px] font-medium transition-colors">
+                    → {t.replace('_', ' ')}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Bot overview */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">

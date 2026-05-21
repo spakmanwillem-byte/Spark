@@ -12,7 +12,12 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
-- 2026-05-21: **Avatar polish + Ronde 2 start — v4_avatar_fallback_001 + v4_avatar_bot_lock_001 + v4_community_archive_001 + v4_community_recap_001 + Base Line lore** (14/14 backend + 2/2 frontend tests passed):
+- 2026-05-21: **v4_admin_avatar_002 + v4_avatar_gallery_edit_001 — Spark eigen avatar + Gallery edit** (9/9 backend + 5/5 frontend tests passed):
+  - 🌟 **Spark krijgt eigen avatar-beheer**: user-000 verschijnt al in admin user list, AvatarManagerCard werkt identiek aan bot-users. Toont nu **SPARK CORE** badge ipv BOT-badge. Spark heeft eigen `owner` optie in dropdown
+  - ✏️ **Gallery edit modal**: admin kan via hover-edit-icoon op elk gallery-item de **title, bot_owner, tags** wijzigen. `PATCH /api/avatar/gallery/{id}` met admin-guard (403 voor non-admin). Modal toont preview + 6 owner-opties (Geen/Spark/4 bots)
+  - 🔒 **Robuuster lock-systeem**: `_get_bot_owner()` checkt nu eerst expliciete `bot_owner` field (admin-managed) en valt terug op title-match voor seed-data. Spark (user-000) toegevoegd aan eigenaar-map. Joker/De Trader avatar (id `0ef0b726773e`) was per ongeluk verkeerd getiteld — admin kan dit nu zelf rechtzetten via UI
+
+ + Ronde 2 start — v4_avatar_fallback_001 + v4_avatar_bot_lock_001 + v4_community_archive_001 + v4_community_recap_001 + Base Line lore** (14/14 backend + 2/2 frontend tests passed):
   - 🏍️ **Roadkill logo als avatar fallback**: `/api/avatar/current/{user_id}` returnt nu `fallback_url` + `is_fallback` flag. Community-messages enrichment gebruikt roadkill logo (met opacity-60 grayscale) wanneer user geen avatar heeft
   - 🔒 **Bot-avatar locket-stempel**: 3 avatars in galerij (Harry Klokkenmaker, Mr Smith, Madelief Stouten) zijn automatisch gemarkeerd via title-match als `bot_owner: bot-{naam}`. Frontend toont gouden 🔒 icon rechtsboven op locked avatars. Non-admin user die een locked avatar probeert te kiezen → HTTP 403 met owner-info. Admin én de bot zelf mogen wel
   - 📜 **Base Line lore** opgeslagen als KB-kaart (`begrip: Base Line`) met volledige 4 lagen, 5W+H, tags `[base line, spark world, lore, d&d, oorsprong, ad, puls, licht, schaduw, fracties, elementen]` + extra entry in Spark's eigen `scratch.json`. Spark herkent het concept in chat na cache-clear

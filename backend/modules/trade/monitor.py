@@ -417,46 +417,48 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         entry = position["entry_price"]
         highest = max(position.get("highest_price", entry), price)
         profit_pct = (price - entry) / entry
-        # Absolute winst in EUR (bruto)
         bruto_profit = trade_amount * profit_pct
         # Fees: 0.25% buy + 0.25% sell = 0.5% van trade amount
         total_fees = trade_amount * BITVAVO_TAKER_FEE * 2
         netto_profit = bruto_profit - total_fees
 
-        # Trailing stop activation: +1%
-        trailing_active = position.get("trailing_active", False) or profit_pct >= 0.01
-        # Trailing stop trigger: -0.4% from high
+        # v4_sell_trigger_002: cent-niveau triggers ipv vaste percentages
+        # Trail aan: netto winst ≥ 2× fees (= comfortabel boven break-even)
+        # Exit: drop vanaf high WAARBIJ netto na verkoop nog ≥ 1× fees blijft
+        trail_threshold = round(total_fees * 2, 6)      # bv €0.0254 voor €5 pot
+        exit_min_netto = round(total_fees * 1, 6)       # bv €0.0127 voor €5 pot
+        netto_rounded = round(netto_profit, 6)
+        trailing_active = position.get("trailing_active", False) or netto_rounded >= trail_threshold
         drop_from_high = (highest - price) / highest if highest else 0
 
-        if trailing_active and drop_from_high >= 0.004:
-            # Guard: nooit verkopen bij verlies na fees
-            if netto_profit >= 0.01:
+        if trailing_active and price < highest:
+            if netto_rounded >= exit_min_netto:
                 return {
                     **base,
                     "action": "SELL",
-                    "reason": f"Trailing stop @ €{price:.2f} (drop -{drop_from_high*100:.2f}% van €{highest:.2f}). Netto: €{netto_profit:.3f}",
+                    "reason": f"Trail exit @ €{price:.4f} (piek €{highest:.4f}, drop -{drop_from_high*100:.3f}%). Netto +€{netto_profit:.4f}",
                     "confidence": 0.95,
-                    "netto_profit": round(netto_profit, 3),
-                    "bruto_profit": round(bruto_profit, 3),
+                    "netto_profit": round(netto_profit, 4),
+                    "bruto_profit": round(bruto_profit, 4),
                     "fees": round(total_fees, 4),
                     "position_update": {"close": True, "highest_price": highest, "trailing_active": trailing_active},
                 }
             else:
-                # Winst te klein voor fees, reset trailing en wacht opnieuw
+                # Drop is daar maar netto te klein voor exit → wacht op nieuwe piek
                 return {
                     **base,
                     "action": "HOLD",
-                    "reason": f"Drop -{drop_from_high*100:.2f}% maar netto €{netto_profit:.3f} <€0.01. Reset trailing.",
-                    "confidence": 0.2,
-                    "netto_profit": round(netto_profit, 3),
-                    "position_update": {"highest_price": highest, "trailing_active": False},
+                    "reason": f"Drop maar netto €{netto_profit:.4f} < €{exit_min_netto:.4f}. Wacht op nieuwe piek.",
+                    "confidence": 0.3,
+                    "netto_profit": round(netto_profit, 4),
+                    "position_update": {"highest_price": highest, "trailing_active": trailing_active},
                 }
 
         # Nog in positie, nog geen exit signaal
         return {
             **base,
             "action": "HOLD",
-            "reason": f"In positie @ €{entry:.2f}. Nu €{price:.2f} ({profit_pct*100:+.2f}%). Netto €{netto_profit:+.3f}. Trailing: {'AAN' if trailing_active else 'wacht op +1%'}",
+            "reason": f"In positie @ €{entry:.4f}. Nu €{price:.4f} ({profit_pct*100:+.3f}%). Netto €{netto_profit:+.4f}. Trail: {'AAN' if trailing_active else f'wacht op +€{trail_threshold:.4f}'}",
             "confidence": 0.5,
             "netto_profit": round(netto_profit, 3),
             "position_update": {"highest_price": highest, "trailing_active": trailing_active},
@@ -726,10 +728,14 @@ class MonitorService:
                 bruto = pot["capital"] * profit_pct
                 fees = pot["capital"] * BITVAVO_TAKER_FEE * 2
                 netto = bruto - fees
-                trailing_active = pos.get("trailing_active", False) or profit_pct >= 0.01
-                drop_from_high = (highest - price) / highest if highest else 0
+                # v4_sell_trigger_002: cent-niveau triggers ipv vaste percentages
+                trail_threshold = round(fees * 2, 6)
+                exit_min_netto = round(fees * 1, 6)
+                netto_r = round(netto, 6)
+                trailing_active = pos.get("trailing_active", False) or netto_r >= trail_threshold
 
-                if trailing_active and drop_from_high >= 0.004 and netto >= 0.01:
+                # Exit: prijs daalt vanaf piek én netto blijft minstens 1× fees
+                if trailing_active and price < highest and netto_r >= exit_min_netto:
                     if self._auto_trade:
                         if self._use_mock:
                             result = execute_mock_trade(self._user_id, market, "SELL", pot["capital"])
@@ -737,7 +743,7 @@ class MonitorService:
                             result = execute_real_trade(self._user_id, market, "SELL", pot["capital"])
                         if result.get("success"):
                             close_result = potjes_svc.close_pot(self._user_id, pot["id"], price)
-                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{price:.2f} netto €{close_result.get('netto', 0):+.3f}")
+                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{price:.4f} netto €{close_result.get('netto', 0):+.4f}")
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)

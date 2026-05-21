@@ -478,6 +478,19 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
 
 @router.post("/monitor/start")
 async def monitor_start(req: MonitorStartRequest = MonitorStartRequest()):
+    """
+    Legacy singleton monitor. Alleen toegankelijk voor admin (gradatie ≤ 1)
+    of Spark (user-000). Andere users moeten via `/api/trade/bot/start/{user_id}`.
+    """
+    # v4_monitor_auth_001: admin/Spark-only check
+    uid = req.user_id
+    if uid and uid != "user-000":
+        users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+        users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+        user_entry = next((u for u in users_list if (u.get("id") or u.get("user_id")) == uid), None)
+        gradatie = (user_entry or {}).get("gradatie", 7)
+        if gradatie > 1:
+            return {"success": False, "error": "Legacy monitor is admin-only. Gebruik /api/trade/bot/start/{user_id}."}
     monitor = get_monitor()
     return monitor.start(
         interval=req.interval,

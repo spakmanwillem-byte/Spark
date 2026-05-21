@@ -131,15 +131,27 @@ function ChatBubble({ msg, isOwn }) {
   const isBot = msg.is_bot;
   const style = BOT_COLORS[msg.user_id] || {};
   const BotIcon = style.icon || Bot;
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const avatar = msg.avatar;  // v4_community_avatar_001
+  const avatarUrl = avatar?.kind === 'image' && avatar.url ? `${API}${avatar.url}` : null;
+  const avatarEmoji = avatar?.kind === 'emoji' ? avatar.emoji : null;
 
   return (
     <div data-testid={`msg-${msg.id}`} className={`flex gap-2.5 ${isOwn ? 'flex-row-reverse' : ''}`}>
       {/* Avatar */}
-      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-        isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
+      <div data-testid={`msg-avatar-${msg.user_id}`} className={`w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 ${
+        avatarUrl ? '' : isBot ? (style.bg || 'bg-slate-800') : isOwn ? 'bg-amber-500/20' : 'bg-slate-800'
       }`}>
-        {isBot ? <BotIcon className={`w-4 h-4 ${style.text || 'text-slate-400'}`} />
-          : <User className={`w-4 h-4 ${isOwn ? 'text-amber-400' : 'text-slate-400'}`} />}
+        {avatarUrl ? (
+          <img src={avatarUrl} alt={msg.user_name} className="w-full h-full object-cover"
+            onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.classList.add(isBot ? 'bg-slate-800' : 'bg-slate-800'); }} />
+        ) : avatarEmoji ? (
+          <span className="text-lg leading-none">{avatarEmoji}</span>
+        ) : isBot ? (
+          <BotIcon className={`w-4 h-4 ${style.text || 'text-slate-400'}`} />
+        ) : (
+          <User className={`w-4 h-4 ${isOwn ? 'text-amber-400' : 'text-slate-400'}`} />
+        )}
       </div>
 
       {/* Bubble */}

@@ -7,3 +7,13 @@
 - `knowledge_base.json.bak_pre_full_repair_*` — KB vóór full-repair (tag-merge + 2261 skelet)
 
 Bewaren voor rollback / vergelijking. Gaan mee in volgende deploy-zip.
+
+## Updates 21 mei (sessie 2)
+
+Verplaatst hierheen:
+- `user_potjes.json.bak_pre_reset.json`
+- `knowledge_base.json.bak_pre_normalize`
+- `knowledge_base.json.bak_pre_plural_merge`
+- `roadmap.json.bak_pre_shadow`
+
+Reden: opruim — losse .bak files lagen verspreid in productie-data.

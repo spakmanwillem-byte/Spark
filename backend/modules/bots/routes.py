@@ -108,7 +108,33 @@ async def get_community_messages(limit: int = 50):
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     messages = data.get("messages", [])
     messages.sort(key=lambda m: m.get("timestamp", ""), reverse=True)
-    return {"messages": messages[:limit], "total": len(messages)}
+    # v4_community_avatar_001: verrijk elke message met avatar_url van de afzender
+    users_file = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+    udata = load_json(users_file, default={})
+    users_list = udata.get("users", []) if isinstance(udata, dict) else []
+    avatar_map = {}
+    for u in users_list:
+        uid = u.get("id") or u.get("user_id")
+        av = u.get("avatar") or u.get("avatar_ref")
+        if not uid:
+            continue
+        if av and isinstance(av, str):
+            if av.startswith("gallery:"):
+                gid = av.split(":", 1)[1]
+                avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/gallery/{gid}/image"}
+            elif av.startswith("emoji:"):
+                avatar_map[uid] = {"kind": "emoji", "emoji": av.split(":", 1)[1]}
+            elif av.startswith("upload:"):
+                avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/user/{uid}/image"}
+        else:
+            # Geen avatar veld → check user-upload als fallback
+            avatar_map[uid] = {"kind": "image", "url": f"/api/avatar/user/{uid}/image"}
+    enriched = []
+    for m in messages[:limit]:
+        m = dict(m)
+        m["avatar"] = avatar_map.get(m.get("user_id"))
+        enriched.append(m)
+    return {"messages": enriched, "total": len(messages)}
 
 
 @router.post("/community/send")

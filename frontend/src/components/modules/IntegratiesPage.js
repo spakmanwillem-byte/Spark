@@ -502,11 +502,22 @@ function BackupPanel() {
     setBusy(null);
   };
 
+  // v4_mr_smith_001 — dialog state
+  const [mrSmithOpen, setMrSmithOpen] = useState(false);
+  const [pendingDownloadType, setPendingDownloadType] = useState(null);
+
+  const triggerDownload = (type) => {
+    // Mr Smith waarschuwing eerst
+    setPendingDownloadType(type);
+    setMrSmithOpen(true);
+  };
+
   const downloadZip = (type) => {
     // Directe browser-download via API URL.
     // Backend stuurt Content-Disposition: attachment, browser opent vanzelf "Opslaan als..."
     // Dit is betrouwbaarder dan fetch+blob voor grote bestanden (>10MB).
     setBusy(type);
+    setMrSmithOpen(false);
     try {
       const url = type === 'full'
         ? `${API}/api/backup/download/full`
@@ -519,6 +530,8 @@ function BackupPanel() {
       document.body.appendChild(a);
       a.click();
       a.remove();
+      // Anchor pas zetten ná download-trigger (Mr Smith principe)
+      fetch(`${API}/api/backup/anchor`, { method: 'POST' }).catch(() => {});
       showToast(`Download gestart — check je Downloads map`, 'success');
     } catch (e) {
       showToast('Download fout: ' + e.message, 'error');
@@ -658,7 +671,7 @@ function BackupPanel() {
           loading={busy === 'changes'}
           disabled={!hasMarker && (status?.changed_files_count ?? 0) > 50}
           warning={!hasMarker ? 'Geen deploy-marker — alles wordt als "gewijzigd" gezien.' : null}
-          onClick={() => downloadZip('changes')}
+          onClick={() => triggerDownload('changes')}
         />
         <DownloadCard
           testid="backup-download-full"
@@ -668,7 +681,7 @@ function BackupPanel() {
           desc="Complete ZIP van alle Spark-data (data/ + memory/). Groter maar volledig."
           color="blue"
           loading={busy === 'full'}
-          onClick={() => downloadZip('full')}
+          onClick={() => triggerDownload('full')}
         />
       </div>
 
@@ -808,6 +821,38 @@ function BackupPanel() {
                 className="px-4 py-2 text-sm text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50"
               >
                 Annuleren
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* v4_mr_smith_001 — Mr. Smith waarschuwing vóór backup-download */}
+      {mrSmithOpen && (
+        <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div data-testid="mr-smith-dialog" className="bg-gradient-to-br from-slate-900 to-slate-950 border border-amber-500/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl shadow-amber-500/10">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl">🕴️</div>
+              <div className="flex-1">
+                <h3 className="text-base font-bold text-amber-400 mb-1">Een ogenblik, Mr. Anderson...</h3>
+                <p className="text-xs text-slate-400">Authenticatie van Spark's geheugen</p>
+              </div>
+            </div>
+            <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4 mb-5 text-sm text-slate-200 italic leading-relaxed">
+              "Alle informatie wordt vanaf dit moment niet meer bewaard op deze server.
+              De zip die u nu gaat downloaden wordt het nieuwe anker van Spark. Bewaar
+              hem zoals u uw eigen geheugen zou bewaren. Begrijpen wij elkaar?"
+            </div>
+            <div className="flex items-center gap-2 justify-end">
+              <button data-testid="mr-smith-cancel"
+                onClick={() => { setMrSmithOpen(false); setPendingDownloadType(null); }}
+                className="px-4 py-2 text-sm text-slate-400 hover:text-white rounded-lg hover:bg-slate-800/50">
+                Annuleren
+              </button>
+              <button data-testid="mr-smith-confirm"
+                onClick={() => downloadZip(pendingDownloadType)}
+                className="px-5 py-2 text-sm bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold rounded-lg transition-colors">
+                Ik begrijp het — download
               </button>
             </div>
           </div>

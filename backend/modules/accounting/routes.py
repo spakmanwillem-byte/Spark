@@ -176,3 +176,75 @@ async def get_kasboeken(user_id: str = None):
             "live": saldo_override is not None,
         })
     return {"kasboeken": kasboeken}
+
+
+
+# ============================================================
+# v4_boekhouding_001 — Admin endpoints voor entiteit-IBAN & BTW
+# ============================================================
+
+class EntityUpdate(BaseModel):
+    iban: Optional[str] = None
+    bank_naam: Optional[str] = None
+    btw_nummer: Optional[str] = None
+    kvk_nummer: Optional[str] = None
+
+
+@router.get("/entities")
+async def list_entities():
+    """Alle entiteiten met bank/btw/kvk velden."""
+    d = load_json(ENTITIES_FILE, default={"entities": {}})
+    return {"entities": d.get("entities", {}), "btw_tarieven": d.get("btw_tarieven", {}), "dagboeken": d.get("dagboeken", {})}
+
+
+@router.patch("/entities/{entity_id}")
+async def update_entity(entity_id: str, upd: EntityUpdate):
+    """Admin update IBAN/BTW/KvK voor een entiteit."""
+    d = load_json(ENTITIES_FILE, default={"entities": {}})
+    ents = d.get("entities", {})
+    if entity_id not in ents:
+        return {"success": False, "error": f"Entiteit {entity_id} bestaat niet"}
+    ent = ents[entity_id]
+    ent.setdefault("bank", {})
+    if upd.iban is not None:
+        ent["bank"]["iban"] = upd.iban.strip() or None
+    if upd.bank_naam is not None:
+        ent["bank"]["naam"] = upd.bank_naam.strip()
+    if upd.btw_nummer is not None:
+        ent["btw_nummer"] = upd.btw_nummer.strip() or None
+    if upd.kvk_nummer is not None:
+        ent["kvk_nummer"] = upd.kvk_nummer.strip() or None
+    ent["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(ENTITIES_FILE, d)
+    return {"success": True, "entity": ent}
+
+
+@router.get("/btw-summary")
+async def btw_summary(entity_id: str, year: Optional[int] = None):
+    """BTW-overzicht per entiteit per tarief (21/9/0). Voor aangifte."""
+    txs = load_json(TX_FILE, default={"transactions": []}).get("transactions", [])
+    filtered = [t for t in txs if t.get("entity_id") == entity_id]
+    if year:
+        filtered = [t for t in filtered if t.get("date", "").startswith(str(year))]
+    buckets = {21: {"income": 0.0, "expense": 0.0, "btw": 0.0},
+               9: {"income": 0.0, "expense": 0.0, "btw": 0.0},
+               0: {"income": 0.0, "expense": 0.0, "btw": 0.0}}
+    for t in filtered:
+        pct = int(t.get("btw_percentage", 21) or 0)
+        if pct not in buckets:
+            buckets[pct] = {"income": 0.0, "expense": 0.0, "btw": 0.0}
+        amt = float(t.get("amount", 0) or 0)
+        btw_amt = float(t.get("btw_amount", 0) or 0)
+        bucket = buckets[pct]
+        if t.get("type") == "income":
+            bucket["income"] += amt
+            bucket["btw"] += btw_amt
+        else:
+            bucket["expense"] += amt
+            bucket["btw"] -= btw_amt
+    return {
+        "entity_id": entity_id,
+        "year": year,
+        "per_tarief": {str(k): {"income": round(v["income"], 2), "expense": round(v["expense"], 2), "btw_saldo": round(v["btw"], 2)} for k, v in buckets.items()},
+        "totaal_btw_te_betalen": round(sum(v["btw"] for v in buckets.values()), 2),
+    }

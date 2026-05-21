@@ -288611,6 +288611,38 @@
         "auto_seeded_from_tag_count": 1,
         "reason": "Tag werd gebruikt zonder eigen onderwerp-kaart. Vul in via Renew tab."
       }
+    },
+    {
+      "id": "kb-boekhouder-acteur",
+      "begrip": "De Boekhouder",
+      "status": "active",
+      "created_by": "system",
+      "created_at": "2026-05-21T12:30:54.880402+00:00",
+      "lagen": {
+        "laag1": "Acteur-bot in Spark Core",
+        "laag2": "Publiceert trade-events vanuit Spark naar admin (cijfers) en community (cryptisch leuk)",
+        "laag3": "Houdt audit-trail bij voor elke geld- en token-beweging tussen entiteiten",
+        "laag4": "Onderdeel van het persona-systeem: zakelijke domein wordt gedelegeerd zodat Spark zelf inhoudelijk blijft"
+      },
+      "tags": [
+        "bot",
+        "acteur",
+        "spark",
+        "trade",
+        "boekhouder",
+        "fee",
+        "audit"
+      ],
+      "belangrijkheid": 4,
+      "topic": "Persona/Acteurs",
+      "ws5": {
+        "wie": "Persona binnen Spark Core, niet een echte persoon",
+        "wat": "Acteur die trade-meldingen formuleert in Boekhouder-stijl",
+        "wanneer": "Bij elke BUY of SELL door Spark's trade-bot",
+        "waar": "In privé-DM naar admin + community trade-feed kanaal",
+        "waarom": "Spark blijft zo schoon voor inhoudelijke gesprekken; cijfers worden gedelegeerd",
+        "hoe": "Backend service announce_buy / announce_sell, hooked aan potjes.open_pot en close_pot"
+      }
     }
   ],
   "repair_log": [

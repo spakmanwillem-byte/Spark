@@ -568,6 +568,23 @@ async def admin_list_bots():
     return {"success": True, "bots": list_running_bots()}
 
 
+@router.get("/community/trade-feed")
+async def get_trade_feed(limit: int = Query(50)):
+    """v4_boekhouder_001: laatste community trade-feed berichten."""
+    feed_file = Path(__file__).parent.parent.parent / "data" / "chat" / "community" / "trade-feed.json"
+    data = load_json(feed_file, default={"messages": []})
+    msgs = data.get("messages", [])
+    return {"success": True, "messages": list(reversed(msgs[-limit:])), "channel_info": {"title": data.get("title", "Trade-feed"), "description": data.get("description", "")}}
+
+
+@router.get("/admin/audit-log")
+async def get_audit_log(limit: int = Query(100)):
+    """v4_audit_001: alle geld/token-bewegingen audit-trail."""
+    audit_file = Path(__file__).parent.parent.parent / "data" / "system" / "audit_log.json"
+    data = load_json(audit_file, default={"entries": []})
+    return {"success": True, "entries": list(reversed(data.get("entries", [])[-limit:]))}
+
+
 # ============================================================
 # POTJES SYSTEEM (10 onafhankelijke potjes)
 # ============================================================

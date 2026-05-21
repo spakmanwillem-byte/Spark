@@ -1,0 +1,40 @@
+{
+  "messages": [
+    {
+      "id": "bh-0cbc219e",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • BCH @ €1.0000\nPotje: pot-002\nInleg: €5.08\nEigenaar: Spark",
+      "ts": "2026-05-21T12:34:05.757959+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 1.0,
+      "user_id": "user-000"
+    },
+    {
+      "id": "bh-2f390287",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📤 SELL • BCH @ €1.1000 ✅\nPotje: pot-002\nEigenaar: Spark\nNetto winst: €+0.4826\n",
+      "ts": "2026-05-21T12:34:05.791986+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 1.1,
+      "netto": 0.4826000000000005,
+      "spark_fee": 0.0,
+      "user_id": "user-000"
+    }
+  ]
+}

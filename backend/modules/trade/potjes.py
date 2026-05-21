@@ -230,6 +230,13 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
             })
             user["last_buy_cycle"] = current_cycle
             _save(data)
+            # v4_boekhouder_001: announce trade
+            try:
+                from modules.boekhouder.service import announce_buy
+                announce_buy(user_id, pot_id, market or p.get("market") or "?-EUR",
+                             entry_price, amount_eur or p.get("capital", 0))
+            except Exception:
+                pass
             return p
     return {}
 
@@ -319,6 +326,13 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             _save(data)
             # v4_token_potje_001: bij positieve winst — mint Spark bonus-tokens (na fee-aftrek)
             bonus_result = _mint_spark_bonus_tokens(netto - spark_fee, p["id"], user_id) if netto > 0 else None
+            # v4_boekhouder_001: announce SELL met netto winst en fee
+            try:
+                from modules.boekhouder.service import announce_sell
+                announce_sell(user_id, pot_id, p.get("market") or "?-EUR",
+                              exit_price, netto, spark_fee)
+            except Exception:
+                pass
             # Probeer automatisch te expanderen als mogelijk
             auto_expansion = None
             try:

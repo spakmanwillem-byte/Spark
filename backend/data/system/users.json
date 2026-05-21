@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-21T12:27:02.378416",
+      "last_active": "2026-05-21T12:41:32.342844",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -2490,6 +2490,25 @@
           "granted_at": "2026-05-20T17:02:07.938844+00:00",
           "total_after": 150
         }
+      ]
+    },
+    {
+      "id": "bot-boekhouder",
+      "user_id": "bot-boekhouder",
+      "naam": "De Boekhouder",
+      "voornaam": "De Boekhouder",
+      "volledige_naam": "De Boekhouder 🎩",
+      "gradatie": 2,
+      "gradatie_titel": "Acteur Bot",
+      "is_bot": true,
+      "is_acteur": true,
+      "personality": "Zakelijk-formeel, droogkomische ondertoon. Spreekt in cijfers, datums en percentages. Houdt van precisie. Lacht zacht bij meevallers. Knort even bij tegenslag.",
+      "avatar": "emoji:🎩",
+      "created_at": "2026-05-21T12:30:54.880402+00:00",
+      "rol": "Acteur die trade-events publiceert namens Spark in community en privé naar admin",
+      "channels": [
+        "trade-feed",
+        "prive-admin"
       ]
     }
   ],

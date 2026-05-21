@@ -152,7 +152,11 @@ export function TraderPage({ onNavigate }) {
   // Monitor controls
   const startMonitor = async () => {
     const settings = traderSettings || {};
-    await fetch(`${API}/api/trade/monitor/start`, {
+    // v4_per_user_bot_001: gebruik bot/start endpoint voor token-gate + per-user instance
+    const endpoint = (user?.gradatie ?? 7) <= 1
+      ? `${API}/api/trade/monitor/start`     // admin: legacy singleton (behoudt huidige UI flow)
+      : `${API}/api/trade/bot/start/${userId}`;  // user: token-gated, eigen bot
+    const res = await fetch(endpoint, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         interval: 30,
@@ -164,6 +168,10 @@ export function TraderPage({ onNavigate }) {
         use_potjes: usePotjes,
       }),
     });
+    const data = await res.json();
+    if (!data.success && data.error) {
+      alert(data.error);  // simpele feedback voor token-gate weigering
+    }
     loadMonitorStatus();
     if (usePotjes) loadPotjes();
   };

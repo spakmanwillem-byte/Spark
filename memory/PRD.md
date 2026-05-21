@@ -12,6 +12,25 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-21: **v4_boekhouder_001 + v4_sell_trigger_002 + v4_mr_smith_001 + v4_trade_analytics_001 + v4_audit_001 + v4_boekhouding_001**:
+  - 🐛 **Sell trigger fix**: was `+1% trail / -0.4% drop`, nu **cent-niveau**: trail aan bij netto ≥ 2× fees, exit bij eerste daling waar netto ≥ 1× fee blijft. Float-precisie bug gefixed met `round(x, 6)`. Werkt op €1-potje én €100-potje
+  - 🎩 **De Boekhouder persona**: nieuwe bot-user `bot-boekhouder` (gradatie 2, acteur) met KB-kaart + 5W+H. Service in `/app/backend/modules/boekhouder/service.py`. Hooked in `potjes.open_pot()` en `close_pot()` voor BUY/SELL announcements:
+    - Privé-DM naar admin: gedetailleerd met cijfers (potje, prijs, netto, fee)
+    - Community trade-feed (`/data/chat/community/trade-feed.json`): cryptisch/leuk zonder bedragen. Random tone-variants ("Hahaha winst, uhh sorry", "De BCH-koers stond te aanlokkelijk laag")
+    - Spark-trades only voor community feed (andere users blijven privé)
+  - 📋 **Audit-trail**: append-only `data/system/audit_log.json` voor élke geld/token-beweging (trade_buy/trade_sell/fee_transfer). Onveranderbaar
+  - 🕴️ **Mr Smith waarschuwing** voor backup-download: dialog in `IntegratiesPage.js` met Matrix-style melding "Alle informatie wordt vanaf dit moment niet meer bewaard". Anchor pas gelogd ná download-trigger via `POST /api/backup/anchor` (failed = geen anchor, geen data-loss)
+  - 📊 **TRADE Analytics tab** in admin: lijst alle running bots (status/cycles/uptime/markets/intervals) + community trade-feed + audit-log live. Stop-bot knop per user. Auto-refresh 15s
+  - 💼 **Boekhouding skelet** (4 entiteiten verrijkt):
+    - `spark_core` — Spark AI, btw_plichtig=False, bank=Bitvavo
+    - `spark_your_life` — btw_plichtig=True (jouw zakelijk)
+    - `roadkill_merch` — btw_plichtig=True (jouw zakelijk)
+    - `personal_willem` — btw_plichtig=False (privé)
+    - Velden: `btw_nummer`, `kvk_nummer`, `bank.iban`, `bank.naam`, `bank.provider`
+    - `btw_tarieven` config (21/9/0), `dagboeken` list (verkoop/inkoop/bank/kas/memoriaal)
+    - Endpoints: `GET /api/accounting/entities`, `PATCH /api/accounting/entities/{eid}` (admin update IBAN/BTW/KvK), `GET /api/accounting/btw-summary?entity_id=X&year=2026` (BTW per tarief voor aangifte)
+  - 🔌 **Per-user bot UI hook** in TraderPage: `startMonitor()` gebruikt `/api/trade/bot/start/{userId}` voor non-admins (token-gated), legacy `/api/trade/monitor/start` voor admin. Foutmelding via alert bij weigering
+  - **Veilig om te redeployen** zodra je dit ziet — geen state-data verloren
 - 2026-05-21: **v4_per_user_bot_001 + v4_spark_fee_001 + v4_token_gate_001 + v4_wallet_per_user_001**:
   - **Per-user tradebot architectuur**: `MonitorService` was singleton, nu instantieerbaar per user-id via `MonitorRegistry` (`get_user_monitor(user_id)`). Legacy `get_monitor()` blijft werken voor backward-compat (Willem's single monitor)
   - **Token-gate quick-buy**: `/api/trade/quick-buy-potje/{user_id}` controleert nu gradatie ≤ 1 (alleen admin mag handmatig potje kopen). UI: knop disabled met uitleg voor andere users

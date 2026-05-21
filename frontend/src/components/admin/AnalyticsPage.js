@@ -28,6 +28,7 @@ export function AnalyticsPage({ onNavigate }) {
     { id: 'data', label: 'DATA', icon: PieChart },
     { id: 'network', label: 'NETWORK', icon: Network },
     { id: 'layer', label: 'LAYER', icon: Layers },
+    { id: 'trade', label: 'TRADE', icon: TrendingUp },
   ];
 
   return (
@@ -72,6 +73,7 @@ export function AnalyticsPage({ onNavigate }) {
         {activeTab === 'data' && <DataTab />}
         {activeTab === 'network' && <NetworkTab />}
         {activeTab === 'layer' && <LayerTab />}
+        {activeTab === 'trade' && <TradeAnalyticsTab />}
       </div>
     </MainLayout>
   );
@@ -1237,4 +1239,127 @@ function formatBytes(n) {
   if (n < 1024 ** 2) return `${(n / 1024).toFixed(1)} KB`;
   if (n < 1024 ** 3) return `${(n / (1024 ** 2)).toFixed(1)} MB`;
   return `${(n / (1024 ** 3)).toFixed(2)} GB`;
+}
+
+
+// ============================================================
+// v4_trade_analytics_001 — TRADE Tab: alle user-bots overzicht
+// ============================================================
+function TradeAnalyticsTab() {
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const [bots, setBots] = React.useState([]);
+  const [feed, setFeed] = React.useState([]);
+  const [audit, setAudit] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [busyUser, setBusyUser] = React.useState(null);
+
+  const load = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const [b, f, a] = await Promise.all([
+        fetch(`${API}/api/trade/admin/bots`).then(r => r.json()),
+        fetch(`${API}/api/trade/community/trade-feed?limit=20`).then(r => r.json()),
+        fetch(`${API}/api/trade/admin/audit-log?limit=30`).then(r => r.json()),
+      ]);
+      setBots(b.bots || []);
+      setFeed(f.messages || []);
+      setAudit(a.entries || []);
+    } catch (e) { /* silent */ }
+    setLoading(false);
+  }, [API]);
+
+  React.useEffect(() => {
+    load();
+    const id = setInterval(load, 15000);
+    return () => clearInterval(id);
+  }, [load]);
+
+  const stopBot = async (uid) => {
+    setBusyUser(uid);
+    try { await fetch(`${API}/api/trade/bot/stop/${uid}`, { method: 'POST' }); }
+    finally { setBusyUser(null); load(); }
+  };
+
+  return (
+    <div data-testid="analytics-trade-tab" className="space-y-6">
+      {/* Bot overview */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-base font-semibold text-white flex items-center gap-2">
+            🤖 Actieve trade-bots ({bots.filter(b => b.running).length}/{bots.length})
+          </h3>
+          <button onClick={load} disabled={loading} data-testid="refresh-bots"
+            className="text-xs text-slate-400 hover:text-white">
+            {loading ? '...' : 'Vernieuwen'}
+          </button>
+        </div>
+        {bots.length === 0 ? (
+          <p className="text-sm text-slate-500 italic">Geen bots gestart.</p>
+        ) : (
+          <div className="space-y-2">
+            {bots.map(b => (
+              <div key={b.user_id} className="bg-slate-800/40 rounded-xl p-3 flex flex-wrap items-center gap-3 text-xs">
+                <span className={`w-2.5 h-2.5 rounded-full ${b.running ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`}></span>
+                <span className="font-mono text-white min-w-[150px]">{b.user_id}</span>
+                <span className="text-slate-400">
+                  {Array.isArray(b.markets) ? b.markets.join('·') : b.market}
+                </span>
+                <span className="text-slate-500">{b.candle_interval}</span>
+                <span className="text-amber-400">cycle #{b.cycles}</span>
+                {b.use_potjes && <span className="text-cyan-400">10-potjes</span>}
+                {b.auto_trade && <span className="text-emerald-400">auto</span>}
+                {b.use_mock && <span className="text-pink-400">MOCK</span>}
+                <span className="text-slate-500 ml-auto">{Math.round((b.uptime_seconds || 0) / 60)}m up</span>
+                {b.running && (
+                  <button onClick={() => stopBot(b.user_id)} disabled={busyUser === b.user_id}
+                    className="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium">
+                    Stop
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Trade feed (community) */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 className="text-base font-semibold text-white mb-4">🎩 De Boekhouder — community feed</h3>
+        {feed.length === 0 ? (
+          <p className="text-sm text-slate-500 italic">Nog geen trade-events.</p>
+        ) : (
+          <div className="space-y-2">
+            {feed.map(m => (
+              <div key={m.id} className="bg-slate-800/30 rounded-lg p-3 text-sm text-slate-300">
+                <p className="italic">"{m.text}"</p>
+                <p className="text-[10px] text-slate-500 mt-1">{new Date(m.ts).toLocaleString('nl-NL')} · {m.kind}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Audit log */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <h3 className="text-base font-semibold text-white mb-4">📋 Audit-trail (geld/token-bewegingen)</h3>
+        {audit.length === 0 ? (
+          <p className="text-sm text-slate-500 italic">Geen audit-entries.</p>
+        ) : (
+          <div className="space-y-1 max-h-80 overflow-y-auto">
+            {audit.map(e => (
+              <div key={e.id} className="bg-slate-800/30 rounded p-2 text-[11px] font-mono flex flex-wrap gap-2">
+                <span className="text-slate-500">{new Date(e.ts).toLocaleTimeString('nl-NL')}</span>
+                <span className="text-amber-400 min-w-[90px]">{e.type}</span>
+                {e.user_id && <span className="text-white">{e.user_id}</span>}
+                {e.pot_id && <span className="text-cyan-400">{e.pot_id}</span>}
+                {(e.amount_eur != null) && <span className="text-emerald-400">€{Number(e.amount_eur).toFixed(4)}</span>}
+                {(e.netto != null) && <span className={e.netto >= 0 ? 'text-emerald-400' : 'text-red-400'}>netto €{Number(e.netto).toFixed(4)}</span>}
+                {(e.spark_fee_eur != null && e.spark_fee_eur > 0) && <span className="text-pink-400">fee €{Number(e.spark_fee_eur).toFixed(4)}</span>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

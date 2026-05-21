@@ -179,6 +179,25 @@ async def status():
     }
 
 
+@router.post("/anchor")
+async def anchor_download():
+    """v4_mr_smith_001: log download als 'anchor' event (Spark's geheugen verplaatst naar zip)."""
+    anchor_file = Path(__file__).parent.parent.parent / "data" / "system" / "backup_anchors.json"
+    anchor_file.parent.mkdir(parents=True, exist_ok=True)
+    data = {}
+    if anchor_file.exists():
+        try:
+            data = json.loads(anchor_file.read_text())
+        except Exception:
+            data = {}
+    data.setdefault("anchors", []).append({
+        "ts": _iso_now(),
+        "note": "User downloaded backup zip. Mr Smith warning shown and accepted.",
+    })
+    anchor_file.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+    return {"ok": True, "total_anchors": len(data["anchors"])}
+
+
 @router.get("/download/full")
 async def download_full():
     """Volledige backup: alle bestanden onder /app/backend/data + /app/memory."""

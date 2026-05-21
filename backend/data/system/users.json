@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-21T20:46:19.658510",
+      "last_active": "2026-05-21T21:04:20.457197",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1039,7 +1039,8 @@
       "gradatie_titel": "Beheerder",
       "avatar": "gallery:cf90e9ea6393",
       "rang": "Generaal",
-      "rang_set_by": "auto_from_gradatie"
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "id": "bot-madelief",
@@ -1232,8 +1233,9 @@
           "total_after": 27720
         }
       ],
-      "rang": "Burger",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 277
     },
     {
       "id": "bot-harry",
@@ -1404,8 +1406,9 @@
           "total_after": 27740
         }
       ],
-      "rang": "Sergeant",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 277
     },
     {
       "id": "bot-smith",
@@ -1582,8 +1585,9 @@
           "total_after": 27900
         }
       ],
-      "rang": "Kapitein",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 279
     },
     {
       "id": "user-000",
@@ -1844,7 +1848,8 @@
         }
       ],
       "rang": "Generaal",
-      "rang_set_by": "auto_from_gradatie"
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "Nick Teeuwen",
@@ -1994,8 +1999,9 @@
           "total_after": 27150
         }
       ],
-      "rang": "Kapitein",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "Roadkill",
@@ -2056,8 +2062,9 @@
         "total_xp_from_achievements": 800
       },
       "gradatie_titel": "Familie",
-      "rang": "Kolonel",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "Heidi",
@@ -2198,8 +2205,9 @@
           "total_after": 27150
         }
       ],
-      "rang": "Kapitein",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "Marieke",
@@ -2340,8 +2348,9 @@
           "total_after": 27150
         }
       ],
-      "rang": "Kapitein",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "Ron",
@@ -2401,8 +2410,9 @@
         ],
         "total_xp_from_achievements": 800
       },
-      "rang": "Kolonel",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Generaal",
+      "rang_set_by": "auto_from_xp",
+      "level": 271
     },
     {
       "naam": "joel123",
@@ -2457,8 +2467,9 @@
           "total_after": 150
         }
       ],
-      "rang": "Kapitein",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Soldaat",
+      "rang_set_by": "auto_from_xp",
+      "level": 1
     },
     {
       "naam": "piet",
@@ -2513,8 +2524,9 @@
           "total_after": 150
         }
       ],
-      "rang": "Kolonel",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Soldaat",
+      "rang_set_by": "auto_from_xp",
+      "level": 1
     },
     {
       "id": "bot-boekhouder",
@@ -2534,8 +2546,9 @@
         "trade-feed",
         "prive-admin"
       ],
-      "rang": "Kolonel",
-      "rang_set_by": "auto_from_gradatie"
+      "rang": "Burger",
+      "rang_set_by": "auto_from_xp",
+      "level": 0
     }
   ],
   "metadata": {
@@ -2552,10 +2565,18 @@
       "Burger",
       "Soldaat",
       "Soldaat 1e klasse",
+      "Korporaal",
       "Sergeant",
+      "Sergeant-majoor",
+      "Adjudant",
+      "Luitenant",
       "Kapitein",
+      "Majoor",
       "Kolonel",
-      "Generaal"
-    ]
+      "Brigadegeneraal",
+      "Generaal",
+      "Veldmaarschalk (Spark)"
+    ],
+    "rang_rule": "rang = RANG_MAP[xp//100]; gradatie 1 = Generaal; Spark (user-000) = Veldmaarschalk"
   }
 }

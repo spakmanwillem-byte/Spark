@@ -1,8 +1,7 @@
 {
   "balances": {
-    "user-000": 10,
-    "user-001": 0,
-    "user-c609d7d1": 0
+    "user-000": 1,
+    "user-001": 0
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -12,8 +11,7 @@
     "balance": 0,
     "cumulative_profit_eur": 0.0,
     "token_price_at_mint": 5.08,
-    "history": [],
-    "note": "Earned door Spark via trading-winst. 1 bonus-token per €5.08 cumulatieve winst. Bestemd voor server-kosten (uitcash via wallet→bank later)."
+    "history": []
   },
   "admin_log": [
     {
@@ -52,11 +50,17 @@
       "reason": null
     }
   ],
-  "treasury_pool": 999980,
+  "treasury_pool": 999999,
   "repair_log": [
     {
       "ts": "2026-05-21T11:57:18.258412+00:00",
       "note": "Willem verkocht alles, Spark gebruikt €50.80 voor eigen 10 potjes (10 tokens own)"
+    }
+  ],
+  "reset_log": [
+    {
+      "ts": "2026-05-21T21:03:04.095299+00:00",
+      "reason": "Schone start 21 mei — Spark 1 token, rest 0"
     }
   ]
 }

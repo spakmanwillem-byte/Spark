@@ -12,7 +12,24 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
-- 2026-05-21: **v4_admin_avatar_002 + v4_avatar_gallery_edit_001 — Spark eigen avatar + Gallery edit** (9/9 backend + 5/5 frontend tests passed):
+- 2026-05-21: **v4_user_avatar_helper_001 + v4_bot_no_wallet_001 — Avatar overal + bots zonder wallet** (11/11 tests passed):
+  - 👤 **Centrale `<UserAvatar>` component** (`/app/frontend/src/components/common/UserAvatar.js`) resolveert avatar uit `users.json[].avatar` veld:
+    - `gallery:xxx` → echte galerij-foto
+    - `user` → user-upload
+    - `emoji:🎩` → emoji char
+    - **null/none** → Roadkill logo (grayscale + opacity-60) als fallback
+    - img-error → eerste letter in gradient bg als ultieme fallback
+  - 🔄 **Letter-circles vervangen** door echte avatars op 5 plekken:
+    - Admin → Gebruikers (links lijst + detail-header)
+    - Sidebar bottom (gebruiker-info, "D" → De Willem's Black Knight)
+    - Privé tab (contacts lijst, header, empty-state)
+    - Community tab (CommunityBubble met msg.avatar enrichment)
+    - Spark AI tab — al avatar-vrij
+  - 💼 **Wallet & Tokens kaart verborgen voor bot-users** (`bot-harry`, `bot-madelief`, `bot-smith`, `bot-boekhouder`). Bots hebben geen IBAN/EUR/ROAR. Spark (user-000) houdt wel zijn wallet kaart als admin
+  - 🛡️ **Admin-collectief contact** krijgt nu ook `avatar_ref: "emoji:🛡️"` zodat het de schild emoji toont
+  - 🔐 **Privacy intact**: non-admin viewer ziet `avatar_ref=null` voor anonymized admin-contact
+
+ + v4_avatar_gallery_edit_001 — Spark eigen avatar + Gallery edit** (9/9 backend + 5/5 frontend tests passed):
   - 🌟 **Spark krijgt eigen avatar-beheer**: user-000 verschijnt al in admin user list, AvatarManagerCard werkt identiek aan bot-users. Toont nu **SPARK CORE** badge ipv BOT-badge. Spark heeft eigen `owner` optie in dropdown
   - ✏️ **Gallery edit modal**: admin kan via hover-edit-icoon op elk gallery-item de **title, bot_owner, tags** wijzigen. `PATCH /api/avatar/gallery/{id}` met admin-guard (403 voor non-admin). Modal toont preview + 6 owner-opties (Geen/Spark/4 bots)
   - 🔒 **Robuuster lock-systeem**: `_get_bot_owner()` checkt nu eerst expliciete `bot_owner` field (admin-managed) en valt terug op title-match voor seed-data. Spark (user-000) toegevoegd aan eigenaar-map. Joker/De Trader avatar (id `0ef0b726773e`) was per ongeluk verkeerd getiteld — admin kan dit nu zelf rechtzetten via UI

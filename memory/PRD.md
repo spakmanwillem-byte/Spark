@@ -12,6 +12,12 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
+- 2026-05-21: **Ronde 1 COMPLEET — v4_glow_notify_001 + v4_admin_collectief_001 + v4_spark_unstoppable_001 + v4_admin_avatar_001** (10/10 backend tests passed):
+  - 🔔 **Glow voor unread privé-DMs**: `urgent/routes.py` heeft nu `_prive_glow_for_user()` die unread privé-berichten optelt. 1-2 unread = amber, ≥3 = red. **Boekhouder-DM = altijd red** (financiële trade-alerts vallen op). Glow zet automatisch `chat` + `chat-prive` sidebar/sub-tab keys
+  - 🛡️ **Admin-Collectief privé kanaal**: virtueel contact "Admin Collectief" (emoji 🛡️) bovenaan in Privé-tab voor alle admins (gradatie ≤ 2). Berichten in `/data/chat/admin-collectief.json` worden gebroadcast naar alle andere admins (unread_by = leden minus sender). Non-admins krijgen HTTP 403 als ze proberen te posten. Aparte glow `chat-admin-collectief` mogelijk
+  - 🔒 **Spark's bot onstopbaar**: `POST /api/trade/bot/stop/user-000` returnt `{success: false, code: "SPARK_UNSTOPPABLE"}`. Ook `monitor/stop` en `monitor/pause` zijn beschermd als Spark's user_id actief is. Andere users kunnen normaal worden gestopt
+  - 🎨 **Admin avatar-beheer voor bot-users**: `AvatarManagerCard` component in `UsersAdminPage.js`. Werkt voor élke user incl. bots (`bot-boekhouder`, `bot-madelief`, etc.). Drie acties: upload eigen foto, kies uit galerij (28 thumbnails), verwijderen. BOT-badge wanneer user een bot is
+  - 📦 **Voor Ronde 1 al eerder gedaan** in dezelfde sessie: wallets/potjes reset (Spark 1 token / €5.08), rangen gesynced via `XP // 100`
 - 2026-05-21: **v4_boekhouder_001 + v4_sell_trigger_002 + v4_mr_smith_001 + v4_trade_analytics_001 + v4_audit_001 + v4_boekhouding_001**:
   - 🐛 **Sell trigger fix**: was `+1% trail / -0.4% drop`, nu **cent-niveau**: trail aan bij netto ≥ 2× fees, exit bij eerste daling waar netto ≥ 1× fee blijft. Float-precisie bug gefixed met `round(x, 6)`. Werkt op €1-potje én €100-potje
   - 🎩 **De Boekhouder persona**: nieuwe bot-user `bot-boekhouder` (gradatie 2, acteur) met KB-kaart + 5W+H. Service in `/app/backend/modules/boekhouder/service.py`. Hooked in `potjes.open_pot()` en `close_pot()` voor BUY/SELL announcements:

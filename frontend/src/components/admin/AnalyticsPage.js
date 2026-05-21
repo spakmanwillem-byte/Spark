@@ -1327,7 +1327,7 @@ function TradeAnalyticsTab() {
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
-            🤖 Actieve trade-bots ({bots.filter(b => b.running).length}/{bots.length})
+            🤖 Trade-bots ({bots.filter(b => b.running).length} actief / {Math.max(bots.length, 2)} verwacht)
           </h3>
           <button onClick={load} disabled={loading} data-testid="refresh-bots"
             className="text-xs text-slate-400 hover:text-white">

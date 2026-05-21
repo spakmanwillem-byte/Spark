@@ -2539,7 +2539,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": "123/175 (70%)",
+    "progress": "126/178 (70%)",
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3825,9 +3825,11 @@
         "id": "v4_registry_persist_001",
         "titel": "MonitorRegistry persist bij backend restart",
         "priority": "medium",
-        "status": "planned",
+        "status": "done",
         "beschrijving": "Legacy _monitor auto-resumed via persist_state, maar bots in MonitorRegistry verdwijnen bij restart. Persist registry state in monitor_state.json[bots] zodat per-user-bots ook auto-resume.",
-        "created_at": "2026-05-21T13:01:52.573336+00:00"
+        "created_at": "2026-05-21T13:01:52.573336+00:00",
+        "completed_at": "2026-05-21T20:45:57.773371+00:00",
+        "note": "Per-user bots persist naar bots_registry_state.json; resume in startup-thread; legacy user-001 blijft eigen state hebben"
       },
       {
         "id": "v4_community_avatar_001",
@@ -3952,6 +3954,29 @@
         "status": "planned",
         "created_at": "2026-05-21T14:16:24.954572+00:00",
         "beschrijving": "Admin-tab in Instellingen of Beheer: visueel overzicht van zone-grootte (Systeem/Spark/User/Community/Archief). Live cijfers + waarschuwing bij groei. Hergebruikt audit-trail principe."
+      },
+      {
+        "id": "v4_kb_id_repair_001",
+        "titel": "KB-kaarten zonder id of duplicaten gerepaird",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T20:45:57.773386+00:00",
+        "note": "3 kaarten zonder id + 2 duplicate-id kaarten = de 5 ondelete-bare kaarten van Willem (Golm/Sinister Mage/Fortune teller). Nieuwe ids met _repair_reason gelogd."
+      },
+      {
+        "id": "v4_avatar_leaderboard_001",
+        "titel": "Avatar zichtbaar in leaderboard + community",
+        "priority": "medium",
+        "status": "done",
+        "completed_at": "2026-05-21T20:45:57.773389+00:00"
+      },
+      {
+        "id": "v4_bot_avatar_upload_001",
+        "titel": "Bot avatar upload via Beheer (klik op profielfoto)",
+        "priority": "medium",
+        "status": "planned",
+        "created_at": "2026-05-21T20:45:57.773391+00:00",
+        "beschrijving": "In UsersAdminPage: klik op user profielafbeelding → modal opent met gallery uit /system/avatars → admin kiest. Voor bots én users. Belangrijkste use case: 11 zelf-gemaakte D&D avatars koppelen aan bots."
       }
     ],
     "last_updated": "2026-05-21T12:49:31.199236+00:00",

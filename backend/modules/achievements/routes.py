@@ -75,6 +75,8 @@ async def get_leaderboard(period: str = "alltime", limit: int = 25):
             "naam": prog.get("user_naam") or u.get("naam") or uid,
             "gradatie": prog.get("user_gradatie") or u.get("gradatie", 7),
             "gradatie_titel": u.get("rol") or "",
+            "rang": u.get("rang"),
+            "avatar_ref": u.get("avatar"),  # v4_avatar_leaderboard_001
             "xp": int(xp),
             "level": int(xp // 100) if xp else 0,
             "achievements": achievements_count,

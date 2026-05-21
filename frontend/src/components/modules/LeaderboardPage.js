@@ -113,9 +113,17 @@ export function LeaderboardPage({ onNavigate }) {
                     style={i < 3 ? { background: rankColors[i] } : {}}>
                     {i + 1}
                   </div>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0"
-                    style={{ background: `linear-gradient(135deg, ${['#f59e0b', '#3b82f6', '#22c55e', '#a855f7'][i % 4]}, ${['#ea580c', '#6366f1', '#10b981', '#ec4899'][i % 4]})` }}>
-                    {(p.naam || '?')[0]}
+                  <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center text-white font-bold flex-shrink-0"
+                    style={p.avatar_ref ? {} : { background: `linear-gradient(135deg, ${['#f59e0b', '#3b82f6', '#22c55e', '#a855f7'][i % 4]}, ${['#ea580c', '#6366f1', '#10b981', '#ec4899'][i % 4]})` }}>
+                    {p.avatar_ref && p.avatar_ref.startsWith('gallery:') ? (
+                      <img src={`${API}/api/avatar/gallery/${p.avatar_ref.split(':')[1]}/image`} alt={p.naam}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.target.style.display = 'none'; }} />
+                    ) : p.avatar_ref && p.avatar_ref.startsWith('emoji:') ? (
+                      <span className="text-xl">{p.avatar_ref.split(':')[1]}</span>
+                    ) : (
+                      <span>{(p.naam || '?')[0]}</span>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">

@@ -18654,11 +18654,47 @@
         "session_id": "default",
         "gesprek_nummer": 706
       }
+    },
+    {
+      "id": "conv-0d3e8eb0",
+      "timestamp": "2026-05-21T20:45:10.495628+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 11 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 707
+      }
+    },
+    {
+      "id": "conv-7b8bb771",
+      "timestamp": "2026-05-21T20:45:10.520512+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 708
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 706,
-    "last_updated": "2026-05-21T09:29:53.452576+00:00"
+    "total_conversations": 708,
+    "last_updated": "2026-05-21T20:45:10.520512+00:00"
   }
 }

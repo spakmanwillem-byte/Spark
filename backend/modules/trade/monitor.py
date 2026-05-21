@@ -553,6 +553,12 @@ class MonitorService:
             self._thread = threading.Thread(target=self._loop, daemon=True)
             self._thread.start()
             self._persist_state()
+            # v4_registry_persist_001: ook registry-state voor non-legacy bots
+            if self._user_id != "user-001":
+                try:
+                    _persist_registry()
+                except Exception:
+                    pass
             mode = "10-potjes" if use_potjes else "single"
             coin_label = ", ".join(self._markets) if len(self._markets) > 1 else self._markets[0]
             return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode, {coin_label})", "status": self.get_status()}
@@ -620,6 +626,11 @@ class MonitorService:
                 self._thread.join(timeout=5)
             self._thread = None
             self._persist_state()  # Save: running=false so auto-resume skips
+            if self._user_id != "user-001":
+                try:
+                    _persist_registry()
+                except Exception:
+                    pass
             return {"success": True, "message": "Monitor gestopt", "status": self.get_status()}
 
     def pause(self) -> Dict:
@@ -841,6 +852,63 @@ def get_user_monitor(user_id: str) -> MonitorService:
         if user_id not in _registry:
             _registry[user_id] = MonitorService(user_id=user_id)
         return _registry[user_id]
+
+
+# v4_registry_persist_001 — persist per-user bots zodat ze auto-resumen na restart
+REGISTRY_STATE_FILE = DATA_DIR / "trade" / "bots_registry_state.json"
+
+
+def _persist_registry():
+    """Sla alle running registry-bots op zodat ze na restart auto-resumen."""
+    try:
+        REGISTRY_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        bots = []
+        with _registry_lock:
+            for uid, m in _registry.items():
+                if uid == "user-001":
+                    continue  # legacy heeft eigen state file
+                if m._running:
+                    bots.append({
+                        "user_id": uid,
+                        "interval": m._interval,
+                        "market": m._market,
+                        "markets": list(m._markets),
+                        "candle_interval": m._candle_interval,
+                        "auto_trade": m._auto_trade,
+                        "trade_amount": m._trade_amount,
+                        "use_mock": m._use_mock,
+                        "use_potjes": m._use_potjes,
+                    })
+        with open(REGISTRY_STATE_FILE, "w") as f:
+            json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
+    except Exception as e:
+        logger.warning(f"Registry persist failed: {e}")
+
+
+def resume_registry_bots():
+    """Bij backend startup: hervat alle eerder-running registry-bots."""
+    if not REGISTRY_STATE_FILE.exists():
+        return {"resumed": 0, "reason": "no state"}
+    try:
+        with open(REGISTRY_STATE_FILE) as f:
+            data = json.load(f)
+        resumed = 0
+        for b in data.get("bots", []):
+            uid = b.get("user_id")
+            if not uid:
+                continue
+            m = get_user_monitor(uid)
+            m.start(
+                interval=b["interval"], market=b["market"], markets=b.get("markets"),
+                candle_interval=b["candle_interval"], user_id=uid,
+                auto_trade=b["auto_trade"], trade_amount=b["trade_amount"],
+                use_mock=b["use_mock"], use_potjes=b["use_potjes"],
+            )
+            resumed += 1
+        return {"resumed": resumed}
+    except Exception as e:
+        logger.error(f"Registry resume failed: {e}")
+        return {"resumed": 0, "error": str(e)}
 
 
 def list_running_bots() -> List[Dict]:

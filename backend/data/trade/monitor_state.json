@@ -1,16 +1,19 @@
 {
-  "running": false,
-  "interval": 60,
+  "running": true,
+  "interval": 900,
   "market": "BCH-EUR",
   "markets": [
-    "BCH-EUR"
+    "BCH-EUR",
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR",
+    "ADA-EUR"
   ],
   "candle_interval": "15m",
   "user_id": "user-001",
-  "auto_trade": false,
+  "auto_trade": true,
   "trade_amount": 5.08,
   "use_mock": false,
   "use_potjes": true,
-  "last_persisted": "2026-05-21T13:17:06.484501+00:00",
-  "note": "Reset bij deploy 21 mei \u2014 Spark's bot start handmatig via UI"
+  "last_persisted": "2026-05-21T20:45:26.128343+00:00"
 }

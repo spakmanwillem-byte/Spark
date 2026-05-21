@@ -274,12 +274,16 @@ async def startup():
     # v4_startup_safe_001: in een thread zodat traag Bitvavo de boot niet blokkeert
     def _resume_in_background():
         try:
-            from modules.trade.monitor import get_monitor
+            from modules.trade.monitor import get_monitor, resume_registry_bots
+            # 1. Legacy single monitor
             result = get_monitor().resume_if_was_running()
             if result.get("resumed"):
-                print(f"   🔄 Trade monitor auto-resumed (background)")
-            else:
-                print(f"   ⏸  Trade monitor: {result.get('reason', 'idle')}")
+                print("   🔄 Trade monitor auto-resumed (legacy)")
+            # 2. Per-user registry bots (Spark + anderen)
+            reg_result = resume_registry_bots()
+            n = reg_result.get("resumed", 0)
+            if n > 0:
+                print(f"   🤖 {n} registry-bot(s) auto-resumed")
         except Exception as e:
             print(f"   ⚠️  Trade monitor resume failed: {e}")
     try:

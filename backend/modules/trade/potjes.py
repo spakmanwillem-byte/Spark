@@ -9,9 +9,8 @@ Regels (Willem's design):
 - Elk potje heeft eigen trailing stop + position state
 """
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 from datetime import datetime, timezone
-import uuid
 from modules.core.storage import load_json, save_json
 
 POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"

@@ -16,11 +16,8 @@ Scope:
   /app/memory/         (PRD, roadmap, notes)
 """
 import io
-import os
 import json
 import zipfile
-import shutil
-import tempfile
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import List, Dict, Any

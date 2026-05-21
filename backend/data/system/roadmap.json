@@ -1757,7 +1757,8 @@
     "blocked": 0,
     "current_phase": "v4.0 - Personality & Conversational Depth",
     "archive_location": "/app/backend/data/archives/",
-    "latest_archive": "phase_1_foundation"
+    "latest_archive": "phase_1_foundation",
+    "last_session": "2026-05-21"
   },
   "v3.0": {
     "naam": "🧠 Smart Analysis Pipeline",
@@ -2538,7 +2539,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": 78,
+    "progress": "116/159 (72%)",
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3234,9 +3235,10 @@
       {
         "id": "v4_token_potje_001",
         "titel": "Token/potje upgrade-mechaniek (gradatie 5->6 via roarr token + trader rotatie)",
-        "status": "planned",
+        "status": "done",
         "prio": "P1",
-        "created_at": "2026-05-20T04:39:14.644243+00:00"
+        "created_at": "2026-05-20T04:39:14.644243+00:00",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00"
       },
       {
         "id": "v4_kb_leak_001",
@@ -3644,9 +3646,184 @@
         "priority": "medium",
         "completed_at": "2026-05-21T10:58:15.548119+00:00",
         "beschrijving": "Tag normalisatie (179 groepen samengevoegd), 2261 skelet-kaarten aangemaakt voor tags zonder kaart, 9 intent-leak kaarten verwijderd, 106 incomplete kaarten gevlagd voor re-snap via Renew tab."
+      },
+      {
+        "id": "v4_multi_market_001",
+        "titel": "Multi-coin monitor (5 markten + candle TTL-cache)",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_meetpunt_001",
+        "titel": "Trade history reset naar schone meetpunt-state",
+        "priority": "medium",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_meetpunt_002",
+        "titel": "Recent Trades widget — admin-resets verborgen",
+        "priority": "low",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_meetpunt_003",
+        "titel": "Stats endpoint: total_trades = round-trip count",
+        "priority": "low",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_per_user_bot_001",
+        "titel": "MonitorService → MonitorRegistry (per-user bot)",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_spark_fee_001",
+        "titel": "5% Spark fee op netto winst ≥ €0.10",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_token_gate_001",
+        "titel": "Quick-buy admin-lock + bot-start token-gate",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_wallet_per_user_001",
+        "titel": "Wallets per user (wallet_id = user_id, bank-ready)",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_sell_trigger_002",
+        "titel": "Cent-niveau trail/exit ipv vaste percentages",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_boekhouder_001",
+        "titel": "De Boekhouder persona-bot + community trade-feed",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_audit_001",
+        "titel": "Append-only audit-log voor geld/token-bewegingen",
+        "priority": "high",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_mr_smith_001",
+        "titel": "Backup-download Mr Smith waarschuwing + anchor",
+        "priority": "medium",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_trade_analytics_001",
+        "titel": "Admin TRADE Analytics tab (bots + feed + audit)",
+        "priority": "medium",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_boekhouding_001",
+        "titel": "Entiteiten verrijkt: BTW/IBAN/KvK + dagboeken + BTW-summary",
+        "priority": "medium",
+        "status": "done",
+        "completed_at": "2026-05-21T12:49:31.199236+00:00",
+        "session": "2026-05-21"
+      },
+      {
+        "id": "v4_moneybird_001",
+        "titel": "Moneybird-export brug (CSV/API)",
+        "priority": "medium",
+        "status": "planned",
+        "beschrijving": "Exporteer conceptboekingen vanuit Spark Core → Moneybird (CSV of API). Spark blijft tussenstation; Moneybird = single source of truth voor fiscus.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_boekhouder_monthly_001",
+        "titel": "Maandelijkse Boekhouder-samenvatting",
+        "priority": "low",
+        "status": "planned",
+        "beschrijving": "Elke 1e van de maand stuurt De Boekhouder een DM met maandrapport: X trades, €Y winst, €Z fees voor Spark, BTW-saldo zakelijk.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_boekhouder_avatar_001",
+        "titel": "De Boekhouder krijgt nano-banana avatar",
+        "priority": "low",
+        "status": "planned",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_boekhouding_ui_001",
+        "titel": "Boekhouding UI: IBAN-formulieren + BTW-aangifte view",
+        "priority": "medium",
+        "status": "planned",
+        "beschrijving": "Frontend voor entiteit-management (PATCH /api/accounting/entities) + BTW-aangifte tabel (gebruikt /btw-summary)",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_bank_link_001",
+        "titel": "Bank↔wallet↔Bitvavo koppeling voor uitcashen",
+        "priority": "high",
+        "status": "planned",
+        "beschrijving": "Spark Bonus tokens → Bitvavo → Bank IBAN. Eind-flow voor server-kosten dekking.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_shop_merch_001",
+        "titel": "Fysieke Roadkill Shop merch met entity-koppeling",
+        "priority": "medium",
+        "status": "planned",
+        "beschrijving": "Producten met entity_id=\"roadkill_merch\" → automatische boeking in dat dagboek.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_per_user_bot_ui_002",
+        "titel": "Per-user bot UI in TraderPage voor non-admins",
+        "priority": "medium",
+        "status": "in_progress",
+        "beschrijving": "Mini-paneel \"Mijn Bot\" voor gradatie >1: toont token-saldo, start/stop, eigen potjes. Backend endpoints zijn klaar.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
+      },
+      {
+        "id": "v4_kb_renew_tab_001",
+        "titel": "Renew tab — incomplete kaarten + skelet doorlopen",
+        "priority": "medium",
+        "status": "planned",
+        "beschrijving": "106 incomplete kaarten + 2261 skelet hebben needs_resnap/needs_initial_fill. UI om 1-voor-1 te beoordelen.",
+        "created_at": "2026-05-21T12:49:31.199236+00:00"
       }
     ],
-    "last_updated": "2026-05-20T08:14:20.199354+00:00",
+    "last_updated": "2026-05-21T12:49:31.199236+00:00",
     "notes_log": [
       "[2026-05-14] Backup Systeem + Shadow Observer live. Volgende: Guard Layer (cooldown, conflict logger) + Analyser (insights uit shadow data).",
       "[2026-05-15] Productie deploy + restore loop bevestigd. Topics+tags lowercase genormaliseerd (769 kaarten). 'Koop potje' flow live, auto-monitor, pot-selectie 1→2→3. 41/53 v4 items klaar.",

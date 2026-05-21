@@ -12,7 +12,15 @@ Dutch (always respond in Dutch).
 - Gradation-based visibility (1=eigenaar, 2=fam/admin, 3=vrienden, 4=collega's, 5-7=community)
 
 ## Completed (recent)
-- 2026-05-21: **Ronde 1 COMPLEET — v4_glow_notify_001 + v4_admin_collectief_001 + v4_spark_unstoppable_001 + v4_admin_avatar_001** (10/10 backend tests passed):
+- 2026-05-21: **Avatar polish + Ronde 2 start — v4_avatar_fallback_001 + v4_avatar_bot_lock_001 + v4_community_archive_001 + v4_community_recap_001 + Base Line lore** (14/14 backend + 2/2 frontend tests passed):
+  - 🏍️ **Roadkill logo als avatar fallback**: `/api/avatar/current/{user_id}` returnt nu `fallback_url` + `is_fallback` flag. Community-messages enrichment gebruikt roadkill logo (met opacity-60 grayscale) wanneer user geen avatar heeft
+  - 🔒 **Bot-avatar locket-stempel**: 3 avatars in galerij (Harry Klokkenmaker, Mr Smith, Madelief Stouten) zijn automatisch gemarkeerd via title-match als `bot_owner: bot-{naam}`. Frontend toont gouden 🔒 icon rechtsboven op locked avatars. Non-admin user die een locked avatar probeert te kiezen → HTTP 403 met owner-info. Admin én de bot zelf mogen wel
+  - 📜 **Base Line lore** opgeslagen als KB-kaart (`begrip: Base Line`) met volledige 4 lagen, 5W+H, tags `[base line, spark world, lore, d&d, oorsprong, ad, puls, licht, schaduw, fracties, elementen]` + extra entry in Spark's eigen `scratch.json`. Spark herkent het concept in chat na cache-clear
+  - 🗂️ **Community archief**: `GET /api/bots/community/archive` returnt jaar→maand→dag-tree met counts/first/last per dag. Met `?year=Y&month=M&day=D` haal je messages van die dag chronologisch
+  - 📋 **Community recap**: `GET /api/bots/community/recap?offset_days=1` (gisteren) of `?date=YYYY-MM-DD` geeft samenvatting met top_topics, user_counts, bot_counts en preview. Voor 2026-03-18 detecteert het 82 berichten met Willem Spakman als top user
+  - 💬 **Chat-commando "Wat is gisteren besproken?"**: nieuwe `detect_community_recap_intent()` in `smart_intents_service.py`. Matcht varianten: "wat is gisteren/vandaag/eergisteren in de community besproken/gezegd/gepraat", "community recap", "samenvatting van de community". Returnt type=`community_recap` met geformatteerd bericht starting met "📋 **Community-recap gisteren**"
+
+ — v4_glow_notify_001 + v4_admin_collectief_001 + v4_spark_unstoppable_001 + v4_admin_avatar_001** (10/10 backend tests passed):
   - 🔔 **Glow voor unread privé-DMs**: `urgent/routes.py` heeft nu `_prive_glow_for_user()` die unread privé-berichten optelt. 1-2 unread = amber, ≥3 = red. **Boekhouder-DM = altijd red** (financiële trade-alerts vallen op). Glow zet automatisch `chat` + `chat-prive` sidebar/sub-tab keys
   - 🛡️ **Admin-Collectief privé kanaal**: virtueel contact "Admin Collectief" (emoji 🛡️) bovenaan in Privé-tab voor alle admins (gradatie ≤ 2). Berichten in `/data/chat/admin-collectief.json` worden gebroadcast naar alle andere admins (unread_by = leden minus sender). Non-admins krijgen HTTP 403 als ze proberen te posten. Aparte glow `chat-admin-collectief` mogelijk
   - 🔒 **Spark's bot onstopbaar**: `POST /api/trade/bot/stop/user-000` returnt `{success: false, code: "SPARK_UNSTOPPABLE"}`. Ook `monitor/stop` en `monitor/pause` zijn beschermd als Spark's user_id actief is. Andere users kunnen normaal worden gestopt

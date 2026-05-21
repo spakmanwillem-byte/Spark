@@ -2539,7 +2539,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": "119/163 (73%)",
+    "progress": "119/171 (69%)",
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3890,6 +3890,30 @@
         "status": "planned",
         "created_at": "2026-05-21T14:04:13.656350+00:00",
         "beschrijving": "Tweede dimensie naast gradatie: militaire rang binnen community (Burger → Soldaat → Sergeant → Kapitein → Kolonel → Generaal). Gradatie blijft vertrouwens-as (privé), rang wordt verdienste-as (community). Admin (jij) overruled altijd via gradatie."
+      },
+      {
+        "id": "v5_event_overlay_001",
+        "titel": "Event-overlay systeem (KB-kaart als transparante overlay)",
+        "priority": "medium",
+        "status": "planned",
+        "created_at": "2026-05-21T14:10:52.739245+00:00",
+        "beschrijving": "Een KB-kaart kan tijdelijk getoond worden als semi-transparante overlay over een chat-kanaal. Drie targets: Spark-privé, Spark AI feed, Community. Duration + fade-in/out. Audio loopt parallel via Web Audio. Eén codebase, drie targets. Hergebruikt v4_kb_sensory_card_001 als data-laag."
+      },
+      {
+        "id": "v5_event_trigger_engine_001",
+        "titel": "Event-trigger engine (Bark-bot bouwsteen)",
+        "priority": "medium",
+        "status": "planned",
+        "created_at": "2026-05-21T14:10:52.739256+00:00",
+        "beschrijving": "Centraal systeem dat events kan uitlokken: chat-keyword, dobbelworp, achievement, timer, andere bot-actie, stemming-detectie. Output = \"toon KB-kaart X als overlay in kanaal Y voor Z seconden\". Voedt zowel Bark-bots als spontane Spark-events."
+      },
+      {
+        "id": "v6_film_party_001",
+        "titel": "Film-avond modus (synced overlay + commentaar)",
+        "priority": "low",
+        "status": "planned",
+        "created_at": "2026-05-21T14:10:52.739259+00:00",
+        "beschrijving": "Met overlay-systeem als basis: gedeelde film-experience. Spark + users zien tegelijk poster, countdown, scène-commentaar. Bark-bots reageren tijdens film."
       }
     ],
     "last_updated": "2026-05-21T12:49:31.199236+00:00",

@@ -209509,40 +209509,6 @@
       "kaart_type": "concept"
     },
     {
-      "id": "kb-skel-76634a8c",
-      "begrip": "emotie",
-      "status": "active",
-      "detected_by": "system_repair",
-      "created_by": "system_repair",
-      "created_at": "2026-05-21T10:51:08.867886+00:00",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "tags": [
-        "emotie"
-      ],
-      "belangrijkheid": 5,
-      "topic": "",
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "needs_initial_fill": true,
-      "metadata": {
-        "created_at": "2026-05-21T10:51:08.867886+00:00",
-        "updated_at": "2026-05-21T10:51:08.867886+00:00",
-        "auto_seeded_from_tag_count": 526,
-        "reason": "skelet voor re-snap; tag werd gebruikt in andere kaarten zonder eigen onderwerp"
-      }
-    },
-    {
       "id": "kb-skel-2f708fd2",
       "begrip": "informatie",
       "status": "active",
@@ -209573,40 +209539,6 @@
         "created_at": "2026-05-21T10:51:08.867886+00:00",
         "updated_at": "2026-05-21T10:51:08.867886+00:00",
         "auto_seeded_from_tag_count": 155,
-        "reason": "skelet voor re-snap; tag werd gebruikt in andere kaarten zonder eigen onderwerp"
-      }
-    },
-    {
-      "id": "kb-skel-fdaabc22",
-      "begrip": "ai",
-      "status": "active",
-      "detected_by": "system_repair",
-      "created_by": "system_repair",
-      "created_at": "2026-05-21T10:51:08.867886+00:00",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "tags": [
-        "ai"
-      ],
-      "belangrijkheid": 3,
-      "topic": "",
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "needs_initial_fill": true,
-      "metadata": {
-        "created_at": "2026-05-21T10:51:08.867886+00:00",
-        "updated_at": "2026-05-21T10:51:08.867886+00:00",
-        "auto_seeded_from_tag_count": 75,
         "reason": "skelet voor re-snap; tag werd gebruikt in andere kaarten zonder eigen onderwerp"
       }
     },
@@ -210033,40 +209965,6 @@
       },
       "tags": [
         "observatie"
-      ],
-      "belangrijkheid": 1,
-      "topic": "",
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "needs_initial_fill": true,
-      "metadata": {
-        "created_at": "2026-05-21T10:51:08.867886+00:00",
-        "updated_at": "2026-05-21T10:51:08.867886+00:00",
-        "auto_seeded_from_tag_count": 26,
-        "reason": "skelet voor re-snap; tag werd gebruikt in andere kaarten zonder eigen onderwerp"
-      }
-    },
-    {
-      "id": "kb-skel-a3a712b2",
-      "begrip": "generatie",
-      "status": "active",
-      "detected_by": "system_repair",
-      "created_by": "system_repair",
-      "created_at": "2026-05-21T10:51:08.867886+00:00",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "tags": [
-        "generatie"
       ],
       "belangrijkheid": 1,
       "topic": "",
@@ -211217,6 +211115,17 @@
       "seeded_skelet_count": 50,
       "total_before": 3024,
       "total_after": 3065
+    },
+    {
+      "ts": "2026-05-21T11:00:00Z",
+      "action": "removed_duplicate_skelet",
+      "removed": [
+        "ai",
+        "emotie",
+        "generatie"
+      ],
+      "before": 3065,
+      "after": 3062
     }
   ]
 }

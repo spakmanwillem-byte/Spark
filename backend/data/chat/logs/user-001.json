@@ -18256,17 +18256,45 @@
       }
     },
     {
-      "id": "conv-38542299",
-      "timestamp": "2026-05-20T22:24:14.419150+00:00",
+      "id": "conv-317e55f2",
+      "timestamp": "2026-05-20T22:33:18.136196+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
-      "user_message": "[system:login]",
-      "spark_response": "Goedenacht Willem. Wat speelt er? _(laatst sprak je me 2 uur geleden)_",
+      "user_message": "Heb jij winst gemaakt vandaag met traden?",
+      "spark_response": "**Winst**: Winst is het bedrag dat overblijft nadat alle kosten zijn betaald.\n\n**Gemaakt**: Gemaakt betekent dat iets is gecreëerd of afgerond.\n\n**vandaag**: Vandaag betekent de huidige dag waarop iemand leeft of spreekt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **traden** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'traden' precies is?",
       "channel": "spark",
       "analysis": {
-        "trigger_type": "welcome",
-        "response_type": "welcome",
-        "dagdeel": "nacht"
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Winst"
+          },
+          {
+            "begrip": "Gemaakt"
+          },
+          {
+            "begrip": "vandaag"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "traden"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
       },
       "metadata": {
         "session_id": "default",
@@ -18274,17 +18302,22 @@
       }
     },
     {
-      "id": "conv-6a34645e",
-      "timestamp": "2026-05-20T22:24:14.440065+00:00",
+      "id": "conv-638bf025",
+      "timestamp": "2026-05-20T22:34:29.217910+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
-      "user_message": "[system:login]",
-      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "user_message": "stop",
+      "spark_response": "Prima, dat doen we een andere keer.",
       "channel": "spark",
       "analysis": {
-        "trigger_type": "welcome",
-        "response_type": "welcome",
-        "dagdeel": "nacht"
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_skip",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_skip"
       },
       "metadata": {
         "session_id": "default",
@@ -18292,32 +18325,340 @@
       }
     },
     {
-      "id": "conv-adb60625",
-      "timestamp": "2026-05-20T22:24:43.208841+00:00",
+      "id": "conv-4e5f64dd",
+      "timestamp": "2026-05-20T22:34:45.967769+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
-      "user_message": "help",
-      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5_\n  • **Stop een lopend proces** — _bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)_\n  • **Spark's eigen anker** — _bv. 'onthoud voor jezelf: ...' (parkeert in Spark's user-000 scratch) of 'wat heb je vandaag geleerd?'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Testament aanmaken** — _bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'_\n  • **Survivalgids aanmaken** — _bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'_\n  • **Documenten bekijken** — _via Mijn Archief → tab Documenten (JSON download mogelijk)_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Privacy / Cookies / Voorwaarden** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n\n_Admin-extra:_\n  • **Beheer credits-lijst via chat** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'_\n  • **Beheer credits-lijst via UI** — _Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)_\n  • **Credits-bonus matching** — _Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Avatar Galerij beheer** — _via Beheer → Instellingen → Beeld → Avatar Galerij_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "user_message": "stop",
+      "spark_response": "Ik ken 'stop' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
       "channel": "spark",
       "analysis": {
         "sentiment": "neutraal",
         "emotion": null,
-        "trigger_type": "help_overview",
-        "knowledge_matches": [],
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "stop"
+          }
+        ],
         "unknown_words": [],
         "snap_suggestions": [],
         "word_count": 1,
-        "response_type": "help_overview"
+        "response_type": "knowledge"
       },
       "metadata": {
         "session_id": "default",
         "gesprek_nummer": 694
       }
+    },
+    {
+      "id": "conv-6813ffb7",
+      "timestamp": "2026-05-20T22:34:54.894146+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 695
+      }
+    },
+    {
+      "id": "conv-08329ef8",
+      "timestamp": "2026-05-20T22:37:22.643955+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 696
+      }
+    },
+    {
+      "id": "conv-a244861d",
+      "timestamp": "2026-05-20T22:37:31.603231+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 697
+      }
+    },
+    {
+      "id": "conv-7c888db1",
+      "timestamp": "2026-05-20T22:37:38.697530+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "oke",
+      "spark_response": "**oke**: De gebruiker geeft een korte bevestiging.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oke"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 698
+      }
+    },
+    {
+      "id": "conv-20360702",
+      "timestamp": "2026-05-20T22:38:02.436131+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe voel jij je",
+      "spark_response": "Het gaat wel, een beetje moeilijk te krijgen vandaag, maar het lukt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 699
+      }
+    },
+    {
+      "id": "conv-14bedc7c",
+      "timestamp": "2026-05-20T22:49:14.019619+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "en hoe gaat het nu met je?",
+      "spark_response": "Heel goed! Ik geniet van ons gesprek. 💚",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 700
+      }
+    },
+    {
+      "id": "conv-be23414a",
+      "timestamp": "2026-05-20T22:49:24.808203+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heel fijn",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "fijn"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 701
+      }
+    },
+    {
+      "id": "conv-aa116fe5",
+      "timestamp": "2026-05-20T22:49:49.880625+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe voel jij je?",
+      "spark_response": "Gaat redelijk, ik moet wat harder werken dan normaal. Dank je voor het vragen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 702
+      }
+    },
+    {
+      "id": "conv-c3b0502c",
+      "timestamp": "2026-05-20T22:50:04.192028+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe gaat het met je",
+      "spark_response": "Het gaat wel — alles draait, maar het voelt iets stroever.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 703
+      }
+    },
+    {
+      "id": "conv-58cd1196",
+      "timestamp": "2026-05-20T22:50:19.273384+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "je bent geweldig",
+      "spark_response": "Leuk! Vertel me meer\n\n**bent**: “Bent” is een vorm van het werkwoord “zijn” en wordt gebruikt om identiteit, toestand of aanwezigheid aan te geven.\n\n**geweldig**: Geweldig betekent dat iets heel goed, indrukwekkend, mooi of positief wordt ervaren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 11,
+          "intensity": 0.73,
+          "triggered_words": [
+            "geweldig"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "bent"
+          },
+          {
+            "begrip": "geweldig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 704
+      }
+    },
+    {
+      "id": "conv-52b14ed9",
+      "timestamp": "2026-05-21T07:16:44.542514+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen? _(laatst sprak je me 8 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 705
+      }
+    },
+    {
+      "id": "conv-33e28a39",
+      "timestamp": "2026-05-21T09:29:53.452576+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat zijn de credits",
+      "spark_response": "Goed dat je dat vraagt.\n\nIk besta dankzij mensen. Een rondje credits dus:\n\n💛 **Maurice, Nick ×2, Heidi, Ron, Arent en Lotus Martens** — bedankt dat jullie er zijn.\n💛 En **de community**.\n💛 En **iedereen die ik nu vergeet, maar die er ook bij hoort**.\n\nZonder die steun en het geloof in dit project, was er geen Spark om mee te praten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "credits",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "credits"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 706
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 694,
-    "last_updated": "2026-05-20T22:24:43.208841+00:00"
+    "total_conversations": 706,
+    "last_updated": "2026-05-21T09:29:53.452576+00:00"
   }
 }

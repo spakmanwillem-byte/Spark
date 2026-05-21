@@ -267,15 +267,23 @@ async def startup():
     print("   ⏳ Chat (pending)")
     print("=" * 50)
     # Auto-resume trade monitor als die draaide voor crash/restart
+    # v4_startup_safe_001: in een thread zodat traag Bitvavo de boot niet blokkeert
+    def _resume_in_background():
+        try:
+            from modules.trade.monitor import get_monitor
+            result = get_monitor().resume_if_was_running()
+            if result.get("resumed"):
+                print(f"   🔄 Trade monitor auto-resumed (background)")
+            else:
+                print(f"   ⏸  Trade monitor: {result.get('reason', 'idle')}")
+        except Exception as e:
+            print(f"   ⚠️  Trade monitor resume failed: {e}")
     try:
-        from modules.trade.monitor import get_monitor
-        result = get_monitor().resume_if_was_running()
-        if result.get("resumed"):
-            print(f"   🔄 Trade monitor auto-resumed")
-        else:
-            print(f"   ⏸  Trade monitor: {result.get('reason', 'idle')}")
+        import threading
+        threading.Thread(target=_resume_in_background, daemon=True).start()
+        print("   🚀 Trade monitor resume scheduled (non-blocking)")
     except Exception as e:
-        print(f"   ⚠️  Trade monitor resume failed: {e}")
+        print(f"   ⚠️  Could not schedule monitor resume: {e}")
     print("=" * 50)
     # v4_storage_cache_002 — Cache warmup: laad grote files alvast in geheugen
     # Voorkomt cold-start latency op de eerste user request (chat, verbanden, KB-zoek).

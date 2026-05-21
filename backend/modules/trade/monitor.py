@@ -558,7 +558,11 @@ class MonitorService:
             return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode, {coin_label})", "status": self.get_status()}
 
     def _persist_state(self):
-        """Save monitor config to disk for auto-resume after restart."""
+        """Save monitor config to disk for auto-resume after restart.
+        v4_registry_persist_001: Alleen LEGACY monitor (user-001) persisteert
+        naar globale state. Registry-bots (user-000 enz) krijgen eigen file later."""
+        if self._user_id != "user-001":
+            return  # registry-bots niet in globale state
         try:
             MONITOR_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
             state = {

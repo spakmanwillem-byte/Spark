@@ -2539,7 +2539,7 @@
     "naam": "🎭 Personality & Conversational Depth",
     "beschrijving": "Consistent personality + diepgaande gesprekken zoals agent<>Willem",
     "status": "in_progress",
-    "progress": "119/171 (69%)",
+    "progress": "119/173 (68%)",
     "priority": "P2",
     "notes": "Doel: 'Dit gesprek met Spark kunnen hebben' - lange, redenererende, lerende dialogen",
     "items": [
@@ -3914,6 +3914,22 @@
         "status": "planned",
         "created_at": "2026-05-21T14:10:52.739259+00:00",
         "beschrijving": "Met overlay-systeem als basis: gedeelde film-experience. Spark + users zien tegelijk poster, countdown, scène-commentaar. Bark-bots reageren tijdens film."
+      },
+      {
+        "id": "v5_voice_cascade_001",
+        "titel": "Acteur stem-cascade: bestand → TTS → tekst (toggle per stap)",
+        "priority": "medium",
+        "status": "planned",
+        "created_at": "2026-05-21T14:13:59.617545+00:00",
+        "beschrijving": "Per acteur/bark-bot: ☑voice-bestand uit gallery, ☑TTS-stem (OpenAI alloy/nova/echo/onyx/shimmer/fable), ☑geen stem. Cascade: aanwezig+aan → speel bestand. Bestand uit/ontbreekt → val terug op TTS. Beide uit → tekst-only. Voor toneelstukken (later upload) automatisch elke rol een unieke stem koppelen."
+      },
+      {
+        "id": "v6_script_upload_001",
+        "titel": "Toneelstuk-script upload + auto-rol-toewijzing",
+        "priority": "low",
+        "status": "planned",
+        "created_at": "2026-05-21T14:13:59.617556+00:00",
+        "beschrijving": "Upload .txt/.md script in formaat \"ROLNAAM: tekst\". Spark parseert rollen, koppelt aan bestaande acteurs of stelt nieuwe Bark-bots voor. Stem-cascade per rol automatisch ingesteld. Voor live performance / D&D campaign / verhalen."
       }
     ],
     "last_updated": "2026-05-21T12:49:31.199236+00:00",

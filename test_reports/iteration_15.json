@@ -1,0 +1,60 @@
+{
+  "summary": "Spark Core 2.0 - Avatar Gallery Edit + Spark (user-000) avatar: ALL 9 backend tests PASSED and ALL 5 frontend tests PASSED. Avatar 0ef0b726773e restored to title='De Trader' bot_owner='' (cleanup verified via GET /avatar/gallery). Spark avatar_ref reset to null so /avatar/current/user-000 keeps is_fallback=true.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend Test 1: PATCH /api/avatar/gallery/0ef0b726773e (viewer_id=user-001, title='De Joker') -> 200 + title updated, verified via GET",
+    "Backend Test 2: PATCH bot_owner='user-000' -> 200, bot_owner persisted",
+    "Backend Test 5: GET /api/avatar/gallery shows avatar with locked=true and bot_owner='user-000'",
+    "Backend Test 6: PUT /api/avatar/select/user-c609d7d1 with claimed avatar -> 403 mentioning 'user-000'",
+    "Backend Test 7: PUT /api/avatar/select/user-000 with own claimed avatar -> 200 success",
+    "Backend Test 3: PATCH bot_owner='' clears claim, locked flag drops",
+    "Backend Test 4: PATCH from viewer_id=user-c609d7d1 (non-admin) -> 403",
+    "Backend Test 8: GET /api/avatar/current/user-000 -> is_fallback=true with fallback_url containing 'roadkill-logo'",
+    "Backend Test 9: GET /api/auth/users includes user-000 with naam='Spark' and gradatie=1",
+    "Frontend Test 10: Login Willem, /admin/users, select Spark -> Avatar Beheer card shows SPARK CORE badge (data-testid='badge-spark')",
+    "Frontend Test 11: 'Kies uit galerij' opens 28 thumbnails, 28 'gallery-edit-*' buttons present (CSS opacity 0 until hover)",
+    "Frontend Test 12: Click gallery-edit-0ef0b726773e -> gallery-edit-modal opens, title='De Trader', owner dropdown has 6 options",
+    "Frontend Test 14: 'Annuleer' closes modal and makes no PATCH call",
+    "Frontend Test 13: Change title='De Joker' + owner='bot-boekhouder' + Save -> modal closes; reopened gallery shows locket-0ef0b726773e icon (locked badge)",
+    "Cleanup Test 15: PATCH avatar 0ef0b726773e back to title='De Trader' bot_owner=''; PUT Spark avatar_ref=null - both 200"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_avatar_gallery_edit.py",
+    "/app/test_reports/pytest/pytest_avatar_gallery_edit.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Pre-existing (not blocking): UsersAdminPage.js still renders <span> inside <option> elements somewhere — React logs 'In HTML, <span> cannot be a child of <option>'. Hydration warning only, cosmetic.",
+    "modules/profile/avatar.py PATCH endpoint: title-only PATCH does not write back when body.title is empty string (only updates when non-empty), which is correct behaviour. tags=None preserves existing — good defensive default.",
+    "modules/profile/avatar.py _get_bot_owner: title-based fallback ('spark' -> 'user-000') still active, so removing explicit bot_owner from an avatar titled 'Spark' would auto-relock via title heuristic. Documented but worth flagging — current behavior is intentional per code comment."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_avatar_gallery_edit.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (9/9 tests passed)",
+    "frontend": "100% (5/5 tests passed)"
+  },
+  "test_credentials": {
+    "admin": {"naam": "Willem", "sleutelwoord": "Appelsap", "user_id": "user-001"},
+    "non_admin": {"naam": "Marieke", "sleutelwoord": "Welkom01", "user_id": "user-c609d7d1"},
+    "spark": {"user_id": "user-000", "naam": "Spark", "gradatie": 1}
+  },
+  "seed_data_creation": "During testing avatar 0ef0b726773e was temporarily mutated (title->De Joker, bot_owner->user-000 then bot-boekhouder). Cleanup PATCH executed AFTER tests restored title='De Trader' bot_owner=''. Spark (user-000) avatar_ref also reset to null. State verified via GET to be identical to initial.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "PATCH /api/avatar/gallery/{avatar_id} endpoint working. Spark (user-000) is now treated like a bot for avatar claims (title 'Spark' auto-claims to user-000 via _get_bot_owner). UsersAdminPage GalleryEditModal verified end-to-end. Gallery-edit buttons are visually hidden (opacity-0) until hover, but are present in DOM and clickable with force=True. Spark avatar entry now resides in users.json. Useful endpoint: PATCH /api/avatar/gallery/{id} body={viewer_id, title?, tags?, bot_owner?} — empty string bot_owner clears claim.",
+  "rca_of_the_issue": "N/A — no bugs found this iteration. All 14 functional + 1 cleanup tests succeeded.",
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "mocked_apis_list": []
+  }
+}

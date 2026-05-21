@@ -1099,9 +1099,12 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
   const [uploading, setUploading] = useState(false);
   const [busy, setBusy] = useState(false);
   const [version, setVersion] = useState(0);
+  // v4_avatar_gallery_edit_001 — Edit modal voor title/bot_owner
+  const [editing, setEditing] = useState(null);  // gallery entry being edited
   const fileInputRef = React.useRef(null);
 
   const isBot = (user?.id || '').startsWith('bot-') || user?.type === 'bot';
+  const isSpark = user?.id === 'user-000';
 
   const reload = React.useCallback(async () => {
     if (!user?.id) return;
@@ -1164,6 +1167,25 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
     } finally { setBusy(false); }
   };
 
+  // v4_avatar_gallery_edit_001 — PATCH title/bot_owner
+  const saveGalleryEdit = async (id, title, botOwner, tagsStr) => {
+    setBusy(true);
+    try {
+      const tags = tagsStr ? tagsStr.split(',').map(s => s.trim()).filter(Boolean) : undefined;
+      await fetch(`${apiUrl}/api/avatar/gallery/${id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          viewer_id: 'user-001',
+          title: title || undefined,
+          tags,
+          bot_owner: botOwner === '' ? '' : (botOwner || undefined),
+        }),
+      });
+      await loadGallery();
+      setEditing(null);
+    } finally { setBusy(false); }
+  };
+
   const previewUrl = current.url ? `${apiUrl}${current.url}${current.url.includes('?') ? '&' : '?'}v=${version}` : null;
 
   return (
@@ -1172,6 +1194,7 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
         <Sparkles className="w-4 h-4 text-amber-400" />
         Avatar Beheer
         {isBot && <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300">BOT</span>}
+        {isSpark && <span data-testid="badge-spark" className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300">SPARK CORE</span>}
       </h3>
 
       <div className="flex items-start gap-4">
@@ -1229,29 +1252,110 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
                 // Lock-regel: alleen die bot zelf (en admin) mag claimen. Hier is viewer altijd admin in UsersAdminPage.
                 const isWrongOwner = locked && owner && owner !== user?.id;
                 return (
-                  <button key={av.id} onClick={() => selectFromGallery(av.id)} disabled={busy}
-                    data-testid={`gallery-pick-${av.id}`}
-                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                      current.avatar_ref === `gallery:${av.id}` ? 'border-amber-400' :
-                      isWrongOwner ? 'border-amber-700/40 hover:border-amber-500' : 'border-slate-700 hover:border-amber-400/60'
-                    }`}
-                    title={locked ? `${av.title || av.id} — exclusief voor ${owner}` : (av.title || av.id)}>
-                    <img src={`${apiUrl}/api/avatar/gallery/${av.id}/image`} alt={av.title || ''}
-                      className={`w-full h-full object-cover ${isWrongOwner ? 'opacity-50' : ''}`} />
-                    {locked && (
-                      <span data-testid={`locket-${av.id}`}
-                        className="absolute top-1 right-1 w-5 h-5 rounded-full bg-amber-500/90 border border-amber-300/60 flex items-center justify-center text-[10px] shadow-md"
-                        title={`Stempel: gereserveerd voor ${owner}`}>
-                        <Lock className="w-2.5 h-2.5 text-slate-950" />
-                      </span>
-                    )}
-                  </button>
+                  <div key={av.id} className="relative group">
+                    <button onClick={() => selectFromGallery(av.id)} disabled={busy}
+                      data-testid={`gallery-pick-${av.id}`}
+                      className={`relative aspect-square w-full rounded-lg overflow-hidden border-2 transition-all ${
+                        current.avatar_ref === `gallery:${av.id}` ? 'border-amber-400' :
+                        isWrongOwner ? 'border-amber-700/40 hover:border-amber-500' : 'border-slate-700 hover:border-amber-400/60'
+                      }`}
+                      title={locked ? `${av.title || av.id} — exclusief voor ${owner}` : (av.title || av.id)}>
+                      <img src={`${apiUrl}/api/avatar/gallery/${av.id}/image`} alt={av.title || ''}
+                        className={`w-full h-full object-cover ${isWrongOwner ? 'opacity-50' : ''}`} />
+                      {locked && (
+                        <span data-testid={`locket-${av.id}`}
+                          className="absolute top-1 right-1 w-5 h-5 rounded-full bg-amber-500/90 border border-amber-300/60 flex items-center justify-center text-[10px] shadow-md"
+                          title={`Stempel: gereserveerd voor ${owner}`}>
+                          <Lock className="w-2.5 h-2.5 text-slate-950" />
+                        </span>
+                      )}
+                    </button>
+                    {/* v4_avatar_gallery_edit_001 — edit-knop voor admin (kleine pencil rechtsonder) */}
+                    <button onClick={(e) => { e.stopPropagation(); setEditing(av); }}
+                      data-testid={`gallery-edit-${av.id}`}
+                      title="Bewerk titel / bot-eigenaar"
+                      className="absolute bottom-1 left-1 w-5 h-5 rounded-full bg-slate-900/80 hover:bg-amber-500/80 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
+                      <Edit3 className="w-3 h-3" />
+                    </button>
+                  </div>
                 );
               })}
             </div>
           )}
         </div>
       )}
+
+      {/* v4_avatar_gallery_edit_001 — Edit modal */}
+      {editing && (
+        <GalleryEditModal
+          entry={editing}
+          onCancel={() => setEditing(null)}
+          onSave={(title, owner, tags) => saveGalleryEdit(editing.id, title, owner, tags)}
+          apiUrl={apiUrl}
+          busy={busy}
+        />
+      )}
+    </div>
+  );
+}
+
+// Edit modal voor gallery entry (title + bot_owner + tags)
+function GalleryEditModal({ entry, onCancel, onSave, apiUrl, busy }) {
+  const [title, setTitle] = useState(entry.title || '');
+  const [owner, setOwner] = useState(entry.bot_owner || '');
+  const [tags, setTags] = useState((entry.tags || []).join(', '));
+
+  const OWNER_OPTIONS = [
+    { v: '', label: 'Geen (vrij voor iedereen)' },
+    { v: 'user-000', label: 'Spark (user-000)' },
+    { v: 'bot-boekhouder', label: 'De Boekhouder' },
+    { v: 'bot-harry', label: 'Harry Klokkenmaker' },
+    { v: 'bot-madelief', label: 'Madelief Stouten' },
+    { v: 'bot-smith', label: 'Mr Smith' },
+  ];
+
+  return (
+    <div data-testid="gallery-edit-modal" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onCancel}>
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
+        <h3 className="text-base font-bold text-white mb-1">Bewerk avatar</h3>
+        <p className="text-[11px] text-slate-500 mb-4 font-mono">ID: {entry.id}</p>
+
+        <div className="flex items-start gap-4 mb-4">
+          <img src={`${apiUrl}/api/avatar/gallery/${entry.id}/image`} alt="" className="w-20 h-20 rounded-xl object-cover border border-slate-700" />
+          <div className="flex-1 space-y-3">
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-1 uppercase tracking-wider">Titel</label>
+              <input data-testid="gallery-edit-title" type="text" value={title} onChange={e => setTitle(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:border-amber-500 focus:outline-none" />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-1 uppercase tracking-wider">Bot/Spark eigenaar (lock 🔒)</label>
+              <select data-testid="gallery-edit-owner" value={owner} onChange={e => setOwner(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:border-amber-500 focus:outline-none">
+                {OWNER_OPTIONS.map(o => <option key={o.v} value={o.v}>{o.label}</option>)}
+              </select>
+              <p className="text-[10px] text-slate-500 mt-1">Vergrendelt deze avatar exclusief voor gekozen bot/Spark.</p>
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-1 uppercase tracking-wider">Tags (komma)</label>
+              <input data-testid="gallery-edit-tags" type="text" value={tags} onChange={e => setTags(e.target.value)}
+                placeholder="fantasie, vrouw, magiër"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-2 justify-end">
+          <button onClick={onCancel} disabled={busy}
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition-colors">
+            Annuleer
+          </button>
+          <button data-testid="gallery-edit-save" onClick={() => onSave(title, owner, tags)} disabled={busy}
+            className="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">
+            {busy ? 'Opslaan…' : 'Opslaan'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

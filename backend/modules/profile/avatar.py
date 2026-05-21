@@ -41,20 +41,24 @@ ROADKILL_LOGO_URL = f"/api/avatar/gallery/{ROADKILL_LOGO_ID}/image"
 # v4_avatar_bot_lock_001 — Avatars geclaimd door specifieke bots (title-based, exclusief voor die bot)
 # Maakt het visueel duidelijk (locket-stempel) + voorkomt dat ze door normale users gekozen worden
 def _get_bot_owner(entry: dict) -> Optional[str]:
-    """Return bot user-id als deze avatar exclusief voor een bot is."""
+    """Return owner user-id als deze avatar exclusief geclaimd is (bot of Spark).
+
+    Priority:
+      1. Expliciete `bot_owner` veld (admin-managed via PATCH /gallery/{id})
+      2. Title-match met bekende bots (fallback voor seed-data)
+    """
     if not entry:
         return None
-    # 1. Expliciete bot_owner tag (toekomstige uploads)
-    explicit = entry.get("bot_owner")
+    explicit = (entry.get("bot_owner") or "").strip()
     if explicit:
         return explicit
-    # 2. Title-match met bekende bots
     title = (entry.get("title") or "").strip().lower()
     title_to_bot = {
         "harry klokkenmaker": "bot-harry",
         "madelief stouten": "bot-madelief",
         "mr smith": "bot-smith",
         "de boekhouder": "bot-boekhouder",
+        "spark": "user-000",
     }
     return title_to_bot.get(title)
 
@@ -158,6 +162,42 @@ async def delete_from_gallery(avatar_id: str, viewer_id: str):
     if f.exists():
         f.unlink()
     return {"success": True, "removed": before - len(idx["avatars"])}
+
+
+# v4_avatar_gallery_edit_001 — Admin kan title/tags/bot_owner van bestaande gallery-avatar wijzigen
+class GalleryEditBody(BaseModel):
+    viewer_id: str
+    title: Optional[str] = None
+    tags: Optional[List[str]] = None
+    bot_owner: Optional[str] = None  # "bot-xxx" of "" om te wissen
+
+
+@router.patch("/gallery/{avatar_id}")
+async def patch_gallery_entry(avatar_id: str, body: GalleryEditBody):
+    """Admin past title/tags/bot_owner aan voor bestaande gallery avatar.
+
+    Voor de bot_owner-claim: gebruik "bot-harry"/"bot-smith"/"bot-madelief"/"bot-boekhouder"/"user-000" (Spark).
+    Lege string of None verwijdert de claim (avatar wordt weer vrij te kiezen).
+    """
+    if not _is_admin(body.viewer_id):
+        raise HTTPException(403, "Alleen admins kunnen avatars bewerken")
+    idx = load_json(GALLERY_INDEX, default={"avatars": []})
+    entry = next((a for a in idx.get("avatars", []) if a.get("id") == avatar_id), None)
+    if not entry:
+        raise HTTPException(404, "Avatar niet gevonden")
+    if body.title is not None and body.title.strip():
+        entry["title"] = body.title.strip()
+    if body.tags is not None:
+        entry["tags"] = [t.strip() for t in body.tags if t and t.strip()]
+    if body.bot_owner is not None:
+        owner = body.bot_owner.strip()
+        if owner == "":
+            entry.pop("bot_owner", None)
+        else:
+            entry["bot_owner"] = owner
+    entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(GALLERY_INDEX, idx)
+    return {"success": True, "avatar": entry}
 
 
 @router.get("/gallery/{avatar_id}/image")

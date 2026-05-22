@@ -1188,6 +1188,21 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
     } finally { setBusy(false); }
   };
 
+  // v5_avatar_delete_001 — Admin verwijdert avatar uit galerij vanuit picker
+  const deleteFromGallery = async (id, title) => {
+    if (!window.confirm(`Verwijder avatar "${title || id}" permanent uit de galerij?\n\nDit kan niet ongedaan worden gemaakt.`)) return;
+    setBusy(true);
+    try {
+      const res = await fetch(`${apiUrl}/api/avatar/gallery/${id}?viewer_id=user-001`, { method: 'DELETE' }).then(r => r.json()).catch(() => ({ success: false }));
+      if (res.success) {
+        await loadGallery();
+        await reload();
+      } else {
+        window.alert('Verwijderen mislukt');
+      }
+    } finally { setBusy(false); }
+  };
+
   const previewUrl = current.url ? `${apiUrl}${current.url}${current.url.includes('?') ? '&' : '?'}v=${version}` : null;
 
   return (
@@ -1278,6 +1293,14 @@ function AvatarManagerCard({ user, apiUrl, onChange }) {
                       title="Bewerk titel / bot-eigenaar"
                       className="absolute bottom-1 left-1 w-5 h-5 rounded-full bg-slate-900/80 hover:bg-amber-500/80 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
                       <Edit3 className="w-3 h-3" />
+                    </button>
+                    {/* v5_avatar_delete_001 — delete-knop voor admin (trash icon rechtsonder) */}
+                    <button onClick={(e) => { e.stopPropagation(); deleteFromGallery(av.id, av.title); }}
+                      data-testid={`gallery-delete-${av.id}`}
+                      title="Verwijder permanent uit galerij"
+                      disabled={busy}
+                      className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-slate-900/80 hover:bg-red-500/80 text-slate-300 hover:text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md disabled:opacity-30">
+                      <Trash2 className="w-3 h-3" />
                     </button>
                   </div>
                 );

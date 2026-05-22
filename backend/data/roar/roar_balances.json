@@ -1,8 +1,8 @@
 {
   "balances": {
     "user-000": 5,
-    "user-001": 13,
-    "user-a0ee2d7e": 1,
+    "user-001": 12,
+    "user-a0ee2d7e": 2,
     "user-574ac78e": 1
   },
   "total_supply": 1000000,
@@ -70,6 +70,17 @@
       "amount": 1,
       "value_eur_at_gift": 10.11,
       "source": "Willem → Nick (welkomstgift)",
+      "status": "completed"
+    },
+    {
+      "id": "9a5737c7-19d2-4f88-9983-916c3a63854d",
+      "ts": "2026-05-22T21:14:20.130206+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-a0ee2d7e",
+      "amount": 1,
+      "gift_id": "bb8adefa-1723-4f45-bc97-9c6a924fdc5b",
+      "note": "Test gift",
       "status": "completed"
     }
   ],
@@ -152,6 +163,14 @@
       "to_user_id": "user-574ac78e",
       "amount": 1,
       "reason": "Welkomstgift nieuwste user"
+    },
+    {
+      "ts": "2026-05-22T21:14:20.130216+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-a0ee2d7e",
+      "amount": 1,
+      "gift_id": "bb8adefa-1723-4f45-bc97-9c6a924fdc5b"
     }
   ],
   "treasury_pool": 999980,

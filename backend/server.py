@@ -140,8 +140,9 @@ from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")
 
 # Module 16: Shop
-from modules.shop import shop_router
+from modules.shop import shop_router, shop_gift_router
 app.include_router(shop_router, prefix="/api")
+app.include_router(shop_gift_router, prefix="/api")
 
 
 # Module 17: Bots & Community

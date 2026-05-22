@@ -28,19 +28,24 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _send_dm(text: str, kind: str = "boekhouder_trade", extra: Optional[Dict] = None):
-    """Privé DM van Boekhouder → admin (Willem)."""
+def _send_dm(text: str, kind: str = "boekhouder_trade", extra: Optional[Dict] = None, recipient_id: Optional[str] = None):
+    """Privé DM van Boekhouder → ontvanger.
+
+    v5_per_user_trade_dm_001: standaard naar admin (Willem) voor Spark-trades; bij user-trades
+    krijgt de user zélf de DM ipv Willem (privacy + ownership).
+    """
+    target = recipient_id or ADMIN_ID
     PRIVE_DIR.mkdir(parents=True, exist_ok=True)
-    fname = PRIVE_DIR / f"{BOEKHOUDER_ID}__{ADMIN_ID}.json"
+    fname = PRIVE_DIR / f"{BOEKHOUDER_ID}__{target}.json"
     data = load_json(fname, default={"messages": []})
     msg = {
         "id": f"bh-{uuid.uuid4().hex[:8]}",
         "from_user_id": BOEKHOUDER_ID,
         "from_naam": "De Boekhouder 🎩",
-        "to_user_id": ADMIN_ID,
+        "to_user_id": target,
         "text": text,
         "ts": _now(),
-        "unread_by": [ADMIN_ID],
+        "unread_by": [target],
         "system": True,
         "kind": kind,
     }
@@ -87,11 +92,13 @@ def _audit(entry: Dict):
 def announce_buy(user_id: str, pot_id: str, market: str, price: float, amount_eur: float):
     """Spark heeft gekocht. Korte droge melding."""
     coin = market.split("-")[0]
-    # Naar Willem: zakelijk
+    # v5_per_user_trade_dm_001: Spark-trades → Willem (admin), user-trades → user zelf
+    recipient = ADMIN_ID if user_id == SPARK_ID else user_id
     _send_dm(
         text=f"📥 BUY • {coin} @ €{price:.4f}\nPotje: {pot_id}\nInleg: €{amount_eur:.2f}\nEigenaar: {'Spark' if user_id == SPARK_ID else user_id}",
         kind="boekhouder_buy",
         extra={"market": market, "pot_id": pot_id, "price": price, "user_id": user_id},
+        recipient_id=recipient,
     )
     # Naar community: alleen voor Spark-trades
     if user_id == SPARK_ID:
@@ -122,7 +129,8 @@ def announce_sell(user_id: str, pot_id: str, market: str, price: float,
     winst_emoji = "✅" if netto > 0 else "⚠️"
     naam = "Spark" if user_id == SPARK_ID else user_id
 
-    # Naar Willem: alle cijfers
+    # v5_per_user_trade_dm_001: Spark-trades → Willem (admin), user-trades → user zelf
+    recipient = ADMIN_ID if user_id == SPARK_ID else user_id
     _send_dm(
         text=(
             f"📤 SELL • {coin} @ €{price:.4f} {winst_emoji}\n"
@@ -134,6 +142,7 @@ def announce_sell(user_id: str, pot_id: str, market: str, price: float,
         kind="boekhouder_sell",
         extra={"market": market, "pot_id": pot_id, "price": price,
                "netto": netto, "spark_fee": spark_fee, "user_id": user_id},
+        recipient_id=recipient,
     )
 
     # Naar community: alleen Spark-trades, en zonder bedragen

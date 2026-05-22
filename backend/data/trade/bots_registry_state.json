@@ -2,43 +2,21 @@
   "bots": [
     {
       "user_id": "user-000",
-      "interval": 30,
+      "interval": 60,
       "market": "BCH-EUR",
       "markets": [
-        "BCH-EUR"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR"
       ],
-      "candle_interval": "15m",
-      "auto_trade": false,
+      "candle_interval": "1h",
+      "auto_trade": true,
       "trade_amount": 5.0,
       "use_mock": true,
       "use_potjes": true
-    },
-    {
-      "user_id": "user-a0ee2d7e",
-      "interval": 60,
-      "market": "BCH-EUR",
-      "markets": [
-        "BCH-EUR"
-      ],
-      "candle_interval": "1h",
-      "auto_trade": false,
-      "trade_amount": 5.0,
-      "use_mock": false,
-      "use_potjes": false
-    },
-    {
-      "user_id": "user-574ac78e",
-      "interval": 60,
-      "market": "BCH-EUR",
-      "markets": [
-        "BCH-EUR"
-      ],
-      "candle_interval": "1h",
-      "auto_trade": false,
-      "trade_amount": 5.0,
-      "use_mock": false,
-      "use_potjes": false
     }
   ],
-  "saved_at": "2026-05-22T21:00:37.675450+00:00"
+  "saved_at": "2026-05-22T21:14:03.868080+00:00"
 }

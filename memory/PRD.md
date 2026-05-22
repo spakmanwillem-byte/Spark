@@ -1,7 +1,22 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
-- 2026-05-23 **v5_leaderboard_avatars_001 + v5_milestone_unlocks_001 + ROAR-gift Nick + monitors live**:
+- 2026-05-23 **v5_roar_gift_001 + v5_per_user_trade_dm_001 + auto-trade testbed**:
+  - 🎁 **ROAR Gift-flow met paper-trail**: nieuwe `/api/shop/gift` endpoints (POST create / GET inbox / GET outbox / POST accept / POST reject / POST cancel)
+    - Tokens worden NIET direct overgeboekt — escrow in `pending` status. Pas bij accept transfer + audit
+    - **24h auto-expire** (lazy-check bij elke list-call): pending → expired, sender's tokens behouden
+    - **Frontend modal** in Winkel → ROAR Token tab (knop "🎁 ROAR Gift sturen" boven Kopen). Velden: ontvanger (dropdown alle users), aantal (max=sender balance), notitie
+    - **Inbox-banner** bovenaan ROAR Token tab toont inkomende pending gifts met Accepteer/Weiger knoppen
+    - Paper-trail in `roar.transactions` + `admin_log` + per-user `notifications.json` (sender + recipient krijgen beiden bevestiging-bark)
+    - **First-token achievement + monitor-uitleg-bark** wordt automatisch getriggerd bij eerste-ontvangst (was eerst alleen bij token-buy)
+    - **Privacy-noot**: `gift_requests.json` bevat sender/recipient pairs — privacy-implicatie genoteerd in roadmap voor encryption-at-rest
+  - 📣 **Trader notifications PER-USER**: `_send_dm` in `boekhouder/service.py` stuurt nu bij user-trades naar de user zelf ipv altijd naar Willem. Spark-trades blijven naar admin (Willem) gaan
+  - 🤖 **Spark monitor auto_trade aan + mock**: hot-swap via Python (`m._auto_trade=True, m._use_mock=True, m._use_potjes=True`) + 5 markets (BCH/BTC/ETH/SOL/ADA). Klaar voor systeem-test
+  - 🥧 **Gijs + Nick beide 10 potjes** auto-aangemaakt (€5,08 startkapitaal elk = €50,80/user). Mock mode, BCH-EUR @ 1h candles
+  - Token-eindstand: **Willem 12, Gijs 2, Nick 1** (+1 pending van Willem), Spark treasury 5
+  - 🗺️ Roadmap fase `phase-roar-economy-v2` gemarkeerd ACTIVE met done/planned items inclusief outbox-view, admin-overzicht, SEPA-mint
+
+- 2026-05-23 **v5_leaderboard_avatars_001 + v5_milestone_unlocks_001 + ROAR-gift Nick + monitors live** (eerder vandaag):
   - 🥇 **Leaderboard top 3 podium + lijst**: letters vervangen door echte `UserAvatar` component met gallery-image / user-upload / roadkill-fallback. Geen "naam[0]" meer
   - 🏆 **3 nieuwe achievements** (categorie "milestones", elk 50 XP):
     - `milestone_avatar_chose` — avatar gekozen uit galerij (trigger: `/avatar/select`)

@@ -127,9 +127,10 @@ export function TraderPage({ onNavigate }) {
   }, [candleMarket, candleInterval]);
 
   const loadMonitorStatus = useCallback(() => {
-    fetch(`${API}/api/trade/monitor/status`).then(r => r.json()).then(d => setMonitorStatus(d.status || null)).catch(() => {});
-    fetch(`${API}/api/trade/monitor/decisions?limit=20`).then(r => r.json()).then(d => setDecisions(d.decisions || [])).catch(() => {});
-  }, []);
+    // v5_per_user_endpoints_001 — per-user endpoints (legacy singleton stopte alle bots tegelijk)
+    fetch(`${API}/api/trade/bot/status/${userId}`).then(r => r.json()).then(d => setMonitorStatus(d.status || null)).catch(() => {});
+    fetch(`${API}/api/trade/bot/decisions/${userId}?limit=20`).then(r => r.json()).then(d => setDecisions(d.decisions || [])).catch(() => {});
+  }, [userId]);
 
   const loadBalance = useCallback(() => {
     fetch(`${API}/api/trade/bitvavo/balance/${userId}`).then(r => r.json()).then(d => setBvBalance(d)).catch(() => {});
@@ -208,13 +209,11 @@ export function TraderPage({ onNavigate }) {
   }, [candleInterval]);
 
   // Monitor controls
+  // v5_per_user_endpoints_001 — altijd per-user endpoints, ook voor admin.
+  // Voorheen gebruikten admins de legacy singleton wat alle bots beïnvloedde (stop Willem → stopte ook Spark).
   const startMonitor = async () => {
     const settings = traderSettings || {};
-    // v4_per_user_bot_001: gebruik bot/start endpoint voor token-gate + per-user instance
-    const endpoint = (user?.gradatie ?? 7) <= 1
-      ? `${API}/api/trade/monitor/start`     // admin: legacy singleton (behoudt huidige UI flow)
-      : `${API}/api/trade/bot/start/${userId}`;  // user: token-gated, eigen bot
-    const res = await fetch(endpoint, {
+    const res = await fetch(`${API}/api/trade/bot/start/${userId}`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         interval: 30,
@@ -233,8 +232,15 @@ export function TraderPage({ onNavigate }) {
     loadMonitorStatus();
     if (usePotjes) loadPotjes();
   };
-  const stopMonitor = async () => { await fetch(`${API}/api/trade/monitor/stop`, { method: 'POST' }); loadMonitorStatus(); };
-  const pauseMonitor = async () => { await fetch(`${API}/api/trade/monitor/pause`, { method: 'POST' }); loadMonitorStatus(); };
+  const stopMonitor = async () => {
+    const res = await fetch(`${API}/api/trade/bot/stop/${userId}`, { method: 'POST' }).then(r => r.json()).catch(() => ({}));
+    if (!res.success && res.error) alert(res.error);
+    loadMonitorStatus();
+  };
+  const pauseMonitor = async () => {
+    await fetch(`${API}/api/trade/bot/pause/${userId}`, { method: 'POST' }).catch(() => {});
+    loadMonitorStatus();
+  };
 
   // Quick trade
   const executeQuickTrade = async () => {

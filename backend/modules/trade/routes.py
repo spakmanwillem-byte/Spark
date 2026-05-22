@@ -599,6 +599,15 @@ async def bot_stop(user_id: str):
     return get_user_monitor(user_id).stop()
 
 
+@router.post("/bot/pause/{user_id}")
+async def bot_pause(user_id: str):
+    """v5_per_user_endpoints_001 — pauzeer een specifieke user's bot zonder andere bots te raken."""
+    from .monitor import get_user_monitor
+    if user_id == "user-000":
+        return {"success": False, "error": "Spark's bot is niet pauzeerbaar.", "code": "SPARK_UNSTOPPABLE"}
+    return get_user_monitor(user_id).pause()
+
+
 @router.get("/bot/status/{user_id}")
 async def bot_status(user_id: str):
     from .monitor import get_user_monitor

@@ -282,6 +282,7 @@ async def select_avatar(user_id: str, body: AvatarSelect):
     ref = body.avatar_ref
     if ref and not (ref == "user" or ref.startswith("gallery:")):
         raise HTTPException(400, "Ongeldige avatar_ref")
+    avatar_title = None
     if ref and ref.startswith("gallery:"):
         gid = ref.split(":", 1)[1]
         idx = load_json(GALLERY_INDEX, default={"avatars": []})
@@ -292,7 +293,19 @@ async def select_avatar(user_id: str, body: AvatarSelect):
         owner = _get_bot_owner(entry)
         if owner and owner != user_id and not _is_admin(user_id):
             raise HTTPException(403, f"Deze avatar is exclusief voor {owner}")
+        avatar_title = entry.get("title")
     _set_user_avatar(user_id, ref)
+
+    # v4_dnd_001: log Spark-observatie zodat hij hem kan benoemen in volgende gesprek
+    try:
+        from modules.dnd.routes import observe, ObserveBody  # type: ignore
+        await observe(ObserveBody(
+            user_id=user_id,
+            kind="avatar_changed",
+            detail={"avatar_ref": ref, "title": avatar_title or (ref or "geen")},
+        ))
+    except Exception:
+        pass  # niet kritiek
     return {"success": True, "avatar_ref": ref}
 
 

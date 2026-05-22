@@ -1,0 +1,48 @@
+{
+  "summary": "Iteration 20 — Validated Spark Core 2.0 D&D layer foundation (v4_dnd_001). All 9 backend pytest tests PASS (lore, track, aura full+empty, world-state, observe, observations list, spark-greeting no-repeat, avatar-select→observation integration). Frontend: aura-section on /profiel Avatar tab works (Veel helpen, color #22c55e, 4 unlock pills). Roadmap Phase D&D visible with 14 items including 🌟 Lore index, 🎒 Persoonskaart, 👁️ Spark observatie, 🎨 Aura/glow. Hash anchor #phase-dnd-aura scrolls into viewport. Found 1 minor CSS bug: anchor permalink uses `group-hover` without `group` class on parent → permalinks invisible on hover (opacity stays 0). Spark AI greeting flow (test 14) could not be conclusively verified via Playwright due to navigation to wrong tab; backend test_spark_greeting_then_no_repeat fully validates the no-repeat logic and Dutch 'Ik merkte iets op' message.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "RoadmapPage item anchor permalink (line ~373)",
+        "issue": "Anchor `<a #lore-index>` uses Tailwind class `opacity-0 group-hover:opacity-100` but the parent `<div>` (line 361) lacks the `group` class — permalink stays invisible (opacity:0) on hover. Add `group` class to the wrapping `<div>` to enable reveal-on-hover.",
+        "selector": "#phase-dnd-lore-index a",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_dnd_module.py",
+    "/app/test_reports/pytest/iter20_dnd_results.xml"
+  ],
+  "action_items": [
+    "Add Tailwind `group` class to the item wrapping div in RoadmapPage.js (line ~361) so anchor permalink fades in on hover.",
+    "Consider whether spark-greeting should mark *all* unspoken events of the deduped kinds as spoken (not just the single selected event per kind) to fully prevent repetition when multiple older avatar_changed events exist."
+  ],
+  "critical_code_review_comments": [
+    "dnd/routes.py spark_greeting only marks the selected (top-3 unique kinds) events as spoken — earlier unspoken events of the same kind remain unspoken and will surface again on next call. Backend test had to call mark-spoken first to assert no-repeat. In production this could cause Spark to repeat similar greetings.",
+    "dnd/routes.py track_behavior has a dead code branch `if body.delta < 0 and body.delta > -1000: pass` — vestigial, remove.",
+    "world-state recompute reads ALL user behavior.json files each call (no caching). For many users this becomes O(n) per request — consider TTL cache.",
+    "lore_index.json: behavior_to_unlock has exactly 6 categories and avatars_as_functions has 7 entries — matches spec.",
+    "avatar.py select_avatar correctly fires observe(kind='avatar_changed') with title detail; integration verified end-to-end (test 9 PASS).",
+    "RoadmapPage.js: 14 D&D phase items defined with 3 done, 3 active, 8 planned — matches spec."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_dnd_module.py (new — 9 pytest tests)"
+  ],
+  "success_rate": {
+    "backend": "100% (9/9)",
+    "frontend": "80% (4/5 verified: aura-section ✅, phase-dnd visible+14 items ✅, anchor href correct ✅ but opacity bug, hash deep-link scrolls into viewport ✅; Spark AI greeting bubble not conclusively verified in browser)"
+  },
+  "test_credentials": "Willem / Appelsap (user-001 admin)",
+  "seed_data_creation": "Backend tests: incremented help_msg counter on user-001 (additive only). Test 9 selected an unlocked gallery avatar for user-001. Several avatar_changed observation events were appended (some marked spoken in test 8 cleanup). No destructive changes.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression: /app/backend/tests/test_dnd_module.py (9 tests, ~1s runtime). Frontend testids: aura-section, phase-phase-dnd, items have id `phase-dnd-{anchor}` (e.g. phase-dnd-aura, phase-dnd-lore-index). Spark AI greeting tab lives in /gesprekken (not /notitie or /spark-brain) — use page.get_by_role('tab', name='Spark AI'). To re-trigger greeting: POST /api/dnd/observations/mark-spoken {user_id} then POST /api/dnd/observe {user_id, kind:'avatar_changed', detail:{title:'X'}}.",
+  "rca of the issue": "Roadmap anchor permalink invisible-on-hover RCA: Tailwind utility `group-hover:opacity-100` requires the parent element to have the literal class `group`. In RoadmapPage.js line 361 the wrapping `<div>` has classes 'flex items-center gap-2.5 py-1.5 px-3 rounded-lg hover:bg-slate-800/30 transition-colors target:bg-amber-500/10 target:ring-1 target:ring-amber-500/40' — no `group`. Fix: prepend `group ` to that className string. Anchor href and id targeting work correctly; only the hover-reveal styling is broken."
+}

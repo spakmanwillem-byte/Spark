@@ -762,6 +762,7 @@ export default UserProfilePage;
 // ============================================================
 function PersoonskaartCard({ userId, isAdmin }) {
   const [inv, setInv] = useState(null);
+  const [aura, setAura] = useState(null);
   const [catalog, setCatalog] = useState([]);
   const [busy, setBusy] = useState(false);
   const [showShop, setShowShop] = useState(false);
@@ -769,6 +770,7 @@ function PersoonskaartCard({ userId, isAdmin }) {
 
   const reload = useCallback(() => {
     fetch(`${API}/api/inventory/${userId}`).then(r => r.json()).then(setInv).catch(() => {});
+    fetch(`${API}/api/dnd/aura/${userId}`).then(r => r.json()).then(setAura).catch(() => {});
   }, [userId]);
   useEffect(() => { reload(); }, [reload]);
   useEffect(() => {
@@ -814,6 +816,42 @@ function PersoonskaartCard({ userId, isAdmin }) {
 
   return (
     <Card title="Persoonskaart" accent="#a855f7" icon={Award}>
+      {/* v4_dnd_001 — Aura/Glow visualisatie */}
+      {aura && aura.total_events > 0 && (
+        <div data-testid="aura-section" className="mb-4 p-3 rounded-xl border"
+          style={{ background: `linear-gradient(135deg, ${aura.primary_color}15, transparent)`, borderColor: `${aura.primary_color}40` }}>
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center"
+                style={{ background: `radial-gradient(circle, ${aura.primary_color}80, ${aura.primary_color}20)`, boxShadow: `0 0 24px ${aura.primary_color}80` }}>
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[9px] uppercase tracking-wider text-slate-500">Aura — gedrag → identiteit</p>
+              <p className="text-sm font-bold text-white">{aura.layers[0].label}</p>
+              <div className="flex items-center gap-1 mt-1">
+                {aura.layers.map(l => (
+                  <span key={l.category} className="h-1.5 rounded-full" style={{ background: l.color, width: `${Math.max(l.ratio * 80, 6)}px` }} title={`${l.label}: ${Math.round(l.ratio * 100)}%`} />
+                ))}
+                <span className="text-[10px] text-slate-500 ml-2">{aura.total_events} events</span>
+              </div>
+            </div>
+          </div>
+          {aura.unlocks?.length > 0 && (
+            <div className="mt-2 pt-2 border-t border-slate-800/50">
+              <p className="text-[10px] text-slate-500 mb-1">Unlocks (top categorie):</p>
+              <div className="flex flex-wrap gap-1">
+                {aura.unlocks.map(u => (
+                  <span key={u} className="text-[10px] px-1.5 py-0.5 rounded-full"
+                    style={{ background: `${aura.primary_color}20`, color: aura.primary_color }}>{u}</span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Stats grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
         <StatTile label="Rang" value={s.rang || '—'} />

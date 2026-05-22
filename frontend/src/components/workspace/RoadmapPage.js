@@ -148,6 +148,30 @@ const phases = [
       { title: 'Beveiligingsaudit', status: 'planned' },
     ],
   },
+  {
+    id: 'phase-dnd',
+    title: 'Phase D&D: Levende Spark World',
+    status: 'active',
+    color: '#a855f7',
+    icon: Sparkles,
+    period: 'Q2-Q3 2026',
+    items: [
+      { title: '🌟 Lore index (Base Line, fracties, elementen)', status: 'done', anchor: 'lore-index' },
+      { title: '🎒 Persoonskaart + inventory + slots/gewicht', status: 'done', anchor: 'persoonskaart' },
+      { title: '👁️ Spark observatie systeem (avatar/KB events)', status: 'done', anchor: 'spark-observe' },
+      { title: '🎨 Aura/glow per gedragspatroon (kleur uit counters)', status: 'active', anchor: 'aura' },
+      { title: '⚖️ Avatars als wereld-functies (Reaper/Boekhouder/etc.)', status: 'active', anchor: 'avatar-functions' },
+      { title: '📊 World state — top entiteiten dominantie', status: 'active', anchor: 'world-state' },
+      { title: '🎯 Hyperlinked stats — gedrag → identiteit (geen cijfers)', status: 'planned', anchor: 'hyperlink-stats' },
+      { title: '🐶 Auto-bark als community reward', status: 'planned', anchor: 'auto-bark' },
+      { title: '🧥 Body-slots (helm/cape/schoenen) na Rugzak', status: 'planned', anchor: 'body-slots' },
+      { title: '🔮 Particles op aura (klok-deeltjes/runen/mist)', status: 'planned', anchor: 'particles' },
+      { title: '⚡ Aspect-bark bij dominantie (>60% van events)', status: 'planned', anchor: 'aspect-bark' },
+      { title: '🗺️ Quest-systeem ontstaat uit gedragspatronen', status: 'planned', anchor: 'emergent-quests' },
+      { title: '📜 Lore-currency (zeldzame KB-kaarten = waarde)', status: 'planned', anchor: 'lore-currency' },
+      { title: '🌫️ Vervormde verhalen (canon herschrijven via consensus)', status: 'planned', anchor: 'dynamic-canon' },
+    ],
+  },
 ];
 
 export function RoadmapPage({ onNavigate }) {
@@ -331,19 +355,30 @@ export function RoadmapPage({ onNavigate }) {
 
                 {isExpanded && (
                   <div className="ml-5 pl-5 border-l-2 mt-1 space-y-1 py-2" style={{ borderColor: `${phase.color}30` }}>
-                    {phase.items.map((item, i) => (
-                      <div key={i} className="flex items-center gap-2.5 py-1.5 px-3 rounded-lg hover:bg-slate-800/30 transition-colors">
-                        {item.status === 'done'
-                          ? <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                          : item.status === 'active'
-                            ? <Clock className="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse" />
-                            : <Circle className="w-4 h-4 text-slate-600 flex-shrink-0" />
-                        }
-                        <span className={`text-sm ${item.status === 'done' ? 'text-slate-300' : item.status === 'active' ? 'text-white' : 'text-slate-500'}`}>
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
+                    {phase.items.map((item, i) => {
+                      const itemId = item.anchor ? `${phase.id}-${item.anchor}` : `${phase.id}-i${i}`;
+                      return (
+                        <div key={i} id={itemId}
+                          className="flex items-center gap-2.5 py-1.5 px-3 rounded-lg hover:bg-slate-800/30 transition-colors target:bg-amber-500/10 target:ring-1 target:ring-amber-500/40">
+                          {item.status === 'done'
+                            ? <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                            : item.status === 'active'
+                              ? <Clock className="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse" />
+                              : <Circle className="w-4 h-4 text-slate-600 flex-shrink-0" />
+                          }
+                          <span className={`text-sm flex-1 ${item.status === 'done' ? 'text-slate-300' : item.status === 'active' ? 'text-white' : 'text-slate-500'}`}>
+                            {item.title}
+                          </span>
+                          {item.anchor && (
+                            <a href={`#${itemId}`}
+                              className="text-[10px] text-slate-600 hover:text-amber-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity"
+                              title="Permalink — gebruik in update-bark als roadmap_ref">
+                              {`#${item.anchor}`}
+                            </a>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

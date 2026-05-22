@@ -259,6 +259,30 @@ export function GesprekkenPage({ onNavigate }) {
       .catch(() => {});
   }, []);
 
+  // v4_dnd_001 — Spark observatie greeting bij openen Spark AI tab (1x per sessie)
+  useEffect(() => {
+    if (activeTab !== 'spark' || !userId) return;
+    const sessionKey = `spark_greeted_${userId}`;
+    if (sessionStorage.getItem(sessionKey)) return;
+    fetch(`${API}/api/dnd/spark-greeting/${userId}`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.has_greeting && d.message) {
+          sessionStorage.setItem(sessionKey, '1');
+          // Inject als Spark-bubble vooraan
+          const greetingMsg = {
+            id: `greet-${Date.now()}`,
+            role: 'assistant',
+            content: d.message,
+            timestamp: new Date().toISOString(),
+            is_observation: true,
+          };
+          setSparkMessages(prev => [...prev, greetingMsg]);
+        }
+      })
+      .catch(() => {});
+  }, [activeTab, userId]);
+
   // Privé contacten + messages (v4_contacts_001)
   const [priveContacts, setPriveContacts] = useState([]);
   const [priveLoading, setPriveLoading] = useState(false);

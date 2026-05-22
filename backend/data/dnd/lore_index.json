@@ -1,0 +1,131 @@
+{
+  "version": "v1",
+  "title": "Spark World D&D Lore Index",
+  "description": "Geen klassieke RPG. Een levende wereld die groeit door keuzes en interpretatie. Stats ontstaan uit gedrag. Avatars zijn functies van de wereld. Aura/glow visualiseert je ziel.",
+  "philosophy": [
+    "Ervaring maakt betekenis",
+    "Betekenis maakt lore",
+    "Lore verandert de wereld",
+    "De wereld beïnvloedt nieuwe spelers"
+  ],
+  "avatars_as_functions": [
+    {
+      "name": "Het Eerste Licht",
+      "function": "begin / oorsprong",
+      "tags": ["base-line", "puls", "geboorte", "licht"],
+      "aura": "#fef9c3",
+      "kb_ref": "Base Line",
+      "growth_trigger": "spelers die verhalen beginnen of nieuwe KB-kaarten maken"
+    },
+    {
+      "name": "De Reaper",
+      "function": "einde / dood / cyclus",
+      "tags": ["dood", "afsluiting", "stilte", "schaduw"],
+      "aura": "#52525b",
+      "kb_ref": null,
+      "growth_trigger": "spelers die verhalen sluiten, items vernietigen, KB-kaarten archiveren"
+    },
+    {
+      "name": "De Boekhouder",
+      "function": "balans / data / waarheid in cijfers",
+      "tags": ["balans", "boekhouding", "data", "trade", "fee"],
+      "aura": "#f59e0b",
+      "kb_ref": "Bot - De Boekhouder",
+      "user_id": "bot-boekhouder",
+      "growth_trigger": "trade-events, accounting-mutaties, fee-stromen"
+    },
+    {
+      "name": "Harry Klokkenmaker",
+      "function": "tijd / synchronisatie / herinnering aan moment",
+      "tags": ["tijd", "klok", "synchronisatie", "moment"],
+      "aura": "#3b82f6",
+      "user_id": "bot-harry",
+      "growth_trigger": "agenda-events, recurring tasks, timing-gebonden interacties"
+    },
+    {
+      "name": "Madelief Stouten",
+      "function": "emotie / sociale toegang / verbinding",
+      "tags": ["emotie", "verbinding", "sociaal", "vrouw", "fantasie"],
+      "aura": "#ec4899",
+      "user_id": "bot-madelief",
+      "growth_trigger": "spelers die elkaar helpen, community-bijdragen, empathische berichten"
+    },
+    {
+      "name": "Mr Smith",
+      "function": "manipulatie / corruptie / macht via angst",
+      "tags": ["manipulatie", "leugen", "schaduw", "controle"],
+      "aura": "#dc2626",
+      "user_id": "bot-smith",
+      "growth_trigger": "spelers die liegen, manipuleren, anderen controleren"
+    },
+    {
+      "name": "The Story Teller",
+      "function": "geheugen / lore-bewaarder",
+      "tags": ["verhaal", "lore", "kennis", "geheugen"],
+      "aura": "#a855f7",
+      "kb_ref": null,
+      "growth_trigger": "spelers die verhalen delen, KB-kaarten verrijken, lore opslaan"
+    }
+  ],
+  "behavior_to_unlock": {
+    "veel_observeren": {
+      "label": "Veel observeren",
+      "tracker_keys": ["msg_received", "kb_view", "scroll_history"],
+      "unlocks": ["Zien", "Perception", "verborgen details", "lore detectie"],
+      "aura": "#6366f1"
+    },
+    "veel_luisteren": {
+      "label": "Veel luisteren",
+      "tracker_keys": ["voice_listen", "long_read"],
+      "unlocks": ["oude stemmen horen", "herinneringen", "empathie", "NPC intenties"],
+      "aura": "#06b6d4"
+    },
+    "veel_zwijgen": {
+      "label": "Veel zwijgen",
+      "tracker_keys": ["session_silent_minutes"],
+      "unlocks": ["stealth", "innerlijke focus", "resistance tegen manipulatie"],
+      "aura": "#475569"
+    },
+    "veel_helpen": {
+      "label": "Veel helpen",
+      "tracker_keys": ["bijdrage_create", "help_msg", "snap_share"],
+      "unlocks": ["vertrouwen", "community perks", "discounts", "companions"],
+      "aura": "#22c55e"
+    },
+    "veel_verhalen_delen": {
+      "label": "Veel verhalen delen",
+      "tracker_keys": ["kb_create", "lore_anchor", "story_share"],
+      "unlocks": ["Story Teller groei", "lore-currency", "memory crystals"],
+      "aura": "#a855f7"
+    },
+    "veel_manipuleren": {
+      "label": "Veel manipuleren / liegen",
+      "tracker_keys": ["lie_detected", "manipulate_attempt"],
+      "unlocks": ["Mr Smith groei", "shadow perks", "macht via angst"],
+      "aura": "#dc2626"
+    }
+  },
+  "aura_layers": [
+    {
+      "kind": "core",
+      "rule": "Hoogste behavior-categorie bepaalt core-kleur",
+      "blends": "wash 60% opacity"
+    },
+    {
+      "kind": "scratch",
+      "rule": "Tweede categorie als overlay-scheuren (bv. corrupte rode lijnen op gouden core = empathisch maar door manipulatie geraakt)"
+    },
+    {
+      "kind": "particles",
+      "rule": "Tags uit recente acties → kleine zwevende elementen (klok-deeltjes voor tijd, runen voor kennis, mist voor stilte)"
+    }
+  ],
+  "world_growth_rules": [
+    "Avatars-as-functions groeien op basis van AANTAL events met passende growth_trigger",
+    "Sterkte van een entiteit wordt gemeten als percentage van totaal-events (1-100)",
+    "Top 3 entiteiten beïnvloeden: kleurschema dashboard, NPC-frequenties, beschikbare quests",
+    "Wanneer een entiteit > 60% domineert: speciale 'aspect-bark' wordt getriggerd (de wereld waarschuwt of viert)"
+  ],
+  "stats_are_hyperlinks": true,
+  "stats_origin": "Stats zijn niet direct gekozen — ze ontstaan uit gedrag-tellers in /data/users/{user_id}/behavior.json. De Persoonskaart leest die counters en berekent live: top behavior, aura, unlocks."
+}

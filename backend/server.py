@@ -169,6 +169,10 @@ app.include_router(inventory_router, prefix="/api")
 from modules.deploy.routes import router as deploy_router
 app.include_router(deploy_router, prefix="/api")
 
+# v4_dnd_001 — D&D Lore + Behavior + Aura + Observations
+from modules.dnd.routes import router as dnd_router
+app.include_router(dnd_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

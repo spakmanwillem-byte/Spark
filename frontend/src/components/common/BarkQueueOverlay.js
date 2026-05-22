@@ -84,7 +84,11 @@ export function BarkQueueOverlay({ userId, onAllSeen }) {
           {active.roadmap_ref && (
             <p className="mt-3 text-[11px] text-slate-500">
               <span className="opacity-60">Referentie: </span>
-              <span className="text-amber-400 font-mono">{active.roadmap_ref}</span>
+              <a href={`/roadmap#${active.roadmap_ref}`} target="_blank" rel="noopener"
+                data-testid="bark-roadmap-link"
+                className="text-amber-400 font-mono hover:underline">
+                {active.roadmap_ref}
+              </a>
             </p>
           )}
           {active.anchored_at && (

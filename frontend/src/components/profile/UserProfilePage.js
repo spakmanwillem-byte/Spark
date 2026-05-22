@@ -577,43 +577,87 @@ function AvatarTab({ userId, isAdmin }) {
         )}
       </Card>
 
-      {/* Galerij */}
+      {/* Galerij — v4_avatar_categories_001 — 2 tabs (Persoonlijk / D&D Archief) */}
       <Card title={`Galerij (${gallery.length})`} accent="#a855f7" icon={ImageIcon}
         subtitle="Voorbeeld-avatars beheerd door het systeem. Kies er één om als jouw avatar in te stellen.">
-        {gallery.length === 0 ? (
-          <p className="text-center text-slate-500 py-6 text-sm">Nog geen galerij-avatars beschikbaar.</p>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {gallery.map(a => {
-              const isSel = current.avatar_ref === `gallery:${a.id}`;
-              return (
-                <button key={a.id} data-testid={`gallery-${a.id}`}
-                  onClick={() => selectAvatar(`gallery:${a.id}`)}
-                  className={`group relative rounded-xl overflow-hidden border-2 transition-all ${
-                    isSel ? 'border-pink-500 ring-2 ring-pink-500/40' : 'border-slate-800 hover:border-slate-600'
-                  }`}>
-                  <img src={`${API}/api/avatar/gallery/${a.id}/image`} alt={a.title}
-                    className="w-full aspect-square object-cover" />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                    <p className="text-[11px] text-white font-medium truncate">{a.title}</p>
-                  </div>
-                  {isSel && (
-                    <div className="absolute top-1.5 right-1.5 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
-                      <Check className="w-3.5 h-3.5 text-white" />
-                    </div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        )}
+        <GalleryTabs gallery={gallery} current={current} onSelect={selectAvatar} apiUrl={API} />
         {isAdmin && (
           <p className="text-[10px] text-amber-400/70 mt-4 italic">
-            Beheer galerij via: Beheer → Instellingen → Beeld → Avatar Galerij
+            Beheer galerij via: Beheer → Gebruikers → kies user → Avatar Beheer
           </p>
         )}
       </Card>
     </div>
+  );
+}
+
+// v4_avatar_categories_001 — Tabs voor User vs D&D Archief
+function GalleryTabs({ gallery, current, onSelect, apiUrl }) {
+  const [tab, setTab] = useState('user');
+  const userAvatars = gallery.filter(a => (a.category || (a.locked ? 'system' : 'user')) === 'user');
+  const dndAvatars = gallery.filter(a => a.category === 'dnd');
+  const lockedCount = dndAvatars.filter(a => a.locked).length;
+  const list = tab === 'user' ? userAvatars : dndAvatars;
+  return (
+    <>
+      <div className="flex items-center gap-1 mb-3 p-1 bg-slate-800/40 rounded-lg w-fit">
+        <button data-testid="gallery-tab-user" onClick={() => setTab('user')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            tab === 'user' ? 'bg-pink-500/20 text-pink-300' : 'text-slate-400 hover:text-slate-200'
+          }`}>
+          Persoonlijk <span className="opacity-60">({userAvatars.length})</span>
+        </button>
+        <button data-testid="gallery-tab-dnd" onClick={() => setTab('dnd')}
+          className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            tab === 'dnd' ? 'bg-amber-500/20 text-amber-300' : 'text-slate-400 hover:text-slate-200'
+          }`}>
+          D&D Archief <span className="opacity-60">({dndAvatars.length}{lockedCount > 0 ? ` · ${lockedCount} 🔒` : ''})</span>
+        </button>
+      </div>
+      {tab === 'dnd' && (
+        <div className="mb-3 px-3 py-2 bg-amber-500/5 border border-amber-500/20 rounded-lg">
+          <p className="text-[11px] text-amber-300/90">
+            🎒 D&D-avatars zijn onderdeel van de Spark World D&D-laag. Sommige zijn gereserveerd voor specifieke bots/Spark — die unlock je via XP, achievements of tokens.
+          </p>
+        </div>
+      )}
+      {list.length === 0 ? (
+        <p className="text-center text-slate-500 py-6 text-sm">
+          {tab === 'dnd' ? 'Nog geen D&D-avatars in archief. Admin kan via gallery-edit een avatar verplaatsen naar D&D.' : 'Nog geen persoonlijke avatars beschikbaar.'}
+        </p>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {list.map(a => {
+            const isSel = current.avatar_ref === `gallery:${a.id}`;
+            const owner = a.bot_owner;
+            return (
+              <button key={a.id} data-testid={`gallery-${a.id}`}
+                onClick={() => onSelect(`gallery:${a.id}`)}
+                className={`group relative rounded-xl overflow-hidden border-2 transition-all ${
+                  isSel ? 'border-pink-500 ring-2 ring-pink-500/40' : 'border-slate-800 hover:border-slate-600'
+                }`}
+                title={a.locked ? `Gereserveerd voor ${owner}` : a.title}>
+                <img src={`${apiUrl}/api/avatar/gallery/${a.id}/image`} alt={a.title}
+                  className={`w-full aspect-square object-cover ${a.locked ? 'opacity-50' : ''}`} />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                  <p className="text-[11px] text-white font-medium truncate">{a.title}</p>
+                </div>
+                {isSel && (
+                  <div className="absolute top-1.5 right-1.5 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </div>
+                )}
+                {a.locked && !isSel && (
+                  <div className="absolute top-1.5 right-1.5 w-6 h-6 bg-amber-500/90 rounded-full flex items-center justify-center text-[12px]">
+                    🔒
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 }
 

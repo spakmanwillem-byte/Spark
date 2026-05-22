@@ -165,6 +165,10 @@ app.include_router(avatar_router, prefix="/api")
 from modules.inventory.routes import router as inventory_router
 app.include_router(inventory_router, prefix="/api")
 
+# v4_update_bark_001 — Deploy ankers + privacy/update barks
+from modules.deploy.routes import router as deploy_router
+app.include_router(deploy_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

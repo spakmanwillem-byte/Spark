@@ -1,0 +1,27 @@
+{
+  "barks": [
+    {
+      "id": "privacy_v1",
+      "kind": "privacy",
+      "anchored_at": "2026-05-22T00:00:00+00:00",
+      "anchored_by": "system",
+      "title": "Privacy & Voorwaarden",
+      "message": "Welkom in Spark Core 2.0. Even kort:\n\n• Wij volgen je niet en gebruiken geen tracking-cookies.\n• Alle data blijft lokaal in JSON-bestanden op deze server (geen MongoDB, geen externe analytics).\n• Je gesprekken met Spark AI, je inventory en je avatar zijn alleen voor jou en de admins (gradatie 1-2).\n• Bij elke deploy zie je 1x een update-bark met wat er is veranderd.\n\nDoor door te gaan ga je akkoord met deze voorwaarden.",
+      "icon": "🔒",
+      "roadmap_ref": null,
+      "audience": "all"
+    },
+    {
+      "id": "v0.6.4",
+      "kind": "deploy",
+      "anchored_at": "2026-05-22T05:14:21.818726+00:00",
+      "anchored_by": "user-001",
+      "title": "Spark Core v0.6.4",
+      "message": "Avatar galerij krijgt 2 tabs (Persoonlijk vs D&D Archief). Inventory + Persoonskaart op profiel. Critical bug-fix batch.",
+      "icon": "🚀",
+      "roadmap_ref": "phase-5",
+      "audience": "all"
+    }
+  ],
+  "current": "v0.6.4"
+}

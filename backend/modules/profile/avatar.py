@@ -95,11 +95,16 @@ def _is_admin(user_id: str) -> bool:
 # ============================================================
 
 @router.get("/gallery")
-async def list_gallery():
-    """Lijst van systeem-avatars (zichtbaar voor alle users)."""
+async def list_gallery(category: Optional[str] = None):
+    """Lijst van systeem-avatars (zichtbaar voor alle users).
+
+    v4_avatar_categories_001: optionele filter op category.
+      - 'user'   = persoonlijke avatars (default zichtbaar voor iedereen)
+      - 'dnd'    = D&D archief — moet unlocked worden via achievements/XP
+      - 'system' = bot-only / Spark-only
+    """
     _ensure_gallery_dir()
     idx = load_json(GALLERY_INDEX, default={"avatars": []})
-    # Verrijk met bot_owner zodat frontend locket-stempel kan tonen
     enriched = []
     for a in idx.get("avatars", []):
         out = dict(a)
@@ -107,6 +112,11 @@ async def list_gallery():
         if owner:
             out["bot_owner"] = owner
             out["locked"] = True
+        # Default category als niet gezet
+        if "category" not in out:
+            out["category"] = "system" if owner else "user"
+        if category and out["category"] != category:
+            continue
         enriched.append(out)
     return {"success": True, "avatars": enriched}
 
@@ -170,15 +180,12 @@ class GalleryEditBody(BaseModel):
     title: Optional[str] = None
     tags: Optional[List[str]] = None
     bot_owner: Optional[str] = None  # "bot-xxx" of "" om te wissen
+    category: Optional[str] = None   # "user" | "dnd" | "system"
 
 
 @router.patch("/gallery/{avatar_id}")
 async def patch_gallery_entry(avatar_id: str, body: GalleryEditBody):
-    """Admin past title/tags/bot_owner aan voor bestaande gallery avatar.
-
-    Voor de bot_owner-claim: gebruik "bot-harry"/"bot-smith"/"bot-madelief"/"bot-boekhouder"/"user-000" (Spark).
-    Lege string of None verwijdert de claim (avatar wordt weer vrij te kiezen).
-    """
+    """Admin past title/tags/bot_owner/category aan."""
     if not _is_admin(body.viewer_id):
         raise HTTPException(403, "Alleen admins kunnen avatars bewerken")
     idx = load_json(GALLERY_INDEX, default={"avatars": []})
@@ -195,6 +202,8 @@ async def patch_gallery_entry(avatar_id: str, body: GalleryEditBody):
             entry.pop("bot_owner", None)
         else:
             entry["bot_owner"] = owner
+    if body.category is not None and body.category in ("user", "dnd", "system"):
+        entry["category"] = body.category
     entry["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_json(GALLERY_INDEX, idx)
     return {"success": True, "avatar": entry}

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
+import { BarkQueueOverlay } from '../common/BarkQueueOverlay';
 
 // Navigation configuration - easy to extend
 export const navigationConfig = {
@@ -534,6 +535,8 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
         </div>
         {children}
       </main>
+      {/* v4_update_bark_001 — privacy + deploy update barks */}
+      {user?.id && <BarkQueueOverlay userId={user.id} />}
     </div>
   );
 }

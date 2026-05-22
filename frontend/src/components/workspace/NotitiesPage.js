@@ -3,9 +3,10 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   StickyNote, Plus, Search, Trash2,
   Tag, Clock, ListTodo, FileText, Save,
-  Circle, CheckCircle, HandHeart, Bug, AlertTriangle
+  Circle, CheckCircle, HandHeart, Bug, AlertTriangle, Rocket
 } from 'lucide-react';
 import { BijdragenPage } from './BijdragenPage';
+import { DeployAnchorPanel } from './DeployAnchorPanel';
 import { useAuth } from '../../context/AuthContext';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -196,6 +197,7 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
               { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, count: null },
               ...(isAdminViewer ? [{ id: 'bugs', label: 'Bugs', icon: Bug, count: bugs.length || null }] : []),
+              ...(isAdminViewer ? [{ id: 'deploy', label: 'Deploy', icon: Rocket, count: null }] : []),
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}
                 className="relative flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium transition-colors"
@@ -257,6 +259,8 @@ export function NotitiesPage({ onNavigate }) {
             <div className="-m-4 md:-m-6 h-full">
               <BijdragenPage embedded={true} />
             </div>
+          ) : viewMode === 'deploy' && isAdminViewer ? (
+            <DeployAnchorPanel viewerId={user.id} />
           ) : viewMode === 'bugs' && isAdminViewer ? (
             <div className="max-w-3xl mx-auto space-y-2">
               {bugs.length === 0 ? (

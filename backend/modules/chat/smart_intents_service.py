@@ -510,7 +510,6 @@ def handle_account_delete_cancel() -> Dict:
     }
 
 
-
 # ============== COMMUNITY RECAP INTENT (v4_community_recap_001) ==============
 _COMMUNITY_RECAP_PATTERNS = [
     r"\bwat (is|was|werd) (er )?(gisteren|vandaag|eergisteren).{0,40}(besproken|gezegd|gepraat|gepost)\b",
@@ -599,3 +598,46 @@ def handle_community_recap(offset_days: int = 1) -> Dict:
         "users": user_counts,
         "top_topics": [{"word": w, "count": c} for w, c in top_topics],
     }
+
+
+# ============== D&D HELP INTENT (v4_dnd_help_001) ==============
+_DND_HELP_PATTERNS = [
+    r"\bd\&?d (help|uitleg|wat is)\b",
+    r"\bhelp.{0,10}d\&?d\b",
+    r"\bwat (is|zijn) d\&?d\b",
+    r"\bhoe werkt d\&?d\b",
+    r"\bspark world (uitleg|help)\b",
+    r"\bbase line (uitleg|wat)\b",
+    r"\bpersoonskaart (help|uitleg)\b",
+    r"\brugzak (help|uitleg)\b",
+    r"\binventory (help|uitleg)\b",
+    r"\bbark (help|uitleg|wat is)\b",
+]
+
+
+def detect_dnd_help_intent(text: str) -> bool:
+    t = (text or "").lower()
+    return any(re.search(p, t) for p in _DND_HELP_PATTERNS)
+
+
+def handle_dnd_help() -> Dict:
+    """v4_dnd_help_001 — Korte uitleg D&D laag in Spark World."""
+    msg = (
+        "🎲 **Spark World D&D — Korte uitleg**\n\n"
+        "**Base Line** is de oorsprong van Spark World (X=0, Y=0, Z=0). "
+        "Vanuit een puls in de leegte groeit alles. Fracties: Spark, Players, "
+        "Licht, Schaduw — elk met 2 kinderen uit de 4 elementen.\n\n"
+        "**Persoonskaart** (Profiel → Avatar-tab) toont je stats: rang, level, "
+        "XP, gradatie. Daaronder zit je inventory met slots en gewichts-mechaniek.\n\n"
+        "**Rugzak** (eerste body-slot) bepaalt hoeveel slots én kg je kunt dragen. "
+        "Trade-off: basis-rugzak (+5 slots / +10kg) vs grote trekrugzak "
+        "(+10 slots / +25kg, weegt zelf 2.5kg).\n\n"
+        "**Avatars** in galerij hebben 2 tabs: Persoonlijk en D&D Archief "
+        "(bot/Spark-claimed of unlock-required).\n\n"
+        "**Barks** zijn sensory-overlays (geluid + beeld) die getriggerd worden "
+        "door events. Bij elke deploy zie je 1x een update-bark.\n\n"
+        "Vraag ook 'wat is Base Line', 'rugzak uitleg' of 'persoonskaart help' "
+        "voor diepere lagen."
+    )
+    return {"type": "dnd_help", "message": msg}
+

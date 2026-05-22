@@ -388,6 +388,13 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "community_recap")
             return response
 
+        # v4_dnd_help_001 — D&D help / Spark World uitleg
+        if si.detect_dnd_help_intent(text):
+            out = si.handle_dnd_help()
+            response.update(out)
+            _save_log(req, response, "dnd_help")
+            return response
+
         # Help (admin krijgt extra commands)
         if si.detect_help_intent(text):
             u = _load_user() or {}

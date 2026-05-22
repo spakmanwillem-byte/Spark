@@ -142,6 +142,27 @@ export function TraderPage({ onNavigate }) {
   // Reload candles when market/interval changes
   useEffect(() => { loadLiveData(); }, [candleMarket, candleInterval, loadLiveData]);
 
+  // v5_bot_proactive_register_001 — Toon mij in Analytics (opt-in zichtbaarheid)
+  const [registeredInAnalytics, setRegisteredInAnalytics] = useState(false);
+  const [registerBusy, setRegisterBusy] = useState(false);
+  useEffect(() => {
+    fetch(`${API}/api/trade/bot/register-status/${userId}`)
+      .then(r => r.json()).then(d => setRegisteredInAnalytics(!!d.registered)).catch(() => {});
+  }, [userId]);
+  const toggleAnalyticsVisibility = async () => {
+    setRegisterBusy(true);
+    const endpoint = registeredInAnalytics
+      ? `${API}/api/trade/bot/unregister/${userId}`
+      : `${API}/api/trade/bot/register/${userId}`;
+    try {
+      const r = await fetch(endpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: user?.id || userId }),
+      }).then(x => x.json());
+      if (r.success) setRegisteredInAnalytics(!registeredInAnalytics);
+    } finally { setRegisterBusy(false); }
+  };
+
   // Countdown timer - time until current candle closes
   useEffect(() => {
     const intervalMs = INTERVAL_MS[candleInterval] || 3600000;
@@ -388,6 +409,14 @@ export function TraderPage({ onNavigate }) {
                           10-Potjes
                         </label>
                       )}
+                      {/* v5_bot_proactive_register_001 — opt-in zichtbaarheid in Admin Analytics */}
+                      <label className="flex items-center gap-1.5 text-[10px] text-slate-400 cursor-pointer select-none" title="Maak je bot-slot zichtbaar in Admin Analytics, zonder dat hij draait">
+                        <input type="checkbox" data-testid="toggle-analytics-visibility"
+                          checked={registeredInAnalytics} disabled={registerBusy}
+                          onChange={toggleAnalyticsVisibility}
+                          className="w-3 h-3 accent-cyan-500" />
+                        Toon in Analytics
+                      </label>
                       {!monitorStatus?.running ? (
                         <button data-testid="monitor-start" onClick={startMonitor}
                           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-medium bg-green-500/20 text-green-400 hover:bg-green-500/30 transition-colors">

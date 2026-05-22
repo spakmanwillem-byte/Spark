@@ -1252,6 +1252,11 @@ function TradeAnalyticsTab() {
   const [audit, setAudit] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [busyUser, setBusyUser] = React.useState(null);
+  // v5_admin_bot_cards_001 — per-bot uitklap met potjes + history
+  const [expanded, setExpanded] = React.useState(null);  // user_id of null
+  const [botData, setBotData] = React.useState({});  // { user_id: { potjes, history } }
+  const [forceSelling, setForceSelling] = React.useState(null);  // { user_id, pot_id }
+  const [forceSellReason, setForceSellReason] = React.useState('');
 
   const load = React.useCallback(async () => {
     setLoading(true);
@@ -1274,10 +1279,50 @@ function TradeAnalyticsTab() {
     return () => clearInterval(id);
   }, [load]);
 
+  const loadBotDetails = React.useCallback(async (uid) => {
+    try {
+      const [p, h] = await Promise.all([
+        fetch(`${API}/api/trade/potjes/${uid}`).then(r => r.json()).catch(() => ({})),
+        fetch(`${API}/api/trade/history/${uid}?limit=8`).then(r => r.json()).catch(() => ({ trades: [] })),
+      ]);
+      setBotData(prev => ({ ...prev, [uid]: { potjes: p.potjes || [], summary: p.summary || {}, history: h.trades || [] } }));
+    } catch {}
+  }, [API]);
+
   const stopBot = async (uid) => {
     setBusyUser(uid);
     try { await fetch(`${API}/api/trade/bot/stop/${uid}`, { method: 'POST' }); }
     finally { setBusyUser(null); load(); }
+  };
+
+  const toggleExpand = (uid) => {
+    if (expanded === uid) {
+      setExpanded(null);
+    } else {
+      setExpanded(uid);
+      if (!botData[uid]) loadBotDetails(uid);
+    }
+  };
+
+  const confirmForceSell = async () => {
+    if (!forceSelling) return;
+    const { user_id, pot_id } = forceSelling;
+    try {
+      const r = await fetch(`${API}/api/trade/potjes/${user_id}/${pot_id}/force-sell`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: 'user-001', reason: forceSellReason || 'Admin handmatige force-sell' }),
+      }).then(x => x.json());
+      if (r.success) {
+        loadBotDetails(user_id);
+      } else {
+        alert('Force-sell mislukt: ' + (r.error || 'onbekende fout'));
+      }
+    } catch (e) {
+      alert('Force-sell error: ' + e.message);
+    } finally {
+      setForceSelling(null);
+      setForceSellReason('');
+    }
   };
 
   // v5_event_overlay_001 — Demo event trigger
@@ -1323,11 +1368,11 @@ function TradeAnalyticsTab() {
         </div>
       )}
 
-      {/* Bot overview */}
+      {/* v5_admin_bot_cards_001 — Bot kaarten (uitklap → potjes + history per wallet) */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
-            🤖 Trade-bots ({bots.filter(b => b.running).length} actief / {Math.max(bots.length, 2)} verwacht)
+            🤖 Trade-bots <span className="text-[11px] font-normal text-slate-500">({bots.filter(b => b.running).length} actief / {bots.length} zichtbaar)</span>
           </h3>
           <button onClick={load} disabled={loading} data-testid="refresh-bots"
             className="text-xs text-slate-400 hover:text-white">
@@ -1337,31 +1382,164 @@ function TradeAnalyticsTab() {
         {bots.length === 0 ? (
           <p className="text-sm text-slate-500 italic">Geen bots gestart.</p>
         ) : (
-          <div className="space-y-2">
-            {bots.map(b => (
-              <div key={b.user_id} className="bg-slate-800/40 rounded-xl p-3 flex flex-wrap items-center gap-3 text-xs">
-                <span className={`w-2.5 h-2.5 rounded-full ${b.running ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`}></span>
-                <span className="font-mono text-white min-w-[150px]">{b.user_id}</span>
-                <span className="text-slate-400">
-                  {Array.isArray(b.markets) ? b.markets.join('·') : b.market}
-                </span>
-                <span className="text-slate-500">{b.candle_interval}</span>
-                <span className="text-amber-400">cycle #{b.cycles}</span>
-                {b.use_potjes && <span className="text-cyan-400">10-potjes</span>}
-                {b.auto_trade && <span className="text-emerald-400">auto</span>}
-                {b.use_mock && <span className="text-pink-400">MOCK</span>}
-                <span className="text-slate-500 ml-auto">{Math.round((b.uptime_seconds || 0) / 60)}m up</span>
-                {b.running && (
-                  <button onClick={() => stopBot(b.user_id)} disabled={busyUser === b.user_id}
-                    className="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[10px] font-medium">
-                    Stop
+          <div className="space-y-2" data-testid="bot-cards-list">
+            {bots.map(b => {
+              const isOpen = expanded === b.user_id;
+              const details = botData[b.user_id];
+              return (
+                <div key={b.user_id} className="bg-slate-800/40 rounded-xl border border-slate-700/40 overflow-hidden">
+                  {/* Header rij — klik om uit te klappen */}
+                  <button onClick={() => toggleExpand(b.user_id)}
+                    data-testid={`bot-card-toggle-${b.user_id}`}
+                    className="w-full p-3 flex flex-wrap items-center gap-3 text-xs hover:bg-slate-800/60 transition-colors text-left">
+                    <span className={`w-2.5 h-2.5 rounded-full ${b.running ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`}></span>
+                    <span className="font-mono text-white min-w-[140px]">{b.user_id}</span>
+                    <span className="text-slate-400">
+                      {Array.isArray(b.markets) ? b.markets.join('·') : b.market}
+                    </span>
+                    <span className="text-slate-500">{b.candle_interval}</span>
+                    <span className="text-amber-400">cycle #{b.cycles}</span>
+                    {b.use_potjes && <span className="text-cyan-400">10-potjes</span>}
+                    {b.auto_trade && <span className="text-emerald-400">auto</span>}
+                    {b.use_mock && <span className="text-pink-400">MOCK</span>}
+                    {!b.running && <span className="text-slate-500 italic">slot-aanwezig (uit)</span>}
+                    <span className="text-slate-500 ml-auto">{Math.round((b.uptime_seconds || 0) / 60)}m up</span>
+                    <span className="text-slate-500">{isOpen ? '▾' : '▸'}</span>
                   </button>
-                )}
-              </div>
-            ))}
+
+                  {isOpen && (
+                    <div className="border-t border-slate-700/40 bg-slate-900/40 p-4 space-y-4">
+                      {/* Action: stop bot */}
+                      {b.running && b.user_id !== 'user-000' && (
+                        <div>
+                          <button onClick={() => stopBot(b.user_id)} disabled={busyUser === b.user_id}
+                            data-testid={`bot-stop-${b.user_id}`}
+                            className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[11px] font-medium">
+                            Stop bot
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Potjes-tabel */}
+                      <div>
+                        <p className="text-[11px] text-slate-400 font-semibold mb-2">Potjes ({details?.potjes?.length || 0})</p>
+                        {!details ? (
+                          <p className="text-[11px] text-slate-500 italic">Laden...</p>
+                        ) : details.potjes.length === 0 ? (
+                          <p className="text-[11px] text-slate-500 italic">Geen potjes geconfigureerd.</p>
+                        ) : (
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-[11px]">
+                              <thead className="text-slate-500 border-b border-slate-800">
+                                <tr>
+                                  <th className="text-left py-1.5 pr-2">#</th>
+                                  <th className="text-left py-1.5 pr-2">Status</th>
+                                  <th className="text-left py-1.5 pr-2">Market</th>
+                                  <th className="text-right py-1.5 pr-2">Capital</th>
+                                  <th className="text-right py-1.5 pr-2">Live</th>
+                                  <th className="text-right py-1.5 pr-2">Entry</th>
+                                  <th className="text-right py-1.5 pr-2">Trades</th>
+                                  <th className="text-right py-1.5 pr-2">P&L</th>
+                                  <th className="text-right py-1.5">Actie</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {details.potjes.map(p => {
+                                  const isOpenPos = p?.position?.is_open;
+                                  const pnl = p?.stats?.total_pnl || 0;
+                                  return (
+                                    <tr key={p.id} className="border-b border-slate-800/40">
+                                      <td className="py-1.5 pr-2 font-mono text-slate-400">{p.nummer || p.index || '?'}</td>
+                                      <td className="py-1.5 pr-2">
+                                        {isOpenPos ? <span className="text-emerald-400">● open</span> : <span className="text-slate-500">○ vrij</span>}
+                                      </td>
+                                      <td className="py-1.5 pr-2 text-slate-300">{p.market || '—'}</td>
+                                      <td className="py-1.5 pr-2 text-right text-slate-300">€{(p.capital ?? 0).toFixed(2)}</td>
+                                      <td className="py-1.5 pr-2 text-right text-cyan-400">€{(p.live_value ?? p.capital ?? 0).toFixed(2)}</td>
+                                      <td className="py-1.5 pr-2 text-right text-slate-400">{isOpenPos && p.position?.entry_price ? `€${p.position.entry_price.toFixed(2)}` : '—'}</td>
+                                      <td className="py-1.5 pr-2 text-right text-slate-400">{p.stats?.trades || 0}</td>
+                                      <td className={`py-1.5 pr-2 text-right ${pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>€{pnl.toFixed(2)}</td>
+                                      <td className="py-1.5 text-right">
+                                        {isOpenPos && (
+                                          <button onClick={() => setForceSelling({ user_id: b.user_id, pot_id: p.id, market: p.market, entry: p.position?.entry_price })}
+                                            data-testid={`force-sell-${b.user_id}-${p.id}`}
+                                            title="Force-sell dit potje (kan verlies geven)"
+                                            className="px-1.5 py-0.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded text-[10px] font-medium">
+                                            🛑 Force-sell
+                                          </button>
+                                        )}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Laatste trades */}
+                      <div>
+                        <p className="text-[11px] text-slate-400 font-semibold mb-2">Laatste trades (8)</p>
+                        {!details ? null : details.history.length === 0 ? (
+                          <p className="text-[11px] text-slate-500 italic">Nog geen trades.</p>
+                        ) : (
+                          <div className="space-y-1">
+                            {details.history.map((t, i) => (
+                              <div key={t.trade_id || t.order_id || i} className="flex items-center gap-2 text-[10px] font-mono bg-slate-800/30 rounded px-2 py-1">
+                                <span className="text-slate-500">{t.timestamp ? new Date(t.timestamp).toLocaleString('nl-NL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</span>
+                                <span className={`min-w-[40px] ${t.action === 'BUY' ? 'text-emerald-400' : 'text-red-400'}`}>{t.action}</span>
+                                <span className="text-slate-300 min-w-[80px]">{t.market}</span>
+                                <span className="text-amber-400">€{(t.amount || 0).toFixed(2)}</span>
+                                <span className="text-slate-500">@€{(t.price || 0).toFixed(2)}</span>
+                                {t.fee != null && <span className="text-pink-400">fee €{Number(t.fee).toFixed(3)}</span>}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
+
+      {/* Force-sell confirm modal */}
+      {forceSelling && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="bg-slate-900 border border-red-500/40 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden" data-testid="force-sell-modal">
+            <div className="px-5 py-4 border-b border-red-500/30 bg-red-500/10">
+              <h3 className="text-base font-bold text-red-200">🛑 Force-sell bevestigen</h3>
+            </div>
+            <div className="px-5 py-4 space-y-3 text-sm text-slate-300">
+              <p>Je staat op het punt om potje <span className="font-mono text-amber-300">{forceSelling.pot_id}</span> van user <span className="font-mono text-amber-300">{forceSelling.user_id}</span> te forceren naar verkoop op de huidige marktprijs ({forceSelling.market || 'onbekende markt'}).</p>
+              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-[12px] text-red-200">
+                ⚠️ <strong>Let op:</strong> dit kan verlies geven. Bij verlies daalt het bot-vermogen en kunnen ROAR-tokens in waarde minderen voor iedereen. Gebruik alleen als laatste redmiddel.
+              </div>
+              <label className="block text-[11px] text-slate-400">Reden (audit-trail)</label>
+              <input type="text" value={forceSellReason} onChange={e => setForceSellReason(e.target.value)}
+                data-testid="force-sell-reason"
+                placeholder="Bv. coin instort, hard stop loss..."
+                className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500/50" />
+            </div>
+            <div className="px-5 py-3 bg-slate-950/50 border-t border-slate-800 flex justify-end gap-2">
+              <button onClick={() => { setForceSelling(null); setForceSellReason(''); }}
+                data-testid="force-sell-cancel"
+                className="px-4 py-1.5 rounded-lg text-sm text-slate-300 bg-slate-800 hover:bg-slate-700">
+                Annuleer
+              </button>
+              <button onClick={confirmForceSell}
+                data-testid="force-sell-confirm"
+                className="px-4 py-1.5 rounded-lg text-sm font-medium text-white bg-red-500 hover:bg-red-600">
+                Force-sell nu
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Trade feed (community) */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">

@@ -1,6 +1,13 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_bot_proactive_register_001 + v5_admin_force_sell_001 + v5_admin_bot_cards_001** (~45 credits batch):
+  - 🪙 **Proactieve bot-registratie**: nieuwe checkbox "Toon in Analytics" op TraderPage (rechts naast Monitor-knoppen). User kan zijn slot zichtbaar maken in Admin Analytics zonder de bot te starten. Persistent via `/data/trade/registered_users.json`, auto-resumed bij elke server-start
+  - 🛑 **Force-sell admin endpoint**: `POST /api/trade/potjes/{user_id}/{pot_id}/force-sell` met admin-only check (gradatie ≤ 1), live Bitvavo prijs voor exit, audit-trail in `/data/trade/force_sell_audit.json`. Waarschuwt voor token-devaluatie
+  - 🤖 **Analytics bot-kaarten redesign**: per-bot uitklap (klik op kaart) toont 1) potjes-tabel met capital/live/entry/trades/P&L per pot, 2) laatste 8 trades van die wallet, 3) force-sell knop per open potje met dubbele-bevestiging modal + reden-veld voor audit-trail
+  - 🔎 **admin/bots filter uitgebreid**: tokens > 0 OF running OF proactively_registered → registered users zijn altijd zichtbaar zelfs zonder tokens
+  - ✅ Backend e2e getest: register → unregister, niet-admin force-sell gefaald (correct 403), closed-pot force-sell gefaald (correct "niet open"), admin/bots list toont proactive users met `proactively_registered=true` flag
+
 - 2026-05-23 **v4_wallet_admin_switch_001**: Wallet-pagina krijgt zelfde admin switch als Trader. `[👤 Mijn | 🌟 Spark]` toggle in header (alleen voor gradatie ≤ 1), `sessionStorage`-persistent, subtitle past zich aan ("Persoonlijk financieel overzicht" / "Spark's wallet (admin view)"). Verified via Playwright: Mijn-view toont De Willem €0,00 + 10 tokens, Spark-view toont Spark €5,08 + 10 tokens
 
 - 2026-05-23 **v4_deposit_19_tokens_001** (€96.52 bijstorting):

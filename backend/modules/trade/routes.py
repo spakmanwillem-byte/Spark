@@ -601,11 +601,13 @@ async def admin_list_bots():
     """v4_trade_analytics_001: alle user-bots voor admin overzicht.
 
     v4_token_bot_filter_001: filtert users met 0 tokens (zij hebben geen bot-slot).
+    v5_proactive_register_001: proactief-geregistreerde users zijn altijd zichtbaar.
     """
-    from .monitor import list_running_bots
+    from .monitor import list_running_bots, _load_registered_users
     # Wallets ophalen om token-balans te checken
     wallets_fp = Path(__file__).parent.parent.parent / "data" / "wallet" / "user_wallets.json"
     wallets = load_json(wallets_fp, default={"user_wallets": {}}).get("user_wallets", {})
+    registered = set(_load_registered_users())
     bots = list_running_bots()
     filtered = []
     for b in bots:
@@ -616,8 +618,9 @@ async def admin_list_bots():
             continue
         wallet = (wallets.get(uid) or {}).get("wallet") or {}
         tokens = wallet.get("spark_tokens", 0)
-        # Alleen tonen als user tokens heeft OF bot daadwerkelijk draait
-        if tokens > 0 or b.get("running"):
+        # Tonen als: bot draait OF tokens OF proactief geregistreerd
+        if tokens > 0 or b.get("running") or uid in registered:
+            b["proactively_registered"] = uid in registered
             filtered.append(b)
     return {"success": True, "bots": filtered, "total_unfiltered": len(bots)}
 
@@ -664,6 +667,110 @@ async def reset_potjes_cycle(user_id: str):
     """Reset last_buy_cycle marker (handmatig, voor debugging)"""
     potjes_svc.reset_last_buy_cycle(user_id)
     return {"success": True, "message": "Buy cycle gereset"}
+
+
+# ============================================================
+# v5_bot_proactive_register_001 — User opt-in zichtbaarheid in Analytics
+# ============================================================
+class RegisterBody(BaseModel):
+    viewer_id: str
+
+
+@router.post("/bot/register/{user_id}")
+async def register_bot(user_id: str, body: RegisterBody):
+    """Proactief: laat bot-slot van user zichtbaar zijn in Analytics zonder dat hij draait.
+    Alleen de user zelf (of admin) mag dit doen."""
+    from .monitor import register_user_bot
+    if body.viewer_id != user_id and (body.viewer_id not in ("user-001",)):
+        # Niet-admin mag alleen zichzelf registreren
+        users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+        users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+        viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+        if not viewer or viewer.get("gradatie", 99) > 1:
+            return {"success": False, "error": "Mag alleen jezelf registreren"}
+    return register_user_bot(user_id)
+
+
+@router.post("/bot/unregister/{user_id}")
+async def unregister_bot(user_id: str, body: RegisterBody):
+    from .monitor import unregister_user_bot
+    if body.viewer_id != user_id:
+        users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+        users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+        viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+        if not viewer or viewer.get("gradatie", 99) > 1:
+            return {"success": False, "error": "Mag alleen jezelf afmelden"}
+    return unregister_user_bot(user_id)
+
+
+@router.get("/bot/register-status/{user_id}")
+async def register_status(user_id: str):
+    from .monitor import is_registered
+    return {"user_id": user_id, "registered": is_registered(user_id)}
+
+
+# ============================================================
+# v5_admin_force_sell_001 — Admin force-sell van een specifiek potje
+# ============================================================
+class ForceSellBody(BaseModel):
+    viewer_id: str
+    reason: Optional[str] = None
+
+
+@router.post("/potjes/{user_id}/{pot_id}/force-sell")
+async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
+    """Admin-only: sluit een specifiek potje op huidige marktprijs.
+    LET OP: dit kan verlies geven → tokens devalueren. Audit-trail wordt bijgehouden."""
+    # Admin-check
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+    if not viewer or viewer.get("gradatie", 99) > 1:
+        return {"success": False, "error": "Alleen admins (gradatie ≤ 1) mogen force-sell"}
+
+    # Vind potje
+    user_data = potjes_svc.get_potjes(user_id)
+    pot = next((p for p in user_data.get("potjes", []) if p.get("id") == pot_id), None)
+    if not pot:
+        return {"success": False, "error": f"Potje {pot_id} niet gevonden voor {user_id}"}
+    if not pot.get("position", {}).get("is_open"):
+        return {"success": False, "error": "Potje is niet open — niets om te verkopen"}
+
+    # Live prijs ophalen
+    market = pot.get("market") or "BCH-EUR"
+    tickers = fetch_tickers()
+    ticker = next((t for t in tickers if t.get("market") == market), None)
+    if not ticker:
+        return {"success": False, "error": f"Geen live prijs voor {market}"}
+    exit_price = float(ticker.get("last") or ticker.get("price") or 0)
+    if exit_price <= 0:
+        return {"success": False, "error": "Ongeldige live prijs"}
+
+    # Close het potje
+    result = potjes_svc.close_pot(user_id, pot_id, exit_price)
+
+    # Audit-trail
+    try:
+        audit_file = Path(__file__).parent.parent.parent / "data" / "trade" / "force_sell_audit.json"
+        audit_file.parent.mkdir(parents=True, exist_ok=True)
+        audit = load_json(audit_file, default={"entries": []})
+        audit["entries"].append({
+            "id": f"fs-{len(audit['entries']) + 1:04d}",
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "type": "force_sell",
+            "user_id": user_id,
+            "pot_id": pot_id,
+            "market": market,
+            "exit_price": exit_price,
+            "by_admin": body.viewer_id,
+            "reason": body.reason or "geen opgegeven",
+            "result": result,
+        })
+        save_json(audit_file, audit)
+    except Exception as e:
+        result["audit_error"] = str(e)
+
+    return {"success": True, "force_sell": result, "exit_price": exit_price, "market": market}
 
 
 # ============================================================

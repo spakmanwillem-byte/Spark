@@ -857,6 +857,52 @@ def get_user_monitor(user_id: str) -> MonitorService:
 # v4_registry_persist_001 — persist per-user bots zodat ze auto-resumen na restart
 REGISTRY_STATE_FILE = DATA_DIR / "trade" / "bots_registry_state.json"
 
+# v5_bot_proactive_register_001 — users die proactief zichtbaar willen zijn in Analytics
+# (bot komt in _registry zonder te starten zodat admin de slot ziet)
+REGISTERED_USERS_FILE = DATA_DIR / "trade" / "registered_users.json"
+
+
+def _load_registered_users() -> list:
+    data = load_json(REGISTERED_USERS_FILE, default={"users": []})
+    return data.get("users", [])
+
+
+def _save_registered_users(users: list):
+    REGISTERED_USERS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    save_json(REGISTERED_USERS_FILE, {"users": sorted(set(users))})
+
+
+def register_user_bot(user_id: str) -> dict:
+    """Proactief: voeg bot toe aan _registry zonder te starten. Persistent."""
+    get_user_monitor(user_id)  # zorgt voor instance in _registry
+    users = _load_registered_users()
+    if user_id not in users:
+        users.append(user_id)
+        _save_registered_users(users)
+    return {"success": True, "registered": True, "user_id": user_id}
+
+
+def unregister_user_bot(user_id: str) -> dict:
+    """Verwijder bot uit visibility-lijst (bot zelf blijft bestaan in registry tot stop)."""
+    users = _load_registered_users()
+    if user_id in users:
+        users = [u for u in users if u != user_id]
+        _save_registered_users(users)
+    return {"success": True, "unregistered": True, "user_id": user_id}
+
+
+def is_registered(user_id: str) -> bool:
+    return user_id in _load_registered_users()
+
+
+def resume_registered_users():
+    """Bij backend startup: ensure registered users hebben monitor-instance (niet running)."""
+    for uid in _load_registered_users():
+        try:
+            get_user_monitor(uid)
+        except Exception as e:
+            logger.warning(f"Registered user {uid} ensure failed: {e}")
+
 
 def _persist_registry():
     """Sla alle running registry-bots op zodat ze na restart auto-resumen."""

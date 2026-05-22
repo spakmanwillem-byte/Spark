@@ -1,9 +1,10 @@
 {
   "balances": {
     "user-000": 5,
-    "user-001": 12,
+    "user-001": 13,
     "user-a0ee2d7e": 1,
-    "user-574ac78e": 2
+    "user-574ac78e": 0,
+    "user-4d81e2a4": 1
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -101,6 +102,26 @@
       "to_user_id": "user-574ac78e",
       "amount": 1,
       "note": "Welkomstgift Nick (admin direct)",
+      "status": "completed"
+    },
+    {
+      "id": "329de0d2-593f-48dc-9f3a-075eeff39555",
+      "ts": "2026-05-22T21:36:58.113127+00:00",
+      "type": "gift_refund",
+      "from_user_id": "user-574ac78e",
+      "to_user_id": "user-001",
+      "amount": 2,
+      "note": "Refund: verkeerde Nick (Teeuwen) - tokens hadden naar Nick zonder achternaam moeten gaan",
+      "status": "completed"
+    },
+    {
+      "id": "3856609d-3a2c-4bee-b477-e7f0503838fd",
+      "ts": "2026-05-22T21:36:58.113127+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-4d81e2a4",
+      "amount": 1,
+      "note": "Welkomstgift voor nieuwste Nick (zonder achternaam)",
       "status": "completed"
     }
   ],
@@ -207,6 +228,11 @@
       "to": "user-574ac78e",
       "amount": 1,
       "reason": "Welkomstgift Nick"
+    },
+    {
+      "ts": "2026-05-22T21:36:58.113127+00:00",
+      "action": "correction",
+      "details": "Teeuwen (user-574ac78e) -> 0, juiste Nick (user-4d81e2a4) -> 1"
     }
   ],
   "treasury_pool": 999980,

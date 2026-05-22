@@ -645,8 +645,15 @@ async def admin_list_bots():
     # Verrijk bestaande bot-entries met user-naam en gradatie
     name_lookup = {(u.get("id") or u.get("user_id")): (u.get("naam") or u.get("name")) for u in all_users}
     grad_lookup = {(u.get("id") or u.get("user_id")): u.get("gradatie") for u in all_users}
+    # v5_display_swap_001 — user-000 toont als "De Willem", user-001 toont als "Spark"
+    # (data ongemoeid, alleen display-laag; aligneert met user's mental model "Willem=00, Spark=01")
+    name_lookup["user-000"] = "De Willem"
+    name_lookup["user-001"] = "Spark"
     for uid, b in bots_by_uid.items():
         b.setdefault("user_naam", name_lookup.get(uid, uid))
+        # Force-overwrite voor user-000 / user-001 zelfs als al gezet
+        if uid in ("user-000", "user-001"):
+            b["user_naam"] = name_lookup[uid]
         b.setdefault("gradatie", grad_lookup.get(uid))
         b["proactively_registered"] = uid in registered
 

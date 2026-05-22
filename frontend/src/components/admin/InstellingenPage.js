@@ -179,6 +179,14 @@ export function InstellingenPage({ onNavigate }) {
             {/* ====== BEELD ====== */}
             {activeTab === 'beeld' && (
               <>
+                <SettingsCard title="App Kleurenschema (admin)" icon={Palette} accent="#a855f7">
+                  <p className="text-xs text-slate-400 mb-3">
+                    Overkoepelend kleurenschema voor de hele app — geldt voor iedereen.
+                    Persoonlijke glow-kleur kan elk lid los aanpassen via <span className="text-purple-300">Mijn Profiel → Instellingen → Beeld</span>.
+                  </p>
+                  <AdminColorScheme userId={userId} userGrad={userGrad} />
+                </SettingsCard>
+
                 <SettingsCard title="Visuele Instellingen" icon={Palette} accent="#a855f7">
                   <Toggle label="Mood Colors" sub="Interface kleurt mee met Spark's emotie" checked={settings.mood_colors} onChange={v => set('mood_colors', v)} color="#a855f7" />
                   <Divider />
@@ -193,13 +201,6 @@ export function InstellingenPage({ onNavigate }) {
                   <InfoRow label="Positie" value="Links (vast)" />
                   <InfoRow label="Inklapbaar" value="Ja" />
                   <InfoRow label="Secties" value="Workspace, Spark AI, Modules, Beheer" />
-                </SettingsCard>
-
-                <SettingsCard title="Avatar Galerij" icon={Palette} accent="#a855f7">
-                  <p className="text-xs text-slate-400 mb-3">
-                    Voorbeeld-avatars die <span className="text-purple-300">alle users</span> kunnen kiezen als profielfoto. Eigen user-portretten worden apart opgeslagen en zijn alleen voor het eigen profiel.
-                  </p>
-                  <AvatarGallerySection adminId={userId} isAdmin={userGrad <= 2} />
                 </SettingsCard>
 
                 <SaveButton saving={saving} onClick={handleSave} />
@@ -256,7 +257,16 @@ export function InstellingenPage({ onNavigate }) {
 
             {/* ====== ARCHIEF (Systeem) ====== */}
             {activeTab === 'archief' && (
-              <SystemArchive currentUserId={user?.id} />
+              <>
+                <SettingsCard title="Avatar Galerij" icon={Palette} accent="#a855f7">
+                  <p className="text-xs text-slate-400 mb-3">
+                    Voorbeeld-avatars die <span className="text-purple-300">alle users</span> kunnen kiezen als profielfoto. Eigen user-portretten worden apart opgeslagen en zijn alleen voor het eigen profiel.
+                  </p>
+                  <AvatarGallerySection adminId={userId} isAdmin={userGrad <= 2} />
+                </SettingsCard>
+
+                <SystemArchive currentUserId={user?.id} />
+              </>
             )}
 
             {/* ====== INTEGRATIES ====== */}
@@ -360,6 +370,194 @@ export function InstellingenPage({ onNavigate }) {
 }
 
 /* === Reusable Components === */
+
+
+// ============================================================
+// AdminColorScheme (v5_admin_color_scheme_001) — overkoepelende app-kleuren
+// Persoonlijke glow staat in Mijn Profiel; dit zijn systeembrede defaults.
+// ============================================================
+const SCHEME_PRESETS = [
+  { name: 'Amber Default',  primary: '#f59e0b', secondary: '#06b6d4', bg: '#0f172a' },
+  { name: 'Forest Calm',    primary: '#10b981', secondary: '#84cc16', bg: '#0c1b14' },
+  { name: 'Cobalt Night',   primary: '#3b82f6', secondary: '#8b5cf6', bg: '#0b1426' },
+  { name: 'Rose Dusk',      primary: '#ec4899', secondary: '#f97316', bg: '#1a0e15' },
+  { name: 'Violet Quiet',   primary: '#a855f7', secondary: '#06b6d4', bg: '#120c20' },
+  { name: 'Crimson Alert',  primary: '#ef4444', secondary: '#f59e0b', bg: '#1a0a0a' },
+];
+
+function AdminColorScheme({ userId, userGrad }) {
+  const [scheme, setScheme] = React.useState({ primary: '#f59e0b', secondary: '#06b6d4', bg: '#0f172a' });
+  const [busy, setBusy] = React.useState(false);
+  const [msg, setMsg] = React.useState(null);
+  const canEdit = (userGrad ?? 7) <= 1;
+
+  // Load current system values
+  React.useEffect(() => {
+    fetch(`${API}/api/settings/system`).then(r => r.json()).then(d => {
+      const s = d.settings || {};
+      const next = {
+        primary: s.app_primary_accent || '#f59e0b',
+        secondary: s.app_secondary_accent || '#06b6d4',
+        bg: s.app_background_tint || '#0f172a',
+      };
+      setScheme(next);
+      applyToRoot(next);
+    }).catch(() => {});
+  }, []);
+
+  const applyToRoot = (s) => {
+    document.documentElement.style.setProperty('--app-primary', s.primary);
+    document.documentElement.style.setProperty('--app-secondary', s.secondary);
+    document.documentElement.style.setProperty('--app-bg-tint', s.bg);
+  };
+
+  const flash = (kind, text) => { setMsg({ kind, text }); setTimeout(() => setMsg(null), 2500); };
+
+  const saveOne = async (key, value) => {
+    const r = await fetch(`${API}/api/settings/system/${key}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ value, viewer_id: userId }),
+    });
+    if (!r.ok) {
+      const d = await r.json().catch(() => ({}));
+      throw new Error(d.detail || `HTTP ${r.status}`);
+    }
+  };
+
+  const saveScheme = async (next) => {
+    if (!canEdit) { flash('err', 'Alleen gradatie ≤ 1 mag dit aanpassen'); return; }
+    setBusy(true);
+    try {
+      await saveOne('app_primary_accent', next.primary);
+      await saveOne('app_secondary_accent', next.secondary);
+      await saveOne('app_background_tint', next.bg);
+      setScheme(next);
+      applyToRoot(next);
+      flash('ok', 'Kleurenschema opgeslagen');
+    } catch (e) {
+      flash('err', e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const pickPreset = (p) => saveScheme({ primary: p.primary, secondary: p.secondary, bg: p.bg });
+
+  const setHex = (field, val) => {
+    const next = { ...scheme, [field]: val };
+    setScheme(next);
+    applyToRoot(next);
+  };
+
+  const commitHex = (field) => {
+    const v = (scheme[field] || '').trim();
+    if (!/^#[0-9a-fA-F]{6}$/.test(v)) {
+      flash('err', `Ongeldige hex: ${v}`);
+      return;
+    }
+    const key = field === 'primary' ? 'app_primary_accent' :
+                field === 'secondary' ? 'app_secondary_accent' : 'app_background_tint';
+    setBusy(true);
+    saveOne(key, v).then(() => flash('ok', 'Opgeslagen')).catch(e => flash('err', e.message)).finally(() => setBusy(false));
+  };
+
+  return (
+    <div data-testid="admin-color-scheme" className="space-y-4">
+      {/* Preview */}
+      <div className="rounded-xl p-4 border border-slate-800" style={{ background: scheme.bg }}>
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Live voorbeeld</p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="px-3 py-1.5 rounded-lg text-xs font-medium" style={{ background: `${scheme.primary}22`, color: scheme.primary, border: `1px solid ${scheme.primary}50` }}>Primary</span>
+              <span className="px-3 py-1.5 rounded-lg text-xs font-medium" style={{ background: `${scheme.secondary}22`, color: scheme.secondary, border: `1px solid ${scheme.secondary}50` }}>Secondary</span>
+              <span className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">Neutral</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-lg" style={{ background: scheme.primary, boxShadow: `0 0 16px ${scheme.primary}80` }} />
+            <div className="w-10 h-10 rounded-lg" style={{ background: scheme.secondary, boxShadow: `0 0 16px ${scheme.secondary}80` }} />
+          </div>
+        </div>
+      </div>
+
+      {/* Presets */}
+      <div>
+        <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Presets (snel kiezen)</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2" data-testid="scheme-presets">
+          {SCHEME_PRESETS.map(p => {
+            const active = p.primary.toLowerCase() === scheme.primary.toLowerCase() &&
+                           p.secondary.toLowerCase() === scheme.secondary.toLowerCase();
+            return (
+              <button
+                key={p.name}
+                data-testid={`scheme-preset-${p.name.toLowerCase().replace(/\s+/g, '-')}`}
+                onClick={() => pickPreset(p)}
+                disabled={busy || !canEdit}
+                className={`p-2.5 rounded-lg border transition-all flex items-center gap-2 ${active ? 'border-white/40 ring-1 ring-white/30' : 'border-slate-800 hover:border-slate-600'} disabled:opacity-40 disabled:cursor-not-allowed`}
+                style={{ background: p.bg }}
+              >
+                <div className="flex items-center -space-x-1">
+                  <span className="w-5 h-5 rounded-full ring-1 ring-slate-900" style={{ background: p.primary }} />
+                  <span className="w-5 h-5 rounded-full ring-1 ring-slate-900" style={{ background: p.secondary }} />
+                </div>
+                <span className="text-[11px] font-medium text-white">{p.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Custom hex pickers */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="scheme-customs">
+        {[
+          { field: 'primary',   label: 'Primary accent',  hint: 'Hoofdkleur (buttons, highlights)' },
+          { field: 'secondary', label: 'Secondary accent',hint: 'Secundair (badges, links)' },
+          { field: 'bg',        label: 'Background tint', hint: 'Donkere achtergrond' },
+        ].map(({ field, label, hint }) => (
+          <div key={field} className="p-3 rounded-lg bg-slate-800/40 border border-slate-800">
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1.5">{label}</p>
+            <div className="flex items-center gap-2 mb-1">
+              <input
+                type="color"
+                data-testid={`scheme-color-${field}`}
+                value={scheme[field]}
+                onChange={e => setHex(field, e.target.value)}
+                onBlur={() => commitHex(field)}
+                disabled={!canEdit || busy}
+                className="w-10 h-8 rounded bg-transparent border border-slate-700 cursor-pointer disabled:opacity-40"
+              />
+              <input
+                type="text"
+                data-testid={`scheme-hex-${field}`}
+                value={scheme[field]}
+                onChange={e => setHex(field, e.target.value)}
+                onBlur={() => commitHex(field)}
+                disabled={!canEdit || busy}
+                className="flex-1 px-2 py-1.5 bg-slate-900 border border-slate-700 rounded text-xs font-mono text-white disabled:opacity-40"
+              />
+            </div>
+            <p className="text-[9px] text-slate-500">{hint}</p>
+          </div>
+        ))}
+      </div>
+
+      {!canEdit && (
+        <p className="text-[11px] text-amber-300/80 italic">
+          Alleen gradatie 1 (beheerder) kan dit overkoepelende schema wijzigen.
+        </p>
+      )}
+
+      {msg && (
+        <p data-testid="scheme-msg"
+          className={`text-[11px] px-3 py-2 rounded-lg border ${msg.kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' : 'bg-red-500/10 text-red-300 border-red-500/30'}`}>
+          {msg.text}
+        </p>
+      )}
+    </div>
+  );
+}
+
 
 function SettingsCard({ title, icon: Icon, accent, children }) {
   return (

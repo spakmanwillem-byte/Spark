@@ -3,6 +3,10 @@
 /* v5_ui_prefs_001 — per-user glow base color, ingesteld via Mijn Profiel → Instellingen */
 :root {
   --glow-base: #f59e0b;
+  /* v5_admin_color_scheme_001 — overkoepelend admin-schema (geladen uit /api/settings/system) */
+  --app-primary: #f59e0b;
+  --app-secondary: #06b6d4;
+  --app-bg-tint: #0f172a;
 }
 
 /* Remove default link styling */

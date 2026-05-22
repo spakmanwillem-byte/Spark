@@ -111,6 +111,27 @@ function AppContent() {
       .catch(() => {});
   }, [user?.id]);
 
+  // v5_admin_color_scheme_001 — laad overkoepelend kleurenschema (system-wide)
+  useEffect(() => {
+    if (!user?.id) return;
+    const API = process.env.REACT_APP_BACKEND_URL;
+    fetch(`${API}/api/settings/system`)
+      .then(r => r.json())
+      .then(d => {
+        const s = d?.settings || {};
+        const apply = (key, css) => {
+          const v = s[key];
+          if (v && /^#[0-9a-fA-F]{6}$/.test(v)) {
+            document.documentElement.style.setProperty(css, v);
+          }
+        };
+        apply('app_primary_accent', '--app-primary');
+        apply('app_secondary_accent', '--app-secondary');
+        apply('app_background_tint', '--app-bg-tint');
+      })
+      .catch(() => {});
+  }, [user?.id]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">

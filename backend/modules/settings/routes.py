@@ -35,6 +35,10 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "session_timeout": {"type": "int", "scope": "system", "min": 1, "max": 60},
     "debug_mode": {"type": "bool", "scope": "system"},
     "auto_save": {"type": "bool", "scope": "system"},
+    # v5_admin_color_scheme_001 — app-wide kleurenschema (admin only)
+    "app_primary_accent": {"type": "str", "scope": "system"},   # hex bv #f59e0b
+    "app_secondary_accent": {"type": "str", "scope": "system"}, # hex bv #06b6d4
+    "app_background_tint": {"type": "str", "scope": "system"},  # hex bv #0f172a
     # User-scope (iedereen voor zichzelf)
     "theme": {"type": "str", "scope": "user", "options": ["dark", "light"]},
     "mood_colors": {"type": "bool", "scope": "user"},

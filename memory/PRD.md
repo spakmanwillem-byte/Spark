@@ -1,6 +1,16 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_admin_color_scheme_001 + avatar-galerij verplaatst naar Archief**:
+  - 🎨 **Nieuwe sectie "App Kleurenschema (admin)"** in `Beheer → Instellingen → Beeld` — overkoepelend voor de hele app, alleen gradatie ≤ 1 kan wijzigen
+    - 6 presets: Amber Default, Forest Calm, Cobalt Night, Rose Dusk, Violet Quiet, Crimson Alert (klik = direct opslaan + apply)
+    - 3 custom color pickers: Primary accent / Secondary accent / Background tint (hex input + native color picker, on-blur save)
+    - Live voorbeeld pill-rij met huidige kleuren in context
+    - Persisted in `settings/system.json` via 3 nieuwe system-scope keys: `app_primary_accent`, `app_secondary_accent`, `app_background_tint`
+  - 🌐 **Globale CSS-variables**: `--app-primary`, `--app-secondary`, `--app-bg-tint` op `:root` (defaults + auto-load uit `/api/settings/system` bij login)
+  - 📦 **Avatar Galerij verplaatst** van Beeld → Archief (logischer: assets-management hoort bij archief, kleuren bij beeld)
+  - ✅ Backend e2e getest (PUT `/api/settings/system/app_primary_accent` → 200, persisted), frontend smoke screenshot bevestigt beide tabs renderen correct
+
 - 2026-05-23 **v5_avatar_gallery_split_001** (Avatar Galerij beheer herstructurering):
   - 🎨 **2 sub-tabs in Beheer → Instellingen → Beeld → Avatar Galerij**:
     - **Gebruikers-avatars** (33): vrij te kiezen door iedereen, rode Verwijder-knop per avatar

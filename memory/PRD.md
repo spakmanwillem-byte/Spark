@@ -1,6 +1,14 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_avatar_gallery_split_001** (Avatar Galerij beheer herstructurering):
+  - 🎨 **2 sub-tabs in Beheer → Instellingen → Beeld → Avatar Galerij**:
+    - **Gebruikers-avatars** (33): vrij te kiezen door iedereen, rode Verwijder-knop per avatar
+    - **Systeem-avatars** (5): Spark/Harry/Smith/Madelief/Spark 2 — locked-icoon + "Beschermd" knop (uitgeschakeld). Eerst lock weghalen via Beheer → Gebruikers → Avatar Beheer pencil voor je echt kunt verwijderen
+  - 🗑️ **Modal-confirmatie i.p.v. silent toast**: rood "Avatar verwijderen?" modal met avatar-titel, waarschuwing dat gekoppelde users initialen krijgen, "Annuleer" + "Ja, verwijder permanent" knoppen. Vervangt browser-native `confirm()` voor duidelijker UX
+  - ✅ Bevestigingstoast `"<naam> verwijderd uit galerij"` met groene bevel + auto-dismiss na 3.5s
+  - 🛡️ Backend `DELETE /api/avatar/gallery/{id}?viewer_id=...` werkt al — bug-report bleek visuele feedback-issue, niet functional
+
 - 2026-05-23 **v5_self_password_001 + ROAR admin-batch**:
   - 🔑 **Self-service sleutelwoord wijzigen**: nieuwe `Account` sectie bovenaan Mijn Profiel → Instellingen. User vult huidig + nieuw sleutelwoord in (toon/verberg toggles per veld), klikt "Wijzig sleutelwoord" of "Reset naar Welkom01" (bevestigingsmodal). Backend: `POST /api/auth/users/{user_id}/change-password` body `{current_sleutelwoord, new_sleutelwoord}` met validatie (huidige check, min 4 tekens, niet gelijk aan huidige). Werkt voor reset → nieuwe = "Welkom01"
   - 🪙 **Admin ROAR batch (Willem +5 @ €10.10 override + 1 gift → Gijs)**:

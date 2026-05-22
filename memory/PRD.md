@@ -1,7 +1,17 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
-- 2026-05-23 **v5_roar_gift_001 + v5_per_user_trade_dm_001 + auto-trade testbed**:
+- 2026-05-23 **v5_candle_hotswap_001 + v5_spark_stoppable_001 + admin-bot-controls + DSP-004/005/006**:
+  - 🕯️ **Cycle hot-swap**: `POST /api/trade/monitor/candle/{user_id}` + `MonitorService.update_candle_interval()`. Wisselen 15m/1h/4h/1d zonder restart, persistent. TraderPage cycle-buttons doen nu hot-patch bij running, lokaal anders. Auto-sync UI ↔ backend
+  - 🛑 **Spark stop weer toegestaan**: `SPARK_UNSTOPPABLE` guard verwijderd in `/bot/stop/` en `/bot/pause/{user_id}`. Bugs van v4 zijn opgelost. Frontend toont Stop-knop ook voor Spark
+  - 🎛️ **Admin bot-controls** in `Beheer → Analytics → Trade-tab`: ▶ Start / ⏸ Pauzeer-Hervat / ⏹ Stop knoppen per bot
+  - 📐 **ARCHITECTURE.md uitgebreid** met 3 nieuwe DSPs:
+    - **DSP-004**: roar_balances.json ↔ user_wallets.json (autoritatief vs mirror)
+    - **DSP-005**: TraderPage React-state ↔ bot_registry_state.json (UI snapshot sync)
+    - **DSP-006**: gift_requests.json ↔ roar_balances.transactions (lifecycle vs audit)
+  - 🔗 `_arch_ref` comments toegevoegd in alle 4 betrokken JSON files
+
+- 2026-05-23 **v5_roar_gift_001 + v5_per_user_trade_dm_001 + auto-trade testbed** (eerder vandaag):
   - 🎁 **ROAR Gift-flow met paper-trail**: nieuwe `/api/shop/gift` endpoints (POST create / GET inbox / GET outbox / POST accept / POST reject / POST cancel)
     - Tokens worden NIET direct overgeboekt — escrow in `pending` status. Pas bij accept transfer + audit
     - **24h auto-expire** (lazy-check bij elke list-call): pending → expired, sender's tokens behouden

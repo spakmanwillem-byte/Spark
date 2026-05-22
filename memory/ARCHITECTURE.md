@@ -40,10 +40,51 @@ Convenant: bij elke vondst van een dual-source moment → entry hier + cross-ref
 - **Verplichting**: Bij elke admin-overview (analytics, dashboard, persoonkaart) waar user-000/001 voorkomt — display-override toepassen. NOOIT in users.json zelf de namen omdraaien (zou alle history breken).
 - **Verwijst naar**: code in `/app/backend/modules/trade/routes.py` zoek `v5_display_swap_001`.
 
-- Nieuwe entry = **DSP-NNN** (Dual-Source Pattern) of **AD-NNN** (Architecture Decision).
-- Iedere entry heeft minimaal: datum, trigger, files involved, beslissing, verplichting (wat moet je nu altijd doen).
-- Cross-references: in elk betrokken bestand een `_arch_ref` veld met de DSP-id en pad naar dit document.
-- Dit document hoort bij elke onboarding/handoff te worden gelezen.
+---
+
+## DSP-004 · ROAR balances: `roar_balances.json` ↔ `user_wallets.json`
+
+- **Datum**: 2026-05-23
+- **Trigger**: Admin token-batch (Willem +5 ROAR @ €10.10 + 1 gift Gijs) toonde wallet-UI `spark_tokens: 0` terwijl `roar_balances.json` correct stond. Mirror was niet gesynct.
+- **Twee bronnen**:
+  - `/app/backend/data/roar/roar_balances.json` → `balances.{user_id}: int` — **autoritatief**, audit-trail (transactions, admin_log)
+  - `/app/backend/data/wallet/user_wallets.json` → `user_wallets.{uid}.wallet.spark_tokens` — display-mirror voor wallet UI
+- **Beslissing**: roar_balances = bron van waarheid. user_wallets.spark_tokens is een **mirror** die bij elke balance-mutatie automatisch moet syncen.
+- **Verplichting**: Elke `roar.balances[uid]` mutatie → óók `user_wallets[uid].wallet.spark_tokens = roar.balances[uid]` + `last_sync`. `shop/gift.py` accept doet dit auto. Admin-scripts: zelf nadenken.
+- **Toekomst (P2)**: Centrale `roar_service.set_balance(uid, n)` die beide files atomair update.
+- **Cross-refs**: `/app/backend/modules/shop/gift.py` (sync-block na accept), `/app/backend/modules/shop/routes.py` (token-buy)
+
+---
+
+## DSP-005 · Bot-settings: React-state ↔ `bot_registry_state.json`
+
+- **Datum**: 2026-05-23
+- **Trigger**: Willem: "2 json met info die elkaar nodig zijn maar niet van elkaar bestaan weten" — cycle-keuze in TraderPage (15m/1h/4h/1d) klonk niet door naar draaiende bot.
+- **Twee bronnen**:
+  - `TraderPage.js` React-state: `candleInterval`, `monitorMarkets`, `usePotjes` (lokale UI)
+  - `/app/backend/data/bots/bot_registry_state.json` + `bot_state_{user_id}.json`: server-side autoritatieve waarde
+- **Beslissing**: Elk veld dat tijdens running aanpasbaar moet zijn → hot-patch endpoint + auto-sync UI poll → setter. Eenrichtings-sync (backend → UI) is niet genoeg.
+- **Implementatie**:
+  - Markets: `POST /api/trade/monitor/markets/{user_id}` (langer bestaand)
+  - Candle/cycle: `POST /api/trade/monitor/candle/{user_id}` (v5_candle_hotswap_001)
+  - Auto-sync hooks in TraderPage.js useEffect op `monitorStatus.markets` / `.candle_interval`
+- **Verplichting**: Bij elk nieuw monitor-setting veld → óf read-only (alleen via restart) óf hot-patch endpoint + sync-effect. Beslis bewust per veld.
+- **Toekomst (P2)**: trade_amount, interval (poll-frequentie), auto_trade, use_mock — gelijktrekken naar hot-swap pattern.
+- **Patroon-naam**: "UI state ↔ JSON snapshot sync"
+- **Cross-refs**: `/app/backend/modules/trade/monitor.py` (`update_markets`, `update_candle_interval`), `/app/frontend/src/components/modules/TraderPage.js` (`changeCandleInterval`, `toggleMonitorMarket`)
+
+---
+
+## DSP-006 · Gift paper-trail: `gift_requests.json` ↔ `roar_balances.transactions`
+
+- **Datum**: 2026-05-23
+- **Trigger**: Gift-feature toevoegen (Wallet UI). Gift heeft 2 sporen:
+  - **Lifecycle**: pending → accepted/rejected/cancelled/expired → `gift_requests.json` (state machine + 24h expiry)
+  - **Transfer**: bij accept de eigenlijke token-mutatie → `roar_balances.transactions[]` (audit)
+- **Beslissing**: Beide bewaren. `gift_requests.json` is UI/state, `roar_balances.transactions` is financial audit. Pending gifts staan niet in transactions (geen token-mutatie yet).
+- **Verplichting**: Bij accept hook → push naar transactions[] + admin_log[] + DSP-004 sync. Bij reject/expired/cancel → geen financial tx (alleen lifecycle).
+- **Privacy-implicatie**: `gift_requests.json` bevat sender/recipient pairs zichtbaar voor alle servers/backups → encryption-at-rest later overwegen (P2).
+- **Cross-refs**: `/app/backend/modules/shop/gift.py` (alle endpoints), `/app/backend/data/roar/roar_balances.json` (transactions)
 
 ---
 

@@ -600,29 +600,66 @@ async def bot_decisions(user_id: str, limit: int = Query(50)):
 async def admin_list_bots():
     """v4_trade_analytics_001: alle user-bots voor admin overzicht.
 
-    v4_token_bot_filter_001: filtert users met 0 tokens (zij hebben geen bot-slot).
-    v5_proactive_register_001: proactief-geregistreerde users zijn altijd zichtbaar.
+    v5_lazy_slot_001: elke menselijke user krijgt automatisch een idle bot-slot
+    (zelfs als hij nog niet gestart heeft). bot-* user_ids (AI personae) worden
+    overgeslagen — die hebben geen trader-bot.
+    'Draaien als ik offline ben' checkbox regelt persistentie, niet zichtbaarheid.
     """
     from .monitor import list_running_bots, _load_registered_users
-    # Wallets ophalen om token-balans te checken
-    wallets_fp = Path(__file__).parent.parent.parent / "data" / "wallet" / "user_wallets.json"
-    wallets = load_json(wallets_fp, default={"user_wallets": {}}).get("user_wallets", {})
+    # Echte users uit system/users.json (geen AI bots)
+    users_fp = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+    users_data = load_json(users_fp, default={"users": []})
+    all_users = users_data.get("users", []) if isinstance(users_data, dict) else []
     registered = set(_load_registered_users())
+
+    # Bestaande bots ophalen
     bots = list_running_bots()
-    filtered = []
-    for b in bots:
-        uid = b.get("user_id") or ""
-        # Spark altijd tonen
-        if uid == "user-000":
-            filtered.append(b)
+    bots_by_uid = {b.get("user_id"): b for b in bots if b.get("user_id")}
+
+    # Voor elke menselijke user: zorg dat er een entry is
+    for u in all_users:
+        uid = u.get("id") or u.get("user_id")
+        if not uid or uid.startswith("bot-"):
             continue
-        wallet = (wallets.get(uid) or {}).get("wallet") or {}
-        tokens = wallet.get("spark_tokens", 0)
-        # Tonen als: bot draait OF tokens OF proactief geregistreerd
-        if tokens > 0 or b.get("running") or uid in registered:
-            b["proactively_registered"] = uid in registered
-            filtered.append(b)
-    return {"success": True, "bots": filtered, "total_unfiltered": len(bots)}
+        if uid in bots_by_uid:
+            continue
+        bots_by_uid[uid] = {
+            "user_id": uid,
+            "user_naam": u.get("naam") or u.get("name") or uid,
+            "gradatie": u.get("gradatie"),
+            "running": False,
+            "paused": False,
+            "cycles": 0,
+            "interval": 3600,
+            "candle_interval": "1h",
+            "market": "BCH-EUR",
+            "markets": ["BCH-EUR"],
+            "auto_trade": False,
+            "trade_amount": 5.08,
+            "use_mock": False,
+            "use_potjes": True,
+            "uptime_seconds": 0,
+            "lazy_slot": True,
+        }
+
+    # Verrijk bestaande bot-entries met user-naam en gradatie
+    name_lookup = {(u.get("id") or u.get("user_id")): (u.get("naam") or u.get("name")) for u in all_users}
+    grad_lookup = {(u.get("id") or u.get("user_id")): u.get("gradatie") for u in all_users}
+    for uid, b in bots_by_uid.items():
+        b.setdefault("user_naam", name_lookup.get(uid, uid))
+        b.setdefault("gradatie", grad_lookup.get(uid))
+        b["proactively_registered"] = uid in registered
+
+    # Sorteer: Spark eerst, dan running, dan rest alfabetisch op naam
+    def _sort_key(b):
+        if b["user_id"] == "user-000":
+            return (0, "")
+        if b.get("running"):
+            return (1, (b.get("user_naam") or b["user_id"]).lower())
+        return (2, (b.get("user_naam") or b["user_id"]).lower())
+
+    out = sorted(bots_by_uid.values(), key=_sort_key)
+    return {"success": True, "bots": out, "total_unfiltered": len(bots)}
 
 
 @router.get("/community/trade-feed")

@@ -1393,7 +1393,8 @@ function TradeAnalyticsTab() {
                     data-testid={`bot-card-toggle-${b.user_id}`}
                     className="w-full p-3 flex flex-wrap items-center gap-3 text-xs hover:bg-slate-800/60 transition-colors text-left">
                     <span className={`w-2.5 h-2.5 rounded-full ${b.running ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600'}`}></span>
-                    <span className="font-mono text-white min-w-[140px]">{b.user_id}</span>
+                    <span className="font-medium text-white min-w-[140px]">{b.user_naam || b.user_id}</span>
+                    <span className="font-mono text-[10px] text-slate-500 min-w-[110px]">{b.user_id}</span>
                     <span className="text-slate-400">
                       {Array.isArray(b.markets) ? b.markets.join('·') : b.market}
                     </span>
@@ -1402,7 +1403,7 @@ function TradeAnalyticsTab() {
                     {b.use_potjes && <span className="text-cyan-400">10-potjes</span>}
                     {b.auto_trade && <span className="text-emerald-400">auto</span>}
                     {b.use_mock && <span className="text-pink-400">MOCK</span>}
-                    {!b.running && <span className="text-slate-500 italic">slot-aanwezig (uit)</span>}
+                    {!b.running && <span className="text-slate-500 italic">{b.lazy_slot ? 'slot leeg (niet gestart)' : 'slot-aanwezig (uit)'}</span>}
                     <span className="text-slate-500 ml-auto">{Math.round((b.uptime_seconds || 0) / 60)}m up</span>
                     <span className="text-slate-500">{isOpen ? '▾' : '▸'}</span>
                   </button>

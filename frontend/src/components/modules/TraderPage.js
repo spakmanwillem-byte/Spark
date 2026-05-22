@@ -409,13 +409,13 @@ export function TraderPage({ onNavigate }) {
                           10-Potjes
                         </label>
                       )}
-                      {/* v5_bot_proactive_register_001 — opt-in zichtbaarheid in Admin Analytics */}
-                      <label className="flex items-center gap-1.5 text-[10px] text-slate-400 cursor-pointer select-none" title="Maak je bot-slot zichtbaar in Admin Analytics, zonder dat hij draait">
-                        <input type="checkbox" data-testid="toggle-analytics-visibility"
+                      {/* v5_offline_persistence_001 — bot blijft draaien als user offline is */}
+                      <label className="flex items-center gap-1.5 text-[10px] text-slate-400 cursor-pointer select-none" title="Wanneer aan: jouw bot draait door ook als je uitlogt. Anders stopt-ie bij logout.">
+                        <input type="checkbox" data-testid="toggle-offline-persistence"
                           checked={registeredInAnalytics} disabled={registerBusy}
                           onChange={toggleAnalyticsVisibility}
                           className="w-3 h-3 accent-cyan-500" />
-                        Toon in Analytics
+                        Draaien als ik offline ben
                       </label>
                       {!monitorStatus?.running ? (
                         <button data-testid="monitor-start" onClick={startMonitor}

@@ -1,6 +1,11 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_lazy_slot_001 + v5_offline_persistence_001** (correctie + uitbreiding):
+  - 🤖 **Lazy slots voor elke user**: `/api/trade/admin/bots` toont nu automatisch elke menselijke user uit `system/users.json` als idle bot-slot (bot-* AI personae uitgesloten). Backend bewees 9 bots zichtbaar (Spark + Willem running + Heidi, joel123, Marieke, Nick, piet, Roadkill, Ron als lazy). User-naam + gradatie meegestuurd voor admin overzicht
+  - 🌙 **Checkbox heroriëntatie**: "Toon in Analytics" → **"Draaien als ik offline ben"**. Functioneel hetzelfde endpoint (`bot/register`), maar semantiek klopt nu met user intent: zichtbaarheid is automatisch, vinkje gaat over persistentie bij logout
+  - 🏷️ **Analytics-kaart toont user-naam**: ipv alleen `user-001` zie je nu "De Willem" + monospace uid kleiner ernaast
+
 - 2026-05-23 **v5_bot_proactive_register_001 + v5_admin_force_sell_001 + v5_admin_bot_cards_001** (~45 credits batch):
   - 🪙 **Proactieve bot-registratie**: nieuwe checkbox "Toon in Analytics" op TraderPage (rechts naast Monitor-knoppen). User kan zijn slot zichtbaar maken in Admin Analytics zonder de bot te starten. Persistent via `/data/trade/registered_users.json`, auto-resumed bij elke server-start
   - 🛑 **Force-sell admin endpoint**: `POST /api/trade/potjes/{user_id}/{pot_id}/force-sell` met admin-only check (gradatie ≤ 1), live Bitvavo prijs voor exit, audit-trail in `/data/trade/force_sell_audit.json`. Waarschuwt voor token-devaluatie

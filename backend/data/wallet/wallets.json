@@ -3,7 +3,7 @@
     "user-001": {
       "balance": 0.0,
       "created_at": "2026-03-29T20:00:00+00:00",
-      "total_deposited": 0,
+      "total_deposited": 50.5,
       "total_withdrawn": 0,
       "total_donated": 0,
       "wallet_id": "user-001",
@@ -206,5 +206,35 @@
       "iban": null
     }
   },
-  "transactions": []
+  "transactions": [
+    {
+      "id": "c197fd03-a8d6-4091-b326-89e23206de87",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 50.5,
+      "amount_eur": 50.5,
+      "status": "completed",
+      "message": "SEPA storting voor ROAR aankoop (admin override)",
+      "source": "Admin Willem self-topup",
+      "created_at": "2026-05-22T20:15:17.936527+00:00",
+      "timestamp": "2026-05-22T20:15:17.936527+00:00"
+    },
+    {
+      "id": "d352f066-92a6-45a4-b2b6-4b2d6f0a3a81",
+      "ts": "2026-05-22T20:15:17.936527+00:00",
+      "timestamp": "2026-05-22T20:15:17.936527+00:00",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 50.5,
+      "token_amount": 5,
+      "amount": 5,
+      "price_eur": 10.1,
+      "price_per_token": 10.1,
+      "total_eur": 50.5,
+      "source": "Wallet (admin price override @ €10.10)",
+      "note": "Aankoop op originele prijs vóór storting; verschil tov live dyn prijs wordt extern verrekend",
+      "description": "5 ROAR gekocht @ €10.1 (override)",
+      "status": "completed"
+    }
+  ]
 }

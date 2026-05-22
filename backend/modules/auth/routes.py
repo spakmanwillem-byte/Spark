@@ -277,6 +277,24 @@ async def reset_password(user_id: str, new_sleutelwoord: Optional[str] = None):
     return {"success": True, "sleutelwoord": result, "message": f"Sleutelwoord gereset naar '{result}'"}
 
 
+# v5_self_password_001 — user kan eigen sleutelwoord wijzigen vanuit Mijn Profiel → Instellingen
+class ChangePasswordRequest(BaseModel):
+    current_sleutelwoord: str
+    new_sleutelwoord: str
+
+
+@router.post("/users/{user_id}/change-password")
+async def change_password(user_id: str, req: ChangePasswordRequest):
+    """
+    Self-service sleutelwoord wijzigen. Vereist huidig sleutelwoord.
+    Gebruik nieuw_sleutelwoord='Welkom01' voor een reset-naar-default.
+    """
+    ok, msg = AuthService.change_password(user_id, req.current_sleutelwoord, req.new_sleutelwoord)
+    if not ok:
+        return {"success": False, "error": msg}
+    return {"success": True, "message": msg}
+
+
 @router.get("/users/{user_id}/time-awareness")
 async def get_time_awareness(user_id: str):
     """v4_025: Wat denkt Spark dat de tijd is voor deze user?

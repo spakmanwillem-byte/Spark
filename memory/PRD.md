@@ -1,6 +1,17 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_self_password_001 + ROAR admin-batch**:
+  - 🔑 **Self-service sleutelwoord wijzigen**: nieuwe `Account` sectie bovenaan Mijn Profiel → Instellingen. User vult huidig + nieuw sleutelwoord in (toon/verberg toggles per veld), klikt "Wijzig sleutelwoord" of "Reset naar Welkom01" (bevestigingsmodal). Backend: `POST /api/auth/users/{user_id}/change-password` body `{current_sleutelwoord, new_sleutelwoord}` met validatie (huidige check, min 4 tekens, niet gelijk aan huidige). Werkt voor reset → nieuwe = "Welkom01"
+  - 🪙 **Admin ROAR batch (Willem +5 @ €10.10 override + 1 gift → Gijs)**:
+    - Nieuwe user **Gijs** aangemaakt (`user-a0ee2d7e`, gradatie 3, sleutelwoord Welkom01)
+    - Willem wallet topup +€50,50 (admin SEPA), 5 tokens gekocht @ €10,10 (override pre-storting prijs)
+    - 1 token gegift Willem → Gijs (welkomstgift, audit-trail in `roar.transactions` + `admin_log`)
+    - Eindstand: Willem 14 ROAR, Gijs 1 ROAR, Spark treasury 5 ROAR
+    - Token-prijs herzakte van €15,16 → €10,11 (precies zoals voorspeld: 151,63 / 15 circulating)
+    - `user_wallets.json` gesynchroniseerd om dual-source consistentie te bewaren
+  - 🔍 **Zip-backup user-verlies bug**: niet reproduceerbaar — Gijs zit met al zijn data IN de `download/full` zip (geverifieerd). Het mtime-filter geldt alleen voor `download/changes` (by-design)
+
 - 2026-05-23 **v5_ui_prefs_001** (Per-user Instellingen-tab in profiel):
   - 🎨 **Mijn Profiel → nieuwe tab "Instellingen"** met 3 secties:
     - **Beeld**: glow basiskleur picker — 8 preset swatches (Amber/Cyan/Violet/Emerald/Roze/Rood/Goud/Blauw) + custom color picker + hex-input. Live preview ring met `box-shadow`. Wijziging direct opgeslagen

@@ -5,7 +5,7 @@ import {
   User, Save, X, Heart, Target, AlertTriangle, Eye, Ear, Brain, Globe,
   Camera, MapPin, Upload, Check, MessageSquare, Calendar,
   Image as ImageIcon, Sparkles, ChevronDown, ChevronRight, Trash2,
-  Backpack, Award, Plus, Settings, Palette, Volume2, Link2,
+  Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw,
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -1084,7 +1084,7 @@ function InstellingenTab({ userId }) {
           </div>
           <div>
             <h2 className="text-sm font-bold text-white">Persoonlijke instellingen</h2>
-            <p className="text-[10px] text-slate-500">Beeld · Geluid · Connecties — geldt alleen voor jouw account</p>
+            <p className="text-[10px] text-slate-500">Account · Beeld · Geluid · Connecties — geldt alleen voor jouw account</p>
           </div>
           {savedFlash && (
             <span className="ml-auto text-[10px] text-emerald-400 flex items-center gap-1">
@@ -1093,6 +1093,9 @@ function InstellingenTab({ userId }) {
           )}
         </div>
       </Panel>
+
+      {/* === ACCOUNT === */}
+      <AccountSection userId={userId} />
 
       {/* === BEELD === */}
       <Panel>
@@ -1260,6 +1263,136 @@ function InstellingenTab({ userId }) {
           </p>
         </div>
       </Panel>
+    </div>
+  );
+}
+
+
+// ============================================================
+// AccountSection (v5_self_password_001) — eigen sleutelwoord wijzigen + reset
+// ============================================================
+function AccountSection({ userId }) {
+  const [currentPw, setCurrentPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState(null);
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+
+  const submitChange = async (newOverride) => {
+    setMsg(null);
+    if (!currentPw) {
+      setMsg({ kind: 'err', text: 'Vul je huidige sleutelwoord in' });
+      return;
+    }
+    const target = (newOverride ?? newPw).trim();
+    if (!target) {
+      setMsg({ kind: 'err', text: 'Vul een nieuw sleutelwoord in' });
+      return;
+    }
+    setBusy(true);
+    try {
+      const res = await fetch(`${API}/api/auth/users/${userId}/change-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ current_sleutelwoord: currentPw, new_sleutelwoord: target }),
+      }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbindingsfout' }));
+      if (res.success) {
+        setMsg({ kind: 'ok', text: newOverride ? 'Gereset naar Welkom01' : 'Sleutelwoord gewijzigd' });
+        setCurrentPw('');
+        setNewPw('');
+      } else {
+        setMsg({ kind: 'err', text: res.error || 'Onbekende fout' });
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div data-testid="account-section" className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <KeyRound className="w-4 h-4 text-rose-400" />
+        <h3 className="text-sm font-semibold text-white">Account — Sleutelwoord</h3>
+      </div>
+      <p className="text-[11px] text-slate-400 mb-3">
+        Wijzig je eigen sleutelwoord. Reset zet hem terug op <code className="text-rose-300 bg-rose-500/10 px-1 rounded">Welkom01</code> (standaard).
+      </p>
+
+      <div className="space-y-2.5 max-w-md">
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Huidig sleutelwoord</label>
+          <div className="relative">
+            <input
+              type={showCurrent ? 'text' : 'password'}
+              data-testid="pw-current"
+              value={currentPw}
+              onChange={e => setCurrentPw(e.target.value)}
+              placeholder="•••••••"
+              className="w-full px-3 py-2 pr-16 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-rose-500/50 outline-none"
+            />
+            <button type="button" data-testid="pw-current-toggle"
+              onClick={() => setShowCurrent(v => !v)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-white px-1.5 py-0.5">
+              {showCurrent ? 'verberg' : 'toon'}
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Nieuw sleutelwoord</label>
+          <div className="relative">
+            <input
+              type={showNew ? 'text' : 'password'}
+              data-testid="pw-new"
+              value={newPw}
+              onChange={e => setNewPw(e.target.value)}
+              placeholder="minstens 4 tekens"
+              className="w-full px-3 py-2 pr-16 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-rose-500/50 outline-none"
+            />
+            <button type="button" data-testid="pw-new-toggle"
+              onClick={() => setShowNew(v => !v)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-white px-1.5 py-0.5">
+              {showNew ? 'verberg' : 'toon'}
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <button
+            data-testid="pw-change-btn"
+            onClick={() => submitChange()}
+            disabled={busy || !currentPw || !newPw}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <Save className="w-3.5 h-3.5" /> Wijzig sleutelwoord
+          </button>
+          <button
+            data-testid="pw-reset-btn"
+            onClick={() => {
+              if (window.confirm('Reset je sleutelwoord naar "Welkom01"?')) submitChange('Welkom01');
+            }}
+            disabled={busy || !currentPw}
+            title={!currentPw ? 'Vul eerst je huidige sleutelwoord in' : 'Reset naar Welkom01'}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <RotateCcw className="w-3.5 h-3.5" /> Reset naar Welkom01
+          </button>
+
+          {msg && (
+            <span
+              data-testid="pw-msg"
+              className={`text-[11px] ml-auto px-2 py-1 rounded ${msg.kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300' : 'bg-red-500/10 text-red-300'}`}
+            >
+              {msg.text}
+            </span>
+          )}
+        </div>
+
+        <p className="text-[10px] text-slate-500 pt-1">
+          Tip: na een wijziging blijf je ingelogd op deze sessie. Bij volgende login gebruik je het nieuwe sleutelwoord.
+        </p>
+      </div>
     </div>
   );
 }

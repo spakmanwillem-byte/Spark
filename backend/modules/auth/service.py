@@ -324,6 +324,33 @@ class AuthService:
                     print(f"[AUTH] Password reset: {user.get('naam')} -> {new_sleutelwoord}")
                     return new_sleutelwoord
         return None
+
+    @staticmethod
+    def change_password(user_id: str, current_sleutelwoord: str, new_sleutelwoord: str) -> Tuple[bool, str]:
+        """
+        Self-service change: verifieer huidig sleutelwoord en zet nieuwe.
+        Returns (success, message).
+        v5_self_password_001: gebruiker kan eigen sleutelwoord wijzigen zonder admin.
+        """
+        if not current_sleutelwoord or not new_sleutelwoord:
+            return False, "Geef huidig én nieuw sleutelwoord op"
+        if len(new_sleutelwoord) < 4:
+            return False, "Nieuw sleutelwoord moet minstens 4 tekens hebben"
+        if current_sleutelwoord == new_sleutelwoord:
+            return False, "Nieuw sleutelwoord is gelijk aan het huidige"
+        users = AuthService.get_all_users()
+        for user in users:
+            if user.get("id") == user_id:
+                if (user.get("sleutelwoord") or "") != current_sleutelwoord:
+                    return False, "Huidig sleutelwoord klopt niet"
+                user["sleutelwoord"] = new_sleutelwoord
+                user["sleutelwoord_changed_op"] = datetime.utcnow().isoformat()
+                if AuthService._save_users(users):
+                    print(f"[AUTH] Password self-change: {user.get('naam')}")
+                    return True, "Sleutelwoord gewijzigd"
+                return False, "Opslaan mislukt"
+        return False, "Gebruiker niet gevonden"
+
     
     # ============== GRADATIE SYSTEM ==============
     

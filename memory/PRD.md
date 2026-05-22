@@ -1,7 +1,18 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
-- 2026-05-23 **v5_foto_subtabs_001 + ROAR gift naar Nick**:
+- 2026-05-23 **v5_leaderboard_avatars_001 + v5_milestone_unlocks_001 + ROAR-gift Nick + monitors live**:
+  - 🥇 **Leaderboard top 3 podium + lijst**: letters vervangen door echte `UserAvatar` component met gallery-image / user-upload / roadkill-fallback. Geen "naam[0]" meer
+  - 🏆 **3 nieuwe achievements** (categorie "milestones", elk 50 XP):
+    - `milestone_avatar_chose` — avatar gekozen uit galerij (trigger: `/avatar/select`)
+    - `milestone_avatar_uploaded` — eigen avatar geüpload (trigger: `/avatar/user/{id}` upload)
+    - `milestone_first_roar_token` — eerste ROAR token op wallet (trigger: koop bij prev_balance=0)
+  - 🪝 **Cross-module hook** `unlock_milestone(user_id, achievement_id)` in `achievements/service.py` — herbruikbaar voor toekomstige mijlpalen
+  - 📢 **Notification-bark** bij eerste ROAR token met uitleg over Trader monitor (in `data/notifications/notifications.json`, per-user)
+  - 🪙 **Nick** kreeg 1 ROAR welkomstgift. Beide nieuwe users (Gijs + Nick) hebben monitor draaiend: **BCH-EUR @ 1h candles, auto_trade=false**
+  - 🎯 Retroactieve unlock voor bestaande users: Willem kreeg "avatar chose" (had al avatar), Gijs+Nick kregen "first ROAR token" + notification
+
+- 2026-05-23 **v5_foto_subtabs_001 + ROAR gift naar Nick** (eerder vandaag):
   - 🪙 **Nick** (`user-574ac78e`) ontving 1 ROAR welkomstgift van Willem. Eindstand: Willem 13, Gijs 1, Nick 1, Spark treasury 5. Audit-trail in `roar_balances.transactions` + `admin_log`, `user_wallets.json` gesynchroniseerd
   - 📦 **Avatar Galerij verplaatst** van losse kaart bovenaan Archief → naar `Foto` sub-tab binnen `SystemArchive`. Logica: SystemArchive heeft tabs Bestanden/Foto/Geluiden/Filmpjes/Dialogen — avatars ZIJN foto's, dus horen onder Foto
   - 🗂️ **Sub-tabs binnen Foto**:

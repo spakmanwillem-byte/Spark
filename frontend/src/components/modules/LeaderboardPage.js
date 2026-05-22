@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
+import { UserAvatar } from '../common/UserAvatar';
 import {
   Award, Trophy, Crown, Star, Medal,
   BookOpen, Flame
@@ -70,9 +71,15 @@ export function LeaderboardPage({ onNavigate }) {
               return (
                 <div key={idx} className={`flex flex-col items-center ${isFirst ? 'order-2' : idx === 1 ? 'order-1' : 'order-3'}`}>
                   <RankIcon className="w-5 h-5 mb-2" style={{ color: rankColors[idx] || '#64748b' }} />
-                  <div className={`rounded-2xl flex items-center justify-center text-white font-bold border-2 ${isFirst ? 'w-20 h-20 text-2xl' : 'w-16 h-16 text-xl'}`}
-                    style={{ background: `linear-gradient(135deg, ${rankColors[idx]}40, ${rankColors[idx]}20)`, borderColor: `${rankColors[idx]}60` }}>
-                    {p.naam[0]}
+                  <div
+                    className="rounded-2xl border-2 overflow-hidden"
+                    style={{ borderColor: `${rankColors[idx]}60`, boxShadow: `0 0 18px ${rankColors[idx]}40` }}
+                  >
+                    <UserAvatar
+                      user={{ id: p.user_id, naam: p.naam, avatar: p.avatar_ref, gradatie: p.gradatie }}
+                      size={isFirst ? 'xl' : 'lg'}
+                      rounded="rounded-2xl"
+                    />
                   </div>
                   <p className="text-sm text-white font-semibold mt-2">{p.naam}</p>
                   <p className="text-xs text-amber-400 font-medium">{(p.xp || 0).toLocaleString()} XP</p>
@@ -113,18 +120,11 @@ export function LeaderboardPage({ onNavigate }) {
                     style={i < 3 ? { background: rankColors[i] } : {}}>
                     {i + 1}
                   </div>
-                  <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center text-white font-bold flex-shrink-0"
-                    style={p.avatar_ref ? {} : { background: `linear-gradient(135deg, ${['#f59e0b', '#3b82f6', '#22c55e', '#a855f7'][i % 4]}, ${['#ea580c', '#6366f1', '#10b981', '#ec4899'][i % 4]})` }}>
-                    {p.avatar_ref && p.avatar_ref.startsWith('gallery:') ? (
-                      <img src={`${API}/api/avatar/gallery/${p.avatar_ref.split(':')[1]}/image`} alt={p.naam}
-                        className="w-full h-full object-cover"
-                        onError={(e) => { e.target.style.display = 'none'; }} />
-                    ) : p.avatar_ref && p.avatar_ref.startsWith('emoji:') ? (
-                      <span className="text-xl">{p.avatar_ref.split(':')[1]}</span>
-                    ) : (
-                      <span>{(p.naam || '?')[0]}</span>
-                    )}
-                  </div>
+                  <UserAvatar
+                    user={{ id: p.user_id, naam: p.naam, avatar: p.avatar_ref, gradatie: p.gradatie }}
+                    size="md"
+                    rounded="rounded-xl"
+                  />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="text-sm font-semibold text-white">{p.naam}</h3>

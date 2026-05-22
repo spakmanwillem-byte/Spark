@@ -73,6 +73,42 @@ class AchievementService:
             "total_xp_available": sum(a.get("xp_reward", 0) for a in achievements),
         }
 
+    # v5_milestone_unlocks_001 — handmatig unlock voor non-milestone achievements (avatar, tokens, etc.)
+    def unlock_manual(self, user_id: str, achievement_id: str) -> dict:
+        """Unlock een specifieke achievement voor een user (indien nog niet unlocked).
+        Returns: {success, already_unlocked, xp_granted, achievement|None}
+        """
+        user = self._get_user(user_id)
+        if not user:
+            return {"success": False, "error": "Gebruiker niet gevonden"}
+        achievements = self._get_achievements()
+        target = next((a for a in achievements if a.get("id") == achievement_id), None)
+        if not target:
+            return {"success": False, "error": f"Achievement {achievement_id} bestaat niet"}
+        user_ach = user.get("achievements", {}) or {}
+        unlocked = list(user_ach.get("unlocked", []))
+        if any(u.get("id") == achievement_id for u in unlocked):
+            return {"success": True, "already_unlocked": True, "achievement": target}
+        entry = {
+            "id": target["id"], "name": target["name"], "description": target["description"],
+            "milestone": target.get("milestone", 0), "xp_reward": target.get("xp_reward", 0),
+            "icon": target.get("icon", ""), "rarity": target.get("rarity", "common"),
+            "unlocked_at": datetime.now(timezone.utc).isoformat(),
+        }
+        unlocked.append(entry)
+        total_xp = user_ach.get("total_xp_from_achievements", 0) + target.get("xp_reward", 0)
+        self._save_user(user_id, {
+            "achievements": {"unlocked": unlocked, "total_xp_from_achievements": total_xp},
+        })
+        try:
+            from modules.chat import xp_service
+            reward = target.get("xp_reward", 0)
+            if reward > 0:
+                xp_service.grant_xp(user_id=user_id, amount=reward, reason=f"Achievement: {target.get('name','?')}")
+        except Exception as ex:
+            print(f"[achievements] grant_xp failed: {ex}")
+        return {"success": True, "already_unlocked": False, "achievement": entry, "xp_granted": target.get("xp_reward", 0)}
+
     def get_user_progress(self, user_id):
         """Calculate user's achievement progress based on knowledge count"""
         user = self._get_user(user_id)
@@ -89,8 +125,10 @@ class AchievementService:
         total_xp = user_ach.get("total_xp_from_achievements", 0)
 
         # Check retroactive: auto-unlock any milestone that word_count already passed
+        # v5_milestone_unlocks_001: skip trigger-based milestones (geen "milestone" int veld)
         newly_unlocked = []
-        for ach in sorted(achievements, key=lambda a: a.get("milestone", 0)):
+        word_milestones = [a for a in achievements if isinstance(a.get("milestone"), int)]
+        for ach in sorted(word_milestones, key=lambda a: a.get("milestone", 0)):
             if ach["id"] not in unlocked_ids and word_count >= ach.get("milestone", 0):
                 unlock_entry = {
                     "id": ach["id"], "name": ach["name"], "description": ach["description"],
@@ -124,9 +162,9 @@ class AchievementService:
             except Exception as ex:
                 print(f"[achievements] grant_xp failed: {ex}")
 
-        # Find next milestone
+        # Find next milestone (alleen word-based)
         next_milestone = None
-        for ach in sorted(achievements, key=lambda a: a.get("milestone", 0)):
+        for ach in sorted(word_milestones, key=lambda a: a.get("milestone", 0)):
             if ach["id"] not in unlocked_ids:
                 next_milestone = {
                     **ach,
@@ -151,3 +189,13 @@ class AchievementService:
             "next_milestone": next_milestone,
             "newly_unlocked": newly_unlocked,
         }
+
+
+# Module-level convenience (v5_milestone_unlocks_001)
+_service_singleton = AchievementService()
+
+
+def unlock_milestone(user_id: str, achievement_id: str) -> dict:
+    """Cross-module hook: unlock een mijlpaal-achievement (avatar, first token, etc.)."""
+    return _service_singleton.unlock_manual(user_id, achievement_id)
+

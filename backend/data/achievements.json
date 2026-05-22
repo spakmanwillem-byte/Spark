@@ -15,6 +15,12 @@
       "description": "Achievements voor kennisbank-bijdragen via portaal",
       "icon": "🤝",
       "xp_multiplier": 1.0
+    },
+    "milestones": {
+      "name": "Mijlpalen",
+      "description": "Eenmalige mijlpalen (avatar, tokens, eerste handelingen)",
+      "icon": "🏁",
+      "xp_multiplier": 1.0
     }
   },
   "achievements": [
@@ -188,11 +194,41 @@
       "xp_reward": 500,
       "icon": "🎯",
       "rarity": "epic"
+    },
+    {
+      "id": "milestone_avatar_chose",
+      "type": "milestones",
+      "name": "Ik koos een Avatar",
+      "description": "Je hebt een avatar gekozen uit de galerij i.p.v. de standaard.",
+      "trigger": "avatar_chose",
+      "xp_reward": 50,
+      "icon": "🖼️",
+      "rarity": "common"
+    },
+    {
+      "id": "milestone_avatar_uploaded",
+      "type": "milestones",
+      "name": "Eigen Avatar",
+      "description": "Je hebt je eigen avatar geüpload — uniek herkenbaar.",
+      "trigger": "avatar_uploaded",
+      "xp_reward": 50,
+      "icon": "🤳",
+      "rarity": "common"
+    },
+    {
+      "id": "milestone_first_roar_token",
+      "type": "milestones",
+      "name": "I got a ROAR Token",
+      "description": "Eerste ROAR token op je wallet — welkom in de Spark-economie.",
+      "trigger": "first_roar_token",
+      "xp_reward": 50,
+      "icon": "🪙",
+      "rarity": "uncommon"
     }
   ],
   "meta": {
-    "total_achievements": 13,
-    "total_xp_available": 141850,
+    "total_achievements": 16,
+    "total_xp_available": 142000,
     "future_types": [
       "bugs_fixed",
       "snaps_created",

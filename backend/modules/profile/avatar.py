@@ -230,6 +230,16 @@ async def upload_user_portrait(user_id: str, file: UploadFile = File(...)):
     dest = USERS_DIR / user_id / "avatar.jpg"
     info = _resize_and_save(raw, dest)
     _set_user_avatar(user_id, "user")
+
+    # v5_milestone_unlocks_001: unlock "Eigen Avatar" achievement
+    try:
+        from modules.achievements.service import unlock_milestone
+        unlock_milestone(user_id, "milestone_avatar_uploaded")
+        # En ook avatar_chose, want hij heeft uiteraard een keuze gemaakt
+        unlock_milestone(user_id, "milestone_avatar_chose")
+    except Exception as ex:
+        print(f"[avatar] milestone unlock failed: {ex}")
+
     return {
         "success": True,
         "width": info["w"],
@@ -295,6 +305,14 @@ async def select_avatar(user_id: str, body: AvatarSelect):
             raise HTTPException(403, f"Deze avatar is exclusief voor {owner}")
         avatar_title = entry.get("title")
     _set_user_avatar(user_id, ref)
+
+    # v5_milestone_unlocks_001: unlock "Ik koos een Avatar" achievement
+    if ref:
+        try:
+            from modules.achievements.service import unlock_milestone
+            unlock_milestone(user_id, "milestone_avatar_chose")
+        except Exception as ex:
+            print(f"[avatar] milestone unlock failed: {ex}")
 
     # v4_dnd_001: log Spark-observatie zodat hij hem kan benoemen in volgende gesprek
     try:

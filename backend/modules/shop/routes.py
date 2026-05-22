@@ -25,8 +25,46 @@ TOTAL_SUPPLY = 1_000_000
 BASE_PRICE = 5.08  # Vaste prijs voor eerste 10 tokens
 FIXED_PRICE_LIMIT = 10  # Na 10 tokens: dynamische prijs
 
+NOTIF_FILE = DATA_DIR / "notifications" / "notifications.json"
+
 # Cache voor live Bitvavo balance (30s)
 _bitvavo_cache = {"value": None, "timestamp": 0}
+
+
+# v5_milestone_unlocks_001 — trigger achievement + per-user notification bark bij eerste ROAR token
+def _trigger_first_roar_token(user_id: str):
+    """Wordt aangeroepen wanneer user voor het eerst een ROAR token ontvangt (prev_balance==0)."""
+    try:
+        from modules.achievements.service import unlock_milestone
+        unlock_milestone(user_id, "milestone_first_roar_token")
+    except Exception as ex:
+        print(f"[shop] milestone unlock failed: {ex}")
+    # Per-user bark / notification met monitor-uitleg
+    try:
+        notif_file = NOTIF_FILE
+        notif_file.parent.mkdir(parents=True, exist_ok=True)
+        data = load_json(notif_file, default={"notifications": []})
+        data.setdefault("notifications", []).append({
+            "id": str(uuid.uuid4()),
+            "user_id": user_id,
+            "kind": "first_roar_token",
+            "icon": "🪙",
+            "title": "Je eerste ROAR token is binnen",
+            "message": (
+                "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. "
+                "Met dit token kun je nu een eigen Trader monitor starten via de Trader-module. "
+                "Hoe het werkt:\n\n"
+                "• De monitor luistert naar 1 markt (bv BCH-EUR) en analyseert de candles\n"
+                "• Bij auto-trade aan koopt en verkoopt hij automatisch volgens de signalen\n"
+                "• Je kunt hem altijd pauzeren of stoppen — Spark's eigen monitor blijft draaien\n\n"
+                "Veel succes!"
+            ),
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "read": False,
+        })
+        save_json(notif_file, data)
+    except Exception as ex:
+        print(f"[shop] notification create failed: {ex}")
 
 
 def get_roar_data():
@@ -246,8 +284,13 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     wallets["wallets"][user_id]["balance"] = round(user_wallet["balance"] - amount_eur, 2)
 
     # 2. Transfer ROAR (hele tokens)
+    prev_user_roar = roar.get("balances", {}).get(user_id, 0)
     roar["balances"]["user-000"] = spark_bal - amount_tokens
-    roar["balances"][user_id] = roar.get("balances", {}).get(user_id, 0) + amount_tokens
+    roar["balances"][user_id] = prev_user_roar + amount_tokens
+
+    # v5_milestone_unlocks_001: trigger "First ROAR Token" achievement + bark
+    if prev_user_roar == 0 and amount_tokens > 0:
+        _trigger_first_roar_token(user_id)
 
     # 3. Log transaction
     tx = {

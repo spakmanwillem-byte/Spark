@@ -1,6 +1,10 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v4_welcome_bark_001 + v4_trader_label_swap_001** (mini-batch ~30 credits):
+  - ✨ **Welkom-bark voor eerste login** (`welcome_v1`, kind="welcome"): legt uit dat je gewoon een gesprek voert en dat je `help` typt voor een overzicht. Auto-injected in `version_anchor.json` voor zowel verse installs als bestaande deployments. Beschermd tegen verwijderen. Eigen styling (groene Hand-icon) in `BarkQueueOverlay`. Sortering: privacy → welcome → rest
+  - 🔄 **Trader wallet-switch labels omgedraaid**: `walletView='me'` (user-001) is nu zichtbaar als "🌟 Spark", `walletView='spark'` (user-000 default) als "👤 Mijn". Routing ongewijzigd, alleen labels swap conform user feedback ("tabs zijn wel goed maar namen moeten andersom")
+
 - 2026-05-22 #3: **v4_dnd_001 — Levende Spark World fundering** (9/9 backend + e2e):
   - 📜 **Lore index** (`/data/dnd/lore_index.json`): 7 avatars-as-functions (Het Eerste Licht=begin, De Reaper=einde, De Boekhouder=balans, Harry=tijd, Madelief=emotie, Mr Smith=manipulatie, The Story Teller=geheugen), 6 behavior-categorieën (observeren/luisteren/zwijgen/helpen/verhalen/manipuleren) met aura-kleuren en unlock-lijsten
   - 🎨 **Aura/Glow systeem**: `GET /api/dnd/aura/{user_id}` berekent live uit behavior counters de top-3 categorieën met kleuren. Op Persoonskaart visueel als gradient-glow + 2-bar layers + unlock-pills

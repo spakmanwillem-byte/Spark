@@ -1,7 +1,7 @@
 // v4_update_bark_001 — Bark queue overlay
 // Toont pending barks (privacy + deploy updates) bij login. User klikt door, marked as seen.
 import React, { useState, useEffect, useCallback } from 'react';
-import { Sparkles, ChevronRight, Shield, Rocket, Star, X } from 'lucide-react';
+import { Sparkles, ChevronRight, Shield, Rocket, Star, X, Hand } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -9,6 +9,7 @@ const KIND_STYLES = {
   privacy: { icon: Shield, accent: '#06b6d4', tag: 'PRIVACY' },
   deploy: { icon: Rocket, accent: '#f59e0b', tag: 'UPDATE' },
   feature: { icon: Star, accent: '#a855f7', tag: 'FEATURE' },
+  welcome: { icon: Hand, accent: '#10b981', tag: 'WELKOM' },
 };
 
 export function BarkQueueOverlay({ userId, onAllSeen }) {
@@ -103,7 +104,7 @@ export function BarkQueueOverlay({ userId, onAllSeen }) {
           <button onClick={dismiss} disabled={busy} data-testid="bark-dismiss"
             className="px-5 py-2 rounded-lg text-sm font-medium text-white transition-colors flex items-center gap-2 disabled:opacity-50"
             style={{ background: style.accent }}>
-            {total > 1 ? 'Volgende' : (active.kind === 'privacy' ? 'Akkoord' : 'Begrepen')}
+            {total > 1 ? 'Volgende' : (active.kind === 'privacy' ? 'Akkoord' : (active.kind === 'welcome' ? 'Laten we beginnen' : 'Begrepen'))}
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>

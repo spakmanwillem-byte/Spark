@@ -66,6 +66,25 @@ DEFAULT_PRIVACY_BARK = {
     "audience": "all",
 }
 
+# v4_welcome_bark_001 — Eerste-login welkom bark, legt conversatie-stijl + 'help' commando uit.
+DEFAULT_WELCOME_BARK = {
+    "id": "welcome_v1",
+    "kind": "welcome",
+    "anchored_at": "2026-05-23T00:00:00+00:00",
+    "anchored_by": "system",
+    "title": "Welkom — zo praat je met Spark",
+    "message": (
+        "Fijn dat je er bent. Even hoe het werkt:\n\n"
+        "• Praat gewoon zoals je tegen iemand praat — vragen, gedachten, korte zinnen, lange verhalen, allemaal goed.\n"
+        "• Spark luistert mee, onthoudt wat belangrijk is, en reageert vanuit de context van het gesprek.\n"
+        "• Wil je weten waar Spark allemaal op reageert? Type dan het woord **help** in de chat. Je krijgt dan een overzicht van alle dingen die je kunt zeggen of vragen.\n\n"
+        "Geen knoppen-jacht nodig. Begin gewoon."
+    ),
+    "icon": "✨",
+    "roadmap_ref": None,
+    "audience": "all",
+}
+
 
 def _is_admin(user_id: str) -> bool:
     users = load_json(USERS_FILE, default={"users": []}).get("users", [])
@@ -76,8 +95,13 @@ def _is_admin(user_id: str) -> bool:
 def _load_anchors() -> dict:
     data = load_json(ANCHOR_FILE, default={})
     if not data or "barks" not in data:
-        # Bootstrap: voeg privacy bark toe
-        data = {"barks": [dict(DEFAULT_PRIVACY_BARK)], "current": None}
+        # Bootstrap: voeg privacy + welcome bark toe
+        data = {"barks": [dict(DEFAULT_PRIVACY_BARK), dict(DEFAULT_WELCOME_BARK)], "current": None}
+        save_json(ANCHOR_FILE, data)
+        return data
+    # v4_welcome_bark_001 — zorg dat welkom bark er ook is voor bestaande installaties
+    if not any(b.get("id") == DEFAULT_WELCOME_BARK["id"] for b in data.get("barks", [])):
+        data["barks"].append(dict(DEFAULT_WELCOME_BARK))
         save_json(ANCHOR_FILE, data)
     return data
 
@@ -172,8 +196,8 @@ async def create_anchor(body: AnchorBody):
 async def delete_anchor(anchor_id: str, viewer_id: str):
     if not _is_admin(viewer_id):
         raise HTTPException(403, "Alleen admins mogen verwijderen")
-    if anchor_id == "privacy_v1":
-        raise HTTPException(400, "Privacy bark is niet te verwijderen")
+    if anchor_id in ("privacy_v1", "welcome_v1"):
+        raise HTTPException(400, "System bark is niet te verwijderen")
     data = _load_anchors()
     before = len(data.get("barks", []))
     data["barks"] = [b for b in data.get("barks", []) if b.get("id") != anchor_id]
@@ -199,8 +223,9 @@ async def pending_barks(user_id: str):
         if (b.get("audience") or "all") == "admins" and not is_admin:
             continue
         pending.append(b)
-    # Privacy-bark eerst, dan chronologisch
-    pending.sort(key=lambda x: (x.get("kind") != "privacy", x.get("anchored_at") or ""))
+    # Privacy eerst, dan welcome, dan chronologisch
+    _kind_order = {"privacy": 0, "welcome": 1}
+    pending.sort(key=lambda x: (_kind_order.get(x.get("kind"), 9), x.get("anchored_at") or ""))
     return {"pending": pending, "count": len(pending)}
 
 

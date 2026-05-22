@@ -1,7 +1,16 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
-- 2026-05-22 #2: **v4_update_bark_001 + v4_avatar_categories_001 + v4_dnd_help_001** (16/16 backend + frontend e2e):
+- 2026-05-22 #3: **v4_dnd_001 — Levende Spark World fundering** (9/9 backend + e2e):
+  - 📜 **Lore index** (`/data/dnd/lore_index.json`): 7 avatars-as-functions (Het Eerste Licht=begin, De Reaper=einde, De Boekhouder=balans, Harry=tijd, Madelief=emotie, Mr Smith=manipulatie, The Story Teller=geheugen), 6 behavior-categorieën (observeren/luisteren/zwijgen/helpen/verhalen/manipuleren) met aura-kleuren en unlock-lijsten
+  - 🎨 **Aura/Glow systeem**: `GET /api/dnd/aura/{user_id}` berekent live uit behavior counters de top-3 categorieën met kleuren. Op Persoonskaart visueel als gradient-glow + 2-bar layers + unlock-pills
+  - 📊 **Behavior tracking**: `POST /api/dnd/track` increment counters (help_msg, kb_create, lie_detected, etc.). Hyperlinks gedrag → identiteit zoals besproken
+  - 🌍 **World state**: `GET /api/dnd/world-state` aggregert ALLE user-counters tot per-entiteit dominantie. Wanneer >60% = `dominant=true` flag → klaar voor aspect-bark trigger
+  - 👁️ **Spark observatie systeem**: avatar-change → automatische `observe`-call. Bij Spark AI tab eerste-open → `GET /api/dnd/spark-greeting/{user_id}` levert Nederlandse begroeting met benoeming van events. Mark-spoken zorgt geen herhaling
+  - 🗺️ **Roadmap Phase D&D**: nieuwe fase met 14 sub-tasks, anchor-IDs zoals `#phase-dnd-aura` voor permalinks. Update-barks kunnen nu `roadmap_ref="phase-dnd-aura"` doorgeven → klikbare link
+  - 🔗 **Bark roadmap_ref klikbaar**: opent /roadmap#anchor in nieuwe tab
+
+ + v4_avatar_categories_001 + v4_dnd_help_001** (16/16 backend + frontend e2e):
   - 🚀 **Deploy Anker + Update Bark systeem**: Admin klikt na deploy "Nieuwe anker" met versie + message → bark wordt automatisch getoond aan iedereen bij volgende login. Endpoints: `/api/deploy/anchor`, `/api/deploy/anchors`, `/api/deploy/pending/{user_id}`, `/api/deploy/seen`, `/api/deploy/reset-seen`. Per-user `seen_barks.json` zorgt dat elke bark maar 1x getoond wordt
   - 🔒 **Privacy/Voorwaarden bark** (privacy_v1) wordt automatisch geseed: ELKE user ziet 'm 1x bij eerste login. Niet te verwijderen. Tekst: "Wij volgen je niet, geen tracking-cookies, alle data lokaal in JSON, etc."
   - 🎨 **BarkQueueOverlay** component: cyaan voor privacy, amber voor deploy, lila voor feature. Counter (1/2). Geen-skip → user moet doorklikken. Mounts in MainLayout

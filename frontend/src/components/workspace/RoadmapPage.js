@@ -359,7 +359,7 @@ export function RoadmapPage({ onNavigate }) {
                       const itemId = item.anchor ? `${phase.id}-${item.anchor}` : `${phase.id}-i${i}`;
                       return (
                         <div key={i} id={itemId}
-                          className="flex items-center gap-2.5 py-1.5 px-3 rounded-lg hover:bg-slate-800/30 transition-colors target:bg-amber-500/10 target:ring-1 target:ring-amber-500/40">
+                          className="group flex items-center gap-2.5 py-1.5 px-3 rounded-lg hover:bg-slate-800/30 transition-colors target:bg-amber-500/10 target:ring-1 target:ring-amber-500/40">
                           {item.status === 'done'
                             ? <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
                             : item.status === 'active'

@@ -172,6 +172,25 @@ const phases = [
       { title: '🌫️ Vervormde verhalen (canon herschrijven via consensus)', status: 'planned', anchor: 'dynamic-canon' },
     ],
   },
+  {
+    id: 'phase-v065',
+    title: 'Deploy v0.6.5: Levende Wallet & Trader',
+    status: 'done',
+    color: '#22c55e',
+    icon: Rocket,
+    period: '23 mei 2026',
+    items: [
+      { title: '✨ Welkom-bark eerste login (praat gewoon + type "help")', status: 'done', anchor: 'welcome-bark' },
+      { title: '🔄 Trader & Wallet admin switch (Mijn / Spark)', status: 'done', anchor: 'admin-switch' },
+      { title: '🤖 Spark trader hourly auto-start (server-persistent)', status: 'done', anchor: 'spark-autostart' },
+      { title: '💰 €96.52 bijstorting → 10/10 ROAR tokens verdeeld', status: 'done', anchor: 'tokens-10-10' },
+      { title: '💸 Saldo €0 = vrij cash, vermogen zit in 10 potjes', status: 'done', anchor: 'saldo-potjes-split' },
+      { title: '🪙 Lazy bot-slot per user (auto zichtbaar in Analytics)', status: 'done', anchor: 'lazy-slots' },
+      { title: '🌙 Checkbox "Draaien als ik offline ben" (persistentie)', status: 'done', anchor: 'offline-persist' },
+      { title: '🛑 Admin force-sell per potje (audit + warning modal)', status: 'done', anchor: 'force-sell' },
+      { title: '📊 Analytics bot-kaart redesign (uitklap + history)', status: 'done', anchor: 'bot-cards' },
+    ],
+  },
 ];
 
 export function RoadmapPage({ onNavigate }) {

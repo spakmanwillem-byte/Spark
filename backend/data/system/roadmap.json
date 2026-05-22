@@ -1729,6 +1729,99 @@
           "volgende_fase": "In v5.0: Uitbreiden met AI-assisted code completion (GitHub Copilot-achtig), maar user blijft altijd driver."
         }
       ]
+    },
+    "v0.6.5": {
+      "naam": "🚀 Deploy v0.6.5 — Levende Wallet & Trader",
+      "beschrijving": "Welkom-bark + 19 tokens uitgegeven + Spark trader hourly lock + lazy bot-slots per user + admin force-sell + saldo/potjes scheiding",
+      "status": "done",
+      "progress": 100,
+      "start_date": "2026-05-22",
+      "completed_date": "2026-05-23",
+      "phase": "spark_world",
+      "notes": "Eerste batch na productie-deploy v0.6.4. €96.52 SEPA bijstorting → 10/10 tokens Spark+Willem. Trader saldo=0 (vermogen in potjes), elke user een idle bot-slot in Analytics.",
+      "items": [
+        {
+          "id": "v065_001",
+          "titel": "Welkom-bark voor eerste login",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "welcome_v1 in version_anchor: legt uit dat user gewoon een gesprek voert en 'help' typt voor overzicht. Eigen Hand-icon styling, protected against delete. Sortering Privacy → Welkom → Updates.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_002",
+          "titel": "Trader & Wallet admin switch (👤 Mijn / 🌟 Spark)",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "Beide pagina's krijgen identieke toggle in header (admin only, gradatie ≤ 1). sessionStorage-persistent. Subtitle past zich aan per view. Labels in eerste deploy verkeerd om — gefixed.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_003",
+          "titel": "Spark trader schone start + hourly autostart",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "notes": "user-001 trade_history gearchiveerd → 0 trades. bots_registry_state.json zorgt voor auto-resume bij elke server start (interval 3600s, 5 markets). Baseline = €101.60 (matcht live Bitvavo).",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_004",
+          "titel": "€96.52 bijstorting → 10/10 tokens verdeling",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "notes": "19 ROAR tokens à €5.08 uitgegeven (Spark 1→10, Willem 0→10). Treasury 999999→999980. Deposit geregistreerd, baseline auto-bumped €5.08 → €101.60.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_005",
+          "titel": "Saldo / vermogen-in-potjes scheiding",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "Wallet 'balance_eur' = vrij liggend cash (€0 voor beiden). Vermogen zit in 10 potjes × €5.08 = €50.80 in Bitvavo per kant. Reset-log entry met de uitleg toegevoegd.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_006",
+          "titel": "Lazy bot-slot per user in Analytics",
+          "status": "done",
+          "priority": "high",
+          "progress": 100,
+          "notes": "/api/trade/admin/bots toont automatisch elke menselijke user uit users.json als idle slot. bot-* AI personae uitgesloten. 9 slots zichtbaar (Spark + 8 mensen). Naam+gradatie meegestuurd.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_007",
+          "titel": "Checkbox 'Draaien als ik offline ben'",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "TraderPage: opt-in voor persistente bot (auto-resume na logout). Endpoint /api/trade/bot/register|unregister. Voor user-zelf, niet voor admin-zichtbaarheid (die is altijd aan).",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_008",
+          "titel": "Admin Force-sell per potje",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "POST /api/trade/potjes/{uid}/{pot_id}/force-sell met admin-only (gradatie ≤ 1) + live Bitvavo prijs + audit-trail (force_sell_audit.json). Dubbele bevestiging modal in UI + waarschuwing voor token-devaluatie.",
+          "completed_date": "2026-05-23"
+        },
+        {
+          "id": "v065_009",
+          "titel": "Analytics bot-kaart redesign (uitklap)",
+          "status": "done",
+          "priority": "medium",
+          "progress": 100,
+          "notes": "Per-bot uitklap toont: potjes-tabel (#/status/market/capital/live/entry/trades/P&L) en laatste 8 trades. User-naam prominent, uid klein erachter. 'slot leeg (niet gestart)' voor lazy slots.",
+          "completed_date": "2026-05-23"
+        }
+      ]
     }
   },
   "metadata": {
@@ -4795,5 +4888,98 @@
     "2026-03-28: v4.1 COMPLEET - Module Sandbox live. 3-Layer Architecture (Trigger→NLP→Knowledge) vastgelegd. Response field toegevoegd aan cards.",
     "2026-03-28: Knowledge Base Cleanup Workflow toegevoegd - 'Te Herzien' filter met slimme sortering (impact-based: placeholder actions eerst).",
     "2026-03-28: v5.0 Ecosystem visie gedocumenteerd (RoarToken, Pool, 5 Facties, Knowledge→Items, Learn-to-Earn)."
-  ]
+  ],
+  "v0.6.5": {
+    "naam": "🚀 Deploy v0.6.5 — Levende Wallet & Trader",
+    "beschrijving": "Welkom-bark + 19 tokens uitgegeven + Spark trader hourly lock + lazy bot-slots per user + admin force-sell + saldo/potjes scheiding",
+    "status": "done",
+    "progress": 100,
+    "start_date": "2026-05-22",
+    "completed_date": "2026-05-23",
+    "phase": "spark_world",
+    "notes": "Eerste batch na productie-deploy v0.6.4. €96.52 SEPA bijstorting → 10/10 tokens Spark+Willem. Trader saldo=0 (vermogen in potjes), elke user een idle bot-slot in Analytics.",
+    "items": [
+      {
+        "id": "v065_001",
+        "titel": "Welkom-bark voor eerste login",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "welcome_v1 in version_anchor: legt uit dat user gewoon een gesprek voert en 'help' typt voor overzicht. Eigen Hand-icon styling, protected against delete. Sortering Privacy → Welkom → Updates.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_002",
+        "titel": "Trader & Wallet admin switch (👤 Mijn / 🌟 Spark)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "Beide pagina's krijgen identieke toggle in header (admin only, gradatie ≤ 1). sessionStorage-persistent. Subtitle past zich aan per view. Labels in eerste deploy verkeerd om — gefixed.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_003",
+        "titel": "Spark trader schone start + hourly autostart",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "notes": "user-001 trade_history gearchiveerd → 0 trades. bots_registry_state.json zorgt voor auto-resume bij elke server start (interval 3600s, 5 markets). Baseline = €101.60 (matcht live Bitvavo).",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_004",
+        "titel": "€96.52 bijstorting → 10/10 tokens verdeling",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "notes": "19 ROAR tokens à €5.08 uitgegeven (Spark 1→10, Willem 0→10). Treasury 999999→999980. Deposit geregistreerd, baseline auto-bumped €5.08 → €101.60.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_005",
+        "titel": "Saldo / vermogen-in-potjes scheiding",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "Wallet 'balance_eur' = vrij liggend cash (€0 voor beiden). Vermogen zit in 10 potjes × €5.08 = €50.80 in Bitvavo per kant. Reset-log entry met de uitleg toegevoegd.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_006",
+        "titel": "Lazy bot-slot per user in Analytics",
+        "status": "done",
+        "priority": "high",
+        "progress": 100,
+        "notes": "/api/trade/admin/bots toont automatisch elke menselijke user uit users.json als idle slot. bot-* AI personae uitgesloten. 9 slots zichtbaar (Spark + 8 mensen). Naam+gradatie meegestuurd.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_007",
+        "titel": "Checkbox 'Draaien als ik offline ben'",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "TraderPage: opt-in voor persistente bot (auto-resume na logout). Endpoint /api/trade/bot/register|unregister. Voor user-zelf, niet voor admin-zichtbaarheid (die is altijd aan).",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_008",
+        "titel": "Admin Force-sell per potje",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "POST /api/trade/potjes/{uid}/{pot_id}/force-sell met admin-only (gradatie ≤ 1) + live Bitvavo prijs + audit-trail (force_sell_audit.json). Dubbele bevestiging modal in UI + waarschuwing voor token-devaluatie.",
+        "completed_date": "2026-05-23"
+      },
+      {
+        "id": "v065_009",
+        "titel": "Analytics bot-kaart redesign (uitklap)",
+        "status": "done",
+        "priority": "medium",
+        "progress": 100,
+        "notes": "Per-bot uitklap toont: potjes-tabel (#/status/market/capital/live/entry/trades/P&L) en laatste 8 trades. User-naam prominent, uid klein erachter. 'slot leeg (niet gestart)' voor lazy slots.",
+        "completed_date": "2026-05-23"
+      }
+    ]
+  }
 }

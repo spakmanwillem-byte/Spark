@@ -212,6 +212,7 @@ const phases = [
       { title: '🎭 5e bot toegevoegd: De Dood', status: 'done', anchor: 'bot-dood', note: 'Reflectieve acteur bij memento-momenten, eindes, transities. Gallery-avatar gekoppeld' },
       { title: '⚙️ Bot-instellingen tab in UsersAdminPage', status: 'done', anchor: 'bot-settings-tab', note: 'Alleen voor is_bot users. Velden: rol, persoonlijkheid, channels, bark-template, avatar-lock, STT/TTS toggles' },
       { title: '🔥 Trader hot coin-swap (productie-bug fix)', status: 'done', anchor: 'trader-hotswap', note: 'Coin-picker klikbaar tijdens running monitor. Potjes verdelen automatisch 5×2 over actieve coins' },
+      { title: '⚰️ De Dood als Verteller bij verhalen (intro v0.6.6 fix)', status: 'done', anchor: 'verteller-dood', note: 'Niet Spark — De Dood vertelt het ontstaansverhaal. Past bij zijn rol "transities/eindes/beginpunten". Geboorte = ook een transitie. user_id verteller berichten = bot-dood (eigen avatar, geen user-overlap meer)' },
     ],
   },
 ];

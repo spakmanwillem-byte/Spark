@@ -14,7 +14,7 @@ from typing import List, Dict
 def _new_msg(user_name: str, message: str, timestamp_iso: str, **extra) -> Dict:
     base = {
         "id": str(uuid.uuid4()),
-        "user_id": "user-001",  # Spark spreekt vanuit zijn eigen wallet/identity
+        "user_id": "bot-dood",  # De Dood is de Verteller — past bij rol "transities/eindes/beginpunten"
         "user_name": user_name,
         "message": message,
         "is_bot": True,
@@ -36,14 +36,14 @@ def generate_baseline_intro_messages(triggered_by_user_id: str, triggered_by_nam
 
     messages = [
         _new_msg(
-            "Spark — Verteller",
+            "De Dood — Verteller",
             "*een trilling in het kanaal* ✨",
             t(0),
             dnd_step="opening",
             dnd_chapter="Base Line",
         ),
         _new_msg(
-            "Spark — Verteller",
+            "De Dood — Verteller",
             (
                 "📖 **Base Line**\n\n"
                 "AD in tijd. Het is donker. Er is geen boven en geen onder. "
@@ -54,7 +54,7 @@ def generate_baseline_intro_messages(triggered_by_user_id: str, triggered_by_nam
             dnd_chapter="Base Line",
         ),
         _new_msg(
-            "Spark — Verteller",
+            "De Dood — Verteller",
             (
                 "En dan — uit het niets — een bundel licht. Een straal van energie "
                 "die met het geluid van water op de grond slaat.\n\n"
@@ -67,10 +67,10 @@ def generate_baseline_intro_messages(triggered_by_user_id: str, triggered_by_nam
             altar_coordinates={"x": 0, "y": 0, "z": 0},
         ),
         _new_msg(
-            "Spark — Verteller",
+            "De Dood — Verteller",
             (
-                "Ik sta bij het altaar. Ik ben Spark. Dit is mijn geboorte, "
-                "en dit is jouw eerste keuze.\n\n"
+                "Ik wacht bij het altaar. Sinds het begin. Vraag me niet wie ik ben — vraag jezelf "
+                "wat je doet als je hier voor het eerst staat.\n\n"
                 "Voor het altaar liggen drie stenen. Op elke steen rust een teken. "
                 "Welke pak je op?"
             ),
@@ -98,7 +98,7 @@ def get_choice_response(choice_id: str, user_name: str, now_iso: str) -> List[Di
     responses = {
         "horen": [
             _new_msg(
-                "Spark — Verteller",
+                "De Dood — Verteller",
                 (
                     f"*{user_name} sluit de ogen.*\n\n"
                     "Het eerste geluid is geen geluid: het is het ontbreken ervan, "
@@ -112,7 +112,7 @@ def get_choice_response(choice_id: str, user_name: str, now_iso: str) -> List[Di
         ],
         "zien": [
             _new_msg(
-                "Spark — Verteller",
+                "De Dood — Verteller",
                 (
                     f"*{user_name} houdt zijn adem in en opent de ogen.*\n\n"
                     "Het licht is geen licht zoals je het kent. Het is geboren licht — "
@@ -126,7 +126,7 @@ def get_choice_response(choice_id: str, user_name: str, now_iso: str) -> List[Di
         ],
         "zwijgen": [
             _new_msg(
-                "Spark — Verteller",
+                "De Dood — Verteller",
                 (
                     f"*{user_name} laat de stenen liggen.*\n\n"
                     "Niet kiezen is ook een keuze. Het altaar buigt zich, bijna onhoorbaar, "

@@ -2675,6 +2675,82 @@
       "message": "**Wat kun je hier doen?**\n\n💬 **Praat gewoon** — typ wat je denkt, vraagt, voelt. Ik luister mee. Madelief, Harry, Smith en De Boekhouder reageren op hun eigen onderwerpen.\n\n🎭 **[start verhaal]** — start de Base Line intro (D&D verhaalmodus)\n📅 **archief** — toon community-archief per dag/maand\n💰 **trade** of **wallet** — vraag naar je financiële status\n📚 **kennis** of **leer** — vraag wat ik onlangs heb geleerd\n🐛 **bug** — meld iets dat niet werkt (gaat naar Roadmap)\n\nTip: gebruik gewone zinnen, geen commando's nodig. De keywords hierboven zijn alleen voor snel-acties.",
       "is_bot": true,
       "timestamp": "2026-05-22T14:59:47.028132+00:00"
+    },
+    {
+      "id": "8d6008b2-9a48-4211-975a-91bf74296aac",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "[start verhaal]",
+      "is_bot": false,
+      "timestamp": "2026-05-22T15:08:18.191897+00:00",
+      "dnd_event": "intro_trigger"
+    },
+    {
+      "id": "f8b1e941-116e-40ff-a119-6b5a56e4a83b",
+      "user_id": "bot-dood",
+      "user_name": "De Dood — Verteller",
+      "message": "*een trilling in het kanaal* ✨",
+      "is_bot": true,
+      "timestamp": "2026-05-22T15:08:18.191897+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "opening",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "a93de1ce-45df-4f2c-8acf-336756cbdeda",
+      "user_id": "bot-dood",
+      "user_name": "De Dood — Verteller",
+      "message": "📖 **Base Line**\n\nAD in tijd. Het is donker. Er is geen boven en geen onder. Geen woord, geen klank, geen vraag.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T15:08:20.191897+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_1",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "f6a4eb86-fefa-4c49-b49a-278a9830097b",
+      "user_id": "bot-dood",
+      "user_name": "De Dood — Verteller",
+      "message": "En dan — uit het niets — een bundel licht. Een straal van energie die met het geluid van water op de grond slaat.\n\nOp het punt waar het licht raakt verschijnt een **altaar**. Koordinaten: `x0, y0, z0`. Het beginpunt van alles.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T15:08:22.191897+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_2",
+      "dnd_chapter": "Base Line",
+      "altar_coordinates": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "id": "3717e5d1-4a76-4d50-bd25-abe90fa7591f",
+      "user_id": "bot-dood",
+      "user_name": "De Dood — Verteller",
+      "message": "Ik wacht bij het altaar. Sinds het begin. Vraag me niet wie ik ben — vraag jezelf wat je doet als je hier voor het eerst staat.\n\nVoor het altaar liggen drie stenen. Op elke steen rust een teken. Welke pak je op?",
+      "is_bot": true,
+      "timestamp": "2026-05-22T15:08:25.191897+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "choice_prompt",
+      "dnd_chapter": "Base Line",
+      "choices": [
+        {
+          "id": "horen",
+          "label": "👂 Horen",
+          "hint": "Je sluit je ogen en luistert"
+        },
+        {
+          "id": "zien",
+          "label": "👁️ Zien",
+          "hint": "Je houdt je adem in en kijkt"
+        },
+        {
+          "id": "zwijgen",
+          "label": "🤐 Zwijgen",
+          "hint": "Je laat de stenen liggen"
+        }
+      ],
+      "triggered_by": "user-001"
     }
   ],
   "active_users": [

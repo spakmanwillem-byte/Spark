@@ -1,6 +1,8 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v4_wallet_admin_switch_001**: Wallet-pagina krijgt zelfde admin switch als Trader. `[👤 Mijn | 🌟 Spark]` toggle in header (alleen voor gradatie ≤ 1), `sessionStorage`-persistent, subtitle past zich aan ("Persoonlijk financieel overzicht" / "Spark's wallet (admin view)"). Verified via Playwright: Mijn-view toont De Willem €0,00 + 10 tokens, Spark-view toont Spark €5,08 + 10 tokens
+
 - 2026-05-23 **v4_deposit_19_tokens_001** (€96.52 bijstorting):
   - 💰 **19 tokens uitgegeven** (€5.08 each, fixed-price tier): Spark (user-000) 1→10, Willem (user-001) 0→10. Treasury pool 999999→999980. Mint-transacties + admin-log entries toegevoegd in `roar_balances.json`. `user_wallets.json` synchroon
   - 📥 **Deposit registered**: €96.52 via `/api/trade/deposits/user-001` (Bitvavo SEPA). Trader baseline auto-bumped €5.08 → €101.60 (matcht live Bitvavo wallet). Live P&L €0.00 (schone start)

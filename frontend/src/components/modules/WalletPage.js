@@ -11,7 +11,13 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export function WalletPage({ onNavigate }) {
   const { user } = useAuth();
-  const userId = user?.id || 'user-001';
+  const isAdmin = (user?.gradatie ?? 7) <= 1;
+  // v4_wallet_admin_switch_001 — admin kan tussen eigen wallet en Spark wallet switchen
+  const [walletView, setWalletView] = useState(() =>
+    sessionStorage.getItem('wallet_view') || 'me'
+  );
+  const userId = walletView === 'spark' && isAdmin ? 'user-000' : (user?.id || 'user-001');
+  useEffect(() => { if (isAdmin) sessionStorage.setItem('wallet_view', walletView); }, [walletView, isAdmin]);
   const [wallet, setWallet] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -95,10 +101,23 @@ export function WalletPage({ onNavigate }) {
             </div>
             <div>
               <h1 className="text-xl font-bold text-white">Wallet</h1>
-              <p className="text-xs text-slate-500">Persoonlijk financieel overzicht</p>
+              <p className="text-xs text-slate-500">{walletView === 'spark' && isAdmin ? "Spark's wallet (admin view)" : 'Persoonlijk financieel overzicht'}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {/* v4_wallet_admin_switch_001 — admin kan switchen tussen eigen wallet en Spark wallet */}
+            {isAdmin && (
+              <div data-testid="wallet-view-switch" className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg border border-slate-700">
+                <button onClick={() => setWalletView('me')} data-testid="wallet-view-me"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  👤 Mijn
+                </button>
+                <button onClick={() => setWalletView('spark')} data-testid="wallet-view-spark"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  🌟 Spark
+                </button>
+              </div>
+            )}
             <button data-testid="withdraw-btn" onClick={() => setShowWithdraw(!showWithdraw)}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
               <Minus className="w-4 h-4" /> Opnemen

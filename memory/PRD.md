@@ -1,7 +1,15 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
-- 2026-05-22: **Critical Bug-Fix Batch + Inventory + Backup Speed** (9/9 backend + UI bevestigd):
+- 2026-05-22 #2: **v4_update_bark_001 + v4_avatar_categories_001 + v4_dnd_help_001** (16/16 backend + frontend e2e):
+  - 🚀 **Deploy Anker + Update Bark systeem**: Admin klikt na deploy "Nieuwe anker" met versie + message → bark wordt automatisch getoond aan iedereen bij volgende login. Endpoints: `/api/deploy/anchor`, `/api/deploy/anchors`, `/api/deploy/pending/{user_id}`, `/api/deploy/seen`, `/api/deploy/reset-seen`. Per-user `seen_barks.json` zorgt dat elke bark maar 1x getoond wordt
+  - 🔒 **Privacy/Voorwaarden bark** (privacy_v1) wordt automatisch geseed: ELKE user ziet 'm 1x bij eerste login. Niet te verwijderen. Tekst: "Wij volgen je niet, geen tracking-cookies, alle data lokaal in JSON, etc."
+  - 🎨 **BarkQueueOverlay** component: cyaan voor privacy, amber voor deploy, lila voor feature. Counter (1/2). Geen-skip → user moet doorklikken. Mounts in MainLayout
+  - 🛡️ **Admin Deploy panel** (Notities → Deploy tab): formulier met versie, titel, bericht, icon, roadmap_ref, audience (all/admins). Lijst van bestaande ankers met delete (privacy_v1 niet verwijderbaar) en CURRENT badge
+  - 🎒 **Avatar galerij 2 tabs**: Persoonlijk (default) en D&D Archief. PATCH endpoint accepteert `category` field. D&D tab toont info-banner over Spark World D&D laag. Locked avatars (bot-claimed) krijgen 🔒 stempel
+  - 🎲 **D&D help chat-commando**: vraag "D&D help", "wat is d&d", "spark world help", "rugzak uitleg", "persoonskaart help" → krijg overzicht met Base Line, Persoonskaart, Rugzak, Avatars en Barks lagen
+
+ + Inventory + Backup Speed** (9/9 backend + UI bevestigd):
   - 💰 Wallet reset: user-001 → 0 tokens, user-000 (Spark) → 1 token / €5.08
   - 🤖 Trade bot filter: alleen Spark zichtbaar (1/2)
   - 🔒 Spark bot onstopbaar

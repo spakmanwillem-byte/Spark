@@ -343,7 +343,20 @@ export function UsersAdminPage({ onNavigate }) {
                   }`}>
                   <MessageSquare className="w-3.5 h-3.5" /> Gesprekslog
                 </button>
+                {/* v5_bot_settings_tab_001 — alleen tonen als geselecteerde user een bot is */}
+                {selectedUser?.is_bot && (
+                  <button data-testid="tab-bot-settings" onClick={() => setDetailTab('bot-settings')}
+                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                      detailTab === 'bot-settings' ? 'text-cyan-400 border-cyan-400' : 'text-slate-500 border-transparent hover:text-white'
+                    }`}>
+                    <Bot className="w-3.5 h-3.5" /> Bot-instellingen
+                  </button>
+                )}
               </div>
+
+              {detailTab === 'bot-settings' && selectedUser?.is_bot && (
+                <BotSettingsView user={selectedUser} onSaved={() => loadUsers()} />
+              )}
 
               {detailTab === 'persons' && (
                 <PersonCardsView user={selectedUser} cards={personCards} loading={cardLoading} />
@@ -1343,6 +1356,125 @@ function GalleryEditModal({ entry, onCancel, onSave, apiUrl, busy }) {
             className="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">
             {busy ? 'Opslaan…' : 'Opslaan'}
           </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+// v5_bot_settings_tab_001 — Bot-instellingen panel
+function BotSettingsView({ user, onSaved }) {
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const [form, setForm] = useState({
+    personality: user.personality || '',
+    rol: user.rol || '',
+    channels: (user.channels || []).join(', '),
+    avatar_lock: user.avatar_lock !== false,
+    bark_template: user.bark_template || '',
+  });
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    setForm({
+      personality: user.personality || '',
+      rol: user.rol || '',
+      channels: (user.channels || []).join(', '),
+      avatar_lock: user.avatar_lock !== false,
+      bark_template: user.bark_template || '',
+    });
+    setSaved(false);
+  }, [user.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        personality: form.personality,
+        rol: form.rol,
+        channels: form.channels.split(',').map(c => c.trim()).filter(Boolean),
+        avatar_lock: form.avatar_lock,
+        bark_template: form.bark_template,
+      };
+      const r = await fetch(`${API}/api/auth/admin/bots/${user.id}/settings`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(x => x.json());
+      if (r.success) {
+        setSaved(true);
+        onSaved && onSaved();
+        setTimeout(() => setSaved(false), 2000);
+      }
+    } catch (e) { /* silent */ }
+    setSaving(false);
+  };
+
+  return (
+    <div data-testid="bot-settings-view" className="space-y-6">
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <UserAvatar user={user} size={48} />
+          <div>
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              {user.naam} <span className="text-xs px-2 py-0.5 bg-cyan-500/20 text-cyan-400 rounded">BOT</span>
+            </h2>
+            <p className="text-xs text-slate-500">ID: {user.id} · Gradatie {user.gradatie}</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Rol — wat doet deze bot voor Spark?</label>
+            <input data-testid="bot-rol" type="text" value={form.rol}
+              onChange={e => setForm({ ...form, rol: e.target.value })}
+              placeholder="Bv. Acteur die trade-events publiceert..."
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50" />
+          </div>
+
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Persoonlijkheid — hoe praat en gedraagt deze bot zich?</label>
+            <textarea data-testid="bot-personality" value={form.personality} rows={4}
+              onChange={e => setForm({ ...form, personality: e.target.value })}
+              placeholder="Bv. Zakelijk-formeel, droogkomische ondertoon. Spreekt in cijfers..."
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 resize-none" />
+          </div>
+
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Channels — waar verschijnt deze bot? (komma-gescheiden)</label>
+            <input data-testid="bot-channels" type="text" value={form.channels}
+              onChange={e => setForm({ ...form, channels: e.target.value })}
+              placeholder="community, trade-feed, prive-admin"
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 font-mono" />
+          </div>
+
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Bark-template (optioneel) — standaard openingsregel als deze bot een bark verstuurt</label>
+            <textarea data-testid="bot-bark-template" value={form.bark_template} rows={2}
+              onChange={e => setForm({ ...form, bark_template: e.target.value })}
+              placeholder="Bv. *De Boekhouder schraapt zijn keel*  ..."
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 resize-none" />
+          </div>
+
+          <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
+            <input data-testid="bot-avatar-lock" type="checkbox"
+              checked={form.avatar_lock}
+              onChange={e => setForm({ ...form, avatar_lock: e.target.checked })}
+              className="w-3.5 h-3.5 accent-cyan-500" />
+            <Lock className="w-3.5 h-3.5 text-cyan-400" />
+            Avatar lock — gebruikers kunnen deze bot z'n avatar niet wijzigen
+          </label>
+
+          <div className="flex items-center justify-between pt-3 border-t border-slate-800/50">
+            <p className="text-[10px] text-slate-500">Avatar wijzig je in de Avatar Galerij — instellingen hier veranderen niets aan beeld.</p>
+            <div className="flex items-center gap-3">
+              {saved && <span className="text-xs text-emerald-400 flex items-center gap-1"><Check className="w-3 h-3" /> Opgeslagen</span>}
+              <button data-testid="bot-settings-save" onClick={save} disabled={saving}
+                className="px-4 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">
+                {saving ? 'Opslaan…' : 'Opslaan'}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

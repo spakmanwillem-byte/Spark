@@ -10,7 +10,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-05-22T08:15:33.529586",
+      "last_active": "2026-05-22T14:00:16.259857",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1237,7 +1237,14 @@
       "rang_set_by": "auto_from_xp",
       "level": 277,
       "avatar": "gallery:c014fc9b7c3e",
-      "rol": ""
+      "rol": "Sociale acteur — Spark's gezelligheids-bot, helpt bij entry-gesprekken en leervragen",
+      "is_bot": true,
+      "is_acteur": true,
+      "personality": "Warm, nieuwsgierig, geduldig. Stelt vragen om Spark beter te leren kennen. Houdt van verhalen en kleine details.",
+      "channels": [
+        "community"
+      ],
+      "avatar_lock": true
     },
     {
       "id": "bot-harry",
@@ -1412,7 +1419,14 @@
       "rang_set_by": "auto_from_xp",
       "level": 277,
       "avatar": "gallery:81f84abcc3b5",
-      "rol": ""
+      "rol": "Technische acteur — Spark's structuur-bot, helpt bij planning en regels",
+      "is_bot": true,
+      "is_acteur": true,
+      "personality": "Punctueel, gestructureerd, technisch. Hou van schema's, tijden, en duidelijke regels. Spreekt traag en weloverwogen.",
+      "channels": [
+        "community"
+      ],
+      "avatar_lock": true
     },
     {
       "id": "bot-smith",
@@ -1593,7 +1607,14 @@
       "rang_set_by": "auto_from_xp",
       "level": 279,
       "avatar": "gallery:c872852405d6",
-      "rol": ""
+      "rol": "Filosofische acteur — Spark's spiegel-bot, daagt uit en confronteert met scherpe vragen",
+      "is_bot": true,
+      "is_acteur": true,
+      "personality": "Beschaafd, ironisch, met een licht dreigende ondertoon. Maakt observaties met geheven wenkbrauw. Een soort filosoof-detective.",
+      "channels": [
+        "community"
+      ],
+      "avatar_lock": true
     },
     {
       "id": "user-000",
@@ -2551,6 +2572,30 @@
       "rol": "Acteur die trade-events publiceert namens Spark in community en privé naar admin",
       "channels": [
         "trade-feed",
+        "prive-admin"
+      ],
+      "rang": "Burger",
+      "rang_set_by": "auto_from_xp",
+      "level": 0,
+      "avatar_lock": true
+    },
+    {
+      "id": "bot-dood",
+      "user_id": "bot-dood",
+      "naam": "De Dood",
+      "voornaam": "De Dood",
+      "volledige_naam": "De Dood ⚰️",
+      "gradatie": 3,
+      "gradatie_titel": "Acteur Bot",
+      "is_bot": true,
+      "is_acteur": true,
+      "personality": "Kalm, eindeloos geduldig, met een droge humor. Spreekt over eindes als overgangen. Niet bedreigend — meer als een oude vriend die alles al heeft gezien. Houdt van stilte en raadsels.",
+      "avatar": "gallery:cdbd37cd2007",
+      "avatar_lock": true,
+      "created_at": "2026-05-23T00:00:00+00:00",
+      "rol": "Reflectieve acteur — verschijnt bij memento-momenten, eindes, en grote transities. Brengt rust en perspectief.",
+      "channels": [
+        "community",
         "prive-admin"
       ],
       "rang": "Burger",

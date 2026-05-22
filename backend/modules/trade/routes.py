@@ -540,6 +540,21 @@ async def monitor_decisions(limit: int = Query(50)):
     return {"success": True, "decisions": get_monitor().get_decisions(limit)}
 
 
+# v5_hot_market_swap_001 — markets hot-aanpassen tijdens running zonder bot te stoppen
+class UpdateMarketsBody(BaseModel):
+    markets: List[str]
+
+
+@router.post("/monitor/markets/{user_id}")
+async def update_monitor_markets(user_id: str, body: UpdateMarketsBody):
+    """Wissel de markten van een (lopende of stilstaande) bot zonder hem te stoppen."""
+    from .monitor import get_user_monitor
+    monitor = get_user_monitor(user_id)
+    return monitor.update_markets(body.markets)
+
+
+
+
 # ============================================================
 # v4_per_user_bot_001 — Per-user bot endpoints
 # ============================================================

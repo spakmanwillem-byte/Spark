@@ -1,6 +1,14 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_30_credit_batch** (Trader bug + Bot format + Roadmap):
+  - 🔥 **Trader hot coin-swap** (prod bug fix): coin-picker zichtbaar én klikbaar tijdens lopende monitor. Nieuwe endpoint `POST /api/trade/monitor/markets/{user_id}` past markten live aan zonder bot te stoppen. Hint label "(live aanpasbaar)" toont state. 10 potjes spreiden zich automatisch over gekozen coins
+  - 🤖 **Bot format gestandaardiseerd**: madelief, harry, smith, boekhouder krijgen allemaal `is_bot=true`, `personality`, `rol`, `channels`, `avatar_lock`. Consistent template voor alle acteurs
+  - ⚰️ **De Dood toegevoegd** als 5e bot (`bot-dood`) met gallery-avatar `cdbd37cd2007`, persoonlijkheid + rol als "reflectieve acteur" (memento momenten, eindes, transities)
+  - ⚙️ **Bot-instellingen tab** in `UsersAdminPage` (alleen zichtbaar als `is_bot=true`): velden voor rol, persoonlijkheid, channels, bark-template, avatar-lock. Backend endpoint `PATCH /api/auth/admin/bots/{bot_id}/settings`. Gebruikt voor bark-systeem configuratie
+  - 🌦️ **Weerstation roadmap-item** toegevoegd onder phase-dnd: weer.nl koppeling → cloud/humeur per user (niet alleen voor Spark)
+  - ✅ Backend e2e getest: hot-swap markets (running=true confirmed), PATCH bot-settings (persoonlijkheid + channels persist), lint clean
+
 - 2026-05-23 **v5_lazy_slot_001 + v5_offline_persistence_001** (correctie + uitbreiding):
   - 🤖 **Lazy slots voor elke user**: `/api/trade/admin/bots` toont nu automatisch elke menselijke user uit `system/users.json` als idle bot-slot (bot-* AI personae uitgesloten). Backend bewees 9 bots zichtbaar (Spark + Willem running + Heidi, joel123, Marieke, Nick, piet, Roadkill, Ron als lazy). User-naam + gradatie meegestuurd voor admin overzicht
   - 🌙 **Checkbox heroriëntatie**: "Toon in Analytics" → **"Draaien als ik offline ben"**. Functioneel hetzelfde endpoint (`bot/register`), maar semantiek klopt nu met user intent: zichtbaarheid is automatisch, vinkje gaat over persistentie bij logout

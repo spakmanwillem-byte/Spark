@@ -58,10 +58,30 @@ export function TraderPage({ onNavigate }) {
   // v4_multi_market_001: meerdere coins tegelijk monitoren
   const [monitorMarkets, setMonitorMarkets] = useState(['BCH-EUR']);
   const ALL_MARKETS = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR'];
-  const toggleMonitorMarket = (mkt) => {
-    setMonitorMarkets(prev => prev.includes(mkt)
-      ? (prev.length > 1 ? prev.filter(m => m !== mkt) : prev)  // min 1 coin
-      : [...prev, mkt]);
+  // Sync coin selectie naar live monitor markets als die anders zijn
+  useEffect(() => {
+    if (Array.isArray(monitorStatus?.markets) && monitorStatus.markets.length > 0) {
+      const live = [...monitorStatus.markets].sort().join(',');
+      const local = [...monitorMarkets].sort().join(',');
+      if (live !== local) setMonitorMarkets(monitorStatus.markets);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [monitorStatus?.markets?.join(',')]);
+  const toggleMonitorMarket = async (mkt) => {
+    const next = monitorMarkets.includes(mkt)
+      ? (monitorMarkets.length > 1 ? monitorMarkets.filter(m => m !== mkt) : monitorMarkets)
+      : [...monitorMarkets, mkt];
+    setMonitorMarkets(next);
+    // v5_hot_market_swap_001 — als monitor draait: hot-patch direct backend
+    if (monitorStatus?.running) {
+      try {
+        await fetch(`${API}/api/trade/monitor/markets/${userId}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markets: next })
+        });
+        loadMonitorStatus();
+      } catch {}
+    }
   };
 
   // Leermodule - Market Context
@@ -437,26 +457,24 @@ export function TraderPage({ onNavigate }) {
                     </div>
                   </div>
                   <div className="p-4">
-                    {/* v4_multi_market_001: coin-selectie voor monitor */}
-                    {!monitorStatus?.running && (
-                      <div className="mb-4 pb-3 border-b border-slate-800/50">
-                        <p className="text-[10px] text-slate-500 mb-2">Welke coins monitoren?</p>
-                        <div className="flex flex-wrap gap-1.5" data-testid="monitor-coin-picker">
-                          {ALL_MARKETS.map(mkt => {
-                            const sym = mkt.split('-')[0];
-                            const active = monitorMarkets.includes(mkt);
-                            return (
-                              <button key={mkt} data-testid={`monitor-coin-${sym}`}
-                                onClick={() => toggleMonitorMarket(mkt)}
-                                className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-colors ${active ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-slate-800 text-slate-500 hover:text-slate-300 border border-transparent'}`}>
-                                {sym}
-                              </button>
-                            );
-                          })}
-                        </div>
-                        <p className="text-[9px] text-slate-600 mt-2">Candle interval: {candleInterval} (zelfde voor alle gekozen coins). Tip: 10-Potjes-modus + meerdere coins = Spark vist over alle markten.</p>
+                    {/* v4_multi_market_001 + v5_hot_swap_001: coin-selectie altijd zichtbaar, ook tijdens running */}
+                    <div className="mb-4 pb-3 border-b border-slate-800/50">
+                      <p className="text-[10px] text-slate-500 mb-2">Welke coins monitoren? {monitorStatus?.running && <span className="text-emerald-400">(live aanpasbaar)</span>}</p>
+                      <div className="flex flex-wrap gap-1.5" data-testid="monitor-coin-picker">
+                        {ALL_MARKETS.map(mkt => {
+                          const sym = mkt.split('-')[0];
+                          const active = monitorMarkets.includes(mkt);
+                          return (
+                            <button key={mkt} data-testid={`monitor-coin-${sym}`}
+                              onClick={() => toggleMonitorMarket(mkt)}
+                              className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-colors ${active ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-slate-800 text-slate-500 hover:text-slate-300 border border-transparent'}`}>
+                              {sym}
+                            </button>
+                          );
+                        })}
                       </div>
-                    )}
+                      <p className="text-[9px] text-slate-600 mt-2">Candle interval: {candleInterval} (zelfde voor alle coins). 10 potjes spreiden zich automatisch over gekozen coins.</p>
+                    </div>
                     {monitorStatus?.running ? (
                       <div className="space-y-3">
                         {/* Status bar */}

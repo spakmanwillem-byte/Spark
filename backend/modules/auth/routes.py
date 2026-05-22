@@ -4,6 +4,7 @@ All auth endpoints in one place
 """
 from fastapi import APIRouter, HTTPException
 from typing import Optional
+from pydantic import BaseModel
 
 from .service import AuthService
 from .models import LoginRequest, LoginResponse, SessionStatus, UserCreate
@@ -312,3 +313,29 @@ async def update_gradatie(user_id: str, gradatie: int, reden: str = ""):
         raise HTTPException(status_code=404, detail="Gebruiker niet gevonden")
     
     return {"success": True}
+
+
+
+# v5_bot_settings_tab_001 — Bot-specifieke settings update (alleen voor is_bot users)
+class BotSettingsPatch(BaseModel):
+    personality: Optional[str] = None
+    rol: Optional[str] = None
+    channels: Optional[list] = None
+    avatar_lock: Optional[bool] = None
+    bark_template: Optional[str] = None
+
+
+@router.patch("/admin/bots/{bot_id}/settings")
+async def patch_bot_settings(bot_id: str, body: BotSettingsPatch):
+    """Update bot-persona velden. Werkt alleen op users met is_bot=true."""
+    users = AuthService.get_all_users()
+    target = next((u for u in users if (u.get("id") or u.get("user_id")) == bot_id), None)
+    if not target:
+        raise HTTPException(404, f"Bot {bot_id} niet gevonden")
+    if not target.get("is_bot"):
+        raise HTTPException(400, f"{bot_id} is geen bot — gebruik /users/{bot_id} voor gewone users")
+    updates = {k: v for k, v in body.dict(exclude_unset=True).items() if v is not None}
+    if not updates:
+        return {"success": True, "updated": [], "message": "Niets te updaten"}
+    AuthService.update_user(bot_id, updates)
+    return {"success": True, "updated": list(updates.keys()), "bot_id": bot_id}

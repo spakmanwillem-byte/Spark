@@ -641,6 +641,24 @@ class MonitorService:
             state = "gepauzeerd" if self._paused else "hervat"
             return {"success": True, "message": f"Monitor {state}", "status": self.get_status()}
 
+    # v5_hot_market_swap_001 — markets hot-aanpassen zonder bot te stoppen
+    def update_markets(self, markets: List[str]) -> Dict:
+        with self._lock:
+            clean = [m.strip().upper() for m in markets if isinstance(m, str) and m.strip()]
+            if not clean:
+                return {"success": False, "message": "Geen geldige markets opgegeven"}
+            self._markets = clean
+            self._market = clean[0]
+            if self._running:
+                try:
+                    self._persist_state()
+                    if self._user_id != "user-001":
+                        _persist_registry()
+                except Exception:
+                    pass
+            logger.info(f"Markets hot-updated voor {self._user_id}: {clean}")
+            return {"success": True, "markets": clean, "running": self._running}
+
     def get_status(self) -> Dict:
         uptime = None
         if self._start_time and self._running:

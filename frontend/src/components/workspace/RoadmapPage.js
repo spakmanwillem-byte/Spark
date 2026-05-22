@@ -170,6 +170,7 @@ const phases = [
       { title: '🗺️ Quest-systeem ontstaat uit gedragspatronen', status: 'planned', anchor: 'emergent-quests' },
       { title: '📜 Lore-currency (zeldzame KB-kaarten = waarde)', status: 'planned', anchor: 'lore-currency' },
       { title: '🌫️ Vervormde verhalen (canon herschrijven via consensus)', status: 'planned', anchor: 'dynamic-canon' },
+      { title: '🌦️ Weerstation (weer.nl koppeling → cloud/humeur per user)', status: 'planned', anchor: 'weather-mood', note: 'Naast emotie krijgt elke user een "wolk" gevoed door echt weer op zijn locatie. Komt later in Phase Emotie samen' },
     ],
   },
   {

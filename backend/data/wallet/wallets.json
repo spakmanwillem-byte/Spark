@@ -65,7 +65,7 @@
     },
     "user-000": {
       "wallet_id": "user-000",
-      "balance": 5.08,
+      "balance": 0,
       "created_at": "2026-05-21T11:43:38.704074+00:00",
       "total_deposited": 0,
       "total_withdrawn": 0,
@@ -76,6 +76,11 @@
           "ts": "2026-05-21T21:03:04.095299+00:00",
           "to": 5.08,
           "reason": "Schone start 21 mei"
+        },
+        {
+          "ts": "2026-05-23T00:00:00+00:00",
+          "to": 0,
+          "reason": "Saldo naar 0: vermogen zit in 10 potjes (Bitvavo allocatie), saldo is alleen vrij liggend cash"
         }
       ]
     },

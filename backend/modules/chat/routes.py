@@ -62,6 +62,34 @@ async def process_message(req: ChatMessage):
     if not text:
         raise HTTPException(status_code=400, detail="Leeg bericht")
 
+    # v5_stop_safeword_001 — universeel safe-word, vóór alle andere processing
+    if text.lower() in ("stop", "/stop", "pauze", "wacht even"):
+        # Wis pending wedervraag-state zodat Spark écht stopt
+        try:
+            session_state.clear_state(req.user_id) if req.user_id else None
+        except Exception:
+            pass
+        try:
+            from modules.behavior_tracker import track
+            track(req.user_id, "used_safeword", 1)
+        except Exception:
+            pass
+        user_naam = req.user_naam or "vriend"
+        return {
+            "type": "safeword",
+            "is_safeword_ack": True,
+            "message": (
+                f"*Spark stopt* ✋\n\n"
+                f"Alles staat stil voor je, {user_naam}. Geen vraag terug, geen vervolg. "
+                "Adem. Als je weer wil, begin gewoon."
+            ),
+            "knowledge_matches": [],
+            "sentiment": "neutral",
+            "emotion": None,
+            "unknown_words": [],
+            "snap_suggestions": [],
+        }
+
     # v4_dnd_001 — Behavior tracking voor aura/wereldgroei
     try:
         from modules.behavior_tracker import track_chat_message

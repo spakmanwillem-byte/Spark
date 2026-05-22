@@ -67,6 +67,29 @@ export function TraderPage({ onNavigate }) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [monitorStatus?.markets?.join(',')]);
+
+  // v5_candle_hotswap_001 — sync lokale candleInterval met wat de bot ECHT draait
+  useEffect(() => {
+    const live = monitorStatus?.candle_interval;
+    if (live && live !== candleInterval) {
+      setCandleInterval(live);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [monitorStatus?.candle_interval]);
+
+  // v5_candle_hotswap_001 — wissel cycle hot wanneer bot draait (anders alleen lokaal voor next start)
+  const changeCandleInterval = async (newInterval) => {
+    setCandleInterval(newInterval);
+    if (monitorStatus?.running) {
+      try {
+        const r = await fetch(`${API}/api/trade/monitor/candle/${userId}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ candle_interval: newInterval }),
+        }).then(r => r.json()).catch(() => ({}));
+        if (!r.success && r.message) alert(r.message);
+      } finally { loadMonitorStatus(); }
+    }
+  };
   const toggleMonitorMarket = async (mkt) => {
     const next = monitorMarkets.includes(mkt)
       ? (monitorMarkets.length > 1 ? monitorMarkets.filter(m => m !== mkt) : monitorMarkets)
@@ -418,8 +441,9 @@ export function TraderPage({ onNavigate }) {
                     </div>
                     <div className="flex items-center gap-1">
                       {['15m', '1h', '4h', '1d'].map(iv => (
-                        <button key={iv} data-testid={`interval-${iv}`} onClick={() => setCandleInterval(iv)}
-                          className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all ${candleInterval === iv ? 'bg-amber-500/20 text-amber-400' : 'text-slate-500 hover:text-slate-300'}`}>
+                        <button key={iv} data-testid={`interval-${iv}`} onClick={() => changeCandleInterval(iv)}
+                          className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all ${candleInterval === iv ? 'bg-amber-500/20 text-amber-400' : 'text-slate-500 hover:text-slate-300'}`}
+                          title={monitorStatus?.running ? 'Wijzigt direct ook de cycle van je draaiende bot' : 'Wijzigt chart-cycle (en bot-cycle bij start)'}>
                           {iv}
                         </button>
                       ))}

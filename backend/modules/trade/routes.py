@@ -553,6 +553,19 @@ async def update_monitor_markets(user_id: str, body: UpdateMarketsBody):
     return monitor.update_markets(body.markets)
 
 
+# v5_candle_hotswap_001 — wissel candle-interval (cycle) zonder restart
+class UpdateCandleBody(BaseModel):
+    candle_interval: str
+
+
+@router.post("/monitor/candle/{user_id}")
+async def update_monitor_candle(user_id: str, body: UpdateCandleBody):
+    """Wissel candle_interval (15m / 1h / 4h / 1d) van een bot zonder restart."""
+    from .monitor import get_user_monitor
+    monitor = get_user_monitor(user_id)
+    return monitor.update_candle_interval(body.candle_interval)
+
+
 
 
 # ============================================================

@@ -659,6 +659,24 @@ class MonitorService:
             logger.info(f"Markets hot-updated voor {self._user_id}: {clean}")
             return {"success": True, "markets": clean, "running": self._running}
 
+    # v5_candle_hotswap_001 — wissel candle_interval (15m / 1h / 4h / 1d) zonder restart
+    def update_candle_interval(self, candle_interval: str) -> Dict:
+        VALID = {"1m", "5m", "15m", "30m", "1h", "2h", "4h", "6h", "8h", "12h", "1d"}
+        ci = (candle_interval or "").strip()
+        if ci not in VALID:
+            return {"success": False, "message": f"Ongeldige candle_interval '{ci}'. Geldig: {sorted(VALID)}"}
+        with self._lock:
+            self._candle_interval = ci
+            if self._running:
+                try:
+                    self._persist_state()
+                    if self._user_id != "user-001":
+                        _persist_registry()
+                except Exception:
+                    pass
+            logger.info(f"Candle interval hot-updated voor {self._user_id}: {ci}")
+            return {"success": True, "candle_interval": ci, "running": self._running}
+
     def get_status(self) -> Dict:
         uptime = None
         if self._start_time and self._running:

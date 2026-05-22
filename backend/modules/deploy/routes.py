@@ -77,7 +77,9 @@ DEFAULT_WELCOME_BARK = {
         "Fijn dat je er bent. Even hoe het werkt:\n\n"
         "• Praat gewoon zoals je tegen iemand praat — vragen, gedachten, korte zinnen, lange verhalen, allemaal goed.\n"
         "• Spark luistert mee, onthoudt wat belangrijk is, en reageert vanuit de context van het gesprek.\n"
-        "• Wil je weten waar Spark allemaal op reageert? Type dan het woord **help** in de chat. Je krijgt dan een overzicht van alle dingen die je kunt zeggen of vragen.\n\n"
+        "• Wil je weten waar Spark allemaal op reageert? Type dan het woord **help** in de chat. Je krijgt dan een overzicht van alle dingen die je kunt zeggen of vragen.\n"
+        "• Nieuwsgierig naar Spark's ontstaansverhaal? Type **[start verhaal]** in community-chat — De Dood vertelt het je.\n"
+        "• Wil je dat alles even stilstaat? Type **stop** als safe-word. Spark stopt direct, geen vragen.\n\n"
         "Geen knoppen-jacht nodig. Begin gewoon."
     ),
     "icon": "✨",

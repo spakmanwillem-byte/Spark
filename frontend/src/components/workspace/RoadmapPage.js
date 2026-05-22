@@ -14,6 +14,24 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const phases = [
   {
+    id: 'phase-werkwijze',
+    title: '📐 Werkwijze & Conventies (lees bij elke sessie)',
+    status: 'active',
+    color: '#06b6d4',
+    icon: BookOpen,
+    period: 'permanent / levend',
+    items: [
+      { title: 'DSP-001 · Bot-data dual-source: bot_users.json + system/users.json — beide updaten bij nieuwe bot', status: 'done', anchor: 'dsp-bot-data', note: 'bot_users.json = triggers/responses. users.json = unified identity. Cross-ref in beide files via _arch_ref' },
+      { title: '📚 ARCHITECTURE.md bijhouden in /app/memory/ — elke nieuwe dual-source → DSP-NNN entry + cross-ref', status: 'active', anchor: 'arch-notebook', note: 'Voorkomt dat dual-source kennis verzandt tussen sessies. Volgende agent leest dit altijd mee bij handoff' },
+      { title: 'Geen MongoDB ooit — alleen lokale JSON via load_json/save_json (modules.core.storage)', status: 'done', anchor: 'no-mongo', note: 'Privacy/autonomy fundament. Nieuwe agent: niet importeren PyMongo' },
+      { title: 'Naam-display swap voor user-000/user-001 (Willem=00, Spark=01) — alleen in admin/bots, niet in data', status: 'done', anchor: 'name-swap', note: 'Data ongemoeid (Bitvavo creds, history blijven op user-001). Display-laag synct met user mental model' },
+      { title: 'Bij ELKE nieuwe download/zip-upload: diffen vóór mergen, geen blind kopiëren', status: 'done', anchor: 'diff-first', note: 'Voorkomt dat productie-state preview pollueert of andersom' },
+      { title: 'Dutch communicatie — agent altijd in Nederlands met user', status: 'done', anchor: 'lang-nl' },
+      { title: '🎤 STT/TTS toggles per bot in Bot-instellingen → koppeling Whisper+TTS via integration_playbook (niet zelf SDK installeren)', status: 'planned', anchor: 'voice-integration' },
+      { title: 'Bij avatar-bug type checks: user_id matters! Verteller-berichten NIET user-001 geven', status: 'done', anchor: 'avatar-userid', note: 'DSP-002 in spe — leerpunt uit Base Line intro' },
+    ],
+  },
+  {
     id: 'phase-0',
     title: 'Phase 0: Core Setup',
     status: 'done',
@@ -213,6 +231,21 @@ const phases = [
       { title: '⚙️ Bot-instellingen tab in UsersAdminPage', status: 'done', anchor: 'bot-settings-tab', note: 'Alleen voor is_bot users. Velden: rol, persoonlijkheid, channels, bark-template, avatar-lock, STT/TTS toggles' },
       { title: '🔥 Trader hot coin-swap (productie-bug fix)', status: 'done', anchor: 'trader-hotswap', note: 'Coin-picker klikbaar tijdens running monitor. Potjes verdelen automatisch 5×2 over actieve coins' },
       { title: '⚰️ De Dood als Verteller bij verhalen (intro v0.6.6 fix)', status: 'done', anchor: 'verteller-dood', note: 'Niet Spark — De Dood vertelt het ontstaansverhaal. Past bij zijn rol "transities/eindes/beginpunten". Geboorte = ook een transitie. user_id verteller berichten = bot-dood (eigen avatar, geen user-overlap meer)' },
+    ],
+  },
+  {
+    id: 'phase-conversatie-2',
+    title: '💬 Conversatie 2.0: Spark voelt als gesprek, niet formulier',
+    status: 'planned',
+    color: '#ec4899',
+    icon: BookHeart,
+    period: 'na v0.6.6 deploy',
+    items: [
+      { title: '🤐 W-vraag systeem dempen — pas vragen ná afgesloten gesprek + max 1× per 4 interacties', status: 'planned', anchor: 'ws5-quiet', note: 'Geen formulier-push meer. Spark voelt minder als kennisbank-trechter, meer als iemand die af en toe nieuwsgierig is' },
+      { title: '✋ "stop" als universeel safe-word', status: 'planned', anchor: 'stop-safeword', note: 'Werkt in chat, D&D, wedervraag, overal. Direct pauze of breek. Net als in echt leven' },
+      { title: '🔍 Profiel-lookup via gewone vraag', status: 'planned', anchor: 'profile-nlp', note: '"wat is je achternaam?" → Spark leest uit context (over wie) + profiel. Geen /commando nodig' },
+      { title: '🕸️ Relatie-graph name resolution (alleen vrienden)', status: 'planned', anchor: 'relation-graph', note: 'Spark resolved namen via persons-tabel + user-graph. Privacy-gate: alleen tussen vrienden, geen vreemden taggen' },
+      { title: '📨 Spark als bode — relay-berichten met attributie', status: 'planned', anchor: 'spark-relay', note: '"Hé Spark, zeg tegen Heidi dat ik wacht" → Heidi krijgt prive: "Willem wilde dat ik dit zou zeggen: [...]" + 4-staps confirm flow (zien → lezen → reageren → reply terug)' },
     ],
   },
 ];

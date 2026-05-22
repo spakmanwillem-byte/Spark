@@ -150,6 +150,42 @@ async def send_community_message(msg: ChatMessage):
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     now = datetime.now(timezone.utc).isoformat()
 
+    # v5_stop_safeword_001 — universeel safe-word vóór alle andere triggers
+    if msg.message.strip().lower() in ("stop", "/stop", "pauze", "wacht even"):
+        # Log user's stop
+        data["messages"].append({
+            "id": str(uuid.uuid4()),
+            "user_id": msg.user_id,
+            "user_name": msg.user_name,
+            "message": msg.message,
+            "is_bot": False,
+            "timestamp": now,
+            "is_safeword": True,
+        })
+        # Spark bevestigt met rustige toon (geen druk om opnieuw te beginnen)
+        stop_msg = {
+            "id": str(uuid.uuid4()),
+            "user_id": "user-001",
+            "user_name": "Spark",
+            "message": (
+                f"*Spark stopt* ✋\n\n"
+                f"Alles staat stil voor je, {msg.user_name}. Geen vraag terug, geen vervolg. "
+                "Adem. Als je weer wil, begin gewoon."
+            ),
+            "is_bot": True,
+            "timestamp": now,
+            "is_safeword_ack": True,
+        }
+        data["messages"].append(stop_msg)
+        save_json(COMMUNITY_FILE, data)
+        # Track behavior — stop-gebruik is ook signaal
+        try:
+            from modules.behavior_tracker import track
+            track(msg.user_id, "used_safeword", 1)
+        except Exception:
+            pass
+        return {"success": True, "safeword": True, "messages": [stop_msg]}
+
     # v5_dnd_baseline_intro_001 — [start verhaal] trigger
     if msg.message.strip().lower() in ("[start verhaal]", "[verhaal]", "/verhaal", "[start]"):
         from .baseline_intro import generate_baseline_intro_messages

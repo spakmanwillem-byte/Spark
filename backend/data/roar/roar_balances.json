@@ -2,8 +2,8 @@
   "balances": {
     "user-000": 5,
     "user-001": 12,
-    "user-a0ee2d7e": 2,
-    "user-574ac78e": 1
+    "user-a0ee2d7e": 1,
+    "user-574ac78e": 2
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -81,6 +81,26 @@
       "amount": 1,
       "gift_id": "bb8adefa-1723-4f45-bc97-9c6a924fdc5b",
       "note": "Test gift",
+      "status": "completed"
+    },
+    {
+      "id": "e38ed87e-de53-4a0d-96ef-d3e49d5b1f9d",
+      "ts": "2026-05-22T21:24:30.368444+00:00",
+      "type": "gift_refund",
+      "from_user_id": "user-a0ee2d7e",
+      "to_user_id": "user-001",
+      "amount": 1,
+      "note": "Refund test-gift (UI verplaatst van Winkel naar Wallet)",
+      "status": "completed"
+    },
+    {
+      "id": "f3f84619-23e3-4122-9368-cce12494848d",
+      "ts": "2026-05-22T21:31:47.685029+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-574ac78e",
+      "amount": 1,
+      "note": "Welkomstgift Nick (admin direct)",
       "status": "completed"
     }
   ],
@@ -171,6 +191,22 @@
       "to_user_id": "user-a0ee2d7e",
       "amount": 1,
       "gift_id": "bb8adefa-1723-4f45-bc97-9c6a924fdc5b"
+    },
+    {
+      "ts": "2026-05-22T21:24:30.368444+00:00",
+      "action": "gift_refund",
+      "from": "user-a0ee2d7e",
+      "to": "user-001",
+      "amount": 1,
+      "reason": "Test gift refund (per user verzoek)"
+    },
+    {
+      "ts": "2026-05-22T21:31:47.685029+00:00",
+      "action": "gift_direct",
+      "from": "user-001",
+      "to": "user-574ac78e",
+      "amount": 1,
+      "reason": "Welkomstgift Nick"
     }
   ],
   "treasury_pool": 999980,

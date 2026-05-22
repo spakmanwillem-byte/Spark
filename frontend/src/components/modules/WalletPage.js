@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
   Wallet, ArrowUpRight, ArrowDownLeft, TrendingUp, CreditCard,
   Plus, Search, Star, Coins, PiggyBank,
-  CircleDollarSign, Banknote, Receipt, Minus, Loader2
+  CircleDollarSign, Banknote, Receipt, Minus, Loader2, Gift
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -27,6 +27,21 @@ export function WalletPage({ onNavigate }) {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawing, setWithdrawing] = useState(false);
   const [roar, setRoar] = useState(null);
+
+  // v5_roar_gift_001 — Gift state (verhuisd van Winkel naar Wallet)
+  const [giftModalOpen, setGiftModalOpen] = useState(false);
+  const [giftInbox, setGiftInbox] = useState([]);
+  const [giftOutbox, setGiftOutbox] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+
+  const loadGifts = useCallback(() => {
+    if (!userId) return;
+    fetch(`${API}/api/shop/gift/inbox/${userId}`).then(r => r.json()).then(d => setGiftInbox(d.gifts || [])).catch(() => {});
+    fetch(`${API}/api/shop/gift/outbox/${userId}`).then(r => r.json()).then(d => setGiftOutbox(d.gifts || [])).catch(() => {});
+    fetch(`${API}/api/auth/users?viewer_id=${userId}`).then(r => r.json()).then(d => setAllUsers((d.users || []).filter(u => u.id !== userId))).catch(() => {});
+  }, [userId]);
+
+  useEffect(() => { loadGifts(); }, [loadGifts]);
 
   const loadData = () => {
     Promise.all([
@@ -122,6 +137,15 @@ export function WalletPage({ onNavigate }) {
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
               <Minus className="w-4 h-4" /> Opnemen
             </button>
+            {/* v5_roar_gift_001 — Gift knop naast Opnemen/Storten */}
+            <button
+              data-testid="open-gift-modal"
+              onClick={() => setGiftModalOpen(true)}
+              disabled={(wallet?.spark_tokens || 0) < 1}
+              title={(wallet?.spark_tokens || 0) < 1 ? 'Je hebt minimaal 1 ROAR nodig om te giften' : 'Stuur een ROAR token naar een andere user'}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-pink-300 bg-pink-500/10 hover:bg-pink-500/20 transition-all border border-pink-500/30 disabled:opacity-40 disabled:cursor-not-allowed">
+              <Gift className="w-4 h-4" /> 🎁 Gift
+            </button>
             <button data-testid="add-funds-btn" className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
               <Plus className="w-4 h-4" /> Storten
             </button>
@@ -138,6 +162,21 @@ export function WalletPage({ onNavigate }) {
               className="px-4 py-2 rounded-lg text-sm font-medium text-white bg-red-500/80 hover:bg-red-500 transition-colors disabled:opacity-50">
               {withdrawing ? 'Bezig...' : 'Opnemen'}
             </button>
+          </div>
+        )}
+
+        {/* v5_roar_gift_001 — Inbox banner voor inkomende ROAR gifts */}
+        {giftInbox.length > 0 && (
+          <div data-testid="wallet-gift-inbox" className="bg-pink-500/10 border border-pink-500/30 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Gift className="w-4 h-4 text-pink-400" />
+              <h3 className="text-sm font-semibold text-pink-300">Inkomende ROAR gift{giftInbox.length > 1 ? 's' : ''} ({giftInbox.length})</h3>
+            </div>
+            <div className="space-y-2">
+              {giftInbox.map(g => (
+                <GiftInboxRow key={g.id} gift={g} actorId={userId} onUpdated={() => { loadGifts(); loadData(); }} />
+              ))}
+            </div>
           </div>
         )}
 
@@ -334,6 +373,17 @@ export function WalletPage({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      {/* v5_roar_gift_001 — Gift Modal */}
+      {giftModalOpen && (
+        <GiftModal
+          senderId={userId}
+          senderBalance={wallet?.spark_tokens || 0}
+          users={allUsers}
+          onClose={() => setGiftModalOpen(false)}
+          onSent={() => { setGiftModalOpen(false); loadGifts(); loadData(); }}
+        />
+      )}
     </MainLayout>
   );
 }
@@ -419,3 +469,113 @@ function PaymentMethod({ label, sub, active, icon: Icon }) {
 }
 
 export default WalletPage;
+
+// ============================================================
+// v5_roar_gift_001 — Gift Modal + Inbox Row (verhuisd van Winkel naar Wallet)
+// ============================================================
+function GiftModal({ senderId, senderBalance, users, onClose, onSent }) {
+  const [recipient, setRecipient] = useState('');
+  const [amount, setAmount] = useState(1);
+  const [note, setNote] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState(null);
+
+  const send = async () => {
+    setErr(null);
+    if (!recipient) return setErr('Kies een ontvanger');
+    const n = parseInt(amount, 10);
+    if (!n || n < 1) return setErr('Aantal moet minstens 1 zijn');
+    if (n > senderBalance) return setErr(`Je hebt maar ${senderBalance} ROAR`);
+    setBusy(true);
+    try {
+      const res = await fetch(`${API}/api/shop/gift`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sender_id: senderId, recipient_id: recipient, amount: n, note: note.trim() || null }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (res.ok && d.success) onSent();
+      else setErr(d.detail || d.error || 'Versturen mislukt');
+    } catch (e) { setErr(e.message || 'Netwerkfout'); }
+    finally { setBusy(false); }
+  };
+
+  return (
+    <div data-testid="gift-modal" className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-slate-900 border border-pink-500/30 rounded-2xl p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full bg-pink-500/15 border border-pink-500/40 flex items-center justify-center">
+            <Gift className="w-5 h-5 text-pink-400" />
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-white">ROAR Gift sturen</h3>
+            <p className="text-[10px] text-slate-500">Je tokens worden pas overgemaakt na acceptatie · vervalt na 24u</p>
+          </div>
+        </div>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider text-slate-500 mb-1">Ontvanger</label>
+            <select data-testid="gift-recipient" value={recipient} onChange={e => setRecipient(e.target.value)}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white">
+              <option value="">— kies een user —</option>
+              {users.map(u => <option key={u.id} value={u.id}>{u.naam} {u.is_bot ? '(bot)' : ''}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider text-slate-500 mb-1">Aantal tokens (1-{senderBalance})</label>
+            <input data-testid="gift-amount" type="number" min="1" max={senderBalance} value={amount}
+              onChange={e => setAmount(e.target.value)}
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white" />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider text-slate-500 mb-1">Notitie (optioneel)</label>
+            <textarea data-testid="gift-note" value={note} onChange={e => setNote(e.target.value)} rows={2}
+              placeholder="Bv. 'Welkom in de community!'"
+              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500" />
+          </div>
+          {err && <p data-testid="gift-error" className="text-[11px] text-red-300 bg-red-500/10 border border-red-500/30 px-2 py-1.5 rounded">{err}</p>}
+        </div>
+        <div className="flex items-center gap-2 justify-end mt-5">
+          <button onClick={onClose} className="px-3 py-2 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">Annuleer</button>
+          <button data-testid="gift-send-btn" onClick={send} disabled={busy || !recipient}
+            className="px-3 py-2 rounded-lg text-xs font-medium bg-pink-500/20 text-pink-300 hover:bg-pink-500/30 border border-pink-500/40 disabled:opacity-40 flex items-center gap-2">
+            <Gift className="w-3 h-3" /> {busy ? 'Versturen...' : 'Verstuur gift'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GiftInboxRow({ gift, actorId, onUpdated }) {
+  const [busy, setBusy] = useState(false);
+  const act = async (action) => {
+    if (action === 'reject' && !window.confirm(`Weet je zeker dat je deze gift wilt weigeren?`)) return;
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/shop/gift/${gift.id}/${action}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ actor_id: actorId }),
+      });
+      onUpdated();
+    } finally { setBusy(false); }
+  };
+  return (
+    <div data-testid={`gift-row-${gift.id}`} className="flex items-center gap-3 p-3 rounded-lg bg-slate-900/60 border border-pink-500/20">
+      <div className="flex-1">
+        <p className="text-xs font-semibold text-white">
+          <span className="text-pink-300">{gift.sender_naam}</span> stuurt je <span className="text-amber-300">{gift.amount} ROAR</span>
+        </p>
+        {gift.note && <p className="text-[10px] text-slate-400 italic mt-0.5">"{gift.note}"</p>}
+        <p className="text-[9px] text-slate-500 mt-0.5">Vervalt: {new Date(gift.expires_at).toLocaleString('nl-NL', { dateStyle: 'short', timeStyle: 'short' })}</p>
+      </div>
+      <button data-testid={`gift-accept-${gift.id}`} onClick={() => act('accept')} disabled={busy}
+        className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 disabled:opacity-40">
+        ✓ Accepteer
+      </button>
+      <button data-testid={`gift-reject-${gift.id}`} onClick={() => act('reject')} disabled={busy}
+        className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40">
+        ✕ Weiger
+      </button>
+    </div>
+  );
+}

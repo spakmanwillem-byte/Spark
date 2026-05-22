@@ -499,40 +499,7 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 
       {/* Main Content */}
       <main className="flex-1 h-full overflow-y-auto overflow-x-hidden relative">
-        {/* Top bar with notifications */}
-        <div className="absolute top-3 right-4 z-30 flex items-center gap-2">
-          <div className="relative">
-            <button data-testid="notification-bell" onClick={() => setShowNotifs(!showNotifs)}
-              className="p-2 bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl transition-colors relative">
-              <Bell className="w-4 h-4 text-slate-400" />
-              {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[9px] font-bold text-white flex items-center justify-center">
-                  {unreadCount}
-                </span>
-              )}
-            </button>
-            {showNotifs && (
-              <div className="absolute right-0 mt-2 w-80 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
-                  <span className="text-sm font-semibold text-white">Meldingen</span>
-                  {unreadCount > 0 && (
-                    <button onClick={markAllRead} className="text-[10px] text-amber-400 hover:underline">Alles gelezen</button>
-                  )}
-                </div>
-                <div className="max-h-72 overflow-y-auto">
-                  {notifs.map(n => (
-                    <div key={n.id} className={`px-4 py-3 border-b border-slate-800/50 ${n.read ? 'opacity-50' : ''}`}>
-                      <p className="text-xs font-medium text-white">{n.title}</p>
-                      <p className="text-[10px] text-slate-400 mt-0.5">{n.message}</p>
-                      <p className="text-[9px] text-slate-600 mt-1">{n.timestamp ? new Date(n.timestamp).toLocaleString('nl-NL') : ''}</p>
-                    </div>
-                  ))}
-                  {notifs.length === 0 && <p className="px-4 py-6 text-center text-xs text-slate-500">Geen meldingen</p>}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        {/* v5_no_bell_001 — notification bell verborgen op verzoek user; De Dood barkt privé in DM waar nodig */}
         {children}
       </main>
       {/* v4_update_bark_001 — privacy + deploy update barks */}

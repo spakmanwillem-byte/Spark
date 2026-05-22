@@ -1,6 +1,14 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_foto_subtabs_001 + ROAR gift naar Nick**:
+  - 🪙 **Nick** (`user-574ac78e`) ontving 1 ROAR welkomstgift van Willem. Eindstand: Willem 13, Gijs 1, Nick 1, Spark treasury 5. Audit-trail in `roar_balances.transactions` + `admin_log`, `user_wallets.json` gesynchroniseerd
+  - 📦 **Avatar Galerij verplaatst** van losse kaart bovenaan Archief → naar `Foto` sub-tab binnen `SystemArchive`. Logica: SystemArchive heeft tabs Bestanden/Foto/Geluiden/Filmpjes/Dialogen — avatars ZIJN foto's, dus horen onder Foto
+  - 🗂️ **Sub-tabs binnen Foto**:
+    - "Algemene foto's" (bestaande system-archive foto-uploads)
+    - "Avatar Galerij" (de gallery zelf, met daarbinnen weer Gebruikers-avatars / Systeem-avatars)
+  - 🔍 Search-bar + tag-filter + content-grid worden verborgen wanneer Avatar Galerij actief is (geen UI-conflicten)
+
 - 2026-05-23 **v5_admin_color_scheme_001 + avatar-galerij verplaatst naar Archief**:
   - 🎨 **Nieuwe sectie "App Kleurenschema (admin)"** in `Beheer → Instellingen → Beeld` — overkoepelend voor de hele app, alleen gradatie ≤ 1 kan wijzigen
     - 6 presets: Amber Default, Forest Calm, Cobalt Night, Rose Dusk, Violet Quiet, Crimson Alert (klik = direct opslaan + apply)

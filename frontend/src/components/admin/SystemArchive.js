@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag,
-  MessageSquare, Server, FileText
+  MessageSquare, Server, FileText, Users
 } from 'lucide-react';
+import { AvatarGallerySection } from './AvatarGallerySection';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -22,10 +23,12 @@ function formatBytes(n) {
   return `${(n / Math.pow(k, i)).toFixed(i === 0 ? 0 : 1)} ${u[i]}`;
 }
 
-export function SystemArchive({ currentUserId }) {
+export function SystemArchive({ currentUserId, isAdmin = true }) {
   const fileInputRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('bestanden');
+  // v5_foto_subtabs_001 — sub-tabs binnen Foto: algemeen vs avatars
+  const [fotoSubTab, setFotoSubTab] = useState('algemeen');
   const [files, setFiles] = useState([]);
   const [stats, setStats] = useState(null);
   const [availableTags, setAvailableTags] = useState([]);
@@ -170,57 +173,98 @@ export function SystemArchive({ currentUserId }) {
         </div>
       )}
 
-      {/* Search + tag filter */}
-      <div className="flex flex-wrap gap-2">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
-          <input data-testid="sys-archive-search" type="text"
-            value={search} onChange={e => setSearch(e.target.value)}
-            placeholder={`Zoek in ${activeCat.label.toLowerCase()}...`}
-            className="w-full pl-8 pr-8 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
-          {search && (
-            <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
-              <X className="w-3.5 h-3.5" />
-            </button>
+      {/* v5_foto_subtabs_001 — Foto sub-tabs (Algemene foto's / Avatar Galerij) */}
+      {activeTab === 'foto' && (
+        <div className="flex items-center gap-1 p-1 bg-slate-800/40 rounded-xl w-fit">
+          <button
+            data-testid="foto-subtab-algemeen"
+            onClick={() => setFotoSubTab('algemeen')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              fotoSubTab === 'algemeen' ? 'bg-emerald-500/20 text-emerald-300' : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <ImageIcon className="w-3.5 h-3.5" />
+            Algemene foto's
+          </button>
+          <button
+            data-testid="foto-subtab-avatars"
+            onClick={() => setFotoSubTab('avatars')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              fotoSubTab === 'avatars' ? 'bg-purple-500/20 text-purple-300' : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Users className="w-3.5 h-3.5" />
+            Avatar Galerij
+          </button>
+        </div>
+      )}
+
+      {/* Avatar Galerij sub-content (verbergt search/grid van system-archive) */}
+      {activeTab === 'foto' && fotoSubTab === 'avatars' && (
+        <div data-testid="foto-avatars-pane" className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
+          <p className="text-[11px] text-slate-400 mb-3">
+            Voorbeeld-avatars die <span className="text-purple-300">alle users</span> kunnen kiezen als profielfoto via Mijn Profiel → Avatar.
+            Eigen user-portretten worden apart opgeslagen en zijn alleen voor het eigen profiel.
+          </p>
+          <AvatarGallerySection adminId={currentUserId} isAdmin={isAdmin} />
+        </div>
+      )}
+
+      {/* Search + tag filter (verberg in avatars-mode) */}
+      {!(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+        <div className="flex flex-wrap gap-2">
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
+            <input data-testid="sys-archive-search" type="text"
+              value={search} onChange={e => setSearch(e.target.value)}
+              placeholder={`Zoek in ${activeCat.label.toLowerCase()}...`}
+              className="w-full pl-8 pr-8 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
+            {search && (
+              <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+          {activeTab === 'dialogen' && availableTags.length > 0 && (
+            <select value={tagFilter} onChange={e => setTagFilter(e.target.value)}
+              data-testid="sys-archive-tag-filter"
+              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white">
+              <option value="">Alle tags</option>
+              {availableTags.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
           )}
         </div>
-        {activeTab === 'dialogen' && availableTags.length > 0 && (
-          <select value={tagFilter} onChange={e => setTagFilter(e.target.value)}
-            data-testid="sys-archive-tag-filter"
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white">
-            <option value="">Alle tags</option>
-            {availableTags.map(t => <option key={t} value={t}>{t}</option>)}
-          </select>
-        )}
-      </div>
+      )}
 
-      {/* Content */}
-      {loading ? (
-        <div className="text-center py-12 text-xs text-slate-500">Laden...</div>
-      ) : files.length === 0 ? (
-        <div className="text-center py-12">
-          <activeCat.icon className="w-10 h-10 text-slate-700 mx-auto mb-2" />
-          <p className="text-sm text-slate-400 mb-1">
-            {search ? `Geen ${activeCat.label.toLowerCase()} matchen "${search}"` : `Nog geen ${activeCat.label.toLowerCase()}`}
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {files.map(f => (
-            <SystemFileCard key={f.id}
-              file={f}
-              category={CATEGORIES.find(c => c.id === f.category) || CATEGORIES[0]}
-              availableTags={availableTags}
-              isEditing={editingId === f.id}
-              editForm={editForm}
-              setEditForm={setEditForm}
-              onStartEdit={() => startEdit(f)}
-              onSave={saveEdit}
-              onCancel={() => setEditingId(null)}
-              onDelete={() => deleteFile(f.id)}
-            />
-          ))}
-        </div>
+      {/* Content (verberg in avatars-mode) */}
+      {!(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+        loading ? (
+          <div className="text-center py-12 text-xs text-slate-500">Laden...</div>
+        ) : files.length === 0 ? (
+          <div className="text-center py-12">
+            <activeCat.icon className="w-10 h-10 text-slate-700 mx-auto mb-2" />
+            <p className="text-sm text-slate-400 mb-1">
+              {search ? `Geen ${activeCat.label.toLowerCase()} matchen "${search}"` : `Nog geen ${activeCat.label.toLowerCase()}`}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {files.map(f => (
+              <SystemFileCard key={f.id}
+                file={f}
+                category={CATEGORIES.find(c => c.id === f.category) || CATEGORIES[0]}
+                availableTags={availableTags}
+                isEditing={editingId === f.id}
+                editForm={editForm}
+                setEditForm={setEditForm}
+                onStartEdit={() => startEdit(f)}
+                onSave={saveEdit}
+                onCancel={() => setEditingId(null)}
+                onDelete={() => deleteFile(f.id)}
+              />
+            ))}
+          </div>
+        )
       )}
     </div>
   );

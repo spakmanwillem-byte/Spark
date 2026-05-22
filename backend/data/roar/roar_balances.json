@@ -1,8 +1,9 @@
 {
   "balances": {
     "user-000": 5,
-    "user-001": 14,
-    "user-a0ee2d7e": 1
+    "user-001": 13,
+    "user-a0ee2d7e": 1,
+    "user-574ac78e": 1
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -58,6 +59,17 @@
       "value_eur_at_gift": 10.1,
       "source": "Willem → Gijs (welkomstgift)",
       "note": "Eerste token-gift aan nieuwe user Gijs",
+      "status": "completed"
+    },
+    {
+      "id": "1f8f41f2-c1b3-4a53-accb-60008ce1b3ef",
+      "ts": "2026-05-22T20:42:38.675524+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-574ac78e",
+      "amount": 1,
+      "value_eur_at_gift": 10.11,
+      "source": "Willem → Nick (welkomstgift)",
       "status": "completed"
     }
   ],
@@ -132,6 +144,14 @@
       "to_user_id": "user-a0ee2d7e",
       "amount": 1,
       "reason": "Welkomstgift voor nieuwe user"
+    },
+    {
+      "ts": "2026-05-22T20:42:38.675524+00:00",
+      "action": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-574ac78e",
+      "amount": 1,
+      "reason": "Welkomstgift nieuwste user"
     }
   ],
   "treasury_pool": 999980,

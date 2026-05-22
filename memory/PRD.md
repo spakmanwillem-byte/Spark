@@ -1,5 +1,15 @@
 # Spark Core 2.0 — PRD
 
+## Completed (recent)
+- 2026-05-22: **Critical Bug-Fix Batch + Inventory + Backup Speed** (9/9 backend + UI bevestigd):
+  - 💰 Wallet reset: user-001 → 0 tokens, user-000 (Spark) → 1 token / €5.08
+  - 🤖 Trade bot filter: alleen Spark zichtbaar (1/2)
+  - 🔒 Spark bot onstopbaar
+  - 🌟 Privé-glow slaat Spark-DMs over (eigen tab)
+  - 🎭 Spark AI bubble toont avatar i.p.v. ster
+  - 🔁 Community chat: schoon overzicht per inlog + banner
+  - 💡 Roadmap "Jouw Ideeën & Tickets" met `/api/bugs/mine` endpoint
+
 ## Original problem statement
 Modular, offline-first personal legacy system. Memory & knowledge machine. STRICT requirement: data lives in local JSON files (NO MongoDB).
 

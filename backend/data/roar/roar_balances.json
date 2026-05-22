@@ -1,12 +1,33 @@
 {
   "balances": {
-    "user-000": 1,
-    "user-001": 0
+    "user-000": 10,
+    "user-001": 10
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
   "fixed_price_limit": 10,
-  "transactions": [],
+  "transactions": [
+    {
+      "ts": "2026-05-23T00:00:00+00:00",
+      "type": "mint",
+      "user_id": "user-000",
+      "amount": 9,
+      "price_eur": 5.08,
+      "total_eur": 45.72,
+      "source": "Bitvavo SEPA bijstorting",
+      "note": "Spark krijgt 9 extra tokens (van 1 naar 10) — eigen 10 potjes"
+    },
+    {
+      "ts": "2026-05-23T00:00:00+00:00",
+      "type": "mint",
+      "user_id": "user-001",
+      "amount": 10,
+      "price_eur": 5.08,
+      "total_eur": 50.80,
+      "source": "Bitvavo SEPA bijstorting",
+      "note": "Willem krijgt 10 nieuwe tokens — eigen 10 potjes"
+    }
+  ],
   "spark_bonus": {
     "balance": 0,
     "cumulative_profit_eur": 0.0,
@@ -48,9 +69,23 @@
       "user_id": "user-c609d7d1",
       "amount": 1,
       "reason": null
+    },
+    {
+      "ts": "2026-05-23T00:00:00+00:00",
+      "action": "grant",
+      "user_id": "user-000",
+      "amount": 9,
+      "reason": "Bijstorting €96.52 — Spark naar 10 tokens"
+    },
+    {
+      "ts": "2026-05-23T00:00:00+00:00",
+      "action": "grant",
+      "user_id": "user-001",
+      "amount": 10,
+      "reason": "Bijstorting €96.52 — Willem naar 10 tokens"
     }
   ],
-  "treasury_pool": 999999,
+  "treasury_pool": 999980,
   "repair_log": [
     {
       "ts": "2026-05-21T11:57:18.258412+00:00",

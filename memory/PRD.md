@@ -1,6 +1,12 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v4_deposit_19_tokens_001** (€96.52 bijstorting):
+  - 💰 **19 tokens uitgegeven** (€5.08 each, fixed-price tier): Spark (user-000) 1→10, Willem (user-001) 0→10. Treasury pool 999999→999980. Mint-transacties + admin-log entries toegevoegd in `roar_balances.json`. `user_wallets.json` synchroon
+  - 📥 **Deposit registered**: €96.52 via `/api/trade/deposits/user-001` (Bitvavo SEPA). Trader baseline auto-bumped €5.08 → €101.60 (matcht live Bitvavo wallet). Live P&L €0.00 (schone start)
+  - 🤖 **Spark trader hourly default lock-on**: bot draait op user-001 (waar Bitvavo creds zijn), interval=3600s, 5 markets, auto_trade=true, persistent via `bots_registry_state.json`. Auto-resume bij elke server start (dus niet gekoppeld aan inlog — "aan = lock-aan")
+  - 👤 **Willem's bot off by default**: kan zelf aan/uit; gebruikt dezelfde Bitvavo-creds en zal binnen z'n 10-token allocatie traden zodra ingeschakeld
+
 - 2026-05-23 **v4_spark_clean_start_001** (mini-batch, follow-up):
   - 🧹 **Spark trader schone start**: user-001 trade_history gearchiveerd → `user-001_archive_pre_spark_clean_<ts>.json`, daarna leeggemaakt (0 trades). Baseline gezet op €5.08 (matcht live Bitvavo wallet)
   - 🤖 **Bot autostart op user-001**: `bots_registry_state.json` verplaatst van user-000 → user-001 (waar de echte Bitvavo creds staan). Bij backend restart: "🤖 1 registry-bot(s) auto-resumed" en cycles loopt direct

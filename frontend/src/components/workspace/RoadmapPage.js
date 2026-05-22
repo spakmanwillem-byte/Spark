@@ -195,6 +195,25 @@ const phases = [
       { title: '📊 Analytics bot-kaart redesign (uitklap + history)', status: 'done', anchor: 'bot-cards' },
     ],
   },
+  {
+    id: 'phase-v066',
+    title: 'Deploy v0.6.6: D&D Base Line & Slim KB-overdracht',
+    status: 'done',
+    color: '#a855f7',
+    icon: Sparkles,
+    period: '23 mei 2026',
+    items: [
+      { title: '🎭 [start verhaal] in community chat — Base Line intro', status: 'done', anchor: 'baseline-intro', note: '4 berichten: opening → AD in tijd, donker → bundel licht slaat als water → altaar x0,y0,z0 → 3 keuzestenen' },
+      { title: '👂 Drie zintuig-keuzes: Horen / Zien / Zwijgen', status: 'done', anchor: 'baseline-choices', note: 'Werkt end-to-end. behavior_tracker logt elke keuze als groei-input. Ruiken/Proeven komen later' },
+      { title: '🆘 Help-knop community chat (typ "help")', status: 'done', anchor: 'community-help', note: 'Productie-bug fix: typ help, /help, ? of hulp → command-overzicht' },
+      { title: '📦 KB-diff export endpoint (slim — paar KB ipv 11MB)', status: 'done', anchor: 'kb-diff-export', note: '/api/backup/kb-changed-since-deploy — alleen kaarten die na deploy zijn aangepast' },
+      { title: '📥 KB-diff import endpoint (merge tussen omgevingen)', status: 'done', anchor: 'kb-diff-import', note: '/api/knowledge/import-diff — upload-mergen met automatische backup, match by id of begrip' },
+      { title: '🗂️ 3 download-opties op Backup-pagina', status: 'done', anchor: 'backup-3-cards', note: 'Wijzigingen / KB-diff slim / Volledig — keuze afhankelijk van wat je nodig hebt' },
+      { title: '🎭 5e bot toegevoegd: De Dood', status: 'done', anchor: 'bot-dood', note: 'Reflectieve acteur bij memento-momenten, eindes, transities. Gallery-avatar gekoppeld' },
+      { title: '⚙️ Bot-instellingen tab in UsersAdminPage', status: 'done', anchor: 'bot-settings-tab', note: 'Alleen voor is_bot users. Velden: rol, persoonlijkheid, channels, bark-template, avatar-lock, STT/TTS toggles' },
+      { title: '🔥 Trader hot coin-swap (productie-bug fix)', status: 'done', anchor: 'trader-hotswap', note: 'Coin-picker klikbaar tijdens running monitor. Potjes verdelen automatisch 5×2 over actieve coins' },
+    ],
+  },
 ];
 
 export function RoadmapPage({ onNavigate }) {

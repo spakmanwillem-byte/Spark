@@ -18,12 +18,14 @@ Scope:
 import io
 import json
 import zipfile
+import tempfile
+import os
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import List, Dict, Any
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Form
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 
 router = APIRouter(prefix="/backup", tags=["backup"])
 
@@ -103,6 +105,33 @@ def _collect_files(since_epoch: float = 0.0) -> List[Dict[str, Any]]:
     return items
 
 
+def _make_zip_file(files: List[Dict[str, Any]], meta: Dict[str, Any]) -> Path:
+    """v4_backup_stream_001 — schrijf ZIP naar disk-tempfile (NIET in RAM).
+
+    Voor grote backups (16MB+) voorkomt dit dat alles eerst in RAM moet zitten
+    en de browser timeout omdat de response pas begint na alle compressie.
+    """
+    tmp = Path(tempfile.mkstemp(prefix="spark_backup_", suffix=".zip")[1])
+    with zipfile.ZipFile(str(tmp), "w", zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
+        zf.writestr("spark_backup_manifest.json", json.dumps(meta, indent=2))
+        for item in files:
+            try:
+                zf.write(item["abs"], arcname=item["rel"])
+            except (OSError, ValueError):
+                continue
+    # Sanity test (cheap: just open, niet testzip op alles → testzip is duur bij grote files)
+    try:
+        with zipfile.ZipFile(str(tmp)) as test_zf:
+            _ = test_zf.namelist()  # alleen index parsen, geen CRC check
+    except zipfile.BadZipFile as e:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+        raise RuntimeError(f"Backup ZIP validatie faalde: {e}")
+    return tmp
+
+
 def _make_zip(files: List[Dict[str, Any]], meta: Dict[str, Any]) -> bytes:
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -146,6 +175,19 @@ def _safe_target_from_rel(rel: str) -> Path:
 
 
 # ============== ROUTES ==============
+def _cleanup_task(path: Path):
+    """Background task die tempfile verwijdert nadat FileResponse klaar is."""
+    from starlette.background import BackgroundTask
+
+    def _do():
+        try:
+            if path.exists():
+                path.unlink()
+        except OSError:
+            pass
+    return BackgroundTask(_do)
+
+
 @router.post("/mark-deployed")
 async def mark_deployed():
     """Zet de 'laatste deploy' marker op nu. Roep dit aan direct NA een succesvolle deploy."""
@@ -206,19 +248,21 @@ async def download_full():
         "sources": [str(r) for _, r in BACKUP_SOURCES],
         "files": [{"path": f["rel"], "size": f["size"], "mtime": f["mtime_iso"]} for f in files],
     }
-    blob = _make_zip(files, meta)
+    # v4_backup_stream_001 — schrijf naar disk en stream als FileResponse
+    zip_path = _make_zip_file(files, meta)
+    size = zip_path.stat().st_size
     fname = f"spark_backup_full_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
-    import hashlib as _hl
-    sha = _hl.sha256(blob).hexdigest()[:16]
-    return StreamingResponse(
-        io.BytesIO(blob),
+    return FileResponse(
+        str(zip_path),
         media_type="application/zip",
+        filename=fname,
         headers={
-            "Content-Disposition": f'attachment; filename="{fname}"',
-            "Content-Length": str(len(blob)),
-            "X-Backup-SHA256-Short": sha,
+            "Content-Length": str(size),
+            "X-Backup-Bytes": str(size),
             "X-Backup-Files": str(len(files)),
+            "Cache-Control": "no-store",
         },
+        background=_cleanup_task(zip_path),
     )
 
 
@@ -236,22 +280,21 @@ async def download_changes():
         "sources": [str(r) for _, r in BACKUP_SOURCES],
         "files": [{"path": f["rel"], "size": f["size"], "mtime": f["mtime_iso"]} for f in files],
     }
-    if not files:
-        pass
-    blob = _make_zip(files, meta)
+    zip_path = _make_zip_file(files, meta)
+    size = zip_path.stat().st_size
     label = "changes" if since > 0 else "no_marker_full_like"
     fname = f"spark_backup_{label}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
-    import hashlib as _hl
-    sha = _hl.sha256(blob).hexdigest()[:16]
-    return StreamingResponse(
-        io.BytesIO(blob),
+    return FileResponse(
+        str(zip_path),
         media_type="application/zip",
+        filename=fname,
         headers={
-            "Content-Disposition": f'attachment; filename="{fname}"',
-            "Content-Length": str(len(blob)),
-            "X-Backup-SHA256-Short": sha,
+            "Content-Length": str(size),
+            "X-Backup-Bytes": str(size),
             "X-Backup-Files": str(len(files)),
+            "Cache-Control": "no-store",
         },
+        background=_cleanup_task(zip_path),
     )
 
 

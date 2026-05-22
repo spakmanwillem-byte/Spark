@@ -193,6 +193,16 @@ async def list_bugs(viewer_id: str, status: Optional[str] = None):
     return {"bugs": bugs, "total": len(bugs), "counts": counts}
 
 
+# v4_roadmap_user_ideas_001 — eigen tickets ophalen (zonder admin-rechten)
+@router.get("/mine")
+async def my_bugs(user_id: str):
+    """Toon alleen bug-tickets aangemaakt door de huidige user."""
+    data = load_json(BUGS_FILE, default={"bugs": []})
+    mine = [b for b in data.get("bugs", []) if b.get("created_by_id") == user_id]
+    mine.sort(key=lambda b: b.get("created_at", ""), reverse=True)
+    return {"bugs": mine, "total": len(mine)}
+
+
 @router.patch("/{bug_id}/status")
 async def update_status(bug_id: str, req: UpdateStatus):
     if not _is_admin_viewer(req.viewer_id):

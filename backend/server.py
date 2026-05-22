@@ -161,6 +161,10 @@ app.include_router(profile_router, prefix="/api")
 from modules.profile.avatar import router as avatar_router
 app.include_router(avatar_router, prefix="/api")
 
+# v4_inventory_001 — Stats + Inventory (D&D laag)
+from modules.inventory.routes import router as inventory_router
+app.include_router(inventory_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

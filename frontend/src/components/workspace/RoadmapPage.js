@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { useAuth } from '../../context/AuthContext';
 import {
   Map, CheckCircle, Clock, Circle, ChevronRight, ChevronDown,
   Rocket, Target, Flag, Star, Zap, Brain, Shield, Globe,
   Package, MessageSquare, Coins, Users, BarChart3, Layers,
   BookOpen, StickyNote, BookHeart, Award, Wallet, Trophy,
-  Settings, Puzzle, Calendar, Home, TrendingUp, Link2, Sparkles
+  Settings, Puzzle, Calendar, Home, TrendingUp, Link2, Sparkles,
+  Lightbulb,
 } from 'lucide-react';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 const phases = [
   {
@@ -147,9 +151,29 @@ const phases = [
 ];
 
 export function RoadmapPage({ onNavigate }) {
+  const { user } = useAuth();
   const [expandedPhase, setExpandedPhase] = useState(
     phases.find(p => p.status === 'active')?.id || phases[0].id
   );
+  // v4_roadmap_user_ideas_001 — toon bug-tickets / ideeën van user op roadmap
+  const [myBugs, setMyBugs] = useState([]);
+  const isAdmin = (user?.gradatie ?? 7) <= 2;
+  useEffect(() => {
+    if (!user?.id) return;
+    // Alleen admins krijgen /bugs/list (403 anders) — voor non-admin probeer mijn-bugs endpoint
+    const url = isAdmin
+      ? `${API}/api/bugs/list?viewer_id=${user.id}`
+      : `${API}/api/bugs/mine?user_id=${user.id}`;
+    fetch(url)
+      .then(r => r.ok ? r.json() : { bugs: [] })
+      .then(d => {
+        const all = d.bugs || [];
+        // Voor admin filter op eigen tickets, voor non-admin returnt API al alleen eigen
+        const mine = isAdmin ? all.filter(b => b.created_by_id === user.id) : all;
+        setMyBugs(mine);
+      })
+      .catch(() => {});
+  }, [user?.id, isAdmin]);
 
   const totalItems = phases.reduce((a, p) => a + p.items.length, 0);
   const doneItems = phases.reduce((a, p) => a + p.items.filter(i => i.status === 'done').length, 0);
@@ -200,6 +224,45 @@ export function RoadmapPage({ onNavigate }) {
             })}
           </div>
         </div>
+
+        {/* v4_roadmap_user_ideas_001 — Jouw Ideeën */}
+        {myBugs.length > 0 && (
+          <div data-testid="roadmap-user-ideas" className="p-5 rounded-xl border border-amber-500/20 bg-slate-900/30">
+            <div className="flex items-center gap-2 mb-3">
+              <Lightbulb className="w-5 h-5 text-amber-400" />
+              <h2 className="text-base font-bold text-white">Jouw Ideeën & Tickets</h2>
+              <span className="text-[10px] px-2 py-0.5 bg-amber-500/15 text-amber-300 rounded-full">{myBugs.length}</span>
+            </div>
+            <div className="space-y-1.5">
+              {myBugs.slice(0, 8).map(b => {
+                const status = b.status || 'open';
+                const sBg =
+                  status === 'opgelost' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' :
+                  status === 'in_behandeling' ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' :
+                  status === 'afgewezen' ? 'bg-slate-700/40 text-slate-500 border-slate-700' :
+                  'bg-amber-500/10 text-amber-300 border-amber-500/30';
+                return (
+                  <div key={b.id} data-testid={`my-bug-${b.id}`}
+                    className="flex items-start gap-3 p-3 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-800/60 rounded-lg transition-colors">
+                    <span className={`text-[9px] px-1.5 py-0.5 rounded border uppercase font-medium ${sBg} flex-shrink-0 mt-0.5`}>
+                      {status === 'in_behandeling' ? 'in behandeling' : status}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-white">{b.description || b.titel || b.summary || '(geen omschrijving)'}</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5">
+                        {b.created_at ? new Date(b.created_at).toLocaleString('nl-NL', {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : ''}
+                        {b.page && <span className="ml-2 text-slate-400">· {b.page}</span>}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+              {myBugs.length > 8 && (
+                <p className="text-[10px] text-slate-500 text-center pt-1">+ {myBugs.length - 8} meer</p>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Timeline */}
         <div className="space-y-3">

@@ -19199,11 +19199,70 @@
         "session_id": "default",
         "gesprek_nummer": 730
       }
+    },
+    {
+      "id": "conv-c9d2756e",
+      "timestamp": "2026-05-22T04:59:37.680482+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 7 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 731
+      }
+    },
+    {
+      "id": "conv-a9c9d3e6",
+      "timestamp": "2026-05-22T04:59:37.755403+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 732
+      }
+    },
+    {
+      "id": "conv-a3dfcecf",
+      "timestamp": "2026-05-22T04:59:40.748388+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 733
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 730,
-    "last_updated": "2026-05-21T21:55:56.000328+00:00"
+    "total_conversations": 733,
+    "last_updated": "2026-05-22T04:59:40.748388+00:00"
   }
 }

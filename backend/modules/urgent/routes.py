@@ -134,6 +134,9 @@ def _prive_glow_for_user(user_id: str) -> List[Dict]:
       • 1-2 unread       → amber
       • ≥3 unread        → red
       • boekhouder-DM    → meteen red (financiële trade alert)
+
+    v4_glow_skip_spark_001: gesprekken met Spark (user-000) tellen NIET
+    voor de Privé-glow — die hebben hun eigen Spark AI tab.
     """
     if not PRIVE_DIR.exists():
         return []
@@ -143,7 +146,11 @@ def _prive_glow_for_user(user_id: str) -> List[Dict]:
     for fp in PRIVE_DIR.glob("*.json"):
         # Filter: alleen conversaties waar user in betrokken is
         stem = fp.stem
-        if user_id not in stem.split("__"):
+        parts = stem.split("__")
+        if user_id not in parts:
+            continue
+        # Skip Spark-conversaties (die horen bij Spark AI tab)
+        if "user-000" in parts:
             continue
         data = load_json(fp, default={"messages": []})
         for m in data.get("messages", []):
@@ -155,7 +162,6 @@ def _prive_glow_for_user(user_id: str) -> List[Dict]:
                     from_boekhouder += 1
     if total_unread == 0:
         return []
-    # Boekhouder-DM = altijd red
     severity = "red" if (from_boekhouder > 0 or total_unread >= 3) else "amber"
     top_sender = max(senders.items(), key=lambda x: x[1])[0] if senders else None
     return [{

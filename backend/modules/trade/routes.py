@@ -598,9 +598,28 @@ async def bot_decisions(user_id: str, limit: int = Query(50)):
 
 @router.get("/admin/bots")
 async def admin_list_bots():
-    """v4_trade_analytics_001: alle user-bots voor admin overzicht."""
+    """v4_trade_analytics_001: alle user-bots voor admin overzicht.
+
+    v4_token_bot_filter_001: filtert users met 0 tokens (zij hebben geen bot-slot).
+    """
     from .monitor import list_running_bots
-    return {"success": True, "bots": list_running_bots()}
+    # Wallets ophalen om token-balans te checken
+    wallets_fp = Path(__file__).parent.parent.parent / "data" / "wallet" / "user_wallets.json"
+    wallets = load_json(wallets_fp, default={"user_wallets": {}}).get("user_wallets", {})
+    bots = list_running_bots()
+    filtered = []
+    for b in bots:
+        uid = b.get("user_id") or ""
+        # Spark altijd tonen
+        if uid == "user-000":
+            filtered.append(b)
+            continue
+        wallet = (wallets.get(uid) or {}).get("wallet") or {}
+        tokens = wallet.get("spark_tokens", 0)
+        # Alleen tonen als user tokens heeft OF bot daadwerkelijk draait
+        if tokens > 0 or b.get("running"):
+            filtered.append(b)
+    return {"success": True, "bots": filtered, "total_unfiltered": len(bots)}
 
 
 @router.get("/community/trade-feed")

@@ -240,6 +240,25 @@ export function GesprekkenPage({ onNavigate }) {
   const [communityLoading, setCommunityLoading] = useState(false);
   const [sendingCommunity, setSendingCommunity] = useState(false);
 
+  // v4_community_session_start_001 — alleen berichten vanaf inlog tonen
+  const [communitySessionStart] = useState(() => {
+    const key = `community_session_start_${userId}`;
+    let ts = sessionStorage.getItem(key);
+    if (!ts) {
+      ts = new Date().toISOString();
+      sessionStorage.setItem(key, ts);
+    }
+    return ts;
+  });
+  // v4_spark_avatar_in_chat_001 — toon Spark's eigen avatar i.p.v. ster
+  const [sparkAvatarUrl, setSparkAvatarUrl] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/api/avatar/current/user-000`)
+      .then(r => r.json())
+      .then(d => setSparkAvatarUrl(d.url ? `${API}${d.url}` : (d.fallback_url ? `${API}${d.fallback_url}` : null)))
+      .catch(() => {});
+  }, []);
+
   // Privé contacten + messages (v4_contacts_001)
   const [priveContacts, setPriveContacts] = useState([]);
   const [priveLoading, setPriveLoading] = useState(false);
@@ -366,14 +385,17 @@ export function GesprekkenPage({ onNavigate }) {
     if (activeTab !== 'community') return;
     setCommunityLoading(true);
     Promise.all([
-      fetch(`${API}/api/bots/community/messages?limit=100`).then(r => r.json()).catch(() => ({ messages: [] })),
+      fetch(`${API}/api/bots/community/messages?limit=200`).then(r => r.json()).catch(() => ({ messages: [] })),
       fetch(`${API}/api/bots/list`).then(r => r.json()).catch(() => ({ bots: [] })),
     ]).then(([m, b]) => {
-      setCommunityMessages((m.messages || []).reverse());
+      // v4_community_session_start_001: filter berichten vanaf inlogmoment
+      const all = (m.messages || []).reverse();
+      const sinceLogin = all.filter(msg => !msg.timestamp || msg.timestamp >= communitySessionStart);
+      setCommunityMessages(sinceLogin);
       setBots(b.bots || []);
       setCommunityLoading(false);
     });
-  }, [activeTab]);
+  }, [activeTab, communitySessionStart]);
 
   // v4_actions_001 — STT opname helpers (v4_voice_002: + silence detection + auto-send)
   const cleanupSilenceDetection = () => {
@@ -776,7 +798,7 @@ export function GesprekkenPage({ onNavigate }) {
               )}
               <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
                 {sparkMessages.map(msg => (
-                  <SparkBubble key={msg.id} msg={msg} />
+                  <SparkBubble key={msg.id} msg={msg} sparkAvatarUrl={sparkAvatarUrl} />
                 ))}
                 <div ref={messagesEndRef} />
               </div>
@@ -823,10 +845,14 @@ export function GesprekkenPage({ onNavigate }) {
               {/* Community messages */}
               <div className="flex-1 flex flex-col">
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">
+                  {/* v4_community_session_start_001 — info-banner */}
+                  <div data-testid="community-session-banner" className="text-center text-[10px] text-slate-500 italic pb-2 border-b border-slate-800/40">
+                    🔁 Schoon overzicht sinds je inlog ({new Date(communitySessionStart).toLocaleTimeString('nl-NL', {hour: '2-digit', minute: '2-digit'})}). Vraag Spark "wat is gisteren besproken?" voor archief.
+                  </div>
                   {communityLoading ? (
                     <p className="text-center text-slate-500 text-xs">Berichten laden...</p>
                   ) : communityMessages.length === 0 ? (
-                    <p className="text-center text-slate-500 text-xs">Nog geen berichten. Typ iets om te starten!</p>
+                    <p className="text-center text-slate-500 text-xs">Geen nieuwe berichten in deze sessie. Typ iets!</p>
                   ) : (
                     communityMessages.map(msg => (
                       <CommunityBubble key={msg.id} msg={msg} isOwn={msg.user_id === userId} />
@@ -1053,7 +1079,7 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
 }
 
 /* === Spark AI message bubble === */
-function SparkBubble({ msg }) {
+function SparkBubble({ msg, sparkAvatarUrl }) {
   const isUser = msg.role === 'user';
   const hasMatches = msg.knowledge_matches && msg.knowledge_matches.length > 0;
   const hasSnaps = msg.snap_suggestions && msg.snap_suggestions.length > 0;
@@ -1072,8 +1098,13 @@ function SparkBubble({ msg }) {
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div className={`flex items-end gap-2 max-w-[80%] md:max-w-[65%] ${isUser ? 'flex-row-reverse' : ''}`}>
         {!isUser && (
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0"
+            style={!sparkAvatarUrl ? { background: 'linear-gradient(135deg, #f59e0b, #ea580c)' } : undefined}>
+            {sparkAvatarUrl ? (
+              <img src={sparkAvatarUrl} alt="Spark" className="w-full h-full object-cover" />
+            ) : (
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+            )}
           </div>
         )}
         <div>

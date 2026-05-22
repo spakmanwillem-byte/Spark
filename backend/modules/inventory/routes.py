@@ -1,0 +1,258 @@
+"""
+Inventory Module (v4_inventory_001)
+
+Stats + Inventory per user (incl. bots) — basis voor D&D laag.
+
+JSON Schema (/app/backend/data/users/{user_id}/inventory.json):
+{
+  "user_id": "user-001",
+  "slots": [
+    {"id": "slot-xxx", "item_id": "backpack-basic", "naam": "Basis Rugzak", "kind": "carry", "weight": 1.0, "capacity_bonus": 5, "weight_bonus": 10.0, "acquired_at": "ISO"}
+  ],
+  "stats": {
+    "level": 277,       # afgeleid van XP // 100
+    "xp": 27720,
+    "rang": "Generaal",
+    "gradatie": 4,
+    "trust": 0,
+    "achievements": []
+  },
+  "capacity": {
+    "slots_base": 4,
+    "slots_used": 1,
+    "slots_total": 9,     # base + sum(capacity_bonus)
+    "weight_used": 1.0,
+    "weight_max": 20.0,   # base 10 + sum(weight_bonus)
+  }
+}
+"""
+from pathlib import Path
+from typing import Dict, List, Optional
+from datetime import datetime, timezone
+import uuid
+
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+
+from ..core.storage import load_json, save_json
+
+router = APIRouter(prefix="/inventory", tags=["inventory"])
+
+DATA_ROOT = Path(__file__).parent.parent.parent / "data"
+USERS_FILE = DATA_ROOT / "system" / "users.json"
+USERS_DIR = DATA_ROOT / "users"
+
+BASE_SLOTS = 4         # ieder krijgt standaard 4 slots
+BASE_WEIGHT_MAX = 10.0  # 10kg basis-tilcapaciteit
+
+# Built-in item-catalogus (uitbreidbaar via KB later)
+ITEM_CATALOG = {
+    "backpack-basic": {
+        "naam": "Basis Rugzak",
+        "kind": "carry",
+        "weight": 1.0,
+        "capacity_bonus": 5,
+        "weight_bonus": 10.0,
+        "description": "Een eenvoudige stoffen rugzak. +5 slots, +10kg draagkracht. Weegt zelf 1kg.",
+        "icon": "🎒",
+        "rarity": "common",
+    },
+    "backpack-large": {
+        "naam": "Grote Trekrugzak",
+        "kind": "carry",
+        "weight": 2.5,
+        "capacity_bonus": 10,
+        "weight_bonus": 25.0,
+        "description": "Stevige trekrugzak met meerdere vakken. +10 slots, +25kg. Weegt 2.5kg.",
+        "icon": "🎒",
+        "rarity": "uncommon",
+    },
+    "achievement-token": {
+        "naam": "Achievement Penning",
+        "kind": "trophy",
+        "weight": 0.05,
+        "description": "Symbool van een afgeronde achievement.",
+        "icon": "🏅",
+        "rarity": "common",
+    },
+    "auto-bark-pup": {
+        "naam": "Auto-Bark Welp",
+        "kind": "pet",
+        "weight": 0.5,
+        "description": "Een mini-Bark die automatisch reageert in community-chat (1x per dag).",
+        "icon": "🐶",
+        "rarity": "rare",
+    },
+}
+
+
+# ============== HELPERS ==============
+def _inv_path(user_id: str) -> Path:
+    d = USERS_DIR / user_id
+    d.mkdir(parents=True, exist_ok=True)
+    return d / "inventory.json"
+
+
+def _get_user(user_id: str) -> Optional[dict]:
+    data = load_json(USERS_FILE, default={"users": []})
+    return next((u for u in data.get("users", []) if u.get("id") == user_id), None)
+
+
+def _compute_capacity(slots: List[dict]) -> dict:
+    """Bereken capacity uit slots."""
+    cap_bonus = sum(s.get("capacity_bonus", 0) for s in slots)
+    weight_bonus = sum(s.get("weight_bonus", 0.0) for s in slots)
+    weight_used = sum(s.get("weight", 0.0) for s in slots)
+    return {
+        "slots_base": BASE_SLOTS,
+        "slots_used": len(slots),
+        "slots_total": BASE_SLOTS + cap_bonus,
+        "weight_used": round(weight_used, 2),
+        "weight_max": round(BASE_WEIGHT_MAX + weight_bonus, 2),
+    }
+
+
+def _load_or_init(user_id: str) -> dict:
+    u = _get_user(user_id)
+    if not u:
+        raise HTTPException(404, "User niet gevonden")
+    fp = _inv_path(user_id)
+    inv = load_json(fp, default={})
+    # storage.load_json returns {} when file not exists (zelfs met default=None)
+    # → check op "slots" key, niet inv is None
+    if not inv or "slots" not in inv:
+        # First-time init: geef iedereen een Basis Rugzak gratis
+        slot_id = f"slot-{uuid.uuid4().hex[:8]}"
+        item = dict(ITEM_CATALOG["backpack-basic"])
+        slot = {
+            "id": slot_id,
+            "item_id": "backpack-basic",
+            "acquired_at": datetime.now(timezone.utc).isoformat(),
+            "source": "starter_pack",
+            **item,
+        }
+        inv = {
+            "user_id": user_id,
+            "slots": [slot],
+            "achievements": [],
+        }
+        save_json(fp, inv)
+
+    # Refresh stats from users.json (live)
+    xp = u.get("xp", 0)
+    inv["stats"] = {
+        "level": xp // 100,
+        "xp": xp,
+        "rang": u.get("rang", "Burger"),
+        "gradatie": u.get("gradatie", 7),
+        "trust": u.get("trust", 0),
+        "naam": u.get("naam"),
+        "achievements": inv.get("achievements", []),
+        "is_bot": (user_id or "").startswith("bot-") or u.get("type") == "bot",
+    }
+    inv["capacity"] = _compute_capacity(inv.get("slots", []))
+    return inv
+
+
+# ============== MODELS ==============
+class AddItemReq(BaseModel):
+    item_id: str
+    source: Optional[str] = "manual"
+    naam: Optional[str] = None
+    weight: Optional[float] = None
+    capacity_bonus: Optional[int] = None
+    weight_bonus: Optional[float] = None
+    description: Optional[str] = None
+    icon: Optional[str] = None
+
+
+# ============== ROUTES ==============
+@router.get("/{user_id}")
+async def get_inventory(user_id: str):
+    """Haal inventory + stats op voor user/bot."""
+    return _load_or_init(user_id)
+
+
+@router.get("/catalog/all")
+async def get_catalog():
+    """Lijst alle bekende items (ITEM_CATALOG)."""
+    return {"items": [{"id": k, **v} for k, v in ITEM_CATALOG.items()]}
+
+
+@router.post("/{user_id}/items")
+async def add_item(user_id: str, req: AddItemReq):
+    """Voeg item toe aan inventory (uit catalog of custom)."""
+    inv = _load_or_init(user_id)
+    slots = inv.get("slots", [])
+    cap = _compute_capacity(slots)
+    if cap["slots_used"] >= cap["slots_total"]:
+        raise HTTPException(400, f"Inventory vol: {cap['slots_used']}/{cap['slots_total']} slots gebruikt")
+
+    base = dict(ITEM_CATALOG.get(req.item_id, {}))
+    if not base and not req.naam:
+        raise HTTPException(404, f"Item '{req.item_id}' niet in catalog (geef custom naam mee)")
+    # Custom overrides
+    if req.naam:
+        base["naam"] = req.naam
+    if req.weight is not None:
+        base["weight"] = req.weight
+    if req.capacity_bonus is not None:
+        base["capacity_bonus"] = req.capacity_bonus
+    if req.weight_bonus is not None:
+        base["weight_bonus"] = req.weight_bonus
+    if req.description:
+        base["description"] = req.description
+    if req.icon:
+        base["icon"] = req.icon
+
+    proposed_weight = sum(s.get("weight", 0) for s in slots) + (base.get("weight") or 0)
+    if proposed_weight > cap["weight_max"]:
+        raise HTTPException(400, f"Te zwaar: {proposed_weight:.1f}kg > {cap['weight_max']:.1f}kg")
+
+    slot = {
+        "id": f"slot-{uuid.uuid4().hex[:8]}",
+        "item_id": req.item_id,
+        "acquired_at": datetime.now(timezone.utc).isoformat(),
+        "source": req.source or "manual",
+        **base,
+    }
+    slots.append(slot)
+    inv["slots"] = slots
+    fp = _inv_path(user_id)
+    save_json(fp, {"user_id": user_id, "slots": slots, "achievements": inv.get("achievements", [])})
+    return _load_or_init(user_id)
+
+
+@router.delete("/{user_id}/items/{slot_id}")
+async def remove_item(user_id: str, slot_id: str):
+    """Verwijder slot."""
+    inv = _load_or_init(user_id)
+    slots = [s for s in inv.get("slots", []) if s.get("id") != slot_id]
+    if len(slots) == len(inv.get("slots", [])):
+        raise HTTPException(404, "Slot niet gevonden")
+    fp = _inv_path(user_id)
+    save_json(fp, {"user_id": user_id, "slots": slots, "achievements": inv.get("achievements", [])})
+    return _load_or_init(user_id)
+
+
+@router.post("/{user_id}/achievement")
+async def add_achievement(user_id: str, body: dict):
+    """v4_inventory_achievement_001 — registreer achievement + automatisch trofee in inventory."""
+    code = (body.get("code") or "").strip()
+    naam = (body.get("naam") or "").strip() or code
+    if not code:
+        raise HTTPException(400, "code is verplicht")
+    inv = _load_or_init(user_id)
+    achs = inv.get("achievements", [])
+    if any(a.get("code") == code for a in achs):
+        return {"ok": True, "already": True, "inventory": inv}
+    ach = {
+        "code": code,
+        "naam": naam,
+        "earned_at": datetime.now(timezone.utc).isoformat(),
+        "source": body.get("source", "manual"),
+    }
+    achs.append(ach)
+    fp = _inv_path(user_id)
+    save_json(fp, {"user_id": user_id, "slots": inv.get("slots", []), "achievements": achs})
+    return _load_or_init(user_id)

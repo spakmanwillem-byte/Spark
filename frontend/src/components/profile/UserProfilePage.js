@@ -5,6 +5,7 @@ import {
   User, Save, X, Heart, Target, AlertTriangle, Eye, Ear, Brain, Globe,
   Camera, MapPin, Upload, Check, MessageSquare, Calendar,
   Image as ImageIcon, Sparkles, ChevronDown, ChevronRight, Trash2,
+  Backpack, Award, Plus,
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -524,6 +525,9 @@ function AvatarTab({ userId, isAdmin }) {
 
   return (
     <div className="space-y-4">
+      {/* v4_inventory_001 — Persoonskaart (Stats + Inventory) */}
+      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
+
       <Card title="Huidige Avatar" accent="#ec4899" icon={Camera}>
         <div className="flex items-center gap-5">
           <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center overflow-hidden flex-shrink-0">
@@ -708,3 +712,186 @@ function SaveBar({ onSave, saving, savedFlash }) {
 }
 
 export default UserProfilePage;
+
+// ============================================================
+// v4_inventory_001 — Persoonskaart (Stats + Inventory)
+// ============================================================
+function PersoonskaartCard({ userId, isAdmin }) {
+  const [inv, setInv] = useState(null);
+  const [catalog, setCatalog] = useState([]);
+  const [busy, setBusy] = useState(false);
+  const [showShop, setShowShop] = useState(false);
+  const [err, setErr] = useState(null);
+
+  const reload = useCallback(() => {
+    fetch(`${API}/api/inventory/${userId}`).then(r => r.json()).then(setInv).catch(() => {});
+  }, [userId]);
+  useEffect(() => { reload(); }, [reload]);
+  useEffect(() => {
+    fetch(`${API}/api/inventory/catalog/all`).then(r => r.json()).then(d => setCatalog(d.items || []));
+  }, []);
+
+  const addItem = async (itemId) => {
+    setBusy(true); setErr(null);
+    try {
+      const r = await fetch(`${API}/api/inventory/${userId}/items`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item_id: itemId, source: 'shop' }),
+      });
+      const d = await r.json();
+      if (r.ok) { setInv(d); setShowShop(false); }
+      else setErr(d.detail || 'Toevoegen mislukt');
+    } finally { setBusy(false); }
+  };
+
+  const removeItem = async (slotId) => {
+    if (!isAdmin) return;
+    setBusy(true);
+    try {
+      const r = await fetch(`${API}/api/inventory/${userId}/items/${slotId}`, { method: 'DELETE' });
+      if (r.ok) setInv(await r.json());
+    } finally { setBusy(false); }
+  };
+
+  if (!inv) {
+    return (
+      <Card title="Persoonskaart" accent="#a855f7" icon={Award}>
+        <p className="text-slate-500 text-sm">Laden…</p>
+      </Card>
+    );
+  }
+
+  const s = inv.stats || {};
+  const c = inv.capacity || {};
+  const slotsPct = c.slots_total ? Math.round(100 * c.slots_used / c.slots_total) : 0;
+  const weightPct = c.weight_max ? Math.round(100 * c.weight_used / c.weight_max) : 0;
+  const ownedIds = (inv.slots || []).map(sl => sl.item_id);
+  const availableInShop = catalog.filter(it => !ownedIds.includes(it.id) || it.kind !== 'carry');
+
+  return (
+    <Card title="Persoonskaart" accent="#a855f7" icon={Award}>
+      {/* Stats grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+        <StatTile label="Rang" value={s.rang || '—'} />
+        <StatTile label="Level" value={s.level ?? 0} sub={`${s.xp ?? 0} XP`} />
+        <StatTile label="Gradatie" value={s.gradatie ?? 7} />
+        <StatTile label="Trust" value={s.trust ?? 0} />
+      </div>
+
+      {/* Capacity bars */}
+      <div className="space-y-3 mb-4 p-3 bg-slate-900/40 rounded-xl border border-slate-800/60">
+        <div>
+          <div className="flex items-center justify-between text-[11px] mb-1">
+            <span className="text-slate-400 flex items-center gap-1.5">
+              <Backpack className="w-3 h-3" /> Slots
+            </span>
+            <span data-testid="inv-slots" className="text-slate-300 font-mono">{c.slots_used} / {c.slots_total}</span>
+          </div>
+          <div className="h-1.5 bg-slate-800 rounded overflow-hidden">
+            <div className={`h-full transition-all ${slotsPct >= 90 ? 'bg-red-500' : slotsPct >= 70 ? 'bg-amber-500' : 'bg-emerald-500'}`}
+              style={{ width: `${Math.min(100, slotsPct)}%` }} />
+          </div>
+        </div>
+        <div>
+          <div className="flex items-center justify-between text-[11px] mb-1">
+            <span className="text-slate-400">Gewicht</span>
+            <span data-testid="inv-weight" className="text-slate-300 font-mono">{c.weight_used} / {c.weight_max} kg</span>
+          </div>
+          <div className="h-1.5 bg-slate-800 rounded overflow-hidden">
+            <div className={`h-full transition-all ${weightPct >= 90 ? 'bg-red-500' : weightPct >= 70 ? 'bg-amber-500' : 'bg-cyan-500'}`}
+              style={{ width: `${Math.min(100, weightPct)}%` }} />
+          </div>
+        </div>
+      </div>
+
+      {/* Inventory slots */}
+      <div className="space-y-2 mb-3">
+        <p className="text-[10px] uppercase tracking-wider text-slate-500">Items ({inv.slots?.length || 0})</p>
+        {(inv.slots || []).length === 0 ? (
+          <p className="text-xs text-slate-500 italic">Nog geen items.</p>
+        ) : (
+          <div className="space-y-1.5">
+            {inv.slots.map(slot => (
+              <div key={slot.id} data-testid={`inv-slot-${slot.id}`}
+                className="flex items-center gap-3 p-2.5 bg-slate-800/40 hover:bg-slate-800/60 border border-slate-800/60 rounded-lg transition-colors">
+                <div className="text-2xl">{slot.icon || '📦'}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium text-white truncate">{slot.naam}</p>
+                    {slot.rarity && slot.rarity !== 'common' && (
+                      <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300 uppercase">{slot.rarity}</span>
+                    )}
+                  </div>
+                  <p className="text-[10px] text-slate-500 truncate">
+                    {slot.weight}kg
+                    {slot.capacity_bonus ? ` · +${slot.capacity_bonus} slots` : ''}
+                    {slot.weight_bonus ? ` · +${slot.weight_bonus}kg` : ''}
+                  </p>
+                </div>
+                {isAdmin && (
+                  <button data-testid={`inv-remove-${slot.id}`} onClick={() => removeItem(slot.id)} disabled={busy}
+                    className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors">
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Achievements */}
+      {(s.achievements || []).length > 0 && (
+        <div className="mb-3">
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1.5">Achievements</p>
+          <div className="flex flex-wrap gap-1.5">
+            {s.achievements.map(a => (
+              <span key={a.code} data-testid={`achievement-${a.code}`}
+                className="text-[10px] px-2 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 rounded-full">
+                🏅 {a.naam || a.code}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Shop */}
+      <div className="pt-3 border-t border-slate-800">
+        <button onClick={() => setShowShop(s => !s)}
+          data-testid="inv-toggle-shop"
+          className="w-full px-3 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-1.5">
+          <Plus className="w-3.5 h-3.5" /> {showShop ? 'Sluit catalogus' : 'Voeg item toe (catalogus)'}
+        </button>
+        {err && <p className="mt-2 text-xs text-red-400">{err}</p>}
+        {showShop && (
+          <div className="mt-2 space-y-1.5 p-2 bg-slate-800/30 rounded-lg max-h-48 overflow-y-auto">
+            {availableInShop.length === 0 ? (
+              <p className="text-xs text-slate-500 text-center py-3">Geen items beschikbaar (alle carry-items zijn al gepakt).</p>
+            ) : availableInShop.map(it => (
+              <button key={it.id} onClick={() => addItem(it.id)} disabled={busy}
+                data-testid={`shop-add-${it.id}`}
+                className="w-full flex items-center gap-2 p-2 hover:bg-slate-800/60 rounded text-left transition-colors">
+                <span className="text-lg">{it.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-white truncate">{it.naam}</p>
+                  <p className="text-[9px] text-slate-500 truncate">{it.description}</p>
+                </div>
+                <Plus className="w-3 h-3 text-slate-500 group-hover:text-amber-400" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+function StatTile({ label, value, sub }) {
+  return (
+    <div className="bg-slate-800/40 border border-slate-800/60 rounded-lg p-2.5">
+      <p className="text-[9px] uppercase tracking-wider text-slate-500">{label}</p>
+      <p className="text-sm font-bold text-white truncate">{value}</p>
+      {sub && <p className="text-[9px] text-slate-500">{sub}</p>}
+    </div>
+  );
+}

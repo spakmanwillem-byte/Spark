@@ -1,0 +1,31 @@
+{
+  "summary": "Validated Spark Core 2.0 critical fixes batch (wallet reset, trade bot filter, Spark unstoppable, urgent glow skip, avatar fallback, /bugs/mine non-admin, inventory + backup regression). 9/9 backend tests pass. Roadmap 'Jouw Ideeën & Tickets' UI confirmed (5 bug entries with status badges). Spark AI avatar/Community banner UI tests were inconclusive due to navigation glitch (script clicked sidebar 'Spark Brain' instead of Gesprekken→Spark AI tab); backend evidence supports implementation.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_spark_core_v2_critical_fixes.py",
+    "/app/test_reports/pytest/iter18_results.xml"
+  ],
+  "action_items": [
+    "Main agent should self-verify Gesprekken→Spark AI tab (img tag with /api/avatar/gallery/roadkill-logo/image) and Community tab session banner via UI screenshot — backend already returns is_fallback=true with fallback_url=/api/avatar/gallery/roadkill-logo/image, so frontend should render correctly."
+  ],
+  "critical_code_review_comments": [
+    "trade/routes.py admin/bots filter is correct: Spark always shown; others only if tokens>0 OR running. user-001 with 0 tokens & not running is correctly hidden.",
+    "bugs/routes.py /mine has no admin guard (correct per spec) and filters by created_by_id — works for non-admin (verified for user-c609d7d1).",
+    "urgent/routes.py _prive_glow_for_user properly skips conversations containing user-000 (line 153)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_core_v2_critical_fixes.py (new)"
+  ],
+  "success_rate": {"backend": "100% (9/9)", "frontend": "Roadmap verified (1/3 UI flows fully verified via UI; 2/3 not directly verified but backend supports)"},
+  "test_credentials": "Willem / Appelsap (user-001), Marieke / Welkom01 (user-c609d7d1)",
+  "seed_data_creation": "None (used existing wallet state with user-001=0, user-000=1, spark_system circulating=1).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend test file /app/backend/tests/test_spark_core_v2_critical_fixes.py covers all 9 backend assertions. Note: /api/wallet/overview returns current-user shape (user_wallet, system_wallet, entities) — to inspect another user's tokens use /api/wallet/user/{user_id}. Frontend Roadmap 'Jouw Ideeën & Tickets' section uses data-testid=roadmap-user-ideas and rows have data-testid=my-bug-{id}. The Gesprekken page Spark AI/Community tabs were not directly tested due to sidebar navigation collision when querying button:has-text('Spark') (matches 'Spark Brain' nav first). Use [data-testid='nav-chat'] then locate sub-tabs within Gesprekken page.",
+  "rca of the issue": "N/A — all reported fixes verified via backend; UI roadmap fix verified via Playwright."
+}

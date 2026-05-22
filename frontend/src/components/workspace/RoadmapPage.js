@@ -171,6 +171,9 @@ const phases = [
       { title: '📜 Lore-currency (zeldzame KB-kaarten = waarde)', status: 'planned', anchor: 'lore-currency' },
       { title: '🌫️ Vervormde verhalen (canon herschrijven via consensus)', status: 'planned', anchor: 'dynamic-canon' },
       { title: '🌦️ Weerstation (weer.nl koppeling → cloud/humeur per user)', status: 'planned', anchor: 'weather-mood', note: 'Naast emotie krijgt elke user een "wolk" gevoed door echt weer op zijn locatie. Komt later in Phase Emotie samen' },
+      { title: '🪙 Token-tier: Community → Community Plus bij token-bezit', status: 'planned', anchor: 'community-plus', note: '1+ token = community member, bot-toegang gekoppeld aan wallet-saldo. Spark zelf spaart eigen potjes uit handelswinst → kan ze weggeven of behouden' },
+      { title: '🎤 STT/TTS per bot — admin spreekt namens bot, bot spreekt terug', status: 'planned', anchor: 'bot-voice', note: 'Toggles in Bot-instellingen zitten al — OpenAI Whisper + TTS koppeling volgt' },
+      { title: '🎙️ D&D-kaart als spreekkanaal — bot leest tekst voor uit kaart', status: 'planned', anchor: 'dnd-voice-cards' },
     ],
   },
   {

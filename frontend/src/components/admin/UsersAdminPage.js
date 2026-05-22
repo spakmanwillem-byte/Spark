@@ -1372,6 +1372,9 @@ function BotSettingsView({ user, onSaved }) {
     channels: (user.channels || []).join(', '),
     avatar_lock: user.avatar_lock !== false,
     bark_template: user.bark_template || '',
+    stt_enabled: user.stt_enabled === true,
+    tts_enabled: user.tts_enabled === true,
+    tts_voice: user.tts_voice || 'alloy',
   });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -1383,6 +1386,9 @@ function BotSettingsView({ user, onSaved }) {
       channels: (user.channels || []).join(', '),
       avatar_lock: user.avatar_lock !== false,
       bark_template: user.bark_template || '',
+      stt_enabled: user.stt_enabled === true,
+      tts_enabled: user.tts_enabled === true,
+      tts_voice: user.tts_voice || 'alloy',
     });
     setSaved(false);
   }, [user.id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -1396,6 +1402,9 @@ function BotSettingsView({ user, onSaved }) {
         channels: form.channels.split(',').map(c => c.trim()).filter(Boolean),
         avatar_lock: form.avatar_lock,
         bark_template: form.bark_template,
+        stt_enabled: form.stt_enabled,
+        tts_enabled: form.tts_enabled,
+        tts_voice: form.tts_voice,
       };
       const r = await fetch(`${API}/api/auth/admin/bots/${user.id}/settings`, {
         method: 'PATCH', headers: { 'Content-Type': 'application/json' },
@@ -1464,6 +1473,46 @@ function BotSettingsView({ user, onSaved }) {
             <Lock className="w-3.5 h-3.5 text-cyan-400" />
             Avatar lock — gebruikers kunnen deze bot z'n avatar niet wijzigen
           </label>
+
+          {/* v5_bot_stt_tts_001 — Voorbereiding voor zelf-inspreken (STT) en uitspraak (TTS) */}
+          <div className="border-t border-slate-800/50 pt-4">
+            <p className="text-[11px] text-slate-400 font-semibold mb-2 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              Stem (voorbereiding — koppeling met OpenAI komt later)
+            </p>
+            <div className="space-y-2.5">
+              <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
+                <input data-testid="bot-stt-toggle" type="checkbox"
+                  checked={form.stt_enabled}
+                  onChange={e => setForm({ ...form, stt_enabled: e.target.checked })}
+                  className="w-3.5 h-3.5 accent-cyan-500" />
+                Spraak-naar-tekst (STT) — admin kan inspreken namens deze bot
+              </label>
+              <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
+                <input data-testid="bot-tts-toggle" type="checkbox"
+                  checked={form.tts_enabled}
+                  onChange={e => setForm({ ...form, tts_enabled: e.target.checked })}
+                  className="w-3.5 h-3.5 accent-cyan-500" />
+                Tekst-naar-spraak (TTS) — bot's berichten worden uitgesproken
+              </label>
+              {form.tts_enabled && (
+                <div className="ml-6">
+                  <label className="block text-[10px] text-slate-500 mb-1">TTS-stem (OpenAI voices)</label>
+                  <select data-testid="bot-tts-voice" value={form.tts_voice}
+                    onChange={e => setForm({ ...form, tts_voice: e.target.value })}
+                    className="px-2 py-1 bg-slate-800/60 border border-slate-700 rounded text-xs text-white">
+                    <option value="alloy">alloy — neutraal</option>
+                    <option value="echo">echo — mannelijk, warm</option>
+                    <option value="fable">fable — Brits, verhalend</option>
+                    <option value="onyx">onyx — diep, autoritair</option>
+                    <option value="nova">nova — vrouwelijk, energiek</option>
+                    <option value="shimmer">shimmer — vrouwelijk, zacht</option>
+                  </select>
+                </div>
+              )}
+              <p className="text-[10px] text-slate-600 italic">Schakelaars worden bewaard. Audio-koppeling (OpenAI Whisper/TTS) komt in volgende fase.</p>
+            </div>
+          </div>
 
           <div className="flex items-center justify-between pt-3 border-t border-slate-800/50">
             <p className="text-[10px] text-slate-500">Avatar wijzig je in de Avatar Galerij — instellingen hier veranderen niets aan beeld.</p>

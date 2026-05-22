@@ -1,6 +1,15 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_30_credit_followup** (Potjes spread + STT/TTS prep + roadmap):
+  - 🪙 **Potjes 5×2 verdeling**: nieuwe endpoint `POST /api/trade/potjes/{user_id}/distribute` verdeelt round-robin over de gekozen markten. Bevestigd: BCH/BTC/ETH/SOL/ADA hebben elk 2 potjes na call. Open posities worden overgeslagen (skipped_open_positions: 1). Bij coin-picker wijziging tijdens running monitor wordt ook automatisch herverdeeld
+  - 🎤 **STT/TTS schakelaars in Bot-instellingen**: stt_enabled, tts_enabled, tts_voice (6 OpenAI stemmen). Velden persisteren via `PATCH /api/auth/admin/bots/{bot_id}/settings`. Audio-koppeling zelf (Whisper + TTS) volgt in latere fase via integration_playbook_expert
+  - 📜 **3 nieuwe roadmap items** (planned):
+    - Community Plus token-tier (1+ token = community member, bot-toegang ∝ wallet)
+    - Spark spaart eigen potjes uit handelswinst → kan weggeven
+    - D&D-kaart als spreekkanaal — bot leest kaart-tekst uit
+  - 🗒️ **Notitie over uploaded zip**: was changes-since-deploy snapshot van PRODUCTIE, geen nieuwe KB-kaarten geïmporteerd in preview (anders zou productie-data zich vermengen). Indien gewenst kan KB-merge in volgende sessie
+
 - 2026-05-23 **v5_30_credit_batch** (Trader bug + Bot format + Roadmap):
   - 🔥 **Trader hot coin-swap** (prod bug fix): coin-picker zichtbaar én klikbaar tijdens lopende monitor. Nieuwe endpoint `POST /api/trade/monitor/markets/{user_id}` past markten live aan zonder bot te stoppen. Hint label "(live aanpasbaar)" toont state. 10 potjes spreiden zich automatisch over gekozen coins
   - 🤖 **Bot format gestandaardiseerd**: madelief, harry, smith, boekhouder krijgen allemaal `is_bot=true`, `personality`, `rol`, `channels`, `avatar_lock`. Consistent template voor alle acteurs

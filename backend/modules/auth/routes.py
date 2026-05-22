@@ -323,6 +323,10 @@ class BotSettingsPatch(BaseModel):
     channels: Optional[list] = None
     avatar_lock: Optional[bool] = None
     bark_template: Optional[str] = None
+    # v5_bot_stt_tts_001 — voorbereiding voor stemkoppeling
+    stt_enabled: Optional[bool] = None
+    tts_enabled: Optional[bool] = None
+    tts_voice: Optional[str] = None
 
 
 @router.patch("/admin/bots/{bot_id}/settings")

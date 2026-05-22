@@ -9,7 +9,7 @@ Regels (Willem's design):
 - Elk potje heeft eigen trailing stop + position state
 """
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
 
@@ -430,6 +430,54 @@ def expand_potjes(user_id: str) -> Dict:
         "cost": cost,
         "overflow_left": user["overflow_pool"],
         "message": f"Potje #{new_count} toegevoegd! Alle {new_count} potjes nu €{new_max}",
+    }
+
+
+
+# v5_potjes_distribute_001 — Verdeel potjes evenredig over een lijst van markten
+def distribute_potjes_over_markets(user_id: str, markets: List[str]) -> Dict:
+    """Verdeel alle potjes evenredig over de gekozen markten.
+    Voorbeeld: 10 potjes + 5 markets → 2 potjes per market.
+    Open posities worden NIET geraakt (alleen `market` van gesloten potjes verandert)."""
+    if not markets:
+        return {"success": False, "error": "Geen markten opgegeven"}
+    markets = [m.strip().upper() for m in markets if m and m.strip()]
+    if not markets:
+        return {"success": False, "error": "Geen geldige markten"}
+
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user["potjes"]
+    if not potjes:
+        return {"success": False, "error": "Geen potjes om te verdelen"}
+
+    n = len(potjes)
+    m = len(markets)
+    # Round-robin verdeling
+    changed = []
+    skipped_open = 0
+    for i, p in enumerate(potjes):
+        target_market = markets[i % m]
+        if p.get("position", {}).get("is_open"):
+            skipped_open += 1
+            continue  # niet aanraken
+        if p.get("market") != target_market:
+            p["market"] = target_market
+            changed.append({"id": p["id"], "market": target_market})
+
+    # Update user-level primaire market (eerste in lijst)
+    user["market"] = markets[0]
+    _save(data)
+
+    return {
+        "success": True,
+        "potjes_count": n,
+        "markets_count": m,
+        "per_market": n // m,
+        "remainder": n % m,
+        "changed_count": len(changed),
+        "skipped_open_positions": skipped_open,
+        "distribution": {mkt: [p["id"] for p in potjes if p.get("market") == mkt] for mkt in markets},
     }
 
 

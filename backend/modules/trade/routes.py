@@ -728,6 +728,18 @@ async def reset_potjes_cycle(user_id: str):
     return {"success": True, "message": "Buy cycle gereset"}
 
 
+# v5_potjes_distribute_001 — Verdeel potjes over markten (5x2, 10x1 etc.)
+class DistributeBody(BaseModel):
+    markets: List[str]
+
+
+@router.post("/potjes/{user_id}/distribute")
+async def distribute_potjes(user_id: str, body: DistributeBody):
+    """Verdeel alle potjes evenredig over de gekozen markten (round-robin).
+    Open posities blijven onaangeraakt op hun huidige market."""
+    return potjes_svc.distribute_potjes_over_markets(user_id, body.markets)
+
+
 # ============================================================
 # v5_bot_proactive_register_001 — User opt-in zichtbaarheid in Analytics
 # ============================================================

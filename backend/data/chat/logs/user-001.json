@@ -19436,11 +19436,47 @@
         "session_id": "default",
         "gesprek_nummer": 740
       }
+    },
+    {
+      "id": "conv-f829898a",
+      "timestamp": "2026-05-22T14:08:19.576332+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister. _(laatst sprak je me 8 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 741
+      }
+    },
+    {
+      "id": "conv-4ee5f01b",
+      "timestamp": "2026-05-22T14:08:19.605422+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 742
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 740,
-    "last_updated": "2026-05-22T05:54:41.625109+00:00"
+    "total_conversations": 742,
+    "last_updated": "2026-05-22T14:08:19.605422+00:00"
   }
 }

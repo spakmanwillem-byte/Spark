@@ -79,7 +79,15 @@ export function TraderPage({ onNavigate }) {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markets: next })
         });
+        // v5_potjes_distribute_001 — herverdeel potjes over nieuwe coin-set (5×2 etc.)
+        if (monitorStatus?.use_potjes) {
+          await fetch(`${API}/api/trade/potjes/${userId}/distribute`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ markets: next })
+          });
+        }
         loadMonitorStatus();
+        loadPotjes && loadPotjes();
       } catch {}
     }
   };

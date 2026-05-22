@@ -1295,6 +1295,31 @@ function TradeAnalyticsTab() {
     finally { setBusyUser(null); load(); }
   };
 
+  // v5_admin_bot_controls_001 — start/pause vanuit Analytics
+  const startBot = async (uid, prevSettings = {}) => {
+    setBusyUser(uid);
+    try {
+      await fetch(`${API}/api/trade/bot/start/${uid}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          market: (prevSettings.markets && prevSettings.markets[0]) || prevSettings.market || 'BCH-EUR',
+          markets: prevSettings.markets || ['BCH-EUR'],
+          candle_interval: prevSettings.candle_interval || '1h',
+          interval: 60,
+          auto_trade: prevSettings.auto_trade !== undefined ? prevSettings.auto_trade : (uid === 'user-000'),
+          use_mock: prevSettings.use_mock !== undefined ? prevSettings.use_mock : true,
+          use_potjes: prevSettings.use_potjes !== undefined ? prevSettings.use_potjes : true,
+        }),
+      });
+    } finally { setBusyUser(null); load(); }
+  };
+
+  const pauseBot = async (uid) => {
+    setBusyUser(uid);
+    try { await fetch(`${API}/api/trade/bot/pause/${uid}`, { method: 'POST' }); }
+    finally { setBusyUser(null); load(); }
+  };
+
   const toggleExpand = (uid) => {
     if (expanded === uid) {
       setExpanded(null);
@@ -1410,16 +1435,33 @@ function TradeAnalyticsTab() {
 
                   {isOpen && (
                     <div className="border-t border-slate-700/40 bg-slate-900/40 p-4 space-y-4">
-                      {/* Action: stop bot */}
-                      {b.running && b.user_id !== 'user-000' && (
-                        <div>
+                      {/* v5_admin_bot_controls_001 — Start/Pause/Stop knoppen per bot */}
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {!b.running && (
+                          <button onClick={() => startBot(b.user_id, b)} disabled={busyUser === b.user_id}
+                            data-testid={`bot-start-${b.user_id}`}
+                            className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-[11px] font-medium disabled:opacity-40">
+                            ▶ Start bot
+                          </button>
+                        )}
+                        {b.running && (
+                          <button onClick={() => pauseBot(b.user_id)} disabled={busyUser === b.user_id}
+                            data-testid={`bot-pause-${b.user_id}`}
+                            className={`px-3 py-1.5 rounded text-[11px] font-medium disabled:opacity-40 ${b.paused ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-400' : 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-400'}`}>
+                            {b.paused ? '▶ Hervat' : '⏸ Pauzeer'}
+                          </button>
+                        )}
+                        {b.running && b.user_id !== 'user-000' && (
                           <button onClick={() => stopBot(b.user_id)} disabled={busyUser === b.user_id}
                             data-testid={`bot-stop-${b.user_id}`}
-                            className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[11px] font-medium">
-                            Stop bot
+                            className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[11px] font-medium disabled:opacity-40">
+                            ⏹ Stop bot
                           </button>
-                        </div>
-                      )}
+                        )}
+                        {b.user_id === 'user-000' && b.running && (
+                          <span className="text-[10px] text-amber-300/70 italic">🔒 Spark is unstoppable (alleen pauze)</span>
+                        )}
+                      </div>
 
                       {/* Potjes-tabel */}
                       <div>

@@ -138,7 +138,6 @@ function ChatBubble({ msg, isOwn }) {
   const avatarUrl = avatar?.kind === 'image' && avatar.url ? `${API}${avatar.url}` : null;
   const avatarEmoji = avatar?.kind === 'emoji' ? avatar.emoji : null;
   const isFallback = !!avatar?.is_fallback;  // v4_avatar_fallback_001 — roadkill logo
-
   return (
     <div data-testid={`msg-${msg.id}`} className={`flex gap-2.5 ${isOwn ? 'flex-row-reverse' : ''}`}>
       {/* Avatar */}
@@ -173,10 +172,62 @@ function ChatBubble({ msg, isOwn }) {
           isBot ? `${style.bg || 'bg-slate-800/50'} border ${style.border || 'border-slate-700'} ${style.text || 'text-slate-300'}`
             : isOwn ? 'bg-amber-500/15 border border-amber-500/20 text-white'
             : 'bg-slate-800/50 border border-slate-700 text-slate-200'
-        }`}>
-          {msg.message}
+        } ${msg.dnd_event ? 'shadow-[0_0_18px_rgba(168,85,247,0.25)] border-purple-500/40' : ''}`}>
+          <div className="whitespace-pre-line">{msg.message}</div>
+          {/* v5_dnd_baseline_intro_001 — keuze-knoppen voor D&D verhaal */}
+          {Array.isArray(msg.choices) && msg.choices.length > 0 && (
+            <DndChoices choices={msg.choices} chapter={msg.dnd_chapter} />
+          )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// v5_dnd_baseline_intro_001 — D&D keuze-knoppen
+function DndChoices({ choices, chapter }) {
+  const API = process.env.REACT_APP_BACKEND_URL;
+  const { user } = useAuth();
+  const [picked, setPicked] = React.useState(null);
+  const [busy, setBusy] = React.useState(false);
+
+  const pick = async (choiceId) => {
+    if (picked || busy) return;
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/bots/community/dnd-choice`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: user?.id || 'anon',
+          user_name: user?.naam || 'Onbekend',
+          choice: choiceId,
+          chapter: chapter || 'Base Line',
+        }),
+      });
+      setPicked(choiceId);
+    } catch {}
+    setBusy(false);
+  };
+
+  return (
+    <div data-testid="dnd-choices" className="mt-3 flex flex-wrap gap-2">
+      {choices.map(c => (
+        <button key={c.id}
+          data-testid={`dnd-choice-${c.id}`}
+          onClick={() => pick(c.id)}
+          disabled={picked !== null || busy}
+          title={c.hint || ''}
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+            picked === c.id
+              ? 'bg-purple-500/30 border-purple-400 text-purple-100'
+              : picked !== null
+                ? 'bg-slate-800/40 border-slate-700 text-slate-500 cursor-not-allowed'
+                : 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30 text-purple-200 hover:border-purple-400'
+          }`}>
+          {c.label}
+          {c.hint && picked === null && <span className="block text-[9px] text-purple-400/70 mt-0.5 font-normal">{c.hint}</span>}
+        </button>
+      ))}
     </div>
   );
 }

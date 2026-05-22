@@ -540,6 +540,24 @@ function BackupPanel() {
     setTimeout(() => setBusy(null), 1500);
   };
 
+  // v5_kb_diff_export_001 — Slim klein KB-diff bestand downloaden
+  const downloadKbDiff = () => {
+    setBusy('kb-diff');
+    try {
+      const a = document.createElement('a');
+      a.href = `${API}/api/backup/kb-changed-since-deploy`;
+      a.rel = 'noopener';
+      a.download = '';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('KB-diff download gestart (klein JSON-bestand)', 'success');
+    } catch (e) {
+      showToast('Download fout: ' + e.message, 'error');
+    }
+    setTimeout(() => setBusy(null), 1500);
+  };
+
   const previewRestore = async (file) => {
     setRestoreFile(file);
     setPreview(null);
@@ -660,18 +678,28 @@ function BackupPanel() {
       </div>
 
       {/* Download buttons */}
-      <div className="max-w-4xl grid md:grid-cols-2 gap-4">
+      <div className="max-w-4xl grid md:grid-cols-3 gap-4">
         <DownloadCard
           testid="backup-download-changes"
           icon={Download}
-          title="Alleen wijzigingen (aanbevolen)"
+          title="Alleen wijzigingen"
           subtitle={`${status?.changed_files_count ?? 0} bestand(en) sinds laatste deploy`}
-          desc="Kleine ZIP met alleen bestanden die zijn aangepast na je deploy-marker. Snel te downloaden en mergen."
+          desc="ZIP met alle gewijzigde bestanden (data + memory). Inclusief grote KB."
           color="emerald"
           loading={busy === 'changes'}
           disabled={!hasMarker && (status?.changed_files_count ?? 0) > 50}
           warning={!hasMarker ? 'Geen deploy-marker — alles wordt als "gewijzigd" gezien.' : null}
           onClick={() => triggerDownload('changes')}
+        />
+        <DownloadCard
+          testid="backup-download-kb-diff"
+          icon={Download}
+          title="Alleen KB-diff (slim)"
+          subtitle="Klein JSON-bestand"
+          desc="Alleen kennis-kaarten die sinds laatste deploy gewijzigd of nieuw zijn. Veel kleiner dan volledige KB. Mergebaar via 'Restore' (KB-tab)."
+          color="amber"
+          loading={busy === 'kb-diff'}
+          onClick={() => downloadKbDiff()}
         />
         <DownloadCard
           testid="backup-download-full"

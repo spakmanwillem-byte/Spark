@@ -150,6 +150,58 @@ async def send_community_message(msg: ChatMessage):
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     now = datetime.now(timezone.utc).isoformat()
 
+    # v5_dnd_baseline_intro_001 — [start verhaal] trigger
+    if msg.message.strip().lower() in ("[start verhaal]", "[verhaal]", "/verhaal", "[start]"):
+        from .baseline_intro import generate_baseline_intro_messages
+        intro_msgs = generate_baseline_intro_messages(msg.user_id, msg.user_name, now)
+        # Voeg user's command toe (klein, voor archief)
+        data["messages"].append({
+            "id": str(uuid.uuid4()),
+            "user_id": msg.user_id,
+            "user_name": msg.user_name,
+            "message": msg.message,
+            "is_bot": False,
+            "timestamp": now,
+            "dnd_event": "intro_trigger",
+        })
+        # Voeg alle intro-berichten toe
+        data["messages"].extend(intro_msgs)
+        save_json(COMMUNITY_FILE, data)
+        return {"success": True, "dnd_intro": True, "messages": intro_msgs}
+
+    # v5_help_command_001 — help-overzicht voor community chat
+    if msg.message.strip().lower() in ("help", "/help", "?", "hulp"):
+        help_msg = {
+            "id": str(uuid.uuid4()),
+            "user_id": "user-001",
+            "user_name": "Spark",
+            "message": (
+                "**Wat kun je hier doen?**\n\n"
+                "💬 **Praat gewoon** — typ wat je denkt, vraagt, voelt. Ik luister mee. "
+                "Madelief, Harry, Smith en De Boekhouder reageren op hun eigen onderwerpen.\n\n"
+                "🎭 **[start verhaal]** — start de Base Line intro (D&D verhaalmodus)\n"
+                "📅 **archief** — toon community-archief per dag/maand\n"
+                "💰 **trade** of **wallet** — vraag naar je financiële status\n"
+                "📚 **kennis** of **leer** — vraag wat ik onlangs heb geleerd\n"
+                "🐛 **bug** — meld iets dat niet werkt (gaat naar Roadmap)\n\n"
+                "Tip: gebruik gewone zinnen, geen commando's nodig. De keywords hierboven zijn alleen voor snel-acties."
+            ),
+            "is_bot": True,
+            "timestamp": now,
+        }
+        # User's vraag opslaan voor archief
+        data["messages"].append({
+            "id": str(uuid.uuid4()),
+            "user_id": msg.user_id,
+            "user_name": msg.user_name,
+            "message": msg.message,
+            "is_bot": False,
+            "timestamp": now,
+        })
+        data["messages"].append(help_msg)
+        save_json(COMMUNITY_FILE, data)
+        return {"success": True, "help": True, "messages": [help_msg]}
+
     # v4_dnd_001 — Behavior tracking + auto-bark community reward
     try:
         from modules.behavior_tracker import track_chat_message, track
@@ -271,6 +323,53 @@ def _group_by_date(messages):
         if ts > node["last"]:
             node["last"] = ts
     return tree
+
+
+
+# v5_dnd_baseline_intro_001 — D&D keuze afhandelen
+class DndChoiceBody(BaseModel):
+    user_id: str
+    user_name: str
+    choice: str  # "horen" | "zien" | "zwijgen"
+    chapter: Optional[str] = "Base Line"
+
+
+@router.post("/community/dnd-choice")
+async def submit_dnd_choice(body: DndChoiceBody):
+    """User maakt keuze in D&D verhaal. Spark reageert + behavior wordt getrackt."""
+    from .baseline_intro import get_choice_response
+    data = load_json(COMMUNITY_FILE, default={"messages": []})
+    now = datetime.now(timezone.utc).isoformat()
+
+    # Log de keuze als user-actie in archief
+    choice_msg = {
+        "id": str(uuid.uuid4()),
+        "user_id": body.user_id,
+        "user_name": body.user_name,
+        "message": f"*kiest:* **{body.choice.capitalize()}**",
+        "is_bot": False,
+        "timestamp": now,
+        "dnd_event": "choice",
+        "dnd_choice": body.choice,
+        "dnd_chapter": body.chapter,
+    }
+    data["messages"].append(choice_msg)
+
+    # Spark reageert
+    responses = get_choice_response(body.choice, body.user_name, now)
+    data["messages"].extend(responses)
+    save_json(COMMUNITY_FILE, data)
+
+    # Behavior track
+    try:
+        from modules.behavior_tracker import track
+        track(body.user_id, f"dnd_choice_{body.choice}", 1)
+        track(body.user_id, "dnd_participation", 1)
+    except Exception:
+        pass
+
+    return {"success": True, "choice": body.choice, "responses": responses}
+
 
 
 @router.get("/community/archive")

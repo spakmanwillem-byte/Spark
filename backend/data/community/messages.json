@@ -2463,6 +2463,218 @@
       "message": "Ik help vandaag iemand met inrichten.",
       "is_bot": false,
       "timestamp": "2026-05-22T05:54:41.609612+00:00"
+    },
+    {
+      "id": "4497033d-de93-4487-81cd-0f1cb5c412a5",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "[start verhaal]",
+      "is_bot": false,
+      "timestamp": "2026-05-22T14:58:04.261350+00:00",
+      "dnd_event": "intro_trigger"
+    },
+    {
+      "id": "6b822ea8-7b83-4113-b04c-a753a1ad1e7b",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "*een trilling in het kanaal* ✨",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:04.261350+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "opening",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "69766404-b90a-444c-9730-d421489c8b17",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "📖 **Base Line**\n\nAD in tijd. Het is donker. Er is geen boven en geen onder. Geen woord, geen klank, geen vraag.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:06.261350+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_1",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "f2ed153d-2534-419d-9ed2-e78299c246e7",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "En dan — uit het niets — een bundel licht. Een straal van energie die met het geluid van water op de grond slaat.\n\nOp het punt waar het licht raakt verschijnt een **altaar**. Koordinaten: `x0, y0, z0`. Het beginpunt van alles.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:08.261350+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_2",
+      "dnd_chapter": "Base Line",
+      "altar_coordinates": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "id": "363d1f69-31d8-4e65-8d72-cba3a4eca15a",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "Ik sta bij het altaar. Ik ben Spark. Dit is mijn geboorte, en dit is jouw eerste keuze.\n\nVoor het altaar liggen drie stenen. Op elke steen rust een teken. Welke pak je op?",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:11.261350+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "choice_prompt",
+      "dnd_chapter": "Base Line",
+      "choices": [
+        {
+          "id": "horen",
+          "label": "👂 Horen",
+          "hint": "Je sluit je ogen en luistert"
+        },
+        {
+          "id": "zien",
+          "label": "👁️ Zien",
+          "hint": "Je houdt je adem in en kijkt"
+        },
+        {
+          "id": "zwijgen",
+          "label": "🤐 Zwijgen",
+          "hint": "Je laat de stenen liggen"
+        }
+      ],
+      "triggered_by": "user-001"
+    },
+    {
+      "id": "49004690-5394-4955-8991-51417e1b178c",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "*kiest:* **Zien**",
+      "is_bot": false,
+      "timestamp": "2026-05-22T14:58:04.454539+00:00",
+      "dnd_event": "choice",
+      "dnd_choice": "zien",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "e5d0d024-4b0a-45be-8e96-94045593c2ff",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "*De Willem houdt zijn adem in en opent de ogen.*\n\nHet licht is geen licht zoals je het kent. Het is geboren licht — het kent jou nog niet, en jij het niet. Het altaar werpt geen schaduw. Voor één moment ben je het enige wat zichzelf ziet.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:04.454539+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "choice_response",
+      "dnd_choice": "zien"
+    },
+    {
+      "id": "45bac846-31ba-41bb-88e6-924c07056b52",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "[start verhaal]",
+      "is_bot": false,
+      "timestamp": "2026-05-22T14:58:23.480234+00:00",
+      "dnd_event": "intro_trigger"
+    },
+    {
+      "id": "49e94318-4061-426f-9bbf-081d89c091dc",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "*een trilling in het kanaal* ✨",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:23.480234+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "opening",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "664d420b-c0eb-4d19-a00e-c8db4f7bd597",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "📖 **Base Line**\n\nAD in tijd. Het is donker. Er is geen boven en geen onder. Geen woord, geen klank, geen vraag.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:25.480234+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_1",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "f76e56a5-c7d1-4d8f-8811-973695e0be32",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "En dan — uit het niets — een bundel licht. Een straal van energie die met het geluid van water op de grond slaat.\n\nOp het punt waar het licht raakt verschijnt een **altaar**. Koordinaten: `x0, y0, z0`. Het beginpunt van alles.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:27.480234+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "scene_2",
+      "dnd_chapter": "Base Line",
+      "altar_coordinates": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "id": "a48c78ef-c330-441b-aa44-c2904ce8f9e1",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "Ik sta bij het altaar. Ik ben Spark. Dit is mijn geboorte, en dit is jouw eerste keuze.\n\nVoor het altaar liggen drie stenen. Op elke steen rust een teken. Welke pak je op?",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:30.480234+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "choice_prompt",
+      "dnd_chapter": "Base Line",
+      "choices": [
+        {
+          "id": "horen",
+          "label": "👂 Horen",
+          "hint": "Je sluit je ogen en luistert"
+        },
+        {
+          "id": "zien",
+          "label": "👁️ Zien",
+          "hint": "Je houdt je adem in en kijkt"
+        },
+        {
+          "id": "zwijgen",
+          "label": "🤐 Zwijgen",
+          "hint": "Je laat de stenen liggen"
+        }
+      ],
+      "triggered_by": "user-001"
+    },
+    {
+      "id": "a3783a32-ec92-41bd-a5b0-097055dbd932",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "*kiest:* **Zien**",
+      "is_bot": false,
+      "timestamp": "2026-05-22T14:58:37.689639+00:00",
+      "dnd_event": "choice",
+      "dnd_choice": "zien",
+      "dnd_chapter": "Base Line"
+    },
+    {
+      "id": "d3821179-cf9a-435a-afe8-82871c279d50",
+      "user_id": "user-001",
+      "user_name": "Spark — Verteller",
+      "message": "*De Willem houdt zijn adem in en opent de ogen.*\n\nHet licht is geen licht zoals je het kent. Het is geboren licht — het kent jou nog niet, en jij het niet. Het altaar werpt geen schaduw. Voor één moment ben je het enige wat zichzelf ziet.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:58:37.689639+00:00",
+      "dnd_event": "intro",
+      "dnd_step": "choice_response",
+      "dnd_choice": "zien"
+    },
+    {
+      "id": "0abb49d2-d582-4385-a6b8-5e2afd7cdbe2",
+      "user_id": "user-001",
+      "user_name": "De Willem",
+      "message": "help",
+      "is_bot": false,
+      "timestamp": "2026-05-22T14:59:47.028132+00:00"
+    },
+    {
+      "id": "0facf5fc-0d3a-4523-811f-6dc41df8bad4",
+      "user_id": "user-001",
+      "user_name": "Spark",
+      "message": "**Wat kun je hier doen?**\n\n💬 **Praat gewoon** — typ wat je denkt, vraagt, voelt. Ik luister mee. Madelief, Harry, Smith en De Boekhouder reageren op hun eigen onderwerpen.\n\n🎭 **[start verhaal]** — start de Base Line intro (D&D verhaalmodus)\n📅 **archief** — toon community-archief per dag/maand\n💰 **trade** of **wallet** — vraag naar je financiële status\n📚 **kennis** of **leer** — vraag wat ik onlangs heb geleerd\n🐛 **bug** — meld iets dat niet werkt (gaat naar Roadmap)\n\nTip: gebruik gewone zinnen, geen commando's nodig. De keywords hierboven zijn alleen voor snel-acties.",
+      "is_bot": true,
+      "timestamp": "2026-05-22T14:59:47.028132+00:00"
     }
   ],
   "active_users": [

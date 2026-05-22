@@ -133,3 +133,85 @@ async def mark_entry_reviewed(entry_id: str):
         "reviewed_at": (entry.get("metadata") or {}).get("reviewed_at"),
         "review_count": (entry.get("metadata") or {}).get("review_count"),
     }
+
+
+# v5_kb_diff_export_001 — Import een KB-diff bestand (van productie naar preview)
+from fastapi import UploadFile, File
+from pathlib import Path as _Path
+import json as _json
+from datetime import datetime as _dt, timezone as _tz
+from modules.core.storage import load_json as _load, save_json as _save
+
+_KB = _Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+
+
+@router.post("/import-diff")
+async def import_kb_diff(file: UploadFile = File(...)):
+    """Merge een kb_diff bestand (van /api/backup/kb-changed-since-deploy) in deze KB.
+    Veiligheid: maakt eerst een backup van de huidige KB. Match by id of begrip.
+    """
+    try:
+        raw = await file.read()
+        payload = _json.loads(raw)
+    except Exception as e:
+        raise HTTPException(400, f"Geen geldig JSON-bestand: {e}")
+
+    if not isinstance(payload, dict) or "knowledge_entries" not in payload:
+        raise HTTPException(400, "Bestand mist 'knowledge_entries' veld")
+
+    diff_entries = payload.get("knowledge_entries") or []
+    if not diff_entries:
+        return {"success": True, "merged_existing": 0, "new_added": 0, "message": "Geen kaarten in diff-bestand"}
+
+    # Backup huidige KB
+    backup_ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    backup_path = _KB.with_suffix(f".backup_pre_diff_import_{backup_ts}.json")
+    try:
+        backup_path.write_text(_KB.read_text(encoding="utf-8"), encoding="utf-8")
+    except Exception:
+        pass
+
+    kb = _load(_KB, default={"knowledge_entries": []})
+    entries = kb.get("knowledge_entries", [])
+    by_id = {e.get("id"): e for e in entries if e.get("id")}
+    by_begrip = {(e.get("begrip") or "").strip().lower(): e for e in entries if e.get("begrip")}
+
+    merged_existing = 0
+    new_added = 0
+    now_iso = _dt.now(_tz.utc).isoformat()
+
+    for d in diff_entries:
+        did = d.get("id")
+        dbegrip = (d.get("begrip") or "").strip().lower()
+        target = by_id.get(did) or (by_begrip.get(dbegrip) if dbegrip else None)
+        if target is not None:
+            # Update inhoud (lagen, ws5, tags, belangrijkheid, topic)
+            for key in ("lagen", "ws5", "tags", "belangrijkheid", "topic"):
+                if key in d and d[key] is not None:
+                    target[key] = d[key]
+            md = target.setdefault("metadata", {})
+            d_md = d.get("metadata") or {}
+            if d_md.get("updated_at"):
+                md["updated_at"] = d_md["updated_at"]
+            md["last_diff_import_at"] = now_iso
+            merged_existing += 1
+        else:
+            entries.append(d)
+            new_added += 1
+
+    kb["knowledge_entries"] = entries
+    kb.setdefault("metadata", {})["last_diff_import"] = {
+        "ts": now_iso,
+        "merged_existing": merged_existing,
+        "new_added": new_added,
+        "source_marker": payload.get("deploy_marker"),
+    }
+    _save(_KB, kb)
+
+    return {
+        "success": True,
+        "merged_existing": merged_existing,
+        "new_added": new_added,
+        "total_after": len(entries),
+        "backup_path": str(backup_path),
+    }

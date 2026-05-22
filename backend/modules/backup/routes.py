@@ -266,6 +266,60 @@ async def download_full():
     )
 
 
+@router.get("/kb-changed-since-deploy")
+async def kb_changed_since_deploy():
+    """v5_kb_diff_export_001 — Export alleen kennis-kaarten die gewijzigd zijn na laatste deploy.
+    Veel kleiner dan de hele knowledge_base.json (paar KB ipv 11MB).
+    Detecteert wijziging via metadata.updated_at vs deploy-marker.
+    Output: klein JSON-bestand met alleen die kaarten + metadata, geschikt om in preview te mergen.
+    """
+    marker = _read_marker()
+    marker_iso = marker.get("marked_at") or "1970-01-01T00:00:00+00:00"
+
+    kb_file = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+    if not kb_file.exists():
+        raise HTTPException(404, "knowledge_base.json niet gevonden")
+
+    kb_data = json.loads(kb_file.read_text(encoding="utf-8"))
+    entries = kb_data.get("knowledge_entries", []) if isinstance(kb_data, dict) else []
+
+    changed = []
+    for e in entries:
+        md = e.get("metadata") or {}
+        upd = md.get("updated_at") or e.get("updated_at") or ""
+        created = e.get("created_at") or md.get("created_at") or ""
+        # Recent als upd > marker OF created > marker
+        if (upd and upd > marker_iso) or (created and created > marker_iso):
+            changed.append(e)
+
+    payload = {
+        "type": "kb_diff_since_deploy",
+        "exported_at": _iso_now(),
+        "deploy_marker": marker_iso,
+        "total_entries_in_kb": len(entries),
+        "changed_count": len(changed),
+        "note": "Alleen knowledge_entries met updated_at OF created_at NA deploy. Merge in preview via /api/knowledge/import-diff.",
+        "knowledge_entries": changed,
+    }
+
+    # Stream als file zodat browser-download netjes triggered
+    fname = f"spark_kb_diff_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json"
+    body = json.dumps(payload, indent=2, ensure_ascii=False).encode("utf-8")
+    from fastapi.responses import Response
+    return Response(
+        content=body,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="{fname}"',
+            "X-KB-Changed-Count": str(len(changed)),
+            "X-KB-Total": str(len(entries)),
+            "Cache-Control": "no-store",
+        },
+    )
+
+
+
+
 @router.get("/download/changes")
 async def download_changes():
     """Backup met alleen bestanden gewijzigd na laatste deploy-marker."""

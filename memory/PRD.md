@@ -1,6 +1,17 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_70cr_batch** (Zip-systeem + D&D Base Line intro + Help):
+  - 📦 **KB-diff export** (`GET /api/backup/kb-changed-since-deploy`): klein JSON-bestand met alleen kaarten waarvan `updated_at` of `created_at` na deploy ligt. Veel kleiner dan de 11MB volledige KB → makkelijker om over te dragen tussen prod ↔ preview
+  - 📥 **KB-diff import** (`POST /api/knowledge/import-diff`): merge een gedownload diff-bestand in de huidige KB (match by id of begrip; updates lagen/ws5/tags/belangrijkheid; backup van pre-import KB automatisch)
+  - 🛠️ **3 download-opties in Backup UI**: Wijzigingen / KB-diff slim / Volledige backup (i.p.v. 2 kaarten)
+  - 🎭 **D&D Base Line intro** in community chat (`[start verhaal]` trigger):
+    - 4 berichten sequence: opening trilling → "AD in tijd, donker" → bundel licht + altaar op `x0,y0,z0` → keuze-prompt
+    - 3 keuze-knoppen: 👂 Horen / 👁️ Zien / 🤐 Zwijgen (de andere 2 zintuigen komen later)
+    - `/api/bots/community/dnd-choice` slaat keuze op + Spark reageert met scene + behavior_tracker logt `dnd_choice_<choice>` en `dnd_participation`
+    - Purple-glow border + whitespace-pre-line voor verhaalberichten in CommunityPage
+  - 🆘 **Help-knop community chat** (productie-bug): keyword `help`, `/help`, `?` of `hulp` → Spark stuurt overzicht van commands ([start verhaal], archief, trade, wallet, kennis, leer, bug) + uitleg dat gewone zinnen geen commando nodig hebben
+
 - 2026-05-23 **v5_30_credit_followup** (Potjes spread + STT/TTS prep + roadmap):
   - 🪙 **Potjes 5×2 verdeling**: nieuwe endpoint `POST /api/trade/potjes/{user_id}/distribute` verdeelt round-robin over de gekozen markten. Bevestigd: BCH/BTC/ETH/SOL/ADA hebben elk 2 potjes na call. Open posities worden overgeslagen (skipped_open_positions: 1). Bij coin-picker wijziging tijdens running monitor wordt ook automatisch herverdeeld
   - 🎤 **STT/TTS schakelaars in Bot-instellingen**: stt_enabled, tts_enabled, tts_voice (6 OpenAI stemmen). Velden persisteren via `PATCH /api/auth/admin/bots/{bot_id}/settings`. Audio-koppeling zelf (Whisper + TTS) volgt in latere fase via integration_playbook_expert

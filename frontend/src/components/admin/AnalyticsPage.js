@@ -1451,15 +1451,12 @@ function TradeAnalyticsTab() {
                             {b.paused ? '▶ Hervat' : '⏸ Pauzeer'}
                           </button>
                         )}
-                        {b.running && b.user_id !== 'user-000' && (
+                        {b.running && (
                           <button onClick={() => stopBot(b.user_id)} disabled={busyUser === b.user_id}
                             data-testid={`bot-stop-${b.user_id}`}
                             className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded text-[11px] font-medium disabled:opacity-40">
                             ⏹ Stop bot
                           </button>
-                        )}
-                        {b.user_id === 'user-000' && b.running && (
-                          <span className="text-[10px] text-amber-300/70 italic">🔒 Spark is unstoppable (alleen pauze)</span>
                         )}
                       </div>
 

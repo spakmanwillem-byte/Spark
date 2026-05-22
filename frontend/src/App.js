@@ -96,6 +96,21 @@ function AppContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, activePage]);
 
+  // v5_ui_prefs_001 — laad glow base color voorkeur en zet CSS variable op root
+  useEffect(() => {
+    if (!user?.id) return;
+    const API = process.env.REACT_APP_BACKEND_URL;
+    fetch(`${API}/api/profile/ui-preferences/${user.id}`)
+      .then(r => r.json())
+      .then(d => {
+        const c = d?.preferences?.glow_base_color;
+        if (c && /^#[0-9a-fA-F]{6}$/.test(c)) {
+          document.documentElement.style.setProperty('--glow-base', c);
+        }
+      })
+      .catch(() => {});
+  }, [user?.id]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">

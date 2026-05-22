@@ -151,6 +151,7 @@ const phases = [
     period: 'Maart 2026',
     items: [
       { title: 'Mijn Profiel pagina', status: 'done' },
+      { title: '🎨 Mijn Profiel → Instellingen-tab (Beeld/Geluid/Connecties, per-user glow base color)', status: 'done', anchor: 'profile-settings-tab', note: 'v5_ui_prefs_001 — color picker 8 preset + custom hex, live CSS variable --glow-base. Toekomst: gradatie op humeur, auto-bark' },
       { title: 'Gebruikers admin', status: 'done' },
       { title: 'Analytics (Systeem / Network / Layer)', status: 'done' },
       { title: 'Instellingen (6 tabs: Algemeen, Beeld, Geluid, Integraties, Features, Tips)', status: 'done' },

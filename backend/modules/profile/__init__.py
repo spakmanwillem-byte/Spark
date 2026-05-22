@@ -234,6 +234,64 @@ async def update_extended_profile(user_id: str, updates: ProfileExtended):
 
 
 # ============================================================
+# UI VOORKEUREN (v5_ui_prefs_001) — per-user beeld/geluid/connecties
+# Schema:
+#   glow_base_color: hex (#f59e0b default amber)
+#   glow_intensity: 0..1 (toekomstig)
+#   sound_enabled: bool (toekomstig, default True)
+#   auto_bark_enabled: bool (toekomstig, default False)
+# Live-apply: frontend zet CSS var --glow-base op document root.
+# ============================================================
+
+class UIPreferences(BaseModel):
+    glow_base_color: Optional[str] = None
+    glow_intensity: Optional[float] = None
+    sound_enabled: Optional[bool] = None
+    auto_bark_enabled: Optional[bool] = None
+    tts_enabled: Optional[bool] = None
+
+
+DEFAULT_UI_PREFS = {
+    "glow_base_color": "#f59e0b",
+    "glow_intensity": 0.5,
+    "sound_enabled": True,
+    "auto_bark_enabled": False,
+    "tts_enabled": True,
+}
+
+
+@router.get("/profile/ui-preferences/{user_id}")
+async def get_ui_preferences(user_id: str):
+    prefs_file = USERS_DIR / user_id / "ui_preferences.json"
+    data = load_json(prefs_file, default={"user_id": user_id, **DEFAULT_UI_PREFS})
+    # Vul ontbrekende defaults aan (forward-compat)
+    merged = {**DEFAULT_UI_PREFS, **data, "user_id": user_id}
+    return {"success": True, "preferences": merged}
+
+
+@router.put("/profile/ui-preferences/{user_id}")
+async def update_ui_preferences(user_id: str, updates: UIPreferences):
+    prefs_file = USERS_DIR / user_id / "ui_preferences.json"
+    prefs_file.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(prefs_file, default={"user_id": user_id, **DEFAULT_UI_PREFS})
+    payload = updates.model_dump(exclude_none=True)
+    # Valideer hex-kleur indien meegegeven
+    color = payload.get("glow_base_color")
+    if color is not None:
+        c = color.strip()
+        if not (c.startswith("#") and len(c) in (4, 7)):
+            return {"success": False, "error": "glow_base_color moet hex zijn (bv #f59e0b)"}
+        payload["glow_base_color"] = c
+    for k, v in payload.items():
+        data[k] = v
+    data["user_id"] = user_id
+    data["last_updated"] = datetime.now(timezone.utc).isoformat()
+    save_json(prefs_file, data)
+    merged = {**DEFAULT_UI_PREFS, **data}
+    return {"success": True, "preferences": merged}
+
+
+# ============================================================
 # CHAT-HISTORIE (eigen log van user, schoon)
 # ============================================================
 

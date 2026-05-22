@@ -1,6 +1,21 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_ui_prefs_001** (Per-user Instellingen-tab in profiel):
+  - 🎨 **Mijn Profiel → nieuwe tab "Instellingen"** met 3 secties:
+    - **Beeld**: glow basiskleur picker — 8 preset swatches (Amber/Cyan/Violet/Emerald/Roze/Rood/Goud/Blauw) + custom color picker + hex-input. Live preview ring met `box-shadow`. Wijziging direct opgeslagen
+    - **Geluid** (in ontwikkeling): TTS-toggle, Geluidseffecten-toggle, Auto-bark-toggle (gemarkeerd "binnenkort")
+    - **Connecties**: Bitvavo trading verbindingsstatus (actief/inactief). Plek voor toekomstige integraties (Google Agenda, Moneybird, Telegram)
+  - 🔌 **Backend**: `GET/PUT /api/profile/ui-preferences/{user_id}` met hex-validatie. Persistent in `/data/users/{user_id}/ui_preferences.json`. Schema: `{glow_base_color, glow_intensity, sound_enabled, auto_bark_enabled, tts_enabled}`
+  - 🌐 **Globale CSS-variable** `--glow-base` op `:root` (default `#f59e0b`). App.js laadt de user-voorkeur bij login en zet de CSS-var. Toekomstige componenten kunnen `var(--glow-base)` consumeren voor humeur-gedreven kleurverloop
+  - ✅ Backend e2e getest (GET/PUT, hex-validatie verwerpt ongeldige input). Frontend smoke screenshot: tab klikbaar, preset-klik wijzigt hex naar #06B6D4 live
+  - 📜 Roadmap item gemarkeerd done (anchor `profile-settings-tab`)
+
+- 2026-05-23 **v5_per_user_endpoints_001** (Trader stop bug fix bevestigd):
+  - 🛑 **`POST /api/trade/bot/stop/{user_id}` + `bot/pause/{user_id}`** ipv legacy global endpoints. Spark (user-000) heeft `SPARK_UNSTOPPABLE` guard
+  - ✅ Curl e2e getest: Willem (user-001) bot stoppen heeft GEEN effect op Spark's slot. Spark stop-poging geeft expliciete error
+  - 🔄 TraderPage frontend gebruikt al `/bot/stop/${userId}` (regel 236) en `/bot/pause/${userId}` (regel 241)
+
 - 2026-05-23 **v5_70cr_batch** (Zip-systeem + D&D Base Line intro + Help):
   - 📦 **KB-diff export** (`GET /api/backup/kb-changed-since-deploy`): klein JSON-bestand met alleen kaarten waarvan `updated_at` of `created_at` na deploy ligt. Veel kleiner dan de 11MB volledige KB → makkelijker om over te dragen tussen prod ↔ preview
   - 📥 **KB-diff import** (`POST /api/knowledge/import-diff`): merge een gedownload diff-bestand in de huidige KB (match by id of begrip; updates lagen/ws5/tags/belangrijkheid; backup van pre-import KB automatisch)

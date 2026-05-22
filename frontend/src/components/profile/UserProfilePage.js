@@ -5,7 +5,7 @@ import {
   User, Save, X, Heart, Target, AlertTriangle, Eye, Ear, Brain, Globe,
   Camera, MapPin, Upload, Check, MessageSquare, Calendar,
   Image as ImageIcon, Sparkles, ChevronDown, ChevronRight, Trash2,
-  Backpack, Award, Plus,
+  Backpack, Award, Plus, Settings, Palette, Volume2, Link2,
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -16,6 +16,7 @@ const TABS = [
   { id: 'persoonlijkheid', label: 'Persoonlijkheid', accent: '#a855f7' },
   { id: 'gesprekken', label: 'Gesprekken', accent: '#3b82f6' },
   { id: 'avatar', label: 'Avatar', accent: '#ec4899' },
+  { id: 'instellingen', label: 'Instellingen', accent: '#06b6d4' },
 ];
 
 export function UserProfilePage({ onNavigate }) {
@@ -123,6 +124,9 @@ export function UserProfilePage({ onNavigate }) {
             )}
             {activeTab === 'avatar' && (
               <AvatarTab userId={userId} isAdmin={(user?.gradatie ?? 99) <= 2} />
+            )}
+            {activeTab === 'instellingen' && (
+              <InstellingenTab userId={userId} />
             )}
           </div>
         </div>
@@ -992,3 +996,271 @@ function StatTile({ label, value, sub }) {
     </div>
   );
 }
+
+// ============================================================
+// TAB: INSTELLINGEN (v5_ui_prefs_001)
+// Beeld (glow base color) — Geluid (placeholder) — Connecties (Bitvavo)
+// ============================================================
+const GLOW_PRESETS = [
+  { hex: '#f59e0b', label: 'Amber',   note: 'Standaard Spark' },
+  { hex: '#06b6d4', label: 'Cyan',    note: 'Rustig / Kalm' },
+  { hex: '#a855f7', label: 'Violet',  note: 'Mystiek' },
+  { hex: '#10b981', label: 'Emerald', note: 'Groei' },
+  { hex: '#ec4899', label: 'Roze',    note: 'Warm' },
+  { hex: '#ef4444', label: 'Rood',    note: 'Alert' },
+  { hex: '#eab308', label: 'Goud',    note: 'Trots' },
+  { hex: '#3b82f6', label: 'Blauw',   note: 'Helder' },
+];
+
+function InstellingenTab({ userId }) {
+  const [prefs, setPrefs] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [bvStatus, setBvStatus] = useState(null);
+  const [savedFlash, setSavedFlash] = useState(false);
+
+  useEffect(() => {
+    fetch(`${API}/api/profile/ui-preferences/${userId}`)
+      .then(r => r.json())
+      .then(d => setPrefs(d.preferences || null))
+      .catch(() => setPrefs({ glow_base_color: '#f59e0b', sound_enabled: true, auto_bark_enabled: false }));
+    fetch(`${API}/api/trade/bitvavo/status/${userId}`)
+      .then(r => r.json())
+      .then(d => setBvStatus(d))
+      .catch(() => setBvStatus({ connected: false }));
+  }, [userId]);
+
+  const updatePref = (key, val) => {
+    setPrefs(p => ({ ...(p || {}), [key]: val }));
+  };
+
+  const savePrefs = async (overrides = {}) => {
+    setSaving(true);
+    try {
+      const payload = { ...(prefs || {}), ...overrides };
+      const res = await fetch(`${API}/api/profile/ui-preferences/${userId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(r => r.json());
+      if (res.success) {
+        setPrefs(res.preferences);
+        // Live-apply naar root: CSS variable
+        if (res.preferences?.glow_base_color) {
+          document.documentElement.style.setProperty('--glow-base', res.preferences.glow_base_color);
+        }
+        setSavedFlash(true);
+        setTimeout(() => setSavedFlash(false), 1800);
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const pickColor = (hex) => {
+    updatePref('glow_base_color', hex);
+    // Live preview
+    document.documentElement.style.setProperty('--glow-base', hex);
+    savePrefs({ glow_base_color: hex });
+  };
+
+  if (!prefs) {
+    return <div className="bg-slate-900 border border-slate-800 rounded-xl p-4"><p className="text-xs text-slate-500">Voorkeuren laden…</p></div>;
+  }
+
+  const currentColor = prefs.glow_base_color || '#f59e0b';
+
+  // Lokale paneel-wrapper (de bestaande `Card` verwacht title/icon props; wij gebruiken kale wrapper)
+  const Panel = ({ children }) => (
+    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">{children}</div>
+  );
+
+  return (
+    <div data-testid="instellingen-tab" className="space-y-4">
+      {/* Header info */}
+      <Panel>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+            <Settings className="w-4 h-4 text-cyan-400" />
+          </div>
+          <div>
+            <h2 className="text-sm font-bold text-white">Persoonlijke instellingen</h2>
+            <p className="text-[10px] text-slate-500">Beeld · Geluid · Connecties — geldt alleen voor jouw account</p>
+          </div>
+          {savedFlash && (
+            <span className="ml-auto text-[10px] text-emerald-400 flex items-center gap-1">
+              <Check className="w-3 h-3" /> Opgeslagen
+            </span>
+          )}
+        </div>
+      </Panel>
+
+      {/* === BEELD === */}
+      <Panel>
+        <div className="flex items-center gap-2 mb-3">
+          <Palette className="w-4 h-4 text-amber-400" />
+          <h3 className="text-sm font-semibold text-white">Beeld — Glow basiskleur</h3>
+        </div>
+        <p className="text-[11px] text-slate-400 mb-3">
+          Kies de basiskleur voor je gloed-effecten in de app. Later worden hier kleurverlopen op
+          basis van humeur toegevoegd (rustig → kalme tint, alert → fellere tint).
+        </p>
+
+        {/* Preview ring */}
+        <div className="flex items-center gap-3 mb-4">
+          <div
+            data-testid="glow-preview"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all"
+            style={{
+              background: `${currentColor}1a`,
+              border: `1px solid ${currentColor}80`,
+              boxShadow: `0 0 24px ${currentColor}66`,
+            }}
+          >
+            <Sparkles className="w-6 h-6" style={{ color: currentColor }} />
+          </div>
+          <div>
+            <p className="text-xs font-mono text-white" data-testid="glow-current-hex">{currentColor.toUpperCase()}</p>
+            <p className="text-[10px] text-slate-500">Live voorbeeld — wijziging is direct actief</p>
+          </div>
+        </div>
+
+        {/* Preset swatches */}
+        <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 mb-3" data-testid="glow-presets">
+          {GLOW_PRESETS.map(p => {
+            const active = currentColor.toLowerCase() === p.hex.toLowerCase();
+            return (
+              <button
+                key={p.hex}
+                data-testid={`glow-preset-${p.label.toLowerCase()}`}
+                onClick={() => pickColor(p.hex)}
+                disabled={saving}
+                title={`${p.label} — ${p.note}`}
+                className={`group aspect-square rounded-xl transition-all flex items-center justify-center ${active ? 'ring-2 ring-white/80 scale-105' : 'ring-1 ring-slate-700 hover:ring-slate-500'}`}
+                style={{
+                  background: `${p.hex}24`,
+                  boxShadow: active ? `0 0 16px ${p.hex}80` : `0 0 4px ${p.hex}40`,
+                }}
+              >
+                <span className="w-5 h-5 rounded-full" style={{ background: p.hex }} />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Custom hex */}
+        <div className="flex items-center gap-2">
+          <label className="text-[11px] text-slate-400">Eigen hex:</label>
+          <input
+            type="color"
+            data-testid="glow-color-picker"
+            value={currentColor}
+            onChange={e => updatePref('glow_base_color', e.target.value)}
+            onBlur={() => savePrefs({})}
+            className="w-10 h-8 rounded cursor-pointer bg-transparent border border-slate-700"
+          />
+          <input
+            type="text"
+            data-testid="glow-color-hex-input"
+            value={currentColor}
+            onChange={e => updatePref('glow_base_color', e.target.value)}
+            onBlur={() => {
+              const v = (prefs.glow_base_color || '').trim();
+              if (/^#[0-9a-fA-F]{6}$/.test(v)) savePrefs({ glow_base_color: v });
+            }}
+            placeholder="#f59e0b"
+            className="flex-1 max-w-[140px] px-2 py-1.5 bg-slate-800 border border-slate-700 rounded text-xs font-mono text-white"
+          />
+          <span className="text-[10px] text-slate-500">Toekomstig: kleurverloop op basis van humeur</span>
+        </div>
+      </Panel>
+
+      {/* === GELUID === */}
+      <Panel>
+        <div className="flex items-center gap-2 mb-3">
+          <Volume2 className="w-4 h-4 text-violet-400" />
+          <h3 className="text-sm font-semibold text-white">Geluid</h3>
+          <span className="text-[9px] uppercase tracking-wider text-slate-500 ml-auto">In ontwikkeling</span>
+        </div>
+
+        <div className="space-y-3">
+          <label className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800 cursor-pointer">
+            <div>
+              <p className="text-xs font-medium text-white">TTS — Spark spreekt antwoorden uit</p>
+              <p className="text-[10px] text-slate-500">Stem-uitvoer in gesprekken</p>
+            </div>
+            <input
+              type="checkbox"
+              data-testid="toggle-tts"
+              checked={prefs.tts_enabled !== false}
+              onChange={e => { updatePref('tts_enabled', e.target.checked); savePrefs({ tts_enabled: e.target.checked }); }}
+              className="w-4 h-4 accent-violet-500"
+            />
+          </label>
+
+          <label className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800 cursor-pointer">
+            <div>
+              <p className="text-xs font-medium text-white">Geluidseffecten</p>
+              <p className="text-[10px] text-slate-500">UI-feedback geluiden (klik, notificatie)</p>
+            </div>
+            <input
+              type="checkbox"
+              data-testid="toggle-sound"
+              checked={prefs.sound_enabled !== false}
+              onChange={e => { updatePref('sound_enabled', e.target.checked); savePrefs({ sound_enabled: e.target.checked }); }}
+              className="w-4 h-4 accent-violet-500"
+            />
+          </label>
+
+          <label className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800 cursor-pointer opacity-60">
+            <div>
+              <p className="text-xs font-medium text-white">Auto-bark <span className="text-[10px] text-slate-500 ml-1">(binnenkort)</span></p>
+              <p className="text-[10px] text-slate-500">Spark schiet uit eigen beweging een berichtje af</p>
+            </div>
+            <input
+              type="checkbox"
+              data-testid="toggle-autobark"
+              checked={!!prefs.auto_bark_enabled}
+              onChange={e => { updatePref('auto_bark_enabled', e.target.checked); savePrefs({ auto_bark_enabled: e.target.checked }); }}
+              className="w-4 h-4 accent-violet-500"
+            />
+          </label>
+        </div>
+      </Panel>
+
+      {/* === CONNECTIES === */}
+      <Panel>
+        <div className="flex items-center gap-2 mb-3">
+          <Link2 className="w-4 h-4 text-emerald-400" />
+          <h3 className="text-sm font-semibold text-white">Connecties</h3>
+        </div>
+
+        <div className="space-y-2">
+          <div data-testid="conn-bitvavo" className="flex items-center justify-between gap-3 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xs font-bold">BV</div>
+              <div>
+                <p className="text-xs font-medium text-white">Bitvavo trading</p>
+                <p className="text-[10px] text-slate-500">
+                  {bvStatus?.connected
+                    ? `Verbonden ${bvStatus.connected_at ? '· ' + new Date(bvStatus.connected_at).toLocaleDateString('nl-NL') : ''}`
+                    : bvStatus?.placeholder ? 'Test-key ingesteld' : 'Niet verbonden'}
+                </p>
+              </div>
+            </div>
+            <span
+              className={`text-[10px] font-medium px-2 py-1 rounded-full ${bvStatus?.connected ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
+              data-testid="conn-bitvavo-status"
+            >
+              {bvStatus?.connected ? 'Actief' : 'Inactief'}
+            </span>
+          </div>
+
+          <p className="text-[10px] text-slate-500 italic px-1">
+            Meer connecties (Google Agenda, Moneybird, Telegram) volgen later.
+          </p>
+        </div>
+      </Panel>
+    </div>
+  );
+}
+

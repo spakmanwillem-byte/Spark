@@ -1,5 +1,10 @@
 /* Spark Core 2.0 - Minimal App Styles */
 
+/* v5_ui_prefs_001 — per-user glow base color, ingesteld via Mijn Profiel → Instellingen */
+:root {
+  --glow-base: #f59e0b;
+}
+
 /* Remove default link styling */
 .App-link {
   color: inherit;

@@ -52,7 +52,15 @@ export function CommunityPage({ onNavigate }) {
     }).then(r => r.json()).catch(() => ({ success: false }));
 
     if (res.success) {
-      setMessages(prev => [...prev, res.message, ...(res.bot_responses || [])]);
+      // v5_response_compat_001 — ondersteunt zowel oude (message+bot_responses) als nieuwe (messages) responses
+      if (res.messages) {
+        // Voor help/safeword/dnd_intro: server heeft alles al in COMMUNITY_FILE gezet → reload feed
+        await loadData();
+      } else if (res.message) {
+        setMessages(prev => [...prev, res.message, ...(res.bot_responses || [])]);
+      } else {
+        await loadData();  // veilige fallback
+      }
     }
     setSending(false);
   };
@@ -102,7 +110,7 @@ export function CommunityPage({ onNavigate }) {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
-          {messages.map(msg => (
+          {messages.filter(Boolean).map(msg => (
             <ChatBubble key={msg.id} msg={msg} isOwn={msg.user_id === userId} />
           ))}
           <div ref={messagesEndRef} />

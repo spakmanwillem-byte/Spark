@@ -108,6 +108,31 @@ def _load(user_id: str) -> Dict:
         user = _init_potjes(user_id)
         data.setdefault("users", {})[user_id] = user
         save_json(POTJES_FILE, data)
+    # v5_potjes_repair_001 — als user fewer than 10 potjes heeft (tier 1), reparate door tot 10 aan te vullen
+    # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
+    if len(user.get("potjes", [])) < DEFAULT_POT_COUNT:
+        existing = user["potjes"]
+        next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
+        now = datetime.now(timezone.utc).isoformat()
+        while len(existing) < DEFAULT_POT_COUNT:
+            existing.append({
+                "id": f"pot-{next_idx+1:03d}",
+                "index": next_idx,
+                "capital": START_AMOUNT,
+                "max_size": INITIAL_MAX,
+                "position": {
+                    "is_open": False, "entry_price": None, "highest_price": None,
+                    "trailing_active": False, "entry_time": None,
+                },
+                "market": existing[0].get("market", "BCH-EUR") if existing else "BCH-EUR",
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now,
+                "last_action": None,
+            })
+            next_idx += 1
+        user["potjes"] = existing
+        data["users"][user_id] = user
+        save_json(POTJES_FILE, data)
     return data
 
 

@@ -1,6 +1,11 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v4_spark_clean_start_001** (mini-batch, follow-up):
+  - 🧹 **Spark trader schone start**: user-001 trade_history gearchiveerd → `user-001_archive_pre_spark_clean_<ts>.json`, daarna leeggemaakt (0 trades). Baseline gezet op €5.08 (matcht live Bitvavo wallet)
+  - 🤖 **Bot autostart op user-001**: `bots_registry_state.json` verplaatst van user-000 → user-001 (waar de echte Bitvavo creds staan). Bij backend restart: "🤖 1 registry-bot(s) auto-resumed" en cycles loopt direct
+  - ✅ Geverifieerd via `/api/trade/stats/user-001` (0 trades, baseline 5.08) en `/api/trade/admin/bots` (running=true, cycles=1, 5 markets)
+
 - 2026-05-23 **v4_welcome_bark_001 + v4_trader_label_swap_001** (mini-batch ~30 credits):
   - ✨ **Welkom-bark voor eerste login** (`welcome_v1`, kind="welcome"): legt uit dat je gewoon een gesprek voert en dat je `help` typt voor een overzicht. Auto-injected in `version_anchor.json` voor zowel verse installs als bestaande deployments. Beschermd tegen verwijderen. Eigen styling (groene Hand-icon) in `BarkQueueOverlay`. Sortering: privacy → welcome → rest
   - 🔄 **Trader wallet-switch labels omgedraaid**: `walletView='me'` (user-001) is nu zichtbaar als "🌟 Spark", `walletView='spark'` (user-000 default) als "👤 Mijn". Routing ongewijzigd, alleen labels swap conform user feedback ("tabs zijn wel goed maar namen moeten andersom")

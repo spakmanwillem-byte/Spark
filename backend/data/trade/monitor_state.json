@@ -1,6 +1,6 @@
 {
-  "running": false,
-  "interval": 900,
+  "running": true,
+  "interval": 3600,
   "market": "BCH-EUR",
   "markets": [
     "BCH-EUR",
@@ -9,11 +9,11 @@
     "SOL-EUR",
     "ADA-EUR"
   ],
-  "candle_interval": "15m",
+  "candle_interval": "1h",
   "user_id": "user-001",
   "auto_trade": true,
   "trade_amount": 5.08,
   "use_mock": false,
   "use_potjes": true,
-  "last_persisted": "2026-05-21T21:15:05.904992+00:00"
+  "last_persisted": "2026-05-22T06:16:17.755080+00:00"
 }

@@ -124,6 +124,14 @@ def submit(req: SubmitRequest):
     result = submit_for_review(req.user_id, req.card_id, req.ws5 or {}, req.lagen, req.belangrijkheid)
     if not result.get("success"):
         raise HTTPException(400, result.get("error", "submit_failed"))
+    # v4_dnd_001 — Behavior tracking: bijdrage = helpen + verhalen delen
+    try:
+        from modules.behavior_tracker import track
+        track(req.user_id, "bijdrage_create", 1)
+        track(req.user_id, "help_msg", 1)
+        track(req.user_id, "story_share", 1)
+    except Exception:
+        pass
     return result
 
 

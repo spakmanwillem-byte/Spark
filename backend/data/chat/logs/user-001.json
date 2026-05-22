@@ -19384,11 +19384,63 @@
         "session_id": "default",
         "gesprek_nummer": 738
       }
+    },
+    {
+      "id": "conv-aabf9b5f",
+      "timestamp": "2026-05-22T05:54:41.215273+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Bedankt voor je hulp! Ik wil graag samen werken.",
+      "spark_response": "Graag gedaan!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "samen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": "thanks",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "thanks"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 739
+      }
+    },
+    {
+      "id": "conv-afda4d16",
+      "timestamp": "2026-05-22T05:54:41.625109+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Ik help vandaag iemand met inrichten.",
+      "spark_response": "(geen bot reactie)",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [],
+        "bot_count": 0,
+        "word_count": 6
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 740
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 738,
-    "last_updated": "2026-05-22T05:23:42.017474+00:00"
+    "total_conversations": 740,
+    "last_updated": "2026-05-22T05:54:41.625109+00:00"
   }
 }

@@ -150,6 +150,33 @@ async def send_community_message(msg: ChatMessage):
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     now = datetime.now(timezone.utc).isoformat()
 
+    # v4_dnd_001 — Behavior tracking + auto-bark community reward
+    try:
+        from modules.behavior_tracker import track_chat_message, track
+        track_chat_message(msg.user_id, msg.message)
+        # Auto-bark: eerste bericht van vandaag → community contribution counter
+        today = now[:10]
+        last_msg_today = next(
+            (m for m in reversed(data.get("messages", []))
+             if m.get("user_id") == msg.user_id and (m.get("timestamp") or "").startswith(today) and not m.get("is_bot")),
+            None,
+        )
+        if not last_msg_today:
+            track(msg.user_id, "first_msg_today", 1)
+            track(msg.user_id, "help_msg", 1)  # community deelnemen = bijdragen
+            # Trigger achievement-bark via inventory module
+            try:
+                from modules.dnd.routes import observe, ObserveBody  # type: ignore
+                await observe(ObserveBody(
+                    user_id=msg.user_id,
+                    kind="first_msg_today",
+                    detail={"date": today},
+                ))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     # User message
     user_msg = {
         "id": str(uuid.uuid4()),

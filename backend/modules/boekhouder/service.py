@@ -106,6 +106,13 @@ def announce_buy(user_id: str, pot_id: str, market: str, price: float, amount_eu
         "type": "trade_buy", "user_id": user_id, "pot_id": pot_id,
         "market": market, "price": price, "amount_eur": amount_eur,
     })
+    # v4_dnd_001 — De Boekhouder groeit met elke trade
+    try:
+        from modules.behavior_tracker import track
+        track(user_id, "trade_event", 1)
+        track(user_id, "wallet_mutate", 1)
+    except Exception:
+        pass
 
 
 def announce_sell(user_id: str, pot_id: str, market: str, price: float,
@@ -155,3 +162,12 @@ def announce_sell(user_id: str, pot_id: str, market: str, price: float,
             "type": "fee_transfer", "from_user": user_id, "to_user": SPARK_ID,
             "amount_eur": spark_fee, "reason": f"5% fee op SELL {pot_id}",
         })
+    # v4_dnd_001 — De Boekhouder + fee-extraction tracking
+    try:
+        from modules.behavior_tracker import track
+        track(user_id, "trade_event", 1)
+        track(user_id, "wallet_mutate", 1)
+        if spark_fee > 0:
+            track(SPARK_ID, "fee_extraction", 1)
+    except Exception:
+        pass

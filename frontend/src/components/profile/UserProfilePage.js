@@ -818,9 +818,24 @@ function PersoonskaartCard({ userId, isAdmin }) {
     <Card title="Persoonskaart" accent="#a855f7" icon={Award}>
       {/* v4_dnd_001 — Aura/Glow visualisatie */}
       {aura && aura.total_events > 0 && (
-        <div data-testid="aura-section" className="mb-4 p-3 rounded-xl border"
+        <div data-testid="aura-section" className="mb-4 p-3 rounded-xl border relative overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${aura.primary_color}15, transparent)`, borderColor: `${aura.primary_color}40` }}>
-          <div className="flex items-center gap-3">
+          {/* Particles laag */}
+          <div className="pointer-events-none absolute inset-0 opacity-40">
+            {[...Array(8)].map((_, i) => (
+              <span key={i} className="absolute rounded-full"
+                style={{
+                  width: `${4 + (i % 3) * 2}px`,
+                  height: `${4 + (i % 3) * 2}px`,
+                  background: aura.layers[i % aura.layers.length]?.color || aura.primary_color,
+                  left: `${(i * 13 + 7) % 95}%`,
+                  top: `${(i * 17 + 11) % 80}%`,
+                  animation: `aura-float-${i % 3} ${3 + (i % 4)}s ease-in-out infinite`,
+                  filter: 'blur(0.5px)',
+                }} />
+            ))}
+          </div>
+          <div className="flex items-center gap-3 relative">
             <div className="relative">
               <div className="w-12 h-12 rounded-full flex items-center justify-center"
                 style={{ background: `radial-gradient(circle, ${aura.primary_color}80, ${aura.primary_color}20)`, boxShadow: `0 0 24px ${aura.primary_color}80` }}>
@@ -839,7 +854,7 @@ function PersoonskaartCard({ userId, isAdmin }) {
             </div>
           </div>
           {aura.unlocks?.length > 0 && (
-            <div className="mt-2 pt-2 border-t border-slate-800/50">
+            <div className="mt-2 pt-2 border-t border-slate-800/50 relative">
               <p className="text-[10px] text-slate-500 mb-1">Unlocks (top categorie):</p>
               <div className="flex flex-wrap gap-1">
                 {aura.unlocks.map(u => (

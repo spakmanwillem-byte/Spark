@@ -74,6 +74,24 @@ async def create_knowledge_entry(data: dict):
             status_code=409,
             detail={"message": "Begrip bestaat al", "match": existing},
         )
+    # v4_dnd_001 — Behavior: kennis-creatie versterkt The Story Teller
+    try:
+        from modules.behavior_tracker import track
+        creator = data.get("created_by") or data.get("detected_by")
+        if creator:
+            track(creator, "kb_create", 1)
+            track(creator, "story_share", 1)
+            try:
+                from modules.dnd.routes import observe, ObserveBody  # type: ignore
+                await observe(ObserveBody(
+                    user_id=creator,
+                    kind="kb_added",
+                    detail={"begrip": entry.get("begrip"), "id": entry.get("id")},
+                ))
+            except Exception:
+                pass
+    except Exception:
+        pass
     return {"status": "ok", "entry": entry}
 
 

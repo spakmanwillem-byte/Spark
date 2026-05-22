@@ -153,6 +153,38 @@ def _recompute_world() -> dict:
         "computed_at": datetime.now(timezone.utc).isoformat(),
     }
     save_json(WORLD_FILE, state)
+
+    # v4_dnd_aspect_bark_001 — Auto-trigger bark als entiteit > 60% dominantie
+    try:
+        from modules.deploy.routes import _load_anchors, ANCHOR_FILE
+        for ent in entities:
+            if not ent.get("dominant"):
+                continue
+            anchor_id = f"aspect_{ent['name'].lower().replace(' ', '_')}"
+            anchors_data = _load_anchors()
+            existing = next((b for b in anchors_data.get("barks", []) if b.get("id") == anchor_id), None)
+            if existing:
+                continue
+            new_bark = {
+                "id": anchor_id,
+                "kind": "feature",
+                "anchored_at": datetime.now(timezone.utc).isoformat(),
+                "anchored_by": "system_aspect",
+                "title": f"Aspect groeit: {ent['name']}",
+                "message": (
+                    f"De wereld voelt het. **{ent['name']}** ({ent.get('function')}) is "
+                    f"dominant geworden — {int(ent.get('ratio', 0) * 100)}% van alle gedrag-events. "
+                    "Deze entiteit beïnvloedt nu actief de toon van Spark World."
+                ),
+                "icon": "🌌",
+                "roadmap_ref": "phase-dnd-aspect-bark",
+                "audience": "all",
+            }
+            anchors_data["barks"].append(new_bark)
+            save_json(ANCHOR_FILE, anchors_data)
+    except Exception:
+        pass
+
     return state
 
 

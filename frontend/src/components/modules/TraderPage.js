@@ -16,7 +16,16 @@ const INTERVAL_LABELS = { '15m': '15 min', '1h': '1 uur', '4h': '4 uur', '1d': '
 
 export function TraderPage({ onNavigate }) {
   const { user } = useAuth();
-  const userId = user?.id || 'user-001';
+  const isAdmin = (user?.gradatie ?? 7) <= 1;
+  const isFamilie = (user?.gradatie ?? 7) === 2;  // v4_trader_g2_hide_001
+  // v4_trader_admin_switch_001 — admin kan switchen tussen eigen wallet en Spark wallet
+  const [walletView, setWalletView] = useState(() => {
+    return sessionStorage.getItem('trader_wallet_view') || (user?.id === 'user-001' ? 'spark' : 'me');
+  });
+  const userId = walletView === 'spark' && isAdmin ? 'user-000' : (user?.id || 'user-001');
+  useEffect(() => {
+    if (isAdmin) sessionStorage.setItem('trader_wallet_view', walletView);
+  }, [walletView, isAdmin]);
   const [activeView, setActiveView] = useState('dashboard');
   const [stats, setStats] = useState(null);
   const [trades, setTrades] = useState([]);
@@ -235,6 +244,19 @@ export function TraderPage({ onNavigate }) {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {/* v4_trader_admin_switch_001 — Wallet view switch (admin only) */}
+            {isAdmin && (
+              <div data-testid="wallet-switch" className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg border border-slate-700">
+                <button onClick={() => setWalletView('me')} data-testid="wallet-switch-me"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  👤 Mijn
+                </button>
+                <button onClick={() => setWalletView('spark')} data-testid="wallet-switch-spark"
+                  className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1 ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+                  🌟 Spark
+                </button>
+              </div>
+            )}
             {/* Monitor indicator */}
             {monitorStatus?.running && (
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 text-[10px] text-green-400 animate-pulse">
@@ -245,13 +267,25 @@ export function TraderPage({ onNavigate }) {
               <RefreshCw className="w-4 h-4 text-slate-400" />
             </button>
             <button data-testid="trade-settings-toggle" onClick={(e) => { e.stopPropagation(); setActiveView(activeView === 'bitvavo' ? 'dashboard' : 'bitvavo'); }}
-              className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
+              className={`p-2 rounded-lg transition-colors ${isFamilie ? 'opacity-30 cursor-not-allowed' : 'bg-slate-800 hover:bg-slate-700'}`}
+              title={isFamilie ? 'Niet beschikbaar voor Familie (gradatie 2)' : 'Bitvavo instellingen'}
+              disabled={isFamilie}>
               <Settings className="w-4 h-4 text-slate-400" />
             </button>
           </div>
         </div>
 
-        {activeView === 'bitvavo' ? (
+        {/* v4_trader_g2_hide_001 — Familie ziet alleen overzicht */}
+        {isFamilie && (
+          <div data-testid="trader-g2-info" className="px-4 py-3 bg-blue-500/5 border border-blue-500/20 rounded-xl">
+            <p className="text-xs text-blue-300 flex items-center gap-2">
+              <span className="text-base">👁️</span>
+              Je bent op Familie-niveau (gradatie 2). Je ziet hier het portfolio-overzicht. Trade-uitvoering, Bitvavo-instellingen en donaties zijn beheerd door admins.
+            </p>
+          </div>
+        )}
+
+        {activeView === 'bitvavo' && !isFamilie ? (
           <BitvavoSettings userId={userId} status={bitvavoStatus} settings={traderSettings} />
         ) : (
           <>
@@ -1026,7 +1060,7 @@ function BitvavoSettings({ userId, status, settings }) {
       </div>
 
       {/* Donaties / Deposits */}
-      <DonationsPanel userId={userId} />
+      {!isFamilie && <DonationsPanel userId={userId} />}
     </div>
   );
 }

@@ -62,6 +62,13 @@ async def process_message(req: ChatMessage):
     if not text:
         raise HTTPException(status_code=400, detail="Leeg bericht")
 
+    # v4_dnd_001 — Behavior tracking voor aura/wereldgroei
+    try:
+        from modules.behavior_tracker import track_chat_message
+        track_chat_message(req.user_id, text)
+    except Exception:
+        pass
+
     response = {
         "type": "response",
         "message": "",

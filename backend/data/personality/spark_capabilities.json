@@ -1,0 +1,207 @@
+{
+  "_arch_ref": "DSP-007 — capability registry. Centrale lijst van wat Spark KAN. Triggers (NL patterns) → module-paden. Status: live/placeholder/idea. Zie ARCHITECTURE.md.",
+  "metadata": {
+    "purpose": "Natural-language capability matching voor Spark. User zegt 'kan jij X?' of 'wil je voor mij X kijken?' → Spark matcht naar een capability en doet hem of geeft eerlijk placeholder-antwoord.",
+    "beschrijving": "Layer voor 'Spark's handen'. Integratie-tab + bestanden-tab worden hier aangeroepen. Elke capability heeft NL-triggers (varianten van hoe je het kan vragen), een module-pad (waar de echte code zit) en een status.",
+    "patroon_user_zinnen": [
+      "kan jij [X]",
+      "kan je voor mij [X]",
+      "wil jij voor mij kijken als jij [X] kan",
+      "wil je voor mij [X]",
+      "weet jij [X]",
+      "heb ik [X]",
+      "hoeveel [X]"
+    ],
+    "regels": [
+      "Elke capability heeft minstens 3 NL-trigger varianten.",
+      "Status live = werkt en heeft echte functie. Placeholder = wel matchbaar, geeft eerlijke 'kan ik nog niet'-bark.",
+      "Capability ID is snake_case en stabiel — UI/code mag erop bouwen.",
+      "Module-pad is relatief vanaf /app/backend/modules/."
+    ],
+    "version": "1.0",
+    "last_updated": "2026-05-23"
+  },
+  "capabilities": [
+    {
+      "id": "trade_logs_ophalen",
+      "naam": "Trade-logs ophalen",
+      "categorie": "trader",
+      "beschrijving": "Haal je trade-history op (buys, sells, winsten, verliezen per pot).",
+      "triggers": [
+        "log(s)? van (mijn )?trade",
+        "trade ?(log|history|geschiedenis)",
+        "wat heb ik (gekocht|verkocht|getraded)",
+        "toon (mijn )?trades"
+      ],
+      "status": "live",
+      "module": "trade/routes.py",
+      "endpoint": "/api/trade/history/{user_id}",
+      "data_source": "/app/backend/data/financial/transactions.json"
+    },
+    {
+      "id": "gesprek_lezen",
+      "naam": "Gesprek van [tijdstip] lezen",
+      "categorie": "memory",
+      "beschrijving": "Lees terug wat we eerder hebben besproken (vandaag, gisteren, vorige week).",
+      "triggers": [
+        "gesprek van (gisteren|vandaag|vorige week|maandag|dinsdag|woensdag|donderdag|vrijdag)",
+        "wat hebben we (gisteren|laatst|vorige keer) besproken",
+        "lees (ons )?gesprek (terug|van)",
+        "wat zei (jij|ik) (gisteren|toen)"
+      ],
+      "status": "placeholder",
+      "module": "chat/history_service.py",
+      "endpoint": null,
+      "data_source": "/app/backend/data/chat/*.json",
+      "placeholder_response": "Ik kan nog niet door oude gesprekken zoeken — dat staat op de roadmap. Wel kan ik je huidige sessie zien."
+    },
+    {
+      "id": "winst_verlies_overzicht",
+      "naam": "Winst/verlies overzicht",
+      "categorie": "trader",
+      "beschrijving": "Hoeveel heb ik verdiend/verloren met trading (totaal, dit jaar, vandaag).",
+      "triggers": [
+        "heb ik winst",
+        "heb ik verlies",
+        "winst (en|/)?verlies",
+        "(P/L|PnL|profit)",
+        "hoeveel heb ik (verdiend|verloren)"
+      ],
+      "status": "live",
+      "module": "trade/routes.py",
+      "endpoint": "/api/trade/pnl/{user_id}",
+      "data_source": "/app/backend/data/financial/user_potjes.json"
+    },
+    {
+      "id": "tellen_gebruikers",
+      "naam": "Hoeveel gebruikers / bots",
+      "categorie": "system",
+      "beschrijving": "Tel users, bots, gradaties.",
+      "triggers": [
+        "hoeveel (gebruikers|users|leden|bots)",
+        "(aantal|tel) (gebruikers|users|bots)",
+        "wie zijn er allemaal"
+      ],
+      "status": "live",
+      "module": "auth/routes.py",
+      "endpoint": "/api/auth/users",
+      "data_source": "/app/backend/data/system/users.json"
+    },
+    {
+      "id": "tellen_bestanden",
+      "naam": "Hoeveel bestanden / volume",
+      "categorie": "system",
+      "beschrijving": "Tel kenniskaarten, dialogen, foto's, opslag-volume.",
+      "triggers": [
+        "hoeveel (bestanden|kaarten|kennis|foto's|files)",
+        "(opslag|storage|volume|massa)",
+        "(aantal|tel) (kaarten|dialogen|foto's)"
+      ],
+      "status": "live",
+      "module": "knowledge/routes.py",
+      "endpoint": "/api/knowledge/stats",
+      "data_source": "/app/backend/data/knowledge/knowledge_base.json"
+    },
+    {
+      "id": "agenda_lezen",
+      "naam": "Agenda raadplegen",
+      "categorie": "memory",
+      "beschrijving": "Wat staat er in mijn agenda — vandaag, deze week, op een datum.",
+      "triggers": [
+        "(mijn |de )?agenda",
+        "wat staat er (op|vandaag|morgen|deze week)",
+        "afspraken",
+        "wat heb ik (vandaag|morgen|gepland)"
+      ],
+      "status": "live",
+      "module": "chat/agenda_intent_service.py",
+      "endpoint": "/api/agenda/items",
+      "data_source": "/app/backend/data/agenda/agenda.json"
+    },
+    {
+      "id": "kasboek_overzicht",
+      "naam": "Kasboek overzicht",
+      "categorie": "financial",
+      "beschrijving": "Hoeveel geld zit waar (wallet, trading, treasury, totale stand).",
+      "triggers": [
+        "(mijn |de )?kasboek",
+        "(financieel|geld|saldo) overzicht",
+        "wat is mijn (saldo|stand)",
+        "hoeveel (euro|geld) (heb ik|staat er)"
+      ],
+      "status": "live",
+      "module": "wallet/routes.py",
+      "endpoint": "/api/wallet/user/{user_id}",
+      "data_source": "/app/backend/data/wallet/wallets.json"
+    },
+    {
+      "id": "zoeken_kennisbank",
+      "naam": "Zoek in kennisbank (Spark's handen — ogen)",
+      "categorie": "search",
+      "beschrijving": "Spark gebruikt integratie/bestanden-tab om kennis op te halen. Eerste 'hand' van Spark.",
+      "triggers": [
+        "weet jij (wat|wie|waar|wanneer|hoe)",
+        "zoek (voor mij )?(naar)?",
+        "wat is (een )?",
+        "vertel (mij )?over",
+        "(kan jij|kun jij) (kijken|zoeken|vinden)"
+      ],
+      "status": "live",
+      "module": "knowledge/search_service.py",
+      "endpoint": "/api/knowledge/search",
+      "data_source": "/app/backend/data/knowledge/knowledge_base.json"
+    },
+    {
+      "id": "toon_afbeelding",
+      "naam": "Toon afbeelding (Spark's handen — beeld)",
+      "categorie": "media",
+      "beschrijving": "Spark zoekt of genereert een afbeelding bij een onderwerp.",
+      "triggers": [
+        "(hoe ziet|laat zien|toon)( mij)?",
+        "(wat is|kan ik) (een )?(plaatje|afbeelding|foto)",
+        "show me",
+        "(maak|genereer) (een )?afbeelding"
+      ],
+      "status": "placeholder",
+      "module": "media/image_service.py",
+      "endpoint": null,
+      "placeholder_response": "Ik kan nog geen afbeeldingen tonen — staat in roadmap als 'Spark's handen — beeld' laag."
+    },
+    {
+      "id": "speel_geluid",
+      "naam": "Speel geluid (Spark's handen — oren/stem)",
+      "categorie": "media",
+      "beschrijving": "Spark speelt een audio-sample bij een onderwerp (bv. appel happen, vogel fluiten).",
+      "triggers": [
+        "(hoe klinkt|wat voor geluid|laat horen|speel)",
+        "(audio|geluid|sound) (van|voor)"
+      ],
+      "status": "placeholder",
+      "module": "media/audio_service.py",
+      "endpoint": null,
+      "placeholder_response": "Geluiden afspelen kan ik nog niet. Komt bij de multi-modale laag (kenniskaart 2.0)."
+    },
+    {
+      "id": "taken_lijst",
+      "naam": "Welke taken heb ik / kan jij doen",
+      "categorie": "system",
+      "beschrijving": "Toon openstaande taken voor een user, of capabilities-lijst voor Spark zelf.",
+      "triggers": [
+        "(mijn )?taken",
+        "wat (kan|moet) (jij|ik) (doen)",
+        "(todo|to do) lijst"
+      ],
+      "status": "live",
+      "module": "notes/routes.py",
+      "endpoint": "/api/notes/tasks",
+      "data_source": "/app/backend/data/notes/tasks.json"
+    }
+  ],
+  "_lege_categorieen_voor_later": {
+    "code": "Kan jij dit fixen / programmeren — Spark als ontwikkel-assistent (idee)",
+    "afbeelding_maken": "Genereer een nieuwe afbeelding van X (vereist integratie)",
+    "rapport_genereren": "Maak PDF/Word rapport van X data",
+    "agenda_toevoegen": "Voeg afspraak toe in agenda via natural language",
+    "trade_uitvoeren": "Koop/verkoop coin op commando (vereist confirmation guard)"
+  }
+}

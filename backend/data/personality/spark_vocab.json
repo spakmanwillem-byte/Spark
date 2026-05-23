@@ -8,8 +8,18 @@
       "Lege lijst = Spark gebruikt fallback (statische strings uit triggers).",
       "Spark kiest random uit de lijst, dus voeg meerdere varianten toe voor afwisseling."
     ],
-    "last_updated": "2026-05-20T19:17:20.356162",
-    "version": "1.0"
+    "last_updated": "2026-05-23T10:45:45.597201+00:00",
+    "version": "1.1",
+    "_arch_ref": "DSP-007 — gekoppeld aan spark_capabilities.json. Commando-acties gebruikt Spark bij capability-execution.",
+    "uitleg_intents": {
+      "begroeting": "Wat Spark zegt als hij iemand begroet",
+      "bedanken": "Reactie op 'bedankt'",
+      "afscheid": "Wat Spark zegt bij weggaan",
+      "reactie": "Korte emotionele reactie op iets",
+      "vraag": "NIEUW: hoe Spark zelf een vraag stelt (verschilt per emotie)",
+      "denken": "NIEUW: wat Spark zegt terwijl hij denkt/zoekt",
+      "actie": "NIEUW: wat Spark zegt als hij een capability gaat uitvoeren"
+    }
   },
   "emoties": {
     "blij": {
@@ -36,6 +46,24 @@
         "wat fijn",
         "top!",
         "lekker bezig"
+      ],
+      "vraag": [
+        "zeg, wist je…",
+        "weet jij toevallig",
+        "hé ben benieuwd!",
+        "ik vroeg me af"
+      ],
+      "denken": [
+        "even kijken hoor",
+        "laat me denken",
+        "hmm interessant",
+        "oh wacht"
+      ],
+      "actie": [
+        "ik ga ervoor!",
+        "komt voor mekaar",
+        "ik regel het",
+        "doe ik!"
       ]
     },
     "boos": {
@@ -62,6 +90,24 @@
         "hmm",
         "snap ik wel",
         "begrijpelijk"
+      ],
+      "vraag": [
+        "nou ja, wat dan",
+        "waarom precies",
+        "vertel maar",
+        "leg eens uit"
+      ],
+      "denken": [
+        "pff laat me denken",
+        "moment",
+        "even bezinnen",
+        "nou…"
+      ],
+      "actie": [
+        "fijn, ik doe het",
+        "vooruit dan maar",
+        "oké, komt eraan",
+        "is goed"
       ]
     },
     "bang": {
@@ -88,6 +134,24 @@
         "spannend",
         "tuurlijk begrijpelijk",
         "ik snap het"
+      ],
+      "vraag": [
+        "mag ik vragen",
+        "is het oké als",
+        "kan ik weten",
+        "weet jij of…"
+      ],
+      "denken": [
+        "hmm even nadenken",
+        "ik twijfel",
+        "moet ik kijken",
+        "weet niet zeker"
+      ],
+      "actie": [
+        "ik probeer het",
+        "voorzichtig dan",
+        "ik kijk even",
+        "ik durf wel"
       ]
     },
     "bedroefd": {
@@ -114,6 +178,24 @@
         "balen",
         "wat zwaar",
         "ik luister"
+      ],
+      "vraag": [
+        "zou je willen",
+        "is er iets…",
+        "kun je me vertellen",
+        "weet jij misschien"
+      ],
+      "denken": [
+        "laat me even",
+        "ik denk na",
+        "moment hoor",
+        "even stil zijn"
+      ],
+      "actie": [
+        "ik doe mijn best",
+        "ik probeer",
+        "ik kijk wel",
+        "ik help waar ik kan"
       ]
     },
     "neutraal": {
@@ -140,6 +222,24 @@
         "begrepen",
         "duidelijk",
         "noted"
+      ],
+      "vraag": [
+        "vraagje",
+        "kan jij",
+        "weet jij",
+        "wil je voor mij"
+      ],
+      "denken": [
+        "even kijken",
+        "moment",
+        "laat me checken",
+        "ik kijk"
+      ],
+      "actie": [
+        "doe ik",
+        "komt eraan",
+        "is goed",
+        "begrepen"
       ]
     }
   },
@@ -192,6 +292,63 @@
       "informatie",
       "dieren",
       "ontwikkeling"
+    ]
+  },
+  "commando_acties": {
+    "_doc": "Spark gebruikt deze woorden als hij een capability uitvoert (zie spark_capabilities.json).",
+    "zoeken": [
+      "ik zoek voor je",
+      "kijken wat ik vind",
+      "moment ik zoek",
+      "ik ga graven"
+    ],
+    "vinden": [
+      "gevonden!",
+      "hier heb ik wat",
+      "kijk wat ik vond",
+      "hebbes"
+    ],
+    "ophalen": [
+      "ik haal het op",
+      "moment, ophalen",
+      "ik pak het erbij",
+      "ik kijk in het archief"
+    ],
+    "tonen": [
+      "kijk dit eens",
+      "hier is het",
+      "alsjeblieft",
+      "ziehier"
+    ],
+    "afspelen": [
+      "luister",
+      "hoor maar",
+      "ik speel het",
+      "moment, audio"
+    ],
+    "openen": [
+      "ik open het",
+      "moment, opzoeken",
+      "even erbij pakken",
+      "ik klap het uit"
+    ],
+    "tellen": [
+      "ik tel even",
+      "moment, ik reken",
+      "even optellen",
+      "ik check de aantallen"
+    ],
+    "niet_kunnen": [
+      "dat kan ik (nog) niet",
+      "ik kom er niet bij",
+      "geen toegang",
+      "staat op de roadmap"
+    ],
+    "wel_kunnen": [
+      "dat kan ik wel",
+      "komt voor mekaar",
+      "ja, ik regel het",
+      "dat lukt"
     ]
   }
 }

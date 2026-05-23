@@ -20,6 +20,14 @@
 - ❓ **Shadow-learning audit**: werkt het, welke leer-modules zijn er, loggen ze goed?
 
 ### Stam (architectuur-ideeën)
+- 🤲 **Spark's "handen" = capability registry** (NIEUW 2026-05-23):
+  - User-zin patroon: `"kan jij [X]"`, `"wil je voor mij [X] kijken"`, `"weet jij [X]"`, `"heb ik [X]"`, `"hoeveel [X]"`
+  - Layer 1: `/app/backend/data/personality/spark_capabilities.json` — centrale registry met `triggers`, `module`, `status` (live/placeholder/idea), `endpoint`
+  - Layer 2: `spark_vocab.commando_acties` — Spark's stem-variatie bij capability-execution (zoeken/vinden/ophalen/tonen/afspelen/openen/tellen/niet_kunnen/wel_kunnen)
+  - Layer 3 TODO: intent-matcher die user-text → capability_id mappt (kan voortbouwen op `chat/smart_intents_service.py`)
+  - Layer 4 TODO: execution-router die capability_id → echte module-call doet
+  - Placeholders eerlijk: "ik kan dat (nog) niet, staat op de roadmap"
+  - Bouw-principe Willem: laag voor laag, met placeholders, niks stuk maken, log voor analyse
 - 🌧️ **Emotie-systeem hertaalt**: Weer=humeur, Klimaat=persoonlijkheid, derde laag=karakter+normen+waarden. Huidige roadmap-tekst klopt niet meer.
 - 📚 **Kenniskaart 2.0**: multi-modaal (tekst + beeld-kader + geluid-kader). Mic-icoon onder kaart → spreek in geselecteerd kader. Onbeantwoorde-kaart-flow.
 - 🗂️ **Archivering**: opgeloste bugs + kasboek-tests + chatlog per dag/maand/jaar, auto-rolling op 1 dec. "Wat hebben we gisteren besproken" moet werken per stream.

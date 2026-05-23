@@ -305,6 +305,176 @@ async def delete_card(card_id: str):
 
 
 # ---------------------------------------------------------------------------
+# v6_dnd_game_cards_001 — KB-shaped Game/D&D kaarten in aparte game.json
+# Hetzelfde schema als KB v2: lagen 1-4, ws5, tags, media, footnote
+# Class: "game", category-tag: "D&D"
+# Opslag: /app/backend/data/cards/dnd/game.json
+# ---------------------------------------------------------------------------
+GAME_FILE = CARDS_DIR / "game.json"
+
+
+def _load_game() -> Dict:
+    return load_json(GAME_FILE, default={"cards": [], "updated_at": _now()})
+
+
+def _save_game(data: Dict) -> None:
+    CARDS_DIR.mkdir(parents=True, exist_ok=True)
+    data["updated_at"] = _now()
+    save_json(GAME_FILE, data)
+
+
+def _compute_game_needs(card: Dict) -> list:
+    needs = []
+    lagen = card.get("lagen") or {}
+    if not (lagen.get("laag1") or "").strip():
+        needs.append("laag1")
+    if not any((card.get("ws5") or {}).values()):
+        needs.append("ws5")
+    media = card.get("media") or {}
+    if not media.get("voice_url"):
+        needs.append("voice")
+    if not (media.get("image_urls") or []):
+        needs.append("image")
+    return needs
+
+
+class GameCreateBody(BaseModel):
+    begrip: str
+    user_id: Optional[str] = "user-001"
+    sense: Optional[str] = None      # 'zie' | 'hoor' | 'voel' (optioneel kanaal-tag)
+
+
+class GameEditBody(BaseModel):
+    card_id: str
+    updates: Dict
+    user_id: Optional[str] = "user-001"
+
+
+class GameLockBody(BaseModel):
+    card_id: str
+    locked: bool = True
+    user_id: Optional[str] = "user-001"
+
+
+@router.get("/game-cards")
+async def list_game_cards(status: Optional[str] = None, limit: int = 200):
+    """Lijst alle game/D&D kaarten (KB-shape)."""
+    data = _load_game()
+    cards = data.get("cards", [])
+    if status:
+        cards = [c for c in cards if c.get("status") == status]
+    # Newest first (footnote.aangemaakt_op desc)
+    cards = sorted(cards, key=lambda c: (c.get("footnote") or {}).get("aangemaakt_op") or "", reverse=True)
+    return {"success": True, "total": len(cards), "cards": cards[:limit]}
+
+
+@router.get("/game-cards/{card_id}")
+async def get_game_card(card_id: str):
+    data = _load_game()
+    for c in data.get("cards", []):
+        if c.get("id") == card_id:
+            return c
+    raise HTTPException(404, f"Game-kaart {card_id} niet gevonden")
+
+
+@router.post("/game-cards")
+async def create_game_card(body: GameCreateBody):
+    """Maak een lege game/D&D-kaart met KB-shape. Default status = draft."""
+    begrip = (body.begrip or "").strip()
+    if not begrip:
+        raise HTTPException(400, "Begrip mag niet leeg zijn")
+    card_id = f"game-{uuid.uuid4().hex[:8]}"
+    base_tags = ["D&D"]
+    if body.sense:
+        base_tags.append(body.sense)
+    card = {
+        "id": card_id,
+        "class": "game",
+        "type": "dnd_game_card",
+        "begrip": begrip,
+        "sense": body.sense,           # optioneel kanaal-aanduiding
+        "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+        "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
+        "tags": base_tags,
+        "media": {"voice_url": None, "voice_transcript": None, "image_urls": []},
+        "status": "draft",             # draft → locked als Willem vastklikt
+        "footnote": {
+            "bron": "manual",
+            "vertrouwen": 0.3,
+            "aangemaakt_door": body.user_id,
+            "aangemaakt_op": _now(),
+            "laatst_bewerkt_op": _now(),
+        },
+    }
+    card["needs"] = _compute_game_needs(card)
+    data = _load_game()
+    data.setdefault("cards", []).insert(0, card)
+    _save_game(data)
+    return {"success": True, "card": card}
+
+
+@router.post("/game-cards/edit")
+async def edit_game_card(body: GameEditBody):
+    """Update lagen / ws5 / tags / begrip / media van een game-kaart."""
+    data = _load_game()
+    for c in data.get("cards", []):
+        if c.get("id") == body.card_id:
+            u = body.updates or {}
+            if "lagen" in u:  c["lagen"] = {**(c.get("lagen") or {}), **(u["lagen"] or {})}
+            if "ws5"   in u:  c["ws5"]   = {**(c.get("ws5") or {}),   **(u["ws5"] or {})}
+            if "tags"  in u and isinstance(u["tags"], list):
+                # Zorg dat "D&D" tag altijd aanwezig blijft (class-aanduiding)
+                tags = list(u["tags"])
+                if "D&D" not in tags: tags.append("D&D")
+                c["tags"] = tags
+            if "begrip" in u and u["begrip"]:
+                c["begrip"] = u["begrip"]
+            if "media"  in u and isinstance(u["media"], dict):
+                c["media"]  = {**(c.get("media") or {}), **u["media"]}
+            if "sense" in u:
+                c["sense"] = u["sense"]
+            fn = c.get("footnote") or {}
+            fn["laatst_bewerkt_door"] = body.user_id
+            fn["laatst_bewerkt_op"] = _now()
+            # vertrouwen omhoog als lagen ingevuld zijn
+            lagen_filled = sum(1 for v in (c.get("lagen") or {}).values() if (v or "").strip())
+            fn["vertrouwen"] = max(fn.get("vertrouwen", 0.3), round(0.3 + 0.15 * lagen_filled, 2))
+            c["footnote"] = fn
+            c["needs"] = _compute_game_needs(c)
+            _save_game(data)
+            return {"success": True, "card": c}
+    raise HTTPException(404, f"Game-kaart {body.card_id} niet gevonden")
+
+
+@router.post("/game-cards/lock")
+async def lock_game_card(body: GameLockBody):
+    """Markeer game-kaart als locked (canon) of zet terug naar draft."""
+    data = _load_game()
+    for c in data.get("cards", []):
+        if c.get("id") == body.card_id:
+            c["status"] = "locked" if body.locked else "draft"
+            fn = c.setdefault("footnote", {})
+            fn["laatst_bewerkt_op"] = _now()
+            if body.locked:
+                fn["locked_op"] = _now()
+                fn["locked_door"] = body.user_id
+            _save_game(data)
+            return {"success": True, "card_id": body.card_id, "status": c["status"]}
+    raise HTTPException(404, f"Game-kaart {body.card_id} niet gevonden")
+
+
+@router.delete("/game-cards/{card_id}")
+async def delete_game_card(card_id: str):
+    data = _load_game()
+    before = len(data.get("cards", []))
+    data["cards"] = [c for c in data.get("cards", []) if c.get("id") != card_id]
+    if len(data["cards"]) == before:
+        raise HTTPException(404, f"Game-kaart {card_id} niet gevonden")
+    _save_game(data)
+    return {"success": True, "deleted": card_id}
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 def _autotitle(content: str, sense_label: str) -> str:

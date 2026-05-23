@@ -873,3 +873,27 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 ### Test status
 - D&D Galerij + Nieuwe D&D-kaart formulier: e2e getest via Playwright (kaart aangemaakt, verschijnt in grid) ✓
 - KB v2 Nieuwe-kaart venster: screenshot bevestigt leeg formulier met begrip/laag1/lade-keuze knoppen ✓
+
+## 2026-05-23 — D&D game-cards in game.json + Boekhoud bedragen aanpasbaar
+
+### D&D Galerij v2 (v6_dnd_gallery_002)
+- Kleine zintuig+content formulier vervangen door **KB-stijl detail-paneel** (zelfde shape als KennisbankV2 detail panel)
+- Velden: Begrip, Lagen 1-4, 5W (wie/wat/wanneer/waar/waarom/hoe), Tags, Media-placeholders, optioneel zintuig-kanaal
+- "Mist nog" checklist + footnote (bron, vertrouwen %, locked/draft status)
+- Lock/Unlock + Delete actie-knoppen
+- **Aparte opslag**: `/app/backend/data/cards/dnd/game.json` (los van bark-kaarten en KB v2)
+- Class = `"game"`, tag-prefix = `"D&D"` (altijd aanwezig zelfs als user tags wijzigt)
+- Backend endpoints: `GET/POST/PUT/DELETE /api/dnd/spark-world/game-cards[/edit|/lock]`
+- Split-view layout: lijst links + detail/edit rechts (zoals KB v2)
+
+### KB v2 Nieuwe-kaart venster — reverted (v6_kbv2_newcard_modal_001 verwijderd)
+- Geen aparte modal meer; nieuwe kaart opent direct in **bestaande detail-paneel** in edit-modus
+- Window.prompt voor de begrip-naam blijft (snel en simpel), maar lagen/5W/tags/media via het detail-paneel zelf
+- NewCardModal component verwijderd uit KennisbankV2Page.js
+
+### Boekhoud — Bedragen aanpasbaar (v6_accounting_edit_001)
+- Backend: nieuw `PUT /api/accounting/transactions/{tx_id}` endpoint dat amount/description/category/type/entity_id/date/btw_percentage kan wijzigen
+- BTW wordt automatisch herberekend bij bedrag-update
+- Frontend: per transactie-rij een **€✎ knop** naast de delete-knop; opent een prompt met huidige waarde
+- Na opslaan worden kasboeken + summary auto-ververst
+- Geverifieerd via PUT-test (round-trip €45 → 99.99 → 45 hersteld)

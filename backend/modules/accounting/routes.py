@@ -78,6 +78,41 @@ async def delete_transaction(tx_id: str):
     return {"success": False, "message": "Transactie niet gevonden"}
 
 
+# v6_accounting_edit_001 — admin kan bedragen / omschrijving / categorie aanpassen
+class TransactionUpdate(BaseModel):
+    amount: Optional[float] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    type: Optional[str] = None
+    entity_id: Optional[str] = None
+    date: Optional[str] = None
+    btw_percentage: Optional[float] = None
+
+
+@router.put("/transactions/{tx_id}")
+async def update_transaction(tx_id: str, upd: TransactionUpdate):
+    data = load_json(TX_FILE, default={"transactions": []})
+    for t in data.get("transactions", []):
+        if t.get("id") != tx_id:
+            continue
+        if upd.amount is not None: t["amount"] = float(upd.amount)
+        if upd.description is not None: t["description"] = upd.description
+        if upd.category is not None: t["category"] = upd.category
+        if upd.type is not None: t["type"] = upd.type
+        if upd.entity_id is not None: t["entity_id"] = upd.entity_id
+        if upd.date is not None: t["date"] = upd.date
+        if upd.btw_percentage is not None:
+            t["btw_percentage"] = float(upd.btw_percentage)
+        # Hercalculeer btw_amount op basis van actuele amount + btw_percentage
+        btw_pct = t.get("btw_percentage")
+        if btw_pct is not None and t.get("amount") is not None:
+            t["btw_amount"] = round(float(t["amount"]) * (float(btw_pct) / 100), 2)
+        t["updated_at"] = datetime.now(timezone.utc).isoformat()
+        save_json(TX_FILE, data)
+        return {"success": True, "transaction": t}
+    return {"success": False, "message": "Transactie niet gevonden"}
+
+
 @router.get("/summary")
 async def get_summary(entity_id: Optional[str] = None):
     data = load_json(TX_FILE, default={"transactions": []})

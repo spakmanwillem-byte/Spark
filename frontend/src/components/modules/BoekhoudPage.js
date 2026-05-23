@@ -76,6 +76,31 @@ export function BoekhoudPage({ onNavigate }) {
     }
   };
 
+  // v6_accounting_edit_001 — bedrag inline aanpassen via prompt
+  const editTxAmount = async (tx) => {
+    const cur = String(tx.amount ?? '');
+    const raw = window.prompt(
+      `Pas bedrag aan voor "${tx.description}"\n(huidige: € ${cur})\n\nNieuw bedrag (in euro's, gebruik . als komma):`,
+      cur
+    );
+    if (raw === null) return;
+    const v = parseFloat(String(raw).replace(',', '.').trim());
+    if (!Number.isFinite(v) || v < 0) { alert('Ongeldig bedrag'); return; }
+    const res = await fetch(`${API}/api/accounting/transactions/${tx.id}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: v }),
+    });
+    const data = await res.json();
+    if (!data.success) { alert('Aanpassen mislukt: ' + (data.message || JSON.stringify(data))); return; }
+    setTransactions(prev => prev.map(t => t.id === tx.id ? data.transaction : t));
+    const [k, s] = await Promise.all([
+      fetch(`${API}/api/accounting/kasboeken`).then(r => r.json()),
+      fetch(`${API}/api/accounting/summary`).then(r => r.json()),
+    ]);
+    setKasboeken(k.kasboeken || []);
+    setSummary(s);
+  };
+
   const filteredTx = filterEntity ? transactions.filter(t => t.entity_id === filterEntity) : transactions;
   const catOptions = newTx.type === 'income' ? categories.income : categories.expense;
 
@@ -256,6 +281,11 @@ export function BoekhoudPage({ onNavigate }) {
                       <p className={`text-sm font-bold ${tx.type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
                         {tx.type === 'income' ? '+' : '-'}{tx.amount?.toFixed(2)}
                       </p>
+                      <button data-testid={`tx-edit-${tx.id}`} onClick={() => editTxAmount(tx)}
+                        title="Bedrag aanpassen"
+                        className="p-1.5 hover:bg-amber-500/10 text-slate-600 hover:text-amber-400 rounded-lg">
+                        <span className="text-xs font-bold">€✎</span>
+                      </button>
                       <button onClick={() => deleteTx(tx.id)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg"><Trash2 className="w-3.5 h-3.5" /></button>
                     </div>
                   ))}

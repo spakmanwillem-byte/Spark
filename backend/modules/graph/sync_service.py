@@ -61,6 +61,31 @@ def _entry_to_node(entry: dict) -> dict:
     }
 
 
+# v5_kbv2_graph_001 — KB v2 kaarten ook in graph, met lade-info als kleur-bron
+LADE_COLORS = {
+    "voelen":  "#ec4899",
+    "spreken": "#06b6d4",
+    "weten":   "#f59e0b",
+    "doen":    "#a855f7",
+}
+
+
+def _v2_entry_to_node(entry: dict, lade: str = None) -> dict:
+    """Bouw een graph-node uit een KB v2 kaart. Bevat lade-info voor kleuring."""
+    return {
+        "id": entry.get("id"),
+        "label": entry.get("begrip", ""),
+        "type": "knowledge_v2",
+        "lade": lade or entry.get("lade"),
+        "lade_color": LADE_COLORS.get(lade or entry.get("lade") or "", "#94a3b8"),
+        "description": (entry.get("lagen", {}) or {}).get("laag1", "")[:300],
+        "tags": entry.get("tags", []),
+        "topic": entry.get("topic", ""),
+        "belangrijkheid": (entry.get("footnote") or {}).get("belangrijkheid", 5),
+        "vertrouwen": (entry.get("footnote") or {}).get("vertrouwen", 0.5),
+    }
+
+
 def _shared_tags_count(tags_a, tags_b) -> int:
     if not tags_a or not tags_b:
         return 0
@@ -154,18 +179,35 @@ def remove_node(entry_id: str):
 
 
 def rebuild_graph_full() -> dict:
-    """Volledige herbouw vanuit knowledge_base. Voor admin-knop / na backup-restore."""
+    """Volledige herbouw vanuit knowledge_base v1 + KB v2 lades + inbox.
+    v5_kbv2_graph_001 — Verbanden tab toont nu ook v2 kaarten gekleurd per lade."""
     from modules.core.storage import load_json as _lj
-    kb_file = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
-    data = _lj(kb_file, default={"knowledge_entries": []})
-    entries = data.get("knowledge_entries", [])
+    BASE = Path(__file__).parent.parent.parent / "data" / "knowledge"
+    kb_file = BASE / "learned_knowledge" / "knowledge_base.json"
 
-    # 1. Bouw alle nodes
-    nodes = [_entry_to_node(e) for e in entries if e.get("id")]
+    # 1. v1 entries
+    v1_data = _lj(kb_file, default={"knowledge_entries": []})
+    v1_entries = v1_data.get("knowledge_entries", [])
+    v1_nodes = [_entry_to_node(e) for e in v1_entries if e.get("id")]
 
-    # 2. Bouw edges via shared tags
+    # 2. v2 lades + inbox
+    v2_nodes = []
+    v2_dir = BASE / "v2"
+    for lade in LADE_COLORS:
+        d = _lj(v2_dir / f"knowledge_v2_{lade}.json", default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            if c.get("id"):
+                v2_nodes.append(_v2_entry_to_node(c, lade=lade))
+    # Inbox: lade=None → grijze nodes
+    inbox = _lj(v2_dir / "knowledge_inbox.json", default={"kaarten": []})
+    for c in inbox.get("kaarten", []):
+        if c.get("id"):
+            v2_nodes.append(_v2_entry_to_node(c, lade=None))
+
+    nodes = v1_nodes + v2_nodes
+
+    # 3. Bouw edges via shared tags (mengt v1 en v2 nodes)
     edges = []
-    # Bouw eerst tag-index
     tag_to_nodes = {}
     for n in nodes:
         for t in (n.get("tags") or []):
@@ -175,13 +217,11 @@ def rebuild_graph_full() -> dict:
     edges_per_node = {n["id"]: 0 for n in nodes}
     node_by_id = {n["id"]: n for n in nodes}
 
-    # Voor elk paar nodes met >=1 shared tag
     for n in nodes:
         nid = n["id"]
         if edges_per_node[nid] >= MAX_EDGES_PER_NODE:
             continue
         tags = n.get("tags") or []
-        # Vind kandidaat-nodes via tag-index
         candidates = {}
         for t in tags:
             for other_id in tag_to_nodes.get(t, set()):
@@ -189,7 +229,6 @@ def rebuild_graph_full() -> dict:
                     continue
                 candidates[other_id] = candidates.get(other_id, 0) + 1
 
-        # Sorteer en beperk
         ranked = sorted(candidates.items(), key=lambda x: -x[1])
         for target_id, shared in ranked:
             if edges_per_node[nid] >= MAX_EDGES_PER_NODE:
@@ -204,8 +243,8 @@ def rebuild_graph_full() -> dict:
             edges_per_node[nid] += 1
             edges_per_node[target_id] = edges_per_node.get(target_id, 0) + 1
 
-    # 3. Homoniem-varianten als sterke link
-    for e in entries:
+    # 4. Homoniem-varianten (v1 only)
+    for e in v1_entries:
         rt = e.get("related_to")
         if rt and e.get("id") in node_by_id and rt in node_by_id:
             edges.append({
@@ -225,5 +264,9 @@ def rebuild_graph_full() -> dict:
         "success": True,
         "nodes": len(nodes),
         "edges": len(edges),
-        "entries_scanned": len(entries),
+        "entries_scanned": len(v1_entries) + len(v2_nodes),
+        "v1_nodes": len(v1_nodes),
+        "v2_nodes": len(v2_nodes),
+        "v2_by_lade": {l: sum(1 for n in v2_nodes if n.get("lade") == l) for l in LADE_COLORS},
+        "v2_inbox": sum(1 for n in v2_nodes if not n.get("lade")),
     }

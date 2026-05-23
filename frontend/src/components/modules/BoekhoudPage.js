@@ -23,11 +23,14 @@ export function BoekhoudPage({ onNavigate }) {
   const [showNew, setShowNew] = useState(false);
   const [newTx, setNewTx] = useState({ type: 'income', category: 'Donations', amount: '', description: '', entity_id: 'spark_core', btw_percentage: 21 });
 
+  const isAdmin = (user?.gradatie ?? 7) <= 2;
+
   useEffect(() => {
     Promise.all([
-      fetch(`${API}/api/accounting/kasboeken?user_id=${userId}`).then(r => r.json()).catch(() => ({ kasboeken: [] })),
-      fetch(`${API}/api/accounting/summary`).then(r => r.json()).catch(() => ({})),
-      fetch(`${API}/api/accounting/transactions`).then(r => r.json()).catch(() => ({ transactions: [] })),
+      fetch(`${API}/api/accounting/kasboeken?user_id=${userId}&viewer_id=${userId}`).then(r => r.json()).catch(() => ({ kasboeken: [] })),
+      // Summary + alle transactions alleen voor admin (gradatie <= 2)
+      isAdmin ? fetch(`${API}/api/accounting/summary`).then(r => r.json()).catch(() => ({})) : Promise.resolve(null),
+      isAdmin ? fetch(`${API}/api/accounting/transactions`).then(r => r.json()).catch(() => ({ transactions: [] })) : Promise.resolve({ transactions: [] }),
       fetch(`${API}/api/accounting/categories`).then(r => r.json()).catch(() => ({ income: [], expense: [] })),
     ]).then(([k, s, t, c]) => {
       setKasboeken(k.kasboeken || []);
@@ -36,7 +39,7 @@ export function BoekhoudPage({ onNavigate }) {
       setCategories(c);
       setLoading(false);
     });
-  }, [userId]);
+  }, [userId, isAdmin]);
 
   const addTransaction = async () => {
     if (!newTx.amount || !newTx.description.trim()) return;
@@ -76,10 +79,12 @@ export function BoekhoudPage({ onNavigate }) {
   const filteredTx = filterEntity ? transactions.filter(t => t.entity_id === filterEntity) : transactions;
   const catOptions = newTx.type === 'income' ? categories.income : categories.expense;
 
-  const tabs = [
+  const tabs = isAdmin ? [
     { id: 'overzicht', label: 'Kasboeken' },
     { id: 'transacties', label: 'Transacties' },
     { id: 'klanten', label: 'Klanten' },  // v6_bonnetje_001
+  ] : [
+    { id: 'overzicht', label: 'Mijn Privé' },  // non-admin ziet alleen eigen kasboek
   ];
 
   if (loading) return <MainLayout activePage="boekhouding" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" /></div></MainLayout>;

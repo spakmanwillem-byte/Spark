@@ -120,27 +120,59 @@ async def get_categories():
 
 
 @router.get("/kasboeken")
-async def get_kasboeken(user_id: str = None):
+async def get_kasboeken(user_id: str = None, viewer_id: str = None):
     entities = load_json(ENTITIES_FILE, default={"entities": {}}).get("entities", {})
     data = load_json(TX_FILE, default={"transactions": []})
+    # v6_boekhouding_multiuser_001 — Bepaal of viewer admin is
+    viewer = viewer_id or user_id
+    is_admin = False
+    if viewer:
+        users = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={"users": []})
+        for u in users.get("users", []):
+            if u.get("id") == viewer and (u.get("gradatie") or 7) <= 2:
+                is_admin = True
+                break
     kasboeken = []
     for eid, ent in entities.items():
+        # Non-admin: skip zakelijke entiteiten — alleen eigen prive-kasboek tonen
+        if not is_admin and eid != "personal_willem":
+            continue
         etxs = [t for t in data.get("transactions", []) if t.get("entity_id", "spark_core") == eid]
         # Persoonlijk kasboek: filter op user_id
         if eid == "personal_willem" and user_id:
             etxs = [t for t in etxs if t.get("user_id") == user_id]
         income = sum(t["amount"] for t in etxs if t["type"] == "income")
         expenses = sum(t["amount"] for t in etxs if t["type"] == "expense")
-        # Wallet/bank info
+        # Wallet/bank info — voor personal_willem alleen tonen als viewer=user-001 (anker)
         wallets = ent.get("wallets", {})
         bank_info = None
-        for wkey, wval in wallets.items():
-            if isinstance(wval, dict) and wval.get("iban"):
-                bank_info = {"iban": wval["iban"], "provider": wval.get("provider", "")}
-                break
-            if isinstance(wval, dict) and wval.get("provider") == "bitvavo":
-                bank_info = {"provider": "Bitvavo", "balance": wval.get("balance_eur", 0)}
-                break
+        if eid == "personal_willem":
+            # Alleen voor Willem zelf (user-001) tonen we de gekoppelde IBAN.
+            # Andere users zien hun privé-kasboek zonder hardcoded IBAN.
+            if viewer == "user-001":
+                for wkey, wval in wallets.items():
+                    if isinstance(wval, dict) and wval.get("iban"):
+                        bank_info = {"iban": wval["iban"], "provider": wval.get("provider", "")}
+                        break
+                if not bank_info:
+                    profile_file = Path(__file__).parent.parent.parent / "data" / "users" / "user-001" / "profile.json"
+                    profile = load_json(profile_file, default={})
+                    if profile.get("iban"):
+                        bank_info = {"iban": profile["iban"], "provider": profile.get("bank_provider", "")}
+            elif viewer:
+                # Andere user: kijk in hun eigen profiel
+                profile_file = Path(__file__).parent.parent.parent / "data" / "users" / viewer / "profile.json"
+                profile = load_json(profile_file, default={})
+                if profile.get("iban"):
+                    bank_info = {"iban": profile["iban"], "provider": profile.get("bank_provider", "")}
+        else:
+            for wkey, wval in wallets.items():
+                if isinstance(wval, dict) and wval.get("iban"):
+                    bank_info = {"iban": wval["iban"], "provider": wval.get("provider", "")}
+                    break
+                if isinstance(wval, dict) and wval.get("provider") == "bitvavo":
+                    bank_info = {"provider": "Bitvavo", "balance": wval.get("balance_eur", 0)}
+                    break
         # Spark Core: saldo komt LIVE van Bitvavo
         if eid == "spark_core":
             try:
@@ -156,15 +188,9 @@ async def get_kasboeken(user_id: str = None):
                 saldo_override = None
         else:
             saldo_override = None
-        # Persoonlijk kasboek: haal IBAN uit user profiel
-        if eid == "personal_willem" and user_id and not bank_info:
-            profile_file = Path(__file__).parent.parent.parent / "data" / "users" / user_id / "profile.json"
-            profile = load_json(profile_file, default={})
-            if profile.get("iban"):
-                bank_info = {"iban": profile["iban"], "provider": profile.get("bank_provider", "")}
         kasboeken.append({
             "id": eid,
-            "name": ent.get("name", eid),
+            "name": ent.get("name", eid) if eid != "personal_willem" else ("Mijn Privé" if viewer != "user-001" else ent.get("name", "Privé")),
             "description": ent.get("description", ""),
             "type": ent.get("type", "system"),
             "color": ent.get("color", "blue"),

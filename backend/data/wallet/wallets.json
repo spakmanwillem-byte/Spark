@@ -73,7 +73,7 @@
     },
     "user-000": {
       "wallet_id": "user-000",
-      "balance": 0,
+      "balance": 4.368,
       "created_at": "2026-05-21T11:43:38.704074+00:00",
       "total_deposited": 0,
       "total_withdrawn": 0,
@@ -230,6 +230,10 @@
       "iban": null,
       "tokens": 0,
       "eur_balance": 0
+    },
+    "user-a0ee2d7e": {
+      "balance": 0,
+      "tokens": 2
     }
   },
   "transactions": [
@@ -261,6 +265,14 @@
       "note": "Aankoop op originele prijs v\u00f3\u00f3r storting; verschil tov live dyn prijs wordt extern verrekend",
       "description": "5 ROAR gekocht @ \u20ac10.1 (override)",
       "status": "completed"
+    },
+    {
+      "id": "2921e03a-2e03-40db-8e61-3f5c273bfde0",
+      "ts": "2026-05-23T16:49:22.030293+00:00",
+      "type": "buy_roar",
+      "user_id": "user-a0ee2d7e",
+      "amount_eur": 20.8,
+      "tokens": 2
     }
   ]
 }

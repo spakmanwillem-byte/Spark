@@ -1,7 +1,8 @@
 {
   "balances": {
     "user-000": 10,
-    "user-001": 10
+    "user-001": 10,
+    "user-a0ee2d7e": 2
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -132,6 +133,21 @@
       "price_per_token": 10.1,
       "note": "Willem opname \u20ac50,50 \u2014 5 tokens terug naar treasury (3 eigen + 1 Gijs + 1 Nick)",
       "status": "completed"
+    },
+    {
+      "id": "2921e03a-2e03-40db-8e61-3f5c273bfde0",
+      "ts": "2026-05-23T16:49:22.030293+00:00",
+      "timestamp": "2026-05-23T16:49:22.030293+00:00",
+      "type": "buy_roar",
+      "user_id": "user-a0ee2d7e",
+      "amount_eur": 20.8,
+      "token_amount": 2,
+      "price_per_token": 10.4,
+      "total_eur": 20.8,
+      "source": "Bitvavo SEPA deposit Gijs (\u20ac20.80) \u2192 2 ROAR @ \u20ac10.40",
+      "description": "2 ROAR gekocht @ \u20ac10.4",
+      "status": "completed",
+      "btw_afgeroomd_eur": 4.368
     }
   ],
   "spark_bonus": {
@@ -250,7 +266,7 @@
       "amount_eur": 50.5
     }
   ],
-  "treasury_pool": 999980,
+  "treasury_pool": 999978,
   "repair_log": [
     {
       "ts": "2026-05-21T11:57:18.258412+00:00",

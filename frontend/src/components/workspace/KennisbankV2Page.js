@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
-  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2
+  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -180,6 +180,26 @@ export function KennisbankV2Page({ onNavigate }) {
             <button data-testid="kbv2-audit-btn" onClick={runAudit}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5" /> Self-audit
+            </button>
+            <button data-testid="kbv2-new-card-btn" onClick={async () => {
+                const begrip = window.prompt('Nieuwe kennis-kaart (begrip):');
+                if (!begrip || !begrip.trim()) return;
+                try {
+                  const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ begrip: begrip.trim(), source: 'manual', user_id: 'user-001' })
+                  }).then(x => x.json());
+                  if (r && (r.success || r.card)) {
+                    setActiveTab('inbox');
+                    await loadStats();
+                    await loadItems();
+                  } else {
+                    alert('Kon niet aanmaken: ' + JSON.stringify(r));
+                  }
+                } catch (e) { alert('Fout: ' + e.message); }
+              }}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
+              <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
             </button>
             <button data-testid="kbv2-refresh-btn" onClick={() => { loadStats(); loadItems(); }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">

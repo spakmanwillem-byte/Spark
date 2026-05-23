@@ -76,12 +76,11 @@ def save_roar_data(data):
 
 
 def get_circulating():
-    """Bereken circulerende tokens (alles behalve user-000/spark treasury)"""
+    """v5_treasury_fix_001 — Circulating = alle uitgegeven tokens uit treasury (incl. Spark's persoonlijke 10).
+    Spark's persoonlijke balance is óók gekocht uit treasury (voor €50.80), dus telt mee als circulating.
+    """
     roar = get_roar_data()
-    return sum(
-        bal for uid, bal in roar.get("balances", {}).items()
-        if uid != "user-000"
-    )
+    return sum(bal for bal in roar.get("balances", {}).values())
 
 
 def get_bitvavo_balance_cached(user_id: str = "user-001") -> Optional[float]:
@@ -167,7 +166,9 @@ async def get_token_price():
     price = get_dynamic_price()
     circulating = get_circulating()
     roar = get_roar_data()
-    spark_balance = roar.get("balances", {}).get("user-000", 0)
+    # v5_treasury_fix_001 — Toon treasury_pool (1M-pool), niet Spark's persoonlijke balance
+    treasury_pool = roar.get("treasury_pool", TOTAL_SUPPLY - circulating)
+    spark_personal = roar.get("balances", {}).get("user-000", 0)
     spark_core_value = get_spark_core_value()
     is_fixed = circulating < FIXED_PRICE_LIMIT
 
@@ -177,7 +178,8 @@ async def get_token_price():
         "base_price": BASE_PRICE,
         "total_supply": TOTAL_SUPPLY,
         "circulating": circulating,
-        "spark_treasury": spark_balance,
+        "spark_treasury": treasury_pool,
+        "spark_personal_tokens": spark_personal,
         "spark_core_value": round(spark_core_value, 2),
         "market_cap": round(circulating * price, 2),
         "price_model": "fixed" if is_fixed else "dynamic",
@@ -273,19 +275,21 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
             "error": f"Onvoldoende EUR saldo. Heb {user_wallet.get('balance', 0):.2f}, nodig {amount_eur:.2f}",
         }
 
-    # Check Spark ROAR supply
+    # Check ROAR supply uit treasury_pool (1M pool, los van Spark's persoonlijke balance)
+    # v5_treasury_fix_001 — Spark's persoonlijke balance is GEEN treasury.
+    # Treasury = aparte pool van 1M tokens waar verkoop uit gaat.
     roar = get_roar_data()
-    spark_bal = roar.get("balances", {}).get("user-000", 0)
-    if spark_bal < amount_tokens:
-        return {"success": False, "error": "Onvoldoende ROAR supply"}
+    treasury_pool = roar.get("treasury_pool", 0)
+    if treasury_pool < amount_tokens:
+        return {"success": False, "error": f"Onvoldoende treasury supply ({treasury_pool} beschikbaar)"}
 
     # Execute
     # 1. Deduct EUR
     wallets["wallets"][user_id]["balance"] = round(user_wallet["balance"] - amount_eur, 2)
 
-    # 2. Transfer ROAR (hele tokens)
+    # 2. Transfer ROAR uit treasury_pool naar koper (Spark's personal balance blijft ongemoeid)
     prev_user_roar = roar.get("balances", {}).get(user_id, 0)
-    roar["balances"]["user-000"] = spark_bal - amount_tokens
+    roar["treasury_pool"] = treasury_pool - amount_tokens
     roar["balances"][user_id] = prev_user_roar + amount_tokens
 
     # v5_milestone_unlocks_001: trigger "First ROAR Token" achievement + bark

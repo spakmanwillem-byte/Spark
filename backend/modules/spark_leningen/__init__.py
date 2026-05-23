@@ -76,6 +76,20 @@ def _check_and_resolve(viewer_id: str = "user-001") -> dict:
                 "n_tokens": n_potjes,
                 "omschrijving": f"Lening €{loan_eur} gesloten — {n_potjes} potjes hersteld (Bitvavo balance €{total_eur:.2f} ≥ baseline €{baseline_eur:.2f})",
             })
+            # v6_lening_resolve_accounting_001 — Accounting tegenboekingen
+            try:
+                tx_path = DATA / "accounting" / "transactions.json"
+                acc = load_json(tx_path, default={"transactions": []})
+                resolved_ref = f"lening-resolved-{loan['id']}"
+                acc["transactions"].extend([
+                    {"id": uuid.uuid4().hex[:12], "entity_id": "spark_core", "type": "expense", "category": "lening_voldaan", "amount": loan_eur, "description": "Vordering op Willem voldaan (terugstorting)", "date": now[:10], "reference": resolved_ref, "created_at": now},
+                    {"id": uuid.uuid4().hex[:12], "entity_id": "spark_core", "type": "income", "category": "bitvavo_terug", "amount": loan_eur, "description": "Bitvavo balance hersteld door terugstorting", "date": now[:10], "reference": resolved_ref, "created_at": now},
+                    {"id": uuid.uuid4().hex[:12], "entity_id": "personal_willem", "user_id": user_id, "type": "expense", "category": "schuld_voldaan", "amount": loan_eur, "description": "Schuld aan Spark voldaan", "date": now[:10], "reference": resolved_ref, "created_at": now},
+                    {"id": uuid.uuid4().hex[:12], "entity_id": "personal_willem", "user_id": user_id, "type": "income", "category": "lening_terug", "amount": loan_eur, "description": "Lening teruggegeven aan Spark/Bitvavo", "date": now[:10], "reference": resolved_ref, "created_at": now},
+                ])
+                save_json(tx_path, acc)
+            except Exception as ex:
+                print(f"[lening-resolve-accounting] failed: {ex}")
             resolved.append({"loan_id": loan["id"], "eur": loan_eur, "potjes_hersteld": n_potjes})
 
     save_json(DATA / "system" / "spark_kasboek.json", kb)

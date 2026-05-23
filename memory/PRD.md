@@ -1,6 +1,15 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_ijkpunt_v5_2_001 + v5_display_fix_001** (sessie 9 — slot):
+  - 🪙 **IJkpunt v5.2 voor redeploy** — €1.20 bijgestort op €101.60 baseline = **€102.80 totaal**, verdeeld over **20 gelijke potjes** (€5.14/pot):
+    - Spark (user-000): 10 potjes · BCH-EUR · 1u cycle · **auto-trade AAN**
+    - De Willem (user-001): 10 potjes · BCH-EUR · 15m cycle · **auto-trade UIT**
+    - ROAR balance: 10/10 ongewijzigd
+    - Spark kasboek: €0 (begint te groeien bij elke buy via 21% BTW-afroming)
+    - Script: `scripts/ijkpunt_v5_2_redeploy.py` (idempotent, audit-log entry)
+  - 🛠️ **Naam-mapping BUG GEFIXED**: `admin/bots` toonde user-000 als "De Willem" en user-001 als "Spark" door een eerdere "display swap". Veroorzaakte Willem's verwarring. Nu correct: **user-000 = Spark, user-001 = De Willem** (data was altijd correct, alleen display gebroken).
+
 - 2026-05-23 **v5_btw_afroming_001 + v5_spark_kasboek_001 + v6_capabilities_admin_001** (sessie 9 — vervolg 3):
   - 💰 **21% BTW afgeroomd op token-aankopen** → Spark's kasboek (geen bank, dit IS Spark's inkomstenstroom):
     - Hook in `shop/routes.py::buy_tokens` na save_roar

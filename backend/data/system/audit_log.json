@@ -5,7 +5,7 @@
       "id": "RESET-21MEI",
       "type": "system_reset",
       "user_id": "user-001",
-      "note": "Schone start: wallets→0 (Spark €5.08), potjes Spark=1, ROAR Spark=1/rest=0, baselines reset, rang gesynced met XP/level. Audit-trail behouden."
+      "note": "Schone start: wallets\u21920 (Spark \u20ac5.08), potjes Spark=1, ROAR Spark=1/rest=0, baselines reset, rang gesynced met XP/level. Audit-trail behouden."
     },
     {
       "ts": "2026-05-22T14:08:07.526270+00:00",
@@ -163,6 +163,18 @@
         "total_mints_tokens": 0,
         "note": "2e ronde - moet leeg zijn"
       }
+    },
+    {
+      "ts": "2026-05-23T14:11:03.280699+00:00",
+      "id": "0dac3a839889",
+      "type": "ijkpunt_redeploy",
+      "version": "v5.2",
+      "totaal_eur": 102.8,
+      "per_pot": 5.14,
+      "n_potjes": 20,
+      "spark_config": "user-000 \u00b7 1h \u00b7 auto_trade=true \u00b7 BCH-EUR",
+      "willem_config": "user-001 \u00b7 15m \u00b7 auto_trade=false \u00b7 BCH-EUR",
+      "note": "\u20ac1.20 bijgestort, alles in BCH op Bitvavo verkocht, ijkpunt v5.2 voor redeploy"
     }
   ]
 }

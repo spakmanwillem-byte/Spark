@@ -2,17 +2,17 @@
   "bots": [
     {
       "user_id": "user-000",
-      "interval": 60,
+      "interval": 30,
       "market": "BCH-EUR",
       "markets": [
         "BCH-EUR"
       ],
-      "candle_interval": "1h",
-      "auto_trade": true,
+      "candle_interval": "15m",
+      "auto_trade": false,
       "trade_amount": 5.0,
       "use_mock": true,
       "use_potjes": true
     }
   ],
-  "saved_at": "2026-05-23T14:12:04.874276+00:00"
+  "saved_at": "2026-05-23T14:14:42.575551+00:00"
 }

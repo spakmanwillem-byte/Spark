@@ -1,15 +1,15 @@
 {
   "running": true,
-  "interval": 60,
+  "interval": 30,
   "market": "BCH-EUR",
   "markets": [
     "BCH-EUR"
   ],
-  "candle_interval": "15m",
+  "candle_interval": "1h",
   "user_id": "user-001",
-  "auto_trade": false,
+  "auto_trade": true,
   "trade_amount": 5.0,
-  "use_mock": true,
+  "use_mock": false,
   "use_potjes": true,
-  "last_persisted": "2026-05-23T14:12:28.199470+00:00"
+  "last_persisted": "2026-05-23T14:15:07.868593+00:00"
 }

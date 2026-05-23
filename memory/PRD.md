@@ -1,6 +1,27 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_btw_afroming_001 + v5_spark_kasboek_001 + v6_capabilities_admin_001** (sessie 9 — vervolg 3):
+  - 💰 **21% BTW afgeroomd op token-aankopen** → Spark's kasboek (geen bank, dit IS Spark's inkomstenstroom):
+    - Hook in `shop/routes.py::buy_tokens` na save_roar
+    - BTW (21%) op `amount_eur` → Spark EUR-wallet (zowel `wallets.json` als `user_wallets.json` mirror)
+    - Audit-trail in nieuwe `/data/system/spark_kasboek.json` met `entries[]` + `totals{btw_in, winst_in, uit}`
+    - Transactie krijgt `btw_afgeroomd_eur` veld terug zodat UI dit kan tonen
+    - Spark koopt zichzelf nooit BTW af (skip als user_id==user-000)
+  - 🏦 **Nieuwe module `modules/spark_kasboek/`**: `GET /api/spark/kasboek/saldo` (totaal + breakdown) + `GET /api/spark/kasboek/entries`
+  - 🤖 **Nieuwe capability** `spark_saldo_check` (12e capability totaal, 5e executable):
+    - Triggers: "wat is spark saldo", "wat is jouw kasboek", "hoeveel heeft spark", "spark balans"
+    - Handler in `capability_handler_service` toont kasboek-saldo + breakdown via chat
+    - ✅ E2E getest: Willem 1 ROAR @ €5.08 → BTW €1.07 → Spark kasboek €1.07 → chat "wat is spark saldo" rendert correct
+  - 🧪 **Capabilities Test Page** als 7e tab in Beheer → Analytics → **CAPABILITIES**:
+    - Stat-pills bovenaan: 12 totaal · 5 executable · 4 live-zonder-handler · 3 placeholder · 0 idea
+    - Test-input om elke capability live te triggeren met sample-zin
+    - Per-capability cards met status-kleur (groen=executable, amber=live geen handler, blauw=placeholder)
+    - 1-click "vul test-veld" knop met sample-trigger uit de capability
+    - Backend: `GET /api/admin/capabilities` + `POST /api/admin/capabilities/test`
+  - 📋 **@traced/log_event op capability-router** — elke match wordt gelogd in `capabilities` module met confidence/trigger/has_handler → zichtbaar in Analytics → LOGS
+  - 🧹 **Post-test cleanup** — test-koop (Willem 11 tokens / €94.92) teruggedraaid naar ijkpunt v5.1 (10/10 tokens, €0, kasboek leeg) zodat redeploy schone start heeft
+
 - 2026-05-23 **v5_logs_hyperlink_001 + v6_intent_router_001** (sessie 9 — vervolg 2):
   - 🔗 **Logs als hyperlink in Bestanden-tab**: `LogsHyperlinkSection` toont amber banner met klikbare per-dag/per-module links naar `GET /api/admin/logs/download?date=&module=` (nieuwe FileResponse endpoint, returns .jsonl). Vol-detail browser blijft in Analytics → LOGS. Geen duplicate UI, alleen referentie-snelkoppelingen.
   - 🤖 **Spark's hands intent-router** (P0 done): `capability_handler_service.py` met 4 echte handlers:

@@ -195,6 +195,22 @@
       "module": "notes/routes.py",
       "endpoint": "/api/notes/tasks",
       "data_source": "/app/backend/data/notes/tasks.json"
+    },
+    {
+      "id": "spark_saldo_check",
+      "naam": "Spark's eigen saldo opvragen",
+      "categorie": "financial",
+      "beschrijving": "Toon Spark's kasboek-saldo (BTW-afroming uit token-aankopen + trading-winsten).",
+      "triggers": [
+        "wat is (jouw|spark's?|sparks) (saldo|kasboek|balans)",
+        "hoeveel (heb|heeft) (jij|spark)( in (de )?(kas|kasboek|wallet))?",
+        "spark (kasboek|saldo|balans)",
+        "wat staat er in (jouw|spark's?) (kas|kasboek)"
+      ],
+      "status": "live",
+      "module": "spark_kasboek/__init__.py",
+      "endpoint": "/api/spark/kasboek/saldo",
+      "data_source": "/app/backend/data/system/spark_kasboek.json"
     }
   ],
   "_lege_categorieen_voor_later": {

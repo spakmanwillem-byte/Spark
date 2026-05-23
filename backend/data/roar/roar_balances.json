@@ -15,7 +15,7 @@
       "price_eur": 5.08,
       "total_eur": 45.72,
       "source": "Bitvavo SEPA bijstorting",
-      "note": "Spark krijgt 9 extra tokens (van 1 naar 10) — eigen 10 potjes"
+      "note": "Spark krijgt 9 extra tokens (van 1 naar 10) \u2014 eigen 10 potjes"
     },
     {
       "ts": "2026-05-23T00:00:00+00:00",
@@ -25,7 +25,7 @@
       "price_eur": 5.08,
       "total_eur": 50.8,
       "source": "Bitvavo SEPA bijstorting",
-      "note": "Willem krijgt 10 nieuwe tokens — eigen 10 potjes"
+      "note": "Willem krijgt 10 nieuwe tokens \u2014 eigen 10 potjes"
     },
     {
       "id": "d352f066-92a6-45a4-b2b6-4b2d6f0a3a81",
@@ -39,9 +39,9 @@
       "price_eur": 10.1,
       "price_per_token": 10.1,
       "total_eur": 50.5,
-      "source": "Wallet (admin price override @ €10.10)",
-      "note": "Aankoop op originele prijs vóór storting; verschil tov live dyn prijs wordt extern verrekend",
-      "description": "5 ROAR gekocht @ €10.1 (override)",
+      "source": "Wallet (admin price override @ \u20ac10.10)",
+      "note": "Aankoop op originele prijs v\u00f3\u00f3r storting; verschil tov live dyn prijs wordt extern verrekend",
+      "description": "5 ROAR gekocht @ \u20ac10.1 (override)",
       "status": "completed"
     },
     {
@@ -55,7 +55,7 @@
       "token_amount": 1,
       "price_per_token": 10.1,
       "value_eur_at_gift": 10.1,
-      "source": "Willem → Gijs (welkomstgift)",
+      "source": "Willem \u2192 Gijs (welkomstgift)",
       "note": "Eerste token-gift aan nieuwe user Gijs",
       "status": "completed"
     },
@@ -67,7 +67,7 @@
       "to_user_id": "user-574ac78e",
       "amount": 1,
       "value_eur_at_gift": 10.11,
-      "source": "Willem → Nick (welkomstgift)",
+      "source": "Willem \u2192 Nick (welkomstgift)",
       "status": "completed"
     },
     {
@@ -130,7 +130,7 @@
       "amount": 5,
       "amount_eur": 50.5,
       "price_per_token": 10.1,
-      "note": "Willem opname €50,50 — 5 tokens terug naar treasury (3 eigen + 1 Gijs + 1 Nick)",
+      "note": "Willem opname \u20ac50,50 \u2014 5 tokens terug naar treasury (3 eigen + 1 Gijs + 1 Nick)",
       "status": "completed"
     }
   ],
@@ -181,14 +181,14 @@
       "action": "grant",
       "user_id": "user-000",
       "amount": 9,
-      "reason": "Bijstorting €96.52 — Spark naar 10 tokens"
+      "reason": "Bijstorting \u20ac96.52 \u2014 Spark naar 10 tokens"
     },
     {
       "ts": "2026-05-23T00:00:00+00:00",
       "action": "grant",
       "user_id": "user-001",
       "amount": 10,
-      "reason": "Bijstorting €96.52 — Willem naar 10 tokens"
+      "reason": "Bijstorting \u20ac96.52 \u2014 Willem naar 10 tokens"
     },
     {
       "ts": "2026-05-22T20:15:17.936527+00:00",
@@ -196,7 +196,7 @@
       "user_id": "user-001",
       "amount": 5,
       "price_per_token": 10.1,
-      "reason": "Admin: aankoop op pre-storting prijs €10.10"
+      "reason": "Admin: aankoop op pre-storting prijs \u20ac10.10"
     },
     {
       "ts": "2026-05-22T20:15:17.936527+00:00",
@@ -254,14 +254,14 @@
   "repair_log": [
     {
       "ts": "2026-05-21T11:57:18.258412+00:00",
-      "note": "Willem verkocht alles, Spark gebruikt €50.80 voor eigen 10 potjes (10 tokens own)"
+      "note": "Willem verkocht alles, Spark gebruikt \u20ac50.80 voor eigen 10 potjes (10 tokens own)"
     }
   ],
   "reset_log": [
     {
       "ts": "2026-05-21T21:03:04.095299+00:00",
-      "reason": "Schone start 21 mei — Spark 1 token, rest 0"
+      "reason": "Schone start 21 mei \u2014 Spark 1 token, rest 0"
     }
   ],
-  "_arch_ref": "DSP-004 — autoritatieve ROAR source. Mirror: user_wallets.json.spark_tokens. Zie /app/memory/ARCHITECTURE.md"
+  "_arch_ref": "DSP-004 \u2014 autoritatieve ROAR source. Mirror: user_wallets.json.spark_tokens. Zie /app/memory/ARCHITECTURE.md"
 }

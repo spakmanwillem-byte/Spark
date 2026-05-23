@@ -31,6 +31,7 @@ export function AnalyticsPage({ onNavigate }) {
     { id: 'layer', label: 'LAYER', icon: Layers },
     { id: 'trade', label: 'TRADE', icon: TrendingUp },
     { id: 'logs', label: 'LOGS', icon: FileText },
+    { id: 'capabilities', label: 'CAPABILITIES', icon: Zap },
   ];
 
   return (
@@ -85,6 +86,7 @@ export function AnalyticsPage({ onNavigate }) {
             <LogsBrowser />
           </div>
         )}
+        {activeTab === 'capabilities' && <CapabilitiesTab />}
       </div>
     </MainLayout>
   );
@@ -1630,6 +1632,145 @@ function TradeAnalyticsTab() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+
+// v6_capabilities_admin_001 — Capabilities Test Page (Spark's handen overzicht)
+function CapabilitiesTab() {
+  const [data, setData] = React.useState(null);
+  const [testText, setTestText] = React.useState('');
+  const [testResult, setTestResult] = React.useState(null);
+  const [busy, setBusy] = React.useState(false);
+
+  const load = React.useCallback(async () => {
+    try {
+      const r = await fetch(`${API}/api/admin/capabilities`).then(x => x.json());
+      setData(r);
+    } catch {}
+  }, []);
+
+  React.useEffect(() => { load(); }, [load]);
+
+  const runTest = async (text) => {
+    setBusy(true);
+    setTestResult(null);
+    try {
+      const r = await fetch(`${API}/api/admin/capabilities/test`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, user_id: 'user-001' }),
+      }).then(x => x.json());
+      setTestResult(r);
+    } catch (e) {
+      setTestResult({ error: String(e) });
+    }
+    setBusy(false);
+  };
+
+  if (!data) return <div className="text-slate-400 text-sm">Capabilities laden…</div>;
+
+  const STATUS_STYLES = {
+    executable:  { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-300', label: 'EXECUTABLE' },
+    live:        { bg: 'bg-amber-500/10',   border: 'border-amber-500/30',   text: 'text-amber-300',   label: 'LIVE (geen handler)' },
+    placeholder: { bg: 'bg-blue-500/10',    border: 'border-blue-500/30',    text: 'text-blue-300',    label: 'PLACEHOLDER' },
+    idea:        { bg: 'bg-slate-700/30',   border: 'border-slate-600/40',   text: 'text-slate-400',   label: 'IDEA' },
+  };
+
+  return (
+    <div data-testid="analytics-capabilities-tab" className="space-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <StatPill label="Totaal" value={data.total} color="white" />
+        <StatPill label="Executable" value={data.executable} color="emerald" />
+        <StatPill label="Live (geen handler)" value={data.live_no_handler} color="amber" />
+        <StatPill label="Placeholder" value={data.placeholder} color="blue" />
+        <StatPill label="Idea" value={data.idea} color="slate" />
+      </div>
+
+      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 space-y-3">
+        <div className="flex items-center gap-2 text-sm text-slate-300">
+          <Zap className="w-4 h-4 text-amber-400" /> Test een capability
+        </div>
+        <div className="flex gap-2">
+          <input
+            data-testid="cap-test-input"
+            type="text"
+            value={testText}
+            onChange={e => setTestText(e.target.value)}
+            placeholder="Typ een zin (bv. 'hoeveel gebruikers' of 'wat is spark saldo')"
+            className="flex-1 bg-slate-800 text-white text-sm px-3 py-2 rounded-lg border border-slate-700 focus:border-amber-500 outline-none"
+            onKeyDown={e => e.key === 'Enter' && testText && runTest(testText)}
+          />
+          <button
+            data-testid="cap-test-btn"
+            onClick={() => testText && runTest(testText)}
+            disabled={!testText || busy}
+            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-lg disabled:opacity-60"
+          >
+            {busy ? 'Bezig…' : 'Test'}
+          </button>
+        </div>
+        {testResult && (
+          <div className={`text-xs p-3 rounded-lg border ${testResult.matched ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-slate-800/40 border-slate-700'}`}>
+            {testResult.matched ? (
+              <>
+                <div className="text-emerald-300 mb-1">
+                  ✓ Match: <span className="font-mono">{testResult.match.capability_id}</span> (confidence {testResult.match.confidence})
+                </div>
+                <div className="text-slate-300 whitespace-pre-line">{testResult.execution?.message || '(geen execution-response)'}</div>
+              </>
+            ) : (
+              <div className="text-slate-400">{testResult.message || 'Geen match'}</div>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {data.capabilities.map(c => {
+          const st = STATUS_STYLES[c.effective_status] || STATUS_STYLES.idea;
+          const sample = (c.triggers && c.triggers[0]) ? c.triggers[0].replace(/[\\()?\[\]*^$|]/g, '').replace(/\s+/g, ' ').trim() : '';
+          return (
+            <div key={c.id} data-testid={`cap-card-${c.id}`}
+                 className={`${st.bg} border ${st.border} rounded-xl p-3 space-y-2`}>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-medium text-white truncate">{c.naam || c.id}</div>
+                  <div className="text-[10px] text-slate-500 font-mono truncate">{c.id} · {c.categorie}</div>
+                </div>
+                <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ${st.text}`}>
+                  {st.label}
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400 leading-relaxed">{c.beschrijving}</div>
+              {sample && (
+                <button
+                  onClick={() => { setTestText(sample.slice(0, 60)); }}
+                  className="text-[10px] text-amber-400 hover:text-amber-300 text-left">
+                  ↻ Vul test-veld met "{sample.slice(0, 40)}…"
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function StatPill({ label, value, color }) {
+  const colors = {
+    white: 'text-white',
+    emerald: 'text-emerald-300',
+    amber: 'text-amber-300',
+    blue: 'text-blue-300',
+    slate: 'text-slate-400',
+  };
+  return (
+    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-3">
+      <div className={`text-2xl font-bold ${colors[color] || colors.white}`}>{value}</div>
+      <div className="text-[10px] text-slate-500 uppercase tracking-wider">{label}</div>
     </div>
   );
 }

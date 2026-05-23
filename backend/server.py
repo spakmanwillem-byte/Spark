@@ -139,6 +139,10 @@ app.include_router(accounting_router, prefix="/api")
 from modules.boekhouder.routes import router as boekhouder_router
 app.include_router(boekhouder_router, prefix="/api")
 
+# v5_spark_kasboek_001 — Spark's eigen kasboek (BTW-afroming)
+from modules.spark_kasboek import router as spark_kasboek_router
+app.include_router(spark_kasboek_router, prefix="/api")
+
 # v5_event_overlay_001
 from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")
@@ -208,6 +212,10 @@ app.include_router(settings_router, prefix="/api")
 # Module 26: Admin Logs (v5_spark_logger_001 — per-module trace logs voor observability)
 from modules.admin import logs_router as admin_logs_router
 app.include_router(admin_logs_router, prefix="/api")
+
+# v6_capabilities_admin_001 — Spark's capabilities overzicht voor Analytics → CAPABILITIES tab
+from modules.admin import capabilities_router as admin_capabilities_router
+app.include_router(admin_capabilities_router, prefix="/api")
 
 # Module 27: Knowledge Base v2 (v5_kbv2_001 — 4 lades + inbox + index)
 from modules.kb_v2 import kbv2_router, kbv2_media_router

@@ -313,6 +313,44 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
 
+    # v5_btw_afroming_001 — 21% BTW op token-aankoop → Spark's kasboek
+    # Spark heeft géén bank, dit is de enige "inkomstenstroom" via Willem's koop-acties.
+    try:
+        from datetime import datetime as _dt, timezone as _tz
+        import uuid as _uuid
+        btw_pct = 0.21
+        btw_eur = round(amount_eur * btw_pct, 4)
+        if btw_eur > 0 and user_id != "user-000":
+            spark_w = wallets.get("wallets", {}).get("user-000")
+            if isinstance(spark_w, dict):
+                spark_w["balance"] = round(spark_w.get("balance", 0) + btw_eur, 4)
+                save_json(WALLET_FILE, wallets)
+            from pathlib import Path as _P
+            uw_path = _P(__file__).parent.parent.parent / "data" / "wallet" / "user_wallets.json"
+            uw = load_json(uw_path, default={"user_wallets": {}})
+            sp = uw.get("user_wallets", {}).get("user-000")
+            if isinstance(sp, dict) and "wallet" in sp:
+                sp["wallet"]["balance_eur"] = round(sp["wallet"].get("balance_eur", 0) + btw_eur, 4)
+                save_json(uw_path, uw)
+            kb_path = _P(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json"
+            kb = load_json(kb_path, default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
+            kb["entries"].append({
+                "id": _uuid.uuid4().hex[:12],
+                "ts": _dt.now(_tz.utc).isoformat(),
+                "type": "btw_afroming",
+                "bron_tx": tx["id"],
+                "bron_user": user_id,
+                "bedrag_eur": btw_eur,
+                "btw_pct": btw_pct,
+                "grondslag_eur": amount_eur,
+                "omschrijving": f"21% BTW afgeroomd op {amount_tokens} ROAR aankoop @ €{price:.2f}",
+            })
+            kb["totals"]["btw_in"] = round(kb["totals"].get("btw_in", 0) + btw_eur, 4)
+            save_json(kb_path, kb)
+            tx["btw_afgeroomd_eur"] = btw_eur
+    except Exception as _ex:
+        print(f"[btw-afroming] failed: {_ex}")
+
     return {
         "success": True,
         "message": f"{amount_tokens} ROAR gekocht voor {amount_eur}",

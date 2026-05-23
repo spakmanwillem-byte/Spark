@@ -12,8 +12,28 @@ Hook punt: chat/routes.py vóór smart_intents (na safe-word + identity).
 from pathlib import Path
 from typing import Optional, Dict
 from modules.core.storage import load_json
+from modules.core.spark_logger import log_event
 
 DATA = Path(__file__).parent.parent.parent / "data"
+
+
+def _handle_spark_saldo(user_id: Optional[str]) -> Optional[Dict]:
+    kb = load_json(DATA / "system" / "spark_kasboek.json",
+                   default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
+    t = kb.get("totals", {})
+    btw_in = t.get("btw_in", 0)
+    winst_in = t.get("winst_in", 0)
+    uit = t.get("uit", 0)
+    saldo = round(btw_in + winst_in - uit, 4)
+    return {
+        "type": "capability_response",
+        "capability_id": "spark_saldo_check",
+        "message": (
+            f"💰 **Spark's kasboek**: €{saldo:.2f}\n"
+            f"_BTW afgeroomd: €{btw_in:.2f} · Trading-winst: €{winst_in:.2f} · Uit: €{uit:.2f}_\n"
+            f"_{len(kb.get('entries', []))} boekingen in kasboek_"
+        ),
+    }
 
 
 def _handle_tellen_gebruikers(user_id: Optional[str]) -> Optional[Dict]:
@@ -103,19 +123,30 @@ _HANDLERS = {
     "tellen_bestanden":          _handle_tellen_bestanden,
     "taken_lijst":               _handle_taken_lijst,
     "winst_verlies_overzicht":   _handle_winst_verlies,
+    "spark_saldo_check":         _handle_spark_saldo,
 }
 
 
 def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
-    """Match user-tekst → capability → execute handler. Return chat-response of None."""
+    """Match user-tekst → capability → execute handler. Return chat-response of None.
+
+    Alle hits worden gelogd (capabilities module) voor observability.
+    """
     from . import intent_matcher_service
     match = intent_matcher_service.match_capability(text)
     if not match or match.get("confidence", 0) < 0.3:
         return None
     cap_id = match["capability_id"]
+    # Log de match zelf (vóór execute) zodat we triggers vs handlers kunnen vergelijken
+    log_event("capabilities", "capability_matched", intent=match.get("naam") or cap_id, detail={
+        "capability_id": cap_id,
+        "confidence": match.get("confidence"),
+        "trigger": match.get("matched_trigger"),
+        "user_id": user_id,
+        "has_handler": cap_id in _HANDLERS,
+    })
     handler = _HANDLERS.get(cap_id)
     if not handler:
-        # Capability bekend maar geen handler: toon nette placeholder met info
         placeholder = match.get("placeholder_response") or (
             f"Ik kan **{match.get('naam') or cap_id}** herkennen ({match.get('status')}), "
             f"maar de uitvoering staat nog op de planning."
@@ -128,6 +159,7 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
     try:
         return handler(user_id)
     except Exception as ex:
+        log_event("capabilities", "capability_error", intent=cap_id, detail={"error": str(ex)})
         return {
             "type": "capability_error",
             "capability_id": cap_id,

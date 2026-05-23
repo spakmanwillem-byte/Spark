@@ -1,6 +1,23 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_kbv2_media_002 + v5_dashboard_kbv2_001** (sessie 6):
+  - 📦 **Kennis-kaart media → System Archive refactor**:
+    - Voice (Whisper STT) + Image uploads gaan nu door `/api/system-archive` heen i.p.v. eigen `/data/knowledge/v2/media/`-folder
+    - Tagging: elk media-item krijgt `tags=['kbv2', 'kbv2_card_<id>']` + `linked_card_id` veld + `source='kbv2_media_upload'`
+    - URL nu `/api/system-archive/file/<archive_id>` (centrale download endpoint)
+    - **Geen duplicate storage** — 1 tabel, 1 zoekindex
+    - Whisper transcript wordt ook opgeslagen in archive-entry's `scan_results.transcript` + `description`
+  - 🎨 **Bron sub-tabs in Beheer → Instellingen → Archief**:
+    - **Alles** / **🧠 Kennis-kaart** / **📎 Los** filter-knoppen onder Foto/Geluiden/Filmpjes tabs
+    - 🧠-badge op file-rij toont gelinkte kaart-id (hover tooltip)
+  - 📊 **Dashboard KB Lades-widget** (admin gradatie ≤ 2):
+    - Nieuwe card "KB Lades (v2)" naast bestaande Kennisbank-overzicht
+    - 4-vakken-grid: 🌸 Voelen 250 · 💬 Spreken 329 · 🧠 Weten 1071 · 🎭 Doen 632
+    - Amber call-to-action banner "3007 kaarten wachten op indeling" → klik = naar Kennisbank
+    - Click-through naar `/knowledge`
+  - ✅ E2E getest: image upload landt in system_archive/foto/ met juiste tags + linked_card_id, sub-tab filter werkt, dashboard widget rendert correct met live stats, geen page errors
+
 - 2026-05-23 **v5_kbv2_hooks_001 — Hooks-laag + Voice-tab cleanup + Reflectie** (sessie 5):
   - 🔗 **`modules/kb_v2/hooks.py` placeholder-laag** voor toekomstige aansluitingen:
     - Hook 1: KB → Vocab register (TODO)

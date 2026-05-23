@@ -32,6 +32,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
   const [activeTab, setActiveTab] = useState('bestanden');
   // v5_foto_subtabs_001 — sub-tabs binnen Foto: algemeen vs avatars
   const [fotoSubTab, setFotoSubTab] = useState('algemeen');
+  // v5_kbv2_media_002 — bron-filter: 'alle' | 'kbv2' (kennis-kaart gebonden) | 'los' (overig)
+  const [sourceFilter, setSourceFilter] = useState('alle');
   const [files, setFiles] = useState([]);
   const [stats, setStats] = useState(null);
   const [availableTags, setAvailableTags] = useState([]);
@@ -54,14 +56,21 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
     const params = new URLSearchParams({ category: activeTab });
     if (search) params.append('q', search);
     if (tagFilter) params.append('tag', tagFilter);
+    // v5_kbv2_media_002 — bron-filter via tag-query
+    if (sourceFilter === 'kbv2') params.append('tag', 'kbv2');
     try {
       const res = await fetch(`${API}/api/system-archive?${params}`).then(r => r.json());
-      setFiles(res.files || []);
+      let arr = res.files || [];
+      // 'los' = alles behalve kbv2-gelinkte items
+      if (sourceFilter === 'los') {
+        arr = arr.filter(f => !(f.tags || []).includes('kbv2') && !f.linked_card_id);
+      }
+      setFiles(arr);
       setStats(res.stats || null);
       setAvailableTags(res.available_tags || []);
     } catch (e) { console.error(e); }
     setLoading(false);
-  }, [activeTab, search, tagFilter]);
+  }, [activeTab, search, tagFilter, sourceFilter]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -222,6 +231,28 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
+      {/* v5_kbv2_media_002 — bron sub-tabs binnen media-categorieën */}
+      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+        <div className="flex items-center gap-1.5">
+          {[
+            { id: 'alle',  label: 'Alles' },
+            { id: 'kbv2',  label: 'Kennis-kaart', icon: '🧠' },
+            { id: 'los',   label: 'Los', icon: '📎' },
+          ].map(opt => (
+            <button key={opt.id}
+              data-testid={`sys-source-${opt.id}`}
+              onClick={() => setSourceFilter(opt.id)}
+              className={`px-2.5 py-1 rounded text-[11px] font-medium border transition-colors ${
+                sourceFilter === opt.id
+                  ? 'bg-amber-500/20 border-amber-500/40 text-amber-300'
+                  : 'border-slate-700 text-slate-400 hover:text-slate-200'
+              }`}>
+              {opt.icon ? <span className="mr-1">{opt.icon}</span> : null}{opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Search + tag filter (verberg in avatars-mode + logs-mode) */}
       {activeTab !== 'logs' && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
         <div className="flex flex-wrap gap-2">
@@ -351,6 +382,11 @@ function SystemFileCard({ file, category, availableTags, isEditing, editForm, se
               </div>
               {file.scan_status === 'pending' && (
                 <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 flex-shrink-0">scan pending</span>
+              )}
+              {file.linked_card_id && (
+                <span data-testid="sys-kbv2-badge" className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 flex-shrink-0" title={`Gekoppeld aan kennis-kaart ${file.linked_card_id}`}>
+                  🧠 kaart
+                </span>
               )}
             </div>
             {file.description && <p className="text-xs text-slate-400 mt-1.5 mb-1">{file.description}</p>}

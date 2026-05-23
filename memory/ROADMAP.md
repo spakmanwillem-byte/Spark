@@ -100,3 +100,28 @@ Nieuwe hooks volgens dit pattern toevoegen voor:
 - `modules/trade/hooks.py` — closing-flow + replay + auto-snapshot triggers
 - `modules/dnd/hooks.py` — lore-card sync, perk-trigger, aura-gates
 - `modules/spark/hooks.py` — Spark's hands (intent_matcher generic router)
+
+## 📦 Media-storage strategie (v5_kbv2_media_002)
+
+**Centrale store**: alle voice/image uploads van kennis-kaarten gaan door
+`/api/system-archive` heen, met:
+- `category`: `foto` / `geluiden` / `filmpjes`
+- `tags`: `['kbv2', 'kbv2_card_<id>']`
+- `linked_card_id`: backreference naar kaart-id
+- `source`: `kbv2_media_upload`
+
+UI in **Beheer → Instellingen → Archief → Foto/Geluiden** heeft drie bron-filters:
+- **Alles** — geen filter
+- **🧠 Kennis-kaart** — alleen kbv2-gelinkte items
+- **📎 Los** — alleen items zonder kbv2-tag
+
+Voordelen:
+- 1 centrale media-tabel, geen duplicate-storage
+- Sub-tab pattern uitbreidbaar (later bv. "Dagboek-foto's", "Trade-screenshots")
+- Verwijderen van een kaart kan zo ook gekoppelde media opruimen via `linked_card_id`-scan
+
+## 📊 Dashboard-widgets per gradatie
+
+- **Gradatie 1** (super-admin): alle widgets incl. Triggers, KB Lades, Shadow Learning, Storage Cache
+- **Gradatie 2** (admin): KB Lades + Triggers + Users + Health
+- **Gradatie 3-7**: Kennisbank-overzicht + persoonlijke widgets (Mijn Opslag, Agenda, Spark-status)

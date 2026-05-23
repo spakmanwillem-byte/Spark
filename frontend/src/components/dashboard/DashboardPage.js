@@ -85,6 +85,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
   const [shadowUnused, setShadowUnused] = useState(null);
   const [perfStats, setPerfStats] = useState(null); // v4_perf_widget_001
   const [recentChats, setRecentChats] = useState([]);
+  const [kbv2Stats, setKbv2Stats] = useState(null);
 
   useEffect(() => {
     if (activePage !== 'dashboard') return;
@@ -101,7 +102,9 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       user?.id ? fetch(`${API}/api/chat/logs/${user.id}?limit=1&channel=spark`).then(r => r.json()).catch(() => null) : null,
       fetch(`${API}/api/bots/community/messages?limit=1`).then(r => r.json()).catch(() => null),
       user?.id ? fetch(`${API}/api/contacts/list?user_id=${user.id}`).then(r => r.json()).catch(() => null) : null,
-    ]).then(([kb, files, users, health, storage, shadow, unused, perf, sparkLog, community, contacts]) => {
+      // v5_dashboard_kbv2_001 — KB v2 lade-verdeling
+      fetch(`${API}/api/kb/v2/stats`).then(r => r.json()).catch(() => null),
+    ]).then(([kb, files, users, health, storage, shadow, unused, perf, sparkLog, community, contacts, kbv2]) => {
       setKnowledgeStats(kb);
       setFileStats(files);
       setUserStats(users);
@@ -111,6 +114,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
       setShadowUnused(unused);
       setPerfStats(perf);
       setRecentChats(buildRecentChats(sparkLog, community, contacts));
+      setKbv2Stats(kbv2);
     });
   }, [activePage, user?.id]);
 
@@ -206,7 +210,37 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
               </div>
             </Card>
 
-            {/* Triggers — ADMIN ONLY (gradatie ≤ 2) */}
+            {/* v5_dashboard_kbv2_001 — KB v2 Lades verdeling (ADMIN gradatie ≤ 2) */}
+            {isAdminUser && kbv2Stats && (
+              <Card title="KB Lades (v2)" icon={Brain} accent="#a855f7"
+                badge={`${kbv2Stats.inbox_count || 0} inbox`} badgeColor="#ef4444"
+                onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
+                <div className="grid grid-cols-2 gap-2 mb-3">
+                  {[
+                    { id: 'voelen',  icon: '🌸', color: '#ec4899' },
+                    { id: 'spreken', icon: '💬', color: '#06b6d4' },
+                    { id: 'weten',   icon: '🧠', color: '#f59e0b' },
+                    { id: 'doen',    icon: '🎭', color: '#a855f7' },
+                  ].map(l => {
+                    const d = kbv2Stats.lades?.[l.id] || {};
+                    return (
+                      <div key={l.id} className="flex items-center gap-2 bg-slate-800/40 rounded-lg p-2 border border-slate-800">
+                        <span className="text-lg">{l.icon}</span>
+                        <div>
+                          <p className="text-[10px] text-slate-500 capitalize">{d.naam || l.id}</p>
+                          <p className="text-sm font-bold" style={{ color: l.color }}>{d.count || 0}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-2">
+                  <p className="text-[10px] text-amber-300">
+                    📥 <strong>{kbv2Stats.inbox_count || 0}</strong> kaarten wachten op indeling
+                  </p>
+                </div>
+              </Card>
+            )}
             {isAdminUser && (
             <Card title="Triggers" icon={Zap} accent="#22c55e" badge="156 ACTIEF" badgeColor="#22c55e" onClick={() => onNavigate('triggers', '/spark/triggers')}>
               <div className="space-y-2">

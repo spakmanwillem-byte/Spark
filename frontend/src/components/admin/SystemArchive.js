@@ -178,6 +178,9 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       </div>
 
+      {/* v5_logs_to_analytics_001 — hyperlink-sectie voor module-trace logs in Bestanden-tab */}
+      {activeTab === 'bestanden' && <LogsHyperlinkSection apiBase={API} />}
+
       {/* Dialoog uitleg banner */}
       {activeTab === 'dialogen' && (
         <div className="bg-cyan-500/5 border border-cyan-500/20 rounded-xl p-3">
@@ -421,3 +424,61 @@ function SystemFileCard({ file, category, availableTags, isEditing, editForm, se
 }
 
 export default SystemArchive;
+
+
+/**
+ * LogsHyperlinkSection (v5_logs_to_analytics_001)
+ * ----------------------------------------------
+ * Toont in Bestanden-tab een sectie met hyperlinks naar module-trace logs.
+ * Klik = download van .jsonl bestand. Vol-detail browser zit in Analytics → LOGS.
+ */
+function LogsHyperlinkSection({ apiBase }) {
+  const [tree, setTree] = React.useState(null);
+  React.useEffect(() => {
+    fetch(`${apiBase}/api/admin/logs/index`)
+      .then(r => r.json())
+      .then(d => setTree(d.tree || {}))
+      .catch(() => setTree({}));
+  }, [apiBase]);
+
+  // Plat-de-tree-uit naar {date: [module]}
+  const flat = [];
+  if (tree) {
+    Object.entries(tree).sort().reverse().forEach(([y, mm]) => {
+      Object.entries(mm).sort().reverse().forEach(([m, dd]) => {
+        Object.entries(dd).sort().reverse().forEach(([d, modules]) => {
+          flat.push({ date: `${y}-${m}-${d}`, modules: modules || [] });
+        });
+      });
+    });
+  }
+  const recent = flat.slice(0, 7);
+
+  return (
+    <div data-testid="logs-hyperlink-section" className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-3 space-y-2">
+      <div className="flex items-start gap-2">
+        <FileText className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+        <div className="text-[11px] text-slate-400 leading-relaxed flex-1">
+          <p className="text-amber-300 font-medium mb-0.5">Module-trace logs (JSONL)</p>
+          <p>Volledige browser zit in <span className="text-amber-300">Beheer → Analytics → LOGS</span>. Hieronder snelkoppelingen om individuele log-bestanden te downloaden.</p>
+        </div>
+      </div>
+      {tree === null && <div className="text-[10px] text-slate-500">Laden…</div>}
+      {tree && recent.length === 0 && <div className="text-[10px] text-slate-500">Nog geen log-bestanden.</div>}
+      {recent.map(({ date, modules }) => (
+        <div key={date} className="flex items-center gap-2 flex-wrap pt-1 border-t border-slate-800/50">
+          <span className="text-[10px] text-slate-500 font-mono w-20">{date}</span>
+          {modules.map(mod => (
+            <a key={mod}
+              data-testid={`log-link-${date}-${mod}`}
+              href={`${apiBase}/api/admin/logs/download?date=${date}&module=${mod}`}
+              target="_blank" rel="noreferrer"
+              className="text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-amber-500/20 text-amber-300 transition-colors">
+              {mod}.jsonl
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}

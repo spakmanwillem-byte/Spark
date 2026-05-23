@@ -156,6 +156,18 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, time_resp["type"])
         return response
 
+    # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
+    # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
+    try:
+        from . import capability_handler_service
+        cap_resp = capability_handler_service.route_capability(text, req.user_id)
+        if cap_resp:
+            response.update(cap_resp)
+            _save_log(req, response, cap_resp.get("type"))
+            return response
+    except Exception as ex:
+        print(f"[capability-router] failed: {ex}")
+
     # 0b4. RELATION EXTRACTION (v4_rel_001) — passieve observer, slaat relaties op
     # uit zinnen als "mijn moeder Anneke", "Ron is mijn vriend". Loopt parallel,
     # blokkeert geen andere intents. Returnt lijst van nieuw toegevoegde relaties.

@@ -39,3 +39,23 @@ async def read(
 async def purge(retention_days: int = Query(RETENTION_DAYS, ge=1, le=365)):
     """Verwijder logs ouder dan `retention_days` dagen."""
     return {"success": True, **purge_old_logs(retention_days)}
+
+
+
+@router.get("/download")
+async def download_log(
+    date: str = Query(..., description="YYYY-MM-DD"),
+    module: str = Query(..., description="module naam"),
+):
+    """Download het ruwe JSONL bestand voor een module/datum (hyperlink-target vanuit Archief)."""
+    from fastapi.responses import FileResponse
+    from pathlib import Path as _P
+    y, m, d = date.split("-")
+    p = _P(__file__).parent.parent.parent / "data" / "system" / "logs" / y / m / d / f"{module}.jsonl"
+    if not p.exists():
+        return {"error": "log file not found", "path": str(p)}
+    return FileResponse(
+        str(p),
+        media_type="application/x-ndjson",
+        filename=f"{date}_{module}.jsonl",
+    )

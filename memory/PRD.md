@@ -1,6 +1,18 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_logs_hyperlink_001 + v6_intent_router_001** (sessie 9 — vervolg 2):
+  - 🔗 **Logs als hyperlink in Bestanden-tab**: `LogsHyperlinkSection` toont amber banner met klikbare per-dag/per-module links naar `GET /api/admin/logs/download?date=&module=` (nieuwe FileResponse endpoint, returns .jsonl). Vol-detail browser blijft in Analytics → LOGS. Geen duplicate UI, alleen referentie-snelkoppelingen.
+  - 🤖 **Spark's hands intent-router** (P0 done): `capability_handler_service.py` met 4 echte handlers:
+    - `tellen_gebruikers` — leest `users.json`, telt mensen vs bots, toont namen
+    - `tellen_bestanden` — leest `_index.json`, toont totaal + MB + per-categorie verdeling
+    - `taken_lijst` — toont open backlog (P0/P1/P2 uit ROADMAP)
+    - `winst_verlies_overzicht` — scant audit_log voor SELL-events, totaal netto
+    - Onbekende caps krijgen nette placeholder-response
+    - Confidence-threshold ≥ 0.3 om false positives te voorkomen
+    - Hook in `chat/routes.py` na time-intent, vóór relation-extraction
+    - ✅ E2E: "hoeveel gebruikers" → 11 mensen + 5 bots; "hoeveel bestanden" → 1 foto / 0.0 MB; "heb ik winst gemaakt" → 0 trades; "log van trade" → placeholder fallback
+
 - 2026-05-23 **v5_logs_to_analytics_001 + v5_closing_flow_001** (sessie 9 — vervolg):
   - 📊 **Logs Browser verhuisd** naar Beheer → Analytics → **LOGS** (6e tab naast SYSTEEM/DATA/NETWORK/LAYER/TRADE)
     - Logs hoorden niet bij media-archief (Foto/Geluiden/Filmpjes/Dialogen) maar bij observability

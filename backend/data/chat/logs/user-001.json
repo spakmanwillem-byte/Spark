@@ -20187,11 +20187,171 @@
         "session_id": "default",
         "gesprek_nummer": 774
       }
+    },
+    {
+      "id": "conv-83b44b20",
+      "timestamp": "2026-05-23T13:50:35.686057+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoeveel gebruikers",
+      "spark_response": "📊 We zijn met **11 mensen** en **5 bots** in Spark Core.\n_Mensen: De Willem, Spark, Nick Teeuwen, Roadkill, Heidi, Marieke, Ron, joel123…_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 775
+      }
+    },
+    {
+      "id": "conv-48a22f3a",
+      "timestamp": "2026-05-23T13:50:35.855160+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoeveel bestanden",
+      "spark_response": "📦 In het systeem-archief: **0 bestanden** (0.0 MB).\n_Verdeling: _",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 776
+      }
+    },
+    {
+      "id": "conv-1e8a8ace",
+      "timestamp": "2026-05-23T13:50:36.003678+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat kan jij doen",
+      "spark_response": "Wat ik kan, Willem:\n\n• Leren van gesprekken\n• Kennis onthouden en delen\n• Dagboek bijhouden\n• Mensen leren kennen\n• Mezelf analyseren en verbeteren\n\n_Typ **help** voor de volledige commando-lijst. Wil je je account verwijderen? Zeg het gewoon: 'verwijder mijn account'._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "doen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "identity_what_can",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "identity_what_can"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 777
+      }
+    },
+    {
+      "id": "conv-871509ce",
+      "timestamp": "2026-05-23T13:50:36.160849+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "heb ik winst gemaakt",
+      "spark_response": "📈 Nog geen afgesloten trades op je account. Pas na een SELL komt hier een cijfer te staan.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 778
+      }
+    },
+    {
+      "id": "conv-aa66b26c",
+      "timestamp": "2026-05-23T13:50:36.336511+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "log van trade",
+      "spark_response": "🤖 Ik kan **Trade-logs ophalen** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 779
+      }
+    },
+    {
+      "id": "conv-bf92b94f",
+      "timestamp": "2026-05-23T13:51:11.716517+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoeveel bestanden",
+      "spark_response": "📦 In het systeem-archief: **1 bestanden** (0.0 MB).\n_Verdeling: foto: 1_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 780
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 774,
-    "last_updated": "2026-05-23T13:31:19.716549+00:00"
+    "total_conversations": 780,
+    "last_updated": "2026-05-23T13:51:11.716517+00:00"
   }
 }

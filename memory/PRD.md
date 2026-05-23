@@ -897,3 +897,39 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 - Frontend: per transactie-rij een **€✎ knop** naast de delete-knop; opent een prompt met huidige waarde
 - Na opslaan worden kasboeken + summary auto-ververst
 - Geverifieerd via PUT-test (round-trip €45 → 99.99 → 45 hersteld)
+
+## 2026-05-24 — KB v1 → KB v2 Herzien-flow
+
+### Herzien-knop (v6_kbv2_herzien_001)
+- Naast "Verversen" in KB v2 nu paarse knop **"Herzien (KB v1)"**
+- Klik → backend trekt 1 KB v1 kaart die nog niet gemigreerd is (`unanswered_first` strategy)
+- Kaart opent in het bestaande NewCardInline rechter-paneel met:
+  - Pre-filled begrip, lagen, ws5, tags vanuit v1
+  - **Topic-veld** (alleen in herzien-modus) — stuurt auto-classify
+  - Paarse banner met v1-id, "nog X te gaan", suggested auto-lade
+  - "Skip → volgende" knop
+- Bij **Promoveer**: backend maakt v2-kaart aan, classified naar voelen/spreken/weten/doen
+  obv topic + tags keyword-mapping. V1 kaart wordt gemarkeerd met `migrated_to_v2 = true`
+  + `v2_card_id` + `v2_lade` + `migrated_at`. De v2 kaart bevat footnote met
+  *"Vorige versie (v1): kb-skel-..."* zodat herkomst zichtbaar blijft.
+
+### Backend endpoints
+- `GET  /api/kb/v2/herzien/next?strategy=unanswered_first|oldest|random`
+- `POST /api/kb/v2/herzien/promote` — body: v1_id, begrip, lagen, ws5, tags, topic, target_lade (optioneel)
+- `POST /api/kb/v2/herzien/skip`
+
+### Topic → Lade mapping
+- voelen: emotie, gevoel, relatie, verbinding, empathie, compassie
+- spreken: taal, communicatie, gesprek, schrijven, praten
+- weten: kennis, systeem, feit, logica, definitie, concept, model, theorie, geheugen
+- doen: gedrag, actie, praktijk, uitvoeren, stap, methode, proces
+- Default: weten
+
+### Test status
+- E2E getest met Playwright (5288 → 5287 → restore) ✓
+- Topic "systeem" + laag 1 → correct gepromoot naar lade weten ✓
+- V1 markering werkt (footnote toont "Vorige versie (v1): kb-skel-..." op v2-kaart) ✓
+
+### Files
+- `backend/modules/kb_v2/routes.py` (+ herzien endpoints + topic→lade mapping)
+- `frontend/src/components/workspace/KennisbankV2Page.js` (Herzien knop, state, handlers, NewCardInline-uitbreiding)

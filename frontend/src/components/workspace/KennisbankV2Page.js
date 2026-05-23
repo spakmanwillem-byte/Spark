@@ -44,6 +44,9 @@ export function KennisbankV2Page({ onNavigate }) {
   const [editForm, setEditForm] = useState(null);
   // v6_kbv2_inline_new_001 — Lege kaart in rechter paneel zonder window.prompt
   const [creatingNew, setCreatingNew] = useState(false);
+  // v6_kbv2_herzien_001 — KB v1 → KB v2 migratie-modus
+  const [herzienV1, setHerzienV1] = useState(null);       // de v1-kaart die nu wordt herzien
+  const [herzienRemaining, setHerzienRemaining] = useState(0);
   const [savingClassify, setSavingClassify] = useState(false);
   const [showAudit, setShowAudit] = useState(false);
   const [auditData, setAuditData] = useState(null);
@@ -207,6 +210,75 @@ export function KennisbankV2Page({ onNavigate }) {
     setCreatingNew(false);
     setEditForm(null);
     setEditMode(false);
+    setHerzienV1(null);
+  };
+
+  // v6_kbv2_herzien_001 — Trek 1 oude KB v1 kaart en open in lege-kaart formulier
+  const loadHerzienEntry = async () => {
+    try {
+      const r = await fetch(`${API}/api/kb/v2/herzien/next?strategy=unanswered_first`).then(x => x.json());
+      if (!r.entry) {
+        alert(`Geen kaarten meer om te herzien. ${r.remaining || 0} resterend.`);
+        return;
+      }
+      const e = r.entry;
+      setHerzienRemaining(r.remaining);
+      setHerzienV1(e);
+      setSelectedCard(null);
+      setEditMode(false);
+      // Pre-fill formulier met v1 data
+      setEditForm({
+        begrip: e.begrip || '',
+        lagen: { ...(e.lagen || {}) },
+        ws5: { ...(e.ws5 || {}) },
+        tags: [...(e.tags || [])],
+        topic: e.topic || '',
+      });
+      setCreatingNew(true);
+    } catch (err) {
+      alert('Herzien-fout: ' + err.message);
+    }
+  };
+
+  // Promote (KB v1 herzien-kaart → KB v2 lade)
+  const saveHerzien = async () => {
+    if (!editForm || !herzienV1) return;
+    if (!(editForm.begrip || '').trim()) { alert('Vul een begrip in'); return; }
+    setSavingClassify(true);
+    try {
+      const r = await fetch(`${API}/api/kb/v2/herzien/promote`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          v1_id: herzienV1.id,
+          begrip: editForm.begrip.trim(),
+          lagen: editForm.lagen,
+          ws5: editForm.ws5,
+          tags: editForm.tags,
+          topic: editForm.topic || '',
+          target_lade: null,           // auto-classify
+          user_id: 'user-001',
+        }),
+      }).then(x => x.json());
+      if (!r.success) { alert('Promote mislukt: ' + (r.message || JSON.stringify(r))); setSavingClassify(false); return; }
+      // Open de gemigreerde kaart in zijn lade
+      setActiveTab(r.lade);
+      setSearch('');
+      setReasonFilter('');
+      setPage(0);
+      await loadStats();
+      await loadItems();
+      setCreatingNew(false);
+      setHerzienV1(null);
+      setSelectedCard(r.kaart);
+      setEditMode(false);
+      setEditForm(null);
+      // Toon kort succes-bericht
+      setTimeout(() => {
+        // Optionele alert; commentaar als je 't te druk vindt
+        // alert(`Kaart gemigreerd naar lade "${r.lade}" ✓`);
+      }, 100);
+    } catch (err) { alert('Fout: ' + err.message); }
+    setSavingClassify(false);
   };
 
   const runAudit = async () => {
@@ -244,6 +316,11 @@ export function KennisbankV2Page({ onNavigate }) {
               }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
+            </button>
+            {/* v6_kbv2_herzien_001 — Herzien knop trekt 1 oude KB v1 kaart */}
+            <button data-testid="kbv2-herzien-btn" onClick={loadHerzienEntry}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-purple-500/40 text-purple-300 hover:bg-purple-500/10 flex items-center gap-1.5">
+              <RefreshCw className="w-3.5 h-3.5" /> Herzien (KB v1)
             </button>
             <button data-testid="kbv2-refresh-btn" onClick={() => { loadStats(); loadItems(); }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
@@ -332,7 +409,12 @@ export function KennisbankV2Page({ onNavigate }) {
           <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-3">
             {creatingNew ? (
               <NewCardInline editForm={editForm} setEditForm={setEditForm}
-                saving={savingClassify} onSave={saveNew} onCancel={cancelNew} />
+                saving={savingClassify}
+                onSave={herzienV1 ? saveHerzien : saveNew}
+                onCancel={cancelNew}
+                herzienV1={herzienV1}
+                herzienRemaining={herzienRemaining}
+                onNextHerzien={loadHerzienEntry} />
             ) : !selectedCard ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12 text-slate-500">
                 <Eye className="w-8 h-8 mb-2 opacity-40" />
@@ -737,7 +819,7 @@ function MediaSection({ card, currentLade, onUpdated }) {
 // v6_kbv2_inline_new_001 — Lege kaart in rechter paneel (geen window.prompt)
 // Niet-compleet (geen lagen/5W) blijft automatisch in inbox = onbeantwoord
 // ============================================================
-function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel }) {
+function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzienV1, herzienRemaining, onNextHerzien }) {
   if (!editForm) return null;
   const lagen = editForm.lagen || {};
   const ws5 = editForm.ws5 || {};
@@ -748,19 +830,63 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel }) {
   const hasL1 = !!(lagen.laag1 || '').trim();
   const has5w = Object.values(ws5).some(v => (v || '').trim());
   const compleet = hasL1 && has5w;
+  const isHerzien = !!herzienV1;
+
+  // Auto-suggest lade op basis van topic + tags
+  const _autoLade = () => {
+    const pool = [(editForm.topic || '').toLowerCase(), ...(tags || []).map(t => t.toLowerCase())];
+    const map = {
+      voelen: ['emotie','voelen','gevoel','relatie','verbinding','empathie','compassie'],
+      spreken: ['taal','communicatie','gesprek','schrijven','spreken','praten'],
+      weten: ['kennis','systeem','feit','logica','definitie','concept','model','theorie','weten','geheugen'],
+      doen: ['gedrag','actie','praktijk','doen','uitvoeren','stap','methode','proces'],
+    };
+    for (const token of pool) {
+      for (const [lade, kws] of Object.entries(map)) {
+        if (kws.some(k => token.includes(k))) return lade;
+      }
+    }
+    return 'weten';
+  };
+  const suggestedLade = isHerzien ? _autoLade() : null;
 
   return (
     <div className="space-y-3" data-testid="kbv2-inline-newcard">
+      {/* Herzien banner */}
+      {isHerzien && (
+        <div data-testid="kbv2-herzien-banner" className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-2.5 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-purple-300">♻️</span>
+            <div className="min-w-0">
+              <p className="text-[11px] text-purple-200 font-semibold">Herzien: KB v1 kaart</p>
+              <p className="text-[10px] text-slate-400 truncate">id {herzienV1.id} · nog {herzienRemaining} te gaan · auto-lade: <span className="text-purple-300">{suggestedLade}</span></p>
+            </div>
+          </div>
+          <button data-testid="kbv2-herzien-skip" onClick={onNextHerzien}
+            className="px-2 py-1 text-[10px] border border-purple-500/40 text-purple-300 hover:bg-purple-500/15 rounded">
+            Skip → volgende
+          </button>
+        </div>
+      )}
+
       <div className="flex items-start justify-between gap-2 border-b border-slate-800 pb-2">
         <div className="flex-1">
-          <p className="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">Nieuwe kaart</p>
+          <p className="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">
+            {isHerzien ? 'Herzien & promoten naar KB v2' : 'Nieuwe kaart'}
+          </p>
           <input data-testid="kbv2-new-begrip" type="text" value={editForm.begrip || ''}
             onChange={e => setEditForm(f => ({ ...f, begrip: e.target.value }))} autoFocus
-            placeholder="Begrip (verplicht) — bv. 'Mededogen'"
+            placeholder="Begrip (verplicht)"
             className="mt-1 w-full text-lg font-bold text-white bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/60" />
           <p className="text-[10px] text-slate-500 mt-1">
-            Nieuwe kaart komt eerst in <span className="text-amber-300">inbox</span>.
-            {!compleet && <> Niet compleet ingevuld → blijft in <span className="text-red-400">onbeantwoord</span>.</>}
+            {isHerzien ? (
+              compleet
+                ? <>Wordt opgeslagen in lade <span className="text-purple-300">{suggestedLade}</span> (op basis van topic + tags).</>
+                : <>Vul minimaal <span className="text-amber-300">laag 1</span> in om kaart te promoveren naar KB v2.</>
+            ) : (
+              <>Nieuwe kaart komt eerst in <span className="text-amber-300">inbox</span>.
+              {!compleet && <> Niet compleet ingevuld → blijft in <span className="text-red-400">onbeantwoord</span>.</>}</>
+            )}
           </p>
         </div>
         <button data-testid="kbv2-new-cancel" onClick={onCancel}
@@ -768,6 +894,19 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel }) {
           <X className="w-4 h-4" />
         </button>
       </div>
+
+      {/* Topic (alleen voor herzien — drives auto-classify) */}
+      {isHerzien && (
+        <div>
+          <label className="text-[10px] uppercase text-slate-500 tracking-wide">
+            Topic <span className="text-purple-300">(stuurt auto-lade)</span>
+          </label>
+          <input data-testid="kbv2-herzien-topic" value={editForm.topic || ''}
+            onChange={e => setEditForm(f => ({ ...f, topic: e.target.value }))}
+            placeholder="bv. systeem / emotie / actie / taal"
+            className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-purple-500/40" />
+        </div>
+      )}
 
       {/* Lagen 1-4 */}
       <div className="space-y-1.5">
@@ -811,17 +950,24 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel }) {
       {/* Completeness hint */}
       <div className="text-[10px] text-slate-500 border-t border-slate-800 pt-2 leading-relaxed">
         Status na opslaan:{' '}
-        {compleet
-          ? <span className="text-emerald-400 font-semibold">Compleet (laag 1 + 5W) — klaar voor indelen</span>
-          : <span className="text-red-400 font-semibold">Onbeantwoord — blijft in inbox</span>}
+        {isHerzien
+          ? (hasL1
+              ? <span className="text-purple-400 font-semibold">Promoveert naar lade {suggestedLade}</span>
+              : <span className="text-red-400 font-semibold">Geen laag 1 → kan niet promoten</span>)
+          : (compleet
+              ? <span className="text-emerald-400 font-semibold">Compleet (laag 1 + 5W) — klaar voor indelen</span>
+              : <span className="text-red-400 font-semibold">Onbeantwoord — blijft in inbox</span>)}
       </div>
 
       <div className="flex justify-end gap-2 border-t border-slate-800 pt-3">
         <button data-testid="kbv2-new-cancel-btn" onClick={onCancel}
           className="px-3 py-1.5 text-xs text-slate-400 hover:bg-slate-800 rounded-lg">Annuleren</button>
-        <button data-testid="kbv2-new-save-btn" onClick={onSave} disabled={saving || !(editForm.begrip || '').trim()}
-          className="px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600">
-            <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : 'Opslaan in inbox'}
+        <button data-testid="kbv2-new-save-btn" onClick={onSave}
+          disabled={saving || !(editForm.begrip || '').trim() || (isHerzien && !hasL1)}
+          className={`px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 ${
+            isHerzien ? 'bg-purple-500 hover:bg-purple-600' : 'bg-emerald-500 hover:bg-emerald-600'
+          }`}>
+            <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : (isHerzien ? `Promoveer naar ${suggestedLade}` : 'Opslaan in inbox')}
         </button>
       </div>
     </div>

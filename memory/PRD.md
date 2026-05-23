@@ -1,6 +1,17 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_welcome_001 — Spark persoonlijke welkom bij eerste login** (sessie 7):
+  - 🌱 **`modules/bots/spark_welcome_service.py`** — idempotent welkom-service
+    - Drie gestapelde Spark-berichten in user's Spark-prive chat (geen muur tekst)
+    - Inhoud uit MISSION.md: wie Spark is, wat hij wél doet, wat hij **NOOIT** doet (privacy-statement), 3 begin-tips
+    - `WELCOME_VERSION = "v1"` — bumpen stuurt iedereen een nieuwe ronde
+    - Persistente referentie in chat-history (in tegenstelling tot eenmalige modal-tour die al bestond)
+    - User-veld `welcome_version_seen` + `welcome_sent_at` in `users.json`
+  - 🔌 Hook in `auth/routes.login` naast Mr Smith bark (sessie 2)
+  - ✅ E2E getest met Marieke: 3 berichten aangemaakt na 1e login, 2e login → géén duplicate (idempotent OK)
+  - 🪞 Combineert mooi met bestaande modal-tour: modal is generiek "zo praat je met Spark", deze nieuwe is persoonlijk Spark→user privacy-belofte
+
 - 2026-05-23 **v5_kbv2_media_002 + v5_dashboard_kbv2_001** (sessie 6):
   - 📦 **Kennis-kaart media → System Archive refactor**:
     - Voice (Whisper STT) + Image uploads gaan nu door `/api/system-archive` heen i.p.v. eigen `/data/knowledge/v2/media/`-folder

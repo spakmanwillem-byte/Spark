@@ -46,6 +46,13 @@ async def login(request: LoginRequest):
     except Exception:
         pass
 
+    # v5_welcome_001 — Spark stuurt persoonlijke welkom bij eerste login (idempotent per WELCOME_VERSION)
+    try:
+        from modules.bots.spark_welcome_service import maybe_send_welcome
+        maybe_send_welcome(user)
+    except Exception:
+        pass
+
     # v4_grad_titel_001: voeg gradatie_titel toe voor warme weergave in UI
     try:
         ginfo = AuthService.get_gradatie_info(user.get("gradatie", 7))

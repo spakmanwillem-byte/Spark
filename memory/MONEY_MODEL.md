@@ -20,13 +20,14 @@
 
 **Identity check**: `treasury_pool + sum(balances.values()) == total_supply` moet áltijd kloppen.
 
-## 💸 Prijs-model & BTW (v6_anchor_no_btw_001)
+## 💸 Prijs-model & BTW (v6_btw_pas_bij_winst_001 — herzien 2026-05-23)
 
-- **Anker-houders** (`user-000` Spark/Roadkill + `user-001` Willem) = fundering van het concept → **GEEN BTW** op hun ankers. 10 tokens × €5.08 = €50.80 elk, 1-op-1 zonder marge.
-- **Klanten** (alle andere users) = betalen 21% BTW **uit incl-prijs** (NL standaard): `btw = bedrag × 21/121`. Voorbeeld: Gijs €20.80 incl = €17.19 netto + €3.61 BTW.
+- **Anker-houders** (`user-000` Spark/Roadkill + `user-001` Willem) = fundering van het concept → **GEEN BTW**. 10 tokens × €5.08 = €50.80 elk, 1-op-1 zonder marge.
+- **Klanten** (alle andere users) → betalen **volle bedrag**, dat gaat **volledig naar Spark's omzet** (`omzet_in`) en EUR-wallet. Spark gebruikt dit om mee te traden.
+- **BTW komt PAS bij winst-realisatie**: bij elke sell-trade met positieve PnL wordt **21% van de winst** gereserveerd in `btw_reserve` (kasboek). Dat is wat later via **Moneybird** naar de Belastingdienst gaat.
+- **Reden**: BTW is fiscaal verschuldigd over **marge/winst**, niet over alle omzet. Direct afromen bij verkoop = boekhoudkundig onjuist.
 - **Fixed prijs** zolang circulating < `FIXED_PRICE_LIMIT` (huidige drempel)
 - **Daarna dynamisch**: prijs stijgt met groei van circulating (early-supporter effect)
-- **BTW afgeroomd** naar `spark_kasboek.json` (Spark's enige cashflow)
 - **Vroege kopers profiteren** van prijs-stijging (te benoemen in voorwaarden + privacy)
 
 ## 🪙 Maak-Token flow (nieuw, v6_mint_from_wallet_001)

@@ -21,3 +21,7 @@
 {"ts": "2026-05-23T12:37:31.872754+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 137.48}
 {"ts": "2026-05-23T12:46:59.889743+00:00", "module": "kbv2", "fn": "upload_image", "phase": "pre", "intent": "foto voor kaart opslaan in system archive"}
 {"ts": "2026-05-23T12:46:59.997704+00:00", "module": "kbv2", "fn": "upload_image", "phase": "post", "intent": "foto voor kaart opslaan in system archive", "result": "dict(success=True, keys=success,image_url,archive_id,size_bytes)", "duration_ms": 107.79}
+{"ts": "2026-05-23T20:49:31.326552+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"a0": "testkaart-debug", "source": "manual", "user_id": "user-001"}}
+{"ts": "2026-05-23T20:49:31.539939+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 212.2}
+{"ts": "2026-05-23T20:52:02.566211+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"a0": "finale-test", "source": "manual", "user_id": "user-001"}}
+{"ts": "2026-05-23T20:52:02.761999+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 195.6}

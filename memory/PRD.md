@@ -1,6 +1,17 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v6_btw_pas_bij_winst_001 + KB v2 kaart-fix** (sessie 10):
+  - 🐛 **KB v2 "Nieuwe kaart" bug GEFIXED**: frontend checkte `r.card` ipv `r.kaart` — endpoint werkte, alleen UI-response-check fout. Nu werkend (kaart wordt in inbox aangemaakt met `_inbox_reason=missing_laag1`)
+  - 💸 **BTW-model herzien — pas bij winst, niet bij verkoop**:
+    - Reden: BTW is fiscaal verschuldigd over **winst/marge**, niet over alle omzet. Direct afromen was boekhoudkundig onjuist.
+    - Klant-aankoop: VOLLE bedrag → `klant_omzet` in kasboek + Spark EUR-wallet (om mee te traden)
+    - Nieuwe veld `btw_reserve` in kasboek `totals` — vult zich bij trade-winst (volgende sessie)
+    - Endpoints update: `/saldo` toont nu `omzet_in`, `btw_reserve`, `vrij_te_besteden`
+    - Bonnetje-template aangepast: "BTW pas bij winst-realisatie" + Moneybird-verwijzing
+    - Gijs's bestaande boeking omgezet: was €17.19 netto + €3.61 BTW → nu €20.80 klant_omzet (full bedrag in Spark wallet)
+  - 📜 **MONEY_MODEL.md** geüpdatet met `v6_btw_pas_bij_winst_001` regels
+
 - 2026-05-23 **v6_spark_history_001 + papier-boekhouding** (sessie 9 — slot 3):
   - 📜 **Spark Boekhouding-paneel** in Wallet (Spark-view):
     - Nieuwe endpoint `GET /api/spark/kasboek/history` voegt 3 bronnen samen:

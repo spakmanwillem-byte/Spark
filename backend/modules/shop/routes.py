@@ -317,51 +317,51 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
 
-    # v5_btw_afroming_001 + v6_anchor_no_btw_001 — 21% BTW uit prijs (incl-BTW model)
-    # Anker-houders (Willem user-001 en Spark user-000) betalen geen BTW: zij zijn fundering.
-    # Klanten (alle andere user-IDs) → 21% BTW uit incl-prijs (bedrag * 21/121).
+    # v6_btw_pas_bij_winst_001 — BTW NIET MEER direct bij koop.
+    # Reden: BTW is fiscaal pas verschuldigd over WINST/MARGE, niet over alle inkomsten.
+    # De full klant-€ blijft eerst bij Spark om mee te traden. Bij elke trade-winst (positieve
+    # pnl bij sell) wordt 21% van die winst gereserveerd in spark_kasboek "btw_reserve" —
+    # dat is wat later via Moneybird naar Belastingdienst gaat.
+    # Anker-aankopen (Willem/Spark) tellen sowieso niet mee.
+    # Wel registreren: hoeveel grondslag we ontvingen, voor papertrail.
     try:
         from datetime import datetime as _dt, timezone as _tz
         import uuid as _uuid
         ANCHOR_USERS = {"user-000", "user-001"}
         is_klant = user_id not in ANCHOR_USERS
-        btw_eur = round(amount_eur * 21 / 121, 4) if is_klant else 0.0
-        if btw_eur > 0:
-            spark_w = wallets.get("wallets", {}).get("user-000")
-            if isinstance(spark_w, dict):
-                spark_w["balance"] = round(spark_w.get("balance", 0) + btw_eur, 4)
-                save_json(WALLET_FILE, wallets)
-            from pathlib import Path as _P
-            uw_path = _P(__file__).parent.parent.parent / "data" / "wallet" / "user_wallets.json"
-            uw = load_json(uw_path, default={"user_wallets": {}})
-            sp = uw.get("user_wallets", {}).get("user-000")
-            if isinstance(sp, dict) and "wallet" in sp:
-                sp["wallet"]["balance_eur"] = round(sp["wallet"].get("balance_eur", 0) + btw_eur, 4)
-                save_json(uw_path, uw)
-            kb_path = _P(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json"
-            kb = load_json(kb_path, default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
-            netto = round(amount_eur - btw_eur, 4)
+        # Geen directe BTW-afroming meer; gehele bedrag is Spark's "ontvangen omzet".
+        # BTW komt later bij winst-realisatie via trade close.
+        from pathlib import Path as _P
+        kb_path = _P(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json"
+        kb = load_json(kb_path, default={"entries": [], "totals": {"omzet_in": 0, "btw_reserve": 0, "winst_in": 0, "uit": 0}})
+        kb.setdefault("totals", {})
+        kb["totals"].setdefault("omzet_in", 0)
+        kb["totals"].setdefault("btw_reserve", 0)
+        if is_klant:
             kb["entries"].append({
                 "id": _uuid.uuid4().hex[:12],
                 "ts": _dt.now(_tz.utc).isoformat(),
-                "type": "btw_afroming",
+                "type": "klant_omzet",
                 "bron_tx": tx["id"],
                 "bron_user": user_id,
-                "bedrag_eur": btw_eur,
-                "btw_pct": 0.21,
-                "btw_uit_incl": True,
-                "grondslag_eur": amount_eur,
-                "netto_eur": netto,
-                "omschrijving": f"21% BTW uit incl-prijs €{amount_eur} (€{netto} netto + €{btw_eur} BTW) — klant aankoop {amount_tokens} ROAR",
+                "bedrag_eur": amount_eur,
+                "n_tokens": amount_tokens,
+                "omschrijving": f"Klant-omzet {amount_tokens} ROAR @ €{price:.2f} (BTW pas bij winst-realisatie)",
             })
-            kb["totals"]["btw_in"] = round(kb["totals"].get("btw_in", 0) + btw_eur, 4)
+            kb["totals"]["omzet_in"] = round(kb["totals"].get("omzet_in", 0) + amount_eur, 4)
             save_json(kb_path, kb)
-            tx["btw_afgeroomd_eur"] = btw_eur
+            # Spark EUR-wallet krijgt VOLLE bedrag (om mee te traden)
+            spark_w = wallets.get("wallets", {}).get("user-000")
+            if isinstance(spark_w, dict):
+                spark_w["balance"] = round(spark_w.get("balance", 0) + amount_eur, 4)
+                save_json(WALLET_FILE, wallets)
+            tx["spark_omzet_eur"] = amount_eur
+            tx["btw_afgeroomd_eur"] = 0  # nog niet, komt bij winst
         else:
             tx["btw_afgeroomd_eur"] = 0
             tx["anker_aankoop"] = True
     except Exception as _ex:
-        print(f"[btw-afroming] failed: {_ex}")
+        print(f"[omzet-registratie] failed: {_ex}")
 
     # v6_bonnetje_001 — Bonnetje voor klant-aankoop opslaan in user archief
     try:

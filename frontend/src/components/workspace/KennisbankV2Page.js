@@ -189,7 +189,7 @@ export function KennisbankV2Page({ onNavigate }) {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ begrip: begrip.trim(), source: 'manual', user_id: 'user-001' })
                   }).then(x => x.json());
-                  if (r && (r.success || r.card)) {
+                  if (r && (r.success || r.kaart)) {
                     setActiveTab('inbox');
                     await loadStats();
                     await loadItems();

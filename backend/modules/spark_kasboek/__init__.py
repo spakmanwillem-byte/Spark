@@ -17,14 +17,20 @@ WALLET_PATH = Path(__file__).parent.parent.parent / "data" / "wallet" / "wallets
 
 @router.get("/saldo")
 async def saldo():
-    kb = load_json(KB_PATH, default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
+    kb = load_json(KB_PATH, default={"entries": [], "totals": {}})
     totals = kb.get("totals", {})
-    saldo_total = round(totals.get("btw_in", 0) + totals.get("winst_in", 0) - totals.get("uit", 0), 4)
-    # Tegelijkertijd huidige Spark EUR-wallet (voor cross-check)
+    omzet_in = totals.get("omzet_in", 0)
+    btw_reserve = totals.get("btw_reserve", 0)
+    winst_in = totals.get("winst_in", 0)
+    uit = totals.get("uit", 0)
+    saldo_total = round(omzet_in + winst_in - uit, 4)
+    vrij = round(saldo_total - btw_reserve, 4)  # vrij te besteden (zonder BTW-reserve)
     w = load_json(WALLET_PATH, default={"wallets": {}})
     spark_w = w.get("wallets", {}).get("user-000", {})
     return {
         "spark_kasboek_saldo_eur": saldo_total,
+        "vrij_te_besteden_eur": vrij,
+        "btw_reserve_eur": btw_reserve,
         "spark_wallet_balance_eur": round(spark_w.get("balance", 0), 4),
         "totals": totals,
         "n_entries": len(kb.get("entries", [])),
@@ -92,12 +98,19 @@ async def history(limit: int = 100):
     items = []
     # Kasboek
     for e in kb.get("entries", []):
+        etype = e.get("type")
+        label = (
+            "💰 Klant-omzet" if etype == "klant_omzet"
+            else "📥 BTW binnen" if etype == "btw_afroming"  # legacy
+            else "💚 Winst trade" if etype == "trade_winst"
+            else "📒 BTW reservering" if etype == "btw_reserve"
+            else "🪙 Token gemaakt" if etype == "spark_self_mint"
+            else etype or "?"
+        )
         items.append({
             "ts": e.get("ts"),
-            "type": e.get("type"),  # btw_afroming / spark_self_mint
-            "label": ("📥 BTW binnen" if e.get("type") == "btw_afroming"
-                      else "🪙 Token gemaakt" if e.get("type") == "spark_self_mint"
-                      else e.get("type")),
+            "type": etype,
+            "label": label,
             "amount_eur": e.get("bedrag_eur"),
             "n_tokens": e.get("n_tokens", 0),
             "description": e.get("omschrijving"),

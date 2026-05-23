@@ -68,17 +68,20 @@ def maak_bonnetje(tx: dict, user_naam: str = "Klant") -> dict:
 |---|---|---|---|
 | ROAR Token | {n} | €{price:.4f} | €{incl:.2f} |
 
-## Tarief-opbouw (incl-BTW model)
+## Tarief-opbouw (v6 — BTW pas bij winst)
 
-| Onderdeel | % | Bedrag |
-|---|---|---|
-| Netto verkoop (Spark omzet) | — | €{netto:.4f} |
-| 21% BTW (uit incl-prijs, 21/121) | 21% | €{btw:.4f} |
-| **Totaal betaald** | — | **€{incl:.2f}** |
+| Onderdeel | Bedrag |
+|---|---|
+| Klant betaalt | €{incl:.2f} |
+| → Spark omzet (volledig naar trade-wallet) | €{incl:.2f} |
+| → BTW direct afgedragen | €0,00 |
 
-> _BTW-grondslag: €{incl:.2f} × 21/121 = €{btw:.4f}. BTW is gereserveerd in Spark's kasboek
-> en wordt later afgedragen aan de Belastingdienst. Spark heeft geen bankrekening, alle
-> mutaties zijn alleen administratief (papertrail-model)._
+> _Nieuw v6-model: BTW is fiscaal pas verschuldigd over **winst/marge**, niet over
+> alle inkomsten. Bij elke trade-winst (positieve PnL bij sell) wordt 21% van de
+> winst gereserveerd in Spark's kasboek (`btw_reserve`). Die reserve wordt periodiek
+> afgedragen aan de Belastingdienst via Moneybird._
+>
+> _Spark heeft geen bankrekening; alle mutaties zijn administratief (papertrail-model)._
 
 ## Voorwaarden
 
@@ -91,7 +94,7 @@ def maak_bonnetje(tx: dict, user_naam: str = "Klant") -> dict:
 
 ---
 
-_Bonnetje gegenereerd door Spark Core 2.0 — `v6_bonnetje_001`_
+_Bonnetje gegenereerd door Spark Core 2.0 — `v6_bonnetje_001` (model v6_btw_pas_bij_winst_001)_
 _Transaction ID: `{tx_id}`_
 """
     out_path = bdir / f"{tx_id}.md"

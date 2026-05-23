@@ -1,6 +1,22 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_kbv2_hooks_001 — Hooks-laag + Voice-tab cleanup + Reflectie** (sessie 5):
+  - 🔗 **`modules/kb_v2/hooks.py` placeholder-laag** voor toekomstige aansluitingen:
+    - Hook 1: KB → Vocab register (TODO)
+    - Hook 2: Chat-commands router — **3 commando's al live**:
+      • "audit kennis" / "wat mist" → self-audit samenvatting
+      • "hoeveel onbeantwoord" / "wat staat in inbox" → inbox-stats
+      • "leer woord: X" / "voeg toe aan kennis: X" → add_to_inbox
+    - Hook 3: Auto-graph verbanden via shared tags (TODO)
+    - Hook 4: D&D card linking (TODO)
+    - Hook 5: Dialogen voice-snippet auto-save (TODO)
+    - Pattern: nieuwe `hooks.py` per module met TODO-blocks in plaats van losse comments
+  - 🔇 **Voice-tab uit workspace verwijderd** — inspraak zit nu in elke Kennisbank-kaart, oude page route bestaat nog (legacy URL) maar geen sidebar-entry meer
+  - 🪞 **`MISSION.md` cross-link** vanuit ROADMAP.md
+  - 📋 **ROADMAP.md flink uitgebreid**: P0 (Spark's hands + boekhouder-closing), P1 (5 KB v2 hooks + ConversationStateManager + AuditService weak-trigger), P2 (8 backlog items), P3 (5 experimenteel). 7 architectuur-principes vastgelegd. Hook-files-tabel toegevoegd.
+  - ✅ End-to-end getest: 3 chat-commands fire (audit/inbox/learn), sidebar gecleaned, geen page errors
+
 - 2026-05-23 **v5_kbv2_media_001 — Hybride Kennisbank + Voice/Image** (sessie 4):
   - 🔀 **Sidebar gemerged**: "Kennisbank" en "Kennisbank v2" → één entry "Kennisbank" die rechtstreeks naar v2 route `/knowledge` gaat (oude KennisbankPage.js blijft als legacy bestand, route bestaat nog op `/knowledge-legacy` voor terugval)
   - 📋 **Card-schema uitgebreid** (idempotent upgrade-script `upgrade_kbv2_schema.py`):

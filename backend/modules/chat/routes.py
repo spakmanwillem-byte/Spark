@@ -523,6 +523,22 @@ async def process_message(req: ChatMessage):
             response.update(out)
             _save_log(req, response, "topic_overview")
             return response
+
+        # v5_kbv2_hooks_001 — KB v2 chat-commands (search/learn/audit/inbox-stats)
+        try:
+            from modules.kb_v2 import hooks as kbv2_hooks
+            match = kbv2_hooks.match_kbv2_command(text)
+            if match:
+                cmd, query = match
+                handler_name = cmd.get("handler")
+                handler = getattr(kbv2_hooks, handler_name, None)
+                if callable(handler):
+                    out = handler(query) if handler_name != "cmd_learn_word" else handler(query, user_id=req.user_id or "user-000")
+                    response.update(out)
+                    _save_log(req, response, f"kbv2_{cmd['id']}")
+                    return response
+        except Exception:
+            pass
     except Exception:
         pass
 

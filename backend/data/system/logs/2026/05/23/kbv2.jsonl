@@ -16,3 +16,6 @@
 {"ts": "2026-05-23T12:15:39.276209+00:00", "module": "kbv2", "fn": "classify_card", "phase": "post", "intent": "kaart uit inbox in lade plaatsen", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 122.63}
 {"ts": "2026-05-23T12:31:13.882332+00:00", "module": "kbv2", "fn": "upload_image", "phase": "pre", "intent": "foto voor kaart opslaan"}
 {"ts": "2026-05-23T12:31:14.041707+00:00", "module": "kbv2", "fn": "upload_image", "phase": "post", "intent": "foto voor kaart opslaan", "result": "dict(success=True, keys=success,image_url,size_bytes)", "duration_ms": 159.2}
+{"ts": "2026-05-23T12:37:31.452289+00:00", "module": "kbv2", "fn": "audit", "phase": "event", "intent": "self-audit kb v2", "detail": {"empty_laag1_count": "0", "missing_footnote_count": "0", "low_confidence_count": "0", "no_tags_count": "0", "inbox_ties": "631", "inbox_no_match": "160", "inbox_missing_laag1": "2215"}}
+{"ts": "2026-05-23T12:37:31.735175+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"a0": "zonnewende", "source": "chat_command", "user_id": "user-001"}}
+{"ts": "2026-05-23T12:37:31.872754+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 137.48}

@@ -19797,11 +19797,80 @@
         "session_id": "default",
         "gesprek_nummer": 757
       }
+    },
+    {
+      "id": "conv-744e846d",
+      "timestamp": "2026-05-23T12:37:31.458134+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "audit kennis",
+      "spark_response": "Self-audit: **2215** kaarten zonder laag1, **631** met tag-tie, **0** met laag vertrouwen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_audit_kb",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_audit"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 758
+      }
+    },
+    {
+      "id": "conv-eb23e675",
+      "timestamp": "2026-05-23T12:37:31.598962+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoeveel onbeantwoord",
+      "spark_response": "Er staan **3006** kaarten in mijn Inbox. Open de Kennisbank-tab om ze in te delen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_list_inbox",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_inbox"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 759
+      }
+    },
+    {
+      "id": "conv-75577081",
+      "timestamp": "2026-05-23T12:37:31.872978+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "leer woord: zonnewende",
+      "spark_response": "Genoteerd: **zonnewende** staat nu in mijn Inbox. Wil je 'm samen invullen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_learn_word",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kbv2_cmd_learned"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 760
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 757,
-    "last_updated": "2026-05-23T12:15:21.893413+00:00"
+    "total_conversations": 760,
+    "last_updated": "2026-05-23T12:37:31.872978+00:00"
   }
 }

@@ -22,7 +22,6 @@ export const navigationConfig = {
       { id: 'dagboek', label: 'Dagboek', icon: BookHeart, path: '/dagboek' },
       { id: 'notities', label: 'Notities & Taken', icon: StickyNote, path: '/notities' },
       { id: 'roadmap', label: 'Roadmap', icon: Map, path: '/roadmap' },
-      { id: 'voice', label: 'Voice', icon: Volume2, path: '/workspace/voice' },
     ]
   },
   spark: {

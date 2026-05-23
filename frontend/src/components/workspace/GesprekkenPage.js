@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
+import DnDBarkPanel from '../dnd/DnDBarkPanel';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
@@ -279,6 +280,8 @@ export function GesprekkenPage({ onNavigate }) {
   const [bots, setBots] = useState([]);
   const [communityLoading, setCommunityLoading] = useState(false);
   const [sendingCommunity, setSendingCommunity] = useState(false);
+  // v6_dnd_bark_001 — Spark World D&D bark-flow modal in community-tab
+  const [showSparkWorld, setShowSparkWorld] = useState(false);
 
   // v4_community_session_start_001 — alleen berichten vanaf inlog tonen
   const [communitySessionStart] = useState(() => {
@@ -923,6 +926,16 @@ export function GesprekkenPage({ onNavigate }) {
               </div>
               {/* Community messages */}
               <div className="flex-1 flex flex-col">
+                {/* v6_dnd_bark_001 — Spark World launcher */}
+                <div className="px-4 pt-3 pb-2 border-b border-slate-800/40 flex items-center justify-between gap-2">
+                  <p className="text-[11px] text-slate-500">
+                    Community chat · <span className="text-slate-400">{bots.length}</span> bots online
+                  </p>
+                  <button data-testid="open-spark-world" onClick={() => setShowSparkWorld(true)}
+                    className="px-3 py-1.5 rounded-lg text-[11px] font-medium border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5 transition-colors">
+                    <Sparkles className="w-3 h-3" /> Spark World
+                  </button>
+                </div>
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3">
                   {/* v4_community_session_start_001 — info-banner */}
                   <div data-testid="community-session-banner" className="text-center text-[10px] text-slate-500 italic pb-2 border-b border-slate-800/40">
@@ -1107,6 +1120,16 @@ export function GesprekkenPage({ onNavigate }) {
             </>
           )}
         </div>
+
+        {/* v6_dnd_bark_001 — Spark World D&D modal */}
+        {showSparkWorld && (
+          <div data-testid="spark-world-modal" className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setShowSparkWorld(false)}>
+            <div className="w-full max-w-xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+              <DnDBarkPanel userId={userId} onClose={() => setShowSparkWorld(false)} />
+            </div>
+          </div>
+        )}
       </div>
     </MainLayout>
   );

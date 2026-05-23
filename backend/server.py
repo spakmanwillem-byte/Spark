@@ -194,6 +194,10 @@ app.include_router(deploy_router, prefix="/api")
 from modules.dnd.routes import router as dnd_router
 app.include_router(dnd_router, prefix="/api")
 
+# v6_dnd_bark_001 — Spark World bark-flow (zintuig-keuze + D&D kaarten)
+from modules.dnd.spark_world import router as spark_world_router
+app.include_router(spark_world_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

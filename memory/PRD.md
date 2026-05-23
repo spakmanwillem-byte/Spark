@@ -818,3 +818,33 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 - KB v2 lades: sortering nu recent-bewerkt eerst i.p.v. alfabetisch.
 - KB v2 "Nieuwe kaart" knop: opent de zojuist aangemaakte kaart automatisch in edit-mode in het detail-panel.
 - KB v1 CreatePanel: na aanmaak schakelt automatisch terug naar "Alles" tab met sort=recent zodat de nieuwe kaart bovenaan zichtbaar is.
+
+## 2026-05-23 — Spark World (D&D Bark MVP) + Auto-select Onbeantwoord
+
+### Spark World MVP (v6_dnd_bark_001)
+- Concept: D&D verhaal-stroom vanuit community-chat. Geen combat. User kiest een zintuig (Zie/Hoor/Voel) → typt wat hij beleeft → opgeslagen als D&D-bark-kaart.
+- Backend: `/app/backend/modules/dnd/spark_world.py` (nieuw)
+  - `POST /api/dnd/spark-world/start` — intro + 3 zintuig-knoppen + bestaande locked kaarten
+  - `POST /api/dnd/spark-world/respond` — slaat user-input op als D&D-kaart (status: draft)
+  - `POST /api/dnd/spark-world/cards/{id}/lock` — markeer kaart als canon (locked → verschijnt als keuze-knop bij volgende start)
+  - `GET  /api/dnd/spark-world/cards?status=` — lijst kaarten
+- 3 zintuigen + KB v2 lade-koppeling:
+  - 👁️ ZIE  (cyan #06b6d4) → weten
+  - 👂 HOOR (amber #f59e0b) → spreken
+  - ❤️ VOEL (pink  #ec4899) → voelen
+- Opslag: `/app/backend/data/cards/dnd/{card_id}.json` + `_index.json`
+- Frontend: 
+  - `/app/frontend/src/components/dnd/DnDBarkPanel.js` (nieuw)
+  - "Spark World" knop in Community-tab (`GesprekkenPage.js`) → opent modal
+  - Flow: intro → 3 zintuig-knoppen → tekst-input → opslaan → lock-knop → "Nieuwe bark" / "Klaar"
+- Behavior-track: elke bark = `story_share` +1 counter, en `spark_world_card` observe-event
+- Verified e2e via Playwright (login → community tab → modal → zie → bloemen → save → lock = LOCKED)
+
+### KB v1 Auto-select Onbeantwoord (v6_kb_auto_select_unanswered)
+- Bij switch naar "Onbeantwoord" tab opent de eerste onbeantwoorde kaart automatisch in de detail-modal, één keer per lijst-state. User hoeft niet door de index te scrollen.
+- `/app/frontend/src/components/workspace/KennisbankPage.js` — useEffect met `autoOpenedFor` tracker zodat re-open na sluiten voorkomen wordt.
+
+### Backlog updates
+- Spark World v0.2: NPC-dialoog via Story Teller LLM, rugzak/inventory unlocks, image+audio media op bark-kaart
+- D&D-kaart → KB v2 lade migratie (locked kaart automatisch in juiste lade kopiëren als kennis)
+- Combat / dice-roll mechanic (later, alleen als het past)

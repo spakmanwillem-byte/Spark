@@ -121,12 +121,15 @@ def get_spark_core_value():
                 total_value += tx.get("amount_eur", 0)
             elif tx["type"] == "withdrawal":
                 total_value -= tx.get("amount_eur", 0)
-    # v6_value_includes_gifts_001 — Spark kasboek meetellen (gift + omzet),
-    # zo stijgt de token-prijs zichtbaar bij elke nieuwe gift/aankoop
+    # v6_value_includes_gifts_001 — Spark kasboek meetellen (gift + omzet + winst + openstaande leningen),
+    # zo stijgt de token-prijs zichtbaar bij elke nieuwe gift/aankoop en blijft hij correct
+    # bij tijdelijke uithaal-leningen (vordering op Willem)
     try:
         kb = load_json(DATA_DIR / "system" / "spark_kasboek.json", default={"totals": {}})
         t = kb.get("totals", {})
         total_value += t.get("gift_in", 0) + t.get("omzet_in", 0) + t.get("winst_in", 0)
+        # Openstaande leningen zijn vorderingen → Spark heeft recht op dit geld
+        total_value += t.get("open_leningen", 0)
     except Exception:
         pass
     return total_value

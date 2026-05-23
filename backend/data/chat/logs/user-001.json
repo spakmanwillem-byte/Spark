@@ -20488,11 +20488,47 @@
         "session_id": "default",
         "gesprek_nummer": 787
       }
+    },
+    {
+      "id": "conv-72a7b645",
+      "timestamp": "2026-05-23T21:44:22.044043+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 788
+      }
+    },
+    {
+      "id": "conv-eccb5ce5",
+      "timestamp": "2026-05-23T21:44:22.074852+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 789
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 787,
-    "last_updated": "2026-05-23T21:35:26.110204+00:00"
+    "total_conversations": 789,
+    "last_updated": "2026-05-23T21:44:22.074852+00:00"
   }
 }

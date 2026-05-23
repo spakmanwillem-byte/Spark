@@ -5,7 +5,7 @@
       "id": "RESET-21MEI",
       "type": "system_reset",
       "user_id": "user-001",
-      "note": "Schone start: wallets\u21920 (Spark \u20ac5.08), potjes Spark=1, ROAR Spark=1/rest=0, baselines reset, rang gesynced met XP/level. Audit-trail behouden."
+      "note": "Schone start: wallets→0 (Spark €5.08), potjes Spark=1, ROAR Spark=1/rest=0, baselines reset, rang gesynced met XP/level. Audit-trail behouden."
     },
     {
       "ts": "2026-05-22T14:08:07.526270+00:00",
@@ -172,9 +172,9 @@
       "totaal_eur": 102.8,
       "per_pot": 5.14,
       "n_potjes": 20,
-      "spark_config": "user-000 \u00b7 1h \u00b7 auto_trade=true \u00b7 BCH-EUR",
-      "willem_config": "user-001 \u00b7 15m \u00b7 auto_trade=false \u00b7 BCH-EUR",
-      "note": "\u20ac1.20 bijgestort, alles in BCH op Bitvavo verkocht, ijkpunt v5.2 voor redeploy"
+      "spark_config": "user-000 · 1h · auto_trade=true · BCH-EUR",
+      "willem_config": "user-001 · 15m · auto_trade=false · BCH-EUR",
+      "note": "€1.20 bijgestort, alles in BCH op Bitvavo verkocht, ijkpunt v5.2 voor redeploy"
     },
     {
       "ts": "2026-05-23T16:49:22.030293+00:00",
@@ -199,7 +199,17 @@
       "boekwaarde_eur": 50.8,
       "verschil_eur": -5.8,
       "loan_id": "0e0d842f76ea",
-      "note": "Willem heeft op Bitvavo 10 potjes verkocht voor \u20ac45 (boekwaarde \u20ac50.80). Wordt teruggestort. Auto-resolve zodra Bitvavo balance terug op niveau is."
+      "note": "Willem heeft op Bitvavo 10 potjes verkocht voor €45 (boekwaarde €50.80). Wordt teruggestort. Auto-resolve zodra Bitvavo balance terug op niveau is."
+    },
+    {
+      "ts": "2026-05-23T21:44:02.573305+00:00",
+      "id": "2574c2683302",
+      "type": "trade_buy",
+      "user_id": "user-000",
+      "pot_id": "pot-000-01",
+      "market": "BCH-EUR",
+      "price": 306.56,
+      "amount_eur": 5.14
     }
   ]
 }

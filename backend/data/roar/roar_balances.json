@@ -1,10 +1,10 @@
 {
   "balances": {
-    "user-000": 5,
-    "user-001": 13,
-    "user-a0ee2d7e": 1,
+    "user-000": 10,
+    "user-001": 10,
+    "user-a0ee2d7e": 0,
     "user-574ac78e": 0,
-    "user-4d81e2a4": 1
+    "user-4d81e2a4": 0
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -123,6 +123,18 @@
       "amount": 1,
       "note": "Welkomstgift voor nieuwste Nick (zonder achternaam)",
       "status": "completed"
+    },
+    {
+      "id": "a24d9377-b112-4af9-a83b-084f70d74376",
+      "ts": "2026-05-23T09:39:56.107501+00:00",
+      "type": "sell_back",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 5,
+      "amount_eur": 50.5,
+      "price_per_token": 10.1,
+      "note": "Willem opname €50,50 — 5 tokens terug naar treasury (3 eigen + 1 Gijs + 1 Nick)",
+      "status": "completed"
     }
   ],
   "spark_bonus": {
@@ -233,6 +245,12 @@
       "ts": "2026-05-22T21:36:58.113127+00:00",
       "action": "correction",
       "details": "Teeuwen (user-574ac78e) -> 0, juiste Nick (user-4d81e2a4) -> 1"
+    },
+    {
+      "ts": "2026-05-23T09:39:56.107501+00:00",
+      "action": "withdrawal_settlement",
+      "details": "Willem -3, Gijs -1, Nick -1, Spark +5",
+      "amount_eur": 50.5
     }
   ],
   "treasury_pool": 999980,

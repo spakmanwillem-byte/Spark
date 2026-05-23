@@ -45,6 +45,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [savingClassify, setSavingClassify] = useState(false);
   const [showAudit, setShowAudit] = useState(false);
   const [auditData, setAuditData] = useState(null);
+  // v6_kbv2_newcard_modal_001 — eigen venster met leeg in-te-vullen formulier
+  const [showNewCardModal, setShowNewCardModal] = useState(false);
 
   const PAGE = 25;
 
@@ -182,37 +184,7 @@ export function KennisbankV2Page({ onNavigate }) {
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5" /> Self-audit
             </button>
-            <button data-testid="kbv2-new-card-btn" onClick={async () => {
-                const begrip = window.prompt('Nieuwe kennis-kaart (begrip):');
-                if (!begrip || !begrip.trim()) return;
-                try {
-                  const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ begrip: begrip.trim(), source: 'manual', user_id: 'user-001' })
-                  }).then(x => x.json());
-                  if (r && (r.success || r.kaart)) {
-                    setActiveTab('inbox');
-                    setSearch('');
-                    setReasonFilter('');
-                    setPage(0);
-                    await loadStats();
-                    await loadItems();
-                    // v6_kbv2_autoselect — open nieuwe kaart direct in edit-mode
-                    if (r.kaart) {
-                      setSelectedCard(r.kaart);
-                      setEditMode(true);
-                      setEditForm({
-                        lagen: { ...(r.kaart.lagen || {}) },
-                        ws5:   { ...(r.kaart.ws5 || {}) },
-                        tags:  [...(r.kaart.tags || [])],
-                        begrip: r.kaart.begrip || '',
-                      });
-                    }
-                  } else {
-                    alert('Kon niet aanmaken: ' + JSON.stringify(r));
-                  }
-                } catch (e) { alert('Fout: ' + e.message); }
-              }}
+            <button data-testid="kbv2-new-card-btn" onClick={() => setShowNewCardModal(true)}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
             </button>
@@ -320,6 +292,32 @@ export function KennisbankV2Page({ onNavigate }) {
         {/* Audit modal */}
         {showAudit && auditData && (
           <AuditModal data={auditData} onClose={() => setShowAudit(false)} />
+        )}
+
+        {/* v6_kbv2_newcard_modal_001 — Nieuwe kaart venster met leeg formulier */}
+        {showNewCardModal && (
+          <NewCardModal
+            onClose={() => setShowNewCardModal(false)}
+            onCreated={async (kaart, targetLade) => {
+              setShowNewCardModal(false);
+              // Switch naar juiste tab
+              setActiveTab(targetLade || 'inbox');
+              setSearch('');
+              setReasonFilter('');
+              setPage(0);
+              await loadStats();
+              await loadItems();
+              // Auto-open in edit-mode in detail-paneel
+              setSelectedCard(kaart);
+              setEditMode(true);
+              setEditForm({
+                lagen: { ...(kaart.lagen || {}) },
+                ws5:   { ...(kaart.ws5 || {}) },
+                tags:  [...(kaart.tags || [])],
+                begrip: kaart.begrip || '',
+              });
+            }}
+          />
         )}
       </div>
     </MainLayout>
@@ -696,6 +694,144 @@ function MediaSection({ card, currentLade, onUpdated }) {
       </div>
 
       {err && <p className="text-[10px] text-red-400">{err}</p>}
+    </div>
+  );
+}
+
+// ============================================================
+// v6_kbv2_newcard_modal_001 — Nieuwe kaart venster
+// ============================================================
+function NewCardModal({ onClose, onCreated }) {
+  const [begrip, setBegrip] = useState('');
+  const [laag1, setLaag1] = useState('');
+  const [targetLade, setTargetLade] = useState('inbox');  // 'inbox' | 'voelen' | 'spreken' | 'weten' | 'doen'
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState(null);
+
+  const submit = async () => {
+    setErr(null);
+    if (!begrip.trim()) { setErr('Vul een begrip in'); return; }
+    setSaving(true);
+    try {
+      // Stap 1: kaart in inbox aanmaken
+      const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ begrip: begrip.trim(), source: 'manual', user_id: 'user-001' }),
+      }).then(x => x.json());
+      if (!r || !r.kaart) { setErr('Aanmaken mislukt: ' + JSON.stringify(r)); setSaving(false); return; }
+
+      let kaart = r.kaart;
+      const updates = {};
+      if (laag1.trim()) updates.lagen = { laag1: laag1.trim() };
+
+      // Stap 2: optioneel direct in lade plaatsen (anders blijft in inbox)
+      if (targetLade !== 'inbox') {
+        const cl = await fetch(`${API}/api/kb/v2/classify`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            card_id: kaart.id, lade: targetLade,
+            updates: Object.keys(updates).length ? updates : null,
+            user_id: 'user-001',
+          }),
+        }).then(x => x.json());
+        if (cl.success && cl.kaart) kaart = cl.kaart;
+      } else if (laag1.trim()) {
+        // Inbox-kaart bewerken
+        const ed = await fetch(`${API}/api/kb/v2/edit`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            card_id: kaart.id, lade: 'inbox', updates, user_id: 'user-001',
+          }),
+        }).then(x => x.json());
+        if (ed.success && ed.kaart) kaart = ed.kaart;
+      }
+      onCreated?.(kaart, targetLade);
+    } catch (e) {
+      setErr(e.message);
+    }
+    setSaving(false);
+  };
+
+  const LADES_OPT = [
+    { id: 'inbox',   icon: '📥', label: 'Inbox',    color: '#ef4444' },
+    { id: 'voelen',  icon: '🌸', label: 'Voelen',   color: '#ec4899' },
+    { id: 'spreken', icon: '💬', label: 'Spreken',  color: '#06b6d4' },
+    { id: 'weten',   icon: '🧠', label: 'Weten',    color: '#f59e0b' },
+    { id: 'doen',    icon: '🎭', label: 'Doen',     color: '#a855f7' },
+  ];
+  const cur = LADES_OPT.find(l => l.id === targetLade);
+
+  return (
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div data-testid="kbv2-newcard-modal" className="bg-slate-900 border border-emerald-500/30 rounded-2xl max-w-lg w-full"
+        onClick={e => e.stopPropagation()}>
+        <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+          <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <Plus className="w-4 h-4 text-emerald-400" /> Nieuwe kennis-kaart
+          </h3>
+          <button data-testid="kbv2-newcard-close" onClick={onClose} className="p-1 hover:bg-slate-800 rounded">
+            <X className="w-4 h-4 text-slate-400" />
+          </button>
+        </div>
+        <div className="p-4 space-y-3">
+          <div>
+            <label className="text-[10px] uppercase text-slate-400 tracking-wider mb-1 block">
+              Begrip <span className="text-red-400">*</span>
+            </label>
+            <input data-testid="kbv2-newcard-begrip" type="text" value={begrip}
+              onChange={e => setBegrip(e.target.value)} autoFocus
+              placeholder="bv. 'Mededogen' of 'Spark Core 2.0'"
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/60" />
+          </div>
+
+          <div>
+            <label className="text-[10px] uppercase text-slate-400 tracking-wider mb-1 block">
+              Laag 1 — Korte uitleg <span className="text-slate-600">(optioneel)</span>
+            </label>
+            <textarea data-testid="kbv2-newcard-laag1" value={laag1} rows={3}
+              onChange={e => setLaag1(e.target.value)}
+              placeholder="In 1-2 zinnen wat dit begrip is..."
+              className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/60" />
+          </div>
+
+          <div>
+            <label className="text-[10px] uppercase text-slate-400 tracking-wider mb-1.5 block">
+              Direct in lade plaatsen <span className="text-slate-600">(of laat in inbox)</span>
+            </label>
+            <div className="grid grid-cols-5 gap-1.5">
+              {LADES_OPT.map(l => (
+                <button key={l.id} data-testid={`kbv2-newcard-lade-${l.id}`}
+                  onClick={() => setTargetLade(l.id)}
+                  className="flex flex-col items-center gap-0.5 py-2 rounded-lg border-2 transition-all"
+                  style={{
+                    borderColor: targetLade === l.id ? l.color : l.color + '30',
+                    background: targetLade === l.id ? l.color + '20' : l.color + '05',
+                  }}>
+                  <span className="text-lg">{l.icon}</span>
+                  <span className="text-[10px] font-medium" style={{ color: l.color }}>{l.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {err && (
+            <p data-testid="kbv2-newcard-error" className="text-xs text-red-400 p-2 bg-red-500/10 border border-red-500/20 rounded-lg">{err}</p>
+          )}
+
+          <p className="text-[10px] text-slate-500 leading-relaxed">
+            Na opslaan opent de kaart automatisch in <span className="text-emerald-300">bewerk-modus</span> in
+            {targetLade === 'inbox' ? ' de inbox' : ` lade ${cur?.label}`}, zodat je lagen / 5W / tags / media direct kunt aanvullen.
+          </p>
+        </div>
+        <div className="p-4 border-t border-slate-800 flex justify-end gap-2">
+          <button data-testid="kbv2-newcard-cancel" onClick={onClose}
+            className="px-3 py-1.5 text-xs text-slate-400 hover:bg-slate-800 rounded-lg">Annuleren</button>
+          <button data-testid="kbv2-newcard-save" onClick={submit} disabled={saving || !begrip.trim()}
+            className="px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600">
+            <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : 'Aanmaken & bewerken'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

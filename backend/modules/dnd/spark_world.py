@@ -291,6 +291,19 @@ async def get_card(card_id: str):
     return json.loads(cp.read_text(encoding="utf-8"))
 
 
+@router.delete("/cards/{card_id}")
+async def delete_card(card_id: str):
+    """Verwijder een D&D-kaart definitief (admin-only via UI)."""
+    cp = _card_path(card_id)
+    if not cp.exists():
+        raise HTTPException(404, f"Kaart {card_id} niet gevonden")
+    cp.unlink()
+    idx = _load_index()
+    idx["cards"] = [c for c in idx.get("cards", []) if c.get("id") != card_id]
+    _save_index(idx)
+    return {"success": True, "deleted": card_id}
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------

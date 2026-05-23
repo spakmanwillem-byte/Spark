@@ -5,6 +5,7 @@ import {
   MessageSquare, Server, FileText, Users, Code2
 } from 'lucide-react';
 import { AvatarGallerySection } from './AvatarGallerySection';
+import { DnDGallerySection } from './DnDGallerySection';
 import { LogsBrowser } from './LogsBrowser';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -197,7 +198,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       {/* v5_spark_logger_001 — Logs tab rendert eigen browser */}
       {activeTab === 'logs' && <LogsBrowser />}
 
-      {/* v5_foto_subtabs_001 — Foto sub-tabs (Algemene foto's / Avatar Galerij) */}
+      {/* v5_foto_subtabs_001 — Foto sub-tabs (Algemene foto's / Avatar Galerij / D&D Galerij) */}
       {activeTab === 'foto' && (
         <div className="flex items-center gap-1 p-1 bg-slate-800/40 rounded-xl w-fit">
           <button
@@ -220,6 +221,17 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             <Users className="w-3.5 h-3.5" />
             Avatar Galerij
           </button>
+          {/* v6_dnd_gallery_001 — D&D galerij naast avatars */}
+          <button
+            data-testid="foto-subtab-dnd"
+            onClick={() => setFotoSubTab('dnd')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              fotoSubTab === 'dnd' ? 'bg-amber-500/20 text-amber-300' : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Code2 className="w-3.5 h-3.5" />
+            D&amp;D Galerij
+          </button>
         </div>
       )}
 
@@ -234,8 +246,15 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
+      {/* v6_dnd_gallery_001 — D&D Galerij sub-content */}
+      {activeTab === 'foto' && fotoSubTab === 'dnd' && (
+        <div data-testid="foto-dnd-pane" className="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
+          <DnDGallerySection adminId={currentUserId} isAdmin={isAdmin} />
+        </div>
+      )}
+
       {/* v5_kbv2_media_002 — bron sub-tabs binnen media-categorieën */}
-      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         <div className="flex items-center gap-1.5">
           {[
             { id: 'alle',  label: 'Alles' },
@@ -257,7 +276,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       )}
 
       {/* Search + tag filter (verberg in avatars-mode + logs-mode) */}
-      {activeTab !== 'logs' && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+      {activeTab !== 'logs' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         <div className="flex flex-wrap gap-2">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
@@ -283,7 +302,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       )}
 
       {/* Content (verberg in avatars-mode + logs-mode) */}
-      {activeTab !== 'logs' && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+      {activeTab !== 'logs' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         loading ? (
           <div className="text-center py-12 text-xs text-slate-500">Laden...</div>
         ) : files.length === 0 ? (

@@ -848,3 +848,28 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 - Spark World v0.2: NPC-dialoog via Story Teller LLM, rugzak/inventory unlocks, image+audio media op bark-kaart
 - D&D-kaart → KB v2 lade migratie (locked kaart automatisch in juiste lade kopiëren als kennis)
 - Combat / dice-roll mechanic (later, alleen als het past)
+
+## 2026-05-23 — D&D Galerij in Beheer + KB v2 Nieuwe-kaart venster
+
+### D&D Galerij (v6_dnd_gallery_001)
+- Locatie: **Beheer → Instellingen → Archief → Foto → "D&D Galerij"** subtab (naast Algemene foto's + Avatar Galerij)
+- Toont alle Spark World bark-kaarten als grid met:
+  - Filter chips: Alles / Draft / Locked (canon)
+  - Per kaart: zintuig-kleur, icoon, titel, content-preview, status-badge
+  - Klik kaart → detail-modal met inhoud + lock/unlock + delete (admin-only)
+  - "Nieuwe D&D-kaart" → venster met leeg formulier (zintuig keuze + titel + content + "direct vastklikken" checkbox)
+- Class-aanduiding: `game · D&D` (zoals user verzocht "uniek krijgen class game en D&D")
+- Backend extra endpoint: `DELETE /api/dnd/spark-world/cards/{card_id}`
+- Files: `frontend/src/components/admin/DnDGallerySection.js` (nieuw), `SystemArchive.js` (subtab toegevoegd)
+
+### KB v2 Nieuwe-kaart Modal (v6_kbv2_newcard_modal_001)
+- Vervangt `window.prompt()` met een echt venster (modal) met leeg in-te-vullen formulier:
+  - Begrip (verplicht)
+  - Laag 1 — korte uitleg (optioneel)
+  - 5 lade-keuze knoppen (Inbox / Voelen / Spreken / Weten / Doen) — kaart wordt direct in juiste lade geplaatst
+- Na opslaan opent kaart automatisch in bewerk-modus in detail-paneel zodat ws5/tags/media direct ingevuld kunnen worden
+- File: `KennisbankV2Page.js` (NewCardModal component toegevoegd)
+
+### Test status
+- D&D Galerij + Nieuwe D&D-kaart formulier: e2e getest via Playwright (kaart aangemaakt, verschijnt in grid) ✓
+- KB v2 Nieuwe-kaart venster: screenshot bevestigt leeg formulier met begrip/laag1/lade-keuze knoppen ✓

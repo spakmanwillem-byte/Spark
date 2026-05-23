@@ -57,6 +57,19 @@ export function KennisbankPage({ onNavigate }) {
   useEffect(() => { fetchStats(); }, [fetchStats]);
   useEffect(() => { fetchEntries(); }, [fetchEntries]);
 
+  // v6_kb_auto_select_unanswered — bij switch naar "Onbeantwoord" of nieuwe page
+  // de eerste onbeantwoorde kaart automatisch openen. Eén keer per lijst.
+  const [autoOpenedFor, setAutoOpenedFor] = useState(null);
+  useEffect(() => {
+    if (statusFilter !== 'unanswered') { setAutoOpenedFor(null); return; }
+    if (loading || !entries || entries.length === 0) return;
+    const key = `${statusFilter}|${page}|${search}`;
+    if (autoOpenedFor === key) return;
+    setAutoOpenedFor(key);
+    if (!selectedEntry) openDetail(entries[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusFilter, loading, entries, page, search]);
+
   // Debounced search
   const [searchInput, setSearchInput] = useState('');
   useEffect(() => {

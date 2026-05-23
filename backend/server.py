@@ -151,6 +151,10 @@ app.include_router(spark_mint_router, prefix="/api")
 from modules.bonnetjes import router as bonnetjes_router
 app.include_router(bonnetjes_router, prefix="/api")
 
+# v6_tijdelijke_lening_001 — Tijdelijke uithaal-leningen + auto-resolve
+from modules.spark_leningen import router as spark_leningen_router
+app.include_router(spark_leningen_router, prefix="/api")
+
 # v5_event_overlay_001
 from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")

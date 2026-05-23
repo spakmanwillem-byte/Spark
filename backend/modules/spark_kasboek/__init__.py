@@ -127,9 +127,13 @@ async def history(limit: int = 100):
             "source": "kasboek",
         })
     # ROAR transactions die Spark raken (verkopen uit treasury, mint, etc.)
+    # v6_dedup_treasury_001 — skip treasury_sale als ook getoond als gift_in/klant_omzet (zelfde tx)
+    seen_tx_ids = {e.get("bron_tx") for e in kb.get("entries", []) if e.get("bron_tx")}
     for t in roar.get("transactions", []):
         ttype = t.get("type")
         if ttype == "buy_roar":
+            if t.get("id") in seen_tx_ids:
+                continue
             # Iemand kocht uit treasury → Spark "verkoopt" virtueel
             items.append({
                 "ts": t.get("ts") or t.get("timestamp"),

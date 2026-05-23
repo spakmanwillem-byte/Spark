@@ -1,6 +1,18 @@
 {
   "entries": [
     {
+      "id": "0e0d842f76ea",
+      "ts": "2026-05-23T21:33:54.355112+00:00",
+      "type": "tijdelijke_lening",
+      "richting": "uitgegaan",
+      "bron_user": "user-001",
+      "bedrag_eur": -45.0,
+      "n_tokens": -10,
+      "phase": "build",
+      "auto_resolve": true,
+      "omschrijving": "Tijdelijke uithaal Willem: 10 potjes verkocht voor €45 op Bitvavo. Wordt teruggestort. Spark sluit lening zodra Bitvavo balance terug op niveau is."
+    },
+    {
       "id": "831f7eafecc9",
       "ts": "2026-05-23T16:49:22.030293+00:00",
       "type": "gift_in",
@@ -8,7 +20,7 @@
       "bron_user": "user-a0ee2d7e",
       "bedrag_eur": 20.8,
       "n_tokens": 2,
-      "omschrijving": "Gift \u20ac20.8 \u2192 2 ROAR als bedankje (bouw-fase: fiscaal donatie, geen BTW) \u2014 Gijs",
+      "omschrijving": "Gift €20.8 → 2 ROAR als bedankje (bouw-fase: fiscaal donatie, geen BTW) — Gijs",
       "phase": "build"
     }
   ],
@@ -17,6 +29,7 @@
     "omzet_in": 0,
     "btw_reserve": 0,
     "winst_in": 0,
-    "uit": 0
+    "uit": 45.0,
+    "open_leningen": 45.0
   }
 }

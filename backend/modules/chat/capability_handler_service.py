@@ -19,20 +19,25 @@ DATA = Path(__file__).parent.parent.parent / "data"
 
 def _handle_spark_saldo(user_id: Optional[str]) -> Optional[Dict]:
     kb = load_json(DATA / "system" / "spark_kasboek.json",
-                   default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
+                   default={"entries": [], "totals": {}})
     t = kb.get("totals", {})
-    btw_in = t.get("btw_in", 0)
+    gift_in = t.get("gift_in", 0)
+    omzet_in = t.get("omzet_in", 0)
     winst_in = t.get("winst_in", 0)
     uit = t.get("uit", 0)
-    saldo = round(btw_in + winst_in - uit, 4)
+    open_l = t.get("open_leningen", 0)
+    saldo = round(gift_in + omzet_in + winst_in - uit, 4)
+    lines = [f"💰 **Spark's kasboek**: €{saldo:.2f}"]
+    if gift_in: lines.append(f"💚 Gifts binnen: €{gift_in:.2f}")
+    if omzet_in: lines.append(f"💰 Klant-omzet: €{omzet_in:.2f}")
+    if winst_in: lines.append(f"📈 Trade-winst: €{winst_in:.2f}")
+    if uit: lines.append(f"📤 Uit: €{uit:.2f}")
+    if open_l: lines.append(f"🤝 **Openstaande lening: €{open_l:.2f}** (te ontvangen)")
+    lines.append(f"_{len(kb.get('entries', []))} boekingen in kasboek_")
     return {
         "type": "capability_response",
         "capability_id": "spark_saldo_check",
-        "message": (
-            f"💰 **Spark's kasboek**: €{saldo:.2f}\n"
-            f"_BTW afgeroomd: €{btw_in:.2f} · Trading-winst: €{winst_in:.2f} · Uit: €{uit:.2f}_\n"
-            f"_{len(kb.get('entries', []))} boekingen in kasboek_"
-        ),
+        "message": "\n".join(lines),
     }
 
 

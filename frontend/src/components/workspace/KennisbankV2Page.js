@@ -133,7 +133,8 @@ export function KennisbankV2Page({ onNavigate }) {
   };
 
   const saveEdit = async () => {
-    if (!selectedCard || !editForm || activeTab === 'inbox') return;
+    if (!selectedCard || !editForm) return;
+    // v6_kbv2_edit_inbox_001 — inbox-kaarten kunnen nu ook bewerkt worden
     setSavingClassify(true);
     try {
       const r = await fetch(`${API}/api/kb/v2/edit`, {
@@ -476,6 +477,18 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
       )}
 
       {/* Actions */}
+      {/* v6_kbv2_edit_inbox_001 — Bewaar knop ook in inbox als editMode aan, naast classify */}
+      {editMode ? (
+        <div className="border-t border-slate-800 pt-3">
+          <button data-testid="kbv2-save-edit" onClick={onSaveEdit} disabled={saving}
+            className="w-full px-3 py-2 text-xs rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 disabled:opacity-50 flex items-center justify-center gap-1.5">
+            <Save className="w-3.5 h-3.5" /> {saving ? 'Opslaan...' : 'Bewaar wijzigingen'}
+          </button>
+          {inInbox && (
+            <p className="text-[10px] text-slate-500 mt-2 text-center">Vul de lagen in en kies hieronder een lade om te classificeren.</p>
+          )}
+        </div>
+      ) : null}
       {inInbox ? (
         <div className="space-y-2 border-t border-slate-800 pt-3">
           <p className="text-[11px] text-slate-400 flex items-center gap-1.5">
@@ -493,13 +506,6 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
               </button>
             ))}
           </div>
-        </div>
-      ) : editMode ? (
-        <div className="border-t border-slate-800 pt-3">
-          <button data-testid="kbv2-save-edit" onClick={onSaveEdit} disabled={saving}
-            className="w-full px-3 py-2 text-xs rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 disabled:opacity-50 flex items-center justify-center gap-1.5">
-            <Save className="w-3.5 h-3.5" /> {saving ? 'Opslaan...' : 'Bewaar wijzigingen'}
-          </button>
         </div>
       ) : null}
     </div>

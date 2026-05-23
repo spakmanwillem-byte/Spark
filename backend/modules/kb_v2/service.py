@@ -297,7 +297,34 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
 
 @traced(intent="bestaande kaart in lade bewerken", module="kbv2")
 def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000") -> Dict:
-    """Update lagen / ws5 / tags / begrip van een kaart die al in een lade staat."""
+    """Update lagen / ws5 / tags / begrip van een kaart die al in een lade staat OF in inbox."""
+    # v6_kbv2_edit_inbox_001 — laat inbox-kaarten ook bewerken (voor zelf-classify flow)
+    if lade == "inbox":
+        from pathlib import Path as _P
+        inbox_path = _P(__file__).parent.parent.parent / "data" / "knowledge" / "v2" / "knowledge_inbox.json"
+        with _lock:
+            data = load_json(inbox_path, default={"kaarten": []})
+            for k in data.get("kaarten", []):
+                if k.get("id") == card_id:
+                    if "lagen" in updates:
+                        k["lagen"] = {**(k.get("lagen") or {}), **(updates["lagen"] or {})}
+                    if "ws5" in updates:
+                        k["ws5"] = {**(k.get("ws5") or {}), **(updates["ws5"] or {})}
+                    if "tags" in updates and isinstance(updates["tags"], list):
+                        k["tags"] = updates["tags"]
+                    if "begrip" in updates and updates["begrip"]:
+                        k["begrip"] = updates["begrip"]
+                    if "media" in updates and isinstance(updates["media"], dict):
+                        k["media"] = {**(k.get("media") or {}), **updates["media"]}
+                    fn = k.get("footnote") or {}
+                    fn["laatst_bewerkt_door"] = user_id
+                    fn["laatst_bewerkt_op"] = _now()
+                    k["footnote"] = fn
+                    k.setdefault("media", {"voice_url": None, "voice_transcript": None, "image_urls": []})
+                    k["needs"] = _compute_needs(k)
+                    save_json(inbox_path, data)
+                    return {"success": True, "kaart": k}
+            return {"success": False, "message": f"Inbox-kaart '{card_id}' niet gevonden"}
     if lade not in LADES:
         return {"success": False, "message": f"Onbekende lade '{lade}'"}
     with _lock:

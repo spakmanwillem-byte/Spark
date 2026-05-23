@@ -1,6 +1,13 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_bugbatch_001: B1+B2+B3+B4 in 1 sessie** (later vandaag):
+  - 🩹 **B3 fix — Community whitescreen op "help"**: bug zat NIET in `CommunityPage.js` zoals handoff suggereerde, maar in `GesprekkenPage.js` Community-tab. `setCommunityMessages(prev => [...prev, res.message, ...res.bot_responses])` las het OUDE response-formaat. Backend retourneert nu `{messages: [...]}` voor help/safeword/dnd → `res.message` was `undefined` → crash op `.map(msg => msg.user_id)`. Fix: `v5_gesprekken_compat_001` ondersteunt beide formats + optimistic user-echo + `.filter(Boolean)` defensive guard
+  - 🤖 **B1 fix — Spark auto_trade persistence**: handoff hot-swapte `m._auto_trade=True` via Python maar dat persisteerde NIET. Bij elke backend-restart resumde Spark met `auto_trade=false` uit registry JSON → geen buys. Fix: nieuwe `MonitorService.update_auto_trade()` + `POST /api/trade/bot/auto-trade/{user_id}` endpoint die `_persist_registry()` triggert. Spark staat nu permanent op auto_trade=true
+  - 📈 **B4 fix — Potje value mark-to-market**: `get_potjes()` toonde altijd `live_value = capital` (statisch) wanneer geen echte Bitvavo balance beschikbaar was (mock mode). Nu: voor open posities wordt huidige market-price opgehaald via `fetch_tickers`, en `live_value = capital + (capital * profit_pct - fees)`. Velden toegevoegd: `unrealized_pnl`, `unrealized_pnl_pct`, `current_price`
+  - 🐢 **B2 fix — Trader sequentieel laden**: `TraderPage.js` vuurde 10+ parallelle fetches af bij mount → UI freeze. Fix: `v5_sequential_load_001` chain: loadCoreData → loadLiveData → loadMonitorStatus → loadBalance → loadPotjes → loadContext. Pollers (30s tickers, 10s monitor) blijven onafhankelijk
+  - ✅ Smoke test: Spark draait nu met Auto-trade AAN, 5 markets monitored, geen console errors, help-command werkt in Gesprekken
+
 - 2026-05-23 **v5_candle_hotswap_001 + v5_spark_stoppable_001 + admin-bot-controls + DSP-004/005/006**:
   - 🕯️ **Cycle hot-swap**: `POST /api/trade/monitor/candle/{user_id}` + `MonitorService.update_candle_interval()`. Wisselen 15m/1h/4h/1d zonder restart, persistent. TraderPage cycle-buttons doen nu hot-patch bij running, lokaal anders. Auto-sync UI ↔ backend
   - 🛑 **Spark stop weer toegestaan**: `SPARK_UNSTOPPABLE` guard verwijderd in `/bot/stop/` en `/bot/pause/{user_id}`. Bugs van v4 zijn opgelost. Frontend toont Stop-knop ook voor Spark

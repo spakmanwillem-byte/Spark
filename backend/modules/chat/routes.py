@@ -1257,6 +1257,31 @@ async def list_all_log_users():
     return {"users": chat_log_service.list_all_users_with_logs()}
 
 
+# v6_intent_matcher_001 — Spark's handen: capability-matcher endpoint
+@router.post("/intent/match")
+async def match_intent(payload: dict):
+    """Match een user-zin → capability_id.
+
+    Body: {"text": "kan jij mijn trade-logs ophalen?"}
+    Returns: {"match": {...} | null}
+    """
+    from .intent_matcher_service import match_capability
+    text = (payload or {}).get("text", "")
+    result = match_capability(text)
+    return {"match": result, "text": text}
+
+
+@router.get("/intent/capabilities")
+async def list_capabilities(status: Optional[str] = None):
+    """Lijst alle Spark-capabilities (optioneel gefilterd op status)."""
+    from .intent_matcher_service import all_capabilities, explain_self
+    return {
+        "capabilities": all_capabilities(status),
+        "explain_self": explain_self(),
+    }
+
+
+
 @router.delete("/logs/{user_id}/{conv_id}")
 async def delete_log(user_id: str, conv_id: str):
     success = chat_log_service.delete_conversation(user_id, conv_id)

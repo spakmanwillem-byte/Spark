@@ -127,7 +127,7 @@ export function TraderPage({ onNavigate }) {
   const [qtResult, setQtResult] = useState(null);
 
   const loadCoreData = useCallback(() => {
-    Promise.all([
+    return Promise.all([
       fetch(`${API}/api/trade/stats/${userId}`).then(r => r.json()).catch(() => ({})),
       fetch(`${API}/api/trade/history/${userId}?limit=100`).then(r => r.json()).catch(() => ({ trades: [] })),
       fetch(`${API}/api/trade/markets/${userId}`).then(r => r.json()).catch(() => ({ markets: {} })),
@@ -143,28 +143,39 @@ export function TraderPage({ onNavigate }) {
     });
   }, [userId]);
 
-  const loadLiveData = useCallback(() => {
-    fetch(`${API}/api/trade/tickers`).then(r => r.json()).then(d => setTickers(d.tickers || [])).catch(() => {});
-    fetch(`${API}/api/trade/candles?market=${candleMarket}&interval=${candleInterval}&limit=50`)
-      .then(r => r.json()).then(d => setCandles(d.candles || [])).catch(() => {});
+  const loadLiveData = useCallback(async () => {
+    // v5_sequential_load_001 — sequentieel ipv parallel om UI freeze te voorkomen
+    try {
+      const d = await fetch(`${API}/api/trade/tickers`).then(r => r.json());
+      setTickers(d.tickers || []);
+    } catch {}
+    try {
+      const d = await fetch(`${API}/api/trade/candles?market=${candleMarket}&interval=${candleInterval}&limit=50`).then(r => r.json());
+      setCandles(d.candles || []);
+    } catch {}
   }, [candleMarket, candleInterval]);
 
-  const loadMonitorStatus = useCallback(() => {
-    // v5_per_user_endpoints_001 — per-user endpoints (legacy singleton stopte alle bots tegelijk)
-    fetch(`${API}/api/trade/bot/status/${userId}`).then(r => r.json()).then(d => setMonitorStatus(d.status || null)).catch(() => {});
-    fetch(`${API}/api/trade/bot/decisions/${userId}?limit=20`).then(r => r.json()).then(d => setDecisions(d.decisions || [])).catch(() => {});
+  const loadMonitorStatus = useCallback(async () => {
+    try {
+      const d = await fetch(`${API}/api/trade/bot/status/${userId}`).then(r => r.json());
+      setMonitorStatus(d.status || null);
+    } catch {}
+    try {
+      const d = await fetch(`${API}/api/trade/bot/decisions/${userId}?limit=20`).then(r => r.json());
+      setDecisions(d.decisions || []);
+    } catch {}
   }, [userId]);
 
   const loadBalance = useCallback(() => {
-    fetch(`${API}/api/trade/bitvavo/balance/${userId}`).then(r => r.json()).then(d => setBvBalance(d)).catch(() => {});
+    return fetch(`${API}/api/trade/bitvavo/balance/${userId}`).then(r => r.json()).then(d => setBvBalance(d)).catch(() => {});
   }, [userId]);
 
   const loadPotjes = useCallback(() => {
-    fetch(`${API}/api/trade/potjes/${userId}`).then(r => r.json()).then(d => setPotjes(d)).catch(() => {});
+    return fetch(`${API}/api/trade/potjes/${userId}`).then(r => r.json()).then(d => setPotjes(d)).catch(() => {});
   }, [userId]);
 
   const loadContext = useCallback(() => {
-    fetch(`${API}/api/trade/context/${candleMarket}`).then(r => r.json()).then(d => setMarketContext(d)).catch(() => {});
+    return fetch(`${API}/api/trade/context/${candleMarket}`).then(r => r.json()).then(d => setMarketContext(d)).catch(() => {});
   }, [candleMarket]);
 
   const refreshAllContexts = async () => {
@@ -174,7 +185,20 @@ export function TraderPage({ onNavigate }) {
     setContextLoading(false);
   };
 
-  useEffect(() => { loadCoreData(); loadLiveData(); loadMonitorStatus(); loadBalance(); loadPotjes(); loadContext(); }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadContext]);
+  // v5_sequential_load_001 (bug B2 fix) — laad data in volgorde ipv parallel
+  // om UI freezes en api-burst te voorkomen. Pollers blijven onafhankelijk lopen.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      if (cancelled) return; await loadCoreData();
+      if (cancelled) return; await loadLiveData();
+      if (cancelled) return; await loadMonitorStatus();
+      if (cancelled) return; await loadBalance();
+      if (cancelled) return; await loadPotjes();
+      if (cancelled) return; await loadContext();
+    })();
+    return () => { cancelled = true; };
+  }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadContext]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {

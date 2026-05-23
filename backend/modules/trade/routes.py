@@ -566,6 +566,20 @@ async def update_monitor_candle(user_id: str, body: UpdateCandleBody):
     return monitor.update_candle_interval(body.candle_interval)
 
 
+# v5_autotrade_hotswap_001 — toggle auto_trade aan/uit zonder restart
+class UpdateAutoTradeBody(BaseModel):
+    auto_trade: bool
+
+
+@router.post("/bot/auto-trade/{user_id}")
+async def update_bot_auto_trade(user_id: str, body: UpdateAutoTradeBody):
+    """Zet auto_trade aan/uit voor user's bot. Persisteert direct naar registry zodat
+    de waarde een backend-restart overleeft (bug B1 fix)."""
+    from .monitor import get_user_monitor
+    monitor = get_user_monitor(user_id)
+    return monitor.update_auto_trade(body.auto_trade)
+
+
 
 
 # ============================================================

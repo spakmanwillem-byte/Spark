@@ -677,6 +677,19 @@ class MonitorService:
             logger.info(f"Candle interval hot-updated voor {self._user_id}: {ci}")
             return {"success": True, "candle_interval": ci, "running": self._running}
 
+    # v5_autotrade_hotswap_001 — toggle auto_trade aan/uit zonder restart en persisteer
+    def update_auto_trade(self, auto_trade: bool) -> Dict:
+        with self._lock:
+            self._auto_trade = bool(auto_trade)
+            try:
+                self._persist_state()
+                if self._user_id != "user-001":
+                    _persist_registry()
+            except Exception:
+                pass
+            logger.info(f"Auto-trade hot-updated voor {self._user_id}: {self._auto_trade}")
+            return {"success": True, "auto_trade": self._auto_trade, "running": self._running}
+
     def get_status(self) -> Dict:
         uptime = None
         if self._start_time and self._running:

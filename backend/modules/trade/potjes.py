@@ -192,6 +192,28 @@ def get_potjes(user_id: str) -> Dict:
         live_balance = None
         baseline = None
 
+    # v5_potje_mark2market_001 — haal live tickers op voor open posities (mock + live)
+    # Bug B4: potje-waarde stijgt niet mee met tokenwaarde. Fix: bereken
+    # unrealized P&L per open potje op basis van huidige market-price.
+    open_markets = sorted({p.get("market") for p in user["potjes"]
+                           if p.get("position", {}).get("is_open") and p.get("market")})
+    price_map: Dict[str, float] = {}
+    if open_markets:
+        try:
+            from modules.trade.monitor import fetch_tickers
+            symbols = [m.split("-")[0] for m in open_markets]
+            tickers = fetch_tickers(symbols)
+            for t in tickers:
+                sym = t.get("symbol") or t.get("market", "").split("-")[0]
+                last = t.get("last") or t.get("price")
+                if sym and last is not None:
+                    try:
+                        price_map[f"{sym}-EUR"] = float(last)
+                    except (TypeError, ValueError):
+                        pass
+        except Exception:
+            pass
+
     if live_balance is not None and baseline and baseline > 0:
         # Growth factor: live / baseline. Elke potje live_value = capital * growth
         growth = live_balance / baseline
@@ -200,6 +222,26 @@ def get_potjes(user_id: str) -> Dict:
     else:
         for p in user["potjes"]:
             p["live_value"] = p["capital"]
+
+    # v5_potje_mark2market_001 — voor OPEN posities: mark-to-market overschrijft live_value
+    # Formule: capital * (1 + (current_price - entry_price)/entry_price) - fees
+    for p in user["potjes"]:
+        pos = p.get("position") or {}
+        if not pos.get("is_open"):
+            continue
+        entry = pos.get("entry_price")
+        market = p.get("market")
+        current = price_map.get(market)
+        if not entry or not current or entry <= 0:
+            continue
+        profit_pct = (current - entry) / entry
+        bruto = p["capital"] * profit_pct
+        fees = p["capital"] * BITVAVO_TAKER_FEE * 2  # buy + sell roundtrip
+        netto = bruto - fees
+        p["live_value"] = round(p["capital"] + netto, 4)
+        p["unrealized_pnl"] = round(netto, 4)
+        p["unrealized_pnl_pct"] = round(profit_pct * 100, 3)
+        p["current_price"] = current
     return user
 
 

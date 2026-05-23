@@ -689,7 +689,22 @@ export function GesprekkenPage({ onNavigate }) {
         body: JSON.stringify({ message: text, user_id: userId, user_name: userName }),
       }).then(r => r.json()).catch(() => ({ success: false }));
       if (res.success) {
-        setCommunityMessages(prev => [...prev, res.message, ...(res.bot_responses || [])]);
+        // v5_gesprekken_compat_001 — ondersteunt nieuwe (messages) en oude (message+bot_responses) response
+        if (Array.isArray(res.messages) && res.messages.length > 0) {
+          // help / safeword / dnd_intro: server geeft alleen bot-antwoord(en) terug,
+          // user-message wordt server-side opgeslagen → voeg lokaal toe voor directe feedback
+          const userEcho = {
+            id: `tmp-${Date.now()}`,
+            user_id: userId,
+            user_name: userName,
+            message: text,
+            is_bot: false,
+            timestamp: new Date().toISOString(),
+          };
+          setCommunityMessages(prev => [...prev, userEcho, ...res.messages.filter(Boolean)]);
+        } else if (res.message) {
+          setCommunityMessages(prev => [...prev, res.message, ...(res.bot_responses || []).filter(Boolean)]);
+        }
       }
       setSendingCommunity(false);
     } else if (activeTab === 'prive') {
@@ -878,7 +893,7 @@ export function GesprekkenPage({ onNavigate }) {
                   ) : communityMessages.length === 0 ? (
                     <p className="text-center text-slate-500 text-xs">Geen nieuwe berichten in deze sessie. Typ iets!</p>
                   ) : (
-                    communityMessages.map(msg => (
+                    communityMessages.filter(Boolean).map(msg => (
                       <CommunityBubble key={msg.id} msg={msg} isOwn={msg.user_id === userId} />
                     ))
                   )}

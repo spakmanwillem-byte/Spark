@@ -811,3 +811,10 @@ Dutch (always respond in Dutch).
 
 ## Tech stack
 React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergentintegrations
+
+## 2026-05-23 — KB sort-recent fix
+- KB v1: `sort_by="recent"` (default) en `"updated"` nu correct geïmplementeerd in service.get_all() — sorteert op metadata.created_at / updated_at desc. Voorheen viel sort terug op file-order waardoor nieuwe kaarten "onzichtbaar" leken na opslaan.
+- KB v2 inbox: sortering nu recent-aangemaakt eerst (footnote.aangemaakt_op / laatst_bewerkt_op desc), met fallback op priority + alfabetisch. Nieuwe handmatige kaart verschijnt direct bovenaan.
+- KB v2 lades: sortering nu recent-bewerkt eerst i.p.v. alfabetisch.
+- KB v2 "Nieuwe kaart" knop: opent de zojuist aangemaakte kaart automatisch in edit-mode in het detail-panel.
+- KB v1 CreatePanel: na aanmaak schakelt automatisch terug naar "Alles" tab met sort=recent zodat de nieuwe kaart bovenaan zichtbaar is.

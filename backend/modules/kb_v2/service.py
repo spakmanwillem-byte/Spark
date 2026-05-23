@@ -100,8 +100,12 @@ def list_lade(lade: str, limit: int = 50, offset: int = 0, search: str = "") -> 
         s = search.lower().strip()
         kaarten = [k for k in kaarten if s in (k.get("begrip", "") or "").lower()]
     total = len(kaarten)
-    # Sorteer alfabetisch op begrip
+    # v6_kbv2_sort_recent — recent ingedeeld/bewerkt eerst (in plaats van alfabetisch)
+    def _ts(k):
+        fn = k.get("footnote") or {}
+        return fn.get("laatst_bewerkt_op") or fn.get("ingedeeld_op") or fn.get("aangemaakt_op") or ""
     kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower())
+    kaarten = sorted(kaarten, key=_ts, reverse=True)
     return {
         "lade": lade,
         **LADE_META[lade],
@@ -122,12 +126,17 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
         s = search.lower().strip()
         kaarten = [k for k in kaarten if s in (k.get("begrip", "") or "").lower()]
     total = len(kaarten)
-    # Sorteer: missing_laag1 (heeft niets) eerst onderaan, ties/no_match boven
-    priority = {"tag_tie": 0, "no_match": 1, "missing_laag1": 2}
-    kaarten = sorted(
-        kaarten,
-        key=lambda k: (priority.get(k.get("_inbox_reason", ""), 9), (k.get("begrip") or "").lower())
-    )
+    # v6_kbv2_sort_recent — recent aangemaakt/bewerkt eerst, dan oude inbox-prio
+    # Manueel toegevoegde kaarten (footnote.aangemaakt_op) komen bovenaan zodat
+    # gebruikers hun nieuw aangemaakte kaart direct terugzien.
+    priority = {"tag_tie": 1, "no_match": 2, "missing_laag1": 3}
+    # Eerst alfabetisch (stable), dan op ts desc, dan op reden-prio.
+    kaarten = sorted(kaarten, key=lambda k: (k.get("begrip") or "").lower())
+    kaarten = sorted(kaarten, key=lambda k: priority.get(k.get("_inbox_reason", ""), 9))
+    def _ts(k):
+        fn = k.get("footnote") or {}
+        return fn.get("aangemaakt_op") or fn.get("laatst_bewerkt_op") or ""
+    kaarten = sorted(kaarten, key=_ts, reverse=True)
     return {
         "total": total,
         "offset": offset,

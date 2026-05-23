@@ -5,13 +5,17 @@
       "interval": 30,
       "market": "BCH-EUR",
       "markets": [
-        "BCH-EUR"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR"
       ],
       "candle_interval": "1h",
       "auto_trade": false,
       "trade_amount": 5.0,
       "use_mock": true,
-      "use_potjes": true
+      "use_potjes": false
     },
     {
       "user_id": "user-a0ee2d7e",
@@ -27,5 +31,5 @@
       "use_potjes": true
     }
   ],
-  "saved_at": "2026-05-23T22:25:28.234548+00:00"
+  "saved_at": "2026-05-23T22:32:45.800035+00:00"
 }

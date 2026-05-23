@@ -94,6 +94,10 @@ class KnowledgeService:
             entries = [e for e in entries if (e.get("belangrijkheid") or 0) >= 6]
 
         # Sort
+        def _ts(e, key):
+            m = e.get("metadata") or {}
+            return m.get(key) or e.get("detected_at") or ""
+
         if sort_by == "alpha-asc":
             entries.sort(key=lambda e: (e.get("begrip") or "").lower())
         elif sort_by == "alpha-desc":
@@ -102,6 +106,12 @@ class KnowledgeService:
             entries.sort(key=lambda e: e.get("belangrijkheid") or 0, reverse=True)
         elif sort_by == "importance-low":
             entries.sort(key=lambda e: e.get("belangrijkheid") or 0)
+        elif sort_by == "recent":
+            # v6_kb_sort_recent — nieuwste aangemaakt eerst (fallback: detected_at)
+            entries.sort(key=lambda e: _ts(e, "created_at"), reverse=True)
+        elif sort_by == "updated":
+            # Recent bewerkt eerst
+            entries.sort(key=lambda e: _ts(e, "updated_at"), reverse=True)
         elif sort_by == "review-priority":
             # Nooit gereviewd eerst (reviewed_at == None), daarna oudste reviewed_at,
             # binnen gelijke groep: oudste created_at eerst (oudste kaarten dus eerst).

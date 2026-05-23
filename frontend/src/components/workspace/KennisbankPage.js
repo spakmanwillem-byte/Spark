@@ -376,7 +376,7 @@ export function KennisbankPage({ onNavigate }) {
         {/* v4_kb_create_001 Create Panel */}
         {statusFilter === 'create' && (
           <CreatePanel
-            onCreated={() => { fetchEntries(); fetchStats(); }}
+            onCreated={() => { fetchEntries(); fetchStats(); setStatusFilter('all'); setSortBy('recent'); setPage(1); }}
             apiBase={API}
           />
         )}

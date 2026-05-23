@@ -192,8 +192,22 @@ export function KennisbankV2Page({ onNavigate }) {
                   }).then(x => x.json());
                   if (r && (r.success || r.kaart)) {
                     setActiveTab('inbox');
+                    setSearch('');
+                    setReasonFilter('');
+                    setPage(0);
                     await loadStats();
                     await loadItems();
+                    // v6_kbv2_autoselect — open nieuwe kaart direct in edit-mode
+                    if (r.kaart) {
+                      setSelectedCard(r.kaart);
+                      setEditMode(true);
+                      setEditForm({
+                        lagen: { ...(r.kaart.lagen || {}) },
+                        ws5:   { ...(r.kaart.ws5 || {}) },
+                        tags:  [...(r.kaart.tags || [])],
+                        begrip: r.kaart.begrip || '',
+                      });
+                    }
                   } else {
                     alert('Kon niet aanmaken: ' + JSON.stringify(r));
                   }

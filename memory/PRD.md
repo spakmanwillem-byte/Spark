@@ -1,6 +1,20 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v6_spark_history_001 + papier-boekhouding** (sessie 9 — slot 3):
+  - 📜 **Spark Boekhouding-paneel** in Wallet (Spark-view):
+    - Nieuwe endpoint `GET /api/spark/kasboek/history` voegt 3 bronnen samen:
+      - Kasboek-entries (BTW-afroming + self-mint outflows)
+      - ROAR `buy_roar` transactions → "🛒 Treasury verkoop" (Spark verkoopt uit 1M pool)
+      - ROAR `spark_self_mint` transactions → "🪙 Self-mint"
+    - Sorteert chronologisch, toont label/EUR/n_tokens per regel
+    - Frontend: in Spark-view (admin + walletView=spark) toont WalletPage automatisch dit paneel ipv gewone deposits
+    - Header titel adaptief: "Spark Boekhouding (kasboek + treasury)" vs "Transactie Geschiedenis"
+  - 💸 **Boekhouder-spiegel** klopt nu eindelijk: voor elke aankoop zie je
+    - User wallet: -€EUR / +ROAR (zoals bonnetje)
+    - Spark Boekhouding: +€BTW (kasboek) / -ROAR (treasury) / EUR-grondslag (treasury_sale)
+  - ✅ Verified: 3 history-entries renderen (Gijs koop €20.80 → BTW €4.37 + treasury sale -2 ROAR; Willem oudere koop €50.50 → -5 ROAR)
+
 - 2026-05-23 **v5_treasury_fix_001 + v6_mint_from_wallet_001 + MONEY_MODEL.md** (sessie 9 — slot 2):
   - 💰 **Treasury-bug gefixed**: shop/routes.py haalde tokens uit Spark's persoonlijke balance ipv uit `treasury_pool` (1M pool). Nu correct gescheiden:
     - `spark_treasury` (1M-pool, nu 999,978) — apart veld in API response

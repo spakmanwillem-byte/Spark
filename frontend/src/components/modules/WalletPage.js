@@ -33,6 +33,8 @@ export function WalletPage({ onNavigate }) {
   const [giftInbox, setGiftInbox] = useState([]);
   const [giftOutbox, setGiftOutbox] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  // v6_spark_history_001 — Spark-specific transactie-papier (kasboek + treasury verkopen + self-mints)
+  const [sparkHistory, setSparkHistory] = useState([]);
 
   const loadGifts = useCallback(() => {
     if (!userId) return;
@@ -48,10 +50,15 @@ export function WalletPage({ onNavigate }) {
       fetch(`${API}/api/wallet/user/${userId}`).then(r => r.json()).catch(() => ({})),
       fetch(`${API}/api/wallet/transactions/${userId}?limit=100`).then(r => r.json()).catch(() => ({ transactions: [] })),
       fetch(`${API}/api/shop/token/balance/${userId}`).then(r => r.json()).catch(() => null),
-    ]).then(([w, t, r]) => {
+      // v6_spark_history_001 — combi-history voor Spark wallet view
+      userId === 'user-000'
+        ? fetch(`${API}/api/spark/kasboek/history?limit=100`).then(r => r.json()).catch(() => ({ history: [] }))
+        : Promise.resolve({ history: [] }),
+    ]).then(([w, t, r, sh]) => {
       setWallet(w);
       setTransactions(t.transactions || []);
       setRoar(r);
+      setSparkHistory(sh.history || []);
       setLoading(false);
     });
   };
@@ -277,7 +284,8 @@ export function WalletPage({ onNavigate }) {
             <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
               <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-                  <Receipt className="w-4 h-4 text-amber-400" /> Transactie Geschiedenis
+                  <Receipt className="w-4 h-4 text-amber-400" />
+                  {walletView === 'spark' && isAdmin ? 'Spark Boekhouding (kasboek + treasury)' : 'Transactie Geschiedenis'}
                 </h3>
                 <div className="flex items-center gap-2">
                   <select
@@ -303,11 +311,39 @@ export function WalletPage({ onNavigate }) {
                   />
                 </div>
                 <div className="space-y-1 max-h-[420px] overflow-y-auto">
-                  {filtered.map(tx => (
-                    <TransactionRow key={tx.id} tx={tx} />
-                  ))}
-                  {filtered.length === 0 && (
-                    <div className="py-8 text-center text-slate-500 text-xs">Geen transacties gevonden</div>
+                  {/* v6_spark_history_001 — in Spark-view tonen we kasboek + treasury verkopen + mints ipv gewone deposits */}
+                  {walletView === 'spark' && isAdmin ? (
+                    sparkHistory.length === 0 ? (
+                      <div className="py-8 text-center text-slate-500 text-xs">Nog geen Spark-transacties</div>
+                    ) : sparkHistory.map((h, i) => (
+                      <div key={i} data-testid="spark-history-row" className="flex items-start justify-between px-3 py-2 hover:bg-slate-800/30 rounded-lg border-b border-slate-800/30 last:border-0">
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs text-white truncate">{h.label} · <span className="text-slate-400">{h.description}</span></div>
+                          <div className="text-[10px] text-slate-500 mt-0.5">{(h.ts || '').slice(0, 16).replace('T', ' ')}{h.bron_user && ` · ${h.bron_user}`}</div>
+                        </div>
+                        <div className="text-right ml-2 shrink-0">
+                          {h.amount_eur != null && (
+                            <div className={`text-xs font-semibold ${h.amount_eur >= 0 ? 'text-emerald-300' : 'text-red-300'}`}>
+                              {h.amount_eur >= 0 ? '+' : ''}€{h.amount_eur.toFixed(2)}
+                            </div>
+                          )}
+                          {h.n_tokens != null && h.n_tokens !== 0 && (
+                            <div className={`text-[10px] ${h.n_tokens >= 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                              {h.n_tokens >= 0 ? '+' : ''}{h.n_tokens} ROAR
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      {filtered.map(tx => (
+                        <TransactionRow key={tx.id} tx={tx} />
+                      ))}
+                      {filtered.length === 0 && (
+                        <div className="py-8 text-center text-slate-500 text-xs">Geen transacties gevonden</div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

@@ -201,6 +201,10 @@ app.include_router(insights_router, prefix="/api")
 from modules.settings import settings_router
 app.include_router(settings_router, prefix="/api")
 
+# Module 26: Admin Logs (v5_spark_logger_001 — per-module trace logs voor observability)
+from modules.admin import logs_router as admin_logs_router
+app.include_router(admin_logs_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============
@@ -308,7 +312,17 @@ async def startup():
     except Exception as e:
         print(f"   ⚠️  Could not schedule monitor resume: {e}")
     print("=" * 50)
-    # v4_storage_cache_002 — Cache warmup: laad grote files alvast in geheugen
+    # v5_spark_logger_001 — opschonen oude logs (> 28 dagen)
+    try:
+        from modules.core.spark_logger import purge_old_logs, log_event
+        p = purge_old_logs()
+        print(f"   🧹 Logs purge: {p['deleted_dirs']} day-folders verwijderd (cutoff {p['cutoff']})")
+        log_event("system", "startup", intent="backend startup gereed", detail={
+            "purged_dirs": p["deleted_dirs"], "cutoff": p["cutoff"],
+        })
+    except Exception as e:
+        print(f"   ⚠️  Log purge failed: {e}")
+    print("=" * 50)
     # Voorkomt cold-start latency op de eerste user request (chat, verbanden, KB-zoek).
     try:
         import time as _t

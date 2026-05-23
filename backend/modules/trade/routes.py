@@ -655,21 +655,34 @@ async def admin_list_bots():
     all_users = users_data.get("users", []) if isinstance(users_data, dict) else []
     registered = set(_load_registered_users())
 
+    # v5_shadow_cleanup_001 — ROAR balances voor token-gate
+    roar_fp = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
+    roar_data = load_json(roar_fp, default={})
+    roar_balances = roar_data.get("balances", {}) if isinstance(roar_data, dict) else {}
+
     # Bestaande bots ophalen
     bots = list_running_bots()
     bots_by_uid = {b.get("user_id"): b for b in bots if b.get("user_id")}
 
-    # Voor elke menselijke user: zorg dat er een entry is
+    # Voor elke menselijke user: zorg dat er een entry is.
+    # v5_shadow_cleanup_001 — alleen lazy-slot tonen als user ≥1 ROAR token heeft,
+    # proactief geregistreerd is, óf een running/paused bot heeft. Voorkomt
+    # "schaduw-traders" zoals Gijs/Nick die ooit een token hadden maar nu 0.
     for u in all_users:
         uid = u.get("id") or u.get("user_id")
         if not uid or uid.startswith("bot-"):
             continue
         if uid in bots_by_uid:
             continue
+        tokens = int(roar_balances.get(uid, 0) or 0)
+        gradatie = u.get("gradatie", 7)
+        # Skip lazy-slot als geen token, niet proactief geregistreerd, en geen admin
+        if tokens < 1 and uid not in registered and gradatie > 1 and uid != "user-000":
+            continue
         bots_by_uid[uid] = {
             "user_id": uid,
             "user_naam": u.get("naam") or u.get("name") or uid,
-            "gradatie": u.get("gradatie"),
+            "gradatie": gradatie,
             "running": False,
             "paused": False,
             "cycles": 0,
@@ -683,6 +696,7 @@ async def admin_list_bots():
             "use_potjes": True,
             "uptime_seconds": 0,
             "lazy_slot": True,
+            "tokens": tokens,
         }
 
     # Verrijk bestaande bot-entries met user-naam en gradatie

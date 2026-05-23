@@ -26,6 +26,7 @@ from . import identity_intent_service
 from . import action_intents_service
 from . import time_intent_service
 from . import relation_extraction_service
+from modules.core.spark_logger import traced
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 snap = SnapNLPService()
@@ -50,6 +51,7 @@ class SnapRequest(BaseModel):
 
 
 @router.post("/message")
+@traced(intent="Spark chat-bericht verwerken", module="chat", log_args=False)
 async def process_message(req: ChatMessage):
     """
     Verwerk een chat bericht:

@@ -836,7 +836,7 @@ export function GesprekkenPage({ onNavigate }) {
                 </div>
               )}
               <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
-                {sparkMessages.map(msg => (
+                {sparkMessages.filter(Boolean).map(msg => (
                   <SparkBubble key={msg.id} msg={msg} sparkAvatarUrl={sparkAvatarUrl} />
                 ))}
                 <div ref={messagesEndRef} />
@@ -1027,7 +1027,7 @@ export function GesprekkenPage({ onNavigate }) {
                           </div>
                         </div>
                       ) : (
-                        priveMessages.map(m => {
+                        priveMessages.filter(Boolean).map(m => {
                           const fromMe = m.from_user_id === userId;
                           return (
                             <div key={m.id} className={`flex ${fromMe ? 'justify-end' : 'justify-start'}`}>

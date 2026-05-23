@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Search, Upload, Trash2, X, File as FileIcon,
   Image as ImageIcon, Music, Video, Download, Edit3, Save, Tag,
-  MessageSquare, Server, FileText, Users
+  MessageSquare, Server, FileText, Users, Code2
 } from 'lucide-react';
 import { AvatarGallerySection } from './AvatarGallerySection';
+import { LogsBrowser } from './LogsBrowser';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -14,6 +15,8 @@ const CATEGORIES = [
   { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7' },
   { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899' },
   { id: 'dialogen', label: 'Dialogen', icon: MessageSquare, color: '#06b6d4' },
+  // v5_spark_logger_001 — module-trace logs (admin observability)
+  { id: 'logs', label: 'Logs', icon: Code2, color: '#f59e0b' },
 ];
 
 function formatBytes(n) {
@@ -41,6 +44,12 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
   const [editForm, setEditForm] = useState({});
 
   const load = useCallback(async () => {
+    // Logs-tab gebruikt eigen browser, niet system-archive API
+    if (activeTab === 'logs') {
+      setLoading(false);
+      setFiles([]);
+      return;
+    }
     setLoading(true);
     const params = new URLSearchParams({ category: activeTab });
     if (search) params.append('q', search);
@@ -173,6 +182,9 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
+      {/* v5_spark_logger_001 — Logs tab rendert eigen browser */}
+      {activeTab === 'logs' && <LogsBrowser />}
+
       {/* v5_foto_subtabs_001 — Foto sub-tabs (Algemene foto's / Avatar Galerij) */}
       {activeTab === 'foto' && (
         <div className="flex items-center gap-1 p-1 bg-slate-800/40 rounded-xl w-fit">
@@ -210,8 +222,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* Search + tag filter (verberg in avatars-mode) */}
-      {!(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+      {/* Search + tag filter (verberg in avatars-mode + logs-mode) */}
+      {activeTab !== 'logs' && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
         <div className="flex flex-wrap gap-2">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
@@ -236,8 +248,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* Content (verberg in avatars-mode) */}
-      {!(activeTab === 'foto' && fotoSubTab === 'avatars') && (
+      {/* Content (verberg in avatars-mode + logs-mode) */}
+      {activeTab !== 'logs' && !(activeTab === 'foto' && fotoSubTab === 'avatars') && (
         loading ? (
           <div className="text-center py-12 text-xs text-slate-500">Laden...</div>
         ) : files.length === 0 ? (

@@ -1,6 +1,24 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_spark_logger_001 + v5_barks_001 + v5_shadow_cleanup_001** (zelfde sessie, na bugbatch):
+  - 🔭 **Observability fundament** (`modules/core/spark_logger.py`):
+    - `@traced(intent="...")` decorator: pre + post + error logs met `duration_ms` en result-summary
+    - JSON-Lines per module: `/data/system/logs/YYYY/MM/DD/{module}.jsonl`
+    - 28-dagen retentie (auto-purge bij startup)
+    - `log_event()` helper voor handmatige events buiten functie-grenzen
+    - Toegepast op kritieke routes: `bots.send_community_message`, `chat.process_message`
+    - **Verplichting voor nieuwe modules** vastgelegd in `/app/memory/ROADMAP.md`
+  - 🪟 **Admin Logs Browser** (`Beheer → Instellingen → Archief → Logs` tab):
+    - Boom-navigatie YYYY/MM/DD → modules
+    - Records-pane met phase-filter (alle/pre/post/error/event)
+    - Endpoints: `GET /api/admin/logs/index`, `GET /api/admin/logs/read`, `POST /api/admin/logs/purge`
+  - 🤖 **F1 — Mr Smith login counter bark**: telt logins per user; bij 3/4/5 → bark in community ("Ik zie je wel, X. 👀"), bij 6 → reset naar 0. Counter in `/data/system/login_counters.json`. Hook in `auth/routes.login`
+  - ⏰ **F2 — Harry mirror-time bark**: lazy check bij `GET /community/messages` — als HUIDIGE tijd HH:MM is met H==M (11:11, 12:12 ... 23:23), post Harry "⏰ HH:MM — een spiegel-minuut. Even stilstaan?" (max 1x per minuut per dag, via `bark_kind_id` dedup)
+  - 🌸 **F3 — Madelief bug-pointer**: als user-bericht "bug/fout/werkt niet/kapot/crash/stuk" bevat, voegt Madelief een bark toe met instructie naar Notities & Taken → Bug-melder (geen duplicate als Madelief al via triggers reageerde)
+  - 🧹 **Schaduwtrader cleanup**: Gijs (user-a0ee2d7e) en Nick (user-4d81e2a4) bots gestopt + uit registry verwijderd. `milestone_first_roar_token` achievement teruggedraaid (incl. -50 XP elk). `admin/bots` endpoint heeft nu token-gate: lazy-slot users zonder tokens + zonder proactieve registratie verschijnen niet meer in Analytics
+  - 🩹 **Defensive guards in GesprekkenPage**: `sparkMessages.filter(Boolean).map`, `priveMessages.filter(Boolean).map` — voorkomt zelfde-soort crashes als B3 bij toekomstige response-format changes
+
 - 2026-05-23 **v5_bugbatch_001: B1+B2+B3+B4 in 1 sessie** (later vandaag):
   - 🩹 **B3 fix — Community whitescreen op "help"**: bug zat NIET in `CommunityPage.js` zoals handoff suggereerde, maar in `GesprekkenPage.js` Community-tab. `setCommunityMessages(prev => [...prev, res.message, ...res.bot_responses])` las het OUDE response-formaat. Backend retourneert nu `{messages: [...]}` voor help/safeword/dnd → `res.message` was `undefined` → crash op `.map(msg => msg.user_id)`. Fix: `v5_gesprekken_compat_001` ondersteunt beide formats + optimistic user-echo + `.filter(Boolean)` defensive guard
   - 🤖 **B1 fix — Spark auto_trade persistence**: handoff hot-swapte `m._auto_trade=True` via Python maar dat persisteerde NIET. Bij elke backend-restart resumde Spark met `auto_trade=false` uit registry JSON → geen buys. Fix: nieuwe `MonitorService.update_auto_trade()` + `POST /api/trade/bot/auto-trade/{user_id}` endpoint die `_persist_registry()` triggert. Spark staat nu permanent op auto_trade=true

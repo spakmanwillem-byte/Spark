@@ -39,6 +39,13 @@ async def login(request: LoginRequest):
     # Update activity
     AuthService.heartbeat(user.get("id"))
 
+    # v5_barks_001 — F1: Mr Smith login-counter bark (3/4/5 → bark, 6 → reset)
+    try:
+        from modules.bots.proactive_barks import handle_login_bark
+        handle_login_bark(user.get("id"), user.get("naam") or user.get("name") or "")
+    except Exception:
+        pass
+
     # v4_grad_titel_001: voeg gradatie_titel toe voor warme weergave in UI
     try:
         ginfo = AuthService.get_gradatie_info(user.get("gradatie", 7))

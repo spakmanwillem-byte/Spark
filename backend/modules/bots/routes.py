@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import secrets
 import uuid
 from modules.core.storage import load_json, save_json
+from modules.core.spark_logger import traced, log_event
 
 router = APIRouter(prefix="/bots", tags=["bots"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
@@ -105,6 +106,12 @@ class ChatMessage(BaseModel):
 
 @router.get("/community/messages")
 async def get_community_messages(limit: int = 50):
+    # v5_barks_001 — F2: Harry mirror-time bark (alleen als nu HH:MM met H==M)
+    try:
+        from .proactive_barks import inject_time_barks
+        inject_time_barks()
+    except Exception:
+        pass
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     messages = data.get("messages", [])
     messages.sort(key=lambda m: m.get("timestamp", ""), reverse=True)
@@ -146,6 +153,7 @@ async def get_community_messages(limit: int = 50):
 
 
 @router.post("/community/send")
+@traced(intent="community-bericht verwerken", module="bots", log_args=False)
 async def send_community_message(msg: ChatMessage):
     data = load_json(COMMUNITY_FILE, default={"messages": []})
     now = datetime.now(timezone.utc).isoformat()
@@ -282,6 +290,15 @@ async def send_community_message(msg: ChatMessage):
     # Replace {user} placeholder
     for resp in bot_responses:
         resp["message"] = resp["message"].replace("{user}", msg.user_name)
+
+    # v5_barks_001 — F3: Madelief bug-pointer als user "bug/fout/werkt niet" zegt
+    try:
+        from .proactive_barks import check_bug_pointer_bark
+        bug_bark = check_bug_pointer_bark(msg.message)
+        if bug_bark and not any(r.get("user_id") == "bot-madelief" for r in bot_responses):
+            bot_responses.append(bug_bark)
+    except Exception:
+        pass
 
     data["messages"].extend(bot_responses)
     save_json(COMMUNITY_FILE, data)

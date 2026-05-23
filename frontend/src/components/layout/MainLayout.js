@@ -30,6 +30,7 @@ export const navigationConfig = {
     items: [
       { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
       { id: 'knowledge', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
+      { id: 'knowledge-v2', label: 'Kennisbank v2', icon: BookOpen, path: '/spark/kennisbank-v2', badge: 'nieuw' },
       { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
       { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
       { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },

@@ -19621,11 +19621,187 @@
         "session_id": "default",
         "gesprek_nummer": 750
       }
+    },
+    {
+      "id": "conv-ebcd4876",
+      "timestamp": "2026-05-23T12:13:44.991425+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een vriend?",
+      "spark_response": "**vriend**: Een vriend is iemand met wie een persoon een sociale, persoonlijke of emotionele band heeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "vriend"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 751
+      }
+    },
+    {
+      "id": "conv-b9c2cb2a",
+      "timestamp": "2026-05-23T12:13:45.140350+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over knuffelvriend",
+      "spark_response": "Ik heb nog niets in mijn kennisbank over **knuffelvriend**. Wil je dat ik iets nieuws leer over dit onderwerp?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 752
+      }
+    },
+    {
+      "id": "conv-e5d17785",
+      "timestamp": "2026-05-23T12:14:55.920524+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over knuffelvriend",
+      "spark_response": "Ik heb nog niets in mijn kennisbank over **knuffelvriend**. Wil je dat ik iets nieuws leer over dit onderwerp?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 753
+      }
+    },
+    {
+      "id": "conv-03324532",
+      "timestamp": "2026-05-23T12:14:56.063820+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over batterij",
+      "spark_response": "Ik heb **8** kaarten over **batterij** in mijn kennisbank. Een paar: **Energie**, **Accu**, **Batterij**, **Elektrische auto**, **Oplader**. Welke wil je dat ik uitleg?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 754
+      }
+    },
+    {
+      "id": "conv-647b75a8",
+      "timestamp": "2026-05-23T12:15:09.281937+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over geluk",
+      "spark_response": "Ik heb **5** kaarten over **geluk** in mijn kennisbank. Een paar: **Klavervier**, **Wat is geluk**, **geluk**, **yhee**, **Wat is de definitie van geluk**. Welke wil je dat ik uitleg?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 755
+      }
+    },
+    {
+      "id": "conv-cd03aa6e",
+      "timestamp": "2026-05-23T12:15:21.747785+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over zonnebloem",
+      "spark_response": "Ik heb nog niets in mijn kennisbank over **zonnebloem**. Wil je dat ik iets nieuws leer over dit onderwerp?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "topic_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 756
+      }
+    },
+    {
+      "id": "conv-2a385156",
+      "timestamp": "2026-05-23T12:15:21.893413+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over emotie blij vreugde",
+      "spark_response": "Ik ken **emotie blij vreugde** nog niet specifiek, maar in mijn **voelen**-lade vind ik wel iets over **Blij**: Blij is een gevoel van vreugde of tevredenheid.\n\n_Wil je dat ik **emotie blij vreugde** apart leer?_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "blij",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "blij"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": "topic_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "kbv2_neighbor"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 757
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 750,
-    "last_updated": "2026-05-23T11:32:39.277083+00:00"
+    "total_conversations": 757,
+    "last_updated": "2026-05-23T12:15:21.893413+00:00"
   }
 }

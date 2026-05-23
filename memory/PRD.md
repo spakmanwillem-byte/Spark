@@ -1,6 +1,29 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_kbv2_001 — Kennisbank v2 (4 Lades + Inbox + Graceful Fallback)** (sessie 3):
+  - 🗂️ **Migratie-script** (`backend/scripts/migrate_kb_v2.py`, idempotent, dry-run + commit modes)
+    - v1 `knowledge_base.json` (5288 kaarten) → **4 lades** op basis van dominant-tag classifier
+    - Backup gegarandeerd: `knowledge_base.json.v1_backup_20260523_120215` (v1 ongewijzigd)
+    - Verdeling: 🌸 **Voelen** 248 / 💬 **Spreken** 329 / 🧠 **Weten** 1071 / 🎭 **Doen** 632 / 📥 **Inbox** 3008
+    - Inbox-redenen: 633 tag-tie, 160 no-match, 2215 missing-laag1 (jouw onbeantwoord-queue)
+  - 🛠️ **KB v2 service + routes** (`modules/kb_v2/`):
+    - `GET /api/kb/v2/stats`, `lade/{id}`, `inbox`, `find`, `fallback`, `audit`
+    - `POST /api/kb/v2/classify` (inbox → lade), `edit`, `inbox/add`
+    - Alle write-ops `@traced` decoreerd (volgens logger-verplichting)
+    - Per-kaart footnote-metadata: bron, ingedeeld_door/op, vorige_versie_v1, vertrouwen, belangrijkheid
+  - 🎨 **UI `KennisbankV2Page.js`** met 5 sub-tabs (Inbox · Voelen · Spreken · Weten · Doen):
+    - Inbox toont reden-badge (Tag-tie/Geen match/Geen laag1) + filter-knoppen
+    - Kaart-detail: alle 4 lagen + 5W collapse + tags + footnote + 4 indeel-knoppen
+    - Edit-mode voor lagen/ws5/tags/begrip met save-flow
+    - **Self-audit modal** — scan op lege laag1, lage vertrouwen, ontbrekende tags
+    - Sidebar nav-item "Kennisbank v2" met "nieuw" badge
+  - 🎭 **#DeWillem Graceful Fallback** (uit v1-filosofie!) terug in `chat/smart_intents_service.handle_topic_overview` + `chat/routes`:
+    - Direct hit → "**X** _(lade: Y)_: laag1-tekst"
+    - Buur-hit (tag-overlap) → "Ik ken X nog niet specifiek, maar in mijn Y-lade vind ik wel iets over Z. Wil je dat ik X apart leer?"
+    - **Spark zegt nooit meer alleen "weet ik niet"** — hij stapt terug en geeft context
+  - ✅ Verified e2e: classify-flow ("Aanbidden" inbox→voelen, stats 248→250, inbox 3008→3006), fallback fire (test "vertel over emotie blij vreugde" → Spark verwijst naar **Blij** in lade voelen)
+
 - 2026-05-23 **v5_spark_logger_001 + v5_barks_001 + v5_shadow_cleanup_001** (zelfde sessie, na bugbatch):
   - 🔭 **Observability fundament** (`modules/core/spark_logger.py`):
     - `@traced(intent="...")` decorator: pre + post + error logs met `duration_ms` en result-summary

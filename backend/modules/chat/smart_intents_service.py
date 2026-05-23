@@ -412,6 +412,36 @@ def handle_topic_overview(topic_query: str) -> Dict:
                 hits.append(e)
 
     if not hits:
+        # v5_kbv2_001 — #DeWillem Graceful Fallback: probeer v2 buur-kaart
+        try:
+            from modules.kb_v2 import service as kbv2
+            fb = kbv2.graceful_fallback(topic_query)
+            if fb and fb.get("type") == "direct":
+                kaart = fb["kaart"]
+                laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                if laag1:
+                    return {
+                        "type": "kbv2_direct",
+                        "message": f"**{kaart['begrip']}** _(lade: {fb['lade']})_: {laag1}",
+                        "topic": topic_query,
+                        "kbv2_card_id": kaart["id"],
+                    }
+            if fb and fb.get("type") == "neighbor":
+                kaart = fb["kaart"]
+                laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                return {
+                    "type": "kbv2_neighbor",
+                    "message": (
+                        f"Ik ken **{topic_query}** nog niet specifiek, maar in mijn **{fb['lade']}**-lade "
+                        f"vind ik wel iets over **{kaart['begrip']}**: {laag1}\n\n"
+                        f"_Wil je dat ik **{topic_query}** apart leer?_"
+                    ),
+                    "topic": topic_query,
+                    "kbv2_card_id": kaart["id"],
+                }
+        except Exception:
+            pass
+
         return {
             "type": "topic_overview",
             "message": f"Ik heb nog niets in mijn kennisbank over **{topic_query}**. Wil je dat ik iets nieuws leer over dit onderwerp?",

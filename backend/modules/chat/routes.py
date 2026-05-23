@@ -1057,6 +1057,38 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "sentence_reply")
             return response
 
+        # v5_kbv2_001 — #DeWillem Graceful Fallback via KB v2 (stap-terug-en-geef-context)
+        # Voor we onbekende woorden gaan snappen, kijk of v2 een buur-kaart kent.
+        try:
+            from modules.kb_v2 import service as kbv2
+            meaningful_first = (snap._extract_meaningful_words(text) or [None])[0]
+            if meaningful_first:
+                fb = kbv2.graceful_fallback(meaningful_first)
+                if fb and fb.get("type") == "direct":
+                    kaart = fb["kaart"]
+                    laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                    if laag1:
+                        response["type"] = "kbv2_direct"
+                        response["message"] = f"**{kaart['begrip']}** _(lade: {fb['lade']})_: {laag1}"
+                        response["kbv2_card_id"] = kaart["id"]
+                        _save_log(req, response, "kbv2_direct")
+                        return response
+                elif fb and fb.get("type") == "neighbor":
+                    kaart = fb["kaart"]
+                    laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                    response["type"] = "kbv2_neighbor"
+                    # #DeWillem: stap terug en geef context
+                    response["message"] = (
+                        f"Ik ken **{meaningful_first}** nog niet specifiek, maar in mijn **{fb['lade']}**-lade "
+                        f"vind ik wel iets over **{kaart['begrip']}**: {laag1}\n\n"
+                        f"_Wil je dat ik **{meaningful_first}** apart leer?_"
+                    )
+                    response["kbv2_card_id"] = kaart["id"]
+                    _save_log(req, response, "kbv2_neighbor")
+                    return response
+        except Exception:
+            pass  # v2 nog niet beschikbaar of leeg — val door naar normale snap-flow
+
         # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)
         index = snap._get_index()

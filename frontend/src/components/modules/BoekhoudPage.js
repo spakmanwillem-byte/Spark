@@ -101,6 +101,9 @@ export function BoekhoudPage({ onNavigate }) {
     setSummary(s);
   };
 
+  // v6_accounting_edit_kasboek_001 — uitklap-state per kasboek voor inline transactie-edit
+  const [expandedKb, setExpandedKb] = useState(null);
+
   const filteredTx = filterEntity ? transactions.filter(t => t.entity_id === filterEntity) : transactions;
   const catOptions = newTx.type === 'income' ? categories.income : categories.expense;
 
@@ -204,37 +207,78 @@ export function BoekhoudPage({ onNavigate }) {
                 <div className="space-y-3">
                   {kasboeken.map(kb => {
                     const color = entityColors[kb.id] || '#64748b';
+                    const isOpen = expandedKb === kb.id;
+                    const kbTxs = transactions.filter(t => t.entity_id === kb.id);
                     return (
-                      <div key={kb.id} data-testid={`kasboek-${kb.id}`} className="p-4 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${color}15` }}>
-                            <Building2 className="w-5 h-5" style={{ color }} />
+                      <div key={kb.id} data-testid={`kasboek-${kb.id}`} className="bg-slate-900/50 border border-slate-800 rounded-xl hover:border-slate-700 transition-colors">
+                        <button data-testid={`kasboek-toggle-${kb.id}`}
+                          onClick={() => setExpandedKb(isOpen ? null : kb.id)}
+                          className="w-full text-left p-4">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${color}15` }}>
+                              <Building2 className="w-5 h-5" style={{ color }} />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                                {kb.name}
+                                <span className="text-[10px] text-slate-500">{isOpen ? '▼' : '▶'} {isAdmin && kbTxs.length > 0 ? 'klik om transacties + bedragen aan te passen' : ''}</span>
+                              </h3>
+                              <p className="text-[10px] text-slate-500">
+                                {kb.type} | {kb.tx_count} transacties
+                                {kb.bank_info?.iban && <span className="ml-2 text-slate-400">| {kb.bank_info.iban}</span>}
+                                {kb.bank_info?.provider === 'Bitvavo' && <span className="ml-2 text-cyan-400">| Bitvavo</span>}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <p className={`text-lg font-bold ${kb.saldo >= 0 ? 'text-green-400' : 'text-red-400'}`}>&euro;{kb.saldo.toFixed(2)}</p>
+                              <p className="text-[10px] text-slate-500">Saldo</p>
+                            </div>
                           </div>
-                          <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-white">{kb.name}</h3>
-                            <p className="text-[10px] text-slate-500">
-                              {kb.type} | {kb.tx_count} transacties
-                              {kb.bank_info?.iban && <span className="ml-2 text-slate-400">| {kb.bank_info.iban}</span>}
-                              {kb.bank_info?.provider === 'Bitvavo' && <span className="ml-2 text-cyan-400">| Bitvavo</span>}
-                            </p>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="p-2 bg-slate-800/30 rounded-lg flex items-center gap-2">
+                              <ArrowDownLeft className="w-3 h-3 text-green-400" />
+                              <span className="text-xs text-green-400 font-medium">{kb.income.toFixed(2)}</span>
+                              <span className="text-[10px] text-slate-600">in</span>
+                            </div>
+                            <div className="p-2 bg-slate-800/30 rounded-lg flex items-center gap-2">
+                              <ArrowUpRight className="w-3 h-3 text-red-400" />
+                              <span className="text-xs text-red-400 font-medium">{kb.expenses.toFixed(2)}</span>
+                              <span className="text-[10px] text-slate-600">uit</span>
+                            </div>
                           </div>
-                          <div className="text-right">
-                            <p className={`text-lg font-bold ${kb.saldo >= 0 ? 'text-green-400' : 'text-red-400'}`}>&euro;{kb.saldo.toFixed(2)}</p>
-                            <p className="text-[10px] text-slate-500">Saldo</p>
+                        </button>
+                        {/* v6_accounting_edit_kasboek_001 — uitgeklapte transactie-lijst met €✎ */}
+                        {isOpen && (
+                          <div data-testid={`kasboek-tx-list-${kb.id}`} className="border-t border-slate-800 px-4 py-3 space-y-1.5">
+                            {kbTxs.length === 0 ? (
+                              <p className="text-[11px] text-slate-500 italic py-2">Geen transacties.</p>
+                            ) : kbTxs.map(tx => (
+                              <div key={tx.id} data-testid={`kb-tx-row-${tx.id}`} className="flex items-center gap-2 py-1.5 px-2 bg-slate-800/30 rounded-lg">
+                                <span className={`w-2 h-2 rounded-full ${tx.type === 'income' ? 'bg-green-400' : 'bg-red-400'}`} />
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs text-slate-200 truncate">{tx.description}</p>
+                                  <p className="text-[10px] text-slate-600">{tx.category}{tx.date && ` · ${new Date(tx.date).toLocaleDateString('nl-NL')}`}</p>
+                                </div>
+                                <span className={`text-sm font-bold ${tx.type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {tx.type === 'income' ? '+' : '-'}€{tx.amount?.toFixed(2)}
+                                </span>
+                                {isAdmin && (
+                                  <button data-testid={`kb-tx-edit-${tx.id}`} onClick={(e) => { e.stopPropagation(); editTxAmount(tx); }}
+                                    title="Bedrag aanpassen"
+                                    className="px-1.5 py-1 hover:bg-amber-500/15 text-slate-500 hover:text-amber-400 rounded text-[10px] font-bold">
+                                    €✎
+                                  </button>
+                                )}
+                                {isAdmin && (
+                                  <button data-testid={`kb-tx-delete-${tx.id}`} onClick={(e) => { e.stopPropagation(); deleteTx(tx.id); }}
+                                    className="p-1 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded">
+                                    <Trash2 className="w-3 h-3" />
+                                  </button>
+                                )}
+                              </div>
+                            ))}
                           </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="p-2 bg-slate-800/30 rounded-lg flex items-center gap-2">
-                            <ArrowDownLeft className="w-3 h-3 text-green-400" />
-                            <span className="text-xs text-green-400 font-medium">{kb.income.toFixed(2)}</span>
-                            <span className="text-[10px] text-slate-600">in</span>
-                          </div>
-                          <div className="p-2 bg-slate-800/30 rounded-lg flex items-center gap-2">
-                            <ArrowUpRight className="w-3 h-3 text-red-400" />
-                            <span className="text-xs text-red-400 font-medium">{kb.expenses.toFixed(2)}</span>
-                            <span className="text-[10px] text-slate-600">uit</span>
-                          </div>
-                        </div>
+                        )}
                       </div>
                     );
                   })}

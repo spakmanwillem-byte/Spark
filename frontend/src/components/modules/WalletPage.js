@@ -137,6 +137,30 @@ export function WalletPage({ onNavigate }) {
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
               <Minus className="w-4 h-4" /> Opnemen
             </button>
+            {/* v6_mint_from_wallet_001 — Spark "Maak Token" knop, alleen in Spark wallet view */}
+            {isAdmin && walletView === 'spark' && (
+              <button
+                data-testid="spark-mint-token-btn"
+                onClick={async () => {
+                  const ok = window.confirm('Spark gebruikt zijn EUR-wallet om 1 token uit treasury te minten.\n\nCirculating +1, prijs stijgt voor alle holders.\n\nDoorgaan?');
+                  if (!ok) return;
+                  try {
+                    const r = await fetch(`${API}/api/spark/mint/from-wallet`, {
+                      method: 'POST', headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ viewer_id: user?.id || 'user-001', amount_tokens: 1 })
+                    }).then(x => x.json());
+                    if (r.success) {
+                      alert(`🪙 Spark heeft 1 ROAR gemaakt!\n\nKosten: €${r.cost_eur}\nTreasury: ${r.new_treasury.toLocaleString()}\nSpark balance: ${r.new_spark_balance}\nSpark EUR-wallet: €${r.new_spark_eur_wallet}`);
+                      window.location.reload();
+                    } else {
+                      alert('Kon niet minten: ' + (r.detail || JSON.stringify(r)));
+                    }
+                  } catch (e) { alert('Fout: ' + e.message); }
+                }}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 transition-all border border-emerald-500/30">
+                🪙 Maak Token
+              </button>
+            )}
             {/* v5_roar_gift_001 — Gift knop naast Opnemen/Storten */}
             <button
               data-testid="open-gift-modal"

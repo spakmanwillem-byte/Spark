@@ -143,6 +143,10 @@ app.include_router(boekhouder_router, prefix="/api")
 from modules.spark_kasboek import router as spark_kasboek_router
 app.include_router(spark_kasboek_router, prefix="/api")
 
+# v6_mint_from_wallet_001 — Spark "Maak Token" flow
+from modules.spark_mint import router as spark_mint_router
+app.include_router(spark_mint_router, prefix="/api")
+
 # v5_event_overlay_001
 from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")

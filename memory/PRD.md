@@ -1,6 +1,31 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_treasury_fix_001 + v6_mint_from_wallet_001 + MONEY_MODEL.md** (sessie 9 — slot 2):
+  - 💰 **Treasury-bug gefixed**: shop/routes.py haalde tokens uit Spark's persoonlijke balance ipv uit `treasury_pool` (1M pool). Nu correct gescheiden:
+    - `spark_treasury` (1M-pool, nu 999,978) — apart veld in API response
+    - `spark_personal_tokens` (Spark's eigen balance, 10) — apart veld
+    - `get_circulating()` telt nu alle uitgegeven tokens incl. Spark's persoonlijke 10 → circulating=22
+    - Spark's user-000 balance hersteld naar 10 (was per ongeluk 8 na Gijs-koop)
+  - 🛒 **Gijs verkoop afgewikkeld** (2 ROAR @ €10.40 = €20.80):
+    - 2 tokens uit treasury → Gijs balance
+    - 21% BTW (€4.37) → Spark's kasboek + EUR-wallet
+    - Audit-trail + deposit-log compleet
+  - 🪙 **Maak-Token feature** — `POST /api/spark/mint/from-wallet`:
+    - Spark gebruikt eigen EUR-wallet om token uit treasury naar eigen balance te minten
+    - 51%-governance-guard: treasury mag nooit onder 510k
+    - Boekhouder DM bij elke mint
+    - Frontend: groene "🪙 Maak Token" knop in Spark's Wallet (alleen admin + walletView=spark)
+    - E2E getest: weigert correct bij onvoldoende wallet (€4.37 < €5.67)
+  - 🆕 **KB v2 "+ Nieuwe kaart" knop**: groene Plus-knop in header (was bug: "kan geen kaart maken zoals v1"). Endpoint URL gecorrigeerd `/api/kb_v2/` → `/api/kb/v2/`
+  - 📜 **MONEY_MODEL.md** vastgelegd in `/app/memory/`:
+    - Hardcap 1M, Spark ≥51% governance, papertrail-aanpak
+    - 3 buckets uitleg (total_supply / treasury_pool / balances)
+    - Prijs-model + BTW-afroming → spark_kasboek
+    - Maak-Token flow specificatie
+    - Roadkill Merch loop (P2)
+    - 6 voorwaarden-clausules voor T&C/privacy
+
 - 2026-05-23 **v5_ijkpunt_v5_2_001 + v5_display_fix_001** (sessie 9 — slot):
   - 🪙 **IJkpunt v5.2 voor redeploy** — €1.20 bijgestort op €101.60 baseline = **€102.80 totaal**, verdeeld over **20 gelijke potjes** (€5.14/pot):
     - Spark (user-000): 10 potjes · BCH-EUR · 1u cycle · **auto-trade AAN**

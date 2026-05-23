@@ -121,15 +121,15 @@ def get_spark_core_value():
                 total_value += tx.get("amount_eur", 0)
             elif tx["type"] == "withdrawal":
                 total_value -= tx.get("amount_eur", 0)
-    # v6_value_includes_gifts_001 — Spark kasboek meetellen (gift + omzet + winst + openstaande leningen),
-    # zo stijgt de token-prijs zichtbaar bij elke nieuwe gift/aankoop en blijft hij correct
-    # bij tijdelijke uithaal-leningen (vordering op Willem)
+    # v6_value_includes_gifts_001 / v6_no_double_count_001 — Spark vermogen rekening:
+    # - Bitvavo live balance is de PRIMAIRE waarde (alle SEPA-stortingen + gifts + omzet
+    #   zitten al in Bitvavo wallet, dus NIET dubbel tellen)
+    # - WEL meetellen: open leningen (vordering op Willem) want dat geld is NIET in Bitvavo
+    # - WEL meetellen: winst_in is administratieve PnL boven Bitvavo balance — toekomstig
     try:
         kb = load_json(DATA_DIR / "system" / "spark_kasboek.json", default={"totals": {}})
         t = kb.get("totals", {})
-        total_value += t.get("gift_in", 0) + t.get("omzet_in", 0) + t.get("winst_in", 0)
-        # Openstaande leningen zijn vorderingen → Spark heeft recht op dit geld
-        total_value += t.get("open_leningen", 0)
+        total_value += t.get("open_leningen", 0)  # vordering = asset buiten Bitvavo
     except Exception:
         pass
     return total_value

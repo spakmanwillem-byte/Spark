@@ -1,5 +1,7 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+> **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
+
 ## 🔭 Observability — Verplicht voor nieuwe modules (v5_spark_logger_001)
 
 Vanaf 2026-05-23 geldt: **elke nieuwe of gewijzigde Python-functie die user-acties of system-events afhandelt MOET gedecoreerd zijn met `@traced`**.

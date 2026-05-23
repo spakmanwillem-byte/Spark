@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
-  ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft
+  ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
+  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -171,9 +172,9 @@ export function KennisbankV2Page({ onNavigate }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold text-white flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-amber-400" /> Kennisbank v2
+              <BookOpen className="w-5 h-5 text-amber-400" /> Kennisbank
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">4 Lades + Inbox · Piramide-laag 3 (Geheugen)</p>
+            <p className="text-xs text-slate-400 mt-0.5">4 Lades + Inbox · Piramide-laag 3 (Geheugen) · v2 schema</p>
           </div>
           <div className="flex items-center gap-2">
             <button data-testid="kbv2-audit-btn" onClick={runAudit}
@@ -275,7 +276,8 @@ export function KennisbankV2Page({ onNavigate }) {
                 setEditForm={setEditForm} onStartEdit={startEdit}
                 onCancelEdit={() => { setEditMode(false); setEditForm(null); }}
                 onClassify={classifyTo} onSaveEdit={saveEdit}
-                saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab} />
+                saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab}
+                onMediaUpdated={loadItems} />
             )}
           </div>
         </div>
@@ -331,7 +333,7 @@ function CardListItem({ card, active, onClick, showReason }) {
 }
 
 function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCancelEdit,
-                     onClassify, onSaveEdit, saving, inInbox, currentLade }) {
+                     onClassify, onSaveEdit, saving, inInbox, currentLade, onMediaUpdated }) {
   const lagen = editMode ? editForm.lagen : (card.lagen || {});
   const ws5 = editMode ? editForm.ws5 : (card.ws5 || {});
   const tags = editMode ? editForm.tags : (card.tags || []);
@@ -422,6 +424,26 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
         )}
       </div>
 
+      {/* v5_kbv2_media_001 — Voice & Image upload */}
+      <MediaSection card={card} currentLade={inInbox ? null : currentLade} onUpdated={onMediaUpdated} />
+
+      {/* Needs checklist */}
+      {(card.needs || []).length > 0 && (
+        <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-2">
+          <p className="text-[10px] uppercase text-amber-300 font-medium mb-1">Mist nog:</p>
+          <div className="flex flex-wrap gap-1">
+            {(card.needs || []).map(n => (
+              <span key={n} className="px-1.5 py-0.5 rounded text-[10px] bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                {n === 'laag1' ? '📝 laag 1' :
+                 n === 'ws5' ? '5️⃣ 5W' :
+                 n === 'voice' ? '🎙️ inspraak' :
+                 n === 'image' ? '🖼️ foto' : n}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Footnote */}
       {card.footnote && (
         <div className="text-[10px] text-slate-500 border-t border-slate-800 pt-2 leading-relaxed">
@@ -502,6 +524,138 @@ function Stat({ label, value, color }) {
     <div className="bg-slate-800/40 rounded-lg p-2 border border-slate-800">
       <p className="text-[10px] text-slate-500 uppercase tracking-wide">{label}</p>
       <p className="text-xl font-bold mt-0.5" style={{ color }}>{value || 0}</p>
+    </div>
+  );
+}
+
+/**
+ * MediaSection — voice (Whisper STT) + image upload bij een kaart.
+ * Voor inbox-kaarten: currentLade = null, backend leidt lade af via index.
+ */
+function MediaSection({ card, currentLade, onUpdated }) {
+  const media = card.media || {};
+  const [recording, setRecording] = useState(false);
+  const [uploadingVoice, setUploadingVoice] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [err, setErr] = useState('');
+  const mediaRecRef = useRef(null);
+  const chunksRef = useRef([]);
+  const imgInputRef = useRef(null);
+
+  const startRecord = async () => {
+    setErr('');
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mr = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      chunksRef.current = [];
+      mr.ondataavailable = (e) => { if (e.data && e.data.size > 0) chunksRef.current.push(e.data); };
+      mr.onstop = async () => {
+        const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
+        stream.getTracks().forEach(t => t.stop());
+        await uploadVoice(blob);
+      };
+      mediaRecRef.current = mr;
+      mr.start();
+      setRecording(true);
+    } catch (e) {
+      setErr('Microfoon geweigerd of niet beschikbaar.');
+    }
+  };
+
+  const stopRecord = () => {
+    try { mediaRecRef.current?.stop(); } catch {}
+    setRecording(false);
+  };
+
+  const uploadVoice = async (blob) => {
+    setUploadingVoice(true);
+    try {
+      const fd = new FormData();
+      fd.append('audio', blob, 'inspraak.webm');
+      fd.append('card_id', card.id);
+      if (currentLade) fd.append('lade', currentLade);
+      fd.append('user_id', 'user-001');
+      const r = await fetch(`${API}/api/kb/v2/media/voice`, { method: 'POST', body: fd }).then(x => x.json());
+      if (!r.success) setErr(r.error || 'Voice-upload mislukt');
+      onUpdated && onUpdated();
+    } catch (e) { setErr('Voice-upload fout: ' + e.message); }
+    setUploadingVoice(false);
+  };
+
+  const handleImageSelect = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    setErr('');
+    try {
+      const fd = new FormData();
+      fd.append('image', file);
+      fd.append('card_id', card.id);
+      if (currentLade) fd.append('lade', currentLade);
+      fd.append('user_id', 'user-001');
+      const r = await fetch(`${API}/api/kb/v2/media/image`, { method: 'POST', body: fd }).then(x => x.json());
+      if (!r.success) setErr('Image-upload mislukt');
+      onUpdated && onUpdated();
+    } catch (ex) { setErr('Image fout: ' + ex.message); }
+    setUploadingImage(false);
+    if (imgInputRef.current) imgInputRef.current.value = '';
+  };
+
+  return (
+    <div className="border-t border-slate-800 pt-3 space-y-2">
+      <p className="text-[10px] uppercase text-slate-500 tracking-wide">Media</p>
+
+      {/* Voice */}
+      <div className="bg-slate-800/30 rounded-lg p-2 space-y-2">
+        <div className="flex items-center gap-2">
+          {!recording ? (
+            <button data-testid="kbv2-voice-record"
+              onClick={startRecord} disabled={uploadingVoice}
+              className="px-2 py-1 text-xs rounded-md bg-rose-500/15 border border-rose-500/40 text-rose-300 hover:bg-rose-500/25 disabled:opacity-50 flex items-center gap-1.5">
+              <Mic className="w-3.5 h-3.5" /> {uploadingVoice ? 'Transcriberen...' : 'Spreek in'}
+            </button>
+          ) : (
+            <button data-testid="kbv2-voice-stop" onClick={stopRecord}
+              className="px-2 py-1 text-xs rounded-md bg-red-500/30 border border-red-500/60 text-red-200 animate-pulse flex items-center gap-1.5">
+              <Square className="w-3.5 h-3.5" /> Stop & verstuur
+            </button>
+          )}
+          {media.voice_url && (
+            <audio data-testid="kbv2-voice-audio" controls className="h-7 flex-1" src={API + media.voice_url} />
+          )}
+        </div>
+        {media.voice_transcript && (
+          <div className="text-[11px] text-slate-300 italic bg-slate-900/50 rounded px-2 py-1 border-l-2 border-rose-500/40">
+            <span className="text-slate-500">Transcript: </span>"{media.voice_transcript}"
+          </div>
+        )}
+      </div>
+
+      {/* Image */}
+      <div className="bg-slate-800/30 rounded-lg p-2 space-y-2">
+        <div className="flex items-center gap-2">
+          <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageSelect}
+            className="hidden" data-testid="kbv2-image-input" />
+          <button data-testid="kbv2-image-upload" onClick={() => imgInputRef.current?.click()}
+            disabled={uploadingImage}
+            className="px-2 py-1 text-xs rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 disabled:opacity-50 flex items-center gap-1.5">
+            <ImageIcon className="w-3.5 h-3.5" /> {uploadingImage ? 'Uploaden...' : 'Foto toevoegen'}
+          </button>
+          {(media.image_urls || []).length > 0 && (
+            <span className="text-[10px] text-slate-500">{media.image_urls.length} foto's</span>
+          )}
+        </div>
+        {(media.image_urls || []).length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {(media.image_urls || []).map((url, i) => (
+              <img key={i} src={API + url} alt={`media-${i}`}
+                className="w-16 h-16 object-cover rounded border border-slate-700" />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {err && <p className="text-[10px] text-red-400">{err}</p>}
     </div>
   );
 }

@@ -53,6 +53,22 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _compute_needs(card: Dict) -> list:
+    """Wat mist deze kaart nog? Gebruikt door UI-checklist."""
+    needs = []
+    lagen = card.get("lagen") or {}
+    if not (lagen.get("laag1") or "").strip():
+        needs.append("laag1")
+    if not any((card.get("ws5") or {}).values()):
+        needs.append("ws5")
+    media = card.get("media") or {}
+    if not media.get("voice_url"):
+        needs.append("voice")
+    if not (media.get("image_urls") or []):
+        needs.append("image")
+    return needs
+
+
 # ---------------------------------------------------------------------------
 # Read API
 # ---------------------------------------------------------------------------
@@ -254,6 +270,9 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
         lagen_filled = sum(1 for v in (card.get("lagen") or {}).values() if (v or "").strip())
         fn["vertrouwen"] = max(fn.get("vertrouwen", 0.5), round(0.5 + 0.1 * lagen_filled, 2))
         card["footnote"] = fn
+        # v5_kbv2_media_001 — needs-checklist bijwerken
+        card.setdefault("media", {"voice_url": None, "voice_transcript": None, "image_urls": []})
+        card["needs"] = _compute_needs(card)
 
         # Schrijf weg
         lade_data.setdefault("kaarten", []).append(card)
@@ -293,10 +312,15 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                     k["tags"] = updates["tags"]
                 if "begrip" in updates and updates["begrip"]:
                     k["begrip"] = updates["begrip"]
+                # v5_kbv2_media_001 — media-updates (voice + images)
+                if "media" in updates and isinstance(updates["media"], dict):
+                    k["media"] = {**(k.get("media") or {}), **updates["media"]}
                 fn = k.get("footnote") or {}
                 fn["laatst_bewerkt_door"] = user_id
                 fn["laatst_bewerkt_op"] = _now()
                 k["footnote"] = fn
+                k.setdefault("media", {"voice_url": None, "voice_transcript": None, "image_urls": []})
+                k["needs"] = _compute_needs(k)
                 save_json(_lade_path(lade), data)
                 # Index bijwerken
                 idx = load_json(_index_path(), default={"entries": {}})

@@ -206,8 +206,9 @@ from modules.admin import logs_router as admin_logs_router
 app.include_router(admin_logs_router, prefix="/api")
 
 # Module 27: Knowledge Base v2 (v5_kbv2_001 — 4 lades + inbox + index)
-from modules.kb_v2 import kbv2_router
+from modules.kb_v2 import kbv2_router, kbv2_media_router
 app.include_router(kbv2_router, prefix="/api")
+app.include_router(kbv2_media_router, prefix="/api")
 
 
 

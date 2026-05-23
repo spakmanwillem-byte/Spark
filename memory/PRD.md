@@ -1,6 +1,34 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_kbv2_media_001 — Hybride Kennisbank + Voice/Image** (sessie 4):
+  - 🔀 **Sidebar gemerged**: "Kennisbank" en "Kennisbank v2" → één entry "Kennisbank" die rechtstreeks naar v2 route `/knowledge` gaat (oude KennisbankPage.js blijft als legacy bestand, route bestaat nog op `/knowledge-legacy` voor terugval)
+  - 📋 **Card-schema uitgebreid** (idempotent upgrade-script `upgrade_kbv2_schema.py`):
+    - `media: {voice_url, voice_transcript, image_urls[]}`
+    - `needs: ["laag1"|"ws5"|"voice"|"image"]` — checklist wat nog ontbreekt, auto-herrekend bij elke edit
+    - Alle 5288 kaarten kregen het nieuwe schema
+  - 🎙️ **Voice opname + Whisper STT** (`modules/kb_v2/media_routes.py`):
+    - `POST /api/kb/v2/media/voice` — MediaRecorder (webm) → OpenAI Whisper via Emergent LLM Key → Nederlandse transcriptie
+    - Auto-fill: als kaart nog geen laag1 heeft + transcript bestaat → laag1 = transcript (in inbox-flow)
+    - Audio bestand bewaard in `/data/knowledge/v2/media/voice/`
+    - Idempotent: max 24MB, 7 audio-formaten ondersteund
+  - 🖼️ **Image upload**:
+    - `POST /api/kb/v2/media/image` — multipart upload tot 8MB
+    - Foto's bewaard in `/data/knowledge/v2/media/image/`, gelinkt aan kaart via `image_urls[]`
+    - UI toont thumbs (16x16) onder voice-sectie
+  - 🎨 **UI MediaSection** (in CardDetail):
+    - Rode "Spreek in" knop met live-recording state ("Stop & verstuur")
+    - Audio-player toont opname terug + transcript-quote daaronder
+    - Groene "Foto toevoegen" knop met thumbs-grid
+    - **Needs-checklist** amber-banner toont wat kaart nog mist (📝 laag1 / 5️⃣ 5W / 🎙️ inspraak / 🖼️ foto)
+  - 📜 **Core docs** (`/app/memory/MISSION.md`):
+    - Missie/Visie uit Spark Core 4.1 herbelichaamd in v2
+    - Drie-lagen-identity-scheiding (auth/display/system) als WET vastgelegd
+    - Privacy-stack (alleen lokale JSON, geen tracking) expliciet
+    - Piramide-architectuur DNA/Skelet/Geheugen/Logs gedocumenteerd
+    - ROADMAP.md verwijst nu naar MISSION.md (top-cross-link)
+  - ✅ End-to-end getest: image upload werkt (287B test-PNG → kaart "aanschouwelijkheid" → `image_urls[0]` gevuld, `needs` auto-update van `['voice','image']` → `['voice']`)
+
 - 2026-05-23 **v5_kbv2_001 — Kennisbank v2 (4 Lades + Inbox + Graceful Fallback)** (sessie 3):
   - 🗂️ **Migratie-script** (`backend/scripts/migrate_kb_v2.py`, idempotent, dry-run + commit modes)
     - v1 `knowledge_base.json` (5288 kaarten) → **4 lades** op basis van dominant-tag classifier

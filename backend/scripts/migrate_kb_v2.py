@@ -152,6 +152,12 @@ def classify(entry: dict) -> tuple[str | None, dict]:
 def build_v2_card(v1_entry: dict, lade: str | None) -> dict:
     """Bouw v2-kaart uit v1-entry, behoud traceability naar v1."""
     lagen = v1_entry.get("lagen") or {}
+    has_l1 = bool((lagen.get("laag1") or "").strip())
+    needs: list = []
+    if not has_l1:
+        needs.append("laag1")
+    if not (v1_entry.get("ws5") or {}):
+        needs.append("ws5")
     return {
         "id": f"kbv2-{v1_entry.get('id','')[3:]}" if v1_entry.get("id", "").startswith("kb-")
               else f"kbv2-{uuid.uuid4().hex[:8]}",
@@ -168,6 +174,13 @@ def build_v2_card(v1_entry: dict, lade: str | None) -> dict:
         "tags": v1_entry.get("tags") or [],
         "topic": v1_entry.get("topic") or "",
         "verbanden": [],
+        # v5_kbv2_media_001 — media + needs-checklist
+        "media": {
+            "voice_url": None,        # audio van de inspraak (Whisper bron)
+            "voice_transcript": None,  # tekst van Whisper-transcriptie
+            "image_urls": [],          # uploads van foto's bij deze kaart
+        },
+        "needs": needs,  # ["laag1","ws5","voice","image"] — checklist wat nog mist
         "footnote": {
             "bron": v1_entry.get("created_by") or v1_entry.get("detected_by") or "onbekend",
             "ingedeeld_door": "kbv2_migratie" if lade else None,

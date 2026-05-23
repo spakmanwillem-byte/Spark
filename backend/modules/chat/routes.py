@@ -1233,12 +1233,25 @@ async def process_message(req: ChatMessage):
         response["message"] = response["message"] + spontaneous_hint
         response["spontaneous_w_filled"] = True
 
+    # v5_tts_pad_001 — korte antwoorden TTS-vriendelijk maken (geldt voor ALLE early returns)
+    try:
+        from . import tts_friendly_service
+        tts_friendly_service.maybe_pad_for_tts(response)
+    except Exception:
+        pass
+
     _save_log(req, response, None)
     return response
 
 
 def _save_log(req: "ChatMessage", response: dict, trigger_type):
     """Save gesprek naar user log."""
+    # v5_tts_pad_001 — ook hier paden zodat early-return responses worden gedekt
+    try:
+        from . import tts_friendly_service
+        tts_friendly_service.maybe_pad_for_tts(response)
+    except Exception:
+        pass
     if not req.user_id:
         return
     chat_log_service.save_message(

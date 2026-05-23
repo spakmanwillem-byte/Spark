@@ -1,6 +1,36 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_ijkpunt_001 + v5_help_refresh_001 + v5_tts_pad_001 + v5_kbv2_graph_001** (sessie 9 — 4 verzoeken + ijkpunt):
+  - 🕸️ **Verbanden tab toont nu KB v2** (`/api/graph/rebuild`):
+    - `sync_service.rebuild_graph_full` scant nu v1 (5288) + v2 lades (250+329+1071+632) + inbox (3007) = **10577 nodes / 65981 edges**
+    - v2-nodes krijgen `type=knowledge_v2`, `lade`, `lade_color` (🌸 voelen pink, 💬 spreken cyan, 🧠 weten amber, 🎭 doen purple)
+    - Edges via shared tags mengen v1 + v2 nodes (per-node cap 20)
+    - Verbanden header toont nu "10577 NODES | 65981 EDGES | 12.5 gem. verbindingen"
+  - 🆘 **Help-commando refresh** (`smart_intents_service.handle_help`):
+    - 11 nieuwe user-items toegevoegd: KB v2 audit/inbox/leren, Card Factory (D&D/Event/Bark), ROAR Gift, Spark World D&D, Community recap, Trader/Wallet
+    - 8 nieuwe admin-items: Logs browser, Deploy-anker, Trader hot-swap, Force-sell, Bot-kleurschema's, App-kleurenschema, Boekhouding entiteiten, Graph rebuild
+  - 🎙️ **TTS-vriendelijke korte antwoorden** (`chat/tts_friendly_service.py`):
+    - Nieuwe `maybe_pad_for_tts(response)` muteert in-place
+    - Heuristiek: alleen padden als bericht < 40 chars, geen vraagteken aan eind, geen markdown, type niet in skip-set (wedervraag/help/dnd_help/agenda_proposal/identity/etc.)
+    - 7 conversational tails varieerden ("Vraag gerust door…", "Ik blijf in de buurt", "Klaar voor je volgende vraag")
+    - Hook in `_save_log` zodat ÉLKE early-return response (greeting/goodbye/etc.) wordt gepad
+    - Geverifieerd: "doei" → "Tot ziens Willem! Vertel het me als ik iets moet aanvullen." (`tts_padded=true`)
+  - 🧠 **ROADMAP.md heeft nu een Spark's-brein-sectie** (top):
+    - 5-laags AI-pipeline expliciet beschreven (safe-word → identity/action → smart_intents → snap → fallback)
+    - 14+ specialized services in chat-module benoemd
+    - Observability/shadow-leren, Kennis-architectuur, D&D-laag, Stem-laag, Bots-acteurs
+    - Conclusie: backlog is *aanvulling* op bestaand brein, geen vervanging
+  - 🧹 **IJKPUNT v5.1 — schone start** (`scripts/ijkpunt_v5_1.py`):
+    - Backup naar `/data/_backups/ijkpunt_v5_1_<ts>/` vóór elke wijziging
+    - **Token/wallet synchronisatie**: roar_balances.json gefilterd → {user-000: 10, user-001: 10}, wallets.json + user_wallets.json tokens/EUR gesynchroniseerd
+    - **5 schaduw-traders potjes verwijderd**: Nick T (574ac78e), Gijs (a0ee2d7e), Nick (4d81e2a4), ghost users (1b492f19, bc76725e)
+    - **18 test-chat-logs verwijderd**: test-*, t.json, agenda-test-*, user-testedge, ca4d31b1, 78f2b0d7
+    - **Community spam opgeruimd**: 358 → 351 messages (test-content filter)
+    - **Gift requests**: bewaard pending + accepted-binnen-30d
+    - **Snapshot opgeslagen**: `/data/system/ijkpunt_v5_1.json` met anchor (Bitvavo deposit €96.52 → 20 tokens @ €5.08)
+    - ✅ Verified: ROAR price endpoint klopt (€5.08, 10 + 10 tokens), Wallet Willem (10 tokens, €0 EUR), Wallet Spark (10 tokens, €0 EUR), 10 potjes elk @ €5.08
+
 - 2026-05-23 **v5_bot_color_scheme_001 + v5_card_factory_001** (sessie 8):
   - 🎨 **Bot-kleurschema's gekoppeld aan Beheer → Kleurbeheer**:
     - 5 nieuwe system-settings: `bot_color_madelief/harry/smith/boekhouder/dood`

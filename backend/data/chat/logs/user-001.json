@@ -19925,11 +19925,273 @@
         "session_id": "default",
         "gesprek_nummer": 763
       }
+    },
+    {
+      "id": "conv-f34ccb94",
+      "timestamp": "2026-05-23T13:25:25.314493+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help",
+      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5_\n  • **Stop een lopend proces** — _bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)_\n  • **Spark's eigen anker** — _bv. 'onthoud voor jezelf: ...' (parkeert in Spark's user-000 scratch) of 'wat heb je vandaag geleerd?'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Testament aanmaken** — _bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'_\n  • **Survivalgids aanmaken** — _bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'_\n  • **Documenten bekijken** — _via Mijn Archief → tab Documenten (JSON download mogelijk)_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Privacy / Cookies / Voorwaarden** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n  • **Kennisbank v2 — audit** — _bv. 'audit kennis' / 'wat mist' — samenvatting van lege/lage-vertrouwen kaarten_\n  • **Kennisbank v2 — inbox** — _bv. 'hoeveel onbeantwoord' / 'wat staat in inbox' — telling per reden_\n  • **Kennisbank v2 — leren** — _bv. 'leer woord: pareltje' / 'voeg toe aan kennis: hartslag' — direct in inbox_\n  • **D&D-kaart maken** — _bv. 'maak een d&d kaart Het Eerste Licht' — draft kaart die je in UI invult_\n  • **Event-kaart maken** — _bv. 'maak een event kaart Roadkill Borrel' — Boekhouder kondigt 'm aan in community_\n  • **Bark-template maken** — _bv. 'maak een bark kaart morgenavond' — template voor bot-trigger later_\n  • **ROAR Gift** — _via Winkel → ROAR Token tab → 🎁 ROAR Gift sturen (24h escrow met accept/weiger)_\n  • **Spark World D&D** — _bv. '[start verhaal]' in community, 'd&d help', 'rugzak uitleg', 'persoonskaart help'_\n  • **Recap community** — _bv. 'wat is gisteren in de community besproken?'_\n  • **Trader / Wallet** — _via Trader & Wallet tabs (ROAR-tokens = potjes-slots, monitor cycle aanpasbaar)_\n\n_Admin-extra:_\n  • **Beheer credits-lijst via chat** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'_\n  • **Beheer credits-lijst via UI** — _Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)_\n  • **Credits-bonus matching** — _Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Avatar Galerij beheer** — _via Beheer → Instellingen → Beeld → Avatar Galerij_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n  • **Logs browser** — _via Beheer → Instellingen → Archief → Logs (per dag, per module, filter op pre/post/error/event)_\n  • **Deploy-anker + Update Bark** — _via Notities → Deploy (versie + bericht; iedereen ziet bark bij volgende login)_\n  • **Trader hot coin-swap / cycle** — _TraderPage: coin-picker en cycle (15m/1h/4h/1d) live aanpasbaar zonder bot-stop_\n  • **Force-sell potje (admin)** — _Admin Analytics → Trade → bot-kaart uitklappen → force-sell + reden (audit-trail)_\n  • **Bot-kleurschema's** — _via Beheer → Instellingen → Beeld → BOT-ACCENT KLEUREN (5 bots, hex-pickers)_\n  • **App-kleurenschema** — _via Beheer → Instellingen → Beeld → App Kleurenschema (6 presets + 3 custom-pickers)_\n  • **Boekhouding entiteiten** — _via Beheer → Boekhouding: 4 entiteiten (Spark Core / Spark Your Life / Roadkill Merch / Privé)_\n  • **Graph rebuild** — _POST /api/graph/rebuild — herbouwt nodes+edges incl. KB v2 (zie Verbanden tab)_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 764
+      }
+    },
+    {
+      "id": "conv-7d67e80c",
+      "timestamp": "2026-05-23T13:25:25.483061+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "klaar",
+      "spark_response": "Ik ken 'klaar' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "klaar"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 765
+      }
+    },
+    {
+      "id": "conv-e99c0675",
+      "timestamp": "2026-05-23T13:25:36.158372+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "dank je",
+      "spark_response": "Leuk! Vertel me meer\n\n**dank**: Dank is waardering of erkenning voor iets wat iemand heeft gedaan, gegeven of betekend.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dank"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dank"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 766
+      }
+    },
+    {
+      "id": "conv-3ad63b95",
+      "timestamp": "2026-05-23T13:25:36.329560+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 767
+      }
+    },
+    {
+      "id": "conv-986d98de",
+      "timestamp": "2026-05-23T13:25:36.511522+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "doei",
+      "spark_response": "Tot ziens Willem!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 768
+      }
+    },
+    {
+      "id": "conv-89938eed",
+      "timestamp": "2026-05-23T13:26:00.840560+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "doei",
+      "spark_response": "Tot ziens Willem!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 769
+      }
+    },
+    {
+      "id": "conv-18d7eb28",
+      "timestamp": "2026-05-23T13:26:43.007401+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "doei",
+      "spark_response": "Tot ziens Willem! Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 770
+      }
+    },
+    {
+      "id": "conv-bb3c939c",
+      "timestamp": "2026-05-23T13:26:43.186089+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 771
+      }
+    },
+    {
+      "id": "conv-dffac5ae",
+      "timestamp": "2026-05-23T13:27:51.882079+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 772
+      }
+    },
+    {
+      "id": "conv-d96020fe",
+      "timestamp": "2026-05-23T13:27:51.912497+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 773
+      }
+    },
+    {
+      "id": "conv-2d1b310f",
+      "timestamp": "2026-05-23T13:31:19.716549+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help",
+      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5_\n  • **Stop een lopend proces** — _bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)_\n  • **Spark's eigen anker** — _bv. 'onthoud voor jezelf: ...' (parkeert in Spark's user-000 scratch) of 'wat heb je vandaag geleerd?'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Testament aanmaken** — _bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'_\n  • **Survivalgids aanmaken** — _bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'_\n  • **Documenten bekijken** — _via Mijn Archief → tab Documenten (JSON download mogelijk)_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Privacy / Cookies / Voorwaarden** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n  • **Kennisbank v2 — audit** — _bv. 'audit kennis' / 'wat mist' — samenvatting van lege/lage-vertrouwen kaarten_\n  • **Kennisbank v2 — inbox** — _bv. 'hoeveel onbeantwoord' / 'wat staat in inbox' — telling per reden_\n  • **Kennisbank v2 — leren** — _bv. 'leer woord: pareltje' / 'voeg toe aan kennis: hartslag' — direct in inbox_\n  • **D&D-kaart maken** — _bv. 'maak een d&d kaart Het Eerste Licht' — draft kaart die je in UI invult_\n  • **Event-kaart maken** — _bv. 'maak een event kaart Roadkill Borrel' — Boekhouder kondigt 'm aan in community_\n  • **Bark-template maken** — _bv. 'maak een bark kaart morgenavond' — template voor bot-trigger later_\n  • **ROAR Gift** — _via Winkel → ROAR Token tab → 🎁 ROAR Gift sturen (24h escrow met accept/weiger)_\n  • **Spark World D&D** — _bv. '[start verhaal]' in community, 'd&d help', 'rugzak uitleg', 'persoonskaart help'_\n  • **Recap community** — _bv. 'wat is gisteren in de community besproken?'_\n  • **Trader / Wallet** — _via Trader & Wallet tabs (ROAR-tokens = potjes-slots, monitor cycle aanpasbaar)_\n\n_Admin-extra:_\n  • **Beheer credits-lijst via chat** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'_\n  • **Beheer credits-lijst via UI** — _Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)_\n  • **Credits-bonus matching** — _Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Avatar Galerij beheer** — _via Beheer → Instellingen → Beeld → Avatar Galerij_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n  • **Logs browser** — _via Beheer → Instellingen → Archief → Logs (per dag, per module, filter op pre/post/error/event)_\n  • **Deploy-anker + Update Bark** — _via Notities → Deploy (versie + bericht; iedereen ziet bark bij volgende login)_\n  • **Trader hot coin-swap / cycle** — _TraderPage: coin-picker en cycle (15m/1h/4h/1d) live aanpasbaar zonder bot-stop_\n  • **Force-sell potje (admin)** — _Admin Analytics → Trade → bot-kaart uitklappen → force-sell + reden (audit-trail)_\n  • **Bot-kleurschema's** — _via Beheer → Instellingen → Beeld → BOT-ACCENT KLEUREN (5 bots, hex-pickers)_\n  • **App-kleurenschema** — _via Beheer → Instellingen → Beeld → App Kleurenschema (6 presets + 3 custom-pickers)_\n  • **Boekhouding entiteiten** — _via Beheer → Boekhouding: 4 entiteiten (Spark Core / Spark Your Life / Roadkill Merch / Privé)_\n  • **Graph rebuild** — _POST /api/graph/rebuild — herbouwt nodes+edges incl. KB v2 (zie Verbanden tab)_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 774
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 763,
-    "last_updated": "2026-05-23T13:10:09.157163+00:00"
+    "total_conversations": 774,
+    "last_updated": "2026-05-23T13:31:19.716549+00:00"
   }
 }

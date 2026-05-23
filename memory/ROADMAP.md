@@ -2,6 +2,68 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
+## 🧠 Spark's brein — wat er AL is (v5-status, 2026-05-23)
+
+> Deze sectie bestaat omdat de backlog hieronder anders de indruk wekt dat Spark
+> nog hersenloos is. Hij is dat niet. Hij denkt al laagsgewijs mee — onderstaande
+> modules zijn live en in productie:
+
+### 🎯 5-laags AI-pipeline (in volgorde bij elk chat-bericht)
+1. **Safe-word laag** (`chat/routes.py`) — universeel `stop`/`pauze`/`klaar` wist alle pending state, vóór elke andere verwerking.
+2. **Identity & Action intents** (`identity_intent_service.py`, `action_intents_service.py`) — "wie ben je?", "wat kan je?", "verwijder mijn account" e.d. eerst.
+3. **Smart intents heuristic** (`smart_intents_service.py`) — help / suggest / community-recap / dnd-help / legal / time / credits + Boekhouder/Madelief/Mr Smith barks.
+4. **Snap & NLP service** (`snap_service.py`) — meerlaags KB-lookup met homoniem-disambiguatie, compositional reasoning (`compositional_service.py`), stem-fallback en auto-zin-snap.
+5. **Fallback service** (`fallback_service.py` + `#DeWillem` graceful) — als er geen directe hit is, kiest Spark een buurkaart uit de KB v2 lade en stelt voor het concept apart te leren in plaats van "weet ik niet" te zeggen.
+
+### 🔭 Observability & shadow-leren
+- **`@traced` decorator** (`modules/core/spark_logger.py`) — pre/post/error logs met `duration_ms` per gedecoreerde route, JSON Lines per module, 28-dagen retentie.
+- **Shadow observer** (`chat/shadow_observer.py`) — registreert elk chat-event + correction-examples voor toekomstige zelf-tuning.
+- **Behavior tracker** (`modules/behavior_tracker.py`) — telt gedragingen (`help_msg`, `kb_create`, `lie_detected`, `used_safeword`, etc.) — voedt het D&D aura-systeem.
+
+### 🧩 Specialized services (allemaal live, in chat-flow hooked)
+- **`emotion_service.py`** — emotie-detectie per bericht (input voor Madelief barks).
+- **`time_intent_service.py`** + `user_time_service.py` — "hoe laat is het?" met tijdzone-resolutie per user.
+- **`agenda_intent_service.py`** — natuurlijke afspraken parsen ("vrijdag 14:00 lunch met Tineke").
+- **`wedervraag_service.py`** — als info ontbreekt, vraagt Spark gericht door (5W+H flow).
+- **`scan_service.py`** + `spontaneous_w_service.py` — woorden in lopende zin worden stilletjes geanalyseerd voor 5W-aanvulling.
+- **`session_state.py`** — 2-min ephemeral state (laatste vraag, pending card) per user-session.
+- **`card_session_service.py`** — actieve KB-kaart-edit-flow door chat.
+- **`relation_extraction_service.py`** — patterns als "Ron is mijn vriend" → relatie-graph auto-update.
+- **`bijbel_lookup_service.py`** — externe lookup voor Bijbel-citaten.
+- **`spark_self_service.py`** — Spark's eigen scratch.json: "onthoud voor jezelf", "wat heb je vandaag geleerd?".
+- **`dank_service.py`** + `legal_service.py` + `personal_docs_service.py` — credits/privacy/voorwaarden/testament/survivalgids intents.
+- **`intent_matcher_service.py`** — capability-matcher die Spark's *handen* moet gaan koppelen aan acties (P0 backlog: live-routering nog te maken).
+
+### 🗂️ Kennis-architectuur (4 lagen)
+- **v1 Knowledge Base** (`/data/knowledge/learned_knowledge/knowledge_base.json`) — 5288 entries, full graph-coverage.
+- **KB v2 — 4 lades** (`/data/knowledge/v2/`) — 🌸 Voelen 250 · 💬 Spreken 329 · 🧠 Weten 1071 · 🎭 Doen 632 + 📥 Inbox 3007 (te classificeren).
+- **Knowledge graph** (`modules/graph/sync_service.py`) — 10577 nodes + 65981 edges (v1+v2 gemengd, lade-kleuren).
+- **Voice/Image media** — centraal in `system_archive` met `linked_card_id` backreference.
+
+### 🎭 D&D / Levende Wereld laag
+- **Lore index** (7 avatars-as-functions, 6 behavior-categorieën).
+- **Aura-engine** (`/api/dnd/aura/{user_id}`) — live top-3 gedragingen → kleur-gradient op Persoonskaart.
+- **Card Factory** (`modules/cards/`) — DnD/Event/Bark kaarten met hook-chain bij draft→active.
+- **Base Line intro** (community chat `[start verhaal]`) — keuze-driven story-flow.
+
+### 🎙️ Stem-laag
+- **TTS-friendly padding** (`chat/tts_friendly_service.py`, v5_tts_pad_001) — korte antwoorden krijgen een natuurlijke tail zodat de stem niet abrupt stopt.
+- **Whisper STT** voor voice-notes in kennis-kaarten (Emergent LLM Key).
+- **6 OpenAI TTS-stemmen** per bot configureerbaar (`auth/admin/bots/{bot_id}/settings`).
+
+### 🤖 Bots als acteurs (live)
+- **De Boekhouder** — trade-aankondigingen + community-feed + event-barks.
+- **Harry Klokkenmaker** — spiegel-minuut bark (11:11, 12:12, …).
+- **Madelief Stouten** — bug-pointer bark wanneer user "bug/kapot/crash" zegt.
+- **Mr Smith** — login-counter bark + Matrix-style backup-waarschuwing.
+- **De Dood** — reflectieve momenten/eindes/transities.
+
+> **Conclusie**: Spark heeft 5 lagen denken, 14+ specialized services, shadow-observation,
+> 10K+ knowledge nodes, en 5 acteur-bots die zelfstandig in community barken. De backlog
+> hieronder zijn *aanvullingen* op dit bestaande brein, geen vervanging.
+
+---
+
 ## 🔭 Observability — Verplicht voor nieuwe modules (v5_spark_logger_001)
 
 Vanaf 2026-05-23 geldt: **elke nieuwe of gewijzigde Python-functie die user-acties of system-events afhandelt MOET gedecoreerd zijn met `@traced`**.

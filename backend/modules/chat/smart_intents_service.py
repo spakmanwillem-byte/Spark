@@ -213,6 +213,17 @@ def handle_help(is_admin: bool = False) -> Dict:
         ("Account verwijderen", "bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen"),
         ("Privacy / Cookies / Voorwaarden", "bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'"),
         ("Credits", "bv. 'credits' — wie heeft Spark mogelijk gemaakt"),
+        # v5_help_refresh_001 — nieuwe v5 features
+        ("Kennisbank v2 — audit", "bv. 'audit kennis' / 'wat mist' — samenvatting van lege/lage-vertrouwen kaarten"),
+        ("Kennisbank v2 — inbox", "bv. 'hoeveel onbeantwoord' / 'wat staat in inbox' — telling per reden"),
+        ("Kennisbank v2 — leren", "bv. 'leer woord: pareltje' / 'voeg toe aan kennis: hartslag' — direct in inbox"),
+        ("D&D-kaart maken", "bv. 'maak een d&d kaart Het Eerste Licht' — draft kaart die je in UI invult"),
+        ("Event-kaart maken", "bv. 'maak een event kaart Roadkill Borrel' — Boekhouder kondigt 'm aan in community"),
+        ("Bark-template maken", "bv. 'maak een bark kaart morgenavond' — template voor bot-trigger later"),
+        ("ROAR Gift", "via Winkel → ROAR Token tab → 🎁 ROAR Gift sturen (24h escrow met accept/weiger)"),
+        ("Spark World D&D", "bv. '[start verhaal]' in community, 'd&d help', 'rugzak uitleg', 'persoonskaart help'"),
+        ("Recap community", "bv. 'wat is gisteren in de community besproken?'"),
+        ("Trader / Wallet", "via Trader & Wallet tabs (ROAR-tokens = potjes-slots, monitor cycle aanpasbaar)"),
     ]
 
     # Admin-extra (gradatie ≤ 2)
@@ -227,6 +238,15 @@ def handle_help(is_admin: bool = False) -> Dict:
         ("Backup/Restore", "via Beheer → Back-up (ZIP export/import, incl. cache flush)"),
         ("Gradatie-upgrades", "automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)"),
         ("Storage cache stats", "via Beheer dashboard 'Performance' kaart"),
+        # v5_help_refresh_001 — admin v5 features
+        ("Logs browser", "via Beheer → Instellingen → Archief → Logs (per dag, per module, filter op pre/post/error/event)"),
+        ("Deploy-anker + Update Bark", "via Notities → Deploy (versie + bericht; iedereen ziet bark bij volgende login)"),
+        ("Trader hot coin-swap / cycle", "TraderPage: coin-picker en cycle (15m/1h/4h/1d) live aanpasbaar zonder bot-stop"),
+        ("Force-sell potje (admin)", "Admin Analytics → Trade → bot-kaart uitklappen → force-sell + reden (audit-trail)"),
+        ("Bot-kleurschema's", "via Beheer → Instellingen → Beeld → BOT-ACCENT KLEUREN (5 bots, hex-pickers)"),
+        ("App-kleurenschema", "via Beheer → Instellingen → Beeld → App Kleurenschema (6 presets + 3 custom-pickers)"),
+        ("Boekhouding entiteiten", "via Beheer → Boekhouding: 4 entiteiten (Spark Core / Spark Your Life / Roadkill Merch / Privé)"),
+        ("Graph rebuild", "POST /api/graph/rebuild — herbouwt nodes+edges incl. KB v2 (zie Verbanden tab)"),
     ]
 
     if is_admin:

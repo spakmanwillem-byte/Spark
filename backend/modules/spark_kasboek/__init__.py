@@ -19,20 +19,28 @@ WALLET_PATH = Path(__file__).parent.parent.parent / "data" / "wallet" / "wallets
 async def saldo():
     kb = load_json(KB_PATH, default={"entries": [], "totals": {}})
     totals = kb.get("totals", {})
+    gift_in = totals.get("gift_in", 0)
     omzet_in = totals.get("omzet_in", 0)
     btw_reserve = totals.get("btw_reserve", 0)
     winst_in = totals.get("winst_in", 0)
     uit = totals.get("uit", 0)
-    saldo_total = round(omzet_in + winst_in - uit, 4)
-    vrij = round(saldo_total - btw_reserve, 4)  # vrij te besteden (zonder BTW-reserve)
+    saldo_total = round(gift_in + omzet_in + winst_in - uit, 4)
+    vrij = round(saldo_total - btw_reserve, 4)
+    # Lees huidige fase
+    from pathlib import Path as _P
+    phase_path = _P(__file__).parent.parent.parent / "data" / "system" / "money_phase.json"
+    phase_data = load_json(phase_path, default={"phase": "build"})
     w = load_json(WALLET_PATH, default={"wallets": {}})
     spark_w = w.get("wallets", {}).get("user-000", {})
     return {
         "spark_kasboek_saldo_eur": saldo_total,
         "vrij_te_besteden_eur": vrij,
+        "gift_in_eur": gift_in,
+        "omzet_in_eur": omzet_in,
         "btw_reserve_eur": btw_reserve,
         "spark_wallet_balance_eur": round(spark_w.get("balance", 0), 4),
         "totals": totals,
+        "money_phase": phase_data.get("phase", "build"),
         "n_entries": len(kb.get("entries", [])),
         "last_entry": (kb.get("entries") or [])[-1] if kb.get("entries") else None,
     }
@@ -100,7 +108,8 @@ async def history(limit: int = 100):
     for e in kb.get("entries", []):
         etype = e.get("type")
         label = (
-            "💰 Klant-omzet" if etype == "klant_omzet"
+            "💚 Gift binnen" if etype == "gift_in"
+            else "💰 Klant-omzet" if etype == "klant_omzet"
             else "📥 BTW binnen" if etype == "btw_afroming"  # legacy
             else "💚 Winst trade" if etype == "trade_winst"
             else "📒 BTW reservering" if etype == "btw_reserve"

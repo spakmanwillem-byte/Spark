@@ -317,51 +317,54 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
 
-    # v6_btw_pas_bij_winst_001 — BTW NIET MEER direct bij koop.
-    # Reden: BTW is fiscaal pas verschuldigd over WINST/MARGE, niet over alle inkomsten.
-    # De full klant-€ blijft eerst bij Spark om mee te traden. Bij elke trade-winst (positieve
-    # pnl bij sell) wordt 21% van die winst gereserveerd in spark_kasboek "btw_reserve" —
-    # dat is wat later via Moneybird naar Belastingdienst gaat.
-    # Anker-aankopen (Willem/Spark) tellen sowieso niet mee.
-    # Wel registreren: hoeveel grondslag we ontvingen, voor papertrail.
+    # v6_gift_phase_001 — In bouw-fase = GIFT, geen BTW. Volledige bedrag → Spark omzet.
+    # Anker-aankopen (Willem/Spark) tellen sowieso niet mee als gift (zij zijn fundering).
     try:
         from datetime import datetime as _dt, timezone as _tz
         import uuid as _uuid
+        from pathlib import Path as _P
         ANCHOR_USERS = {"user-000", "user-001"}
         is_klant = user_id not in ANCHOR_USERS
-        # Geen directe BTW-afroming meer; gehele bedrag is Spark's "ontvangen omzet".
-        # BTW komt later bij winst-realisatie via trade close.
-        from pathlib import Path as _P
+        # Lees money_phase
+        phase_path = _P(__file__).parent.parent.parent / "data" / "system" / "money_phase.json"
+        phase = load_json(phase_path, default={"phase": "build"}).get("phase", "build")
         kb_path = _P(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json"
-        kb = load_json(kb_path, default={"entries": [], "totals": {"omzet_in": 0, "btw_reserve": 0, "winst_in": 0, "uit": 0}})
+        kb = load_json(kb_path, default={"entries": [], "totals": {"gift_in": 0, "omzet_in": 0, "btw_reserve": 0, "winst_in": 0, "uit": 0}})
         kb.setdefault("totals", {})
-        kb["totals"].setdefault("omzet_in", 0)
-        kb["totals"].setdefault("btw_reserve", 0)
+        for key in ("gift_in", "omzet_in", "btw_reserve", "winst_in", "uit"):
+            kb["totals"].setdefault(key, 0)
         if is_klant:
+            entry_type = "gift_in" if phase == "build" else "klant_omzet"
+            label_text = "Gift" if phase == "build" else "Klant-omzet"
             kb["entries"].append({
                 "id": _uuid.uuid4().hex[:12],
                 "ts": _dt.now(_tz.utc).isoformat(),
-                "type": "klant_omzet",
+                "type": entry_type,
+                "phase": phase,
                 "bron_tx": tx["id"],
                 "bron_user": user_id,
                 "bedrag_eur": amount_eur,
                 "n_tokens": amount_tokens,
-                "omschrijving": f"Klant-omzet {amount_tokens} ROAR @ €{price:.2f} (BTW pas bij winst-realisatie)",
+                "omschrijving": f"{label_text} €{amount_eur} → {amount_tokens} ROAR als bedankje (bouw-fase: geen BTW, fiscaal donatie)" if phase == "build" else f"Klant-omzet {amount_tokens} ROAR @ €{price:.2f} (BTW pas bij winst-realisatie)",
             })
-            kb["totals"]["omzet_in"] = round(kb["totals"].get("omzet_in", 0) + amount_eur, 4)
+            if phase == "build":
+                kb["totals"]["gift_in"] = round(kb["totals"]["gift_in"] + amount_eur, 4)
+            else:
+                kb["totals"]["omzet_in"] = round(kb["totals"]["omzet_in"] + amount_eur, 4)
             save_json(kb_path, kb)
-            # Spark EUR-wallet krijgt VOLLE bedrag (om mee te traden)
+            # Spark EUR-wallet krijgt VOLLE bedrag
             spark_w = wallets.get("wallets", {}).get("user-000")
             if isinstance(spark_w, dict):
                 spark_w["balance"] = round(spark_w.get("balance", 0) + amount_eur, 4)
                 save_json(WALLET_FILE, wallets)
             tx["spark_omzet_eur"] = amount_eur
-            tx["btw_afgeroomd_eur"] = 0  # nog niet, komt bij winst
+            tx["btw_afgeroomd_eur"] = 0
+            tx["money_phase"] = phase
         else:
             tx["btw_afgeroomd_eur"] = 0
             tx["anker_aankoop"] = True
     except Exception as _ex:
-        print(f"[omzet-registratie] failed: {_ex}")
+        print(f"[gift-registratie] failed: {_ex}")
 
     # v6_bonnetje_001 — Bonnetje voor klant-aankoop opslaan in user archief
     try:

@@ -1,6 +1,28 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v6_gift_phase_001** (sessie 10, vervolg — model herzien):
+  - 💚 **Build-fase = GIFT, geen BTW**:
+    - ROAR-aanschaf is nu **donatie/gift** aan Spark Core concept (geen aankoop)
+    - Gever krijgt token als **symbolisch bedankje**, geen tegenprestatie-product
+    - **0% BTW** want donaties zijn fiscaal vrijgesteld
+    - Volledige bedrag → Spark omzet (om mee te traden / groeien)
+  - 🔀 **Phase-switch mechanisme** (`/data/system/money_phase.json`):
+    - `phase = "build"` (huidig) — gift-model, geen BTW
+    - `phase = "public"` (later, P2) — product-model, 21% BTW pas bij winst (Moneybird)
+    - Code in `shop/buy_tokens` checkt deze flag bij elke aankoop
+    - Switch vereist admin gradatie ≤ 1 + audit-log entry
+  - 📝 **Bonnetje is nu Gift-bevestiging** (build) of Factuur (public):
+    - Build: "💚 Gift-bevestiging — Donatie aan Spark Core concept"
+    - Public: "🧾 Factuur" met BTW-reservering tekst
+    - Gever kan downloaden uit Beheer → Boekhouding → Klanten-tab
+  - 🗃️ **Spark kasboek**:
+    - Nieuw veld `gift_in` (build-fase donaties)
+    - `omzet_in` blijft voor public-fase
+    - `btw_reserve` blijft voor toekomstige winst-BTW
+    - Gijs's bestaande boeking gemigreerd: €20.80 in `gift_in`
+  - 📜 **MONEY_MODEL.md** geüpdatet met fase-structuur
+
 - 2026-05-23 **v6_btw_pas_bij_winst_001 + KB v2 kaart-fix** (sessie 10):
   - 🐛 **KB v2 "Nieuwe kaart" bug GEFIXED**: frontend checkte `r.card` ipv `r.kaart` — endpoint werkte, alleen UI-response-check fout. Nu werkend (kaart wordt in inbox aangemaakt met `_inbox_reason=missing_laag1`)
   - 💸 **BTW-model herzien — pas bij winst, niet bij verkoop**:

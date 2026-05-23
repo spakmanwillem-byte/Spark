@@ -20,15 +20,27 @@
 
 **Identity check**: `treasury_pool + sum(balances.values()) == total_supply` moet áltijd kloppen.
 
-## 💸 Prijs-model & BTW (v6_btw_pas_bij_winst_001 — herzien 2026-05-23)
+## 💸 Gift- vs Product-model (v6_gift_phase_001 — herzien 2026-05-23)
 
-- **Anker-houders** (`user-000` Spark/Roadkill + `user-001` Willem) = fundering van het concept → **GEEN BTW**. 10 tokens × €5.08 = €50.80 elk, 1-op-1 zonder marge.
-- **Klanten** (alle andere users) → betalen **volle bedrag**, dat gaat **volledig naar Spark's omzet** (`omzet_in`) en EUR-wallet. Spark gebruikt dit om mee te traden.
-- **BTW komt PAS bij winst-realisatie**: bij elke sell-trade met positieve PnL wordt **21% van de winst** gereserveerd in `btw_reserve` (kasboek). Dat is wat later via **Moneybird** naar de Belastingdienst gaat.
-- **Reden**: BTW is fiscaal verschuldigd over **marge/winst**, niet over alle omzet. Direct afromen bij verkoop = boekhoudkundig onjuist.
-- **Fixed prijs** zolang circulating < `FIXED_PRICE_LIMIT` (huidige drempel)
-- **Daarna dynamisch**: prijs stijgt met groei van circulating (early-supporter effect)
-- **Vroege kopers profiteren** van prijs-stijging (te benoemen in voorwaarden + privacy)
+### Fase 1: BOUW (huidig)
+- ROAR-aanschaf is **GIFT/DONATIE** aan Spark Core concept
+- Gever krijgt token als **symbool/bedankje** (geen tegenprestatie-product)
+- **GEEN BTW** — donaties zijn fiscaal vrijgesteld
+- Volledig bedrag → Spark omzet voor trade/groei
+- Bonnetje toont: "Gift ter ondersteuning van Spark Core concept"
+- Anker-houders (Spark/Roadkill + Willem) blijven ankers zonder gift-status
+
+### Fase 2: PUBLIEK (later, P2)
+- Bij publieke launch wordt token **product**
+- Vanaf dan: 21% BTW op nieuwe transacties
+- Bestaande gift-tokens blijven gift (papertrail)
+- Gift-flow blijft beschikbaar als parallel donatie-mogelijkheid
+- Moneybird-integratie voor BTW-aangifte
+
+### Switch-mechanisme
+- `system/money_phase.json` veld `phase = "build" | "public"`
+- Code checkt deze flag bij elke aankoop
+- Wijziging vereist admin (gradatie 1) + audit-log entry
 
 ## 🪙 Maak-Token flow (nieuw, v6_mint_from_wallet_001)
 

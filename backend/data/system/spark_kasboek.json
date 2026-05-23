@@ -3,16 +3,18 @@
     {
       "id": "831f7eafecc9",
       "ts": "2026-05-23T16:49:22.030293+00:00",
-      "type": "klant_omzet",
+      "type": "gift_in",
       "bron_tx": "2921e03a-2e03-40db-8e61-3f5c273bfde0",
       "bron_user": "user-a0ee2d7e",
       "bedrag_eur": 20.8,
       "n_tokens": 2,
-      "omschrijving": "Klant-omzet \u20ac20.8 (BTW pas bij winst-realisatie) \u2014 Gijs"
+      "omschrijving": "Gift \u20ac20.8 \u2192 2 ROAR als bedankje (bouw-fase: fiscaal donatie, geen BTW) \u2014 Gijs",
+      "phase": "build"
     }
   ],
   "totals": {
-    "omzet_in": 20.8,
+    "gift_in": 20.8,
+    "omzet_in": 0,
     "btw_reserve": 0,
     "winst_in": 0,
     "uit": 0

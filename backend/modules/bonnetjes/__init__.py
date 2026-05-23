@@ -34,26 +34,66 @@ def _index_file(user_id: str) -> Path:
 
 
 def maak_bonnetje(tx: dict, user_naam: str = "Klant") -> dict:
-    """Genereer + opslaan bonnetje voor klant-aankoop.
-
-    tx velden: id, ts, user_id, token_amount, amount_eur, price_per_token,
-               btw_afgeroomd_eur, netto_eur (optioneel — anders berekend)
-    """
+    """Genereer + opslaan bonnetje (gift-bevestiging in build-fase, factuur in public-fase)."""
     user_id = tx.get("user_id")
     if not user_id:
         return {"error": "no user_id"}
     bdir = _bonnetje_dir(user_id)
     bdir.mkdir(parents=True, exist_ok=True)
 
-    btw = tx.get("btw_afgeroomd_eur", 0)
     incl = tx.get("amount_eur", 0)
-    netto = tx.get("netto_eur", round(incl - btw, 4))
     n = tx.get("token_amount", 1)
     price = tx.get("price_per_token", incl / max(1, n))
     ts = tx.get("timestamp") or tx.get("ts") or datetime.now(timezone.utc).isoformat()
     tx_id = tx.get("id", "no-id")
 
-    md = f"""# 🧾 Bonnetje #{tx_id[:8]}
+    # Bepaal fase
+    phase_path = DATA / "system" / "money_phase.json"
+    phase = load_json(phase_path, default={"phase": "build"}).get("phase", "build")
+
+    if phase == "build":
+        md = f"""# 💚 Gift-bevestiging #{tx_id[:8]}
+
+**Datum**: {ts[:19].replace('T', ' ')} UTC
+**Gever**: {user_naam} (`{user_id}`)
+**Ontvanger**: Roadkill / Spark Core 2.0
+**Onderwerp**: Donatie aan Spark Core concept (bouw-fase)
+
+---
+
+## Gift
+
+| Bedrag | Bedankje |
+|---|---|
+| **€{incl:.2f}** | {n} × ROAR Token (@ €{price:.4f}) |
+
+> **Dit is een gift, geen aankoop.** Tijdens de bouw-fase van Spark Core kunnen
+> sympathisanten het concept ondersteunen via een vrijwillige donatie. Als
+> symbolisch bedankje ontvangt de gever {n} ROAR Token(s) — een interne
+> concept-token die later kan groeien in waarde en/of converteren bij een
+> eventuele publieke launch.
+>
+> _Fiscaal: donaties zijn vrijgesteld van BTW. Het volledige gift-bedrag wordt
+> ingezet voor de groei van het Spark Core concept (development, trade-kapitaal,
+> hosting). Bij publieke launch (fase 2) wordt token een product en gaat BTW gelden._
+
+## Voorwaarden gift-fase
+
+- ROAR Token is een **intern concept-token**, geen officieel betaalmiddel.
+- Geen tegenprestatie-garantie: gift is symbolisch, geen koopcontract.
+- Token-waarde kan stijgen of dalen op basis van concept-groei en circulating supply.
+- Spark Core behoudt altijd ≥ 51% governance (510.000 tokens in treasury).
+- Token kan worden gegift, gebruikt voor merch, of converteren bij coin-uitrol (1:1 papertrail).
+- Bij overgang naar publieke fase blijven bestaande gift-tokens behouden (geen
+  retroactieve BTW).
+
+---
+
+_Gift-bevestiging gegenereerd door Spark Core 2.0 — `v6_gift_phase_001`_
+_Transaction ID: `{tx_id}` · Fase: BUILD_
+"""
+    else:
+        md = f"""# 🧾 Factuur #{tx_id[:8]}
 
 **Datum**: {ts[:19].replace('T', ' ')} UTC
 **Klant**: {user_naam} (`{user_id}`)
@@ -68,33 +108,28 @@ def maak_bonnetje(tx: dict, user_naam: str = "Klant") -> dict:
 |---|---|---|---|
 | ROAR Token | {n} | €{price:.4f} | €{incl:.2f} |
 
-## Tarief-opbouw (v6 — BTW pas bij winst)
+## Tarief (publieke fase)
 
 | Onderdeel | Bedrag |
 |---|---|
-| Klant betaalt | €{incl:.2f} |
-| → Spark omzet (volledig naar trade-wallet) | €{incl:.2f} |
-| → BTW direct afgedragen | €0,00 |
+| Totaal betaald | €{incl:.2f} |
+| BTW direct afgedragen | €0,00 |
+| BTW pas bij winst-realisatie (via Moneybird) | reservering |
 
-> _Nieuw v6-model: BTW is fiscaal pas verschuldigd over **winst/marge**, niet over
-> alle inkomsten. Bij elke trade-winst (positieve PnL bij sell) wordt 21% van de
-> winst gereserveerd in Spark's kasboek (`btw_reserve`). Die reserve wordt periodiek
-> afgedragen aan de Belastingdienst via Moneybird._
->
-> _Spark heeft geen bankrekening; alle mutaties zijn administratief (papertrail-model)._
+> _v6 publieke model: BTW (21%) is fiscaal verschuldigd over winst/marge, niet
+> over omzet. Bij elke trade-winst wordt 21% van die winst gereserveerd in
+> Spark's kasboek (`btw_reserve`) en periodiek afgedragen via Moneybird._
 
 ## Voorwaarden
 
 - ROAR is een **intern concept-token**, geen officieel betaalmiddel of cryptomunt.
 - Token-prijs kan stijgen of dalen op basis van circulating supply.
 - Spark Core behoudt altijd ≥ 51% governance (510.000 tokens in treasury).
-- Aankoop is **symbolische ondersteuning** van het Spark Core concept.
-- Token kan later worden gegift, gebruikt voor merch, of geconverteerd bij eventuele
-  toekomstige coin-uitrol (1:1 papertrail-conversie).
+- Token kan later worden gegift, gebruikt voor merch, of geconverteerd bij coin-uitrol.
 
 ---
 
-_Bonnetje gegenereerd door Spark Core 2.0 — `v6_bonnetje_001` (model v6_btw_pas_bij_winst_001)_
+_Factuur gegenereerd door Spark Core 2.0 — `v6_gift_phase_001` (fase PUBLIC)_
 _Transaction ID: `{tx_id}`_
 """
     out_path = bdir / f"{tx_id}.md"
@@ -107,9 +142,10 @@ _Transaction ID: `{tx_id}`_
         "tx_id": tx_id,
         "ts": ts,
         "bedrag_eur": incl,
-        "btw_eur": btw,
-        "netto_eur": netto,
+        "btw_eur": 0,  # gift-fase: geen BTW; later bij public-fase wel
+        "netto_eur": incl,  # volledig naar Spark
         "n_tokens": n,
+        "phase": phase,
         "file": f"{tx_id}.md",
     })
     save_json(idx_path, idx)

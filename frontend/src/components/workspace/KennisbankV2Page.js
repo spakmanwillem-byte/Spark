@@ -42,6 +42,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [selectedCard, setSelectedCard] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [editForm, setEditForm] = useState(null);
+  // v6_kbv2_inline_new_001 — Lege kaart in rechter paneel zonder window.prompt
+  const [creatingNew, setCreatingNew] = useState(false);
   const [savingClassify, setSavingClassify] = useState(false);
   const [showAudit, setShowAudit] = useState(false);
   const [auditData, setAuditData] = useState(null);
@@ -156,6 +158,57 @@ export function KennisbankV2Page({ onNavigate }) {
     setSavingClassify(false);
   };
 
+  // v6_kbv2_inline_new_001 — lege kaart opslaan vanuit rechter paneel
+  // Niet-compleet (geen laag1 etc) blijft automatisch in inbox als "onbeantwoord".
+  const saveNew = async () => {
+    if (!editForm) return;
+    if (!(editForm.begrip || '').trim()) { alert('Vul een begrip in'); return; }
+    setSavingClassify(true);
+    try {
+      // Stap 1: kaart in inbox aanmaken
+      const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ begrip: editForm.begrip.trim(), source: 'manual', user_id: 'user-001' }),
+      }).then(x => x.json());
+      if (!r || !r.kaart) { alert('Aanmaken mislukt: ' + JSON.stringify(r)); setSavingClassify(false); return; }
+      let kaart = r.kaart;
+      // Stap 2: lagen / ws5 / tags bewerken als ingevuld
+      const hasContent =
+        Object.values(editForm.lagen || {}).some(v => (v || '').trim()) ||
+        Object.values(editForm.ws5 || {}).some(v => (v || '').trim()) ||
+        (editForm.tags || []).length > 0;
+      if (hasContent) {
+        const ed = await fetch(`${API}/api/kb/v2/edit`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            card_id: kaart.id, lade: 'inbox',
+            updates: { lagen: editForm.lagen, ws5: editForm.ws5, tags: editForm.tags },
+            user_id: 'user-001',
+          }),
+        }).then(x => x.json());
+        if (ed.success && ed.kaart) kaart = ed.kaart;
+      }
+      // Stap 3: refresh + selecteer nieuwe kaart (blijft in inbox/onbeantwoord)
+      setActiveTab('inbox');
+      setSearch('');
+      setReasonFilter('');
+      setPage(0);
+      await loadStats();
+      await loadItems();
+      setCreatingNew(false);
+      setSelectedCard(kaart);
+      setEditMode(false);
+      setEditForm(null);
+    } catch (e) { alert('Fout: ' + e.message); }
+    setSavingClassify(false);
+  };
+
+  const cancelNew = () => {
+    setCreatingNew(false);
+    setEditForm(null);
+    setEditMode(false);
+  };
+
   const runAudit = async () => {
     try {
       const r = await fetch(`${API}/api/kb/v2/audit`).then(x => x.json());
@@ -182,36 +235,12 @@ export function KennisbankV2Page({ onNavigate }) {
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5" /> Self-audit
             </button>
-            <button data-testid="kbv2-new-card-btn" onClick={async () => {
-                const begrip = window.prompt('Nieuwe kennis-kaart (begrip):');
-                if (!begrip || !begrip.trim()) return;
-                try {
-                  const r = await fetch(`${API}/api/kb/v2/inbox/add`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ begrip: begrip.trim(), source: 'manual', user_id: 'user-001' })
-                  }).then(x => x.json());
-                  if (r && (r.success || r.kaart)) {
-                    setActiveTab('inbox');
-                    setSearch('');
-                    setReasonFilter('');
-                    setPage(0);
-                    await loadStats();
-                    await loadItems();
-                    // v6_kbv2_autoselect — open nieuwe kaart direct in bestaande detail-paneel in edit-modus
-                    if (r.kaart) {
-                      setSelectedCard(r.kaart);
-                      setEditMode(true);
-                      setEditForm({
-                        lagen: { ...(r.kaart.lagen || {}) },
-                        ws5:   { ...(r.kaart.ws5 || {}) },
-                        tags:  [...(r.kaart.tags || [])],
-                        begrip: r.kaart.begrip || '',
-                      });
-                    }
-                  } else {
-                    alert('Kon niet aanmaken: ' + JSON.stringify(r));
-                  }
-                } catch (e) { alert('Fout: ' + e.message); }
+            <button data-testid="kbv2-new-card-btn" onClick={() => {
+                // v6_kbv2_inline_new_001 — open leeg formulier in rechter paneel
+                setSelectedCard(null);
+                setEditMode(false);
+                setEditForm({ begrip: '', lagen: {}, ws5: {}, tags: [] });
+                setCreatingNew(true);
               }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
@@ -301,10 +330,14 @@ export function KennisbankV2Page({ onNavigate }) {
 
           {/* Detail / Edit */}
           <div className="bg-slate-900/40 border border-slate-800 rounded-xl p-3">
-            {!selectedCard ? (
+            {creatingNew ? (
+              <NewCardInline editForm={editForm} setEditForm={setEditForm}
+                saving={savingClassify} onSave={saveNew} onCancel={cancelNew} />
+            ) : !selectedCard ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12 text-slate-500">
                 <Eye className="w-8 h-8 mb-2 opacity-40" />
                 <p className="text-xs">Selecteer een kaart links om te bekijken of in te delen.</p>
+                <p className="text-[10px] mt-2 text-slate-600">Of klik <span className="text-emerald-400">Nieuwe kaart</span> rechtsboven om een lege kaart te starten.</p>
               </div>
             ) : (
               <CardDetail card={selectedCard} editMode={editMode} editForm={editForm}
@@ -696,6 +729,101 @@ function MediaSection({ card, currentLade, onUpdated }) {
       </div>
 
       {err && <p className="text-[10px] text-red-400">{err}</p>}
+    </div>
+  );
+}
+
+// ============================================================
+// v6_kbv2_inline_new_001 — Lege kaart in rechter paneel (geen window.prompt)
+// Niet-compleet (geen lagen/5W) blijft automatisch in inbox = onbeantwoord
+// ============================================================
+function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel }) {
+  if (!editForm) return null;
+  const lagen = editForm.lagen || {};
+  const ws5 = editForm.ws5 || {};
+  const tags = editForm.tags || [];
+  const updLaag = (k, v) => setEditForm(f => ({ ...f, lagen: { ...(f.lagen || {}), [k]: v } }));
+  const updWs5  = (k, v) => setEditForm(f => ({ ...f, ws5:   { ...(f.ws5 || {}),   [k]: v } }));
+
+  const hasL1 = !!(lagen.laag1 || '').trim();
+  const has5w = Object.values(ws5).some(v => (v || '').trim());
+  const compleet = hasL1 && has5w;
+
+  return (
+    <div className="space-y-3" data-testid="kbv2-inline-newcard">
+      <div className="flex items-start justify-between gap-2 border-b border-slate-800 pb-2">
+        <div className="flex-1">
+          <p className="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">Nieuwe kaart</p>
+          <input data-testid="kbv2-new-begrip" type="text" value={editForm.begrip || ''}
+            onChange={e => setEditForm(f => ({ ...f, begrip: e.target.value }))} autoFocus
+            placeholder="Begrip (verplicht) — bv. 'Mededogen'"
+            className="mt-1 w-full text-lg font-bold text-white bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/60" />
+          <p className="text-[10px] text-slate-500 mt-1">
+            Nieuwe kaart komt eerst in <span className="text-amber-300">inbox</span>.
+            {!compleet && <> Niet compleet ingevuld → blijft in <span className="text-red-400">onbeantwoord</span>.</>}
+          </p>
+        </div>
+        <button data-testid="kbv2-new-cancel" onClick={onCancel}
+          className="p-1 hover:bg-slate-800 rounded text-slate-400">
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Lagen 1-4 */}
+      <div className="space-y-1.5">
+        {['laag1','laag2','laag3','laag4'].map((k, i) => (
+          <div key={k}>
+            <label className="text-[10px] uppercase text-slate-500 tracking-wide">
+              Laag {i+1}{i === 0 && <span className="text-red-400 ml-1">(belangrijk)</span>}
+            </label>
+            <textarea data-testid={`kbv2-new-${k}`} value={lagen[k] || ''} rows={2}
+              onChange={e => updLaag(k, e.target.value)}
+              placeholder={i === 0 ? 'Kort antwoord / definitie' : ''}
+              className="w-full mt-0.5 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 resize-y focus:outline-none focus:border-emerald-500/40" />
+          </div>
+        ))}
+      </div>
+
+      {/* 5W */}
+      <details className="border border-slate-800 rounded-lg" open>
+        <summary className="px-2 py-1.5 text-[11px] text-slate-400 cursor-pointer">5W (wie/wat/wanneer/waar/waarom/hoe)</summary>
+        <div className="p-2 space-y-1">
+          {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
+            <div key={k} className="flex items-start gap-2">
+              <span className="text-[10px] text-slate-500 w-14 mt-0.5 uppercase">{k}</span>
+              <input data-testid={`kbv2-new-ws5-${k}`} value={ws5[k] || ''}
+                onChange={e => updWs5(k, e.target.value)}
+                className="flex-1 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-0.5 focus:outline-none focus:border-emerald-500/40" />
+            </div>
+          ))}
+        </div>
+      </details>
+
+      {/* Tags */}
+      <div>
+        <label className="text-[10px] uppercase text-slate-500 tracking-wide">Tags</label>
+        <input data-testid="kbv2-new-tags" value={tags.join(', ')}
+          onChange={e => setEditForm(f => ({ ...f, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) }))}
+          placeholder="tag1, tag2, ..."
+          className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/40" />
+      </div>
+
+      {/* Completeness hint */}
+      <div className="text-[10px] text-slate-500 border-t border-slate-800 pt-2 leading-relaxed">
+        Status na opslaan:{' '}
+        {compleet
+          ? <span className="text-emerald-400 font-semibold">Compleet (laag 1 + 5W) — klaar voor indelen</span>
+          : <span className="text-red-400 font-semibold">Onbeantwoord — blijft in inbox</span>}
+      </div>
+
+      <div className="flex justify-end gap-2 border-t border-slate-800 pt-3">
+        <button data-testid="kbv2-new-cancel-btn" onClick={onCancel}
+          className="px-3 py-1.5 text-xs text-slate-400 hover:bg-slate-800 rounded-lg">Annuleren</button>
+        <button data-testid="kbv2-new-save-btn" onClick={onSave} disabled={saving || !(editForm.begrip || '').trim()}
+          className="px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600">
+            <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : 'Opslaan in inbox'}
+        </button>
+      </div>
     </div>
   );
 }

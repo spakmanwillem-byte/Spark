@@ -9,6 +9,32 @@
   "fixed_price_limit": 10,
   "transactions": [
     {
+      "id": "anchor-spark-initial-mint",
+      "ts": "2026-05-14T00:00:00+00:00",
+      "timestamp": "2026-05-14T00:00:00+00:00",
+      "type": "anchor_mint",
+      "user_id": "user-000",
+      "token_amount": 10,
+      "amount_eur": 50.8,
+      "total_eur": 50.8,
+      "price_per_token": 5.08,
+      "source": "anker_initial",
+      "description": "Anker-mint Spark/Roadkill: 10 ROAR @ \u20ac5.08 = \u20ac50.80 (fundering concept)"
+    },
+    {
+      "id": "anchor-willem-initial-mint",
+      "ts": "2026-05-14T00:00:00+00:00",
+      "timestamp": "2026-05-14T00:00:00+00:00",
+      "type": "anchor_mint",
+      "user_id": "user-001",
+      "token_amount": 10,
+      "amount_eur": 50.8,
+      "total_eur": 50.8,
+      "price_per_token": 5.08,
+      "source": "anker_initial",
+      "description": "Anker-mint Willem: 10 ROAR @ \u20ac5.08 = \u20ac50.80 (fundering concept, geen gift/koop)"
+    },
+    {
       "ts": "2026-05-23T00:00:00+00:00",
       "type": "mint",
       "user_id": "user-000",

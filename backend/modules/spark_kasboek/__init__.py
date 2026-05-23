@@ -141,6 +141,17 @@ async def history(limit: int = 100):
                 "bron_user": t.get("user_id"),
                 "source": "roar",
             })
+        elif ttype == "anchor_mint":
+            items.append({
+                "ts": t.get("ts") or t.get("timestamp"),
+                "type": "anchor_mint",
+                "label": "⚓ Anker-mint",
+                "amount_eur": t.get("total_eur") or t.get("amount_eur"),
+                "n_tokens": t.get("token_amount", 0),
+                "description": t.get("description") or f"Anker {t.get('user_id')} kreeg {t.get('token_amount')} ROAR @ €{t.get('price_per_token')}",
+                "bron_user": t.get("user_id"),
+                "source": "roar",
+            })
         elif ttype == "spark_self_mint":
             items.append({
                 "ts": t.get("ts"),

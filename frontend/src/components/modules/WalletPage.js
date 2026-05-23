@@ -123,7 +123,7 @@ export function WalletPage({ onNavigate }) {
             </div>
             <div>
               <h1 className="text-xl font-bold text-white">Wallet</h1>
-              <p className="text-xs text-slate-500">{walletView === 'spark' && isAdmin ? 'Persoonlijk financieel overzicht' : "Spark's wallet (admin view)"}</p>
+              <p className="text-xs text-slate-500">{walletView === 'spark' && isAdmin ? "Spark's wallet (admin view)" : 'Persoonlijk financieel overzicht'}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -132,11 +132,11 @@ export function WalletPage({ onNavigate }) {
               <div data-testid="wallet-view-switch" className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg border border-slate-700">
                 <button onClick={() => setWalletView('me')} data-testid="wallet-view-me"
                   className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
-                  🌟 Spark
+                  👤 Mijn
                 </button>
                 <button onClick={() => setWalletView('spark')} data-testid="wallet-view-spark"
                   className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
-                  👤 Mijn
+                  🌟 Spark
                 </button>
               </div>
             )}

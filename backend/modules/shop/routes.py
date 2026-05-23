@@ -103,24 +103,32 @@ def get_bitvavo_balance_cached(user_id: str = "user-001") -> Optional[float]:
 
 def get_spark_core_value():
     """
-    Spark Core totale waarde = LIVE Bitvavo balance (primair) OF
-    deposits + trading profits - withdrawals uit financial file (fallback).
+    Spark Core totale waarde = LIVE Bitvavo balance + Spark kasboek gifts/omzet
+    (gifts in build-fase + omzet in public-fase). v6_value_includes_gifts_001.
     """
+    total_value = 0.0
     # PRIMAIR: Live Bitvavo balance
     live = get_bitvavo_balance_cached()
     if live is not None and live > 0:
-        return live
-
-    # FALLBACK: Bereken uit financial transactions
-    fin = load_json(FINANCIAL_FILE, default={"transactions": []})
-    total_value = 0.0
-    for tx in fin.get("transactions", []):
-        if tx["type"] == "deposit":
-            total_value += tx.get("amount_eur", 0)
-        elif tx["type"] == "profit":
-            total_value += tx.get("amount_eur", 0)
-        elif tx["type"] == "withdrawal":
-            total_value -= tx.get("amount_eur", 0)
+        total_value += live
+    else:
+        # FALLBACK: Bereken uit financial transactions
+        fin = load_json(FINANCIAL_FILE, default={"transactions": []})
+        for tx in fin.get("transactions", []):
+            if tx["type"] == "deposit":
+                total_value += tx.get("amount_eur", 0)
+            elif tx["type"] == "profit":
+                total_value += tx.get("amount_eur", 0)
+            elif tx["type"] == "withdrawal":
+                total_value -= tx.get("amount_eur", 0)
+    # v6_value_includes_gifts_001 — Spark kasboek meetellen (gift + omzet),
+    # zo stijgt de token-prijs zichtbaar bij elke nieuwe gift/aankoop
+    try:
+        kb = load_json(DATA_DIR / "system" / "spark_kasboek.json", default={"totals": {}})
+        t = kb.get("totals", {})
+        total_value += t.get("gift_in", 0) + t.get("omzet_in", 0) + t.get("winst_in", 0)
+    except Exception:
+        pass
     return total_value
 
 

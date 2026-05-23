@@ -276,6 +276,9 @@ export function WalletPage({ onNavigate }) {
           </div>
         </div>
 
+        {/* v6_price_chart_001 — token-prijs grafiek bovenaan transactie-paneel (Spark view only) */}
+        {walletView === 'spark' && isAdmin && <TokenPriceChart />}
+
         {/* Bottom Row: Transactions + Stats */}
         <div className="grid grid-cols-12 gap-4">
 
@@ -636,6 +639,81 @@ function GiftInboxRow({ gift, actorId, onUpdated }) {
         className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40">
         ✕ Weiger
       </button>
+    </div>
+  );
+}
+
+
+// v6_price_chart_001 — Token-prijs grafiek met 2 lijnen (incl-BTW vs netto) + cycle-buttons
+function TokenPriceChart() {
+  const [interval, setInterval_] = useState('1d');
+  const [points, setPoints] = useState([]);
+  useEffect(() => {
+    fetch(`${API}/api/spark/kasboek/price-history?interval=${interval}&limit=80`)
+      .then(r => r.json()).then(d => setPoints(d.points || [])).catch(() => setPoints([]));
+  }, [interval]);
+
+  const W = 800, H = 180, P = 30;
+  const prices = points.flatMap(p => [p.price_incl, p.price_netto]).filter(x => x > 0);
+  const minP = prices.length ? Math.min(...prices) * 0.92 : 0;
+  const maxP = prices.length ? Math.max(...prices) * 1.08 : 1;
+  const x = i => P + ((W - 2 * P) * i) / Math.max(1, points.length - 1);
+  const y = v => H - P - ((H - 2 * P) * (v - minP)) / Math.max(0.01, maxP - minP);
+  const path = key => points.length === 0 ? '' :
+    points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${y(p[key])}`).join(' ');
+
+  return (
+    <div data-testid="token-price-chart" className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h3 className="text-sm font-semibold text-white">📈 ROAR Token-prijs</h3>
+          <p className="text-[10px] text-slate-500">
+            <span className="text-emerald-300">━━ Incl-BTW (klant)</span>
+            {' · '}
+            <span className="text-amber-300">━━ Netto (Spark ontvangt)</span>
+            {' · ankers (Willem/Roadkill) = lijnen samen'}
+          </p>
+        </div>
+        <div className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg">
+          {['15m', '1h', '4h', '1d'].map(iv => (
+            <button key={iv} onClick={() => setInterval_(iv)} data-testid={`chart-cycle-${iv}`}
+              className={`px-2 py-1 rounded text-[10px] font-medium ${interval === iv ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
+              {iv}
+            </button>
+          ))}
+        </div>
+      </div>
+      {points.length === 0 ? (
+        <div className="py-8 text-center text-slate-500 text-xs">Nog geen prijs-historie op dit interval</div>
+      ) : (
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
+          {/* Grid */}
+          {[0, 0.25, 0.5, 0.75, 1].map(t => (
+            <line key={t} x1={P} y1={P + (H - 2 * P) * t} x2={W - P} y2={P + (H - 2 * P) * t} stroke="#1e293b" strokeWidth="1" />
+          ))}
+          {/* Y-axis labels */}
+          {[0, 0.5, 1].map(t => {
+            const v = maxP - (maxP - minP) * t;
+            return <text key={t} x={W - P + 4} y={P + (H - 2 * P) * t + 3} fill="#64748b" fontSize="9">€{v.toFixed(2)}</text>;
+          })}
+          {/* Lines */}
+          <path d={path('price_netto')} stroke="#f59e0b" strokeWidth="2" fill="none" />
+          <path d={path('price_incl')} stroke="#10b981" strokeWidth="2" fill="none" />
+          {/* Dots */}
+          {points.map((p, i) => (
+            <g key={i}>
+              <circle cx={x(i)} cy={y(p.price_incl)} r="3" fill="#10b981" />
+              <circle cx={x(i)} cy={y(p.price_netto)} r="3" fill="#f59e0b" />
+            </g>
+          ))}
+          {/* X-axis dates */}
+          {points.map((p, i) => i % Math.max(1, Math.floor(points.length / 5)) === 0 && (
+            <text key={i} x={x(i)} y={H - 8} fill="#64748b" fontSize="9" textAnchor="middle">
+              {(p.ts || '').slice(5, 10)}
+            </text>
+          ))}
+        </svg>
+      )}
     </div>
   );
 }

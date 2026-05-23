@@ -317,14 +317,16 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
 
-    # v5_btw_afroming_001 — 21% BTW op token-aankoop → Spark's kasboek
-    # Spark heeft géén bank, dit is de enige "inkomstenstroom" via Willem's koop-acties.
+    # v5_btw_afroming_001 + v6_anchor_no_btw_001 — 21% BTW uit prijs (incl-BTW model)
+    # Anker-houders (Willem user-001 en Spark user-000) betalen geen BTW: zij zijn fundering.
+    # Klanten (alle andere user-IDs) → 21% BTW uit incl-prijs (bedrag * 21/121).
     try:
         from datetime import datetime as _dt, timezone as _tz
         import uuid as _uuid
-        btw_pct = 0.21
-        btw_eur = round(amount_eur * btw_pct, 4)
-        if btw_eur > 0 and user_id != "user-000":
+        ANCHOR_USERS = {"user-000", "user-001"}
+        is_klant = user_id not in ANCHOR_USERS
+        btw_eur = round(amount_eur * 21 / 121, 4) if is_klant else 0.0
+        if btw_eur > 0:
             spark_w = wallets.get("wallets", {}).get("user-000")
             if isinstance(spark_w, dict):
                 spark_w["balance"] = round(spark_w.get("balance", 0) + btw_eur, 4)
@@ -338,6 +340,7 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
                 save_json(uw_path, uw)
             kb_path = _P(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json"
             kb = load_json(kb_path, default={"entries": [], "totals": {"btw_in": 0, "winst_in": 0, "uit": 0}})
+            netto = round(amount_eur - btw_eur, 4)
             kb["entries"].append({
                 "id": _uuid.uuid4().hex[:12],
                 "ts": _dt.now(_tz.utc).isoformat(),
@@ -345,15 +348,31 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
                 "bron_tx": tx["id"],
                 "bron_user": user_id,
                 "bedrag_eur": btw_eur,
-                "btw_pct": btw_pct,
+                "btw_pct": 0.21,
+                "btw_uit_incl": True,
                 "grondslag_eur": amount_eur,
-                "omschrijving": f"21% BTW afgeroomd op {amount_tokens} ROAR aankoop @ €{price:.2f}",
+                "netto_eur": netto,
+                "omschrijving": f"21% BTW uit incl-prijs €{amount_eur} (€{netto} netto + €{btw_eur} BTW) — klant aankoop {amount_tokens} ROAR",
             })
             kb["totals"]["btw_in"] = round(kb["totals"].get("btw_in", 0) + btw_eur, 4)
             save_json(kb_path, kb)
             tx["btw_afgeroomd_eur"] = btw_eur
+        else:
+            tx["btw_afgeroomd_eur"] = 0
+            tx["anker_aankoop"] = True
     except Exception as _ex:
         print(f"[btw-afroming] failed: {_ex}")
+
+    # v6_bonnetje_001 — Bonnetje voor klant-aankoop opslaan in user archief
+    try:
+        if user_id not in {"user-000", "user-001"}:  # alleen klanten
+            from modules.bonnetjes import maak_bonnetje
+            # Lookup naam
+            users = load_json(DATA_DIR / "system" / "users.json", default={"users": []}).get("users", [])
+            naam = next((u.get("naam") for u in users if u.get("id") == user_id), "Klant")
+            maak_bonnetje({**tx, "netto_eur": round(amount_eur - tx.get("btw_afgeroomd_eur", 0), 4)}, user_naam=naam)
+    except Exception as _ex:
+        print(f"[bonnetje-gen] failed: {_ex}")
 
     return {
         "success": True,

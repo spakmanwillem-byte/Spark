@@ -32,6 +32,46 @@ async def saldo():
     }
 
 
+@router.get("/price-history")
+async def price_history(interval: str = "1h", limit: int = 50):
+    """v6_price_history_001 — bucket prijs uit alle buy_roar transactions.
+    Returns 2 lines: price_incl (klant-prijs) + price_netto (Spark's deel zonder BTW).
+    interval: 15m / 1h / 4h / 1d
+    """
+    from pathlib import Path as _P
+    from datetime import datetime, timezone, timedelta
+    ROAR = _P(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
+    roar = load_json(ROAR, default={"transactions": []})
+
+    minutes = {"15m": 15, "1h": 60, "4h": 240, "1d": 1440}.get(interval, 60)
+    buckets = {}
+    ANCHOR = {"user-000", "user-001"}
+    for t in roar.get("transactions", []):
+        if t.get("type") != "buy_roar":
+            continue
+        ts_str = t.get("ts") or t.get("timestamp")
+        if not ts_str:
+            continue
+        try:
+            dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+        except Exception:
+            continue
+        # Round down to bucket
+        epoch_min = int(dt.timestamp() / 60)
+        bucket_min = (epoch_min // minutes) * minutes
+        bucket_ts = datetime.fromtimestamp(bucket_min * 60, tz=timezone.utc).isoformat()
+        price_incl = t.get("price_per_token") or 0
+        is_klant = t.get("user_id") not in ANCHOR
+        # Anker-aankoop: incl == netto (geen BTW). Klant: netto = incl * 100/121
+        price_netto = round(price_incl * 100 / 121, 4) if is_klant else price_incl
+        b = buckets.setdefault(bucket_ts, {"ts": bucket_ts, "price_incl": price_incl, "price_netto": price_netto, "n": 0})
+        b["price_incl"] = max(b["price_incl"], price_incl)
+        b["price_netto"] = max(b["price_netto"], price_netto)
+        b["n"] += 1
+    series = sorted(buckets.values(), key=lambda x: x["ts"])[-limit:]
+    return {"interval": interval, "points": series, "total": len(series)}
+
+
 @router.get("/entries")
 async def entries(limit: int = 50):
     kb = load_json(KB_PATH, default={"entries": []})

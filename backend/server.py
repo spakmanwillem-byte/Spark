@@ -147,6 +147,10 @@ app.include_router(spark_kasboek_router, prefix="/api")
 from modules.spark_mint import router as spark_mint_router
 app.include_router(spark_mint_router, prefix="/api")
 
+# v6_bonnetje_001 — Bonnetjes voor klant-aankopen
+from modules.bonnetjes import router as bonnetjes_router
+app.include_router(bonnetjes_router, prefix="/api")
+
 # v5_event_overlay_001
 from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")

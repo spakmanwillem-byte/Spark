@@ -84,11 +84,33 @@ Convenant: bij elke vondst van een dual-source moment → entry hier + cross-ref
 - **Beslissing**: Beide bewaren. `gift_requests.json` is UI/state, `roar_balances.transactions` is financial audit. Pending gifts staan niet in transactions (geen token-mutatie yet).
 - **Verplichting**: Bij accept hook → push naar transactions[] + admin_log[] + DSP-004 sync. Bij reject/expired/cancel → geen financial tx (alleen lifecycle).
 - **Privacy-implicatie**: `gift_requests.json` bevat sender/recipient pairs zichtbaar voor alle servers/backups → encryption-at-rest later overwegen (P2).
-- **Cross-refs**: `/app/backend/modules/shop/gift.py` (alle endpoints), `/app/backend/data/roar/roar_balances.json` (transactions)
+---
+
+## INDEX · Waar zit wat (voor agent-handoff, overleeft deploy + zip-cycle)
+
+| Bestand / Locatie | Inhoud | Voor wie |
+|---|---|---|
+| `/app/backend/data/bugs/bugs.json` | Bug-meldingen + ideeën door users via Notities → Bugs tab. Open + opgelost mengen. | Echte bugs + brain-dump van user |
+| `/app/backend/data/notes/notes.json` | User-notities (Willem's eigen titels/inhoud zoals "5w", "Bugmelder uitleg") | **USER**-content — NIET agent-context |
+| `/app/backend/data/system/roadmap.json` | Versies (v3.0, v4.0, v5.0, v6.0, known_issues, technical_debt, architectural_decisions, notes) | Boom-structuur, niet UI-flat-list |
+| `/app/frontend/src/components/workspace/RoadmapPage.js` | **Hardcoded phase-array** met done/active/planned items. Dit is wat user ziet | User-visible roadmap |
+| `/app/memory/AGENT_BACKLOG.md` | **NIEUW**: alleen agent-context — brain-dump-items die nog niet user-visible zijn | Agent (mij) |
+| `/app/memory/ARCHITECTURE.md` | DSP-patronen, dual-source afspraken, dit overzicht | Agent (verplicht lezen) |
+| `/app/memory/PRD.md` | Original problem statement + recent done | Agent + handoff |
+| `/app/memory/test_credentials.md` | Login-info | Agent + test runs |
+| `/app/backend/data/personality/spark_vocab.json` | Spark's eigen woordenlijst — per emotie 4 intents (begroet/bedank/afscheid/reactie), + algemeen (twijfel/enthousiasme/zelfspot/openers/afsluiters/uit_kennisbank) | Spark's stem-variatie |
+
+### Cross-doc regels (om mijn fouten te voorkomen)
+1. **Vóór coden**: lees `ARCHITECTURE.md` + `PRD.md` + huidige roadmap-fases in `RoadmapPage.js`
+2. **Geen aannames**: bij bug-melding eerst vragen welke environment (preview vs https://roadkillcommunity.nl)
+3. **Mijn fouten** horen NIET op user-zichtbare roadmap of bugs.json — alleen in AGENT_BACKLOG
+4. **Roadmap = boom, niet lijst**: stam (architectuur) / wortels (audit-vragen) / takken (concrete items). RoadmapPage.js moet die hiërarchie respecteren
+5. Bij elke balance/state mutatie: check DSP-004/005/006 voor sync-verplichtingen
 
 ---
 
 ## Convenant-oorsprong (waarom dit bestaat)
+
 
 - **Datum**: 2026-05-23
 - **Trigger**: Willem merkte op dat ik bij dual-source ontdekkingen geen voetnoot maakte. Quote: "in situaties als deze moet je het in footnote en meta zetten als je er nog niet mee werkt na elkaar verwijzen als je er achterkomt. ook deze opmerking hahaha".

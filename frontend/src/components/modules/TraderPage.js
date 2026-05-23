@@ -351,11 +351,11 @@ export function TraderPage({ onNavigate }) {
               <div data-testid="wallet-switch" className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg border border-slate-700">
                 <button onClick={() => setWalletView('me')} data-testid="wallet-switch-me"
                   className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1 ${walletView === 'me' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
-                  🌟 Spark
+                  👤 Mijn
                 </button>
                 <button onClick={() => setWalletView('spark')} data-testid="wallet-switch-spark"
                   className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors ${walletView === 'spark' ? 'bg-amber-500/30 text-amber-200' : 'text-slate-400 hover:text-slate-200'}`}>
-                  👤 Mijn
+                  🌟 Spark
                 </button>
               </div>
             )}

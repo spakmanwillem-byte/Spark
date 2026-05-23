@@ -538,6 +538,9 @@ function AdminColorScheme({ userId, userGrad }) {
         </p>
       )}
 
+      {/* v5_bot_color_scheme_001 — per-bot accent kleuren */}
+      <BotColorPanel canEdit={canEdit} />
+
       {msg && (
         <p data-testid="scheme-msg"
           className={`text-[11px] px-3 py-2 rounded-lg border ${msg.kind === 'ok' ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' : 'bg-red-500/10 text-red-300 border-red-500/30'}`}>
@@ -731,6 +734,81 @@ function SaveButton({ saving, onClick }) {
     >
       <Save className="w-4 h-4" /> {saving ? 'Opgeslagen!' : 'Instellingen Opslaan'}
     </button>
+  );
+}
+
+// v5_bot_color_scheme_001 — admin paneel om per-bot accent te kiezen
+const BOT_DEFAULTS = [
+  { key: 'bot_color_madelief',   naam: 'Madelief Stouten',   default: '#ec4899', icon: '🌸' },
+  { key: 'bot_color_harry',      naam: 'Harry Klokkenmaker', default: '#06b6d4', icon: '⏰' },
+  { key: 'bot_color_smith',      naam: 'Mr Smith',           default: '#10b981', icon: '🛡️' },
+  { key: 'bot_color_boekhouder', naam: 'De Boekhouder',      default: '#f59e0b', icon: '📊' },
+  { key: 'bot_color_dood',       naam: 'De Dood',            default: '#a855f7', icon: '💀' },
+];
+
+function BotColorPanel({ canEdit }) {
+  const [colors, setColors] = React.useState({});
+  const [saving, setSaving] = React.useState('');
+
+  React.useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/settings/system`).then(r => r.json()).then(d => {
+      const s = d?.settings || {};
+      const next = {};
+      BOT_DEFAULTS.forEach(b => { next[b.key] = s[b.key] || b.default; });
+      setColors(next);
+    });
+  }, []);
+
+  const saveOne = async (key, value) => {
+    setSaving(key);
+    try {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/settings/system`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key, value }),
+      });
+    } catch {}
+    setSaving('');
+  };
+
+  return (
+    <div data-testid="bot-color-panel" className="space-y-2 pt-4 border-t border-slate-800">
+      <div>
+        <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Bot-accent kleuren</p>
+        <p className="text-[11px] text-slate-400 leading-relaxed">
+          Iedere community-bot heeft zijn eigen kleur in Gesprekken/Community bubbles.
+          Bumpt geldt direct voor alle users.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {BOT_DEFAULTS.map(b => (
+          <div key={b.key} className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-800/40 border border-slate-800">
+            <span className="text-lg">{b.icon}</span>
+            <div className="flex-1">
+              <p className="text-[11px] text-slate-200 font-medium">{b.naam}</p>
+              <p className="text-[9px] text-slate-500 font-mono">{b.key}</p>
+            </div>
+            <input
+              type="color"
+              data-testid={`bot-color-${b.key}`}
+              value={colors[b.key] || b.default}
+              disabled={!canEdit || saving === b.key}
+              onChange={e => setColors(c => ({ ...c, [b.key]: e.target.value }))}
+              onBlur={e => saveOne(b.key, e.target.value)}
+              className="w-9 h-7 rounded bg-transparent border border-slate-700 cursor-pointer disabled:opacity-40"
+            />
+            <input
+              type="text"
+              value={colors[b.key] || b.default}
+              disabled={!canEdit || saving === b.key}
+              onChange={e => setColors(c => ({ ...c, [b.key]: e.target.value }))}
+              onBlur={e => saveOne(b.key, e.target.value)}
+              className="w-20 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-[10px] font-mono text-white disabled:opacity-40"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

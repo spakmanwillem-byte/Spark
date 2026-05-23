@@ -112,11 +112,51 @@ const getAmbientPlayer = () => {
   return window.__sparkAmbient;
 };
 
-const BOT_COLORS = {
-  'bot-madelief': { bg: 'bg-pink-500/10', text: 'text-pink-400', border: 'border-pink-500/20', icon: Sparkles, accent: '#ec4899' },
-  'bot-harry': { bg: 'bg-cyan-500/10', text: 'text-cyan-400', border: 'border-cyan-500/20', icon: Timer, accent: '#06b6d4' },
-  'bot-smith': { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', icon: Shield, accent: '#10b981' },
+// v5_bot_color_scheme_001 — defaults; worden overschreven via /api/settings/system
+const BOT_COLOR_DEFAULTS = {
+  'bot-madelief':   { bg: 'bg-pink-500/10',    text: 'text-pink-400',    border: 'border-pink-500/20',    icon: Sparkles, accent: '#ec4899' },
+  'bot-harry':      { bg: 'bg-cyan-500/10',    text: 'text-cyan-400',    border: 'border-cyan-500/20',    icon: Timer,    accent: '#06b6d4' },
+  'bot-smith':      { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', icon: Shield,   accent: '#10b981' },
+  'bot-boekhouder': { bg: 'bg-amber-500/10',   text: 'text-amber-400',   border: 'border-amber-500/20',   icon: Bot,      accent: '#f59e0b' },
+  'bot-dood':       { bg: 'bg-purple-500/10',  text: 'text-purple-400',  border: 'border-purple-500/20',  icon: Bot,      accent: '#a855f7' },
 };
+// Mutable runtime cache — gevuld bij eerste fetch en bij admin save (via storage event)
+const BOT_COLORS = { ...BOT_COLOR_DEFAULTS };
+
+function _hexToTailwindStyle(hex) {
+  // Returnt inline styles voor bg + text + border met opacity
+  return {
+    bg: `${hex}1a`,        // 10% opacity
+    text: hex,
+    border: `${hex}33`,    // 20% opacity
+    accent: hex,
+  };
+}
+
+async function _refreshBotColors() {
+  try {
+    const r = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/settings/system`).then(x => x.json());
+    const s = r?.settings || {};
+    const map = {
+      'bot-madelief':   s.bot_color_madelief,
+      'bot-harry':      s.bot_color_harry,
+      'bot-smith':      s.bot_color_smith,
+      'bot-boekhouder': s.bot_color_boekhouder,
+      'bot-dood':       s.bot_color_dood,
+    };
+    Object.entries(map).forEach(([botId, hex]) => {
+      if (hex && /^#[0-9a-fA-F]{6}$/.test(hex)) {
+        const ts = _hexToTailwindStyle(hex);
+        BOT_COLORS[botId] = {
+          ...(BOT_COLOR_DEFAULTS[botId] || {}),
+          ...ts,
+        };
+      }
+    });
+  } catch {}
+}
+// Initial fetch
+_refreshBotColors();
 
 const initialSparkMessages = [];
 

@@ -525,6 +525,7 @@ async def process_message(req: ChatMessage):
             return response
 
         # v5_kbv2_hooks_001 — KB v2 chat-commands (search/learn/audit/inbox-stats)
+        # v5_card_factory_001 — uitgebreid met card-factory commands (maak DnD/Event/Bark)
         try:
             from modules.kb_v2 import hooks as kbv2_hooks
             match = kbv2_hooks.match_kbv2_command(text)
@@ -533,7 +534,13 @@ async def process_message(req: ChatMessage):
                 handler_name = cmd.get("handler")
                 handler = getattr(kbv2_hooks, handler_name, None)
                 if callable(handler):
-                    out = handler(query) if handler_name != "cmd_learn_word" else handler(query, user_id=req.user_id or "user-000")
+                    kwargs = {}
+                    if handler_name == "cmd_learn_word":
+                        kwargs["user_id"] = req.user_id or "user-000"
+                    if handler_name == "cmd_make_card":
+                        kwargs["user_id"] = req.user_id or "user-000"
+                        kwargs["card_type"] = cmd.get("card_type", "dnd")
+                    out = handler(query, **kwargs) if kwargs else handler(query)
                     response.update(out)
                     _save_log(req, response, f"kbv2_{cmd['id']}")
                     return response

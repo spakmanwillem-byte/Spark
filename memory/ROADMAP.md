@@ -94,12 +94,29 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 
 | Hook-file | Status | Doel |
 |---|---|---|
-| `modules/kb_v2/hooks.py` | ✅ Created sessie 5 | KB v2 → Vocab/Commands/Graph/D&D/Dialogen koppeling |
+| `modules/kb_v2/hooks.py` | ✅ Created sessie 5 + uitgebreid sessie 8 | KB v2 → Vocab/Commands/Graph/D&D/Dialogen + card-factory commands |
+| `modules/cards/service.py::_fire_card_hooks` | ✅ Created sessie 8 | DnD/Event/Bark hook-chain bij draft→active overgang |
 
 Nieuwe hooks volgens dit pattern toevoegen voor:
 - `modules/trade/hooks.py` — closing-flow + replay + auto-snapshot triggers
-- `modules/dnd/hooks.py` — lore-card sync, perk-trigger, aura-gates
+- `modules/dnd/hooks.py` — lore-card sync, perk-trigger, aura-gates (kan deels via cards/service.py)
 - `modules/spark/hooks.py` — Spark's hands (intent_matcher generic router)
+
+## 🃏 Card Factory pattern (v5_card_factory_001)
+
+3 generieke kaart-types naast KB v2 kennis-kaarten:
+
+| Type | Doel | Hook bij active | Extra schema |
+|---|---|---|---|
+| `dnd` | Game-kaarten (lore/quest/item) | `dnd_lore_registered` | `dnd: {verteller, scene, rewards}` |
+| `event` | Community-events | Community-bark via Boekhouder | `event: {datum, locatie, deelnemers}` |
+| `bark` | Bot-trigger templates | `bark_template_registered` | `bark: {bot, trigger_text, schedule}` |
+
+**Common schema**: id, type, titel, vraag, antwoord, media (image+audio), tags, status, footnote.
+**Storage**: `/data/cards/{type}/<id>.json` + index per type. Media via system_archive met
+`tag=card_<type>` + `linked_card_id`. Cascade-delete bij card-verwijdering.
+
+**Chat commands**: "maak een d&d kaart [titel]" / "maak een event kaart [titel]" / "maak een bark kaart [titel]".
 
 ## 📦 Media-storage strategie (v5_kbv2_media_002)
 

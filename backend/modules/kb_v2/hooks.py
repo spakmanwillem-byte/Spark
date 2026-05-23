@@ -75,14 +75,27 @@ def get_active_vocab(lade: Optional[str] = None) -> List[str]:
 #      voor follow-up vragen ("en wat nog meer over die kaart?")
 # ---------------------------------------------------------------------------
 
-# Command-registry: text-trigger → handler-naam (handler = nog te bouwen)
-KBV2_CHAT_COMMANDS: List[Dict] = [
+# Command-registry: text-trigger → handler-naam + optionele depth (laag-keuze)
+KBV2_CHAT_COMMANDS: list = [
     {"id": "search_kb",   "triggers": ["zoek in kennis", "wat staat er over", "wat weet je van"],   "handler": "cmd_search_kb"},
-    {"id": "tell_short",  "triggers": ["vertel kort over", "in 1 zin", "samenvatting van"],          "handler": "cmd_tell_layer"},
-    {"id": "tell_deep",   "triggers": ["vertel diep over", "leg uit", "vertel meer over"],          "handler": "cmd_tell_layer"},
+    {"id": "tell_short",  "triggers": ["vertel kort over", "in 1 zin", "samenvatting van", "korte uitleg"],
+                          "handler": "cmd_tell_layer", "depth": 1},
+    {"id": "tell_more",   "triggers": ["vertel meer over", "leg uit", "beschrijf"],
+                          "handler": "cmd_tell_layer", "depth": 2},
+    {"id": "tell_deep",   "triggers": ["vertel diep over", "vertel alles over", "diep uitleg"],
+                          "handler": "cmd_tell_layer", "depth": 3},
+    {"id": "tell_full",   "triggers": ["vertel volledig over", "alles wat je weet over"],
+                          "handler": "cmd_tell_layer", "depth": 4},
     {"id": "learn_word",  "triggers": ["leer woord", "onthoud dit woord", "voeg toe aan kennis"],   "handler": "cmd_learn_word"},
     {"id": "list_inbox",  "triggers": ["wat staat in inbox", "welke kaarten wachten", "hoeveel onbeantwoord"], "handler": "cmd_list_inbox"},
     {"id": "audit_kb",    "triggers": ["audit kennis", "scan kennis", "wat mist"],                  "handler": "cmd_audit_kb"},
+    # v5_card_factory_001 — game-kaart commands
+    {"id": "make_dnd",    "triggers": ["maak een d&d kaart", "maak dnd kaart", "nieuwe dnd kaart"],
+                          "handler": "cmd_make_card", "card_type": "dnd"},
+    {"id": "make_event",  "triggers": ["maak een event kaart", "nieuw event", "maak event"],
+                          "handler": "cmd_make_card", "card_type": "event"},
+    {"id": "make_bark",   "triggers": ["maak een bark kaart", "nieuwe bark", "maak bark"],
+                          "handler": "cmd_make_card", "card_type": "bark"},
 ]
 
 
@@ -158,6 +171,31 @@ def cmd_audit_kb(query: str = "") -> Dict:
         f"**{s.get('low_confidence_count', 0)}** met laag vertrouwen."
     )
     return {"type": "kbv2_cmd_audit", "message": msg, "audit": s}
+
+
+def cmd_make_card(query: str, user_id: str = "user-000", card_type: str = "dnd") -> Dict:
+    """Handler: 'maak een D&D kaart' / 'maak event kaart' / 'maak bark kaart'.
+    Query = optionele titel. Maakt een draft-kaart en geeft instructies terug."""
+    from modules.cards import service as cards_service
+    titel = (query or f"Nieuwe {card_type}-kaart").strip()
+    r = cards_service.create_card(card_type, titel=titel, user_id=user_id)
+    if not r.get("success"):
+        return {"type": "card_factory_error", "message": r.get("message", "Aanmaken mislukt")}
+    card = r["card"]
+    return {
+        "type": f"card_made_{card_type}",
+        "message": (
+            f"🃏 **{card_type.upper()}-kaart aangemaakt**: _{card['titel']}_\n\n"
+            f"ID: `{card['id']}` (draft)\n\n"
+            f"Nu kun je:\n"
+            f"• Een **vraag** of **antwoord** invullen (1 van 2 is genoeg om kaart actief te maken)\n"
+            f"• Een **afbeelding** of **geluid** uploaden via Beheer→Kaarten\n"
+            f"• Tags toevoegen voor categorisering\n\n"
+            f"Endpoint: `POST /api/cards/{card_type}/{card['id']}`"
+        ),
+        "card_id": card["id"],
+        "card_type": card_type,
+    }
 
 
 # ---------------------------------------------------------------------------

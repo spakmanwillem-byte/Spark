@@ -39,6 +39,12 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "app_primary_accent": {"type": "str", "scope": "system"},   # hex bv #f59e0b
     "app_secondary_accent": {"type": "str", "scope": "system"}, # hex bv #06b6d4
     "app_background_tint": {"type": "str", "scope": "system"},  # hex bv #0f172a
+    # v5_bot_color_scheme_001 — per-bot accent kleur (admin) — gebruikt door GesprekkenPage / CommunityPage bubbles
+    "bot_color_madelief": {"type": "str", "scope": "system"},   # default #ec4899
+    "bot_color_harry":    {"type": "str", "scope": "system"},   # default #06b6d4
+    "bot_color_smith":    {"type": "str", "scope": "system"},   # default #10b981
+    "bot_color_boekhouder": {"type": "str", "scope": "system"}, # default #f59e0b
+    "bot_color_dood":     {"type": "str", "scope": "system"},   # default #a855f7
     # User-scope (iedereen voor zichzelf)
     "theme": {"type": "str", "scope": "user", "options": ["dark", "light"]},
     "mood_colors": {"type": "bool", "scope": "user"},

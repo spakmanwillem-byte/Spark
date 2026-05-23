@@ -1,6 +1,29 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_bot_color_scheme_001 + v5_card_factory_001** (sessie 8):
+  - 🎨 **Bot-kleurschema's gekoppeld aan Beheer → Kleurbeheer**:
+    - 5 nieuwe system-settings: `bot_color_madelief/harry/smith/boekhouder/dood`
+    - Nieuw "BOT-ACCENT KLEUREN" paneel onder Beeld-tab met color-pickers + hex-input
+    - Hardcoded `BOT_COLORS` in GesprekkenPage is nu runtime cache; vult uit `/api/settings/system` bij mount
+    - Hex → rgba opacity-conversie voor bg(10%) + border(20%) + accent(100%)
+  - 🃏 **Card Factory** (`modules/cards/` — generieke game-style kaarten):
+    - 3 types: `dnd` / `event` / `bark` met type-specifieke extra-velden
+    - Schema: `id, type, titel, vraag, antwoord, media{image_url, audio_url}, tags, status, footnote`
+    - Endpoints: `POST/GET/PATCH/DELETE /api/cards/{type}/{card_id}` + `/media` upload
+    - Media via system_archive met tag `card_<type>` + `linked_card_id` (centrale store)
+    - Cascade-delete: bij verwijderen kaart → gekoppelde media in system_archive auto-opruimen
+    - **Hook-chain bij draft→active overgang** (zodra vraag OF antwoord ingevuld):
+      • `dnd` → `dnd_lore_registered` (toekomstig: lore_index update)
+      • `event` → De Boekhouder maakt automatisch community-bark "📅 Nieuw event: ..."
+      • `bark` → `bark_template_registered` (toekomstig: trigger-registry update)
+  - 💬 **3 chat-commands toegevoegd** in `kb_v2/hooks.py`:
+    - "maak een d&d kaart [titel]" → draft DnD-kaart
+    - "maak een event kaart [titel]" → draft Event-kaart
+    - "maak een bark kaart [titel]" → draft Bark-template
+  - 🎚️ **Depth-router voorbereid** in `cmd_tell_layer` (depth-veld in registry, 4 niveaus: kort/meer/diep/volledig) — handlers nog te koppelen aan laag1-4 lookup
+  - ✅ E2E getest: 3 card-types aanmaken werkt, hook-chain fired correct (Roadkill Borrel event → community-bark "📅 Nieuw event: Roadkill Borrel. Vrijdag 20:00 in het centrum"), bot-color panel rendert in UI met alle 5 bots
+
 - 2026-05-23 **v5_welcome_001 — Spark persoonlijke welkom bij eerste login** (sessie 7):
   - 🌱 **`modules/bots/spark_welcome_service.py`** — idempotent welkom-service
     - Drie gestapelde Spark-berichten in user's Spark-prive chat (geen muur tekst)

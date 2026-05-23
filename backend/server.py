@@ -210,6 +210,10 @@ from modules.kb_v2 import kbv2_router, kbv2_media_router
 app.include_router(kbv2_router, prefix="/api")
 app.include_router(kbv2_media_router, prefix="/api")
 
+# Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
+from modules.cards import cards_router
+app.include_router(cards_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

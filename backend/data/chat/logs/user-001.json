@@ -19866,11 +19866,70 @@
         "session_id": "default",
         "gesprek_nummer": 760
       }
+    },
+    {
+      "id": "conv-d50092e3",
+      "timestamp": "2026-05-23T13:03:57.593171+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 761
+      }
+    },
+    {
+      "id": "conv-97fcabcf",
+      "timestamp": "2026-05-23T13:03:57.616292+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 762
+      }
+    },
+    {
+      "id": "conv-6179e3fc",
+      "timestamp": "2026-05-23T13:10:09.157163+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "maak een d&d kaart Eerste Strijder",
+      "spark_response": "🃏 **DND-kaart aangemaakt**: _Eerste Strijder_\n\nID: `card-dnd-4011639d` (draft)\n\nNu kun je:\n• Een **vraag** of **antwoord** invullen (1 van 2 is genoeg om kaart actief te maken)\n• Een **afbeelding** of **geluid** uploaden via Beheer→Kaarten\n• Tags toevoegen voor categorisering\n\nEndpoint: `POST /api/cards/dnd/card-dnd-4011639d`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_make_dnd",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "card_made_dnd"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 763
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 760,
-    "last_updated": "2026-05-23T12:37:31.872978+00:00"
+    "total_conversations": 763,
+    "last_updated": "2026-05-23T13:10:09.157163+00:00"
   }
 }

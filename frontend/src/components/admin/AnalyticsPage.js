@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { LogsBrowser } from './LogsBrowser';
 import { 
   Activity, Cpu, HardDrive, MemoryStick, Wifi, Server,
   Database, Globe, Users, MessageSquare, Clock, TrendingUp,
   Layers, Network, Monitor, Zap, BarChart2, PieChart,
   ArrowUp, ArrowDown, CheckCircle, AlertCircle, RefreshCw,
-  ChevronRight, FolderOpen
+  ChevronRight, FolderOpen, FileText
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -29,6 +30,7 @@ export function AnalyticsPage({ onNavigate }) {
     { id: 'network', label: 'NETWORK', icon: Network },
     { id: 'layer', label: 'LAYER', icon: Layers },
     { id: 'trade', label: 'TRADE', icon: TrendingUp },
+    { id: 'logs', label: 'LOGS', icon: FileText },
   ];
 
   return (
@@ -74,6 +76,15 @@ export function AnalyticsPage({ onNavigate }) {
         {activeTab === 'network' && <NetworkTab />}
         {activeTab === 'layer' && <LayerTab />}
         {activeTab === 'trade' && <TradeAnalyticsTab />}
+        {activeTab === 'logs' && (
+          <div data-testid="analytics-logs-tab" className="space-y-4">
+            <div className="text-xs text-slate-400 flex items-center gap-2">
+              <FileText className="w-3 h-3" />
+              <span>Spark Logger (v5_spark_logger_001) — pre / post / error / event records per module per dag.</span>
+            </div>
+            <LogsBrowser />
+          </div>
+        )}
       </div>
     </MainLayout>
   );

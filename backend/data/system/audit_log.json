@@ -106,6 +106,63 @@
       "market": "BCH-EUR",
       "price": 322.06,
       "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T13:41:33.816774+00:00",
+      "id": "2ec4a2cf4a59",
+      "type": "cycle_close",
+      "user_id": "user-000",
+      "rollup": {
+        "user_id": "user-000",
+        "naam": "Spark",
+        "since": "begin der tijd",
+        "closed_at": "2026-05-23T13:41:33.811817+00:00",
+        "n_buys": 0,
+        "n_sells": 0,
+        "total_buy_eur": 0,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "IJkpunt v5.1 - eerste afsluiting"
+      }
+    },
+    {
+      "ts": "2026-05-23T13:41:33.980801+00:00",
+      "id": "182316bb33e0",
+      "type": "cycle_close",
+      "user_id": "user-001",
+      "rollup": {
+        "user_id": "user-001",
+        "naam": "user-001",
+        "since": "begin der tijd",
+        "closed_at": "2026-05-23T13:41:33.976269+00:00",
+        "n_buys": 10,
+        "n_sells": 0,
+        "total_buy_eur": 50.8,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "IJkpunt v5.1"
+      }
+    },
+    {
+      "ts": "2026-05-23T13:41:45.168938+00:00",
+      "id": "8c9b871b8004",
+      "type": "cycle_close",
+      "user_id": "user-001",
+      "rollup": {
+        "user_id": "user-001",
+        "naam": "user-001",
+        "since": "2026-05-23T13:41:33.976269+00:00",
+        "closed_at": "2026-05-23T13:41:45.163673+00:00",
+        "n_buys": 0,
+        "n_sells": 0,
+        "total_buy_eur": 0,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "2e ronde - moet leeg zijn"
+      }
     }
   ]
 }

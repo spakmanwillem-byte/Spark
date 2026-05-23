@@ -102,7 +102,7 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 
 ### P0 — In Progress
 - [ ] **Spark's hands** capability hookup naar live chat — `intent_matcher_service` is gebouwd, moet nog gekoppeld aan `/chat/message` route (gedeeltelijk: kbv2-commands werken al, generic intent-router ontbreekt nog)
-- [ ] **Boekhouder closing-flow** ("terlens-terug-boek") — aan eind van trade-cyclus: saldo + winst + fees + token-mints in 1 boeking. Nu open-eindjes in `accounting/`
+- [x] **Boekhouder closing-flow** ("terlens-terug-boek") — ✅ DONE (v5_closing_flow_001): `close_cycle(user_id, note)` rollupt audit-events sinds vorige closing, DM naar admin/user, audit-log + closings-log. Endpoints: `POST /api/boekhouder/close-cycle/{user_id}` (admin-guarded) + `GET /api/boekhouder/closings`
 
 ### P1 — Aanstaande (deze maand)
 - [ ] **KB v2 → Vocab register hook implementeren** (zie `modules/kb_v2/hooks.py::register_in_vocab`)

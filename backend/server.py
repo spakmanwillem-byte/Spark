@@ -135,6 +135,10 @@ app.include_router(trade_router, prefix="/api")
 from modules.accounting import accounting_router
 app.include_router(accounting_router, prefix="/api")
 
+# v5_closing_flow_001 — De Boekhouder closing-flow (terlens-terug-boek)
+from modules.boekhouder.routes import router as boekhouder_router
+app.include_router(boekhouder_router, prefix="/api")
+
 # v5_event_overlay_001
 from modules.events.routes import router as events_router
 app.include_router(events_router, prefix="/api")

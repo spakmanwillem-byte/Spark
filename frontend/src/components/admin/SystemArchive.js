@@ -15,8 +15,8 @@ const CATEGORIES = [
   { id: 'geluiden', label: 'Geluiden', icon: Music, color: '#a855f7' },
   { id: 'filmpjes', label: 'Filmpjes', icon: Video, color: '#ec4899' },
   { id: 'dialogen', label: 'Dialogen', icon: MessageSquare, color: '#06b6d4' },
-  // v5_spark_logger_001 — module-trace logs (admin observability)
-  { id: 'logs', label: 'Logs', icon: Code2, color: '#f59e0b' },
+  // v5_logs_to_analytics_001 — Logs-tab verhuisd naar Beheer → Analytics → LOGS
+  // (LogsBrowser nog steeds beschikbaar als legacy fallback, maar UI-entry hier weggehaald)
 ];
 
 function formatBytes(n) {

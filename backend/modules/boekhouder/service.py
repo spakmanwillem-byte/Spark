@@ -180,3 +180,114 @@ def announce_sell(user_id: str, pot_id: str, market: str, price: float,
             track(SPARK_ID, "fee_extraction", 1)
     except Exception:
         pass
+
+
+
+# ============================================================
+# v5_closing_flow_001 — "Terlens-terug-boek": rollup van een trade-cyclus
+# ============================================================
+CLOSING_LOG = DATA / "system" / "boekhouder_closings.json"
+
+
+def _audit_entries_since(user_id: str, since_ts: Optional[str]) -> Dict:
+    """Lees audit_log en filter op user_id sinds since_ts (ISO of None = alles)."""
+    data = load_json(AUDIT_LOG, default={"entries": []})
+    out = {"buys": [], "sells": [], "fees": [], "mints": []}
+    for e in data.get("entries", []):
+        ts = e.get("ts") or ""
+        if since_ts and ts <= since_ts:
+            continue
+        etype = e.get("type")
+        if etype == "trade_buy" and e.get("user_id") == user_id:
+            out["buys"].append(e)
+        elif etype == "trade_sell" and e.get("user_id") == user_id:
+            out["sells"].append(e)
+        elif etype == "fee_transfer" and e.get("from_user") == user_id:
+            out["fees"].append(e)
+        elif etype == "mint" and e.get("user_id") == user_id:
+            out["mints"].append(e)
+    return out
+
+
+def _last_closing_ts(user_id: str) -> Optional[str]:
+    data = load_json(CLOSING_LOG, default={"closings": []})
+    user_closings = [c for c in data.get("closings", []) if c.get("user_id") == user_id]
+    if not user_closings:
+        return None
+    return max(c.get("closed_at", "") for c in user_closings)
+
+
+def close_cycle(user_id: str, note: str = "") -> Dict:
+    """Sluit boekhouder-cyclus voor user_id af. Idempotent per-since-window:
+    rollupt alle audit-events sinds laatste closing en stuurt 1 DM + audit-record.
+
+    Returns rollup dict met saldo/winst/fees/mints.
+    """
+    since = _last_closing_ts(user_id)
+    bucket = _audit_entries_since(user_id, since)
+
+    total_buy_eur = sum(b.get("amount_eur", 0) for b in bucket["buys"])
+    total_sell_netto = sum(s.get("netto", 0) for s in bucket["sells"])
+    total_fees_eur = sum(f.get("amount_eur", 0) for f in bucket["fees"])
+    total_mints = sum(m.get("amount", 0) for m in bucket["mints"])
+    n_buys = len(bucket["buys"])
+    n_sells = len(bucket["sells"])
+
+    naam = "Spark" if user_id == SPARK_ID else user_id
+    rollup = {
+        "user_id": user_id,
+        "naam": naam,
+        "since": since or "begin der tijd",
+        "closed_at": _now(),
+        "n_buys": n_buys,
+        "n_sells": n_sells,
+        "total_buy_eur": round(total_buy_eur, 4),
+        "total_sell_netto_eur": round(total_sell_netto, 4),
+        "total_fees_eur": round(total_fees_eur, 4),
+        "total_mints_tokens": total_mints,
+        "note": note,
+    }
+
+    # DM naar eigenaar/admin
+    recipient = ADMIN_ID if user_id == SPARK_ID else user_id
+    body_lines = [
+        f"📒 **Terlens-terug-boek** — {naam}",
+        f"Periode sinds: {since or 'begin'}",
+        f"• Koop-volume:  €{total_buy_eur:.2f}  ({n_buys} buys)",
+        f"• Verkoop netto: €{total_sell_netto:+.4f}  ({n_sells} sells)",
+        f"• Fees afgedragen: €{total_fees_eur:.4f}",
+        f"• Token-mints: {total_mints}",
+    ]
+    if note:
+        body_lines.append(f"_Noot: {note}_")
+    body_lines.append("Boekhouding voor deze cyclus is afgesloten en gearchiveerd.")
+    _send_dm(
+        text="\n".join(body_lines),
+        kind="boekhouder_closing",
+        extra={"rollup": rollup},
+        recipient_id=recipient,
+    )
+
+    # Persist closing
+    CLOSING_LOG.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(CLOSING_LOG, default={"closings": []})
+    data.setdefault("closings", []).append(rollup)
+    save_json(CLOSING_LOG, data)
+
+    # Audit
+    _audit({
+        "type": "cycle_close",
+        "user_id": user_id,
+        "rollup": rollup,
+    })
+
+    return rollup
+
+
+def list_closings(user_id: Optional[str] = None, limit: int = 20) -> Dict:
+    data = load_json(CLOSING_LOG, default={"closings": []})
+    items = data.get("closings", [])
+    if user_id:
+        items = [c for c in items if c.get("user_id") == user_id]
+    items = sorted(items, key=lambda c: c.get("closed_at", ""), reverse=True)[:limit]
+    return {"closings": items, "total": len(items)}

@@ -1,6 +1,19 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-23 **v5_logs_to_analytics_001 + v5_closing_flow_001** (sessie 9 — vervolg):
+  - 📊 **Logs Browser verhuisd** naar Beheer → Analytics → **LOGS** (6e tab naast SYSTEEM/DATA/NETWORK/LAYER/TRADE)
+    - Logs hoorden niet bij media-archief (Foto/Geluiden/Filmpjes/Dialogen) maar bij observability
+    - `LogsBrowser` component blijft hergebruikt; Beheer → Instellingen → Archief verlost van Logs-categorie
+    - Verified in screenshot: 13 records "f1_login_bark", phase-filter (alle/pre/post/error/event), tree-nav 2026/05/23 → barks/bots/cards/chat/kbv2/system/welcome
+  - 📒 **Boekhouder closing-flow** ("terlens-terug-boek") — `modules/boekhouder/service.py::close_cycle()`:
+    - Rollupt audit-events sinds vorige closing per user (buys/sells/fees/mints)
+    - Stuurt 1 samenvatting-DM naar admin (Spark-trades) of user (eigen trades)
+    - Persistent in `/data/system/boekhouder_closings.json` + `audit_log` type=cycle_close
+    - Idempotent venster: 2e close direct na 1e → since=vorige_ts → 0 nieuwe trades
+    - Endpoints: `POST /api/boekhouder/close-cycle/{user_id}` (admin-guarded gradatie ≤ 2) + `GET /api/boekhouder/closings`
+    - ✅ E2E getest: Spark (0 buys), Willem (10 buys €50.80), 2e close (0 sinds vorige), 403 voor non-admin (Marieke)
+
 - 2026-05-23 **v5_ijkpunt_001 + v5_help_refresh_001 + v5_tts_pad_001 + v5_kbv2_graph_001** (sessie 9 — 4 verzoeken + ijkpunt):
   - 🕸️ **Verbanden tab toont nu KB v2** (`/api/graph/rebuild`):
     - `sync_service.rebuild_graph_full` scant nu v1 (5288) + v2 lades (250+329+1071+632) + inbox (3007) = **10577 nodes / 65981 edges**

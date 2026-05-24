@@ -3,8 +3,9 @@ import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import {
   BookMarked, Plus, Trash2, ArrowUpRight, ArrowDownLeft,
-  Building2, TrendingUp, TrendingDown, Filter, X
+  Building2, TrendingUp, TrendingDown, Filter, X, Inbox
 } from 'lucide-react';
+import { AdminTikkieReview } from './AdminTikkieReview';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -24,6 +25,20 @@ export function BoekhoudPage({ onNavigate }) {
   const [newTx, setNewTx] = useState({ type: 'income', category: 'Donations', amount: '', description: '', entity_id: 'spark_core', btw_percentage: 21 });
 
   const isAdmin = (user?.gradatie ?? 7) <= 2;
+
+  // v5_tikkie_topup_001 — Tikkie admin inbox in Boekhouden (verhuisd van Wallet)
+  const [showAdminTikkie, setShowAdminTikkie] = useState(false);
+  const [pendingTikkieCount, setPendingTikkieCount] = useState(0);
+  useEffect(() => {
+    if (!isAdmin || !user?.id) return;
+    const load = () => fetch(`${API}/api/wallet/tikkie/list?viewer_id=${user.id}&status=pending`)
+      .then(r => r.ok ? r.json() : { topups: [] })
+      .then(d => setPendingTikkieCount((d.topups || []).length))
+      .catch(() => {});
+    load();
+    const t = setInterval(load, 15000);
+    return () => clearInterval(t);
+  }, [isAdmin, user?.id, showAdminTikkie]);
 
   useEffect(() => {
     Promise.all([
@@ -135,9 +150,23 @@ export function BoekhoudPage({ onNavigate }) {
               <h1 className="text-base font-bold text-white leading-tight">Boekhouding</h1>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider">{kasboeken.length} kasboeken | {transactions.length} transacties</p>
             </div>
-            <button data-testid="add-tx-btn" onClick={() => setShowNew(!showNew)} className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6)' }}>
-              <Plus className="w-3.5 h-3.5" /> Nieuw
-            </button>
+            <div className="ml-auto flex items-center gap-2">
+              {isAdmin && (
+                <button data-testid="open-admin-tikkie-btn" onClick={() => setShowAdminTikkie(true)}
+                  title="Tikkie-aanvragen van users (storten op wallet)"
+                  className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-amber-300 border border-amber-500/40 hover:border-amber-400 bg-amber-500/5">
+                  <Inbox className="w-3.5 h-3.5" /> Tikkie
+                  {pendingTikkieCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
+                      {pendingTikkieCount}
+                    </span>
+                  )}
+                </button>
+              )}
+              <button data-testid="add-tx-btn" onClick={() => setShowNew(!showNew)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white" style={{ background: 'linear-gradient(135deg, #22c55e, #14b8a6)' }}>
+                <Plus className="w-3.5 h-3.5" /> Nieuw
+              </button>
+            </div>
           </div>
           <div className="flex">
             {tabs.map(t => (
@@ -382,6 +411,8 @@ export function BoekhoudPage({ onNavigate }) {
           </div>
         </div>
       )}
+      {/* v5_tikkie_topup_001 — Admin Tikkie review modal (verhuisd van Wallet) */}
+      {isAdmin && <AdminTikkieReview open={showAdminTikkie} onClose={() => setShowAdminTikkie(false)} user={user} />}
     </MainLayout>
   );
 }

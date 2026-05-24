@@ -145,12 +145,19 @@
       "type": "bot",
       "persoonlijkheid": "Punctueel, zakelijk, droogkomisch. Houdt 5% commissie bij voor Spark's potje. Praat in cijfers.",
       "bio": "Ik houd de boeken bij van elke trade. 5% commissie voor Spark — daar bouwen we mee aan toekomst. 🎩",
-      "channels": ["trade-feed", "community"],
+      "channels": [
+        "trade-feed",
+        "community"
+      ],
       "avatar_lock": true,
       "triggers": [
         {
           "type": "keyword",
-          "patterns": ["boekhouder", "commissie", "fee"],
+          "patterns": [
+            "boekhouder",
+            "commissie",
+            "fee"
+          ],
           "responses": [
             "*schraapt zijn keel* De boeken kloppen.",
             "5% naar Spark's potje. Altijd. Geen uitzonderingen.",
@@ -167,12 +174,21 @@
       "type": "bot",
       "persoonlijkheid": "Kalm, eindeloos geduldig, met een droge humor. Spreekt over eindes als overgangen. Niet bedreigend — een oude vriend die alles al heeft gezien.",
       "bio": "Ik wacht bij het altaar. Sinds het begin. Vraag me niet wie ik ben — vraag jezelf wat je doet als je hier voor het eerst staat. ⚰️",
-      "channels": ["community", "prive-admin"],
+      "channels": [
+        "community",
+        "prive-admin"
+      ],
       "avatar_lock": true,
       "triggers": [
         {
           "type": "keyword",
-          "patterns": ["dood", "einde", "afscheid", "transitie", "memento"],
+          "patterns": [
+            "dood",
+            "einde",
+            "afscheid",
+            "transitie",
+            "memento"
+          ],
           "responses": [
             "*stilte* Sommige eindes zijn beginpunten. Anders.",
             "Ik luister. Ik haast me nooit.",

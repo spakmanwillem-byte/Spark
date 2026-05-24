@@ -124,8 +124,9 @@ from modules.graph import router as graph_router
 app.include_router(graph_router, prefix="/api")
 
 # Module 13: Wallet
-from modules.wallet import wallet_router
+from modules.wallet import wallet_router, tikkie_router
 app.include_router(wallet_router, prefix="/api")
+app.include_router(tikkie_router, prefix="/api")
 
 # Module 14: Trade
 from modules.trade import trade_router

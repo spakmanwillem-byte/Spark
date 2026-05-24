@@ -47,11 +47,14 @@ export function NotitiesPage({ onNavigate }) {
     });
   }, [user?.id]);
 
-  // Load bugs when admin opens the Bugs tab
+  // Load bugs when Bugs tab opens (alle gradaties zien eigen meldingen; admins zien alles)
   useEffect(() => {
-    if (viewMode !== 'bugs' || !isAdminViewer || !user?.id) return;
-    fetch(`${API}/api/bugs/list?viewer_id=${user.id}`)
-      .then(r => r.json())
+    if (viewMode !== 'bugs' || !user?.id) return;
+    const url = isAdminViewer
+      ? `${API}/api/bugs/list?viewer_id=${user.id}`
+      : `${API}/api/bugs/mine?user_id=${user.id}`;
+    fetch(url)
+      .then(r => r.ok ? r.json() : { bugs: [] })
       .then(d => setBugs(d.bugs || []))
       .catch(() => setBugs([]));
   }, [viewMode, isAdminViewer, user?.id]);
@@ -196,7 +199,7 @@ export function NotitiesPage({ onNavigate }) {
               { id: 'notes', label: 'Notities', icon: StickyNote, count: notesTotal },
               { id: 'tasks', label: 'Taken', icon: ListTodo, count: tasksTotal },
               { id: 'bijdragen', label: 'Bijdragen', icon: HandHeart, count: null },
-              ...(isAdminViewer ? [{ id: 'bugs', label: 'Bugs', icon: Bug, count: bugs.length || null }] : []),
+              { id: 'bugs', label: 'Bugs', icon: Bug, count: bugs.length || null },
               ...(isAdminViewer ? [{ id: 'deploy', label: 'Deploy', icon: Rocket, count: null }] : []),
             ].map(t => (
               <button key={t.id} data-testid={`view-${t.id}`} onClick={() => setViewMode(t.id)}

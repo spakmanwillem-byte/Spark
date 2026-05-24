@@ -508,7 +508,7 @@ async def upload_product_image(
     image: UploadFile = File(...),
     viewer_id: str = Form(...),
 ):
-    """Upload nieuwe afbeelding voor een merch-product.
+    """Upload nieuwe afbeelding voor een merch-product (vervangt of voegt toe).
     Opslag: /data/system_archive/foto/ met tag 'roadkill_merch' + linked_product_id.
     Product `image_url` wordt bijgewerkt naar de system-archive URL.
     """
@@ -525,7 +525,6 @@ async def upload_product_image(
     if len(data_bytes) > 8 * 1024 * 1024:
         raise HTTPException(413, "Image te groot (>8MB)")
 
-    # Schrijf naar system_archive/foto
     sa_dir = DATA_DIR / "system_archive"
     foto_dir = sa_dir / "foto"
     foto_dir.mkdir(parents=True, exist_ok=True)
@@ -534,43 +533,181 @@ async def upload_product_image(
     dest = foto_dir / safe_name
     dest.write_bytes(data_bytes)
 
-    # Update system_archive index met 'roadkill_merch' tag
     sa_index = sa_dir / "_index.json"
     idx = load_json(sa_index, default={"files": []})
-    # Get product name for description
     pdata = load_json(PRODUCTS_FILE, default={"products": []})
     prod = next((p for p in pdata.get("products", []) if p["id"] == product_id), None)
     pname = prod["name"] if prod else product_id
     entry = {
-        "id": file_id,
-        "filename": safe_name,
-        "original_name": image.filename or safe_name,
-        "category": "foto",
-        "extension": ext,
-        "mime_type": image.content_type or "image/png",
+        "id": file_id, "filename": safe_name, "original_name": image.filename or safe_name,
+        "category": "foto", "extension": ext, "mime_type": image.content_type or "image/png",
         "size_bytes": len(data_bytes),
         "description": f"Roadkill Merch product: {pname}",
         "tags": ["roadkill_merch", f"product_{product_id}"],
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
-        "uploaded_by": viewer_id,
-        "path": str(dest),
-        "linked_product_id": product_id,
-        "source": "shop_product_image",
-        "scan_status": None,
-        "scan_results": None,
+        "uploaded_by": viewer_id, "path": str(dest),
+        "linked_product_id": product_id, "source": "shop_product_image",
+        "scan_status": None, "scan_results": None,
     }
     idx.setdefault("files", []).append(entry)
     idx["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_json(sa_index, idx)
 
-    # Update product
     image_url = f"/api/system-archive/file/{file_id}"
     if prod:
-        prod["image_url"] = image_url
+        # Multi-image: voeg toe aan images[] array, en zet primary image_url als die nog leeg is
+        imgs = prod.get("images") or ([prod["image_url"]] if prod.get("image_url") else [])
+        imgs.append(image_url)
+        prod["images"] = imgs
+        if not prod.get("image_url"):
+            prod["image_url"] = image_url
         prod["image_archive_id"] = file_id
         save_json(PRODUCTS_FILE, pdata)
 
-    return {"success": True, "image_url": image_url, "archive_id": file_id, "product_id": product_id}
+    return {"success": True, "image_url": image_url, "archive_id": file_id, "product_id": product_id, "images": prod.get("images") if prod else [image_url]}
+
+
+# v6_shop_admin_product_crud_001 — Admin product create/edit/delete + image management
+class ProductUpsert(BaseModel):
+    viewer_id: str
+    name: str
+    description: Optional[str] = ""
+    price: float
+    category: Optional[str] = "merch"  # 'merch' | 'digital'
+    entity_id: Optional[str] = "roadkill_merch"
+    in_stock: Optional[bool] = True
+    image_icon: Optional[str] = "package"
+    images: Optional[List[str]] = []  # full URLs (sa /api/system-archive/file/...)
+
+
+def _require_admin(viewer_id: str) -> None:
+    users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
+    viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
+    if not viewer or (viewer.get("gradatie") or 7) > 2:
+        raise HTTPException(403, "Alleen admins (gradatie ≤ 2)")
+
+
+@router.post("/admin/products")
+async def admin_create_product(req: ProductUpsert):
+    _require_admin(req.viewer_id)
+    if req.price < 0:
+        raise HTTPException(400, "Prijs mag niet negatief zijn")
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    pid = req.name.lower().replace(" ", "-").replace("/", "-")[:50] + "-" + uuid.uuid4().hex[:6]
+    new_prod = {
+        "id": pid, "name": req.name, "description": req.description or "",
+        "price": round(req.price, 2),
+        "category": req.category, "entity_id": req.entity_id,
+        "in_stock": req.in_stock, "image_icon": req.image_icon,
+        "images": req.images or [], "image_url": (req.images or [None])[0],
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "btw_percentage": 0,  # Verkoopprijs is incl. BTW (per user: zonder BTW = wat ze betalen)
+    }
+    data.setdefault("products", []).append(new_prod)
+    save_json(PRODUCTS_FILE, data)
+    return {"success": True, "product": new_prod}
+
+
+@router.put("/admin/products/{product_id}")
+async def admin_update_product(product_id: str, req: ProductUpsert):
+    _require_admin(req.viewer_id)
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    for p in data.get("products", []):
+        if p["id"] == product_id:
+            p["name"] = req.name
+            p["description"] = req.description or ""
+            p["price"] = round(req.price, 2)
+            p["category"] = req.category
+            p["entity_id"] = req.entity_id
+            p["in_stock"] = req.in_stock
+            if req.image_icon:
+                p["image_icon"] = req.image_icon
+            if req.images is not None:
+                p["images"] = req.images
+                if req.images:
+                    p["image_url"] = req.images[0]
+            p["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(PRODUCTS_FILE, data)
+            return {"success": True, "product": p}
+    raise HTTPException(404, "Product niet gevonden")
+
+
+@router.delete("/admin/products/{product_id}")
+async def admin_delete_product(product_id: str, viewer_id: str):
+    _require_admin(viewer_id)
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    before = len(data.get("products", []))
+    data["products"] = [p for p in data.get("products", []) if p["id"] != product_id]
+    if len(data["products"]) == before:
+        raise HTTPException(404, "Product niet gevonden")
+    save_json(PRODUCTS_FILE, data)
+    return {"success": True}
+
+
+@router.delete("/admin/products/{product_id}/images")
+async def admin_remove_product_image(product_id: str, image_url: str, viewer_id: str):
+    """Verwijder één image-URL uit product.images[]."""
+    _require_admin(viewer_id)
+    data = load_json(PRODUCTS_FILE, default={"products": []})
+    for p in data.get("products", []):
+        if p["id"] == product_id:
+            p["images"] = [u for u in (p.get("images") or []) if u != image_url]
+            if p.get("image_url") == image_url:
+                p["image_url"] = (p["images"][0] if p["images"] else None)
+            save_json(PRODUCTS_FILE, data)
+            return {"success": True, "images": p["images"]}
+    raise HTTPException(404, "Product niet gevonden")
+
+
+# v6_order_shipped_001 — Markeer order verzonden, stuur bark naar user
+class ShipOrderRequest(BaseModel):
+    viewer_id: str
+    tracking_info: Optional[str] = None
+    note: Optional[str] = None
+
+
+@router.post("/orders/{order_id}/ship")
+async def mark_order_shipped(order_id: str, req: ShipOrderRequest):
+    _require_admin(req.viewer_id)
+    data = load_json(PRODUCTS_FILE, default={"orders": []})
+    target = None
+    for o in data.get("orders", []):
+        if o["id"] == order_id:
+            target = o
+            break
+    if not target:
+        raise HTTPException(404, "Order niet gevonden")
+    if target["status"] == "verzonden":
+        raise HTTPException(400, "Al verzonden")
+    target["status"] = "verzonden"
+    target["shipped_at"] = datetime.now(timezone.utc).isoformat()
+    target["tracking_info"] = req.tracking_info
+    target["ship_note"] = req.note
+    save_json(PRODUCTS_FILE, data)
+
+    # Markeer admin-taak als done
+    try:
+        tasks_file = DATA_DIR / "notes" / "tasks.json"
+        td = load_json(tasks_file, default={"tasks": []})
+        for t in td.get("tasks", []):
+            if t.get("order_id") == order_id:
+                t["status"] = "done"
+                t["completed_at"] = datetime.now(timezone.utc).isoformat()
+        save_json(tasks_file, td)
+    except Exception:
+        pass
+
+    # Bark naar user
+    items_summary = ", ".join(f"{i['quantity']}x {i['name']}" for i in target["items"])
+    extra = f"\n\n📋 {req.note}" if req.note else ""
+    tracking = f"\n\n🚚 Track & trace: {req.tracking_info}" if req.tracking_info else ""
+    _bark_to_user(
+        target["user_id"],
+        f"📦 Je bestelling #{order_id} is onderweg!\n\n{items_summary}{tracking}{extra}",
+        kind="order_shipped",
+        meta={"order_id": order_id},
+    )
+    return {"success": True, "order": target}
 
 
 # ============================================================
@@ -707,6 +844,22 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             except Exception as e:
                 print(f"[SHOP] Storage activeren mislukt: {e}")
 
+    # v6_order_followup_001 — Bonnetje + admin-taak + bark naar user
+    _create_order_bonnetje(user_id, order)
+    if any(it.get("category") == "merch" for it in order_items):
+        # Fysiek product: admin moet verzenden → bonnetje voor admin + taak + bark
+        _create_order_bonnetje(user_id, order, viewer_target="user-001")
+        _create_order_admin_task(order)
+        _bark_to_user(
+            user_id,
+            f"🛍️ Je bestelling #{order_id} is binnen!\n\n"
+            f"Totaal: €{total:.2f}\n"
+            f"Status: in behandeling — admin gaat het inpakken & verzenden.\n"
+            f"Je ontvangt een bericht zodra het onderweg is.",
+            kind="order_placed",
+            meta={"order_id": order_id, "total": total},
+        )
+
     return {
         "success": True,
         "message": f"Bestelling #{order_id} geplaatst!",
@@ -714,6 +867,106 @@ async def create_order(user_id: str, req: CreateOrderRequest):
         "new_balance": wallets["wallets"][user_id]["balance"],
         "storage_granted_gb": storage_granted_gb,
     }
+
+
+# v6_order_followup_001 — Helpers: bonnetje in archief + admin-taak + bark
+def _create_order_bonnetje(user_id: str, order: dict, viewer_target: str = None) -> None:
+    """Schrijf een Markdown-bonnetje naar user_archive/bestanden."""
+    try:
+        from modules.user_archive.routes import _user_dir, _load_index, _save_index
+        target = viewer_target or user_id
+        adir = _user_dir(target) / "bestanden"
+        adir.mkdir(parents=True, exist_ok=True)
+        file_id = uuid.uuid4().hex[:12]
+        fname = f"bestelling_{order['id']}_{file_id}.md"
+        dest = adir / fname
+        rows = [
+            f"# 🧾 Bestelling #{order['id']}",
+            "",
+            f"**Datum:** {order['created_at']}",
+            f"**Klant:** {order.get('shipping_name', '—')}",
+            f"**Adres:** {order.get('shipping_address', '—')}",
+            "",
+            "## Items",
+            "",
+            "| Aantal | Product | Prijs | Totaal |",
+            "|---|---|---|---|",
+        ]
+        for it in order["items"]:
+            rows.append(f"| {it['quantity']} | {it['name']} | €{it['price']:.2f} | €{it['line_total']:.2f} |")
+        rows += ["", f"**Totaal: €{order['total']:.2f}**", "",
+                 f"**Status:** {order.get('status', 'besteld')}"]
+        if order.get("notes"):
+            rows += ["", f"**Notitie:** {order['notes']}"]
+        dest.write_text("\n".join(rows), encoding="utf-8")
+        entry = {
+            "id": file_id, "filename": fname, "original_name": f"Bestelling #{order['id']}.md",
+            "category": "bestanden", "extension": ".md", "mime_type": "text/markdown",
+            "size_bytes": dest.stat().st_size,
+            "description": f"Bestelling #{order['id']} — €{order['total']:.2f}",
+            "tags": ["bestelling", "bonnetje", f"order_{order['id']}"],
+            "uploaded_at": datetime.now(timezone.utc).isoformat(),
+            "uploaded_by": target, "path": str(dest),
+            "source": "shop_order", "order_id": order["id"],
+            "for_role": "admin" if viewer_target == "user-001" else "user",
+        }
+        files = _load_index(target)
+        files.append(entry)
+        _save_index(target, files)
+    except Exception as e:
+        print(f"[shop] bonnetje schrijven mislukt: {e}")
+
+
+def _create_order_admin_task(order: dict) -> None:
+    """Maak admin-taak in notes voor het verzenden van de bestelling."""
+    try:
+        tasks_file = DATA_DIR / "notes" / "tasks.json"
+        tasks_file.parent.mkdir(parents=True, exist_ok=True)
+        d = load_json(tasks_file, default={"tasks": []})
+        items_summary = ", ".join(f"{i['quantity']}x {i['name']}" for i in order["items"])
+        d["tasks"].append({
+            "id": str(uuid.uuid4()),
+            "user_id": "user-001",
+            "task": f"📦 Bestelling #{order['id']} verzenden — {items_summary} — €{order['total']:.2f} — Klant: {order.get('shipping_name', '?')}",
+            "priority": "high",
+            "status": "todo",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "completed_at": None,
+            "source": "shop_order",
+            "order_id": order["id"],
+            "user_recipient": order["user_id"],
+        })
+        save_json(tasks_file, d)
+    except Exception as e:
+        print(f"[shop] admin taak mislukt: {e}")
+
+
+def _bark_to_user(user_id: str, text: str, kind: str = "order_update", meta: dict = None) -> None:
+    """Stuur privé-bark via bot-spark naar user."""
+    try:
+        bot_id = "bot-smith"  # Spark zelf via Mr Smith
+        prive_dir = DATA_DIR / "chat" / "prive"
+        prive_dir.mkdir(parents=True, exist_ok=True)
+        pair = sorted([bot_id, user_id])
+        fp = prive_dir / f"{pair[0]}__{pair[1]}.json"
+        data = load_json(fp, default={"messages": []})
+        msg = {
+            "id": f"pm-{uuid.uuid4().hex[:8]}",
+            "from_user_id": bot_id,
+            "from_naam": "Mr Smith",
+            "to_user_id": user_id,
+            "text": text,
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "unread_by": [user_id],
+            "system": True,
+            "kind": kind,
+            "is_bot": True,
+            **(meta or {}),
+        }
+        data["messages"] = data.get("messages", []) + [msg]
+        save_json(fp, data)
+    except Exception as e:
+        print(f"[shop] bark naar user mislukt: {e}")
 
 
 @router.get("/orders/{user_id}")

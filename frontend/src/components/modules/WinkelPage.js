@@ -4,8 +4,9 @@ import { useAuth } from '../../context/AuthContext';
 import {
   ShoppingBag, Coins, Plus, Minus, ShoppingCart, X,
   Package, Tag, Truck, CreditCard, Loader2, Check,
-  TrendingUp, ChevronRight, HardDrive, Gift
+  TrendingUp, ChevronRight, HardDrive, Gift, Pencil
 } from 'lucide-react';
+import { ProductEditModal } from './ProductEditModal';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -28,6 +29,11 @@ export function WinkelPage({ onNavigate }) {
   const [tokenQty, setTokenQty] = useState('1');
   const [buyingToken, setBuyingToken] = useState(false);
   const [tokenResult, setTokenResult] = useState(null);
+
+  // v6_shop_admin_product_crud_001 — Admin product edit state (BEFORE early returns!)
+  const isAdminViewer = (user?.gradatie ?? 7) <= 2;
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [newProductTab, setNewProductTab] = useState(null);
 
   const loadData = useCallback(() => {
     Promise.all([
@@ -194,9 +200,16 @@ export function WinkelPage({ onNavigate }) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {merchProducts.map(product => (
                 <div key={product.id} data-testid={`product-${product.id}`}
-                  className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-all group">
-                  {/* Product image area — admin kan klikken om afbeelding te wijzigen */}
-                  <ProductImageArea product={product} isAdmin={(user?.gradatie ?? 7) <= 2} userId={user?.id} onUpdated={loadData} />
+                  className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-all group relative">
+                  {/* Admin: edit knop top-right (los van image-overlay) */}
+                  {isAdminViewer && (
+                    <button onClick={() => setEditingProduct(product)} data-testid={`product-edit-${product.id}`}
+                      title="Product bewerken"
+                      className="absolute top-2 right-2 z-10 w-8 h-8 rounded-lg bg-slate-900/80 backdrop-blur border border-amber-500/40 flex items-center justify-center text-amber-300 hover:bg-amber-500/20">
+                      <Pencil className="w-4 h-4" />
+                    </button>
+                  )}
+                  <ProductImageArea product={product} isAdmin={isAdminViewer} userId={user?.id} onUpdated={loadData} />
                   {/* Product info */}
                   <div className="p-4 space-y-3">
                     <div>
@@ -221,9 +234,19 @@ export function WinkelPage({ onNavigate }) {
                   </div>
                 </div>
               ))}
+              {/* v6_shop_admin_product_crud_001 — Nieuw product tegel (admin) */}
+              {isAdminViewer && (
+                <button data-testid="new-merch-product"
+                  onClick={() => { setEditingProduct(null); setNewProductTab('merch'); }}
+                  className="bg-slate-900/30 border-2 border-dashed border-amber-500/40 rounded-xl flex flex-col items-center justify-center gap-2 min-h-[280px] text-amber-300 hover:bg-amber-500/5 hover:border-amber-400 transition-all">
+                  <Plus className="w-10 h-10" />
+                  <span className="text-sm font-bold">Nieuw merch product</span>
+                  <span className="text-[10px] text-slate-400">titel, prijs, voor/achter foto…</span>
+                </button>
+              )}
             </div>
 
-            {merchProducts.length === 0 && (
+            {merchProducts.length === 0 && !isAdminViewer && (
               <div className="py-12 text-center text-slate-500 text-sm">Geen producten beschikbaar</div>
             )}
           </div>
@@ -420,6 +443,18 @@ export function WinkelPage({ onNavigate }) {
       </div>
 
       {/* v5_roar_gift_001 — Gift verhuisd naar WalletPage (bij Storten/Opnemen) */}
+
+      {/* v6_shop_admin_product_crud_001 — Edit/new product modal */}
+      {isAdminViewer && (
+        <ProductEditModal
+          open={!!editingProduct || !!newProductTab}
+          onClose={() => { setEditingProduct(null); setNewProductTab(null); }}
+          product={editingProduct}
+          userId={user?.id}
+          defaultCategory={newProductTab || editingProduct?.category || 'merch'}
+          onSaved={(p) => { loadData(); if (p && p.id) setEditingProduct(p); }}
+        />
+      )}
     </MainLayout>
   );
 }

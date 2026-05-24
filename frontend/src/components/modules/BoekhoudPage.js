@@ -76,30 +76,36 @@ export function BoekhoudPage({ onNavigate }) {
     }
   };
 
-  // v6_accounting_edit_001 — bedrag inline aanpassen via prompt
-  const editTxAmount = async (tx) => {
-    const cur = String(tx.amount ?? '');
-    const raw = window.prompt(
-      `Pas bedrag aan voor "${tx.description}"\n(huidige: € ${cur})\n\nNieuw bedrag (in euro's, gebruik . als komma):`,
-      cur
-    );
-    if (raw === null) return;
-    const v = parseFloat(String(raw).replace(',', '.').trim());
-    if (!Number.isFinite(v) || v < 0) { alert('Ongeldig bedrag'); return; }
-    const res = await fetch(`${API}/api/accounting/transactions/${tx.id}`, {
-      method: 'PUT', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: v }),
-    });
-    const data = await res.json();
-    if (!data.success) { alert('Aanpassen mislukt: ' + (data.message || JSON.stringify(data))); return; }
-    setTransactions(prev => prev.map(t => t.id === tx.id ? data.transaction : t));
-    const [k, s] = await Promise.all([
-      fetch(`${API}/api/accounting/kasboeken`).then(r => r.json()),
-      fetch(`${API}/api/accounting/summary`).then(r => r.json()),
-    ]);
-    setKasboeken(k.kasboeken || []);
-    setSummary(s);
+  // v6_accounting_edit_001 — bedrag inline aanpassen via modal (was prompt)
+  const [editingTx, setEditingTx] = useState(null);
+  const [editAmount, setEditAmount] = useState('');
+  const [editSaving, setEditSaving] = useState(false);
+  const openEditTx = (tx) => {
+    setEditingTx(tx);
+    setEditAmount(String(tx.amount ?? ''));
   };
+  const saveEditTx = async () => {
+    const v = parseFloat(String(editAmount).replace(',', '.').trim());
+    if (!Number.isFinite(v) || v < 0) { alert('Ongeldig bedrag'); return; }
+    setEditSaving(true);
+    try {
+      const res = await fetch(`${API}/api/accounting/transactions/${editingTx.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: v }),
+      });
+      const data = await res.json();
+      if (!data.success) { alert('Aanpassen mislukt: ' + (data.message || JSON.stringify(data))); return; }
+      setTransactions(prev => prev.map(t => t.id === editingTx.id ? data.transaction : t));
+      const [k, s] = await Promise.all([
+        fetch(`${API}/api/accounting/kasboeken`).then(r => r.json()),
+        fetch(`${API}/api/accounting/summary`).then(r => r.json()),
+      ]);
+      setKasboeken(k.kasboeken || []);
+      setSummary(s);
+      setEditingTx(null);
+    } finally { setEditSaving(false); }
+  };
+  const editTxAmount = openEditTx;  // backwards-compat (overige buttons gebruiken deze naam)
 
   // v6_accounting_edit_kasboek_001 — uitklap-state per kasboek voor inline transactie-edit
   const [expandedKb, setExpandedKb] = useState(null);
@@ -263,10 +269,10 @@ export function BoekhoudPage({ onNavigate }) {
                                   {tx.type === 'income' ? '+' : '-'}€{tx.amount?.toFixed(2)}
                                 </span>
                                 {isAdmin && (
-                                  <button data-testid={`kb-tx-edit-${tx.id}`} onClick={(e) => { e.stopPropagation(); editTxAmount(tx); }}
+                                  <button data-testid={`kb-tx-edit-${tx.id}`} onClick={(e) => { e.stopPropagation(); openEditTx(tx); }}
                                     title="Bedrag aanpassen"
-                                    className="px-1.5 py-1 hover:bg-amber-500/15 text-slate-500 hover:text-amber-400 rounded text-[10px] font-bold">
-                                    €✎
+                                    className="px-2 py-1 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded text-[10px] font-bold">
+                                    ✎ Bewerk
                                   </button>
                                 )}
                                 {isAdmin && (
@@ -325,10 +331,10 @@ export function BoekhoudPage({ onNavigate }) {
                       <p className={`text-sm font-bold ${tx.type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
                         {tx.type === 'income' ? '+' : '-'}{tx.amount?.toFixed(2)}
                       </p>
-                      <button data-testid={`tx-edit-${tx.id}`} onClick={() => editTxAmount(tx)}
+                      <button data-testid={`tx-edit-${tx.id}`} onClick={() => openEditTx(tx)}
                         title="Bedrag aanpassen"
-                        className="p-1.5 hover:bg-amber-500/10 text-slate-600 hover:text-amber-400 rounded-lg">
-                        <span className="text-xs font-bold">€✎</span>
+                        className="px-2 py-1 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded text-[11px] font-bold">
+                        ✎ Bewerk
                       </button>
                       <button onClick={() => deleteTx(tx.id)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg"><Trash2 className="w-3.5 h-3.5" /></button>
                     </div>
@@ -344,6 +350,38 @@ export function BoekhoudPage({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      {/* v6_accounting_edit_002 — Edit Transactie Modal */}
+      {editingTx && (
+        <div data-testid="edit-tx-modal" className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => !editSaving && setEditingTx(null)}>
+          <div className="w-full max-w-md bg-slate-900 border border-amber-500/40 rounded-2xl p-5 space-y-4" onClick={e => e.stopPropagation()}>
+            <div>
+              <h3 className="text-base font-bold text-white">Bedrag aanpassen</h3>
+              <p className="text-xs text-slate-400 mt-1">{editingTx.description}</p>
+              <p className="text-[10px] text-slate-500 mt-0.5">{editingTx.category} · {editingTx.entity_id}</p>
+            </div>
+            <div>
+              <label className="text-[10px] text-slate-400 uppercase tracking-wider">Nieuw bedrag (€)</label>
+              <input data-testid="edit-tx-input" type="number" step="0.01" autoFocus
+                value={editAmount} onChange={e => setEditAmount(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && saveEditTx()}
+                className="mt-1 w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-base text-white focus:outline-none focus:border-amber-500" />
+              <p className="text-[10px] text-slate-500 mt-1">Huidig: €{editingTx.amount?.toFixed(2)}</p>
+            </div>
+            <div className="flex gap-2">
+              <button data-testid="edit-tx-cancel" onClick={() => setEditingTx(null)} disabled={editSaving}
+                className="flex-1 py-2 rounded-lg text-sm font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">
+                Annuleren
+              </button>
+              <button data-testid="edit-tx-save" onClick={saveEditTx} disabled={editSaving}
+                className="flex-1 py-2 rounded-lg text-sm font-bold text-slate-900 disabled:opacity-60"
+                style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+                {editSaving ? 'Opslaan…' : 'Opslaan'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 }

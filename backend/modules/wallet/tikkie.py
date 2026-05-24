@@ -66,7 +66,7 @@ def _is_admin(user_id: str) -> bool:
 
 
 def _send_admin_pm(topup: dict) -> None:
-    """Stuur privé-bericht van bot-boekhouder naar admin (user-001)."""
+    """Stuur privé-bericht van bot-boekhouder naar admin (user-001) + archiveer als bestand."""
     pair = sorted([BOEKHOUDER_BOT_ID, ADMIN_USER_ID])
     fp = PRIVE_DIR / f"{pair[0]}__{pair[1]}.json"
     fp.parent.mkdir(parents=True, exist_ok=True)
@@ -79,7 +79,7 @@ def _send_admin_pm(topup: dict) -> None:
         f"✏️  Naam ingevoerd: {topup['naam_invoer']}",
         f"💶 Bedrag: €{topup['amount_eur']:.2f}",
         "",
-        "Check Tikkie-app of het bedrag binnen is en bevestig in admin → Wallet → Tikkie-aanvragen.",
+        "Check Tikkie-app of het bedrag binnen is en bevestig in Wallet → 📥 (admin Tikkie-aanvragen).",
     ]
     msg = {
         "id": f"pm-{uuid.uuid4().hex[:8]}",
@@ -97,6 +97,69 @@ def _send_admin_pm(topup: dict) -> None:
     }
     data["messages"] = data.get("messages", []) + [msg]
     save_json(fp, data)
+    # Archiveer ook als bestand in admin's persoonlijk archief (categorie: bestanden)
+    try:
+        _archive_tikkie_doc(topup, "aanvraag")
+    except Exception as e:
+        print(f"[tikkie] archiveer aanvraag gefaald: {e}")
+
+
+def _archive_tikkie_doc(topup: dict, soort: str) -> None:
+    """Schrijf een tekstdocument met Tikkie-details naar admin's archief.
+    soort: 'aanvraag' bij nieuwe Tikkie, 'bevestigd' bij confirm.
+    """
+    admin_archive = DATA_ROOT / "users" / ADMIN_USER_ID / "archive" / "bestanden"
+    admin_archive.mkdir(parents=True, exist_ok=True)
+    index_file = DATA_ROOT / "users" / ADMIN_USER_ID / "archive" / "_index.json"
+    idx_data = load_json(index_file, default={"files": []})
+    files_list = idx_data.get("files", []) if isinstance(idx_data, dict) else (idx_data if isinstance(idx_data, list) else [])
+    file_id = f"tikkie-{topup['id'][:10]}-{soort}"
+    fname = f"{file_id}.txt"
+    dest = admin_archive / fname
+    lines = [
+        f"# Tikkie {soort.title()} — {topup['id']}",
+        "",
+        f"Aangevraagd: {topup.get('created_at','')}",
+        f"User: {topup['user_naam']} ({topup['user_id']})",
+        f"Naam-invoer (bij betaling): {topup['naam_invoer']}",
+        f"Bedrag: €{topup['amount_eur']:.2f}",
+        f"Status: {topup.get('status','pending')}",
+    ]
+    if soort == "bevestigd":
+        lines += [
+            f"Bevestigd: {topup.get('confirmed_at','')}",
+            f"Door: {topup.get('confirmed_by','')}",
+            f"Verdeling: €{topup.get('free_amount',0):.2f} vrij + €{topup.get('potje_amount',0):.2f} potje",
+        ]
+        if topup.get("note"):
+            lines += ["", f"Notitie: {topup['note']}"]
+    content = "\n".join(lines).encode("utf-8")
+    dest.write_bytes(content)
+    # Update index (vervang als al bestaat)
+    files_list = [f for f in files_list if f.get("id") != file_id]
+    entry = {
+        "id": file_id,
+        "filename": fname,
+        "original_name": f"Tikkie {soort} {topup['id'][:8]}.txt",
+        "category": "bestanden",
+        "extension": ".txt",
+        "mime_type": "text/plain",
+        "size_bytes": len(content),
+        "description": f"Tikkie {soort} van {topup['user_naam']} — €{topup['amount_eur']:.2f}",
+        "tags": ["tikkie", soort, topup["user_id"]],
+        "uploaded_at": _now(),
+        "uploaded_by": ADMIN_USER_ID,
+        "path": str(dest),
+        "auto_generated": True,
+        "source": "tikkie_topup",
+        "topup_id": topup["id"],
+    }
+    files_list.append(entry)
+    save_json(index_file, {
+        "user_id": ADMIN_USER_ID,
+        "files": files_list,
+        "updated_at": _now(),
+    })
 
 
 def _send_user_confirmation_pm(topup: dict) -> None:
@@ -320,6 +383,10 @@ async def confirm_topup(topup_id: str, req: ConfirmTopup):
         _send_user_confirmation_pm(topup)
     except Exception as e:
         print(f"[tikkie] PM naar user gefaald: {e}")
+    try:
+        _archive_tikkie_doc(topup, "bevestigd")
+    except Exception as e:
+        print(f"[tikkie] archiveer bevestigd gefaald: {e}")
 
     return {"success": True, "topup": topup, "wallet": w, "transaction": tx}
 

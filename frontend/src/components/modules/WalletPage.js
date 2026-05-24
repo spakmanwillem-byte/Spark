@@ -155,7 +155,7 @@ export function WalletPage({ onNavigate }) {
               </div>
             )}
             <button data-testid="withdraw-btn" onClick={() => setShowWithdraw(!showWithdraw)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
+              className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
               <Minus className="w-4 h-4" /> Opnemen
             </button>
             {/* v6_mint_from_wallet_001 — Spark "Maak Token" knop, alleen in Spark wallet view */}
@@ -178,8 +178,8 @@ export function WalletPage({ onNavigate }) {
                     }
                   } catch (e) { alert('Fout: ' + e.message); }
                 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 transition-all border border-emerald-500/30">
-                🪙 Maak Token
+                className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 transition-all border border-emerald-500/30">
+                🪙 Mint
               </button>
             )}
             {/* v5_roar_gift_001 — Gift knop naast Opnemen/Storten */}
@@ -188,15 +188,17 @@ export function WalletPage({ onNavigate }) {
               onClick={() => setGiftModalOpen(true)}
               disabled={(wallet?.spark_tokens || 0) < 1}
               title={(wallet?.spark_tokens || 0) < 1 ? 'Je hebt minimaal 1 ROAR nodig om te giften' : 'Stuur een ROAR token naar een andere user'}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-pink-300 bg-pink-500/10 hover:bg-pink-500/20 transition-all border border-pink-500/30 disabled:opacity-40 disabled:cursor-not-allowed">
-              <Gift className="w-4 h-4" /> 🎁 Gift
+              className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-pink-300 bg-pink-500/10 hover:bg-pink-500/20 transition-all border border-pink-500/30 disabled:opacity-40 disabled:cursor-not-allowed">
+              <Gift className="w-4 h-4" /> Gift
             </button>
-            <button data-testid="add-funds-btn" onClick={() => setShowTikkie(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-              <Plus className="w-4 h-4" /> Storten (Tikkie)
+            <button data-testid="add-funds-btn" onClick={() => setShowTikkie(true)}
+              className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-white transition-all"
+              style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+              <Plus className="w-4 h-4" /> Storten
             </button>
             {isTikkieAdmin && (
               <button data-testid="open-admin-tikkie-btn" onClick={() => setShowAdminTikkie(true)}
-                className="relative flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-amber-300 transition-all border border-amber-500/40 hover:border-amber-400 bg-amber-500/5"
+                className="relative flex items-center justify-center gap-2 px-4 h-10 min-w-[60px] rounded-xl text-sm font-medium text-amber-300 transition-all border border-amber-500/40 hover:border-amber-400 bg-amber-500/5"
                 title="Tikkie-aanvragen beheren">
                 <Inbox className="w-4 h-4" />
                 {pendingTikkieCount > 0 && (

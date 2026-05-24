@@ -4,37 +4,26 @@
       "id": "sc-deposit-001",
       "type": "income",
       "category": "Crypto Profit",
-      "amount": 50.8,
+      "amount": 90.8,
       "description": "Startkapitaal gestort op Bitvavo (10 ROAR tokens verkocht @ 5.08)",
       "entity_id": "spark_core",
       "date": "2026-04-19T20:00:00+00:00",
       "btw_percentage": 0,
-      "btw_amount": 0,
-      "created_at": "2026-04-19T20:00:00+00:00"
-    },
-    {
-      "id": "f5875a680ab5",
-      "entity_id": "spark_core",
-      "type": "income",
-      "category": "lening_vordering",
-      "amount": 55.0,
-      "description": "Vordering op Willem (tijdelijke uithaal 10 potjes)",
-      "date": "2026-05-23",
-      "reference": "tijdelijke-lening-2026-05-23",
-      "created_at": "2026-05-23T22:02:45.324068+00:00",
-      "updated_at": "2026-05-23T23:45:44.539106+00:00"
+      "btw_amount": 0.0,
+      "created_at": "2026-04-19T20:00:00+00:00",
+      "updated_at": "2026-05-24T10:03:51.874006+00:00"
     },
     {
       "id": "024fa10f4972",
       "entity_id": "spark_core",
       "type": "expense",
       "category": "potjes_uithaal",
-      "amount": 55.0,
+      "amount": 30.0,
       "description": "10 potjes Willem verkocht op Bitvavo (tijdelijk)",
       "date": "2026-05-23",
       "reference": "tijdelijke-lening-2026-05-23",
       "created_at": "2026-05-23T22:02:45.324068+00:00",
-      "updated_at": "2026-05-23T23:45:44.671253+00:00"
+      "updated_at": "2026-05-24T10:03:22.578126+00:00"
     },
     {
       "id": "3d3207ad7e30",
@@ -42,12 +31,12 @@
       "user_id": "user-001",
       "type": "income",
       "category": "bitvavo_uithaal",
-      "amount": 55.0,
+      "amount": 30.0,
       "description": "10 potjes verkocht — ontvangen op bank",
       "date": "2026-05-23",
       "reference": "tijdelijke-lening-2026-05-23",
       "created_at": "2026-05-23T22:02:45.324068+00:00",
-      "updated_at": "2026-05-23T23:45:44.837576+00:00"
+      "updated_at": "2026-05-24T10:04:08.750635+00:00"
     },
     {
       "id": "ce8e9a567750",
@@ -55,37 +44,12 @@
       "user_id": "user-001",
       "type": "expense",
       "category": "schuld_aan_spark",
-      "amount": 55.0,
+      "amount": 30.0,
       "description": "Schuld aan Spark (terug te storten)",
       "date": "2026-05-23",
       "reference": "tijdelijke-lening-2026-05-23",
       "created_at": "2026-05-23T22:02:45.324068+00:00",
-      "updated_at": "2026-05-23T23:45:44.996456+00:00"
-    },
-    {
-      "id": "afb-1c8f85d473",
-      "entity_id": "personal_willem",
-      "user_id": "user-001",
-      "type": "expense",
-      "category": "afbetaling_schuld",
-      "amount": 15.0,
-      "description": "Afbetaling op schuld aan Spark — 1e termijn",
-      "date": "2026-05-24",
-      "reference": "afbetaling-2026-05-24",
-      "created_at": "2026-05-24T09:46:50.619937+00:00",
-      "linked_tx": "ce8e9a567750"
-    },
-    {
-      "id": "afb-0147d4c411",
-      "entity_id": "spark_core",
-      "type": "income",
-      "category": "afbetaling_ontvangen",
-      "amount": 15.0,
-      "description": "Afbetaling Willem ontvangen op schuld",
-      "date": "2026-05-24",
-      "reference": "afbetaling-2026-05-24",
-      "created_at": "2026-05-24T09:46:50.619937+00:00",
-      "linked_tx": "f5875a680ab5"
+      "updated_at": "2026-05-24T10:02:14.306504+00:00"
     }
   ]
 }

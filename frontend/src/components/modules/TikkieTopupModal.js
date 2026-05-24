@@ -5,7 +5,7 @@ import { X, Loader2, Check, AlertCircle, Euro, QrCode, Send } from 'lucide-react
 const API = process.env.REACT_APP_BACKEND_URL;
 
 export function TikkieTopupModal({ open, onClose, user }) {
-  const [amount, setAmount] = useState('10');
+  const [amount, setAmount] = useState('');
   const [naam, setNaam] = useState(user?.naam || user?.volledige_naam || '');
   const [step, setStep] = useState('form'); // form → confirm → sent
   const [sending, setSending] = useState(false);
@@ -17,6 +17,7 @@ export function TikkieTopupModal({ open, onClose, user }) {
   useEffect(() => {
     if (!open) return;
     setNaam(user?.naam || user?.volledige_naam || '');
+    setAmount('');
     setStep('form');
     setError(null);
     setResult(null);
@@ -28,7 +29,7 @@ export function TikkieTopupModal({ open, onClose, user }) {
 
   if (!open) return null;
 
-  const presets = [10, 15, 20];
+  const suggestions = [10, 15, 20];
 
   const goConfirm = () => {
     setError(null);
@@ -88,11 +89,17 @@ export function TikkieTopupModal({ open, onClose, user }) {
           {step === 'form' && (
             <>
               <div>
-                <label className="text-[10px] text-slate-400 uppercase tracking-wider">Bedrag (€)</label>
+                <label className="text-[10px] text-slate-400 uppercase tracking-wider">Bedrag (€) — vul zelf het bedrag in dat je via Tikkie betaalt</label>
+                <input data-testid="tikkie-amount" type="number" min="1" step="0.50" value={amount}
+                  onChange={e => setAmount(e.target.value)}
+                  autoFocus
+                  className="mt-1 w-full px-3 py-3 bg-slate-800 border border-slate-700 rounded-lg text-base text-white focus:outline-none focus:border-amber-500"
+                  placeholder="Bijv. 10, 15, 20, 27.50..." />
                 <div className="mt-2 flex gap-2">
-                  {presets.map(p => (
+                  <span className="text-[10px] text-slate-500 self-center">Snel:</span>
+                  {suggestions.map(p => (
                     <button key={p} data-testid={`preset-${p}`} onClick={() => setAmount(String(p))}
-                      className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                      className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
                         parseFloat(amount) === p
                           ? 'bg-amber-500 text-slate-900 ring-2 ring-amber-400'
                           : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -101,10 +108,6 @@ export function TikkieTopupModal({ open, onClose, user }) {
                     </button>
                   ))}
                 </div>
-                <input data-testid="tikkie-amount" type="number" min="1" step="0.50" value={amount}
-                  onChange={e => setAmount(e.target.value)}
-                  className="mt-2 w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500"
-                  placeholder="Eigen bedrag" />
               </div>
               <div>
                 <label className="text-[10px] text-slate-400 uppercase tracking-wider">Jouw naam (zoals in Tikkie)</label>

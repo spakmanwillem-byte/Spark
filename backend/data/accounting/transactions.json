@@ -61,6 +61,31 @@
       "reference": "tijdelijke-lening-2026-05-23",
       "created_at": "2026-05-23T22:02:45.324068+00:00",
       "updated_at": "2026-05-23T23:45:44.996456+00:00"
+    },
+    {
+      "id": "afb-1c8f85d473",
+      "entity_id": "personal_willem",
+      "user_id": "user-001",
+      "type": "expense",
+      "category": "afbetaling_schuld",
+      "amount": 15.0,
+      "description": "Afbetaling op schuld aan Spark — 1e termijn",
+      "date": "2026-05-24",
+      "reference": "afbetaling-2026-05-24",
+      "created_at": "2026-05-24T09:46:50.619937+00:00",
+      "linked_tx": "ce8e9a567750"
+    },
+    {
+      "id": "afb-0147d4c411",
+      "entity_id": "spark_core",
+      "type": "income",
+      "category": "afbetaling_ontvangen",
+      "amount": 15.0,
+      "description": "Afbetaling Willem ontvangen op schuld",
+      "date": "2026-05-24",
+      "reference": "afbetaling-2026-05-24",
+      "created_at": "2026-05-24T09:46:50.619937+00:00",
+      "linked_tx": "f5875a680ab5"
     }
   ]
 }

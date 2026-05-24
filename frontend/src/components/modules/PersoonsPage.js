@@ -5,6 +5,7 @@ import {
   ChevronDown, ChevronRight, Link2
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { UserAvatar } from '../common/UserAvatar';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -174,9 +175,11 @@ export function PersoonsPage({ onNavigate }) {
                       <div key={p.id} data-testid={`person-${p.id}`} className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors">
                         <button onClick={() => setExpandedId(isExpanded ? null : p.id)}
                           className="w-full flex items-center gap-3 p-3 text-left">
-                          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${gColor}15` }}>
-                            <span className="text-sm font-bold" style={{ color: gColor }}>{(p.naam || '?')[0].toUpperCase()}</span>
-                          </div>
+                          <UserAvatar
+                            user={{ id: p.id, naam: p.naam, avatar: p.avatar || p.avatar_ref, gradatie: p.gradatie }}
+                            size="md"
+                            rounded="rounded-lg"
+                          />
                           <div className="flex-1 min-w-0">
                             <h4 className="text-sm font-medium text-white">{p.naam}</h4>
                             <div className="flex items-center gap-2">

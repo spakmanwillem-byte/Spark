@@ -21,6 +21,7 @@ export function CommunityPage({ onNavigate }) {
   const userName = user?.naam || 'Willem';
   const [messages, setMessages] = useState([]);
   const [bots, setBots] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
@@ -30,14 +31,34 @@ export function CommunityPage({ onNavigate }) {
     Promise.all([
       fetch(`${API}/api/bots/community/messages?limit=100`).then(r => r.json()).catch(() => ({ messages: [] })),
       fetch(`${API}/api/bots/list`).then(r => r.json()).catch(() => ({ bots: [] })),
-    ]).then(([m, b]) => {
+      fetch(`${API}/api/contacts/online`).then(r => r.json()).catch(() => ({ users: [] })),
+    ]).then(([m, b, o]) => {
       setMessages((m.messages || []).reverse());
       setBots(b.bots || []);
+      setOnlineUsers(o.users || []);
       setLoading(false);
     });
   };
 
   useEffect(() => { loadData(); }, []);
+
+  // v5_community_polling_001 — auto-refresh berichten + online lijst elke 8s; heartbeat elke 30s
+  useEffect(() => {
+    const msgTimer = setInterval(() => {
+      fetch(`${API}/api/bots/community/messages?limit=100`).then(r => r.json())
+        .then(m => setMessages((m.messages || []).reverse()))
+        .catch(() => {});
+      fetch(`${API}/api/contacts/online`).then(r => r.json())
+        .then(o => setOnlineUsers(o.users || []))
+        .catch(() => {});
+    }, 8000);
+    const beatTimer = setInterval(() => {
+      if (userId) fetch(`${API}/api/contacts/heartbeat?user_id=${userId}`, { method: 'POST' }).catch(() => {});
+    }, 30000);
+    // initial beat
+    if (userId) fetch(`${API}/api/contacts/heartbeat?user_id=${userId}`, { method: 'POST' }).catch(() => {});
+    return () => { clearInterval(msgTimer); clearInterval(beatTimer); };
+  }, [userId]);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
   const sendMessage = async () => {
@@ -89,17 +110,22 @@ export function CommunityPage({ onNavigate }) {
               </div>
               <div>
                 <h1 className="text-base font-bold text-white leading-tight">Community</h1>
-                <p className="text-[10px] text-slate-500">{messages.length} berichten | {bots.length} bots online</p>
+                <p className="text-[10px] text-slate-500" data-testid="community-stats">
+                  {messages.length} berichten · {onlineUsers.length} online ({onlineUsers.filter(u => u.is_bot).length} bots, {onlineUsers.filter(u => !u.is_bot).length} users)
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-1">
-              {bots.map(bot => {
-                const style = BOT_COLORS[bot.id] || { bg: 'bg-slate-800', text: 'text-slate-400', border: 'border-slate-700', icon: Bot };
-                const BotIcon = style.icon;
+            <div className="flex items-center gap-1 flex-wrap justify-end max-w-[60%]" data-testid="online-users-list">
+              {onlineUsers.map(u => {
+                const style = u.is_bot ? (BOT_COLORS[u.id] || { bg: 'bg-slate-800', text: 'text-slate-400', border: 'border-slate-700', icon: Bot }) :
+                  { bg: 'bg-amber-500/10', text: 'text-amber-300', border: 'border-amber-500/20', icon: User };
+                const Icon = style.icon;
                 return (
-                  <div key={bot.id} className={`flex items-center gap-1.5 px-2 py-1 rounded-lg ${style.bg} border ${style.border}`}>
-                    <BotIcon className={`w-3 h-3 ${style.text}`} />
-                    <span className={`text-[10px] font-medium ${style.text}`}>{bot.naam.split(' ')[0]}</span>
+                  <div key={u.id} data-testid={`online-${u.id}`}
+                    className={`flex items-center gap-1.5 px-2 py-1 rounded-lg ${style.bg} border ${style.border}`}
+                    title={`${u.naam}${u.is_bot ? ' (bot)' : ''}`}>
+                    <Icon className={`w-3 h-3 ${style.text}`} />
+                    <span className={`text-[10px] font-medium ${style.text}`}>{u.naam.split(' ')[0]}</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                   </div>
                 );

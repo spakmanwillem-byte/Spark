@@ -4,10 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import {
   ShoppingBag, Coins, Plus, Minus, ShoppingCart, X,
   Package, Tag, Truck, CreditCard, Loader2, Check,
-  TrendingUp, ChevronRight, HardDrive, Gift, Euro, Inbox
+  TrendingUp, ChevronRight, HardDrive, Gift
 } from 'lucide-react';
-import { TikkieTopupModal } from './TikkieTopupModal';
-import { AdminTikkieReview } from './AdminTikkieReview';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -30,20 +28,6 @@ export function WinkelPage({ onNavigate }) {
   const [tokenQty, setTokenQty] = useState('1');
   const [buyingToken, setBuyingToken] = useState(false);
   const [tokenResult, setTokenResult] = useState(null);
-
-  // Tikkie topup
-  const [showTikkie, setShowTikkie] = useState(false);
-  const [showAdminTikkie, setShowAdminTikkie] = useState(false);
-  const [pendingTikkieCount, setPendingTikkieCount] = useState(0);
-  const isAdmin = (user?.gradatie ?? 7) <= 2;
-
-  useEffect(() => {
-    if (!isAdmin || !user?.id) return;
-    fetch(`${API}/api/wallet/tikkie/list?viewer_id=${user.id}&status=pending`)
-      .then(r => r.ok ? r.json() : { topups: [] })
-      .then(d => setPendingTikkieCount((d.topups || []).length))
-      .catch(() => {});
-  }, [isAdmin, user?.id, showAdminTikkie, showTikkie]);
 
   const loadData = useCallback(() => {
     Promise.all([
@@ -154,24 +138,6 @@ export function WinkelPage({ onNavigate }) {
               <p className="text-[10px] text-slate-500">Wallet saldo</p>
               <p className="text-sm font-bold text-white">&euro;{walletBalance.toFixed(2)}</p>
             </div>
-            <button data-testid="open-tikkie-btn" onClick={() => setShowTikkie(true)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white transition-all border border-violet-500/40 hover:border-violet-400"
-              style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.20), rgba(34, 197, 94, 0.15))' }}
-              title="Wallet opwaarderen via Tikkie">
-              <Euro className="w-3.5 h-3.5" /> Tikkie
-            </button>
-            {isAdmin && (
-              <button data-testid="open-admin-tikkie-btn" onClick={() => setShowAdminTikkie(true)}
-                className="relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-300 transition-all border border-amber-500/40 hover:border-amber-400 bg-amber-500/5"
-                title="Tikkie-aanvragen beheren">
-                <Inbox className="w-3.5 h-3.5" />
-                {pendingTikkieCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
-                    {pendingTikkieCount}
-                  </span>
-                )}
-              </button>
-            )}
             <button data-testid="cart-btn" onClick={() => setShowCart(!showCart)}
               className="relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all border border-slate-700 hover:border-amber-500/50 bg-slate-800">
               <ShoppingCart className="w-4 h-4" />
@@ -464,10 +430,6 @@ export function WinkelPage({ onNavigate }) {
       </div>
 
       {/* v5_roar_gift_001 — Gift verhuisd naar WalletPage (bij Storten/Opnemen) */}
-
-      {/* v5_tikkie_topup_001 — Tikkie modals */}
-      <TikkieTopupModal open={showTikkie} onClose={() => setShowTikkie(false)} user={user} />
-      {isAdmin && <AdminTikkieReview open={showAdminTikkie} onClose={() => setShowAdminTikkie(false)} user={user} />}
     </MainLayout>
   );
 }

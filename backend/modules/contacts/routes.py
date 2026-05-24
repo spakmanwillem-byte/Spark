@@ -137,6 +137,47 @@ class SendMessage(BaseModel):
 
 
 # ============== ROUTES ==============
+@router.get("/online")
+async def online_users():
+    """Lijst alle online users + bots (last_active < 5 min OR is_bot).
+
+    Wordt gebruikt door Community-pagina om real-time aanwezigen te tonen.
+    Bevat geen privé-gegevens — alleen id, naam, avatar_ref, gradatie, is_bot.
+    """
+    data = load_json(USERS_FILE, default={"users": []})
+    out = []
+    for u in data.get("users", []):
+        uid = u.get("id")
+        if not uid or uid == "user-000":  # Spark zelf: skip in 'online list' (overal beschikbaar)
+            continue
+        if not _is_online(u):
+            continue
+        out.append({
+            "id": uid,
+            "naam": u.get("naam") or u.get("volledige_naam") or uid,
+            "avatar": u.get("avatar") or u.get("avatar_ref"),
+            "gradatie": u.get("gradatie", 7),
+            "is_bot": _is_bot(u),
+            "last_active": u.get("last_active"),
+        })
+    # Bots boven, dan op gradatie/naam
+    out.sort(key=lambda x: (not x["is_bot"], x.get("gradatie", 7), x["naam"].lower()))
+    return {"users": out, "count": len(out)}
+
+
+@router.post("/heartbeat")
+async def heartbeat(user_id: str):
+    """Update last_active voor user — gebruikt door FE om presence te signalen."""
+    data = load_json(USERS_FILE, default={"users": []})
+    now = _now().isoformat()
+    for u in data.get("users", []):
+        if u.get("id") == user_id:
+            u["last_active"] = now
+            save_json(USERS_FILE, data)
+            return {"ok": True, "last_active": now}
+    raise HTTPException(404, "User niet gevonden")
+
+
 @router.get("/list")
 async def list_contacts(user_id: str) -> Dict:
     """Geef gradatie-gefilterde contactenlijst voor deze viewer."""

@@ -881,9 +881,11 @@ function PersonCardsView({ user, cards, loading }) {
                 <div key={p.id} data-testid={`person-${p.id}`}
                   className={`${style.bg} border border-slate-800 rounded-xl p-3 hover:border-slate-700 transition-colors`}>
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center flex-shrink-0">
-                      <span className={`text-sm font-bold ${style.text}`}>{(p.naam || '?').charAt(0).toUpperCase()}</span>
-                    </div>
+                    <UserAvatar
+                      user={{ id: p.id, naam: p.naam, avatar: p.avatar || p.avatar_ref, gradatie: p.gradatie }}
+                      size="md"
+                      rounded="rounded-xl"
+                    />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-white truncate">
                         {p.volledige_naam || p.naam}

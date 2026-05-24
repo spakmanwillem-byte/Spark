@@ -4,8 +4,10 @@ import { useAuth } from '../../context/AuthContext';
 import {
   Wallet, ArrowUpRight, ArrowDownLeft, TrendingUp, CreditCard,
   Plus, Search, Star, Coins, PiggyBank,
-  CircleDollarSign, Banknote, Receipt, Minus, Loader2, Gift
+  CircleDollarSign, Banknote, Receipt, Minus, Loader2, Gift, Inbox
 } from 'lucide-react';
+import { TikkieTopupModal } from './TikkieTopupModal';
+import { AdminTikkieReview } from './AdminTikkieReview';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -33,6 +35,18 @@ export function WalletPage({ onNavigate }) {
   const [giftInbox, setGiftInbox] = useState([]);
   const [giftOutbox, setGiftOutbox] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  // v5_tikkie_topup_001 — Tikkie modals
+  const [showTikkie, setShowTikkie] = useState(false);
+  const [showAdminTikkie, setShowAdminTikkie] = useState(false);
+  const [pendingTikkieCount, setPendingTikkieCount] = useState(0);
+  const isTikkieAdmin = (user?.gradatie ?? 7) <= 2;
+  useEffect(() => {
+    if (!isTikkieAdmin || !user?.id) return;
+    fetch(`${API}/api/wallet/tikkie/list?viewer_id=${user.id}&status=pending`)
+      .then(r => r.ok ? r.json() : { topups: [] })
+      .then(d => setPendingTikkieCount((d.topups || []).length))
+      .catch(() => {});
+  }, [isTikkieAdmin, user?.id, showAdminTikkie, showTikkie]);
   // v6_spark_history_001 — Spark-specific transactie-papier (kasboek + treasury verkopen + self-mints)
   const [sparkHistory, setSparkHistory] = useState([]);
 
@@ -177,9 +191,21 @@ export function WalletPage({ onNavigate }) {
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-pink-300 bg-pink-500/10 hover:bg-pink-500/20 transition-all border border-pink-500/30 disabled:opacity-40 disabled:cursor-not-allowed">
               <Gift className="w-4 h-4" /> 🎁 Gift
             </button>
-            <button data-testid="add-funds-btn" className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-              <Plus className="w-4 h-4" /> Storten
+            <button data-testid="add-funds-btn" onClick={() => setShowTikkie(true)} className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+              <Plus className="w-4 h-4" /> Storten (Tikkie)
             </button>
+            {isTikkieAdmin && (
+              <button data-testid="open-admin-tikkie-btn" onClick={() => setShowAdminTikkie(true)}
+                className="relative flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-amber-300 transition-all border border-amber-500/40 hover:border-amber-400 bg-amber-500/5"
+                title="Tikkie-aanvragen beheren">
+                <Inbox className="w-4 h-4" />
+                {pendingTikkieCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
+                    {pendingTikkieCount}
+                  </span>
+                )}
+              </button>
+            )}
           </div>
         </div>
 
@@ -447,11 +473,12 @@ export function WalletPage({ onNavigate }) {
           onSent={() => { setGiftModalOpen(false); loadGifts(); loadData(); }}
         />
       )}
+      {/* v5_tikkie_topup_001 — Tikkie modals */}
+      <TikkieTopupModal open={showTikkie} onClose={() => setShowTikkie(false)} user={user} />
+      {isTikkieAdmin && <AdminTikkieReview open={showAdminTikkie} onClose={() => setShowAdminTikkie(false)} user={user} />}
     </MainLayout>
   );
 }
-
-/* === Sub components === */
 
 function StatCard({ label, icon: Icon, value, unit, change, changePositive, sub, color }) {
   return (

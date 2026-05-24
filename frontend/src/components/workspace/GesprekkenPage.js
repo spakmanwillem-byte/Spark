@@ -819,7 +819,7 @@ export function GesprekkenPage({ onNavigate }) {
         </div>
 
         {/* === CONTENT AREA === */}
-        <div className="flex-1 flex overflow-hidden">
+        <div className="flex-1 flex overflow-hidden min-h-0">
 
           {/* --- SPARK AI TAB --- */}
           {activeTab === 'spark' && (
@@ -970,9 +970,9 @@ export function GesprekkenPage({ onNavigate }) {
           {/* --- PRIVÉ TAB --- */}
           {activeTab === 'prive' && (
             <>
-              <div className="w-52 md:w-64 bg-slate-900/40 border-r border-slate-800 flex flex-col flex-shrink-0">
-                <div className="p-3">
-                  <div className="relative mb-3">
+              <div className="w-52 md:w-64 bg-slate-900/40 border-r border-slate-800 flex flex-col flex-shrink-0 min-h-0">
+                <div className="p-3 flex flex-col min-h-0 flex-1">
+                  <div className="relative mb-3 flex-shrink-0">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
                     <input
                       type="text"
@@ -988,7 +988,7 @@ export function GesprekkenPage({ onNavigate }) {
                   ) : priveContacts.length === 0 ? (
                     <p className="text-xs text-slate-500 text-center py-4">Geen contacten beschikbaar</p>
                   ) : (
-                    <div className="space-y-1">
+                    <div className="space-y-1 overflow-y-auto flex-1 pr-1" data-testid="prive-contact-list">
                       {priveContacts
                         .filter(c => !priveSearch || c.naam.toLowerCase().includes(priveSearch.toLowerCase()))
                         .map(c => (
@@ -1031,7 +1031,7 @@ export function GesprekkenPage({ onNavigate }) {
                   )}
                 </div>
               </div>
-              <div className="flex-1 flex flex-col">
+              <div className="flex-1 flex flex-col min-h-0">
                 {!selectedContact ? (
                   <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">

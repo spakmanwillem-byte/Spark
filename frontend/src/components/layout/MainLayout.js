@@ -91,6 +91,17 @@ export function getVisibilityForGradatie(grad) {
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  // v5_presence_heartbeat_001 — Globale heartbeat, update last_active elke 30s
+  useEffect(() => {
+    if (!user?.id) return;
+    const API = process.env.REACT_APP_BACKEND_URL;
+    const beat = () => fetch(`${API}/api/contacts/heartbeat?user_id=${user.id}`, { method: 'POST' }).catch(() => {});
+    beat();
+    const t = setInterval(beat, 30_000);
+    return () => clearInterval(t);
+  }, [user?.id]);
+
   // Urgent notifications glow (v4_glow_001) — pollt elke 60s
   const [urgentGlow, setUrgentGlow] = useState({});
   const [urgentItems, setUrgentItems] = useState([]);

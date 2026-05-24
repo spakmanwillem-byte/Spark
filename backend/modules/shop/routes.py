@@ -3,7 +3,7 @@ Shop Routes - Roadkill Winkel + ROAR Token
 Producten: Merch (caps, hoodies) + ROAR tokens (dynamische prijs).
 Winkelwagen + bestellingen. Kasboek koppeling per entity.
 """
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
 from pathlib import Path
@@ -499,6 +499,78 @@ async def get_product(product_id: str):
                 p["price"] = get_dynamic_price()
             return {"success": True, "product": p}
     return {"success": False, "error": "Product niet gevonden"}
+
+
+# v6_shop_product_image_001 — Admin kan product-afbeelding uploaden
+@router.post("/products/{product_id}/image")
+async def upload_product_image(
+    product_id: str,
+    image: UploadFile = File(...),
+    viewer_id: str = Form(...),
+):
+    """Upload nieuwe afbeelding voor een merch-product.
+    Opslag: /data/system_archive/foto/ met tag 'roadkill_merch' + linked_product_id.
+    Product `image_url` wordt bijgewerkt naar de system-archive URL.
+    """
+    # Admin-check
+    users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
+    viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
+    if not viewer or (viewer.get("gradatie") or 7) > 2:
+        raise HTTPException(403, "Alleen admins mogen product-afbeeldingen wijzigen")
+
+    ext = Path(image.filename or "img.png").suffix.lower()
+    if ext not in {".png", ".jpg", ".jpeg", ".webp"}:
+        raise HTTPException(400, f"Image type '{ext}' niet toegestaan")
+    data_bytes = await image.read()
+    if len(data_bytes) > 8 * 1024 * 1024:
+        raise HTTPException(413, "Image te groot (>8MB)")
+
+    # Schrijf naar system_archive/foto
+    sa_dir = DATA_DIR / "system_archive"
+    foto_dir = sa_dir / "foto"
+    foto_dir.mkdir(parents=True, exist_ok=True)
+    file_id = uuid.uuid4().hex[:12]
+    safe_name = f"merch_{product_id}_{file_id}{ext}"
+    dest = foto_dir / safe_name
+    dest.write_bytes(data_bytes)
+
+    # Update system_archive index met 'roadkill_merch' tag
+    sa_index = sa_dir / "_index.json"
+    idx = load_json(sa_index, default={"files": []})
+    # Get product name for description
+    pdata = load_json(PRODUCTS_FILE, default={"products": []})
+    prod = next((p for p in pdata.get("products", []) if p["id"] == product_id), None)
+    pname = prod["name"] if prod else product_id
+    entry = {
+        "id": file_id,
+        "filename": safe_name,
+        "original_name": image.filename or safe_name,
+        "category": "foto",
+        "extension": ext,
+        "mime_type": image.content_type or "image/png",
+        "size_bytes": len(data_bytes),
+        "description": f"Roadkill Merch product: {pname}",
+        "tags": ["roadkill_merch", f"product_{product_id}"],
+        "uploaded_at": datetime.now(timezone.utc).isoformat(),
+        "uploaded_by": viewer_id,
+        "path": str(dest),
+        "linked_product_id": product_id,
+        "source": "shop_product_image",
+        "scan_status": None,
+        "scan_results": None,
+    }
+    idx.setdefault("files", []).append(entry)
+    idx["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(sa_index, idx)
+
+    # Update product
+    image_url = f"/api/system-archive/file/{file_id}"
+    if prod:
+        prod["image_url"] = image_url
+        prod["image_archive_id"] = file_id
+        save_json(PRODUCTS_FILE, pdata)
+
+    return {"success": True, "image_url": image_url, "archive_id": file_id, "product_id": product_id}
 
 
 # ============================================================

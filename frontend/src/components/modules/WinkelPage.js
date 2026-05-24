@@ -114,10 +114,6 @@ export function WinkelPage({ onNavigate }) {
   const tokenPrice = tokenInfo?.price_eur || 5.08;
   const walletBalance = userBalance?.wallet_eur || 0;
 
-  const productIcons = {
-    hat: '🧢', shirt: '🔥', package: '📦', coin: '💎',
-  };
-
   return (
     <MainLayout activePage="winkel" onNavigate={onNavigate}>
       <div data-testid="winkel-page" className="p-4 md:p-6 space-y-4 max-w-6xl mx-auto">
@@ -199,14 +195,8 @@ export function WinkelPage({ onNavigate }) {
               {merchProducts.map(product => (
                 <div key={product.id} data-testid={`product-${product.id}`}
                   className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-all group">
-                  {/* Product image area */}
-                  <div className="h-40 flex items-center justify-center" style={{
-                    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
-                  }}>
-                    <span className="text-6xl group-hover:scale-110 transition-transform">
-                      {productIcons[product.image_icon] || '📦'}
-                    </span>
-                  </div>
+                  {/* Product image area — admin kan klikken om afbeelding te wijzigen */}
+                  <ProductImageArea product={product} isAdmin={(user?.gradatie ?? 7) <= 2} userId={user?.id} onUpdated={loadData} />
                   {/* Product info */}
                   <div className="p-4 space-y-3">
                     <div>
@@ -435,6 +425,69 @@ export function WinkelPage({ onNavigate }) {
 }
 
 export default WinkelPage;
+
+// v6_shop_product_image_001 — Admin kan product-afbeelding wijzigen
+const PRODUCT_ICONS = {
+  hat: '🧢', shirt: '🔥', package: '📦', coin: '💎',
+};
+
+function ProductImageArea({ product, isAdmin, userId, onUpdated }) {
+  const [uploading, setUploading] = useState(false);
+  const [err, setErr] = useState('');
+  const inputRef = React.useRef(null);
+
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setErr('');
+    try {
+      const fd = new FormData();
+      fd.append('image', file);
+      fd.append('viewer_id', userId || '');
+      const r = await fetch(`${API}/api/shop/products/${product.id}/image`, { method: 'POST', body: fd }).then(x => x.json());
+      if (!r.success) { setErr(r.detail || 'Upload mislukt'); }
+      else { onUpdated && onUpdated(); }
+    } catch (ex) { setErr(ex.message); }
+    setUploading(false);
+    if (inputRef.current) inputRef.current.value = '';
+  };
+
+  const hasImage = !!product.image_url;
+
+  return (
+    <div className="relative h-40 flex items-center justify-center group" style={{
+      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
+    }}>
+      {hasImage ? (
+        <img src={`${API}${product.image_url}`} alt={product.name} className="w-full h-full object-cover" data-testid={`product-img-${product.id}`} />
+      ) : (
+        <span className="text-6xl group-hover:scale-110 transition-transform">
+          {PRODUCT_ICONS[product.image_icon] || '📦'}
+        </span>
+      )}
+      {isAdmin && (
+        <>
+          <input ref={inputRef} type="file" accept="image/png,image/jpeg,image/webp" className="hidden"
+            onChange={handleUpload} data-testid={`product-upload-${product.id}`} />
+          <button
+            onClick={() => inputRef.current?.click()}
+            disabled={uploading}
+            data-testid={`product-img-edit-${product.id}`}
+            title="Klik om afbeelding te wijzigen"
+            className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 text-white">
+            <Plus className="w-7 h-7" />
+            <span className="text-xs font-medium">{uploading ? 'Uploaden…' : (hasImage ? 'Wijzig foto' : 'Voeg foto toe')}</span>
+            <span className="text-[10px] text-slate-300">{product.name}</span>
+          </button>
+        </>
+      )}
+      {err && (
+        <p className="absolute bottom-1 left-1 right-1 text-[10px] text-red-300 bg-red-900/60 rounded px-1.5 py-0.5">{err}</p>
+      )}
+    </div>
+  );
+}
 
 // ============================================================
 // Storage Tab — koop opslag + zie huidige quota breakdown

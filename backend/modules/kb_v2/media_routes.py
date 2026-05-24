@@ -252,3 +252,149 @@ async def upload_image(
         _patch_card_media(card_id, None, {"image_urls": [image_url]}, user_id)
 
     return {"success": True, "image_url": image_url, "archive_id": entry["id"], "size_bytes": len(data)}
+
+
+# ---------------------------------------------------------------------------
+# v6_kbv2_media_delete_001 — Delete media (voice OR specific image)
+# ---------------------------------------------------------------------------
+
+@router.delete("/voice/{card_id}")
+@traced(intent="voice + transcript verwijderen van kaart", module="kbv2", log_args=False)
+async def delete_voice(card_id: str, lade: Optional[str] = None, user_id: str = "user-000"):
+    """Verwijder voice_url + transcript van kaart. Bestand blijft in archive."""
+    target = lade or _resolve_lade(card_id)
+    _patch_card_media(card_id, target, {"voice_url": None, "voice_transcript": None}, user_id)
+    return {"success": True}
+
+
+@router.delete("/image/{card_id}")
+@traced(intent="één foto verwijderen van kaart", module="kbv2", log_args=False)
+async def delete_image(card_id: str, image_url: str, lade: Optional[str] = None, user_id: str = "user-000"):
+    """Verwijder één specifieke foto-URL uit kaart.media.image_urls.
+    Bestand blijft bestaan in system_archive (alleen kaart-link verwijderd).
+    """
+    target_lade = lade or _resolve_lade(card_id)
+    if target_lade and target_lade in service.LADES:
+        cur = load_json(service._lade_path(target_lade), default={"kaarten": []})
+        for k in cur.get("kaarten", []):
+            if k.get("id") == card_id:
+                images = (k.get("media") or {}).get("image_urls") or []
+                images = [u for u in images if u != image_url]
+                service.edit_card(card_id, target_lade, {"media": {"image_urls": images}}, user_id=user_id)
+                return {"success": True, "remaining": len(images)}
+    # Inbox-direct
+    ip = service._inbox_path()
+    inbox = load_json(ip, default={"kaarten": []})
+    for k in inbox.get("kaarten", []):
+        if k.get("id") == card_id:
+            m = k.setdefault("media", {})
+            m["image_urls"] = [u for u in (m.get("image_urls") or []) if u != image_url]
+            k["needs"] = service._compute_needs(k)
+            save_json(ip, inbox)
+            return {"success": True, "remaining": len(m["image_urls"])}
+    raise HTTPException(404, "Kaart niet gevonden")
+
+
+# ---------------------------------------------------------------------------
+# v6_kbv2_media_audio2_001 — 2e audio (spraak transcript) NAAST de hoofd-voice
+# ---------------------------------------------------------------------------
+
+@router.post("/voice/secondary")
+@traced(intent="extra audio (spraak of geluid) opslaan bij kaart", module="kbv2", log_args=False)
+async def upload_secondary_audio(
+    audio: UploadFile = File(...),
+    card_id: str = Form(...),
+    lade: Optional[str] = Form(None),
+    user_id: str = Form("user-000"),
+    audio_kind: str = Form("spraak"),  # "spraak" of "geluid"
+    transcribe: bool = Form(True),
+):
+    """Voeg 2e audio-track toe aan kaart.media.extra_audio[].
+    Bij audio_kind=spraak en transcribe=True wordt ook Whisper aangeroepen.
+    """
+    ext = Path(audio.filename or "audio.webm").suffix.lower()
+    if ext not in ALLOWED_AUDIO:
+        raise HTTPException(status_code=400, detail=f"Audio-type '{ext}' niet toegestaan")
+    data = await audio.read()
+    if len(data) > MAX_AUDIO_MB * 1024 * 1024:
+        raise HTTPException(status_code=413, detail=f"Audio te groot (>{MAX_AUDIO_MB}MB)")
+
+    entry = _save_to_system_archive(
+        content=data,
+        original_name=audio.filename or f"audio2_{card_id}.webm",
+        category="geluiden",
+        card_id=card_id,
+        user_id=user_id,
+        mime_type=audio.content_type or "audio/webm",
+        extra_meta={"audio_kind": audio_kind},
+    )
+    url = _system_archive_url(entry["id"])
+
+    transcript = ""
+    if audio_kind == "spraak" and transcribe:
+        try:
+            from emergentintegrations.llm.openai import OpenAISpeechToText
+            api_key = os.getenv("EMERGENT_LLM_KEY")
+            if api_key:
+                stt = OpenAISpeechToText(api_key=api_key)
+                with open(entry["path"], "rb") as f:
+                    resp = await stt.transcribe(file=f, model="whisper-1", response_format="json", language="nl", temperature=0.0)
+                transcript = (getattr(resp, "text", None) or "").strip()
+                idx = load_json(SA_INDEX, default={"files": []})
+                for f2 in idx.get("files", []):
+                    if f2.get("id") == entry["id"]:
+                        f2["scan_status"] = "transcribed"
+                        f2["scan_results"] = {"transcript": transcript, "language": "nl"}
+                        break
+                save_json(SA_INDEX, idx)
+        except Exception as e:
+            print(f"[kbv2 audio2] transcriptie skip: {e}")
+
+    # Voeg toe aan extra_audio list
+    item = {"url": url, "kind": audio_kind, "transcript": transcript, "archive_id": entry["id"],
+            "added_at": datetime.now(timezone.utc).isoformat()}
+    target_lade = lade or _resolve_lade(card_id)
+    if target_lade and target_lade in service.LADES:
+        cur = load_json(service._lade_path(target_lade), default={"kaarten": []})
+        for k in cur.get("kaarten", []):
+            if k.get("id") == card_id:
+                extras = (k.get("media") or {}).get("extra_audio") or []
+                extras.append(item)
+                service.edit_card(card_id, target_lade, {"media": {"extra_audio": extras}}, user_id=user_id)
+                break
+    else:
+        ip = service._inbox_path()
+        inbox = load_json(ip, default={"kaarten": []})
+        for k in inbox.get("kaarten", []):
+            if k.get("id") == card_id:
+                m = k.setdefault("media", {})
+                m.setdefault("extra_audio", []).append(item)
+                k["needs"] = service._compute_needs(k)
+                save_json(ip, inbox)
+                break
+
+    return {"success": True, "item": item}
+
+
+@router.delete("/voice/secondary/{card_id}")
+@traced(intent="extra audio verwijderen van kaart", module="kbv2", log_args=False)
+async def delete_secondary_audio(card_id: str, archive_id: str, lade: Optional[str] = None, user_id: str = "user-000"):
+    target_lade = lade or _resolve_lade(card_id)
+    if target_lade and target_lade in service.LADES:
+        cur = load_json(service._lade_path(target_lade), default={"kaarten": []})
+        for k in cur.get("kaarten", []):
+            if k.get("id") == card_id:
+                extras = (k.get("media") or {}).get("extra_audio") or []
+                extras = [x for x in extras if x.get("archive_id") != archive_id]
+                service.edit_card(card_id, target_lade, {"media": {"extra_audio": extras}}, user_id=user_id)
+                return {"success": True, "remaining": len(extras)}
+    ip = service._inbox_path()
+    inbox = load_json(ip, default={"kaarten": []})
+    for k in inbox.get("kaarten", []):
+        if k.get("id") == card_id:
+            m = k.setdefault("media", {})
+            m["extra_audio"] = [x for x in (m.get("extra_audio") or []) if x.get("archive_id") != archive_id]
+            k["needs"] = service._compute_needs(k)
+            save_json(ip, inbox)
+            return {"success": True, "remaining": len(m["extra_audio"])}
+    raise HTTPException(404, "Kaart niet gevonden")

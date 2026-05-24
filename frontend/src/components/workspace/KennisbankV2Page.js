@@ -693,9 +693,16 @@ function MediaSection({ card, currentLade, onUpdated }) {
   const [uploadingVoice, setUploadingVoice] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [err, setErr] = useState('');
+  // v6_kbv2_media_audio2_001 — 2e audio
+  const [extraKind, setExtraKind] = useState('spraak'); // 'spraak' = transcribe, 'geluid' = alleen opslaan
+  const [recordingExtra, setRecordingExtra] = useState(false);
+  const [uploadingExtra, setUploadingExtra] = useState(false);
   const mediaRecRef = useRef(null);
   const chunksRef = useRef([]);
+  const extraRecRef = useRef(null);
+  const extraChunksRef = useRef([]);
   const imgInputRef = useRef(null);
+  const extraInputRef = useRef(null);
 
   const startRecord = async () => {
     setErr('');
@@ -756,6 +763,71 @@ function MediaSection({ card, currentLade, onUpdated }) {
     if (imgInputRef.current) imgInputRef.current.value = '';
   };
 
+  // v6_kbv2_media_delete_001 — verwijder voice / image
+  const deleteVoice = async () => {
+    if (!window.confirm('Voice + transcript verwijderen van deze kaart?')) return;
+    const qs = new URLSearchParams({ user_id: 'user-001', ...(currentLade ? { lade: currentLade } : {}) });
+    await fetch(`${API}/api/kb/v2/media/voice/${card.id}?${qs}`, { method: 'DELETE' });
+    onUpdated && onUpdated();
+  };
+
+  const deleteImage = async (url) => {
+    if (!window.confirm('Foto verwijderen van deze kaart?')) return;
+    const qs = new URLSearchParams({ image_url: url, user_id: 'user-001', ...(currentLade ? { lade: currentLade } : {}) });
+    await fetch(`${API}/api/kb/v2/media/image/${card.id}?${qs}`, { method: 'DELETE' });
+    onUpdated && onUpdated();
+  };
+
+  const deleteExtraAudio = async (archive_id) => {
+    if (!window.confirm('Extra audio verwijderen van deze kaart?')) return;
+    const qs = new URLSearchParams({ archive_id, user_id: 'user-001', ...(currentLade ? { lade: currentLade } : {}) });
+    await fetch(`${API}/api/kb/v2/media/voice/secondary/${card.id}?${qs}`, { method: 'DELETE' });
+    onUpdated && onUpdated();
+  };
+
+  // v6_kbv2_media_audio2_001 — 2e audio opname (spraak of geluid)
+  const startExtraRecord = async () => {
+    setErr('');
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mr = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      extraChunksRef.current = [];
+      mr.ondataavailable = (e) => { if (e.data?.size > 0) extraChunksRef.current.push(e.data); };
+      mr.onstop = async () => {
+        const blob = new Blob(extraChunksRef.current, { type: 'audio/webm' });
+        stream.getTracks().forEach(t => t.stop());
+        await uploadExtra(blob, `extra_${Date.now()}.webm`);
+      };
+      extraRecRef.current = mr;
+      mr.start();
+      setRecordingExtra(true);
+    } catch (e) { setErr('Microfoon geweigerd.'); }
+  };
+  const stopExtraRecord = () => { try { extraRecRef.current?.stop(); } catch {} setRecordingExtra(false); };
+
+  const uploadExtra = async (file, filename) => {
+    setUploadingExtra(true);
+    try {
+      const fd = new FormData();
+      fd.append('audio', file, filename || (file.name || 'extra.webm'));
+      fd.append('card_id', card.id);
+      if (currentLade) fd.append('lade', currentLade);
+      fd.append('user_id', 'user-001');
+      fd.append('audio_kind', extraKind);
+      fd.append('transcribe', extraKind === 'spraak' ? 'true' : 'false');
+      const r = await fetch(`${API}/api/kb/v2/media/voice/secondary`, { method: 'POST', body: fd }).then(x => x.json());
+      if (!r.success) setErr(r.error || 'Audio-upload mislukt');
+      onUpdated && onUpdated();
+    } catch (e) { setErr('Audio fout: ' + e.message); }
+    setUploadingExtra(false);
+    if (extraInputRef.current) extraInputRef.current.value = '';
+  };
+
+  const handleExtraSelect = (e) => {
+    const f = e.target.files?.[0];
+    if (f) uploadExtra(f);
+  };
+
   return (
     <div className="border-t border-slate-800 pt-3 space-y-2">
       <p className="text-[10px] uppercase text-slate-500 tracking-wide">Media</p>
@@ -776,12 +848,72 @@ function MediaSection({ card, currentLade, onUpdated }) {
             </button>
           )}
           {media.voice_url && (
-            <audio data-testid="kbv2-voice-audio" controls className="h-7 flex-1" src={API + media.voice_url} />
+            <>
+              <audio data-testid="kbv2-voice-audio" controls className="h-7 flex-1" src={API + media.voice_url} />
+              <button data-testid="kbv2-voice-delete" onClick={deleteVoice}
+                title="Voice + transcript wissen"
+                className="px-2 py-1 text-xs rounded-md bg-red-500/15 border border-red-500/40 text-red-300 hover:bg-red-500/25">
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+            </>
           )}
         </div>
         {media.voice_transcript && (
           <div className="text-[11px] text-slate-300 italic bg-slate-900/50 rounded px-2 py-1 border-l-2 border-rose-500/40">
             <span className="text-slate-500">Transcript: </span>"{media.voice_transcript}"
+          </div>
+        )}
+      </div>
+
+      {/* v6_kbv2_media_audio2_001 — Extra audio (spraak of geluid) */}
+      <div className="bg-slate-800/30 rounded-lg p-2 space-y-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider">Extra audio:</span>
+          <div className="flex bg-slate-900 rounded-md p-0.5">
+            <button data-testid="kbv2-extra-kind-spraak" onClick={() => setExtraKind('spraak')}
+              className={`px-2 py-0.5 text-[10px] rounded ${extraKind === 'spraak' ? 'bg-rose-500/30 text-rose-200' : 'text-slate-400'}`}>
+              Spraak (→ transcript)
+            </button>
+            <button data-testid="kbv2-extra-kind-geluid" onClick={() => setExtraKind('geluid')}
+              className={`px-2 py-0.5 text-[10px] rounded ${extraKind === 'geluid' ? 'bg-indigo-500/30 text-indigo-200' : 'text-slate-400'}`}>
+              Geluid
+            </button>
+          </div>
+          {!recordingExtra ? (
+            <button data-testid="kbv2-extra-record" onClick={startExtraRecord} disabled={uploadingExtra}
+              className="px-2 py-1 text-xs rounded-md bg-rose-500/15 border border-rose-500/40 text-rose-300 hover:bg-rose-500/25 disabled:opacity-50 flex items-center gap-1.5">
+              <Mic className="w-3.5 h-3.5" /> {uploadingExtra ? 'Opslaan...' : 'Opnemen'}
+            </button>
+          ) : (
+            <button data-testid="kbv2-extra-stop" onClick={stopExtraRecord}
+              className="px-2 py-1 text-xs rounded-md bg-red-500/30 border border-red-500/60 text-red-200 animate-pulse flex items-center gap-1.5">
+              <Square className="w-3.5 h-3.5" /> Stop
+            </button>
+          )}
+          <input ref={extraInputRef} type="file" accept="audio/*" onChange={handleExtraSelect} className="hidden" data-testid="kbv2-extra-input" />
+          <button data-testid="kbv2-extra-upload" onClick={() => extraInputRef.current?.click()} disabled={uploadingExtra}
+            className="px-2 py-1 text-xs rounded-md bg-slate-700/40 border border-slate-600 text-slate-300 hover:bg-slate-700 disabled:opacity-50">
+            Upload bestand
+          </button>
+        </div>
+        {(media.extra_audio || []).length > 0 && (
+          <div className="space-y-1">
+            {(media.extra_audio || []).map((a, i) => (
+              <div key={a.archive_id || i} data-testid={`kbv2-extra-audio-${i}`} className="flex items-center gap-2 bg-slate-900/50 rounded px-2 py-1">
+                <span className={`text-[9px] px-1.5 py-0.5 rounded font-semibold ${a.kind === 'spraak' ? 'bg-rose-500/20 text-rose-300' : 'bg-indigo-500/20 text-indigo-300'}`}>
+                  {a.kind === 'spraak' ? 'SPRAAK' : 'GELUID'}
+                </span>
+                <audio controls className="h-6 flex-1" src={API + a.url} />
+                <button onClick={() => deleteExtraAudio(a.archive_id)}
+                  data-testid={`kbv2-extra-delete-${i}`}
+                  className="p-1 rounded hover:bg-red-500/20 text-red-300">
+                  <Trash2 className="w-3 h-3" />
+                </button>
+              </div>
+            ))}
+            {(media.extra_audio || []).filter(a => a.transcript).map((a, i) => (
+              <p key={`tr-${i}`} className="text-[10px] text-slate-400 italic pl-2 border-l-2 border-rose-500/30">"{a.transcript}"</p>
+            ))}
           </div>
         )}
       </div>
@@ -796,15 +928,22 @@ function MediaSection({ card, currentLade, onUpdated }) {
             className="px-2 py-1 text-xs rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 disabled:opacity-50 flex items-center gap-1.5">
             <ImageIcon className="w-3.5 h-3.5" /> {uploadingImage ? 'Uploaden...' : 'Foto toevoegen'}
           </button>
-          {(media.image_urls || []).length > 0 && (
-            <span className="text-[10px] text-slate-500">{media.image_urls.length} foto's</span>
+          {(media.image_urls || []).filter(Boolean).length > 0 && (
+            <span className="text-[10px] text-slate-500">{media.image_urls.filter(Boolean).length} foto's</span>
           )}
         </div>
-        {(media.image_urls || []).length > 0 && (
+        {(media.image_urls || []).filter(Boolean).length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {(media.image_urls || []).map((url, i) => (
-              <img key={i} src={API + url} alt={`media-${i}`}
-                className="w-16 h-16 object-cover rounded border border-slate-700" />
+            {(media.image_urls || []).filter(Boolean).map((url, i) => (
+              <div key={i} className="relative group">
+                <img src={API + url} alt={`media-${i}`}
+                  className="w-16 h-16 object-cover rounded border border-slate-700" />
+                <button data-testid={`kbv2-image-delete-${i}`} onClick={() => deleteImage(url)}
+                  title="Foto verwijderen"
+                  className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Trash2 className="w-3 h-3 text-white" />
+                </button>
+              </div>
             ))}
           </div>
         )}

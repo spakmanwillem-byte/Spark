@@ -85,7 +85,10 @@ def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Di
 
 def fetch_tickers(coins: List[str] = None) -> List[Dict]:
     """Fetch live ticker prices from Bitvavo (public, no auth).
-    Accepts either base symbol (e.g. 'BCH') or market (e.g. 'BCH-EUR'). v4_trade_ticker_fix_001"""
+    v6_ticker_cache_001 — 12s TTL cache: ALL tickers worden gecached na 1e fetch,
+    daarna geserveerd uit cache. Verminder Bitvavo-roundtrips én snellere
+    watchlist-load voor alle users tegelijk.
+    """
     if coins is None:
         coins = WATCHLIST_COINS
     # Normalize: strip "-EUR" suffix if present so caller mag beide formats geven
@@ -96,30 +99,50 @@ def fetch_tickers(coins: List[str] = None) -> List[Dict]:
         else:
             normalized.append(c)
     coins = normalized
-    results = []
+
+    # v6_ticker_cache_001 — gedeelde cache (12s TTL)
+    now = time.time()
+    global _TICKER_CACHE_ALL
     try:
-        url = f"{BITVAVO_URL}/ticker/24h"
-        resp = requests.get(url, timeout=10)
-        if resp.status_code == 200:
-            data = resp.json()
-            wanted = {f"{c}-EUR" for c in coins}
-            for t in data:
-                if t.get("market") in wanted:
-                    results.append({
-                        "market": t["market"],
-                        "symbol": t["market"].split("-")[0],
-                        "name": WATCHLIST_NAMES.get(t["market"].split("-")[0], t["market"].split("-")[0]),
-                        "last": float(t.get("last", 0)),
-                        "open": float(t.get("open", 0)),
-                        "high": float(t.get("high", 0)),
-                        "low": float(t.get("low", 0)),
-                        "volume": float(t.get("volume", 0)),
-                        "volumeQuote": float(t.get("volumeQuote", 0)),
-                        "bid": float(t.get("bid", 0)),
-                        "ask": float(t.get("ask", 0)),
-                    })
-    except Exception as e:
-        logger.error(f"Ticker fetch error: {e}")
+        _TICKER_CACHE_ALL
+    except NameError:
+        _TICKER_CACHE_ALL = {"data": None, "ts": 0}
+    data = None
+    if _TICKER_CACHE_ALL.get("data") and (now - _TICKER_CACHE_ALL["ts"]) < 12:
+        data = _TICKER_CACHE_ALL["data"]
+    if data is None:
+        try:
+            url = f"{BITVAVO_URL}/ticker/24h"
+            resp = requests.get(url, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                _TICKER_CACHE_ALL = {"data": data, "ts": now}
+            elif _TICKER_CACHE_ALL.get("data"):
+                # rate-limit of fout → cached data hergebruiken
+                data = _TICKER_CACHE_ALL["data"]
+        except Exception as e:
+            logger.error(f"Ticker fetch error: {e}")
+            if _TICKER_CACHE_ALL.get("data"):
+                data = _TICKER_CACHE_ALL["data"]
+
+    results = []
+    if data:
+        wanted = {f"{c}-EUR" for c in coins}
+        for t in data:
+            if t.get("market") in wanted:
+                results.append({
+                    "market": t["market"],
+                    "symbol": t["market"].split("-")[0],
+                    "name": WATCHLIST_NAMES.get(t["market"].split("-")[0], t["market"].split("-")[0]),
+                    "last": float(t.get("last", 0)),
+                    "open": float(t.get("open", 0)),
+                    "high": float(t.get("high", 0)),
+                    "low": float(t.get("low", 0)),
+                    "volume": float(t.get("volume", 0)),
+                    "volumeQuote": float(t.get("volumeQuote", 0)),
+                    "bid": float(t.get("bid", 0)),
+                    "ask": float(t.get("ask", 0)),
+                })
     # Sort: BCH first, then by market cap (BTC, ETH, SOL, ADA)
     order = {c: i for i, c in enumerate(coins)}
     results.sort(key=lambda x: order.get(x["symbol"], 99))

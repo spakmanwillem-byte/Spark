@@ -59,6 +59,8 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
     if (tagFilter) params.append('tag', tagFilter);
     // v5_kbv2_media_002 — bron-filter via tag-query
     if (sourceFilter === 'kbv2') params.append('tag', 'kbv2');
+    // v6_roadkill_merch_archive_001 — merch sub-tab filter
+    if (activeTab === 'foto' && fotoSubTab === 'merch') params.append('tag', 'roadkill_merch');
     try {
       const res = await fetch(`${API}/api/system-archive?${params}`).then(r => r.json());
       let arr = res.files || [];
@@ -71,7 +73,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       setAvailableTags(res.available_tags || []);
     } catch (e) { console.error(e); }
     setLoading(false);
-  }, [activeTab, search, tagFilter, sourceFilter]);
+  }, [activeTab, search, tagFilter, sourceFilter, fotoSubTab]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -232,6 +234,17 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             <Code2 className="w-3.5 h-3.5" />
             D&amp;D Galerij
           </button>
+          {/* v6_roadkill_merch_archive_001 — Roadkill Merch galerij */}
+          <button
+            data-testid="foto-subtab-merch"
+            onClick={() => setFotoSubTab('merch')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              fotoSubTab === 'merch' ? 'bg-red-500/20 text-red-300' : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Tag className="w-3.5 h-3.5" />
+            Roadkill Merch
+          </button>
         </div>
       )}
 
@@ -254,7 +267,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       )}
 
       {/* v5_kbv2_media_002 — bron sub-tabs binnen media-categorieën */}
-      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
+      {['foto', 'geluiden', 'filmpjes'].includes(activeTab) && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd' || fotoSubTab === 'merch')) && (
         <div className="flex items-center gap-1.5">
           {[
             { id: 'alle',  label: 'Alles' },

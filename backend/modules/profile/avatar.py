@@ -225,7 +225,10 @@ async def get_gallery_image(avatar_id: str):
 
 @router.post("/user/{user_id}")
 async def upload_user_portrait(user_id: str, file: UploadFile = File(...)):
-    """User upload eigen profielfoto (alleen voor eigen profiel)."""
+    """User upload eigen profielfoto.
+    v6_personal_avatar_archive_001 — Wordt OOK gearchiveerd in user_archive/foto met
+    tag 'personal_avatar', zodat user een eigen collectie heeft (alleen voor zichzelf).
+    """
     raw = await file.read()
     if len(raw) > 10 * 1024 * 1024:
         raise HTTPException(413, "Bestand te groot (max 10MB)")
@@ -233,11 +236,49 @@ async def upload_user_portrait(user_id: str, file: UploadFile = File(...)):
     info = _resize_and_save(raw, dest)
     _set_user_avatar(user_id, "user")
 
+    # Archiveer als persoonlijke avatar in user_archive (met index)
+    try:
+        from modules.user_archive.routes import _user_dir, _load_index, _save_index
+        from PIL import Image as _PILImage
+        import io as _io
+        # Bewaar geresizede versie (zoals dest) ook in archive/foto
+        archive_dir = _user_dir(user_id) / "foto"
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        file_id = uuid.uuid4().hex[:12]
+        archive_filename = f"avatar_{file_id}.jpg"
+        archive_dest = archive_dir / archive_filename
+        # Lees bewaarde resize uit dest om identieke bytes te hebben
+        archive_dest.write_bytes(dest.read_bytes())
+        entry = {
+            "id": file_id,
+            "filename": archive_filename,
+            "original_name": file.filename or "avatar.jpg",
+            "category": "foto",
+            "extension": ".jpg",
+            "mime_type": "image/jpeg",
+            "size_bytes": archive_dest.stat().st_size,
+            "description": "Persoonlijke avatar",
+            "tags": ["personal_avatar", "avatar"],
+            "uploaded_at": datetime.now(timezone.utc).isoformat(),
+            "uploaded_by": user_id,
+            "path": str(archive_dest),
+            "source": "personal_avatar_upload",
+            "active": True,  # huidige actieve avatar
+        }
+        files = _load_index(user_id)
+        # Markeer eerdere personal avatars als niet-actief
+        for f in files:
+            if "personal_avatar" in (f.get("tags") or []):
+                f["active"] = False
+        files.append(entry)
+        _save_index(user_id, files)
+    except Exception as ex:
+        print(f"[avatar] personal archive write failed: {ex}")
+
     # v5_milestone_unlocks_001: unlock "Eigen Avatar" achievement
     try:
         from modules.achievements.service import unlock_milestone
         unlock_milestone(user_id, "milestone_avatar_uploaded")
-        # En ook avatar_chose, want hij heeft uiteraard een keuze gemaakt
         unlock_milestone(user_id, "milestone_avatar_chose")
     except Exception as ex:
         print(f"[avatar] milestone unlock failed: {ex}")
@@ -249,6 +290,58 @@ async def upload_user_portrait(user_id: str, file: UploadFile = File(...)):
         "size_bytes": info["size_bytes"],
         "url": f"/api/avatar/user/{user_id}/image?t={int(datetime.now(timezone.utc).timestamp())}",
     }
+
+
+@router.get("/user/{user_id}/personal-gallery")
+async def list_personal_avatars(user_id: str):
+    """Lijst alle persoonlijke avatars uit user_archive (alleen zichtbaar voor user zelf).
+    Tag 'personal_avatar' bepaalt of het erbij hoort.
+    """
+    try:
+        from modules.user_archive.routes import _load_index
+        files = _load_index(user_id)
+    except Exception:
+        files = []
+    out = []
+    for f in files:
+        if "personal_avatar" in (f.get("tags") or []):
+            out.append({
+                "id": f["id"],
+                "filename": f.get("filename"),
+                "uploaded_at": f.get("uploaded_at"),
+                "active": f.get("active", False),
+                "url": f"/api/archive/{user_id}/file/{f['id']}",
+            })
+    out.sort(key=lambda x: x.get("uploaded_at", ""), reverse=True)
+    return {"avatars": out, "count": len(out)}
+
+
+@router.post("/user/{user_id}/activate-personal/{avatar_id}")
+async def activate_personal_avatar(user_id: str, avatar_id: str):
+    """Wissel actieve personal-avatar naar eerdere uit eigen archief."""
+    try:
+        from modules.user_archive.routes import _load_index, _save_index
+        files = _load_index(user_id)
+    except Exception:
+        raise HTTPException(500, "Archief niet beschikbaar")
+    target = None
+    for f in files:
+        if "personal_avatar" in (f.get("tags") or []):
+            f["active"] = (f["id"] == avatar_id)
+            if f["id"] == avatar_id:
+                target = f
+    if not target:
+        raise HTTPException(404, "Avatar niet gevonden in jouw archief")
+    # Kopieer naar avatar.jpg
+    USERS_DIR.mkdir(parents=True, exist_ok=True)
+    dest = USERS_DIR / user_id / "avatar.jpg"
+    src = Path(target.get("path", ""))
+    if not src.exists():
+        raise HTTPException(404, "Bestand ontbreekt in archief")
+    dest.write_bytes(src.read_bytes())
+    _save_index(user_id, files)
+    _set_user_avatar(user_id, "user")
+    return {"success": True, "url": f"/api/avatar/user/{user_id}/image?t={int(datetime.now(timezone.utc).timestamp())}"}
 
 
 @router.get("/user/{user_id}/image")

@@ -257,8 +257,13 @@ export function WinkelPage({ onNavigate }) {
               <div className="p-5 text-center" style={{
                 background: 'linear-gradient(135deg, #1a1333 0%, #f59e0b10 50%, #ea580c08 100%)'
               }}>
-                <div className="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-                  <span className="text-2xl font-black text-white">R</span>
+                <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-amber-500/40 bg-slate-900">
+                  <img
+                    src={`${API}/api/avatar/gallery/roadkill-logo/image`}
+                    alt="Roadkill ROAR Token"
+                    className="w-full h-full object-cover"
+                    data-testid="roar-token-logo"
+                  />
                 </div>
                 <h2 className="text-lg font-bold text-white">ROAR Token</h2>
                 <p className="text-xs text-slate-400">Spark Core Aandeel</p>

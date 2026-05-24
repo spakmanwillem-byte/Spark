@@ -34,8 +34,10 @@ MAX_DIM = 512  # max width/height
 QUALITY = 85
 ADMIN_GRAD = 2  # gradatie ≤ 2 mag galerij beheren
 
-# v4_avatar_fallback_001 — Roadkill logo als default fallback wanneer geen avatar gezet is
-ROADKILL_LOGO_ID = "roadkill-logo"
+# v4_avatar_fallback_002 — Vraagteken-avatar als default fallback (was Roadkill logo)
+ROADKILL_LOGO_ID = "roadkill-logo"  # behouden voor token-logo / shop gebruik
+QUESTION_AVATAR_ID = "31c6dc04a2fd"  # "Vraag" avatar uit galerij
+QUESTION_AVATAR_URL = f"/api/avatar/gallery/{QUESTION_AVATAR_ID}/image"
 ROADKILL_LOGO_URL = f"/api/avatar/gallery/{ROADKILL_LOGO_ID}/image"
 
 # v4_avatar_bot_lock_001 — Avatars geclaimd door specifieke bots (title-based, exclusief voor die bot)
@@ -346,8 +348,10 @@ async def get_current_avatar(user_id: str):
         gid = ref.split(":", 1)[1]
         if (GALLERY_DIR / f"{gid}.jpg").exists():
             url = f"/api/avatar/gallery/{gid}/image"
-    # Fallback naar Roadkill logo wanneer niets gezet
-    fallback_url = ROADKILL_LOGO_URL if (GALLERY_DIR / f"{ROADKILL_LOGO_ID}.jpg").exists() else None
+    # Fallback naar vraagteken-avatar wanneer niets gezet
+    fallback_url = QUESTION_AVATAR_URL if (GALLERY_DIR / f"{QUESTION_AVATAR_ID}.jpg").exists() else (
+        ROADKILL_LOGO_URL if (GALLERY_DIR / f"{ROADKILL_LOGO_ID}.jpg").exists() else None
+    )
     return {
         "success": True,
         "avatar_ref": ref,

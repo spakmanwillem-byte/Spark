@@ -3,12 +3,12 @@
 //   1. gallery:xxx → /api/avatar/gallery/xxx/image
 //   2. user        → /api/avatar/user/{id}/image
 //   3. emoji:🎩   → emoji char
-//   4. niets       → Roadkill logo (grayscale + 60% opacity)
+//   4. niets       → Vraagteken-avatar (gallery id 31c6dc04a2fd)
 //   5. img-load-error → eerste letter van naam in gradient bg
 import React, { useState, useEffect } from 'react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
-const ROADKILL_LOGO = `${API}/api/avatar/gallery/roadkill-logo/image`;
+const QUESTION_AVATAR = `${API}/api/avatar/gallery/31c6dc04a2fd/image`;
 
 // Resolve avatar info uit user object
 export function resolveAvatar(user) {
@@ -26,8 +26,8 @@ export function resolveAvatar(user) {
       return { kind: 'emoji', emoji: av.split(':', 2)[1] };
     }
   }
-  // Geen avatar set → roadkill fallback
-  return { kind: 'fallback', url: ROADKILL_LOGO, letter: (user.naam || '?').charAt(0).toUpperCase() };
+  // Geen avatar set → vraagteken-avatar fallback
+  return { kind: 'fallback', url: QUESTION_AVATAR, letter: (user.naam || '?').charAt(0).toUpperCase() };
 }
 
 const SIZE_CLASSES = {
@@ -63,7 +63,7 @@ export function UserAvatar({ user, size = 'md', className = '', rounded = 'round
         <img
           src={info.url}
           alt={user?.naam || ''}
-          className={`w-full h-full object-cover ${info.kind === 'fallback' ? 'opacity-60 grayscale' : ''}`}
+          className={`w-full h-full object-cover`}
           onError={() => setErrored(true)}
         />
       </div>

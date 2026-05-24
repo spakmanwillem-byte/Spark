@@ -120,7 +120,7 @@ async def get_community_messages(limit: int = 50):
     udata = load_json(users_file, default={})
     users_list = udata.get("users", []) if isinstance(udata, dict) else []
     avatar_map = {}
-    ROADKILL_FALLBACK = {"kind": "image", "url": "/api/avatar/gallery/roadkill-logo/image", "is_fallback": True}
+    ROADKILL_FALLBACK = {"kind": "image", "url": "/api/avatar/gallery/31c6dc04a2fd/image", "is_fallback": True}
     for u in users_list:
         uid = u.get("id") or u.get("user_id")
         av = u.get("avatar") or u.get("avatar_ref")

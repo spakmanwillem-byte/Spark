@@ -236,6 +236,18 @@ const phases = [
       { title: '🪙 Token-tier: Community → Community Plus bij token-bezit', status: 'planned', anchor: 'community-plus', note: '1+ token = community member, bot-toegang gekoppeld aan wallet-saldo. Spark zelf spaart eigen potjes uit handelswinst → kan ze weggeven of behouden' },
       { title: '🎤 STT/TTS per bot — admin spreekt namens bot, bot spreekt terug', status: 'planned', anchor: 'bot-voice', note: 'Toggles in Bot-instellingen zitten al — OpenAI Whisper + TTS koppeling volgt' },
       { title: '🎙️ D&D-kaart als spreekkanaal — bot leest tekst voor uit kaart', status: 'planned', anchor: 'dnd-voice-cards' },
+      // v6_spark_world_concept_001 — Volledig wereldopbouw concept (P1, ná deploy)
+      { title: '🇳🇱 Nederland-als-fantasy-continent (basiswereld)', status: 'planned', anchor: 'sw-nl-base', note: 'Echte NL-kaart vertaald naar D&D-stijl. Kustlijnen, provincies, waterstructuren blijven herkenbaar. Visueel fantasy.' },
+      { title: '🏰 12 provincies als facties', status: 'planned', anchor: 'sw-facties', note: 'Groningen=Noord begin, Friesland=water/zee, Drenthe=bossen, Overijssel=handel, Gelderland=militair, Utrecht=orde, NH=haven, ZH=politiek, Zeeland=mystiek, Brabant=ambacht, Limburg=heuvels, Flevoland=experimenteel' },
+      { title: '❄️ Startgebied "The North" — Groningen', status: 'planned', anchor: 'sw-the-north', note: 'Bekend terrein, lokaal fotografeerbaar, logisch uitbreidbaar' },
+      { title: '📸 Foto→Fantasy workflow (asset creator)', status: 'planned', anchor: 'sw-foto-flow', note: 'Echte foto → metadata (locatie, richting, functie) → D&D-vertaling met behoud perspectief/compositie → 512×512 asset' },
+      { title: '🗺️ Asset-types: wereldkaart, stad top-down, scene view, NPC avatars', status: 'planned', anchor: 'sw-asset-types' },
+      { title: '🌧️ Realtime weer-koppeling per regio', status: 'planned', anchor: 'sw-realtime-weer', note: 'Weer.nl Groningen → game-regen/mist/zon. Quest-triggers op weersomstandigheden.' },
+      { title: '🌅 24-uurs realtime dag/nacht sync', status: 'planned', anchor: 'sw-realtime-tijd', note: 'Dag = dag, nacht = nacht. Nacht-quests, dag-events.' },
+      { title: '🛡️ D&D character sheet UI (Stormhaven-stijl)', status: 'planned', anchor: 'sw-char-sheet', note: 'Persoonskaart met level/XP/HP/SP, equipment slots (helm/cape/wapen/schoenen), inventory grid (4×6), avatar art, dorp-portretje. Zie ontwerp-mockup test ui D&D.png' },
+      { title: '🛒 Multi-tenant shop (per user eigen tab)', status: 'planned', anchor: 'sw-multi-shop', note: 'Beheer kan extra winkel-tabs aanmaken gekoppeld aan andere gebruikers. Bv. zus → edelstenenwinkel. Alle binnen 1 ecosysteem.' },
+      { title: '👕 Avatar-T-shirts (on-demand print)', status: 'planned', anchor: 'sw-avatar-tshirts', note: 'User kiest eigen avatar of Roadkill design → laat het op T-shirt drukken. Print-on-demand integratie.' },
+      { title: '💾 Per-user GB opslagsysteem (1GB standaard, bij te kopen)', status: 'planned', anchor: 'sw-storage-tier', note: 'Logica niet marketing. Gebruikte capaciteit telt. Extra GB via Spark shop.' },
     ],
   },
   {

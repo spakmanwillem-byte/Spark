@@ -266,6 +266,29 @@ export function NotitiesPage({ onNavigate }) {
             <DeployAnchorPanel viewerId={user.id} />
           ) : viewMode === 'bugs' && isAdminViewer ? (
             <div className="max-w-3xl mx-auto space-y-2">
+              {/* v6_bug_bulk_close_001 — Bulk-close knop */}
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+                <p className="text-xs text-slate-400">
+                  {bugs.length} totaal · {bugs.filter(b => b.status === 'nieuw').length} nieuw · {bugs.filter(b => b.status === 'opgelost').length} opgelost
+                </p>
+                <button
+                  data-testid="bugs-bulk-close-resolved"
+                  onClick={async () => {
+                    const resolved = bugs.filter(b => b.status === 'opgelost');
+                    if (!resolved.length) { alert('Geen opgeloste bugs om op te schonen.'); return; }
+                    if (!window.confirm(`${resolved.length} opgeloste bugs definitief sluiten? (status → closed)`)) return;
+                    for (const b of resolved) {
+                      await fetch(`${API}/api/bugs/${b.id}/status`, {
+                        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ viewer_id: user.id, status: 'closed' }),
+                      });
+                    }
+                    fetch(`${API}/api/bugs/list?viewer_id=${user.id}`).then(r => r.json()).then(d => setBugs(d.bugs || []));
+                  }}
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700">
+                  🧹 Bulk-close opgelost
+                </button>
+              </div>
               {bugs.length === 0 ? (
                 <div className="py-16 text-center"><Bug className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Nog geen bugmeldingen.</p></div>
               ) : bugs.map(b => {
@@ -512,8 +535,39 @@ function NoteItemCard({ item, toggleDone, deleteItem }) {
             {item.categorie && <span className="text-[10px] text-slate-600">{item.categorie}</span>}
           </div>
           {item.inhoud && <p className="text-xs text-slate-400 mt-1 whitespace-pre-wrap">{item.inhoud}</p>}
+          {/* v6_order_shipped_ui_001 — Markeer verzonden knop voor shop-orders */}
+          {item.source === 'shop_order' && item.order_id && !item.done && (
+            <div className="mt-2 flex items-center gap-2 flex-wrap">
+              <input
+                type="text"
+                value={item._tracking || ''}
+                onChange={e => { item._tracking = e.target.value; }}
+                placeholder="Track & trace (optioneel)"
+                data-testid={`ship-tracking-${item.order_id}`}
+                className="px-2 py-1 bg-slate-800 border border-slate-700 rounded text-[11px] text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+              />
+              <button
+                data-testid={`mark-shipped-${item.order_id}`}
+                onClick={async () => {
+                  if (!window.confirm(`Bestelling #${item.order_id} markeren als verzonden? User krijgt bark.`)) return;
+                  const tracking = document.querySelector(`[data-testid="ship-tracking-${item.order_id}"]`)?.value || null;
+                  const r = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/shop/orders/${item.order_id}/ship`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ viewer_id: 'user-001', tracking_info: tracking }),
+                  }).then(x => x.json());
+                  if (r.success) {
+                    toggleDone(item);
+                  } else {
+                    alert('Verzenden mislukt: ' + (r.detail || 'onbekende fout'));
+                  }
+                }}
+                className="px-2.5 py-1 rounded-md text-[11px] font-bold text-white bg-green-600 hover:bg-green-500">
+                📦 Markeer verzonden
+              </button>
+            </div>
+          )}
           <div className="flex items-center gap-3 mt-2">
-            <span className="text-[10px] text-slate-600 flex items-center gap-1"><Clock className="w-2.5 h-2.5" /> {new Date(item.datum || item.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}</span>
+            <span className="text-[10px] text-slate-600">{new Date(item.datum || item.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}</span>
             {item.created_by && <span className="text-[10px] text-slate-600">{item.created_by}</span>}
             {(item.tags || []).slice(0, 2).map((t, i) => <span key={i} className="text-[10px] text-slate-600">#{t}</span>)}
           </div>

@@ -278,8 +278,8 @@ export function WinkelPage({ onNavigate }) {
                     data-testid="roar-token-logo"
                   />
                 </div>
-                <h2 className="text-lg font-bold text-white">ROAR Token</h2>
-                <p className="text-xs text-slate-400">Spark Core Aandeel</p>
+                <h2 className="text-lg font-bold text-white">Roadkill ROAR Token</h2>
+                <p className="text-xs text-slate-400">Spark Core Aandeel — dynamische prijs</p>
                 <p className="text-3xl font-bold text-amber-400 mt-2">&euro;{tokenPrice.toFixed(2)}</p>
                 <p className="text-[10px] text-slate-500 mt-1">
                   {tokenInfo?.price_model === 'dynamic' ? 'Dynamische prijs = Spark Core / tokens' : `Vaste prijs (nog ${tokenInfo?.tokens_until_dynamic || 0} tokens)`}

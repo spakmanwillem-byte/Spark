@@ -212,8 +212,9 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
             {/* v5_dashboard_kbv2_001 — KB v2 Lades verdeling (ADMIN gradatie ≤ 2) */}
             {isAdminUser && kbv2Stats && (
-              <Card title="KB Lades (v2)" icon={Brain} accent="#a855f7"
-                badge={`${kbv2Stats.inbox_count || 0} inbox`} badgeColor="#ef4444"
+              <Card title="KB v2 Lades" icon={Brain} accent="#a855f7"
+                badge={`${(kbv2Stats.lades ? Object.values(kbv2Stats.lades).reduce((a, b) => a + (b.count || 0), 0) : 0) + (kbv2Stats.inbox_count || 0)} totaal`}
+                badgeColor="#a855f7"
                 onClick={() => onNavigate('knowledge-v2', '/knowledge')}>
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   {[
@@ -234,11 +235,20 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                     );
                   })}
                 </div>
-                <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-2">
+                <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-2 mb-2">
                   <p className="text-[10px] text-amber-300">
-                    📥 <strong>{kbv2Stats.inbox_count || 0}</strong> kaarten wachten op indeling
+                    📥 <strong>{kbv2Stats.inbox_count || 0}</strong> kaarten in inbox wachten op indeling
                   </p>
                 </div>
+                {/* v6_kb_v1_v2_split_001 — Toon ook KB v1 totaal voor context */}
+                {knowledgeStats && (
+                  <div className="bg-slate-800/30 rounded-lg p-2 text-[10px] text-slate-400">
+                    KB v1 (legacy): <strong className="text-slate-300">{kbTotal}</strong> kaarten
+                    {kbReviewPending > 0 && (
+                      <span className="text-amber-400"> • {kbReviewPending} te herzien</span>
+                    )}
+                  </div>
+                )}
               </Card>
             )}
             {isAdminUser && (

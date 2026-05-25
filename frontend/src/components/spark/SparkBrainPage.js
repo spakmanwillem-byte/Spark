@@ -165,6 +165,26 @@ export function SparkBrainPage({ onNavigate }) {
                     <p className="text-[10px] text-amber-400 uppercase tracking-wider mb-1">Doel</p>
                     <p className="text-sm text-white leading-relaxed">{identity?.doel || '—'}</p>
                   </div>
+                  {/* v6_identity_v2_001 — Linked layers (live counts) */}
+                  {identity?.linked_layers && (
+                    <div data-testid="identity-linked-layers" className="grid grid-cols-3 md:grid-cols-6 gap-2 mt-3">
+                      {[
+                        { k: 'kernwaarden',          label: 'Kernwaarden', color: '#ec4899' },
+                        { k: 'normen',               label: 'Normen',      color: '#f43f5e' },
+                        { k: 'bijbel_items',         label: 'Bijbel',      color: '#a855f7' },
+                        { k: 'capabilities_live',    label: 'Capabilities live', color: '#06b6d4' },
+                        { k: 'emotie_pipeline_lagen', label: 'Emotie-lagen', color: '#fb923c' },
+                        { k: 'kb_v2_hooks',          label: 'KB v2 hooks', color: '#22c55e' },
+                      ].map(item => (
+                        <div key={item.k} className="p-2 rounded-lg bg-slate-800/40 border border-slate-700/50 text-center">
+                          <p className="text-base font-bold" style={{ color: item.color }}>
+                            {identity.linked_layers[item.k] ?? '—'}
+                          </p>
+                          <p className="text-[9px] text-slate-500 uppercase tracking-wider mt-0.5">{item.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Doelen */}

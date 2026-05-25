@@ -123,12 +123,133 @@ def _handle_winst_verlies(user_id: Optional[str]) -> Optional[Dict]:
     }
 
 
+# ============================================================
+# v6_capabilities_handlers_001 — 3 placeholder caps → werkende handlers
+# ============================================================
+
+def _handle_gesprek_lezen(user_id: Optional[str]) -> Optional[Dict]:
+    """Lees Spark's logs voor de huidige user — laatste 10 berichten of laatste dag."""
+    import os
+    import re
+    from datetime import datetime, timezone, timedelta
+    logs_root = DATA / "system" / "logs"
+    if not logs_root.exists():
+        return {"type": "capability_response", "capability_id": "gesprek_lezen",
+                "message": "📜 Ik heb nog geen archiveerde gesprekken kunnen vinden."}
+    # Pak gisteren + vandaag
+    today = datetime.now(timezone.utc)
+    yest = today - timedelta(days=1)
+    candidates = []
+    for d in (yest, today):
+        chat_dir = logs_root / d.strftime("%Y") / d.strftime("%m") / d.strftime("%d")
+        chat_file = chat_dir / "chat.jsonl"
+        if chat_file.exists():
+            candidates.append((d.strftime("%Y-%m-%d"), chat_file))
+    if not candidates:
+        return {"type": "capability_response", "capability_id": "gesprek_lezen",
+                "message": "📜 Geen chat-logs gevonden voor vandaag of gisteren."}
+    import json as _j
+    entries = []
+    for day_str, path in candidates:
+        try:
+            for line in path.read_text(encoding="utf-8").splitlines():
+                try:
+                    entry = _j.loads(line)
+                    if user_id is None or entry.get("user_id") == user_id:
+                        entries.append({"day": day_str, **entry})
+                except Exception:
+                    pass
+        except Exception:
+            continue
+    if not entries:
+        return {"type": "capability_response", "capability_id": "gesprek_lezen",
+                "message": f"📜 Geen recente chats voor user `{user_id}` gevonden."}
+    last = entries[-10:]
+    lines = [f"📜 **Laatste {len(last)} berichten** uit ons gesprek:"]
+    for e in last:
+        ts = (e.get("ts") or "")[11:16]
+        msg = (e.get("message") or e.get("text") or "")[:80]
+        lines.append(f"  · `{ts}` _{msg}_")
+    return {"type": "capability_response", "capability_id": "gesprek_lezen",
+            "message": "\n".join(lines)}
+
+
+def _handle_toon_afbeelding(user_id: Optional[str]) -> Optional[Dict]:
+    """v6: in plaats van placeholder — toon laatste afbeeldingen uit user's archive."""
+    import json as _j
+    arch_idx = DATA / "system_archive" / "_index.json"
+    if not arch_idx.exists():
+        return {"type": "capability_response", "capability_id": "toon_afbeelding",
+                "message": "🖼️ Ik vind nog geen archiefindex. Upload eerst iets in Archief."}
+    try:
+        data = _j.loads(arch_idx.read_text(encoding="utf-8"))
+    except Exception:
+        data = {"files": []}
+    files = data.get("files", [])
+    imgs = [f for f in files if (f.get("type", "").startswith("image") or
+                                  f.get("filename", "").lower().endswith((".png", ".jpg", ".jpeg", ".webp")))]
+    # Filter op user als mogelijk
+    if user_id:
+        own = [f for f in imgs if f.get("uploaded_by") == user_id]
+        if own:
+            imgs = own
+    if not imgs:
+        return {"type": "capability_response", "capability_id": "toon_afbeelding",
+                "message": "🖼️ Nog geen afbeeldingen in mijn archief gevonden."}
+    last = imgs[-3:]
+    lines = [f"🖼️ **Laatste {len(last)} afbeeldingen** in mijn archief:"]
+    for f in last:
+        fn = f.get("filename") or f.get("id")
+        tag = ", ".join((f.get("tags") or [])[:3])
+        lines.append(f"  · {fn}" + (f" ({tag})" if tag else ""))
+    lines.append(f"\n_Open Archief om te bekijken._")
+    return {"type": "capability_response", "capability_id": "toon_afbeelding",
+            "message": "\n".join(lines)}
+
+
+def _handle_speel_geluid(user_id: Optional[str]) -> Optional[Dict]:
+    """v6: toon laatste audio-bestanden uit archive."""
+    import json as _j
+    arch_idx = DATA / "system_archive" / "_index.json"
+    if not arch_idx.exists():
+        return {"type": "capability_response", "capability_id": "speel_geluid",
+                "message": "🔊 Archiefindex niet gevonden — upload eerst geluid in Archief."}
+    try:
+        data = _j.loads(arch_idx.read_text(encoding="utf-8"))
+    except Exception:
+        data = {"files": []}
+    files = data.get("files", [])
+    auds = [f for f in files if (f.get("type", "").startswith("audio") or
+                                  f.get("filename", "").lower().endswith((".mp3", ".wav", ".m4a", ".ogg", ".webm")))]
+    if user_id:
+        own = [f for f in auds if f.get("uploaded_by") == user_id]
+        if own:
+            auds = own
+    if not auds:
+        return {"type": "capability_response", "capability_id": "speel_geluid",
+                "message": "🔊 Nog geen audio in mijn archief gevonden."}
+    last = auds[-3:]
+    lines = [f"🔊 **Laatste {len(last)} audio-fragmenten** in mijn archief:"]
+    for f in last:
+        fn = f.get("filename") or f.get("id")
+        dur = f.get("duration_seconds")
+        extra = f" ({dur:.1f}s)" if isinstance(dur, (int, float)) else ""
+        lines.append(f"  · {fn}{extra}")
+    lines.append("\n_Open Archief om af te spelen._")
+    return {"type": "capability_response", "capability_id": "speel_geluid",
+            "message": "\n".join(lines)}
+
+
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
     "tellen_bestanden":          _handle_tellen_bestanden,
     "taken_lijst":               _handle_taken_lijst,
     "winst_verlies_overzicht":   _handle_winst_verlies,
     "spark_saldo_check":         _handle_spark_saldo,
+    # v6_capabilities_handlers_001 — 3 voorheen placeholders nu live
+    "gesprek_lezen":             _handle_gesprek_lezen,
+    "toon_afbeelding":           _handle_toon_afbeelding,
+    "speel_geluid":              _handle_speel_geluid,
 }
 
 

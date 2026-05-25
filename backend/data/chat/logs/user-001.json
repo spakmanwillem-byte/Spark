@@ -20908,11 +20908,87 @@
         "session_id": "default",
         "gesprek_nummer": 805
       }
+    },
+    {
+      "id": "conv-00c29477",
+      "timestamp": "2026-05-25T22:59:03.036962+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Ik ben echt boos op dit systeem!",
+      "spark_response": "Ik begrijp dat je boos bent\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n**Systeem**: Een systeem is een geheel van onderdelen die samenwerken om een bepaald doel te bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "boos"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boos"
+          },
+          {
+            "begrip": "Systeem"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 806
+      }
+    },
+    {
+      "id": "conv-efceaa9a",
+      "timestamp": "2026-05-25T22:59:03.110773+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "lees ons gesprek terug",
+      "spark_response": "📜 Geen recente chats voor user `user-001` gevonden.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "terug",
+            "gesprek"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 807
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 805,
-    "last_updated": "2026-05-25T15:18:21.243374+00:00"
+    "total_conversations": 807,
+    "last_updated": "2026-05-25T22:59:03.110773+00:00"
   }
 }

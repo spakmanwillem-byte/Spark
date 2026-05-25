@@ -114,6 +114,33 @@ async def process_message(req: ChatMessage):
     if emotion:
         response["emotion"] = emotion
 
+    # 0a. v6_emotion_pipeline_shadow_001 — Schaduw-run de 7-laags pipeline naast bestaande detectie.
+    #     Géén impact op de response. Output gaat naar /data/emotions/pipeline_shadow/YYYY-MM-DD.jsonl
+    #     zodat we kunnen vergelijken of pipeline andere routes zou kiezen dan smart_intents.
+    try:
+        from modules.emotion_pipeline.pipeline import run_pipeline as _emo_pipeline
+        from pathlib import Path as _P
+        import json as _json
+        from datetime import datetime as _dt, timezone as _tz
+        _pipe = _emo_pipeline(text, user_id=req.user_id)
+        # Compacte regel (alleen summary + ts), voorkom dat de schaduwlog enorm wordt
+        _shadow_line = {
+            "ts": _dt.now(_tz.utc).isoformat(),
+            "user_id": req.user_id,
+            "msg_chars": len(text or ""),
+            "msg_preview": (text or "")[:80],
+            "summary": _pipe.get("summary"),
+        }
+        _day = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+        _shadow_dir = _P(__file__).parent.parent.parent / "data" / "emotions" / "pipeline_shadow"
+        _shadow_dir.mkdir(parents=True, exist_ok=True)
+        with open(_shadow_dir / f"{_day}.jsonl", "a", encoding="utf-8") as _f:
+            _f.write(_json.dumps(_shadow_line, ensure_ascii=False) + "\n")
+        # Expose op response (optioneel — frontend kan dit later tonen)
+        response["emotion_pipeline_shadow"] = _pipe.get("summary")
+    except Exception:
+        pass
+
     # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
     state = session_state.get_state(req.user_id) if req.user_id else {}
 

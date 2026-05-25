@@ -1,6 +1,22 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_core_stabilisatie_001** (sessie 11 — Spark Core stabiel + linked):
+  - 🆔 **Identity v0.1 → v2.0** (was v1.0): we zijn voorbij v1 want we hebben emotie-pipeline + hooks + disclaimer + capabilities live. Maker = **"De Willem"** (Roadkill/Willem Spakman naar metadata.maker_aliassen voor legacy).
+  - 🔗 **Linked layers veld** in identity.json: live counts van kernwaarden/normen/bijbel/capabilities/emotie-lagen/kb-hooks. **UI**: 6 kleurig-coded tegels onder "Doel" tonen real-time architecturele staat.
+  - 🌗 **Emotie Pipeline LIVE-shadow** (v6_emotion_pipeline_shadow_001):
+    - In chat-flow draait pipeline parallel naast EmotionDetectionService + smart_intents
+    - Géén impact op response — output gaat naar `/data/emotions/pipeline_shadow/YYYY-MM-DD.jsonl`
+    - Frontend ziet `response.emotion_pipeline_shadow` veld voor toekomstige visualisatie
+    - 2 nieuwe endpoints: `GET /api/emotion-pipeline/shadow/recent` + `/shadow/stats` (aggregatie by emotie/behavior/kernwaarde)
+  - ⚙️ **Capabilities: 3 placeholders → live handlers** (v6_capabilities_handlers_001):
+    - `gesprek_lezen` — leest chat-logs van vandaag + gisteren, returnt laatste 10
+    - `toon_afbeelding` — toont 3 laatste images uit system_archive (gefilterd op user)
+    - `speel_geluid` — toont 3 laatste audio-files uit system_archive
+    - **12/12 capabilities** nu LIVE in capability_handler_service. Commands van 2 kanten gelinked.
+  - 🗺️ **Roadmap synced**: 6 nieuwe done-items toegevoegd (KB v2 hooks, KB v2 unify, Identity v2 + Disclaimer, Emotie Pipeline, Capabilities handlers, Brain delete-fix). Gift-bug-double status: planned → done.
+  - 📛 **"De Willem" naming**: Willem Spakman vervangen door De Willem in identity + profile (subtieler maar nog steeds attribute-able). Aliassen bewaard in metadata.
+
 - 2026-05-25 **v6_identity_001 + v6_disclaimer_001 + v6_profile_001** (sessie 11):
   - 🧬 **`spark_identity.json` v0.1 → v1.0** rewrite volgens Willem's notitie 23:00:
     - **Doel**: "Menselijke ontwikkeling versterken via transparante, autonome en begrijpelijke ondersteuning"

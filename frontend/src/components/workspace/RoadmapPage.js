@@ -54,6 +54,18 @@ const phases = [
       { title: '🚨 Urgent module (leeg, gedefinieerd maar niet gebruikt)', status: 'planned', anchor: 'mod-urgent' },
       { title: '🗣️ Voice module (folder bestaat, STT/TTS pending integration_playbook)', status: 'planned', anchor: 'mod-voice' },
       { title: '🎤 Triggers — 12 keyword triggers actief, uitbreidbaar via NLP-tags', status: 'done', anchor: 'mod-triggers' },
+      // v6_brainfart_001 — Notities van De Willem 25-mei
+      { title: '🆘 Help-JSON per gradatie (g1 t/m g7) — gerichte command/help-tracking', status: 'planned', anchor: 'help-per-gradatie', note: 'Per gradatie eigen help_gN.json. Welke commands zichtbaar, welke verborgen. Minder foutgevoelig, gerichter problemen vinden.' },
+      { title: '📐 Blueprint-systeem — 1 JSON ↔ 1 module.py mapping', status: 'planned', anchor: 'blueprint-system', note: 'Elke /modules/<naam>/routes.py heeft een bijbehorende /data/blueprints/<naam>.json met intent/help/commands. Zo wordt commandsysteem indeelbaar per gradatie.' },
+      { title: '📚 Spark eigen index-mapstructuur + meta-index bestand', status: 'planned', anchor: 'spark-index', note: 'Eigen mapstructuur voor Spark JSONs. Indexbestand met bestandsnamen + meta + footnotes per bestand.' },
+      { title: '🔎 Integraties → tab 1 = "Spark Search" (Google-equivalent)', status: 'planned', anchor: 'spark-search', note: 'Eerste tab in Integraties = Sparks zoekfunctie binnen KB v2 + graph + later web. Latere fase: lees-functie (RSS/Drive), schrijf-functie (post).' },
+      { title: '📅 Maand-reset 31 mei / 1 juni — kasboek-anker', status: 'planned', anchor: 'maand-reset', note: 'Snapshot 31 mei 23:59 van Spark-balans, alle wallets, trade-history. 1 juni 00:00 = alles nul, snapshot wordt open-saldo nieuw boekjaar. + Disclaimer privacy en tokenomics-doc updaten.' },
+      { title: '🏷️ Token-waarde systeem / Winkel / Token / Digitaal bezit — formaliseren', status: 'planned', anchor: 'token-value-system', note: 'Vastleggen hoe token-waarde wordt bepaald, hoe winkel-prijzen erop reageren, wat digitaal bezit betekent voor user.' },
+      { title: '🤖 Trade bot — Pot 1 als €10 staking-anker (locked, nooit traden)', status: 'planned', anchor: 'trader-pot1-anchor', note: 'Pot 1 blijft staan bij Bitvavo als stake → groeit mee in waarde. Andere potjes = trade-budget per coin. Pot 1 waarde = anker voor min-bedrag berekening.' },
+      { title: '⚠️ Trader: min-buy check (SOL min €7 → bot crasht nu)', status: 'planned', anchor: 'trader-min-buy', note: 'Vóór sell/buy order: check Bitvavo min-amount per coin. Skip + log waarschuwing als pot < min.' },
+      { title: '➕ Watchlist + knop — coins toevoegen/verwijderen + 5 extra coins', status: 'planned', anchor: 'watchlist-plus', note: 'Plusje bij watchlist → coin toevoegen met monitor/bot + €10 pot voor onderzoek (incl. staking-tests).' },
+      { title: '✏️ BUG: Notitie kan niet aangepast worden', status: 'planned', anchor: 'bug-note-edit', note: 'NotitiesPage heeft alleen toggleDone + delete, geen edit-flow voor inhoud/titel/prioriteit.' },
+      { title: '🎁 BUG: Wallet melding "gift 2x verwerkt" terwijl niet gedaan', status: 'planned', anchor: 'bug-gift-double', note: 'Onderzoek transaction-log dubbele entry. Mogelijk frontend duplicate submit of backend retry zonder idempotency.' },
     ],
   },
   {

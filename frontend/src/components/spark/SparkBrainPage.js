@@ -229,6 +229,15 @@ export function SparkBrainPage({ onNavigate }) {
                     </div>
                   </Card>
                 )}
+
+                {/* v6_disclaimer_001 — Disclaimer-pijlers */}
+                {identity?.disclaimer && (
+                  <DisclaimerCard disclaimer={identity.disclaimer} bijbelCounts={{
+                    kernwaarden: kernwaarden.length,
+                    normen: normen.length,
+                    bijbel_items: bijbelItems.length,
+                  }} />
+                )}
               </>
             )}
 
@@ -436,6 +445,83 @@ export function SparkBrainPage({ onNavigate }) {
     </MainLayout>
   );
 }
+
+
+// v6_disclaimer_001 — Disclaimer-pijlers component
+function DisclaimerCard({ disclaimer, bijbelCounts }) {
+  const kaders = disclaimer.kaders || [];
+  const nietDoet = disclaimer.wat_spark_niet_doet || [];
+  return (
+    <div data-testid="disclaimer-card" className="rounded-2xl border border-amber-500/30 overflow-hidden"
+         style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.07), rgba(251,146,60,0.04))' }}>
+      <div className="px-5 py-3 border-b border-amber-500/20 flex items-center gap-2">
+        <Shield className="w-4 h-4 text-amber-400" />
+        <h3 className="text-sm font-bold text-white flex-1">Disclaimer</h3>
+        <span className="text-[10px] text-amber-400 bg-amber-500/15 px-2 py-0.5 rounded">{disclaimer.version || 'v1.0'}</span>
+      </div>
+      <div className="p-5 space-y-4">
+        {/* Kernzin */}
+        <p data-testid="disclaimer-kernzin" className="text-sm text-slate-200 leading-relaxed">
+          {disclaimer.kernzin}
+        </p>
+
+        {/* Leidende lagen badge */}
+        <div className="flex flex-wrap gap-2">
+          {(disclaimer.leidende_lagen || []).map((l, i) => {
+            const count = l === 'Normen & Waarden'
+              ? (bijbelCounts?.kernwaarden || 0) + (bijbelCounts?.normen || 0)
+              : bijbelCounts?.bijbel_items || 0;
+            return (
+              <div key={i} className="px-3 py-1.5 rounded-lg bg-pink-500/10 border border-pink-500/30 text-xs">
+                <span className="text-pink-300 font-medium">{l}</span>
+                <span className="text-slate-500 ml-2">{count} items</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Kaders */}
+        {kaders.length > 0 && (
+          <div className="space-y-2">
+            <p className="text-[10px] uppercase text-amber-400 tracking-wider font-semibold">De 4 kaders</p>
+            {kaders.map((k, i) => (
+              <div key={i} data-testid={`disclaimer-kader-${i}`}
+                   className="p-2.5 bg-slate-900/40 rounded-lg border border-slate-800/60">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-xs font-semibold text-amber-200">{k.kader}</span>
+                  {k.verwijst_naar && (
+                    <span className="text-[9px] text-slate-500 font-mono">{k.verwijst_naar}</span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5 leading-snug">{k.betekenis}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Wat Spark NIET doet */}
+        {nietDoet.length > 0 && (
+          <div className="space-y-1">
+            <p className="text-[10px] uppercase text-red-400 tracking-wider font-semibold">Wat Spark niet doet</p>
+            {nietDoet.map((n, i) => (
+              <div key={i} className="flex items-center gap-2 py-0.5">
+                <X className="w-3 h-3 text-red-400 flex-shrink-0" />
+                <span className="text-xs text-slate-400">{n}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {disclaimer.laatst_bewerkt && (
+          <p className="text-[9px] text-slate-600 text-right pt-2 border-t border-slate-800/40">
+            Laatst bewerkt: {(disclaimer.laatst_bewerkt || '').slice(0, 19).replace('T', ' ')}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 
 function Card({ title, icon: Icon, accent, action, children }) {
   return (

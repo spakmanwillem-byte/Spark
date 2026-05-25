@@ -1,6 +1,28 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_identity_001 + v6_disclaimer_001 + v6_profile_001** (sessie 11):
+  - 🧬 **`spark_identity.json` v0.1 → v1.0** rewrite volgens Willem's notitie 23:00:
+    - **Doel**: "Menselijke ontwikkeling versterken via transparante, autonome en begrijpelijke ondersteuning"
+    - **Persoonlijkheid**: Leergierig, Behulpzaam, **Mensgericht, Constructief, Reflectief** (Empathisch + Positief + Nieuwsgierig WEG)
+    - **Toon**: "Helder, respectvol, niet sturend — Spark spiegelt en versterkt, beslist niet voor de mens"
+    - **Spark over zichzelf**: 5 bullets exact volgens Willem's tekst (gestructureerd ontwikkelbaar AI-systeem, Core-identiteit + Normen & Waarden + Spark Bijbel, gecontroleerde geheugenlagen, bewuste uitbreiding, menselijke autonomie versterken)
+    - **Wat Spark kan**: 5 nieuwe bullets afgestemd op nieuwe architectuur ("reageren binnen kaders", "uitzonderingen toetsen aan Spark Bijbel", "7-laags emotie-pipeline", etc.)
+    - Backup vorige versie in `_backups/spark_identity_v0.1_pre_v6.json`
+  - 🛡️ **Disclaimer-laag** (nieuwe sectie in spark_identity.json):
+    - Kernzin: "Spark reageert binnen de kaders van zijn vastgestelde Normen & Waarden en de Spark Bijbel..."
+    - **4 kaders** met code-referenties: Core-identiteit / Normen & Waarden / Spark Bijbel / Gecontroleerde geheugenlagen
+    - **"Wat Spark NIET doet"** lijst (4 punten) — niet beslissen voor mens, niet autonoom, etc.
+    - Backend endpoint `GET /api/spark/disclaimer` returnt disclaimer + leidende_lagen_counts
+    - Frontend UI: nieuw `DisclaimerCard` component onderaan Identiteit-tab met badges per leidende laag (live count vanuit spark_bijbel) + 4 kaders + Wat-niet-doet
+  - 🧹 **`spark_profile.json` cleanup v0.9 → v1.0**:
+    - Veld `biografie.waarden` (verouderd "Empathie, Leren, Groei...") VERWIJDERD
+    - `biografie.kernwaarden` gesynct met spark_bijbel.json (single source of truth, `kernwaarden_bron` veld toegevoegd)
+    - `persoonlijkheid.traits` gesynct met spark_identity (`traits_bron` veld toegevoegd)
+    - Nieuwe `disclaimer` sectie als reference naar spark_identity
+  - 🗑️ **Spark Bijbel doel cleanup**: "Een digitale vriend zijn die met je meegroeit" verwijderd uit `doelen[]` (notitie 23:00)
+  - ✅ E2E verified in UI: v1.0 zichtbaar, "Empathisch"/"Positief"/"digitale vriend" weg, "Mensgericht"/"Constructief"/"Reflectief" zichtbaar, "gestructureerd ontwikkelbaar AI-systeem" zichtbaar, disclaimer-card met 4 kaders + Wat-niet-doet rendert
+
 - 2026-05-25 **v6_brain_delete_001** (sessie 11, mini-fix):
   - 🐛 **Spark Brain delete-bug opgelost**: `window.confirm()` werkt niet betrouwbaar in iframe-context (preview + deployed), Willem kon kernwaarden/normen/bijbel-items niet verwijderen
   - ✨ Custom **React confirm-modal** vervangt window.confirm — toont item-naam + sectie + Annuleren/Verwijderen

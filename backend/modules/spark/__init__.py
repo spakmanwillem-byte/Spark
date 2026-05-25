@@ -21,6 +21,24 @@ async def get_identity():
     return load_json(DATA_DIR / "spark_identity.json", default={})
 
 
+@router.get("/disclaimer")
+async def get_disclaimer():
+    """v6_disclaimer_001 — Spark's disclaimer-pijlers.
+    Verwijst naar Normen & Waarden + Spark Bijbel als leidende contextlagen."""
+    identity = load_json(DATA_DIR / "spark_identity.json", default={})
+    disclaimer = identity.get("disclaimer") or {}
+    bijbel = load_json(BIJBEL_FILE, default={})
+    return {
+        "success": True,
+        "disclaimer": disclaimer,
+        "leidende_lagen_counts": {
+            "kernwaarden": len(bijbel.get("kernwaarden", [])),
+            "normen": len(bijbel.get("normen", [])),
+            "bijbel_items": len(bijbel.get("bijbel_items", [])),
+        },
+    }
+
+
 @router.get("/bijbel")
 async def get_bijbel():
     """Spark Bijbel: kernwaarden, normen, doelen, reactie voorbeelden.

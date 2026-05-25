@@ -86,6 +86,15 @@ const phases = [
       { title: '🧭 Intent-extractor: user-zin → tag-vector', status: 'planned', anchor: 'intent-extractor', note: 'User zegt "Wat staat morgen op mijn agenda?" → extractor tagt [tijd,planning,bekijken]. Triggers worden primitieve versie hiervan. Later: emergent LLM voor robustere extractie.' },
       { title: '🤝 Capability-matcher: tag-overlap score → top-3 kandidaat-commands', status: 'planned', anchor: 'cap-matcher', note: 'Bidirectioneel: user-intent ↔ command-capability ontmoeten elkaar in tag-ruimte. Spark kan nieuwe combinaties bedenken zonder hardcoded trigger.' },
       { title: '❓ Disambiguation: bij meerdere matches → "Bedoelde je X of Y?"', status: 'planned', anchor: 'cmd-disambiguation', note: 'Voorkomt verkeerde uitvoer. Spark leert van gebruikers-keuze welke combinatie de juiste was → tags fine-tunen.' },
+      // v6_brainfart_005 — Emergente capability via command-compositie (25-mei)
+      { title: '🧬 Sequential composition: command-keten bouwen voor onbekende intent', status: 'planned', anchor: 'cmd-compose-seq', note: 'Geen 1-op-1 match? Spark componeert keten: cmdA → output → cmdB → output → cmdC. Bv. "lijstje gekocht gisteren voor boekhouding" = /wallet/transactions → /accounting/category-summary → /notes/create.' },
+      { title: '🪂 Fallback chains: dichtstbijzijnde match + user-bevestiging', status: 'planned', anchor: 'cmd-fallback', note: 'Geen exacte match? Toon top-3 closest met overlap-score. User kiest → Spark leert die mapping.' },
+      { title: '🌱 Skill discovery: Spark biedt aan herkende compositie als snelkoppeling op te slaan', status: 'planned', anchor: 'cmd-skill-discovery', note: 'Spark merkt patroon (zelfde keten 3x gebruikt) → "Zal ik hier 1 command van maken?" → user keurt goed → nieuwe samengestelde capability live. Spark groeit organisch zonder dat dev iets bouwt.' },
+      // v6_brainfart_006 — Gradatie-locks op command-niveau (25-mei)
+      { title: '🔒 Per-gradatie command-JSON (commands_g1.json t/m commands_g7.json)', status: 'planned', anchor: 'cmd-gradatie-files', note: 'Net als help_gN.json. Auto-afgeleid van master command_registry.json o.b.v. gradatie_min van elk command. g3 ziet alleen wat g3 mag uitvoeren.' },
+      { title: '🛡️ Gradatie-lock check IN command-registry, niet alleen in UI', status: 'planned', anchor: 'cmd-grad-lock', note: 'Elke command in registry: gradatie_min veld. Matcher honoreert deze. UI-locks zijn slechts decoratief — echte security zit op API-laag + registry.' },
+      { title: '🪜 Privilege-fallback: blocked command → bied request-flow aan', status: 'planned', anchor: 'cmd-priv-fallback', note: 'g3 vraagt iets dat g1-only is → Spark biedt aan: "Wil ik er een aanvraag-taak van maken voor admin?" → routes naar /notes/tasks/create (g3-allowed) met juiste context.' },
+      { title: '🌐 Skill-discovery gradatie-aware', status: 'planned', anchor: 'cmd-skill-grad', note: 'Compositie waarin g1-command zit kan g3 niet als eigen snelkoppeling opslaan. Of: g3 stelt voor → g1 keurt goed → wordt globaal beschikbaar voor iedereen vanaf passende gradatie.' },
     ],
   },
   {

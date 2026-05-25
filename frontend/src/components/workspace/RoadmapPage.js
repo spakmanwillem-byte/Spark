@@ -63,6 +63,9 @@ const phases = [
       { title: '✅ Capabilities 3 placeholders → live handlers (gesprek_lezen / toon_afbeelding / speel_geluid)', status: 'done', anchor: 'v6-cap-handlers', note: 'v6_capabilities_handlers_001 — 12/12 capabilities nu LIVE in capability_handler_service. Spark "handen" beide kanten gelinked.' },
       { title: '✅ Spark Brain delete-bug fix (window.confirm faalt in iframe)', status: 'done', anchor: 'v6-brain-delete', note: 'v6_brain_delete_001 — Custom React confirm-modal + sonner toast feedback. Geen stille fails meer.' },
       { title: '✅ KB v2 DELETE endpoint + UI knop (onbruikbare kaarten)', status: 'done', anchor: 'v6-kbv2-delete', note: 'v6_kbv2_delete_001 — POST /api/kb/v2/delete + Trash-knop in CardDetail + reden-veld voor traceability + log naar spark_logger.' },
+      { title: '✅ A/B Diff-view: huidige route vs pipeline-advies', status: 'done', anchor: 'v6-ab-diff', note: 'v6_emotion_pipeline_ab_001 — Per chat-call vergelijking. Stats: match/mismatch/potential + match-ratio. UI in Spark Brain → Emotie Pipeline. Eerste data toont 60% match — boos/verdrietig vallen nu in knowledge-route ipv pipeline begrenzen/vertragen. Fundering vóór live route-override.' },
+      { title: '✅ Kernwaarden cleanup (11 → 9): Groeien + Emoties weg, sync productie', status: 'done', anchor: 'v6-kw-cleanup' },
+      { title: '✅ Shadow widget — pipeline draait mee in chat (zichtbaar in Spark Brain)', status: 'done', anchor: 'v6-shadow-widget', note: 'v6_shadow_widget_001 — Live activity-blok met stats + laatste 15 chat-runs.' },
 
       // ==== Communicatie-systeem (expliciet, was impliciet) ====
       { title: '💬 COMMUNICATIE — chat-flow (chat/routes.py)', status: 'done', anchor: 'comm-chat-flow', note: 'Hoofdorchestrator. Voor elke user-message: emotie-detectie → emotie-pipeline (shadow) → smart_intents → kbv2-commands → capability-handler → recap/identity/self-state → fallback. Streaming response.' },

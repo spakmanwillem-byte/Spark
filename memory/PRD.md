@@ -1,6 +1,11 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25/12 **Sessie 11 + 12 — Spark Core stabilisatie compleet**:
+  - Roadmap-tab gesynchroniseerd: alle v6-items afgevinkt (A/B diff toegevoegd als done item).
+  - Identity v2.0 linked_layers correct: 9 kernwaarden · 6 normen · 9 bijbel-items · 12 capabilities live · 7 emotie-lagen · 5 KB v2 hooks.
+  - Klaar voor: redeploy → De Willem vult kennis-kaarten in → volgende sessie verder aan hand roadmap.
+
 - 2026-05-25 **v6_emotion_pipeline_ab_001** (sessie 12 — A/B diff-view LIVE):
   - ⚖️ **A/B Diff-view tussen huidige route en pipeline-advies** in Spark Brain → Emotie Pipeline tab
   - Backend: `_build_ab_entry()` in `chat/routes.py._save_log` schrijft naar `/data/emotions/pipeline_ab/YYYY-MM-DD.jsonl` met `{ts, user_id, msg_preview, current_route, pipeline_summary, diff_status, diff_note}`

@@ -1326,6 +1326,73 @@ def _save_log(req: "ChatMessage", response: dict, trigger_type):
     except Exception:
         pass
 
+    # v6_emotion_pipeline_ab_001 — A/B diff-log: vergelijkt smart_intents/cap-route met pipeline-advies
+    try:
+        _ab_entry = _build_ab_entry(req, response, trigger_type)
+        from pathlib import Path as _P
+        import json as _json
+        from datetime import datetime as _dt, timezone as _tz
+        day = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+        ab_dir = _P(__file__).parent.parent.parent / "data" / "emotions" / "pipeline_ab"
+        ab_dir.mkdir(parents=True, exist_ok=True)
+        with open(ab_dir / f"{day}.jsonl", "a", encoding="utf-8") as f:
+            f.write(_json.dumps(_ab_entry, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def _build_ab_entry(req, response, trigger_type) -> dict:
+    """v6_emotion_pipeline_ab_001 — bouw 1 vergelijkingsregel.
+    Toont welke route smart_intents/capabilities koos vs welke pipeline zou adviseren."""
+    from datetime import datetime as _dt, timezone as _tz
+    pipeline_summary = response.get("emotion_pipeline_shadow") or {}
+    # Welke route koos het systeem nu?
+    current_route = trigger_type or response.get("type") or "unknown"
+    # Welke "behavior_class" zou pipeline adviseren?
+    pipeline_behavior = pipeline_summary.get("behavior")
+    # Diff-logica: matchen ze inhoudelijk? (heuristiek per behavior_class)
+    diff_status = "match"
+    diff_note = "geen significant verschil"
+    if pipeline_summary:
+        emo = pipeline_summary.get("emotie")
+        weging = pipeline_summary.get("weging")
+        # v6_ab_diff_002 — Breder palet van routes die "neutrale" respons leveren
+        info_routes = {
+            "identity_about", "capability_response", "capability_placeholder",
+            "info", "knowledge", "unknown", "fallback", "time_now",
+            "kbv2_cmd_inbox", "kbv2_cmd_audit", "how_are_you",
+            "kbv2_tell_kort", "kbv2_tell_meer", "kbv2_tell_diep", "kbv2_tell_volledig",
+            "kbv2_cmd_search", "kbv2_cmd_known", "kbv2_cmd_learned",
+        }
+        # Mismatch wanneer pipeline een actieve emotie-route adviseert, maar systeem koos info-route
+        active_behaviors = {
+            "begrenzen-structureren": "Sterke negatieve emotie — pipeline zou structureren/begrenzen",
+            "vertragen-ondersteunen":  "Negatieve emotie — pipeline zou vertragen/ondersteunen",
+            "kalmeren-opties":         "Angst-emotie — pipeline zou kalmeren met opties",
+        }
+        if pipeline_behavior in active_behaviors and current_route in info_routes:
+            diff_status = "mismatch"
+            diff_note = f"{active_behaviors[pipeline_behavior]} ({emo}, {weging}); systeem koos info-route '{current_route}'"
+        elif pipeline_behavior == "exploreren-uitbreiden" and current_route in ("fallback", "unknown"):
+            diff_status = "potential"
+            diff_note = "Blije emotie — pipeline zou kunnen uitbreiden, systeem viel terug"
+        elif not pipeline_behavior:
+            diff_status = "neutraal"
+            diff_note = "Geen pipeline-output"
+    else:
+        diff_status = "no_pipeline"
+        diff_note = "Pipeline draaide niet"
+    return {
+        "ts": _dt.now(_tz.utc).isoformat(),
+        "user_id": req.user_id,
+        "msg_preview": (req.message or "")[:100],
+        "current_route": current_route,
+        "current_type": response.get("type"),
+        "pipeline_summary": pipeline_summary,
+        "diff_status": diff_status,
+        "diff_note": diff_note,
+    }
+
 
 def _get_user_gradatie(user_id):
     """Haal gradatie van user op. Return None als niet gevonden."""

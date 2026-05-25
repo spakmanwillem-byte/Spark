@@ -1,6 +1,19 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_emotion_pipeline_ab_001** (sessie 12 — A/B diff-view LIVE):
+  - ⚖️ **A/B Diff-view tussen huidige route en pipeline-advies** in Spark Brain → Emotie Pipeline tab
+  - Backend: `_build_ab_entry()` in `chat/routes.py._save_log` schrijft naar `/data/emotions/pipeline_ab/YYYY-MM-DD.jsonl` met `{ts, user_id, msg_preview, current_route, pipeline_summary, diff_status, diff_note}`
+  - **Diff-status logica** (v6_ab_diff_002): mismatch wanneer pipeline een actieve emotie-route adviseert (begrenzen-structureren / vertragen-ondersteunen / kalmeren-opties) maar systeem koos een info-route (knowledge / fallback / capability_placeholder / kbv2_tell_* / how_are_you / time_now / unknown / etc.)
+  - 2 nieuwe endpoints: `GET /api/emotion-pipeline/ab/recent?only_mismatches=` en `/ab/stats`
+  - **UI A/B Diff widget** in EmotiePipelineSection:
+    - 5 stats-tegels: totaal / match (groen) / mismatch (rood) / potential (amber) / match-ratio %
+    - "Routes met meeste mismatches" chips (rood)
+    - Filter-toggle: "Alle" vs "Alleen mismatches"
+    - Per-run kaart: timestamp · message-preview · "HUIDIG: route → PIPELINE: emotie/kernwaarde/behavior" + diff-note in italics + status-badge
+  - **E2E verified**: 5 test-chats → 2 mismatches gevonden (boos→knowledge ipv begrenzen, bedroefd→knowledge ipv vertragen). 60% match-ratio. Filter werkt (toont 2 mismatches op klik).
+  - 📊 **Eerste inzicht**: huidige smart_intents-flow valt vaak terug op generieke 'knowledge'-route bij negatieve emotionele input — pipeline zou specifieker reageren. Bewijs zichtbaar zonder live impact.
+
 - 2026-05-25 **v6_polish_001** (sessie 11 — laatste polish + KB delete):
   - 🔢 **Kernwaarden 11 → 9**: "Groeien" + "Emoties" verwijderd uit spark_bijbel (volgens productie-sync van De Willem). Topbar + Identity tegels tonen nu correcte 9.
   - 🌗 **Shadow widget** in Spark Brain → Emotie Pipeline tab:

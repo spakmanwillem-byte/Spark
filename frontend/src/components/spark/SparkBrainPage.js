@@ -1114,6 +1114,10 @@ function EmotiePipelineSection() {
   const [shadowRuns, setShadowRuns] = useState([]);
   const [shadowStats, setShadowStats] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  // v6_emotion_pipeline_ab_001 — A/B diff state
+  const [abRuns, setAbRuns] = useState([]);
+  const [abStats, setAbStats] = useState(null);
+  const [abFilter, setAbFilter] = useState('all'); // 'all' | 'mismatch'
 
   useEffect(() => {
     fetch(`${API}/api/emotion-pipeline/layers`).then(r => r.json()).then(d => setLayersDoc(d.layers || []));
@@ -1123,16 +1127,26 @@ function EmotiePipelineSection() {
   const loadShadow = async () => {
     setRefreshing(true);
     try {
-      const [r1, r2] = await Promise.all([
+      const [r1, r2, r3, r4] = await Promise.all([
         fetch(`${API}/api/emotion-pipeline/shadow/recent?limit=15`).then(x => x.json()),
         fetch(`${API}/api/emotion-pipeline/shadow/stats`).then(x => x.json()),
+        fetch(`${API}/api/emotion-pipeline/ab/recent?limit=30&only_mismatches=${abFilter === 'mismatch'}`).then(x => x.json()),
+        fetch(`${API}/api/emotion-pipeline/ab/stats`).then(x => x.json()),
       ]);
       setShadowRuns(r1.runs || []);
       setShadowStats(r2);
+      setAbRuns(r3.runs || []);
+      setAbStats(r4);
     } finally {
       setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    // Herlaad A/B bij filter-wijziging
+    fetch(`${API}/api/emotion-pipeline/ab/recent?limit=30&only_mismatches=${abFilter === 'mismatch'}`)
+      .then(x => x.json()).then(d => setAbRuns(d.runs || []));
+  }, [abFilter]);
 
   const runPipeline = async () => {
     if (!text.trim()) return;
@@ -1340,6 +1354,115 @@ function EmotiePipelineSection() {
                   <p className="text-xs text-slate-300 mt-0.5 truncate">
                     <span className="text-slate-500">›</span> {r.msg_preview || '(empty)'}
                   </p>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
+
+      {/* v6_emotion_pipeline_ab_001 — A/B diff-view */}
+      <div data-testid="ab-diff-widget" className="bg-slate-900/40 border border-purple-500/30 rounded-xl overflow-hidden">
+        <div className="flex items-center gap-2 px-4 py-2.5 bg-purple-500/10 border-b border-purple-500/20">
+          <span className="text-purple-300">⚖️</span>
+          <h3 className="text-sm font-bold text-white flex-1">A/B Diff — huidige route vs pipeline-advies</h3>
+          <div className="flex items-center gap-1 text-[10px]">
+            <button data-testid="ab-filter-all" onClick={() => setAbFilter('all')}
+              className={`px-2 py-1 rounded ${abFilter === 'all' ? 'bg-purple-500/30 text-purple-200' : 'border border-slate-700 text-slate-400'}`}>
+              Alle
+            </button>
+            <button data-testid="ab-filter-mismatch" onClick={() => setAbFilter('mismatch')}
+              className={`px-2 py-1 rounded ${abFilter === 'mismatch' ? 'bg-red-500/30 text-red-200' : 'border border-slate-700 text-slate-400'}`}>
+              Alleen mismatches
+            </button>
+          </div>
+        </div>
+
+        {/* Stats: match-ratio + status verdeling */}
+        {abStats && abStats.total_runs > 0 && (
+          <div className="px-4 py-3 grid grid-cols-2 md:grid-cols-5 gap-2 border-b border-slate-800">
+            <div className="text-center p-2 rounded bg-slate-800/40">
+              <p className="text-base font-bold text-purple-300">{abStats.total_runs}</p>
+              <p className="text-[9px] uppercase text-slate-500 tracking-wider">Totaal</p>
+            </div>
+            <div className="text-center p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
+              <p className="text-base font-bold text-emerald-300">{abStats.by_diff_status?.match || 0}</p>
+              <p className="text-[9px] uppercase text-emerald-400 tracking-wider">Match</p>
+            </div>
+            <div className="text-center p-2 rounded bg-red-500/10 border border-red-500/20">
+              <p className="text-base font-bold text-red-300">{abStats.by_diff_status?.mismatch || 0}</p>
+              <p className="text-[9px] uppercase text-red-400 tracking-wider">Mismatch</p>
+            </div>
+            <div className="text-center p-2 rounded bg-amber-500/10 border border-amber-500/20">
+              <p className="text-base font-bold text-amber-300">{abStats.by_diff_status?.potential || 0}</p>
+              <p className="text-[9px] uppercase text-amber-400 tracking-wider">Potential</p>
+            </div>
+            <div className="text-center p-2 rounded bg-slate-800/40">
+              <p className="text-base font-bold text-cyan-300">{((abStats.match_ratio || 0) * 100).toFixed(0)}%</p>
+              <p className="text-[9px] uppercase text-slate-500 tracking-wider">Match-ratio</p>
+            </div>
+          </div>
+        )}
+
+        {/* Top routes met mismatches */}
+        {abStats && Object.keys(abStats.mismatches_per_route || {}).length > 0 && (
+          <div className="px-4 py-2 space-y-1.5 border-b border-slate-800">
+            <p className="text-[10px] uppercase text-slate-500 tracking-wider">Routes met meeste mismatches</p>
+            <div className="flex flex-wrap gap-1.5">
+              {Object.entries(abStats.mismatches_per_route).slice(0, 5).map(([route, n]) => (
+                <span key={route} className="px-2 py-0.5 rounded text-[10px] bg-red-500/15 text-red-300 border border-red-500/30">
+                  {route} <span className="text-slate-500">×{n}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Recent vergelijkingen */}
+        <div className="max-h-96 overflow-y-auto divide-y divide-slate-800/60">
+          {abRuns.length === 0 ? (
+            <div className="px-4 py-6 text-center text-xs text-slate-500">
+              {abFilter === 'mismatch'
+                ? 'Geen mismatches gevonden — alle routes lijnden uit met pipeline-advies. 🎯'
+                : 'Nog geen A/B-data. Chat met Spark en kom terug.'}
+            </div>
+          ) : (
+            abRuns.map((r, i) => {
+              const statusColors = {
+                match: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300',
+                mismatch: 'bg-red-500/10 border-red-500/30 text-red-300',
+                potential: 'bg-amber-500/10 border-amber-500/30 text-amber-300',
+                neutraal: 'bg-slate-700/20 border-slate-600 text-slate-400',
+                no_pipeline: 'bg-slate-800/40 border-slate-700 text-slate-500',
+              };
+              const sc = statusColors[r.diff_status] || statusColors.neutraal;
+              const p = r.pipeline_summary || {};
+              return (
+                <div key={i} data-testid={`ab-run-${i}`}
+                     className="px-4 py-2 hover:bg-slate-800/30">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[10px] text-slate-500 font-mono mt-0.5">{(r.ts || '').slice(11, 16)}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-slate-300 truncate"><span className="text-slate-500">›</span> {r.msg_preview}</p>
+                      <div className="flex flex-wrap items-center gap-2 mt-1">
+                        <span className="text-[9px] uppercase text-slate-500">huidig:</span>
+                        <span className="text-[10px] text-cyan-300">{r.current_route}</span>
+                        <span className="text-slate-600">→</span>
+                        <span className="text-[9px] uppercase text-slate-500">pipeline:</span>
+                        <span className="text-[10px] text-pink-300">{p.emotie || '—'}</span>
+                        <span className="text-slate-600">·</span>
+                        <span className="text-[10px] text-amber-300">{p.kernwaarde || '—'}</span>
+                        <span className="text-slate-600">·</span>
+                        <span className="text-[10px] text-purple-300">{p.behavior || '—'}</span>
+                      </div>
+                      {r.diff_note && r.diff_status !== 'match' && (
+                        <p className="text-[10px] text-slate-400 mt-0.5 italic">{r.diff_note}</p>
+                      )}
+                    </div>
+                    <span className={`px-2 py-0.5 rounded text-[9px] border ${sc} font-semibold uppercase`}>
+                      {r.diff_status}
+                    </span>
+                  </div>
                 </div>
               );
             })

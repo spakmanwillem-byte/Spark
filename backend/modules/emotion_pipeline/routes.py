@@ -102,3 +102,62 @@ async def shadow_stats():
         "by_behavior": dict(beh_c.most_common()),
         "by_kernwaarde": dict(kw_c.most_common()),
     }
+
+
+# v6_emotion_pipeline_ab_001 — A/B diff-view endpoints
+@router.get("/ab/recent")
+async def ab_recent(limit: int = 50, only_mismatches: bool = False):
+    """Recente A/B-vergelijkingen tussen huidige route en pipeline-advies."""
+    from pathlib import Path as _P
+    import json as _json
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+
+    ab_dir = _P(__file__).parent.parent.parent / "data" / "emotions" / "pipeline_ab"
+    runs = []
+    for i in range(7):
+        day = (_dt.now(_tz.utc) - _td(days=i)).strftime("%Y-%m-%d")
+        f = ab_dir / f"{day}.jsonl"
+        if not f.exists():
+            continue
+        try:
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                try:
+                    runs.append(_json.loads(line))
+                except Exception:
+                    pass
+        except Exception:
+            continue
+    runs.sort(key=lambda r: r.get("ts", ""), reverse=True)
+    if only_mismatches:
+        runs = [r for r in runs if r.get("diff_status") in ("mismatch", "potential")]
+    return {"success": True, "total": len(runs), "runs": runs[:limit]}
+
+
+@router.get("/ab/stats")
+async def ab_stats():
+    """Aggregatie van A/B diff-statussen: match / mismatch / potential / no_pipeline."""
+    from collections import Counter
+    r = await ab_recent(limit=10000)
+    runs = r.get("runs", [])
+    status_c = Counter()
+    route_c = Counter()
+    mismatch_routes = Counter()
+    for x in runs:
+        ds = x.get("diff_status") or "unknown"
+        status_c[ds] += 1
+        cr = x.get("current_route") or "unknown"
+        route_c[cr] += 1
+        if ds in ("mismatch", "potential"):
+            mismatch_routes[cr] += 1
+    return {
+        "success": True,
+        "total_runs": len(runs),
+        "by_diff_status": dict(status_c.most_common()),
+        "by_current_route": dict(route_c.most_common()),
+        "mismatches_per_route": dict(mismatch_routes.most_common()),
+        "match_ratio": (
+            (status_c.get("match", 0) / max(1, sum(status_c.values()))) if status_c else 0.0
+        ),
+    }

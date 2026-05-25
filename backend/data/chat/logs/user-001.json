@@ -20984,11 +20984,404 @@
         "session_id": "default",
         "gesprek_nummer": 807
       }
+    },
+    {
+      "id": "conv-5425b19c",
+      "timestamp": "2026-05-25T23:16:55.558397+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ben helemaal woest!",
+      "spark_response": "Ik ken deze woorden nog niet: **helemaal, woest**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'woest' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "helemaal",
+          "woest"
+        ],
+        "snap_suggestions": [
+          "helemaal",
+          "woest"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 808
+      }
+    },
+    {
+      "id": "conv-beb245ab",
+      "timestamp": "2026-05-25T23:16:55.600961+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe gaat het",
+      "spark_response": "Heel goed! Ik geniet van ons gesprek. 💚 Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 809
+      }
+    },
+    {
+      "id": "conv-088e7747",
+      "timestamp": "2026-05-25T23:16:55.646748+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is de tijd",
+      "spark_response": "Het is **01:16** (dinsdag 26 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 810
+      }
+    },
+    {
+      "id": "conv-052d922d",
+      "timestamp": "2026-05-25T23:16:55.725574+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel kort over vriend",
+      "spark_response": "**vriend** _(lade: voelen, kort)_:\n\nEen vriend is iemand met wie een persoon een sociale, persoonlijke of emotionele band heeft.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vriend"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "kbv2_tell_short",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "kbv2_tell_kort"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 811
+      }
+    },
+    {
+      "id": "conv-406f5f9c",
+      "timestamp": "2026-05-25T23:17:17.355489+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ben boos en gefrustreerd",
+      "spark_response": "Ik begrijp dat je boos bent\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n**gefrustreerd**: Gefrustreerd betekent dat iemand spanning, irritatie of teleurstelling voelt omdat iets niet lukt of tegenwerkt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 12,
+          "intensity": 0.76,
+          "triggered_words": [
+            "boos",
+            "gefrustreerd"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boos"
+          },
+          {
+            "begrip": "gefrustreerd"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 812
+      }
+    },
+    {
+      "id": "conv-50a8eada",
+      "timestamp": "2026-05-25T23:17:17.396178+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ben verdrietig en moe",
+      "spark_response": "Dat spijt me om te horen 💙\n\n**verdrietig**: Verdrietig betekent dat iemand zich emotioneel pijn gedaan, somber of ongelukkig voelt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 10,
+          "intensity": 0.7,
+          "triggered_words": [
+            "verdrietig"
+          ],
+          "source": "both",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat spijt me om te horen 💙"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "verdrietig"
+          },
+          {
+            "begrip": "moe"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 813
+      }
+    },
+    {
+      "id": "conv-947392df",
+      "timestamp": "2026-05-25T23:17:17.443509+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is een vriend",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vriend"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 814
+      }
+    },
+    {
+      "id": "conv-c328c30e",
+      "timestamp": "2026-05-25T23:18:00.181326+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ben boos en gefrustreerd",
+      "spark_response": "Ik begrijp dat je boos bent\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n**gefrustreerd**: Gefrustreerd betekent dat iemand spanning, irritatie of teleurstelling voelt omdat iets niet lukt of tegenwerkt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 15,
+          "intensity": 0.85,
+          "triggered_words": [
+            "boos",
+            "gefrustreerd"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boos"
+          },
+          {
+            "begrip": "gefrustreerd"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 815
+      }
+    },
+    {
+      "id": "conv-8d4f2e4d",
+      "timestamp": "2026-05-25T23:18:00.223247+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik ben verdrietig en moe",
+      "spark_response": "Wil je erover praten?\n\n**verdrietig**: Verdrietig betekent dat iemand zich emotioneel pijn gedaan, somber of ongelukkig voelt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 10,
+          "intensity": 0.7,
+          "triggered_words": [
+            "verdrietig"
+          ],
+          "source": "both",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wil je erover praten?"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "verdrietig"
+          },
+          {
+            "begrip": "moe"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 816
+      }
+    },
+    {
+      "id": "conv-ed4fc01a",
+      "timestamp": "2026-05-25T23:18:00.268924+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is de tijd",
+      "spark_response": "Het is **01:18** (dinsdag 26 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 817
+      }
+    },
+    {
+      "id": "conv-75b42f43",
+      "timestamp": "2026-05-25T23:18:00.311279+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat leuk ben blij",
+      "spark_response": "Wat mooi om te horen\n\n**Blij**: Blij is een gevoel van vreugde of tevredenheid.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "blij",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "blij"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Blij"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 818
+      }
+    },
+    {
+      "id": "conv-51e18ea4",
+      "timestamp": "2026-05-25T23:18:00.362113+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe gaat het",
+      "spark_response": "Heel goed! Ik geniet van ons gesprek. 💚 Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 819
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 807,
-    "last_updated": "2026-05-25T22:59:03.110773+00:00"
+    "total_conversations": 819,
+    "last_updated": "2026-05-25T23:18:00.362113+00:00"
   }
 }

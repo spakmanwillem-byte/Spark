@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 526,
+    "events": 538,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 176
+    "knowledge_matches": 185
   },
   "triggers_used": {
     "wedervraag_done": 21,
@@ -44,7 +44,7 @@
     "action_stt_off": 6,
     "action_ambient_on": 13,
     "action_ambient_off": 10,
-    "time_now": 4,
+    "time_now": 6,
     "action_tts_on": 12,
     "action_tts_off": 7,
     "account_delete_start": 4,
@@ -67,7 +67,7 @@
     "doc_survivalgids_appended": 1,
     "spark_self_noted": 1,
     "spark_self_read": 2,
-    "how_are_you": 1,
+    "how_are_you": 3,
     "community_recap": 7,
     "dnd_help": 5,
     "kbv2_audit_kb": 1,
@@ -75,15 +75,15 @@
     "kbv2_learn_word": 1,
     "kbv2_make_dnd": 1,
     "capability_response": 8,
-    "capability_placeholder": 1,
-    "kbv2_tell_short": 2,
+    "capability_placeholder": 2,
+    "kbv2_tell_short": 3,
     "kbv2_tell_deep": 2,
     "kbv2_tell_more": 1,
     "kbv2_tell_full": 1
   },
   "response_types": {
-    "knowledge": 101,
-    "unknown": 19,
+    "knowledge": 106,
+    "unknown": 20,
     "wedervraag_done": 21,
     "wedervraag": 28,
     "wedervraag_skip": 16,
@@ -123,7 +123,7 @@
     "action_stt_off": 6,
     "action_ambient_on": 13,
     "action_ambient_off": 10,
-    "time_now": 4,
+    "time_now": 6,
     "action_tts_on": 12,
     "action_tts_off": 7,
     "account_delete_confirm_1": 4,
@@ -147,7 +147,7 @@
     "doc_survivalgids_appended": 1,
     "spark_self_noted": 1,
     "spark_self_read": 2,
-    "how_are_you": 1,
+    "how_are_you": 3,
     "community_recap": 7,
     "dnd_help": 5,
     "kbv2_neighbor": 1,
@@ -156,8 +156,8 @@
     "kbv2_cmd_learned": 1,
     "card_made_dnd": 1,
     "capability_response": 8,
-    "capability_placeholder": 1,
-    "kbv2_tell_kort": 2,
+    "capability_placeholder": 2,
+    "kbv2_tell_kort": 3,
     "kbv2_tell_diep": 2,
     "kbv2_tell_meer": 1,
     "kbv2_tell_volledig": 1
@@ -214,7 +214,7 @@
     "Vervolgopleiding": 1,
     "Reactie": 1,
     "verkeerd": 1,
-    "Blij": 2,
+    "Blij": 3,
     "gedaan": 2,
     "bijna": 1,
     "Slapen": 1,
@@ -276,13 +276,16 @@
     "community": 1,
     "vriend": 1,
     "klaar": 1,
-    "Boos": 1,
-    "Systeem": 1
+    "Boos": 3,
+    "Systeem": 1,
+    "gefrustreerd": 2,
+    "verdrietig": 2,
+    "moe": 2
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-25T22:59:03.129428+00:00",
+  "last_event_at": "2026-05-25T23:18:00.381308+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

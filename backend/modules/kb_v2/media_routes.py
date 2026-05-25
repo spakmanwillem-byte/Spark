@@ -199,6 +199,13 @@ async def upload_voice(
     _patch_card_media(card_id, lade or _resolve_lade(card_id),
                       {"voice_url": voice_url, "voice_transcript": transcript}, user_id)
 
+    # v6_kbv2_hooks_landing_001 — Hook 5: bewaar transcript ook als dialoog-snippet
+    try:
+        from . import hooks as kbv2_hooks
+        kbv2_hooks.save_voice_snippet(transcript, card_id, user_id, voice_url=voice_url)
+    except Exception:
+        pass
+
     return {
         "success": True,
         "voice_url": voice_url,
@@ -372,6 +379,14 @@ async def upload_secondary_audio(
                 k["needs"] = service._compute_needs(k)
                 save_json(ip, inbox)
                 break
+
+    # v6_kbv2_hooks_landing_001 — Hook 5: bewaar transcript van 2e spraak-audio ook als snippet
+    if transcript:
+        try:
+            from . import hooks as kbv2_hooks
+            kbv2_hooks.save_voice_snippet(transcript, card_id, user_id, voice_url=url)
+        except Exception:
+            pass
 
     return {"success": True, "item": item}
 

@@ -1,0 +1,10 @@
+{"ts": "2026-05-25T15:03:00.406705+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "hook_test_xyz", "lade": "weten", "active": "True", "is_new": "True"}}
+{"ts": "2026-05-25T15:03:00.426005+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "hook_test_xyz", "found": "5"}}
+{"ts": "2026-05-25T15:03:00.470795+00:00", "module": "kbv2_hooks", "fn": "link_to_dnd", "phase": "event", "intent": "lore-koppeling", "detail": {"begrip": "hook_test_xyz", "action": "added"}}
+{"ts": "2026-05-25T15:03:16.041025+00:00", "module": "kbv2_hooks", "fn": "save_voice_snippet", "phase": "event", "intent": "dialoog-snippet bewaard", "detail": {"card_id": "kbv2-3f3ed863", "chars": "38", "date": "2026-05-25"}}
+{"ts": "2026-05-25T15:05:09.818896+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "vriend", "lade": "voelen", "active": "True", "is_new": "True"}}
+{"ts": "2026-05-25T15:05:09.822097+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "vriend", "found": "5"}}
+{"ts": "2026-05-25T15:14:23.855405+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "vriend", "lade": "voelen", "active": "True", "is_new": "False"}}
+{"ts": "2026-05-25T15:14:23.858229+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "vriend", "found": "5"}}
+{"ts": "2026-05-25T15:18:07.437204+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "vriend", "lade": "voelen", "active": "True", "is_new": "False"}}
+{"ts": "2026-05-25T15:18:07.458399+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "vriend", "found": "5"}}

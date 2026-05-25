@@ -615,6 +615,22 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
         </div>
       )}
 
+      {/* v6_kbv2_hooks_landing_001 — Verbanden (Hook 3 output) */}
+      {(card.verbanden || []).length > 0 && (
+        <div data-testid="kbv2-verbanden" className="border-t border-slate-800 pt-2">
+          <p className="text-[10px] uppercase text-slate-500 tracking-wide mb-1">🕸️ Gerelateerd ({(card.verbanden || []).length})</p>
+          <div className="flex flex-wrap gap-1.5">
+            {(card.verbanden || []).slice(0, 5).map((v, i) => (
+              <span key={i} data-testid={`kbv2-verband-${i}`}
+                title={`Gedeelde tags: ${(v.shared_tags || []).join(', ')}`}
+                className="px-2 py-0.5 rounded-md text-[10px] bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
+                {v.begrip} <span className="text-slate-500">· {v.lade} · ⨯{v.overlap}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Footnote */}
       {card.footnote && (
         <div className="text-[10px] text-slate-500 border-t border-slate-800 pt-2 leading-relaxed">

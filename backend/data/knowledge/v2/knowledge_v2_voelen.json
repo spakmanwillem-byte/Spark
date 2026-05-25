@@ -34,30 +34,109 @@
         "vriend",
         "vriendschap",
         "relatie",
-        "Verbinding",
+        "verbinding",
         "vertrouwen",
         "sociaal",
         "emotie",
         "steun",
         "herkenning",
-        "gesprek",
-        "Herinnering",
-        "samen",
-        "communicatie",
-        "loyaliteit",
-        "interactie",
-        "blij",
-        "neutraal"
+        "gesprek"
       ],
       "topic": "relatie",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-80a2976e",
+          "begrip": "Vriendschap",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "relatie",
+            "steun",
+            "verbinding",
+            "vertrouwen",
+            "vriend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7784634a",
+          "begrip": "Maurice Maas is een goede vriend",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "sociaal",
+            "steun",
+            "vertrouwen",
+            "vriend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8197c815",
+          "begrip": "Mijn vriend",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "relatie",
+            "sociaal",
+            "verbinding",
+            "vertrouwen",
+            "vriendschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herkenning",
+            "relatie",
+            "sociaal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "herkenning",
+            "relatie",
+            "sociaal",
+            "verbinding"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "joel123",
         "ingedeeld_door": "kbv2_migratie",
         "ingedeeld_op": "2026-05-23T12:02:15.260017+00:00",
         "vorige_versie_v1": "kb-cc7f1b8b",
         "vertrouwen": 0.9,
-        "belangrijkheid": 4
+        "belangrijkheid": 4,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-25T15:18:07.384686+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:18:07.437327+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-25T15:18:07.458385+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

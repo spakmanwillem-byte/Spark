@@ -460,7 +460,7 @@
     },
     {
       "id": "ec59e5bf-2860-499b-80e0-3720013588c4",
-      "description": "Test bug — dashboard kaart Gesprekken toonde fake data",
+      "description": "Test bug \u2014 dashboard kaart Gesprekken toonde fake data",
       "when": "vanmiddag rond 11u",
       "page": "Dashboard",
       "status": "nieuw",
@@ -499,7 +499,7 @@
       "created_at": "2026-05-20T05:52:51.524441+00:00",
       "created_by": "user-001",
       "status": "opgelost",
-      "description": "[Trade] Potje toont hardcoded BCH-EUR ook als je BTC kocht — geen visuele scheiding per coin",
+      "description": "[Trade] Potje toont hardcoded BCH-EUR ook als je BTC kocht \u2014 geen visuele scheiding per coin",
       "resolution_note": "v4_potje_market_001: open_pot() bewaart nu market-veld per potje. UI kan straks per potje tonen welke coin erin zit.",
       "resolved_at": "2026-05-20T05:52:51.524441+00:00"
     },
@@ -702,7 +702,7 @@
     },
     {
       "id": "3c7ccb12-9bdc-4ba2-a41d-39a6c561ddf5",
-      "description": "Je kan alleen in privé gesprekken bericht sturen/ontvangen na vriendschap verzoek. moet een kader voor komen in mijn profiel user. \nEn Link of verbonden kader dashboard.",
+      "description": "Je kan alleen in priv\u00e9 gesprekken bericht sturen/ontvangen na vriendschap verzoek. moet een kader voor komen in mijn profiel user. \nEn Link of verbonden kader dashboard.",
       "when": null,
       "page": null,
       "status": "nieuw",
@@ -738,7 +738,7 @@
     },
     {
       "id": "d37a8fe6-c5fe-49ab-9221-8f0d0e0d6abd",
-      "description": "Roadkill ROAR Token\nROAR Token\nSpark Core Aandeel\n\n€6.91\n\nDynamische prijs = Spark Core / tokens\n\nBitvavo: €151.96\n\nJouw tokens: 10 ROAR\nWaarde: €69.10\nIn Omloop\n\n22\n\nSpark Core\n\n€151.96\n\nMarket Cap\n\n€152.02\n\nis de API wel verbonden en of kasboek aan spark core want veranderd niet core of lijkt",
+      "description": "Roadkill ROAR Token\nROAR Token\nSpark Core Aandeel\n\n\u20ac6.91\n\nDynamische prijs = Spark Core / tokens\n\nBitvavo: \u20ac151.96\n\nJouw tokens: 10 ROAR\nWaarde: \u20ac69.10\nIn Omloop\n\n22\n\nSpark Core\n\n\u20ac151.96\n\nMarket Cap\n\n\u20ac152.02\n\nis de API wel verbonden en of kasboek aan spark core want veranderd niet core of lijkt",
       "when": null,
       "page": null,
       "status": "nieuw",
@@ -809,6 +809,36 @@
           "note": null
         }
       ]
+    },
+    {
+      "id": "733a8bb9",
+      "title": "KB v2: onbruikbare kaarten kunnen niet verwijderd worden",
+      "description": "Bij KB v2 cards die compleet onbruikbaar zijn (bv. lege test-kaarten) is geen UI-knop om ze permanent te verwijderen. Frontend mist DELETE-knop in CardDetail. Backend heeft wel mutatie-endpoints maar geen DELETE /api/kb/v2/card/{id}.",
+      "severity": "medium",
+      "status": "open",
+      "reported_by": "user-001",
+      "reported_at": "2026-05-25T15:04:13.540986+00:00",
+      "tags": [
+        "kbv2",
+        "ui",
+        "cleanup"
+      ],
+      "note": "Genoteerd in sessie 11 \u2014 niet voor nu, opnemen in volgend cluster."
+    },
+    {
+      "id": "fa4b0f87",
+      "title": "KB v2: 3 Bijbel-kaarten staan klaar compleet voor toekomstig gebruik",
+      "description": "Willem heeft 3 Bijbel-thema kaarten compleet gemaakt (laag 1-4 + 5W). Wacht op specifiek gebruik in Spark World v2 of D&D-laag.",
+      "severity": "info",
+      "status": "open",
+      "reported_by": "user-001",
+      "reported_at": "2026-05-25T15:04:13.540986+00:00",
+      "tags": [
+        "kbv2",
+        "content",
+        "todo"
+      ],
+      "note": "Memo-bug \u2014 geen fix vereist."
     }
   ]
 }

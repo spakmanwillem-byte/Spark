@@ -34,7 +34,7 @@ LADE_META = {
     "doen": {"icon": "🎭", "naam": "Doen", "stroom": "Gedrag & Actie"},
 }
 
-_lock = threading.Lock()
+_lock = threading.RLock()
 
 
 def _lade_path(lade: str) -> Path:
@@ -301,7 +301,47 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
         }
         save_json(_index_path(), idx)
 
+    # v6_kbv2_hooks_landing_001 — 5 hooks landen (post-save zodat data consistent is)
+    _fire_post_classify_hooks(card, lade)
+
     return {"success": True, "kaart": card, "lade": lade}
+
+
+def _fire_post_classify_hooks(card: Dict, lade: str) -> None:
+    """v6_kbv2_hooks_landing_001 — fire hooks 1/3/4 na succesvolle classify/edit.
+    Faalt graceful (try/except per hook) zodat 1 broken hook nooit een save blokkeert."""
+    try:
+        from . import hooks as kbv2_hooks
+    except Exception:
+        return
+    # Hook 1: Vocab register
+    try:
+        kbv2_hooks.register_in_vocab(card)
+    except Exception as e:
+        log_event("kbv2_hooks", "register_in_vocab_error", intent="hook-fail", detail={"err": str(e)[:120]})
+    # Hook 3: Auto-graph verbanden
+    try:
+        verbanden = kbv2_hooks.compute_verbanden(card)
+        if verbanden:
+            # Schrijf terug in de kaart
+            with _lock:
+                if lade and lade != "inbox":
+                    d = load_json(_lade_path(lade), default={"kaarten": []})
+                    for k in d.get("kaarten", []):
+                        if k.get("id") == card.get("id"):
+                            k["verbanden"] = verbanden
+                            # Sync footnote.hooks_fired uit in-memory card
+                            if card.get("footnote", {}).get("hooks_fired"):
+                                k.setdefault("footnote", {})["hooks_fired"] = card["footnote"]["hooks_fired"]
+                            break
+                    save_json(_lade_path(lade), d)
+    except Exception as e:
+        log_event("kbv2_hooks", "compute_verbanden_error", intent="hook-fail", detail={"err": str(e)[:120]})
+    # Hook 4: D&D koppeling
+    try:
+        kbv2_hooks.link_to_dnd(card)
+    except Exception as e:
+        log_event("kbv2_hooks", "link_to_dnd_error", intent="hook-fail", detail={"err": str(e)[:120]})
 
 
 @traced(intent="bestaande kaart in lade bewerken", module="kbv2")
@@ -336,6 +376,8 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                         if k.get("_inbox_reason") == "missing_laag1":
                             k.pop("_inbox_reason", None)
                     save_json(inbox_path, data)
+                    # v6_kbv2_hooks_landing_001 — herfire hooks ook bij inbox-edit
+                    _fire_post_classify_hooks(k, "inbox")
                     return {"success": True, "kaart": k}
             return {"success": False, "message": f"Inbox-kaart '{card_id}' niet gevonden"}
     if lade not in LADES:
@@ -370,6 +412,8 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                     "last_updated": _now(),
                 }
                 save_json(_index_path(), idx)
+                # v6_kbv2_hooks_landing_001 — herfire hooks na elke edit (lade-kaart)
+                _fire_post_classify_hooks(k, lade)
                 return {"success": True, "kaart": k}
     return {"success": False, "message": f"Kaart '{card_id}' niet gevonden in lade '{lade}'"}
 

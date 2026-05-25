@@ -1,6 +1,21 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_kbv2_hooks_landing_001** (sessie 11, vervolg — 5 hooks LIVE):
+  - 🧩 **Alle 5 KB v2 P1-hooks geïmplementeerd** in `modules/kb_v2/hooks.py` (placeholders → productiecode):
+    1. **register_in_vocab** → `/data/personality/spark_vocab.json` (begrip + lade + active + use_count). Active wanneer kaart in lade EN laag1 gevuld. `bump_vocab_use_count()` toegevoegd voor toekomstige ranking.
+    2. **cmd_tell_layer (depth-router)** → "vertel kort/meer/diep/volledig over X" → cumulatief laag1 / 1+2 / 1+2+3 / 1+2+3+4. Sla `last_kbv2_card_id` op in session-state voor follow-up.
+    3. **compute_verbanden** → top-5 related cards via shared tags (min_overlap=2), schrijf naar `kaart.verbanden[]`. **UI**: "🕸️ Gerelateerd (N)" cyan-chips sectie in CardDetail, hover toont shared tags.
+    4. **link_to_dnd** → kaart met tag `lore/dnd/spark world/base line` → `/data/dnd/lore_index.json` met `{type, trigger, unlocks, tags}`. Idempotent op `kbv2_card_id`.
+    5. **save_voice_snippet** → Whisper-transcripties → `/data/dialogen/voice_snippets/YYYY-MM-DD/{card_id}_{uuid}.json`. Hook gebeurt in zowel primary als secondary audio upload.
+  - 🧾 **Footnote-meta tracer** (`track_hook_in_card`): elke hook-fire append entry `{hook, fired_at, result}` aan `card.footnote.hooks_fired[]` (max 25 laatste). Zo zien toekomstige agenten exact wat er met een kaart is gebeurd, zonder logs te scannen.
+  - 🔗 **Hook-orchestrator** `_fire_post_classify_hooks()` in service.py wordt aangeroepen na classify EN edit (zowel lade als inbox). Faalt graceful per hook (try/except).
+  - 🔁 **threading.RLock** ipv Lock om reentrant calls (hook 3 schrijft verbanden binnen edit_card lock) te ondersteunen — voorkomt deadlock.
+  - 📜 **Bugs noted (niet gefixt, voor later)**:
+    - KB v2: onbruikbare kaarten kunnen niet verwijderd worden (geen DELETE knop/endpoint)
+    - 3 Bijbel-kaarten compleet, wachten op gebruik in Spark World v2/D&D
+  - ✅ E2E getest: 4 chat depth-commands (kort/meer/diep/volledig) → cumulatieve lagen. Edit van "vriend" → 5 verbanden gevonden (Vriendschap ⨯6, Maurice Maas ⨯6, Mijn vriend ⨯5, lotte ⨯5, klaas ⨯5). UI "Gerelateerd"-sectie rendert correct. Vocab + lore_index + voice_snippets folders aangemaakt.
+
 - 2026-05-25 **v6_kbv2_unify_001 + v6_gift_idempotent_001** (sessie 11, fork):
   - 🧩 **KB v2 unificatie CardDetail ↔ NewCardInline**:
     - Nieuwe gedeelde `CardFormFields` component voor Laag 1-4 + 5W + Tags

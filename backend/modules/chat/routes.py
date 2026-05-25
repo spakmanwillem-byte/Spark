@@ -538,6 +538,7 @@ async def process_message(req: ChatMessage):
 
         # v5_kbv2_hooks_001 — KB v2 chat-commands (search/learn/audit/inbox-stats)
         # v5_card_factory_001 — uitgebreid met card-factory commands (maak DnD/Event/Bark)
+        # v6_kbv2_hooks_landing_001 — depth-arg doorgeven + last_kbv2_card_id session-state
         try:
             from modules.kb_v2 import hooks as kbv2_hooks
             match = kbv2_hooks.match_kbv2_command(text)
@@ -552,8 +553,16 @@ async def process_message(req: ChatMessage):
                     if handler_name == "cmd_make_card":
                         kwargs["user_id"] = req.user_id or "user-000"
                         kwargs["card_type"] = cmd.get("card_type", "dnd")
+                    if handler_name == "cmd_tell_layer":
+                        kwargs["depth"] = cmd.get("depth", 1)
                     out = handler(query, **kwargs) if kwargs else handler(query)
                     response.update(out)
+                    # Sla referentie op zodat follow-up vragen ("en wat nog meer?") deze kaart kunnen oppakken
+                    if out.get("kbv2_card_id") and req.user_id:
+                        try:
+                            session_state.set_state(req.user_id, last_kbv2_card_id=out["kbv2_card_id"])
+                        except Exception:
+                            pass
                     _save_log(req, response, f"kbv2_{cmd['id']}")
                     return response
         except Exception:

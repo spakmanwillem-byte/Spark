@@ -1,6 +1,21 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_polish_001** (sessie 11 — laatste polish + KB delete):
+  - 🔢 **Kernwaarden 11 → 9**: "Groeien" + "Emoties" verwijderd uit spark_bijbel (volgens productie-sync van De Willem). Topbar + Identity tegels tonen nu correcte 9.
+  - 🌗 **Shadow widget** in Spark Brain → Emotie Pipeline tab:
+    - Live activity-blok bovenaan met "Live activity — pipeline draait nu mee in chat"
+    - Stats: totaal runs (7d) / unieke emoties / kernwaarden geraakt
+    - Top emoties + Top behaviors chips (pink + cyan)
+    - Lijst laatste 15 chat-runs: timestamp · emotie · kernwaarde · behavior · weging + message-preview
+    - Refresh-knop voor live updates
+  - 🗑️ **KB v2 DELETE endpoint + UI** (v6_kbv2_delete_001):
+    - Backend `POST /api/kb/v2/delete` met `card_id`, `lade`, `user_id`, `reason` — verwijdert uit lade-bestand + knowledge_index, logged naar spark_logger
+    - Frontend: rode `Trash2` knop in CardDetail header naast Bewerken
+    - Custom confirm-modal met begrip-naam + optionele reden-textarea voor traceability
+    - Toast-feedback bij success/error
+  - 🗺️ **Communicatie-systeem expliciet in roadmap**: 7 done items + 2 planned (intent-router expansie + externe kanalen WhatsApp/Signal). Niet langer impliciet — overzicht zichtbaar in Roadmap-tab.
+
 - 2026-05-25 **v6_core_stabilisatie_001** (sessie 11 — Spark Core stabiel + linked):
   - 🆔 **Identity v0.1 → v2.0** (was v1.0): we zijn voorbij v1 want we hebben emotie-pipeline + hooks + disclaimer + capabilities live. Maker = **"De Willem"** (Roadkill/Willem Spakman naar metadata.maker_aliassen voor legacy).
   - 🔗 **Linked layers veld** in identity.json: live counts van kernwaarden/normen/bijbel/capabilities/emotie-lagen/kb-hooks. **UI**: 6 kleurig-coded tegels onder "Doel" tonen real-time architecturele staat.

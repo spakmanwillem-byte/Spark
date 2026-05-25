@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { toast } from 'sonner';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
@@ -46,6 +47,9 @@ export function KennisbankV2Page({ onNavigate }) {
   const [creatingNew, setCreatingNew] = useState(false);
   // v6_kbv2_unify_001 — duplicate-begrip check
   const [dupCheck, setDupCheck] = useState({ checking: false, exists: false, info: null });
+  // v6_kbv2_delete_001 — permanent verwijderen
+  const [confirmDelete, setConfirmDelete] = useState(null);
+  const [deleteReason, setDeleteReason] = useState('');
   // v6_kbv2_herzien_001 — KB v1 → KB v2 migratie-modus
   const [herzienV1, setHerzienV1] = useState(null);       // de v1-kaart die nu wordt herzien
   const [herzienRemaining, setHerzienRemaining] = useState(0);
@@ -214,6 +218,38 @@ export function KennisbankV2Page({ onNavigate }) {
     setEditMode(false);
     setHerzienV1(null);
     setDupCheck({ checking: false, exists: false, info: null });
+  };
+
+  // v6_kbv2_delete_001 — permanent verwijderen via /api/kb/v2/delete
+  const doDelete = async () => {
+    if (!confirmDelete) return;
+    try {
+      const r = await fetch(`${API}/api/kb/v2/delete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          card_id: confirmDelete.id,
+          lade: activeTab,
+          user_id: 'user-001',
+          reason: deleteReason,
+        }),
+      });
+      const j = await r.json();
+      if (j.success) {
+        toast.success(`Kaart "${j.begrip}" verwijderd`);
+        setSelectedCard(null);
+        setEditMode(false);
+        setEditForm(null);
+        await loadItems();
+      } else {
+        toast.error(j.message || 'Verwijderen mislukt');
+      }
+    } catch (e) {
+      toast.error(`Netwerkfout: ${e.message}`);
+    } finally {
+      setConfirmDelete(null);
+      setDeleteReason('');
+    }
   };
 
   // v6_kbv2_unify_001 — debounced duplicate-check tegen knowledge_index.json
@@ -472,7 +508,8 @@ export function KennisbankV2Page({ onNavigate }) {
                 onCancelEdit={() => { setEditMode(false); setEditForm(null); }}
                 onClassify={classifyTo} onSaveEdit={saveEdit}
                 saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab}
-                onMediaUpdated={loadItems} />
+                onMediaUpdated={loadItems}
+                onDeleteCard={() => setConfirmDelete(selectedCard)} />
             )}
           </div>
         </div>
@@ -480,6 +517,43 @@ export function KennisbankV2Page({ onNavigate }) {
         {/* Audit modal */}
         {showAudit && auditData && (
           <AuditModal data={auditData} onClose={() => setShowAudit(false)} />
+        )}
+
+        {/* v6_kbv2_delete_001 — Confirm delete modal */}
+        {confirmDelete && (
+          <div data-testid="kbv2-delete-modal"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setConfirmDelete(null)}>
+            <div className="bg-slate-900 border border-red-500/40 rounded-xl p-5 max-w-md w-full" onClick={e => e.stopPropagation()}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-full bg-red-500/15 flex items-center justify-center">
+                  <Trash2 className="w-4 h-4 text-red-400" />
+                </div>
+                <h3 className="text-base font-bold text-white">Kaart permanent verwijderen?</h3>
+              </div>
+              <p className="text-sm text-slate-300 mb-2">
+                Begrip <span className="text-red-300 font-medium">"{confirmDelete.begrip || '(leeg)'}"</span> wordt verwijderd uit <span className="text-slate-400">{activeTab}</span>.
+              </p>
+              <p className="text-[10px] text-slate-500 mb-4">Dit kan niet ongedaan worden. ID: <code>{confirmDelete.id}</code></p>
+              <textarea data-testid="kbv2-delete-reason"
+                value={deleteReason} onChange={e => setDeleteReason(e.target.value)}
+                placeholder="Reden (optioneel, voor traceability)…"
+                rows={2}
+                className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 mb-3 resize-none" />
+              <div className="flex justify-end gap-2">
+                <button data-testid="kbv2-delete-cancel"
+                  onClick={() => { setConfirmDelete(null); setDeleteReason(''); }}
+                  className="px-4 py-2 text-sm rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800">
+                  Annuleren
+                </button>
+                <button data-testid="kbv2-delete-confirm"
+                  onClick={doDelete}
+                  className="px-4 py-2 text-sm rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium">
+                  Ja, verwijderen
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </MainLayout>
@@ -575,10 +649,19 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
           {isComplete ? '✓ 100% gekuurd' : `${pct}% (${filledCount}/${totalFields})`}
         </div>
         {!editMode ? (
-          <button data-testid="kbv2-edit-btn" onClick={onStartEdit}
-            className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-300 hover:bg-slate-800 flex items-center gap-1">
-            <Edit3 className="w-3 h-3" /> Bewerken
-          </button>
+          <>
+            <button data-testid="kbv2-edit-btn" onClick={onStartEdit}
+              className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-300 hover:bg-slate-800 flex items-center gap-1">
+              <Edit3 className="w-3 h-3" /> Bewerken
+            </button>
+            {/* v6_kbv2_delete_001 — permanent delete-knop */}
+            <button data-testid="kbv2-delete-btn"
+              onClick={() => onDeleteCard && onDeleteCard()}
+              title="Permanent verwijderen (bv. onbruikbare kaart)"
+              className="px-2 py-1 text-xs border border-red-500/40 rounded text-red-400 hover:bg-red-500/15 flex items-center gap-1">
+              <Trash2 className="w-3 h-3" />
+            </button>
+          </>
         ) : (
           <button data-testid="kbv2-cancel-edit" onClick={onCancelEdit}
             className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-400 hover:bg-slate-800">

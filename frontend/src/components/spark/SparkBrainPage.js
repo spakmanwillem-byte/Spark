@@ -1110,10 +1110,29 @@ function EmotiePipelineSection() {
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState(null);
   const [layersDoc, setLayersDoc] = useState([]);
+  // v6_shadow_widget_001 — live activity uit chat-flow
+  const [shadowRuns, setShadowRuns] = useState([]);
+  const [shadowStats, setShadowStats] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     fetch(`${API}/api/emotion-pipeline/layers`).then(r => r.json()).then(d => setLayersDoc(d.layers || []));
+    loadShadow();
   }, []);
+
+  const loadShadow = async () => {
+    setRefreshing(true);
+    try {
+      const [r1, r2] = await Promise.all([
+        fetch(`${API}/api/emotion-pipeline/shadow/recent?limit=15`).then(x => x.json()),
+        fetch(`${API}/api/emotion-pipeline/shadow/stats`).then(x => x.json()),
+      ]);
+      setShadowRuns(r1.runs || []);
+      setShadowStats(r2);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const runPipeline = async () => {
     if (!text.trim()) return;
@@ -1239,6 +1258,94 @@ function EmotiePipelineSection() {
           </details>
         </div>
       )}
+
+      {/* v6_shadow_widget_001 — Live shadow activity uit chat-flow */}
+      <div data-testid="shadow-activity-widget" className="bg-slate-900/40 border border-cyan-500/30 rounded-xl overflow-hidden">
+        <div className="flex items-center gap-2 px-4 py-2.5 bg-cyan-500/10 border-b border-cyan-500/20">
+          <span className="text-cyan-300">🌗</span>
+          <h3 className="text-sm font-bold text-white">Live activity — pipeline draait nu mee in chat</h3>
+          <button data-testid="shadow-refresh-btn"
+            onClick={loadShadow} disabled={refreshing}
+            className="ml-auto px-2 py-1 text-[10px] border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/15 rounded disabled:opacity-40">
+            {refreshing ? 'Laden…' : '↻ Refresh'}
+          </button>
+        </div>
+
+        {/* Stats */}
+        {shadowStats && (shadowStats.total_runs > 0) && (
+          <div className="px-4 py-3 grid grid-cols-3 gap-3 border-b border-slate-800">
+            <div className="text-center">
+              <p className="text-base font-bold text-cyan-300">{shadowStats.total_runs}</p>
+              <p className="text-[9px] uppercase text-slate-500 tracking-wider">Totaal runs (7d)</p>
+            </div>
+            <div className="text-center">
+              <p className="text-base font-bold text-pink-300">{Object.keys(shadowStats.by_emotie || {}).length}</p>
+              <p className="text-[9px] uppercase text-slate-500 tracking-wider">Unieke emoties</p>
+            </div>
+            <div className="text-center">
+              <p className="text-base font-bold text-amber-300">{Object.keys(shadowStats.by_kernwaarde || {}).length}</p>
+              <p className="text-[9px] uppercase text-slate-500 tracking-wider">Kernwaarden geraakt</p>
+            </div>
+          </div>
+        )}
+
+        {/* Top emoties + behaviors */}
+        {shadowStats && Object.keys(shadowStats.by_emotie || {}).length > 0 && (
+          <div className="px-4 py-2 space-y-1.5 border-b border-slate-800">
+            <p className="text-[10px] uppercase text-slate-500 tracking-wider">Top emoties</p>
+            <div className="flex flex-wrap gap-1.5">
+              {Object.entries(shadowStats.by_emotie).slice(0, 6).map(([emo, n]) => (
+                <span key={emo} className="px-2 py-0.5 rounded text-[10px] bg-pink-500/15 text-pink-300 border border-pink-500/30">
+                  {emo} <span className="text-slate-500">×{n}</span>
+                </span>
+              ))}
+            </div>
+            {Object.keys(shadowStats.by_behavior || {}).length > 0 && (
+              <>
+                <p className="text-[10px] uppercase text-slate-500 tracking-wider mt-2">Top behaviors</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {Object.entries(shadowStats.by_behavior).slice(0, 5).map(([beh, n]) => (
+                    <span key={beh} className="px-2 py-0.5 rounded text-[10px] bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                      {beh} <span className="text-slate-500">×{n}</span>
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Recent runs */}
+        <div className="max-h-72 overflow-y-auto divide-y divide-slate-800/60">
+          {shadowRuns.length === 0 ? (
+            <div className="px-4 py-6 text-center text-xs text-slate-500">
+              Nog geen chat-runs geregistreerd. Stuur Spark een bericht en kom terug.
+            </div>
+          ) : (
+            shadowRuns.map((r, i) => {
+              const s = r.summary || {};
+              return (
+                <div key={i} data-testid={`shadow-run-${i}`}
+                     className="px-4 py-2 hover:bg-slate-800/30 transition-colors">
+                  <div className="flex items-center gap-2 text-[10px]">
+                    <span className="text-slate-500 font-mono">{(r.ts || '').slice(11, 16)}</span>
+                    <span className="text-pink-300">{s.emotie || '—'}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-amber-300">{s.kernwaarde || '—'}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-cyan-300">{s.behavior || '—'}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-slate-500">{s.weging || '—'}</span>
+                  </div>
+                  <p className="text-xs text-slate-300 mt-0.5 truncate">
+                    <span className="text-slate-500">›</span> {r.msg_preview || '(empty)'}
+                  </p>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
 
       {/* Layers doc onderaan */}
       {!result && layersDoc.length > 0 && (

@@ -101,6 +101,73 @@ async def edit(body: EditBody):
     return service.edit_card(body.card_id, body.lade, updates=body.updates, user_id=body.user_id)
 
 
+# v6_kbv2_delete_001 — permanent verwijderen van onbruikbare kaart
+class DeleteBody(BaseModel):
+    card_id: str
+    lade: str  # 'inbox' of een van LADES
+    user_id: str = "user-001"
+    reason: str = ""
+
+
+@router.post("/delete")
+async def delete_card(body: DeleteBody):
+    """Verwijder een KB v2 kaart permanent uit zijn lade (of inbox) + index.
+    Reden wordt gelogd in admin_log voor traceability."""
+    from modules.core.storage import load_json as _lj, save_json as _sj
+    from .service import LADES, _lade_path, _inbox_path, _index_path, _lock
+    from modules.core.spark_logger import log_event
+    from datetime import datetime, timezone
+
+    target = body.lade
+    if target != "inbox" and target not in LADES:
+        return {"success": False, "message": f"Onbekende lade: {target}"}
+
+    with _lock:
+        path = _inbox_path() if target == "inbox" else _lade_path(target)
+        data = _lj(path, default={"kaarten": []})
+        before = len(data.get("kaarten", []))
+        removed = None
+        new_kaarten = []
+        for k in data.get("kaarten", []):
+            if k.get("id") == body.card_id:
+                removed = k
+                continue
+            new_kaarten.append(k)
+        if removed is None:
+            return {"success": False, "message": f"Kaart '{body.card_id}' niet gevonden in '{target}'"}
+        data["kaarten"] = new_kaarten
+        _sj(path, data)
+
+        # Verwijder ook uit knowledge_index
+        idx = _lj(_index_path(), default={"entries": {}})
+        begrip_key = (removed.get("begrip") or "").lower().strip()
+        if begrip_key and begrip_key in idx.get("entries", {}):
+            if idx["entries"][begrip_key].get("kaart_id") == body.card_id:
+                del idx["entries"][begrip_key]
+                _sj(_index_path(), idx)
+
+    log_event("kbv2", "delete_card",
+              intent="card-verwijderd",
+              detail={
+                  "card_id": body.card_id,
+                  "lade": target,
+                  "begrip": removed.get("begrip"),
+                  "user_id": body.user_id,
+                  "reason": body.reason or "(geen reden opgegeven)",
+                  "before_count": before,
+                  "after_count": len(new_kaarten),
+                  "ts": datetime.now(timezone.utc).isoformat(),
+              })
+    return {
+        "success": True,
+        "message": f"Kaart '{removed.get('begrip')}' verwijderd uit {target}",
+        "card_id": body.card_id,
+        "begrip": removed.get("begrip"),
+        "lade": target,
+        "remaining_in_lade": len(new_kaarten),
+    }
+
+
 @router.post("/inbox/add")
 async def inbox_add(body: InboxAddBody):
     return service.add_to_inbox(body.begrip, source=body.source, user_id=body.user_id)

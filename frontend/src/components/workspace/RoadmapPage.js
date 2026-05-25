@@ -81,6 +81,11 @@ const phases = [
       { title: '🟰 KB-invul UI volledig consistent maken (één layout overal)', status: 'planned', anchor: 'kb-ui-unified', note: 'Voorwaarde voor topic-uniqueness check. CardDetail/NewCardInline/Herzien-flow moeten exact dezelfde velden + validatie hebben. Anders werkt geen enkele trigger betrouwbaar.' },
       { title: '🚫 Snap-creatie: topic-uniqueness check tegen knowledge_index.json', status: 'planned', anchor: 'snap-topic-unique', note: 'Bij nieuwe snap: als topic al bestaat → 2 opties: "Toevoegen aan bestaande kaart" / "Nieuwe variant maken". Voorkomt 5300 lege variant-kaarten.' },
       { title: '❌ Negatie-trigger: "nee niet [onderwerp]" → exclude voor sessie', status: 'planned', anchor: 'negate-trigger', note: 'User zegt "nee niet emotie" → Spark slaat in user-preferences excluded_topics op voor huidige sessie/snap-flow.' },
+      // v6_brainfart_004 — Bidirectionele intent-capability matcher (25-mei)
+      { title: '🎯 Command-registry: elke /api-endpoint krijgt intent-tags', status: 'planned', anchor: 'cmd-registry', note: 'JSON: {path, intent_tags[], required_params[], gradatie_min}. /agenda/list → [tijd,planning,bekijken]. /wallet/topup → [geld,toevoegen,wallet]. Geen 1-op-1 trigger→command meer.' },
+      { title: '🧭 Intent-extractor: user-zin → tag-vector', status: 'planned', anchor: 'intent-extractor', note: 'User zegt "Wat staat morgen op mijn agenda?" → extractor tagt [tijd,planning,bekijken]. Triggers worden primitieve versie hiervan. Later: emergent LLM voor robustere extractie.' },
+      { title: '🤝 Capability-matcher: tag-overlap score → top-3 kandidaat-commands', status: 'planned', anchor: 'cap-matcher', note: 'Bidirectioneel: user-intent ↔ command-capability ontmoeten elkaar in tag-ruimte. Spark kan nieuwe combinaties bedenken zonder hardcoded trigger.' },
+      { title: '❓ Disambiguation: bij meerdere matches → "Bedoelde je X of Y?"', status: 'planned', anchor: 'cmd-disambiguation', note: 'Voorkomt verkeerde uitvoer. Spark leert van gebruikers-keuze welke combinatie de juiste was → tags fine-tunen.' },
     ],
   },
   {

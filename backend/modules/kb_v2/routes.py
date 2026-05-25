@@ -106,6 +106,79 @@ async def inbox_add(body: InboxAddBody):
     return service.add_to_inbox(body.begrip, source=body.source, user_id=body.user_id)
 
 
+# ---------- v6_kbv2_hooks_landing_001: Eenmalige backfill ----------
+
+@router.post("/backfill-hooks")
+async def backfill_hooks(limit_per_lade: int = Query(0, ge=0, description="0 = alles")):
+    """Eenmalig: alle bestaande KB v2 kaarten door de 5 hooks halen zodat
+    vocab/verbanden/lore-koppeling/footnote.hooks_fired retroactief gevuld worden.
+
+    Batch-veilig: 1 save per lade (geen save per kaart).
+    Voor grote KB's mag je `limit_per_lade` zetten om in stapjes te draaien.
+    """
+    from . import hooks as kbv2_hooks
+    from modules.core.storage import load_json as _lj, save_json as _sj
+    from .service import LADES, _lade_path, _inbox_path
+
+    stats = {"by_lade": {}, "totals": {"cards": 0, "vocab_new": 0, "verbanden_added": 0, "lore_added": 0}}
+
+    # Verwerk lades + inbox
+    targets = [(L, _lade_path(L)) for L in LADES] + [("inbox", _inbox_path())]
+    for lade, path in targets:
+        data = _lj(path, default={"kaarten": []})
+        kaarten = data.get("kaarten", [])
+        if limit_per_lade > 0:
+            kaarten_to_process = kaarten[:limit_per_lade]
+        else:
+            kaarten_to_process = kaarten
+
+        n_processed = 0
+        n_verb = 0
+        n_lore = 0
+        n_vocab_new = 0
+        for k in kaarten_to_process:
+            # Hook 1: vocab register
+            try:
+                is_new = kbv2_hooks.register_in_vocab(k)
+                if is_new:
+                    n_vocab_new += 1
+            except Exception:
+                pass
+            # Hook 3: verbanden (alleen voor lade-kaarten, niet inbox)
+            if lade != "inbox":
+                try:
+                    verbanden = kbv2_hooks.compute_verbanden(k)
+                    if verbanden:
+                        k["verbanden"] = verbanden
+                        n_verb += 1
+                except Exception:
+                    pass
+            # Hook 4: D&D koppeling (alleen lade)
+            if lade != "inbox":
+                try:
+                    if kbv2_hooks.link_to_dnd(k):
+                        n_lore += 1
+                except Exception:
+                    pass
+            n_processed += 1
+
+        # Batch-save 1x per lade
+        _sj(path, data)
+        stats["by_lade"][lade] = {
+            "processed": n_processed,
+            "total_in_lade": len(kaarten),
+            "verbanden_added": n_verb,
+            "lore_added": n_lore,
+            "vocab_new": n_vocab_new,
+        }
+        stats["totals"]["cards"] += n_processed
+        stats["totals"]["verbanden_added"] += n_verb
+        stats["totals"]["lore_added"] += n_lore
+        stats["totals"]["vocab_new"] += n_vocab_new
+
+    return {"success": True, **stats}
+
+
 # ---------- Herzien-flow (v6_kbv2_herzien_001) ----------
 # Trekt 1 KB v1 kaart die nog niet gemigreerd is en presenteert hem voor
 # herziening + promotion naar KB v2 lade.

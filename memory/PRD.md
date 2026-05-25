@@ -1,6 +1,14 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_brain_delete_001** (sessie 11, mini-fix):
+  - 🐛 **Spark Brain delete-bug opgelost**: `window.confirm()` werkt niet betrouwbaar in iframe-context (preview + deployed), Willem kon kernwaarden/normen/bijbel-items niet verwijderen
+  - ✨ Custom **React confirm-modal** vervangt window.confirm — toont item-naam + sectie + Annuleren/Verwijderen
+  - 🍞 **Toast-feedback** (sonner) bij delete success/error en save success/error — geen "stille" failures meer
+  - 🛡️ Error handling: 404/500 toont nu netjes "Verwijderen mislukt: {detail}" ipv niks
+  - ✅ E2E getest: 11 kernwaarden → 10 na delete via UI confirm-modal werkt
+  - 📝 Modal heeft data-testids voor toekomstige automation (`confirm-delete-modal`, `confirm-delete-confirm`, `confirm-delete-cancel`)
+
 - 2026-05-25 **v6_emotion_pipeline_001** (sessie 11, vervolg — 7-laags fundering live):
   - 🧠 **Nieuwe module `modules/emotion_pipeline/`** met 7-laags pipeline (filosofie van Willem, geformuleerd via GPT):
     - **L1 Detectie** — wrapper rond bestaande `EmotionDetectionService` (geen dubbel werk)

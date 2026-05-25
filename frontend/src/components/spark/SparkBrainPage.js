@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { toast } from 'sonner';
 import {
   Brain, Heart, BookOpen, Star,
   Zap, Target, MessageSquare, ChevronDown, ChevronRight,
@@ -43,18 +44,48 @@ export function SparkBrainPage({ onNavigate }) {
       ? `${API}/api/spark/bijbel/${section}`
       : `${API}/api/spark/bijbel/${section}/${identifier}`;
     const method = mode === 'add' ? 'POST' : 'PUT';
-    await fetch(url, {
-      method, headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: data || {}, value }),
-    });
-    setEditor(null);
-    await loadBijbel();
+    try {
+      const res = await fetch(url, {
+        method, headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: data || {}, value }),
+      });
+      if (!res.ok) {
+        const eb = await res.json().catch(() => ({}));
+        toast.error(`Opslaan mislukt: ${eb.detail || res.status}`);
+        return;
+      }
+      toast.success(mode === 'add' ? 'Toegevoegd' : 'Opgeslagen');
+      setEditor(null);
+      await loadBijbel();
+    } catch (e) {
+      toast.error(`Netwerkfout: ${e.message}`);
+    }
   };
 
-  const deleteItem = async (section, identifier) => {
-    if (!confirm('Dit item permanent verwijderen?')) return;
-    await fetch(`${API}/api/spark/bijbel/${section}/${identifier}`, { method: 'DELETE' });
-    await loadBijbel();
+  // v6_brain_delete_001 — custom confirm-modal (window.confirm faalt in iframe)
+  const [confirmDel, setConfirmDel] = useState(null); // { section, identifier, label }
+
+  const deleteItem = (section, identifier, label = '') => {
+    setConfirmDel({ section, identifier, label });
+  };
+
+  const doDelete = async () => {
+    if (!confirmDel) return;
+    const { section, identifier } = confirmDel;
+    try {
+      const res = await fetch(`${API}/api/spark/bijbel/${section}/${identifier}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        toast.error(`Verwijderen mislukt: ${errBody.detail || res.status}`);
+      } else {
+        toast.success('Verwijderd');
+        await loadBijbel();
+      }
+    } catch (e) {
+      toast.error(`Netwerkfout: ${e.message}`);
+    } finally {
+      setConfirmDel(null);
+    }
   };
 
   const sections = [
@@ -229,7 +260,7 @@ export function SparkBrainPage({ onNavigate }) {
                         key={kw.id || i}
                         kw={kw}
                         onEdit={() => setEditor({ section: 'kernwaarden', mode: 'edit', identifier: kw.id || String(i), data: kw })}
-                        onDelete={() => deleteItem('kernwaarden', kw.id || String(i))}
+                        onDelete={() => deleteItem('kernwaarden', kw.id || String(i), kw.waarde)}
                       />
                     ))}
                     {kernwaarden.length === 0 && (
@@ -258,7 +289,7 @@ export function SparkBrainPage({ onNavigate }) {
                         key={n.id || i}
                         n={n}
                         onEdit={() => setEditor({ section: 'normen', mode: 'edit', identifier: n.id || String(i), data: n })}
-                        onDelete={() => deleteItem('normen', n.id || String(i))}
+                        onDelete={() => deleteItem('normen', n.id || String(i), n.norm || n.onderwerp)}
                       />
                     ))}
                     {normen.length === 0 && (
@@ -297,7 +328,7 @@ export function SparkBrainPage({ onNavigate }) {
                         key={item.id || i}
                         item={item}
                         onEdit={() => setEditor({ section: 'bijbel_items', mode: 'edit', identifier: item.id || String(i), data: item })}
-                        onDelete={() => deleteItem('bijbel_items', item.id || String(i))}
+                        onDelete={() => deleteItem('bijbel_items', item.id || String(i), item.titel || item.naam || item.onderwerp)}
                       />
                     ))}
                     {bijbelItems.length === 0 && (
@@ -369,6 +400,38 @@ export function SparkBrainPage({ onNavigate }) {
           onSave={saveItem}
           onChange={(patch) => setEditor(prev => ({ ...prev, data: { ...prev.data, ...patch } }))}
         />
+      )}
+      {/* v6_brain_delete_001 — custom confirm-modal */}
+      {confirmDel && (
+        <div data-testid="confirm-delete-modal"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setConfirmDel(null)}>
+          <div className="bg-slate-900 border border-red-500/40 rounded-xl p-5 max-w-md w-full" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-9 h-9 rounded-full bg-red-500/15 flex items-center justify-center">
+                <Trash2 className="w-4 h-4 text-red-400" />
+              </div>
+              <h3 className="text-base font-bold text-white">Permanent verwijderen?</h3>
+            </div>
+            <p className="text-sm text-slate-300 mb-4">
+              {confirmDel.label
+                ? <>Item <span className="text-red-300 font-medium">"{confirmDel.label}"</span> uit <span className="text-slate-400">{confirmDel.section}</span> wordt permanent verwijderd.</>
+                : <>Dit item wordt permanent verwijderd.</>}
+            </p>
+            <div className="flex justify-end gap-2">
+              <button data-testid="confirm-delete-cancel"
+                onClick={() => setConfirmDel(null)}
+                className="px-4 py-2 text-sm rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800">
+                Annuleren
+              </button>
+              <button data-testid="confirm-delete-confirm"
+                onClick={doDelete}
+                className="px-4 py-2 text-sm rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium">
+                Ja, verwijderen
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </MainLayout>
   );

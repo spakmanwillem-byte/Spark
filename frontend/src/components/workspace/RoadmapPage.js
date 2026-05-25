@@ -75,6 +75,12 @@ const phases = [
       { title: '⚙️ Werkwoord-stamherkenning (bakt / bakken / bakker → stam "bak")', status: 'planned', anchor: 'kb-verb-stem', note: 'Bakker = persoon die bakt, "wij gaan bakken" = werkwoord-vorm. Beide delen stam "bak". Stam wordt node, vormen worden edges met label (persoon / werkwoord / bezigheid).' },
       { title: '🪞 Gelijkheid-engine: stam-herkenning over werkwoorden + zelfstandige naamwoorden', status: 'planned', anchor: 'kb-similarity', note: 'Soms valt "bak kaas" (voorwerp) onder zelfde stam maar andere relatie. Engine moet onderscheid maken via context-tag (voorwerp/handeling/persoon).' },
       { title: '📊 Curatie-dashboard: zie afwijkingen, los enkelvoud/synoniem-conflict op met 1 klik', status: 'planned', anchor: 'kb-curation-dash', note: 'Admin-pagina: lijst van potentiële duplicaten/synoniemen/plural-issues. Per regel: "Voeg samen" / "Negeer" / "Markeer als apart concept".' },
+      // v6_brainfart_003 — Hooks/commands + KB consistency + topic-uniqueness (25-mei)
+      { title: '🔌 Hook-systeem voor triggers/commands (gebruiker-uitbreidbaar)', status: 'planned', anchor: 'trigger-hooks', note: 'Statische trigger.json → dynamisch hook-systeem. User kan via UI trigger toevoegen ("als ik X zeg → doe Y"). Elke trigger = hook met action-plugin.' },
+      { title: '👥 Triggers community-extensible (g2+ stelt voor, g1 keurt goed)', status: 'planned', anchor: 'trigger-community', note: 'Curatie-flow voorkomt dat verkeerde triggers KB vervuilen. Of: triggers per gradatie-scope (eigen vs globaal).' },
+      { title: '🟰 KB-invul UI volledig consistent maken (één layout overal)', status: 'planned', anchor: 'kb-ui-unified', note: 'Voorwaarde voor topic-uniqueness check. CardDetail/NewCardInline/Herzien-flow moeten exact dezelfde velden + validatie hebben. Anders werkt geen enkele trigger betrouwbaar.' },
+      { title: '🚫 Snap-creatie: topic-uniqueness check tegen knowledge_index.json', status: 'planned', anchor: 'snap-topic-unique', note: 'Bij nieuwe snap: als topic al bestaat → 2 opties: "Toevoegen aan bestaande kaart" / "Nieuwe variant maken". Voorkomt 5300 lege variant-kaarten.' },
+      { title: '❌ Negatie-trigger: "nee niet [onderwerp]" → exclude voor sessie', status: 'planned', anchor: 'negate-trigger', note: 'User zegt "nee niet emotie" → Spark slaat in user-preferences excluded_topics op voor huidige sessie/snap-flow.' },
     ],
   },
   {

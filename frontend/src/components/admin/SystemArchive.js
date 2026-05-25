@@ -86,6 +86,13 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
       const fd = new FormData();
       fd.append('file', file);
       fd.append('category', activeTab); // forceer huidige tab
+      // v6_subtab_upload_tag_001 — sub-tab → automatische tag
+      if (activeTab === 'foto') {
+        if (fotoSubTab === 'merch') fd.append('tags', 'roadkill_merch');
+        else if (fotoSubTab === 'avatars') fd.append('tags', 'avatar');
+        else if (fotoSubTab === 'dnd') fd.append('tags', 'dnd');
+        else fd.append('tags', 'algemeen');
+      }
       if (currentUserId) fd.append('uploaded_by', currentUserId);
       const res = await fetch(`${API}/api/system-archive/upload`, { method: 'POST', body: fd });
       if (!res.ok) {
@@ -101,9 +108,20 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
   };
 
   const deleteFile = async (fileId) => {
-    if (!confirm('Dit systeem-bestand permanent verwijderen?')) return;
-    await fetch(`${API}/api/system-archive/${fileId}`, { method: 'DELETE' });
-    await load();
+    if (!window.confirm('Dit systeem-bestand permanent verwijderen?')) return;
+    try {
+      const r = await fetch(`${API}/api/system-archive/${fileId}`, { method: 'DELETE' });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({ detail: 'Verwijderen mislukt' }));
+        alert(`Verwijderen mislukt: ${err.detail || r.status}`);
+        return;
+      }
+      // Direct uit lijst halen (vluchtige UI), daarna refresh
+      setFiles(prev => prev.filter(f => f.id !== fileId));
+      await load();
+    } catch (e) {
+      alert(`Fout: ${e.message}`);
+    }
   };
 
   const startEdit = (f) => {
@@ -151,7 +169,16 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
             className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-60">
-            <Upload className="w-3.5 h-3.5" /> {uploading ? 'Bezig...' : `Upload ${activeCat.label.toLowerCase()}`}
+            <Upload className="w-3.5 h-3.5" />
+            {uploading ? 'Bezig...' : (
+              activeTab === 'foto'
+                ? `Upload ${
+                    fotoSubTab === 'merch' ? 'Roadkill Merch foto' :
+                    fotoSubTab === 'avatars' ? 'Avatar foto' :
+                    fotoSubTab === 'dnd' ? 'D&D foto' : 'Algemene foto'
+                  }`
+                : `Upload ${activeCat.label.toLowerCase()}`
+            )}
           </button>
         </div>
 
@@ -288,7 +315,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
         </div>
       )}
 
-      {/* Search + tag filter (verberg in avatars-mode + logs-mode) */}
+      {/* Search + tag filter (verberg in avatars-mode + logs-mode + D&D) */}
       {activeTab !== 'logs' && !(activeTab === 'foto' && (fotoSubTab === 'avatars' || fotoSubTab === 'dnd')) && (
         <div className="flex flex-wrap gap-2">
           <div className="relative flex-1 max-w-md">
@@ -443,7 +470,7 @@ function SystemFileCard({ file, category, availableTags, isEditing, editForm, se
                 className="flex items-center gap-1 px-2 py-1 text-[10px] text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors">
                 <Edit3 className="w-3 h-3" /> Bewerk
               </button>
-              <button onClick={onDelete}
+              <button onClick={onDelete} data-testid={`sys-file-delete-${file.id}`}
                 className="flex items-center gap-1 px-2 py-1 text-[10px] text-red-400 hover:bg-red-500/10 rounded transition-colors ml-auto">
                 <Trash2 className="w-3 h-3" /> Verwijder
               </button>

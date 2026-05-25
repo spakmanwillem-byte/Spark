@@ -18,13 +18,19 @@
         "accessoire"
       ],
       "entity_id": "roadkill_merch",
-      "product_type": "physical"
+      "product_type": "physical",
+      "images": [
+        "/api/system-archive/file/3da99c13b4e4"
+      ],
+      "image_url": "/api/system-archive/file/3da99c13b4e4",
+      "image_archive_id": "3da99c13b4e4",
+      "updated_at": "2026-05-24T11:02:55.849727+00:00"
     },
     {
       "id": "roadkill-hoodie",
       "name": "Roadkill Hoodie",
       "description": "Premium hoodie met groot Roadkill print op de rug. Zwart, unisex.",
-      "price": 55.0,
+      "price": 60.0,
       "category": "merch",
       "image_icon": "shirt",
       "in_stock": true,
@@ -32,13 +38,19 @@
         "kleding"
       ],
       "entity_id": "roadkill_merch",
-      "product_type": "physical"
+      "product_type": "physical",
+      "images": [
+        "/api/system-archive/file/5b16b1d6bd85"
+      ],
+      "image_url": "/api/system-archive/file/5b16b1d6bd85",
+      "image_archive_id": "5b16b1d6bd85",
+      "updated_at": "2026-05-24T10:58:20.325239+00:00"
     },
     {
       "id": "roadkill-hoodie-broek-set",
       "name": "Hoodie + Broek Set",
       "description": "Complete Roadkill outfit. Hoodie en joggingbroek met subtiel logo.",
-      "price": 85.0,
+      "price": 95.0,
       "category": "merch",
       "image_icon": "package",
       "in_stock": true,
@@ -47,7 +59,13 @@
         "set"
       ],
       "entity_id": "roadkill_merch",
-      "product_type": "physical"
+      "product_type": "physical",
+      "images": [
+        "/api/system-archive/file/c5c02601a5dc"
+      ],
+      "image_url": "/api/system-archive/file/c5c02601a5dc",
+      "image_archive_id": "c5c02601a5dc",
+      "updated_at": "2026-05-24T10:58:05.959610+00:00"
     },
     {
       "id": "roar-token",
@@ -80,6 +98,76 @@
         "grants": "storage_purchased"
       },
       "product_type": "digital"
+    },
+    {
+      "id": "roadkill-rugtas-d5dcc8",
+      "name": "Roadkill Rugtas",
+      "description": "Een water dichte rugtas van gerecycled materiaal. Meer info volgt later.  ",
+      "price": 60.0,
+      "category": "merch",
+      "entity_id": "roadkill_merch",
+      "in_stock": true,
+      "image_icon": "package",
+      "images": [
+        "/api/system-archive/file/6361fe9d3ca0"
+      ],
+      "image_url": "/api/system-archive/file/6361fe9d3ca0",
+      "created_at": "2026-05-24T10:54:58.776077+00:00",
+      "btw_percentage": 0,
+      "image_archive_id": "6361fe9d3ca0"
+    },
+    {
+      "id": "roadkill-rugtas-238ca5",
+      "name": "Roadkill Rugtas",
+      "description": "Een water dichte rugtas van gerecycled materiaal. Meer info volgt later.  ",
+      "price": 60.0,
+      "category": "merch",
+      "entity_id": "roadkill_merch",
+      "in_stock": false,
+      "image_icon": "package",
+      "images": [
+        "/api/system-archive/file/6361fe9d3ca0"
+      ],
+      "image_url": "/api/system-archive/file/6361fe9d3ca0",
+      "created_at": "2026-05-24T10:55:02.288592+00:00",
+      "btw_percentage": 0,
+      "updated_at": "2026-05-24T10:55:15.398572+00:00"
+    },
+    {
+      "id": "donatie-spark-ai-eab152",
+      "name": "Donatie Spark AI",
+      "description": "Een Donatie voor support. ",
+      "price": 2.5,
+      "category": "merch",
+      "entity_id": "spark_core",
+      "in_stock": true,
+      "image_icon": "package",
+      "images": [
+        "/api/system-archive/file/cc8b6075abb5"
+      ],
+      "image_url": "/api/system-archive/file/cc8b6075abb5",
+      "created_at": "2026-05-24T11:09:09.702751+00:00",
+      "btw_percentage": 0,
+      "image_archive_id": "cc8b6075abb5",
+      "updated_at": "2026-05-24T11:09:19.700766+00:00"
+    },
+    {
+      "id": "roadkill-t-shirt-49165b",
+      "name": "Roadkill T-shirt",
+      "description": "Een Stoere Roadkill T-shirt. Ecologische verantwoord. ",
+      "price": 24.0,
+      "category": "merch",
+      "entity_id": "roadkill_merch",
+      "in_stock": true,
+      "image_icon": "package",
+      "images": [
+        "/api/system-archive/file/682bbad516c6"
+      ],
+      "image_url": "/api/system-archive/file/682bbad516c6",
+      "created_at": "2026-05-24T17:06:55.444056+00:00",
+      "btw_percentage": 0,
+      "image_archive_id": "682bbad516c6",
+      "updated_at": "2026-05-24T17:07:09.208733+00:00"
     }
   ],
   "orders": [

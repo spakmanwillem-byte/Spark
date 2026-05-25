@@ -331,6 +331,10 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
                     k["footnote"] = fn
                     k.setdefault("media", {"voice_url": None, "voice_transcript": None, "image_urls": []})
                     k["needs"] = _compute_needs(k)
+                    # v6_kbv2_unify_001 — wis _inbox_reason als laag1 nu gevuld is
+                    if (k.get("lagen") or {}).get("laag1", "").strip():
+                        if k.get("_inbox_reason") == "missing_laag1":
+                            k.pop("_inbox_reason", None)
                     save_json(inbox_path, data)
                     return {"success": True, "kaart": k}
             return {"success": False, "message": f"Inbox-kaart '{card_id}' niet gevonden"}

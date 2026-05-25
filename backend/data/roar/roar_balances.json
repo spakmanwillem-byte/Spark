@@ -2,7 +2,8 @@
   "balances": {
     "user-000": 10,
     "user-001": 10,
-    "user-a0ee2d7e": 2
+    "user-a0ee2d7e": 2,
+    "user-c609d7d1": 0
   },
   "total_supply": 1000000,
   "initial_price": 5.08,
@@ -273,6 +274,14 @@
       "action": "withdrawal_settlement",
       "details": "Willem -3, Gijs -1, Nick -1, Spark +5",
       "amount_eur": 50.5
+    },
+    {
+      "ts": "2026-05-25T14:40:54.635400+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-c609d7d1",
+      "amount": 1,
+      "gift_id": "50a49062-42c0-41d3-8e7f-afc6221d93c0"
     }
   ],
   "treasury_pool": 999978,

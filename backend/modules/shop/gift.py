@@ -11,6 +11,7 @@ Flow:
 
 Audit-trail: roar_balances.transactions + audit_log entry per actie.
 """
+import threading
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -22,6 +23,9 @@ from pydantic import BaseModel, Field
 from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/shop", tags=["shop-gift"])
+
+# v6_gift_idempotent_001 — global lock om race-conditions (dubbel accept/reject) te voorkomen
+_gift_lock = threading.Lock()
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 GIFTS_FILE = DATA_DIR / "roar" / "gift_requests.json"
@@ -187,114 +191,123 @@ async def list_outbox(user_id: str):
 @router.post("/gift/{gift_id}/accept")
 async def accept_gift(gift_id: str, req: GiftAction):
     """Recipient accepteert: voer transfer uit, sluit gift."""
-    data = _load_gifts()
-    _expire_overdue(data)
-    gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
-    if not gift:
-        raise HTTPException(404, "Gift niet gevonden")
-    if gift.get("recipient_id") != req.actor_id:
-        raise HTTPException(403, "Alleen recipient kan accepteren")
-    if gift.get("status") != "pending":
-        raise HTTPException(400, f"Gift heeft status '{gift.get('status')}', kan niet meer geaccepteerd worden")
+    # v6_gift_idempotent_001 — ALLE state-mutaties binnen 1 lock om dubbel-verwerken te voorkomen
+    with _gift_lock:
+        data = _load_gifts()
+        _expire_overdue(data)
+        gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
+        if not gift:
+            raise HTTPException(404, "Gift niet gevonden")
+        if gift.get("recipient_id") != req.actor_id:
+            raise HTTPException(403, "Alleen recipient kan accepteren")
+        if gift.get("status") == "accepted":
+            return {"success": True, "gift": gift, "already_accepted": True}
+        if gift.get("status") != "pending":
+            raise HTTPException(400, f"Gift heeft status '{gift.get('status')}', kan niet meer geaccepteerd worden")
 
-    # Voer transfer uit (sender → recipient)
-    roar = load_json(ROAR_FILE, default={"balances": {}, "transactions": []})
-    sender = gift["sender_id"]
-    recipient = gift["recipient_id"]
-    amount = int(gift["amount"])
-    sender_bal = int(roar["balances"].get(sender, 0))
-    if sender_bal < amount:
-        # Edge case: sender heeft tokens tussentijds weggegeven
-        gift["status"] = "failed"
-        gift["failed_at"] = _iso()
-        gift["failed_reason"] = "Sender heeft niet genoeg tokens meer"
+        # Claim direct binnen lock: status → 'processing' zodat parallelle call afketst
+        gift["status"] = "processing"
         _save_gifts(data)
-        _notify(recipient, "Gift mislukt", f"De gift kon niet worden uitgevoerd: sender heeft niet genoeg tokens meer.", icon="⚠️", kind="gift_failed")
-        return {"success": False, "error": "Sender heeft onvoldoende tokens", "gift": gift}
 
-    prev_recipient = int(roar["balances"].get(recipient, 0))
-    roar["balances"][sender] = sender_bal - amount
-    roar["balances"][recipient] = prev_recipient + amount
+        # Voer transfer uit (sender → recipient)
+        roar = load_json(ROAR_FILE, default={"balances": {}, "transactions": []})
+        sender = gift["sender_id"]
+        recipient = gift["recipient_id"]
+        amount = int(gift["amount"])
+        sender_bal = int(roar["balances"].get(sender, 0))
+        if sender_bal < amount:
+            gift["status"] = "failed"
+            gift["failed_at"] = _iso()
+            gift["failed_reason"] = "Sender heeft niet genoeg tokens meer"
+            _save_gifts(data)
+            _notify(recipient, "Gift mislukt", f"De gift kon niet worden uitgevoerd: sender heeft niet genoeg tokens meer.", icon="⚠️", kind="gift_failed")
+            return {"success": False, "error": "Sender heeft onvoldoende tokens", "gift": gift}
 
-    # Audit-trail
-    tx = {
-        "id": str(uuid.uuid4()),
-        "ts": _iso(),
-        "type": "gift",
-        "from_user_id": sender,
-        "to_user_id": recipient,
-        "amount": amount,
-        "gift_id": gift_id,
-        "note": gift.get("note", ""),
-        "status": "completed",
-    }
-    roar.setdefault("transactions", []).append(tx)
-    roar.setdefault("admin_log", []).append({
-        "ts": _iso(),
-        "action": "gift_accepted",
-        "from_user_id": sender,
-        "to_user_id": recipient,
-        "amount": amount,
-        "gift_id": gift_id,
-    })
-    save_json(ROAR_FILE, roar)
+        prev_recipient = int(roar["balances"].get(recipient, 0))
+        roar["balances"][sender] = sender_bal - amount
+        roar["balances"][recipient] = prev_recipient + amount
 
-    # Sync user_wallets
-    try:
-        uw = load_json(USER_WALLETS, default={"user_wallets": {}})
-        for uid in (sender, recipient):
-            e = uw.setdefault("user_wallets", {}).setdefault(uid, {"wallet": {}})
-            e.setdefault("wallet", {})["spark_tokens"] = int(roar["balances"].get(uid, 0))
-            e["wallet"]["last_sync"] = _iso()
-        save_json(USER_WALLETS, uw)
-    except Exception:
-        pass
+        # Audit-trail
+        tx = {
+            "id": str(uuid.uuid4()),
+            "ts": _iso(),
+            "type": "gift",
+            "from_user_id": sender,
+            "to_user_id": recipient,
+            "amount": amount,
+            "gift_id": gift_id,
+            "note": gift.get("note", ""),
+            "status": "completed",
+        }
+        roar.setdefault("transactions", []).append(tx)
+        roar.setdefault("admin_log", []).append({
+            "ts": _iso(),
+            "action": "gift_accepted",
+            "from_user_id": sender,
+            "to_user_id": recipient,
+            "amount": amount,
+            "gift_id": gift_id,
+        })
+        save_json(ROAR_FILE, roar)
 
-    # First-token achievement voor recipient
-    try:
-        if prev_recipient == 0 and amount > 0:
-            from modules.achievements.service import unlock_milestone
-            unlock_milestone(recipient, "milestone_first_roar_token")
-            # En per-user bark
-            _notify(
-                recipient,
-                "Je eerste ROAR token is binnen",
-                "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. "
-                "Met dit token kun je nu een eigen Trader monitor starten via de Trader-module.\n\n"
-                "• De monitor luistert naar 1 markt en analyseert de candles\n"
-                "• Bij auto-trade aan koopt en verkoopt hij automatisch\n"
-                "• Je kunt hem altijd pauzeren of stoppen",
-                icon="🪙", kind="first_roar_token",
-            )
-    except Exception:
-        pass
+        # Sync user_wallets
+        try:
+            uw = load_json(USER_WALLETS, default={"user_wallets": {}})
+            for uid in (sender, recipient):
+                e = uw.setdefault("user_wallets", {}).setdefault(uid, {"wallet": {}})
+                e.setdefault("wallet", {})["spark_tokens"] = int(roar["balances"].get(uid, 0))
+                e["wallet"]["last_sync"] = _iso()
+            save_json(USER_WALLETS, uw)
+        except Exception:
+            pass
 
-    # Notificaties
-    _notify(sender, f"Gift geaccepteerd door {gift['recipient_naam']}", f"{gift['recipient_naam']} heeft je gift van {amount} ROAR geaccepteerd.", icon="✅", kind="gift_accepted")
-    _notify(recipient, f"Gift ontvangen van {gift['sender_naam']}", f"Je hebt {amount} ROAR ontvangen van {gift['sender_naam']}.", icon="🎁", kind="gift_received")
+        # First-token achievement voor recipient
+        try:
+            if prev_recipient == 0 and amount > 0:
+                from modules.achievements.service import unlock_milestone
+                unlock_milestone(recipient, "milestone_first_roar_token")
+                _notify(
+                    recipient,
+                    "Je eerste ROAR token is binnen",
+                    "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. "
+                    "Met dit token kun je nu een eigen Trader monitor starten via de Trader-module.\n\n"
+                    "• De monitor luistert naar 1 markt en analyseert de candles\n"
+                    "• Bij auto-trade aan koopt en verkoopt hij automatisch\n"
+                    "• Je kunt hem altijd pauzeren of stoppen",
+                    icon="🪙", kind="first_roar_token",
+                )
+        except Exception:
+            pass
 
-    gift["status"] = "accepted"
-    gift["accepted_at"] = _iso()
-    _save_gifts(data)
+        # Notificaties
+        _notify(sender, f"Gift geaccepteerd door {gift['recipient_naam']}", f"{gift['recipient_naam']} heeft je gift van {amount} ROAR geaccepteerd.", icon="✅", kind="gift_accepted")
+        _notify(recipient, f"Gift ontvangen van {gift['sender_naam']}", f"Je hebt {amount} ROAR ontvangen van {gift['sender_naam']}.", icon="🎁", kind="gift_received")
 
-    return {"success": True, "gift": gift, "new_balance": roar["balances"][recipient]}
+        gift["status"] = "accepted"
+        gift["accepted_at"] = _iso()
+        _save_gifts(data)
+
+        return {"success": True, "gift": gift, "new_balance": roar["balances"][recipient]}
 
 
 @router.post("/gift/{gift_id}/reject")
 async def reject_gift(gift_id: str, req: GiftAction):
     """Recipient weigert. Geen token-mutatie."""
-    data = _load_gifts()
-    _expire_overdue(data)
-    gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
-    if not gift:
-        raise HTTPException(404, "Gift niet gevonden")
-    if gift.get("recipient_id") != req.actor_id:
-        raise HTTPException(403, "Alleen recipient kan weigeren")
-    if gift.get("status") != "pending":
-        raise HTTPException(400, f"Gift heeft status '{gift.get('status')}'")
-    gift["status"] = "rejected"
-    gift["rejected_at"] = _iso()
-    _save_gifts(data)
+    with _gift_lock:
+        data = _load_gifts()
+        _expire_overdue(data)
+        gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
+        if not gift:
+            raise HTTPException(404, "Gift niet gevonden")
+        if gift.get("recipient_id") != req.actor_id:
+            raise HTTPException(403, "Alleen recipient kan weigeren")
+        if gift.get("status") == "rejected":
+            return {"success": True, "gift": gift, "already_rejected": True}
+        if gift.get("status") != "pending":
+            raise HTTPException(400, f"Gift heeft status '{gift.get('status')}'")
+        gift["status"] = "rejected"
+        gift["rejected_at"] = _iso()
+        _save_gifts(data)
     _notify(gift["sender_id"], f"Gift geweigerd door {gift['recipient_naam']}", f"{gift['recipient_naam']} heeft je gift van {gift['amount']} ROAR geweigerd. Je tokens zijn behouden.", icon="↩️", kind="gift_rejected")
     return {"success": True, "gift": gift}
 
@@ -302,17 +315,20 @@ async def reject_gift(gift_id: str, req: GiftAction):
 @router.post("/gift/{gift_id}/cancel")
 async def cancel_gift(gift_id: str, req: GiftAction):
     """Sender annuleert pending gift voordat recipient reageert."""
-    data = _load_gifts()
-    _expire_overdue(data)
-    gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
-    if not gift:
-        raise HTTPException(404, "Gift niet gevonden")
-    if gift.get("sender_id") != req.actor_id:
-        raise HTTPException(403, "Alleen sender kan annuleren")
-    if gift.get("status") != "pending":
-        raise HTTPException(400, f"Gift heeft status '{gift.get('status')}'")
-    gift["status"] = "cancelled"
-    gift["cancelled_at"] = _iso()
-    _save_gifts(data)
+    with _gift_lock:
+        data = _load_gifts()
+        _expire_overdue(data)
+        gift = next((g for g in data.get("gifts", []) if g.get("id") == gift_id), None)
+        if not gift:
+            raise HTTPException(404, "Gift niet gevonden")
+        if gift.get("sender_id") != req.actor_id:
+            raise HTTPException(403, "Alleen sender kan annuleren")
+        if gift.get("status") == "cancelled":
+            return {"success": True, "gift": gift, "already_cancelled": True}
+        if gift.get("status") != "pending":
+            raise HTTPException(400, f"Gift heeft status '{gift.get('status')}'")
+        gift["status"] = "cancelled"
+        gift["cancelled_at"] = _iso()
+        _save_gifts(data)
     _notify(gift["recipient_id"], "Gift ingetrokken", f"{gift['sender_naam']} heeft de pending gift van {gift['amount']} ROAR ingetrokken.", icon="↩️", kind="gift_cancelled")
     return {"success": True, "gift": gift}

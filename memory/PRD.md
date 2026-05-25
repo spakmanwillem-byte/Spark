@@ -1,6 +1,27 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_kbv2_unify_001 + v6_gift_idempotent_001** (sessie 11, fork):
+  - 🧩 **KB v2 unificatie CardDetail ↔ NewCardInline**:
+    - Nieuwe gedeelde `CardFormFields` component voor Laag 1-4 + 5W + Tags
+    - Beide modi (edit bestaande kaart + nieuwe kaart) hebben nu identieke inputs
+    - Topic-veld blijft alleen in herzien-modus (stuurt auto-classify)
+  - 🔍 **Duplicate-begrip check** via `/api/kb/v2/find` (debounced 400ms):
+    - Rode banner toont bij bestaand begrip: "X bestaat al · Lade: Y · id Z"
+    - "Open bestaande →" knop springt direct naar de bestaande kaart in juiste lade
+    - Save-knop disabled bij duplicate (geen silent overwrite meer)
+  - 💯 **Compleetheid-badge** (8 velden: laag1-4, 5W, Tags, Voice, Image):
+    - 100% → groen "✓ 100% gekuurd" badge
+    - 50%+ → amber percentage
+    - <50% → grijze indicator
+    - Toont zowel in CardDetail (read+edit) als NewCardInline
+  - 🐛 **Fix Issue 2 — KB v2 "missing_laag1" inbox-reason wordt nu gewist** zodra laag1 wordt ingevuld via edit. Voorheen bleef de rode "geen laag 1"-badge hangen ondanks gevulde inhoud
+  - 🔒 **Fix Issue 3 — Gift dubbel-verwerkt race fix**:
+    - Globale `_gift_lock` (threading.Lock) rondom accept/reject/cancel
+    - Status `'pending' → 'processing' → 'accepted'` met intermediate claim binnen lock
+    - Idempotent: 2e accept-call returnt `{success:true, already_accepted:true}` zonder dubbele token-transfer
+    - Verified via curl: balance verandert exact 1x ondanks 2 opeenvolgende POST /gift/{id}/accept
+
 - 2026-05-23 **v6_gift_phase_001** (sessie 10, vervolg — model herzien):
   - 💚 **Build-fase = GIFT, geen BTW**:
     - ROAR-aanschaf is nu **donatie/gift** aan Spark Core concept (geen aankoop)

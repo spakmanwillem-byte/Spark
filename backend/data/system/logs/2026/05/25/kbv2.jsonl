@@ -1,0 +1,4 @@
+{"ts": "2026-05-25T14:36:53.802459+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"a0": "test_unify_check_xyz", "source": "test", "user_id": "user-001"}}
+{"ts": "2026-05-25T14:36:53.930939+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 128.26}
+{"ts": "2026-05-25T14:36:54.345882+00:00", "module": "kbv2", "fn": "edit_card", "phase": "pre", "intent": "bestaande kaart in lade bewerken", "args": {"a0": "kbv2-39f9d823", "a1": "inbox", "updates": "{'lagen': {'laag1': 'test antwoord'}}", "user_id": "user-001"}}
+{"ts": "2026-05-25T14:36:54.443089+00:00", "module": "kbv2", "fn": "edit_card", "phase": "post", "intent": "bestaande kaart in lade bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 97.04}

@@ -44,6 +44,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [editForm, setEditForm] = useState(null);
   // v6_kbv2_inline_new_001 — Lege kaart in rechter paneel zonder window.prompt
   const [creatingNew, setCreatingNew] = useState(false);
+  // v6_kbv2_unify_001 — duplicate-begrip check
+  const [dupCheck, setDupCheck] = useState({ checking: false, exists: false, info: null });
   // v6_kbv2_herzien_001 — KB v1 → KB v2 migratie-modus
   const [herzienV1, setHerzienV1] = useState(null);       // de v1-kaart die nu wordt herzien
   const [herzienRemaining, setHerzienRemaining] = useState(0);
@@ -211,6 +213,46 @@ export function KennisbankV2Page({ onNavigate }) {
     setEditForm(null);
     setEditMode(false);
     setHerzienV1(null);
+    setDupCheck({ checking: false, exists: false, info: null });
+  };
+
+  // v6_kbv2_unify_001 — debounced duplicate-check tegen knowledge_index.json
+  const checkDuplicateBegrip = useCallback(async (begrip) => {
+    const q = (begrip || '').trim();
+    if (!q || q.length < 2) { setDupCheck({ checking: false, exists: false, info: null }); return; }
+    setDupCheck(d => ({ ...d, checking: true }));
+    try {
+      const r = await fetch(`${API}/api/kb/v2/find?begrip=${encodeURIComponent(q)}`).then(x => x.json());
+      if (r && r.found && r.kaart) {
+        setDupCheck({ checking: false, exists: true, info: { kaart_id: r.kaart.id, lade: r.lade || 'inbox', begrip: r.kaart.begrip } });
+      } else {
+        setDupCheck({ checking: false, exists: false, info: null });
+      }
+    } catch {
+      setDupCheck({ checking: false, exists: false, info: null });
+    }
+  }, []);
+
+  // v6_kbv2_unify_001 — open bestaande kaart vanuit duplicate-banner
+  const openExistingFromDup = async () => {
+    if (!dupCheck.info) return;
+    const { kaart_id, lade } = dupCheck.info;
+    setActiveTab(lade || 'inbox');
+    setCreatingNew(false);
+    setEditForm(null);
+    setHerzienV1(null);
+    setDupCheck({ checking: false, exists: false, info: null });
+    // Wacht tot items van die lade geladen zijn, dan zoek de kaart
+    setTimeout(async () => {
+      try {
+        const url = lade && lade !== 'inbox'
+          ? `${API}/api/kb/v2/lade/${lade}?limit=500`
+          : `${API}/api/kb/v2/inbox?limit=500`;
+        const r = await fetch(url).then(x => x.json());
+        const k = (r.kaarten || []).find(c => c.id === kaart_id);
+        if (k) setSelectedCard(k);
+      } catch {}
+    }, 200);
   };
 
   // v6_kbv2_herzien_001 — Trek 1 oude KB v1 kaart en open in lege-kaart formulier
@@ -414,7 +456,10 @@ export function KennisbankV2Page({ onNavigate }) {
                 onCancel={cancelNew}
                 herzienV1={herzienV1}
                 herzienRemaining={herzienRemaining}
-                onNextHerzien={loadHerzienEntry} />
+                onNextHerzien={loadHerzienEntry}
+                dupCheck={dupCheck}
+                onCheckDup={checkDuplicateBegrip}
+                onOpenExisting={openExistingFromDup} />
             ) : !selectedCard ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12 text-slate-500">
                 <Eye className="w-8 h-8 mb-2 opacity-40" />
@@ -490,8 +535,20 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
   const upd = (path, val) => {
     setEditForm(f => ({ ...f, [path]: val }));
   };
-  const updLaag = (key, val) => setEditForm(f => ({ ...f, lagen: { ...f.lagen, [key]: val } }));
-  const updWs5  = (key, val) => setEditForm(f => ({ ...f, ws5: { ...f.ws5, [key]: val } }));
+
+  // v6_kbv2_unify_001 — bereken 100%-status (laag1 + 5W + tags + media voice/image)
+  const hasL1 = !!(card.lagen?.laag1 || '').trim();
+  const hasL2 = !!(card.lagen?.laag2 || '').trim();
+  const hasL3 = !!(card.lagen?.laag3 || '').trim();
+  const hasL4 = !!(card.lagen?.laag4 || '').trim();
+  const has5w = Object.values(card.ws5 || {}).some(v => (v || '').trim());
+  const hasTags = (card.tags || []).length > 0;
+  const hasVoice = !!(card.media?.voice_url);
+  const hasImage = (card.media?.image_urls || []).filter(Boolean).length > 0;
+  const filledCount = [hasL1, hasL2, hasL3, hasL4, has5w, hasTags, hasVoice, hasImage].filter(Boolean).length;
+  const totalFields = 8;
+  const pct = Math.round((filledCount / totalFields) * 100);
+  const isComplete = pct === 100;
 
   return (
     <div className="space-y-3">
@@ -507,6 +564,16 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
           )}
           <p className="text-[10px] text-slate-500 mt-0.5">{card.id}</p>
         </div>
+        {/* v6_kbv2_unify_001 — Compleetheid-badge */}
+        <div data-testid="kbv2-completeness-badge" className={`px-2 py-1 rounded-lg text-[10px] font-semibold border ${
+          isComplete
+            ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
+            : pct >= 50
+              ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+              : 'bg-slate-800/60 border-slate-700 text-slate-400'
+        }`}>
+          {isComplete ? '✓ 100% gekuurd' : `${pct}% (${filledCount}/${totalFields})`}
+        </div>
         {!editMode ? (
           <button data-testid="kbv2-edit-btn" onClick={onStartEdit}
             className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-300 hover:bg-slate-800 flex items-center gap-1">
@@ -520,59 +587,13 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
         )}
       </div>
 
-      {/* Lagen */}
-      <div className="space-y-1.5">
-        {['laag1','laag2','laag3','laag4'].map((k, i) => (
-          <div key={k}>
-            <label className="text-[10px] uppercase text-slate-500 tracking-wide">Laag {i+1}</label>
-            {editMode ? (
-              <textarea data-testid={`kbv2-edit-${k}`} value={lagen[k] || ''} rows={2}
-                onChange={(e) => updLaag(k, e.target.value)}
-                className="w-full mt-0.5 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 resize-y" />
-            ) : (
-              <p className={`text-xs px-2 py-1 rounded ${lagen[k] ? 'text-slate-200 bg-slate-800/40' : 'text-slate-600 italic'}`}>
-                {lagen[k] || '(leeg)'}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* WS5 */}
-      <details className="border border-slate-800 rounded-lg">
-        <summary className="px-2 py-1.5 text-[11px] text-slate-400 cursor-pointer">5W (wie/wat/wanneer/waar/waarom/hoe)</summary>
-        <div className="p-2 space-y-1">
-          {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
-            <div key={k} className="flex items-start gap-2">
-              <span className="text-[10px] text-slate-500 w-14 mt-0.5 uppercase">{k}</span>
-              {editMode ? (
-                <input data-testid={`kbv2-edit-ws5-${k}`} value={ws5[k] || ''}
-                  onChange={(e) => updWs5(k, e.target.value)}
-                  className="flex-1 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-0.5" />
-              ) : (
-                <span className="text-xs text-slate-300">{ws5[k] || '—'}</span>
-              )}
-            </div>
-          ))}
-        </div>
-      </details>
-
-      {/* Tags */}
-      <div>
-        <label className="text-[10px] uppercase text-slate-500 tracking-wide">Tags</label>
-        {editMode ? (
-          <input data-testid="kbv2-edit-tags" value={(tags || []).join(', ')}
-            onChange={(e) => upd('tags', e.target.value.split(',').map(t => t.trim()).filter(Boolean))}
-            placeholder="emotie, verbinding, ..."
-            className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1" />
-        ) : (
-          <div className="flex flex-wrap gap-1 mt-0.5">
-            {(tags || []).slice(0, 25).map((t, i) => (
-              <span key={i} className="px-1.5 py-0.5 rounded text-[10px] bg-slate-800/60 text-slate-300">{t}</span>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* v6_kbv2_unify_001 — gedeelde form-velden (Laag 1-4 + 5W + Tags) */}
+      <CardFormFields
+        editForm={editMode ? editForm : { lagen, ws5, tags }}
+        setEditForm={setEditForm}
+        editable={editMode}
+        testIdPrefix="kbv2-edit"
+      />
 
       {/* v5_kbv2_media_001 — Voice & Image upload */}
       <MediaSection card={card} currentLade={inInbox ? null : currentLade} onUpdated={onMediaUpdated} />
@@ -606,7 +627,6 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
       )}
 
       {/* Actions */}
-      {/* v6_kbv2_edit_inbox_001 — Bewaar knop ook in inbox als editMode aan, naast classify */}
       {editMode ? (
         <div className="border-t border-slate-800 pt-3">
           <button data-testid="kbv2-save-edit" onClick={onSaveEdit} disabled={saving}
@@ -638,6 +658,79 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
         </div>
       ) : null}
     </div>
+  );
+}
+
+// ============================================================
+// v6_kbv2_unify_001 — Gedeelde form-velden (Laag 1-4 + 5W + Tags)
+// Gebruikt door zowel CardDetail (edit-mode) als NewCardInline.
+// ============================================================
+function CardFormFields({ editForm, setEditForm, editable, testIdPrefix, openWs5 = false, highlightLaag1 = false }) {
+  const lagen = editForm.lagen || {};
+  const ws5 = editForm.ws5 || {};
+  const tags = editForm.tags || [];
+  const updLaag = (k, v) => setEditForm(f => ({ ...f, lagen: { ...(f.lagen || {}), [k]: v } }));
+  const updWs5  = (k, v) => setEditForm(f => ({ ...f, ws5:   { ...(f.ws5 || {}),   [k]: v } }));
+
+  return (
+    <>
+      {/* Lagen 1-4 */}
+      <div className="space-y-1.5">
+        {['laag1','laag2','laag3','laag4'].map((k, i) => (
+          <div key={k}>
+            <label className="text-[10px] uppercase text-slate-500 tracking-wide">
+              Laag {i+1}{highlightLaag1 && i === 0 && <span className="text-red-400 ml-1">(belangrijk)</span>}
+            </label>
+            {editable ? (
+              <textarea data-testid={`${testIdPrefix}-${k}`} value={lagen[k] || ''} rows={2}
+                onChange={(e) => updLaag(k, e.target.value)}
+                placeholder={i === 0 ? 'Kort antwoord / definitie' : ''}
+                className="w-full mt-0.5 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 resize-y focus:outline-none focus:border-emerald-500/40" />
+            ) : (
+              <p className={`text-xs px-2 py-1 rounded ${lagen[k] ? 'text-slate-200 bg-slate-800/40' : 'text-slate-600 italic'}`}>
+                {lagen[k] || '(leeg)'}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* WS5 */}
+      <details className="border border-slate-800 rounded-lg" {...(openWs5 ? { open: true } : {})}>
+        <summary className="px-2 py-1.5 text-[11px] text-slate-400 cursor-pointer">5W (wie/wat/wanneer/waar/waarom/hoe)</summary>
+        <div className="p-2 space-y-1">
+          {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
+            <div key={k} className="flex items-start gap-2">
+              <span className="text-[10px] text-slate-500 w-14 mt-0.5 uppercase">{k}</span>
+              {editable ? (
+                <input data-testid={`${testIdPrefix}-ws5-${k}`} value={ws5[k] || ''}
+                  onChange={(e) => updWs5(k, e.target.value)}
+                  className="flex-1 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-0.5 focus:outline-none focus:border-emerald-500/40" />
+              ) : (
+                <span className="text-xs text-slate-300">{ws5[k] || '—'}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </details>
+
+      {/* Tags */}
+      <div>
+        <label className="text-[10px] uppercase text-slate-500 tracking-wide">Tags</label>
+        {editable ? (
+          <input data-testid={`${testIdPrefix}-tags`} value={(tags || []).join(', ')}
+            onChange={(e) => setEditForm(f => ({ ...f, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) }))}
+            placeholder="emotie, verbinding, ..."
+            className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/40" />
+        ) : (
+          <div className="flex flex-wrap gap-1 mt-0.5">
+            {(tags || []).slice(0, 25).map((t, i) => (
+              <span key={i} className="px-1.5 py-0.5 rounded text-[10px] bg-slate-800/60 text-slate-300">{t}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -956,20 +1049,29 @@ function MediaSection({ card, currentLade, onUpdated }) {
 
 // ============================================================
 // v6_kbv2_inline_new_001 — Lege kaart in rechter paneel (geen window.prompt)
-// Niet-compleet (geen lagen/5W) blijft automatisch in inbox = onbeantwoord
+// v6_kbv2_unify_001 — gebruikt CardFormFields voor identieke velden als CardDetail
 // ============================================================
-function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzienV1, herzienRemaining, onNextHerzien }) {
+function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzienV1, herzienRemaining, onNextHerzien,
+                        dupCheck, onCheckDup, onOpenExisting }) {
+  // v6_kbv2_unify_001 — debounce duplicate check op begrip (hook MOET vóór early return)
+  const dupTimer = useRef(null);
   if (!editForm) return null;
   const lagen = editForm.lagen || {};
   const ws5 = editForm.ws5 || {};
   const tags = editForm.tags || [];
-  const updLaag = (k, v) => setEditForm(f => ({ ...f, lagen: { ...(f.lagen || {}), [k]: v } }));
-  const updWs5  = (k, v) => setEditForm(f => ({ ...f, ws5:   { ...(f.ws5 || {}),   [k]: v } }));
 
   const hasL1 = !!(lagen.laag1 || '').trim();
   const has5w = Object.values(ws5).some(v => (v || '').trim());
+  const hasTags = (tags || []).length > 0;
   const compleet = hasL1 && has5w;
   const isHerzien = !!herzienV1;
+
+  const onBegripChange = (val) => {
+    setEditForm(f => ({ ...f, begrip: val }));
+    if (isHerzien) return; // herzien is een v1-kaart promoveren, geen nieuw begrip
+    if (dupTimer.current) clearTimeout(dupTimer.current);
+    dupTimer.current = setTimeout(() => onCheckDup && onCheckDup(val), 400);
+  };
 
   // Auto-suggest lade op basis van topic + tags
   const _autoLade = () => {
@@ -988,6 +1090,16 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
     return 'weten';
   };
   const suggestedLade = isHerzien ? _autoLade() : null;
+
+  // v6_kbv2_unify_001 — compleetheid-meter (zelfde 8-velden score als CardDetail)
+  const hasL2 = !!(lagen.laag2 || '').trim();
+  const hasL3 = !!(lagen.laag3 || '').trim();
+  const hasL4 = !!(lagen.laag4 || '').trim();
+  const filledCount = [hasL1, hasL2, hasL3, hasL4, has5w, hasTags, false, false].filter(Boolean).length;
+  const totalFields = 8;
+  const pct = Math.round((filledCount / totalFields) * 100);
+
+  const dupBlocking = !isHerzien && dupCheck && dupCheck.exists;
 
   return (
     <div className="space-y-3" data-testid="kbv2-inline-newcard">
@@ -1008,25 +1120,56 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
         </div>
       )}
 
+      {/* v6_kbv2_unify_001 — Duplicate-banner */}
+      {dupBlocking && (
+        <div data-testid="kbv2-dup-banner" className="bg-red-500/10 border border-red-500/40 rounded-lg p-2.5 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-[11px] text-red-200 font-semibold truncate">"{dupCheck.info?.begrip}" bestaat al</p>
+              <p className="text-[10px] text-slate-400 truncate">Lade: <span className="text-red-300">{dupCheck.info?.lade || 'inbox'}</span> · id {dupCheck.info?.kaart_id}</p>
+            </div>
+          </div>
+          <button data-testid="kbv2-dup-open-existing" onClick={onOpenExisting}
+            className="px-2 py-1 text-[10px] border border-red-500/40 text-red-200 hover:bg-red-500/15 rounded shrink-0">
+            Open bestaande →
+          </button>
+        </div>
+      )}
+
       <div className="flex items-start justify-between gap-2 border-b border-slate-800 pb-2">
         <div className="flex-1">
           <p className="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">
             {isHerzien ? 'Herzien & promoten naar KB v2' : 'Nieuwe kaart'}
           </p>
           <input data-testid="kbv2-new-begrip" type="text" value={editForm.begrip || ''}
-            onChange={e => setEditForm(f => ({ ...f, begrip: e.target.value }))} autoFocus
+            onChange={e => onBegripChange(e.target.value)} autoFocus
             placeholder="Begrip (verplicht)"
-            className="mt-1 w-full text-lg font-bold text-white bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/60" />
+            className={`mt-1 w-full text-lg font-bold text-white bg-slate-800/60 border rounded px-2 py-1 focus:outline-none ${
+              dupBlocking ? 'border-red-500/60 focus:border-red-500' : 'border-slate-700 focus:border-emerald-500/60'
+            }`} />
           <p className="text-[10px] text-slate-500 mt-1">
-            {isHerzien ? (
+            {dupCheck?.checking && <span className="text-slate-400">Bezig met controle…</span>}
+            {!dupCheck?.checking && isHerzien && (
               compleet
                 ? <>Wordt opgeslagen in lade <span className="text-purple-300">{suggestedLade}</span> (op basis van topic + tags).</>
                 : <>Vul minimaal <span className="text-amber-300">laag 1</span> in om kaart te promoveren naar KB v2.</>
-            ) : (
+            )}
+            {!dupCheck?.checking && !isHerzien && (
               <>Nieuwe kaart komt eerst in <span className="text-amber-300">inbox</span>.
               {!compleet && <> Niet compleet ingevuld → blijft in <span className="text-red-400">onbeantwoord</span>.</>}</>
             )}
           </p>
+        </div>
+        {/* v6_kbv2_unify_001 — Compleetheid badge ook in NewCardInline */}
+        <div data-testid="kbv2-new-completeness-badge" className={`px-2 py-1 rounded-lg text-[10px] font-semibold border self-start ${
+          pct === 100
+            ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
+            : pct >= 50
+              ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+              : 'bg-slate-800/60 border-slate-700 text-slate-400'
+        }`}>
+          {pct}%
         </div>
         <button data-testid="kbv2-new-cancel" onClick={onCancel}
           className="p-1 hover:bg-slate-800 rounded text-slate-400">
@@ -1047,44 +1190,15 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
         </div>
       )}
 
-      {/* Lagen 1-4 */}
-      <div className="space-y-1.5">
-        {['laag1','laag2','laag3','laag4'].map((k, i) => (
-          <div key={k}>
-            <label className="text-[10px] uppercase text-slate-500 tracking-wide">
-              Laag {i+1}{i === 0 && <span className="text-red-400 ml-1">(belangrijk)</span>}
-            </label>
-            <textarea data-testid={`kbv2-new-${k}`} value={lagen[k] || ''} rows={2}
-              onChange={e => updLaag(k, e.target.value)}
-              placeholder={i === 0 ? 'Kort antwoord / definitie' : ''}
-              className="w-full mt-0.5 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 resize-y focus:outline-none focus:border-emerald-500/40" />
-          </div>
-        ))}
-      </div>
-
-      {/* 5W */}
-      <details className="border border-slate-800 rounded-lg" open>
-        <summary className="px-2 py-1.5 text-[11px] text-slate-400 cursor-pointer">5W (wie/wat/wanneer/waar/waarom/hoe)</summary>
-        <div className="p-2 space-y-1">
-          {['wie','wat','wanneer','waar','waarom','hoe'].map(k => (
-            <div key={k} className="flex items-start gap-2">
-              <span className="text-[10px] text-slate-500 w-14 mt-0.5 uppercase">{k}</span>
-              <input data-testid={`kbv2-new-ws5-${k}`} value={ws5[k] || ''}
-                onChange={e => updWs5(k, e.target.value)}
-                className="flex-1 text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-0.5 focus:outline-none focus:border-emerald-500/40" />
-            </div>
-          ))}
-        </div>
-      </details>
-
-      {/* Tags */}
-      <div>
-        <label className="text-[10px] uppercase text-slate-500 tracking-wide">Tags</label>
-        <input data-testid="kbv2-new-tags" value={tags.join(', ')}
-          onChange={e => setEditForm(f => ({ ...f, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) }))}
-          placeholder="tag1, tag2, ..."
-          className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-emerald-500/40" />
-      </div>
+      {/* v6_kbv2_unify_001 — gedeelde form-velden */}
+      <CardFormFields
+        editForm={editForm}
+        setEditForm={setEditForm}
+        editable={true}
+        testIdPrefix="kbv2-new"
+        openWs5={true}
+        highlightLaag1={true}
+      />
 
       {/* Completeness hint */}
       <div className="text-[10px] text-slate-500 border-t border-slate-800 pt-2 leading-relaxed">
@@ -1102,7 +1216,8 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
         <button data-testid="kbv2-new-cancel-btn" onClick={onCancel}
           className="px-3 py-1.5 text-xs text-slate-400 hover:bg-slate-800 rounded-lg">Annuleren</button>
         <button data-testid="kbv2-new-save-btn" onClick={onSave}
-          disabled={saving || !(editForm.begrip || '').trim() || (isHerzien && !hasL1)}
+          disabled={saving || !(editForm.begrip || '').trim() || (isHerzien && !hasL1) || dupBlocking}
+          title={dupBlocking ? 'Begrip bestaat al — open bestaande kaart of pas naam aan' : ''}
           className={`px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 ${
             isHerzien ? 'bg-purple-500 hover:bg-purple-600' : 'bg-emerald-500 hover:bg-emerald-600'
           }`}>

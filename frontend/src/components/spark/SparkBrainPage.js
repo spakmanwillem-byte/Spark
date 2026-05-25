@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   Brain, Heart, BookOpen, Star,
   Zap, Target, MessageSquare, ChevronDown, ChevronRight,
-  Plus, Edit3, Trash2, X, Save, Sparkles, Shield, Leaf, Check
+  Plus, Edit3, Trash2, X, Save, Sparkles, Shield, Leaf, Check, Layers
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -63,6 +63,8 @@ export function SparkBrainPage({ onNavigate }) {
     { id: 'bijbel', label: 'Spark Bijbel', icon: BookOpen, accent: '#a855f7' },
     { id: 'profiel', label: 'Spark Profiel', icon: Star, accent: '#06b6d4' },
     { id: 'groeien', label: 'Groeien', icon: Leaf, accent: '#22c55e' },
+    // v6_emotion_pipeline_001 — 7-laags emotie-pipeline dry-run
+    { id: 'emotie_pipeline', label: 'Emotie Pipeline', icon: Layers, accent: '#fb923c' },
   ];
 
   const kernwaarden = bijbel?.kernwaarden || [];
@@ -350,6 +352,11 @@ export function SparkBrainPage({ onNavigate }) {
 
             {activeSection === 'groeien' && (
               <GroeienSection />
+            )}
+
+            {/* v6_emotion_pipeline_001 — 7-laags emotie-pipeline dry-run */}
+            {activeSection === 'emotie_pipeline' && (
+              <EmotiePipelineSection />
             )}
 
           </div>
@@ -923,3 +930,165 @@ function GroeienSection() {
   );
 }
 
+
+
+// ============================================================
+// v6_emotion_pipeline_001 — Emotie Pipeline dry-run UI
+// ============================================================
+
+function EmotiePipelineSection() {
+  const [text, setText] = useState('');
+  const [running, setRunning] = useState(false);
+  const [result, setResult] = useState(null);
+  const [layersDoc, setLayersDoc] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/api/emotion-pipeline/layers`).then(r => r.json()).then(d => setLayersDoc(d.layers || []));
+  }, []);
+
+  const runPipeline = async () => {
+    if (!text.trim()) return;
+    setRunning(true);
+    setResult(null);
+    try {
+      const r = await fetch(`${API}/api/emotion-pipeline/run`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      }).then(x => x.json());
+      setResult(r);
+    } finally {
+      setRunning(false);
+    }
+  };
+
+  const presets = [
+    'Ik ben echt boos en gefrustreerd, dit werkt al uren niet!',
+    'Wat leuk, ik ben zo blij hiermee! Geweldig werk!',
+    'Ik voel me vandaag echt verdrietig en moe',
+    'Ik weet niet meer wat ik moet doen, ben bang dat het misgaat',
+    'Wat is de hoofdstad van Frankrijk?',
+  ];
+
+  const layerColors = {
+    1: '#fb923c', 2: '#f97316', 3: '#ec4899', 4: '#a855f7',
+    5: '#8b5cf6', 6: '#3b82f6', 7: '#06b6d4',
+  };
+
+  return (
+    <div data-testid="emotie-pipeline-section" className="space-y-4">
+      <div className="bg-orange-500/5 border border-orange-500/30 rounded-xl p-4">
+        <h2 className="text-lg font-bold text-orange-300 mb-1">7-laags Emotie Pipeline</h2>
+        <p className="text-xs text-slate-400">
+          Test hoe Spark's emotie-bewustzijn werkt op een input. Detectie → Weging → Contextfilter → Identiteit → Norm/waarden → Actierouting → Expressie.
+          Geen impact op live chat — dit is een dry-run.
+        </p>
+      </div>
+
+      {/* Input */}
+      <Card title="Test input" icon={MessageSquare} accent="#fb923c">
+        <textarea
+          data-testid="emotie-pipeline-input"
+          value={text}
+          onChange={e => setText(e.target.value)}
+          placeholder="Typ iets dat je tegen Spark zou kunnen zeggen..."
+          rows={3}
+          className="w-full text-sm text-slate-200 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 focus:outline-none focus:border-orange-500/40 resize-y"
+        />
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {presets.map((p, i) => (
+            <button key={i} data-testid={`emotie-preset-${i}`}
+              onClick={() => setText(p)}
+              className="px-2 py-1 text-[10px] rounded border border-slate-700 text-slate-400 hover:bg-slate-800 truncate max-w-[200px]">
+              {p.slice(0, 32)}…
+            </button>
+          ))}
+        </div>
+        <button data-testid="emotie-pipeline-run-btn"
+          onClick={runPipeline}
+          disabled={running || !text.trim()}
+          className="mt-3 px-4 py-2 text-sm font-medium rounded-lg bg-orange-500 hover:bg-orange-600 disabled:opacity-40 text-white flex items-center gap-2">
+          <Layers className="w-4 h-4" />
+          {running ? 'Draaien…' : 'Pipeline draaien'}
+        </button>
+      </Card>
+
+      {/* Resultaat per laag */}
+      {result && (
+        <div data-testid="emotie-pipeline-result" className="space-y-3">
+          {/* Summary */}
+          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+            <h3 className="text-xs uppercase text-slate-400 mb-2 tracking-wider">Samenvatting</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+              <div><span className="text-slate-500 text-xs">Emotie</span><p data-testid="result-emotie" className="text-white font-medium">{result.summary?.emotie || 'neutraal'}</p></div>
+              <div><span className="text-slate-500 text-xs">Weging</span><p className="text-white font-medium">{result.summary?.weging}</p></div>
+              <div><span className="text-slate-500 text-xs">Kernwaarde</span><p data-testid="result-kernwaarde" className="text-pink-300 font-medium">{result.summary?.kernwaarde || '—'}</p></div>
+              <div><span className="text-slate-500 text-xs">Behavior</span><p data-testid="result-behavior" className="text-cyan-300 font-medium">{result.summary?.behavior}</p></div>
+              <div><span className="text-slate-500 text-xs">Identity-axis</span><p className="text-amber-300 font-medium">{result.summary?.identity_axis}</p></div>
+              <div><span className="text-slate-500 text-xs">Tempo</span><p className="text-white font-medium">{result.summary?.tone?.tempo}</p></div>
+              <div><span className="text-slate-500 text-xs">Directheid</span><p className="text-white font-medium">{result.summary?.tone?.directheid}</p></div>
+              <div><span className="text-slate-500 text-xs">Passend</span><p className={`font-medium ${result.summary?.passend ? 'text-emerald-300' : 'text-red-300'}`}>{result.summary?.passend ? '✓ ja' : '✗ schuurt'}</p></div>
+            </div>
+          </div>
+
+          {/* Per laag */}
+          {(result.trace || []).map(t => {
+            const color = layerColors[t.layer] || '#94a3b8';
+            const out = t.output || {};
+            const hasError = !!out.error;
+            return (
+              <div key={t.layer} data-testid={`emotie-layer-${t.layer}`}
+                className="bg-slate-900/40 border border-slate-800 rounded-xl overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-2 border-b border-slate-800/50"
+                     style={{ background: `${color}15` }}>
+                  <span className="w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold text-white"
+                        style={{ background: color }}>{t.layer}</span>
+                  <h4 className="text-sm font-semibold text-white capitalize">{t.name}</h4>
+                  {hasError && <span className="ml-auto text-[10px] text-red-300 bg-red-500/15 px-2 py-0.5 rounded">error</span>}
+                </div>
+                <div className="p-3 space-y-1">
+                  {Object.entries(out).map(([k, v]) => (
+                    <div key={k} className="flex items-start gap-2 text-xs">
+                      <span className="text-slate-500 min-w-[120px]">{k}</span>
+                      <span className="text-slate-200 break-words">
+                        {typeof v === 'object' ? JSON.stringify(v) : String(v ?? '—')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Footnote-meta */}
+          <details className="bg-slate-900/40 border border-slate-800 rounded-xl overflow-hidden">
+            <summary className="px-4 py-2 text-xs text-slate-400 cursor-pointer hover:bg-slate-800/40">
+              🧾 Footnote-meta (debug info)
+            </summary>
+            <pre className="p-3 text-[10px] text-slate-400 overflow-x-auto">
+              {JSON.stringify(result.footnote, null, 2)}
+            </pre>
+          </details>
+        </div>
+      )}
+
+      {/* Layers doc onderaan */}
+      {!result && layersDoc.length > 0 && (
+        <Card title="De 7 lagen — wat doen ze?" icon={Layers} accent="#fb923c">
+          <div className="space-y-2">
+            {layersDoc.map(L => (
+              <div key={L.n} className="flex items-start gap-3 text-xs">
+                <span className="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white"
+                      style={{ background: layerColors[L.n] || '#94a3b8' }}>{L.n}</span>
+                <div className="flex-1">
+                  <p className="text-white font-semibold">{L.name}</p>
+                  <p className="text-slate-400">{L.rol}</p>
+                  <p className="text-slate-600 text-[10px] mt-0.5">Bron: {L.bron}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+    </div>
+  );
+}

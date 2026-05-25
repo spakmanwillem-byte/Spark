@@ -1,6 +1,22 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_emotion_pipeline_001** (sessie 11, vervolg — 7-laags fundering live):
+  - 🧠 **Nieuwe module `modules/emotion_pipeline/`** met 7-laags pipeline (filosofie van Willem, geformuleerd via GPT):
+    - **L1 Detectie** — wrapper rond bestaande `EmotionDetectionService` (geen dubbel werk)
+    - **L2 Weging** — score → bracket (licht/midden/sterk/escalerend), bepaalt of emotie de interpretatie mag sturen
+    - **L3 Contextfilter** — emotie-lens per type (frustratie / nieuwsgierigheid / twijfel / risico-inschatting)
+    - **L4 Identiteitstoets** — gespiegeld aan Spark User core (transparantie/autonomie/menselijkheid/rust)
+    - **L5 Norm/waarden** — match tegen `spark_bijbel.json` kernwaarden + normen → passend/schuurt + welke waarde gekozen
+    - **L6 Actierouting** — emotie → behavior_class (begrenzen-structureren / vertragen-ondersteunen / exploreren-uitbreiden / kalmeren-opties / informatief-functioneel)
+    - **L7 Expressie** — toon-presets per behavior_class (tempo/directheid/zachtheid/detail + voorbeeld-zin)
+  - 🔌 **Dry-run endpoint** `POST /api/emotion-pipeline/run` + `GET /api/emotion-pipeline/layers` (geen impact op live chat)
+  - 🖥️ **Spark Brain UI tab "Emotie Pipeline"**: textarea + 5 preset-knoppen + per-laag output panels met kleurcodering (oranje→cyaan) + footnote-meta details
+  - 🧾 **Footnote-meta** in elke pipeline-run: `{module, version, user_id, layers_completed[], layers_failed[], ran_at}` voor traceability (zelfde patroon als KB v2 hooks)
+  - 🧹 **Spark Bijbel cleanup**: test-norm "Test Norm UPDATED" + test bijbel-item "Levenswijs: Test Visie" weg → 5 normen + 10 bijbel-items resterend
+  - ✅ E2E getest: boos→Respect+begrenzen-structureren, blij→Positiviteit+exploreren-uitbreiden, bedroefd→Emoties+vertragen-ondersteunen, neutraal→Eerlijkheid+informatief-functioneel. UI rendert alle 7 lagen met kleurbadges
+  - 🔄 **Inhaak in live chat-flow**: NOG NIET — pipeline is dry-run only. Volgende sessie: hook in `chat/routes.py` vóór smart_intents
+
 - 2026-05-25 **v6_kbv2_hooks_landing_001** (sessie 11, vervolg — 5 hooks LIVE):
   - 🧩 **Alle 5 KB v2 P1-hooks geïmplementeerd** in `modules/kb_v2/hooks.py` (placeholders → productiecode):
     1. **register_in_vocab** → `/data/personality/spark_vocab.json` (begrip + lade + active + use_count). Active wanneer kaart in lade EN laag1 gevuld. `bump_vocab_use_count()` toegevoegd voor toekomstige ranking.

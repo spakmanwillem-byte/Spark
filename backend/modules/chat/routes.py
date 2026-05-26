@@ -1340,6 +1340,30 @@ def _save_log(req: "ChatMessage", response: dict, trigger_type):
     except Exception:
         pass
 
+    # v6_command_registry_001 — auto-log intent (text + pipeline tags + chosen route)
+    try:
+        from modules.intent_registry.extractor import extract_tags as _extract_tags
+        from pathlib import Path as _P
+        import json as _json
+        from datetime import datetime as _dt, timezone as _tz
+        _pipe_summary = response.get("emotion_pipeline_shadow") or {}
+        _tag_vector = _extract_tags(req.message, _pipe_summary)
+        _intent_log = _P(__file__).parent.parent.parent / "data" / "system" / "intent_log.jsonl"
+        _intent_log.parent.mkdir(parents=True, exist_ok=True)
+        _entry = {
+            "ts": _dt.now(_tz.utc).isoformat(),
+            "user_id": req.user_id,
+            "text": (req.message or "")[:200],
+            "tag_vector": _tag_vector,
+            "tag_key": "|".join(sorted(_tag_vector)),
+            "chosen_route": trigger_type,
+            "chosen_command_id": response.get("capability_id"),
+        }
+        with open(_intent_log, "a", encoding="utf-8") as f:
+            f.write(_json.dumps(_entry, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
 
 def _build_ab_entry(req, response, trigger_type) -> dict:
     """v6_emotion_pipeline_ab_001 — bouw 1 vergelijkingsregel.

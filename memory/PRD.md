@@ -1,6 +1,24 @@
 # Spark Core 2.0 — PRD
 
 ## Completed (recent)
+- 2026-05-25 **v6_command_registry_001** (sessie 12 — Bidirectionele Command-Registry MVP / fundering donderdag):
+  - 📋 **`/data/system/command_registry.json`** met **27 commands** uit alle modules (capabilities/agenda/notes/wallet/trade/kbv2/bijbel/spark/emotion/community/dagboek/achievements/leaderboard/boekhouder). Per command: `intent_tags[]`, `required_params[]`, `gradatie_min`, `behavior_class_hint`.
+  - 🧠 **Intent-extractor** (`modules/intent_registry/extractor.py`):
+    - Keyword-map met ~150 woord→canonical-tag mappings
+    - Multi-word phrases ("wat is", "wie ben jij", "doe je niet") matchen vóór tokenisatie
+    - Emotie-pipeline integratie: voegt `emo:`, `behavior:`, `waarde:` prefix-tags toe als pipeline-summary meekomt
+  - 🎯 **Capability-matcher** (`matcher.py`):
+    - Jaccard-overlap score met +15% behavior_class bonus als pipeline-behavior matcht
+    - Top-N candidates + disambiguation flag (twee scores binnen 0.1)
+    - Gradatie-filter (gradatie_min ≤ user-gradatie)
+  - 🔌 **6 endpoints** (`routes.py`): `/extract`, `/match`, `/run-flow`, `/registry`, `/log`, `/skills/candidates`
+  - 🔍 **Skill-discovery embryo**: `intent_log.jsonl` automatisch geschreven bij elke chat-call (text + tag_vector + chosen_route). `/skills/candidates?min_occurrences=3` detecteert patronen — donderdag UI om accepteren.
+  - ✅ E2E verified:
+    - "wat staat morgen op mijn agenda?" → tags `[morgen, agenda]` → `agenda_list` score 0.57
+    - "hoeveel gebruikers hebben we?" → tags `[tellen, gebruikers]` → `cap_tellen_gebruikers` score 0.40
+    - 4x "hoeveel gebruikers" → skill_candidate gevonden met 5-tag-vector + voorbeeld-tekst
+  - 🛣️ **Donderdag uitbouwen op deze fundering**: UI disambiguation panel, sequential composition, skill-discovery accept/reject UI, LLM-upgrade extractor, gradatie-locks daadwerkelijk afdwingen.
+
 - 2026-05-25/12 **Sessie 11 + 12 — Spark Core stabilisatie compleet**:
   - Roadmap-tab gesynchroniseerd: alle v6-items afgevinkt (A/B diff toegevoegd als done item).
   - Identity v2.0 linked_layers correct: 9 kernwaarden · 6 normen · 9 bijbel-items · 12 capabilities live · 7 emotie-lagen · 5 KB v2 hooks.

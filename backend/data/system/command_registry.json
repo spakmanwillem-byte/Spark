@@ -1,0 +1,271 @@
+{
+  "_arch_ref": "v6_command_registry_001 — master mapping van app-endpoints naar intent_tags (donderdag-fundering)",
+  "version": "v1",
+  "last_updated": "2026-05-25T22:00:00Z",
+  "commands": [
+    {
+      "id": "cap_tellen_gebruikers",
+      "path": "/api/users/count",
+      "method": "GET",
+      "intent_tags": ["tellen", "gebruikers", "leden", "aantal", "overzicht"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_tellen_gebruikers"
+    },
+    {
+      "id": "cap_tellen_bestanden",
+      "path": "/api/system-archive/count",
+      "method": "GET",
+      "intent_tags": ["tellen", "bestanden", "archief", "media", "aantal"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_tellen_bestanden"
+    },
+    {
+      "id": "cap_taken_lijst",
+      "path": "/api/notes/tasks",
+      "method": "GET",
+      "intent_tags": ["taken", "todo", "lijst", "bekijken", "openstaand"],
+      "required_params": ["user_id"],
+      "gradatie_min": 3,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_taken_lijst"
+    },
+    {
+      "id": "cap_winst_verlies",
+      "path": "/api/trade/stats",
+      "method": "GET",
+      "intent_tags": ["winst", "verlies", "pnl", "trade", "resultaat", "overzicht"],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_winst_verlies"
+    },
+    {
+      "id": "cap_spark_saldo",
+      "path": "/api/wallet/spark/balance",
+      "method": "GET",
+      "intent_tags": ["saldo", "spark", "geld", "balance", "kasboek"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_spark_saldo"
+    },
+    {
+      "id": "cap_gesprek_lezen",
+      "path": "/api/chat/recap",
+      "method": "GET",
+      "intent_tags": ["gesprek", "lezen", "terugkijken", "log", "geschiedenis", "wat besproken"],
+      "required_params": ["user_id"],
+      "gradatie_min": 3,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_gesprek_lezen"
+    },
+    {
+      "id": "cap_toon_afbeelding",
+      "path": "/api/system-archive/list?type=image",
+      "method": "GET",
+      "intent_tags": ["afbeelding", "foto", "plaatje", "tonen", "archief"],
+      "required_params": ["user_id"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_toon_afbeelding"
+    },
+    {
+      "id": "cap_speel_geluid",
+      "path": "/api/system-archive/list?type=audio",
+      "method": "GET",
+      "intent_tags": ["geluid", "audio", "afspelen", "muziek", "stem"],
+      "required_params": ["user_id"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel",
+      "source": "capability_handler_service._handle_speel_geluid"
+    },
+    {
+      "id": "agenda_list",
+      "path": "/api/agenda/items",
+      "method": "GET",
+      "intent_tags": ["agenda", "afspraak", "planning", "tijd", "bekijken", "vandaag", "morgen"],
+      "required_params": ["user_id"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "agenda_create",
+      "path": "/api/agenda/items",
+      "method": "POST",
+      "intent_tags": ["agenda", "afspraak", "toevoegen", "plannen", "nieuw"],
+      "required_params": ["user_id", "titel", "datum"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "notes_create",
+      "path": "/api/notes",
+      "method": "POST",
+      "intent_tags": ["notitie", "noteren", "schrijven", "opslaan", "memo", "onthouden"],
+      "required_params": ["user_id", "title", "content"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "wallet_topup",
+      "path": "/api/wallet/tikkie",
+      "method": "POST",
+      "intent_tags": ["geld", "toevoegen", "tikkie", "opwaarderen", "topup", "wallet"],
+      "required_params": ["user_id", "amount_eur"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "wallet_transactions",
+      "path": "/api/wallet/transactions",
+      "method": "GET",
+      "intent_tags": ["transacties", "wallet", "geschiedenis", "uitgaven", "bekijken"],
+      "required_params": ["user_id"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "trade_watchlist",
+      "path": "/api/trade/watchlist",
+      "method": "GET",
+      "intent_tags": ["trade", "watchlist", "coins", "prijs", "monitor", "crypto"],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "trade_buy",
+      "path": "/api/trade/buy",
+      "method": "POST",
+      "intent_tags": ["kopen", "buy", "trade", "order", "crypto"],
+      "required_params": ["market", "amount_eur"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "trade_sell",
+      "path": "/api/trade/sell",
+      "method": "POST",
+      "intent_tags": ["verkopen", "sell", "trade", "order", "crypto"],
+      "required_params": ["market", "amount_coin"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "kbv2_search",
+      "path": "/api/kb/v2/find",
+      "method": "GET",
+      "intent_tags": ["kennis", "weten", "uitleg", "zoeken", "begrip", "wat is"],
+      "required_params": ["begrip"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "kbv2_audit",
+      "path": "/api/kb/v2/audit",
+      "method": "GET",
+      "intent_tags": ["audit", "scan", "kennis", "missend", "gaten"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "bijbel_lookup",
+      "path": "/api/spark/bijbel",
+      "method": "GET",
+      "intent_tags": ["bijbel", "waarden", "normen", "moraal", "ethiek", "kernwaarde"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "vertragen-ondersteunen"
+    },
+    {
+      "id": "spark_disclaimer",
+      "path": "/api/spark/disclaimer",
+      "method": "GET",
+      "intent_tags": ["disclaimer", "wat doe je niet", "grenzen", "kaders", "wie ben jij"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "spark_identity",
+      "path": "/api/spark/identity",
+      "method": "GET",
+      "intent_tags": ["identiteit", "wie ben jij", "spark", "persoonlijkheid", "doel"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "emotion_pipeline_run",
+      "path": "/api/emotion-pipeline/run",
+      "method": "POST",
+      "intent_tags": ["emotie", "pipeline", "analyse", "test", "voelen"],
+      "required_params": ["text"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "achievements_list",
+      "path": "/api/achievements/{user_id}",
+      "method": "GET",
+      "intent_tags": ["achievement", "milestone", "xp", "behaald", "voortgang"],
+      "required_params": ["user_id"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "leaderboard",
+      "path": "/api/leaderboard",
+      "method": "GET",
+      "intent_tags": ["leaderboard", "ranglijst", "podium", "top", "score"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "community_chat_send",
+      "path": "/api/community/messages",
+      "method": "POST",
+      "intent_tags": ["community", "chat", "bericht", "groep", "post"],
+      "required_params": ["user_id", "text"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "diary_entry_create",
+      "path": "/api/dagboek/entries",
+      "method": "POST",
+      "intent_tags": ["dagboek", "entry", "schrijven", "reflectie", "mood"],
+      "required_params": ["user_id", "content"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "vertragen-ondersteunen"
+    },
+    {
+      "id": "boekhouder_overview",
+      "path": "/api/boekhouder/transactions",
+      "method": "GET",
+      "intent_tags": ["kasboek", "boekhouding", "transacties", "overzicht", "financien"],
+      "required_params": [],
+      "gradatie_min": 2,
+      "behavior_class_hint": "informatief-functioneel"
+    }
+  ],
+  "stats": {
+    "total_commands": 27,
+    "by_gradatie_min": {
+      "1": 22,
+      "2": 4,
+      "3": 2
+    },
+    "by_behavior_class": {
+      "informatief-functioneel": 18,
+      "exploreren-uitbreiden": 7,
+      "vertragen-ondersteunen": 2
+    }
+  }
+}

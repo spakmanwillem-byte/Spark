@@ -243,6 +243,10 @@ app.include_router(kbv2_media_router, prefix="/api")
 from modules.emotion_pipeline.routes import router as emotion_pipeline_router
 app.include_router(emotion_pipeline_router, prefix="/api")
 
+# v6_command_registry_001 — Bidirectionele intent ↔ capability matcher (fundering donderdag)
+from modules.intent_registry.routes import router as intent_registry_router
+app.include_router(intent_registry_router, prefix="/api")
+
 # Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")

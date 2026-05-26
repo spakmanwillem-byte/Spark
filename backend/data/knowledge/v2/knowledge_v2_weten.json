@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1074,
+    "card_count": 1085,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-25T15:03:00.238470+00:00"
+    "last_updated": "2026-05-26T15:28:22.023134+00:00"
   },
   "kaarten": [
     {
@@ -124607,8 +124607,58 @@
               "n_found": 5,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:37:09.436880+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:37:09.442917+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:37:37.446717+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:37:37.453073+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:37:59.241938+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:37:59.247900+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:37:58.379451+00:00"
       },
       "media": {
         "voice_url": null,
@@ -127341,6 +127391,1795 @@
       },
       "needs": [
         "voice"
+      ]
+    },
+    {
+      "id": "kbv2-f8f9871b",
+      "begrip": "Kruiden en Specerijen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kruiden en specerijen zijn natuurlijke smaakmakers uit planten die worden gebruikt om eten meer smaak, geur en soms geneeskrachtige werking te geven.",
+        "laag2": "Kruiden komen meestal van de groene delen van een plant, zoals bladeren of stengels.\nSpecerijen komen vaak uit andere delen, zoals zaden, bast, wortels of vruchten.\n\nVoorbeelden:\n\nKruiden: basilicum, peterselie, munt\nSpecerijen: kaneel, peper, kruidnagel",
+        "laag3": "Ze worden wereldwijd gebruikt in koken, bewaren van voedsel, geneeskunde en rituelen.\n\nFuncties:\n\nsmaak versterken\ngeur toevoegen\nconserveren\ngezondheid ondersteunen\ncultuur en traditie weerspiegelen\n\nSommige hebben antibacteriële of ontstekingsremmende eigenschappen.",
+        "laag4": "Kruiden en specerijen verbinden smaak met herinnering, cultuur en gevoel.\n\nVoorbeeld:\nDe geur van kaneel kan herinneringen oproepen aan winter of thuis.\nMunt kan frisheid en rust geven.\n\nZe laten zien hoe kleine toevoegingen grote invloed kunnen hebben."
+      },
+      "ws5": {
+        "wie": "Koks, gezinnen, voedselproducenten, kruidenkenners, artsen uit traditionele geneeswijzen",
+        "wat": "Plantaardige smaakmakers die eten verrijken",
+        "wanneer": "Tijdens koken, bakken, bewaren of bereiden van dranken",
+        "waar": "Keuken, tuin, markt, natuur, voedselindustrie",
+        "waarom": "Voor smaak, geur, gezondheid en beleving",
+        "hoe": "Door drogen, malen, kneuzen, koken of vers toevoegen"
+      },
+      "tags": [
+        "smaak",
+        "geur",
+        "voeding",
+        "natuur",
+        "gezondheid",
+        "koken",
+        "cultuur",
+        "beleving",
+        "verbinding"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-10630d05",
+          "begrip": "Kruiden",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beleving",
+            "geur",
+            "koken",
+            "smaak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c8d90e70",
+          "begrip": "Bouillon",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "koken",
+            "smaak",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-22dc32d3",
+          "begrip": "Kruiden & specerijen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "geur",
+            "smaak",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-58668008",
+          "begrip": "drank",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "smaak",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "natuur",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:26:31.324254+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-25T06:38:47.154898+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:26:26.396645+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.968650+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:26:27.257791+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:26:27.333555+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:26:33.137362+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:26:33.143703+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/941578f9544a"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-ca25da2d",
+      "begrip": "Vlees (voedsel)",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Vlees is dierlijk voedsel dat afkomstig is van spieren en weefsels van dieren en wordt gebruikt als voedingsbron.",
+        "laag2": "Vlees bevat belangrijke voedingsstoffen zoals:\n\neiwitten\nijzer\nvitamine B12\nvetten\nmineralen\n\nHet wordt gegeten in verschillende vormen:\n\nvers\ngebakken\ngekookt\ngedroogd\nverwerkt\n\nVoorbeelden: rundvlees, kip, varkensvlees, lamsvlees.",
+        "laag3": "Vlees speelt wereldwijd een rol in voeding, cultuur en economie.\n\nAspecten:\n\nbron van bouwstoffen voor het lichaam\nonderdeel van tradities en gerechten\nonderwerp van discussie over gezondheid, dierenwelzijn en duurzaamheid\n\nTe veel bewerkt vlees kan minder gezond zijn, terwijl onbewerkte vleesproducten voedingswaarde bieden.",
+        "laag4": "Vlees roept verschillende gevoelens en overtuigingen op.\n\nVoor sommigen is het:\n\ntraditie\nkracht\ncomfortfood\n\nVoor anderen roept het vragen op over:\n\ndierenwelzijn\nmilieu\nethiek\n\nHet laat zien hoe voeding verbonden is met keuzes en waarden."
+      },
+      "ws5": {
+        "wie": "Mensen, slagers, boeren, koks, voedingsdeskundigen",
+        "wat": "Dierlijk voedsel rijk aan eiwitten en voedingsstoffen",
+        "wanneer": "Bij maaltijden, feestdagen, dagelijkse voeding",
+        "waar": "Supermarkt, slagerij, boerderij, keuken, restaurant",
+        "waarom": "Voor voeding, energie, spieropbouw en smaak",
+        "hoe": "Door bereiden zoals bakken, koken, grillen of stoven"
+      },
+      "tags": [
+        "voeding",
+        "eiwitten",
+        "gezondheid",
+        "traditie",
+        "keuze",
+        "duurzaamheid",
+        "koken",
+        "grondstoffen",
+        "product"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f8f9871b",
+          "begrip": "Kruiden en Specerijen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "koken",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fbceb2a6",
+          "begrip": "Drinken",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gezondheid",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7bc1088",
+          "begrip": "Energie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "duurzaamheid",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0415d2a1",
+          "begrip": "Olie (plantaardig)",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "koken",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72a472d8",
+          "begrip": "Boter",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "koken",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:28:24.883250+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-25T06:36:47.785207+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:39:37.118515+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.934255+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:28:18.856718+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:28:18.933634+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:28:26.556527+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:28:26.632401+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:39:38.033480+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:39:38.038535+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/e5d69e8b2623"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-skel-efd6adb5",
+      "begrip": "brood",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Brood is een voedingsproduct dat wordt gemaakt van meel, water en meestal gist, en wordt gebakken in een oven.",
+        "laag2": "Brood is een veelgegeten basisvoedsel.\n\nHet wordt vaak gemaakt van:\n\nmeel of bloem\nwater\ngist\nzout\n\nEr zijn verschillende soorten brood:\n\nwit brood\nbruin brood\nvolkoren brood\nstokbrood\nkrentenbrood",
+        "laag3": "Brood is wereldwijd een belangrijk onderdeel van voeding.\n\nHet levert:\n\nkoolhydraten\nenergie\nvezels (bij volkoren brood)\nsoms vitaminen en mineralen\n\nHet maken van brood vraagt een proces van:\n\nmengen\nkneden\nrijzen\nbakken\n\nVerschillende culturen hebben hun eigen broodsoorten.",
+        "laag4": "Brood staat vaak symbool voor voeding, delen en dagelijks leven.\n\nHet roept associaties op met:\n\nontbijt\ngezin\nwarmte\nzorg\nsamen eten\n\nIn veel culturen heeft brood ook een symbolische of traditionele betekenis."
+      },
+      "ws5": {
+        "wie": "Bakkers, klanten, gezinnen, voedselproducenten",
+        "wat": "Een gebakken voedingsproduct van meel en water",
+        "wanneer": "Bij ontbijt, lunch, avondeten of tussendoor",
+        "waar": "Bakkerij, supermarkt, keuken, restaurant",
+        "waarom": "Als bron van energie en voeding",
+        "hoe": "Door deeg te maken, te laten rijzen en te bakken"
+      },
+      "tags": [
+        "voeding",
+        "brood",
+        "bakken",
+        "energie",
+        "basisvoedsel",
+        "traditie",
+        "dagelijks leven",
+        "grondstoffen",
+        "product"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ca25da2d",
+          "begrip": "Vlees (voedsel)",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "grondstoffen",
+            "product",
+            "traditie",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f30cc0dd",
+          "begrip": "Bakker (beroep)",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bakken",
+            "brood",
+            "traditie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d466d14",
+          "begrip": "Bakker (gebouw)",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "brood",
+            "grondstoffen",
+            "product"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4111e684",
+          "begrip": "Reikistamboom",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "traditie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7bc1088",
+          "begrip": "Energie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:40:11.079966+00:00",
+        "vorige_versie_v1": "kb-skel-efd6adb5",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.772377+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:36:09.934146+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:36:09.940007+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:40:05.150323+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:40:05.155976+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:40:12.746821+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:40:12.752065+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:40:04.269260+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/11b24741b018"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-e0854d66",
+      "begrip": "Toverdrank",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een toverdrank is een magische vloeistof die speciale krachten of effecten kan geven.",
+        "laag2": "Toverdranken komen vaak voor in fantasieverhalen en spellen.\n\nZe kunnen verschillende effecten hebben, zoals:\n\ngenezen\nsterker maken\nonzichtbaar maken\nenergie geven\nmagie versterken\n\nZe worden meestal gemaakt door magische ingrediënten te mengen.",
+        "laag3": "Een toverdrank wordt vaak gemaakt door een alchemist, heks, tovenaar of magiër.\n\nIngrediënten kunnen zijn:\n\nkruiden\nkristallen\nmagisch water\nzeldzame planten\nspeciale poeders\n\nHet maken vraagt vaak:\n\nkennis\nprecisie\njuiste timing\nmagische spreuken\n\nIn fantasywerelden kunnen toverdranken tijdelijk of blijvend effect hebben.",
+        "laag4": "Een toverdrank staat symbool voor verandering en mogelijkheid.\n\nHet roept gedachten op aan:\n\nhoop\nmysterie\nrisico\nkracht\nexperimenteren\n\nHet laat zien hoe kleine ingrediënten samen iets groots kunnen creëren."
+      },
+      "ws5": {
+        "wie": "Tovenaars, alchemisten, heksen, avonturiers",
+        "wat": "Een magische vloeistof met bijzondere effecten",
+        "wanneer": "Tijdens magie, gevechten, genezing of experimenten",
+        "waar": "Laboratorium, tovertoren, fantasywereld, alchemiewinkel",
+        "waarom": "Om magische effecten te veroorzaken",
+        "hoe": "Door magische ingrediënten te mengen en bereiden"
+      },
+      "tags": [
+        "magie",
+        "fantasie",
+        "alchemie",
+        "kracht",
+        "verandering",
+        "mysterie",
+        "drank",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2b80d498",
+          "begrip": "Ring",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "kracht",
+            "magie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-61769f61",
+          "begrip": "Staf met steen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "kracht",
+            "magie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d04e23d2",
+          "begrip": "Handzwaard",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "fantasie",
+            "kracht",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "magie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ff29657",
+          "begrip": "Magie",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "fantasie",
+            "kracht",
+            "magie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:45:42.786422+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-25T06:30:46.450800+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:45:40.029112+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.830746+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:45:41.019978+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:45:41.030424+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:45:44.536193+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:45:44.545309+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/05947f687a13"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-5ce822aa",
+      "begrip": "zonnewende",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een zonnewende is het moment waarop de zon haar hoogste of laagste punt aan de hemel bereikt, waardoor de langste of kortste dag van het jaar ontstaat.",
+        "laag2": "Er zijn twee zonnewendes per jaar:\n\nZomerzonnewende → langste dag, kortste nacht\nWinterzonnewende → kortste dag, langste nacht\n\nDit gebeurt doordat de aarde schuin om de zon draait.",
+        "laag3": "De zonnewende speelt al duizenden jaren een belangrijke rol.\n\nHet werd gebruikt voor:\n\nkalenders\nlandbouwplanning\nseizoenswisseling\nfeesten en rituelen\n\nVeel culturen vieren de zonnewende met ceremonies, vuur, samenkomsten of tradities.\n\nVoorbeelden:\n\nmidzomerfeesten\nwinterlichtvieringen\nspirituele bijeenkomsten",
+        "laag4": "De zonnewende staat symbool voor verandering en overgang.\n\nHet roept gedachten op aan:\n\nnieuwe beginpunten\nbalans tussen licht en donker\nnatuurcycli\ngroei en rust\n\nHet laat zien dat alles in ritmes en seizoenen beweegt."
+      },
+      "ws5": {
+        "wie": "Mensen, astronomen, culturen, natuurvolgers",
+        "wat": "Een astronomisch moment waarop de zon haar hoogste of laagste stand bereikt",
+        "wanneer": "Rond 21 juni en 21 december",
+        "waar": "Overal op aarde, zichtbaar verschillend per locatie",
+        "waarom": "Door de schuine stand van de aardas",
+        "hoe": "Doordat de aarde om de zon draait met een gekantelde as"
+      },
+      "tags": [
+        "natuur",
+        "seizoenen",
+        "astronomie",
+        "licht",
+        "donker",
+        "ritme",
+        "overgang",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "licht",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-43a559a1",
+          "begrip": "Vleermuis",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "donker",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8cbee41",
+          "begrip": "Duiven",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "chat_command",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:53:32.088102+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-23T12:37:31.742802+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.518251+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:53:27.847793+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:53:27.925353+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:53:33.844124+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:53:33.850430+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:53:26.923437+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9115c6a7",
+      "begrip": "weet",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Weet is een vorm van het werkwoord weten en betekent dat iemand ergens kennis van heeft.",
+        "laag2": "“Weet” gebruik je wanneer iemand iets kent of begrijpt.\n\nVoorbeelden:\n\nIk weet het.\nWeet jij waar dat is?\nHij weet hoe het werkt.\n\nHet laat zien dat kennis aanwezig is.",
+        "laag3": "“Weet” wordt gebruikt om zekerheid of bekendheid uit te drukken.\n\nHet kan gaan over:\n\nfeiten\nherinneringen\nvaardigheden\ninformatie\ninzicht\n\nHet woord wordt vaak gebruikt in communicatie om duidelijkheid te geven.",
+        "laag4": "“Weet” laat zien dat iemand toegang heeft tot kennis.\n\nHet roept vragen op zoals:\n\nHoe weet je dat?\nWaar komt die kennis vandaan?\nIs het zeker?\n\nHet verbindt taal met kennis en vertrouwen."
+      },
+      "ws5": {
+        "wie": "Iedereen die kennis uitdrukt",
+        "wat": "Een werkwoordsvorm van weten",
+        "wanneer": "Wanneer iemand kennis of zekerheid uitspreekt",
+        "waar": "In gesproken en geschreven taal",
+        "waarom": "Om aan te geven dat iets bekend is",
+        "hoe": "Door het uit te spreken of op te schrijven"
+      },
+      "tags": [
+        "taal",
+        "kennis",
+        "werkwoord",
+        "begrip",
+        "communicatie",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9fb4bf15",
+          "begrip": "dieper",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "blij",
+            "communicatie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-361c0e49",
+          "begrip": "geschreven",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "kennis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-33902a4a",
+          "begrip": "goedeavond",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "kennis",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T14:32:30.439147+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-26T14:32:14.978791+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T14:32:16.131939+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:32:17.136669+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:32:17.144360+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:32:32.231405+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:32:32.238489+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c7901357",
+      "begrip": "test-edit-flow",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Test-edit-flow is een controleproces waarmee wordt getest of wijzigingen correct worden opgeslagen, aangepast en verwerkt.",
+        "laag2": "Het wordt gebruikt om te controleren of bewerken goed werkt.\n\nBijvoorbeeld:\n\ntekst aanpassen\nwijzigingen opslaan\ncontroleren op fouten\nnagaan of updates zichtbaar zijn\n\nHet helpt om systemen betrouwbaar te houden.",
+        "laag3": "Binnen een systeem test een edit-flow de volledige wijzigingsroute.\n\nDit controleert:\n\ninvoer\nverwerking\nopslag\nterugkoppeling\nweergave\n\nZo kun je ontdekken of ergens in de keten fouten ontstaan.\n\nBinnen Spark helpt dit bij het testen van kenniskaarten en kaartbewerkingen.",
+        "laag4": "Een test-edit-flow laat zien hoe belangrijk controle en iteratie zijn.\n\nHet maakt zichtbaar dat verbeteren vaak gebeurt door:\n\nproberen\naanpassen\ntesten\nverfijnen\n\nFouten geven richting voor ontwikkeling."
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars, testers, gebruikers",
+        "wat": "Een proces om bewerkingen te testen",
+        "wanneer": "Tijdens bouwen, aanpassen en controleren",
+        "waar": "Binnen software, databases en kaartsystemen",
+        "waarom": "Om te controleren of wijzigingen goed werken",
+        "hoe": "Door invoer aan te passen en resultaat te controleren"
+      },
+      "tags": [
+        "test",
+        "bewerken",
+        "controle",
+        "systeem",
+        "ontwikkeling",
+        "debug"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-90e890bc",
+          "begrip": "test na fixes",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "controle",
+            "ontwikkeling",
+            "systeem",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-23684ad1",
+          "begrip": "Test",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "ontwikkeling",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99e32e9a",
+          "begrip": "testkaart-debug",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "ontwikkeling",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f0b6329",
+          "begrip": "houden",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T14:34:18.308964+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-23T21:23:11.666397+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T14:34:06.147525+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.660455+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:34:07.159307+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:34:07.234352+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:34:20.035561+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:34:20.042145+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-aa698519",
+      "begrip": "test-inbox-edit",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Test-inbox-edit is een testfunctie om te controleren of berichten in een inbox correct kunnen worden aangepast en opgeslagen.",
+        "laag2": "Deze test controleert of een inboxsysteem goed werkt bij het bewerken van inhoud.\n\nDaarbij wordt gekeken naar:\n\nopenen van berichten\naanpassen van inhoud\nopslaan van wijzigingen\ntonen van de nieuwe versie",
+        "laag3": "Een inbox-edit test controleert meerdere onderdelen van een systeem.\n\nBijvoorbeeld:\n\nof data correct geladen wordt\nof wijzigingen worden verwerkt\nof oude inhoud wordt overschreven\nof fouten worden gemeld\nof synchronisatie goed verloopt\n\nBinnen Spark kan dit gebruikt worden om berichtstromen en opslaglogica te testen.",
+        "laag4": "Deze test laat zien hoe belangrijk betrouwbaarheid is in communicatie.\n\nWanneer berichten niet goed worden aangepast of opgeslagen, ontstaat verwarring.\n\nEen goede inbox-edit-flow zorgt voor:\n\nduidelijkheid\ncontrole\nvertrouwen\nconsistente informatie"
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars, testers, gebruikers",
+        "wat": "Een test voor het aanpassen van inboxberichten",
+        "wanneer": "Tijdens systeemontwikkeling en kwaliteitscontrole",
+        "waar": "Binnen berichten- en communicatiesystemen",
+        "waarom": "Om te controleren of bewerken goed werkt",
+        "hoe": "Door berichten aan te passen en de verwerking te controleren"
+      },
+      "tags": [
+        "test",
+        "inbox",
+        "berichten",
+        "bewerken",
+        "controle",
+        "systeem",
+        "debug"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c7901357",
+          "begrip": "test-edit-flow",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewerken",
+            "controle",
+            "debug",
+            "systeem",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-90e890bc",
+          "begrip": "test na fixes",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f0b6329",
+          "begrip": "houden",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a934145b",
+          "begrip": "controleren",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T14:35:55.166523+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-23T21:23:11.392545+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.626337+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:35:50.244184+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:35:50.250070+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:35:56.944981+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:35:56.951127+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T14:35:49.260737+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-571e34f4",
+      "begrip": "finale-test",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Finale-test is de laatste controle om te testen of een systeem volledig en correct werkt voordat het definitief wordt gebruikt.",
+        "laag2": "Een finale-test is de afsluitende testfase.\n\nHiermee controleer je of:\n\nalles goed functioneert\nfouten zijn opgelost\nonderdelen samenwerken\nhet systeem klaar is voor gebruik\n\nHet is de laatste check voor oplevering.",
+        "laag3": "Tijdens een finale-test worden alle belangrijke processen gecontroleerd.\n\nDit kan bestaan uit:\n\nfunctietesten\ngebruikerstesten\ncontrole van opslag\ncontrole van invoer en uitvoer\neindvalidatie\n\nBinnen Spark kan dit betekenen dat kaarten, opslag, inbox en edits samen getest worden.",
+        "laag4": "Een finale-test staat voor afronding en vertrouwen.\n\nHet laat zien dat ontwikkeling niet stopt bij bouwen, maar pas afgerond is na controle.\n\nEen goede finale-test zorgt voor:\n\nzekerheid\nstabiliteit\nbetrouwbaarheid\nrust bij oplevering"
+      },
+      "ws5": {
+        "wie": "Ontwikkelaars, testers, beheerders, gebruikers",
+        "wat": "De laatste controle van een systeem",
+        "wanneer": "Vlak voor oplevering of livegang",
+        "waar": "Binnen software, systemen en projecten",
+        "waarom": "Om te controleren of alles gereed is",
+        "hoe": "Door alle functies volledig te testen"
+      },
+      "tags": [
+        "test",
+        "controle",
+        "oplevering",
+        "validatie",
+        "systeem",
+        "afronding"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-90e890bc",
+          "begrip": "test na fixes",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "test",
+            "validatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c7901357",
+          "begrip": "test-edit-flow",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa698519",
+          "begrip": "test-inbox-edit",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "test"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39918bb0",
+          "begrip": "toestemming",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "validatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-71749540",
+          "begrip": "bevestig",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "systeem",
+            "validatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T14:37:59.937661+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-23T20:52:02.636829+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.589128+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:37:55.931668+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:37:55.938252+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:38:01.652207+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:38:01.729459+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T14:37:54.977373+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-95792024",
+      "begrip": "aandelen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aandelen zijn kleine eigendomsdelen van een bedrijf die gekocht en verkocht kunnen worden.",
+        "laag2": "Wanneer iemand aandelen bezit, heeft die persoon een stukje van een bedrijf.\n\nAandelen kunnen:\n\nin waarde stijgen\nin waarde dalen\nwinst opleveren\nstemrecht geven\n\nZe worden verhandeld op de beurs.",
+        "laag3": "Bedrijven geven aandelen uit om geld op te halen.\n\nMensen kopen aandelen om te investeren.\n\nDe waarde hangt af van:\n\nprestaties van het bedrijf\nvraag en aanbod\neconomische ontwikkelingen\nvertrouwen van investeerders\n\nSommige aandelen keren dividend uit: een deel van de winst.",
+        "laag4": "Aandelen gaan over eigenaarschap, risico en groei.\n\nZe laten zien hoe vertrouwen invloed heeft op waarde.\n\nInvesteren in aandelen vraagt inzicht, geduld en afweging tussen risico en mogelijke opbrengst."
+      },
+      "ws5": {
+        "wie": "Bedrijven, investeerders, aandeelhouders",
+        "wat": "Eigendomsdelen van een bedrijf",
+        "wanneer": "Bij investeren en beurshandel",
+        "waar": "Op aandelenbeurzen en financiële markten",
+        "waarom": "Om kapitaal op te halen of te investeren",
+        "hoe": "Door aandelen te kopen en verkopen"
+      },
+      "tags": [
+        "aandelen",
+        "eigendom",
+        "bedrijf",
+        "investeren",
+        "beurs",
+        "waarde",
+        "dividend"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-848800f2",
+          "begrip": "Beleggen",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "aandelen",
+            "investeren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77d3993a",
+          "begrip": "Bedrijven",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "bedrijf",
+            "waarde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T15:13:40.436711+00:00",
+        "vorige_versie_v1": "kb-skel-95792024",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:57.640836+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:13:39.032752+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:13:39.039407+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:13:42.432008+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:13:42.437889+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T15:13:38.013308+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e18a94d1",
+      "begrip": "aandrijving",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aandrijving is de kracht of het systeem dat beweging veroorzaakt.",
+        "laag2": "Aandrijving zorgt ervoor dat iets in beweging komt of blijft bewegen.\n\nVoorbeelden:\n\neen fietsketting\neen automotor\nelektrische kracht\nwindkracht\n\nZonder aandrijving ontstaat er geen gerichte beweging.",
+        "laag3": "Aandrijving wordt gebruikt in techniek en machines.\n\nEr zijn verschillende soorten:\n\nmechanische aandrijving\nelektrische aandrijving\nhydraulische aandrijving\nmenselijke aandrijving\nnatuurlijke aandrijving, zoals wind of water\n\nDe aandrijving zet energie om in beweging.",
+        "laag4": "Aandrijving staat voor kracht en voortgang.\n\nHet laat zien dat beweging altijd een bron nodig heeft.\n\nOok figuurlijk kan aandrijving betekenen:\n\nmotivatie\ninnerlijke kracht\niets dat vooruitgang stimuleert\n\nHet verbindt energie aan ontwikkeling."
+      },
+      "ws5": {
+        "wie": "Mensen, machines, voertuigen, systemen",
+        "wat": "Een kracht of systeem dat beweging veroorzaakt",
+        "wanneer": "Wanneer iets moet bewegen",
+        "waar": "Wanneer iets moet bewegen",
+        "waarom": "Om beweging en werking mogelijk te maken",
+        "hoe": "Door energie om te zetten in kracht en beweging"
+      },
+      "tags": [
+        "aandrijving",
+        "beweging",
+        "kracht",
+        "energie",
+        "motor",
+        "techniek"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ef7e86f6",
+          "begrip": "Motoren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beweging",
+            "energie",
+            "motor",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4eef7f35",
+          "begrip": "Engine",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "energie",
+            "motor",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f3c374b3",
+          "begrip": "Locomotief",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aandrijving",
+            "energie",
+            "motor"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19b876f3",
+          "begrip": "Wapen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e117d48",
+          "begrip": "Reikitechnieken",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T15:15:12.757347+00:00",
+        "vorige_versie_v1": "kb-skel-e18a94d1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:20.659597+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:15:10.648727+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:15:10.655413+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:15:14.554778+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:15:14.630492+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T15:15:09.649306+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-dcbe0f85",
+      "begrip": "aardrijkskunde",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aardrijkskunde is de studie van de aarde, landen, gebieden, natuur en hoe mensen daarin leven.",
+        "laag2": "Aardrijkskunde gaat over hoe de wereld is opgebouwd.\n\nHet kijkt naar:\n\nlanden\nsteden\nbergen\nrivieren\nklimaat\nbevolking\n\nHet helpt om de wereld beter te begrijpen.",
+        "laag3": "Aardrijkskunde onderzoekt de relatie tussen mens en omgeving.\n\nOnderwerpen zijn bijvoorbeeld:\n\nlandschappen\nweer en klimaat\nnatuurverschijnselen\neconomie\ncultuur\nkaartlezen\n\nHet laat zien hoe plekken verschillen en waarom die verschillen bestaan.",
+        "laag4": "Aardrijkskunde helpt om de wereld in context te zien.\n\nHet vergroot begrip voor:\n\nandere plekken\nverschillende leefomstandigheden\nnatuur en milieu\nverbondenheid tussen gebieden\n\nHet laat zien hoe alles op aarde met elkaar samenhangt."
+      },
+      "ws5": {
+        "wie": "Leerlingen, docenten, geografen, onderzoekers",
+        "wat": "Een vak over de aarde en haar gebieden",
+        "wanneer": "Tijdens onderwijs, onderzoek en wereldoriëntatie",
+        "waar": "Op school, in onderzoek en in de wereld zelf",
+        "waarom": "Om de aarde en haar processen te begrijpen",
+        "hoe": "Door kaarten, observatie, onderzoek en analyse"
+      },
+      "tags": [
+        "aardrijkskunde",
+        "aarde",
+        "kaarten",
+        "landen",
+        "klimaat",
+        "natuur",
+        "geografie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9d48f5da",
+          "begrip": "grond",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aarde",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9e1fa92",
+          "begrip": "de Maas",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "geografie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8cbee41",
+          "begrip": "Duiven",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T15:28:22.023103+00:00",
+        "vorige_versie_v1": "kb-skel-dcbe0f85",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:27.002673+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:28:20.738179+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:28:20.747085+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:28:23.940461+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:28:23.948416+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T15:28:19.575509+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
       ]
     }
   ]

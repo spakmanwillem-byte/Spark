@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 250,
+    "card_count": 257,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-23T12:15:39.153730+00:00"
+    "last_updated": "2026-05-26T15:31:16.457873+00:00"
   },
   "kaarten": [
     {
@@ -32174,6 +32174,641 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5cfb18c6",
+      "begrip": "Huisdieren",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Huisdieren zijn dieren die door mensen worden verzorgd en gehouden voor gezelschap, hulp of plezier.",
+        "laag2": "Huisdieren leven vaak bij mensen thuis.\n\nVoorbeelden zijn:\n\nhonden\nkatten\nkonijnen\nvogels\nvissen\nhamsters\n\nMensen geven huisdieren:\n\neten\ndrinken\nverzorging\naandacht\neen veilige leefplek",
+        "laag3": "Huisdieren hebben verschillende behoeften.\n\nZe hebben nodig:\n\ngoede voeding\nbeweging\nrust\nverzorging\nsoms medische hulp\n\nSommige huisdieren helpen mensen ook, zoals:\n\nblindengeleidehonden\ntherapiedieren\nwaakhonden\n\nHet verzorgen van een huisdier vraagt verantwoordelijkheid.",
+        "laag4": "Huisdieren zorgen vaak voor emotionele verbinding.\n\nZe kunnen geven:\n\ngezelschap\ntroost\nplezier\nrust\nvertrouwen\n\nZe leren mensen zorgzaamheid, geduld en verantwoordelijkheid."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, dierenartsen, verzorgers",
+        "wat": "Dieren die door mensen worden gehouden en verzorgd",
+        "wanneer": "Dagelijks, tijdens verzorging en samenleven",
+        "waar": "Thuis, tuin, boerderij, dierenopvang",
+        "waarom": "Voor gezelschap, hulp, plezier of ondersteuning",
+        "hoe": "Door verzorgen, voeden, beschermen en aandacht geven"
+      },
+      "tags": [
+        "dieren",
+        "zorg",
+        "gezelschap",
+        "verantwoordelijkheid",
+        "verbinding",
+        "thuis",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4fd91828",
+          "begrip": "excuus",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "verantwoordelijkheid",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T13:47:48.244533+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-25T06:24:07.050990+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T13:48:33.084140+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.728023+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:47:46.034987+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:47:46.042508+00:00",
+            "result": {
+              "n_found": 4,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:47:49.631853+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:47:49.636995+00:00",
+            "result": {
+              "n_found": 4,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T13:48:33.537554+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T13:48:33.544481+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/ed687f4a1d04"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-eba6a469",
+      "begrip": "Aarde staat voor stabiliteit in een groep",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aarde staat voor stabiliteit en rust.",
+        "laag2": "In groepen zorgt aarde voor stevigheid en houvast.",
+        "laag3": "Stabiele groepen hebben een basis nodig waarin mensen zich veilig voelen.",
+        "laag4": "Stabiliteit creëert vertrouwen, waardoor samenwerking en groei mogelijk worden."
+      },
+      "ws5": {
+        "wie": "Groepsleden, begeleiders, teams",
+        "wat": "Een symbool voor stabiliteit en basis",
+        "wanneer": "Wanneer een groep structuur nodig heeft",
+        "waar": "Binnen groepsprocessen en samenwerking",
+        "waarom": "Om vertrouwen en veiligheid te creëren",
+        "hoe": "Door rust, duidelijkheid en betrouwbaarheid"
+      },
+      "tags": [
+        "aarde",
+        "stabiel",
+        "rust",
+        "veilig",
+        "vertrouwen",
+        "groep",
+        "basis",
+        "structuur",
+        "groei",
+        "verbinding",
+        "balans",
+        "fundament"
+      ],
+      "topic": "community",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "rust",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-66a97842",
+          "begrip": "Aarde staat voor stabiliteit",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aarde",
+            "basis",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a508eba",
+          "begrip": "Core",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "basis",
+            "fundament",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c4912f42",
+          "begrip": "Spark Your Life",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "groei",
+            "structuur",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc7f1b8b",
+          "begrip": "vriend",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "verbinding",
+            "vertrouwen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T14:45:17.283894+00:00",
+        "vorige_versie_v1": "e4287f6d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.432697+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:45:05.245224+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:45:05.252274+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T14:45:18.639662+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T14:45:18.645835+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T14:45:04.245982+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/bcd7f91e9b47"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-skel-12a1f51c",
+      "begrip": "aardig",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aardig betekent vriendelijk, prettig of behulpzaam zijn naar anderen.",
+        "laag2": "Wanneer iemand aardig is, laat die persoon positief gedrag zien.\n\nDat kan bijvoorbeeld door:\n\nhelpen\nvriendelijk praten\nrekening houden met anderen\nrespect tonen\naandacht geven\n\nAardigheid zorgt vaak voor een prettige sfeer.",
+        "laag3": "Aardig zijn is een sociale eigenschap.\n\nHet helpt bij:\n\ncontact maken\nvertrouwen opbouwen\nsamenwerking\nverbinding\n\nAardigheid kan klein zijn, zoals glimlachen, of groter, zoals iemand actief ondersteunen.\n\nHet draait vaak om oprechte aandacht.",
+        "laag4": "Aardigheid versterkt relaties.\n\nHet laat zien dat kleine positieve acties veel invloed kunnen hebben.\n\nAardig zijn kan zorgen voor:\n\nveiligheid\nopenheid\nvertrouwen\nverbondenheid\n\nHet maakt samenleven prettiger."
+      },
+      "ws5": {
+        "wie": "Mensen die vriendelijk en behulpzaam zijn",
+        "wat": "Een positieve eigenschap van vriendelijkheid",
+        "wanneer": "Tijdens contact met anderen",
+        "waar": "Overal waar mensen samenkomen",
+        "waarom": "Om verbinding en respect te creëren",
+        "hoe": "Door vriendelijk gedrag en aandacht te tonen"
+      },
+      "tags": [
+        "aardig",
+        "vriendelijk",
+        "behulpzaam",
+        "respect",
+        "aandacht",
+        "verbinding",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "respect",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "respect",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dcd7932d",
+          "begrip": "Lief",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "vriendelijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b31f7f47",
+          "begrip": "Ik ben blij met je",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6d601a6",
+          "begrip": "Daar geef ik veel om",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T15:25:22.330780+00:00",
+        "vorige_versie_v1": "kb-skel-12a1f51c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:36.573148+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:25:20.255143+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:25:20.332104+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:25:23.746130+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:25:23.752301+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T15:25:19.281334+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-badad5e7",
+      "begrip": "aarden",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aarden betekent verbinding maken met rust, stabiliteit en de werkelijkheid.",
+        "laag2": "Aarden helpt iemand om stevig en rustig aanwezig te zijn.\n\nDat kan gebeuren door:\n\nbewust ademen\nvoelen waar je bent\ncontact maken met de grond\naandacht richten op het moment\n\nHet helpt om spanning te verminderen.",
+        "laag3": "Aarden wordt gebruikt in:\n\nontspanning\nbegeleiding\nmindfulness\npersoonlijke ontwikkeling\n\nHet helpt wanneer iemand:\n\nonrustig is\noverprikkeld raakt\nafdwaalt\nspanning ervaart\n\nAarden brengt aandacht terug naar het lichaam en het hier en nu.",
+        "laag4": "Aarden staat voor balans en stevigheid.\n\nHet helpt om:\n\nrust te vinden\nveiligheid te voelen\nfocus terug te krijgen\nemotionele stabiliteit te ervaren\n\nHet laat zien dat verbinding met jezelf een basis vormt voor groei."
+      },
+      "ws5": {
+        "wie": "Mensen die rust, focus of stabiliteit zoeken",
+        "wat": "Een manier om verbinding te maken met het hier en nu",
+        "wanneer": "Bij spanning, onrust of behoefte aan balans",
+        "waar": "Overal waar bewust aandacht mogelijk is",
+        "waarom": "Om rust en stabiliteit te ervaren",
+        "hoe": "Door ademhaling, lichaamsbewustzijn en contact met de omgeving"
+      },
+      "tags": [
+        "aarden",
+        "rust",
+        "stabiliteit",
+        "focus",
+        "balans",
+        "aanwezigheid",
+        "gevoel",
+        "verbinding",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "focus",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "focus",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "rust",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0f46c8",
+          "begrip": "sterke",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "stabiliteit",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-26T15:31:16.457839+00:00",
+        "vorige_versie_v1": "kb-skel-badad5e7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:40.401101+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:31:11.637041+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:31:11.645018+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-26T15:31:17.855942+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-26T15:31:17.932937+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-26T15:31:10.686977+00:00"
       },
       "media": {
         "voice_url": null,

@@ -22294,11 +22294,227 @@
         "session_id": "default",
         "gesprek_nummer": 856
       }
+    },
+    {
+      "id": "conv-1036bc1e",
+      "timestamp": "2026-05-26T12:42:39.231390+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 857
+      }
+    },
+    {
+      "id": "conv-835d1b83",
+      "timestamp": "2026-05-26T12:45:12.751021+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark hoe is het?",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 858
+      }
+    },
+    {
+      "id": "conv-5bb9f117",
+      "timestamp": "2026-05-26T12:45:48.430546+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is he",
+      "spark_response": "Interessante vraag! Ik heb daar nog geen kennis over.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 859
+      }
+    },
+    {
+      "id": "conv-dfb5210a",
+      "timestamp": "2026-05-26T12:46:12.782219+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe is het",
+      "spark_response": "Het gaat prima! Dankjewel voor het vragen. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 860
+      }
+    },
+    {
+      "id": "conv-c9175e72",
+      "timestamp": "2026-05-26T13:57:17.023348+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 861
+      }
+    },
+    {
+      "id": "conv-675532e4",
+      "timestamp": "2026-05-26T13:57:22.209846+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 862
+      }
+    },
+    {
+      "id": "conv-659336fc",
+      "timestamp": "2026-05-26T13:57:45.332255+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil weten hoe jet met je is",
+      "spark_response": "Ik ken deze woorden nog niet: **jet**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'jet' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "jet"
+        ],
+        "snap_suggestions": [
+          "jet"
+        ],
+        "word_count": 8,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 863
+      }
+    },
+    {
+      "id": "conv-8c92f58c",
+      "timestamp": "2026-05-26T13:58:08.344224+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik wil weten hoe het met je is",
+      "spark_response": "Interessante vraag! Ik heb daar nog geen kennis over.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 864
+      }
+    },
+    {
+      "id": "conv-43930cdb",
+      "timestamp": "2026-05-26T13:58:28.855413+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Weet jij niet hoe het met je zelf gaat?",
+      "spark_response": "**zelf**: Zelf verwijst naar een persoon, identiteit of systeem als eigen individu of eigen kern.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zelf"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zelf"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 865
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 856,
-    "last_updated": "2026-05-26T12:12:25.939323+00:00"
+    "total_conversations": 865,
+    "last_updated": "2026-05-26T13:58:28.855413+00:00"
   }
 }

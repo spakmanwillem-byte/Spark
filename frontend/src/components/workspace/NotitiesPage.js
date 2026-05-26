@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import {
   StickyNote, Plus, Search, Trash2,
   Tag, Clock, ListTodo, FileText, Save,
-  Circle, CheckCircle, HandHeart, Bug, AlertTriangle, Rocket
+  Circle, CheckCircle, HandHeart, Bug, AlertTriangle, Rocket, Pencil, X
 } from 'lucide-react';
 import { BijdragenPage } from './BijdragenPage';
 import { DeployAnchorPanel } from './DeployAnchorPanel';
@@ -93,6 +93,35 @@ export function NotitiesPage({ onNavigate }) {
     if (data.success) {
       if (item.type === 'note') setNotes(notes.filter(n => n.id !== item.id));
       else setTasks(tasks.filter(t => t.id !== item.id));
+    }
+  };
+
+  // v6_note_edit_001 — Edit notitie/taak titel + inhoud
+  const updateItem = async (item, updates) => {
+    if (item.type === 'note') {
+      const res = await fetch(`${API}/api/notes/update/${item.id}?user_id=${user.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setNotes(notes.map(n => n.id === item.id ? data.note : n));
+        return true;
+      }
+      return false;
+    } else {
+      // Voor taken hernoemt alleen het 'task' veld
+      const payload = updates.titel !== undefined ? { task: updates.titel } : updates;
+      const res = await fetch(`${API}/api/notes/tasks/update/${item.id}?user_id=${user.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setTasks(tasks.map(t => t.id === item.id ? data.task : t));
+        return true;
+      }
+      return false;
     }
   };
 
@@ -376,7 +405,7 @@ export function NotitiesPage({ onNavigate }) {
             {filtered.length === 0 ? (
               <div className="py-16 text-center"><StickyNote className="w-10 h-10 text-slate-700 mx-auto mb-3" /><p className="text-slate-400 text-sm">Geen items gevonden</p></div>
             ) : (
-              <NotitiesTreeView items={filtered} toggleDone={toggleDone} deleteItem={deleteItem} />
+              <NotitiesTreeView items={filtered} toggleDone={toggleDone} deleteItem={deleteItem} updateItem={updateItem} />
             )}
           </div>
           )}
@@ -394,7 +423,7 @@ export default NotitiesPage;
 /* ================================================================ */
 const MONTHS_NL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
 
-function NotitiesTreeView({ items, toggleDone, deleteItem }) {
+function NotitiesTreeView({ items, toggleDone, deleteItem, updateItem }) {
   const tree = React.useMemo(() => {
     const t = {};
     for (const e of items) {
@@ -497,7 +526,7 @@ function NotitiesTreeView({ items, toggleDone, deleteItem }) {
                           </button>
                           {isDayOpen && (
                             <div className="px-2 py-2 space-y-2 border-t border-slate-900/80">
-                              {dayItems.map(item => <NoteItemCard key={item.id} item={item} toggleDone={toggleDone} deleteItem={deleteItem} />)}
+                              {dayItems.map(item => <NoteItemCard key={item.id} item={item} toggleDone={toggleDone} deleteItem={deleteItem} updateItem={updateItem} />)}
                             </div>
                           )}
                         </div>
@@ -514,8 +543,79 @@ function NotitiesTreeView({ items, toggleDone, deleteItem }) {
   );
 }
 
-function NoteItemCard({ item, toggleDone, deleteItem }) {
+function NoteItemCard({ item, toggleDone, deleteItem, updateItem }) {
   const pri = priorities[item.priority] || priorities.medium;
+  const [editing, setEditing] = React.useState(false);
+  const [editTitel, setEditTitel] = React.useState(item.titel || '');
+  const [editInhoud, setEditInhoud] = React.useState(item.inhoud || '');
+  const [saving, setSaving] = React.useState(false);
+  const isShopOrder = item.source === 'shop_order';
+  const canEdit = typeof updateItem === 'function' && !isShopOrder;
+
+  const startEdit = () => {
+    setEditTitel(item.titel || '');
+    setEditInhoud(item.inhoud || '');
+    setEditing(true);
+  };
+  const cancelEdit = () => setEditing(false);
+  const saveEdit = async () => {
+    if (!editTitel.trim()) return;
+    setSaving(true);
+    const updates = item.type === 'note'
+      ? { titel: editTitel.trim(), inhoud: editInhoud }
+      : { titel: editTitel.trim() };
+    const ok = await updateItem(item, updates);
+    setSaving(false);
+    if (ok) setEditing(false);
+  };
+
+  if (editing) {
+    return (
+      <div data-testid={`item-edit-${item.id}`} className="p-3 bg-slate-900/70 border border-amber-500/40 rounded-xl space-y-2">
+        <div className="flex items-center gap-2">
+          <Pencil className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-[10px] uppercase tracking-wider text-amber-400 font-medium">
+            {item.type === 'note' ? 'Notitie bewerken' : 'Taak bewerken'}
+          </span>
+        </div>
+        <input
+          type="text"
+          value={editTitel}
+          onChange={e => setEditTitel(e.target.value)}
+          placeholder="Titel..."
+          data-testid={`edit-titel-${item.id}`}
+          className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
+          autoFocus
+        />
+        {item.type === 'note' && (
+          <textarea
+            value={editInhoud}
+            onChange={e => setEditInhoud(e.target.value)}
+            placeholder="Inhoud..."
+            rows={4}
+            data-testid={`edit-inhoud-${item.id}`}
+            className="w-full px-3 py-2 bg-slate-800/60 border border-slate-700/60 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50 resize-none"
+          />
+        )}
+        <div className="flex items-center justify-end gap-2">
+          <button
+            onClick={cancelEdit}
+            data-testid={`edit-cancel-${item.id}`}
+            className="px-3 py-1.5 text-xs text-slate-400 hover:text-white flex items-center gap-1">
+            <X className="w-3 h-3" /> Annuleer
+          </button>
+          <button
+            onClick={saveEdit}
+            disabled={saving || !editTitel.trim()}
+            data-testid={`edit-save-${item.id}`}
+            className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-green-600 hover:bg-green-500 disabled:opacity-50 flex items-center gap-1">
+            <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : 'Opslaan'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div data-testid={`item-${item.id}`} className={`p-3 bg-slate-900/50 border rounded-xl transition-all ${item.done ? 'border-slate-800/50 opacity-60' : 'border-slate-800 hover:border-slate-600'}`}>
       <div className="flex items-start gap-3">
@@ -569,12 +669,24 @@ function NoteItemCard({ item, toggleDone, deleteItem }) {
           <div className="flex items-center gap-3 mt-2">
             <span className="text-[10px] text-slate-600">{new Date(item.datum || item.created_at).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })}</span>
             {item.created_by && <span className="text-[10px] text-slate-600">{item.created_by}</span>}
+            {item.updated_at && <span className="text-[10px] text-amber-600/80" title={`Bewerkt op ${new Date(item.updated_at).toLocaleString('nl-NL')}`}>(bewerkt)</span>}
             {(item.tags || []).slice(0, 2).map((t, i) => <span key={i} className="text-[10px] text-slate-600">#{t}</span>)}
           </div>
         </div>
-        <button onClick={() => deleteItem(item)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors flex-shrink-0">
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
+        <div className="flex items-start gap-0.5 flex-shrink-0">
+          {canEdit && (
+            <button
+              onClick={startEdit}
+              data-testid={`edit-${item.id}`}
+              title="Bewerken"
+              className="p-1.5 hover:bg-amber-500/10 text-slate-600 hover:text-amber-400 rounded-lg transition-colors">
+              <Pencil className="w-3.5 h-3.5" />
+            </button>
+          )}
+          <button onClick={() => deleteItem(item)} className="p-1.5 hover:bg-red-500/10 text-slate-600 hover:text-red-400 rounded-lg transition-colors">
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </div>
   );

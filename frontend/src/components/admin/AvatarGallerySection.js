@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Upload, Trash2, Image as ImageIcon, Plus, Star, Users, ShieldAlert, Lock } from 'lucide-react';
+import { Upload, Trash2, Image as ImageIcon, Plus, Star, Users, ShieldAlert, Lock, Pencil, X, Save } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -18,6 +18,11 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
   const [uploading, setUploading] = useState(false);
   const [msg, setMsg] = useState(null);
   const [confirming, setConfirming] = useState(null); // {id, title} or null
+  const [editing, setEditing] = useState(null); // {id, title, tags, bot_owner, category, locked} or null
+  const [editTitle, setEditTitle] = useState('');
+  const [editTags, setEditTags] = useState('');
+  const [editBotOwner, setEditBotOwner] = useState('');
+  const [savingEdit, setSavingEdit] = useState(false);
   const fileRef = useRef(null);
 
   const load = useCallback(() => {
@@ -65,6 +70,54 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
       load();
     } else {
       flash('err', `Verwijderen mislukt (HTTP ${r.status})`);
+    }
+  };
+
+  // v6_avatar_edit_001 — Open edit-modal voor titel/tags/bot_owner
+  const startEdit = (avatar) => {
+    setEditing({
+      id: avatar.id,
+      title: avatar.title || '',
+      tags: (avatar.tags || []).join(', '),
+      bot_owner: avatar.bot_owner || '',
+      category: avatar.category || 'user',
+      locked: !!avatar.locked,
+    });
+    setEditTitle(avatar.title || '');
+    setEditTags((avatar.tags || []).join(', '));
+    setEditBotOwner(avatar.bot_owner || '');
+  };
+
+  const saveEdit = async () => {
+    if (!editing) return;
+    if (!editTitle.trim()) { flash('err', 'Titel mag niet leeg zijn'); return; }
+    setSavingEdit(true);
+    try {
+      const payload = {
+        viewer_id: adminId,
+        title: editTitle.trim(),
+        tags: editTags.split(',').map(t => t.trim()).filter(Boolean),
+      };
+      // Alleen bot_owner meesturen als de avatar locked/system is (admin-relevant)
+      if (editing.locked || editing.category === 'system') {
+        payload.bot_owner = editBotOwner.trim();
+      }
+      const r = await fetch(`${API}/api/avatar/gallery/${editing.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && d.success) {
+        flash('ok', `"${d.avatar.title}" bijgewerkt`);
+        setEditing(null);
+        load();
+      } else {
+        flash('err', d.detail || `Bewerken mislukt (HTTP ${r.status})`);
+      }
+    } catch (e) {
+      flash('err', e.message);
+    } finally {
+      setSavingEdit(false);
     }
   };
 
@@ -190,18 +243,34 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
                     </div>
                   )}
                   {activeTab === 'user' ? (
-                    <button onClick={() => setConfirming({ id: a.id, title: a.title })}
-                      data-testid={`gallery-delete-${a.id}`}
-                      className="mt-2 w-full px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded flex items-center justify-center gap-1 text-[10px]">
-                      <Trash2 className="w-3 h-3" /> Verwijder
-                    </button>
+                    <div className="mt-2 flex items-center gap-1">
+                      <button onClick={() => startEdit(a)}
+                        data-testid={`gallery-edit-${a.id}`}
+                        title="Bewerken"
+                        className="flex-1 px-2 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded flex items-center justify-center gap-1 text-[10px]">
+                        <Pencil className="w-3 h-3" /> Bewerk
+                      </button>
+                      <button onClick={() => setConfirming({ id: a.id, title: a.title })}
+                        data-testid={`gallery-delete-${a.id}`}
+                        className="flex-1 px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded flex items-center justify-center gap-1 text-[10px]">
+                        <Trash2 className="w-3 h-3" /> Verwijder
+                      </button>
+                    </div>
                   ) : (
-                    <button disabled
-                      data-testid={`gallery-locked-${a.id}`}
-                      title="Beschermd. Verwijder eerst de lock via Beheer → Gebruikers → Avatar Beheer."
-                      className="mt-2 w-full px-2 py-1 bg-slate-800/50 text-slate-500 border border-slate-700/50 rounded flex items-center justify-center gap-1 text-[10px] cursor-not-allowed">
-                      <Lock className="w-3 h-3" /> Beschermd
-                    </button>
+                    <div className="mt-2 flex items-center gap-1">
+                      <button onClick={() => startEdit(a)}
+                        data-testid={`gallery-edit-${a.id}`}
+                        title="Bewerk titel/tags/eigenaar"
+                        className="flex-1 px-2 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded flex items-center justify-center gap-1 text-[10px]">
+                        <Pencil className="w-3 h-3" /> Bewerk
+                      </button>
+                      <button disabled
+                        data-testid={`gallery-locked-${a.id}`}
+                        title="Beschermd. Verwijder eerst de lock via Beheer → Gebruikers → Avatar Beheer."
+                        className="flex-1 px-2 py-1 bg-slate-800/50 text-slate-500 border border-slate-700/50 rounded flex items-center justify-center gap-1 text-[10px] cursor-not-allowed">
+                        <Lock className="w-3 h-3" /> Beschermd
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
@@ -209,6 +278,79 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
           </div>
         )}
       </div>
+
+      {/* v6_avatar_edit_001 — Edit modal */}
+      {editing && (
+        <div data-testid="gallery-edit-modal"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => !savingEdit && setEditing(null)}>
+          <div className="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center">
+                <Pencil className="w-5 h-5 text-amber-400" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-base font-bold text-white">Avatar bewerken</h3>
+                <p className="text-[11px] text-slate-500 truncate">ID: {editing.id}</p>
+              </div>
+              <button onClick={() => !savingEdit && setEditing(null)} className="p-1 text-slate-500 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="text-[10px] text-slate-400 uppercase tracking-wider">Titel *</label>
+                <input
+                  type="text"
+                  value={editTitle}
+                  onChange={e => setEditTitle(e.target.value)}
+                  data-testid="gallery-edit-title"
+                  className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] text-slate-400 uppercase tracking-wider">Tags (komma-gescheiden)</label>
+                <input
+                  type="text"
+                  value={editTags}
+                  onChange={e => setEditTags(e.target.value)}
+                  placeholder="bv. mannelijk, fantasy, dark"
+                  data-testid="gallery-edit-tags"
+                  className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                />
+              </div>
+              {(editing.locked || editing.category === 'system') && (
+                <div>
+                  <label className="text-[10px] text-amber-400 uppercase tracking-wider">Bot-eigenaar (system)</label>
+                  <input
+                    type="text"
+                    value={editBotOwner}
+                    onChange={e => setEditBotOwner(e.target.value)}
+                    placeholder='bv. "bot-spark" of leeg om los te koppelen'
+                    data-testid="gallery-edit-bot-owner"
+                    className="mt-1 w-full px-3 py-2 bg-slate-800 border border-amber-500/30 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  />
+                  <p className="text-[10px] text-slate-500 mt-1">Leeg laten = ontkoppelen van bot. Lock blijft staan.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 justify-end mt-5">
+              <button onClick={() => setEditing(null)} disabled={savingEdit}
+                data-testid="gallery-edit-cancel"
+                className="px-3 py-2 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-50">
+                Annuleer
+              </button>
+              <button onClick={saveEdit} disabled={savingEdit || !editTitle.trim()}
+                data-testid="gallery-edit-save"
+                className="px-3 py-2 rounded-lg text-xs font-medium bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 flex items-center gap-2 disabled:opacity-50">
+                <Save className="w-3 h-3" /> {savingEdit ? 'Opslaan...' : 'Opslaan'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Confirm modal */}
       {confirming && (

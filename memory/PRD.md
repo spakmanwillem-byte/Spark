@@ -1082,3 +1082,22 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 ### Files
 - `backend/modules/kb_v2/routes.py` (+ herzien endpoints + topic→lade mapping)
 - `frontend/src/components/workspace/KennisbankV2Page.js` (Herzien knop, state, handlers, NewCardInline-uitbreiding)
+
+## 2026-05-26 — Notitie edit + Avatar edit (quick wins sessie 12)
+
+### v6_note_edit_001 — Notitie/Taak inline edit
+- **Probleem**: Notities en taken konden alleen aangemaakt of verwijderd worden, niet meer bewerkt na opslaan.
+- **Fix**: Pencil-knop op elke `NoteItemCard` opent inline edit-modus (titel + inhoud voor notities, alleen titel voor taken). Save → `PUT /api/notes/update/{id}?user_id=...` of `PUT /api/notes/tasks/update/{id}?user_id=...`. Backend endpoints bestonden al; alleen frontend UI ontbrak.
+- **UI-extra**: Een klein `(bewerkt)` label verschijnt op een notitie zodra `updated_at` ingevuld is, met tooltip naar exact moment van laatste edit.
+- **Files**: `frontend/src/components/workspace/NotitiesPage.js`
+- **Backend test (curl)**: ✓ Aanmaken → update titel+inhoud → update bevestigd → delete
+
+### v6_avatar_edit_001 — Avatar edit in Beheer→Archief→Avatar Galerij
+- **Probleem**: In Beheer→Archief→Foto→Avatar Galerij was alleen toevoegen/verwijderen mogelijk; titel/tags/bot_owner wijzigen vereiste navigatie via Beheer→Gebruikers→Avatar Beheer.
+- **Fix**: Bewerk-knop (pencil) op elke avatar-tile (zowel user- als system-avatars). Modal toont:
+  - Titel (verplicht, alle avatars)
+  - Tags (komma-gescheiden, alle avatars)
+  - Bot-eigenaar (alleen system/locked avatars — leeg laten = ontkoppelen)
+  Save → `PATCH /api/avatar/gallery/{id}` met `viewer_id` voor admin-guard. Verwijder-knop blijft uitsluitend op user-tab (system blijft beschermd).
+- **Files**: `frontend/src/components/admin/AvatarGallerySection.js`
+- **Backend test (curl)**: ✓ PATCH met nieuwe titel/tags → success, en restore werkt.

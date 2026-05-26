@@ -133,6 +133,48 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
     const interval = setInterval(ping, 240_000); // 4 min
     return () => clearInterval(interval);
   }, []);
+
+  // v6_glow_nav_001 — Spark wijst tab aan: pulserende glow op nav-button + auto-navigatie
+  useEffect(() => {
+    const handler = (e) => {
+      const targetId = e?.detail?.targetId;
+      const navigateTo = e?.detail?.navigateTo;
+      const pulseDurationMs = 6000;
+      if (!targetId) return;
+
+      const tryGlow = (attempt = 0) => {
+        const el = document.querySelector(`[data-testid="${targetId}"]`);
+        if (!el && attempt < 6) {
+          setTimeout(() => tryGlow(attempt + 1), 300);
+          return;
+        }
+        if (!el) return;
+        el.classList.add('spark-nav-glow');
+        try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch {}
+        setTimeout(() => {
+          try { el.classList.remove('spark-nav-glow'); } catch {}
+        }, pulseDurationMs);
+      };
+
+      // Eerste pulse meteen, dan navigeer (zodat user het ziet oplichten)
+      tryGlow();
+
+      // Zoek bijbehorend nav-item en roep onNavigate aan
+      if (navigateTo && typeof onNavigate === 'function') {
+        let foundItem = null;
+        for (const section of Object.values(navigationConfig)) {
+          const m = section.items.find(it => it.path === navigateTo);
+          if (m) { foundItem = m; break; }
+        }
+        if (foundItem) {
+          // Kleine vertraging zodat de glow eerst zichtbaar wordt
+          setTimeout(() => onNavigate(foundItem.id, foundItem.path), 700);
+        }
+      }
+    };
+    window.addEventListener('spark:nav-glow', handler);
+    return () => window.removeEventListener('spark:nav-glow', handler);
+  }, [onNavigate]);
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const stored = parseInt(localStorage.getItem('sidebarWidth') || '256', 10);
     return isNaN(stored) ? 256 : Math.min(Math.max(stored, 200), 420);

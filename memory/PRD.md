@@ -1101,3 +1101,34 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
   Save → `PATCH /api/avatar/gallery/{id}` met `viewer_id` voor admin-guard. Verwijder-knop blijft uitsluitend op user-tab (system blijft beschermd).
 - **Files**: `frontend/src/components/admin/AvatarGallerySection.js`
 - **Backend test (curl)**: ✓ PATCH met nieuwe titel/tags → success, en restore werkt.
+
+## 2026-05-26 — Glow-nav MVP live (v6_glow_nav_001)
+
+### Wat werkt nu:
+1. **Backend `/api/tabs/registry`** retourneert 23 tabs (alle frontend nav-items) met kebab-case IDs die exact matchen met `data-testid="nav-{id}"`.
+2. **Backend `/api/tabs/navigate`** matcht een vrije vraag op label/id/aliases en geeft `{navigate_to, glow_target}` terug.
+3. **Chat-flow integratie** (`modules/chat/routes.py`): nav-trigger detectie (`waar is/zijn`, `waar vind/kan ik`, `ga naar`, `open de/tab/mijn`, `ik wil naar`, `breng me naar`, `laat zien waar`) staat **vóór** capability-router & kbv2-router → kan niet worden opgegeten door snap/intent.
+4. **Frontend `GesprekkenPage`**: bij `data.type === 'navigate_tab'` dispatcht een `window` custom event `spark:nav-glow` met `{ targetId, navigateTo, matchedTab }`.
+5. **Frontend `MainLayout`**: luistert globaal naar dat event → voegt 6s pulserende amber `spark-nav-glow` CSS-class toe op de matchende sidebar-button (via `data-testid` lookup), scrollt naar het item, en roept 700ms later `onNavigate(item.id, item.path)` aan voor automatische tab-switch.
+6. **CSS-keyframes** in `index.css`: `@keyframes spark-nav-pulse` met box-shadow-pulse in amber (rgba(245,158,11)).
+
+### Visueel bevestigd met screenshot:
+- *"waar is dagboek"* → Spark antwoordt "De **Dagboek**-tab vind je hier: /dagboek. Ik laat 'm even oplichten voor je." → Dagboek-button in sidebar pulseert amber → 700ms later: Dagboek-pagina opent.
+
+### Backend-tests (curl, 9 queries):
+- `waar is mijn wallet` → nav-wallet → /modules/wallet ✓
+- `waar zijn mijn notities` → nav-notities → /notities ✓
+- `waar vind ik de agenda` → nav-calendar → /calendar ✓
+- `ga naar dagboek` → nav-dagboek → /dagboek ✓
+- `open de kennisbank` → nav-knowledge-v2 → /knowledge ✓
+- `breng me naar trade` → nav-trade → /modules/trade ✓
+- `ik wil naar de winkel` → nav-winkel → /modules/winkel ✓
+- `open de boekhouding` → nav-boekhouding → /modules/boekhouding ✓
+- `hallo spark hoe gaat het` → greeting (correct, geen nav) ✓
+
+### Files
+- `backend/modules/glow_nav/__init__.py` (defaults uitgebreid 15→23 tabs + IDs gesynced)
+- `backend/modules/chat/routes.py` (nav-trigger block gehoist naar boven capability-router)
+- `frontend/src/components/workspace/GesprekkenPage.js` (event-dispatch)
+- `frontend/src/components/layout/MainLayout.js` (event-listener + auto-navigate)
+- `frontend/src/index.css` (pulse keyframes)

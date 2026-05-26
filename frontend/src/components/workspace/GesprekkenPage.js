@@ -715,7 +715,23 @@ export function GesprekkenPage({ onNavigate }) {
           unknown_words: data.unknown_words || [],
           snap_suggestions: data.snap_suggestions || [],
           sentiment: data.sentiment,
+          navigate_to: data.navigate_to,
+          glow_target: data.glow_target,
+          matched_tab: data.matched_tab,
         }]);
+
+        // v6_glow_nav_001 — Frontend dispatch: laat nav-tab gloeien + optioneel navigeren
+        if (data.type === 'navigate_tab' && data.glow_target) {
+          try {
+            window.dispatchEvent(new CustomEvent('spark:nav-glow', {
+              detail: {
+                targetId: data.glow_target,         // bv. "nav-wallet"
+                navigateTo: data.navigate_to,        // bv. "/modules/wallet"
+                matchedTab: data.matched_tab,
+              },
+            }));
+          } catch {}
+        }
       } catch (e) {
         setSparkMessages(prev => [...prev, {
           id: Date.now() + 1, role: 'spark',

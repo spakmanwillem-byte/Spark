@@ -183,6 +183,35 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, time_resp["type"])
         return response
 
+    # 0b3a. GLOW-NAV (v6_glow_nav_001) — "waar is X tab" / "ga naar Y" → tab-navigatie + glow
+    # MOET vóór capability-router en kbv2-router omdat "waar is X" anders door
+    # generieke capability-placeholder of snap-fallback wordt opgevreten.
+    try:
+        txt_lower = (text or "").lower()
+        nav_triggers = (
+            "waar is", "waar zijn", "waar vind ik", "waar kan ik",
+            "ga naar", "open de", "open tab", "open mijn", "ik wil naar",
+            "breng me naar", "laat zien waar",
+        )
+        if any(t in txt_lower for t in nav_triggers):
+            from modules.glow_nav import navigate as _nav_func
+            import asyncio as _aio
+            from modules.glow_nav import NavigateBody
+            body = NavigateBody(q=text)
+            nav_result = await _nav_func(body) if _aio.iscoroutinefunction(_nav_func) else _nav_func(body)
+            if nav_result and nav_result.get("success"):
+                response.update({
+                    "type": "navigate_tab",
+                    "message": nav_result.get("spoken_response"),
+                    "navigate_to": nav_result.get("navigate_to"),
+                    "glow_target": nav_result.get("glow_target"),
+                    "matched_tab": nav_result.get("match", {}).get("label"),
+                })
+                _save_log(req, response, "navigate_tab")
+                return response
+    except Exception as ex:
+        print(f"[glow-nav] failed: {ex}")
+
     # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
     # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
     try:
@@ -591,30 +620,6 @@ async def process_message(req: ChatMessage):
                             pass
                     _save_log(req, response, f"kbv2_{cmd['id']}")
                     return response
-
-            # v6_glow_nav_001 — "waar is X tab" / "ga naar Y" → tab-navigatie + glow
-            txt_lower = (text or "").lower()
-            nav_triggers = ("waar is", "ga naar", "open de", "open tab", "ik wil naar")
-            if any(t in txt_lower for t in nav_triggers):
-                try:
-                    from modules.glow_nav import navigate as _nav_func
-                    import asyncio as _aio
-                    from modules.glow_nav import NavigateBody
-                    # Run sync wrapper (NavigateBody is pydantic)
-                    body = NavigateBody(q=text)
-                    nav_result = await _nav_func(body) if _aio.iscoroutinefunction(_nav_func) else _nav_func(body)
-                    if nav_result and nav_result.get("success"):
-                        response.update({
-                            "type": "navigate_tab",
-                            "message": nav_result.get("spoken_response"),
-                            "navigate_to": nav_result.get("navigate_to"),
-                            "glow_target": nav_result.get("glow_target"),
-                            "matched_tab": nav_result.get("match", {}).get("label"),
-                        })
-                        _save_log(req, response, "navigate_tab")
-                        return response
-                except Exception:
-                    pass
         except Exception:
             pass
     except Exception:

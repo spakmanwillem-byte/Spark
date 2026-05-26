@@ -23,24 +23,36 @@ TABS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "tabs_regi
 
 def _default_tabs() -> dict:
     return {
-        "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie",
-        "version": "v1",
+        "_arch_ref": "v6_glow_nav_001 — UI tab → route + aliases voor NLP-navigatie. IDs matchen MainLayout.navigationConfig zodat glow_target = `nav-{id}` overeenkomt met data-testid in sidebar.",
+        "version": "v2",
         "tabs": [
-            {"id": "dashboard", "label": "Dashboard", "route": "/", "aliases": ["home", "start"], "icon": "Home"},
-            {"id": "spark_chat", "label": "Spark Chat", "route": "/spark/chat", "aliases": ["chat", "praten", "gesprek"], "icon": "MessageSquare"},
-            {"id": "spark_brain", "label": "Spark Brain", "route": "/spark/brain", "aliases": ["brein", "identiteit", "normen", "waarden", "bijbel", "emotie"], "icon": "Brain"},
-            {"id": "kennisbank", "label": "Kennisbank", "route": "/knowledge", "aliases": ["kennis", "kb", "kennisbank", "begrip", "weten"], "icon": "BookOpen"},
-            {"id": "agenda", "label": "Agenda", "route": "/agenda", "aliases": ["agenda", "planning", "afspraak"], "icon": "Calendar"},
-            {"id": "notities", "label": "Notities", "route": "/notes", "aliases": ["notities", "noteer", "memo", "todo", "taken"], "icon": "FileText"},
-            {"id": "wallet", "label": "Wallet", "route": "/wallet", "aliases": ["wallet", "geld", "saldo", "tikkie", "kasboek"], "icon": "Wallet"},
-            {"id": "winkelstraat", "label": "Winkelstraat", "route": "/winkelstraat", "aliases": ["winkel", "winkelstraat", "shop", "roadkillshop", "merch"], "icon": "Store"},
-            {"id": "trader", "label": "Trader", "route": "/trader", "aliases": ["trade", "trader", "crypto", "buy", "sell", "kopen", "verkopen"], "icon": "TrendingUp"},
-            {"id": "community", "label": "Community", "route": "/community", "aliases": ["community", "iedereen", "groep", "chat groep"], "icon": "Users"},
-            {"id": "dagboek", "label": "Dagboek", "route": "/dagboek", "aliases": ["dagboek", "reflectie", "mood"], "icon": "Heart"},
-            {"id": "achievements", "label": "Achievements", "route": "/achievements", "aliases": ["achievement", "milestone", "punten", "xp"], "icon": "Trophy"},
-            {"id": "leaderboard", "label": "Leaderboard", "route": "/leaderboard", "aliases": ["leaderboard", "ranglijst", "podium"], "icon": "Trophy"},
-            {"id": "roadmap", "label": "Roadmap", "route": "/roadmap", "aliases": ["roadmap", "planning", "todo"], "icon": "Map"},
-            {"id": "beheer", "label": "Beheer", "route": "/beheer", "aliases": ["beheer", "admin", "archief"], "icon": "Settings"},
+            # WORKSPACE
+            {"id": "dashboard", "label": "Dashboard", "route": "/", "aliases": ["dashboard", "home", "start", "overzicht"], "icon": "Home"},
+            {"id": "chat", "label": "Gesprekken", "route": "/chat", "aliases": ["chat", "gesprekken", "praten", "spark chat", "gesprek"], "icon": "MessageSquare"},
+            {"id": "archief", "label": "Archief", "route": "/archief", "aliases": ["archief", "media", "foto's", "geluiden", "filmpjes"], "icon": "Archive"},
+            {"id": "calendar", "label": "Agenda", "route": "/calendar", "aliases": ["agenda", "kalender", "planning", "afspraak", "afspraken"], "icon": "Calendar"},
+            {"id": "dagboek", "label": "Dagboek", "route": "/dagboek", "aliases": ["dagboek", "reflectie", "mood", "stemming"], "icon": "BookHeart"},
+            {"id": "notities", "label": "Notities & Taken", "route": "/notities", "aliases": ["notities", "noteer", "memo", "todo", "taken", "taak", "notitie"], "icon": "StickyNote"},
+            {"id": "roadmap", "label": "Roadmap", "route": "/roadmap", "aliases": ["roadmap", "planning roadmap"], "icon": "Map"},
+            # SPARK AI
+            {"id": "spark-brain", "label": "Spark Brain", "route": "/spark/brain", "aliases": ["spark brain", "brein", "identiteit", "normen", "waarden", "bijbel", "emotie pipeline"], "icon": "Brain"},
+            {"id": "knowledge-v2", "label": "Kennisbank", "route": "/knowledge", "aliases": ["kennis", "kb", "kennisbank", "begrip", "weten", "kaarten"], "icon": "BookOpen"},
+            {"id": "triggers", "label": "Triggers", "route": "/spark/triggers", "aliases": ["triggers", "trigger lijst"], "icon": "Zap"},
+            {"id": "emotions", "label": "Emoties", "route": "/spark/emotions", "aliases": ["emoties", "emotie"], "icon": "Sparkles"},
+            {"id": "connections", "label": "Verbanden", "route": "/spark/connections", "aliases": ["verbanden", "graph", "connecties", "relaties"], "icon": "Link"},
+            # MODULES
+            {"id": "trade", "label": "Trade", "route": "/modules/trade", "aliases": ["trade", "trader", "crypto", "buy", "sell", "kopen", "verkopen", "bitvavo"], "icon": "TrendingUp"},
+            {"id": "wallet", "label": "Wallet", "route": "/modules/wallet", "aliases": ["wallet", "geld", "saldo", "tikkie", "portemonnee", "balans"], "icon": "Wallet"},
+            {"id": "winkel", "label": "Winkel", "route": "/modules/winkel", "aliases": ["winkel", "winkelstraat", "shop", "roadkillshop", "merch"], "icon": "ShoppingBag"},
+            {"id": "boekhouding", "label": "Boekhouding", "route": "/modules/boekhouding", "aliases": ["boekhouding", "kasboek", "boeken", "accounting"], "icon": "BookMarked"},
+            {"id": "achievements", "label": "Achievements", "route": "/modules/achievements", "aliases": ["achievement", "achievements", "milestone", "punten", "xp"], "icon": "Trophy"},
+            {"id": "leaderboard", "label": "Leaderboard", "route": "/modules/leaderboard", "aliases": ["leaderboard", "ranglijst", "podium", "top"], "icon": "Award"},
+            {"id": "integrations", "label": "Integraties", "route": "/modules/integrations", "aliases": ["integraties", "integrations", "koppelingen", "api keys"], "icon": "Puzzle"},
+            # BEHEER
+            {"id": "profiel", "label": "Mijn Profiel", "route": "/profiel", "aliases": ["profiel", "mijn profiel", "instellingen profiel", "avatar instellen"], "icon": "User"},
+            {"id": "users", "label": "Gebruikers", "route": "/admin/users", "aliases": ["gebruikers", "users beheer", "leden"], "icon": "Users"},
+            {"id": "analytics", "label": "Analytics", "route": "/admin/analytics", "aliases": ["analytics", "statistieken", "stats"], "icon": "BarChart"},
+            {"id": "settings", "label": "Instellingen", "route": "/admin/settings", "aliases": ["instellingen", "settings", "beheer instellingen", "system archief"], "icon": "Settings"},
         ],
     }
 
@@ -98,7 +110,7 @@ async def navigate(body: NavigateBody):
         "success": True,
         "match": best,
         "navigate_to": best["route"],
-        "glow_target": f"nav-tab-{best['id']}",
+        "glow_target": f"nav-{best['id']}",
         "score": best_score,
         "spoken_response": f"De **{best['label']}**-tab vind je hier: {best['route']}. Ik laat 'm even oplichten voor je.",
     }

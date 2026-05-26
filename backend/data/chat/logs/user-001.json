@@ -21561,11 +21561,744 @@
         "session_id": "default",
         "gesprek_nummer": 824
       }
+    },
+    {
+      "id": "conv-546bdcbf",
+      "timestamp": "2026-05-26T12:06:07.500389+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar is mijn wallet",
+      "spark_response": "De **Wallet**-tab vind je hier: /wallet. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 825
+      }
+    },
+    {
+      "id": "conv-739dd0cb",
+      "timestamp": "2026-05-26T12:07:56.578474+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar is mijn wallet",
+      "spark_response": "De **Wallet**-tab vind je hier: /modules/wallet. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 826
+      }
+    },
+    {
+      "id": "conv-bdeac2b2",
+      "timestamp": "2026-05-26T12:07:56.752925+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ga naar dagboek",
+      "spark_response": "De **Dagboek**-tab vind je hier: /dagboek. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 827
+      }
+    },
+    {
+      "id": "conv-261fd8fd",
+      "timestamp": "2026-05-26T12:07:56.899242+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "open de kennisbank",
+      "spark_response": "De **Kennisbank**-tab vind je hier: /knowledge. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 828
+      }
+    },
+    {
+      "id": "conv-57d76fb4",
+      "timestamp": "2026-05-26T12:07:57.067800+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar zijn mijn notities",
+      "spark_response": "Ik ken 'notities' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "notities"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 829
+      }
+    },
+    {
+      "id": "conv-1a751e26",
+      "timestamp": "2026-05-26T12:07:57.216584+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ga naar trade",
+      "spark_response": "De **Trade**-tab vind je hier: /modules/trade. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 830
+      }
+    },
+    {
+      "id": "conv-650d4414",
+      "timestamp": "2026-05-26T12:07:57.351887+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar is spark brain",
+      "spark_response": "De **Spark Brain**-tab vind je hier: /spark/brain. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 831
+      }
+    },
+    {
+      "id": "conv-98acf88b",
+      "timestamp": "2026-05-26T12:07:57.483276+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik wil naar de winkel",
+      "spark_response": "De **Winkel**-tab vind je hier: /modules/winkel. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 832
+      }
+    },
+    {
+      "id": "conv-486e2d16",
+      "timestamp": "2026-05-26T12:08:21.174754+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar zijn mijn notities",
+      "spark_response": "De **Notities & Taken**-tab vind je hier: /notities. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 833
+      }
+    },
+    {
+      "id": "conv-d8b83518",
+      "timestamp": "2026-05-26T12:08:21.338046+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar vind ik de agenda",
+      "spark_response": "🤖 Ik kan **Agenda raadplegen** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 834
+      }
+    },
+    {
+      "id": "conv-c3d4a97e",
+      "timestamp": "2026-05-26T12:08:21.476878+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "breng me naar dagboek",
+      "spark_response": "De **Dagboek**-tab vind je hier: /dagboek. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 835
+      }
+    },
+    {
+      "id": "conv-7501bc9e",
+      "timestamp": "2026-05-26T12:08:21.614548+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar kan ik mijn boekhouding zien",
+      "spark_response": "De **Boekhouding**-tab vind je hier: /modules/boekhouding. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 836
+      }
+    },
+    {
+      "id": "conv-c5913abe",
+      "timestamp": "2026-05-26T12:09:26.677117+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar is mijn wallet",
+      "spark_response": "De **Wallet**-tab vind je hier: /modules/wallet. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 837
+      }
+    },
+    {
+      "id": "conv-6b6aa960",
+      "timestamp": "2026-05-26T12:09:26.819231+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar zijn mijn notities",
+      "spark_response": "De **Notities & Taken**-tab vind je hier: /notities. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 838
+      }
+    },
+    {
+      "id": "conv-6d38c68f",
+      "timestamp": "2026-05-26T12:09:26.958774+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar vind ik de agenda",
+      "spark_response": "De **Agenda**-tab vind je hier: /calendar. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 839
+      }
+    },
+    {
+      "id": "conv-af9dde52",
+      "timestamp": "2026-05-26T12:09:27.121819+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ga naar dagboek",
+      "spark_response": "De **Dagboek**-tab vind je hier: /dagboek. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 840
+      }
+    },
+    {
+      "id": "conv-b6bddc4c",
+      "timestamp": "2026-05-26T12:09:27.255749+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "open de kennisbank",
+      "spark_response": "De **Kennisbank**-tab vind je hier: /knowledge. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 841
+      }
+    },
+    {
+      "id": "conv-5c2afa31",
+      "timestamp": "2026-05-26T12:09:27.395647+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "breng me naar trade",
+      "spark_response": "De **Trade**-tab vind je hier: /modules/trade. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 842
+      }
+    },
+    {
+      "id": "conv-5fe38281",
+      "timestamp": "2026-05-26T12:09:27.532238+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik wil naar de winkel",
+      "spark_response": "De **Winkel**-tab vind je hier: /modules/winkel. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 843
+      }
+    },
+    {
+      "id": "conv-1fc69111",
+      "timestamp": "2026-05-26T12:09:27.665546+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "open de boekhouding",
+      "spark_response": "De **Boekhouding**-tab vind je hier: /modules/boekhouding. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 844
+      }
+    },
+    {
+      "id": "conv-9a0be97a",
+      "timestamp": "2026-05-26T12:09:27.855605+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hallo spark hoe gaat het",
+      "spark_response": "Hallo Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 845
+      }
+    },
+    {
+      "id": "conv-35e2bc26",
+      "timestamp": "2026-05-26T12:10:59.295149+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 846
+      }
+    },
+    {
+      "id": "conv-00e5f870",
+      "timestamp": "2026-05-26T12:10:59.394717+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 847
+      }
+    },
+    {
+      "id": "conv-322d6349",
+      "timestamp": "2026-05-26T12:11:12.395310+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 848
+      }
+    },
+    {
+      "id": "conv-6603a08a",
+      "timestamp": "2026-05-26T12:11:12.416613+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 849
+      }
+    },
+    {
+      "id": "conv-96de48b5",
+      "timestamp": "2026-05-26T12:11:14.442832+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "waar is mijn wallet",
+      "spark_response": "De **Wallet**-tab vind je hier: /modules/wallet. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 850
+      }
+    },
+    {
+      "id": "conv-873e3012",
+      "timestamp": "2026-05-26T12:11:41.702023+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 851
+      }
+    },
+    {
+      "id": "conv-2820e7d6",
+      "timestamp": "2026-05-26T12:11:41.723362+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 852
+      }
+    },
+    {
+      "id": "conv-d0f49ed3",
+      "timestamp": "2026-05-26T12:11:43.239951+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "waar is mijn wallet",
+      "spark_response": "De **Wallet**-tab vind je hier: /modules/wallet. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 853
+      }
+    },
+    {
+      "id": "conv-0f0b58e7",
+      "timestamp": "2026-05-26T12:12:24.692307+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 854
+      }
+    },
+    {
+      "id": "conv-61284821",
+      "timestamp": "2026-05-26T12:12:24.714248+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 855
+      }
+    },
+    {
+      "id": "conv-281123f2",
+      "timestamp": "2026-05-26T12:12:25.939323+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "waar is dagboek",
+      "spark_response": "De **Dagboek**-tab vind je hier: /dagboek. Ik laat 'm even oplichten voor je.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "navigate_tab",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "navigate_tab"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 856
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 824,
-    "last_updated": "2026-05-26T11:34:49.507350+00:00"
+    "total_conversations": 856,
+    "last_updated": "2026-05-26T12:12:25.939323+00:00"
   }
 }

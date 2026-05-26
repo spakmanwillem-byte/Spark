@@ -623,6 +623,15 @@ async def process_message(req: ChatMessage):
                         kwargs["card_type"] = cmd.get("card_type", "dnd")
                     if handler_name == "cmd_tell_layer":
                         kwargs["depth"] = cmd.get("depth", 1)
+                        # v6_kbv2_tell_layer_followup_001 — Als query leeg is
+                        # ("vertel meer" zonder onderwerp) → val terug op laatste kaart
+                        if not query.strip() and req.user_id:
+                            try:
+                                last_card_id = state.get("last_kbv2_card_id")
+                                if last_card_id:
+                                    kwargs["fallback_card_id"] = last_card_id
+                            except Exception:
+                                pass
                     out = handler(query, **kwargs) if kwargs else handler(query)
                     response.update(out)
                     if out.get("kbv2_card_id") and req.user_id:

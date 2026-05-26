@@ -22659,11 +22659,263 @@
         "session_id": "default",
         "gesprek_nummer": 871
       }
+    },
+    {
+      "id": "conv-5eac1994",
+      "timestamp": "2026-05-26T16:13:53.303154+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat doet glow_nav?",
+      "spark_response": "🎯 **glow_nav** — Glow-Nav service (v6_glow_nav_001) — Spark wijst via chat de juiste UI-tab aan\n\n📂 `backend/modules/glow_nav` · status `active`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_what",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_what"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 872
+      }
+    },
+    {
+      "id": "conv-f063961b",
+      "timestamp": "2026-05-26T16:13:53.480612+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat doet synapse?",
+      "spark_response": "🎯 **synapse** — Synapse module (v6_synapse_001) — Spark's zelf-lezende synapslaag\n\n📂 `backend/modules/synapse` · status `active`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_what",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_what"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 873
+      }
+    },
+    {
+      "id": "conv-cef2e923",
+      "timestamp": "2026-05-26T16:16:43.691221+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel kort over identiteit",
+      "spark_response": "**Identiteit** _(lade: doen, kort)_:\n\nIdentiteit is het geheel van eigenschappen, kenmerken en ervaringen dat bepaalt wie iemand is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_short",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "kbv2_tell_kort"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 874
+      }
+    },
+    {
+      "id": "conv-1b23e007",
+      "timestamp": "2026-05-26T16:16:43.836078+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel meer",
+      "spark_response": "Over welk begrip wil je dat ik vertel?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_more",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_empty"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 875
+      }
+    },
+    {
+      "id": "conv-ebf58fe9",
+      "timestamp": "2026-05-26T16:16:43.997497+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ga dieper",
+      "spark_response": "Over welk begrip wil je dat ik vertel?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dieper"
+          ],
+          "source": "learned",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat moet moeilijk zijn"
+        },
+        "trigger_type": "kbv2_tell_deep",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_empty"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 876
+      }
+    },
+    {
+      "id": "conv-336cb4ac",
+      "timestamp": "2026-05-26T16:18:09.016726+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel meer",
+      "spark_response": "Over welk begrip wil je dat ik vertel?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_more",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_empty"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 877
+      }
+    },
+    {
+      "id": "conv-1f8b48ae",
+      "timestamp": "2026-05-26T16:19:52.820805+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel kort over identiteit",
+      "spark_response": "**Identiteit** _(lade: doen, kort)_:\n\nIdentiteit is het geheel van eigenschappen, kenmerken en ervaringen dat bepaalt wie iemand is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_short",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "kbv2_tell_kort"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 878
+      }
+    },
+    {
+      "id": "conv-348436a1",
+      "timestamp": "2026-05-26T16:19:53.070251+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel meer",
+      "spark_response": "**Identiteit** _(lade: doen, meer)_:\n\nIdentiteit is het geheel van eigenschappen, kenmerken en ervaringen dat bepaalt wie iemand is.\n\nHet woord wordt gebruikt om te beschrijven hoe iemand zichzelf ziet en hoe iemand door anderen wordt herkend. Identiteit kan gaan over persoonlijkheid, achtergrond, overtuigingen en rollen in het leven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_more",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_tell_meer"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 879
+      }
+    },
+    {
+      "id": "conv-8ff8770d",
+      "timestamp": "2026-05-26T16:19:53.307186+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ga dieper",
+      "spark_response": "**Identiteit** _(lade: doen, diep)_:\n\nIdentiteit is het geheel van eigenschappen, kenmerken en ervaringen dat bepaalt wie iemand is.\n\nHet woord wordt gebruikt om te beschrijven hoe iemand zichzelf ziet en hoe iemand door anderen wordt herkend. Identiteit kan gaan over persoonlijkheid, achtergrond, overtuigingen en rollen in het leven.\n\nIdentiteit ontstaat door een combinatie van persoonlijke kenmerken, ervaringen, waarden en relaties met anderen. Het helpt mensen te begrijpen wie ze zijn en waar ze bij horen.\n\nIdentiteit kan zich ontwikkelen en veranderen door nieuwe ervaringen, keuzes en invloeden uit de omgeving. Daarom is identiteit vaak iets dat groeit en zich vormt gedurende het leven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dieper"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "kbv2_tell_deep",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_tell_diep"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 880
+      }
+    },
+    {
+      "id": "conv-5a824fac",
+      "timestamp": "2026-05-26T16:19:53.501873+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel volledig",
+      "spark_response": "**Identiteit** _(lade: doen, volledig)_:\n\nIdentiteit is het geheel van eigenschappen, kenmerken en ervaringen dat bepaalt wie iemand is.\n\nHet woord wordt gebruikt om te beschrijven hoe iemand zichzelf ziet en hoe iemand door anderen wordt herkend. Identiteit kan gaan over persoonlijkheid, achtergrond, overtuigingen en rollen in het leven.\n\nIdentiteit ontstaat door een combinatie van persoonlijke kenmerken, ervaringen, waarden en relaties met anderen. Het helpt mensen te begrijpen wie ze zijn en waar ze bij horen.\n\nIdentiteit kan zich ontwikkelen en veranderen door nieuwe ervaringen, keuzes en invloeden uit de omgeving. Daarom is identiteit vaak iets dat groeit en zich vormt gedurende het leven.\n\nIn psychologie en sociologie wordt identiteit gezien als een belangrijk onderdeel van hoe mensen zichzelf begrijpen. Het bestaat uit verschillende lagen, zoals persoonlijke identiteit (eigenschappen en karakter) en sociale identiteit (groepen of rollen waar iemand bij hoort).\n\nIdentiteit speelt een rol in zelfbeeld, gedrag en de manier waarop mensen met anderen omgaan.\n\nVoorbeelden:\n\n“Zijn identiteit werd gevormd door zijn ervaringen.”\n\n“Identiteit kan veranderen door nieuwe levensfasen.”\n\n“Cultuur en omgeving kunnen invloed hebben op iemands identiteit.”",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_tell_full",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_tell_volledig"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 881
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 871,
-    "last_updated": "2026-05-26T15:57:20.796638+00:00"
+    "total_conversations": 881,
+    "last_updated": "2026-05-26T16:19:53.501873+00:00"
   }
 }

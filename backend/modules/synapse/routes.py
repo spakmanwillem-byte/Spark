@@ -37,6 +37,24 @@ async def trigger_scan():
     }
 
 
+# v6_synapse_002 — Auto-enrich: vul doel uit docstrings + blueprint-stubs
+class EnrichBody(BaseModel):
+    write_blueprints: bool = True
+    overwrite_existing_doel: bool = False
+    viewer_id: Optional[str] = None
+
+
+@router.post("/enrich")
+async def trigger_enrich(body: EnrichBody = EnrichBody()):
+    """Auto-vul doel + genereer blueprint-stubs voor alle containers."""
+    from .enricher import enrich_all
+    stats = enrich_all(
+        write_blueprints=body.write_blueprints,
+        overwrite_existing_doel=body.overwrite_existing_doel,
+    )
+    return {"success": True, "stats": stats}
+
+
 @router.get("/tree")
 async def get_tree(group: Optional[str] = None):
     """Returnt SYNAPSE.json. Optioneel: ?group=backend_modules|frontend_components|backend_data"""

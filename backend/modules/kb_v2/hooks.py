@@ -140,13 +140,14 @@ def bump_vocab_use_count(begrip: str) -> None:
 
 KBV2_CHAT_COMMANDS: list = [
     {"id": "search_kb",   "triggers": ["zoek in kennis", "wat staat er over", "wat weet je van"],   "handler": "cmd_search_kb"},
-    {"id": "tell_short",  "triggers": ["vertel kort over", "in 1 zin", "samenvatting van", "korte uitleg"],
+    # v6_kbv2_tell_layer_followup_001 — meer triggers voor follow-up zonder onderwerp
+    {"id": "tell_short",  "triggers": ["vertel kort over", "vertel kort", "in 1 zin", "samenvatting van", "korte uitleg"],
                           "handler": "cmd_tell_layer", "depth": 1},
-    {"id": "tell_more",   "triggers": ["vertel meer over", "leg uit", "beschrijf"],
+    {"id": "tell_more",   "triggers": ["vertel meer over", "vertel meer", "leg uit", "beschrijf", "iets meer"],
                           "handler": "cmd_tell_layer", "depth": 2},
-    {"id": "tell_deep",   "triggers": ["vertel diep over", "vertel alles over", "diep uitleg"],
+    {"id": "tell_deep",   "triggers": ["vertel diep over", "vertel diep", "ga dieper", "ga dieper in", "diep uitleg"],
                           "handler": "cmd_tell_layer", "depth": 3},
-    {"id": "tell_full",   "triggers": ["vertel volledig over", "alles wat je weet over"],
+    {"id": "tell_full",   "triggers": ["vertel volledig over", "vertel volledig", "vertel alles over", "alles wat je weet over"],
                           "handler": "cmd_tell_layer", "depth": 4},
     {"id": "learn_word",  "triggers": ["leer woord", "onthoud dit woord", "voeg toe aan kennis"],   "handler": "cmd_learn_word"},
     {"id": "list_inbox",  "triggers": ["wat staat in inbox", "welke kaarten wachten", "hoeveel onbeantwoord"], "handler": "cmd_list_inbox"},
@@ -194,16 +195,41 @@ def cmd_search_kb(query: str) -> Dict:
     }
 
 
-def cmd_tell_layer(query: str, depth: int = 1) -> Dict:
+def cmd_tell_layer(query: str, depth: int = 1, fallback_card_id: Optional[str] = None) -> Dict:
     """v6_kbv2_hooks_landing_001 — depth-router: laag1 (kort) / 2 (meer) / 3 (diep) / 4 (volledig).
+    v6_kbv2_tell_layer_followup_001 — fallback_card_id: bij lege query gebruik laatst-besproken kaart.
+
     Bouwt antwoord op uit alle gevraagde lagen + valt terug bij missing laag."""
-    if not query:
+    kaart = None
+    fb_lade = None
+    if not query.strip() and fallback_card_id:
+        # Follow-up: gebruik laatst besproken kaart
+        # Index v2 is gemapt op begrip → {kaart_id, lade}. We lopen entries door om de lade te vinden.
+        try:
+            idx = load_json(kbv2._index_path(), default={"entries": {}})
+            entries = idx.get("entries", {})
+            target_lade = None
+            for begrip, info in entries.items():
+                if info.get("kaart_id") == fallback_card_id:
+                    target_lade = info.get("lade")
+                    break
+            if target_lade:
+                lade_data = load_json(kbv2._lade_path(target_lade), default={"kaarten": []})
+                kaart = next((k for k in lade_data.get("kaarten", []) if k.get("id") == fallback_card_id), None)
+                if kaart:
+                    fb_lade = target_lade
+        except Exception:
+            kaart = None
+    if not kaart and not query.strip():
         return {"type": "kbv2_cmd_empty", "message": "Over welk begrip wil je dat ik vertel?"}
-    fb = kbv2.graceful_fallback(query)
-    if not fb or fb.get("type") != "direct":
-        # Geen direct hit → val terug op search-result + suggestie
-        return cmd_search_kb(query)
-    kaart = fb["kaart"]
+    if not kaart:
+        fb = kbv2.graceful_fallback(query)
+        if not fb or fb.get("type") != "direct":
+            # Geen direct hit → val terug op search-result + suggestie
+            return cmd_search_kb(query)
+        kaart = fb["kaart"]
+        fb_lade = fb["lade"]
+
     lagen = kaart.get("lagen") or {}
     depth = max(1, min(4, int(depth)))
     bump_vocab_use_count(kaart.get("begrip", ""))
@@ -227,9 +253,9 @@ def cmd_tell_layer(query: str, depth: int = 1) -> Dict:
     body = "\n\n".join(parts)
     return {
         "type": f"kbv2_tell_{label}",
-        "message": f"**{kaart['begrip']}** _(lade: {fb['lade']}, {label})_:\n\n{body}",
+        "message": f"**{kaart['begrip']}** _(lade: {fb_lade}, {label})_:\n\n{body}",
         "kbv2_card_id": kaart["id"],
-        "kbv2_lade": fb["lade"],
+        "kbv2_lade": fb_lade,
         "kbv2_depth": depth,
         "kbv2_layers_used": used_layers,
     }

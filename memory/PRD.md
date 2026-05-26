@@ -1182,3 +1182,57 @@ Encryption-slot ligt klaar in elke `_meta.json`. Wanneer user F2F-mode activeert
 - Spark systeem ziet alleen meta-shell, geen container-inhoud.
 
 Geen rework nodig — alleen het slot vullen.
+
+## 2026-05-26 — Synapse Auto-Enricher + KB v2 Laagsgewijs Uitleg
+
+### Auto-enricher (v6_synapse_002)
+Synapse-meta wordt nu **automatisch gevuld** met betekenisvolle `doel`-omschrijvingen:
+- Leest module-level docstring uit `__init__.py` (of routes.py / service.py als fallback)
+- Voor frontend: top JSDoc-blok uit eerste .js/.jsx file
+- Voor data-stores: lijst van aanwezige JSON-bestanden
+- **53 modules** gevuld in eerste run, **78 blueprint-stubs** aangemaakt
+
+**Blueprint-stubs**: per module een `/app/memory/blueprints/{naam}.md` met:
+- 🎯 Doel
+- ✅ Wat werkt al
+- 🔌 Auto-gedetecteerde endpoints
+- 📝 TODO / open items
+- ⚠️ Splitting-trigger (warning bij > 4 subdirs of > 10 endpoints)
+- 🔐 Encryption-plan (F2F-roadmap)
+- 🧬 Relaties
+
+**Endpoint**: `POST /api/synapse/enrich`
+
+**Effect in chat**: Spark zegt nu *"glow_nav — Glow-Nav service (v6_glow_nav_001) — Spark wijst via chat de juiste UI-tab aan"* in plaats van *"glow_nav — geen doel-omschrijving"*.
+
+### KB v2 Laagsgewijs Uitleg (v6_kbv2_tell_layer_followup_001)
+Spark's antwoorden zijn nu **gelaagd** en hebben **context-geheugen** (10 min):
+
+```
+User: "vertel kort over identiteit"
+Spark: [laag1] Identiteit is het geheel van eigenschappen, kenmerken en ervaringen...
+
+User: "vertel meer"
+Spark: [laag1 + laag2] ...gebruikt om te beschrijven hoe iemand zich verhoudt...
+
+User: "ga dieper"
+Spark: [laag1 + laag2 + laag3] ...
+
+User: "vertel volledig"
+Spark: [alle 4 lagen]
+```
+
+**Triggers**:
+- depth 1: `vertel kort`, `in 1 zin`, `samenvatting van`, `korte uitleg`
+- depth 2: `vertel meer`, `leg uit`, `beschrijf`, `iets meer`
+- depth 3: `vertel diep`, `ga dieper`, `ga dieper in`, `diep uitleg`
+- depth 4: `vertel volledig`, `vertel alles over`, `alles wat je weet over`
+
+Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" — gebruikt `session_state.last_kbv2_card_id`).
+
+### Files
+- `backend/modules/synapse/enricher.py` (auto-doel + blueprint-stubs)
+- `backend/modules/synapse/routes.py` (POST /api/synapse/enrich)
+- `backend/modules/kb_v2/hooks.py` (cmd_tell_layer + fallback_card_id + uitgebreide triggers)
+- `backend/modules/chat/routes.py` (state.last_kbv2_card_id doorgeven aan handler)
+- `/app/memory/blueprints/*.md` (78 nieuwe stubs)

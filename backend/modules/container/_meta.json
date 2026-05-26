@@ -1,0 +1,34 @@
+{
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "naam": "container",
+  "doel": "(container — geen doel-omschrijving)",
+  "container_type": "dir",
+  "status": "active",
+  "owner": "spark-system",
+  "blueprint_ref": null,
+  "footnote": "",
+  "split_from": null,
+  "children_max": 4,
+  "endpoints": [
+    "DELETE /container/{container_type}/{container_id}",
+    "GET /container/{container_type}",
+    "GET /container/{container_type}/{container_id}/meta",
+    "PATCH /container/{container_type}/{container_id}/meta",
+    "POST /container/{container_type}",
+    "POST /container/{container_type}/{container_id}/tag-for-deletion"
+  ],
+  "tags": [],
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  },
+  "created_at": "2026-05-26T16:06:21.863389+00:00",
+  "last_touched": "2026-05-26T16:06:21.863389+00:00",
+  "activity_count": 0,
+  "file_count": 4,
+  "subdir_count": 0,
+  "extra": {}
+}

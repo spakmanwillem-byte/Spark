@@ -1132,3 +1132,53 @@ React 18, FastAPI, JSON files, Bitvavo API (trade), OpenAI TTS/STT via emergenti
 - `frontend/src/components/workspace/GesprekkenPage.js` (event-dispatch)
 - `frontend/src/components/layout/MainLayout.js` (event-listener + auto-navigate)
 - `frontend/src/index.css` (pulse keyframes)
+
+## 2026-05-26 — Synapse + Container architectuur (sessie 12+, F1-F7)
+
+### 🧬 Concept (door Willem)
+*"Synapslaag — Spark moet zichzelf kunnen lezen. Mappen geven zichzelf meta-data, hij hoeft het niet uit z'n hoofd te kennen. En dit container-patroon is universeel: user, shop, asset, kb_card, card_deck, chat_thread, trade_bot — alles met eigen meta + (later) eigen encryption."*
+
+### Wat is er nu live (na sync van productie-data 2026-05-26 15:38):
+1. **`_meta.json` per map** — backend/modules (50), frontend/components (12), backend/data (28). Totaal 90 containers gescand.
+2. **Auto-detectie 418 endpoints** uit `@router.<verb>` decorators.
+3. **SYNAPSE.json aggregator** op `/app/memory/SYNAPSE.json` — Spark's "ik weet wat ik heb".
+4. **Spark leest zichzelf in chat**: 6 intents werken ("wat hebben we", "is X af", "waar woont X", "wat doet X", "lijst skeletons", "lijst verouderd").
+5. **Auto-touch** in `core/storage.py` — elke save_json bumpt parent _meta.json automatisch.
+6. **Container service** met universele CRUD voor user/shop/asset/card/thread.
+7. **User-delete is nu bug-vrij**: container weg + cross-refs anonimiseren in bugs/community + bestanden weg uit agenda/dagboek/chat-prive.
+8. **Encryption-slot in elke meta** — leeg, klaar voor F2F-feature later (geen rework).
+9. **Winkelstraat hook**: shop-create → auto shop-container; shop-close → auto tag-for-deletion.
+10. **UI Synapse-tab** in Beheer→Instellingen met filter, search, status-tellers, edit-modal.
+
+### Endpoints (allemaal getest)
+- `GET /api/synapse/scan` — trigger full scan + rebuild
+- `GET /api/synapse/tree` — volledige boom
+- `GET /api/synapse/search?q=...` — zoek in alle meta
+- `GET /api/synapse/summary` — lichte stats
+- `POST /api/synapse/tag` — update doel/status/footnote/blueprint/tags
+- `POST /api/synapse/touch` — handmatige touch
+- `POST /api/container/{type}` — create (user/shop/asset/card/thread)
+- `GET /api/container/{type}` — list
+- `GET /api/container/{type}/{id}/meta` — read meta
+- `PATCH /api/container/{type}/{id}/meta` — update
+- `POST /api/container/{type}/{id}/tag-for-deletion` — revertable
+- `DELETE /api/container/{type}/{id}` — admin-only, archive + cross-ref clean
+
+### Files
+- `backend/modules/synapse/{__init__.py, schema.py, scanner.py, aggregator.py, touch.py, chat_handler.py, routes.py}`
+- `backend/modules/container/{__init__.py, service.py, user_helper.py, routes.py}`
+- `backend/modules/core/storage.py` (touch-hook bij save_json)
+- `backend/modules/chat/routes.py` (synapse intent-router vóór capability)
+- `backend/modules/winkelstraat/__init__.py` (auto shop-container hook)
+- `frontend/src/components/admin/SynapseTab.js` + `InstellingenPage.js` (nieuwe tab)
+- `backend/server.py` (synapse + container router-includes)
+
+### F2F-roadmap (placeholder voor later)
+Encryption-slot ligt klaar in elke `_meta.json`. Wanneer user F2F-mode activeert:
+- `meta.encryption.enabled = true`
+- `algorithm = "AES-256-GCM"`
+- `key_holder = "user-<id>"`
+- Container-data wordt encrypted at-rest, alleen user kan ontsleutelen.
+- Spark systeem ziet alleen meta-shell, geen container-inhoud.
+
+Geen rework nodig — alleen het slot vullen.

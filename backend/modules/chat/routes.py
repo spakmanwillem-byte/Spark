@@ -186,6 +186,18 @@ async def process_message(req: ChatMessage):
     # 0b3a. GLOW-NAV (v6_glow_nav_001) — "waar is X tab" / "ga naar Y" → tab-navigatie + glow
     # MOET vóór capability-router en kbv2-router omdat "waar is X" anders door
     # generieke capability-placeholder of snap-fallback wordt opgevreten.
+    # Synapse-router komt vlak hierna (specifieker — "waar woont X" + status-vragen).
+    try:
+        # Synapse zelf-lezende intents eerst (specifieker: waar woont/wat doet/is X af)
+        from modules.synapse.chat_handler import route_synapse_intent as _syn_route
+        syn_resp = _syn_route(text, req.user_id)
+        if syn_resp:
+            response.update(syn_resp)
+            _save_log(req, response, syn_resp.get("type", "synapse"))
+            return response
+    except Exception as ex:
+        print(f"[synapse-router] failed: {ex}")
+
     try:
         txt_lower = (text or "").lower()
         nav_triggers = (

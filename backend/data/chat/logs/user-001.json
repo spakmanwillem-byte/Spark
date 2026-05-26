@@ -22510,11 +22510,160 @@
         "session_id": "default",
         "gesprek_nummer": 865
       }
+    },
+    {
+      "id": "conv-1a97a164",
+      "timestamp": "2026-05-26T15:57:20.006379+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat hebben we?",
+      "spark_response": "🧬 **Mijn synapslaag — wat zit er in mij:**\n\n📦 **88 containers** in totaal:\n  • 60 code-modules\n  • 28 data-stores\n\n📊 **Status verdeling:**\n  • ✅ 76 actief\n  • 🌱 12 skeletons\n\n🔌 **412 endpoints** zelf-gedetecteerd\n\n_Vraag me: 'is winkelstraat af?', 'waar woont wallet?', 'wat doet glow_nav?', 'lijst skeletons'._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "hebben"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "synapse_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 866
+      }
+    },
+    {
+      "id": "conv-b851c22f",
+      "timestamp": "2026-05-26T15:57:20.211320+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "is winkelstraat af?",
+      "spark_response": "✅ **winkelstraat** — status: `active`\n\n📂 Locatie: `backend/modules/winkelstraat`\n🎯 Doel: (winkelstraat — geen doel-omschrijving)\n🔌 6 endpoints\n📁 2 bestanden",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_status",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_status"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 867
+      }
+    },
+    {
+      "id": "conv-921391bf",
+      "timestamp": "2026-05-26T15:57:20.354700+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "waar woont wallet?",
+      "spark_response": "📍 **wallet** woont op:\n`backend/modules/wallet`\n\n(backend_modules, status: `active`)\n\n🔌 Eigen endpoints:\n  · GET /wallet/admin/overview\n  · GET /wallet/config\n  · GET /wallet/entities\n  · GET /wallet/entities/{entity_id}\n  · GET /wallet/list\n  · GET /wallet/mine\n  _… + 14 meer_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_where",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_where"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 868
+      }
+    },
+    {
+      "id": "conv-45ccaf6a",
+      "timestamp": "2026-05-26T15:57:20.495696+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat doet glow_nav?",
+      "spark_response": "🎯 **glow_nav** — (glow_nav — geen doel-omschrijving)\n\n📂 `backend/modules/glow_nav` · status `active`",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_what",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_what"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 869
+      }
+    },
+    {
+      "id": "conv-4cb86bbc",
+      "timestamp": "2026-05-26T15:57:20.626889+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "lijst skeletons",
+      "spark_response": "🌱 **Modules met status `skeleton`**\n\n  • **auth** (frontend_components) — Skelet — auth module nog leeg of placeholder\n  • **dnd** (frontend_components) — Skelet — dnd module nog leeg of placeholder\n  • **events** (frontend_components) — Skelet — events module nog leeg of placeholder\n  • **layout** (frontend_components) — Skelet — layout module nog leeg of placeholder\n  • **profile** (frontend_components) — Skelet — profile module nog leeg of placeholder\n  • **accounting** (backend_data) — Skelet — accounting module nog leeg of placeholder\n  • **bots** (backend_data) — Skelet — bots module nog leeg of placeholder\n  • **bugs** (backend_data) — Skelet — bugs module nog leeg of placeholder\n  • **community** (backend_data) — Skelet — community module nog leeg of placeholder\n  • **dagboek** (backend_data) — Skelet — dagboek module nog leeg of placeholder\n  • **notifications** (backend_data) — Skelet — notifications module nog leeg of placeholder\n  • **urgent** (backend_data) — Skelet — urgent module nog leeg of placeholder",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_list",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "synapse_list"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 870
+      }
+    },
+    {
+      "id": "conv-287ee4c4",
+      "timestamp": "2026-05-26T15:57:20.796638+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "is glow_nav klaar",
+      "spark_response": "✅ **glow_nav** — status: `active`\n\n📂 Locatie: `backend/modules/glow_nav`\n🎯 Doel: (glow_nav — geen doel-omschrijving)\n🔌 3 endpoints\n📁 2 bestanden",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "synapse_status",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "synapse_status"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 871
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 865,
-    "last_updated": "2026-05-26T13:58:28.855413+00:00"
+    "total_conversations": 871,
+    "last_updated": "2026-05-26T15:57:20.796638+00:00"
   }
 }

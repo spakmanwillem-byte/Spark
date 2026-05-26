@@ -143,6 +143,15 @@ def save_json(filepath: Path, data: Any, backup: bool = False) -> bool:
                 with _cache_lock:
                     _cache.pop(fp_str, None)
 
+            # v6_synapse_001 F3: auto-touch parent-container _meta.json (best-effort)
+            # Skipt _meta.json zelf (anders infinite loop). Lazy import om circulair te vermijden.
+            try:
+                if filepath.name != "_meta.json":
+                    from modules.synapse.touch import touch_path as _touch
+                    _touch(filepath)
+            except Exception:
+                pass  # touch is bonus, mag nooit save breken
+
             return True
         except IOError as e:
             print(f"[STORAGE ERROR] Failed to save {filepath}: {e}")

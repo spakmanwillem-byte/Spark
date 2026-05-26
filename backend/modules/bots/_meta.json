@@ -1,0 +1,35 @@
+{
+  "_arch_ref": "v6_synapse_001",
+  "schema_version": "1.0",
+  "naam": "bots",
+  "doel": "(bots — geen doel-omschrijving)",
+  "container_type": "dir",
+  "status": "active",
+  "owner": "spark-system",
+  "blueprint_ref": null,
+  "footnote": "",
+  "split_from": null,
+  "children_max": 4,
+  "endpoints": [
+    "GET /bots/community/archive",
+    "GET /bots/community/messages",
+    "GET /bots/community/recap",
+    "GET /bots/list",
+    "GET /bots/{bot_id}",
+    "POST /bots/community/dnd-choice",
+    "POST /bots/community/send"
+  ],
+  "tags": [],
+  "encryption": {
+    "enabled": false,
+    "algorithm": null,
+    "key_id": null,
+    "key_holder": null
+  },
+  "created_at": "2026-05-26T15:54:32.135497+00:00",
+  "last_touched": "2026-05-26T15:54:32.135497+00:00",
+  "activity_count": 0,
+  "file_count": 5,
+  "subdir_count": 0,
+  "extra": {}
+}

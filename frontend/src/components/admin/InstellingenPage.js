@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { SystemArchive } from './SystemArchive';
+import { SynapseTab } from './SynapseTab';
 import {
   Settings, Monitor, Volume2, Link2, Sparkles, HelpCircle,
   Save, Shield, Clock, Bug, RefreshCw, Palette, Sun, Moon,
@@ -108,6 +109,7 @@ export function InstellingenPage({ onNavigate }) {
     { id: 'beeld', label: 'Beeld', icon: Palette, accent: '#a855f7' },
     { id: 'geluid', label: 'Geluid', icon: Volume2, accent: '#3b82f6' },
     { id: 'archief', label: 'Archief', icon: Archive, accent: '#10b981' },
+    { id: 'synapse', label: 'Synapslaag', icon: Brain, accent: '#f59e0b' },
     { id: 'integraties', label: 'Integraties', icon: Link2, accent: '#06b6d4' },
     { id: 'features', label: 'Features', icon: Sparkles, accent: '#22c55e' },
     { id: 'tips', label: 'Tips & Hulp', icon: HelpCircle, accent: '#f97316' },
@@ -257,6 +259,11 @@ export function InstellingenPage({ onNavigate }) {
             {/* ====== ARCHIEF (Systeem) ====== */}
             {activeTab === 'archief' && (
               <SystemArchive currentUserId={user?.id} isAdmin={userGrad <= 2} />
+            )}
+
+            {/* ====== SYNAPSLAAG (v6_synapse_001 F6) ====== */}
+            {activeTab === 'synapse' && (
+              <SynapseTab />
             )}
 
             {/* ====== INTEGRATIES ====== */}

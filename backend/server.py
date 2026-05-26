@@ -259,6 +259,14 @@ app.include_router(help_router, prefix="/api")
 from modules.glow_nav.routes import router as glow_router
 app.include_router(glow_router, prefix="/api")
 
+# v6_synapse_001 — Spark's synapslaag (zelf-lezende meta op alle mappen)
+from modules.synapse.routes import router as synapse_router
+app.include_router(synapse_router, prefix="/api")
+
+# v6_container_001 — Universeel container-patroon (user/shop/asset/...)
+from modules.container.routes import router as container_router
+app.include_router(container_router, prefix="/api")
+
 # Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")

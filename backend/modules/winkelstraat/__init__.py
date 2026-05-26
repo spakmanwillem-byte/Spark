@@ -135,6 +135,29 @@ async def create_shop(body: CreateShopBody):
     }
     d.setdefault("shops", []).append(new_shop)
     _save_shops(d)
+
+    # v6_container_001 F7 — Maak ook een shop-container met _meta.json zodat:
+    #  - producten/orders/listing-fotos per shop geïsoleerd staan
+    #  - bij sluiting de hele container weg kan zonder cross-pollution
+    #  - encryption-slot reeds aanwezig voor F2F-secure shops later
+    try:
+        from modules.container.service import create_container
+        from modules.synapse.schema import CONTAINER_SHOP
+        create_container(
+            CONTAINER_SHOP, new_shop["id"],
+            naam=new_shop["naam"],
+            doel=f"Shop-container voor {new_shop['naam']} ({new_shop['type']}, owner: {new_shop['owner_user_id']})",
+            owner=new_shop["owner_user_id"],
+            footnote=f"Commissie: {new_shop['commissie_pct']}% naar Spark. Bij sluiting: container archiveren.",
+            extra={
+                "commissie_pct": new_shop["commissie_pct"],
+                "type": new_shop["type"],
+                "openings_gradatie": grad,
+            },
+        )
+    except Exception as _ex:
+        print(f"[winkelstraat] container create voor {new_shop['id']} faalde: {_ex}")
+
     return {"success": True, "shop": new_shop,
             "message": f"Winkel '{body.naam}' aangemaakt. Commissie {new_shop['commissie_pct']}%."}
 
@@ -183,5 +206,16 @@ async def close_shop(shop_id: str, body: CloseShopBody):
     shop["close_requested_at"] = _now()
     shop["close_reden"] = body.reden
     _save_shops(d)
+
+    # v6_container_001 F7 — Tag shop-container voor verwijdering (revertable).
+    # Definitieve cleanup gebeurt later via admin via /api/container/shop/{id} DELETE.
+    try:
+        from modules.container.service import tag_for_deletion, container_exists
+        from modules.synapse.schema import CONTAINER_SHOP
+        if container_exists(CONTAINER_SHOP, shop_id):
+            tag_for_deletion(CONTAINER_SHOP, shop_id, reason=body.reden or "Owner-verzoek sluiting")
+    except Exception as _ex:
+        print(f"[winkelstraat] container tag-for-deletion voor {shop_id} faalde: {_ex}")
+
     return {"success": True, "shop": shop,
             "message": "Sluitings-verzoek geregistreerd. Producten worden gearchiveerd, openstaande orders nog afgehandeld."}

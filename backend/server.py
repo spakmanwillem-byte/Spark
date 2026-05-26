@@ -247,6 +247,18 @@ app.include_router(emotion_pipeline_router, prefix="/api")
 from modules.intent_registry.routes import router as intent_registry_router
 app.include_router(intent_registry_router, prefix="/api")
 
+# v6_winkelstraat_001 — Multi-tenant winkelstraat
+from modules.winkelstraat.routes import router as winkelstraat_router
+app.include_router(winkelstraat_router, prefix="/api")
+
+# v6_help_per_gradatie_001 — Help/commands per gradatie auto-afgeleid uit command_registry
+from modules.help_per_gradatie.routes import router as help_router
+app.include_router(help_router, prefix="/api")
+
+# v6_glow_nav_001 — Spark wijst UI-tabs aan via chat ("waar is winkelstraat?")
+from modules.glow_nav.routes import router as glow_router
+app.include_router(glow_router, prefix="/api")
+
 # Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")

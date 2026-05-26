@@ -584,7 +584,6 @@ async def process_message(req: ChatMessage):
                         kwargs["depth"] = cmd.get("depth", 1)
                     out = handler(query, **kwargs) if kwargs else handler(query)
                     response.update(out)
-                    # Sla referentie op zodat follow-up vragen ("en wat nog meer?") deze kaart kunnen oppakken
                     if out.get("kbv2_card_id") and req.user_id:
                         try:
                             session_state.set_state(req.user_id, last_kbv2_card_id=out["kbv2_card_id"])
@@ -592,6 +591,30 @@ async def process_message(req: ChatMessage):
                             pass
                     _save_log(req, response, f"kbv2_{cmd['id']}")
                     return response
+
+            # v6_glow_nav_001 — "waar is X tab" / "ga naar Y" → tab-navigatie + glow
+            txt_lower = (text or "").lower()
+            nav_triggers = ("waar is", "ga naar", "open de", "open tab", "ik wil naar")
+            if any(t in txt_lower for t in nav_triggers):
+                try:
+                    from modules.glow_nav import navigate as _nav_func
+                    import asyncio as _aio
+                    from modules.glow_nav import NavigateBody
+                    # Run sync wrapper (NavigateBody is pydantic)
+                    body = NavigateBody(q=text)
+                    nav_result = await _nav_func(body) if _aio.iscoroutinefunction(_nav_func) else _nav_func(body)
+                    if nav_result and nav_result.get("success"):
+                        response.update({
+                            "type": "navigate_tab",
+                            "message": nav_result.get("spoken_response"),
+                            "navigate_to": nav_result.get("navigate_to"),
+                            "glow_target": nav_result.get("glow_target"),
+                            "matched_tab": nav_result.get("match", {}).get("label"),
+                        })
+                        _save_log(req, response, "navigate_tab")
+                        return response
+                except Exception:
+                    pass
         except Exception:
             pass
     except Exception:

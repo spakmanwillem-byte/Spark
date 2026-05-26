@@ -88,6 +88,15 @@ _KEYWORD_MAP = {
     # disclaimer
     "disclaimer": "disclaimer", "grenzen": "grenzen", "kader": "kaders",
     "doe je niet": "grenzen",
+    # v6_winkelstraat_001 — shop intents
+    "winkel": "winkel", "shop": "winkel", "winkeltje": "winkel",
+    "winkelstraat": "winkelstraat", "merch": "merch", "digitaal": "digitaal",
+    "product": "product", "producten": "product",
+    # v6_glow_nav_001 — navigation intents
+    "waar is": "navigate", "ga naar": "navigate", "open": "navigate_open",
+    "tab": "tab", "pagina": "pagina", "scherm": "pagina",
+    # help
+    "help": "help", "wat kan jij": "help", "hulp": "help", "commando": "commands",
 }
 
 # Multi-word fragments (worden vóór tokenisatie gematcht zodat "wat is" → "uitleg")
@@ -96,6 +105,7 @@ _MULTIWORD = [
     "wat is", "leg uit",
     "doe je niet", "laat zien",
     "to-do",
+    "waar is", "ga naar", "wat kan jij",
 ]
 
 

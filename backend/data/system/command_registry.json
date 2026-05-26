@@ -253,18 +253,64 @@
       "required_params": [],
       "gradatie_min": 2,
       "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "winkelstraat_list",
+      "path": "/api/winkelstraat/shops",
+      "method": "GET",
+      "intent_tags": ["winkel", "winkelstraat", "shops", "bekijken", "lijst"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "winkelstraat_create",
+      "path": "/api/winkelstraat/shops",
+      "method": "POST",
+      "intent_tags": ["winkel", "winkelstraat", "aanmaken", "openen", "starten"],
+      "required_params": ["naam", "owner_user_id", "voorwaarden_geaccepteerd"],
+      "gradatie_min": 4,
+      "behavior_class_hint": "exploreren-uitbreiden"
+    },
+    {
+      "id": "help_per_gradatie",
+      "path": "/api/help/{gradatie}",
+      "method": "GET",
+      "intent_tags": ["help", "commands", "wat kan jij", "hulp"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "navigate_to_tab",
+      "path": "/api/intent-registry/navigate",
+      "method": "POST",
+      "intent_tags": ["navigate", "navigate_open", "tab", "pagina", "winkel", "winkelstraat"],
+      "required_params": ["target"],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
+    },
+    {
+      "id": "shop_voorwaarden",
+      "path": "/api/winkelstraat/voorwaarden",
+      "method": "GET",
+      "intent_tags": ["voorwaarden", "regels", "commissie", "afdracht", "winkel"],
+      "required_params": [],
+      "gradatie_min": 1,
+      "behavior_class_hint": "informatief-functioneel"
     }
   ],
   "stats": {
-    "total_commands": 27,
+    "total_commands": 33,
     "by_gradatie_min": {
-      "1": 22,
+      "1": 27,
       "2": 4,
-      "3": 2
+      "3": 2,
+      "4": 1
     },
     "by_behavior_class": {
-      "informatief-functioneel": 18,
-      "exploreren-uitbreiden": 7,
+      "informatief-functioneel": 22,
+      "exploreren-uitbreiden": 8,
       "vertragen-ondersteunen": 2
     }
   }

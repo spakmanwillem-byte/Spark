@@ -2,6 +2,34 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
+## 🟢 Redeploy-ready check — 2026-05-29 (pre-storting €98.40)
+
+**Status**: Stabiel. Geen blockers. Wacht op €98.40 storting Willem zodat Spark potjes-commitment 100% gedekt is door Bitvavo.
+
+**Rekening (kloppend na storting)**:
+- Spark potjes commitment: 15 × €10 = **€149.92**
+- Bitvavo live wallet: **€122.74** (huidig)
+- Open commitment: **€100.00** (= 10 trade-slots zonder `linked_bitvavo` flag)
+- Willem privé saldo (Boekhouding): **€1.60**
+- **Storting morgen: €98.40** → €100 commitment volledig gedekt (€1.60 privé + €98.40 = €100)
+
+**Wat live werkt (smoke-checked, mag op productie)**:
+- Bitvavo trading LIVE (3 bots: Spark 60m, Gijs 15m)
+- ROAR economy v6 (gift-fase, 0% BTW, 12 tokens circulating: Willem 10 + Gijs 2)
+- Boekhouding 4 entiteiten met BTW-summary + reconcile + retroactief fix-endpoint
+- Winkelstraat hub met owner-shop-isolation (`shops/{shop_id}/products.json`)
+- 8 capabilities (W-vraag, profile-lookup, relay, dashboard saldo, verbal deposit, etc.)
+- Synapse auto-documenter (90 containers, 418 endpoints, 59 blueprints)
+- KB v2 hooks-laag (5 hooks live: vocab/tell-layer/verbanden/dnd-link/voice-snippet)
+- 12 capabilities executable in chat-router
+
+**Open na redeploy (P0, niet blocker voor deploy)**:
+- [ ] 6 Boekhouding-hooks centraliseren (token-buy / coin-buy / sell-back / shop-sale / deposit / trader-result → `/api/accounting/transactions`)
+- [ ] Legacy `spark_kasboek.json` schrijfpaden uitfaseren (alleen-lezen + migratie)
+
+**Open daarna (P1+)** — zie secties hieronder ongewijzigd.
+
+
 ## 🧠 Spark's brein — wat er AL is (v5-status, 2026-05-23)
 
 > Deze sectie bestaat omdat de backlog hieronder anders de indruk wekt dat Spark

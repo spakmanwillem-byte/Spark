@@ -21,6 +21,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from modules.core.storage import load_json, save_json
+from modules.core.spark_logger import traced
 
 router = APIRouter(prefix="/shop", tags=["shop-gift"])
 
@@ -120,6 +121,7 @@ class GiftAction(BaseModel):
 # ============================================================
 
 @router.post("/gift")
+@traced(intent="ROAR gift initieren (sender → recipient pending)", module="shop_gift")
 async def create_gift(req: GiftCreate):
     """Sender start een gift. Tokens worden NIET direct overgeboekt — escrow in 'pending'."""
     if req.sender_id == req.recipient_id:
@@ -189,6 +191,7 @@ async def list_outbox(user_id: str):
 
 
 @router.post("/gift/{gift_id}/accept")
+@traced(intent="ROAR gift accepteren (token-transfer recipient)", module="shop_gift")
 async def accept_gift(gift_id: str, req: GiftAction):
     """Recipient accepteert: voer transfer uit, sluit gift."""
     # v6_gift_idempotent_001 — ALLE state-mutaties binnen 1 lock om dubbel-verwerken te voorkomen

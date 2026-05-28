@@ -183,6 +183,34 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, time_resp["type"])
         return response
 
+    # 0b3z. TRADER-HELP (v6_trade_help_001) — "hoe werkt de trader/bot/potjes?"
+    try:
+        _txt = (text or "").lower()
+        trader_help_triggers = (
+            "hoe werkt de trader", "hoe werkt trader", "uitleg trader", "leg de trader uit",
+            "wat is de trader", "hoe werkt het potjes", "potjes systeem uitleggen",
+            "hoe werkt de bot", "wat doet de bot", "hoe werkt buy en sell",
+            "uitleg over potjes",
+        )
+        if any(t in _txt for t in trader_help_triggers):
+            from modules.trade_help import TRADER_HELP_DOC
+            lines = [f"**{TRADER_HELP_DOC['title']}**", "", TRADER_HELP_DOC["intro"], ""]
+            for sec in TRADER_HELP_DOC["sections"][:3]:  # eerste 3 secties in chat
+                lines.append(f"### {sec['icon']} {sec['title']}")
+                for ln in sec["body"]:
+                    lines.append(ln)
+                lines.append("")
+            lines.append("_(Voor alle 7 secties: open de **Help-knop** in de Trader-pagina.)_")
+            response.update({
+                "type": "trader_help",
+                "message": "\n".join(lines),
+                "deep_link": "/modules/trade?tab=help",
+            })
+            _save_log(req, response, "trader_help")
+            return response
+    except Exception as ex:
+        print(f"[trader-help] failed: {ex}")
+
     # 0b3a. GLOW-NAV (v6_glow_nav_001) — "waar is X tab" / "ga naar Y" → tab-navigatie + glow
     # MOET vóór capability-router en kbv2-router omdat "waar is X" anders door
     # generieke capability-placeholder of snap-fallback wordt opgevreten.

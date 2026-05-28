@@ -126,9 +126,13 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
   - *"vertel volledig"* → alle 4 lagen
   Session-state houdt `last_kbv2_card_id` 10 min bij. Fallback gebruikt index-lookup om kaart in juiste lade te vinden. E2E getest met "Identiteit"-kaart: alle 4 follow-ups correct.
 
-#### 🔧 Refactor + minor bugs (later, lage prioriteit)
-- [ ] **Wallet header-knop volgorde** — Gift staat tussen Storten (+) en Opnemen (−). Naar: Storten, Opnemen, Gift (rechts). Klein UI fix.
-- [ ] **ROAR-prijs consistentie Spark Core display** — "Roadkill ROAR Token · Spark Core Aandeel €6.91 · Dynamische prijs = Spark Core / tokens · Bitvavo: €151.96 · Jouw tokens: 10 ROAR" — getallen niet logisch uitgelegd. Refactor display-tekst.
+#### 🔧 Refactor + minor bugs (sessie 13+, 2026-05-28 ALLES DONE)
+- [x] **Wallet header-knop volgorde** ✅ DONE (v6_wallet_button_order_001, 2026-05-28): Storten (+) → Opnemen (−) → [Mint admin] → Gift (rechts). `data-testid="add-funds-btn", "withdraw-btn", "spark-mint-token-btn", "open-gift-modal"`.
+- [x] **ROAR-prijs consistentie display** ✅ DONE (v6_roar_price_display_001, 2026-05-28): WinkelPage tekst opgeschoond — "1 ROAR = aandeel in Spark Core kapitaal" + formule `€{spark_core} ÷ {circulating} = €{price}` zichtbaar in tooltip. "Jouw tokens" → "Jouw bezit" + "Waarde" → "Tegen huidige prijs".
+- [x] **Potje grootte €5.08 → €10** ✅ DONE (v6_potje_size_10_001, 2026-05-28): `START_AMOUNT = 10.0` voor nieuwe users. Admin-endpoint `POST /api/trade/potjes/{user_id}/resize-to-default` voor bestaande users (faalt bij open posities).
+- [x] **Pot 1 Staking Anchor (€10 lock)** ✅ DONE (v6_pot1_staking_lock_001, 2026-05-28): eerste potje krijgt `pot_locked=True, lock_reason="staking_anchor"`. `find_available_potje` skipt gelockte potjes. Backfill robuust (vindt eerste potje ook in legacy data zonder `index`). Toggle-endpoint `POST /api/trade/potjes/{user_id}/toggle-lock`.
+- [x] **Trader Help (in chat + UI-ready endpoint)** ✅ DONE (v6_trade_help_001, 2026-05-28): `modules/trade_help/__init__.py` met 7 secties (potjes-systeem, BUY/SELL-logica, Modes, Veiligheid, Spark Brain, Tips). Endpoints `GET /api/trade/help` + `/markdown`. Chat-router pakt triggers ("hoe werkt de trader/bot/potjes?") en post eerste 3 secties met deep_link `/modules/trade?tab=help`.
+- [x] **`@traced` uitrol overige** ✅ DONE (v6_traced_rollout_002, 2026-05-28): shop.gift (`create_gift`, `accept_gift`) + KB v2 mutations (`classify`, `edit`, `delete_card`).
 
 #### Bestaande P1 items — Status 2026-05-27 inventarisatie
 
@@ -160,7 +164,7 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
   - Errors hebben nu `error_code` (`MIN_QUOTE`, `NO_BALANCE`, `ZERO_AFTER_CLAMP`, `BITVAVO_HTTP_ERROR`, `EXCEPTION`) voor frontend-handling.
   - Trade-record bevat extra `requested_amount` + `effective_amount` voor traceability.
   - Unit-test in preview bevestigt min-quote fallback werkt (Bitvavo timeout in preview is normaal).
-- [ ] **`@traced` uitrol (overige)** — shop.gift.*, dnd.observe, KB mutations (deel al gedaan, restant in volgende sessie)
+- [ ] **`@traced` uitrol (overige overig)** — dnd.observe + monitor.execute_real_trade nog niet (rest is gedaan in v6_traced_rollout_001/002). (deel al gedaan, restant in volgende sessie)
 - [ ] **Identity 3-lagen-enforcement** in seed-data (CR-001/002/003 als code-wet ipv alleen doc)
 - [ ] **ROAR-gift encryption-at-rest** — sender/recipient pairs privacy-gevoelig
 - [ ] **SEPA-mint koppeling** voor ROAR economy v2 — PLACEHOLDER, Tikkie blijft fallback

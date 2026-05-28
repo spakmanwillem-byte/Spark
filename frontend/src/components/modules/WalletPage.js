@@ -143,6 +143,12 @@ export function WalletPage({ onNavigate }) {
                 </button>
               </div>
             )}
+            {/* v6_wallet_button_order_001 — Volgorde: Storten (+) → Opnemen (−) → [Mint admin] → Gift (rechts) */}
+            <button data-testid="add-funds-btn" onClick={() => setShowTikkie(true)}
+              className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-white transition-all"
+              style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
+              <Plus className="w-4 h-4" /> Storten
+            </button>
             <button data-testid="withdraw-btn" onClick={() => setShowWithdraw(!showWithdraw)}
               className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all border border-slate-700">
               <Minus className="w-4 h-4" /> Opnemen
@@ -171,7 +177,7 @@ export function WalletPage({ onNavigate }) {
                 🪙 Mint
               </button>
             )}
-            {/* v5_roar_gift_001 — Gift knop naast Opnemen/Storten */}
+            {/* v6_wallet_button_order_001 — Gift altijd uiterst rechts */}
             <button
               data-testid="open-gift-modal"
               onClick={() => setGiftModalOpen(true)}
@@ -179,11 +185,6 @@ export function WalletPage({ onNavigate }) {
               title={(wallet?.spark_tokens || 0) < 1 ? 'Je hebt minimaal 1 ROAR nodig om te giften' : 'Stuur een ROAR token naar een andere user'}
               className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-pink-300 bg-pink-500/10 hover:bg-pink-500/20 transition-all border border-pink-500/30 disabled:opacity-40 disabled:cursor-not-allowed">
               <Gift className="w-4 h-4" /> Gift
-            </button>
-            <button data-testid="add-funds-btn" onClick={() => setShowTikkie(true)}
-              className="flex items-center justify-center gap-2 px-4 h-10 min-w-[120px] rounded-xl text-sm font-medium text-white transition-all"
-              style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-              <Plus className="w-4 h-4" /> Storten
             </button>
           </div>
         </div>

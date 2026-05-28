@@ -1294,3 +1294,57 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 
 ### Files
 - `backend/modules/trade/monitor.py` (helper + buy/sell pre-checks + error-codes)
+
+## 2026-05-28 — Sessie 13b: Potjes €10 + Pot 1 Staking + Trader Help + UI fixes
+
+### v6_potje_size_10_001 — Potjes van €10
+- `START_AMOUNT 5.08 → 10.0` (was eigenaardige opstart-waarde, nu schoon).
+- Admin-endpoint `POST /api/trade/potjes/{user_id}/resize-to-default` zet alle potjes op €10. Faalt veilig bij open posities.
+
+### v6_pot1_staking_lock_001 — Pot 1 staking-lock
+- Eerste potje (laagste index OF eerste in lijst) krijgt `pot_locked=True, lock_reason="staking_anchor"`.
+- `find_available_potje` skipt locked potjes (zowel monitor-bot als quick-buy).
+- Backfill robuust: vindt eerste potje ook in legacy data zonder `index`-veld (productie-data).
+- Toggle endpoint `POST /api/trade/potjes/{user_id}/toggle-lock` met body `{pot_id, locked, lock_reason}`.
+
+### v6_trade_help_001 — Trader Help
+- `modules/trade_help/__init__.py` — 7 secties:
+  1. Het potjes-systeem (€10 elk + Pot 1 staking)
+  2. BUY-logica (dip-detectie, min-quote check, cycle-lock)
+  3. SELL-logica (trailing stop, balance-pre-check, force-sell)
+  4. Modes & Knoppen (Monitor/Stop/QuickBuy/Force-sell/Resize)
+  5. Veiligheid & Limieten (operatorId, token-gate, trade-history)
+  6. Spark's stem in de trades (Boekhouder + Madelief)
+  7. Tips
+- Endpoints `GET /api/trade/help` (volle JSON) + `/markdown` (één string).
+- Chat-router pakt triggers ("hoe werkt de trader/bot/potjes?") en plakt eerste 3 secties + deep_link.
+
+### v6_wallet_button_order_001 — Wallet knop-volgorde
+- Volgorde: **Storten** (+) → **Opnemen** (−) → [**Mint** admin] → **Gift** (rechts).
+
+### v6_roar_price_display_001 — ROAR-prijs uitleg
+- WinkelPage text: "1 ROAR = aandeel in Spark Core kapitaal".
+- Tooltip toont formule: `€{spark_core} ÷ {circulating} = €{prijs}`.
+- "Jouw tokens" → "Jouw bezit", "Waarde" → "Tegen huidige prijs".
+
+### v6_traced_rollout_002 — @traced overige
+- `shop/gift.py`: `create_gift`, `accept_gift`.
+- `kb_v2/routes.py`: `classify`, `edit`, `delete_card`.
+
+### Files
+- `backend/modules/trade/potjes.py` (potje €10 + lock + resize)
+- `backend/modules/trade/routes.py` (resize + toggle-lock endpoints)
+- `backend/modules/trade_help/__init__.py` (NIEUW)
+- `backend/modules/chat/routes.py` (trader-help intent)
+- `backend/modules/shop/gift.py` (@traced)
+- `backend/modules/kb_v2/routes.py` (@traced)
+- `backend/server.py` (trade_help router include)
+- `frontend/src/components/modules/WalletPage.js` (knop-volgorde)
+- `frontend/src/components/modules/WinkelPage.js` (prijs-uitleg)
+
+### Testing
+- Backend lint: all checks passed
+- Pot 1 auto-locked op productie-data (Willem): bevestigd
+- Resize endpoint blokkeert bij open posities: bevestigd
+- Chat "hoe werkt de bot?" → `type=trader_help`: bevestigd
+- Wallet UI screenshot: knop-volgorde Storten→Opnemen→Gift correct (rechts)

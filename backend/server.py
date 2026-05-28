@@ -275,6 +275,10 @@ app.include_router(audit_router, prefix="/api")
 from modules.perks import router as perks_router
 app.include_router(perks_router, prefix="/api")
 
+# v6_trade_help_001 — Centrale Trader-uitleg (voor chat én UI)
+from modules.trade_help import router as trade_help_router
+app.include_router(trade_help_router, prefix="/api")
+
 # Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")

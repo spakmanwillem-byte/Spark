@@ -16,9 +16,10 @@ from modules.core.storage import load_json, save_json
 POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
 ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
 
-START_AMOUNT = 5.08
+START_AMOUNT = 10.0  # v6_potje_size_10_001 — starters direct €10 (was €5.08)
 DEFAULT_POT_COUNT = 10
 INITIAL_MAX = 10.0  # tier 1: 10 potjes à max €10
+LOCKED_POT_INDEX = 0  # v6_pot1_staking_lock_001 — Pot 1 (index 0) is staking-anker, traded NIET
 BITVAVO_TAKER_FEE = 0.0025
 TOKEN_PRICE = 5.08  # vaste prijs per ROAR token (= 1 bonus token bij €5.08 winst)
 
@@ -110,16 +111,20 @@ def _load(user_id: str) -> Dict:
         save_json(POTJES_FILE, data)
     # v5_potjes_repair_001 — als user fewer than 10 potjes heeft (tier 1), reparate door tot 10 aan te vullen
     # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
+    # v6_pot1_staking_lock_001: zorg dat pot-001 (index 0) altijd `pot_locked=True` heeft
     if len(user.get("potjes", [])) < DEFAULT_POT_COUNT:
         existing = user["potjes"]
         next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
         now = datetime.now(timezone.utc).isoformat()
         while len(existing) < DEFAULT_POT_COUNT:
+            is_locked = (next_idx == LOCKED_POT_INDEX)
             existing.append({
                 "id": f"pot-{next_idx+1:03d}",
                 "index": next_idx,
                 "capital": START_AMOUNT,
                 "max_size": INITIAL_MAX,
+                "pot_locked": is_locked,
+                "lock_reason": "staking_anchor" if is_locked else None,
                 "position": {
                     "is_open": False, "entry_price": None, "highest_price": None,
                     "trailing_active": False, "entry_time": None,
@@ -133,7 +138,56 @@ def _load(user_id: str) -> Dict:
         user["potjes"] = existing
         data["users"][user_id] = user
         save_json(POTJES_FILE, data)
+    # v6_pot1_staking_lock_001 — backfill: eerste potje (laagste index OF eerste in lijst-volgorde) → lock
+    potjes_list = user.get("potjes", [])
+    if potjes_list:
+        # Vind het 'eerste' potje: liefst index==0, anders nummer==1, anders gewoon eerste in lijst
+        def _pot_sort_key(p):
+            return (p.get("index") if p.get("index") is not None else 999,
+                    p.get("nummer") if p.get("nummer") is not None else 999,
+                    p.get("id", "zzz"))
+        first_pot = sorted(potjes_list, key=_pot_sort_key)[0]
+        if not first_pot.get("pot_locked"):
+            first_pot["pot_locked"] = True
+            first_pot["lock_reason"] = "staking_anchor"
+            data["users"][user_id] = user
+            save_json(POTJES_FILE, data)
     return data
+
+
+def resize_potjes_to_default(user_id: str) -> Dict:
+    """v6_potje_size_10_001 — admin-resize: zet alle potjes van een user op €10 capital.
+
+    Alleen toepasbaar als de user geen open posities heeft (anders crashed P&L).
+    Returns dict met before/after status.
+    """
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.get("potjes", [])
+    open_count = sum(1 for p in potjes if p.get("position", {}).get("is_open"))
+    if open_count > 0:
+        return {
+            "success": False,
+            "error": f"User heeft {open_count} open posities — sluit eerst alle trades voordat resize.",
+            "open_positions": open_count,
+        }
+    changed = 0
+    for p in potjes:
+        old = p.get("capital", 0)
+        if abs(old - START_AMOUNT) < 0.01:
+            continue  # al €10
+        p["capital"] = START_AMOUNT
+        p["max_size"] = INITIAL_MAX
+        changed += 1
+    _save(data)
+    return {
+        "success": True,
+        "user_id": user_id,
+        "total_potjes": len(potjes),
+        "potjes_resized": changed,
+        "new_capital_each": START_AMOUNT,
+        "total_capital": len(potjes) * START_AMOUNT,
+    }
 
 
 def _save(data: Dict):
@@ -141,15 +195,23 @@ def _save(data: Dict):
 
 
 def _init_potjes(user_id: str) -> Dict:
-    """Maak initiële 10 potjes à €5.08 voor user. Groeien tot max €10 per potje."""
+    """Maak initiële 10 potjes à €10 voor user. Pot 1 (index 0) = staking-lock.
+
+    v6_potje_size_10_001: nieuwe potjes starten direct op €10 (was €5.08).
+    v6_pot1_staking_lock_001: pot-001 krijgt `pot_locked=True` — wordt geskipt door
+    de trade-bot en quick-buy. Dient als ROAR-token staking-anker.
+    """
     now = datetime.now(timezone.utc).isoformat()
     potjes = []
     for i in range(DEFAULT_POT_COUNT):
+        is_locked = (i == LOCKED_POT_INDEX)
         potjes.append({
             "id": f"pot-{i+1:03d}",
             "index": i,
             "capital": START_AMOUNT,
             "max_size": INITIAL_MAX,
+            "pot_locked": is_locked,  # v6_pot1_staking_lock_001
+            "lock_reason": "staking_anchor" if is_locked else None,
             "position": {
                 "is_open": False,
                 "entry_price": None,
@@ -254,12 +316,15 @@ def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool =
     v4_potje_sync_001: sorteer op nummer/index zodat UI en backend dezelfde keuze maken.
     v4_potje_quickbuy_002: skip_cycle_check voor user-initiated Quick Buy (user mag meerdere
     potjes openen in dezelfde monitor-cycle).
+    v6_pot1_staking_lock_001: skip potjes met `pot_locked=True` (staking-anker).
     """
     user = get_potjes(user_id)
     if not skip_cycle_check and user.get("last_buy_cycle") == current_cycle:
         return None  # Al een potje gekocht in deze cycle (monitor-mode bescherming)
     sorted_potjes = sorted(user["potjes"], key=lambda p: (p.get("nummer") or (p.get("index", 99) + 1)))
     for p in sorted_potjes:
+        if p.get("pot_locked"):
+            continue  # v6_pot1_staking_lock_001 — staking-anker overslaan
         if not p["position"]["is_open"]:
             return p
     return None

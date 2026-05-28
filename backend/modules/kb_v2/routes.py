@@ -16,6 +16,7 @@ from fastapi import APIRouter, Query
 from pydantic import BaseModel
 
 from . import service
+from modules.core.spark_logger import traced
 
 router = APIRouter(prefix="/kb/v2", tags=["kb-v2"])
 
@@ -92,11 +93,13 @@ async def get_audit():
 # ---------- Write ----------
 
 @router.post("/classify")
+@traced(intent="KB v2 kaart classificeren (inbox → lade)", module="kb_v2")
 async def classify(body: ClassifyBody):
     return service.classify_card(body.card_id, body.lade, updates=body.updates, user_id=body.user_id)
 
 
 @router.post("/edit")
+@traced(intent="KB v2 kaart bewerken", module="kb_v2")
 async def edit(body: EditBody):
     return service.edit_card(body.card_id, body.lade, updates=body.updates, user_id=body.user_id)
 
@@ -110,6 +113,7 @@ class DeleteBody(BaseModel):
 
 
 @router.post("/delete")
+@traced(intent="KB v2 kaart verwijderen", module="kb_v2")
 async def delete_card(body: DeleteBody):
     """Verwijder een KB v2 kaart permanent uit zijn lade (of inbox) + index.
     Reden wordt gelogd in admin_log voor traceability."""

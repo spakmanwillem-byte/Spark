@@ -47,7 +47,9 @@
               "trade_id": "00000000-0000-041f-0100-0007d8d2c3c5",
               "market": "BCH-EUR"
             }
-          ]
+          ],
+          "pot_locked": true,
+          "lock_reason": "staking_anchor"
         },
         {
           "id": "pot-001-02",
@@ -449,7 +451,9 @@
               "trade_id": "00000000-0000-041f-0100-0007d89f8437",
               "market": "BCH-EUR"
             }
-          ]
+          ],
+          "pot_locked": true,
+          "lock_reason": "staking_anchor"
         },
         {
           "id": "pot-000-02",
@@ -796,7 +800,9 @@
             "total_pnl": 0.0
           },
           "created_at": "2026-05-23T22:25:24.072168+00:00",
-          "last_action": null
+          "last_action": null,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor"
         },
         {
           "id": "pot-002",

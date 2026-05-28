@@ -774,6 +774,37 @@ async def reset_potjes_cycle(user_id: str):
     return {"success": True, "message": "Buy cycle gereset"}
 
 
+# v6_potje_size_10_001 — admin: zet alle potjes op €10 (nieuwe default)
+@router.post("/potjes/{user_id}/resize-to-default")
+async def resize_potjes(user_id: str):
+    """Zet alle potjes van een user naar de DEFAULT capital (€10).
+    Faalt als user open posities heeft."""
+    return potjes_svc.resize_potjes_to_default(user_id)
+
+
+# v6_pot1_staking_lock_001 — toggle pot-lock (admin / Pot 1 wijzigen)
+class TogglePotLockBody(BaseModel):
+    pot_id: str
+    locked: bool
+    lock_reason: Optional[str] = "staking_anchor"
+
+
+@router.post("/potjes/{user_id}/toggle-lock")
+async def toggle_pot_lock(user_id: str, body: TogglePotLockBody):
+    """Zet `pot_locked` op een specifiek potje aan/uit."""
+    data = potjes_svc._load(user_id)
+    user = data["users"].get(user_id, {})
+    pot = next((p for p in user.get("potjes", []) if p.get("id") == body.pot_id), None)
+    if not pot:
+        return {"success": False, "error": f"Potje {body.pot_id} niet gevonden"}
+    if pot.get("position", {}).get("is_open") and body.locked:
+        return {"success": False, "error": "Potje heeft open positie — sluit eerst voor je het lockt."}
+    pot["pot_locked"] = body.locked
+    pot["lock_reason"] = body.lock_reason if body.locked else None
+    potjes_svc._save(data)
+    return {"success": True, "pot": pot}
+
+
 # v5_potjes_distribute_001 — Verdeel potjes over markten (5x2, 10x1 etc.)
 class DistributeBody(BaseModel):
     markets: List[str]

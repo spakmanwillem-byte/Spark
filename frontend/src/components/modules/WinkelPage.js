@@ -279,18 +279,22 @@ export function WinkelPage({ onNavigate }) {
                   />
                 </div>
                 <h2 className="text-lg font-bold text-white">Roadkill ROAR Token</h2>
-                <p className="text-xs text-slate-400">Spark Core Aandeel — dynamische prijs</p>
+                <p className="text-xs text-slate-400">1 ROAR = aandeel in Spark Core kapitaal</p>
                 <p className="text-3xl font-bold text-amber-400 mt-2">&euro;{tokenPrice.toFixed(2)}</p>
-                <p className="text-[10px] text-slate-500 mt-1">
-                  {tokenInfo?.price_model === 'dynamic' ? 'Dynamische prijs = Spark Core / tokens' : `Vaste prijs (nog ${tokenInfo?.tokens_until_dynamic || 0} tokens)`}
+                <p className="text-[10px] text-slate-500 mt-1" title="Prijs per token = Spark Core kapitaal ÷ aantal tokens in omloop">
+                  {tokenInfo?.price_model === 'dynamic'
+                    ? `Dynamisch: €${(tokenInfo?.spark_core_value || 0).toFixed(2)} ÷ ${tokenInfo?.circulating || 0} = €${tokenPrice.toFixed(2)}`
+                    : `Vaste startprijs — nog ${tokenInfo?.tokens_until_dynamic || 0} tokens tot dynamisch`}
                 </p>
                 {tokenInfo?.bitvavo_balance > 0 && (
-                  <p className="text-[10px] text-cyan-400 mt-1">Bitvavo: &euro;{tokenInfo.bitvavo_balance.toFixed(2)}</p>
+                  <p className="text-[10px] text-cyan-400 mt-1" title="Live crypto-waarde op Bitvavo, onderdeel van Spark Core">
+                    waarvan op Bitvavo: &euro;{tokenInfo.bitvavo_balance.toFixed(2)}
+                  </p>
                 )}
               </div>
               <div className="px-5 py-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
-                <span className="text-slate-400">Jouw tokens: <b className="text-white">{userBalance?.roar_balance || 0} ROAR</b></span>
-                <span className="text-slate-400">Waarde: <b className="text-amber-400">&euro;{(userBalance?.value_eur || 0).toFixed(2)}</b></span>
+                <span className="text-slate-400">Jouw bezit: <b className="text-white">{userBalance?.roar_balance || 0} ROAR</b></span>
+                <span className="text-slate-400">Tegen huidige prijs: <b className="text-amber-400">&euro;{(userBalance?.value_eur || 0).toFixed(2)}</b></span>
               </div>
               <div className="px-5 py-3 border-t border-slate-800 grid grid-cols-3 gap-3 text-center text-[10px]">
                 <div>

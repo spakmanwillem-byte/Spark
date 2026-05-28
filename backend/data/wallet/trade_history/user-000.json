@@ -31,6 +31,25 @@
       "mock": true,
       "success": true,
       "error": null
+    },
+    {
+      "trade_id": "00000000-0000-0560-0100-0007f74f5961",
+      "run_id": "manual",
+      "timestamp": "2026-05-28T18:56:15.492710+00:00",
+      "action": "SELL",
+      "market": "SOL-EUR",
+      "order_id": "00000000-0000-0560-0100-0007f74f5961",
+      "amount": 0.14201631,
+      "price": 71.122,
+      "filled": 0.14201631,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.03048399982,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.14201631
     }
   ]
 }

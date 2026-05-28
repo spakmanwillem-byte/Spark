@@ -382,3 +382,94 @@ async def herzien_promote(body: HerzienPromoteBody):
 async def herzien_skip():
     """Skip (alleen marker, geen mutatie nodig — herzien/next picks willekeurig)."""
     return {"success": True, "skipped": True}
+
+
+
+# ---------------------------------------------------------------------------
+# v6_kb_tag_normalizer_001 — Tag-normalisatie + dry-run scan
+# ---------------------------------------------------------------------------
+# Fundering voor #kb-tag-singular + #kb-verb-stem. Geen mutaties — alleen
+# inspectie zodat Willem in volgende sessie een "1-klik dedupe" UI kan
+# bouwen bovenop deze data.
+# ---------------------------------------------------------------------------
+
+from .tag_normalizer import normalize_tag, normalize_tags, overlap_score
+
+
+@router.get("/tags/normalize")
+async def tag_normalize_one(tag: str):
+    """Test 1 tag: 'Emoties' → 'emotie'."""
+    return {"input": tag, "normalized": normalize_tag(tag)}
+
+
+@router.post("/tags/normalize-batch")
+async def tag_normalize_batch(body: dict):
+    """Normaliseer een lijst tags (dedupe behoudt volgorde)."""
+    tags = body.get("tags") or []
+    if not isinstance(tags, list):
+        return {"success": False, "error": "tags moet een lijst zijn"}
+    return {"input": tags, "normalized": normalize_tags(tags)}
+
+
+@router.get("/tags/scan")
+async def tag_scan(limit: int = 50):
+    """Scan alle KB v2 kaarten en groepeer tags op canonieke stam.
+    Toont waar dedupe kansen liggen (bv. 'emoties' + 'emotie' + 'Emoties' → 1 stam).
+    Read-only.
+    """
+    from collections import defaultdict
+    from modules.core.storage import load_json
+    lades = ["voelen", "spreken", "weten", "doen"]
+    stem_to_variants: dict = defaultdict(set)
+    stem_to_count: dict = defaultdict(int)
+    total_tags = 0
+    for lade in lades:
+        try:
+            d = load_json(service._lade_path(lade), default={"kaarten": []})
+        except Exception:
+            continue
+        for k in d.get("kaarten", []):
+            for t in k.get("tags") or []:
+                if not isinstance(t, str) or not t.strip():
+                    continue
+                stem = normalize_tag(t)
+                if not stem:
+                    continue
+                stem_to_variants[stem].add(t.strip().lower())
+                stem_to_count[stem] += 1
+                total_tags += 1
+    # Filter: alleen stammen met ≥2 verschillende varianten (dedupe-kansen)
+    duplicates = [
+        {
+            "stem": stem,
+            "variants": sorted(variants),
+            "variant_count": len(variants),
+            "total_occurrences": stem_to_count[stem],
+        }
+        for stem, variants in stem_to_variants.items()
+        if len(variants) >= 2
+    ]
+    duplicates.sort(key=lambda x: (-x["total_occurrences"], -x["variant_count"]))
+    return {
+        "success": True,
+        "total_tags_scanned": total_tags,
+        "unique_stems": len(stem_to_variants),
+        "stems_with_duplicates": len(duplicates),
+        "top_duplicates": duplicates[:limit],
+    }
+
+
+@router.get("/tags/similarity")
+async def tag_similarity(a: str, b: str):
+    """Vergelijk 2 tag-lijsten (kommagescheiden) via genormaliseerde Jaccard.
+    Voorbeeld: ?a=emoties,blij&b=emotie,verdrietig → 0.333
+    """
+    list_a = [s.strip() for s in a.split(",") if s.strip()]
+    list_b = [s.strip() for s in b.split(",") if s.strip()]
+    return {
+        "tags_a": list_a,
+        "tags_b": list_b,
+        "normalized_a": normalize_tags(list_a),
+        "normalized_b": normalize_tags(list_b),
+        "jaccard_score": round(overlap_score(list_a, list_b), 4),
+    }

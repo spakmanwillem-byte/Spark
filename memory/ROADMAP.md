@@ -276,10 +276,18 @@ Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (a
 ### Cluster A — KB curation & normalisatie
 - [ ] **#zip-mindgraph** — Zip-backup bevat ook mindgraph + andere afgeleide data. Bij restore meeladen ipv alleen kaarten.
 - [ ] **#kb-node-hierarchy** — Hoofd-node vs sub-tag hierarchie (bv. "emotie" = hoofd-node, "blij/boos" = sub-tags). Schema-uitbreiding op tags-array → tree.
-- [ ] **#kb-tag-singular** — Plural→Singular normalisatie van tags ("emoties" → "emotie"). Module: `modules/kb_v2/tag_normalizer.py`.
-- [ ] **#kb-verb-stem** — Werkwoord-stamherkenning (bakt / bakken / bakker → stam "bak"). Hook in tag-pipeline + zoek.
-- [ ] **#kb-similarity** — Gelijkheid-engine: stam-herkenning over werkwoorden + zelfstandige naamwoorden. Voedt `compute_verbanden` en disambiguatie.
-- [ ] **#kb-curation-dash** — Curatie-dashboard: zie afwijkingen, los enkelvoud/synoniem-conflict op met 1 klik. Tab in Beheer → Kennis-curatie.
+- [x] **#kb-tag-singular + #kb-verb-stem** ✅ FUNDERING DONE (v6_kb_tag_normalizer_001, 2026-05-28):
+  - `modules/kb_v2/tag_normalizer.py` met `normalize_tag()`, `normalize_tags()`, `tags_similar()`, `overlap_score()`. 20/20 unit-tests pass.
+  - Endpoints: `GET /api/kb/v2/tags/normalize?tag=...`, `POST /api/kb/v2/tags/normalize-batch`, `GET /api/kb/v2/tags/scan`, `GET /api/kb/v2/tags/similarity?a=...&b=...`.
+  - **Live scan resultaten** (18.041 tags / 3.422 stammen / 46 dedupe-kansen):
+    - `emotie/emoties` — 457 occurrences
+    - `systeem/systeemm` — 376 (typo!)
+    - `relatie/relaties` — 98
+    - `grondstof/grondstoffen` — 87
+    - `plan/plant` ⚠️ false-positive (verb-strip raakt "plant" noun) — TODO: lookup-exception
+  - **Open volgende sessie**: false-positive lookup-table, 1-klik dedupe-UI in #kb-curation-dash.
+- [ ] **#kb-similarity** — Gelijkheid-engine met stam-herkenning. Voedt `compute_verbanden` en disambiguatie. Bouwt op tag_normalizer.
+- [ ] **#kb-curation-dash** — Curatie-dashboard: zie afwijkingen, los enkelvoud/synoniem-conflict op met 1 klik. Backend `/tags/scan` levert nu al de data; UI moet nog.
 - [ ] **#kb-ui-unified** — KB-invul UI volledig consistent maken (één layout overal — inbox / lade-detail / nieuwe-kaart / herzien). Reeds gedeeltelijk via `CardFormFields`.
 - [ ] **#snap-topic-unique** — Snap-creatie: topic-uniqueness check tegen `knowledge_index.json` vóór auto-create.
 

@@ -23369,11 +23369,569 @@
         "session_id": "default",
         "gesprek_nummer": 896
       }
+    },
+    {
+      "id": "conv-f28f8040",
+      "timestamp": "2026-05-28T14:08:56.035343+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is spark saldo",
+      "spark_response": "💰 **Spark's kasboek**: €-23.90\n💚 Gifts binnen: €71.60\n📤 Uit: €95.50\n🤝 **Openstaande lening: €45.00** (te ontvangen)\n_4 boekingen in kasboek_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 897
+      }
+    },
+    {
+      "id": "conv-25eca898",
+      "timestamp": "2026-05-28T14:08:56.246316+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat vandaag op de agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 898
+      }
+    },
+    {
+      "id": "conv-45d2f5b1",
+      "timestamp": "2026-05-28T14:08:56.561804+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel onbeantwoord",
+      "spark_response": "Er staan **2989** kaarten in mijn Inbox. Open de Kennisbank-tab om ze in te delen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_list_inbox",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kbv2_cmd_inbox"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 899
+      }
+    },
+    {
+      "id": "conv-ed8e6419",
+      "timestamp": "2026-05-28T14:08:58.450740+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke bots draaien",
+      "spark_response": "**draaien**: Draaien betekent bewegen rond een punt, as of richting, of actief functioneren binnen een proces of systeem.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **bots** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'bots' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "draaien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "draaien"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "bots"
+        ],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 900
+      }
+    },
+    {
+      "id": "conv-2a789fb4",
+      "timestamp": "2026-05-28T14:08:58.864812+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'bots' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 901
+      }
+    },
+    {
+      "id": "conv-30fa18c8",
+      "timestamp": "2026-05-28T14:10:41.369513+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke bots draaien",
+      "spark_response": "Geen bots gevonden. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "draaien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 902
+      }
+    },
+    {
+      "id": "conv-7d6d72a5",
+      "timestamp": "2026-05-28T14:10:41.552517+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "🩺 **Systeem-audit / gezondheid:**\n\n  🧠 KB-entries: **5311**, waarvan 2243 zonder laag1 (42.23%)\n  📡 Shadow-learning: `geen-observations-file`\n\n⚠️ Waarschuwingen:\n  · Shadow observer heeft nog geen events geschreven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 903
+      }
+    },
+    {
+      "id": "conv-d31a93aa",
+      "timestamp": "2026-05-28T14:10:41.706894+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel kaarten wachten op classificatie",
+      "spark_response": "📥 **Kennis-inbox status:**\n\n  🌟 Wachtend in inbox: **2989** kaarten\n\n📚 Gevulde lades:",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 904
+      }
+    },
+    {
+      "id": "conv-59d0e934",
+      "timestamp": "2026-05-28T14:10:41.866286+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat morgen op mijn agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 905
+      }
+    },
+    {
+      "id": "conv-40e1ab13",
+      "timestamp": "2026-05-28T14:10:42.005432+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is spark saldo",
+      "spark_response": "💰 **Spark's kasboek**: €-23.90\n💚 Gifts binnen: €71.60\n📤 Uit: €95.50\n🤝 **Openstaande lening: €45.00** (te ontvangen)\n_4 boekingen in kasboek_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 906
+      }
+    },
+    {
+      "id": "conv-636e5746",
+      "timestamp": "2026-05-28T14:12:58.072303+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is spark saldo",
+      "spark_response": "💰 **Spark's kasboek**: €-23.90\n💚 Gifts binnen: €71.60\n📤 Uit: €95.50\n🤝 **Openstaande lening: €45.00** (te ontvangen)\n_4 boekingen in kasboek_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 907
+      }
+    },
+    {
+      "id": "conv-f4bb995a",
+      "timestamp": "2026-05-28T14:12:58.232153+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat morgen op mijn agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 908
+      }
+    },
+    {
+      "id": "conv-efb443a5",
+      "timestamp": "2026-05-28T14:13:00.551160+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel kaarten wachten op classificatie",
+      "spark_response": "📥 **Kennis-inbox status:**\n\n  🌟 Wachtend in inbox: **2989** kaarten\n\n📚 Gevulde lades:",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 909
+      }
+    },
+    {
+      "id": "conv-a44d1090",
+      "timestamp": "2026-05-28T14:13:00.755386+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke bots draaien",
+      "spark_response": "Geen bots gevonden. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "draaien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 910
+      }
+    },
+    {
+      "id": "conv-a0e5ec71",
+      "timestamp": "2026-05-28T14:13:00.918369+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "🩺 **Systeem-audit / gezondheid:**\n\n  🧠 KB-entries: **5311**, waarvan 2243 zonder laag1 (42.23%)\n  📡 Shadow-learning: `geen-observations-file`\n\n⚠️ Waarschuwingen:\n  · Shadow observer heeft nog geen events geschreven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 911
+      }
+    },
+    {
+      "id": "conv-c541aa7d",
+      "timestamp": "2026-05-28T14:14:02.434516+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is spark saldo",
+      "spark_response": "💰 **Spark's kasboek**: €-23.90\n💚 Gifts binnen: €71.60\n📤 Uit: €95.50\n🤝 **Openstaande lening: €45.00** (te ontvangen)\n_4 boekingen in kasboek_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 912
+      }
+    },
+    {
+      "id": "conv-295c8209",
+      "timestamp": "2026-05-28T14:14:02.578502+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat morgen op mijn agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 913
+      }
+    },
+    {
+      "id": "conv-6a4a6440",
+      "timestamp": "2026-05-28T14:14:02.875372+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel kaarten wachten op classificatie",
+      "spark_response": "📥 **Kennis-inbox status:**\n\n  🌟 Wachtend in inbox: **2989** kaarten\n\n📚 Gevulde lades:",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 914
+      }
+    },
+    {
+      "id": "conv-944b02b7",
+      "timestamp": "2026-05-28T14:14:03.012441+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke bots draaien",
+      "spark_response": "Geen bots gevonden. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "draaien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 915
+      }
+    },
+    {
+      "id": "conv-b35ce205",
+      "timestamp": "2026-05-28T14:14:03.158289+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "🩺 **Systeem-audit / gezondheid:**\n\n  🧠 KB-entries: **5311**, waarvan 2243 zonder laag1 (42.23%)\n  📡 Shadow-learning: `geen-observations-file`\n\n⚠️ Waarschuwingen:\n  · Shadow observer heeft nog geen events geschreven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 916
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 896,
-    "last_updated": "2026-05-28T13:39:58.907909+00:00"
+    "total_conversations": 916,
+    "last_updated": "2026-05-28T14:14:03.158289+00:00"
   }
 }

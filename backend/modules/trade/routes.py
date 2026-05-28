@@ -782,6 +782,43 @@ async def resize_potjes(user_id: str):
     return potjes_svc.resize_potjes_to_default(user_id)
 
 
+# v6_potje_per_token_001 — sync 1 token = 1 potje voor alle non-Spark users
+@router.post("/potjes/sync-all-to-tokens")
+async def sync_all_potjes_to_tokens(viewer_id: str):
+    """Backfill: synchroniseert alle non-Spark users' potje-count naar hun ROAR balance.
+    Admin-only (gradatie ≤ 2). Verwijdert ongebruikte potjes als user te veel heeft.
+    """
+    from fastapi import HTTPException
+    USERS = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+    ROAR = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
+    users = load_json(USERS, default={"users": []})
+    ulist = users.get("users", []) if isinstance(users, dict) else users
+    viewer = next((u for u in ulist if u.get("id") == viewer_id), None)
+    if not viewer or int(viewer.get("gradatie", 7) or 7) > 2:
+        raise HTTPException(403, "Alleen admin (gradatie ≤ 2) mag bulk-sync uitvoeren.")
+    roar = load_json(ROAR, default={"balances": {}})
+    balances = roar.get("balances", {})
+    results = []
+    for uid, n in balances.items():
+        if uid == "user-000":
+            continue
+        try:
+            n = int(n)
+        except (TypeError, ValueError):
+            continue
+        # Probeer eerst expand, dan trim
+        add_r = potjes_svc.sync_potjes_to_tokens(uid, n)
+        trim_r = potjes_svc.trim_potjes_to_tokens(uid, n)
+        results.append({
+            "user_id": uid,
+            "tokens": n,
+            "added": add_r.get("added", 0),
+            "removed": trim_r.get("removed", 0),
+            "final_count": trim_r.get("current", add_r.get("target", n)),
+        })
+    return {"success": True, "synced_users": len(results), "results": results}
+
+
 # v6_pot1_staking_lock_001 — toggle pot-lock (admin / Pot 1 wijzigen)
 class TogglePotLockBody(BaseModel):
     pot_id: str

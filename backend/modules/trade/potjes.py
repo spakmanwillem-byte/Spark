@@ -105,14 +105,25 @@ def _expansion_cost(current_count: int) -> float:
 def _load(user_id: str) -> Dict:
     data = load_json(POTJES_FILE, default={"users": {}})
     user = data.get("users", {}).get(user_id, {})
-    if not user.get("potjes"):
+    # v6_potje_per_token_001: alleen Spark (user-000) krijgt automatisch 10 base potjes.
+    # Andere users starten met 0 potjes; expansie gebeurt via sync_potjes_to_tokens() bij token-buy.
+    is_spark = (user_id == "user-000")
+    if not user.get("potjes") and is_spark:
         user = _init_potjes(user_id)
+        data.setdefault("users", {})[user_id] = user
+        save_json(POTJES_FILE, data)
+    elif not user:
+        # Non-Spark user — leeg user-record aanmaken, geen base-potjes
+        now = datetime.now(timezone.utc).isoformat()
+        user = {"user_id": user_id, "market": "BCH-EUR", "potjes": [],
+                "last_buy_cycle": None, "overflow_pool": 0.0, "created_at": now}
         data.setdefault("users", {})[user_id] = user
         save_json(POTJES_FILE, data)
     # v5_potjes_repair_001 — als user fewer than 10 potjes heeft (tier 1), reparate door tot 10 aan te vullen
     # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
     # v6_pot1_staking_lock_001: zorg dat pot-001 (index 0) altijd `pot_locked=True` heeft
-    if len(user.get("potjes", [])) < DEFAULT_POT_COUNT:
+    # v6_potje_per_token_001: alleen voor Spark; non-Spark users moeten via token-buy expanden
+    if is_spark and len(user.get("potjes", [])) < DEFAULT_POT_COUNT:
         existing = user["potjes"]
         next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
         now = datetime.now(timezone.utc).isoformat()
@@ -192,6 +203,96 @@ def resize_potjes_to_default(user_id: str) -> Dict:
 
 def _save(data: Dict):
     save_json(POTJES_FILE, data)
+
+
+def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") -> Dict:
+    """v6_potje_per_token_001 — 1 token = 1 potje.
+
+    Regel (Willem 2026-05-28): alleen Spark (user-000) heeft 10 base potjes;
+    andere users krijgen 1 potje per ROAR-token dat ze bezitten.
+
+    Deze functie zorgt dat een user EXACT n_tokens potjes heeft. Voegt potjes toe
+    bij groei. Verwijdert NIET (open posities of sell_back behandelen we apart).
+    Spark (user-000) wordt overgeslagen.
+    """
+    if user_id == "user-000":
+        return {"success": True, "user_id": user_id, "skipped": True, "reason": "Spark heeft base-potjes (10)"}
+
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.get("potjes", [])
+    current = len(potjes)
+    target = max(0, int(n_tokens))
+    if current >= target:
+        return {"success": True, "user_id": user_id, "current": current, "target": target, "added": 0,
+                "message": "Geen potje-uitbreiding nodig."}
+
+    # Voeg potjes toe tot target. Eerste potje (index 0) blijft staking-anker.
+    now = datetime.now(timezone.utc).isoformat()
+    next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
+    added = 0
+    while len(potjes) < target:
+        is_locked = (next_idx == LOCKED_POT_INDEX)
+        potjes.append({
+            "id": f"pot-{next_idx+1:03d}",
+            "index": next_idx,
+            "capital": START_AMOUNT,
+            "max_size": INITIAL_MAX,
+            "pot_locked": is_locked,
+            "lock_reason": "staking_anchor" if is_locked else None,
+            "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                         "trailing_active": False, "entry_time": None},
+            "market": market,
+            "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+            "created_at": now,
+            "last_action": None,
+            "source": "token_buy_expansion",
+        })
+        next_idx += 1
+        added += 1
+    user["potjes"] = potjes
+    _save(data)
+    return {
+        "success": True,
+        "user_id": user_id,
+        "current": current,
+        "target": target,
+        "added": added,
+        "message": f"{added} potjes toegevoegd — {len(potjes)} totaal voor user (= {target} tokens).",
+    }
+
+
+def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
+    """v6_potje_per_token_001 — verminder potjes wanneer user tokens kwijtraakt (sell_back/gift_sent).
+
+    Veiligheid: verwijdert ALLEEN ongebruikte potjes (geen open positie, en niet de lock-anker).
+    Returns dict met n_removed.
+    """
+    if user_id == "user-000":
+        return {"success": True, "skipped": True, "reason": "Spark base-potjes"}
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.get("potjes", [])
+    target = max(0, int(n_tokens))
+    if len(potjes) <= target:
+        return {"success": True, "removed": 0, "current": len(potjes), "target": target}
+    # Sorteer: hoog → laag (verwijder hoogste indexes eerst, behoud lock-anker)
+    # Skip: pot_locked OR open position
+    removed = 0
+    sorted_pots = sorted(potjes, key=lambda p: -(p.get("index") or 0))
+    keep_pots = []
+    for p in sorted_pots:
+        is_open = p.get("position", {}).get("is_open")
+        is_locked = p.get("pot_locked")
+        if len(potjes) - removed > target and not is_open and not is_locked:
+            removed += 1
+            continue
+        keep_pots.append(p)
+    # Behoud originele sorteer-volgorde (op index)
+    keep_pots.sort(key=lambda p: p.get("index") or 0)
+    user["potjes"] = keep_pots
+    _save(data)
+    return {"success": True, "removed": removed, "current": len(keep_pots), "target": target}
 
 
 def _init_potjes(user_id: str) -> Dict:

@@ -231,6 +231,67 @@
       "module": "spark_kasboek/__init__.py",
       "endpoint": "/api/spark/kasboek/saldo",
       "data_source": "/app/backend/data/system/spark_kasboek.json"
+    },
+    {
+      "id": "kennis_inbox_status",
+      "naam": "Kennis-inbox status",
+      "categorie": "kennis",
+      "beschrijving": "Hoeveel kaarten wachten nog op classificatie in de KB v2 inbox.",
+      "triggers": [
+        "hoeveel (kaarten )?(wachten|onbeantwoord|in (de )?inbox)",
+        "(wat is|hoe staat) (de )?kennis(-| )inbox",
+        "kennis ?inbox (status|stats)",
+        "te classificeren kaarten"
+      ],
+      "status": "live",
+      "module": "kb_v2/__init__.py",
+      "endpoint": "/api/kb/v2/inbox/stats"
+    },
+    {
+      "id": "bots_status",
+      "naam": "Status van bots",
+      "categorie": "systeem",
+      "beschrijving": "Welke bots zijn online, draaiend en wat is hun status.",
+      "triggers": [
+        "(welke|wat voor|hoeveel) bots (draaien|zijn (er )?online|zijn (er )?actief)",
+        "(status|overzicht) (van (de )?)?bots",
+        "bots(-| )status",
+        "(wat doen|hoe gaat het met) (de )?bots"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "endpoint": null
+    },
+    {
+      "id": "audit_health",
+      "naam": "Systeem-audit / gezondheid",
+      "categorie": "systeem",
+      "beschrijving": "Snelle health-check: KB-gaps, error-log scan, shadow-observations status.",
+      "triggers": [
+        "(audit|systeem) (gezondheid|health|status|check)",
+        "(hoe (gaat|staat) (het|t) met) (het )?(systeem|spark)",
+        "(scan|controle) (op )?(fouten|errors|kapot)",
+        "gezondheid(s)?( |-)check",
+        "wat is kapot"
+      ],
+      "status": "live",
+      "module": "audit/__init__.py",
+      "endpoint": "/api/audit/summary"
+    },
+    {
+      "id": "agenda_vandaag",
+      "naam": "Agenda van vandaag",
+      "categorie": "agenda",
+      "beschrijving": "Wat staat er op de agenda vandaag (of de komende dagen).",
+      "triggers": [
+        "(wat (staat|heb ik|is er)) (vandaag|morgen|deze week) (op (de|mijn))? agenda",
+        "(toon|laat (me|zien)) (de|mijn) agenda",
+        "agenda (van )?(vandaag|morgen|deze week)",
+        "wat heb ik (vandaag|morgen) te doen"
+      ],
+      "status": "live",
+      "module": "chat/agenda_intent_service.py",
+      "endpoint": null
     }
   ],
   "_lege_categorieen_voor_later": {

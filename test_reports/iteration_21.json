@@ -1,0 +1,37 @@
+{
+  "summary": "Iteration 21 — Tested P1-P4 plan: Winkelstraat backend+UI, Spark kasboek reconcile, 1-token-1-potje sync, chat capability-routing for 5 new intents. 17/17 backend tests PASSED. Frontend Winkelstraat tab verified end-to-end via Playwright (login as Willem, all 3 tabs visible, Roadkillshop FOUNDER card rendered, open-shop-btn visible for admin).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_winkelstraat_p1p4.py",
+    "/app/test_reports/pytest/iter21_results.xml"
+  ],
+  "action_items": [
+    "Optional cleanup: 4 TEST_ shops left in 'closing' status from backend test runs (TEST_AdminShop, TEST_PatchShop, TEST_CloseMe x2). They're harmless but visible on the Winkelstraat tab. Consider adding a hard-delete admin endpoint or filtering 'closing' shops from the public list."
+  ],
+  "critical_code_review_comments": [
+    "winkelstraat/__init__.py is ~364 lines — acceptable; no need to split yet.",
+    "WinkelPage.js is 684 lines and getting large — consider extracting tab content components in a follow-up.",
+    "Reconcile endpoint depends on roar_balances.json being up to date. Tests confirmed expected_in_eur=71.6, booked_in_eur=71.6, in_balance=true, unbooked_transactions=[] — perfect match with spec."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_winkelstraat_p1p4.py"
+  ],
+  "success_rate": {
+    "backend": "100% (17/17)",
+    "frontend": "100% (6/6 UI checks)"
+  },
+  "test_credentials": "Willem/Appelsap (admin user-001 gradatie 1), Marieke/Welkom01 (user-c609d7d1 gradatie 3) — both used.",
+  "seed_data_creation": "Backend tests create TEST_-prefixed shops which are closed via /shops/{id}/close endpoint in test teardown. Closed shops remain in 'closing' status (per spec) and appear in shop list with SLUIT badge.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All P1-P4 spec items verified. Backend test file at /app/backend/tests/test_winkelstraat_p1p4.py covers: 6 Winkelstraat CRUD/permission tests, 1 kasboek reconcile balance check, 4 potjes 1-token-1-potje tests (admin sync, non-admin block, Gijs=2 tokens=2 potjes, Marieke=0=0, Spark=10 base potjes), 5 parametrized chat capability-routing tests. Roar balance endpoint is /api/shop/token/balance/{user_id} (not /api/roar/balance). Frontend: navigate to /modules/winkel, third tab is data-testid=shop-tab-winkelstraat. Spark monitor / Bitvavo timeout NOT tested (not in scope, known issue per main agent).",
+  "rca of the issue": "N/A — no failures. Initial test attempt used wrong roar balance endpoint (/api/roar/balance/{id} returns 404); corrected to /api/shop/token/balance/{id}."
+}

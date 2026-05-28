@@ -7,6 +7,7 @@ import {
   TrendingUp, ChevronRight, HardDrive, Gift, Pencil
 } from 'lucide-react';
 import { ProductEditModal } from './ProductEditModal';
+import { WinkelstraatTab } from './WinkelstraatTab';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -152,11 +153,12 @@ export function WinkelPage({ onNavigate }) {
           </div>
         </div>
 
-        {/* Main Tabs: Fysiek vs Digitaal */}
+        {/* Main Tabs: Roadkillshop, Digitaal, Winkelstraat */}
         <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 border border-slate-800">
           {[
-            { id: 'merch', label: 'Merch', icon: Tag, hint: 'Fysieke producten' },
+            { id: 'merch', label: 'Roadkillshop', icon: Tag, hint: 'Fysieke producten' },
             { id: 'digital', label: 'Digitaal', icon: Package, hint: 'Token & opslag' },
+            { id: 'winkelstraat', label: 'Winkelstraat', icon: ShoppingBag, hint: 'Andere winkels' },
           ].map(tab => (
             <button key={tab.id} data-testid={`shop-tab-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
@@ -355,6 +357,11 @@ export function WinkelPage({ onNavigate }) {
               </div>
             </div>
           </div>
+        )}
+
+        {/* WINKELSTRAAT TAB — andere shops */}
+        {activeTab === 'winkelstraat' && (
+          <WinkelstraatTab user={user} onNavigateToShop={() => setActiveTab('merch')} />
         )}
 
         {/* WINKELWAGEN SLIDE-OUT */}

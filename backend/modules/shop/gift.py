@@ -264,6 +264,13 @@ async def accept_gift(gift_id: str, req: GiftAction):
         except Exception:
             pass
 
+        # v6_potje_per_token_001 — sync recipient's potje count to new token balance
+        try:
+            from modules.trade.potjes import sync_potjes_to_tokens
+            sync_potjes_to_tokens(recipient, int(roar["balances"].get(recipient, 0)))
+        except Exception as _ex:
+            print(f"[potje-sync gift] failed: {_ex}")
+
         # First-token achievement voor recipient
         try:
             if prev_recipient == 0 and amount > 0:

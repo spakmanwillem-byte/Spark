@@ -377,6 +377,16 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     except Exception as _ex:
         print(f"[gift-registratie] failed: {_ex}")
 
+    # v6_potje_per_token_001 — 1 token = 1 potje voor non-Spark users.
+    # Spark (user-000) heeft 10 base potjes via _init_potjes; alleen anderen syncen.
+    if user_id != "user-000":
+        try:
+            from modules.trade.potjes import sync_potjes_to_tokens
+            new_balance = roar["balances"].get(user_id, 0)
+            sync_potjes_to_tokens(user_id, int(new_balance))
+        except Exception as _ex:
+            print(f"[potje-sync] failed for {user_id}: {_ex}")
+
     # v6_bonnetje_001 — Bonnetje voor klant-aankoop opslaan in user archief
     try:
         if user_id not in {"user-000", "user-001"}:  # alleen klanten

@@ -21,7 +21,7 @@ from modules.core.storage import load_json, save_json
 router = APIRouter(prefix="/winkelstraat", tags=["winkelstraat"])
 
 SHOPS_FILE = Path(__file__).parent.parent.parent / "data" / "shop" / "shops.json"
-USERS_FILE = Path(__file__).parent.parent.parent / "data" / "users" / "users.json"
+USERS_FILE = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
 
 
 def _load_shops() -> dict:
@@ -104,7 +104,9 @@ async def create_shop(body: CreateShopBody):
     grad = _get_user_gradatie(body.owner_user_id)
     d = _load_shops()
     min_grad = int(d.get("min_gradatie_to_open", 4))
-    if grad < min_grad:
+    # Admin (gradatie ≤ 2) mag altijd; anderen moeten gradatie ≥ min_grad hebben
+    is_admin = grad <= 2
+    if not is_admin and grad < min_grad:
         raise HTTPException(403, f"Gradatie {grad} is te laag — minimum gradatie {min_grad} vereist om een winkel te openen.")
 
     # Owner mag maximaal 3 actieve shops hebben (placeholder voor donderdag)

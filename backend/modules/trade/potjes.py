@@ -17,9 +17,9 @@ POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user
 ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
 
 START_AMOUNT = 10.0  # v6_potje_size_10_001 — starters direct €10 (was €5.08)
-DEFAULT_POT_COUNT = 10
-INITIAL_MAX = 10.0  # tier 1: 10 potjes à max €10
-LOCKED_POT_INDEX = 0  # v6_pot1_staking_lock_001 — Pot 1 (index 0) is staking-anker, traded NIET
+DEFAULT_POT_COUNT = 5  # v6_clean_slate_28mei — Spark: 5 base potjes van €10 = €50 (was 10)
+INITIAL_MAX = 50.0  # tier 1: 5 potjes à max €50 (5x growth)
+LOCKED_POT_INDEX = None  # v6_clean_slate_28mei — geen lock-anker; 5 potjes = 5 trade-posities
 BITVAVO_TAKER_FEE = 0.0025
 TOKEN_PRICE = 5.08  # vaste prijs per ROAR token (= 1 bonus token bij €5.08 winst)
 

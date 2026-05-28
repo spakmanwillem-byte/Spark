@@ -710,7 +710,13 @@ class MonitorService:
                     _persist_registry()
                 except Exception:
                     pass
-            mode = "10-potjes" if use_potjes else "single"
+            # v6_clean_slate_28mei — toon actuele potje-count uit data
+            from modules.trade.potjes import _load as _potjes_load
+            try:
+                n_pots = len(_potjes_load(user_id or self._user_id).get("users", {}).get(self._user_id, {}).get("potjes", []))
+                mode = f"{n_pots}-potjes" if use_potjes else "single"
+            except Exception:
+                mode = "potjes" if use_potjes else "single"
             coin_label = ", ".join(self._markets) if len(self._markets) > 1 else self._markets[0]
             return {"success": True, "message": f"Monitor gestart ({candle_interval} candles, {mode} mode, {coin_label})", "status": self.get_status()}
 

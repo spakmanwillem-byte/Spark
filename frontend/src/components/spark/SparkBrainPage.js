@@ -88,14 +88,17 @@ export function SparkBrainPage({ onNavigate, initialSection = 'identiteit' }) {
     }
   };
 
-  const sections = [
+  // Verberg emotie_pipeline tab uit Brain als deze page is opened via sidebar 'Emotie Routering'
+  // (initialSection='emotie_pipeline') — anders krijg je dubbele toegang.
+  const isRouteringView = initialSection === 'emotie_pipeline';
+  const sections = isRouteringView ? [
+    { id: 'emotie_pipeline', label: 'Emotie Pipeline', icon: Layers, accent: '#fb923c' },
+  ] : [
     { id: 'identiteit', label: 'Identiteit', icon: Brain, accent: '#f59e0b' },
     { id: 'waarden', label: 'Normen & Waarden', icon: Heart, accent: '#ec4899' },
     { id: 'bijbel', label: 'Spark Bijbel', icon: BookOpen, accent: '#a855f7' },
     { id: 'profiel', label: 'Spark Profiel', icon: Star, accent: '#06b6d4' },
     { id: 'groeien', label: 'Groeien', icon: Leaf, accent: '#22c55e' },
-    // v6_emotion_pipeline_001 — 7-laags emotie-pipeline dry-run
-    { id: 'emotie_pipeline', label: 'Emotie Pipeline', icon: Layers, accent: '#fb923c' },
   ];
 
   const kernwaarden = bijbel?.kernwaarden || [];
@@ -106,10 +109,11 @@ export function SparkBrainPage({ onNavigate, initialSection = 'identiteit' }) {
   const traits = identity?.persoonlijkheid?.traits || [];
   const basisKennis = identity?.basis_kennis || {};
 
-  if (loading) return <MainLayout activePage="spark-brain" onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" /></div></MainLayout>;
+  const activePageId = isRouteringView ? 'emotion-routing' : 'spark-brain';
+  if (loading) return <MainLayout activePage={activePageId} onNavigate={onNavigate}><div className="flex items-center justify-center h-full"><div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" /></div></MainLayout>;
 
   return (
-    <MainLayout activePage="spark-brain" onNavigate={onNavigate}>
+    <MainLayout activePage={activePageId} onNavigate={onNavigate}>
       <div data-testid="spark-brain-page" className="h-full flex flex-col">
 
         {/* Banner */}

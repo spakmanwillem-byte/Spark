@@ -6,7 +6,29 @@
 
 **Status**: Stabiel. Geen code-blockers. Wacht op EUR-storting Willem zodat Spark potjes-commitment volledig gedekt is door Bitvavo.
 
-**Token-balans (live)**:
+### ✅ Sessie 14 (2026-05-28 avond) — wat gedaan
+- [x] 🐛 **KB v2 legacy media bug** (v6_kbv2_media_legacy_001) — backwards-compat routes `/api/kb/v2/media/{image,voice}/file/{filename}` met path-traversal guard hersteld. Curl-getest: 200 OK + 287B PNG. Oude kaarten (zoals "aanschouwelijkheid") tonen weer hun media.
+- [x] 🧹 **Disk cleanup** — 615 MB vrijgemaakt: `/tmp/spark_zip` (zip-analyse), pycache, 4× supervisor logs getrunceerd. Backups in `/app/backend/data/_backups/` intact (88MB).
+- [x] 🔍 **Zip-backup analyse** — bevestigd dat `spark_backup_full_20260528_122515.zip` geen verloren kaarten bevat. Lade-counts zip == live (voelen 257 / weten 1085 / inbox 2989).
+- [x] 📜 **ROADMAP.md** — top-sectie met live token-tabel + 3 storting-paden + 50 nieuwe Willem-ideeën in 10 clusters (A t/m J).
+- [x] 🔤 **Tag-normalizer fundering** (v6_kb_tag_normalizer_001 + v6_kb_tag_merge_001):
+  - `modules/kb_v2/tag_normalizer.py` met 4 functies + ~50-noun exception-list. 20/20 unit-tests pass.
+  - 5 endpoints: `/tags/normalize`, `/normalize-batch`, `/scan`, `/similarity`, `/merge` (admin-only).
+  - Live scan: 18.041 tags → 45 echte dedupe-kansen (`emotie/emoties` 457×, `systeem/systeemm` 376×, `relatie/relaties` 98×).
+  - Merge-endpoint live-getest: 1 demo-merge in lade `weten`, dedupe-list 46→45→44.
+- [x] 🧠 **SPARK AI sidebar restructure** (v6_synapse_sidebar_001 + v6_emotion_routing_sidebar_001):
+  - **Synapslaag** verhuisd van Beheer→Instellingen → SPARK AI sidebar (`/spark/synapse`, admin-only).
+  - **"Emoties"** hernoemd naar **"Emotie Detectie"** (input-laag: wat voelt user).
+  - Nieuwe **"Emotie Routering"** sidebar-item (`/spark/routering`, admin-only) — 7-laags pipeline view (was tab in Brain).
+  - **Geen dubbele tabs**: Emotie Pipeline tab uit Spark Brain weggehaald (zit nu enkel onder Routering). Brain heeft nu 5 tabs (Identiteit/Normen/Bijbel/Profiel/Groeien).
+  - `SparkBrainPage` ondersteunt `initialSection` prop voor deep-linking.
+
+### Conceptueel kader (uit deze sessie)
+- **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test
+- **Emotie Routering** (`/spark/routering`, admin) = "Hoe reageer ik?" → 7 lagen → behavior_class (begrenzen/vertragen/exploreren/kalmeren)
+- Niet duplicaat, maar gestapelde ketting (hybride-by-design, niet bipolair)
+
+### Token-balans (live, ongewijzigd)
 | Wie | Tokens | Betaald (cash in) | Rol |
 |---|---|---|---|
 | Spark (user-000) | 10 | — | Anker / fundering |
@@ -15,35 +37,39 @@
 | **Totaal circulating** | **22** | **€71.60 cash in** | |
 | Spark treasury | 999,978 | — | Pool |
 
-**Bitvavo & commitments**:
+### Bitvavo & commitments
 - Bitvavo live wallet: **€122.74** (auto-feed → bepaalt ROAR-prijs €5.58)
 - Spark potjes commitment: 15 × €10 = **€149.92**
 - Gat tussen Bitvavo en commitment: **€27.18**
 - ROAR-prijs-formule: `Bitvavo balance ÷ circulating` — past zich auto aan bij elke storting
 
-**Drie storting-paden (Willem kiest)**:
+### Drie storting-paden (Willem kiest)
 - a) **€27.18** → exact 0-gat, potjes blijven €10, kleine Tikkie-test
 - b) **€98.40** → groter ijkpunt, Spark ruimte om Willem+Gijs uit te kunnen kopen + buffer
 - c) **€0 + potje-grote terug naar €5.08** → geen storting nodig, 15 × €5.08 = €76.20 ≈ Bitvavo
 
-**Wat live werkt (smoke-checked, mag op productie)**:
+### Wat live werkt (smoke-checked, mag op productie)
 - Bitvavo trading LIVE (3 bots: Spark 60m, Gijs 15m, Willem 15m)
 - ROAR economy v6 (gift-fase, 0% BTW, dynamic price)
 - Boekhouding 4 entiteiten (Spark Core / Zorgboerderij / Roadkill Merch / Privé Willem) met BTW-summary + reconcile + retroactief fix-endpoint
 - Tikkie-storting flow (user→admin PM→confirm→wallet bijschrijven + auto-archief in admin's bestanden)
 - Winkelstraat hub met owner-shop-isolation (`shops/{shop_id}/products.json`)
-- 8 capabilities (W-vraag dempen, profile-lookup, Spark als bode/relay, antwoordapparaat, dashboard saldo widget, verbal deposit, mood-glow, 1 bot per pot stub)
-- Synapse auto-documenter (90 containers, 418 endpoints, 59 blueprints)
+- 8 capabilities + 17 in chat-router (5 executable, 12 met handlers ready)
+- Synapse auto-documenter (90 containers, 419 endpoints, 78 actief, 12 skelet, 59 blueprints)
 - KB v2 hooks-laag (5 hooks live: vocab/tell-layer/verbanden/dnd-link/voice-snippet)
-- 17 capabilities in chat-router (5 executable, 12 met handlers ready)
+- KB tag-normalizer met 45 dedupe-kansen geïdentificeerd
 - @traced observability (auth/login + logout, trade buy/start/stop, shop-gift, kbv2 mutations)
 - 21:00 Boekhouder roundup-bark + Madelief error-pointer (5-min scheduler)
 
-**Open P0 (niet blocker voor deploy, mag erna)**:
+### Open P0 (niet blocker voor deploy, mag erna)
 - [ ] 6 Boekhouding-hooks centraliseren (token-buy / bitvavo coin-buy / sell-back / shop-sale / deposit / trader-result → automatisch posten op `/api/accounting/transactions`)
 - [ ] Legacy `spark_kasboek.json` schrijfpaden uitfaseren (alleen-lezen + migratie-script)
 
-**Open daarna (P1+)** — zie secties hieronder ongewijzigd.
+### Open daarna (P1+)
+- [ ] 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan` (data klaar, 45 dedupe-kansen klaar voor 1-klik merge)
+- [ ] Tag-merge auto-fire optie in `classify_card` (opt-in flag)
+- [ ] Exception-list uitbreiden bij volgende false-positives
+- → Zie clusters A-J hieronder voor volledige backlog
 
 ---
 

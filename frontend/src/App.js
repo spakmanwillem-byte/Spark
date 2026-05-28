@@ -26,6 +26,7 @@ import { AchievementsPage } from "./components/modules/AchievementsPage";
 import { InstellingenPage } from "./components/admin/InstellingenPage";
 import { WalletPage } from "./components/modules/WalletPage";
 import { SparkBrainPage } from "./components/spark/SparkBrainPage";
+import { SparkOverviewPage } from "./components/spark/SparkOverviewPage";
 import { SynapsePage } from "./components/spark/SynapsePage";
 import { EmotieRouteringPage } from "./components/spark/EmotieRouteringPage";
 import { PersoonsPage } from "./components/modules/PersoonsPage";
@@ -56,6 +57,7 @@ function AppContent() {
       '/notities': 'notities',
       '/bijdragen': 'bijdragen',
       '/spark/brain': 'spark-brain',
+      '/spark/overzicht': 'spark-overzicht',
       '/spark/synapse': 'synapse',
       '/spark/triggers': 'triggers',
       '/spark/emotions': 'emotions',
@@ -233,6 +235,8 @@ function AppContent() {
         return <WalletPage onNavigate={handleNavigate} />;
       case 'spark-brain':
         return <SparkBrainPage onNavigate={handleNavigate} />;
+      case 'spark-overzicht':
+        return <SparkOverviewPage onNavigate={handleNavigate} />;
       case 'synapse':
         return <SynapsePage onNavigate={handleNavigate} />;
       case 'emotion-routing':

@@ -20,6 +20,7 @@
     "GET /chat/logs/{user_id}",
     "GET /chat/logs/{user_id}/stats",
     "GET /chat/lookup/{query}",
+    "GET /chat/relay/inbox/{user_id}",
     "GET /chat/shadow/corrections",
     "GET /chat/shadow/recent",
     "GET /chat/shadow/stats",
@@ -27,6 +28,7 @@
     "POST /chat/emotions/detect",
     "POST /chat/intent/match",
     "POST /chat/message",
+    "POST /chat/relay/inbox/{user_id}/read/{message_id}",
     "POST /chat/shadow/reset",
     "POST /chat/snap",
     "POST /chat/welcome"
@@ -41,7 +43,7 @@
   "created_at": "2026-05-26T15:54:32.167435+00:00",
   "last_touched": "2026-05-26T16:13:26.963707+00:00",
   "activity_count": 0,
-  "file_count": 31,
+  "file_count": 33,
   "subdir_count": 0,
   "extra": {}
 }

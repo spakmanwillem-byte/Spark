@@ -28,6 +28,7 @@ export const navigationConfig = {
   spark: {
     label: 'SPARK AI',
     items: [
+      { id: 'spark-overzicht', label: 'Brein-overzicht', icon: Brain, path: '/spark/overzicht' },
       { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
       { id: 'synapse', label: 'Synapslaag', icon: Brain, path: '/spark/synapse', adminOnly: true },
       { id: 'knowledge-v2', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },

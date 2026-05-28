@@ -15,6 +15,8 @@
     "GET /container/{container_type}",
     "GET /container/{container_type}/{container_id}/meta",
     "PATCH /container/{container_type}/{container_id}/meta",
+    "POST /container/user/migrate",
+    "POST /container/user/migrate-all",
     "POST /container/{container_type}",
     "POST /container/{container_type}/{container_id}/tag-for-deletion"
   ],

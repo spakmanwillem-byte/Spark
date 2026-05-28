@@ -22,6 +22,12 @@
   - Nieuwe **"Emotie Routering"** sidebar-item (`/spark/routering`, admin-only) — 7-laags pipeline view (was tab in Brain).
   - **Geen dubbele tabs**: Emotie Pipeline tab uit Spark Brain weggehaald (zit nu enkel onder Routering). Brain heeft nu 5 tabs (Identiteit/Normen/Bijbel/Profiel/Groeien).
   - `SparkBrainPage` ondersteunt `initialSection` prop voor deep-linking.
+- [x] 🦅 **Spark Brein-overzicht dashboard** (v6_spark_overview_001):
+  - Nieuwe sidebar-item bovenaan SPARK AI sectie: **"Brein-overzicht"** (`/spark/overzicht`, iedereen).
+  - Helikopter-view met 6 live-teller-kaarten: Spark Brain · Synapslaag · Kennisbank · Triggers · Emotie Routering · Verbanden.
+  - Per kaart: 2-5 stat-pills + top-tag-pills (waar relevant). Klik → onNavigate naar sidebar-item.
+  - Parallel-fetch van 6 endpoints met null-safe rendering. Refresh-knop met spinner.
+  - **Live data verified**: Synapse 96 containers/447 endpoints, KB v2 4 lades, Triggers 81 groepen/444, Pipeline 117 runs/5 emoties, Graph 10.631 nodes/69.008 edges.
 
 ### Conceptueel kader (uit deze sessie)
 - **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test

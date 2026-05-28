@@ -13,10 +13,12 @@
   "endpoints": [
     "GET /winkelstraat/shops",
     "GET /winkelstraat/shops/{shop_id}",
+    "GET /winkelstraat/shops/{shop_id}/logo.{ext}",
     "GET /winkelstraat/voorwaarden",
     "PATCH /winkelstraat/shops/{shop_id}",
     "POST /winkelstraat/shops",
-    "POST /winkelstraat/shops/{shop_id}/close"
+    "POST /winkelstraat/shops/{shop_id}/close",
+    "POST /winkelstraat/shops/{shop_id}/logo"
   ],
   "tags": [],
   "encryption": {

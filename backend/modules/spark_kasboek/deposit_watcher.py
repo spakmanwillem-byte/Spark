@@ -51,7 +51,7 @@ async def check_deposits(user_id: str = "user-001"):
     if last_known is not None:
         delta = round(current_eur - last_known, 2)
         if delta > 0.50:  # threshold: kleinere bewegingen = trade-resultaat
-            # Storting gedetecteerd
+            # Storting gedetecteerd → log in echte accounting kasboek (spark_core)
             event = {
                 "ts": now,
                 "type": "deposit_detected",
@@ -61,17 +61,27 @@ async def check_deposits(user_id: str = "user-001"):
                 "user_id": user_id,
             }
             state.setdefault("history", []).append(event)
-            # Auto-log in Spark kasboek
-            kb = load_json(KASBOEK, default={"entries": [], "totals": {}})
-            kb["entries"].append({
-                "ts": now,
-                "type": "storting_in",
-                "bedrag_eur": delta,
-                "bron": "bitvavo_auto_detect",
-                "omschrijving": f"Storting gedetecteerd: Bitvavo EUR ging van €{last_known:.2f} naar €{current_eur:.2f} (+€{delta:.2f})",
-            })
-            kb["totals"]["storting_in"] = round(kb["totals"].get("storting_in", 0) + delta, 2)
-            save_json(KASBOEK, kb)
+            # Voeg toe aan /api/accounting/transactions in spark_core kasboek
+            try:
+                from modules.accounting.routes import TX_FILE as ACC_TX
+                import uuid
+                acc_data = load_json(ACC_TX, default={"transactions": []})
+                acc_data["transactions"].append({
+                    "id": str(uuid.uuid4()),
+                    "type": "income",
+                    "category": "Donations",
+                    "amount": delta,
+                    "description": f"Storting auto-detect via deposit_watcher (Bitvavo EUR €{last_known:.2f}→€{current_eur:.2f})",
+                    "entity_id": "spark_core",
+                    "date": now,
+                    "btw_percentage": 0,
+                    "btw_amount": 0,
+                    "created_at": now,
+                    "source": "deposit_watcher",
+                })
+                save_json(ACC_TX, acc_data)
+            except Exception as ex:
+                print(f"[deposit-watcher] kasboek-log failed: {ex}")
         elif delta < -0.50:
             # Mogelijk uitname of trade
             event = {

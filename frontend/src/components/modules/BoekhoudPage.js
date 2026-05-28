@@ -235,24 +235,16 @@ export function BoekhoudPage({ onNavigate }) {
             {/* KASBOEKEN TAB */}
             {activeTab === 'overzicht' && (
               <>
-                {/* v6_commitments_001 — Rood-staan widget voor Spark openstaande potje-commitments */}
+                {/* v6_commitments_001 — kleine banner met deposit-watcher status */}
                 {isAdmin && reconcile?.commitments && reconcile.commitments.open_commitment_eur > 0 && (
-                  <div data-testid="commitment-rood-widget"
-                    className="p-4 rounded-xl border border-red-500/40 bg-gradient-to-r from-red-500/10 to-transparent">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-[10px] text-red-300 uppercase tracking-wide">Spark openstaande verplichting</p>
-                        <p className="text-2xl font-bold text-red-400">−€{reconcile.commitments.open_commitment_eur.toFixed(2)}</p>
-                        <p className="text-[11px] text-slate-400 mt-1">{reconcile.commitments.note}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-[10px] text-slate-500">Gedekt:</p>
-                        <p className="text-sm text-emerald-400">€{reconcile.commitments.bitvavo_covered_eur?.toFixed(2)}</p>
-                        <p className="text-[10px] text-slate-500 mt-1">Totaal nodig:</p>
-                        <p className="text-sm text-amber-300">€{reconcile.commitments.spark_potjes_total_eur?.toFixed(2)}</p>
-                      </div>
-                    </div>
-                    <p className="text-[10px] text-red-200/70 mt-2 italic">Spark wordt automatisch bijgewerkt zodra een storting via Bitvavo wordt gedetecteerd (deposit-watcher checkt elke 5 min).</p>
+                  <div data-testid="commitment-banner"
+                    className="p-3 rounded-lg border border-red-500/30 bg-red-500/5 flex items-center justify-between">
+                    <p className="text-xs text-red-200">
+                      📍 Spark heeft {reconcile.commitments.spark_potjes_total_eur ? `€${reconcile.commitments.spark_potjes_total_eur.toFixed(2)} toegezegd` : 'open commitment'} —
+                      <span className="text-emerald-400 mx-1">€{reconcile.commitments.bitvavo_covered_eur?.toFixed(2)} gedekt</span> op Bitvavo,
+                      <span className="text-red-400 ml-1 font-bold">€{reconcile.commitments.open_commitment_eur.toFixed(2)} nog te storten</span>
+                    </p>
+                    <p className="text-[10px] text-slate-500 italic">deposit-watcher actief</p>
                   </div>
                 )}
 

@@ -1,41 +1,66 @@
 {
   "transactions": [
     {
-      "id": "sc-deposit-001",
-      "type": "income",
-      "category": "Crypto Profit",
-      "amount": 122.4,
-      "description": "Startkapitaal gestort op Bitvavo (10 ROAR tokens verkocht @ 5.08)",
-      "entity_id": "spark_core",
-      "date": "2026-04-19T20:00:00+00:00",
-      "btw_percentage": 0,
-      "btw_amount": 0.0,
-      "created_at": "2026-04-19T20:00:00+00:00",
-      "updated_at": "2026-05-28T16:19:19.231690+00:00"
-    },
-    {
-      "id": "c4c730a3-03da-45d7-b4bf-35fb3ced5d61",
-      "type": "expense",
-      "category": "Crypto Profit",
-      "amount": 49.92,
-      "description": "5 base potjes ingekocht via Bitvavo: SOL+ETH+BCH+BTC+ADA (€10 elk, 28 mei)",
-      "entity_id": "spark_core",
-      "date": "2026-05-28T18:03:43.606528+00:00",
-      "btw_percentage": 0.0,
-      "btw_amount": 0,
-      "created_at": "2026-05-28T18:03:43.606537+00:00"
-    },
-    {
-      "id": "f914a89d-b0e5-4789-9fbd-6eba305f926c",
+      "id": "f7a0b8b3-224f-4024-8719-84cd0e5f6575",
       "type": "expense",
       "category": "Overig",
-      "amount": 49.92,
-      "description": "Willem stort voor Spark: 5 base potjes á €10 (4 trades + ADA €9.95)",
+      "amount": 49.2,
+      "description": "open",
+      "entity_id": "spark_core",
+      "date": "2026-05-28T18:13:57.265317+00:00",
+      "btw_percentage": 21.0,
+      "btw_amount": 10.33,
+      "created_at": "2026-05-28T18:13:57.265327+00:00"
+    },
+    {
+      "id": "0b429e15-254a-43db-a5ae-ee14503f9b29",
+      "type": "expense",
+      "category": "Overig",
+      "amount": 49.2,
+      "description": "open",
       "entity_id": "personal_willem",
-      "date": "2026-05-28T18:03:43.739968+00:00",
-      "btw_percentage": 0.0,
-      "btw_amount": 0,
-      "created_at": "2026-05-28T18:03:43.739973+00:00"
+      "date": "2026-05-28T18:15:15.702497+00:00",
+      "btw_percentage": 21.0,
+      "btw_amount": 10.33,
+      "created_at": "2026-05-28T18:15:15.702506+00:00",
+      "updated_at": "2026-05-28T18:21:02.934650+00:00"
+    },
+    {
+      "id": "4a03e37e-f3ad-4bfd-8b6d-7b332e62c289",
+      "type": "income",
+      "category": "Sales",
+      "amount": 20.8,
+      "description": "Token 1x10,- 80 cent in systeem gekocht user Gijser",
+      "entity_id": "spark_core",
+      "date": "2026-05-28T18:17:11.657919+00:00",
+      "btw_percentage": 21.0,
+      "btw_amount": 4.37,
+      "created_at": "2026-05-28T18:17:11.657926+00:00"
+    },
+    {
+      "id": "bf6e5336-e6fc-4a71-999b-afb5e6031484",
+      "type": "income",
+      "category": "Sales",
+      "amount": 50.8,
+      "description": "10 token 1 token 10,-  open saldo",
+      "entity_id": "personal_willem",
+      "date": "2026-05-28T18:18:24.330620+00:00",
+      "btw_percentage": 21.0,
+      "btw_amount": 10.67,
+      "created_at": "2026-05-28T18:18:24.330628+00:00",
+      "updated_at": "2026-05-28T18:20:57.544873+00:00"
+    },
+    {
+      "id": "57a4b580-7143-4757-8b76-a8a522d1a4a4",
+      "type": "income",
+      "category": "Sales",
+      "amount": 50.8,
+      "description": "10 token 1x 10,- staat open",
+      "entity_id": "spark_core",
+      "date": "2026-05-28T18:19:00.193754+00:00",
+      "btw_percentage": 21.0,
+      "btw_amount": 10.67,
+      "created_at": "2026-05-28T18:19:00.193763+00:00"
     }
   ]
 }

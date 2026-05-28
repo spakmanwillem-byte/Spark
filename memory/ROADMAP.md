@@ -267,6 +267,53 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 - [ ] **Krachtigere log-search** — full-text zoeken over alle modules op een dag
 - [ ] **Boekhouder closing-flow** uitgebreid met PDF-export per maand
 
+---
+
+## 🌱 Backlog 2026-05-28 — 21 nieuwe ideeën (Willem brainstorm)
+
+Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (al live).
+
+### Cluster A — KB curation & normalisatie
+- [ ] **#zip-mindgraph** — Zip-backup bevat ook mindgraph + andere afgeleide data. Bij restore meeladen ipv alleen kaarten.
+- [ ] **#kb-node-hierarchy** — Hoofd-node vs sub-tag hierarchie (bv. "emotie" = hoofd-node, "blij/boos" = sub-tags). Schema-uitbreiding op tags-array → tree.
+- [ ] **#kb-tag-singular** — Plural→Singular normalisatie van tags ("emoties" → "emotie"). Module: `modules/kb_v2/tag_normalizer.py`.
+- [ ] **#kb-verb-stem** — Werkwoord-stamherkenning (bakt / bakken / bakker → stam "bak"). Hook in tag-pipeline + zoek.
+- [ ] **#kb-similarity** — Gelijkheid-engine: stam-herkenning over werkwoorden + zelfstandige naamwoorden. Voedt `compute_verbanden` en disambiguatie.
+- [ ] **#kb-curation-dash** — Curatie-dashboard: zie afwijkingen, los enkelvoud/synoniem-conflict op met 1 klik. Tab in Beheer → Kennis-curatie.
+- [ ] **#kb-ui-unified** — KB-invul UI volledig consistent maken (één layout overal — inbox / lade-detail / nieuwe-kaart / herzien). Reeds gedeeltelijk via `CardFormFields`.
+- [ ] **#snap-topic-unique** — Snap-creatie: topic-uniqueness check tegen `knowledge_index.json` vóór auto-create.
+
+### Cluster B — Triggers & Hooks (community-extensible)
+- [ ] **#trigger-hooks** — Hook-systeem voor triggers/commands (gebruiker-uitbreidbaar). Schema: `/data/triggers/user_triggers.json` met owner/gradatie/pattern/action.
+- [ ] **#trigger-community** — Triggers community-extensible: g2+ stelt voor, g1 keurt goed. Workflow: voorstel → review-queue → approve/reject.
+- [ ] **#negate-trigger** — Negatie-trigger: "nee niet [onderwerp]" → exclude voor sessie. Hook in session_state met `excluded_topics[]`.
+
+### Cluster C — Command Registry uitbreiding (fundering v6_command_registry_001 leeft al)
+- [x] **#cmd-registry** — ✅ DONE (v6_command_registry_001): elke api-endpoint krijgt intent-tags. 27 commands in `/data/system/command_registry.json`. Uitbreiden naar alle 418 endpoints (Synapse-scan).
+- [x] **#intent-extractor** — ✅ DONE (v6_command_registry_001): user-zin → tag-vector via `modules/intent_registry/extractor.py` (~150 synoniem-mappings).
+- [x] **#cap-matcher** — ✅ DONE (v6_command_registry_001): tag-overlap Jaccard-score → top-3 kandidaten in `matcher.py`.
+- [ ] **#cmd-disambiguation** — Bij meerdere matches → "Bedoelde je X of Y?". UI-panel + chat-response. Disambiguation flag is al in matcher; UI moet nog.
+- [ ] **#cmd-compose-seq** — Sequential composition: command-keten bouwen voor onbekende intent. Bv. "stuur Gijs €10 voor zijn verjaardag" → wallet.transfer + bark.send.
+- [ ] **#cmd-fallback** — Fallback chains: dichtstbijzijnde match + user-bevestiging vóór execution.
+- [ ] **#cmd-skill-discovery** — Spark biedt aan herkende compositie als snelkoppeling op te slaan. Fundering staat: `intent_log.jsonl` + `/skills/candidates`. UI accept/reject mist nog.
+
+### Cluster D — Gradatie-enforcement
+- [ ] **#cmd-gradatie-files** — Per-gradatie command-JSON (commands_g1.json t/m commands_g7.json). Naast bestaande `help_g{n}` per gradatie. Beheer-UI per file.
+- [ ] **#cmd-grad-lock** — Gradatie-lock check IN command-registry, niet alleen in UI. Backend-guard ook bij chat-routed commands.
+- [ ] **#cmd-priv-fallback** — Privilege-fallback: blocked command → bied request-flow aan ("Vraag toestemming aan beheerder?"). Mini-inbox voor admin.
+
+### Cluster E — Conversational depth
+- [ ] **Spark vraagt elke 4e interactie**: *"Wat denk jij dat ik zou moeten kunnen?"* → log-naar `intent_log.jsonl` + categoriseer als feature-request. Voedt skill-discovery (#cmd-skill-discovery).
+
+### Cluster F — Volgorde-suggestie (bouwen in deze volgorde)
+1. **#kb-tag-singular** + **#kb-verb-stem** (fundering voor similarity)
+2. **#kb-similarity** + **#kb-node-hierarchy** (semantische upgrade)
+3. **#cmd-disambiguation** (UI op bestaande matcher-output)
+4. **#cmd-skill-discovery** (accept/reject UI op bestaande intent_log)
+5. **#trigger-hooks** + **#trigger-community** (gemeenschap-uitbreidbaar)
+6. **#cmd-gradatie-files** + **#cmd-grad-lock** + **#cmd-priv-fallback** (privacy/governance)
+7. Rest in fluctuerende volgorde
+
 ## 🧠 Architectuur principes (don't forget)
 
 1. **NO MONGODB**: alle data via `load_json`/`save_json` uit `modules.core.storage`

@@ -17,6 +17,19 @@ from modules.core.storage import load_json, save_json
 
 logger = logging.getLogger("spark_monitor")
 
+
+def _read_pot_count(user_id: str) -> int:
+    """v6_potje_per_token_001 — lees aantal potjes uit user_potjes.json (geen hardcoded 10)."""
+    try:
+        path = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
+        if not path.exists():
+            return 0
+        data = json.loads(path.read_text())
+        return len(data.get("users", {}).get(user_id, {}).get("potjes", []))
+    except Exception:
+        return 0
+
+
 # Bitvavo public API
 BITVAVO_URL = "https://api.bitvavo.com/v2"
 
@@ -851,6 +864,7 @@ class MonitorService:
             "thread_alive": self._thread.is_alive() if self._thread else False,
             "position": self._position,
             "use_potjes": self._use_potjes,
+            "pot_count": _read_pot_count(self._user_id) if self._use_potjes else None,
         }
 
     def get_decisions(self, limit: int = 50) -> List[Dict]:
@@ -1111,6 +1125,7 @@ def _persist_registry():
                         "trade_amount": m._trade_amount,
                         "use_mock": m._use_mock,
                         "use_potjes": m._use_potjes,
+                        "pot_count": _read_pot_count(uid) if m._use_potjes else None,
                     })
         with open(REGISTRY_STATE_FILE, "w") as f:
             json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)

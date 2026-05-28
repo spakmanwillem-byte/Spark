@@ -652,7 +652,7 @@ async def admin_list_bots():
     overgeslagen — die hebben geen trader-bot.
     'Draaien als ik offline ben' checkbox regelt persistentie, niet zichtbaarheid.
     """
-    from .monitor import list_running_bots, _load_registered_users
+    from .monitor import list_running_bots, _load_registered_users, _read_pot_count
     # Echte users uit system/users.json (geen AI bots)
     users_fp = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
     users_data = load_json(users_fp, default={"users": []})
@@ -666,6 +666,10 @@ async def admin_list_bots():
 
     # Bestaande bots ophalen
     bots = list_running_bots()
+    # v6_potje_per_token_001 — toevoegen actual pot_count uit user_potjes.json (niet hardcoded 10)
+    for b in bots:
+        if b.get("use_potjes") and b.get("user_id"):
+            b["pot_count"] = _read_pot_count(b["user_id"])
     bots_by_uid = {b.get("user_id"): b for b in bots if b.get("user_id")}
 
     # Voor elke menselijke user: zorg dat er een entry is.
@@ -698,6 +702,7 @@ async def admin_list_bots():
             "trade_amount": 5.08,
             "use_mock": False,
             "use_potjes": True,
+            "pot_count": _read_pot_count(uid),
             "uptime_seconds": 0,
             "lazy_slot": True,
             "tokens": tokens,

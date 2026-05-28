@@ -1438,7 +1438,7 @@ function TradeAnalyticsTab() {
                     </span>
                     <span className="text-slate-500">{b.candle_interval}</span>
                     <span className="text-amber-400">cycle #{b.cycles}</span>
-                    {b.use_potjes && <span className="text-cyan-400">10-potjes</span>}
+                    {b.use_potjes && <span className="text-cyan-400">{details?.potjes?.length ?? b.pot_count ?? '?'}-potjes</span>}
                     {b.auto_trade && <span className="text-emerald-400">auto</span>}
                     {b.use_mock && <span className="text-pink-400">MOCK</span>}
                     {!b.running && <span className="text-slate-500 italic">{b.lazy_slot ? 'slot leeg (niet gestart)' : 'slot-aanwezig (uit)'}</span>}

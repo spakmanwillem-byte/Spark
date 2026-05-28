@@ -92,6 +92,15 @@ async def process_message(req: ChatMessage):
             "snap_suggestions": [],
         }
 
+    # v6_wedervraag_quiet_001 — bump interaction counter (voor wedervraag-cap)
+    try:
+        if req.user_id:
+            _cur = session_state.get_state(req.user_id) or {}
+            _cnt = int(_cur.get("interaction_count", 0) or 0) + 1
+            session_state.set_state(req.user_id, interaction_count=_cnt)
+    except Exception:
+        pass
+
     # v4_dnd_001 — Behavior tracking voor aura/wereldgroei
     try:
         from modules.behavior_tracker import track_chat_message
@@ -733,11 +742,20 @@ async def process_message(req: ChatMessage):
             kb = _lj(_Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json", default={"knowledge_entries": []})
             entry = next((e for e in kb.get("knowledge_entries", []) if e.get("id") == pending_consent["entry_id"]), None)
             session_state.set_state(req.user_id, pending_wv_consent=None)
+            # v6_wedervraag_quiet_001 — interactie-cap: max 1 wedervraag per 4 chat-beurten
+            interaction_count = int(state.get("interaction_count", 0) or 0)
+            last_wv_at = int(state.get("last_wedervraag_at", 0) or 0)
+            if wedervraag_service.should_throttle(last_wv_at, interaction_count):
+                response["type"] = "wedervraag_throttled"
+                response["message"] = "Genoteerd. Ik vraag straks wel even door."
+                _save_log(req, response, "wedervraag_throttled")
+                return response
             if entry:
                 wv = wedervraag_service.kick_off(entry, max_questions=6)
                 if wv:
                     session_state.set_state(req.user_id, pending_wedervraag=wv,
-                                            last_entry_id=entry["id"], last_begrip=entry["begrip"])
+                                            last_entry_id=entry["id"], last_begrip=entry["begrip"],
+                                            last_wedervraag_at=interaction_count)
                     response["type"] = "wedervraag"
                     response["message"] = f"Top! Eerste vraag: {wv['question']}"
                     response["wedervraag"] = wv
@@ -759,6 +777,8 @@ async def process_message(req: ChatMessage):
         session_state.set_state(req.user_id, pending_wv_consent=None)
 
     # 0c. WEDERVRAAG-FLOW (v4_001b) — als Spark in vorige beurt een 5W+H vraag stelde
+    # v6_wedervraag_quiet_001 (28 mei): bewaak tegen "user typt nieuwe vraag, wordt
+    # per ongeluk als antwoord op pending W-vraag geboekt".
     pending_wv = state.get("pending_wedervraag")
     if pending_wv and not snap.detect_rejection(text):
         # User wil stoppen?
@@ -771,28 +791,34 @@ async def process_message(req: ChatMessage):
             )
             _save_log(req, response, "wedervraag_skip")
             return response
-        # Antwoord opslaan in ws5 van die snap
-        ok = wedervraag_service.apply_answer(
-            pending_wv["entry_id"], pending_wv["field"], text
-        )
-        if ok:
-            # Volgende veld vragen, of afronden
-            next_step = wedervraag_service.continue_flow(pending_wv)
-            if next_step:
-                session_state.set_state(req.user_id, pending_wedervraag=next_step)
-                response["type"] = "wedervraag"
-                response["message"] = f"Dank je! Genoteerd. {next_step['question']}"
-                response["wedervraag"] = next_step
-                _save_log(req, response, "wedervraag")
-                return response
-            else:
-                session_state.set_state(req.user_id, pending_wedervraag=None)
-                response["type"] = "wedervraag_done"
-                response["message"] = fallback_service.pick(
-                    "wedervraag_done", "Dank je! De kaart heb ik bijgewerkt."
-                )
-                _save_log(req, response, "wedervraag_done")
-                return response
+        # v6_wedervraag_quiet_001: nieuwe vraag detectie — niet als antwoord boeken
+        if wedervraag_service.looks_like_new_question(text):
+            session_state.set_state(req.user_id, pending_wedervraag=None)
+            # Niet returnen — flow door naar normale chat-processing voor nieuwe vraag
+            pending_wv = None
+        else:
+            # Antwoord opslaan in ws5 van die snap
+            ok = wedervraag_service.apply_answer(
+                pending_wv["entry_id"], pending_wv["field"], text
+            )
+            if ok:
+                # Volgende veld vragen, of afronden
+                next_step = wedervraag_service.continue_flow(pending_wv)
+                if next_step:
+                    session_state.set_state(req.user_id, pending_wedervraag=next_step)
+                    response["type"] = "wedervraag"
+                    response["message"] = f"Dank je! Genoteerd. {next_step['question']}"
+                    response["wedervraag"] = next_step
+                    _save_log(req, response, "wedervraag")
+                    return response
+                else:
+                    session_state.set_state(req.user_id, pending_wedervraag=None)
+                    response["type"] = "wedervraag_done"
+                    response["message"] = fallback_service.pick(
+                        "wedervraag_done", "Dank je! De kaart heb ik bijgewerkt."
+                    )
+                    _save_log(req, response, "wedervraag_done")
+                    return response
 
     # -- CONFIRMATION flow: user zei eerder "nee" en Spark vroeg "bedoel je een andere X?"
     if state.get("awaiting_homonym_confirm") and snap.detect_confirmation(text):

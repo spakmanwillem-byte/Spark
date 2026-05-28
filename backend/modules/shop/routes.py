@@ -18,7 +18,24 @@ ROAR_FILE = DATA_DIR / "roar" / "roar_balances.json"
 WALLET_FILE = DATA_DIR / "wallet" / "wallets.json"
 FINANCIAL_FILE = DATA_DIR / "financial" / "transactions.json"
 POTJES_FILE = DATA_DIR / "financial" / "user_potjes.json"
-PRODUCTS_FILE = DATA_DIR / "shop" / "products.json"
+PRODUCTS_FILE = DATA_DIR / "users" / "user-001" / "shops" / "shop-roadkill" / "products.json"
+
+
+def _shop_products_path(shop_id: str = "shop-roadkill"):
+    """v6_shop_per_user_001 (28 mei) — products per shop in shop-owner's container.
+    Founder shop-roadkill = user-001's container. Andere shops = hun owner.
+    """
+    from pathlib import Path as _P
+    SHOPS = _P(__file__).parent.parent.parent / "data" / "shop" / "shops.json"
+    sdata = load_json(SHOPS, default={"shops": []})
+    shop = next((s for s in sdata.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        return PRODUCTS_FILE  # fallback
+    owner = shop.get("owner_user_id", "user-001")
+    user_path = _P(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id / "products.json"
+    if user_path.exists():
+        return user_path
+    return PRODUCTS_FILE
 ACCOUNTING_FILE = DATA_DIR / "accounting" / "transactions.json"
 
 TOTAL_SUPPLY = 1_000_000
@@ -487,16 +504,17 @@ async def get_potjes(user_id: str):
 # ============================================================
 
 @router.get("/products")
-async def get_products():
-    """Alle winkel producten ophalen"""
-    data = load_json(PRODUCTS_FILE, default={"products": []})
+async def get_products(shop_id: str = "shop-roadkill"):
+    """Alle winkel producten ophalen (filter via shop_id; default = Roadkillshop)."""
+    pfile = _shop_products_path(shop_id)
+    data = load_json(pfile, default={"products": []})
     products = data.get("products", [])
     # ROAR token prijs dynamisch updaten
     price = get_dynamic_price()
     for p in products:
         if p.get("dynamic_price"):
             p["price"] = price
-    return {"success": True, "products": products}
+    return {"success": True, "products": products, "shop_id": shop_id, "source": str(pfile)}
 
 
 @router.get("/products/{product_id}")

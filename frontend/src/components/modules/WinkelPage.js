@@ -23,8 +23,31 @@ export function WinkelPage({ onNavigate }) {
   const [showCart, setShowCart] = useState(false);
   const [ordering, setOrdering] = useState(false);
   const [orderResult, setOrderResult] = useState(null);
-  const [activeTab, setActiveTab] = useState('merch');
+  const [activeTab, setActiveTab] = useState('winkelstraat');
+  const [selectedShopId, setSelectedShopId] = useState(null);  // v6_shop_per_user_001 — drill-in view
+  const [selectedShop, setSelectedShop] = useState(null);
   const [digitalSubTab, setDigitalSubTab] = useState('storage');
+
+  // Wanneer een shop wordt geselecteerd: laad shop-info + bepaal welke subtab default actief is
+  const openShop = useCallback(async (shopId) => {
+    try {
+      const r = await fetch(`${API}/api/winkelstraat/shops`);
+      const d = await r.json();
+      const shop = (d.shops || []).find(s => s.id === shopId);
+      if (!shop) return;
+      setSelectedShopId(shopId);
+      setSelectedShop(shop);
+      // Default sub-tab = eerste in subtabs_enabled
+      const firstSub = (shop.subtabs_enabled || ['merch'])[0];
+      setActiveTab(firstSub === 'digitaal' ? 'digital' : firstSub);
+    } catch (e) { console.error(e); }
+  }, []);
+
+  const backToWinkelstraat = () => {
+    setSelectedShopId(null);
+    setSelectedShop(null);
+    setActiveTab('winkelstraat');
+  };
 
   // Token buy state
   const [tokenQty, setTokenQty] = useState('1');
@@ -125,57 +148,80 @@ export function WinkelPage({ onNavigate }) {
     <MainLayout activePage="winkel" onNavigate={onNavigate}>
       <div data-testid="winkel-page" className="p-4 md:p-6 space-y-4 max-w-6xl mx-auto">
 
-        {/* Header */}
+        {/* Header — dynamisch op basis van geselecteerde shop of Winkelstraat-overzicht */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #dc2626, #991b1b)' }}>
-              <ShoppingBag className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">Roadkill Shop</h1>
-              <p className="text-xs text-slate-400">Merch, tokens & meer</p>
-            </div>
+            {selectedShop ? (
+              <>
+                <button data-testid="back-to-winkelstraat" onClick={backToWinkelstraat}
+                  className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white">
+                  <ChevronRight className="w-5 h-5 rotate-180" />
+                </button>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: `linear-gradient(135deg, ${selectedShop.color_accent || '#f59e0b'}, ${selectedShop.color_accent || '#f59e0b'}88)` }}>
+                  <ShoppingBag className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-white">{selectedShop.naam}</h1>
+                  <p className="text-xs text-slate-400">{selectedShop.tagline || `${selectedShop.type} · door ${selectedShop.owner_naam || selectedShop.owner_user_id}`}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #b45309)' }}>
+                  <ShoppingBag className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-white">Winkelstraat</h1>
+                  <p className="text-xs text-slate-400">Alle winkels op Spark Core</p>
+                </div>
+              </>
+            )}
           </div>
           <div className="flex items-center gap-3">
             <div className="text-right">
               <p className="text-[10px] text-slate-500">Wallet saldo</p>
               <p className="text-sm font-bold text-white">&euro;{walletBalance.toFixed(2)}</p>
             </div>
-            <button data-testid="cart-btn" onClick={() => setShowCart(!showCart)}
-              className="relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all border border-slate-700 hover:border-amber-500/50 bg-slate-800">
-              <ShoppingCart className="w-4 h-4" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
-                  {cartCount}
-                </span>
-              )}
-            </button>
+            {selectedShop && (
+              <button data-testid="cart-btn" onClick={() => setShowCart(!showCart)}
+                className="relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all border border-slate-700 hover:border-amber-500/50 bg-slate-800">
+                <ShoppingCart className="w-4 h-4" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Main Tabs: Roadkillshop, Digitaal, Winkelstraat */}
-        <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 border border-slate-800">
-          {[
-            { id: 'merch', label: 'Roadkillshop', icon: Tag, hint: 'Fysieke producten' },
-            { id: 'digital', label: 'Digitaal', icon: Package, hint: 'Token & opslag' },
-            { id: 'winkelstraat', label: 'Winkelstraat', icon: ShoppingBag, hint: 'Andere winkels' },
-          ].map(tab => (
-            <button key={tab.id} data-testid={`shop-tab-${tab.id}`}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-medium transition-all ${
-                activeTab === tab.id
-                  ? 'bg-slate-800 text-white border border-slate-700'
-                  : 'text-slate-500 hover:text-slate-300'
-              }`}>
-              <tab.icon className="w-3.5 h-3.5" />
-              <span>{tab.label}</span>
-              <span className="hidden md:inline text-[10px] text-slate-600">· {tab.hint}</span>
-            </button>
-          ))}
-        </div>
+        {/* Sub-tabs alleen tonen als een shop geselecteerd is */}
+        {selectedShop && (
+          <div className="flex gap-1 bg-slate-900/50 rounded-xl p-1 border border-slate-800">
+            {(selectedShop.subtabs_enabled || ['merch', 'digitaal']).map(sub => {
+              const tabId = sub === 'digitaal' ? 'digital' : sub;
+              const label = sub === 'merch' ? 'Fysiek' : sub === 'digitaal' ? 'Digitaal' : sub.charAt(0).toUpperCase() + sub.slice(1);
+              const Icon = sub === 'merch' ? Tag : sub === 'digitaal' ? Package : ShoppingBag;
+              const hint = sub === 'merch' ? 'Fysieke producten' : sub === 'digitaal' ? 'Token & opslag' : '';
+              return (
+                <button key={tabId} data-testid={`shop-tab-${tabId}`}
+                  onClick={() => setActiveTab(tabId)}
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-medium transition-all ${
+                    activeTab === tabId ? 'bg-slate-800 text-white border border-slate-700' : 'text-slate-500 hover:text-slate-300'
+                  }`}>
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{label}</span>
+                  {hint && <span className="hidden md:inline text-[10px] text-slate-600">· {hint}</span>}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-        {/* Sub-tabs voor digitaal */}
-        {activeTab === 'digital' && (
+        {/* Storage subtab */}
+        {selectedShop && activeTab === 'digital' && (
           <div className="flex gap-2 px-1">
             {[
               { id: 'storage', label: 'Opslag', icon: HardDrive, color: '#3b82f6' },
@@ -196,8 +242,8 @@ export function WinkelPage({ onNavigate }) {
           </div>
         )}
 
-        {/* MERCH TAB */}
-        {activeTab === 'merch' && (
+        {/* MERCH TAB — alleen tonen als shop geselecteerd */}
+        {selectedShop && activeTab === 'merch' && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {merchProducts.map(product => (
@@ -255,7 +301,7 @@ export function WinkelPage({ onNavigate }) {
         )}
 
         {/* OPSLAG (sub van digitaal) */}
-        {activeTab === 'digital' && digitalSubTab === 'storage' && (
+        {selectedShop && activeTab === 'digital' && digitalSubTab === 'storage' && (
           <StorageTab
             products={storageProducts}
             storageStats={storageStats}
@@ -265,7 +311,7 @@ export function WinkelPage({ onNavigate }) {
         )}
 
         {/* ROAR TOKENS (sub van digitaal) */}
-        {activeTab === 'digital' && digitalSubTab === 'tokens' && (
+        {selectedShop && activeTab === 'digital' && digitalSubTab === 'tokens' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Token Info */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
@@ -359,9 +405,9 @@ export function WinkelPage({ onNavigate }) {
           </div>
         )}
 
-        {/* WINKELSTRAAT TAB — andere shops */}
-        {activeTab === 'winkelstraat' && (
-          <WinkelstraatTab user={user} onNavigateToShop={() => setActiveTab('merch')} />
+        {/* WINKELSTRAAT TAB — alle shops (entry point) */}
+        {!selectedShopId && activeTab === 'winkelstraat' && (
+          <WinkelstraatTab user={user} onNavigateToShop={openShop} />
         )}
 
         {/* WINKELWAGEN SLIDE-OUT */}

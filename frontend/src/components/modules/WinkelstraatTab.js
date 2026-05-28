@@ -120,7 +120,8 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
 
   return (
     <div data-testid={`shop-card-${shop.id}`}
-      className={`bg-slate-900/50 border rounded-xl p-4 transition-all ${isClosing ? 'border-red-500/30 opacity-70' : 'border-slate-800 hover:border-slate-700'}`}>
+      onClick={() => !isClosing && onNavigate && onNavigate(shop.id)}
+      className={`bg-slate-900/50 border rounded-xl p-4 transition-all cursor-pointer ${isClosing ? 'border-red-500/30 opacity-70 cursor-default' : 'border-slate-800 hover:border-amber-500/50'}`}>
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -144,7 +145,7 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
           </div>
         </div>
         {isOwner && !isClosing && (
-          <button data-testid={`shop-edit-${shop.id}`} onClick={onEdit}
+          <button data-testid={`shop-edit-${shop.id}`} onClick={(e) => { e.stopPropagation(); onEdit(); }}
             className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex-shrink-0">
             <Edit3 className="w-3.5 h-3.5" />
           </button>
@@ -154,9 +155,8 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
         {(shop.subtabs_enabled || []).map(s => (
           <span key={s} className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{s}</span>
         ))}
-        {isFounder && onNavigate && (
-          <button data-testid={`shop-open-${shop.id}`} onClick={onNavigate}
-            className="ml-auto text-amber-400 hover:text-amber-300">Bekijk →</button>
+        {!isClosing && onNavigate && (
+          <span className="ml-auto text-amber-400">Bekijk →</span>
         )}
       </div>
     </div>

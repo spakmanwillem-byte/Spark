@@ -61,6 +61,44 @@ SKIP_PATTERNS = [
     "stop", "niet nu", "geen tijd", "passeren", "overslaan",
 ]
 
+# v6_wedervraag_quiet_001 (28 mei) — heuristieken om te detecteren of user-input
+# een NIEUWE vraag/onderwerp is ipv antwoord op de pending wedervraag.
+NEW_QUESTION_STARTERS = (
+    "wat is", "wat zijn", "hoe ", "waarom ", "wanneer ", "waar ", "wie ",
+    "welke ", "kun je", "kan je", "kun jij", "kan jij", "weet je",
+    "vertel ", "leg uit", "help me", "help mij", "ik wil", "ik wou",
+    "toon ", "geef ", "open ", "ga naar", "start ", "stop ",
+)
+
+def looks_like_new_question(text: str) -> bool:
+    """v6_wedervraag_quiet_001 — herkent of user een nieuwe vraag stelt ipv
+    antwoord geeft op pending W-vraag. Voorkomt dat 'wat is liefde?' getypt
+    tijdens een pending 'wanneer was dat?' per ongeluk als antwoord wordt opgeslagen.
+    """
+    if not text:
+        return False
+    t = text.lower().strip()
+    if t.endswith("?"):
+        return True
+    if any(t.startswith(s) for s in NEW_QUESTION_STARTERS):
+        return True
+    # Twee of meer woorden EN bevat een vraagwoord midden in
+    words = t.split()
+    if len(words) >= 4 and any(qw in words for qw in ("wat", "hoe", "waarom", "wanneer", "waar")):
+        return True
+    return False
+
+
+# v6_wedervraag_quiet_001 — interactie-cap: max 1 wedervraag per N chat-beurten
+WEDERVRAAG_INTERVAL_INTERACTIONS = 4
+
+
+def should_throttle(last_wv_at_count: int, current_count: int) -> bool:
+    """True = nog te kort geleden, sla nieuwe kick_off over."""
+    if not last_wv_at_count:
+        return False
+    return (current_count - last_wv_at_count) < WEDERVRAAG_INTERVAL_INTERACTIONS
+
 
 def _load_entries():
     return load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []}).get("knowledge_entries", [])

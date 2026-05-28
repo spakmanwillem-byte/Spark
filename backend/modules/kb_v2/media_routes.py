@@ -413,3 +413,54 @@ async def delete_secondary_audio(card_id: str, archive_id: str, lade: Optional[s
             save_json(ip, inbox)
             return {"success": True, "remaining": len(m["extra_audio"])}
     raise HTTPException(404, "Kaart niet gevonden")
+
+
+
+# ---------------------------------------------------------------------------
+# v6_kbv2_media_legacy_001 — Legacy file-serve route
+# ---------------------------------------------------------------------------
+# Oude kaarten (pre-v5_kbv2_media_002) hebben URLs als
+#   /api/kb/v2/media/image/file/{filename}
+#   /api/kb/v2/media/voice/file/{filename}
+# Die files staan nog in /data/knowledge/v2/media/{image,voice}/
+# maar de route was verdwenen → 404. Deze route herstelt backwards-compat.
+# ---------------------------------------------------------------------------
+
+from fastapi.responses import FileResponse
+
+_LEGACY_MEDIA_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2" / "media"
+
+_MIME_BY_EXT = {
+    ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+    ".webp": "image/webp", ".gif": "image/gif", ".bmp": "image/bmp",
+    ".webm": "audio/webm", ".mp3": "audio/mpeg", ".wav": "audio/wav",
+    ".m4a": "audio/mp4", ".mp4": "audio/mp4", ".ogg": "audio/ogg",
+    ".opus": "audio/ogg",
+}
+
+
+def _serve_legacy_media(kind: str, filename: str):
+    if kind not in ("image", "voice"):
+        raise HTTPException(404, "Onbekend media-type")
+    # Basic path-traversal guard
+    safe_name = os.path.basename(filename)
+    if not safe_name or safe_name != filename:
+        raise HTTPException(400, "Ongeldige bestandsnaam")
+    fp = _LEGACY_MEDIA_DIR / kind / safe_name
+    if not fp.exists() or not fp.is_file():
+        raise HTTPException(404, "Bestand niet gevonden")
+    ext = fp.suffix.lower()
+    media_type = _MIME_BY_EXT.get(ext, "application/octet-stream")
+    return FileResponse(path=str(fp), media_type=media_type, filename=safe_name)
+
+
+@router.get("/image/file/{filename}")
+async def legacy_image_file(filename: str):
+    """Backwards-compat: serve image van pre-v5_kbv2_media_002 kaarten."""
+    return _serve_legacy_media("image", filename)
+
+
+@router.get("/voice/file/{filename}")
+async def legacy_voice_file(filename: str):
+    """Backwards-compat: serve voice van pre-v5_kbv2_media_002 kaarten."""
+    return _serve_legacy_media("voice", filename)

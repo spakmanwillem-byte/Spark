@@ -165,3 +165,29 @@ async def finalize_delete(container_type: str, container_id: str, viewer_id: str
         keep_archive=keep_archive,
     )
     return result
+
+
+# ============================================================
+# v6_container_migrate_001 — Legacy → Container migratie endpoints
+# ============================================================
+class MigrateUserBody(BaseModel):
+    viewer_id: str
+    user_id: str
+
+
+@router.post("/user/migrate")
+async def migrate_one_user(body: MigrateUserBody):
+    """Kopieer legacy user-data naar nieuwe user-container. Idempotent."""
+    if not _check_admin(body.viewer_id):
+        raise HTTPException(403, "Alleen admin (gradatie ≤ 2) kan migratie triggeren")
+    from .user_helper import migrate_user_legacy
+    return migrate_user_legacy(body.user_id)
+
+
+@router.post("/user/migrate-all")
+async def migrate_all_users_endpoint(viewer_id: str):
+    """Bulk-migratie voor alle users. Idempotent. Geeft per-user resultaat."""
+    if not _check_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin (gradatie ≤ 2) kan bulk-migratie triggeren")
+    from .user_helper import migrate_all_users
+    return migrate_all_users()

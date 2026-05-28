@@ -35,8 +35,13 @@ class TTSRequest(BaseModel):
 
 
 @router.post("/stt")
-async def speech_to_text(audio: UploadFile = File(...), language: str = "nl"):
-    """Speech-to-Text via OpenAI Whisper"""
+async def speech_to_text(audio: UploadFile = File(...), language: str = "nl",
+                          card_id: Optional[str] = None, user_id: Optional[str] = None):
+    """Speech-to-Text via OpenAI Whisper.
+
+    v6_voice_kbv2_link_001 — als card_id meegegeven wordt, slaan we het transcript
+    op als dialoog-snippet via kbv2.save_voice_snippet (Spark's stem-stijl groei).
+    """
     try:
         from emergentintegrations.llm.openai import OpenAISpeechToText
         stt = OpenAISpeechToText(api_key=os.getenv("EMERGENT_LLM_KEY"))
@@ -52,7 +57,24 @@ async def speech_to_text(audio: UploadFile = File(...), language: str = "nl"):
             response = await stt.transcribe(file=f, model="whisper-1", language=language, response_format="json")
 
         os.unlink(tmp_path)
-        return {"success": True, "text": response.text, "language": language}
+
+        transcript_text = response.text or ""
+
+        # v6_voice_kbv2_link_001 — Kennis-kaart link → snippet opslaan
+        snippet_saved = False
+        if card_id and user_id and transcript_text.strip():
+            try:
+                from modules.kb_v2.hooks import save_voice_snippet
+                snippet_saved = save_voice_snippet(transcript_text, card_id, user_id)
+            except Exception as _ex:
+                print(f"[voice] save_voice_snippet failed: {_ex}")
+
+        return {
+            "success": True,
+            "text": transcript_text,
+            "language": language,
+            "snippet_saved": snippet_saved,
+        }
     except Exception as e:
         return {"success": False, "error": str(e)}
 

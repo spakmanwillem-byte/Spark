@@ -202,7 +202,7 @@ def _handle_toon_afbeelding(user_id: Optional[str]) -> Optional[Dict]:
         fn = f.get("filename") or f.get("id")
         tag = ", ".join((f.get("tags") or [])[:3])
         lines.append(f"  · {fn}" + (f" ({tag})" if tag else ""))
-    lines.append(f"\n_Open Archief om te bekijken._")
+    lines.append("\n_Open Archief om te bekijken._")
     return {"type": "capability_response", "capability_id": "toon_afbeelding",
             "message": "\n".join(lines)}
 
@@ -240,6 +240,169 @@ def _handle_speel_geluid(user_id: Optional[str]) -> Optional[Dict]:
             "message": "\n".join(lines)}
 
 
+# ============================================================
+# v6_capabilities_handlers_002 (sessie 13) — 5 nieuwe handlers
+# ============================================================
+def _handle_kasboek_overzicht(user_id):
+    """Snelle kasboek-samenvatting voor admin."""
+    try:
+        from pathlib import Path
+        from modules.core.storage import load_json
+        # Probeer eerst centrale ledger.json
+        led_fp = Path("/app/backend/data/accounting/ledger.json")
+        if not led_fp.exists():
+            # Fallback: aggregeer over alle accounting JSONs
+            acct_dir = Path("/app/backend/data/accounting")
+            in_total = 0.0
+            out_total = 0.0
+            entries = 0
+            if acct_dir.exists():
+                for fp in acct_dir.rglob("*.json"):
+                    if fp.name == "_meta.json":
+                        continue
+                    d = load_json(fp, default={})
+                    for ent_list in [d.get("entries"), d.get("ledger"), d.get("boekingen")]:
+                        if isinstance(ent_list, list):
+                            for e in ent_list:
+                                amt = e.get("amount") or e.get("bedrag") or 0
+                                try:
+                                    amt = float(amt)
+                                except Exception:
+                                    continue
+                                kind = (e.get("kind") or e.get("type") or "").lower()
+                                if kind in ("in", "credit", "inkomst"):
+                                    in_total += amt
+                                elif kind in ("out", "debit", "uitgave"):
+                                    out_total += amt
+                                entries += 1
+            s = {"in": in_total, "out": out_total, "saldo": in_total - out_total, "entries": entries}
+        else:
+            led = load_json(led_fp, default={"entries": []})
+            ents = led.get("entries", [])
+            in_total = sum(float(e.get("amount", 0)) for e in ents if (e.get("kind") or "").lower() in ("in", "credit"))
+            out_total = sum(float(e.get("amount", 0)) for e in ents if (e.get("kind") or "").lower() in ("out", "debit"))
+            s = {"in": in_total, "out": out_total, "saldo": in_total - out_total, "entries": len(ents)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "kasboek_overzicht",
+                "message": f"Kasboek niet beschikbaar: {ex}"}
+    lines = [
+        "💼 **Kasboek overzicht:**",
+        "",
+        f"  📥 Inkomsten: €{s.get('in', 0):.2f}",
+        f"  📤 Uitgaven: €{s.get('out', 0):.2f}",
+        f"  💰 Saldo: €{s.get('saldo', 0):.2f}",
+        f"  📋 Boekingen: {s.get('entries', 0)}",
+    ]
+    return {"type": "capability_response", "capability_id": "kasboek_overzicht",
+            "message": "\n".join(lines)}
+
+
+def _handle_agenda_vandaag(user_id):
+    """Vandaag's afspraken voor user."""
+    if not user_id:
+        return {"type": "capability_response", "capability_id": "agenda_vandaag",
+                "message": "Ik moet weten wie je bent voor je agenda."}
+    try:
+        from pathlib import Path
+        from modules.core.storage import load_json
+        from datetime import datetime, timezone
+        fp = Path(f"/app/backend/data/agenda/{user_id}.json")
+        if not fp.exists():
+            return {"type": "capability_response", "capability_id": "agenda_vandaag",
+                    "message": "📅 Je agenda is nog leeg vandaag."}
+        d = load_json(fp, default={"items": []})
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        items = [i for i in d.get("items", []) if (i.get("datum") or "").startswith(today)]
+        if not items:
+            return {"type": "capability_response", "capability_id": "agenda_vandaag",
+                    "message": "📅 Geen afspraken vandaag."}
+        lines = [f"📅 **Vandaag ({today}):**", ""]
+        for i in items[:10]:
+            t = i.get("tijd") or ""
+            titel = i.get("titel") or i.get("event") or "(geen titel)"
+            lines.append(f"  · {t} — {titel}")
+        return {"type": "capability_response", "capability_id": "agenda_vandaag",
+                "message": "\n".join(lines)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "agenda_vandaag",
+                "message": f"Kon agenda niet lezen: {ex}"}
+
+
+def _handle_kennis_inbox_status(user_id):
+    """Hoeveel kaarten wachten in KB v2 inbox."""
+    try:
+        from modules.kb_v2 import service as kbv2
+        stats = kbv2.get_stats()
+        inbox = stats.get("inbox_count", 0)
+        by_lade = stats.get("by_lade", {})
+        lines = [
+            "📥 **Kennis-inbox status:**",
+            "",
+            f"  🌟 Wachtend in inbox: **{inbox}** kaarten",
+            "",
+            "📚 Gevulde lades:",
+        ]
+        for lade, cnt in by_lade.items():
+            lines.append(f"  · {lade}: {cnt} kaarten")
+        return {"type": "capability_response", "capability_id": "kennis_inbox_status",
+                "message": "\n".join(lines)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "kennis_inbox_status",
+                "message": f"KB v2 status niet beschikbaar: {ex}"}
+
+
+def _handle_bots_status(user_id):
+    """Welke bots staan aan + hun laatste actie."""
+    try:
+        from pathlib import Path
+        from modules.core.storage import load_json
+        bots_fp = Path("/app/backend/data/bots/bots.json")
+        bots = load_json(bots_fp, default={"bots": []}).get("bots", [])
+        if not bots:
+            return {"type": "capability_response", "capability_id": "bots_status",
+                    "message": "Geen bots gevonden."}
+        lines = ["🤖 **Bots-status:**", ""]
+        for b in bots:
+            icon = "🟢" if b.get("active") else "⚪"
+            naam = b.get("naam") or b.get("id")
+            rol = b.get("rol") or ""
+            lines.append(f"  {icon} **{naam}** — {rol}")
+        return {"type": "capability_response", "capability_id": "bots_status",
+                "message": "\n".join(lines)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "bots_status",
+                "message": f"Bots-status niet beschikbaar: {ex}"}
+
+
+def _handle_audit_health(user_id):
+    """Systeem-gezondheid: weak-triggers + self-learning audit."""
+    try:
+        from modules.audit import weak_trigger_scan, self_learning_audit
+        wt = weak_trigger_scan()
+        sl = self_learning_audit()
+        total = wt.get("total_entries", 0)
+        weak = wt.get("weak_count", 0)
+        weak_pct = wt.get("weak_pct", 0)
+        sl_status = sl.get("status", "?")
+        warnings = sl.get("warnings", [])
+        lines = [
+            "🩺 **Systeem-audit / gezondheid:**",
+            "",
+            f"  🧠 KB-entries: **{total}**, waarvan {weak} zonder laag1 ({weak_pct}%)",
+            f"  📡 Shadow-learning: `{sl_status}`",
+        ]
+        if warnings:
+            lines.append("")
+            lines.append("⚠️ Waarschuwingen:")
+            for w in warnings[:3]:
+                lines.append(f"  · {w}")
+        return {"type": "capability_response", "capability_id": "audit_health",
+                "message": "\n".join(lines)}
+    except Exception as ex:
+        return {"type": "capability_error", "capability_id": "audit_health",
+                "message": f"Audit niet beschikbaar: {ex}"}
+
+
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
     "tellen_bestanden":          _handle_tellen_bestanden,
@@ -250,6 +413,13 @@ _HANDLERS = {
     "gesprek_lezen":             _handle_gesprek_lezen,
     "toon_afbeelding":           _handle_toon_afbeelding,
     "speel_geluid":              _handle_speel_geluid,
+    # v6_capabilities_handlers_002 (sessie 13) — 5 nieuwe handlers
+    "kasboek_overzicht":         _handle_kasboek_overzicht,
+    "agenda_vandaag":            _handle_agenda_vandaag,
+    "agenda_lezen":              _handle_agenda_vandaag,  # alias voor bestaande placeholder
+    "kennis_inbox_status":       _handle_kennis_inbox_status,
+    "bots_status":               _handle_bots_status,
+    "audit_health":              _handle_audit_health,
 }
 
 

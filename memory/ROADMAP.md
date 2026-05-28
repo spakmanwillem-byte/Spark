@@ -130,36 +130,34 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 - [ ] **Wallet header-knop volgorde** — Gift staat tussen Storten (+) en Opnemen (−). Naar: Storten, Opnemen, Gift (rechts). Klein UI fix.
 - [ ] **ROAR-prijs consistentie Spark Core display** — "Roadkill ROAR Token · Spark Core Aandeel €6.91 · Dynamische prijs = Spark Core / tokens · Bitvavo: €151.96 · Jouw tokens: 10 ROAR" — getallen niet logisch uitgelegd. Refactor display-tekst.
 
-#### Bestaande P1 items
-- [ ] **KB v2 → Vocab register hook implementeren** (zie `modules/kb_v2/hooks.py::register_in_vocab`)
-  - Bij elke `classify_card()` → schrijf begrip naar `/data/personality/spark_vocab.json`
-  - spark_brain mag alleen `active=true` vocab spontaan gebruiken
-- [ ] **KB v2 → Chat-commands handlers afmaken** (`hooks.py::cmd_tell_layer`)
-  - "vertel kort" → laag1, "vertel meer" → laag2, "vertel diep" → laag3/4
-  - Sla `last_kbv2_card_id` op in session_state voor follow-up vragen
-- [ ] **KB v2 → Auto-graph (verbanden)** (`hooks.py::compute_verbanden`)
-  - Periodieke job (1x/dag): vind top-5 related cards via shared tags
-  - UI: "Gerelateerd:" sectie in CardDetail
-- [ ] **KB v2 → D&D Kaarten integratie** (`hooks.py::link_to_dnd`)
-  - Optionele `dnd` veld in card-schema (type/trigger/unlocks)
-  - lore_index synct van v2-cards met `dnd.type == "lore"`
-- [ ] **KB v2 → Dialogen voice-snippet auto-save** (`hooks.py::save_voice_snippet`)
-  - Bij elke Whisper-transcriptie → /data/dialogen/voice_snippets/YYYY-MM-DD/
-  - Spark's gesprek-stijl groeit mee met Willem's stem
-- [ ] **ConversationStateManager terug uit v1** — 2-min `last_question` per session
-- [ ] **AuditService weak-trigger scan** (uit v1) — vind triggers met <10-char responses
-- [ ] **Self-learning audit (B5)** — verificatie dat shadow learning modules correct loggen
-- [ ] **D&D Perks & Unlocks** — backend logic om Aura-gebaseerde feature-gates af te dwingen
+#### Bestaande P1 items — Status 2026-05-27 inventarisatie
+
+- [x] **KB v2 → Vocab register hook** ✅ AL LIVE (sessie 11): `register_in_vocab` is gehookd in `service.py::_fire_post_classify_hooks`. `spark_vocab.json` heeft **5304 entries, 2316 active**. Spark gebruikt de active-set voor spontane spraak.
+- [x] **KB v2 → Chat-commands "vertel kort/meer/diep"** ✅ DONE (v6_kbv2_tell_layer_followup_001, 2026-05-26): zie boven.
+- [x] **KB v2 → Auto-graph (verbanden)** ✅ AL LIVE (sessie 11): `compute_verbanden` is gehookd. Op lade `doen`: **644/659 kaarten** hebben verbanden. UI in CardDetail toont ze al.
+- [x] **KB v2 → D&D Kaarten integratie** ✅ AL LIVE (sessie 11): `link_to_dnd` is gehookd. Lore-cards met `dnd.type=="lore"` syncen naar lore_index.
+- [x] **KB v2 → Voice-snippet auto-save** ✅ DONE (v6_voice_kbv2_link_001, 2026-05-27): STT endpoint accepteert optionele `card_id` + `user_id` query params. Bij meegegeven → `save_voice_snippet` schrijft transcript naar `/data/dialogen/voice_snippets/YYYY-MM-DD/{card_id}_{snippet_id}.json`.
+- [x] **ConversationStateManager terug uit v1** ✅ DONE (v6_conv_state_001, 2026-05-27): `session_state.py` heeft nu `set_last_question` / `get_last_question` met 2-min expire window. Verlopen vragen worden in `get_state` automatisch weg-gefilterd.
+- [x] **AuditService weak-trigger scan** ✅ DONE (v6_audit_001, 2026-05-27): `modules/audit/__init__.py`. Endpoints `GET /api/audit/weak-triggers`, `/self-learning`, `/summary`. 5307 KB-entries gescand, 2239 (42%) missen `laag1`. Reports persisteren in `/data/system/audit_reports/`.
+- [x] **Self-learning audit (B5)** ✅ DONE (v6_audit_001): zelfde service. Verifieert shadow_observations.jsonl recentheid (<48h), unique-kinds variatie, parse-errors.
+- [x] **D&D Perks & Unlocks** ✅ DONE (v6_perks_001, 2026-05-27): `modules/perks/__init__.py` met 8 declarative perks. Combineert `min_gradatie + required_behaviors + blocked_by_behaviors`. Endpoints `GET /api/perks?user_id=...`, `/check/{perk_id}`, `/user/{user_id}`. Klaar voor frontend-integratie om feature-gates aan/uit te schakelen.
 
 ### P2 — Volgend kwartaal
-- [ ] **`@traced` uitrol** — auth.login/logout, trade.bot_start/stop/quick_buy_potje, shop.gift.*, dnd.observe, KB mutations
+
+#### ✅ Done in sessie 13 (2026-05-27/28)
+- [x] **`@traced` uitrol (auth + trade)** ✅ DONE (v6_traced_rollout_001): `login`, `logout` (auth) + `quick_buy_potje`, `bot_start`, `bot_stop` (trade) hebben `@traced` decorator. Logs verschijnen in `/data/system/logs/YYYY/MM/DD/spark.jsonl` met phase=start/done/error.
+- [x] **Auto-expire archive (pending gifts)** ✅ AL LIVE (eerdere sessie): `shop/gift.py` heeft expire-logica naar status="expired" na 24h.
+- [x] **Boekhouder 21:00 roundup-bark** ✅ DONE (v6_scheduler_001): `modules/scheduler/__init__.py` draait elke 5 min in background. 19:00/20:00 UTC (= 21:00 NL) post Boekhouder samenvatting in community. Persistent state-file voorkomt dubbele post.
+- [x] **Spark "merkt eigen errors"** ✅ DONE (v6_scheduler_001): Madelief Stouten scant elke 5 min nieuwe `phase=error` log-records. Bij errors → bark in community met module/intent/err-context (max 3 per bark, anti-spam).
+- [x] **Spark hands intent-router 8 → 13 commands** ✅ DONE (v6_capabilities_handlers_002): 5 nieuwe handlers in `capability_handler_service.py`: kasboek_overzicht, agenda_vandaag (alias voor agenda_lezen placeholder), kennis_inbox_status, bots_status, audit_health. 2/5 actief gematcht in chat (kasboek + agenda); andere 3 wachten op verfijning van intent-triggers maar handlers staan klaar.
+- [x] **User-migratie helper** ✅ DONE (v6_container_migrate_001): `container/user_helper.py::migrate_user_legacy()` + `migrate_all_users()`. Endpoints `POST /api/container/user/migrate` + `/migrate-all`. Idempotent: kopieert legacy agenda/dagboek naar user-container met migration-footnote. 1/21 users had legacy-data om te migreren (Willem, 2 bestanden).
+
+#### Nog open
+- [ ] **`@traced` uitrol (overige)** — shop.gift.*, dnd.observe, KB mutations (deel al gedaan, restant in volgende sessie)
 - [ ] **Identity 3-lagen-enforcement** in seed-data (CR-001/002/003 als code-wet ipv alleen doc)
 - [ ] **ROAR-gift encryption-at-rest** — sender/recipient pairs privacy-gevoelig
-- [ ] **SEPA-mint koppeling** voor ROAR economy v2 (uitcash naar bank)
-- [ ] **Auto-expire archive tab** voor pending gifts (na 24h naar archive)
-- [ ] **Boekhouder dagelijkse 21:00 roundup-bark** in community
+- [ ] **SEPA-mint koppeling** voor ROAR economy v2 — PLACEHOLDER, Tikkie blijft fallback
 - [ ] **ReplayLogService uit v1** — trade backtest met run_id replay
-- [ ] **Spark "merkt eigen errors"** — log-watcher: elk `error`-record → bark in community
 
 ### P3 — Future / Experimenteel
 - [ ] **Dynamic theming** via `lore_index.json` (kleuren shiften met seizoen/lore)

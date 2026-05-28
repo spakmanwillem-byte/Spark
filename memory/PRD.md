@@ -1236,3 +1236,41 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 - `backend/modules/kb_v2/hooks.py` (cmd_tell_layer + fallback_card_id + uitgebreide triggers)
 - `backend/modules/chat/routes.py` (state.last_kbv2_card_id doorgeven aan handler)
 - `/app/memory/blueprints/*.md` (78 nieuwe stubs)
+
+## 2026-05-27/28 — Sessie 13: Roadmap-batch (P1 finish + P2 quick wins + Sessie C)
+
+### P1 items afgemaakt
+- **v6_voice_kbv2_link_001**: STT-endpoint accepteert optionele `card_id` + `user_id`. Bij meegegeven → snippet opgeslagen via `save_voice_snippet` in `/data/dialogen/voice_snippets/YYYY-MM-DD/`.
+- **v6_conv_state_001**: `session_state.py` heeft `set_last_question` / `get_last_question` met 2-min expire window. Verlopen vragen worden in `get_state` auto-gefilterd.
+- **v6_audit_001**: `modules/audit/__init__.py`. Endpoints `/api/audit/weak-triggers`, `/self-learning`, `/summary`. 5307 KB-entries gescand, 2239 (42%) missen laag1. Reports in `/data/system/audit_reports/`.
+- **v6_perks_001**: `modules/perks/__init__.py` met 8 declarative perks. Combineert `min_gradatie + required_behaviors + blocked_by_behaviors`. Endpoints `/api/perks?user_id=...`, `/check/{perk_id}`, `/user/{user_id}`.
+
+### P2 quick wins
+- **v6_traced_rollout_001**: `@traced` op login/logout (auth) + quick_buy_potje/bot_start/bot_stop (trade).
+- **v6_scheduler_001**: Background asyncio-loop elke 5 min:
+  - 21:00 NL roundup-bark door Boekhouder in community
+  - Madelief scant nieuwe error-logs en barkt bij errors (max 3/bark)
+  - Persistent state-file `scheduler_state.json` voorkomt dubbele runs
+
+### Sessie C — Bonus
+- **v6_capabilities_handlers_002**: 5 nieuwe Spark-handen handlers (kasboek_overzicht, agenda_vandaag, kennis_inbox_status, bots_status, audit_health). 2/5 chat-matched, 3/5 wachten op intent-tuning.
+- **v6_container_migrate_001**: `container/user_helper.py::migrate_user_legacy()` + bulk `migrate_all_users()`. Endpoints `POST /api/container/user/migrate` + `/migrate-all`. Kopieert legacy agenda/dagboek met footnote. Idempotent.
+- **Help-per-gradatie**: bevestigd al volledig live uit eerdere sessie (32 commands, gradatie-gefilterd).
+
+### Skip / placeholder
+- **SEPA-mint**: placeholder gehouden — Tikkie-flow blijft fallback voor bank-uitcash (gebruikersbeslissing).
+- **Winkelstraat frontend**: backend volledig klaar (incl. shop-container hook); UI nog niet aangepakt — heeft route+design-keuzes nodig die in volgende sessie passen.
+
+### Files in sessie 13
+- `backend/modules/audit/__init__.py` (NIEUW)
+- `backend/modules/perks/__init__.py` (NIEUW)
+- `backend/modules/scheduler/__init__.py` (NIEUW)
+- `backend/modules/chat/session_state.py` (last_question + 2-min window)
+- `backend/modules/voice/__init__.py` (STT + card_id linking)
+- `backend/modules/auth/routes.py` (@traced login/logout)
+- `backend/modules/trade/routes.py` (@traced bot_start/stop/quick_buy)
+- `backend/modules/chat/capability_handler_service.py` (+5 handlers)
+- `backend/modules/container/user_helper.py` (+migrate functies)
+- `backend/modules/container/routes.py` (+migrate endpoints)
+- `backend/server.py` (audit + perks routers + scheduler startup)
+- `backend/data/system/command_registry.json` (+5 capabilities)

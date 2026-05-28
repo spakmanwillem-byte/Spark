@@ -3,7 +3,9 @@ User-container helpers (v6_container_001 — F4 user-eerste implementatie)
 ==========================================================================
 - get_user_dir(user_id)              : pad naar /data/users/{user_id}/ (maakt aan)
 - get_user_resource_path(uid, res)   : bv. notes.json, agenda.json, archive/foto/...
-- migrate_user_legacy(user_id)       : verzamelt bestaande user-data naar container
+- migrate_user_legacy(user_id)       : v6_container_migrate_001 — kopieer legacy user-data
+                                       (agenda, dagboek) naar nieuwe container-structuur
+                                       met legacy_origin-meta voor traceability.
 - anonymize_user_cross_refs(user_id) : vervangt user_id refs in shared JSONs door '_anon_<id>'
 
 Strategie: GEEN big-bang migratie. Endpoints blijven hun oude paden lezen/schrijven.
@@ -159,3 +161,80 @@ def anonymize_user_cross_refs(user_id: str) -> Dict[str, int]:
         cleaned["chat_prive_files_deleted"] = deleted
 
     return cleaned
+
+
+# ============================================================
+# v6_container_migrate_001 — Legacy → Container migratie
+# ============================================================
+def migrate_user_legacy(user_id: str) -> Dict[str, Any]:
+    """Kopieer bestaande user-data uit oude scattered paths naar nieuwe container.
+
+    Veilig: kopieert (geen move). Oude paden blijven werken. Container krijgt
+    `migration_origin` in meta zodat we later kunnen tellen wat al gemigreerd is.
+
+    Returns dict met counts per resource.
+    """
+    base = get_user_dir(user_id)  # ensure container bestaat
+    result: Dict[str, Any] = {"user_id": user_id, "copied": {}, "skipped": []}
+
+    legacy_paths = {
+        "agenda.json":  DATA / "agenda" / f"{user_id}.json",
+        "dagboek.json": DATA / "dagboek" / f"{user_id}.json",
+        # Wallet/notes/tasks zijn arrays in shared JSONs — niet 1-op-1 kopieerbaar.
+        # Voor die data is filter+slice nodig (toekomstige fase).
+    }
+
+    for target_name, src in legacy_paths.items():
+        dst = base / target_name
+        if not src.exists():
+            result["skipped"].append({"src": str(src), "reason": "geen-legacy-data"})
+            continue
+        if dst.exists():
+            result["skipped"].append({"src": str(src), "reason": "container-heeft-al"})
+            continue
+        try:
+            data = load_json(src, default={})
+            # Voeg footnote toe
+            if isinstance(data, dict):
+                data.setdefault("_migration", {})
+                data["_migration"]["from"] = str(src)
+                data["_migration"]["migrated_at"] = (datetime.now(timezone.utc).isoformat())
+            save_json(dst, data)
+            result["copied"][target_name] = str(dst)
+        except Exception as ex:
+            result["skipped"].append({"src": str(src), "reason": f"error: {ex}"})
+
+    # Markeer container als gemigreerd
+    try:
+        from .service import update_meta
+        from modules.synapse.schema import CONTAINER_USER
+        update_meta(CONTAINER_USER, user_id, {
+            "tags": ["legacy_migrated"],
+            "footnote": f"Legacy-migratie uitgevoerd op {datetime.now(timezone.utc).strftime('%Y-%m-%d')}. {len(result['copied'])} bestanden gekopieerd.",
+        })
+    except Exception:
+        pass
+
+    return result
+
+
+def migrate_all_users() -> Dict[str, Any]:
+    """Bulk-migratie voor alle users in /data/system/users.json."""
+    users_fp = DATA / "system" / "users.json"
+    users = load_json(users_fp, default={"users": []}).get("users", [])
+    overall = {"total_users": len(users), "migrated": 0, "skipped": 0, "per_user": []}
+    for u in users:
+        uid = u.get("id")
+        if not uid:
+            continue
+        r = migrate_user_legacy(uid)
+        if r.get("copied"):
+            overall["migrated"] += 1
+        else:
+            overall["skipped"] += 1
+        overall["per_user"].append({"user_id": uid, "copied_count": len(r.get("copied", {}))})
+    return overall
+
+
+# Datetime import voor de migrate_user_legacy hierboven
+from datetime import datetime, timezone  # noqa: E402

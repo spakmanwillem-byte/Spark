@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from .service import AuthService
 from .models import LoginRequest, LoginResponse, SessionStatus, UserCreate
 from modules.core.storage import load_json, save_json
+from modules.core.spark_logger import traced
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -16,6 +17,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 # ============== LOGIN / LOGOUT ==============
 
 @router.post("/login", response_model=LoginResponse)
+@traced(intent="user inlog verifieren", module="auth", log_args=False)
 async def login(request: LoginRequest):
     """
     Login with naam + sleutelwoord
@@ -70,6 +72,7 @@ async def login(request: LoginRequest):
 
 
 @router.post("/logout")
+@traced(intent="user uitloggen + sessie eindigen", module="auth")
 async def logout(user_id: str):
     """
     Logout user (clear session state om stale pending_* flows te voorkomen).

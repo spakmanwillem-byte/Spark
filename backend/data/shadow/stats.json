@@ -1,14 +1,14 @@
 {
   "totals": {
-    "events": 600,
+    "events": 613,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 191
+    "knowledge_matches": 197
   },
   "triggers_used": {
-    "wedervraag_done": 21,
-    "wedervraag": 28,
+    "wedervraag_done": 22,
+    "wedervraag": 29,
     "wedervraag_skip": 16,
     "agenda_overview": 5,
     "make_note": 2,
@@ -74,24 +74,25 @@
     "kbv2_list_inbox": 1,
     "kbv2_learn_word": 1,
     "kbv2_make_dnd": 1,
-    "capability_response": 12,
-    "capability_placeholder": 3,
+    "capability_response": 16,
+    "capability_placeholder": 5,
     "kbv2_tell_short": 5,
     "kbv2_tell_deep": 4,
     "kbv2_tell_more": 4,
     "kbv2_tell_full": 2,
     "navigate_tab": 21,
     "synapse_overview": 1,
-    "synapse_status": 2,
+    "synapse_status": 3,
     "synapse_where": 1,
     "synapse_what": 3,
-    "synapse_list": 1
+    "synapse_list": 1,
+    "capability_error": 1
   },
   "response_types": {
-    "knowledge": 109,
+    "knowledge": 112,
     "unknown": 21,
-    "wedervraag_done": 21,
-    "wedervraag": 28,
+    "wedervraag_done": 22,
+    "wedervraag": 29,
     "wedervraag_skip": 16,
     "agenda_overview": 5,
     "note_created": 2,
@@ -161,19 +162,20 @@
     "kbv2_cmd_inbox": 1,
     "kbv2_cmd_learned": 1,
     "card_made_dnd": 1,
-    "capability_response": 12,
-    "capability_placeholder": 3,
+    "capability_response": 16,
+    "capability_placeholder": 5,
     "kbv2_tell_kort": 5,
     "kbv2_tell_diep": 3,
     "kbv2_tell_meer": 2,
     "kbv2_tell_volledig": 2,
     "navigate_tab": 21,
     "synapse_overview": 1,
-    "synapse_status": 2,
+    "synapse_status": 3,
     "synapse_where": 1,
     "synapse_what": 3,
     "synapse_list": 1,
-    "kbv2_cmd_empty": 3
+    "kbv2_cmd_empty": 3,
+    "capability_error": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -297,12 +299,18 @@
     "laat": 1,
     "traden": 1,
     "zien": 1,
-    "notities": 1
+    "notities": 1,
+    "gezond": 1,
+    "Kennis": 1,
+    "status": 1,
+    "auditing": 1,
+    "Gezondheid": 1,
+    "check": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-26T16:19:53.525055+00:00",
+  "last_event_at": "2026-05-28T12:42:50.586559+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

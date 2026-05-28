@@ -267,6 +267,14 @@ app.include_router(synapse_router, prefix="/api")
 from modules.container.routes import router as container_router
 app.include_router(container_router, prefix="/api")
 
+# v6_audit_001 — Audit-service (weak-triggers + self-learning verificatie)
+from modules.audit import router as audit_router
+app.include_router(audit_router, prefix="/api")
+
+# v6_perks_001 — D&D Perks aura-gebaseerde feature-gates
+from modules.perks import router as perks_router
+app.include_router(perks_router, prefix="/api")
+
 # Module 28: Card Factory (v5_card_factory_001 — DnD/Event/Bark generieke kaarten)
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")
@@ -377,6 +385,13 @@ async def startup():
         print("   🚀 Trade monitor resume scheduled (non-blocking)")
     except Exception as e:
         print(f"   ⚠️  Could not schedule monitor resume: {e}")
+    # v6_scheduler_001 — Boekhouder 21:00 bark + Madelief error-watcher
+    try:
+        from modules.scheduler import start_scheduler_in_background
+        start_scheduler_in_background()
+        print("   🕰️  v6_scheduler_001 scheduler-loop gestart (5min interval)")
+    except Exception as e:
+        print(f"   ⚠️  Scheduler kon niet starten: {e}")
     print("=" * 50)
     # v5_spark_logger_001 — opschonen oude logs (> 28 dagen)
     try:

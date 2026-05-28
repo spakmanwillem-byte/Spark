@@ -22911,11 +22911,401 @@
         "session_id": "default",
         "gesprek_nummer": 881
       }
+    },
+    {
+      "id": "conv-769a8edb",
+      "timestamp": "2026-05-28T12:41:21.097793+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "laat het kasboek zien",
+      "spark_response": "Kasboek niet beschikbaar: cannot import name 'service' from 'modules.accounting' (/app/backend/modules/accounting/__init__.py)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "laat",
+            "zien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_error",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_error"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 882
+      }
+    },
+    {
+      "id": "conv-1e28ddb7",
+      "timestamp": "2026-05-28T12:41:21.248558+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat vandaag op mijn agenda",
+      "spark_response": "🤖 Ik kan **Agenda raadplegen** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 883
+      }
+    },
+    {
+      "id": "conv-e95c2ee7",
+      "timestamp": "2026-05-28T12:41:21.407638+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel kaarten in de inbox",
+      "spark_response": "📦 In het systeem-archief: **60 bestanden** (54.7 MB).\n_Verdeling: foto: 47, geluiden: 13_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 884
+      }
+    },
+    {
+      "id": "conv-88cfdfde",
+      "timestamp": "2026-05-28T12:41:21.558508+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is de status van de bots",
+      "spark_response": "🤔 Ik vind geen module met de naam **de bots** in mijn synapslaag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "status"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "synapse_status",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "synapse_status"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 885
+      }
+    },
+    {
+      "id": "conv-96fe33a5",
+      "timestamp": "2026-05-28T12:41:21.756370+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "doe een gezondheidscheck",
+      "spark_response": "Ik ken 'gezond' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gezond"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 886
+      }
+    },
+    {
+      "id": "conv-0a7e7745",
+      "timestamp": "2026-05-28T12:42:15.950316+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "kasboek overzicht",
+      "spark_response": "💼 **Kasboek overzicht:**\n\n  📥 Inkomsten: €0.00\n  📤 Uitgaven: €0.00\n  💰 Saldo: €0.00\n  📋 Boekingen: 0",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 887
+      }
+    },
+    {
+      "id": "conv-7b74a298",
+      "timestamp": "2026-05-28T12:42:16.174471+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "agenda vandaag",
+      "spark_response": "🤖 Ik kan **Agenda raadplegen** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 888
+      }
+    },
+    {
+      "id": "conv-23ffa515",
+      "timestamp": "2026-05-28T12:42:18.034268+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "kennis inbox status",
+      "spark_response": "**Kennis**: Kennis is informatie en begrip dat iemand heeft geleerd of ervaren.\n\n**status**: Status geeft de huidige toestand, positie of situatie van iets of iemand aan.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **inbox** (opgeslagen als kaarten)\n\nWat houdt 'inbox' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "status"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Kennis"
+          },
+          {
+            "begrip": "status"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "inbox"
+        ],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 889
+      }
+    },
+    {
+      "id": "conv-182c5abf",
+      "timestamp": "2026-05-28T12:42:18.397494+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "bots online",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'inbox'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 890
+      }
+    },
+    {
+      "id": "conv-a322a68a",
+      "timestamp": "2026-05-28T12:42:18.752179+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 891
+      }
+    },
+    {
+      "id": "conv-5afa7be8",
+      "timestamp": "2026-05-28T12:42:50.245511+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "kasboek overzicht",
+      "spark_response": "💼 **Kasboek overzicht:**\n\n  📥 Inkomsten: €0.00\n  📤 Uitgaven: €0.00\n  💰 Saldo: €0.00\n  📋 Boekingen: 0",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 892
+      }
+    },
+    {
+      "id": "conv-212bc499",
+      "timestamp": "2026-05-28T12:42:50.400615+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "agenda vandaag",
+      "spark_response": "📅 Geen afspraken vandaag. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 893
+      }
+    },
+    {
+      "id": "conv-460d3760",
+      "timestamp": "2026-05-28T12:42:50.564560+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid check",
+      "spark_response": "Ik ken 'auditing' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "auditing"
+          },
+          {
+            "begrip": "Gezondheid"
+          },
+          {
+            "begrip": "check"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 894
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 881,
-    "last_updated": "2026-05-26T16:19:53.501873+00:00"
+    "total_conversations": 894,
+    "last_updated": "2026-05-28T12:42:50.564560+00:00"
   }
 }

@@ -7,6 +7,7 @@ from typing import Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
+from modules.core.spark_logger import traced
 from .monitor import (
     get_monitor, fetch_candles, fetch_tickers,
     execute_mock_trade, execute_real_trade, WATCHLIST_COINS,
@@ -385,6 +386,7 @@ class QuickBuyPotjeRequest(BaseModel):
 
 
 @router.post("/quick-buy-potje/{user_id}")
+@traced(intent="quick-buy: pak eerste vrije potje + start monitor", module="trade")
 async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     """
     Spark-assisted buy: pakt eerste vrije potje, voert buy uit, start monitor in potjes-mode.
@@ -586,6 +588,7 @@ async def update_bot_auto_trade(user_id: str, body: UpdateAutoTradeBody):
 # v4_per_user_bot_001 — Per-user bot endpoints
 # ============================================================
 @router.post("/bot/start/{user_id}")
+@traced(intent="trade-bot starten voor specifieke user", module="trade")
 async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest()):
     """Start trade-bot voor specifieke user. Token-gate: user moet ≥ 1 token hebben.
     Spark (user-000) en admin (gradatie 1) zijn uitgezonderd van token-gate."""
@@ -614,6 +617,7 @@ async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest
 
 
 @router.post("/bot/stop/{user_id}")
+@traced(intent="trade-bot stoppen voor specifieke user", module="trade")
 async def bot_stop(user_id: str):
     from .monitor import get_user_monitor
     # v5_spark_stoppable_001 — Spark stop is weer toegestaan (bugs van v4_spark_unstoppable_001 zijn opgelost)

@@ -14,3 +14,11 @@
 {"ts": "2026-05-28T14:20:31.317857+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 2.21}
 {"ts": "2026-05-28T15:51:46.870221+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
 {"ts": "2026-05-28T15:51:46.886961+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 16.71}
+{"ts": "2026-05-28T15:58:00.789134+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-05-28T15:58:00.822517+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 19.3}
+{"ts": "2026-05-28T15:58:30.071140+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-05-28T15:58:30.121487+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 18.27}
+{"ts": "2026-05-28T16:01:42.803427+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-05-28T16:01:42.832051+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 27.71}
+{"ts": "2026-05-28T16:02:05.984792+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-05-28T16:02:06.015163+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 30.38}

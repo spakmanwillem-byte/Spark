@@ -153,6 +153,13 @@ log_event("module_naam", "event_naam", intent="...", detail={"key": "value"})
 - [x] **User-migratie helper** ✅ DONE (v6_container_migrate_001): `container/user_helper.py::migrate_user_legacy()` + `migrate_all_users()`. Endpoints `POST /api/container/user/migrate` + `/migrate-all`. Idempotent: kopieert legacy agenda/dagboek naar user-container met migration-footnote. 1/21 users had legacy-data om te migreren (Willem, 2 bestanden).
 
 #### Nog open
+- [x] **Trader sell-balance + SOL min-buy fix** ✅ DONE (v6_trade_minorder_001 + v6_trade_sell_balance_001, 2026-05-28):
+  - `monitor.py::get_market_min_quote(market)` — 1u-cache van Bitvavo `/v2/markets` minimums, met fallbacks (BTC/ETH/SOL/ADA = €5).
+  - **Buy pre-check**: bij `amount_eur < min_quote` → vriendelijke error met tip (geen crash meer op SOL).
+  - **Sell pre-check**: voor SELL fetch eerst actuele balance, clamp naar `min(requested, actual) * 0.999` om dust-rounding te vermijden. Bij 0 balance → duidelijke error met base_asset.
+  - Errors hebben nu `error_code` (`MIN_QUOTE`, `NO_BALANCE`, `ZERO_AFTER_CLAMP`, `BITVAVO_HTTP_ERROR`, `EXCEPTION`) voor frontend-handling.
+  - Trade-record bevat extra `requested_amount` + `effective_amount` voor traceability.
+  - Unit-test in preview bevestigt min-quote fallback werkt (Bitvavo timeout in preview is normaal).
 - [ ] **`@traced` uitrol (overige)** — shop.gift.*, dnd.observe, KB mutations (deel al gedaan, restant in volgende sessie)
 - [ ] **Identity 3-lagen-enforcement** in seed-data (CR-001/002/003 als code-wet ipv alleen doc)
 - [ ] **ROAR-gift encryption-at-rest** — sender/recipient pairs privacy-gevoelig

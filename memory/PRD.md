@@ -1274,3 +1274,23 @@ Werkt met onderwerp ("vertel meer over identiteit") en zonder ("vertel meer" —
 - `backend/modules/container/routes.py` (+migrate endpoints)
 - `backend/server.py` (audit + perks routers + scheduler startup)
 - `backend/data/system/command_registry.json` (+5 capabilities)
+
+## 2026-05-28 — Trader Fix (na vraag van Willem)
+
+### v6_trade_minorder_001 — SOL min-buy crash fix
+- Probleem: Bitvavo eist `minimumOrderInQuoteAsset` per markt (SOL/BTC/ETH ≈ €5). Bij €1-2 trades → cryptische error.
+- Fix: `get_market_min_quote(market)` met 1u cache van `/v2/markets`. Pre-check bij BUY → friendly error met tip.
+- Fallback-tabel voor offline cache: BTC/ETH/SOL/ADA/XRP/BCH = €5.
+
+### v6_trade_sell_balance_001 — Sell balance mismatch fix
+- Probleem: potje toonde X tokens, maar Bitvavo had iets minder door rounding/fees → sell crashte op "insufficient balance".
+- Fix: voor SELL fetch eerst actuele Bitvavo balance via `fetch_bitvavo_balance`. Clamp `min(requested, actual) * 0.999`.
+- Errors hebben nu `error_code`: `MIN_QUOTE`, `NO_BALANCE`, `ZERO_AFTER_CLAMP`, `BITVAVO_HTTP_ERROR`, `EXCEPTION`.
+- Trade-record bevat `requested_amount` + `effective_amount` voor traceability.
+
+### Test status
+- Preview: unit-test bevestigt min-quote fallback werkt (€1 SOL-buy → MIN_QUOTE error met tip).
+- Productie: testen na redeploy. Sell-balance pre-check vereist live Bitvavo credentials.
+
+### Files
+- `backend/modules/trade/monitor.py` (helper + buy/sell pre-checks + error-codes)

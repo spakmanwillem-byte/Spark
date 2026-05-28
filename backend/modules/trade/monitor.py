@@ -40,6 +40,46 @@ MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 _CANDLE_CACHE: Dict[str, Dict] = {}
 _INTERVAL_SECONDS = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400, "1d": 86400}
 
+# v6_trade_minorder_001: market-info cache (minimumOrderInQuoteAsset per markt).
+# Bitvavo /v2/markets endpoint geeft per markt: minimumOrderInBaseAsset + minimumOrderInQuoteAsset.
+# Geheugen-cache 1u; voorkomt SOL min-buy crashes door te lage amount_eur.
+_MARKETS_CACHE: Dict[str, Dict] = {"data": None, "ts": 0}
+_MARKETS_TTL = 3600
+# Bekende fallback-minimums (gebaseerd op Bitvavo public docs) bij offline / cache-miss.
+# Eenheid: EUR (minimumOrderInQuoteAsset).
+KNOWN_MIN_QUOTE_FALLBACK = {
+    "BTC-EUR": 5.0, "ETH-EUR": 5.0, "SOL-EUR": 5.0,
+    "BCH-EUR": 5.0, "ADA-EUR": 5.0, "XRP-EUR": 5.0,
+}
+
+
+def get_market_min_quote(market: str) -> float:
+    """v6_trade_minorder_001 — Returnt minimumOrderInQuoteAsset voor een markt.
+
+    1. Probeer cache. 2. Fetch /markets als verlopen. 3. Val terug op KNOWN_MIN_QUOTE_FALLBACK
+       of conservatieve 5.0 EUR.
+    """
+    now = time.time()
+    cached = _MARKETS_CACHE.get("data")
+    if not cached or (now - _MARKETS_CACHE.get("ts", 0)) > _MARKETS_TTL:
+        try:
+            resp = requests.get(f"{BITVAVO_URL}/markets", timeout=8)
+            if resp.status_code == 200:
+                arr = resp.json()
+                if isinstance(arr, list):
+                    cached = {m.get("market"): m for m in arr if m.get("market")}
+                    _MARKETS_CACHE["data"] = cached
+                    _MARKETS_CACHE["ts"] = now
+        except Exception as e:
+            logger.warning(f"markets fetch faalde: {e}")
+    if cached and market in cached:
+        info = cached[market]
+        try:
+            return float(info.get("minOrderInQuoteAsset") or info.get("minimumOrderInQuoteAsset") or KNOWN_MIN_QUOTE_FALLBACK.get(market, 5.0))
+        except Exception:
+            pass
+    return KNOWN_MIN_QUOTE_FALLBACK.get(market, 5.0)
+
 
 def _cache_ttl(interval: str) -> int:
     """Cache TTL = candle-interval (in seconden). Pas vernieuwen als nieuwe candle verwacht."""
@@ -183,7 +223,12 @@ def execute_mock_trade(user_id: str, market: str, side: str, amount_eur: float) 
 
 
 def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) -> Dict:
-    """Execute a real trade via Bitvavo authenticated API"""
+    """Execute a real trade via Bitvavo authenticated API.
+
+    v6_trade_minorder_001: pre-check minimumOrderInQuoteAsset bij BUY.
+    v6_trade_sell_balance_001: bij SELL eerst actuele balance ophalen en clamp om
+      ‘insufficient balance’/dust-rounding fouten te voorkomen.
+    """
     settings_file = SETTINGS_DIR / user_id / "settings.json"
     settings = load_json(settings_file, default={})
     bitvavo = settings.get("integrations", {}).get("bitvavo", {})
@@ -193,19 +238,76 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
     if not api_key or not api_secret:
         return {"success": False, "error": "Geen Bitvavo API credentials gevonden"}
 
+    side_l = side.lower()
+
+    # v6_trade_minorder_001 — BUY min-order check
+    if side_l == "buy":
+        try:
+            min_quote = get_market_min_quote(market)
+            if amount_eur < min_quote:
+                return {
+                    "success": False,
+                    "error": f"Te laag bedrag voor {market}: €{amount_eur:.2f} < minimum €{min_quote:.2f} (Bitvavo). Tip: kies een potje met meer kapitaal of een lagere min-coin (BTC/ETH werken vanaf €5).",
+                    "error_code": "MIN_QUOTE",
+                    "market": market,
+                    "min_quote": min_quote,
+                    "requested_amount": amount_eur,
+                }
+        except Exception as e:
+            logger.warning(f"min-order check faalde voor {market}: {e}")
+
+    # v6_trade_sell_balance_001 — SELL balance pre-check
+    final_amount = amount_eur
+    if side_l == "sell":
+        try:
+            base_asset = market.split("-")[0]  # bv. SOL-EUR → SOL
+            bal_resp = fetch_bitvavo_balance(user_id)
+            balances = (bal_resp or {}).get("balances") or []
+            actual_avail = 0.0
+            for b in balances:
+                if str(b.get("symbol")) == base_asset:
+                    try:
+                        actual_avail = float(b.get("available") or 0)
+                    except Exception:
+                        actual_avail = 0.0
+                    break
+            if actual_avail <= 0:
+                return {
+                    "success": False,
+                    "error": f"Geen {base_asset} balance op Bitvavo om te verkopen. Mogelijk al verkocht of niet binnengekomen.",
+                    "error_code": "NO_BALANCE",
+                    "market": market,
+                    "base_asset": base_asset,
+                    "actual_balance": actual_avail,
+                }
+            # Clamp naar min(requested, actual) * 0.999 om dust-rounding te vermijden
+            clamped = min(amount_eur, actual_avail) * 0.999
+            # Round naar 8 decimals (Bitvavo standaard)
+            final_amount = round(clamped, 8)
+            if final_amount <= 0:
+                return {
+                    "success": False,
+                    "error": f"Effectief sell-amount is 0 na clamp ({base_asset}: gevraagd {amount_eur}, actueel {actual_avail}).",
+                    "error_code": "ZERO_AFTER_CLAMP",
+                }
+            logger.info(f"[sell] {market}: gevraagd {amount_eur} → clamped {final_amount} (api_balance={actual_avail})")
+        except Exception as e:
+            logger.warning(f"balance pre-check faalde voor {market}: {e} — val terug op gevraagd bedrag")
+            final_amount = amount_eur
+
     try:
         timestamp = int(time.time() * 1000)
         body = {
             "market": market,
-            "side": side.lower(),
+            "side": side_l,
             "orderType": "market",
             # v4_trade_operator_id_001: Bitvavo verplicht sinds 2025 operatorId (int) bij order endpoints (errorCode 203)
             "operatorId": int(bitvavo.get("operator_id") or 1001),
         }
-        if side.lower() == "buy":
-            body["amountQuote"] = str(round(amount_eur, 8))
+        if side_l == "buy":
+            body["amountQuote"] = str(round(final_amount, 8))
         else:
-            body["amount"] = str(round(amount_eur, 8))
+            body["amount"] = str(final_amount)
 
         # CRITICAL: signature moet over EXACT dezelfde body string als verzonden.
         # We sturen `data=body_str` om dubbele serialisatie te voorkomen.
@@ -239,7 +341,7 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
                 "action": side.upper(),
                 "market": market,
                 "order_id": trade_id,
-                "amount": filled_quote if side.lower() == "buy" else filled,
+                "amount": filled_quote if side_l == "buy" else filled,
                 "price": avg_price,
                 "filled": filled,
                 "status": result.get("status", "filled"),
@@ -248,6 +350,9 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
                 "error": None,
                 "fee": fee_paid,
                 "fee_currency": fee_currency,
+                # v6_trade_sell_balance_001 — traceability
+                "requested_amount": amount_eur,
+                "effective_amount": final_amount,
             }
 
             history_file = DATA_DIR / "wallet" / "trade_history" / f"{user_id}.json"
@@ -257,9 +362,19 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
 
             return {"success": True, "trade": trade, "message": f"LIVE {side.upper()} uitgevoerd @ €{avg_price:.2f} (fee €{fee_paid:.4f})"}
         else:
-            return {"success": False, "error": f"Bitvavo API error: {resp.status_code} - {resp.text}"}
+            # Detail-error voor debugging
+            err_body = resp.text
+            return {
+                "success": False,
+                "error": f"Bitvavo API error: {resp.status_code} - {err_body}",
+                "error_code": "BITVAVO_HTTP_ERROR",
+                "http_status": resp.status_code,
+                "requested_amount": amount_eur,
+                "effective_amount": final_amount,
+            }
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        return {"success": False, "error": str(e), "error_code": "EXCEPTION",
+                "requested_amount": amount_eur, "effective_amount": final_amount}
 
 
 def _bitvavo_signed_get(api_key: str, api_secret: str, endpoint: str, params: str = "") -> Dict:

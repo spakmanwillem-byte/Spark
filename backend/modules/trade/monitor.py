@@ -269,6 +269,32 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
         except Exception as e:
             logger.warning(f"min-order check faalde voor {market}: {e}")
 
+        # v6_buy_balance_check_001 (28 mei) — EUR-saldo check vóór BUY
+        try:
+            bal_resp = fetch_bitvavo_balance(user_id)
+            balances = (bal_resp or {}).get("balances") or []
+            eur_avail = 0.0
+            for b in balances:
+                if str(b.get("symbol")) == "EUR":
+                    try:
+                        eur_avail = float(b.get("available") or 0)
+                    except Exception:
+                        eur_avail = 0.0
+                    break
+            if eur_avail < amount_eur:
+                logger.warning(f"[buy] geen saldo: €{eur_avail:.2f} < gevraagd €{amount_eur:.2f}")
+                return {
+                    "success": False,
+                    "error": f"Geen saldo — aankoop niet gelukt. EUR beschikbaar: €{eur_avail:.2f}, gevraagd: €{amount_eur:.2f} voor {market}.",
+                    "error_code": "INSUFFICIENT_EUR_BALANCE",
+                    "market": market,
+                    "eur_available": round(eur_avail, 2),
+                    "requested_amount": amount_eur,
+                    "tip": "Stort EUR op Bitvavo of wacht tot deposit-watcher een storting detecteert.",
+                }
+        except Exception as e:
+            logger.warning(f"EUR-balance check faalde voor {market}: {e} — door met buy")
+
     # v6_trade_sell_balance_001 — SELL balance pre-check
     final_amount = amount_eur
     if side_l == "sell":

@@ -263,6 +263,10 @@ app.include_router(glow_router, prefix="/api")
 from modules.dashboard import router as dashboard_fin_router
 app.include_router(dashboard_fin_router, prefix="/api")
 
+# v6_deposit_watcher_001 — Auto-detect storting via Bitvavo EUR-balance
+from modules.spark_kasboek.deposit_watcher import router as deposit_watcher_router
+app.include_router(deposit_watcher_router, prefix="/api")
+
 # v6_synapse_001 — Spark's synapslaag (zelf-lezende meta op alle mappen)
 from modules.synapse.routes import router as synapse_router
 app.include_router(synapse_router, prefix="/api")

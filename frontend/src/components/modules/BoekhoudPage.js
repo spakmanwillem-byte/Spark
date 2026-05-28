@@ -16,6 +16,7 @@ export function BoekhoudPage({ onNavigate }) {
   const userId = user?.id || 'user-001';
   const [activeTab, setActiveTab] = useState('overzicht');
   const [kasboeken, setKasboeken] = useState([]);
+  const [reconcile, setReconcile] = useState(null);  // v6_commitments_001
   const [summary, setSummary] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState({ income: [], expense: [] });
@@ -47,14 +48,31 @@ export function BoekhoudPage({ onNavigate }) {
       isAdmin ? fetch(`${API}/api/accounting/summary`).then(r => r.json()).catch(() => ({})) : Promise.resolve(null),
       isAdmin ? fetch(`${API}/api/accounting/transactions`).then(r => r.json()).catch(() => ({ transactions: [] })) : Promise.resolve({ transactions: [] }),
       fetch(`${API}/api/accounting/categories`).then(r => r.json()).catch(() => ({ income: [], expense: [] })),
-    ]).then(([k, s, t, c]) => {
+      // v6_commitments_001 — Spark openstaande potje-commitments
+      isAdmin ? fetch(`${API}/api/spark/kasboek/reconcile`).then(r => r.json()).catch(() => null) : Promise.resolve(null),
+    ]).then(([k, s, t, c, rec]) => {
       setKasboeken(k.kasboeken || []);
       setSummary(s);
       setTransactions(t.transactions || []);
       setCategories(c);
+      setReconcile(rec);
       setLoading(false);
     });
   }, [userId, isAdmin]);
+
+  // v6_commitments_001 — re-check storting elke 5min als admin op deze pagina is
+  useEffect(() => {
+    if (!isAdmin) return;
+    const check = () => {
+      fetch(`${API}/api/spark/deposit-watcher/check?user_id=${userId}`)
+        .then(r => r.json())
+        .then(d => { if (d?.commitments) setReconcile(prev => ({ ...(prev || {}), commitments: d.commitments })); })
+        .catch(() => {});
+    };
+    check();
+    const t = setInterval(check, 5 * 60 * 1000);
+    return () => clearInterval(t);
+  }, [isAdmin, userId]);
 
   const addTransaction = async () => {
     if (!newTx.amount || !newTx.description.trim()) return;
@@ -217,6 +235,27 @@ export function BoekhoudPage({ onNavigate }) {
             {/* KASBOEKEN TAB */}
             {activeTab === 'overzicht' && (
               <>
+                {/* v6_commitments_001 — Rood-staan widget voor Spark openstaande potje-commitments */}
+                {isAdmin && reconcile?.commitments && reconcile.commitments.open_commitment_eur > 0 && (
+                  <div data-testid="commitment-rood-widget"
+                    className="p-4 rounded-xl border border-red-500/40 bg-gradient-to-r from-red-500/10 to-transparent">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[10px] text-red-300 uppercase tracking-wide">Spark openstaande verplichting</p>
+                        <p className="text-2xl font-bold text-red-400">−€{reconcile.commitments.open_commitment_eur.toFixed(2)}</p>
+                        <p className="text-[11px] text-slate-400 mt-1">{reconcile.commitments.note}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] text-slate-500">Gedekt:</p>
+                        <p className="text-sm text-emerald-400">€{reconcile.commitments.bitvavo_covered_eur?.toFixed(2)}</p>
+                        <p className="text-[10px] text-slate-500 mt-1">Totaal nodig:</p>
+                        <p className="text-sm text-amber-300">€{reconcile.commitments.spark_potjes_total_eur?.toFixed(2)}</p>
+                      </div>
+                    </div>
+                    <p className="text-[10px] text-red-200/70 mt-2 italic">Spark wordt automatisch bijgewerkt zodra een storting via Bitvavo wordt gedetecteerd (deposit-watcher checkt elke 5 min).</p>
+                  </div>
+                )}
+
                 {/* Totaal overzicht */}
                 {summary && (
                   <div className="grid grid-cols-3 gap-3">

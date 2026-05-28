@@ -110,6 +110,17 @@ def _build_reconcile_report():
     kb = load_json(KB_PATH, default={"entries": [], "totals": {}})
     w = load_json(WALLET_PATH, default={"wallets": {}})
 
+    # v6_commitments_001 (28 mei) — bereken Spark's openstaande potje-commitments
+    # 15 potjes × €10 = €150 totaal toegezegd capital
+    # 5 base bezet door Bitvavo (€50 al gedekt)
+    # 10 trade-slots = €100 te storten/aanvullen
+    pot_path = _P(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
+    potjes = load_json(pot_path, default={"users": {}})
+    spark_pots = potjes.get("users", {}).get("user-000", {}).get("potjes", [])
+    commitments_total = sum(float(p.get("capital", 0) or 0) for p in spark_pots)
+    bitvavo_covered = sum(float(p.get("capital", 0) or 0) for p in spark_pots if p.get("linked_bitvavo"))
+    open_commitment = round(commitments_total - bitvavo_covered, 2)
+
     # 1. Som inkomsten uit ROAR transactions (anchor_mint + buy_roar) — exclusief Spark zelf
     expected_in = 0.0
     tx_records = []
@@ -182,6 +193,14 @@ def _build_reconcile_report():
         "unbooked_out_transactions": unbooked_out,
         "out_transactions": out_records,
         "kasboek_totals": totals,
+        # v6_commitments_001
+        "commitments": {
+            "spark_potjes_total_eur": round(commitments_total, 2),
+            "bitvavo_covered_eur": round(bitvavo_covered, 2),
+            "open_commitment_eur": open_commitment,
+            "status": "rood" if open_commitment > 0 else "ok",
+            "note": f"Spark heeft {len(spark_pots)} potjes (€{commitments_total:.2f} totaal). €{bitvavo_covered:.2f} gedekt door Bitvavo. €{open_commitment:.2f} nog te storten.",
+        },
     }
 
 

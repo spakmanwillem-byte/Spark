@@ -276,16 +276,17 @@ Geordend per cluster. Veel haakt aan op fundering van v6_command_registry_001 (a
 ### Cluster A — KB curation & normalisatie
 - [ ] **#zip-mindgraph** — Zip-backup bevat ook mindgraph + andere afgeleide data. Bij restore meeladen ipv alleen kaarten.
 - [ ] **#kb-node-hierarchy** — Hoofd-node vs sub-tag hierarchie (bv. "emotie" = hoofd-node, "blij/boos" = sub-tags). Schema-uitbreiding op tags-array → tree.
-- [x] **#kb-tag-singular + #kb-verb-stem** ✅ FUNDERING DONE (v6_kb_tag_normalizer_001, 2026-05-28):
+- [x] **#kb-tag-singular + #kb-verb-stem** ✅ FUNDERING + MERGE-ENGINE DONE (v6_kb_tag_normalizer_001 + v6_kb_tag_merge_001, 2026-05-28):
   - `modules/kb_v2/tag_normalizer.py` met `normalize_tag()`, `normalize_tags()`, `tags_similar()`, `overlap_score()`. 20/20 unit-tests pass.
-  - Endpoints: `GET /api/kb/v2/tags/normalize?tag=...`, `POST /api/kb/v2/tags/normalize-batch`, `GET /api/kb/v2/tags/scan`, `GET /api/kb/v2/tags/similarity?a=...&b=...`.
-  - **Live scan resultaten** (18.041 tags / 3.422 stammen / 46 dedupe-kansen):
-    - `emotie/emoties` — 457 occurrences
-    - `systeem/systeemm` — 376 (typo!)
-    - `relatie/relaties` — 98
-    - `grondstof/grondstoffen` — 87
-    - `plan/plant` ⚠️ false-positive (verb-strip raakt "plant" noun) — TODO: lookup-exception
-  - **Open volgende sessie**: false-positive lookup-table, 1-klik dedupe-UI in #kb-curation-dash.
+  - Plant/plan false-positive opgelost via `_NOUN_T_EXCEPTIONS` (~50 NL nouns: plant, kant, kunst, boot, moet, voet, post, kist, etc.) — kan groeien per false-positive.
+  - **5 endpoints**: `GET /api/kb/v2/tags/normalize?tag=...`, `POST /tags/normalize-batch`, `GET /tags/scan?limit=...`, `GET /tags/similarity?a=...&b=...`, `POST /tags/merge` (admin-only).
+  - **Live scan resultaten** (na plant-fix): 18.041 tags / 3.423 stammen / **45 dedupe-kansen**:
+    - `emotie/emoties` — 457 occurrences (✅ gemergd via API, dedupe-kansen → 44)
+    - `systeem/systeemm` — 376 (typo, wacht op handmatige keuze)
+    - `relatie/relaties` — 98 · `grondstof/grondstoffen` — 87 · `dier/dieren` — 54
+    - `game/games` — 49 · `doel/doelen` — 30 · `werk/werkt` — 28 · `eigenschap/eigenschappen` — 27 · `speler/spelers` — 25
+  - **Merge-endpoint flow** (admin-only, gradatie ≤ 2): POST `/api/kb/v2/tags/merge` met `{stem, keep_variant, viewer_id}` → vervangt alle varianten met zelfde stam door `keep_variant` in alle 4 lades. Returnt `cards_touched + tags_replaced + per_lade`.
+  - **Open volgende sessie**: 1-klik UI in #kb-curation-dash bovenop `/tags/scan` data; auto-normalisatie bij `service.classify_card` (opt-in flag); uitbreiding exception-list bij meer false-positives.
 - [ ] **#kb-similarity** — Gelijkheid-engine met stam-herkenning. Voedt `compute_verbanden` en disambiguatie. Bouwt op tag_normalizer.
 - [ ] **#kb-curation-dash** — Curatie-dashboard: zie afwijkingen, los enkelvoud/synoniem-conflict op met 1 klik. Backend `/tags/scan` levert nu al de data; UI moet nog.
 - [ ] **#kb-ui-unified** — KB-invul UI volledig consistent maken (één layout overal — inbox / lade-detail / nieuwe-kaart / herzien). Reeds gedeeltelijk via `CardFormFields`.

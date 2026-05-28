@@ -26,6 +26,19 @@ _IRREGULAR_PLURAL = {
     "steden": "stad", "dagen": "dag", "wegen": "weg",
 }
 
+# Nouns die eindigen op "-t" achter consonant maar GEEN verb zijn.
+# Zonder deze list zou "plant" → "plan" worden (false positive).
+_NOUN_T_EXCEPTIONS = {
+    "plant", "kant", "punt", "front", "tent", "want", "ent",
+    "kunst", "lust", "rust", "wist", "kust", "vest", "best",
+    "feest", "geest", "geest", "leest", "moest", "vast",
+    "markt", "kracht", "vacht", "macht", "nacht", "wacht", "lucht",
+    "vlucht", "klucht", "drift", "lift", "gift", "schrift",
+    "groot", "noot", "boot", "voet", "moet", "stoet",
+    "post", "lijst", "kist", "vist", "twist",
+    "borst", "dorst", "vorst", "korst", "barst", "haast",
+}
+
 # Korte stopwoorden die we NIET normaliseren (zou stam < 3 maken)
 _KEEP_AS_IS = {"ik", "jij", "wij", "zij", "hij", "het", "een", "de", "en", "of",
                "in", "op", "om", "te", "ze", "is", "ai", "tv", "pc"}
@@ -68,6 +81,8 @@ def normalize_tag(tag: str) -> str:
         return t
     if t in _IRREGULAR_PLURAL:
         return _IRREGULAR_PLURAL[t]
+    if t in _NOUN_T_EXCEPTIONS:
+        return t
     # Probeer plural-strip eerst
     stem_p = _strip_suffix(t, _PLURAL_SUFFIX)
     if stem_p != t:

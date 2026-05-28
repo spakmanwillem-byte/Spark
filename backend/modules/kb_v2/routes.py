@@ -473,3 +473,83 @@ async def tag_similarity(a: str, b: str):
         "normalized_b": normalize_tags(list_b),
         "jaccard_score": round(overlap_score(list_a, list_b), 4),
     }
+
+
+class TagMergeBody(BaseModel):
+    stem: str  # canonieke stam waar we naar mergen
+    keep_variant: str  # welke variant we behouden (bv. "emotie", niet "emoties")
+    viewer_id: str  # admin gradatie ≤ 2 vereist
+
+
+@router.post("/tags/merge")
+async def tag_merge(body: TagMergeBody):
+    """Vervang ALLE varianten met dezelfde stam door `keep_variant` in alle KB v2 kaarten.
+
+    Voorbeeld: stem='emotie', keep_variant='emotie' → 'Emoties', 'emoties', 'EMOTIE' worden
+    allemaal 'emotie' in elke kaart-tags lijst.
+
+    Admin-only (gradatie ≤ 2). Geeft per lade aantal gemuteerde kaarten terug.
+    """
+    from pathlib import Path
+    from modules.core.storage import load_json, save_json
+
+    # Admin check
+    USERS = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+    users = load_json(USERS, default={"users": []})
+    ulist = users.get("users", []) if isinstance(users, dict) else users
+    viewer = next((u for u in ulist if u.get("id") == body.viewer_id), None)
+    if not viewer or int(viewer.get("gradatie", 7) or 7) > 2:
+        return {"success": False, "error": "Alleen admin (gradatie ≤ 2) mag tags mergen"}
+
+    target_stem = normalize_tag(body.stem)
+    keep = body.keep_variant.strip()
+    if not target_stem or not keep:
+        return {"success": False, "error": "stem en keep_variant mogen niet leeg zijn"}
+
+    lades = ["voelen", "spreken", "weten", "doen"]
+    stats = {lade: {"cards_touched": 0, "tags_replaced": 0} for lade in lades}
+
+    for lade in lades:
+        path = service._lade_path(lade)
+        d = load_json(path, default={"kaarten": []})
+        changed = False
+        for k in d.get("kaarten", []):
+            old_tags = k.get("tags") or []
+            if not old_tags:
+                continue
+            new_tags = []
+            seen = set()
+            card_changed = False
+            for t in old_tags:
+                if not isinstance(t, str):
+                    new_tags.append(t)
+                    continue
+                if normalize_tag(t) == target_stem and t != keep:
+                    if keep not in seen:
+                        new_tags.append(keep)
+                        seen.add(keep)
+                    stats[lade]["tags_replaced"] += 1
+                    card_changed = True
+                else:
+                    if t not in seen:
+                        new_tags.append(t)
+                        seen.add(t)
+            if card_changed:
+                k["tags"] = new_tags
+                stats[lade]["cards_touched"] += 1
+                changed = True
+        if changed:
+            save_json(path, d)
+
+    total_cards = sum(s["cards_touched"] for s in stats.values())
+    total_replaced = sum(s["tags_replaced"] for s in stats.values())
+    return {
+        "success": True,
+        "stem": target_stem,
+        "keep_variant": keep,
+        "cards_touched": total_cards,
+        "tags_replaced": total_replaced,
+        "per_lade": stats,
+        "by": body.viewer_id,
+    }
+

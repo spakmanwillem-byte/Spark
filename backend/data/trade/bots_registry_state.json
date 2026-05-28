@@ -16,22 +16,23 @@
       "trade_amount": 10.0,
       "use_mock": false,
       "use_potjes": true,
-      "pot_count": 5
+      "pot_count": 15
     },
     {
       "user_id": "user-a0ee2d7e",
-      "interval": 60,
+      "interval": 900,
       "market": "BCH-EUR",
       "markets": [
-        "BCH-EUR"
+        "BCH-EUR",
+        "ETH-EUR"
       ],
-      "candle_interval": "1h",
-      "auto_trade": false,
-      "trade_amount": 5.0,
+      "candle_interval": "15m",
+      "auto_trade": true,
+      "trade_amount": 10.0,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 2
     }
   ],
-  "saved_at": "2026-05-28T17:31:32.626925+00:00"
+  "saved_at": "2026-05-28T17:45:03.829143+00:00"
 }

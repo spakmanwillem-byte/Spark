@@ -17,9 +17,10 @@ POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user
 ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
 
 START_AMOUNT = 10.0  # v6_potje_size_10_001 — starters direct €10 (was €5.08)
-DEFAULT_POT_COUNT = 5  # v6_clean_slate_28mei — Spark: 5 base potjes van €10 = €50 (was 10)
-INITIAL_MAX = 50.0  # tier 1: 5 potjes à max €50 (5x growth)
-LOCKED_POT_INDEX = None  # v6_clean_slate_28mei — geen lock-anker; 5 potjes = 5 trade-posities
+DEFAULT_POT_COUNT = 5  # v6_clean_slate_28mei — 5 base potjes van €10 = €50 baseline
+SPARK_EXTRA_TRADE_SLOTS = 10  # v6_spark_15slots_001 (28 mei) — Spark krijgt 5 base + 10 trade-slots = 15 totaal
+INITIAL_MAX = 50.0  # tier 1: max €50 (5x growth)
+LOCKED_POT_INDEX = None  # v6_clean_slate_28mei — geen lock-anker; potjes = trade-posities
 BITVAVO_TAKER_FEE = 0.0025
 TOKEN_PRICE = 5.08  # vaste prijs per ROAR token (= 1 bonus token bij €5.08 winst)
 
@@ -122,12 +123,13 @@ def _load(user_id: str) -> Dict:
     # v5_potjes_repair_001 — als user fewer than 10 potjes heeft (tier 1), reparate door tot 10 aan te vullen
     # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
     # v6_pot1_staking_lock_001: zorg dat pot-001 (index 0) altijd `pot_locked=True` heeft
-    # v6_potje_per_token_001: alleen voor Spark; non-Spark users moeten via token-buy expanden
-    if is_spark and len(user.get("potjes", [])) < DEFAULT_POT_COUNT:
+    # v6_spark_15slots_001 — Spark krijgt 5 base + 10 trade-slots = 15 totaal
+    target_count = DEFAULT_POT_COUNT + SPARK_EXTRA_TRADE_SLOTS if is_spark else DEFAULT_POT_COUNT
+    if is_spark and len(user.get("potjes", [])) < target_count:
         existing = user["potjes"]
         next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
         now = datetime.now(timezone.utc).isoformat()
-        while len(existing) < DEFAULT_POT_COUNT:
+        while len(existing) < target_count:
             is_locked = (next_idx == LOCKED_POT_INDEX)
             existing.append({
                 "id": f"pot-{next_idx+1:03d}",

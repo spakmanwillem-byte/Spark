@@ -283,7 +283,8 @@ export function WalletPage({ onNavigate }) {
         </div>
 
         {/* v6_price_chart_001 — token-prijs grafiek bovenaan transactie-paneel (Spark view only) */}
-        {walletView === 'spark' && isAdmin && <TokenPriceChart />}
+        {/* v6_token_chart_all_users_001 (28 mei) — ROAR koersgrafiek zichtbaar voor ALLE users (was admin-only) */}
+        <TokenPriceChart />
 
         {/* Bottom Row: Transactions + Stats */}
         <div className="grid grid-cols-12 gap-4">

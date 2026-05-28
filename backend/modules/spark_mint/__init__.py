@@ -106,6 +106,42 @@ async def mint_from_wallet(payload: dict = Body(...)):
     })
     save_json(AUDIT_FILE, audit)
 
+    # v6_mint_creates_potje_001 (28 mei) — Spark krijgt extra trade-slot potje per mint
+    try:
+        from modules.trade.potjes import sync_potjes_to_tokens, _load as _potjes_load
+        # Spark heeft target_count = 5 + 10 = 15 (base + slots). Bij elke mint expanden we de slots-pool met n.
+        # Direct expand: voeg n nieuwe pots toe aan Spark's pool
+        data = _potjes_load("user-000")
+        spark_data = data["users"]["user-000"]
+        existing = spark_data.get("potjes", [])
+        next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
+        for _ in range(n):
+            existing.append({
+                "id": f"pot-{next_idx+1:03d}",
+                "index": next_idx,
+                "capital": 10.0,
+                "max_size": 50.0,
+                "pot_locked": False,
+                "lock_reason": None,
+                "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                             "trailing_active": False, "entry_time": None},
+                "market": "EUR",
+                "assigned_market": None,
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now,
+                "last_action": None,
+                "source": "spark_mint_bonus",
+                "slot_type": "trade_slot_from_mint",
+                "origin_tx": tx_id,
+            })
+            next_idx += 1
+        spark_data["potjes"] = existing
+        from modules.core.storage import save_json as _save
+        _save(Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json", data)
+        print(f"[mint] Spark kreeg {n} extra trade-slot potjes (totaal nu: {len(existing)})")
+    except Exception as ex:
+        print(f"[mint→potje] failed: {ex}")
+
     # 5. Boekhouder DM
     try:
         from modules.boekhouder import service as bh

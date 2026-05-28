@@ -67,7 +67,15 @@ const phases = [
       { title: '✅ Bidirectionele Command-Registry MVP — fundering donderdag', status: 'done', anchor: 'v6-cmd-registry', note: 'v6_command_registry_001 — 27 commands met intent_tags + gradatie_min + behavior_class_hint. Extract → match → top-N. Skill-discovery embryo (intent_log.jsonl + /candidates endpoint detecteert 3+ keer voorkomende patterns). Hooks in chat-flow. 6 endpoints. Donderdag UI + LLM-upgrade.' },
       { title: '✅ Kernwaarden cleanup (11 → 9): Groeien + Emoties weg, sync productie', status: 'done', anchor: 'v6-kw-cleanup' },
       { title: '✅ Shadow widget — pipeline draait mee in chat (zichtbaar in Spark Brain)', status: 'done', anchor: 'v6-shadow-widget', note: 'v6_shadow_widget_001 — Live activity-blok met stats + laatste 15 chat-runs.' },
+      // ==== Sessie 16 — 28 mei 2026 (Bots LIVE + TokenChart public) ====
+      { title: '✅ TokenPriceChart zichtbaar voor ALLE users (was admin-only)', status: 'done', anchor: 'v6-token-chart-public', note: 'WalletPage.js: walletView===spark && isAdmin gate verwijderd. Alle users zien ROAR koersgrafiek met 15m/1u/4u/1d intervals.' },
+      { title: '✅ Spark: 5 base potjes + 10 trade-slots = 15 totaal', status: 'done', anchor: 'v6-spark-15slots', note: 'SPARK_EXTRA_TRADE_SLOTS=10 in potjes.py. _load() expand naar 15 voor Spark. 5 base bezet door Bitvavo (SOL/ETH/BCH/BTC/ADA), 10 lege slots klaar voor signaal of mint.' },
+      { title: '✅ Mint-hook: Spark krijgt extra potje per mint', status: 'done', anchor: 'v6-mint-creates-potje', note: 'spark_mint/from-wallet voegt na succesvolle mint n nieuwe pots toe aan Spark pool met slot_type=trade_slot_from_mint + origin_tx.' },
+      { title: '✅ Bots LIVE op echte Bitvavo (Spark 60min, Gijs 15min)', status: 'done', anchor: 'v6-bots-live-bitvavo', note: 'Spark: 15 potjes, BCH/SOL/ETH/BTC/ADA, 60min cycle. Gijs: 2 potjes (BCH/ETH), 15min cycle. Beide use_mock=false. Lock-anker globaal verwijderd — alle potjes kunnen traden.' },
+
       // ==== Sessie 15 — 28 mei 2026 (Clean slate + Bitvavo live) ====
+
+
       { title: '✅ Clean slate boekhouding — alle entries gearchiveerd, 0-punt vastgezet', status: 'done', anchor: 'v6-clean-slate-28mei', note: 'Vorige stand (4 entries, totals gift_in=€71.60 / uit=€95.50 / open_leningen=€45) → backup in /data/_backups/clean_slate_28mei_*/. Nieuwe kasboek: alle totals=0, 3 baseline-anchors toegevoegd (Bitvavo €122.40, Spark base €50, ROAR-uitgegeven 22 tokens).' },
       { title: '✅ Bitvavo API WERKT vanaf preview — handoff was fout!', status: 'done', anchor: 'v6-bitvavo-confirmed', note: 'Public + private endpoints werken. Spark heeft €122.34 op Bitvavo (€72.40 EUR + 5 coin-posities van €10). Eerdere handoff zei dat Bitvavo-API in preview timed out — dat is NIET (meer) zo.' },
       { title: '✅ Bitvavo client module — get_balance_summary + place_order', status: 'done', anchor: 'v6-bitvavo-client', note: 'modules/trade/bitvavo_client.py met signed HMAC requests, 30s price-cache. Dashboard fin-widget toont nu LIVE Bitvavo data (Willem: €277.93 totaal vermogen).' },

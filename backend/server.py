@@ -259,6 +259,10 @@ app.include_router(help_router, prefix="/api")
 from modules.glow_nav.routes import router as glow_router
 app.include_router(glow_router, prefix="/api")
 
+# v6_dashboard_fin_001 — Saldo + Vermogen widget aggregator
+from modules.dashboard import router as dashboard_fin_router
+app.include_router(dashboard_fin_router, prefix="/api")
+
 # v6_synapse_001 — Spark's synapslaag (zelf-lezende meta op alle mappen)
 from modules.synapse.routes import router as synapse_router
 app.include_router(synapse_router, prefix="/api")

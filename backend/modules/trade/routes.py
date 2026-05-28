@@ -824,6 +824,12 @@ async def sync_all_potjes_to_tokens(viewer_id: str):
     return {"success": True, "synced_users": len(results), "results": results}
 
 
+@router.post("/potjes/{user_id}/{pot_id}/assign-market")
+async def assign_pot_market(user_id: str, pot_id: str, market: str):
+    """v6_one_bot_per_pot_001 — assign coin-market per pot (fase 1 van multi-bot)."""
+    return potjes_svc.assign_pot_market(user_id, pot_id, market)
+
+
 # v6_pot1_staking_lock_001 — toggle pot-lock (admin / Pot 1 wijzigen)
 class TogglePotLockBody(BaseModel):
     pot_id: str

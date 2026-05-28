@@ -261,6 +261,56 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[glow-nav] failed: {ex}")
 
+    # v6_profile_lookup_001 (28 mei) — VÓÓR capability-router zodat "wat is Willems achternaam"
+    # niet wordt opgevangen door generic capability_placeholder.
+    try:
+        from . import smart_intents_service as _si_pl
+        profile_out = _si_pl.detect_profile_lookup(text, viewer_id=req.user_id or "")
+        if profile_out:
+            response.update(profile_out)
+            _save_log(req, response, profile_out.get("type", "profile_lookup"))
+            return response
+    except Exception as ex:
+        print(f"[profile-lookup] failed: {ex}")
+
+    # v6_spark_relay_001 (28 mei) — Spark als bode tussen vrienden
+    try:
+        from . import relay_service
+        relay_out = relay_service.detect_relay(text, sender_id=req.user_id or "", sender_naam=req.user_naam or "")
+        if relay_out:
+            response.update(relay_out)
+            _save_log(req, response, relay_out.get("type", "relay"))
+            return response
+    except Exception as ex:
+        print(f"[relay] failed: {ex}")
+
+    # v6_verbal_deposit_001 (28 mei) — "ik stortte 50 euro" → Spark vraagt voor welke user
+    try:
+        # Eerst: zit user mid-flow (al amount-detect gedaan, wacht op naam)?
+        pending_dep = state.get("pending_deposit")
+        if pending_dep and req.user_id:
+            from . import verbal_deposit_service as vd
+            out = vd.confirm_deposit(
+                amount_eur=float(pending_dep.get("amount_eur", 0)),
+                target_naam=text.strip(),
+                actor_user_id=req.user_id,
+            )
+            session_state.set_state(req.user_id, pending_deposit=None)
+            response.update(out)
+            _save_log(req, response, out.get("type", "deposit"))
+            return response
+        # Anders: probeer detect
+        from . import verbal_deposit_service as vd
+        dep_out = vd.detect_verbal_deposit(text, user_id=req.user_id or "")
+        if dep_out:
+            if req.user_id:
+                session_state.set_state(req.user_id, pending_deposit={"amount_eur": dep_out["amount_eur"]})
+            response.update(dep_out)
+            _save_log(req, response, dep_out.get("type", "deposit_ask"))
+            return response
+    except Exception as ex:
+        print(f"[verbal-deposit] failed: {ex}")
+
     # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
     # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
     try:
@@ -1810,3 +1860,20 @@ async def chat_welcome(req: WelcomeRequest):
             pass
 
     return response
+
+
+
+# v6_spark_relay_001 (28 mei) — Inbox endpoints
+@router.get("/relay/inbox/{user_id}")
+async def get_relay_inbox(user_id: str, limit: int = 50):
+    from . import relay_service
+    msgs = relay_service.get_inbox(user_id, limit)
+    unread = sum(1 for m in msgs if not m.get("read"))
+    return {"success": True, "messages": msgs, "count": len(msgs), "unread": unread}
+
+
+@router.post("/relay/inbox/{user_id}/read/{message_id}")
+async def mark_relay_read(user_id: str, message_id: str):
+    from . import relay_service
+    ok = relay_service.mark_read(user_id, message_id)
+    return {"success": ok}

@@ -369,10 +369,10 @@ const phases = [
     items: [
       { title: '🤐 W-vraag systeem dempen — pas vragen ná afgesloten gesprek + max 1× per 4 interacties', status: 'done', anchor: 'ws5-quiet', note: '✅ v6_wedervraag_quiet_001 (28 mei) — wedervraag_service.looks_like_new_question() detecteert nieuwe vragen (start met wat/hoe/waarom of eindigt op ?). Als user typt "wat is liefde?" tijdens pending W-vraag → pending wordt gewist, niet als antwoord geboekt. WEDERVRAAG_INTERVAL_INTERACTIONS=4: max 1 W-vraag per 4 chat-beurten via interaction_count + last_wedervraag_at in session_state. Tests 7/7 passed.' },
       { title: '✋ "stop" als universeel safe-word', status: 'done', anchor: 'stop-safeword', note: '✅ v5_stop_safeword_001 — chat/routes.py regel 67: text.lower() in ("stop","/stop","pauze","wacht even") → wist pending wedervraag-state + track behavior + return type=safeword. Vóór elke andere processing. Werkt in chat, D&D, wedervraag.' },
-      { title: '🔍 Profiel-lookup via gewone vraag', status: 'planned', anchor: 'profile-nlp', note: '"wat is je achternaam?" → Spark leest uit context (over wie) + profiel. Geen /commando nodig' },
+      { title: '🔍 Profiel-lookup via gewone vraag', status: 'done', anchor: 'profile-nlp', note: '✅ v6_profile_lookup_001 (28 mei) — smart_intents_service.detect_profile_lookup vóór capability-router. Patronen: wie is X, wat is X achternaam, vertel over X, ken je X. Privacy: gradatie ≤ 2 publiek, anders moet recipient in vrienden-graaf van vrager.' },
       { title: '🕸️ Relatie-graph name resolution (alleen vrienden)', status: 'done', anchor: 'relation-graph', note: '✅ relation_extraction_service.py + per-user /data/persons/user-001_relationships.json. Perks-systeem activeert "1-op-1 met vrienden chatten" feature. Name resolution checkt vrienden-graaf vóór globale users.' },
-      { title: '📨 Spark als bode — relay-berichten met attributie', status: 'planned', anchor: 'spark-relay', note: '"Hé Spark, zeg tegen Heidi dat ik wacht" → Heidi krijgt prive: "Willem wilde dat ik dit zou zeggen: [...]" + 4-staps confirm flow (zien → lezen → reageren → reply terug)' },
-      { title: '📞 Antwoordapparaat-modus: agenda-aware auto-replies (WhatsApp/Signal/web)', status: 'planned', anchor: 'voicemail-agenda', note: 'Bij gekoppelde messaging-integratie: Spark gebruikt agenda voor "Willem is bij de tandarts". Excuus-lijst aanvinkbaar. Optioneel TTS oplezen van bot-berichten op verzoek user' },
+      { title: '📨 Spark als bode — relay-berichten met attributie', status: 'done', anchor: 'spark-relay', note: '✅ v6_spark_relay_001 (28 mei) — relay_service.detect_relay + per-user spark_inbox.json. Triggers: zeg tegen X dat..., vraag aan X of..., stuur X een bericht: .... Attributie auto in payload. API: GET /api/chat/relay/inbox/{user_id} + POST /read/{message_id}.' },
+      { title: '📞 Antwoordapparaat-modus: agenda-aware auto-replies (WhatsApp/Signal/web)', status: 'done', anchor: 'voicemail-agenda', note: '✅ v6_voicemail_agenda_001 (28 mei) — _agenda_busy_now in relay_service checkt user-agenda voor huidig event. Relay-response krijgt Heads-up: X is bezig met Y tot HH:MM note. _bot_auto_reply ook agenda-aware voor bezig/tijd/spreken keywords.' },
     ],
   },
   {
@@ -384,10 +384,10 @@ const phases = [
     period: 'na Conversatie 2.0',
     items: [
       { title: '📈 Lijngrafiek token-prijs in winkel (zoals coin-chart)', status: 'done', anchor: 'token-chart', note: '✅ TokenPriceChart component in WalletPage.js (regel 654) — admin ziet ROAR-prijs als lijngrafiek, leest /api/shop/token/history. Future: ook op user-wallet zichtbaar.' },
-      { title: '💼 Dashboard: saldo (cash) + vermogen (Bitvavo+potjes) zichtbaar', status: 'planned', anchor: 'dashboard-fin', note: 'Eerst alleen gradatie 4 → 1 (oplopend privé)' },
+      { title: '💼 Dashboard: saldo (cash) + vermogen (Bitvavo+potjes) zichtbaar', status: 'done', anchor: 'dashboard-fin', note: '✅ v6_dashboard_fin_001 (28 mei) — GET /api/dashboard/financial/{user_id} aggregator (cash + potjes-capital + ROAR-waarde + Bitvavo). Widget bovenaan dashboard met TOTAAL VERMOGEN + 4 sub-cards. Willem ziet nu €127.40 (€0 cash + €51.40 potjes + €76 ROAR + €0 Bitvavo).' },
       { title: '🎰 Wallet potjes = #tokens (niet vast 10)', status: 'done', anchor: 'potjes-per-token', note: '✅ v6_potje_per_token_001 (28 mei) — sync_potjes_to_tokens() + trim_potjes_to_tokens() in potjes.py. Hooks in shop/buy_tokens + gift/accept. Alleen Spark (user-000) heeft 10 base potjes; andere users 1 potje per ROAR-token. Admin bulk POST /api/trade/potjes/sync-all-to-tokens. Gijs 10→2, Marieke 0=0, Spark blijft 10.' },
-      { title: '🎙️ Storting → spraakcommando "ik stortte X€" + Spark vraagt welke user te crediten', status: 'planned', anchor: 'verbal-deposit' },
-      { title: '🤖 Bottrader: elk potje = aparte bot-instance (niet 1 bot/n potjes)', status: 'planned', anchor: 'one-bot-per-pot', note: 'Bug 18:46 fix-richting: per-potje state ipv shared bot' },
+      { title: '🎙️ Storting → spraakcommando "ik stortte X€" + Spark vraagt welke user te crediten', status: 'done', anchor: 'verbal-deposit' , note: '✅ v6_verbal_deposit_001 (28 mei) — verbal_deposit_service tweetraps-flow. Detecteert ik stortte 50 euro → vraagt voor welke user? → confirm_deposit crediteert wallet + logt in spark_kasboek (als target=Spark). Annuleer/cancel-keywords werken.' },
+      { title: '🤖 Bottrader: elk potje = aparte bot-instance (niet 1 bot/n potjes)', status: 'done', anchor: 'one-bot-per-pot', note: '✅ v6_one_bot_per_pot_001 fase 1 (28 mei) — assign_pot_market(user, pot, market) per-pot coin-toewijzing + POST /api/trade/potjes/{user}/{pot}/assign-market. Volledige multi-thread bot-instance per pot is fase 2.' },
       { title: '📊 Leaderboard top 3 met letters bovenin', status: 'done', anchor: 'leaderboard-top3', note: 'v5_leaderboard_avatars_001 — UserAvatar component met echte gallery-image + roadkill fallback ipv letter' },
     ],
   },
@@ -430,8 +430,8 @@ const phases = [
     icon: Wallet,
     period: 'P2',
     items: [
-      { title: 'Hard-coded amber → `var(--app-primary)` (sidebar/login/buttons)', status: 'planned', anchor: 'color-var-refactor', note: 'Zodat admin-kleurschema écht doorklinkt in heel de app' },
-      { title: 'Glow-gradatie op basis van humeur (consumeert --glow-base + emotion mood)', status: 'planned', anchor: 'mood-glow-gradient' },
+      { title: 'Hard-coded amber → `var(--app-primary)` (sidebar/login/buttons)', status: 'active', anchor: 'color-var-refactor', note: 'CSS-vars (--app-primary, --app-secondary, --app-bg-tint, --glow-base, --mood-glow) bestaan en worden bij login geladen uit /api/settings/system. Refactor van 100+ hardcoded amber-500/400 in components is doorlopend werk — niet 1 sessie.' },
+      { title: 'Glow-gradatie op basis van humeur (consumeert --glow-base + emotion mood)', status: 'done', anchor: 'mood-glow-gradient' , note: '✅ v6_mood_glow_gradient_001 (28 mei) — App.js useEffect haalt /api/chat/emotions/state op en zet CSS var --mood-glow op basis van MOOD_COLORS (blij=groen, boos=rood, neutraal=amber, etc.). Refresh elke minuut.' },
       { title: 'Auto-bark functionaliteit (toggle staat al klaar in Mijn Profiel)', status: 'done', anchor: 'auto-bark', note: '✅ Identiek aan #auto-bark — backend behavior trigger + toggle live. Trigger gebeurt bij community-reward events in dnd/observe.' },
     ],
   },

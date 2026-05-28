@@ -114,6 +114,37 @@ function AppContent() {
       .catch(() => {});
   }, [user?.id]);
 
+  // v6_mood_glow_gradient_001 (28 mei) — glow-kleur shift met huidige emotie-state
+  useEffect(() => {
+    if (!user?.id) return;
+    const API = process.env.REACT_APP_BACKEND_URL;
+    const MOOD_COLORS = {
+      blij:      '#22c55e', // groen
+      vrolijk:   '#10b981',
+      tevreden:  '#06b6d4',
+      neutraal:  '#f59e0b', // default amber
+      moe:       '#6366f1',
+      verdrietig:'#475569',
+      boos:      '#ef4444',
+      gefrustreerd:'#dc2626',
+      verbaasd:  '#a855f7',
+      bang:      '#f97316',
+    };
+    const update = () => {
+      fetch(`${API}/api/chat/emotions/state`)
+        .then(r => r.json())
+        .then(d => {
+          const e = (d?.state || d?.current_emotion?.state || 'neutraal').toLowerCase();
+          const color = MOOD_COLORS[e];
+          if (color) document.documentElement.style.setProperty('--mood-glow', color);
+        })
+        .catch(() => {});
+    };
+    update();
+    const t = setInterval(update, 60000); // refresh elke minuut
+    return () => clearInterval(t);
+  }, [user?.id]);
+
   // v5_admin_color_scheme_001 — laad overkoepelend kleurenschema (system-wide)
   useEffect(() => {
     if (!user?.id) return;

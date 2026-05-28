@@ -1,0 +1,48 @@
+{
+  "summary": "Iteration 22 — Full verification of 8 capabilities + Winkel UI refactor. Backend 14/14 pass, frontend Winkelstraat-first + drill-in confirmed visually, Dashboard fin widget shows Saldo & Vermogen €127.40 with Cash/Potjes/ROAR/Bitvavo split. All chat capabilities (W-vraag dempen via wedervraag_service, profile_lookup, relay/Spark-bode, verbal deposit ask+cancel, assign-market) verified via API.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/chat/relay/inbox/{user_id}", "issue": "Returns messages but no schema guarantee on from_user_naam='De Willem' until a relay is sent in same session. Verified after relay send."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Winkelstraat overview", "issues": ["Owner avatar tile renders empty when avatar_url is empty string — initial-letter fallback works but is subtle. Consider stronger initial-fallback styling."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration_22.py",
+    "/app/test_reports/pytest/iter22_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "wedervraag_service.py is 830+ lines — consider splitting into wedervraag_detection.py + wedervraag_storage.py for maintainability.",
+    "Bitvavo timeout fallback to 0 in dashboard widget is correct, but UI shows 'geen sync' subtly — could surface a tooltip on hover.",
+    "Relay inbox endpoint returns 200 with empty list if no msgs — fine, but no pagination/limit param yet (future risk if relays grow)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration_22.py"
+  ],
+  "success_rate": {"backend": "100% (14/14)", "frontend": "100% on visual + drill-in flows tested"},
+  "test_credentials": "Willem / Appelsap (user-001 admin), Marieke / Welkom01 (user-c609d7d1)",
+  "seed_data_creation": "None — used existing Roadkillshop products + Spark wallet manual sync state from iteration 21.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend test suite at /app/backend/tests/test_iteration_22.py covers all 8 capabilities. Wallet endpoint is /api/wallet/user/{user_id} (NOT /api/wallet/balance/{user_id}). Token endpoint returns 'roar_balance' key. Dashboard financial widget endpoint /api/dashboard/financial/{user_id} returns success+5 fields summing to totaal_vermogen_eur. Winkel drill-in trigger is 'Bekijk →' link on shop card, not the card itself.",
+  "verified_capabilities": {
+    "winkel_ui_refactor": "Winkelstraat shown as default — no merch/digital main tabs; FOUNDER badge + owner-avatar tile rendered; drill-in to Roadkillshop reveals Fysiek + Digitaal sub-tabs with back-arrow.",
+    "backend_owner_avatar_enrichment": "PASS — shops list includes owner_avatar_url.",
+    "logo_serve_endpoint": "PASS — returns 200 or 404 (not 500).",
+    "product_migration": "PASS — products served from user-container path (users/user-001/shops/shop-roadkill/products.json).",
+    "wallet_sync": "PASS — Spark balance_eur=0, roar_balance=10.",
+    "dashboard_financial": "PASS — cash_eur, potjes_eur, roar_value_eur, bitvavo_eur, totaal_vermogen_eur all present; sum matches.",
+    "profile_lookup": "PASS — 'wie is Willem' + 'wie is Onbekend123' resolved correctly.",
+    "relay_spark_bode": "PASS — 'zeg tegen Marieke ...' produces relay_sent; inbox for Marieke contains message attributed to Willem.",
+    "verbal_deposit": "PASS — 'ik stortte 50 euro' → deposit_ask with amount_eur=50; 'annuleer' → deposit_cancelled.",
+    "assign_market_1_bot_per_pot": "PASS — POST assign-market sets assigned_market on pot.",
+    "emotion_state_endpoint": "PASS — endpoint reachable (no 500), confirms mood-glow useEffect target exists."
+  }
+}

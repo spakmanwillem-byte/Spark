@@ -691,3 +691,142 @@ def handle_dnd_help() -> Dict:
     )
     return {"type": "dnd_help", "message": msg}
 
+
+# ============== PROFILE LOOKUP INTENT (v6_profile_lookup_001 - 28 mei) ==============
+# Spark beantwoordt vragen over personen: "wie is Marieke?", "wat is Willems achternaam?"
+# Privacy-gate: alleen users in vriendelijke graaf van vrager, óf publieke users (gradatie ≤ 4).
+
+_PROFILE_PATTERNS = [
+    r"\bwie is\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
+    # "wat is X achternaam" / "wat is Willems achternaam"
+    r"\b(wat|hoe)(\s+is)?\s+([A-ZÀ-Ÿa-zà-ÿ][\w\- ']{1,30})['\u2019]?s?\s+(achternaam|email|telefoon|leeftijd|geboortedatum|rang|gradatie)\??",
+    # "wat is de achternaam van X"
+    r"\b(wat|hoe)(\s+is)?(\s+(?:de\s+|haar\s+|zijn\s+))?(achternaam|email|telefoon|leeftijd|geboortedatum|rang|gradatie)\s+van\s+([A-ZÀ-Ÿa-zà-ÿ][\w\- ']{1,30})\??",
+    r"\bvertel\s+(eens\s+)?over\s+([A-ZÀ-Ÿa-zà-ÿ][\w\- ']{1,30})\b",
+    r"\bken\s+je\s+([A-ZÀ-Ÿa-zà-ÿ][\w\- ']{1,30})\??",
+]
+
+
+def _users_data():
+    USERS_FILE = DATA_ROOT / "system" / "users.json"
+    d = load_json(USERS_FILE, default={"users": []})
+    return d.get("users", []) if isinstance(d, dict) else d
+
+
+def _resolve_person(name_query: str, viewer_id: str):
+    """Find person by name. Privacy-rules:
+    - Owner profielen (gradatie ≤ 2) altijd zichtbaar
+    - Viewer's eigen profiel altijd zichtbaar
+    - Andere users alleen als ze in viewer's relationships staan
+    """
+    q = (name_query or "").strip().lower()
+    if not q:
+        return None, "no_name"
+    users = _users_data()
+    matches = []
+    for u in users:
+        if not isinstance(u, dict):
+            continue
+        full = (u.get("naam") or u.get("name") or "").lower()
+        if not full:
+            continue
+        # Match op exact, voornaam-only, of partial
+        if q == full or q in full.split() or q in full:
+            matches.append(u)
+    if not matches:
+        return None, "not_found"
+    if len(matches) > 1:
+        # Geef alleen voornamen terug voor disambiguatie
+        return matches, "ambiguous"
+    person = matches[0]
+    grad = int(person.get("gradatie", 7) or 7)
+    # Publieke profielen (admin/super gradatie) of self → altijd OK
+    if grad <= 2 or person.get("id") == viewer_id:
+        return person, "ok"
+    # Anders: check viewer's relationships
+    REL_FILE = DATA_ROOT / "persons" / f"{viewer_id}_relationships.json"
+    if REL_FILE.exists():
+        rel_data = load_json(REL_FILE, default={"relationships": []})
+        rels = rel_data.get("relationships", []) if isinstance(rel_data, dict) else rel_data
+        for r in rels:
+            if r.get("user_id") == person.get("id") or r.get("naam","").lower() == (person.get("naam") or "").lower():
+                return person, "ok"
+    return person, "no_access"
+
+
+def detect_profile_lookup(text: str, viewer_id: str = "") -> Optional[Dict]:
+    """Detecteert vragen als 'wie is Marieke?' of 'wat is Willems achternaam?'.
+    Returns dict {type, message, person?} of None.
+    """
+    if not text or len(text) < 6:
+        return None
+    t = text.strip()
+    name_query = None
+    field = None
+    for pat in _PROFILE_PATTERNS:
+        m = re.search(pat, t, re.IGNORECASE)
+        if not m:
+            continue
+        groups = m.groups()
+        # Patroon "wat is Willems achternaam" → groups = (wat, is, willems, achternaam)
+        if len(groups) == 4 and groups[3] and groups[3].lower() in ("achternaam","email","telefoon","leeftijd","geboortedatum","rang","gradatie"):
+            name_query = (groups[2] or "").strip().rstrip("'\u2019s")
+            field = groups[3].lower()
+        # Patroon "wat is de achternaam van X" (5 groups)
+        elif len(groups) >= 5 and groups[3] and groups[4]:
+            field = (groups[3] or "").strip().lower()
+            name_query = (groups[4] or "").strip()
+        else:
+            name_query = (groups[-1] or "").strip()
+        break
+    if not name_query:
+        return None
+
+    # Cleanup: remove trailing ?, leading "een/de"
+    name_query = re.sub(r"^(een|de|het|die|dat)\s+", "", name_query, flags=re.I).strip("?., ")
+    if not name_query or name_query.lower() in ("dat", "die", "het", "ik", "jij", "je"):
+        return None
+
+    person, status = _resolve_person(name_query, viewer_id)
+    if status == "not_found":
+        return {"type": "profile_lookup", "message": f"Ik ken geen '{name_query}' in mijn registers. Ben je zeker van de naam?"}
+    if status == "ambiguous":
+        names = ", ".join(p.get("naam") or p.get("name") or "?" for p in person[:5])
+        return {"type": "profile_lookup_ambiguous", "message": f"Welke '{name_query}' bedoel je? Ik vind: {names}."}
+    if status == "no_access":
+        return {"type": "profile_lookup_denied", "message": f"Ik weet wel wie {person.get('naam', name_query)} is, maar deze persoon staat niet in jouw vrienden-graaf. Ik deel hun info alleen met vrienden."}
+
+    # status == ok → bouw antwoord
+    naam = person.get("naam") or person.get("name") or "?"
+    rang = person.get("rang") or person.get("rank") or "—"
+    grad = person.get("gradatie", "?")
+    if field:
+        # Specifiek veld vragen
+        value = None
+        if field in ("achternaam",):
+            parts = naam.split()
+            value = parts[-1] if len(parts) > 1 else "(alleen voornaam bekend)"
+        elif field in ("email",):
+            value = person.get("email") or "(niet ingevuld)"
+        elif field in ("telefoon",):
+            value = person.get("telefoon") or person.get("phone") or "(niet ingevuld)"
+        elif field in ("leeftijd", "geboortedatum"):
+            value = person.get("geboortedatum") or person.get("leeftijd") or "(niet ingevuld)"
+        else:
+            value = person.get(field) or "(niet ingevuld)"
+        return {
+            "type": "profile_lookup",
+            "person_id": person.get("id"),
+            "message": f"**{naam}** — {field}: {value}",
+        }
+
+    # Algemeen profiel
+    return {
+        "type": "profile_lookup",
+        "person_id": person.get("id"),
+        "message": (
+            f"**{naam}** (gradatie {grad}, rang {rang}). "
+            f"{'Admin / oprichter.' if int(grad)<=2 else 'Lid van het Spark Core platform.'}"
+        ),
+    }
+

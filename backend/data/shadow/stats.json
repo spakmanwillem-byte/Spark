@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 635,
+    "events": 660,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 198
+    "knowledge_matches": 199
   },
   "triggers_used": {
     "wedervraag_done": 22,
@@ -75,7 +75,7 @@
     "kbv2_learn_word": 1,
     "kbv2_make_dnd": 1,
     "capability_response": 33,
-    "capability_placeholder": 5,
+    "capability_placeholder": 7,
     "kbv2_tell_short": 5,
     "kbv2_tell_deep": 4,
     "kbv2_tell_more": 4,
@@ -87,11 +87,17 @@
     "synapse_what": 3,
     "synapse_list": 1,
     "capability_error": 1,
-    "trader_help": 2
+    "trader_help": 2,
+    "profile_lookup": 11,
+    "profile_lookup_denied": 1,
+    "relay_sent": 3,
+    "deposit_ask": 3,
+    "deposit_cancelled": 1,
+    "deposit_unresolved": 2
   },
   "response_types": {
-    "knowledge": 113,
-    "unknown": 21,
+    "knowledge": 114,
+    "unknown": 22,
     "wedervraag_done": 22,
     "wedervraag": 30,
     "wedervraag_skip": 16,
@@ -164,7 +170,7 @@
     "kbv2_cmd_learned": 1,
     "card_made_dnd": 1,
     "capability_response": 33,
-    "capability_placeholder": 5,
+    "capability_placeholder": 7,
     "kbv2_tell_kort": 5,
     "kbv2_tell_diep": 3,
     "kbv2_tell_meer": 2,
@@ -177,7 +183,13 @@
     "synapse_list": 1,
     "kbv2_cmd_empty": 3,
     "capability_error": 1,
-    "trader_help": 2
+    "trader_help": 2,
+    "profile_lookup": 11,
+    "profile_lookup_denied": 1,
+    "relay_sent": 3,
+    "deposit_ask": 3,
+    "deposit_cancelled": 1,
+    "deposit_unresolved": 2
   },
   "begrip_used": {
     "vroeg": 2,
@@ -308,12 +320,13 @@
     "auditing": 1,
     "Gezondheid": 1,
     "check": 1,
-    "draaien": 1
+    "draaien": 1,
+    "annuleer": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-05-28T14:14:03.181256+00:00",
+  "last_event_at": "2026-05-28T17:03:27.165042+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

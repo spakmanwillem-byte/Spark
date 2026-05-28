@@ -124,13 +124,26 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
       className={`bg-slate-900/50 border rounded-xl p-4 transition-all cursor-pointer ${isClosing ? 'border-red-500/30 opacity-70 cursor-default' : 'border-slate-800 hover:border-amber-500/50'}`}>
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: `linear-gradient(135deg, ${accent}, ${accent}88)` }}>
-            {isFounder ? <Crown className="w-5 h-5 text-white" /> : <Store className="w-5 h-5 text-white" />}
-          </div>
+          {/* Owner avatar (vervangt kroontje) */}
+          {shop.owner_avatar_url ? (
+            <img src={shop.owner_avatar_url.startsWith('http') ? shop.owner_avatar_url : `${API}${shop.owner_avatar_url}`}
+              alt={shop.owner_naam || 'owner'}
+              className="w-10 h-10 rounded-lg object-cover border-2 flex-shrink-0"
+              style={{ borderColor: accent }} />
+          ) : (
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-sm"
+              style={{ background: `linear-gradient(135deg, ${accent}, ${accent}88)` }}>
+              {(shop.owner_naam || shop.owner_user_id || '?').charAt(0).toUpperCase()}
+            </div>
+          )}
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <span className="truncate">{shop.naam}</span>
+              {/* Shop logo (achter de naam, klein) */}
+              {shop.logo_url && (
+                <img src={shop.logo_url.startsWith('http') ? shop.logo_url : `${API}${shop.logo_url}`}
+                  alt="logo" className="w-5 h-5 rounded object-contain flex-shrink-0" />
+              )}
               {isFounder && (
                 <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex-shrink-0">FOUNDER</span>
               )}
@@ -299,10 +312,27 @@ function EditShopModal({ shop, viewerId, onClose, onSaved }) {
   const [naam, setNaam] = useState(shop.naam || '');
   const [tagline, setTagline] = useState(shop.tagline || '');
   const [color, setColor] = useState(shop.color_accent || '#f59e0b');
+  const [logoUrl, setLogoUrl] = useState(shop.logo_url || '');
+  const [uploadingLogo, setUploadingLogo] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState('');
   const [confirmClose, setConfirmClose] = useState(false);
   const [closeReden, setCloseReden] = useState('');
+
+  const uploadLogo = async (file) => {
+    if (!file) return;
+    setUploadingLogo(true); setErr('');
+    try {
+      const fd = new FormData();
+      fd.append('logo', file);
+      fd.append('actor_user_id', viewerId);
+      const r = await fetch(`${API}/api/winkelstraat/shops/${shop.id}/logo`, { method: 'POST', body: fd });
+      const d = await r.json();
+      if (!r.ok || !d.success) { setErr(d.detail || 'Logo upload mislukt'); setUploadingLogo(false); return; }
+      setLogoUrl(d.logo_url);
+    } catch (e) { setErr(e.message); }
+    setUploadingLogo(false);
+  };
 
   const save = async () => {
     setBusy(true); setErr('');
@@ -355,6 +385,24 @@ function EditShopModal({ shop, viewerId, onClose, onSaved }) {
             <label className="block text-xs text-slate-400 mb-1">Accent-kleur</label>
             <input data-testid="edit-shop-color" type="color" value={color} onChange={e => setColor(e.target.value)}
               className="w-16 h-9 bg-slate-800 border border-slate-700 rounded-lg cursor-pointer" />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Shop logo (verschijnt naast naam)</label>
+            <div className="flex items-center gap-3">
+              {logoUrl ? (
+                <img src={logoUrl.startsWith('http') ? logoUrl : `${API}${logoUrl}`} alt="logo"
+                  className="w-12 h-12 rounded object-contain bg-slate-800 border border-slate-700" />
+              ) : (
+                <div className="w-12 h-12 rounded bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-600 text-[10px]">geen</div>
+              )}
+              <label className="flex-1 cursor-pointer">
+                <input type="file" accept="image/*" className="hidden"
+                  onChange={e => uploadLogo(e.target.files?.[0])} data-testid="upload-logo-input" />
+                <div className="px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700 text-center">
+                  {uploadingLogo ? 'Uploading...' : (logoUrl ? 'Vervang logo' : 'Upload logo')}
+                </div>
+              </label>
+            </div>
           </div>
           {err && (
             <div className="p-2.5 rounded-lg bg-red-500/10 border border-red-500/30 text-xs text-red-300 flex items-center gap-2">

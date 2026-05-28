@@ -54,6 +54,19 @@ def _get_user_gradatie(user_id: str) -> int:
 async def list_shops():
     d = _load_shops()
     shops = d.get("shops", [])
+    # v6_shop_visuals_001 (28 mei) — enrich met owner_avatar_url uit users.json
+    try:
+        users_data = load_json(USERS_FILE, default={"users": []})
+        users = users_data.get("users", []) if isinstance(users_data, dict) else users_data
+        user_map = {u.get("id"): u for u in users if u.get("id")}
+        for s in shops:
+            owner = user_map.get(s.get("owner_user_id"))
+            if owner:
+                s["owner_avatar_url"] = owner.get("avatar_url") or owner.get("avatar")
+                if not s.get("owner_naam"):
+                    s["owner_naam"] = owner.get("naam") or owner.get("name")
+    except Exception:
+        pass
     return {
         "success": True,
         "count": len(shops),
@@ -180,7 +193,7 @@ async def update_shop(shop_id: str, body: UpdateShopBody):
     if shop.get("owner_user_id") != body.actor_user_id:
         raise HTTPException(403, "Alleen owner kan deze winkel bewerken.")
     # Witte lijst van editbare velden
-    editable = {"naam", "tagline", "color_accent", "subtabs_enabled", "type"}
+    editable = {"naam", "tagline", "color_accent", "subtabs_enabled", "type", "logo_url"}
     for k, v in (body.patch or {}).items():
         if k in editable:
             shop[k] = v
@@ -221,3 +234,52 @@ async def close_shop(shop_id: str, body: CloseShopBody):
 
     return {"success": True, "shop": shop,
             "message": "Sluitings-verzoek geregistreerd. Producten worden gearchiveerd, openstaande orders nog afgehandeld."}
+
+
+# ---------- LOGO UPLOAD (v6_shop_visuals_001) ----------
+
+from fastapi import UploadFile, File, Form
+import shutil, os
+
+
+@router.post("/shops/{shop_id}/logo")
+async def upload_shop_logo(shop_id: str, logo: UploadFile = File(...), actor_user_id: str = Form(...)):
+    """Upload shop-logo. Alleen owner. Slaat op in /data/users/{owner}/shops/{shop_id}/logo.{ext}."""
+    d = _load_shops()
+    shop = next((s for s in d.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        raise HTTPException(404, "Shop niet gevonden")
+    if shop.get("owner_user_id") != actor_user_id:
+        raise HTTPException(403, "Alleen owner kan logo uploaden.")
+    if not logo.content_type or not logo.content_type.startswith("image/"):
+        raise HTTPException(400, "Alleen images toegestaan")
+    ext = (logo.filename or "logo.png").split(".")[-1].lower()
+    if ext not in ("png", "jpg", "jpeg", "webp", "svg"):
+        ext = "png"
+    owner = shop["owner_user_id"]
+    target_dir = Path(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id
+    os.makedirs(target_dir, exist_ok=True)
+    target = target_dir / f"logo.{ext}"
+    with open(target, "wb") as f:
+        shutil.copyfileobj(logo.file, f)
+    # Static URL via /api/shop/container-static/{shop_id}/logo.{ext}
+    rel_url = f"/api/winkelstraat/shops/{shop_id}/logo.{ext}"
+    shop["logo_url"] = rel_url
+    shop["logo_uploaded_at"] = _now()
+    _save_shops(d)
+    return {"success": True, "logo_url": rel_url, "shop": shop}
+
+
+@router.get("/shops/{shop_id}/logo.{ext}")
+async def serve_shop_logo(shop_id: str, ext: str):
+    """Static serve van shop-logo."""
+    from fastapi.responses import FileResponse
+    d = _load_shops()
+    shop = next((s for s in d.get("shops", []) if s.get("id") == shop_id), None)
+    if not shop:
+        raise HTTPException(404, "Shop niet gevonden")
+    owner = shop["owner_user_id"]
+    path = Path(__file__).parent.parent.parent / "data" / "users" / owner / "shops" / shop_id / f"logo.{ext}"
+    if not path.exists():
+        raise HTTPException(404, "Logo niet gevonden")
+    return FileResponse(str(path))

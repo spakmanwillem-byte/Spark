@@ -23927,11 +23927,660 @@
         "session_id": "default",
         "gesprek_nummer": 916
       }
+    },
+    {
+      "id": "conv-859a5c50",
+      "timestamp": "2026-05-28T16:46:00.617623+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 917
+      }
+    },
+    {
+      "id": "conv-487cd831",
+      "timestamp": "2026-05-28T16:46:00.826598+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Marieke",
+      "spark_response": "Ik weet wel wie Marieke is, maar deze persoon staat niet in jouw vrienden-graaf. Ik deel hun info alleen met vrienden.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_denied",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_denied"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 918
+      }
+    },
+    {
+      "id": "conv-3ad5c7ab",
+      "timestamp": "2026-05-28T16:46:01.026105+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is Willems achternaam",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "achternaam"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 919
+      }
+    },
+    {
+      "id": "conv-24becb4a",
+      "timestamp": "2026-05-28T16:46:01.177455+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ken je Gijs",
+      "spark_response": "Ik ken geen 'Gijs' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 920
+      }
+    },
+    {
+      "id": "conv-3f1edabf",
+      "timestamp": "2026-05-28T16:46:01.370902+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Onbekend123",
+      "spark_response": "Ik ken geen 'Onbekend123' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 921
+      }
+    },
+    {
+      "id": "conv-a883268b",
+      "timestamp": "2026-05-28T16:47:04.584790+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is Willems achternaam",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "achternaam"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 922
+      }
+    },
+    {
+      "id": "conv-e2a456cc",
+      "timestamp": "2026-05-28T16:47:04.750989+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 923
+      }
+    },
+    {
+      "id": "conv-6087ae2b",
+      "timestamp": "2026-05-28T16:48:25.968984+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is Willems achternaam",
+      "spark_response": "**De Willem** — achternaam: Willem",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "achternaam"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 924
+      }
+    },
+    {
+      "id": "conv-33d2dfb7",
+      "timestamp": "2026-05-28T16:48:26.131271+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is willem zijn email",
+      "spark_response": "Ik ken geen 'willem zijn' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 925
+      }
+    },
+    {
+      "id": "conv-70c2338a",
+      "timestamp": "2026-05-28T16:48:26.272995+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 926
+      }
+    },
+    {
+      "id": "conv-f3afa2cb",
+      "timestamp": "2026-05-28T16:50:01.835027+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "zeg tegen Marieke dat ik morgen kom",
+      "spark_response": "📨 Bericht voor **Marieke** in hun Spark-inbox gezet:\n\n> \"ik morgen kom\"\n\n_Komt door als ze inloggen. Attributie: De Willem (via Spark)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zeg"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "relay_sent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "relay_sent"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 927
+      }
+    },
+    {
+      "id": "conv-80beec0c",
+      "timestamp": "2026-05-28T16:55:37.072172+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Genoteerd: storting van €50.00. Voor welke user moet ik dit crediteren? (zeg de naam, of 'spark' voor Spark zelf, of 'annuleer')",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_ask",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_ask"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 928
+      }
+    },
+    {
+      "id": "conv-d790a663",
+      "timestamp": "2026-05-28T16:55:37.220155+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "annuleer",
+      "spark_response": "Storting geannuleerd. Niets geboekt. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_cancelled",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "deposit_cancelled"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 929
+      }
+    },
+    {
+      "id": "conv-d4b156d9",
+      "timestamp": "2026-05-28T17:02:49.772843+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 930
+      }
+    },
+    {
+      "id": "conv-822bb002",
+      "timestamp": "2026-05-28T17:02:49.869640+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Onbekend123",
+      "spark_response": "Ik ken geen 'Onbekend123' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 931
+      }
+    },
+    {
+      "id": "conv-55d1c5dc",
+      "timestamp": "2026-05-28T17:02:49.963425+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zeg tegen Marieke dat ik morgen kom",
+      "spark_response": "📨 Bericht voor **Marieke** in hun Spark-inbox gezet:\n\n> \"ik morgen kom\"\n\n_Komt door als ze inloggen. Attributie: Gebruiker (via Spark)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zeg"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "relay_sent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "relay_sent"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 932
+      }
+    },
+    {
+      "id": "conv-5e82e538",
+      "timestamp": "2026-05-28T17:02:50.105614+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Genoteerd: storting van €50.00. Voor welke user moet ik dit crediteren? (zeg de naam, of 'spark' voor Spark zelf, of 'annuleer')",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_ask",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_ask"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 933
+      }
+    },
+    {
+      "id": "conv-99a1b48c",
+      "timestamp": "2026-05-28T17:02:50.191868+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Ik ken geen 'ik stortte 50 euro'. Geef de juiste naam, of 'annuleer'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_unresolved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_unresolved"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 934
+      }
+    },
+    {
+      "id": "conv-43b7a25a",
+      "timestamp": "2026-05-28T17:02:51.325338+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "annuleer",
+      "spark_response": "Ik ken deze woorden nog niet: **annuleer**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'annuleer' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "annuleer"
+        ],
+        "snap_suggestions": [
+          "annuleer"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 935
+      }
+    },
+    {
+      "id": "conv-86c3ae74",
+      "timestamp": "2026-05-28T17:03:26.622051+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 936
+      }
+    },
+    {
+      "id": "conv-df20431d",
+      "timestamp": "2026-05-28T17:03:26.703703+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Onbekend123",
+      "spark_response": "Ik ken geen 'Onbekend123' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 937
+      }
+    },
+    {
+      "id": "conv-799e3ce9",
+      "timestamp": "2026-05-28T17:03:26.797333+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zeg tegen Marieke dat ik morgen kom",
+      "spark_response": "📨 Bericht voor **Marieke** in hun Spark-inbox gezet:\n\n> \"ik morgen kom\"\n\n_Komt door als ze inloggen. Attributie: Gebruiker (via Spark)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zeg"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "relay_sent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "relay_sent"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 938
+      }
+    },
+    {
+      "id": "conv-e4526f00",
+      "timestamp": "2026-05-28T17:03:26.946953+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Genoteerd: storting van €50.00. Voor welke user moet ik dit crediteren? (zeg de naam, of 'spark' voor Spark zelf, of 'annuleer')",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_ask",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_ask"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 939
+      }
+    },
+    {
+      "id": "conv-dbd68854",
+      "timestamp": "2026-05-28T17:03:27.030499+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Ik ken geen 'ik stortte 50 euro'. Geef de juiste naam, of 'annuleer'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_unresolved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_unresolved"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 940
+      }
+    },
+    {
+      "id": "conv-b8d301b7",
+      "timestamp": "2026-05-28T17:03:27.140740+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "annuleer",
+      "spark_response": "Ik ken 'annuleer' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "annuleer"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 941
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 916,
-    "last_updated": "2026-05-28T14:14:03.158289+00:00"
+    "total_conversations": 941,
+    "last_updated": "2026-05-28T17:03:27.140740+00:00"
   }
 }

@@ -262,6 +262,23 @@ def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") 
     }
 
 
+def assign_pot_market(user_id: str, pot_id: str, market: str) -> Dict:
+    """v6_one_bot_per_pot_001 (28 mei) — Stap 1 van multi-bot:
+    Sla per-pot market-toewijzing op (BCH-EUR / BTC-EUR / etc.) zodat elke pot
+    onafhankelijk op zijn eigen coin kan handelen. Echte multi-thread bot-instance
+    per pot is volgende fase — nu wordt market gerespecteerd door _trade_signals.
+    """
+    data = _load(user_id)
+    user = data["users"][user_id]
+    for p in user.get("potjes", []):
+        if p.get("id") == pot_id:
+            p["assigned_market"] = market
+            p["assigned_at"] = datetime.now(timezone.utc).isoformat()
+            _save(data)
+            return {"success": True, "pot_id": pot_id, "market": market}
+    return {"success": False, "error": f"Pot {pot_id} niet gevonden"}
+
+
 def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
     """v6_potje_per_token_001 — verminder potjes wanneer user tokens kwijtraakt (sell_back/gift_sent).
 

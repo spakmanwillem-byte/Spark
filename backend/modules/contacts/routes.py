@@ -459,9 +459,28 @@ async def send_message(req: SendMessage) -> Dict:
 
 def _bot_auto_reply(bot: dict, sender: dict, text: str) -> Optional[str]:
     """Eenvoudige bot-reply op basis van bot persoonlijkheid.
-    Houd het simpel — voor volwaardige NLP kan user later via Spark AI tab praten."""
+    v6_voicemail_agenda_001 — agenda-aware: als bot-owner nu in een agenda-event zit,
+    meld dat in het auto-reply (alleen voor admin-bots, owner = user-001).
+    """
     naam = sender.get("naam") or "vriend"
     bot_naam = bot.get("naam") or "Bot"
+
+    # v6_voicemail_agenda_001 — agenda-aware: owner is meestal user-001 (admin)
+    try:
+        owner_id = bot.get("owner_user_id") or "user-001"
+        from modules.chat.relay_service import _agenda_busy_now
+        busy = _agenda_busy_now(owner_id)
+        if busy and any(w in text.lower() for w in ["bezig", "tijd", "kunt", "kun", "even", "praten", "spreken"]):
+            from datetime import datetime as _dt
+            try:
+                end_dt = _dt.fromisoformat(busy["eind"].replace("Z", "+00:00"))
+                tijd = end_dt.strftime("%H:%M")
+                return f"Hoi {naam}, ik geef je vast door: de baas is nu bezig met '{busy['titel']}' tot {tijd}. Wil je dat ik een bericht achterlaat?"
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     pi = bot.get("persoonlijke_info") or {}
     persona = (bot.get("persoonlijkheid") or pi.get("persoonlijkheid") or "").lower()
     bio = (bot.get("bio") or pi.get("bio") or "").lower()

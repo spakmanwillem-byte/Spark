@@ -9,8 +9,8 @@ import {
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
-export function SparkBrainPage({ onNavigate }) {
-  const [activeSection, setActiveSection] = useState('identiteit');
+export function SparkBrainPage({ onNavigate, initialSection = 'identiteit' }) {
+  const [activeSection, setActiveSection] = useState(initialSection);
   const [identity, setIdentity] = useState(null);
   const [bijbel, setBijbel] = useState(null);
   const [sparkProfile, setSparkProfile] = useState(null);

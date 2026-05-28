@@ -109,7 +109,6 @@ export function InstellingenPage({ onNavigate }) {
     { id: 'beeld', label: 'Beeld', icon: Palette, accent: '#a855f7' },
     { id: 'geluid', label: 'Geluid', icon: Volume2, accent: '#3b82f6' },
     { id: 'archief', label: 'Archief', icon: Archive, accent: '#10b981' },
-    { id: 'synapse', label: 'Synapslaag', icon: Brain, accent: '#f59e0b' },
     { id: 'integraties', label: 'Integraties', icon: Link2, accent: '#06b6d4' },
     { id: 'features', label: 'Features', icon: Sparkles, accent: '#22c55e' },
     { id: 'tips', label: 'Tips & Hulp', icon: HelpCircle, accent: '#f97316' },

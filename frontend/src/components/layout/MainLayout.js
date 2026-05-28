@@ -4,7 +4,8 @@ import {
   Sparkles, Zap as Bolt, Link2, Puzzle, UsersRound, MessageCircle, Volume2,
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
-  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart
+  BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart,
+  Activity
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
@@ -28,9 +29,11 @@ export const navigationConfig = {
     label: 'SPARK AI',
     items: [
       { id: 'spark-brain', label: 'Spark Brain', icon: Brain, path: '/spark/brain' },
+      { id: 'synapse', label: 'Synapslaag', icon: Brain, path: '/spark/synapse', adminOnly: true },
       { id: 'knowledge-v2', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
       { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
-      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
+      { id: 'emotions', label: 'Emotie Detectie', icon: Sparkles, path: '/spark/emotions' },
+      { id: 'emotion-routing', label: 'Emotie Routering', icon: Activity, path: '/spark/routering', adminOnly: true },
       { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },
     ]
   },

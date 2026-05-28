@@ -135,7 +135,7 @@ const phases = [
     period: 'permanent / levend',
     items: [
       { title: 'DSP-001 · Bot-data dual-source: bot_users.json + system/users.json — beide updaten bij nieuwe bot', status: 'done', anchor: 'dsp-bot-data', note: 'bot_users.json = triggers/responses. users.json = unified identity. Cross-ref in beide files via _arch_ref' },
-      { title: '📚 ARCHITECTURE.md bijhouden in /app/memory/ — elke nieuwe dual-source → DSP-NNN entry + cross-ref', status: 'active', anchor: 'arch-notebook', note: 'Voorkomt dat dual-source kennis verzandt tussen sessies. Volgende agent leest dit altijd mee bij handoff' },
+      { title: '📚 ARCHITECTURE.md bijhouden in /app/memory/ — elke nieuwe dual-source → DSP-NNN entry + cross-ref', status: 'done', anchor: 'arch-notebook', note: '✅ /app/memory/ARCHITECTURE.md actief met DSP-001 t/m DSP-007 + cross-ref _arch_ref velden in alle dual-source JSON files. Volgende agent leest dit altijd bij handoff.' },
       { title: 'Geen MongoDB ooit — alleen lokale JSON via load_json/save_json (modules.core.storage)', status: 'done', anchor: 'no-mongo', note: 'Privacy/autonomy fundament. Nieuwe agent: niet importeren PyMongo' },
       { title: 'Naam-display fix (v5_display_fix_001): user-000=Spark, user-001=De Willem — aligneert admin/bots met rest van app (data was altijd correct)', status: 'done', anchor: 'name-fix', note: 'Eerdere "swap" was juist de bug; canonical mapping nu overal hetzelfde' },
       { title: 'Bij ELKE nieuwe download/zip-upload: diffen vóór mergen, geen blind kopiëren', status: 'done', anchor: 'diff-first', note: 'Voorkomt dat productie-state preview pollueert of andersom' },
@@ -262,7 +262,7 @@ const phases = [
       { title: 'Uitgebreid profiel (adres, noodcontact)', status: 'done' },
       { title: 'Roadmap API backend', status: 'done' },
       { title: 'AI conversatie engine', status: 'done', note: '✅ chat/routes.py orchestreert 5-laags AI-pipeline (safe-word → identity/action → smart_intents → snap → fallback) met 14+ specialized services + 7-laags emotie-pipeline + shadow observer.' },
-      { title: 'Externe integraties (Bitvavo live, Telegram)', status: 'planned', note: '✅ Bitvavo live (per-user API key in /data/wallet/). Telegram nog niet. WhatsApp/Signal/Telegram zit in Conversatie 2.0 fase als comm-external.' },
+      { title: 'Externe integraties (Bitvavo live)', status: 'done', note: '✅ Bitvavo live: per-user API key in /data/wallet/bitvavo_keys.json, /api/trade/buy + /sell uitvoeren tegen echte Bitvavo. Telegram zit in Conversatie 2.0 (comm-external).' },
     ],
   },
   {
@@ -295,7 +295,7 @@ const phases = [
       { title: '⚖️ Avatars als wereld-functies (Reaper/Boekhouder/etc.)', status: 'done', anchor: 'avatar-functions', note: '✅ Lore-index met 7 avatars-as-functions: Eerste Licht=begin, De Reaper=einde, De Boekhouder=balans, Harry=tijd, Madelief=emotie, Mr Smith=manipulatie, Story Teller=geheugen.' },
       { title: '📊 World state — top entiteiten dominantie', status: 'done', anchor: 'world-state', note: '✅ /api/dnd/world-state aggregert alle user-counters tot per-entiteit dominantie. >60% = dominant=true flag (klaar voor aspect-bark trigger).' },
       { title: '🎯 Hyperlinked stats — gedrag → identiteit (geen cijfers)', status: 'planned', anchor: 'hyperlink-stats' },
-      { title: '🐶 Auto-bark als community reward', status: 'planned', anchor: 'auto-bark' },
+      { title: '🐶 Auto-bark als community reward', status: 'done', anchor: 'auto-bark', note: '✅ v4_dnd_001 — behavior tracking + auto-bark community reward in bots/routes.py. auto_bark_enabled toggle in profile/__init__.py. auto-bark-pup item in inventory/routes.py.' },
       { title: '🧥 Body-slots (helm/cape/schoenen) na Rugzak', status: 'planned', anchor: 'body-slots' },
       { title: '🔮 Particles op aura (klok-deeltjes/runen/mist)', status: 'planned', anchor: 'particles' },
       { title: '⚡ Aspect-bark bij dominantie (>60% van events)', status: 'planned', anchor: 'aspect-bark' },
@@ -370,7 +370,7 @@ const phases = [
       { title: '🤐 W-vraag systeem dempen — pas vragen ná afgesloten gesprek + max 1× per 4 interacties', status: 'planned', anchor: 'ws5-quiet', note: 'Geen formulier-push meer. Spark voelt minder als kennisbank-trechter, meer als iemand die af en toe nieuwsgierig is' },
       { title: '✋ "stop" als universeel safe-word', status: 'done', anchor: 'stop-safeword', note: '✅ v5_stop_safeword_001 — chat/routes.py regel 67: text.lower() in ("stop","/stop","pauze","wacht even") → wist pending wedervraag-state + track behavior + return type=safeword. Vóór elke andere processing. Werkt in chat, D&D, wedervraag.' },
       { title: '🔍 Profiel-lookup via gewone vraag', status: 'planned', anchor: 'profile-nlp', note: '"wat is je achternaam?" → Spark leest uit context (over wie) + profiel. Geen /commando nodig' },
-      { title: '🕸️ Relatie-graph name resolution (alleen vrienden)', status: 'planned', anchor: 'relation-graph', note: 'Spark resolved namen via persons-tabel + user-graph. Privacy-gate: alleen tussen vrienden, geen vreemden taggen' },
+      { title: '🕸️ Relatie-graph name resolution (alleen vrienden)', status: 'done', anchor: 'relation-graph', note: '✅ relation_extraction_service.py + per-user /data/persons/user-001_relationships.json. Perks-systeem activeert "1-op-1 met vrienden chatten" feature. Name resolution checkt vrienden-graaf vóór globale users.' },
       { title: '📨 Spark als bode — relay-berichten met attributie', status: 'planned', anchor: 'spark-relay', note: '"Hé Spark, zeg tegen Heidi dat ik wacht" → Heidi krijgt prive: "Willem wilde dat ik dit zou zeggen: [...]" + 4-staps confirm flow (zien → lezen → reageren → reply terug)' },
       { title: '📞 Antwoordapparaat-modus: agenda-aware auto-replies (WhatsApp/Signal/web)', status: 'planned', anchor: 'voicemail-agenda', note: 'Bij gekoppelde messaging-integratie: Spark gebruikt agenda voor "Willem is bij de tandarts". Excuus-lijst aanvinkbaar. Optioneel TTS oplezen van bot-berichten op verzoek user' },
     ],
@@ -383,7 +383,7 @@ const phases = [
     icon: Wallet,
     period: 'na Conversatie 2.0',
     items: [
-      { title: '📈 Lijngrafiek token-prijs in winkel (zoals coin-chart)', status: 'planned', anchor: 'token-chart', note: 'Verwerkt prijsverloop ROAR token over tijd, naast huidige fixed-price kaart' },
+      { title: '📈 Lijngrafiek token-prijs in winkel (zoals coin-chart)', status: 'done', anchor: 'token-chart', note: '✅ TokenPriceChart component in WalletPage.js (regel 654) — admin ziet ROAR-prijs als lijngrafiek, leest /api/shop/token/history. Future: ook op user-wallet zichtbaar.' },
       { title: '💼 Dashboard: saldo (cash) + vermogen (Bitvavo+potjes) zichtbaar', status: 'planned', anchor: 'dashboard-fin', note: 'Eerst alleen gradatie 4 → 1 (oplopend privé)' },
       { title: '🎰 Wallet potjes = #tokens (niet vast 10)', status: 'done', anchor: 'potjes-per-token', note: '✅ v6_potje_per_token_001 (28 mei) — sync_potjes_to_tokens() + trim_potjes_to_tokens() in potjes.py. Hooks in shop/buy_tokens + gift/accept. Alleen Spark (user-000) heeft 10 base potjes; andere users 1 potje per ROAR-token. Admin bulk POST /api/trade/potjes/sync-all-to-tokens. Gijs 10→2, Marieke 0=0, Spark blijft 10.' },
       { title: '🎙️ Storting → spraakcommando "ik stortte X€" + Spark vraagt welke user te crediten', status: 'planned', anchor: 'verbal-deposit' },
@@ -432,7 +432,7 @@ const phases = [
     items: [
       { title: 'Hard-coded amber → `var(--app-primary)` (sidebar/login/buttons)', status: 'planned', anchor: 'color-var-refactor', note: 'Zodat admin-kleurschema écht doorklinkt in heel de app' },
       { title: 'Glow-gradatie op basis van humeur (consumeert --glow-base + emotion mood)', status: 'planned', anchor: 'mood-glow-gradient' },
-      { title: 'Auto-bark functionaliteit (toggle staat al klaar in Mijn Profiel)', status: 'planned', anchor: 'auto-bark' },
+      { title: 'Auto-bark functionaliteit (toggle staat al klaar in Mijn Profiel)', status: 'done', anchor: 'auto-bark', note: '✅ Identiek aan #auto-bark — backend behavior trigger + toggle live. Trigger gebeurt bij community-reward events in dnd/observe.' },
     ],
   },
   {

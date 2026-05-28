@@ -76,9 +76,20 @@ export function BoekhoudPage({ onNavigate }) {
 
   const addTransaction = async () => {
     if (!newTx.amount || !newTx.description.trim()) return;
+    // v6_signed_amount_001 (28 mei) — bedrag met +/- teken: auto-detect type
+    const raw = String(newTx.amount).trim().replace(',', '.');
+    const num = parseFloat(raw);
+    if (isNaN(num) || num === 0) return;
+    // Negatief = expense, positief = income (signed-input overrules type-button)
+    const isNeg = num < 0 || raw.startsWith('-');
+    const finalType = isNeg ? 'expense' : 'income';
+    const finalAmount = Math.abs(num);
+    const finalCategory = newTx.category && (isNeg ? categories.expense : categories.income)?.includes(newTx.category)
+      ? newTx.category
+      : (isNeg ? 'Overig' : 'Donations');
     const res = await fetch(`${API}/api/accounting/transactions`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...newTx, amount: parseFloat(newTx.amount) }),
+      body: JSON.stringify({ ...newTx, type: finalType, category: finalCategory, amount: finalAmount }),
     });
     const data = await res.json();
     if (data.success) {
@@ -115,16 +126,23 @@ export function BoekhoudPage({ onNavigate }) {
   const [editSaving, setEditSaving] = useState(false);
   const openEditTx = (tx) => {
     setEditingTx(tx);
-    setEditAmount(String(tx.amount ?? ''));
+    // v6_signed_amount_001 — toon bedrag met teken (- voor expense, + voor income)
+    const signed = tx.type === 'expense' ? `-${tx.amount}` : `${tx.amount}`;
+    setEditAmount(signed);
   };
   const saveEditTx = async () => {
-    const v = parseFloat(String(editAmount).replace(',', '.').trim());
-    if (!Number.isFinite(v) || v < 0) { alert('Ongeldig bedrag'); return; }
+    const raw = String(editAmount).replace(',', '.').trim();
+    const v = parseFloat(raw);
+    if (!Number.isFinite(v) || v === 0) { alert('Ongeldig bedrag'); return; }
+    // v6_signed_amount_001 — als teken veranderd is, ook type updaten
+    const isNeg = v < 0 || raw.startsWith('-');
+    const newType = isNeg ? 'expense' : 'income';
+    const absAmt = Math.abs(v);
     setEditSaving(true);
     try {
       const res = await fetch(`${API}/api/accounting/transactions/${editingTx.id}`, {
         method: 'PUT', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: v }),
+        body: JSON.stringify({ amount: absAmt, type: newType }),
       });
       const data = await res.json();
       if (!data.success) { alert('Aanpassen mislukt: ' + (data.message || JSON.stringify(data))); return; }
@@ -213,8 +231,30 @@ export function BoekhoudPage({ onNavigate }) {
                   ))}
                 </div>
                 <div className="flex gap-2">
-                  <input type="number" value={newTx.amount} onChange={e => setNewTx({ ...newTx, amount: e.target.value })} placeholder="Bedrag..."
-                    className="w-32 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none" />
+                  {/* v6_signed_amount_001 — Bedrag accepteert +5.00 of -49.92 (teken overrules type-knop) */}
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={newTx.amount}
+                    onChange={e => {
+                      const v = e.target.value;
+                      // Auto-toggle type-button als user expliciet teken typt
+                      const cleaned = v.trim().replace(',', '.');
+                      const isNeg = cleaned.startsWith('-');
+                      const isPos = cleaned.startsWith('+');
+                      const next = { ...newTx, amount: v };
+                      if (isNeg && newTx.type !== 'expense') {
+                        next.type = 'expense';
+                        next.category = 'Overig';
+                      } else if (isPos && newTx.type !== 'income') {
+                        next.type = 'income';
+                        next.category = 'Donations';
+                      }
+                      setNewTx(next);
+                    }}
+                    placeholder="Bedrag (gebruik +/- bv -49.92)"
+                    data-testid="tx-amount-input"
+                    className="w-40 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50" />
                   <select value={newTx.category} onChange={e => setNewTx({ ...newTx, category: e.target.value })}
                     className="flex-1 px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-slate-300 focus:outline-none">
                     {catOptions.map(c => <option key={c} value={c}>{c}</option>)}
@@ -235,19 +275,6 @@ export function BoekhoudPage({ onNavigate }) {
             {/* KASBOEKEN TAB */}
             {activeTab === 'overzicht' && (
               <>
-                {/* v6_commitments_001 — kleine banner met deposit-watcher status */}
-                {isAdmin && reconcile?.commitments && reconcile.commitments.open_commitment_eur > 0 && (
-                  <div data-testid="commitment-banner"
-                    className="p-3 rounded-lg border border-red-500/30 bg-red-500/5 flex items-center justify-between">
-                    <p className="text-xs text-red-200">
-                      📍 Spark heeft {reconcile.commitments.spark_potjes_total_eur ? `€${reconcile.commitments.spark_potjes_total_eur.toFixed(2)} toegezegd` : 'open commitment'} —
-                      <span className="text-emerald-400 mx-1">€{reconcile.commitments.bitvavo_covered_eur?.toFixed(2)} gedekt</span> op Bitvavo,
-                      <span className="text-red-400 ml-1 font-bold">€{reconcile.commitments.open_commitment_eur.toFixed(2)} nog te storten</span>
-                    </p>
-                    <p className="text-[10px] text-slate-500 italic">deposit-watcher actief</p>
-                  </div>
-                )}
-
                 {/* Totaal overzicht */}
                 {summary && (
                   <div className="grid grid-cols-3 gap-3">

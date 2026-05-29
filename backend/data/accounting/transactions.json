@@ -74,6 +74,20 @@
       "btw_amount": 0,
       "created_at": "2026-05-29T09:25:35.024200+00:00",
       "source": "deposit_watcher"
+    },
+    {
+      "id": "2d7b964c-91e2-4fac-ab52-a86795882b24",
+      "type": "income",
+      "category": "Donations",
+      "amount": 10.11,
+      "description": "ROAR-aankoop: Willem kocht 1 token à €10.11 (recovery: hook crashte)",
+      "entity_id": "spark_core",
+      "date": "2026-05-29T09:38:19.296382+00:00",
+      "btw_percentage": 0,
+      "btw_amount": 0,
+      "created_at": "2026-05-29T09:38:19.296382+00:00",
+      "tx_ref": "token_buy_recovery_user-001_1780047499",
+      "source": "manual_recovery"
     }
   ]
 }

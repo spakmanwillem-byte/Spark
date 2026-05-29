@@ -351,8 +351,12 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
         from modules.accounting.hooks import on_token_buy
         ANCHOR_USERS = {"user-000", "user-001"}
         is_anchor = user_id in ANCHOR_USERS
+        # Lookup naam uit users.json (variable `user` bestaat niet in deze scope — was bug)
+        _users_data = load_json(USERS_FILE, default={"users": []})
+        _ulist = _users_data.get("users", []) if isinstance(_users_data, dict) else _users_data
+        buyer_naam = next((u.get("naam") for u in _ulist if u.get("id") == user_id), user_id)
         on_token_buy(
-            buyer_user_id=user_id, buyer_naam=user.get("naam") or user_id,
+            buyer_user_id=user_id, buyer_naam=buyer_naam,
             tokens=amount_tokens, total_eur=amount_eur,
             price_per_token=price, ref_id=tx["id"],
             is_anchor=is_anchor, btw_pct=0.0,

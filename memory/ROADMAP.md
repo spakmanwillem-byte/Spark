@@ -6,28 +6,39 @@
 
 **Status**: Stabiel. Geen code-blockers. Wacht op EUR-storting Willem zodat Spark potjes-commitment volledig gedekt is door Bitvavo.
 
-### ✅ Sessie 14 (2026-05-28 avond) — wat gedaan
-- [x] 🐛 **KB v2 legacy media bug** (v6_kbv2_media_legacy_001) — backwards-compat routes `/api/kb/v2/media/{image,voice}/file/{filename}` met path-traversal guard hersteld. Curl-getest: 200 OK + 287B PNG. Oude kaarten (zoals "aanschouwelijkheid") tonen weer hun media.
-- [x] 🧹 **Disk cleanup** — 615 MB vrijgemaakt: `/tmp/spark_zip` (zip-analyse), pycache, 4× supervisor logs getrunceerd. Backups in `/app/backend/data/_backups/` intact (88MB).
-- [x] 🔍 **Zip-backup analyse** — bevestigd dat `spark_backup_full_20260528_122515.zip` geen verloren kaarten bevat. Lade-counts zip == live (voelen 257 / weten 1085 / inbox 2989).
-- [x] 📜 **ROADMAP.md** — top-sectie met live token-tabel + 3 storting-paden + 50 nieuwe Willem-ideeën in 10 clusters (A t/m J).
+### ✅ Sessie 14 (2026-05-28/29) — wat gedaan
+- [x] 🐛 **KB v2 legacy media bug** (v6_kbv2_media_legacy_001) — backwards-compat routes `/api/kb/v2/media/{image,voice}/file/{filename}` met path-traversal guard. Curl-getest: 200 OK + 287B PNG.
+- [x] 🧹 **Disk cleanup** — 615 MB vrijgemaakt: `/tmp/spark_zip` + pycache + 4× supervisor logs getrunceerd. Backups intact (88MB).
+- [x] 🔍 **Zip-backup analyse** — `spark_backup_full_20260528_122515.zip` bevat geen verloren kaarten. Lade-counts zip == live.
+- [x] 🔄 **KB v2 sync uit productie** (29 mei) — 42 verhuisde kaarten gepulled uit `spark_backup_changes_20260529_074414.zip` (voelen 257→269, weten 1085→1097, doen 659→677, inbox 2989→2947). Backup veilig.
+- [x] 📜 **ROADMAP.md** — top-sectie + 50 nieuwe Willem-ideeën in 10 clusters (A t/m J).
 - [x] 🔤 **Tag-normalizer fundering** (v6_kb_tag_normalizer_001 + v6_kb_tag_merge_001):
   - `modules/kb_v2/tag_normalizer.py` met 4 functies + ~50-noun exception-list. 20/20 unit-tests pass.
   - 5 endpoints: `/tags/normalize`, `/normalize-batch`, `/scan`, `/similarity`, `/merge` (admin-only).
-  - Live scan: 18.041 tags → 45 echte dedupe-kansen (`emotie/emoties` 457×, `systeem/systeemm` 376×, `relatie/relaties` 98×).
-  - Merge-endpoint live-getest: 1 demo-merge in lade `weten`, dedupe-list 46→45→44.
-- [x] 🧠 **SPARK AI sidebar restructure** (v6_synapse_sidebar_001 + v6_emotion_routing_sidebar_001):
-  - **Synapslaag** verhuisd van Beheer→Instellingen → SPARK AI sidebar (`/spark/synapse`, admin-only).
-  - **"Emoties"** hernoemd naar **"Emotie Detectie"** (input-laag: wat voelt user).
-  - Nieuwe **"Emotie Routering"** sidebar-item (`/spark/routering`, admin-only) — 7-laags pipeline view (was tab in Brain).
-  - **Geen dubbele tabs**: Emotie Pipeline tab uit Spark Brain weggehaald (zit nu enkel onder Routering). Brain heeft nu 5 tabs (Identiteit/Normen/Bijbel/Profiel/Groeien).
+  - Live scan: 18.041 tags → 45 echte dedupe-kansen geïdentificeerd.
+- [x] 🧠 **SPARK AI sidebar restructure**:
+  - **Synapslaag** verhuisd van Instellingen → SPARK AI sidebar (admin-only).
+  - **"Emoties"** hernoemd naar **"Emotie Detectie"** (input-laag).
+  - Nieuwe **"Emotie Routering"** sidebar-item (admin-only) — 7-laags pipeline view.
+  - **Geen dubbele tabs**: Emotie Pipeline tab uit Spark Brain weggehaald.
   - `SparkBrainPage` ondersteunt `initialSection` prop voor deep-linking.
 - [x] 🦅 **Spark Brein-overzicht dashboard** (v6_spark_overview_001):
-  - Nieuwe sidebar-item bovenaan SPARK AI sectie: **"Brein-overzicht"** (`/spark/overzicht`, iedereen).
-  - Helikopter-view met 6 live-teller-kaarten: Spark Brain · Synapslaag · Kennisbank · Triggers · Emotie Routering · Verbanden.
-  - Per kaart: 2-5 stat-pills + top-tag-pills (waar relevant). Klik → onNavigate naar sidebar-item.
-  - Parallel-fetch van 6 endpoints met null-safe rendering. Refresh-knop met spinner.
-  - **Live data verified**: Synapse 96 containers/447 endpoints, KB v2 4 lades, Triggers 81 groepen/444, Pipeline 117 runs/5 emoties, Graph 10.631 nodes/69.008 edges.
+  - Sidebar-item bovenaan SPARK AI: 6 live-teller-kaarten (Brain/Synapse/KB/Triggers/Routering/Verbanden).
+  - Parallel-fetch 6 endpoints, klik → navigeer naar betreffende sub-page.
+- [x] 🐛 **`/api/trade/stats/*` HTTP 500 fix** — capital_baseline.json had floats (legacy), code verwachtte dicts. Backwards-compat + data-migratie (2 users).
+- [x] 🐛 **Quick-buy €5.08 → €10** — `capital` als primaire bron ipv outdated `current_size`/`starting_size` (die in moderne potjes niet meer gezet worden).
+- [x] 🐛 **Open potjes amount_eur backfill** — `open_pot` zette amount alleen in trade_log, niet in `position`. UI toonde "niet gevuld". Fix in code + 11 open posities backfilled.
+- [x] 🐛 **Winkelstraat avatar/logo placeholders** — `gallery:cf90e9ea6393` werd niet geresolveerd naar `/api/avatar/gallery/{id}/image`. Fix in `winkelstraat/__init__.py`.
+- [x] 🔒 **Lock-bug defense-in-depth** — `open_pot()` + `close_pot()` weigeren nu locked potjes hard. Logs printen 'BLOCK'. `distribute_potjes_over_markets` skipt locked anchors.
+- [x] 🏗️ **Spark 5 anchor pots** — 1 staking-anchor per coin: pot-001 ADA / pot-002 BCH / pot-003 BTC / pot-004 ETH / pot-005 SOL. Trade-potjes hernummerd naar pot-006..015.
+- [x] 🎨 **Locked potjes onderaan UI** — sort-key in TraderPage zet anchors visueel onderaan met 🔒-icon, groene styling, "STAKING ANKER" label.
+- [x] 🐛 **€43.25 fix** — UI verdeelde Bitvavo-balance via growth-factor over alle potjes (€10 × 4.32 = €43.25). Nu tonen locked+vrije potjes hun echte capital; alleen open posities mark-to-market.
+- [x] 🐛 **Snel Handelen panel** — pakte locked anchor als "potje 1". Skip locked + use echte capital. Live prijs refresh 30s → 10s.
+- [x] 📋 **bugs.json cleanup** — 7 stilletjes opgeloste bugs afgevinkt met `resolution_tag` + `resolution_note`. Status nu: 13 nieuw / 1 in_behandeling / 29 opgelost.
+- [x] 📈 **ROAR price-history snapshots** (v6_price_history_snapshots_002):
+  - `POST /api/spark/kasboek/price-snapshot` legt huidige prijs vast in `roar/price_snapshots.json`.
+  - Scheduler-hook `_maybe_roar_price_snapshot()` draait elk uur in 5-min loop.
+  - `/price-history` endpoint mergt nu tx-buckets + snapshot-buckets → grafiek heeft altijd data, ook na clean_slate.
 
 ### Conceptueel kader (uit deze sessie)
 - **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test
@@ -73,8 +84,14 @@
 
 ### Open daarna (P1+)
 - [ ] 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan` (data klaar, 45 dedupe-kansen klaar voor 1-klik merge)
+- [ ] **🌱 Staking Growth Engine** (nieuw na sessie 14):
+  - Per anchor maandelijks 1-2% rente uit overflow_pool → anchor.capital groei
+  - Auto-mint nieuw potje bij `overflow_pool >= €10`
+  - Auto-create base-anchor bij toevoegen nieuwe coin aan watch (zoals Willem vroeg)
+  - Maakt Spark Core organisch groeiend zonder handmatig storten
 - [ ] Tag-merge auto-fire optie in `classify_card` (opt-in flag)
 - [ ] Exception-list uitbreiden bij volgende false-positives
+- [ ] 2 endpoints uitbreiden (`/spark/disclaimer.leidende_lagen_counts.bijbel + capabilities` + `/kb/v2/stats.inbox.count`) zodat overzicht alle cijfers heeft i.p.v. `-`
 - → Zie clusters A-J hieronder voor volledige backlog
 
 ---

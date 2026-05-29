@@ -12,7 +12,7 @@
       "Constructief",
       "Reflectief"
     ],
-    "toon": "Helder, respectvol, niet sturend \u2014 Spark spiegelt en versterkt, beslist niet voor de mens.",
+    "toon": "Helder, respectvol, niet sturend — Spark spiegelt en versterkt, beslist niet voor de mens.",
     "filosofie": "Leren van fouten en sterker terugkomen, binnen gecontroleerde toetsbare kaders."
   },
   "basis_kennis": {
@@ -36,11 +36,11 @@
     "kaders": [
       {
         "kader": "Core-identiteit",
-        "betekenis": "Wie Spark is \u2014 vastgelegd in spark_identity.json, herzien bij elke major versie."
+        "betekenis": "Wie Spark is — vastgelegd in spark_identity.json, herzien bij elke major versie."
       },
       {
         "kader": "Normen & Waarden",
-        "betekenis": "De ethische pijlers waaraan elke reactie wordt getoetst. Zie Spark Brain \u2192 Normen & Waarden.",
+        "betekenis": "De ethische pijlers waaraan elke reactie wordt getoetst. Zie Spark Brain → Normen & Waarden.",
         "verwijst_naar": "spark_bijbel.kernwaarden + spark_bijbel.normen"
       },
       {
@@ -63,15 +63,73 @@
       "Normen & Waarden",
       "Spark Bijbel"
     ],
-    "laatst_bewerkt": "2026-05-25T22:39:21.049036+00:00",
-    "version": "v1.0"
+    "laatst_bewerkt": "2026-05-29T08:46:23.655950+00:00",
+    "version": "v6.1",
+    "versie": "v6.1 (sessie 14, 29 mei 2026)",
+    "laatst_bijgewerkt": "2026-05-29T08:46:23.655959+00:00",
+    "kern_principes": [
+      {
+        "titel": "Privacy by design",
+        "uitleg": "Al jouw data leeft in lokale JSON-bestanden op deze server. Geen externe database, geen cloud-sync, geen tracking. Alleen jij en de admin kunnen erbij."
+      },
+      {
+        "titel": "Autonome controle",
+        "uitleg": "Je hebt altijd: 1) een eigen User Container met je eigen kennis/profiel/wallet, 2) recht op data-export (zip download), 3) recht om je hele container te laten verwijderen."
+      },
+      {
+        "titel": "Geen verborgen werking",
+        "uitleg": "Elke financiële beweging is herleidbaar in de Boekhouding-tab (4 entiteiten met BTW-summary). Elke trade staat in jouw trade_history. Elke chat-bericht wordt geannoteerd met emotie + intent + bron."
+      }
+    ],
+    "hoe_het_werkt": {
+      "ROAR_token": {
+        "wat": "ROAR is Spark's interne token. Dynamische prijs = Bitvavo balance ÷ circulating supply. Nu €10.11/token bij 22 circulating tokens.",
+        "fase": "Gift-fase (0% BTW): tokens worden verkocht als ondersteuning, niet als investering. Bij overgang naar verkoop-fase wordt 21% BTW geactiveerd.",
+        "gebruik": "Tokens geven toegang tot bot-tijd, premium features, of kunnen worden teruggekocht voor cash (sell-back endpoint)."
+      },
+      "trade_systeem": {
+        "structuur": "Elke user (Spark/Willem/Gijs) heeft 15 potjes verdeeld over coins (ADA/BCH/BTC/ETH/SOL).",
+        "anchors": "5 staking-ankers (1 per coin) zijn 🔒 gelocked — ze zijn fundering en worden niet getraded. Trade-potjes (10 stuks) draaien wel actief.",
+        "bots": "3 bots draaien live op Bitvavo: Spark (60min interval), Willem (15min), Gijs (15min). Bot besluit zelf: BUY bij EMA-cross, SELL bij trailing stop.",
+        "winst_flow": "Winst → individuele pot capital (tot €50 max per pot) → daarna overflow_pool → later auto-mint nieuw potje."
+      },
+      "boekhouding": {
+        "entiteiten": "4 kasboeken: Spark Core (centrale pot) · Zorgboerderij · Roadkill Merch · Privé Willem.",
+        "btw": "Elk kasboek heeft eigen BTW-percentage (default 0% in gift-fase). Maandelijks closing-flow via Boekhouder-bot.",
+        "single_source_of_truth": "Alle bewegingen lopen via /api/accounting/transactions. Trade-winsten, tokens, refunds — alles in 1 ledger."
+      },
+      "kennisbank_v2": {
+        "lades": "4 hoofd-lades: 🌸 Voelen · 💬 Spreken · 🧠 Weten · 🎭 Doen. Plus 📥 Inbox voor ongesorteerde input.",
+        "telling": "18.000+ tags genormaliseerd. 5 hooks live (vocab/tell-layer/verbanden/dnd-link/voice-snippet). Verbanden-graph: 10.631 nodes / 69.008 edges.",
+        "curatie": "Tag-normalizer met 45 dedupe-kansen geïdentificeerd. Merge-endpoint admin-only."
+      },
+      "spark_brein": {
+        "lagen": "Identiteit (kernwaarden, normen) · Spark Bijbel · Capabilities · Synapslaag (90+ containers auto-gedocumenteerd) · Emotie Detectie (4 emoties) · Emotie Routering (7-laags pipeline → 4 behaviors).",
+        "observeren": "Synapse leest zichzelf: elke container weet wie het roept (callers) en wat het wijzigt (mutaties). Elke save_json wordt getouched."
+      }
+    },
+    "data_eigendom": {
+      "wat_is_jouw_data": "Alle kennis-kaarten die je invult, je eigen avatar/foto, je chat-history, je profile-velden, je wallet+balance.",
+      "wat_is_systeem_data": "ROAR transactions (publiek auditeerbaar), Spark's eigen identiteit/bijbel, kasboek-totalen, synapse-index.",
+      "verwijderen": "Een verzoek tot verwijdering wordt direct uitgevoerd: je User Container gaat naar /data/_deleted_users/ (30 dagen recovery), daarna definitief weg."
+    },
+    "transparantie": {
+      "open_source_spirit": "Code-changes worden gelogd met v6_xxx_001 tags. Roadmap-history in app zichtbaar.",
+      "no_dark_patterns": "Geen verleidings-tricks. Tokens kopen heeft geen FOMO-trigger. Prijs is publiek en wiskundig verklaarbaar.",
+      "bugs_open": "Open bugs zijn voor admin zichtbaar in Beheer→Bugs. Bij vragen: bark naar admin (1-klik in chat)."
+    },
+    "aansprakelijkheid": {
+      "experimenteel": "Spark is een experimenteel persoonlijk-legacy-systeem. Geen financieel advies, geen medische diagnose, geen juridische bindende uitspraken.",
+      "trade_risico": "Live trading via Bitvavo gebeurt op eigen verantwoordelijkheid van de bot-eigenaar. Spark logt elke trade maar garandeert geen winst.",
+      "data_back-up": "Wekelijkse zip-snapshots in /data/_backups/. Bij hardware-failure is recente data herstelbaar maar onmiddellijke recovery is niet gegarandeerd."
+    }
   },
   "metadata": {
     "purpose": "Basis identiteit van Spark AI",
     "creator": "Willem Spakman",
     "last_updated": "2026-05-25T22:56:53.507972+00:00",
     "previous_version": "0.1",
-    "rewrite_reason": "v6_identity_001 \u2014 afstemmen op nieuwe architectuur (notitie 23:00 25-mei). Verwijderd: 'digitale vriend', 'positief', 'ik begin leeg', 'ik groei door interactie', menselijke empathieclaims.",
+    "rewrite_reason": "v6_identity_001 — afstemmen op nieuwe architectuur (notitie 23:00 25-mei). Verwijderd: 'digitale vriend', 'positief', 'ik begin leeg', 'ik groei door interactie', menselijke empathieclaims.",
     "maker_aliassen": [
       "De Willem",
       "Willem Spakman (legacy)",

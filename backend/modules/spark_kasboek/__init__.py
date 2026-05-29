@@ -7,7 +7,7 @@ Endpoints:
 """
 from fastapi import APIRouter
 from pathlib import Path
-from modules.core.storage import load_json
+from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/spark/kasboek", tags=["spark-kasboek"])
 
@@ -49,12 +49,17 @@ async def saldo():
 @router.get("/price-history")
 async def price_history(interval: str = "1h", limit: int = 50):
     """v6_price_history_001 — bucket prijs uit alle buy_roar transactions.
+    v6_price_history_snapshots_002 (sessie 14) — als er geen buy_roar tx zijn (na
+    clean_slate of in lage-activiteit periodes), val terug op periodieke snapshots
+    in roar/price_snapshots.json. Een aparte scheduler legt elke uur de huidige
+    ROAR-prijs vast.
     Returns 2 lines: price_incl (klant-prijs) + price_netto (Spark's deel zonder BTW).
     interval: 15m / 1h / 4h / 1d
     """
     from pathlib import Path as _P
     from datetime import datetime, timezone, timedelta
     ROAR = _P(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
+    SNAPS = _P(__file__).parent.parent.parent / "data" / "roar" / "price_snapshots.json"
     roar = load_json(ROAR, default={"transactions": []})
 
     minutes = {"15m": 15, "1h": 60, "4h": 240, "1d": 1440}.get(interval, 60)
@@ -70,20 +75,63 @@ async def price_history(interval: str = "1h", limit: int = 50):
             dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
         except Exception:
             continue
-        # Round down to bucket
         epoch_min = int(dt.timestamp() / 60)
         bucket_min = (epoch_min // minutes) * minutes
         bucket_ts = datetime.fromtimestamp(bucket_min * 60, tz=timezone.utc).isoformat()
         price_incl = t.get("price_per_token") or 0
         is_klant = t.get("user_id") not in ANCHOR
-        # Anker-aankoop: incl == netto (geen BTW). Klant: netto = incl * 100/121
         price_netto = round(price_incl * 100 / 121, 4) if is_klant else price_incl
-        b = buckets.setdefault(bucket_ts, {"ts": bucket_ts, "price_incl": price_incl, "price_netto": price_netto, "n": 0})
+        b = buckets.setdefault(bucket_ts, {"ts": bucket_ts, "price_incl": price_incl, "price_netto": price_netto, "n": 0, "source": "tx"})
         b["price_incl"] = max(b["price_incl"], price_incl)
         b["price_netto"] = max(b["price_netto"], price_netto)
         b["n"] += 1
+
+    # v6_price_history_snapshots_002 — voeg snapshots toe als bron
+    snapshots = load_json(SNAPS, default={"snapshots": []}).get("snapshots", [])
+    for s in snapshots:
+        ts_str = s.get("ts")
+        if not ts_str:
+            continue
+        try:
+            dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+        except Exception:
+            continue
+        epoch_min = int(dt.timestamp() / 60)
+        bucket_min = (epoch_min // minutes) * minutes
+        bucket_ts = datetime.fromtimestamp(bucket_min * 60, tz=timezone.utc).isoformat()
+        price = s.get("price_eur") or 0
+        if bucket_ts not in buckets:
+            buckets[bucket_ts] = {"ts": bucket_ts, "price_incl": price, "price_netto": price, "n": 1, "source": "snapshot"}
+
     series = sorted(buckets.values(), key=lambda x: x["ts"])[-limit:]
     return {"interval": interval, "points": series, "total": len(series)}
+
+
+@router.post("/price-snapshot")
+async def price_snapshot_now():
+    """v6_price_history_snapshots_002 — leg huidige ROAR-prijs vast als datapoint
+    in price_snapshots.json. Bedoeld voor periodieke aanroep (scheduler) maar ook
+    handmatig triggerbaar voor testen.
+    """
+    from pathlib import Path as _P
+    from datetime import datetime, timezone
+    SNAPS = _P(__file__).parent.parent.parent / "data" / "roar" / "price_snapshots.json"
+    try:
+        from modules.shop.routes import get_dynamic_price
+        price = float(get_dynamic_price() or 0)
+    except Exception as e:
+        return {"success": False, "error": f"price-fetch failed: {e}"}
+    data = load_json(SNAPS, default={"snapshots": []})
+    snap = {
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "price_eur": round(price, 4),
+    }
+    data["snapshots"].append(snap)
+    # Bewaar laatste 5000 (1 per uur = ~7 maand)
+    if len(data["snapshots"]) > 5000:
+        data["snapshots"] = data["snapshots"][-5000:]
+    save_json(SNAPS, data)
+    return {"success": True, "snapshot": snap, "total": len(data["snapshots"])}
 
 
 @router.get("/entries")

@@ -192,6 +192,40 @@ async def _maybe_error_bark():
 # ============================================================
 # MAIN LOOP
 # ============================================================
+async def _maybe_roar_price_snapshot():
+    """v6_price_history_snapshots_002 (sessie 14) — eens per uur ROAR-prijs
+    vastleggen in roar/price_snapshots.json zodat de grafiek altijd data heeft,
+    ook na een clean_slate of in lage-activiteit periodes.
+    """
+    now = datetime.now(timezone.utc)
+    state = _load_state()
+    last_str = state.get("roar_price_snapshot_last")
+    if last_str:
+        try:
+            last = datetime.fromisoformat(last_str.replace("Z", "+00:00"))
+            if (now - last).total_seconds() < 3600:  # < 1 uur geleden
+                return
+        except Exception:
+            pass
+    try:
+        from modules.shop.routes import get_dynamic_price
+        from modules.core.storage import load_json, save_json
+        SNAPS = DATA / "roar" / "price_snapshots.json"
+        price = float(get_dynamic_price() or 0)
+        if price <= 0:
+            return
+        d = load_json(SNAPS, default={"snapshots": []})
+        d["snapshots"].append({"ts": now.isoformat(), "price_eur": round(price, 4)})
+        if len(d["snapshots"]) > 5000:
+            d["snapshots"] = d["snapshots"][-5000:]
+        save_json(SNAPS, d)
+        state["roar_price_snapshot_last"] = now.isoformat()
+        _save_state(state)
+        print(f"[scheduler] roar price-snapshot saved: €{price:.2f}")
+    except Exception as ex:
+        print(f"[scheduler] roar price-snapshot failed: {ex}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -199,6 +233,7 @@ async def scheduler_loop():
         try:
             await _maybe_boekhouder_roundup()
             await _maybe_error_bark()
+            await _maybe_roar_price_snapshot()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

@@ -626,21 +626,46 @@ export function TraderPage({ onNavigate }) {
                       </div>
                     )}
                     <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2">
-                      {potjes.potjes?.map(p => {
+                      {(potjes.potjes ? [...potjes.potjes].sort((a, b) => {
+                        // v6_pot_lock_visual_order_001 — locked potjes (staking-ankers) ONDERAAN
+                        // zodat de actieve trade-potjes meteen in beeld staan en de "fundering"
+                        // visueel apart blijft staan.
+                        const aLocked = a.pot_locked ? 1 : 0;
+                        const bLocked = b.pot_locked ? 1 : 0;
+                        if (aLocked !== bLocked) return aLocked - bLocked;
+                        // Binnen elke groep: open posities eerst, dan op index
+                        const aOpen = a.position?.is_open ? 0 : 1;
+                        const bOpen = b.position?.is_open ? 0 : 1;
+                        if (aOpen !== bOpen) return aOpen - bOpen;
+                        return (a.index || 0) - (b.index || 0);
+                      }) : [])?.map(p => {
                         const open = p.position?.is_open;
+                        const locked = p.pot_locked;
                         const pnl = p.stats?.total_pnl || 0;
                         const liveValue = p.live_value ?? p.capital;
                         const hasGrowth = Math.abs(liveValue - p.capital) >= 0.005;
                         return (
                           <div key={p.id} data-testid={`pot-${p.id}`}
-                            className={`rounded-xl p-2.5 border ${open ? 'bg-amber-500/10 border-amber-500/30' : 'bg-slate-800/30 border-slate-700'}`}>
+                            className={`rounded-xl p-2.5 border ${
+                              locked ? 'bg-emerald-500/5 border-emerald-500/30' :
+                              open ? 'bg-amber-500/10 border-amber-500/30' :
+                              'bg-slate-800/30 border-slate-700'
+                            }`}>
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-[10px] font-bold text-white">{p.id}</span>
+                              <span className="text-[10px] font-bold text-white flex items-center gap-1">
+                                {locked && <span className="text-emerald-400" title={p.lock_reason || 'locked'}>🔒</span>}
+                                {p.id}
+                              </span>
                               <span className={`text-[9px] font-medium ${hasGrowth ? (liveValue > p.capital ? 'text-green-400' : 'text-red-400') : 'text-slate-400'}`}>
                                 €{liveValue.toFixed(2)}
                               </span>
                             </div>
-                            {open ? (
+                            {locked ? (
+                              <div>
+                                <p className="text-[9px] text-emerald-400 font-semibold">STAKING ANKER</p>
+                                <p className="text-[9px] text-slate-500 truncate">{p.market || '—'}</p>
+                              </div>
+                            ) : open ? (
                               <div>
                                 <p className="text-[9px] text-amber-400">IN POSITIE</p>
                                 <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>

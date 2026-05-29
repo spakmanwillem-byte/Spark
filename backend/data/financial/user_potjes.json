@@ -337,8 +337,124 @@
     "user-000": {
       "potjes": [
         {
-          "id": "pot-001",
+          "id": "pot-008",
           "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "assigned_market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "last_action": "LOCK as ADA staking anchor (migration v6 sessie14)",
+          "source": "spark_trade_slot_001",
+          "slot_type": "trade_slot",
+          "origin_eur": 0.0,
+          "migrated_at": "2026-05-29T08:20:40.218667+00:00"
+        },
+        {
+          "id": "pot-009",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "assigned_market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "last_action": "LOCK as BCH staking anchor (migration v6 sessie14)",
+          "source": "spark_trade_slot_001",
+          "slot_type": "trade_slot",
+          "origin_eur": 0.0,
+          "migrated_at": "2026-05-29T08:20:40.218681+00:00"
+        },
+        {
+          "id": "pot-010",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BTC-EUR",
+          "assigned_market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "last_action": "LOCK as BTC staking anchor (migration v6 sessie14)",
+          "source": "spark_trade_slot_001",
+          "slot_type": "trade_slot",
+          "origin_eur": 0.0,
+          "migrated_at": "2026-05-29T08:20:40.218685+00:00"
+        },
+        {
+          "id": "pot-011",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ETH-EUR",
+          "assigned_market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "last_action": "LOCK as ETH staking anchor (migration v6 sessie14)",
+          "source": "spark_trade_slot_001",
+          "slot_type": "trade_slot",
+          "origin_eur": 0.0,
+          "migrated_at": "2026-05-29T08:20:40.218689+00:00"
+        },
+        {
+          "id": "pot-001",
+          "index": 4,
           "capital": 10.0549,
           "max_size": 50.0,
           "pot_locked": true,
@@ -370,113 +486,8 @@
           "slot_type": "base_locked_to_bitvavo"
         },
         {
-          "id": "pot-002",
-          "index": 1,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": true,
-            "entry_price": 1727.01,
-            "highest_price": 1739.63,
-            "trailing_active": false,
-            "entry_time": "2026-05-28T17:27:21.724710+00:00",
-            "qty": 0.005791797405837913,
-            "source": "bitvavo_sync_28mei",
-            "amount_eur": 10.0
-          },
-          "market": "ETH-EUR",
-          "stats": {
-            "trades": 1,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": null,
-          "source": "clean_slate_28mei",
-          "assigned_market": "ETH-EUR",
-          "linked_bitvavo": {
-            "symbol": "ETH",
-            "qty": 0.005791797405837913,
-            "entry_eur_per_coin": 1727.01,
-            "entry_total_eur": 10.0
-          },
-          "slot_type": "base_locked_to_bitvavo"
-        },
-        {
-          "id": "pot-003",
-          "index": 2,
-          "capital": 10.1144,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "BCH-EUR",
-          "stats": {
-            "trades": 2,
-            "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.1244
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €262.29 | netto €+0.124",
-          "source": "clean_slate_28mei",
-          "assigned_market": "BCH-EUR",
-          "linked_bitvavo": {
-            "symbol": "BCH",
-            "qty": 0.03874402,
-            "entry_eur_per_coin": 257.79,
-            "entry_total_eur": 9.99
-          },
-          "slot_type": "base_locked_to_bitvavo"
-        },
-        {
-          "id": "pot-004",
-          "index": 3,
-          "capital": 9.98,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": true,
-            "entry_price": 62878.0,
-            "highest_price": 63194.0,
-            "trailing_active": false,
-            "entry_time": "2026-05-28T17:27:21.724710+00:00",
-            "qty": 0.00015875,
-            "source": "bitvavo_sync_28mei",
-            "amount_eur": 9.98
-          },
-          "market": "BTC-EUR",
-          "stats": {
-            "trades": 1,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": null,
-          "source": "clean_slate_28mei",
-          "assigned_market": "BTC-EUR",
-          "linked_bitvavo": {
-            "symbol": "BTC",
-            "qty": 0.00015875,
-            "entry_eur_per_coin": 62878.0,
-            "entry_total_eur": 9.98
-          },
-          "slot_type": "base_locked_to_bitvavo"
-        },
-        {
           "id": "pot-005",
-          "index": 4,
+          "index": 5,
           "capital": 9.95,
           "max_size": 50.0,
           "pot_locked": false,
@@ -512,7 +523,7 @@
         },
         {
           "id": "pot-006",
-          "index": 5,
+          "index": 6,
           "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
@@ -551,7 +562,7 @@
         },
         {
           "id": "pot-007",
-          "index": 6,
+          "index": 7,
           "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
@@ -589,93 +600,81 @@
           ]
         },
         {
-          "id": "pot-008",
-          "index": 7,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "EUR",
-          "assigned_market": null,
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:43:02.272429+00:00",
-          "last_action": null,
-          "source": "spark_trade_slot_001",
-          "slot_type": "trade_slot",
-          "origin_eur": 0.0
-        },
-        {
-          "id": "pot-009",
+          "id": "pot-004",
           "index": 8,
-          "capital": 10.0,
+          "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 62878.0,
+            "highest_price": 63194.0,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-28T17:27:21.724710+00:00",
+            "qty": 0.00015875,
+            "source": "bitvavo_sync_28mei",
+            "amount_eur": 9.98
           },
-          "market": "EUR",
-          "assigned_market": null,
+          "market": "BTC-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
-          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
           "last_action": null,
-          "source": "spark_trade_slot_001",
-          "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "source": "clean_slate_28mei",
+          "assigned_market": "BTC-EUR",
+          "linked_bitvavo": {
+            "symbol": "BTC",
+            "qty": 0.00015875,
+            "entry_eur_per_coin": 62878.0,
+            "entry_total_eur": 9.98
+          },
+          "slot_type": "base_locked_to_bitvavo"
         },
         {
-          "id": "pot-010",
+          "id": "pot-002",
           "index": 9,
           "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 1727.01,
+            "highest_price": 1739.63,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-28T17:27:21.724710+00:00",
+            "qty": 0.005791797405837913,
+            "source": "bitvavo_sync_28mei",
+            "amount_eur": 10.0
           },
-          "market": "EUR",
-          "assigned_market": null,
+          "market": "ETH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
-          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
           "last_action": null,
-          "source": "spark_trade_slot_001",
-          "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "source": "clean_slate_28mei",
+          "assigned_market": "ETH-EUR",
+          "linked_bitvavo": {
+            "symbol": "ETH",
+            "qty": 0.005791797405837913,
+            "entry_eur_per_coin": 1727.01,
+            "entry_total_eur": 10.0
+          },
+          "slot_type": "base_locked_to_bitvavo"
         },
         {
-          "id": "pot-011",
+          "id": "pot-003",
           "index": 10,
-          "capital": 10.0,
+          "capital": 10.1144,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -686,19 +685,24 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "EUR",
-          "assigned_market": null,
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
-            "wins": 0,
+            "trades": 2,
+            "wins": 1,
             "losses": 0,
-            "total_pnl": 0.0
+            "total_pnl": 0.1244
           },
-          "created_at": "2026-05-28T17:43:02.272429+00:00",
-          "last_action": null,
-          "source": "spark_trade_slot_001",
-          "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €262.29 | netto €+0.124",
+          "source": "clean_slate_28mei",
+          "assigned_market": "BCH-EUR",
+          "linked_bitvavo": {
+            "symbol": "BCH",
+            "qty": 0.03874402,
+            "entry_eur_per_coin": 257.79,
+            "entry_total_eur": 9.99
+          },
+          "slot_type": "base_locked_to_bitvavo"
         },
         {
           "id": "pot-012",

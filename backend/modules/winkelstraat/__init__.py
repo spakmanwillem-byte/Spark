@@ -55,6 +55,9 @@ async def list_shops():
     d = _load_shops()
     shops = d.get("shops", [])
     # v6_shop_visuals_001 (28 mei) — enrich met owner_avatar_url uit users.json
+    # v6_shop_avatar_resolve_fix_001 (29 mei) — resolve "gallery:{id}" prefix naar
+    # echte image-URL. Frontend kreeg eerder "gallery:cf90e9ea6393" als src en kon
+    # die niet renderen → lege avatar-cirkel naast shop-naam.
     try:
         users_data = load_json(USERS_FILE, default={"users": []})
         users = users_data.get("users", []) if isinstance(users_data, dict) else users_data
@@ -62,7 +65,13 @@ async def list_shops():
         for s in shops:
             owner = user_map.get(s.get("owner_user_id"))
             if owner:
-                s["owner_avatar_url"] = owner.get("avatar_url") or owner.get("avatar")
+                raw_av = owner.get("avatar_url") or owner.get("avatar")
+                if raw_av and isinstance(raw_av, str):
+                    if raw_av.startswith("gallery:"):
+                        avatar_id = raw_av.split(":", 1)[1]
+                        s["owner_avatar_url"] = f"/api/avatar/gallery/{avatar_id}/image"
+                    else:
+                        s["owner_avatar_url"] = raw_av
                 if not s.get("owner_naam"):
                     s["owner_naam"] = owner.get("naam") or owner.get("name")
     except Exception:

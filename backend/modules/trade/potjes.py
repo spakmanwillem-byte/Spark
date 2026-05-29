@@ -421,6 +421,74 @@ def ensure_anchors_for_markets(user_id: str, markets: List[str]) -> Dict:
     return {"success": True, "created": created, "skipped": skipped}
 
 
+# v6_spark_2pots_per_coin_001 — Spark krijgt 2 trade-potjes per coin (naast anchor)
+def ensure_spark_trade_pots(markets: List[str], pots_per_coin: int = 2) -> Dict:
+    """Zorg dat Spark `pots_per_coin` vrije trade-potjes per coin heeft (default 2).
+    Anchors zijn los hiervan (zie ensure_anchors_for_markets).
+
+    Idempotent: telt bestaande vrije trade-potjes per coin, mint alleen tekorten.
+    Skipt open posities (die zijn geclaimd door een actieve trade).
+    """
+    user_id = "user-000"
+    if not markets:
+        return {"success": True, "minted": [], "skipped": []}
+
+    clean_markets = sorted({(m or "").strip().upper() for m in markets if m})
+    clean_markets = [m for m in clean_markets if m and m != "EUR"]
+    if not clean_markets:
+        return {"success": True, "minted": [], "skipped": []}
+
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.setdefault("potjes", [])
+
+    # Tel vrije trade-potjes per market (skip locked anchors + open positions)
+    from collections import Counter
+    free_trade_per_market = Counter()
+    for p in potjes:
+        if p.get("pot_locked"):
+            continue
+        if p.get("position", {}).get("is_open"):
+            continue
+        m = (p.get("market") or "").upper()
+        if m and m != "EUR":
+            free_trade_per_market[m] += 1
+
+    now = datetime.now(timezone.utc).isoformat()
+    next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
+    minted = []
+    for market in clean_markets:
+        cur = free_trade_per_market.get(market, 0)
+        needed = pots_per_coin - cur
+        for _ in range(max(0, needed)):
+            new_pot = {
+                "id": f"pot-{next_idx + 1:03d}",
+                "index": next_idx,
+                "capital": START_AMOUNT,
+                "max_size": INITIAL_MAX,
+                "pot_locked": False,
+                "lock_reason": None,
+                "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                             "trailing_active": False, "entry_time": None},
+                "market": market,
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now,
+                "last_action": None,
+                "source": "spark_2pots_per_coin",
+            }
+            potjes.append(new_pot)
+            minted.append({"id": new_pot["id"], "market": market})
+            next_idx += 1
+
+    if minted:
+        user["potjes"] = potjes
+        _save(data)
+
+    return {"success": True, "minted": minted, "target_per_coin": pots_per_coin,
+            "total_potjes": len(potjes)}
+
+
+
 def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
     """v6_potje_per_token_001 — verminder potjes wanneer user tokens kwijtraakt (sell_back/gift_sent).
 

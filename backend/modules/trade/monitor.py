@@ -872,16 +872,23 @@ class MonitorService:
                     pass
             # v6_auto_anchor_001 — Auto-create locked staking-anker voor nieuwe coins (Spark only)
             anchor_result = None
+            trade_pots_result = None
             try:
-                from .potjes import ensure_anchors_for_markets
+                from .potjes import ensure_anchors_for_markets, ensure_spark_trade_pots
                 anchor_result = ensure_anchors_for_markets(self._user_id, clean)
                 if anchor_result.get("created"):
                     logger.info(f"Auto-anchors aangemaakt voor {self._user_id}: {anchor_result['created']}")
+                # v6_spark_2pots_per_coin_001 — Spark: 2 trade-potjes per coin
+                if self._user_id == "user-000":
+                    trade_pots_result = ensure_spark_trade_pots(clean, pots_per_coin=2)
+                    if trade_pots_result.get("minted"):
+                        logger.info(f"Spark trade-potjes gemint: {trade_pots_result['minted']}")
             except Exception as ex:
-                logger.warning(f"ensure_anchors_for_markets faalde voor {self._user_id}: {ex}")
+                logger.warning(f"ensure pot-structure faalde voor {self._user_id}: {ex}")
             logger.info(f"Markets hot-updated voor {self._user_id}: {clean}")
             return {"success": True, "markets": clean, "running": self._running,
-                    "anchors_created": (anchor_result or {}).get("created", [])}
+                    "anchors_created": (anchor_result or {}).get("created", []),
+                    "trade_pots_minted": (trade_pots_result or {}).get("minted", [])}
 
     # v5_candle_hotswap_001 — wissel candle_interval (15m / 1h / 4h / 1d) zonder restart
     def update_candle_interval(self, candle_interval: str) -> Dict:

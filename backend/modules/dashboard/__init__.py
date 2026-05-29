@@ -62,12 +62,20 @@ async def financial(user_id: str):
     out["roar_value_eur"] = round(tokens * token_price, 2)
 
     # 4) Bitvavo portfolio (alleen voor admin user-001 — vereist API key)
+    # v6_bitvavo_base_locked_001 (sessie 16) — base = total - cash =
+    # waarde van coins die in staking/anchors zitten. Groeit automatisch
+    # met crypto-prijzen, geen handmatige sync nodig.
     if user_id == "user-001":
         try:
             from modules.trade.bitvavo_client import get_balance_summary
             summary = get_balance_summary()
-            out["bitvavo_eur"] = round(float(summary.get("total_eur", 0)), 2)
-            out["details"]["bitvavo"] = summary.get("breakdown", {})
+            total_bv = round(float(summary.get("total_eur", 0)), 2)
+            breakdown = summary.get("breakdown", {})
+            cash_in_bv = round(float(breakdown.get("EUR", 0)), 2)
+            out["bitvavo_eur"] = total_bv
+            out["bitvavo_cash_eur"] = cash_in_bv
+            out["bitvavo_base_locked_eur"] = round(total_bv - cash_in_bv, 2)
+            out["details"]["bitvavo"] = breakdown
         except Exception:
             pass
 

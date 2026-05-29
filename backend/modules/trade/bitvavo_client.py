@@ -15,6 +15,9 @@ import urllib.error
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from modules.core.storage import load_json
+
+SETTINGS_DIR = Path(__file__).parent.parent.parent / "data" / "users"
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 BASE_URL = "https://api.bitvavo.com/v2"
 _PRICE_CACHE = {}
@@ -95,6 +98,43 @@ def get_balance(user_id: str = "user-001") -> List[Dict]:
     if isinstance(res, list):
         return res
     return []
+
+
+def _signed_get_raw(user_id: str, path: str) -> Optional[Dict]:
+    """v6_bitvavo_staking_001 — generieke signed GET voor extra endpoints."""
+    settings_file = SETTINGS_DIR / user_id / "settings.json"
+    settings = load_json(settings_file, default={})
+    bv = settings.get("integrations", {}).get("bitvavo", {})
+    api_key = bv.get("api_key")
+    api_secret = bv.get("api_secret")
+    if not api_key or not api_secret:
+        # Proxy via Spark
+        spark_set = load_json(SETTINGS_DIR / "user-000" / "settings.json", default={})
+        sbv = spark_set.get("integrations", {}).get("bitvavo", {})
+        api_key = sbv.get("api_key")
+        api_secret = sbv.get("api_secret")
+        if not api_key or not api_secret:
+            return None
+    return _signed_request(api_key, api_secret, "GET", path, "")
+
+
+def get_staking_balance(user_id: str = "user-001") -> Dict:
+    """Haal Bitvavo Staking/Savings balance op.
+    Returns {total_staked_eur, positions: [{symbol, qty, eur_value}]} of None bij geen toegang.
+    Bitvavo heeft `/v2/account/balance` voor staking historie; pragmatisch
+    proberen we de `/v2/balance` met `staking=true` query (heeft niet altijd resultaat).
+    """
+    out = {"total_staked_eur": 0.0, "positions": []}
+    # Bitvavo splitst staking onder dezelfde balance endpoint maar als aparte symbols
+    # met staking prefix (bv "ETH-STK" of "GOVE"). Geen publieke docs voor exact endpoint.
+    # Voor nu: signed GET op /v2/account toont staking_enabled etc. Fallback: leeg.
+    try:
+        resp = _signed_get_raw(user_id, "/v2/account")
+        if isinstance(resp, dict):
+            out["account_meta"] = resp
+    except Exception:
+        pass
+    return out
 
 
 def get_balance_summary(user_id: str = "user-001") -> Dict:

@@ -10,22 +10,33 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 260.28,
+            "highest_price": 260.44,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-29T19:02:31.947221+00:00",
+            "amount_eur": 10.0
           },
           "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-29T18:59:53.581694+00:00",
-          "last_action": null,
-          "source": "trade_pot_per_token"
+          "last_action": "BUY @ €260.28",
+          "source": "trade_pot_per_token",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T19:02:31.947221+00:00",
+              "side": "BUY",
+              "price": 260.28,
+              "amount_eur": 10.0,
+              "trade_id": "961c7008",
+              "market": "BCH-EUR"
+            }
+          ]
         },
         {
           "id": "pot-002",
@@ -530,7 +541,7 @@
       ],
       "baseline_eur": 0,
       "overflow_pool": 0.0,
-      "last_buy_cycle": null,
+      "last_buy_cycle": 19,
       "user_id": "user-001",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00"
@@ -828,7 +839,7 @@
       "user_id": "user-000",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00",
-      "_clean_slate": "28-mei-2026: was 10 potjes van \u20ac5.08 \u2192 nu 5 base potjes van \u20ac10 (per Willem)",
+      "_clean_slate": "28-mei-2026: was 10 potjes van €5.08 → nu 5 base potjes van €10 (per Willem)",
       "eur_reserve_bitvavo": 72.4,
       "_bitvavo_synced_at": "2026-05-28T17:27:21.724710+00:00",
       "_bitvavo_total_eur": 122.33

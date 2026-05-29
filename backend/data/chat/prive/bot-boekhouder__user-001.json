@@ -1180,6 +1180,23 @@
       "topup_id": "tk-e5b40d7780",
       "topup_ref": "#tk-e5b40",
       "is_bot": true
+    },
+    {
+      "id": "bh-54b7add2",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • BCH @ €260.2800\nPotje: pot-001\nInleg: €10.00\nEigenaar: user-001",
+      "ts": "2026-05-29T19:02:31.956186+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 260.28,
+      "user_id": "user-001"
     }
   ]
 }

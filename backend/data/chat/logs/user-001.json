@@ -24758,17 +24758,17 @@
       }
     },
     {
-      "id": "conv-c3da30bc",
-      "timestamp": "2026-05-29T17:21:14.301448+00:00",
+      "id": "conv-20c28b3f",
+      "timestamp": "2026-05-29T11:20:40.050882+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
       "user_message": "[system:login]",
-      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 6 uur geleden)_",
+      "spark_response": "Goedemiddag Willem. Vertel maar.",
       "channel": "spark",
       "analysis": {
         "trigger_type": "welcome",
         "response_type": "welcome",
-        "dagdeel": "avond"
+        "dagdeel": "middag"
       },
       "metadata": {
         "session_id": "default",
@@ -24776,17 +24776,17 @@
       }
     },
     {
-      "id": "conv-dfdb378e",
-      "timestamp": "2026-05-29T17:21:14.340603+00:00",
+      "id": "conv-0c3b2a95",
+      "timestamp": "2026-05-29T11:39:50.244354+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
       "user_message": "[system:login]",
-      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "spark_response": "Goedemiddag Willem. Waar staat je hoofd vandaag?",
       "channel": "spark",
       "analysis": {
         "trigger_type": "welcome",
         "response_type": "welcome",
-        "dagdeel": "avond"
+        "dagdeel": "middag"
       },
       "metadata": {
         "session_id": "default",
@@ -24794,17 +24794,17 @@
       }
     },
     {
-      "id": "conv-7eee05c1",
-      "timestamp": "2026-05-29T17:52:30.406823+00:00",
+      "id": "conv-7a297b40",
+      "timestamp": "2026-05-29T12:04:33.746295+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
       "user_message": "[system:login]",
-      "spark_response": "Goedenavond Willem. Ik luister.",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
       "channel": "spark",
       "analysis": {
         "trigger_type": "welcome",
         "response_type": "welcome",
-        "dagdeel": "avond"
+        "dagdeel": "middag"
       },
       "metadata": {
         "session_id": "default",
@@ -24812,27 +24812,45 @@
       }
     },
     {
-      "id": "conv-c3465ca8",
-      "timestamp": "2026-05-29T17:52:30.458247+00:00",
+      "id": "conv-a5b33e65",
+      "timestamp": "2026-05-29T12:33:01.761651+00:00",
       "user_id": "user-001",
       "user_naam": "De Willem",
       "user_message": "[system:login]",
-      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "spark_response": "Goedemiddag Willem. Wat speelt er?",
       "channel": "spark",
       "analysis": {
         "trigger_type": "welcome",
         "response_type": "welcome",
-        "dagdeel": "avond"
+        "dagdeel": "middag"
       },
       "metadata": {
         "session_id": "default",
         "gesprek_nummer": 955
       }
+    },
+    {
+      "id": "conv-401fba95",
+      "timestamp": "2026-05-29T15:28:42.556770+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen? _(laatst sprak je me 2 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 956
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 955,
-    "last_updated": "2026-05-29T17:52:30.458247+00:00"
+    "total_conversations": 956,
+    "last_updated": "2026-05-29T15:28:42.556770+00:00"
   }
 }

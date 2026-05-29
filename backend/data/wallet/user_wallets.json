@@ -4,12 +4,12 @@
       "user_id": "user-001",
       "name": "De Willem",
       "wallet": {
-        "spark_tokens": 10,
+        "spark_tokens": 20,
         "credits": 0,
         "balance_eur": 0.0,
         "earned_total": 0,
         "activity_score": 0,
-        "last_sync": "2026-05-28T17:22:48.396843+00:00"
+        "last_sync": "2026-05-29T15:32:31.225310+00:00"
       },
       "linked_entities": [
         "personal_willem"
@@ -75,7 +75,25 @@
         "last_sync": "2026-05-28T17:22:48.396843+00:00",
         "balance_eur": 0.0
       }
+    },
+    "user-1996fa59": {
+      "wallet": {
+        "spark_tokens": 1,
+        "last_sync": "2026-05-29T11:31:42.536682+00:00"
+      }
+    },
+    "user-5dd295db": {
+      "wallet": {
+        "spark_tokens": 1,
+        "last_sync": "2026-05-29T12:18:09.349663+00:00"
+      }
+    },
+    "user-4d9b59aa": {
+      "wallet": {
+        "spark_tokens": 1,
+        "last_sync": "2026-05-29T15:32:31.225339+00:00"
+      }
     }
   },
-  "_arch_ref": "DSP-004 \u2014 display-mirror voor wallet UI. Autoritatief: roar_balances.json.balances. Sync verplicht bij elke balance-mutatie."
+  "_arch_ref": "DSP-004 — display-mirror voor wallet UI. Autoritatief: roar_balances.json.balances. Sync verplicht bij elke balance-mutatie."
 }

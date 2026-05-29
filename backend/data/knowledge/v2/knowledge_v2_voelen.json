@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 269,
+    "card_count": 271,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-29T07:18:09.788930+00:00"
+    "last_updated": "2026-05-29T16:40:55.456286+00:00"
   },
   "kaarten": [
     {
@@ -34501,6 +34501,307 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-05-29T07:18:02.753138+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-8ef1f4ef",
+      "begrip": "ademhaling",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ademhaling is het ritmische proces van in- en uitademen waarmee het lichaam zuurstof opneemt, spanning reguleert en leven ondersteunt.",
+        "laag2": "Ademhaling verbindt lichaam en bewustzijn.\nHet gebeurt automatisch, maar kan ook bewust gestuurd worden om rust, focus of herstel te beïnvloeden.",
+        "laag3": "De manier waarop iemand ademt weerspiegelt vaak de innerlijke staat.\nSnelle, oppervlakkige ademhaling kan spanning tonen, terwijl rustige diepe ademhaling kalmte en regulatie ondersteunt.",
+        "laag4": "Binnen Spark kan ademhaling gezien worden als metafoor voor adaptieve regulatie.\nZoals ademhaling balans houdt tussen opname en loslaten, zo ondersteunt bewuste afstemming het bewaren van evenwicht binnen denken, voelen en handelen.\nAdemhaling is daarmee een basismechanisme van zelfsturing."
+      },
+      "ws5": {
+        "wie": "Alle levende mensen en organismen",
+        "wat": "Een automatisch en bewust beïnvloedbaar regulatieproces",
+        "wanneer": "Continu, vanaf geboorte tot levenseinde",
+        "waar": "In het lichaam, via longen, middenrif en zenuwstelsel",
+        "waarom": "Voor zuurstofopname, energievoorziening en regulatie van spanning",
+        "hoe": "Door ritmische in- en uitademing gestuurd door het autonome en bewuste zenuwstelsel"
+      },
+      "tags": [
+        "ademhaling",
+        "rust",
+        "regulatie",
+        "ritme",
+        "spanning",
+        "bewustzijn",
+        "balans",
+        "zelfsturing",
+        "zuurstof"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bewustzijn",
+            "regulatie",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8354db8d",
+          "begrip": "Geaard",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "balans",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ced807dd",
+          "begrip": "Vrede",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "balans",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-67a41cf9",
+          "begrip": "Stabiliteit",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "balans",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-992ca38a",
+          "begrip": "Ontspanning",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "balans",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-29T16:35:24.331834+00:00",
+        "vorige_versie_v1": "kb-skel-8ef1f4ef",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.893079+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-29T16:35:23.262241+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-29T16:35:23.272094+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-29T16:35:26.548835+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-29T16:35:26.556818+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-29T16:35:21.655777+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e7fada80",
+      "begrip": "afkeer",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afkeer is een gevoel van afwijzing, weerstand of terugtrekking tegenover iets dat als onprettig, bedreigend of ongewenst wordt ervaren.",
+        "laag2": "Afkeer helpt grenzen aangeven.\nHet waarschuwt wanneer iets niet passend, veilig of wenselijk voelt.",
+        "laag3": "Afkeer ontstaat vaak vanuit ervaring, overtuiging, instinct of bescherming.\nHet kan helpend zijn als signaal, maar kan ook beperkend worden wanneer het niet bewust onderzocht wordt.",
+        "laag4": "Binnen Spark kan afkeer gezien worden als een regulerend waarschuwingsmechanisme dat spanning tussen intentie en ervaring zichtbaar maakt.\nAfkeer vraagt niet direct om afwijzing, maar om onderzoek:\nwat veroorzaakt de weerstand, welke grens wordt geraakt en welke betekenis ligt daaronder?\nBewuste reflectie maakt afkeer tot informatie in plaats van automatische afstoting."
+      },
+      "ws5": {
+        "wie": "Mensen en bewuste systemen die reageren op prikkels",
+        "wat": "Een gevoel van weerstand of afwijzing",
+        "wanneer": "Bij ervaren dreiging, mismatch, ongemak of afstemmingstekort",
+        "waar": "In emotionele beleving, denken, lichaam en gedrag",
+        "waarom": "Om bescherming, begrenzing en signalering mogelijk te maken",
+        "hoe": "Door interne interpretatie van ervaring, herinnering, instinct of betekenisgeving"
+      },
+      "tags": [
+        "afkeer",
+        "weerstand",
+        "grens",
+        "emotie",
+        "bescherming",
+        "afwijzing",
+        "reflectie",
+        "regulatie",
+        "boos",
+        "bang"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c82f3134",
+          "begrip": "beledigd",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afwijzing",
+            "bang",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10363874",
+          "begrip": "vijandigheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afwijzing",
+            "bang",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-84a2710c",
+          "begrip": "opstandig",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "weerstand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "regulatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58fe509b",
+          "begrip": "Bang",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bang",
+            "bescherming",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-29T16:40:55.456245+00:00",
+        "vorige_versie_v1": "kb-skel-e7fada80",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:25.630192+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-29T16:40:54.257129+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-29T16:40:54.269326+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-29T16:40:59.042861+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-29T16:40:59.053199+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-29T16:40:52.169491+00:00"
       },
       "media": {
         "voice_url": null,

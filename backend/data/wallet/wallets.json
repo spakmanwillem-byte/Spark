@@ -1,9 +1,9 @@
 {
   "wallets": {
     "user-001": {
-      "balance": 10.51,
+      "balance": 0.0,
       "created_at": "2026-03-29T20:00:00+00:00",
-      "total_deposited": 72.03,
+      "total_deposited": 230.16,
       "total_withdrawn": 0,
       "total_donated": 0,
       "wallet_id": "user-001",
@@ -77,7 +77,7 @@
     },
     "user-000": {
       "wallet_id": "user-000",
-      "balance": 0.0052,
+      "balance": 0.0,
       "created_at": "2026-05-21T11:43:38.704074+00:00",
       "total_deposited": 0,
       "total_withdrawn": 0,
@@ -100,16 +100,7 @@
       "balance_eur": 0.0,
       "spark_tokens": 10,
       "last_sync": "2026-05-28T17:22:48.396843+00:00",
-      "cleaned_at_28mei": true,
-      "fee_log": [
-        {
-          "ts": "2026-05-29T17:30:55.402959+00:00",
-          "from_user": "user-001",
-          "from_pot": "pot-001",
-          "netto_profit": 0.10360864531068935,
-          "fee_eur": 0.0052
-        }
-      ]
+      "cleaned_at_28mei": true
     },
     "user-574ac78e": {
       "wallet_id": "user-574ac78e",
@@ -332,6 +323,163 @@
         "free": 1.33,
         "potje": 0.0
       }
+    },
+    {
+      "id": "acfbb1a0-4e2d-4d00-8689-a043213275d9",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 11.0,
+      "status": "completed",
+      "message": "Tikkie tk-9aa27 — naam: De Willem",
+      "created_at": "2026-05-29T11:39:34.442710+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-9aa2791a0f"
+      },
+      "split": {
+        "free": 11.0,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "c9adf27a-05ab-444d-af5f-4b78d0ab6b9a",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 11.0,
+      "token_amount": 1,
+      "price_per_token": 11.0,
+      "description": "1 ROAR gekocht @ 11.0",
+      "timestamp": "2026-05-29T11:41:42.155363+00:00",
+      "status": "completed"
+    },
+    {
+      "id": "50f74b92-2dc5-40fe-8a90-918eff179c2c",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 100.0,
+      "status": "completed",
+      "message": "Tikkie tk-5ccab — naam: De Willem",
+      "created_at": "2026-05-29T12:01:45.264460+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-5ccabc5cec"
+      },
+      "split": {
+        "free": 100.0,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "12de66a7-b82d-45f4-b82b-1c22afccfd9b",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 59.64,
+      "token_amount": 4,
+      "price_per_token": 14.91,
+      "description": "4 ROAR gekocht @ 14.91",
+      "timestamp": "2026-05-29T12:02:21.654976+00:00",
+      "status": "completed"
+    },
+    {
+      "id": "6968f677-47de-4df0-96a5-8f3d0723b3c1",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 10.0,
+      "status": "completed",
+      "message": "Tikkie tk-f2b2a — naam: De Willem",
+      "created_at": "2026-05-29T12:07:01.523012+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-f2b2a7588a"
+      },
+      "split": {
+        "free": 10.0,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "6eade84d-2d18-416d-af3b-bfb262af3bf2",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 26.24,
+      "token_amount": 2,
+      "price_per_token": 13.12,
+      "description": "2 ROAR gekocht @ 13.12",
+      "timestamp": "2026-05-29T12:13:59.157709+00:00",
+      "status": "completed"
+    },
+    {
+      "id": "cd2e0b3b-b90e-492b-9e56-70c9c33516bd",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 33.0,
+      "status": "completed",
+      "message": "Tikkie tk-ad126 — naam: De Willem",
+      "created_at": "2026-05-29T12:29:38.244099+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-ad12662a68"
+      },
+      "split": {
+        "free": 33.0,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "84d6499c-ea41-452c-9434-7d3690d66b3f",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 61.05,
+      "token_amount": 5,
+      "price_per_token": 12.21,
+      "description": "5 ROAR gekocht @ 12.21",
+      "timestamp": "2026-05-29T12:37:05.356086+00:00",
+      "status": "completed"
+    },
+    {
+      "id": "64471bd9-bbdf-4912-97c8-fb337ee308dc",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 4.02,
+      "status": "completed",
+      "message": "Tikkie tk-20b09 — naam: De Willem",
+      "created_at": "2026-05-29T17:04:32.869929+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-20b093143f"
+      },
+      "split": {
+        "free": 4.02,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "7eb1102f-bd98-4d19-a290-361e9c47d907",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 0.11,
+      "status": "completed",
+      "message": "Tikkie tk-e5b40 — naam: De Willem",
+      "created_at": "2026-05-29T17:07:46.207196+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-e5b40d7780"
+      },
+      "split": {
+        "free": 0.11,
+        "potje": 0.0
+      }
+    },
+    {
+      "id": "2a2688ab-c2ad-4b8a-9198-1726a9cd46c9",
+      "user_id": "user-001",
+      "type": "buy_roar",
+      "amount_eur": 10.71,
+      "token_amount": 1,
+      "price_per_token": 10.71,
+      "description": "1 ROAR gekocht @ 10.71",
+      "timestamp": "2026-05-29T17:08:00.702630+00:00",
+      "status": "completed"
     }
   ]
 }

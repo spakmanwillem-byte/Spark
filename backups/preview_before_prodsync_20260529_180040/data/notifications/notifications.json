@@ -1,0 +1,131 @@
+{
+  "notifications": [
+    {
+      "id": "notif-1",
+      "user_id": "user-001",
+      "title": "Welkom bij Spark Core 2.0",
+      "message": "Alle modules zijn geport vanuit V1!",
+      "type": "info",
+      "read": true,
+      "timestamp": "2026-04-01T08:00:00+00:00"
+    },
+    {
+      "id": "notif-2",
+      "user_id": "all",
+      "title": "ROAR Token Update",
+      "message": "Systeem gereset. Tokens behouden, waarde wordt herberekend bij nieuwe stortingen.",
+      "type": "warning",
+      "read": true,
+      "timestamp": "2026-04-01T10:00:00+00:00"
+    },
+    {
+      "id": "notif-3",
+      "user_id": "user-001",
+      "title": "Community Chat Live",
+      "message": "Madelief, Harry en Mr Smith zijn online! Stuur een bericht.",
+      "type": "success",
+      "read": true,
+      "timestamp": "2026-04-01T10:30:00+00:00"
+    },
+    {
+      "id": "4e218d0a-5624-4299-be65-189e7763b751",
+      "user_id": "user-a0ee2d7e",
+      "kind": "first_roar_token",
+      "icon": "🪙",
+      "title": "Je eerste ROAR token is binnen",
+      "message": "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. Met dit token kun je nu een eigen Trader monitor starten via de Trader-module.\n\n• De monitor luistert naar 1 markt (bv BCH-EUR) en analyseert de candles\n• Bij auto-trade aan koopt en verkoopt hij automatisch volgens de signalen\n• Je kunt hem altijd pauzeren of stoppen — Spark's eigen monitor blijft draaien\n\nVeel succes!",
+      "created_at": "2026-05-22T21:01:20.306168+00:00",
+      "read": false
+    },
+    {
+      "id": "57ebb8ac-e343-4fcb-82e2-40f8b35ce303",
+      "user_id": "user-574ac78e",
+      "kind": "first_roar_token",
+      "icon": "🪙",
+      "title": "Je eerste ROAR token is binnen",
+      "message": "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. Met dit token kun je nu een eigen Trader monitor starten via de Trader-module.\n\n• De monitor luistert naar 1 markt (bv BCH-EUR) en analyseert de candles\n• Bij auto-trade aan koopt en verkoopt hij automatisch volgens de signalen\n• Je kunt hem altijd pauzeren of stoppen — Spark's eigen monitor blijft draaien\n\nVeel succes!",
+      "created_at": "2026-05-22T21:01:20.306182+00:00",
+      "read": false
+    },
+    {
+      "id": "b9a2d2be-c7cb-4abe-b4d7-dbf24ba1c0c1",
+      "user_id": "user-a0ee2d7e",
+      "kind": "gift_incoming",
+      "icon": "🎁",
+      "title": "🎁 Gift van De Willem: 1 ROAR",
+      "message": "De Willem wil je 1 ROAR token sturen.\n\nNotitie: \"Test gift\"\n\nGa naar Wallet → Inkomende gifts om te accepteren of weigeren. Verloopt over 24 uur.",
+      "created_at": "2026-05-22T21:14:19.751233+00:00",
+      "read": false
+    },
+    {
+      "id": "a7f1b03f-42a7-4c7f-b562-e1e8728eb957",
+      "user_id": "user-001",
+      "kind": "gift_accepted",
+      "icon": "✅",
+      "title": "Gift geaccepteerd door Gijs",
+      "message": "Gijs heeft je gift van 1 ROAR geaccepteerd.",
+      "created_at": "2026-05-22T21:14:20.134546+00:00",
+      "read": false
+    },
+    {
+      "id": "6dbb44ea-706c-4be6-bdee-690f48ed263f",
+      "user_id": "user-a0ee2d7e",
+      "kind": "gift_received",
+      "icon": "🎁",
+      "title": "Gift ontvangen van De Willem",
+      "message": "Je hebt 1 ROAR ontvangen van De Willem.",
+      "created_at": "2026-05-22T21:14:20.136393+00:00",
+      "read": false
+    },
+    {
+      "id": "24f60a16-ddf9-4dd7-b6af-98eeae429d7e",
+      "user_id": "user-574ac78e",
+      "kind": "gift_incoming",
+      "icon": "🎁",
+      "title": "🎁 Gift van De Willem: 1 ROAR",
+      "message": "De Willem wil je 1 ROAR token sturen.\n\nGa naar Wallet → Inkomende gifts om te accepteren of weigeren. Verloopt over 24 uur.",
+      "created_at": "2026-05-22T21:18:00.884985+00:00",
+      "read": false
+    },
+    {
+      "id": "061d05a0-deb5-4b57-bf80-3c36ac6fa5c5",
+      "user_id": "user-c609d7d1",
+      "kind": "gift_incoming",
+      "icon": "🎁",
+      "title": "🎁 Gift van De Willem: 1 ROAR",
+      "message": "De Willem wil je 1 ROAR token sturen.\n\nNotitie: \"idempotency test\"\n\nGa naar Wallet → Inkomende gifts om te accepteren of weigeren. Verloopt over 24 uur.",
+      "created_at": "2026-05-25T14:40:54.471753+00:00",
+      "read": false
+    },
+    {
+      "id": "a6c5b0f0-e011-4370-91be-d0f348b4b487",
+      "user_id": "user-c609d7d1",
+      "kind": "first_roar_token",
+      "icon": "🪙",
+      "title": "Je eerste ROAR token is binnen",
+      "message": "Welkom in de Spark-economie! Eén ROAR token = één bot-slot. Met dit token kun je nu een eigen Trader monitor starten via de Trader-module.\n\n• De monitor luistert naar 1 markt en analyseert de candles\n• Bij auto-trade aan koopt en verkoopt hij automatisch\n• Je kunt hem altijd pauzeren of stoppen",
+      "created_at": "2026-05-25T14:40:54.650587+00:00",
+      "read": false
+    },
+    {
+      "id": "b748d9c2-b669-4764-8c95-55f714644de3",
+      "user_id": "user-001",
+      "kind": "gift_accepted",
+      "icon": "✅",
+      "title": "Gift geaccepteerd door Marieke",
+      "message": "Marieke heeft je gift van 1 ROAR geaccepteerd.",
+      "created_at": "2026-05-25T14:40:54.652336+00:00",
+      "read": false
+    },
+    {
+      "id": "66ca32f6-9f47-4c22-8c27-9998131f78d5",
+      "user_id": "user-c609d7d1",
+      "kind": "gift_received",
+      "icon": "🎁",
+      "title": "Gift ontvangen van De Willem",
+      "message": "Je hebt 1 ROAR ontvangen van De Willem.",
+      "created_at": "2026-05-25T14:40:54.654414+00:00",
+      "read": false
+    }
+  ]
+}

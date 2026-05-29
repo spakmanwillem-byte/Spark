@@ -387,11 +387,47 @@
         "session_id": "default",
         "gesprek_nummer": 15
       }
+    },
+    {
+      "id": "conv-5cf40f17",
+      "timestamp": "2026-05-29T11:31:08.443327+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Roadkill. Ik luister. _(het is 9 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 16
+      }
+    },
+    {
+      "id": "conv-3d568635",
+      "timestamp": "2026-05-29T15:28:23.637364+00:00",
+      "user_id": "user-1996fa59",
+      "user_naam": "Roadkill",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Roadkill. Klaar om iets te leren of door te denken? _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 17
+      }
     }
   ],
   "metadata": {
     "user_id": "user-1996fa59",
-    "total_conversations": 15,
-    "last_updated": "2026-05-19T15:31:15.123476+00:00"
+    "total_conversations": 17,
+    "last_updated": "2026-05-29T15:28:23.637364+00:00"
   }
 }

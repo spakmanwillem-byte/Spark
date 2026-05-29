@@ -1,0 +1,57 @@
+{
+  "entries": [
+    {
+      "id": "0e0d842f76ea",
+      "ts": "2026-05-23T21:33:54.355112+00:00",
+      "type": "tijdelijke_lening",
+      "richting": "uitgegaan",
+      "bron_user": "user-001",
+      "bedrag_eur": -45.0,
+      "n_tokens": -10,
+      "phase": "build",
+      "auto_resolve": true,
+      "omschrijving": "Tijdelijke uithaal Willem: 10 potjes verkocht voor €45 op Bitvavo. Wordt teruggestort. Spark sluit lening zodra Bitvavo balance terug op niveau is."
+    },
+    {
+      "id": "831f7eafecc9",
+      "ts": "2026-05-23T16:49:22.030293+00:00",
+      "type": "gift_in",
+      "bron_tx": "2921e03a-2e03-40db-8e61-3f5c273bfde0",
+      "bron_user": "user-a0ee2d7e",
+      "bedrag_eur": 20.8,
+      "n_tokens": 2,
+      "omschrijving": "Gift €20.8 → 2 ROAR als bedankje (bouw-fase: fiscaal donatie, geen BTW) — Gijs",
+      "phase": "build"
+    },
+    {
+      "ts": "2026-05-14T00:00:00+00:00",
+      "type": "gift_in",
+      "bedrag_eur": 50.8,
+      "n_tokens": 10,
+      "bron_user": "user-001",
+      "bron_tx": "anchor-willem-initial-mint",
+      "omschrijving": "Reconcile: anchor_mint retroactief — 10 ROAR voor €50.8 (user user-001)",
+      "reconciled_by": "user-001",
+      "reconciled_at": "2026-05-28T14:03:28.629803+00:00"
+    },
+    {
+      "ts": "2026-05-23T09:39:56.107501+00:00",
+      "type": "uit_sell_back",
+      "bedrag_eur": 50.5,
+      "n_tokens": null,
+      "bron_user": null,
+      "bron_tx": "a24d9377-b112-4af9-a83b-084f70d74376",
+      "omschrijving": "Reconcile: sell_back retroactief — €50.5 uit (Willem opname €50,50 — 5 tokens terug naar treasury (3 eigen)",
+      "reconciled_by": "user-001",
+      "reconciled_at": "2026-05-28T14:04:29.706735+00:00"
+    }
+  ],
+  "totals": {
+    "gift_in": 71.6,
+    "omzet_in": 0,
+    "btw_reserve": 0,
+    "winst_in": 0,
+    "uit": 95.5,
+    "open_leningen": 45.0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "_arch_ref": "DSP-009 clean slate 28 mei",
+  "cleaned_at": "2026-05-28T17:22:48.396843+00:00",
+  "cleaned_by": "user-001",
+  "previous_tx_count": 13,
+  "balances": {
+    "user-000": 10,
+    "user-001": 11,
+    "user-a0ee2d7e": 2,
+    "user-c609d7d1": 0
+  },
+  "transactions": [
+    {
+      "id": "tx-clean-slate-28mei",
+      "ts": "2026-05-28T17:22:48.396843+00:00",
+      "type": "clean_slate_anchor",
+      "note": "Clean slate 28 mei: 13 oude tx gearchiveerd. Balances vastgezet als baseline.",
+      "reset_by": "user-001"
+    },
+    {
+      "id": "recovery-8c64ca48-7cf6-41e0-a020-980a2b41c976",
+      "ts": "2026-05-29T09:38:19.296687+00:00",
+      "type": "buy_roar",
+      "user_id": "user-001",
+      "amount": 1,
+      "amount_eur": 10.11,
+      "price_per_token": 10.11,
+      "note": "Recovery: token-koop user-001 (29 mei) — hook crashed, tx achteraf toegevoegd"
+    }
+  ],
+  "total_supply": 1000000,
+  "treasury_pool": 999977,
+  "anchor_price_eur": 5.08,
+  "current_dynamic_price_eur": 7.6,
+  "spark_bonus": {
+    "balance": 0,
+    "cumulative_profit_eur": 0.538007,
+    "token_price_at_mint": 5.08,
+    "history": []
+  }
+}

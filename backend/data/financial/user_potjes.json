@@ -3,223 +3,9 @@
     "user-001": {
       "potjes": [
         {
-          "id": "pot-005",
-          "index": 4,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null
-          },
-          "market": "BCH-EUR",
-          "stats": {
-            "trades": 1,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → BCH-EUR",
-          "source": "clean_slate_28mei",
-          "trade_log": [
-            {
-              "ts": "2026-05-29T07:48:45.513398+00:00",
-              "side": "BUY",
-              "price": 62979.0,
-              "amount_eur": 5.08,
-              "trade_id": "00000000-0000-0431-0100-0007fa5305b1",
-              "market": "BTC-EUR"
-            }
-          ],
-          "nummer": 5
-        },
-        {
-          "id": "pot-006",
-          "index": 5,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "BTC-EUR",
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → BTC-EUR",
-          "source": "clean_slate_28mei",
-          "nummer": 6
-        },
-        {
-          "id": "pot-007",
-          "index": 6,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null
-          },
-          "market": "ETH-EUR",
-          "stats": {
-            "trades": 1,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → ETH-EUR",
-          "source": "clean_slate_28mei",
-          "trade_log": [
-            {
-              "ts": "2026-05-29T07:48:49.877960+00:00",
-              "side": "BUY",
-              "price": 1720.39,
-              "amount_eur": 5.08,
-              "trade_id": "00000000-0000-047b-0100-0007fa531712",
-              "market": "ETH-EUR"
-            }
-          ],
-          "nummer": 7
-        },
-        {
-          "id": "pot-008",
-          "index": 7,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "SOL-EUR",
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → SOL-EUR",
-          "source": "clean_slate_28mei",
-          "nummer": 8
-        },
-        {
-          "id": "pot-009",
-          "index": 8,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null,
-            "amount_eur": null
-          },
-          "market": "ADA-EUR",
-          "stats": {
-            "trades": 1,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → ADA-EUR",
-          "source": "clean_slate_28mei",
-          "trade_log": [
-            {
-              "ts": "2026-05-29T07:49:07.435986+00:00",
-              "side": "BUY",
-              "price": 70.383,
-              "amount_eur": 5.08,
-              "trade_id": "00000000-0000-0560-0100-0007fa536e81",
-              "market": "SOL-EUR"
-            }
-          ],
-          "nummer": 9
-        },
-        {
-          "id": "pot-010",
-          "index": 9,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "BCH-EUR",
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "redistribute → BCH-EUR",
-          "source": "clean_slate_28mei",
-          "nummer": 10
-        },
-        {
-          "id": "pot-011",
-          "index": 10,
-          "capital": 10.0,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "BTC-EUR",
-          "stats": {
-            "trades": 0,
-            "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
-          },
-          "created_at": "2026-05-29T09:29:26.921559+00:00",
-          "last_action": "redistribute → BTC-EUR",
-          "source": "token_buy_expansion"
-        },
-        {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.0984,
+          "capital": 9.9527,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -233,12 +19,12 @@
           "market": "BCH-EUR",
           "stats": {
             "trades": 3,
-            "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.1036
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0473
           },
           "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €263.08 | netto €+0.104",
+          "last_action": "SELL @ €259.17 | netto €-0.047",
           "source": "clean_slate_28mei",
           "trade_log": [
             {
@@ -263,7 +49,7 @@
         {
           "id": "pot-002",
           "index": 1,
-          "capital": 10.097,
+          "capital": 9.9527,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -274,15 +60,15 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "BCH-EUR",
+          "market": "BTC-EUR",
           "stats": {
             "trades": 2,
-            "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.097
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0473
           },
           "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €262.91 | netto €+0.097",
+          "last_action": "redistribute → BTC-EUR",
           "source": "clean_slate_28mei",
           "nummer": 2,
           "trade_log": [
@@ -299,7 +85,7 @@
         {
           "id": "pot-003",
           "index": 2,
-          "capital": 10.0913,
+          "capital": 9.9864,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -310,15 +96,15 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "BCH-EUR",
+          "market": "ETH-EUR",
           "stats": {
-            "trades": 4,
-            "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.0913
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0136
           },
           "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €261.92 | netto €+0.091",
+          "last_action": "redistribute → ETH-EUR",
           "source": "clean_slate_28mei",
           "trade_log": [
             {
@@ -330,19 +116,11 @@
               "market": "BCH-EUR"
             },
             {
-              "ts": "2026-05-29T10:59:51.038639+00:00",
+              "ts": "2026-05-29T10:58:56.721008+00:00",
               "side": "BUY",
-              "price": 258.27,
+              "price": 258.23,
               "amount_eur": 10.0,
-              "trade_id": "00000000-0000-041f-0100-0007fb1cee28",
-              "market": "BCH-EUR"
-            },
-            {
-              "ts": "2026-05-29T10:59:51.139500+00:00",
-              "side": "BUY",
-              "price": 258.27,
-              "amount_eur": 10.0,
-              "trade_id": "00000000-0000-041f-0100-0007fb1cee87",
+              "trade_id": "00000000-0000-041f-0100-0007fb1c364a",
               "market": "BCH-EUR"
             }
           ],
@@ -351,7 +129,131 @@
         {
           "id": "pot-004",
           "index": 3,
-          "capital": 10.0719,
+          "capital": 9.9852,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0148
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → ADA-EUR",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:35.544086+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-041f-0100-0007fa52dbe3",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T10:59:31.204314+00:00",
+              "side": "BUY",
+              "price": 258.26,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb1ca9c9",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 4
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 9.9841,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0159
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → SOL-EUR",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:45.513398+00:00",
+              "side": "BUY",
+              "price": 62979.0,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-0431-0100-0007fa5305b1",
+              "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:00:05.555204+00:00",
+              "side": "BUY",
+              "price": 258.29,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb1d43d0",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 5
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 9.9852,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0148
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → ATOM-EUR",
+          "source": "clean_slate_28mei",
+          "nummer": 6,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:39:31.549489+00:00",
+              "side": "BUY",
+              "price": 258.26,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb4677f6",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0546,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -364,46 +266,481 @@
           },
           "market": "BCH-EUR",
           "stats": {
-            "trades": 4,
+            "trades": 3,
             "wins": 1,
             "losses": 0,
-            "total_pnl": 0.0719
+            "total_pnl": 0.0546
           },
           "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €261.50 | netto €+0.072",
+          "last_action": "SELL @ €258.80 | netto €+0.055",
           "source": "clean_slate_28mei",
           "trade_log": [
             {
-              "ts": "2026-05-29T07:48:35.544086+00:00",
+              "ts": "2026-05-29T07:48:49.877960+00:00",
               "side": "BUY",
-              "price": 262.84,
+              "price": 1720.39,
               "amount_eur": 5.08,
-              "trade_id": "00000000-0000-041f-0100-0007fa52dbe3",
-              "market": "BCH-EUR"
+              "trade_id": "00000000-0000-047b-0100-0007fa531712",
+              "market": "ETH-EUR"
             },
             {
-              "ts": "2026-05-29T11:00:25.810103+00:00",
+              "ts": "2026-05-29T11:52:24.745068+00:00",
               "side": "BUY",
-              "price": 258.35,
+              "price": 256.12,
               "amount_eur": 10.0,
-              "trade_id": "00000000-0000-041f-0100-0007fb1dbb20",
-              "market": "BCH-EUR"
-            },
-            {
-              "ts": "2026-05-29T11:00:25.817028+00:00",
-              "side": "BUY",
-              "price": 258.35,
-              "amount_eur": 10.0,
-              "trade_id": "00000000-0000-041f-0100-0007fb1dbb2a",
+              "trade_id": "00000000-0000-041f-0100-0007fb55cfdf",
               "market": "BCH-EUR"
             }
           ],
-          "nummer": 4
+          "nummer": 7
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0608,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BTC-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0608
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → BTC-EUR",
+          "source": "clean_slate_28mei",
+          "nummer": 8,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:54:19.043748+00:00",
+              "side": "BUY",
+              "price": 256.33,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb59a94a",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:20.042773+00:00",
+              "side": "BUY",
+              "price": 256.33,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb59ac98",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0533,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ETH-EUR",
+          "stats": {
+            "trades": 4,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0533
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → ETH-EUR",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:49:07.435986+00:00",
+              "side": "BUY",
+              "price": 70.383,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-0560-0100-0007fa536e81",
+              "market": "SOL-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:56.445805+00:00",
+              "side": "BUY",
+              "price": 256.52,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5a5d9a",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:57.546828+00:00",
+              "side": "BUY",
+              "price": 256.52,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5a624c",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 9
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0458,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0458
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "redistribute → ADA-EUR",
+          "source": "clean_slate_28mei",
+          "nummer": 10,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:55:32.333887+00:00",
+              "side": "BUY",
+              "price": 256.71,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5b38be",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:55:33.169123+00:00",
+              "side": "BUY",
+              "price": 256.71,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5b3bfc",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0427,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0427
+          },
+          "created_at": "2026-05-29T09:29:26.921559+00:00",
+          "last_action": "redistribute → SOL-EUR",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:56:07.226876+00:00",
+              "side": "BUY",
+              "price": 256.79,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5be9ea",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 9.9709,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0291
+          },
+          "created_at": "2026-05-29T12:02:21.682974+00:00",
+          "last_action": "redistribute → ATOM-EUR",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T15:14:48.093347+00:00",
+              "side": "BUY",
+              "price": 258.63,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fc979a87",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T15:14:48.239836+00:00",
+              "side": "BUY",
+              "price": 258.63,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fc979b2b",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        {
+          "id": "pot-013",
+          "index": 12,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:02:21.682974+00:00",
+          "last_action": null,
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-014",
+          "index": 13,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BTC-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:02:21.682974+00:00",
+          "last_action": "redistribute → BTC-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-015",
+          "index": 14,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ETH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:02:21.682974+00:00",
+          "last_action": "redistribute → ETH-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-016",
+          "index": 15,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:13:59.349071+00:00",
+          "last_action": "redistribute → ADA-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-017",
+          "index": 16,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:13:59.349071+00:00",
+          "last_action": "redistribute → SOL-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-018",
+          "index": 17,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:37:05.384592+00:00",
+          "last_action": "redistribute → ATOM-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-019",
+          "index": 18,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:37:05.384592+00:00",
+          "last_action": null,
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-020",
+          "index": 19,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BTC-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:37:05.384592+00:00",
+          "last_action": "redistribute → BTC-EUR",
+          "source": "token_buy_expansion"
+        },
+        {
+          "id": "pot-021",
+          "index": 20,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ETH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:37:05.384592+00:00",
+          "last_action": "redistribute → ETH-EUR",
+          "source": "token_buy_expansion"
         }
       ],
       "baseline_eur": 0,
       "overflow_pool": 0.0,
-      "last_buy_cycle": 57,
+      "last_buy_cycle": 399,
       "user_id": "user-001",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00"
@@ -411,7 +748,33 @@
     "user-1996fa59": {
       "user_id": "user-1996fa59",
       "market": "BCH-EUR",
-      "potjes": [],
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T11:31:42.546940+00:00",
+          "last_action": null,
+          "source": "token_buy_expansion"
+        }
+      ],
       "last_buy_cycle": 72,
       "overflow_pool": 0.0,
       "created_at": "2026-05-19T15:26:14.306311+00:00"
@@ -582,7 +945,7 @@
           "position": {
             "is_open": true,
             "entry_price": 0.20069,
-            "highest_price": 0.2029,
+            "highest_price": 0.20611,
             "trailing_active": true,
             "entry_time": "2026-05-28T17:27:21.724710+00:00",
             "qty": 49.574859,
@@ -612,28 +975,27 @@
         {
           "id": "pot-007",
           "index": 6,
-          "capital": 10.0,
+          "capital": 9.8104,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": true,
-            "entry_price": 262.84,
-            "highest_price": 263.53,
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
             "trailing_active": false,
-            "entry_time": "2026-05-29T07:48:08.068952+00:00",
-            "amount_eur": 5.08
+            "entry_time": null
           },
           "market": "BCH-EUR",
           "assigned_market": null,
           "stats": {
-            "trades": 1,
+            "trades": 2,
             "wins": 0,
-            "losses": 0,
-            "total_pnl": 0.0
+            "losses": 1,
+            "total_pnl": -0.1896
           },
           "created_at": "2026-05-28T17:43:02.272429+00:00",
-          "last_action": "BUY @ €262.84",
+          "last_action": "SELL @ €259.17 | netto €-0.190",
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
@@ -659,8 +1021,8 @@
           "position": {
             "is_open": true,
             "entry_price": 262.84,
-            "highest_price": 263.53,
-            "trailing_active": false,
+            "highest_price": 295.47,
+            "trailing_active": true,
             "entry_time": "2026-05-29T07:48:15.339739+00:00",
             "amount_eur": 5.08
           },
@@ -733,7 +1095,7 @@
           "position": {
             "is_open": true,
             "entry_price": 62878.0,
-            "highest_price": 63626.0,
+            "highest_price": 64915.0,
             "trailing_active": true,
             "entry_time": "2026-05-28T17:27:21.724710+00:00",
             "qty": 0.00015875,
@@ -770,7 +1132,7 @@
           "position": {
             "is_open": true,
             "entry_price": 1727.01,
-            "highest_price": 1749.33,
+            "highest_price": 1782.9,
             "trailing_active": true,
             "entry_time": "2026-05-28T17:27:21.724710+00:00",
             "qty": 0.005791797405837913,
@@ -934,7 +1296,7 @@
             "losses": 0,
             "total_pnl": 0.0
           },
-          "created_at": "2026-05-29T17:35:14.121553+00:00",
+          "created_at": "2026-05-29T18:01:26.245814+00:00",
           "last_action": null,
           "source": "auto_anchor_for_new_coin"
         }
@@ -995,7 +1357,7 @@
             "trailing_active": false,
             "entry_time": null
           },
-          "market": "ETH-EUR",
+          "market": "BTC-EUR",
           "stats": {
             "trades": 0,
             "wins": 0,
@@ -1003,7 +1365,7 @@
             "total_pnl": 0.0
           },
           "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": null,
+          "last_action": "redistribute → BTC-EUR",
           "source": "clean_slate_28mei",
           "assigned_market": "ETH-EUR",
           "nummer": 2
@@ -1021,13 +1383,73 @@
       "overflow_pool": 0.0,
       "created_at": "2026-05-28T14:08:14.265031+00:00"
     },
-    "stats": {
-      "user_id": "stats",
+    "user-5dd295db": {
+      "user_id": "user-5dd295db",
       "market": "BCH-EUR",
-      "potjes": [],
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T12:18:09.640214+00:00",
+          "last_action": null,
+          "source": "token_buy_expansion"
+        }
+      ],
       "last_buy_cycle": null,
       "overflow_pool": 0.0,
-      "created_at": "2026-05-29T17:30:25.730845+00:00"
+      "created_at": "2026-05-29T12:18:09.536768+00:00"
+    },
+    "user-4d9b59aa": {
+      "user_id": "user-4d9b59aa",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T15:32:31.233949+00:00",
+          "last_action": null,
+          "source": "token_buy_expansion"
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-29T15:30:24.727439+00:00"
     }
   }
 }

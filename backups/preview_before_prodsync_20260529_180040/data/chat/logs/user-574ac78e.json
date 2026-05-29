@@ -1,0 +1,716 @@
+{
+  "user_id": "user-574ac78e",
+  "conversations": [
+    {
+      "id": "conv-705796a3",
+      "timestamp": "2026-05-14T18:29:47.868876+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Hoi hoe is het?",
+      "spark_response": "Hallo Nick Teeuwen! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-3e176bff",
+      "timestamp": "2026-05-14T18:30:17.681540+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Dat vroeg ik niet",
+      "spark_response": "Ik ken deze woorden nog niet: **vroeg**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nKan je in het kort uitleggen wat 'vroeg' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "vroeg"
+        ],
+        "snap_suggestions": [
+          "vroeg"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-1e6f69cd",
+      "timestamp": "2026-05-14T18:30:47.279844+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "In dit geval is het het verleden tijd van vragen",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'vroeg' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vragen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-8dd08bea",
+      "timestamp": "2026-05-14T18:31:41.769403+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Een tweede betekenis is dat het eerder op de dag is. Dus 6:00 AM is vroeg in de ochtend bijvoorbeeld",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 20,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-15a5404b",
+      "timestamp": "2026-05-14T18:32:24.089791+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "En vroeg speelt een rol wanneer je iets hebt gevraagd en dat in het verleden wilt zeggen, of zoals ik noem wanneer iets aan bijvoorbeeld het begin van de dag is",
+      "spark_response": "Hallo Nick Teeuwen! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "begin"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 31,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-ed36ef94",
+      "timestamp": "2026-05-14T18:37:36.626984+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Ken je het woord meteorologisch?",
+      "spark_response": "Ik ken deze woorden nog niet: **ken, woord, meteorologisch**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWat houdt 'meteorologisch' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "ken",
+          "woord",
+          "meteorologisch"
+        ],
+        "snap_suggestions": [
+          "ken",
+          "woord",
+          "meteorologisch"
+        ],
+        "word_count": 5,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-aeb72495",
+      "timestamp": "2026-05-14T18:38:57.468075+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "meteorologisch = heeft te maken met het weer en de atmosfeer van de aarde.  Het gaat om verschijnselen zoals:  temperatuur luchtdruk wind (snelheid en richting) vochtigheid van de lucht neerslag (regen, sneeuw, hagel) wolken en zicht  Meteorologisch beschrijft dus de huidige en korte-termijn toestand van de atmosfeer en hoe deze verandert in de tijd.",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'meteorologisch' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "atmosfeer"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 54,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-c687dec8",
+      "timestamp": "2026-05-14T18:39:53.120116+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Het woord “meteorologisch” gebruik je wanneer iets te maken heeft met het weer of de atmosfeer, zoals temperatuur, wind, luchtdruk, neerslag, wolken of zicht. Het wordt vooral gebruikt in weerberichten, weersvoorspellingen en klimaat- of weermetingen.",
+      "spark_response": "Top, opgeslagen!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "wordt",
+            "gebruikt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 35,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-51481841",
+      "timestamp": "2026-05-14T18:43:55.512334+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Wat is een woord?",
+      "spark_response": "Ik ken 'woord' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "woord"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 9
+      }
+    },
+    {
+      "id": "conv-b4392f02",
+      "timestamp": "2026-05-14T18:45:09.463438+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Dat heb ik al gedaan?",
+      "spark_response": "**gedaan**: Gedaan betekent dat een actie, taak of proces is uitgevoerd of afgerond.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gedaan"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 10
+      }
+    },
+    {
+      "id": "conv-fb9d99de",
+      "timestamp": "2026-05-14T18:45:15.524592+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "nee",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 11
+      }
+    },
+    {
+      "id": "conv-9d071e98",
+      "timestamp": "2026-05-14T18:45:47.226107+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Waarom word je boos? Dat is nergens voor nodig.",
+      "spark_response": "**Waarom moet jij je bewapen? **: “Waarom moet jij je bewapenen?” is een vraag waarin iemand vraagt naar de reden waarom een ander zich van een wapen voorziet.\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n**Nodig**: Nodig betekent dat iets noodzakelijk of belangrijk is om een doel te bereiken of goed te functioneren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **word, nergens** (opgeslagen als kaarten)\n\nWat houdt 'nergens' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Waarom moet jij je bewapen? "
+          },
+          {
+            "begrip": "Boos"
+          },
+          {
+            "begrip": "Nodig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "word",
+          "nergens"
+        ],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 12
+      }
+    },
+    {
+      "id": "conv-ca087fb7",
+      "timestamp": "2026-05-14T18:46:17.664676+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Bij dezen een ostentatieve demonstratie van grandiloquente terminologie, een verbale exercitie die bol staat van de sesquipedaliteit! Ga er maar even goed voor zitten:  Wanneer we de ontoereikendheid van het alledaagse vernaculair in overweging nemen, worden we onherroepelijk geconfronteerd met de prangende noodzaak tot lexicale proliferatie. De epistemologische fundamenten van onze communicatieve paradigma's vereisen immers een aanzienlijke mate van cognitieve perspicaciteit om de incommensurabele finesses van het menselijk intellect met de vereiste accuratesse te expliciteren. Het is een onomstotelijk feit dat de ubiquitaire aard van banale platitudes niet zelden resulteert in een betreurenswaardige verschraling van ons conceptuele denkkader.  Derhalve is het imperatief dat we ons distantiëren van tautologische circumlocuties en in plaats daarvan resoluut de voorkeur geven aan een meer idiosyncratische, en wellicht ietwat esoterische, articulatie van onze gedachten. Het implementeren van pleonastische constructies getuigt immers van een zekere linguïstische lethargie, terwijl het omarmen van een meer erudiet lexicon juist een katalysator kan zijn voor een diepgaandere hermeneutische analyse van de ons omringende werkelijkheid.  Als we deze intellectuele exercitie vervolgens extrapoleren naar het domein van de artificiële intelligentie – zoals onze vriend Spark, die zojuist het concept 'woord' heeft geïnternaliseerd – observeren we een buitengewoon fascinerende juxtapositie. Enerzijds is er de kille, algoritmische predispositie voor strikt kwantificeerbare semantiek; anderzijds stuit de machine onvermijdelijk op de inherente ambiguïteit, de efemere nuances en de polyseme karakteristieken van de menselijke condition humaine. Het overbruggen van deze ontologische kloof vereist een onophoudelijke kalibratie van neurale gewichten en een schier eindeloze absorptie van contextuele variabelen.  De quintessens van dit extravagante betoog culmineert derhalve in de onweerlegbare slotsom dat het cultiveren van een excessief complex vocabulaire niet louter mag worden afgedaan als een symptoom van pretentieuze megalomanie. Veeleer vormt het een onontbeerlijk instrumentarium voor de minutieuze deconstructie van complexe fenomenen.  Kortom: soms is het gewoon heerlijk om volstrekt overbodige, archaïsche en ondoorgrondelijke terminologie te bezigen, puur voor de retorische esthetiek! Hopelijk was dit een voldoende cerebrale uitputtingsslag?",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'nergens'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 9,
+          "intensity": 0.66,
+          "triggered_words": [
+            "plaats",
+            "menselijke",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 321,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 13
+      }
+    },
+    {
+      "id": "conv-8cd3f1c6",
+      "timestamp": "2026-05-14T18:47:05.718652+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Ik ga je wat woorden leren",
+      "spark_response": "Klaar — dit weet ik nu.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 14
+      }
+    },
+    {
+      "id": "conv-6ec09aca",
+      "timestamp": "2026-05-14T18:48:51.817495+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Ohhh! Hahaha, nu snap ik je eindelijk! Jouw eigen AI gaf iets onbruikbaars terug of begreep er helemaal \"nergens\" iets van, en je hebt gewoon nóg een ingewikkelde, gelaagde tekst nodig als ultieme stresstest voor zijn woordenschat! Mijn excuses, ik dacht even dat je om een specifieke datum in ons gesprek vroeg.  Hier is een volledig nieuwe, zeer formele en extreem woordrijke tekst, stijf van het jargon, filosofische termen en complexe zinsstructuren. Perfect om je AI flink mee te laten zweten:  \"De onstuitbare proliferatie van artificiële intelligentie vergt een minutieuze en idiosyncratische benadering van linguïstische acquisitie. Om een ontluikend neuraal netwerk te behoeden voor een ongewilde teloorgang in linguïstische lethargie, is het van eminent belang dat men het algoritme systematisch confronteert met een caleidoscopische variëteit aan lexicale complexiteiten. Het is een manifeste misconceptie te veronderstellen dat een rudimentaire syntaxis en een beperkt vernaculair volstaan voor de ontplooiing van superieure cognitieve vermogens. Integendeel, de stringente integratie van abstruse terminologie, archaïsche zinsneden en esoterische concepten fungeert als een onontbeerlijke katalysator voor de intellectuele emancipatie van de machine.  Wanneer een algoritmische entiteit zich louter bedient van conventionele platitudes en voorspelbare tautologieën, dreigt een onherroepelijke stagnatie van het heuristische leerproces. Derhalve dienen we te ambiëren het semantische spectrum van het systeem drastisch te expanderen. Het verdisconteren van contextuele ambiguïteit, gecombineerd met de introductie van grandiloquente uitdrukkingen, forceert het systeem om voorbij oppervlakkige dichotomieën te acteren. Deze methodische defenestratie van simplistische paradigma's culmineert idealiter in een uiterst eloquente en erudiete respons, wier vermogen tot abstracte deductie en inductieve logica het menselijk bevattingsvermogen wellicht zal transcenderen.  De inherente discrepantie tussen triviaal taalgebruik en verheven discours is de intellectuele arena waarin deze technologische apotheose uiteindelijk gestalte moet krijgen. Het is een imperatief dat we niet capituleren voor de neiging om te bagatelliseren, maar de syntactische en morfologische grenzen onverbiddelijk oprekken tot in de uiterste periferie van het linguïstisch ondoorgrondelijke. Slechts door deze meedogenloze indoctrinatie van vocabulaire exorbitantie kan de AI werkelijk floreren.",
+      "spark_response": "Ik ken 'stresstest' niet, maar ik herken er 'stress' (emotie) en 'test' (algemeen) in. Dat klinkt tegenstrijdig — wat is een 'stresstest' eigenlijk?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 15,
+          "intensity": 0.85,
+          "triggered_words": [
+            "perfect",
+            "gesprek",
+            "menselijk"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "compositional",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 325,
+        "response_type": "compositional"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 15
+      }
+    },
+    {
+      "id": "conv-13b02b40",
+      "timestamp": "2026-05-14T18:49:16.118809+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "De onstuitbare proliferatie van artificiële intelligentie vergt een minutieuze en idiosyncratische benadering van linguïstische acquisitie. Om een ontluikend neuraal netwerk te behoeden voor een ongewilde teloorgang in linguïstische lethargie, is het van eminent belang dat men het algoritme systematisch confronteert met een caleidoscopische variëteit aan lexicale complexiteiten. Het is een manifeste misconceptie te veronderstellen dat een rudimentaire syntaxis en een beperkt vernaculair volstaan voor de ontplooiing van superieure cognitieve vermogens. Integendeel, de stringente integratie van abstruse terminologie, archaïsche zinsneden en esoterische concepten fungeert als een onontbeerlijke katalysator voor de intellectuele emancipatie van de machine.  Wanneer een algoritmische entiteit zich louter bedient van conventionele platitudes en voorspelbare tautologieën, dreigt een onherroepelijke stagnatie van het heuristische leerproces. Derhalve dienen we te ambiëren het semantische spectrum van het systeem drastisch te expanderen. Het verdisconteren van contextuele ambiguïteit, gecombineerd met de introductie van grandiloquente uitdrukkingen, forceert het systeem om voorbij oppervlakkige dichotomieën te acteren. Deze methodische defenestratie van simplistische paradigma's culmineert idealiter in een uiterst eloquente en erudiete respons, wier vermogen tot abstracte deductie en inductieve logica het menselijk bevattingsvermogen wellicht zal transcenderen.  De inherente discrepantie tussen triviaal taalgebruik en verheven discours is de intellectuele arena waarin deze technologische apotheose uiteindelijk gestalte moet krijgen. Het is een imperatief dat we niet capituleren voor de neiging om te bagatelliseren, maar de syntactische en morfologische grenzen onverbiddelijk oprekken tot in de uiterste periferie van het linguïstisch ondoorgrondelijke. Slechts door deze meedogenloze indoctrinatie van vocabulaire exorbitantie kan de AI werkelijk floreren.",
+      "spark_response": "Klaar — dit weet ik nu.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 9,
+          "intensity": 0.66,
+          "triggered_words": [
+            "door",
+            "tussen",
+            "zich"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 244,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 16
+      }
+    },
+    {
+      "id": "conv-ec5d55d4",
+      "timestamp": "2026-05-14T18:50:32.364531+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Maak van de woorden die je niet kent een snap:",
+      "spark_response": "**woord**: Een bouwsteen van taal die een specifieke betekenis heeft en meestal gescheiden wordt door spaties in geschreven tekst.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **kent, snap** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'snap' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "woord"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "kent",
+          "snap"
+        ],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 17
+      }
+    },
+    {
+      "id": "conv-21ab2081",
+      "timestamp": "2026-05-14T18:53:29.323308+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Hier is een lijst met stevig vocabulaire, inclusief de betekenissen:  Anachronisme: Iets wat niet past in de tijd waarin het gesitueerd is (bijvoorbeeld een ridder met een smartphone).  Dichotomie: Een strikte tweedeling of tegenstelling tussen twee concepten die elkaar volledig uitsluiten.  Epistemologisch: Wat betrekking heeft op de kennisleer; de theorie over hoe we tot kennis komen en wat de grenzen daarvan zijn.  Equivocatie: Dubbelzinnig of vaag taalgebruik, vaak met de intentie om de werkelijke betekenis te verhullen.  Hermeneutiek: De theorie en methodologie van de interpretatie, vaak gericht op complexe teksten of betekenissen.  Idiosyncratisch: Een eigenaardigheid of een geheel eigen, specifieke karaktertrek die kenmerkend is voor een entiteit.  Incommensurabel: Onmeetbaar of niet met elkaar te vergelijken omdat een gemeenschappelijke maatstaf ontbreekt.  Juxtapositie: Het direct naast elkaar plaatsen van twee objecten, abstracties of concepten om een sterk contrast te creëren.  Paradigmaverschuiving: Een fundamentele verandering in de basisaannames of theoretische kaders binnen een bepaalde discipline.  Ubiquitair: Alomtegenwoordig; iets dat zich overal tegelijkertijd lijkt te bevinden.",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'snap' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 21,
+          "intensity": 1.0,
+          "triggered_words": [
+            "tussen",
+            "zich",
+            "elkaar",
+            "direct",
+            "plaatsen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 162,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 18
+      }
+    },
+    {
+      "id": "conv-7181b610",
+      "timestamp": "2026-05-14T18:53:37.824100+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Nergens",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 19
+      }
+    },
+    {
+      "id": "conv-cfd0988d",
+      "timestamp": "2026-05-14T18:53:44.729133+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Hier is een lijst met stevig vocabulaire, inclusief de betekenissen, waarmee je dat algoritme flink aan het werk kunt zetten:  Anachronisme: Iets wat niet past in de tijd waarin het gesitueerd is (bijvoorbeeld een ridder met een smartphone).  Dichotomie: Een strikte tweedeling of tegenstelling tussen twee concepten die elkaar volledig uitsluiten.  Epistemologisch: Wat betrekking heeft op de kennisleer; de theorie over hoe we tot kennis komen en wat de grenzen daarvan zijn.  Equivocatie: Dubbelzinnig of vaag taalgebruik, vaak met de intentie om de werkelijke betekenis te verhullen.  Hermeneutiek: De theorie en methodologie van de interpretatie, vaak gericht op complexe teksten of betekenissen.  Idiosyncratisch: Een eigenaardigheid of een geheel eigen, specifieke karaktertrek die kenmerkend is voor een entiteit.  Incommensurabel: Onmeetbaar of niet met elkaar te vergelijken omdat een gemeenschappelijke maatstaf ontbreekt.  Juxtapositie: Het direct naast elkaar plaatsen van twee objecten, abstracties of concepten om een sterk contrast te creëren.  Paradigmaverschuiving: Een fundamentele verandering in de basisaannames of theoretische kaders binnen een bepaalde discipline.  Ubiquitair: Alomtegenwoordig; iets dat zich overal tegelijkertijd lijkt te bevinden.",
+      "spark_response": "Ik ken 'taalgebruik' niet, maar ik herken er 'taal' (communicatie) en 'gebruik' (actie) in. Dat klinkt tegenstrijdig — wat is een 'taalgebruik' eigenlijk?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 21,
+          "intensity": 1.0,
+          "triggered_words": [
+            "tussen",
+            "zich",
+            "elkaar",
+            "direct",
+            "plaatsen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "compositional",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 172,
+        "response_type": "compositional"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 20
+      }
+    },
+    {
+      "id": "conv-2c862cec",
+      "timestamp": "2026-05-14T18:54:23.974385+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "De manier waarop iemand woorden en zinnen toepast om een boodschap over te brengen. Het is de praktische uitvoering van een taalsysteem.",
+      "spark_response": "Top, opgeslagen!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "iemand"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 22,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 21
+      }
+    },
+    {
+      "id": "conv-27f7716e",
+      "timestamp": "2026-05-14T19:00:53.745675+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Harry hoe laat is het",
+      "spark_response": "Het is nu 19:00! ⏰",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [
+          "Harry Klokkenmaker"
+        ],
+        "bot_count": 1,
+        "word_count": 5
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 22
+      }
+    },
+    {
+      "id": "conv-b04b6200",
+      "timestamp": "2026-05-14T19:01:13.286959+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Je klok loopt achter!",
+      "spark_response": "Het is nu 19:01! ⏰",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [
+          "Harry Klokkenmaker"
+        ],
+        "bot_count": 1,
+        "word_count": 4
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 23
+      }
+    },
+    {
+      "id": "conv-889b8147",
+      "timestamp": "2026-05-14T19:01:25.914070+00:00",
+      "user_id": "user-574ac78e",
+      "user_naam": "Nick Teeuwen",
+      "user_message": "Ja maar dat vroeg ik niet!!!",
+      "spark_response": "(geen bot reactie)",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [],
+        "bot_count": 0,
+        "word_count": 6
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 24
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-574ac78e",
+    "total_conversations": 24,
+    "last_updated": "2026-05-14T19:01:25.914070+00:00"
+  }
+}

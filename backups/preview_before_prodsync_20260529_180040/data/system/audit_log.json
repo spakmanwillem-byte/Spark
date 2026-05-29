@@ -1,0 +1,460 @@
+{
+  "entries": [
+    {
+      "ts": "2026-05-21T21:03:04.095299+00:00",
+      "id": "RESET-21MEI",
+      "type": "system_reset",
+      "user_id": "user-001",
+      "note": "Schone start: wallets→0 (Spark €5.08), potjes Spark=1, ROAR Spark=1/rest=0, baselines reset, rang gesynced met XP/level. Audit-trail behouden."
+    },
+    {
+      "ts": "2026-05-22T14:08:07.526270+00:00",
+      "id": "8399f23b5885",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "price": 325.7,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-22T14:08:07.585424+00:00",
+      "id": "cf8f83e92f35",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "price": 325.7,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:10:27.274490+00:00",
+      "id": "87904bf9b27e",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:11:06.739569+00:00",
+      "id": "58f119407b04",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:11:45.810154+00:00",
+      "id": "580b37f4b818",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:12:27.179508+00:00",
+      "id": "b98fe9916501",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-005",
+      "market": "BCH-EUR",
+      "price": 297.95,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:13:06.284528+00:00",
+      "id": "a81cd03b80a4",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-006",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:13:44.619775+00:00",
+      "id": "351e57009920",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-007",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:14:23.032806+00:00",
+      "id": "04724d5936e9",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-008",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T11:15:03.877276+00:00",
+      "id": "9efb27379956",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-009",
+      "market": "BCH-EUR",
+      "price": 322.06,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-23T13:41:33.816774+00:00",
+      "id": "2ec4a2cf4a59",
+      "type": "cycle_close",
+      "user_id": "user-000",
+      "rollup": {
+        "user_id": "user-000",
+        "naam": "Spark",
+        "since": "begin der tijd",
+        "closed_at": "2026-05-23T13:41:33.811817+00:00",
+        "n_buys": 0,
+        "n_sells": 0,
+        "total_buy_eur": 0,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "IJkpunt v5.1 - eerste afsluiting"
+      }
+    },
+    {
+      "ts": "2026-05-23T13:41:33.980801+00:00",
+      "id": "182316bb33e0",
+      "type": "cycle_close",
+      "user_id": "user-001",
+      "rollup": {
+        "user_id": "user-001",
+        "naam": "user-001",
+        "since": "begin der tijd",
+        "closed_at": "2026-05-23T13:41:33.976269+00:00",
+        "n_buys": 10,
+        "n_sells": 0,
+        "total_buy_eur": 50.8,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "IJkpunt v5.1"
+      }
+    },
+    {
+      "ts": "2026-05-23T13:41:45.168938+00:00",
+      "id": "8c9b871b8004",
+      "type": "cycle_close",
+      "user_id": "user-001",
+      "rollup": {
+        "user_id": "user-001",
+        "naam": "user-001",
+        "since": "2026-05-23T13:41:33.976269+00:00",
+        "closed_at": "2026-05-23T13:41:45.163673+00:00",
+        "n_buys": 0,
+        "n_sells": 0,
+        "total_buy_eur": 0,
+        "total_sell_netto_eur": 0,
+        "total_fees_eur": 0,
+        "total_mints_tokens": 0,
+        "note": "2e ronde - moet leeg zijn"
+      }
+    },
+    {
+      "ts": "2026-05-23T14:11:03.280699+00:00",
+      "id": "0dac3a839889",
+      "type": "ijkpunt_redeploy",
+      "version": "v5.2",
+      "totaal_eur": 102.8,
+      "per_pot": 5.14,
+      "n_potjes": 20,
+      "spark_config": "user-000 · 1h · auto_trade=true · BCH-EUR",
+      "willem_config": "user-001 · 15m · auto_trade=false · BCH-EUR",
+      "note": "€1.20 bijgestort, alles in BCH op Bitvavo verkocht, ijkpunt v5.2 voor redeploy"
+    },
+    {
+      "ts": "2026-05-23T16:49:22.030293+00:00",
+      "id": "cbcd5d8f4898",
+      "type": "token_purchase_via_system",
+      "user_id": "user-a0ee2d7e",
+      "user_naam": "Gijs",
+      "n_tokens": 2,
+      "price_per_token": 10.4,
+      "total_eur": 20.8,
+      "btw_eur": 4.368,
+      "btw_pct": 0.21,
+      "note": "Vriend van Willem koopt via systeem ipv bank, BTW naar Spark's kasboek"
+    },
+    {
+      "ts": "2026-05-23T21:33:54.355112+00:00",
+      "id": "afc50db1ee69",
+      "type": "potjes_tijdelijk_uitgehaald",
+      "user_id": "user-001",
+      "n_potjes": 10,
+      "verkoopwaarde_eur": 45.0,
+      "boekwaarde_eur": 50.8,
+      "verschil_eur": -5.8,
+      "loan_id": "0e0d842f76ea",
+      "note": "Willem heeft op Bitvavo 10 potjes verkocht voor €45 (boekwaarde €50.80). Wordt teruggestort. Auto-resolve zodra Bitvavo balance terug op niveau is."
+    },
+    {
+      "ts": "2026-05-23T21:44:02.573305+00:00",
+      "id": "2574c2683302",
+      "type": "trade_buy",
+      "user_id": "user-000",
+      "pot_id": "pot-000-01",
+      "market": "BCH-EUR",
+      "price": 306.56,
+      "amount_eur": 5.14
+    },
+    {
+      "ts": "2026-05-23T22:21:18.591668+00:00",
+      "id": "e58b8592f19c",
+      "type": "trade_buy",
+      "user_id": "user-000",
+      "pot_id": "pot-000-02",
+      "market": "BCH-EUR",
+      "price": 306.37,
+      "amount_eur": 5.14
+    },
+    {
+      "ts": "2026-05-23T22:24:29.598126+00:00",
+      "id": "2626f1c96bf3",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-001-01",
+      "market": "BCH-EUR",
+      "price": 306.37,
+      "amount_eur": 5.14
+    },
+    {
+      "ts": "2026-05-23T22:24:33.377624+00:00",
+      "id": "3492f66526a9",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-001-02",
+      "market": "BCH-EUR",
+      "price": 306.37,
+      "amount_eur": 5.14
+    },
+    {
+      "ts": "2026-05-28T18:56:15.519088+00:00",
+      "id": "1e6f820c8c1a",
+      "type": "trade_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-001",
+      "market": "SOL-EUR",
+      "price": 71.116,
+      "netto": 0.05486231492796037,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T07:48:08.087160+00:00",
+      "id": "fa922b6bd6c3",
+      "type": "trade_buy",
+      "user_id": "user-000",
+      "pot_id": "pot-006",
+      "market": "BCH-EUR",
+      "price": 262.84,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:48:15.352168+00:00",
+      "id": "0b2b51724661",
+      "type": "trade_buy",
+      "user_id": "user-000",
+      "pot_id": "pot-007",
+      "market": "BCH-EUR",
+      "price": 262.84,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:48:32.243302+00:00",
+      "id": "598c134bb710",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "price": 262.84,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:48:35.553246+00:00",
+      "id": "a2841b913a02",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 262.84,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:48:45.522966+00:00",
+      "id": "6bc1d2d6496b",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BTC-EUR",
+      "price": 62979.0,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:48:49.886875+00:00",
+      "id": "a5c0302ba468",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-005",
+      "market": "ETH-EUR",
+      "price": 1720.39,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:49:01.822099+00:00",
+      "id": "4ae935bff8b9",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-006",
+      "market": "ADA-EUR",
+      "price": 0.20098,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:49:07.445448+00:00",
+      "id": "320a5228c75f",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-007",
+      "market": "SOL-EUR",
+      "price": 70.383,
+      "amount_eur": 5.08
+    },
+    {
+      "ts": "2026-05-29T07:56:45.390065+00:00",
+      "id": "4d4ea8516a15",
+      "type": "trade_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 262.29,
+      "netto": 0.12443612824391947,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T09:44:51.741290+00:00",
+      "id": "72fb21e5de17",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "price": 259.1,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T09:44:56.893838+00:00",
+      "id": "efd2ced31344",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "price": 259.1,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T10:59:51.049511+00:00",
+      "id": "055e9fb2a6e7",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 258.27,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T10:59:51.149709+00:00",
+      "id": "6a03e9c4a541",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 258.27,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T11:00:25.822063+00:00",
+      "id": "54f42be492e9",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "price": 258.35,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T11:00:25.829459+00:00",
+      "id": "6bacc817b277",
+      "type": "trade_buy",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "price": 258.35,
+      "amount_eur": 10.0
+    },
+    {
+      "ts": "2026-05-29T17:30:55.420278+00:00",
+      "id": "c726e7abbd9b",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "price": 263.08,
+      "netto": 0.10360864531068935,
+      "spark_fee_eur": 0.0052
+    },
+    {
+      "ts": "2026-05-29T17:30:55.424247+00:00",
+      "id": "b3875b954e05",
+      "type": "fee_transfer",
+      "from_user": "user-001",
+      "to_user": "user-000",
+      "amount_eur": 0.0052,
+      "reason": "5% fee op SELL pot-001"
+    },
+    {
+      "ts": "2026-05-29T17:41:26.288585+00:00",
+      "id": "fe2e7b3031bb",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "price": 262.91,
+      "netto": 0.09704747201852575,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T17:50:28.060828+00:00",
+      "id": "6881d232bd8b",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 261.92,
+      "netto": 0.09132496999264468,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T17:51:28.074702+00:00",
+      "id": "541716b7e125",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "price": 261.5,
+      "netto": 0.07192761757305892,
+      "spark_fee_eur": 0.0
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "user_id": "test-rel-002",
+  "conversations": [
+    {
+      "id": "conv-f9ede27b",
+      "timestamp": "2026-05-19T06:26:59.042018+00:00",
+      "user_id": "test-rel-002",
+      "user_naam": "T",
+      "user_message": "Mijn moeder Anneke heeft jarig morgen",
+      "spark_response": "**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\n**Morgen**: Morgen betekent de dag na vandaag of het begin van een nieuwe dag.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "anneke"
+          },
+          {
+            "begrip": "jarig"
+          },
+          {
+            "begrip": "Morgen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-c1d0125d",
+      "timestamp": "2026-05-19T06:27:01.702620+00:00",
+      "user_id": "test-rel-002",
+      "user_naam": "T",
+      "user_message": "Mijn vader Peter werkt in Utrecht",
+      "spark_response": "**Vader**: Door groei, leren, opvoeding en sociale ontwikkeling.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **peter, werkt, utrecht** (opgeslagen als kaarten)\n\nWat houdt 'utrecht' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vader"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "peter",
+          "werkt",
+          "utrecht"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-a897cca8",
+      "timestamp": "2026-05-19T06:27:02.121990+00:00",
+      "user_id": "test-rel-002",
+      "user_naam": "T",
+      "user_message": "Mijn zusje Lotte is 8",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'utrecht' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-3352a513",
+      "timestamp": "2026-05-19T06:27:02.554380+00:00",
+      "user_id": "test-rel-002",
+      "user_naam": "T",
+      "user_message": "Mijn goede vriend Klaas komt langs",
+      "spark_response": "Top, opgeslagen!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-e640d32f",
+      "timestamp": "2026-05-19T06:27:05.271772+00:00",
+      "user_id": "test-rel-002",
+      "user_naam": "T",
+      "user_message": "mijn oma Riet baakt koekjes",
+      "spark_response": "**Oma**: Een oma is de moeder van een vader of moeder.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **riet, baakt, koekjes** (opgeslagen als kaarten)\n\nWat betekent 'koekjes' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Oma"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "riet",
+          "baakt",
+          "koekjes"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-rel-002",
+    "total_conversations": 5,
+    "last_updated": "2026-05-19T06:27:05.271772+00:00"
+  }
+}

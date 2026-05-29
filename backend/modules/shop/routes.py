@@ -118,13 +118,28 @@ def get_bitvavo_balance_cached(user_id: str = "user-001") -> Optional[float]:
     return None
 
 
+def get_bitvavo_staking_adjustment() -> float:
+    """v6_bitvavo_staking_manual_001 (sessie 16) — handmatige staking-adjustment.
+    Bitvavo's `/v2/balance` ziet alleen spot. Voor coins in Bitvavo Spaar/Staking
+    wordt deze waarde handmatig bijgehouden in `system/bitvavo_extras.json`.
+    Admin kan dit updaten via `POST /api/financial/bitvavo-staking`.
+    """
+    try:
+        extras_file = DATA_DIR / "system" / "bitvavo_extras.json"
+        extras = load_json(extras_file, default={"staking_eur": 0.0})
+        return float(extras.get("staking_eur", 0) or 0)
+    except Exception:
+        return 0.0
+
+
 def get_spark_core_value():
     """
     Spark Core totale waarde = LIVE Bitvavo balance + Spark kasboek gifts/omzet
     (gifts in build-fase + omzet in public-fase). v6_value_includes_gifts_001.
+    v6_bitvavo_staking_manual_001 — telt nu ook handmatige staking erbij.
     """
     total_value = 0.0
-    # PRIMAIR: Live Bitvavo balance
+    # PRIMAIR: Live Bitvavo balance (spot)
     live = get_bitvavo_balance_cached()
     if live is not None and live > 0:
         total_value += live
@@ -138,6 +153,8 @@ def get_spark_core_value():
                 total_value += tx.get("amount_eur", 0)
             elif tx["type"] == "withdrawal":
                 total_value -= tx.get("amount_eur", 0)
+    # v6_bitvavo_staking_manual_001 — Spaar/Staking handmatig toegevoegd
+    total_value += get_bitvavo_staking_adjustment()
     # v6_value_includes_gifts_001 / v6_no_double_count_001 — Spark vermogen rekening:
     # - Bitvavo live balance is de PRIMAIRE waarde (alle SEPA-stortingen + gifts + omzet
     #   zitten al in Bitvavo wallet, dus NIET dubbel tellen)
@@ -215,7 +232,39 @@ async def get_token_price():
         "fixed_price_limit": FIXED_PRICE_LIMIT,
         "tokens_until_dynamic": max(0, FIXED_PRICE_LIMIT - circulating),
         "bitvavo_balance": round(spark_core_value, 2),
+        # v6_bitvavo_staking_manual_001 — toon staking-adjustment apart voor transparantie
+        "bitvavo_spot_eur": round((get_bitvavo_balance_cached() or 0), 2),
+        "bitvavo_staking_eur": round(get_bitvavo_staking_adjustment(), 2),
     }
+
+
+# v6_bitvavo_staking_manual_001 — admin endpoint om staking-bedrag in te stellen
+class StakingUpdateBody(BaseModel):
+    staking_eur: float
+    viewer_id: str = "user-001"
+
+
+@router.post("/token/bitvavo-staking")
+async def update_bitvavo_staking(body: StakingUpdateBody):
+    """Update handmatige Bitvavo Staking-waarde (zit in Bitvavo Spaar, niet
+    via /v2/balance leesbaar). Telt mee in Spark Core value en dynamic price.
+    Alleen admin (gradatie ≤ 1)."""
+    # Auth check
+    users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
+    viewer = next((u for u in users.get("users", []) if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+    if not viewer or (viewer.get("gradatie") or 99) > 1:
+        return {"success": False, "error": "Alleen admin mag staking-adjustment aanpassen"}
+    if body.staking_eur < 0:
+        return {"success": False, "error": "Staking moet >= 0 zijn"}
+    extras_file = DATA_DIR / "system" / "bitvavo_extras.json"
+    extras = load_json(extras_file, default={"staking_eur": 0.0})
+    old = extras.get("staking_eur", 0)
+    extras["staking_eur"] = round(float(body.staking_eur), 2)
+    extras["updated_at"] = datetime.now(timezone.utc).isoformat()
+    extras["updated_by"] = body.viewer_id
+    save_json(extras_file, extras)
+    return {"success": True, "old_eur": old, "new_eur": extras["staking_eur"],
+            "spark_core_value_now": round(get_spark_core_value(), 2)}
 
 
 @router.get("/token/balance/{user_id}")

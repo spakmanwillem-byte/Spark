@@ -69,12 +69,17 @@ async def financial(user_id: str):
         try:
             from modules.trade.bitvavo_client import get_balance_summary
             summary = get_balance_summary()
-            total_bv = round(float(summary.get("total_eur", 0)), 2)
+            spot_total = round(float(summary.get("total_eur", 0)), 2)
             breakdown = summary.get("breakdown", {})
             cash_in_bv = round(float(breakdown.get("EUR", 0)), 2)
-            out["bitvavo_eur"] = total_bv
+            # v6_bitvavo_staking_manual_001 — telt handmatige staking adjustment mee
+            from modules.shop.routes import get_bitvavo_staking_adjustment
+            staking = round(get_bitvavo_staking_adjustment(), 2)
+            out["bitvavo_eur"] = spot_total + staking
+            out["bitvavo_spot_eur"] = spot_total
+            out["bitvavo_staking_eur"] = staking
             out["bitvavo_cash_eur"] = cash_in_bv
-            out["bitvavo_base_locked_eur"] = round(total_bv - cash_in_bv, 2)
+            out["bitvavo_base_locked_eur"] = round((spot_total - cash_in_bv) + staking, 2)
             out["details"]["bitvavo"] = breakdown
         except Exception:
             pass

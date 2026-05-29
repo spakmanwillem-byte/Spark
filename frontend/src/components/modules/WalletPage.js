@@ -653,32 +653,85 @@ function GiftInboxRow({ gift, actorId, onUpdated }) {
 
 // v6_price_chart_001 — Token-prijs grafiek met 2 lijnen (incl-BTW vs netto) + cycle-buttons
 function TokenPriceChart() {
-  const [interval, setInterval_] = useState('1d');
+  const [interval, setInterval_] = useState('15m');
   const [points, setPoints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [updatedAt, setUpdatedAt] = useState(null);
+
   useEffect(() => {
-    fetch(`${API}/api/spark/kasboek/price-history?interval=${interval}&limit=80`)
-      .then(r => r.json()).then(d => setPoints(d.points || [])).catch(() => setPoints([]));
+    let cancelled = false;
+    const load = () => {
+      fetch(`${API}/api/spark/kasboek/price-history?interval=${interval}&limit=200`)
+        .then(r => r.json())
+        .then(d => {
+          if (cancelled) return;
+          setPoints(d.points || []);
+          setUpdatedAt(new Date());
+          setLoading(false);
+        })
+        .catch(() => { if (!cancelled) setLoading(false); });
+    };
+    load();
+    // v6_price_chart_density_001 (sessie 15) — auto-refresh elke 30s
+    const t = window.setInterval(load, 30000);
+    return () => { cancelled = true; window.clearInterval(t); };
   }, [interval]);
+
+  // v6_price_chart_density_001 — manueel snapshot triggeren als debug-knop
+  const triggerSnapshot = async () => {
+    try {
+      await fetch(`${API}/api/spark/kasboek/price-snapshot`, { method: 'POST' });
+      // Refresh
+      const d = await fetch(`${API}/api/spark/kasboek/price-history?interval=${interval}&limit=200`).then(r => r.json());
+      setPoints(d.points || []);
+      setUpdatedAt(new Date());
+    } catch {}
+  };
 
   const W = 800, H = 180, P = 30;
   const prices = points.flatMap(p => [p.price_incl, p.price_netto]).filter(x => x > 0);
-  const minP = prices.length ? Math.min(...prices) * 0.92 : 0;
-  const maxP = prices.length ? Math.max(...prices) * 1.08 : 1;
+  // v6_price_chart_density_001 — tightere y-as: 1% padding ipv 8% zodat
+  // kleine fluctuaties (€0.01 .. €0.50) zichtbaar worden. Bij volledig vlak
+  // (alle prijzen identiek) val terug op ±2% zodat de lijn niet op de rand kleeft.
+  const rawMin = prices.length ? Math.min(...prices) : 0;
+  const rawMax = prices.length ? Math.max(...prices) : 1;
+  const range = rawMax - rawMin;
+  const padPct = range < 0.001 ? 0.02 : 0.01;
+  const padAbs = Math.max(range * padPct, 0.005); // min 0.5 cent padding
+  const minP = Math.max(0, rawMin - padAbs);
+  const maxP = rawMax + padAbs;
   const x = i => P + ((W - 2 * P) * i) / Math.max(1, points.length - 1);
-  const y = v => H - P - ((H - 2 * P) * (v - minP)) / Math.max(0.01, maxP - minP);
+  const y = v => H - P - ((H - 2 * P) * (v - minP)) / Math.max(0.0001, maxP - minP);
   const path = key => points.length === 0 ? '' :
     points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${x(i)} ${y(p[key])}`).join(' ');
+
+  const lastPrice = points.length ? points[points.length - 1].price_incl : null;
+  const firstPrice = points.length ? points[0].price_incl : null;
+  const deltaAbs = (lastPrice !== null && firstPrice !== null) ? lastPrice - firstPrice : 0;
+  const deltaPct = firstPrice ? (deltaAbs / firstPrice) * 100 : 0;
 
   return (
     <div data-testid="token-price-chart" className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h3 className="text-sm font-semibold text-white">📈 ROAR Token-prijs</h3>
+          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            📈 ROAR Token-prijs
+            {lastPrice && (
+              <span className="text-[10px] font-normal text-slate-400">
+                · nu &euro;{lastPrice.toFixed(2)}
+                {points.length > 1 && (
+                  <span className={deltaAbs >= 0 ? ' text-emerald-400' : ' text-red-400'}>
+                    {' '}({deltaAbs >= 0 ? '+' : ''}{deltaAbs.toFixed(2)} / {deltaPct >= 0 ? '+' : ''}{deltaPct.toFixed(2)}%)
+                  </span>
+                )}
+              </span>
+            )}
+          </h3>
           <p className="text-[10px] text-slate-500">
             <span className="text-emerald-300">━━ Incl-BTW (klant)</span>
             {' · '}
             <span className="text-amber-300">━━ Netto (Spark ontvangt)</span>
-            {' · ankers (Willem/Roadkill) = lijnen samen'}
+            {updatedAt && <span> · ververst {updatedAt.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>}
           </p>
         </div>
         <div className="flex items-center gap-1 p-1 bg-slate-800/60 rounded-lg">
@@ -688,10 +741,20 @@ function TokenPriceChart() {
               {iv}
             </button>
           ))}
+          <button onClick={triggerSnapshot} data-testid="chart-snapshot-now"
+            className="px-2 py-1 rounded text-[10px] font-medium text-slate-400 hover:text-amber-300 border border-slate-700/50"
+            title="Forceer nu een prijs-snapshot">
+            +
+          </button>
         </div>
       </div>
-      {points.length === 0 ? (
-        <div className="py-8 text-center text-slate-500 text-xs">Nog geen prijs-historie op dit interval</div>
+      {loading ? (
+        <div className="py-8 text-center text-slate-500 text-xs">Prijs-historie laden...</div>
+      ) : points.length === 0 ? (
+        <div className="py-8 text-center text-slate-500 text-xs">
+          Nog geen prijs-historie op dit interval.<br />
+          <span className="text-[10px]">Klik op + om nu een snapshot te maken, of wacht 5 min op de volgende automatische snapshot.</span>
+        </div>
       ) : (
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
           {/* Grid */}
@@ -716,7 +779,7 @@ function TokenPriceChart() {
           {/* X-axis dates */}
           {points.map((p, i) => i % Math.max(1, Math.floor(points.length / 5)) === 0 && (
             <text key={i} x={x(i)} y={H - 8} fill="#64748b" fontSize="9" textAnchor="middle">
-              {(p.ts || '').slice(5, 10)}
+              {(p.ts || '').slice(5, 16).replace('T', ' ')}
             </text>
           ))}
         </svg>

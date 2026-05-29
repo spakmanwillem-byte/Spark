@@ -196,6 +196,8 @@ async def _maybe_roar_price_snapshot():
     """v6_price_history_snapshots_002 (sessie 14) — eens per uur ROAR-prijs
     vastleggen in roar/price_snapshots.json zodat de grafiek altijd data heeft,
     ook na een clean_slate of in lage-activiteit periodes.
+    v6_price_chart_density_001 (sessie 15) — interval verlaagd naar 5 minuten
+    zodat fluctuaties in de Bitvavo-balance zichtbaar worden in de grafiek.
     """
     now = datetime.now(timezone.utc)
     state = _load_state()
@@ -203,7 +205,7 @@ async def _maybe_roar_price_snapshot():
     if last_str:
         try:
             last = datetime.fromisoformat(last_str.replace("Z", "+00:00"))
-            if (now - last).total_seconds() < 3600:  # < 1 uur geleden
+            if (now - last).total_seconds() < 300:  # < 5 min geleden
                 return
         except Exception:
             pass

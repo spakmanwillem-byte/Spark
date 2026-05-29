@@ -87,6 +87,9 @@ async def price_history(interval: str = "1h", limit: int = 50):
         b["n"] += 1
 
     # v6_price_history_snapshots_002 — voeg snapshots toe als bron
+    # v6_price_chart_density_001 (sessie 15) — als meerdere snapshots in dezelfde bucket
+    # vallen, neem de LAATSTE (meest recente prijs); voorheen werd de eerste behouden
+    # waardoor 5-min snapshots in een 1h-bucket geen variatie toonden.
     snapshots = load_json(SNAPS, default={"snapshots": []}).get("snapshots", [])
     for s in snapshots:
         ts_str = s.get("ts")
@@ -100,10 +103,24 @@ async def price_history(interval: str = "1h", limit: int = 50):
         bucket_min = (epoch_min // minutes) * minutes
         bucket_ts = datetime.fromtimestamp(bucket_min * 60, tz=timezone.utc).isoformat()
         price = s.get("price_eur") or 0
-        if bucket_ts not in buckets:
-            buckets[bucket_ts] = {"ts": bucket_ts, "price_incl": price, "price_netto": price, "n": 1, "source": "snapshot"}
+        if price <= 0:
+            continue
+        existing = buckets.get(bucket_ts)
+        if existing is None:
+            buckets[bucket_ts] = {"ts": bucket_ts, "price_incl": price, "price_netto": price,
+                                  "n": 1, "source": "snapshot", "_last_dt": dt}
+        elif existing.get("source") == "snapshot":
+            # Behoud meest recente snapshot in dezelfde bucket
+            if dt > existing.get("_last_dt", dt):
+                existing["price_incl"] = price
+                existing["price_netto"] = price
+                existing["_last_dt"] = dt
+                existing["n"] += 1
 
+    # Strip _last_dt voordat we serialiseren
     series = sorted(buckets.values(), key=lambda x: x["ts"])[-limit:]
+    for p in series:
+        p.pop("_last_dt", None)
     return {"interval": interval, "points": series, "total": len(series)}
 
 

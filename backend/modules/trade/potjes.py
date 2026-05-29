@@ -467,6 +467,10 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
                 "highest_price": entry_price,
                 "trailing_active": False,
                 "entry_time": now,
+                # v6_potje_amount_in_position_fix_001 — UI moet kunnen tonen hoeveel
+                # er in dit potje vastzit. Was alleen in trade_log gezet → "potje
+                # wordt niet gevuld"-effect.
+                "amount_eur": amount_eur if amount_eur is not None else p.get("capital"),
             }
             # v4_potje_market_001: leg vast WELKE coin in dit potje zit (BTC-EUR / BCH-EUR / ETH-EUR ...)
             if market:

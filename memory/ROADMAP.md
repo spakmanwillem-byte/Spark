@@ -6,6 +6,36 @@
 
 **Status**: Stabiel. Geen code-blockers. Wacht op EUR-storting Willem zodat Spark potjes-commitment volledig gedekt is door Bitvavo.
 
+### ✅ Sessie 15 (2026-05-29) — wat gedaan
+- [x] 🐛 **Token-buy UI feedback** (v6_token_buy_ux_001):
+  - `<Toaster>` globaal gemount in `App.js`
+  - Preemptive guard in `WinkelPage.buyToken()`: blokkeert API-call als `qty × price > wallet`
+  - 3 zichtbare lagen bij tekort: inline rood waarschuwingsvlak (live met qty), toast rechtsboven, inline error-box
+  - E2E: 999 ROAR met €9.18 → alle 3 signalen tegelijk zichtbaar
+- [x] 🚀 **Auto-anchor voor nieuwe coins** (v6_auto_anchor_001):
+  - `potjes.ensure_anchors_for_markets(user_id, markets)` — Spark-only
+  - Gehookt op `POST /api/trade/monitor/markets/{user_id}` → response geeft `anchors_created`
+  - Per nieuwe coin: locked anker (€10, `source=auto_anchor_for_new_coin`) automatisch aangemaakt
+  - Verified: bestaande coins worden correct overgeslagen
+- [x] 🏷️ **KB Curation Dashboard** (v6_kb_curation_dashboard_001):
+  - Nieuw component `components/workspace/KbV2TagCuration.js`
+  - 6e tab "Tag-curatie" in Kennisbank met 4 stat-tegels (gescand/stammen/dedupe-kansen/sessie-merges)
+  - 1-klik merge per stem met variant-dropdown + expand-knop voor alle varianten als chips
+  - Sessie-historie van merges onderaan
+  - E2E: 52 dedupe-kansen zichtbaar (systeem 377×, relatie 98×, grondstof 87×)
+- [x] 💸 **Overflow Auto-Mint instant** (v6_overflow_auto_mint_instant_001):
+  - `staking_growth.run_auto_mint_only()` — mint-only loop (geen rente)
+  - Direct gehookt in `potjes.close_pot()` voor `user-000`
+  - Smoke-test: overflow €25 → 2 potjes gemint + €5 rest, geen 24h-wachttijd meer
+  - `close_pot` returnt nu ook `auto_mint: {minted, n_minted, overflow_after}`
+  - Daily scheduler-hook behouden als safety-net
+- [x] 🎨 **UI Theme refactor — Amber/Orange** (v6_spark_theme_001):
+  - CSS-variabelen in `index.css`: `--spark-primary/-hover/-soft/-ring/-secondary/-accent`
+  - Utility-klassen: `bg-spark-primary`, `text-spark-primary`, `border-spark-primary`, `ring-spark-primary`
+  - 23 frontend files gepasseerd: cosmetic chrome (buttons, focus-rings, upload-chrome, link-hovers) van purple/blue → amber
+  - Bewust intact: mood-glow palet (semantische emotie-kleuren), status-indicators (paused/mock = blauw), chart-distinctions, module-color-coding in AnalyticsPage, layer-kleuren in EmotiesPage/SparkBrainPage
+  - Dashboard + KB Curation getest, geen visuele regressie
+
 ### ✅ Sessie 14 (2026-05-28/29) — wat gedaan
 - [x] 🐛 KB v2 legacy media routes hersteld (path-traversal guard)
 - [x] 🧹 Disk cleanup 615 MB
@@ -109,22 +139,16 @@
   - Plan: split per module-area (trade-help / shop-help / kb-help / boekhouding-help) ipv 1 grote per-gradatie file
   - Auto-gegeneer uit command_registry tags
   - Cluster D #cmd-gradatie-files + #cmd-grad-lock + #cmd-priv-fallback bouwen hier verder op
-- [ ] 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan`
-- [ ] **🌱 Staking Growth Engine** (nieuw na sessie 14):
-  - Per anchor maandelijks 1-2% rente uit overflow_pool → anchor.capital groei
-  - Auto-mint nieuw potje bij `overflow_pool >= €10`
-  - Auto-create base-anchor bij toevoegen nieuwe coin aan watch
-  - Maakt Spark Core organisch groeiend zonder handmatig storten
-- [ ] **🎨 Unified Theme Engine** (nieuw na sessie 14):
-  - **Probleem**: 66 plekken in `/app/frontend/src/components/` met hardcoded `bg-purple-/blue-/indigo-` knoppen. Past niet bij amber/orange Spark-branding.
-  - **Scope**:
-    1. CSS-vars in `index.css`: `--brand-primary`, `--brand-accent`, `--section-spark`, `--section-workspace`, etc.
-    2. ThemeContext met per-section accent (SPARK AI = amber, WORKSPACE = blauw, MODULES = paars, BEHEER = grijs)
-    3. Sweep `bg-purple-/bg-blue-/bg-indigo-` → `bg-[var(--section-accent)]` voor primary actions
-    4. Keep semantic colors (rood=delete, groen=success) intact
-    5. Settings: `users/{id}/settings.theme = {accent: 'auto'|'amber'|'blue'|'green'|'purple'}` voor user-override
-  - **Bonus**: voorbereiden voor latere light/dark-mode toggle
-  - **Effort schatting**: 2-3 uur (1 hr CSS-vars + context, 1 hr sweep, 30 min settings UI, 30 min testen)
+- [x] ✅ 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan` (sessie 15, v6_kb_curation_dashboard_001)
+- [x] ✅ **🌱 Staking Growth Engine** (sessie 14 + sessie 15 instant-mint):
+  - [x] Auto-rente uit overflow_pool → anchor.capital groei (sessie 14)
+  - [x] Auto-mint bij `overflow_pool >= €10` (sessie 14, daily) + **instant na elke close_pot** (sessie 15)
+  - [x] Auto-create base-anchor bij toevoegen nieuwe coin aan watch (sessie 15, v6_auto_anchor_001)
+- [x] ✅ **🎨 Unified Theme Engine** (sessie 15, v6_spark_theme_001 — eerste pas):
+  - [x] CSS-vars in `index.css` (`--spark-primary`, `--spark-secondary`, `--spark-accent`, ...)
+  - [x] Sweep cosmetic chrome `bg-purple-/bg-blue-/focus:border-purple-` → `bg-amber-/focus:border-amber-` in 23 files
+  - [x] Semantic colors (mood/status/charts) bewust intact gelaten
+  - [ ] Nog te doen (v2): ThemeContext per section, user-override in Settings, light/dark-mode voorbereiden
 - [ ] Tag-merge auto-fire optie in `classify_card` (opt-in flag)
 - [ ] Exception-list uitbreiden bij volgende false-positives
 - [ ] 2 endpoints uitbreiden (`/spark/disclaimer.leidende_lagen_counts.bijbel + capabilities` + `/kb/v2/stats.inbox.count`) zodat overzicht alle cijfers heeft i.p.v. `-`

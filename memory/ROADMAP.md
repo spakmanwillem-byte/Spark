@@ -4,6 +4,45 @@
 
 ## 🟢 Redeploy-ready check — 2026-05-29
 
+### ✅ Sessie 16 (2026-05-29 avond) — Trade-systeem dynamisch & multi-user echt
+- [x] 🪙 **ATOM toegevoegd aan watchlist** — 6e coin live (`WATCHLIST_COINS`, `LEARNING_COINS`, `ALL_MARKETS` in TraderPage)
+- [x] 🔗 **Bitvavo proxy via Spark** (v6_bitvavo_proxy_via_spark_001):
+  - `execute_real_trade()` + `fetch_bitvavo_balance()`: non-Spark users zonder eigen keys → fallback op Spark's keys
+  - Mock-fallback in `Monitor.start()` verwijderd → álle user-bots draaien echte mode
+  - Trade-log markeert `proxied_via_spark: True` voor audit
+  - Reden: Spark's Bitvavo-account is fysiek 1 account voor het hele systeem
+- [x] 🎯 **Echte fill-prices voor potjes** (v6_pot_real_price_001):
+  - BUY: `entry_price` op potje = Bitvavo's `avg_price`, niet ticker-snapshot
+  - SELL: `close_pot` krijgt Bitvavo's `avg_price`
+  - Resultaat: trail-percentage, exit-min-netto en P&L kloppen tot op cent
+- [x] 🎯 **Potje blijft op zijn coin** (v6_pot_market_match_001):
+  - `get_available_pot(prefer_market=...)` zoekt eerst potje van diezelfde markt
+  - Voorkomt round-robin coin-wisselingen midden in trade-flow
+  - Gehookt in monitor `_run_market_cycle` + `quick_buy_potje`
+- [x] 📊 **Per-user stats correct** (v6_pot_live_value_per_user_001):
+  - Niet-Spark users zien eigen JSON-aandeel ipv gedeelde €345 pool
+  - Spark + Willem zien live Bitvavo balance + baseline P&L
+- [x] ⚖️ **Dynamische €10-schijven herbalancering** (v6_dynamic_pot_split_001):
+  - Nieuw endpoint `POST /api/trade/potjes/rebalance-from-bitvavo`
+  - Regel per coin: `n × €10 trade-pots voor Willem` + `restje (< €10) als locked anchor voor Spark`
+  - Open posities preserved (vastgezet in actieve trade)
+  - Idempotent — kan altijd opnieuw aangeroepen worden
+  - **Auto-trigger**: na elke `close_pot()` automatisch herbalanceerd
+  - Verificatie: €90.50 in potjes = €90.50 Bitvavo crypto, exact match
+- [x] 🔒 **Lock-enforcement bevestigd**:
+  - `open_pot()` returnt `{}` voor locked potjes (BLOCK log)
+  - `get_available_pot()` skipt anchors in iteratie
+  - `close_pot()` weigert sluiten van locked anchors
+  - Test E2E in preview-data: pot-001 BCH-anchor → BLOCK, fallback naar pot-007 ✅
+- [x] 📥 **Productie-data geïntegreerd in preview**:
+  - 22 users, 36 ROAR in omloop, 5 actieve trade-users
+  - Backup: `/app/backups/preview_before_prodsync_20260529_180040/`
+- [x] 🔧 **Andere helpers** (sessie 16):
+  - `ensure_spark_trade_pots()` (optionele helper, niet meer auto-gehookt)
+  - `redistribute_potjes_across_markets()` voor handmatige verdeling
+
+**Status**: Stabiel. Lock-enforcement geverifieerd. Som potjes = Bitvavo. Klaar voor redeploy.
+
 ### ✅ Sessie 15 (2026-05-29, vervolg) — D&D Spark World
 - [x] 🎭 **Body Slots** (v6_body_slots_001):
   - Backend: 3 endpoints (`GET /persons/body-slots/config`, `PUT /persons/cards/{u}/{p}/body-slots`, `DELETE .../body-slots/{slot_id}`)
@@ -120,19 +159,18 @@
 | **Totaal circulating** | **22** | **€71.60 cash in** | |
 | Spark treasury | 999,978 | — | Pool |
 
-### Bitvavo & commitments
-- Bitvavo live wallet: **€122.74** (auto-feed → bepaalt ROAR-prijs €5.58)
-- Spark potjes commitment: 15 × €10 = **€149.92**
-- Gat tussen Bitvavo en commitment: **€27.18**
+### Bitvavo & potjes-status (sessie 16, na rebalance-from-bitvavo)
+- Bitvavo live crypto: **€90.50** (BCH €20 / BTC €20 / ETH €10 / SOL €10 / ADA €20 / ATOM €10)
+- Bitvavo EUR-cash: ~€245
+- Spark commitment: 6 locked anchors = **€10.50** (BCH €0.01 / BTC €0.10 / ETH €0.21 / SOL €0.16 / ADA €9.90 / ATOM €0.12)
+- Willem trade-pots: 8 × €10 = **€80** (2 BCH / 2 BTC / 1 ETH / 1 SOL / 1 ADA / 1 ATOM)
+- **Som potjes = Bitvavo crypto: €90.50 ✅** (exact match)
 - ROAR-prijs-formule: `Bitvavo balance ÷ circulating` — past zich auto aan bij elke storting
-
-### Drie storting-paden (Willem kiest)
-- a) **€27.18** → exact 0-gat, potjes blijven €10, kleine Tikkie-test
-- b) **€98.40** → groter ijkpunt, Spark ruimte om Willem+Gijs uit te kunnen kopen + buffer
-- c) **€0 + potje-grote terug naar €5.08** → geen storting nodig, 15 × €5.08 = €76.20 ≈ Bitvavo
+- Auto-rebalance triggert na elke `close_pot()` → systeem houdt zichzelf in sync
 
 ### Wat live werkt (smoke-checked, mag op productie)
-- Bitvavo trading LIVE (3 bots: Spark 60m, Gijs 15m, Willem 15m)
+- Bitvavo trading LIVE — alle user-bots via Spark's keys (proxy fallback, sessie 16). Echte fills uit Bitvavo `avg_price` voor entry/exit op potjes.
+- Multi-user bots: Spark + Willem + Gijs + Roadkill + Lotus + Gerben (5 users met tokens kunnen autonoom traden)
 - ROAR economy v6 (gift-fase, 0% BTW, dynamic price)
 - Boekhouding 4 entiteiten (Spark Core / Zorgboerderij / Roadkill Merch / Privé Willem) met BTW-summary + reconcile + retroactief fix-endpoint
 - Tikkie-storting flow (user→admin PM→confirm→wallet bijschrijven + auto-archief in admin's bestanden)

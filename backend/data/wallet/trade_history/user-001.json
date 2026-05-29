@@ -450,6 +450,46 @@
       "fee_currency": "EUR",
       "requested_amount": 10.0,
       "effective_amount": 0.07790411
+    },
+    {
+      "trade_id": "00000000-0000-041f-0100-0007fd976819",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T17:41:26.269555+00:00",
+      "action": "SELL",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-0007fd976819",
+      "amount": 0.07574067,
+      "price": 262.90000000000003,
+      "filled": 0.07574067,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.052222143,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.07574067,
+      "proxied_via_spark": false
+    },
+    {
+      "trade_id": "00000000-0000-041f-0100-0007fda4d379",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T17:50:28.041365+00:00",
+      "action": "SELL",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-0007fda4d379",
+      "amount": 0.07616787,
+      "price": 261.5,
+      "filled": 0.07616787,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.057898005,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.07616787,
+      "proxied_via_spark": false
     }
   ]
 }

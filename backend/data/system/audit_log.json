@@ -422,6 +422,39 @@
       "to_user": "user-000",
       "amount_eur": 0.0052,
       "reason": "5% fee op SELL pot-001"
+    },
+    {
+      "ts": "2026-05-29T17:41:26.288585+00:00",
+      "id": "fe2e7b3031bb",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "price": 262.91,
+      "netto": 0.09704747201852575,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T17:50:28.060828+00:00",
+      "id": "6881d232bd8b",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "price": 261.92,
+      "netto": 0.09132496999264468,
+      "spark_fee_eur": 0.0
+    },
+    {
+      "ts": "2026-05-29T17:51:28.074702+00:00",
+      "id": "541716b7e125",
+      "type": "trade_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "price": 261.5,
+      "netto": 0.07192761757305892,
+      "spark_fee_eur": 0.0
     }
   ]
 }

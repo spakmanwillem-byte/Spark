@@ -57,7 +57,7 @@ export function TraderPage({ onNavigate }) {
 
   // v4_multi_market_001: meerdere coins tegelijk monitoren
   const [monitorMarkets, setMonitorMarkets] = useState(['BCH-EUR']);
-  const ALL_MARKETS = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR'];
+  const ALL_MARKETS = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR', 'ATOM-EUR'];
   // Sync coin selectie naar live monitor markets als die anders zijn
   useEffect(() => {
     if (Array.isArray(monitorStatus?.markets) && monitorStatus.markets.length > 0) {

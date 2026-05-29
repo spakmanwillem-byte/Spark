@@ -34,13 +34,14 @@ def _read_pot_count(user_id: str) -> int:
 BITVAVO_URL = "https://api.bitvavo.com/v2"
 
 # Watchlist coins
-WATCHLIST_COINS = ["BCH", "BTC", "ETH", "SOL", "ADA"]
+WATCHLIST_COINS = ["BCH", "BTC", "ETH", "SOL", "ADA", "ATOM"]
 WATCHLIST_NAMES = {
     "BCH": "Bitcoin Cash",
     "BTC": "Bitcoin",
     "ETH": "Ethereum",
     "SOL": "Solana",
     "ADA": "Cardano",
+    "ATOM": "Cosmos",
 }
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"

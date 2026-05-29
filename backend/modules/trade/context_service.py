@@ -25,7 +25,7 @@ CACHE_DIR = Path(__file__).parent.parent.parent / "data" / "trade" / "context_ca
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Coins waarvoor context wordt gegenereerd
-LEARNING_COINS = ["BCH-EUR", "BTC-EUR", "ETH-EUR", "SOL-EUR", "ADA-EUR"]
+LEARNING_COINS = ["BCH-EUR", "BTC-EUR", "ETH-EUR", "SOL-EUR", "ADA-EUR", "ATOM-EUR"]
 CACHE_FRESH_HOURS = 24
 
 

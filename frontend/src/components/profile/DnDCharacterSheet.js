@@ -20,6 +20,37 @@ import {
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
+// v6_dnd_card_visuals_001 — Helpers om D&D game-cards te koppelen aan plekken in de sheet
+// Match-strategieën (in volgorde):
+//   1. tag exact (case-insensitief): bv. tag "dorp" / "lijf" / "torso"
+//   2. begrip exact: bv. begrip "dorp" / "t-shirt"
+//   3. begrip bevat: bv. begrip "Basis Dorp" → match voor "dorp"
+function findCardByKeywords(cards, keywords) {
+  if (!cards || !cards.length) return null;
+  const kws = keywords.map(k => String(k).toLowerCase().trim()).filter(Boolean);
+  // 1. exact tag match (loop op kw eerst → eerste keyword wint)
+  for (const kw of kws) {
+    const m = cards.find(c => (c.tags || []).some(t => String(t).toLowerCase().trim() === kw));
+    if (m) return m;
+  }
+  // 2. exact begrip match
+  for (const kw of kws) {
+    const m = cards.find(c => String(c.begrip || '').toLowerCase().trim() === kw);
+    if (m) return m;
+  }
+  // 3. begrip-contains match
+  for (const kw of kws) {
+    const m = cards.find(c => String(c.begrip || '').toLowerCase().includes(kw));
+    if (m) return m;
+  }
+  return null;
+}
+
+function cardFirstImage(card, apiUrl = API) {
+  const u = card?.media?.image_urls?.[0];
+  return u ? `${apiUrl}${u}` : null;
+}
+
 // ----- Slot grid: 9 links (3x3) + 9 rechts (3x3) rond een center silhouet ----
 const SLOT_LAYOUT_LEFT = [
   { key: 'linkerhand',  label: 'LINKERHAND',  fallback: 'Schild' },
@@ -86,6 +117,7 @@ const FEED_COLORS = {
 export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
   const [char, setChar] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [gameCards, setGameCards] = useState([]);
   const [activeFooter, setActiveFooter] = useState('overzicht');
   const [infoTab, setInfoTab] = useState('char_info');
   const [editingMeta, setEditingMeta] = useState(false);
@@ -106,6 +138,14 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
       .then(d => setAvatarUrl(d.url ? `${API}${d.url}?t=${Date.now()}` : null))
       .catch(() => {});
   }, [userId]);
+
+  // v6_dnd_card_visuals_001 — Laad D&D game-cards zodat we ze als visuele bouwstenen kunnen gebruiken
+  useEffect(() => {
+    fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`)
+      .then(r => r.json())
+      .then(d => setGameCards(d.cards || []))
+      .catch(() => setGameCards([]));
+  }, []);
 
   if (!char) {
     return (
@@ -149,6 +189,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
               userId={userId}
               isAdmin={isAdmin}
               onChange={reload}
+              gameCards={gameCards}
             />
           </PaperPanel>
         </div>
@@ -171,8 +212,8 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
         {/* === KOLOM RECHTS: Inventory + Huis & Opslag === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           <InventoryGridPanel userId={userId} />
-          <HuisOpslagPanel />
-          <DorpPreviewPanel char={char} onNavigateMap={() => onOpenAvatarSettings?.('map')} />
+          <HuisOpslagPanel gameCards={gameCards} />
+          <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => onOpenAvatarSettings?.('map')} />
         </div>
       </div>
 
@@ -292,8 +333,25 @@ function CurrencyPill({ icon: Icon, color, value, testid }) {
 }
 
 // ----- BODY SILHOUETTE -----
-function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
+function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards = [] }) {
   const [editingSlot, setEditingSlot] = useState(null);
+
+  // v6_dnd_card_visuals_001 — vervang getekende silhouet door foto van "lijf"-kaart als die bestaat
+  const lijfCard = findCardByKeywords(gameCards, ['lijf', 'body', 'silhouet', 'silhouette']);
+  const lijfImg = cardFirstImage(lijfCard);
+
+  // Per slot: vind een matching kaart op basis van slot-key/label
+  const slotPreview = (slot) => {
+    const keywords = [slot.key, slot.label.toLowerCase(), slot.fallback.toLowerCase()];
+    // Specifieke synoniemen voor lastige slots
+    if (slot.key === 'torso') keywords.push('t-shirt', 'shirt', 'hemd');
+    if (slot.key === 'voeten') keywords.push('schoenen', 'laarzen');
+    if (slot.key === 'handen') keywords.push('handschoenen');
+    if (slot.key === 'hoofd') keywords.push('helm', 'hoed', 'hoofdband');
+    if (slot.key === 'rugzak') keywords.push('tas');
+    const card = findCardByKeywords(gameCards, keywords);
+    return cardFirstImage(card);
+  };
 
   return (
     <div className="relative p-3 min-h-[440px]">
@@ -301,7 +359,7 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
         {/* LINKS kolom */}
         <div className="flex flex-col gap-2">
           {SLOT_LAYOUT_LEFT.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} align="right"
+            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="right"
               onClick={() => setEditingSlot(s)} />
           ))}
         </div>
@@ -309,25 +367,30 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
         {/* CENTRUM: silhouet + center slots */}
         <div className="flex flex-col items-center gap-2">
           {SLOT_LAYOUT_CENTER_TOP.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} align="center"
+            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
               onClick={() => setEditingSlot(s)} />
           ))}
           <div className="relative w-[120px] h-[180px]">
-            {/* SVG silhouet */}
-            <svg viewBox="0 0 120 200" className="absolute inset-0 w-full h-full"
-              fill="none" stroke="#fde68a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.35 }}>
-              <circle cx="60" cy="22" r="14" />
-              <path d="M40 38 Q60 30 80 38 L86 80 L72 90 L72 130 L80 180 L66 180 L60 130 L54 180 L40 180 L48 130 L48 90 L34 80 Z" fill="rgba(245,158,11,0.08)" />
-              <line x1="34" y1="48" x2="14" y2="100" /><line x1="14" y1="100" x2="20" y2="140" />
-              <line x1="86" y1="48" x2="106" y2="100" /><line x1="106" y1="100" x2="100" y2="140" />
-            </svg>
+            {lijfImg ? (
+              <img src={lijfImg} alt="lijf"
+                className="absolute inset-0 w-full h-full object-contain"
+                style={{ opacity: 0.85, filter: 'drop-shadow(0 0 12px rgba(245,158,11,0.3))' }} />
+            ) : (
+              <svg viewBox="0 0 120 200" className="absolute inset-0 w-full h-full"
+                fill="none" stroke="#fde68a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.35 }}>
+                <circle cx="60" cy="22" r="14" />
+                <path d="M40 38 Q60 30 80 38 L86 80 L72 90 L72 130 L80 180 L66 180 L60 130 L54 180 L40 180 L48 130 L48 90 L34 80 Z" fill="rgba(245,158,11,0.08)" />
+                <line x1="34" y1="48" x2="14" y2="100" /><line x1="14" y1="100" x2="20" y2="140" />
+                <line x1="86" y1="48" x2="106" y2="100" /><line x1="106" y1="100" x2="100" y2="140" />
+              </svg>
+            )}
           </div>
           {SLOT_LAYOUT_CENTER.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} align="center"
+            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
               onClick={() => setEditingSlot(s)} />
           ))}
           {SLOT_LAYOUT_CENTER_BOTTOM.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} align="center"
+            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
               onClick={() => setEditingSlot(s)} />
           ))}
         </div>
@@ -335,7 +398,7 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
         {/* RECHTS kolom */}
         <div className="flex flex-col gap-2">
           {SLOT_LAYOUT_RIGHT.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} align="left"
+            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="left"
               onClick={() => setEditingSlot(s)} />
           ))}
         </div>
@@ -345,6 +408,8 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
         <EquipSlotModal
           slot={editingSlot}
           item={equipment[editingSlot.key]}
+          previewCard={findCardByKeywords(gameCards, [editingSlot.key, editingSlot.fallback.toLowerCase()])}
+          gameCards={gameCards}
           userId={userId}
           onClose={() => setEditingSlot(null)}
           onSaved={() => { setEditingSlot(null); onChange?.(); }}
@@ -354,7 +419,7 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange }) {
   );
 }
 
-function SlotCell({ slot, item, align = 'right', onClick }) {
+function SlotCell({ slot, item, align = 'right', onClick, preview }) {
   const filled = !!item;
   const naam = item?.naam || slot.fallback;
   return (
@@ -365,9 +430,16 @@ function SlotCell({ slot, item, align = 'right', onClick }) {
       style={{ minHeight: 50 }}
     >
       <div
-        className={`w-10 h-10 rounded border-2 flex-shrink-0 flex items-center justify-center text-lg ${filled ? 'border-amber-500/60 bg-amber-950/40 text-amber-200' : 'border-amber-900/40 bg-stone-950/70 text-stone-700'}`}
+        className={`relative w-10 h-10 rounded border-2 flex-shrink-0 flex items-center justify-center text-lg overflow-hidden ${filled ? 'border-amber-500/60 bg-amber-950/40 text-amber-200' : preview ? 'border-amber-700/40 bg-stone-950/70' : 'border-amber-900/40 bg-stone-950/70 text-stone-700'}`}
         style={{ boxShadow: filled ? '0 0 12px rgba(245,158,11,0.3)' : 'none' }}>
-        {item?.icon || (filled ? '✦' : '·')}
+        {/* Faded preview from matching D&D card (only if not equipped) */}
+        {!filled && preview && (
+          <img src={preview} alt="" className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: 0.55, filter: 'sepia(0.2) saturate(0.8)' }} />
+        )}
+        <span className="relative z-10">
+          {item?.icon || (filled ? '✦' : (preview ? '' : '·'))}
+        </span>
       </div>
       <div className={`flex-1 min-w-0 ${align === 'center' ? 'text-[8px]' : ''}`}>
         <p className="text-[8px] uppercase tracking-[0.15em] text-amber-500/70 truncate">{slot.label}</p>
@@ -377,10 +449,31 @@ function SlotCell({ slot, item, align = 'right', onClick }) {
   );
 }
 
-function EquipSlotModal({ slot, item, userId, onClose, onSaved }) {
+function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gameCards = [] }) {
   const [naam, setNaam] = useState(item?.naam || '');
   const [icon, setIcon] = useState(item?.icon || '');
   const [busy, setBusy] = useState(false);
+
+  // v6_dnd_card_visuals_001 — kandidaten uit D&D-galerij op basis van slot-key/label/synoniemen
+  const candidates = (() => {
+    const kw = [slot.key, slot.label.toLowerCase(), slot.fallback.toLowerCase()];
+    if (slot.key === 'torso') kw.push('t-shirt', 'shirt', 'hemd');
+    if (slot.key === 'voeten') kw.push('schoenen', 'laarzen');
+    if (slot.key === 'handen') kw.push('handschoenen');
+    if (slot.key === 'hoofd') kw.push('helm', 'hoed', 'hoofdband');
+    if (slot.key === 'rugzak') kw.push('tas');
+    return (gameCards || []).filter(c => {
+      const tags = (c.tags || []).map(t => String(t).toLowerCase());
+      const begrip = String(c.begrip || '').toLowerCase();
+      return kw.some(k => tags.includes(k) || begrip === k || begrip.includes(k));
+    }).slice(0, 8);
+  })();
+
+  const pickCard = (c) => {
+    setNaam(c.begrip || '');
+    // Geen emoji, want we hebben een foto; gebruik klein symbool als fallback
+    if (!icon) setIcon('🎴');
+  };
 
   const save = async () => {
     setBusy(true);
@@ -406,9 +499,37 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={onClose}>
-      <div data-testid="equip-modal" className="bg-stone-950 border-2 border-amber-700/60 rounded-xl p-5 w-full max-w-md" onClick={e => e.stopPropagation()}>
+      <div data-testid="equip-modal" className="bg-stone-950 border-2 border-amber-700/60 rounded-xl p-5 w-full max-w-md max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
         <h3 className="text-amber-100 font-serif text-lg mb-1">{slot.label}</h3>
         <p className="text-amber-400/60 text-xs mb-4">Equip een item in dit slot</p>
+
+        {/* Kaart-suggesties uit D&D galerij */}
+        {candidates.length > 0 && (
+          <div className="mb-4">
+            <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
+              Snel kiezen uit D&amp;D-galerij ({candidates.length})
+            </p>
+            <div data-testid="equip-card-suggestions" className="grid grid-cols-4 gap-1.5">
+              {candidates.map(c => {
+                const img = cardFirstImage(c);
+                const selected = (naam || '').toLowerCase() === (c.begrip || '').toLowerCase();
+                return (
+                  <button key={c.id} data-testid={`equip-pick-${c.id}`}
+                    onClick={() => pickCard(c)} title={c.begrip}
+                    className={`aspect-square rounded border-2 overflow-hidden transition-all ${selected ? 'border-amber-400 ring-2 ring-amber-400/40' : 'border-stone-700 hover:border-amber-600'}`}>
+                    {img ? (
+                      <img src={img} alt={c.begrip} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-amber-300 text-lg bg-stone-900">🎴</div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[9px] text-stone-500 mt-1 italic">Tip: voeg tag <code className="text-amber-300">{slot.key}</code> aan een D&amp;D-kaart om hem hier te laten zien.</p>
+          </div>
+        )}
+
         <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">Item naam</label>
         <input data-testid="equip-input-naam" value={naam} onChange={e => setNaam(e.target.value)}
           placeholder={slot.fallback}
@@ -566,7 +687,22 @@ function InventoryGridPanel({ userId }) {
   );
 }
 
-function HuisOpslagPanel() {
+function HuisOpslagPanel({ gameCards = [] }) {
+  // v6_dnd_card_visuals_001 — Huis-slots vullen we met "huis"-D&D-kaarten als die er zijn
+  const huisCards = (gameCards || []).filter(c => {
+    const tags = (c.tags || []).map(t => String(t).toLowerCase());
+    const begrip = String(c.begrip || '').toLowerCase();
+    return tags.includes('huis') || tags.includes('opslag') || begrip.includes('huis');
+  }).slice(0, 5);
+  const meubelCards = (gameCards || []).filter(c => {
+    const tags = (c.tags || []).map(t => String(t).toLowerCase());
+    const begrip = String(c.begrip || '').toLowerCase();
+    return tags.includes('meubel') || begrip.includes('meubel') || begrip.includes('stoel') || begrip.includes('bed') || begrip.includes('kast');
+  }).slice(0, 5);
+
+  const fallbackHuis = ['🏠', '📦', '🗃', '⛪', '+'];
+  const fallbackMeubel = ['🪑', '🛏', '🗄', '🪟', '+'];
+
   return (
     <PaperPanel>
       <PaperHeader>HUIS &amp; OPSLAG</PaperHeader>
@@ -574,17 +710,41 @@ function HuisOpslagPanel() {
         <div>
           <p className="text-[9px] uppercase tracking-wider text-amber-500/70 mb-1 text-center">Huis sloten</p>
           <div className="grid grid-cols-5 gap-1">
-            {['🏠', '📦', '🗃', '⛪', '+'].map((c, i) => (
-              <div key={i} className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70">{c}</div>
-            ))}
+            {[0, 1, 2, 3, 4].map(i => {
+              const card = huisCards[i];
+              const img = cardFirstImage(card);
+              return (
+                <div key={i} data-testid={`huis-slot-${i}`}
+                  className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70 overflow-hidden relative"
+                  title={card?.begrip || ''}>
+                  {img ? (
+                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <span>{fallbackHuis[i]}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div>
           <p className="text-[9px] uppercase tracking-wider text-amber-500/70 mb-1 text-center">Meubel sloten</p>
           <div className="grid grid-cols-5 gap-1">
-            {['🪑', '🛏', '🗄', '🪟', '+'].map((c, i) => (
-              <div key={i} className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70">{c}</div>
-            ))}
+            {[0, 1, 2, 3, 4].map(i => {
+              const card = meubelCards[i];
+              const img = cardFirstImage(card);
+              return (
+                <div key={i} data-testid={`meubel-slot-${i}`}
+                  className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70 overflow-hidden relative"
+                  title={card?.begrip || ''}>
+                  {img ? (
+                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <span>{fallbackMeubel[i]}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -592,25 +752,38 @@ function HuisOpslagPanel() {
   );
 }
 
-function DorpPreviewPanel({ char, onNavigateMap }) {
+function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
+  // v6_dnd_card_visuals_001 — gebruik basis-dorp D&D-kaart als achtergrond
+  const dorpCard = findCardByKeywords(gameCards, ['dorp', 'basis dorp', 'stad', char.dorp || '']);
+  const dorpImg = cardFirstImage(dorpCard);
+  const dorpNaam = dorpCard?.begrip || char.dorp || 'Stormhaven';
+
   return (
     <PaperPanel>
       <PaperHeader>DORP</PaperHeader>
-      <div className="relative h-32 overflow-hidden">
-        {/* Placeholder dorps-illustratie */}
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-800 via-amber-950/40 to-stone-950">
-          <svg viewBox="0 0 200 80" className="absolute bottom-0 w-full h-full" preserveAspectRatio="xMidYMax slice">
-            <path d="M0 80 L0 60 L20 50 L20 40 L30 30 L40 40 L60 35 L70 25 L85 30 L100 18 L115 30 L130 25 L150 35 L170 30 L185 40 L200 50 L200 80 Z" fill="#451a03" />
-            <path d="M30 50 L30 35 L40 30 L50 35 L50 50 Z" fill="#78350f" />
-            <path d="M70 50 L70 30 L85 25 L100 30 L100 50 Z" fill="#78350f" />
-            <path d="M120 50 L120 32 L135 28 L150 32 L150 50 Z" fill="#78350f" />
-          </svg>
-        </div>
+      <div className="relative h-40 overflow-hidden">
+        {dorpImg ? (
+          <img src={dorpImg} alt={dorpNaam}
+            className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          /* Fallback: getekende dorp-illustratie */
+          <div className="absolute inset-0 bg-gradient-to-b from-stone-800 via-amber-950/40 to-stone-950">
+            <svg viewBox="0 0 200 80" className="absolute bottom-0 w-full h-full" preserveAspectRatio="xMidYMax slice">
+              <path d="M0 80 L0 60 L20 50 L20 40 L30 30 L40 40 L60 35 L70 25 L85 30 L100 18 L115 30 L130 25 L150 35 L170 30 L185 40 L200 50 L200 80 Z" fill="#451a03" />
+              <path d="M30 50 L30 35 L40 30 L50 35 L50 50 Z" fill="#78350f" />
+              <path d="M70 50 L70 30 L85 25 L100 30 L100 50 Z" fill="#78350f" />
+              <path d="M120 50 L120 32 L135 28 L150 32 L150 50 Z" fill="#78350f" />
+            </svg>
+          </div>
+        )}
+        {/* Vignet zodat tekst leesbaar blijft over willekeurige foto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 pointer-events-none" />
+
         <div className="absolute top-2 right-2 text-right">
-          <p className="text-[9px] uppercase tracking-wider text-amber-500/70">Dorp</p>
-          <p data-testid="dorp-naam" className="text-sm font-serif font-bold text-amber-100">{char.dorp || 'Stormhaven'}</p>
-          <p className="text-[10px] text-amber-300/70">Layout: Level {char.dorp_level ?? 1}</p>
-          <p className="text-[10px] text-amber-300/70">Fog of War: {char.fog_of_war_pct ?? 0}%</p>
+          <p className="text-[9px] uppercase tracking-wider text-amber-300/90">Dorp</p>
+          <p data-testid="dorp-naam" className="text-sm font-serif font-bold text-amber-100">{dorpNaam}</p>
+          <p className="text-[10px] text-amber-200/85">Layout: Level {char.dorp_level ?? 1}</p>
+          <p className="text-[10px] text-amber-200/85">Fog of War: {char.fog_of_war_pct ?? 0}%</p>
         </div>
         <button
           data-testid="dorp-kaart-btn"

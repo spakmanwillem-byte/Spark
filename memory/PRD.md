@@ -3,6 +3,16 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_card_visuals_001** — D&D-kaarten als visuele bouwstenen in character sheet:
+  - Helper `findCardByKeywords(cards, keywords)` met 3-staps matching: tag exact → begrip exact → begrip contains (allemaal case-insensitief).
+  - **DORP-paneel** zoekt automatisch een kaart met tag/begrip `dorp` of `stad` en gebruikt de 1e foto als achtergrond + naam uit `begrip` ("Basis dorp"). Vignet zorgt dat tekst leesbaar blijft. Fallback naar getekende SVG-huisjes als geen kaart matcht.
+  - **Body silhouet** zoekt een kaart met tag `lijf`/`body`/`silhouet` en gebruikt die als foto-overlay i.p.v. de SVG.
+  - **Slot-preview** (faded image in lege slots): elke slot zoekt een kaart via slot-key + label + synoniemen (torso → t-shirt/shirt/hemd, hoofd → helm/hoed/hoofdband, voeten → schoenen/laarzen, handen → handschoenen, rugzak → tas).
+  - **Equip-modal upgrade**: toont "SNEL KIEZEN UIT D&D-GALERIJ"-grid met matching kaart-foto's (max 8). Klikken pre-fillt naam uit `begrip`. Tip-tekst legt uit hoe je tags toevoegt om nieuwe kaarten te koppelen.
+  - **Huis & Opslag sloten** vullen zich met kaarten getagged `huis`/`opslag` of `meubel`/`stoel`/`bed`/`kast`.
+  - Bevestigd met user's 2 bestaande kaarten ("Basis dorp" + tag Dorp → dorp-panel; "T-shirt" + tag shirt → torso slot).
+
+
 - **v6_dnd_gallery_media_001** — D&D Galerij upgrade: "Nieuwe kaart" modal + functionele foto-media:
   - Nieuwe `NewCardModal`: vervangt `window.prompt`. Velden: begrip/titel + zintuig-kanaal (geen/Zie/Hoor/Voel). Klikt direct in edit-mode.
   - Nieuwe `ArchivePhotoPicker` modal: lijst alle foto's uit Algemene foto-archief (`GET /api/system-archive?category=foto`), met zoekbalk + 3 tabs (Alle / D&D-game / Overige). Klik foto → koppelt URL aan `card.media.image_urls`. Toont ✓-badge voor reeds gekoppelde foto's.

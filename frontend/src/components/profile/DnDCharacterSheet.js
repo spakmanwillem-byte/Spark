@@ -150,6 +150,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [gameCards, setGameCards] = useState([]);
   const [inventory, setInventory] = useState(null);
+  const [achievements, setAchievements] = useState([]);
   const [activeFooter, setActiveFooter] = useState('overzicht');
   const [infoTab, setInfoTab] = useState('char_info');
   const [editingMeta, setEditingMeta] = useState(false);
@@ -163,8 +164,15 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
       .catch(() => {});
     // v6_dnd_rugzak_sync_001 — laad inventory zodat RUGZAK slot er mee kan syncen
     fetch(`${API}/api/inventory/${userId}`)
-      .then(r => r.json())
-      .then(setInventory)
+      .then(r => {
+        if (!r.ok) return null;
+        return r.json();
+      })
+      .then(d => {
+        if (!d) return;
+        setInventory(d);
+        setAchievements(d.stats?.achievements || []);
+      })
       .catch(() => {});
   }, [userId]);
 
@@ -233,6 +241,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
       <CharacterHeaderBar
         char={char}
         isAdmin={isAdmin}
+        achievements={achievements}
         onEdit={() => setEditingMeta(true)}
       />
 
@@ -324,7 +333,17 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
 // SUB-COMPONENTS
 // ============================================================
 
-function CharacterHeaderBar({ char, isAdmin, onEdit }) {
+function CharacterHeaderBar({ char, isAdmin, achievements = [], onEdit }) {
+  // v6_dnd_military_stripes_001 — Leger-stijl: 1 streepje = 100 levels (chevron stripes)
+  const level = char.derived?.level ?? 0;
+  const fullStripes = Math.floor(level / 100);
+  const partialPct = level % 100; // 0..99 → tweede chevron-fill
+  const totalStripes = Math.max(fullStripes + 1, 3); // toon minimaal 3 chevrons als visueel kader
+  const stripes = Array.from({ length: totalStripes }, (_, i) => ({
+    full: i < fullStripes,
+    partial: i === fullStripes ? partialPct : 0,
+  }));
+
   return (
     <div
       data-testid="char-header-bar"
@@ -333,9 +352,27 @@ function CharacterHeaderBar({ char, isAdmin, onEdit }) {
         boxShadow: 'inset 0 0 24px rgba(245,158,11,0.05), 0 0 0 1px rgba(245,158,11,0.15)',
       }}
     >
-      {/* Banner-emblem */}
-      <div className="w-14 h-16 flex-shrink-0 rounded-md border border-amber-700/60 bg-gradient-to-b from-amber-900/40 to-purple-900/30 flex items-center justify-center">
-        <Crown className="w-7 h-7 text-amber-400" />
+      {/* Banner-emblem + Achievement medals row */}
+      <div className="relative">
+        <div className="w-14 h-16 flex-shrink-0 rounded-md border border-amber-700/60 bg-gradient-to-b from-amber-900/40 to-purple-900/30 flex items-center justify-center">
+          <Crown className="w-7 h-7 text-amber-400" />
+        </div>
+        {/* Medals stack onder de banner — max 4 zichtbaar */}
+        {achievements.length > 0 && (
+          <div data-testid="achievement-medals" className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex -space-x-1.5">
+            {achievements.slice(0, 4).map((a, i) => (
+              <div key={a.code || i} title={a.naam || a.code}
+                className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600 border-2 border-stone-950 flex items-center justify-center text-[10px] shadow-lg">
+                🏅
+              </div>
+            ))}
+            {achievements.length > 4 && (
+              <div className="w-5 h-5 rounded-full bg-stone-800 border-2 border-stone-950 flex items-center justify-center text-[8px] text-amber-200 font-bold">
+                +{achievements.length - 4}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Titel + Ondertitel */}
@@ -347,17 +384,18 @@ function CharacterHeaderBar({ char, isAdmin, onEdit }) {
         <p className="text-[11px] italic text-amber-300/60">{char.ondertitel || ''}</p>
       </div>
 
-      {/* Rang */}
+      {/* Rang + Militaire streepjes (100 levels = 1 streepje) */}
       <div className="border-l border-r border-amber-900/40 px-3 py-1">
         <p className="text-[9px] uppercase tracking-[0.2em] text-amber-500/70">Rang / Status</p>
         <p data-testid="char-rang" className="text-sm font-bold text-amber-100">{char.rang_titel || 'Burger'}</p>
-        <p className="text-[10px] text-amber-400/60">Community Level {char.derived?.level ?? 0}+</p>
-        {/* Progress bar */}
-        <div className="mt-1 w-32 h-1.5 bg-stone-900 rounded-full overflow-hidden border border-amber-900/40">
-          <div className="h-full bg-gradient-to-r from-amber-700 to-yellow-400"
-            style={{ width: `${char.rang_progress_pct ?? 0}%` }} />
+        <p className="text-[10px] text-amber-400/60">Level {level} · {fullStripes} {fullStripes === 1 ? 'streep' : 'strepen'}</p>
+        {/* Chevron stripes */}
+        <div data-testid="rank-stripes" className="mt-1 flex items-center gap-0.5">
+          {stripes.map((s, i) => (
+            <RankStripe key={i} full={s.full} partial={s.partial} />
+          ))}
         </div>
-        <p className="text-[9px] text-amber-400/60 mt-0.5">{char.rang_progress_pct ?? 0}%</p>
+        <p className="text-[9px] text-amber-400/60 mt-0.5 font-mono">{partialPct}/100 tot volgende streep</p>
       </div>
 
       {/* Rank shields */}
@@ -387,6 +425,22 @@ function CharacterHeaderBar({ char, isAdmin, onEdit }) {
         className="w-8 h-8 rounded border border-amber-900/40 bg-stone-900/40 hover:bg-amber-900/30 text-amber-400 flex items-center justify-center">
         <Edit3 className="w-3.5 h-3.5" />
       </button>
+    </div>
+  );
+}
+
+function RankStripe({ full, partial = 0 }) {
+  // Chevron-stijl streepje (parallelogram met punt naar rechts)
+  return (
+    <div className="relative w-5 h-3.5 overflow-hidden"
+      style={{ clipPath: 'polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%, 30% 50%)' }}>
+      <div className="absolute inset-0 bg-stone-800/80" />
+      <div
+        className={`absolute inset-0 ${full ? 'bg-gradient-to-r from-amber-500 to-yellow-300' : 'bg-gradient-to-r from-amber-600 to-yellow-400'}`}
+        style={{
+          width: full ? '100%' : `${partial}%`,
+          boxShadow: full ? 'inset 0 0 4px rgba(255,255,255,0.4)' : 'none',
+        }} />
     </div>
   );
 }
@@ -876,13 +930,80 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
 }
 
 function MiniMapPanel({ char }) {
+  // v6_spark_world_nl_001 — NL-silhouet met Stormhaven boven (Groningen-positie)
+  // Klikbare hotspots; later D&D-fractie-kaarten koppelen
+  const NL_LOCATIONS = [
+    { id: 'stormhaven', x: 78, y: 18, label: 'Stormhaven', fractie: 'Spark', isMain: true },
+    { id: 'noord',      x: 60, y: 32, label: '—',          fractie: '', isMain: false },
+    { id: 'midden',     x: 50, y: 55, label: '—',          fractie: '', isMain: false },
+    { id: 'zuid',       x: 45, y: 80, label: '—',          fractie: '', isMain: false },
+  ];
+
   return (
     <PaperPanel>
       <PaperHeader>SPARK WORLD</PaperHeader>
-      <div className="p-3 text-center">
-        <Map className="w-10 h-10 mx-auto text-amber-500/70" />
-        <p className="text-[11px] text-amber-200 mt-2 font-serif">{char.locatie_naam || 'Stormhaven'}</p>
-        <p className="text-[9px] text-amber-400/60 mt-1">Interactieve map<br />komt in fase 2</p>
+      <div className="relative p-2">
+        <svg viewBox="0 0 100 110" className="w-full h-44">
+          {/* NL silhouet (gestileerd) */}
+          <defs>
+            <linearGradient id="nl-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#78350f" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#451a03" stopOpacity="0.9" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M30 12 L42 8 L56 8 L72 6 L84 12 L88 20 L86 32 L82 42 L78 50 L74 58 L70 66 L62 76 L52 88 L40 96 L30 92 L26 80 L22 70 L24 58 L28 48 L26 38 L24 28 L26 20 Z"
+            fill="url(#nl-fill)"
+            stroke="#f59e0b"
+            strokeWidth="0.6"
+            strokeLinejoin="round"
+          />
+          {/* Provincie-grenzen (subtiel) */}
+          <g stroke="#f59e0b" strokeWidth="0.2" opacity="0.3" fill="none">
+            <path d="M30 50 L74 50" />
+            <path d="M50 8 L52 88" />
+            <path d="M30 30 L82 32" />
+            <path d="M28 70 L70 66" />
+          </g>
+          {/* Noordzee water-textuur */}
+          <g opacity="0.4">
+            <path d="M5 25 Q12 23 18 25 T28 25" stroke="#38bdf8" strokeWidth="0.4" fill="none" />
+            <path d="M5 35 Q12 33 18 35 T28 35" stroke="#38bdf8" strokeWidth="0.4" fill="none" />
+          </g>
+
+          {/* Locatie hotspots */}
+          {NL_LOCATIONS.map(loc => (
+            <g key={loc.id} data-testid={`nl-hotspot-${loc.id}`} style={{ cursor: 'pointer' }}>
+              {loc.isMain ? (
+                <>
+                  <circle cx={loc.x} cy={loc.y} r="5" fill="#f59e0b" opacity="0.25" />
+                  <circle cx={loc.x} cy={loc.y} r="2.5"
+                    fill="url(#nl-fill)" stroke="#fde68a" strokeWidth="0.6" />
+                  <circle cx={loc.x} cy={loc.y} r="1" fill="#fde68a" />
+                </>
+              ) : (
+                <circle cx={loc.x} cy={loc.y} r="1.5"
+                  fill="none" stroke="#f59e0b" strokeWidth="0.4" strokeDasharray="0.6 0.4" />
+              )}
+            </g>
+          ))}
+
+          {/* Stormhaven label */}
+          <text x="78" y="13" textAnchor="middle" fill="#fde68a" fontSize="3"
+            fontFamily="serif" fontWeight="bold">Stormhaven</text>
+          <text x="78" y="9.5" textAnchor="middle" fill="#f59e0b" fontSize="1.8"
+            fontStyle="italic">Fractie Spark</text>
+        </svg>
+
+        <div className="border-t border-amber-900/40 pt-1.5 mt-1">
+          <p className="text-[9px] uppercase tracking-wider text-amber-500/70">Huidige Locatie</p>
+          <p data-testid="nl-current-location" className="text-[11px] text-amber-100 font-serif">
+            {char.locatie_naam || 'Stormhaven'}
+          </p>
+          <p className="text-[8px] text-amber-400/60 italic mt-0.5">
+            Klik plekken om D&amp;D-fractiekaarten te koppelen (komt eraan)
+          </p>
+        </div>
       </div>
     </PaperPanel>
   );

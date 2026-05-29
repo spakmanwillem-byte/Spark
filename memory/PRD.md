@@ -3,6 +3,14 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_integration_001** — 5 verzoeken in 1 batch verwerkt:
+  - **Persoonskaart terug naar Avatar-tab**: Aura (gedrag → identiteit) + Stats grid + Slots/Gewicht bars + Items + (verwijderde losse) Achievements zitten nu geïntegreerd onder de D&D character sheet.
+  - **Rugzak-icoon foto-fix**: PersoonskaartCard kijkt nu in D&D-kaarten op (begrip/tag match) en gebruikt de kaart-foto als 40×40 icoon i.p.v. 🎒 emoji. "Grote Trekrugzak" toont nu de echte rugzak-foto.
+  - **Militaire chevron-stripes** (`RankStripe`): in de header-bar staan nu 3+ goud-gevulde chevron-strepen (clip-path parallelogram). Regel: **100 levels = 1 streep**. Sub-tekst: "Level 272 · 2 strepen" + "72/100 tot volgende streep".
+  - **Achievement-medailles** op de banner: 🏅 gouden bolletjes (gradient amber→yellow) gestapeld onder de Crown-emblem. Max 4 zichtbaar + "+N" overflow badge.
+  - **Spark World mini-map → NL-silhouet**: SVG-pad van Nederland (gestileerd, met provincie-lijnen + Noordzee-textuur). **Stormhaven** als grote gouden hotspot bovenaan (Groningen-positie) met label + "Fractie Spark". 3 extra vacant city-frames als gestippelde cirkels (later klikbaar voor D&D-fractie-kaart koppeling).
+
+
 - **v6_dnd_dorp_zoom_001** — Stormhaven Dorp-Zoom modal (`StormhavenMapView.js`):
   - Klikken op "Kaart Bekijken" in DORP-paneel opent een full-screen modal met de "Basis dorp" foto als achtergrond.
   - Header toont "Hoofdstad — Fractie Spark · Stormhaven" + Layout Level + Fog of War.

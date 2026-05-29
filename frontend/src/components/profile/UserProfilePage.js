@@ -217,10 +217,6 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
         </div>
       </Card>
 
-      {/* v6_dnd_character_sheet_001 — Persoonskaart (stats + aura + inventory) verplaatst uit Avatar-tab.
-          Toont gradatie/level/XP, aura, inventory-items en achievements. */}
-      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
-
       <SaveBar onSave={onSave} saving={saving} savedFlash={savedFlash} />
     </div>
   );
@@ -538,6 +534,9 @@ function AvatarTab({ userId, isAdmin }) {
       {/* v6_dnd_character_sheet_001 — Stormhaven-stijl D&D character sheet voor de Avatar-tab */}
       <DnDCharacterSheet userId={userId} isAdmin={isAdmin} />
 
+      {/* v6_dnd_persoonskaart_avatar_002 — Aura + Stats + Inventory + Achievements onder character sheet */}
+      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
+
       {/* Collapsible: avatar-portret + galerij (compact onder character sheet) */}
       <details className="bg-slate-900 border border-slate-800 rounded-xl group">
         <summary data-testid="avatar-portret-toggle"
@@ -789,6 +788,7 @@ function PersoonskaartCard({ userId, isAdmin }) {
   const [inv, setInv] = useState(null);
   const [aura, setAura] = useState(null);
   const [catalog, setCatalog] = useState([]);
+  const [gameCards, setGameCards] = useState([]);
   const [busy, setBusy] = useState(false);
   const [showShop, setShowShop] = useState(false);
   const [err, setErr] = useState(null);
@@ -800,7 +800,23 @@ function PersoonskaartCard({ userId, isAdmin }) {
   useEffect(() => { reload(); }, [reload]);
   useEffect(() => {
     fetch(`${API}/api/inventory/catalog/all`).then(r => r.json()).then(d => setCatalog(d.items || []));
+    // v6_dnd_persoonskaart_avatar_002 — D&D-kaarten ophalen om foto-icoon te kunnen matchen
+    fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`).then(r => r.json())
+      .then(d => setGameCards(d.cards || [])).catch(() => {});
   }, []);
+
+  // Match een inventory-item naam aan een D&D-kaart om de foto te tonen
+  const cardImgFor = (slot) => {
+    if (!gameCards.length) return null;
+    const naam = String(slot.naam || '').toLowerCase();
+    const card = gameCards.find(c => {
+      const b = String(c.begrip || '').toLowerCase();
+      return b === naam || naam.includes(b) || b.includes(naam) ||
+        (c.tags || []).some(t => naam.includes(String(t).toLowerCase()));
+    });
+    const u = card?.media?.image_urls?.[0];
+    return u ? `${API}${u}` : null;
+  };
 
   const addItem = async (itemId) => {
     setBusy(true); setErr(null);
@@ -933,10 +949,17 @@ function PersoonskaartCard({ userId, isAdmin }) {
           <p className="text-xs text-slate-500 italic">Nog geen items.</p>
         ) : (
           <div className="space-y-1.5">
-            {inv.slots.map(slot => (
+            {inv.slots.map(slot => {
+              const img = cardImgFor(slot);
+              return (
               <div key={slot.id} data-testid={`inv-slot-${slot.id}`}
                 className="flex items-center gap-3 p-2.5 bg-slate-800/40 hover:bg-slate-800/60 border border-slate-800/60 rounded-lg transition-colors">
-                <div className="text-2xl">{slot.icon || '📦'}</div>
+                {img ? (
+                  <img src={img} alt={slot.naam}
+                    className="w-10 h-10 rounded-md object-cover border border-amber-500/50 flex-shrink-0" />
+                ) : (
+                  <div className="text-2xl w-10 h-10 flex items-center justify-center flex-shrink-0">{slot.icon || '📦'}</div>
+                )}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium text-white truncate">{slot.naam}</p>
@@ -957,7 +980,8 @@ function PersoonskaartCard({ userId, isAdmin }) {
                   </button>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

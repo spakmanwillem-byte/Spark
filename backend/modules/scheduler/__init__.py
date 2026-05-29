@@ -226,6 +226,32 @@ async def _maybe_roar_price_snapshot():
         print(f"[scheduler] roar price-snapshot failed: {ex}")
 
 
+async def _maybe_staking_growth():
+    """v6_staking_growth_engine_001 — eens per 24 uur staking growth cycle draaien.
+    Auto-rente check is intern op 30-dag interval, dus dagelijkse trigger is safe.
+    """
+    now = datetime.now(timezone.utc)
+    state = _load_state()
+    last_str = state.get("staking_growth_last")
+    if last_str:
+        try:
+            last = datetime.fromisoformat(last_str.replace("Z", "+00:00"))
+            if (now - last).total_seconds() < 86400:  # < 24h geleden
+                return
+        except Exception:
+            pass
+    try:
+        from modules.trade.staking_growth import run_growth_cycle
+        result = run_growth_cycle(force=False)
+        state["staking_growth_last"] = now.isoformat()
+        _save_state(state)
+        actions = result.get("actions", [])
+        if actions:
+            print(f"[scheduler] staking growth: {len(actions)} acties ({len(result.get('minted_pots', []))} mints)")
+    except Exception as ex:
+        print(f"[scheduler] staking growth failed: {ex}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -234,6 +260,7 @@ async def scheduler_loop():
             await _maybe_boekhouder_roundup()
             await _maybe_error_bark()
             await _maybe_roar_price_snapshot()
+            await _maybe_staking_growth()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

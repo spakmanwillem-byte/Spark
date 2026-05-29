@@ -502,6 +502,22 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
                              entry_price, amount_eur or p.get("capital", 0))
             except Exception:
                 pass
+            # v6_accounting_hooks_001 — Trade BUY → expense spark_core (Materiaal)
+            try:
+                from modules.accounting.hooks import on_bitvavo_coin_buy
+                from pathlib import Path as _P
+                USERS = _P(__file__).parent.parent.parent / "data" / "system" / "users.json"
+                udata = load_json(USERS, default={"users": []})
+                ulist = udata.get("users", []) if isinstance(udata, dict) else udata
+                naam = next((u.get("naam") for u in ulist if u.get("id") == user_id), user_id)
+                on_bitvavo_coin_buy(
+                    user_id=user_id, user_naam=naam,
+                    market=market or p.get("market") or "?-EUR",
+                    amount_eur=amount_eur or p.get("capital", 0),
+                    trade_id=trade_id or f"{pot_id}_{now}",
+                )
+            except Exception as ex:
+                print(f"[open_pot] accounting-hook failed (non-blocking): {ex}")
             return p
     return {}
 
@@ -605,6 +621,24 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                               exit_price, netto, spark_fee)
             except Exception:
                 pass
+            # v6_accounting_hooks_001 — Trade SELL resultaat → income/expense Crypto Profit
+            try:
+                from modules.accounting.hooks import on_trade_result
+                USERS = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+                udata = load_json(USERS, default={"users": []})
+                ulist = udata.get("users", []) if isinstance(udata, dict) else udata
+                naam = next((u.get("naam") for u in ulist if u.get("id") == user_id), user_id)
+                buy_amt = capital  # wat erin ging
+                sell_amt = capital + netto  # wat eruit kwam (vóór fee)
+                trade_id_local = f"sell_{pot_id}_{datetime.now(timezone.utc).timestamp()}"
+                on_trade_result(
+                    user_id=user_id, user_naam=naam,
+                    market=p.get("market") or "?-EUR",
+                    buy_amount=buy_amt, sell_amount=sell_amt,
+                    trade_id=trade_id_local,
+                )
+            except Exception as ex:
+                print(f"[close_pot] accounting-hook failed (non-blocking): {ex}")
             # Probeer automatisch te expanderen als mogelijk
             auto_expansion = None
             try:

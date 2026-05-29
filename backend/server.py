@@ -132,6 +132,10 @@ app.include_router(tikkie_router, prefix="/api")
 from modules.trade import trade_router
 app.include_router(trade_router, prefix="/api")
 
+# v6_staking_growth_engine_001 — Staking Growth Engine
+from modules.trade.staking_growth import router as staking_growth_router
+app.include_router(staking_growth_router, prefix="/api")
+
 # Module 15: Accounting
 from modules.accounting import accounting_router
 app.include_router(accounting_router, prefix="/api")

@@ -7,38 +7,46 @@
 **Status**: Stabiel. Geen code-blockers. Wacht op EUR-storting Willem zodat Spark potjes-commitment volledig gedekt is door Bitvavo.
 
 ### ✅ Sessie 14 (2026-05-28/29) — wat gedaan
-- [x] 🐛 **KB v2 legacy media bug** (v6_kbv2_media_legacy_001) — backwards-compat routes `/api/kb/v2/media/{image,voice}/file/{filename}` met path-traversal guard. Curl-getest: 200 OK + 287B PNG.
-- [x] 🧹 **Disk cleanup** — 615 MB vrijgemaakt: `/tmp/spark_zip` + pycache + 4× supervisor logs getrunceerd. Backups intact (88MB).
-- [x] 🔍 **Zip-backup analyse** — `spark_backup_full_20260528_122515.zip` bevat geen verloren kaarten. Lade-counts zip == live.
-- [x] 🔄 **KB v2 sync uit productie** (29 mei) — 42 verhuisde kaarten gepulled uit `spark_backup_changes_20260529_074414.zip` (voelen 257→269, weten 1085→1097, doen 659→677, inbox 2989→2947). Backup veilig.
-- [x] 📜 **ROADMAP.md** — top-sectie + 50 nieuwe Willem-ideeën in 10 clusters (A t/m J).
-- [x] 🔤 **Tag-normalizer fundering** (v6_kb_tag_normalizer_001 + v6_kb_tag_merge_001):
-  - `modules/kb_v2/tag_normalizer.py` met 4 functies + ~50-noun exception-list. 20/20 unit-tests pass.
-  - 5 endpoints: `/tags/normalize`, `/normalize-batch`, `/scan`, `/similarity`, `/merge` (admin-only).
-  - Live scan: 18.041 tags → 45 echte dedupe-kansen geïdentificeerd.
-- [x] 🧠 **SPARK AI sidebar restructure**:
-  - **Synapslaag** verhuisd van Instellingen → SPARK AI sidebar (admin-only).
-  - **"Emoties"** hernoemd naar **"Emotie Detectie"** (input-laag).
-  - Nieuwe **"Emotie Routering"** sidebar-item (admin-only) — 7-laags pipeline view.
-  - **Geen dubbele tabs**: Emotie Pipeline tab uit Spark Brain weggehaald.
-  - `SparkBrainPage` ondersteunt `initialSection` prop voor deep-linking.
-- [x] 🦅 **Spark Brein-overzicht dashboard** (v6_spark_overview_001):
-  - Sidebar-item bovenaan SPARK AI: 6 live-teller-kaarten (Brain/Synapse/KB/Triggers/Routering/Verbanden).
-  - Parallel-fetch 6 endpoints, klik → navigeer naar betreffende sub-page.
-- [x] 🐛 **`/api/trade/stats/*` HTTP 500 fix** — capital_baseline.json had floats (legacy), code verwachtte dicts. Backwards-compat + data-migratie (2 users).
-- [x] 🐛 **Quick-buy €5.08 → €10** — `capital` als primaire bron ipv outdated `current_size`/`starting_size` (die in moderne potjes niet meer gezet worden).
-- [x] 🐛 **Open potjes amount_eur backfill** — `open_pot` zette amount alleen in trade_log, niet in `position`. UI toonde "niet gevuld". Fix in code + 11 open posities backfilled.
-- [x] 🐛 **Winkelstraat avatar/logo placeholders** — `gallery:cf90e9ea6393` werd niet geresolveerd naar `/api/avatar/gallery/{id}/image`. Fix in `winkelstraat/__init__.py`.
-- [x] 🔒 **Lock-bug defense-in-depth** — `open_pot()` + `close_pot()` weigeren nu locked potjes hard. Logs printen 'BLOCK'. `distribute_potjes_over_markets` skipt locked anchors.
-- [x] 🏗️ **Spark 5 anchor pots** — 1 staking-anchor per coin: pot-001 ADA / pot-002 BCH / pot-003 BTC / pot-004 ETH / pot-005 SOL. Trade-potjes hernummerd naar pot-006..015.
-- [x] 🎨 **Locked potjes onderaan UI** — sort-key in TraderPage zet anchors visueel onderaan met 🔒-icon, groene styling, "STAKING ANKER" label.
-- [x] 🐛 **€43.25 fix** — UI verdeelde Bitvavo-balance via growth-factor over alle potjes (€10 × 4.32 = €43.25). Nu tonen locked+vrije potjes hun echte capital; alleen open posities mark-to-market.
-- [x] 🐛 **Snel Handelen panel** — pakte locked anchor als "potje 1". Skip locked + use echte capital. Live prijs refresh 30s → 10s.
-- [x] 📋 **bugs.json cleanup** — 7 stilletjes opgeloste bugs afgevinkt met `resolution_tag` + `resolution_note`. Status nu: 13 nieuw / 1 in_behandeling / 29 opgelost.
-- [x] 📈 **ROAR price-history snapshots** (v6_price_history_snapshots_002):
-  - `POST /api/spark/kasboek/price-snapshot` legt huidige prijs vast in `roar/price_snapshots.json`.
-  - Scheduler-hook `_maybe_roar_price_snapshot()` draait elk uur in 5-min loop.
-  - `/price-history` endpoint mergt nu tx-buckets + snapshot-buckets → grafiek heeft altijd data, ook na clean_slate.
+- [x] 🐛 KB v2 legacy media routes hersteld (path-traversal guard)
+- [x] 🧹 Disk cleanup 615 MB
+- [x] 🔄 KB v2 sync uit productie (42 verhuisde kaarten)
+- [x] 🔤 Tag-normalizer (45 dedupe-kansen, 5 endpoints)
+- [x] 🧠 SPARK AI sidebar restructure (geen dubbele tabs)
+- [x] 🦅 Spark Brein-overzicht dashboard (6-kaarten helikopter-view)
+- [x] 🐛 `/api/trade/stats/*` HTTP 500 (float vs dict fix)
+- [x] 🐛 Quick-buy €5.08 → €10 (capital als bron)
+- [x] 🐛 Open potje amount_eur backfill (11 gefixed)
+- [x] 🐛 Winkelstraat avatar/logo (gallery: prefix resolve)
+- [x] 🔒 Lock-bug defense-in-depth (open+close+distribute)
+- [x] 🏗️ Spark 5 anchor pots (1 per coin) + hernummering pot-001..015
+- [x] 🎨 Locked potjes onderaan UI (sort-key)
+- [x] 🐛 €43.25 fix (growth-distortion in live_value)
+- [x] 🐛 Snel Handelen panel (skip locked + capital + refresh 10s)
+- [x] 🐛 Ghost-anchors Willem + Gijs verwijderd (alleen Spark hoort anchors te hebben)
+- [x] 🐛 Ghost-positions Willem (6 fake OPEN → cleared)
+- [x] 🐛 Auto-lock hook beperkt tot Spark (was bug die anchors bij iedereen herstelde)
+- [x] 🐛 Willem coin-balance 3-1-2-2-2 → 2-2-2-2-2 symmetrisch
+- [x] 📋 7 bugs.json afgevinkt met resolution-tag
+- [x] 📈 ROAR price-history snapshots + scheduler-hook (1×/uur)
+- [x] 📜 Disclaimer uitgebreid (5 nieuwe secties: privacy/werking/eigendom/transparantie/aansprakelijkheid)
+- [x] 💰 **6 Boekhouding-hooks gecentraliseerd** (v6_accounting_hooks_001):
+  - `modules/accounting/hooks.py` met 6 idempotente helpers (tx_ref-based)
+  - Hook 1: ROAR token-buy → income spark_core (gift/sales o.b.v. anker/klant)
+  - Hook 2: Bitvavo coin-buy → expense spark_core (Materiaal)
+  - Hook 3: Sell-back → expense spark_core (Refunds)
+  - Hook 4: Shop verkoop → income shop-kasboek + 2% commissie naar spark_core
+  - Hook 5: Tikkie deposit → income personal_<naam>
+  - Hook 6: Trade SELL resultaat → income/expense Crypto Profit
+  - Aanroepen toegevoegd in `shop/routes.py` (token-buy/sell-back/shop-sale), `trade/potjes.py` (open_pot+close_pot), `wallet/tikkie.py` (confirm)
+  - Stille-fail mode: hook-error blokkeert nooit een product-actie
+- [x] 🌱 **Staking Growth Engine** (v6_staking_growth_engine_001):
+  - `modules/trade/staking_growth.py` — 3-in-1 module
+  - Auto-rente: 1.5% per anchor per maand uit overflow_pool (30-dag interval)
+  - Auto-mint: bij overflow >= €10 → nieuw trade-potje
+  - Auto-anchor: `POST /auto-anchor` voor nieuwe coin (alleen Spark, idempotent)
+  - 3 endpoints: `/trade/growth/run`, `/trade/growth/status`, `/trade/growth/auto-anchor`
+  - Scheduler-hook dagelijks check (intern 30-dag rente-interval)
+  - **Live getest**: €25.50 overflow → 5 anchors +€0.38 elk + 2 mints + €3.59 rest. Reset naar clean state.
 
 ### Conceptueel kader (uit deze sessie)
 - **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test

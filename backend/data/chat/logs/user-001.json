@@ -24648,11 +24648,47 @@
         "session_id": "default",
         "gesprek_nummer": 945
       }
+    },
+    {
+      "id": "conv-2f204ba4",
+      "timestamp": "2026-05-29T09:10:27.074491+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 14 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 946
+      }
+    },
+    {
+      "id": "conv-71e82c24",
+      "timestamp": "2026-05-29T09:10:27.103861+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 947
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 945,
-    "last_updated": "2026-05-28T18:50:25.390412+00:00"
+    "total_conversations": 947,
+    "last_updated": "2026-05-29T09:10:27.103861+00:00"
   }
 }

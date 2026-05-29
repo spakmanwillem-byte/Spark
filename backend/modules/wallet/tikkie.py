@@ -388,6 +388,19 @@ async def confirm_topup(topup_id: str, req: ConfirmTopup):
     except Exception as e:
         print(f"[tikkie] archiveer bevestigd gefaald: {e}")
 
+    # v6_accounting_hooks_001 — Tikkie storting → income personal_<user>
+    try:
+        from modules.accounting.hooks import on_deposit
+        on_deposit(
+            user_id=topup.get("user_id"),
+            user_naam=topup.get("naam_invoer") or topup.get("user_id"),
+            amount=float(topup.get("amount") or 0),
+            source="Tikkie",
+            ref_id=topup["id"],
+        )
+    except Exception as e:
+        print(f"[tikkie] accounting-hook failed (non-blocking): {e}")
+
     return {"success": True, "topup": topup, "wallet": w, "transaction": tx}
 
 

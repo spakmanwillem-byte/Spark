@@ -345,6 +345,20 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
 
+    # v6_accounting_hooks_001 — auto-post naar centraal Boekhouding (single source of truth)
+    try:
+        from modules.accounting.hooks import on_token_buy
+        ANCHOR_USERS = {"user-000", "user-001"}
+        is_anchor = user_id in ANCHOR_USERS
+        on_token_buy(
+            buyer_user_id=user_id, buyer_naam=user.get("naam") or user_id,
+            tokens=amount_tokens, total_eur=amount_eur,
+            price_per_token=price, ref_id=tx["id"],
+            is_anchor=is_anchor, btw_pct=0.0,
+        )
+    except Exception as ex:
+        print(f"[token_buy] accounting-hook failed (non-blocking): {ex}")
+
     # v6_gift_phase_001 — In bouw-fase = GIFT, geen BTW. Volledige bedrag → Spark omzet.
     # Anker-aankopen (Willem/Spark) tellen sowieso niet mee als gift (zij zijn fundering).
     try:
@@ -475,6 +489,16 @@ async def sell_tokens(user_id: str, req: SellTokenRequest):
     wallets["transactions"].append(tx)
     save_json(WALLET_FILE, wallets)
     save_roar_data(roar)
+
+    # v6_accounting_hooks_001 — sell-back → expense spark_core (Refunds)
+    try:
+        from modules.accounting.hooks import on_sell_back
+        on_sell_back(
+            seller_user_id=user_id, seller_naam=user.get("naam") or user_id,
+            tokens=amount_tokens, total_eur=amount_eur, ref_id=tx["id"],
+        )
+    except Exception as ex:
+        print(f"[sell_back] accounting-hook failed (non-blocking): {ex}")
 
     return {
         "success": True,
@@ -840,8 +864,27 @@ async def create_order(user_id: str, req: CreateOrderRequest):
             "btw_percentage": 21,
             "btw_amount": round(item["line_total"] * 0.21, 2),
             "created_at": now,
+            "tx_ref": f"shop_sale_{order_id}_{item['id']}",
         }
         accounting["transactions"].append(acc_tx)
+        # v6_accounting_hooks_001 — 2% shop-commissie naar spark_core
+        if item["entity_id"] != "spark_core":
+            commissie = round(item["line_total"] * 0.02, 2)
+            if commissie > 0:
+                accounting["transactions"].append({
+                    "id": str(uuid.uuid4()),
+                    "type": "income",
+                    "category": "Sales",
+                    "amount": commissie,
+                    "description": f"Shop-commissie 2% van {item['entity_id']} (order #{order_id})",
+                    "entity_id": "spark_core",
+                    "date": now,
+                    "btw_percentage": 0,
+                    "btw_amount": 0,
+                    "created_at": now,
+                    "tx_ref": f"shop_commissie_{order_id}_{item['id']}",
+                    "source": "auto_hook",
+                })
     save_json(ACCOUNTING_FILE, accounting)
 
     # Sla order op

@@ -270,7 +270,7 @@
           "position": {
             "is_open": true,
             "entry_price": 259.1,
-            "highest_price": 263.27,
+            "highest_price": 263.32,
             "trailing_active": true,
             "entry_time": "2026-05-29T09:44:56.882791+00:00",
             "amount_eur": 10.0
@@ -307,7 +307,7 @@
           "position": {
             "is_open": true,
             "entry_price": 258.27,
-            "highest_price": 263.27,
+            "highest_price": 263.32,
             "trailing_active": true,
             "entry_time": "2026-05-29T10:59:51.139500+00:00",
             "amount_eur": 10.0
@@ -360,7 +360,7 @@
           "position": {
             "is_open": true,
             "entry_price": 258.35,
-            "highest_price": 263.27,
+            "highest_price": 263.32,
             "trailing_active": true,
             "entry_time": "2026-05-29T11:00:25.817028+00:00",
             "amount_eur": 10.0
@@ -915,6 +915,31 @@
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
           "nummer": 15
+        },
+        {
+          "id": "pot-016",
+          "index": 15,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-05-29T17:35:14.121553+00:00",
+          "last_action": null,
+          "source": "auto_anchor_for_new_coin"
         }
       ],
       "baseline_eur": 51.4,

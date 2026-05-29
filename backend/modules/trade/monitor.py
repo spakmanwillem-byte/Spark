@@ -240,7 +240,10 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
 
     v6_trade_minorder_001: pre-check minimumOrderInQuoteAsset bij BUY.
     v6_trade_sell_balance_001: bij SELL eerst actuele balance ophalen en clamp om
-      ‘insufficient balance’/dust-rounding fouten te voorkomen.
+      'insufficient balance'/dust-rounding fouten te voorkomen.
+    v6_bitvavo_proxy_via_spark_001 (sessie 16): non-Spark users zonder eigen
+      Bitvavo keys → trade gaat via Spark's (user-000) keys. Logisch consistent:
+      ROAR-aankopen kwamen via Spark op Bitvavo terecht. `proxied=True` in trade-log.
     """
     settings_file = SETTINGS_DIR / user_id / "settings.json"
     settings = load_json(settings_file, default={})
@@ -248,8 +251,18 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
 
     api_key = bitvavo.get("api_key")
     api_secret = bitvavo.get("api_secret")
+    proxied = False
     if not api_key or not api_secret:
-        return {"success": False, "error": "Geen Bitvavo API credentials gevonden"}
+        spark_settings = load_json(SETTINGS_DIR / "user-000" / "settings.json", default={})
+        spark_bv = spark_settings.get("integrations", {}).get("bitvavo", {})
+        if spark_bv.get("api_key") and spark_bv.get("api_secret"):
+            api_key = spark_bv["api_key"]
+            api_secret = spark_bv["api_secret"]
+            bitvavo = spark_bv
+            proxied = True
+            logger.info(f"[trade] {user_id} → via Spark's Bitvavo keys (proxy)")
+        else:
+            return {"success": False, "error": "Geen Bitvavo API credentials gevonden (ook niet bij Spark)"}
 
     side_l = side.lower()
 
@@ -392,6 +405,8 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
                 # v6_trade_sell_balance_001 — traceability
                 "requested_amount": amount_eur,
                 "effective_amount": final_amount,
+                # v6_bitvavo_proxy_via_spark_001 — audit trail
+                "proxied_via_spark": proxied,
             }
 
             history_file = DATA_DIR / "wallet" / "trade_history" / f"{user_id}.json"
@@ -435,13 +450,24 @@ def _bitvavo_signed_get(api_key: str, api_secret: str, endpoint: str, params: st
 
 
 def fetch_bitvavo_balance(user_id: str) -> Dict:
-    """Fetch live Bitvavo account balances (all coins)."""
+    """Fetch live Bitvavo account balances (all coins).
+    v6_bitvavo_proxy_via_spark_001 (sessie 16): non-Spark users zonder keys →
+    val terug op Spark's keys. Resultaat: één gedeelde Bitvavo-balance die alle
+    user-bots zien (logisch want het is fysiek 1 Bitvavo-account)."""
     settings = load_json(SETTINGS_DIR / user_id / "settings.json", default={})
     bitvavo = settings.get("integrations", {}).get("bitvavo", {})
     api_key = bitvavo.get("api_key")
     api_secret = bitvavo.get("api_secret")
+    proxied = False
     if not api_key or not api_secret:
-        return {"success": False, "error": "Geen Bitvavo API credentials"}
+        spark_settings = load_json(SETTINGS_DIR / "user-000" / "settings.json", default={})
+        spark_bv = spark_settings.get("integrations", {}).get("bitvavo", {})
+        if spark_bv.get("api_key") and spark_bv.get("api_secret"):
+            api_key = spark_bv["api_key"]
+            api_secret = spark_bv["api_secret"]
+            proxied = True
+        else:
+            return {"success": False, "error": "Geen Bitvavo API credentials"}
     if api_key.startswith("TEST_"):
         return {"success": False, "error": "Placeholder API keys gedetecteerd - voer echte Bitvavo keys in via Trader → Settings"}
 
@@ -479,7 +505,8 @@ def fetch_bitvavo_balance(user_id: str) -> Dict:
             "value_eur": round(eur_value, 2),
         })
     enriched.sort(key=lambda x: x["value_eur"], reverse=True)
-    return {"success": True, "balances": enriched, "total_eur": round(total_eur, 2)}
+    return {"success": True, "balances": enriched, "total_eur": round(total_eur, 2),
+            "proxied_via_spark": proxied}
 
 
 def sync_bitvavo_orders(user_id: str, market: Optional[str] = None) -> Dict:
@@ -718,27 +745,10 @@ class MonitorService:
             self._user_id = user_id
             self._auto_trade = auto_trade
             self._trade_amount = trade_amount
-            # v6_bot_mock_fallback_001 — als user geen Bitvavo API keys heeft,
-            # forceer mock-mode. Voorkomt asymmetrie waarbij buy faalt op
-            # eur-saldo-check maar sell soms slipt via fallback. Spark + Willem
-            # hebben wel echte keys.
+            # v6_bitvavo_proxy_via_spark_001 — non-Spark users gebruiken Spark's keys
+            # via execute_real_trade fallback. Mock-mode wordt niet meer geforceerd
+            # zodat álle user-bots echt kunnen handelen.
             self._use_mock = use_mock
-            try:
-                from pathlib import Path as _P
-                _settings_path = _P(__file__).parent.parent.parent / "data" / "users" / user_id / "settings.json" if user_id else None
-                if _settings_path and not _settings_path.exists():
-                    self._use_mock = True
-                    logger.info(f"[bot {user_id}] geen settings.json → forceer mock-mode")
-                elif _settings_path:
-                    import json as _json
-                    with open(_settings_path) as _f:
-                        _s = _json.load(_f)
-                    _bv = (_s.get("integrations") or {}).get("bitvavo") or {}
-                    if not _bv.get("api_key") or not _bv.get("api_secret"):
-                        self._use_mock = True
-                        logger.info(f"[bot {user_id}] geen Bitvavo keys → forceer mock-mode")
-            except Exception as _ex:
-                logger.warning(f"[bot {user_id}] mock-fallback check faalde: {_ex}")
             self._use_potjes = use_potjes
             self._stop_event.clear()
             self._running = True

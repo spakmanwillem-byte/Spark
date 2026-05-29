@@ -955,7 +955,9 @@ def get_summary(user_id: str) -> Dict:
     overflow = user.get("overflow_pool", 0.0)
 
     # Live Bitvavo balance + baseline P&L
-    # v6_pot_live_value_per_user_001 — alleen Spark + Willem hebben echte Bitvavo
+    # v6_bitvavo_proxy_via_spark_001 — non-Spark users delen wel Spark's Bitvavo
+    # voor trades, maar hún "balance" tonen we als JSON-capital (= hun aandeel)
+    # ipv de gedeelde €345 totaal-pool. Anders zien alle users dezelfde fantasie-balans.
     HAS_REAL_BITVAVO = {"user-000", "user-001"}
     live_balance = None
     live_pnl = None
@@ -973,10 +975,9 @@ def get_summary(user_id: str) -> Dict:
                     live_pnl = round(live_balance - baseline, 2)
         except Exception:
             pass
-    else:
-        # Non-Spark/Willem users: live_balance = som van JSON capital
-        # (zij delen Spark's Bitvavo niet rechtstreeks; hun "balance" is hun
-        #  potje-equity zoals in JSON bewaard). baseline = sum start-amounts.
+    # Fallback voor non-Spark users OR mislukte Bitvavo call: per-user
+    # live_balance = som van JSON capital (gerealiseerd) + mark-to-market open posities.
+    if live_balance is None:
         live_balance = round(total_capital, 4)
         baseline = round(START_AMOUNT * count, 4)
         live_pnl = round(live_balance - baseline, 2)

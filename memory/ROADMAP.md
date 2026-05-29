@@ -87,8 +87,18 @@
 - [ ] **🌱 Staking Growth Engine** (nieuw na sessie 14):
   - Per anchor maandelijks 1-2% rente uit overflow_pool → anchor.capital groei
   - Auto-mint nieuw potje bij `overflow_pool >= €10`
-  - Auto-create base-anchor bij toevoegen nieuwe coin aan watch (zoals Willem vroeg)
+  - Auto-create base-anchor bij toevoegen nieuwe coin aan watch
   - Maakt Spark Core organisch groeiend zonder handmatig storten
+- [ ] **🎨 Unified Theme Engine** (nieuw na sessie 14):
+  - **Probleem**: 66 plekken in `/app/frontend/src/components/` met hardcoded `bg-purple-/blue-/indigo-` knoppen. Past niet bij amber/orange Spark-branding.
+  - **Scope**:
+    1. CSS-vars in `index.css`: `--brand-primary`, `--brand-accent`, `--section-spark`, `--section-workspace`, etc.
+    2. ThemeContext met per-section accent (SPARK AI = amber, WORKSPACE = blauw, MODULES = paars, BEHEER = grijs)
+    3. Sweep `bg-purple-/bg-blue-/bg-indigo-` → `bg-[var(--section-accent)]` voor primary actions
+    4. Keep semantic colors (rood=delete, groen=success) intact
+    5. Settings: `users/{id}/settings.theme = {accent: 'auto'|'amber'|'blue'|'green'|'purple'}` voor user-override
+  - **Bonus**: voorbereiden voor latere light/dark-mode toggle
+  - **Effort schatting**: 2-3 uur (1 hr CSS-vars + context, 1 hr sweep, 30 min settings UI, 30 min testen)
 - [ ] Tag-merge auto-fire optie in `classify_card` (opt-in flag)
 - [ ] Exception-list uitbreiden bij volgende false-positives
 - [ ] 2 endpoints uitbreiden (`/spark/disclaimer.leidende_lagen_counts.bijbel + capabilities` + `/kb/v2/stats.inbox.count`) zodat overzicht alle cijfers heeft i.p.v. `-`

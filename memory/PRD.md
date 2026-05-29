@@ -3,6 +3,18 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_spark_world_map_001** — Borderless NL-map + draggable city-frames (admin):
+  - **Backend** (`modules/dnd/spark_world_map.py`): nieuw bestand met persistente locatie-opslag in `data/dnd/spark_world_map.json`. 3 endpoints: `GET /api/dnd/spark-world/map/locations`, `PUT /api/dnd/spark-world/map/locations`, `POST /api/dnd/spark-world/map/locations/reset`. Admin-only via gradatie ≤ 2 check tegen users.json.
+  - **Frontend** `MiniMapPanel` upgrade:
+    - SVG-image background gebruikt nu de geüploade "Nederland map kaal.jpeg" als achtergrond (van customer-assets URL).
+    - 4 default-locaties: Stormhaven (rechtsboven = Groningen-pos) + 3 vacant city-frames.
+    - **Admin sleep-modus**: "✏ sleep"-knop toggle in panel header. In edit-mode worden de hotspots gevuld goud (i.p.v. gestippeld), pointer-events worden actief, en je kunt elke cirkel slepen. Coordinaten worden clamped op 2..98% van het viewport.
+    - Auto-save naar backend bij pointerup (PUT). "reset"-knop herstelt defaults via POST.
+    - Hotspot-labels worden met `paintOrder: stroke` zwart-omlijnd zodat ze leesbaar blijven over de map foto.
+  - Backend e2e: PUT (2 locaties save), POST reset (4 locaties terug) — beide groen.
+  - Lint clean (Python E741 'l' variable rename naar 'loc'), Frontend clean.
+
+
 - **v6_dnd_integration_001** — 5 verzoeken in 1 batch verwerkt:
   - **Persoonskaart terug naar Avatar-tab**: Aura (gedrag → identiteit) + Stats grid + Slots/Gewicht bars + Items + (verwijderde losse) Achievements zitten nu geïntegreerd onder de D&D character sheet.
   - **Rugzak-icoon foto-fix**: PersoonskaartCard kijkt nu in D&D-kaarten op (begrip/tag match) en gebruikt de kaart-foto als 40×40 icoon i.p.v. 🎒 emoji. "Grote Trekrugzak" toont nu de echte rugzak-foto.

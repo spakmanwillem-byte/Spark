@@ -299,7 +299,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
         </div>
         <div className="col-span-12 md:col-span-3">
           {/* Compacte map preview als rechter kolom hieronder ontbreekt */}
-          <MiniMapPanel char={char} />
+          <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
         </div>
       </div>
 
@@ -929,70 +929,130 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
   );
 }
 
-function MiniMapPanel({ char }) {
-  // v6_spark_world_nl_001 — NL-silhouet met Stormhaven boven (Groningen-positie)
-  // Klikbare hotspots; later D&D-fractie-kaarten koppelen
-  const NL_LOCATIONS = [
-    { id: 'stormhaven', x: 78, y: 18, label: 'Stormhaven', fractie: 'Spark', isMain: true },
-    { id: 'noord',      x: 60, y: 32, label: '—',          fractie: '', isMain: false },
-    { id: 'midden',     x: 50, y: 55, label: '—',          fractie: '', isMain: false },
-    { id: 'zuid',       x: 45, y: 80, label: '—',          fractie: '', isMain: false },
-  ];
+function MiniMapPanel({ char, userId, isAdmin }) {
+  // v6_spark_world_map_001 — Borderless NL map background + draggable hotspots (admin)
+  const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
+  const [locations, setLocations] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [dragging, setDragging] = useState(null); // id of currently dragged
+  const svgRef = useRef(null);
+
+  const reload = useCallback(() => {
+    fetch(`${API}/api/dnd/spark-world/map/locations`)
+      .then(r => r.json())
+      .then(d => setLocations(d.locations || []))
+      .catch(() => {});
+  }, []);
+  useEffect(() => { reload(); }, [reload]);
+
+  const saveLocations = async (newLocs) => {
+    setLocations(newLocs);
+    try {
+      await fetch(`${API}/api/dnd/spark-world/map/locations`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ locations: newLocs, user_id: userId }),
+      });
+    } catch (e) { /* swallow */ }
+  };
+
+  const resetLocations = async () => {
+    if (!window.confirm('Reset alle SPARK WORLD locaties naar standaard?')) return;
+    const r = await fetch(`${API}/api/dnd/spark-world/map/locations/reset`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId }),
+    }).then(x => x.json()).catch(() => null);
+    if (r?.locations) setLocations(r.locations);
+  };
+
+  // Vertaal pointer → SVG-coords (0..100 %)
+  const svgFromPointer = (clientX, clientY) => {
+    const svg = svgRef.current;
+    if (!svg) return null;
+    const rect = svg.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    return { x: Math.max(2, Math.min(98, x)), y: Math.max(2, Math.min(98, y)) };
+  };
+
+  const onPointerDown = (e, id) => {
+    if (!editMode) return;
+    e.preventDefault();
+    setDragging(id);
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    const p = svgFromPointer(e.clientX, e.clientY);
+    if (!p) return;
+    setLocations(prev => prev.map(l => l.id === dragging ? { ...l, x: p.x, y: p.y } : l));
+  };
+  const onPointerUp = (e) => {
+    if (!dragging) return;
+    setDragging(null);
+    // Persist
+    saveLocations(locations);
+  };
 
   return (
     <PaperPanel>
-      <PaperHeader>SPARK WORLD</PaperHeader>
-      <div className="relative p-2">
-        <svg viewBox="0 0 100 110" className="w-full h-44">
-          {/* NL silhouet (gestileerd) */}
-          <defs>
-            <linearGradient id="nl-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#78350f" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#451a03" stopOpacity="0.9" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M30 12 L42 8 L56 8 L72 6 L84 12 L88 20 L86 32 L82 42 L78 50 L74 58 L70 66 L62 76 L52 88 L40 96 L30 92 L26 80 L22 70 L24 58 L28 48 L26 38 L24 28 L26 20 Z"
-            fill="url(#nl-fill)"
-            stroke="#f59e0b"
-            strokeWidth="0.6"
-            strokeLinejoin="round"
-          />
-          {/* Provincie-grenzen (subtiel) */}
-          <g stroke="#f59e0b" strokeWidth="0.2" opacity="0.3" fill="none">
-            <path d="M30 50 L74 50" />
-            <path d="M50 8 L52 88" />
-            <path d="M30 30 L82 32" />
-            <path d="M28 70 L70 66" />
-          </g>
-          {/* Noordzee water-textuur */}
-          <g opacity="0.4">
-            <path d="M5 25 Q12 23 18 25 T28 25" stroke="#38bdf8" strokeWidth="0.4" fill="none" />
-            <path d="M5 35 Q12 33 18 35 T28 35" stroke="#38bdf8" strokeWidth="0.4" fill="none" />
-          </g>
+      <PaperHeader right={isAdmin && (
+        <div className="flex gap-1">
+          <button data-testid="map-edit-toggle"
+            onClick={() => setEditMode(!editMode)}
+            className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30'}`}>
+            {editMode ? '✓ klaar' : '✏ sleep'}
+          </button>
+          {editMode && (
+            <button data-testid="map-reset-btn" onClick={resetLocations}
+              className="text-[9px] px-1.5 py-0.5 rounded border border-red-700/40 text-red-300 hover:bg-red-900/30">
+              reset
+            </button>
+          )}
+        </div>
+      )}>SPARK WORLD</PaperHeader>
+      <div className="relative p-2 select-none">
+        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-44"
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+          style={{ touchAction: 'none', cursor: dragging ? 'grabbing' : 'default' }}>
+          {/* Borderless NL map als achtergrond */}
+          <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
+            preserveAspectRatio="xMidYMid slice" />
 
           {/* Locatie hotspots */}
-          {NL_LOCATIONS.map(loc => (
-            <g key={loc.id} data-testid={`nl-hotspot-${loc.id}`} style={{ cursor: 'pointer' }}>
+          {locations.map(loc => (
+            <g key={loc.id} data-testid={`nl-hotspot-${loc.id}`}
+              onPointerDown={(e) => onPointerDown(e, loc.id)}
+              style={{ cursor: editMode ? 'grab' : 'pointer' }}>
               {loc.isMain ? (
                 <>
-                  <circle cx={loc.x} cy={loc.y} r="5" fill="#f59e0b" opacity="0.25" />
-                  <circle cx={loc.x} cy={loc.y} r="2.5"
-                    fill="url(#nl-fill)" stroke="#fde68a" strokeWidth="0.6" />
-                  <circle cx={loc.x} cy={loc.y} r="1" fill="#fde68a" />
+                  <circle cx={loc.x} cy={loc.y} r="4.5" fill="#f59e0b" opacity="0.3" />
+                  <circle cx={loc.x} cy={loc.y} r="2" fill="#451a03" stroke="#fde68a" strokeWidth="0.6" />
+                  <circle cx={loc.x} cy={loc.y} r="0.8" fill="#fde68a" />
                 </>
               ) : (
-                <circle cx={loc.x} cy={loc.y} r="1.5"
-                  fill="none" stroke="#f59e0b" strokeWidth="0.4" strokeDasharray="0.6 0.4" />
+                <circle cx={loc.x} cy={loc.y} r="1.4"
+                  fill={editMode ? '#f59e0b' : 'none'}
+                  stroke="#fde68a" strokeWidth="0.4"
+                  strokeDasharray={editMode ? '' : '0.6 0.4'} />
+              )}
+              {loc.label && loc.label !== '—' && (
+                <text x={loc.x} y={loc.y - 5} textAnchor="middle"
+                  fill="#fde68a" fontSize="2.4" fontFamily="serif" fontWeight="bold"
+                  style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.5 }}>
+                  {loc.label}
+                </text>
+              )}
+              {loc.isMain && loc.fractie && (
+                <text x={loc.x} y={loc.y - 8} textAnchor="middle"
+                  fill="#f59e0b" fontSize="1.6" fontStyle="italic"
+                  style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.4 }}>
+                  Fractie {loc.fractie}
+                </text>
               )}
             </g>
           ))}
-
-          {/* Stormhaven label */}
-          <text x="78" y="13" textAnchor="middle" fill="#fde68a" fontSize="3"
-            fontFamily="serif" fontWeight="bold">Stormhaven</text>
-          <text x="78" y="9.5" textAnchor="middle" fill="#f59e0b" fontSize="1.8"
-            fontStyle="italic">Fractie Spark</text>
         </svg>
 
         <div className="border-t border-amber-900/40 pt-1.5 mt-1">
@@ -1001,7 +1061,9 @@ function MiniMapPanel({ char }) {
             {char.locatie_naam || 'Stormhaven'}
           </p>
           <p className="text-[8px] text-amber-400/60 italic mt-0.5">
-            Klik plekken om D&amp;D-fractiekaarten te koppelen (komt eraan)
+            {editMode
+              ? '🖱 Sleep de cirkels om locaties te verplaatsen. Wijzigingen worden direct opgeslagen.'
+              : (isAdmin ? 'Klik ✏ om te slepen' : 'Locaties koppelen aan D&D-fractiekaarten komt eraan')}
           </p>
         </div>
       </div>

@@ -24846,11 +24846,47 @@
         "session_id": "default",
         "gesprek_nummer": 956
       }
+    },
+    {
+      "id": "conv-fb2abb5e",
+      "timestamp": "2026-05-29T18:34:48.142605+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Ik luister. _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 957
+      }
+    },
+    {
+      "id": "conv-d22c5c2a",
+      "timestamp": "2026-05-29T18:34:48.170671+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 958
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 956,
-    "last_updated": "2026-05-29T15:28:42.556770+00:00"
+    "total_conversations": 958,
+    "last_updated": "2026-05-29T18:34:48.170671+00:00"
   }
 }

@@ -124,8 +124,12 @@ def _load(user_id: str) -> Dict:
     # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
     # v6_pot1_staking_lock_001: zorg dat pot-001 (index 0) altijd `pot_locked=True` heeft
     # v6_spark_15slots_001 — Spark krijgt 5 base + 10 trade-slots = 15 totaal
-    target_count = DEFAULT_POT_COUNT + SPARK_EXTRA_TRADE_SLOTS if is_spark else DEFAULT_POT_COUNT
-    if is_spark and len(user.get("potjes", [])) < target_count:
+    # v6_spark_no_autofill_001 (sessie 16) — Spark krijgt GEEN auto-fill meer.
+    # Reden: na rebalance_from_bitvavo() heeft Spark exact 6 locked anchors (1 per coin).
+    # Auto-fill genereerde 9 fantoom BCH-EUR €10-pots uit oude state, ongewenst.
+    # Anchors worden nu beheerd via ensure_anchors_for_markets() + rebalance_from_bitvavo().
+    target_count = DEFAULT_POT_COUNT
+    if is_spark and False and len(user.get("potjes", [])) < target_count:
         existing = user["potjes"]
         next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
         now = datetime.now(timezone.utc).isoformat()

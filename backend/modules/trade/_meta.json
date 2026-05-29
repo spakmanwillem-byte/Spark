@@ -31,7 +31,9 @@
     "GET /trade/potjes/{user_id}",
     "GET /trade/settings/{user_id}",
     "GET /trade/stats/{user_id}",
+    "GET /trade/status",
     "GET /trade/tickers",
+    "POST /trade/auto-anchor",
     "POST /trade/baseline/{user_id}",
     "POST /trade/bitvavo/credentials/{user_id}",
     "POST /trade/bitvavo/sync/{user_id}",
@@ -49,6 +51,8 @@
     "POST /trade/monitor/pause",
     "POST /trade/monitor/start",
     "POST /trade/monitor/stop",
+    "POST /trade/potjes/rebalance-from-bitvavo",
+    "POST /trade/potjes/redistribute/{user_id}",
     "POST /trade/potjes/sync-all-to-tokens",
     "POST /trade/potjes/{user_id}/distribute",
     "POST /trade/potjes/{user_id}/expand",
@@ -58,6 +62,7 @@
     "POST /trade/potjes/{user_id}/{pot_id}/assign-market",
     "POST /trade/potjes/{user_id}/{pot_id}/force-sell",
     "POST /trade/quick-buy-potje/{user_id}",
+    "POST /trade/run",
     "PUT /trade/settings/{user_id}"
   ],
   "tags": [],
@@ -70,7 +75,7 @@
   "created_at": "2026-05-26T15:54:32.262160+00:00",
   "last_touched": "2026-05-26T15:54:32.262160+00:00",
   "activity_count": 0,
-  "file_count": 6,
+  "file_count": 7,
   "subdir_count": 0,
   "extra": {}
 }

@@ -719,8 +719,11 @@ async def admin_list_bots():
     # Bestaande bots ophalen
     bots = list_running_bots()
     # v6_potje_per_token_001 — toevoegen actual pot_count uit user_potjes.json (niet hardcoded 10)
+    # v6_admin_bots_potcount_fix_001 (sessie 16) — ALTIJD pot_count zetten, niet alleen
+    # als use_potjes=True. Potjes bestaan los van de bot-instance flag, en de UI
+    # toont anders `null` voor Spark/Willem wat verwarrend is.
     for b in bots:
-        if b.get("use_potjes") and b.get("user_id"):
+        if b.get("user_id"):
             b["pot_count"] = _read_pot_count(b["user_id"])
     bots_by_uid = {b.get("user_id"): b for b in bots if b.get("user_id")}
 
@@ -768,12 +771,23 @@ async def admin_list_bots():
     # display nu ook gelijkgetrokken met user's mental model.
     name_lookup["user-000"] = "Spark"
     name_lookup["user-001"] = "De Willem"
+    # v6_admin_bots_markets_fix_001 (sessie 16) — overlay markets uit bots_registry_state
+    # voor entries die stale default ['BCH-EUR'] tonen. Registry is source-of-truth voor
+    # multi-coin keuzes.
+    registry_fp = Path(__file__).parent.parent.parent / "data" / "trade" / "bots_registry_state.json"
+    registry_data = load_json(registry_fp, default={"bots": []})
+    registry_markets = {br.get("user_id"): br.get("markets") for br in registry_data.get("bots", []) if br.get("user_id")}
     for uid, b in bots_by_uid.items():
         b.setdefault("user_naam", name_lookup.get(uid, uid))
         if uid in ("user-000", "user-001"):
             b["user_naam"] = name_lookup[uid]
         b.setdefault("gradatie", grad_lookup.get(uid))
         b["proactively_registered"] = uid in registered
+        # Overlay markets als registry een betere (langere) lijst heeft
+        reg_mkts = registry_markets.get(uid)
+        if reg_mkts and len(reg_mkts) > len(b.get("markets", [])):
+            b["markets"] = reg_mkts
+            b["market"] = reg_mkts[0]
 
     # Sorteer: Spark eerst, dan running, dan rest alfabetisch op naam
     def _sort_key(b):

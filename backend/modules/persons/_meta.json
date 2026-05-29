@@ -12,10 +12,13 @@
   "children_max": 4,
   "endpoints": [
     "DELETE /persons/cards/{user_id}/{person_id}",
+    "DELETE /persons/cards/{user_id}/{person_id}/body-slots/{slot_id}",
+    "GET /persons/body-slots/config",
     "GET /persons/cards/{user_id}",
     "GET /persons/relationships/{user_id}",
     "POST /persons/cards/{user_id}",
-    "PUT /persons/cards/{user_id}/{person_id}"
+    "PUT /persons/cards/{user_id}/{person_id}",
+    "PUT /persons/cards/{user_id}/{person_id}/body-slots"
   ],
   "tags": [],
   "encryption": {

@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-05-29T08:40:35.374168+00:00",
+  "generated_at": "2026-05-29T18:34:52.552099+00:00",
   "summary": {
     "total_containers": 96,
     "by_status": {
@@ -12,7 +12,7 @@
       "dir": 66,
       "data": 30
     },
-    "total_endpoints_detected": 448
+    "total_endpoints_detected": 461
   },
   "tree": {
     "backend_modules": {
@@ -50,7 +50,7 @@
         "created_at": "2026-05-26T15:54:32.100010+00:00",
         "last_touched": "2026-05-26T15:54:32.100010+00:00",
         "activity_count": 0,
-        "file_count": 2,
+        "file_count": 3,
         "subdir_count": 0,
         "extra": {}
       },
@@ -306,7 +306,10 @@
         "children_max": 4,
         "endpoints": [
           "GET /boekhouder/closings",
-          "POST /boekhouder/close-cycle/{user_id}"
+          "GET /boekhouder/history",
+          "GET /boekhouder/preview",
+          "POST /boekhouder/close-cycle/{user_id}",
+          "POST /boekhouder/run"
         ],
         "tags": [],
         "encryption": {
@@ -318,7 +321,7 @@
         "created_at": "2026-05-26T15:54:32.128125+00:00",
         "last_touched": "2026-05-26T16:13:26.946872+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -756,6 +759,7 @@
           "GET /dnd/observations/{user_id}",
           "GET /dnd/spark-greeting/{user_id}",
           "GET /dnd/world-state",
+          "GET /dnd/{location_id}",
           "POST /dnd/cards/{card_id}/lock",
           "POST /dnd/game-cards",
           "POST /dnd/game-cards/edit",
@@ -764,7 +768,8 @@
           "POST /dnd/observe",
           "POST /dnd/respond",
           "POST /dnd/start",
-          "POST /dnd/track"
+          "POST /dnd/track",
+          "POST /dnd/travel"
         ],
         "tags": [],
         "encryption": {
@@ -776,7 +781,7 @@
         "created_at": "2026-05-26T15:54:32.187293+00:00",
         "last_touched": "2026-05-26T15:54:32.187293+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1253,10 +1258,13 @@
         "children_max": 4,
         "endpoints": [
           "DELETE /persons/cards/{user_id}/{person_id}",
+          "DELETE /persons/cards/{user_id}/{person_id}/body-slots/{slot_id}",
+          "GET /persons/body-slots/config",
           "GET /persons/cards/{user_id}",
           "GET /persons/relationships/{user_id}",
           "POST /persons/cards/{user_id}",
-          "PUT /persons/cards/{user_id}/{person_id}"
+          "PUT /persons/cards/{user_id}/{person_id}",
+          "PUT /persons/cards/{user_id}/{person_id}/body-slots"
         ],
         "tags": [],
         "encryption": {
@@ -1688,7 +1696,9 @@
           "GET /trade/potjes/{user_id}",
           "GET /trade/settings/{user_id}",
           "GET /trade/stats/{user_id}",
+          "GET /trade/status",
           "GET /trade/tickers",
+          "POST /trade/auto-anchor",
           "POST /trade/baseline/{user_id}",
           "POST /trade/bitvavo/credentials/{user_id}",
           "POST /trade/bitvavo/sync/{user_id}",
@@ -1706,6 +1716,8 @@
           "POST /trade/monitor/pause",
           "POST /trade/monitor/start",
           "POST /trade/monitor/stop",
+          "POST /trade/potjes/rebalance-from-bitvavo",
+          "POST /trade/potjes/redistribute/{user_id}",
           "POST /trade/potjes/sync-all-to-tokens",
           "POST /trade/potjes/{user_id}/distribute",
           "POST /trade/potjes/{user_id}/expand",
@@ -1715,6 +1727,7 @@
           "POST /trade/potjes/{user_id}/{pot_id}/assign-market",
           "POST /trade/potjes/{user_id}/{pot_id}/force-sell",
           "POST /trade/quick-buy-potje/{user_id}",
+          "POST /trade/run",
           "PUT /trade/settings/{user_id}"
         ],
         "tags": [],
@@ -1727,7 +1740,7 @@
         "created_at": "2026-05-26T15:54:32.262160+00:00",
         "last_touched": "2026-05-26T15:54:32.262160+00:00",
         "activity_count": 0,
-        "file_count": 6,
+        "file_count": 7,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2188,7 +2201,7 @@
         "created_at": "2026-05-26T15:54:32.295113+00:00",
         "last_touched": "2026-05-26T15:54:32.295113+00:00",
         "activity_count": 0,
-        "file_count": 12,
+        "file_count": 13,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2296,7 +2309,7 @@
         "created_at": "2026-05-26T15:54:32.302855+00:00",
         "last_touched": "2026-05-26T15:54:32.302855+00:00",
         "activity_count": 0,
-        "file_count": 12,
+        "file_count": 13,
         "subdir_count": 0,
         "extra": {}
       }
@@ -2350,8 +2363,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.304583+00:00",
-        "last_touched": "2026-05-28T18:21:02.937751+00:00",
-        "activity_count": 19,
+        "last_touched": "2026-05-29T17:07:42.006190+00:00",
+        "activity_count": 55,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2485,9 +2498,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-05-29T07:56:45.388409+00:00",
-        "activity_count": 90,
-        "file_count": 23,
+        "last_touched": "2026-05-29T18:34:48.193284+00:00",
+        "activity_count": 183,
+        "file_count": 25,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2512,8 +2525,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-05-29T08:32:42.023442+00:00",
-        "activity_count": 24,
+        "last_touched": "2026-05-29T18:02:44.443690+00:00",
+        "activity_count": 34,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2566,10 +2579,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-05-26T16:13:27.108903+00:00",
-        "activity_count": 0,
-        "file_count": 3,
-        "subdir_count": 0,
+        "last_touched": "2026-05-29T15:28:23.457787+00:00",
+        "activity_count": 4,
+        "file_count": 4,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/data/emotions": {
@@ -2595,7 +2608,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-05-26T16:13:27.111780+00:00",
         "activity_count": 0,
-        "file_count": 8,
+        "file_count": 10,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2620,9 +2633,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-05-29T07:59:55.801263+00:00",
-        "activity_count": 1825,
-        "file_count": 5,
+        "last_touched": "2026-05-29T18:27:45.094758+00:00",
+        "activity_count": 15238,
+        "file_count": 7,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2647,8 +2660,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-05-28T18:46:08.867101+00:00",
-        "activity_count": 12,
+        "last_touched": "2026-05-29T16:56:14.653852+00:00",
+        "activity_count": 20,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -2674,8 +2687,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-05-28T19:01:48.745231+00:00",
-        "activity_count": 9,
+        "last_touched": "2026-05-29T17:01:13.859743+00:00",
+        "activity_count": 85,
         "file_count": 33,
         "subdir_count": 2,
         "extra": {}
@@ -2728,8 +2741,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.326384+00:00",
-        "last_touched": "2026-05-26T16:13:27.127281+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-05-29T15:32:31.357926+00:00",
+        "activity_count": 12,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2755,9 +2768,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-05-26T16:19:53.496095+00:00",
-        "activity_count": 5,
-        "file_count": 7,
+        "last_touched": "2026-05-29T17:01:12.997168+00:00",
+        "activity_count": 34,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2782,8 +2795,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.329074+00:00",
-        "last_touched": "2026-05-26T16:13:27.134474+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-05-29T10:23:54.075952+00:00",
+        "activity_count": 2,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -2809,9 +2822,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-05-29T07:56:45.380687+00:00",
-        "activity_count": 2,
-        "file_count": 2,
+        "last_touched": "2026-05-29T18:30:36.214235+00:00",
+        "activity_count": 116,
+        "file_count": 3,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2865,7 +2878,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 15,
+        "file_count": 16,
         "subdir_count": 1,
         "extra": {}
       },
@@ -2944,9 +2957,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-05-29T08:40:34.747803+00:00",
-        "activity_count": 2030,
-        "file_count": 114,
+        "last_touched": "2026-05-29T18:34:52.293796+00:00",
+        "activity_count": 5301,
+        "file_count": 119,
         "subdir_count": 5,
         "extra": {}
       },
@@ -2971,9 +2984,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.338797+00:00",
-        "last_touched": "2026-05-26T16:13:27.154757+00:00",
-        "activity_count": 0,
-        "file_count": 51,
+        "last_touched": "2026-05-29T16:27:39.362463+00:00",
+        "activity_count": 4,
+        "file_count": 48,
         "subdir_count": 5,
         "extra": {}
       },
@@ -2998,9 +3011,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-05-29T07:49:07.037392+00:00",
-        "activity_count": 5,
-        "file_count": 11,
+        "last_touched": "2026-05-29T15:23:30.335236+00:00",
+        "activity_count": 23,
+        "file_count": 12,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3079,10 +3092,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.345126+00:00",
-        "last_touched": "2026-05-28T12:42:50.537710+00:00",
-        "activity_count": 23,
-        "file_count": 48,
-        "subdir_count": 21,
+        "last_touched": "2026-05-29T15:45:46.441052+00:00",
+        "activity_count": 44,
+        "file_count": 69,
+        "subdir_count": 22,
         "extra": {}
       },
       "backend/data/wallet": {
@@ -3106,8 +3119,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-05-29T07:56:45.369874+00:00",
-        "activity_count": 10,
+        "last_touched": "2026-05-29T17:08:00.719401+00:00",
+        "activity_count": 60,
         "file_count": 11,
         "subdir_count": 1,
         "extra": {}

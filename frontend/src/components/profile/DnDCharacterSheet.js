@@ -82,37 +82,8 @@ function findCardForSlot(slot, cards) {
   return findCardByKeywords(cards, getSlotKeywords(slot));
 }
 
-// ----- Slot grid: 9 links (3x3) + 9 rechts (3x3) rond een center silhouet ----
-const SLOT_LAYOUT_LEFT = [
-  { key: 'linkerhand',  label: 'LINKERHAND',  fallback: 'Schild' },
-  { key: 'offhand',     label: 'OFFHAND',     fallback: 'Lantaarn' },
-  { key: 'pijl_boog',   label: 'PIJL & BOOG', fallback: 'Pijl en Boog' },
-  { key: 'rugzak',      label: 'RUGZAK',      fallback: 'Rugzak' },
-  { key: 'ring_l',      label: 'RING (L)',    fallback: 'Ring' },
-  { key: 'riem',        label: 'RIEM',        fallback: 'Riem' },
-];
-
-const SLOT_LAYOUT_CENTER_TOP = [
-  { key: 'hoofd',       label: 'HOOFD',       fallback: 'Hoofdband' },
-];
-const SLOT_LAYOUT_CENTER = [
-  { key: 'rechterhand', label: 'RECHTERHAND', fallback: 'Klein Zwaard' },
-  { key: 'handen',      label: 'HANDEN',      fallback: 'Handschoenen' },
-  { key: 'ring_r',      label: 'RING (R)',    fallback: 'Ring' },
-];
-const SLOT_LAYOUT_CENTER_BOTTOM = [
-  { key: 'broek',       label: 'BROEK',       fallback: 'Broek' },
-  { key: 'torso',       label: 'TORSO',       fallback: 'T-shirt' },
-  { key: 'voeten',      label: 'VOETEN',      fallback: 'Schoenen' },
-];
-
-const SLOT_LAYOUT_RIGHT = [
-  { key: 'nek',         label: 'NEK',         fallback: 'Ketting' },
-  { key: 'schouders',   label: 'SCHOUDERS',   fallback: 'Schouderbeschermer' },
-  { key: 'armen',       label: 'ARMEN',       fallback: 'Armband' },
-  { key: 'trinket',     label: 'TRINKET',     fallback: 'Medaillon' },
-  { key: 'sjaal',       label: 'SJAAL',       fallback: 'Sjaal' },
-];
+// v6_dnd_body_layout_001 — Slot-layout komt nu uit backend `/api/dnd/body-layout` (admin-bewerkbaar)
+// (oude constanten SLOT_LAYOUT_* en oude SlotCell component verwijderd in deze refactor)
 
 const RANK_SHIELDS = [
   { color: '#b45309', label: 'Brons' },
@@ -454,70 +425,121 @@ function CurrencyPill({ icon: Icon, color, value, testid }) {
   );
 }
 
+// v6_dnd_body_layout_001 — Body-avatar URL (goud-omlijnde silhouet, uploaded by user)
+const BODY_AVATAR_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/sb88yjie_WhatsApp%20Image%202026-05-29%20at%2023.58.26%20%281%29.jpeg';
+
 // ----- BODY SILHOUETTE -----
 function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards = [] }) {
   const [editingSlot, setEditingSlot] = useState(null);
+  const [slotLayout, setSlotLayout] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [dragging, setDragging] = useState(null);
+  const containerRef = useRef(null);
 
-  // v6_dnd_card_visuals_001 — body silhouet: alleen pakken als begrip exact "lijf"/"body"/"silhouet" is
-  // (anders pakt hij T-shirt vanwege tag "lijf")
-  const lijfCard = (gameCards || []).find(c => {
-    const b = String(c.begrip || '').toLowerCase().trim();
-    return b === 'lijf' || b === 'body' || b === 'silhouet' || b === 'silhouette' || b === 'lichaam';
-  });
-  const lijfImg = cardFirstImage(lijfCard);
+  // Laad sleepbare slot-posities (admin-bewerkbaar)
+  const reloadLayout = useCallback(() => {
+    fetch(`${API}/api/dnd/body-layout`)
+      .then(r => r.json())
+      .then(d => setSlotLayout(d.slots || []))
+      .catch(() => {});
+  }, []);
+  useEffect(() => { reloadLayout(); }, [reloadLayout]);
 
   // Per slot: vind een matching kaart via gedeelde synoniemen
   const slotPreview = (slot) => cardFirstImage(findCardForSlot(slot, gameCards));
 
+  const saveLayout = async (newSlots) => {
+    setSlotLayout(newSlots);
+    await fetch(`${API}/api/dnd/body-layout`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, slots: newSlots }),
+    }).catch(() => {});
+  };
+
+  const resetLayout = async () => {
+    if (!window.confirm('Reset alle slot-posities naar standaard?')) return;
+    const r = await fetch(`${API}/api/dnd/body-layout/reset`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId }),
+    }).then(x => x.json()).catch(() => null);
+    if (r?.slots) setSlotLayout(r.slots);
+  };
+
+  const pointerToPct = (clientX, clientY) => {
+    const el = containerRef.current;
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    return { x: Math.max(3, Math.min(97, x)), y: Math.max(3, Math.min(97, y)) };
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    const p = pointerToPct(e.clientX, e.clientY);
+    if (!p) return;
+    setSlotLayout(prev => prev.map(s => s.key === dragging ? { ...s, x: p.x, y: p.y } : s));
+  };
+  const onPointerUp = () => {
+    if (!dragging) return;
+    setDragging(null);
+    saveLayout(slotLayout);
+  };
+  const onSlotPointerDown = (e, slot) => {
+    if (editMode) {
+      e.preventDefault();
+      setDragging(slot.key);
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    } else {
+      setEditingSlot(slot);
+    }
+  };
+
   return (
-    <div className="relative p-3 min-h-[440px]">
-      <div className="grid grid-cols-[1fr_minmax(110px,140px)_1fr] gap-3">
-        {/* LINKS kolom */}
-        <div className="flex flex-col gap-2">
-          {SLOT_LAYOUT_LEFT.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="right"
-              onClick={() => setEditingSlot(s)} />
-          ))}
+    <div className="relative">
+      {isAdmin && (
+        <div className="absolute top-1 right-1 z-20 flex gap-1">
+          <button data-testid="body-edit-toggle" onClick={() => setEditMode(!editMode)}
+            className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30 bg-stone-950/70'}`}>
+            {editMode ? '✓ klaar' : '✏ sleep'}
+          </button>
+          {editMode && (
+            <button data-testid="body-reset-btn" onClick={resetLayout}
+              className="text-[9px] px-1.5 py-0.5 rounded border border-red-700/40 text-red-300 hover:bg-red-900/30 bg-stone-950/70">
+              reset
+            </button>
+          )}
         </div>
+      )}
 
-        {/* CENTRUM: silhouet + center slots */}
-        <div className="flex flex-col items-center gap-2">
-          {SLOT_LAYOUT_CENTER_TOP.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
-              onClick={() => setEditingSlot(s)} />
-          ))}
-          <div className="relative w-[120px] h-[180px]">
-            {lijfImg ? (
-              <img src={lijfImg} alt="lijf"
-                className="absolute inset-0 w-full h-full object-contain"
-                style={{ opacity: 0.85, filter: 'drop-shadow(0 0 12px rgba(245,158,11,0.3))' }} />
-            ) : (
-              <svg viewBox="0 0 120 200" className="absolute inset-0 w-full h-full"
-                fill="none" stroke="#fde68a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.35 }}>
-                <circle cx="60" cy="22" r="14" />
-                <path d="M40 38 Q60 30 80 38 L86 80 L72 90 L72 130 L80 180 L66 180 L60 130 L54 180 L40 180 L48 130 L48 90 L34 80 Z" fill="rgba(245,158,11,0.08)" />
-                <line x1="34" y1="48" x2="14" y2="100" /><line x1="14" y1="100" x2="20" y2="140" />
-                <line x1="86" y1="48" x2="106" y2="100" /><line x1="106" y1="100" x2="100" y2="140" />
-              </svg>
-            )}
-          </div>
-          {SLOT_LAYOUT_CENTER.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
-              onClick={() => setEditingSlot(s)} />
-          ))}
-          {SLOT_LAYOUT_CENTER_BOTTOM.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="center"
-              onClick={() => setEditingSlot(s)} />
-          ))}
-        </div>
+      <div ref={containerRef}
+        data-testid="body-silhouette"
+        className="relative w-full overflow-hidden rounded select-none"
+        style={{ paddingBottom: '125%', touchAction: 'none' }}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}>
 
-        {/* RECHTS kolom */}
-        <div className="flex flex-col gap-2">
-          {SLOT_LAYOUT_RIGHT.map(s => (
-            <SlotCell key={s.key} slot={s} item={equipment[s.key]} preview={slotPreview(s)} align="left"
-              onClick={() => setEditingSlot(s)} />
-          ))}
-        </div>
+        {/* Body-avatar achtergrond (goud-silhouet upload) */}
+        <img src={BODY_AVATAR_URL} alt="Body silhouet"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.95 }}
+          draggable={false} />
+
+        {/* Vignet voor leesbaarheid labels */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.5) 100%)' }} />
+
+        {/* Slot-frames absoluut gepositioneerd */}
+        {slotLayout.map(slot => (
+          <SlotFrame key={slot.key}
+            slot={slot}
+            item={equipment[slot.key]}
+            preview={slotPreview(slot)}
+            editMode={editMode}
+            isDragging={dragging === slot.key}
+            onPointerDown={(e) => onSlotPointerDown(e, slot)} />
+        ))}
       </div>
 
       {editingSlot && (
@@ -531,49 +553,63 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards =
           onSaved={() => { setEditingSlot(null); onChange?.(); }}
         />
       )}
+
+      {isAdmin && editMode && (
+        <p className="text-[9px] text-amber-400/70 italic px-2 py-1 text-center">
+          🖱 Sleep slot-frames over de avatar · ✓ klaar om vast te zetten
+        </p>
+      )}
     </div>
   );
 }
 
-function SlotCell({ slot, item, align = 'right', onClick, preview }) {
+function SlotFrame({ slot, item, preview, editMode, isDragging, onPointerDown }) {
   const filled = !!item;
   const naam = item?.naam || slot.fallback;
-  const fromInv = !!item?.from_inventory;
-  // Toon capacity-bonus voor rugzak (uit inventory)
-  const subText = fromInv && (item?.capacity_bonus || item?.weight_bonus)
-    ? `+${item.capacity_bonus || 0} slots · +${item.weight_bonus || 0}kg`
-    : null;
   return (
-    <button
+    <div
       data-testid={`slot-${slot.key}`}
-      onClick={onClick}
-      className={`group flex items-center gap-2 px-1 py-1 rounded ${align === 'right' ? 'flex-row-reverse text-right' : align === 'center' ? 'flex-col text-center' : 'flex-row text-left'} hover:bg-amber-900/10 transition-colors w-full`}
-      style={{ minHeight: 50 }}
-    >
+      onPointerDown={onPointerDown}
+      className={`absolute group ${editMode ? 'cursor-grab' : 'cursor-pointer'} ${isDragging ? 'z-30 scale-110' : 'z-10 hover:scale-105'}`}
+      style={{
+        left: `${slot.x}%`,
+        top: `${slot.y}%`,
+        transform: 'translate(-50%, -50%)',
+        transition: isDragging ? 'none' : 'transform 0.15s',
+      }}>
+      {/* Frame box */}
       <div
-        className={`relative w-10 h-10 rounded border-2 flex-shrink-0 flex items-center justify-center text-lg overflow-hidden ${filled ? 'border-amber-500/60 bg-amber-950/40 text-amber-200' : preview ? 'border-amber-700/40 bg-stone-950/70' : 'border-amber-900/40 bg-stone-950/70 text-stone-700'}`}
-        style={{ boxShadow: filled ? '0 0 12px rgba(245,158,11,0.3)' : 'none' }}>
-        {/* Faded preview from matching D&D card (only if not equipped) */}
+        className={`relative w-10 h-10 rounded border-2 flex items-center justify-center text-base overflow-hidden ${filled ? 'border-amber-400 bg-amber-950/80' : preview ? 'border-amber-600/70 bg-stone-950/70' : 'border-amber-800/50 bg-stone-950/80'}`}
+        style={{
+          boxShadow: filled
+            ? '0 0 14px rgba(245,158,11,0.6), inset 0 0 6px rgba(245,158,11,0.2)'
+            : '0 0 6px rgba(0,0,0,0.7)',
+        }}>
         {!filled && preview && (
           <img src={preview} alt="" className="absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: 0.55, filter: 'sepia(0.2) saturate(0.8)' }} />
+            style={{ opacity: 0.55, filter: 'sepia(0.15)' }} draggable={false} />
         )}
-        <span className="relative z-10">
+        <span className="relative z-10 text-amber-100">
           {item?.icon || (filled ? '✦' : (preview ? '' : '·'))}
         </span>
-        {fromInv && (
-          <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-stone-950"
+        {item?.from_inventory && (
+          <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-stone-950"
             title="Gesynced met inventory" />
         )}
       </div>
-      <div className={`flex-1 min-w-0 ${align === 'center' ? 'text-[8px]' : ''}`}>
-        <p className="text-[8px] uppercase tracking-[0.15em] text-amber-500/70 truncate">{slot.label}</p>
-        <p className={`text-[10px] truncate ${filled ? 'text-amber-100' : 'text-stone-500'}`}>{naam}</p>
-        {subText && (
-          <p className="text-[8px] text-emerald-400/90 truncate">{subText}</p>
-        )}
+
+      {/* Label onder slot */}
+      <div className="absolute left-1/2 top-full mt-0.5 -translate-x-1/2 text-center whitespace-nowrap pointer-events-none">
+        <p className="text-[8px] uppercase tracking-[0.12em] text-amber-300/95 font-bold"
+          style={{ paintOrder: 'stroke', WebkitTextStroke: '0.3px #000', textShadow: '0 1px 3px rgba(0,0,0,0.95)' }}>
+          {slot.label}
+        </p>
+        <p className={`text-[8px] ${filled ? 'text-amber-100' : 'text-amber-200/60'}`}
+          style={{ textShadow: '0 1px 3px rgba(0,0,0,0.95)' }}>
+          {naam}
+        </p>
       </div>
-    </button>
+    </div>
   );
 }
 

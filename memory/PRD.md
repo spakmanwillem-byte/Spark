@@ -3,6 +3,20 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_body_layout_001** — Body-avatar als achtergrond + sleepbare slot-frames:
+  - **Backend** (`modules/dnd/body_layout.py`): 3 endpoints (`GET /api/dnd/body-layout`, `PUT /api/dnd/body-layout`, `POST /api/dnd/body-layout/reset`). Shared 18-slot layout met x/y % posities in `data/dnd/body_layout.json`. Admin-only via gradatie ≤ 2.
+  - **Frontend `BodySilhouettePanel` volledig herbouwd**:
+    - Goud-omlijnde body-avatar (user upload "WhatsApp 2026-05-29 23.58.26") als full-bleed achtergrond.
+    - Alle 18 slot-frames `position: absolute` met `left/top: x%/y%` uit backend.
+    - Frame-design: 40×40 met amber border, gevuld = gouden glow + box-shadow.
+    - Label onder elk frame met zwarte outline (paintOrder/textShadow) zodat het leesbaar blijft over de gloeiende avatar.
+    - Emerald sync-badge voor inventory-gesync items (zoals rugzak).
+    - **Admin sleep-modus**: "✏ sleep" toggle in panel rechtsboven; in edit-mode worden frames sleepbaar (`cursor: grab`, PointerCapture), positie wordt geclamped op 3..97%, direct gesaved bij `pointerup`.
+    - "reset" knop herstelt defaults.
+  - Oude 3-kolom grid layout + `SLOT_LAYOUT_*` constanten + `SlotCell` component **verwijderd** (dead code).
+  - Backend e2e: GET 18 slots, PUT/PATCH werkt. Smoke screenshot: alle 18 frames staan over de goud-avatar.
+
+
 - **v6_dnd_world_001** — Fundament voor D&D wereld (fracties + provincies + rarity):
   - **Backend** (`modules/dnd/world.py`): nieuwe module met 5 endpoints:
     - `GET /api/dnd/world/rarities` — 5 WoW-style tiers (Common 60%/Uncommon 25%/Rare 10%/Epic 4%/Legendary 1%) met kleur + glow CSS

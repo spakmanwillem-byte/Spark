@@ -585,6 +585,28 @@ async def redistribute_potjes(user_id: str, body: UpdateMarketsBody = None):
     return redistribute_potjes_across_markets(user_id, target)
 
 
+# v6_dynamic_pot_split_001 — Rebalance potjes vanaf actuele Bitvavo balance
+class RebalanceBody(BaseModel):
+    coins: Optional[List[str]] = None       # default: alle 6 watchlist coins
+    pot_size: float = 10.0                  # vaste schijf
+    trader_user_id: str = "user-001"        # krijgt de €10 trade-pots
+    anchor_user_id: str = "user-000"        # krijgt de restjes als locked anchor
+
+
+@router.post("/potjes/rebalance-from-bitvavo")
+async def rebalance_from_bitvavo_endpoint(body: RebalanceBody = RebalanceBody()):
+    """Herbalanceer potjes vanaf actuele Bitvavo coin-waardes.
+    Regel: per coin → trader krijgt floor(value/pot_size) × €pot_size aan vrije
+    trade-pots, anchor krijgt het restje (< €pot_size) als locked anchor.
+    Open posities blijven ongemoeid. Idempotent.
+    """
+    from .potjes import rebalance_from_bitvavo
+    return rebalance_from_bitvavo(
+        coins=body.coins, pot_size=body.pot_size,
+        trader_user_id=body.trader_user_id, anchor_user_id=body.anchor_user_id,
+    )
+
+
 # v5_candle_hotswap_001 — wissel candle-interval (cycle) zonder restart
 class UpdateCandleBody(BaseModel):
     candle_interval: str

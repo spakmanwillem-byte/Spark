@@ -488,6 +488,135 @@ def ensure_spark_trade_pots(markets: List[str], pots_per_coin: int = 2) -> Dict:
             "total_potjes": len(potjes)}
 
 
+# v6_dynamic_pot_split_001 — Dynamische €10-schijven herbalancering vanaf Bitvavo
+def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
+                            pot_size: float = 10.0,
+                            trader_user_id: str = "user-001",
+                            anchor_user_id: str = "user-000") -> Dict:
+    """Reset potje-structuur op basis van actuele Bitvavo coin-waardes.
+
+    Regel per coin:
+      - n_pots = floor(coin_value_eur / pot_size)
+      - Trader (Willem) krijgt n_pots × €pot_size aan vrije trade-potjes
+      - Anchor (Spark) krijgt 1 locked anchor met het restbedrag (value - n_pots × pot_size)
+
+    Open posities blijven ongemoeid — die tellen niet mee in de herverdeling
+    (hun coin-waarde zit al "vast" in een lopende trade).
+
+    Idempotent: kan na elke trade/storting opnieuw aangeroepen worden.
+    """
+    from modules.trade.monitor import fetch_bitvavo_balance
+
+    # 1) Haal coin-waardes op via Spark's keys
+    bv = fetch_bitvavo_balance(anchor_user_id)
+    if not bv.get("success"):
+        return {"success": False, "error": f"Bitvavo balance fetch faalde: {bv.get('error')}"}
+
+    target_coins = coins or ["BCH", "BTC", "ETH", "SOL", "ADA", "ATOM"]
+    coin_values: Dict[str, float] = {}
+    for sym in target_coins:
+        m = next((b for b in bv["balances"] if b["symbol"] == sym), None)
+        coin_values[sym] = round(m["value_eur"], 2) if m else 0.0
+
+    # 2) Bouw nieuwe potjes-state
+    data = _load(trader_user_id)
+    if anchor_user_id != trader_user_id:
+        anchor_data = _load(anchor_user_id)
+    else:
+        anchor_data = data
+
+    # Behoud open-positie potjes van trader (die zijn vastgezet in actieve trade)
+    existing_trader = data["users"][trader_user_id].get("potjes", [])
+    open_trader_pots = [p for p in existing_trader if p.get("position", {}).get("is_open")]
+    open_value_per_coin: Dict[str, float] = {}
+    for p in open_trader_pots:
+        m = p.get("market") or ""
+        sym = m.split("-")[0]
+        open_value_per_coin[sym] = open_value_per_coin.get(sym, 0) + (p.get("capital") or 0)
+
+    # Behoud open posities van anchor user
+    existing_anchor = anchor_data["users"][anchor_user_id].get("potjes", [])
+    open_anchor_pots = [p for p in existing_anchor if p.get("position", {}).get("is_open")]
+    for p in open_anchor_pots:
+        sym = (p.get("market") or "").split("-")[0]
+        open_value_per_coin[sym] = open_value_per_coin.get(sym, 0) + (p.get("capital") or 0)
+
+    now = datetime.now(timezone.utc).isoformat()
+    trader_pots: List[Dict] = list(open_trader_pots)  # behoud
+    anchor_pots: List[Dict] = list(open_anchor_pots)  # behoud
+    t_idx = max((p.get("index", -1) for p in trader_pots), default=-1) + 1
+    a_idx = max((p.get("index", -1) for p in anchor_pots), default=-1) + 1
+    summary = []
+
+    for sym in target_coins:
+        market = f"{sym}-EUR"
+        bv_value = coin_values.get(sym, 0)
+        already_open = open_value_per_coin.get(sym, 0)
+        free_value = max(0, round(bv_value - already_open, 2))
+        n_trade = int(free_value // pot_size)
+        remainder = round(free_value - n_trade * pot_size, 2)
+
+        for _ in range(n_trade):
+            trader_pots.append({
+                "id": f"pot-{t_idx+1:03d}", "index": t_idx,
+                "capital": pot_size, "max_size": 50.0,
+                "pot_locked": False, "lock_reason": None,
+                "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                             "trailing_active": False, "entry_time": None},
+                "market": market,
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now, "last_action": None,
+                "source": "rebalance_from_bitvavo",
+            })
+            t_idx += 1
+
+        # Anchor met restje (alleen aanmaken als > €0.01)
+        if remainder >= 0.01:
+            anchor_pots.append({
+                "id": f"pot-{a_idx+1:03d}", "index": a_idx,
+                "capital": remainder, "max_size": max(remainder * 2, 50.0),
+                "pot_locked": True, "lock_reason": "staking_anchor",
+                "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                             "trailing_active": False, "entry_time": None},
+                "market": market,
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now, "last_action": None,
+                "source": "rebalance_anchor_remainder",
+            })
+            a_idx += 1
+
+        summary.append({
+            "coin": sym, "bitvavo_value": bv_value, "already_open": already_open,
+            "free_value": free_value, "trade_pots_created": n_trade, "anchor_remainder": remainder,
+        })
+
+    # 3) Save
+    data["users"][trader_user_id]["potjes"] = trader_pots
+    data["users"][trader_user_id]["overflow_pool"] = 0.0
+    data["users"][trader_user_id]["last_buy_cycle"] = None
+    _save(data)
+
+    if anchor_user_id != trader_user_id:
+        anchor_data["users"][anchor_user_id]["potjes"] = anchor_pots
+        anchor_data["users"][anchor_user_id]["overflow_pool"] = 0.0
+        _save(anchor_data)
+
+    total_trade_eur = sum(p["capital"] for p in trader_pots if not p.get("pot_locked"))
+    total_anchor_eur = sum(p["capital"] for p in anchor_pots if p.get("pot_locked"))
+    return {
+        "success": True,
+        "trader_user_id": trader_user_id, "anchor_user_id": anchor_user_id,
+        "pot_size_eur": pot_size,
+        "bitvavo_total_eur": sum(coin_values.values()),
+        "trader_pot_count": len([p for p in trader_pots if not p.get("pot_locked")]),
+        "anchor_pot_count": len([p for p in anchor_pots if p.get("pot_locked")]),
+        "trader_total_eur": round(total_trade_eur, 2),
+        "anchor_total_eur": round(total_anchor_eur, 2),
+        "open_positions_preserved": len(open_trader_pots) + len(open_anchor_pots),
+        "summary": summary,
+    }
+
+
 
 def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
     """v6_potje_per_token_001 — verminder potjes wanneer user tokens kwijtraakt (sell_back/gift_sent).
@@ -869,9 +998,20 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                         print(f"[close_pot] Auto-mint: {auto_mint['n_minted']} nieuwe potjes uit overflow")
                 except Exception as ex:
                     print(f"[close_pot] auto-mint failed (non-blocking): {ex}")
+            # v6_dynamic_pot_split_001 — Na elke trade-close: herbalanceer potjes
+            # tegen actuele Bitvavo. Houdt €10-schijven dynamisch in sync met realiteit.
+            auto_rebalance = None
+            try:
+                auto_rebalance = rebalance_from_bitvavo()
+                if auto_rebalance.get("success"):
+                    print(f"[close_pot] auto-rebalance: trader={auto_rebalance['trader_pot_count']} pots €{auto_rebalance['trader_total_eur']}, "
+                          f"anchor={auto_rebalance['anchor_pot_count']} pots €{auto_rebalance['anchor_total_eur']}")
+            except Exception as ex:
+                print(f"[close_pot] auto-rebalance failed (non-blocking): {ex}")
             return {"pot": p, "netto": round(netto, 4), "overflow": overflow,
                     "auto_expansion": auto_expansion, "spark_bonus": bonus_result,
-                    "spark_fee_eur": spark_fee, "auto_mint": auto_mint}
+                    "spark_fee_eur": spark_fee, "auto_mint": auto_mint,
+                    "auto_rebalance": auto_rebalance}
     return {}
 
 

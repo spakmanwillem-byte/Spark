@@ -396,14 +396,16 @@ def get_potjes(user_id: str) -> Dict:
         except Exception:
             pass
 
-    if live_balance is not None and baseline and baseline > 0:
-        # Growth factor: live / baseline. Elke potje live_value = capital * growth
-        growth = live_balance / baseline
-        for p in user["potjes"]:
-            p["live_value"] = round(p["capital"] * growth, 4)
-    else:
-        for p in user["potjes"]:
-            p["live_value"] = p["capital"]
+    # v6_pot_live_value_fix_001 (sessie 14) — voorheen verdeelde live_value de hele
+    # Bitvavo balance proportioneel over ALLE potjes via growth-factor. Dat gaf
+    # rare bedragen als €43.25 op een €10 anker omdat Bitvavo €222 had (groei-
+    # factor 4.32×). Nieuw gedrag:
+    #   - LOCKED + VRIJE potjes → live_value = capital (geen growth)
+    #   - OPEN posities → mark-to-market via current_price (bestaand, hieronder)
+    # Resultaat: anchor blijft €10, trade-potjes met open positie pulseren mee
+    # met de actuele coin-prijs.
+    for p in user["potjes"]:
+        p["live_value"] = p["capital"]
 
     # v5_potje_mark2market_001 — voor OPEN posities: mark-to-market overschrijft live_value
     # Formule: capital * (1 + (current_price - entry_price)/entry_price) - fees
@@ -725,11 +727,18 @@ def distribute_potjes_over_markets(user_id: str, markets: List[str]) -> Dict:
     # Round-robin verdeling
     changed = []
     skipped_open = 0
+    skipped_locked = 0
     for i, p in enumerate(potjes):
         target_market = markets[i % m]
         if p.get("position", {}).get("is_open"):
             skipped_open += 1
             continue  # niet aanraken
+        # v6_distribute_respect_lock_001 (sessie 14) — locked staking-ankers houden
+        # hun coin-koppeling. Zonder deze guard zou een coin-herverdeling de
+        # 5 anchor-potjes door elkaar gooien (bv. ADA-anker → BCH-anker).
+        if p.get("pot_locked"):
+            skipped_locked += 1
+            continue
         if p.get("market") != target_market:
             p["market"] = target_market
             changed.append({"id": p["id"], "market": target_market})
@@ -746,6 +755,7 @@ def distribute_potjes_over_markets(user_id: str, markets: List[str]) -> Dict:
         "remainder": n % m,
         "changed_count": len(changed),
         "skipped_open_positions": skipped_open,
+        "skipped_locked_anchors": skipped_locked,
         "distribution": {mkt: [p["id"] for p in potjes if p.get("market") == mkt] for mkt in markets},
     }
 

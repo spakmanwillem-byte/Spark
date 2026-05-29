@@ -337,7 +337,7 @@
     "user-000": {
       "potjes": [
         {
-          "id": "pot-008",
+          "id": "pot-001",
           "index": 0,
           "capital": 10.0,
           "max_size": 50.0,
@@ -363,10 +363,11 @@
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
-          "migrated_at": "2026-05-29T08:20:40.218667+00:00"
+          "migrated_at": "2026-05-29T08:20:40.218667+00:00",
+          "nummer": 1
         },
         {
-          "id": "pot-009",
+          "id": "pot-002",
           "index": 1,
           "capital": 10.0,
           "max_size": 50.0,
@@ -392,10 +393,11 @@
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
-          "migrated_at": "2026-05-29T08:20:40.218681+00:00"
+          "migrated_at": "2026-05-29T08:20:40.218681+00:00",
+          "nummer": 2
         },
         {
-          "id": "pot-010",
+          "id": "pot-003",
           "index": 2,
           "capital": 10.0,
           "max_size": 50.0,
@@ -421,10 +423,11 @@
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
-          "migrated_at": "2026-05-29T08:20:40.218685+00:00"
+          "migrated_at": "2026-05-29T08:20:40.218685+00:00",
+          "nummer": 3
         },
         {
-          "id": "pot-011",
+          "id": "pot-004",
           "index": 3,
           "capital": 10.0,
           "max_size": 50.0,
@@ -450,10 +453,11 @@
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
           "origin_eur": 0.0,
-          "migrated_at": "2026-05-29T08:20:40.218689+00:00"
+          "migrated_at": "2026-05-29T08:20:40.218689+00:00",
+          "nummer": 4
         },
         {
-          "id": "pot-001",
+          "id": "pot-005",
           "index": 4,
           "capital": 10.0549,
           "max_size": 50.0,
@@ -483,10 +487,11 @@
             "entry_total_eur": 10.0
           },
           "assigned_market": "SOL-EUR",
-          "slot_type": "base_locked_to_bitvavo"
+          "slot_type": "base_locked_to_bitvavo",
+          "nummer": 5
         },
         {
-          "id": "pot-005",
+          "id": "pot-006",
           "index": 5,
           "capital": 9.95,
           "max_size": 50.0,
@@ -519,10 +524,11 @@
             "entry_eur_per_coin": 0.20069,
             "entry_total_eur": 9.95
           },
-          "slot_type": "base_locked_to_bitvavo"
+          "slot_type": "base_locked_to_bitvavo",
+          "nummer": 6
         },
         {
-          "id": "pot-006",
+          "id": "pot-007",
           "index": 6,
           "capital": 10.0,
           "max_size": 50.0,
@@ -558,10 +564,11 @@
               "trade_id": "a97b775a",
               "market": "BCH-EUR"
             }
-          ]
+          ],
+          "nummer": 7
         },
         {
-          "id": "pot-007",
+          "id": "pot-008",
           "index": 7,
           "capital": 10.0,
           "max_size": 50.0,
@@ -597,11 +604,46 @@
               "trade_id": "eee4b022",
               "market": "BCH-EUR"
             }
-          ]
+          ],
+          "nummer": 8
         },
         {
-          "id": "pot-004",
+          "id": "pot-009",
           "index": 8,
+          "capital": 10.1144,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.1244
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €262.29 | netto €+0.124",
+          "source": "clean_slate_28mei",
+          "assigned_market": "BCH-EUR",
+          "linked_bitvavo": {
+            "symbol": "BCH",
+            "qty": 0.03874402,
+            "entry_eur_per_coin": 257.79,
+            "entry_total_eur": 9.99
+          },
+          "slot_type": "base_locked_to_bitvavo",
+          "nummer": 9
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
           "capital": 9.98,
           "max_size": 50.0,
           "pot_locked": false,
@@ -633,11 +675,12 @@
             "entry_eur_per_coin": 62878.0,
             "entry_total_eur": 9.98
           },
-          "slot_type": "base_locked_to_bitvavo"
+          "slot_type": "base_locked_to_bitvavo",
+          "nummer": 10
         },
         {
-          "id": "pot-002",
-          "index": 9,
+          "id": "pot-011",
+          "index": 10,
           "capital": 10.0,
           "max_size": 50.0,
           "pot_locked": false,
@@ -669,40 +712,8 @@
             "entry_eur_per_coin": 1727.01,
             "entry_total_eur": 10.0
           },
-          "slot_type": "base_locked_to_bitvavo"
-        },
-        {
-          "id": "pot-003",
-          "index": 10,
-          "capital": 10.1144,
-          "max_size": 50.0,
-          "pot_locked": false,
-          "lock_reason": null,
-          "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
-          },
-          "market": "BCH-EUR",
-          "stats": {
-            "trades": 2,
-            "wins": 1,
-            "losses": 0,
-            "total_pnl": 0.1244
-          },
-          "created_at": "2026-05-28T17:23:18.391617+00:00",
-          "last_action": "SELL @ €262.29 | netto €+0.124",
-          "source": "clean_slate_28mei",
-          "assigned_market": "BCH-EUR",
-          "linked_bitvavo": {
-            "symbol": "BCH",
-            "qty": 0.03874402,
-            "entry_eur_per_coin": 257.79,
-            "entry_total_eur": 9.99
-          },
-          "slot_type": "base_locked_to_bitvavo"
+          "slot_type": "base_locked_to_bitvavo",
+          "nummer": 11
         },
         {
           "id": "pot-012",
@@ -730,7 +741,8 @@
           "last_action": null,
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "nummer": 12
         },
         {
           "id": "pot-013",
@@ -758,7 +770,8 @@
           "last_action": null,
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "nummer": 13
         },
         {
           "id": "pot-014",
@@ -786,7 +799,8 @@
           "last_action": null,
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "nummer": 14
         },
         {
           "id": "pot-015",
@@ -814,7 +828,8 @@
           "last_action": null,
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "nummer": 15
         }
       ],
       "baseline_eur": 51.4,

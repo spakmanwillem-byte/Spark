@@ -3,6 +3,16 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_gallery_media_001** — D&D Galerij upgrade: "Nieuwe kaart" modal + functionele foto-media:
+  - Nieuwe `NewCardModal`: vervangt `window.prompt`. Velden: begrip/titel + zintuig-kanaal (geen/Zie/Hoor/Voel). Klikt direct in edit-mode.
+  - Nieuwe `ArchivePhotoPicker` modal: lijst alle foto's uit Algemene foto-archief (`GET /api/system-archive?category=foto`), met zoekbalk + 3 tabs (Alle / D&D-game / Overige). Klik foto → koppelt URL aan `card.media.image_urls`. Toont ✓-badge voor reeds gekoppelde foto's.
+  - Nieuwe `DnDUploadButton`: directe upload van eigen foto naar systeem-archief (auto-tags `D&D, game-card` + description) en hangt automatisch aan de kaart.
+  - Functionele Media-sectie in card-detail: thumbnail-grid van gekoppelde foto's (max 4 kolommen) + verwijderknop per foto + "ICON"-badge op de 1e foto (die wordt het kaart-icoon).
+  - **Card-list thumbnails**: kaart-rij toont nu een 36×36 thumbnail van de 1e foto i.p.v. alleen sense-emoji. Veel beter te scannen.
+  - Backend hergebruikt: `/api/dnd/spark-world/game-cards/edit` met `{media:{image_urls:[…]}}`, `/api/system-archive/upload` voor nieuwe uploads.
+  - E2E getest via curl: create → 44 archive-photos beschikbaar → attach foto → list bevat thumb → cleanup OK. UI smoke-screenshot: modal opent correct met begrip-input + zintuig-keuzes.
+
+
 - **v6_dnd_character_sheet_001** — Stormhaven-stijl D&D Character Sheet onder Avatar-tab:
   - Nieuwe backend module `modules/dnd/character.py` met JSON-persistent character per user in `data/dnd/characters/{user_id}.json`.
   - 4 endpoints: `GET /api/dnd/character/slots/config`, `GET /api/dnd/character/{user_id}`, `PATCH /api/dnd/character/{user_id}`, `POST /api/dnd/character/{user_id}/equip`, `POST /api/dnd/character/{user_id}/event`.

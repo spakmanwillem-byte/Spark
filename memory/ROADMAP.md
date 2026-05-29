@@ -4,6 +4,21 @@
 
 ## 🟢 Redeploy-ready check — 2026-05-29
 
+### ✅ Sessie 15 (2026-05-29, vervolg) — D&D Spark World
+- [x] 🎭 **Body Slots** (v6_body_slots_001):
+  - Backend: 3 endpoints (`GET /persons/body-slots/config`, `PUT /persons/cards/{u}/{p}/body-slots`, `DELETE .../body-slots/{slot_id}`)
+  - 8 slot-types met anatomische posities: head / shoulders / chest / hands / waist / feet / aura / pocket
+  - Per slot: label · icon (emoji) · color · note · ts
+  - Frontend: `BodySlotsPanel.js` met SVG-silhouet + visuele klikbare slots + edit-modal
+  - Geïntegreerd in PersoonsPage expand-view (onder notes, boven verwijder-knop)
+  - E2E getest: Lotus krijgt "Houten ketting" in borst-slot → orange glow + legenda
+- [x] 🌲 **Spark World "The North"** (v6_spark_world_north_001):
+  - Backend: `modules/dnd/spark_world_north.py` — locaties als persistent JSON in `data/dnd/spark_world/locations.json`
+  - Seed: **The North** (Groningen base) met 4 sub-locaties (Werkplaats/Tuin/Studio/Kampvuur) + 2 NPCs (De Dood, De Boekhouder)
+  - Endpoints: `GET /dnd/spark-world/locations`, `GET /.../locations/{id}`, `POST /.../locations/travel`
+  - Frontend: travel-banner in `DnDBarkPanel.js` + lazy-loaded sub-locaties + NPC-chips + senses-hints per plek
+  - E2E getest: Spark World modal → Locaties → The North → werkplaats sub-pick → full travel context
+
 **Status**: Stabiel. Geen code-blockers. Wacht op EUR-storting Willem zodat Spark potjes-commitment volledig gedekt is door Bitvavo.
 
 ### ✅ Sessie 15 (2026-05-29) — wat gedaan

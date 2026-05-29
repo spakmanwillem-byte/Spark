@@ -35,6 +35,32 @@ class PersonUpdate(BaseModel):
     notes: Optional[str] = None
 
 
+# v6_body_slots_001 — D&D-style inventory voor persoonskaart
+# 8 slots, geïnspireerd door D&D armor/inventory maar privacy-vriendelijk:
+#   head / shoulders / chest / hands / waist / feet / aura / pocket
+class BodySlotItem(BaseModel):
+    label: str                              # bv. "Roadkill Cap"
+    color: Optional[str] = None             # hex kleur voor visualisatie
+    icon: Optional[str] = None              # emoji of lucide-naam
+    note: Optional[str] = None              # vrije notitie
+
+
+class BodySlotsUpdate(BaseModel):
+    slots: dict  # {slot_id: BodySlotItem | None}  — None = leegmaken
+
+
+VALID_SLOTS = {
+    "head":      {"label": "Hoofd",     "icon": "🎩", "x": 50, "y": 8,  "desc": "Pet, helm, gedachten"},
+    "shoulders": {"label": "Schouders", "icon": "🧥", "x": 50, "y": 22, "desc": "Jas, cape, last"},
+    "chest":     {"label": "Borst",     "icon": "❤️", "x": 50, "y": 38, "desc": "Hart, drager"},
+    "hands":     {"label": "Handen",    "icon": "🤲", "x": 18, "y": 50, "desc": "Tools, magie, sieraad"},
+    "waist":     {"label": "Heupen",    "icon": "🔑", "x": 50, "y": 58, "desc": "Riem, sleutels"},
+    "feet":      {"label": "Voeten",    "icon": "👟", "x": 50, "y": 90, "desc": "Schoenen, pad"},
+    "aura":      {"label": "Aura",      "icon": "✨", "x": 82, "y": 50, "desc": "Energie, stemming"},
+    "pocket":    {"label": "Zak",       "icon": "💼", "x": 50, "y": 72, "desc": "Geheim, draag-item"},
+}
+
+
 def _get_file(user_id: str) -> Path:
     return DATA_DIR / f"{user_id}.json"
 
@@ -108,3 +134,61 @@ async def delete_person(user_id: str, person_id: str):
 @router.get("/relationships/{user_id}")
 async def get_relationships(user_id: str):
     return load_json(_get_rel_file(user_id), default={"user_id": user_id, "relationships": []})
+
+
+# v6_body_slots_001 — D&D-style body-slot inventaris per persoonskaart
+@router.get("/body-slots/config")
+async def get_body_slot_config():
+    """Lijst van geldige slot-IDs met hun positie + label voor de UI."""
+    return {"slots": VALID_SLOTS}
+
+
+@router.put("/cards/{user_id}/{person_id}/body-slots")
+async def update_body_slots(user_id: str, person_id: str, body: BodySlotsUpdate):
+    """Vervang volledige body_slots map. Items=None verwijderen het slot."""
+    filepath = _get_file(user_id)
+    data = load_json(filepath, default={"persons": []})
+    for p in data["persons"]:
+        if p["id"] != person_id:
+            continue
+        cur = p.get("body_slots") or {}
+        for slot_id, item in (body.slots or {}).items():
+            if slot_id not in VALID_SLOTS:
+                continue  # negeer onbekende slots
+            if item is None:
+                cur.pop(slot_id, None)
+            else:
+                # Sanitize: alleen velden uit BodySlotItem opslaan
+                cur[slot_id] = {
+                    "label": (item.get("label") or "").strip(),
+                    "color": item.get("color"),
+                    "icon": item.get("icon"),
+                    "note": (item.get("note") or "").strip() or None,
+                    "ts": datetime.now(timezone.utc).isoformat(),
+                }
+        p["body_slots"] = cur
+        p["updated_at"] = datetime.now(timezone.utc).isoformat()
+        save_json(filepath, data)
+        return {"success": True, "body_slots": cur}
+    return {"success": False, "message": "Persoon niet gevonden"}
+
+
+@router.delete("/cards/{user_id}/{person_id}/body-slots/{slot_id}")
+async def clear_body_slot(user_id: str, person_id: str, slot_id: str):
+    """Maak één specifiek slot leeg."""
+    if slot_id not in VALID_SLOTS:
+        return {"success": False, "message": f"Onbekend slot: {slot_id}"}
+    filepath = _get_file(user_id)
+    data = load_json(filepath, default={"persons": []})
+    for p in data["persons"]:
+        if p["id"] != person_id:
+            continue
+        slots = p.get("body_slots") or {}
+        if slot_id in slots:
+            del slots[slot_id]
+            p["body_slots"] = slots
+            p["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(filepath, data)
+            return {"success": True, "body_slots": slots}
+        return {"success": True, "body_slots": slots, "noop": True}
+    return {"success": False, "message": "Persoon niet gevonden"}

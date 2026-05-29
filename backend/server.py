@@ -207,6 +207,10 @@ app.include_router(dnd_router, prefix="/api")
 from modules.dnd.spark_world import router as spark_world_router
 app.include_router(spark_world_router, prefix="/api")
 
+# v6_spark_world_north_001 — Spark World locations (The North = Groningen base)
+from modules.dnd.spark_world_north import router as spark_world_north_router
+app.include_router(spark_world_north_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

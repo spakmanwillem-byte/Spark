@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
+import { BodySlotsPanel } from './BodySlotsPanel';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -210,6 +211,15 @@ export function PersoonsPage({ onNavigate }) {
                               </div>
                             )}
                             {p.notes && <p className="text-xs text-slate-400 p-2 bg-slate-800/20 rounded-lg">{p.notes}</p>}
+                            {/* v6_body_slots_001 — D&D-style inventaris */}
+                            <BodySlotsPanel
+                              userId={userId}
+                              personId={p.id}
+                              initialSlots={p.body_slots || {}}
+                              onChange={(newSlots) => {
+                                setPersons(prev => prev.map(pp => pp.id === p.id ? { ...pp, body_slots: newSlots } : pp));
+                              }}
+                            />
                             <div className="flex justify-end">
                               <button onClick={() => deletePerson(p.id)} className="flex items-center gap-1 px-2 py-1 text-[10px] text-red-400 hover:bg-red-500/10 rounded-lg transition-colors">
                                 <Trash2 className="w-3 h-3" /> Verwijderen

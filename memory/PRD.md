@@ -3,6 +3,27 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_world_001** — Fundament voor D&D wereld (fracties + provincies + rarity):
+  - **Backend** (`modules/dnd/world.py`): nieuwe module met 5 endpoints:
+    - `GET /api/dnd/world/rarities` — 5 WoW-style tiers (Common 60%/Uncommon 25%/Rare 10%/Epic 4%/Legendary 1%) met kleur + glow CSS
+    - `GET /api/dnd/world/fracties` — 9 fracties: Spark (hoofdfractie), Licht, Schaduw, Vuur (Licht), Lucht (Licht), Water (Schaduw), Aarde (Schaduw), Natuur (Licht, niet-element), Barbaren (Schaduw, niet-element), Neutraal
+    - `GET /api/dnd/world/provincies` — 12 NL-provincies met default fractie-binding
+    - `PATCH /api/dnd/world/provincies` — admin update (fractie/positie/hoofdstad)
+    - `POST /api/dnd/world/provincies/reset` — herstel defaults
+  - **Default mapping** 12 provincies: Groningen→Spark, Friesland→Lucht, Drenthe→Aarde, Overijssel→Natuur, Flevoland→Water, Gelderland→Vuur, Utrecht→Licht, Noord-Brabant→Schaduw, Limburg→Barbaren. Noord-Holland/Zuid-Holland/Zeeland blijven **Neutraal** (3 veroverbare regio's).
+  - **Frontend MiniMapPanel** vervangt vorige 4-locatie systeem:
+    - 12 fractie-shields op de borderless NL-map met fractie-kleur per provincie
+    - Klik shield → detail-panel met fractie-info + admin radio-knoppen om fractie te wijzigen
+    - Drag-modus voor admin om shields te verplaatsen (PATCH naar backend)
+    - Reset-knop herstelt defaults
+    - Header toont nu "SPARK WORLD · 12 PROVINCIES"
+
+- **v6_dnd_rugzak_hide_001** — Inventory opruim:
+  - Carry-items (`kind: 'carry'`) verdwijnen uit items-lijst zodra gedragen. Status getoond als compacte tekst: "ITEMS (0) · Grote Trekrugzak gedragen".
+  - **WoW-style rarity glow** op items: border + box-shadow + tier-naam in eigen kleur (Common grijs/Uncommon groen/Rare blauw/Epic paars/Legendary goud).
+  - "Nog geen items" copy verwijst nu naar Spark World D&D-galerij (i.p.v. hardcoded catalog).
+
+
 - **v6_spark_world_map_001** — Borderless NL-map + draggable city-frames (admin):
   - **Backend** (`modules/dnd/spark_world_map.py`): nieuw bestand met persistente locatie-opslag in `data/dnd/spark_world_map.json`. 3 endpoints: `GET /api/dnd/spark-world/map/locations`, `PUT /api/dnd/spark-world/map/locations`, `POST /api/dnd/spark-world/map/locations/reset`. Admin-only via gradatie ≤ 2 check tegen users.json.
   - **Frontend** `MiniMapPanel` upgrade:

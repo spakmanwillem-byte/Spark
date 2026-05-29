@@ -930,52 +930,53 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
 }
 
 function MiniMapPanel({ char, userId, isAdmin }) {
-  // v6_spark_world_map_001 — Borderless NL map background + draggable hotspots (admin)
+  // v6_dnd_world_001 — 12 provincies + fractie shields op de "Nederland map kaal" achtergrond
   const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
-  const [locations, setLocations] = useState([]);
+  const [provincies, setProvincies] = useState([]);
+  const [fracties, setFracties] = useState([]);
   const [editMode, setEditMode] = useState(false);
-  const [dragging, setDragging] = useState(null); // id of currently dragged
+  const [dragging, setDragging] = useState(null);
+  const [selectedProv, setSelectedProv] = useState(null);
   const svgRef = useRef(null);
 
   const reload = useCallback(() => {
-    fetch(`${API}/api/dnd/spark-world/map/locations`)
+    fetch(`${API}/api/dnd/world/provincies`)
       .then(r => r.json())
-      .then(d => setLocations(d.locations || []))
+      .then(d => { setProvincies(d.provincies || []); setFracties(d.fracties || []); })
       .catch(() => {});
   }, []);
   useEffect(() => { reload(); }, [reload]);
 
-  const saveLocations = async (newLocs) => {
-    setLocations(newLocs);
-    try {
-      await fetch(`${API}/api/dnd/spark-world/map/locations`, {
-        method: 'PUT', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ locations: newLocs, user_id: userId }),
-      });
-    } catch (e) { /* swallow */ }
+  const fractieOf = (fid) => fracties.find(f => f.id === fid) || fracties.find(f => f.id === 'neutraal') || {};
+
+  const saveProvincie = async (id, patch) => {
+    setProvincies(prev => prev.map(p => p.id === id ? { ...p, ...patch } : p));
+    await fetch(`${API}/api/dnd/world/provincies`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, updates: [{ id, ...patch }] }),
+    }).catch(() => {});
   };
 
-  const resetLocations = async () => {
-    if (!window.confirm('Reset alle SPARK WORLD locaties naar standaard?')) return;
-    const r = await fetch(`${API}/api/dnd/spark-world/map/locations/reset`, {
+  const resetAll = async () => {
+    if (!window.confirm('Reset alle 12 provincies naar standaard mapping?')) return;
+    const r = await fetch(`${API}/api/dnd/world/provincies/reset`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: userId }),
     }).then(x => x.json()).catch(() => null);
-    if (r?.locations) setLocations(r.locations);
+    if (r?.provincies) setProvincies(r.provincies);
   };
 
-  // Vertaal pointer → SVG-coords (0..100 %)
   const svgFromPointer = (clientX, clientY) => {
     const svg = svgRef.current;
     if (!svg) return null;
     const rect = svg.getBoundingClientRect();
     const x = ((clientX - rect.left) / rect.width) * 100;
     const y = ((clientY - rect.top) / rect.height) * 100;
-    return { x: Math.max(2, Math.min(98, x)), y: Math.max(2, Math.min(98, y)) };
+    return { x_pct: Math.max(2, Math.min(98, x)), y_pct: Math.max(2, Math.min(98, y)) };
   };
 
   const onPointerDown = (e, id) => {
-    if (!editMode) return;
+    if (!editMode) { setSelectedProv(id === selectedProv ? null : id); return; }
     e.preventDefault();
     setDragging(id);
     e.currentTarget.setPointerCapture?.(e.pointerId);
@@ -984,88 +985,118 @@ function MiniMapPanel({ char, userId, isAdmin }) {
     if (!dragging) return;
     const p = svgFromPointer(e.clientX, e.clientY);
     if (!p) return;
-    setLocations(prev => prev.map(l => l.id === dragging ? { ...l, x: p.x, y: p.y } : l));
+    setProvincies(prev => prev.map(prov => prov.id === dragging ? { ...prov, ...p } : prov));
   };
-  const onPointerUp = (e) => {
+  const onPointerUp = () => {
     if (!dragging) return;
+    const prov = provincies.find(p => p.id === dragging);
+    if (prov) saveProvincie(dragging, { x_pct: prov.x_pct, y_pct: prov.y_pct });
     setDragging(null);
-    // Persist
-    saveLocations(locations);
   };
+
+  const selProv = selectedProv ? provincies.find(p => p.id === selectedProv) : null;
+  const selFrac = selProv ? fractieOf(selProv.fractie_id) : null;
 
   return (
     <PaperPanel>
       <PaperHeader right={isAdmin && (
         <div className="flex gap-1">
-          <button data-testid="map-edit-toggle"
-            onClick={() => setEditMode(!editMode)}
+          <button data-testid="map-edit-toggle" onClick={() => setEditMode(!editMode)}
             className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30'}`}>
             {editMode ? '✓ klaar' : '✏ sleep'}
           </button>
           {editMode && (
-            <button data-testid="map-reset-btn" onClick={resetLocations}
+            <button data-testid="map-reset-btn" onClick={resetAll}
               className="text-[9px] px-1.5 py-0.5 rounded border border-red-700/40 text-red-300 hover:bg-red-900/30">
               reset
             </button>
           )}
         </div>
-      )}>SPARK WORLD</PaperHeader>
+      )}>SPARK WORLD · 12 PROVINCIES</PaperHeader>
+
       <div className="relative p-2 select-none">
-        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-44"
+        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-56"
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerLeave={onPointerUp}
           style={{ touchAction: 'none', cursor: dragging ? 'grabbing' : 'default' }}>
-          {/* Borderless NL map als achtergrond */}
           <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
             preserveAspectRatio="xMidYMid slice" />
 
-          {/* Locatie hotspots */}
-          {locations.map(loc => (
-            <g key={loc.id} data-testid={`nl-hotspot-${loc.id}`}
-              onPointerDown={(e) => onPointerDown(e, loc.id)}
-              style={{ cursor: editMode ? 'grab' : 'pointer' }}>
-              {loc.isMain ? (
-                <>
-                  <circle cx={loc.x} cy={loc.y} r="4.5" fill="#f59e0b" opacity="0.3" />
-                  <circle cx={loc.x} cy={loc.y} r="2" fill="#451a03" stroke="#fde68a" strokeWidth="0.6" />
-                  <circle cx={loc.x} cy={loc.y} r="0.8" fill="#fde68a" />
-                </>
-              ) : (
-                <circle cx={loc.x} cy={loc.y} r="1.4"
-                  fill={editMode ? '#f59e0b' : 'none'}
-                  stroke="#fde68a" strokeWidth="0.4"
-                  strokeDasharray={editMode ? '' : '0.6 0.4'} />
-              )}
-              {loc.label && loc.label !== '—' && (
-                <text x={loc.x} y={loc.y - 5} textAnchor="middle"
-                  fill="#fde68a" fontSize="2.4" fontFamily="serif" fontWeight="bold"
-                  style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.5 }}>
-                  {loc.label}
+          {/* Provincie shields */}
+          {provincies.map(p => {
+            const f = fractieOf(p.fractie_id);
+            const isMain = p.fractie_id === 'spark';
+            const isSelected = selectedProv === p.id;
+            return (
+              <g key={p.id} data-testid={`prov-${p.id}`}
+                onPointerDown={(e) => onPointerDown(e, p.id)}
+                style={{ cursor: editMode ? 'grab' : 'pointer' }}>
+                {/* Shield-vorm */}
+                <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 4 : 2.6}
+                  fill={f.kleur || '#94a3b8'}
+                  stroke={isSelected ? '#fde68a' : '#000'}
+                  strokeWidth={isSelected ? 0.8 : 0.4}
+                  opacity={p.fractie_id === 'neutraal' ? 0.55 : 0.9}
+                  style={{
+                    filter: isMain ? 'drop-shadow(0 0 4px rgba(245,158,11,0.6))' : 'none',
+                  }} />
+                {/* Kern */}
+                {isMain && (
+                  <circle cx={p.x_pct} cy={p.y_pct} r="1.2" fill="#fde68a" />
+                )}
+                {/* Label */}
+                <text x={p.x_pct} y={p.y_pct + (isMain ? 7 : 5)} textAnchor="middle"
+                  fill="#fde68a" fontSize={isMain ? 2.4 : 1.8}
+                  fontFamily="serif" fontWeight={isMain ? 'bold' : 'normal'}
+                  style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.5, pointerEvents: 'none' }}>
+                  {p.hoofdstad}
                 </text>
-              )}
-              {loc.isMain && loc.fractie && (
-                <text x={loc.x} y={loc.y - 8} textAnchor="middle"
-                  fill="#f59e0b" fontSize="1.6" fontStyle="italic"
-                  style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.4 }}>
-                  Fractie {loc.fractie}
-                </text>
-              )}
-            </g>
-          ))}
+              </g>
+            );
+          })}
         </svg>
 
-        <div className="border-t border-amber-900/40 pt-1.5 mt-1">
-          <p className="text-[9px] uppercase tracking-wider text-amber-500/70">Huidige Locatie</p>
-          <p data-testid="nl-current-location" className="text-[11px] text-amber-100 font-serif">
-            {char.locatie_naam || 'Stormhaven'}
-          </p>
-          <p className="text-[8px] text-amber-400/60 italic mt-0.5">
-            {editMode
-              ? '🖱 Sleep de cirkels om locaties te verplaatsen. Wijzigingen worden direct opgeslagen.'
-              : (isAdmin ? 'Klik ✏ om te slepen' : 'Locaties koppelen aan D&D-fractiekaarten komt eraan')}
-          </p>
-        </div>
+        {/* Selected provincie detail */}
+        {selProv && (
+          <div data-testid="prov-detail" className="border-t border-amber-900/40 pt-2 mt-1 bg-stone-950/60 rounded p-2">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[9px] uppercase tracking-wider text-amber-500/70">{selProv.naam}</p>
+                <p className="text-[12px] text-amber-100 font-serif">{selProv.hoofdstad}</p>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full" style={{ background: selFrac?.kleur || '#94a3b8' }} />
+                <span className="text-[11px] text-amber-200">{selFrac?.naam || '—'}</span>
+              </div>
+            </div>
+            {isAdmin && (
+              <div className="mt-1.5 flex flex-wrap gap-1">
+                {fracties.map(f => (
+                  <button key={f.id} data-testid={`prov-fractie-${f.id}`}
+                    onClick={() => saveProvincie(selProv.id, { fractie_id: f.id })}
+                    className={`text-[9px] px-1.5 py-0.5 rounded border ${selProv.fractie_id === f.id ? 'border-amber-400' : 'border-stone-700 hover:border-amber-700'}`}
+                    style={{ color: f.kleur, background: `${f.kleur}15` }}>
+                    {f.naam}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {!selProv && (
+          <div className="border-t border-amber-900/40 pt-1.5 mt-1">
+            <p className="text-[9px] uppercase tracking-wider text-amber-500/70">Huidige Locatie</p>
+            <p data-testid="nl-current-location" className="text-[11px] text-amber-100 font-serif">
+              {char.locatie_naam || 'Stormhaven'} · Fractie Spark
+            </p>
+            <p className="text-[8px] text-amber-400/60 italic mt-0.5">
+              {editMode ? '🖱 Sleep shields om te verplaatsen · klik = selecteren' :
+               (isAdmin ? '✏ om te slepen · klik shield voor fractie-toewijzing' : 'Klik een provincie voor info')}
+            </p>
+          </div>
+        )}
       </div>
     </PaperPanel>
   );

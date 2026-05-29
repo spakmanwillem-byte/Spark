@@ -219,6 +219,10 @@ app.include_router(dnd_character_router, prefix="/api")
 from modules.dnd.spark_world_map import router as spark_world_map_router
 app.include_router(spark_world_map_router, prefix="/api")
 
+# v6_dnd_world_001 — 9 fracties + 12 provincies + 5 rarity tiers (WoW-style)
+from modules.dnd.world import router as dnd_world_router
+app.include_router(dnd_world_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

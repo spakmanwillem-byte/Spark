@@ -944,46 +944,76 @@ function PersoonskaartCard({ userId, isAdmin }) {
 
       {/* Inventory slots */}
       <div className="space-y-2 mb-3">
-        <p className="text-[10px] uppercase tracking-wider text-slate-500">Items ({inv.slots?.length || 0})</p>
-        {(inv.slots || []).length === 0 ? (
-          <p className="text-xs text-slate-500 italic">Nog geen items.</p>
-        ) : (
-          <div className="space-y-1.5">
-            {inv.slots.map(slot => {
-              const img = cardImgFor(slot);
-              return (
-              <div key={slot.id} data-testid={`inv-slot-${slot.id}`}
-                className="flex items-center gap-3 p-2.5 bg-slate-800/40 hover:bg-slate-800/60 border border-slate-800/60 rounded-lg transition-colors">
-                {img ? (
-                  <img src={img} alt={slot.naam}
-                    className="w-10 h-10 rounded-md object-cover border border-amber-500/50 flex-shrink-0" />
-                ) : (
-                  <div className="text-2xl w-10 h-10 flex items-center justify-center flex-shrink-0">{slot.icon || '📦'}</div>
+        {(() => {
+          // v6_dnd_rugzak_hide_001 — verberg carry-items uit lijst (ze worden gedragen, niet bewaard)
+          const visibleSlots = (inv.slots || []).filter(s => s.kind !== 'carry');
+          const carriedRugzak = (inv.slots || []).find(s => s.kind === 'carry');
+          return (
+            <>
+              <p className="text-[10px] uppercase tracking-wider text-slate-500">
+                Items ({visibleSlots.length})
+                {carriedRugzak && (
+                  <span className="text-emerald-400/70 normal-case ml-1.5">· {carriedRugzak.naam} gedragen</span>
                 )}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-white truncate">{slot.naam}</p>
-                    {slot.rarity && slot.rarity !== 'common' && (
-                      <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-300 uppercase">{slot.rarity}</span>
-                    )}
-                  </div>
-                  <p className="text-[10px] text-slate-500 truncate">
-                    {slot.weight}kg
-                    {slot.capacity_bonus ? ` · +${slot.capacity_bonus} slots` : ''}
-                    {slot.weight_bonus ? ` · +${slot.weight_bonus}kg` : ''}
-                  </p>
+              </p>
+              {visibleSlots.length === 0 ? (
+                <p className="text-xs text-slate-500 italic">
+                  Nog geen items. Items uit Spark World D&D-galerij verschijnen hier.
+                </p>
+              ) : (
+                <div className="space-y-1.5">
+                  {visibleSlots.map(slot => {
+                    const img = cardImgFor(slot);
+                    const rar = slot.rarity || 'common';
+                    const rarColors = {
+                      common: '#9ca3af', uncommon: '#22c55e', rare: '#3b82f6',
+                      epic: '#a855f7', legendary: '#f59e0b',
+                    };
+                    const rc = rarColors[rar] || '#9ca3af';
+                    return (
+                      <div key={slot.id} data-testid={`inv-slot-${slot.id}`}
+                        className="flex items-center gap-3 p-2.5 bg-slate-800/40 hover:bg-slate-800/60 border rounded-lg transition-colors"
+                        style={{ borderColor: `${rc}55`, boxShadow: rar !== 'common' ? `0 0 8px ${rc}33` : 'none' }}>
+                        {img ? (
+                          <img src={img} alt={slot.naam}
+                            className="w-10 h-10 rounded-md object-cover flex-shrink-0"
+                            style={{ border: `2px solid ${rc}`, boxShadow: `0 0 8px ${rc}80` }} />
+                        ) : (
+                          <div className="text-2xl w-10 h-10 flex items-center justify-center flex-shrink-0 rounded-md"
+                            style={{ border: `2px solid ${rc}`, boxShadow: `0 0 6px ${rc}55` }}>
+                            {slot.icon || '📦'}
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm font-medium truncate" style={{ color: rc }}>{slot.naam}</p>
+                            {rar !== 'common' && (
+                              <span className="text-[9px] px-1 py-0.5 rounded uppercase font-bold"
+                                style={{ background: `${rc}22`, color: rc, border: `1px solid ${rc}55` }}>
+                                {rar}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-[10px] text-slate-500 truncate">
+                            {slot.weight}kg
+                            {slot.capacity_bonus ? ` · +${slot.capacity_bonus} slots` : ''}
+                            {slot.weight_bonus ? ` · +${slot.weight_bonus}kg` : ''}
+                          </p>
+                        </div>
+                        {isAdmin && (
+                          <button data-testid={`inv-remove-${slot.id}`} onClick={() => removeItem(slot.id)} disabled={busy}
+                            className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors">
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                {isAdmin && (
-                  <button data-testid={`inv-remove-${slot.id}`} onClick={() => removeItem(slot.id)} disabled={busy}
-                    className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors">
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-              );
-            })}
-          </div>
-        )}
+              )}
+            </>
+          );
+        })()}
       </div>
 
       {/* Achievements */}

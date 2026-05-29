@@ -1,6 +1,147 @@
 {
   "cards": [
     {
+      "id": "game-fc3db413",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Toverdrank",
+      "sense": "hoor",
+      "lagen": {
+        "laag1": "Toverdrank",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "drank",
+        "bonus"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/659385e87b76"
+        ]
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.45,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-29T21:38:33.913593+00:00",
+        "laatst_bewerkt_op": "2026-05-29T21:43:29.650852+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "locked_op": "2026-05-29T21:43:20.611978+00:00",
+        "locked_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "game-825be55f",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Voedsel kraam",
+      "sense": "hoor",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "voeding",
+        "koop",
+        "verkoop"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/ebf5a7eca66d"
+        ]
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-29T21:38:21.393810+00:00",
+        "laatst_bewerkt_op": "2026-05-29T21:39:28.006957+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "game-f4646417",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Map zonder boarders",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Land kaart",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "minimap"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/31ac12974fd0"
+        ]
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.45,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-29T21:36:53.322085+00:00",
+        "laatst_bewerkt_op": "2026-05-29T21:38:00.533909+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
       "id": "game-4ba9bd96",
       "class": "game",
       "type": "dnd_game_card",
@@ -78,13 +219,13 @@
           "/api/system-archive/file/11b24741b018"
         ]
       },
-      "status": "locked",
+      "status": "draft",
       "footnote": {
         "bron": "manual",
         "vertrouwen": 0.45,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-05-29T21:28:05.174223+00:00",
-        "laatst_bewerkt_op": "2026-05-29T21:28:49.280543+00:00",
+        "laatst_bewerkt_op": "2026-05-29T21:43:33.135278+00:00",
         "laatst_bewerkt_door": "user-001",
         "locked_op": "2026-05-29T21:28:49.280547+00:00",
         "locked_door": "user-001"
@@ -174,13 +315,13 @@
           "/api/system-archive/file/5fada3d7c9c4"
         ]
       },
-      "status": "locked",
+      "status": "draft",
       "footnote": {
         "bron": "manual",
         "vertrouwen": 0.45,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-05-29T21:23:59.901439+00:00",
-        "laatst_bewerkt_op": "2026-05-29T21:26:47.868280+00:00",
+        "laatst_bewerkt_op": "2026-05-29T21:43:34.847007+00:00",
         "laatst_bewerkt_door": "user-001",
         "locked_op": "2026-05-29T21:26:47.868284+00:00",
         "locked_door": "user-001"
@@ -1458,5 +1599,5 @@
       ]
     }
   ],
-  "updated_at": "2026-05-29T21:29:29.247413+00:00"
+  "updated_at": "2026-05-29T21:43:34.847027+00:00"
 }

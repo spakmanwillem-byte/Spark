@@ -3,6 +3,25 @@
 
 ## Completed (recent — 2026-05-29, sessie 17 / fork)
 
+- **v6_dnd_dorp_zoom_001** — Stormhaven Dorp-Zoom modal (`StormhavenMapView.js`):
+  - Klikken op "Kaart Bekijken" in DORP-paneel opent een full-screen modal met de "Basis dorp" foto als achtergrond.
+  - Header toont "Hoofdstad — Fractie Spark · Stormhaven" + Layout Level + Fog of War.
+  - **9 gebouw-hotspots** geplaatst rond de circulaire plattegrond (proportioneel %-positioned):
+    - Center → **Tempel van Spark** (gouden Sparkles-glow, altijd zichtbaar)
+    - N/Z/W → 3× **Waterput** (allemaal jouw `Waterput` foto)
+    - NE → **Slager gebouw**, SE → **Bakker gebouw**, SW → **Kleine straat**
+    - E → Markt (vacant placeholder), W → Smederij (vacant placeholder)
+  - Klik op een hotspot → tooltip met building-info, foto, en `laag1` beschrijving.
+  - Footer toont chips voor alle 9 gebouwen + counter "6/9 gevuld" + tip om vacant slots in te vullen met nieuwe D&D-kaarten.
+  - Geen backend changes — pure frontend layer over bestaande game-cards en character data.
+
+- **v6_dnd_rugzak_sync_001** — RUGZAK slot ↔ Inventory carry-item sync:
+  - DnDCharacterSheet laadt nu `/api/inventory/{user_id}` parallel met character.
+  - Als RUGZAK slot leeg is maar inventory heeft een carry-item (kind=`carry`) → toon die automatisch in het slot.
+  - Slot toont **groene ⬤ badge** (synced indicator) + capacity-info tekst (`+5 slots · +10kg`).
+  - InventoryGridPanel hergebruikt nu de parent inventory state i.p.v. dubbel te fetchen.
+
+
 - **v6_dnd_card_visuals_001** — D&D-kaarten als visuele bouwstenen in character sheet:
   - Helper `findCardByKeywords(cards, keywords)` met 3-staps matching: tag exact → begrip exact → begrip contains (allemaal case-insensitief).
   - **DORP-paneel** zoekt automatisch een kaart met tag/begrip `dorp` of `stad` en gebruikt de 1e foto als achtergrond + naam uit `begrip` ("Basis dorp"). Vignet zorgt dat tekst leesbaar blijft. Fallback naar getekende SVG-huisjes als geen kaart matcht.

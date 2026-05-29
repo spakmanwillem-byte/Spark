@@ -17,6 +17,7 @@ import {
   Save, Edit3, Map, Home, MessageSquare, Scroll, BookOpen, Award,
   Activity, FileText, Settings, Upload, ChevronDown, ChevronUp, Send,
 } from 'lucide-react';
+import { StormhavenMapView } from './StormhavenMapView';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -148,15 +149,22 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
   const [char, setChar] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [gameCards, setGameCards] = useState([]);
+  const [inventory, setInventory] = useState(null);
   const [activeFooter, setActiveFooter] = useState('overzicht');
   const [infoTab, setInfoTab] = useState('char_info');
   const [editingMeta, setEditingMeta] = useState(false);
   const [eventDraft, setEventDraft] = useState('');
+  const [showMapView, setShowMapView] = useState(false);
 
   const reload = useCallback(() => {
     fetch(`${API}/api/dnd/character/${userId}`)
       .then(r => r.json())
       .then(setChar)
+      .catch(() => {});
+    // v6_dnd_rugzak_sync_001 — laad inventory zodat RUGZAK slot er mee kan syncen
+    fetch(`${API}/api/inventory/${userId}`)
+      .then(r => r.json())
+      .then(setInventory)
       .catch(() => {});
   }, [userId]);
 
@@ -199,6 +207,26 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
   const xpPerLvl = char.derived?.xp_per_level ?? 100;
   const xpPct = Math.min(100, Math.round((xpInLvl / xpPerLvl) * 100));
 
+  // v6_dnd_rugzak_sync_001 — RUGZAK slot toont automatisch de carry-item uit inventory.
+  // Als geen rugzak ge-equipt is, maar inventory heeft een 'carry'-item, gebruik die als virtual equipment.
+  const equipment = { ...(char.equipment || {}) };
+  if (!equipment.rugzak && inventory?.slots) {
+    const carry = inventory.slots.find(s => s.kind === 'carry');
+    if (carry) {
+      equipment.rugzak = {
+        item_id: carry.item_id,
+        naam: carry.naam,
+        icon: carry.icon || '🎒',
+        from_inventory: true,
+        capacity_bonus: carry.capacity_bonus || 0,
+        weight_bonus: carry.weight_bonus || 0,
+      };
+    }
+  }
+
+  // Vind dorpCard hier ook (zelfde logica als DorpPreviewPanel) zodat we hem aan map view kunnen geven
+  const dorpCard = findCardByKeywords(gameCards, ['dorp', 'basis dorp', 'stad', char.dorp || '']);
+
   return (
     <div data-testid="dnd-character-sheet" className="relative">
       {/* ===== HEADER BAR — Titel | Rang | Shields | Currency ===== */}
@@ -215,7 +243,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <PaperPanel>
             <PaperHeader>BODY · EQUIPMENT</PaperHeader>
             <BodySilhouettePanel
-              equipment={char.equipment || {}}
+              equipment={equipment}
               userId={userId}
               isAdmin={isAdmin}
               onChange={reload}
@@ -241,9 +269,9 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
 
         {/* === KOLOM RECHTS: Inventory + Huis & Opslag === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
-          <InventoryGridPanel userId={userId} />
+          <InventoryGridPanel userId={userId} inventory={inventory} />
           <HuisOpslagPanel gameCards={gameCards} />
-          <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => onOpenAvatarSettings?.('map')} />
+          <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
         </div>
       </div>
 
@@ -276,6 +304,16 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           userId={userId}
           onClose={() => setEditingMeta(false)}
           onSaved={() => { setEditingMeta(false); reload(); }}
+        />
+      )}
+
+      {/* ===== STORMHAVEN DORP-ZOOM ===== */}
+      {showMapView && (
+        <StormhavenMapView
+          dorpCard={dorpCard}
+          gameCards={gameCards}
+          char={char}
+          onClose={() => setShowMapView(false)}
         />
       )}
     </div>
@@ -446,6 +484,11 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards =
 function SlotCell({ slot, item, align = 'right', onClick, preview }) {
   const filled = !!item;
   const naam = item?.naam || slot.fallback;
+  const fromInv = !!item?.from_inventory;
+  // Toon capacity-bonus voor rugzak (uit inventory)
+  const subText = fromInv && (item?.capacity_bonus || item?.weight_bonus)
+    ? `+${item.capacity_bonus || 0} slots · +${item.weight_bonus || 0}kg`
+    : null;
   return (
     <button
       data-testid={`slot-${slot.key}`}
@@ -464,10 +507,17 @@ function SlotCell({ slot, item, align = 'right', onClick, preview }) {
         <span className="relative z-10">
           {item?.icon || (filled ? '✦' : (preview ? '' : '·'))}
         </span>
+        {fromInv && (
+          <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-stone-950"
+            title="Gesynced met inventory" />
+        )}
       </div>
       <div className={`flex-1 min-w-0 ${align === 'center' ? 'text-[8px]' : ''}`}>
         <p className="text-[8px] uppercase tracking-[0.15em] text-amber-500/70 truncate">{slot.label}</p>
         <p className={`text-[10px] truncate ${filled ? 'text-amber-100' : 'text-stone-500'}`}>{naam}</p>
+        {subText && (
+          <p className="text-[8px] text-emerald-400/90 truncate">{subText}</p>
+        )}
       </div>
     </button>
   );
@@ -661,11 +711,12 @@ function OverigPanel({ char }) {
 }
 
 // ----- INVENTORY GRID -----
-function InventoryGridPanel({ userId }) {
-  const [inv, setInv] = useState(null);
+function InventoryGridPanel({ userId, inventory: invProp }) {
+  const [inv, setInv] = useState(invProp || null);
   useEffect(() => {
+    if (invProp) { setInv(invProp); return; }
     fetch(`${API}/api/inventory/${userId}`).then(r => r.json()).then(setInv).catch(() => {});
-  }, [userId]);
+  }, [userId, invProp]);
 
   const slots = inv?.slots || [];
   const total = 48; // 8 cols x 6 rows

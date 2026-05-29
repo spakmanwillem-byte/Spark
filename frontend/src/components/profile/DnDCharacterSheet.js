@@ -51,6 +51,36 @@ function cardFirstImage(card, apiUrl = API) {
   return u ? `${apiUrl}${u}` : null;
 }
 
+// v6_dnd_card_visuals_002 — uitgebreide synoniemen-lijst per slot (sluit aan op user's 31 D&D-kaarten)
+const SLOT_SYNONYMS = {
+  hoofd:       ['hoofd', 'helm', 'hoed', 'hoofdband', 'kroon', 'kap'],
+  nek:         ['nek', 'ketting', 'sieraad', 'medaillon'],
+  schouders:   ['schouders', 'schouder', 'schouderbeschermer', 'mantel'],
+  armen:       ['armen', 'arm', 'pols', 'armband', 'polsband'],
+  trinket:     ['trinket', 'medaillon', 'amulet'],
+  torso:       ['torso', 't-shirt', 'shirt', 'hemd', 'borst', 'borstplaat', 'wambuis'],
+  broek:       ['broek', 'benen', 'broeken', 'leggings'],
+  voeten:      ['voeten', 'schoen', 'schoenen', 'laarzen', 'laars'],
+  sjaal:       ['sjaal', 'doek'],
+  riem:        ['riem', 'heuptas', 'gordel', 'gesp'],
+  handen:      ['handen', 'hand', 'handschoenen', 'handschoen'],
+  ring_l:      ['ring_l', 'ring (l)', 'ring'],
+  ring_r:      ['ring_r', 'ring (r)', 'ring'],
+  rugzak:      ['rugzak', 'tas', 'reistas'],
+  linkerhand:  ['linkerhand', 'links', 'schild', 'buckler'],
+  rechterhand: ['rechterhand', 'rechts', 'wapen', 'zwaard', 'staf', 'bijl', 'dolk'],
+  offhand:     ['offhand', 'lantaarn', 'fakkel', 'toorts'],
+  pijl_boog:   ['pijl_boog', 'pijl & boog', 'pijl en boog', 'boog', 'kruisboog'],
+};
+
+function getSlotKeywords(slot) {
+  return SLOT_SYNONYMS[slot.key] || [slot.key, slot.label.toLowerCase(), slot.fallback.toLowerCase()];
+}
+
+function findCardForSlot(slot, cards) {
+  return findCardByKeywords(cards, getSlotKeywords(slot));
+}
+
 // ----- Slot grid: 9 links (3x3) + 9 rechts (3x3) rond een center silhouet ----
 const SLOT_LAYOUT_LEFT = [
   { key: 'linkerhand',  label: 'LINKERHAND',  fallback: 'Schild' },
@@ -336,22 +366,16 @@ function CurrencyPill({ icon: Icon, color, value, testid }) {
 function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards = [] }) {
   const [editingSlot, setEditingSlot] = useState(null);
 
-  // v6_dnd_card_visuals_001 — vervang getekende silhouet door foto van "lijf"-kaart als die bestaat
-  const lijfCard = findCardByKeywords(gameCards, ['lijf', 'body', 'silhouet', 'silhouette']);
+  // v6_dnd_card_visuals_001 — body silhouet: alleen pakken als begrip exact "lijf"/"body"/"silhouet" is
+  // (anders pakt hij T-shirt vanwege tag "lijf")
+  const lijfCard = (gameCards || []).find(c => {
+    const b = String(c.begrip || '').toLowerCase().trim();
+    return b === 'lijf' || b === 'body' || b === 'silhouet' || b === 'silhouette' || b === 'lichaam';
+  });
   const lijfImg = cardFirstImage(lijfCard);
 
-  // Per slot: vind een matching kaart op basis van slot-key/label
-  const slotPreview = (slot) => {
-    const keywords = [slot.key, slot.label.toLowerCase(), slot.fallback.toLowerCase()];
-    // Specifieke synoniemen voor lastige slots
-    if (slot.key === 'torso') keywords.push('t-shirt', 'shirt', 'hemd');
-    if (slot.key === 'voeten') keywords.push('schoenen', 'laarzen');
-    if (slot.key === 'handen') keywords.push('handschoenen');
-    if (slot.key === 'hoofd') keywords.push('helm', 'hoed', 'hoofdband');
-    if (slot.key === 'rugzak') keywords.push('tas');
-    const card = findCardByKeywords(gameCards, keywords);
-    return cardFirstImage(card);
-  };
+  // Per slot: vind een matching kaart via gedeelde synoniemen
+  const slotPreview = (slot) => cardFirstImage(findCardForSlot(slot, gameCards));
 
   return (
     <div className="relative p-3 min-h-[440px]">
@@ -408,7 +432,7 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards =
         <EquipSlotModal
           slot={editingSlot}
           item={equipment[editingSlot.key]}
-          previewCard={findCardByKeywords(gameCards, [editingSlot.key, editingSlot.fallback.toLowerCase()])}
+          previewCard={findCardForSlot(editingSlot, gameCards)}
           gameCards={gameCards}
           userId={userId}
           onClose={() => setEditingSlot(null)}
@@ -454,14 +478,9 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
   const [icon, setIcon] = useState(item?.icon || '');
   const [busy, setBusy] = useState(false);
 
-  // v6_dnd_card_visuals_001 — kandidaten uit D&D-galerij op basis van slot-key/label/synoniemen
+  // v6_dnd_card_visuals_002 — kandidaten uit D&D-galerij via gedeelde synoniemen
   const candidates = (() => {
-    const kw = [slot.key, slot.label.toLowerCase(), slot.fallback.toLowerCase()];
-    if (slot.key === 'torso') kw.push('t-shirt', 'shirt', 'hemd');
-    if (slot.key === 'voeten') kw.push('schoenen', 'laarzen');
-    if (slot.key === 'handen') kw.push('handschoenen');
-    if (slot.key === 'hoofd') kw.push('helm', 'hoed', 'hoofdband');
-    if (slot.key === 'rugzak') kw.push('tas');
+    const kw = getSlotKeywords(slot);
     return (gameCards || []).filter(c => {
       const tags = (c.tags || []).map(t => String(t).toLowerCase());
       const begrip = String(c.begrip || '').toLowerCase();
@@ -688,17 +707,26 @@ function InventoryGridPanel({ userId }) {
 }
 
 function HuisOpslagPanel({ gameCards = [] }) {
-  // v6_dnd_card_visuals_001 — Huis-slots vullen we met "huis"-D&D-kaarten als die er zijn
-  const huisCards = (gameCards || []).filter(c => {
+  // v6_dnd_card_visuals_002 — Huis-slots: gebouwen + opslag-kasten. Meubel-slots: pure meubels (geen opslag).
+  const HUIS_TAGS = ['huis', 'gebouw', 'opslag', 'locatie'];
+  const MEUBEL_TAGS = ['meubel'];
+
+  const isHuis = c => {
     const tags = (c.tags || []).map(t => String(t).toLowerCase());
     const begrip = String(c.begrip || '').toLowerCase();
-    return tags.includes('huis') || tags.includes('opslag') || begrip.includes('huis');
-  }).slice(0, 5);
-  const meubelCards = (gameCards || []).filter(c => {
+    return HUIS_TAGS.some(t => tags.includes(t)) || begrip.includes('huis') || begrip.includes('gebouw') || begrip.includes('straat');
+  };
+  const isMeubel = c => {
     const tags = (c.tags || []).map(t => String(t).toLowerCase());
     const begrip = String(c.begrip || '').toLowerCase();
-    return tags.includes('meubel') || begrip.includes('meubel') || begrip.includes('stoel') || begrip.includes('bed') || begrip.includes('kast');
-  }).slice(0, 5);
+    return MEUBEL_TAGS.some(t => tags.includes(t))
+      || ['stoel', 'bed', 'kast', 'kist', 'tafel', 'bank'].some(w => begrip.includes(w));
+  };
+
+  // Mutually exclusive: als kaart zowel huis als meubel matcht → huis prioriteit (opslag-kist gaat naar huis-slot)
+  const huisCards = (gameCards || []).filter(isHuis).slice(0, 5);
+  const huisIds = new Set(huisCards.map(c => c.id));
+  const meubelCards = (gameCards || []).filter(c => isMeubel(c) && !huisIds.has(c.id)).slice(0, 5);
 
   const fallbackHuis = ['🏠', '📦', '🗃', '⛪', '+'];
   const fallbackMeubel = ['🪑', '🛏', '🗄', '🪟', '+'];

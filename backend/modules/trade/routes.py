@@ -1008,8 +1008,16 @@ async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
     if exit_price <= 0:
         return {"success": False, "error": "Ongeldige live prijs"}
 
-    # Close het potje
-    result = potjes_svc.close_pot(user_id, pot_id, exit_price)
+    # v6_force_sell_real_001 (sessie 16) — voer echte Bitvavo SELL uit voordat
+    # we administratief sluiten. Anders blijft de coin op Bitvavo en raken JSON
+    # en realiteit uit sync. execute_real_trade gebruikt Spark's keys via proxy.
+    from .monitor import execute_real_trade
+    sell_result = execute_real_trade(user_id, market, "SELL", pot.get("capital") or 10.0)
+    real_exit_price = (sell_result.get("trade") or {}).get("price") or exit_price
+
+    # Close het potje (administratief) met echte fill-prijs
+    result = potjes_svc.close_pot(user_id, pot_id, real_exit_price)
+    result["bitvavo_sell"] = sell_result
 
     # Audit-trail
     try:

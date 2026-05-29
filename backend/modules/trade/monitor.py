@@ -358,9 +358,11 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             "operatorId": int(bitvavo.get("operator_id") or 1001),
         }
         if side_l == "buy":
-            body["amountQuote"] = str(round(final_amount, 8))
+            body["amountQuote"] = str(round(final_amount, 2))  # EUR: 2 decimalen
         else:
-            body["amount"] = str(final_amount)
+            # v6_sell_amount_decimals_001 — coin-amount: max 8 decimals, geen
+            # wetenschappelijke notatie. Bitvavo weigert anders met errorCode 429.
+            body["amount"] = f"{final_amount:.8f}".rstrip("0").rstrip(".")
 
         # CRITICAL: signature moet over EXACT dezelfde body string als verzonden.
         # We sturen `data=body_str` om dubbele serialisatie te voorkomen.

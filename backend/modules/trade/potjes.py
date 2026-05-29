@@ -1002,20 +1002,13 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                         print(f"[close_pot] Auto-mint: {auto_mint['n_minted']} nieuwe potjes uit overflow")
                 except Exception as ex:
                     print(f"[close_pot] auto-mint failed (non-blocking): {ex}")
-            # v6_dynamic_pot_split_001 — Na elke trade-close: herbalanceer potjes
-            # tegen actuele Bitvavo. Houdt €10-schijven dynamisch in sync met realiteit.
-            auto_rebalance = None
-            try:
-                auto_rebalance = rebalance_from_bitvavo()
-                if auto_rebalance.get("success"):
-                    print(f"[close_pot] auto-rebalance: trader={auto_rebalance['trader_pot_count']} pots €{auto_rebalance['trader_total_eur']}, "
-                          f"anchor={auto_rebalance['anchor_pot_count']} pots €{auto_rebalance['anchor_total_eur']}")
-            except Exception as ex:
-                print(f"[close_pot] auto-rebalance failed (non-blocking): {ex}")
+            # v6_dynamic_pot_split_001 — DISABLED (sessie 16): auto-rebalance op
+            # Bitvavo waarde botst met "1 token = 1 potje"-model. Tokens zijn leidend,
+            # niet Bitvavo crypto-waardes (die zijn shared pool). Manual rebalance
+            # endpoint blijft beschikbaar voor uitzonderlijke gevallen.
             return {"pot": p, "netto": round(netto, 4), "overflow": overflow,
                     "auto_expansion": auto_expansion, "spark_bonus": bonus_result,
-                    "spark_fee_eur": spark_fee, "auto_mint": auto_mint,
-                    "auto_rebalance": auto_rebalance}
+                    "spark_fee_eur": spark_fee, "auto_mint": auto_mint}
     return {}
 
 

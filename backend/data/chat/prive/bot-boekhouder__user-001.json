@@ -641,6 +641,25 @@
       "pot_id": "pot-004",
       "price": 258.35,
       "user_id": "user-001"
+    },
+    {
+      "id": "bh-e869c26d",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📤 SELL • BCH @ €263.0800 ✅\nPotje: pot-001\nEigenaar: user-001\nNetto winst: €+0.1036\nSpark-fee (5%): €0.0052\n",
+      "ts": "2026-05-29T17:30:55.415925+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 263.08,
+      "netto": 0.10360864531068935,
+      "spark_fee": 0.0052,
+      "user_id": "user-001"
     }
   ]
 }

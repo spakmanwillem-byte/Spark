@@ -718,7 +718,27 @@ class MonitorService:
             self._user_id = user_id
             self._auto_trade = auto_trade
             self._trade_amount = trade_amount
+            # v6_bot_mock_fallback_001 — als user geen Bitvavo API keys heeft,
+            # forceer mock-mode. Voorkomt asymmetrie waarbij buy faalt op
+            # eur-saldo-check maar sell soms slipt via fallback. Spark + Willem
+            # hebben wel echte keys.
             self._use_mock = use_mock
+            try:
+                from pathlib import Path as _P
+                _settings_path = _P(__file__).parent.parent.parent / "data" / "users" / user_id / "settings.json" if user_id else None
+                if _settings_path and not _settings_path.exists():
+                    self._use_mock = True
+                    logger.info(f"[bot {user_id}] geen settings.json → forceer mock-mode")
+                elif _settings_path:
+                    import json as _json
+                    with open(_settings_path) as _f:
+                        _s = _json.load(_f)
+                    _bv = (_s.get("integrations") or {}).get("bitvavo") or {}
+                    if not _bv.get("api_key") or not _bv.get("api_secret"):
+                        self._use_mock = True
+                        logger.info(f"[bot {user_id}] geen Bitvavo keys → forceer mock-mode")
+            except Exception as _ex:
+                logger.warning(f"[bot {user_id}] mock-fallback check faalde: {_ex}")
             self._use_potjes = use_potjes
             self._stop_event.clear()
             self._running = True

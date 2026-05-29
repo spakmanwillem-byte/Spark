@@ -77,7 +77,7 @@
     },
     "user-000": {
       "wallet_id": "user-000",
-      "balance": 0.0,
+      "balance": 0.0052,
       "created_at": "2026-05-21T11:43:38.704074+00:00",
       "total_deposited": 0,
       "total_withdrawn": 0,
@@ -100,7 +100,16 @@
       "balance_eur": 0.0,
       "spark_tokens": 10,
       "last_sync": "2026-05-28T17:22:48.396843+00:00",
-      "cleaned_at_28mei": true
+      "cleaned_at_28mei": true,
+      "fee_log": [
+        {
+          "ts": "2026-05-29T17:30:55.402959+00:00",
+          "from_user": "user-001",
+          "from_pot": "pot-001",
+          "netto_profit": 0.10360864531068935,
+          "fee_eur": 0.0052
+        }
+      ]
     },
     "user-574ac78e": {
       "wallet_id": "user-574ac78e",

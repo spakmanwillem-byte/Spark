@@ -209,6 +209,65 @@ def _save(data: Dict):
     save_json(POTJES_FILE, data)
 
 
+def _markets_for_user(user_id: str) -> List[str]:
+    """v6_potje_market_distribution_001 — lees user-specifieke markten uit bots_registry.
+    Gebruikt door sync_potjes_to_tokens en redistribute_potjes_across_markets.
+    Fallback: ["BCH-EUR"] (legacy default).
+    """
+    try:
+        reg = load_json(POTJES_FILE.parent / "bots_registry_state.json", default={"bots": []})
+        bots = reg.get("bots") or []
+        for b in bots:
+            if b.get("user_id") == user_id:
+                mks = b.get("markets") or []
+                if mks:
+                    return [m for m in mks if isinstance(m, str) and m.strip()]
+    except Exception:
+        pass
+    return ["BCH-EUR"]
+
+
+def redistribute_potjes_across_markets(user_id: str, markets: Optional[List[str]] = None) -> Dict:
+    """v6_potje_market_distribution_001 — herverdeel bestaande potjes round-robin
+    over een lijst markten. Slaat potjes met open positions over (die staan al
+    vast op een coin). Veilig her-uit te voeren.
+    """
+    if user_id == "user-000":
+        return {"success": False, "error": "Spark heeft custom anchor-distributie; gebruik update_markets() ipv redistribute."}
+
+    target_markets = markets or _markets_for_user(user_id)
+    if not target_markets:
+        return {"success": False, "error": "Geen markten gevonden om over te verdelen"}
+
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.get("potjes", [])
+    if not potjes:
+        return {"success": True, "changed": 0, "potjes": []}
+
+    changed = 0
+    closed_potjes = [p for p in potjes if not p.get("position", {}).get("is_open")]
+    open_potjes = [p for p in potjes if p.get("position", {}).get("is_open")]
+    # Open potjes blijven op hun huidige market (positie vastzit).
+    # Closed potjes: round-robin verdelen.
+    for i, p in enumerate(closed_potjes):
+        new_market = target_markets[i % len(target_markets)]
+        if p.get("market") != new_market:
+            p["market"] = new_market
+            p["last_action"] = f"redistribute → {new_market}"
+            changed += 1
+
+    user["potjes"] = closed_potjes + open_potjes
+    _save(data)
+    from collections import Counter
+    by_market = dict(Counter(p.get("market") for p in user["potjes"]))
+    return {
+        "success": True, "changed": changed, "total_potjes": len(potjes),
+        "open_positions": len(open_potjes), "markets_used": target_markets,
+        "distribution": by_market,
+    }
+
+
 def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") -> Dict:
     """v6_potje_per_token_001 — 1 token = 1 potje.
 
@@ -232,11 +291,17 @@ def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") 
                 "message": "Geen potje-uitbreiding nodig."}
 
     # Voeg potjes toe tot target. Eerste potje (index 0) blijft staking-anker.
+    # v6_potje_market_distribution_001 — verdeel nieuwe potjes round-robin
+    # over user's `bots_registry.markets` lijst (ipv altijd BCH-EUR). Geeft
+    # je direct 2 potjes per coin als je 6 coins hebt.
+    user_markets = _markets_for_user(user_id) or [market]
     now = datetime.now(timezone.utc).isoformat()
     next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
     added = 0
     while len(potjes) < target:
         is_locked = (next_idx == LOCKED_POT_INDEX)
+        # Round-robin: kies market op basis van totaal aantal potjes
+        chosen_market = user_markets[len(potjes) % len(user_markets)] if user_markets else market
         potjes.append({
             "id": f"pot-{next_idx+1:03d}",
             "index": next_idx,
@@ -246,7 +311,7 @@ def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") 
             "lock_reason": "staking_anchor" if is_locked else None,
             "position": {"is_open": False, "entry_price": None, "highest_price": None,
                          "trailing_active": False, "entry_time": None},
-            "market": market,
+            "market": chosen_market,
             "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
             "created_at": now,
             "last_action": None,
@@ -437,17 +502,9 @@ def _init_potjes(user_id: str) -> Dict:
 def get_potjes(user_id: str) -> Dict:
     data = _load(user_id)
     user = data["users"][user_id]
-    # Verrijk elk potje met live_value: als gesloten → aandeel in live balance
-    try:
-        baseline_file = Path(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
-        baseline_data = load_json(baseline_file, default={})
-        baseline = baseline_data.get(user_id, {}).get("baseline_eur")
-        from modules.trade.monitor import fetch_bitvavo_balance
-        bv = fetch_bitvavo_balance(user_id)
-        live_balance = bv.get("total_eur") if bv.get("success") else None
-    except Exception:
-        live_balance = None
-        baseline = None
+    # v6_pot_live_value_per_user_001 — Live Bitvavo lookup zit nu in get_summary()
+    # (de stats-endpoint); get_potjes() levert alleen JSON capital + mark-to-market
+    # voor open posities. Voorheen werd hier een onused fetch_bitvavo_balance gedaan.
 
     # v5_potje_mark2market_001 — haal live tickers op voor open posities (mock + live)
     # Bug B4: potje-waarde stijgt niet mee met tokenwaarde. Fix: bereken
@@ -898,21 +955,31 @@ def get_summary(user_id: str) -> Dict:
     overflow = user.get("overflow_pool", 0.0)
 
     # Live Bitvavo balance + baseline P&L
+    # v6_pot_live_value_per_user_001 — alleen Spark + Willem hebben echte Bitvavo
+    HAS_REAL_BITVAVO = {"user-000", "user-001"}
     live_balance = None
     live_pnl = None
     baseline = None
-    try:
-        baseline_file = Path(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
-        baseline_data = load_json(baseline_file, default={})
-        baseline = baseline_data.get(user_id, {}).get("baseline_eur")
-        from modules.trade.monitor import fetch_bitvavo_balance
-        bv = fetch_bitvavo_balance(user_id)
-        if bv.get("success"):
-            live_balance = bv.get("total_eur")
-            if baseline is not None and live_balance is not None:
-                live_pnl = round(live_balance - baseline, 2)
-    except Exception:
-        pass
+    if user_id in HAS_REAL_BITVAVO:
+        try:
+            baseline_file = Path(__file__).parent.parent.parent / "data" / "trade" / "capital_baseline.json"
+            baseline_data = load_json(baseline_file, default={})
+            baseline = baseline_data.get(user_id, {}).get("baseline_eur")
+            from modules.trade.monitor import fetch_bitvavo_balance
+            bv = fetch_bitvavo_balance(user_id)
+            if bv.get("success"):
+                live_balance = bv.get("total_eur")
+                if baseline is not None and live_balance is not None:
+                    live_pnl = round(live_balance - baseline, 2)
+        except Exception:
+            pass
+    else:
+        # Non-Spark/Willem users: live_balance = som van JSON capital
+        # (zij delen Spark's Bitvavo niet rechtstreeks; hun "balance" is hun
+        #  potje-equity zoals in JSON bewaard). baseline = sum start-amounts.
+        live_balance = round(total_capital, 4)
+        baseline = round(START_AMOUNT * count, 4)
+        live_pnl = round(live_balance - baseline, 2)
 
     return {
         "pot_count": count,

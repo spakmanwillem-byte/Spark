@@ -571,6 +571,18 @@ async def update_monitor_markets(user_id: str, body: UpdateMarketsBody):
     return monitor.update_markets(body.markets)
 
 
+# v6_potje_market_distribution_001 — herverdeel bestaande potjes over user's markten
+@router.post("/potjes/redistribute/{user_id}")
+async def redistribute_potjes(user_id: str, body: UpdateMarketsBody = None):
+    """Verdeel alle gesloten potjes round-robin over user's markets.
+    Open posities blijven op hun huidige market staan (kan niet hot-swappen).
+    Als `markets` in body ontbreekt, wordt user's bots_registry markets gebruikt.
+    """
+    from .potjes import redistribute_potjes_across_markets
+    target = (body.markets if body else None)
+    return redistribute_potjes_across_markets(user_id, target)
+
+
 # v5_candle_hotswap_001 — wissel candle-interval (cycle) zonder restart
 class UpdateCandleBody(BaseModel):
     candle_interval: str

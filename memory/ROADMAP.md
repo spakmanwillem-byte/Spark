@@ -2,46 +2,50 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
-## 🟢 Redeploy-ready check — 2026-05-29
+## 🟢 Redeploy-ready check — 2026-05-29 (avond)
 
 ### ✅ Sessie 16 (2026-05-29 avond) — Trade-systeem dynamisch & multi-user echt
-- [x] 🪙 **ATOM toegevoegd aan watchlist** — 6e coin live (`WATCHLIST_COINS`, `LEARNING_COINS`, `ALL_MARKETS` in TraderPage)
-- [x] 🔗 **Bitvavo proxy via Spark** (v6_bitvavo_proxy_via_spark_001):
-  - `execute_real_trade()` + `fetch_bitvavo_balance()`: non-Spark users zonder eigen keys → fallback op Spark's keys
-  - Mock-fallback in `Monitor.start()` verwijderd → álle user-bots draaien echte mode
-  - Trade-log markeert `proxied_via_spark: True` voor audit
-  - Reden: Spark's Bitvavo-account is fysiek 1 account voor het hele systeem
-- [x] 🎯 **Echte fill-prices voor potjes** (v6_pot_real_price_001):
-  - BUY: `entry_price` op potje = Bitvavo's `avg_price`, niet ticker-snapshot
-  - SELL: `close_pot` krijgt Bitvavo's `avg_price`
-  - Resultaat: trail-percentage, exit-min-netto en P&L kloppen tot op cent
-- [x] 🎯 **Potje blijft op zijn coin** (v6_pot_market_match_001):
-  - `get_available_pot(prefer_market=...)` zoekt eerst potje van diezelfde markt
-  - Voorkomt round-robin coin-wisselingen midden in trade-flow
-  - Gehookt in monitor `_run_market_cycle` + `quick_buy_potje`
-- [x] 📊 **Per-user stats correct** (v6_pot_live_value_per_user_001):
-  - Niet-Spark users zien eigen JSON-aandeel ipv gedeelde €345 pool
-  - Spark + Willem zien live Bitvavo balance + baseline P&L
-- [x] ⚖️ **Dynamische €10-schijven herbalancering** (v6_dynamic_pot_split_001):
-  - Nieuw endpoint `POST /api/trade/potjes/rebalance-from-bitvavo`
-  - Regel per coin: `n × €10 trade-pots voor Willem` + `restje (< €10) als locked anchor voor Spark`
-  - Open posities preserved (vastgezet in actieve trade)
-  - Idempotent — kan altijd opnieuw aangeroepen worden
-  - **Auto-trigger**: na elke `close_pot()` automatisch herbalanceerd
-  - Verificatie: €90.50 in potjes = €90.50 Bitvavo crypto, exact match
-- [x] 🔒 **Lock-enforcement bevestigd**:
-  - `open_pot()` returnt `{}` voor locked potjes (BLOCK log)
-  - `get_available_pot()` skipt anchors in iteratie
-  - `close_pot()` weigert sluiten van locked anchors
-  - Test E2E in preview-data: pot-001 BCH-anchor → BLOCK, fallback naar pot-007 ✅
-- [x] 📥 **Productie-data geïntegreerd in preview**:
-  - 22 users, 36 ROAR in omloop, 5 actieve trade-users
-  - Backup: `/app/backups/preview_before_prodsync_20260529_180040/`
-- [x] 🔧 **Andere helpers** (sessie 16):
-  - `ensure_spark_trade_pots()` (optionele helper, niet meer auto-gehookt)
-  - `redistribute_potjes_across_markets()` voor handmatige verdeling
 
-**Status**: Stabiel. Lock-enforcement geverifieerd. Som potjes = Bitvavo. Klaar voor redeploy.
+**🎯 Werkende eindstaat na sessie 16:**
+| User | Tokens | Anchors | Trade-pots | Werkend |
+|---|---|---|---|---|
+| Spark | 10 | 6 (BCH/BTC/ETH/SOL/ADA/ATOM) | 4 vrij | ✅ |
+| Willem | 21 | 0 | 21 vrij | ✅ E2E getest |
+| Gijs | 2 | 0 | 2 vrij | ✅ E2E getest |
+| Roadkill / Lotus / Gerben | 1 elk | 0 | 1 elk | ✅ E2E getest |
+
+**🎯 Bitvavo ↔ Anchors synced (live):**
+- Bitvavo €376.55 = €314.01 cash + 6 coin-anchors (BCH €9.96 · BTC €10.03 · ETH €9.92 · SOL €9.91 · ADA €10.05 · ATOM €12.67)
+- Som Spark anchors = €62.54 = Bitvavo crypto (exact match)
+- ROAR price = €376.53 / 36 = €10.46 per token
+- Market Cap = €376.56
+
+**Belangrijkste fixes:**
+- [x] 🪙 **ATOM** toegevoegd aan watchlist (6e coin)
+- [x] 🔗 **Bitvavo proxy via Spark** (v6_bitvavo_proxy_via_spark_001): non-Spark users zonder eigen keys → fallback op Spark's keys. Trade-log markeert `proxied_via_spark`. Mock-fallback verwijderd.
+- [x] 🎯 **Echte fill-prices** (v6_pot_real_price_001): entry_price en close_pot gebruiken Bitvavo's `avg_price` ipv ticker.
+- [x] 🎯 **Potje blijft op zijn coin** (v6_pot_market_match_001): `get_available_pot(prefer_market=...)` zoekt eerst potje van diezelfde markt.
+- [x] 📊 **Per-user stats** (v6_pot_live_value_per_user_001): non-Spark users zien eigen JSON-aandeel.
+- [x] ⚖️ **Token = Potje model** geherbevestigd (sessie 16 evening): 1 ROAR = 1 trade-pot van €10. Capital is claim op gedeelde Bitvavo, niet vastgezette coin. `rebalance_from_bitvavo()` endpoint blijft beschikbaar maar auto-trigger uit close_pot is uit (botste met token-model).
+- [x] 🔒 **Lock-enforcement bevestigd**: open/close/get-available respecteren `pot_locked=True`. E2E getest.
+- [x] 💰 **Bitvavo Staking adjustment** (v6_bitvavo_staking_manual_001): handmatige veld voor Spaar/Staking-deel (`bitvavo_extras.json`). Endpoint `POST /api/shop/token/bitvavo-staking`. Telt mee in `spark_core_value` en `bitvavo_base_locked_eur`.
+- [x] 🔧 **Force-sell endpoint** (v6_force_sell_real_001): doet nu echte Bitvavo SELL voor admin-close.
+- [x] 🔧 **Bitvavo amount format fix** (v6_sell_amount_decimals_001): 8-decimal string ipv wetenschappelijke notatie.
+- [x] 📊 **Dashboard breakdown**: `bitvavo_cash_eur` + `bitvavo_base_locked_eur` (= coins, groeit met prijs) + `bitvavo_staking_eur` (handmatig).
+- [x] 🏷️ **Admin/Analytics bots-view fix**: `pot_count` altijd gezet (was None), markets uit registry overlay (v6_admin_bots_potcount_fix_001 + v6_admin_bots_markets_fix_001).
+- [x] 🚫 **Spark auto-fill UIT** (v6_spark_no_autofill_001): Spark krijgt geen automatische 15 base-pots meer. Voorkomt fantoom-potjes.
+- [x] 🧹 **Clean Slate '1 juni 2026'**: accounting + financial + wallet + spark_kasboek + roar transactions allemaal op 0. ROAR balances behouden. Capital baseline gereset. Trade-logs gearchiveerd in `data/_backups/clean_slate_1juni_2026/` en `data/_backups/post_user_bot_tests_29mei/`.
+- [x] 📥 **Productie-data sync** (sessie 16 morning): 22 users + 36 ROAR + alle relaties uit prod-zip. Backup: `data/_backups/preview_before_prodsync_20260529_180040/`.
+- [x] 🐛 **Gerben sync**: user toegevoegd met basis-avatar (gallery:31c6dc04a2fd).
+- [x] 🐛 **joel123/Jayden avatar+gradatie sync** uit productie.
+- [x] 📈 **Wallet line-chart fluctuatie** (v6_price_chart_density_001): 5-min snapshot interval ipv 1u, ±1% padding, auto-refresh 30s, "+" knop voor manual snapshot, delta-info in header. Snapshot bucket dedupe-bug gefixt (laatste prijs wint).
+- [x] 🤝 **5/6 users E2E getest** met echte BUY+SELL via Bitvavo proxy. Spark ATOM-restje was dust (1.47 ATOM < min-order 2.81), administratief gesloten.
+
+**Bekend / aan te scherpen:**
+- Bitvavo Staking API direct lezen ipv handmatige veld (kost extra endpoint research)
+- Capital-row in stats kan beter splitsen tussen "claim op cash" vs "echte coin-waarde"
+
+**Status**: Stabiel. Klaar voor redeploy.
 
 ### ✅ Sessie 15 (2026-05-29, vervolg) — D&D Spark World
 - [x] 🎭 **Body Slots** (v6_body_slots_001):

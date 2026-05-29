@@ -142,6 +142,10 @@ app.include_router(accounting_router, prefix="/api")
 
 # v5_closing_flow_001 — De Boekhouder closing-flow (terlens-terug-boek)
 from modules.boekhouder.routes import router as boekhouder_router
+
+# v6_boekhouder_weekrapport_001 — Wekelijks rapport
+from modules.boekhouder.weekly_report import router as boekhouder_weekly_router
+app.include_router(boekhouder_weekly_router, prefix="/api")
 app.include_router(boekhouder_router, prefix="/api")
 
 # v5_spark_kasboek_001 — Spark's eigen kasboek (BTW-afroming)

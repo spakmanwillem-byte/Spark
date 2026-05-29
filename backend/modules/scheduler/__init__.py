@@ -252,6 +252,33 @@ async def _maybe_staking_growth():
         print(f"[scheduler] staking growth failed: {ex}")
 
 
+async def _maybe_weekly_report():
+    """v6_boekhouder_weekrapport_001 (sessie 14) — Zondagavond rond 20:00 het
+    wekelijks Boekhouder-rapport sturen. Idempotent: 1 keer per 6+ dagen.
+    """
+    now = datetime.now(timezone.utc)
+    # Trigger-window: zondag (weekday=6) tussen 20:00 en 22:00 UTC
+    if now.weekday() != 6 or now.hour < 20 or now.hour >= 22:
+        return
+    state = _load_state()
+    last_str = state.get("weekly_report_last")
+    if last_str:
+        try:
+            last = datetime.fromisoformat(last_str.replace("Z", "+00:00"))
+            if (now - last).total_seconds() < 6 * 86400:  # < 6 dagen geleden
+                return
+        except Exception:
+            pass
+    try:
+        from modules.boekhouder.weekly_report import send_weekly_report
+        send_weekly_report(also_community=False)
+        state["weekly_report_last"] = now.isoformat()
+        _save_state(state)
+        print(f"[scheduler] weekly boekhouder report sent")
+    except Exception as ex:
+        print(f"[scheduler] weekly report failed: {ex}")
+
+
 async def scheduler_loop():
     """Hoofdloop — draait elke 5 minuten."""
     print("[scheduler] v6_scheduler_001 gestart (interval 5min)")
@@ -261,6 +288,7 @@ async def scheduler_loop():
             await _maybe_error_bark()
             await _maybe_roar_price_snapshot()
             await _maybe_staking_growth()
+            await _maybe_weekly_report()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

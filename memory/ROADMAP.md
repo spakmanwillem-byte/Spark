@@ -47,6 +47,13 @@
   - 3 endpoints: `/trade/growth/run`, `/trade/growth/status`, `/trade/growth/auto-anchor`
   - Scheduler-hook dagelijks check (intern 30-dag rente-interval)
   - **Live getest**: €25.50 overflow → 5 anchors +€0.38 elk + 2 mints + €3.59 rest. Reset naar clean state.
+- [x] 📅 **Boekhouder weekrapport** (v6_boekhouder_weekrapport_001):
+  - `modules/boekhouder/weekly_report.py` — verzamelt anchor-groei + overflow + mints + trade-PnL + ROAR-activiteit
+  - Stuurt zondagavond 20:00-22:00 UTC een PM naar admin met human-readable rapport
+  - Projectie: "Bij dit tempo verdienen anchors zichzelf in N maanden terug"
+  - 3 endpoints: `/boekhouder/weekly/preview` (UI), `/run` (admin-trigger), `/history` (laatste 20 rapporten)
+  - History archief in `data/boekhouder/weekly_reports.json` (max 200 entries = ~4 jaar)
+  - **Live getest**: preview-endpoint genereert mooie output, idle-state correct herkend ("Nog geen tempo te meten")
 
 ### Conceptueel kader (uit deze sessie)
 - **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test

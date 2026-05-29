@@ -65,8 +65,8 @@
     ],
     "laatst_bewerkt": "2026-05-29T08:46:23.655950+00:00",
     "version": "v6.1",
-    "versie": "v6.1 (sessie 14, 29 mei 2026)",
-    "laatst_bijgewerkt": "2026-05-29T08:46:23.655959+00:00",
+    "versie": "v6.2 (sessie 14 final, 29 mei 2026)",
+    "laatst_bijgewerkt": "2026-05-29T09:27:43.777497+00:00",
     "kern_principes": [
       {
         "titel": "Privacy by design",
@@ -85,7 +85,8 @@
       "ROAR_token": {
         "wat": "ROAR is Spark's interne token. Dynamische prijs = Bitvavo balance ÷ circulating supply. Nu €10.11/token bij 22 circulating tokens.",
         "fase": "Gift-fase (0% BTW): tokens worden verkocht als ondersteuning, niet als investering. Bij overgang naar verkoop-fase wordt 21% BTW geactiveerd.",
-        "gebruik": "Tokens geven toegang tot bot-tijd, premium features, of kunnen worden teruggekocht voor cash (sell-back endpoint)."
+        "gebruik": "Tokens geven toegang tot bot-tijd, premium features, of kunnen worden teruggekocht voor cash (sell-back endpoint).",
+        "nieuw_sessie14": "Sinds 29 mei: (1) elke koop kan optioneel via een specifieke shop lopen (`via_shop_id` parameter) — die shop krijgt dan 2% commissie als referral. (2) Wekelijks krijgen alle token-houders een PM-rapport van de Boekhouder met groei + projectie."
       },
       "trade_systeem": {
         "structuur": "Elke user (Spark/Willem/Gijs) heeft 15 potjes verdeeld over coins (ADA/BCH/BTC/ETH/SOL).",
@@ -106,6 +107,12 @@
       "spark_brein": {
         "lagen": "Identiteit (kernwaarden, normen) · Spark Bijbel · Capabilities · Synapslaag (90+ containers auto-gedocumenteerd) · Emotie Detectie (4 emoties) · Emotie Routering (7-laags pipeline → 4 behaviors).",
         "observeren": "Synapse leest zichzelf: elke container weet wie het roept (callers) en wat het wijzigt (mutaties). Elke save_json wordt getouched."
+      },
+      "staking_growth": {
+        "wat": "5 staking-anchors (1 per coin) groeien autonoom uit overflow_pool van trade-winsten.",
+        "rente": "1.5% per anchor per maand. Bv: €50 anchors → €0.75/maand groei.",
+        "auto_mint": "Bij overflow_pool >= €10 wordt automatisch een nieuw trade-potje geminted.",
+        "transparant": "Wekelijks rapport zondagavond toont anchor-capital, overflow-delta, mints, trade-PnL, ROAR-activiteit, en projectie 'bij dit tempo verdienen anchors zichzelf in N maanden terug'."
       }
     },
     "data_eigendom": {

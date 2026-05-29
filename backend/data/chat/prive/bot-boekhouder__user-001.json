@@ -366,9 +366,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • BCH @ €262.8400\nPotje: pot-006\nInleg: €5.08\nEigenaar: Spark",
       "ts": "2026-05-29T07:48:08.077846+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "BCH-EUR",
@@ -383,9 +381,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • BCH @ €262.8400\nPotje: pot-007\nInleg: €5.08\nEigenaar: Spark",
       "ts": "2026-05-29T07:48:15.344230+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "BCH-EUR",
@@ -400,9 +396,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • BCH @ €262.8400\nPotje: pot-002\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:48:32.238480+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "BCH-EUR",
@@ -417,9 +411,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • BCH @ €262.8400\nPotje: pot-003\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:48:35.548758+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "BCH-EUR",
@@ -434,9 +426,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • BTC @ €62979.0000\nPotje: pot-004\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:48:45.518401+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "BTC-EUR",
@@ -451,9 +441,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • ETH @ €1720.3900\nPotje: pot-005\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:48:49.882673+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "ETH-EUR",
@@ -468,9 +456,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • ADA @ €0.2010\nPotje: pot-006\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:49:01.816271+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "ADA-EUR",
@@ -485,9 +471,7 @@
       "to_user_id": "user-001",
       "text": "📥 BUY • SOL @ €70.3830\nPotje: pot-007\nInleg: €5.08\nEigenaar: user-001",
       "ts": "2026-05-29T07:49:07.440904+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_buy",
       "market": "SOL-EUR",
@@ -502,9 +486,7 @@
       "to_user_id": "user-001",
       "text": "📤 SELL • BCH @ €262.2900 ✅\nPotje: pot-003\nEigenaar: Spark\nNetto winst: €+0.1244\n",
       "ts": "2026-05-29T07:56:45.382698+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "boekhouder_sell",
       "market": "BCH-EUR",
@@ -513,6 +495,36 @@
       "netto": 0.12443612824391947,
       "spark_fee": 0.0,
       "user_id": "user-000"
+    },
+    {
+      "id": "pm-3f43184a",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "💰 Nieuwe Tikkie-aanvraag #tk-5a23c\n\n👤 User: De Willem (user-001)\n✏️  Naam ingevoerd: De Willem\n💶 Bedrag: €20.20\n\nCheck Tikkie-app of het bedrag binnen is en bevestig in Wallet → 📥 (admin Tikkie-aanvragen).",
+      "ts": "2026-05-29T09:24:28.498331+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "tikkie_request",
+      "topup_id": "tk-5a23c57fad",
+      "topup_ref": "#tk-5a23c",
+      "is_bot": true
+    },
+    {
+      "id": "pm-630cf9f3",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "✅ Je Tikkie-storting #tk-5a23c is bevestigd.\n\n💶 Bedrag: €20.20\n💳 Vrij saldo: €20.20\n\n💬 staat op bitvavo",
+      "ts": "2026-05-29T09:27:42.819927+00:00",
+      "unread_by": [
+        "user-001"
+      ],
+      "system": true,
+      "kind": "tikkie_confirmed",
+      "topup_id": "tk-5a23c57fad",
+      "topup_ref": "#tk-5a23c",
+      "is_bot": true
     }
   ]
 }

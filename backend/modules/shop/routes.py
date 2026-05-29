@@ -178,6 +178,7 @@ def get_dynamic_price():
 class BuyTokenRequest(BaseModel):
     amount_eur: Optional[float] = None
     amount_tokens: Optional[int] = None  # Alleen hele tokens
+    via_shop_id: Optional[str] = None  # v6_shop_referral_token_001 — als ROAR via shop wordt verkocht, krijgt die shop 2% commissie
 
 
 class SellTokenRequest(BaseModel):
@@ -356,6 +357,38 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
             price_per_token=price, ref_id=tx["id"],
             is_anchor=is_anchor, btw_pct=0.0,
         )
+        # v6_shop_referral_token_001 — als verkoop via shop liep, boek 2% commissie op shop_kasboek
+        # (alleen voor klanten, niet voor anker-aankopen die zelf de fundering vormen)
+        if (not is_anchor) and getattr(req, "via_shop_id", None):
+            shop_id = req.via_shop_id
+            try:
+                # Vind shop_kasboek_id via shops.json
+                _ws_file = DATA_DIR / "shop" / "shops.json"
+                shops_data = load_json(_ws_file, default={"shops": []})
+                shop = next((s for s in shops_data.get("shops", []) if s.get("id") == shop_id), None)
+                shop_kasboek_id = shop.get("kasboek_id") if shop else None
+                if shop_kasboek_id and shop_kasboek_id != "spark_core":
+                    commissie = round(amount_eur * 0.02, 2)
+                    if commissie > 0:
+                        acc = load_json(ACCOUNTING_FILE, default={"transactions": []})
+                        acc["transactions"].append({
+                            "id": str(uuid.uuid4()),
+                            "type": "income",
+                            "category": "Referral",
+                            "amount": commissie,
+                            "description": f"ROAR-koop via {shop_id} ({amount_tokens} tokens à €{price:.2f})",
+                            "entity_id": shop_kasboek_id,
+                            "date": datetime.now(timezone.utc).isoformat(),
+                            "btw_percentage": 0,
+                            "btw_amount": 0,
+                            "created_at": datetime.now(timezone.utc).isoformat(),
+                            "tx_ref": f"token_buy_referral_{tx['id']}",
+                            "source": "auto_hook",
+                        })
+                        save_json(ACCOUNTING_FILE, acc)
+                        print(f"[token_buy] shop-referral 2% (€{commissie}) → {shop_kasboek_id}")
+            except Exception as ex:
+                print(f"[token_buy] shop-referral failed (non-blocking): {ex}")
     except Exception as ex:
         print(f"[token_buy] accounting-hook failed (non-blocking): {ex}")
 

@@ -197,20 +197,50 @@ def format_report_text(report: Dict) -> str:
     return "\n".join(lines)
 
 
-def send_weekly_report(also_community: bool = False) -> Dict:
-    """Bouw + verstuur + archiveer rapport. Return dict met outcome."""
+def send_weekly_report(also_community: bool = False, also_token_holders: bool = True) -> Dict:
+    """Bouw + verstuur + archiveer rapport.
+
+    v6_weekrapport_token_holders_001 (sessie 14) — `also_token_holders=True` stuurt
+    het rapport ook als PM naar iedereen die >=1 ROAR token bezit. Idee van Willem:
+    "iedereen die een token heeft krijgt denk ik die output via bot". Zo voelen
+    holders de groei van hun investering, zonder gedwongen app-login.
+    """
     from modules.boekhouder.service import _send_dm, _post_community
     report = build_weekly_report()
     text = format_report_text(report)
+    recipients = [ADMIN_USER]
 
     # 1. PM naar admin
     try:
         _send_dm(text, kind="boekhouder_weekly_report",
                  extra={"report": report}, recipient_id=ADMIN_USER)
     except Exception as e:
-        print(f"[weekly-report] PM failed: {e}")
+        print(f"[weekly-report] PM admin failed: {e}")
 
-    # 2. Optioneel community-post (kortere versie)
+    # 2. v6_weekrapport_token_holders_001 — PM aan alle ROAR token-houders
+    holder_count = 0
+    if also_token_holders:
+        try:
+            ROAR = DATA / "roar" / "roar_balances.json"
+            roar = load_json(ROAR, default={"balances": {}})
+            balances = roar.get("balances", {})
+            # Spark (treasury) en admin zelf overslaan (admin krijgt 'm al hierboven)
+            ANCHOR_USERS = {"user-000", ADMIN_USER}
+            for uid, bal in balances.items():
+                tokens = bal.get("amount", 0) if isinstance(bal, dict) else bal
+                if tokens >= 1 and uid not in ANCHOR_USERS:
+                    try:
+                        _send_dm(text, kind="boekhouder_weekly_report",
+                                 extra={"report": report, "as_holder": True},
+                                 recipient_id=uid)
+                        recipients.append(uid)
+                        holder_count += 1
+                    except Exception as e:
+                        print(f"[weekly-report] PM holder {uid} failed: {e}")
+        except Exception as e:
+            print(f"[weekly-report] holder-broadcast failed: {e}")
+
+    # 3. Optioneel community-post
     if also_community:
         try:
             anchors_total = report["anchors"]["total_capital"]
@@ -222,14 +252,16 @@ def send_weekly_report(also_community: bool = False) -> Dict:
         except Exception as e:
             print(f"[weekly-report] community-post failed: {e}")
 
-    # 3. Archiveer
+    # 4. Archiveer
     archive = load_json(REPORTS_FILE, default={"reports": []})
+    report["recipients"] = recipients
     archive["reports"].append(report)
-    if len(archive["reports"]) > 200:  # max ~4 jaar
+    if len(archive["reports"]) > 200:
         archive["reports"] = archive["reports"][-200:]
     save_json(REPORTS_FILE, archive)
 
-    return {"success": True, "report": report, "text": text}
+    return {"success": True, "report": report, "text": text,
+            "recipients_count": len(recipients), "holder_pms": holder_count}
 
 
 # ============================================================
@@ -253,6 +285,7 @@ def _is_admin(viewer_id: str) -> bool:
 class TriggerRequest(BaseModel):
     viewer_id: str
     also_community: bool = False
+    also_token_holders: bool = True
 
 
 @router.post("/run")
@@ -260,7 +293,10 @@ async def run_endpoint(req: TriggerRequest):
     """Forceer weekly report nu (admin-only). Test-trigger."""
     if not _is_admin(req.viewer_id):
         raise HTTPException(403, "Alleen admin (gradatie ≤ 2)")
-    return send_weekly_report(also_community=req.also_community)
+    return send_weekly_report(
+        also_community=req.also_community,
+        also_token_holders=req.also_token_holders,
+    )
 
 
 @router.get("/preview")

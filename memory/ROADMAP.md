@@ -47,13 +47,19 @@
   - 3 endpoints: `/trade/growth/run`, `/trade/growth/status`, `/trade/growth/auto-anchor`
   - Scheduler-hook dagelijks check (intern 30-dag rente-interval)
   - **Live getest**: €25.50 overflow → 5 anchors +€0.38 elk + 2 mints + €3.59 rest. Reset naar clean state.
-- [x] 📅 **Boekhouder weekrapport** (v6_boekhouder_weekrapport_001):
+- [x] 📅 **Boekhouder weekrapport** (v6_boekhouder_weekrapport_001 + v6_weekrapport_token_holders_001):
   - `modules/boekhouder/weekly_report.py` — verzamelt anchor-groei + overflow + mints + trade-PnL + ROAR-activiteit
   - Stuurt zondagavond 20:00-22:00 UTC een PM naar admin met human-readable rapport
+  - **+ Alle ROAR token-houders krijgen PM** (idee Willem): bot stuurt rapport aan iedereen met >=1 token, holders voelen de groei van hun investering zonder app-bezoek
   - Projectie: "Bij dit tempo verdienen anchors zichzelf in N maanden terug"
-  - 3 endpoints: `/boekhouder/weekly/preview` (UI), `/run` (admin-trigger), `/history` (laatste 20 rapporten)
-  - History archief in `data/boekhouder/weekly_reports.json` (max 200 entries = ~4 jaar)
-  - **Live getest**: preview-endpoint genereert mooie output, idle-state correct herkend ("Nog geen tempo te meten")
+  - 3 endpoints: `/preview` (UI), `/run` (admin-trigger met `also_token_holders` toggle), `/history`
+  - History archief in `data/boekhouder/weekly_reports.json` (max 200 entries = ~4 jaar) + recipients-tracking
+- [x] 🛍️ **Token-koop via shop referral** (v6_shop_referral_token_001):
+  - `BuyTokenRequest.via_shop_id` optionele parameter
+  - Als ROAR via een specifieke shop wordt verkocht (bv. Roadkillshop), krijgt die shop **2% commissie** in z'n eigen kasboek (`Referral`-categorie)
+  - Alleen voor klanten, niet voor anker-aankopen (die zijn fundering)
+  - Stille-fail (non-blocking)
+- [x] 📜 **Disclaimer v6.2** — `staking_growth` sectie + `nieuw_sessie14` shop-referral & holder-newsletter
 
 ### Conceptueel kader (uit deze sessie)
 - **Emotie Detectie** (`/spark/emotions`, iedereen) = "Wat voelt user nú?" → 4 emoties (blij/boos/bang/bedroefd) + state + test
@@ -98,7 +104,12 @@
 - [ ] Legacy `spark_kasboek.json` schrijfpaden uitfaseren (alleen-lezen + migratie-script)
 
 ### Open daarna (P1+)
-- [ ] 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan` (data klaar, 45 dedupe-kansen klaar voor 1-klik merge)
+- [ ] **📚 Help + Commands update + spliten** (afgesproken, sessie 15):
+  - Bestaande `help_g{n}.json` per gradatie staan nog niet voor v6-features (staking-growth, weekrapport, shop-referral, 5 anchors, tag-merge, ...)
+  - Plan: split per module-area (trade-help / shop-help / kb-help / boekhouding-help) ipv 1 grote per-gradatie file
+  - Auto-gegeneer uit command_registry tags
+  - Cluster D #cmd-gradatie-files + #cmd-grad-lock + #cmd-priv-fallback bouwen hier verder op
+- [ ] 1-klik UI **#kb-curation-dash** bovenop `/api/kb/v2/tags/scan`
 - [ ] **🌱 Staking Growth Engine** (nieuw na sessie 14):
   - Per anchor maandelijks 1-2% rente uit overflow_pool → anchor.capital groei
   - Auto-mint nieuw potje bij `overflow_pool >= €10`

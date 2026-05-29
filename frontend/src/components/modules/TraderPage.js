@@ -202,7 +202,9 @@ export function TraderPage({ onNavigate }) {
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
-    const liveTimer = setInterval(loadLiveData, 30000);
+    // v6_snelhandel_faster_refresh_001 (sessie 14) — was 30s, nu 10s zodat
+    // "Live prijs" in Snel Handelen panel meebeweegt met market (gevoel van actueel).
+    const liveTimer = setInterval(loadLiveData, 10000);
     return () => clearInterval(liveTimer);
   }, [loadLiveData]);
 
@@ -886,8 +888,12 @@ export function TraderPage({ onNavigate }) {
                     {(() => {
                       const list = Array.isArray(potjes?.potjes) ? potjes.potjes : (Array.isArray(potjes) ? potjes : []);
                       const sorted = [...list].sort((a, b) => (a.nummer || a.index || 0) - (b.nummer || b.index || 0));
-                      const freePot = sorted.find(p => !p?.position?.is_open);
-                      const amt = freePot ? (freePot.current_size || freePot.capital || freePot.starting_size || 5.08) : null;
+                      // v6_snelhandel_skip_lock_001 (sessie 14) — sla locked anchors over
+                      // (anders pakt UI pot-001 ADA-anker als "volgende vrij potje")
+                      const freePot = sorted.find(p => !p?.position?.is_open && !p?.pot_locked);
+                      // v6_snelhandel_live_capital_001 — gebruik echte capital (€9.95 / €10.11 etc),
+                      // niet de outdated 5.08 fallback.
+                      const amt = freePot ? (freePot.capital || freePot.current_size || freePot.starting_size || 10.0) : null;
                       return freePot
                         ? <>€{amt.toFixed(2)} <span className="text-[10px] text-slate-500">(potje {freePot.nummer || freePot.index + 1})</span></>
                         : <span className="text-amber-400 text-xs">Alle potjes bezet</span>;

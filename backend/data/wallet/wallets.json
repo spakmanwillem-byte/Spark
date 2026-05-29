@@ -1,9 +1,9 @@
 {
   "wallets": {
     "user-001": {
-      "balance": 9.18,
+      "balance": 10.51,
       "created_at": "2026-03-29T20:00:00+00:00",
-      "total_deposited": 70.7,
+      "total_deposited": 72.03,
       "total_withdrawn": 0,
       "total_donated": 0,
       "wallet_id": "user-001",
@@ -306,6 +306,23 @@
       "description": "1 ROAR gekocht @ 11.02",
       "timestamp": "2026-05-29T09:29:26.907472+00:00",
       "status": "completed"
+    },
+    {
+      "id": "72666ebd-acab-4ac6-bc39-fbdc1a152d51",
+      "user_id": "user-001",
+      "type": "deposit",
+      "amount": 1.33,
+      "status": "completed",
+      "message": "Tikkie tk-22d0b — naam: De Willem",
+      "created_at": "2026-05-29T10:36:10.860943+00:00",
+      "payment_info": {
+        "method": "tikkie",
+        "topup_id": "tk-22d0b4bc65"
+      },
+      "split": {
+        "free": 1.33,
+        "potje": 0.0
+      }
     }
   ]
 }

@@ -24756,11 +24756,47 @@
         "session_id": "default",
         "gesprek_nummer": 951
       }
+    },
+    {
+      "id": "conv-c3da30bc",
+      "timestamp": "2026-05-29T17:21:14.301448+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 6 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 952
+      }
+    },
+    {
+      "id": "conv-dfdb378e",
+      "timestamp": "2026-05-29T17:21:14.340603+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 953
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 951,
-    "last_updated": "2026-05-29T10:30:55.266285+00:00"
+    "total_conversations": 953,
+    "last_updated": "2026-05-29T17:21:14.340603+00:00"
   }
 }

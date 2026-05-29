@@ -5,7 +5,7 @@
       "description": "Voor en na elke functie in het stripten een log, zodat Spark ook intern ziet wat werkt. anders mist hij informatie bij het analyseren",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-26T16:19:35.696876+00:00",
       "created_by_id": "user-001",
       "created_by_naam": "De Willem",
@@ -16,14 +16,18 @@
           "by": "user-001",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v6_traced_rollout_001/002",
+      "resolution_note": "@traced decorator uitgerold over auth/login+logout, trade buy/start/stop, shop-gift, KB v2 mutations. Pre/post/error JSON-Lines logs per module, 28-dagen retentie. Browser in Beheer→Logs."
     },
     {
       "id": "dc234312-5022-42c1-baee-0fe09dc2b55b",
       "description": "Als ik op een kennis kaart en 1 van de hoofd noden klik kan ik daarbinnen de kaart niet aanpassen. bv Weten",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-26T14:01:02.538519+00:00",
       "created_by_id": "user-001",
       "created_by_naam": "De Willem",
@@ -34,7 +38,11 @@
           "by": "user-001",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v6_kbv2_unify_001 + v6_kbv2_edit_inbox_001",
+      "resolution_note": "CardFormFields-component unified edit-flow voor alle lades + inbox. Bewerken-knop in CardDetail werkt nu in alle 4 hoofd-lades (Voelen/Spreken/Weten/Doen) en inbox."
     },
     {
       "id": "a70b36b5-c6d2-4826-a6f0-674906805151",
@@ -77,7 +85,7 @@
       "description": "buglijst opschonen",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-22T20:01:05.096549+00:00",
       "created_by_id": "user-001",
       "created_by_naam": "De Willem",
@@ -88,7 +96,11 @@
           "by": "user-001",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "sessie 14 cleanup",
+      "resolution_note": "Bug-lijst doorgelopen: 7 stilletjes opgeloste bugs afgevinkt met resolution-tag + datum. Bij elke afgevinkt: link naar tag-naam zodat traceerbaar."
     },
     {
       "id": "49cc4ebf-0835-4bda-b0f2-c419e41f57c6",
@@ -211,7 +223,7 @@
       "description": "om van gradatie 5 naar 6 te komen moet een user een token bezitten. Het idee is dat hij dan met die token een potje kan gebruiken in de trader. 1 roarr token is 1 potje. aantal potjes groet mee met vollume potjes. als een user zijn token mee wil laten draaien dan zet de gebruiker monitor aan. dan rouleert zijn potje mee. verder geen invloed. (mss andere indelind voor niet admin users in front. dus geen koop en sell wel log wanneer trader wat doet. hun potje kan een ander 2 kleuren combo hebben.",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-19T15:58:40.440736+00:00",
       "created_by_id": "user-1996fa59",
       "created_by_naam": "Roadkill",
@@ -222,7 +234,11 @@
           "by": "user-1996fa59",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v6_potje_per_token_001",
+      "resolution_note": "1 token = 1 potje regel live: non-Spark users krijgen 1 potje per ROAR-token. `sync_potjes_to_tokens()` bij buy, `trim_potjes_to_tokens()` bij sell/gift. Admin bulk-endpoint `/api/trade/potjes/sync-all-to-tokens` voor backfill. Spark blijft 10 base potjes houden (anker)."
     },
     {
       "id": "cfa76aec-bded-4ea2-af66-6e4ad96be5b6",
@@ -614,7 +630,7 @@
       "description": "Trader sell toetsen, daadwerkelijk verschil api balance en token.",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-24T14:05:47.489662+00:00",
       "created_by_id": "user-1996fa59",
       "created_by_naam": "Roadkill",
@@ -625,14 +641,18 @@
           "by": "user-1996fa59",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v6_trade_sell_balance_001",
+      "resolution_note": "Sell pre-check fetched actuele Bitvavo balance, clamp naar min(requested, actual)*0.999 om dust-rounding te voorkomen. Bij 0 balance → duidelijke error met base_asset. Trade-record bevat requested_amount + effective_amount voor traceability."
     },
     {
       "id": "bd1f9599-a7ce-4f05-94d7-b9eac5952e77",
       "description": "Bij poging aankoop inzet potje trader in Balance boven 1 potje gekocht saldo min. is error er was geen trade mogelijk",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-24T14:02:55.723836+00:00",
       "created_by_id": "user-1996fa59",
       "created_by_naam": "Roadkill",
@@ -643,7 +663,11 @@
           "by": "user-1996fa59",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v6_trade_minorder_001",
+      "resolution_note": "Buy pre-check: bij amount_eur < min_quote → vriendelijke error met tip (geen crash meer op SOL/BTC). get_market_min_quote(market) cached Bitvavo /v2/markets minimums met fallback (BTC/ETH/SOL/ADA = €5)."
     },
     {
       "id": "fc780124-f540-41ef-b12b-45fd664ecefc",
@@ -742,7 +766,7 @@
       "description": "Gaat verbanden knowledge graph goed. ivm kb-v2",
       "when": null,
       "page": null,
-      "status": "nieuw",
+      "status": "opgelost",
       "created_at": "2026-05-24T13:05:08.164457+00:00",
       "created_by_id": "user-001",
       "created_by_naam": "De Willem",
@@ -753,7 +777,11 @@
           "by": "user-001",
           "note": null
         }
-      ]
+      ],
+      "resolved_at": "2026-05-29T07:47:48.494427+00:00",
+      "resolved_by": "sessie-14-cleanup",
+      "resolution_tag": "v5_kbv2_graph_001",
+      "resolution_note": "sync_service.rebuild_graph_full scant nu v1 (5288) + v2 lades (250+329+1071+632) + inbox (3007) = 10577+ nodes / 65981+ edges. v2-nodes krijgen type=knowledge_v2, lade, lade_color. Edges via shared tags mengen v1+v2 nodes."
     },
     {
       "id": "611b114c-4c79-4538-8783-03cd2386e429",

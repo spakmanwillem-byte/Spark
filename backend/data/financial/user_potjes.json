@@ -348,7 +348,7 @@
           "position": {
             "is_open": true,
             "entry_price": 257.79,
-            "highest_price": 261.52,
+            "highest_price": 262.83,
             "trailing_active": true,
             "entry_time": "2026-05-28T17:27:21.724710+00:00",
             "qty": 0.03874402,
@@ -451,25 +451,35 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 262.84,
+            "highest_price": 262.84,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-29T07:48:08.068952+00:00"
           },
-          "market": "EUR",
+          "market": "BCH-EUR",
           "assigned_market": null,
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-28T17:43:02.272429+00:00",
-          "last_action": null,
+          "last_action": "BUY @ €262.84",
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:08.068952+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "a97b775a",
+              "market": "BCH-EUR"
+            }
+          ]
         },
         {
           "id": "pot-007",
@@ -479,25 +489,35 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 262.84,
+            "highest_price": 262.84,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-29T07:48:15.339739+00:00"
           },
-          "market": "EUR",
+          "market": "BCH-EUR",
           "assigned_market": null,
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-28T17:43:02.272429+00:00",
-          "last_action": null,
+          "last_action": "BUY @ €262.84",
           "source": "spark_trade_slot_001",
           "slot_type": "trade_slot",
-          "origin_eur": 0.0
+          "origin_eur": 0.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:15.339739+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "eee4b022",
+              "market": "BCH-EUR"
+            }
+          ]
         },
         {
           "id": "pot-008",
@@ -726,7 +746,7 @@
       ],
       "baseline_eur": 51.4,
       "overflow_pool": 0.0,
-      "last_buy_cycle": null,
+      "last_buy_cycle": 5,
       "user_id": "user-000",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00",

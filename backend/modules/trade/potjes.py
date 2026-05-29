@@ -561,7 +561,8 @@ def get_potjes(user_id: str) -> Dict:
     return user
 
 
-def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool = False) -> Optional[Dict]:
+def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool = False,
+                       prefer_market: Optional[str] = None) -> Optional[Dict]:
     """
     Vind een potje dat mag kopen:
     - is_open = False (niet in positie)
@@ -571,17 +572,21 @@ def get_available_pot(user_id: str, current_cycle: int, skip_cycle_check: bool =
     v4_potje_quickbuy_002: skip_cycle_check voor user-initiated Quick Buy (user mag meerdere
     potjes openen in dezelfde monitor-cycle).
     v6_pot1_staking_lock_001: skip potjes met `pot_locked=True` (staking-anker).
+    v6_pot_market_match_001: als `prefer_market` opgegeven, geef voorrang aan een
+    vrij potje dat al voor deze markt is gemarkeerd (voorkomt dat een SOL-potje
+    plotseling BCH gaat kopen door round-robin). Fallback: eerste vrije potje.
     """
     user = get_potjes(user_id)
     if not skip_cycle_check and user.get("last_buy_cycle") == current_cycle:
         return None  # Al een potje gekocht in deze cycle (monitor-mode bescherming)
     sorted_potjes = sorted(user["potjes"], key=lambda p: (p.get("nummer") or (p.get("index", 99) + 1)))
-    for p in sorted_potjes:
-        if p.get("pot_locked"):
-            continue  # v6_pot1_staking_lock_001 — staking-anker overslaan
-        if not p["position"]["is_open"]:
-            return p
-    return None
+    free_potjes = [p for p in sorted_potjes
+                   if not p.get("pot_locked") and not p["position"]["is_open"]]
+    if prefer_market:
+        market_match = [p for p in free_potjes if p.get("market") == prefer_market]
+        if market_match:
+            return market_match[0]
+    return free_potjes[0] if free_potjes else None
 
 
 def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,

@@ -1031,28 +1031,35 @@ class MonitorService:
                         else:
                             result = execute_real_trade(self._user_id, market, "SELL", pot["capital"])
                         if result.get("success"):
-                            close_result = potjes_svc.close_pot(self._user_id, pot["id"], price)
-                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{price:.4f} netto €{close_result.get('netto', 0):+.4f}")
+                            # v6_pot_real_price_001 — gebruik Bitvavo's avg_price (echte fill)
+                            # ipv ticker `price` voor close. Voorkomt drift tussen UI en boek.
+                            real_price = result.get("trade", {}).get("price") or price
+                            close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
+                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}")
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
             if market_context:
                 buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
             if buy_decision["action"] == "BUY":
-                available = potjes_svc.get_available_pot(self._user_id, self._cycles)
+                # v6_pot_market_match_001 — geef voorrang aan een potje dat al voor deze market is gemarkeerd
+                available = potjes_svc.get_available_pot(self._user_id, self._cycles, prefer_market=market)
                 if available and self._auto_trade:
                     if self._use_mock:
                         result = execute_mock_trade(self._user_id, market, "BUY", available["capital"])
                     else:
                         result = execute_real_trade(self._user_id, market, "BUY", available["capital"])
                     if result.get("success"):
+                        # v6_pot_real_price_001 — entry_price uit Bitvavo fill (avg_price),
+                        # niet uit ticker. Trail-logica baseert op echte entry.
+                        real_entry = result.get("trade", {}).get("price") or price
                         potjes_svc.open_pot(
-                            self._user_id, available["id"], price, self._cycles,
+                            self._user_id, available["id"], real_entry, self._cycles,
                             trade_id=result.get("trade", {}).get("trade_id"),
                             amount_eur=available.get("capital"),
                             market=market,
                         )
-                        actions_this_cycle.append(f"BUY {available['id']} ({market}) @ €{price:.2f}")
+                        actions_this_cycle.append(f"BUY {available['id']} ({market}) @ €{real_entry:.2f}")
                 elif not available:
                     buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"
 

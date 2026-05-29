@@ -413,8 +413,10 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     monitor = get_monitor()
 
     # 1) Vind vrij potje (v4_potje_quickbuy_002: skip cycle-check, user-initiated mag meerdere)
+    # v6_pot_market_match_001 — voorkeur voor potje dat al deze market heeft
     current_cycle = monitor._cycles if hasattr(monitor, "_cycles") else 0
-    pot = potjes_svc.get_available_pot(user_id, current_cycle, skip_cycle_check=True)
+    pot = potjes_svc.get_available_pot(user_id, current_cycle, skip_cycle_check=True,
+                                        prefer_market=getattr(req, "market", None))
     if not pot:
         # Tel hoeveel er open zijn voor een betere foutmelding
         user_data = potjes_svc.get_potjes(user_id)

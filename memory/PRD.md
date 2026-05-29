@@ -1,6 +1,27 @@
 # Spark Core 2.0 — PRD
 
 
+## Completed (recent — 2026-05-29, sessie 17 / fork)
+
+- **v6_dnd_character_sheet_001** — Stormhaven-stijl D&D Character Sheet onder Avatar-tab:
+  - Nieuwe backend module `modules/dnd/character.py` met JSON-persistent character per user in `data/dnd/characters/{user_id}.json`.
+  - 4 endpoints: `GET /api/dnd/character/slots/config`, `GET /api/dnd/character/{user_id}`, `PATCH /api/dnd/character/{user_id}`, `POST /api/dnd/character/{user_id}/equip`, `POST /api/dnd/character/{user_id}/event`.
+  - Schema: titel, ondertitel, rang_titel, rang_progress_pct, klasse, beroep, fractie, locatie_naam, dorp, dorp_level, fog_of_war_pct, bio, currency (goud/gems/ziel), 18-slot equipment-map, event_feed ringbuffer (max 50).
+  - Frontend component `components/profile/DnDCharacterSheet.js` met 3-koloms layout:
+    - **Header bar**: banner-emblem, Titel + Ondertitel, Rang-progress bar, 6 rank-shields, 3 currency-pills (Goud/Gems/Ziel), Edit-knop.
+    - **Links**: 14+ body-slots rond SVG silhouet (Hoofd/Nek/Schouders/Armen/Trinket/Sjaal/Torso/Broek/Voeten/Riem/Handen/Ring L+R/Rugzak/Linkerhand/Rechterhand/Offhand/Pijl&Boog).
+    - **Midden**: Karakter portret + Niveau/XP-bar, Statistieken (Kracht/Behendigheid/Intelligentie/Conditie/Wilskracht/Geluk), Aanval & Verdediging (6 derived stats), Overig (Klasse/Beroep/Fractie/Locatie).
+    - **Rechts**: Inventory-grid (8x6 = 48 slots, leest uit bestaande `/api/inventory/{user_id}`), Huis & Opslag (Huis sloten + Meubel sloten), Dorp preview (Stormhaven met fog-of-war).
+    - **Onderaan**: Event Feed (ringbuffer met SYSTEEM/WERELD/GUILD/VERHAAL/HANDEL kleurcodering + input), Char Info-tabs (CHAR INFO/LORE/QUEST LOG/Notas), Mini-map.
+    - **Footer nav**: 8-knops bottom-tabs (OVERZICHT/STATISTIEKEN/TALENTEN/VAARDIGHEDEN/QUESTS/RELATIES/PRESTATIES/INSTELLINGEN — stub).
+  - Equip-modal per slot (naam + emoji-icon, uitrust-knop).
+  - Edit-modal voor character meta (titel/klasse/beroep/fractie/locatie/bio + currency).
+  - Stone/amber-tinted "perkament" UI met SVG silhouet + village-illustratie.
+  - **Persoonskaart verplaatst** van Avatar-tab naar Algemeen-tab (aura + inventory + items + achievements onder Sociale Media).
+  - Avatar/portret/galerij ingeklapt in `<details>` "Portret & Galerij beheren" sectie onder character sheet.
+  - Backend e2e geverifieerd (GET/PATCH/equip/unequip/event).
+
+
 ## Completed (recent — 2026-05-29, vervolg)
 
 - **v6_kb_curation_dashboard_001** — Tag-curatie UI bovenop `/api/kb/v2/tags/scan` + `/tags/merge`:

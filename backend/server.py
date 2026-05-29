@@ -211,6 +211,10 @@ app.include_router(spark_world_router, prefix="/api")
 from modules.dnd.spark_world_north import router as spark_world_north_router
 app.include_router(spark_world_north_router, prefix="/api")
 
+# v6_dnd_character_sheet_001 — Stormhaven-stijl character sheet (titel/rang/currency/equipment/event-feed)
+from modules.dnd.character import router as dnd_character_router
+app.include_router(dnd_character_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

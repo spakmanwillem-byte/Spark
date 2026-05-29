@@ -7,6 +7,7 @@ import {
   Image as ImageIcon, Sparkles, ChevronDown, ChevronRight, Trash2,
   Backpack, Award, Plus, Settings, Palette, Volume2, Link2, KeyRound, RotateCcw,
 } from 'lucide-react';
+import { DnDCharacterSheet } from './DnDCharacterSheet';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -104,6 +105,7 @@ export function UserProfilePage({ onNavigate }) {
                 user={user} userId={userId}
                 profile={extProfile} updateField={updateField}
                 persona={persona} setPersona={setPersona}
+                isAdmin={(user?.gradatie ?? 99) <= 2}
                 onSave={saveProfile} saving={saving} savedFlash={savedFlash}
               />
             )}
@@ -138,7 +140,7 @@ export function UserProfilePage({ onNavigate }) {
 // ============================================================
 // TAB: ALGEMEEN — basis user-info
 // ============================================================
-function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, onSave, saving, savedFlash }) {
+function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, isAdmin, onSave, saving, savedFlash }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   useEffect(() => {
@@ -214,6 +216,10 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
             placeholder="kanaal/handle" onChange={v => updateField('social_youtube', v)} />
         </div>
       </Card>
+
+      {/* v6_dnd_character_sheet_001 — Persoonskaart (stats + aura + inventory) verplaatst uit Avatar-tab.
+          Toont gradatie/level/XP, aura, inventory-items en achievements. */}
+      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
 
       <SaveBar onSave={onSave} saving={saving} savedFlash={savedFlash} />
     </div>
@@ -529,68 +535,83 @@ function AvatarTab({ userId, isAdmin }) {
 
   return (
     <div className="space-y-4">
-      {/* v4_inventory_001 — Persoonskaart (Stats + Inventory) */}
-      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
+      {/* v6_dnd_character_sheet_001 — Stormhaven-stijl D&D character sheet voor de Avatar-tab */}
+      <DnDCharacterSheet userId={userId} isAdmin={isAdmin} />
 
-      <Card title="Huidige Avatar" accent="#ec4899" icon={Camera}>
-        <div className="flex items-center gap-5">
-          <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center overflow-hidden flex-shrink-0">
-            {current.url ? (
-              <img src={`${API}${current.url}?t=${Date.now()}`} alt="" className="w-full h-full object-cover" />
-            ) : (
-              <User className="w-14 h-14 text-white" />
-            )}
+      {/* Collapsible: avatar-portret + galerij (compact onder character sheet) */}
+      <details className="bg-slate-900 border border-slate-800 rounded-xl group">
+        <summary data-testid="avatar-portret-toggle"
+          className="cursor-pointer px-4 py-3 flex items-center justify-between hover:bg-slate-800/40">
+          <span className="text-sm font-bold text-white flex items-center gap-2">
+            <Camera className="w-4 h-4 text-pink-400" />
+            Portret &amp; Galerij beheren
+          </span>
+          <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+        </summary>
+        <div className="border-t border-slate-800 p-4 space-y-4">
+          {/* Huidige Avatar */}
+          <div className="flex items-center gap-5">
+            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center overflow-hidden flex-shrink-0">
+              {current.url ? (
+                <img src={`${API}${current.url}?t=${Date.now()}`} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <User className="w-12 h-12 text-white" />
+              )}
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-white font-medium">
+                {current.avatar_ref === 'user' ? 'Eigen portret' :
+                  current.avatar_ref?.startsWith('gallery:') ? 'Uit galerij' : 'Standaard (initialen)'}
+              </p>
+              <p className="text-xs text-slate-500 mt-1">Foto's worden geschaald naar max 512×512 om opslag te besparen.</p>
+              {current.avatar_ref && (
+                <button data-testid="clear-avatar" onClick={() => selectAvatar(null)}
+                  className="mt-2 px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg flex items-center gap-1.5">
+                  <X className="w-3 h-3" /> Verwijder selectie
+                </button>
+              )}
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="text-sm text-white font-medium">
-              {current.avatar_ref === 'user' ? 'Eigen portret' :
-                current.avatar_ref?.startsWith('gallery:') ? 'Uit galerij' : 'Standaard (initialen)'}
-            </p>
-            <p className="text-xs text-slate-500 mt-1">Foto's worden geschaald naar max 512×512 om opslag te besparen.</p>
-            {current.avatar_ref && (
-              <button data-testid="clear-avatar" onClick={() => selectAvatar(null)}
-                className="mt-3 px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg flex items-center gap-1.5">
-                <X className="w-3 h-3" /> Verwijder selectie
+
+          {/* Upload */}
+          <div className="pt-3 border-t border-slate-800">
+            <p className="text-xs font-semibold text-white mb-2">Eigen portret uploaden</p>
+            <input data-testid="portrait-upload" ref={fileRef} type="file" accept="image/*"
+              onChange={e => uploadPortrait(e.target.files?.[0])} className="hidden" />
+            <div className="flex flex-wrap gap-3">
+              <button onClick={() => fileRef.current?.click()} disabled={uploading}
+                data-testid="upload-portrait-btn"
+                className="px-4 py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/40 rounded-lg flex items-center gap-2 text-sm disabled:opacity-50">
+                <Upload className="w-4 h-4" />
+                {uploading ? 'Uploaden...' : 'Kies een foto'}
               </button>
+              {hasUserPortrait && (
+                <button onClick={() => selectAvatar('user')}
+                  className="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 border border-pink-500/40 rounded-lg flex items-center gap-2 text-sm">
+                  <Check className="w-4 h-4" /> Gebruik mijn portret
+                </button>
+              )}
+            </div>
+            {msg && (
+              <p className={`mt-2 text-xs ${msg.type === 'ok' ? 'text-green-400' : 'text-red-400'}`}>{msg.text}</p>
+            )}
+          </div>
+
+          {/* Galerij */}
+          <div className="pt-3 border-t border-slate-800">
+            <p className="text-xs font-semibold text-white mb-2 flex items-center gap-2">
+              <ImageIcon className="w-3.5 h-3.5 text-purple-400" />
+              Galerij ({gallery.length})
+            </p>
+            <GalleryTabs gallery={gallery} current={current} onSelect={selectAvatar} apiUrl={API} />
+            {isAdmin && (
+              <p className="text-[10px] text-amber-400/70 mt-3 italic">
+                Beheer galerij via: Beheer → Gebruikers → kies user → Avatar Beheer
+              </p>
             )}
           </div>
         </div>
-      </Card>
-
-      {/* Upload eigen */}
-      <Card title="Eigen Portret Uploaden" accent="#22c55e" icon={Upload}
-        subtitle="Wordt alleen voor jouw profiel gebruikt (niet in algemeen archief)">
-        <input data-testid="portrait-upload" ref={fileRef} type="file" accept="image/*"
-          onChange={e => uploadPortrait(e.target.files?.[0])} className="hidden" />
-        <div className="flex flex-wrap gap-3">
-          <button onClick={() => fileRef.current?.click()} disabled={uploading}
-            data-testid="upload-portrait-btn"
-            className="px-4 py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/40 rounded-lg flex items-center gap-2 text-sm disabled:opacity-50">
-            <Upload className="w-4 h-4" />
-            {uploading ? 'Uploaden...' : 'Kies een foto'}
-          </button>
-          {hasUserPortrait && (
-            <button onClick={() => selectAvatar('user')}
-              className="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 border border-pink-500/40 rounded-lg flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4" /> Gebruik mijn portret
-            </button>
-          )}
-        </div>
-        {msg && (
-          <p className={`mt-3 text-xs ${msg.type === 'ok' ? 'text-green-400' : 'text-red-400'}`}>{msg.text}</p>
-        )}
-      </Card>
-
-      {/* Galerij — v4_avatar_categories_001 — 2 tabs (Persoonlijk / D&D Archief) */}
-      <Card title={`Galerij (${gallery.length})`} accent="#a855f7" icon={ImageIcon}
-        subtitle="Voorbeeld-avatars beheerd door het systeem. Kies er één om als jouw avatar in te stellen.">
-        <GalleryTabs gallery={gallery} current={current} onSelect={selectAvatar} apiUrl={API} />
-        {isAdmin && (
-          <p className="text-[10px] text-amber-400/70 mt-4 italic">
-            Beheer galerij via: Beheer → Gebruikers → kies user → Avatar Beheer
-          </p>
-        )}
-      </Card>
+      </details>
     </div>
   );
 }

@@ -455,12 +455,18 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
              market: Optional[str] = None) -> Dict:
     """Open positie in een potje + log de BUY-trade op het potje zelf.
     v4_potje_sync_001: trade_count + trade_log bijwerken zodat UI tellertje klopt.
-    v4_potje_market_001: bewaar welke coin gekocht is per potje (was hardcoded BCH-EUR)."""
+    v4_potje_market_001: bewaar welke coin gekocht is per potje (was hardcoded BCH-EUR).
+    v6_lock_enforce_002: hard guard tegen openen van een locked potje (defense in depth).
+    """
     data = _load(user_id)
     user = data["users"][user_id]
     now = datetime.now(timezone.utc).isoformat()
     for p in user["potjes"]:
         if p["id"] == pot_id:
+            # v6_lock_enforce_002 — locked potjes mogen NOOIT geopend worden
+            if p.get("pot_locked"):
+                print(f"[potjes] BLOCK: open_pot geweigerd voor {pot_id} ({p.get('market')}) — pot_locked=True (reason={p.get('lock_reason','?')})")
+                return {}
             p["position"] = {
                 "is_open": True,
                 "entry_price": entry_price,
@@ -514,11 +520,18 @@ def update_pot_tracking(user_id: str, pot_id: str, current_price: float) -> Dict
 
 
 def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
-    """Sluit positie, voeg winst toe aan capital (tot max), update stats."""
+    """Sluit positie, voeg winst toe aan capital (tot max), update stats.
+    v6_lock_enforce_002: hard guard — locked potjes mogen niet gesloten worden.
+    Dit beschermt staking-ankers als 'is_open' om historische redenen toch True is.
+    """
     data = _load(user_id)
     user = data["users"][user_id]
     for p in user["potjes"]:
         if p["id"] == pot_id and p["position"]["is_open"]:
+            # v6_lock_enforce_002 — staking-anker blijft staan
+            if p.get("pot_locked"):
+                print(f"[potjes] BLOCK: close_pot geweigerd voor {pot_id} ({p.get('market')}) — pot_locked=True (reason={p.get('lock_reason','?')})")
+                return {}
             entry = p["position"]["entry_price"]
             capital = p["capital"]
             # Bruto P&L

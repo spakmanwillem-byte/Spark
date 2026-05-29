@@ -283,6 +283,79 @@ def assign_pot_market(user_id: str, pot_id: str, market: str) -> Dict:
     return {"success": False, "error": f"Pot {pot_id} niet gevonden"}
 
 
+# v6_auto_anchor_001 — Auto-create staking-anchor pot voor nieuwe coins
+def ensure_anchors_for_markets(user_id: str, markets: List[str]) -> Dict:
+    """Zorg dat Spark (user-000) voor elke market in de watchlist een locked
+    staking-anker heeft. Als een coin nog geen anker heeft → maak nieuw potje
+    aan met `pot_locked=True` en `lock_reason='staking_anchor'`, gevuld met
+    €10 capital (zelfde als de bestaande anchors).
+
+    Regel: alleen Spark heeft anchors (zie _load() logica). Andere users
+    krijgen 1 potje per ROAR-token (sync_potjes_to_tokens). Voor non-spark
+    users wordt deze call genegeerd.
+
+    Returns: {success, created: [{id, market}], skipped: [markets met al anker]}.
+    """
+    if user_id != "user-000":
+        return {"success": True, "skipped_reason": "alleen Spark heeft anchors",
+                "created": [], "skipped": []}
+
+    if not markets:
+        return {"success": True, "created": [], "skipped": []}
+
+    clean = sorted({(m or "").strip().upper() for m in markets if m and m.strip()})
+    clean = [m for m in clean if m and m != "EUR"]
+    if not clean:
+        return {"success": True, "created": [], "skipped": []}
+
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.setdefault("potjes", [])
+
+    # Verzamel markets die al een locked anker hebben
+    existing_anchor_markets = {
+        (p.get("market") or "").upper()
+        for p in potjes
+        if p.get("pot_locked") and p.get("lock_reason") == "staking_anchor"
+    }
+
+    now = datetime.now(timezone.utc).isoformat()
+    next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
+    created = []
+    skipped = []
+    for market in clean:
+        if market in existing_anchor_markets:
+            skipped.append(market)
+            continue
+        new_pot = {
+            "id": f"pot-{next_idx + 1:03d}",
+            "index": next_idx,
+            "capital": START_AMOUNT,
+            "max_size": INITIAL_MAX,
+            "pot_locked": True,
+            "lock_reason": "staking_anchor",
+            "position": {
+                "is_open": False, "entry_price": None, "highest_price": None,
+                "trailing_active": False, "entry_time": None,
+            },
+            "market": market,
+            "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+            "created_at": now,
+            "last_action": None,
+            "source": "auto_anchor_for_new_coin",
+        }
+        potjes.append(new_pot)
+        existing_anchor_markets.add(market)
+        created.append({"id": new_pot["id"], "market": market})
+        next_idx += 1
+
+    if created:
+        user["potjes"] = potjes
+        _save(data)
+
+    return {"success": True, "created": created, "skipped": skipped}
+
+
 def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
     """v6_potje_per_token_001 — verminder potjes wanneer user tokens kwijtraakt (sell_back/gift_sent).
 

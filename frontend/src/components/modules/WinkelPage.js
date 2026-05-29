@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { ProductEditModal } from './ProductEditModal';
 import { WinkelstraatTab } from './WinkelstraatTab';
+import { toast } from 'sonner';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -123,6 +124,15 @@ export function WinkelPage({ onNavigate }) {
   const buyToken = async () => {
     const qty = parseInt(tokenQty) || 0;
     if (qty < 1) return;
+    // v6_token_buy_ux_001 — preemptive guard: blokkeer als wallet niet genoeg heeft
+    const needed = qty * (tokenInfo?.price_eur || 5.08);
+    const have = userBalance?.wallet_eur || 0;
+    if (needed > have + 0.001) {
+      const msg = `Onvoldoende EUR saldo: je hebt €${have.toFixed(2)}, nodig €${needed.toFixed(2)} voor ${qty} ROAR. Stort eerst geld.`;
+      setTokenResult({ success: false, error: msg });
+      toast.error(msg, { duration: 6000 });
+      return;
+    }
     setBuyingToken(true);
     setTokenResult(null);
     const res = await fetch(`${API}/api/shop/token/buy/${userId}`, {
@@ -132,7 +142,14 @@ export function WinkelPage({ onNavigate }) {
     }).then(r => r.json()).catch(() => ({ success: false, error: 'Verbinding mislukt' }));
     setTokenResult(res);
     setBuyingToken(false);
-    if (res.success) { setTokenQty('1'); loadData(); }
+    if (res.success) {
+      toast.success(res.message || `${qty} ROAR gekocht`, { duration: 5000 });
+      setTokenQty('1');
+      loadData();
+    } else {
+      // v6_token_buy_ux_001 — error prominent als toast (incl. dynamische-prijs verhoging)
+      toast.error(res.error || 'ROAR-koop mislukt', { duration: 8000 });
+    }
   };
 
   if (loading) return (
@@ -386,6 +403,27 @@ export function WinkelPage({ onNavigate }) {
                   <span className="text-white">&euro;{walletBalance.toFixed(2)}</span>
                 </div>
               </div>
+              {/* v6_token_buy_ux_001 — preemptief tekort-waarschuwing */}
+              {(() => {
+                const qty = parseInt(tokenQty) || 0;
+                const needed = qty * tokenPrice;
+                const tekort = needed - walletBalance;
+                if (qty >= 1 && tekort > 0.001) {
+                  return (
+                    <div data-testid="token-insufficient-warning"
+                      className="p-3 rounded-lg text-xs bg-red-500/10 border border-red-500/30 text-red-300 flex items-start gap-2">
+                      <X className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold">Onvoldoende saldo voor {qty} ROAR</p>
+                        <p className="text-red-400/80 mt-0.5">
+                          Tekort: &euro;{tekort.toFixed(2)} &middot; stort eerst geld op je wallet of verlaag aantal.
+                        </p>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
               {/* v5_roar_gift_001 — Gift verhuisd naar Wallet pagina (bij Storten/Opnemen) */}
               <button data-testid="buy-token-btn" onClick={buyToken}
                 disabled={buyingToken || (parseInt(tokenQty) || 0) < 1}

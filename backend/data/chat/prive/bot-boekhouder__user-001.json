@@ -517,14 +517,42 @@
       "to_user_id": "user-001",
       "text": "✅ Je Tikkie-storting #tk-5a23c is bevestigd.\n\n💶 Bedrag: €20.20\n💳 Vrij saldo: €20.20\n\n💬 staat op bitvavo",
       "ts": "2026-05-29T09:27:42.819927+00:00",
-      "unread_by": [
-        "user-001"
-      ],
+      "unread_by": [],
       "system": true,
       "kind": "tikkie_confirmed",
       "topup_id": "tk-5a23c57fad",
       "topup_ref": "#tk-5a23c",
       "is_bot": true
+    },
+    {
+      "id": "bh-49107e3c",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • BCH @ €259.1000\nPotje: pot-001\nInleg: €10.00\nEigenaar: user-001",
+      "ts": "2026-05-29T09:44:51.736634+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "BCH-EUR",
+      "pot_id": "pot-001",
+      "price": 259.1,
+      "user_id": "user-001"
+    },
+    {
+      "id": "bh-5fe21f38",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "📥 BUY • BCH @ €259.1000\nPotje: pot-002\nInleg: €10.00\nEigenaar: user-001",
+      "ts": "2026-05-29T09:44:56.888635+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "BCH-EUR",
+      "pot_id": "pot-002",
+      "price": 259.1,
+      "user_id": "user-001"
     }
   ]
 }

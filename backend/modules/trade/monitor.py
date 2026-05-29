@@ -839,8 +839,18 @@ class MonitorService:
                         _persist_registry()
                 except Exception:
                     pass
+            # v6_auto_anchor_001 — Auto-create locked staking-anker voor nieuwe coins (Spark only)
+            anchor_result = None
+            try:
+                from .potjes import ensure_anchors_for_markets
+                anchor_result = ensure_anchors_for_markets(self._user_id, clean)
+                if anchor_result.get("created"):
+                    logger.info(f"Auto-anchors aangemaakt voor {self._user_id}: {anchor_result['created']}")
+            except Exception as ex:
+                logger.warning(f"ensure_anchors_for_markets faalde voor {self._user_id}: {ex}")
             logger.info(f"Markets hot-updated voor {self._user_id}: {clean}")
-            return {"success": True, "markets": clean, "running": self._running}
+            return {"success": True, "markets": clean, "running": self._running,
+                    "anchors_created": (anchor_result or {}).get("created", [])}
 
     # v5_candle_hotswap_001 — wissel candle_interval (15m / 1h / 4h / 1d) zonder restart
     def update_candle_interval(self, candle_interval: str) -> Dict:

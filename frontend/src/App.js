@@ -34,6 +34,7 @@ import { WinkelPage } from "./components/modules/WinkelPage";
 import { BoekhoudPage } from "./components/modules/BoekhoudPage";
 import { CommunityPage } from "./components/workspace/CommunityPage";
 import { VoicePage } from "./components/workspace/VoicePage";
+import { Toaster } from "./components/ui/sonner";
 
 // Main App Content with Navigation
 function AppContent() {
@@ -265,6 +266,7 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <AppContent />
+          <Toaster position="top-right" richColors closeButton />
         </AuthProvider>
       </BrowserRouter>
     </div>

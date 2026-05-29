@@ -1,5 +1,22 @@
 # Spark Core 2.0 — PRD
 
+
+## Completed (recent — 2026-05-29)
+
+- **v6_token_buy_ux_001** — Token Buy UX hardening:
+  - `<Toaster>` (sonner) globaal gemount in `App.js`.
+  - `WinkelPage.buyToken()` toont toasts (success + error) en blokkeert preemptief als wallet ontoereikend.
+  - Nieuwe inline `data-testid="token-insufficient-warning"` rood-vlak verschijnt zodra `qty * price > wallet_eur`, met exact tekort-bedrag.
+  - Resultaat: gebruiker kan dynamische-prijs-overschrijdingen of saldo-tekorten niet meer missen.
+
+- **v6_auto_anchor_001** — Auto-create locked staking-anchor voor nieuwe coins:
+  - Nieuw `potjes.ensure_anchors_for_markets(user_id, markets)` — Spark-only.
+  - Voor elke watchlist-coin zonder bestaand `pot_locked=True / lock_reason='staking_anchor'` potje wordt automatisch een nieuw locked anker aangemaakt (€10 capital, source=`auto_anchor_for_new_coin`).
+  - Gehookt in `monitor.update_markets()` (en daarmee `POST /api/trade/monitor/markets/{user_id}`). Response bevat nu `anchors_created: [{id, market}]`.
+  - Non-Spark users worden geskipt (regel: alleen Spark heeft anchors).
+  - Smoke-test: nieuwe coin in watchlist → anker direct aanwezig in `user_potjes.json` zonder handmatige stap.
+
+
 ## Completed (recent)
 - 2026-05-25 **v6_command_registry_001** (sessie 12 — Bidirectionele Command-Registry MVP / fundering donderdag):
   - 📋 **`/data/system/command_registry.json`** met **27 commands** uit alle modules (capabilities/agenda/notes/wallet/trade/kbv2/bijbel/spark/emotion/community/dagboek/achievements/leaderboard/boekhouder). Per command: `intent_tags[]`, `required_params[]`, `gradatie_min`, `behavior_class_hint`.

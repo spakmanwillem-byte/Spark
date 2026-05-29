@@ -81,7 +81,14 @@ async def get_trade_stats(user_id: str):
 
     # Live P&L vs baseline kapitaal
     baseline_data = load_json(DATA_DIR.parent / "trade" / "capital_baseline.json", default={})
-    user_baseline = baseline_data.get(user_id, {})
+    user_baseline_raw = baseline_data.get(user_id, {})
+    # Backwards-compat: pre-v4 stored as bare float; v4+ stores dict
+    if isinstance(user_baseline_raw, (int, float)):
+        user_baseline = {"baseline_eur": float(user_baseline_raw), "set_at": None, "note": "legacy-float"}
+    elif isinstance(user_baseline_raw, dict):
+        user_baseline = user_baseline_raw
+    else:
+        user_baseline = {}
     baseline_eur = user_baseline.get("baseline_eur")
     live_pnl = None
     live_balance = None

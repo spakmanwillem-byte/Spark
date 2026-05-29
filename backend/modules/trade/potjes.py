@@ -151,9 +151,11 @@ def _load(user_id: str) -> Dict:
         user["potjes"] = existing
         data["users"][user_id] = user
         save_json(POTJES_FILE, data)
-    # v6_pot1_staking_lock_001 — backfill: eerste potje (laagste index OF eerste in lijst-volgorde) → lock
+    # v6_pot1_staking_lock_only_spark_fix_001 (sessie 14) — backfill van staking-anchor
+    # mag ALLEEN bij Spark (user-000). Non-Spark users hebben "1 token = 1 potje" en
+    # géén anchors. Eerder werd ook bij Willem/Gijs pot-001 telkens auto-gelocked.
     potjes_list = user.get("potjes", [])
-    if potjes_list:
+    if is_spark and potjes_list:
         # Vind het 'eerste' potje: liefst index==0, anders nummer==1, anders gewoon eerste in lijst
         def _pot_sort_key(p):
             return (p.get("index") if p.get("index") is not None else 999,

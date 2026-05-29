@@ -80,6 +80,25 @@
       "mock": true,
       "success": true,
       "error": null
+    },
+    {
+      "trade_id": "00000000-0000-041f-0100-0007fa5baed7",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T07:56:45.367262+00:00",
+      "action": "SELL",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-0007fa5baed7",
+      "amount": 0.07640517,
+      "price": 262.61,
+      "filled": 0.07640517,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0547616937,
+      "fee_currency": "EUR",
+      "requested_amount": 9.99,
+      "effective_amount": 0.07640517
     }
   ]
 }

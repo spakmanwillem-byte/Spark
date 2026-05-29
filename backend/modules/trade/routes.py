@@ -437,7 +437,16 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
         return {"success": False, "error": f"Kon prijs niet ophalen voor {req.market}"}
 
     # 3) Buy uitvoeren met potje's eigen entry amount
-    entry_amount = float(pot.get("current_size", pot.get("starting_size", 5.08)))
+    # v6_potje_size_10_fix_001 — primaire bron is `capital` (v6-systeem schrijft daar
+    # de actuele potje-grootte naartoe). `current_size`/`starting_size` zijn legacy
+    # velden die in moderne potjes niet meer gezet worden, vandaar dat de oude
+    # fallback `5.08` ten onrechte sloeg. Nu: capital → current_size → starting_size → 10.0.
+    entry_amount = float(
+        pot.get("capital")
+        or pot.get("current_size")
+        or pot.get("starting_size")
+        or 10.0
+    )
     if req.use_mock:
         trade_result = execute_mock_trade(user_id, req.market, "buy", entry_amount)
     else:

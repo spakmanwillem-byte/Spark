@@ -466,15 +466,15 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
   if (loading) {
     return (
       <div className="py-20 text-center">
-        <div className="w-8 h-8 border-3 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-8 h-8 border-3 border-amber-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-3" />
         <p className="text-slate-500 text-sm">Volgende kaart laden...</p>
       </div>
     );
   }
   if (!entry || !form) {
     return (
-      <div className="py-20 text-center bg-slate-900/40 border border-purple-500/20 rounded-xl">
-        <CheckCircle className="w-12 h-12 text-purple-400 mx-auto mb-3" />
+      <div className="py-20 text-center bg-slate-900/40 border border-amber-500/20 rounded-xl">
+        <CheckCircle className="w-12 h-12 text-amber-400 mx-auto mb-3" />
         <p className="text-white text-lg font-semibold mb-1">Alle kaarten zijn gereviewd!</p>
         <p className="text-slate-400 text-sm">Goed bezig. Tijd voor iets anders.</p>
       </div>
@@ -488,11 +488,11 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
   const fmt = (iso) => iso ? new Date(iso).toLocaleDateString('nl-NL') : '—';
 
   return (
-    <div data-testid="review-panel" className="bg-slate-900/50 border border-purple-500/30 rounded-2xl overflow-hidden">
+    <div data-testid="review-panel" className="bg-slate-900/50 border border-amber-500/30 rounded-2xl overflow-hidden">
       {/* Header */}
-      <div className="px-5 py-4 border-b border-purple-500/20 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.08), rgba(236,72,153,0.04))' }}>
+      <div className="px-5 py-4 border-b border-amber-500/20 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.08), rgba(236,72,153,0.04))' }}>
         <div>
-          <div className="flex items-center gap-2 text-[10px] text-purple-300 uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-[10px] text-amber-300 uppercase tracking-wider mb-1">
             <Eye className="w-3 h-3" /> Review modus
             <span className="text-slate-600">•</span>
             <span className="text-slate-400">{queueTotal?.toLocaleString() || 0} kaarten te gaan</span>
@@ -502,7 +502,7 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
         <div className="text-right text-[10px] text-slate-500 space-y-0.5">
           <div>Aangemaakt: <span className="text-slate-400">{fmt(meta.created_at || entry.detected_at)}</span></div>
           <div>Bijgewerkt: <span className="text-slate-400">{fmt(meta.updated_at)}</span></div>
-          <div>Reviews: <span className="text-purple-300">{reviewCount}×</span></div>
+          <div>Reviews: <span className="text-amber-300">{reviewCount}×</span></div>
         </div>
       </div>
 
@@ -512,12 +512,12 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
           <div>
             <label className="text-[10px] text-slate-400 uppercase tracking-wider">Begrip</label>
             <input data-testid="rev-begrip" type="text" value={form.begrip} onChange={e => setLag('begrip', e.target.value)}
-              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500" />
           </div>
           <div>
             <label className="text-[10px] text-slate-400 uppercase tracking-wider">Kaart type</label>
             <select data-testid="rev-kaart-type" value={form.kaart_type || 'concept'} onChange={e => setLag('kaart_type', e.target.value)}
-              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
               {['concept','recept','procedure','dialogue','blueprint','emotional_pattern','context'].map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
@@ -530,7 +530,7 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
               <textarea key={n} data-testid={`rev-laag${n}`} rows={2} value={form[`laag${n}`]}
                 onChange={e => setLag(`laag${n}`, e.target.value)}
                 placeholder={['Korte definitie','Uitgebreider','Diepere context','Essentie / kern'][n-1]}
-                className="w-full bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+                className="w-full bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
             ))}
           </div>
         </div>
@@ -542,7 +542,7 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
               <input key={k} data-testid={`rev-ws5-${k}`} type="text" value={form.ws5[k] || ''}
                 onChange={e => setW5(k, e.target.value)}
                 placeholder={k.charAt(0).toUpperCase() + k.slice(1)}
-                className="bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+                className="bg-slate-800/40 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
             ))}
           </div>
         </div>
@@ -552,12 +552,12 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
             <label className="text-[10px] text-slate-400 uppercase tracking-wider">Tags <span className="text-slate-600">(komma-gescheiden)</span></label>
             <input data-testid="rev-tags" type="text" value={form.tags} onChange={e => setLag('tags', e.target.value)}
               placeholder="bv. emotie, blij, doel"
-              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500" />
           </div>
           <div>
             <label className="text-[10px] text-slate-400 uppercase tracking-wider">Topic</label>
             <input data-testid="rev-topic" type="text" value={form.topic} onChange={e => setLag('topic', e.target.value)}
-              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" />
+              className="mt-1 w-full bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500" />
           </div>
         </div>
 
@@ -588,7 +588,7 @@ function ReviewPanel({ entry, form, setForm, loading, savedMsg, onSaveNext, onSa
             Goedgekeurd, volgende
           </button>
           <button data-testid="rev-save-stay" onClick={onSaveStay}
-            className="px-3 py-2 rounded-lg text-xs bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 transition-colors">
+            className="px-3 py-2 rounded-lg text-xs bg-purple-500/15 hover:bg-purple-500/25 text-amber-300 transition-colors">
             <Save className="w-3.5 h-3.5 inline -mt-0.5 mr-1" /> Opslaan
           </button>
           <button data-testid="rev-save-next" onClick={onSaveNext}

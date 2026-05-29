@@ -142,7 +142,7 @@ function FileBrowser() {
               data-testid="file-search"
               type="text" value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Zoek bestand..."
-              className="w-full pl-8 pr-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white placeholder-slate-500 focus:border-blue-500/50 focus:outline-none"
+              className="w-full pl-8 pr-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-white placeholder-slate-500 focus:border-amber-500/50 focus:outline-none"
             />
           </div>
           <select
@@ -348,7 +348,7 @@ function ModuleSandbox() {
             data-testid="module-name-input"
             type="text" value={newName} onChange={e => setNewName(e.target.value)}
             placeholder="Module naam"
-            className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500/50"
+            className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
           />
           <select
             data-testid="module-type-select"
@@ -839,7 +839,7 @@ function BackupPanel() {
               <button
                 data-testid="backup-confirm-yes"
                 onClick={doRestore}
-                className="flex-1 px-4 py-2 text-sm font-medium rounded-lg bg-purple-500 hover:bg-purple-600 text-white"
+                className="flex-1 px-4 py-2 text-sm font-medium rounded-lg bg-amber-500 hover:bg-amber-600 text-white"
               >
                 Ja, merge toepassen
               </button>

@@ -1,6 +1,30 @@
 # Spark Core 2.0 — PRD
 
 
+## Completed (recent — 2026-05-29, vervolg)
+
+- **v6_kb_curation_dashboard_001** — Tag-curatie UI bovenop `/api/kb/v2/tags/scan` + `/tags/merge`:
+  - Nieuw component `components/workspace/KbV2TagCuration.js` met 4 stat-tegels, filter, refresh, 1-klik merge per stem.
+  - Geïntegreerd als 6e tab in KennisbankV2Page: **Tag-curatie**.
+  - Dropdown per stem voor `keep_variant`-keuze; expand-knop toont alle varianten als chips.
+  - Sessie-historie van merges zichtbaar onderaan.
+  - E2E verified: 52 dedupe-kansen gevonden (top: systeem 377×, relatie 98×, grondstof 87×).
+
+- **v6_overflow_auto_mint_instant_001** — Instant mint zonder 24h-wachttijd:
+  - Nieuw `staking_growth.run_auto_mint_only()` — alleen-mint loop (geen rente).
+  - Gehookt in `potjes.close_pot()` voor `user-000`: zodra een Spark-trade sluit en overflow ≥ €10, wordt direct een nieuw trade-potje gemint.
+  - Smoke-test: overflow €25 → 2 potjes (pot-016, pot-017) + €5 rest. Daily scheduler-hook behouden als safety-net.
+  - `close_pot` returnt nu ook `auto_mint: {minted, n_minted, overflow_after}`.
+
+- **v6_spark_theme_001** — Amber/Orange theme refactor (eerste pas):
+  - CSS-variabelen toegevoegd in `index.css`: `--spark-primary`, `--spark-primary-hover`, `--spark-primary-soft`, `--spark-primary-ring`, `--spark-secondary`, `--spark-accent`.
+  - Utility-klassen: `bg-spark-primary`, `text-spark-primary`, `border-spark-primary`, `ring-spark-primary`.
+  - Cosmetic chrome (focus-rings, action-buttons, upload-chrome, link-hovers) van 23 files vervangen: `bg-purple-500 hover:bg-purple-600` → `bg-amber-500 hover:bg-amber-600`, `focus:border-purple/blue-500` → `focus:border-amber-500`, etc.
+  - Bewust **niet** vervangen: mood-glow palet in App.js (semantische emotie-kleuren), status-indicators (paused/mock = blauw), chart-distinctions, module-color-coding in AnalyticsPage, layer-kleuren in EmotiesPage/SparkBrainPage.
+  - Dashboard + KB Curation getest, geen visuele regressie.
+
+
+
 ## Completed (recent — 2026-05-29)
 
 - **v6_token_buy_ux_001** — Token Buy UX hardening:

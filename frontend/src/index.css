@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* v6_spark_theme_001 — centrale Amber/Orange tokens.
+   Vervangt hardcoded purple/blue chrome door semantische primary-tokens.
+   Override-baar via process_env-style runtime hooks in App.js (--app-primary). */
+:root {
+  --spark-primary: #f59e0b;         /* amber-500 — hoofdkleur */
+  --spark-primary-hover: #d97706;   /* amber-600 — hover */
+  --spark-primary-soft: rgba(245, 158, 11, 0.15);
+  --spark-primary-ring: rgba(245, 158, 11, 0.4);
+  --spark-secondary: #b45309;       /* amber-700 — gradient-eindpunt */
+  --spark-accent: #fb923c;          /* orange-400 — secundair accent */
+  --glow-base: #f59e0b;             /* gebruikt door app-bg glow */
+  --mood-glow: #f59e0b;             /* gemoedstoestand-overlay, default = primary */
+}
+
+/* Utility-klassen voor semantische amber-stijlen.
+   Gebruik bij voorkeur "bg-spark-primary" boven hardcoded bg-purple-500/bg-blue-500. */
+.bg-spark-primary { background-color: var(--spark-primary); }
+.bg-spark-primary:hover, .hover\:bg-spark-primary:hover { background-color: var(--spark-primary-hover); }
+.text-spark-primary { color: var(--spark-primary); }
+.border-spark-primary { border-color: var(--spark-primary); }
+.ring-spark-primary { --tw-ring-color: var(--spark-primary-ring); }
+
 body {
     margin: 0;
     font-family:

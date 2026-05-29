@@ -50,8 +50,8 @@ export function UserAvatar({ user, size = 'md', className = '', rounded = 'round
   const grad = user?.gradatie;
   const bgGradient =
     grad === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
-    grad === 2 ? 'bg-gradient-to-br from-purple-500 to-pink-600' :
-    grad <= 4 ? 'bg-gradient-to-br from-blue-500 to-cyan-600' :
+    grad === 2 ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
+    grad <= 4 ? 'bg-gradient-to-br from-amber-500 to-orange-600' :
     'bg-gradient-to-br from-slate-600 to-slate-700';
 
   const baseCls = `${sizeCls} ${rounded} ${className} overflow-hidden flex items-center justify-center font-bold text-white flex-shrink-0 ${showRing ? 'ring-2 ring-slate-700' : ''}`;

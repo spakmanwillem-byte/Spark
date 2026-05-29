@@ -97,7 +97,7 @@ export function AgendaPage({ onNavigate }) {
             {showNew && (
               <div className="p-4 bg-slate-900/60 border border-blue-500/20 rounded-xl space-y-3">
                 <input data-testid="event-titel" type="text" value={newEvent.titel} onChange={e => setNewEvent({...newEvent, titel: e.target.value})} placeholder="Titel..."
-                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+                  className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
                 <input type="text" value={newEvent.beschrijving} onChange={e => setNewEvent({...newEvent, beschrijving: e.target.value})} placeholder="Beschrijving..."
                   className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none" />
                 <div className="flex gap-2">

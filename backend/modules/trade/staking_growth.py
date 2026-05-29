@@ -138,6 +138,54 @@ def run_growth_cycle(force: bool = False) -> Dict:
     }
 
 
+def run_auto_mint_only() -> Dict:
+    """v6_overflow_auto_mint_instant_001 — Snelle mint-only check, geen rente.
+    Bedoeld voor live triggers (na elke close_pot): zodra overflow >= MINT_THRESHOLD
+    wordt er direct een nieuw trade-potje gemint, zonder te wachten op de
+    24h-scheduler. Idempotent: doet niets als overflow < threshold.
+    """
+    now = datetime.now(timezone.utc)
+    data = load_json(POTJES_FILE, default={"users": {}})
+    spark = data.get("users", {}).get(SPARK_USER)
+    if not spark:
+        return {"success": False, "error": "Spark user niet gevonden", "minted": []}
+
+    overflow = float(spark.get("overflow_pool", 0))
+    if overflow < MINT_THRESHOLD:
+        return {"success": True, "minted": [], "overflow": overflow,
+                "reason": f"overflow €{overflow:.2f} < threshold €{MINT_THRESHOLD}"}
+
+    minted = []
+    while overflow >= MINT_THRESHOLD:
+        existing = spark.get("potjes", [])
+        next_idx = max((p.get("index", 0) for p in existing), default=-1) + 1
+        new_pot = {
+            "id": f"pot-{next_idx + 1:03d}",
+            "index": next_idx,
+            "nummer": next_idx + 1,
+            "capital": 10.0,
+            "max_size": 50.0,
+            "pot_locked": False,
+            "lock_reason": None,
+            "market": "EUR",
+            "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                         "trailing_active": False, "entry_time": None, "amount_eur": None},
+            "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+            "trade_log": [],
+            "minted_at": now.isoformat(),
+            "minted_from": "overflow_auto_mint_instant",
+            "last_action": "Auto-minted from overflow_pool",
+        }
+        existing.append(new_pot)
+        spark["overflow_pool"] = round(overflow - MINT_THRESHOLD, 4)
+        overflow = spark["overflow_pool"]
+        minted.append({"pot_id": new_pot["id"], "minted_at": new_pot["minted_at"]})
+
+    save_json(POTJES_FILE, data)
+    return {"success": True, "minted": minted, "overflow_after": overflow,
+            "n_minted": len(minted)}
+
+
 def auto_create_anchor(coin: str) -> Optional[Dict]:
     """Maak een staking-anchor voor coin (alleen voor Spark).
     Hergebruikt een bestaand vrij EUR-potje als anchor of mint een nieuw potje.

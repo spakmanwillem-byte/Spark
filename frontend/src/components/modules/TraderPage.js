@@ -710,7 +710,7 @@ export function TraderPage({ onNavigate }) {
                         <span className="text-[9px] text-slate-600">{marketContext.context?.market}</span>
                       </h3>
                       <button data-testid="refresh-context-btn" onClick={refreshAllContexts} disabled={contextLoading}
-                        className="text-[10px] text-purple-400 hover:text-purple-300 flex items-center gap-1 disabled:opacity-50">
+                        className="text-[10px] text-amber-400 hover:text-amber-300 flex items-center gap-1 disabled:opacity-50">
                         <RefreshCw className={`w-3 h-3 ${contextLoading ? 'animate-spin' : ''}`} /> {contextLoading ? 'Leren...' : 'Refresh alle coins'}
                       </button>
                     </div>
@@ -1266,7 +1266,7 @@ function DonationsPanel({ userId }) {
           <DollarSign className="w-4 h-4 text-purple-400" /> Donaties & Deposits
         </h3>
         <button data-testid="add-deposit-btn" onClick={() => setShowForm(!showForm)}
-          className="text-[11px] px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+          className="text-[11px] px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 transition-colors">
           {showForm ? 'Annuleer' : '+ Toevoegen'}
         </button>
       </div>
@@ -1304,11 +1304,11 @@ function DonationsPanel({ userId }) {
             ))}
           </div>
           <input data-testid="dep-amount" type="number" step="0.01" placeholder="Bedrag in EUR" value={amount} onChange={e => setAmount(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
           <input data-testid="dep-source" type="text" placeholder="Van wie? (bv. Harry)" value={source} onChange={e => setSource(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
           <input data-testid="dep-description" type="text" placeholder="Omschrijving (verantwoording)" value={description} onChange={e => setDescription(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" />
+            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500" />
 
           {/* Impact preview op ROAR token prijs */}
           {amountNum > 0 && tokenInfo && (
@@ -1327,7 +1327,7 @@ function DonationsPanel({ userId }) {
           )}
 
           <button data-testid="save-deposit-btn" onClick={save} disabled={saving || !amount}
-            className="w-full py-2 rounded-lg bg-purple-500 hover:bg-purple-600 text-white text-xs font-medium disabled:opacity-50">
+            className="w-full py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-medium disabled:opacity-50">
             {saving ? 'Opslaan...' : 'Registreren & baseline bijwerken'}
           </button>
         </div>
@@ -1341,7 +1341,7 @@ function DonationsPanel({ userId }) {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className={`text-[9px] px-1.5 py-0.5 rounded uppercase ${
-                    d.type === 'donation' ? 'bg-purple-500/20 text-purple-400' :
+                    d.type === 'donation' ? 'bg-amber-500/20 text-amber-400' :
                     d.type === 'deposit' ? 'bg-cyan-500/20 text-cyan-400' :
                     'bg-orange-500/20 text-orange-400'
                   }`}>{d.type === 'donation' ? 'Donatie' : d.type === 'deposit' ? 'Storting' : 'Opname'}</span>

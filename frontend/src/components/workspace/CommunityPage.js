@@ -150,7 +150,7 @@ export function CommunityPage({ onNavigate }) {
               type="text" value={input} onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Typ een bericht... (bots reageren op keywords)"
-              className="flex-1 px-4 py-3 bg-slate-800/80 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50"
+              className="flex-1 px-4 py-3 bg-slate-800/80 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
             />
             <button data-testid="community-send" onClick={sendMessage} disabled={sending || !input.trim()}
               className="p-3 bg-blue-500 hover:bg-blue-600 rounded-xl transition-colors disabled:opacity-50 disabled:bg-slate-700">

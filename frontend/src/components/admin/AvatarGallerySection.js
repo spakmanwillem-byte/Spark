@@ -133,7 +133,7 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
       {/* Upload form */}
       <div className="rounded-xl bg-slate-900/60 border border-slate-800 p-4 space-y-3">
         <div className="flex items-center gap-2 mb-2">
-          <Plus className="w-4 h-4 text-purple-400" />
+          <Plus className="w-4 h-4 text-amber-400" />
           <h4 className="text-sm font-bold text-white">Nieuwe avatar toevoegen</h4>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -141,20 +141,20 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
             type="text" value={title} onChange={e => setTitle(e.target.value)}
             placeholder="Titel (verplicht, bijv. 'Roadkill Logo')"
             data-testid="gallery-title-input"
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none"
           />
           <input
             type="text" value={tags} onChange={e => setTags(e.target.value)}
             placeholder="Tags (komma-gescheiden, optioneel)"
             data-testid="gallery-tags-input"
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none"
           />
         </div>
         <input ref={fileRef} type="file" accept="image/*" data-testid="gallery-file-input"
-          className="text-xs text-slate-400 file:mr-3 file:px-3 file:py-1.5 file:bg-purple-500/20 file:text-purple-400 file:border-0 file:rounded-lg file:text-xs file:cursor-pointer" />
+          className="text-xs text-slate-400 file:mr-3 file:px-3 file:py-1.5 file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:text-xs file:cursor-pointer" />
         <button onClick={upload} disabled={uploading}
           data-testid="gallery-upload-btn"
-          className="px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 border border-purple-500/40 rounded-lg flex items-center gap-2 text-sm disabled:opacity-50">
+          className="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/40 rounded-lg flex items-center gap-2 text-sm disabled:opacity-50">
           <Upload className="w-4 h-4" />
           {uploading ? 'Uploaden...' : 'Toevoegen aan galerij'}
         </button>
@@ -172,7 +172,7 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
           data-testid="gallery-cat-tab-user"
           onClick={() => setActiveTab('user')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
-            activeTab === 'user' ? 'bg-purple-500/20 text-purple-300' : 'text-slate-400 hover:text-slate-200'
+            activeTab === 'user' ? 'bg-amber-500/20 text-amber-300' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Users className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export function AvatarGallerySection({ adminId, isAdmin }) {
       {/* Gallery list */}
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <ImageIcon className="w-4 h-4 text-purple-400" />
+          <ImageIcon className="w-4 h-4 text-amber-400" />
           <h4 className="text-sm font-bold text-white">
             {activeTab === 'user' ? 'Gebruikers-avatars' : 'Systeem-avatars'} ({visible.length})
           </h4>

@@ -4,8 +4,9 @@ import { toast } from 'sonner';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
-  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus
+  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge
 } from 'lucide-react';
+import { KbV2TagCuration } from './KbV2TagCuration';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -417,7 +418,16 @@ export function KennisbankV2Page({ onNavigate }) {
               count={stats?.lades?.[l.id]?.count || 0} iconEmoji={l.icon}
               label={l.naam} color={l.color} />
           ))}
+          <TabButton id="curatie" active={activeTab === 'curatie'} onClick={setActiveTab}
+            icon={<Merge className="w-3.5 h-3.5" />}
+            label="Tag-curatie" color="#f59e0b" />
         </div>
+
+        {/* v6_kb_curation_dashboard_001 — Tag-curation view */}
+        {activeTab === 'curatie' ? (
+          <KbV2TagCuration viewerId="user-001" />
+        ) : (
+        <>
 
         {/* Search + filter row */}
         <div className="flex flex-wrap items-center gap-2">
@@ -554,6 +564,8 @@ export function KennisbankV2Page({ onNavigate }) {
               </div>
             </div>
           </div>
+        )}
+        </>
         )}
       </div>
     </MainLayout>
@@ -1285,7 +1297,7 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
           <input data-testid="kbv2-herzien-topic" value={editForm.topic || ''}
             onChange={e => setEditForm(f => ({ ...f, topic: e.target.value }))}
             placeholder="bv. systeem / emotie / actie / taal"
-            className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-purple-500/40" />
+            className="w-full text-xs text-slate-200 bg-slate-800/60 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-amber-500/40" />
         </div>
       )}
 
@@ -1318,7 +1330,7 @@ function NewCardInline({ editForm, setEditForm, saving, onSave, onCancel, herzie
           disabled={saving || !(editForm.begrip || '').trim() || (isHerzien && !hasL1) || dupBlocking}
           title={dupBlocking ? 'Begrip bestaat al — open bestaande kaart of pas naam aan' : ''}
           className={`px-4 py-1.5 text-xs font-medium rounded-lg text-white disabled:opacity-40 flex items-center gap-1.5 ${
-            isHerzien ? 'bg-purple-500 hover:bg-purple-600' : 'bg-emerald-500 hover:bg-emerald-600'
+            isHerzien ? 'bg-amber-500 hover:bg-amber-600' : 'bg-emerald-500 hover:bg-emerald-600'
           }`}>
             <Save className="w-3 h-3" /> {saving ? 'Opslaan...' : (isHerzien ? `Promoveer naar ${suggestedLade}` : 'Opslaan in inbox')}
         </button>

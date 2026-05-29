@@ -727,7 +727,21 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
                     auto_expansion = expand_potjes(user_id)
             except Exception:
                 pass
-            return {"pot": p, "netto": round(netto, 4), "overflow": overflow, "auto_expansion": auto_expansion, "spark_bonus": bonus_result, "spark_fee_eur": spark_fee}
+            # v6_overflow_auto_mint_instant_001 — direct na trade-sluiting: check of
+            # Spark's overflow_pool >= €10 staat, en mint dan onmiddellijk nieuwe
+            # trade-potjes. Voorkomt 24h wachttijd van de scheduler. Spark-only.
+            auto_mint = None
+            if user_id == "user-000":
+                try:
+                    from modules.trade.staking_growth import run_auto_mint_only
+                    auto_mint = run_auto_mint_only()
+                    if auto_mint.get("n_minted", 0) > 0:
+                        print(f"[close_pot] Auto-mint: {auto_mint['n_minted']} nieuwe potjes uit overflow")
+                except Exception as ex:
+                    print(f"[close_pot] auto-mint failed (non-blocking): {ex}")
+            return {"pot": p, "netto": round(netto, 4), "overflow": overflow,
+                    "auto_expansion": auto_expansion, "spark_bonus": bonus_result,
+                    "spark_fee_eur": spark_fee, "auto_mint": auto_mint}
     return {}
 
 

@@ -372,7 +372,7 @@ function NetworkTab() {
                         r.method === 'GET' ? 'bg-cyan-500/20 text-cyan-400' :
                         r.method === 'POST' ? 'bg-amber-500/20 text-amber-400' :
                         r.method === 'DELETE' ? 'bg-red-500/20 text-red-400' :
-                        r.method === 'PUT' ? 'bg-purple-500/20 text-purple-400' :
+                        r.method === 'PUT' ? 'bg-amber-500/20 text-amber-400' :
                         'bg-slate-700 text-slate-400'
                       }`}>{r.method}</span>
                     </td>
@@ -488,7 +488,7 @@ function _OldNetworkTab() {
                     style={{ height: `${(t.in / 420) * 100}%` }}
                   />
                   <div 
-                    className="flex-1 bg-gradient-to-t from-purple-500 to-purple-400 rounded-t"
+                    className="flex-1 bg-gradient-to-t from-amber-500 to-amber-400 rounded-t"
                     style={{ height: `${(t.out / 420) * 100}%` }}
                   />
                 </div>
@@ -923,7 +923,7 @@ function _OldLayerTab() {
 function ResourceCard({ label, value, icon: Icon, color, unit, sub }) {
   const colorClasses = {
     cyan: 'from-cyan-500 to-cyan-400',
-    purple: 'from-purple-500 to-purple-400',
+    purple: 'from-amber-500 to-amber-400',
     amber: 'from-amber-500 to-amber-400',
     green: 'from-green-500 to-green-400',
   };

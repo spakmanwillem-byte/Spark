@@ -710,7 +710,7 @@ function Slider({ left, right, value, onChange }) {
       </div>
       <div className="relative h-7">
         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1.5 bg-slate-800 rounded-full" />
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-1.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500"
           style={{ width: `${value}%` }} />
         <input type="range" min="0" max="100" value={value}
           onChange={e => onChange(parseInt(e.target.value, 10))}

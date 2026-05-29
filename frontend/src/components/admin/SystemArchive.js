@@ -244,7 +244,7 @@ export function SystemArchive({ currentUserId, isAdmin = true }) {
             data-testid="foto-subtab-avatars"
             onClick={() => setFotoSubTab('avatars')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              fotoSubTab === 'avatars' ? 'bg-purple-500/20 text-purple-300' : 'text-slate-400 hover:text-slate-200'
+              fotoSubTab === 'avatars' ? 'bg-amber-500/20 text-amber-300' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             <Users className="w-3.5 h-3.5" />

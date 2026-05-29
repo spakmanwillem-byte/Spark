@@ -9,8 +9,8 @@ import {
 // Gradatie kleuren
 const gradatieColors = {
   1: 'from-amber-500 to-orange-600',
-  2: 'from-purple-500 to-pink-600',
-  3: 'from-blue-500 to-cyan-600',
+  2: 'from-amber-500 to-orange-600',
+  3: 'from-amber-500 to-orange-600',
   4: 'from-green-500 to-emerald-600',
   5: 'from-slate-500 to-slate-600',
   6: 'from-slate-600 to-slate-700',

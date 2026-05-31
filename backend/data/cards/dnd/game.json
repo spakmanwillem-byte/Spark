@@ -1,13 +1,77 @@
 {
   "cards": [
     {
+      "id": "game-8b48bffd",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Super dobbelsteen avatar",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "dobbelsteen",
+        "super",
+        "avatar"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/716e81889c24"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0.0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "klasse": "",
+          "beroep": "",
+          "fractie": "",
+          "locatie": ""
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": ""
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-31T23:29:34.647840+00:00",
+        "laatst_bewerkt_op": "2026-05-31T23:29:58.463504+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice"
+      ]
+    },
+    {
       "id": "game-a7c4a332",
       "class": "game",
       "type": "dnd_game_card",
       "begrip": "Basis Dobbelstenen Avatar",
       "sense": "zie",
       "lagen": {
-        "laag1": "",
+        "laag1": "D&D, dobbelsteen, basis, avatar",
         "laag2": "",
         "laag3": "",
         "laag4": ""
@@ -52,14 +116,13 @@
       "status": "draft",
       "footnote": {
         "bron": "manual",
-        "vertrouwen": 0.3,
+        "vertrouwen": 0.45,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-05-31T23:27:31.662443+00:00",
-        "laatst_bewerkt_op": "2026-05-31T23:28:38.395443+00:00",
+        "laatst_bewerkt_op": "2026-05-31T23:28:50.264626+00:00",
         "laatst_bewerkt_door": "user-001"
       },
       "needs": [
-        "laag1",
         "ws5",
         "voice"
       ]
@@ -3023,5 +3086,5 @@
       ]
     }
   ],
-  "updated_at": "2026-05-31T23:28:38.395471+00:00"
+  "updated_at": "2026-05-31T23:29:58.463532+00:00"
 }

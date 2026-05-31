@@ -1,5 +1,44 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18H, fork — Dobbelsteen-events met JOUW 2 D&D avatars)
+
+### 🎲 Dobbelsteen-event systeem (NIEUW)
+- Nieuwe module `/app/backend/modules/dnd/dice.py` (~140 regels)
+- Endpoints:
+  - `GET /api/dnd/dice/cards` — geeft beide dobbelsteen-D&D-kaarten terug met image_urls
+  - `POST /api/dnd/dice/roll` — `{user_id, dice: "basis"|"super", stat_key?, actie?}` → 1d20 + stat-bonus
+- **Card-lookup via begrip-naam** (geen hardcoded IDs — robuust tegen kaart-edits):
+  - "Basis Dobbelstenen Avatar" → 🎯 basis worp
+  - "Super dobbelsteen avatar" → ⭐ super worp (gebruikt TOP 2 hoogste stats als bonus i.p.v. 1)
+- 5 uitkomst-niveaus met flavor-tekst:
+  - `≤ 1` → 💀 kritiek_faal (rood)
+  - `2..9` → ❌ faal (oranje)
+  - `10..15` → ✅ succes (groen)
+  - `16..19` → ✨ groot_succes (paars)
+  - `20+` → 🌟 kritiek_succes (geel)
+- Worpen worden geschreven naar `character.events_feed` (laatste 50) als `kind=WERELD` event
+
+### 🎨 DiceRollerPanel UI in MID-kolom (onder OVERIG)
+- 2 grote avatar-knoppen met JOUW geüploade 512×512 images (Basis oranje, Super paars met amber-glow shadow)
+- Tijdens worp: `animate-spin` op de avatar (visuele roll)
+- Stat-keuze dropdown (Kracht/Behendigheid/etc. met huidige bonus zichtbaar)
+- Actie-input (vrije tekst, bv. "verken bos")
+- Resultaat-kader met level-kleur border, emoji, getalbreakdown (base + bonus = total), level-label, flavor-tekst
+- `data-testid="dice-basis-btn|dice-super-btn|dice-stat-select|dice-action-input|dice-result"`
+
+### Test (visueel + curl)
+- ✅ Basis-worp 18 + 0 = 18 → groot_succes ("Het loopt soepel — alsof iets je een zachte duw geeft.")
+- ✅ Super-worp 7 + 0 = 7 → faal (UI screenshot bevestigd: rood kader, "❌ 7 = 7 · FAAL")
+- ✅ Beide avatars correct gerenderd vanuit D&D-kaarten
+
+### Bestanden gewijzigd in sessie 18H
+- NEW `/app/backend/modules/dnd/dice.py` (~140 regels)
+- `/app/backend/server.py` — dice router
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — `DiceRollerPanel` (~115 regels) + integratie in MID-kolom
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18G, fork — Layout fix + Map full coverage + Speler-glow op dorp)
 
 ### 🗺️ Alle 12 provincies krijgen avatar-cirkel

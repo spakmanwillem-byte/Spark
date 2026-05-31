@@ -395,6 +395,8 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <StatsPanel title="STATISTIEKEN" stats={char.statistieken || {}} accent="#f59e0b" />
           <StatsPanel title="AANVAL & VERDEDIGING" stats={char.aanval_verdediging || {}} accent="#dc2626" />
           <OverigPanel char={char} />
+          {/* v6_dice_001 — Dobbelsteen-paneel met jouw 2 D&D-kaart-avatars */}
+          <DiceRollerPanel userId={userId} stats={char.statistieken || {}} onRolled={reload} />
           {/* v6_bewoners_layout_002 — Bewoners-strip compact 2x3=6 in MID-kolom onder Overig */}
           <BewonersStripPanel
             bewoners={bewoners}
@@ -2015,6 +2017,125 @@ function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSel
     </PaperPanel>
   );
 }
+
+// ============================================================
+// v6_dice_001 — Dobbelsteen-paneel: basis + super, met jouw D&D-kaart-avatars
+// ============================================================
+function DiceRollerPanel({ userId, stats = {}, onRolled }) {
+  const [cards, setCards] = useState(null);
+  const [rolling, setRolling] = useState(false);
+  const [result, setResult] = useState(null);
+  const [statKey, setStatKey] = useState('geluk');
+  const [actie, setActie] = useState('');
+
+  useEffect(() => {
+    fetch(`${API}/api/dnd/dice/cards`)
+      .then(r => r.json())
+      .then(setCards)
+      .catch(() => setCards(null));
+  }, []);
+
+  const roll = async (dice) => {
+    setRolling(true);
+    setResult(null);
+    // Korte visuele "rol"-pauze
+    await new Promise(res => setTimeout(res, 700));
+    try {
+      const r = await fetch(`${API}/api/dnd/dice/roll`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, dice, stat_key: statKey, actie }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.detail || 'Worp mislukt');
+      setResult(data);
+      onRolled?.();
+    } catch (e) {
+      window.alert(e.message);
+    } finally {
+      setRolling(false);
+    }
+  };
+
+  const levelColor = {
+    kritiek_faal: '#dc2626',
+    faal: '#f97316',
+    succes: '#22c55e',
+    groot_succes: '#a78bfa',
+    kritiek_succes: '#fbbf24',
+  };
+
+  return (
+    <PaperPanel>
+      <PaperHeader>DOBBELSTENEN · 1d20</PaperHeader>
+      <div className="p-3 space-y-2.5">
+        {/* Stat-keuze + actie */}
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <label className="text-[10px] text-amber-400/80 w-12">Stat:</label>
+            <select data-testid="dice-stat-select"
+              value={statKey} onChange={e => setStatKey(e.target.value)}
+              className="flex-1 bg-stone-950 border border-amber-900/50 rounded px-1.5 py-0.5 text-[11px] text-amber-100">
+              {Object.keys(stats).length === 0 && <option value="">geen stats</option>}
+              {Object.entries(stats).map(([k, v]) => (
+                <option key={k} value={k}>{k} (+{v})</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <label className="text-[10px] text-amber-400/80 w-12">Actie:</label>
+            <input data-testid="dice-action-input"
+              value={actie} onChange={e => setActie(e.target.value)}
+              placeholder="bv. verken bos…"
+              className="flex-1 bg-stone-950 border border-amber-900/50 rounded px-1.5 py-0.5 text-[11px] text-amber-100 placeholder-amber-700" />
+          </div>
+        </div>
+
+        {/* 2 dobbelsteen-avatars */}
+        <div className="grid grid-cols-2 gap-2">
+          {['basis', 'super'].map(key => {
+            const card = cards?.[key];
+            const img = card?.image_url ? `${API}${card.image_url}` : null;
+            return (
+              <button key={key} data-testid={`dice-${key}-btn`}
+                onClick={() => roll(key)}
+                disabled={rolling}
+                className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${key === 'super' ? 'border-amber-500' : 'border-stone-700'} hover:border-amber-300 disabled:opacity-50 group`}
+                style={key === 'super' ? { boxShadow: '0 0 14px rgba(245,158,11,0.45)' } : undefined}>
+                {img ? (
+                  <img src={img} alt={key}
+                    className={`w-full h-full object-cover transition-transform ${rolling ? 'animate-spin' : 'group-hover:scale-105'}`} />
+                ) : (
+                  <div className="w-full h-full bg-stone-800 flex items-center justify-center text-3xl">🎲</div>
+                )}
+                <div className="absolute bottom-0 inset-x-0 bg-black/85 text-center py-1">
+                  <p className={`text-[11px] font-bold uppercase tracking-wider ${key === 'super' ? 'text-amber-300' : 'text-amber-100'}`}>{key}</p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Resultaat */}
+        {result && (
+          <div data-testid="dice-result" className="rounded-lg border-2 p-2.5 mt-1"
+            style={{ borderColor: levelColor[result.uitkomst_niveau], background: 'rgba(0,0,0,0.6)' }}>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl">{result.emoji}</span>
+              <span className="font-mono text-amber-100 text-sm font-bold">
+                {result.base_roll}{result.stat_bonus ? ` + ${result.stat_bonus}` : ''} = <span style={{ color: levelColor[result.uitkomst_niveau] }}>{result.total}</span>
+              </span>
+            </div>
+            <p className="text-[11px] font-bold mt-1 uppercase tracking-wider" style={{ color: levelColor[result.uitkomst_niveau] }}>
+              {result.uitkomst_niveau.replace('_', ' ')}
+            </p>
+            <p className="text-[10px] italic text-amber-200/80 mt-1 leading-snug">{result.flavor}</p>
+          </div>
+        )}
+      </div>
+    </PaperPanel>
+  );
+}
+
 
 
 export default DnDCharacterSheet;

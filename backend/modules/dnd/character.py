@@ -27,7 +27,7 @@ Schema:
       "trinket": null, "torso": null, "broek": null, "voeten": null,
       "sjaal": null, "riem": null, "handen": null, "ring_l": null,
       "ring_r": null, "linkerhand": null, "rechterhand": null,
-      "offhand": null, "pijl_boog": null
+      "offhand": null, "pijl_boog": null, "rugzak": null
   },
   "event_feed": [               # ringbuffer max 50
       {"ts": ISO, "kind": "SYSTEEM|WERELD|GUILD|VERHAAL|HANDEL", "text": "..."}
@@ -54,7 +54,7 @@ EVENT_BUFFER_MAX = 50
 SLOT_KEYS = [
     "hoofd", "nek", "schouders", "armen", "trinket", "torso", "broek",
     "voeten", "sjaal", "riem", "handen", "ring_l", "ring_r",
-    "linkerhand", "rechterhand", "offhand", "pijl_boog",
+    "linkerhand", "rechterhand", "offhand", "pijl_boog", "rugzak",
 ]
 
 SLOT_LABELS = {
@@ -75,6 +75,7 @@ SLOT_LABELS = {
     "rechterhand": ("RECHTERHAND", "Klein Zwaard"),
     "offhand": ("OFFHAND", "Lantaarn"),
     "pijl_boog": ("PIJL & BOOG", "Pijl en Boog"),
+    "rugzak": ("RUGZAK", "Basis Rugzak"),
 }
 
 DEFAULT_CHARACTER = {

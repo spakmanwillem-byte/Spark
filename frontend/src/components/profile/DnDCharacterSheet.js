@@ -238,6 +238,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
               isAdmin={isAdmin}
               onChange={reload}
               gameCards={gameCards}
+              capacity={inventory?.capacity || null}
             />
           </PaperPanel>
           {/* v6_dnd_layout_v2 — CharInfo verplaatst onder Body+Equipment (Willem 31 mei) */}
@@ -268,10 +269,20 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
         </div>
       </div>
 
-      {/* ===== PLACEHOLDER (Willem: tabs omhoog, placeholder tot nodig) ===== */}
-      <div className="mt-3 p-4 border border-dashed border-amber-900/30 rounded-lg bg-stone-950/40 text-center" data-testid="dnd-placeholder-future">
-        <p className="text-[10px] uppercase tracking-wider text-amber-500/40">Toekomstige uitbreiding</p>
-        <p className="text-[10px] text-amber-400/30 mt-1">handel-kader hub · pop-up dorp-info · pop-up stad-info — zie ROADMAP P2</p>
+      {/* ===== HANDEL-KADER VOORBEREIDING (Willem: items + kg klaar, kader-hub volgt) ===== */}
+      <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3" data-testid="dnd-trade-prep">
+        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">🏪 Warehouse</p>
+          <p className="text-[10px] text-amber-200/60 italic">Per stad/fractie · opslag voor handelaren · binnenkort</p>
+        </div>
+        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">⚖️ Auction House</p>
+          <p className="text-[10px] text-amber-200/60 italic">Loot kopen / verkopen · prijs per fractie · binnenkort</p>
+        </div>
+        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">🍞 Werkbank</p>
+          <p className="text-[10px] text-amber-200/60 italic">Thuis koken/maken · brood, vlees, drank · binnenkort</p>
+        </div>
       </div>
 
       {/* (EventFeed + CharInfo zijn verplaatst — EventFeed bovenaan breed, CharInfo onder Body+Equipment) */}
@@ -431,7 +442,7 @@ function CurrencyPill({ icon: Icon, color, value, testid }) {
 const BODY_AVATAR_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/sb88yjie_WhatsApp%20Image%202026-05-29%20at%2023.58.26%20%281%29.jpeg';
 
 // ----- BODY SILHOUETTE -----
-function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards = [] }) {
+function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards = [], capacity = null }) {
   const [editingSlot, setEditingSlot] = useState(null);
   const [slotLayout, setSlotLayout] = useState([]);
   const [editMode, setEditMode] = useState(false);
@@ -540,6 +551,7 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards =
             preview={slotPreview(slot)}
             editMode={editMode}
             isDragging={dragging === slot.key}
+            capacity={slot.key === 'rugzak' ? capacity : null}
             onPointerDown={(e) => onSlotPointerDown(e, slot)} />
         ))}
       </div>
@@ -565,9 +577,15 @@ function BodySilhouettePanel({ equipment, userId, isAdmin, onChange, gameCards =
   );
 }
 
-function SlotFrame({ slot, item, preview, editMode, isDragging, onPointerDown }) {
+function SlotFrame({ slot, item, preview, editMode, isDragging, onPointerDown, capacity = null }) {
   const filled = !!item;
   const naam = item?.naam || slot.fallback;
+  // v6_rugzak_kg_001 — Rugzak slot toont kg-meter (gebruikt/max) onder de naam.
+  const isRugzak = slot.key === 'rugzak';
+  const kgUsed = capacity?.weight_used ?? 0;
+  const kgMax = capacity?.weight_max ?? 0;
+  const kgPct = kgMax > 0 ? Math.min(100, Math.round((kgUsed / kgMax) * 100)) : 0;
+  const kgColor = kgPct >= 90 ? '#dc2626' : kgPct >= 70 ? '#eab308' : '#22c55e';
   return (
     <div
       data-testid={`slot-${slot.key}`}
@@ -610,6 +628,17 @@ function SlotFrame({ slot, item, preview, editMode, isDragging, onPointerDown })
           style={{ textShadow: '0 1px 3px rgba(0,0,0,0.95)' }}>
           {naam}
         </p>
+        {isRugzak && kgMax > 0 && (
+          <div data-testid="rugzak-kg-meter" className="mt-0.5 mx-auto" style={{ width: 56 }}>
+            <p className="text-[8px] font-mono font-bold"
+              style={{ color: kgColor, textShadow: '0 1px 3px rgba(0,0,0,0.95)' }}>
+              {kgUsed.toFixed(1)}/{kgMax.toFixed(0)} kg
+            </p>
+            <div className="h-1 rounded-full bg-black/70 border border-amber-900/40 overflow-hidden">
+              <div className="h-full transition-all" style={{ width: `${kgPct}%`, background: kgColor }} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -884,10 +913,13 @@ function HuisOpslagPanel({ gameCards = [], inventory = null }) {
     <PaperPanel>
       <PaperHeader right={
         <span className="text-[10px] font-mono text-amber-300/80" data-testid="opslag-cap-counter">
-          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX}
+          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX} · <span className="text-emerald-300/80 italic">geen kg-limiet</span>
         </span>
-      }>HUIS &amp; OPSLAG</PaperHeader>
+      }>HUIS &amp; OPSLAG · STILSTAAND</PaperHeader>
       <div className="space-y-3 p-3">
+        <p className="text-[10px] text-emerald-300/70 italic -mt-1">
+          🏠 Hier staat alles stil — bereid eten, sla loot op, geen gewicht-restrictie. Pak in je rugzak wat je meeneemt op pad.
+        </p>
         {/* Rij 1: Huis + Meubel slots */}
         <div className="grid grid-cols-2 gap-3">
           <div>

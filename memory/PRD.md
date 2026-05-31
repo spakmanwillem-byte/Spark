@@ -1,5 +1,48 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18, fork — Rugzak hersteld + items)
+
+### 🎒 Rugzak terug op de Avatar (per ongeluk verwijderd in vorige sessie hersteld)
+- **`rugzak` slot weer toegevoegd** aan `body_layout.json` (positie x:65 y:36) + `SLOT_KEYS` + equipment schema in `character.py`
+- **Kg-meter onder rugzak slot**: toont `kgUsed/kgMax` met kleur-progress bar (groen <70%, geel 70-90%, rood ≥90%)
+- **Capacity wordt doorgegeven** vanuit `inventory.capacity` aan `BodySilhouettePanel` → `SlotFrame` (alleen rugzak-slot toont de meter)
+- Bestaande character JSON files krijgen `rugzak: null` automatisch via `eq.setdefault()`
+
+### 🍞 Item-catalog uitgebreid (start-loot, voorbereiding bakker/slager/handel)
+- 8 nieuwe items toegevoegd aan `ITEM_CATALOG` (`/app/backend/modules/inventory/routes.py`):
+  - **Voedsel**: Brood (0.4kg, 2g), Stuk Vlees (0.6kg, 4g), Boerenkaas (0.3kg, 3g), Appel (0.15kg, 1g), Ei (0.08kg, 1g)
+  - **Drank**: Veldfles Water (0.8kg, 1g)
+  - **Tool**: Fakkel (0.5kg, 2g)
+  - **Currency**: Goudstuk (0.01kg)
+- Elk item heeft `tags`, `value_goud`, `kind`, `description` — klaar voor avatar-image matching en handel-prijsbepaling
+
+### 🏠 Huis & Opslag panel verduidelijkt
+- Header label `HUIS & OPSLAG · STILSTAAND` + counter regel: "Opslag X/500 · geen kg-limiet"
+- Toegevoegd: emerald hint-tekst "🏠 Hier staat alles stil — bereid eten, sla loot op, geen gewicht-restrictie. Pak in je rugzak wat je meeneemt op pad."
+- Conceptueel onderscheid: **Huis** = 500 slots, geen kg / **Rugzak** = beperkt door kg (op avatar zichtbaar)
+
+### 🏪 Handel-kader voorbereiding (3 placeholders)
+- Onderaan D&D character sheet: 3-kolom grid met dashed-border placeholders
+  - **Warehouse** (per stad/fractie · opslag voor handelaren · binnenkort)
+  - **Auction House** (loot kopen/verkopen · prijs per fractie · binnenkort)
+  - **Werkbank** (thuis koken/maken · brood, vlees, drank · binnenkort)
+- `data-testid="dnd-trade-prep"` voor latere testing
+- Vervangt de oude losse "Toekomstige uitbreiding" placeholder
+
+### Bestanden gewijzigd
+- `/app/backend/data/dnd/body_layout.json` — rugzak slot toegevoegd
+- `/app/backend/modules/dnd/character.py` — SLOT_KEYS + SLOT_LABELS + equipment-schema
+- `/app/backend/modules/inventory/routes.py` — 8 nieuwe items in catalog
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — kg-meter op SlotFrame, capacity prop, Huis-label, Handel-kader placeholders
+
+### Backend testing
+- ✅ `GET /api/inventory/catalog/all` → 12 items (4 origineel + 8 nieuw)
+- ✅ `GET /api/dnd/character/slots/config` → 18 slots (17 origineel + rugzak)
+- Frontend smoke-tested (app rendert, login pagina zichtbaar)
+
+---
+
+
 
 ## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 7, final pre-deploy)
 

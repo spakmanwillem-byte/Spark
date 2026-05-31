@@ -841,15 +841,16 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 70.78000488289744,
+            "highest_price": 70.783,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-31T22:15:21.950285+00:00",
+            "amount_eur": 10.0
           },
           "market": "SOL-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -863,9 +864,17 @@
               "amount_eur": 10.0,
               "trade_id": "00000000-0000-0560-0100-000809033bf2",
               "market": "SOL-EUR"
+            },
+            {
+              "ts": "2026-05-31T22:15:21.950285+00:00",
+              "side": "BUY",
+              "price": 70.78000488289744,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a6f0e99",
+              "market": "SOL-EUR"
             }
           ],
-          "last_action": null,
+          "last_action": "BUY @ €70.78",
           "live_value": 10.0
         },
         {
@@ -876,23 +885,34 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 0.20186000326458445,
+            "highest_price": 0.20186000326458445,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-31T22:17:02.829776+00:00",
+            "amount_eur": 10.0
           },
           "market": "ADA-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-31T21:07:36.812367+00:00",
-          "last_action": null,
+          "last_action": "BUY @ €0.20",
           "source": "spark_extra_tokens_from_willem",
-          "live_value": 10.0
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:17:02.829776+00:00",
+              "side": "BUY",
+              "price": 0.20186000326458445,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080a71af66",
+              "market": "ADA-EUR"
+            }
+          ]
         },
         {
           "id": "pot-012",
@@ -1006,23 +1026,34 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 70.73000243972396,
+            "highest_price": 70.731,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-05-31T22:16:30.934095+00:00",
+            "amount_eur": 10.0
           },
           "market": "SOL-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-31T21:07:36.812367+00:00",
-          "last_action": null,
+          "last_action": "BUY @ €70.73",
           "source": "spark_extra_tokens_from_willem",
-          "live_value": 10.0
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:16:30.934095+00:00",
+              "side": "BUY",
+              "price": 70.73000243972396,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a70ee65",
+              "market": "SOL-EUR"
+            }
+          ]
         },
         {
           "id": "pot-017",
@@ -1105,7 +1136,7 @@
       ],
       "baseline_eur": 51.4,
       "overflow_pool": 0.0,
-      "last_buy_cycle": 695,
+      "last_buy_cycle": 3,
       "user_id": "user-000",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00",

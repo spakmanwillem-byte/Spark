@@ -638,23 +638,10 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         trailing_active = position.get("trailing_active", False) or netto_rounded >= trail_threshold
         drop_from_high = (highest - price) / highest if highest else 0
 
-        # v6_stop_loss_001 — Hard stop-loss bij verlies, vóór trail-logica.
-        # Verlies-pad ≠ trail-pad: geen conflict, 1 systeem in 2 richtingen.
-        # Drempel: -2% van entry (configurabel via STOP_LOSS_PCT env later).
-        # Doel: potje vrijmaken bij dump zodat re-entry mogelijk wordt op de stijging erna.
-        STOP_LOSS_PCT = -0.02  # -2%
-        if profit_pct <= STOP_LOSS_PCT:
-            return {
-                **base,
-                "action": "SELL",
-                "reason": f"Stop-loss @ €{price:.4f} ({profit_pct*100:+.2f}% ≤ {STOP_LOSS_PCT*100:.1f}%). Sluit verlies-positie om potje vrij te maken voor re-entry.",
-                "confidence": 0.99,
-                "netto_profit": round(netto_profit, 4),
-                "bruto_profit": round(bruto_profit, 4),
-                "fees": round(total_fees, 4),
-                "stop_loss": True,
-                "position_update": {"close": True, "highest_price": highest, "trailing_active": trailing_active},
-            }
+        # v6_stop_loss_001 — VERVANGEN door shadow-potje systeem (v6_shadow_pot_001).
+        # Stop-loss verwijderd: we sluiten geen verlies-positie meer. Wachten op recovery + winst
+        # uit andere potjes/overflow streamt terug naar wachtende positie.
+        # Trail-strategie blijft 100% intact (alleen winst-verkoop).
 
         if trailing_active and price < highest:
             if netto_rounded >= exit_min_netto:
@@ -1058,6 +1045,38 @@ class MonitorService:
                             real_price = result.get("trade", {}).get("price") or price
                             close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
                             actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}")
+                            # v6_shadow_pot_001 — Als de gesloten pot een actieve shadow had → sluit shadow ook (winst voor user)
+                            try:
+                                from modules.trade import shadow_pots as _shadow
+                                act = _shadow.get_active_shadow(pot["id"])
+                                if act:
+                                    s_entry = act.get("entry_price") or real_price
+                                    s_profit = (real_price - s_entry) / s_entry * (act.get("capital", 10.0))
+                                    _shadow.close_shadow(act["shadow_id"], real_price, round(s_profit, 4))
+                                    actions_this_cycle.append(f"SHADOW-CLOSE {act['shadow_id']} ({market}) profit €{s_profit:+.4f}")
+                            except Exception as _ex:
+                                logger.warning(f"shadow-close failed: {_ex}")
+
+                # v6_shadow_pot_001 — Drop-detectie: als positie ≤ -3% verlies → activeer shadow (BUY op lage prijs)
+                # Origineel potje BLIJFT OPEN (no realized loss). Shadow vangt de re-entry stijging.
+                if profit_pct <= -0.03:
+                    try:
+                        from modules.trade import shadow_pots as _shadow
+                        idle = next((s for s in _shadow.get_shadows_for_pot(pot["id"]) if s.get("status") == "idle"), None)
+                        if idle and self._auto_trade and not self._use_mock:
+                            # Voer echte BUY uit voor de shadow op huidige (lage) prijs
+                            shadow_capital = float(idle.get("capital", 10.0))
+                            sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
+                            if sresult.get("success"):
+                                real_entry = sresult.get("trade", {}).get("price") or price
+                                _shadow.activate_shadow(pot["id"], real_entry, profit_pct, trade_id=sresult.get("trade", {}).get("trade_id"))
+                                actions_this_cycle.append(f"SHADOW-ACTIVATE {idle['shadow_id']} ({market}) @ €{real_entry:.4f} on -{abs(profit_pct)*100:.2f}% drop")
+                        elif idle and self._auto_trade and self._use_mock:
+                            # Mock-modus: activeer shadow administratief zonder echte BUY
+                            _shadow.activate_shadow(pot["id"], price, profit_pct, trade_id="MOCK-SHADOW")
+                            actions_this_cycle.append(f"SHADOW-MOCK {idle['shadow_id']} ({market}) @ €{price:.4f}")
+                    except Exception as _ex:
+                        logger.warning(f"shadow-activate failed for {pot['id']}: {_ex}")
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
             #    v6_buy_cooldown_001 — Plus: minimaal 5 min cooldown per markt tussen 2 BUYs

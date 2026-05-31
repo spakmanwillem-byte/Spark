@@ -1178,6 +1178,67 @@ def is_registered(user_id: str) -> bool:
     return user_id in _load_registered_users()
 
 
+# v6_auto_provision_001 — Wanneer een user een token koopt of ontvangt,
+# moet hij direct kunnen handelen. Deze helper doet alles in 1 call:
+#   1. register_user_bot (proactief zichtbaar in admin Analytics)
+#   2. monitor-instance aanmaken met defaults (markets, trade_amount=10, auto_trade=True)
+#   3. use_mock standaard FALSE (zelfde als de 5 live-bots) — token-holder mag echt handelen
+#   4. NIET autostart: bot staat klaar maar wacht op user "start"-knop in UI
+def auto_provision_bot_for_token_holder(
+    user_id: str,
+    use_mock: bool = False,
+    auto_trade: bool = True,
+    autostart: bool = False,
+) -> dict:
+    """Idempotent: meerdere calls voor dezelfde user veranderen niets als hij al heeft."""
+    # 1. Register (idempotent)
+    register_user_bot(user_id)
+
+    # 2. Monitor instance (idempotent — get_user_monitor maakt aan als niet bestaat)
+    m = get_user_monitor(user_id)
+
+    # 3. Defaults voor nieuwe bot — alleen toepassen als nog niet expliciet ingesteld
+    already_running = bool(getattr(m, "_running", False))
+    has_been_configured = bool(getattr(m, "_user_configured", False))
+
+    if not has_been_configured:
+        try:
+            m._markets = list(WATCHLIST_COINS) if "WATCHLIST_COINS" in globals() else m._markets
+            m._auto_trade = bool(auto_trade)
+            m._use_mock = bool(use_mock)
+            m._trade_amount = float(getattr(m, "_trade_amount", 10.0) or 10.0)
+            m._use_potjes = True
+            m._user_configured = True
+        except Exception as e:
+            logger.warning(f"auto-provision config-set failed for {user_id}: {e}")
+
+    # 4. Optioneel autostart
+    started = False
+    if autostart and not already_running:
+        try:
+            m.start()
+            started = True
+        except Exception as e:
+            logger.warning(f"auto-provision autostart failed for {user_id}: {e}")
+
+    # Persist registry
+    try:
+        _persist_registry()
+    except Exception:
+        pass
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "registered": True,
+        "auto_trade": getattr(m, "_auto_trade", None),
+        "use_mock": getattr(m, "_use_mock", None),
+        "configured": getattr(m, "_user_configured", False),
+        "started": started,
+        "running": bool(getattr(m, "_running", False)),
+    }
+
+
 def resume_registered_users():
     """Bij backend startup: ensure registered users hebben monitor-instance (niet running)."""
     for uid in _load_registered_users():

@@ -3,6 +3,18 @@
 
 ## Completed (recent — 2026-05-31, sessie 17 / fork)
 
+- **v6_auto_provision_001** — Auto-registratie bij token-purchase + migratie voor bestaande holders:
+  - **Nieuwe helper** `auto_provision_bot_for_token_holder(user_id, use_mock, auto_trade, autostart)` in `modules/trade/monitor.py`. Idempotent: doet niks als user al bot heeft.
+  - **3 entry-points gehookt**:
+    - `shop/routes.py` (`buy_tokens`) — bij directe token-purchase
+    - `shop/gift.py` (`accept_gift`) — bij gift-acceptatie
+    - `trade/routes.py` (`POST /admin/migrate-token-holders`) — nieuwe admin endpoint voor migratie van bestaande token-holders
+  - **Migratie uitgevoerd**: alle 5 huidige token-holders gechecked. De Willem (user-001, 21 tokens) was als enige nog niet geregistreerd → nu `newly_provisioned` met 21 potjes (1 per token, round-robin over markten).
+  - **Defaults voor nieuwe token-holder bot**: `auto_trade=true`, `use_mock=false`, `autostart=false` (user moet bewust starten via UI). Markten = WATCHLIST_COINS (6 stuks).
+  - **Boekhouding ready voor 1 juni**: `spark_kasboek.json` = 0 entries (clean slate), hooks loggen met `datetime.now(timezone.utc).isoformat()` → dag/maand/jaar zit automatisch in elke entry's `created_at` + `date` veld. Geen rollover-mechanisme nodig.
+
+
+
 - **v6_go_live_001** — Alle 5 token-users bots zijn LIVE per 1 juni:
   - **Bug A (mock-safety)** gefixt: nieuwe `_enforce_mock_safety()` helper in `routes.py` blokkeert handmatige `execute_real_trade` als bot-config `use_mock=True` staat. Toegepast in `/trade/execute/{user_id}` en `/trade/quick-buy-potje/{user_id}`. Hoofd-issue eerder: handmatige Quick-Buy met `use_mock=False` overruleerde de bot-mock-flag en deed echte trades (zoals Lotus/Roadkill op 29 mei 19:09 — dit verklaart "trail-verkoop werkt, koop niet"). Nu hard-block met duidelijke error.
   - **Bug B (auto_trade=False overal)** gefixt: registry `bots_registry_state.json` gepatcht — alle 5 bots (Spark/de Geiser/Gerben/Lotus/Roadkill) op `auto_trade=true` + `use_mock=false`. Backend gerestart, monitor herlaadt uit registry.

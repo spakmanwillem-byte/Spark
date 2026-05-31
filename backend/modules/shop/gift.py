@@ -271,6 +271,14 @@ async def accept_gift(gift_id: str, req: GiftAction):
         except Exception as _ex:
             print(f"[potje-sync gift] failed: {_ex}")
 
+        # v6_auto_provision_001 — auto-register bot + monitor voor recipient
+        try:
+            if recipient != "user-000":
+                from modules.trade.monitor import auto_provision_bot_for_token_holder
+                auto_provision_bot_for_token_holder(recipient, use_mock=False, auto_trade=True, autostart=False)
+        except Exception as _ex:
+            print(f"[auto-provision gift] failed for {recipient}: {_ex}")
+
         # First-token achievement voor recipient
         try:
             if prev_recipient == 0 and amount > 0:

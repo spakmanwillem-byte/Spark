@@ -1117,3 +1117,54 @@ async def refresh_all_contexts():
         except Exception as e:
             results[market] = {"success": False, "error": str(e)}
     return {"success": True, "results": results}
+
+
+
+# ============================================================
+# v6_auto_provision_001 — Migratie: alle ROAR-token-holders zonder bot
+# ============================================================
+@router.post("/admin/migrate-token-holders")
+async def migrate_token_holders():
+    """
+    Voor alle users met >0 ROAR-tokens die nog geen monitor-bot hebben:
+    - register_user_bot
+    - bot-config aanmaken (auto_trade=True, use_mock=False)
+    - sync_potjes_to_tokens
+    Idempotent: doet niks voor users die al een bot hebben.
+    """
+    from modules.trade.monitor import auto_provision_bot_for_token_holder
+    from modules.trade.potjes import sync_potjes_to_tokens
+
+    roar = load_json(DATA_DIR.parent / "roar" / "roar_balances.json", default={"balances": {}})
+    balances = roar.get("balances", {})
+
+    registry = load_json(TRADE_DIR / "bots_registry_state.json", default={"bots": []})
+    existing_bot_users = {b.get("user_id") for b in registry.get("bots", []) if isinstance(b, dict)}
+
+    results = []
+    for uid, tokens in balances.items():
+        try:
+            t = int(tokens) if tokens else 0
+        except Exception:
+            t = 0
+        if t <= 0:
+            continue
+        if uid == "user-000":  # Spark heeft eigen base-potjes
+            continue
+        already = uid in existing_bot_users
+        try:
+            sync_potjes_to_tokens(uid, t)
+        except Exception as e:
+            results.append({"user_id": uid, "tokens": t, "status": "potje-sync-failed", "error": str(e)})
+            continue
+        try:
+            r = auto_provision_bot_for_token_holder(uid, use_mock=False, auto_trade=True, autostart=False)
+            results.append({
+                "user_id": uid, "tokens": t,
+                "status": "already_had_bot" if already else "newly_provisioned",
+                "running": r.get("running"),
+            })
+        except Exception as e:
+            results.append({"user_id": uid, "tokens": t, "status": "provision-failed", "error": str(e)})
+
+    return {"success": True, "total_users": len(results), "results": results}

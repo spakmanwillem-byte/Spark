@@ -504,6 +504,13 @@ async def buy_tokens(user_id: str, req: BuyTokenRequest):
         except Exception as _ex:
             print(f"[potje-sync] failed for {user_id}: {_ex}")
 
+        # v6_auto_provision_001 — auto-register bot + monitor zodat token-holder direct kan starten
+        try:
+            from modules.trade.monitor import auto_provision_bot_for_token_holder
+            auto_provision_bot_for_token_holder(user_id, use_mock=False, auto_trade=True, autostart=False)
+        except Exception as _ex:
+            print(f"[auto-provision] failed for {user_id}: {_ex}")
+
     # v6_bonnetje_001 — Bonnetje voor klant-aankoop opslaan in user archief
     try:
         if user_id not in {"user-000", "user-001"}:  # alleen klanten

@@ -260,9 +260,11 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <OverigPanel char={char} />
         </div>
 
-        {/* === KOLOM RECHTS: Huis & Opslag (master inventory) + Dorp + Map === */}
+        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag (master inventory) + Dorp + Map === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
-          {/* v6_dnd_layout_v2 — Rugzak weg, Huis & Opslag is nu de inventory (500 slots, geen kg) */}
+          {/* v6_rugzak_kader_001 — Rugzak als eigen kader naast Huis & Opslag (mobile carry, met kg) */}
+          <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} />
+          {/* v6_dnd_layout_v2 — Huis & Opslag is stilstaand (500 slots, geen kg) */}
           <HuisOpslagPanel gameCards={gameCards} inventory={inventory} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
           <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
@@ -648,6 +650,25 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
   const [naam, setNaam] = useState(item?.naam || '');
   const [icon, setIcon] = useState(item?.icon || '');
   const [busy, setBusy] = useState(false);
+  // v6_item_stats_001 — catalog items voor dit slot (met stats_bonus preview)
+  const [catalogItems, setCatalogItems] = useState([]);
+  const [selectedCatalogItem, setSelectedCatalogItem] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API}/api/inventory/catalog/all`)
+      .then(r => r.json())
+      .then(d => {
+        const all = d.items || [];
+        const kw = getSlotKeywords(slot);
+        const filtered = all.filter(it => {
+          if (it.slot === slot.key) return true;
+          const tags = (it.tags || []).map(t => String(t).toLowerCase());
+          return kw.some(k => tags.includes(k));
+        });
+        setCatalogItems(filtered);
+      })
+      .catch(() => setCatalogItems([]));
+  }, [slot.key]);
 
   // v6_dnd_card_visuals_002 — kandidaten uit D&D-galerij via gedeelde synoniemen
   const candidates = (() => {
@@ -661,8 +682,14 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
 
   const pickCard = (c) => {
     setNaam(c.begrip || '');
-    // Geen emoji, want we hebben een foto; gebruik klein symbool als fallback
     if (!icon) setIcon('🎴');
+    setSelectedCatalogItem(null);
+  };
+
+  const pickCatalogItem = (it) => {
+    setNaam(it.naam || '');
+    setIcon(it.icon || '◆');
+    setSelectedCatalogItem(it);
   };
 
   const save = async () => {
@@ -692,6 +719,72 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
       <div data-testid="equip-modal" className="bg-stone-950 border-2 border-amber-700/60 rounded-xl p-5 w-full max-w-md max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
         <h3 className="text-amber-100 font-serif text-lg mb-1">{slot.label}</h3>
         <p className="text-amber-400/60 text-xs mb-4">Equip een item in dit slot</p>
+
+        {/* Catalog items voor dit slot (met stats) */}
+        {catalogItems.length > 0 && (
+          <div className="mb-4">
+            <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
+              Item-catalogus ({catalogItems.length}) · stats inbegrepen
+            </p>
+            <div data-testid="equip-catalog-items" className="space-y-1.5">
+              {catalogItems.map(it => {
+                const sel = selectedCatalogItem?.id === it.id || (naam || '').toLowerCase() === (it.naam || '').toLowerCase();
+                const statBonus = it.stats_bonus || {};
+                const combatBonus = it.combat_bonus || {};
+                const meta = it.meta || {};
+                return (
+                  <button key={it.id} data-testid={`equip-catalog-${it.id}`}
+                    onClick={() => pickCatalogItem(it)}
+                    className={`w-full text-left p-2 rounded border transition-all ${sel ? 'border-amber-400 bg-amber-900/30 ring-1 ring-amber-400/40' : 'border-stone-700 hover:border-amber-600 bg-stone-900/40'}`}>
+                    <div className="flex items-start gap-2">
+                      <div className="text-2xl leading-none">{it.icon || '◆'}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-sm font-bold text-amber-100 truncate">{it.naam}</p>
+                          <span className="text-[10px] text-amber-400/70 font-mono shrink-0">{it.weight}kg</span>
+                        </div>
+                        {it.description && (
+                          <p className="text-[10px] text-amber-300/60 italic mt-0.5 line-clamp-2">{it.description}</p>
+                        )}
+                        {/* Stats bonus pills */}
+                        <div className="flex flex-wrap gap-1 mt-1.5">
+                          {Object.entries(statBonus).map(([k, v]) => (
+                            <span key={k} className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-900/40 border border-emerald-700/40 text-emerald-200 font-mono">
+                              {v > 0 ? '+' : ''}{v} {k}
+                            </span>
+                          ))}
+                          {Object.entries(combatBonus).map(([k, v]) => (
+                            <span key={k} className={`text-[9px] px-1.5 py-0.5 rounded border font-mono ${v > 0 ? 'bg-red-900/40 border-red-700/40 text-red-200' : 'bg-amber-900/30 border-amber-700/40 text-amber-300/80'}`}>
+                              {v > 0 ? '+' : ''}{v} {k}
+                            </span>
+                          ))}
+                          {it.value_goud && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-yellow-900/40 border border-yellow-700/40 text-yellow-200 font-mono">
+                              {it.value_goud}g
+                            </span>
+                          )}
+                          {it.rarity && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-stone-800 border border-stone-600 text-stone-300 italic uppercase tracking-wider">
+                              {it.rarity}
+                            </span>
+                          )}
+                        </div>
+                        {/* Meta (klasse/beroep/fractie/locatie) */}
+                        {(meta.klasse || meta.beroep || meta.fractie || meta.locatie) && (
+                          <p className="text-[9px] text-amber-400/50 mt-1">
+                            {[meta.klasse && `Klasse: ${meta.klasse}`, meta.beroep && `Beroep: ${meta.beroep}`,
+                              meta.fractie && `Fractie: ${meta.fractie}`, meta.locatie && `📍 ${meta.locatie}`]
+                              .filter(Boolean).join(' · ')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Kaart-suggesties uit D&D galerij */}
         {candidates.length > 0 && (
@@ -878,9 +971,121 @@ function InventoryGridPanel({ userId, inventory: invProp }) {
   );
 }
 
+// v6_rugzak_kader_001 — Eigen kader voor de Rugzak (mobile carry, met kg-limiet)
+function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange }) {
+  const [catalog, setCatalog] = useState([]);
+  const [adding, setAdding] = useState(false);
+
+  useEffect(() => {
+    fetch(`${API}/api/inventory/catalog/all`)
+      .then(r => r.json())
+      .then(d => setCatalog(d.items || []))
+      .catch(() => {});
+  }, []);
+
+  const slots = inventory?.slots || [];
+  const cap = inventory?.capacity || { weight_used: 0, weight_max: 0, slots_used: 0, slots_total: 0 };
+  const VISIBLE_SLOTS = 16; // 8 cols × 2 rows
+  const kgUsed = cap.weight_used || 0;
+  const kgMax = cap.weight_max || 0;
+  const kgPct = kgMax > 0 ? Math.min(100, Math.round((kgUsed / kgMax) * 100)) : 0;
+  const kgColor = kgPct >= 90 ? '#dc2626' : kgPct >= 70 ? '#eab308' : '#22c55e';
+
+  // Speed-modifier op basis van kg-vulling (kosmetisch indicator)
+  const speedLabel =
+    kgPct >= 90 ? 'Zwaar geladen — traag' :
+    kgPct >= 70 ? 'Vol — iets trager' :
+    kgPct >= 40 ? 'Goede balans' : 'Licht — snel';
+
+  const addItem = async (item_id) => {
+    setAdding(true);
+    try {
+      const r = await fetch(`${API}/api/inventory/${userId}/items`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item_id, source: 'rugzak_ui' }),
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        window.alert(e.detail || 'Kon item niet toevoegen');
+      }
+      onChange?.();
+    } finally { setAdding(false); }
+  };
+
+  const removeItem = async (slot_id) => {
+    if (!window.confirm('Item uit rugzak halen?')) return;
+    await fetch(`${API}/api/inventory/${userId}/items/${slot_id}`, { method: 'DELETE' }).catch(() => {});
+    onChange?.();
+  };
+
+  return (
+    <PaperPanel>
+      <PaperHeader right={
+        <span className="text-[10px] font-mono font-bold" data-testid="rugzak-kg-counter" style={{ color: kgColor }}>
+          {kgUsed.toFixed(1)} / {kgMax.toFixed(0)} kg
+        </span>
+      }>RUGZAK · ONDERWEG</PaperHeader>
+      <div className="p-3 space-y-2.5">
+        <p className="text-[10px] text-amber-300/70 italic -mt-0.5">
+          🎒 Wat je meeneemt op pad. Meer kg = langzamer. Items uit Huis & Opslag of gevonden loot.
+        </p>
+
+        {/* Kg progress bar */}
+        <div data-testid="rugzak-kg-bar" className="space-y-1">
+          <div className="h-2 rounded-full bg-black/70 border border-amber-900/40 overflow-hidden">
+            <div className="h-full transition-all" style={{ width: `${kgPct}%`, background: kgColor }} />
+          </div>
+          <div className="flex justify-between text-[9px]">
+            <span className="text-amber-400/80">Slots: <span className="font-mono text-amber-200">{cap.slots_used || 0}/{cap.slots_total || 0}</span></span>
+            <span style={{ color: kgColor }} className="italic font-medium">{speedLabel}</span>
+          </div>
+        </div>
+
+        {/* Items grid */}
+        <div data-testid="rugzak-grid" className="grid grid-cols-8 gap-1">
+          {Array.from({ length: VISIBLE_SLOTS }).map((_, i) => {
+            const item = slots[i];
+            return (
+              <button key={i} data-testid={`rugzak-slot-${i}`}
+                disabled={!item}
+                onClick={() => item && removeItem(item.id)}
+                title={item ? `${item.naam} · ${item.weight || 0}kg · klik om te verwijderen` : 'Leeg'}
+                className={`aspect-square rounded border text-base flex items-center justify-center transition-all ${item ? 'border-amber-700/60 bg-amber-950/40 hover:bg-red-900/30 hover:border-red-700 cursor-pointer' : 'border-amber-900/30 bg-stone-950/50 cursor-default'}`}>
+                {item ? (item.icon || '◆') : ''}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Quick-add knop */}
+        <div className="pt-1">
+          <details className="text-[10px]">
+            <summary className="cursor-pointer text-amber-400 hover:text-amber-300 select-none" data-testid="rugzak-quickadd-toggle">
+              + Item toevoegen ({catalog.length} beschikbaar)
+            </summary>
+            <div data-testid="rugzak-catalog" className="mt-2 grid grid-cols-4 gap-1.5 max-h-40 overflow-y-auto pr-1">
+              {catalog.map(it => (
+                <button key={it.id} data-testid={`rugzak-add-${it.id}`}
+                  onClick={() => addItem(it.id)}
+                  disabled={adding}
+                  title={`${it.naam} · ${it.weight}kg${it.value_goud ? ` · ${it.value_goud}g` : ''}`}
+                  className="p-1.5 rounded border border-amber-900/40 hover:border-amber-500 bg-stone-950/60 hover:bg-amber-900/20 text-left transition-colors disabled:opacity-50">
+                  <div className="text-lg leading-none">{it.icon || '◆'}</div>
+                  <div className="text-[9px] text-amber-200 truncate mt-0.5">{it.naam}</div>
+                  <div className="text-[8px] text-amber-400/60 font-mono">{it.weight}kg</div>
+                </button>
+              ))}
+            </div>
+          </details>
+        </div>
+      </div>
+    </PaperPanel>
+  );
+}
+
+
+
 function HuisOpslagPanel({ gameCards = [], inventory = null }) {
-  // v6_dnd_layout_v2 — Huis-slots (gebouwen) + Meubel-slots (decor) + Opslag-grid (master inventory, 500 cap, geen kg).
-  // De aparte 'rugzak' (InventoryGridPanel) is verwijderd; alles in dit kader.
   const HUIS_TAGS = ['huis', 'gebouw', 'opslag', 'locatie'];
   const MEUBEL_TAGS = ['meubel'];
   const STORAGE_MAX = 500;

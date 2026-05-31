@@ -1,5 +1,71 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18B, fork — Items met stats + Rugzak-kader als eigen panel)
+
+### 🎒 Rugzak als eigen kader naast Huis & Opslag (Willem feedback)
+- Nieuwe `RugzakKaderPanel` component (rechterkolom, boven HuisOpslagPanel)
+- Toont: header `RUGZAK · ONDERWEG` + gekleurde kg-counter, hint-tekst, kg-progressbar, slots-counter, speed-label
+  (`Licht — snel` / `Goede balans` / `Vol — iets trager` / `Zwaar geladen — traag`)
+- 16-slot grid (klik op item = verwijderen, met confirm)
+- Collapsible "+ Item toevoegen (N beschikbaar)" → 4-kolom catalog grid, klik = direct toevoegen
+- `data-testid="rugzak-kg-counter|rugzak-kg-bar|rugzak-grid|rugzak-slot-N|rugzak-quickadd-toggle|rugzak-add-{id}"`
+- Body-slot rugzak op silhouet blijft + kleine kg-meter eronder — consistent visueel
+
+### ⚔️ Item-stats schema toegevoegd (combat + meta)
+- ITEM_CATALOG schema-uitbreiding (`/app/backend/modules/inventory/routes.py`):
+  - `slot`: target equipment-slot (bv. `rechterhand`, `torso`)
+  - `stats_bonus`: `{kracht, behendigheid, intelligentie, conditie, wilskracht, geluk}`
+  - `combat_bonus`: `{aanvalskracht, verdediging, magie, crit_kans, beweging, initiatief}`
+  - `meta`: `{klasse, beroep, fractie, locatie}` — `fractie=""` = common loot, later fractie-specifiek
+- 6 nieuwe combat-items: Klein Zwaard, Basis Schild, Linnen Shirt, Linnen Broek, Lederen Helm, Leren Laarzen
+- Allemaal `rarity: "common"` en `fractie: ""` (overal te vinden, basis-tier)
+
+### 🎨 EquipSlotModal upgrade — item-catalogus met stats preview
+- Nieuwe sectie boven D&D-galerij: "Item-catalogus (N) · stats inbegrepen"
+- Per item kaart toont: icoon · naam · kg · beschrijving · stats-pills + meta-regel
+- Pills kleurgecodeerd: groen=stats / rood=combat+ / amber=combat− / geel=goud / grijs=rarity
+- Klik = vult naam + icon, gemarkeerd met amber ring
+
+### Backend testing
+- ✅ `/api/inventory/catalog/all` → 18 items (12 origineel uit eerdere subsessie + 6 combat)
+- ✅ `/api/dnd/character/slots/config` → 18 slots inclusief `rugzak`
+
+### Frontend (visueel geverifieerd via screenshot na Willem login)
+- ✅ Rugzak kader rechtsboven (`RUGZAK · ONDERWEG`, 0.0/10 kg, slots 0/4, "Licht — snel")
+- ✅ Rugzak body-slot zichtbaar op silhouet met groene kg-meter
+- ✅ Huis & Opslag label `STILSTAAND` met "geen kg-limiet"
+- ✅ Handel-kader placeholders onderaan (Warehouse, Auction House, Werkbank)
+
+### Bestanden gewijzigd in sessie 18B
+- `/app/backend/modules/inventory/routes.py` — 6 combat-items + stats schema
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — RugzakKaderPanel, EquipSlotModal stats-preview
+
+---
+
+## Completed (2026-05-31 — sessie 18A, fork — Rugzak hersteld + voedsel-items)
+
+### 🎒 Rugzak terug op de Avatar (per ongeluk verwijderd in vorige sessie hersteld)
+- **`rugzak` slot** weer toegevoegd aan `body_layout.json` (x:65 y:36) + `SLOT_KEYS` + equipment schema in `character.py`
+- **Kg-meter onder rugzak slot**: kleur-progress bar (groen <70%, geel 70-90%, rood ≥90%)
+- Capacity wordt doorgegeven vanuit `inventory.capacity` aan `BodySilhouettePanel` → `SlotFrame`
+- Bestaande character JSON files krijgen `rugzak: null` automatisch via `eq.setdefault()`
+
+### 🍞 Item-catalog uitgebreid met voedsel (bakker/slager loop)
+- 8 voedsel/loot items: Brood (0.4kg, 2g), Stuk Vlees (0.6kg, 4g), Veldfles Water (0.8kg, 1g),
+  Boerenkaas (0.3kg, 3g), Appel (0.15kg, 1g), Ei (0.08kg, 1g), Fakkel (0.5kg, 2g), Goudstuk (0.01kg)
+- Elk item met `tags`, `value_goud`, `kind`, `description`
+
+### 🏠 Huis & Opslag verduidelijkt
+- Header `HUIS & OPSLAG · STILSTAAND` + counter "Opslag X/500 · geen kg-limiet"
+- Emerald hint: "🏠 Hier staat alles stil — bereid eten, sla loot op, pak in je rugzak wat je meeneemt op pad."
+
+### 🏪 Handel-kader voorbereiding (3 placeholders onderaan)
+- Warehouse · Auction House · Werkbank — dashed-border kaders met "binnenkort"
+- `data-testid="dnd-trade-prep"`
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18, fork — Rugzak hersteld + items)
 
 ### 🎒 Rugzak terug op de Avatar (per ongeluk verwijderd in vorige sessie hersteld)

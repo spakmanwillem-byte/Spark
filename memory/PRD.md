@@ -3,6 +3,21 @@
 
 ## Completed (recent — 2026-05-31, sessie 17 / fork)
 
+- **v6_stop_loss_001** — Hard stop-loss bij -2% verlies (vóór trail-logica):
+  - Verlies-pad ≠ trail-pad → géén 2 systemen, gewoon 1 systeem in 2 richtingen
+  - Drempel `STOP_LOSS_PCT = -0.02`. Bij triggering: forced SELL met reason "Sluit verlies-positie om potje vrij te maken voor re-entry"
+  - Lost de "gemiste re-entry kans" op: na grote drop wordt potje vrijgemaakt → bot kan weer kopen bij stabilisatie/stijging
+  - Trail-strategie (+1% winst) blijft 100% onaangetast
+  - Geverifieerd: -2.5% → stop-loss SELL ✅, -1% → HOLD ✅
+
+- **v6_buy_cooldown_001** — 5-minuten BUY-cooldown per markt:
+  - Voorkomt dat bot binnen 8 min 20× achter elkaar hetzelfde markt koopt (30 mei 02:36-02:44 was BTC-EUR 20× BUY in 8 min)
+  - `_last_buy_per_market: Dict[market, datetime]` per monitor-instance
+  - Cooldown blokkeert nieuwe BUY via decision-reason; trail/stop-loss/SELL onaangetast
+  - 300 seconden default, configurabel via constante
+
+
+
 - **v6_auto_provision_001** — Auto-registratie bij token-purchase + migratie voor bestaande holders:
   - **Nieuwe helper** `auto_provision_bot_for_token_holder(user_id, use_mock, auto_trade, autostart)` in `modules/trade/monitor.py`. Idempotent: doet niks als user al bot heeft.
   - **3 entry-points gehookt**:

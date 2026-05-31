@@ -638,6 +638,24 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         trailing_active = position.get("trailing_active", False) or netto_rounded >= trail_threshold
         drop_from_high = (highest - price) / highest if highest else 0
 
+        # v6_stop_loss_001 — Hard stop-loss bij verlies, vóór trail-logica.
+        # Verlies-pad ≠ trail-pad: geen conflict, 1 systeem in 2 richtingen.
+        # Drempel: -2% van entry (configurabel via STOP_LOSS_PCT env later).
+        # Doel: potje vrijmaken bij dump zodat re-entry mogelijk wordt op de stijging erna.
+        STOP_LOSS_PCT = -0.02  # -2%
+        if profit_pct <= STOP_LOSS_PCT:
+            return {
+                **base,
+                "action": "SELL",
+                "reason": f"Stop-loss @ €{price:.4f} ({profit_pct*100:+.2f}% ≤ {STOP_LOSS_PCT*100:.1f}%). Sluit verlies-positie om potje vrij te maken voor re-entry.",
+                "confidence": 0.99,
+                "netto_profit": round(netto_profit, 4),
+                "bruto_profit": round(bruto_profit, 4),
+                "fees": round(total_fees, 4),
+                "stop_loss": True,
+                "position_update": {"close": True, "highest_price": highest, "trailing_active": trailing_active},
+            }
+
         if trailing_active and price < highest:
             if netto_rounded >= exit_min_netto:
                 return {
@@ -725,6 +743,8 @@ class MonitorService:
         self._use_mock = True
         self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
         self._use_potjes = False
+        # v6_buy_cooldown_001 — tijdstempel laatste BUY per markt (voor 5-min cooldown)
+        self._last_buy_per_market: Dict[str, datetime] = {}
 
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: Optional[str] = None,
@@ -1040,9 +1060,25 @@ class MonitorService:
                             actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}")
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
+            #    v6_buy_cooldown_001 — Plus: minimaal 5 min cooldown per markt tussen 2 BUYs
+            #    (voorkomt 20× BUY in 8 min zoals 30 mei 02:36-02:44)
+            BUY_COOLDOWN_SEC = 300  # 5 minuten
+            last_buy_ts = self._last_buy_per_market.get(market)
+            now = datetime.now(timezone.utc)
+            in_cooldown = False
+            cooldown_left = 0
+            if last_buy_ts:
+                elapsed = (now - last_buy_ts).total_seconds()
+                if elapsed < BUY_COOLDOWN_SEC:
+                    in_cooldown = True
+                    cooldown_left = int(BUY_COOLDOWN_SEC - elapsed)
+
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
             if market_context:
                 buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
+            if buy_decision["action"] == "BUY" and in_cooldown:
+                buy_decision["reason"] += f" | Skipped: BUY-cooldown {cooldown_left}s op {market}"
+                buy_decision["action"] = "HOLD"
             if buy_decision["action"] == "BUY":
                 # v6_pot_market_match_001 — geef voorrang aan een potje dat al voor deze market is gemarkeerd
                 available = potjes_svc.get_available_pot(self._user_id, self._cycles, prefer_market=market)
@@ -1061,6 +1097,8 @@ class MonitorService:
                             amount_eur=available.get("capital"),
                             market=market,
                         )
+                        # v6_buy_cooldown_001 — registreer ts zodat de 5-min cooldown start
+                        self._last_buy_per_market[market] = now
                         actions_this_cycle.append(f"BUY {available['id']} ({market}) @ €{real_entry:.2f}")
                 elif not available:
                     buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"

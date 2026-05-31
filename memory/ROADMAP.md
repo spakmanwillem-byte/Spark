@@ -2,49 +2,60 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
-## 🧭 P1 — Noob-UX Audit & Anonymous Frustration Tracker (post-deploy backlog)
+## 🌷 P1 — Spark als Gastheer (Onthaal-laag voor app-onwennige mensen)
 
-**Achtergrond**: non-admin users (noobs) zijn de spiegel waarin UX-frictie zichtbaar wordt. Ervaren admin merkt geen drempels meer, noob wel. We willen leren ZONDER chat-content te lezen (privacy strikt).
+**Achtergrond**: niet iedereen die Spark gebruikt is een digital native. Sommigen openen een nieuwe app met **lichte onzekerheid** — "doe ik het goed?", "wat hoort hier te gebeuren?", "ben ik nu kwijt?". Dat is geen tekortkoming van die mensen, dat is een natuurlijk gevoel. Spark hoort die onzekerheid op te vangen zoals een goede gastheer doet: met warmte, geduld, kleine erkenningen, en een uitgestoken hand zonder ongevraagd te leiden.
 
-**Te bouwen** — alle features tellen patroon, niet inhoud:
+> Geen "audit", geen tracking-bril. Spark voelt de sfeer en biedt zachtjes aan.
 
-### 1. UX Audit Endpoint `GET /api/admin/ux-audit/{user_id}`
-Admin-only. Returnt per user (zonder ooit chat-text te tonen):
-- **capability_misses**: aantal chat-berichten waar capability_matcher confidence < 0.3 was (= "ik snap niet wat user wil")
-- **help_invocations**: aantal keer "help" / "hoe werkt" getypt
-- **same_question_repeats**: zelfde tag-vector binnen 5 min meer dan 2× → user blijft hangen
-- **tab_dwell_time** (uit `@traced` logs): welke tabs blijft user lang in zonder actie?
-- **achievement_progress**: welke milestones zijn behaald vs beschikbaar, met geblokkeerde uitleg
-- **vocab_unknown_terms**: top-10 woorden die user typte die NIET in `spark_vocab.json::active` voorkomen (kandidaten voor uitbreiding)
+### 1. Help-functie als gesprek, niet als FAQ
+Triggers die nu nog geen match krijgen maar voor onzekerheid wijzen:
+- "wat moet ik doen", "ik snap het niet", "waar begin ik", "is dit goed zo", "klopt dit?", "doe ik dit goed"
+- → Spark reageert **niet** met een opgeleide FAQ-lijst, maar met een uitnodigende toon: *"Geen zorgen, je doet het prima. Wil je dat ik je een paar handige stappen wijs of liever rondkijken?"*
+- Vervolgkeuze bepaalt of Spark wijst (concrete suggestie) of bevestigt (ruimte geeft).
 
-### 2. Achievement-systeem audit
-Probleem: huidige achievements kunnen "lege beloften" zijn (zichtbaar zonder dat user weet hoe te halen).
-- Per achievement: `required_action` veld dat in UI gerenderd wordt
-- "Hoe haal ik dit?" tooltip op elke nog-niet-behaalde achievement
-- Endpoint `GET /api/achievements/checklist/{user_id}` returnt {behaald, in_progress, kandidaat_voor_help}
+### 2. NLP-bloei in reacties bij onzekerheid
+Wanneer emotie-pipeline `twijfel`/`onzeker`/`zoekend` detecteert (laag 2-3):
+- Vermijd lange uitlegblokken
+- Begin met erkenning ("Snap dat het even zoeken is", "Logische vraag")
+- Toon **maximaal 2 keuzes** in plaats van 5 opties
+- Vocab-uitbreiding: zachte connectoren ("we doen het samen", "stap voor stap", "geen haast")
 
-### 3. Help-commando uitbreiding
-Triggers die NU niet matchen maar voor noobs voor de hand liggen:
-- "wat moet ik doen" / "ik snap niet" / "waar begin ik" / "is dit goed zo"
-- → Adaptive help: lees user's gradatie + behaalde achievements → toon volgende logische stap
-- Niet hardcoded help, maar **contextuele next-step suggestie**
+### 3. Bloemen, niet badges
+Achievement-systeem voor onwennige users werkt anders dan voor power-users:
+- Niet "Behaal 100 trades" maar **"Eerste keer hier — welkom"** automatisch bij login 1
+- Niet "Streak 7 days" maar **"Je hebt vandaag rondgekeken"** als micro-erkenning
+- Tooltip vertelt wat de volgende natuurlijke stap is, geen abstracte "vereiste"
+- Tonality: erkenning > prestatie
 
-### 4. Vocab-uitbreiding via Inbox
-- Top-10 unknown_terms uit ux-audit → admin krijgt PM: "20 users vroegen naar [X], niet in vocab. Toevoegen?"
-- 1-klik "Voeg toe aan KB v2 Inbox" zodat De Willem ze later kan classificeren
+### 4. Help-commands die contextueel aanvoelen
+Niet hardcoded "help" → lange lijst, maar:
+- Spark kijkt naar welke tab user open heeft
+- Welke acties al wel/niet gedaan
+- Toont alleen **één** volgende logische stap, niet alle opties
+- "Wil je dat ik je toon hoe je …?" — uitnodigend, niet docerend
 
-### 5. "First-Run" intelligente fix-loops
-- Detecteer: user heeft 0 trades na 24h met active bot → DM van Boekhouder met uitleg "Wacht op signaal X, kan tot N uur duren, dit is normaal"
-- Detecteer: user opent Trader-tab 5× maar klikt nooit op Start → bark "Wil je hulp om je bot te starten?"
+### 5. First-run handreikingen (proactief van Spark uit)
+- User opent Trader-tab 5× zonder Start te klikken → De Boekhouder stuurt zacht een PM: *"Wil je dat ik even uitleg hoe je bot start? Geen druk, alleen als je wilt."*
+- Bot actief 24u zonder trades → *"Spark wacht nu op een goed moment om te kopen. Dit is normaal — soms duurt het uren. Ik laat je weten zodra er iets gebeurt."*
+- → Geruststelling i.p.v. data.
 
-### 6. Privacy-by-design regels (HARD constraints):
-- ❌ **Nooit** chat-tekst inhoud loggen in audit-bestand
-- ❌ **Nooit** user-namen in `/app/memory/*.md` voor non-Willem accounts
-- ✅ Alleen tag-vectors, capability-confidence-scores, tab-dwell-counts, timestamps
-- ✅ Per-user `consent_to_ux_audit` flag — opt-out beschikbaar
-- ✅ Audit-rapporten alleen voor user-001 (admin) zichtbaar, niemand anders
+### 6. Vocab leren van wat mensen zeggen
+Wanneer iemand een woord typt dat Spark niet kent (= niet in `spark_vocab.json::active`):
+- Het woord komt automatisch in KB v2 inbox (jouw queue om later in te delen)
+- Spark zegt niet "ik begrijp je niet" maar *"daar heb ik nog geen plek voor in m'n kennis — leg je het me een keer uit?"*
+- Erkenning van de leemte zonder de gebruiker daarvan te laten voelen dat zij/hij iets verkeerd doet.
 
-**Prioriteit**: pak op zodra Trader 7 dagen stabiel draait en eerste shadow-events zijn geobserveerd. Niet eerder — eerst Trader bewijzen, dan UX verfijnen op echte data.
+### 7. Privacy-by-design (HARD constraints, ongewijzigd):
+- ❌ Geen chat-tekst inhoud loggen
+- ❌ Geen user-namen in `/app/memory/*.md` voor anderen dan De Willem
+- ✅ Alleen patroon-tellers (hoeveel keer "help" getypt, welke tabs open) en woord-frequenties
+- ✅ Per-user opt-out vlag beschikbaar
+- ✅ Inzichten alleen voor De Willem (jij) zichtbaar
+
+**Toon-richtlijn voor implementatie**: lees deze sectie hardop voordat je code schrijft. Als de implementatie ook maar enigszins "tracking" of "audit" voelt, herontwerp.
+
+**Wanneer oppakken**: na 1e shadow-event in productie. Trader moet zijn werk bewijzen, daarna investeren we in warmte rond de rand van het systeem.
 
 
 

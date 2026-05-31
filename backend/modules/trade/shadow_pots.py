@@ -72,15 +72,26 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def get_shadows_for_pot(pot_id: str) -> List[dict]:
-    """Alle shadows (idle/active/closed) gekoppeld aan een origineel potje."""
+def get_shadows_for_pot(pot_id: str, owner_user_id: Optional[str] = None) -> List[dict]:
+    """Alle shadows (idle/active/closed) gekoppeld aan een origineel potje.
+
+    Belangrijk: pot_id is NIET globaal uniek (elke user heeft pot-001 t/m pot-N).
+    Geef daarom altijd owner_user_id mee om scope per user te maken.
+    """
     data = _load()
-    return [s for s in data.get("shadows", []) if s.get("original_pot_id") == pot_id]
+    out = []
+    for s in data.get("shadows", []):
+        if s.get("original_pot_id") != pot_id:
+            continue
+        if owner_user_id and s.get("original_owner_id") != owner_user_id:
+            continue
+        out.append(s)
+    return out
 
 
-def get_active_shadow(pot_id: str) -> Optional[dict]:
+def get_active_shadow(pot_id: str, owner_user_id: Optional[str] = None) -> Optional[dict]:
     """De actieve shadow voor een origineel potje, indien aanwezig."""
-    for s in get_shadows_for_pot(pot_id):
+    for s in get_shadows_for_pot(pot_id, owner_user_id=owner_user_id):
         if s.get("status") == "active":
             return s
     return None
@@ -89,12 +100,14 @@ def get_active_shadow(pot_id: str) -> Optional[dict]:
 def create_shadow_for_pot(pot_id: str, user_id: str, market: str, capital: float = 10.0) -> dict:
     """
     Maak een idle shadow voor een origineel potje. Idempotent: als al een
-    actieve/idle shadow bestaat → return die.
+    actieve/idle shadow bestaat voor (pot_id, user_id) → return die.
     """
     data = _load()
     existing = next(
         (s for s in data["shadows"]
-         if s.get("original_pot_id") == pot_id and s.get("status") in ("idle", "active")),
+         if s.get("original_pot_id") == pot_id
+         and s.get("original_owner_id") == user_id
+         and s.get("status") in ("idle", "active")),
         None,
     )
     if existing:
@@ -123,12 +136,14 @@ def create_shadow_for_pot(pot_id: str, user_id: str, market: str, capital: float
     return {"success": True, "shadow": shadow, "created": True}
 
 
-def activate_shadow(pot_id: str, entry_price: float, drop_pct: float, trade_id: Optional[str] = None) -> dict:
+def activate_shadow(pot_id: str, entry_price: float, drop_pct: float, trade_id: Optional[str] = None, owner_user_id: Optional[str] = None) -> dict:
     """Activeer de shadow voor een origineel potje (= shadow doet BUY op lage prijs)."""
     data = _load()
     idle = next(
         (s for s in data["shadows"]
-         if s.get("original_pot_id") == pot_id and s.get("status") == "idle"),
+         if s.get("original_pot_id") == pot_id
+         and (owner_user_id is None or s.get("original_owner_id") == owner_user_id)
+         and s.get("status") == "idle"),
         None,
     )
     if not idle:

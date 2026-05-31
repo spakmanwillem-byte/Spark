@@ -4,30 +4,22 @@
 
 ## 🌟 P1 — Shadow-potje systeem (Willem's idee, 2026-05-31)
 
-**Concept:** elk potje krijgt een onzichtbare "shadow" twin. Bij een drop (stop-loss triggert) doet de **shadow** de re-entry, terwijl het **origineel** open blijft staan. Resultaat: geen gerealiseerd verlies, dubbele winst-kans bij recovery.
+**Status (2026-05-31, sessie 17/fork)**: ✅ MVP LIVE. 30 idle shadows aangemaakt voor 6 trade-users. Wacht nu op echte markt-drop ≥ -3% om eerste auto-activatie te observeren.
 
-**Mechaniek:**
-1. User met 1 potje → potje geopend op markt X @ €100
-2. Markt dumpt → -2.5% (op €97.5)
-3. Huidige fix: stop-loss SELT @ €98, verlies -€2 geboekt
-4. **Shadow-systeem:** origineel blijft op €100, **shadow potje** doet BUY @ €97.5
-5. Markt herstelt → origineel trail-SELLS @ €101 (winst), shadow trail-SELLS @ €99 (winst)
-6. **2 winsten i.p.v. 1 verlies**
+**Voltooid:**
+- [x] Backend `shadow_pots.py` + `shadow_routes.py` (7 endpoints)
+- [x] Per-user scope-fix (pot-001 niet globaal uniek)
+- [x] Auto-ensure bij elke `auto_provision_bot_for_token_holder` call
+- [x] Monitor-integratie: activeer bij -3%, sluit bij SELL van origineel
+- [x] UI: shadow-status banner + per-pot badges (🌑 idle / ⚡ active / ✓ closed)
+- [x] Test-suite `tests/test_shadow_trigger.py` (9/9 pass)
 
-**Community-pool variant:**
-- Als user maar 1 potje heeft (geen shadow beschikbaar) → leen shadow uit collectieve pool
-- Voorkeur: shadow van een user met minste winst (solidariteit-mechaniek)
-- Winst-deling: 50/50 of via slimme algoritme
-- Past perfect bij Spark's tokenomics ("1 token = 1 potje = €10 trade claim")
-
-**Vervangt:** v6_stop_loss_001 (huidige -2% hard-SELL, realiseert verlies)
-
-**Te bouwen:**
-- `data/trade/shadow_pots.json` met linkje origineel ↔ shadow
-- `shadow_pot_engine.py` met allocate/return/borrow flow
-- Settlement-logic voor winst-deling community-pool
-- UI: shadow-status zichtbaar in potjes-overzicht (admin), niet zichtbaar voor non-admin tot opening
-- Activeren ná stabilisatie post-1-juni live launch
+**Open (na 1-laag observatie):**
+- [ ] **Cascade chain**: shadow-4 = origineel van shadow-3 (Willem's idee voor later)
+- [ ] **Community-pool**: user zonder vrij potje leent shadow uit pool (50/50 winst-deling)
+- [ ] **Spark als shadow-provider**: Spark heeft 1 shadow per circulating potje als systeem-brede safety
+- [ ] Settlement-logic voor community-pool winst-deling
+- [ ] Telemetry-dashboard: hoeveel SHADOW-ACTIVATE events per dag, gemiddelde profit per shadow, recovery-tijd
 
 
 

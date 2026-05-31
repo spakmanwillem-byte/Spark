@@ -174,6 +174,12 @@ export function TraderPage({ onNavigate }) {
     return fetch(`${API}/api/trade/potjes/${userId}`).then(r => r.json()).then(d => setPotjes(d)).catch(() => {});
   }, [userId]);
 
+  // v6_shadow_pot_001 — Shadow potje status (idle/active/closed per pot)
+  const [shadowStatus, setShadowStatus] = useState(null);
+  const loadShadowStatus = useCallback(() => {
+    return fetch(`${API}/api/trade/shadow/status/${userId}`).then(r => r.json()).then(d => setShadowStatus(d)).catch(() => {});
+  }, [userId]);
+
   const loadContext = useCallback(() => {
     return fetch(`${API}/api/trade/context/${candleMarket}`).then(r => r.json()).then(d => setMarketContext(d)).catch(() => {});
   }, [candleMarket]);
@@ -195,10 +201,11 @@ export function TraderPage({ onNavigate }) {
       if (cancelled) return; await loadMonitorStatus();
       if (cancelled) return; await loadBalance();
       if (cancelled) return; await loadPotjes();
+      if (cancelled) return; await loadShadowStatus();
       if (cancelled) return; await loadContext();
     })();
     return () => { cancelled = true; };
-  }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadContext]);
+  }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadShadowStatus, loadContext]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
@@ -615,6 +622,25 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
+                    {/* v6_shadow_pot_001 — Shadow Potje status banner */}
+                    {shadowStatus?.summary && (
+                      <div className="px-4 py-2 border-b border-slate-800 bg-purple-500/5 flex items-center justify-between text-[10px]" data-testid="shadow-status-banner">
+                        <div className="flex items-center gap-2 text-purple-300">
+                          <span className="text-base">🌑</span>
+                          <span className="font-semibold">Shadow Potjes</span>
+                          <span className="text-slate-500">·</span>
+                          <span className="text-slate-400" title="Stand-by: vangt drop ≤ -3%">stand-by: <span className="text-purple-300 font-medium">{shadowStatus.summary.idle}</span></span>
+                          <span className="text-slate-400" title="Actief: shadow heeft re-entry BUY gedaan">actief: <span className="text-purple-400 font-bold">{shadowStatus.summary.active}</span></span>
+                          <span className="text-slate-400" title="Gesloten met winst">gesloten: <span className="text-green-400 font-medium">{shadowStatus.summary.closed}</span></span>
+                          {shadowStatus.summary.none > 0 && (
+                            <span className="text-slate-500" title="Potjes zonder shadow">onbeschermd: {shadowStatus.summary.none}</span>
+                          )}
+                        </div>
+                        <button onClick={loadShadowStatus} className="text-slate-500 hover:text-purple-300" title="Ververs shadow status">
+                          <RefreshCw className="w-3 h-3" />
+                        </button>
+                      </div>
+                    )}
                     {/* Expansie progress bar naar volgende potje */}
                     {potjes.summary?.next_pot_cost && (
                       <div className="px-4 pt-3 pb-1">
@@ -628,7 +654,11 @@ export function TraderPage({ onNavigate }) {
                       </div>
                     )}
                     <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-2">
-                      {(potjes.potjes ? [...potjes.potjes].sort((a, b) => {
+                      {(() => {
+                        // v6_shadow_pot_001 — Build per-pot shadow lookup
+                        const shadowByPot = {};
+                        (shadowStatus?.pots || []).forEach(s => { shadowByPot[s.pot_id] = s; });
+                        return (potjes.potjes ? [...potjes.potjes].sort((a, b) => {
                         // v6_pot_lock_visual_order_001 — locked potjes (staking-ankers) ONDERAAN
                         // zodat de actieve trade-potjes meteen in beeld staan en de "fundering"
                         // visueel apart blijft staan.
@@ -646,10 +676,13 @@ export function TraderPage({ onNavigate }) {
                         const pnl = p.stats?.total_pnl || 0;
                         const liveValue = p.live_value ?? p.capital;
                         const hasGrowth = Math.abs(liveValue - p.capital) >= 0.005;
+                        const sh = shadowByPot[p.id];
+                        const shStatus = sh?.shadow_status;
                         return (
                           <div key={p.id} data-testid={`pot-${p.id}`}
                             className={`rounded-xl p-2.5 border ${
                               locked ? 'bg-emerald-500/5 border-emerald-500/30' :
+                              shStatus === 'active' ? 'bg-purple-500/10 border-purple-500/40 ring-1 ring-purple-500/30' :
                               open ? 'bg-amber-500/10 border-amber-500/30' :
                               'bg-slate-800/30 border-slate-700'
                             }`}>
@@ -657,6 +690,15 @@ export function TraderPage({ onNavigate }) {
                               <span className="text-[10px] font-bold text-white flex items-center gap-1">
                                 {locked && <span className="text-emerald-400" title={p.lock_reason || 'locked'}>🔒</span>}
                                 {p.id}
+                                {!locked && shStatus === 'idle' && (
+                                  <span data-testid={`shadow-idle-${p.id}`} title={`Shadow ${sh.shadow_id} stand-by (activeert bij -3%)`} className="text-slate-500">🌑</span>
+                                )}
+                                {!locked && shStatus === 'active' && (
+                                  <span data-testid={`shadow-active-${p.id}`} title={`Shadow ${sh.shadow_id} ACTIEF @ €${sh.entry_price?.toFixed(4)} (drop ${(sh.trigger_drop_pct*100).toFixed(1)}%)`} className="text-purple-400 animate-pulse">⚡</span>
+                                )}
+                                {!locked && shStatus === 'closed' && (
+                                  <span data-testid={`shadow-closed-${p.id}`} title={`Shadow gesloten profit €${sh.profit?.toFixed(2)}`} className="text-green-400">✓</span>
+                                )}
                               </span>
                               <span className={`text-[9px] font-medium ${hasGrowth ? (liveValue > p.capital ? 'text-green-400' : 'text-red-400') : 'text-slate-400'}`}>
                                 €{liveValue.toFixed(2)}
@@ -672,6 +714,9 @@ export function TraderPage({ onNavigate }) {
                                 <p className="text-[9px] text-amber-400">IN POSITIE</p>
                                 <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>
                                 {p.position.trailing_active && <p className="text-[9px] text-green-400">🔒 trailing</p>}
+                                {shStatus === 'active' && (
+                                  <p className="text-[9px] text-purple-300 font-semibold mt-0.5">🌑→⚡ Shadow @ €{sh.entry_price?.toFixed(2)}</p>
+                                )}
                               </div>
                             ) : (
                               <p className="text-[9px] text-slate-500">Vrij</p>
@@ -682,7 +727,8 @@ export function TraderPage({ onNavigate }) {
                             </div>
                           </div>
                         );
-                      })}
+                      });
+                      })()}
                     </div>
                     {potjes.summary?.overflow_pool > 0 && (
                       <div className="px-4 py-2 border-t border-slate-800 text-[10px] text-slate-500">

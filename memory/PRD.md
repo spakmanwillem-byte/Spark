@@ -1,7 +1,41 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg)
+
+### 🌑 v6_shadow_pot_001 — Shadow Potje systeem LIVE
+Vervangt v6_stop_loss_001 (de hard-SELL bij -2%). Concept van De Willem: bij een drop blijft het originele potje **open**, een idle "shadow potje" doet de re-entry BUY op de lage prijs. Bij recovery → 2 winst-kansen i.p.v. 1 gerealiseerd verlies.
+
+**Backend (`modules/trade/shadow_pots.py` + `shadow_routes.py`)**:
+- 7 endpoints: `/trade/shadow/list/{user_id}`, `/pot/{pot_id}`, `/auto-ensure/{user_id}`, `/create`, `/status/{user_id}`, `/stats`
+- Per-user scope-fix: pot-001 is NIET globaal uniek (elke user heeft eigen pot-001..N). `original_owner_id` + `original_pot_id` samen vormen de unieke key.
+- `auto_ensure_shadows_for_user(user_id)` maakt idle shadows voor alle non-anchor potjes (anchors zijn locked staking-ankers, krijgen geen shadow).
+- Trigger-drempel `SHADOW_TRIGGER_PCT = -0.03` (-3%). Activeert ruimer dan oude stop-loss (-2%) zodat het niet op kleine swings vuurt.
+
+**Monitor-integratie (`monitor.py`)**:
+- SELL-pad sluit ook bijbehorende shadow met profit-berekening (regel 1048-1058).
+- BUY-pad: bij `profit_pct <= -0.03` op een open positie → idle shadow gevonden? → voer echte Bitvavo BUY uit met shadow capital → `activate_shadow()` met entry_price uit fill (regel 1060-1079). In mock-modus: alleen administratief activeren.
+- Per-user scoped via `owner_user_id=self._user_id` op alle shadow calls.
+
+**Auto-provisioning hook**:
+- `auto_provision_bot_for_token_holder()` roept nu `shadow.auto_ensure_shadows_for_user()` aan na registry-persist → elke nieuwe token-houder krijgt automatisch shadows.
+
+**Frontend (`TraderPage.js`)**:
+- Shadow-status banner in 10-Potjes systeem header: "stand-by / actief / gesloten / onbeschermd" counts (data-testid="shadow-status-banner").
+- Per-pot badge in elke potje-tile: 🌑 idle (slate), ⚡ active (pulse purple), ✓ closed (green). Active pot krijgt purple ring + extra label "🌑→⚡ Shadow @ €X.XX" onder positie.
+- `loadShadowStatus()` fetcht `/api/trade/shadow/status/{user_id}` parallel met potjes.
+
+**Live status (1 juni 00:00 ready)**:
+- **30 idle shadows** aangemaakt voor alle 6 trade-actieve users: Spark (4), Willem (21), Geiser (1), Roadkill (1), Lotus (2), Gerben (1).
+- Test-suite `/app/backend/tests/test_shadow_trigger.py`: 9/9 tests pass (idempotency, scope-isolatie, activate/close lifecycle, stats).
+- E2E geverifieerd: shadow-005 administratief geactiveerd @ €262.50 → status endpoint pickte het correct op → 1 active, 20 idle voor Willem.
+
+**Future / open**:
+- **Cascade shadow** (Willem's idee): shadow-4 = origineel van shadow-3 = origineel van shadow-2 → chain re-entry. Pas implementeren als 1-laag observatie stabiel is over meerdere drops.
+- **Community-pool variant**: user zonder vrij potje leent shadow uit collectieve pool. Spec staat in ROADMAP.
+- **Spark zelf als shadow-provider**: Spark heeft 1 shadow per circulating potje (out-of-system safety net).
+
+
 
 ### 🌑 Disclaimer huidige stop-loss (v6_stop_loss_001)
 Stop-loss @ -2% **realiseert het verlies** door SELL. Vrijgekomen potje kan re-entry doen, maar de -2% wordt definitief in het kasboek geboekt. Werkt voor 1 juni, maar **vervangbaar door shadow-potje systeem** (zie ROADMAP P1 — Willem's idee, betere oplossing).

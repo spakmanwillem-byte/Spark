@@ -1048,7 +1048,7 @@ class MonitorService:
                             # v6_shadow_pot_001 — Als de gesloten pot een actieve shadow had → sluit shadow ook (winst voor user)
                             try:
                                 from modules.trade import shadow_pots as _shadow
-                                act = _shadow.get_active_shadow(pot["id"])
+                                act = _shadow.get_active_shadow(pot["id"], owner_user_id=self._user_id)
                                 if act:
                                     s_entry = act.get("entry_price") or real_price
                                     s_profit = (real_price - s_entry) / s_entry * (act.get("capital", 10.0))
@@ -1062,18 +1062,18 @@ class MonitorService:
                 if profit_pct <= -0.03:
                     try:
                         from modules.trade import shadow_pots as _shadow
-                        idle = next((s for s in _shadow.get_shadows_for_pot(pot["id"]) if s.get("status") == "idle"), None)
+                        idle = next((s for s in _shadow.get_shadows_for_pot(pot["id"], owner_user_id=self._user_id) if s.get("status") == "idle"), None)
                         if idle and self._auto_trade and not self._use_mock:
                             # Voer echte BUY uit voor de shadow op huidige (lage) prijs
                             shadow_capital = float(idle.get("capital", 10.0))
                             sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
                             if sresult.get("success"):
                                 real_entry = sresult.get("trade", {}).get("price") or price
-                                _shadow.activate_shadow(pot["id"], real_entry, profit_pct, trade_id=sresult.get("trade", {}).get("trade_id"))
+                                _shadow.activate_shadow(pot["id"], real_entry, profit_pct, trade_id=sresult.get("trade", {}).get("trade_id"), owner_user_id=self._user_id)
                                 actions_this_cycle.append(f"SHADOW-ACTIVATE {idle['shadow_id']} ({market}) @ €{real_entry:.4f} on -{abs(profit_pct)*100:.2f}% drop")
                         elif idle and self._auto_trade and self._use_mock:
                             # Mock-modus: activeer shadow administratief zonder echte BUY
-                            _shadow.activate_shadow(pot["id"], price, profit_pct, trade_id="MOCK-SHADOW")
+                            _shadow.activate_shadow(pot["id"], price, profit_pct, trade_id="MOCK-SHADOW", owner_user_id=self._user_id)
                             actions_this_cycle.append(f"SHADOW-MOCK {idle['shadow_id']} ({market}) @ €{price:.4f}")
                     except Exception as _ex:
                         logger.warning(f"shadow-activate failed for {pot['id']}: {_ex}")
@@ -1283,6 +1283,13 @@ def auto_provision_bot_for_token_holder(
         _persist_registry()
     except Exception:
         pass
+
+    # v6_shadow_pot_001 — Auto-ensure shadows voor alle non-anchor potjes
+    try:
+        from modules.trade import shadow_pots as _shadow
+        _shadow.auto_ensure_shadows_for_user(user_id)
+    except Exception as e:
+        logger.warning(f"shadow auto-ensure failed for {user_id}: {e}")
 
     return {
         "success": True,

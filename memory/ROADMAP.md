@@ -2,6 +2,62 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
+---
+
+## 🚀 ACTIVE ROADMAP (post-sessie 18, 31 mei 2026)
+
+### ✅ Compleet in sessie 18 (klaar voor redeploy)
+- [x] **Rugzak hersteld** als eigen kader rechts (32 slots, 8×4), met kg-meter + speed-label
+- [x] **Item-stats schema**: items hebben nu `stats_bonus`, `combat_bonus`, `meta` (klasse/beroep/fractie/locatie), `value_goud`, `rarity`
+- [x] **D&D-kaart = bron-van-waarheid** via `game_meta.is_item:true` (geen hardcoded ITEM_CATALOG meer leidend)
+- [x] **17 draft item-kaarten geseed** met placeholder Vraag-avatar (alle slots gevuld: nek/schouders/armen/trinket/sjaal/riem/handen/ring/offhand/pijl_boog + 7 consumables)
+- [x] **NPC Bewoner-systeem**: 3 NPCs in Stormhaven (Hans/Greta/Mira) met avatar, beroep, fractie, wallet, 8 inventory-slots
+- [x] **Handel-kader** met 8/8 vakjes (kopen 100% / verkopen 50%)
+- [x] **Item-transfer met thuis-check**: rugzak ↔ huis (mag alleen thuis) ↔ equipment (mag altijd)
+- [x] **Map markers = dorp/stad-avatars** (alle 12 provincies, Spark hoofdstad = stad, rest = dorp)
+- [x] **Speler-glow-dot** (groene pulse) op huidige locatie op wereldmap
+- [x] **Dobbelsteen-events**: 1d20 + stat-bonus, 5 uitkomstniveaus met flavor-tekst, basis + super-worp via jouw 2 avatars
+- [x] **Spark-advies in `laag1`** op alle geseede kaarten (geen GPT, mijn voorstel — jij past aan)
+
+### 🎯 P0 — Direct na redeploy
+1. **Character-creation flow** voor nieuwe gebruikers — eerst karakter (naam/klasse/beroep/fractie/dorp) voordat je kan spelen
+2. **D&D-kaart editor met `game_meta` form** — visueel inputveld voor is_item/slot/weight/stats_bonus/combat_bonus i.p.v. via API
+3. **Bewoners per gebouw op Stormhaven-dorpskaart** — klik op Bakker-gebouw → opent Hans handel direct (natuurlijke flow)
+4. **Equipment-stats live optellen** bij character STATISTIEKEN + AANVAL/VERDEDIGING (zwaard +5 aanval → zichtbaar in stat-blok)
+
+### 🎲 P1 — Game-mechanics uitbreiden
+1. **Dungeon-feature**: knop "Activeer Dungeon" → 8u real-time → fractie-thematisch verhaal-rapport + reward. Dice-engine bepaalt uitkomstniveau.
+2. **Quick-Roll knoppen** op stats (klein 🎲 naast Kracht/Behendigheid → 1-klik check)
+3. **Real-time dag/nacht + travel-time**: centrum → stadspoort = 1/5 dag, day/night clock zichtbaar in HUD
+4. **Bederf-timer op voedsel** (brood/vlees gaan na X uur slecht zonder huis-koeling)
+5. **9-fracties claim-systeem**: user kan na rang Y eigen fractie starten en provincie claimen
+6. **Auction House per fractie** met prijs-variatie (vlees in Slager-stad goedkoper dan elders)
+7. **Werkbank UI thuis**: recepten (ei+meel → brood) — produceren in huis, kg ↑ in rugzak
+
+### 🎨 P2 — UX & visuele upgrades
+1. **Per-provincie `dorp_level` veld** (1-10) — niveau bepaalt: dorp (1-5), stad (6-9), metropool (10) → andere avatar
+2. **Per fractie unieke dorp-avatar** (Spark/Natuur/Vuur/etc. — koppelt automatisch op begrip "{fractie} dorp")
+3. **Glow-instelling in Settings**: speler-dot kleur + intensiteit aanpasbaar
+4. **HTML5 drag&drop** tussen Rugzak / Huis / Equipment-slots (i.p.v. knoppen)
+5. **Map pop-ups** (klik provincie → modal met fractie-info, bewoners, quests)
+6. **SVG-province paths** (semi-transparante gekleurde gebieden i.p.v. dots)
+7. **Event Feed ringbuffer** voor `[SYSTEEM]` / `[WERELD]` / `[HANDEL]` events
+8. **Spark als Gastheer** noob-UX (zie sectie hieronder, blijft P1 voor onthaal)
+
+### 📡 P3 — Externe integraties (Future)
+- Telegram / WhatsApp / Signal externe chat-kanalen
+- TTS audio uitspelen (response → audio via OpenAI TTS, key al klaar)
+- Trade Dashboard user-specifieke balances (was P1, nu opnieuw bekeken na items-flow)
+
+### ⚙️ Tech-cleanup (Backlog)
+- Pre-existing lint errors in `spark_world.py` regel 436/441 (E701 multi-statement on one line)
+- `MiniMapPanel` >800 regels — splitsen naar eigen file
+- Bewoner-trade: bewoner wallet-cap (max 999g voorkomt grind-exploit)
+
+---
+
+
+
 ## 🎲 P2 — Spark World D&D Tab herstructurering (2026-05-31, idee Willem)
 
 **Quick wins al uitgerold** (sessie 17): huis/opslag slots groter (aspect-square min-h-56, text-2xl iconen), worldmap onder dorp i.p.v. apart (zelfde breedte), worldmap-svg langer (h-56 → h-72), dorp-kader langer (h-40 → h-52), event-feed/charinfo herverdeeld zonder MiniMap-kolom (7+5 i.p.v. 5+4+3).

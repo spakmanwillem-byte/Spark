@@ -1,7 +1,49 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 6, post-deploy reset)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 7, final pre-deploy)
+
+### 💰 Surplus-mint: 3 nieuwe ROAR tokens
+- Bitvavo €389,74 vrij vs admin €360 → €29,74 surplus
+- Mint 3 tokens naar Spark (user-000): 16 → 19 ROAR
+- 3 extra non-anchor pots toegevoegd voor Spark (6 anchor + 13 non-anchor = 19 totaal)
+- Nieuwe totaal: 39 tokens / 39 pots / €390 admin / 99 idle shadows
+- Bitvavo-precisie: €389,74 ÷ 39 = €9,99 gemiddeld per token (1 cent afwijking onder nominaal €10)
+- `roar_balances.mint_history` log met motivatie + milestone ref
+
+### 🔧 Avatar bug fix
+- AvatarPickerPanel body-field `avatar` → `avatar_ref` (matchen backend `AvatarSelect` model)
+- `avatar-changed` event krijgt nu `detail.userId` zodat UserAvatar + AuthContext per-user kunnen reageren
+- `activate-personal` flow: na POST activate doe extra PUT select met `avatar_ref="user"` zodat huidige avatar daadwerkelijk wisselt naar je eigen portret
+- E2E getest via curl — selectie persisteert, sidebar + Algemeen-tab live update
+
+### 🎲 D&D Avatar-tab herstructurering v2 (Willem 31 mei avond)
+**Quick wins (uitgevoerd):**
+- **EventFeed verplaatst naar bovenaan** (col-span-12, breed) — info-laatste-nieuws omhoog
+- **CharInfoPanel verplaatst** uit onderbalk naar **linker kolom** (onder Body+Equipment)
+- **Rugzak verwijderd** (`InventoryGridPanel` niet meer aangeroepen — dode code blijft als _LegacyInventoryGrid bewaard)
+- **HuisOpslagPanel uitgebreid tot master-inventory**:
+  - 5 huis-slots (gebouwen) + 5 meubel-slots (decor) — onveranderd
+  - Nieuw: 32 zichtbare opslag-slots (8×4 grid, venster op 500 totaal)
+  - Header counter `Opslag X/500` rechtsboven (geen kg-limiet meer — "het is je huis")
+  - Items uit `inventory.slots` worden in opslag-grid getoond
+- **Worldmap onder Dorp** (gelijke breedte i.p.v. apart onderaan), SVG `h-56 → h-72`
+- **Placeholder kader** onderaan ("Toekomstige uitbreiding · handel-kader hub · pop-up dorp/stad — zie ROADMAP P2")
+- **Footer-nav tabs** automatisch omhoog door verwijdering MiniMap-onderkolom
+
+**Layout nieuw**:
+```
+Row 1: EventFeed (col-12, breed bovenaan)
+Row 2 (3 kolommen):
+  LEFT  (col-5): Body+Equipment, CharInfo (verplaatst)
+  MID   (col-3): Karakter-portret, Stats, Aanval/Verd, Overig
+  RIGHT (col-4): HuisOpslag (master inv, 500 cap), Dorp (h-52), Map (h-72)
+Row 3: Placeholder "Toekomstige uitbreiding"
+```
+
+**Voor latere uitwerking (ROADMAP P2)**: pop-up Dorp-info modal · pop-up Stad-info op landkaart · centraal handel-kader hub · Persoonskaart-progressie geïntegreerd.
+
+
 
 ### 🔄 Full Reset voor "echte start" (na productie-deploy, 31 mei avond)
 

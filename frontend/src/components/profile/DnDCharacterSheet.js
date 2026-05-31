@@ -216,10 +216,20 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
         onEdit={() => setEditingMeta(true)}
       />
 
+      {/* ===== EVENT FEED — bovenaan, breed (Willem: info omhoog & breder) ===== */}
+      <div className="mt-3">
+        <EventFeedPanel
+          feed={char.event_feed || []}
+          draft={eventDraft}
+          setDraft={setEventDraft}
+          onSend={(t) => sendEvent('SYSTEEM', t)}
+        />
+      </div>
+
       {/* ===== HOOFD 3-KOLOMS LAYOUT ===== */}
       <div className="mt-3 grid grid-cols-12 gap-3">
-        {/* === KOLOM LINKS: Body silhouet met slots === */}
-        <div className="col-span-12 lg:col-span-5">
+        {/* === KOLOM LINKS: Body silhouet met slots + CharInfo === */}
+        <div className="col-span-12 lg:col-span-5 space-y-3">
           <PaperPanel>
             <PaperHeader>BODY · EQUIPMENT</PaperHeader>
             <BodySilhouettePanel
@@ -230,9 +240,11 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
               gameCards={gameCards}
             />
           </PaperPanel>
+          {/* v6_dnd_layout_v2 — CharInfo verplaatst onder Body+Equipment (Willem 31 mei) */}
+          <CharInfoPanel char={char} activeTab={infoTab} setActiveTab={setInfoTab} />
         </div>
 
-        {/* === KOLOM MIDDEN: Karakter + Stats === */}
+        {/* === KOLOM MIDDEN: Karakter + Stats + Overig (langer) === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
           <KarakterPortretPanel
             avatarUrl={avatarUrl}
@@ -247,30 +259,22 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <OverigPanel char={char} />
         </div>
 
-        {/* === KOLOM RECHTS: Inventory + Huis & Opslag + Dorp + Map === */}
+        {/* === KOLOM RECHTS: Huis & Opslag (master inventory) + Dorp + Map === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
-          <InventoryGridPanel userId={userId} inventory={inventory} />
-          <HuisOpslagPanel gameCards={gameCards} />
+          {/* v6_dnd_layout_v2 — Rugzak weg, Huis & Opslag is nu de inventory (500 slots, geen kg) */}
+          <HuisOpslagPanel gameCards={gameCards} inventory={inventory} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
-          {/* v6_dnd_map_breder_001 — landkaart even breed als dorp-kader, iets langer */}
           <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
         </div>
       </div>
 
-      {/* ===== EVENT FEED + CHAR INFO ===== */}
-      <div className="mt-3 grid grid-cols-12 gap-3">
-        <div className="col-span-12 md:col-span-7">
-          <EventFeedPanel
-            feed={char.event_feed || []}
-            draft={eventDraft}
-            setDraft={setEventDraft}
-            onSend={(t) => sendEvent('SYSTEEM', t)}
-          />
-        </div>
-        <div className="col-span-12 md:col-span-5">
-          <CharInfoPanel char={char} activeTab={infoTab} setActiveTab={setInfoTab} />
-        </div>
+      {/* ===== PLACEHOLDER (Willem: tabs omhoog, placeholder tot nodig) ===== */}
+      <div className="mt-3 p-4 border border-dashed border-amber-900/30 rounded-lg bg-stone-950/40 text-center" data-testid="dnd-placeholder-future">
+        <p className="text-[10px] uppercase tracking-wider text-amber-500/40">Toekomstige uitbreiding</p>
+        <p className="text-[10px] text-amber-400/30 mt-1">handel-kader hub · pop-up dorp-info · pop-up stad-info — zie ROADMAP P2</p>
       </div>
+
+      {/* (EventFeed + CharInfo zijn verplaatst — EventFeed bovenaan breed, CharInfo onder Body+Equipment) */}
 
       {/* ===== FOOTER NAV ===== */}
       <FooterNav active={activeFooter} setActive={setActiveFooter} />
@@ -845,10 +849,13 @@ function InventoryGridPanel({ userId, inventory: invProp }) {
   );
 }
 
-function HuisOpslagPanel({ gameCards = [] }) {
-  // v6_dnd_card_visuals_002 — Huis-slots: gebouwen + opslag-kasten. Meubel-slots: pure meubels (geen opslag).
+function HuisOpslagPanel({ gameCards = [], inventory = null }) {
+  // v6_dnd_layout_v2 — Huis-slots (gebouwen) + Meubel-slots (decor) + Opslag-grid (master inventory, 500 cap, geen kg).
+  // De aparte 'rugzak' (InventoryGridPanel) is verwijderd; alles in dit kader.
   const HUIS_TAGS = ['huis', 'gebouw', 'opslag', 'locatie'];
   const MEUBEL_TAGS = ['meubel'];
+  const STORAGE_MAX = 500;
+  const VISIBLE_STORAGE_SLOTS = 32; // 8 cols × 4 rows venster op de 500 totaal
 
   const isHuis = c => {
     const tags = (c.tags || []).map(t => String(t).toLowerCase());
@@ -862,7 +869,6 @@ function HuisOpslagPanel({ gameCards = [] }) {
       || ['stoel', 'bed', 'kast', 'kist', 'tafel', 'bank'].some(w => begrip.includes(w));
   };
 
-  // Mutually exclusive: als kaart zowel huis als meubel matcht → huis prioriteit (opslag-kist gaat naar huis-slot)
   const huisCards = (gameCards || []).filter(isHuis).slice(0, 5);
   const huisIds = new Set(huisCards.map(c => c.id));
   const meubelCards = (gameCards || []).filter(c => isMeubel(c) && !huisIds.has(c.id)).slice(0, 5);
@@ -870,45 +876,73 @@ function HuisOpslagPanel({ gameCards = [] }) {
   const fallbackHuis = ['🏠', '📦', '🗃', '⛪', '+'];
   const fallbackMeubel = ['🪑', '🛏', '🗄', '🪟', '+'];
 
+  // Opslag items (uit inventory.slots)
+  const storageItems = inventory?.slots || [];
+  const storageUsed = storageItems.length;
+
   return (
     <PaperPanel>
-      <PaperHeader>HUIS &amp; OPSLAG</PaperHeader>
-      <div className="grid grid-cols-2 gap-3 p-3">
-        <div>
-          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Huis sloten</p>
-          <div className="grid grid-cols-5 gap-1.5">
-            {[0, 1, 2, 3, 4].map(i => {
-              const card = huisCards[i];
-              const img = cardFirstImage(card);
-              return (
-                <div key={i} data-testid={`huis-slot-${i}`}
-                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
-                  title={card?.begrip || ''}>
-                  {img ? (
-                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
-                  ) : (
-                    <span>{fallbackHuis[i]}</span>
-                  )}
-                </div>
-              );
-            })}
+      <PaperHeader right={
+        <span className="text-[10px] font-mono text-amber-300/80" data-testid="opslag-cap-counter">
+          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX}
+        </span>
+      }>HUIS &amp; OPSLAG</PaperHeader>
+      <div className="space-y-3 p-3">
+        {/* Rij 1: Huis + Meubel slots */}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Huis sloten</p>
+            <div className="grid grid-cols-5 gap-1.5">
+              {[0, 1, 2, 3, 4].map(i => {
+                const card = huisCards[i];
+                const img = cardFirstImage(card);
+                return (
+                  <div key={i} data-testid={`huis-slot-${i}`}
+                    className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
+                    title={card?.begrip || ''}>
+                    {img ? (
+                      <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <span>{fallbackHuis[i]}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Meubel sloten</p>
+            <div className="grid grid-cols-5 gap-1.5">
+              {[0, 1, 2, 3, 4].map(i => {
+                const card = meubelCards[i];
+                const img = cardFirstImage(card);
+                return (
+                  <div key={i} data-testid={`meubel-slot-${i}`}
+                    className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
+                    title={card?.begrip || ''}>
+                    {img ? (
+                      <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <span>{fallbackMeubel[i]}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
+
+        {/* Rij 2: Opslag grid (master inventory) */}
         <div>
-          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Meubel sloten</p>
-          <div className="grid grid-cols-5 gap-1.5">
-            {[0, 1, 2, 3, 4].map(i => {
-              const card = meubelCards[i];
-              const img = cardFirstImage(card);
+          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Opslag (eerste {VISIBLE_STORAGE_SLOTS} van {STORAGE_MAX})</p>
+          <div data-testid="opslag-grid" className="grid grid-cols-8 gap-1">
+            {Array.from({ length: VISIBLE_STORAGE_SLOTS }).map((_, i) => {
+              const item = storageItems[i];
               return (
-                <div key={i} data-testid={`meubel-slot-${i}`}
-                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
-                  title={card?.begrip || ''}>
-                  {img ? (
-                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
-                  ) : (
-                    <span>{fallbackMeubel[i]}</span>
-                  )}
+                <div key={i} data-testid={`opslag-slot-${i}`}
+                  className={`aspect-square rounded border ${item ? 'border-amber-700/60 bg-amber-950/30 flex items-center justify-center text-sm' : 'border-amber-900/30 bg-stone-950/50'}`}
+                  title={item?.naam || ''}>
+                  {item ? (item.icon || '◆') : ''}
                 </div>
               );
             })}

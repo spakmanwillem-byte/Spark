@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-05-29T22:52:57.543488+00:00",
+  "generated_at": "2026-05-31T09:35:50.229565+00:00",
   "summary": {
     "total_containers": 96,
     "by_status": {
@@ -12,7 +12,7 @@
       "dir": 66,
       "data": 30
     },
-    "total_endpoints_detected": 476
+    "total_endpoints_detected": 485
   },
   "tree": {
     "backend_modules": {
@@ -829,7 +829,7 @@
         "created_at": "2026-05-26T15:54:32.190929+00:00",
         "last_touched": "2026-05-26T15:54:32.190929+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1111,33 +1111,34 @@
         "split_from": null,
         "children_max": 4,
         "endpoints": [
-          "DELETE /kb/v2/media/image/{card_id}",
-          "DELETE /kb/v2/media/voice/secondary/{card_id}",
-          "DELETE /kb/v2/media/voice/{card_id}",
-          "GET /kb/v2/media/audit",
-          "GET /kb/v2/media/fallback",
-          "GET /kb/v2/media/find",
-          "GET /kb/v2/media/herzien/next",
-          "GET /kb/v2/media/image/file/{filename}",
-          "GET /kb/v2/media/inbox",
-          "GET /kb/v2/media/lade/{lade}",
-          "GET /kb/v2/media/stats",
-          "GET /kb/v2/media/tags/normalize",
-          "GET /kb/v2/media/tags/scan",
-          "GET /kb/v2/media/tags/similarity",
-          "GET /kb/v2/media/voice/file/{filename}",
-          "POST /kb/v2/media/backfill-hooks",
-          "POST /kb/v2/media/classify",
-          "POST /kb/v2/media/delete",
-          "POST /kb/v2/media/edit",
-          "POST /kb/v2/media/herzien/promote",
-          "POST /kb/v2/media/herzien/skip",
-          "POST /kb/v2/media/image",
-          "POST /kb/v2/media/inbox/add",
-          "POST /kb/v2/media/tags/merge",
-          "POST /kb/v2/media/tags/normalize-batch",
-          "POST /kb/v2/media/voice",
-          "POST /kb/v2/media/voice/secondary"
+          "DELETE /kb/v2/image/{card_id}",
+          "DELETE /kb/v2/voice/secondary/{card_id}",
+          "DELETE /kb/v2/voice/{card_id}",
+          "GET /kb/v2/audit",
+          "GET /kb/v2/fallback",
+          "GET /kb/v2/find",
+          "GET /kb/v2/herzien/next",
+          "GET /kb/v2/image/file/{filename}",
+          "GET /kb/v2/inbox",
+          "GET /kb/v2/lade/{lade}",
+          "GET /kb/v2/priority/missing-laag1",
+          "GET /kb/v2/stats",
+          "GET /kb/v2/tags/normalize",
+          "GET /kb/v2/tags/scan",
+          "GET /kb/v2/tags/similarity",
+          "GET /kb/v2/voice/file/{filename}",
+          "POST /kb/v2/backfill-hooks",
+          "POST /kb/v2/classify",
+          "POST /kb/v2/delete",
+          "POST /kb/v2/edit",
+          "POST /kb/v2/herzien/promote",
+          "POST /kb/v2/herzien/skip",
+          "POST /kb/v2/image",
+          "POST /kb/v2/inbox/add",
+          "POST /kb/v2/tags/merge",
+          "POST /kb/v2/tags/normalize-batch",
+          "POST /kb/v2/voice",
+          "POST /kb/v2/voice/secondary"
         ],
         "tags": [],
         "encryption": {
@@ -1705,15 +1706,21 @@
           "GET /trade/context/{market}",
           "GET /trade/deposits/{user_id}",
           "GET /trade/history/{user_id}",
+          "GET /trade/list/{user_id}",
           "GET /trade/markets/{user_id}",
           "GET /trade/monitor/decisions",
           "GET /trade/monitor/status",
+          "GET /trade/pot/{pot_id}",
           "GET /trade/potjes/{user_id}",
           "GET /trade/settings/{user_id}",
+          "GET /trade/stats",
           "GET /trade/stats/{user_id}",
           "GET /trade/status",
+          "GET /trade/status/{user_id}",
           "GET /trade/tickers",
+          "POST /trade/admin/migrate-token-holders",
           "POST /trade/auto-anchor",
+          "POST /trade/auto-ensure/{user_id}",
           "POST /trade/baseline/{user_id}",
           "POST /trade/bitvavo/credentials/{user_id}",
           "POST /trade/bitvavo/sync/{user_id}",
@@ -1724,6 +1731,7 @@
           "POST /trade/bot/stop/{user_id}",
           "POST /trade/bot/unregister/{user_id}",
           "POST /trade/context/refresh-all",
+          "POST /trade/create",
           "POST /trade/deposits/{user_id}",
           "POST /trade/execute/{user_id}",
           "POST /trade/monitor/candle/{user_id}",
@@ -1743,6 +1751,7 @@
           "POST /trade/potjes/{user_id}/{pot_id}/force-sell",
           "POST /trade/quick-buy-potje/{user_id}",
           "POST /trade/run",
+          "POST /trade/simulate-stabilization",
           "PUT /trade/settings/{user_id}"
         ],
         "tags": [],
@@ -1755,7 +1764,7 @@
         "created_at": "2026-05-26T15:54:32.262160+00:00",
         "last_touched": "2026-05-26T15:54:32.262160+00:00",
         "activity_count": 0,
-        "file_count": 7,
+        "file_count": 9,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2378,8 +2387,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.304583+00:00",
-        "last_touched": "2026-05-29T19:18:03.618630+00:00",
-        "activity_count": 71,
+        "last_touched": "2026-05-30T02:44:59.913895+00:00",
+        "activity_count": 92,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2459,8 +2468,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.309307+00:00",
-        "last_touched": "2026-05-26T16:19:35.700269+00:00",
-        "activity_count": 1,
+        "last_touched": "2026-05-31T06:53:42.451686+00:00",
+        "activity_count": 2,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2513,8 +2522,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-05-29T22:48:00.297159+00:00",
-        "activity_count": 201,
+        "last_touched": "2026-05-31T09:20:37.318935+00:00",
+        "activity_count": 247,
         "file_count": 28,
         "subdir_count": 3,
         "extra": {}
@@ -2540,8 +2549,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-05-29T22:51:02.024425+00:00",
-        "activity_count": 46,
+        "last_touched": "2026-05-31T09:34:47.114262+00:00",
+        "activity_count": 53,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2594,8 +2603,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-05-29T22:31:25.616977+00:00",
-        "activity_count": 19,
+        "last_touched": "2026-05-31T09:34:51.271076+00:00",
+        "activity_count": 21,
         "file_count": 9,
         "subdir_count": 2,
         "extra": {}
@@ -2623,7 +2632,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-05-26T16:13:27.111780+00:00",
         "activity_count": 0,
-        "file_count": 10,
+        "file_count": 14,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2648,9 +2657,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-05-29T19:09:59.617463+00:00",
-        "activity_count": 15262,
-        "file_count": 7,
+        "last_touched": "2026-05-31T09:15:50.764985+00:00",
+        "activity_count": 93402,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2675,8 +2684,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-05-29T16:56:14.653852+00:00",
-        "activity_count": 20,
+        "last_touched": "2026-05-31T09:20:37.292299+00:00",
+        "activity_count": 68,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -2702,8 +2711,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-05-29T17:01:13.859743+00:00",
-        "activity_count": 85,
+        "last_touched": "2026-05-31T09:20:36.674187+00:00",
+        "activity_count": 279,
         "file_count": 33,
         "subdir_count": 2,
         "extra": {}
@@ -2783,8 +2792,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-05-29T17:01:12.997168+00:00",
-        "activity_count": 34,
+        "last_touched": "2026-05-31T06:52:26.297524+00:00",
+        "activity_count": 102,
         "file_count": 8,
         "subdir_count": 0,
         "extra": {}
@@ -2837,8 +2846,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-05-29T22:49:04.053694+00:00",
-        "activity_count": 162,
+        "last_touched": "2026-05-31T09:32:27.323537+00:00",
+        "activity_count": 574,
         "file_count": 3,
         "subdir_count": 0,
         "extra": {}
@@ -2893,7 +2902,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 16,
+        "file_count": 18,
         "subdir_count": 1,
         "extra": {}
       },
@@ -2972,9 +2981,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-05-29T22:52:55.689856+00:00",
-        "activity_count": 6545,
-        "file_count": 121,
+        "last_touched": "2026-05-31T09:35:49.956129+00:00",
+        "activity_count": 11038,
+        "file_count": 136,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3026,9 +3035,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-05-29T19:07:29.963036+00:00",
-        "activity_count": 25,
-        "file_count": 12,
+        "last_touched": "2026-05-31T09:15:50.768725+00:00",
+        "activity_count": 183,
+        "file_count": 16,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3134,8 +3143,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-05-29T19:09:59.611744+00:00",
-        "activity_count": 74,
+        "last_touched": "2026-05-30T02:44:59.850909+00:00",
+        "activity_count": 95,
         "file_count": 14,
         "subdir_count": 1,
         "extra": {}

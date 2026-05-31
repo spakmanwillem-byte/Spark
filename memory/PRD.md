@@ -1,7 +1,25 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 3)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 4)
+
+### 🖼️ v6_avatar_picker_001 — Avatar-kiezer terug in Mijn Profiel → Instellingen
+
+**Context**: Avatar-keuze stond ooit in een eigen "Avatar"-tab. Die tab is verbouwd naar D&D character sheet (sessie 17 eerder). Daardoor was er geen plek meer waar users hun profiel-avatar konden kiezen/uploaden.
+
+**Oplossing**: nieuw `AvatarPickerPanel` component binnen Mijn Profiel → tab Instellingen. Volgorde top→bottom: Account → Avatar → Beeld-glow → Geluid → Connecties.
+
+**Features**:
+- Live preview huidige avatar + bron-label (gallery:xxx / user / standaard)
+- Upload eigen afbeelding (klik "Upload eigen" → file picker)
+- Grid "Jouw eigen" (personal gallery) met X-knop om te verwijderen
+- Grid "Gedeelde galerij" (41 afbeeldingen) scrollbaar
+- Selectie ringt roze (Pink-400 accent)
+- Bij selectie: `avatar-changed` custom event dispatched zodat sidebar-avatar live verandert
+
+**Backend hergebruik**: bestaande `/api/avatar/*` endpoints (geen nieuwe routes). Field-mapping: `current.avatar_ref` + `current.url`/`current.fallback_url`.
+
+
 
 ### 🧠 v6_warmth_layer_001 — Norm/waarden van shadow → LIVE in spraak
 

@@ -1073,6 +1073,205 @@ function StatTile({ label, value, sub }) {
 }
 
 // ============================================================
+// AvatarPickerPanel (v6_avatar_picker_001) — was vroeger Avatar-tab,
+// nu instellingen-paneel omdat de Avatar-tab is omgebouwd naar D&D.
+// Gebruikt bestaande /api/avatar endpoints (geen nieuwe backend nodig).
+// ============================================================
+function AvatarPickerPanel({ userId }) {
+  const [gallery, setGallery] = useState([]);
+  const [personal, setPersonal] = useState([]);
+  const [current, setCurrent] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const fileRef = useRef(null);
+
+  const loadAll = useCallback(async () => {
+    try {
+      const [gRes, pRes, cRes] = await Promise.all([
+        fetch(`${API}/api/avatar/gallery`).then(r => r.json()),
+        fetch(`${API}/api/avatar/user/${userId}/personal-gallery`).then(r => r.json()),
+        fetch(`${API}/api/avatar/current/${userId}`).then(r => r.json()),
+      ]);
+      setGallery(gRes.avatars || []);
+      setPersonal(pRes.avatars || []);
+      setCurrent(cRes);
+    } catch {}
+  }, [userId]);
+
+  useEffect(() => { loadAll(); }, [loadAll]);
+
+  const selectFromGallery = async (avatarId) => {
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/avatar/select/${userId}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar: `gallery:${avatarId}` }),
+      });
+      await loadAll();
+      window.dispatchEvent(new CustomEvent('avatar-changed'));
+    } finally { setBusy(false); }
+  };
+
+  const activatePersonal = async (avatarId) => {
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/avatar/user/${userId}/activate-personal/${avatarId}`, { method: 'POST' });
+      await loadAll();
+      window.dispatchEvent(new CustomEvent('avatar-changed'));
+    } finally { setBusy(false); }
+  };
+
+  const uploadOwn = async (file) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      await fetch(`${API}/api/avatar/user/${userId}`, { method: 'POST', body: fd });
+      await loadAll();
+      window.dispatchEvent(new CustomEvent('avatar-changed'));
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = '';
+    }
+  };
+
+  const removeOwn = async (avatarId) => {
+    if (!window.confirm('Eigen avatar verwijderen?')) return;
+    setBusy(true);
+    try {
+      await fetch(`${API}/api/avatar/user/${userId}?avatar_id=${avatarId}`, { method: 'DELETE' });
+      await loadAll();
+      window.dispatchEvent(new CustomEvent('avatar-changed'));
+    } finally { setBusy(false); }
+  };
+
+  const currentImageUrl = (() => {
+    const u = current?.url || current?.fallback_url;
+    if (!u) return null;
+    return u.startsWith('http') ? u : `${API}${u}?t=${Date.now()}`;
+  })();
+
+  const isSelected = (avatarId, type) => {
+    const ref = current?.avatar_ref || '';
+    if (!ref) return false;
+    if (type === 'gallery') return ref === `gallery:${avatarId}`;
+    if (type === 'personal') return ref === 'user' && current?.active_personal === avatarId;
+    return false;
+  };
+
+  return (
+    <div data-testid="avatar-picker-panel" className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <ImageIcon className="w-4 h-4 text-pink-400" />
+        <h3 className="text-sm font-semibold text-white">Avatar</h3>
+        <span className="text-[9px] uppercase tracking-wider text-slate-500 ml-auto">Profielafbeelding</span>
+      </div>
+      <p className="text-[11px] text-slate-400 mb-3">
+        Kies een afbeelding uit de gedeelde galerij, uit je eigen geüploade afbeeldingen, of upload een nieuwe.
+      </p>
+
+      {/* Huidige avatar preview */}
+      <div className="flex items-center gap-3 mb-4 p-3 bg-slate-800/40 rounded-lg">
+        <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-700 bg-slate-800 flex items-center justify-center" data-testid="avatar-current-preview">
+          {currentImageUrl ? (
+            <img src={currentImageUrl} alt="Avatar" className="w-full h-full object-cover" />
+          ) : (
+            <User className="w-7 h-7 text-slate-500" />
+          )}
+        </div>
+        <div>
+          <p className="text-xs font-medium text-white">Huidige avatar</p>
+          <p className="text-[10px] text-slate-500">{current?.avatar_ref || (current?.is_fallback ? 'standaard (vraagteken)' : 'geen geselecteerd')}</p>
+        </div>
+        <div className="ml-auto">
+          <button
+            data-testid="avatar-upload-btn"
+            onClick={() => fileRef.current?.click()}
+            disabled={uploading}
+            className="px-3 py-1.5 bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 text-pink-300 rounded text-[11px] font-medium flex items-center gap-1.5 transition-colors disabled:opacity-50">
+            <Upload className="w-3 h-3" />
+            {uploading ? 'Uploaden…' : 'Upload eigen'}
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={e => uploadOwn(e.target.files?.[0])}
+            data-testid="avatar-file-input"
+          />
+        </div>
+      </div>
+
+      {/* Eigen avatars (personal) */}
+      {personal.length > 0 && (
+        <div className="mb-4">
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Jouw eigen ({personal.length})</p>
+          <div className="grid grid-cols-6 sm:grid-cols-8 gap-2" data-testid="avatar-personal-grid">
+            {personal.map(a => {
+              const sel = isSelected(a.id, 'personal');
+              return (
+                <div key={a.id} className="relative group">
+                  <button
+                    data-testid={`avatar-personal-${a.id}`}
+                    onClick={() => activatePersonal(a.id)}
+                    disabled={busy}
+                    title={a.title || a.original_name || 'Eigen avatar'}
+                    className={`block w-full aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      sel ? 'border-pink-400 ring-2 ring-pink-400/40' : 'border-slate-700 hover:border-slate-500'
+                    }`}>
+                    <img
+                      src={`${API}/api/avatar/gallery/${a.id}/image`}
+                      alt={a.title || 'avatar'}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                  <button
+                    data-testid={`avatar-personal-del-${a.id}`}
+                    onClick={() => removeOwn(a.id)}
+                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500/80 hover:bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                    title="Verwijderen">
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Gedeelde galerij */}
+      <div>
+        <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Gedeelde galerij ({gallery.length})</p>
+        <div className="grid grid-cols-6 sm:grid-cols-8 gap-2 max-h-72 overflow-y-auto pr-1" data-testid="avatar-gallery-grid">
+          {gallery.map(a => {
+            const sel = isSelected(a.id, 'gallery');
+            return (
+              <button
+                key={a.id}
+                data-testid={`avatar-gallery-${a.id}`}
+                onClick={() => selectFromGallery(a.id)}
+                disabled={busy}
+                title={a.title || a.original_name || 'Avatar'}
+                className={`block aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                  sel ? 'border-pink-400 ring-2 ring-pink-400/40' : 'border-slate-700 hover:border-slate-500'
+                }`}>
+                <img
+                  src={`${API}/api/avatar/gallery/${a.id}/image`}
+                  alt={a.title || 'avatar'}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
 // TAB: INSTELLINGEN (v5_ui_prefs_001)
 // Beeld (glow base color) — Geluid (placeholder) — Connecties (Bitvavo)
 // ============================================================
@@ -1159,7 +1358,7 @@ function InstellingenTab({ userId }) {
           </div>
           <div>
             <h2 className="text-sm font-bold text-white">Persoonlijke instellingen</h2>
-            <p className="text-[10px] text-slate-500">Account · Beeld · Geluid · Connecties — geldt alleen voor jouw account</p>
+            <p className="text-[10px] text-slate-500">Account · Avatar · Beeld · Geluid · Connecties — geldt alleen voor jouw account</p>
           </div>
           {savedFlash && (
             <span className="ml-auto text-[10px] text-emerald-400 flex items-center gap-1">
@@ -1171,6 +1370,9 @@ function InstellingenTab({ userId }) {
 
       {/* === ACCOUNT === */}
       <AccountSection userId={userId} />
+
+      {/* === AVATAR (terug, was vroeger Avatar-tab; nu D&D dus hier ondergebracht) === */}
+      <AvatarPickerPanel userId={userId} />
 
       {/* === BEELD === */}
       <Panel>

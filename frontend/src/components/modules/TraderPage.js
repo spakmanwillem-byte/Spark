@@ -588,7 +588,7 @@ export function TraderPage({ onNavigate }) {
                       <div className="text-center py-6">
                         <Radio className="w-8 h-8 text-slate-700 mx-auto mb-2" />
                         <p className="text-xs text-slate-500">Monitor is uit. Klik Start om live markt te monitoren.</p>
-                        <p className="text-[10px] text-slate-600 mt-1">Bollinger Band signalen | Auto-trade: {traderSettings?.auto_trade ? 'Aan' : 'Uit'} | Mock: {traderSettings?.use_mock !== false ? 'Ja' : 'Nee (LIVE)'}</p>
+                        <p className="text-[10px] text-slate-600 mt-1">Bollinger Band signalen | Auto-trade: {traderSettings?.auto_trade ? 'Aan' : 'Uit'} | Mock: {traderSettings == null ? '…' : (traderSettings.use_mock === true ? 'Ja' : 'Nee (LIVE)')}</p>
                       </div>
                     )}
                   </div>
@@ -965,10 +965,22 @@ export function TraderPage({ onNavigate }) {
                 <div>
                   <label className="block text-xs text-slate-400 mb-2">Modus</label>
                   <div className="flex items-center gap-2 py-3 px-4 bg-slate-800 rounded-xl text-sm">
-                    <span className={`w-2 h-2 rounded-full ${traderSettings?.use_mock !== false ? 'bg-blue-400' : 'bg-green-400 animate-pulse'}`} />
-                    <span className={traderSettings?.use_mock !== false ? 'text-blue-400' : 'text-green-400'}>
-                      {traderSettings?.use_mock !== false ? 'Mock' : 'LIVE'}
-                    </span>
+                    {traderSettings == null ? (
+                      <>
+                        <span className="w-2 h-2 rounded-full bg-slate-500 animate-pulse" />
+                        <span className="text-slate-500">Laden…</span>
+                      </>
+                    ) : traderSettings.use_mock === true ? (
+                      <>
+                        <span className="w-2 h-2 rounded-full bg-blue-400" />
+                        <span className="text-blue-400">Mock</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                        <span className="text-green-400">LIVE</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

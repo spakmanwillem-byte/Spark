@@ -397,6 +397,19 @@ async def create_game_card(body: GameCreateBody):
         "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
         "tags": base_tags,
         "media": {"voice_url": None, "voice_transcript": None, "image_urls": []},
+        # v6_game_meta_001 — game-specifieke metadata (item-stats, fractie, etc.)
+        # Leeg = niet-bruikbaar als item. Vul in om kaart als equipable/carry item te markeren.
+        "game_meta": {
+            "is_item": False,             # True = kaart kan in rugzak/inventory
+            "slot": "",                   # equipment slot (rechterhand/torso/etc.) of "" voor non-equip
+            "weight": 0.0,                # kg
+            "stats_bonus": {},            # {kracht, behendigheid, intelligentie, conditie, wilskracht, geluk}
+            "combat_bonus": {},           # {aanvalskracht, verdediging, magie, crit_kans, beweging, initiatief}
+            "meta": {"klasse": "", "beroep": "", "fractie": "", "locatie": ""},
+            "value_goud": 0,
+            "rarity": "common",           # common / uncommon / rare / epic / legendary
+            "kind": "",                   # food / weapon / armor / tool / shield / drink / currency / pet / etc.
+        },
         "status": "draft",             # draft → locked als Willem vastklikt
         "footnote": {
             "bron": "manual",
@@ -433,6 +446,16 @@ async def edit_game_card(body: GameEditBody):
                 c["media"]  = {**(c.get("media") or {}), **u["media"]}
             if "sense" in u:
                 c["sense"] = u["sense"]
+            # v6_game_meta_001 — diep mergen van game_meta (item-stats etc.)
+            if "game_meta" in u and isinstance(u["game_meta"], dict):
+                gm_old = c.get("game_meta") or {}
+                gm_new = dict(gm_old)
+                for k, v in u["game_meta"].items():
+                    if isinstance(v, dict) and isinstance(gm_old.get(k), dict):
+                        gm_new[k] = {**gm_old.get(k, {}), **v}
+                    else:
+                        gm_new[k] = v
+                c["game_meta"] = gm_new
             fn = c.get("footnote") or {}
             fn["laatst_bewerkt_door"] = body.user_id
             fn["laatst_bewerkt_op"] = _now()
@@ -472,6 +495,123 @@ async def delete_game_card(card_id: str):
         raise HTTPException(404, f"Game-kaart {card_id} niet gevonden")
     _save_game(data)
     return {"success": True, "deleted": card_id}
+
+
+# v6_game_meta_001 — Items uit D&D-kaarten halen (eenheid: 1 kaart-systeem voor alles)
+@router.get("/game-items")
+async def list_item_cards(slot: Optional[str] = None, fractie: Optional[str] = None):
+    """
+    Lijst alle D&D-kaarten die als items gemarkeerd zijn (game_meta.is_item: true).
+    Filters: slot=rechterhand|torso|...  fractie=spark|...
+    """
+    data = _load_game()
+    items = []
+    for c in data.get("cards", []):
+        gm = c.get("game_meta") or {}
+        if not gm.get("is_item"):
+            continue
+        if slot and gm.get("slot") != slot:
+            continue
+        if fractie:
+            meta = gm.get("meta") or {}
+            if (meta.get("fractie") or "") != fractie:
+                continue
+        # Compose item-shape (consistent met /api/inventory/catalog/all)
+        img_url = (c.get("media") or {}).get("image_urls", [None])[0] if (c.get("media") or {}).get("image_urls") else None
+        items.append({
+            "id": c.get("id"),
+            "card_id": c.get("id"),
+            "naam": c.get("begrip"),
+            "kind": gm.get("kind") or "",
+            "slot": gm.get("slot") or "",
+            "weight": gm.get("weight", 0.0),
+            "stats_bonus": gm.get("stats_bonus") or {},
+            "combat_bonus": gm.get("combat_bonus") or {},
+            "meta": gm.get("meta") or {},
+            "value_goud": gm.get("value_goud", 0),
+            "rarity": gm.get("rarity") or "common",
+            "description": (c.get("lagen") or {}).get("laag1") or "",
+            "tags": c.get("tags") or [],
+            "image_url": img_url,
+            "source": "dnd_card",
+        })
+    return {"success": True, "total": len(items), "items": items}
+
+
+@router.post("/game-cards/migrate-items")
+async def migrate_items_to_cards(user_id: str = "user-001"):
+    """
+    EENMALIGE MIGRATIE: kopieer ITEM_CATALOG entries uit inventory/routes.py
+    naar game_meta op overeenkomende D&D-kaarten (matched op begrip/tags).
+    Maakt het D&D-kaart-systeem dé bron-van-waarheid.
+    """
+    from ..inventory.routes import ITEM_CATALOG
+
+    # Mapping van item_id → kandidaat begrip/tags op D&D-kaarten
+    ID_TO_CARD_HINTS = {
+        "brood":         ["basis brood", "brood"],
+        "vlees":         ["basis vlees", "vlees"],
+        "water":         ["waterput", "water"],
+        "kaas":          ["kaas"],
+        "appel":         ["appel"],
+        "ei":            ["ei"],
+        "fakkel":        ["fakkel", "toorts", "lantaarn"],
+        "munt-goud":     ["goud", "munt"],
+        "zwaard-klein":  ["1 hand wapen rechts", "zwaard"],
+        "schild-basis":  ["basis schild", "schild"],
+        "linnen-shirt":  ["t-shirt", "shirt"],
+        "linnen-broek":  ["broek basis", "broek"],
+        "lederen-helm":  ["hoofd"],
+        "leren-laarzen": ["schoenen", "laarzen"],
+        "backpack-basic": ["basis rugzak"],
+    }
+
+    data = _load_game()
+    cards = data.get("cards", [])
+    migrated = []
+    for item_id, hints in ID_TO_CARD_HINTS.items():
+        if item_id not in ITEM_CATALOG:
+            continue
+        item = ITEM_CATALOG[item_id]
+        target = None
+        for h in hints:
+            lh = h.lower().strip()
+            # 1. exact begrip match (altijd toegestaan)
+            target = next((c for c in cards if (c.get("begrip") or "").lower().strip() == lh), None)
+            if target:
+                break
+            # 2. substring alleen voor hints langer dan 3 chars (voorkomt "ei" → "Kleine straat")
+            if len(lh) > 3:
+                target = next((c for c in cards if lh in (c.get("begrip") or "").lower()), None)
+                if target:
+                    break
+            # 3. tag-exact match (altijd toegestaan)
+            target = next((c for c in cards if any(lh == str(t).lower().strip() for t in (c.get("tags") or []))), None)
+            if target:
+                break
+        if not target:
+            continue
+        gm_old = target.get("game_meta") or {}
+        gm_new = {
+            "is_item": True,
+            "slot": item.get("slot", gm_old.get("slot", "")),
+            "weight": item.get("weight", gm_old.get("weight", 0.0)),
+            "stats_bonus": item.get("stats_bonus") or gm_old.get("stats_bonus") or {},
+            "combat_bonus": item.get("combat_bonus") or gm_old.get("combat_bonus") or {},
+            "meta": item.get("meta") or gm_old.get("meta") or {"klasse": "", "beroep": "", "fractie": "", "locatie": ""},
+            "value_goud": item.get("value_goud", gm_old.get("value_goud", 0)),
+            "rarity": item.get("rarity", gm_old.get("rarity", "common")),
+            "kind": item.get("kind", gm_old.get("kind", "")),
+        }
+        target["game_meta"] = gm_new
+        fn = target.setdefault("footnote", {})
+        fn["laatst_bewerkt_op"] = _now()
+        fn["item_migrated_from"] = item_id
+        migrated.append({"card_id": target.get("id"), "begrip": target.get("begrip"), "item_id": item_id})
+    _save_game(data)
+    return {"success": True, "migrated_count": len(migrated), "migrated": migrated}
+
+
 
 
 # ---------------------------------------------------------------------------

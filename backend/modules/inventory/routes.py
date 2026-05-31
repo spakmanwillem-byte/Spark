@@ -345,8 +345,54 @@ async def get_inventory(user_id: str):
 
 @router.get("/catalog/all")
 async def get_catalog():
-    """Lijst alle bekende items (ITEM_CATALOG)."""
-    return {"items": [{"id": k, **v} for k, v in ITEM_CATALOG.items()]}
+    """
+    Lijst alle bekende items: D&D-kaarten met game_meta.is_item:true (PRIMAIR)
+    + hardcoded ITEM_CATALOG (fallback voor items zonder kaart).
+    Het D&D-kaart-systeem is dé bron-van-waarheid; deze endpoint unificeert ze.
+    """
+    items = []
+    migrated_ids = set()  # hardcoded item_ids die al naar een D&D-kaart zijn gemigreerd
+
+    # 1. D&D-kaarten met is_item=True (primaire bron)
+    try:
+        game_file = DATA_ROOT / "cards" / "dnd" / "game.json"
+        game_data = load_json(game_file, default={"cards": []})
+        for c in game_data.get("cards", []):
+            gm = c.get("game_meta") or {}
+            if not gm.get("is_item"):
+                continue
+            img_urls = (c.get("media") or {}).get("image_urls") or []
+            items.append({
+                "id": c.get("id"),
+                "card_id": c.get("id"),
+                "naam": c.get("begrip"),
+                "kind": gm.get("kind") or "",
+                "slot": gm.get("slot") or "",
+                "weight": gm.get("weight", 0.0),
+                "stats_bonus": gm.get("stats_bonus") or {},
+                "combat_bonus": gm.get("combat_bonus") or {},
+                "meta": gm.get("meta") or {},
+                "value_goud": gm.get("value_goud", 0),
+                "rarity": gm.get("rarity") or "common",
+                "description": (c.get("lagen") or {}).get("laag1") or "",
+                "tags": c.get("tags") or [],
+                "image_url": img_urls[0] if img_urls else None,
+                "source": "dnd_card",
+            })
+            # Onthoud welke hardcoded items al een D&D-kaart hebben
+            mig_id = (c.get("footnote") or {}).get("item_migrated_from")
+            if mig_id:
+                migrated_ids.add(mig_id)
+    except Exception:
+        pass
+
+    # 2. Hardcoded ITEM_CATALOG (fallback, alleen voor items zonder D&D-kaart)
+    for k, v in ITEM_CATALOG.items():
+        if k in migrated_ids:
+            continue  # heeft al een D&D-kaart, dus skip
+        items.append({"id": k, **v, "source": "hardcoded"})
+
+    return {"items": items, "total": len(items)}
 
 
 @router.post("/{user_id}/items")

@@ -1,5 +1,66 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18D, fork — UNIFICATIE: items leven nu in D&D-kaarten)
+
+### 🎯 Doel: stop fragmentering — D&D-kaart-systeem is dé bron-van-waarheid
+
+### 🃏 D&D-kaart schema uitgebreid met `game_meta`
+- Nieuw veld `game_meta` op elke D&D-kaart (`/app/backend/modules/dnd/spark_world.py` `create_game_card`):
+  ```python
+  game_meta: {
+    is_item: bool,         # True = kaart is bruikbaar als item in rugzak/inventory
+    slot: str,             # equipment slot (rechterhand/torso/etc.) of "" voor non-equip
+    weight: float,         # kg
+    stats_bonus: {kracht, behendigheid, intelligentie, conditie, wilskracht, geluk},
+    combat_bonus: {aanvalskracht, verdediging, magie, crit_kans, beweging, initiatief},
+    meta: {klasse, beroep, fractie, locatie},
+    value_goud: int,
+    rarity: str,           # common / uncommon / rare / epic / legendary
+    kind: str,             # food / weapon / armor / tool / shield / drink / currency / pet
+  }
+  ```
+- `edit_game_card` doet nu deep-merge op `game_meta` (dict-in-dict updates werken correct)
+
+### 🌐 Nieuwe endpoints
+- `GET /api/dnd/spark-world/game-items?slot=...&fractie=...` — lijst items vanuit D&D-kaarten
+- `POST /api/dnd/spark-world/game-cards/migrate-items` — eenmalige migratie van hardcoded ITEM_CATALOG naar `game_meta` op overeenkomende kaarten
+
+### 🔀 Catalog API geunificeerd (`GET /api/inventory/catalog/all`)
+- **Primaire bron**: D&D-kaarten met `game_meta.is_item=true` (mét je eigen 512×512 images)
+- **Fallback**: hardcoded ITEM_CATALOG, gefilterd op items die NOG GEEN D&D-kaart hebben (via `footnote.item_migrated_from`)
+- Geen duplicaten meer — items met kaart hebben prioriteit
+
+### 🚀 Eenmalige migratie uitgevoerd (11 → 10 succesvol)
+- Brood, Vlees, Water, Rugzak, Zwaard, Schild, T-shirt, Broek, Helm, Schoenen — allemaal gekoppeld aan jouw bestaande D&D-kaarten
+- Bug gefixt: "ei" matchte substring "Kleine straat" → matching strenger gemaakt (substring alleen voor hints > 3 chars)
+- Resultaat: 10 items uit D&D-kaarten + 8 hardcoded fallback (Trekrugzak, Penning, Kaas, Appel, Ei, Fakkel, Goudstuk, Auto-Bark)
+- Wanneer je voor die 8 een D&D-kaart maakt + `game_meta.is_item=true` zet → migreren ze automatisch
+
+### Frontend `itemImage()` slimmer
+- Stap 1: `item.image_url` direct (komt van unified catalog)
+- Stap 2: `item.item_id` start met `game-` → match op `gameCards.find(id)`
+- Stap 3: legacy fallback via `findCardForItem` (hardcoded ID_MAP)
+
+### Test (curl)
+- ✅ `/api/dnd/spark-world/game-items` → 10 items, allemaal met `image_url`
+- ✅ `/api/inventory/catalog/all` → 18 totaal (10 D&D-kaart + 8 hardcoded), geen duplicaten
+- ✅ Frontend rugzak grid + Huis-opslag tonen images correct
+
+### Bestanden gewijzigd in sessie 18D
+- `/app/backend/modules/dnd/spark_world.py` — `game_meta` schema, `/game-items`, `/migrate-items`, deep-merge in edit
+- `/app/backend/modules/inventory/routes.py` — `/catalog/all` unified met dedup op `item_migrated_from`
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — `itemImage()` 3-staps lookup
+
+### Volgende stap voor Willem
+Wanneer je een nieuwe item-kaart aanmaakt in het D&D-systeem:
+1. Upload image
+2. Vul `begrip`, `tags`, `lagen.laag1` (beschrijving)
+3. Edit `game_meta`: zet `is_item: true`, kies `slot`, vul `weight`, `value_goud`, etc.
+4. Item verschijnt automatisch in catalog + rugzak + equip-modal — geen code nodig
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18C, fork — Items naar JOUW 512x512 images, geen emojis)
 
 ### 🖼️ Items koppelen aan eigen 512x512 D&D-kaarten

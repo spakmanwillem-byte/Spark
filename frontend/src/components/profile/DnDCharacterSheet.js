@@ -67,6 +67,15 @@ function findCardForItem(item, gameCards) {
 }
 
 function itemImage(item, gameCards) {
+  // v6_unified_001 — catalog-items uit /api/inventory/catalog/all hebben image_url direct
+  if (item?.image_url) return `${API}${item.image_url}`;
+  // Inventory.slots → item_id kan ook een card_id zijn (game-xxx)
+  const itemId = item?.item_id || item?.id || '';
+  if (typeof itemId === 'string' && itemId.startsWith('game-') && gameCards) {
+    const c = gameCards.find(x => x.id === itemId);
+    if (c) return cardFirstImage(c);
+  }
+  // Anders: fallback op findCardForItem (legacy hardcoded items)
   const card = findCardForItem(item, gameCards);
   return cardFirstImage(card);
 }

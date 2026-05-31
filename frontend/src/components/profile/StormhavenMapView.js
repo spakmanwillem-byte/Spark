@@ -104,6 +104,9 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose }) {
                   active={selectedBuilding?.id === b.id} />
               ))}
 
+              {/* v6_player_glow_001 — Speler-avatar met groene puls op centrum (default) */}
+              <PlayerOnMap char={char} />
+
               {/* Selected building tooltip */}
               {selectedBuilding && (
                 <BuildingTooltip building={selectedBuilding} onClose={() => setSelectedBuilding(null)} />
@@ -225,5 +228,60 @@ function BuildingTooltip({ building, onClose }) {
     </div>
   );
 }
+
+// v6_player_glow_001 — Speler-avatar met groene puls-glow op de dorpskaart
+function PlayerOnMap({ char }) {
+  const userId = char?.user_id;
+  const [avatarUrl, setAvatarUrl] = useState(null);
+  React.useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/avatar/current/${userId}`)
+      .then(r => r.json())
+      .then(d => setAvatarUrl(d.url ? `${API}${d.url}` : null))
+      .catch(() => {});
+  }, [userId]);
+  // Default: centrum van het dorp (50%, 50%). Later: per gebouw waar speler is.
+  const px = char?.player_x_pct ?? 50;
+  const py = char?.player_y_pct ?? 50;
+  return (
+    <div
+      data-testid="player-on-map"
+      title={`${char?.titel || 'Speler'} — Jij bent hier`}
+      className="absolute"
+      style={{
+        left: `${px}%`,
+        top: `${py}%`,
+        transform: 'translate(-50%, -50%)',
+        zIndex: 20,
+      }}>
+      <div className="relative">
+        {/* Pulse-ring */}
+        <div className="absolute -inset-3 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(34,197,94,0.55) 0%, rgba(34,197,94,0) 70%)',
+            animation: 'spark-player-pulse 1.8s ease-in-out infinite',
+          }} />
+        {/* Avatar circle */}
+        <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-emerald-400"
+          style={{ boxShadow: '0 0 12px rgba(34,197,94,0.9), 0 0 24px rgba(34,197,94,0.4)' }}>
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-emerald-900 flex items-center justify-center text-emerald-100 font-bold">
+              {(char?.titel || '?').charAt(0)}
+            </div>
+          )}
+        </div>
+      </div>
+      <style>{`
+        @keyframes spark-player-pulse {
+          0%, 100% { transform: scale(0.85); opacity: 0.5; }
+          50%      { transform: scale(1.15); opacity: 0.9; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 
 export default StormhavenMapView;

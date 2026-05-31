@@ -1,5 +1,46 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18G, fork — Layout fix + Map full coverage + Speler-glow op dorp)
+
+### 🗺️ Alle 12 provincies krijgen avatar-cirkel
+- `MiniMapPanel` haalt nu de **"Basis dorp"** D&D-kaart op als generieke fallback
+- Avatar-lookup volgorde:
+  1. `bewonersByStad[hoofdstad]` (eerste bewoner-avatar van die stad)
+  2. `dorpAvatarUrl` (generieke "Basis dorp" 512×512 image)
+  3. Fractie-shield (laatste fallback)
+- Resultaat: alle 12 provincies tonen nu een avatar-foto met fractie-glow ring (i.p.v. lege dots)
+
+### 👤 Speler-avatar met glow op StormhavenMapView
+- Nieuwe `PlayerOnMap` component (intern in `StormhavenMapView.js`)
+- Laadt `GET /api/avatar/current/{userId}` voor speler's eigen avatar
+- Rendert op `char.player_x_pct ?? 50` / `char.player_y_pct ?? 50` (default centrum, later per gebouw)
+- Visueel: 48×48 emerald cirkel-frame + pulsende radial-gradient ring (1.8s, 0.85↔1.15 scale)
+- `data-testid="player-on-map"`, tooltip "Jij bent hier"
+
+### 📐 Layout reshuffle (2x3 bewoners + handel naast map)
+- **BewonersStripPanel** heeft nu een `compact` prop:
+  - Compact mode: `grid grid-cols-3 gap-2` (2×3 = 6 zichtbaar), kleinere 48×48 avatars
+  - Default mode: horizontale scroll-strip (60+ zichtbaar)
+- Verplaatst naar **MID-kolom** onder `OverigPanel` (compact aan)
+- **BewonerHandelPanel** heeft nu een `compact` prop:
+  - Compact mode: vertikale flex-stack i.p.v. 12-col grid, 80×80 avatar in horizontale row
+  - Avatar+info, "Te koop" en "Jouw rugzak" panels onder elkaar
+- Verplaatst naar **RIGHT-kolom** onder `MiniMapPanel` (compact aan)
+- Oude rij onder de 3 kolommen verwijderd (geen extra full-width strip meer)
+
+### Resultaat (visueel geverifieerd)
+- ✅ BEWONERS · STORMHAVEN 2×3 = 6 vakjes compact in MID-kolom
+- ✅ SPARK WORLD · 12 PROVINCIES toont ALLE 12 provincies als avatar-cirkels
+- ✅ HANDEL · HANS DE BAKKER opent compact onder Spark World (RIGHT-kolom)
+- ✅ Layout-balans verbeterd: alle 3 kolommen ongeveer gelijke hoogte
+
+### Bestanden gewijzigd in sessie 18G
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — `MiniMapPanel` dorpAvatarUrl, `BewonersStripPanel` compact, `BewonerHandelPanel` compact, layout reshuffle
+- `/app/frontend/src/components/profile/StormhavenMapView.js` — `PlayerOnMap` component met groene puls-glow
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18F, fork — Bewoners + Map-avatars + Item-transfer)
 
 ### 👥 NPC Bewoner-systeem (NIEUW)

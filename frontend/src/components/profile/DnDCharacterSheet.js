@@ -382,7 +382,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <CharInfoPanel char={char} activeTab={infoTab} setActiveTab={setInfoTab} />
         </div>
 
-        {/* === KOLOM MIDDEN: Karakter + Stats + Overig (langer) === */}
+        {/* === KOLOM MIDDEN: Karakter + Stats + Overig + Bewoners (2x3) === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
           <KarakterPortretPanel
             avatarUrl={avatarUrl}
@@ -395,9 +395,17 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <StatsPanel title="STATISTIEKEN" stats={char.statistieken || {}} accent="#f59e0b" />
           <StatsPanel title="AANVAL & VERDEDIGING" stats={char.aanval_verdediging || {}} accent="#dc2626" />
           <OverigPanel char={char} />
+          {/* v6_bewoners_layout_002 — Bewoners-strip compact 2x3=6 in MID-kolom onder Overig */}
+          <BewonersStripPanel
+            bewoners={bewoners}
+            activeBewonerId={activeBewonerId}
+            onSelect={setActiveBewonerId}
+            char={char}
+            compact={true}
+          />
         </div>
 
-        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag (master inventory) + Dorp + Map === */}
+        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Map + Handel === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           {/* v6_rugzak_kader_001 — Rugzak als eigen kader naast Huis & Opslag (mobile carry, met kg) */}
           <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} onTransfer={transferItem} isHome={isHome} />
@@ -405,29 +413,23 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <HuisOpslagPanel gameCards={gameCards} inventory={inventory} onTransfer={transferItem} isHome={isHome} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
           <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
+          {/* v6_bewoners_layout_002 — Handel-kader onder Spark World map (geopend bij selectie) */}
+          {activeBewoner && (
+            <BewonerHandelPanel
+              bewoner={activeBewoner}
+              playerInventory={inventory}
+              playerGoud={char.currency?.goud || 0}
+              onBuy={(idx) => buyFromBewoner(activeBewoner.id, idx)}
+              onSell={(slotId) => sellToBewoner(activeBewoner.id, slotId)}
+              onClose={() => setActiveBewonerId(null)}
+              gameCards={gameCards}
+              compact={true}
+            />
+          )}
         </div>
       </div>
 
-      {/* ===== BEWONER-PANEL (NIEUW) — handel met NPCs in de huidige stad ===== */}
-      <div className="mt-3">
-        <BewonersStripPanel
-          bewoners={bewoners}
-          activeBewonerId={activeBewonerId}
-          onSelect={setActiveBewonerId}
-          char={char}
-        />
-        {activeBewoner && (
-          <BewonerHandelPanel
-            bewoner={activeBewoner}
-            playerInventory={inventory}
-            playerGoud={char.currency?.goud || 0}
-            onBuy={(idx) => buyFromBewoner(activeBewoner.id, idx)}
-            onSell={(slotId) => sellToBewoner(activeBewoner.id, slotId)}
-            onClose={() => setActiveBewonerId(null)}
-            gameCards={gameCards}
-          />
-        )}
-      </div>
+      {/* (Bewoners-strip + Handel zijn verplaatst naar MID resp. RIGHT kolom hierboven) */}
 
       {/* ===== HANDEL-KADER VOORBEREIDING (rest van flow nog te bouwen) ===== */}
       <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3" data-testid="dnd-trade-prep">
@@ -1407,6 +1409,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
   const [provincies, setProvincies] = useState([]);
   const [fracties, setFracties] = useState([]);
   const [bewonersByStad, setBewonersByStad] = useState({}); // hoofdstad → first bewoner avatar
+  const [dorpAvatarUrl, setDorpAvatarUrl] = useState(null); // generieke "Basis dorp" fallback
   const [editMode, setEditMode] = useState(false);
   const [dragging, setDragging] = useState(null);
   const [selectedProv, setSelectedProv] = useState(null);
@@ -1427,6 +1430,17 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           if (stad && !map[stad]) map[stad] = b.avatar_url;
         });
         setBewonersByStad(map);
+      })
+      .catch(() => {});
+    // Generieke "Basis dorp" kaart als fallback voor alle 12 provincies
+    fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`)
+      .then(r => r.json())
+      .then(d => {
+        const cards = d.cards || [];
+        const dorpCard = cards.find(c => (c.begrip || '').toLowerCase() === 'basis dorp')
+          || cards.find(c => (c.tags || []).some(t => String(t).toLowerCase() === 'dorp'));
+        const img = dorpCard?.media?.image_urls?.[0];
+        if (img) setDorpAvatarUrl(img);
       })
       .catch(() => {});
   }, []);
@@ -1515,7 +1529,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
             const isSelected = selectedProv === p.id;
             const baseR = isMain ? 5.5 : 4.2;
             const glowColor = f.kleur || '#94a3b8';
-            const avatarUrl = bewonersByStad[(p.hoofdstad || '').toLowerCase()];
+            const avatarUrl = bewonersByStad[(p.hoofdstad || '').toLowerCase()] || dorpAvatarUrl;
             const isPlayerHere = (char?.dorp || '').toLowerCase() === (p.hoofdstad || '').toLowerCase();
             return (
               <g key={p.id} data-testid={`prov-${p.id}`}
@@ -1860,30 +1874,34 @@ function PaperHeader({ children, right }) {
 // ============================================================
 // v6_bewoner_001 — Bewoner-strip + Handel-paneel
 // ============================================================
-function BewonersStripPanel({ bewoners = [], activeBewonerId, onSelect, char }) {
+function BewonersStripPanel({ bewoners = [], activeBewonerId, onSelect, char, compact = false }) {
   if (!bewoners.length) return null;
+  // Compact mode: 2x3 grid, kleinere avatars (max 6 zichtbaar)
+  const visible = compact ? bewoners.slice(0, 6) : bewoners;
+  const avatarSize = compact ? 'w-12 h-12' : 'w-16 h-16';
+  const wrap = compact ? 'grid grid-cols-3 gap-2' : 'flex gap-3 overflow-x-auto';
   return (
     <PaperPanel>
       <PaperHeader right={
-        <span className="text-[10px] text-amber-400/60">{char?.dorp || 'onbekend'}</span>
+        <span className="text-[10px] text-amber-400/60">{visible.length}/{bewoners.length}</span>
       }>BEWONERS · {char?.dorp || ''}</PaperHeader>
-      <div className="p-3 flex gap-3 overflow-x-auto" data-testid="bewoners-strip">
-        {bewoners.map(b => {
+      <div className={`p-2 ${wrap}`} data-testid="bewoners-strip">
+        {visible.map(b => {
           const sel = activeBewonerId === b.id;
           return (
             <button key={b.id} data-testid={`bewoner-${b.id}`}
               onClick={() => onSelect(sel ? null : b.id)}
-              className={`shrink-0 w-24 flex flex-col items-center gap-1 p-2 rounded-lg border-2 transition-all ${sel ? 'border-amber-400 bg-amber-900/30' : 'border-stone-700 hover:border-amber-600 bg-stone-950/60'}`}>
-              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-amber-700/60"
-                style={{ boxShadow: '0 0 12px rgba(245,158,11,0.3)' }}>
+              className={`flex flex-col items-center gap-0.5 p-1.5 rounded-lg border-2 transition-all ${sel ? 'border-amber-400 bg-amber-900/30' : 'border-stone-700 hover:border-amber-600 bg-stone-950/60'}`}>
+              <div className={`${avatarSize} rounded-full overflow-hidden border-2 border-amber-700/60`}
+                style={{ boxShadow: '0 0 10px rgba(245,158,11,0.3)' }}>
                 {b.avatar_url ? (
                   <img src={`${API}${b.avatar_url}`} alt={b.naam} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full bg-stone-800 flex items-center justify-center text-amber-200">{b.naam?.charAt(0)}</div>
                 )}
               </div>
-              <p className="text-[10px] font-bold text-amber-100 truncate w-full text-center">{b.naam}</p>
-              <p className="text-[9px] text-amber-400/70 truncate w-full text-center">{b.beroep}</p>
+              <p className="text-[9px] font-bold text-amber-100 truncate w-full text-center leading-tight">{b.naam.split(' ')[0]}</p>
+              <p className="text-[8px] text-amber-400/70 truncate w-full text-center leading-tight">{b.beroep}</p>
             </button>
           );
         })}
@@ -1892,12 +1910,16 @@ function BewonersStripPanel({ bewoners = [], activeBewonerId, onSelect, char }) 
   );
 }
 
-function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSell, onClose, gameCards = [] }) {
+function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSell, onClose, gameCards = [], compact = false }) {
   if (!bewoner) return null;
   const bewonerSlots = bewoner.inventory_slots || [];
   const playerSlots = (playerInventory?.slots || []).filter(s => (s.location || 'rugzak') === 'rugzak');
   const BEWONER_SLOT_COUNT = 8;
   const PLAYER_SLOT_COUNT = 8;
+  // Compact: stack vertikaal i.p.v. 3 kolommen (past in smalle RIGHT-col)
+  const layoutCls = compact ? 'flex flex-col gap-3' : 'grid grid-cols-12 gap-3';
+  const avatarSize = compact ? 'w-20 h-20' : 'w-32 h-32';
+  const gridCols = compact ? 'grid-cols-4' : 'grid-cols-4';
 
   return (
     <PaperPanel>
@@ -1906,11 +1928,11 @@ function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSel
           className="text-[10px] px-2 py-0.5 rounded border border-amber-700/40 text-amber-300 hover:bg-amber-900/30">
           sluit
         </button>
-      }>HANDEL · {bewoner.naam} ({bewoner.beroep})</PaperHeader>
-      <div className="p-3 grid grid-cols-12 gap-3" data-testid="bewoner-handel">
+      }>HANDEL · {bewoner.naam}</PaperHeader>
+      <div className={`p-3 ${layoutCls}`} data-testid="bewoner-handel">
         {/* Avatar + info */}
-        <div className="col-span-12 md:col-span-3 flex flex-col items-center">
-          <div className="w-32 h-32 rounded-lg overflow-hidden border-2 border-amber-700/60"
+        <div className={`${compact ? 'flex gap-3 items-start' : 'col-span-12 md:col-span-3 flex flex-col items-center'}`}>
+          <div className={`${avatarSize} rounded-lg overflow-hidden border-2 border-amber-700/60 shrink-0`}
             style={{ boxShadow: '0 0 16px rgba(245,158,11,0.4)' }}>
             {bewoner.avatar_url ? (
               <img src={`${API}${bewoner.avatar_url}`} alt={bewoner.naam} className="w-full h-full object-cover" />
@@ -1918,20 +1940,20 @@ function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSel
               <div className="w-full h-full bg-stone-800 flex items-center justify-center text-amber-200 text-2xl">{bewoner.naam?.charAt(0)}</div>
             )}
           </div>
-          <p className="mt-2 text-sm font-serif font-bold text-amber-100">{bewoner.naam}</p>
-          <p className="text-[10px] text-amber-400/70">{bewoner.beroep} · {bewoner.rang || 'Burger'}</p>
-          <p className="text-[10px] text-yellow-300 font-mono mt-1">💰 {bewoner.wallet?.goud || 0}g</p>
-          {bewoner.beschrijving && (
-            <p className="text-[10px] italic text-amber-200/70 mt-2 text-center leading-snug">"{bewoner.beschrijving}"</p>
-          )}
+          <div className={compact ? 'flex-1 min-w-0' : 'mt-2 text-center'}>
+            <p className="text-sm font-serif font-bold text-amber-100 leading-tight">{bewoner.naam}</p>
+            <p className="text-[10px] text-amber-400/70">{bewoner.beroep} · {bewoner.rang || 'Burger'}</p>
+            <p className="text-[10px] text-yellow-300 font-mono mt-1">💰 {bewoner.wallet?.goud || 0}g</p>
+            {bewoner.beschrijving && (
+              <p className="text-[10px] italic text-amber-200/70 mt-1 leading-snug line-clamp-3">"{bewoner.beschrijving}"</p>
+            )}
+          </div>
         </div>
 
-        {/* Bewoner verkoopt (8 vakjes) */}
-        <div className="col-span-12 md:col-span-4">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
-            Te koop · klik om te kopen
-          </p>
-          <div data-testid="bewoner-shop-grid" className="grid grid-cols-4 gap-1.5">
+        {/* Bewoner verkoopt */}
+        <div className={compact ? '' : 'col-span-12 md:col-span-4'}>
+          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">Te koop · klik om te kopen</p>
+          <div data-testid="bewoner-shop-grid" className={`grid ${gridCols} gap-1.5`}>
             {Array.from({ length: BEWONER_SLOT_COUNT }).map((_, i) => {
               const item = bewonerSlots[i];
               const img = item ? itemImage(item, gameCards) : null;
@@ -1959,12 +1981,10 @@ function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSel
           </div>
         </div>
 
-        {/* Speler verkoopt (8 vakjes) */}
-        <div className="col-span-12 md:col-span-5">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
-            Jouw rugzak · klik om te verkopen (50% waarde)
-          </p>
-          <div data-testid="bewoner-sell-grid" className="grid grid-cols-4 gap-1.5">
+        {/* Speler verkoopt */}
+        <div className={compact ? '' : 'col-span-12 md:col-span-5'}>
+          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">Jouw rugzak · klik = verkoop (50%)</p>
+          <div data-testid="bewoner-sell-grid" className={`grid ${gridCols} gap-1.5`}>
             {Array.from({ length: PLAYER_SLOT_COUNT }).map((_, i) => {
               const item = playerSlots[i];
               const img = item ? itemImage(item, gameCards) : null;

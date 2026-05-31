@@ -1,0 +1,103 @@
+{
+  "_arch_ref": "DSP-009 clean slate 28 mei",
+  "cleaned_at": "2026-05-28T17:22:48.396843+00:00",
+  "cleaned_by": "user-001",
+  "previous_tx_count": 13,
+  "balances": {
+    "user-000": 10,
+    "user-001": 21,
+    "user-a0ee2d7e": 2,
+    "user-c609d7d1": 0,
+    "user-1996fa59": 1,
+    "user-5dd295db": 1,
+    "user-4d9b59aa": 1
+  },
+  "transactions": [
+    {
+      "id": "tx-clean-slate-28mei",
+      "ts": "2026-05-28T17:22:48.396843+00:00",
+      "type": "clean_slate_anchor",
+      "note": "Clean slate 28 mei: 13 oude tx gearchiveerd. Balances vastgezet als baseline.",
+      "reset_by": "user-001"
+    },
+    {
+      "id": "recovery-8c64ca48-7cf6-41e0-a020-980a2b41c976",
+      "ts": "2026-05-29T09:38:19.296687+00:00",
+      "type": "buy_roar",
+      "user_id": "user-001",
+      "amount": 1,
+      "amount_eur": 10.11,
+      "price_per_token": 10.11,
+      "note": "Recovery: token-koop user-001 (29 mei) — hook crashed, tx achteraf toegevoegd"
+    },
+    {
+      "id": "bc163671-70a5-46ef-becb-e1c4e51c1f6a",
+      "ts": "2026-05-29T11:31:42.525189+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-1996fa59",
+      "amount": 1,
+      "gift_id": "23b31a98-de9a-47e9-b539-060505c72a00",
+      "note": "aub. Willem",
+      "status": "completed"
+    },
+    {
+      "id": "6da65f13-d9de-4963-b468-6ab150e131ba",
+      "ts": "2026-05-29T12:18:09.336376+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-5dd295db",
+      "amount": 1,
+      "gift_id": "c334637b-6cbc-45db-9b69-7ec3b2859b96",
+      "note": "",
+      "status": "completed"
+    },
+    {
+      "id": "b3f1476a-3d9c-4593-8e1e-71c15383389f",
+      "ts": "2026-05-29T15:32:31.217224+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-4d9b59aa",
+      "amount": 1,
+      "gift_id": "d7e44ad3-c330-466b-90e4-a10fed1b7c18",
+      "note": "",
+      "status": "completed"
+    }
+  ],
+  "total_supply": 1000000,
+  "treasury_pool": 999964,
+  "anchor_price_eur": 5.08,
+  "current_dynamic_price_eur": 7.6,
+  "spark_bonus": {
+    "balance": 0,
+    "cumulative_profit_eur": 0.436548,
+    "token_price_at_mint": 5.08,
+    "history": []
+  },
+  "admin_log": [
+    {
+      "ts": "2026-05-29T11:31:42.525218+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-1996fa59",
+      "amount": 1,
+      "gift_id": "23b31a98-de9a-47e9-b539-060505c72a00"
+    },
+    {
+      "ts": "2026-05-29T12:18:09.336433+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-5dd295db",
+      "amount": 1,
+      "gift_id": "c334637b-6cbc-45db-9b69-7ec3b2859b96"
+    },
+    {
+      "ts": "2026-05-29T15:32:31.217249+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-4d9b59aa",
+      "amount": 1,
+      "gift_id": "d7e44ad3-c330-466b-90e4-a10fed1b7c18"
+    }
+  ]
+}

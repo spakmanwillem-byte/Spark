@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1106,
+    "card_count": 1120,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-29T16:59:46.437748+00:00"
+    "last_updated": "2026-05-31T06:49:00.108597+00:00"
   },
   "kaarten": [
     {
@@ -132250,6 +132250,2219 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-05-29T16:59:43.526429+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-54166a49",
+      "begrip": "afgebakend",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afgebakend is een toestand waarin duidelijke grenzen zijn vastgesteld waardoor iets herkenbaar, begrensd en onderscheiden is.",
+        "laag2": "Afgebakend geeft helderheid over wat ergens binnen of buiten valt.",
+        "laag3": "Door afbakening ontstaat structuur, veiligheid en overzicht.\nHet voorkomt vermenging en maakt gerichte afstemming mogelijk.",
+        "laag4": "Binnen Spark is afgebakend een staat van begrensde helderheid waarin informatie, rollen en verantwoordelijkheden duidelijk gepositioneerd zijn.\nAfgebakend ondersteunt adaptie, integriteit en relationele transparantie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, rollen, structuren",
+        "wat": "een begrensde en duidelijke toestand",
+        "wanneer": "bij ordening, bescherming, positionering",
+        "waar": "in systemen, relaties, processen",
+        "waarom": "voor helderheid en integriteit",
+        "hoe": "door grenzen en scheiding"
+      },
+      "tags": [
+        "afgebakend",
+        "grens",
+        "helderheid",
+        "structuur",
+        "scheiding",
+        "orde",
+        "veiligheid",
+        "positie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7c193011",
+          "begrip": "afbakening",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "grens",
+            "helderheid",
+            "scheiding",
+            "structuur",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48404078",
+          "begrip": "grenzen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "structuur",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "orde",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-464a157a",
+          "begrip": "Grens",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grens",
+            "scheiding",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b0e3143",
+          "begrip": "Binnen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "grens",
+            "positie",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T08:54:43.087001+00:00",
+        "vorige_versie_v1": "kb-skel-54166a49",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.967493+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:54:38.070268+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:54:38.097210+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:54:46.377349+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:54:46.390444+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T08:54:36.192752+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-696d12c0",
+      "begrip": "afgerond",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afgerond is de toestand waarin iets voltooid, gesloten of in een complete staat is gebracht.",
+        "laag2": "Afgerond betekent dat een proces, vorm of ontwikkeling een passend einde heeft bereikt.",
+        "laag3": "Afronding geeft rust, duidelijkheid en stabiliteit.\nHet markeert dat iets voldoende compleet is om los te laten, te gebruiken of te behouden.",
+        "laag4": "Binnen Spark is afgerond een staat van voldoende voltooiing waarin verdere uitbreiding niet direct nodig is.\nAfgerond betekent niet perfect, maar functioneel compleet binnen de gestelde context.\nHet vormt een basis voor stabilisatie, evaluatie en eventuele volgende ontwikkeling."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, structuren",
+        "wat": "een voltooide toestand",
+        "wanneer": "na voltooiing of afsluiting",
+        "waar": "in ontwikkeling, vorm, processen",
+        "waarom": "voor rust en stabiliteit",
+        "hoe": "door afronding en voltooiing"
+      },
+      "tags": [
+        "afgerond",
+        "voltooid",
+        "compleet",
+        "gesloten",
+        "stabiel",
+        "rust",
+        "einde",
+        "balans",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48404078",
+          "begrip": "grenzen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-370dddfb",
+          "begrip": "Nou, zo als jij dieper zegt klinkt dat wel fijn. Grijns",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T08:56:33.574996+00:00",
+        "vorige_versie_v1": "kb-skel-696d12c0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.219909+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:56:32.294869+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:56:32.308821+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:56:36.073065+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:56:36.089040+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T08:56:30.953241+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-de6ae178",
+      "begrip": "afhankelijkheid",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afhankelijkheid is een toestand waarin iets voor zijn werking, bestaan of voortgang verbonden is aan iets anders.",
+        "laag2": "Afhankelijkheid ontstaat wanneer een proces, persoon of systeem niet volledig zelfstandig functioneert.",
+        "laag3": "Afhankelijkheid kan ondersteunend of beperkend zijn.\nHet kan samenwerking mogelijk maken, maar ook kwetsbaarheid creëren wanneer balans of autonomie ontbreekt.",
+        "laag4": "Binnen Spark is afhankelijkheid een relationele verbinding tussen onderdelen waarbij werking, informatie of ontwikkeling samenhangt met andere lagen.\nGezonde afhankelijkheid ondersteunt samenhang en adaptie.\nOngebalanceerde afhankelijkheid vergroot kwetsbaarheid en beperkt veerkracht.\nBewuste afbakening maakt afhankelijkheden inzichtelijk en beheersbaar."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, relaties",
+        "wat": "een toestand van verbonden noodzaak",
+        "wanneer": "bij verbonden werking of ondersteuning",
+        "waar": "in systemen, relaties, ontwikkeling",
+        "waarom": "door samenhang of behoefte",
+        "hoe": "door koppeling en onderlinge invloed"
+      },
+      "tags": [
+        "afhankelijkheid",
+        "verbinding",
+        "koppeling",
+        "steun",
+        "kwetsbaarheid",
+        "relatie",
+        "samenhang",
+        "balans",
+        "emotie",
+        "bang",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cc7f1b8b",
+          "begrip": "vriend",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "relatie",
+            "steun",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T08:58:17.540594+00:00",
+        "vorige_versie_v1": "kb-skel-de6ae178",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.968591+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:58:16.501323+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:58:16.509826+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:58:20.228454+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:58:20.236209+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T08:58:15.098723+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2f6ef6ac",
+      "begrip": "afkomst",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afkomst is de oorsprong of herkomst van iemand, iets of een ontwikkeling.",
+        "laag2": "Afkomst verwijst naar waar iets vandaan komt en welke basis of bron eraan voorafging.",
+        "laag3": "Afkomst geeft context en helpt betekenis te begrijpen.\nHet laat zien welke invloeden, geschiedenis of oorsprong hebben bijgedragen aan de huidige vorm.",
+        "laag4": "Binnen Spark is afkomst een relationeel anker dat de oorsprong van informatie, ontwikkeling of identiteit zichtbaar maakt.\nAfkomst ondersteunt transparantie, papertrail en contextbegrip door herleidbaarheid mogelijk te maken.\nHet verbindt huidige staat met eerdere oorsprong."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, informatie, processen",
+        "wat": "de oorsprong of herkomst",
+        "wanneer": "bij ontstaan of ontwikkeling",
+        "waar": "in geschiedenis, context, bron",
+        "waarom": "voor begrip en herleidbaarheid",
+        "hoe": "door oorsprong en verbinding"
+      },
+      "tags": [
+        "afkomst",
+        "oorsprong",
+        "herkomst",
+        "bron",
+        "verleden",
+        "context",
+        "historie",
+        "verbinding",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cf063bd8",
+          "begrip": "terug",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6d601a6",
+          "begrip": "Daar geef ik veel om",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:00:45.973209+00:00",
+        "vorige_versie_v1": "kb-skel-2f6ef6ac",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:33.231215+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:00:45.092755+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:00:45.103697+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:00:48.508153+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:00:48.562472+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:00:43.521983+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-10647c3a",
+      "begrip": "afkorting",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een afkorting is een verkorte schrijf- of spreekvorm van een woord of woordgroep.",
+        "laag2": "Afkortingen maken communicatie compacter en sneller door langere vormen samen te vatten.",
+        "laag3": "Afkortingen vergroten efficiëntie, maar vragen gedeeld begrip.\nZonder context kunnen ze verwarring veroorzaken doordat betekenis niet direct herkenbaar is.",
+        "laag4": "Binnen Spark is een afkorting een compacte representatie van bredere betekenisstructuren.\nAfkortingen ondersteunen snelheid, ordening en semantische efficiëntie, mits zij relationeel verankerd zijn aan hun volledige context.\nZonder die verankering ontstaat interpretatieruis."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, taalstructuren",
+        "wat": "een verkorte betekenisvorm",
+        "wanneer": "bij vereenvoudiging of compacte communicatie",
+        "waar": "in taal, systemen, codering",
+        "waarom": "voor snelheid en overzicht",
+        "hoe": "door verkorting en symbolisering"
+      },
+      "tags": [
+        "afkorting",
+        "verkorting",
+        "taal",
+        "compactheid",
+        "betekenis",
+        "codering",
+        "herkenning",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:02:20.244345+00:00",
+        "vorige_versie_v1": "kb-skel-10647c3a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:44.061469+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:02:19.089959+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:02:19.098315+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:02:22.699682+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:02:22.708204+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:02:17.550209+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f0c6db7d",
+      "begrip": "afnemer",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een afnemer is iemand of iets dat een product, dienst, informatie of waarde ontvangt of gebruikt.",
+        "laag2": "Een afnemer neemt iets af van een aanbieder of systeem voor gebruik, verwerking of deelname.",
+        "laag3": "De afnemer vormt een ontvangende schakel binnen een uitwisseling.\nDe relatie tussen aanbieder en afnemer bepaalt mede de kwaliteit, waarde en wederkerigheid van die uitwisseling.",
+        "laag4": "Binnen Spark is een afnemer een relationele deelnemer die waarde ontvangt vanuit het ecosysteem en tegelijkertijd bijdraagt aan validatie, activiteit en papertrail.\nEen afnemer is niet slechts consument, maar onderdeel van een wederkerige stroom waarin gebruik, feedback en betrokkenheid het systeem mede versterken."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen, organisaties",
+        "wat": "een ontvangende deelnemer",
+        "wanneer": "bij uitwisseling of gebruik",
+        "waar": "in relaties, systemen, markten",
+        "waarom": "om waarde te ontvangen of benutten",
+        "hoe": "door afname en interactie"
+      },
+      "tags": [
+        "afnemer",
+        "ontvanger",
+        "gebruiker",
+        "deelname",
+        "ontvangst",
+        "relatie",
+        "uitwisseling",
+        "waarde",
+        "neutraal",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "uitwisseling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-792abcf8",
+          "begrip": "erbij",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "deelname",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3a46ccb8",
+          "begrip": "delen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "relatie",
+            "uitwisseling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-89dca1fe",
+          "begrip": "geloof",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:04:08.807131+00:00",
+        "vorige_versie_v1": "kb-skel-f0c6db7d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:15.267460+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:04:04.013738+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:04:04.090326+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:04:11.113487+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:04:11.189451+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:04:02.699407+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ad14d353",
+      "begrip": "afscheiding",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afscheiding is het ontstaan of aanbrengen van een scheiding waardoor onderdelen van elkaar worden onderscheiden of losgemaakt.",
+        "laag2": "Afscheiding creëert onderscheid, afstand of begrenzing tussen delen die eerder verbonden waren.",
+        "laag3": "Afscheiding markeert dat iets wordt losgemaakt, onderscheiden of achterblijft.\nDit kan ordening en bescherming brengen, maar ook restvorming, afstand of emotionele betekenis dragen.",
+        "laag4": "Binnen Spark is afscheiding zowel een structureel onderscheidingsmechanisme als een registratie van wat buiten een actieve stroom komt te liggen.\nAfscheiding ondersteunt afbakening, logging en verwerking door zichtbaar te maken wat gescheiden, achtergelaten of afgezonderd wordt."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, structuren, processen",
+        "wat": "het scheiden of onderscheiden van delen",
+        "wanneer": "bij afbakening, ordening, bescherming",
+        "waar": "in relaties, systemen, structuren",
+        "waarom": "voor helderheid en onderscheid",
+        "hoe": "door scheiding en begrenzing"
+      },
+      "tags": [
+        "afscheiding",
+        "scheiding",
+        "grens",
+        "onderscheid",
+        "afstand",
+        "ordening",
+        "afbakening",
+        "verbinding",
+        "neutraal",
+        "overblijfsel",
+        "afval",
+        "emotie",
+        "neutraal",
+        "log"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7c193011",
+          "begrip": "afbakening",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "afbakening",
+            "grens",
+            "ordening",
+            "scheiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13fe3072",
+          "begrip": "wereldwijd",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:13:34.554413+00:00",
+        "vorige_versie_v1": "kb-skel-ad14d353",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:35.923361+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:12:35.677012+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:12:35.691987+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:13:17.398247+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:13:17.409641+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:13:37.091793+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:13:37.100475+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:13:15.788147+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-78411ddc",
+      "begrip": "afstemming",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afstemming is de toestand waarin onderdelen passend op elkaar zijn gericht en in samenhang functioneren.",
+        "laag2": "Afstemming ontstaat wanneer verschil, context en behoefte in balans zijn gebracht.",
+        "laag3": "Afstemming creëert helderheid, rust en samenhang.\nHet laat zien dat aanpassing succesvol heeft geleid tot passende verbinding zonder verlies van eigenheid.",
+        "laag4": "Binnen Spark is afstemming een relationele staat waarin informatie, interactie en systeemwerking in balans zijn met context, gradatie en intentie.\nAfstemming vormt het resultaat van adaptie en afstemmen en ondersteunt begrijpelijkheid, integriteit en responsieve samenhang."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, relaties",
+        "wat": "een staat van passende samenhang",
+        "wanneer": "na gerichte aanpassing",
+        "waar": "in interactie, systemen, communicatie",
+        "waarom": "voor balans en helderheid",
+        "hoe": "door afstemmen en adaptie"
+      },
+      "tags": [
+        "afstemming",
+        "balans",
+        "samenhang",
+        "verbinding",
+        "richting",
+        "context",
+        "adaptie",
+        "doel",
+        "rust",
+        "helderheid",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-8598ee1f",
+          "begrip": "afstemmen",
+          "lade": "doen",
+          "overlap": 10,
+          "shared_tags": [
+            "adaptie",
+            "afstemming",
+            "balans",
+            "context",
+            "doel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "context",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-badad5e7",
+          "begrip": "aarden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "rust",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "doel",
+            "emotie",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de6ae178",
+          "begrip": "afhankelijkheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "samenhang",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:18:20.492111+00:00",
+        "vorige_versie_v1": "kb-skel-78411ddc",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.318809+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:18:19.105604+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:18:19.114630+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:18:23.107641+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:18:23.116559+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:18:17.643466+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3b2e4c13",
+      "begrip": "afweging",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afweging is het bewust vergelijken en beoordelen van mogelijkheden om tot een passende keuze te komen.",
+        "laag2": "Afweging helpt om verschillende belangen, gevolgen of richtingen tegen elkaar af te zetten.",
+        "laag3": "Afweging vraagt reflectie, inzicht en beoordeling.\nHet brengt balans tussen gevoel, verstand, context en doel voordat een beslissing wordt genomen.",
+        "laag4": "Binnen Spark is afweging een relationeel beoordelingsproces waarin informatie, context, intentie en mogelijke uitkomsten tegen elkaar worden gehouden om afgestemde besluitvorming mogelijk te maken.\nAfweging vormt de brug tussen observatie en keuze."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen",
+        "wat": "een proces van vergelijken en beoordelen",
+        "wanneer": "bij keuzes, twijfel, besluitvorming",
+        "waar": "in denken, systemen, interacties",
+        "waarom": "voor passende richting",
+        "hoe": "door vergelijken en beoordelen"
+      },
+      "tags": [
+        "afweging",
+        "keuze",
+        "vergelijking",
+        "beoordeling",
+        "balans",
+        "richting",
+        "context",
+        "reflectie",
+        "intentie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "keuze",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63a5d91b",
+          "begrip": "nemen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "intentie",
+            "keuze",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "context",
+            "neutraal",
+            "reflectie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "intentie",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b9b1f79",
+          "begrip": "besluitvorming",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "afweging",
+            "beoordeling",
+            "keuze",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:23:16.556653+00:00",
+        "vorige_versie_v1": "kb-skel-3b2e4c13",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.246194+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:23:14.263335+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:23:14.293353+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:23:18.901720+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:23:18.963878+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:23:12.942817+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-898a7e14",
+      "begrip": "afwezigheid",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwezigheid is de toestand of het verschijnsel waarbij aanwezigheid ontbreekt.",
+        "laag2": "Afwezigheid maakt zichtbaar dat iets of iemand niet aanwezig, beschikbaar of waarneembaar is.",
+        "laag3": "Afwezigheid kan tijdelijk of blijvend zijn.\nHet krijgt betekenis door verwachting, context en ervaring en kan neutraal, leeg of negatief worden beleefd.",
+        "laag4": "Binnen Spark is afwezigheid een betekenisdragende toestand waarin het ontbreken van verbinding, respons of aanwezigheid relationele informatie geeft.\nAfwezigheid is niet slechts leegte, maar een signaal dat duidt op afstand, onderbreking, verandering of stilte binnen een systeem of relatie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, signalen, processen",
+        "wat": "het ontbreken van aanwezigheid",
+        "wanneer": "bij onderbreking, afstand, gemis",
+        "waar": "in relaties, systemen, interacties",
+        "waarom": "door ontbreken, verwijdering, stilte",
+        "hoe": "door niet-aanwezig zijn"
+      },
+      "tags": [
+        "afwezigheid",
+        "ontbreken",
+        "leegte",
+        "stil",
+        "afstand",
+        "gemis",
+        "onderbreking",
+        "verwachting",
+        "emotie",
+        "neutraal",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-403af50b",
+          "begrip": "afwezig",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "gemis",
+            "leegte",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a4eaa6ad",
+          "begrip": "afdrijven",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "leegte",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-28feae55",
+          "begrip": "niks",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "afwezigheid",
+            "leegte",
+            "negatief",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "afwezigheid",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:34:43.514781+00:00",
+        "vorige_versie_v1": "kb-skel-898a7e14",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.213194+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:34:42.464530+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:34:42.488385+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:34:46.308005+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:34:46.391396+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:34:40.947240+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-22adefd9",
+      "begrip": "akoestiek",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Akoestiek is de manier waarop geluid zich beweegt, weerkaatst en wordt ervaren binnen een ruimte of omgeving.",
+        "laag2": "Akoestiek bepaalt hoe geluid klinkt en hoorbaar wordt.",
+        "laag3": "Akoestiek beïnvloedt helderheid, verstaanbaarheid en beleving van geluid.\nRuimte, vorm en materiaal bepalen hoe geluid draagt, weerkaatst of dempt.",
+        "laag4": "Binnen Spark is akoestiek een voorbeeld van relationele beïnvloeding waarin omgeving direct bepaalt hoe een signaal wordt ontvangen en geïnterpreteerd.\nHet laat zien dat overdracht niet alleen afhangt van de bron, maar ook van de context waarin het klinkt."
+      },
+      "ws5": {
+        "wie": "mensen, geluid, ruimtes, systemen",
+        "wat": "de werking van geluid in ruimte",
+        "wanneer": "bij geluidsoverdracht",
+        "waar": "in ruimtes en omgevingen",
+        "waarom": "voor hoorbaarheid en beleving",
+        "hoe": "door trilling, weerkaatsing en demping"
+      },
+      "tags": [
+        "akoestiek",
+        "geluid",
+        "trilling",
+        "ruimte",
+        "weerkaatsing",
+        "demping",
+        "klank",
+        "echo",
+        "beleving",
+        "omgeving",
+        "helderheid",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-70b6d717",
+          "begrip": "klank",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beleving",
+            "geluid",
+            "klank",
+            "neutraal",
+            "trilling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f31a64d",
+          "begrip": "Ambient aan",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "beleving",
+            "geluid",
+            "omgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-370dddfb",
+          "begrip": "Nou, zo als jij dieper zegt klinkt dat wel fijn. Grijns",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "beleving",
+            "geluid",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7d6abafd",
+          "begrip": "spraak",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "geluid",
+            "klank",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "geluid",
+            "neutraal",
+            "trilling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:39:10.142834+00:00",
+        "vorige_versie_v1": "kb-skel-22adefd9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:22.983034+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:39:08.203834+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:39:08.290343+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:39:13.700733+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:39:13.709119+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:39:06.260703+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-46e51f05",
+      "begrip": "alternatieven",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Alternatieven zijn andere mogelijke keuzes, oplossingen of richtingen naast een bestaande optie.",
+        "laag2": "Alternatieven bieden verschillende mogelijkheden om hetzelfde doel te bereiken.",
+        "laag3": "Alternatieven vergroten keuzevrijheid en maken vergelijking mogelijk.\nZe helpen afwegen, aanpassen en nieuwe richtingen ontdekken wanneer een eerste optie niet passend is.",
+        "laag4": "Binnen Spark vormen alternatieven een adaptieve keuzeruimte waarin meerdere mogelijke routes naast elkaar bestaan.\nAlternatieven ondersteunen flexibiliteit, afweging en ontwikkeling door ruimte te geven aan heroriëntatie zonder het doel uit het oog te verliezen."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, keuzes, processen",
+        "wat": "andere mogelijke opties",
+        "wanneer": "bij keuze, twijfel, verandering",
+        "waar": "in besluitvorming, ontwikkeling, systemen",
+        "waarom": "voor vrijheid en afweging",
+        "hoe": "door vergelijking en vervanging"
+      },
+      "tags": [
+        "alternatieven",
+        "keuze",
+        "opties",
+        "verschil",
+        "richting",
+        "afweging",
+        "vergelijking",
+        "verandering",
+        "vrijheid",
+        "oplossing",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3b2e4c13",
+          "begrip": "afweging",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "afweging",
+            "keuze",
+            "neutraal",
+            "richting",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e13cf93",
+          "begrip": "opties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "alternatieven",
+            "keuze",
+            "neutraal",
+            "opties"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca3efa42",
+          "begrip": "ik heb een voorstel",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "neutraal",
+            "oplossing",
+            "richting",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "keuze",
+            "neutraal",
+            "opties"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "keuze",
+            "neutraal",
+            "richting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:40:40.424246+00:00",
+        "vorige_versie_v1": "kb-skel-46e51f05",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:35.761231+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:40:37.409368+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:40:37.463190+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:40:43.098502+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:40:43.105933+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:40:35.979474+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f9efce92",
+      "begrip": "anders",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Anders betekent afwijkend, verschillend of niet gelijk aan wat verwacht, bekend of aanwezig is.",
+        "laag2": "Anders geeft aan dat iets afwijkt van een bestaande situatie, vorm of verwachting.",
+        "laag3": "Anders maakt verschil zichtbaar.\nHet kan verandering, vernieuwing of onderscheid aanduiden en vraagt vaak om nieuwe interpretatie of afstemming.",
+        "laag4": "Binnen Spark is anders een relationeel verschilsignaal dat aangeeft dat een waarneming, toestand of richting afwijkt van een bestaande referentie.\nAnders vormt een uitnodiging tot observatie, vergelijking en mogelijke adaptie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, situaties, waarnemingen",
+        "wat": "een toestand van verschil",
+        "wanneer": "bij afwijking of verandering",
+        "waar": "in vergelijking, ervaring, context",
+        "waarom": "door verschil of verschuiving",
+        "hoe": "door afwijken van referentie"
+      },
+      "tags": [
+        "anders",
+        "verschil",
+        "afwijking",
+        "verandering",
+        "vergelijking",
+        "richting",
+        "nieuw",
+        "onbekend",
+        "contrast",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-46e51f05",
+          "begrip": "alternatieven",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "neutraal",
+            "richting",
+            "verandering",
+            "vergelijking",
+            "verschil"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-681a4143",
+          "begrip": "Verschillende",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "contrast",
+            "neutraal",
+            "vergelijking",
+            "verschil"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7283d344",
+          "begrip": "afwijking",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "afwijking",
+            "verandering",
+            "verschil"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b2e4c13",
+          "begrip": "afweging",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "richting",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca3efa42",
+          "begrip": "ik heb een voorstel",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "richting",
+            "verandering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:42:00.167906+00:00",
+        "vorige_versie_v1": "kb-skel-f9efce92",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:09.112585+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:41:58.709155+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:41:58.762065+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:42:03.164702+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:42:03.172104+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:41:57.446862+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d0140942",
+      "begrip": "Aliens",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aliens zijn wezens, vormen van leven of intelligentie die als vreemd of buitenaards worden gezien.",
+        "laag2": "Aliens verwijzen naar leven dat niet afkomstig is uit de bekende eigen omgeving of wereld.",
+        "laag3": "Aliens roepen nieuwsgierigheid, verbeelding en onzekerheid op.\nZe staan voor het onbekende en voor de mogelijkheid dat leven of intelligentie anders kan bestaan dan verwacht.",
+        "laag4": "Binnen Spark vertegenwoordigen aliens het concept van onbekende of afwijkende intelligentie buiten bestaande referentiekaders.\nHet begrip nodigt uit tot observatie, openheid en onderzoek zonder directe afwijzing.\nAliens maken zichtbaar hoe verschil spanning kan oproepen tussen nieuwsgierigheid en onzekerheid."
+      },
+      "ws5": {
+        "wie": "wezens, intelligentie, leven, onbekenden",
+        "wat": "vreemd of buitenaards leven",
+        "wanneer": "bij verkenning van onbekend bestaan",
+        "waar": "buiten bekende omgeving of wereld",
+        "waarom": "om verschil en onbekendheid te duiden",
+        "hoe": "door waarneming, verbeelding of ontdekking"
+      },
+      "tags": [
+        "aliens",
+        "leven",
+        "vreemd",
+        "onbekend",
+        "ruimte",
+        "wezen",
+        "verschil",
+        "intelligentie",
+        "ontdekking",
+        "verbeelding",
+        "nieuwsgierigheid",
+        "onzekerheid",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c0f1080f",
+          "begrip": "buiten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "ruimte",
+            "verschil"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f9efce92",
+          "begrip": "anders",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "onbekend",
+            "verschil"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0847772f",
+          "begrip": "onzekerheid",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "neutraal",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-267ae513",
+          "begrip": "overleden",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leven",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "neutraal",
+            "ruimte"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:49:00.108555+00:00",
+        "vorige_versie_v1": "kb-skel-d0140942",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:05.598587+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:48:58.793344+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:48:58.865498+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:49:02.700522+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:49:02.708143+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:48:57.370842+00:00"
       },
       "media": {
         "voice_url": null,

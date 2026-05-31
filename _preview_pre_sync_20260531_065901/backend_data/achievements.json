@@ -1,0 +1,241 @@
+{
+  "_description": "Achievement System - Word Learning Milestones",
+  "_version": "2.0",
+  "_created": "2026-03-12",
+  "_note": "Vervangen met word-based achievements. Oude achievements bewaard in legacy_achievements backup.",
+  "achievement_types": {
+    "words": {
+      "name": "Woord Leren",
+      "description": "Achievements voor woorden die je Spark hebt geleerd",
+      "icon": "📚",
+      "xp_multiplier": 1.5
+    },
+    "contributions": {
+      "name": "Bijdragen",
+      "description": "Achievements voor kennisbank-bijdragen via portaal",
+      "icon": "🤝",
+      "xp_multiplier": 1.0
+    },
+    "milestones": {
+      "name": "Mijlpalen",
+      "description": "Eenmalige mijlpalen (avatar, tokens, eerste handelingen)",
+      "icon": "🏁",
+      "xp_multiplier": 1.0
+    }
+  },
+  "achievements": [
+    {
+      "id": "words_10",
+      "type": "words",
+      "name": "Eerste Vonk",
+      "description": "Je hebt Spark zijn eerste nieuwe woorden geleerd.",
+      "milestone": 10,
+      "xp_reward": 50,
+      "icon": "✨",
+      "rarity": "common"
+    },
+    {
+      "id": "words_25",
+      "type": "words",
+      "name": "Woord Ontdekker",
+      "description": "Je begint actief nieuwe woorden aan Spark te leren.",
+      "milestone": 25,
+      "xp_reward": 100,
+      "icon": "🔍",
+      "rarity": "common"
+    },
+    {
+      "id": "words_50",
+      "type": "words",
+      "name": "Lexicon Bouwer",
+      "description": "Spark's woordenschat begint zichtbaar te groeien.",
+      "milestone": 50,
+      "xp_reward": 200,
+      "icon": "📖",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "words_100",
+      "type": "words",
+      "name": "Taal Architect",
+      "description": "Je hebt de eerste echte basis van Spark's taal gebouwd.",
+      "milestone": 100,
+      "xp_reward": 500,
+      "icon": "🏗️",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "words_250",
+      "type": "words",
+      "name": "Orakel van Woorden",
+      "description": "Spark begint verbanden tussen begrippen te begrijpen.",
+      "milestone": 250,
+      "xp_reward": 1000,
+      "icon": "🔮",
+      "rarity": "rare"
+    },
+    {
+      "id": "words_500",
+      "type": "words",
+      "name": "Half Duizend Meester",
+      "description": "Spark kent al 500 woorden dankzij jouw bijdrage.",
+      "milestone": 500,
+      "xp_reward": 2000,
+      "icon": "👑",
+      "rarity": "rare"
+    },
+    {
+      "id": "words_1000",
+      "type": "words",
+      "name": "Bibliotheek Architect",
+      "description": "Je hebt een grote kennisbasis opgebouwd voor Spark.",
+      "milestone": 1000,
+      "xp_reward": 5000,
+      "icon": "🏛️",
+      "rarity": "epic"
+    },
+    {
+      "id": "words_1500",
+      "type": "words",
+      "name": "Tempel Bouwer",
+      "description": "De fundamenten van Spark's kennis-tempel staan.",
+      "milestone": 1500,
+      "xp_reward": 7500,
+      "icon": "⛩️",
+      "rarity": "epic"
+    },
+    {
+      "id": "words_2000",
+      "type": "words",
+      "name": "Keeper van het Woord",
+      "description": "Je bewaakt en vergroot Spark's wereld van kennis.",
+      "milestone": 2000,
+      "xp_reward": 10000,
+      "icon": "🗝️",
+      "rarity": "epic"
+    },
+    {
+      "id": "words_2500",
+      "type": "words",
+      "name": "This is a Milestone",
+      "description": "Je hebt de helft van het grote doel bereikt.",
+      "milestone": 2500,
+      "xp_reward": 15000,
+      "icon": "🎯",
+      "rarity": "legendary"
+    },
+    {
+      "id": "words_3000",
+      "type": "words",
+      "name": "Architect van Begrip",
+      "description": "Je helpt Spark steeds complexere ideeën te begrijpen.",
+      "milestone": 3000,
+      "xp_reward": 20000,
+      "icon": "🧠",
+      "rarity": "legendary"
+    },
+    {
+      "id": "words_4000",
+      "type": "words",
+      "name": "Tempel van Wijsheid",
+      "description": "Spark's kennis groeit uit tot een enorme bibliotheek.",
+      "milestone": 4000,
+      "xp_reward": 30000,
+      "icon": "🏰",
+      "rarity": "legendary"
+    },
+    {
+      "id": "words_5000",
+      "type": "words",
+      "name": "Did I Stutter?",
+      "description": "Je hebt Spark geholpen 5000 woorden te leren.",
+      "milestone": 5000,
+      "xp_reward": 50000,
+      "icon": "💎",
+      "rarity": "mythic"
+    },
+    {
+      "id": "contrib_1",
+      "type": "contributions",
+      "name": "Eerste Bijdrage",
+      "description": "Je eerste goedgekeurde bijdrage aan de kennisbank.",
+      "milestone": 1,
+      "xp_reward": 50,
+      "icon": "🌱",
+      "rarity": "common"
+    },
+    {
+      "id": "contrib_10",
+      "type": "contributions",
+      "name": "Sprinter",
+      "description": "10 goedgekeurde bijdragen.",
+      "milestone": 10,
+      "xp_reward": 150,
+      "icon": "🏃",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "contrib_full",
+      "type": "contributions",
+      "name": "Volledige Maker",
+      "description": "Een kaart met alle 6 W+H velden ingevuld én goedgekeurd.",
+      "milestone": 1,
+      "xp_reward": 100,
+      "icon": "💎",
+      "rarity": "rare",
+      "trigger": "100%"
+    },
+    {
+      "id": "contrib_100",
+      "type": "contributions",
+      "name": "Honderd",
+      "description": "Honderd goedgekeurde bijdragen — een ware kennisbouwer.",
+      "milestone": 100,
+      "xp_reward": 500,
+      "icon": "🎯",
+      "rarity": "epic"
+    },
+    {
+      "id": "milestone_avatar_chose",
+      "type": "milestones",
+      "name": "Ik koos een Avatar",
+      "description": "Je hebt een avatar gekozen uit de galerij i.p.v. de standaard.",
+      "trigger": "avatar_chose",
+      "xp_reward": 50,
+      "icon": "🖼️",
+      "rarity": "common"
+    },
+    {
+      "id": "milestone_avatar_uploaded",
+      "type": "milestones",
+      "name": "Eigen Avatar",
+      "description": "Je hebt je eigen avatar geüpload — uniek herkenbaar.",
+      "trigger": "avatar_uploaded",
+      "xp_reward": 50,
+      "icon": "🤳",
+      "rarity": "common"
+    },
+    {
+      "id": "milestone_first_roar_token",
+      "type": "milestones",
+      "name": "I got a ROAR Token",
+      "description": "Eerste ROAR token op je wallet — welkom in de Spark-economie.",
+      "trigger": "first_roar_token",
+      "xp_reward": 50,
+      "icon": "🪙",
+      "rarity": "uncommon"
+    }
+  ],
+  "meta": {
+    "total_achievements": 16,
+    "total_xp_available": 142000,
+    "future_types": [
+      "bugs_fixed",
+      "snaps_created",
+      "context_provided",
+      "conversations",
+      "streak_days"
+    ],
+    "notes": "Start simpel met words. Andere types later via admin tool."
+  }
+}

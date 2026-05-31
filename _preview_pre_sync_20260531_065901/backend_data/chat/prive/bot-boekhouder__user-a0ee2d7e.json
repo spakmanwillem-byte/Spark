@@ -1,0 +1,40 @@
+{
+  "messages": [
+    {
+      "id": "bh-2460e408",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📥 BUY • ATOM @ €1.7398\nPotje: pot-001\nInleg: €10.00\nEigenaar: user-a0ee2d7e",
+      "ts": "2026-05-29T19:09:48.230034+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_buy",
+      "market": "ATOM-EUR",
+      "pot_id": "pot-001",
+      "price": 1.7398002248652529,
+      "user_id": "user-a0ee2d7e"
+    },
+    {
+      "id": "bh-501913ff",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-a0ee2d7e",
+      "text": "📤 SELL • ATOM @ €1.7379 ⚠️\nPotje: pot-001\nEigenaar: user-a0ee2d7e\nNetto winst: €-0.0611\n",
+      "ts": "2026-05-29T19:09:50.693720+00:00",
+      "unread_by": [
+        "user-a0ee2d7e"
+      ],
+      "system": true,
+      "kind": "boekhouder_sell",
+      "market": "ATOM-EUR",
+      "pot_id": "pot-001",
+      "price": 1.737872702852853,
+      "netto": -0.061078984729693725,
+      "spark_fee": 0.0,
+      "user_id": "user-a0ee2d7e"
+    }
+  ]
+}

@@ -24882,11 +24882,175 @@
         "session_id": "default",
         "gesprek_nummer": 958
       }
+    },
+    {
+      "id": "conv-60e702e2",
+      "timestamp": "2026-05-29T22:48:00.136656+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 4 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 959
+      }
+    },
+    {
+      "id": "conv-b2e1c59f",
+      "timestamp": "2026-05-29T22:52:57.600048+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 960
+      }
+    },
+    {
+      "id": "conv-930540c5",
+      "timestamp": "2026-05-29T22:53:21.404171+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 961
+      }
+    },
+    {
+      "id": "conv-3b0eb74c",
+      "timestamp": "2026-05-30T08:33:54.890935+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 9 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 962
+      }
+    },
+    {
+      "id": "conv-1ee29966",
+      "timestamp": "2026-05-30T08:37:58.981990+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 963
+      }
+    },
+    {
+      "id": "conv-d1b484f7",
+      "timestamp": "2026-05-30T08:43:21.697777+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Door goed de trader te blijven monitoren.",
+      "spark_response": "Dat klinkt geweldig!\n\n**door**: Door betekent via, dankzij, langs of verdergaan binnen een proces, beweging of oorzaak.\n\n\n**Blijven doen**: De gebruiker geeft aan dat iets door moet gaan.\n\n**Monitoren**: Monitoren is het volgen en controleren van iets.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **trader** (opgeslagen als kaarten)\n\nWat betekent 'trader' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "door"
+          },
+          {
+            "begrip": "Blijven doen"
+          },
+          {
+            "begrip": "Monitoren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "trader"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 964
+      }
+    },
+    {
+      "id": "conv-ce8a85c1",
+      "timestamp": "2026-05-30T08:44:29.687353+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Handel",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'trader' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 965
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 958,
-    "last_updated": "2026-05-29T18:34:48.170671+00:00"
+    "total_conversations": 965,
+    "last_updated": "2026-05-30T08:44:29.687353+00:00"
   }
 }

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 680,
+    "card_count": 693,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-29T17:01:09.464095+00:00"
+    "last_updated": "2026-05-31T06:52:24.123265+00:00"
   },
   "kaarten": [
     {
@@ -81741,6 +81741,2021 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-05-29T17:01:05.446884+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-30cd0d34",
+      "begrip": "afbreken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afbreken is het bewust beëindigen, ontmantelen of verwijderen van iets dat niet langer passend, nodig of functioneel is.",
+        "laag2": "Afbreken maakt ruimte voor verandering, herstel of nieuwe opbouw.",
+        "laag3": "Afbreken is niet altijd verlies of vernietiging.\nHet kan een noodzakelijke stap zijn om fouten te herstellen, overbelasting te verminderen of ruimte te maken voor betere structuren.",
+        "laag4": "Binnen Spark is afbreken een reflectieve correctielaag waarin bestaande structuren bewust worden losgelaten wanneer zij groei, helderheid of integriteit belemmeren.\nAfbreken is geen mislukking, maar een vorm van adaptieve opschoning.\nDoor gericht af te breken blijft het systeem gezond, overzichtelijk en ontwikkelbaar."
+      },
+      "ws5": {
+        "wie": "Mensen, beheerders, systemen en ontwikkelprocessen",
+        "wat": "Het bewust ontmantelen, stoppen of verwijderen van iets",
+        "wanneer": "Bij fouten, veroudering, mismatch, overbelasting of noodzakelijke vernieuwing",
+        "waar": "Binnen systemen, structuren, processen, relaties en ontwikkeling",
+        "waarom": "Om ruimte, helderheid, herstel en verbetering mogelijk te maken",
+        "hoe": "Door evaluatie, loslaten, verwijderen, vereenvoudigen en herstructureren"
+      },
+      "tags": [
+        "afbreken",
+        "ontmantelen",
+        "loslaten",
+        "correctie",
+        "ruimte",
+        "herstel",
+        "opschoning",
+        "verwijderen",
+        "emotie",
+        "neutraal",
+        "bedroefd"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "herstel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "correctie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d2289586",
+          "begrip": "fouten",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "correctie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9c7f4a5",
+          "begrip": "ziekte",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "herstel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-89dca1fe",
+          "begrip": "geloof",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T08:48:29.665401+00:00",
+        "vorige_versie_v1": "kb-skel-30cd0d34",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:15.096463+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:48:24.217966+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:48:24.294212+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:48:31.804363+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:48:31.814951+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T08:48:22.812876+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3ba58c24",
+      "begrip": "afronding",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afronding is het proces van voltooiing waarbij iets bewust naar een passende afsluiting wordt gebracht.",
+        "laag2": "Afronding markeert de overgang van ontwikkeling naar voltooidheid.",
+        "laag3": "Afronding geeft structuur en duidelijkheid door een proces af te sluiten op een moment waarop het voldoende compleet is.\nHet voorkomt open eindes en maakt evaluatie, rust en doorgang mogelijk.",
+        "laag4": "Binnen Spark is afronding een regulerende fase waarin ontwikkeling bewust wordt afgesloten om stabilisatie, reflectie en integratie mogelijk te maken.\nAfronding betekent niet perfectie, maar een voldoende complete staat waarin een fundament draagkrachtig genoeg is voor volgende groei."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, ontwikkeling",
+        "wat": "een proces van voltooiing",
+        "wanneer": "bij afsluiting of voltooiing",
+        "waar": "in projecten, fasen, structuren",
+        "waarom": "voor helderheid en stabiliteit",
+        "hoe": "door afsluiting en evaluatie"
+      },
+      "tags": [
+        "afronding",
+        "voltooiing",
+        "afsluiting",
+        "overgang",
+        "evaluatie",
+        "rust",
+        "stabiliteit",
+        "integratie",
+        "neutraal",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b89797b",
+          "begrip": "morgen wil ik mijn administratie op orde brengen.",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f0b6329",
+          "begrip": "houden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "evaluatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:06:19.662927+00:00",
+        "vorige_versie_v1": "kb-skel-3ba58c24",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.883591+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:06:18.403677+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:06:18.414225+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:06:22.863808+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:06:22.891388+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:06:16.988321+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-8598ee1f",
+      "begrip": "afstemmen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afstemmen is het bewust aanpassen of richten op een situatie, behoefte of context om passende samenhang te creëren.",
+        "laag2": "Afstemmen zorgt ervoor dat onderdelen beter op elkaar aansluiten.",
+        "laag3": "Afstemmen vraagt luisteren, waarnemen en bewust kiezen.\nHet brengt richting en balans door aanpassing aan context zonder de eigen kern te verliezen.",
+        "laag4": "Binnen Spark is afstemmen een intentioneel adaptieproces waarin systemen, informatie en interacties relationeel worden gericht op doel, context en behoefte.\nAfstemmen verbindt luisteren met keuze en maakt afgestemde respons mogelijk."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, relaties",
+        "wat": "het passend op elkaar richten",
+        "wanneer": "bij verschil, verandering, interactie",
+        "waar": "in communicatie, systemen, gedrag",
+        "waarom": "voor samenhang en balans",
+        "hoe": "door waarnemen en bijstellen"
+      },
+      "tags": [
+        "afstemmen",
+        "afstemming",
+        "richting",
+        "keus",
+        "balans",
+        "aanpassing",
+        "samenhang",
+        "verbinding",
+        "context",
+        "adaptie",
+        "luisteren",
+        "doel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "doel",
+            "emotie",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de6ae178",
+          "begrip": "afhankelijkheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "samenhang",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cf063bd8",
+          "begrip": "terug",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "richting",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassing",
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:16:39.396915+00:00",
+        "vorige_versie_v1": "kb-skel-8598ee1f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:22.080771+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:16:35.004190+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:16:35.060857+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:16:41.616267+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:16:41.692564+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:16:33.648872+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-be3749ee",
+      "begrip": "afvoer",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afvoer is het proces waarbij iets wordt weggevoerd, verwijderd of afgevoerd vanuit een systeem of omgeving.",
+        "laag2": "Afvoer zorgt ervoor dat overtollige, ongewenste of verwerkte elementen worden afgevoerd.",
+        "laag3": "Afvoer ondersteunt balans en werking door ruimte vrij te maken en ophoping te voorkomen.\nZonder afvoer ontstaat verstoring, overbelasting of stagnatie.",
+        "laag4": "Binnen Spark is afvoer een regulerend mechanisme waarmee overtollige informatie, reststromen, logs of verwerkte processen gecontroleerd worden afgehandeld.\nAfvoer ondersteunt systeemgezondheid door opschoning, doorstroming en structurele helderheid mogelijk te maken."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, omgevingen",
+        "wat": "het verwijderen of wegvoeren van stromen",
+        "wanneer": "bij verwerking, overschot, afronding",
+        "waar": "in systemen, netwerken, processen",
+        "waarom": "voor balans en doorstroming",
+        "hoe": "door afleiding en verwijdering"
+      },
+      "tags": [
+        "afvoer",
+        "verwijdering",
+        "afleiding",
+        "uitstroom",
+        "doorstroming",
+        "verwerking",
+        "opschoning",
+        "ruimte",
+        "balans",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-30cd0d34",
+          "begrip": "afbreken",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "opschoning",
+            "ruimte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f41ec470",
+          "begrip": "Neutraal",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff0e6be0",
+          "begrip": "snel",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-025b0e21",
+          "begrip": "ecosystemen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12809d56",
+          "begrip": "waarneming",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verwerking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:19:43.509304+00:00",
+        "vorige_versie_v1": "kb-skel-be3749ee",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:12.376638+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:19:42.491031+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:19:42.499927+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:19:45.515588+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:19:45.591416+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:19:40.702426+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-5f415b05",
+      "begrip": "afwachten",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwachten is het bewust uitstellen van handelen in afwachting van meer duidelijkheid, informatie of ontwikkeling.",
+        "laag2": "Afwachten betekent ruimte laten voor verloop voordat een keuze of actie wordt ingezet.",
+        "laag3": "Afwachten vraagt geduld en observatie.\nHet is niet passief nietsdoen, maar bewust tijdelijk niet ingrijpen om betere afstemming mogelijk te maken.",
+        "laag4": "Binnen Spark is afwachten een regulerende tussenstaat waarin observatie voorrang krijgt boven directe interventie.\nAfwachten ondersteunt adaptie door ruimte te geven aan dataverzameling, contextvorming en betekenisontwikkeling voordat richting wordt bepaald."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen",
+        "wat": "bewust tijdelijk niet handelen",
+        "wanneer": "bij onzekerheid, observatie, ontwikkeling",
+        "waar": "in keuzes, processen, interacties",
+        "waarom": "voor duidelijkheid en timing",
+        "hoe": "door observeren en uitstellen"
+      },
+      "tags": [
+        "afwachten",
+        "wachten",
+        "geduld",
+        "observatie",
+        "timing",
+        "onzekerheid",
+        "rust",
+        "keuze",
+        "context",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-857b2b4a",
+          "begrip": "mss",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "afwachten",
+            "context",
+            "neutraal",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b2c5463",
+          "begrip": "gedragsanalyse",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "keuze",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "neutraal",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "geduld",
+            "neutraal",
+            "wachten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "keuze",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:20:50.560293+00:00",
+        "vorige_versie_v1": "kb-skel-5f415b05",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:44.129813+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:20:49.603666+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:20:49.614364+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:20:52.796920+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:20:52.868395+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:20:48.317383+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a002b51a",
+      "begrip": "afwerking",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwerking is het proces waarbij iets wordt verfijnd, voltooid en verzorgd tot een bruikbare of afgeronde staat.",
+        "laag2": "Afwerking zorgt voor de laatste aanpassingen die kwaliteit, samenhang en volledigheid versterken.",
+        "laag3": "Afwerking richt zich op detail, precisie en presentatie.\nHet maakt zichtbaar dat iets niet alleen functioneert, maar ook zorgvuldig is voltooid.",
+        "laag4": "Binnen Spark is afwerking de verfijningsfase waarin structuur, interactie en presentatie worden aangescherpt zodat het fundament helder, bruikbaar en consistent ervaren wordt.\nAfwerking brengt samenhang tussen functionaliteit en beleving en ondersteunt volwassenheid van het systeem."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, ontwerp",
+        "wat": "een proces van verfijning en voltooiing",
+        "wanneer": "aan het einde van ontwikkeling",
+        "waar": "in ontwerp, systemen, structuren",
+        "waarom": "voor kwaliteit en volledigheid",
+        "hoe": "door verfijning en detailzorg"
+      },
+      "tags": [
+        "afwerking",
+        "verfijning",
+        "detail",
+        "voltooiing",
+        "kwaliteit",
+        "verzorging",
+        "precisie",
+        "afronding",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "kwaliteit",
+            "neutraal",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3ba58c24",
+          "begrip": "afronding",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "afronding",
+            "blij",
+            "emotie",
+            "neutraal",
+            "voltooiing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afronding",
+            "blij",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165ff5e9",
+          "begrip": "nuance",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "detail",
+            "emotie",
+            "neutraal",
+            "verfijning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99e32e9a",
+          "begrip": "testkaart-debug",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:26:47.613659+00:00",
+        "vorige_versie_v1": "kb-skel-a002b51a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:59.044089+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:26:46.513775+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:26:46.590517+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:26:49.708207+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:26:49.719956+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:26:45.238521+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-66b8100a",
+      "begrip": "afzuigen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afzuigen is het gericht onttrekken, wegtrekken of opnemen van stoffen, energie, informatie of inhoud vanuit een bron of ruimte.",
+        "laag2": "Afzuigen verwijdert of verplaatst iets door het actief naar zich toe te trekken.",
+        "laag3": "Afzuigen kan functioneel zijn, zoals reinigen of afvoeren, maar kan ook negatief ervaren worden wanneer het ongewenst onttrekt of uitput.",
+        "laag4": "Binnen Spark is afzuigen een mechanisme van actieve onttrekking waarbij informatie, reststromen of signalen gecontroleerd worden verzameld of verwijderd.\nDe betekenis hangt af van intentie en context: functionele afzuiging ondersteunt opschoning en verwerking, ongewenste afzuiging kan balans verstoren door uitputting of verlies."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, apparaten, processen",
+        "wat": "het actief onttrekken of opnemen",
+        "wanneer": "bij verwijdering, verwerking, opname",
+        "waar": "in systemen, ruimtes, processen",
+        "waarom": "voor afvoer, verzameling of onttrekking",
+        "hoe": "door trekkracht of opname"
+      },
+      "tags": [
+        "afzuigen",
+        "onttrekking",
+        "opname",
+        "afvoer",
+        "verwijdering",
+        "kracht",
+        "verwerking",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-be3749ee",
+          "begrip": "afvoer",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "afvoer",
+            "neutraal",
+            "verwerking",
+            "verwijdering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff0e6be0",
+          "begrip": "snel",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "neutraal",
+            "verwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0f46c8",
+          "begrip": "sterke",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "kracht",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94efcc1e",
+          "begrip": "druk",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "kracht",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58356e7a",
+          "begrip": "spanning",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "kracht",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T11:17:41.607264+00:00",
+        "vorige_versie_v1": "kb-skel-66b8100a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:31.688148+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T11:17:40.518076+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T11:17:40.594523+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T11:17:43.987488+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T11:17:43.994969+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T11:17:39.204924+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-355ca912",
+      "begrip": "afzwakken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afzwakken is het verminderen van kracht, intensiteit, invloed of scherpte.",
+        "laag2": "Afzwakken is het verminderen van kracht, intensiteit, invloed of scherpte.",
+        "laag3": "Afzwakken kan balans herstellen door overmatige spanning, kracht of intensiteit te verminderen.\nHet kan beschermend werken, maar ook ervaren worden als verlies van impact of verzwakking.",
+        "laag4": "Binnen Spark is afzwakken een regulerend proces waarmee intensiteit, belasting of invloed bewust wordt teruggebracht om adaptie, stabiliteit en passende afstemming te ondersteunen.\nAfzwakken vermindert niet de kern, maar past de uitingskracht aan aan context en draagkracht."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen, signalen",
+        "wat": "het verminderen van intensiteit of kracht",
+        "wanneer": "bij overbelasting, correctie, afstemming",
+        "waar": "in systemen, interacties, processen",
+        "waarom": "voor balans en regulatie",
+        "hoe": "door vermindering en tempering"
+      },
+      "tags": [
+        "afzwakken",
+        "mindering",
+        "zachter",
+        "verandering",
+        "verkleinen",
+        "balans",
+        "correctie",
+        "regulatie",
+        "aanpassing",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-802f4a61",
+          "begrip": "nee dat klopt niet.",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "aanpassing",
+            "correctie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "aanpassing",
+            "emotie",
+            "neutraal",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0a2ebb81",
+          "begrip": "aanpassingsvermogen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "aanpassing",
+            "emotie",
+            "neutraal",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8598ee1f",
+          "begrip": "afstemmen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "aanpassing",
+            "balans",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f41ec470",
+          "begrip": "Neutraal",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:32:01.613834+00:00",
+        "vorige_versie_v1": "kb-skel-355ca912",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:00.365799+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:31:50.500202+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:31:50.509484+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:32:03.906619+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:32:03.914406+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:31:49.025316+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-63837c01",
+      "begrip": "akkerbouw",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Akkerbouw is het verbouwen van gewassen op landbouwgrond voor voedsel, grondstoffen of andere opbrengsten.",
+        "laag2": "Akkerbouw richt zich op het bewerken van land om planten te laten groeien en oogsten.",
+        "laag3": "Akkerbouw vraagt planning, zorg en afstemming op natuur, bodem en seizoen.\nHet verbindt menselijk handelen met groei, voeding en opbrengst.",
+        "laag4": "Binnen Spark is akkerbouw een systeem van gerichte cultivering waarin voorbereiding, voeding, tijd en onderhoud samenkomen om groei mogelijk te maken.\nHet laat zien hoe ontwikkeling ontstaat door ritme, verzorging en afgestemde voorwaarden."
+      },
+      "ws5": {
+        "wie": "mensen, boeren, natuur, systemen",
+        "wat": "het verbouwen van gewassen",
+        "wanneer": "volgens seizoen en groeicyclus",
+        "waar": "op landbouwgrond en akkers",
+        "waarom": "voor voeding en opbrengst",
+        "hoe": "door zaaien, verzorgen en oogsten"
+      },
+      "tags": [
+        "akkerbouw",
+        "landbouw",
+        "grond",
+        "bodem",
+        "gewas",
+        "groei",
+        "zaaien",
+        "oogst",
+        "voeding",
+        "natuur",
+        "seizoen",
+        "werk",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9d48f5da",
+          "begrip": "grond",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bodem",
+            "grond",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d297f391",
+          "begrip": "Aarde",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bodem",
+            "grond",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab39e13f",
+          "begrip": "Wortel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bodem",
+            "groei",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75dbc769",
+          "begrip": "Kunstmest",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bodem",
+            "landbouw",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-058797ec",
+          "begrip": "Gewassen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "akkerbouw",
+            "landbouw",
+            "natuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:37:52.422324+00:00",
+        "vorige_versie_v1": "kb-skel-63837c01",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:15.038697+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:37:50.811673+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:37:50.897203+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:37:54.564677+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:37:54.594322+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:37:48.939397+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1b1506a0",
+      "begrip": "ambacht",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ambacht is vaardig en zorgvuldig werk waarbij kennis, ervaring en handeling samenkomen om iets te maken of vorm te geven.",
+        "laag2": "Ambacht draait om beheersing, aandacht en vakmanschap in het maken of uitvoeren.",
+        "laag3": "Ambacht ontstaat door oefening, ervaring en toewijding.\nHet verbindt techniek met gevoel voor detail, kwaliteit en zorg.",
+        "laag4": "Binnen Spark is ambacht een ontwikkelvorm waarin kennis niet alleen wordt begrepen, maar belichaamd door herhaling, verfijning en bewuste toepassing.\nAmbacht laat zien hoe groei ontstaat door aandachtige praktijk en opgebouwde beheersing."
+      },
+      "ws5": {
+        "wie": "mensen, makers, vakmensen, systemen",
+        "wat": "zorgvuldig vaardig werk",
+        "wanneer": "bij maken, bouwen, creëren",
+        "waar": "in werk, creatie, ontwikkeling",
+        "waarom": "voor kwaliteit en beheersing",
+        "hoe": "door oefening en ervaring"
+      },
+      "tags": [
+        "ambacht",
+        "vak",
+        "vaardigheid",
+        "werk",
+        "maken",
+        "oefening",
+        "ervaring",
+        "aandacht",
+        "kwaliteit",
+        "zorg",
+        "creatie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2905ecd8",
+          "begrip": "bezig",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "neutraal",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5dd0dca5",
+          "begrip": "expertise",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "kwaliteit",
+            "vaardigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7cc3c0fc",
+          "begrip": "Vaardigheid",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "oefening",
+            "vaardigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fb2e19d2",
+          "begrip": "Welk level ben ik?",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "neutraal",
+            "vaardigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "ervaring",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:43:23.445992+00:00",
+        "vorige_versie_v1": "kb-skel-1b1506a0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.076154+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:43:19.534877+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:43:19.545948+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:43:26.297830+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:43:26.307425+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:43:17.399374+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ebd19822",
+      "begrip": "metselaar",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een metselaar is een vakmens die stenen en materialen zorgvuldig verbindt tot een stevige structuur.",
+        "laag2": "Een metselaar bouwt door losse delen precies samen te voegen tot een dragend geheel.",
+        "laag3": "Metselen vraagt aandacht, vaardigheid en geduld.\nDoor laag voor laag te werken ontstaat stevigheid, samenhang en vorm.",
+        "laag4": "Binnen Spark staat de metselaar voor ambachtelijke opbouw waarbij losse kennisdelen bewust worden verbonden tot een stabiele structuur.\nHet laat zien dat duurzame ontwikkeling ontstaat door precisie, herhaling en zorgvuldige plaatsing.\nDe kracht zit niet in snelheid, maar in consistente verbinding."
+      },
+      "ws5": {
+        "wie": "vakmensen, bouwers, makers",
+        "wat": "iemand die bouwt door verbinding",
+        "wanneer": "bij opbouw en constructie",
+        "waar": "in bouw, structuur, ontwikkeling",
+        "waarom": "voor stevigheid en samenhang",
+        "hoe": "door plaatsen en verbinden"
+      },
+      "tags": [
+        "metselaar",
+        "ambacht",
+        "bouwen",
+        "steen",
+        "muur",
+        "verbinding",
+        "laag",
+        "structuur",
+        "precisie",
+        "vak",
+        "werk",
+        "kracht",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1b1506a0",
+          "begrip": "ambacht",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "ambacht",
+            "neutraal",
+            "vak",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "structuur",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0f46c8",
+          "begrip": "sterke",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "kracht",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "verbinding",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2b80d498",
+          "begrip": "Ring",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "kracht",
+            "neutraal",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:45:32.460762+00:00",
+        "vorige_versie_v1": "kb-skel-ebd19822",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:07.711753+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:45:30.765259+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:45:30.791318+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:45:35.295001+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:45:35.372390+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:45:29.166738+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e1b36b71",
+      "begrip": "Schoenlapper",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een schoenlapper is een vakmens die schoenen herstelt, verstevigt en bruikbaar houdt.",
+        "laag2": "Een schoenlapper verlengt gebruik door beschadigingen te repareren.",
+        "laag3": "Het werk vraagt aandacht, precisie en ambacht.\nDe schoenlapper herstelt niet alleen vorm, maar ook functie en draagkracht.",
+        "laag4": "Binnen Spark staat de schoenlapper voor herstelgericht ambacht waarbij bestaande structuren worden gerepareerd en versterkt in plaats van direct vervangen.\nHet laat zien dat duurzaamheid ontstaat door zorgvuldige correctie en behoud van bruikbare basis."
+      },
+      "ws5": {
+        "wie": "vakmensen, makers, herstellers",
+        "wat": "iemand die schoenen herstelt",
+        "wanneer": "bij slijtage of schade",
+        "waar": "in werkplaats, herstel, onderhoud",
+        "waarom": "voor herstel en verlenging",
+        "hoe": "door reparatie en versterking"
+      },
+      "tags": [
+        "schoenlapper",
+        "ambacht",
+        "herstel",
+        "reparatie",
+        "schoen",
+        "vak",
+        "precisie",
+        "onderhoud",
+        "versterking",
+        "werk",
+        "duurzaamheid",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ebd19822",
+          "begrip": "metselaar",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "ambacht",
+            "neutraal",
+            "precisie",
+            "vak",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b1506a0",
+          "begrip": "ambacht",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "ambacht",
+            "neutraal",
+            "vak",
+            "werk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d41e3189",
+          "begrip": "Handschoenen",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "precisie",
+            "versterking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "herstel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "neutraal",
+            "precisie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:47:37.397401+00:00",
+        "vorige_versie_v1": "kb-skel-e1b36b71",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:13.444744+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:47:34.403811+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:47:34.463965+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:47:39.910663+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:47:39.919201+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:47:33.056276+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-64304822",
+      "begrip": "aluminium",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Aluminium is een licht, sterk en goed vervormbaar metaal dat veel wordt gebruikt in bouw, techniek en productie.",
+        "laag2": "Aluminium is een materiaal dat stevig is, weinig weegt en makkelijk te bewerken is.",
+        "laag3": "Door de combinatie van lichtheid, sterkte en bestendigheid is aluminium breed toepasbaar.\nHet wordt gebruikt waar duurzaamheid, vormbaarheid en bescherming belangrijk zijn.",
+        "laag4": "Binnen Spark staat aluminium voor een balans tussen kracht en flexibiliteit.\nHet laat zien hoe een structuur stevig kan zijn zonder zwaar of star te worden.\nAluminium vertegenwoordigt adaptieve stevigheid: draagkracht met beweeglijkheid."
+      },
+      "ws5": {
+        "wie": "mensen, industrie, techniek, systemen",
+        "wat": "een licht metaal",
+        "wanneer": "bij bouw, productie, verwerking",
+        "waar": "in constructie, techniek, gebruiksvoorwerpen",
+        "waarom": "voor sterkte en lichtheid",
+        "hoe": "door vorming en verwerking"
+      },
+      "tags": [
+        "aluminium",
+        "metaal",
+        "scheikunde",
+        "stof",
+        "licht",
+        "sterk",
+        "buigbaar",
+        "vorm",
+        "bescherming",
+        "bouw",
+        "techniek",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc9f9d35",
+          "begrip": "gebouw",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-785e26b2",
+          "begrip": "Glas",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "bouw",
+            "licht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7f9cf141",
+          "begrip": "bouw",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b03c8649",
+          "begrip": "Handwapens",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bescherming",
+            "neutraal",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:52:24.123218+00:00",
+        "vorige_versie_v1": "kb-skel-64304822",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.152354+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:52:22.610637+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:52:22.688701+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:52:26.301544+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:52:26.309552+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:52:21.238066+00:00"
       },
       "media": {
         "voice_url": null,

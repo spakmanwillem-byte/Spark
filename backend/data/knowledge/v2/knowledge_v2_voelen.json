@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 271,
+    "card_count": 277,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-29T16:40:55.456286+00:00"
+    "last_updated": "2026-05-31T06:36:08.576272+00:00"
   },
   "kaarten": [
     {
@@ -34802,6 +34802,959 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-05-29T16:40:52.169491+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a4eaa6ad",
+      "begrip": "afdrijven",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afdrijven is het geleidelijk verwijderen van een oorspronkelijke richting, verbinding of focus.",
+        "laag2": "Afdrijven ontstaat wanneer grip, aandacht, afstemming of verbondenheid langzaam afneemt.",
+        "laag3": "Afdrijven gebeurt vaak ongemerkt.\nHet kan ontstaan door vermoeidheid, gebrek aan richting, externe invloeden of verlies van bewust contact met een doel of kern.",
+        "laag4": "Binnen Spark is afdrijven een signaal van verminderde afstemming tussen intentie, aandacht en richting.\nAfdrijven vraagt om observatie en heroriëntatie, niet directe afwijzing.\nHet zichtbaar maken van afdrijven maakt bewuste terugkeer naar kern, focus of nieuwe koers mogelijk."
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, processen en aandachtstoestanden",
+        "wat": "Een geleidelijke verwijdering van richting of verbinding",
+        "wanneer": "Bij verminderde focus, afstemming of bewuste sturing",
+        "waar": "In denken, voelen, gedrag, relaties en processen",
+        "waarom": "Door verlies van aandacht, richting, energie of verbinding",
+        "hoe": "Door geleidelijke verschuiving zonder bewuste correctie"
+      },
+      "tags": [
+        "afdrijven",
+        "verandering",
+        "afstand",
+        "vervreemding",
+        "focus",
+        "verlies",
+        "losraken",
+        "verschuiving",
+        "oriëntatie",
+        "emotie",
+        "neutraal",
+        "leegte",
+        "dromen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verandering",
+            "verschuiving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0847772f",
+          "begrip": "onzekerheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "focus",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "focus",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T08:52:24.961913+00:00",
+        "vorige_versie_v1": "kb-skel-a4eaa6ad",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:39.930089+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:52:21.314871+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:52:21.393257+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T08:52:26.682260+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T08:52:26.690594+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T08:52:20.036768+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-99231762",
+      "begrip": "afscheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afscheid is het bewust markeren van een beëindiging van aanwezigheid, verbinding of samenzijn.",
+        "laag2": "Afscheid maakt zichtbaar dat een contact, fase of situatie eindigt of verandert.",
+        "laag3": "Afscheid helpt overgang verwerken.\nHet geeft ruimte aan loslaten, erkenning en het bewust afronden van wat geweest is.",
+        "laag4": "Binnen Spark is afscheid een relationeel overgangsmoment waarin verandering bewust wordt erkend.\nAfscheid ondersteunt verwerking, afbakening en integratie door een verbinding niet abrupt te laten verdwijnen maar betekenisvol af te ronden.\nHet markeert een overgang tussen verbondenheid en nieuwe positie."
+      },
+      "ws5": {
+        "wie": "mensen, relaties, systemen, processen",
+        "wat": "een bewuste markering van beëindiging",
+        "wanneer": "bij vertrek, verandering, verlies of overgang",
+        "waar": "in relaties, fasen, ontmoetingen, processen",
+        "waarom": "voor verwerking en afronding",
+        "hoe": "door erkenning en loslaten"
+      },
+      "tags": [
+        "afscheid",
+        "loslaten",
+        "overgang",
+        "einde",
+        "verbinding",
+        "verwerking",
+        "verandering",
+        "emotie",
+        "sluiten",
+        "openen",
+        "bedroefd",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overgang",
+            "verandering",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overgang",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0e95d34a",
+          "begrip": "zusje",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-267ae513",
+          "begrip": "overleden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afscheid",
+            "bedroefd",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:09:29.571723+00:00",
+        "vorige_versie_v1": "kb-skel-99231762",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.771888+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:09:27.191338+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:09:27.262340+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:09:31.493588+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:09:31.565272+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:09:25.960694+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f5f6eda5",
+      "begrip": "afwachtend",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwachtend is de toestand waarin iemand of iets gericht wacht op ontwikkeling, duidelijkheid of een passend moment.",
+        "laag2": "Afwachtend zijn betekent ontvankelijk blijven zonder direct te handelen.",
+        "laag3": "Een afwachtende houding geeft ruimte aan observatie, timing en afstemming.\nHet kan wijs en bewust zijn, maar ook spanning of onzekerheid bevatten afhankelijk van context.",
+        "laag4": "Binnen Spark is afwachtend een observatieve staat waarin respons tijdelijk wordt opgeschort om context, patroon of betekenis vollediger zichtbaar te laten worden.\nAfwachtend ondersteunt adaptieve besluitvorming door ruimte te geven aan informatievorming vóór interventie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, processen",
+        "wat": "een toestand van gericht wachten",
+        "wanneer": "bij onzekerheid, verwachting, observatie",
+        "waar": "in interactie, besluitvorming, ontwikkeling",
+        "waarom": "voor timing en afstemming",
+        "hoe": "door aanwezigheid en terughoudendheid"
+      },
+      "tags": [
+        "afwachtend",
+        "wachten",
+        "verwachting",
+        "observatie",
+        "timing",
+        "rust",
+        "spanning",
+        "onzekerheid",
+        "ontvankelijkheid",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5f415b05",
+          "begrip": "afwachten",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "neutraal",
+            "observatie",
+            "onzekerheid",
+            "rust",
+            "timing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7e2610bd",
+          "begrip": "frustrerend",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "onzekerheid",
+            "spanning",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "verwachting",
+            "wachten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-eb31fb44",
+          "begrip": "onzeker",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "onzekerheid",
+            "spanning",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e08614e6",
+          "begrip": "dreiging",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "neutraal",
+            "onzekerheid",
+            "spanning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:22:03.910459+00:00",
+        "vorige_versie_v1": "kb-skel-f5f6eda5",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:06.268191+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:22:01.415567+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:22:01.492371+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:22:06.308791+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:22:06.392176+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:22:00.093212+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-403af50b",
+      "begrip": "afwezig",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwezig is de toestand waarin iemand of iets niet aanwezig, niet beschikbaar of niet direct waarneembaar is.",
+        "laag2": "Afwezigheid betekent dat aanwezigheid tijdelijk of blijvend ontbreekt.",
+        "laag3": "Afwezig zijn kan fysiek, mentaal, emotioneel of functioneel voorkomen.\nAfwezigheid kan neutraal zijn, maar ook gevoelens van gemis, stilte of negatieve spanning oproepen wanneer aanwezigheid verwacht wordt.",
+        "laag4": "Binnen Spark is afwezig een relationele toestand waarin een verwachte verbinding, respons of aanwezigheid ontbreekt.\nDe betekenis ontstaat vanuit verwachting, context en interpretatie.\nAfwezigheid kan informatie geven over afstand, onderbreking of noodzakelijke heroriëntatie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, signalen, processen",
+        "wat": "een toestand van niet-aanwezig zijn",
+        "wanneer": "bij ontbreken, onderbreking, afstand",
+        "waar": "in relaties, systemen, interacties",
+        "waarom": "door verwijdering, stilte, onderbreking of afstand",
+        "hoe": "door ontbreken van aanwezigheid of respons"
+      },
+      "tags": [
+        "afwezig",
+        "ontbreken",
+        "leegte",
+        "stil",
+        "afstand",
+        "gemis",
+        "onderbreking",
+        "verwachting",
+        "emotie",
+        "neutraal",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a4eaa6ad",
+          "begrip": "afdrijven",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "leegte",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "onderbreking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "onderbreking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verwachting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T09:28:48.979565+00:00",
+        "vorige_versie_v1": "kb-skel-403af50b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:09.896255+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:28:34.285164+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:28:34.294001+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:28:50.876280+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:28:50.885802+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T09:29:22.009049+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T09:29:22.086935+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T09:29:21.294901+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f34b1969",
+      "begrip": "afwijzing",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Afwijzing is het bewust niet accepteren, niet toestaan of niet erkennen van iets of iemand.",
+        "laag2": "Afwijzing maakt duidelijk dat iets niet passend, gewenst of aanvaardbaar wordt geacht.",
+        "laag3": "Afwijzing kan bescherming, begrenzing en duidelijkheid bieden, maar kan ook gevoelens van afstand, verlies of pijn oproepen.\nDe betekenis hangt af van intentie, context en beleving.",
+        "laag4": "Binnen Spark is afwijzing een relationeel selectiemechanisme waarin iets bewust buiten een gekozen richting, norm of verbinding wordt geplaatst.\nAfwijzing ondersteunt afbakening en integriteit wanneer zij zorgvuldig en transparant plaatsvindt.\nOnbegrepen afwijzing kan vervreemding veroorzaken; bewuste afwijzing creëert helderheid."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, keuzes, relaties",
+        "wat": "het niet accepteren of uitsluiten",
+        "wanneer": "bij mismatch, grens, conflict, selectie",
+        "waar": "in relaties, systemen, communicatie",
+        "waarom": "voor bescherming, richting of afbakening",
+        "hoe": "door weigering, begrenzing of uitsluiting"
+      },
+      "tags": [
+        "afwijzing",
+        "weigering",
+        "uitsluiting",
+        "grens",
+        "afstand",
+        "afbakening",
+        "emotie",
+        "pijn",
+        "verdriet",
+        "negatief",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ad14d353",
+          "begrip": "afscheiding",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "afbakening",
+            "afstand",
+            "emotie",
+            "grens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b88a656a",
+          "begrip": "gekwetst",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afwijzing",
+            "emotie",
+            "pijn",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-403af50b",
+          "begrip": "afwezig",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "negatief",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-898a7e14",
+          "begrip": "afwezigheid",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "afstand",
+            "emotie",
+            "negatief",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c976ebd2",
+          "begrip": "Bedroefd",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "negatief",
+            "verdriet"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-30T11:10:09.688341+00:00",
+        "vorige_versie_v1": "kb-skel-f34b1969",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.103505+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T11:10:08.602351+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T11:10:08.689788+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-30T11:10:12.106463+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-30T11:10:12.165201+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-30T11:10:06.920341+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-efe5810f",
+      "begrip": "alcohol",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Alcohol is een stof die invloed heeft op lichaam, bewustzijn en gedrag door inwerking op het zenuwstelsel.",
+        "laag2": "Alcohol verandert waarneming, gevoel, controle en reactie.",
+        "laag3": "Alcohol beïnvloedt bewustzijn, controle en beleving.\nHet kan ontspanning of verbinding geven, maar ook risico, verslaving of verstoring veroorzaken.\nNaast consumptie wordt alcohol ook functioneel gebruikt voor ontsmetting en reiniging.",
+        "laag4": "Binnen Spark is alcohol een externe beïnvloedende stof die regulatie, bewustzijn en interpretatie verandert.\nDe invloed ervan kan functioneel, ontspannend of ontregelend zijn afhankelijk van context, dosering en intentie.\nAlcohol toont hoe externe stoffen systeemtoestand direct kunnen verschuiven."
+      },
+      "ws5": {
+        "wie": "mensen, lichaam, systemen",
+        "wat": "een beïnvloedende stof",
+        "wanneer": "bij gebruik of inname",
+        "waar": "in lichaam, gedrag, interactie",
+        "waarom": "voor effect, ontspanning, beleving",
+        "hoe": "door opname en beïnvloeding"
+      },
+      "tags": [
+        "alcohol",
+        "stof",
+        "drank",
+        "invloed",
+        "roes",
+        "ontspanning",
+        "controle",
+        "verandering",
+        "bewustzijn",
+        "emotie",
+        "lichaam",
+        "neutraal",
+        "risico",
+        "verslaving",
+        "ontsmetting"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0847772f",
+          "begrip": "onzekerheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "risico",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-383b4da5",
+          "begrip": "chemische",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "stof",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-146aaa54",
+          "begrip": "veroorzaken",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "invloed",
+            "neutraal",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0854d66",
+          "begrip": "Toverdrank",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "drank",
+            "emotie",
+            "neutraal",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bewustzijn",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T06:36:08.576223+00:00",
+        "vorige_versie_v1": "kb-skel-efe5810f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:01.884748+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:36:07.005457+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:36:07.065801+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T06:36:10.381038+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T06:36:10.390772+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T06:36:05.662322+00:00"
       },
       "media": {
         "voice_url": null,

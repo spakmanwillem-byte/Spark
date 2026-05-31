@@ -1,7 +1,28 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 4)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 5)
+
+### 📿 v6_bijbel_aansluiting_001 — Missie · Visie · Doelen verbonden in Spark Bijbel
+
+**Context**: Spark Bijbel-tab toonde alleen Levenswijsheden + Reactie Voorbeelden + 5W+H Framework. De Willem mistte de aansluiting tussen Missie/Visie/Doelen en Normen/Waarden — die bestaan wel in de data maar werden niet visueel verbonden.
+
+**Toegevoegd**:
+- `spark_bijbel.json::spark_bijbel.missie` (nieuw veld): kern-missie expliciet vastgelegd.
+- `spark_bijbel.json::spark_bijbel.visie` (nieuw veld): toekomstvisie expliciet vastgelegd.
+- `spark_bijbel.json::doelen` geüpgraded van lijst-van-strings naar lijst-van-objects: `{tekst, verbinding}` waarbij `verbinding` linkt naar een kernwaarde-naam.
+- Mapping: Mensen helpen→Helpen · Veilige ruimte→Respect · Kennis delen→Transparantie · Nalatenschap→Loyaliteit.
+
+**UI** (`SparkBrainPage.js` regel 344-401):
+- Nieuwe Card "Missie · Visie · Doelen" met groene Target-icon bovenaan Spark Bijbel tab.
+- 3 sub-secties met verschillende kleur-codering: groen (Missie), cyaan (Visie), amber (Doelen).
+- Elke doel-item heeft klikbare roze pill "→ Helpen" / "→ Respect" / etc. die direct naar Normen & Waarden-tab springt.
+- Voetnoot expliciet: "Deze missie, visie en doelen sturen Spark's keuzes — gekoppeld aan 9 kernwaarden en 6 normen."
+- Bug-fix in Identiteit-tab: `{d}` rendering van doelen-objects gefixt (was React-error sinds doelen nu objects zijn).
+
+**Resultaat**: bezoeker van Spark Brain → Spark Bijbel ziet nu in 1 oogopslag het complete ethische raamwerk: Missie → Visie → Doelen → (link naar) Normen & Waarden → Levenswijsheden. De volledige aansluiting die ontbrak.
+
+
 
 ### 🖼️ v6_avatar_picker_001 — Avatar-kiezer terug in Mijn Profiel → Instellingen
 

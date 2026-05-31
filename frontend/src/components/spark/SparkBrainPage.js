@@ -195,12 +195,15 @@ export function SparkBrainPage({ onNavigate, initialSection = 'identiteit' }) {
                 {doelen.length > 0 && (
                   <Card title="Doelen" icon={Target} accent="#22c55e">
                     <div className="space-y-2">
-                      {doelen.map((d, i) => (
-                        <div key={i} className="flex items-center gap-2.5 py-1.5">
-                          <div className="w-6 h-6 rounded-lg bg-green-500/10 flex items-center justify-center text-[10px] font-bold text-green-400">{i + 1}</div>
-                          <span className="text-sm text-slate-300">{d}</span>
-                        </div>
-                      ))}
+                      {doelen.map((d, i) => {
+                        const tekst = typeof d === 'string' ? d : (d.tekst || d.doel || d.naam || '');
+                        return (
+                          <div key={i} className="flex items-center gap-2.5 py-1.5">
+                            <div className="w-6 h-6 rounded-lg bg-green-500/10 flex items-center justify-center text-[10px] font-bold text-green-400">{i + 1}</div>
+                            <span className="text-sm text-slate-300">{tekst}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </Card>
                 )}
@@ -340,6 +343,57 @@ export function SparkBrainPage({ onNavigate, initialSection = 'identiteit' }) {
                   <h2 className="text-lg font-bold text-white mb-1">Spark Bijbel</h2>
                   <p className="text-xs text-slate-400">{bijbel?.spark_bijbel?.beschrijving || 'Normen, waarden en voorbeelden voor het kerngedrag van Spark'}</p>
                 </div>
+
+                {/* v6_bijbel_aansluiting_001 — Missie → Visie → Doelen → (linkt naar Normen & Waarden) */}
+                {(bijbel?.spark_bijbel?.missie || bijbel?.spark_bijbel?.visie || (bijbel?.doelen || []).length > 0) && (
+                  <Card title="Missie · Visie · Doelen" icon={Target} accent="#22c55e">
+                    <div className="space-y-3" data-testid="bijbel-mission-vision-goals">
+                      {bijbel?.spark_bijbel?.missie && (
+                        <div className="p-3 bg-gradient-to-r from-emerald-500/5 to-transparent border-l-2 border-emerald-500/60 rounded-r-lg">
+                          <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold mb-1">Missie</p>
+                          <p className="text-xs text-slate-200 italic leading-relaxed">{bijbel.spark_bijbel.missie}</p>
+                        </div>
+                      )}
+                      {bijbel?.spark_bijbel?.visie && (
+                        <div className="p-3 bg-gradient-to-r from-cyan-500/5 to-transparent border-l-2 border-cyan-500/60 rounded-r-lg">
+                          <p className="text-[10px] uppercase tracking-wider text-cyan-400 font-semibold mb-1">Visie</p>
+                          <p className="text-xs text-slate-200 italic leading-relaxed">{bijbel.spark_bijbel.visie}</p>
+                        </div>
+                      )}
+                      {doelen.length > 0 && (
+                        <div className="p-3 bg-gradient-to-r from-amber-500/5 to-transparent border-l-2 border-amber-500/60 rounded-r-lg">
+                          <p className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold mb-2">Doelen ({doelen.length})</p>
+                          <ul className="space-y-1.5">
+                            {doelen.map((d, i) => {
+                              const tekst = typeof d === 'string' ? d : (d.tekst || d.doel || d.naam || '');
+                              const link = typeof d === 'object' ? d.verbinding : null;
+                              return (
+                                <li key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                                  <span className="text-amber-400 mt-0.5">▸</span>
+                                  <span className="flex-1">
+                                    {tekst}
+                                    {link && (
+                                      <button
+                                        onClick={() => setActiveSection('waarden')}
+                                        className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-pink-500/15 text-pink-300 hover:bg-pink-500/25 transition-colors"
+                                        title={`Verbonden met kernwaarde: ${link}`}>
+                                        → {link}
+                                      </button>
+                                    )}
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      )}
+                      <div className="pt-1 text-[10px] text-slate-500 italic flex items-center gap-1.5">
+                        <Sparkles className="w-3 h-3 text-purple-400" />
+                        Deze missie, visie en doelen sturen Spark's keuzes — gekoppeld aan {kernwaarden.length} kernwaarden en {normen.length} normen onder "Normen & Waarden".
+                      </div>
+                    </div>
+                  </Card>
+                )}
 
                 {/* Bijbel items */}
                 <Card

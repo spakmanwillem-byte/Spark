@@ -14,8 +14,10 @@
     "DELETE /inventory/{user_id}/items/{slot_id}",
     "GET /inventory/catalog/all",
     "GET /inventory/{user_id}",
+    "GET /inventory/{user_id}/is-home",
     "POST /inventory/{user_id}/achievement",
-    "POST /inventory/{user_id}/items"
+    "POST /inventory/{user_id}/items",
+    "POST /inventory/{user_id}/transfer"
   ],
   "tags": [],
   "encryption": {

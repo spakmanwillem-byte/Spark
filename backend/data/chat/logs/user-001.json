@@ -25888,11 +25888,47 @@
         "session_id": "default",
         "gesprek_nummer": 986
       }
+    },
+    {
+      "id": "conv-652e29ac",
+      "timestamp": "2026-05-31T23:48:21.817212+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Wat speelt er? _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 987
+      }
+    },
+    {
+      "id": "conv-3428c497",
+      "timestamp": "2026-05-31T23:48:21.844830+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 988
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 986,
-    "last_updated": "2026-05-31T20:38:22.913038+00:00"
+    "total_conversations": 988,
+    "last_updated": "2026-05-31T23:48:21.844830+00:00"
   }
 }

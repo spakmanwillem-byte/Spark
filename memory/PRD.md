@@ -1,5 +1,53 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18C, fork — Items naar JOUW 512x512 images, geen emojis)
+
+### 🖼️ Items koppelen aan eigen 512x512 D&D-kaarten
+- Helper `findCardForItem(item, gameCards)` met expliciete `ID_MAP`:
+  ```
+  brood         → Basis brood (game-b55)
+  vlees         → basis vlees (game-4ba)
+  water         → Waterput (game-29b)
+  zwaard-klein  → 1 hand wapen rechts (game-006)
+  schild-basis  → Basis schild (game-46f)
+  linnen-shirt  → T-shirt (game-77d)
+  linnen-broek  → Broek basis (game-831)
+  lederen-helm  → Hoofd (game-7fb)
+  leren-laarzen → schoenen (game-a80)
+  backpack-*    → Basis rugzak (game-bf0)
+  ```
+- Fallback: matching op naam-contains, dan tag-exact
+- Helper `itemImage(item, gameCards)` retourneert `${API}${card.media.image_urls[0]}`
+
+### 🎒 Rugzak panel — 32-slot grid, geen emojis, geen "+ Add" knop
+- Grid uitgebreid van 16 → **32 slots (8×4)** zoals Huis & Opslag
+- Items tonen nu **jouw 512×512 D&D-card image** (object-cover) i.p.v. emoji
+- Fallback: eerste letter naam als image-lookup mislukt
+- "+ Item toevoegen" catalog-button VERWIJDERD — items vullen slots via gameplay (loot/koop)
+- Header hint aangepast: "Items vullen de slots wanneer je ze vindt of koopt."
+
+### 🏠 Huis & Opslag — zelfde image-koppeling
+- `opslag-grid` toont nu items met `itemImage()` (jouw 512×512 images)
+- Visueel consistent met de rugzak
+
+### 🎨 EquipSlotModal catalog-items
+- Item-cards in modal tonen nu **64×64 preview-thumbnail** van de gematchte D&D-kaart i.p.v. emoji
+- Stat-pills/meta-regels onveranderd
+
+### Test (Willem login → Avatar tab, na seed van 3 items)
+- ✅ rugzak-slot-0 toont Basis brood image
+- ✅ rugzak-slot-1 toont 1-hand wapen image
+- ✅ rugzak-slot-2 toont T-shirt image
+- ✅ opslag-slot-0/1/2 tonen zelfde images
+- ✅ Geen "+ Item toevoegen" zichtbaar
+- ✅ kg-counter: 2.5/10 kg (groen)
+
+### Bestanden gewijzigd in sessie 18C
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — findCardForItem helper, RugzakKaderPanel v2 (32 slots, images), HuisOpslagPanel opslag-grid images, EquipSlotModal catalog preview-thumbnails
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18B, fork — Items met stats + Rugzak-kader als eigen panel)
 
 ### 🎒 Rugzak als eigen kader naast Huis & Opslag (Willem feedback)

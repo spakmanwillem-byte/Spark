@@ -1447,6 +1447,24 @@ async def process_message(req: ChatMessage):
 
 def _save_log(req: "ChatMessage", response: dict, trigger_type):
     """Save gesprek naar user log."""
+    # v6_warmth_layer_001 — Norm/waarden tot de spraak: bij sterke negatieve emotie
+    # OP een info-route (knowledge/snap/fallback) → prefix een korte erkenningszin
+    # uit kernwaarde laag1. Centrale hook hier zodat ALLE early-returns ook gewarmd worden.
+    # v6_warmth_layer_001 — Norm/waarden tot de spraak: bij sterke negatieve emotie
+    # OP een info-route (knowledge/snap/fallback) → prefix een korte erkenningszin
+    # uit kernwaarde laag1. Centrale hook hier zodat ALLE early-returns ook gewarmd worden.
+    try:
+        from modules.emotion_pipeline import warmth as _warmth
+        # Als trigger_type=None (flow-end save), gebruik response.type als hint
+        _route = trigger_type or response.get("type") or "unknown"
+        _warmth.maybe_apply_warmth(
+            response=response,
+            pipeline_summary=response.get("emotion_pipeline_shadow"),
+            current_route=_route,
+        )
+    except Exception:
+        pass
+
     # v5_tts_pad_001 — ook hier paden zodat early-return responses worden gedekt
     try:
         from . import tts_friendly_service

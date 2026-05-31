@@ -25046,11 +25046,781 @@
         "session_id": "default",
         "gesprek_nummer": 965
       }
+    },
+    {
+      "id": "conv-30e98eec",
+      "timestamp": "2026-05-31T09:11:46.978177+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Verdomme dit klote ding werkt nooit, ik ben hier zo woest over!",
+      "spark_response": "**werkt**: Werkt betekent dat iets functioneert, resultaat geeft of doet wat het hoort te doen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **verdomme, klote, ding** (opgeslagen als kaarten)\n\nWat houdt 'ding' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "werkt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "werkt"
+          },
+          {
+            "begrip": "woest"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "verdomme",
+          "klote",
+          "ding"
+        ],
+        "word_count": 12,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 966
+      }
+    },
+    {
+      "id": "conv-d7bc8347",
+      "timestamp": "2026-05-31T09:14:02.646842+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Verdomme dit klote ding werkt nooit, ik ben hier zo woest over!",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'ding' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "boos",
+          "score": 9,
+          "intensity": 0.66,
+          "triggered_words": [
+            "verdomme",
+            "klote",
+            "woest"
+          ],
+          "source": "static",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 12,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 967
+      }
+    },
+    {
+      "id": "conv-7a4a128e",
+      "timestamp": "2026-05-31T09:14:02.909875+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Ik voel me echt verschrikkelijk verdrietig en eenzaam vandaag, niks helpt",
+      "spark_response": "Top, opgeslagen! Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "verdrietig",
+            "eenzaam"
+          ],
+          "source": "both",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat moet moeilijk zijn"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 968
+      }
+    },
+    {
+      "id": "conv-4b2e59f7",
+      "timestamp": "2026-05-31T09:14:04.670816+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Ik twijfel echt ik weet niet hoe ik dit moet doen, snap niet wat ik moet en durf niet",
+      "spark_response": "**Twijfel**: Twijfel is een gevoel van onzekerheid wanneer iemand niet zeker weet wat waar is of welke keuze de juiste is.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n**snap**: Een snap is een korte kenniskaart of compacte uitleg van een begrip, woord of context.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **durf** (opgeslagen als kaarten)\n\nWat houdt 'durf' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Twijfel"
+          },
+          {
+            "begrip": "doen"
+          },
+          {
+            "begrip": "snap"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "durf"
+        ],
+        "word_count": 19,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 969
+      }
+    },
+    {
+      "id": "conv-affbcd76",
+      "timestamp": "2026-05-31T09:14:04.719631+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Hoe laat is het",
+      "spark_response": "Het is **11:14** (zondag 31 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "laat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 970
+      }
+    },
+    {
+      "id": "conv-fbff63cd",
+      "timestamp": "2026-05-31T09:15:55.061068+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Ik twijfel echt over alles, voel me onzeker en heb stress over deze keuze",
+      "spark_response": "Dank je! Genoteerd. Wanneer speelt 'durf' een rol?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bang",
+          "score": 12,
+          "intensity": 0.76,
+          "triggered_words": [
+            "onzeker",
+            "twijfel",
+            "stress"
+          ],
+          "source": "both",
+          "emoji": "😰",
+          "color": "purple",
+          "empathic_response": "Ik begrijp je zorgen"
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 14,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 971
+      }
+    },
+    {
+      "id": "conv-99afe1d6",
+      "timestamp": "2026-05-31T09:15:55.318971+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Ik voel me hopeloos en eenzaam, vol verdriet en tranen",
+      "spark_response": "Klaar — dit weet ik nu. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 11,
+          "intensity": 0.73,
+          "triggered_words": [
+            "verdriet",
+            "hopeloos",
+            "tranen"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat moet moeilijk zijn"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 972
+      }
+    },
+    {
+      "id": "conv-5c7ae71b",
+      "timestamp": "2026-05-31T09:16:14.442374+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Wat is liefde, ik voel me zo verschrikkelijk eenzaam en hopeloos vandaag, vol tranen en verdriet",
+      "spark_response": "Wat verdrietig voor je\n\nIk ken 'liefde' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **verschrikkelijk, hopeloos, vol, tranen** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'tranen' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 15,
+          "intensity": 0.85,
+          "triggered_words": [
+            "verdriet",
+            "eenzaam",
+            "hopeloos",
+            "tranen"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wat verdrietig voor je"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "liefde"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "vandaag"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "verschrikkelijk",
+          "hopeloos",
+          "vol",
+          "tranen"
+        ],
+        "word_count": 16,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 973
+      }
+    },
+    {
+      "id": "conv-9d59d143",
+      "timestamp": "2026-05-31T09:16:55.817261+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is hopeloosheid, ik voel me zo verschrikkelijk eenzaam en down vol verdriet",
+      "spark_response": "Wil je erover praten?\n\nIk ken 'hopeloos' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **down** (opgeslagen als kaarten)\n\nWat houdt 'down' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "down",
+            "verdriet",
+            "eenzaam"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wil je erover praten?"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hopeloos"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "verschrikkelijk"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "vol"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "down"
+        ],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 974
+      }
+    },
+    {
+      "id": "conv-8fadd6d5",
+      "timestamp": "2026-05-31T09:17:24.625266+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is hopeloosheid, ik voel me zo verschrikkelijk eenzaam en down vol verdriet",
+      "spark_response": "Wil je erover praten?\n\nIk ken 'hopeloos' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "down",
+            "verdriet",
+            "eenzaam"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wil je erover praten?"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hopeloos"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "verschrikkelijk"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "down"
+          },
+          {
+            "begrip": "vol"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 975
+      }
+    },
+    {
+      "id": "conv-e9922c26",
+      "timestamp": "2026-05-31T09:17:52.721458+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is hopeloosheid, ik voel me zo verschrikkelijk eenzaam en down vol verdriet",
+      "spark_response": "Dat spijt me om te horen 💙\n\nIk ken 'hopeloos' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "down",
+            "verdriet",
+            "eenzaam"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat spijt me om te horen 💙"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hopeloos"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "verschrikkelijk"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "down"
+          },
+          {
+            "begrip": "vol"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 976
+      }
+    },
+    {
+      "id": "conv-4a05a2e9",
+      "timestamp": "2026-05-31T09:19:23.841518+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is hopeloosheid, ik voel me zo verschrikkelijk eenzaam en down vol verdriet",
+      "spark_response": "Wat verdrietig voor je\n\nIk ken 'hopeloos' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "down",
+            "verdriet",
+            "eenzaam"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wat verdrietig voor je"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hopeloos"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "verschrikkelijk"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "down"
+          },
+          {
+            "begrip": "vol"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 977
+      }
+    },
+    {
+      "id": "conv-5768e37c",
+      "timestamp": "2026-05-31T09:20:01.724832+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is hopeloosheid, ik voel me zo verschrikkelijk eenzaam en down vol verdriet",
+      "spark_response": "Even rust nemen mag. Dat moet moeilijk zijn\n\nIk ken 'hopeloos' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 13,
+          "intensity": 0.79,
+          "triggered_words": [
+            "down",
+            "verdriet",
+            "eenzaam"
+          ],
+          "source": "static",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Dat moet moeilijk zijn"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hopeloos"
+          },
+          {
+            "begrip": "Voel"
+          },
+          {
+            "begrip": "verschrikkelijk"
+          },
+          {
+            "begrip": "eenzaamheid"
+          },
+          {
+            "begrip": "down"
+          },
+          {
+            "begrip": "vol"
+          },
+          {
+            "begrip": "verdrietig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 978
+      }
+    },
+    {
+      "id": "conv-80f6623d",
+      "timestamp": "2026-05-31T09:20:32.938965+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe laat is het",
+      "spark_response": "Het is **11:20** (zondag 31 mei 2026) — tijdzone Europe/Amsterdam.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "laat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "time_now",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "time_now"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 979
+      }
+    },
+    {
+      "id": "conv-4c6555f4",
+      "timestamp": "2026-05-31T09:20:33.001892+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hallo",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 980
+      }
+    },
+    {
+      "id": "conv-0e20e2e6",
+      "timestamp": "2026-05-31T09:20:34.727665+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is liefde, verdomme dit klote leven is zo woest en haat ik echt",
+      "spark_response": "Respect begint bij ruimte laten. Ik begrijp dat je boos bent\n\nIk ken 'liefde' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **haat** (opgeslagen als kaarten)\n\nWat betekent 'haat' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "boos",
+          "score": 16,
+          "intensity": 0.88,
+          "triggered_words": [
+            "verdomme",
+            "klote",
+            "woest",
+            "haat"
+          ],
+          "source": "static",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "liefde"
+          },
+          {
+            "begrip": "verdomme"
+          },
+          {
+            "begrip": "klote"
+          },
+          {
+            "begrip": "Leven"
+          },
+          {
+            "begrip": "woest"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "haat"
+        ],
+        "word_count": 14,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 981
+      }
+    },
+    {
+      "id": "conv-1f1cba6f",
+      "timestamp": "2026-05-31T09:20:37.296101+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is moed, ik twijfel kwijt en stress en eng en vrees",
+      "spark_response": "Wat invloed heeft, moet zichtbaar zijn. Wil je erover praten?\n\nIk ken 'moed' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **eng, vrees** (opgeslagen als kaarten)\n\nWat houdt 'vrees' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bang",
+          "score": 15,
+          "intensity": 0.85,
+          "triggered_words": [
+            "vrees",
+            "twijfel",
+            "kwijt",
+            "stress",
+            "eng"
+          ],
+          "source": "static",
+          "emoji": "😰",
+          "color": "purple",
+          "empathic_response": "Wil je erover praten?"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "moed"
+          },
+          {
+            "begrip": "Twijfel"
+          },
+          {
+            "begrip": "kwijt"
+          },
+          {
+            "begrip": "Stress"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "eng",
+          "vrees"
+        ],
+        "word_count": 12,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 982
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 965,
-    "last_updated": "2026-05-30T08:44:29.687353+00:00"
+    "total_conversations": 982,
+    "last_updated": "2026-05-31T09:20:37.296101+00:00"
   }
 }

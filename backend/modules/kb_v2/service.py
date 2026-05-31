@@ -146,6 +146,70 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
     }
 
 
+def list_priority_missing_laag1(limit: int = 50) -> Dict:
+    """
+    v6_kbv2_priority_001 — Top N kaarten zonder laag1, gesorteerd op belangrijkheid.
+
+    Score-formule (hoger = belangrijker om eerst in te vullen):
+      + 3 punten per bestaand verband (kaart wordt al ergens aan gerefereerd)
+      + 1 punt per tag (hoe rijker getagd, hoe meer Spark er al van weet)
+      + 5 punten als topic gevuld is (Spark heeft 5W-vragen er over gehad)
+      + 2 punten als ws5 gedeeltelijk gevuld is
+
+    Geeft top-N kaarten terug met `score` + `reasons[]` voor transparantie.
+    """
+    data = load_json(_inbox_path(), default={"kaarten": []})
+    kaarten = data.get("kaarten", [])
+    # Filter: alleen zonder laag1
+    no_laag1 = [k for k in kaarten if not (k.get("lagen") or {}).get("laag1", "").strip()]
+
+    scored = []
+    for k in no_laag1:
+        score = 0
+        reasons = []
+        verbanden = k.get("verbanden") or []
+        if verbanden:
+            n = len(verbanden)
+            score += n * 3
+            reasons.append(f"{n} verbanden (×3)")
+        tags = k.get("tags") or []
+        # Tags kunnen ook 1 string-met-comma's zijn (legacy)
+        if isinstance(tags, list):
+            n_tags = sum(len(str(t).split(",")) for t in tags) if tags and isinstance(tags[0], str) and "," in str(tags[0]) else len(tags)
+        else:
+            n_tags = 0
+        if n_tags:
+            score += n_tags
+            reasons.append(f"{n_tags} tags (×1)")
+        topic = (k.get("topic") or "").strip()
+        if topic:
+            score += 5
+            reasons.append("topic gevuld (+5)")
+        ws5 = k.get("ws5") or {}
+        if isinstance(ws5, dict) and any(v for v in ws5.values() if v):
+            score += 2
+            reasons.append("ws5 gedeeltelijk (+2)")
+        scored.append({
+            "id": k.get("id"),
+            "begrip": k.get("begrip"),
+            "lade": k.get("lade"),
+            "_inbox_reason": k.get("_inbox_reason"),
+            "tags_count": n_tags,
+            "verbanden_count": len(verbanden),
+            "has_topic": bool(topic),
+            "has_ws5_partial": isinstance(ws5, dict) and any(v for v in ws5.values() if v),
+            "score": score,
+            "reasons": reasons,
+        })
+
+    scored.sort(key=lambda x: x["score"], reverse=True)
+    return {
+        "total_missing_laag1": len(no_laag1),
+        "limit": limit,
+        "kaarten": scored[:limit],
+    }
+
+
 def _count_reasons(cards: List[Dict]) -> Dict[str, int]:
     out: Dict[str, int] = {}
     for c in cards:

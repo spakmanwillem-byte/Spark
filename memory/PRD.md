@@ -1,7 +1,46 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 2)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 3)
+
+### 🧠 v6_warmth_layer_001 — Norm/waarden van shadow → LIVE in spraak
+
+**Achtergrond**: Emotie-pipeline draaide tot nu toe SHADOW-only (sessie 11). De pipeline detecteerde correct "deze user voelt twijfel → kernwaarde Emoties → behavior vertragen-ondersteunen" maar Spark's response gebruikte die info NIET. A/B diff bewees dat: 60% match-ratio met vaak knowledge-route i.p.v. emotie-route bij negatieve input.
+
+**Nieuwe warmth-laag** (`modules/emotion_pipeline/warmth.py`):
+- **Trigger**: pipeline detecteert behavior in `(begrenzen-structureren, vertragen-ondersteunen, kalmeren-opties)` + weging in `(sterk, escalerend)` + route in info-routes.
+- **Effect**: prefix response.message met korte erkenningszin uit kernwaarde laag1 of fallback behavior-template ("Snap dat het zwaar voelt.", "Even rust nemen mag.", "We doen het stap voor stap.").
+- **Veilig**: skip routes die eigen toon hebben (greeting/goodbye/agenda/identity/help/time/capability/wedervraag). Max 1 warmth-prefix per response. Niet vervangen — Spark geeft nog steeds de kennis.
+- **Centraal**: hook zit in `_save_log` (regel 1448) zodat ALLE early-returns gedekt zijn. Fallback van `trigger_type` naar `response.type` voor flow-end save.
+
+**Emotion triggers uitgebreid**:
+- `emotion_triggers.json` van ~12 woorden per emotie → 24-41 woorden.
+- Spreektaal toegevoegd: "verdomme/klote/woest/kut" (boos), "eenzaam/hopeloos/tranen/verdriet" (bedroefd), "twijfel/onzeker/stress/kwijt" (bang), "super/top/yes/geweldig" (blij).
+- Multi-word phrases verwijderd ("weet niet", "snap niet") want `word_freq.get()` matcht alleen losse tokens — single-word triggers met hogere puntenwaarde werken WEL.
+
+**E2E geverifieerd via curl**:
+- Boos+knowledge: `warmth_applied=True`, prefix "Respect begint bij ruimte laten." (kernwaarde Respect)
+- Bang+knowledge: prefix "Wat invloed heeft, moet zichtbaar zijn." (Transparantie)
+- Bedroefd+knowledge: prefix "Even rust nemen mag." (Emoties → fallback want exacte kernwaarde-naam mismatch)
+- Neutraal/greeting: `warmth_applied=None` (correct skip)
+
+### ⭐ v6_kbv2_priority_001 — Top 50 prio voor lege laag1
+
+**Doel**: 2112 inbox-kaarten zonder laag1 is te veel om te scrollen. Geef Willem gericht de TOP belangrijkste eerst.
+
+**Score-formule** (in `service.list_priority_missing_laag1`):
+- +3 per bestaand verband (kaart wordt al gerefereerd)
+- +1 per tag (rijker getagd = relevanter)
+- +5 als topic gevuld (5W-vragen al gesteld door Spark)
+- +2 als ws5 gedeeltelijk gevuld
+
+**Endpoint**: `GET /api/kb/v2/priority/missing-laag1?limit=50`.
+
+**UI** (`KennisbankV2Page.js`): nieuwe paarse "⭐ Top 50 prio (laag1)" knop naast bestaande reden-filters. Card-tile toont `prio N` badge (paars) + scoring breakdown in tooltip. Auto-reset bij tab-wissel.
+
+**Live resultaat**: 2112 missing → top 5 begint met "besproken" (score 5), "Wat is gisteren in de community besproken?" (score 3), gevolgd door "preventie/user-verrijkt/mode/voertuig/politiek/plezier/mengen/architectuur" (alle score 1).
+
+
 
 ### 🌑🌑🌑 v6_shadow_cascade_002 — 3-laags piramide + bodemdetectie LIVE
 

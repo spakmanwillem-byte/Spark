@@ -40,6 +40,9 @@ export function KennisbankV2Page({ onNavigate }) {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [reasonFilter, setReasonFilter] = useState('');
+  // v6_kbv2_priority_001 — Top 50 prio modus
+  const [priorityMode, setPriorityMode] = useState(false);
+  const [priorityMeta, setPriorityMeta] = useState(null);
   const [page, setPage] = useState(0);
   const [selectedCard, setSelectedCard] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -75,7 +78,10 @@ export function KennisbankV2Page({ onNavigate }) {
       const qs = new URLSearchParams({ limit: String(PAGE), offset: String(page * PAGE) });
       if (search) qs.append('search', search);
       let url;
-      if (activeTab === 'inbox') {
+      if (activeTab === 'inbox' && priorityMode) {
+        // v6_kbv2_priority_001 — Top 50 belangrijkste kaarten zonder laag1
+        url = `${API}/api/kb/v2/priority/missing-laag1?limit=50`;
+      } else if (activeTab === 'inbox') {
         if (reasonFilter) qs.append('reason', reasonFilter);
         url = `${API}/api/kb/v2/inbox?${qs}`;
       } else {
@@ -83,19 +89,25 @@ export function KennisbankV2Page({ onNavigate }) {
       }
       const r = await fetch(url).then(x => x.json());
       setItems(r.kaarten || []);
-      setTotal(r.total || 0);
-      if (activeTab === 'inbox') setReasons(r.redenen || {});
+      if (priorityMode) {
+        setTotal(r.total_missing_laag1 || 0);
+        setPriorityMeta({ total: r.total_missing_laag1, shown: r.kaarten?.length || 0 });
+      } else {
+        setTotal(r.total || 0);
+        setPriorityMeta(null);
+      }
+      if (activeTab === 'inbox' && !priorityMode) setReasons(r.redenen || {});
     } catch {
       setItems([]); setTotal(0);
     }
     setLoading(false);
-  }, [activeTab, page, search, reasonFilter]);
+  }, [activeTab, page, search, reasonFilter, priorityMode]);
 
   useEffect(() => { loadStats(); }, [loadStats]);
   useEffect(() => { loadItems(); }, [loadItems]);
 
   // Reset page on tab change
-  useEffect(() => { setPage(0); setReasonFilter(''); }, [activeTab]);
+  useEffect(() => { setPage(0); setReasonFilter(''); setPriorityMode(false); }, [activeTab]);
 
   const openCard = (card) => {
     setSelectedCard(card);
@@ -439,21 +451,30 @@ export function KennisbankV2Page({ onNavigate }) {
               className="w-full pl-8 pr-3 py-1.5 bg-slate-900/60 border border-slate-700 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-amber-500/50" />
           </div>
           {activeTab === 'inbox' && (
-            <div className="flex items-center gap-1">
-              <button data-testid="kbv2-reason-all" onClick={() => { setReasonFilter(''); setPage(0); }}
+            <div className="flex items-center gap-1 flex-wrap">
+              <button data-testid="kbv2-reason-all" onClick={() => { setReasonFilter(''); setPriorityMode(false); setPage(0); }}
                 className={`px-2 py-1 rounded text-[10px] font-medium border ${
-                  reasonFilter === '' ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'border-slate-700 text-slate-400'
+                  reasonFilter === '' && !priorityMode ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'border-slate-700 text-slate-400'
                 }`}>alle</button>
               {Object.entries(REASON_LABEL).map(([k, v]) => (
                 <button key={k} data-testid={`kbv2-reason-${k}`}
-                  onClick={() => { setReasonFilter(k); setPage(0); }}
+                  onClick={() => { setReasonFilter(k); setPriorityMode(false); setPage(0); }}
                   className={`px-2 py-1 rounded text-[10px] font-medium border ${
-                    reasonFilter === k ? 'border-current' : 'border-slate-700 text-slate-400'
+                    reasonFilter === k && !priorityMode ? 'border-current' : 'border-slate-700 text-slate-400'
                   }`}
-                  style={reasonFilter === k ? { color: v.color, borderColor: v.color, backgroundColor: v.color + '15' } : {}}>
+                  style={reasonFilter === k && !priorityMode ? { color: v.color, borderColor: v.color, backgroundColor: v.color + '15' } : {}}>
                   {v.label} {reasons[k] ? `(${reasons[k]})` : ''}
                 </button>
               ))}
+              <button
+                data-testid="kbv2-priority-laag1"
+                onClick={() => { setPriorityMode(!priorityMode); setReasonFilter(''); setPage(0); }}
+                title="Top 50 kaarten zonder laag1, gesorteerd op belangrijkheid (verbanden + tags + topic)"
+                className={`px-2 py-1 rounded text-[10px] font-medium border ml-1 ${
+                  priorityMode ? 'bg-purple-500/20 border-purple-500/40 text-purple-300' : 'border-purple-700/40 text-purple-400 hover:bg-purple-500/10'
+                }`}>
+                ⭐ Top 50 prio (laag1)
+              </button>
             </div>
           )}
         </div>
@@ -591,6 +612,8 @@ function CardListItem({ card, active, onClick, showReason }) {
   const reason = card._inbox_reason;
   const r = reason ? REASON_LABEL[reason] : null;
   const hasL1 = !!(card.lagen?.laag1 || '').trim();
+  // v6_kbv2_priority_001 — score & reasons komen alleen mee in priority-modus
+  const hasScore = typeof card.score === 'number';
   return (
     <button data-testid={`kbv2-card-${card.id}`}
       onClick={onClick}
@@ -599,15 +622,20 @@ function CardListItem({ card, active, onClick, showReason }) {
       }`}>
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm text-slate-200 font-medium truncate">{card.begrip || '(leeg)'}</p>
-        {showReason && r && (
+        {hasScore ? (
+          <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300" title={card.reasons?.join(' · ')}>
+            prio {card.score}
+          </span>
+        ) : (showReason && r && (
           <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded"
             style={{ backgroundColor: r.color + '20', color: r.color }}>{r.label}</span>
-        )}
+        ))}
       </div>
       <div className="flex items-center gap-2 mt-0.5 text-[10px] text-slate-500">
         {hasL1 ? <span className="text-emerald-400">✓ laag1</span> : <span className="text-red-400">✗ laag1</span>}
-        {card.tags?.length > 0 && <span>{card.tags.slice(0, 3).join(', ')}</span>}
+        {card.tags?.length > 0 && <span>{Array.isArray(card.tags) ? card.tags.slice(0, 3).join(', ') : ''}</span>}
         {card.footnote?.vertrouwen != null && <span>· {Math.round(card.footnote.vertrouwen * 100)}%</span>}
+        {hasScore && card.has_topic && <span className="text-purple-400">· topic ✓</span>}
       </div>
     </button>
   );

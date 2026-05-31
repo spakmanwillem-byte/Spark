@@ -68,6 +68,20 @@ async def get_inbox(limit: int = Query(50, ge=1, le=500),
     return {"success": True, **service.list_inbox(limit=limit, offset=offset, reason=reason, search=search)}
 
 
+@router.get("/priority/missing-laag1")
+async def get_priority_missing_laag1(limit: int = Query(50, ge=1, le=200)):
+    """
+    v6_kbv2_priority_001 — Top N inbox-kaarten zonder laag1, gesorteerd op
+    'belangrijkheid' = aantal verbanden + tag-richness + topic-aanwezigheid.
+
+    Doel: De Willem ziet welke kaarten het meeste effect hebben als hij ze invult,
+    i.p.v. door 2112 inbox-kaarten te scrollen.
+
+    Returnt: {cards: [{id, begrip, lade, score, reasons[], tags_count, verbanden_count, has_topic}]}
+    """
+    return {"success": True, **service.list_priority_missing_laag1(limit=limit)}
+
+
 @router.get("/find")
 async def find_begrip(begrip: str = Query(..., min_length=1)):
     r = service.find_by_begrip(begrip)

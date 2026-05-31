@@ -2,7 +2,51 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
-## 🌑 v6_shadow_cascade_002 — 3-laags Shadow Cascade + Bodemdetectie (2026-05-31, sessie 17)
+## 🧭 P1 — Noob-UX Audit & Anonymous Frustration Tracker (post-deploy backlog)
+
+**Achtergrond**: non-admin users (noobs) zijn de spiegel waarin UX-frictie zichtbaar wordt. Ervaren admin merkt geen drempels meer, noob wel. We willen leren ZONDER chat-content te lezen (privacy strikt).
+
+**Te bouwen** — alle features tellen patroon, niet inhoud:
+
+### 1. UX Audit Endpoint `GET /api/admin/ux-audit/{user_id}`
+Admin-only. Returnt per user (zonder ooit chat-text te tonen):
+- **capability_misses**: aantal chat-berichten waar capability_matcher confidence < 0.3 was (= "ik snap niet wat user wil")
+- **help_invocations**: aantal keer "help" / "hoe werkt" getypt
+- **same_question_repeats**: zelfde tag-vector binnen 5 min meer dan 2× → user blijft hangen
+- **tab_dwell_time** (uit `@traced` logs): welke tabs blijft user lang in zonder actie?
+- **achievement_progress**: welke milestones zijn behaald vs beschikbaar, met geblokkeerde uitleg
+- **vocab_unknown_terms**: top-10 woorden die user typte die NIET in `spark_vocab.json::active` voorkomen (kandidaten voor uitbreiding)
+
+### 2. Achievement-systeem audit
+Probleem: huidige achievements kunnen "lege beloften" zijn (zichtbaar zonder dat user weet hoe te halen).
+- Per achievement: `required_action` veld dat in UI gerenderd wordt
+- "Hoe haal ik dit?" tooltip op elke nog-niet-behaalde achievement
+- Endpoint `GET /api/achievements/checklist/{user_id}` returnt {behaald, in_progress, kandidaat_voor_help}
+
+### 3. Help-commando uitbreiding
+Triggers die NU niet matchen maar voor noobs voor de hand liggen:
+- "wat moet ik doen" / "ik snap niet" / "waar begin ik" / "is dit goed zo"
+- → Adaptive help: lees user's gradatie + behaalde achievements → toon volgende logische stap
+- Niet hardcoded help, maar **contextuele next-step suggestie**
+
+### 4. Vocab-uitbreiding via Inbox
+- Top-10 unknown_terms uit ux-audit → admin krijgt PM: "20 users vroegen naar [X], niet in vocab. Toevoegen?"
+- 1-klik "Voeg toe aan KB v2 Inbox" zodat De Willem ze later kan classificeren
+
+### 5. "First-Run" intelligente fix-loops
+- Detecteer: user heeft 0 trades na 24h met active bot → DM van Boekhouder met uitleg "Wacht op signaal X, kan tot N uur duren, dit is normaal"
+- Detecteer: user opent Trader-tab 5× maar klikt nooit op Start → bark "Wil je hulp om je bot te starten?"
+
+### 6. Privacy-by-design regels (HARD constraints):
+- ❌ **Nooit** chat-tekst inhoud loggen in audit-bestand
+- ❌ **Nooit** user-namen in `/app/memory/*.md` voor non-Willem accounts
+- ✅ Alleen tag-vectors, capability-confidence-scores, tab-dwell-counts, timestamps
+- ✅ Per-user `consent_to_ux_audit` flag — opt-out beschikbaar
+- ✅ Audit-rapporten alleen voor user-001 (admin) zichtbaar, niemand anders
+
+**Prioriteit**: pak op zodra Trader 7 dagen stabiel draait en eerste shadow-events zijn geobserveerd. Niet eerder — eerst Trader bewijzen, dan UX verfijnen op echte data.
+
+
 
 **Status**: ✅ LIVE. 90 idle shadows (3 slots × 30 trade-potjes) over 6 trade-actieve users. Test-suite 12/12 pass. Bot draait live, wacht op eerste echte markt-drop voor live observatie.
 

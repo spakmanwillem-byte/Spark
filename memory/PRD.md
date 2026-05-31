@@ -31,7 +31,7 @@
 
 **Live data na re-ensure**:
 - **90 idle shadows** = 3 slots × 30 trade-potjes verdeeld over 6 users.
-- Spark 12 · Willem 63 · Geiser 3 · Roadkill 3 · Lotus 6 · Gerben 3.
+- Spark 12 · de Willem 63 · andere token-houders 3-6 elk (anon naar memory toe).
 
 **Test-suite** `/app/backend/tests/test_shadow_trigger.py` — **12/12 pass**:
 - 3-slot create + 4e geweigerd
@@ -83,10 +83,10 @@ Stop-loss @ -2% **realiseert het verlies** door SELL. Vrijgekomen potje kan re-e
 
 - **v6_go_live_001** — Alle 5 token-users bots zijn LIVE per 1 juni:
   - **Bug A (mock-safety)** gefixt: nieuwe `_enforce_mock_safety()` helper in `routes.py` blokkeert handmatige `execute_real_trade` als bot-config `use_mock=True` staat. Toegepast in `/trade/execute/{user_id}` en `/trade/quick-buy-potje/{user_id}`. Hoofd-issue eerder: handmatige Quick-Buy met `use_mock=False` overruleerde de bot-mock-flag en deed echte trades (zoals Lotus/Roadkill op 29 mei 19:09 — dit verklaart "trail-verkoop werkt, koop niet"). Nu hard-block met duidelijke error.
-  - **Bug B (auto_trade=False overal)** gefixt: registry `bots_registry_state.json` gepatcht — alle 5 bots (Spark/de Geiser/Gerben/Lotus/Roadkill) op `auto_trade=true` + `use_mock=false`. Backend gerestart, monitor herlaadt uit registry.
+  - **Bug B (auto_trade=False overal)** gefixt: registry `bots_registry_state.json` gepatcht — alle 5 bots (Spark + 4 token-houders) op `auto_trade=true` + `use_mock=false`. Backend gerestart, monitor herlaadt uit registry.
   - **Live status (geverifieerd)**: alle 5 bots draaien, cycles tellen op (~1 cycle/20s), 6 markten gemonitord per bot, klaar voor autonome BUY-signals uit hun strategie.
   - Backup van vorige registry-state in `/tmp/bots_registry_pre_live.json`.
-  - Token-users met bot-config: Spark (10 tokens), de Geiser (2), Roadkill (1), Lotus (1), Gerben (1). De Willem (jij, 21 tokens) draait nog handmatig zonder bot.
+  - Token-users met bot-config: Spark (10 tokens) + 4 anonieme token-houders (totaal 5 tokens). De Willem (jij, 21 tokens) draait nog handmatig zonder bot.
 
 
 

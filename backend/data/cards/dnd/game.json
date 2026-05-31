@@ -1,13 +1,139 @@
 {
   "cards": [
     {
+      "id": "game-bd0a89d7",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "basis stad",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "basis stad",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "basis",
+        "stad",
+        "avatar"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/67cfb1c42e50"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0.0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "klasse": "",
+          "beroep": "",
+          "fractie": "",
+          "locatie": ""
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": ""
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.45,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-31T23:37:13.974751+00:00",
+        "laatst_bewerkt_op": "2026-05-31T23:37:41.769606+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "game-7d54a005",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Basis Dorp",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Basis dorp ",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "dorp",
+        "basis",
+        "avatar"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/b70664a716bf"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0.0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "klasse": "",
+          "beroep": "",
+          "fractie": "",
+          "locatie": ""
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": ""
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.45,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-05-31T23:36:18.898527+00:00",
+        "laatst_bewerkt_op": "2026-05-31T23:37:04.404539+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
       "id": "game-8b48bffd",
       "class": "game",
       "type": "dnd_game_card",
       "begrip": "Super dobbelsteen avatar",
       "sense": "zie",
       "lagen": {
-        "laag1": "",
+        "laag1": "Super dobbelsteen",
         "laag2": "",
         "laag3": "",
         "laag4": ""
@@ -52,14 +178,13 @@
       "status": "draft",
       "footnote": {
         "bron": "manual",
-        "vertrouwen": 0.3,
+        "vertrouwen": 0.45,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-05-31T23:29:34.647840+00:00",
-        "laatst_bewerkt_op": "2026-05-31T23:29:58.463504+00:00",
+        "laatst_bewerkt_op": "2026-05-31T23:37:55.537910+00:00",
         "laatst_bewerkt_door": "user-001"
       },
       "needs": [
-        "laag1",
         "ws5",
         "voice"
       ]
@@ -3086,5 +3211,5 @@
       ]
     }
   ],
-  "updated_at": "2026-05-31T23:29:58.463532+00:00"
+  "updated_at": "2026-05-31T23:37:55.537939+00:00"
 }

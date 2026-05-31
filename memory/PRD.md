@@ -1,5 +1,35 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18I, fork — Map fix: dorp/stad avatars per provincie, groei-logica)
+
+### 🗺️ Wereld-map gebruikt nu dorp/stad-avatars (niet bewoner-avatars)
+- Bewoner-avatars zijn **verwijderd** van de wereldkaart (waren alleen voor 1 stad bedoeld, niet voor de wereld)
+- Bewoner-avatars verschijnen alléén in:
+  - De `BewonersStripPanel` (rechter MID-kolom)
+  - Het Handel-paneel
+  - Later: in dorp-popup per gebouw
+
+### 🌱 Groei-logica geïmplementeerd
+- `spark` fractie hoofdstad (Stormhaven, Groningen) → **"basis stad"** D&D-kaart-avatar (groot)
+- Alle andere 11 provincies → **"Basis Dorp"** D&D-kaart-avatar (kleiner)
+- Logica is per `p.fractie_id === 'spark'` check — later uit te breiden met `dorp_level` veld (level 1-5: dorp, level 6+ stad)
+
+### Frontend update in `MiniMapPanel`
+- Nieuwe state: `dorpAvatarUrl` + `stadAvatarUrl` (apart geladen via begrip-lookup)
+- Verwijderd: `bewonersByStad` map en bijbehorende fetch
+- Render: `const avatarUrl = isStad ? (stadAvatarUrl || dorpAvatarUrl) : dorpAvatarUrl;`
+
+### Test (DOM-inspectie via Playwright)
+- ✅ `prov-groningen` → image `href=67cfb1c42e50` (basis stad)
+- ✅ Alle 11 andere provincies → image `href=b70664a716bf` (Basis Dorp)
+- ✅ Geen bewoner-images meer op wereldkaart
+
+### Bestanden gewijzigd in sessie 18I
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — `MiniMapPanel` state + render-logica gewijzigd
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18H, fork — Dobbelsteen-events met JOUW 2 D&D avatars)
 
 ### 🎲 Dobbelsteen-event systeem (NIEUW)

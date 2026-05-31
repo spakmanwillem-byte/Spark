@@ -1410,8 +1410,8 @@ function MiniMapPanel({ char, userId, isAdmin }) {
   const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
   const [provincies, setProvincies] = useState([]);
   const [fracties, setFracties] = useState([]);
-  const [bewonersByStad, setBewonersByStad] = useState({}); // hoofdstad → first bewoner avatar
-  const [dorpAvatarUrl, setDorpAvatarUrl] = useState(null); // generieke "Basis dorp" fallback
+  const [dorpAvatarUrl, setDorpAvatarUrl] = useState(null);
+  const [stadAvatarUrl, setStadAvatarUrl] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [dragging, setDragging] = useState(null);
   const [selectedProv, setSelectedProv] = useState(null);
@@ -1422,27 +1422,25 @@ function MiniMapPanel({ char, userId, isAdmin }) {
       .then(r => r.json())
       .then(d => { setProvincies(d.provincies || []); setFracties(d.fracties || []); })
       .catch(() => {});
-    // Avatar per stad uit bewoner-lijst
-    fetch(`${API}/api/dnd/bewoners/`)
-      .then(r => r.json())
-      .then(d => {
-        const map = {};
-        (d.bewoners || []).forEach(b => {
-          const stad = (b.hoofdstad || '').toLowerCase();
-          if (stad && !map[stad]) map[stad] = b.avatar_url;
-        });
-        setBewonersByStad(map);
-      })
-      .catch(() => {});
-    // Generieke "Basis dorp" kaart als fallback voor alle 12 provincies
+    // Basis dorp + Basis stad als avatars per provincie (groei-logica: spark hoofdstad = stad, rest = dorp)
     fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`)
       .then(r => r.json())
       .then(d => {
         const cards = d.cards || [];
-        const dorpCard = cards.find(c => (c.begrip || '').toLowerCase() === 'basis dorp')
-          || cards.find(c => (c.tags || []).some(t => String(t).toLowerCase() === 'dorp'));
-        const img = dorpCard?.media?.image_urls?.[0];
-        if (img) setDorpAvatarUrl(img);
+        const findFirst = (...begrippen) => {
+          for (const b of begrippen) {
+            const lb = b.toLowerCase().trim();
+            const c = cards.find(x => (x.begrip || '').toLowerCase().trim() === lb);
+            if (c) return c;
+          }
+          return null;
+        };
+        const dorp = findFirst('basis dorp', 'Basis dorp');
+        const stad = findFirst('basis stad', 'Basis Stad');
+        const dorpImg = dorp?.media?.image_urls?.[0];
+        const stadImg = stad?.media?.image_urls?.[0];
+        if (dorpImg) setDorpAvatarUrl(dorpImg);
+        if (stadImg) setStadAvatarUrl(stadImg);
       })
       .catch(() => {});
   }, []);
@@ -1531,7 +1529,12 @@ function MiniMapPanel({ char, userId, isAdmin }) {
             const isSelected = selectedProv === p.id;
             const baseR = isMain ? 5.5 : 4.2;
             const glowColor = f.kleur || '#94a3b8';
-            const avatarUrl = bewonersByStad[(p.hoofdstad || '').toLowerCase()] || dorpAvatarUrl;
+            // v6_map_avatars_002 — Dorp/Stad avatar per provincie. Groei-logica:
+            //   spark hoofdstad → 'basis stad' avatar (groot/hoofdstad)
+            //   alle andere     → 'Basis dorp' avatar (kleiner dorp)
+            // Bewoner-avatars zijn NIET op de wereldkaart (alleen in dorp-popup zichtbaar)
+            const isStad = p.fractie_id === 'spark';
+            const avatarUrl = isStad ? (stadAvatarUrl || dorpAvatarUrl) : dorpAvatarUrl;
             const isPlayerHere = (char?.dorp || '').toLowerCase() === (p.hoofdstad || '').toLowerCase();
             return (
               <g key={p.id} data-testid={`prov-${p.id}`}

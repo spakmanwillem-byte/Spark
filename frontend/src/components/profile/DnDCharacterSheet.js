@@ -1091,31 +1091,40 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
             preserveAspectRatio="xMidYMid slice" />
 
-          {/* Provincie shields */}
+          {/* Provincie shields — v6_dnd_map_glow_001 met fractie-kleur glow + groter */}
           {provincies.map(p => {
             const f = fractieOf(p.fractie_id);
             const isMain = p.fractie_id === 'spark';
             const isSelected = selectedProv === p.id;
+            const baseR = isMain ? 5.5 : 4.2;
+            const glowColor = f.kleur || '#94a3b8';
             return (
               <g key={p.id} data-testid={`prov-${p.id}`}
                 onPointerDown={(e) => onPointerDown(e, p.id)}
                 style={{ cursor: editMode ? 'grab' : 'pointer' }}>
-                {/* Shield-vorm */}
-                <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 4 : 2.6}
-                  fill={f.kleur || '#94a3b8'}
+                {/* Buitenring (gloeie kring) */}
+                <circle cx={p.x_pct} cy={p.y_pct} r={baseR + 1.8}
+                  fill="none"
+                  stroke={glowColor}
+                  strokeWidth="0.6"
+                  opacity="0.4"
+                  style={{ filter: `drop-shadow(0 0 ${isMain ? 5 : 3}px ${glowColor})` }} />
+                {/* Dorp-shield */}
+                <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
+                  fill={glowColor}
                   stroke={isSelected ? '#fde68a' : '#000'}
-                  strokeWidth={isSelected ? 0.8 : 0.4}
-                  opacity={p.fractie_id === 'neutraal' ? 0.55 : 0.9}
+                  strokeWidth={isSelected ? 0.9 : 0.5}
+                  opacity={p.fractie_id === 'neutraal' ? 0.6 : 0.95}
                   style={{
-                    filter: isMain ? 'drop-shadow(0 0 4px rgba(245,158,11,0.6))' : 'none',
+                    filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})`,
                   }} />
-                {/* Kern */}
-                {isMain && (
-                  <circle cx={p.x_pct} cy={p.y_pct} r="1.2" fill="#fde68a" />
-                )}
+                {/* Kern (witte stip = dorp-hart) */}
+                <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 1.8 : 1.3}
+                  fill={isMain ? '#fde68a' : '#fef3c7'}
+                  opacity="0.9" />
                 {/* Label */}
-                <text x={p.x_pct} y={p.y_pct + (isMain ? 7 : 5)} textAnchor="middle"
-                  fill="#fde68a" fontSize={isMain ? 2.4 : 1.8}
+                <text x={p.x_pct} y={p.y_pct + baseR + 2.4} textAnchor="middle"
+                  fill="#fde68a" fontSize={isMain ? 2.6 : 2.0}
                   fontFamily="serif" fontWeight={isMain ? 'bold' : 'normal'}
                   style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.5, pointerEvents: 'none' }}>
                   {p.hoofdstad}

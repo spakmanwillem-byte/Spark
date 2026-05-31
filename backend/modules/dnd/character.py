@@ -26,7 +26,7 @@ Schema:
       "hoofd": null, "nek": null, "schouders": null, "armen": null,
       "trinket": null, "torso": null, "broek": null, "voeten": null,
       "sjaal": null, "riem": null, "handen": null, "ring_l": null,
-      "ring_r": null, "rugzak": null, "linkerhand": null, "rechterhand": null,
+      "ring_r": null, "linkerhand": null, "rechterhand": null,
       "offhand": null, "pijl_boog": null
   },
   "event_feed": [               # ringbuffer max 50
@@ -53,7 +53,7 @@ EVENT_BUFFER_MAX = 50
 
 SLOT_KEYS = [
     "hoofd", "nek", "schouders", "armen", "trinket", "torso", "broek",
-    "voeten", "sjaal", "riem", "handen", "ring_l", "ring_r", "rugzak",
+    "voeten", "sjaal", "riem", "handen", "ring_l", "ring_r",
     "linkerhand", "rechterhand", "offhand", "pijl_boog",
 ]
 
@@ -71,7 +71,6 @@ SLOT_LABELS = {
     "handen": ("HANDEN", "Handschoenen"),
     "ring_l": ("RING (L)", "Ring"),
     "ring_r": ("RING (R)", "Ring"),
-    "rugzak": ("RUGZAK", "Rugzak"),
     "linkerhand": ("LINKERHAND", "Schild"),
     "rechterhand": ("RECHTERHAND", "Klein Zwaard"),
     "offhand": ("OFFHAND", "Lantaarn"),

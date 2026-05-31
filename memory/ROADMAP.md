@@ -6,13 +6,27 @@
 
 **Quick wins al uitgerold** (sessie 17): huis/opslag slots groter (aspect-square min-h-56, text-2xl iconen), worldmap onder dorp i.p.v. apart (zelfde breedte), worldmap-svg langer (h-56 → h-72), dorp-kader langer (h-40 → h-52), event-feed/charinfo herverdeeld zonder MiniMap-kolom (7+5 i.p.v. 5+4+3).
 
-**Volgende fases** (later uitwerken, niet rushen — Willem citaat: "werken we later verder uit"):
-1. **Pop-up Dorp-info**: klik op dorp-kader → modal met fractie + inwoners + gebouwen + quests (i.p.v. naar volledige map navigeren)
-2. **Pop-up Stad-info op landkaart**: klik op provincie → modal met fractie + inwoners + sterkte
-3. **Centraal handel-kader**: één Trade-hub waar alle handel-acties samenkomen, NPCs/gebouwen routeren naar deze hub i.p.v. ieder z'n eigen pop-up
-4. **Persoonskaart-integratie**: XP/Rang/Slots/Achievements (was sessie 17 uit Avatar-tab gehaald) hoort thuis in Spark World D&D als character-progressie-laag
+**Rugzak compleet weg + map herverdeeld** (sessie 17 vervolg 8):
+- SLOT_KEYS/SLOT_LABELS/_empty_equipment in character.py: rugzak verwijderd
+- body_layout.json slots: rugzak positie weg
+- characters/user-001 equipment: 'rugzak' key gewist (was geequiped item dat 🎒 toonde)
+- inventory.json: 'Basis rugzak' item verwijderd
+- 12 provincies herverdeeld over volle NL-geografie (Stormhaven NO 80,12 / Maastricht ZO 60,88 / Middelburg Z-Z 10,72)
+- Map markers: fractie-kleur glow-ring + drop-shadow + grotere shield (4.2-5.5px ipv 2.6-4px)
 
-**Aanpak**: eerst mockup → test mentaal model met De Willem → daarna implementeren in fases.
+**Volgende fases — creatieve speculatie van Willem 31 mei avond** (later uitwerken):
+1. **Bed = klikbaar → rust event** in event-feed (3 niveaus: snel rusten / kort rusten / char parkeren)
+2. **Tafel = klikbaar → eet event** in event-feed
+3. **Kist/kast als opslag-containers** binnen huis-locatie
+4. **NPCs als kasten**: slager/bakker hebben eigen opslag (handel-mechaniek)
+5. **Dorp-avatar-icons op map** met fractie-kleur glow eromheen (i.p.v. simpele shields)
+6. **Pop-up Dorp-info**: klik op dorp-kader → modal met fractie + inwoners + gebouwen + quests
+7. **Pop-up Stad-info op landkaart**: klik op provincie → modal met fractie + inwoners + sterkte
+8. **Centraal handel-kader**: één Trade-hub waar alle handel-acties samenkomen
+9. **Persoonskaart-integratie**: XP/Rang/Slots/Achievements als character-progressie-laag
+
+**Aanpak**: eerst mockup → test mentaal model met De Willem → daarna implementeren in fases. "Werken we later verder uit" — Willem citaat.
+
 
 ## 🌷 P1 — Spark als Gastheer (Onthaal-laag voor app-onwennige mensen)
 

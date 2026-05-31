@@ -542,13 +542,25 @@ function AvatarTab({ userId, isAdmin }) {
 
   return (
     <div className="space-y-4">
-      {/* v6_dnd_character_sheet_001 — Stormhaven-stijl D&D character sheet voor de Avatar-tab */}
+      {/* v6_dnd_character_sheet_001 — Stormhaven-stijl D&D character sheet (kern van Avatar-tab) */}
       <DnDCharacterSheet userId={userId} isAdmin={isAdmin} />
+      {/*
+        Verwijderd (sessie 17, 31 mei):
+        - PersoonskaartCard: was overbodig naast character sheet, info dupliceert XP/Rang/Slots.
+          Toekomst: integreren in Spark World D&D-laag (ROADMAP P2).
+        - Portret & Galerij beheren collapsible: vervangen door AvatarPickerPanel
+          in Mijn Profiel → Instellingen tab (waar het thuishoort als instelling).
+      */}
+    </div>
+  );
+}
 
-      {/* v6_dnd_persoonskaart_avatar_002 — Aura + Stats + Inventory + Achievements onder character sheet */}
-      <PersoonskaartCard userId={userId} isAdmin={isAdmin} />
-
-      {/* Collapsible: avatar-portret + galerij (compact onder character sheet) */}
+// Legacy AvatarTab vervolg — code voor msg/flash/selectAvatar/uploadPortrait/GalleryTabs
+// blijft staan voor mogelijk hergebruik. Niet aangeroepen vanuit AvatarTab.
+function _LegacyAvatarBlock({ gallery, current, flash, selectAvatar, uploadPortrait,
+  fileRef, uploading, msg, isAdmin, hasUserPortrait }) {
+  return (
+    <div className="space-y-4">
       <details className="bg-slate-900 border border-slate-800 rounded-xl group">
         <summary data-testid="avatar-portret-toggle"
           className="cursor-pointer px-4 py-3 flex items-center justify-between hover:bg-slate-800/40">

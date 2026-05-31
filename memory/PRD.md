@@ -1,7 +1,65 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 5)
+## Completed (recent — 2026-05-31, sessie 17 / fork — vervolg 6, post-deploy reset)
+
+### 🔄 Full Reset voor "echte start" (na productie-deploy, 31 mei avond)
+
+**Trigger**: Willem deployde naar productie (https://roadkillcommunity.nl), zette trader stil, verzamelde data, en uploadde een verse backup-zip (20:29) met bugs + nieuwe users + kaarten. Voorbereiding voor "echte start" — telling tot nu was alles test.
+
+**Uitgevoerd in preview**:
+
+1. **Zip-import** (`spark_backup_full_20260531_202912.zip`):
+   - `system/users.json` (7 users, +1 nieuw user-c609d7d1)
+   - `financial/user_potjes.json` (36 pots, 21:28 snapshot)
+   - `trade/bots_registry_state.json` + `registered_users.json`
+   - `bugs/bugs.json` (50 bugs, 5 echte open)
+   - `knowledge/v2/*.json` (2852 inbox kaarten, 48 nieuwe indelingen sinds vorige sync)
+   - Pre-import backup → `_backups/pre_zip_import_20260531_203845/`
+
+2. **Mock-bug gefixt voor alle users** (`bots_registry_state.json` + per-user `settings.json`):
+   - user-1996fa59: `auto_trade=False → True, use_mock=True → False`
+   - user-5dd295db: idem
+   - 5 andere bots geverifieerd LIVE
+   - **Alle 7 users nu echt traden**
+
+3. **Token-count ↔ potje-count sync** (Willem regel: 1 token = 1 potje):
+   - user-1996fa59: 10 pots → 1 (9 weeskinderen verwijderd)
+   - user-5dd295db: 2 pots → 1 (1 weesje verwijderd)
+   - Spark (user-000): behouden op 10 pots (4 non-anchor + 6 anchor) — speciale system-account
+   - Willem (user-001): 21 tokens = 21 pots ✓
+   - Andere users: match ✓
+
+4. **Capital reset naar €10.00 voor ALLE potjes**:
+   - Anchors óók (Willem's wens: clean slate over alle linie)
+   - ATOM-anchor van €12.67 → €10 gecorrigeerd (Willem had 2 ATOM opgenomen op Bitvavo)
+   - `stats.trades = 0`, `position` cleared (alle 25 ghost-posities administratief gesloten — geen Bitvavo SELL nodig want amount=0)
+   - 0 capital-afwijkingen na reset, 0 open posities, 0 ghost-trades
+
+5. **Shadow pots wipe + regenereren**:
+   - 90 oude shadows → 0 → 90 nieuwe idle (3 slots × 30 non-anchor pots over 6 users)
+   - Verdeling: Spark 12 · Willem 63 · andere 4 users 3-6 elk
+   - Alle in cyclus 1, status=idle
+
+6. **Avatar-bug gefixt** ("weg op 2 plekken"):
+   - `AlgemeenTab` regel 149: gebruikte alleen `d.url`, niet `d.fallback_url` → fallback-vraagteken werkte niet
+   - Hint-tekst "Verander via 'Avatar' tab" → "Verander via 'Instellingen' tab" (Avatar-tab is D&D nu)
+   - **Live-refresh hook**: `UserAvatar` + `AuthContext` luisteren naar `avatar-changed` event → sidebar/header auto-update bij avatar-keuze in Instellingen
+   - Willem's eigen avatar herstelt naar Black Knight (`gallery:cf90e9ea6393`)
+
+7. **Avatar-tab opgeschoond**:
+   - "Portret & Galerij beheren" collapsible verwijderd → vervangen door AvatarPickerPanel in Mijn Profiel → Instellingen (waar het thuishoort)
+   - `PersoonskaartCard` verwijderd uit Avatar-tab → was overbodig naast D&D character sheet; toekomstige integratie in Spark World D&D (ROADMAP P2)
+   - Avatar-tab toont nu uitsluitend de DnDCharacterSheet (kern van Spark World D&D-laag)
+
+### Open bug reports (uit zip, top-5)
+- **#d481414b**: "minder als 20 potjes weg gegeven maar blijf zo veel zien" → mogelijk gefixt door token-count sync hierboven
+- **#3d4a5d69** + **#eb440a60**: KB v2 kaarten verplaatsen tussen lades + delete-knop in KB → P1
+- **#0f26bf42**: "palster" niet correct als kennis kaart geclassificeerd → KB v2 issue
+- **#13b2640e**: "basis potjes van elke token zijn anders geworden" → gefixt door anchor-reset naar €10
+- **#a70b36b5**: Graph rebuild dubbelt frontend telling → P2
+
+
 
 ### 📿 v6_bijbel_aansluiting_001 — Missie · Visie · Doelen verbonden in Spark Bijbel
 

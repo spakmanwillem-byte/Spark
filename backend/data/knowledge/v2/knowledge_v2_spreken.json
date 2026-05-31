@@ -6,8 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 329,
-    "source": "knowledge_base.json (v1) — auto-classified"
+    "card_count": 339,
+    "source": "knowledge_base.json (v1) — auto-classified",
+    "last_updated": "2026-05-31T20:17:59.719188+00:00"
   },
   "kaarten": [
     {
@@ -40963,6 +40964,1648 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-649c119c",
+      "begrip": "besproken",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Besproken betekent dat iets door communicatie, overleg of uitwisseling onder aandacht is gebracht en behandeld.",
+        "laag2": "Besproken geeft aan dat een onderwerp gedeeld, benoemd en behandeld is.",
+        "laag3": "Door iets te bespreken ontstaat uitwisseling, verduidelijking en afstemming.\nHet maakt gedachten, gevoelens of informatie zichtbaar voor begrip en verwerking.",
+        "laag4": "Binnen Spark is besproken een relationele toestand waarin informatie actief is gedeeld en verwerkt binnen interactie.\nBesproken markeert dat betekenis niet meer verborgen of ongekend is, maar onderdeel is geworden van gezamenlijke waarneming, interpretatie en afstemming."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, deelnemers",
+        "wat": "gedeelde behandeling van een onderwerp",
+        "wanneer": "bij overleg, uitleg, uitwisseling",
+        "waar": "in gesprek, communicatie, interactie",
+        "waarom": "voor begrip en afstemming",
+        "hoe": "door benoemen en uitwisselen"
+      },
+      "tags": [
+        "besproken",
+        "gesprek",
+        "communicatie",
+        "uitwisseling",
+        "duidelijkheid",
+        "afstemming",
+        "delen",
+        "begrip",
+        "verbinding",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "uitwisseling",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9fb4bf15",
+          "begrip": "dieper",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3a46ccb8",
+          "begrip": "delen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "neutraal",
+            "uitwisseling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0648b550",
+          "begrip": "ik blijf hoor, je begreep het verkeerd.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "afstemming",
+            "begrip",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T11:52:22.212349+00:00",
+        "vorige_versie_v1": "snap-d96236c7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.320766+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T11:52:21.061278+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T11:52:21.136032+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T11:52:25.665354+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T11:52:25.675020+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T11:52:19.637984+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d6c51a59",
+      "begrip": "verwijzing",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verwijzing is het gericht wijzen naar andere informatie, een bron, plaats of betekenis.",
+        "laag2": "Een verwijzing helpt om aandacht of begrip naar iets anders te leiden.",
+        "laag3": "Verwijzing verbindt informatie met context.\nHet maakt relaties zichtbaar en helpt richting geven aan zoeken, begrijpen en ontdekken.",
+        "laag4": "Binnen Spark is verwijzing een verbindingsmechanisme waarmee informatie gekoppeld wordt aan andere kennis, context of betekenisvelden.\nVerwijzing ondersteunt navigatie, samenhang en verdieping door relaties zichtbaar en toegankelijk te maken."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, bronnen",
+        "wat": "een koppeling naar andere informatie",
+        "wanneer": "bij uitleg, zoeken, verbinden",
+        "waar": "in taal, systemen, kennis, communicatie",
+        "waarom": "voor richting en samenhang",
+        "hoe": "door aanwijzing en koppeling"
+      },
+      "tags": [
+        "verwijzing",
+        "verwijzen",
+        "wachten",
+        "koppeling",
+        "richting",
+        "bron",
+        "verbinding",
+        "informatie",
+        "context",
+        "betekenis",
+        "zoeken",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T11:56:25.415655+00:00",
+        "vorige_versie_v1": "kb-skel-d6c51a59",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.084689+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T11:56:23.067100+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T11:56:23.144232+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T11:56:29.446584+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T11:56:29.544247+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T11:56:21.831672+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-770a03a1",
+      "begrip": "instructie",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een instructie is een gerichte aanwijzing die uitlegt wat gedaan moet worden en hoe dat uitgevoerd kan worden.",
+        "laag2": "Een instructie geeft richting aan handelen.",
+        "laag3": "Instructies ondersteunen duidelijkheid, uitvoering en afstemming.\nZe helpen om kennis om te zetten in doelgericht handelen.",
+        "laag4": "Binnen Spark is instructie een sturend overdrachtsmechanisme waarmee informatie wordt vertaald naar concrete richting en uitvoering.\nInstructie verbindt kennis met actie door helderheid te bieden over volgorde, bedoeling en toepassing."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, begeleiders",
+        "wat": "een gerichte aanwijzing",
+        "wanneer": "bij uitleg of uitvoering",
+        "waar": "in leren, werk, systemen, communicatie",
+        "waarom": "voor duidelijkheid en richting",
+        "hoe": "door uitleg en aanwijzing"
+      },
+      "tags": [
+        "instructie",
+        "uitleg",
+        "informatie",
+        "aanwijzing",
+        "richting",
+        "communicatie",
+        "actie",
+        "uitvoering",
+        "duidelijkheid",
+        "sturing",
+        "kennis",
+        "afstemming",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-84f2ceda",
+          "begrip": "docent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T13:11:51.176188+00:00",
+        "vorige_versie_v1": "kb-skel-770a03a1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.192037+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T13:11:50.062172+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T13:11:50.144892+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T13:11:53.563183+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T13:11:53.641843+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T13:11:48.397825+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7163a446",
+      "begrip": "audio",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Audio is hoorbare informatie in de vorm van geluid, spraak, toon of opname.",
+        "laag2": "Audio maakt overdracht mogelijk via geluid.",
+        "laag3": "Audio ondersteunt communicatie, beleving en informatieoverdracht.\nHet maakt betekenis hoorbaar en draagt ritme, emotie en nuance over.",
+        "laag4": "Binnen Spark is audio een auditief informatiedrager waarmee signalen, communicatie en beleving via geluid worden overgebracht en verwerkt.\nAudio ondersteunt waarneming, interpretatie en interactie door betekenis in hoorbare vorm beschikbaar te maken."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, luisteraars",
+        "wat": "hoorbare informatie",
+        "wanneer": "bij luisteren, spreken of opname",
+        "waar": "in communicatie, media, systemen",
+        "waarom": "voor overdracht en beleving",
+        "hoe": "door geluidsgolven en verwerking"
+      },
+      "tags": [
+        "audio",
+        "geluid",
+        "spraak",
+        "luisteren",
+        "opname",
+        "communicatie",
+        "signaal",
+        "frequentie",
+        "informatie",
+        "beleving",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d0b3fd0f",
+          "begrip": "horen",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "audio",
+            "communicatie",
+            "emotie",
+            "frequentie",
+            "geluid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-370dddfb",
+          "begrip": "Nou, zo als jij dieper zegt klinkt dat wel fijn. Grijns",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "beleving",
+            "communicatie",
+            "emotie",
+            "geluid",
+            "luisteren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-70b6d717",
+          "begrip": "klank",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "beleving",
+            "communicatie",
+            "emotie",
+            "geluid",
+            "luisteren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "geluid",
+            "luisteren",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f10ef3f5",
+          "begrip": "klinkt",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "beleving",
+            "communicatie",
+            "emotie",
+            "geluid",
+            "luisteren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:14:47.004225+00:00",
+        "vorige_versie_v1": "kb-skel-7163a446",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.442035+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:14:45.358937+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:14:45.370633+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:14:49.387249+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:14:49.446542+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:14:43.244698+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b231303c",
+      "begrip": "media",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Media zijn middelen of kanalen waarmee informatie, communicatie en beleving worden overgedragen.",
+        "laag2": "Media brengen informatie van de ene plek of persoon naar de andere.",
+        "laag3": "Media verbinden zender en ontvanger.\nZe maken overdracht, interactie en verspreiding van kennis, beeld, geluid en betekenis mogelijk.",
+        "laag4": "Binnen Spark zijn media de dragers waarmee informatie, signalen en ervaringen worden opgeslagen, verwerkt en overgebracht.\nMedia ondersteunen communicatie en verbinding door betekenis via verschillende vormen toegankelijk en overdraagbaar te maken."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, organisaties",
+        "wat": "middelen voor overdracht",
+        "wanneer": "bij communicatie en informatie-uitwisseling",
+        "waar": "in systemen, netwerken, samenleving",
+        "waarom": "voor verbinding en verspreiding",
+        "hoe": "door opslag en overdracht"
+      },
+      "tags": [
+        "media",
+        "communicatie",
+        "informatie",
+        "kanaal",
+        "overdracht",
+        "verbinding",
+        "verspreiding",
+        "opslag",
+        "audio",
+        "beeld",
+        "interactie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "interactie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "interactie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72778c24",
+          "begrip": "belt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "interactie",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13fe3072",
+          "begrip": "wereldwijd",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "neutraal",
+            "verbinding",
+            "verspreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "interactie",
+            "neutraal",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:17:51.783626+00:00",
+        "vorige_versie_v1": "kb-skel-b231303c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.504468+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:17:50.065628+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:17:50.144846+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:17:53.663239+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:17:53.672152+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:17:48.694256+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-8e190be7",
+      "begrip": "bericht",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bericht is een overgedragen boodschap of informatie bedoeld om iets mee te delen.",
+        "laag2": "Een bericht brengt informatie van een zender naar een ontvanger.",
+        "laag3": "Berichten ondersteunen communicatie, verbinding en overdracht.\nZe maken uitwisseling van informatie, betekenis en reactie mogelijk.",
+        "laag4": "Binnen Spark is een bericht een gerichte informatiedrager waarmee betekenis, signalen of instructies tussen onderdelen worden overgebracht.\nBerichten ondersteunen interactie en afstemming door informatie overdraagbaar en interpreteerbaar te maken binnen het netwerk."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, zenders, ontvangers",
+        "wat": "een overgedragen boodschap",
+        "wanneer": "bij communicatie en informatie-uitwisseling",
+        "waar": "in gesprekken, media, systemen",
+        "waarom": "voor overdracht en afstemming",
+        "hoe": "door verzenden en ontvangen"
+      },
+      "tags": [
+        "bericht",
+        "boodschap",
+        "informatie",
+        "communicatie",
+        "overdracht",
+        "zender",
+        "ontvanger",
+        "signaal",
+        "afstemming",
+        "reactie",
+        "media",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31c6d4d6",
+          "begrip": "schrijf",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72778c24",
+          "begrip": "belt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-770a03a1",
+          "begrip": "instructie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "afstemming",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:25:20.445230+00:00",
+        "vorige_versie_v1": "kb-skel-8e190be7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.483465+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:25:19.353000+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:25:19.367496+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:25:24.047209+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:25:24.056754+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:25:17.601156+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ce1a8553",
+      "begrip": "mening",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een mening is een persoonlijke gedachte, beoordeling of standpunt over iets.",
+        "laag2": "Een mening laat zien hoe iemand ergens over denkt.",
+        "laag3": "Meningen maken perspectief, verschil en uitwisseling zichtbaar.\nZe ontstaan vanuit ervaring, kennis, gevoel en interpretatie.",
+        "laag4": "Binnen Spark is een mening een subjectieve interpretatieve positie waarin informatie wordt beoordeeld vanuit persoonlijke ervaring, overtuiging of perspectief.\nMeningen ondersteunen diversiteit in betekenisvorming en maken vergelijking, reflectie en afstemming mogelijk."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, systemen",
+        "wat": "een persoonlijk standpunt",
+        "wanneer": "bij beoordeling of reactie",
+        "waar": "in communicatie, discussie, reflectie",
+        "waarom": "voor uiting en perspectief",
+        "hoe": "door interpretatie en beoordeling"
+      },
+      "tags": [
+        "mening",
+        "standpunt",
+        "oordeel",
+        "perspectief",
+        "gedachte",
+        "interpretatie",
+        "communicatie",
+        "verschil",
+        "persoonlijk",
+        "reflectie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interpretatie",
+            "mening",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165ff5e9",
+          "begrip": "nuance",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interpretatie",
+            "neutraal",
+            "perspectief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5f97c167",
+          "begrip": "stel",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gedachte",
+            "neutraal",
+            "reflectie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interpretatie",
+            "neutraal",
+            "perspectief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gedachte",
+            "interpretatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:31:37.127603+00:00",
+        "vorige_versie_v1": "kb-skel-ce1a8553",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.490302+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:31:35.980346+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:31:35.989115+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:31:39.947007+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:31:39.956169+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:31:34.597288+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2c3d72bb",
+      "begrip": "Wat is gisteren in de community besproken?",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Besproken betekent dat iets in gesprek, overleg of uitwisseling behandeld en gedeeld is.",
+        "laag2": "Besproken geeft aan dat informatie of een onderwerp al met anderen is behandeld.",
+        "laag3": "Besproken markeert gedeelde verwerking van informatie.\nHet laat zien dat een onderwerp aandacht heeft gekregen en onderdeel is geworden van communicatie en afstemming.",
+        "laag4": "Binnen Spark is besproken een verwerkte communicatiestatus waarin informatie actief is uitgewisseld, behandeld en opgenomen binnen een relationele context.\nHet markeert dat betekenis niet alleen aanwezig is, maar collectief is onderzocht, gedeeld en afgestemd binnen het netwerk."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, community, systemen",
+        "wat": "een behandeld onderwerp",
+        "wanneer": "na overleg of communicatie",
+        "waar": "in gesprekken, overleg, community",
+        "waarom": "voor afstemming en uitwisseling",
+        "hoe": "door bespreken en delen"
+      },
+      "tags": [
+        "besproken",
+        "overleg",
+        "communicatie",
+        "informatie",
+        "overzicht",
+        "samenvatting",
+        "hoofdpunten",
+        "onderwerp",
+        "uitwisseling",
+        "gesprek",
+        "behandeling",
+        "afstemming",
+        "terugblik",
+        "onderwerp",
+        "community",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-649c119c",
+          "begrip": "besproken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "afstemming",
+            "besproken",
+            "communicatie",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3a46ccb8",
+          "begrip": "delen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "uitwisseling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-47e45ad0",
+          "begrip": "gesprek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86271654",
+          "begrip": "gesprekken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:36:22.272157+00:00",
+        "vorige_versie_v1": "snap-4063fb17",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.356188+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:35:55.544758+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:35:55.555367+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:36:24.569582+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:36:24.646857+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:35:54.150301+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f02f431e",
+      "begrip": "spreektaal",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spreektaal is informele taal zoals die spontaan in gesproken communicatie wordt gebruikt.",
+        "laag2": "Spreektaal is de natuurlijke manier waarop mensen praten.",
+        "laag3": "Spreektaal ondersteunt directe, toegankelijke en persoonlijke communicatie.\nHet maakt snelle uitwisseling mogelijk en draagt vaak emotie, nuance en context mee.",
+        "laag4": "Binnen Spark is spreektaal een dynamische communicatieve vorm waarin betekenis via natuurlijke, contextgebonden en relationele taaloverdracht ontstaat.\nSpreektaal ondersteunt directe interactie en adaptieve interpretatie doordat nuance, emotie en situatie verweven zijn in de boodschap."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "informele gesproken taal",
+        "wanneer": "bij direct gesprek en interactie",
+        "waar": "in communicatie, gesprekken, dagelijks contact",
+        "waarom": "voor snelle en natuurlijke uitwisseling",
+        "hoe": "door spontaan spreken en luisteren"
+      },
+      "tags": [
+        "spreektaal",
+        "spreken",
+        "communicatie",
+        "taal",
+        "gesprek",
+        "informeel",
+        "interactie",
+        "context",
+        "spraak",
+        "uitwisseling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63c2beae",
+          "begrip": "oke, zeg eens wat",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "informeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0af850c1",
+          "begrip": "nou",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "interactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T19:48:40.790349+00:00",
+        "vorige_versie_v1": "kb-skel-f02f431e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.669476+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:48:31.646357+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:48:31.749215+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T19:48:42.586907+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T19:48:42.646173+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T19:48:28.053613+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-cd6c17c9",
+      "begrip": "context-zin",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een context-zin is een voorbeeldzin die laat zien hoe een woord of begrip binnen een bepaalde situatie wordt gebruikt.",
+        "laag2": "Een context-zin plaatst betekenis in een herkenbare situatie.",
+        "laag3": "Context-zinnen ondersteunen begrip, interpretatie en verduidelijking.\nZe maken zichtbaar hoe betekenis verandert afhankelijk van gebruik en omgeving.",
+        "laag4": "Context-zinnen ondersteunen begrip, interpretatie en verduidelijking.\nZe maken zichtbaar hoe betekenis verandert afhankelijk van gebruik en omgeving."
+      },
+      "ws5": {
+        "wie": "gebruikers, systemen, taalverwerkers",
+        "wat": "een zin met toepassingscontext",
+        "wanneer": "bij uitleg en betekenisverduidelijking",
+        "waar": "in taal, communicatie, kennisstructuren",
+        "waarom": "voor precisie en interpretatie",
+        "hoe": "door situering in voorbeeldgebruik"
+      },
+      "tags": [
+        "context-zin",
+        "context",
+        "voorbeeld",
+        "betekenis",
+        "situatie",
+        "verhaal",
+        "moment",
+        "gebruik",
+        "verduidelijking",
+        "interpretatie",
+        "taal",
+        "toepassing",
+        "classificatie",
+        "user",
+        "verrijkt",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea50eab8",
+          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-05-31T20:17:59.719156+00:00",
+        "vorige_versie_v1": "kb-skel-cd6c17c9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.400427+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T20:17:47.561459+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T20:17:47.645915+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-31T20:18:01.654880+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-31T20:18:01.664207+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-05-31T20:17:45.852724+00:00"
       },
       "media": {
         "voice_url": null,

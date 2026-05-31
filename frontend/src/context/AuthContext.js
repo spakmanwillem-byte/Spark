@@ -97,6 +97,19 @@ export function AuthProvider({ children }) {
     }
   }, [user]);
 
+  // v6_avatar_live_refresh — luister naar avatar-changed event en refresh user-object
+  // zodat sidebar/header/etc. de nieuwe avatar zien zonder login-reload
+  useEffect(() => {
+    if (!user?.id) return;
+    const handler = (e) => {
+      if (!e?.detail?.userId || e.detail.userId === user.id) {
+        refreshUser();
+      }
+    };
+    window.addEventListener('avatar-changed', handler);
+    return () => window.removeEventListener('avatar-changed', handler);
+  }, [user?.id, refreshUser]);
+
   const value = {
     user,
     loading,

@@ -40,11 +40,26 @@ const SIZE_CLASSES = {
 
 export function UserAvatar({ user, size = 'md', className = '', rounded = 'rounded-xl', showRing = false }) {
   const [errored, setErrored] = useState(false);
+  // v6_avatar_live_refresh — cache-buster die wijzigt bij avatar-changed event
+  const [bust, setBust] = useState(0);
   const info = resolveAvatar(user);
   const sizeCls = SIZE_CLASSES[size] || SIZE_CLASSES.md;
 
   // Reset error on user change
   useEffect(() => { setErrored(false); }, [user?.id, user?.avatar]);
+
+  // Listen for global avatar-changed event (dispatched from AvatarPickerPanel)
+  useEffect(() => {
+    const handler = (e) => {
+      // Alleen busten als event van dezelfde user is (of geen user-specificatie heeft)
+      if (!e?.detail?.userId || e.detail.userId === user?.id) {
+        setBust(Date.now());
+        setErrored(false);
+      }
+    };
+    window.addEventListener('avatar-changed', handler);
+    return () => window.removeEventListener('avatar-changed', handler);
+  }, [user?.id]);
 
   // Gradient bg per gradatie (zelfde palet als voorheen)
   const grad = user?.gradatie;
@@ -58,10 +73,11 @@ export function UserAvatar({ user, size = 'md', className = '', rounded = 'round
 
   // Render image (gallery/user/fallback)
   if ((info.kind === 'image' || info.kind === 'fallback') && !errored) {
+    const src = bust ? `${info.url}${info.url.includes('?') ? '&' : '?'}t=${bust}` : info.url;
     return (
       <div className={baseCls} data-testid={`avatar-${user?.id || 'anon'}`}>
         <img
-          src={info.url}
+          src={src}
           alt={user?.naam || ''}
           className={`w-full h-full object-cover`}
           onError={() => setErrored(true)}

@@ -25816,11 +25816,83 @@
         "session_id": "default",
         "gesprek_nummer": 982
       }
+    },
+    {
+      "id": "conv-dd240fb7",
+      "timestamp": "2026-05-31T09:49:43.978819+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 983
+      }
+    },
+    {
+      "id": "conv-771577e2",
+      "timestamp": "2026-05-31T09:49:44.006480+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 984
+      }
+    },
+    {
+      "id": "conv-1454af47",
+      "timestamp": "2026-05-31T20:38:22.881815+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 10 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 985
+      }
+    },
+    {
+      "id": "conv-a05ece25",
+      "timestamp": "2026-05-31T20:38:22.913038+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 986
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 982,
-    "last_updated": "2026-05-31T09:20:37.296101+00:00"
+    "total_conversations": 986,
+    "last_updated": "2026-05-31T20:38:22.913038+00:00"
   }
 }

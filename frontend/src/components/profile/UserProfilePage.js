@@ -143,12 +143,23 @@ export function UserProfilePage({ onNavigate }) {
 function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, isAdmin, onSave, saving, savedFlash }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
 
-  useEffect(() => {
+  const reloadAvatar = useCallback(() => {
     fetch(`${API}/api/avatar/current/${userId}`)
       .then(r => r.json())
-      .then(d => setAvatarUrl(d.url ? `${API}${d.url}` : null))
+      .then(d => {
+        const u = d.url || d.fallback_url;
+        setAvatarUrl(u ? `${API}${u}?t=${Date.now()}` : null);
+      })
       .catch(() => {});
   }, [userId]);
+
+  useEffect(() => {
+    reloadAvatar();
+    // v6_avatar_live_refresh — luister naar avatar-changed event vanuit Instellingen-tab
+    const handler = () => reloadAvatar();
+    window.addEventListener('avatar-changed', handler);
+    return () => window.removeEventListener('avatar-changed', handler);
+  }, [reloadAvatar]);
 
   return (
     <div className="space-y-4">
@@ -156,14 +167,14 @@ function AlgemeenTab({ user, userId, profile, updateField, persona, setPersona, 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {/* Avatar */}
           <div className="text-center">
-            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center overflow-hidden">
+            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center overflow-hidden" data-testid="profile-avatar-display">
               {avatarUrl ? (
-                <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+                <img src={avatarUrl} alt="" className="w-full h-full object-cover" onError={() => setAvatarUrl(null)} />
               ) : (
                 <User className="w-16 h-16 text-white" />
               )}
             </div>
-            <p className="text-[10px] text-slate-500 mt-2 uppercase tracking-wider">Verander via "Avatar" tab</p>
+            <p className="text-[10px] text-slate-500 mt-2 uppercase tracking-wider">Verander via "Instellingen" tab</p>
           </div>
 
           {/* Basisvelden */}

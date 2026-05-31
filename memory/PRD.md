@@ -1,7 +1,16 @@
 # Spark Core 2.0 — PRD
 
 
-## Completed (recent — 2026-05-29, sessie 17 / fork)
+## Completed (recent — 2026-05-31, sessie 17 / fork)
+
+- **v6_go_live_001** — Alle 5 token-users bots zijn LIVE per 1 juni:
+  - **Bug A (mock-safety)** gefixt: nieuwe `_enforce_mock_safety()` helper in `routes.py` blokkeert handmatige `execute_real_trade` als bot-config `use_mock=True` staat. Toegepast in `/trade/execute/{user_id}` en `/trade/quick-buy-potje/{user_id}`. Hoofd-issue eerder: handmatige Quick-Buy met `use_mock=False` overruleerde de bot-mock-flag en deed echte trades (zoals Lotus/Roadkill op 29 mei 19:09 — dit verklaart "trail-verkoop werkt, koop niet"). Nu hard-block met duidelijke error.
+  - **Bug B (auto_trade=False overal)** gefixt: registry `bots_registry_state.json` gepatcht — alle 5 bots (Spark/de Geiser/Gerben/Lotus/Roadkill) op `auto_trade=true` + `use_mock=false`. Backend gerestart, monitor herlaadt uit registry.
+  - **Live status (geverifieerd)**: alle 5 bots draaien, cycles tellen op (~1 cycle/20s), 6 markten gemonitord per bot, klaar voor autonome BUY-signals uit hun strategie.
+  - Backup van vorige registry-state in `/tmp/bots_registry_pre_live.json`.
+  - Token-users met bot-config: Spark (10 tokens), de Geiser (2), Roadkill (1), Lotus (1), Gerben (1). De Willem (jij, 21 tokens) draait nog handmatig zonder bot.
+
+
 
 - **v6_dnd_body_layout_001** — Body-avatar als achtergrond + sleepbare slot-frames:
   - **Backend** (`modules/dnd/body_layout.py`): 3 endpoints (`GET /api/dnd/body-layout`, `PUT /api/dnd/body-layout`, `POST /api/dnd/body-layout/reset`). Shared 18-slot layout met x/y % posities in `data/dnd/body_layout.json`. Admin-only via gradatie ≤ 2.

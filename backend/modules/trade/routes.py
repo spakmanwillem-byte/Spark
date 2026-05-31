@@ -19,6 +19,31 @@ from . import context_service
 router = APIRouter(prefix="/trade", tags=["trade"])
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "wallet"
 SETTINGS_DIR = Path(__file__).parent.parent.parent / "data" / "users"
+TRADE_DIR = Path(__file__).parent.parent.parent / "data" / "trade"
+
+
+# v6_mock_safety_001 — Hard safety: als bot-config use_mock=True → handmatige real trade is geblokkeerd
+def _bot_uses_mock(user_id: str) -> Optional[bool]:
+    """Return True/False als user een bot-config heeft, anders None (geen config)."""
+    reg = load_json(TRADE_DIR / "bots_registry_state.json", default={"bots": []})
+    for b in reg.get("bots", []) if isinstance(reg.get("bots"), list) else []:
+        if b.get("user_id") == user_id:
+            return bool(b.get("use_mock", True))
+    return None
+
+
+def _enforce_mock_safety(user_id: str, requested_use_mock: bool) -> tuple[bool, Optional[str]]:
+    """
+    Returns (effective_use_mock, blocker_error_or_None).
+    Regel: als bot zegt mock=True maar user vraagt real → BLOCK met duidelijke error.
+    Als bot zegt mock=False → user mag beide (admin kan altijd kiezen).
+    Geen bot-config → respecteer user's keuze (backward compat).
+    """
+    bot_mock = _bot_uses_mock(user_id)
+    if bot_mock is True and not requested_use_mock:
+        return (True, f"Bot-config voor {user_id} staat op MOCK. Handmatige real trade geblokkeerd. "
+                       "Zet eerst use_mock=False in de bot-config via /api/trade/bot/start/{user_id}.")
+    return (requested_use_mock, None)
 
 
 class BitvavoCredentials(BaseModel):
@@ -375,7 +400,11 @@ async def get_tickers(coins: str = Query(None)):
 
 @router.post("/execute/{user_id}")
 async def execute_trade(user_id: str, req: QuickTradeRequest):
-    if req.use_mock:
+    # v6_mock_safety_001 — block real-trade als bot-config op mock staat
+    eff_mock, err = _enforce_mock_safety(user_id, req.use_mock)
+    if err:
+        return {"success": False, "error": err, "blocked_by": "bot_mock_safety"}
+    if eff_mock:
         result = execute_mock_trade(user_id, req.market, req.side, req.amount)
     else:
         result = execute_real_trade(user_id, req.market, req.side, req.amount)
@@ -452,6 +481,10 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     if req.use_mock:
         trade_result = execute_mock_trade(user_id, req.market, "buy", entry_amount)
     else:
+        # v6_mock_safety_001 — block real-trade als bot-config op mock staat
+        eff_mock, err = _enforce_mock_safety(user_id, req.use_mock)
+        if err:
+            return {"success": False, "error": err, "blocked_by": "bot_mock_safety"}
         trade_result = execute_real_trade(user_id, req.market, "buy", entry_amount)
 
     if not trade_result.get("success"):

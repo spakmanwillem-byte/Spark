@@ -1800,5 +1800,41 @@
       "created_at": "2026-05-31T08:37:20.330805+00:00",
       "closed_at": null
     }
-  ]
+  ],
+  "footnote_meta": {
+    "module": "v6_shadow_cascade_002",
+    "concept_door": "De Willem (2026-05-31)",
+    "geimplementeerd_in_sessie": "17 / fork",
+    "doel": "Per origineel potje 3 shadow-slots. Bij stabilisatie na drop activeert eerstvolgende idle slot (laagste eerst). Origineel BLIJFT OPEN \u2014 geen gerealiseerd verlies. Bij recovery: alle actieve shadows SLUITEN automatisch met winst. Bij 4e drop-cyclus: recycle origineel als slot-0 van nieuwe cyclus.",
+    "trigger": "is_stabilizing_after_drop(candles, entry, current) \u2014 5 vlakke candles (range <1.2%) + drop \u22651.5% + geen new low. GEEN puur %-trigger.",
+    "scaling": "1 token = 1 potje = \u20ac10 \u2192 meer volume = meer potjes = meer shadows. Lock-up risico schaalbaar opgevangen door uitbreiding watchlist + extra potjes per user.",
+    "lock_up_risico": "Bij persistent bear-markt: tot 4 \u00d7 \u20ac10 = \u20ac40 per origineel potje tijdelijk in positie (origineel + 3 shadows). Geen freefall-buy garantie. Aanbeveling: monitor cycle-counter; bij cycle > 5 op meerdere pots overweeg pause op nieuwe activaties.",
+    "alleen_voor": "Blue-chip coins met historisch herstel-patroon (huidige watchlist: BCH/BTC/ETH/SOL/ADA/ATOM). NIET voor altcoins of speculative tokens.",
+    "max_per_pot": 3,
+    "min_drop_before_shadow": 0.015,
+    "stabilization_range_pct": 0.012,
+    "stabilization_lookback": 5,
+    "test_suite": "/app/backend/tests/test_shadow_trigger.py (12/12 pass)",
+    "endpoints": [
+      "GET /api/trade/shadow/list/{user_id}",
+      "GET /api/trade/shadow/pot/{pot_id}",
+      "GET /api/trade/shadow/status/{user_id}",
+      "GET /api/trade/shadow/stats",
+      "POST /api/trade/shadow/auto-ensure/{user_id}",
+      "POST /api/trade/shadow/create",
+      "POST /api/trade/shadow/simulate-stabilization"
+    ],
+    "ui_locatie": "TraderPage.js \u2014 Shadow-banner in '10-Potjes Systeem' header + per-pot slot-dots (\u25cb\u25cb\u25cb / \u25cf\u25cb\u25cb / \u25cf\u25cf\u25cb / \u25cf\u25cf\u25cf / \u2713\u2713\u2713)",
+    "disclaimer_in": "data/personality/spark_identity.json::aansprakelijkheid.shadow_potjes",
+    "first_seeded_at": "2026-05-31T08:50:42.046670+00:00",
+    "shadows_count_at_seed": 90,
+    "users_covered": [
+      "user-000",
+      "user-001",
+      "user-1996fa59",
+      "user-4d9b59aa",
+      "user-5dd295db",
+      "user-a0ee2d7e"
+    ]
+  }
 }

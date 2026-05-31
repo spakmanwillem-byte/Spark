@@ -2,24 +2,46 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
-## 🌟 P1 — Shadow-potje systeem (Willem's idee, 2026-05-31)
+## 🌑 v6_shadow_cascade_002 — 3-laags Shadow Cascade + Bodemdetectie (2026-05-31, sessie 17)
 
-**Status (2026-05-31, sessie 17/fork)**: ✅ MVP LIVE. 30 idle shadows aangemaakt voor 6 trade-users. Wacht nu op echte markt-drop ≥ -3% om eerste auto-activatie te observeren.
+**Status**: ✅ LIVE. 90 idle shadows (3 slots × 30 trade-potjes) over 6 trade-actieve users. Test-suite 12/12 pass. Bot draait live, wacht op eerste echte markt-drop voor live observatie.
 
-**Voltooid:**
-- [x] Backend `shadow_pots.py` + `shadow_routes.py` (7 endpoints)
-- [x] Per-user scope-fix (pot-001 niet globaal uniek)
-- [x] Auto-ensure bij elke `auto_provision_bot_for_token_holder` call
-- [x] Monitor-integratie: activeer bij -3%, sluit bij SELL van origineel
-- [x] UI: shadow-status banner + per-pot badges (🌑 idle / ⚡ active / ✓ closed)
-- [x] Test-suite `tests/test_shadow_trigger.py` (9/9 pass)
+### Concept (Willem)
+1. Elk non-anchor potje krijgt **3 shadow-slots** (slot 1/2/3) — een piramide.
+2. Activatie-trigger is **bodemdetectie**, niet puur %-drop:
+   - Huidige prijs ≥ -1.5% onder entry
+   - Laatste 5 candles range < 1.2% (vlakke lijn = bodem-formatie)
+   - Geen new low (laatste close ≥ vorige × 0.998)
+3. Shadows activeren in volgorde slot 1 → 2 → 3, elk op een lagere bodem.
+4. Bij 4e drop-cyclus (alle 3 slots vol): **recycle** origineel als slot-0 van nieuwe cyclus. Cycle-counter +1, oude shadows → `archived_cycle_N`, 3 nieuwe idle slots in cycle N+1.
+5. Bij SELL van origineel: ALLE actieve shadows sluiten automatisch met winst.
 
-**Open (na 1-laag observatie):**
-- [ ] **Cascade chain**: shadow-4 = origineel van shadow-3 (Willem's idee voor later)
-- [ ] **Community-pool**: user zonder vrij potje leent shadow uit pool (50/50 winst-deling)
-- [ ] **Spark als shadow-provider**: Spark heeft 1 shadow per circulating potje als systeem-brede safety
-- [ ] Settlement-logic voor community-pool winst-deling
-- [ ] Telemetry-dashboard: hoeveel SHADOW-ACTIVATE events per dag, gemiddelde profit per shadow, recovery-tijd
+### Scaling-inzicht (gesprek 31 mei)
+- **Lock-up risico** is reëel maar opvangen door volume: meer ROAR-tokens = meer potjes = meer onafhankelijke shadow-piramides. Geen één-positie risico.
+- Cyclus-counter is signaal: zien we cycle > 3 op meerdere potjes? → markt zit diep in bear, capital ligt langer vast.
+- "We leren in het nu" — observeren eerst hoe vaak bodemdetectie triggert op echte markten, daarna tunen (range_pct, lookback, drop_threshold).
+
+### Bestanden / referentie
+- Code: `modules/trade/shadow_pots.py` + `shadow_routes.py` + `monitor.py` (regel 1048-1095)
+- Data: `data/trade/shadow_pots.json` (heeft `footnote_meta` met volledige spec embedded)
+- Tests: `backend/tests/test_shadow_trigger.py` (12/12)
+- UI: `frontend/.../TraderPage.js` — Shadow-banner + slot-dots (○○○ / ●○○ / ●●○ / ●●● / ✓✓✓)
+- Disclaimer: `data/personality/spark_identity.json::aansprakelijkheid.shadow_potjes`
+
+### Endpoints
+- `GET /api/trade/shadow/status/{user_id}` — per-pot capacity, active shadows, cycle
+- `POST /api/trade/shadow/auto-ensure/{user_id}` — zorg dat user 3 slots per non-anchor pot heeft
+- `POST /api/trade/shadow/simulate-stabilization` — test bodemdetector op willekeurige candles (voor backtest)
+- `GET /api/trade/shadow/stats` — globale telling
+
+### Open / aanstaande
+- [ ] Observeer eerste echte SHADOW-ACTIVATE in productie en log naar `_backups/first_shadow_events.jsonl` voor leren
+- [ ] **Bot-logs backtest** (wacht op zip van Willem): hoe vaak zou bodemdetectie getriggerd zijn op historische data? Welke coins/markten?
+- [ ] Boekhouder community-bark bij SHADOW-ACTIVATE/CLOSE (transparantie voor token-houders)
+- [ ] Cycle-counter alert in UI als cycle > 5 op meerdere pots
+- [ ] Community-pool variant: user zonder vrij potje leent shadow uit Spark's anchor-pool
+
+
 
 
 

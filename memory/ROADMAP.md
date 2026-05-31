@@ -2,6 +2,35 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
+## 🌟 P1 — Shadow-potje systeem (Willem's idee, 2026-05-31)
+
+**Concept:** elk potje krijgt een onzichtbare "shadow" twin. Bij een drop (stop-loss triggert) doet de **shadow** de re-entry, terwijl het **origineel** open blijft staan. Resultaat: geen gerealiseerd verlies, dubbele winst-kans bij recovery.
+
+**Mechaniek:**
+1. User met 1 potje → potje geopend op markt X @ €100
+2. Markt dumpt → -2.5% (op €97.5)
+3. Huidige fix: stop-loss SELT @ €98, verlies -€2 geboekt
+4. **Shadow-systeem:** origineel blijft op €100, **shadow potje** doet BUY @ €97.5
+5. Markt herstelt → origineel trail-SELLS @ €101 (winst), shadow trail-SELLS @ €99 (winst)
+6. **2 winsten i.p.v. 1 verlies**
+
+**Community-pool variant:**
+- Als user maar 1 potje heeft (geen shadow beschikbaar) → leen shadow uit collectieve pool
+- Voorkeur: shadow van een user met minste winst (solidariteit-mechaniek)
+- Winst-deling: 50/50 of via slimme algoritme
+- Past perfect bij Spark's tokenomics ("1 token = 1 potje = €10 trade claim")
+
+**Vervangt:** v6_stop_loss_001 (huidige -2% hard-SELL, realiseert verlies)
+
+**Te bouwen:**
+- `data/trade/shadow_pots.json` met linkje origineel ↔ shadow
+- `shadow_pot_engine.py` met allocate/return/borrow flow
+- Settlement-logic voor winst-deling community-pool
+- UI: shadow-status zichtbaar in potjes-overzicht (admin), niet zichtbaar voor non-admin tot opening
+- Activeren ná stabilisatie post-1-juni live launch
+
+
+
 ## 🟢 Redeploy-ready check — 2026-05-29 (avond)
 
 ### ✅ Sessie 16 (2026-05-29 avond) — Trade-systeem dynamisch & multi-user echt

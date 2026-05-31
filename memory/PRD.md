@@ -3,6 +3,11 @@
 
 ## Completed (recent — 2026-05-31, sessie 17 / fork)
 
+### 🌑 Disclaimer huidige stop-loss (v6_stop_loss_001)
+Stop-loss @ -2% **realiseert het verlies** door SELL. Vrijgekomen potje kan re-entry doen, maar de -2% wordt definitief in het kasboek geboekt. Werkt voor 1 juni, maar **vervangbaar door shadow-potje systeem** (zie ROADMAP P1 — Willem's idee, betere oplossing).
+
+
+
 - **v6_stop_loss_001** — Hard stop-loss bij -2% verlies (vóór trail-logica):
   - Verlies-pad ≠ trail-pad → géén 2 systemen, gewoon 1 systeem in 2 richtingen
   - Drempel `STOP_LOSS_PCT = -0.02`. Bij triggering: forced SELL met reason "Sluit verlies-positie om potje vrij te maken voor re-entry"

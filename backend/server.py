@@ -231,6 +231,10 @@ app.include_router(dnd_world_router, prefix="/api")
 from modules.dnd.body_layout import router as dnd_body_layout_router
 app.include_router(dnd_body_layout_router, prefix="/api")
 
+# v6_bewoner_001 — NPC bewoners + trade per gebouw/stad
+from modules.dnd.bewoner import router as dnd_bewoner_router
+app.include_router(dnd_bewoner_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

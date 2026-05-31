@@ -472,3 +472,127 @@ async def add_achievement(user_id: str, body: dict):
     fp = _inv_path(user_id)
     save_json(fp, {"user_id": user_id, "slots": inv.get("slots", []), "achievements": achs})
     return _load_or_init(user_id)
+
+
+
+# ============== TRANSFER (v6_transfer_001) ==============
+# Item-verplaatsen tussen containers (rugzak ↔ huis-opslag ↔ equipment-slot).
+# Thuis-check: alleen wanneer character.locatie_naam == character.dorp.
+
+class TransferReq(BaseModel):
+    from_container: str       # "rugzak" | "huis" | "equipment:<slot_key>"
+    to_container: str         # idem
+    slot_id: Optional[str] = None       # bij rugzak/huis → slot.id
+    equip_slot_key: Optional[str] = None # bij equipment → slot_key (hoofd/torso/...)
+    item_payload: Optional[Dict] = None  # fallback voor equipment-naar-elders zonder slot_id
+
+
+def _is_home(user_id: str) -> bool:
+    """Check of speler thuis is (locatie_naam == dorp)."""
+    char_fp = DATA_ROOT / "dnd" / "characters" / f"{user_id}.json"
+    char = load_json(char_fp, default={})
+    loc = (char.get("locatie_naam") or "").lower().strip()
+    dorp = (char.get("dorp") or "").lower().strip()
+    return bool(loc) and bool(dorp) and loc == dorp
+
+
+@router.get("/{user_id}/is-home")
+async def check_home(user_id: str):
+    """Geef terug of speler thuis is (kan items verplaatsen tussen containers)."""
+    return {"user_id": user_id, "is_home": _is_home(user_id)}
+
+
+@router.post("/{user_id}/transfer")
+async def transfer_item(user_id: str, req: TransferReq):
+    """
+    Verplaats item tussen containers.
+    Restrictie: rugzak ↔ huis vereist 'thuis zijn' (locatie == dorp).
+    Equipment ↔ rugzak mag altijd (kleren wisselen on the road).
+    """
+    fc = (req.from_container or "").lower()
+    tc = (req.to_container or "").lower()
+    if fc == tc:
+        raise HTTPException(400, "from en to zijn gelijk")
+
+    # Thuis-check voor verplaatsing waar 'huis' bij betrokken is
+    needs_home = "huis" in fc or "huis" in tc
+    if needs_home and not _is_home(user_id):
+        raise HTTPException(403, "Niet thuis: ga eerst terug naar je dorp om je huis-opslag te gebruiken.")
+
+    # NB: rugzak + huis delen momenteel hetzelfde inventory.slots (zelfde lijst).
+    # Voor MVP: een item zit ofwel in rugzak (carried, telt voor kg) ofwel in huis (storage, geen kg).
+    # We onderscheiden via slot.location: "rugzak" | "huis"
+    inv = _load_or_init(user_id)
+    slots = inv.get("slots", [])
+
+    def _ensure_location(s, default="rugzak"):
+        if not s.get("location"):
+            s["location"] = default
+        return s
+    slots = [_ensure_location(s) for s in slots]
+
+    # equipment-naar-rugzak/huis OR rugzak/huis-naar-equipment
+    if fc.startswith("equipment:") or tc.startswith("equipment:"):
+        char_fp = DATA_ROOT / "dnd" / "characters" / f"{user_id}.json"
+        char = load_json(char_fp, default={})
+        if not char.get("user_id"):
+            raise HTTPException(404, "Character niet gevonden")
+        eq = char.setdefault("equipment", {})
+
+        if fc.startswith("equipment:"):
+            slot_key = fc.split(":", 1)[1]
+            equipped = eq.get(slot_key)
+            if not equipped:
+                raise HTTPException(400, f"Equipment slot {slot_key} is leeg")
+            new_slot = {
+                "id": f"slot-{uuid.uuid4().hex[:8]}",
+                "item_id": equipped.get("item_id") or "custom",
+                "acquired_at": datetime.now(timezone.utc).isoformat(),
+                "source": f"unequip:{slot_key}",
+                "naam": equipped.get("naam"),
+                "icon": equipped.get("icon", ""),
+                "image_url": equipped.get("image_url"),
+                "weight": equipped.get("weight", 0),
+                "value_goud": equipped.get("value_goud", 0),
+                "stats_bonus": equipped.get("stats_bonus", {}),
+                "combat_bonus": equipped.get("combat_bonus", {}),
+                "kind": equipped.get("kind", ""),
+                "location": tc,
+            }
+            slots.append(new_slot)
+            eq[slot_key] = None
+        else:
+            slot_key = tc.split(":", 1)[1]
+            slot = next((s for s in slots if s.get("id") == req.slot_id), None)
+            if not slot:
+                raise HTTPException(404, "Bron-item niet gevonden in inventory")
+            eq[slot_key] = {
+                "item_id": slot.get("item_id"),
+                "naam": slot.get("naam"),
+                "icon": slot.get("icon", ""),
+                "image_url": slot.get("image_url"),
+                "weight": slot.get("weight", 0),
+                "value_goud": slot.get("value_goud", 0),
+                "stats_bonus": slot.get("stats_bonus", {}),
+                "combat_bonus": slot.get("combat_bonus", {}),
+                "kind": slot.get("kind", ""),
+                "equipped_at": datetime.now(timezone.utc).isoformat(),
+            }
+            slots = [s for s in slots if s.get("id") != req.slot_id]
+        char["equipment"] = eq
+        char["updated_at"] = datetime.now(timezone.utc).isoformat()
+        save_json(char_fp, char)
+    else:
+        # Pure container move (rugzak ↔ huis): toggle slot.location
+        slot = next((s for s in slots if s.get("id") == req.slot_id), None)
+        if not slot:
+            raise HTTPException(404, "Item niet in inventory")
+        if fc not in {"rugzak", "huis"} or tc not in {"rugzak", "huis"}:
+            raise HTTPException(400, "from/to moet 'rugzak' of 'huis' zijn")
+        if (slot.get("location") or "rugzak") != fc:
+            raise HTTPException(400, f"Item zit niet in {fc}")
+        slot["location"] = tc
+
+    fp = _inv_path(user_id)
+    save_json(fp, {"user_id": user_id, "slots": slots, "achievements": inv.get("achievements", [])})
+    return _load_or_init(user_id)

@@ -1,5 +1,65 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18F, fork — Bewoners + Map-avatars + Item-transfer)
+
+### 👥 NPC Bewoner-systeem (NIEUW)
+- Nieuwe module `/app/backend/modules/dnd/bewoner.py`:
+  - Schema: `id`, `naam`, `beroep`, `fractie_id`, `provincie_id`, `hoofdstad`, `avatar_card_id` (D&D-kaart link), `gebouw_card_id`, `wallet.goud`, **8 inventory_slots**, `rang`, `beschrijving`
+  - Endpoints: `GET /` (filterbaar op provincie/fractie/stad), `GET /{id}`, `POST /` (create), `PATCH /{id}`, `PUT /{id}/slot/{n}` (admin slot vullen), `DELETE`, `POST /seed`
+  - Trade: `POST /{id}/buy` (speler koopt slot N) + `POST /{id}/sell` (speler verkoopt eigen item → bewoner betaalt 50%)
+- 3 bewoners gespeed in Stormhaven:
+  - **Hans de Bakker** (Bakker, Spark, 80g) → verkoopt brood/appel/ei, gekoppeld aan "Bakker persoon" + "Bakker gebouw" D&D-kaarten
+  - **Greta de Slager** (Slager, Spark, 100g) → verkoopt vlees, gekoppeld aan "Slager"-kaarten
+  - **Oude Mira** (Kruidenvrouw, Natuur, 60g) → verkoopt heelkruid + water (placeholder avatar via Vraag-avatar)
+
+### 🛒 BewonerPanel UI (NIEUW in Avatar-tab)
+- `BewonersStripPanel` — horizontale strip met 96px avatar-circles per bewoner (klik = activeer)
+- `BewonerHandelPanel` — geopend bij selectie, toont:
+  - Links: 128×128 bewoner-avatar met naam/beroep/rang/wallet-goud/quote-beschrijving
+  - Midden: 8 vakjes "TE KOOP" (4×2 grid, prijs-overlay, klik = kopen, rood/disabled als te duur)
+  - Rechts: 8 vakjes "JOUW RUGZAK" (4×2 grid, +sellPrice overlay, klik = verkopen voor 50%)
+- `data-testid="bewoners-strip|bewoner-{id}|bewoner-handel|bewoner-buy-slot-N|bewoner-sell-slot-N"`
+
+### 🗺️ Map markers — avatar-circles met fractie-glow + speler-glow-dot
+- `MiniMapPanel` upgrade: i.p.v. lege fractie-shield-cirkel toont elke provincie nu de **eerste bewoner-avatar** van die hoofdstad als ronde foto (clipPath) met fractie-kleur outline
+- Fallback: fractie-shield met witte kern (voor provincies zonder bewoner)
+- **Speler-glow-dot**: groene pulsende cirkel (1.8s animatie) onder de provincie waar `char.dorp` matcht — visueel "Jij bent hier"
+- Behoudt drag/admin/select functionaliteit
+
+### 🤝 Item-transfer systeem met thuis-check
+- Backend: `POST /api/inventory/{user_id}/transfer` met `{from_container, to_container, slot_id, equip_slot_key}`
+- Containers: `rugzak` ↔ `huis` ↔ `equipment:{slot_key}` (bv. `equipment:torso`)
+- **Thuis-check**: `_is_home(user_id)` → `char.locatie_naam == char.dorp`. Rugzak↔Huis vereist thuis, 403 als niet thuis
+- Equipment↔Rugzak mag altijd (kleren wisselen onderweg)
+- Items hebben nu `location: "rugzak"|"huis"` field (default "rugzak")
+- GET `/api/inventory/{user_id}/is-home` → boolean
+- Frontend RugzakKaderPanel + HuisOpslagPanel:
+  - Filter slots op `location` (`!== 'huis'` voor rugzak, `=== 'huis'` voor opslag)
+  - Hover-overlay op gevulde slots: "→ Huis" / "→ Rugzak" knop + Drop-knop voor rugzak
+  - Alleen tonen als `isHome === true`
+- `data-testid="rugzak-tohome-N|rugzak-drop-N|opslag-torug-N"`
+
+### Backend test (curl)
+- ✅ `POST /api/dnd/bewoners/seed` → 3 bewoners
+- ✅ `PUT /api/dnd/bewoners/{id}/slot/N` → items in bewoner-inventory
+- ✅ `POST /api/dnd/bewoners/{id}/buy` → speler 50g - 2g brood = 48g, item verschijnt in inventory
+- ✅ `GET /api/inventory/user-001/is-home` → `true`
+
+### Frontend visueel geverifieerd (Willem login → Avatar tab)
+- ✅ Bewoners-strip toont 3 avatars (Hans, Greta met eigen D&D-kaart images, Mira met placeholder)
+- ✅ Handel-panel opent bij klik, toont bewoner-avatar + 8/8 vakjes + prijslabels
+- ✅ Map shows avatar-circles voor Stormhaven (Bakker) en Leeuwarden (Mira), met fractie-glow
+- ✅ Groene speler-glow-dot pulse onder Stormhaven (huidige locatie)
+
+### Bestanden gewijzigd in sessie 18F
+- NEW `/app/backend/modules/dnd/bewoner.py` (~360 regels)
+- `/app/backend/server.py` — bewoner router registreren
+- `/app/backend/modules/inventory/routes.py` — `/transfer` + `/is-home` + `location` field
+- `/app/frontend/src/components/profile/DnDCharacterSheet.js` — `BewonersStripPanel`, `BewonerHandelPanel`, transferItem/buy/sell helpers, RugzakKaderPanel + HuisOpslagPanel transfer-knoppen, MiniMapPanel avatar-circles + speler-glow
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18E, fork — Game-items SEED met placeholder + Spark-advies)
 
 ### 🎲 D&D Game Items SEED — alle slots gevuld + consumables

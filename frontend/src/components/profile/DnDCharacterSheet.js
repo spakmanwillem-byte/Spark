@@ -186,6 +186,11 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
   const [editingMeta, setEditingMeta] = useState(false);
   const [eventDraft, setEventDraft] = useState('');
   const [showMapView, setShowMapView] = useState(false);
+  // v6_bewoner_001 — bewoners + thuis-status + actieve bewoner (handel)
+  const [bewoners, setBewoners] = useState([]);
+  const [isHome, setIsHome] = useState(true);
+  const [activeBewonerId, setActiveBewonerId] = useState(null);
+  const [activeBewoner, setActiveBewoner] = useState(null);
 
   const reload = useCallback(() => {
     fetch(`${API}/api/dnd/character/${userId}`)
@@ -223,6 +228,30 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
       .catch(() => setGameCards([]));
   }, []);
 
+  // v6_bewoner_001 — bewoners van de huidige stad laden + is_home check
+  useEffect(() => {
+    if (!char?.dorp) return;
+    fetch(`${API}/api/dnd/bewoners/?hoofdstad=${encodeURIComponent(char.dorp)}`)
+      .then(r => r.json())
+      .then(d => setBewoners(d.bewoners || []))
+      .catch(() => setBewoners([]));
+  }, [char?.dorp]);
+
+  useEffect(() => {
+    fetch(`${API}/api/inventory/${userId}/is-home`)
+      .then(r => r.json())
+      .then(d => setIsHome(!!d.is_home))
+      .catch(() => {});
+  }, [userId, char?.locatie_naam]);
+
+  useEffect(() => {
+    if (!activeBewonerId) { setActiveBewoner(null); return; }
+    fetch(`${API}/api/dnd/bewoners/${activeBewonerId}`)
+      .then(r => r.json())
+      .then(setActiveBewoner)
+      .catch(() => setActiveBewoner(null));
+  }, [activeBewonerId, inventory]);
+
   if (!char) {
     return (
       <div data-testid="dnd-sheet-loading" className="flex items-center justify-center py-20 text-amber-500/60 text-sm">
@@ -238,6 +267,55 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
       body: JSON.stringify({ kind, text }),
     });
     setEventDraft('');
+    reload();
+  };
+
+  // v6_transfer_001 — verplaats item tussen containers met thuis-check
+  const transferItem = async (from_container, to_container, payload) => {
+    try {
+      const r = await fetch(`${API}/api/inventory/${userId}/transfer`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from_container, to_container, ...payload }),
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        window.alert(e.detail || `Kon item niet verplaatsen (${r.status})`);
+        return false;
+      }
+      reload();
+      return true;
+    } catch (err) {
+      window.alert('Fout bij verplaatsen');
+      return false;
+    }
+  };
+
+  // v6_bewoner_001 — koop item uit bewoner-slot
+  const buyFromBewoner = async (bewonerId, slotIdx) => {
+    const r = await fetch(`${API}/api/dnd/bewoners/${bewonerId}/buy`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, bewoner_slot_index: slotIdx }),
+    });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({}));
+      window.alert(e.detail || 'Aankoop mislukt');
+      return;
+    }
+    setActiveBewonerId(bewonerId);  // herlaad bewoner
+    reload();
+  };
+
+  const sellToBewoner = async (bewonerId, slotId) => {
+    const r = await fetch(`${API}/api/dnd/bewoners/${bewonerId}/sell`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, user_slot_id: slotId }),
+    });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({}));
+      window.alert(e.detail || 'Verkoop mislukt');
+      return;
+    }
+    setActiveBewonerId(bewonerId);
     reload();
   };
 
@@ -322,15 +400,36 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
         {/* === KOLOM RECHTS: Rugzak + Huis & Opslag (master inventory) + Dorp + Map === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           {/* v6_rugzak_kader_001 — Rugzak als eigen kader naast Huis & Opslag (mobile carry, met kg) */}
-          <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} />
+          <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} onTransfer={transferItem} isHome={isHome} />
           {/* v6_dnd_layout_v2 — Huis & Opslag is stilstaand (500 slots, geen kg) */}
-          <HuisOpslagPanel gameCards={gameCards} inventory={inventory} />
+          <HuisOpslagPanel gameCards={gameCards} inventory={inventory} onTransfer={transferItem} isHome={isHome} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
           <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
         </div>
       </div>
 
-      {/* ===== HANDEL-KADER VOORBEREIDING (Willem: items + kg klaar, kader-hub volgt) ===== */}
+      {/* ===== BEWONER-PANEL (NIEUW) — handel met NPCs in de huidige stad ===== */}
+      <div className="mt-3">
+        <BewonersStripPanel
+          bewoners={bewoners}
+          activeBewonerId={activeBewonerId}
+          onSelect={setActiveBewonerId}
+          char={char}
+        />
+        {activeBewoner && (
+          <BewonerHandelPanel
+            bewoner={activeBewoner}
+            playerInventory={inventory}
+            playerGoud={char.currency?.goud || 0}
+            onBuy={(idx) => buyFromBewoner(activeBewoner.id, idx)}
+            onSell={(slotId) => sellToBewoner(activeBewoner.id, slotId)}
+            onClose={() => setActiveBewonerId(null)}
+            gameCards={gameCards}
+          />
+        )}
+      </div>
+
+      {/* ===== HANDEL-KADER VOORBEREIDING (rest van flow nog te bouwen) ===== */}
       <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3" data-testid="dnd-trade-prep">
         <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
           <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">🏪 Warehouse</p>
@@ -1039,8 +1138,10 @@ function InventoryGridPanel({ userId, inventory: invProp }) {
 
 // v6_rugzak_kader_002 — Eigen kader voor de Rugzak (mobile carry, met kg-limiet)
 // 32-slot grid (8×4), items tonen jouw 512x512 D&D-kaart images (geen emojis), vullen via gameplay
-function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange }) {
-  const slots = inventory?.slots || [];
+function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, onTransfer, isHome = true }) {
+  // Filter alleen rugzak-items (location !== 'huis')
+  const allSlots = inventory?.slots || [];
+  const slots = allSlots.filter(s => (s.location || 'rugzak') !== 'huis');
   const cap = inventory?.capacity || { weight_used: 0, weight_max: 0, slots_used: 0, slots_total: 0 };
   const VISIBLE_SLOTS = 32; // 8 cols × 4 rows
   const kgUsed = cap.weight_used || 0;
@@ -1058,6 +1159,12 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange }
     if (!window.confirm('Item uit rugzak halen?')) return;
     await fetch(`${API}/api/inventory/${userId}/items/${slot_id}`, { method: 'DELETE' }).catch(() => {});
     onChange?.();
+  };
+
+  const moveToHuis = async (e, slot_id) => {
+    e.stopPropagation();
+    if (!isHome) { window.alert('Niet thuis: ga eerst terug naar je dorp.'); return; }
+    await onTransfer?.('rugzak', 'huis', { slot_id });
   };
 
   return (
@@ -1089,18 +1196,30 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange }
             const item = slots[i];
             const img = item ? itemImage(item, gameCards) : null;
             return (
-              <button key={i} data-testid={`rugzak-slot-${i}`}
-                disabled={!item}
-                onClick={() => item && removeItem(item.id)}
-                title={item ? `${item.naam} · ${item.weight || 0}kg · klik om te verwijderen` : ''}
-                className={`aspect-square rounded border overflow-hidden relative transition-all ${item ? 'border-amber-700/60 bg-amber-950/40 hover:border-red-700 cursor-pointer' : 'border-amber-900/30 bg-stone-950/50 cursor-default'}`}>
+              <div key={i} data-testid={`rugzak-slot-${i}`}
+                title={item ? `${item.naam} · ${item.weight || 0}kg${item.value_goud ? ` · ${item.value_goud}g` : ''}` : ''}
+                className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/40' : 'border-amber-900/30 bg-stone-950/50'}`}>
                 {item && img && (
                   <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
                 )}
                 {item && !img && (
                   <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
                 )}
-              </button>
+                {item && (
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex flex-col items-center justify-center gap-0.5 transition-opacity">
+                    {isHome && (
+                      <button data-testid={`rugzak-tohome-${i}`} onClick={(e) => moveToHuis(e, item.id)}
+                        className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
+                        → Huis
+                      </button>
+                    )}
+                    <button data-testid={`rugzak-drop-${i}`} onClick={() => removeItem(item.id)}
+                      className="text-[8px] px-1 py-0.5 bg-red-700 hover:bg-red-600 text-stone-100 rounded">
+                      Drop
+                    </button>
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -1111,7 +1230,7 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange }
 
 
 
-function HuisOpslagPanel({ gameCards = [], inventory = null }) {
+function HuisOpslagPanel({ gameCards = [], inventory = null, onTransfer, isHome = true }) {
   const HUIS_TAGS = ['huis', 'gebouw', 'opslag', 'locatie'];
   const MEUBEL_TAGS = ['meubel'];
   const STORAGE_MAX = 500;
@@ -1136,9 +1255,16 @@ function HuisOpslagPanel({ gameCards = [], inventory = null }) {
   const fallbackHuis = ['🏠', '📦', '🗃', '⛪', '+'];
   const fallbackMeubel = ['🪑', '🛏', '🗄', '🪟', '+'];
 
-  // Opslag items (uit inventory.slots)
-  const storageItems = inventory?.slots || [];
+  // Opslag items (uit inventory.slots, alleen waar location=='huis')
+  const allSlots = inventory?.slots || [];
+  const storageItems = allSlots.filter(s => s.location === 'huis');
   const storageUsed = storageItems.length;
+
+  const moveToRugzak = async (e, slot_id) => {
+    e.stopPropagation();
+    if (!isHome) { window.alert('Niet thuis: ga eerst terug naar je dorp.'); return; }
+    await onTransfer?.('huis', 'rugzak', { slot_id });
+  };
 
   return (
     <PaperPanel>
@@ -1204,13 +1330,21 @@ function HuisOpslagPanel({ gameCards = [], inventory = null }) {
               const img = item ? itemImage(item, gameCards) : null;
               return (
                 <div key={i} data-testid={`opslag-slot-${i}`}
-                  className={`aspect-square rounded border overflow-hidden relative ${item ? 'border-amber-700/60 bg-amber-950/30' : 'border-amber-900/30 bg-stone-950/50'}`}
+                  className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/30' : 'border-amber-900/30 bg-stone-950/50'}`}
                   title={item?.naam || ''}>
                   {item && img && (
                     <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
                   )}
                   {item && !img && (
                     <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
+                  )}
+                  {item && isHome && (
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex items-center justify-center transition-opacity">
+                      <button data-testid={`opslag-torug-${i}`} onClick={(e) => moveToRugzak(e, item.id)}
+                        className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
+                        → Rugzak
+                      </button>
+                    </div>
                   )}
                 </div>
               );
@@ -1268,9 +1402,11 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
 
 function MiniMapPanel({ char, userId, isAdmin }) {
   // v6_dnd_world_001 — 12 provincies + fractie shields op de "Nederland map kaal" achtergrond
+  // v6_map_avatars_001 — provincies tonen nu hoofdstad-avatar (eerste bewoner) i.p.v. lege stip
   const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
   const [provincies, setProvincies] = useState([]);
   const [fracties, setFracties] = useState([]);
+  const [bewonersByStad, setBewonersByStad] = useState({}); // hoofdstad → first bewoner avatar
   const [editMode, setEditMode] = useState(false);
   const [dragging, setDragging] = useState(null);
   const [selectedProv, setSelectedProv] = useState(null);
@@ -1280,6 +1416,18 @@ function MiniMapPanel({ char, userId, isAdmin }) {
     fetch(`${API}/api/dnd/world/provincies`)
       .then(r => r.json())
       .then(d => { setProvincies(d.provincies || []); setFracties(d.fracties || []); })
+      .catch(() => {});
+    // Avatar per stad uit bewoner-lijst
+    fetch(`${API}/api/dnd/bewoners/`)
+      .then(r => r.json())
+      .then(d => {
+        const map = {};
+        (d.bewoners || []).forEach(b => {
+          const stad = (b.hoofdstad || '').toLowerCase();
+          if (stad && !map[stad]) map[stad] = b.avatar_url;
+        });
+        setBewonersByStad(map);
+      })
       .catch(() => {});
   }, []);
   useEffect(() => { reload(); }, [reload]);
@@ -1360,37 +1508,70 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
             preserveAspectRatio="xMidYMid slice" />
 
-          {/* Provincie shields — v6_dnd_map_glow_001 met fractie-kleur glow + groter */}
+          {/* Provincie shields — v6_map_avatars_001: avatar-circle als beschikbaar, anders shield */}
           {provincies.map(p => {
             const f = fractieOf(p.fractie_id);
             const isMain = p.fractie_id === 'spark';
             const isSelected = selectedProv === p.id;
             const baseR = isMain ? 5.5 : 4.2;
             const glowColor = f.kleur || '#94a3b8';
+            const avatarUrl = bewonersByStad[(p.hoofdstad || '').toLowerCase()];
+            const isPlayerHere = (char?.dorp || '').toLowerCase() === (p.hoofdstad || '').toLowerCase();
             return (
               <g key={p.id} data-testid={`prov-${p.id}`}
                 onPointerDown={(e) => onPointerDown(e, p.id)}
                 style={{ cursor: editMode ? 'grab' : 'pointer' }}>
-                {/* Buitenring (gloeie kring) */}
+                {/* Buitenring (gloeie kring fractie-kleur) */}
                 <circle cx={p.x_pct} cy={p.y_pct} r={baseR + 1.8}
                   fill="none"
                   stroke={glowColor}
                   strokeWidth="0.6"
-                  opacity="0.4"
+                  opacity="0.5"
                   style={{ filter: `drop-shadow(0 0 ${isMain ? 5 : 3}px ${glowColor})` }} />
-                {/* Dorp-shield */}
-                <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
-                  fill={glowColor}
-                  stroke={isSelected ? '#fde68a' : '#000'}
-                  strokeWidth={isSelected ? 0.9 : 0.5}
-                  opacity={p.fractie_id === 'neutraal' ? 0.6 : 0.95}
-                  style={{
-                    filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})`,
-                  }} />
-                {/* Kern (witte stip = dorp-hart) */}
-                <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 1.8 : 1.3}
-                  fill={isMain ? '#fde68a' : '#fef3c7'}
-                  opacity="0.9" />
+                {/* Avatar-circle als bewoner aanwezig, anders fractie-shield */}
+                {avatarUrl ? (
+                  <>
+                    <defs>
+                      <clipPath id={`clip-${p.id}`}>
+                        <circle cx={p.x_pct} cy={p.y_pct} r={baseR} />
+                      </clipPath>
+                    </defs>
+                    <image href={`${API}${avatarUrl}`}
+                      x={p.x_pct - baseR} y={p.y_pct - baseR}
+                      width={baseR * 2} height={baseR * 2}
+                      clipPath={`url(#clip-${p.id})`}
+                      preserveAspectRatio="xMidYMid slice" />
+                    <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
+                      fill="none"
+                      stroke={isSelected ? '#fde68a' : glowColor}
+                      strokeWidth={isSelected ? 0.9 : 0.6}
+                      style={{ filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})` }} />
+                  </>
+                ) : (
+                  <>
+                    <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
+                      fill={glowColor}
+                      stroke={isSelected ? '#fde68a' : '#000'}
+                      strokeWidth={isSelected ? 0.9 : 0.5}
+                      opacity={p.fractie_id === 'neutraal' ? 0.6 : 0.95}
+                      style={{ filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})` }} />
+                    <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 1.8 : 1.3}
+                      fill={isMain ? '#fde68a' : '#fef3c7'}
+                      opacity="0.9" />
+                  </>
+                )}
+                {/* Speler-glow-dot — pulse op huidige locatie */}
+                {isPlayerHere && (
+                  <>
+                    <circle cx={p.x_pct} cy={p.y_pct + baseR + 0.5} r={1.2}
+                      fill="#22c55e"
+                      style={{ filter: 'drop-shadow(0 0 4px #22c55e)' }}>
+                      <animate attributeName="r" values="1.2;2;1.2" dur="1.8s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+                    </circle>
+                    <title>Jij bent hier</title>
+                  </>
+                )}
                 {/* Label */}
                 <text x={p.x_pct} y={p.y_pct + baseR + 2.4} textAnchor="middle"
                   fill="#fde68a" fontSize={isMain ? 2.6 : 2.0}
@@ -1675,5 +1856,145 @@ function PaperHeader({ children, right }) {
     </div>
   );
 }
+
+// ============================================================
+// v6_bewoner_001 — Bewoner-strip + Handel-paneel
+// ============================================================
+function BewonersStripPanel({ bewoners = [], activeBewonerId, onSelect, char }) {
+  if (!bewoners.length) return null;
+  return (
+    <PaperPanel>
+      <PaperHeader right={
+        <span className="text-[10px] text-amber-400/60">{char?.dorp || 'onbekend'}</span>
+      }>BEWONERS · {char?.dorp || ''}</PaperHeader>
+      <div className="p-3 flex gap-3 overflow-x-auto" data-testid="bewoners-strip">
+        {bewoners.map(b => {
+          const sel = activeBewonerId === b.id;
+          return (
+            <button key={b.id} data-testid={`bewoner-${b.id}`}
+              onClick={() => onSelect(sel ? null : b.id)}
+              className={`shrink-0 w-24 flex flex-col items-center gap-1 p-2 rounded-lg border-2 transition-all ${sel ? 'border-amber-400 bg-amber-900/30' : 'border-stone-700 hover:border-amber-600 bg-stone-950/60'}`}>
+              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-amber-700/60"
+                style={{ boxShadow: '0 0 12px rgba(245,158,11,0.3)' }}>
+                {b.avatar_url ? (
+                  <img src={`${API}${b.avatar_url}`} alt={b.naam} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-stone-800 flex items-center justify-center text-amber-200">{b.naam?.charAt(0)}</div>
+                )}
+              </div>
+              <p className="text-[10px] font-bold text-amber-100 truncate w-full text-center">{b.naam}</p>
+              <p className="text-[9px] text-amber-400/70 truncate w-full text-center">{b.beroep}</p>
+            </button>
+          );
+        })}
+      </div>
+    </PaperPanel>
+  );
+}
+
+function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSell, onClose, gameCards = [] }) {
+  if (!bewoner) return null;
+  const bewonerSlots = bewoner.inventory_slots || [];
+  const playerSlots = (playerInventory?.slots || []).filter(s => (s.location || 'rugzak') === 'rugzak');
+  const BEWONER_SLOT_COUNT = 8;
+  const PLAYER_SLOT_COUNT = 8;
+
+  return (
+    <PaperPanel>
+      <PaperHeader right={
+        <button data-testid="bewoner-handel-close" onClick={onClose}
+          className="text-[10px] px-2 py-0.5 rounded border border-amber-700/40 text-amber-300 hover:bg-amber-900/30">
+          sluit
+        </button>
+      }>HANDEL · {bewoner.naam} ({bewoner.beroep})</PaperHeader>
+      <div className="p-3 grid grid-cols-12 gap-3" data-testid="bewoner-handel">
+        {/* Avatar + info */}
+        <div className="col-span-12 md:col-span-3 flex flex-col items-center">
+          <div className="w-32 h-32 rounded-lg overflow-hidden border-2 border-amber-700/60"
+            style={{ boxShadow: '0 0 16px rgba(245,158,11,0.4)' }}>
+            {bewoner.avatar_url ? (
+              <img src={`${API}${bewoner.avatar_url}`} alt={bewoner.naam} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-stone-800 flex items-center justify-center text-amber-200 text-2xl">{bewoner.naam?.charAt(0)}</div>
+            )}
+          </div>
+          <p className="mt-2 text-sm font-serif font-bold text-amber-100">{bewoner.naam}</p>
+          <p className="text-[10px] text-amber-400/70">{bewoner.beroep} · {bewoner.rang || 'Burger'}</p>
+          <p className="text-[10px] text-yellow-300 font-mono mt-1">💰 {bewoner.wallet?.goud || 0}g</p>
+          {bewoner.beschrijving && (
+            <p className="text-[10px] italic text-amber-200/70 mt-2 text-center leading-snug">"{bewoner.beschrijving}"</p>
+          )}
+        </div>
+
+        {/* Bewoner verkoopt (8 vakjes) */}
+        <div className="col-span-12 md:col-span-4">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
+            Te koop · klik om te kopen
+          </p>
+          <div data-testid="bewoner-shop-grid" className="grid grid-cols-4 gap-1.5">
+            {Array.from({ length: BEWONER_SLOT_COUNT }).map((_, i) => {
+              const item = bewonerSlots[i];
+              const img = item ? itemImage(item, gameCards) : null;
+              const canAfford = item && playerGoud >= (item.value_goud || 0);
+              return (
+                <button key={i} data-testid={`bewoner-buy-slot-${i}`}
+                  disabled={!item || !canAfford}
+                  onClick={() => item && canAfford && onBuy(i)}
+                  title={item ? `${item.naam} · ${item.value_goud}g${!canAfford ? ' (te duur)' : ''}` : ''}
+                  className={`aspect-square rounded border-2 overflow-hidden relative transition-all ${item ? (canAfford ? 'border-emerald-700/60 bg-emerald-950/30 hover:border-emerald-400 cursor-pointer' : 'border-red-900/40 bg-stone-950/60 opacity-60 cursor-not-allowed') : 'border-stone-800 bg-stone-950/50'}`}>
+                  {item && img && (
+                    <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
+                  )}
+                  {item && !img && (
+                    <span className="absolute inset-0 flex items-center justify-center text-amber-200">{item.naam?.charAt(0)}</span>
+                  )}
+                  {item && (
+                    <div className="absolute bottom-0 inset-x-0 bg-black/80 text-yellow-300 text-[9px] font-mono font-bold py-0.5 text-center">
+                      {item.value_goud}g
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Speler verkoopt (8 vakjes) */}
+        <div className="col-span-12 md:col-span-5">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400 mb-1.5">
+            Jouw rugzak · klik om te verkopen (50% waarde)
+          </p>
+          <div data-testid="bewoner-sell-grid" className="grid grid-cols-4 gap-1.5">
+            {Array.from({ length: PLAYER_SLOT_COUNT }).map((_, i) => {
+              const item = playerSlots[i];
+              const img = item ? itemImage(item, gameCards) : null;
+              const sellPrice = item ? Math.max(1, Math.floor((item.value_goud || 0) / 2)) : 0;
+              return (
+                <button key={i} data-testid={`bewoner-sell-slot-${i}`}
+                  disabled={!item}
+                  onClick={() => item && onSell(item.id)}
+                  title={item ? `${item.naam} verkopen voor ${sellPrice}g` : ''}
+                  className={`aspect-square rounded border-2 overflow-hidden relative transition-all ${item ? 'border-amber-700/60 bg-amber-950/30 hover:border-amber-400 cursor-pointer' : 'border-stone-800 bg-stone-950/50'}`}>
+                  {item && img && (
+                    <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
+                  )}
+                  {item && !img && (
+                    <span className="absolute inset-0 flex items-center justify-center text-amber-200">{item.naam?.charAt(0)}</span>
+                  )}
+                  {item && (
+                    <div className="absolute bottom-0 inset-x-0 bg-black/80 text-yellow-300 text-[9px] font-mono font-bold py-0.5 text-center">
+                      +{sellPrice}g
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </PaperPanel>
+  );
+}
+
 
 export default DnDCharacterSheet;

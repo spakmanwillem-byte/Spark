@@ -1,13 +1,5 @@
 """
-Smoke-test voor v6_shadow_pot_001 — Shadow Potje activatie/sluiting.
-
-Doel:
-  Bewijs dat het shadow-systeem juist werkt zonder echte Bitvavo-trades.
-  Test scenarios:
-    1. Idle shadow bestaat voor een open potje
-    2. Bij -3% drop → shadow activeert (status idle → active, entry_price gevuld)
-    3. Bij potje-close → bijbehorende shadow ook closed met profit
-    4. Per-user scope: pot-001 van user-A en user-B worden niet door elkaar gehaald
+Smoke-test voor v6_shadow_cascade_002 — 3-slot shadow + bodemdetectie + recycle.
 
 Run: cd /app/backend && python3 -m tests.test_shadow_trigger
 """
@@ -22,7 +14,6 @@ TEST_USER_B = "test-shadow-user-B"
 
 
 def cleanup():
-    """Verwijder test-shadows zodat test idempotent is."""
     data = shadow._load()
     data["shadows"] = [s for s in data["shadows"]
                        if s.get("owner_user_id") not in (TEST_USER_A, TEST_USER_B)]
@@ -30,65 +21,101 @@ def cleanup():
 
 
 def run():
-    print("=== Shadow Potje Trigger Smoke Test ===")
+    print("=== Shadow Cascade (3-slot) + Bodemdetectie Smoke Test ===")
     cleanup()
 
-    # 1. Create idle shadow voor User A pot-001 (BCH)
-    r1 = shadow.create_shadow_for_pot("pot-001", TEST_USER_A, "BCH-EUR", capital=10.0)
-    assert r1["created"], f"Should create new shadow, got {r1}"
-    sh_a = r1["shadow"]
-    print(f"  [OK] Shadow created voor user-A pot-001: {sh_a['shadow_id']} status={sh_a['status']}")
+    # 1. 3 slots aanmaken voor user-A pot-001
+    for slot in [1, 2, 3]:
+        r = shadow.create_shadow_for_pot("pot-001", TEST_USER_A, "BCH-EUR", capital=10.0, slot=slot)
+        assert r["created"], f"Should create slot {slot}: {r}"
+    cap = shadow.shadow_capacity("pot-001", TEST_USER_A)
+    assert cap["have"] == 3 and cap["idle"] == 3, f"Expected 3/3 idle, got {cap}"
+    print(f"  [OK] 3 idle slots aangemaakt: {cap['slots']}")
 
-    # 2. Create idle shadow voor User B pot-001 (BTC) — per-user scope test
-    r2 = shadow.create_shadow_for_pot("pot-001", TEST_USER_B, "BTC-EUR", capital=10.0)
-    assert r2["created"], "User B's pot-001 should NOT collide with User A's pot-001"
-    sh_b = r2["shadow"]
-    print(f"  [OK] Shadow created voor user-B pot-001 (separate): {sh_b['shadow_id']}")
+    # 2. 4e create faalt netjes
+    r4 = shadow.create_shadow_for_pot("pot-001", TEST_USER_A, "BCH-EUR")
+    assert not r4["created"] and "alle 3" in r4.get("reason", ""), f"Should reject 4e: {r4}"
+    print(f"  [OK] 4e shadow geweigerd: {r4['reason']}")
 
-    # 3. Idempotent: 2e create voor user-A pot-001 returnt bestaande
-    r3 = shadow.create_shadow_for_pot("pot-001", TEST_USER_A, "BCH-EUR")
-    assert not r3["created"], "Should NOT create duplicate"
-    assert r3["shadow"]["shadow_id"] == sh_a["shadow_id"], "Should return existing"
-    print(f"  [OK] Idempotent: dezelfde shadow_id retour bij 2e call")
+    # 3. Per-user scope: user-B's pot-001 staat naast user-A
+    for slot in [1, 2, 3]:
+        rb = shadow.create_shadow_for_pot("pot-001", TEST_USER_B, "BTC-EUR", slot=slot)
+        assert rb["created"]
+    cap_b = shadow.shadow_capacity("pot-001", TEST_USER_B)
+    assert cap_b["have"] == 3
+    print(f"  [OK] User-B krijgt eigen 3 slots (scope-isolatie OK)")
 
-    # 4. Scope-check: get_shadows_for_pot met owner geeft alleen die user
-    all_pot1 = shadow.get_shadows_for_pot("pot-001")
-    test_pot1 = [s for s in all_pot1 if s.get("original_owner_id") in (TEST_USER_A, TEST_USER_B)]
-    assert len(test_pot1) == 2, f"Expected 2 test shadows on pot-001, got {len(test_pot1)}"
-    only_a = shadow.get_shadows_for_pot("pot-001", owner_user_id=TEST_USER_A)
-    assert len(only_a) == 1 and only_a[0]["original_owner_id"] == TEST_USER_A
-    print(f"  [OK] Per-user scope: test pot-001={len(test_pot1)}, user-A only={len(only_a)} (globally {len(all_pot1)})")
+    # 4. Bodemdetectie: STABIEL na drop
+    # Entry €100, huidige prijs €97 (-3%), 5 vlakke candles in range €96.50-€97.20 (≈0.72%)
+    candles_stable = [
+        {"high": 97.20, "low": 96.80, "close": 97.00},
+        {"high": 97.10, "low": 96.70, "close": 96.95},
+        {"high": 97.00, "low": 96.60, "close": 96.85},
+        {"high": 97.10, "low": 96.75, "close": 96.90},
+        {"high": 97.20, "low": 96.80, "close": 97.00},
+    ]
+    stab = shadow.is_stabilizing_after_drop(candles_stable, entry_price=100.0, current_price=97.0)
+    assert stab["stable"], f"Stable case should pass: {stab}"
+    print(f"  [OK] Stabilisatie GEDETECTEERD: {stab['reason']}")
 
-    # 5. Activate shadow van user-A (simuleer -3% drop op €100 → €97)
-    act = shadow.activate_shadow("pot-001", entry_price=97.0, drop_pct=-0.03, owner_user_id=TEST_USER_A)
-    assert act["success"], f"Activation failed: {act}"
-    assert act["shadow"]["status"] == "active"
-    assert act["shadow"]["entry_price"] == 97.0
-    print(f"  [OK] Shadow user-A actief @ €97.00 (trigger -3%)")
+    # 5. Bodemdetectie: NOG IN FREEFALL (laatste close lager dan vorige)
+    candles_falling = [
+        {"high": 99.0, "low": 98.0, "close": 98.5},
+        {"high": 98.5, "low": 97.5, "close": 97.8},
+        {"high": 97.8, "low": 96.8, "close": 97.0},
+        {"high": 97.0, "low": 96.0, "close": 96.2},
+        {"high": 96.2, "low": 95.0, "close": 95.1},  # nieuwe low
+    ]
+    stab2 = shadow.is_stabilizing_after_drop(candles_falling, entry_price=100.0, current_price=95.1)
+    assert not stab2["stable"], f"Falling case should NOT trigger: {stab2}"
+    print(f"  [OK] Freefall NIET getriggerd: {stab2['reason']}")
 
-    # 6. Check dat get_active_shadow user-A's shadow vindt
-    act_check = shadow.get_active_shadow("pot-001", owner_user_id=TEST_USER_A)
-    assert act_check is not None and act_check["status"] == "active"
-    print(f"  [OK] get_active_shadow vindt active shadow voor user-A pot-001")
+    # 6. Bodemdetectie: drop te klein
+    candles_small = [{"high": 99.8, "low": 99.5, "close": 99.7}] * 5
+    stab3 = shadow.is_stabilizing_after_drop(candles_small, entry_price=100.0, current_price=99.7)
+    assert not stab3["stable"], f"Small drop should NOT trigger: {stab3}"
+    print(f"  [OK] Te kleine drop geweigerd: {stab3['reason']}")
 
-    # 7. User-B's shadow is nog idle (niet per ongeluk geactiveerd door scope-bug)
-    b_check = shadow.get_active_shadow("pot-001", owner_user_id=TEST_USER_B)
-    assert b_check is None, "User-B's shadow should still be idle!"
-    print(f"  [OK] User-B's pot-001 shadow blijft idle (scope-isolatie)")
+    # 7. Activate slot 1 (laagste eerst)
+    act1 = shadow.activate_shadow("pot-001", entry_price=97.0, drop_pct=-0.03,
+                                  owner_user_id=TEST_USER_A, trigger_reason="bodem €97 vlak")
+    assert act1["success"] and act1["shadow"]["slot"] == 1
+    print(f"  [OK] Activated slot 1: {act1['shadow']['shadow_id']}")
 
-    # 8. Sluit shadow user-A (simuleer recovery: €97 → €99 = €0.21 winst op €10)
-    close = shadow.close_shadow(act["shadow"]["shadow_id"], exit_price=99.0, profit=0.2062)
-    assert close["success"]
-    assert close["shadow"]["status"] == "closed"
-    assert close["shadow"]["profit"] == 0.2062
-    print(f"  [OK] Shadow closed @ €99.00 profit €0.21")
+    # 8. Activate slot 2 (volgende drop)
+    act2 = shadow.activate_shadow("pot-001", entry_price=94.0, drop_pct=-0.06,
+                                  owner_user_id=TEST_USER_A, trigger_reason="bodem €94")
+    assert act2["success"] and act2["shadow"]["slot"] == 2
+    print(f"  [OK] Activated slot 2: {act2['shadow']['shadow_id']}")
 
-    # 9. Stats
-    st = shadow.stats()
-    print(f"  [OK] Global stats: total={st['total']}, by_status={st['by_status']}")
+    # 9. Activate slot 3 (3e drop)
+    act3 = shadow.activate_shadow("pot-001", entry_price=91.0, drop_pct=-0.09,
+                                  owner_user_id=TEST_USER_A, trigger_reason="bodem €91")
+    assert act3["success"] and act3["shadow"]["slot"] == 3
+    print(f"  [OK] Activated slot 3: {act3['shadow']['shadow_id']}")
+
+    # 10. 4e activate faalt (alle slots actief)
+    act4 = shadow.activate_shadow("pot-001", entry_price=88.0, drop_pct=-0.12, owner_user_id=TEST_USER_A)
+    assert not act4["success"]
+    print(f"  [OK] 4e activate correct geweigerd: {act4['error']}")
+
+    # 11. Recycle: alle 3 worden archived_cycle_1, nieuwe 3 idle slots in cycle 2
+    rec = shadow.recycle_pot_as_shadow_zero("pot-001", TEST_USER_A, current_price=88.0)
+    assert rec["success"] and rec["new_cycle"] == 2 and len(rec["new_shadow_ids"]) == 3
+    cap_after = shadow.shadow_capacity("pot-001", TEST_USER_A)
+    assert cap_after["idle"] == 3 and cap_after["active"] == 0
+    print(f"  [OK] Recycled cyclus 1→2, 3 nieuwe idle slots: {rec['new_shadow_ids']}")
+
+    # 12. Close shadow (simuleer recovery)
+    # We hebben net gerecycled, dus laat slot 1 nieuwe cyclus pakken
+    act5 = shadow.activate_shadow("pot-001", entry_price=87.0, drop_pct=-0.13, owner_user_id=TEST_USER_A)
+    assert act5["success"]
+    cls = shadow.close_shadow(act5["shadow"]["shadow_id"], exit_price=95.0, profit=0.92)
+    assert cls["success"] and cls["shadow"]["status"] == "closed"
+    print(f"  [OK] Shadow closed @ €95 profit €0.92")
 
     cleanup()
-    print("\n✅ Alle 9 shadow-tests passed. Systeem ready voor live.")
+    print("\n✅ Alle 12 tests passed. 3-slot cascade + bodemdetectie + recycle werken.")
     return 0
 
 

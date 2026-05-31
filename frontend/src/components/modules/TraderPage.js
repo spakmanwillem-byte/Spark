@@ -622,18 +622,22 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
-                    {/* v6_shadow_pot_001 — Shadow Potje status banner */}
+                    {/* v6_shadow_cascade_002 — Shadow Potje status banner (3-slot piramide) */}
                     {shadowStatus?.summary && (
                       <div className="px-4 py-2 border-b border-slate-800 bg-purple-500/5 flex items-center justify-between text-[10px]" data-testid="shadow-status-banner">
                         <div className="flex items-center gap-2 text-purple-300">
                           <span className="text-base">🌑</span>
                           <span className="font-semibold">Shadow Potjes</span>
+                          <span className="text-slate-500" title={`Max ${shadowStatus.max_per_pot || 3} shadows per origineel — bij 4e drop recycle naar nieuwe cyclus`}>·  3-laags piramide</span>
                           <span className="text-slate-500">·</span>
-                          <span className="text-slate-400" title="Stand-by: vangt drop ≤ -3%">stand-by: <span className="text-purple-300 font-medium">{shadowStatus.summary.idle}</span></span>
-                          <span className="text-slate-400" title="Actief: shadow heeft re-entry BUY gedaan">actief: <span className="text-purple-400 font-bold">{shadowStatus.summary.active}</span></span>
-                          <span className="text-slate-400" title="Gesloten met winst">gesloten: <span className="text-green-400 font-medium">{shadowStatus.summary.closed}</span></span>
+                          <span className="text-slate-400" title="Stand-by slots, klaar voor bodemdetectie">stand-by: <span className="text-purple-300 font-medium">{shadowStatus.summary.idle}</span></span>
+                          <span className="text-slate-400" title="Active: shadow heeft BUY gedaan na bodem">actief: <span className="text-purple-400 font-bold">{shadowStatus.summary.active}</span></span>
+                          <span className="text-slate-400" title="Gesloten met winst (recovery)">gesloten: <span className="text-green-400 font-medium">{shadowStatus.summary.closed}</span></span>
+                          {shadowStatus.summary.archived > 0 && (
+                            <span className="text-slate-500" title="Gearchiveerd na recycle">gearchiveerd: {shadowStatus.summary.archived}</span>
+                          )}
                           {shadowStatus.summary.none > 0 && (
-                            <span className="text-slate-500" title="Potjes zonder shadow">onbeschermd: {shadowStatus.summary.none}</span>
+                            <span className="text-amber-500" title="Potjes zonder shadow-slots">onbeschermd: {shadowStatus.summary.none}</span>
                           )}
                         </div>
                         <button onClick={loadShadowStatus} className="text-slate-500 hover:text-purple-300" title="Ververs shadow status">
@@ -677,12 +681,22 @@ export function TraderPage({ onNavigate }) {
                         const liveValue = p.live_value ?? p.capital;
                         const hasGrowth = Math.abs(liveValue - p.capital) >= 0.005;
                         const sh = shadowByPot[p.id];
-                        const shStatus = sh?.shadow_status;
+                        const cap = sh?.capacity;
+                        const activeShadows = sh?.active_shadows || [];
+                        const hasActive = activeShadows.length > 0;
+                        const allClosed = cap && cap.idle === 0 && cap.active === 0 && cap.closed === cap.have;
+                        // Slot dots: gevuld als active, leeg als idle, ✓ als closed
+                        const slotDots = cap?.slots ? [1,2,3].map(slot => {
+                          const st = cap.slots[slot] || cap.slots[String(slot)];
+                          if (st === 'active') return '●';
+                          if (st === 'closed') return '✓';
+                          return '○';
+                        }).join('') : '';
                         return (
                           <div key={p.id} data-testid={`pot-${p.id}`}
                             className={`rounded-xl p-2.5 border ${
                               locked ? 'bg-emerald-500/5 border-emerald-500/30' :
-                              shStatus === 'active' ? 'bg-purple-500/10 border-purple-500/40 ring-1 ring-purple-500/30' :
+                              hasActive ? 'bg-purple-500/10 border-purple-500/40 ring-1 ring-purple-500/30' :
                               open ? 'bg-amber-500/10 border-amber-500/30' :
                               'bg-slate-800/30 border-slate-700'
                             }`}>
@@ -690,14 +704,13 @@ export function TraderPage({ onNavigate }) {
                               <span className="text-[10px] font-bold text-white flex items-center gap-1">
                                 {locked && <span className="text-emerald-400" title={p.lock_reason || 'locked'}>🔒</span>}
                                 {p.id}
-                                {!locked && shStatus === 'idle' && (
-                                  <span data-testid={`shadow-idle-${p.id}`} title={`Shadow ${sh.shadow_id} stand-by (activeert bij -3%)`} className="text-slate-500">🌑</span>
-                                )}
-                                {!locked && shStatus === 'active' && (
-                                  <span data-testid={`shadow-active-${p.id}`} title={`Shadow ${sh.shadow_id} ACTIEF @ €${sh.entry_price?.toFixed(4)} (drop ${(sh.trigger_drop_pct*100).toFixed(1)}%)`} className="text-purple-400 animate-pulse">⚡</span>
-                                )}
-                                {!locked && shStatus === 'closed' && (
-                                  <span data-testid={`shadow-closed-${p.id}`} title={`Shadow gesloten profit €${sh.profit?.toFixed(2)}`} className="text-green-400">✓</span>
+                                {!locked && cap && cap.have > 0 && (
+                                  <span
+                                    data-testid={`shadow-slots-${p.id}`}
+                                    title={`Shadows ${activeShadows.length}/${cap.have} actief · slots ${slotDots} · cyclus ${sh.cycle}${allClosed ? ' (alle gesloten — recycle bij volgende drop)' : ''}`}
+                                    className={hasActive ? 'text-purple-400 font-mono' : (allClosed ? 'text-green-400 font-mono' : 'text-slate-500 font-mono')}>
+                                    {slotDots}
+                                  </span>
                                 )}
                               </span>
                               <span className={`text-[9px] font-medium ${hasGrowth ? (liveValue > p.capital ? 'text-green-400' : 'text-red-400') : 'text-slate-400'}`}>
@@ -714,9 +727,11 @@ export function TraderPage({ onNavigate }) {
                                 <p className="text-[9px] text-amber-400">IN POSITIE</p>
                                 <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>
                                 {p.position.trailing_active && <p className="text-[9px] text-green-400">🔒 trailing</p>}
-                                {shStatus === 'active' && (
-                                  <p className="text-[9px] text-purple-300 font-semibold mt-0.5">🌑→⚡ Shadow @ €{sh.entry_price?.toFixed(2)}</p>
-                                )}
+                                {activeShadows.map(as => (
+                                  <p key={as.shadow_id} className="text-[9px] text-purple-300 font-semibold mt-0.5" title={as.trigger_reason || ''}>
+                                    🌑 S{as.slot}/3 @ €{as.entry_price?.toFixed(2)}
+                                  </p>
+                                ))}
                               </div>
                             ) : (
                               <p className="text-[9px] text-slate-500">Vrij</p>

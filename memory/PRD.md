@@ -1,5 +1,61 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-05-31 — sessie 18E, fork — Game-items SEED met placeholder + Spark-advies)
+
+### 🎲 D&D Game Items SEED — alle slots gevuld + consumables
+- Nieuwe endpoint `POST /api/dnd/spark-world/game-cards/seed-missing-items`
+- Genereert **17 DRAFT D&D-kaarten** (14 nieuw, 3 al bestaand) voor alle ontbrekende slots + consumables
+- **Placeholder image**: Vraag-avatar (`/api/avatar/gallery/31c6dc04a2fd/image`) — Willem upload later de echte
+- **Spark-advies in `laag1`** per kaart (jouw input bij "context invullen zonder GPT in line 1 2 3"):
+  - bv. "Wollen mantel die warmte vasthoudt op koude tochten. Biedt lichte bescherming."
+- **`laag2/3/4` + `ws5` blijven leeg** — voor Willem om in te vullen zonder GPT
+
+### Slot-dekking compleet (15 van 17 slots gevuld)
+- ✅ hoofd, nek, schouders, armen, trinket, torso, broek, voeten
+- ✅ sjaal, riem, handen, ring_l, linkerhand, rechterhand, offhand, pijl_boog, rugzak
+- (ring_r niet gespeed — gebruikt zelfde "Basis ring" als ring_l, prima)
+
+### Nieuwe items per slot/categorie
+| Slot/Cat | Kaart | Slot | kg | Stats/Combat |
+|---|---|---|---|---|
+| nek | Basis ketting | nek | 0.1 | +1 Wilskracht |
+| schouders | Basis mantel | schouders | 0.8 | +2 Verdediging |
+| armen | Basis armband | armen | 0.1 | +1 Behendigheid |
+| trinket | Basis medaillon | trinket | 0.05 | +1 Geluk |
+| sjaal | Basis sjaal | sjaal | 0.2 | +1 Conditie |
+| riem | Basis riem | riem | 0.3 | — |
+| handen | Basis handschoenen | handen | 0.2 | +1 Verd, +1 Aanval |
+| ring_l | Basis ring | ring_l | 0.02 | +1 Intelligentie |
+| offhand | Basis lantaarn | offhand | 0.8 | -1 Beweging |
+| pijl_boog | Basis boog | pijl_boog | 1.2 | +1 Beh, +4 Aanval, +2 Initiatief |
+| **Consumables (rugzak)** | | | | |
+| food | Basis kaas | — | 0.3 | herstel 15 conditie (laag1) |
+| food | Basis appel | — | 0.15 | herstel 8 conditie |
+| food | Basis ei | — | 0.08 | basis voor maaltijden |
+| tool | Basis fakkel | — | 0.5 | 30 min brandtijd |
+| currency | Basis goudstuk | — | 0.01 | universele ruileenheid |
+| consumable | Basis heelkruid | — | 0.05 | herstel 25 conditie, 1× |
+| tool | Basis touw | — | 0.6 | 10m hennep-touw |
+
+### Status na seed
+- Totaal items in catalog: **32** (24 uit D&D-kaarten + 8 hardcoded fallback)
+- Elke seed-kaart heeft `footnote.needs_image: true` en `footnote.needs_lagen: true` — markeert wat Willem moet aanvullen
+- `status: "draft"` — Willem klikt later "lock" wanneer kaart klaar is
+
+### Workflow voor Willem
+1. Open Kennisbank → D&D-kaarten
+2. Open een draft-kaart (bv. "Basis ketting")
+3. Upload echte 512×512 image (placeholder Vraag-avatar wordt vervangen)
+4. Verfijn `laag1` advies, vul `laag2/3/4` aan (context/regels/varianten/lore)
+5. Vul `ws5` aan (wie/wat/wanneer/waar/waarom/hoe)
+6. Klik "lock" → kaart is canon
+
+### Bestanden gewijzigd in sessie 18E
+- `/app/backend/modules/dnd/spark_world.py` — `seed-missing-items` route + `PLACEHOLDER_IMAGE_URL`
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18D, fork — UNIFICATIE: items leven nu in D&D-kaarten)
 
 ### 🎯 Doel: stop fragmentering — D&D-kaart-systeem is dé bron-van-waarheid

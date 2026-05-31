@@ -612,6 +612,175 @@ async def migrate_items_to_cards(user_id: str = "user-001"):
     return {"success": True, "migrated_count": len(migrated), "migrated": migrated}
 
 
+# v6_game_seed_001 — Seed draft-kaarten voor ontbrekende slots/items zodat Willem alleen
+# nog de echte image hoeft te uploaden + lagen te verfijnen. Placeholder = "Vraag" avatar.
+PLACEHOLDER_IMAGE_URL = "/api/avatar/gallery/31c6dc04a2fd/image"
+
+
+@router.post("/game-cards/seed-missing-items")
+async def seed_missing_game_items(user_id: str = "user-001"):
+    """
+    Genereer DRAFT D&D-kaarten voor alle slots/item-types die nog ontbreken.
+    Elke kaart krijgt:
+      - placeholder image (Vraag-avatar) — Willem upload later z'n eigen 512x512
+      - game_meta.is_item = true met voorgestelde slot/weight/stats
+      - laag1 = mijn (Spark's) advies-aanvulling — Willem past aan
+      - laag2-4, ws5 = leeg — Willem vult in zonder GPT
+    Idempotent: skip-checks op begrip-naam in bestaande kaarten.
+    """
+    data = _load_game()
+    cards = data.get("cards", [])
+    existing_begrippen = {(c.get("begrip") or "").lower().strip() for c in cards}
+
+    # Seed-definities: minimum-set items om volledige D&D body-coverage te hebben + basis consumables
+    SEED_ITEMS = [
+        # === Equipable per slot ===
+        {"begrip": "Basis ketting", "slot": "nek", "weight": 0.1, "kind": "armor",
+         "stats_bonus": {"wilskracht": 1}, "combat_bonus": {},
+         "tags": ["D&D", "nek", "ketting", "sieraad"],
+         "laag1": "Eenvoudige koorden-ketting met houten hanger. Geeft een licht beschermend gevoel."},
+        {"begrip": "Basis mantel", "slot": "schouders", "weight": 0.8, "kind": "armor",
+         "stats_bonus": {}, "combat_bonus": {"verdediging": 2},
+         "tags": ["D&D", "schouders", "mantel", "kleding"],
+         "laag1": "Wollen mantel die warmte vasthoudt op koude tochten. Biedt lichte bescherming."},
+        {"begrip": "Basis armband", "slot": "armen", "weight": 0.1, "kind": "armor",
+         "stats_bonus": {"behendigheid": 1}, "combat_bonus": {},
+         "tags": ["D&D", "armen", "armband", "sieraad"],
+         "laag1": "Leren armband met ijzeren stiftjes. Houdt de mouwen op hun plek."},
+        {"begrip": "Basis medaillon", "slot": "trinket", "weight": 0.05, "kind": "trinket",
+         "stats_bonus": {"geluk": 1}, "combat_bonus": {},
+         "tags": ["D&D", "trinket", "medaillon", "amulet"],
+         "laag1": "Bronzen medaillon met onleesbare runen. Voelt warm aan."},
+        {"begrip": "Basis sjaal", "slot": "sjaal", "weight": 0.2, "kind": "armor",
+         "stats_bonus": {"conditie": 1}, "combat_bonus": {},
+         "tags": ["D&D", "sjaal", "doek", "kleding"],
+         "laag1": "Stoffen sjaal in fractiekleur. Bedekt nek en gezicht tegen stof en kou."},
+        {"begrip": "Basis riem", "slot": "riem", "weight": 0.3, "kind": "armor",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "riem", "gordel", "kleding"],
+         "laag1": "Leren riem met ijzeren gesp. Houdt broek en zwaardschede vast."},
+        {"begrip": "Basis handschoenen", "slot": "handen", "weight": 0.2, "kind": "armor",
+         "stats_bonus": {}, "combat_bonus": {"verdediging": 1, "aanvalskracht": 1},
+         "tags": ["D&D", "handen", "handschoenen", "kleding"],
+         "laag1": "Leren handschoenen met geknoopte palmen. Beter grip op wapens."},
+        {"begrip": "Basis ring", "slot": "ring_l", "weight": 0.02, "kind": "trinket",
+         "stats_bonus": {"intelligentie": 1}, "combat_bonus": {},
+         "tags": ["D&D", "ring", "sieraad", "ring_l"],
+         "laag1": "Ijzeren ring met klein steentje. Symbool van een ambacht of belofte."},
+        {"begrip": "Basis lantaarn", "slot": "offhand", "weight": 0.8, "kind": "tool",
+         "stats_bonus": {}, "combat_bonus": {"beweging": -1},
+         "tags": ["D&D", "offhand", "lantaarn", "licht"],
+         "laag1": "Olielantaarn met glazen kapje. Verlicht donkere paden. 4 uur brandtijd."},
+        {"begrip": "Basis boog", "slot": "pijl_boog", "weight": 1.2, "kind": "weapon",
+         "stats_bonus": {"behendigheid": 1}, "combat_bonus": {"aanvalskracht": 4, "initiatief": 2},
+         "tags": ["D&D", "pijl_boog", "boog", "wapen"],
+         "laag1": "Houten kromboog met 10 simpele pijlen. Bereik tot 30 meter."},
+        # Rugzak-slot heeft al "Basis rugzak" kaart maar zonder slot — fixen via migration
+        # Geen extra rugzak-kaart, want bestaande wordt geupdated.
+
+        # === Voedsel / consumables (geen slot, in rugzak) ===
+        {"begrip": "Basis kaas", "slot": "", "weight": 0.3, "kind": "food",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "voeding", "kaas"], "value_goud": 3,
+         "laag1": "Stuk gerijpte boerenkaas. Lichte snack onderweg. Herstelt 15 conditie."},
+        {"begrip": "Basis appel", "slot": "", "weight": 0.15, "kind": "food",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "voeding", "fruit", "appel"], "value_goud": 1,
+         "laag1": "Verse rode appel. Herstelt 8 conditie. Licht in dragen."},
+        {"begrip": "Basis ei", "slot": "", "weight": 0.08, "kind": "food",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "voeding", "ei"], "value_goud": 1,
+         "laag1": "Vers boerenei. Basis voor maaltijden, kan thuis gebakken worden."},
+        {"begrip": "Basis fakkel", "slot": "", "weight": 0.5, "kind": "tool",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "tool", "fakkel", "licht"], "value_goud": 2,
+         "laag1": "Handfakkel met pek-uiteinde. Verlicht donkere ruimtes, brandtijd 30 min."},
+        {"begrip": "Basis goudstuk", "slot": "", "weight": 0.01, "kind": "currency",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "valuta", "goud", "munt"], "value_goud": 1,
+         "laag1": "Eén glanzend goudstuk. Universele ruileenheid in Spark World."},
+        {"begrip": "Basis heelkruid", "slot": "", "weight": 0.05, "kind": "consumable",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "kruid", "genezing", "consumable"], "value_goud": 5,
+         "laag1": "Gedroogd kruid in linnen zakje. Bij inname: herstelt 25 conditie. 1 gebruik."},
+        {"begrip": "Basis touw", "slot": "", "weight": 0.6, "kind": "tool",
+         "stats_bonus": {}, "combat_bonus": {},
+         "tags": ["D&D", "tool", "touw"], "value_goud": 4,
+         "laag1": "10 meter hennep-touw. Onmisbaar bij klimmen of vastbinden."},
+    ]
+
+    created = []
+    skipped = []
+    for seed in SEED_ITEMS:
+        if seed["begrip"].lower().strip() in existing_begrippen:
+            skipped.append(seed["begrip"])
+            continue
+        card_id = f"game-{uuid.uuid4().hex[:8]}"
+        card = {
+            "id": card_id,
+            "class": "game",
+            "type": "dnd_game_card",
+            "begrip": seed["begrip"],
+            "sense": "zie",
+            "lagen": {"laag1": seed.get("laag1", ""), "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
+            "tags": seed.get("tags", ["D&D"]),
+            "media": {
+                "voice_url": None,
+                "voice_transcript": None,
+                "image_urls": [PLACEHOLDER_IMAGE_URL],   # ← placeholder; Willem upload later
+            },
+            "game_meta": {
+                "is_item": True,
+                "slot": seed.get("slot", ""),
+                "weight": seed.get("weight", 0.0),
+                "stats_bonus": seed.get("stats_bonus", {}),
+                "combat_bonus": seed.get("combat_bonus", {}),
+                "meta": {"klasse": "", "beroep": "", "fractie": "", "locatie": "Overal"},
+                "value_goud": seed.get("value_goud", 0),
+                "rarity": "common",
+                "kind": seed.get("kind", ""),
+            },
+            "status": "draft",
+            "footnote": {
+                "bron": "seed_advies",
+                "vertrouwen": 0.4,
+                "aangemaakt_door": user_id,
+                "aangemaakt_op": _now(),
+                "laatst_bewerkt_op": _now(),
+                "needs_image": True,            # ← markeert dat echte image nog moet komen
+                "needs_lagen": True,            # ← markeert dat laag2/3/4 + ws5 nog moet komen
+            },
+            "needs": ["image", "lagen", "voice"],
+        }
+        cards.insert(0, card)
+        existing_begrippen.add(seed["begrip"].lower().strip())
+        created.append({"card_id": card_id, "begrip": seed["begrip"], "slot": seed.get("slot")})
+
+    # Ook: bestaande Basis rugzak kaart updaten met slot="rugzak" als die niet gezet is
+    for c in cards:
+        if (c.get("begrip") or "").lower().strip() == "basis rugzak":
+            gm = c.get("game_meta") or {}
+            if gm.get("is_item") and not gm.get("slot"):
+                gm["slot"] = "rugzak"
+                gm["kind"] = gm.get("kind") or "carry"
+                c["game_meta"] = gm
+
+    data["cards"] = cards
+    _save_game(data)
+    return {
+        "success": True,
+        "created_count": len(created),
+        "skipped_count": len(skipped),
+        "placeholder_image_url": PLACEHOLDER_IMAGE_URL,
+        "created": created,
+        "skipped": skipped,
+        "instructie": "Open Kennisbank → D&D-kaarten. Voor elke 'draft' kaart: upload echte image, verfijn lagen + ws5, klik daarna 'lock'.",
+    }
+
+
+
+
 
 
 # ---------------------------------------------------------------------------

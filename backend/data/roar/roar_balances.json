@@ -4,7 +4,7 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-000": 16,
+    "user-000": 19,
     "user-001": 15,
     "user-a0ee2d7e": 2,
     "user-c609d7d1": 0,
@@ -68,5 +68,14 @@
     "cleaned_at": "2026-05-29T18:42:48.193726+00:00",
     "previous_tx_count": 5,
     "note": "Transactiehistorie gewist, token balances blijven (vroege instappers)."
-  }
+  },
+  "mint_history": [
+    {
+      "ts": "2026-05-31T21:15:37.057791+00:00",
+      "to_user_id": "user-000",
+      "amount": 3,
+      "reason": "Surplus uit Bitvavo €29.74 → 3 tokens gemint naar Spark (nominaal €30, klein gemiddeld-correctie €0.26)",
+      "milestone": "echte_start_v1"
+    }
+  ]
 }

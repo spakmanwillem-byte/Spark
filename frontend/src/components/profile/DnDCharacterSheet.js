@@ -247,17 +247,19 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <OverigPanel char={char} />
         </div>
 
-        {/* === KOLOM RECHTS: Inventory + Huis & Opslag === */}
+        {/* === KOLOM RECHTS: Inventory + Huis & Opslag + Dorp + Map === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           <InventoryGridPanel userId={userId} inventory={inventory} />
           <HuisOpslagPanel gameCards={gameCards} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
+          {/* v6_dnd_map_breder_001 — landkaart even breed als dorp-kader, iets langer */}
+          <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
         </div>
       </div>
 
       {/* ===== EVENT FEED + CHAR INFO ===== */}
       <div className="mt-3 grid grid-cols-12 gap-3">
-        <div className="col-span-12 md:col-span-5">
+        <div className="col-span-12 md:col-span-7">
           <EventFeedPanel
             feed={char.event_feed || []}
             draft={eventDraft}
@@ -265,12 +267,8 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             onSend={(t) => sendEvent('SYSTEEM', t)}
           />
         </div>
-        <div className="col-span-12 md:col-span-4">
+        <div className="col-span-12 md:col-span-5">
           <CharInfoPanel char={char} activeTab={infoTab} setActiveTab={setInfoTab} />
-        </div>
-        <div className="col-span-12 md:col-span-3">
-          {/* Compacte map preview als rechter kolom hieronder ontbreekt */}
-          <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
         </div>
       </div>
 
@@ -875,16 +873,16 @@ function HuisOpslagPanel({ gameCards = [] }) {
   return (
     <PaperPanel>
       <PaperHeader>HUIS &amp; OPSLAG</PaperHeader>
-      <div className="grid grid-cols-2 gap-2 p-2">
+      <div className="grid grid-cols-2 gap-3 p-3">
         <div>
-          <p className="text-[9px] uppercase tracking-wider text-amber-500/70 mb-1 text-center">Huis sloten</p>
-          <div className="grid grid-cols-5 gap-1">
+          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Huis sloten</p>
+          <div className="grid grid-cols-5 gap-1.5">
             {[0, 1, 2, 3, 4].map(i => {
               const card = huisCards[i];
               const img = cardFirstImage(card);
               return (
                 <div key={i} data-testid={`huis-slot-${i}`}
-                  className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70 overflow-hidden relative"
+                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
                   title={card?.begrip || ''}>
                   {img ? (
                     <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
@@ -897,14 +895,14 @@ function HuisOpslagPanel({ gameCards = [] }) {
           </div>
         </div>
         <div>
-          <p className="text-[9px] uppercase tracking-wider text-amber-500/70 mb-1 text-center">Meubel sloten</p>
-          <div className="grid grid-cols-5 gap-1">
+          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Meubel sloten</p>
+          <div className="grid grid-cols-5 gap-1.5">
             {[0, 1, 2, 3, 4].map(i => {
               const card = meubelCards[i];
               const img = cardFirstImage(card);
               return (
                 <div key={i} data-testid={`meubel-slot-${i}`}
-                  className="aspect-square rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-sm text-amber-300/70 overflow-hidden relative"
+                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
                   title={card?.begrip || ''}>
                   {img ? (
                     <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
@@ -930,7 +928,7 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
   return (
     <PaperPanel>
       <PaperHeader>DORP</PaperHeader>
-      <div className="relative h-40 overflow-hidden">
+      <div className="relative h-52 overflow-hidden">
         {dorpImg ? (
           <img src={dorpImg} alt={dorpNaam}
             className="absolute inset-0 w-full h-full object-cover" />
@@ -1051,7 +1049,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
       )}>SPARK WORLD · 12 PROVINCIES</PaperHeader>
 
       <div className="relative p-2 select-none">
-        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-56"
+        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-72"
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerLeave={onPointerUp}

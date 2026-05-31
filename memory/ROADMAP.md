@@ -2,6 +2,18 @@
 
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
+## 🎲 P2 — Spark World D&D Tab herstructurering (2026-05-31, idee Willem)
+
+**Quick wins al uitgerold** (sessie 17): huis/opslag slots groter (aspect-square min-h-56, text-2xl iconen), worldmap onder dorp i.p.v. apart (zelfde breedte), worldmap-svg langer (h-56 → h-72), dorp-kader langer (h-40 → h-52), event-feed/charinfo herverdeeld zonder MiniMap-kolom (7+5 i.p.v. 5+4+3).
+
+**Volgende fases** (later uitwerken, niet rushen — Willem citaat: "werken we later verder uit"):
+1. **Pop-up Dorp-info**: klik op dorp-kader → modal met fractie + inwoners + gebouwen + quests (i.p.v. naar volledige map navigeren)
+2. **Pop-up Stad-info op landkaart**: klik op provincie → modal met fractie + inwoners + sterkte
+3. **Centraal handel-kader**: één Trade-hub waar alle handel-acties samenkomen, NPCs/gebouwen routeren naar deze hub i.p.v. ieder z'n eigen pop-up
+4. **Persoonskaart-integratie**: XP/Rang/Slots/Achievements (was sessie 17 uit Avatar-tab gehaald) hoort thuis in Spark World D&D als character-progressie-laag
+
+**Aanpak**: eerst mockup → test mentaal model met De Willem → daarna implementeren in fases.
+
 ## 🌷 P1 — Spark als Gastheer (Onthaal-laag voor app-onwennige mensen)
 
 **Achtergrond**: niet iedereen die Spark gebruikt is een digital native. Sommigen openen een nieuwe app met **lichte onzekerheid** — "doe ik het goed?", "wat hoort hier te gebeuren?", "ben ik nu kwijt?". Dat is geen tekortkoming van die mensen, dat is een natuurlijk gevoel. Spark hoort die onzekerheid op te vangen zoals een goede gastheer doet: met warmte, geduld, kleine erkenningen, en een uitgestoken hand zonder ongevraagd te leiden.

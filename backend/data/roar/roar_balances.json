@@ -4,15 +4,38 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-000": 10,
-    "user-001": 21,
+    "user-000": 16,
+    "user-001": 15,
     "user-a0ee2d7e": 2,
     "user-c609d7d1": 0,
     "user-1996fa59": 1,
     "user-5dd295db": 1,
     "user-4d9b59aa": 1
   },
-  "transactions": [],
+  "transactions": [
+    {
+      "id": "0b66d989-d91c-4866-85a7-fedd2617fcae",
+      "ts": "2026-05-31T21:02:06.612931+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 5,
+      "gift_id": "c707aace-3b6e-4721-bb49-eb5a72be03b2",
+      "note": "",
+      "status": "completed"
+    },
+    {
+      "id": "53b163b6-27e7-4c76-88de-445650f1e0cb",
+      "ts": "2026-05-31T21:03:14.974684+00:00",
+      "type": "gift",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 1,
+      "gift_id": "6bba5b27-48b4-46b2-a391-92f0abf2afea",
+      "note": "",
+      "status": "completed"
+    }
+  ],
   "total_supply": 1000000,
   "treasury_pool": 999964,
   "anchor_price_eur": 5.08,
@@ -23,7 +46,24 @@
     "token_price_at_mint": 5.08,
     "history": []
   },
-  "admin_log": [],
+  "admin_log": [
+    {
+      "ts": "2026-05-31T21:02:06.612939+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 5,
+      "gift_id": "c707aace-3b6e-4721-bb49-eb5a72be03b2"
+    },
+    {
+      "ts": "2026-05-31T21:03:14.974691+00:00",
+      "action": "gift_accepted",
+      "from_user_id": "user-001",
+      "to_user_id": "user-000",
+      "amount": 1,
+      "gift_id": "6bba5b27-48b4-46b2-a391-92f0abf2afea"
+    }
+  ],
   "_clean_slate_1juni": {
     "cleaned_at": "2026-05-29T18:42:48.193726+00:00",
     "previous_tx_count": 5,

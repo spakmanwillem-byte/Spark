@@ -1128,19 +1128,25 @@ function AvatarPickerPanel({ userId }) {
     try {
       await fetch(`${API}/api/avatar/select/${userId}`, {
         method: 'PUT', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ avatar: `gallery:${avatarId}` }),
+        body: JSON.stringify({ avatar_ref: `gallery:${avatarId}` }),
       });
       await loadAll();
-      window.dispatchEvent(new CustomEvent('avatar-changed'));
+      window.dispatchEvent(new CustomEvent('avatar-changed', { detail: { userId } }));
     } finally { setBusy(false); }
   };
 
   const activatePersonal = async (avatarId) => {
     setBusy(true);
     try {
+      // 1. Activeer personal avatar als 'mijn portret'
       await fetch(`${API}/api/avatar/user/${userId}/activate-personal/${avatarId}`, { method: 'POST' });
+      // 2. Stel hem in als huidige avatar (avatar_ref = "user")
+      await fetch(`${API}/api/avatar/select/${userId}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ avatar_ref: 'user' }),
+      });
       await loadAll();
-      window.dispatchEvent(new CustomEvent('avatar-changed'));
+      window.dispatchEvent(new CustomEvent('avatar-changed', { detail: { userId } }));
     } finally { setBusy(false); }
   };
 

@@ -1,0 +1,40 @@
+{
+  "milestone": "echte_start_v1",
+  "datum": "2026-05-31T21:08:24.041440+00:00",
+  "context": "Reset compleet, productie deploy aanstaand, telling start 00:00",
+  "bitvavo": {
+    "eur_vrij": 389.74,
+    "in_order": 0.0,
+    "dust_crypto_count": 14,
+    "dust_estimate_eur": 0.5
+  },
+  "tokens": {
+    "totaal_in_circulatie": 36,
+    "verdeling": {
+      "user-000": 16,
+      "user-001": 15,
+      "user-1996fa59": 1,
+      "user-4d9b59aa": 1,
+      "user-5dd295db": 1,
+      "user-a0ee2d7e": 2,
+      "user-c609d7d1": 0
+    }
+  },
+  "pots": {
+    "totaal": 36,
+    "anchors_locked": 6,
+    "non_anchor_trade": 30,
+    "admin_waarde": 360.0
+  },
+  "shadows": {
+    "totaal_idle": 90,
+    "active": 0,
+    "closed": 0,
+    "per_non_anchor_pot": 3
+  },
+  "boekhouding": {
+    "verschil_bitvavo_minus_admin": 29.74000000000001,
+    "uitleg": "Bitvavo heeft €29.74 surplus boven admin-waarde door eerdere kleine winsten/koersbeweging. Bij start: Spark koopt 6 anchors (~€60), restant €329.74 functioneert als trade-budget."
+  },
+  "next_action": "Spark monitor start → koopt 6 base anchors automatisch → vanaf dat moment is anchors=staking actief en non-anchor pots cyclen door BUY/SELL."
+}

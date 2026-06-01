@@ -741,6 +741,34 @@
       "created_at": "2026-06-01T11:23:04.355410+00:00",
       "tx_ref": "trade_result_sell_pot-019_1780312984.355065",
       "source": "auto_hook"
+    },
+    {
+      "id": "7c823c13-c913-479f-bd97-0e1d6c2236fc",
+      "type": "expense",
+      "category": "Materiaal",
+      "amount": 10.0,
+      "description": "Trade BUY ATOM-EUR: De Willem's bot inzet €10.00",
+      "entity_id": "spark_core",
+      "date": "2026-06-01T14:53:18.252434+00:00",
+      "btw_percentage": 0.0,
+      "btw_amount": 0,
+      "created_at": "2026-06-01T14:53:18.252434+00:00",
+      "tx_ref": "trade_buy_00000000-0000-0410-0100-000810100575",
+      "source": "auto_hook"
+    },
+    {
+      "id": "b0b9d064-f9b9-47ba-837d-689c00581d74",
+      "type": "expense",
+      "category": "Crypto Profit",
+      "amount": 0.05,
+      "description": "Trade VERLIES ATOM-EUR: De Willem sloot positie (€10.00 → €9.95)",
+      "entity_id": "spark_core",
+      "date": "2026-06-01T14:53:49.853026+00:00",
+      "btw_percentage": 0.0,
+      "btw_amount": 0,
+      "created_at": "2026-06-01T14:53:49.853026+00:00",
+      "tx_ref": "trade_result_sell_pot-002_1780325629.852675",
+      "source": "auto_hook"
     }
   ]
 }

@@ -51,19 +51,27 @@
 | user-4d9b59aa | ✅ | 1 potje |
 
 ### Bestanden gewijzigd in sessie 19
-- `/app/backend/modules/trade/monitor.py` — `_persist_registry()` merge + SHADOW_ENABLED check + shadow logging
-- `/app/backend/modules/trade/shadow_pots.py` — `is_shadow_enabled()` / `set_shadow_enabled()` flag + recycle-guard tegen active shadows
-- `/app/backend/modules/trade/shadow_routes.py` — flag endpoints + cleanup-corrupt endpoint
+- `/app/backend/modules/trade/monitor.py` — `_persist_registry()` MERGE + file-lock + SHADOW_ENABLED check (cleane if-block) + shadow logging
+- `/app/backend/modules/trade/shadow_pots.py` — `is_shadow_enabled()` / `set_shadow_enabled()` flag + recycle-guard tegen active shadows + public `cleanup_corrupt_active_shadows()`
+- `/app/backend/modules/trade/shadow_routes.py` — flag endpoints + cleanup-corrupt endpoint, **admin-guard (gradatie ≤ 2)** op alle mutaties
 - `/app/backend/data/trade/shadow_flag.json` — persistent flag (NEW, default enabled=false)
 - `/app/backend/tests/test_registry_persist_merge.py` — NEW, 3 pytests
 - `/app/backend/tests/test_shadow_trigger.py` — uitgebreid met recycle-blokkade test (13 tests totaal)
 - `/app/backend/data/trade/bots_registry_state.json` — hersteld vanuit backup, alle 5 bots actief
+- `/app/frontend/src/components/modules/TraderPage.js` — admin-only Shadow-cascade toggle + Cleanup-knop in shadow banner (UI)
+
+### Code-review fixes (post-review)
+Na een read-only code review zijn deze verbeteringen doorgevoerd:
+1. **Admin-guard op alle shadow-mutaties** (`POST /flag`, `POST /cleanup-corrupt`) — gradatie ≤ 2 vereist, anders 403. GET /flag blijft public-read.
+2. **File-lock op `_persist_registry()`** — gebruik `storage._get_lock(REGISTRY_STATE_FILE)` zodat parallelle stop/start calls niet elkaars writes overschrijven (race condition fix).
+3. **`raise StopIteration` anti-pattern vervangen** door schone `if _shadow.is_shadow_enabled(): ...` blok.
+4. **Private method exposure opgelost** — endpoint roept nu public `shadow_svc.cleanup_corrupt_active_shadows()` aan i.p.v. `_load()` / `_save()` direct.
+5. **Frontend stuurt `viewer_id`** bij cleanup en parseert backend 403-detail naar alert.
 
 ### 📌 Voor PRODUCTIE-DEPLOY: handmatige stappen vereist
-1. Deploy preview naar productie via Save → Deploy
-2. Na deploy: roep `POST /api/trade/shadow/cleanup-corrupt` aan in productie om corrupt shadows daar ook te markeren (preview-cleanup is alleen lokaal)
-3. SHADOW_ENABLED blijft UIT — bot gebruikt alleen origineel-potje BUY/SELL (veilig)
-4. Zodra je shadow-recycle volledig wilt valideren: tweede pass: handmatig `POST /api/trade/shadow/flag {"enabled": true}` met monitoring
+1. Deploy preview naar productie via "Save"
+2. Na deploy: open Trader-pagina als admin (Willem), klik op de **🧹 Cleanup corrupt** knop in de shadow-banner. Werkt nu via UI i.p.v. curl.
+3. Shadow-cascade staat default UIT. Open Trader → zie banner met "Shadow-cascade: UIT · veilige modus". Klik "UIT" om aan te zetten zodra je vertrouwt dat data clean is.
 
 ---
 

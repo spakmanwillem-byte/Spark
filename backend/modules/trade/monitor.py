@@ -1073,62 +1073,54 @@ class MonitorService:
                 # tot we recycle-bug + data-corruptie hebben opgeruimd.
                 try:
                     from modules.trade import shadow_pots as _shadow
-                    if not _shadow.is_shadow_enabled():
-                        # Skip shadow-cascade volledig — alleen origineel-potje BUY/SELL blijft draaien
-                        raise StopIteration  # short-circuit naar except
-                    stab = _shadow.is_stabilizing_after_drop(
-                        candles=context_candles,
-                        entry_price=entry,
-                        current_price=price,
-                    )
-                    if stab.get("stable"):
-                        # Eerst kijken of recycle nodig is (geen idle slots meer)
-                        cap = _shadow.shadow_capacity(pot["id"], self._user_id)
-                        if cap["idle"] == 0 and cap["have"] >= _shadow.MAX_SHADOWS_PER_POT:
-                            rec = _shadow.recycle_pot_as_shadow_zero(pot["id"], self._user_id, price)
-                            if rec.get("success"):
-                                actions_this_cycle.append(
-                                    f"SHADOW-RECYCLE {pot['id']} ({market}) cyclus {rec['archived_cycle']}→{rec['new_cycle']}"
+                    if _shadow.is_shadow_enabled():
+                        stab = _shadow.is_stabilizing_after_drop(
+                            candles=context_candles,
+                            entry_price=entry,
+                            current_price=price,
+                        )
+                        if stab.get("stable"):
+                            # Eerst kijken of recycle nodig is (geen idle slots meer)
+                            cap = _shadow.shadow_capacity(pot["id"], self._user_id)
+                            if cap["idle"] == 0 and cap["have"] >= _shadow.MAX_SHADOWS_PER_POT:
+                                rec = _shadow.recycle_pot_as_shadow_zero(pot["id"], self._user_id, price)
+                                if rec.get("success"):
+                                    actions_this_cycle.append(
+                                        f"SHADOW-RECYCLE {pot['id']} ({market}) cyclus {rec['archived_cycle']}→{rec['new_cycle']}"
+                                    )
+                            idle = _shadow.get_next_idle_shadow(pot["id"], self._user_id)
+                            if idle and self._auto_trade and not self._use_mock:
+                                shadow_capital = float(idle.get("capital", 10.0))
+                                # v6_shadow_balance_guard_001 — log expliciet welk bedrag
+                                # bovenop het origineel wordt ingezet (4× capital mogelijk).
+                                logger.info(
+                                    f"[shadow] {self._user_id} pot={pot['id']} slot={idle.get('slot')} "
+                                    f"BUY €{shadow_capital:.2f} (extra bovenop origineel — Bitvavo balance check volgt)"
                                 )
-                        idle = _shadow.get_next_idle_shadow(pot["id"], self._user_id)
-                        if idle and self._auto_trade and not self._use_mock:
-                            shadow_capital = float(idle.get("capital", 10.0))
-                            # v6_shadow_balance_guard_001 — Willem's zorg: shadows kopen
-                            # bovenop origineel met EXTRA Bitvavo EUR (4× potje-capital
-                            # mogelijk). execute_real_trade heeft al een EUR-balance check
-                            # die alles blokkeert als Bitvavo leeg is, maar we loggen hier
-                            # expliciet welk bedrag bovenop het origineel wordt ingezet
-                            # zodat de cascade-uitgave traceable is.
-                            logger.info(
-                                f"[shadow] {self._user_id} pot={pot['id']} slot={idle.get('slot')} "
-                                f"BUY €{shadow_capital:.2f} (extra bovenop origineel — Bitvavo balance check volgt)"
-                            )
-                            sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
-                            if sresult.get("success"):
-                                real_entry = sresult.get("trade", {}).get("price") or price
+                                sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
+                                if sresult.get("success"):
+                                    real_entry = sresult.get("trade", {}).get("price") or price
+                                    _shadow.activate_shadow(
+                                        pot["id"], real_entry, stab["drop_pct"],
+                                        trade_id=sresult.get("trade", {}).get("trade_id"),
+                                        owner_user_id=self._user_id,
+                                        trigger_reason=stab["reason"],
+                                    )
+                                    actions_this_cycle.append(
+                                        f"SHADOW-ACTIVATE {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
+                                        f"({market}) @ €{real_entry:.4f} (drop {stab['drop_pct']*100:.2f}%, range {stab['range_pct']*100:.2f}%)"
+                                    )
+                            elif idle and self._auto_trade and self._use_mock:
                                 _shadow.activate_shadow(
-                                    pot["id"], real_entry, stab["drop_pct"],
-                                    trade_id=sresult.get("trade", {}).get("trade_id"),
+                                    pot["id"], price, stab["drop_pct"],
+                                    trade_id="MOCK-SHADOW",
                                     owner_user_id=self._user_id,
                                     trigger_reason=stab["reason"],
                                 )
                                 actions_this_cycle.append(
-                                    f"SHADOW-ACTIVATE {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
-                                    f"({market}) @ €{real_entry:.4f} (drop {stab['drop_pct']*100:.2f}%, range {stab['range_pct']*100:.2f}%)"
+                                    f"SHADOW-MOCK {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
+                                    f"({market}) @ €{price:.4f}"
                                 )
-                        elif idle and self._auto_trade and self._use_mock:
-                            _shadow.activate_shadow(
-                                pot["id"], price, stab["drop_pct"],
-                                trade_id="MOCK-SHADOW",
-                                owner_user_id=self._user_id,
-                                trigger_reason=stab["reason"],
-                            )
-                            actions_this_cycle.append(
-                                f"SHADOW-MOCK {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
-                                f"({market}) @ €{price:.4f}"
-                            )
-                except StopIteration:
-                    pass  # v6_shadow_safety_001 — flag UIT, geen shadow-actie deze cyclus
                 except Exception as _ex:
                     logger.warning(f"shadow-activate failed for {pot['id']}: {_ex}")
 
@@ -1372,50 +1364,50 @@ def _persist_registry():
     - stopped bots herkenbaar blijven (running:false) → niet auto-restarted
 
     v6_resume_persist_merge_001 — MERGE met bestaand bestand i.p.v. overschrijven.
-    Reden: na backend restart is `_registry` leeg. Wanneer 1 bot daarna stopt/start,
-    werd het bestand overschreven met alleen die ene bot → andere running bots
-    verdwenen → bij volgende restart resumde er niks. Nu wordt elke bot uit
-    `_registry` ge-upsert in de bestaande lijst; bots die nog niet in-memory zijn
-    behouden hun laatst-bekende state.
+    Plus file-level lock zodat parallelle stop/start calls niet elkaars writes
+    overschrijven (read-modify-write race).
     """
+    from modules.core.storage import _get_lock
+    file_lock = _get_lock(str(REGISTRY_STATE_FILE))
     try:
         REGISTRY_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        # 1. Lees bestaand bestand (kan bots bevatten die nog niet in-memory zijn)
-        existing_by_uid: Dict[str, Dict] = {}
-        if REGISTRY_STATE_FILE.exists():
-            try:
-                with open(REGISTRY_STATE_FILE) as f:
-                    data = json.load(f)
-                for b in data.get("bots", []):
-                    uid = b.get("user_id")
-                    if uid:
-                        existing_by_uid[uid] = b
-            except Exception as e:
-                logger.warning(f"Registry read-before-merge failed: {e}")
+        with file_lock:
+            # 1. Lees bestaand bestand (kan bots bevatten die nog niet in-memory zijn)
+            existing_by_uid: Dict[str, Dict] = {}
+            if REGISTRY_STATE_FILE.exists():
+                try:
+                    with open(REGISTRY_STATE_FILE) as f:
+                        data = json.load(f)
+                    for b in data.get("bots", []):
+                        uid = b.get("user_id")
+                        if uid:
+                            existing_by_uid[uid] = b
+                except Exception as e:
+                    logger.warning(f"Registry read-before-merge failed: {e}")
 
-        # 2. Overschrijf/voeg toe met in-memory state
-        with _registry_lock:
-            for uid, m in _registry.items():
-                if uid == "user-001":
-                    continue  # legacy heeft eigen state file
-                existing_by_uid[uid] = {
-                    "user_id": uid,
-                    "running": bool(m._running),
-                    "interval": m._interval,
-                    "market": m._market,
-                    "markets": list(m._markets),
-                    "candle_interval": m._candle_interval,
-                    "auto_trade": m._auto_trade,
-                    "trade_amount": m._trade_amount,
-                    "use_mock": m._use_mock,
-                    "use_potjes": m._use_potjes,
-                    "pot_count": _read_pot_count(uid) if m._use_potjes else None,
-                }
+            # 2. Overschrijf/voeg toe met in-memory state
+            with _registry_lock:
+                for uid, m in _registry.items():
+                    if uid == "user-001":
+                        continue  # legacy heeft eigen state file
+                    existing_by_uid[uid] = {
+                        "user_id": uid,
+                        "running": bool(m._running),
+                        "interval": m._interval,
+                        "market": m._market,
+                        "markets": list(m._markets),
+                        "candle_interval": m._candle_interval,
+                        "auto_trade": m._auto_trade,
+                        "trade_amount": m._trade_amount,
+                        "use_mock": m._use_mock,
+                        "use_potjes": m._use_potjes,
+                        "pot_count": _read_pot_count(uid) if m._use_potjes else None,
+                    }
 
-        # 3. Schrijf merged lijst terug
-        bots = list(existing_by_uid.values())
-        with open(REGISTRY_STATE_FILE, "w") as f:
-            json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
+            # 3. Schrijf merged lijst terug
+            bots = list(existing_by_uid.values())
+            with open(REGISTRY_STATE_FILE, "w") as f:
+                json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
     except Exception as e:
         logger.warning(f"Registry persist failed: {e}")
 

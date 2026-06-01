@@ -403,3 +403,48 @@ def stats() -> dict:
         "total_profit_realized": round(total_profit, 4),
         "max_per_pot": MAX_SHADOWS_PER_POT,
     }
+
+
+def cleanup_corrupt_active_shadows() -> dict:
+    """v6_shadow_safety_001 — Markeer actieve shadows met data-corruptie als
+    `archived_corrupt`. Detectie:
+      - shadow.market != pot.market (mismatch)
+      - shadow.entry_price niet binnen 0.5×..2× van pot.position.entry_price
+    Idle slots worden NIET aangeraakt — eerst handmatig beoordelen via UI.
+    """
+    pots_data = load_json(POTJES_FILE, default={"users": {}})
+    pot_lookup = {}
+    for uid, u in pots_data.get("users", {}).items():
+        for p in u.get("potjes", []) or u.get("pots", []):
+            pot_lookup[(uid, p.get("id"))] = p
+
+    now = _now_iso()
+    data = _load()
+    flagged = []
+    for s in data.get("shadows", []):
+        if s.get("status") != "active":
+            continue
+        owner = s.get("original_owner_id")
+        pot_id = s.get("original_pot_id")
+        pot = pot_lookup.get((owner, pot_id))
+        if not pot:
+            continue
+        pot_market = pot.get("market")
+        pot_entry = (pot.get("position") or {}).get("entry_price") or 0
+        s_market = s.get("market")
+        s_entry = float(s.get("entry_price") or 0)
+        reasons = []
+        if pot_market and s_market and pot_market != s_market:
+            reasons.append(f"market_mismatch pot={pot_market} shadow={s_market}")
+        if pot_entry and s_entry:
+            ratio = s_entry / pot_entry
+            if ratio < 0.5 or ratio > 2.0:
+                reasons.append(f"entry_drift pot={pot_entry:.4f} shadow={s_entry:.4f} ratio={ratio:.2f}")
+        if reasons:
+            s["status"] = "archived_corrupt"
+            s["archived_at"] = now
+            s["corrupt_reasons"] = reasons
+            flagged.append({"shadow_id": s.get("shadow_id"), "pot_id": pot_id,
+                            "owner": owner, "reasons": reasons})
+    _save(data)
+    return {"success": True, "flagged_count": len(flagged), "flagged": flagged}

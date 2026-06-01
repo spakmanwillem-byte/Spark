@@ -1,7 +1,7 @@
 """
 Shadow-potjes API routes (v6_shadow_cascade_002)
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from pathlib import Path
@@ -13,6 +13,16 @@ router = APIRouter(prefix="/trade/shadow", tags=["trade-shadow"])
 
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 POTJES_FILE = DATA_ROOT / "financial" / "user_potjes.json"
+USERS_FILE = DATA_ROOT / "system" / "users.json"
+
+
+def _is_admin(user_id: Optional[str]) -> bool:
+    """v6_shadow_safety_001 — admin-guard helper, matcht patroon van dnd/world.py."""
+    if not user_id:
+        return False
+    users = load_json(USERS_FILE, default={"users": []}).get("users", [])
+    u = next((x for x in users if x.get("id") == user_id), None)
+    return bool(u and (u.get("gradatie", 99) <= 2))
 
 
 @router.get("/list/{user_id}")
@@ -122,7 +132,7 @@ async def simulate_stabilization(req: SimulateStabReq):
 # v6_shadow_safety_001 — admin endpoints voor master-flag + corrupt cleanup
 @router.get("/flag")
 async def get_shadow_flag():
-    """Lees huidige SHADOW_ENABLED state."""
+    """Lees huidige SHADOW_ENABLED state. Public-read (informatief)."""
     return {"enabled": shadow_svc.is_shadow_enabled()}
 
 
@@ -133,52 +143,27 @@ class ShadowFlagReq(BaseModel):
 
 @router.post("/flag")
 async def set_shadow_flag(req: ShadowFlagReq):
-    """Toggle de master-flag. Wanneer False slaat de bot alle shadow-BUYs over."""
+    """Toggle de master-flag. Wanneer False slaat de bot alle shadow-BUYs over.
+    Admin-only (gradatie ≤ 2)."""
+    if not _is_admin(req.by_user):
+        raise HTTPException(403, "Alleen admin (gradatie ≤ 2) kan de shadow-flag wijzigen")
     return shadow_svc.set_shadow_enabled(req.enabled, by_user=req.by_user or "admin")
 
 
+class CleanupReq(BaseModel):
+    viewer_id: Optional[str] = None
+
+
 @router.post("/cleanup-corrupt")
-async def cleanup_corrupt_shadows():
+async def cleanup_corrupt_shadows(req: Optional[CleanupReq] = None):
     """v6_shadow_safety_001 — markeer actieve shadows met market/entry-mismatch
     als `archived_corrupt`. Detectie:
       - shadow.market != pot.market (mismatch)
       - shadow.entry_price niet binnen 50% van pot.position.entry_price
     Vrij idle slot creëren NIET — eerst handmatig beoordelen.
+    Admin-only (gradatie ≤ 2).
     """
-    pots = load_json(POTJES_FILE, default={"users": {}})
-    pot_lookup = {}
-    for uid, u in pots.get("users", {}).items():
-        for p in u.get("potjes", []) or u.get("pots", []):
-            pot_lookup[(uid, p.get("id"))] = p
-
-    from datetime import datetime, timezone
-    now = datetime.now(timezone.utc).isoformat()
-    data = shadow_svc._load()
-    flagged = []
-    for s in data.get("shadows", []):
-        if s.get("status") != "active":
-            continue
-        owner = s.get("original_owner_id")
-        pot_id = s.get("original_pot_id")
-        pot = pot_lookup.get((owner, pot_id))
-        if not pot:
-            continue
-        pot_market = pot.get("market")
-        pot_entry = (pot.get("position") or {}).get("entry_price") or 0
-        s_market = s.get("market")
-        s_entry = float(s.get("entry_price") or 0)
-        reasons = []
-        if pot_market and s_market and pot_market != s_market:
-            reasons.append(f"market_mismatch pot={pot_market} shadow={s_market}")
-        if pot_entry and s_entry:
-            ratio = s_entry / pot_entry
-            if ratio < 0.5 or ratio > 2.0:
-                reasons.append(f"entry_drift pot={pot_entry:.4f} shadow={s_entry:.4f} ratio={ratio:.2f}")
-        if reasons:
-            s["status"] = "archived_corrupt"
-            s["archived_at"] = now
-            s["corrupt_reasons"] = reasons
-            flagged.append({"shadow_id": s.get("shadow_id"), "pot_id": pot_id,
-                            "owner": owner, "reasons": reasons})
-    shadow_svc._save(data)
-    return {"success": True, "flagged_count": len(flagged), "flagged": flagged}
+    viewer_id = req.viewer_id if req else None
+    if not _is_admin(viewer_id):
+        raise HTTPException(403, "Alleen admin (gradatie ≤ 2) kan corrupt shadows opruimen")
+    return shadow_svc.cleanup_corrupt_active_shadows()

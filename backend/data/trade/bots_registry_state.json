@@ -22,7 +22,7 @@
     },
     {
       "user_id": "user-1996fa59",
-      "running": false,
+      "running": true,
       "interval": 30,
       "market": "BCH-EUR",
       "markets": [
@@ -33,7 +33,7 @@
         "ADA-EUR",
         "ATOM-EUR"
       ],
-      "candle_interval": "15m",
+      "candle_interval": "1h",
       "auto_trade": true,
       "trade_amount": 10.0,
       "use_mock": false,
@@ -42,65 +42,64 @@
     },
     {
       "user_id": "user-5dd295db",
-      "running": false,
-      "interval": 60,
-      "market": "BCH",
+      "running": true,
+      "interval": 30,
+      "market": "BCH-EUR",
       "markets": [
-        "BCH",
-        "BTC",
-        "ETH",
-        "SOL",
-        "ADA",
-        "ATOM",
-        "BCH-EUR"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
       ],
-      "candle_interval": "15m",
+      "candle_interval": "1h",
       "auto_trade": true,
-      "trade_amount": 5.0,
+      "trade_amount": 10.0,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 1
     },
     {
       "user_id": "user-a0ee2d7e",
-      "running": false,
-      "interval": 60,
-      "market": "BCH",
+      "running": true,
+      "interval": 30,
+      "market": "BCH-EUR",
       "markets": [
-        "BCH",
-        "BTC",
-        "ETH",
-        "SOL",
-        "ADA",
-        "ATOM"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
       ],
       "candle_interval": "1h",
       "auto_trade": true,
-      "trade_amount": 5.0,
+      "trade_amount": 10.0,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 2
     },
     {
       "user_id": "user-4d9b59aa",
-      "running": false,
-      "interval": 60,
-      "market": "BCH",
+      "running": true,
+      "interval": 30,
+      "market": "BCH-EUR",
       "markets": [
-        "BCH",
-        "BTC",
-        "ETH",
-        "SOL",
-        "ADA",
-        "ATOM"
+        "BCH-EUR",
+        "BTC-EUR",
+        "ETH-EUR",
+        "SOL-EUR",
+        "ADA-EUR",
+        "ATOM-EUR"
       ],
       "candle_interval": "1h",
       "auto_trade": true,
-      "trade_amount": 5.0,
+      "trade_amount": 10.0,
       "use_mock": false,
       "use_potjes": true,
       "pot_count": 1
     }
   ],
-  "saved_at": "2026-06-01T10:41:32.617175+00:00"
+  "saved_at": "2026-06-01T11:19:33.692604+00:00"
 }

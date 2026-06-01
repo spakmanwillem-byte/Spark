@@ -201,8 +201,16 @@ export function TraderPage({ onNavigate }) {
   const cleanupCorruptShadows = async () => {
     if (!window.confirm("Corrupt actieve shadows opruimen? Shadows met market-mismatch of entry-drift worden gemarkeerd als archived_corrupt.")) return;
     try {
-      const r = await fetch(`${API}/api/trade/shadow/cleanup-corrupt`, { method: "POST" });
+      const r = await fetch(`${API}/api/trade/shadow/cleanup-corrupt`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ viewer_id: user?.id || "admin" }),
+      });
       const d = await r.json();
+      if (d.detail) {
+        alert(d.detail);
+        return;
+      }
       alert(`${d.flagged_count || 0} corrupt shadow(s) gearchiveerd.`);
       await loadShadowStatus();
     } catch (e) { /* ignore */ }

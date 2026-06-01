@@ -26663,11 +26663,47 @@
         "session_id": "default",
         "gesprek_nummer": 1015
       }
+    },
+    {
+      "id": "conv-c3d68ed1",
+      "timestamp": "2026-06-01T11:22:02.347933+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1016
+      }
+    },
+    {
+      "id": "conv-06c61655",
+      "timestamp": "2026-06-01T11:22:02.377743+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1017
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1015,
-    "last_updated": "2026-06-01T10:35:19.210034+00:00"
+    "total_conversations": 1017,
+    "last_updated": "2026-06-01T11:22:02.377743+00:00"
   }
 }

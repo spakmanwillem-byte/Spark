@@ -697,8 +697,8 @@ export function TraderPage({ onNavigate }) {
                             className={`rounded-xl p-2.5 border ${
                               locked ? 'bg-emerald-500/5 border-emerald-500/30' :
                               hasActive ? 'bg-purple-500/10 border-purple-500/40 ring-1 ring-purple-500/30' :
-                              open ? 'bg-amber-500/10 border-amber-500/30' :
-                              'bg-slate-800/30 border-slate-700'
+                              open ? 'bg-green-500/15 border-green-500/40' :
+                              'bg-blue-500/10 border-blue-500/30'
                             }`}>
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-[10px] font-bold text-white flex items-center gap-1">
@@ -724,9 +724,9 @@ export function TraderPage({ onNavigate }) {
                               </div>
                             ) : open ? (
                               <div>
-                                <p className="text-[9px] text-amber-400">IN POSITIE</p>
+                                <p className="text-[9px] text-green-400 font-bold">GEKOCHT</p>
                                 <p className="text-[9px] text-slate-400">@ €{p.position.entry_price?.toFixed(2)}</p>
-                                {p.position.trailing_active && <p className="text-[9px] text-green-400">🔒 trailing</p>}
+                                {p.position.trailing_active && <p className="text-[9px] text-emerald-300">🔒 trailing</p>}
                                 {activeShadows.map(as => (
                                   <p key={as.shadow_id} className="text-[9px] text-purple-300 font-semibold mt-0.5" title={as.trigger_reason || ''}>
                                     🌑 S{as.slot}/3 @ €{as.entry_price?.toFixed(2)}
@@ -734,7 +734,7 @@ export function TraderPage({ onNavigate }) {
                                 ))}
                               </div>
                             ) : (
-                              <p className="text-[9px] text-slate-500">Vrij</p>
+                              <p className="text-[9px] text-blue-400">Vrij</p>
                             )}
                             <div className="flex justify-between mt-1">
                               <span className="text-[9px] text-slate-500">{p.stats?.trades || 0} trades</span>

@@ -1779,10 +1779,11 @@ function StatPill({ label, value, color }) {
 }
 
 
-// v6_reconcile_001 — Toont per coin: potje vs echte Bitvavo, met diff
+// v6_reconcile_001 — Toont per coin: potje vs echte Bitvavo, met diff + sync-knop
 function ReconcileSparkPanel() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [syncing, setSyncing] = useState(null); // coin tijdens sync
   const API = process.env.REACT_APP_BACKEND_URL;
 
   const load = async () => {
@@ -1795,6 +1796,25 @@ function ReconcileSparkPanel() {
       setData({ success: false, error: String(e) });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const syncCoin = async (coin) => {
+    if (!window.confirm(`Sync ${coin} anchor-pot met echte Bitvavo-balance?\n\nDit zet de anchor-pot's position.size + entry_price gelijk aan wat NU op Bitvavo staat.`)) return;
+    setSyncing(coin);
+    try {
+      const r = await fetch(`${API}/api/trade/reconcile/spark/sync-anchor/${coin}`, { method: 'POST' });
+      const j = await r.json();
+      if (!r.ok || !j.success) {
+        window.alert(`Sync ${coin} mislukt: ${j.detail || j.error || 'onbekend'}`);
+      } else {
+        window.alert(`✅ ${coin} gesynced: ${j.synced.size.toFixed(6)} coin @ €${j.synced.entry_price.toFixed(4)} = €${j.synced.eur_value}`);
+        await load();
+      }
+    } catch (e) {
+      window.alert('Fout: ' + e.message);
+    } finally {
+      setSyncing(null);
     }
   };
 
@@ -1843,6 +1863,7 @@ function ReconcileSparkPanel() {
             <th className="text-right">€ waarde</th>
             <th className="text-right">Diff</th>
             <th className="text-left pl-2">Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -1852,6 +1873,7 @@ function ReconcileSparkPanel() {
               overschot: 'text-amber-400',
               tekort: 'text-red-400',
             }[r.status] || 'text-slate-400';
+            const canSync = r.n_locked > 0 && r.actual_coin_amount > 0;
             return (
               <tr key={r.coin} className="border-b border-slate-800/40" data-testid={`reconcile-row-${r.coin}`}>
                 <td className="py-1 font-mono text-slate-200">{r.coin}</td>
@@ -1865,15 +1887,24 @@ function ReconcileSparkPanel() {
                   {r.diff_coin > 0 ? '+' : ''}{r.diff_coin.toFixed(6)}
                 </td>
                 <td className={`pl-2 ${statusCls} uppercase tracking-wider text-[10px] font-bold`}>{r.status}</td>
+                <td className="text-right pl-2">
+                  {canSync && (
+                    <button data-testid={`reconcile-sync-${r.coin}`}
+                      onClick={() => syncCoin(r.coin)}
+                      disabled={syncing === r.coin}
+                      className="text-[10px] px-2 py-0.5 rounded bg-emerald-700 hover:bg-emerald-600 text-white disabled:opacity-40">
+                      {syncing === r.coin ? '...' : '🔄 Sync anchor'}
+                    </button>
+                  )}
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
       <p className="text-[9px] text-slate-500 italic mt-2 leading-snug">
-        💡 <strong>overschot</strong> = Bitvavo heeft meer coin dan potjes claimen (komt voor als potje-size niet bijgewerkt is na BUY) ·
-        <strong> tekort</strong> = potje denkt meer te hebben dan echt staat ·
-        <strong> exact</strong> = klopt. Fix-knop voor handmatige bijstelling komt zodra ik weet welke kolommen aanpasbaar moeten zijn.
+        💡 <strong>🔄 Sync anchor</strong> = neem de anchor-pot (🔒) voor deze coin en zet z'n position.size + entry_price gelijk aan wat NU op Bitvavo staat.
+        Gebruik dit na een handmatige aankoop op Bitvavo om het anchor-potje "te vullen". Audit bewaart elke wijziging.
       </p>
     </div>
   );

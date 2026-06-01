@@ -117,6 +117,68 @@ async def reconcile_spark():
     return {"success": True, "user_id": SPARK_USER, "rows": rows, "ts": _now()}
 
 
+@router.post("/spark/sync-anchor/{coin}")
+async def sync_anchor_to_bitvavo(coin: str):
+    """
+    Eén-klik-sync: pak de anchor-pot (pot_locked=True) voor deze coin en zet diens
+    position.size + entry_price gelijk aan de echte Bitvavo-balance.
+    Capital → 0 (geld zit in coin, niet meer cash).
+    Audit-log per sync.
+    """
+    coin = coin.upper()
+    pot_data = load_json(POTJES_FILE, default={"users": {}})
+    spark = pot_data.get("users", {}).get(SPARK_USER)
+    if not spark:
+        raise HTTPException(404, "Spark gebruiker niet gevonden")
+
+    # Vind anchor-pot voor deze coin (locked + matchende market)
+    target = None
+    for p in spark.get("potjes", []):
+        market_coin = (p.get("market") or "").split("-")[0].upper()
+        if market_coin == coin and p.get("pot_locked"):
+            target = p
+            break
+    if not target:
+        raise HTTPException(404, f"Geen anchor-pot (locked) gevonden voor {coin}")
+
+    # Haal echte Bitvavo
+    bv_result = fetch_bitvavo_balance(SPARK_USER)
+    if not bv_result.get("success"):
+        raise HTTPException(502, f"Bitvavo: {bv_result.get('error')}")
+    bv_balances = {b.get("symbol", "").upper(): b for b in bv_result.get("balances", bv_result.get("data", []))}
+    bv = bv_balances.get(coin) or {}
+    actual_amount = float(bv.get("available", 0) or 0) + float(bv.get("in_order", 0) or 0)
+    bv_price = float(bv.get("price", 0) or 0)
+    if actual_amount <= 0:
+        raise HTTPException(400, f"Bitvavo balance voor {coin} is 0 — niets te syncen")
+
+    before = {"capital": target.get("capital"), "position": dict(target.get("position") or {})}
+    target["capital"] = 0.0
+    target["position"] = {
+        "is_open": True,
+        "entry_price": bv_price,
+        "size": actual_amount,
+        "highest_price": bv_price,
+        "trailing_active": False,
+    }
+    audit = target.setdefault("reconcile_audit", [])
+    audit.append({
+        "ts": _now(),
+        "action": "sync-anchor",
+        "before": before,
+        "after": {"capital": 0.0, "position": dict(target["position"])},
+        "bv_price": bv_price,
+        "actual_amount": actual_amount,
+    })
+    save_json(POTJES_FILE, pot_data)
+    return {
+        "success": True,
+        "coin": coin,
+        "pot_id": target.get("id"),
+        "synced": {"size": actual_amount, "entry_price": bv_price, "eur_value": round(actual_amount * bv_price, 2)},
+    }
+
+
 class FixPotReq(BaseModel):
     pot_id: str
     new_capital: Optional[float] = None

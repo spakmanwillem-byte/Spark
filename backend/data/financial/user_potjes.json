@@ -10,21 +10,22 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 0.20370396742387403,
+            "highest_price": 0.20370396742387403,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-06-01T00:53:40.340506+00:00",
+            "amount_eur": 10.0
           },
-          "market": "BCH-EUR",
+          "market": "ADA-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-29T19:09:40.956066+00:00",
-          "last_action": null,
+          "last_action": "BUY @ €0.20",
           "trade_log": [
             {
               "ts": "2026-05-30T02:28:05.899545+00:00",
@@ -33,6 +34,14 @@
               "amount_eur": 9.9423,
               "trade_id": "00000000-0000-041f-0100-0007ffe8f7ee",
               "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:53:40.340506+00:00",
+              "side": "BUY",
+              "price": 0.20370396742387403,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080b3488cc",
+              "market": "ADA-EUR"
             }
           ],
           "live_value": 10.0
@@ -45,15 +54,16 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 1.6956001472127873,
+            "highest_price": 1.6956001472127873,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-06-01T00:54:42.194255+00:00",
+            "amount_eur": 10.0
           },
-          "market": "BTC-EUR",
+          "market": "ATOM-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -67,9 +77,17 @@
               "amount_eur": 10.0,
               "trade_id": "00000000-0000-0431-0100-0007fff184fe",
               "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:54:42.194255+00:00",
+              "side": "BUY",
+              "price": 1.6956001472127873,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0410-0100-00080b362d1f",
+              "market": "ATOM-EUR"
             }
           ],
-          "last_action": null,
+          "last_action": "BUY @ €1.70",
           "live_value": 10.0
         },
         {
@@ -80,15 +98,16 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 0.20305086676753226,
+            "highest_price": 0.20305086676753226,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-06-01T00:58:47.636213+00:00",
+            "amount_eur": 10.0
           },
-          "market": "BTC-EUR",
+          "market": "ADA-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
@@ -102,9 +121,17 @@
               "amount_eur": 10.0,
               "trade_id": "00000000-0000-0431-0100-0007fff3dcd3",
               "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:58:47.636213+00:00",
+              "side": "BUY",
+              "price": 0.20305086676753226,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080b3b51fc",
+              "market": "ADA-EUR"
             }
           ],
-          "last_action": null,
+          "last_action": "BUY @ €0.20",
           "live_value": 10.0
         },
         {
@@ -530,7 +557,7 @@
       ],
       "baseline_eur": 0,
       "overflow_pool": 0.0,
-      "last_buy_cycle": 450,
+      "last_buy_cycle": 65,
       "user_id": "user-001",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00"
@@ -738,8 +765,8 @@
           "position": {
             "is_open": true,
             "entry_price": 70.51600101424219,
-            "highest_price": 71.036,
-            "trailing_active": false,
+            "highest_price": 71.229,
+            "trailing_active": true,
             "entry_time": "2026-05-31T22:21:45.808531+00:00",
             "amount_eur": 10.0
           },
@@ -782,7 +809,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.53700451203356,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:21:55.145117+00:00",
             "amount_eur": 10.0
@@ -826,7 +853,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.83399318359582,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:27:20.893342+00:00",
             "amount_eur": 10.0
@@ -870,7 +897,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.78000488289744,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:15:21.950285+00:00",
             "amount_eur": 10.0
@@ -914,7 +941,7 @@
           "position": {
             "is_open": true,
             "entry_price": 0.20186000326458445,
-            "highest_price": 0.20292,
+            "highest_price": 0.20353,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:17:02.829776+00:00",
             "amount_eur": 10.0
@@ -951,7 +978,7 @@
           "position": {
             "is_open": true,
             "entry_price": 0.20192000200907365,
-            "highest_price": 0.20292,
+            "highest_price": 0.20353,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:27:52.808916+00:00",
             "amount_eur": 10.0
@@ -988,7 +1015,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.7047719764012,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:32:36.097341+00:00",
             "amount_eur": 10.0
@@ -1025,7 +1052,7 @@
           "position": {
             "is_open": true,
             "entry_price": 0.20211802662906017,
-            "highest_price": 0.20292,
+            "highest_price": 0.20353,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:33:08.321496+00:00",
             "amount_eur": 10.0
@@ -1062,7 +1089,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.84205625001377,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:36:36.449763+00:00",
             "amount_eur": 10.0
@@ -1099,7 +1126,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.73000243972396,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:16:30.934095+00:00",
             "amount_eur": 10.0
@@ -1136,7 +1163,7 @@
           "position": {
             "is_open": true,
             "entry_price": 0.20171292919989484,
-            "highest_price": 0.20292,
+            "highest_price": 0.20353,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:22:37.323832+00:00",
             "amount_eur": 10.0
@@ -1173,7 +1200,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.73200459325267,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:37:15.503079+00:00",
             "amount_eur": 10.0
@@ -1210,7 +1237,7 @@
           "position": {
             "is_open": true,
             "entry_price": 70.71800193059437,
-            "highest_price": 71.036,
+            "highest_price": 71.229,
             "trailing_active": false,
             "entry_time": "2026-05-31T22:37:21.030077+00:00",
             "amount_eur": 10.0

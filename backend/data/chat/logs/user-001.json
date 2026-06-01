@@ -25924,11 +25924,241 @@
         "session_id": "default",
         "gesprek_nummer": 988
       }
+    },
+    {
+      "id": "conv-75831f7b",
+      "timestamp": "2026-06-01T00:22:05.868143+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Zo even een redeploy",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'vrees' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 989
+      }
+    },
+    {
+      "id": "conv-22dbef0d",
+      "timestamp": "2026-06-01T00:22:28.008471+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vrees niks",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bang",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vrees"
+          ],
+          "source": "static",
+          "emoji": "😰",
+          "color": "purple",
+          "empathic_response": "Wil je erover praten?"
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 990
+      }
+    },
+    {
+      "id": "conv-e5ef2f83",
+      "timestamp": "2026-06-01T00:22:39.740390+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nu",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 991
+      }
+    },
+    {
+      "id": "conv-777da7e8",
+      "timestamp": "2026-06-01T00:22:46.473536+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 992
+      }
+    },
+    {
+      "id": "conv-c141b7b5",
+      "timestamp": "2026-06-01T00:22:56.013935+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mss later",
+      "spark_response": "Tot ziens De Willem! Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "mss",
+            "later"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "goodbye",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "goodbye"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 993
+      }
+    },
+    {
+      "id": "conv-71e42793",
+      "timestamp": "2026-06-01T00:23:06.875390+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "oke",
+      "spark_response": "**oke**: De gebruiker geeft een korte bevestiging.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oke"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 994
+      }
+    },
+    {
+      "id": "conv-05f5545b",
+      "timestamp": "2026-06-01T00:23:33.853885+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dieper",
+      "spark_response": "**dieper**: Dieper betekent verder naar binnen, lager of meer uitgebreid dan eerst.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dieper"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dieper"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 995
+      }
+    },
+    {
+      "id": "conv-f77479d7",
+      "timestamp": "2026-06-01T00:23:50.694412+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "gieper",
+      "spark_response": "Ik ken deze woorden nog niet: **gieper**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'gieper' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "gieper"
+        ],
+        "snap_suggestions": [
+          "gieper"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 996
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 988,
-    "last_updated": "2026-05-31T23:48:21.844830+00:00"
+    "total_conversations": 996,
+    "last_updated": "2026-06-01T00:23:50.694412+00:00"
   }
 }

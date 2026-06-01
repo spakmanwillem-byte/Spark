@@ -1349,7 +1349,11 @@ def resume_registered_users():
 
 
 def _persist_registry():
-    """Sla alle running registry-bots op zodat ze na restart auto-resumen."""
+    """Sla alle registry-bots op (running EN stopped) zodat:
+    - running bots auto-resumen bij restart
+    - stopped bots herkenbaar blijven (running:false) → niet auto-restarted
+    v6_resume_respect_stop_001 — voorheen werd alleen running opgeslagen.
+    """
     try:
         REGISTRY_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
         bots = []
@@ -1357,19 +1361,19 @@ def _persist_registry():
             for uid, m in _registry.items():
                 if uid == "user-001":
                     continue  # legacy heeft eigen state file
-                if m._running:
-                    bots.append({
-                        "user_id": uid,
-                        "interval": m._interval,
-                        "market": m._market,
-                        "markets": list(m._markets),
-                        "candle_interval": m._candle_interval,
-                        "auto_trade": m._auto_trade,
-                        "trade_amount": m._trade_amount,
-                        "use_mock": m._use_mock,
-                        "use_potjes": m._use_potjes,
-                        "pot_count": _read_pot_count(uid) if m._use_potjes else None,
-                    })
+                bots.append({
+                    "user_id": uid,
+                    "running": bool(m._running),
+                    "interval": m._interval,
+                    "market": m._market,
+                    "markets": list(m._markets),
+                    "candle_interval": m._candle_interval,
+                    "auto_trade": m._auto_trade,
+                    "trade_amount": m._trade_amount,
+                    "use_mock": m._use_mock,
+                    "use_potjes": m._use_potjes,
+                    "pot_count": _read_pot_count(uid) if m._use_potjes else None,
+                })
         with open(REGISTRY_STATE_FILE, "w") as f:
             json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
     except Exception as e:
@@ -1377,16 +1381,28 @@ def _persist_registry():
 
 
 def resume_registry_bots():
-    """Bij backend startup: hervat alle eerder-running registry-bots."""
+    """Bij backend startup: hervat alle eerder-running registry-bots.
+
+    v6_resume_respect_stop_001 — Respecteer expliciet als user de bot gestopt heeft:
+    de stop() flow verwijdert de bot uit `bots` (via _persist_registry die alleen
+    running bots opslaat). Als een bot toch in de file staat met `running: false`,
+    skippen we 'm ook. Anders zou een eerdere bug die `running:false` schrijft een
+    eindeloze auto-restart loop veroorzaken.
+    """
     if not REGISTRY_STATE_FILE.exists():
         return {"resumed": 0, "reason": "no state"}
     try:
         with open(REGISTRY_STATE_FILE) as f:
             data = json.load(f)
         resumed = 0
+        skipped = []
         for b in data.get("bots", []):
             uid = b.get("user_id")
             if not uid:
+                continue
+            # NIEUW: respect "running: false" als expliciet aanwezig
+            if b.get("running") is False:
+                skipped.append(uid)
                 continue
             m = get_user_monitor(uid)
             m.start(
@@ -1396,7 +1412,8 @@ def resume_registry_bots():
                 use_mock=b["use_mock"], use_potjes=b["use_potjes"],
             )
             resumed += 1
-        return {"resumed": resumed}
+        logger.info(f"Registry resume: {resumed} resumed, {len(skipped)} skipped (user-stopped): {skipped}")
+        return {"resumed": resumed, "skipped_user_stopped": skipped}
     except Exception as e:
         logger.error(f"Registry resume failed: {e}")
         return {"resumed": 0, "error": str(e)}

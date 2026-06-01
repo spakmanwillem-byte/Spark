@@ -1504,7 +1504,7 @@ function TradeAnalyticsTab() {
                                     <tr key={p.id} className="border-b border-slate-800/40">
                                       <td className="py-1.5 pr-2 font-mono text-slate-400">{p.nummer || p.index || '?'}</td>
                                       <td className="py-1.5 pr-2">
-                                        {isOpenPos ? <span className="text-emerald-400">● open</span> : <span className="text-slate-500">○ vrij</span>}
+                                        {isOpenPos ? <span className="text-green-400">● gekocht</span> : <span className="text-blue-400">○ vrij</span>}
                                       </td>
                                       <td className="py-1.5 pr-2 text-slate-300">{p.market || '—'}</td>
                                       <td className="py-1.5 pr-2 text-right text-slate-300">€{(p.capital ?? 0).toFixed(2)}</td>

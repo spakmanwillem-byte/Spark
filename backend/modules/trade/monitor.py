@@ -1087,6 +1087,16 @@ class MonitorService:
                         idle = _shadow.get_next_idle_shadow(pot["id"], self._user_id)
                         if idle and self._auto_trade and not self._use_mock:
                             shadow_capital = float(idle.get("capital", 10.0))
+                            # v6_shadow_balance_guard_001 — Willem's zorg: shadows kopen
+                            # bovenop origineel met EXTRA Bitvavo EUR (4× potje-capital
+                            # mogelijk). execute_real_trade heeft al een EUR-balance check
+                            # die alles blokkeert als Bitvavo leeg is, maar we loggen hier
+                            # expliciet welk bedrag bovenop het origineel wordt ingezet
+                            # zodat de cascade-uitgave traceable is.
+                            logger.info(
+                                f"[shadow] {self._user_id} pot={pot['id']} slot={idle.get('slot')} "
+                                f"BUY €{shadow_capital:.2f} (extra bovenop origineel — Bitvavo balance check volgt)"
+                            )
                             sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
                             if sresult.get("success"):
                                 real_entry = sresult.get("trade", {}).get("price") or price
@@ -1352,16 +1362,35 @@ def _persist_registry():
     """Sla alle registry-bots op (running EN stopped) zodat:
     - running bots auto-resumen bij restart
     - stopped bots herkenbaar blijven (running:false) → niet auto-restarted
-    v6_resume_respect_stop_001 — voorheen werd alleen running opgeslagen.
+
+    v6_resume_persist_merge_001 — MERGE met bestaand bestand i.p.v. overschrijven.
+    Reden: na backend restart is `_registry` leeg. Wanneer 1 bot daarna stopt/start,
+    werd het bestand overschreven met alleen die ene bot → andere running bots
+    verdwenen → bij volgende restart resumde er niks. Nu wordt elke bot uit
+    `_registry` ge-upsert in de bestaande lijst; bots die nog niet in-memory zijn
+    behouden hun laatst-bekende state.
     """
     try:
         REGISTRY_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        bots = []
+        # 1. Lees bestaand bestand (kan bots bevatten die nog niet in-memory zijn)
+        existing_by_uid: Dict[str, Dict] = {}
+        if REGISTRY_STATE_FILE.exists():
+            try:
+                with open(REGISTRY_STATE_FILE) as f:
+                    data = json.load(f)
+                for b in data.get("bots", []):
+                    uid = b.get("user_id")
+                    if uid:
+                        existing_by_uid[uid] = b
+            except Exception as e:
+                logger.warning(f"Registry read-before-merge failed: {e}")
+
+        # 2. Overschrijf/voeg toe met in-memory state
         with _registry_lock:
             for uid, m in _registry.items():
                 if uid == "user-001":
                     continue  # legacy heeft eigen state file
-                bots.append({
+                existing_by_uid[uid] = {
                     "user_id": uid,
                     "running": bool(m._running),
                     "interval": m._interval,
@@ -1373,7 +1402,10 @@ def _persist_registry():
                     "use_mock": m._use_mock,
                     "use_potjes": m._use_potjes,
                     "pot_count": _read_pot_count(uid) if m._use_potjes else None,
-                })
+                }
+
+        # 3. Schrijf merged lijst terug
+        bots = list(existing_by_uid.values())
         with open(REGISTRY_STATE_FILE, "w") as f:
             json.dump({"bots": bots, "saved_at": datetime.now(timezone.utc).isoformat()}, f, indent=2)
     except Exception as e:

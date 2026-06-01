@@ -1,5 +1,47 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-01 — sessie 19, fork — Trade bot auto-resume MERGE-fix + shadow balance log)
+
+### 🐛 v6_resume_persist_merge_001 — Auto-resume bug definitief gefixt
+**Probleem**: Trade bots resumden niet na backend restart, ook al was in eerdere sessie geprobeerd het `running:false`-state te respecteren. Stopped bots bleven stopped (goed), maar running bots auto-resumden niet (regressie).
+
+**Root cause**: `_persist_registry()` schreef ALLE bots uit `_registry` (in-memory). Na backend restart is `_registry` LEEG. Zodra je daarna 1 bot stopte via UI, werd `_persist_registry()` opgeroepen met alleen die ene bot in geheugen → bestand overschreven met enkel die bot → andere 4 running bots verdwenen uit het bestand → volgende restart resumde er niks.
+
+**Fix**: `_persist_registry()` MERGEt nu met het bestaande bestand:
+1. Lees bestaand `bots_registry_state.json` (kan bots bevatten die nog niet in-memory zijn)
+2. Per bot in `_registry`: upsert in de merged lijst
+3. Schrijf merged lijst terug — bots die nog niet aangeraakt zijn behouden hun laatst-bekende state
+
+**Test**: `/app/backend/tests/test_registry_persist_merge.py` — 3 testcases, allen PASS:
+- `test_persist_merges_with_existing_file` — bots in bestand blijven na partial persist
+- `test_resume_skips_stopped_bots` — `running:false` wordt geskipt
+- `test_resume_starts_running_bots` — `running:true` wordt herstart
+
+**End-to-end verified**:
+- Restored `bots_registry_state.json` vanuit `bots_registry_state.backup_20260601_081126.json` (5 bots).
+- Stop user-1996fa59 via API → bestand toont 4 running + 1 stopped (was: 1 stopped, 4 weg).
+- Backend restart → "4 registry-bot(s) auto-resumed" log + skip user-1996fa59 (correct).
+- Daarna user-1996fa59 weer gestart via API → status `running=True`.
+
+### 🔍 v6_shadow_balance_guard_001 — Shadow-BUY traceability
+**Context**: Willem merkte "als ik meer balance als potjes hij dan dat balance toch pakt". Onderzocht: shadow-pots-systeem activeert tot 3 extra BUYs per origineel potje op bodem-detectie → kan 4× user's potje-capital aan Bitvavo EUR consumeren (€10 origineel + 3 × €10 shadows = €40 per pot). Dit is by-design (DCA strategie) maar was niet expliciet zichtbaar.
+
+**Toegevoegd**: explicit `logger.info()` in `monitor.py` regel ~1089 vóór shadow-BUY-execute:
+```
+[shadow] {user} pot={id} slot={n} BUY €{X} (extra bovenop origineel — Bitvavo balance check volgt)
+```
+Plus inline comment dat verwijst naar bestaande `execute_real_trade()` balance-check (regel 286) die alles blokkeert als Bitvavo leeg is.
+
+**Open vraag voor Willem**: wil je dat ik shadow-activations HARD CAP op user's totale niet-locked potjes-capital (= geen extra spending bovenop claim)? Dat zou effectief shadows uitschakelen, maar geeft 1-op-1 mapping tussen tokens en max-exposure.
+
+### Bestanden gewijzigd in sessie 19
+- `/app/backend/modules/trade/monitor.py` — `_persist_registry()` merge-logica + shadow logging
+- `/app/backend/tests/test_registry_persist_merge.py` — NEW, 3 unit tests
+- `/app/backend/data/trade/bots_registry_state.json` — hersteld vanuit backup, alle 5 bots actief
+
+---
+
+
 ## Completed (2026-05-31 — sessie 18I, fork — Map fix: dorp/stad avatars per provincie, groei-logica)
 
 ### 🗺️ Wereld-map gebruikt nu dorp/stad-avatars (niet bewoner-avatars)

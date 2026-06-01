@@ -1417,6 +1417,9 @@ function TradeAnalyticsTab() {
             {loading ? '...' : 'Vernieuwen'}
           </button>
         </div>
+
+        {/* v6_reconcile_001 — Reconciliatie-panel: Spark potjes vs echte Bitvavo balance */}
+        <ReconcileSparkPanel />
         {bots.length === 0 ? (
           <p className="text-sm text-slate-500 italic">Geen bots gestart.</p>
         ) : (
@@ -1774,3 +1777,105 @@ function StatPill({ label, value, color }) {
     </div>
   );
 }
+
+
+// v6_reconcile_001 — Toont per coin: potje vs echte Bitvavo, met diff
+function ReconcileSparkPanel() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const r = await fetch(`${API}/api/trade/reconcile/spark`);
+      const j = await r.json();
+      setData(j);
+    } catch (e) {
+      setData({ success: false, error: String(e) });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!data) {
+    return (
+      <div className="mb-4 p-3 bg-slate-800/30 rounded-lg border border-slate-700/30">
+        <div className="flex items-center justify-between">
+          <p className="text-xs text-slate-400">
+            💰 <strong className="text-slate-200">Reconciliatie</strong> — vergelijk Spark's potjes met echte Bitvavo-balance
+          </p>
+          <button data-testid="reconcile-load" onClick={load} disabled={loading}
+            className="text-xs px-3 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50">
+            {loading ? '...' : 'Check Bitvavo'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data.success) {
+    return (
+      <div className="mb-4 p-3 bg-red-900/20 rounded-lg border border-red-800/40">
+        <p className="text-xs text-red-300">⚠ {data.error || data.detail || 'Onbekende fout'}</p>
+        <button onClick={load} className="text-xs underline text-blue-300 mt-1">Opnieuw</button>
+      </div>
+    );
+  }
+
+  const rows = data.rows || [];
+  return (
+    <div className="mb-4 p-3 bg-slate-800/30 rounded-lg border border-slate-700/40" data-testid="reconcile-table">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs text-slate-300 font-semibold">💰 Spark · Potje ↔ Bitvavo</p>
+        <button onClick={load} disabled={loading}
+          className="text-[10px] text-slate-400 hover:text-white">{loading ? '...' : '↻ refresh'}</button>
+      </div>
+      <table className="w-full text-[11px]">
+        <thead>
+          <tr className="text-slate-500 border-b border-slate-700">
+            <th className="text-left py-1">Coin</th>
+            <th className="text-right">#pot</th>
+            <th className="text-right">open</th>
+            <th className="text-right">🔒</th>
+            <th className="text-right">Expected coin</th>
+            <th className="text-right">Bitvavo coin</th>
+            <th className="text-right">€ waarde</th>
+            <th className="text-right">Diff</th>
+            <th className="text-left pl-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(r => {
+            const statusCls = {
+              exact: 'text-green-400',
+              overschot: 'text-amber-400',
+              tekort: 'text-red-400',
+            }[r.status] || 'text-slate-400';
+            return (
+              <tr key={r.coin} className="border-b border-slate-800/40" data-testid={`reconcile-row-${r.coin}`}>
+                <td className="py-1 font-mono text-slate-200">{r.coin}</td>
+                <td className="text-right text-slate-400">{r.n_pots}</td>
+                <td className="text-right text-green-300">{r.n_open}</td>
+                <td className="text-right text-blue-300">{r.n_locked}</td>
+                <td className="text-right font-mono text-slate-400">{r.expected_coin_amount.toFixed(6)}</td>
+                <td className="text-right font-mono text-slate-200">{r.actual_coin_amount.toFixed(6)}</td>
+                <td className="text-right font-mono text-yellow-300">€{r.actual_eur_value.toFixed(2)}</td>
+                <td className={`text-right font-mono ${r.diff_coin > 0 ? 'text-amber-300' : r.diff_coin < 0 ? 'text-red-300' : 'text-slate-500'}`}>
+                  {r.diff_coin > 0 ? '+' : ''}{r.diff_coin.toFixed(6)}
+                </td>
+                <td className={`pl-2 ${statusCls} uppercase tracking-wider text-[10px] font-bold`}>{r.status}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p className="text-[9px] text-slate-500 italic mt-2 leading-snug">
+        💡 <strong>overschot</strong> = Bitvavo heeft meer coin dan potjes claimen (komt voor als potje-size niet bijgewerkt is na BUY) ·
+        <strong> tekort</strong> = potje denkt meer te hebben dan echt staat ·
+        <strong> exact</strong> = klopt. Fix-knop voor handmatige bijstelling komt zodra ik weet welke kolommen aanpasbaar moeten zijn.
+      </p>
+    </div>
+  );
+}
+

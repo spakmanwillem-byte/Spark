@@ -267,6 +267,10 @@ app.include_router(dnd_bewoner_router, prefix="/api")
 from modules.dnd.dice import router as dnd_dice_router
 app.include_router(dnd_dice_router, prefix="/api")
 
+# v6_reconcile_001 — Reconciliation: potje-saldo vs Bitvavo (alleen Spark)
+from modules.trade.reconcile import router as trade_reconcile_router
+app.include_router(trade_reconcile_router, prefix="/api")
+
 # Module 20: Backup (export/import van alle Spark data)
 from modules.backup import backup_router
 app.include_router(backup_router, prefix="/api")

@@ -180,6 +180,34 @@ export function TraderPage({ onNavigate }) {
     return fetch(`${API}/api/trade/shadow/status/${userId}`).then(r => r.json()).then(d => setShadowStatus(d)).catch(() => {});
   }, [userId]);
 
+  // v6_shadow_safety_001 — Master-flag (default UIT) + cleanup
+  const [shadowFlag, setShadowFlag] = useState(null);
+  const loadShadowFlag = useCallback(() => {
+    return fetch(`${API}/api/trade/shadow/flag`).then(r => r.json()).then(d => setShadowFlag(d?.enabled ?? false)).catch(() => {});
+  }, []);
+  const toggleShadowFlag = async () => {
+    const next = !shadowFlag;
+    if (next && !window.confirm("Shadow-cascade weer AANzetten? Bot gaat dan tot 3 extra BUYs per origineel doen op bodemdetectie (4× capital). Alleen aanzetten als je vertrouwt dat alle shadows clean zijn.")) return;
+    try {
+      const r = await fetch(`${API}/api/trade/shadow/flag`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ enabled: next, by_user: user?.id || "admin" }),
+      });
+      const d = await r.json();
+      setShadowFlag(d?.enabled ?? next);
+    } catch (e) { /* ignore */ }
+  };
+  const cleanupCorruptShadows = async () => {
+    if (!window.confirm("Corrupt actieve shadows opruimen? Shadows met market-mismatch of entry-drift worden gemarkeerd als archived_corrupt.")) return;
+    try {
+      const r = await fetch(`${API}/api/trade/shadow/cleanup-corrupt`, { method: "POST" });
+      const d = await r.json();
+      alert(`${d.flagged_count || 0} corrupt shadow(s) gearchiveerd.`);
+      await loadShadowStatus();
+    } catch (e) { /* ignore */ }
+  };
+
   const loadContext = useCallback(() => {
     return fetch(`${API}/api/trade/context/${candleMarket}`).then(r => r.json()).then(d => setMarketContext(d)).catch(() => {});
   }, [candleMarket]);
@@ -202,10 +230,11 @@ export function TraderPage({ onNavigate }) {
       if (cancelled) return; await loadBalance();
       if (cancelled) return; await loadPotjes();
       if (cancelled) return; await loadShadowStatus();
+      if (cancelled) return; await loadShadowFlag();
       if (cancelled) return; await loadContext();
     })();
     return () => { cancelled = true; };
-  }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadShadowStatus, loadContext]);
+  }, [loadCoreData, loadLiveData, loadMonitorStatus, loadBalance, loadPotjes, loadShadowStatus, loadShadowFlag, loadContext]);
 
   // Auto-refresh live data every 30s, monitor every 10s when running
   useEffect(() => {
@@ -642,6 +671,36 @@ export function TraderPage({ onNavigate }) {
                         </div>
                         <button onClick={loadShadowStatus} className="text-slate-500 hover:text-purple-300" title="Ververs shadow status">
                           <RefreshCw className="w-3 h-3" />
+                        </button>
+                      </div>
+                    )}
+                    {/* v6_shadow_safety_001 — Admin-only flag toggle + cleanup */}
+                    {isAdmin && (
+                      <div
+                        className="px-4 py-1.5 border-b border-slate-800 bg-slate-900/40 flex items-center justify-between text-[10px]"
+                        data-testid="shadow-safety-controls"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-500">Shadow-cascade:</span>
+                          <button
+                            onClick={toggleShadowFlag}
+                            data-testid="shadow-flag-toggle"
+                            className={`px-2 py-0.5 rounded font-semibold ${shadowFlag ? "bg-purple-500/30 text-purple-200 border border-purple-500/60" : "bg-slate-800 text-slate-400 border border-slate-700 hover:border-amber-500/60"}`}
+                            title={shadowFlag ? "AAN — klik om uit te zetten (veilige modus = alleen origineel-potje)" : "UIT — bot doet geen shadow-BUYs. Klik om aan te zetten."}
+                          >
+                            {shadowFlag === null ? "..." : shadowFlag ? "AAN" : "UIT"}
+                          </button>
+                          {shadowFlag === false && (
+                            <span className="text-slate-500 italic">veilige modus — alleen origineel-potje BUY/SELL</span>
+                          )}
+                        </div>
+                        <button
+                          onClick={cleanupCorruptShadows}
+                          data-testid="shadow-cleanup-btn"
+                          className="px-2 py-0.5 rounded text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 border border-amber-500/30"
+                          title="Markeer actieve shadows met market-mismatch of entry-drift als archived_corrupt"
+                        >
+                          🧹 Cleanup corrupt
                         </button>
                       </div>
                     )}

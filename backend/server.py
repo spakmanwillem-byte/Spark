@@ -28,6 +28,34 @@ app = FastAPI(
     description="Modulaire Spark AI - Stap voor stap opgebouwd"
 )
 
+
+# v6_mock_default_off_001 — Eenmalige migratie bij elke startup: alle bots met use_mock=True flippen.
+# Idempotent (geen effect als alles al goed staat). Geen gedoe voor Willem, geen handmatig fix per user.
+def _migrate_mock_users_to_real() -> None:
+    import json
+    fp = ROOT_DIR / "data" / "trade" / "bots_registry_state.json"
+    if not fp.exists():
+        return
+    try:
+        with open(fp) as f:
+            d = json.load(f)
+        bots = d.get("bots", [])
+        flipped = []
+        for b in bots:
+            if b.get("use_mock") is True:
+                b["use_mock"] = False
+                flipped.append(b.get("user_id"))
+        if flipped:
+            with open(fp, "w") as f:
+                json.dump(d, f, indent=2, ensure_ascii=False)
+            print(f"[mock-migration] Flipped use_mock=True → False voor: {flipped}")
+    except Exception as e:
+        print(f"[mock-migration] FOUT: {e}")
+
+
+_migrate_mock_users_to_real()
+
+
 # CORS middleware
 cors_origins = ["*"] if CORS_ORIGINS == "*" else [o.strip() for o in CORS_ORIGINS.split(",")]
 

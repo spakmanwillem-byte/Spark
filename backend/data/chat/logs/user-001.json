@@ -26699,11 +26699,47 @@
         "session_id": "default",
         "gesprek_nummer": 1017
       }
+    },
+    {
+      "id": "conv-fa7f6402",
+      "timestamp": "2026-06-01T15:25:08.699235+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 4 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1018
+      }
+    },
+    {
+      "id": "conv-4d2e4e98",
+      "timestamp": "2026-06-01T15:25:08.744743+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1019
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1017,
-    "last_updated": "2026-06-01T11:22:02.377743+00:00"
+    "total_conversations": 1019,
+    "last_updated": "2026-06-01T15:25:08.744743+00:00"
   }
 }

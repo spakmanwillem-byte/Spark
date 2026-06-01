@@ -1001,11 +1001,9 @@ export function TraderPage({ onNavigate }) {
                   <label className="block text-xs text-slate-400 mb-2">Markt (coin)</label>
                   <select data-testid="quick-trade-market" value={qtMarket} onChange={e => setQtMarket(e.target.value)}
                     className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 focus:outline-none">
-                    <option value="BCH-EUR">BCH-EUR</option>
-                    <option value="BTC-EUR">BTC-EUR</option>
-                    <option value="ETH-EUR">ETH-EUR</option>
-                    <option value="SOL-EUR">SOL-EUR</option>
-                    <option value="ADA-EUR">ADA-EUR</option>
+                    {ALL_MARKETS.map(m => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
                   </select>
                 </div>
 

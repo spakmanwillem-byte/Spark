@@ -54,7 +54,8 @@ class BitvavoCredentials(BaseModel):
 class TraderSettings(BaseModel):
     trade_amount: Optional[float] = 5.0
     market: Optional[str] = "BCH-EUR"
-    use_mock: Optional[bool] = True
+    # v6_mock_default_off_001 — new users default naar REAL, niet mock
+    use_mock: Optional[bool] = False
     auto_trade: Optional[bool] = False
 
 
@@ -66,7 +67,7 @@ class MonitorStartRequest(BaseModel):
     user_id: Optional[str] = "user-001"
     auto_trade: Optional[bool] = False
     trade_amount: Optional[float] = 5.0
-    use_mock: Optional[bool] = True
+    use_mock: Optional[bool] = False
     use_potjes: Optional[bool] = False
 
 
@@ -74,7 +75,7 @@ class QuickTradeRequest(BaseModel):
     market: str = "BCH-EUR"
     side: str = "buy"
     amount: float = 5.0
-    use_mock: bool = True
+    use_mock: bool = False
 
 
 @router.get("/history/{user_id}")
@@ -354,7 +355,7 @@ async def get_trader_settings(user_id: str):
     trader = settings.get("trader", {
         "trade_amount": 5.0,
         "market": "BCH-EUR",
-        "use_mock": True,
+        "use_mock": False,   # v6_mock_default_off_001 — default REAL voor nieuwe users
         "auto_trade": False,
     })
     return {"settings": trader}
@@ -417,7 +418,7 @@ async def execute_trade(user_id: str, req: QuickTradeRequest):
 
 class QuickBuyPotjeRequest(BaseModel):
     market: str = "BCH-EUR"
-    use_mock: bool = True
+    use_mock: bool = False   # v6_mock_default_off_001
     candle_interval: Optional[str] = "1h"
 
 

@@ -727,7 +727,8 @@ class MonitorService:
         self._last_prices = {}
         self._auto_trade = False
         self._trade_amount = 5.0
-        self._use_mock = True
+        # v6_mock_default_off_001 — default REAL voor nieuwe MonitorService-instanties
+        self._use_mock = False
         self._position = {"is_open": False, "entry_price": None, "highest_price": None, "trailing_active": False}
         self._use_potjes = False
         # v6_buy_cooldown_001 — tijdstempel laatste BUY per markt (voor 5-min cooldown)
@@ -735,7 +736,7 @@ class MonitorService:
 
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: Optional[str] = None,
-              auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = True,
+              auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = False,
               use_potjes: bool = False, markets: Optional[List[str]] = None) -> Dict:
         # user_id wordt vastgezet bij instantiatie; argument blijft voor back-compat
         if user_id and user_id != self._user_id:

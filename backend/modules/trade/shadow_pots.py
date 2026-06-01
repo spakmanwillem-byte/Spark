@@ -17,6 +17,14 @@ Storage: data/trade/shadow_pots.json
 Activatie-trigger:
   Niet meer puur profit_pct ≤ -3%. Nu: bodemdetectie via candle-analyse
   (`is_stabilizing_after_drop`). Voorkomt freefall-buys.
+
+v6_shadow_safety_001 (2026-06-01, sessie 19):
+  SHADOW_ENABLED feature-flag (default False) — pauzeert shadow-BUYs zolang we
+  recycle-bug + data-corruptie aan het opruimen zijn. Origineel-potje BUY/SELL
+  blijft normaal werken. Zet True via /api/trade/shadow/flag/enable als alles
+  weer gevalideerd is. Reden: recycle archiveerde ACTIVE shadows zonder SELL →
+  coin verloren in admin. Plus market/entry-corruptie ontdekt in actieve
+  shadows (BCH-shadow met SOL-entry €69 etc.).
 """
 from pathlib import Path
 from typing import Optional, Dict, Any, List
@@ -27,12 +35,37 @@ from ..core.storage import load_json, save_json
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 SHADOW_FILE = DATA_ROOT / "trade" / "shadow_pots.json"
 POTJES_FILE = DATA_ROOT / "financial" / "user_potjes.json"
+FLAG_FILE = DATA_ROOT / "trade" / "shadow_flag.json"
 
 # Configuratie
 MAX_SHADOWS_PER_POT = 3       # 3-laags piramide (Willem's idee)
 MIN_DROP_BEFORE_SHADOW = 0.015  # min -1.5% onder entry voordat bodemdetectie iets doet
 STABILIZATION_RANGE_PCT = 0.012  # laatste 5 candles range < 1.2% = vlak/stabiel
 STABILIZATION_LOOKBACK = 5        # candles om naar terug te kijken
+
+# v6_shadow_safety_001 — DEFAULT UIT in productie
+SHADOW_ENABLED_DEFAULT = False
+
+
+def is_shadow_enabled() -> bool:
+    """v6_shadow_safety_001 — master-flag voor shadow-cascade. Default False.
+    Persist in shadow_flag.json zodat admin via API kan toggelen zonder code-deploy.
+    """
+    try:
+        if FLAG_FILE.exists():
+            data = load_json(FLAG_FILE, default={})
+            return bool(data.get("enabled", SHADOW_ENABLED_DEFAULT))
+    except Exception:
+        pass
+    return SHADOW_ENABLED_DEFAULT
+
+
+def set_shadow_enabled(enabled: bool, by_user: str = "system") -> dict:
+    """Toggle de master-flag. Schrijft persistent."""
+    FLAG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    data = {"enabled": bool(enabled), "updated_at": _now_iso(), "updated_by": by_user}
+    save_json(FLAG_FILE, data)
+    return data
 
 
 def _load() -> dict:
@@ -266,26 +299,39 @@ def close_shadow(shadow_id: str, exit_price: float, profit: float) -> dict:
 def recycle_pot_as_shadow_zero(pot_id: str, owner_user_id: str, current_price: float) -> dict:
     """
     Willem's "4e drop wordt origineel".
-    Alle 3 shadows zitten vol (active of closed). Bij volgende drop-stabilisatie
-    behandel we het ORIGINELE potje als "shadow-0" van een nieuwe cyclus:
-      - Alle 3 huidige shadows worden archived (status="archived_cycle_{n}")
-      - 3 nieuwe idle shadows komen ervoor in de plaats (cycle += 1)
-      - Origineel potje blijft open en gaat door
-    Roep dit aan ALLEEN als alle 3 shadow-slots niet meer idle zijn.
+    Alle 3 shadows zitten vol → bij volgende drop-stabilisatie behandel we het
+    ORIGINELE potje als "shadow-0" van een nieuwe cyclus.
+
+    v6_shadow_safety_001 (2026-06-01) — VEILIGHEIDSCHECK:
+    Vereist nu dat alle shadows status `closed` zijn (= via SELL gesloten op
+    Bitvavo). Voorheen archiveerde we ook `active` shadows → coin op Bitvavo
+    raakte uit zicht ("verloren" in admin). Nu blokkeert recycle als er nog
+    1 active shadow is → bot stopt met nieuwe BUYs tot SELL automatisch fired.
     """
     data = _load()
     relevant = [s for s in data["shadows"]
                 if s.get("original_pot_id") == pot_id
-                and s.get("original_owner_id") == owner_user_id]
+                and s.get("original_owner_id") == owner_user_id
+                and not str(s.get("status", "")).startswith("archived")]
     if not relevant:
         return {"success": False, "error": "geen shadows om te recyclen"}
     idle_count = sum(1 for s in relevant if s.get("status") == "idle")
+    active_count = sum(1 for s in relevant if s.get("status") == "active")
+    closed_count = sum(1 for s in relevant if s.get("status") == "closed")
     if idle_count > 0:
         return {"success": False, "error": f"recycle alleen als 0 idle shadows ({idle_count} gevonden)"}
+    if active_count > 0:
+        # v6_shadow_safety_001 — BLOKKADE: niet archiveren terwijl er nog
+        # ongeslotene posities zijn. Wacht tot trail-SELL ze sluit.
+        return {
+            "success": False,
+            "error": f"recycle geweigerd: {active_count} active shadow(s) nog niet gesloten (zou coin verliezen)",
+            "active_count": active_count, "closed_count": closed_count,
+        }
 
     cur_cycle = max(int(s.get("cycle", 1)) for s in relevant)
     for s in relevant:
-        if s.get("status") in ("active", "closed"):
+        if s.get("status") == "closed":
             s["status"] = f"archived_cycle_{cur_cycle}"
             s["archived_at"] = _now_iso()
     _save(data)

@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-06-01T10:30:44.288927+00:00",
+      "last_active": "2026-06-01T10:38:14.300692",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1059,7 +1059,7 @@
       "level": 271,
       "welcome_version_seen": "v1",
       "welcome_sent_at": "2026-05-23T13:03:57.379683+00:00",
-      "avatar": "gallery:cf90e9ea6393"
+      "avatar": "gallery:9331f27d4fd8"
     },
     {
       "id": "bot-madelief",
@@ -1273,7 +1273,7 @@
       "type": "bot",
       "sleutelwoord": "Welkom01",
       "gradatie": 3,
-      "xp": 27740,
+      "xp": 27790,
       "credits": 0,
       "rank": "Bot Assistant",
       "persoonlijke_info": {
@@ -1345,9 +1345,19 @@
             "icon": "🎯",
             "rarity": "epic",
             "unlocked_at": "2026-05-20T07:45:53.450449+00:00"
+          },
+          {
+            "id": "milestone_avatar_chose",
+            "name": "Ik koos een Avatar",
+            "description": "Je hebt een avatar gekozen uit de galerij i.p.v. de standaard.",
+            "milestone": 0,
+            "xp_reward": 50,
+            "icon": "🖼️",
+            "rarity": "common",
+            "unlocked_at": "2026-06-01T10:34:54.556113+00:00"
           }
         ],
-        "total_xp_from_achievements": 950
+        "total_xp_from_achievements": 1000
       },
       "profile": {
         "need": "",
@@ -1432,6 +1442,12 @@
           "reason": "Achievement: Keeper van het Woord",
           "granted_at": "2026-05-20T07:45:53.492199+00:00",
           "total_after": 27740
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: Ik koos een Avatar",
+          "granted_at": "2026-06-01T10:34:54.562521+00:00",
+          "total_after": 27790
         }
       ],
       "rang": "Generaal",

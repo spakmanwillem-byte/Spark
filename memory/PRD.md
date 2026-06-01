@@ -1,43 +1,69 @@
 # Spark Core 2.0 — PRD
 
-## Completed (2026-06-01 — sessie 19, fork — Trade bot auto-resume MERGE-fix + shadow balance log)
+## Completed (2026-06-01 — sessie 19, fork — Shadow safety + corrupt data cleanup + auto-resume MERGE-fix)
 
-### 🐛 v6_resume_persist_merge_001 — Auto-resume bug definitief gefixt
-**Probleem**: Trade bots resumden niet na backend restart, ook al was in eerdere sessie geprobeerd het `running:false`-state te respecteren. Stopped bots bleven stopped (goed), maar running bots auto-resumden niet (regressie).
+### 🛡️ v6_shadow_safety_001 — Shadow-cascade gepauzeerd + recycle bug gefixt
+**Problemen ontdekt na live productie-deploy**:
 
-**Root cause**: `_persist_registry()` schreef ALLE bots uit `_registry` (in-memory). Na backend restart is `_registry` LEEG. Zodra je daarna 1 bot stopte via UI, werd `_persist_registry()` opgeroepen met alleen die ene bot in geheugen → bestand overschreven met enkel die bot → andere 4 running bots verdwenen uit het bestand → volgende restart resumde er niks.
+1. **Recycle-bug archiveerde ACTIEVE shadows** — `recycle_pot_as_shadow_zero()` zette zowel `active` als `closed` shadows naar `archived_cycle_N`. Active shadows = open posities op Bitvavo → coin uit zicht in admin → bij SELL van origineel werden ze NIET mee-gesloten → **coin verloren**.
 
-**Fix**: `_persist_registry()` MERGEt nu met het bestaande bestand:
-1. Lees bestaand `bots_registry_state.json` (kan bots bevatten die nog niet in-memory zijn)
-2. Per bot in `_registry`: upsert in de merged lijst
-3. Schrijf merged lijst terug — bots die nog niet aangeraakt zijn behouden hun laatst-bekende state
+2. **Data-corruptie in 7 actieve shadows** ontdekt:
+   - `shadow-124/130/136/139/145/148` — pot=SOL-EUR maar shadow.market=ATOM/ETH/BCH-EUR mismatch
+   - Trail-SELL faalt structureel doordat shadow.entry van compleet andere coin afkomstig is
 
-**Test**: `/app/backend/tests/test_registry_persist_merge.py` — 3 testcases, allen PASS:
-- `test_persist_merges_with_existing_file` — bots in bestand blijven na partial persist
-- `test_resume_skips_stopped_bots` — `running:false` wordt geskipt
-- `test_resume_starts_running_bots` — `running:true` wordt herstart
+3. **Shadow-loop risico** — recycle creëerde 3 nieuwe idle slots ongeacht of vorige cyclus winstgevend was → bot kon eindeloos BUYs blijven afgeven bij elke drop.
 
-**End-to-end verified**:
-- Restored `bots_registry_state.json` vanuit `bots_registry_state.backup_20260601_081126.json` (5 bots).
-- Stop user-1996fa59 via API → bestand toont 4 running + 1 stopped (was: 1 stopped, 4 weg).
-- Backend restart → "4 registry-bot(s) auto-resumed" log + skip user-1996fa59 (correct).
-- Daarna user-1996fa59 weer gestart via API → status `running=True`.
+**Fixes**:
 
-### 🔍 v6_shadow_balance_guard_001 — Shadow-BUY traceability
-**Context**: Willem merkte "als ik meer balance als potjes hij dan dat balance toch pakt". Onderzocht: shadow-pots-systeem activeert tot 3 extra BUYs per origineel potje op bodem-detectie → kan 4× user's potje-capital aan Bitvavo EUR consumeren (€10 origineel + 3 × €10 shadows = €40 per pot). Dit is by-design (DCA strategie) maar was niet expliciet zichtbaar.
+- **Master-flag `SHADOW_ENABLED`** (default **FALSE**) in `shadow_pots.py`. Bot's monitor loopt nu door `is_shadow_enabled()` check; bij False worden alle shadow-activaties geskipt. Origineel-potje BUY/SELL (= simpele veilige trader) blijft normaal werken.
+- **Recycle-guard**: `recycle_pot_as_shadow_zero()` blokkeert nu als er nog `active` shadows zijn. Eis: alle 3 moeten status `closed` zijn (via SELL gesloten). Voorkomt coin-verlies.
+- **Cleanup-endpoint** `POST /api/trade/shadow/cleanup-corrupt`: detecteert shadows met market-mismatch of entry_price-drift > 2×, markeert ze `archived_corrupt` met `corrupt_reasons[]` log.
 
-**Toegevoegd**: explicit `logger.info()` in `monitor.py` regel ~1089 vóór shadow-BUY-execute:
-```
-[shadow] {user} pot={id} slot={n} BUY €{X} (extra bovenop origineel — Bitvavo balance check volgt)
-```
-Plus inline comment dat verwijst naar bestaande `execute_real_trade()` balance-check (regel 286) die alles blokkeert als Bitvavo leeg is.
+**Nieuwe endpoints**:
+- `GET /api/trade/shadow/flag` — lees master-flag
+- `POST /api/trade/shadow/flag {"enabled": true/false}` — toggle master-flag
+- `POST /api/trade/shadow/cleanup-corrupt` — clean corrupt actieve shadows
 
-**Open vraag voor Willem**: wil je dat ik shadow-activations HARD CAP op user's totale niet-locked potjes-capital (= geen extra spending bovenop claim)? Dat zou effectief shadows uitschakelen, maar geeft 1-op-1 mapping tussen tokens en max-exposure.
+**Live cleanup uitgevoerd (preview)**:
+- 7 corrupt shadows → `archived_corrupt`
+- Resterende 4 actieve shadows (ADA pot-011/017 + SOL pot-010/016) zijn correct (markets matchen, entry binnen verwachte marge)
+- Shadow stats nu: 88 idle / 4 active / 76 archived
+
+**Test**: `test_shadow_trigger.py` aangepast — recycle vereist nu eerst SELL van actieve shadows (test 11a). Alle 13 tests pass.
+
+### 🐛 v6_resume_persist_merge_001 — Auto-resume bug definitief gefixt (earlier in sessie 19)
+**Probleem**: Trade bots resumden niet na backend restart. Root cause: `_persist_registry()` overschreef bestand met alleen in-memory bots. Wanneer 1 bot stopte na restart (rest van bots nog niet in `_registry`) verdwenen ze.
+
+**Fix**: `_persist_registry()` mergt nu met bestaand bestand. Bots die niet in-memory zijn behouden hun laatst-bekende state.
+
+**Test**: 3 pytests in `tests/test_registry_persist_merge.py` — alle PASS.
+
+**E2E**: 5 bots hersteld vanuit backup → stop user-1996fa59 → restart → log "4 registry-bot(s) auto-resumed" + skip user-1996fa59 ✅
+
+### Status alle bots (eind sessie 19)
+| User | Running | Mode |
+|---|---|---|
+| user-000 (Spark) | ✅ | 19 potjes |
+| user-001 (Willem) | ✅ | 15 potjes |
+| user-1996fa59 | ✅ | 1 potje |
+| user-5dd295db | ✅ | 1 potje |
+| user-a0ee2d7e | ✅ | 2 potjes |
+| user-4d9b59aa | ✅ | 1 potje |
 
 ### Bestanden gewijzigd in sessie 19
-- `/app/backend/modules/trade/monitor.py` — `_persist_registry()` merge-logica + shadow logging
-- `/app/backend/tests/test_registry_persist_merge.py` — NEW, 3 unit tests
+- `/app/backend/modules/trade/monitor.py` — `_persist_registry()` merge + SHADOW_ENABLED check + shadow logging
+- `/app/backend/modules/trade/shadow_pots.py` — `is_shadow_enabled()` / `set_shadow_enabled()` flag + recycle-guard tegen active shadows
+- `/app/backend/modules/trade/shadow_routes.py` — flag endpoints + cleanup-corrupt endpoint
+- `/app/backend/data/trade/shadow_flag.json` — persistent flag (NEW, default enabled=false)
+- `/app/backend/tests/test_registry_persist_merge.py` — NEW, 3 pytests
+- `/app/backend/tests/test_shadow_trigger.py` — uitgebreid met recycle-blokkade test (13 tests totaal)
 - `/app/backend/data/trade/bots_registry_state.json` — hersteld vanuit backup, alle 5 bots actief
+
+### 📌 Voor PRODUCTIE-DEPLOY: handmatige stappen vereist
+1. Deploy preview naar productie via Save → Deploy
+2. Na deploy: roep `POST /api/trade/shadow/cleanup-corrupt` aan in productie om corrupt shadows daar ook te markeren (preview-cleanup is alleen lokaal)
+3. SHADOW_ENABLED blijft UIT — bot gebruikt alleen origineel-potje BUY/SELL (veilig)
+4. Zodra je shadow-recycle volledig wilt valideren: tweede pass: handmatig `POST /api/trade/shadow/flag {"enabled": true}` met monitoring
 
 ---
 

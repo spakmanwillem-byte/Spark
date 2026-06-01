@@ -99,12 +99,21 @@ def run():
     assert not act4["success"]
     print(f"  [OK] 4e activate correct geweigerd: {act4['error']}")
 
-    # 11. Recycle: alle 3 worden archived_cycle_1, nieuwe 3 idle slots in cycle 2
+    # 11a. v6_shadow_safety_001 — recycle BLOKKEERT als shadows nog active zijn
+    rec_blocked = shadow.recycle_pot_as_shadow_zero("pot-001", TEST_USER_A, current_price=88.0)
+    assert not rec_blocked["success"] and "active" in rec_blocked.get("error", "").lower()
+    print(f"  [OK] Recycle geblokkeerd (3 active shadows): {rec_blocked['error']}")
+
+    # 11b. Sluit alle 3 actieve shadows eerst → daarna mag recycle wel
+    for sh in shadow.get_active_shadows("pot-001", owner_user_id=TEST_USER_A):
+        shadow.close_shadow(sh["shadow_id"], exit_price=95.0, profit=0.5)
+
+    # 11c. Nu Recycle: 3 closed worden archived_cycle_1, nieuwe 3 idle slots in cycle 2
     rec = shadow.recycle_pot_as_shadow_zero("pot-001", TEST_USER_A, current_price=88.0)
     assert rec["success"] and rec["new_cycle"] == 2 and len(rec["new_shadow_ids"]) == 3
     cap_after = shadow.shadow_capacity("pot-001", TEST_USER_A)
     assert cap_after["idle"] == 3 and cap_after["active"] == 0
-    print(f"  [OK] Recycled cyclus 1→2, 3 nieuwe idle slots: {rec['new_shadow_ids']}")
+    print(f"  [OK] Recycled cyclus 1→2 na SELL van alle slots: {rec['new_shadow_ids']}")
 
     # 12. Close shadow (simuleer recovery)
     # We hebben net gerecycled, dus laat slot 1 nieuwe cyclus pakken
@@ -115,7 +124,7 @@ def run():
     print(f"  [OK] Shadow closed @ €95 profit €0.92")
 
     cleanup()
-    print("\n✅ Alle 12 tests passed. 3-slot cascade + bodemdetectie + recycle werken.")
+    print("\n✅ Alle 13 tests passed. 3-slot cascade + bodemdetectie + safe recycle werken.")
     return 0
 
 

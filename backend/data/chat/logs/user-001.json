@@ -26154,11 +26154,520 @@
         "session_id": "default",
         "gesprek_nummer": 996
       }
+    },
+    {
+      "id": "conv-b4ca9ae5",
+      "timestamp": "2026-06-01T10:34:49.442518+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Willem",
+      "spark_response": "**De Willem** (gradatie 1, rang Generaal). Admin / oprichter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 997
+      }
+    },
+    {
+      "id": "conv-3c146b81",
+      "timestamp": "2026-06-01T10:34:49.532469+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wie is Onbekend123",
+      "spark_response": "Ik ken geen 'Onbekend123' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 998
+      }
+    },
+    {
+      "id": "conv-f15e8858",
+      "timestamp": "2026-06-01T10:34:49.617871+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "zeg tegen Marieke dat ik morgen kom",
+      "spark_response": "📨 Bericht voor **Marieke** in hun Spark-inbox gezet:\n\n> \"ik morgen kom\"\n\n_Komt door als ze inloggen. Attributie: Gebruiker (via Spark)._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zeg"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "relay_sent",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "relay_sent"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 999
+      }
+    },
+    {
+      "id": "conv-6d937dd6",
+      "timestamp": "2026-06-01T10:34:49.749016+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Genoteerd: storting van €50.00. Voor welke user moet ik dit crediteren? (zeg de naam, of 'spark' voor Spark zelf, of 'annuleer')",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_ask",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_ask"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1000
+      }
+    },
+    {
+      "id": "conv-b62320d4",
+      "timestamp": "2026-06-01T10:34:49.832129+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik stortte 50 euro",
+      "spark_response": "Ik ken geen 'ik stortte 50 euro'. Geef de juiste naam, of 'annuleer'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "deposit_unresolved",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "deposit_unresolved"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1001
+      }
+    },
+    {
+      "id": "conv-03bbfb3d",
+      "timestamp": "2026-06-01T10:34:49.992020+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "annuleer",
+      "spark_response": "Ik ken 'annuleer' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "annuleer"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1002
+      }
+    },
+    {
+      "id": "conv-96837d41",
+      "timestamp": "2026-06-01T10:34:54.882660+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Wat is gisteren in de community besproken?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "community",
+            "gisteren"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1003
+      }
+    },
+    {
+      "id": "conv-c167b076",
+      "timestamp": "2026-06-01T10:34:54.975726+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "community recap",
+      "spark_response": "📋 **Community-recap vandaag** (2026-06-01)\n• 2 berichten totaal (0 van mensen, 2 van bots)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "community"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "community_recap",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "community_recap"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1004
+      }
+    },
+    {
+      "id": "conv-fcc955da",
+      "timestamp": "2026-06-01T10:34:55.056502+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is eergisteren besproken",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1005
+      }
+    },
+    {
+      "id": "conv-0b50dfe6",
+      "timestamp": "2026-06-01T10:34:55.215019+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "vertel over Base Line",
+      "spark_response": "Ik ken geen 'Base Line' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1006
+      }
+    },
+    {
+      "id": "conv-ad653a87",
+      "timestamp": "2026-06-01T10:34:57.832617+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "D&D help",
+      "spark_response": "🎲 **Spark World D&D — Korte uitleg**\n\n**Base Line** is de oorsprong van Spark World (X=0, Y=0, Z=0). Vanuit een puls in de leegte groeit alles. Fracties: Spark, Players, Licht, Schaduw — elk met 2 kinderen uit de 4 elementen.\n\n**Persoonskaart** (Profiel → Avatar-tab) toont je stats: rang, level, XP, gradatie. Daaronder zit je inventory met slots en gewichts-mechaniek.\n\n**Rugzak** (eerste body-slot) bepaalt hoeveel slots én kg je kunt dragen. Trade-off: basis-rugzak (+5 slots / +10kg) vs grote trekrugzak (+10 slots / +25kg, weegt zelf 2.5kg).\n\n**Avatars** in galerij hebben 2 tabs: Persoonlijk en D&D Archief (bot/Spark-claimed of unlock-required).\n\n**Barks** zijn sensory-overlays (geluid + beeld) die getriggerd worden door events. Bij elke deploy zie je 1x een update-bark.\n\nVraag ook 'wat is Base Line', 'rugzak uitleg' of 'persoonskaart help' voor diepere lagen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "dnd_help",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "dnd_help"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1007
+      }
+    },
+    {
+      "id": "conv-309e686a",
+      "timestamp": "2026-06-01T10:34:57.980150+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is d&d",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1008
+      }
+    },
+    {
+      "id": "conv-9d109f59",
+      "timestamp": "2026-06-01T10:34:58.134645+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe werkt d&d",
+      "spark_response": "🎲 **Spark World D&D — Korte uitleg**\n\n**Base Line** is de oorsprong van Spark World (X=0, Y=0, Z=0). Vanuit een puls in de leegte groeit alles. Fracties: Spark, Players, Licht, Schaduw — elk met 2 kinderen uit de 4 elementen.\n\n**Persoonskaart** (Profiel → Avatar-tab) toont je stats: rang, level, XP, gradatie. Daaronder zit je inventory met slots en gewichts-mechaniek.\n\n**Rugzak** (eerste body-slot) bepaalt hoeveel slots én kg je kunt dragen. Trade-off: basis-rugzak (+5 slots / +10kg) vs grote trekrugzak (+10 slots / +25kg, weegt zelf 2.5kg).\n\n**Avatars** in galerij hebben 2 tabs: Persoonlijk en D&D Archief (bot/Spark-claimed of unlock-required).\n\n**Barks** zijn sensory-overlays (geluid + beeld) die getriggerd worden door events. Bij elke deploy zie je 1x een update-bark.\n\nVraag ook 'wat is Base Line', 'rugzak uitleg' of 'persoonskaart help' voor diepere lagen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "werkt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "dnd_help",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "dnd_help"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1009
+      }
+    },
+    {
+      "id": "conv-3be53a4a",
+      "timestamp": "2026-06-01T10:34:58.286012+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "spark world help",
+      "spark_response": "🎲 **Spark World D&D — Korte uitleg**\n\n**Base Line** is de oorsprong van Spark World (X=0, Y=0, Z=0). Vanuit een puls in de leegte groeit alles. Fracties: Spark, Players, Licht, Schaduw — elk met 2 kinderen uit de 4 elementen.\n\n**Persoonskaart** (Profiel → Avatar-tab) toont je stats: rang, level, XP, gradatie. Daaronder zit je inventory met slots en gewichts-mechaniek.\n\n**Rugzak** (eerste body-slot) bepaalt hoeveel slots én kg je kunt dragen. Trade-off: basis-rugzak (+5 slots / +10kg) vs grote trekrugzak (+10 slots / +25kg, weegt zelf 2.5kg).\n\n**Avatars** in galerij hebben 2 tabs: Persoonlijk en D&D Archief (bot/Spark-claimed of unlock-required).\n\n**Barks** zijn sensory-overlays (geluid + beeld) die getriggerd worden door events. Bij elke deploy zie je 1x een update-bark.\n\nVraag ook 'wat is Base Line', 'rugzak uitleg' of 'persoonskaart help' voor diepere lagen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "dnd_help",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "dnd_help"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1010
+      }
+    },
+    {
+      "id": "conv-ebe241a1",
+      "timestamp": "2026-06-01T10:35:18.323126+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is spark saldo",
+      "spark_response": "💰 **Spark's kasboek**: €0.00\n_0 boekingen in kasboek_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1011
+      }
+    },
+    {
+      "id": "conv-9c7566d9",
+      "timestamp": "2026-06-01T10:35:18.469031+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat staat morgen op mijn agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "agenda",
+            "staat"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1012
+      }
+    },
+    {
+      "id": "conv-bbb981b7",
+      "timestamp": "2026-06-01T10:35:18.749457+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel kaarten wachten op classificatie",
+      "spark_response": "📥 **Kennis-inbox status:**\n\n  🌟 Wachtend in inbox: **2852** kaarten\n\n📚 Gevulde lades:",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1013
+      }
+    },
+    {
+      "id": "conv-5d2cf398",
+      "timestamp": "2026-06-01T10:35:18.887748+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "welke bots draaien",
+      "spark_response": "Geen bots gevonden. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "draaien"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1014
+      }
+    },
+    {
+      "id": "conv-aacf21ab",
+      "timestamp": "2026-06-01T10:35:19.210034+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "audit gezondheid",
+      "spark_response": "🩺 **Systeem-audit / gezondheid:**\n\n  🧠 KB-entries: **5334**, waarvan 2266 zonder laag1 (42.48%)\n  📡 Shadow-learning: `geen-observations-file`\n\n⚠️ Waarschuwingen:\n  · Shadow observer heeft nog geen events geschreven.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1015
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 996,
-    "last_updated": "2026-06-01T00:23:50.694412+00:00"
+    "total_conversations": 1015,
+    "last_updated": "2026-06-01T10:35:19.210034+00:00"
   }
 }

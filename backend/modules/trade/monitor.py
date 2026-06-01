@@ -1068,8 +1068,14 @@ class MonitorService:
                 # (5 candles vlak + significant onder entry + geen new low) activeer
                 # eerstvolgende idle shadow. Bij alle 3 actief/closed → recycle origineel
                 # als nieuwe cyclus-start ("4e shadow = origineel").
+                #
+                # v6_shadow_safety_001 — MASTER-FLAG check eerst. Default UIT in productie
+                # tot we recycle-bug + data-corruptie hebben opgeruimd.
                 try:
                     from modules.trade import shadow_pots as _shadow
+                    if not _shadow.is_shadow_enabled():
+                        # Skip shadow-cascade volledig — alleen origineel-potje BUY/SELL blijft draaien
+                        raise StopIteration  # short-circuit naar except
                     stab = _shadow.is_stabilizing_after_drop(
                         candles=context_candles,
                         entry_price=entry,
@@ -1121,6 +1127,8 @@ class MonitorService:
                                 f"SHADOW-MOCK {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
                                 f"({market}) @ €{price:.4f}"
                             )
+                except StopIteration:
+                    pass  # v6_shadow_safety_001 — flag UIT, geen shadow-actie deze cyclus
                 except Exception as _ex:
                     logger.warning(f"shadow-activate failed for {pot['id']}: {_ex}")
 

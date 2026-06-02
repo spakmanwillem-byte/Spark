@@ -651,11 +651,29 @@ export function GesprekkenPage({ onNavigate }) {
     }, 400);
   };
 
+  // v6_rps_001b — RPS opponent state, set by chat trigger
+  const [rpsOpponent, setRpsOpponent] = useState('spark');
+
   const handleSend = async (overrideText) => {
     const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();
     if (!raw) return;
     const text = raw;
     setNewMessage('');
+
+    // v6_rps_001b — Client-side RPS-trigger in community tab (Spark tab gaat via backend)
+    if (activeTab === 'community') {
+      const txt = text.toLowerCase().trim();
+      const rpsTriggers = [
+        'speel steen papier schaar', 'steen papier schaar',
+        'speel sps', 'spelletje sps', 'speel een spelletje',
+        'speel steen', 'speel papier', 'speel schaar',
+      ];
+      if (rpsTriggers.some(t => txt === t || txt.includes(t))) {
+        setRpsOpponent('bot');
+        setRpsOpen(true);
+        return;
+      }
+    }
 
     if (activeTab === 'spark') {
       const userMsg = {
@@ -667,7 +685,7 @@ export function GesprekkenPage({ onNavigate }) {
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, user_naam: userName, user_id: userId }),
+          body: JSON.stringify({ message: text, user_naam: userName, user_id: userId, channel: 'spark' }),
         });
         const data = await res.json();
 
@@ -700,7 +718,8 @@ export function GesprekkenPage({ onNavigate }) {
             window.location.href = '/?deleted=1';
           }, 1500);
         } else if (data.action === 'open_game_rps') {
-          // v6_rps_001 — open Steen-Papier-Schaar bark
+          // v6_rps_001 — open Steen-Papier-Schaar bark met juiste opponent
+          setRpsOpponent(data.rps_opponent || 'spark');
           setRpsOpen(true);
         }
 
@@ -1154,7 +1173,7 @@ export function GesprekkenPage({ onNavigate }) {
         )}
 
         {/* v6_rps_001 — Steen-Papier-Schaar mini-game bark */}
-        <RpsBark userId={userId} open={rpsOpen} onClose={() => setRpsOpen(false)} />
+        <RpsBark userId={userId} open={rpsOpen} opponent={rpsOpponent} onClose={() => setRpsOpen(false)} />
       </div>
     </MainLayout>
   );

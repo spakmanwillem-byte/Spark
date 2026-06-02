@@ -1,0 +1,67 @@
+{
+  "summary": "RPS V2 additions (Spark Core 2.0) — backend + frontend tested end-to-end. All 14 pytest cases pass; all critical frontend flows verified via Playwright.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "chat_triggers": {
+      "speel_steen_spark": "PASS — action=open_game_rps, rps_opponent=spark",
+      "speel_steen_papier_schaar_spark": "PASS — rps_opponent=spark",
+      "speel_papier_spark": "PASS — action=open_game_rps",
+      "speel_sps_community": "PASS — rps_opponent=bot",
+      "spelletje_sps_spark": "PASS — rps_opponent=spark"
+    },
+    "bot_start": {
+      "random_pick_distribution": "PASS — 12 starts produced multiple bots: madelief, smith, dood, harry, boekhouder",
+      "explicit_bot_madelief": "PASS — opponent persisted in session"
+    },
+    "learning_flag": {
+      "easy_bot_harry_no_learning": "PASS — spark_is_learning=False on all 3 rounds",
+      "spark_first_round_learning": "PASS — spark_is_learning=True (history_length<=10)",
+      "bot_dood_learning_first_10": "PASS — spark_is_learning=True for first round"
+    },
+    "cards_endpoint": {
+      "denkt_na_image_live_lookup": "PASS — image url contains c6b518680717",
+      "all_10_cards_have_images": "PASS — steen/papier/schaar/gewonnen/verloren/denkt_na/maak_een_keus/score/high_score/stop all have images"
+    },
+    "help_endpoint": {
+      "rps_topic_for_user_001": "PASS — topic id='rps' label='Steen-Papier-Schaar mini-game' visible (22 topics total for gradatie-1 admin)"
+    },
+    "kb_tags": {
+      "10_sps_tagged_cards": "PASS — exactly 10 cards across doen/weten/spreken/voelen have 'sps' tag"
+    },
+    "frontend": {
+      "spark_tab_speel_steen": "PASS — rps-bark opens, rps-opponent-label='· vs Spark'",
+      "community_tab_speel_sps": "PASS — rps-bark opens with bot label (seen: 'vs Boekhouder')",
+      "choice_badge_opponent_label": "PASS — after pick, 'JIJ vs BOEKHOUDER' badges shown (no 'Spark' leak)",
+      "learning_badge_easy_bot": "PASS — '⚡ Boekhouder heeft je door' shown for easy bot (no learning)",
+      "help_bark_rps_topic": "PASS — help-topic-rps element renders in HelpBark modal (opened via sidebar-help-btn). 66 testids → 22 topics shown for Willem"
+    }
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rps_v2_iter25.py",
+    "/app/test_reports/pytest/iter25_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "GesprekkenPage.js is ~1340 lines — consider splitting handleSend into a hook (chatActions) to keep file <700 lines per code-review guideline.",
+    "HelpBark fetches /api/help/for-viewer with `${userId}` template literal — when userId is undefined the request becomes `?user_id=undefined` which silently degrades to 10 anonymous topics instead of 22. Defensive guard recommended: skip fetch until userId is defined, or pass no user_id param when undefined.",
+    "Send-button click via Playwright requires Enter-press in some viewports due to 'Made with Emergent' badge overlap on bottom-right at 1280x900 — cosmetic, not functional. Consider z-index check on emergent badge in dev preview."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_rps_v2_iter25.py"
+  ],
+  "success_rate": {"backend": "100% (14/14)", "frontend": "100% (5/5 flows)"},
+  "test_credentials": "Willem / Appelsap (user-001, gradatie 1 admin)",
+  "seed_data_creation": "Test users TEST_iter25_* created via /api/games/rps/start; cleanup not implemented (data isolated by user_id, low impact).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All RPS V2 additions verified. Chat trigger field is 'message' (not 'text'). Play endpoint expects JSON body {user_id,choice} not query params. Bot random pick verified across 12 starts. Help-bark opens via [data-testid=sidebar-help-btn]; the in-chat 'help' message does NOT open the HelpBark — it goes to chat as a regular query. Pytest run: cd /app && python -m pytest backend/tests/test_rps_v2_iter25.py -v.",
+  "rca of the issue": "No bugs found in this iteration."
+}

@@ -195,10 +195,13 @@ async def process_message(req: ChatMessage):
     # 0b2. RPS — Steen-Papier-Schaar mini-game (v6_rps_001)
     try:
         _txt = (text or "").lower().strip()
+        # v6_rps_001b — kortere triggers ("speel steen" zonder rest)
         rps_open_triggers = (
             "speel steen papier schaar", "steen papier schaar",
             "rock paper scissors", "speel sps", "open spel sps",
-            "spelletje steen papier schaar", "speel sps",
+            "spelletje steen papier schaar",
+            "speel steen", "speel papier", "speel schaar",
+            "spelletje sps", "speel een spelletje", "speel spelletje",
         )
         rps_reset_triggers = (
             "reset score steen papier schaar", "reset sps", "reset score sps",
@@ -208,11 +211,19 @@ async def process_message(req: ChatMessage):
             "score sps", "stand sps", "stand steen papier schaar",
             "mijn rps stats", "rps stats",
         )
-        if any(t in _txt for t in rps_open_triggers):
+        if any(t == _txt or t in _txt for t in rps_open_triggers):
+            # context bepaalt opponent: 'spark' (chat met Spark) of 'bot' (community)
+            ch = (getattr(req, "channel", None) or "").lower()
+            opponent = "bot" if ch == "community" else "spark"
             response.update({
                 "type": "open_game",
                 "action": "open_game_rps",
-                "message": "🎮 Steen — Papier — Schaar! Kies je zet.",
+                "rps_opponent": opponent,
+                "message": (
+                    "🎮 Steen — Papier — Schaar! Kies je zet."
+                    if opponent == "spark"
+                    else "🎮 Tegenstander wordt gekozen… kies je zet."
+                ),
             })
             _save_log(req, response, "rps_open")
             return response

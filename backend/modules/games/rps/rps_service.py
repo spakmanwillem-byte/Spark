@@ -82,20 +82,35 @@ def _append_history(user_id: str, choice: str, max_keep: int = 100):
     save_json(LEARNING_FILE, data)
 
 
-def start_session(user_id: str) -> dict:
-    """Forceer fresh sessie-state (reset score). Stats blijven intact."""
+def start_session(user_id: str, opponent: str = "spark") -> dict:
+    """Forceer fresh sessie-state (reset score). Stats blijven intact.
+
+    opponent: "spark" (Spark zelf, leert) | "bot-dood" (slim/moeilijk) |
+              "bot-madelief"/"bot-harry"/"bot-smith"/"bot-boekhouder" (random, makkelijk).
+    """
+    import random as _r
+    if opponent == "bot":
+        # Kies random bot — bot-dood = moeilijk, anderen = random
+        opponent = _r.choice(["bot-madelief", "bot-harry", "bot-smith", "bot-boekhouder", "bot-dood"])
     session = {
         "wins": 0, "losses": 0, "ties": 0,
         "current_streak": 0, "best_streak_session": 0,
         "started_at": _now(),
+        "opponent": opponent,  # v6_rps_opponent_001
     }
     _save_session(user_id, session)
     return session
 
 
-def reset_session(user_id: str) -> dict:
-    """Reset alleen huidige sessie-score (alias voor start)."""
-    return start_session(user_id)
+def reset_session(user_id: str, opponent: str = None) -> dict:
+    """Reset alleen huidige sessie-score (alias voor start).
+
+    Als `opponent` niet gegeven, behoud huidige opponent.
+    """
+    if opponent is None:
+        cur = _get_session(user_id)
+        opponent = cur.get("opponent", "spark")
+    return start_session(user_id, opponent=opponent)
 
 
 def get_session(user_id: str) -> dict:
@@ -119,19 +134,34 @@ def stop_session(user_id: str) -> dict:
 
 def play_round(user_id: str, player_choice: str) -> dict:
     """
-    Speel één ronde. Returneert volledige uitkomst incl. Spark's keuze,
+    Speel één ronde. Returneert volledige uitkomst incl. tegenstander-keuze,
     sessie-score, XP-delta en eventuele nieuwe achievements.
+
+    Tegenstander wordt afgeleid uit huidige sessie:
+      - "spark" / "bot-dood": slim algoritme (eerste 10 random, dan counter)
+      - andere bots: 100% random (makkelijk)
     """
+    import random as _r
     if not rps_engine.is_valid_choice(player_choice):
         return {"success": False, "error": f"Ongeldige keuze: {player_choice}"}
     player_choice = player_choice.lower().strip()
 
+    session = _get_session(user_id)
+    opponent = session.get("opponent", "spark")
+
+    # Bepaal tegenstander-keuze op basis van opponent-type
     history = _get_history(user_id)
-    spark_choice = rps_engine.predict_next(history)
-    outcome = rps_engine.resolve(player_choice, spark_choice)  # 'a' = player wins
+    if opponent in ("spark", "bot-dood"):
+        opp_choice = rps_engine.predict_next(history)
+        is_learning = len(history) < 10
+    else:
+        # Easy bots — puur random, geen leren
+        opp_choice = _r.choice(rps_engine.CHOICES)
+        is_learning = False
+
+    outcome = rps_engine.resolve(player_choice, opp_choice)  # 'a' = player wins
 
     # Update sessie
-    session = _get_session(user_id)
     if outcome == 'a':
         session["wins"] += 1
         session["current_streak"] += 1
@@ -195,7 +225,9 @@ def play_round(user_id: str, player_choice: str) -> dict:
     return {
         "success": True,
         "player_choice": player_choice,
-        "spark_choice": spark_choice,
+        "opponent": opponent,
+        "opponent_choice": opp_choice,
+        "spark_choice": opp_choice,  # backward-compat alias
         "outcome": result_label,  # gewonnen / verloren / gelijkspel
         "session": session,
         "lifetime_wins": stats["wins"],
@@ -205,6 +237,6 @@ def play_round(user_id: str, player_choice: str) -> dict:
         "xp_delta": xp_delta,
         "new_xp": new_xp,
         "new_achievements": new_achievements,
-        "spark_is_learning": len(history) < 10,
+        "spark_is_learning": is_learning,
         "history_length": len(history) + 1,
     }

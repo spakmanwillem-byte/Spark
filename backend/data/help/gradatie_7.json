@@ -83,12 +83,24 @@
       "nav_path": "/profiel",
       "nav_testid": "nav-profiel",
       "synonyms": ["profiel", "mijn", "instelling", "instellingen", "wachtwoord", "avatar", "thema"]
+    },
+    {
+      "id": "rps",
+      "label": "Steen-Papier-Schaar mini-game",
+      "korte_uitleg": "Speel een rondje Steen-Papier-Schaar tegen Spark of een bot. Type 'speel steen papier schaar' (of 'speel sps') in de chat om te beginnen. +10 XP per gewonnen potje.",
+      "deep_uitleg": "In Spark-gesprek speel je tegen Spark zelf — eerste 10 rondes random, daarna leert Spark jouw patronen. In Community-chat krijg je een random bot — De Dood is de moeilijkste. Vraag 'hoe vaak gewonnen' voor je lifetime stats, of 'reset score sps' om opnieuw te beginnen. Achievements: eerste winst, eerste verlies, 5 op een rij.",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["speel", "sps", "steen papier schaar", "spelletje", "game", "mini-game", "rps"]
     }
   ],
   "shortcuts": [
     { "trigger": "help", "actie": "open help-bark voor jouw gradatie" },
     { "trigger": "waar is X", "actie": "zoek tab X en laat hem oplichten in de zijbalk" },
     { "trigger": "vind X", "actie": "zoek tab X en laat hem oplichten" },
-    { "trigger": "vertel meer over X", "actie": "open de diepe uitleg van topic X" }
+    { "trigger": "vertel meer over X", "actie": "open de diepe uitleg van topic X" },
+    { "trigger": "speel steen papier schaar / speel sps", "actie": "open Steen-Papier-Schaar mini-game" },
+    { "trigger": "hoe vaak gewonnen", "actie": "toon je lifetime SPS stats" },
+    { "trigger": "reset score sps", "actie": "reset huidige sessie-score (lifetime blijft)" }
   ]
 }

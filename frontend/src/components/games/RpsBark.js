@@ -12,21 +12,25 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 const LABEL = { steen: 'Steen', papier: 'Papier', schaar: 'Schaar' };
 
-export function RpsBark({ userId, open, onClose }) {
+export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
   const [cards, setCards] = useState(null);
   const [session, setSession] = useState({ wins: 0, losses: 0, ties: 0, current_streak: 0 });
   const [lifetime, setLifetime] = useState({ wins: 0, losses: 0, longest_streak: 0 });
-  const [lastRound, setLastRound] = useState(null); // {player_choice, spark_choice, outcome, xp_delta, new_achievements, spark_is_learning}
+  const [lastRound, setLastRound] = useState(null);
   const [thinking, setThinking] = useState(false);
   const [playerPick, setPlayerPick] = useState(null);
 
-  // Init: load cards + session + stats
+  // v6_rps_001b — Init: start nieuwe sessie met juiste opponent + load stats
   useEffect(() => {
     if (!open) return;
-    fetch(`${API}/api/games/rps/cards`).then(r => r.json()).then(d => setCards(d.cards));
-    fetch(`${API}/api/games/rps/session?user_id=${userId}`).then(r => r.json()).then(d => setSession(d.session || {}));
+    fetch(`${API}/api/games/rps/start?user_id=${userId}&opponent=${opponent}`, { method: 'POST' })
+      .then(r => r.json())
+      .then(d => {
+        setCards(d.cards);
+        setSession(d.session || {});
+      });
     fetch(`${API}/api/games/rps/stats?user_id=${userId}`).then(r => r.json()).then(d => setLifetime(d.stats || {}));
-  }, [open, userId]);
+  }, [open, userId, opponent]);
 
   const play = async (choice) => {
     if (thinking) return;
@@ -73,6 +77,17 @@ export function RpsBark({ userId, open, onClose }) {
 
   const outcomeCard = lastRound?.outcome === 'gewonnen' ? cards.gewonnen
                     : lastRound?.outcome === 'verloren' ? cards.verloren : null;
+  // v6_rps_001b — Toon huidige tegenstander (Spark of bot-naam)
+  const opp = lastRound?.opponent || session.opponent || opponent;
+  const OPP_LABEL = {
+    'spark': 'Spark',
+    'bot-dood': 'De Dood 💀',
+    'bot-madelief': 'Madelief',
+    'bot-harry': 'Harry',
+    'bot-smith': 'Smith',
+    'bot-boekhouder': 'Boekhouder',
+  };
+  const oppLabel = OPP_LABEL[opp] || opp;
 
   return (
     <div data-testid="rps-bark" className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={stopGame}>
@@ -83,6 +98,9 @@ export function RpsBark({ userId, open, onClose }) {
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-300" />
             <h2 className="text-base font-bold text-amber-100">Steen — Papier — Schaar</h2>
+            <span data-testid="rps-opponent-label" className="text-[11px] text-amber-200/80">
+              · vs <strong>{oppLabel}</strong>
+            </span>
           </div>
           <button data-testid="rps-close" onClick={stopGame} className="text-amber-200 hover:text-white p-1.5 rounded-full bg-slate-800/60">
             <X className="w-4 h-4" />
@@ -116,7 +134,7 @@ export function RpsBark({ userId, open, onClose }) {
                 <div className="flex items-center justify-center gap-6">
                   <ChoiceBadge label="Jij" choice={lastRound.player_choice} cards={cards} />
                   <span className="text-2xl">vs</span>
-                  <ChoiceBadge label="Spark" choice={lastRound.spark_choice} cards={cards} />
+                  <ChoiceBadge label={oppLabel} choice={lastRound.opponent_choice || lastRound.spark_choice} cards={cards} />
                 </div>
                 {outcomeCard && (
                   <div className="flex items-center justify-center gap-2 pt-1">
@@ -174,7 +192,7 @@ export function RpsBark({ userId, open, onClose }) {
               )}
             </span>
             <span className={lastRound?.spark_is_learning ? 'text-cyan-400' : 'text-purple-400'}>
-              {lastRound?.spark_is_learning ? '🧠 Spark leert nog' : '⚡ Spark heeft je door'}
+              {lastRound?.spark_is_learning ? `🧠 ${oppLabel} leert nog` : `⚡ ${oppLabel} heeft je door`}
             </span>
           </div>
         </div>

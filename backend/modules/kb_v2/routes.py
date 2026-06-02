@@ -226,6 +226,76 @@ async def auto_resolve_inbox(body: AutoResolveBody):
     return result
 
 
+# v6_kbv2_vocab_sync_001 — herstel vocab-gaten (kaarten in lade maar niet in vocab)
+class VocabSyncBody(BaseModel):
+    dry_run: bool = True
+    viewer_id: str = "user-001"
+
+
+@router.post("/vocab/sync")
+@traced(intent="Sync vocab register met lade-kaarten", module="kb_v2")
+async def sync_vocab(body: VocabSyncBody):
+    """v6_kbv2_vocab_sync_001 — Herstel ontbrekende vocab-entries.
+
+    Probleem: kaarten die via legacy paden of mislukte hooks in de lades zijn beland,
+    staan WEL in de lade maar NIET in spark_vocab → Spark gebruikt het woord niet
+    actief in zijn taal. Geaccepteerd was zo'n geval.
+
+    Fix: loop door alle lade-kaarten, check vocab, en run `register_in_vocab()` voor
+    elke kaart die mist. Idempotent — kaarten die al in vocab staan worden niet
+    aangeraakt (behalve `last_seen`-update door bestaande hook-logica).
+
+    Admin-only (gradatie ≤ 2).
+    """
+    from modules.core.storage import load_json
+    from .service import _lade_path
+    from . import hooks as kbv2_hooks
+    from modules.dnd.world import _is_admin as _check_admin
+    from pathlib import Path
+    if not _check_admin(body.viewer_id):
+        return {"success": False, "error": "Alleen admin (gradatie ≤ 2) mag vocab syncen."}
+
+    base = Path(__file__).parent.parent.parent / "data"
+    vdata = load_json(base / "personality" / "spark_vocab.json", default={"vocab": {}})
+    vocab_keys = {k.lower() for k in vdata.get("vocab", {}).keys()}
+
+    missing = []
+    for lade in ["voelen", "spreken", "weten", "doen"]:
+        ldata = load_json(_lade_path(lade), default={"kaarten": []})
+        for k in ldata.get("kaarten", []):
+            begrip = (k.get("begrip") or "").strip()
+            if not begrip:
+                continue
+            if begrip.lower() not in vocab_keys:
+                missing.append({"id": k.get("id"), "begrip": begrip, "lade": lade})
+
+    result = {
+        "success": True,
+        "dry_run": body.dry_run,
+        "missing_count": len(missing),
+        "by_lade": {},
+        "examples": missing[:15],
+    }
+    for m in missing:
+        result["by_lade"][m["lade"]] = result["by_lade"].get(m["lade"], 0) + 1
+
+    if not body.dry_run:
+        registered = 0
+        for m in missing:
+            # Vind kaart en run register_in_vocab
+            ldata = load_json(_lade_path(m["lade"]), default={"kaarten": []})
+            card = next((k for k in ldata.get("kaarten", []) if k.get("id") == m["id"]), None)
+            if card:
+                try:
+                    kbv2_hooks.register_in_vocab(card)
+                    registered += 1
+                except Exception:
+                    pass
+        result["registered"] = registered
+
+    return result
+
+
 # v6_kbv2_delete_001 — permanent verwijderen van onbruikbare kaart
 class DeleteBody(BaseModel):
     card_id: str

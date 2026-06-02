@@ -859,17 +859,26 @@ def open_pot(user_id: str, pot_id: str, entry_price: float, current_cycle: int,
 
 
 def update_pot_tracking(user_id: str, pot_id: str, current_price: float) -> Dict:
-    """Update highest_price en trailing_active voor open positie."""
+    """Update highest_price en trailing_active voor open positie.
+
+    v6_zerodiv_guard_001 — guard tegen entry_price=0/None (b.v. corrupted anchor
+    pots zonder echte BUY-fill). Voorheen crashte de monitor loop met
+    ZeroDivisionError → 372 errors in 1 dag log spam.
+    """
     data = _load(user_id)
     user = data["users"][user_id]
     for p in user["potjes"]:
         if p["id"] == pot_id and p["position"]["is_open"]:
             pos = p["position"]
-            if current_price > pos["highest_price"]:
+            entry = pos.get("entry_price") or 0
+            if current_price > (pos.get("highest_price") or 0):
                 pos["highest_price"] = current_price
-            profit_pct = (current_price - pos["entry_price"]) / pos["entry_price"]
-            if profit_pct >= 0.01:
-                pos["trailing_active"] = True
+            if entry > 0:
+                profit_pct = (current_price - entry) / entry
+                if profit_pct >= 0.01:
+                    pos["trailing_active"] = True
+            # entry_price == 0 → position is open maar zonder fill-prijs; trailing
+            # activatie wacht tot een force-close of admin-reconcile dit oplost.
             _save(data)
             return p
     return {}

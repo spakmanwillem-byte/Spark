@@ -118,6 +118,114 @@ async def edit(body: EditBody):
     return service.edit_card(body.card_id, body.lade, updates=body.updates, user_id=body.user_id)
 
 
+# v6_kbv2_autoresolve_001 — bulk auto-classify van inbox-kaarten via topic+tags
+class AutoResolveBody(BaseModel):
+    reasons: Optional[List[str]] = None  # ['tag_tie', 'no_match'] — default beide
+    dry_run: bool = True
+    limit: Optional[int] = None  # max kaarten in 1 call (None = alles)
+    viewer_id: str = "user-001"
+
+
+@router.post("/inbox/auto-resolve")
+@traced(intent="Auto-classify inbox kaarten via topic+tags → lade", module="kb_v2")
+async def auto_resolve_inbox(body: AutoResolveBody):
+    """v6_kbv2_autoresolve_001 — Bulk auto-classify van inbox-kaarten.
+
+    Gebruikt `_auto_lade(topic, tags)` om kaarten met tag_tie/no_match-reden
+    naar de juiste lade te promoteren. Default dry_run=True (preview) zodat
+    je eerst kunt zien wat er ZOU gebeuren.
+
+    Filter:
+      reasons=['tag_tie'] of ['no_match'] of beide (default).
+      Kaarten zonder topic EN zonder tags → skipped (geen signaal).
+
+    Returns: {success, planned, executed, by_lade, skipped, examples}
+    Admin-only (gradatie ≤ 2).
+    """
+    from modules.core.storage import load_json
+    from .service import _inbox_path
+    # Admin-guard
+    from modules.dnd.world import _is_admin as _check_admin
+    if not _check_admin(body.viewer_id):
+        return {"success": False, "error": "Alleen admin (gradatie ≤ 2) mag inbox bulk-classifyen."}
+
+    reasons = set(body.reasons or ["tag_tie", "no_match"])
+    inbox = load_json(_inbox_path(), default={"kaarten": []})
+    kaarten = inbox.get("kaarten", [])
+
+    planned = []   # kaarten die we kunnen promoten
+    skipped = []   # geen topic + geen tags
+    for k in kaarten:
+        if k.get("_inbox_reason") not in reasons:
+            continue
+        # Skip als al laag1 gevuld (zou niet moeten kunnen voor deze reasons, maar safety)
+        topic = (k.get("topic") or "").strip()
+        tags = k.get("tags") or []
+        if not topic and not tags:
+            skipped.append({"id": k.get("id"), "begrip": k.get("begrip"), "reason": "geen topic en geen tags"})
+            continue
+        target_lade = _auto_lade(topic, tags)
+        # v6_kbv2_autoresolve_001 — alleen committen als _auto_lade een ECHTE match
+        # had (anders zou alles 'weten' worden via default). Word-boundary check
+        # (zelfde regex-grens als _auto_lade nu gebruikt).
+        import re as _re
+        matched = False
+        pool = [topic.lower()] if topic else []
+        pool.extend([str(t).lower() for t in tags])
+        for token in pool:
+            if any(_re.search(rf"(?:^|[\s\-_/]){_re.escape(key)}(?:$|[\s\-_/])", token)
+                   for key in _TOPIC_LADE_MAP.keys()):
+                matched = True
+                break
+        if not matched:
+            skipped.append({"id": k.get("id"), "begrip": k.get("begrip"), "reason": "topic/tags niet in lade-map"})
+            continue
+        planned.append({
+            "id": k.get("id"),
+            "begrip": k.get("begrip"),
+            "topic": topic or "-",
+            "tags_count": len(tags),
+            "reason": k.get("_inbox_reason"),
+            "→ lade": target_lade,
+        })
+
+    # Limit
+    if body.limit:
+        planned = planned[:body.limit]
+
+    by_lade: Dict[str, int] = {}
+    for p in planned:
+        by_lade[p["→ lade"]] = by_lade.get(p["→ lade"], 0) + 1
+
+    result = {
+        "success": True,
+        "dry_run": body.dry_run,
+        "planned_count": len(planned),
+        "by_lade": by_lade,
+        "skipped_count": len(skipped),
+        "examples": planned[:10],
+        "skipped_examples": skipped[:5],
+    }
+
+    if not body.dry_run:
+        executed = 0
+        failures = []
+        for p in planned:
+            try:
+                r = service.classify_card(p["id"], p["→ lade"], updates=None, user_id=body.viewer_id)
+                if r and r.get("success"):
+                    executed += 1
+                else:
+                    failures.append({"id": p["id"], "error": r.get("message") if r else "no result"})
+            except Exception as e:
+                failures.append({"id": p["id"], "error": str(e)[:80]})
+        result["executed"] = executed
+        result["failure_count"] = len(failures)
+        result["failures"] = failures[:5]
+
+    return result
+
+
 # v6_kbv2_delete_001 — permanent verwijderen van onbruikbare kaart
 class DeleteBody(BaseModel):
     card_id: str
@@ -337,12 +445,18 @@ _TOPIC_LADE_MAP = {
 
 
 def _auto_lade(topic: Optional[str], tags: Optional[List[str]]) -> str:
+    """v6_kbv2_autoresolve_001 — Map topic+tags naar lade via WORD-boundary.
+    Voorheen werd `if key in token` substring-match gebruikt → false positives
+    zoals 'taal' in 'metaal' (Nikkel → spreken). Nu: woord-grens regex zodat
+    enkel hele tokens of door spatie/streepje gescheiden delen matchen.
+    """
+    import re as _re
     pool = []
     if topic: pool.append(str(topic).lower())
     pool.extend([str(t).lower() for t in (tags or [])])
     for token in pool:
         for key, lade in _TOPIC_LADE_MAP.items():
-            if key in token:
+            if _re.search(rf"(?:^|[\s\-_/]){_re.escape(key)}(?:$|[\s\-_/])", token):
                 return lade
     return "weten"  # safe default
 

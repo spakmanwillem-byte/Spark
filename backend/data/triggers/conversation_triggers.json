@@ -90,6 +90,59 @@
       "dat klopt"
     ]
   },
+  "cancel": {
+    "triggers": [
+      "annuleer",
+      "annuleren",
+      "stop",
+      "laat maar",
+      "vergeet het",
+      "vergeet het maar",
+      "niet doen",
+      "cancel",
+      "stop maar"
+    ],
+    "responses": [
+      "Oké, ik laat het rusten.",
+      "Goed, niks aan de hand. We gaan verder.",
+      "Annuleerd. Wat wil je in plaats daarvan?",
+      "Komt goed, ik vergeet het."
+    ],
+    "_note": "Generieke cancel-trigger. Wedervraag-flow gebruikt hier 'wedervraag_skip' als hogere prioriteit route."
+  },
+  "affirm": {
+    "triggers": [
+      "ja",
+      "yes",
+      "jep",
+      "klopt",
+      "inderdaad",
+      "absoluut",
+      "doe maar",
+      "ok",
+      "okay",
+      "oké",
+      "prima",
+      "goed",
+      "akkoord"
+    ],
+    "responses": [],
+    "_note": "Bevestiging. Wordt door wedervraag-flow opgepakt als 'wedervraag_done'."
+  },
+  "deny": {
+    "triggers": [
+      "nee",
+      "nope",
+      "niet",
+      "klopt niet",
+      "fout",
+      "verkeerd",
+      "niks",
+      "no"
+    ],
+    "responses": [],
+    "_note": "Ontkenning. Wordt door wedervraag-flow opgepakt voor herklassificatie."
+  },
   "metadata": {
     "purpose": "Triggers voor sociale interacties en basisgesprekken",
     "creator": "System",

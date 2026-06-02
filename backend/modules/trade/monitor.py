@@ -983,8 +983,12 @@ class MonitorService:
             for mkt in list(self._markets):
                 try:
                     self._run_market_cycle(mkt, context_per_market, price_by_market.get(mkt))
+                except ZeroDivisionError as e:
+                    # v6_zerodiv_guard_001 — log met user-id en stack-trace voor diagnose
+                    import traceback as _tb
+                    logger.error(f"Monitor cycle ZeroDivision ({mkt}) user={self._user_id}: {e}\n{_tb.format_exc()[:800]}")
                 except Exception as e:
-                    logger.error(f"Monitor cycle error ({mkt}): {e}")
+                    logger.error(f"Monitor cycle error ({mkt}) user={self._user_id}: {e}")
 
             elapsed = 0
             while elapsed < self._interval and not self._stop_event.is_set():
@@ -1022,7 +1026,12 @@ class MonitorService:
                 potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
                 pos = pot["position"]
                 entry = pos["entry_price"]
-                highest = max(pos.get("highest_price", entry), price)
+                if not entry or entry <= 0:
+                    # v6_zerodiv_guard_001 — open positie zonder valide entry-prijs:
+                    # b.v. anchor met manual lock zonder echte BUY fill. Skip SELL-logica;
+                    # admin moet eerst reconcilen via force-close of /api/trade/reconcile/spark.
+                    continue
+                highest = max(pos.get("highest_price", entry) or entry, price)
                 profit_pct = (price - entry) / entry
                 bruto = pot["capital"] * profit_pct
                 fees = pot["capital"] * BITVAVO_TAKER_FEE * 2

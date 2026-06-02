@@ -79,7 +79,10 @@
         "heb ik verlies",
         "winst (en|/)?verlies",
         "(P/L|PnL|profit)",
-        "hoeveel heb ik (verdiend|verloren)"
+        "hoeveel heb ik (verdiend|verloren)",
+        "(laat (me )?(zien )?)?(mijn |de )?trade ?winst",
+        "(trade|trader) (winst|verlies|pnl|p&l|opbrengst)",
+        "wat heb ik verdiend"
       ],
       "status": "live",
       "module": "trade/routes.py",
@@ -271,7 +274,8 @@
         "(audit|systeem) (gezondheid|health|status|check)",
         "(hoe (gaat|staat) (het|t) met) (het )?(systeem|spark)",
         "(scan|controle) (op )?(fouten|errors|kapot)",
-        "gezondheid(s)?( |-)check",
+        "gezondheid(s)?( |-)?check",
+        "(doe|run) (een|de)? ?(gezondheid|health|audit)",
         "wat is kapot"
       ],
       "status": "live",
@@ -292,6 +296,22 @@
       "status": "live",
       "module": "chat/agenda_intent_service.py",
       "endpoint": null
+    },
+    {
+      "id": "notities_overzicht",
+      "naam": "Notities & dagboek",
+      "categorie": "geheugen",
+      "beschrijving": "Toon recente notities, dagboek-entries of taken.",
+      "triggers": [
+        "(waar zijn|toon|laat (me|zien)) (mijn )?(notities|aantekeningen|notes)",
+        "(open|ga naar) (het )?dagboek",
+        "(mijn )?dagboek (van )?(vandaag|gisteren|deze week)",
+        "(toon|wat zijn) (mijn )?taken",
+        "(notities|notes|dagboek) (lijst|overzicht)"
+      ],
+      "status": "live",
+      "module": "notes/routes.py",
+      "endpoint": "/api/notes/all"
     }
   ],
   "_lege_categorieen_voor_later": {

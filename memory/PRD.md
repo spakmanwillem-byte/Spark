@@ -1,5 +1,37 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 21C — RPS V2: korte triggers, community bots, help-integratie)
+
+### 🎮 v6_rps_001b — RPS uitbreidingen
+**Korte triggers** in chat-routes: "speel steen" / "speel papier" / "speel schaar" / "spelletje sps" / "speel spelletje" openen nu allemaal de game (naast oorspronkelijke "speel steen papier schaar").
+
+**Community-mode** (random bot-tegenstanders):
+- Spark-tab → opponent = "spark" (eerste 10 random, dan leren).
+- Community-tab → opponent = "bot" → service kiest random uit ["bot-madelief","bot-harry","bot-smith","bot-boekhouder","bot-dood"].
+- Slimheid: alleen "spark" en **"bot-dood"** gebruiken het learning-algoritme (= moeilijk). Andere bots zijn 100% random (makkelijk).
+- Opponent wordt opgeslagen in sessie en getoond in bark-header: "vs Spark" / "vs De Dood 💀" / "vs Madelief" etc.
+
+**Live KB-image lookup** (`rps_routes._hydrated_cards()`): kaarten met `image=None` in de hardcoded RPS_CARDS dict worden live opgezocht in `data/knowledge/v2/*.json`. Dit pakt automatisch nieuw geüploade afbeeldingen op — bv. Willem heeft net een "denkt na"-image geupload (`c6b518680717`) die nu vanzelf in de bark verschijnt.
+
+**KB-tagging "sps"**: alle 10 RPS-gerelateerde kaarten (Steen, Papier, Schaar, Gewonnen, Verloren, Denkt na, Maak een keus, Score, High Score, Stop) hebben nu de tag `sps` voor toekomstige geluidskoppeling (geluidsbestanden krijgen de "sps"-prefix).
+
+**Help-integratie** (`data/help/gradatie_7.json`): RPS-topic toegevoegd aan gradatie 7 (laagste), via inheritance-chain (1→2→3→4→5→6→7) zichtbaar in alle gradaties. Inclusief shortcuts voor "speel sps", "hoe vaak gewonnen", "reset score sps".
+
+**Frontend** (`RpsBark.js`):
+- Nieuwe `opponent` prop met default 'spark'.
+- Header toont `vs <oppLabel>` (Spark / De Dood 💀 / Madelief / etc.).
+- ChoiceBadge en learning-indicator gebruiken dynamisch de opponent-naam.
+- `useEffect` triggert `/games/rps/start?opponent=X` bij open.
+
+**Frontend** (`GesprekkenPage.js`):
+- Spark-tab stuurt `channel:'spark'` → backend bepaalt opponent.
+- Community-tab: client-side trigger-detectie vóór de bot-POST, opent bark direct met `opponent='bot'`.
+
+**Verified**: testing agent iteration 25 — 14/14 backend pytest + 5/5 frontend Playwright flows passed. Geen bugs, geen issues. Test-bestand: `/app/backend/tests/test_rps_v2_iter25.py`.
+
+---
+
+
 ## Completed (2026-06-02 — sessie 21B — Steen-Papier-Schaar mini-game)
 
 ### 🎮 v6_rps_001 — RPS mini-game in chat

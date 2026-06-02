@@ -1,5 +1,28 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 21 — KB v2 image-delete + Admin frame-bark)
+
+### 🖼️ v6_kbv2_image_delete_visibility_001 — Foto-X altijd zichtbaar
+- **Bug**: delete-X knop op KB v2 kaart-foto's stond op `opacity-0 group-hover:opacity-100` → onzichtbaar op touch/mobile of voor users die niet wisten dat hoveren nodig was.
+- **Fix**: knop nu altijd zichtbaar als rood cirkeltje met witte X + `shadow-md ring-1 ring-slate-900` voor contrast (file: `frontend/src/components/workspace/KennisbankV2Page.js` regels 1167-1185).
+- **Backend**: `DELETE /api/kb/v2/media/image/{card_id}?image_url=...` was al correct, met curl getest (HTTP 200, `{success:true, remaining:N}`).
+- **Verified**: testing agent iteration 23 (computed opacity=1, zichtbaar zonder hover).
+
+### 🛡️ v6_admin_grant_frame_001 — Admin grant via ornamental InputBark
+- **Verandering**: oude inline form (select + password + button) in `InstellingenPage.js` Admin-tab vervangen door één trigger-knop **"Maak admin (in frame-bark)"** die de ceremoniële InputBark met het ornament-frame opent.
+- **InputBark velden**: `targetId` (select met grantable users) + `grantPw` (password). Submit roept `grant({targetId, grantPw})` → `POST /api/admin/grant`.
+- **UX**: bij succes → success-bark "Admin geactiveerd"; bij fout → error-bark "Toegang geweigerd". Frame-popup auto-sluit bij succes.
+- **File**: `frontend/src/components/admin/InstellingenPage.js` (regels 970-1005 trigger + 1024-1080 InputBark renderer).
+- **Verified**: testing agent iteration 23 (BarkModal opent met frame, 22 user-opties, password input, Annuleer werkt).
+
+### 🐛 Bug 733a8bb9 closed — KB v2 onbruikbare kaarten verwijderen
+- UI-knop `data-testid="kbv2-delete-btn"` bestond al in CardDetail header (v6_kbv2_delete_001).
+- Backend `POST /api/kb/v2/delete` getest (geeft correcte 404 voor onbekende kaart).
+- Bug-entry in `data/bugs/bugs.json` gemarkeerd als `opgelost`.
+
+---
+
+
 ## Completed (2026-06-02 — sessie 19/20 — Admin-rol systeem + bark-modal)
 
 ### 🛡️ v6_admin_role_001 — Admin als losstaande technische rol

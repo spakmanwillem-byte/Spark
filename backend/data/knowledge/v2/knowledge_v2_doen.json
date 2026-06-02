@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 842,
+    "card_count": 843,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T19:41:13.746366+00:00"
+    "last_updated": "2026-06-02T19:43:00.940458+00:00"
   },
   "kaarten": [
     {
@@ -105146,6 +105146,14 @@
               "active": false,
               "is_new": false
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:41:13.992778+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
           }
         ]
       },
@@ -105159,6 +105167,69 @@
       },
       "needs": [
         "voice"
+      ]
+    },
+    {
+      "id": "kbv2-a406125f",
+      "begrip": "Denkt na",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Denkt na is een toestand waarin informatie wordt verwerkt om tot een begrip, keuze of conclusie te komen.",
+        "laag2": "Denkt na geeft aan dat analyse of afweging plaatsvindt.",
+        "laag3": "Nadenken ondersteunt begrip, beoordeling en besluitvorming door informatie te verwerken en verbanden te onderzoeken.\n",
+        "laag4": "Binnen Spark is denkt na een actieve verwerkingsstatus waarin kennis, context en waarnemingen worden onderzocht voordat een reactie, keuze of actie wordt uitgevoerd.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een toestand van verwerking en analyse",
+        "wanneer": "bij vragen, keuzes of nieuwe informatie",
+        "waar": "in denken, communicatie en besluitvorming",
+        "waarom": "om tot een beter begrip of passende reactie te komen",
+        "hoe": "door informatie te vergelijken, interpreteren en af te wegen"
+      },
+      "tags": [
+        "door informatie te vergelijken",
+        "interpreteren en af te wegen"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T19:43:00.940438+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:24:13.645559+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:42:55.563961+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:24:23.130231+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:42:55.693597+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
       ]
     }
   ]

@@ -146,34 +146,164 @@ def list_inbox(limit: int = 50, offset: int = 0, reason: str = "", search: str =
     }
 
 
+def _build_priority_signals() -> Dict:
+    """v6_kbv2_priority_002 — Bouw de externe signaal-indexes voor prio-scoring.
+    Wordt 1× per priority-call gebouwd, niet per kaart (anders O(n²)).
+
+    Returns dict met:
+      vocab_active: set van begrip.lower() die in spark_vocab.active=True staan
+      intent_freq: dict begrip.lower() → aantal keer dat woord in laatste 500 intents voorkomt
+      laag1_refs:  dict begrip.lower() → aantal andere lade-kaarten die dit woord in laag1 noemen
+    """
+    # NL stopwoorden — filter uit cross-ref/intent zodat "zijn, niet, manier" niet bovenaan komen
+    STOP = {
+        "een", "het", "die", "deze", "dit", "dat", "der", "den", "des", "wie", "wat",
+        "waar", "wanneer", "hoe", "waarom", "alle", "alles", "iets", "niets", "zo", "ook",
+        "maar", "want", "omdat", "dus", "toch", "echter", "want", "of", "en", "noch",
+        "niet", "wel", "geen", "naar", "over", "voor", "uit", "door", "tegen", "tussen",
+        "achter", "boven", "onder", "binnen", "buiten", "tijdens", "zonder", "vanaf",
+        "vooral", "alleen", "even", "alvast", "graag", "ergens", "overal", "nergens",
+        "hier", "daar", "ginds", "vandaag", "morgen", "gisteren", "nu", "later", "altijd",
+        "soms", "vaak", "nooit", "meestal", "weer", "opnieuw", "snel", "langzaam",
+        "zijn", "ben", "bent", "was", "waren", "geweest", "worden", "wordt", "werd",
+        "heeft", "hebben", "had", "hadden", "gehad", "doen", "doet", "deed", "gedaan",
+        "gaat", "gaan", "ging", "gingen", "gegaan", "komen", "komt", "kwam", "kwamen",
+        "gekomen", "kan", "kun", "kunnen", "kon", "konden", "moet", "moeten", "moest",
+        "moesten", "mag", "mogen", "mocht", "mochten", "wil", "willen", "wilde",
+        "wilden", "zal", "zou", "zouden", "ja", "nee", "misschien", "vast", "wel",
+        "zelf", "alleen", "samen", "ergens", "geven", "geeft", "gaf", "gegeven",
+        "maken", "maakt", "maakte", "gemaakt", "zien", "zie", "zag", "gezien",
+        "laten", "laat", "liet", "gelaten", "vinden", "vindt", "vond", "gevonden",
+        "weten", "weet", "wist", "geweten", "zeggen", "zegt", "zei", "gezegd",
+        "manier", "deel", "kant", "ding", "dingen", "klein", "groot", "veel", "weinig",
+        "meer", "minder", "iets", "twee", "drie", "vier", "vijf", "kenmerken",
+        "uitspraak", "andere", "anders", "elke", "elk", "iedere", "alle", "alles",
+        "mij", "jou", "hem", "haar", "ons", "jullie", "hen", "hun", "ze", "we", "je",
+    }
+
+    base = Path(__file__).parent.parent.parent / "data"
+    # 1. Vocab actives
+    vocab_active = set()
+    try:
+        vdata = load_json(base / "personality" / "spark_vocab.json", default={"vocab": {}})
+        for word, entry in vdata.get("vocab", {}).items():
+            if isinstance(entry, dict) and entry.get("active"):
+                vocab_active.add(word.lower())
+    except Exception:
+        pass
+
+    def _is_signal_word(w: str) -> bool:
+        return len(w) >= 4 and w not in STOP
+
+    # 2. Intent frequencies (laatste 500 regels)
+    intent_freq: Dict[str, int] = {}
+    intent_log = base / "system" / "intent_log.jsonl"
+    try:
+        if intent_log.exists():
+            import json as _json
+            with open(intent_log, "r") as f:
+                lines = f.readlines()[-500:]
+            for line in lines:
+                try:
+                    obj = _json.loads(line)
+                    text = (obj.get("text") or "").lower()
+                    for w in text.replace(".", " ").replace(",", " ").replace("?", " ").split():
+                        if _is_signal_word(w):
+                            intent_freq[w] = intent_freq.get(w, 0) + 1
+                except Exception:
+                    continue
+    except Exception:
+        pass
+
+    # 3. Cross-references in laag1 van andere lade-kaarten
+    laag1_refs: Dict[str, int] = {}
+    for lade in LADES:
+        try:
+            ldata = load_json(V2_DIR / f"knowledge_v2_{lade}.json", default={"kaarten": []})
+            for k in ldata.get("kaarten", []):
+                laag1 = ((k.get("lagen") or {}).get("laag1") or "").lower()
+                if not laag1:
+                    continue
+                for w in laag1.replace(".", " ").replace(",", " ").split():
+                    if _is_signal_word(w):
+                        laag1_refs[w] = laag1_refs.get(w, 0) + 1
+        except Exception:
+            continue
+
+    return {
+        "vocab_active": vocab_active,
+        "intent_freq": intent_freq,
+        "laag1_refs": laag1_refs,
+    }
+
+
 def list_priority_missing_laag1(limit: int = 50) -> Dict:
     """
-    v6_kbv2_priority_001 — Top N kaarten zonder laag1, gesorteerd op belangrijkheid.
+    v6_kbv2_priority_002 — Top N kaarten zonder laag1, gesorteerd op echte signalen
+    i.p.v. alleen interne tags/verbanden.
 
     Score-formule (hoger = belangrijker om eerst in te vullen):
-      + 3 punten per bestaand verband (kaart wordt al ergens aan gerefereerd)
-      + 1 punt per tag (hoe rijker getagd, hoe meer Spark er al van weet)
-      + 5 punten als topic gevuld is (Spark heeft 5W-vragen er over gehad)
-      + 2 punten als ws5 gedeeltelijk gevuld is
+      + 10 punten als Spark dit woord al active gebruikt (spark_vocab.active=true)
+                    → kaart "vult zichzelf in" als context voor Spark's eigen taal
+      +  5 punten per keer dat het woord in de laag1 van andere lade-kaarten staat
+                    → cross-reference: woord is fundament voor andere kennis
+      +  3 punten per keer dat het woord in laatste 500 intents is getypt
+                    → mensen vragen Spark al over dit begrip
+      +  3 punten per bestaand verband (kaart wordt al ergens aan gerefereerd)
+      +  5 punten als topic gevuld is (Spark heeft 5W-vragen er over gehad)
+      +  2 punten als ws5 gedeeltelijk gevuld is
+      +  1 punt per tag (mild signaal)
 
-    Geeft top-N kaarten terug met `score` + `reasons[]` voor transparantie.
+    Returnt: kaarten[] met {id, begrip, lade, score, reasons[], breakdown}
     """
     data = load_json(_inbox_path(), default={"kaarten": []})
     kaarten = data.get("kaarten", [])
-    # Filter: alleen zonder laag1
     no_laag1 = [k for k in kaarten if not (k.get("lagen") or {}).get("laag1", "").strip()]
+
+    sig = _build_priority_signals()
+    vocab_active = sig["vocab_active"]
+    intent_freq = sig["intent_freq"]
+    laag1_refs = sig["laag1_refs"]
 
     scored = []
     for k in no_laag1:
         score = 0
         reasons = []
+        breakdown: Dict[str, int] = {}
+        begrip = (k.get("begrip") or "").strip().lower()
+
+        # NIEUW: 1. Vocab-active boost
+        if begrip and begrip in vocab_active:
+            score += 10
+            reasons.append("Spark gebruikt dit al active (+10)")
+            breakdown["vocab_active"] = 10
+
+        # NIEUW: 2. Cross-reference in laag1
+        if begrip and begrip in laag1_refs:
+            n = laag1_refs[begrip]
+            pts = n * 5
+            score += pts
+            reasons.append(f"{n}× genoemd in andere kaarten laag1 (×5)")
+            breakdown["laag1_refs"] = pts
+
+        # NIEUW: 3. Intent frequency
+        if begrip and begrip in intent_freq:
+            n = intent_freq[begrip]
+            pts = n * 3
+            score += pts
+            reasons.append(f"{n}× getypt in recente intents (×3)")
+            breakdown["intent_freq"] = pts
+
+        # Bestaande signalen
         verbanden = k.get("verbanden") or []
         if verbanden:
             n = len(verbanden)
-            score += n * 3
+            pts = n * 3
+            score += pts
             reasons.append(f"{n} verbanden (×3)")
+            breakdown["verbanden"] = pts
+
         tags = k.get("tags") or []
-        # Tags kunnen ook 1 string-met-comma's zijn (legacy)
         if isinstance(tags, list):
             n_tags = sum(len(str(t).split(",")) for t in tags) if tags and isinstance(tags[0], str) and "," in str(tags[0]) else len(tags)
         else:
@@ -181,14 +311,19 @@ def list_priority_missing_laag1(limit: int = 50) -> Dict:
         if n_tags:
             score += n_tags
             reasons.append(f"{n_tags} tags (×1)")
+            breakdown["tags"] = n_tags
+
         topic = (k.get("topic") or "").strip()
         if topic:
             score += 5
             reasons.append("topic gevuld (+5)")
+            breakdown["topic"] = 5
         ws5 = k.get("ws5") or {}
         if isinstance(ws5, dict) and any(v for v in ws5.values() if v):
             score += 2
             reasons.append("ws5 gedeeltelijk (+2)")
+            breakdown["ws5"] = 2
+
         scored.append({
             "id": k.get("id"),
             "begrip": k.get("begrip"),
@@ -198,14 +333,24 @@ def list_priority_missing_laag1(limit: int = 50) -> Dict:
             "verbanden_count": len(verbanden),
             "has_topic": bool(topic),
             "has_ws5_partial": isinstance(ws5, dict) and any(v for v in ws5.values() if v),
+            "vocab_active": begrip in vocab_active,
+            "laag1_refs": laag1_refs.get(begrip, 0),
+            "intent_freq": intent_freq.get(begrip, 0),
             "score": score,
             "reasons": reasons,
+            "breakdown": breakdown,
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
     return {
         "total_missing_laag1": len(no_laag1),
         "limit": limit,
+        "formula_version": "v2",
+        "signals_used": {
+            "vocab_active_count": len(vocab_active),
+            "intent_words_indexed": len(intent_freq),
+            "laag1_refs_indexed": len(laag1_refs),
+        },
         "kaarten": scored[:limit],
     }
 

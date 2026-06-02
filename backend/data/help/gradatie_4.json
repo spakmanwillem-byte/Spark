@@ -1,0 +1,26 @@
+{
+  "gradatie": 4,
+  "label": "Vertrouwd Lid",
+  "intro": "Op gradatie 4 krijg je toegang tot Trade en Boekhouding. Echte verantwoordelijkheid: Spark kan voor jou handelen.",
+  "inherits_from": "gradatie_5",
+  "extra_topics": [
+    {
+      "id": "trade",
+      "label": "Trade",
+      "korte_uitleg": "Hier draait de crypto-trade-bot. Je ziet je potjes (kapitaal-pakketten), live prijzen, en wat de bot voor je doet.",
+      "deep_uitleg": "De bot werkt met potjes van €10 per coin. Bij stijging trail-SELT hij automatisch. Bij daling kan een shadow-cascade extra kopen op de bodem. Je beheerst alles via de Snel Handelen kaart of de potje-overzichten.",
+      "nav_path": "/modules/trade",
+      "nav_testid": "nav-trade",
+      "synonyms": ["trade", "trader", "trading", "bot", "potje", "potjes", "crypto", "bitvavo", "handel"]
+    },
+    {
+      "id": "boekhouding",
+      "label": "Boekhouding",
+      "korte_uitleg": "Inkomsten en uitgaven in/uit je ROAR-economie. Voor zelfreflectie of opslag-controle.",
+      "deep_uitleg": "Spark voert double-entry boekhouding voor jouw transacties. Alles is met datum + omschrijving terug te vinden. Exporteren kan op gradatie 2+.",
+      "nav_path": "/modules/boekhouding",
+      "nav_testid": "nav-boekhouding",
+      "synonyms": ["boekhouding", "boekhouder", "transacties", "uitgaven", "inkomsten", "kasboek"]
+    }
+  ]
+}

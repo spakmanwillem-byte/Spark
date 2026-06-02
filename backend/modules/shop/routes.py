@@ -726,10 +726,36 @@ class ProductUpsert(BaseModel):
 
 
 def _require_admin(viewer_id: str) -> None:
+    """v6_shop_admin_legacy — laat bestaande gradatie-2-admins doorgaan voor backwards-compat.
+    Voor STRIKTE admin-only-acties → gebruik admin_service.is_admin() direct.
+    """
     users = load_json(DATA_DIR / "system" / "users.json", default={"users": []})
     viewer = next((u for u in users.get("users", []) if u.get("id") == viewer_id), None)
-    if not viewer or (viewer.get("gradatie") or 7) > 2:
-        raise HTTPException(403, "Alleen admins (gradatie ≤ 2)")
+    if not viewer:
+        raise HTTPException(403, "Gebruiker niet gevonden")
+    # v6_admin_role_001 — accept either user.admin == True OR legacy gradatie ≤ 2
+    is_strict_admin = viewer.get("admin") is True
+    is_legacy_admin = (viewer.get("gradatie") or 7) <= 2
+    if not (is_strict_admin or is_legacy_admin):
+        raise HTTPException(403, "Alleen admins")
+
+
+# v6_shop_delete_001 — delete shop (test/legacy cleanup)
+@router.delete("/admin/shops/{shop_id}")
+async def admin_delete_shop(shop_id: str, viewer_id: str):
+    """Verwijder een shop. Alleen door admin. Roadkillshop (system-default)
+    kan niet verwijderd worden."""
+    _require_admin(viewer_id)
+    if shop_id == "shop-roadkill":
+        raise HTTPException(400, "System-default shop kan niet verwijderd worden")
+    data = load_json(SHOPS, default={"shops": []})
+    shops = data.get("shops", [])
+    before = len(shops)
+    data["shops"] = [s for s in shops if s.get("id") != shop_id]
+    if len(data["shops"]) == before:
+        raise HTTPException(404, f"Shop {shop_id} niet gevonden")
+    save_json(SHOPS, data)
+    return {"success": True, "deleted": shop_id, "remaining": len(data["shops"])}
 
 
 @router.post("/admin/products")

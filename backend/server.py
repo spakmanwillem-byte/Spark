@@ -309,6 +309,10 @@ app.include_router(admin_capabilities_router, prefix="/api")
 # v6_admin_role_001 — Admin role grant/revoke + bark-image lookup
 from modules.admin import role_router as admin_role_router
 app.include_router(admin_role_router, prefix="/api")
+
+# v6_help_001 — Gradatie-gebaseerde help + 'waar is X' lookup
+from modules.help import help_router
+app.include_router(help_router, prefix="/api")
 # Bootstrap-load admin password uit JSON-bestand (overrules env-default voor live wijzigingen)
 try:
     from modules.admin import admin_service as _admin_svc

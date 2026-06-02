@@ -5,11 +5,12 @@ import {
   BarChart3, Target, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Settings, Shield, Wallet, Trophy, Bell, TrendingUp, User, Map,
   BookHeart, StickyNote, Award, ShoppingBag, BookMarked, Archive, HandHeart,
-  Activity
+  Activity, HelpCircle
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
 import { BarkQueueOverlay } from '../common/BarkQueueOverlay';
+import { HelpBark } from '../shared/HelpBark';
 
 // Navigation configuration - easy to extend
 export const navigationConfig = {
@@ -95,6 +96,7 @@ export function getVisibilityForGradatie(grad) {
 export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const { user, logout, isAdmin } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);  // v6_help_001
 
   // v5_presence_heartbeat_001 — Globale heartbeat, update last_active elke 30s
   useEffect(() => {
@@ -508,6 +510,16 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 
         {/* User & Collapse */}
         <div className="border-t border-slate-800 p-3">
+          {/* v6_help_001 — Help knop */}
+          <button
+            data-testid="sidebar-help-btn"
+            onClick={() => setShowHelp(true)}
+            className={`w-full flex items-center gap-2 px-3 py-2 mb-2 text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 rounded-xl transition-colors ${sidebarCollapsed ? 'justify-center' : ''}`}
+          >
+            <HelpCircle className="w-4 h-4" />
+            {!sidebarCollapsed && <span className="text-xs">Help</span>}
+          </button>
+
           {/* User info */}
           {!sidebarCollapsed && (
             <div className="flex items-center gap-3 px-3 py-2 mb-2">
@@ -560,6 +572,8 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
       </main>
       {/* v4_update_bark_001 — privacy + deploy update barks */}
       {user?.id && <BarkQueueOverlay userId={user.id} />}
+      {/* v6_help_001 — Help-bark popup */}
+      <HelpBark open={showHelp} onClose={() => setShowHelp(false)} userId={user?.id} />
     </div>
   );
 }

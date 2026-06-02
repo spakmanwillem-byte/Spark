@@ -1,0 +1,94 @@
+{
+  "gradatie": 7,
+  "label": "Gast / Nieuwkomer",
+  "intro": "Welkom! Je hebt net kennis gemaakt met Spark. Op deze gradatie kan je het basisteam ontmoeten en meedoen aan gesprekken. Dit zijn de tabs die jij kan gebruiken:",
+  "topics": [
+    {
+      "id": "dashboard",
+      "label": "Dashboard",
+      "korte_uitleg": "Je startpagina. Hier zie je in 1 oogopslag wat er speelt: een welkomstgroet van Spark, jouw gradatie, en wat snelle knoppen naar belangrijke acties.",
+      "deep_uitleg": "Het dashboard is gepersonaliseerd. Als je vaker een tab gebruikt, krijgt die hier ook een snelkoppeling. Spark kan ook tips tonen die bij jouw vragen-geschiedenis passen.",
+      "nav_path": "/",
+      "nav_testid": "nav-dashboard",
+      "synonyms": ["dashboard", "home", "begin", "start", "voorpagina"]
+    },
+    {
+      "id": "chat",
+      "label": "Gesprekken (Chat)",
+      "korte_uitleg": "Praat met Spark. Stel een vraag, vertel iets, of geef een commando. Spark antwoordt in het Nederlands en past zijn toon aan jouw gevoel.",
+      "deep_uitleg": "Onder Gesprekken zit ook geschiedenis: je vorige sessies. Spark onthoudt context per sessie maar kan ook lange-termijn onthouden als jij dat aanduidt ('onthoud dit').",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["chat", "praat", "spreek", "spark", "gesprek", "gesprekken"]
+    },
+    {
+      "id": "notities",
+      "label": "Notities & Taken",
+      "korte_uitleg": "Snelle notities maken die alleen jij kan zien. Handig om dingen te onthouden voor later.",
+      "deep_uitleg": "Notities kunnen ook taken worden met deadlines. Spark kan je herinneren als een taak verloopt.",
+      "nav_path": "/notities",
+      "nav_testid": "nav-notities",
+      "synonyms": ["notitie", "notities", "taken", "todo", "lijst", "aantekening"]
+    },
+    {
+      "id": "roadmap",
+      "label": "Roadmap",
+      "korte_uitleg": "Bekijk wat er nog op de planning staat voor Spark. Hier zie je welke functies eraan komen.",
+      "deep_uitleg": "De roadmap is openbaar — je kan zien waar Willem aan werkt en wat is afgevinkt. Goede plek om context te krijgen over Spark als project.",
+      "nav_path": "/roadmap",
+      "nav_testid": "nav-roadmap",
+      "synonyms": ["roadmap", "planning", "toekomst", "wat komt"]
+    },
+    {
+      "id": "wallet",
+      "label": "Wallet",
+      "korte_uitleg": "Hier zie je jouw ROAR-saldo en transacties. Op gradatie 7 is dit alleen-lezen.",
+      "deep_uitleg": "Je krijgt ROAR door dingen te doen in Spark: een goed gesprek, een opdracht voltooien, of een achievement. Op hogere gradaties kun je hier mee handelen.",
+      "nav_path": "/modules/wallet",
+      "nav_testid": "nav-wallet",
+      "synonyms": ["wallet", "portemonnee", "saldo", "balance", "geld", "roar"]
+    },
+    {
+      "id": "winkel",
+      "label": "Winkel",
+      "korte_uitleg": "Koop merch, digitale goederen of cadeau-codes met ROAR of geld. Hier kan je ook cadeautjes geven aan vrienden.",
+      "deep_uitleg": "Producten zijn opgedeeld in categorieën (merch, digitaal, etc). Sommige producten zijn alleen voor hogere gradaties. Vraag Spark 'wat kan ik kopen?' voor persoonlijke suggesties.",
+      "nav_path": "/modules/winkel",
+      "nav_testid": "nav-winkel",
+      "synonyms": ["winkel", "shop", "kopen", "merch", "koop", "winkeltje", "store"]
+    },
+    {
+      "id": "achievements",
+      "label": "Achievements",
+      "korte_uitleg": "Verzamel badges door dingen te doen. Elke achievement geeft ROAR en soms een titel.",
+      "deep_uitleg": "Achievements zijn zowel sociaal (eerste gesprek, 10 vrienden) als technisch (eerste trade, 100 kaarten gelezen). Spark juicht je toe bij elke unlock.",
+      "nav_path": "/modules/achievements",
+      "nav_testid": "nav-achievements",
+      "synonyms": ["achievement", "achievements", "badge", "badges", "prestatie", "prestaties"]
+    },
+    {
+      "id": "leaderboard",
+      "label": "Leaderboard",
+      "korte_uitleg": "Wie is het meest actief? Hier zie je de top-spelers.",
+      "deep_uitleg": "Het leaderboard heeft verschillende categorieën: meest verdiend, meest geholpen, meeste kaarten geclassificeerd, etc. Pure motivatie, geen prijzen.",
+      "nav_path": "/modules/leaderboard",
+      "nav_testid": "nav-leaderboard",
+      "synonyms": ["leaderboard", "top", "ranglijst", "scores", "wie is beste"]
+    },
+    {
+      "id": "profiel",
+      "label": "Mijn Profiel",
+      "korte_uitleg": "Bekijk en wijzig je avatar, sleutelwoord, en thema. Je gradatie staat hier ook.",
+      "deep_uitleg": "Het profiel heeft tabs: Algemeen (avatar/naam), Instellingen (sleutelwoord), en D&D karakter (klasse/beroep/fractie). Verschijning hangt af van je gradatie.",
+      "nav_path": "/profiel",
+      "nav_testid": "nav-profiel",
+      "synonyms": ["profiel", "mijn", "instelling", "instellingen", "wachtwoord", "avatar", "thema"]
+    }
+  ],
+  "shortcuts": [
+    { "trigger": "help", "actie": "open help-bark voor jouw gradatie" },
+    { "trigger": "waar is X", "actie": "zoek tab X en laat hem oplichten in de zijbalk" },
+    { "trigger": "vind X", "actie": "zoek tab X en laat hem oplichten" },
+    { "trigger": "vertel meer over X", "actie": "open de diepe uitleg van topic X" }
+  ]
+}

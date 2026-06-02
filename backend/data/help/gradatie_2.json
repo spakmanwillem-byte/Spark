@@ -1,0 +1,53 @@
+{
+  "gradatie": 2,
+  "label": "Familie / Vertrouweling",
+  "intro": "Familie. Bijna alle toegang behalve technische admin-acties. Hier komen Integraties, Analytics en de hele Spark AI sectie binnen.",
+  "inherits_from": "gradatie_3",
+  "extra_topics": [
+    {
+      "id": "knowledge-v2",
+      "label": "Kennisbank",
+      "korte_uitleg": "De ziel van Spark. 4 lades (Voelen / Spreken / Weten / Doen) met duizenden kaarten die Spark's vocabulaire vormen.",
+      "deep_uitleg": "Kaarten doorlopen 4 lagen (kort → diep). Hoe meer je vult, hoe rijker Spark's taalgevoel. Onder gradatie 2 (familie) kan je kaarten LEZEN en aanmaken. Verwijderen blijft admin-only.",
+      "nav_path": "/knowledge",
+      "nav_testid": "nav-knowledge-v2",
+      "synonyms": ["kennisbank", "kennis", "kb", "kaarten", "lades", "voelen", "spreken", "weten", "doen"]
+    },
+    {
+      "id": "triggers",
+      "label": "Triggers",
+      "korte_uitleg": "De regels die bepalen wanneer Spark reageert op bepaalde woorden of zinnen.",
+      "deep_uitleg": "Triggers zijn regex-gestuurd. Een trigger kan een capability oproepen (b.v. 'audit_health' bij 'gezondheidscheck'). Familie mag bekijken, admin mag wijzigen.",
+      "nav_path": "/spark/triggers",
+      "nav_testid": "nav-triggers",
+      "synonyms": ["triggers", "trigger", "regels", "keywords"]
+    },
+    {
+      "id": "emotions",
+      "label": "Emotie Detectie",
+      "korte_uitleg": "Spark herkent emoties in je tekst en past zijn toon aan. Hier zie je hoe.",
+      "deep_uitleg": "Spark's emotie-pipeline gebruikt keyword + context-analyse. Je ziet per gesprek welke emotie gedetecteerd is en welke respons-stijl Spark koos.",
+      "nav_path": "/spark/emotions",
+      "nav_testid": "nav-emotions",
+      "synonyms": ["emotie", "emoties", "gevoel", "stemming", "tone"]
+    },
+    {
+      "id": "connections",
+      "label": "Verbanden",
+      "korte_uitleg": "Graphisch overzicht van hoe begrippen in de kennisbank aan elkaar gelinkt zijn.",
+      "deep_uitleg": "Een interactieve grafiek toont welke kaarten elkaar referencen. Hoe centraler een knoop, hoe fundamenteler het concept.",
+      "nav_path": "/spark/connections",
+      "nav_testid": "nav-connections",
+      "synonyms": ["verbanden", "verband", "connecties", "grafiek", "graph", "netwerk"]
+    },
+    {
+      "id": "integrations",
+      "label": "Integraties",
+      "korte_uitleg": "Externe koppelingen: Bitvavo, Google Calendar, Telegram, etc.",
+      "deep_uitleg": "Elke integratie heeft een eigen status-light (groen/oranje/rood) en logs. Familie mag bekijken, admin mag wijzigen en nieuwe koppelingen activeren.",
+      "nav_path": "/modules/integrations",
+      "nav_testid": "nav-integrations",
+      "synonyms": ["integraties", "integratie", "koppeling", "koppelingen", "google", "telegram"]
+    }
+  ]
+}

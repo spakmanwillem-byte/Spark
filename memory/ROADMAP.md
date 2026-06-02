@@ -8,6 +8,18 @@
 
 ### ✅ Compleet in sessie 19 (klaar voor redeploy)
 
+#### Help-bark systeem (v6_help_001)
+- [x] **7 gradatie-help files** (gradatie_1.json t/m gradatie_7.json) + admin.json
+- [x] **Inheritance**: gradatie 1 inherits 2 inherits ... inherits 7 (cumulatieve topic-lijst)
+- [x] **Endpoints**: `GET /api/help/for-viewer`, `POST /api/help/find`, `GET /api/help/topic/{id}`
+- [x] **Fuzzy zoek-algoritme**: strip "waar is" / "vind" / "zoek" / "open" prefixen, score op label + id + synonyms + tokens
+- [x] **HelpBark component** (`frontend/shared/HelpBark.js`): grote modal met help-afbeelding, zoekveld, topic-lijst, admin-toggle, diepe-uitleg drill-down
+- [x] **Help-knop in zijbalk** (HelpCircle-icon, amber)
+- [x] **Glow-integratie**: bij klik op topic → `spark:nav-glow` event → tab licht op + scroll + navigeer (gebruikt bestaande `v6_glow_nav_001`)
+- [x] **Admin-tab**: aparte admin.json met 9 admin-only topics (grant, password, shadow-flag, force-sell, vocab-sync, shop-admin, etc.)
+- [x] **Shop-delete endpoint**: `DELETE /api/shop/admin/shops/{id}` voor test-shop cleanup (3 test-shops konden niet verwijderd worden)
+- [x] **Shop _require_admin** geüpgraded: accepteert nu `user.admin == True` (strict) OF gradatie ≤ 2 (legacy)
+
 #### Trade-bot veiligheid + auto-resume
 - [x] **`_persist_registry()` MERGE-fix** (`v6_resume_persist_merge_001`) — bot-registry mergt nu met bestaand bestand i.p.v. te overschrijven. Stop-state blijft bewaard, andere bots auto-resumen.
 - [x] **File-lock** op registry-persist tegen race conditions
@@ -51,7 +63,9 @@
 - [x] **Veiligheid**: ADMIN_PASSWORD env-var = `AppelsapAdmin2026` (default) — wijzig direct na deploy via de UI
 
 ### 🎯 P0 — Direct na redeploy
-1. **Migratie admin-checks** in gevoelige endpoints: vervang `gradatie ≤ 2` door `is_admin(user_id)` in:
+1. **Help-bark uitbreiden naar chat-commando** — bij typing "help" / "waar is X" in chat → triggert HelpBark popup (nu nog alleen via zijbalk-knop). Voeg een capability "open_help_bark" toe en route in `intent_matcher_service`.
+2. **Help-kaart maken**: in productie de KB-kaarten "Help" en "Help Admin" aanmaken (doen-lade) met een passende afbeelding zodat de bark altijd visueel is.
+3. **Migratie admin-checks** in gevoelige endpoints: vervang `gradatie ≤ 2` door `is_admin(user_id)` in:
    - `trade/routes.py` (force-sell, force-close, reconcile)
    - `container/routes.py` + `deploy/routes.py`
    - `mint/routes.py` (Spark Mint)

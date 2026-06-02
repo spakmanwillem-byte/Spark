@@ -1,5 +1,44 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 21B — Steen-Papier-Schaar mini-game)
+
+### 🎮 v6_rps_001 — RPS mini-game in chat
+**Trigger**: type "speel steen papier schaar" in Spark-chat → bark-popup opent.
+
+**Backend** (`modules/games/rps/`):
+- `rps_engine.py` — pure logic (resolve, counter_of, predict_next) — **herbruikbaar voor D&D battles later** (Schaar=aanval, Steen=verdediging, Papier=ontwijken).
+- `rps_service.py` — sessies + lifetime stats + learning history (laatste 100 zetten).
+- `rps_routes.py` — endpoints: `POST /api/games/rps/{start,play,reset,stop}`, `GET /{cards,session,stats}`.
+
+**Spark's gedrag**:
+- Eerste 10 rondes: 100% random ("Spark leert nog" badge zichtbaar).
+- Vanaf ronde 11: 60% counter-de-meest-voorkomende speler-keuze (laatste 20 zetten) / 30% random / 10% mirror.
+
+**XP & Achievements**:
+- +10 XP per win, +1 per gelijkspel, 0 per verlies.
+- `rps_first_win` (+25 XP eenmalig), `rps_first_loss` (+10 "voor de moed"), `rps_streak_5` (+50).
+
+**Chat-triggers** (`modules/chat/routes.py`):
+- "speel steen papier schaar" → frontend action `open_game_rps` opent bark.
+- "hoe vaak gewonnen/verloren" → stats-bericht in chat.
+- "reset score sps" → sessie-score gereset, lifetime intact.
+
+**Frontend** (`components/games/RpsBark.js`):
+- Modal met 3 keuze-knoppen (KB-kaart thumbnails Steen/Papier/Schaar).
+- Score-bar (session wins/losses/ties + streak).
+- "Spark denkt na…" 800ms → reveal Spark's keuze + uitkomst-kaart (Gewonnen/Verloren).
+- Reset-knop (alleen sessie), Close (X) sluit modal.
+- Learning-indicator: "🧠 Spark leert nog" → "⚡ Spark heeft je door" na ronde 10.
+- Toasts voor achievements + XP-bonus.
+
+**Verified**: testing agent iteration 24 — backend 11/11 pytest, frontend modal+flow volledig werkend. Eén UX-tweak na test: placeholder bg-gradient + `loading="eager"` voor de 3MB KB-foto's zodat tiles niet leeg laden.
+
+**Data files** (auto-created):
+- `data/games/rps/sessions.json`, `stats.json`, `learning.json`
+
+---
+
+
 ## Completed (2026-06-02 — sessie 21 — KB v2 image-delete + Admin frame-bark)
 
 ### 🖼️ v6_kbv2_image_delete_visibility_001 — Foto-X altijd zichtbaar

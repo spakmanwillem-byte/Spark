@@ -151,7 +151,10 @@ export function RpsBark({ userId, open, onClose }) {
                     : 'border-slate-700 bg-slate-800/50 hover:border-amber-500/60 hover:bg-slate-800 hover:scale-105'}
                   disabled:opacity-40 disabled:cursor-not-allowed`}>
                 {cards[c]?.image ? (
-                  <img src={`${API}${cards[c].image}`} alt={c} className="w-20 h-20 object-cover rounded-lg" />
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+                    <img src={`${API}${cards[c].image}`} alt={c} loading="eager"
+                      className="w-full h-full object-cover" />
+                  </div>
                 ) : (
                   <div className="w-20 h-20 bg-slate-700 rounded-lg flex items-center justify-center text-3xl">?</div>
                 )}

@@ -79541,7 +79541,10 @@
         "gevoel",
         "Verwachting",
         "verdriet",
-        "frustratie"
+        "frustratie",
+        "emotie",
+        "boos",
+        "bedroefd"
       ],
       "topic": "emotie",
       "belangrijkheid": 3,
@@ -87588,6 +87591,140 @@
       ],
       "topic": "weer",
       "belangrijkheid": 3,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-25112e01",
+      "label": "wens",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Een wens is een verlangen naar een situatie, gebeurtenis, eigenschap of resultaat dat iemand graag wil bereiken of ervaren.",
+      "tags": [
+        "wens",
+        "verlangen",
+        "behoefte",
+        "doel",
+        "motivatie",
+        "hoop",
+        "verwachting",
+        "droom",
+        "toekomst",
+        "zingeving",
+        "ontwikkeling",
+        "keuze",
+        "ambitie",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-c33a1ec8",
+      "label": "pijn",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Een onaangename lichamelijke of emotionele ervaring die wijst op schade, belasting of lijden.",
+      "tags": [
+        "pijn",
+        "gevoel",
+        "letsel",
+        "schade",
+        "lijden",
+        "ongemak",
+        "waarschuwing",
+        "emotie",
+        "herstel",
+        "reactie",
+        "emotie",
+        "bedroefd",
+        "bang",
+        "negatief"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-3f9170b4",
+      "label": "waarnemen",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Het opmerken, registreren of ervaren van informatie via de zintuigen of het bewustzijn.",
+      "tags": [
+        "waarnemen",
+        "observatie",
+        "zintuigen",
+        "zien",
+        "horen",
+        "voelen",
+        "registreren",
+        "bewustzijn",
+        "prikkel",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-02b43e8e",
+      "label": "Geaccepteerd",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Geaccepteerd betekent dat iets of iemand is goedgekeurd, aangenomen of aanvaard.",
+      "tags": [
+        "geaccepteerd",
+        "acceptatie",
+        "aanvaarding",
+        "goedkeuring",
+        "erkenning",
+        "toestemming",
+        "instemming",
+        "verbondenheid",
+        "samenwerking",
+        "beoordeling",
+        "resultaat",
+        "sociaal",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-66e253db",
+      "label": "Happy",
+      "type": "knowledge_v2",
+      "lade": "voelen",
+      "lade_color": "#ec4899",
+      "description": "Happy betekent dat iemand zich blij, tevreden of gelukkig voelt.",
+      "tags": [
+        "happy",
+        "blij",
+        "geluk",
+        "tevredenheid",
+        "plezier",
+        "welzijn",
+        "positiviteit",
+        "emotie",
+        "gevoel",
+        "vreugde",
+        "waardering",
+        "verbondenheid",
+        "motivatie",
+        "positief"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
       "vertrouwen": 0.9
     },
     {
@@ -98334,6 +98471,193 @@
       ],
       "topic": "identiteit",
       "belangrijkheid": 3,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e64c654b",
+      "label": "benoemen",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Benoemen is het geven van een naam, term of omschrijving aan een persoon, object, gevoel, eigenschap of concept.",
+      "tags": [
+        "benoemen",
+        "naam",
+        "omschrijving",
+        "taal",
+        "communicatie",
+        "betekenis",
+        "herkenning",
+        "classificatie",
+        "identificatie",
+        "label",
+        "begrip",
+        "kennis",
+        "symbool",
+        "interpretatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e628516e",
+      "label": "antwoord",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Een antwoord is een reactie op een vraag, verzoek, situatie of boodschap.",
+      "tags": [
+        "antwoord",
+        "reactie",
+        "vraag",
+        "communicatie",
+        "informatie",
+        "uitleg",
+        "feedback",
+        "kennis",
+        "begrip",
+        "oplossing",
+        "interactie",
+        "betekenis",
+        "duidelijkheid",
+        "uitwisseling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-25f75433",
+      "label": "verzoek",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Een vraag of verzoek om iets te doen, geven, overwegen of toestaan.",
+      "tags": [
+        "verzoek",
+        "vraag",
+        "communicatie",
+        "hulp",
+        "toestemming",
+        "actie",
+        "aanvraag",
+        "antwoord",
+        "contact",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-4fe0ed50",
+      "label": "boodschap",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Informatie, betekenis of communicatie die wordt overgebracht van een zender naar een ontvanger.",
+      "tags": [
+        "boodschap",
+        "communicatie",
+        "informatie",
+        "bericht",
+        "betekenis",
+        "inhoud",
+        "signaal",
+        "taal",
+        "zender",
+        "ontvanger",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-cefcf6b9",
+      "label": "instructies",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Aanwijzingen of opdrachten die uitleggen wat gedaan moet worden en hoe dit moet gebeuren.",
+      "tags": [
+        "instructies",
+        "instructie",
+        "aanwijzing",
+        "opdracht",
+        "uitleg",
+        "uitvoering",
+        "proces",
+        "communicatie",
+        "richting",
+        "handeling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-9eb7705b",
+      "label": "Tot ziens",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Tot ziens is een afscheidsgroet waarmee wordt aangegeven dat men verwacht elkaar later weer te ontmoeten.",
+      "tags": [
+        "tot ziens",
+        "afscheid",
+        "groet",
+        "communicatie",
+        "ontmoeting",
+        "verbinding",
+        "sociaal",
+        "beleefdheid",
+        "interactie",
+        "contact",
+        "toekomst",
+        "relatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-cca12a6b",
+      "label": "welkom",
+      "type": "knowledge_v2",
+      "lade": "spreken",
+      "lade_color": "#06b6d4",
+      "description": "Welkom is een begroeting of uiting waarmee iemand vriendelijk wordt ontvangen of uitgenodigd.",
+      "tags": [
+        "welkom",
+        "begroeting",
+        "ontvangst",
+        "gastvrijheid",
+        "acceptatie",
+        "verbondenheid",
+        "communicatie",
+        "sociaal",
+        "interactie",
+        "openheid",
+        "relatie",
+        "gemeenschap",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
       "vertrouwen": 0.9
     },
     {
@@ -125117,6 +125441,399 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-skel-ffc93aeb",
+      "label": "werkelijkheid",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Werkelijkheid is alles wat daadwerkelijk bestaat, gebeurt of ervaren wordt, onafhankelijk van hoe het wordt voorgesteld of gedacht.\n",
+      "tags": [
+        "werkelijkheid",
+        "realiteit",
+        "bestaan",
+        "waarneming",
+        "ervaring",
+        "observatie",
+        "interpretatie",
+        "bewustwording",
+        "kennis",
+        "context",
+        "omgeving",
+        "gebeurtenis",
+        "waarheid",
+        "perspectief",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-7852b92c",
+      "label": "herkennen",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Herkennen is het waarnemen en identificeren van iets dat bekend, eerder gezien of eerder ervaren is.",
+      "tags": [
+        "herkennen",
+        "herkenning",
+        "waarneming",
+        "geheugen",
+        "patroon",
+        "patroonherkenning",
+        "observatie",
+        "interpretatie",
+        "kennis",
+        "ervaring",
+        "bewustwording",
+        "identificatie",
+        "associatie",
+        "detectie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-d549fc6f",
+      "label": "hetzelfde",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Hetzelfde betekent dat twee of meer dingen gelijk zijn in identiteit, betekenis, eigenschappen of toestand.",
+      "tags": [
+        "hetzelfde",
+        "gelijk",
+        "overeenkomst",
+        "identiteit",
+        "vergelijking",
+        "herkenning",
+        "classificatie",
+        "relatie",
+        "betekenis",
+        "patroon",
+        "associatie",
+        "kennis",
+        "interpretatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-0087262b",
+      "label": "verzameling",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een verzameling is een groep objecten, gegevens, personen, ideeën of elementen die bij elkaar zijn gebracht op basis van een gemeenschappelijk kenmerk of doel.\n",
+      "tags": [
+        "verzameling",
+        "groep",
+        "collectie",
+        "classificatie",
+        "organisatie",
+        "ordening",
+        "opslag",
+        "archief",
+        "gegevens",
+        "objecten",
+        "kennis",
+        "categorie",
+        "structuur",
+        "overzicht",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e3a02076",
+      "label": "correct",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Correct betekent dat iets juist, nauwkeurig of in overeenstemming met feiten, regels, afspraken of verwachtingen is.",
+      "tags": [
+        "correct",
+        "juist",
+        "nauwkeurig",
+        "betrouwbaarheid",
+        "validatie",
+        "verificatie",
+        "controle",
+        "kwaliteit",
+        "waarheid",
+        "consistentie",
+        "beoordeling",
+        "check",
+        "resultaat",
+        "foutloos",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-ff1be4f3",
+      "label": "laag",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een laag is een niveau, onderdeel of afgebakende structuur binnen een groter geheel.",
+      "tags": [
+        "laag",
+        "niveau",
+        "structuur",
+        "organisatie",
+        "classificatie",
+        "hiërarchie",
+        "onderdeel",
+        "opbouw",
+        "overzicht",
+        "systeem",
+        "ordening",
+        "model",
+        "kennis",
+        "abstractie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-3107f3df",
+      "label": "structuren",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Structuren zijn georganiseerde opbouwen van onderdelen die samen een geheel vormen volgens een bepaalde ordening of relatie.",
+      "tags": [
+        "structuren",
+        "structuur",
+        "organisatie",
+        "opbouw",
+        "samenhang",
+        "systeem",
+        "netwerk",
+        "relatie",
+        "patroon",
+        "hiërarchie",
+        "laag",
+        "classificatie",
+        "ordening",
+        "verbinding",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-aa89bb62",
+      "label": "volledig",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Volledig betekent dat iets compleet is en geen essentiële onderdelen, informatie of elementen ontbreken.",
+      "tags": [
+        "volledig",
+        "compleet",
+        "volledigheid",
+        "geheel",
+        "compleetheid",
+        "informatie",
+        "structuur",
+        "verzameling",
+        "validatie",
+        "controle",
+        "correct",
+        "overzicht",
+        "samenhang",
+        "kwaliteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-42c604ea",
+      "label": "omstandigheden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Omstandigheden zijn de situatie, voorwaarden of factoren die invloed hebben op een gebeurtenis, proces of uitkomst.",
+      "tags": [
+        "omstandigheden",
+        "context",
+        "situatie",
+        "factoren",
+        "voorwaarden",
+        "omgeving",
+        "invloed",
+        "gebeurtenis",
+        "proces",
+        "uitkomst",
+        "interpretatie",
+        "perspectief",
+        "besluitvorming",
+        "werkelijkheid",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-11840f86",
+      "label": "juist",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Juist betekent dat iets klopt, waar is of overeenkomt met feiten, werkelijkheid, regels of verwachtingen.",
+      "tags": [
+        "juist",
+        "correct",
+        "waarheid",
+        "nauwkeurig",
+        "validatie",
+        "verificatie",
+        "controle",
+        "betrouwbaarheid",
+        "kennis",
+        "werkelijkheid",
+        "beoordeling",
+        "consistentie",
+        "begrip",
+        "kwaliteit",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e80e80fa",
+      "label": "kort",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Kort betekent van beperkte lengte, duur, omvang of hoeveelheid.",
+      "tags": [
+        "kort",
+        "lengte",
+        "duur",
+        "omvang",
+        "tijd",
+        "afstand",
+        "compact",
+        "beknopt",
+        "efficiëntie",
+        "vergelijking",
+        "eigenschap",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-ea845482",
+      "label": "reden",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "De oorzaak, motivatie of verklaring waarom iets gebeurt of wordt gedaan.",
+      "tags": [
+        "reden",
+        "waarom",
+        "oorzaak",
+        "gevolg",
+        "motivatie",
+        "verklaring",
+        "aanleiding",
+        "keuze",
+        "argument",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-ab49447e",
+      "label": "onderwerp",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Datgene waar een gesprek, tekst, gedachte, onderzoek of activiteit over gaat.",
+      "tags": [
+        "onderwerp",
+        "thema",
+        "focus",
+        "aandacht",
+        "kennis",
+        "gesprek",
+        "informatie",
+        "context",
+        "begrip",
+        "inhoud",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e2137213",
+      "label": "oorsprong",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Het begin, de herkomst of de bron waaruit iets is ontstaan.",
+      "tags": [
+        "oorsprong",
+        "herkomst",
+        "begin",
+        "bron",
+        "ontstaan",
+        "geschiedenis",
+        "ontwikkeling",
+        "afkomst",
+        "start",
+        "basis",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-74f8723c",
       "label": "Samenwerken wordt moeilijker wanneer er weinig vertrouwen is.",
       "type": "knowledge_v2",
@@ -135980,20 +136697,22 @@
       "type": "knowledge_v2",
       "lade": "doen",
       "lade_color": "#a855f7",
-      "description": "Helpen betekent ondersteuning geven zodat iemand of iets een doel, oplossing of verbetering kan bereiken.",
+      "description": "Helpen is het ondersteunen van iemand of iets bij een taak, probleem of doel.",
       "tags": [
         "helpen",
         "ondersteuning",
+        "hulp",
         "samenwerking",
-        "zorg",
-        "relatie",
-        "systeem",
+        "begeleiding",
+        "assistentie",
+        "probleemoplossing",
         "ontwikkeling",
-        "communicatie",
-        "interactie",
-        "emotie blij",
-        "neutraal",
-        "user-verrijkt"
+        "kennis",
+        "middelen",
+        "doel",
+        "actie",
+        "sociaal",
+        "positief"
       ],
       "topic": "ondersteuning",
       "belangrijkheid": 5,
@@ -142053,47 +142772,829 @@
       "vertrouwen": 0.9
     },
     {
-      "id": "kbv2-07324d80",
-      "label": "Analyseert alles",
+      "id": "kbv2-skel-8d7c00e1",
+      "label": "kledingstuk",
       "type": "knowledge_v2",
       "lade": "doen",
       "lade_color": "#a855f7",
-      "description": "Scanning is het actief onderzoeken en verwerken van beschikbare informatie.",
+      "description": "Een kledingstuk is een voorwerp dat op het lichaam wordt gedragen voor bescherming, comfort, functie of uiterlijk.",
       "tags": [
-        "scanning",
-        "analyseren",
-        "verwerking",
-        "onderzoek",
-        "detectie",
-        "waarneming",
-        "patroonherkenning",
-        "context",
-        "kennis",
-        "informatie",
-        "verbanden",
-        "observatie",
-        "systeem",
-        "actief",
+        "kledingstuk",
+        "kleding",
+        "lichaam",
+        "bescherming",
+        "comfort",
+        "mode",
+        "textiel",
+        "uiterlijk",
+        "identiteit",
+        "stijl",
+        "dragen",
+        "functie",
+        "cultuur",
+        "sociaal",
         "emotie",
-        "neutraalscanning",
-        "analyseren",
-        "verwerking",
-        "onderzoek",
-        "detectie",
-        "waarneming",
-        "patroonherkenning",
-        "context",
-        "kennis",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-11a097c8",
+      "label": "hand",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "\nEen hand is een lichaamsdeel aan het uiteinde van de arm dat wordt gebruikt voor grijpen, voelen, vasthouden en uitvoeren van handelingen.",
+      "tags": [
+        "hand",
+        "lichaam",
+        "arm",
+        "vingers",
+        "grijpen",
+        "aanraking",
+        "voelen",
+        "beweging",
+        "motoriek",
+        "interactie",
+        "communicatie",
+        "gebaar",
+        "creatie",
+        "uitvoering",
+        "zintuig",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-8789175e",
+      "label": "spullen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Spullen zijn voorwerpen, bezittingen of objecten die worden gebruikt, bewaard, vervoerd of eigendom zijn van iemand.",
+      "tags": [
+        "spullen",
+        "voorwerpen",
+        "bezittingen",
+        "objecten",
+        "eigendom",
+        "gebruik",
+        "opslag",
+        "verzameling",
+        "middelen",
+        "huishouding",
+        "materiaal",
+        "waarde",
+        "bezit",
+        "dagelijks leven",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-c9aa993d",
+      "label": "toegankelijk",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Toegankelijk betekent dat iets bereikbaar, begrijpelijk of bruikbaar is voor mensen zonder onnodige belemmeringen.",
+      "tags": [
+        "toegankelijk",
+        "bereikbaarheid",
+        "beschikbaarheid",
+        "gebruiksgemak",
+        "inclusie",
+        "communicatie",
+        "openheid",
+        "begrijpelijk",
+        "bruikbaar",
+        "deelname",
+        "verbinding",
+        "ondersteuning",
+        "dienstverlening",
         "informatie",
-        "verbanden",
-        "observatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-a5abec7c",
+      "label": "sterker",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Sterker betekent dat iets meer kracht, capaciteit, invloed, weerstand of effect heeft dan voorheen of in vergelijking met iets anders.",
+      "tags": [
+        "sterker",
+        "kracht",
+        "versterking",
+        "groei",
+        "ontwikkeling",
+        "verbetering",
+        "capaciteit",
+        "invloed",
+        "stabiliteit",
+        "weerstand",
+        "veerkracht",
+        "prestatie",
+        "motivatie",
+        "vooruitgang",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-280e269c",
+      "label": "werking",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "De manier waarop iets functioneert, werkt of een effect veroorzaakt.\n",
+      "tags": [
+        "werking",
+        "functie",
+        "proces",
+        "resultaat",
+        "effect",
         "systeem",
-        "actief",
+        "gedrag",
+        "mechanisme",
+        "uitvoering",
+        "activiteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-810ca503",
+      "label": "leiding",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een verbinding of structuur waardoor materiaal, energie, signalen of informatie wordt doorgegeven.",
+      "tags": [
+        "leiding",
+        "verbinding",
+        "overdracht",
+        "transport",
+        "stroom",
+        "communicatie",
+        "netwerk",
+        "infrastructuur",
+        "kanaal",
+        "doorgeven",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-f51bb87d",
+      "label": "Leiding (als leidinggeven)",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Het sturen, begeleiden en coördineren van mensen, groepen of processen om een doel te bereiken.",
+      "tags": [
+        "leiding",
+        "leiderschap",
+        "aansturing",
+        "verantwoordelijkheid",
+        "begeleiding",
+        "organisatie",
+        "coördinatie",
+        "besluitvorming",
+        "richting",
+        "invloed",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-003d3d85",
+      "label": "sturen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Het gericht laten bewegen, overbrengen of beïnvloeden van iets of iemand.",
+      "tags": [
+        "sturen",
+        "richting",
+        "aansturing",
+        "communicatie",
+        "invloed",
+        "overdracht",
+        "controle",
+        "signaal",
+        "beweging",
+        "doel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-a7447e6f",
+      "label": "resultaten",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "De uitkomsten, gevolgen of opbrengsten van een handeling, proces of gebeurtenis.",
+      "tags": [
+        "resultaten",
+        "resultaat",
+        "uitkomst",
+        "gevolg",
+        "opbrengst",
+        "effect",
+        "prestatie",
+        "evaluatie",
+        "doel",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-c3f1997f",
+      "label": "ontvangen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Het krijgen, aannemen of binnenkrijgen van iets dat wordt gegeven, gestuurd of overgedragen.",
+      "tags": [
+        "ontvangen",
+        "krijgen",
+        "aannemen",
+        "informatie",
+        "bericht",
+        "signaal",
+        "overdracht",
+        "ontvanger",
+        "communicatie",
+        "binnen",
+        "krijgen",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-493d812b",
+      "label": "lijn",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een rechte, gebogen of denkbeeldige verbinding tussen twee of meer punten.",
+      "tags": [
+        "lijn",
+        "verbinding",
+        "richting",
+        "structuur",
+        "grens",
+        "route",
+        "netwerk",
+        "pad",
+        "verbindingen",
+        "ordening",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-fc459193",
+      "label": "verwijderen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Het weghalen, wissen of laten verdwijnen van iets.",
+      "tags": [
+        "verwijderen",
+        "wissen",
+        "weghalen",
+        "opruimen",
+        "afwezig",
+        "verwijderen",
+        "corrigeren",
+        "vervangen",
+        "beheer",
+        "selectie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-96b52c55",
+      "label": "Toegang verleend",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Toegang verleend betekent dat toestemming is gegeven om een plaats, systeem, informatiebron of functie te gebruiken of te betreden.",
+      "tags": [
+        "toegang verleend",
+        "toegang",
+        "toestemming",
+        "autorisatie",
+        "goedkeuring",
+        "beveiliging",
+        "gebruiker",
+        "rechten",
+        "verificatie",
+        "authenticatie",
+        "beschikbaarheid",
+        "systeem",
+        "controle",
+        "status",
         "emotie",
         "neutraal"
       ],
       "topic": "",
       "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-a374c38c",
+      "label": "Toegang geweigerd",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Toegang geweigerd betekent dat toestemming om een plaats, systeem, informatiebron of functie te gebruiken niet is verleend.",
+      "tags": [
+        "toegang geweigerd",
+        "toegang",
+        "weigering",
+        "afwijzing",
+        "beveiliging",
+        "gebruiker",
+        "rechten",
+        "verificatie",
+        "authenticatie",
+        "controle",
+        "bescherming",
+        "systeem",
+        "status",
+        "beperking",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-f31fbce7",
+      "label": "Admin geactiveerd",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Admin geactiveerd betekent dat beheerdersrechten of administratieve functies zijn ingeschakeld voor een gebruiker of systeem.",
+      "tags": [
+        "admin geactiveerd",
+        "administrator",
+        "beheer",
+        "beheerdersrechten",
+        "autorisatie",
+        "toegang",
+        "privileges",
+        "configuratie",
+        "controle",
+        "systeem",
+        "gebruiker",
+        "beveiliging",
+        "status",
+        "activatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-71796d8f",
+      "label": "Admin gedeactiveerd",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Admin gedeactiveerd betekent dat beheerdersrechten of administratieve functies zijn uitgeschakeld voor een gebruiker of systeem.",
+      "tags": [
+        "admin gedeactiveerd",
+        "administrator",
+        "beheer",
+        "beheerdersrechten",
+        "deactivatie",
+        "autorisatie",
+        "toegang",
+        "privileges",
+        "beveiliging",
+        "controle",
+        "systeem",
+        "gebruiker",
+        "status",
+        "beperking",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-007a3a10",
+      "label": "Joke",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een joke is een humoristische actie of opmerking waarmee iemand wordt verrast, geplaagd of voor de gek gehouden.",
+      "tags": [
+        "joke",
+        "grap",
+        "sarcasme",
+        "humor",
+        "plagen",
+        "verrassing",
+        "interactie",
+        "verwachting",
+        "teleurstelling",
+        "entertainment",
+        "reactie",
+        "speels",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-ceaab6a2",
+      "label": "Hmmm",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Hmmm is een uiting die aangeeft dat iemand nadenkt, twijfelt of iets beoordeelt.",
+      "tags": [
+        "hmmm",
+        "nadenken",
+        "reflectie",
+        "twijfel",
+        "beoordeling",
+        "analyse",
+        "interpretatie",
+        "observatie",
+        "afweging",
+        "besluitvorming",
+        "perspectief",
+        "mening",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-30d45e45",
+      "label": "Stop",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Stop is een opdracht of gebeurtenis waarmee een proces, activiteit of systeem wordt beëindigd of onderbroken.",
+      "tags": [
+        "stop",
+        "beëindigen",
+        "onderbreken",
+        "uitschakelen",
+        "afbreken",
+        "trigger",
+        "commando",
+        "controle",
+        "veiligheid",
+        "systeem",
+        "proces",
+        "status",
+        "blokkeren",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-5b4bc7c7",
+      "label": "scan",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een scan is het onderzoeken of doorzoeken van een object, omgeving, systeem of informatiebron om gegevens waar te nemen of te verzamelen.",
+      "tags": [
+        "scan",
+        "scannen",
+        "detectie",
+        "zoeken",
+        "analyse",
+        "waarneming",
+        "herkenning",
+        "informatie",
+        "sensor",
+        "onderzoek",
+        "controle",
+        "patroonherkenning",
+        "systeem",
+        "trigger",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-01e41321",
+      "label": "scanning",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Scanning is het actief onderzoeken of doorzoeken van een object, omgeving, systeem of informatiebron om gegevens te verzamelen.",
+      "tags": [
+        "scanning",
+        "scan",
+        "detectie",
+        "waarneming",
+        "analyse",
+        "monitoring",
+        "zoeken",
+        "informatie",
+        "observatie",
+        "herkenning",
+        "controle",
+        "patroonherkenning",
+        "systeem",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-65f07fef",
+      "label": "Help Admin",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Admin Help is een functie of actie die ondersteuning biedt bij beheer- en administratieve taken.",
+      "tags": [
+        "admin help",
+        "beheer",
+        "administrator",
+        "ondersteuning",
+        "hulp",
+        "configuratie",
+        "instellingen",
+        "controle",
+        "onderhoud",
+        "systeembeheer",
+        "probleemoplossing",
+        "assistentie",
+        "systeem",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-136b414d",
+      "label": "Help",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.",
+      "tags": [
+        "help",
+        "ondersteuning",
+        "hulp",
+        "begeleiding",
+        "samenwerking",
+        "probleemoplossing",
+        "informatie",
+        "vraag",
+        "assistentie",
+        "advies",
+        "communicatie",
+        "leren",
+        "systeem",
+        "trigger",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-2c6ae150",
+      "label": "Schaar",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een schaar is een handgereedschap met twee snijbladen waarmee materialen kunnen worden geknipt.",
+      "tags": [
+        "schaar",
+        "knippen",
+        "snijden",
+        "gereedschap",
+        "handgereedschap",
+        "papier",
+        "stof",
+        "draad",
+        "vormgeven",
+        "scheiden",
+        "precisie",
+        "creativiteit",
+        "hulpmiddel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-2522f483",
+      "label": "score",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een score is een waarde die een resultaat, prestatie of voortgang weergeeft.",
+      "tags": [
+        "scorescore",
+        "punten",
+        "resultaat",
+        "prestatie",
+        "voortgang",
+        "meting",
+        "beoordeling",
+        "waarde",
+        "ranking",
+        "feedback",
+        "vergelijking",
+        "spel",
+        "systeem",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-2e9b7f0e",
+      "label": "High Score",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Een high score is de hoogste behaalde score binnen een spel, systeem of competitie.",
+      "tags": [
+        "high score",
+        "record",
+        "topscore",
+        "prestatie",
+        "resultaat",
+        "punten",
+        "ranking",
+        "competitie",
+        "voortgang",
+        "vergelijking",
+        "spel",
+        "systeem",
+        "motivatie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-a244cd34",
+      "label": "Maak een keus",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Maak een keus is een oproep om uit meerdere mogelijkheden één optie te selecteren.",
+      "tags": [
+        "door één optie uit de beschikbare mogelijkheden te selecteren"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-a406125f",
+      "label": "Denkt na",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Denkt na is een toestand waarin informatie wordt verwerkt om tot een begrip, keuze of conclusie te komen.",
+      "tags": [
+        "door informatie te vergelijken",
+        "interpreteren en af te wegen"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-2248bad7",
+      "label": "Gewonnen",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Gewonnen betekent dat een doel, wedstrijd, uitdaging of conflict met succes is afgerond.",
+      "tags": [
+        "gewonnen",
+        "overwinning",
+        "succes",
+        "resultaat",
+        "prestatie",
+        "doel",
+        "voltooid",
+        "behaald",
+        "competitie",
+        "spel",
+        "uitdaging",
+        "erkenning",
+        "positief",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-89ce9289",
+      "label": "Verloren",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Verloren betekent dat een doel, wedstrijd, uitdaging of conflict niet succesvol is afgerond.",
+      "tags": [
+        "verloren",
+        "nederlaag",
+        "mislukking",
+        "resultaat",
+        "uitkomst",
+        "doel",
+        "uitdaging",
+        "competitie",
+        "spel",
+        "evaluatie",
+        "leren",
+        "feedback",
+        "negatief",
+        "teleurstelling"
+      ],
+      "topic": "toestand",
+      "belangrijkheid": 2,
       "vertrouwen": 0.9
     },
     {
@@ -144251,24 +145752,6 @@
       ],
       "topic": "gereedschap, techniek",
       "belangrijkheid": 3,
-      "vertrouwen": 0.85
-    },
-    {
-      "id": "kbv2-89ce9289",
-      "label": "Verloren",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "Verloren betekent dat iets kwijt is geraakt of niet meer in bezit is.",
-      "tags": [
-        "kwijt",
-        "mislukking",
-        "verlies",
-        "kans",
-        "resultaat"
-      ],
-      "topic": "toestand",
-      "belangrijkheid": 2,
       "vertrouwen": 0.85
     },
     {
@@ -148968,20 +150451,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-493d812b",
-      "label": "lijn",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "lijn"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-043ba9c4",
       "label": "toezicht",
       "type": "knowledge_v2",
@@ -148990,20 +150459,6 @@
       "description": "",
       "tags": [
         "toezicht"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-25112e01",
-      "label": "wens",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "wens"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -149220,20 +150675,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-ea845482",
-      "label": "reden",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "reden"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-d521f663",
       "label": "flow",
       "type": "knowledge_v2",
@@ -149248,20 +150689,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-e628516e",
-      "label": "antwoord",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "antwoord"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-9d9febf2",
       "label": "precisie",
       "type": "knowledge_v2",
@@ -149270,20 +150697,6 @@
       "description": "",
       "tags": [
         "precisie"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-25f75433",
-      "label": "verzoek",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "verzoek"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -149536,20 +150949,6 @@
       "description": "",
       "tags": [
         "waarheid"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-11a097c8",
-      "label": "hand",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "hand"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -150018,20 +151417,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-280e269c",
-      "label": "werking",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "werking"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-7c92f5c7",
       "label": "contrast",
       "type": "knowledge_v2",
@@ -150326,20 +151711,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-ab49447e",
-      "label": "onderwerp",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "onderwerp"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-781813b4",
       "label": "service",
       "type": "knowledge_v2",
@@ -150474,20 +151845,6 @@
       "description": "",
       "tags": [
         "stappenplan"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-810ca503",
-      "label": "leiding",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "leiding"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -151026,20 +152383,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-e80e80fa",
-      "label": "kort",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "kort"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-88ec335a",
       "label": "uitzondering",
       "type": "knowledge_v2",
@@ -151160,20 +152503,6 @@
       "description": "",
       "tags": [
         "fijnmaken"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-c33a1ec8",
-      "label": "pijn",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "pijn"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -152034,20 +153363,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-0087262b",
-      "label": "verzameling",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "verzameling"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-d64702a5",
       "label": "gezamenlijk",
       "type": "knowledge_v2",
@@ -152804,20 +154119,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-e3a02076",
-      "label": "correct",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "correct"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-07716470",
       "label": "stabilisatie",
       "type": "knowledge_v2",
@@ -153336,20 +154637,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-ffc93aeb",
-      "label": "werkelijkheid",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "werkelijkheid"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-ef7bf3fa",
       "label": "emotie blij",
       "type": "knowledge_v2",
@@ -153512,20 +154799,6 @@
       "description": "",
       "tags": [
         "sociale relatie"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-e64c654b",
-      "label": "benoemen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "benoemen"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -153728,20 +155001,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-8d7c00e1",
-      "label": "kledingstuk",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "kledingstuk"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-c6544224",
       "label": "huisdier",
       "type": "knowledge_v2",
@@ -153876,20 +155135,6 @@
       "description": "",
       "tags": [
         "rotatie"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-4fe0ed50",
-      "label": "boodschap",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "boodschap"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -154316,20 +155561,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-e2137213",
-      "label": "oorsprong",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "oorsprong"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-a649008f",
       "label": "design",
       "type": "knowledge_v2",
@@ -154422,20 +155653,6 @@
       "description": "",
       "tags": [
         "drive"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-5b4bc7c7",
-      "label": "scan",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "scan"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -156136,20 +157353,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-003d3d85",
-      "label": "sturen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "sturen"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-130c6b2f",
       "label": "item",
       "type": "knowledge_v2",
@@ -156592,20 +157795,6 @@
       "description": "",
       "tags": [
         "doorgaan"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-11840f86",
-      "label": "juist",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "juist"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -157718,20 +158907,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-42c604ea",
-      "label": "omstandigheden",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "omstandigheden"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-dd316d53",
       "label": "potentieel",
       "type": "knowledge_v2",
@@ -157768,20 +158943,6 @@
       "description": "",
       "tags": [
         "instellingen"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-7852b92c",
-      "label": "herkennen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "herkennen"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -158320,20 +159481,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-2522f483",
-      "label": "score",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "score"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-0ef557cf",
       "label": "verzekering",
       "type": "knowledge_v2",
@@ -158552,20 +159699,6 @@
       "description": "",
       "tags": [
         "proef"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-3f9170b4",
-      "label": "waarnemen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "waarnemen"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -164514,20 +165647,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-01e41321",
-      "label": "scanning",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "scanning"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-802a2a3d",
       "label": "phreaking",
       "type": "knowledge_v2",
@@ -166138,20 +167257,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-aa89bb62",
-      "label": "volledig",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "volledig"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-3f019465",
       "label": "spelmateriaal",
       "type": "knowledge_v2",
@@ -167118,20 +168223,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-8789175e",
-      "label": "spullen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "spullen"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-9ba4f8d4",
       "label": "opruimen",
       "type": "knowledge_v2",
@@ -168070,20 +169161,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-fc459193",
-      "label": "verwijderen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "verwijderen"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-3f16b144",
       "label": "graphics",
       "type": "knowledge_v2",
@@ -168246,20 +169323,6 @@
       "description": "",
       "tags": [
         "tilemap"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-ff1be4f3",
-      "label": "laag",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "laag"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -172536,20 +173599,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-3107f3df",
-      "label": "structuren",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "structuren"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-4d87f0bb",
       "label": "internationaal",
       "type": "knowledge_v2",
@@ -172914,20 +173963,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-cefcf6b9",
-      "label": "instructies",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "instructies"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-0befabdf",
       "label": "fysieke wereld",
       "type": "knowledge_v2",
@@ -172950,20 +173985,6 @@
       "description": "",
       "tags": [
         "fabricage"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-a7447e6f",
-      "label": "resultaten",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "resultaten"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -173594,20 +174615,6 @@
       "description": "",
       "tags": [
         "pakken"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-c3f1997f",
-      "label": "ontvangen",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "ontvangen"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -175056,20 +176063,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-c9aa993d",
-      "label": "toegankelijk",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "toegankelijk"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-852b279c",
       "label": "openbare ruimte",
       "type": "knowledge_v2",
@@ -175266,20 +176259,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-d549fc6f",
-      "label": "hetzelfde",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "hetzelfde"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-776813ad",
       "label": "tijdsverloop",
       "type": "knowledge_v2",
@@ -175470,20 +176449,6 @@
       "description": "",
       "tags": [
         "jeugdvriend"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
-      "id": "kbv2-skel-cca12a6b",
-      "label": "welkom",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "welkom"
       ],
       "topic": "",
       "belangrijkheid": 1,
@@ -176666,20 +177631,6 @@
       "vertrouwen": 0.5
     },
     {
-      "id": "kbv2-skel-a5abec7c",
-      "label": "sterker",
-      "type": "knowledge_v2",
-      "lade": null,
-      "lade_color": "#94a3b8",
-      "description": "",
-      "tags": [
-        "sterker"
-      ],
-      "topic": "",
-      "belangrijkheid": 1,
-      "vertrouwen": 0.5
-    },
-    {
       "id": "kbv2-skel-cee4cad0",
       "label": "redrum_w",
       "type": "knowledge_v2",
@@ -176833,7 +177784,7 @@
     },
     {
       "id": "kbv2-29da5490",
-      "label": "GIF (afbeelding)",
+      "label": "GIF",
       "type": "knowledge_v2",
       "lade": null,
       "lade_color": "#94a3b8",

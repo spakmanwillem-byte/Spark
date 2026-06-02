@@ -913,3 +913,11 @@
 {"ts": "2026-06-02T19:41:13.992653+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Maak een keus", "lade": "doen", "active": "True", "is_new": "False"}}
 {"ts": "2026-06-02T19:42:55.693500+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Denkt na", "lade": "inbox", "active": "False", "is_new": "False"}}
 {"ts": "2026-06-02T19:43:01.184727+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Denkt na", "lade": "doen", "active": "True", "is_new": "False"}}
+{"ts": "2026-06-02T19:44:57.639667+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Gewonnen", "lade": "inbox", "active": "False", "is_new": "False"}}
+{"ts": "2026-06-02T19:44:57.644331+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Gewonnen", "found": "5"}}
+{"ts": "2026-06-02T19:45:10.471788+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Gewonnen", "lade": "doen", "active": "True", "is_new": "False"}}
+{"ts": "2026-06-02T19:45:10.476510+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Gewonnen", "found": "5"}}
+{"ts": "2026-06-02T19:47:12.651988+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Verloren", "lade": "inbox", "active": "False", "is_new": "False"}}
+{"ts": "2026-06-02T19:47:12.656238+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Verloren", "found": "5"}}
+{"ts": "2026-06-02T19:47:15.153759+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Verloren", "lade": "doen", "active": "True", "is_new": "False"}}
+{"ts": "2026-06-02T19:47:15.158074+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Verloren", "found": "5"}}

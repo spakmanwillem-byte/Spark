@@ -896,7 +896,7 @@
       "title": "KB v2: onbruikbare kaarten kunnen niet verwijderd worden",
       "description": "Bij KB v2 cards die compleet onbruikbaar zijn (bv. lege test-kaarten) is geen UI-knop om ze permanent te verwijderen. Frontend mist DELETE-knop in CardDetail. Backend heeft wel mutatie-endpoints maar geen DELETE /api/kb/v2/card/{id}.",
       "severity": "medium",
-      "status": "open",
+      "status": "opgelost",
       "reported_by": "user-001",
       "reported_at": "2026-05-25T15:04:13.540986+00:00",
       "tags": [
@@ -904,7 +904,9 @@
         "ui",
         "cleanup"
       ],
-      "note": "Genoteerd in sessie 11 — niet voor nu, opnemen in volgend cluster."
+      "note": "Genoteerd in sessie 11 — niet voor nu, opnemen in volgend cluster.",
+      "resolved_at": "2026-06-02T19:35:45.370550+00:00",
+      "resolution": "Verified opgelost in sessie 19 (v6_kbv2_delete_001): UI delete-knop in CardDetail header werkt + POST /api/kb/v2/delete endpoint getest met curl."
     },
     {
       "id": "fa4b0f87",

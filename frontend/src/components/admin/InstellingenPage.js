@@ -12,6 +12,7 @@ import {
   ToggleLeft, ToggleRight, Archive, X
 } from 'lucide-react';
 import { BarkModal } from '../shared/BarkModal';
+import { InputBark } from '../shared/InputBark';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -836,11 +837,10 @@ function AdminSettingsPanel({ userId }) {
   const [isAdmin, setIsAdmin] = useState(null);
   const [admins, setAdmins] = useState([]);
   const [users, setUsers] = useState([]);
-  const [targetId, setTargetId] = useState('');
-  const [grantPw, setGrantPw] = useState('');
   const [oldPw, setOldPw] = useState('');
   const [newPw, setNewPw] = useState('');
   const [showBark, setShowBark] = useState(null);
+  const [showGrantBark, setShowGrantBark] = useState(false); // v6_admin_grant_frame_001
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -867,7 +867,7 @@ function AdminSettingsPanel({ userId }) {
     );
   }
 
-  const grant = async () => {
+  const grant = async ({ targetId, grantPw }) => {
     if (!targetId || !grantPw) {
       setShowBark({ begrip: 'Toegang geweigerd', title: 'Vul beide velden in', text: 'Kies een user en typ het admin-wachtwoord.', tone: 'warn' });
       return;
@@ -878,10 +878,9 @@ function AdminSettingsPanel({ userId }) {
       body: JSON.stringify({ target_user_id: targetId, granted_by: userId, password: grantPw }),
     }).then(r => r.json());
     setBusy(false);
-    setGrantPw('');
     if (res.success) {
+      setShowGrantBark(false);
       setShowBark({ begrip: 'Admin geactiveerd', title: `${res.naam || targetId} is nu admin`, text: res.message, tone: 'success' });
-      setTargetId('');
       refresh();
     } else {
       setShowBark({ begrip: 'Toegang geweigerd', title: 'Admin-grant mislukt', text: res.error, tone: 'error' });
@@ -968,37 +967,23 @@ function AdminSettingsPanel({ userId }) {
         </div>
       </div>
 
-      {/* Grant nieuwe admin */}
+      {/* Grant nieuwe admin — v6_admin_grant_frame_001 (InputBark frame popup) */}
       <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 space-y-3">
         <h3 className="text-sm font-semibold text-white">Nieuwe admin toekennen</h3>
-        <div>
-          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Gebruiker</label>
-          <select
-            data-testid="admin-grant-user"
-            value={targetId}
-            onChange={e => setTargetId(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none"
-          >
-            <option value="">— kies user —</option>
-            {grantableUsers.map(u => (
-              <option key={u.id} value={u.id}>{u.naam || u.id} (g{u.gradatie || '?'})</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Admin-wachtwoord</label>
-          <input
-            type="password" data-testid="admin-grant-password"
-            value={grantPw} onChange={e => setGrantPw(e.target.value)} placeholder="•••••••"
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none"
-          />
-        </div>
+        <p className="text-[11px] text-slate-400">
+          Open de ceremoniële bark om een gebruiker tot admin te benoemen. Je hebt het admin-wachtwoord nodig.
+        </p>
         <button
-          data-testid="admin-grant-btn" onClick={grant} disabled={busy || !targetId || !grantPw}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/20 text-purple-200 hover:bg-purple-500/30 disabled:opacity-40 disabled:cursor-not-allowed"
+          data-testid="admin-grant-btn"
+          onClick={() => setShowGrantBark(true)}
+          disabled={busy || grantableUsers.length === 0}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/20 text-purple-200 hover:bg-purple-500/30 disabled:opacity-40 disabled:cursor-not-allowed border border-purple-500/40"
         >
-          <ShieldCheck className="w-3.5 h-3.5" /> Maak admin
+          <ShieldCheck className="w-3.5 h-3.5" /> Maak admin (in frame-bark)
         </button>
+        {grantableUsers.length === 0 && (
+          <p className="text-[10px] text-slate-500 italic">Geen kandidaat-gebruikers beschikbaar.</p>
+        )}
       </div>
 
       {/* Admin wachtwoord wijzigen */}
@@ -1028,6 +1013,38 @@ function AdminSettingsPanel({ userId }) {
         title={showBark?.title}
         text={showBark?.text}
         tone={showBark?.tone}
+      />
+
+      {/* v6_admin_grant_frame_001 — Ornament-frame popup voor admin-grant */}
+      <InputBark
+        open={showGrantBark}
+        onClose={() => setShowGrantBark(false)}
+        title="Nieuwe admin benoemen"
+        text="Kies de gebruiker en bevestig met het admin-wachtwoord."
+        tone="info"
+        variant="frame"
+        fields={[
+          {
+            name: 'targetId',
+            type: 'select',
+            label: 'Gebruiker',
+            placeholder: '— kies user —',
+            options: grantableUsers.map(u => ({
+              value: u.id,
+              label: `${u.naam || u.id} (g${u.gradatie || '?'})`,
+            })),
+          },
+          {
+            name: 'grantPw',
+            type: 'password',
+            label: 'Admin-wachtwoord',
+            placeholder: '•••••••',
+            autoFocus: false,
+          },
+        ]}
+        onSubmit={grant}
+        submitLabel={busy ? 'Bezig…' : 'Maak admin'}
+        cancelLabel="Annuleer"
       />
     </div>
   );

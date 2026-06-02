@@ -1165,15 +1165,17 @@ function MediaSection({ card, currentLade, onUpdated }) {
           )}
         </div>
         {(media.image_urls || []).filter(Boolean).length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-2">
             {(media.image_urls || []).filter(Boolean).map((url, i) => (
-              <div key={i} className="relative group">
+              <div key={i} className="relative">
                 <img src={API + url} alt={`media-${i}`}
                   className="w-16 h-16 object-cover rounded border border-slate-700" />
+                {/* v6_kbv2_image_delete_visibility_001 — knop altijd zichtbaar (was opacity-0 group-hover) */}
                 <button data-testid={`kbv2-image-delete-${i}`} onClick={() => deleteImage(url)}
                   title="Foto verwijderen"
-                  className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Trash2 className="w-3 h-3 text-white" />
+                  aria-label="Foto verwijderen"
+                  className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-md ring-1 ring-slate-900 transition-colors">
+                  <X className="w-3 h-3 text-white" />
                 </button>
               </div>
             ))}

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 838,
+    "card_count": 842,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T18:42:03.170565+00:00"
+    "last_updated": "2026-06-02T19:41:13.746366+00:00"
   },
   "kaarten": [
     {
@@ -104546,6 +104546,615 @@
         "voice_transcript": null,
         "image_urls": [
           "/api/system-archive/file/d8e93fc9b4fe"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-2c6ae150",
+      "begrip": "Schaar",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een schaar is een handgereedschap met twee snijbladen waarmee materialen kunnen worden geknipt.",
+        "laag2": "Een schaar gebruikt twee bewegende bladen om materiaal door te snijden.",
+        "laag3": "Een schaar ondersteunt knippen, vormen en aanpassen van materialen zoals papier, stof en draad.",
+        "laag4": "Binnen Spark is een schaar een gereedschap dat gebruikt wordt om iets te scheiden, te verkleinen of een gewenste vorm te geven door materiaal gecontroleerd door te snijden.\n"
+      },
+      "ws5": {
+        "wie": " mensen, gebruikers, hobbyisten, professionals",
+        "wat": "een knipgereedschap",
+        "wanneer": " bij knippen, aanpassen of vormgeven",
+        "waar": "thuis, op school, op het werk en in werkplaatsen",
+        "waarom": "om materiaal te scheiden of te vormen",
+        "hoe": "door twee snijbladen langs elkaar te bewegen"
+      },
+      "tags": [
+        "schaar",
+        "knippen",
+        "snijden",
+        "gereedschap",
+        "handgereedschap",
+        "papier",
+        "stof",
+        "draad",
+        "vormgeven",
+        "scheiden",
+        "precisie",
+        "creativiteit",
+        "hulpmiddel",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d41e3189",
+          "begrip": "Handschoenen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "hulpmiddel",
+            "neutraal",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3a68e49",
+          "begrip": "geur",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "stof"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "precisie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-23253e0a",
+          "begrip": "ga je geld verdienen voor redrum_w?",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "creativiteit",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-efe5810f",
+          "begrip": "alcohol",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "stof"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T19:35:01.380343+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:20:27.867495+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:34:52.415215+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:20:49.601125+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:34:52.544914+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:34:52.549749+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:35:01.625966+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:35:01.630677+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/7e90fa41d0b3"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2522f483",
+      "begrip": "score",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een score is een waarde die een resultaat, prestatie of voortgang weergeeft.",
+        "laag2": "Een score laat zien hoe goed, hoeveel of hoe succesvol iets is verlopen.",
+        "laag3": "Scores ondersteunen meting, vergelijking en feedback door prestaties zichtbaar te maken.",
+        "laag4": "Scores ondersteunen meting, vergelijking en feedback door prestaties zichtbaar te maken."
+      },
+      "ws5": {
+        "wie": " mensen, gebruikers, spelers, systemen",
+        "wat": "een meetwaarde of resultaat",
+        "wanneer": "na een actie, taak, spel of beoordeling",
+        "waar": "in games, systemen, toetsen en metingen",
+        "waarom": "om prestaties of voortgang zichtbaar te maken",
+        "hoe": "door punten, waarden of resultaten toe te kennen"
+      },
+      "tags": [
+        "scorescore",
+        "punten",
+        "resultaat",
+        "prestatie",
+        "voortgang",
+        "meting",
+        "beoordeling",
+        "waarde",
+        "ranking",
+        "feedback",
+        "vergelijking",
+        "spel",
+        "systeem",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "feedback",
+            "neutraal",
+            "prestatie",
+            "ranking",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e31a7aca",
+          "begrip": "beoordeling",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beoordeling",
+            "feedback",
+            "neutraal",
+            "prestatie",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "feedback",
+            "neutraal",
+            "prestatie",
+            "spel",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5243d9ac",
+          "begrip": "verdienen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "neutraal",
+            "prestatie",
+            "resultaat",
+            "waarde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f5bd2d1c",
+          "begrip": "check",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beoordeling",
+            "neutraal",
+            "resultaat",
+            "vergelijking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T19:36:51.201832+00:00",
+        "vorige_versie_v1": "kb-skel-2522f483",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:03.811021+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:31:07.906356+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:36:47.262099+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:36:47.266740+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:36:51.441936+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:36:51.446324+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:37:01.944172+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:37:01.948917+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:37:05.476153+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:37:05.480709+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:37:05.329819+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/47f37e76adf9"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-2e9b7f0e",
+      "begrip": "High Score",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een high score is de hoogste behaalde score binnen een spel, systeem of competitie.",
+        "laag2": "Een high score geeft het beste resultaat weer dat tot nu toe is behaald.",
+        "laag3": "High scores ondersteunen motivatie, competitie en voortgang door uitzonderlijke prestaties zichtbaar te maken.",
+        "laag4": "Binnen Spark is een high score een referentiewaarde die het hoogste behaalde resultaat vertegenwoordigt en gebruikt wordt om prestaties, groei of records te vergelijken.\n"
+      },
+      "ws5": {
+        "wie": "spelers, gebruikers, systemen",
+        "wat": "de hoogste behaalde score",
+        "wanneer": "na het behalen van een recordprestatie",
+        "waar": "in games, systemen, competities en uitdagingen",
+        "waarom": "om prestaties te meten en te vergelijken",
+        "hoe": "door scores op te slaan en te rangschikken"
+      },
+      "tags": [
+        "high score",
+        "record",
+        "topscore",
+        "prestatie",
+        "resultaat",
+        "punten",
+        "ranking",
+        "competitie",
+        "voortgang",
+        "vergelijking",
+        "spel",
+        "systeem",
+        "motivatie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "competitie",
+            "motivatie",
+            "neutraal",
+            "prestatie",
+            "ranking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2522f483",
+          "begrip": "score",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "neutraal",
+            "prestatie",
+            "punten",
+            "ranking",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "motivatie",
+            "neutraal",
+            "prestatie",
+            "spel",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-65ed74a2",
+          "begrip": "Hoeveel xp erbij?",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "motivatie",
+            "neutraal",
+            "prestatie",
+            "systeem",
+            "voortgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5243d9ac",
+          "begrip": "verdienen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "motivatie",
+            "neutraal",
+            "prestatie",
+            "resultaat"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T19:39:26.257931+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:27:15.845734+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:39:02.069652+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:27:50.148800+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:31:40.788214+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:39:02.204201+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:39:02.208815+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:39:26.499936+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:39:26.504538+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/118c2ea41377",
+          "/api/system-archive/file/baf2a2f9b078",
+          "/api/system-archive/file/d5f30bd8b6b9"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-a244cd34",
+      "begrip": "Maak een keus",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Maak een keus is een oproep om uit meerdere mogelijkheden één optie te selecteren.",
+        "laag2": "Maak een keus geeft aan dat een beslissing nodig is om verder te gaan.",
+        "laag3": "Keuzes ondersteunen richting, voortgang en controle door één mogelijkheid te selecteren uit meerdere alternatieven.",
+        "laag4": "Binnen Spark is maak een keus een trigger die aangeeft dat een gebruiker of systeem een beslissing moet nemen voordat een proces, interactie of actie kan worden voortgezet.\n"
+      },
+      "ws5": {
+        "wie": "gebruikers, spelers, systemen",
+        "wat": "een verzoek om te kiezen",
+        "wanneer": "wanneer meerdere opties beschikbaar zijn",
+        "waar": "in spellen, systemen en besluitvorming",
+        "waarom": "om richting te bepalen en verder te gaan",
+        "hoe": "door één optie uit de beschikbare mogelijkheden te selecteren"
+      },
+      "tags": [
+        "door één optie uit de beschikbare mogelijkheden te selecteren"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T19:41:13.746346+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:24:58.232827+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:41:11.785996+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:25:12.142447+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:25:49.939129+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:41:11.919214+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/ba388a95bfbd",
+          "/api/system-archive/file/24ba918e30d6"
         ]
       },
       "needs": [

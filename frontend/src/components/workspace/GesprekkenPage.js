@@ -723,23 +723,35 @@ export function GesprekkenPage({ onNavigate }) {
           setRpsOpen(true);
         }
 
+        // v6_kb_sound_001b — KB-kaart geluid EERST afspelen, daarna TTS (onweer → "ik ben boos")
+        // Wacht tot geluid klaar is (max 4s) voordat TTS begint.
+        const playKbSound = () => {
+          if (!data.sound_url) return Promise.resolve();
+          return new Promise(resolve => {
+            try {
+              const fullUrl = data.sound_url.startsWith('http') ? data.sound_url : `${API}${data.sound_url}`;
+              const a = new Audio(fullUrl);
+              a.volume = 0.7;
+              let done = false;
+              const finish = () => { if (!done) { done = true; resolve(); } };
+              a.addEventListener('ended', finish);
+              a.addEventListener('error', finish);
+              // Hard timeout zodat lange/foute clips TTS niet ophouden
+              setTimeout(finish, 4000);
+              a.play().catch(finish);
+            } catch { resolve(); }
+          });
+        };
+
+        // Geluid eerst, daarna pas TTS
+        await playKbSound();
+
         // TTS speak Spark's response — strip markdown for cleaner audio
         if (ttsEnabled && data.message && data.action !== 'enable_tts') {
           await speakSparkResponse(data.message);
         } else {
           // Geen TTS → meteen re-arm mic indien voice-loop
           rearmMicIfVoiceLoop();
-        }
-
-        // v6_kb_sound_001 — Speel KB-kaart geluid af (apart van TTS) als backend dat aangeeft
-        if (data.sound_url) {
-          try {
-            const fullUrl = data.sound_url.startsWith('http') ? data.sound_url : `${API}${data.sound_url}`;
-            const a = new Audio(fullUrl);
-            a.volume = 0.7;
-            // Niet awaiten — speelt gewoon op de achtergrond
-            a.play().catch(() => {});
-          } catch {}
         }
 
         setSparkMessages(prev => [...prev, {

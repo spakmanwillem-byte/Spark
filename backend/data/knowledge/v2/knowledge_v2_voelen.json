@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 285,
+    "card_count": 298,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-05-31T20:04:52.861798+00:00"
+    "last_updated": "2026-06-02T10:38:24.534481+00:00"
   },
   "kaarten": [
     {
@@ -37045,6 +37045,2162 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9980c280",
+      "begrip": "steun",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Steun is hulp, ondersteuning of draagkracht die iemand, iets of een proces sterker of stabieler maakt.",
+        "laag2": "Steun helpt om iets vol te houden, te verbeteren of te beschermen.",
+        "laag3": "Steun ondersteunt stabiliteit, vertrouwen en ontwikkeling.\nHet kan praktisch, emotioneel, financieel of sociaal zijn en helpt bij het bereiken van doelen of het omgaan met uitdagingen.",
+        "laag4": "Binnen Spark is steun een versterkende relatie waarbij middelen, kennis, energie of betrokkenheid worden ingezet om groei, herstel, continuïteit of stabiliteit te bevorderen.\nSteun verbindt draagkracht met ontwikkeling door ondersteuning beschikbaar te maken waar behoefte bestaat.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, systemen, organisaties",
+        "wat": "hulp of ondersteuning",
+        "wanneer": "bij behoefte, ontwikkeling of uitdaging",
+        "waar": "in relaties, systemen, werk, zorg en gemeenschap",
+        "waarom": "voor stabiliteit, groei en herstel",
+        "hoe": "door hulp, middelen, begeleiding of betrokkenheid"
+      },
+      "tags": [
+        "steun",
+        "hulp",
+        "ondersteuning",
+        "betrokkenheid",
+        "vertrouwen",
+        "stabiliteit",
+        "bescherming",
+        "herstel",
+        "begeleiding",
+        "samenwerking",
+        "verbinding",
+        "draagkracht",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "bescherming",
+            "blij",
+            "emotie",
+            "hulp",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5c41cd27",
+          "begrip": "community",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d261ebd3",
+          "begrip": "ondersteunen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "begeleiding",
+            "blij",
+            "emotie",
+            "hulp",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-08de73f3",
+          "begrip": "hulpdienst",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "herstel",
+            "hulp",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f0b6329",
+          "begrip": "houden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "ondersteuning",
+            "stabiliteit"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T07:59:27.376425+00:00",
+        "vorige_versie_v1": "kb-skel-9980c280",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.794792+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T07:59:25.578620+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T07:59:25.677321+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T07:59:30.394007+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T07:59:30.433941+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T07:59:22.833545+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9054e758",
+      "begrip": "comfort",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Comfort is een toestand van gemak, welzijn of aangenaamheid waarin weinig hinder, spanning of ongemak wordt ervaren.",
+        "laag2": "Comfort zorgt ervoor dat iemand zich prettig en op zijn gemak voelt.",
+        "laag3": "Comfort ondersteunt welzijn, rust en stabiliteit.\nHet vermindert belasting en vergroot het gevoel van veiligheid, ontspanning en tevredenheid.",
+        "laag4": "Binnen Spark is comfort een ervaringsstaat waarin omstandigheden, middelen of interacties bijdragen aan een gevoel van gemak, balans en welzijn.\nComfort ondersteunt duurzame ontwikkeling door spanning te verminderen en ruimte te creëren voor herstel, focus en betrokkenheid."
+      },
+      "ws5": {
+        "wie": "mensen, dieren, gebruikers",
+        "wat": "een toestand van gemak en welzijn",
+        "wanneer": "bij prettige of ondersteunende omstandigheden",
+        "waar": "in wonen, werken, reizen en dagelijkse situaties",
+        "waarom": "voor welzijn, rust en tevredenheid",
+        "hoe": "door veiligheid, ondersteuning en vermindering van ongemak"
+      },
+      "tags": [
+        "comfort",
+        "gemak",
+        "welzijn",
+        "rust",
+        "ontspanning",
+        "veiligheid",
+        "tevredenheid",
+        "ondersteuning",
+        "stabiliteit",
+        "balans",
+        "bescherming",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "bescherming",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48404078",
+          "begrip": "grenzen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "balans",
+            "bescherming",
+            "blij",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "neutraal",
+            "ontspanning",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T08:12:21.563722+00:00",
+        "vorige_versie_v1": "kb-skel-9054e758",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.901976+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T08:12:19.152620+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T08:12:19.234274+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T08:12:24.342796+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T08:12:24.379473+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T08:12:16.932867+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3b090f8b",
+      "begrip": "houding",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Houding is de manier waarop iemand zich lichamelijk, mentaal of sociaal opstelt in een situatie.",
+        "laag2": "Houding laat zien hoe iemand staat, denkt of reageert.",
+        "laag3": "Houding beïnvloedt uitstraling, gedrag en interactie.\nHet maakt zichtbaar hoe iemand zich verhoudt tot zichzelf, anderen of een bepaalde situatie.",
+        "laag4": "Binnen Spark is houding een uitingsvorm waarin lichamelijke positie, mentale instelling en sociale benadering samenkomen.\nHouding ondersteunt communicatie en afstemming doordat zij richting geeft aan gedrag, interpretatie en interactie binnen een context."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen",
+        "wat": "een manier van opstellen of reageren",
+        "wanneer": "bij interactie, communicatie en gedrag",
+        "waar": "in sociale situaties, werk, onderwijs en dagelijks leven",
+        "waarom": "voor uitdrukking, afstemming en reactie",
+        "hoe": "door lichaamstaal, gedrag, instelling en presentatie"
+      },
+      "tags": [
+        "houding",
+        "gedrag",
+        "instelling",
+        "lichaamstaal",
+        "presentatie",
+        "reactie",
+        "communicatie",
+        "uitstraling",
+        "positie",
+        "afstemming",
+        "respect",
+        "interactie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1cc66f15",
+          "begrip": "reageren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gedrag",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-adaae840",
+          "begrip": "emotionele",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gedrag",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c74d6af0",
+          "begrip": "alsjeblieft",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gedrag",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "reactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T08:15:33.409403+00:00",
+        "vorige_versie_v1": "kb-skel-3b090f8b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:44.945352+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T08:15:32.335347+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T08:15:32.383771+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T08:15:36.104747+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T08:15:36.185194+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T08:15:29.970795+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b6b74495",
+      "begrip": "welzijn",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Welzijn is de toestand waarin iemand zich lichamelijk, mentaal en sociaal goed voelt.",
+        "laag2": "Welzijn gaat over gezondheid, tevredenheid en kwaliteit van leven.",
+        "laag3": "Welzijn ondersteunt balans, ontwikkeling en functioneren.\nHet ontstaat wanneer basisbehoeften, gezondheid, veiligheid, sociale verbinding en persoonlijke groei voldoende aanwezig zijn.",
+        "laag4": "Binnen Spark is welzijn een positieve staat van functioneren waarin lichamelijke, mentale, emotionele en sociale factoren in evenwicht zijn.\nWelzijn ondersteunt duurzame ontwikkeling doordat gezondheid, comfort, veiligheid, betrokkenheid en zingeving samen bijdragen aan een stabiele en bevredigende levenssituatie.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gemeenschappen",
+        "wat": "een toestand van gezondheid en welbevinden",
+        "wanneer": "tijdens dagelijks functioneren en ontwikkeling",
+        "waar": "in het persoonlijke, sociale en maatschappelijke leven",
+        "waarom": "voor een gezond, stabiel en betekenisvol bestaan",
+        "hoe": "door balans tussen gezondheid, veiligheid, verbinding en ontwikkeling"
+      },
+      "tags": [
+        "welzijn",
+        "gezondheid",
+        "geluk",
+        "tevredenheid",
+        "comfort",
+        "balans",
+        "veiligheid",
+        "ontwikkeling",
+        "ondersteuning",
+        "betrokkenheid",
+        "kwaliteit",
+        "leven",
+        "herstel",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-9054e758",
+          "begrip": "comfort",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "comfort",
+            "emotie",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "herstel",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "herstel",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ondersteuning",
+            "ontwikkeling",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48404078",
+          "begrip": "grenzen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:12:09.317248+00:00",
+        "vorige_versie_v1": "kb-skel-b6b74495",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.290917+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:12:07.741747+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:12:07.753439+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:12:11.789782+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:12:11.803265+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:12:05.535786+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-761b05aa",
+      "begrip": "entertainment",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Entertainment is vermaak dat bedoeld is om mensen te amuseren, boeien of plezier te geven.",
+        "laag2": "Entertainment zorgt voor ontspanning, plezier of beleving.\n",
+        "laag3": "Entertainment ondersteunt ontspanning, sociale verbinding en beleving.\nHet kan mensen informeren, inspireren, afleiden of samenbrengen door middel van verschillende vormen van vermaak.\n",
+        "laag4": "Binnen Spark is entertainment een ervaringsgerichte activiteit of inhoud die aandacht, emotie en betrokkenheid stimuleert met als doel vermaak, ontspanning of beleving.\nEntertainment ondersteunt welzijn en sociale interactie door plezier, verwondering, spanning of inspiratie toegankelijk te maken.\n"
+      },
+      "ws5": {
+        "wie": "mensen, publiek, makers, gebruikers",
+        "wat": "vermaak en beleving",
+        "wanneer": "tijdens vrije tijd, evenementen of media-gebruik",
+        "waar": "in media, games, theater, muziek, evenementen en online platforms",
+        "waarom": "voor ontspanning, plezier en betrokkenheid",
+        "hoe": "door verhalen, spel, muziek, beeld, humor en interactie"
+      },
+      "tags": [
+        "entertainment",
+        "vermaak",
+        "plezier",
+        "ontspanning",
+        "beleving",
+        "amusement",
+        "media",
+        "publiek",
+        "spel",
+        "muziek",
+        "verhaal",
+        "creativiteit",
+        "betrokkenheid",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8205b15f",
+          "begrip": "spelen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "ontspanning",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9e27d2e7",
+          "begrip": "Vertel een verhaal",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "verhaal",
+            "vermaak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-46805938",
+          "begrip": "twist",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0178f2bb",
+          "begrip": "Ambient",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "media",
+            "muziek",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f31a64d",
+          "begrip": "Ambient aan",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beleving",
+            "emotie",
+            "media",
+            "ontspanning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:15:33.424819+00:00",
+        "vorige_versie_v1": "kb-skel-761b05aa",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.425033+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:15:32.444360+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:15:32.478511+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:15:36.339193+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:15:36.380145+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:15:30.472048+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-74c6dbff",
+      "begrip": "behoefte",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Behoefte is iets wat nodig of gewenst is voor functioneren, welzijn, ontwikkeling of tevredenheid.",
+        "laag2": "Een behoefte geeft aan wat iemand mist, verlangt of nodig heeft.",
+        "laag3": "Behoeften ondersteunen overleving, welzijn en ontwikkeling.\nZe kunnen lichamelijk, emotioneel, sociaal, praktisch of mentaal van aard zijn en sturen vaak gedrag en keuzes.\n",
+        "laag4": "Binnen Spark is een behoefte een drijfveer die ontstaat wanneer een gewenste of noodzakelijke toestand nog niet volledig aanwezig is.\nBehoeften ondersteunen richting en motivatie doordat ze gedrag, keuzes en interacties beïnvloeden in het streven naar balans, vervulling of verbetering.\n"
+      },
+      "ws5": {
+        "wie": "mensen, dieren, groepen, systemen",
+        "wat": "iets dat nodig of gewenst is",
+        "wanneer": "bij een tekort, verlangen of doel",
+        "waar": "in het dagelijks leven, relaties, werk en ontwikkeling",
+        "waarom": "voor welzijn, functioneren en groei",
+        "hoe": "door motivatie, verlangen, noodzaak of vraag"
+      },
+      "tags": [
+        "behoefte",
+        "noodzaak",
+        "verlangen",
+        "motivatie",
+        "welzijn",
+        "ontwikkeling",
+        "gezondheid",
+        "ondersteuning",
+        "doel",
+        "vervulling",
+        "gedrag",
+        "keuze",
+        "vraag",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-37bffc41",
+          "begrip": "wilde",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "gedrag",
+            "keuze",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6b74495",
+          "begrip": "welzijn",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gezondheid",
+            "ondersteuning",
+            "ontwikkeling",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "neutraal",
+            "ondersteuning",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "motivatie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "motivatie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:23:40.651636+00:00",
+        "vorige_versie_v1": "kb-skel-74c6dbff",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.556643+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:23:39.649945+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:23:39.729294+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:23:43.477750+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:23:43.491047+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:23:37.842821+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-44dea6c8",
+      "begrip": "speels",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Speels is een houding of manier van handelen die gekenmerkt wordt door plezier, nieuwsgierigheid, experimenteren en ontspanning.",
+        "laag2": "Speels betekent iets op een luchtige, vrije of creatieve manier benaderen.",
+        "laag3": "Speelsheid ondersteunt leren, creativiteit en sociale interactie.\nHet verlaagt spanning, stimuleert ontdekking en maakt experimenteren toegankelijk zonder directe druk op het resultaat.\n",
+        "laag4": "Binnen Spark is speels een benaderingsvorm waarbij nieuwsgierigheid, verkenning en plezier centraal staan.\nSpeelsheid ondersteunt ontwikkeling door ruimte te creëren voor experiment, creativiteit, ontdekking en spontane interactie zonder dat perfectie of prestatie het hoofddoel is.\n"
+      },
+      "ws5": {
+        "wie": "mensen, kinderen, spelers, gebruikers",
+        "wat": "een vrije en plezierige manier van handelen",
+        "wanneer": "bij spel, ontdekking, leren en creatie",
+        "waar": "in spel, onderwijs, sociale situaties en creatieve processen",
+        "waarom": "voor plezier, ontdekking en ontwikkeling",
+        "hoe": "door experimenteren, verkennen, improviseren en spelen"
+      },
+      "tags": [
+        "speels",
+        "spel",
+        "plezier",
+        "creativiteit",
+        "nieuwsgierigheid",
+        "experiment",
+        "ontdekking",
+        "fantasie",
+        "verbeelding",
+        "ontspanning",
+        "interactie",
+        "leren",
+        "ontwikkeling",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8205b15f",
+          "begrip": "spelen",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "interactie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-86777294",
+          "begrip": "inspiratie",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "leren",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-761b05aa",
+          "begrip": "entertainment",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "ontspanning",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-26d6a41b",
+          "begrip": "spel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "interactie",
+            "leren",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3df2c212",
+          "begrip": "creatief",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "experiment",
+            "fantasie",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:26:50.523766+00:00",
+        "vorige_versie_v1": "kb-skel-44dea6c8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.621397+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:26:49.483164+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:26:49.496466+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:26:55.461168+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:26:55.474783+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:26:46.620950+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-73d1d0f0",
+      "begrip": "weerstand",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Weerstand is een kracht, reactie of houding die verandering, beweging, invloed of doorgang tegenwerkt.",
+        "laag2": "Weerstand remt, vertraagt of blokkeert iets.",
+        "laag3": "Weerstand ondersteunt bescherming, stabiliteit en begrenzing.\nHet kan fysiek, emotioneel, sociaal of technisch zijn en ontstaat wanneer een kracht, idee of verandering wordt tegengewerkt.\n",
+        "laag4": "Binnen Spark is weerstand een tegenwerkende factor die invloed uitoefent op de voortgang van een proces, ontwikkeling of verandering.\nWeerstand ondersteunt balans en bescherming door grenzen zichtbaar te maken en systemen te dwingen zich aan te passen, te versterken of opnieuw af te stemmen.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, systemen, materialen",
+        "wat": "een tegenwerkende kracht of reactie",
+        "wanneer": "bij verandering, beweging, invloed of druk",
+        "waar": "in gedrag, relaties, techniek, natuur en processen",
+        "waarom": "voor bescherming, stabiliteit of behoud",
+        "hoe": " door tegenkracht, vertraging, blokkering of afwijzing"
+      },
+      "tags": [
+        "weerstand",
+        "tegenkracht",
+        "blokkade",
+        "bescherming",
+        "stabiliteit",
+        "beperking",
+        "verandering",
+        "conflict",
+        "afwijzing",
+        "vertraging",
+        "spanning",
+        "reactie",
+        "aanpassing",
+        "balans",
+        "negatief",
+        "emotie",
+        "bang",
+        "boos"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "conflict",
+            "emotie",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f86e417b",
+          "begrip": "ergernis",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "conflict",
+            "emotie",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10363874",
+          "begrip": "vijandigheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "afwijzing",
+            "bang",
+            "boos",
+            "conflict",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-84a2710c",
+          "begrip": "opstandig",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "conflict",
+            "emotie",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e7fada80",
+          "begrip": "afkeer",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "afwijzing",
+            "bang",
+            "bescherming",
+            "boos",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:34:53.462287+00:00",
+        "vorige_versie_v1": "kb-skel-73d1d0f0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.685864+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:34:39.189314+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:34:39.200632+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:34:56.127823+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:34:56.141251+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:34:37.081717+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-621c2a20",
+      "begrip": "openheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Openheid is de bereidheid om informatie, ideeën, gevoelens of ervaringen toegankelijk te delen en nieuwe inzichten te ontvangen.",
+        "laag2": "Openheid maakt uitwisseling, begrip en samenwerking mogelijk.",
+        "laag3": "Openheid ondersteunt vertrouwen, communicatie en ontwikkeling.\nHet helpt mensen en systemen om nieuwe perspectieven te verkennen, feedback te ontvangen en verbindingen te versterken.",
+        "laag4": "Binnen Spark is openheid een houding waarbij informatie, ervaringen, ideeën en mogelijkheden toegankelijk zijn voor uitwisseling, onderzoek en groei.\nOpenheid ondersteunt ontwikkeling en verbinding doordat kennis, communicatie en perspectieven vrij kunnen stromen tussen mensen, groepen en systemen.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gemeenschappen, organisaties",
+        "wat": "een houding van toegankelijkheid en ontvankelijkheid",
+        "wanneer": "bij communicatie, samenwerking, leren en ontwikkeling",
+        "waar": "in relaties, gemeenschappen, organisaties en kennisnetwerken",
+        "waarom": "voor vertrouwen, begrip en groei",
+        "hoe": "door luisteren, delen, ontvangen en onderzoeken"
+      },
+      "tags": [
+        "openheid",
+        "toegankelijkheid",
+        "vertrouwen",
+        "communicatie",
+        "verbinding",
+        "samenwerking",
+        "begrip",
+        "transparantie",
+        "eerlijkheid",
+        "nieuwsgierigheid",
+        "leren",
+        "ontwikkeling",
+        "ontvankelijkheid",
+        "positief",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-86777294",
+          "begrip": "inspiratie",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "leren",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9fb4bf15",
+          "begrip": "dieper",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "blij",
+            "communicatie",
+            "emotie",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f4d18917",
+          "begrip": "verbonden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "samenwerking",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "positief",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T09:38:10.439198+00:00",
+        "vorige_versie_v1": "kb-skel-621c2a20",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:45.817799+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:38:09.495554+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:38:09.527964+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T09:38:12.941869+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T09:38:12.952749+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T09:38:07.689962+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-8d9261ff",
+      "begrip": "verbondenheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verbondenheid is het gevoel of de toestand van verbonden zijn met mensen, groepen, plaatsen, ideeën of ervaringen.",
+        "laag2": "Verbondenheid creëert een gevoel van contact, betrokkenheid en samenhang.",
+        "laag3": "Verbondenheid ondersteunt vertrouwen, samenwerking en welzijn.\nHet helpt mensen zich onderdeel te voelen van relaties, gemeenschappen en gedeelde doelen.\n",
+        "laag4": "Binnen Spark is verbondenheid een relationele staat waarin personen, groepen, concepten of systemen betekenisvolle relaties met elkaar delen.\nVerbondenheid ondersteunt samenwerking, betrokkenheid en stabiliteit doordat informatie, ervaringen, emoties en doelen met elkaar worden verbonden binnen een groter geheel.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gemeenschappen, systemen",
+        "wat": "een gevoel of relatie van samenhang",
+        "wanneer": "bij contact, samenwerking en gedeelde ervaringen",
+        "waar": "in relaties, families, gemeenschappen, teams en netwerken",
+        "waarom": "voor steun, vertrouwen en betrokkenheid",
+        "hoe": "door contact, begrip, samenwerking en gedeelde ervaringen"
+      },
+      "tags": [
+        "verbondenheid",
+        "verbinding",
+        "betrokkenheid",
+        "relatie",
+        "gemeenschap",
+        "vertrouwen",
+        "samenwerking",
+        "steun",
+        "contact",
+        "begrip",
+        "sociale interactie",
+        "welzijn",
+        "samenhang",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betrokkenheid",
+            "contact",
+            "emotie",
+            "gemeenschap",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "samenwerking",
+            "steun"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "blij",
+            "emotie",
+            "samenwerking",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7f88f44",
+          "begrip": "samen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gemeenschap",
+            "relatie",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5c41cd27",
+          "begrip": "community",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "relatie",
+            "samenwerking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T10:00:37.987688+00:00",
+        "vorige_versie_v1": "kb-skel-8d9261ff",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.043047+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:00:36.844418+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:00:36.877933+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:00:40.679404+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:00:40.735676+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T10:00:34.661065+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-55375854",
+      "begrip": "zingeving",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Zingeving is het ervaren of zoeken van betekenis, waarde en richting in het leven, handelen of bestaan.",
+        "laag2": "Zingeving helpt mensen begrijpen waarom iets belangrijk is of waarvoor zij iets doen.",
+        "laag3": "\nZingeving ondersteunt motivatie, welzijn en persoonlijke ontwikkeling.\nDoor betekenis te geven aan ervaringen, doelen en relaties ontstaat een gevoel van richting, betrokkenheid en verbondenheid.",
+        "laag4": "Binnen Spark is zingeving een proces van betekenisvorming waarbij ervaringen, waarden, doelen en relaties worden verbonden tot een samenhangend begrip van wat belangrijk of waardevol is.\nZingeving ondersteunt welzijn en bewustwording door mensen te helpen richting, identiteit en betrokkenheid te ontwikkelen binnen hun persoonlijke en sociale werkelijkheid.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gemeenschappen, gebruikers",
+        "wat": "het geven of ervaren van betekenis en richting",
+        "wanneer": "bij reflectie, ontwikkeling, keuzes en levensvragen",
+        "waar": "in het dagelijks leven, relaties, werk, geloof, cultuur en persoonlijke groei",
+        "waarom": "voor betekenis, motivatie en welzijn",
+        "hoe": "door ervaringen, waarden, doelen en overtuigingen met elkaar te verbinden"
+      },
+      "tags": [
+        "zingeving",
+        "betekenis",
+        "doel",
+        "richting",
+        "waarden",
+        "motivatie",
+        "welzijn",
+        "bewustwording",
+        "identiteit",
+        "ontwikkeling",
+        "verbondenheid",
+        "reflectie",
+        "levensvragen",
+        "betekenisvorming",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "doel",
+            "emotie",
+            "identiteit",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "doel",
+            "emotie",
+            "identiteit",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "doel",
+            "emotie",
+            "identiteit",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "bewustwording",
+            "emotie",
+            "ontwikkeling",
+            "reflectie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T10:27:11.343203+00:00",
+        "vorige_versie_v1": "kb-skel-55375854",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.354614+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:27:10.341529+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:27:10.382839+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:27:13.752102+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:27:13.838532+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T10:27:08.519939+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-974f5a10",
+      "begrip": "spiritualiteit",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spiritualiteit\nLaag 1 — Kort antwoord / definitie\n\nSpiritualiteit is het zoeken naar of ervaren van betekenis, verbondenheid, bewustzijn en een werkelijkheid die verder gaat dan het direct waarneembare.\n\nLaag 2\n\nSpiritualiteit gaat over zingeving, innerlijke beleving en verbondenheid.\n\nLaag 3\n\nSpiritualiteit ondersteunt zelfreflectie, bewustwording en zingeving.\nHet helpt mensen betekenis te geven aan ervaringen, relaties, het leven en hun plaats binnen een groter geheel.\n\nLaag 4\n\nBinnen Spark is spiritualiteit een proces van betekenisvorming waarbij bewustzijn, ervaringen, waarden en verbondenheid worden onderzocht vanuit een perspectief dat verder reikt dan uitsluitend het materiële of praktische.\nSpiritualiteit ondersteunt persoonlijke ontwikkeling en welzijn door ruimte te bieden voor reflectie, verwondering, innerlijke groei en het ervaren van samenhang tussen zichzelf, anderen en de omgeving.\n\n5W\n\nWie\nmensen, gemeenschappen, zoekenden, spirituele tradities\n\nWat\nhet ervaren of onderzoeken van diepere betekenis en verbondenheid\n\nWanneer\nbij reflectie, levensvragen, ontwikkeling en bijzondere ervaringen\n\nWaar\nin persoonlijke beleving, religie, filosofie, natuur en cultuur\n\nWaarom\nvoor zingeving, bewustwording en innerlijke groei\n\nHoe\ndoor reflectie, meditatie, ervaring, contemplatie, rituelen of persoonlijke inzichten\n\nTags\n\nspiritualiteit, zingeving, bewustwording, verbondenheid, betekenis, bewustzijn, reflectie, innerlijke groei, levensvragen, ervaring, verwondering, filosofie, geloof, welzijn, emotie, blij\n\nLade\n\n🌸 Voelen\n\nKernzin\n\nSpiritualiteit onderzoekt betekenis, bewustzijn en verbondenheid binnen een groter geheel.",
+        "laag2": "Spiritualiteit gaat over zingeving, innerlijke beleving en verbondenheid.\n",
+        "laag3": "Spiritualiteit gaat over zingeving, innerlijke beleving en verbondenheid.\n",
+        "laag4": "Binnen Spark is spiritualiteit een proces van betekenisvorming waarbij bewustzijn, ervaringen, waarden en verbondenheid worden onderzocht vanuit een perspectief dat verder reikt dan uitsluitend het materiële of praktische.\nSpiritualiteit ondersteunt persoonlijke ontwikkeling en welzijn door ruimte te bieden voor reflectie, verwondering, innerlijke groei en het ervaren van samenhang tussen zichzelf, anderen en de omgeving.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gemeenschappen, zoekenden, spirituele tradities",
+        "wat": "het ervaren of onderzoeken van diepere betekenis en verbondenheid",
+        "wanneer": "bij reflectie, levensvragen, ontwikkeling en bijzondere ervaringen",
+        "waar": "in persoonlijke beleving, religie, filosofie, natuur en cultuur",
+        "waarom": "voor zingeving, bewustwording en innerlijke groei",
+        "hoe": "door reflectie, meditatie, ervaring, contemplatie, rituelen of persoonlijke inzichten"
+      },
+      "tags": [
+        "spiritualiteit",
+        "zingeving",
+        "bewustwording",
+        "verbondenheid",
+        "betekenis",
+        "bewustzijn",
+        "reflectie",
+        "innerlijke groei",
+        "levensvragen",
+        "ervaring",
+        "verwondering",
+        "filosofie",
+        "geloof",
+        "welzijn",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "betekenis",
+            "bewustwording",
+            "blij",
+            "emotie",
+            "levensvragen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5f61601",
+          "begrip": "Wat is de definitie van geluk",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "bewustzijn",
+            "emotie",
+            "ervaring",
+            "filosofie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "bewustwording",
+            "bewustzijn",
+            "emotie",
+            "ervaring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9fb4bf15",
+          "begrip": "dieper",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "bewustzijn",
+            "blij",
+            "emotie",
+            "ervaring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12928ad5",
+          "begrip": "Ziel",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bewustzijn",
+            "blij",
+            "emotie",
+            "filosofie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T10:30:31.895620+00:00",
+        "vorige_versie_v1": "kb-skel-974f5a10",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.375750+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:30:29.746356+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:30:29.757303+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:30:34.391054+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:30:34.400872+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T10:30:27.741629+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e7bd2cf1",
+      "begrip": "dankbaarheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Dankbaarheid is het gevoel van waardering voor iets dat men heeft ontvangen, ervaren of bereikt.",
+        "laag2": "Dankbaarheid ontstaat wanneer iemand waarde ziet in een persoon, gebeurtenis, situatie of ervaring.",
+        "laag3": "Dankbaarheid ondersteunt welzijn, verbondenheid en positieve relaties.\nHet helpt aandacht te geven aan wat als waardevol, behulpzaam of betekenisvol wordt ervaren.",
+        "laag4": "Binnen Spark is dankbaarheid een emotionele waardering waarbij positieve ervaringen, ontvangen steun, kansen of omstandigheden bewust worden erkend.\nDankbaarheid ondersteunt welzijn en verbondenheid door aandacht te richten op waardevolle aspecten van het leven en de relaties met anderen te versterken.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gemeenschappen",
+        "wat": "een gevoel van waardering en erkenning",
+        "wanneer": "na een positieve ervaring, hulp, steun of betekenisvolle gebeurtenis",
+        "waar": "in relaties, gemeenschappen, werk en het dagelijks leven",
+        "waarom": "voor welzijn, waardering en verbondenheid",
+        "hoe": "door bewust stil te staan bij ontvangen waarde, hulp of positieve ervaringen"
+      },
+      "tags": [
+        "dankbaarheid",
+        "waardering",
+        "erkenning",
+        "welzijn",
+        "verbondenheid",
+        "steun",
+        "respect",
+        "positieve ervaring",
+        "betekenis",
+        "relatie",
+        "bewustwording",
+        "tevredenheid",
+        "geluk",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "blij",
+            "emotie",
+            "erkenning",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8d9261ff",
+          "begrip": "verbondenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "relatie",
+            "steun",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "bewustwording",
+            "blij",
+            "emotie",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-974f5a10",
+          "begrip": "spiritualiteit",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "bewustwording",
+            "blij",
+            "emotie",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5f61601",
+          "begrip": "Wat is de definitie van geluk",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "emotie",
+            "geluk",
+            "tevredenheid",
+            "verbondenheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T10:38:24.534423+00:00",
+        "vorige_versie_v1": "kb-skel-e7bd2cf1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.613046+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:38:22.775547+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:38:22.793651+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T10:38:27.440811+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T10:38:27.455709+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T10:38:20.736405+00:00"
       },
       "media": {
         "voice_url": null,

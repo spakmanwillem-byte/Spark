@@ -1,8 +1,13 @@
 {
   "running": true,
   "interval": 60,
-  "market": "ATOM-EUR",
+  "market": "BCH-EUR",
   "markets": [
+    "BCH-EUR",
+    "BTC-EUR",
+    "ETH-EUR",
+    "SOL-EUR",
+    "ADA-EUR",
     "ATOM-EUR"
   ],
   "candle_interval": "1h",
@@ -11,5 +16,5 @@
   "trade_amount": 10.0,
   "use_mock": false,
   "use_potjes": true,
-  "last_persisted": "2026-06-01T14:53:18.257698+00:00"
+  "last_persisted": "2026-06-02T10:50:17.958737+00:00"
 }

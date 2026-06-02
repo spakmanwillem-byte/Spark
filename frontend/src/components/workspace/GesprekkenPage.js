@@ -731,6 +731,17 @@ export function GesprekkenPage({ onNavigate }) {
           rearmMicIfVoiceLoop();
         }
 
+        // v6_kb_sound_001 — Speel KB-kaart geluid af (apart van TTS) als backend dat aangeeft
+        if (data.sound_url) {
+          try {
+            const fullUrl = data.sound_url.startsWith('http') ? data.sound_url : `${API}${data.sound_url}`;
+            const a = new Audio(fullUrl);
+            a.volume = 0.7;
+            // Niet awaiten — speelt gewoon op de achtergrond
+            a.play().catch(() => {});
+          } catch {}
+        }
+
         setSparkMessages(prev => [...prev, {
           id: Date.now() + 1, role: 'spark',
           message: data.message || 'Hmm, daar moet ik even over nadenken.',

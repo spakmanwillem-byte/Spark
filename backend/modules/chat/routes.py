@@ -168,6 +168,41 @@ async def process_message(req: ChatMessage):
             session_state.set_state(req.user_id, pending_wedervraag=None, pending_card_session=None, pending_wv_consent=None)
         return response
 
+    # 0b1. KB-Sound toggle — "geluid aan" / "geluid uit" (v6_kb_sound_001)
+    # MOET vóór action_intents en ambient-stop omdat "geluid uit" anders bij ambient-stop landt.
+    try:
+        _txt = (text or "").lower().strip()
+        sound_on = _txt in (
+            "geluid aan", "kaart geluid aan", "kaartgeluid aan",
+            "speel geluiden af", "kb geluid aan",
+        )
+        sound_off = _txt in (
+            "geluid uit", "kaart geluid uit", "kaartgeluid uit",
+            "stop geluiden", "kb geluid uit",
+        )
+        if sound_on or sound_off:
+            from modules.core.storage import load_json as _lj, save_json as _sj
+            from pathlib import Path as _P
+            uid = req.user_id or "user-000"
+            sfile = _P(__file__).parent.parent.parent / "data" / "settings" / f"user_{uid}.json"
+            sfile.parent.mkdir(parents=True, exist_ok=True)
+            cur = _lj(sfile, default={})
+            cur["kb_sound_enabled"] = bool(sound_on)
+            _sj(sfile, cur)
+            response.update({
+                "type": "kb_sound_toggle",
+                "action": "kb_sound_on" if sound_on else "kb_sound_off",
+                "message": (
+                    "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het."
+                    if sound_on else
+                    "🔇 Kaart-geluiden zijn UIT."
+                ),
+            })
+            _save_log(req, response, "kb_sound_toggle")
+            return response
+    except Exception as ex:
+        print(f"[kb-sound-toggle] failed: {ex}")
+
     # 0b2. ACTION-INTENT (v4_actions_001) — chat-commando's voor app-acties:
     #      "stt aan/uit", "vogels aan", "stilte". Frontend voert action uit.
     action_resp = action_intents_service.try_detect(text)
@@ -1532,6 +1567,25 @@ def _save_log(req: "ChatMessage", response: dict, trigger_type):
         tts_friendly_service.maybe_pad_for_tts(response)
     except Exception:
         pass
+
+    # v6_kb_sound_001 — KB-kaart geluid (spraak ≠ TTS): zoek begrip met 'geluid'-audio in Spark's antwoord
+    # Alleen als user `kb_sound_enabled=True` heeft. Voegt sound_url + sound_begrip toe aan response.
+    try:
+        if req.user_id and response.get("message"):
+            from modules.core.storage import load_json as _lj
+            from pathlib import Path as _P
+            sfile = _P(__file__).parent.parent.parent / "data" / "settings" / f"user_{req.user_id}.json"
+            if sfile.exists():
+                upref = _lj(sfile, default={})
+                if upref.get("kb_sound_enabled"):
+                    from modules.kb_v2 import sound_lookup as _sl
+                    hit = _sl.find_sound_for_text(response.get("message") or "")
+                    if hit:
+                        response["sound_begrip"] = hit[0]
+                        response["sound_url"] = hit[1]
+    except Exception as ex:
+        print(f"[kb-sound-hook] failed: {ex}")
+
     if not req.user_id:
         return
     chat_log_service.save_message(

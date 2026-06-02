@@ -4,6 +4,43 @@
 
 ---
 
+
+## 🚀 ACTIVE ROADMAP (post-sessie 21D/E, 2 juni 2026)
+
+### ✅ Compleet in sessie 21 (klaar voor redeploy)
+
+#### v6_rps_001 — Steen-Papier-Schaar mini-game (sessie 21B/C)
+- [x] Pure engine `modules/games/rps/rps_engine.py` (resolve, counter_of, predict_next) — herbruikbaar voor D&D battles
+- [x] Service `rps_service.py` met sessies, lifetime stats, learning history (laatste 100 zetten)
+- [x] Routes `/api/games/rps/{start,play,reset,stop,cards,session,stats}`
+- [x] Chat-triggers: "speel steen papier schaar", "speel steen", "speel sps", "spelletje sps", "hoe vaak gewonnen", "reset score sps"
+- [x] Frontend RpsBark met 3 keuze-knoppen, score-bar, "Spark denkt na…" 800ms reveal, achievement-toasts
+- [x] Spark-tab speelt tegen Spark (leert), Community-tab tegen random bot (bot-dood = moeilijk)
+- [x] Live KB-image lookup (pakt nieuw geüploade images automatisch op)
+- [x] 10 RPS-kaarten getagd met `sps` voor toekomstige geluidskoppeling
+- [x] Help-topic toegevoegd aan gradatie 7 (zichtbaar in alle 7 via inheritance)
+
+#### v6_kbv2_audio_kind_001 — Audio-kind toggle (sessie 21D)
+- [x] Veld `media.voice_kind` op kaart (spraak | geluid, default 'spraak')
+- [x] PATCH `/api/kb/v2/media/voice/kind/{id}` (primair) en `/voice/secondary/kind/{id}?archive_id=X` (extra)
+- [x] Klikbare 🎤 SPRAAK ↔ 🔊 GELUID badge bij elke audio-rij in KennisbankV2Page
+
+#### v6_kb_sound_001 — KB-kaart geluiden afspelen in chat (sessie 21E)
+- [x] User-pref `kb_sound_enabled` (settings.json scope: user)
+- [x] Chat-triggers: "geluid aan" / "geluid uit" / "kaart geluid aan/uit" (vóór action_intents zodat ambient-stop niet conflicteert)
+- [x] Helper `modules/kb_v2/sound_lookup.py` met cache + mtime-invalidation
+- [x] Hook in `_save_log`: scan Spark's response.message voor begrippen met `voice_kind='geluid'` of `extra_audio.kind='geluid'` → voeg `sound_url` + `sound_begrip` toe
+- [x] Frontend GesprekkenPage speelt `sound_url` af via `new Audio()` (parallel aan/los van TTS)
+- [x] End-to-end getest: "ik ben boos" → Spark zegt 'Boos' → sound_url=onweer.mp3 afgespeeld
+
+#### v6_admin_grant_frame_001 + v6_kbv2_image_delete_visibility_001 (sessie 21A)
+- [x] Admin-grant flow gebruikt ornamental InputBark frame popup
+- [x] KB v2 foto-X delete-knop altijd zichtbaar (was opacity-0 group-hover)
+- [x] Bug 733a8bb9 (KB v2 onbruikbare kaarten verwijderen) afgesloten
+
+---
+
+
 ## 🚀 ACTIVE ROADMAP (post-sessie 19, 2 juni 2026)
 
 ### ✅ Compleet in sessie 19 (klaar voor redeploy)

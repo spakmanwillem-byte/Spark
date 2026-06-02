@@ -1,5 +1,30 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 21E — KB-kaart geluid in chat)
+
+### 🔊 v6_kb_sound_001 — Spark speelt KB-kaart geluiden af in gesprek
+**Concept**: wanneer Spark een KB-begrip noemt dat een `voice_kind='geluid'` (of `extra_audio.kind='geluid'`) audio heeft, en user heeft `kb_sound_enabled=True`, speelt die audio automatisch af. **Apart van TTS** — werkt zonder dat TTS aan staat.
+
+**Backend**:
+- `modules/kb_v2/sound_lookup.py` — cache met mtime-invalidation, `find_sound_for_text()` scant Spark's message-tekst voor begrippen
+- Chat-triggers: "geluid aan" / "geluid uit" / "kaart geluid aan/uit" (geplaatst vóór action_intents zodat ambient-stop niet conflicteert)
+- User-pref `kb_sound_enabled` opgenomen in settings-schema (`scope: user`)
+- Hook in `_save_log` centraliseert toevoeging van `sound_url` + `sound_begrip` aan ALLE response-paths (early returns gedekt)
+
+**Frontend**:
+- GesprekkenPage detecteert `data.sound_url` in chat-response → `new Audio(fullUrl).play()` op de achtergrond
+- Volume default 0.7, niet awaited (blokkeert geen mic re-arming)
+
+**Verified end-to-end**:
+- "geluid aan" → user setting `kb_sound_enabled=True` persisted
+- "ik ben boos" → Spark zegt "Boos" → response.sound_url = onweer.mp3 (van boos-kaart)
+- "geluid uit" → setting `False`, geen sound_url meer in response
+
+**ROADMAP.md bijgewerkt** met sessie 21 deliverables (B/C/D/E).
+
+---
+
+
 ## Completed (2026-06-02 — sessie 21D — KB v2 audio-kind toggle)
 
 ### 🎤↔️🔊 v6_kbv2_audio_kind_001 — Spraak/Geluid wissel-knop op kaart-audio

@@ -59,6 +59,8 @@ SCHEMA: Dict[str, Dict[str, Any]] = {
     "stt_language": {"type": "str", "scope": "user", "options": ["nl", "en", "de"]},
     "stt_push_to_talk": {"type": "bool", "scope": "user"},
     "stt_silence_sec": {"type": "float", "scope": "user", "min": 0.5, "max": 5.0},
+    # v6_kb_sound_001 — Speel KB-kaart geluid af wanneer Spark een begrip noemt dat een 'geluid'-audio heeft
+    "kb_sound_enabled": {"type": "bool", "scope": "user"},
     "ambient_default_volume": {"type": "float", "scope": "user", "min": 0.0, "max": 1.0},
     "ambient_duck_volume": {"type": "float", "scope": "user", "min": 0.0, "max": 1.0},
 }

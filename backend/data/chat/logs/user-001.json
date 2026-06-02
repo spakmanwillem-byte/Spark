@@ -27306,11 +27306,270 @@
         "session_id": "default",
         "gesprek_nummer": 1046
       }
+    },
+    {
+      "id": "conv-8399fffa",
+      "timestamp": "2026-06-02T20:58:27.485016+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid aan",
+      "spark_response": "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1047
+      }
+    },
+    {
+      "id": "conv-4e810e08",
+      "timestamp": "2026-06-02T20:58:55.184981+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik ben boos",
+      "spark_response": "Respect begint bij ruimte laten. Vervelend om te horen\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "boos"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Vervelend om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boos"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1048
+      }
+    },
+    {
+      "id": "conv-d65393f9",
+      "timestamp": "2026-06-02T20:59:11.045120+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid uit",
+      "spark_response": "Achtergrondgeluid uitgezet. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1049
+      }
+    },
+    {
+      "id": "conv-564753f2",
+      "timestamp": "2026-06-02T20:59:11.227004+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over boos",
+      "spark_response": "Ik ken geen 'boos' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "boos"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1050
+      }
+    },
+    {
+      "id": "conv-35be79b9",
+      "timestamp": "2026-06-02T20:59:11.416699+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid aan",
+      "spark_response": "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1051
+      }
+    },
+    {
+      "id": "conv-afc32a4a",
+      "timestamp": "2026-06-02T21:01:14.478849+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid uit",
+      "spark_response": "🔇 Kaart-geluiden zijn UIT. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1052
+      }
+    },
+    {
+      "id": "conv-ad646f94",
+      "timestamp": "2026-06-02T21:01:14.683516+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over boos",
+      "spark_response": "Ik ken geen 'boos' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "boos"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Dat klinkt frustrerend"
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1053
+      }
+    },
+    {
+      "id": "conv-1110b1a7",
+      "timestamp": "2026-06-02T21:01:15.025963+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid aan",
+      "spark_response": "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1054
+      }
+    },
+    {
+      "id": "conv-ba1b9776",
+      "timestamp": "2026-06-02T21:01:15.269876+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik ben boos",
+      "spark_response": "Respect begint bij ruimte laten. Ik begrijp dat je boos bent\n\n**Boos**: Boos is een emotie die ontstaat wanneer iemand zich gekwetst, onrechtvaardig behandeld of gefrustreerd voelt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "negatief",
+        "emotion": {
+          "emotion": "boos",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "boos"
+          ],
+          "source": "both",
+          "emoji": "😠",
+          "color": "red",
+          "empathic_response": "Ik begrijp dat je boos bent"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Boos"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1055
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1046,
-    "last_updated": "2026-06-02T20:36:05.512506+00:00"
+    "total_conversations": 1055,
+    "last_updated": "2026-06-02T21:01:15.269876+00:00"
   }
 }

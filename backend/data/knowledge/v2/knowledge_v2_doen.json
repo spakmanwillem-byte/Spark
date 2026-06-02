@@ -103514,7 +103514,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T17:09:12.536601+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T17:33:11.023425+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:48:01.280366+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -103555,6 +103555,38 @@
               "n_found": 5,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:47:57.333849+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:47:57.338405+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:48:01.427215+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:48:01.431807+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
           }
         ]
       },
@@ -103563,6 +103595,15 @@
         "voice_transcript": null,
         "image_urls": [
           "/api/system-archive/file/749419711fab"
+        ],
+        "extra_audio": [
+          {
+            "url": "/api/system-archive/file/953f79571cab",
+            "kind": "spraak",
+            "transcript": "♫",
+            "archive_id": "953f79571cab",
+            "added_at": "2026-06-02T20:47:57.187239+00:00"
+          }
         ]
       },
       "needs": [
@@ -104971,6 +105012,19 @@
       ],
       "verbanden": [
         {
+          "kaart_id": "kbv2-skel-2522f483",
+          "begrip": "score",
+          "lade": "doen",
+          "overlap": 10,
+          "shared_tags": [
+            "neutraal",
+            "prestatie",
+            "punten",
+            "ranking",
+            "resultaat"
+          ]
+        },
+        {
           "kaart_id": "kbv2-3cd997a3",
           "begrip": "punten",
           "lade": "voelen",
@@ -104981,19 +105035,6 @@
             "neutraal",
             "prestatie",
             "ranking"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-skel-2522f483",
-          "begrip": "score",
-          "lade": "doen",
-          "overlap": 9,
-          "shared_tags": [
-            "neutraal",
-            "prestatie",
-            "punten",
-            "ranking",
-            "resultaat"
           ]
         },
         {
@@ -105023,15 +105064,16 @@
           ]
         },
         {
-          "kaart_id": "kbv2-5243d9ac",
-          "begrip": "verdienen",
-          "lade": "voelen",
-          "overlap": 4,
+          "kaart_id": "kbv2-2248bad7",
+          "begrip": "Gewonnen",
+          "lade": "doen",
+          "overlap": 5,
           "shared_tags": [
-            "motivatie",
-            "neutraal",
+            "competitie",
             "prestatie",
-            "resultaat"
+            "resultaat",
+            "spel",
+            "sps"
           ]
         }
       ],
@@ -105044,7 +105086,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T19:27:15.845734+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T19:39:02.069652+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:50:03.770331+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -105093,6 +105135,38 @@
               "n_found": 5,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:49:56.043895+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:49:56.048354+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:50:03.918343+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:50:03.922944+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
           }
         ]
       },
@@ -105103,6 +105177,15 @@
           "/api/system-archive/file/118c2ea41377",
           "/api/system-archive/file/baf2a2f9b078",
           "/api/system-archive/file/d5f30bd8b6b9"
+        ],
+        "extra_audio": [
+          {
+            "url": "/api/system-archive/file/fe1a9d5d940e",
+            "kind": "spraak",
+            "transcript": "Ondertitels door de Amara.org gemeenschap",
+            "archive_id": "fe1a9d5d940e",
+            "added_at": "2026-06-02T20:49:55.893215+00:00"
+          }
         ]
       },
       "needs": [
@@ -105395,7 +105478,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T19:24:13.645559+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T20:10:04.309965+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:48:26.736986+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -105452,6 +105535,38 @@
               "n_found": 5,
               "top_overlap": 9
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:48:23.409444+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:48:23.414180+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:48:26.884984+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:48:26.889684+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
           }
         ]
       },
@@ -105460,6 +105575,15 @@
         "voice_transcript": null,
         "image_urls": [
           "/api/system-archive/file/c6b518680717"
+        ],
+        "extra_audio": [
+          {
+            "url": "/api/system-archive/file/159ad522fe79",
+            "kind": "spraak",
+            "transcript": "Ondertitels ingediend door de Amara.org gemeenschap",
+            "archive_id": "159ad522fe79",
+            "added_at": "2026-06-02T20:48:23.262250+00:00"
+          }
         ]
       },
       "needs": [
@@ -105518,6 +105642,19 @@
           ]
         },
         {
+          "kaart_id": "kbv2-89ce9289",
+          "begrip": "Verloren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "competitie",
+            "doel",
+            "resultaat",
+            "spel",
+            "sps"
+          ]
+        },
+        {
           "kaart_id": "kbv2-81d57f08",
           "begrip": "Krijg ik geen punten?",
           "lade": "voelen",
@@ -105555,19 +105692,6 @@
             "emotie",
             "spel"
           ]
-        },
-        {
-          "kaart_id": "kbv2-f0c0bd5a",
-          "begrip": "Succes",
-          "lade": "weten",
-          "overlap": 5,
-          "shared_tags": [
-            "blij",
-            "doel",
-            "prestatie",
-            "resultaat",
-            "succes"
-          ]
         }
       ],
       "footnote": {
@@ -105579,7 +105703,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T19:22:38.337825+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T19:44:57.509417+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:51:25.379724+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -105620,6 +105744,38 @@
               "n_found": 5,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:51:21.554271+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:51:21.559001+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:51:25.532001+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:51:25.536688+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
           }
         ]
       },
@@ -105628,6 +105784,15 @@
         "voice_transcript": null,
         "image_urls": [
           "/api/system-archive/file/864af086c6ce"
+        ],
+        "extra_audio": [
+          {
+            "url": "/api/system-archive/file/a1a28b1b13dc",
+            "kind": "spraak",
+            "transcript": "APPLAUS",
+            "archive_id": "a1a28b1b13dc",
+            "added_at": "2026-06-02T20:51:21.402629+00:00"
+          }
         ]
       },
       "needs": [
@@ -105676,13 +105841,13 @@
           "kaart_id": "kbv2-2248bad7",
           "begrip": "Gewonnen",
           "lade": "doen",
-          "overlap": 5,
+          "overlap": 6,
           "shared_tags": [
             "competitie",
             "doel",
             "resultaat",
             "spel",
-            "uitdaging"
+            "sps"
           ]
         },
         {
@@ -105797,16 +105962,57 @@
               "n_found": 5,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:51:43.209294+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:51:43.213478+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:51:46.460953+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:51:46.465122+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T19:47:12.521021+00:00"
+        "laatst_bewerkt_op": "2026-06-02T20:51:46.303190+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
         "image_urls": [
           "/api/system-archive/file/12d1aa8fb1ac"
+        ],
+        "extra_audio": [
+          {
+            "url": "/api/system-archive/file/86629f180a27",
+            "kind": "spraak",
+            "transcript": "🎵",
+            "archive_id": "86629f180a27",
+            "added_at": "2026-06-02T20:51:43.058744+00:00"
+          }
         ]
       },
       "needs": [

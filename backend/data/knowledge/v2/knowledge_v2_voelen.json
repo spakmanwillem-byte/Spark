@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 367,
+    "card_count": 372,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T11:17:13.951578+00:00"
+    "last_updated": "2026-06-02T17:21:37.917452+00:00"
   },
   "kaarten": [
     {
@@ -1426,56 +1426,63 @@
       "topic": "psychologie",
       "verbanden": [
         {
+          "kaart_id": "kbv2-skel-2f19f8be",
+          "begrip": "gif",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bescherming",
+            "emotie",
+            "gevaar",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6e6e8d7e",
+          "begrip": "angst",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "angst",
+            "bang",
+            "bescherming",
+            "emotie",
+            "gevaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-571055ff",
+          "begrip": "gevaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bescherming",
+            "emotie",
+            "gevaar",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-73d1d0f0",
+          "begrip": "weerstand",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "bescherming",
+            "emotie",
+            "negatief"
+          ]
+        },
+        {
           "kaart_id": "kbv2-287e34ef",
           "begrip": "Giftig",
           "lade": "voelen",
           "overlap": 3,
           "shared_tags": [
             "bang",
-            "emotie",
-            "gevaar"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-19b876f3",
-          "begrip": "Wapen",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "bang",
-            "emotie",
-            "gevaar"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-25813596",
-          "begrip": "Ben jij bang",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "angst",
-            "bang",
-            "emotie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-d3a68e49",
-          "begrip": "geur",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "bang",
-            "emotie",
-            "gevaar"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-bfcd6bf7",
-          "begrip": "kwaad",
-          "lade": "voelen",
-          "overlap": 3,
-          "shared_tags": [
-            "angst",
             "emotie",
             "gevaar"
           ]
@@ -1504,17 +1511,52 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:12:39.287762+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:12:39.369841+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:12:41.486529+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:12:41.497679+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:12:40.353535+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/6d0898204006"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -1631,17 +1673,52 @@
               "n_found": 5,
               "top_overlap": 5
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:12:07.588327+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:12:07.671653+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:12:10.589594+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:12:10.673398+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:12:09.098803+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/5462ccf761e1"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -1758,17 +1835,84 @@
               "n_found": 5,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:10:39.383606+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:10:39.397109+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:11:11.089540+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:11:11.167226+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:11:13.570981+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:11:13.582453+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:11:18.094390+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:11:18.171780+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:11:17.087117+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/4d830f271b1a"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -3014,59 +3158,76 @@
         "gevoel",
         "Verwachting",
         "verdriet",
-        "frustratie"
+        "frustratie",
+        "emotie",
+        "boos",
+        "bedroefd"
       ],
       "topic": "emotie",
       "verbanden": [
         {
+          "kaart_id": "kbv2-f9c8ce21",
+          "begrip": "razernij",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "verdriet"
+          ]
+        },
+        {
           "kaart_id": "kbv2-68fe9f72",
           "begrip": "teleurstelling",
           "lade": "voelen",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
+            "bedroefd",
+            "emotie",
             "frustratie",
             "verdriet",
             "verwachting"
           ]
         },
         {
-          "kaart_id": "kbv2-c976ebd2",
-          "begrip": "Bedroefd",
+          "kaart_id": "kbv2-aae48394",
+          "begrip": "gefrustreerd",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 5,
           "shared_tags": [
-            "gevoel",
-            "verdriet"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-46ac9b1e",
-          "begrip": "Boos",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
             "frustratie",
-            "gevoel"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-8d9001e6",
-          "begrip": "Hoop",
-          "lade": "voelen",
-          "overlap": 2,
-          "shared_tags": [
-            "gevoel",
             "verwachting"
           ]
         },
         {
-          "kaart_id": "kbv2-6fd187de",
-          "begrip": "Spannend",
+          "kaart_id": "kbv2-7e2610bd",
+          "begrip": "frustrerend",
           "lade": "voelen",
-          "overlap": 2,
+          "overlap": 5,
           "shared_tags": [
-            "gevoel",
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
             "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-84a2710c",
+          "begrip": "opstandig",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "verdriet"
           ]
         }
       ],
@@ -3093,17 +3254,52 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:15:12.392942+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:15:12.471005+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:15:50.883917+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:15:50.895337+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:15:49.946971+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/7573052abcab"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -6192,24 +6388,26 @@
           ]
         },
         {
-          "kaart_id": "kbv2-3772ab5a",
-          "begrip": "IJdelheid",
+          "kaart_id": "kbv2-0344ad7a",
+          "begrip": "Wat goed van je",
           "lade": "voelen",
-          "overlap": 3,
+          "overlap": 4,
           "shared_tags": [
             "blij",
             "emotie",
+            "reactie",
             "waardering"
           ]
         },
         {
-          "kaart_id": "kbv2-b31f7f47",
-          "begrip": "Ik ben blij met je",
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
           "lade": "voelen",
-          "overlap": 3,
+          "overlap": 4,
           "shared_tags": [
             "blij",
             "emotie",
+            "reactie",
             "waardering"
           ]
         }
@@ -6237,17 +6435,52 @@
               "n_found": 5,
               "top_overlap": 4
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:14:34.473401+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:14:34.484384+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:14:36.999678+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:14:37.076494+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:14:35.952440+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/6cdcec015aeb"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -48726,6 +48959,845 @@
       "needs": [
         "voice",
         "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-25112e01",
+      "begrip": "wens",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een wens is een verlangen naar een situatie, gebeurtenis, eigenschap of resultaat dat iemand graag wil bereiken of ervaren.",
+        "laag2": "Een wens geeft aan wat iemand hoopt, wil of verlangt.",
+        "laag3": "Wensen ondersteunen motivatie, doelen en persoonlijke ontwikkeling.\nZe geven richting aan keuzes en gedrag doordat ze laten zien wat iemand belangrijk, prettig of waardevol vindt.",
+        "laag4": "Binnen Spark is een wens een mentale of emotionele voorstelling van een gewenste toestand, ervaring of uitkomst.\nWensen ondersteunen ontwikkeling en besluitvorming doordat zij behoeften, verlangens en doelen zichtbaar maken en richting geven aan handelen, plannen en groei.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gebruikers",
+        "wat": "een verlangen naar een gewenste situatie of uitkomst",
+        "wanneer": "bij dromen, plannen, behoeften en verwachtingen",
+        "waar": "in gedachten, gevoelens, relaties en persoonlijke ontwikkeling",
+        "waarom": "om richting te geven aan verlangens, doelen en keuzes",
+        "hoe": "door een gewenste toekomst of situatie voor te stellen en na te streven"
+      },
+      "tags": [
+        "wens",
+        "verlangen",
+        "behoefte",
+        "doel",
+        "motivatie",
+        "hoop",
+        "verwachting",
+        "droom",
+        "toekomst",
+        "zingeving",
+        "ontwikkeling",
+        "keuze",
+        "ambitie",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "behoefte",
+            "doel",
+            "emotie",
+            "keuze",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "keuze",
+            "ontwikkeling",
+            "toekomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "hoop",
+            "motivatie",
+            "ontwikkeling",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling",
+            "toekomst"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:09:13.446308+00:00",
+        "vorige_versie_v1": "kb-skel-25112e01",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.663996+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:08:52.187842+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:08:52.271702+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:09:11.691967+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:09:11.770653+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:09:15.387198+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:09:15.467442+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:09:10.525859+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c33a1ec8",
+      "begrip": "pijn",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een onaangename lichamelijke of emotionele ervaring die wijst op schade, belasting of lijden.",
+        "laag2": "Pijn is een signaal dat er iets mis kan zijn of aandacht nodig heeft.\n\nPijn kan zijn:\n\nlichamelijk\nemotioneel\npsychisch\n\nVoorbeelden:\n\nhoofdpijn\nspierpijn\nverdriet\nliefdesverdriet\nverlies\n\nDe kern is:\n\neen negatieve ervaring die waarschuwt of belast.",
+        "laag3": "Pijn heeft een belangrijke functie.\n\nHet helpt om:\n\ngevaar te herkennen\nschade te beperken\nherstel te stimuleren\ngrenzen te bewaken\n\nPijn verschilt per persoon en situatie.\n\nFactoren die invloed hebben:\n\noorzaak\nintensiteit\nduur\ncontext\npersoonlijke beleving\n\nPijn kan tijdelijk zijn, maar ook langdurig voorkomen.",
+        "laag4": "Pijn verschilt van:\n\nOngemak → lichte hinder\nLijden → langdurige of diepe negatieve ervaring\nLetsel → fysieke beschadiging\nPijn → de ervaren sensatie of emotionele belasting\n\nPijn is niet alleen een probleem, maar ook een informatiesignaal.\n\nZonder pijn zouden veel gevaren of beschadigingen niet worden opgemerkt.\n\nBinnen gedrag ontstaat vaak:\n\nprikkel → pijn → reactie → aanpassing"
+      },
+      "ws5": {
+        "wie": "Mensen en dieren",
+        "wat": "Een onaangename lichamelijke of emotionele ervaring",
+        "wanneer": "Bij schade, belasting, ziekte, verlies of bedreiging",
+        "waar": "In lichaam, geest en emotionele beleving",
+        "waarom": "Om aandacht te vestigen op een probleem of risico",
+        "hoe": "Via zenuwprikkels, emoties of psychologische processen"
+      },
+      "tags": [
+        "pijn",
+        "gevoel",
+        "letsel",
+        "schade",
+        "lijden",
+        "ongemak",
+        "waarschuwing",
+        "emotie",
+        "herstel",
+        "reactie",
+        "emotie",
+        "bedroefd",
+        "bang",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2f19f8be",
+          "begrip": "gif",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "negatief",
+            "schade",
+            "waarschuwing"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:49:14.897633+00:00",
+        "vorige_versie_v1": "kb-skel-c33a1ec8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.555150+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:49:13.600928+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:49:13.675920+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:49:17.476644+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:49:17.488643+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:49:12.114196+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3f9170b4",
+      "begrip": "waarnemen",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Het opmerken, registreren of ervaren van informatie via de zintuigen of het bewustzijn.",
+        "laag2": "Waarnemen betekent dat je iets ziet, hoort, voelt, ruikt, proeft of opmerkt.\n\nVoorbeelden:\n\neen geluid waarnemen\neen beweging waarnemen\neen emotie waarnemen\nveranderingen waarnemen\ngedrag waarnemen\n\nDe kern is:\n\niets bewust opmerken.",
+        "laag3": "Waarnemen is vaak de eerste stap van leren en begrijpen.\n\nVia waarneming verzamelen mensen en systemen informatie over hun omgeving.\n\nWaarnemen kan plaatsvinden door:\n\nzien\nhoren\nvoelen\nruiken\nproeven\nobserveren\n\nDe kwaliteit van waarneming wordt beïnvloed door:\n\naandacht\nervaring\ncontext\nverwachtingen\nomstandigheden\n\nNiet alles wat wordt waargenomen wordt direct goed geïnterpreteerd.",
+        "laag4": "Waarnemen verschilt van:\n\nObserveren\nBewust en gericht kijken of onderzoeken.\n\nMeten\nObjectief gegevens verzamelen.\n\nInterpreteren\nBetekenis geven aan een waarneming.\n\nWaarnemen\nHet registreren of ervaren van een prikkel of gebeurtenis.\n\nVaak ontstaat:\n\nwaarnemen → herkennen → begrijpen → reageren\n\nWaarneming vormt de basis van kennis, ervaring en bewustzijn."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en waarnemende systemen",
+        "wat": "Het registreren of ervaren van informatie",
+        "wanneer": "Wanneer prikkels of gebeurtenissen worden opgemerkt",
+        "waar": "In de omgeving, het lichaam of het bewustzijn",
+        "waarom": "Om informatie over de werkelijkheid te verkrijgen",
+        "hoe": "Via zintuigen, observatie of sensoren"
+      },
+      "tags": [
+        "waarnemen",
+        "observatie",
+        "zintuigen",
+        "zien",
+        "horen",
+        "voelen",
+        "registreren",
+        "bewustzijn",
+        "prikkel",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bewustzijn",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12809d56",
+          "begrip": "waarneming",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "prikkel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bewustzijn",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "zien"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5f608502",
+          "begrip": "zintuig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "prikkel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T15:01:52.770088+00:00",
+        "vorige_versie_v1": "kb-skel-3f9170b4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.338799+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T15:01:51.299880+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T15:01:51.372525+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T15:01:55.901759+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T15:01:55.981938+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T15:01:50.133020+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-02b43e8e",
+      "begrip": "Geaccepteerd",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Geaccepteerd betekent dat iets of iemand is goedgekeurd, aangenomen of aanvaard.",
+        "laag2": "Geaccepteerd geeft aan dat iets wordt toegestaan of erkend.",
+        "laag3": "Acceptatie ondersteunt samenwerking, verbondenheid en voortgang.",
+        "laag4": "Binnen Spark beschrijft geaccepteerd een toestand waarin een persoon, idee, voorstel, situatie of resultaat wordt erkend, toegestaan of opgenomen binnen een bepaalde context."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, organisaties, systemen",
+        "wat": "iets dat is aanvaard of goedgekeurd",
+        "wanneer": "na beoordeling, keuze of erkenning",
+        "waar": "in relaties, organisaties, systemen en gemeenschappen",
+        "waarom": "voor samenwerking, erkenning en voortgang",
+        "hoe": "door instemming, goedkeuring of aanvaarding"
+      },
+      "tags": [
+        "geaccepteerd",
+        "acceptatie",
+        "aanvaarding",
+        "goedkeuring",
+        "erkenning",
+        "toestemming",
+        "instemming",
+        "verbondenheid",
+        "samenwerking",
+        "beoordeling",
+        "resultaat",
+        "sociaal",
+        "emotie",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "goedkeuring",
+            "instemming",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c51f0f04",
+          "begrip": "oke, jij hebt gelijk.",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "acceptatie",
+            "blij",
+            "emotie",
+            "erkenning",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "erkenning",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "erkenning",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "erkenning",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T17:20:09.338190+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T17:16:28.364065+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:20:01.859867+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:16:39.491309+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:20:03.190143+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:20:03.268125+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:20:11.485611+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:20:11.570909+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/e8568377ff5c"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-66e253db",
+      "begrip": "Happy",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Happy betekent dat iemand zich blij, tevreden of gelukkig voelt.",
+        "laag2": "Happy beschrijft een positieve emotionele toestand.",
+        "laag3": "Happy ondersteunt welzijn, motivatie en sociale verbondenheid.",
+        "laag4": "Binnen Spark is happy een positieve emotie die ontstaat wanneer ervaringen, behoeften, verwachtingen of omstandigheden als prettig, waardevol of wenselijk worden ervaren."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, gebruikers",
+        "wat": "een positieve emotionele toestand",
+        "wanneer": "bij prettige ervaringen of vervulde wensen",
+        "waar": "in gedachten, gevoelens en sociale interacties",
+        "waarom": "door positieve gebeurtenissen, relaties of resultaten",
+        "hoe": "door ervaringen die voldoening, plezier of geluk geven"
+      },
+      "tags": [
+        "happy",
+        "blij",
+        "geluk",
+        "tevredenheid",
+        "plezier",
+        "welzijn",
+        "positiviteit",
+        "emotie",
+        "gevoel",
+        "vreugde",
+        "waardering",
+        "verbondenheid",
+        "motivatie",
+        "positief"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e7bd2cf1",
+          "begrip": "dankbaarheid",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "tevredenheid",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1c65b0a",
+          "begrip": "ik ben zo blij met je. jij motiveert mij om bezig te zijn.",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "motivatie",
+            "positief",
+            "positiviteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5f61601",
+          "begrip": "Wat is de definitie van geluk",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "geluk",
+            "motivatie",
+            "positief",
+            "tevredenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-532d6a37",
+          "begrip": "plezier",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "motivatie",
+            "plezier",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "motivatie",
+            "positief",
+            "tevredenheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T17:21:37.917402+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T17:09:49.140426+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:21:35.363183+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:10:02.075138+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:21:36.597592+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:21:36.674440+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:21:39.982866+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:21:39.994731+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/db0e0b9085f6"
+        ]
+      },
+      "needs": [
+        "voice"
       ]
     }
   ]

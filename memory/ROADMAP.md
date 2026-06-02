@@ -4,26 +4,66 @@
 
 ---
 
-## 🚀 ACTIVE ROADMAP (post-sessie 18, 31 mei 2026)
+## 🚀 ACTIVE ROADMAP (post-sessie 19, 2 juni 2026)
 
-### ✅ Compleet in sessie 18 (klaar voor redeploy)
-- [x] **Rugzak hersteld** als eigen kader rechts (32 slots, 8×4), met kg-meter + speed-label
-- [x] **Item-stats schema**: items hebben nu `stats_bonus`, `combat_bonus`, `meta` (klasse/beroep/fractie/locatie), `value_goud`, `rarity`
-- [x] **D&D-kaart = bron-van-waarheid** via `game_meta.is_item:true` (geen hardcoded ITEM_CATALOG meer leidend)
-- [x] **17 draft item-kaarten geseed** met placeholder Vraag-avatar (alle slots gevuld: nek/schouders/armen/trinket/sjaal/riem/handen/ring/offhand/pijl_boog + 7 consumables)
-- [x] **NPC Bewoner-systeem**: 3 NPCs in Stormhaven (Hans/Greta/Mira) met avatar, beroep, fractie, wallet, 8 inventory-slots
-- [x] **Handel-kader** met 8/8 vakjes (kopen 100% / verkopen 50%)
-- [x] **Item-transfer met thuis-check**: rugzak ↔ huis (mag alleen thuis) ↔ equipment (mag altijd)
-- [x] **Map markers = dorp/stad-avatars** (alle 12 provincies, Spark hoofdstad = stad, rest = dorp)
-- [x] **Speler-glow-dot** (groene pulse) op huidige locatie op wereldmap
-- [x] **Dobbelsteen-events**: 1d20 + stat-bonus, 5 uitkomstniveaus met flavor-tekst, basis + super-worp via jouw 2 avatars
-- [x] **Spark-advies in `laag1`** op alle geseede kaarten (geen GPT, mijn voorstel — jij past aan)
+### ✅ Compleet in sessie 19 (klaar voor redeploy)
+
+#### Trade-bot veiligheid + auto-resume
+- [x] **`_persist_registry()` MERGE-fix** (`v6_resume_persist_merge_001`) — bot-registry mergt nu met bestaand bestand i.p.v. te overschrijven. Stop-state blijft bewaard, andere bots auto-resumen.
+- [x] **File-lock** op registry-persist tegen race conditions
+- [x] **`SHADOW_ENABLED` master-flag** (`v6_shadow_safety_001`) default UIT — shadow-cascade gepauzeerd tot recycle-bug + data-corruptie zijn opgelost
+- [x] **Recycle-guard** weigert nu archiveren als er nog `active` shadows zijn (voorkomt coin-verlies)
+- [x] **Cleanup-endpoint** `POST /api/trade/shadow/cleanup-corrupt` — markeert shadows met market/entry-mismatch als `archived_corrupt`
+- [x] **Admin-only guards** op shadow-flag + cleanup endpoints (gradatie ≤ 2)
+- [x] **UI-paneel** in TraderPage shadow-banner met toggle + 🧹 Cleanup-knop (admin-only)
+- [x] **ZeroDivision-fix** in `update_pot_tracking` + `_run_market_cycle` voor anchor-pots met `entry=0.0` (372 log-spams per dag opgelost)
+
+#### KB v2 prio v2 + auto-resolve
+- [x] **Priority-scoring v2** (`v6_kbv2_priority_002`) — score gebruikt nu echte signalen:
+  - +10 als Spark woord al active heeft in vocab
+  - +5 per cross-reference in andere kaarten laag1
+  - +3 per intent-frequency in laatste 500 intents
+  - +3 per verband, +5 topic, +2 ws5 partial, +1 per tag
+  - NL stopwoorden gefilterd
+- [x] **Auto-resolve endpoint** `POST /api/kb/v2/inbox/auto-resolve` — bulk-classify tag_tie + no_match via topic/tag word-boundary mapping. 421 kaarten verplaatst in preview.
+- [x] **`_auto_lade()` word-boundary fix** — voorheen "taal" matchte "metaal" → Nikkel landde in spreken. Nu regex met word-grenzen.
+- [x] **Vocab-sync endpoint** `POST /api/kb/v2/vocab/sync` — herstelt vocab-gaten (kaarten in lade maar niet in spark_vocab). Lost Geaccepteerd-gap op.
+
+#### Trigger-keywords uitbreiding
+- [x] **`audit_health`** capability uitgebreid: "doe een gezondheidscheck" / "run audit" werken
+- [x] **`winst_verlies_overzicht`** uitgebreid: "trade winst" / "laat me trade winst zien" werken
+- [x] **NIEUW `notities_overzicht`** capability: "waar zijn mijn notities" / "dagboek" / "toon taken"
+- [x] **Conversation triggers** uitgebreid: `cancel` / `affirm` / `deny` secties voor wedervraag-flow
+
+#### v6_admin_role_001 — Admin als losstaande rol (sessie 19)
+- [x] **Admin = boolean op user**, los van gradatie. Gradatie blijft sociaal (familie/lid).
+- [x] **Seed**: alleen Willem (user-001) + Spark (user-000) bij eerste boot. Anderen NIET automatisch admin.
+- [x] **`is_admin(user_id)` helper** in `modules/admin/admin_service.py` — centrale check
+- [x] **Endpoints**: `/api/admin/grant`, `/revoke`, `/verify`, `/password/reset`, `/list`, `/is-admin/{id}`, `/bark-image`, `/help-bark`
+- [x] **Anti-lockout**: laatste admin kan zichzelf niet revoken
+- [x] **Admin-wachtwoord** in env-var `ADMIN_PASSWORD` met override naar `data/system/admin_password.json` voor runtime wijzigen
+- [x] **Admin-tab in Instellingen** (ShieldCheck-icon, paars):
+  - Huidige admins met "seed" badge
+  - Nieuwe admin grant-formulier (user-dropdown + wachtwoord)
+  - Admin-wachtwoord wijzigen sectie
+- [x] **Bark-modal component** (`shared/BarkModal.js`) — visuele popup met KB-kaart-afbeelding + titel + tekst, vervangt droge alerts
+- [x] **Bark-image lookup**: gebruikt jouw `doen`-lade-kaarten "Admin geactiveerd" / "Admin gedeactiveerd" / "Toegang verleend" / "Toegang geweigerd" als visuele feedback
+- [x] **Veiligheid**: ADMIN_PASSWORD env-var = `AppelsapAdmin2026` (default) — wijzig direct na deploy via de UI
 
 ### 🎯 P0 — Direct na redeploy
-1. **Character-creation flow** voor nieuwe gebruikers — eerst karakter (naam/klasse/beroep/fractie/dorp) voordat je kan spelen
-2. **D&D-kaart editor met `game_meta` form** — visueel inputveld voor is_item/slot/weight/stats_bonus/combat_bonus i.p.v. via API
-3. **Bewoners per gebouw op Stormhaven-dorpskaart** — klik op Bakker-gebouw → opent Hans handel direct (natuurlijke flow)
-4. **Equipment-stats live optellen** bij character STATISTIEKEN + AANVAL/VERDEDIGING (zwaard +5 aanval → zichtbaar in stat-blok)
+1. **Migratie admin-checks** in gevoelige endpoints: vervang `gradatie ≤ 2` door `is_admin(user_id)` in:
+   - `trade/routes.py` (force-sell, force-close, reconcile)
+   - `container/routes.py` + `deploy/routes.py`
+   - `mint/routes.py` (Spark Mint)
+   - `boekhouder/routes.py`
+   - `shop/routes.py`
+   - `kb_v2` delete endpoint
+   - Behoud `gradatie ≤ 2` voor sociale features (helptekst, vriendenlijst)
+2. **Help-bark integratie** — wanneer user "help" typt → bark-popup met `Help`-kaart-afbeelding + tekst per gradatie. Apart "Help Admin"-bark voor admins. Vraagt: maak een doen-kaart "Help" en "Help Admin" met afbeelding.
+3. **Character-creation flow** voor nieuwe gebruikers — eerst karakter (naam/klasse/beroep/fractie/dorp) voordat je kan spelen
+4. **D&D-kaart editor met `game_meta` form** — visueel inputveld voor is_item/slot/weight/stats_bonus/combat_bonus i.p.v. via API
+5. **Bewoners per gebouw op Stormhaven-dorpskaart** — klik op Bakker-gebouw → opent Hans handel direct
+6. **Equipment-stats live optellen** bij character STATISTIEKEN + AANVAL/VERDEDIGING
 
 ### 🎲 P1 — Game-mechanics uitbreiden
 1. **Dungeon-feature**: knop "Activeer Dungeon" → 8u real-time → fractie-thematisch verhaal-rapport + reward. Dice-engine bepaalt uitkomstniveau.

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1300,
+    "card_count": 1314,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T11:17:12.907457+00:00"
+    "last_updated": "2026-06-02T15:12:04.558953+00:00"
   },
   "kaarten": [
     {
@@ -61862,6 +61862,27 @@
       "topic": "algemeen",
       "verbanden": [
         {
+          "kaart_id": "kbv2-skel-3df2c212",
+          "begrip": "creatief",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "creatie",
+            "innovatie",
+            "oplossing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d2ee2d13",
+          "begrip": "fantasie",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "creatie",
+            "innovatie"
+          ]
+        },
+        {
           "kaart_id": "kbv2-b160a64a",
           "begrip": "Technologie",
           "lade": "weten",
@@ -61890,26 +61911,6 @@
             "creatie",
             "technologie"
           ]
-        },
-        {
-          "kaart_id": "kbv2-eab440c4",
-          "begrip": "werkt",
-          "lade": "weten",
-          "overlap": 2,
-          "shared_tags": [
-            "oplossing",
-            "technologie"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-40d24f63",
-          "begrip": "brainstormen",
-          "lade": "doen",
-          "overlap": 2,
-          "shared_tags": [
-            "innovatie",
-            "oplossing"
-          ]
         }
       ],
       "footnote": {
@@ -61935,17 +61936,52 @@
               "n_found": 5,
               "top_overlap": 2
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:17:49.586555+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:17:49.667450+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T17:17:56.272453+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T17:17:56.282705+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T17:17:53.269985+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/0b663a58b0fe"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -159967,6 +160003,2323 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ffc93aeb",
+      "begrip": "werkelijkheid",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Werkelijkheid is alles wat daadwerkelijk bestaat, gebeurt of ervaren wordt, onafhankelijk van hoe het wordt voorgesteld of gedacht.\n",
+        "laag2": "Werkelijkheid is wat echt is of als echt wordt ervaren.\n",
+        "laag3": "Werkelijkheid is wat echt is of als echt wordt ervaren.\n",
+        "laag4": "Binnen Spark is werkelijkheid het geheel van gebeurtenissen, objecten, ervaringen, relaties en processen die bestaan of worden waargenomen binnen een bepaalde context.\nWerkelijkheid ondersteunt kennisvorming doordat waarnemingen, interpretaties en ervaringen voortdurend worden vergeleken met wat daadwerkelijk plaatsvindt of wordt ervaren.\n"
+      },
+      "ws5": {
+        "wie": "mensen, dieren, systemen, waarnemers",
+        "wat": "datgene wat bestaat, gebeurt of wordt ervaren",
+        "wanneer": "altijd wanneer iets wordt waargenomen of ervaren",
+        "waar": "in de fysieke wereld, sociale omgeving en persoonlijke beleving",
+        "waarom": "om gebeurtenissen, ervaringen en kennis een basis te geven",
+        "hoe": "door bestaan, waarneming, ervaring en interactie"
+      },
+      "tags": [
+        "werkelijkheid",
+        "realiteit",
+        "bestaan",
+        "waarneming",
+        "ervaring",
+        "observatie",
+        "interpretatie",
+        "bewustwording",
+        "kennis",
+        "context",
+        "omgeving",
+        "gebeurtenis",
+        "waarheid",
+        "perspectief",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-558ac2f9",
+          "begrip": "realiteit",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "bestaan",
+            "emotie",
+            "ervaring",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewustwording",
+            "emotie",
+            "ervaring",
+            "interpretatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e1df63b6",
+          "begrip": "perspectief",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewustwording",
+            "context",
+            "emotie",
+            "ervaring",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b2beb9a",
+          "begrip": "ontdekken",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bewustwording",
+            "context",
+            "emotie",
+            "ervaring",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:34:19.790410+00:00",
+        "vorige_versie_v1": "kb-skel-ffc93aeb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.349009+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:34:17.489981+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:34:17.588194+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:34:24.686977+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:34:24.873794+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:34:15.428596+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7852b92c",
+      "begrip": "herkennen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Herkennen is het waarnemen en identificeren van iets dat bekend, eerder gezien of eerder ervaren is.",
+        "laag2": "Herkennen betekent weten wat iets is door eerdere kennis of ervaring.",
+        "laag3": "Herkennen ondersteunt leren, geheugen en besluitvorming.\nHet helpt mensen en systemen om patronen, objecten, situaties, personen of informatie snel te identificeren en te begrijpen.",
+        "laag4": "Binnen Spark is herkennen een cognitief proces waarbij waarnemingen worden vergeleken met bestaande kennis, ervaringen of patronen om betekenis en identiteit vast te stellen.\nHerkennen ondersteunt bewustwording en interpretatie doordat nieuwe informatie wordt gekoppeld aan reeds aanwezige verbanden binnen het kennisnetwerk.\n"
+      },
+      "ws5": {
+        "wie": "mensen, dieren, gebruikers, systemen",
+        "wat": "het identificeren van iets bekends",
+        "wanneer": "bij observatie, leren, herinneren en analyse",
+        "waar": "in waarneming, geheugen, communicatie en kennisverwerking",
+        "waarom": "voor begrip, oriëntatie en snelle interpretatie",
+        "hoe": "door vergelijking met bestaande kennis, ervaringen of patronen"
+      },
+      "tags": [
+        "herkennen",
+        "herkenning",
+        "waarneming",
+        "geheugen",
+        "patroon",
+        "patroonherkenning",
+        "observatie",
+        "interpretatie",
+        "kennis",
+        "ervaring",
+        "bewustwording",
+        "identificatie",
+        "associatie",
+        "detectie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c1039f2b",
+          "begrip": "patroonherkenning",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "associatie",
+            "bewustwording",
+            "detectie",
+            "emotie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bewustwording",
+            "emotie",
+            "ervaring",
+            "herkenning",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-57702291",
+          "begrip": "associatie",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "associatie",
+            "emotie",
+            "ervaring",
+            "geheugen",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ffc93aeb",
+          "begrip": "werkelijkheid",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bewustwording",
+            "emotie",
+            "ervaring",
+            "interpretatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "herkenning",
+            "interpretatie",
+            "neutraal",
+            "observatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:36:05.924118+00:00",
+        "vorige_versie_v1": "kb-skel-7852b92c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.749141+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:36:04.277774+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:36:04.291051+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:36:09.291807+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:36:09.369911+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:36:02.712197+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d549fc6f",
+      "begrip": "hetzelfde",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Hetzelfde betekent dat twee of meer dingen gelijk zijn in identiteit, betekenis, eigenschappen of toestand.",
+        "laag2": "Hetzelfde geeft aan dat er geen relevant verschil is tussen de vergeleken zaken.",
+        "laag3": "Hetzelfde ondersteunt herkenning, classificatie en vergelijking.\nDoor vast te stellen dat iets hetzelfde is, kunnen mensen en systemen informatie groeperen, begrijpen en ordenen.",
+        "laag4": "Binnen Spark is hetzelfde een relatie waarbij objecten, concepten, eigenschappen of situaties als gelijkwaardig of identiek worden beschouwd binnen een bepaalde context.\nHetzelfde ondersteunt kennisvorming doordat overeenkomsten worden herkend en verschillen niet bepalend zijn voor de betekenis of classificatie."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, systemen, concepten",
+        "wat": "een toestand van gelijkheid of identiteit",
+        "wanneer": "bij vergelijking, herkenning en classificatie",
+        "waar": "in taal, kennis, waarneming, logica en communicatie",
+        "waarom": "om overeenkomsten vast te stellen en informatie te ordenen",
+        "hoe": "door kenmerken, eigenschappen of betekenissen met elkaar te vergelijken"
+      },
+      "tags": [
+        "hetzelfde",
+        "gelijk",
+        "overeenkomst",
+        "identiteit",
+        "vergelijking",
+        "herkenning",
+        "classificatie",
+        "relatie",
+        "betekenis",
+        "patroon",
+        "associatie",
+        "kennis",
+        "interpretatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-57702291",
+          "begrip": "associatie",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "associatie",
+            "betekenis",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1d373d6f",
+          "begrip": "overeenkomst",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "associatie",
+            "betekenis",
+            "classificatie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c1039f2b",
+          "begrip": "patroonherkenning",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "associatie",
+            "emotie",
+            "herkenning",
+            "interpretatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d06bd250",
+          "begrip": "concept",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "herkenning",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "emotie",
+            "identiteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:45:27.169032+00:00",
+        "vorige_versie_v1": "kb-skel-d549fc6f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:41.468339+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:45:26.193136+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:45:26.210224+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:45:30.288762+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:45:30.367259+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:45:24.367763+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-0087262b",
+      "begrip": "verzameling",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een verzameling is een groep objecten, gegevens, personen, ideeën of elementen die bij elkaar zijn gebracht op basis van een gemeenschappelijk kenmerk of doel.\n",
+        "laag2": "Een verzameling brengt meerdere dingen samen tot één geheel.",
+        "laag3": "Verzamelingen ondersteunen organisatie, overzicht en classificatie.\nDoor elementen te groeperen wordt informatie gemakkelijker beheerd, vergeleken en teruggevonden.",
+        "laag4": "Binnen Spark is een verzameling een gestructureerde of ongestructureerde groep van verbonden elementen die gezamenlijk een betekenisvolle eenheid vormen.\nVerzamelingen ondersteunen kennisvorming en organisatie doordat objecten, concepten of gegevens worden gegroepeerd op basis van kenmerken, relaties of context.\n"
+      },
+      "ws5": {
+        "wie": "mensen, systemen, organisaties, onderzoekers",
+        "wat": "een groep samengebrachte elementen",
+        "wanneer": "bij ordening, opslag, onderzoek of classificatie",
+        "waar": "in databases, archieven, musea, verzamelingen, kennisnetwerken en het dagelijks leven",
+        "waarom": "voor overzicht, beheer en vergelijking",
+        "hoe": "door elementen te groeperen op basis van kenmerken, relaties of een doel"
+      },
+      "tags": [
+        "verzameling",
+        "groep",
+        "collectie",
+        "classificatie",
+        "organisatie",
+        "ordening",
+        "opslag",
+        "archief",
+        "gegevens",
+        "objecten",
+        "kennis",
+        "categorie",
+        "structuur",
+        "overzicht",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "kennis",
+            "opslag",
+            "ordening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e97f471",
+          "begrip": "verzamelen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "gegevens",
+            "kennis",
+            "neutraal",
+            "opslag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0a533c5f",
+          "begrip": "classificatie",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "kennis",
+            "neutraal",
+            "ordening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5e3218f1",
+          "begrip": "hiërarchie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "neutraal",
+            "ordening",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "overzicht",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:49:49.107096+00:00",
+        "vorige_versie_v1": "kb-skel-0087262b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.042673+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:49:47.522059+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:49:47.672938+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:49:53.095029+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:49:55.281062+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:49:44.661844+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e3a02076",
+      "begrip": "correct",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Correct betekent dat iets juist, nauwkeurig of in overeenstemming met feiten, regels, afspraken of verwachtingen is.",
+        "laag2": "Correct geeft aan dat iets klopt of geen fouten bevat.",
+        "laag3": "\nCorrectheid ondersteunt betrouwbaarheid, kwaliteit en duidelijkheid.\nHet helpt om informatie, gedrag, berekeningen of handelingen te beoordelen op juistheid en consistentie.",
+        "laag4": "Binnen Spark is correct een eigenschap die aangeeft dat een gegeven, interpretatie, handeling of resultaat overeenkomt met de beschikbare werkelijkheid, vastgestelde criteria of geldende afspraken.\nCorrectheid ondersteunt kennisvorming en besluitvorming doordat afwijkingen worden verminderd en betrouwbaarheid wordt vergroot.\n"
+      },
+      "ws5": {
+        "wie": "mensen, systemen, organisaties, gebruikers",
+        "wat": "iets dat juist of foutloos is",
+        "wanneer": "bij controle, beoordeling, communicatie en uitvoering",
+        "waar": "in kennis, taal, berekeningen, processen en gedrag",
+        "waarom": "voor betrouwbaarheid, kwaliteit en duidelijkheid",
+        "hoe": "door verificatie, validatie, controle of vergelijking met criteria"
+      },
+      "tags": [
+        "correct",
+        "juist",
+        "nauwkeurig",
+        "betrouwbaarheid",
+        "validatie",
+        "verificatie",
+        "controle",
+        "kwaliteit",
+        "waarheid",
+        "consistentie",
+        "beoordeling",
+        "check",
+        "resultaat",
+        "foutloos",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-51dd8529",
+          "begrip": "validatie",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "beoordeling",
+            "betrouwbaarheid",
+            "check",
+            "consistentie",
+            "controle"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f5bd2d1c",
+          "begrip": "check",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "beoordeling",
+            "betrouwbaarheid",
+            "check",
+            "controle",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "correct",
+            "emotie",
+            "kwaliteit",
+            "nauwkeurig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-59dbfa44",
+          "begrip": "verificatie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "controle",
+            "emotie",
+            "neutraal",
+            "validatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58e62d0e",
+          "begrip": "beoordelen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "controle",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:51:37.368125+00:00",
+        "vorige_versie_v1": "kb-skel-e3a02076",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.406980+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:51:36.584273+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:51:36.671175+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:51:40.880464+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:51:40.894801+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:51:34.421886+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ff1be4f3",
+      "begrip": "laag",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een laag is een niveau, onderdeel of afgebakende structuur binnen een groter geheel.",
+        "laag2": "Een laag verdeelt informatie, objecten of processen in afzonderlijke niveaus.",
+        "laag3": "Lagen ondersteunen organisatie, overzicht en structuur.\nDoor informatie of onderdelen op te delen in lagen wordt complexiteit beheersbaar en kunnen verschillende niveaus afzonderlijk worden bekeken.\n",
+        "laag4": "Binnen Spark is een laag een organisatorische structuur die informatie, functies, eigenschappen of processen groepeert op een specifiek abstractie- of detailniveau.\nLagen ondersteunen kennisvorming doordat complexe systemen worden opgesplitst in overzichtelijke delen die afzonderlijk kunnen worden begrepen en met elkaar verbonden blijven.\n"
+      },
+      "ws5": {
+        "wie": "mensen, systemen, organisaties, kennisstructuren",
+        "wat": "een niveau of onderdeel binnen een groter geheel",
+        "wanneer": "bij ordening, analyse, ontwerp en classificatie",
+        "waar": "in kennis, software, organisaties, materialen en modellen",
+        "waarom": "voor overzicht, structuur en beheersbaarheid",
+        "hoe": "door elementen te verdelen over verschillende niveaus of onderdelen"
+      },
+      "tags": [
+        "laag",
+        "niveau",
+        "structuur",
+        "organisatie",
+        "classificatie",
+        "hiërarchie",
+        "onderdeel",
+        "opbouw",
+        "overzicht",
+        "systeem",
+        "ordening",
+        "model",
+        "kennis",
+        "abstractie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5e3218f1",
+          "begrip": "hiërarchie",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "hiërarchie",
+            "neutraal",
+            "niveau"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd8770c8",
+          "begrip": "welke ranken ken jij",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "hiërarchie",
+            "kennis",
+            "neutraal",
+            "niveau"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "classificatie",
+            "hiërarchie",
+            "kennis",
+            "ordening",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0087262b",
+          "begrip": "verzameling",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "kennis",
+            "neutraal",
+            "ordening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-93e27265",
+          "begrip": "rang",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "classificatie",
+            "hiërarchie",
+            "neutraal",
+            "niveau",
+            "organisatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:55:06.985465+00:00",
+        "vorige_versie_v1": "kb-skel-ff1be4f3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:24.784848+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:55:05.620101+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:55:05.673427+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:55:10.817690+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:55:10.869867+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:55:03.102461+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3107f3df",
+      "begrip": "structuren",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Structuren zijn georganiseerde opbouwen van onderdelen die samen een geheel vormen volgens een bepaalde ordening of relatie.",
+        "laag2": "Structuren geven vorm, samenhang en organisatie aan een systeem of geheel.",
+        "laag3": "Structuren ondersteunen overzicht, stabiliteit en functioneren.\nDoor onderdelen op een georganiseerde manier met elkaar te verbinden ontstaat een begrijpelijk en werkbaar geheel.",
+        "laag4": "Binnen Spark zijn structuren georganiseerde netwerken van elementen, relaties en lagen die gezamenlijk betekenis, functie of samenhang creëren.\nStructuren ondersteunen kennisvorming en ontwikkeling doordat informatie, processen en objecten volgens herkenbare patronen worden geordend en verbonden.\n"
+      },
+      "ws5": {
+        "wie": "Binnen Spark zijn structuren georganiseerde netwerken van elementen, relaties en lagen die gezamenlijk betekenis, functie of samenhang creëren. Structuren ondersteunen kennisvorming en ontwikkeling doordat informatie, processen en objecten volgens herkenbare patronen worden geordend en verbonden.",
+        "wat": "een georganiseerde opbouw van verbonden onderdelen",
+        "wanneer": "bij organisatie, ontwerp, classificatie en ontwikkeling",
+        "waar": "in kennis, natuur, techniek, organisaties en sociale systemen",
+        "waarom": "voor overzicht, samenhang, stabiliteit en werking",
+        "hoe": "door onderdelen volgens bepaalde relaties, regels of patronen met elkaar te verbinden"
+      },
+      "tags": [
+        "structuren",
+        "structuur",
+        "organisatie",
+        "opbouw",
+        "samenhang",
+        "systeem",
+        "netwerk",
+        "relatie",
+        "patroon",
+        "hiërarchie",
+        "laag",
+        "classificatie",
+        "ordening",
+        "verbinding",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ff1be4f3",
+          "begrip": "laag",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "hiërarchie",
+            "laag",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5e3218f1",
+          "begrip": "hiërarchie",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "classificatie",
+            "emotie",
+            "hiërarchie",
+            "neutraal",
+            "ordening"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "classificatie",
+            "hiërarchie",
+            "netwerk",
+            "ordening",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4d4337f1",
+          "begrip": "architectuur",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "opbouw",
+            "ordening",
+            "samenhang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "netwerk",
+            "neutraal",
+            "relatie",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:56:52.485166+00:00",
+        "vorige_versie_v1": "kb-skel-3107f3df",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:34.716671+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:56:51.071745+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:56:51.088703+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:56:55.371128+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:56:55.387690+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:56:49.645366+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-aa89bb62",
+      "begrip": "volledig",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Volledig betekent dat iets compleet is en geen essentiële onderdelen, informatie of elementen ontbreken.",
+        "laag2": "Volledig geeft aan dat een geheel af of compleet is.",
+        "laag3": "Volledigheid ondersteunt duidelijkheid, betrouwbaarheid en overzicht.\nWanneer iets volledig is, kan het beter worden begrepen, beoordeeld of gebruikt zonder dat belangrijke informatie ontbreekt.",
+        "laag4": "Volledigheid ondersteunt duidelijkheid, betrouwbaarheid en overzicht.\nWanneer iets volledig is, kan het beter worden begrepen, beoordeeld of gebruikt zonder dat belangrijke informatie ontbreekt."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, documenten, verzamelingen, processen",
+        "wat": "een toestand van compleetheid",
+        "wanneer": "wanneer alle relevante onderdelen aanwezig zijn",
+        "waar": "in kennis, communicatie, documenten, systemen en verzamelingen",
+        "waarom": "voor betrouwbaarheid, duidelijkheid en bruikbaarheid",
+        "hoe": "door alle benodigde elementen, informatie of onderdelen op te nemen"
+      },
+      "tags": [
+        "volledig",
+        "compleet",
+        "volledigheid",
+        "geheel",
+        "compleetheid",
+        "informatie",
+        "structuur",
+        "verzameling",
+        "validatie",
+        "controle",
+        "correct",
+        "overzicht",
+        "samenhang",
+        "kwaliteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "correct",
+            "emotie",
+            "informatie",
+            "kwaliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e3a02076",
+          "begrip": "correct",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "correct",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58e62d0e",
+          "begrip": "beoordelen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "informatie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T13:58:49.234604+00:00",
+        "vorige_versie_v1": "kb-skel-aa89bb62",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:20.065511+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:58:48.186956+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:58:48.274359+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T13:58:52.101771+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T13:58:52.177055+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T13:58:45.414175+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-42c604ea",
+      "begrip": "omstandigheden",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Omstandigheden zijn de situatie, voorwaarden of factoren die invloed hebben op een gebeurtenis, proces of uitkomst.",
+        "laag2": "Omstandigheden vormen de context waarin iets gebeurt.",
+        "laag3": "Omstandigheden ondersteunen begrip van waarom gebeurtenissen of resultaten ontstaan.\nZe kunnen fysiek, sociaal, emotioneel, economisch of omgevingsgebonden zijn en beïnvloeden gedrag, keuzes en ontwikkelingen.\n",
+        "laag4": "Binnen Spark zijn omstandigheden de verzameling van aanwezige factoren, condities en contextuele invloeden die bepalen hoe een situatie, proces of interactie verloopt.\nOmstandigheden ondersteunen interpretatie en besluitvorming doordat zij inzicht geven in de achtergrond en beïnvloedende factoren van een gebeurtenis of resultaat.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, organisaties, systemen",
+        "wat": "de voorwaarden en factoren rond een situatie",
+        "wanneer": "voor, tijdens en na gebeurtenissen of processen",
+        "waar": "in de omgeving, samenleving, relaties, werk en dagelijkse situaties",
+        "waarom": "om invloed uit te oefenen op verloop en uitkomst",
+        "hoe": "door fysieke, sociale, emotionele of praktische factoren"
+      },
+      "tags": [
+        "omstandigheden",
+        "context",
+        "situatie",
+        "factoren",
+        "voorwaarden",
+        "omgeving",
+        "invloed",
+        "gebeurtenis",
+        "proces",
+        "uitkomst",
+        "interpretatie",
+        "perspectief",
+        "besluitvorming",
+        "werkelijkheid",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ffc93aeb",
+          "begrip": "werkelijkheid",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fa83209e",
+          "begrip": "Situatie",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "gebeurtenis",
+            "interpretatie",
+            "neutraal",
+            "omstandigheden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165ff5e9",
+          "begrip": "nuance",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal",
+            "perspectief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77d5122f",
+          "begrip": "Welk tijdstip is het?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gebeurtenis",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "interpretatie",
+            "neutraal",
+            "perspectief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:03:54.958543+00:00",
+        "vorige_versie_v1": "kb-skel-42c604ea",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.643275+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:03:46.493729+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:03:46.582548+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:03:58.782998+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:03:58.873677+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:03:44.227926+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-11840f86",
+      "begrip": "juist",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Juist betekent dat iets klopt, waar is of overeenkomt met feiten, werkelijkheid, regels of verwachtingen.",
+        "laag2": "Juist geeft aan dat iets correct of passend is.",
+        "laag3": "Juist geeft aan dat iets correct of passend is.",
+        "laag4": "Binnen Spark is juist een eigenschap die aangeeft dat een waarneming, interpretatie, uitspraak of resultaat voldoende overeenkomt met de beschikbare kennis, context of werkelijkheid.\nJuistheid ondersteunt kennisvorming en validatie doordat onderscheid kan worden gemaakt tussen correcte en onjuiste informatie.\n"
+      },
+      "ws5": {
+        "wie": "mensen, systemen, onderzoekers, gebruikers",
+        "wat": "iets dat klopt of overeenkomt met de werkelijkheid of criteria",
+        "wanneer": "bij beoordeling, communicatie, analyse en besluitvorming",
+        "waar": "in kennis, taal, wetenschap, berekeningen en dagelijkse situaties",
+        "waarom": "voor betrouwbaarheid, duidelijkheid en kwaliteit",
+        "hoe": "door vergelijking met feiten, waarnemingen, regels of afspraken"
+      },
+      "tags": [
+        "juist",
+        "correct",
+        "waarheid",
+        "nauwkeurig",
+        "validatie",
+        "verificatie",
+        "controle",
+        "betrouwbaarheid",
+        "kennis",
+        "werkelijkheid",
+        "beoordeling",
+        "consistentie",
+        "begrip",
+        "kwaliteit",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e3a02076",
+          "begrip": "correct",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "beoordeling",
+            "betrouwbaarheid",
+            "consistentie",
+            "controle",
+            "correct"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-51dd8529",
+          "begrip": "validatie",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "beoordeling",
+            "betrouwbaarheid",
+            "consistentie",
+            "controle",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f5bd2d1c",
+          "begrip": "check",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "beoordeling",
+            "betrouwbaarheid",
+            "controle",
+            "emotie",
+            "kwaliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "controle",
+            "correct",
+            "emotie",
+            "kwaliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-59dbfa44",
+          "begrip": "verificatie",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "controle",
+            "emotie",
+            "kennis",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:11:21.113012+00:00",
+        "vorige_versie_v1": "kb-skel-11840f86",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:00.440932+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:11:18.598228+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:11:18.767722+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:11:27.266808+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:11:27.367653+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:11:16.917516+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e80e80fa",
+      "begrip": "kort",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kort betekent van beperkte lengte, duur, omvang of hoeveelheid.",
+        "laag2": "Kort geeft aan dat iets weinig ruimte of tijd inneemt.",
+        "laag3": "Kort ondersteunt duidelijkheid, snelheid en eenvoud.",
+        "laag4": "Binnen Spark beschrijft kort een eigenschap waarbij informatie, tijd, afstand of omvang beperkt blijft ten opzichte van een referentie."
+      },
+      "ws5": {
+        "wie": "mensen, systemen, objecten, gebeurtenissen",
+        "wat": "beperkte lengte, duur of omvang",
+        "wanneer": "bij vergelijking van grootte of tijd",
+        "waar": " in taal, tijd, afstand en informatie",
+        "waarom": "voor eenvoud en efficiëntie",
+        "hoe": "door minder ruimte, tijd of inhoud te bevatten"
+      },
+      "tags": [
+        "kort",
+        "lengte",
+        "duur",
+        "omvang",
+        "tijd",
+        "afstand",
+        "compact",
+        "beknopt",
+        "efficiëntie",
+        "vergelijking",
+        "eigenschap",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4db90563",
+          "begrip": "welk",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1522cf22",
+          "begrip": "Niet alles zonder hoeken is een cirkel.",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "vergelijking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "omvang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a4096d6",
+          "begrip": "productiviteit",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "efficiëntie",
+            "emotie",
+            "neutraal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:18:01.352113+00:00",
+        "vorige_versie_v1": "kb-skel-e80e80fa",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.328448+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:17:58.877351+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:17:58.898045+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:18:04.894573+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:18:04.909525+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:17:56.695580+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ea845482",
+      "begrip": "reden",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "De oorzaak, motivatie of verklaring waarom iets gebeurt of wordt gedaan.",
+        "laag2": "Een reden geeft antwoord op de vraag \"waarom\". Het helpt om keuzes, gebeurtenissen en gedrag te begrijpen.",
+        "laag3": "Redenen kunnen voortkomen uit omstandigheden, doelen, behoeften, emoties of logica. Eén gebeurtenis kan meerdere redenen hebben. Redenen worden gebruikt om beslissingen te nemen, gedrag te verklaren en verbanden te begrijpen.",
+        "laag4": "Een reden verschilt van een gevolg. De reden verklaart waarom iets gebeurt, terwijl het gevolg beschrijft wat er daarna gebeurt. Redenen spelen een belangrijke rol bij denken, communiceren, analyseren en leren.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en systemen",
+        "wat": "Een oorzaak, motivatie of verklaring",
+        "wanneer": "Bij keuzes, gebeurtenissen en handelingen",
+        "waar": "In denken, communicatie, besluitvorming en analyse",
+        "waarom": "Om te begrijpen waarom iets gebeurt of gedaan wordt",
+        "hoe": "Door oorzaken, motieven of omstandigheden te onderzoeken"
+      },
+      "tags": [
+        "reden",
+        "waarom",
+        "oorzaak",
+        "gevolg",
+        "motivatie",
+        "verklaring",
+        "aanleiding",
+        "keuze",
+        "argument",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-68625774",
+          "begrip": "waarom",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "motivatie",
+            "neutraal",
+            "oorzaak",
+            "reden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b2c5463",
+          "begrip": "gedragsanalyse",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gevolg",
+            "keuze",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-37bffc41",
+          "begrip": "wilde",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7a278a3a",
+          "begrip": "gebeurtenissen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "gevolg",
+            "neutraal",
+            "oorzaak"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:35:52.398263+00:00",
+        "vorige_versie_v1": "kb-skel-ea845482",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.081335+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:35:11.779299+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:35:11.885018+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:35:56.594064+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:35:56.677825+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:35:07.478846+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-ab49447e",
+      "begrip": "onderwerp",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Datgene waar een gesprek, tekst, gedachte, onderzoek of activiteit over gaat.",
+        "laag2": "Een onderwerp vormt het centrale thema of focuspunt van aandacht.\n\nVoorbeelden:\n\nhet onderwerp van een gesprek\nhet onderwerp van een boek\nhet onderwerp van een les\nhet onderwerp van onderzoek\n\nDe kern is:\n\nwaar iets over gaat.",
+        "laag3": "Onderwerpen helpen informatie te ordenen en richting te geven.\n\nZe worden gebruikt om:\n\ngesprekken te structureren\nkennis te organiseren\nonderzoek af te bakenen\naandacht te richten\n\nEen onderwerp kan breed of smal zijn.\n\nBijvoorbeeld:\n\nnatuur (breed)\nfotosynthese (specifiek)",
+        "laag4": "Onderwerp verschilt van:\n\nThema → onderliggende rode draad\nTitel → naam van een onderwerp\nContext → omstandigheden rondom een onderwerp\nOnderwerp → het centrale punt waar de aandacht op gericht is\n\nBinnen Spark is een onderwerp vaak het startpunt van een kenniskaart. Vanuit één onderwerp ontstaan definities, verbanden, tags en nieuwe kaarten.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, onderzoekers, schrijvers en sprekers",
+        "wat": "Het centrale thema of focuspunt",
+        "wanneer": "Tijdens communicatie, leren, denken of onderzoeken",
+        "waar": "In gesprekken, teksten, lessen, media en kennisstructuren",
+        "waarom": "Om aandacht en informatie te organiseren",
+        "hoe": "Door een centraal thema of begrip te kiezen"
+      },
+      "tags": [
+        "onderwerp",
+        "thema",
+        "focus",
+        "aandacht",
+        "kennis",
+        "gesprek",
+        "informatie",
+        "context",
+        "begrip",
+        "inhoud",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "emotie",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1364c6a2",
+          "begrip": "voorbeeld",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "context",
+            "gesprek",
+            "informatie",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:43:04.543940+00:00",
+        "vorige_versie_v1": "kb-skel-ab49447e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.064562+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:43:02.094916+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:43:02.174629+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:43:09.676488+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:43:09.869603+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:43:00.749696+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e2137213",
+      "begrip": "oorsprong",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Het begin, de herkomst of de bron waaruit iets is ontstaan.",
+        "laag2": "Oorsprong verwijst naar waar iets vandaan komt of hoe iets begonnen is.\n\nVoorbeelden:\n\nde oorsprong van een rivier\nde oorsprong van een idee\nde oorsprong van een taal\nde oorsprong van een traditie\nde oorsprong van een soort\n\nDe kern is:\n\nwaar iets begint of vandaan komt.",
+        "laag3": "Door de oorsprong van iets te kennen, kun je beter begrijpen hoe het zich heeft ontwikkeld.\n\nOorsprong kan betrekking hebben op:\n\npersonen\nobjecten\nideeën\nculturen\norganismen\nsystemen\n\nDe oorsprong verklaart niet altijd alles, maar geeft vaak belangrijke context.\n\nVeel onderzoek richt zich op vragen als:\n\nWaar komt het vandaan?\nHoe is het ontstaan?\nWat was de eerste vorm?",
+        "laag4": "Oorsprong verschilt van:\n\nGeschiedenis\nAlles wat daarna gebeurd is.\n\nBron\nDe directe herkomst van informatie of materiaal.\n\nOntstaan\nHet proces van beginnen.\n\nOorsprong\nHet beginpunt of de herkomst zelf.\n\nVaak ontstaat:\n\noorsprong → ontwikkeling → verandering → resultaat\n\nHet begrijpen van oorsprong helpt bij het verklaren van verbanden, kenmerken en evolutie."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, objecten, ideeën, culturen en systemen",
+        "wat": "Het beginpunt of de herkomst van iets",
+        "wanneer": "Wanneer iets ontstaat of voor het eerst voorkomt",
+        "waar": "In de bron, herkomst of beginfase van iets",
+        "waarom": "Om te begrijpen waar iets vandaan komt",
+        "hoe": "Door onderzoek naar ontstaan, geschiedenis of herkomst"
+      },
+      "tags": [
+        "oorsprong",
+        "herkomst",
+        "begin",
+        "bron",
+        "ontstaan",
+        "geschiedenis",
+        "ontwikkeling",
+        "afkomst",
+        "start",
+        "basis",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2f6ef6ac",
+          "begrip": "afkomst",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "afkomst",
+            "blij",
+            "bron",
+            "emotie",
+            "herkomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bb0b2435",
+          "begrip": "begin",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "begin",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontstaan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-223c88a1",
+          "begrip": "creatie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "begin",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontstaan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b5ecdbed",
+          "begrip": "ontstaan",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "begin",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontstaan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7651287e",
+          "begrip": "starten",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "begin",
+            "blij",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T15:12:04.558905+00:00",
+        "vorige_versie_v1": "kb-skel-e2137213",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.112811+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T15:12:01.516959+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T15:12:01.572499+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T15:12:08.585163+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T15:12:08.596916+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T15:12:00.133503+00:00"
       },
       "media": {
         "voice_url": null,

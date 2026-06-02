@@ -5,12 +5,13 @@ import { SystemArchive } from './SystemArchive';
 import { SynapseTab } from './SynapseTab';
 import {
   Settings, Monitor, Volume2, Link2, Sparkles, HelpCircle,
-  Save, Shield, Clock, Bug, RefreshCw, Palette, Sun, Moon,
+  Save, Shield, ShieldCheck, Clock, Bug, RefreshCw, Palette, Sun, Moon,
   Mic, Speech, Music, Upload, Play, Trash2, Edit3, Plus,
   Keyboard, MessageSquare, Brain, Trophy, ChevronDown, ChevronRight,
   Zap, Globe, Wifi, Database, Server, Bell, Eye, EyeOff,
-  ToggleLeft, ToggleRight, Archive
+  ToggleLeft, ToggleRight, Archive, X
 } from 'lucide-react';
+import { BarkModal } from '../shared/BarkModal';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -111,6 +112,7 @@ export function InstellingenPage({ onNavigate }) {
     { id: 'archief', label: 'Archief', icon: Archive, accent: '#10b981' },
     { id: 'integraties', label: 'Integraties', icon: Link2, accent: '#06b6d4' },
     { id: 'features', label: 'Features', icon: Sparkles, accent: '#22c55e' },
+    { id: 'admin', label: 'Admin', icon: ShieldCheck, accent: '#a855f7' },
     { id: 'tips', label: 'Tips & Hulp', icon: HelpCircle, accent: '#f97316' },
   ];
 
@@ -321,6 +323,11 @@ export function InstellingenPage({ onNavigate }) {
 
                 <SaveButton saving={saving} onClick={handleSave} />
               </>
+            )}
+
+            {/* ====== ADMIN ====== v6_admin_role_001 ====== */}
+            {activeTab === 'admin' && (
+              <AdminSettingsPanel userId={userId} />
             )}
 
             {/* ====== TIPS & HULP ====== */}
@@ -819,3 +826,209 @@ function BotColorPanel({ canEdit }) {
 }
 
 export default InstellingenPage;
+
+// ============================================================
+// AdminSettingsPanel (v6_admin_role_001)
+// Admin-wachtwoord wijzigen + grant/revoke admins
+// Alleen zichtbaar voor users met admin:true
+// ============================================================
+function AdminSettingsPanel({ userId }) {
+  const [isAdmin, setIsAdmin] = useState(null);
+  const [admins, setAdmins] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [targetId, setTargetId] = useState('');
+  const [grantPw, setGrantPw] = useState('');
+  const [oldPw, setOldPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [showBark, setShowBark] = useState(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/admin/is-admin/${userId}`).then(r => r.json()).then(d => setIsAdmin(d.is_admin === true));
+  }, [userId]);
+
+  const refresh = useCallback(() => {
+    if (isAdmin !== true) return;
+    fetch(`${API}/api/admin/list?viewer_id=${userId}`).then(r => r.json()).then(d => setAdmins(d.admins || []));
+    fetch(`${API}/api/auth/users`).then(r => r.json()).then(d => setUsers(d.users || d || [])).catch(() => {});
+  }, [isAdmin, userId]);
+
+  useEffect(() => { refresh(); }, [refresh]);
+
+  if (isAdmin === null) return <div className="text-xs text-slate-500">Laden...</div>;
+  if (isAdmin === false) {
+    return (
+      <div className="p-8 text-center rounded-xl border border-slate-800 bg-slate-900/40">
+        <ShieldCheck className="w-12 h-12 mx-auto text-slate-600 mb-3" />
+        <h3 className="text-sm font-semibold text-slate-300 mb-1">Geen toegang</h3>
+        <p className="text-[11px] text-slate-500">Deze sectie is alleen zichtbaar voor admins. Vraag een bestaande admin om je rechten toe te kennen.</p>
+      </div>
+    );
+  }
+
+  const grant = async () => {
+    if (!targetId || !grantPw) {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Vul beide velden in', text: 'Kies een user en typ het admin-wachtwoord.', tone: 'warn' });
+      return;
+    }
+    setBusy(true);
+    const res = await fetch(`${API}/api/admin/grant`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ target_user_id: targetId, granted_by: userId, password: grantPw }),
+    }).then(r => r.json());
+    setBusy(false);
+    setGrantPw('');
+    if (res.success) {
+      setShowBark({ begrip: 'Admin geactiveerd', title: `${res.naam || targetId} is nu admin`, text: res.message, tone: 'success' });
+      setTargetId('');
+      refresh();
+    } else {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Admin-grant mislukt', text: res.error, tone: 'error' });
+    }
+  };
+
+  const revoke = async (target_user_id, naam) => {
+    if (!window.confirm(`Admin-rol intrekken voor ${naam}?`)) return;
+    setBusy(true);
+    const res = await fetch(`${API}/api/admin/revoke`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ target_user_id, revoked_by: userId }),
+    }).then(r => r.json());
+    setBusy(false);
+    if (res.success) {
+      setShowBark({ begrip: 'Admin gedeactiveerd', title: `${naam} is geen admin meer`, text: res.message, tone: 'warn' });
+      refresh();
+    } else {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Revoke mislukt', text: res.error, tone: 'error' });
+    }
+  };
+
+  const changePw = async () => {
+    if (!oldPw || !newPw) {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Vul beide velden in', text: 'Oud en nieuw wachtwoord verplicht.', tone: 'warn' });
+      return;
+    }
+    if (newPw.length < 6) {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Te kort', text: 'Minstens 6 tekens.', tone: 'warn' });
+      return;
+    }
+    setBusy(true);
+    const res = await fetch(`${API}/api/admin/password/reset`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, old_password: oldPw, new_password: newPw }),
+    }).then(r => r.json());
+    setBusy(false);
+    setOldPw(''); setNewPw('');
+    if (res.success) {
+      setShowBark({ begrip: 'Admin geactiveerd', title: 'Wachtwoord gewijzigd', text: res.message, tone: 'success' });
+    } else {
+      setShowBark({ begrip: 'Toegang geweigerd', title: 'Wachtwoord wijzigen mislukt', text: res.error, tone: 'error' });
+    }
+  };
+
+  const adminIds = new Set(admins.map(a => a.id));
+  const grantableUsers = (users || []).filter(u => u.id && !adminIds.has(u.id));
+
+  return (
+    <div data-testid="admin-settings-panel" className="space-y-4">
+      <div className="p-5 rounded-xl border border-purple-500/30" style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.10), rgba(91,33,182,0.06))' }}>
+        <h2 className="text-lg font-bold text-white mb-1 flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-purple-300" /> Admin-beheer</h2>
+        <p className="text-xs text-slate-400">Admin = technische rol, los van gradatie (familie/lid). Toekenning vereist het admin-wachtwoord.</p>
+      </div>
+
+      {/* Huidige admins */}
+      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-white mb-3">
+          Huidige admins <span className="text-[10px] text-purple-300 ml-1">({admins.length})</span>
+        </h3>
+        <div className="space-y-1.5">
+          {admins.map(a => (
+            <div key={a.id} data-testid={`admin-row-${a.id}`} className="flex items-center justify-between bg-slate-950/40 border border-slate-800 rounded-lg px-3 py-2">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-300" />
+                <span className="text-xs text-white">{a.naam || a.id}</span>
+                <span className="text-[10px] text-slate-500">g{a.gradatie}</span>
+                {a.admin_granted_by === 'system-seed' && (
+                  <span className="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">seed</span>
+                )}
+              </div>
+              {a.admin_granted_by !== 'system-seed' && admins.length > 1 && (
+                <button
+                  data-testid={`admin-revoke-${a.id}`}
+                  onClick={() => revoke(a.id, a.naam || a.id)}
+                  disabled={busy}
+                  className="text-[10px] text-rose-300 hover:text-rose-200 px-2 py-1 rounded bg-rose-500/10 hover:bg-rose-500/20"
+                >
+                  intrekken
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Grant nieuwe admin */}
+      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 space-y-3">
+        <h3 className="text-sm font-semibold text-white">Nieuwe admin toekennen</h3>
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Gebruiker</label>
+          <select
+            data-testid="admin-grant-user"
+            value={targetId}
+            onChange={e => setTargetId(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none"
+          >
+            <option value="">— kies user —</option>
+            {grantableUsers.map(u => (
+              <option key={u.id} value={u.id}>{u.naam || u.id} (g{u.gradatie || '?'})</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Admin-wachtwoord</label>
+          <input
+            type="password" data-testid="admin-grant-password"
+            value={grantPw} onChange={e => setGrantPw(e.target.value)} placeholder="•••••••"
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none"
+          />
+        </div>
+        <button
+          data-testid="admin-grant-btn" onClick={grant} disabled={busy || !targetId || !grantPw}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/20 text-purple-200 hover:bg-purple-500/30 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <ShieldCheck className="w-3.5 h-3.5" /> Maak admin
+        </button>
+      </div>
+
+      {/* Admin wachtwoord wijzigen */}
+      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 space-y-3">
+        <h3 className="text-sm font-semibold text-white">Admin-wachtwoord wijzigen</h3>
+        <p className="text-[11px] text-slate-400">Dit is het wachtwoord dat nodig is om <strong className="text-purple-300">nieuwe admins toe te kennen</strong>. Staat los van je eigen sleutelwoord.</p>
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Huidig admin-wachtwoord</label>
+          <input type="password" data-testid="admin-pw-old" value={oldPw} onChange={e => setOldPw(e.target.value)} placeholder="•••••••" className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none" />
+        </div>
+        <div>
+          <label className="block text-[10px] text-slate-500 uppercase tracking-wider mb-1">Nieuw admin-wachtwoord (min. 6 tekens)</label>
+          <input type="password" data-testid="admin-pw-new" value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="•••••••" className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white focus:border-purple-500/50 outline-none" />
+        </div>
+        <button
+          data-testid="admin-pw-change-btn" onClick={changePw} disabled={busy || !oldPw || !newPw}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/20 text-purple-200 hover:bg-purple-500/30 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <Save className="w-3.5 h-3.5" /> Wijzig admin-wachtwoord
+        </button>
+      </div>
+
+      <BarkModal
+        open={!!showBark}
+        onClose={() => setShowBark(null)}
+        begrip={showBark?.begrip}
+        title={showBark?.title}
+        text={showBark?.text}
+        tone={showBark?.tone}
+      />
+    </div>
+  );
+}

@@ -306,6 +306,22 @@ app.include_router(admin_logs_router, prefix="/api")
 from modules.admin import capabilities_router as admin_capabilities_router
 app.include_router(admin_capabilities_router, prefix="/api")
 
+# v6_admin_role_001 — Admin role grant/revoke + bark-image lookup
+from modules.admin import role_router as admin_role_router
+app.include_router(admin_role_router, prefix="/api")
+# Bootstrap-load admin password uit JSON-bestand (overrules env-default voor live wijzigingen)
+try:
+    from modules.admin import admin_service as _admin_svc
+    _pw_file = Path("/app/backend/data/system/admin_password.json")
+    if _pw_file.exists():
+        import json as _json
+        _pw_data = _json.loads(_pw_file.read_text())
+        if _pw_data.get("password"):
+            os.environ["ADMIN_PASSWORD"] = _pw_data["password"]
+    _admin_svc.ensure_seed_admins()
+except Exception as _ex:
+    print(f"   ⚠️  Admin seed failed: {_ex}")
+
 # Module 27: Knowledge Base v2 (v5_kbv2_001 — 4 lades + inbox + index)
 from modules.kb_v2 import kbv2_router, kbv2_media_router
 app.include_router(kbv2_router, prefix="/api")

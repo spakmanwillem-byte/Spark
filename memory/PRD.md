@@ -1,5 +1,53 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 19/20 — Admin-rol systeem + bark-modal)
+
+### 🛡️ v6_admin_role_001 — Admin als losstaande technische rol
+
+**Probleem**: alle admin-checks deden `gradatie ≤ 2` → familie (gradatie 2) kreeg automatisch admin-rechten. Niet uitsplitsbaar, en bij Willem-dood-scenario (Lotus → gradatie 1) zou admin automatisch overgaan zonder bevestiging.
+
+**Oplossing**:
+- Nieuwe `user.admin` boolean — los van gradatie
+- Centrale helper `modules/admin/admin_service.is_admin(user_id)`
+- Seed admins: alleen user-001 (Willem) + user-000 (Spark) bij eerste boot
+- Andere users (incl. familie gradatie 2) krijgen NIET automatisch admin
+- Toekenning via `POST /api/admin/grant` met admin-wachtwoord (env var)
+- Anti-lockout: laatste admin kan zichzelf niet revoken
+- Wachtwoord beheerd in `data/system/admin_password.json` (runtime-writable) met env-var-default
+
+### 🎨 Bark-modal systeem
+- Nieuwe component `frontend/src/components/shared/BarkModal.js`
+- Visuele popup met KB-kaart-afbeelding (uit doen-lade) + titel + tekst + 4 tones (info/success/warn/error)
+- Gebruikt jouw kaarten: "Admin geactiveerd", "Admin gedeactiveerd", "Toegang verleend", "Toegang geweigerd"
+- Backend lookup via `GET /api/admin/bark-image?begrip=X` zoekt eerste image_url in alle lades
+- Vervangt droge `alert()`/`toast()` calls met sfeerrijke Spark-respons
+
+### 🖥️ Admin-tab in Instellingen
+- Nieuwe tab in `InstellingenPage.js` (ShieldCheck-icon, paars)
+- Sectie 1: Lijst huidige admins met "seed"-badge + intrekken-knop (met confirm)
+- Sectie 2: Nieuwe admin toekennen (user-dropdown + wachtwoord + Maak admin)
+- Sectie 3: Admin-wachtwoord wijzigen (oud + nieuw met min. 6 tekens)
+- Bij elke actie: BarkModal met passende afbeelding (Admin geactiveerd / Toegang geweigerd / etc.)
+
+### Bestanden gewijzigd in sessie 19 (admin-deel)
+- `/app/backend/modules/admin/admin_service.py` — NEW: helper + grant/revoke/seed logic
+- `/app/backend/modules/admin/role_routes.py` — NEW: 8 endpoints
+- `/app/backend/modules/admin/__init__.py` — export role_router + admin_service
+- `/app/backend/server.py` — registreer role_router + bootstrap-load password + ensure_seed_admins
+- `/app/backend/.env` — ADMIN_PASSWORD seed
+- `/app/frontend/src/components/shared/BarkModal.js` — NEW: herbruikbare visuele popup
+- `/app/frontend/src/components/admin/InstellingenPage.js` — Admin-tab + `AdminSettingsPanel`
+
+### 📌 Voor PRODUCTIE-DEPLOY (na deploy stappen)
+1. Deploy preview → productie via "Save"
+2. **DIRECT na deploy**: log in als Willem → Instellingen → Admin → "Admin-wachtwoord wijzigen" → wijzig `AppelsapAdmin2026` naar eigen sterk wachtwoord
+3. Controleer dat alleen Willem + Spark als seed-admin gemarkeerd zijn
+4. Run `POST /api/kb/v2/vocab/sync` met `viewer_id=user-001` in productie om alle geclassificeerde kaarten naar vocab te brengen
+5. Productie heeft de admin-kaarten al in doen-lade → bark-popups werken direct
+
+---
+
+
 ## Completed (2026-06-01 — sessie 19, fork — Shadow safety + corrupt data cleanup + auto-resume MERGE-fix)
 
 ### 🛡️ v6_shadow_safety_001 — Shadow-cascade gepauzeerd + recycle bug gefixt

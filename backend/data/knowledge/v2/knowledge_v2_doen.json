@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 814,
+    "card_count": 815,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T11:17:13.631934+00:00"
+    "last_updated": "2026-06-02T18:12:49.663688+00:00"
   },
   "kaarten": [
     {
@@ -80586,6 +80586,14 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T18:05:09.883639+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
@@ -85060,6 +85068,14 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T18:05:09.917859+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
             }
           }
         ]
@@ -100514,6 +100530,181 @@
       "needs": [
         "voice",
         "image"
+      ]
+    },
+    {
+      "id": "kbv2-07324d80",
+      "begrip": "Analyseert alles",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Scanning is het actief onderzoeken en verwerken van beschikbare informatie.",
+        "laag2": "Scanning geeft aan dat informatie wordt verzameld, vergeleken en geanalyseerd.",
+        "laag3": "Scanning ondersteunt analyse, herkenning en besluitvorming door relevante gegevens uit de omgeving of kennisstructuur te verwerken.",
+        "laag4": "Binnen Spark is scanning een actieve verwerkingsstatus waarin informatie, context, kennis en signalen worden onderzocht om patronen, verbanden of bruikbare inzichten te vinden voordat een reactie of actie volgt."
+      },
+      "ws5": {
+        "wie": "Spark, systemen, gebruikers",
+        "wat": "een actief analyseproces",
+        "wanneer": "tijdens verwerking van informatie",
+        "waar": "in kennis, context, systemen en omgevingen",
+        "waarom": "om relevante inzichten of verbanden te vinden",
+        "hoe": "door informatie te verzamelen, vergelijken en analyseren"
+      },
+      "tags": [
+        "scanning",
+        "analyseren",
+        "verwerking",
+        "onderzoek",
+        "detectie",
+        "waarneming",
+        "patroonherkenning",
+        "context",
+        "kennis",
+        "informatie",
+        "verbanden",
+        "observatie",
+        "systeem",
+        "actief",
+        "emotie",
+        "neutraalscanning",
+        "analyseren",
+        "verwerking",
+        "onderzoek",
+        "detectie",
+        "waarneming",
+        "patroonherkenning",
+        "context",
+        "kennis",
+        "informatie",
+        "verbanden",
+        "observatie",
+        "systeem",
+        "actief",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "analyseren",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-12809d56",
+          "begrip": "waarneming",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f83c2190",
+          "begrip": "opslaan",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T18:12:49.663667+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T18:10:35.420640+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T18:12:45.537584+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T18:12:45.670322+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T18:12:45.675131+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T18:12:49.905005+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T18:12:49.909825+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/e1f9b44ca977"
+        ]
+      },
+      "needs": [
+        "voice"
       ]
     }
   ]

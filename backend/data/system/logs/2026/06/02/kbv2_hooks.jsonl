@@ -841,3 +841,7 @@
 {"ts": "2026-06-02T18:05:09.848575+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "mode (kleding)", "lade": "voelen", "active": "True", "is_new": "True"}}
 {"ts": "2026-06-02T18:05:09.883546+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Aarde planten", "lade": "doen", "active": "True", "is_new": "True"}}
 {"ts": "2026-06-02T18:05:09.917768+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Pleister", "lade": "doen", "active": "True", "is_new": "True"}}
+{"ts": "2026-06-02T18:12:45.670224+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Analyseert alles", "lade": "inbox", "active": "False", "is_new": "True"}}
+{"ts": "2026-06-02T18:12:45.675139+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Analyseert alles", "found": "5"}}
+{"ts": "2026-06-02T18:12:49.904896+00:00", "module": "kbv2_hooks", "fn": "register_in_vocab", "phase": "event", "intent": "vocab-koppeling", "detail": {"begrip": "Analyseert alles", "lade": "doen", "active": "True", "is_new": "False"}}
+{"ts": "2026-06-02T18:12:49.909834+00:00", "module": "kbv2_hooks", "fn": "compute_verbanden", "phase": "event", "intent": "verbanden-graph", "detail": {"begrip": "Analyseert alles", "found": "5"}}

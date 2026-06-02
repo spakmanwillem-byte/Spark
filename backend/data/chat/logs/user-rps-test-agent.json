@@ -1,0 +1,79 @@
+{
+  "user_id": "user-rps-test-agent",
+  "conversations": [
+    {
+      "id": "conv-dcd8851f",
+      "timestamp": "2026-06-02T20:13:44.552501+00:00",
+      "user_id": "user-rps-test-agent",
+      "user_naam": "Gebruiker",
+      "user_message": "speel steen papier schaar",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_open",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_game"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-5330ce4d",
+      "timestamp": "2026-06-02T20:13:44.630010+00:00",
+      "user_id": "user-rps-test-agent",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe vaak gewonnen",
+      "spark_response": "📊 **Steen-Papier-Schaar — jouw cijfers**\n- Gewonnen: **0**\n- Verloren: **0**\n- Gelijkspel: **0**\n- Langste streak: **0**\n- Achievements: **0**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_stats",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "rps_stats"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-b389e4ef",
+      "timestamp": "2026-06-02T20:13:44.693142+00:00",
+      "user_id": "user-rps-test-agent",
+      "user_naam": "Gebruiker",
+      "user_message": "reset score sps",
+      "spark_response": "Sessie-score gereset. Je lifetime stats blijven staan.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_reset",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "rps_reset"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-rps-test-agent",
+    "total_conversations": 3,
+    "last_updated": "2026-06-02T20:13:44.693142+00:00"
+  }
+}

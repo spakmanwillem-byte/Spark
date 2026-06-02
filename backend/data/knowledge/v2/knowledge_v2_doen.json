@@ -101756,7 +101756,7 @@
     },
     {
       "id": "kbv2-f51bb87d",
-      "begrip": "Leiding (als leidinggeven)",
+      "begrip": "Leiding",
       "lade": "doen",
       "status": "draft",
       "lagen": {
@@ -101864,7 +101864,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T14:52:20.148585+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T14:52:21.725454+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:10:34.182182+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -101893,6 +101893,22 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-06-02T14:52:28.870850+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:10:34.329267+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:10:34.334073+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 8
@@ -105109,9 +105125,86 @@
         "hoe": "door één optie uit de beschikbare mogelijkheden te selecteren"
       },
       "tags": [
-        "door één optie uit de beschikbare mogelijkheden te selecteren"
+        "keuze",
+        "kiezen",
+        "beslissing",
+        "selecteren",
+        "optie",
+        "interactie",
+        "richting",
+        "voortgang",
+        "besluitvorming",
+        "gebruiker",
+        "systeem",
+        "trigger",
+        "actie",
+        "neutraal"
       ],
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d8a0e593",
+          "begrip": "Wat zullen wij doen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "beslissing",
+            "interactie",
+            "keuze",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6ac86d79",
+          "begrip": "handelen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "beslissing",
+            "interactie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f34b9311",
+          "begrip": "voorstel",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "besluitvorming",
+            "keuze",
+            "neutraal",
+            "optie",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e13cf93",
+          "begrip": "opties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beslissing",
+            "keuze",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63a5d91b",
+          "begrip": "nemen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "beslissing",
+            "keuze",
+            "neutraal"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "manual",
         "ingedeeld_door": "user-001",
@@ -105121,7 +105214,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T19:24:58.232827+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T19:41:11.785996+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:09:16.205315+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -105153,6 +105246,22 @@
             "result": {
               "active": true,
               "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:09:16.364977+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:09:16.369439+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]
@@ -105189,10 +105298,88 @@
         "hoe": "door informatie te vergelijken, interpreteren en af te wegen"
       },
       "tags": [
-        "door informatie te vergelijken",
-        "interpreteren en af te wegen"
+        "denkt na",
+        "nadenken",
+        "analyse",
+        "verwerking",
+        "afweging",
+        "beoordeling",
+        "interpretatie",
+        "besluitvorming",
+        "context",
+        "kennis",
+        "observatie",
+        "reflectie",
+        "systeem",
+        "neutraal"
       ],
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "analyse",
+            "beoordeling",
+            "besluitvorming",
+            "context",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ceaab6a2",
+          "begrip": "Hmmm",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "afweging",
+            "analyse",
+            "beoordeling",
+            "besluitvorming",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-db4fb36c",
+          "begrip": "nadenken",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "analyse",
+            "besluitvorming",
+            "context",
+            "kennis",
+            "nadenken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b2c5463",
+          "begrip": "gedragsanalyse",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "analyse",
+            "besluitvorming",
+            "context",
+            "interpretatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "interpretatie",
+            "nadenken",
+            "neutraal"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "manual",
         "ingedeeld_door": "user-001",
@@ -105202,7 +105389,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-02T19:24:13.645559+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T19:42:55.563961+00:00",
+        "laatst_bewerkt_op": "2026-06-02T20:10:04.309965+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -105227,17 +105414,50 @@
               "active": true,
               "is_new": false
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:07:45.529102+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:07:49.671732+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:10:04.462538+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:10:04.585009+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
           }
         ]
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/c6b518680717"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {

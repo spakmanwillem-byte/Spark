@@ -383,6 +383,10 @@ app.include_router(trade_help_router, prefix="/api")
 from modules.cards import cards_router
 app.include_router(cards_router, prefix="/api")
 
+# Module 29: Steen-Papier-Schaar mini-game (v6_rps_001)
+from modules.games.rps.rps_routes import router as rps_router
+app.include_router(rps_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

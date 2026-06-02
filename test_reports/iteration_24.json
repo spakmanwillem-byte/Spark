@@ -1,0 +1,39 @@
+{
+  "summary": "v6_rps_001 Steen-Papier-Schaar mini-game: backend (11/11 pytest) + frontend (modal+flow) fully verified. All chat triggers (open/stats/reset), game flow (start/play x12/reset/stop), stats, cards endpoint, learning flag, achievements, XP delta and UI score-updates work correctly. Reset clears session without touching lifetime stats. Close button closes modal.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "RpsBark modal", "issues": ["KB-card images (steen/papier/schaar) are ~3 MB each at 1254x1254 — the choice tiles render blank/empty for ~1.5-2.5s on a fresh open. Consider a thumbnail variant served via /api/system-archive/file/{id}?w=160 or similar to make first-paint snappy. Functionally correct, just slow first impression."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rps_game.py",
+    "/app/test_reports/pytest/iter24_rps_results.xml"
+  ],
+  "action_items": [
+    "(Optional, low priority) Add thumbnail/resize support for the RPS KB-card images so the choice tiles paint instantly instead of after ~2s load."
+  ],
+  "critical_code_review_comments": [
+    "rps_service.play_round: small race-condition possible — if user clicks reset while a play() in flight, the play's setSession() may overwrite the reset state. In practice ~800ms setTimeout + disabled buttons during 'thinking' mitigate this, but technically the resetScore() can be hit via keyboard / other flows. Optional: cancel pending in-flight play on reset.",
+    "RpsBark.js click outside backdrop calls stopGame which also POSTs /games/rps/stop. This is desired per spec but worth noting that an accidental misclick on backdrop ends the session.",
+    "Backend rps_routes.RPS_CARDS hardcodes KB IDs and file IDs — fine for MVP, but if the KB items are ever recreated those IDs drift. Consider resolving lazily from the KB by stable key."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_rps_game.py"
+  ],
+  "success_rate": {
+    "backend": "100% (11/11)",
+    "frontend": "100% (all 4 flows: open, play, reset, close)"
+  },
+  "test_credentials": "Willem / Appelsap (user-001). Backend tests use TEST_USER='user-rps-test-agent'.",
+  "seed_data_creation": "TEST_USER 'user-rps-test-agent' created in /app/data/games/rps/sessions.json and stats.json by tests. Lifetime stats for user-001 confirmed wins>=5.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live at /app/backend/tests/test_rps_game.py — pytest passes in ~2.4s, 11 tests covering chat triggers, cards endpoint, start/play/stats/reset/stop, validation. For frontend: chat input placeholder is 'Vraag Spark iets...' (textarea). RpsBark testids: rps-bark, rps-pick-(steen|papier|schaar), rps-session-(wins|losses|ties), rps-lifetime-(wins|losses), rps-reset, rps-close. After 1 play() click, wait ~3000ms (800ms thinking timeout + API). For user-001 the lifetime is already >10 rounds so the 'Spark heeft je door' badge shows; use a fresh user_id if you need to verify the 'Spark leert nog' learning badge.",
+  "rca of the issue": "No bugs. All requested feature behavior matches spec. Only observation: 3 MB choice-card images cause a brief first-paint delay (cosmetic)."
+}

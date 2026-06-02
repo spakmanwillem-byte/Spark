@@ -192,6 +192,56 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, time_resp["type"])
         return response
 
+    # 0b2. RPS — Steen-Papier-Schaar mini-game (v6_rps_001)
+    try:
+        _txt = (text or "").lower().strip()
+        rps_open_triggers = (
+            "speel steen papier schaar", "steen papier schaar",
+            "rock paper scissors", "speel sps", "open spel sps",
+            "spelletje steen papier schaar", "speel sps",
+        )
+        rps_reset_triggers = (
+            "reset score steen papier schaar", "reset sps", "reset score sps",
+        )
+        rps_stats_triggers = (
+            "hoe vaak gewonnen", "hoe vaak verloren",
+            "score sps", "stand sps", "stand steen papier schaar",
+            "mijn rps stats", "rps stats",
+        )
+        if any(t in _txt for t in rps_open_triggers):
+            response.update({
+                "type": "open_game",
+                "action": "open_game_rps",
+                "message": "🎮 Steen — Papier — Schaar! Kies je zet.",
+            })
+            _save_log(req, response, "rps_open")
+            return response
+        if any(t in _txt for t in rps_reset_triggers):
+            from modules.games.rps.rps_service import reset_session as _rps_reset
+            _rps_reset(req.user_id)
+            response.update({
+                "type": "rps_reset",
+                "message": "Sessie-score gereset. Je lifetime stats blijven staan.",
+            })
+            _save_log(req, response, "rps_reset")
+            return response
+        if any(t in _txt for t in rps_stats_triggers):
+            from modules.games.rps.rps_service import get_stats as _rps_stats
+            stats = _rps_stats(req.user_id)
+            msg = (
+                f"📊 **Steen-Papier-Schaar — jouw cijfers**\n"
+                f"- Gewonnen: **{stats.get('wins', 0)}**\n"
+                f"- Verloren: **{stats.get('losses', 0)}**\n"
+                f"- Gelijkspel: **{stats.get('ties', 0)}**\n"
+                f"- Langste streak: **{stats.get('longest_streak', 0)}**\n"
+                f"- Achievements: **{len(stats.get('achievements', {}))}**"
+            )
+            response.update({"type": "rps_stats", "message": msg})
+            _save_log(req, response, "rps_stats")
+            return response
+    except Exception as ex:
+        print(f"[rps-router] failed: {ex}")
+
     # 0b3z. TRADER-HELP (v6_trade_help_001) — "hoe werkt de trader/bot/potjes?"
     try:
         _txt = (text or "").lower()

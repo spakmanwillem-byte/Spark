@@ -3,6 +3,7 @@ import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
 import { UserAvatar } from '../common/UserAvatar';
 import DnDBarkPanel from '../dnd/DnDBarkPanel';
+import { RpsBark } from '../games/RpsBark';
 import {
   MessageSquare, Send, Plus, Search, Users, Lock,
   Sparkles, Phone, Video, Bot, Circle, BookOpen, Zap,
@@ -282,6 +283,8 @@ export function GesprekkenPage({ onNavigate }) {
   const [sendingCommunity, setSendingCommunity] = useState(false);
   // v6_dnd_bark_001 — Spark World D&D bark-flow modal in community-tab
   const [showSparkWorld, setShowSparkWorld] = useState(false);
+  // v6_rps_001 — Steen-Papier-Schaar mini-game bark
+  const [rpsOpen, setRpsOpen] = useState(false);
 
   // v4_community_session_start_001 — alleen berichten vanaf inlog tonen
   const [communitySessionStart] = useState(() => {
@@ -696,6 +699,9 @@ export function GesprekkenPage({ onNavigate }) {
             try { localStorage.clear(); sessionStorage.clear(); } catch {}
             window.location.href = '/?deleted=1';
           }, 1500);
+        } else if (data.action === 'open_game_rps') {
+          // v6_rps_001 — open Steen-Papier-Schaar bark
+          setRpsOpen(true);
         }
 
         // TTS speak Spark's response — strip markdown for cleaner audio
@@ -1146,6 +1152,9 @@ export function GesprekkenPage({ onNavigate }) {
             </div>
           </div>
         )}
+
+        {/* v6_rps_001 — Steen-Papier-Schaar mini-game bark */}
+        <RpsBark userId={userId} open={rpsOpen} onClose={() => setRpsOpen(false)} />
       </div>
     </MainLayout>
   );

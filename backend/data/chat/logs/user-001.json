@@ -26794,11 +26794,198 @@
         "session_id": "default",
         "gesprek_nummer": 1022
       }
+    },
+    {
+      "id": "conv-e26056d7",
+      "timestamp": "2026-06-02T20:11:03.965691+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "speel steen papier schaar",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_open",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_game"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1023
+      }
+    },
+    {
+      "id": "conv-864dac9e",
+      "timestamp": "2026-06-02T20:11:04.118026+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoe vaak gewonnen",
+      "spark_response": "📊 **Steen-Papier-Schaar — jouw cijfers**\n- Gewonnen: **5**\n- Verloren: **2**\n- Gelijkspel: **5**\n- Langste streak: **3**\n- Achievements: **2**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_stats",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "rps_stats"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1024
+      }
+    },
+    {
+      "id": "conv-329e1c40",
+      "timestamp": "2026-06-02T20:11:04.284412+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "reset score sps",
+      "spark_response": "Sessie-score gereset. Je lifetime stats blijven staan.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_reset",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "rps_reset"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1025
+      }
+    },
+    {
+      "id": "conv-0ac363d9",
+      "timestamp": "2026-06-02T20:14:29.178873+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1026
+      }
+    },
+    {
+      "id": "conv-40356e8c",
+      "timestamp": "2026-06-02T20:14:29.207400+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1027
+      }
+    },
+    {
+      "id": "conv-8b1490c6",
+      "timestamp": "2026-06-02T20:14:31.915461+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "speel steen papier schaar",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_open",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_game"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1028
+      }
+    },
+    {
+      "id": "conv-e8ed8b77",
+      "timestamp": "2026-06-02T20:16:01.781266+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1029
+      }
+    },
+    {
+      "id": "conv-53e3cc6d",
+      "timestamp": "2026-06-02T20:16:01.820283+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1030
+      }
+    },
+    {
+      "id": "conv-4017f4df",
+      "timestamp": "2026-06-02T20:16:04.227931+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "speel steen papier schaar",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_open",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_game"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1031
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1022,
-    "last_updated": "2026-06-02T18:49:43.922495+00:00"
+    "total_conversations": 1031,
+    "last_updated": "2026-06-02T20:16:04.227931+00:00"
   }
 }

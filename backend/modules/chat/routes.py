@@ -168,17 +168,19 @@ async def process_message(req: ChatMessage):
             session_state.set_state(req.user_id, pending_wedervraag=None, pending_card_session=None, pending_wv_consent=None)
         return response
 
-    # 0b1. KB-Sound toggle — "geluid aan" / "geluid uit" (v6_kb_sound_001)
-    # MOET vóór action_intents en ambient-stop omdat "geluid uit" anders bij ambient-stop landt.
+    # 0b1. KB-Sound toggle — "sound aan" / "sound uit" (v6_kb_sound_001)
+    # Naamgeving consistent met tts/stt. "geluid aan/uit" blijft voor ambient.
     try:
         _txt = (text or "").lower().strip()
         sound_on = _txt in (
-            "geluid aan", "kaart geluid aan", "kaartgeluid aan",
-            "speel geluiden af", "kb geluid aan",
+            "sound aan", "kaart geluid aan", "kaartgeluid aan",
+            "kb geluid aan", "kb sound aan", "kaart sound aan",
+            "speel geluiden af",
         )
         sound_off = _txt in (
-            "geluid uit", "kaart geluid uit", "kaartgeluid uit",
-            "stop geluiden", "kb geluid uit",
+            "sound uit", "kaart geluid uit", "kaartgeluid uit",
+            "kb geluid uit", "kb sound uit", "kaart sound uit",
+            "stop kaart geluiden",
         )
         if sound_on or sound_off:
             from modules.core.storage import load_json as _lj, save_json as _sj

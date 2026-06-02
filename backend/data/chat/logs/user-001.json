@@ -27565,11 +27565,103 @@
         "session_id": "default",
         "gesprek_nummer": 1055
       }
+    },
+    {
+      "id": "conv-c2e02e91",
+      "timestamp": "2026-06-02T21:07:31.808719+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "sound aan",
+      "spark_response": "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1056
+      }
+    },
+    {
+      "id": "conv-918ce7d2",
+      "timestamp": "2026-06-02T21:07:31.984533+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geluid uit",
+      "spark_response": "Achtergrondgeluid uitgezet. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1057
+      }
+    },
+    {
+      "id": "conv-bf0036ea",
+      "timestamp": "2026-06-02T21:07:32.135274+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "sound uit",
+      "spark_response": "🔇 Kaart-geluiden zijn UIT. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1058
+      }
+    },
+    {
+      "id": "conv-8b248c11",
+      "timestamp": "2026-06-02T21:07:32.325808+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "kaart geluid aan",
+      "spark_response": "🔊 Kaart-geluiden zijn AAN. Als ik een begrip noem dat een geluid heeft, hoor je het.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kb_sound_toggle",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "kb_sound_toggle"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1059
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1055,
-    "last_updated": "2026-06-02T21:01:15.269876+00:00"
+    "total_conversations": 1059,
+    "last_updated": "2026-06-02T21:07:32.325808+00:00"
   }
 }

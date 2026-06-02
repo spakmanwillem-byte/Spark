@@ -415,6 +415,74 @@ async def delete_secondary_audio(card_id: str, archive_id: str, lade: Optional[s
     raise HTTPException(404, "Kaart niet gevonden")
 
 
+# ---------------------------------------------------------------------------
+# v6_kbv2_audio_kind_001 — Toggle audio-kind (spraak ↔ geluid)
+# ---------------------------------------------------------------------------
+
+def _normalize_kind(kind: str) -> str:
+    k = (kind or "").lower().strip()
+    return "geluid" if k in ("geluid", "sound", "sfx") else "spraak"
+
+
+@router.patch("/voice/kind/{card_id}")
+@traced(intent="toggle primaire voice-kind (spraak/geluid)", module="kbv2", log_args=False)
+async def def_primary_voice_kind(
+    card_id: str,
+    kind: str,
+    lade: Optional[str] = None,
+    user_id: str = "user-000",
+):
+    """Zet kaart.media.voice_kind = 'spraak' | 'geluid'. Voor backwards-compat is default 'spraak'."""
+    kind = _normalize_kind(kind)
+    target = lade or _resolve_lade(card_id)
+    _patch_card_media(card_id, target, {"voice_kind": kind}, user_id)
+    return {"success": True, "voice_kind": kind}
+
+
+@router.patch("/voice/secondary/kind/{card_id}")
+@traced(intent="toggle extra-audio-kind (spraak/geluid)", module="kbv2", log_args=False)
+async def def_secondary_voice_kind(
+    card_id: str,
+    archive_id: str,
+    kind: str,
+    lade: Optional[str] = None,
+    user_id: str = "user-000",
+):
+    """Update extra_audio[archive_id].kind in lade OF inbox."""
+    kind = _normalize_kind(kind)
+    target_lade = lade or _resolve_lade(card_id)
+    if target_lade and target_lade in service.LADES:
+        cur = load_json(service._lade_path(target_lade), default={"kaarten": []})
+        for k in cur.get("kaarten", []):
+            if k.get("id") == card_id:
+                extras = (k.get("media") or {}).get("extra_audio") or []
+                hit = False
+                for x in extras:
+                    if x.get("archive_id") == archive_id:
+                        x["kind"] = kind
+                        hit = True
+                if not hit:
+                    raise HTTPException(404, f"Extra audio '{archive_id}' niet gevonden")
+                service.edit_card(card_id, target_lade, {"media": {"extra_audio": extras}}, user_id=user_id)
+                return {"success": True, "kind": kind, "archive_id": archive_id}
+    ip = service._inbox_path()
+    inbox = load_json(ip, default={"kaarten": []})
+    for k in inbox.get("kaarten", []):
+        if k.get("id") == card_id:
+            extras = (k.get("media") or {}).get("extra_audio") or []
+            hit = False
+            for x in extras:
+                if x.get("archive_id") == archive_id:
+                    x["kind"] = kind
+                    hit = True
+            if not hit:
+                raise HTTPException(404, f"Extra audio '{archive_id}' niet gevonden")
+            k.setdefault("media", {})["extra_audio"] = extras
+            save_json(ip, inbox)
+            return {"success": True, "kind": kind, "archive_id": archive_id}
+    raise HTTPException(404, "Kaart niet gevonden")
+
+
 
 # ---------------------------------------------------------------------------
 # v6_kbv2_media_legacy_001 — Legacy file-serve route

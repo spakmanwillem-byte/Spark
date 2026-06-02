@@ -4,7 +4,8 @@ import { toast } from 'sonner';
 import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
-  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge
+  Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge,
+  Volume2
 } from 'lucide-react';
 import { KbV2TagCuration } from './KbV2TagCuration';
 
@@ -1017,6 +1018,22 @@ function MediaSection({ card, currentLade, onUpdated }) {
     onUpdated && onUpdated();
   };
 
+  // v6_kbv2_audio_kind_001 — toggle audio-kind (spraak ↔ geluid)
+  const togglePrimaryKind = async () => {
+    const cur = (media.voice_kind || 'spraak');
+    const next = cur === 'spraak' ? 'geluid' : 'spraak';
+    const qs = new URLSearchParams({ kind: next, user_id: 'user-001', ...(currentLade ? { lade: currentLade } : {}) });
+    await fetch(`${API}/api/kb/v2/media/voice/kind/${card.id}?${qs}`, { method: 'PATCH' });
+    onUpdated && onUpdated();
+  };
+
+  const toggleExtraKind = async (archive_id, currentKind) => {
+    const next = (currentKind || 'spraak') === 'spraak' ? 'geluid' : 'spraak';
+    const qs = new URLSearchParams({ archive_id, kind: next, user_id: 'user-001', ...(currentLade ? { lade: currentLade } : {}) });
+    await fetch(`${API}/api/kb/v2/media/voice/secondary/kind/${card.id}?${qs}`, { method: 'PATCH' });
+    onUpdated && onUpdated();
+  };
+
   // v6_kbv2_media_audio2_001 — 2e audio opname (spraak of geluid)
   const startExtraRecord = async () => {
     setErr('');
@@ -1081,6 +1098,18 @@ function MediaSection({ card, currentLade, onUpdated }) {
           )}
           {media.voice_url && (
             <>
+              {/* v6_kbv2_audio_kind_001 — Klikbare kind-toggle (🎤 spraak ↔ 🔊 geluid) */}
+              <button data-testid="kbv2-voice-kind-toggle" onClick={togglePrimaryKind}
+                title={`Wissel naar ${(media.voice_kind || 'spraak') === 'spraak' ? 'geluid' : 'spraak'}`}
+                className={`flex items-center gap-1 px-1.5 py-1 rounded text-[10px] font-semibold border transition-colors ${
+                  (media.voice_kind || 'spraak') === 'spraak'
+                    ? 'bg-rose-500/20 text-rose-200 border-rose-500/40 hover:bg-rose-500/30'
+                    : 'bg-indigo-500/20 text-indigo-200 border-indigo-500/40 hover:bg-indigo-500/30'
+                }`}>
+                {(media.voice_kind || 'spraak') === 'spraak'
+                  ? <><Mic className="w-3 h-3" /> SPRAAK</>
+                  : <><Volume2 className="w-3 h-3" /> GELUID</>}
+              </button>
               <audio data-testid="kbv2-voice-audio" controls className="h-7 flex-1" src={API + media.voice_url} />
               <button data-testid="kbv2-voice-delete" onClick={deleteVoice}
                 title="Voice + transcript wissen"
@@ -1132,9 +1161,17 @@ function MediaSection({ card, currentLade, onUpdated }) {
           <div className="space-y-1">
             {(media.extra_audio || []).map((a, i) => (
               <div key={a.archive_id || i} data-testid={`kbv2-extra-audio-${i}`} className="flex items-center gap-2 bg-slate-900/50 rounded px-2 py-1">
-                <span className={`text-[9px] px-1.5 py-0.5 rounded font-semibold ${a.kind === 'spraak' ? 'bg-rose-500/20 text-rose-300' : 'bg-indigo-500/20 text-indigo-300'}`}>
-                  {a.kind === 'spraak' ? 'SPRAAK' : 'GELUID'}
-                </span>
+                {/* v6_kbv2_audio_kind_001 — Klikbare kind-toggle */}
+                <button data-testid={`kbv2-extra-kind-toggle-${i}`}
+                  onClick={() => toggleExtraKind(a.archive_id, a.kind)}
+                  title={`Wissel naar ${a.kind === 'spraak' ? 'geluid' : 'spraak'}`}
+                  className={`flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded font-semibold transition-colors ${
+                    a.kind === 'spraak'
+                      ? 'bg-rose-500/20 text-rose-300 hover:bg-rose-500/30'
+                      : 'bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30'
+                  }`}>
+                  {a.kind === 'spraak' ? <><Mic className="w-3 h-3" /> SPRAAK</> : <><Volume2 className="w-3 h-3" /> GELUID</>}
+                </button>
                 <audio controls className="h-6 flex-1" src={API + a.url} />
                 <button onClick={() => deleteExtraAudio(a.archive_id)}
                   data-testid={`kbv2-extra-delete-${i}`}

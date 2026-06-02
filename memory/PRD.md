@@ -1,5 +1,29 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-02 — sessie 21D — KB v2 audio-kind toggle)
+
+### 🎤↔️🔊 v6_kbv2_audio_kind_001 — Spraak/Geluid wissel-knop op kaart-audio
+**Probleem**: Bij KB v2 kaart-audio (primaire `voice_url`) was geen onderscheid mogelijk tussen "gesproken" (ingesproken/spraak) en "geluid van" (sfx, bv. paard-hinniken). Extra audio had wel een keuze bij upload, maar niet wijzigbaar achteraf.
+
+**Oplossing**:
+- **Backend** (`modules/kb_v2/media_routes.py`):
+  - Nieuw veld `media.voice_kind` op kaart (default 'spraak', backwards compat).
+  - `PATCH /api/kb/v2/media/voice/kind/{card_id}?kind=spraak|geluid` — toggle primaire voice.
+  - `PATCH /api/kb/v2/media/voice/secondary/kind/{card_id}?archive_id=X&kind=Y` — toggle een specifiek extra-audio item.
+- **Frontend** (`KennisbankV2Page.js` MediaSection):
+  - Klikbare badge bij élke audio-rij: `🎤 SPRAAK` (roze) ↔ `🔊 GELUID` (indigo) — één klik wisselt direct.
+  - Gebruikt `Mic` en `Volume2` lucide-icons.
+  - Test-ids: `kbv2-voice-kind-toggle` (primair), `kbv2-extra-kind-toggle-{i}` (per extra audio rij).
+
+**Verified via curl**:
+- Primary toggle: spraak → geluid → spraak (persisted in JSON, success:true response).
+- Secondary toggle: voor random extra-audio (kbv2-089254f8 / 9d1e1ccbbbc5) spraak → geluid → spraak.
+
+**Toekomstige use-case**: in combinatie met de "sps"-tag (sessie 21C) kunnen de Steen/Papier/Schaar/etc. KB-kaarten "GELUID"-audio bevatten (actie-geluiden) die door de RPS bark afgespeeld kunnen worden bij de juiste momenten (bv. "geluid van" een schaar knippt → bij win/loss).
+
+---
+
+
 ## Completed (2026-06-02 — sessie 21C — RPS V2: korte triggers, community bots, help-integratie)
 
 ### 🎮 v6_rps_001b — RPS uitbreidingen

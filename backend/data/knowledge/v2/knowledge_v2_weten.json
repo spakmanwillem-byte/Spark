@@ -35651,10 +35651,42 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:45:27.157707+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:45:27.161603+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:45:27.778165+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:45:27.782052+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T20:38:37.153919+00:00"
+        "laatst_bewerkt_op": "2026-06-02T20:45:27.594312+00:00"
       },
       "media": {
         "voice_url": null,
@@ -106274,13 +106306,14 @@
           ]
         },
         {
-          "kaart_id": "kbv2-497391ba",
-          "begrip": "Peer",
-          "lade": "weten",
-          "overlap": 2,
+          "kaart_id": "kbv2-skel-5a2ab536",
+          "begrip": "groente",
+          "lade": "doen",
+          "overlap": 3,
           "shared_tags": [
-            "fruit",
-            "natuur"
+            "natuur",
+            "plant",
+            "voeding"
           ]
         }
       ],
@@ -106307,20 +106340,52 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:45:13.393308+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:45:13.397215+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T20:45:13.930789+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T20:45:13.934600+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T20:45:13.745042+00:00"
       },
       "media": {
         "voice_url": "/api/system-archive/file/45537b2e7af0",
         "voice_transcript": "Appel",
         "image_urls": [
           "/api/system-archive/file/39cd0666d8cf"
-        ]
+        ],
+        "voice_kind": "spraak"
       },
-      "needs": [
-        "voice",
-        "image"
-      ]
+      "needs": []
     },
     {
       "id": "kbv2-b2441a0e",

@@ -19263,6 +19263,16 @@
           ]
         },
         {
+          "kaart_id": "kbv2-1c6d745f",
+          "begrip": "Leven",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "aarde",
+            "natuur"
+          ]
+        },
+        {
           "kaart_id": "kbv2-963fa0a2",
           "begrip": "Natuur",
           "lade": "weten",
@@ -19280,16 +19290,6 @@
           "shared_tags": [
             "aarde",
             "natuur"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-1097c14a",
-          "begrip": "Vuursteen",
-          "lade": "weten",
-          "overlap": 2,
-          "shared_tags": [
-            "natuur",
-            "steen"
           ]
         }
       ],
@@ -19316,17 +19316,52 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:21:38.660517+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:21:38.664376+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:21:39.874104+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:21:39.877886+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:21:39.687489+00:00"
       },
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/2f486d95b929"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {

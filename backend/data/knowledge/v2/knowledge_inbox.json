@@ -7529,8 +7529,26 @@
               "active": false,
               "is_new": true
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:23:39.505914+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T19:23:39.509728+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:23:39.375942+00:00"
       },
       "_inbox_reason": "no_match",
       "_classifier_scores": {
@@ -7542,11 +7560,12 @@
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/12d1aa8fb1ac"
+        ]
       },
       "needs": [
-        "voice",
-        "image"
+        "voice"
       ]
     },
     {
@@ -130964,6 +130983,143 @@
       "needs": [
         "voice",
         "image"
+      ]
+    },
+    {
+      "id": "kbv2-2c6ae150",
+      "begrip": "Schaar",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:20:27.867495+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:20:49.470907+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:20:49.601125+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/7e90fa41d0b3"
+        ]
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-2248bad7",
+      "begrip": "Gewonnen",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:22:38.337825+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:23:01.731444+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T19:23:01.863945+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/864af086c6ce"
+        ]
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-a406125f",
+      "begrip": "Denkt na",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-02T19:24:13.645559+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T19:24:22.998718+00:00"
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/0c728b651e50"
+        ]
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice"
       ]
     }
   ]

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { AuthAPI } from '../../api';
 import { UserAvatar } from '../common/UserAvatar';
+import { BarkModal } from '../shared/BarkModal';
 import { 
   Users, User, Star, Calendar, BarChart2, Edit3, 
   Trash2, Shield, Clock, MessageSquare, Award,

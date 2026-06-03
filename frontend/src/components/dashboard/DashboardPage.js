@@ -190,43 +190,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
           </div>
         </div>
 
-        {/* v6_dashboard_fin_001 — Saldo + Vermogen widget */}
-        {finStats && finStats.success && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4" data-testid="dashboard-fin-widget">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b, #b45309)' }}>
-                  <TrendingUp className="w-4 h-4 text-white" />
-                </div>
-                <h3 className="text-sm font-bold text-white">Saldo & Vermogen</h3>
-              </div>
-              <p className="text-2xl font-bold text-amber-400" data-testid="totaal-vermogen">€{(finStats.totaal_vermogen_eur || 0).toFixed(2)}</p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-              <div className="bg-slate-800/40 rounded-lg p-2.5">
-                <p className="text-[10px] text-slate-500 uppercase">Cash (EUR)</p>
-                <p className="text-base font-bold text-white">€{(finStats.cash_eur || 0).toFixed(2)}</p>
-              </div>
-              <div className="bg-slate-800/40 rounded-lg p-2.5">
-                <p className="text-[10px] text-slate-500 uppercase">Potjes ({finStats.potjes_count || 0})</p>
-                <p className="text-base font-bold text-emerald-400">€{(finStats.potjes_eur || 0).toFixed(2)}</p>
-                {finStats.potjes_open_count > 0 && (
-                  <p className="text-[9px] text-amber-400">{finStats.potjes_open_count} open trades</p>
-                )}
-              </div>
-              <div className="bg-slate-800/40 rounded-lg p-2.5">
-                <p className="text-[10px] text-slate-500 uppercase">ROAR ({finStats.roar_tokens || 0})</p>
-                <p className="text-base font-bold text-amber-400">€{(finStats.roar_value_eur || 0).toFixed(2)}</p>
-                <p className="text-[9px] text-slate-500">@€{(finStats.roar_token_price_eur || 0).toFixed(2)}</p>
-              </div>
-              <div className="bg-slate-800/40 rounded-lg p-2.5">
-                <p className="text-[10px] text-slate-500 uppercase">Bitvavo</p>
-                <p className="text-base font-bold text-blue-400">€{(finStats.bitvavo_eur || 0).toFixed(2)}</p>
-                {!finStats.bitvavo_eur && <p className="text-[9px] text-slate-600">geen sync</p>}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* v6_dashboard_fin_001 — Saldo + Vermogen widget VERWIJDERD (sessie 23).
+            Financiële info staat al in /modules/wallet en /modules/trade — dashboard hoeft het niet te dupliceren. */}
 
         {/* Main Grid */}
         <div className="grid grid-cols-12 gap-4">

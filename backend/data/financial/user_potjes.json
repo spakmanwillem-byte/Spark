@@ -410,7 +410,7 @@
           "position": {
             "is_open": true,
             "entry_price": 214.34001334626683,
-            "highest_price": 214.92,
+            "highest_price": 215.02,
             "trailing_active": false,
             "entry_time": "2026-06-03T12:04:22.221545+00:00",
             "amount_eur": 10.0
@@ -480,22 +480,32 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 214.76002344481543,
+            "highest_price": 215.02,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-06-03T12:09:29.634062+00:00",
+            "amount_eur": 10.0
           },
-          "market": "BTC-EUR",
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-29T19:09:40.956066+00:00",
-          "trade_log": [],
-          "last_action": "",
+          "trade_log": [
+            {
+              "ts": "2026-06-03T12:09:29.634062+00:00",
+              "side": "BUY",
+              "price": 214.76002344481543,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-00082007e6ca",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "BUY @ €214.76",
           "live_value": 10.0
         },
         {
@@ -506,22 +516,32 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
+            "is_open": true,
+            "entry_price": 214.8900019678493,
+            "highest_price": 214.8900019678493,
             "trailing_active": false,
-            "entry_time": null
+            "entry_time": "2026-06-03T12:10:02.819522+00:00",
+            "amount_eur": 10.0
           },
-          "market": "BTC-EUR",
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-05-29T19:09:40.956066+00:00",
-          "trade_log": [],
-          "last_action": "",
+          "trade_log": [
+            {
+              "ts": "2026-06-03T12:10:02.819522+00:00",
+              "side": "BUY",
+              "price": 214.8900019678493,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-000820089e8d",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "BUY @ €214.89",
           "live_value": 10.0
         }
       ],

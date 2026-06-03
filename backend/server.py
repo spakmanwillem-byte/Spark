@@ -387,6 +387,10 @@ app.include_router(cards_router, prefix="/api")
 from modules.games.rps.rps_routes import router as rps_router
 app.include_router(rps_router, prefix="/api")
 
+# Module 30: Pre-deploy admin reset (v6_pre_deploy_reset_001)
+from modules.admin.pre_deploy_routes import router as pre_deploy_router
+app.include_router(pre_deploy_router, prefix="/api")
+
 
 
 # ============== HEALTH & ROOT ==============

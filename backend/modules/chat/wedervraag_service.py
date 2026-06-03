@@ -17,6 +17,11 @@ from modules.core.storage import load_json, save_json
 
 KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 
+# v6_wedervraag_disable_001 — Globale toggle. User vult kaarten zelf sneller in
+# dan de vraag-flow biedt; uitgezet om chat-flow niet te verstoren.
+# Zet op True om de "Wat houdt X eigenlijk in?" vragen weer aan te zetten.
+WEDERVRAAG_ENABLED = False
+
 # Prioriteit-volgorde: welke velden vragen we eerst?
 # (Wat/Wanneer/Waar zijn meest concreet, Wie/Waarom/Hoe meer reflectief)
 FIELD_PRIORITY = ["wat", "wanneer", "waar", "wie", "waarom", "hoe"]
@@ -166,7 +171,12 @@ def kick_off(entry: dict, max_questions: int = 2) -> dict:
     """
     Genereer eerste wedervraag voor een nieuwe snap.
     Returns {field, question, asked_count: 1} of None als niks te vragen.
+
+    v6_wedervraag_disable_001 — Globale uitschakeling via WEDERVRAAG_ENABLED.
+    User vult kaarten zelf sneller in en de tussenvragen verstoren de flow.
     """
+    if not WEDERVRAAG_ENABLED:
+        return None
     field = pick_next_field(entry)
     if not field:
         return None
@@ -185,6 +195,8 @@ def continue_flow(pending: dict) -> dict:
     pending = vorige state {entry_id, field, asked_count, max_questions}
     Returns next state of None.
     """
+    if not WEDERVRAAG_ENABLED:
+        return None
     entry = _find_entry(pending.get("entry_id"))
     if not entry:
         return None

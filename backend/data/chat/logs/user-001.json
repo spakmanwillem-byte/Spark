@@ -29806,11 +29806,67 @@
         "session_id": "default",
         "gesprek_nummer": 1140
       }
+    },
+    {
+      "id": "conv-dc3e5746",
+      "timestamp": "2026-06-03T17:21:54.559495+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Een banaan is een gele kromme vrucht.",
+      "spark_response": "**Banaan**: Een banaan is een zoete, eetbare vrucht die groeit aan een tropische plant.\n\n**Vrucht**: Een vrucht is het deel van een plant dat zaden bevat en helpt bij de verspreiding van de plant.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **gele, kromme** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Banaan"
+          },
+          {
+            "begrip": "Vrucht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gele",
+          "kromme"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1141
+      }
+    },
+    {
+      "id": "conv-85d54fb6",
+      "timestamp": "2026-06-03T17:21:54.738873+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus heeft een fiets.",
+      "spark_response": "📝 Genoteerd: **Lotus** heeft een fiets · **Lotus Martens** heeft een fiets.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1142
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1140,
-    "last_updated": "2026-06-03T17:18:30.089879+00:00"
+    "total_conversations": 1142,
+    "last_updated": "2026-06-03T17:21:54.738873+00:00"
   }
 }

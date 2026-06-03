@@ -28,6 +28,10 @@ export function UsersAdminPage({ onNavigate }) {
 
   // Persoonskaarten per user (juist schema: persons, gradatie, relatie, tags)
   const [personCards, setPersonCards] = useState([]);
+
+  // v6_admin_users_bark_001 — vervang native confirm/alert door BarkModal
+  const [bark, setBark] = useState(null);
+  // bark shape: { mode: 'confirm'|'info', begrip, title, text, tone, onConfirm }
   const [cardLoading, setCardLoading] = useState(false);
 
   // Gesprekslogs per user
@@ -211,14 +215,25 @@ export function UsersAdminPage({ onNavigate }) {
   };
 
   const handleResetPassword = async (user) => {
-    if (!user) return;
-    if (!confirm(`Sleutelwoord van "${user.naam}" resetten naar 'Welkom01'?\n\nDe gebruiker kan hiermee direct inloggen.`)) return;
-    try {
-      const res = await AuthAPI.resetPassword(user.id);
-      alert(`✓ Gelukt — sleutelwoord voor ${user.naam} is nu: ${res.sleutelwoord}`);
-    } catch (err) {
-      alert(err?.response?.data?.detail || 'Kon sleutelwoord niet resetten');
+    if (!user) {
+      setBark({ mode: 'info', begrip: 'Toegang geweigerd', title: 'Geen gebruiker geselecteerd', text: 'Selecteer eerst een gebruiker in de lijst.', tone: 'warn' });
+      return;
     }
+    setBark({
+      mode: 'confirm',
+      begrip: 'Admin geactiveerd',
+      title: `Sleutelwoord resetten?`,
+      text: `Sleutelwoord van "${user.naam}" wordt gereset naar 'Welkom01'. De gebruiker kan hiermee direct inloggen.`,
+      tone: 'warn',
+      onConfirm: async () => {
+        try {
+          const res = await AuthAPI.resetPassword(user.id);
+          setBark({ mode: 'info', begrip: 'Admin geactiveerd', title: 'Gereset', text: `Sleutelwoord voor ${user.naam} is nu: ${res.sleutelwoord}`, tone: 'success' });
+        } catch (err) {
+          setBark({ mode: 'info', begrip: 'Toegang geweigerd', title: 'Reset mislukt', text: err?.response?.data?.detail || 'Kon sleutelwoord niet resetten', tone: 'error' });
+        }
+      },
+    });
   };
 
   const getGradatieInfo = (niveau) => {
@@ -826,6 +841,30 @@ export function UsersAdminPage({ onNavigate }) {
           </div>
         </div>
       )}
+
+      {/* v6_admin_users_bark_001 — Bark voor reset/feedback flows */}
+      <BarkModal
+        open={!!bark}
+        onClose={() => setBark(null)}
+        begrip={bark?.begrip}
+        title={bark?.title}
+        text={bark?.text}
+        tone={bark?.tone}
+        primary={bark?.mode === 'confirm' ? {
+          label: 'Ja, reset',
+          testId: 'bark-confirm-reset',
+          onClick: async () => {
+            const fn = bark.onConfirm;
+            setBark(null);
+            if (fn) await fn();
+          },
+        } : undefined}
+        secondary={bark?.mode === 'confirm' ? {
+          label: 'Annuleer',
+          testId: 'bark-cancel-reset',
+          onClick: () => setBark(null),
+        } : undefined}
+      />
     </MainLayout>
   );
 }

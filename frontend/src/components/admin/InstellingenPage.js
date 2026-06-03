@@ -1066,6 +1066,7 @@ function PreDeployResetPanel({ userId, setShowBark }) {
     clear_accounting: true,
     clear_shadow_pots: true,
     zero_all_roar: true,
+    clear_bots_registry: true,
   });
   const [busy, setBusy] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -1108,6 +1109,7 @@ function PreDeployResetPanel({ userId, setShowBark }) {
     clear_accounting: 'Boekhouding wissen (transactions = [])',
     clear_shadow_pots: 'Shadow-pots wissen',
     zero_all_roar: 'Alle ROAR balances → 0',
+    clear_bots_registry: 'Bots-registry leeg (verwijder stale user-bots)',
   };
 
   return (

@@ -30,6 +30,7 @@ USER_POTJES_FILE = DATA / "financial" / "user_potjes.json"
 CAPITAL_BASELINE_FILE = DATA / "trade" / "capital_baseline.json"
 ACCOUNTING_FILE = DATA / "accounting" / "transactions.json"
 SHADOW_POTS_FILE = DATA / "trade" / "shadow_pots.json"
+BOTS_REGISTRY_FILE = DATA / "trade" / "bots_registry_state.json"
 
 DEFAULT_POTS_COUNT = 12
 DEFAULT_POT_CAPITAL = 10.0
@@ -46,6 +47,7 @@ class ResetBody(BaseModel):
     clear_accounting: bool = False     # accounting/transactions.json leeg
     clear_shadow_pots: bool = False    # shadow_pots.json clean
     zero_all_roar: bool = False        # alle ROAR balances → 0
+    clear_bots_registry: bool = False  # bots_registry_state.json bots=[]
 
 
 def _now() -> str:
@@ -165,6 +167,17 @@ def pre_deploy_reset(body: ResetBody):
         save_json(SHADOW_POTS_FILE, {"shadows": [], "_cleared_at": _now(), "_cleared_by": body.by_user})
         result["shadow_pots_cleared"] = {"previous_shadows": prev_count}
 
+    # 7. Bots registry clean (verwijdert oude/stale bot-entries)
+    if body.clear_bots_registry:
+        prev_br = load_json(BOTS_REGISTRY_FILE, default={"bots": []})
+        prev_count = len(prev_br.get("bots", []))
+        save_json(BOTS_REGISTRY_FILE, {
+            "bots": [],
+            "saved_at": _now(),
+            "_cleared_by": body.by_user,
+        })
+        result["bots_registry_cleared"] = {"previous_bots": prev_count}
+
     return result
 
 
@@ -176,6 +189,7 @@ def health_status():
     up = load_json(USER_POTJES_FILE, default={"users": {}})
     bl = load_json(CAPITAL_BASELINE_FILE, default={})
     acc = load_json(ACCOUNTING_FILE, default={"transactions": []})
+    br = load_json(BOTS_REGISTRY_FILE, default={"bots": []})
 
     pots_summary = {}
     for uid, info in up.get("users", {}).items():
@@ -190,4 +204,5 @@ def health_status():
         "pots_per_user": pots_summary,
         "baseline_users": list(bl.keys()),
         "accounting_tx_count": len(acc.get("transactions", [])),
+        "bots_registry_count": len(br.get("bots", [])),
     }

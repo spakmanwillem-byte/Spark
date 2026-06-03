@@ -27657,11 +27657,141 @@
         "session_id": "default",
         "gesprek_nummer": 1059
       }
+    },
+    {
+      "id": "conv-0b8c2e08",
+      "timestamp": "2026-06-02T21:10:09.433240+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1060
+      }
+    },
+    {
+      "id": "conv-4b931abe",
+      "timestamp": "2026-06-02T21:10:09.461198+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1061
+      }
+    },
+    {
+      "id": "conv-eae7477a",
+      "timestamp": "2026-06-02T21:10:12.572743+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "help",
+      "spark_response": "**Help voor jou (admin)**\n\n_Iedereen kan dit:_\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte' — blijft door na F5_\n  • **Stop een lopend proces** — _bv. 'stop' of 'klaar' — beëindigt actieve sessie (W-woord card, kennis-leer, etc.)_\n  • **Spark's eigen anker** — _bv. 'onthoud voor jezelf: ...' (parkeert in Spark's user-000 scratch) of 'wat heb je vandaag geleerd?'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Testament aanmaken** — _bv. 'maak testament aan' → 'voeg toe aan testament: <tekst>' → 'bekijk testament'_\n  • **Survivalgids aanmaken** — _bv. 'maak survivalgids aan' → 'voeg toe aan survivalgids: <tekst>'_\n  • **Documenten bekijken** — _via Mijn Archief → tab Documenten (JSON download mogelijk)_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Privacy / Cookies / Voorwaarden** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n  • **Kennisbank v2 — audit** — _bv. 'audit kennis' / 'wat mist' — samenvatting van lege/lage-vertrouwen kaarten_\n  • **Kennisbank v2 — inbox** — _bv. 'hoeveel onbeantwoord' / 'wat staat in inbox' — telling per reden_\n  • **Kennisbank v2 — leren** — _bv. 'leer woord: pareltje' / 'voeg toe aan kennis: hartslag' — direct in inbox_\n  • **D&D-kaart maken** — _bv. 'maak een d&d kaart Het Eerste Licht' — draft kaart die je in UI invult_\n  • **Event-kaart maken** — _bv. 'maak een event kaart Roadkill Borrel' — Boekhouder kondigt 'm aan in community_\n  • **Bark-template maken** — _bv. 'maak een bark kaart morgenavond' — template voor bot-trigger later_\n  • **ROAR Gift** — _via Winkel → ROAR Token tab → 🎁 ROAR Gift sturen (24h escrow met accept/weiger)_\n  • **Spark World D&D** — _bv. '[start verhaal]' in community, 'd&d help', 'rugzak uitleg', 'persoonskaart help'_\n  • **Recap community** — _bv. 'wat is gisteren in de community besproken?'_\n  • **Trader / Wallet** — _via Trader & Wallet tabs (ROAR-tokens = potjes-slots, monitor cycle aanpasbaar)_\n\n_Admin-extra:_\n  • **Beheer credits-lijst via chat** — _bv. 'voeg Nick Teeuwen toe aan de credits', 'verander Nick naar Nick Teeuwen in credits', 'verwijder X uit credits'_\n  • **Beheer credits-lijst via UI** — _Spark AI → Triggers → zoek op 'Credits' (Voornamen + Extra dank)_\n  • **Credits-bonus matching** — _Namen met voor+achternaam matchen autom. met users (grad ≤4) — +10 trust + ×1.2 multiplier_\n  • **Wat zullen we doen? (admin)** — _bv. 'wat zou jij willen doen?' — bekijkt roadmap-bugs + open items_\n  • **Bugs beheren** — _via Beheer → Bug-melder; chat-meldingen lopen via Spark_\n  • **Trigger/Vocab beheer** — _via Spark AI → Triggers; alles editable_\n  • **Avatar Galerij beheer** — _via Beheer → Instellingen → Beeld → Avatar Galerij_\n  • **Backup/Restore** — _via Beheer → Back-up (ZIP export/import, incl. cache flush)_\n  • **Gradatie-upgrades** — _automatisch (7→6 profiel, 6→5 gedrag) of admin handmatig (4→3)_\n  • **Storage cache stats** — _via Beheer dashboard 'Performance' kaart_\n  • **Logs browser** — _via Beheer → Instellingen → Archief → Logs (per dag, per module, filter op pre/post/error/event)_\n  • **Deploy-anker + Update Bark** — _via Notities → Deploy (versie + bericht; iedereen ziet bark bij volgende login)_\n  • **Trader hot coin-swap / cycle** — _TraderPage: coin-picker en cycle (15m/1h/4h/1d) live aanpasbaar zonder bot-stop_\n  • **Force-sell potje (admin)** — _Admin Analytics → Trade → bot-kaart uitklappen → force-sell + reden (audit-trail)_\n  • **Bot-kleurschema's** — _via Beheer → Instellingen → Beeld → BOT-ACCENT KLEUREN (5 bots, hex-pickers)_\n  • **App-kleurenschema** — _via Beheer → Instellingen → Beeld → App Kleurenschema (6 presets + 3 custom-pickers)_\n  • **Boekhouding entiteiten** — _via Beheer → Boekhouding: 4 entiteiten (Spark Core / Spark Your Life / Roadkill Merch / Privé)_\n  • **Graph rebuild** — _POST /api/graph/rebuild — herbouwt nodes+edges incl. KB v2 (zie Verbanden tab)_\n\n_Daarnaast reageer ik op 10 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, cancel, affirm...._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1062
+      }
+    },
+    {
+      "id": "conv-4ec7cef7",
+      "timestamp": "2026-06-02T21:10:59.934182+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "start steen",
+      "spark_response": "(geen bot reactie)",
+      "channel": "community",
+      "analysis": {
+        "bots_reacted": [],
+        "bot_count": 0,
+        "word_count": 2
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1063
+      }
+    },
+    {
+      "id": "conv-c9838bcd",
+      "timestamp": "2026-06-02T21:11:15.158082+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "start steen",
+      "spark_response": "**starten**: Starten betekent beginnen met een actie, proces, gebeurtenis of ontwikkeling.\n\n\n**Steen**: Een steen is een hard stuk natuurlijk materiaal dat bestaat uit gesteente.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "starten"
+          },
+          {
+            "begrip": "Steen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1064
+      }
+    },
+    {
+      "id": "conv-2f07a4a1",
+      "timestamp": "2026-06-02T21:11:33.755151+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "start steen papier schaar",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "rps_open",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_game"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1065
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1059,
-    "last_updated": "2026-06-02T21:07:32.325808+00:00"
+    "total_conversations": 1065,
+    "last_updated": "2026-06-02T21:11:33.755151+00:00"
   }
 }

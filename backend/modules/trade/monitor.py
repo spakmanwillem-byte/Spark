@@ -741,6 +741,23 @@ class MonitorService:
         # user_id wordt vastgezet bij instantiatie; argument blijft voor back-compat
         if user_id and user_id != self._user_id:
             self._user_id = user_id
+
+        # v6_pot_required_001 — geen potje = geen monitor/bot
+        # Monitor en bot mogen ALLEEN starten als de user-id minstens 1 potje bezit.
+        # Dit voorkomt idle bots/monitor zonder capital na deploy-reset.
+        effective_uid = user_id or self._user_id
+        owned_pot_count = _read_pot_count(effective_uid)
+        if owned_pot_count <= 0:
+            return {
+                "success": False,
+                "message": f"Geen potjes voor {effective_uid} — koop/ontvang eerst een potje voor je een bot/monitor start.",
+                "owned_pot_count": 0,
+            }
+        # Monitor gebruikt strikt het aantal potjes dat de user bezit (niet meer dan dat).
+        # use_potjes wordt geforceerd op True zodat er geen single-mode bot draait
+        # die de pot-economie omzeilt.
+        use_potjes = True
+
         with self._lock:
             if self._running:
                 return {"success": False, "message": "Monitor draait al", "status": self.get_status()}

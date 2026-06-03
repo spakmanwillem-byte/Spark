@@ -721,6 +721,9 @@ export function GesprekkenPage({ onNavigate }) {
           // v6_rps_001 — open Steen-Papier-Schaar bark met juiste opponent
           setRpsOpponent(data.rps_opponent || 'spark');
           setRpsOpen(true);
+        } else if (data.action === 'open_help_bark') {
+          // v6_help_001b — open de Help-Bark via global window event (MainLayout luistert)
+          window.dispatchEvent(new CustomEvent('spark:open-help'));
         }
 
         // v6_kb_sound_001b — KB-kaart geluid EERST afspelen, daarna TTS (onweer → "ik ben boos")

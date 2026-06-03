@@ -98,6 +98,13 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showHelp, setShowHelp] = useState(false);  // v6_help_001
 
+  // v6_help_001 — Luister naar 'spark:open-help' event vanuit chat ("help" trigger)
+  useEffect(() => {
+    const onOpenHelp = () => setShowHelp(true);
+    window.addEventListener('spark:open-help', onOpenHelp);
+    return () => window.removeEventListener('spark:open-help', onOpenHelp);
+  }, []);
+
   // v5_presence_heartbeat_001 — Globale heartbeat, update last_active elke 30s
   useEffect(() => {
     if (!user?.id) return;
@@ -510,15 +517,9 @@ export function MainLayout({ children, activePage = 'dashboard', onNavigate }) {
 
         {/* User & Collapse */}
         <div className="border-t border-slate-800 p-3">
-          {/* v6_help_001 — Help knop */}
-          <button
-            data-testid="sidebar-help-btn"
-            onClick={() => setShowHelp(true)}
-            className={`w-full flex items-center gap-2 px-3 py-2 mb-2 text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 rounded-xl transition-colors ${sidebarCollapsed ? 'justify-center' : ''}`}
-          >
-            <HelpCircle className="w-4 h-4" />
-            {!sidebarCollapsed && <span className="text-xs">Help</span>}
-          </button>
+          {/* v6_help_001 — Help-knop verwijderd uit sidebar (sessie 23).
+              Help opent nu uitsluitend via chat-command "help" in Spark-gesprek/community.
+              Sidebar luistert naar window event 'spark:open-help'. */}
 
           {/* User info */}
           {!sidebarCollapsed && (

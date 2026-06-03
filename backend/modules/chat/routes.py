@@ -697,12 +697,13 @@ async def process_message(req: ChatMessage):
             _save_log(req, response, "dnd_help")
             return response
 
-        # Help (admin krijgt extra commands)
+        # Help (v6_help_001b — open de Help-Bark popup i.p.v. tekst-opsomming)
         if si.detect_help_intent(text):
-            u = _load_user() or {}
-            is_admin = (u.get("gradatie", 99) <= 2)
-            out = si.handle_help(is_admin=is_admin)
-            response.update(out)
+            response.update({
+                "type": "open_help_bark",
+                "action": "open_help_bark",
+                "message": "🔮 Help-overzicht geopend.",
+            })
             _save_log(req, response, "help_overview")
             return response
 

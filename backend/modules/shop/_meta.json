@@ -13,6 +13,7 @@
   "endpoints": [
     "DELETE /shop/admin/products/{product_id}",
     "DELETE /shop/admin/products/{product_id}/images",
+    "DELETE /shop/admin/shops/{shop_id}",
     "GET /shop/gift/inbox/{user_id}",
     "GET /shop/gift/outbox/{user_id}",
     "GET /shop/orders/{user_id}",

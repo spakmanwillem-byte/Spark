@@ -394,7 +394,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           />
           <StatsPanel title="STATISTIEKEN" stats={char.statistieken || {}} accent="#f59e0b" />
           <StatsPanel title="AANVAL & VERDEDIGING" stats={char.aanval_verdediging || {}} accent="#dc2626" />
-          <OverigPanel char={char} />
+          <OverigPanel char={char} userId={userId} />
           {/* v6_dice_001 — Dobbelsteen-paneel met jouw 2 D&D-kaart-avatars */}
           <DiceRollerPanel userId={userId} stats={char.statistieken || {}} onRolled={reload} />
           {/* v6_bewoners_layout_002 — Bewoners-strip compact 2x3=6 in MID-kolom onder Overig */}
@@ -1818,7 +1818,7 @@ function EditMetaModal({ char, userId, onClose, onSaved }) {
         <div className="grid grid-cols-2 gap-3">
           <Field label="Titel"        v={form.titel}        onChange={v => setForm({ ...form, titel: v })} />
           <Field label="Ondertitel"   v={form.ondertitel}   onChange={v => setForm({ ...form, ondertitel: v })} />
-          <Field label="Klasse"       v={form.klasse}       onChange={v => setForm({ ...form, klasse: v })} />
+          <ClassField label="Klasse" v={form.klasse} onChange={v => setForm({ ...form, klasse: v })} />
           <Field label="Beroep"       v={form.beroep}       onChange={v => setForm({ ...form, beroep: v })} />
           <Field label="Fractie"      v={form.fractie}      onChange={v => setForm({ ...form, fractie: v })} />
           <Field label="Locatie"      v={form.locatie_naam} onChange={v => setForm({ ...form, locatie_naam: v })} />
@@ -1840,6 +1840,34 @@ function EditMetaModal({ char, userId, onClose, onSaved }) {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+// v6_rps_classes_001 — 3 basisklassen voor steen-papier-schaar zelf-uitvecht-systeem
+const RPS_CLASSES = [
+  { value: 'Handgevecht Soldaat', shape: 'steen',   icon: '🪨', desc: 'Steen — verplettert Schaar' },
+  { value: 'Boog Soldaat',        shape: 'schaar',  icon: '✂', desc: 'Schaar — knipt Papier' },
+  { value: 'Magie Soldaat',       shape: 'papier',  icon: '📜', desc: 'Papier — wikkelt Steen' },
+];
+
+function ClassField({ label, v, onChange }) {
+  return (
+    <div>
+      <label className="block text-[10px] uppercase tracking-wider text-amber-400 mb-1">{label}</label>
+      <select
+        data-testid="field-klasse"
+        value={v}
+        onChange={e => onChange(e.target.value)}
+        className="w-full px-3 py-2 bg-stone-900 border border-amber-900/40 rounded text-sm text-amber-100">
+        <option value="">— kies een basisklasse —</option>
+        {RPS_CLASSES.map(c => (
+          <option key={c.value} value={c.value}>{c.icon} {c.value} ({c.desc})</option>
+        ))}
+      </select>
+      <p className="text-[9px] text-amber-400/60 mt-1 italic">
+        Bepaalt jouw vorm in Steen-Papier-Schaar zelfuitvecht-systeem (later: tree, XP, rang).
+      </p>
     </div>
   );
 }

@@ -13,7 +13,9 @@
   "endpoints": [
     "GET /achievements/all",
     "GET /achievements/leaderboard",
-    "GET /achievements/progress/{user_id}"
+    "GET /achievements/progress/{user_id}",
+    "PATCH /achievements/admin/{achievement_id}",
+    "POST /achievements/admin/{achievement_id}/icon-upload"
   ],
   "tags": [],
   "encryption": {

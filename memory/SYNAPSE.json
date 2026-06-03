@@ -1,18 +1,18 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-06-01T15:25:47.439889+00:00",
+  "generated_at": "2026-06-03T13:57:41.502326+00:00",
   "summary": {
-    "total_containers": 97,
+    "total_containers": 104,
     "by_status": {
-      "active": 84,
-      "skeleton": 13
+      "active": 90,
+      "skeleton": 14
     },
     "by_container_type": {
-      "dir": 66,
-      "data": 31
+      "dir": 70,
+      "data": 34
     },
-    "total_endpoints_detected": 507
+    "total_endpoints_detected": 527
   },
   "tree": {
     "backend_modules": {
@@ -69,7 +69,9 @@
         "endpoints": [
           "GET /achievements/all",
           "GET /achievements/leaderboard",
-          "GET /achievements/progress/{user_id}"
+          "GET /achievements/progress/{user_id}",
+          "PATCH /achievements/admin/{achievement_id}",
+          "POST /achievements/admin/{achievement_id}/icon-upload"
         ],
         "tags": [],
         "encryption": {
@@ -98,11 +100,21 @@
         "split_from": null,
         "children_max": 4,
         "endpoints": [
+          "GET /admin/capabilities/bark-image",
           "GET /admin/capabilities/download",
+          "GET /admin/capabilities/health-status",
           "GET /admin/capabilities/index",
+          "GET /admin/capabilities/is-admin/{user_id}",
+          "GET /admin/capabilities/list",
           "GET /admin/capabilities/read",
+          "POST /admin/capabilities/grant",
+          "POST /admin/capabilities/help-bark",
+          "POST /admin/capabilities/password/reset",
+          "POST /admin/capabilities/pre-deploy-reset",
           "POST /admin/capabilities/purge",
-          "POST /admin/capabilities/test"
+          "POST /admin/capabilities/revoke",
+          "POST /admin/capabilities/test",
+          "POST /admin/capabilities/verify"
         ],
         "tags": [],
         "encryption": {
@@ -114,7 +126,7 @@
         "created_at": "2026-05-26T15:54:32.109000+00:00",
         "last_touched": "2026-05-26T16:13:26.928088+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 6,
         "subdir_count": 0,
         "extra": {}
       },
@@ -916,6 +928,33 @@
         "subdir_count": 0,
         "extra": {}
       },
+      "backend/modules/games": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "games",
+        "doel": "(games — geen doel-omschrijving)",
+        "container_type": "dir",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.012105+00:00",
+        "last_touched": "2026-06-03T13:57:41.012105+00:00",
+        "activity_count": 0,
+        "file_count": 5,
+        "subdir_count": 1,
+        "extra": {}
+      },
       "backend/modules/glow_nav": {
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
@@ -979,6 +1018,37 @@
         },
         "created_at": "2026-05-26T15:54:32.202433+00:00",
         "last_touched": "2026-05-26T16:13:27.004943+00:00",
+        "activity_count": 0,
+        "file_count": 2,
+        "subdir_count": 0,
+        "extra": {}
+      },
+      "backend/modules/help": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "help",
+        "doel": "(help — geen doel-omschrijving)",
+        "container_type": "dir",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [
+          "GET /help/for-viewer",
+          "GET /help/topic/{topic_id}",
+          "POST /help/find"
+        ],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.016220+00:00",
+        "last_touched": "2026-06-03T13:57:41.016220+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1143,6 +1213,8 @@
           "GET /kb/v2/tags/scan",
           "GET /kb/v2/tags/similarity",
           "GET /kb/v2/voice/file/{filename}",
+          "PATCH /kb/v2/voice/kind/{card_id}",
+          "PATCH /kb/v2/voice/secondary/kind/{card_id}",
           "POST /kb/v2/backfill-hooks",
           "POST /kb/v2/classify",
           "POST /kb/v2/delete",
@@ -1151,8 +1223,10 @@
           "POST /kb/v2/herzien/skip",
           "POST /kb/v2/image",
           "POST /kb/v2/inbox/add",
+          "POST /kb/v2/inbox/auto-resolve",
           "POST /kb/v2/tags/merge",
           "POST /kb/v2/tags/normalize-batch",
+          "POST /kb/v2/vocab/sync",
           "POST /kb/v2/voice",
           "POST /kb/v2/voice/secondary"
         ],
@@ -1166,7 +1240,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-05-26T16:13:27.020693+00:00",
         "activity_count": 0,
-        "file_count": 6,
+        "file_count": 7,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1453,6 +1527,7 @@
         "endpoints": [
           "DELETE /shop/admin/products/{product_id}",
           "DELETE /shop/admin/products/{product_id}/images",
+          "DELETE /shop/admin/shops/{shop_id}",
           "GET /shop/gift/inbox/{user_id}",
           "GET /shop/gift/outbox/{user_id}",
           "GET /shop/orders/{user_id}",
@@ -2197,6 +2272,33 @@
         "subdir_count": 0,
         "extra": {}
       },
+      "frontend/components/games": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "games",
+        "doel": "Skelet — games module nog leeg of placeholder",
+        "container_type": "dir",
+        "status": "skeleton",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.057714+00:00",
+        "last_touched": "2026-06-03T13:57:41.057714+00:00",
+        "activity_count": 0,
+        "file_count": 1,
+        "subdir_count": 0,
+        "extra": {}
+      },
       "frontend/components/layout": {
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
@@ -2273,6 +2375,33 @@
         },
         "created_at": "2026-05-26T15:54:32.296770+00:00",
         "last_touched": "2026-05-26T15:54:32.296770+00:00",
+        "activity_count": 0,
+        "file_count": 3,
+        "subdir_count": 0,
+        "extra": {}
+      },
+      "frontend/components/shared": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "shared",
+        "doel": "(shared — geen doel-omschrijving)",
+        "container_type": "dir",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.065468+00:00",
+        "last_touched": "2026-06-03T13:57:41.065468+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -2409,8 +2538,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.304583+00:00",
-        "last_touched": "2026-06-01T14:53:49.855750+00:00",
-        "activity_count": 126,
+        "last_touched": "2026-06-03T12:10:02.857173+00:00",
+        "activity_count": 129,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2571,9 +2700,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-06-01T15:25:28.964287+00:00",
-        "activity_count": 355,
-        "file_count": 28,
+        "last_touched": "2026-06-03T13:18:53.843945+00:00",
+        "activity_count": 412,
+        "file_count": 29,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2598,8 +2727,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-06-01T10:26:14.064402+00:00",
-        "activity_count": 66,
+        "last_touched": "2026-06-02T21:10:59.932363+00:00",
+        "activity_count": 81,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2631,6 +2760,33 @@
         "subdir_count": 0,
         "extra": {}
       },
+      "backend/data/dialogen": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "dialogen",
+        "doel": "(dialogen — geen doel-omschrijving)",
+        "container_type": "data",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.081030+00:00",
+        "last_touched": "2026-06-03T13:57:41.081030+00:00",
+        "activity_count": 0,
+        "file_count": 9,
+        "subdir_count": 1,
+        "extra": {}
+      },
       "backend/data/dnd": {
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
@@ -2652,8 +2808,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-06-01T11:22:02.787982+00:00",
-        "activity_count": 104,
+        "last_touched": "2026-06-03T13:16:23.028392+00:00",
+        "activity_count": 108,
         "file_count": 13,
         "subdir_count": 3,
         "extra": {}
@@ -2681,7 +2837,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-05-26T16:13:27.111780+00:00",
         "activity_count": 0,
-        "file_count": 16,
+        "file_count": 20,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2706,10 +2862,37 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-06-01T14:53:49.833826+00:00",
-        "activity_count": 100807,
+        "last_touched": "2026-06-03T13:57:27.290838+00:00",
+        "activity_count": 112833,
         "file_count": 8,
         "subdir_count": 0,
+        "extra": {}
+      },
+      "backend/data/games": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "games",
+        "doel": "(games — geen doel-omschrijving)",
+        "container_type": "data",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.086997+00:00",
+        "last_touched": "2026-06-03T13:57:41.086997+00:00",
+        "activity_count": 0,
+        "file_count": 6,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/data/graph": {
@@ -2733,9 +2916,36 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-06-01T00:23:50.677785+00:00",
-        "activity_count": 70,
+        "last_touched": "2026-06-02T21:08:39.121061+00:00",
+        "activity_count": 78,
         "file_count": 4,
+        "subdir_count": 0,
+        "extra": {}
+      },
+      "backend/data/help": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "help",
+        "doel": "(help — geen doel-omschrijving)",
+        "container_type": "data",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-03T13:57:41.089803+00:00",
+        "last_touched": "2026-06-03T13:57:41.089803+00:00",
+        "activity_count": 0,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2760,8 +2970,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-06-01T00:23:50.044161+00:00",
-        "activity_count": 282,
+        "last_touched": "2026-06-02T20:58:54.327602+00:00",
+        "activity_count": 2188,
         "file_count": 33,
         "subdir_count": 2,
         "extra": {}
@@ -2841,8 +3051,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-05-31T06:52:26.297524+00:00",
-        "activity_count": 102,
+        "last_touched": "2026-06-02T20:58:54.141953+00:00",
+        "activity_count": 605,
         "file_count": 8,
         "subdir_count": 0,
         "extra": {}
@@ -2895,9 +3105,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-06-01T15:22:53.901627+00:00",
-        "activity_count": 693,
-        "file_count": 3,
+        "last_touched": "2026-06-03T13:54:59.503205+00:00",
+        "activity_count": 790,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2922,8 +3132,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.331992+00:00",
-        "last_touched": "2026-05-26T16:13:27.140970+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-06-02T21:07:32.323851+00:00",
+        "activity_count": 7,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -2951,7 +3161,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 19,
+        "file_count": 21,
         "subdir_count": 1,
         "extra": {}
       },
@@ -2976,9 +3186,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.335113+00:00",
-        "last_touched": "2026-06-01T10:35:16.709287+00:00",
-        "activity_count": 27,
-        "file_count": 4,
+        "last_touched": "2026-06-03T12:26:25.952208+00:00",
+        "activity_count": 29,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3030,9 +3240,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-06-01T15:25:47.086715+00:00",
-        "activity_count": 12629,
-        "file_count": 147,
+        "last_touched": "2026-06-03T13:57:41.220278+00:00",
+        "activity_count": 14139,
+        "file_count": 160,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3057,9 +3267,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.338797+00:00",
-        "last_touched": "2026-05-31T23:37:38.217268+00:00",
-        "activity_count": 27,
-        "file_count": 71,
+        "last_touched": "2026-06-02T20:51:43.056924+00:00",
+        "activity_count": 66,
+        "file_count": 120,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3084,8 +3294,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-06-01T14:53:49.864031+00:00",
-        "activity_count": 781,
+        "last_touched": "2026-06-03T12:10:32.678549+00:00",
+        "activity_count": 785,
         "file_count": 18,
         "subdir_count": 1,
         "extra": {}
@@ -3165,10 +3375,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.345126+00:00",
-        "last_touched": "2026-05-29T19:09:59.630907+00:00",
-        "activity_count": 48,
-        "file_count": 72,
-        "subdir_count": 23,
+        "last_touched": "2026-06-03T13:41:32.480177+00:00",
+        "activity_count": 53,
+        "file_count": 76,
+        "subdir_count": 24,
         "extra": {}
       },
       "backend/data/wallet": {
@@ -3192,8 +3402,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-06-01T14:53:49.827639+00:00",
-        "activity_count": 195,
+        "last_touched": "2026-06-03T12:10:02.816136+00:00",
+        "activity_count": 198,
         "file_count": 14,
         "subdir_count": 1,
         "extra": {}

@@ -11,11 +11,21 @@
   "split_from": null,
   "children_max": 4,
   "endpoints": [
+    "GET /admin/capabilities/bark-image",
     "GET /admin/capabilities/download",
+    "GET /admin/capabilities/health-status",
     "GET /admin/capabilities/index",
+    "GET /admin/capabilities/is-admin/{user_id}",
+    "GET /admin/capabilities/list",
     "GET /admin/capabilities/read",
+    "POST /admin/capabilities/grant",
+    "POST /admin/capabilities/help-bark",
+    "POST /admin/capabilities/password/reset",
+    "POST /admin/capabilities/pre-deploy-reset",
     "POST /admin/capabilities/purge",
-    "POST /admin/capabilities/test"
+    "POST /admin/capabilities/revoke",
+    "POST /admin/capabilities/test",
+    "POST /admin/capabilities/verify"
   ],
   "tags": [],
   "encryption": {
@@ -27,7 +37,7 @@
   "created_at": "2026-05-26T15:54:32.109000+00:00",
   "last_touched": "2026-05-26T16:13:26.928088+00:00",
   "activity_count": 0,
-  "file_count": 3,
+  "file_count": 6,
   "subdir_count": 0,
   "extra": {}
 }

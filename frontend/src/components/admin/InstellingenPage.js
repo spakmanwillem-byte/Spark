@@ -1015,6 +1015,9 @@ function AdminSettingsPanel({ userId }) {
         tone={showBark?.tone}
       />
 
+      {/* v6_pre_deploy_reset_002 — Pre-deploy schoonmaak knop met opties */}
+      <PreDeployResetPanel userId={userId} setShowBark={setShowBark} />
+
       {/* v6_admin_grant_frame_001 — Ornament-frame popup voor admin-grant */}
       <InputBark
         open={showGrantBark}
@@ -1046,6 +1049,133 @@ function AdminSettingsPanel({ userId }) {
         submitLabel={busy ? 'Bezig…' : 'Maak admin'}
         cancelLabel="Annuleer"
       />
+    </div>
+  );
+}
+
+
+// ============================================================
+// v6_pre_deploy_reset_002 — Pre-deploy schoonmaak paneel
+// ============================================================
+function PreDeployResetPanel({ userId, setShowBark }) {
+  const [status, setStatus] = useState(null);
+  const [opts, setOpts] = useState({
+    disable_shadow: true,
+    reset_pots: true,
+    clear_baseline: true,
+    clear_accounting: true,
+    clear_shadow_pots: true,
+    zero_all_roar: true,
+  });
+  const [busy, setBusy] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+
+  const loadStatus = useCallback(() => {
+    fetch(`${API}/api/admin/system/health-status`)
+      .then(r => r.json()).then(setStatus).catch(() => {});
+  }, []);
+  useEffect(() => { loadStatus(); }, [loadStatus]);
+
+  const run = async () => {
+    setBusy(true);
+    try {
+      const r = await fetch(`${API}/api/admin/system/pre-deploy-reset`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ by_user: userId, ...opts }),
+      });
+      const d = await r.json();
+      if (r.ok) {
+        setShowBark({
+          begrip: 'Admin geactiveerd',
+          title: 'Schone lei',
+          text: `Reset uitgevoerd. ROAR: ${Object.keys(d.balances?.new || {}).length} users, pots: ${Object.keys(d.pots_reset || {}).length} users, accounting tx gewist: ${d.accounting_cleared?.previous_tx_count ?? 0}`,
+          tone: 'success',
+        });
+        loadStatus();
+      } else {
+        setShowBark({ begrip: 'Toegang geweigerd', title: 'Reset mislukt', text: d.detail || 'Onbekende fout', tone: 'error' });
+      }
+    } finally {
+      setBusy(false);
+      setConfirm(false);
+    }
+  };
+
+  const flagLabels = {
+    disable_shadow: 'Shadow-cascade UIT',
+    reset_pots: '12 lege potjes per user (capital €10, geen positie)',
+    clear_baseline: 'Geen base (capital_baseline leeg)',
+    clear_accounting: 'Boekhouding wissen (transactions = [])',
+    clear_shadow_pots: 'Shadow-pots wissen',
+    zero_all_roar: 'Alle ROAR balances → 0',
+  };
+
+  return (
+    <div data-testid="pre-deploy-panel" className="bg-slate-900/60 border border-rose-900/50 rounded-xl p-4 space-y-3">
+      <div className="flex items-start gap-2">
+        <div className="w-7 h-7 rounded-full bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-300 text-sm">!</div>
+        <div className="flex-1">
+          <h3 className="text-sm font-semibold text-white">Pre-Deploy Schoonmaak</h3>
+          <p className="text-[11px] text-slate-400">Maakt alles klaar voor een schone redeploy. Voer dit pas uit nadat je alle posities verkocht hebt op Bitvavo.</p>
+        </div>
+      </div>
+
+      {/* Huidige status */}
+      {status && (
+        <div className="bg-slate-950/40 border border-slate-800 rounded-lg px-3 py-2 text-[10px] text-slate-300 font-mono space-y-0.5">
+          <div>shadow: <span className={status.shadow_enabled ? 'text-rose-300' : 'text-emerald-300'}>{status.shadow_enabled ? 'AAN' : 'UIT'}</span></div>
+          <div>baseline_users: {status.baseline_users?.length || 0}</div>
+          <div>accounting tx: {status.accounting_tx_count}</div>
+          <div>pots per user: {Object.entries(status.pots_per_user || {}).map(([u, p]) => `${u.slice(-6)}=${p.count}(${p.open_positions}open)`).join(', ') || '—'}</div>
+          <div>ROAR totaal: {Object.values(status.roar_balances || {}).reduce((a, b) => a + b, 0)}</div>
+        </div>
+      )}
+
+      {/* Vlaggen */}
+      <div className="space-y-1.5">
+        {Object.entries(flagLabels).map(([k, lbl]) => (
+          <label key={k} className="flex items-start gap-2 text-[11px] text-slate-300 cursor-pointer">
+            <input
+              type="checkbox"
+              data-testid={`pre-deploy-${k}`}
+              checked={opts[k]}
+              onChange={e => setOpts({ ...opts, [k]: e.target.checked })}
+              className="mt-0.5 accent-rose-500"
+            />
+            <span>{lbl}</span>
+          </label>
+        ))}
+      </div>
+
+      {/* Confirm flow */}
+      {!confirm ? (
+        <button
+          data-testid="pre-deploy-trigger-btn"
+          onClick={() => setConfirm(true)}
+          disabled={busy}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-rose-500/20 text-rose-200 hover:bg-rose-500/30 border border-rose-500/40 disabled:opacity-40"
+        >
+          <RefreshCw className="w-3.5 h-3.5" /> Voer pre-deploy reset uit
+        </button>
+      ) : (
+        <div className="flex gap-2">
+          <button
+            data-testid="pre-deploy-confirm-btn"
+            onClick={run}
+            disabled={busy}
+            className="flex-1 px-3 py-2 rounded-lg text-xs font-bold bg-rose-600 text-white hover:bg-rose-500 disabled:opacity-40"
+          >
+            {busy ? 'Bezig…' : 'JA, schone lei'}
+          </button>
+          <button
+            onClick={() => setConfirm(false)}
+            disabled={busy}
+            className="px-3 py-2 rounded-lg text-xs text-slate-300 bg-slate-800 hover:bg-slate-700"
+          >
+            Annuleer
+          </button>
+        </div>
+      )}
     </div>
   );
 }

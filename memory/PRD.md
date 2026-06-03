@@ -1,5 +1,42 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-03 — sessie 26 — Pre-deploy Reset uitgebreid + RPS basisklassen + char-userId fix)
+
+### 🔄 v6_pre_deploy_reset_002 — Schone-lei knop voor redeploy
+**Concept**: één knop in Admin-tab die alle staat naar nul brengt voor schone redeploy.
+
+**Backend `/api/admin/system/pre-deploy-reset` (uitgebreid)**:
+- `disable_shadow`: shadow-cascade UIT (al bestaand)
+- `reset_pots`: elke user krijgt **12 lege idle potjes** (capital €10, geen positie, geen anchor) — verwijdert `baseline_eur` per user
+- `clear_baseline`: `capital_baseline.json` leeg ("geen base")
+- `clear_accounting`: `accounting/transactions.json` `transactions=[]`
+- `clear_shadow_pots`: `shadow_pots.json` `{shadows:[]}`
+- `zero_all_roar`: alle ROAR balances → 0 (alternative naast expliciete mapping)
+- Idempotent, admin-only (`is_admin` check)
+- Health-status endpoint uitgebreid met `pots_per_user`, `baseline_users`, `accounting_tx_count`
+
+**Frontend Admin-tab** (`InstellingenPage.js` → `PreDeployResetPanel`):
+- Toont live status (shadow/baseline/accounting/pots/ROAR totaal)
+- Checkboxes per vlag (alle default AAN)
+- 2-staps confirm ("JA, schone lei")
+- BarkModal feedback
+
+### 🪨✂📜 v6_rps_classes_001 — 3 RPS-basisklassen
+- Klasse-veld in `EditMetaModal` is nu een **dropdown** met 3 vaste opties:
+  - 🪨 **Handgevecht Soldaat** — Steen
+  - ✂ **Boog Soldaat** — Schaar
+  - 📜 **Magie Soldaat** — Papier
+- Voorbereiding voor toekomstige zelf-uitvecht-RPS tussen NPCs/users + tree/XP/rank
+- Coins/Goud: al ingebouwd in `rps_service.py`, `STARTING_GOLD = 1000`, +10 per battle won
+
+### 🐛 Bugfix — `OverigPanel` ontbreekt `userId`
+- Aanroep in `DnDCharacterSheet.js` line 397 gaf alleen `char` mee → fetch deed niets
+- Nu: `<OverigPanel char={char} userId={userId} />` — battles W/L + Goud worden correct getoond
+
+---
+
+
+
 ## Completed (2026-06-02 — sessie 21E — KB-kaart geluid in chat)
 
 ### 🔊 v6_kb_sound_001 — Spark speelt KB-kaart geluiden af in gesprek

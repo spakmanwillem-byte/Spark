@@ -168954,6 +168954,176 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-skel-11a097c8",
+      "begrip": "hand",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "\nEen hand is een lichaamsdeel aan het uiteinde van de arm dat wordt gebruikt voor grijpen, voelen, vasthouden en uitvoeren van handelingen.",
+        "laag2": "De hand maakt interactie met de omgeving mogelijk.",
+        "laag3": "Handen ondersteunen beweging, communicatie en manipulatie van objecten.\nZe spelen een belangrijke rol bij werken, leren, creëren, aanraken en sociale interacties zoals begroeten of gebaren maken.\n",
+        "laag4": "Binnen Spark is een hand een functioneel lichaamsdeel dat waarneming en actie met elkaar verbindt door fysieke interactie met objecten, personen en de omgeving mogelijk te maken.\nDe hand ondersteunt uitvoering, creatie en communicatie doordat zij zowel informatie ontvangt via aanraking als handelingen uitvoert binnen een systeem.\n"
+      },
+      "ws5": {
+        "wie": "mensen, primaten en andere dieren met grijporganen",
+        "wat": "een lichaamsdeel voor grijpen, voelen en handelen",
+        "wanneer": "bij beweging, werk, communicatie en interactie",
+        "waar": "aan het uiteinde van de arm",
+        "waarom": "voor manipulatie, aanraking, creatie en uitvoering van handelingen",
+        "hoe": "door vingers, spieren, gewrichten en zenuwen samen te laten werken"
+      },
+      "tags": [
+        "hand",
+        "lichaam",
+        "arm",
+        "vingers",
+        "grijpen",
+        "aanraking",
+        "voelen",
+        "beweging",
+        "motoriek",
+        "interactie",
+        "communicatie",
+        "gebaar",
+        "creatie",
+        "uitvoering",
+        "zintuig",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-097c2cb9",
+          "begrip": "brengen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb925241",
+          "begrip": "voeten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "lichaam",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T14:02:08.310820+00:00",
+        "vorige_versie_v1": "kb-skel-11a097c8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.677712+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:02:03.266703+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:02:03.280102+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T14:02:10.893534+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T14:02:10.907047+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-02T14:02:01.869001+00:00",
+        "verplaatst_op": "2026-06-03T16:42:02.167360+00:00",
+        "verplaatst_van": "doen",
+        "verplaatst_door": "user-001",
+        "verplaatst_reden": "lichaamsdeel hoort onder feiten/weten"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ]
 }

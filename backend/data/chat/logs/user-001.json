@@ -28000,11 +28000,315 @@
         "session_id": "default",
         "gesprek_nummer": 1076
       }
+    },
+    {
+      "id": "conv-4cfdbbb0",
+      "timestamp": "2026-06-03T16:36:34.483931+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Heidi Spakman is mijn moeder",
+      "spark_response": "_(Dit doet me denken aan: \"Heidi Spakman is mijn Moeder\")_\n\nEen uitspraak die aangeeft dat Heidi Spakman de moeder is van de spreker.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "sentence_reply",
+        "knowledge_matches": [
+          {
+            "begrip": "Heidi Spakman is mijn Moeder"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "sentence_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1077
+      }
+    },
+    {
+      "id": "conv-cee3af32",
+      "timestamp": "2026-06-03T16:36:50.987940+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maaike Spakman is mijn Zusje",
+      "spark_response": "Wat fijn om te horen! 😊\n\n_(Dit doet me denken aan: \"Maaike Spakman is mijn Zusje\")_\n\nEen uitspraak die aangeeft dat Maaike Spakman een vrouwelijke broer/zus-relatie heeft met de spreker.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zusje"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "sentence_reply",
+        "knowledge_matches": [
+          {
+            "begrip": "Maaike Spakman is mijn Zusje"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "sentence_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1078
+      }
+    },
+    {
+      "id": "conv-ff75ff10",
+      "timestamp": "2026-06-03T16:37:12.513757+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus Martens is mijn dochter",
+      "spark_response": "_(Dit doet me denken aan: \"Lotus Martens is mijn Dochter\")_\n\nEen uitspraak die aangeeft dat Lotus Martens de dochter is van de spreker.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "sentence_reply",
+        "knowledge_matches": [
+          {
+            "begrip": "Lotus Martens is mijn Dochter"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "sentence_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1079
+      }
+    },
+    {
+      "id": "conv-f95c4b85",
+      "timestamp": "2026-06-03T16:37:53.156920+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Joy Spakman is de dochter van Maaike Spakman.",
+      "spark_response": "Ik ken 'spakman' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **joy** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'joy' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "spakman"
+          },
+          {
+            "begrip": "Dochter"
+          },
+          {
+            "begrip": "Maaike"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "joy"
+        ],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1080
+      }
+    },
+    {
+      "id": "conv-8ad73304",
+      "timestamp": "2026-06-03T16:38:40.765605+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Willie bakker is mijn vader. Echter is hij overleden.",
+      "spark_response": "_(Dit doet me denken aan: \"Willie Bakker was mijn vader. Hij is overleden.\")_\n\nEen uitspraak die aangeeft dat Willie Bakker de vader van de spreker was en inmiddels overleden is.\n",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "bakker",
+            "willie"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "sentence_reply",
+        "knowledge_matches": [
+          {
+            "begrip": "Willie Bakker was mijn vader. Hij is overleden."
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "sentence_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1081
+      }
+    },
+    {
+      "id": "conv-e7580498",
+      "timestamp": "2026-06-03T16:39:32.171370+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Joy is mijn nichtje.",
+      "spark_response": "Ik ken 'joy' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "joy"
+          },
+          {
+            "begrip": "Nicht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1082
+      }
+    },
+    {
+      "id": "conv-38fb9ffb",
+      "timestamp": "2026-06-03T16:39:57.413215+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik moet morgen om 13:30 naar de dokter",
+      "spark_response": "Ik hoorde dat je morgen om 13:30 dokter hebt. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1083
+      }
+    },
+    {
+      "id": "conv-e7455a8a",
+      "timestamp": "2026-06-03T16:40:06.751813+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja",
+      "spark_response": "Genoteerd! 'Dokter' staat in je agenda. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_created",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "agenda_created"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1084
+      }
+    },
+    {
+      "id": "conv-461cd214",
+      "timestamp": "2026-06-03T16:41:22.218261+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben is mijn neef",
+      "spark_response": "**Neef**: Een neef is het kind van een oom of tante.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **gerben** (opgeslagen als kaarten)\n\nWat betekent 'gerben' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Neef"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "gerben"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1085
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1076,
-    "last_updated": "2026-06-03T16:33:03.781431+00:00"
+    "total_conversations": 1085,
+    "last_updated": "2026-06-03T16:41:22.218261+00:00"
   }
 }

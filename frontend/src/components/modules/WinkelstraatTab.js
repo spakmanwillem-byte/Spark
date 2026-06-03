@@ -13,6 +13,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 export function WinkelstraatTab({ user, onNavigateToShop }) {
   const userId = user?.id;
   const gradatie = user?.gradatie ?? 7;
+  const isAdmin = !!user?.admin;  // v6_shop_admin_delete_001
   const [shops, setShops] = useState([]);
   const [minGradatie, setMinGradatie] = useState(4);
   const [commissieDefault, setCommissieDefault] = useState(2.0);
@@ -34,6 +35,29 @@ export function WinkelstraatTab({ user, onNavigateToShop }) {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  // v6_shop_admin_delete_001 — Admin verwijdert shop via backend
+  const handleAdminDelete = useCallback(async (shop) => {
+    if (shop.is_founder_shop) {
+      alert('Founder-shop kan niet verwijderd worden.');
+      return;
+    }
+    const txt = window.prompt(`Verwijder "${shop.naam}" definitief?\n\nTyp "VERWIJDER" om te bevestigen:`);
+    if (txt !== 'VERWIJDER') return;
+    try {
+      const r = await fetch(`${API}/api/shop/admin/shops/${shop.id}?viewer_id=${encodeURIComponent(userId)}`, {
+        method: 'DELETE',
+      });
+      const d = await r.json();
+      if (!r.ok || d.success === false) {
+        alert(`Verwijderen mislukt: ${d.detail || d.error || 'onbekende fout'}`);
+        return;
+      }
+      load();
+    } catch (e) {
+      alert(`Verwijderen mislukt: ${e.message}`);
+    }
+  }, [userId, load]);
 
   const eligible = gradatie <= minGradatie;
   const canOpen = eligible;
@@ -81,7 +105,8 @@ export function WinkelstraatTab({ user, onNavigateToShop }) {
       {/* Shop-lijst */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {shops.map(shop => (
-          <ShopCard key={shop.id} shop={shop} viewerId={userId} onEdit={() => setEditShop(shop)} onNavigate={onNavigateToShop} />
+          <ShopCard key={shop.id} shop={shop} viewerId={userId} isAdmin={isAdmin}
+            onEdit={() => setEditShop(shop)} onAdminDelete={handleAdminDelete} onNavigate={onNavigateToShop} />
         ))}
         {shops.length === 0 && (
           <div className="col-span-2 py-8 text-center text-slate-500 text-sm">
@@ -113,14 +138,18 @@ export function WinkelstraatTab({ user, onNavigateToShop }) {
 }
 
 // ============================================================================
-function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
+function ShopCard({ shop, viewerId, isAdmin, onEdit, onAdminDelete, onNavigate }) {
   const isOwner = shop.owner_user_id === viewerId;
   const isFounder = shop.is_founder_shop;
   const isClosing = shop.status === 'closing';
   const accent = shop.color_accent || '#f59e0b';
   // v6_shop_card_redesign_001 — Banner met groot bedrijfslogo, geen filosofie/commissie zichtbaar.
   // Commissie komt op de bon en in de owner-voorwaarden, niet in de openbare straat.
-  const logoUrl = shop.logo_url ? (shop.logo_url.startsWith('http') ? shop.logo_url : `${API}${shop.logo_url}`) : null;
+  // v6_shop_logo_cache_buster_001 — gebruik updated_at als cache-buster
+  const cacheBust = shop.updated_at || shop.created_at || '';
+  const logoUrl = shop.logo_url
+    ? (shop.logo_url.startsWith('http') ? shop.logo_url : `${API}${shop.logo_url}`) + (cacheBust ? `?t=${encodeURIComponent(cacheBust)}` : '')
+    : null;
   const ownerAvatar = shop.owner_avatar_url ? (shop.owner_avatar_url.startsWith('http') ? shop.owner_avatar_url : `${API}${shop.owner_avatar_url}`) : null;
 
   return (
@@ -130,41 +159,56 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
         isClosing ? 'border-red-500/30 opacity-70 cursor-default' : 'border-slate-800 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5'
       }`}>
 
-      {/* Banner met groot bedrijfslogo */}
-      <div className="relative h-28 flex items-center justify-center overflow-hidden"
-        style={{ background: `linear-gradient(135deg, ${accent}22 0%, ${accent}11 50%, #0f172a 100%)` }}>
-        {logoUrl ? (
-          <img src={logoUrl} alt={shop.naam}
-            className="max-h-20 max-w-[60%] object-contain drop-shadow-lg" />
-        ) : (
-          <Store className="w-12 h-12" style={{ color: accent, opacity: 0.5 }} />
-        )}
-        {/* Badges in banner-rechterbovenhoek */}
-        <div className="absolute top-2 right-2 flex items-center gap-1">
+      {/* v6_shop_card_redesign_002 — Naam BOVEN banner */}
+      <div className="px-3 pt-3 pb-2 flex items-center justify-between gap-2">
+        <h3 className="text-base font-bold text-white truncate flex-1" data-testid={`shop-name-${shop.id}`}>
+          {shop.naam}
+        </h3>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
           {isFounder && (
             <span data-testid={`shop-badge-founder-${shop.id}`}
-              className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-200 border border-amber-400/50 backdrop-blur-sm font-semibold">
+              className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold">
               FOUNDER
             </span>
           )}
           {isClosing && (
-            <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/30 text-red-200 border border-red-400/50 backdrop-blur-sm font-semibold">
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 font-semibold">
               SLUIT
             </span>
           )}
         </div>
-        {/* Edit-knop voor owner (rechtsboven, alleen voor eigenaar) */}
+      </div>
+
+      {/* Banner met groot bedrijfslogo */}
+      <div className="relative h-32 flex items-center justify-center overflow-hidden mx-3 rounded-lg"
+        style={{ background: `linear-gradient(135deg, ${accent}22 0%, ${accent}11 50%, #0f172a 100%)` }}>
+        {logoUrl ? (
+          <img src={logoUrl} alt={shop.naam}
+            className="max-h-24 max-w-[70%] object-contain drop-shadow-lg" />
+        ) : (
+          <Store className="w-14 h-14" style={{ color: accent, opacity: 0.4 }} />
+        )}
+        {/* Edit-knop voor owner (linksboven in banner) */}
         {isOwner && !isClosing && (
           <button data-testid={`shop-edit-${shop.id}`} onClick={(e) => { e.stopPropagation(); onEdit(); }}
-            title="Winkel bewerken"
-            className="absolute top-2 left-2 p-1.5 rounded-lg bg-slate-900/60 hover:bg-slate-900/80 text-slate-300 hover:text-white backdrop-blur-sm">
+            title="Winkel bewerken (incl. logo)"
+            className="absolute top-2 left-2 p-1.5 rounded-lg bg-slate-900/70 hover:bg-slate-900/90 text-slate-300 hover:text-white backdrop-blur-sm border border-slate-700/50">
             <Edit3 className="w-3.5 h-3.5" />
+          </button>
+        )}
+        {/* v6_shop_admin_delete_001 — Admin verwijder-knop (rechtsboven, niet bij founder-shop) */}
+        {isAdmin && !isFounder && (
+          <button data-testid={`shop-admin-delete-${shop.id}`}
+            onClick={(e) => { e.stopPropagation(); onAdminDelete && onAdminDelete(shop); }}
+            title="Winkel definitief verwijderen (admin)"
+            className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-900/70 hover:bg-red-700/90 text-red-200 hover:text-white backdrop-blur-sm border border-red-500/40">
+            <X className="w-3.5 h-3.5" />
           </button>
         )}
       </div>
 
-      {/* Footer-strip: owner-avatar + shop-naam + bekijk */}
-      <div className="px-3 py-2.5 flex items-center gap-2.5 border-t border-slate-800/80">
+      {/* Footer-strip: owner-avatar + door X + tags + arrow */}
+      <div className="px-3 py-2.5 mt-2 flex items-center gap-2.5">
         {ownerAvatar ? (
           <img src={ownerAvatar} alt={shop.owner_naam || 'owner'}
             className="w-8 h-8 rounded-full object-cover border-2 flex-shrink-0"
@@ -176,11 +220,8 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-bold text-white truncate" data-testid={`shop-name-${shop.id}`}>
-            {shop.naam}
-          </h3>
-          <p className="text-[10px] text-slate-500 truncate">
-            door {shop.owner_naam || shop.owner_user_id}
+          <p className="text-[11px] text-slate-400 truncate">
+            door <span className="text-slate-300 font-medium">{shop.owner_naam || shop.owner_user_id}</span>
           </p>
         </div>
         {/* Tag-cluster (compact) */}
@@ -350,7 +391,10 @@ function EditShopModal({ shop, viewerId, onClose, onSaved }) {
       const r = await fetch(`${API}/api/winkelstraat/shops/${shop.id}/logo`, { method: 'POST', body: fd });
       const d = await r.json();
       if (!r.ok || !d.success) { setErr(d.detail || 'Logo upload mislukt'); setUploadingLogo(false); return; }
-      setLogoUrl(d.logo_url);
+      // v6_shop_logo_cache_buster_001 — voeg ?t= toe zodat browser nieuwe logo direct toont
+      setLogoUrl(`${d.logo_url}?t=${Date.now()}`);
+      // Sla op zodat onSaved-refresh ook de nieuwe logo ophaalt
+      onSaved && onSaved();
     } catch (e) { setErr(e.message); }
     setUploadingLogo(false);
   };

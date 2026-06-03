@@ -19,6 +19,7 @@ WALLET_FILE = DATA_DIR / "wallet" / "wallets.json"
 FINANCIAL_FILE = DATA_DIR / "financial" / "transactions.json"
 POTJES_FILE = DATA_DIR / "financial" / "user_potjes.json"
 PRODUCTS_FILE = DATA_DIR / "users" / "user-001" / "shops" / "shop-roadkill" / "products.json"
+SHOPS_FILE = DATA_DIR / "shop" / "shops.json"  # v6_shop_admin_delete_001 — module-level
 
 
 def _shop_products_path(shop_id: str = "shop-roadkill"):
@@ -748,13 +749,13 @@ async def admin_delete_shop(shop_id: str, viewer_id: str):
     _require_admin(viewer_id)
     if shop_id == "shop-roadkill":
         raise HTTPException(400, "System-default shop kan niet verwijderd worden")
-    data = load_json(SHOPS, default={"shops": []})
+    data = load_json(SHOPS_FILE, default={"shops": []})
     shops = data.get("shops", [])
     before = len(shops)
     data["shops"] = [s for s in shops if s.get("id") != shop_id]
     if len(data["shops"]) == before:
         raise HTTPException(404, f"Shop {shop_id} niet gevonden")
-    save_json(SHOPS, data)
+    save_json(SHOPS_FILE, data)
     return {"success": True, "deleted": shop_id, "remaining": len(data["shops"])}
 
 

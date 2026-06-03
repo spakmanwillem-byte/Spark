@@ -8,7 +8,9 @@
     "created_at": "2026-05-23T12:02:15.325174+00:00",
     "card_count": 1314,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T15:12:04.558953+00:00"
+    "last_updated": "2026-06-02T15:12:04.558953+00:00",
+    "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
+    "last_zip_merge_added": 46
   },
   "kaarten": [
     {
@@ -162497,6 +162499,6451 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-02T15:12:00.133503+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a82c0974",
+      "begrip": "gesteente",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gesteente is een natuurlijk vast materiaal dat bestaat uit één of meer mineralen.",
+        "laag2": "Gesteente vormt een belangrijk onderdeel van de aardkorst.",
+        "laag3": "Gesteenten ondersteunen de structuur van landschappen en leveren informatie over de geschiedenis van de aarde.",
+        "laag4": "Binnen Spark is gesteente een verzameling van mineralen die door natuurlijke processen is gevormd en een bouwsteen vormt van de aardkorst, bergen, bodems en andere geologische structuren."
+      },
+      "ws5": {
+        "wie": "geologen, onderzoekers, mensen",
+        "wat": "een natuurlijk vast materiaal van mineralen",
+        "wanneer": "gevormd over korte of zeer lange geologische perioden",
+        "waar": "in de aardkorst, bergen, bodems en ondergrond",
+        "waarom": "door geologische processen zoals afkoeling, afzetting of druk",
+        "hoe": "door natuurlijke vorming van mineralen tot een vaste massa"
+      },
+      "tags": [
+        "gesteente",
+        "steen",
+        "mineraal",
+        "aardkorst",
+        "geologie",
+        "natuur",
+        "bodem",
+        "berg",
+        "afzetting",
+        "magma",
+        "druk",
+        "kristal",
+        "materiaal",
+        "aarde",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9d48f5da",
+          "begrip": "grond",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aarde",
+            "bodem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bodem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-124bf8b6",
+          "begrip": "Steen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aarde",
+            "gesteente",
+            "natuur",
+            "steen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-dcbe0f85",
+          "begrip": "aardrijkskunde",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "aarde",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:14:21.736178+00:00",
+        "vorige_versie_v1": "kb-skel-a82c0974",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.764301+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:14:20.293462+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:14:20.360069+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:14:23.490367+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:14:23.498260+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:14:19.563763+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9fa42aa9",
+      "begrip": "concreet",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Concreet betekent duidelijk, specifiek en direct toepasbaar.",
+        "laag2": "Concreet beschrijft iets dat helder, tastbaar of nauwkeurig is.",
+        "laag3": "Concreet ondersteunt begrip, communicatie en uitvoering doordat informatie duidelijk en praktisch wordt gemaakt.",
+        "laag4": "Binnen Spark is concreet een eigenschap van informatie, plannen of uitspraken die specifiek, begrijpelijk en direct bruikbaar zijn zonder veel interpretatie of abstract denken."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een duidelijke en specifieke beschrijving",
+        "wanneer": "bij uitleg, plannen, opdrachten of communicatie",
+        "waar": "in gesprekken, documenten, onderwijs en systemen",
+        "waarom": "in gesprekken, documenten, onderwijs en systemen",
+        "hoe": "door duidelijke, specifieke en meetbare informatie te geven"
+      },
+      "tags": [
+        "concreet",
+        "duidelijk",
+        "specifiek",
+        "helder",
+        "praktisch",
+        "tastbaar",
+        "direct",
+        "uitvoerbaar",
+        "communicatie",
+        "begrip",
+        "uitleg",
+        "informatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e628516e",
+          "begrip": "antwoord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1364c6a2",
+          "begrip": "voorbeeld",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "uitleg"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:24:33.234193+00:00",
+        "vorige_versie_v1": "kb-skel-9fa42aa9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:01.121253+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:24:31.789465+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:24:31.799539+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:24:35.056212+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:24:35.087093+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:24:31.016216+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a2b54083",
+      "begrip": "speciaal",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Speciaal betekent dat iets bijzonder, opvallend of anders is dan normaal.",
+        "laag2": "Speciaal geeft aan dat iets extra aandacht krijgt of zich onderscheidt van de rest.",
+        "laag3": "Speciaal ondersteunt herkenning, waardering en betekenis doordat unieke eigenschappen zichtbaar worden gemaakt.",
+        "laag4": "Binnen Spark is speciaal een eigenschap die aangeeft dat een persoon, object, gebeurtenis of situatie zich onderscheidt door unieke kenmerken, bijzondere waarde of een afwijkende betekenis binnen een bepaalde context."
+      },
+      "ws5": {
+        "wie": "mensen, objecten, gebeurtenissen, situaties",
+        "wat": "iets bijzonders of afwijkends",
+        "wanneer": "wanneer iets zich onderscheidt van de norm",
+        "waar": "in relaties, gebeurtenissen, objecten en ervaringen",
+        "waarom": "om unieke kenmerken of betekenis aan te geven",
+        "hoe": "door eigenschappen, omstandigheden of waarde die anders zijn dan gebruikelijk"
+      },
+      "tags": [
+        "speciaal",
+        "bijzonder",
+        "uniek",
+        "opvallend",
+        "uitzonderlijk",
+        "waardevol",
+        "onderscheidend",
+        "betekenisvol",
+        "herkenning",
+        "aandacht",
+        "eigenschap",
+        "context",
+        "positief",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d3a68e49",
+          "begrip": "geur",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5414e132",
+          "begrip": "grijns",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:26:06.717059+00:00",
+        "vorige_versie_v1": "kb-skel-a2b54083",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:09.002736+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:26:05.192467+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:26:05.280045+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:26:09.283392+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:26:09.294564+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:26:04.320565+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d88c5630",
+      "begrip": "waarschijnlijk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Waarschijnlijk betekent dat iets naar verwachting zal gebeuren of waar is, maar niet volledig zeker is.",
+        "laag2": "Waarschijnlijk geeft aan dat de kans op een bepaalde uitkomst groot is.",
+        "laag3": "Waarschijnlijk ondersteunt inschatting, voorspelling en besluitvorming wanneer volledige zekerheid ontbreekt.",
+        "laag4": "Binnen Spark is waarschijnlijk een beoordeling van kans waarbij beschikbare informatie, waarnemingen of patronen erop wijzen dat een gebeurtenis, uitspraak of uitkomst aannemelijk is, zonder absolute zekerheid."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een inschatting van kans",
+        "wanneer": "bij onzekerheid of voorspellingen",
+        "waar": "in denken, analyse, communicatie en besluitvorming",
+        "waarom": "om verwachtingen en kansen te beoordelen",
+        "hoe": "door beschikbare informatie en aanwijzingen te wegen"
+      },
+      "tags": [
+        "waarschijnlijk",
+        "kans",
+        "verwachting",
+        "voorspelling",
+        "inschatting",
+        "onzekerheid",
+        "aannemelijk",
+        "mogelijkheid",
+        "analyse",
+        "beoordeling",
+        "informatie",
+        "patroon",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ad6b88f4",
+          "begrip": "voorspelling",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "informatie",
+            "inschatting",
+            "kans"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "beoordeling",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0847772f",
+          "begrip": "onzekerheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "onzekerheid",
+            "voorspelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58e62d0e",
+          "begrip": "beoordelen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "beoordeling",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b80c57e5",
+          "begrip": "detectie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "patroon"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:31:39.949290+00:00",
+        "vorige_versie_v1": "kb-skel-d88c5630",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:26.178170+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:31:38.981530+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:31:38.990625+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:31:42.367753+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:31:42.378045+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:31:37.982587+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-5bcd0c31",
+      "begrip": "waarden",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Waarden zijn principes, overtuigingen of idealen die bepalen wat belangrijk, goed of wenselijk wordt gevonden.",
+        "laag2": "Waarden geven richting aan keuzes, gedrag en besluitvorming.",
+        "laag3": "Waarden ondersteunen identiteit, samenwerking en betekenisgeving doordat zij helpen bepalen wat prioriteit krijgt.",
+        "laag4": "Binnen Spark zijn waarden fundamentele uitgangspunten die gebruikt worden om gedrag, keuzes, doelen en relaties te beoordelen en richting te geven binnen een persoon, groep of systeem."
+      },
+      "ws5": {
+        "wie": "mensen, groepen, organisaties, systemen",
+        "wat": "principes of overtuigingen over wat belangrijk is",
+        "wanneer": "bij keuzes, gedrag en besluitvorming",
+        "waar": "in relaties, werk, cultuur en samenleving",
+        "waarom": "om richting en betekenis te geven",
+        "hoe": "door voorkeuren, normen en overtuigingen te gebruiken als leidraad"
+      },
+      "tags": [
+        "waarden",
+        "principes",
+        "overtuigingen",
+        "normen",
+        "idealen",
+        "betekenis",
+        "identiteit",
+        "gedrag",
+        "keuzes",
+        "besluitvorming",
+        "respect",
+        "verantwoordelijkheid",
+        "cultuur",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-018e3d9a",
+          "begrip": "joël",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "blij",
+            "cultuur",
+            "emotie",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2b80d498",
+          "begrip": "Ring",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "blij",
+            "cultuur",
+            "emotie",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1964f6ec",
+          "begrip": "ketting",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "blij",
+            "cultuur",
+            "emotie",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "cultuur",
+            "emotie",
+            "gedrag",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gedrag",
+            "identiteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:35:14.971772+00:00",
+        "vorige_versie_v1": "kb-skel-5bcd0c31",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:41.569084+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:35:11.601884+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:35:11.679040+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:35:16.788955+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:35:16.851409+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:35:10.817869+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f5e6af9a",
+      "begrip": "symbolen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Symbolen zijn tekens, afbeeldingen of objecten die een betekenis vertegenwoordigen.",
+        "laag2": "Een symbool verwijst naar iets anders dan zichzelf, zoals een idee, object of begrip.",
+        "laag3": "Symbolen ondersteunen communicatie, herkenning en betekenisgeving doordat complexe informatie compact kan worden weergegeven.",
+        "laag4": "Binnen Spark zijn symbolen betekenisdragers die worden gebruikt om informatie, concepten, emoties, functies of relaties op een herkenbare en efficiënte manier weer te geven.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen, culturen",
+        "wat": "tekens of afbeeldingen met een betekenis",
+        "wanneer": "bij communicatie, herkenning en representatie",
+        "waar": "in taal, media, interfaces, kunst en systemen",
+        "waarom": "om betekenis snel en duidelijk over te brengen",
+        "hoe": "door een teken, beeld of object te koppelen aan een begrip of idee"
+      },
+      "tags": [
+        "symbolen",
+        "symbool",
+        "teken",
+        "betekenis",
+        "representatie",
+        "communicatie",
+        "pictogram",
+        "icoon",
+        "taal",
+        "informatie",
+        "herkenning",
+        "afbeelding",
+        "concept",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-b1197711",
+          "begrip": "symbool",
+          "lade": "spreken",
+          "overlap": 12,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "concept",
+            "emotie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e64c654b",
+          "begrip": "benoemen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "herkenning",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "symbolen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:43:11.520319+00:00",
+        "vorige_versie_v1": "kb-skel-f5e6af9a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.895349+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:43:09.890126+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:43:09.898886+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:43:13.306141+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:43:13.381040+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:43:09.105496+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-8b1b1907",
+      "begrip": "route",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een route is een vastgestelde weg of reeks stappen van een beginpunt naar een eindpunt.",
+        "laag2": "Een route beschrijft hoe een bestemming of doel bereikt kan worden.",
+        "laag3": "Routes ondersteunen navigatie, planning en voortgang door richting en volgorde aan te geven.",
+        "laag4": "Binnen Spark is een route een pad van locaties, keuzes, acties of stappen dat gevolgd wordt om een bepaald doel, resultaat of bestemming te bereiken.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een pad of reeks stappen",
+        "wanneer": "bij reizen, navigeren of doelgericht handelen",
+        "waar": "in de fysieke wereld, digitale systemen en processen",
+        "waarom": "om een bestemming of doel te bereiken",
+        "hoe": "door een bepaalde volgorde van wegen, keuzes of acties te volgen"
+      },
+      "tags": [
+        "route",
+        "pad",
+        "weg",
+        "navigatie",
+        "richting",
+        "bestemming",
+        "traject",
+        "stappen",
+        "planning",
+        "voortgang",
+        "reis",
+        "proces",
+        "doel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a933c396",
+          "begrip": "Weg",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "navigatie",
+            "pad",
+            "richting",
+            "route",
+            "weg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "neutraal",
+            "planning",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6f705508",
+          "begrip": "Pad",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "navigatie",
+            "pad",
+            "proces",
+            "richting",
+            "route"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff2554fe",
+          "begrip": "later",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "proces",
+            "voortgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a4096d6",
+          "begrip": "productiviteit",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "neutraal",
+            "planning",
+            "voortgang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:44:45.062620+00:00",
+        "vorige_versie_v1": "kb-skel-8b1b1907",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.425660+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:44:43.354040+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:44:43.383852+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:44:46.883072+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:44:46.892006+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:44:42.536505+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e5ecab7e",
+      "begrip": "mond",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "De mond is een opening in het gezicht die wordt gebruikt voor eten, drinken, ademen en spreken.",
+        "laag2": "De mond helpt bij het opnemen van voedsel en het maken van geluiden en woorden.",
+        "laag3": "De mond ondersteunt voeding, communicatie en ademhaling door voedsel te verwerken en geluid voort te brengen.",
+        "laag4": "Binnen Spark is de mond een lichaamsdeel dat betrokken is bij eten, drinken, spreken, ademen en het uiten van emoties. De mond vormt een belangrijke verbinding tussen het lichaam en de omgeving.\n"
+      },
+      "ws5": {
+        "wie": "mensen en dieren",
+        "wat": "een opening en lichaamsdeel in het gezicht",
+        "wanneer": "bij eten, drinken, spreken en ademen",
+        "waar": "aan de voorkant van het hoofd",
+        "waarom": "voor voeding, communicatie en ademhaling",
+        "hoe": "door samen te werken met lippen, tong, tanden en kaak"
+      },
+      "tags": [
+        "mond",
+        "lichaam",
+        "gezicht",
+        "spreken",
+        "eten",
+        "drinken",
+        "ademhaling",
+        "communicatie",
+        "tong",
+        "tanden",
+        "lippen",
+        "kaak",
+        "anatomie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f02f431e",
+          "begrip": "spreektaal",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:46:20.446222+00:00",
+        "vorige_versie_v1": "kb-skel-e5ecab7e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.104911+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:46:18.789707+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:46:18.855766+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:46:22.264518+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:46:22.278994+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:46:17.872934+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-bae9f8e3",
+      "begrip": "optie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een optie is een mogelijke keuze uit meerdere beschikbare mogelijkheden.",
+        "laag2": "Een optie biedt een alternatief waaruit gekozen kan worden.",
+        "laag3": "Opties ondersteunen besluitvorming, flexibiliteit en keuzevrijheid doordat verschillende mogelijkheden beschikbaar zijn.",
+        "laag4": "Binnen Spark is een optie een beschikbare mogelijkheid, actie of uitkomst die kan worden geselecteerd door een gebruiker, systeem of proces om een bepaald doel of vervolgactie te bepalen.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een mogelijke keuze",
+        "wanneer": "wanneer meerdere mogelijkheden beschikbaar zijn",
+        "waar": "in beslissingen, systemen, processen en interacties",
+        "waarom": "om keuzevrijheid en verschillende uitkomsten mogelijk te maken",
+        "hoe": "door één mogelijkheid uit een verzameling alternatieven te selecteren"
+      },
+      "tags": [
+        "keuze",
+        "mogelijkheid",
+        "alternatief",
+        "selectie",
+        "beslissing",
+        "besluitvorming",
+        "vrijheid",
+        "interactie",
+        "systeem",
+        "actie",
+        "uitkomst",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a244cd34",
+          "begrip": "Maak een keus",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "beslissing",
+            "besluitvorming",
+            "interactie",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b9b1f79",
+          "begrip": "besluitvorming",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "besluitvorming",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6ac86d79",
+          "begrip": "handelen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "beslissing",
+            "emotie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8cd74bf5",
+          "begrip": "voorgesteld",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "besluitvorming",
+            "emotie",
+            "interactie",
+            "keuze",
+            "mogelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e13cf93",
+          "begrip": "opties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beslissing",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:49:34.539696+00:00",
+        "vorige_versie_v1": "kb-skel-bae9f8e3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.732850+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:49:32.468326+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:49:32.481698+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:49:36.355438+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:49:36.382287+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:49:31.646734+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-904af4d1",
+      "begrip": "bruikbaar",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bruikbaar betekent dat iets geschikt is om te gebruiken voor een bepaald doel.",
+        "laag2": "Bruikbaar geeft aan dat iets praktisch toepasbaar en nuttig is.",
+        "laag3": "Bruikbaarheid ondersteunt efficiëntie, probleemoplossing en doelgericht handelen doordat middelen of informatie daadwerkelijk kunnen worden ingezet.",
+        "laag4": "Binnen Spark is bruikbaar een eigenschap van een object, idee, hulpmiddel, kenniskaart of informatiebron die aangeeft dat deze effectief kan worden toegepast om een taak uit te voeren, een probleem op te lossen of een doel te bereiken.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "iets dat geschikt is voor gebruik",
+        "wanneer": "wanneer iets een functie of doel kan vervullen",
+        "waar": "in hulpmiddelen, informatie, systemen en processen",
+        "waarom": "om een taak uit te voeren of een doel te bereiken",
+        "hoe": "door praktisch en effectief toepasbaar te zijn"
+      },
+      "tags": [
+        "bruikbaar",
+        "nuttig",
+        "toepasbaar",
+        "praktisch",
+        "functioneel",
+        "effectief",
+        "hulpmiddel",
+        "informatie",
+        "doelgericht",
+        "inzetbaar",
+        "waardevol",
+        "gebruik",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:55:48.901849+00:00",
+        "vorige_versie_v1": "kb-skel-904af4d1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:20.154334+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:55:47.688927+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:55:47.699066+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:55:50.704472+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:55:50.781702+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:55:46.821819+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c229ca0c",
+      "begrip": "zoogdieren",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Zoogdieren zijn dieren die hun jongen voeden met melk die door het moederdier wordt geproduceerd.",
+        "laag2": "Zoogdieren vormen een diergroep met kenmerken zoals haar of vacht en verzorging van hun jongen.",
+        "laag3": "Zoogdieren ondersteunen biodiversiteit en vervullen belangrijke rollen binnen ecosystemen als planteneters, roofdieren, alleseters en bestuivers.",
+        "laag4": "Binnen Spark zijn zoogdieren een klasse van gewervelde dieren die hun jongen voeden met moedermelk, warmbloedig zijn en zich hebben aangepast aan uiteenlopende leefomgevingen zoals land, zee en lucht.\n"
+      },
+      "ws5": {
+        "wie": "mensen, honden, katten, paarden, walvissen en andere zoogdieren",
+        "wat": "een klasse van gewervelde dieren",
+        "wanneer": "gedurende hun levenscyclus vanaf geboorte",
+        "waar": "op land, in zee en deels in de lucht",
+        "waarom": "als onderdeel van ecosystemen en natuurlijke voedselketens",
+        "hoe": "door zich voort te planten, hun jongen te verzorgen en melk te geven"
+      },
+      "tags": [
+        "zoogdieren",
+        "dier",
+        "biologie",
+        "natuur",
+        "melk",
+        "moederdier",
+        "vacht",
+        "haar",
+        "warmbloedig",
+        "gewervelde",
+        "ecosysteem",
+        "diergroep",
+        "leven",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "leven",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7865b573",
+          "begrip": "Organismen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "emotie",
+            "leven",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c12fb2d0",
+          "begrip": "Schapen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "melk",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-43a559a1",
+          "begrip": "Vleermuis",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:03:50.478169+00:00",
+        "vorige_versie_v1": "kb-skel-c229ca0c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.665823+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:03:48.990168+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:03:49.058821+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:03:52.397269+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:03:52.479642+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:03:48.254161+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-22a641b0",
+      "begrip": "informatiebron",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een informatiebron is een persoon, object, systeem of medium waaruit informatie kan worden verkregen.",
+        "laag2": "Een informatiebron levert kennis, gegevens of inzichten over een onderwerp.",
+        "laag3": "Informatiebronnen ondersteunen leren, onderzoek en besluitvorming door informatie beschikbaar te maken voor gebruik en interpretatie.",
+        "laag4": "Binnen Spark is een informatiebron een oorsprong of opslagplaats van gegevens, kennis, ervaringen of signalen die gebruikt kunnen worden om begrip, analyse, communicatie of besluitvorming te ondersteunen.\n"
+      },
+      "ws5": {
+        "wie": "mensen, organisaties, systemen, media",
+        "wat": "een bron van informatie of kennis",
+        "wanneer": "bij leren, onderzoeken of beslissen",
+        "waar": "in boeken, databases, gesprekken, websites en systemen",
+        "waarom": "om kennis of gegevens beschikbaar te maken",
+        "hoe": "door informatie te verzamelen, bewaren of delen"
+      },
+      "tags": [
+        "informatiebron",
+        "informatie",
+        "kennis",
+        "bron",
+        "gegevens",
+        "onderzoek",
+        "communicatie",
+        "leren",
+        "database",
+        "documentatie",
+        "media",
+        "waarneming",
+        "systeem",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9be16a2a",
+          "begrip": "vragen",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00205cb5",
+          "begrip": "studie",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "informatie",
+            "kennis",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "documentatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "database",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:05:29.244079+00:00",
+        "vorige_versie_v1": "kb-skel-22a641b0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:07.900800+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:05:28.270958+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:05:28.287479+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:05:31.500291+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:05:31.579337+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:05:27.170211+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-5a80c066",
+      "begrip": "bouwstenen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bouwstenen zijn onderdelen waaruit een groter geheel kan worden opgebouwd.",
+        "laag2": "Bouwstenen vormen de basis van een structuur, systeem, idee of object.",
+        "laag3": "Bouwstenen ondersteunen ontwikkeling, organisatie en creatie doordat complexe gehelen kunnen worden samengesteld uit kleinere onderdelen.",
+        "laag4": "Bouwstenen ondersteunen ontwikkeling, organisatie en creatie doordat complexe gehelen kunnen worden samengesteld uit kleinere onderdelen."
+      },
+      "ws5": {
+        "wie": "mensen, ontwerpers, ontwikkelaars, systemen",
+        "wat": "basisonderdelen van een groter geheel",
+        "wanneer": "tijdens opbouw, ontwikkeling of ontwer",
+        "waar": "in kennis, systemen, objecten, processen en structuren",
+        "waarom": "om grotere gehelen te kunnen vormen",
+        "hoe": "door onderdelen te combineren en met elkaar te verbinden"
+      },
+      "tags": [
+        "bouwstenen",
+        "basis",
+        "onderdeel",
+        "structuur",
+        "systeem",
+        "opbouw",
+        "fundament",
+        "component",
+        "element",
+        "kennis",
+        "organisatie",
+        "ontwikkeling",
+        "samenstelling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ff1be4f3",
+          "begrip": "laag",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "kennis",
+            "neutraal",
+            "onderdeel",
+            "opbouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e632e36",
+          "begrip": "element",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bouwstenen",
+            "component",
+            "element",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1129086",
+          "begrip": "onderdeel",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bouwstenen",
+            "component",
+            "emotie",
+            "neutraal",
+            "onderdeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e97f471",
+          "begrip": "verzamelen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "kennis",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13bddec2",
+          "begrip": "onderdelen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "component",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:07:10.494874+00:00",
+        "vorige_versie_v1": "kb-skel-5a80c066",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.728770+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:07:09.167510+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:07:09.178891+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:07:12.302506+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:07:12.383869+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:07:08.354153+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-01cacea4",
+      "begrip": "familienaam",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een familienaam is de naam die leden van dezelfde familie met elkaar delen.",
+        "laag2": "Een familienaam helpt personen te identificeren en familieverbanden herkenbaar te maken.",
+        "laag3": "Familienamen ondersteunen registratie, identificatie en verwantschap door mensen aan een familie of afstammingslijn te koppelen.",
+        "laag4": "Binnen Spark is een familienaam een erfelijke naam die wordt gebruikt om personen te onderscheiden en hun relatie met een familie, geslacht of afstamming zichtbaar te maken.\n"
+      },
+      "ws5": {
+        "wie": "personen, families, burgers",
+        "wat": "een gedeelde naam binnen een familie",
+        "wanneer": "vanaf geboorte, erkenning of naamswijziging",
+        "waar": "in registraties, documenten en sociale situaties",
+        "waarom": "voor identificatie en herkenning van familieverbanden",
+        "hoe": "door een familienaam te erven, verkrijgen of aannemen"
+      },
+      "tags": [
+        "familienaam",
+        "achternaam",
+        "familie",
+        "verwantschap",
+        "afstamming",
+        "identiteit",
+        "naam",
+        "registratie",
+        "persoon",
+        "geslacht",
+        "familieverband",
+        "herkenning",
+        "administratie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "achternaam",
+            "administratie",
+            "emotie",
+            "familie",
+            "familienaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b15ef9cf",
+          "begrip": "martens",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "achternaam",
+            "emotie",
+            "familie",
+            "familienaam",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b941ec1e",
+          "begrip": "Pelster",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "achternaam",
+            "emotie",
+            "familie",
+            "familienaam",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6fe78ed",
+          "begrip": "Maas",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "achternaam",
+            "emotie",
+            "familie",
+            "familienaam",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "administratie",
+            "emotie",
+            "herkenning",
+            "identiteit",
+            "naam"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:08:51.256248+00:00",
+        "vorige_versie_v1": "kb-skel-01cacea4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.622975+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:08:50.207046+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:08:50.216371+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:08:52.992363+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:08:53.059953+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:08:49.407230+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-0b365c00",
+      "begrip": "besturingssysteem",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een besturingssysteem is software die de werking van een computer, apparaat of systeem beheert.",
+        "laag2": "Een besturingssysteem zorgt ervoor dat hardware en software met elkaar kunnen samenwerken.",
+        "laag3": "Besturingssystemen ondersteunen het uitvoeren van programma's, beheren van middelen en communiceren met apparaten.",
+        "laag4": "Binnen Spark is een besturingssysteem een centrale softwarelaag die processen, geheugen, bestanden, apparaten en gebruikersinteracties beheert zodat een systeem betrouwbaar en efficiënt kan functioneren.\n"
+      },
+      "ws5": {
+        "wie": "gebruikers, computers, apparaten, systemen",
+        "wat": "software die een systeem beheert",
+        "wanneer": "tijdens het gebruik van een computer of apparaat",
+        "waar": "op computers, telefoons, servers en ingebedde systemen",
+        "waarom": "om hardware en software te laten samenwerken",
+        "hoe": "door processen, geheugen, bestanden en apparaten te beheren"
+      },
+      "tags": [
+        "besturingssysteem",
+        "software",
+        "computer",
+        "systeem",
+        "kernel",
+        "hardware",
+        "programma",
+        "procesbeheer",
+        "geheugen",
+        "bestandssysteem",
+        "apparaat",
+        "gebruiker",
+        "technologie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-81be535a",
+          "begrip": "computers",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "computer",
+            "emotie",
+            "hardware",
+            "neutraal",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c314d4ff",
+          "begrip": "computermuis",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "computer",
+            "emotie",
+            "gebruiker",
+            "hardware",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f95d8e14",
+          "begrip": "hardware",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "apparaat",
+            "computer",
+            "emotie",
+            "geheugen",
+            "hardware"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1103ac04",
+          "begrip": "software",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "computer",
+            "emotie",
+            "neutraal",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0e95be78",
+          "begrip": "Besturingssystemen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "besturingssysteem",
+            "computer",
+            "software",
+            "systeem",
+            "technologie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:15:31.156385+00:00",
+        "vorige_versie_v1": "kb-skel-0b365c00",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.551188+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:15:30.204883+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:15:30.278124+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:15:33.157028+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:15:33.166096+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:15:29.385857+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-458f5f21",
+      "begrip": "container",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een container is een object, ruimte of structuur die wordt gebruikt om iets in op te slaan, te vervoeren of te beschermen.",
+        "laag2": "Een container houdt inhoud bij elkaar en scheidt deze van de omgeving.",
+        "laag3": "Containers ondersteunen opslag, organisatie, transport en bescherming van materialen, gegevens of andere inhoud.",
+        "laag4": "Binnen Spark is een container een afgebakende eenheid waarin objecten, informatie, processen of gegevens kunnen worden opgeslagen, gegroepeerd, beheerd of verplaatst zonder hun onderlinge samenhang te verliezen.\n"
+      },
+      "ws5": {
+        "wie": "mensen, organisaties, systemen",
+        "wat": "een opslag- of transporteenheid",
+        "wanneer": "bij opslag, vervoer, ordening of bescherming",
+        "waar": "in logistiek, software, databases en dagelijkse situaties",
+        "waarom": "om inhoud georganiseerd en beschermd te houden",
+        "hoe": "door een afgebakende ruimte of structuur te bieden voor inhoud"
+      },
+      "tags": [
+        "container",
+        "opslag",
+        "verpakking",
+        "inhoud",
+        "transport",
+        "bescherming",
+        "structuur",
+        "organisatie",
+        "gegevens",
+        "systeem",
+        "verzameling",
+        "afbakening",
+        "logistiek",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4e97f471",
+          "begrip": "verzamelen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "gegevens",
+            "neutraal",
+            "opslag",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0087262b",
+          "begrip": "verzameling",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "gegevens",
+            "neutraal",
+            "opslag",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3829f084",
+          "begrip": "logistiek",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "logistiek",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gegevens",
+            "inhoud",
+            "neutraal",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45e27ba5",
+          "begrip": "soldaten",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:17:12.307058+00:00",
+        "vorige_versie_v1": "kb-skel-458f5f21",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.536884+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:17:10.395511+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:17:10.405263+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:17:14.006009+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:17:14.084573+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:17:09.635466+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9a72140f",
+      "begrip": "conclusie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een conclusie is een oordeel, uitkomst of gevolgtrekking die wordt gevormd op basis van informatie, waarnemingen of redeneringen.",
+        "laag2": "Een conclusie brengt informatie samen tot een eindresultaat of inzicht.",
+        "laag3": "Conclusies ondersteunen begrip, besluitvorming en kennisopbouw doordat informatie wordt verwerkt tot een betekenisvolle uitkomst.",
+        "laag4": "Binnen Spark is een conclusie het resultaat van analyse, observatie, vergelijking of redenering waarbij beschikbare informatie wordt samengebracht tot een samenhangend inzicht, oordeel of antwoord.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, systemen",
+        "wat": "een gevolgtrekking of uitkomst",
+        "wanneer": "na analyse, onderzoek of nadenken",
+        "waar": "in denken, leren, onderzoek en besluitvorming",
+        "waarom": "om betekenis te geven aan informatie en keuzes te ondersteunen",
+        "hoe": "door gegevens, kennis of waarnemingen te combineren en te beoordelen"
+      },
+      "tags": [
+        "conclusie",
+        "gevolgtrekking",
+        "uitkomst",
+        "inzicht",
+        "oordeel",
+        "analyse",
+        "redenering",
+        "informatie",
+        "kennis",
+        "besluitvorming",
+        "evaluatie",
+        "resultaat",
+        "begrip",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-db4fb36c",
+          "begrip": "nadenken",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "analyse",
+            "begrip",
+            "besluitvorming",
+            "emotie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9a4b2e3",
+          "begrip": "intelligentie",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "analyse",
+            "begrip",
+            "besluitvorming",
+            "emotie",
+            "inzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e31a7aca",
+          "begrip": "beoordeling",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "analyse",
+            "besluitvorming",
+            "emotie",
+            "evaluatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "evaluatie",
+            "neutraal",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-38b878b2",
+          "begrip": "onderzoek",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "emotie",
+            "informatie",
+            "inzicht",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:18:40.563624+00:00",
+        "vorige_versie_v1": "kb-skel-9a72140f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.465025+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:18:39.396802+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:18:39.456930+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:18:42.272517+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:18:42.354138+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:18:38.640430+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c44fd0bc",
+      "begrip": "overeenstemming",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Overeenstemming betekent dat twee of meer zaken, personen of ideeën gelijk zijn of met elkaar in harmonie zijn.",
+        "laag2": "Overeenstemming geeft aan dat er sprake is van een match, akkoord of gedeeld begrip.\n",
+        "laag3": "Overeenstemming ondersteunt samenwerking, communicatie en besluitvorming doordat verschillen voldoende zijn opgelost of omdat zaken goed op elkaar aansluiten.\n",
+        "laag4": "Binnen Spark is overeenstemming een toestand waarin informatie, standpunten, waarnemingen, doelen of systemen voldoende met elkaar overeenkomen om verbinding, samenwerking of acceptatie mogelijk te maken.\n"
+      },
+      "ws5": {
+        "wie": "mensen, groepen, systemen, organisaties",
+        "wat": "een situatie van gelijkheid of akkoord",
+        "wanneer": "bij gedeeld begrip, vergelijkingen of afspraken",
+        "waar": "in communicatie, relaties, analyses en besluitvorming",
+        "waarom": "om samenwerking, begrip of consistentie mogelijk te maken",
+        "hoe": "door overeenkomende kenmerken, inzichten of afspraken vast te stellen"
+      },
+      "tags": [
+        "overeenstemming",
+        "akkoord",
+        "consensus",
+        "gelijkheid",
+        "match",
+        "overeenkomst",
+        "begrip",
+        "samenwerking",
+        "afstemming",
+        "verbinding",
+        "afspraak",
+        "acceptatie",
+        "harmonie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1d373d6f",
+          "begrip": "overeenkomst",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "afspraak",
+            "afstemming",
+            "gelijkheid",
+            "neutraal",
+            "overeenkomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "afspraak",
+            "akkoord",
+            "overeenstemming",
+            "samenwerking",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-649c119c",
+          "begrip": "besproken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "afstemming",
+            "begrip",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "afstemming",
+            "neutraal",
+            "samenwerking",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c51f0f04",
+          "begrip": "oke, jij hebt gelijk.",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "acceptatie",
+            "begrip",
+            "overeenstemming",
+            "samenwerking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:20:05.486135+00:00",
+        "vorige_versie_v1": "kb-skel-c44fd0bc",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.361033+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:20:04.794024+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:20:04.802327+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:20:07.297186+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:20:07.306778+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:20:03.992754+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-0eebf3f5",
+      "begrip": "knaagdier",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een knaagdier is een zoogdier met voortdurend groeiende voortanden waarmee het kan knagen.",
+        "laag2": "Knaagdieren gebruiken hun sterke snijtanden om voedsel en materialen door te bijten.",
+        "laag3": "Knaagdieren ondersteunen ecosystemen als voedselverzamelaars, zaadverspreiders en prooidieren binnen voedselketens.",
+        "laag4": "Binnen Spark is een knaagdier een lid van een groep zoogdieren die gekenmerkt wordt door voortdurend groeiende voortanden en een sterke aanpassing aan knagen. Voorbeelden zijn muizen, ratten, hamsters, cavia's, eekhoorns en bevers.\n"
+      },
+      "ws5": {
+        "wie": "muizen, ratten, hamsters, cavia's, eekhoorns, bevers",
+        "wat": "een groep knagende zoogdieren",
+        "wanneer": "tijdens voedselzoeken, knagen en nestbouw",
+        "waar": "in bossen, velden, steden, woningen en andere leefgebieden",
+        "waarom": "om voedsel te verkrijgen en hun tanden op lengte te houden",
+        "hoe": "door te knagen met voortdurend groeiende voortanden"
+      },
+      "tags": [
+        "knaagdier",
+        "zoogdier",
+        "dier",
+        "knagen",
+        "voortanden",
+        "muis",
+        "rat",
+        "hamster",
+        "cavia",
+        "eekhoorn",
+        "bever",
+        "natuur",
+        "biologie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ac0761e3",
+          "begrip": "Muis",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "knaagdier",
+            "muis",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-43a559a1",
+          "begrip": "Vleermuis",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal",
+            "zoogdier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c229ca0c",
+          "begrip": "zoogdieren",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:21:33.035833+00:00",
+        "vorige_versie_v1": "kb-skel-0eebf3f5",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.468184+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:21:31.603413+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:21:31.682538+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:21:34.795239+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:21:34.804296+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T09:21:30.787784+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a924647e",
+      "begrip": "Bouwtekening",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bouwtekening is een technische tekening die laat zien hoe een gebouw of constructie moet worden gebouwd.",
+        "laag2": "Bouwtekeningen helpen bouwers om precies te begrijpen hoe een ontwerp uitgevoerd moet worden.",
+        "laag3": "Een bouwtekening bevat informatie over de vorm, afmetingen, materialen en indeling van een gebouw of constructie. Het laat zien waar muren, deuren, ramen en andere onderdelen moeten komen zodat bouwers het ontwerp correct kunnen uitvoeren.",
+        "laag4": "Een bouwtekening bevat informatie over de vorm, afmetingen, materialen en indeling van een gebouw of constructie. Het laat zien waar muren, deuren, ramen en andere onderdelen moeten komen zodat bouwers het ontwerp correct kunnen uitvoeren."
+      },
+      "ws5": {
+        "wie": "Architecten, ingenieurs en bouwers",
+        "wat": "Architecten, ingenieurs en bouwers",
+        "wanneer": "Voor en tijdens een bouwproject",
+        "waar": "In de bouw, architectuur en techniek",
+        "waarom": "Om duidelijk te maken hoe een gebouw of constructie moet worden gebouwd",
+        "hoe": "Door een gedetailleerde tekening te maken met afmetingen, structuur en onderdelen."
+      },
+      "tags": [
+        "bouwtekening",
+        "ontwerp",
+        "bouw",
+        "Plan",
+        "architectuur"
+      ],
+      "topic": "informatie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9b94f296",
+          "begrip": "Blauwdruk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "architectuur",
+            "ontwerp",
+            "plan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-796f7dad",
+          "begrip": "Bouwopdracht",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "plan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f10b32f4",
+          "begrip": "Balkon",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "architectuur",
+            "bouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b1f57250",
+          "begrip": "Tussenmuur",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "architectuur",
+            "bouw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ffedab0",
+          "begrip": "Bouwschema",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "ontwerp",
+            "plan"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:26:40.683433+00:00",
+        "vorige_versie_v1": "snap-0682ba1a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.231050+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:26:42.486400+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:26:42.494048+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-481dfbb5",
+      "begrip": "Balans in ecosysteem is belangrijk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Balans in een ecosysteem is belangrijk voor overleving.",
+        "laag2": "Een ecosysteem blijft gezond wanneer er een evenwicht is tussen organismen en hun omgeving.",
+        "laag3": "Balans in een ecosysteem betekent dat de verschillende organismen en omgevingsfactoren in evenwicht zijn. Dit zorgt ervoor dat populaties stabiel blijven en dat er voldoende voedsel en middelen beschikbaar zijn. Wanneer deze balans verstoord raakt, kunnen soorten verdwijnen of juist overmatig groeien, wat het ecosysteem kan beschadigen.",
+        "laag4": "Benadrukt dat evenwicht nodig is voor stabiliteit en voortbestaan van systemen."
+      },
+      "ws5": {
+        "wie": "Alle organismen binnen het ecosysteem",
+        "wat": "Evenwicht binnen het systeem",
+        "wanneer": "Continu van belang",
+        "waar": "In elk ecosysteem",
+        "waarom": "Omdat balans zorgt voor stabiliteit en voortbestaan",
+        "hoe": "Door natuurlijke regulatie van populaties en middelen"
+      },
+      "tags": [
+        "ecosysteem",
+        "balans",
+        "evenwicht",
+        "natuur",
+        "overleving",
+        "stabiliteit",
+        "organisme"
+      ],
+      "topic": "ecosysteem",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4c5018cd",
+          "begrip": "Diversiteit van organismen zorgt voor balans",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "ecosysteem",
+            "organisme",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-140e2486",
+          "begrip": "Evenwicht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "ecosysteem",
+            "evenwicht",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f480eb3d",
+          "begrip": "Balans",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "ecosysteem",
+            "evenwicht",
+            "stabiliteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-389ae51d",
+          "begrip": "Organismen zijn afhankelijk van elkaar voor overleving",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "natuur",
+            "organisme",
+            "overleving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3682fb0a",
+          "begrip": "Verandering in ecosysteem beïnvloedt geheel",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "ecosysteem",
+            "natuur",
+            "organisme"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:26:53.454107+00:00",
+        "vorige_versie_v1": "snap-d70cbbe0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.470613+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:26:55.262992+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:26:55.270512+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1385f7b6",
+      "begrip": "Beveiligingsplannen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Beveiligingsplannen zijn plannen die beschrijven hoe systemen, gegevens of organisaties beschermd worden tegen risico’s en bedreigingen.",
+        "laag2": "Ze bevatten regels, procedures en maatregelen om schade, misbruik, datalekken of aanvallen te voorkomen.",
+        "laag3": "Een beveiligingsplan is een gestructureerd document of strategie waarin staat hoe een organisatie haar informatie, systemen en infrastructuur beschermt. Het beschrijft mogelijke risico’s, veiligheidsmaatregelen, verantwoordelijkheden en procedures voor het voorkomen en reageren op beveiligingsincidenten. Dit kan zowel fysieke beveiliging (zoals toegang tot gebouwen) als digitale beveiliging (zoals netwerken en data) omvatten.",
+        "laag4": "Beveiligingsplannen worden vaak gebruikt in bedrijven, overheden en IT-omgevingen om risico’s te beheren en systemen betrouwbaar te houden. Ze kunnen onderdelen bevatten zoals risicobeoordelingen, toegangscontrole, back-ups, monitoring, incidentrespons en herstelprocedures. Door een goed beveiligingsplan kunnen organisaties beter voorbereid zijn op cyberaanvallen, storingen of dataverlies."
+      },
+      "ws5": {
+        "wie": "Organisaties, bedrijven, systeembeheerders en beveiligingsspecialisten.",
+        "wat": "Een plan met maatregelen en procedures om systemen en informatie te beschermen.",
+        "wanneer": "Bij het beheren van IT-systemen, gegevens en bedrijfsprocessen.",
+        "waar": "In bedrijven, organisaties, netwerken en IT-infrastructuren.",
+        "waarom": "Om risico’s, aanvallen en dataverlies te voorkomen of te beperken.",
+        "hoe": "Door risico’s te analyseren en beveiligingsmaatregelen, regels en procedures vast te leggen."
+      },
+      "tags": [
+        "beveiligingsplan",
+        "security",
+        "risico",
+        "bescherming",
+        "cybersecurity",
+        "beleid",
+        "technologie",
+        "beveiliging",
+        "organisatie"
+      ],
+      "topic": "technologie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-eeb6bb06",
+          "begrip": "Beveiligingsrichtlijnen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "beleid",
+            "beveiliging",
+            "cybersecurity",
+            "technologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-571055ff",
+          "begrip": "gevaar",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bescherming",
+            "beveiliging",
+            "risico",
+            "technologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-83e9da5f",
+          "begrip": "Computerbeveiliging kosten",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "cybersecurity",
+            "organisatie",
+            "risico",
+            "technologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4d5d548e",
+          "begrip": "defensie",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "bescherming",
+            "beveiliging",
+            "organisatie",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-38366cf7",
+          "begrip": "Backdoors",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beveiliging",
+            "cybersecurity",
+            "technologie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:28:25.102349+00:00",
+        "vorige_versie_v1": "snap-7ca30e1c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:32.170418+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:28:26.893289+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:28:26.901046+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-63a68d24",
+      "begrip": "BHV werkt samen met hulpdiensten bij grotere incidenten.",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "BHV werkt samen met hulpdiensten.",
+        "laag2": "Bij grotere incidenten ondersteunt BHV de hulpdiensten.",
+        "laag3": "Wanneer een incident groter is dan wat intern opgelost kan worden, werkt BHV samen met hulpdiensten zoals brandweer, politie en ambulance. BHV’ers geven informatie door, ondersteunen waar nodig en zorgen voor een soepele overgang van interne naar externe hulp.",
+        "laag4": "Herkent het moment waarop externe hulp nodig is en kan effectief samenwerken en overdragen."
+      },
+      "ws5": {
+        "wie": "BHV’ers en hulpdiensten",
+        "wat": "samenwerking en overdracht",
+        "wanneer": "bij grotere incidenten",
+        "waar": "op de werkvloer",
+        "waarom": "voor effectieve hulpverlening",
+        "hoe": "door informatie delen en ondersteunen"
+      },
+      "tags": [
+        "samenwerking",
+        "hulpdienst",
+        "overdracht",
+        "ondersteuning"
+      ],
+      "topic": "bhv",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "ondersteuning",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ddba79d3",
+          "begrip": "contact",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "overdracht",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "ondersteuning",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-052874b0",
+          "begrip": "Toen jij vroeg als jij mij kon helpen",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "ondersteuning",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5b31925",
+          "begrip": "uitwisseling",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "overdracht",
+            "samenwerking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:29:10.843440+00:00",
+        "vorige_versie_v1": "f6431df2",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:36.891831+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:29:12.692834+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:29:12.752488+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6e20e362",
+      "begrip": "Basisschool biedt gestructureerd onderwijs in basisvakken.",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Basisschool leert basisvakken.",
+        "laag2": "Kinderen leren lezen, schrijven en rekenen.",
+        "laag3": "Op de basisschool krijgen kinderen gestructureerd onderwijs in basisvaardigheden zoals lezen, schrijven en rekenen. Daarnaast ontwikkelen ze sociale vaardigheden en algemene kennis. Deze fase legt de fundering voor verder onderwijs.",
+        "laag4": "Herkent het belang van basisvaardigheden en kan begrijpen hoe deze de basis vormen voor verdere ontwikkeling."
+      },
+      "ws5": {
+        "wie": "basisschool, basisvakken, leren, ontwikkeling",
+        "wat": "basis onderwijs",
+        "wanneer": "basisschool leeftijd",
+        "waar": "basisschool",
+        "waarom": "voor fundering van kennis",
+        "hoe": "door les en oefening"
+      },
+      "tags": [
+        "basisschool",
+        "basisvakken",
+        "leren",
+        "ontwikkeling"
+      ],
+      "topic": "school",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-86777294",
+          "begrip": "inspiratie",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leren",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-948732a8",
+          "begrip": "uitdaging",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leren",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leren",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leren",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7134aeb5",
+          "begrip": "kinderen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "leren",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:29:21.050208+00:00",
+        "vorige_versie_v1": "da468f2b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.123131+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:29:22.866740+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:29:22.879246+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c49a87bc",
+      "begrip": "Blikopener",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een blikopener is een hulpmiddel om blikken open te maken.",
+        "laag2": "Het wordt gebruikt om metalen verpakkingen veilig te openen zodat je bij de inhoud kunt.",
+        "laag3": "Een blikopener is een keukengereedschap dat speciaal is ontworpen om het deksel van een metalen blik los te snijden. Dit gebeurt meestal met een draaiend snijwiel dat door het metaal snijdt terwijl je draait. Het voorkomt scherpe randen en maakt openen veiliger dan met een mes.",
+        "laag4": "Maakt gesloten systemen toegankelijk door een gecontroleerde opening te creëren."
+      },
+      "ws5": {
+        "wie": "Iedereen die voedsel bereidt",
+        "wat": "Een hulpmiddel om blikken te openen",
+        "wanneer": "Bij het gebruiken van ingeblikt voedsel",
+        "waar": "In de keuken",
+        "waarom": "Om veilig toegang te krijgen tot de inhoud",
+        "hoe": "Door het snijmechanisme op het blik te plaatsen en rond te draaien zodat het deksel loskomt"
+      },
+      "tags": [
+        "Open",
+        "keuken",
+        "gereedschap",
+        "blik",
+        "metaal",
+        "verpakking",
+        "veiligheid",
+        "snijden",
+        "toegang"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5df7e6d2",
+          "begrip": "Snijplank",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "gereedschap",
+            "keuken",
+            "snijden",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5403357f",
+          "begrip": "Kaasschaaf",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gereedschap",
+            "keuken",
+            "snijden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-06374bd2",
+          "begrip": "net",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b0c0a550",
+          "begrip": "Spijker",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "metaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1020b265",
+          "begrip": "IJzerzaag",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "metaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:21.492767+00:00",
+        "vorige_versie_v1": "snap-71e305c2",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.208881+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:31:23.290738+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:31:23.300204+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-24678f94",
+      "begrip": "bed",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bed is een meubel waarop mensen liggen om te slapen of uit te rusten.",
+        "laag2": "Een bed geeft het lichaam rust en ondersteuning tijdens het slapen. Er bestaan verschillende soorten bedden, zoals eenpersoonsbedden, tweepersoonsbedden, stapelbedden en ziekenhuisbedden. Een goed bed helpt bij slaap, herstel en gezondheid.",
+        "laag3": "Een bed bestaat meestal uit een frame, matras, kussen en dekens. Mensen gebruiken een bed om te slapen, te ontspannen of te herstellen wanneer ze ziek zijn. Goede slaap is belangrijk voor het lichaam en de hersenen. Tijdens de slaap verwerkt het lichaam informatie, herstelt het spieren en komt het lichaam tot rust.\n\nBedden bestaan al duizenden jaren en zijn in verschillende culturen anders opgebouwd. Sommige mensen slapen hoog boven de grond in een bedframe, terwijl anderen futons, hangmatten of matrassen op de vloer gebruiken. Moderne bedden kunnen extra functies hebben, zoals verstelbare standen, opbergruimte of medische ondersteuning.",
+        "laag4": "Een bed staat symbool voor rust, herstel en veiligheid. Het is een plek waar lichaam en geest kunnen opladen. Rust vormt vaak de basis voordat groei, leren of ontwikkeling mogelijk wordt."
+      },
+      "ws5": {
+        "wie": "Mensen en dieren gebruiken een bed om te slapen of uit te rusten.",
+        "wat": "Een meubel of ligplaats bedoeld om comfortabel te kunnen slapen en herstellen.",
+        "wanneer": "Vooral tijdens de nacht of rustmomenten overdag.",
+        "waar": "In huizen, slaapkamers, hotels, ziekenhuizen, zorginstellingen en andere verblijfplaatsen.",
+        "waarom": "Om het lichaam en de geest rust, slaap, herstel en comfort te geven.",
+        "hoe": "Door op een matras of ondergrond te liggen die ondersteuning en comfort biedt tijdens rust of slaap."
+      },
+      "tags": [
+        "bed",
+        "slap",
+        "rust",
+        "slaapkamer",
+        "meubel",
+        "gezondheid",
+        "wonen"
+      ],
+      "topic": "meubel",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-49ed0a68",
+          "begrip": "Slaapkamer",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "rust",
+            "slap",
+            "wonen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b73e6cda",
+          "begrip": "Slapen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "rust",
+            "slap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96c3da36",
+          "begrip": "Ik ga nu slapen",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "rust",
+            "slap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9c0965c8",
+          "begrip": "ik ga bijna slapen",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "rust",
+            "slap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4199163f",
+          "begrip": "Nou ik ga naar bed.",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "rust",
+            "slap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:27.648363+00:00",
+        "vorige_versie_v1": "kb-24678f94",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:43.349979+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:31:29.489689+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:31:29.551331+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9631e0f3",
+      "begrip": "Bezem",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bezem is een hulpmiddel om vuil van de grond te vegen.",
+        "laag2": "Het wordt gebruikt om schoon te maken.",
+        "laag3": "Een bezem bestaat meestal uit:\n\nEen steel (om vast te houden)\n\nHaren of borstels (om vuil te verplaatsen)\n\nHet wordt gebruikt om stof, vuil of bladeren bij elkaar te vegen.",
+        "laag4": "Bezem wordt gebruikt binnen en buiten.\nEr zijn verschillende soorten:\n\nBinnenbezem (fijne haren)\n\nBuitenbezem (stevige haren)\n\nVaak wordt een bezem samen met een blik gebruikt om vuil op te ruimen."
+      },
+      "ws5": {
+        "wie": "Iedereen",
+        "wat": "Iedereen",
+        "wanneer": "Bij het opruimen van vuil",
+        "waar": "In huis, buiten, werkplekken",
+        "waarom": "In huis, buiten, werkplekken",
+        "hoe": "Door vuil bij elkaar te vegen met de bezem"
+      },
+      "tags": [
+        "bezem",
+        "schoonmaken",
+        "hulpmiddel",
+        "gereedschap"
+      ],
+      "topic": "huishouden",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ca6b2a8b",
+          "begrip": "Tool",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "hulpmiddel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bcee6bd",
+          "begrip": "Hulpmiddel",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "hulpmiddel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfc22ee1",
+          "begrip": "Emmer",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "schoonmaken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a4bdcad4",
+          "begrip": "Instrument",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "hulpmiddel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8a81c5d7",
+          "begrip": "Gereedschap",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "hulpmiddel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Harry Klokkenmaker",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:34.624387+00:00",
+        "vorige_versie_v1": "snap-f8146f19",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:33.463429+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:31:36.461327+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:31:36.484699+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d6058f7d",
+      "begrip": "Afzuigkap",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een afzuigkap is een apparaat dat lucht afzuigt tijdens het koken.",
+        "laag2": "Het wordt gebruikt om damp, geur en vet uit de lucht te verwijderen in de keuken.",
+        "laag3": "Een afzuigkap is een elektrisch apparaat dat boven het fornuis hangt en lucht aanzuigt tijdens het koken. Het filtert vetdeeltjes en voert dampen en geuren af naar buiten of recirculeert de lucht via filters. Dit zorgt voor schonere lucht en minder ophoping van vet in de keuken.",
+        "laag4": "Verwijdert ongewenste elementen uit een omgeving om balans en kwaliteit te behouden."
+      },
+      "ws5": {
+        "wie": "Iedereen die kookt",
+        "wat": "Een apparaat dat lucht afzuigt en reinigt",
+        "wanneer": "Tijdens het koken",
+        "waar": "Boven het fornuis in de keuken",
+        "waarom": "Om lucht schoon te houden en geuren te verminderen",
+        "hoe": "Door lucht aan te zuigen, te filteren en af te voeren of te recirculeren"
+      },
+      "tags": [
+        "afzuigen",
+        "keuken",
+        "apparaat",
+        "lucht",
+        "ventilatie",
+        "geur",
+        "vet",
+        "reinigen",
+        "filter"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f72bc380",
+          "begrip": "Koffiezetapparaat",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "filter",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c079ee89",
+          "begrip": "Oven",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "apparaat",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3772965b",
+          "begrip": "Mensen vinden poep stinken",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "geur",
+            "lucht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-47bb6558",
+          "begrip": "Jij kan wel dampen meten",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "geur",
+            "lucht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "apparaat",
+            "keuken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:42.925493+00:00",
+        "vorige_versie_v1": "snap-da3a29ec",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.499195+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:31:44.787355+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:31:44.795393+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2d7fb106",
+      "begrip": "Airfryer",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een airfryer is een apparaat om voedsel te bakken met hete lucht.",
+        "laag2": "Het wordt gebruikt om eten krokant te maken met weinig of geen olie.",
+        "laag3": "Een airfryer is een elektrisch apparaat dat voedsel bereidt door hete lucht snel rond te laten circuleren. Dit zorgt voor een krokant resultaat vergelijkbaar met frituren, maar met minder vet. Het wordt gebruikt voor snacks, friet, vlees en groenten.",
+        "laag4": "Gebruikt gecontroleerde luchtstroming en warmte om efficiënt een gewenste structuur te creëren."
+      },
+      "ws5": {
+        "wie": "Iedereen die kookt",
+        "wat": "Een apparaat dat voedsel bakt met hete lucht",
+        "wanneer": "Bij het bereiden van maaltijden of snacks",
+        "waar": "In de keuken",
+        "waarom": "Om krokant eten te maken met minder vet",
+        "hoe": "Door hete lucht rond het voedsel te laten circuleren"
+      },
+      "tags": [
+        "bakken",
+        "keuken",
+        "apparaat",
+        "hete lucht",
+        "krokant",
+        "bereiden",
+        "gezond",
+        "elektriciteit",
+        "circulatie"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b61b88fd",
+          "begrip": "Ik heb de airfryer gebruikt om het eten krokant te maken.",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "bakken",
+            "hete lucht",
+            "krokant"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c079ee89",
+          "begrip": "Oven",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "bakken",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0dc36b33",
+          "begrip": "Vriezer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65893ba",
+          "begrip": "Magnetron",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:49.225552+00:00",
+        "vorige_versie_v1": "snap-b62b8e4b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.420782+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:31:50.998538+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:31:51.006144+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c45135d3",
+      "begrip": "Blender",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een blender is een apparaat om ingrediënten te mengen en fijn te maken.",
+        "laag2": "Het wordt gebruikt om bijvoorbeeld smoothies, soepen of sauzen te maken door ingrediënten te mixen.",
+        "laag3": "Een blender is een elektrisch apparaat met ronddraaiende messen die ingrediënten in een kan fijnsnijden en mengen. Door de hoge snelheid worden vaste en vloeibare onderdelen samengevoegd tot een glad geheel. Blenders worden vaak gebruikt voor dranken, soepen en sauzen.",
+        "laag4": "Combineert en transformeert verschillende elementen tot één uniforme massa."
+      },
+      "ws5": {
+        "wie": "Iedereen die kookt of drankjes maakt",
+        "wat": "Een apparaat om ingrediënten te mengen en fijn te maken",
+        "wanneer": "Tijdens bereiden van gerechten of dranken",
+        "waar": "In de keuken",
+        "waarom": "Om een glad en gemengd resultaat te krijgen",
+        "hoe": "Door messen op hoge snelheid te laten draaien die ingrediënten snijden en mengen"
+      },
+      "tags": [
+        "mixen",
+        "keuken",
+        "apparaat",
+        "mengen",
+        "fijnmaken",
+        "smoothie",
+        "saus",
+        "Mes",
+        "elektriciteit"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0dc36b33",
+          "begrip": "Vriezer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65893ba",
+          "begrip": "Magnetron",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6963a28c",
+          "begrip": "Ik heb de staafmixer in de pan gebruikt om de soep glad te maken.",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "keuken",
+            "mengen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2d7fb106",
+          "begrip": "Airfryer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:31:58.894386+00:00",
+        "vorige_versie_v1": "snap-cac9c034",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.326366+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:00.689113+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:00.696743+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-48eb82da",
+      "begrip": "Boormachine",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een boormachine is een elektrisch gereedschap om te boren.",
+        "laag2": "Een boormachine wordt gebruikt om gaten te maken in materialen zoals hout, metaal of steen.",
+        "laag3": "Een boormachine is een elektrisch of accugereedschap dat een boor laat draaien om gaten te maken in verschillende materialen. Het verhoogt kracht en snelheid ten opzichte van handmatig boren. Boormachines worden veel gebruikt in bouw, montage en reparatie.",
+        "laag4": "Laat zien hoe kracht en snelheid worden gebruikt om efficiënt gaten te maken."
+      },
+      "ws5": {
+        "wie": "Mens",
+        "wat": "Elektrisch gereedschap om te boren",
+        "wanneer": "Bij bouwen en monteren",
+        "waar": "Werkplaats, Bouw",
+        "waarom": "Om snel en efficiënt gaten te maken",
+        "hoe": "Door een draaiende boor met kracht in materiaal te drukken"
+      },
+      "tags": [
+        "boormachine",
+        "gereedschap",
+        "boren",
+        "gat",
+        "draaien",
+        "kracht"
+      ],
+      "topic": "gereedschap",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a8f6ff70",
+          "begrip": "boor",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "draaien",
+            "gat",
+            "gereedschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a506c6ff",
+          "begrip": "Klopboormachine",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "boren",
+            "gereedschap",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19b876f3",
+          "begrip": "Wapen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c7ef1d3",
+          "begrip": "Handboorset",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "boren",
+            "gereedschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd81b038",
+          "begrip": "Boren",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "draaien",
+            "gereedschap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:05.109883+00:00",
+        "vorige_versie_v1": "snap-dadacf15",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.050567+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:06.982777+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:06.990564+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bc41f86f",
+      "begrip": "Broodrooster",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een broodrooster is een apparaat om brood te roosteren.",
+        "laag2": "Het wordt gebruikt om brood krokant en warm te maken door het te verhitten.",
+        "laag3": "Een broodrooster is een elektrisch apparaat dat brood verwarmt met gloeidraden. Door deze hitte wordt het brood geroosterd, waardoor het knapperig wordt en van smaak verandert. Vaak heeft het instellingen om de mate van bruining te bepalen.",
+        "laag4": "Past gecontroleerde hitte toe om structuur en eigenschappen te veranderen."
+      },
+      "ws5": {
+        "wie": "Iedereen die brood eet",
+        "wat": "Een apparaat om brood te roosteren",
+        "wanneer": "Bij ontbijt of maaltijd",
+        "waar": "In de keuken",
+        "waarom": "Om brood knapperig en smaakvoller te maken",
+        "hoe": "Door brood tussen verwarmde elementen te plaatsen die het verhitten"
+      },
+      "tags": [
+        "roosteren",
+        "keuken",
+        "apparaat",
+        "brood",
+        "warmte",
+        "elektriciteit",
+        "krokant",
+        "bereiden",
+        "hittem"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2d7fb106",
+          "begrip": "Airfryer",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "bereiden",
+            "elektriciteit",
+            "keuken",
+            "krokant"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c079ee89",
+          "begrip": "Oven",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "keuken",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0dc36b33",
+          "begrip": "Vriezer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65893ba",
+          "begrip": "Magnetron",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:14.112542+00:00",
+        "vorige_versie_v1": "snap-1fcece97",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.401392+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:15.880734+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:15.888577+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fb0e9c77",
+      "begrip": "Braadpan",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een braadpan is een pan om voedsel langzaam te braden.",
+        "laag2": "Een braadpan wordt gebruikt om grotere stukken voedsel gelijkmatig te garen.",
+        "laag3": "Een braadpan is een diepe, stevige pan met een dikke bodem die warmte goed vasthoudt en verdeelt. Hij wordt gebruikt om voedsel, vooral vlees, langzaam te braden zodat het van binnen gaar wordt en van buiten bruin. Braadpannen worden vaak gebruikt op een fornuis of in de oven.",
+        "laag4": "Laat zien hoe warmtebehoud zorgt voor gelijkmatige en langzame bereiding."
+      },
+      "ws5": {
+        "wie": "Mens",
+        "wat": "Pan voor braden",
+        "wanneer": "Bij koken van grotere stukken voedsel",
+        "waar": "Keuken",
+        "waarom": "Om voedsel langzaam en gelijkmatig gaar te maken",
+        "hoe": "Door warmte vast te houden en geleidelijk af te geven"
+      },
+      "tags": [
+        "braadpan",
+        "pan",
+        "braden",
+        "hitte",
+        "bereiden",
+        "keuken"
+      ],
+      "topic": "gereedschap",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-74a530b6",
+          "begrip": "Braden",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bereiden",
+            "braden",
+            "hitte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e215777f",
+          "begrip": "Snelkookpan",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bereiden",
+            "hitte",
+            "pan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00fa0161",
+          "begrip": "Barbecue",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bereiden",
+            "hitte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ced1da6",
+          "begrip": "Roosteren",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bereiden",
+            "hitte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0b780725",
+          "begrip": "Bakken",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bereiden",
+            "hitte"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:21.321971+00:00",
+        "vorige_versie_v1": "snap-e132674d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.130498+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:23.189681+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:23.197328+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d686e2db",
+      "begrip": "Cement",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Cement is een fijn poeder dat met water een harde bindende massa vormt.",
+        "laag2": "Cement wordt veel gebruikt in de bouw om materialen zoals zand en grind aan elkaar te binden. Wanneer cement met water wordt gemengd, begint het uit te harden en ontstaat een stevig materiaal.",
+        "laag3": "Cement bestaat uit fijngemalen mineralen die worden verhit en daarna tot poeder worden vermalen. Wanneer het met water wordt gemengd ontstaat een chemische reactie waardoor het langzaam hard wordt. In combinatie met zand en grind vormt cement materialen zoals mortel en beton.",
+        "laag4": "Cement is een belangrijk bindmiddel in de bouwindustrie. Het wordt gebruikt voor funderingen, muren, vloeren en andere constructies. Tijdens het uitharden verandert het mengsel van een natte massa naar een harde steenachtige structuur die grote krachten kan dragen."
+      },
+      "ws5": {
+        "wie": "Bouwers, metselaars en ingenieurs.",
+        "wat": "Een bindmiddel dat materialen aan elkaar hecht in bouwconstructies.",
+        "wanneer": "Tijdens het bouwen van structuren zoals huizen en bruggen.",
+        "waar": "In funderingen, muren, vloeren en andere bouwconstructies.",
+        "waarom": "Om materialen te verbinden en sterke constructies te maken.",
+        "hoe": "Door cement met water en andere materialen te mengen zodat het uithardt tot een harde structuur."
+      },
+      "tags": [
+        "bouw",
+        "bindmiddel",
+        "beton",
+        "mortel",
+        "constructie"
+      ],
+      "topic": "bouwmateriaal",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-796f7dad",
+          "begrip": "Bouwopdracht",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "constructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-611fb309",
+          "begrip": "Muur (gebouw)",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "constructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ec4f7d82",
+          "begrip": "Vloer (gebouw)",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "constructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0ae31001",
+          "begrip": "Fundering",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "constructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f10b32f4",
+          "begrip": "Balkon",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bouw",
+            "constructie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:29.783528+00:00",
+        "vorige_versie_v1": "snap-4ecbe90d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:31.544181+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:31.589495+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:31.597564+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0297bade",
+      "begrip": "De brandweer beoordeelt risico’s voordat ze een situatie betreden.",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "De brandweer kijkt eerst naar risico’s.",
+        "laag2": "Brandweerlieden schatten gevaren in voordat ze actie ondernemen.",
+        "laag3": "Voordat de brandweer een situatie ingaat, maken ze een inschatting van de risico’s zoals vuurontwikkeling, instortingsgevaar of gevaarlijke stoffen. Deze beoordeling helpt om veilige keuzes te maken en te bepalen hoe ze het beste kunnen handelen. Dit vermindert risico voor zowel hulpverleners als slachtoffers.",
+        "laag4": "Herkent het belang van risico-inschatting en kan dit toepassen door eerst te analyseren voordat er actie wordt ondernomen."
+      },
+      "ws5": {
+        "wie": "brandweerlieden",
+        "wat": "risico-inschatting",
+        "wanneer": "voor het betreden van een situatie",
+        "waar": "op incidentlocaties",
+        "waarom": "om veilig te kunnen handelen",
+        "hoe": "door risico’s te analyseren en af te wegen"
+      },
+      "tags": [
+        "risico",
+        "analyse",
+        "veiligheid",
+        "besluitvorming"
+      ],
+      "topic": "brandweer",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-eb31fb44",
+          "begrip": "onzeker",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "besluitvorming",
+            "risico",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e26fb2",
+          "begrip": "traden",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "besluitvorming",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b12b488f",
+          "begrip": "Medewerkers in de meldkamer bepalen welke hulpdiensten nodig zijn.",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "besluitvorming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c6b293e",
+          "begrip": "Situatiebewustzijn is essentieel voor effectief beveiligen.",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e1cd2cc",
+          "begrip": "Ik heb gekeken naar de houdbaarheid van het product.",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "risico",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:52.163313+00:00",
+        "vorige_versie_v1": "3e6ab380",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:36.631068+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:32:53.982164+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:32:54.055184+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5cd4234f",
+      "begrip": "De meldkamer verzamelt snel informatie om een juiste inschatting te maken.",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "De meldkamer verzamelt informatie.",
+        "laag2": "Tijdens een oproep vraagt de meldkamer door om de situatie te begrijpen.",
+        "laag3": "Meldkamer medewerkers stellen gerichte vragen aan de melder om snel een duidelijk beeld van de situatie te krijgen. Ze verzamelen informatie zoals locatie, aard van het probleem en ernst. Deze gegevens zijn nodig om een juiste inschatting te maken en passende hulp in te schakelen.",
+        "laag4": "Herkent het belang van informatieverzameling en kan gerichte vragen stellen om snel tot een juiste inschatting te komen."
+      },
+      "ws5": {
+        "wie": "meldkamer medewerkers",
+        "wat": "verzamelen van informatie",
+        "wanneer": "tijdens een noodoproep",
+        "waar": "in de meldkamer",
+        "waarom": "voor een juiste inschatting",
+        "hoe": "door vragen te stellen en informatie te verzamelen"
+      },
+      "tags": [
+        "informatie",
+        "analyse",
+        "vragen",
+        "inschatting"
+      ],
+      "topic": "meldkamer",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-ad6b88f4",
+          "begrip": "voorspelling",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "informatie",
+            "inschatting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d88c5630",
+          "begrip": "waarschijnlijk",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "informatie",
+            "inschatting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7bce51dd",
+          "begrip": "accuraat",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:32:58.911258+00:00",
+        "vorige_versie_v1": "51be6dbf",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:36.779590+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:33:00.681005+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:33:00.689479+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5bb8f90b",
+      "begrip": "De politie heeft bevoegdheden om in te grijpen bij gevaar of overtredingen.",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "De politie mag ingrijpen.",
+        "laag2": "Politieagenten hebben rechten om op te treden bij gevaarlijke of verboden situaties.",
+        "laag3": "De politie heeft wettelijke bevoegdheden om in te grijpen wanneer er sprake is van gevaar, overtredingen of strafbare feiten. Dit kan variëren van controleren en aanspreken tot aanhouden of het gebruik van middelen. Deze bevoegdheden zijn nodig om veiligheid en orde te handhaven.",
+        "laag4": "Herkent situaties waarin ingrijpen nodig is en kan handelen binnen duidelijke grenzen om veiligheid en orde te waarborgen."
+      },
+      "ws5": {
+        "wie": "politieagenten",
+        "wat": "bevoegdheid tot ingrijpen",
+        "wanneer": "bij overtredingen of gevaar",
+        "waar": "in de samenleving",
+        "waarom": "om orde en veiligheid te handhaven",
+        "hoe": "door gebruik van wettelijke bevoegdheden"
+      },
+      "tags": [
+        "bevoegdheid",
+        "wet",
+        "ingrijpen",
+        "veiligheid"
+      ],
+      "topic": "politie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ee1e71ff",
+          "begrip": "De politie zorgt voor veiligheid en handhaving van de wet.",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "veiligheid",
+            "wet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-882571ea",
+          "begrip": "bekwaamheid",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "bevoegdheid",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b2f26b60",
+          "begrip": "preventie",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "ingrijpen",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-08de73f3",
+          "begrip": "hulpdienst",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "ingrijpen",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:33:06.110883+00:00",
+        "vorige_versie_v1": "snap-906942e6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:35.446593+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:33:07.903406+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:33:07.981212+00:00",
+            "result": {
+              "n_found": 4,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0eaa094d",
+      "begrip": "Deur",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een deur is een opening die je kunt afsluiten of openen.",
+        "laag2": "Een deur geeft toegang tot een ruimte en zorgt voor controle over wie of wat naar binnen of buiten gaat.",
+        "laag3": "Een deur is een beweegbaar onderdeel in een muur of gebouw dat gebruikt wordt om een opening af te sluiten of toegankelijk te maken. Het biedt veiligheid, privacy en controle. Deuren kunnen draaien, schuiven of openen op verschillende manieren en worden gemaakt van materialen zoals hout, metaal of glas.",
+        "laag4": "Laat zien hoe toegang en controle werken binnen een ruimte of systeem."
+      },
+      "ws5": {
+        "wie": "Mens",
+        "wat": "Beweegbare afsluiting van een opening",
+        "wanneer": "Bij toegang en afsluiting van ruimtes",
+        "waar": "In muren en gebouwen",
+        "waarom": "Voor controle, veiligheid en privacy",
+        "hoe": "Door te openen en te sluiten via scharnieren of rails"
+      },
+      "tags": [
+        "deur",
+        "toegang",
+        "controle",
+        "gebouw",
+        "veiligheid",
+        "opening"
+      ],
+      "topic": "constructie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cbf23814",
+          "begrip": "Deur (gebouw)",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "gebouw",
+            "toegang",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5293bf1f",
+          "begrip": "Bescherming",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "toegang",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a934145b",
+          "begrip": "controleren",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e1cd2cc",
+          "begrip": "Ik heb gekeken naar de houdbaarheid van het product.",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "controle",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:34:47.275167+00:00",
+        "vorige_versie_v1": "snap-2a44be27",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:38.951112+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:34:49.291929+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:34:49.299952+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-737d2691",
+      "begrip": "Demper",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een demper is een onderdeel dat geluid, trillingen of schokken vermindert.",
+        "laag2": "Dempers worden gebruikt in verschillende systemen om lawaai te verminderen en beweging soepeler te maken.",
+        "laag3": "Een demper werkt door energie op te vangen en te verspreiden, waardoor geluid of trillingen minder sterk worden.\n\nVoorbeelden van dempers:\n\ngeluidsdemper – vermindert geluid\n\nschokdemper – vangt schokken op (bij voertuigen)\n\ntrillingsdemper – vermindert vibraties in machines\n\nFuncties van een demper:\n\ngeluid verminderen\n\nschokken opvangen\n\ntrillingen beperken",
+        "laag4": "Dempers worden toegepast in verschillende systemen zoals:\n\nvoertuigen (schokdempers bij wielen)\n\nmachines\n\nuitlaatsystemen\n\ntechnische apparaten\n\nHet doel is meestal om comfort, veiligheid of geluidsbeheersing te verbeteren."
+      },
+      "ws5": {
+        "wie": "Ingenieurs, monteurs, fabrikanten",
+        "wat": "Ingenieurs, monteurs, fabrikanten",
+        "wanneer": "Bij gebruik van machines, voertuigen of technische systemen",
+        "waar": "Voertuigen, machines, apparaten",
+        "waarom": "Om geluid, trillingen of schokken te verminderen",
+        "hoe": "Door energie van beweging of geluid op te vangen en te dempen."
+      },
+      "tags": [
+        "geluid",
+        "trilling",
+        "mechanica",
+        "techniek",
+        "demping",
+        "technologie"
+      ],
+      "topic": "technologie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-22adefd9",
+          "begrip": "akoestiek",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "demping",
+            "geluid",
+            "trilling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-70b6d717",
+          "begrip": "klank",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "geluid",
+            "trilling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-28c90ee7",
+          "begrip": "Geluid",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "geluid",
+            "trilling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfc9445b",
+          "begrip": "Microfoon",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "geluid",
+            "technologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "geluid",
+            "trilling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:35:02.678923+00:00",
+        "vorige_versie_v1": "snap-31b9d8b9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.929709+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:35:04.492563+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:35:04.499914+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0ce24b28",
+      "begrip": "DNA bevat erfelijke informatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "DNA bevat erfelijke informatie.",
+        "laag2": "In DNA ligt vast welke eigenschappen een organisme heeft.",
+        "laag3": "DNA bevat de erfelijke informatie van een organisme. Deze informatie bepaalt eigenschappen zoals uiterlijk, functioneren en ontwikkeling. Het DNA fungeert als een soort code die processen in het lichaam aanstuurt en wordt doorgegeven van ouders naar nakomelingen.",
+        "laag4": "Laat zien dat informatie de basis vormt voor structuur en gedrag."
+      },
+      "ws5": {
+        "wie": "Organismen",
+        "wat": "Erfelijke informatie",
+        "wanneer": "Altijd aanwezig in cellen",
+        "waar": "In DNA",
+        "waarom": "Om eigenschappen vast te leggen",
+        "hoe": "Door genetische code"
+      },
+      "tags": [
+        "dna",
+        "erfelijkheid",
+        "informatie",
+        "eigenschap",
+        "genetica",
+        "organisme"
+      ],
+      "topic": "dna",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4662ed4c",
+          "begrip": "Cellen bevatten DNA",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8ae05d74",
+          "begrip": "genetica",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3ee554cc",
+          "begrip": "dna",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-014253e1",
+          "begrip": "DNA bevindt zich in cellen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99dcf41b",
+          "begrip": "DNA wordt gekopieerd bij celdeling",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:35:08.921222+00:00",
+        "vorige_versie_v1": "bbe79c3e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.836131+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:35:10.890469+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:35:10.899557+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9db4d977",
+      "begrip": "DNA heeft een specifieke structuur",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "DNA heeft een specifieke structuur",
+        "laag2": "De opbouw van DNA maakt het mogelijk om informatie op te slaan en te kopiëren.",
+        "laag3": "DNA heeft een herkenbare structuur die geschikt is voor het opslaan van genetische informatie. Deze structuur zorgt ervoor dat DNA stabiel blijft en tegelijkertijd gekopieerd kan worden tijdens celdeling. De vorm en opbouw zijn essentieel voor de werking van erfelijkheid.",
+        "laag4": "Laat zien dat structuur bepalend is voor functie."
+      },
+      "ws5": {
+        "wie": "DNA in cellen",
+        "wat": "Specifieke structuur",
+        "wanneer": "Altijd aanwezig",
+        "waar": "In de celkern",
+        "waarom": "Om informatie op te slaan en te kopiëren",
+        "hoe": "Door specifieke opbouw van DNA"
+      },
+      "tags": [
+        "dna",
+        "structuur",
+        "genetica",
+        "opbouw",
+        "functie",
+        "informatie"
+      ],
+      "topic": "dna",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4662ed4c",
+          "begrip": "Cellen bevatten DNA",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-014253e1",
+          "begrip": "DNA bevindt zich in cellen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-640ab01f",
+          "begrip": "vorm",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "informatie",
+            "opbouw",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7de43640",
+          "begrip": "DNA stuurt processen in cellen aan",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "functie",
+            "genetica"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8ae05d74",
+          "begrip": "genetica",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:35:15.676185+00:00",
+        "vorige_versie_v1": "22ac0fbf",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.877978+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:35:17.564615+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:35:17.586068+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-85ee3e42",
+      "begrip": "DNA bepaalt eigenschappen",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "DNA bepaalt eigenschappen van een organisme.",
+        "laag2": "De informatie in DNA beïnvloedt hoe een organisme eruitziet en functioneert.",
+        "laag3": "DNA bevat instructies die bepalen welke eigenschappen een organisme heeft, zoals uiterlijk, gedrag en interne processen. Deze instructies sturen de ontwikkeling en het functioneren van het organisme aan. Verschillen in DNA zorgen voor verschillen in eigenschappen.",
+        "laag4": "Laat zien dat informatie direct invloed heeft op vorm en gedrag."
+      },
+      "ws5": {
+        "wie": "Organismen",
+        "wat": "Bepalen van eigenschappen",
+        "wanneer": "Tijdens ontwikkeling en functioneren",
+        "waar": "In cellen",
+        "waarom": "Omdat DNA instructies bevat",
+        "hoe": "Door genetische aansturing"
+      },
+      "tags": [
+        "dna",
+        "eigenschap",
+        "genetica",
+        "informatie",
+        "organisme",
+        "variatie"
+      ],
+      "topic": "dna",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0ce24b28",
+          "begrip": "DNA bevat erfelijke informatie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dna",
+            "eigenschap",
+            "genetica",
+            "informatie",
+            "organisme"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8104aed8",
+          "begrip": "Mutaties zorgen voor nieuwe eigenschappen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eigenschap",
+            "genetica",
+            "organisme",
+            "variatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165a6a18",
+          "begrip": "Mutaties zorgen voor variatie",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "eigenschap",
+            "organisme",
+            "variatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4662ed4c",
+          "begrip": "Cellen bevatten DNA",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-014253e1",
+          "begrip": "DNA bevindt zich in cellen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "dna",
+            "genetica",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:35:22.016087+00:00",
+        "vorige_versie_v1": "d2c54fad",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.856369+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:35:24.087639+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:35:24.095305+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-74c47211",
+      "begrip": "DNA vormt basis van erfelijkheid en evolutie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "DNA vormt de basis van erfelijkheid en evolutie.",
+        "laag2": "Via DNA worden eigenschappen doorgegeven en kunnen veranderingen ontstaan.",
+        "laag3": "DNA vormt de basis van erfelijkheid doordat het informatie bevat die wordt doorgegeven van generatie op generatie. Tegelijk vormt DNA de basis van evolutie, omdat veranderingen (mutaties) in dit materiaal kunnen leiden tot nieuwe eigenschappen. Hierdoor kunnen soorten zich over tijd aanpassen en ontwikkelen.",
+        "laag4": "Verbindt informatie, verandering en tijd tot één systeem."
+      },
+      "ws5": {
+        "wie": "Organismen en populaties",
+        "wat": "Basis van erfelijkheid en evolutie",
+        "wanneer": "Over generaties",
+        "waar": "In genetisch materiaal",
+        "waarom": "Omdat DNA informatie en verandering draagt",
+        "hoe": "Door overdracht en mutaties"
+      },
+      "tags": [
+        "dna",
+        "erfelijkheid",
+        "evolutie",
+        "mutatie",
+        "generatie",
+        "informatie"
+      ],
+      "topic": "dna",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f6208ef0",
+          "begrip": "Mutaties worden doorgegeven aan volgende generaties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "evolutie",
+            "generatie",
+            "mutatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8ae05d74",
+          "begrip": "genetica",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "evolutie",
+            "informatie",
+            "mutatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f0a44962",
+          "begrip": "Elke generatie verschilt van de vorige",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "evolutie",
+            "generatie",
+            "mutatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5243b155",
+          "begrip": "Mutaties verspreiden zich over generaties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "evolutie",
+            "generatie",
+            "mutatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3ee554cc",
+          "begrip": "dna",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "dna",
+            "erfelijkheid",
+            "generatie",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:35:30.184014+00:00",
+        "vorige_versie_v1": "64601629",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.917179+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:35:32.093389+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:35:32.101650+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6068aa67",
+      "begrip": "Advocaat",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een advocaat is een jurist die mensen of organisaties helpt en verdedigt bij juridische zaken.",
+        "laag2": "Advocaten geven juridisch advies en vertegenwoordigen cliënten in rechtszaken.",
+        "laag3": "Een advocaat is een juridisch specialist die cliënten helpt bij conflicten met de wet of met andere partijen. De advocaat kan advies geven, documenten opstellen en namens een cliënt spreken in een rechtbank. Hij of zij verdedigt de belangen van de cliënt en probeert een zo goed mogelijk resultaat te bereiken.",
+        "laag4": "Advocaten kunnen werken in verschillende rechtsgebieden, zoals strafrecht, familierecht, ondernemingsrecht of bestuursrecht. Ze spelen een belangrijke rol in het rechtssysteem omdat zij ervoor zorgen dat iedereen een eerlijke verdediging en juridische ondersteuning kan krijgen."
+      },
+      "ws5": {
+        "wie": "Advocaten, cliënten, rechters",
+        "wat": "Een jurist die cliënten juridisch adviseert en vertegenwoordigt",
+        "wanneer": "Bij juridische conflicten, rechtszaken of adviesvragen",
+        "waar": "In rechtbanken, advocatenkantoren en juridische procedures",
+        "waarom": "Om mensen of organisaties te helpen hun rechten te beschermen",
+        "hoe": "Door juridisch advies te geven, documenten op te stellen en cliënten te verdedigen in een rechtszaak"
+      },
+      "tags": [
+        "advocaat",
+        "recht",
+        "verdediging",
+        "juridisch",
+        "rechtbank",
+        "juridische beroepen"
+      ],
+      "topic": "recht",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-31904fa9",
+          "begrip": "rechtbank",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "juridisch",
+            "recht",
+            "rechtbank"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-14613751",
+          "begrip": "Rechter",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "recht",
+            "rechtbank"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:37:34.618084+00:00",
+        "vorige_versie_v1": "snap-a2694731",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:31.188304+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:37:36.305412+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:37:36.382120+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8e27e4b4",
+      "begrip": "Appelsap",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Appelsap is een drank gemaakt van geperste appels.",
+        "laag2": "Het is een zoete vruchtendrank die vaak wordt gedronken bij ontbijt, lunch of als tussendoortje.",
+        "laag3": "Appelsap ontstaat door appels te wassen, te persen en het sap te filteren. Soms wordt het gepasteuriseerd zodat het langer houdbaar blijft. Het kan helder zijn of troebel, afhankelijk van hoeveel vruchtdeeltjes erin blijven.",
+        "laag4": "Er bestaan verschillende varianten, zoals troebel appelsap en appelcider (gefermenteerd appelsap). Appelsap bevat natuurlijke suikers en vitamines uit de appel en wordt wereldwijd veel gedronken."
+      },
+      "ws5": {
+        "wie": "Geproduceerd door fruitverwerkers en gedronken door mensen van alle leeftijden.",
+        "wat": "Een drank gemaakt van het sap van appels.",
+        "wanneer": "Bij ontbijt, lunch of als verfrissende drank tussendoor.",
+        "waar": "Wereldwijd, vooral in landen waar appels groeien.",
+        "waarom": "Omdat het zoet, verfrissend en natuurlijk is.",
+        "hoe": "Appels worden gewassen, geperst en het sap wordt gefilterd en vaak gepasteuriseerd."
+      },
+      "tags": [
+        "appel",
+        "sap",
+        "drank",
+        "fruit"
+      ],
+      "topic": "drank",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7938e871",
+          "begrip": "Appels",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "appel",
+            "fruit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-58668008",
+          "begrip": "drank",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "drank",
+            "sap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-005620f2",
+          "begrip": "Appelboom",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "appel",
+            "fruit"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:37:40.916388+00:00",
+        "vorige_versie_v1": "a57aa470",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:29.589713+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T09:37:42.800657+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T09:37:42.808582+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a27fb620",
+      "begrip": "Behang",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Behang is materiaal dat op muren wordt geplakt om ze te bedekken en te versieren.",
+        "laag2": "Wordt gebruikt in huizen en gebouwen voor uitstraling en afwerking.",
+        "laag3": "Behang bestaat meestal uit papier of vinyl en is verkrijgbaar in verschillende kleuren, patronen en structuren. Het wordt met lijm op muren aangebracht om een ruimte een bepaalde sfeer te geven.",
+        "laag4": "Er zijn verschillende soorten behang, zoals vliesbehang en afwasbaar behang. De keuze hangt af van gebruik, ruimte en stijl. Behang kan ook kleine oneffenheden in muren verbergen."
+      },
+      "ws5": {
+        "wie": "Bewoners, klussers, interieurontwerpers",
+        "wat": "Materiaal voor het bedekken van muren",
+        "wanneer": "Bij inrichting of renovatie",
+        "waar": "Binnen in huizen en gebouwen",
+        "waarom": "Om muren mooier te maken en af te werken",
+        "hoe": "Door het met lijm op muren te plakken"
+      },
+      "tags": [
+        "muur",
+        "decoratie",
+        "interieur",
+        "afwerking",
+        "papier",
+        "patroon"
+      ],
+      "topic": "interieur",
+      "verbanden": [],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T09:37:53.716476+00:00",
+        "vorige_versie_v1": "snap-5317f80a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:33.218425+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

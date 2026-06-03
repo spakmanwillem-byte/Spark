@@ -8,7 +8,9 @@
     "created_at": "2026-05-23T12:02:15.307240+00:00",
     "card_count": 372,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T17:21:37.917452+00:00"
+    "last_updated": "2026-06-02T17:21:37.917452+00:00",
+    "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
+    "last_zip_merge_added": 6
   },
   "kaarten": [
     {
@@ -49937,6 +49939,998 @@
       },
       "needs": [
         "voice"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1ef01b9b",
+      "begrip": "vriendelijk",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vriendelijk betekent dat iemand op een aardige, respectvolle en positieve manier met anderen omgaat.",
+        "laag2": "Vriendelijk gedrag laat zien dat iemand rekening houdt met anderen en een prettige houding heeft.",
+        "laag3": "Vriendelijkheid ondersteunt vertrouwen, samenwerking en verbondenheid door positieve sociale interacties te bevorderen.",
+        "laag4": "Binnen Spark is vriendelijk een sociale eigenschap of uiting waarbij respect, aandacht en welwillendheid worden getoond naar anderen, met als doel een positieve en veilige interactie te bevorderen."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen, systemen",
+        "wat": "een positieve sociale houding",
+        "wanneer": "tijdens interacties en communicatie",
+        "waar": "in relaties, gesprekken en samenwerkingen",
+        "waarom": "om respect, vertrouwen en verbondenheid te bevorderen",
+        "hoe": "door beleefd, behulpzaam en respectvol te handelen of communiceren"
+      },
+      "tags": [
+        "vriendelijk",
+        "aardig",
+        "respect",
+        "beleefdheid",
+        "behulpzaam",
+        "empathie",
+        "warmte",
+        "sociaal",
+        "verbondenheid",
+        "vertrouwen",
+        "communicatie",
+        "positief",
+        "menselijkheid",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "menselijkheid",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "menselijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "menselijkheid",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1dc3f40a",
+          "begrip": "beleefdheid",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "emotie",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4fd91828",
+          "begrip": "excuus",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "empathie",
+            "menselijkheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:12:57.647845+00:00",
+        "vorige_versie_v1": "kb-skel-1ef01b9b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.792988+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:12:56.380491+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:12:56.389794+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:12:58.878096+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:12:58.886579+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:12:55.624370+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f3706a89",
+      "begrip": "vrij",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vrij betekent dat iemand of iets niet beperkt, vastgehouden of verplicht wordt door een externe beperking.",
+        "laag2": "Vrij geeft aan dat er ruimte is om zelfstandig te handelen, kiezen of bewegen.",
+        "laag3": "Vrijheid ondersteunt autonomie, ontwikkeling en eigen verantwoordelijkheid doordat keuzes en acties niet volledig worden opgelegd.",
+        "laag4": "Binnen Spark is vrij een toestand waarin een persoon, object of systeem zonder directe beperking kan handelen, bewegen, kiezen of functioneren binnen de geldende context en grenzen."
+      },
+      "ws5": {
+        "wie": "mensen, dieren, systemen, objecten",
+        "wat": "een toestand zonder directe beperking",
+        "wanneer": "wanneer controle, verplichting of gevangenschap ontbreekt",
+        "waar": "in denken, handelen, bewegen en kiezen",
+        "waarom": "om autonomie en eigen regie mogelijk te maken",
+        "hoe": "door beperkingen, blokkades of verplichtingen weg te nemen"
+      },
+      "tags": [
+        "vrij",
+        "vrijheid",
+        "autonomie",
+        "keuze",
+        "onafhankelijkheid",
+        "ruimte",
+        "zelfbeschikking",
+        "beweging",
+        "toestemming",
+        "openheid",
+        "verantwoordelijkheid",
+        "ontwikkeling",
+        "positief",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-55449b1b",
+          "begrip": "autonomie",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "autonomie",
+            "keuze",
+            "ontwikkeling",
+            "verantwoordelijkheid",
+            "vrijheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ontwikkeling",
+            "openheid",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-15354e23",
+          "begrip": "mogelijkheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "keuze",
+            "ontwikkeling",
+            "ruimte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "keuze",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "toestemming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:30:26.219869+00:00",
+        "vorige_versie_v1": "kb-skel-f3706a89",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:25.720740+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:30:25.182042+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:30:25.192221+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:30:27.491692+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:30:27.501189+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:30:24.290578+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3fbe59ad",
+      "begrip": "emotioneel",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Emotioneel betekent dat gevoelens een sterke invloed hebben op gedachten, gedrag of reacties.",
+        "laag2": "Emotioneel geeft aan dat iemand sterk reageert vanuit gevoelens of emoties.",
+        "laag3": "Emoties ondersteunen verwerking, betekenisgeving en sociale verbinding door ervaringen van een gevoelswaarde te voorzien.",
+        "laag4": "Binnen Spark is emotioneel een toestand waarbij gevoelens zoals blijdschap, verdriet, angst, boosheid of ontroering een merkbare invloed hebben op waarneming, communicatie, besluitvorming of gedrag."
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen",
+        "wat": "een toestand waarin gevoelens sterk aanwezig zijn",
+        "wanneer": "bij belangrijke, ingrijpende of betekenisvolle ervaringen",
+        "waar": "in gedachten, gedrag, relaties en communicatie",
+        "waarom": "doordat gebeurtenissen gevoelens oproepen",
+        "hoe": "door emoties te ervaren en daarop te reageren"
+      },
+      "tags": [
+        "emotioneel",
+        "emotie",
+        "gevoel",
+        "blij",
+        "boos",
+        "ontroering",
+        "reactie",
+        "beleving",
+        "verwerking",
+        "menselijk",
+        "sociaal",
+        "voelen",
+        "bedroefd",
+        "bang"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "beleving",
+            "blij",
+            "boos"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:33:56.582022+00:00",
+        "vorige_versie_v1": "kb-skel-3fbe59ad",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:37.546288+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:33:55.294468+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:33:55.303995+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:33:57.803112+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:33:57.881243+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:33:54.492270+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a07a1351",
+      "begrip": "fijn",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Fijn betekent dat iets als prettig, aangenaam of positief wordt ervaren.",
+        "laag2": "Fijn geeft aan dat een ervaring, situatie of gebeurtenis een goed gevoel oproept.",
+        "laag3": "Fijne ervaringen ondersteunen welzijn, tevredenheid en motivatie doordat ze als positief en wenselijk worden beleefd.",
+        "laag4": "Binnen Spark is fijn een positieve gevoelsbeleving die ontstaat wanneer een situatie, ervaring, persoon of resultaat als aangenaam, comfortabel of waardevol wordt ervaren.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen",
+        "wat": "een positieve ervaring of beleving",
+        "wanneer": "bij prettige situaties of ervaringen",
+        "waar": "in relaties, activiteiten, omgevingen en gebeurtenissen",
+        "waarom": "omdat iets als aangenaam of waardevol wordt ervaren",
+        "hoe": "door positieve gevoelens, comfort of tevredenheid op te roepen"
+      },
+      "tags": [
+        "fijn",
+        "prettig",
+        "aangenaam",
+        "positief",
+        "tevreden",
+        "comfort",
+        "welzijn",
+        "plezier",
+        "gevoel",
+        "waardering",
+        "geluk",
+        "ervaring",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-66e253db",
+          "begrip": "Happy",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gevoel",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d77a8aa",
+          "begrip": "Tevredenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-637f395d",
+          "begrip": "Ik voel me goed",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gevoel",
+            "positief",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "fijn",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c760a1f1",
+          "begrip": "leuke",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "plezier",
+            "positief",
+            "waardering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:50:57.394430+00:00",
+        "vorige_versie_v1": "kb-skel-a07a1351",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.443105+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:50:56.493065+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:50:56.503671+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:50:58.785139+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:50:58.793754+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:50:55.694822+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-25251bf6",
+      "begrip": "tevreden",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Tevreden betekent dat iemand zich content voelt met een situatie, resultaat of ervaring.",
+        "laag2": "Tevreden geeft aan dat verwachtingen, wensen of behoeften voldoende zijn vervuld.",
+        "laag3": "Tevredenheid ondersteunt welzijn, motivatie en stabiliteit doordat iemand een situatie als goed of voldoende ervaart.",
+        "laag4": "Binnen Spark is tevreden een positieve emotionele toestand die ontstaat wanneer een resultaat, ervaring, relatie of situatie overeenkomt met of voldoet aan persoonlijke verwachtingen, doelen of behoeften.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen",
+        "wat": "een positieve gevoelsmatige beoordeling",
+        "wanneer": "wanneer verwachtingen of behoeften zijn vervuld",
+        "waar": "in werk, relaties, activiteiten en dagelijkse situaties",
+        "waarom": "doordat een uitkomst als goed of voldoende wordt ervaren",
+        "hoe": "door positieve beoordeling van een situatie, ervaring of resultaat"
+      },
+      "tags": [
+        "tevreden",
+        "tevredenheid",
+        "content",
+        "voldaan",
+        "positief",
+        "welzijn",
+        "waardering",
+        "resultaat",
+        "ervaring",
+        "behoefte",
+        "verwachting",
+        "geluk",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a07a1351",
+          "begrip": "fijn",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ervaring",
+            "geluk",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-66e253db",
+          "begrip": "Happy",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "positief",
+            "tevredenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e7bd2cf1",
+          "begrip": "dankbaarheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "tevredenheid",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5f61601",
+          "begrip": "Wat is de definitie van geluk",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "geluk",
+            "positief",
+            "tevredenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3d77a8aa",
+          "begrip": "Tevredenheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ervaring",
+            "positief",
+            "tevreden"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:52:40.392329+00:00",
+        "vorige_versie_v1": "kb-skel-25251bf6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.872497+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:52:38.794073+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:52:38.858851+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:52:41.605452+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:52:41.682408+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:52:37.851120+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1e4b0eaa",
+      "begrip": "betrokken",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Betrokken betekent dat iemand aandacht, interesse of verbondenheid voelt met een persoon, situatie, groep of onderwerp.",
+        "laag2": "Betrokkenheid laat zien dat iets belangrijk wordt gevonden en aandacht krijgt.",
+        "laag3": "Betrokkenheid ondersteunt samenwerking, verantwoordelijkheid en verbondenheid doordat mensen actief deelnemen en meedenken.",
+        "laag4": "Binnen Spark is betrokken een toestand waarin een persoon, groep of systeem actief aandacht besteedt aan een situatie, relatie, taak of onderwerp en zich verbonden voelt met het verloop of resultaat ervan.\n"
+      },
+      "ws5": {
+        "wie": "mensen, gebruikers, groepen, organisaties",
+        "wat": "aandacht, interesse of verbondenheid",
+        "wanneer": "bij deelname, samenwerking of interesse",
+        "waar": "in relaties, projecten, gemeenschappen en activiteiten",
+        "waarom": "omdat iets als belangrijk of betekenisvol wordt ervaren",
+        "hoe": "door mee te denken, deel te nemen, te ondersteunen of verantwoordelijkheid te nemen"
+      },
+      "tags": [
+        "betrokken",
+        "betrokkenheid",
+        "interesse",
+        "aandacht",
+        "verbondenheid",
+        "deelname",
+        "samenwerking",
+        "verantwoordelijkheid",
+        "relatie",
+        "gemeenschap",
+        "ondersteuning",
+        "motivatie",
+        "sociaal",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-10d97373",
+          "begrip": "betrokkenheid",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "aandacht",
+            "betrokkenheid",
+            "deelname",
+            "emotie",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8d9261ff",
+          "begrip": "verbondenheid",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "gemeenschap",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5c41cd27",
+          "begrip": "community",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "ondersteuning",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d64702a5",
+          "begrip": "gezamenlijk",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gemeenschap",
+            "samenwerking",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-792abcf8",
+          "begrip": "erbij",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "betrokken",
+            "blij",
+            "deelname",
+            "emotie",
+            "relatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T08:54:13.352508+00:00",
+        "vorige_versie_v1": "kb-skel-1e4b0eaa",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.486152+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:54:11.773962+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:54:11.852402+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T08:54:14.488238+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T08:54:14.557944+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T08:54:10.952296+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
       ]
     }
   ]

@@ -1163,7 +1163,8 @@ function GroeienSection() {
 // v6_emotion_pipeline_001 — Emotie Pipeline dry-run UI
 // ============================================================
 
-function EmotiePipelineSection() {
+// v6_emotie_pipeline_export_001 — geëxporteerd zodat EmotiesPage 'm als tab kan inbedden
+export function EmotiePipelineSection() {
   const [text, setText] = useState('');
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState(null);

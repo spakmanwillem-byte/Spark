@@ -34,9 +34,9 @@ export const navigationConfig = {
       { id: 'synapse', label: 'Synapslaag', icon: Brain, path: '/spark/synapse', adminOnly: true },
       { id: 'knowledge-v2', label: 'Kennisbank', icon: BookOpen, path: '/knowledge' },
       { id: 'triggers', label: 'Triggers', icon: Bolt, path: '/spark/triggers' },
-      { id: 'emotions', label: 'Emotie Detectie', icon: Sparkles, path: '/spark/emotions' },
-      { id: 'emotion-routing', label: 'Emotie Routering', icon: Activity, path: '/spark/routering', adminOnly: true },
+      { id: 'emotions', label: 'Emoties', icon: Sparkles, path: '/spark/emotions' },
       { id: 'connections', label: 'Verbanden', icon: Link2, path: '/spark/connections' },
+      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },
   modules: {
@@ -48,7 +48,6 @@ export const navigationConfig = {
       { id: 'boekhouding', label: 'Boekhouding', icon: BookMarked, path: '/modules/boekhouding' },
       { id: 'achievements', label: 'Achievements', icon: Trophy, path: '/modules/achievements' },
       { id: 'leaderboard', label: 'Leaderboard', icon: Award, path: '/modules/leaderboard' },
-      { id: 'integrations', label: 'Integraties', icon: Puzzle, path: '/modules/integrations' },
     ]
   },
   admin: {

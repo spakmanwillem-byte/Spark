@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
+import { EmotiePipelineSection } from './SparkBrainPage';
 import {
   Sparkles, Heart, Smile, Frown, AlertTriangle, Cloud,
   Activity, Zap, BookOpen, ChevronDown, ChevronRight,
-  MessageSquare, Target, Shield
+  MessageSquare, Target, Shield, Layers
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -58,6 +59,7 @@ export function EmotiesPage({ onNavigate }) {
     { id: 'overzicht', label: 'Overzicht', icon: Activity },
     { id: 'detectie', label: 'Live Detectie', icon: Zap },
     { id: 'sub-emoties', label: 'Sub-Emoties', icon: Heart },
+    { id: 'routering', label: 'Routering / Pipeline', icon: Layers },
     { id: 'systeem', label: 'Hoe het werkt', icon: BookOpen },
   ];
 
@@ -319,6 +321,10 @@ export function EmotiesPage({ onNavigate }) {
             )}
 
             {/* HOE HET WERKT */}
+            {activeTab === 'routering' && (
+              <EmotiePipelineSection />
+            )}
+
             {activeTab === 'systeem' && (
               <>
                 <div className="p-4 rounded-xl border border-amber-500/20" style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.06), rgba(234,88,12,0.04))' }}>

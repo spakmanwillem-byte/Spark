@@ -693,6 +693,100 @@ def handle_dnd_help() -> Dict:
 
 
 # ============== PROFILE LOOKUP INTENT (v6_profile_lookup_001 - 28 mei) ==============
+# ============== v6_my_relation_lookup_001 — "Wie is/zijn mijn X" ==============
+# Vragen als "Wie is mijn zus?", "Wie zijn mijn dochters?", "Wie is mijn vader"
+# Antwoorden direct vanuit /persons/{user_id}_relationships.json — geen KB-cards.
+
+from .relation_extraction_service import REL_TYPES as _REL_TYPES, REL_KEYS_SORTED as _REL_KEYS
+
+# Plural forms → singular relation key. NB: REL_TYPES heeft o.a. "zus", "broer", "neef" etc.
+_REL_PLURALS = {
+    "zussen": "zus", "broers": "broer", "broertjes": "broer", "zusjes": "zus",
+    "moeders": "moeder", "vaders": "vader",
+    "dochters": "dochter", "zonen": "zoon", "kinderen": "kind",
+    "vrienden": "vriend", "vriendinnen": "vriendin",
+    "collegas": "collega", "collega's": "collega",
+    "neven": "neef", "nichten": "nicht", "neefjes": "neef", "nichtjes": "nicht",
+    "tantes": "tante", "ooms": "oom",
+    "schoonzussen": "schoonzus", "schoonbroers": "schoonbroer",
+    "schoonzonen": "schoonzoon", "schoondochters": "schoondochter",
+    "oma's": "oma", "opa's": "opa", "omas": "oma", "opas": "opa",
+}
+
+# Alle herkende termen (singular + plural)
+_ALL_REL_TERMS = sorted(
+    list(_REL_KEYS) + list(_REL_PLURALS.keys()),
+    key=len, reverse=True
+)
+_MY_REL_PATTERN = re.compile(
+    rf"\bwie\s+(?:is|zijn)\s+mijn\s+({'|'.join(re.escape(k) for k in _ALL_REL_TERMS)})\b",
+    re.IGNORECASE,
+)
+
+
+def detect_my_relation_lookup(text: str) -> Optional[str]:
+    """Returnt de relatie-term (genormaliseerd, lowercase, singular) als 'Wie is mijn X' matcht."""
+    if not text:
+        return None
+    m = _MY_REL_PATTERN.search(text)
+    if not m:
+        return None
+    term = m.group(1).lower()
+    # Normalize plurals
+    return _REL_PLURALS.get(term, term)
+
+
+def handle_my_relation_lookup(user_id: str, rel_term: str) -> Dict:
+    """Vraagt persons-graaf op en geeft alle personen terug die op deze relatie matchen."""
+    rel_type = _REL_TYPES.get(rel_term, rel_term)
+    # rel_type kan bv. "familie/zus" zijn
+    base_type = rel_type.split("/")[-1]  # "zus", "moeder", etc.
+
+    REL_FILE = DATA_ROOT / "persons" / f"{user_id}_relationships.json"
+    if not REL_FILE.exists():
+        return {
+            "type": "my_relation_lookup",
+            "message": f"Ik heb geen relaties van jou opgeslagen. Vertel me eens over je {rel_term}? Dan onthoud ik het.",
+            "matched_rel": rel_term,
+            "found": [],
+        }
+
+    rel_data = load_json(REL_FILE, default={"relationships": []})
+    rels = rel_data.get("relationships", []) if isinstance(rel_data, dict) else rel_data
+
+    matches = []
+    for r in rels:
+        rt = (r.get("relation_type") or "").lower()
+        # Match: exact "familie/zus" of suffix-match (laatste deel = "zus")
+        if rt == rel_type.lower() or rt.endswith(f"/{base_type}") or rt == base_type:
+            matches.append(r)
+
+    if not matches:
+        return {
+            "type": "my_relation_lookup",
+            "message": f"Ik weet (nog) niet wie jouw {rel_term} is. Vertel het me — bv. '\\<naam\\> is mijn {rel_term}' — dan onthoud ik het.",
+            "matched_rel": rel_term,
+            "found": [],
+        }
+
+    namen = [r.get("person_name") for r in matches if r.get("person_name")]
+    # Mooie taal
+    if len(namen) == 1:
+        n = namen[0]
+        notes = (matches[0].get("notes") or "").strip()
+        extra = f"\n\n_{notes}_" if notes and not notes.startswith("Auto-detected") else ""
+        msg = f"Jouw **{rel_term}** is **{n}**.{extra}"
+    else:
+        bulleted = "\n".join(f"- **{n}**" for n in namen)
+        msg = f"Jouw **{rel_term}**:\n{bulleted}"
+    return {
+        "type": "my_relation_lookup",
+        "message": msg,
+        "matched_rel": rel_term,
+        "found": namen,
+    }
+
+
 # Spark beantwoordt vragen over personen: "wie is Marieke?", "wat is Willems achternaam?"
 # Privacy-gate: alleen users in vriendelijke graaf van vrager, óf publieke users (gradatie ≤ 4).
 

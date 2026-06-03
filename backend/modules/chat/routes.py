@@ -359,6 +359,19 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[glow-nav] failed: {ex}")
 
+    # v6_my_relation_lookup_001 (3 jun) — VÓÓR profile-lookup zodat "Wie is mijn zus"
+    # niet als naam-lookup eindigt en zegt "ik ken geen 'mijn zus'".
+    try:
+        from . import smart_intents_service as _si_rel
+        rel_term = _si_rel.detect_my_relation_lookup(text)
+        if rel_term:
+            rel_out = _si_rel.handle_my_relation_lookup(req.user_id or "", rel_term)
+            response.update(rel_out)
+            _save_log(req, response, rel_out.get("type", "my_relation_lookup"))
+            return response
+    except Exception as ex:
+        print(f"[my-relation-lookup] failed: {ex}")
+
     # v6_profile_lookup_001 (28 mei) — VÓÓR capability-router zodat "wat is Willems achternaam"
     # niet wordt opgevangen door generic capability_placeholder.
     try:

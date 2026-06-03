@@ -12,7 +12,7 @@ Voegt nieuwe relaties toe aan /data/persons/{user_id}_relationships.json
 import re
 import json
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 from datetime import datetime, timezone
 
 from modules.core.storage import load_json, save_json
@@ -34,26 +34,38 @@ REL_TYPES = {
     "broer": "familie/broer",
     "broertje": "familie/broer",
     "oma": "familie/oma",
+    "omaatje": "familie/oma",
     "opa": "familie/opa",
+    "opaatje": "familie/opa",
     "dochter": "familie/dochter",
+    "dochtertje": "familie/dochter",
     "zoon": "familie/zoon",
+    "zoontje": "familie/zoon",
     "kind": "familie/kind",
     "man": "familie/partner",
     "vrouw": "familie/partner",
     "partner": "familie/partner",
     "vriend": "vriend",
     "vriendin": "vriend",
+    "vriendje": "vriend",
     "goede vriend": "vriend/goed",
     "beste vriend": "vriend/beste",
     "collega": "collega",
     "buurman": "buur",
     "buurvrouw": "buur",
     "nicht": "familie/nicht",
+    "nichtje": "familie/nicht",
     "neef": "familie/neef",
+    "neefje": "familie/neef",
     "tante": "familie/tante",
     "oom": "familie/oom",
     "schoonmoeder": "familie/schoonmoeder",
     "schoonvader": "familie/schoonvader",
+    "schoonzus": "familie/schoonzus",
+    "schoonbroer": "familie/schoonbroer",
+    "zwager": "familie/schoonbroer",
+    "schoonzoon": "familie/schoonzoon",
+    "schoondochter": "familie/schoondochter",
     "bekende": "bekende",
 }
 
@@ -82,6 +94,38 @@ PATTERN_KEN_NAAM = re.compile(
 PATTERN_NAAM_KEN_IK = re.compile(
     rf"\b{NAAM_REGEX}\s+ken\s+ik\b"
 )
+# v6_rel_004 — Transitieve relatie: "X is de Y van Z" (bv. "Joy is de dochter van Maaike")
+# Wordt gemapt naar een impliciete user-relatie als Z al bekend is.
+PATTERN_NAAM_IS_REL_VAN = re.compile(
+    rf"\b{NAAM_REGEX}\s+is\s+(?:de|het|een)\s+({REL_REGEX})\s+van\s+{NAAM_REGEX}\b"
+)
+
+# Welke combinaties geven welke transitieve relatie?
+# (Z_rel_to_user, X_rel_to_Z) → X_rel_to_user
+TRANSITIVE_REL = {
+    # zus/broer's kind = nichtje/neefje
+    ("familie/zus", "familie/dochter"): "familie/nicht",
+    ("familie/zus", "familie/zoon"): "familie/neef",
+    ("familie/broer", "familie/dochter"): "familie/nicht",
+    ("familie/broer", "familie/zoon"): "familie/neef",
+    # moeder/vader's kind = zus/broer (al bekend) — skip om dubbele detectie te voorkomen
+    # oma/opa's kind = ouder (al bekend)
+    # ouders van ouders → grootouders
+    ("familie/moeder", "familie/moeder"): "familie/oma",
+    ("familie/moeder", "familie/vader"): "familie/opa",
+    ("familie/vader", "familie/moeder"): "familie/oma",
+    ("familie/vader", "familie/vader"): "familie/opa",
+    # partners van familie → schoonfamilie
+    ("familie/zus", "familie/partner"): "familie/schoonbroer",
+    ("familie/broer", "familie/partner"): "familie/schoonzus",
+    ("familie/dochter", "familie/partner"): "familie/schoonzoon",
+    ("familie/zoon", "familie/partner"): "familie/schoondochter",
+    # kind van mijn kind = kleinkind
+    ("familie/dochter", "familie/dochter"): "familie/kleindochter",
+    ("familie/dochter", "familie/zoon"): "familie/kleinzoon",
+    ("familie/zoon", "familie/dochter"): "familie/kleindochter",
+    ("familie/zoon", "familie/zoon"): "familie/kleinzoon",
+}
 
 # Negatieve woorden die we niet als naam willen
 NAME_BLACKLIST = {"De", "Het", "Een", "Wat", "Hoe", "Hij", "Zij", "Mijn", "Jouw"}
@@ -95,26 +139,40 @@ def _normalize(name: str) -> str:
     return name.strip()
 
 
-def extract(text: str) -> List[Dict]:
-    """Vind relatie-mentions in tekst."""
+def extract(text: str, user_id: Optional[str] = None) -> List[Dict]:
+    """Vind relatie-mentions in tekst.
+
+    v6_rel_004 — Als `user_id` meegegeven is, doet ook transitieve relatie-detectie
+    ("X is de Y van Z") door bestaande relaties van de user op te zoeken.
+    """
     if not text:
         return []
     findings: List[Dict] = []
     seen = set()
 
-    def add(naam: str, rel_word: str):
+    def add(naam: str, rel_word: str, note: str = ""):
         naam = _normalize(naam)
         if not naam or naam in NAME_BLACKLIST:
             return
-        key = (naam.lower(), rel_word.lower())
+        # rel_word kan al een volledig rel_type zijn (bv. "familie/nicht") via transitive
+        if rel_word in REL_TYPES:
+            rel_type = REL_TYPES[rel_word]
+        elif "/" in rel_word:
+            rel_type = rel_word
+        else:
+            rel_type = rel_word.lower()
+        key = (naam.lower(), rel_type.lower())
         if key in seen:
             return
         seen.add(key)
-        findings.append({
+        f = {
             "person_name": naam,
-            "relation_type": REL_TYPES.get(rel_word.lower(), rel_word.lower()),
+            "relation_type": rel_type,
             "raw_relation_word": rel_word.lower(),
-        })
+        }
+        if note:
+            f["transitive_note"] = note
+        findings.append(f)
 
     for m in PATTERN_MIJN_REL_NAAM.finditer(text):
         rel_word, naam = m.group(1), m.group(2)
@@ -130,6 +188,33 @@ def extract(text: str) -> List[Dict]:
         for m in pat.finditer(text):
             naam = m.group(1)
             add(naam, "bekende")
+
+    # v6_rel_004 — Transitieve relatie via bestaande relatie van user
+    if user_id:
+        try:
+            existing_data = load_json(_rel_file(user_id), default={"relationships": []})
+            existing_rels = existing_data.get("relationships", [])
+            # Map naam → rel_type van bekende relaties
+            known = {}
+            for r in existing_rels:
+                nm = (r.get("person_name") or "").strip().lower()
+                rt = r.get("relation_type") or ""
+                if nm and rt and nm not in known:
+                    known[nm] = rt
+            for m in PATTERN_NAAM_IS_REL_VAN.finditer(text):
+                x_naam = m.group(1)
+                rel_word = m.group(2)
+                z_naam = m.group(3)
+                # Eerst de directe relatie tussen X en Z toevoegen (niet user-relatie, maar info)
+                # Z is bekend? Dan kan transitive afgeleid worden:
+                z_rel_user = known.get(z_naam.lower().strip())
+                xz_rel = REL_TYPES.get(rel_word.lower(), f"familie/{rel_word.lower()}")
+                if z_rel_user:
+                    transitive = TRANSITIVE_REL.get((z_rel_user, xz_rel))
+                    if transitive:
+                        add(x_naam, transitive, note=f"afgeleid: {rel_word} van {z_naam}")
+        except Exception as e:
+            print(f"[rel-extract] transitive lookup failed: {e}")
 
     return findings
 
@@ -254,5 +339,5 @@ def _sync_persons_cards(user_id: str, new_relations: List[Dict]):
 
 def detect_and_save(user_id: str, text: str) -> List[Dict]:
     """Combined: extract + save. Returns lijst van NIEUW toegevoegde relaties."""
-    findings = extract(text)
+    findings = extract(text, user_id=user_id)
     return add_relations(user_id, findings)

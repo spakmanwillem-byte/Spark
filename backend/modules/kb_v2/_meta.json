@@ -29,6 +29,7 @@
     "GET /kb/v2/voice/file/{filename}",
     "PATCH /kb/v2/voice/kind/{card_id}",
     "PATCH /kb/v2/voice/secondary/kind/{card_id}",
+    "POST /kb/v2/admin/dedupe-inbox",
     "POST /kb/v2/backfill-hooks",
     "POST /kb/v2/classify",
     "POST /kb/v2/delete",

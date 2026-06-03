@@ -238,6 +238,7 @@ async def auto_resolve_inbox(body: AutoResolveBody):
 class VocabSyncBody(BaseModel):
     dry_run: bool = True
     viewer_id: str = "user-001"
+    force_refresh: bool = False  # v6_kbv2_vocab_sync_002 — alle entries her-registreren, niet alleen missing
 
 
 @router.post("/vocab/sync")
@@ -253,6 +254,9 @@ async def sync_vocab(body: VocabSyncBody):
     elke kaart die mist. Idempotent — kaarten die al in vocab staan worden niet
     aangeraakt (behalve `last_seen`-update door bestaande hook-logica).
 
+    v6_kbv2_vocab_sync_002 — `force_refresh=True` repareert ook stale entries
+    (lade/active waarden in vocab die niet matchen met huidige lade-data).
+
     Admin-only (gradatie ≤ 2).
     """
     from modules.core.storage import load_json
@@ -265,41 +269,70 @@ async def sync_vocab(body: VocabSyncBody):
 
     base = Path(__file__).parent.parent.parent / "data"
     vdata = load_json(base / "personality" / "spark_vocab.json", default={"vocab": {}})
-    vocab_keys = {k.lower() for k in vdata.get("vocab", {}).keys()}
+    vocab = vdata.get("vocab", {})
+    vocab_keys = {k.lower() for k in vocab.keys()}
 
     missing = []
+    stale = []
+    all_lade_cards = []
     for lade in ["voelen", "spreken", "weten", "doen"]:
         ldata = load_json(_lade_path(lade), default={"kaarten": []})
         for k in ldata.get("kaarten", []):
             begrip = (k.get("begrip") or "").strip()
             if not begrip:
                 continue
-            if begrip.lower() not in vocab_keys:
+            all_lade_cards.append({"card": k, "lade": lade, "begrip": begrip})
+            key = begrip.lower()
+            if key not in vocab_keys:
                 missing.append({"id": k.get("id"), "begrip": begrip, "lade": lade})
+            else:
+                # Check stale (lade mismatch of inactive terwijl het in lade staat met laag1)
+                ve = vocab.get(key, {})
+                lagen = k.get("lagen") or {}
+                has_l1 = bool((lagen.get("laag1") or "").strip())
+                expected_active = has_l1
+                if ve.get("lade") != lade or bool(ve.get("active")) != expected_active:
+                    stale.append({"id": k.get("id"), "begrip": begrip, "lade": lade,
+                                  "was_lade": ve.get("lade"), "was_active": ve.get("active"),
+                                  "should_active": expected_active})
 
     result = {
         "success": True,
         "dry_run": body.dry_run,
+        "force_refresh": body.force_refresh,
         "missing_count": len(missing),
+        "stale_count": len(stale),
         "by_lade": {},
-        "examples": missing[:15],
+        "examples_missing": missing[:10],
+        "examples_stale": stale[:10],
     }
     for m in missing:
         result["by_lade"][m["lade"]] = result["by_lade"].get(m["lade"], 0) + 1
 
     if not body.dry_run:
         registered = 0
-        for m in missing:
-            # Vind kaart en run register_in_vocab
-            ldata = load_json(_lade_path(m["lade"]), default={"kaarten": []})
-            card = next((k for k in ldata.get("kaarten", []) if k.get("id") == m["id"]), None)
+        repaired = 0
+        targets = list(missing)
+        if body.force_refresh:
+            # Voeg stale en ook compleet aanwezigen toe → her-registreren alle lade-cards
+            targets = [{"id": c["card"].get("id"), "begrip": c["begrip"], "lade": c["lade"],
+                        "_card": c["card"]} for c in all_lade_cards]
+        for m in targets:
+            card = m.get("_card")
+            if card is None:
+                ldata = load_json(_lade_path(m["lade"]), default={"kaarten": []})
+                card = next((k for k in ldata.get("kaarten", []) if k.get("id") == m["id"]), None)
             if card:
                 try:
-                    kbv2_hooks.register_in_vocab(card)
-                    registered += 1
+                    is_new = kbv2_hooks.register_in_vocab(card)
+                    if is_new:
+                        registered += 1
+                    else:
+                        repaired += 1
                 except Exception:
                     pass
         result["registered"] = registered
+        result["repaired"] = repaired
 
     return result
 

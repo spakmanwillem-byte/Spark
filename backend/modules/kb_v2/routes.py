@@ -50,6 +50,14 @@ async def get_stats():
     return {"success": True, **service.get_stats()}
 
 
+# v6_kbv2_dedupe_001 — Inbox-dedupe knop (admin)
+@router.post("/admin/dedupe-inbox")
+async def admin_dedupe_inbox(dry_run: bool = False):
+    """Verwijdert duplicaten uit de inbox (kaarten met id of begrip dat al in een
+    lade met ingevulde laag1 staat). Set dry_run=true om alleen te checken."""
+    return service.dedupe_inbox(dry_run=dry_run)
+
+
 @router.get("/lade/{lade}")
 async def get_lade(lade: str,
                    limit: int = Query(50, ge=1, le=500),

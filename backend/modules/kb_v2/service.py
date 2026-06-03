@@ -630,12 +630,48 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
 @traced(intent="nieuwe kaart toevoegen aan inbox", module="kbv2")
 def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000") -> Dict:
     """Maak een lege kaart in de inbox (bv. wanneer Spark een onbekend woord tegenkomt).
-    Idempotent: als 'begrip' al ergens bestaat, return existing."""
+    Idempotent: als 'begrip' al ergens bestaat, return existing.
+
+    v6_kbv2_dedupe_001 — Hardened dedup: scant ook lades + inbox direct (niet alleen index),
+    case-insensitief, voorkomt dat dezelfde 'begrip' twee keer in inbox/lades kan landen
+    bij index-corruption of externe imports.
+    """
     if not begrip or not begrip.strip():
         return {"success": False, "message": "Leeg begrip"}
+    nb = begrip.lower().strip()
+
+    # 1. Snelle index-check
     existing = find_by_begrip(begrip)
     if existing:
         return {"success": True, "kaart": existing["kaart"], "existing": True, "lade": existing["lade"]}
+
+    # 2. Diepe scan over lades + inbox (defensief tegen index-out-of-sync)
+    for L in LADES:
+        ld = load_json(_lade_path(L), default={"kaarten": []})
+        for k in ld.get("kaarten", []):
+            if (k.get("begrip") or "").lower().strip() == nb:
+                # Repair index meteen
+                idx = load_json(_index_path(), default={"entries": {}})
+                idx.setdefault("entries", {})[nb] = {
+                    "kaart_id": k.get("id"), "lade": L,
+                    "has_lagen": [kk for kk, vv in (k.get("lagen") or {}).items() if vv],
+                    "last_updated": _now(),
+                }
+                save_json(_index_path(), idx)
+                return {"success": True, "kaart": k, "existing": True, "lade": L,
+                        "repaired_index": True}
+    inbox_check = load_json(_inbox_path(), default={"kaarten": []})
+    for k in inbox_check.get("kaarten", []):
+        if (k.get("begrip") or "").lower().strip() == nb:
+            idx = load_json(_index_path(), default={"entries": {}})
+            idx.setdefault("entries", {})[nb] = {
+                "kaart_id": k.get("id"), "lade": None,
+                "has_lagen": [], "last_updated": _now(),
+            }
+            save_json(_index_path(), idx)
+            return {"success": True, "kaart": k, "existing": True, "lade": None,
+                    "repaired_index": True}
+
     with _lock:
         inbox = load_json(_inbox_path(), default={"kaarten": []})
         new_card = {
@@ -668,6 +704,59 @@ def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000") -
         }
         save_json(_index_path(), idx)
     return {"success": True, "kaart": new_card, "existing": False}
+
+
+def dedupe_inbox(dry_run: bool = False) -> Dict:
+    """v6_kbv2_dedupe_001 — Verwijder kaarten uit inbox die elders bestaan.
+
+    Verwijdert een inbox-kaart als:
+      - Een lade-kaart bestaat met dezelfde `id`, OF
+      - Een lade-kaart bestaat met hetzelfde (lowercased) `begrip` EN die lade-kaart
+        heeft een ingevulde laag1 (dus is "echt" ingevuld, niet leeg)
+
+    Returns count van verwijderde duplicaten.
+    """
+    inbox = load_json(_inbox_path(), default={"kaarten": []})
+    inbox_cards = inbox.get("kaarten", [])
+
+    # Index lade-cards: id + begrip-met-laag1
+    lade_ids = set()
+    lade_begrippen_filled = set()
+    for L in LADES:
+        ld = load_json(_lade_path(L), default={"kaarten": []})
+        for k in ld.get("kaarten", []):
+            kid = k.get("id")
+            if kid:
+                lade_ids.add(kid)
+            lagen = k.get("lagen") or {}
+            l1 = (lagen.get("laag1", "") if isinstance(lagen, dict) else "") or ""
+            if l1.strip() and k.get("begrip"):
+                lade_begrippen_filled.add((k["begrip"] or "").lower().strip())
+
+    duplicates = []
+    kept = []
+    for c in inbox_cards:
+        cid = c.get("id")
+        cbegrip = (c.get("begrip") or "").lower().strip()
+        if cid in lade_ids or (cbegrip and cbegrip in lade_begrippen_filled):
+            duplicates.append({"id": cid, "begrip": c.get("begrip")})
+        else:
+            kept.append(c)
+
+    if not dry_run and duplicates:
+        inbox["kaarten"] = kept
+        inbox.setdefault("metadata", {})["last_dedupe_at"] = _now()
+        inbox["metadata"]["last_dedupe_removed"] = len(duplicates)
+        inbox["card_count"] = len(kept)
+        save_json(_inbox_path(), inbox)
+
+    return {
+        "success": True,
+        "dry_run": dry_run,
+        "removed": len(duplicates),
+        "remaining_inbox": len(kept),
+        "examples": duplicates[:20],
+    }
 
 
 # ---------------------------------------------------------------------------

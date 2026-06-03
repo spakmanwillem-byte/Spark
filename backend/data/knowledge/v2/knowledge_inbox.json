@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 2248,
+  "card_count": 2246,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -9,8 +9,8 @@
       "no_match": 160,
       "missing_laag1": 2215
     },
-    "last_dedupe_at": "2026-06-03T16:18:46.286712+00:00",
-    "last_dedupe_removed": 72
+    "last_dedupe_at": "2026-06-03T16:21:24.164752+00:00",
+    "last_dedupe_removed": 2
   },
   "kaarten": [
     {
@@ -20541,72 +20541,6 @@
         "voelen": 0,
         "spreken": 0,
         "weten": 0,
-        "doen": 0
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-77da6088",
-      "begrip": "net",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "Net betekent dat iets kort geleden is gebeurd of nog maar pas begonnen is.",
-        "laag2": "Mensen gebruiken “net” vaak om aan te geven dat iets vers, recent of direct voorafgaand aan het huidige moment gebeurde. Het woord helpt om tijd en volgorde in gesprekken duidelijk te maken.",
-        "laag3": "“Net” is een tijdsaanduiding die aangeeft dat iets heel kort geleden plaatsvond. Het wordt gebruikt om gebeurtenissen dichtbij het huidige moment te plaatsen.\n\nVoorbeelden:\n\nik ben net wakker\nhij was net weg\nwe hebben net gegeten\nhet is net gebeurd\n\nHet woord geeft context aan:\n\ntijd\novergang\nactualiteit\nrecentheid\nvolgorde van gebeurtenissen\n\n“Net” kan ook andere betekenissen hebben afhankelijk van de context, zoals:\n\nnetjes of precies (“dat past net”)\neen netwerk of gaas (“een visnet”)\n\nIn deze context betekent “net”:\nkort geleden.",
-        "laag4": "Spark gebruikt woorden zoals “net” om tijdsverbanden tussen gebeurtenissen te begrijpen. Hierdoor kan Spark herkennen dat een situatie recent is gebeurd en verband leggen tussen opeenvolgende processen zoals slapen, wakker worden, landen en koffie drinken."
-      },
-      "ws5": {
-        "wie": "Mensen die praten over recente gebeurtenissen of situaties.",
-        "wat": "Een aanduiding dat iets kort geleden is gebeurd.",
-        "wanneer": "Direct voor het huidige moment of kort daarvoor.",
-        "waar": "In gesprekken, verhalen en dagelijkse communicatie.",
-        "waarom": "Om duidelijk te maken dat iets recent of vers gebeurd is.",
-        "hoe": "Door een gebeurtenis in tijd dichtbij het huidige moment te plaatsen."
-      },
-      "tags": [
-        "net",
-        "tijd",
-        "recent",
-        "gebeurtenis",
-        "overgang",
-        "context",
-        "volgorde",
-        "bewustzijn"
-      ],
-      "topic": "tijd",
-      "verbanden": [],
-      "footnote": {
-        "bron": "De Willem",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "snap-c79bb525",
-        "vertrouwen": 0.9,
-        "belangrijkheid": 2,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:42.373561+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "tag_tie",
-      "_classifier_scores": {
-        "voelen": 0,
-        "spreken": 1,
-        "weten": 1,
         "doen": 0
       },
       "media": {
@@ -126464,96 +126398,6 @@
         "spreken": 0,
         "weten": 0,
         "doen": 0
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-29da5490",
-      "begrip": "GIF",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "Een GIF is een digitaal afbeeldingsbestand dat stilstaande of bewegende beelden in korte herhalende vorm weergeeft.",
-        "laag2": "Een GIF toont beeld, vaak met korte herhalende beweging.",
-        "laag3": "GIFs ondersteunen visuele communicatie en snelle expressie.\nZe brengen informatie, emotie of reactie compact en herkenbaar over.",
-        "laag4": "Binnen Spark is een GIF een visuele informatiedrager waarin beeld en herhaling samenkomen om betekenis, reactie of beweging efficiënt over te brengen.\nGIF ondersteunt snelle interpretatie en versterkt communicatie door dynamische visuele expressie."
-      },
-      "ws5": {
-        "wie": "mensen, systemen, gebruikers",
-        "wat": "een bewegend afbeeldingsbestand",
-        "wanneer": "bij visuele communicatie of reactie",
-        "waar": "in media, communicatie, digitale systemen",
-        "waarom": "voor snelle visuele overdracht",
-        "hoe": "door beeldframes in herhaling"
-      },
-      "tags": [
-        "gif",
-        "afbeelding",
-        "animatie",
-        "beweging",
-        "beeld",
-        "media",
-        "communicatie",
-        "herhaling",
-        "digitaal",
-        "expressie",
-        "emotie",
-        "blij",
-        "neutraal"
-      ],
-      "verbanden": [],
-      "footnote": {
-        "bron": "manual",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": null,
-        "vertrouwen": 0.3,
-        "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-05-31T19:20:50.256429+00:00",
-        "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-02T17:24:31.284217+00:00",
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-31T19:20:53.179523+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-05-31T19:20:53.189881+00:00",
-            "result": {
-              "n_found": 5,
-              "top_overlap": 6
-            }
-          },
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-06-02T17:24:32.499915+00:00",
-            "result": {
-              "active": false,
-              "is_new": false
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-06-02T17:24:32.576792+00:00",
-            "result": {
-              "n_found": 5,
-              "top_overlap": 6
-            }
-          }
-        ]
       },
       "media": {
         "voice_url": null,

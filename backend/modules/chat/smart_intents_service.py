@@ -788,8 +788,12 @@ def handle_my_relation_lookup(user_id: str, rel_term: str) -> Dict:
 
 
 # ============== v6_age_lookup_001 — "Hoe oud is X" ==============
+# Twee patronen: naam OF "mijn relatie"
+_REL_REF_AGE = "(?:mijn\\s+(?:moeder|vader|ma|mama|pa|papa|zus|zusje|broer|broertje|oma|opa|"
+_REL_REF_AGE += "dochter|zoon|man|vrouw|partner|tante|oom|neef|nicht|nichtje|neefje|"
+_REL_REF_AGE += "schoonmoeder|schoonvader|schoonzus|schoonbroer))"
 _AGE_PATTERN = re.compile(
-    r"\bhoe\s+oud\s+is\s+([A-Z][a-zà-ÿ]+(?:[\s\-]+[A-Z][a-zà-ÿ]+){0,2})\b",
+    rf"\bhoe\s+oud\s+is\s+(?:([A-Z][a-zà-ÿ]+(?:[\s\-]+[A-Z][a-zà-ÿ]+){{0,2}})|({_REL_REF_AGE}))\b",
     re.IGNORECASE,
 )
 
@@ -801,7 +805,29 @@ def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
     m = _AGE_PATTERN.search(text)
     if not m:
         return None
-    naam_query = m.group(1).strip()
+    naam_direct = m.group(1)
+    rel_ref = m.group(2)
+    # v6 fix: re.IGNORECASE laat [A-Z] ook lowercase matchen, dus "mijn moeder" kan in
+    # de naam-slot belanden. Detecteer dit en map terug naar rel_ref.
+    if naam_direct and naam_direct.lower().startswith("mijn "):
+        rel_ref = naam_direct
+        naam_direct = None
+    # Resolve "mijn moeder" → echte naam
+    if rel_ref and not naam_direct:
+        try:
+            from .personalia_extraction_service import _resolve_relation_ref
+            naam_query = _resolve_relation_ref(user_id, rel_ref)
+            if not naam_query:
+                return {
+                    "type": "age_lookup",
+                    "message": f"Ik weet (nog) niet wie jouw {rel_ref.replace('mijn ','')} is. Vertel het me eerst.",
+                }
+        except Exception:
+            naam_query = rel_ref
+    else:
+        naam_query = (naam_direct or "").strip()
+    if not naam_query:
+        return None
     pf = DATA_ROOT / "persons" / f"{user_id}.json"
     if not pf.exists():
         return {
@@ -827,6 +853,11 @@ def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
     p = matches[0]
     gd = p.get("geboortedatum")
     gj = p.get("geboortejaar")
+    g_dag = p.get("geboortedag")
+    g_maand = p.get("geboortemaand")
+    # Compose ISO datum als alle 3 delen aanwezig (auto-fill)
+    if not gd and gj and g_maand and g_dag:
+        gd = f"{int(gj):04d}-{int(g_maand):02d}-{int(g_dag):02d}"
     if gd:
         try:
             d = datetime.strptime(gd, "%Y-%m-%d")
@@ -841,9 +872,22 @@ def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
             pass
     if gj:
         approx = datetime.now().year - int(gj)
+        extra = ""
+        if g_dag and g_maand:
+            # Toon ook verjaardag-datum zonder jaar
+            mnd_namen = ["", "januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"]
+            extra = f" Verjaardag op **{int(g_dag)} {mnd_namen[int(g_maand)]}**."
+        elif g_dag or g_maand:
+            extra = " (geboortedatum nog niet compleet)"
         return {
             "type": "age_lookup",
-            "message": f"**{p.get('naam') or naam_query}** is ongeveer **{approx} jaar** (geboren in {gj}). Een exacte geboortedatum heb ik nog niet — vertel eens?",
+            "message": f"**{p.get('naam') or naam_query}** is ongeveer **{approx} jaar** (geboren in {gj}).{extra}",
+        }
+    if g_dag and g_maand:
+        mnd_namen = ["", "januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"]
+        return {
+            "type": "age_lookup",
+            "message": f"**{p.get('naam') or naam_query}** is jarig op **{int(g_dag)} {mnd_namen[int(g_maand)]}**, maar het geboortejaar heb ik nog niet — vertel eens?",
         }
     return {
         "type": "age_lookup",

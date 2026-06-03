@@ -35,23 +35,90 @@ for k in MAANDEN.keys():
     _MAAND_RX_PARTS.append("".join(f"[{c}{c.upper()}]" if c.isalpha() else c for c in k))
 _MAAND_GROUP = "(" + "|".join(_MAAND_RX_PARTS) + ")"
 
+# v6_personalia_pronoun_001 — Herken "mijn moeder/vader/zus/etc." als persoon-verwijzing.
+# Wordt opgelost door _resolve_relation_ref() naar de naam uit relationships.json.
+_REL_REF_WORDS = [
+    "moeder", "vader", "zus", "zusje", "broer", "broertje", "oma", "opa",
+    "dochter", "zoon", "man", "vrouw", "partner", "tante", "oom", "neef", "nicht",
+    "nichtje", "neefje", "schoonmoeder", "schoonvader", "schoonzus", "schoonbroer",
+]
+
 NAAM_RX = r"([A-Z][a-zà-ÿ]+(?:[\s\-]+[A-Z][a-zà-ÿ]+){0,2})"
 
 PAT_BIRTHDATE_NL = re.compile(
-    rf"\b{NAAM_RX}\s+is\s+(?:op\s+)?(\d{{1,2}})\s+{_MAAND_GROUP}\s+(\d{{4}})\s+geboren\b"
+    rf"\b{NAAM_RX}\s+(?i:is)\s+(?i:op\s+)?(\d{{1,2}})\s+{_MAAND_GROUP}\s+(\d{{4}})\s+(?i:geboren)\b"
 )
 PAT_BIRTHDATE_ISO = re.compile(
-    rf"\b{NAAM_RX}\s+is\s+(?:op\s+)?geboren\s+(?:op\s+)?(\d{{1,2}})[\-/](\d{{1,2}})[\-/](\d{{4}})\b"
+    rf"\b{NAAM_RX}\s+(?i:is)\s+(?i:op\s+)?(?i:geboren)\s+(?i:op\s+)?(\d{{1,2}})[\-/](\d{{1,2}})[\-/](\d{{4}})\b"
 )
 PAT_AGE = re.compile(
-    rf"\b{NAAM_RX}\s+is\s+(\d{{1,3}})\s+jaar(?:\s+oud)?\b"
+    rf"\b{NAAM_RX}\s+(?i:is)\s+(\d{{1,3}})\s+(?i:jaar)(?:\s+(?i:oud))?\b"
 )
 PAT_WOONT = re.compile(
-    rf"\b{NAAM_RX}\s+woont\s+(?:in|te)\s+([A-Z][a-zà-ÿ \-]+?)(?:\.|,|$|\n)"
+    rf"\b{NAAM_RX}\s+(?i:woont)\s+(?i:in|te)\s+([A-Z][a-zà-ÿ \-]+?)(?:\.|,|$|\n)"
 )
 PAT_WERKT = re.compile(
-    rf"\b{NAAM_RX}\s+(?:werkt|werkte)\s+(?:als|bij)\s+([a-zA-Zà-ÿ \-]+?)(?:\.|,|$|\n)"
+    rf"\b{NAAM_RX}\s+(?i:werkt|werkte)\s+(?i:als|bij)\s+([a-zA-Zà-ÿ \-]+?)(?:\.|,|$|\n)"
 )
+
+# v6_personalia_birthday_002 — "[Naam/mijn relatie] is jarig op DD MAAND"
+PAT_JARIG_OP = re.compile(
+    rf"\b(?:{NAAM_RX}|((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)})))\s+(?i:is)\s+(?i:jarig)\s+(?i:op\s+)?(\d{{1,2}})\s+{_MAAND_GROUP}\b",
+)
+# "DD MAAND is [Naam/mijn relatie] jarig" — andersom
+PAT_OP_JARIG = re.compile(
+    rf"\b(\d{{1,2}})\s+{_MAAND_GROUP}\s+(?i:is)\s+(?:{NAAM_RX}|((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)})))\s+(?i:jarig)\b",
+)
+# v6_personalia_pronoun_001 — "mijn [relatie] is N jaar [oud]"
+PAT_REL_AGE = re.compile(
+    rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:is)\s+(\d{{1,3}})\s+(?i:jaar)(?:\s+(?i:oud))?\b",
+)
+PAT_PRONOUN_AGE = re.compile(
+    r"\b(?i:zij|hij|ze)\s+(?i:is)\s+(\d{1,3})(?:\s+(?i:jaar))?\b",
+)
+# "mijn [relatie] is op DD MAAND YYYY geboren"
+PAT_REL_BIRTHDATE = re.compile(
+    rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:is)\s+(?i:op\s+)?(\d{{1,2}})\s+{_MAAND_GROUP}\s+(\d{{4}})\s+(?i:geboren)\b",
+)
+# "mijn [relatie] woont in PLAATS"
+PAT_REL_WOONT = re.compile(
+    rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:woont)\s+(?i:in|te)\s+([A-Z][a-zà-ÿ \-]+?)(?:\.|,|$|\n)",
+)
+
+
+def _resolve_relation_ref(user_id: str, ref: str) -> Optional[str]:
+    """'mijn moeder' → echte naam uit relationships.json. Returns naam of None."""
+    if not ref or not user_id:
+        return None
+    # extract rel-word
+    parts = ref.strip().lower().split()
+    if len(parts) < 2 or parts[0] != "mijn":
+        return None
+    rel_word = " ".join(parts[1:])
+    # Map plural/diminutive → singular like in smart_intents
+    rel_word_norm = rel_word
+    plurals = {"zusje": "zus", "broertje": "broer", "nichtje": "nicht", "neefje": "neef",
+               "ma": "moeder", "mama": "moeder", "pa": "vader", "papa": "vader"}
+    rel_word_norm = plurals.get(rel_word, rel_word)
+    # Map naar relation_type uit relationships
+    rel_file = DATA_DIR / "persons" / f"{user_id}_relationships.json"
+    if not rel_file.exists():
+        return None
+    rd = load_json(rel_file, default={"relationships": []})
+    rels = rd.get("relationships", []) if isinstance(rd, dict) else rd
+    base = rel_word_norm.lower()
+    matches = []
+    for r in rels:
+        rt = (r.get("relation_type") or "").lower()
+        if rt.endswith(f"/{base}") or rt == base:
+            matches.append(r.get("person_name"))
+    if not matches:
+        return None
+    # Voorkeur: niet-auto-detected (hand-getypt door user, dus zeker)
+    primaries = [r for r in rels if r.get("person_name") in matches and not r.get("auto_detected")]
+    if primaries:
+        return primaries[0].get("person_name")
+    return matches[0]
 
 
 def _now():
@@ -85,14 +152,18 @@ def _find_persons_by_name(user_id: str, naam: str) -> List[Dict]:
     return matches
 
 
-def extract_personalia(text: str) -> List[Dict]:
+def extract_personalia(text: str, user_id: Optional[str] = None) -> List[Dict]:
     """Vind personalia-mentions. Returns list of dicts:
     {naam, field, value, raw}
+
+    v6_personalia_pronoun_001 — Resolves "mijn moeder/vader/etc." en pronomen "zij/hij"
+    via user_id's relationships + last-mention in zelfde zin.
     """
     findings: List[Dict] = []
     if not text:
         return findings
 
+    # === bestaande directe naam-patterns ===
     for m in PAT_BIRTHDATE_NL.finditer(text):
         naam = m.group(1).strip()
         d, maand_word, y = m.group(2), m.group(3).lower(), m.group(4)
@@ -130,9 +201,83 @@ def extract_personalia(text: str) -> List[Dict]:
     for m in PAT_WERKT.finditer(text):
         naam = m.group(1).strip()
         beroep = m.group(2).strip().rstrip(",.;")
-        # Filter te-vage beroepen
         if len(beroep) > 1 and beroep.lower() not in ("daar", "hier", "ze", "hij"):
             findings.append({"naam": naam, "field": "beroep", "value": beroep, "raw": m.group(0)})
+
+    # === v6_personalia_birthday_002 — verjaardag DAG+MAAND (zonder jaar) ===
+    # PAT_JARIG_OP: groups = (naam_directe, mijn_relatie_ref, dag, maand_word)
+    last_subject_naam: Optional[str] = None  # voor pronoun-resolutie
+    for m in PAT_JARIG_OP.finditer(text):
+        naam_direct = m.group(1)
+        rel_ref = m.group(2)
+        d, maand_word = m.group(3), m.group(4).lower()
+        maand = MAANDEN.get(maand_word)
+        if not maand:
+            continue
+        naam = naam_direct or (_resolve_relation_ref(user_id, rel_ref) if rel_ref else None)
+        if not naam:
+            continue
+        last_subject_naam = naam
+        findings.append({"naam": naam, "field": "geboortedag", "value": int(d), "raw": m.group(0)})
+        findings.append({"naam": naam, "field": "geboortemaand", "value": int(maand), "raw": m.group(0)})
+
+    for m in PAT_OP_JARIG.finditer(text):
+        d, maand_word = m.group(1), m.group(2).lower()
+        naam_direct = m.group(3)
+        rel_ref = m.group(4)
+        maand = MAANDEN.get(maand_word)
+        if not maand:
+            continue
+        naam = naam_direct or (_resolve_relation_ref(user_id, rel_ref) if rel_ref else None)
+        if not naam:
+            continue
+        last_subject_naam = naam
+        findings.append({"naam": naam, "field": "geboortedag", "value": int(d), "raw": m.group(0)})
+        findings.append({"naam": naam, "field": "geboortemaand", "value": int(maand), "raw": m.group(0)})
+
+    # "mijn [relatie] is op DD MAAND YYYY geboren"
+    for m in PAT_REL_BIRTHDATE.finditer(text):
+        rel_ref = m.group(1)
+        d, maand_word, y = m.group(2), m.group(3).lower(), m.group(4)
+        maand = MAANDEN.get(maand_word)
+        if not maand:
+            continue
+        naam = _resolve_relation_ref(user_id, rel_ref) if rel_ref else None
+        if not naam:
+            continue
+        try:
+            iso = f"{int(y):04d}-{int(maand):02d}-{int(d):02d}"
+            datetime.strptime(iso, "%Y-%m-%d")
+            last_subject_naam = naam
+            findings.append({"naam": naam, "field": "geboortedatum", "value": iso, "raw": m.group(0)})
+        except ValueError:
+            continue
+
+    # "mijn [relatie] is N jaar"
+    for m in PAT_REL_AGE.finditer(text):
+        rel_ref = m.group(1)
+        leeftijd = int(m.group(2))
+        naam = _resolve_relation_ref(user_id, rel_ref) if rel_ref else None
+        if naam and 0 <= leeftijd <= 130:
+            last_subject_naam = naam
+            findings.append({"naam": naam, "field": "leeftijd", "value": leeftijd, "raw": m.group(0)})
+
+    # "mijn [relatie] woont in PLAATS"
+    for m in PAT_REL_WOONT.finditer(text):
+        rel_ref = m.group(1)
+        plaats = m.group(2).strip().rstrip(",.;")
+        naam = _resolve_relation_ref(user_id, rel_ref) if rel_ref else None
+        if naam:
+            last_subject_naam = naam
+            findings.append({"naam": naam, "field": "woonplaats", "value": plaats, "raw": m.group(0)})
+
+    # === Pronoun "zij/hij is N" — refereert naar last_subject_naam ===
+    for m in PAT_PRONOUN_AGE.finditer(text):
+        leeftijd = int(m.group(1))
+        if last_subject_naam and 0 <= leeftijd <= 130:
+            findings.append({"naam": last_subject_naam, "field": "leeftijd",
+                             "value": leeftijd, "raw": m.group(0),
+                             "resolved_from_pronoun": True})
 
     return findings
 
@@ -187,12 +332,22 @@ def save_personalia(user_id: str, findings: List[Dict]) -> List[Dict]:
                 p["geboortedatum"] = value
                 # geboortejaar voor backward-compat
                 try:
-                    p["geboortejaar"] = int(value.split("-")[0])
+                    parts = value.split("-")
+                    p["geboortejaar"] = int(parts[0])
+                    p["geboortemaand"] = int(parts[1])
+                    p["geboortedag"] = int(parts[2])
                 except (ValueError, IndexError):
                     pass
                 p["updated_at"] = _now()
                 applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
                                 "field": "geboortedatum", "value": value})
+            elif field in ("geboortedag", "geboortemaand"):
+                if current == value:
+                    continue
+                p[field] = int(value)
+                p["updated_at"] = _now()
+                applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
+                                "field": field, "value": value})
             else:
                 # generieke string-velden
                 if current == value:
@@ -211,7 +366,7 @@ def save_personalia(user_id: str, findings: List[Dict]) -> List[Dict]:
 
 
 def detect_and_save(user_id: str, text: str) -> List[Dict]:
-    findings = extract_personalia(text)
+    findings = extract_personalia(text, user_id=user_id)
     return save_personalia(user_id, findings)
 
 

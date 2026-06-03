@@ -29082,11 +29082,424 @@
         "session_id": "default",
         "gesprek_nummer": 1111
       }
+    },
+    {
+      "id": "conv-f9f87cae",
+      "timestamp": "2026-06-03T17:05:53.893122+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus heeft een scooter.",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'loodgieter' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1112
+      }
+    },
+    {
+      "id": "conv-56f87f21",
+      "timestamp": "2026-06-03T17:06:13.425968+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Niet ik had het over Lotus",
+      "spark_response": "Genoteerd. Bedankt voor de aanvulling. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1113
+      }
+    },
+    {
+      "id": "conv-f5a0402b",
+      "timestamp": "2026-06-03T17:06:32.294458+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Lotus",
+      "spark_response": "Ik weet wel wie Lotus is, maar deze persoon staat niet in jouw vrienden-graaf. Ik deel hun info alleen met vrienden.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_denied",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_denied"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1114
+      }
+    },
+    {
+      "id": "conv-e0525852",
+      "timestamp": "2026-06-03T17:07:08.913982+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Zij is mijn dochter en vertelde je net over haar. je reactie is deels goed.",
+      "spark_response": "**Dochter**: Een dochter is een vrouwelijk kind van ouders.\n\n**net**: Net betekent dat iets kort geleden is gebeurd of nog maar pas begonnen is.\n\n**Reactie**: Een reactie is een directe verandering als antwoord op een prikkel.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **vertelde, deels** (opgeslagen als kaarten)\n\nWat houdt 'deels' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Dochter"
+          },
+          {
+            "begrip": "net"
+          },
+          {
+            "begrip": "Reactie"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "vertelde",
+          "deels"
+        ],
+        "word_count": 15,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1115
+      }
+    },
+    {
+      "id": "conv-5e4dfdab",
+      "timestamp": "2026-06-03T17:07:09.188784+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "28 januari is mijn moeder Jarig zij is 69",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'deels' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "jarig"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Dat klinkt geweldig!"
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1116
+      }
+    },
+    {
+      "id": "conv-c832885b",
+      "timestamp": "2026-06-03T17:07:13.399974+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Heidi?",
+      "spark_response": "Ik ken **Heidi Spakman**, maar geen geboortedatum. Vertel eens — bv. 'Heidi Spakman is 11 februari 2009 geboren'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1117
+      }
+    },
+    {
+      "id": "conv-d83a095e",
+      "timestamp": "2026-06-03T17:07:13.644396+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is mijn moeder?",
+      "spark_response": "Ik ken **mijn moeder** nog niet als persoon. Vertel hoe je elkaar kent of wanneer hij/zij geboren is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1118
+      }
+    },
+    {
+      "id": "conv-6c4e2f66",
+      "timestamp": "2026-06-03T17:07:36.107399+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Oke ik test opnieuw",
+      "spark_response": "Dank je! De kaart heb ik bijgewerkt. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1119
+      }
+    },
+    {
+      "id": "conv-ed06b02e",
+      "timestamp": "2026-06-03T17:08:03.025682+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is mijn moeder?",
+      "spark_response": "Ik ken **mijn moeder** nog niet als persoon. Vertel hoe je elkaar kent of wanneer hij/zij geboren is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1120
+      }
+    },
+    {
+      "id": "conv-881637f3",
+      "timestamp": "2026-06-03T17:09:10.029488+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is mijn moeder?",
+      "spark_response": "Ik ken **mijn moeder** nog niet als persoon. Vertel hoe je elkaar kent of wanneer hij/zij geboren is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1121
+      }
+    },
+    {
+      "id": "conv-7d96dfa1",
+      "timestamp": "2026-06-03T17:09:40.293456+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is mijn moeder?",
+      "spark_response": "Ik ken **mijn moeder** nog niet als persoon. Vertel hoe je elkaar kent of wanneer hij/zij geboren is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1122
+      }
+    },
+    {
+      "id": "conv-344a36ae",
+      "timestamp": "2026-06-03T17:10:29.109254+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is mijn moeder?",
+      "spark_response": "**Heidi Spakman** is **69 jaar** (geboren op 28 januari 1957).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1123
+      }
+    },
+    {
+      "id": "conv-cbb2cd7a",
+      "timestamp": "2026-06-03T17:10:29.330346+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Heidi?",
+      "spark_response": "**Heidi Spakman** is **69 jaar** (geboren op 28 januari 1957).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1124
+      }
+    },
+    {
+      "id": "conv-ae1189a1",
+      "timestamp": "2026-06-03T17:10:29.505614+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Heidi Spakman?",
+      "spark_response": "**Heidi Spakman** is **69 jaar** (geboren op 28 januari 1957).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1125
+      }
+    },
+    {
+      "id": "conv-a478842d",
+      "timestamp": "2026-06-03T17:10:29.716635+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus Martens?",
+      "spark_response": "**Lotus Martens** is **17 jaar** (geboren op 11 februari 2009).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1126
+      }
+    },
+    {
+      "id": "conv-c5068160",
+      "timestamp": "2026-06-03T17:10:29.925585+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "28 januari is mijn moeder jarig, zij is 69.",
+      "spark_response": "Ik ken 'januari' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "januari"
+          },
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "jarig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1127
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1111,
-    "last_updated": "2026-06-03T17:02:59.901150+00:00"
+    "total_conversations": 1127,
+    "last_updated": "2026-06-03T17:10:29.925585+00:00"
   }
 }

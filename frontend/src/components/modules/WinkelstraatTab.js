@@ -53,11 +53,12 @@ export function WinkelstraatTab({ user, onNavigateToShop }) {
               <Store className="w-5 h-5 text-amber-400" /> Winkelstraat
             </h2>
             <p className="text-xs text-slate-400 mt-1">
+              {/* v6_shop_card_redesign_001 — Commissie staat niet meer in de openbare tekst.
+                  Eigenaars zien voorwaarden bij Open-mijn-winkel; klanten zien % alleen op de bon. */}
               Iedere user met gradatie {minGradatie} of hoger kan een eigen winkel openen.
-              Spark vraagt {commissieDefault}% commissie op netto-winst voor onderhoud van het platform.
             </p>
             <p className="text-[10px] text-slate-500 mt-2">
-              {shops.length} winkels actief · Founder-shop = Roadkillshop (commissie-vrij)
+              {shops.length} {shops.length === 1 ? 'winkel actief' : 'winkels actief'}
             </p>
           </div>
           {canOpen ? (
@@ -117,59 +118,79 @@ function ShopCard({ shop, viewerId, onEdit, onNavigate }) {
   const isFounder = shop.is_founder_shop;
   const isClosing = shop.status === 'closing';
   const accent = shop.color_accent || '#f59e0b';
+  // v6_shop_card_redesign_001 — Banner met groot bedrijfslogo, geen filosofie/commissie zichtbaar.
+  // Commissie komt op de bon en in de owner-voorwaarden, niet in de openbare straat.
+  const logoUrl = shop.logo_url ? (shop.logo_url.startsWith('http') ? shop.logo_url : `${API}${shop.logo_url}`) : null;
+  const ownerAvatar = shop.owner_avatar_url ? (shop.owner_avatar_url.startsWith('http') ? shop.owner_avatar_url : `${API}${shop.owner_avatar_url}`) : null;
 
   return (
     <div data-testid={`shop-card-${shop.id}`}
       onClick={() => !isClosing && onNavigate && onNavigate(shop.id)}
-      className={`bg-slate-900/50 border rounded-xl p-4 transition-all cursor-pointer ${isClosing ? 'border-red-500/30 opacity-70 cursor-default' : 'border-slate-800 hover:border-amber-500/50'}`}>
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          {/* Owner avatar (vervangt kroontje) */}
-          {shop.owner_avatar_url ? (
-            <img src={shop.owner_avatar_url.startsWith('http') ? shop.owner_avatar_url : `${API}${shop.owner_avatar_url}`}
-              alt={shop.owner_naam || 'owner'}
-              className="w-10 h-10 rounded-lg object-cover border-2 flex-shrink-0"
-              style={{ borderColor: accent }} />
-          ) : (
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-sm"
-              style={{ background: `linear-gradient(135deg, ${accent}, ${accent}88)` }}>
-              {(shop.owner_naam || shop.owner_user_id || '?').charAt(0).toUpperCase()}
-            </div>
+      className={`bg-slate-900/50 border rounded-xl overflow-hidden transition-all cursor-pointer ${
+        isClosing ? 'border-red-500/30 opacity-70 cursor-default' : 'border-slate-800 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5'
+      }`}>
+
+      {/* Banner met groot bedrijfslogo */}
+      <div className="relative h-28 flex items-center justify-center overflow-hidden"
+        style={{ background: `linear-gradient(135deg, ${accent}22 0%, ${accent}11 50%, #0f172a 100%)` }}>
+        {logoUrl ? (
+          <img src={logoUrl} alt={shop.naam}
+            className="max-h-20 max-w-[60%] object-contain drop-shadow-lg" />
+        ) : (
+          <Store className="w-12 h-12" style={{ color: accent, opacity: 0.5 }} />
+        )}
+        {/* Badges in banner-rechterbovenhoek */}
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          {isFounder && (
+            <span data-testid={`shop-badge-founder-${shop.id}`}
+              className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-200 border border-amber-400/50 backdrop-blur-sm font-semibold">
+              FOUNDER
+            </span>
           )}
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <span className="truncate">{shop.naam}</span>
-              {/* Shop logo (achter de naam, klein) */}
-              {shop.logo_url && (
-                <img src={shop.logo_url.startsWith('http') ? shop.logo_url : `${API}${shop.logo_url}`}
-                  alt="logo" className="w-5 h-5 rounded object-contain flex-shrink-0" />
-              )}
-              {isFounder && (
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex-shrink-0">FOUNDER</span>
-              )}
-              {isClosing && (
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 flex-shrink-0">SLUIT</span>
-              )}
-            </h3>
-            <p className="text-[11px] text-slate-400 truncate">{shop.tagline || `Type: ${shop.type}`}</p>
-            <p className="text-[10px] text-slate-500 mt-1">
-              door {shop.owner_naam || shop.owner_user_id} · commissie {shop.commissie_pct}%
-            </p>
-          </div>
+          {isClosing && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/30 text-red-200 border border-red-400/50 backdrop-blur-sm font-semibold">
+              SLUIT
+            </span>
+          )}
         </div>
+        {/* Edit-knop voor owner (rechtsboven, alleen voor eigenaar) */}
         {isOwner && !isClosing && (
           <button data-testid={`shop-edit-${shop.id}`} onClick={(e) => { e.stopPropagation(); onEdit(); }}
-            className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex-shrink-0">
+            title="Winkel bewerken"
+            className="absolute top-2 left-2 p-1.5 rounded-lg bg-slate-900/60 hover:bg-slate-900/80 text-slate-300 hover:text-white backdrop-blur-sm">
             <Edit3 className="w-3.5 h-3.5" />
           </button>
         )}
       </div>
-      <div className="mt-3 flex items-center gap-2 text-[10px]">
-        {(shop.subtabs_enabled || []).map(s => (
-          <span key={s} className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{s}</span>
+
+      {/* Footer-strip: owner-avatar + shop-naam + bekijk */}
+      <div className="px-3 py-2.5 flex items-center gap-2.5 border-t border-slate-800/80">
+        {ownerAvatar ? (
+          <img src={ownerAvatar} alt={shop.owner_naam || 'owner'}
+            className="w-8 h-8 rounded-full object-cover border-2 flex-shrink-0"
+            style={{ borderColor: accent }} />
+        ) : (
+          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-xs border-2"
+            style={{ background: `linear-gradient(135deg, ${accent}, ${accent}88)`, borderColor: accent }}>
+            {(shop.owner_naam || shop.owner_user_id || '?').charAt(0).toUpperCase()}
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-bold text-white truncate" data-testid={`shop-name-${shop.id}`}>
+            {shop.naam}
+          </h3>
+          <p className="text-[10px] text-slate-500 truncate">
+            door {shop.owner_naam || shop.owner_user_id}
+          </p>
+        </div>
+        {/* Tag-cluster (compact) */}
+        {(shop.subtabs_enabled || []).slice(0, 2).map(s => (
+          <span key={s} className="hidden sm:inline-block text-[9px] px-1.5 py-0.5 rounded bg-slate-800/80 text-slate-400">
+            {s}
+          </span>
         ))}
         {!isClosing && onNavigate && (
-          <span className="ml-auto text-amber-400">Bekijk →</span>
+          <span className="text-amber-400 text-xs flex-shrink-0 ml-1">→</span>
         )}
       </div>
     </div>

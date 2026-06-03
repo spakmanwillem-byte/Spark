@@ -27892,11 +27892,47 @@
         "session_id": "default",
         "gesprek_nummer": 1070
       }
+    },
+    {
+      "id": "conv-aef582fa",
+      "timestamp": "2026-06-03T16:00:39.471053+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten? _(laatst sprak je me 2 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1071
+      }
+    },
+    {
+      "id": "conv-7742f5e6",
+      "timestamp": "2026-06-03T16:00:39.501707+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1072
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1070,
-    "last_updated": "2026-06-03T13:18:53.819670+00:00"
+    "total_conversations": 1072,
+    "last_updated": "2026-06-03T16:00:39.501707+00:00"
   }
 }

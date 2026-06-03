@@ -1,5 +1,20 @@
 {
-  "transactions": [],
+  "transactions": [
+    {
+      "id": "c876f2ab-23ca-4284-a669-0932b6f22ee3",
+      "type": "expense",
+      "category": "Materiaal",
+      "amount": 10.0,
+      "description": "Trade BUY BCH-EUR: De Willem's bot inzet €10.00",
+      "entity_id": "spark_core",
+      "date": "2026-06-03T16:00:12.547069+00:00",
+      "btw_percentage": 0.0,
+      "btw_amount": 0,
+      "created_at": "2026-06-03T16:00:12.547069+00:00",
+      "tx_ref": "trade_buy_00000000-0000-041f-0100-000821a24e48",
+      "source": "auto_hook"
+    }
+  ],
   "_cleared_at": "2026-06-03T14:02:40.643985+00:00",
   "_cleared_by": "user-001"
 }

@@ -85,6 +85,32 @@ PAT_REL_WOONT = re.compile(
     rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:woont)\s+(?i:in|te)\s+([A-Z][a-zà-ÿ \-]+?)(?:\.|,|$|\n)",
 )
 
+# v6_personalia_bezittingen_001 — "X heeft een Y" / "X bezit een Y"
+PAT_BEZIT = re.compile(
+    rf"\b{NAAM_RX}\s+(?i:heeft|bezit)\s+(?i:een|de|het)?\s*([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){{0,2}}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|\s+ook\b|$|\n)"
+)
+PAT_REL_BEZIT = re.compile(
+    rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:heeft|bezit)\s+(?i:een|de|het)?\s*([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){{0,2}}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|\s+ook\b|$|\n)"
+)
+PAT_INTEREST = re.compile(
+    rf"\b{NAAM_RX}\s+(?i:houdt\s+van|is\s+gek\s+op|is\s+dol\s+op)\s+([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){{0,2}}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|$|\n)"
+)
+PAT_REL_INTEREST = re.compile(
+    rf"\b((?i:mijn)\s+(?i:{'|'.join(_REL_REF_WORDS)}))\s+(?i:houdt\s+van|is\s+gek\s+op|is\s+dol\s+op)\s+([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){{0,2}}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|$|\n)"
+)
+# v6_personalia_continuation_001 — "... en is gek op Y" / "... en heeft Y" (subject overerving)
+# Matches alleen als er een eerder onderwerp was, gebruikt context.
+PAT_AND_BEZIT = re.compile(
+    r"\s+en\s+(?i:heeft|bezit)\s+(?i:een|de|het)?\s*([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){0,2}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|$|\n)"
+)
+PAT_AND_INTEREST = re.compile(
+    r"\s+en\s+(?i:houdt\s+van|is\s+gek\s+op|is\s+dol\s+op)\s+([a-zà-ÿ][\w\-]*(?:\s+[a-zà-ÿ][\w\-]*){0,2}?)\s*(?:\.|,|;|\s+en\b|\s+maar\b|$|\n)"
+)
+# Filter woorden die geen "echt bezit" zijn
+_BEZIT_BLACKLIST = {"zin", "tijd", "honger", "dorst", "haast", "spijt", "gelijk", "ongelijk",
+                    "geluk", "pech", "last", "moeite", "plezier", "lol", "respect", "begrip",
+                    "iets", "niets", "alles", "geen", "veel", "weinig", "wat", "dat", "dit"}
+
 
 def _resolve_relation_ref(user_id: str, ref: str) -> Optional[str]:
     """'mijn moeder' → echte naam uit relationships.json. Returns naam of None."""
@@ -279,6 +305,60 @@ def extract_personalia(text: str, user_id: Optional[str] = None) -> List[Dict]:
                              "value": leeftijd, "raw": m.group(0),
                              "resolved_from_pronoun": True})
 
+    # === v6_personalia_bezittingen_001 — bezittingen ===
+    for m in PAT_BEZIT.finditer(text):
+        naam = m.group(1).strip()
+        ding = m.group(2).strip().lower()
+        if ding and ding not in _BEZIT_BLACKLIST and len(ding) >= 3:
+            findings.append({"naam": naam, "field": "bezittingen", "value": ding,
+                             "raw": m.group(0), "list_append": True})
+            last_subject_naam = naam
+
+    for m in PAT_REL_BEZIT.finditer(text):
+        rel_ref = m.group(1)
+        ding = m.group(2).strip().lower()
+        if not ding or ding in _BEZIT_BLACKLIST or len(ding) < 3:
+            continue
+        naam = _resolve_relation_ref(user_id, rel_ref) if rel_ref else None
+        if naam:
+            findings.append({"naam": naam, "field": "bezittingen", "value": ding,
+                             "raw": m.group(0), "list_append": True})
+            last_subject_naam = naam
+
+    # === v6_personalia_interest_001 — interesses ===
+    for m in PAT_INTEREST.finditer(text):
+        naam = m.group(1).strip()
+        ding = m.group(2).strip().lower()
+        if ding and len(ding) >= 3:
+            findings.append({"naam": naam, "field": "interesses", "value": ding,
+                             "raw": m.group(0), "list_append": True})
+            last_subject_naam = naam
+
+    for m in PAT_REL_INTEREST.finditer(text):
+        rel_ref = m.group(1)
+        ding = m.group(2).strip().lower()
+        if not ding or len(ding) < 3:
+            continue
+        naam = _resolve_relation_ref(user_id, rel_ref) if rel_ref else None
+        if naam:
+            findings.append({"naam": naam, "field": "interesses", "value": ding,
+                             "raw": m.group(0), "list_append": True})
+            last_subject_naam = naam
+
+    # v6_personalia_continuation_001 — Match "... en heeft Y" / "... en is gek op Y"
+    # waarbij subject impliciet de voorgaande naam is.
+    if last_subject_naam:
+        for m in PAT_AND_BEZIT.finditer(text):
+            ding = m.group(1).strip().lower()
+            if ding and ding not in _BEZIT_BLACKLIST and len(ding) >= 3:
+                findings.append({"naam": last_subject_naam, "field": "bezittingen", "value": ding,
+                                 "raw": m.group(0), "list_append": True, "resolved_from_pronoun": True})
+        for m in PAT_AND_INTEREST.finditer(text):
+            ding = m.group(1).strip().lower()
+            if ding and len(ding) >= 3:
+                findings.append({"naam": last_subject_naam, "field": "interesses", "value": ding,
+                                 "raw": m.group(0), "list_append": True, "resolved_from_pronoun": True})
+
     return findings
 
 
@@ -349,13 +429,26 @@ def save_personalia(user_id: str, findings: List[Dict]) -> List[Dict]:
                 applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
                                 "field": field, "value": value})
             else:
-                # generieke string-velden
-                if current == value:
-                    continue
-                p[field] = value
-                p["updated_at"] = _now()
-                applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
-                                "field": field, "value": value})
+                # generieke string-velden + list-velden (bezittingen/interesses)
+                is_list = f.get("list_append")
+                if is_list:
+                    cur_list = p.get(field) or []
+                    if not isinstance(cur_list, list):
+                        cur_list = [cur_list] if cur_list else []
+                    if value in cur_list:
+                        continue
+                    cur_list.append(value)
+                    p[field] = cur_list
+                    p["updated_at"] = _now()
+                    applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
+                                    "field": field, "value": value, "appended": True})
+                else:
+                    if current == value:
+                        continue
+                    p[field] = value
+                    p["updated_at"] = _now()
+                    applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
+                                    "field": field, "value": value})
 
     if applied:
         pd["persons"] = persons
@@ -394,6 +487,15 @@ def format_applied_message(applied: List[Dict]) -> str:
             parts.append(f"**{naam}** woont in {val}")
         elif field == "beroep":
             parts.append(f"**{naam}** werkt als {val}")
+        elif field == "bezittingen":
+            parts.append(f"**{naam}** heeft een {val}")
+        elif field == "interesses":
+            parts.append(f"**{naam}** houdt van {val}")
+        elif field == "geboortedag":
+            parts.append(f"**{naam}** jarig op dag {val}")
+        elif field == "geboortemaand":
+            mnd = ["", "jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"]
+            parts.append(f"**{naam}** maand {mnd[int(val)] if 1<=int(val)<=12 else val}")
         else:
             parts.append(f"**{naam}** {field}: {val}")
     return "📝 Genoteerd: " + " · ".join(parts) + "."

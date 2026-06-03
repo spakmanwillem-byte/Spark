@@ -29495,11 +29495,322 @@
         "session_id": "default",
         "gesprek_nummer": 1127
       }
+    },
+    {
+      "id": "conv-b8090395",
+      "timestamp": "2026-06-03T17:16:12.437549+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Lotus?",
+      "spark_response": "Welke 'Lotus' bedoel je? Ik vind: Lotus, Lotus, Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_ambiguous",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_ambiguous"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1128
+      }
+    },
+    {
+      "id": "conv-dde8b367",
+      "timestamp": "2026-06-03T17:16:12.590329+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus heeft een scooter.",
+      "spark_response": "📝 Genoteerd: **Lotus** heeft een scooter · **Lotus Martens** heeft een scooter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1129
+      }
+    },
+    {
+      "id": "conv-42c1bad7",
+      "timestamp": "2026-06-03T17:16:12.788555+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mijn moeder houdt van katten.",
+      "spark_response": "📝 Genoteerd: **Heidi Spakman** houdt van katten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "houdt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1130
+      }
+    },
+    {
+      "id": "conv-80eb8044",
+      "timestamp": "2026-06-03T17:16:12.968293+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben heeft een hond en is gek op vissen.",
+      "spark_response": "📝 Genoteerd: **Gerben** heeft een hond en is gek op vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1131
+      }
+    },
+    {
+      "id": "conv-fd9f243d",
+      "timestamp": "2026-06-03T17:16:52.340997+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben heeft een hond en is gek op vissen.",
+      "spark_response": "📝 Genoteerd: **Gerben** heeft een hond.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1132
+      }
+    },
+    {
+      "id": "conv-74546dad",
+      "timestamp": "2026-06-03T17:17:43.243388+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben heeft een hond en is gek op vissen.",
+      "spark_response": "📝 Genoteerd: **Gerben** heeft een hond · **Gerben** houdt van vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1133
+      }
+    },
+    {
+      "id": "conv-eaf21f80",
+      "timestamp": "2026-06-03T17:17:52.555250+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1134
+      }
+    },
+    {
+      "id": "conv-523454fb",
+      "timestamp": "2026-06-03T17:17:52.590878+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1135
+      }
+    },
+    {
+      "id": "conv-a538dc2a",
+      "timestamp": "2026-06-03T17:17:58.558273+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Lotus?",
+      "spark_response": "Welke 'Lotus' bedoel je? Ik vind: Lotus, Lotus, Lotus Martens.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup_ambiguous",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup_ambiguous"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1136
+      }
+    },
+    {
+      "id": "conv-73a46726",
+      "timestamp": "2026-06-03T17:17:58.735491+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Lotus Martens?",
+      "spark_response": "**Lotus Martens** is jouw **dochter** — 17 jaar · heeft: scooter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1137
+      }
+    },
+    {
+      "id": "conv-5df35443",
+      "timestamp": "2026-06-03T17:18:29.722241+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Lotus?",
+      "spark_response": "**Lotus Martens** is jouw **dochter** — 17 jaar · heeft: scooter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1138
+      }
+    },
+    {
+      "id": "conv-46a684c7",
+      "timestamp": "2026-06-03T17:18:29.871852+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel over Lotus Martens",
+      "spark_response": "**Lotus Martens** is jouw **dochter** — 17 jaar · heeft: scooter.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1139
+      }
+    },
+    {
+      "id": "conv-c2328573",
+      "timestamp": "2026-06-03T17:18:30.089879+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Gerben?",
+      "spark_response": "**Gerben** is jouw **neef** — werkt als loodgieter · heeft: hond · interesses: vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1140
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1127,
-    "last_updated": "2026-06-03T17:10:29.925585+00:00"
+    "total_conversations": 1140,
+    "last_updated": "2026-06-03T17:18:30.089879+00:00"
   }
 }

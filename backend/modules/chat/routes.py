@@ -383,14 +383,19 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[age-lookup] failed: {ex}")
 
-    # v6_personalia_extract_001 (3 jun) — Sla personalia op (geboortedatum, woonplaats, beroep)
-    # NIET return-gebaseerd: dit draait stilletjes en plakt een hint in de response prefix later.
+    # v6_personalia_extract_001 (3 jun) — Sla personalia op (geboortedatum, woonplaats, beroep,
+    # bezittingen, interesses). Als gevonden, return DIRECT met bevestiging i.p.v. door te lopen
+    # naar de KB-lookup (anders krijgt user "ik ken 'januari'" als hoofd-antwoord).
     try:
         from . import personalia_extraction_service as _pe
         _pe_applied = _pe.detect_and_save(req.user_id or "", text)
         if _pe_applied:
-            # Hint wordt later toegevoegd door een wrapper. Sla even op state.
-            state["_personalia_hint"] = _pe.format_applied_message(_pe_applied)
+            hint = _pe.format_applied_message(_pe_applied)
+            response["message"] = hint or "📝 Genoteerd."
+            response["type"] = "personalia_save"
+            response["personalia_applied"] = _pe_applied
+            _save_log(req, response, "personalia_save")
+            return response
     except Exception as ex:
         print(f"[personalia-extract] failed: {ex}")
 

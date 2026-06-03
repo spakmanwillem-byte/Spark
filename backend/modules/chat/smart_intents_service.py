@@ -920,10 +920,14 @@ def _resolve_person(name_query: str, viewer_id: str):
     - Owner profielen (gradatie ≤ 2) altijd zichtbaar
     - Viewer's eigen profiel altijd zichtbaar
     - Andere users alleen als ze in viewer's relationships staan
+    - v6_persons_card_lookup_001 — Persons cards (alleen in viewer's eigen graaf)
+      worden óók doorzocht zodat "Wie is Lotus" met Lotus uit relaties werkt.
     """
     q = (name_query or "").strip().lower()
     if not q:
         return None, "no_name"
+
+    # 1. Zoek in system users
     users = _users_data()
     matches = []
     for u in users:
@@ -932,20 +936,54 @@ def _resolve_person(name_query: str, viewer_id: str):
         full = (u.get("naam") or u.get("name") or "").lower()
         if not full:
             continue
-        # Match op exact, voornaam-only, of partial
         if q == full or q in full.split() or q in full:
             matches.append(u)
+
+    # 2. v6_persons_card_lookup_001 — Persons cards van viewer (eigen relatie-graaf)
+    if viewer_id:
+        pf = DATA_ROOT / "persons" / f"{viewer_id}.json"
+        if pf.exists():
+            pd = load_json(pf, default={"persons": []})
+            for p in pd.get("persons", []):
+                full = (p.get("volledige_naam") or p.get("naam") or "").lower()
+                if not full:
+                    continue
+                if q == full or q in full.split() or q in full:
+                    # Wrap als pseudo-user met _source marker
+                    matches.append({
+                        "id": p.get("id"),
+                        "naam": p.get("naam"),
+                        "volledige_naam": p.get("volledige_naam"),
+                        "gradatie": p.get("gradatie", 5),
+                        "_persons_card": p,
+                        "_source": "persons_card",
+                    })
+
     if not matches:
         return None, "not_found"
     if len(matches) > 1:
-        # Geef alleen voornamen terug voor disambiguatie
+        # v6_persons_card_lookup_001 — dedup: persons_card heeft voorrang als de naam
+        # uniek matcht binnen viewer's eigen graaf, want viewer kent zijn eigen persoon-kaart.
+        # Selecteer de meest-complete persons_card (met meeste velden ingevuld).
+        own_cards = [m for m in matches if m.get("_source") == "persons_card"]
+        if own_cards:
+            # Score op aantal info-velden
+            def _score(m):
+                pc = m.get("_persons_card", {}) or {}
+                fields = ("geboortedatum","geboortejaar","woonplaats","beroep","bezittingen","interesses","relatie")
+                return sum(1 for f in fields if pc.get(f))
+            own_cards.sort(key=_score, reverse=True)
+            # Kies de top als er een duidelijke winnaar is
+            if len(own_cards) == 1 or _score(own_cards[0]) > _score(own_cards[1]):
+                return own_cards[0], "ok"
         return matches, "ambiguous"
     person = matches[0]
+    # Persons-cards uit user's eigen graaf zijn ALTIJD toegankelijk voor die user
+    if person.get("_source") == "persons_card":
+        return person, "ok"
     grad = int(person.get("gradatie", 7) or 7)
-    # Publieke profielen (admin/super gradatie) of self → altijd OK
     if grad <= 2 or person.get("id") == viewer_id:
         return person, "ok"
-    # Anders: check viewer's relationships
     REL_FILE = DATA_ROOT / "persons" / f"{viewer_id}_relationships.json"
     if REL_FILE.exists():
         rel_data = load_json(REL_FILE, default={"relationships": []})
@@ -999,6 +1037,48 @@ def detect_profile_lookup(text: str, viewer_id: str = "") -> Optional[Dict]:
         return {"type": "profile_lookup_denied", "message": f"Ik weet wel wie {person.get('naam', name_query)} is, maar deze persoon staat niet in jouw vrienden-graaf. Ik deel hun info alleen met vrienden."}
 
     # status == ok → bouw antwoord
+    # v6_persons_card_lookup_001 — Als persons-card hit, gebruik die info
+    if person.get("_source") == "persons_card":
+        pc = person.get("_persons_card", {})
+        naam = pc.get("volledige_naam") or pc.get("naam") or "?"
+        rel = pc.get("relatie") or "—"
+        parts = [f"**{naam}**"]
+        if rel and rel != "—":
+            parts.append(f"jouw **{rel}**")
+        info_bits = []
+        if pc.get("geboortedatum"):
+            try:
+                from datetime import datetime
+                d = datetime.strptime(pc["geboortedatum"], "%Y-%m-%d")
+                today = datetime.now()
+                age = today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+                info_bits.append(f"{age} jaar")
+            except ValueError:
+                pass
+        elif pc.get("geboortejaar"):
+            try:
+                from datetime import datetime
+                age = datetime.now().year - int(pc["geboortejaar"])
+                info_bits.append(f"~{age} jaar")
+            except (ValueError, TypeError):
+                pass
+        if pc.get("woonplaats"):
+            info_bits.append(f"woont in {pc['woonplaats']}")
+        if pc.get("beroep"):
+            info_bits.append(f"werkt als {pc['beroep']}")
+        bezit = pc.get("bezittingen") or []
+        if bezit:
+            info_bits.append(f"heeft: {', '.join(bezit[:5])}")
+        interesses = pc.get("interesses") or []
+        if interesses:
+            info_bits.append(f"interesses: {', '.join(interesses[:5])}")
+        msg = " is ".join(parts) + ("." if not info_bits else " — " + " · ".join(info_bits) + ".")
+        return {
+            "type": "profile_lookup",
+            "person_id": pc.get("id"),
+            "message": msg,
+        }
+
     naam = person.get("naam") or person.get("name") or "?"
     rang = person.get("rang") or person.get("rank") or "—"
     grad = person.get("gradatie", "?")

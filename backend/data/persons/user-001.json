@@ -17,7 +17,7 @@
       "conversation_refs": [],
       "knowledge_refs": [],
       "created_at": "2026-03-15T17:03:38.247993",
-      "updated_at": "2026-05-29T10:23:54.073458+00:00",
+      "updated_at": "2026-06-03T17:16:12.586476+00:00",
       "body_slots": {
         "chest": {
           "label": "Houten ketting",
@@ -26,7 +26,10 @@
           "note": null,
           "ts": "2026-05-29T10:23:53.916657+00:00"
         }
-      }
+      },
+      "bezittingen": [
+        "scooter"
+      ]
     },
     {
       "id": "person-e92653b6",
@@ -65,10 +68,13 @@
       "conversation_refs": [],
       "knowledge_refs": [],
       "created_at": "2026-03-21T18:20:38.611808",
-      "updated_at": "2026-06-03T17:09:39.861892+00:00",
+      "updated_at": "2026-06-03T17:16:12.785150+00:00",
       "geboortedag": 28,
       "geboortemaand": 1,
-      "geboortejaar": 1957
+      "geboortejaar": 1957,
+      "interesses": [
+        "katten"
+      ]
     },
     {
       "id": "person-1f566774",
@@ -187,8 +193,11 @@
       "knowledge_refs": [],
       "auto_detected": true,
       "created_at": "2026-06-03T16:37:12.504829+00:00",
-      "updated_at": "2026-06-03T19:00:00+00:00",
-      "geboortedatum": "2009-02-11"
+      "updated_at": "2026-06-03T17:16:12.586482+00:00",
+      "geboortedatum": "2009-02-11",
+      "bezittingen": [
+        "scooter"
+      ]
     },
     {
       "id": "person-9cf5657e",
@@ -208,8 +217,14 @@
       "knowledge_refs": [],
       "auto_detected": true,
       "created_at": "2026-06-03T16:41:20.464598+00:00",
-      "updated_at": "2026-06-03T17:02:57.881342+00:00",
-      "beroep": "loodgieter"
+      "updated_at": "2026-06-03T17:17:43.069153+00:00",
+      "beroep": "loodgieter",
+      "bezittingen": [
+        "hond"
+      ],
+      "interesses": [
+        "vissen"
+      ]
     },
     {
       "id": "person-5c7efbbe",
@@ -275,6 +290,6 @@
   "metadata": {
     "user_id": "user-001",
     "total_persons": 13,
-    "last_updated": "2026-06-03T17:09:39.861894+00:00"
+    "last_updated": "2026-06-03T17:17:43.069156+00:00"
   }
 }

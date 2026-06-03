@@ -28625,11 +28625,468 @@
         "session_id": "default",
         "gesprek_nummer": 1098
       }
+    },
+    {
+      "id": "conv-a89b77e1",
+      "timestamp": "2026-06-03T16:56:09.441691+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus Martens is 11 februari 2009 geboren.",
+      "spark_response": "**Lotus (naam)**: Lotus is een voornaam die afkomstig is van de lotusplant.\n\n**martens**: “Martens” is een familienaam die waarschijnlijk afkomstig is van de voornaam Martin of afgeleid is van een familie- of persoonslijn.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **februari, geboren** (opgeslagen als kaarten)\n\nWat houdt 'geboren' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Lotus (naam)"
+          },
+          {
+            "begrip": "martens"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "februari",
+          "geboren"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1099
+      }
+    },
+    {
+      "id": "conv-ef16ab2b",
+      "timestamp": "2026-06-03T16:57:01.928216+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus?",
+      "spark_response": "Ik ken 'oud' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oud"
+          },
+          {
+            "begrip": "Lotus (naam)"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1100
+      }
+    },
+    {
+      "id": "conv-84c96d35",
+      "timestamp": "2026-06-03T16:59:39.637147+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus Martens is 11 februari 2009 geboren.",
+      "spark_response": "**Lotus (naam)**: Lotus is een voornaam die afkomstig is van de lotusplant.\n\n**martens**: “Martens” is een familienaam die waarschijnlijk afkomstig is van de voornaam Martin of afgeleid is van een familie- of persoonslijn.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Lotus (naam)"
+          },
+          {
+            "begrip": "martens"
+          },
+          {
+            "begrip": "februari"
+          },
+          {
+            "begrip": "geboren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1101
+      }
+    },
+    {
+      "id": "conv-4b94aab6",
+      "timestamp": "2026-06-03T16:59:39.822983+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus?",
+      "spark_response": "Ik ken **Lotus**, maar geen geboortedatum. Vertel eens — bv. 'Lotus is 11 februari 2009 geboren'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1102
+      }
+    },
+    {
+      "id": "conv-da4c2f3d",
+      "timestamp": "2026-06-03T16:59:39.995823+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus Martens?",
+      "spark_response": "Ik ken **Lotus Martens**, maar geen geboortedatum. Vertel eens — bv. 'Lotus Martens is 11 februari 2009 geboren'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1103
+      }
+    },
+    {
+      "id": "conv-8882600c",
+      "timestamp": "2026-06-03T17:00:16.304423+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "28 januari is mijn moeder Jarig zij is 69",
+      "spark_response": "Leuk! Vertel me meer\n\n**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\n**jarig**: Jarig betekent dat iemand de geboortedag viert waarop die persoon geboren is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **januari** (opgeslagen als kaarten)\n\nWat houdt 'januari' eigenlijk in?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "jarig"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "jarig"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "januari"
+        ],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1104
+      }
+    },
+    {
+      "id": "conv-6ad0fbe8",
+      "timestamp": "2026-06-03T17:00:32.840769+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Welk jaar is ze geboren?",
+      "spark_response": "**welk**: “Welk” is een vraagwoord dat gebruikt wordt om te vragen naar een keuze, soort of specifieke optie.\n\n**Jaar**: Een jaar is de tijd die de aarde nodig heeft om één keer om de zon te draaien.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "welk"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "welk"
+          },
+          {
+            "begrip": "Jaar"
+          },
+          {
+            "begrip": "geboren"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1105
+      }
+    },
+    {
+      "id": "conv-5450bd5a",
+      "timestamp": "2026-06-03T17:01:22.606627+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus Martens?",
+      "spark_response": "Ik ken **Lotus Martens**, maar geen geboortedatum. Vertel eens — bv. 'Lotus Martens is 11 februari 2009 geboren'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1106
+      }
+    },
+    {
+      "id": "conv-7f513aa9",
+      "timestamp": "2026-06-03T17:01:24.545475+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maaike Spakman woont in Groningen.",
+      "spark_response": "**Maaike**: Maaike is een vrouwelijke voornaam die vooral voorkomt in Nederland en Vlaanderen.\n\n**Groningen**: Groningen is een stad in het noorden van Nederland en de hoofdstad van de provincie Groningen.\n\nNieuw geleerd: **woont** (opgeslagen als kaarten)\n\nKan je in het kort uitleggen wat 'woont' precies is?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Maaike"
+          },
+          {
+            "begrip": "spakman"
+          },
+          {
+            "begrip": "Groningen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "woont"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1107
+      }
+    },
+    {
+      "id": "conv-99d5290f",
+      "timestamp": "2026-06-03T17:02:57.261192+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus Martens is 11 februari 2009 geboren.",
+      "spark_response": "Dank je! Genoteerd. Wanneer was dat met 'woont'?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "martens"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1108
+      }
+    },
+    {
+      "id": "conv-2c7c14f9",
+      "timestamp": "2026-06-03T17:02:57.678009+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Maaike Spakman woont in Groningen.",
+      "spark_response": "Top, opgeslagen! Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "wedervraag_done",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "wedervraag_done"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1109
+      }
+    },
+    {
+      "id": "conv-80489b61",
+      "timestamp": "2026-06-03T17:02:59.648589+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben werkt als loodgieter.",
+      "spark_response": "Wat mooi om te horen\n\nIk ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **loodgieter** (opgeslagen als kaarten)\n\nWat betekent 'loodgieter' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 4,
+          "intensity": 0.46,
+          "triggered_words": [
+            "werkt"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          },
+          {
+            "begrip": "werkt"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "loodgieter"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1110
+      }
+    },
+    {
+      "id": "conv-16e3e021",
+      "timestamp": "2026-06-03T17:02:59.901150+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus Martens?",
+      "spark_response": "**Lotus Martens** is **17 jaar** (geboren op 11 februari 2009).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1111
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1098,
-    "last_updated": "2026-06-03T16:54:48.342109+00:00"
+    "total_conversations": 1111,
+    "last_updated": "2026-06-03T17:02:59.901150+00:00"
   }
 }

@@ -1,14 +1,14 @@
 {
   "totals": {
-    "events": 838,
+    "events": 851,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 279
+    "knowledge_matches": 297
   },
   "triggers_used": {
-    "wedervraag_done": 25,
-    "wedervraag": 41,
+    "wedervraag_done": 26,
+    "wedervraag": 42,
     "wedervraag_skip": 17,
     "agenda_overview": 5,
     "make_note": 2,
@@ -98,13 +98,14 @@
     "rps_stats": 2,
     "rps_reset": 2,
     "kb_sound_toggle": 7,
-    "my_relation_lookup": 6
+    "my_relation_lookup": 6,
+    "age_lookup": 4
   },
   "response_types": {
-    "knowledge": 139,
+    "knowledge": 146,
     "unknown": 24,
-    "wedervraag_done": 25,
-    "wedervraag": 41,
+    "wedervraag_done": 26,
+    "wedervraag": 42,
     "wedervraag_skip": 17,
     "agenda_overview": 5,
     "note_created": 2,
@@ -200,7 +201,8 @@
     "rps_reset": 2,
     "kb_sound_toggle": 7,
     "open_help_bark": 1,
-    "my_relation_lookup": 6
+    "my_relation_lookup": 6,
+    "age_lookup": 4
   },
   "begrip_used": {
     "vroeg": 2,
@@ -267,14 +269,14 @@
     "ken": 3,
     "Konijn": 1,
     "dank": 2,
-    "Moeder": 6,
-    "spakman": 2,
+    "Moeder": 7,
+    "spakman": 3,
     "Lotusbloem": 1,
     "Dochter": 2,
     "Jeugd": 1,
     "Goedemorgen schoonheid": 2,
     "Vriendschap": 3,
-    "welk": 1,
+    "welk": 2,
     "Vader": 5,
     "Mijn vader is inmiddels overleden.": 1,
     "Heet": 1,
@@ -287,10 +289,10 @@
     "invullen": 1,
     "Appel": 1,
     "anneke": 4,
-    "jarig": 2,
+    "jarig": 3,
     "Oma": 2,
     "peter": 1,
-    "werkt": 2,
+    "werkt": 3,
     "utrecht": 1,
     "riet": 1,
     "baakt": 1,
@@ -360,16 +362,24 @@
     "Heidi Spakman is mijn Moeder": 1,
     "Maaike Spakman is mijn Zusje": 1,
     "Lotus Martens is mijn Dochter": 1,
-    "Maaike": 1,
+    "Maaike": 2,
     "Willie Bakker was mijn vader. Hij is overleden.": 1,
     "joy": 1,
     "Nicht": 1,
-    "Neef": 1
+    "Neef": 1,
+    "Lotus (naam)": 3,
+    "martens": 2,
+    "oud": 1,
+    "februari": 1,
+    "geboren": 2,
+    "Jaar": 1,
+    "Groningen": 1,
+    "gerben": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-06-03T16:54:48.368612+00:00",
+  "last_event_at": "2026-06-03T17:02:59.928458+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

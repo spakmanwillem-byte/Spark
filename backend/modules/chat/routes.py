@@ -372,6 +372,28 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[my-relation-lookup] failed: {ex}")
 
+    # v6_age_lookup_001 (3 jun) — "Hoe oud is X" → leeftijd vanuit person.geboortedatum
+    try:
+        from . import smart_intents_service as _si_age
+        age_out = _si_age.detect_age_lookup(text, req.user_id or "")
+        if age_out:
+            response.update(age_out)
+            _save_log(req, response, age_out.get("type", "age_lookup"))
+            return response
+    except Exception as ex:
+        print(f"[age-lookup] failed: {ex}")
+
+    # v6_personalia_extract_001 (3 jun) — Sla personalia op (geboortedatum, woonplaats, beroep)
+    # NIET return-gebaseerd: dit draait stilletjes en plakt een hint in de response prefix later.
+    try:
+        from . import personalia_extraction_service as _pe
+        _pe_applied = _pe.detect_and_save(req.user_id or "", text)
+        if _pe_applied:
+            # Hint wordt later toegevoegd door een wrapper. Sla even op state.
+            state["_personalia_hint"] = _pe.format_applied_message(_pe_applied)
+    except Exception as ex:
+        print(f"[personalia-extract] failed: {ex}")
+
     # v6_profile_lookup_001 (28 mei) — VÓÓR capability-router zodat "wat is Willems achternaam"
     # niet wordt opgevangen door generic capability_placeholder.
     try:

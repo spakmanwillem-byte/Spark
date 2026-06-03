@@ -787,6 +787,70 @@ def handle_my_relation_lookup(user_id: str, rel_term: str) -> Dict:
     }
 
 
+# ============== v6_age_lookup_001 — "Hoe oud is X" ==============
+_AGE_PATTERN = re.compile(
+    r"\bhoe\s+oud\s+is\s+([A-Z][a-zà-ÿ]+(?:[\s\-]+[A-Z][a-zà-ÿ]+){0,2})\b",
+    re.IGNORECASE,
+)
+
+
+def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
+    """Returns response dict als 'Hoe oud is X' kan worden beantwoord via persons-card."""
+    if not text:
+        return None
+    m = _AGE_PATTERN.search(text)
+    if not m:
+        return None
+    naam_query = m.group(1).strip()
+    pf = DATA_ROOT / "persons" / f"{user_id}.json"
+    if not pf.exists():
+        return {
+            "type": "age_lookup",
+            "message": f"Ik weet niet wie {naam_query} is — vertel eerst hoe je hem/haar kent.",
+        }
+    pd = load_json(pf, default={"persons": []})
+    persons = pd.get("persons", [])
+    q = naam_query.lower()
+    matches = []
+    for p in persons:
+        cand = (p.get("volledige_naam") or p.get("naam") or "").lower()
+        if not cand:
+            continue
+        if cand == q or q in cand.split() or q in cand:
+            matches.append(p)
+    if not matches:
+        return {
+            "type": "age_lookup",
+            "message": f"Ik ken **{naam_query}** nog niet als persoon. Vertel hoe je elkaar kent of wanneer hij/zij geboren is.",
+        }
+    # Take best match (highest gradatie / first)
+    p = matches[0]
+    gd = p.get("geboortedatum")
+    gj = p.get("geboortejaar")
+    if gd:
+        try:
+            d = datetime.strptime(gd, "%Y-%m-%d")
+            today = datetime.now()
+            age = today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+            verjaardag = d.strftime("%d %B").replace("January", "januari").replace("February", "februari").replace("March", "maart").replace("April", "april").replace("May", "mei").replace("June", "juni").replace("July", "juli").replace("August", "augustus").replace("September", "september").replace("October", "oktober").replace("November", "november").replace("December", "december")
+            return {
+                "type": "age_lookup",
+                "message": f"**{p.get('naam') or naam_query}** is **{age} jaar** (geboren op {verjaardag} {d.year}).",
+            }
+        except ValueError:
+            pass
+    if gj:
+        approx = datetime.now().year - int(gj)
+        return {
+            "type": "age_lookup",
+            "message": f"**{p.get('naam') or naam_query}** is ongeveer **{approx} jaar** (geboren in {gj}). Een exacte geboortedatum heb ik nog niet — vertel eens?",
+        }
+    return {
+        "type": "age_lookup",
+        "message": f"Ik ken **{p.get('naam') or naam_query}**, maar geen geboortedatum. Vertel eens — bv. '{p.get('naam')} is 11 februari 2009 geboren'.",
+    }
+
+
 # Spark beantwoordt vragen over personen: "wie is Marieke?", "wat is Willems achternaam?"
 # Privacy-gate: alleen users in vriendelijke graaf van vrager, óf publieke users (gradatie ≤ 4).
 

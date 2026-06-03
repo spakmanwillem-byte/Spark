@@ -29862,11 +29862,707 @@
         "session_id": "default",
         "gesprek_nummer": 1142
       }
+    },
+    {
+      "id": "conv-faeec730",
+      "timestamp": "2026-06-03T17:23:14.791561+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1143
+      }
+    },
+    {
+      "id": "conv-ba1bdb07",
+      "timestamp": "2026-06-03T17:23:27.945430+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is mijn Neef?",
+      "spark_response": "Jouw **neef** is **Gerben**.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1144
+      }
+    },
+    {
+      "id": "conv-c09432a5",
+      "timestamp": "2026-06-03T17:23:51.266044+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik heb eigenlijk 2 neefjes",
+      "spark_response": "**Eigenlijk**: Eigenlijk is een woord dat wordt gebruikt om iets preciezer, eerlijker of beter uit te leggen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **neefjes** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Eigenlijk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "neefjes"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1145
+      }
+    },
+    {
+      "id": "conv-1a56abef",
+      "timestamp": "2026-06-03T17:24:48.750240+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mijn andere neef heet Wouter",
+      "spark_response": "**Neef**: Een neef is het kind van een oom of tante.\n\n**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **wouter** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Neef"
+          },
+          {
+            "begrip": "Heet"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "wouter"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1146
+      }
+    },
+    {
+      "id": "conv-7b541a18",
+      "timestamp": "2026-06-03T17:25:18.308864+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is Lotus",
+      "spark_response": "**Lotus Martens** is jouw **dochter** — 17 jaar · heeft: scooter, fiets.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1147
+      }
+    },
+    {
+      "id": "conv-14de1b86",
+      "timestamp": "2026-06-03T17:25:39.220570+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen wat te doen?",
+      "spark_response": "**Morgen**: Morgen betekent de dag na vandaag of het begin van een nieuwe dag.\n\n**doen**: Doen betekent een actie, handeling of proces uitvoeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Morgen"
+          },
+          {
+            "begrip": "doen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1148
+      }
+    },
+    {
+      "id": "conv-d35208ec",
+      "timestamp": "2026-06-03T17:26:02.341457+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kijk in de agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1149
+      }
+    },
+    {
+      "id": "conv-0608c69a",
+      "timestamp": "2026-06-03T17:26:18.133624+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen afspraken",
+      "spark_response": "📅 Geen afspraken vandaag. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1150
+      }
+    },
+    {
+      "id": "conv-62d12209",
+      "timestamp": "2026-06-03T17:27:14.908659+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben heeft op het moment geen werk",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          },
+          {
+            "begrip": "Moment"
+          },
+          {
+            "begrip": "Werk"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1151
+      }
+    },
+    {
+      "id": "conv-ac83334c",
+      "timestamp": "2026-06-03T17:28:01.535427+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Mijn zusje heeft een online winkel. die heet Full of Joy.",
+      "spark_response": "📝 Genoteerd: **Maaike Spakman** heeft een online winkel.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "bedroefd",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zusje"
+          ],
+          "source": "learned",
+          "emoji": "😢",
+          "color": "blue",
+          "empathic_response": "Wat verdrietig voor je"
+        },
+        "trigger_type": "personalia_save",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 11,
+        "response_type": "personalia_save"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1152
+      }
+    },
+    {
+      "id": "conv-c96e9876",
+      "timestamp": "2026-06-03T17:28:24.874728+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat weet jij over gerben",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1153
+      }
+    },
+    {
+      "id": "conv-1dfdb178",
+      "timestamp": "2026-06-03T17:28:49.587328+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben is een naam, maar mijn neef heet ook zo",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          },
+          {
+            "begrip": "Naam"
+          },
+          {
+            "begrip": "Neef"
+          },
+          {
+            "begrip": "Heet"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1154
+      }
+    },
+    {
+      "id": "conv-ed41bec7",
+      "timestamp": "2026-06-03T17:28:52.606267+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mijn andere neef heet Wouter",
+      "spark_response": "**Neef**: Een neef is het kind van een oom of tante.\n\n**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Neef"
+          },
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "wouter"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1155
+      }
+    },
+    {
+      "id": "conv-b5c1f454",
+      "timestamp": "2026-06-03T17:28:52.796904+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie zijn mijn neven?",
+      "spark_response": "Jouw **neef**:\n- **Gerben**\n- **Wouter**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1156
+      }
+    },
+    {
+      "id": "conv-131d0d47",
+      "timestamp": "2026-06-03T17:28:52.999738+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen afspraken",
+      "spark_response": "📅 Geen afspraken vandaag. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1157
+      }
+    },
+    {
+      "id": "conv-0e3c3aa0",
+      "timestamp": "2026-06-03T17:28:53.195996+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen wat te doen?",
+      "spark_response": "📅 Morgen: **Dokter** om 15:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "agenda_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "agenda_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1158
+      }
+    },
+    {
+      "id": "conv-4d3716ae",
+      "timestamp": "2026-06-03T17:28:54.579150+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kijk in agenda",
+      "spark_response": "📅 Geen afspraken vandaag. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1159
+      }
+    },
+    {
+      "id": "conv-42f752a0",
+      "timestamp": "2026-06-03T17:28:58.292326+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1160
+      }
+    },
+    {
+      "id": "conv-f7aadab9",
+      "timestamp": "2026-06-03T17:30:51.966808+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen afspraken",
+      "spark_response": "📅 Morgen: **Dokter** om 15:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1161
+      }
+    },
+    {
+      "id": "conv-b00e06ec",
+      "timestamp": "2026-06-03T17:30:52.135854+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik vandaag afspraken",
+      "spark_response": "📅 Geen afspraken vandaag. Wel daarna: **Dokter** (morgen om 15:30).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1162
+      }
+    },
+    {
+      "id": "conv-9cbf0c4b",
+      "timestamp": "2026-06-03T17:30:52.301393+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kijk in de agenda",
+      "spark_response": "Vandaag staat er **niks** in je agenda. Morgen heb je je eerste afspraak: **Dokter** om 15:30.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "agenda"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1163
+      }
+    },
+    {
+      "id": "conv-e8a6a747",
+      "timestamp": "2026-06-03T17:30:52.601459+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "mijn andere neef heet Wouter",
+      "spark_response": "**Neef**: Een neef is het kind van een oom of tante.\n\n**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Neef"
+          },
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "wouter"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1164
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1142,
-    "last_updated": "2026-06-03T17:21:54.738873+00:00"
+    "total_conversations": 1164,
+    "last_updated": "2026-06-03T17:30:52.601459+00:00"
   }
 }

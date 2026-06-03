@@ -94,6 +94,14 @@ PATTERN_KEN_NAAM = re.compile(
 PATTERN_NAAM_KEN_IK = re.compile(
     rf"\b{NAAM_REGEX}\s+ken\s+ik\b"
 )
+# v6_rel_005 — "mijn [andere/tweede/derde] X heet Y" / "mijn X heet Y"
+PATTERN_MIJN_REL_HEET = re.compile(
+    rf"\b[Mm]ijn\s+(?:andere|tweede|derde|vierde|jongere|oudere|kleine|grote)?\s*({REL_REGEX})\s+heet\s+{NAAM_REGEX}\b"
+)
+# "een/m'n andere X is Y"
+PATTERN_MIJN_REL_IS_NAAM = re.compile(
+    rf"\b[Mm]ijn\s+(?:andere|tweede|derde|vierde|jongere|oudere|kleine|grote)?\s*({REL_REGEX})\s+is\s+{NAAM_REGEX}\b"
+)
 # v6_rel_004 — Transitieve relatie: "X is de Y van Z" (bv. "Joy is de dochter van Maaike")
 # Wordt gemapt naar een impliciete user-relatie als Z al bekend is.
 PATTERN_NAAM_IS_REL_VAN = re.compile(
@@ -188,6 +196,12 @@ def extract(text: str, user_id: Optional[str] = None) -> List[Dict]:
         for m in pat.finditer(text):
             naam = m.group(1)
             add(naam, "bekende")
+
+    # v6_rel_005 — "mijn [andere/tweede] X heet Y" / "mijn X is Y"
+    for pat in (PATTERN_MIJN_REL_HEET, PATTERN_MIJN_REL_IS_NAAM):
+        for m in pat.finditer(text):
+            rel_word, naam = m.group(1), m.group(2)
+            add(naam, rel_word)
 
     # v6_rel_004 — Transitieve relatie via bestaande relatie van user
     if user_id:

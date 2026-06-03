@@ -297,32 +297,27 @@ def _handle_kasboek_overzicht(user_id):
             "message": "\n".join(lines)}
 
 
-def _handle_agenda_vandaag(user_id):
-    """Vandaag's afspraken voor user."""
+def _handle_agenda_vandaag(user_id, user_text: str = ""):
+    """Vandaag's afspraken voor user. v6_agenda_dayfocus_001 — delegeert nu naar
+    smart_intents.handle_agenda zodat 'morgen/overmorgen' ook werken."""
     if not user_id:
         return {"type": "capability_response", "capability_id": "agenda_vandaag",
                 "message": "Ik moet weten wie je bent voor je agenda."}
     try:
-        from pathlib import Path
+        from . import smart_intents_service as si
         from modules.core.storage import load_json
-        from datetime import datetime, timezone
-        fp = Path(f"/app/backend/data/agenda/{user_id}.json")
-        if not fp.exists():
-            return {"type": "capability_response", "capability_id": "agenda_vandaag",
-                    "message": "📅 Je agenda is nog leeg vandaag."}
-        d = load_json(fp, default={"items": []})
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        items = [i for i in d.get("items", []) if (i.get("datum") or "").startswith(today)]
-        if not items:
-            return {"type": "capability_response", "capability_id": "agenda_vandaag",
-                    "message": "📅 Geen afspraken vandaag."}
-        lines = [f"📅 **Vandaag ({today}):**", ""]
-        for i in items[:10]:
-            t = i.get("tijd") or ""
-            titel = i.get("titel") or i.get("event") or "(geen titel)"
-            lines.append(f"  · {t} — {titel}")
-        return {"type": "capability_response", "capability_id": "agenda_vandaag",
-                "message": "\n".join(lines)}
+        from pathlib import Path
+        USERS_FILE = Path("/app/backend/data/system/users.json")
+        users = load_json(USERS_FILE, default={"users": []})
+        users_list = users.get("users", []) if isinstance(users, dict) else users
+        user = next((u for u in users_list if u.get("id") == user_id), None)
+        out = si.handle_agenda(user_id, user, user_text or "")
+        return {
+            "type": "capability_response",
+            "capability_id": "agenda_vandaag",
+            "message": out.get("message", "📅 Geen afspraken."),
+            "day_focus": out.get("day_focus"),
+        }
     except Exception as ex:
         return {"type": "capability_error", "capability_id": "agenda_vandaag",
                 "message": f"Kon agenda niet lezen: {ex}"}
@@ -453,6 +448,10 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
             "message": f"🤖 {placeholder}",
         }
     try:
+        # v6_agenda_dayfocus_001 — geef user-tekst mee aan agenda-handler
+        import inspect
+        if cap_id in ("agenda_vandaag", "agenda_lezen"):
+            return handler(user_id, text)
         return handler(user_id)
     except Exception as ex:
         log_event("capabilities", "capability_error", intent=cap_id, detail={"error": str(ex)})

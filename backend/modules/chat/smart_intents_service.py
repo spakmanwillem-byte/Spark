@@ -35,10 +35,16 @@ _AGENDA_PATTERNS = [
     r"\bwat staat (er|op (de )?planning)\b",
     r"\bwat (staat|heb ik) (er )?(vandaag|morgen|overmorgen|deze week)\b",
     r"\b(heb|hebben) ik\b.*\b(afspraken|afspraak|in (de )?agenda)\b",
+    r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen)\b.*\b(afspraken|afspraak|wat te doen|iets te doen)\b",
+    r"\b(heb|hebben) ik\s+(vandaag|morgen|overmorgen|deze week)\b.*\b(te doen|iets|wat)",
     r"\bagenda\b.*\b(vandaag|morgen|overmorgen|deze week)\b",
+    r"\bkijk\s+(?:in|naar)?\s*(?:de\s+|mijn\s+)?(agenda|planning)\b",
     r"\bwelke afspraken\b",
     r"\b(mijn |de )?planning\b.*\b(vandaag|morgen)\b",
 ]
+
+
+_AGENDA_DAY_RX = re.compile(r"\b(vandaag|morgen|overmorgen|deze week)\b", re.IGNORECASE)
 
 
 def detect_agenda_intent(text: str) -> bool:
@@ -74,6 +80,19 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
     today = local_now.date()
     horizon_end = local_now + timedelta(days=7)
 
+    # v6_agenda_dayfocus_001 — Detecteer dag-focus (morgen/overmorgen) uit user-tekst
+    day_focus = None  # None = standaard (vandaag + komende week)
+    day_match = _AGENDA_DAY_RX.search(text or "")
+    if day_match:
+        word = day_match.group(1).lower()
+        if word == "morgen":
+            day_focus = today + timedelta(days=1)
+        elif word == "overmorgen":
+            day_focus = today + timedelta(days=2)
+        elif word == "vandaag":
+            day_focus = today
+        # "deze week" laat focus op None (alles toont)
+
     # Sorteer + filter toekomstige
     upcoming = []
     for ev in events:
@@ -91,6 +110,36 @@ def handle_agenda(user_id: str, user: Optional[dict], text: str) -> Dict:
 
     today_evs = [(d, e) for d, e in upcoming if d.date() == today]
     later_evs = [(d, e) for d, e in upcoming if d.date() > today and d <= horizon_end]
+
+    # v6_agenda_dayfocus_001 — Antwoord toespitsen als user expliciet een dag noemde
+    if day_focus is not None:
+        focused = [(d, e) for d, e in upcoming if d.date() == day_focus]
+        day_label = "vandaag" if day_focus == today else (
+            "morgen" if day_focus == today + timedelta(days=1) else (
+            "overmorgen" if day_focus == today + timedelta(days=2) else day_focus.strftime('%A %d %b')))
+        if not focused:
+            msg = f"📅 Geen afspraken {day_label}."
+            # Toon eerstvolgende daarna als hint
+            future = [(d, e) for d, e in upcoming if d.date() > day_focus]
+            if future:
+                nxt = future[0]
+                nxt_label = "morgen" if nxt[0].date() == today + timedelta(days=1) else (
+                    "overmorgen" if nxt[0].date() == today + timedelta(days=2) else nxt[0].strftime('%A %d %b'))
+                msg += f" Wel daarna: **{nxt[1].get('titel') or nxt[1].get('title') or 'afspraak'}** ({nxt_label} om {nxt[0].strftime('%H:%M')})."
+        else:
+            first = focused[0]
+            rest = focused[1:]
+            msg = f"📅 {day_label.capitalize()}: **{first[1].get('titel') or first[1].get('title') or 'afspraak'}** om {first[0].strftime('%H:%M')}."
+            if rest:
+                extra = ", ".join(f"{r[1].get('titel') or 'afspraak'} ({r[0].strftime('%H:%M')})" for r in rest[:3])
+                msg += f" Verder: {extra}."
+        return {
+            "type": "agenda_overview",
+            "message": msg,
+            "day_focus": str(day_focus),
+            "focused_count": len(focused),
+            "events_preview": [{"titel": e.get("titel") or e.get("title"), "tijd": d.strftime("%a %d %b %H:%M")} for d, e in focused[:5]],
+        }
 
     if not upcoming:
         msg = "Je agenda is helemaal leeg voor de komende week. Vrij speelveld dus 🙂"

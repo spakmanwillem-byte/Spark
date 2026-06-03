@@ -1,0 +1,4 @@
+{"ts": "2026-06-03T17:31:12.435657+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "pre", "intent": "nieuwe kaart toevoegen aan inbox", "args": {"a0": "Gerben", "source": "manual", "user_id": "user-001"}}
+{"ts": "2026-06-03T17:31:12.727655+00:00", "module": "kbv2", "fn": "add_to_inbox", "phase": "post", "intent": "nieuwe kaart toevoegen aan inbox", "result": "dict(success=True, keys=success,kaart,existing)", "duration_ms": 291.78}
+{"ts": "2026-06-03T17:31:12.889467+00:00", "module": "kbv2", "fn": "edit_card", "phase": "pre", "intent": "bestaande kaart in lade bewerken", "args": {"a0": "kbv2-36c7a566", "a1": "inbox", "updates": "{'lagen': {'laag1': 'Gerben is een voornaam die wordt gebruikt om een persoon a…", "user_id": "user-001"}}
+{"ts": "2026-06-03T17:31:13.021581+00:00", "module": "kbv2", "fn": "edit_card", "phase": "post", "intent": "bestaande kaart in lade bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 131.96}

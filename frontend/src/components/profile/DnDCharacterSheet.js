@@ -1069,19 +1069,35 @@ function StatsPanel({ title, stats, accent }) {
   );
 }
 
-function OverigPanel({ char }) {
+function OverigPanel({ char, userId }) {
+  // v6_rps_battle_001 — battles + goud onder Locatie
+  const [rps, setRps] = React.useState({ battles_won: 0, battles_lost: 0, gold: 1000 });
+  React.useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/games/rps/stats?user_id=${userId}`)
+      .then(r => r.json())
+      .then(d => setRps({
+        battles_won: d.stats?.battles_won || 0,
+        battles_lost: d.stats?.battles_lost || 0,
+        gold: d.stats?.gold ?? 1000,
+      }))
+      .catch(() => {});
+  }, [userId]);
+
   const items = [
     { label: 'Klasse',  value: char.klasse  || '—', icon: '◉' },
     { label: 'Beroep',  value: char.beroep  || '—', icon: '◆' },
     { label: 'Fractie', value: char.fractie || '—', icon: '✦' },
     { label: 'Locatie', value: char.locatie_naam || '—', icon: '◎' },
+    { label: 'Battles', value: `${rps.battles_won} W · ${rps.battles_lost} L`, icon: '⚔', testid: 'charinfo-battles' },
+    { label: 'Goud',    value: `${rps.gold}`, icon: '🪙', testid: 'charinfo-gold' },
   ];
   return (
     <PaperPanel>
       <PaperHeader>OVERIG</PaperHeader>
       <div className="p-2.5 space-y-1.5">
         {items.map(it => (
-          <div key={it.label} className="flex items-center justify-between text-xs">
+          <div key={it.label} className="flex items-center justify-between text-xs" data-testid={it.testid}>
             <span className="flex items-center gap-1.5 text-amber-200/90">
               <span className="text-amber-500/70">{it.icon}</span>{it.label}
             </span>

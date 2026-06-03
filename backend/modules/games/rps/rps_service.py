@@ -22,6 +22,38 @@ ACH_FIRST_WIN_BONUS = 25
 ACH_FIRST_LOSS_BONUS = 10  # "voor de moed"
 ACH_STREAK_5_BONUS = 50
 
+# v6_rps_battle_001 — Battle = 10 rondes, ≥6 wins = battle won
+BATTLE_ROUNDS = 10
+BATTLE_WIN_THRESHOLD = 6
+GOLD_PER_BATTLE_WIN = 10
+STARTING_GOLD = 1000
+
+GOLD_FILE = DATA_DIR.parent.parent / "users" / "gold_balances.json"
+GOLD_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+
+def _get_gold(user_id: str) -> int:
+    """Returneer goud-saldo. Eerste gebruik geeft default STARTING_GOLD."""
+    d = load_json(GOLD_FILE, default={"balances": {}})
+    bals = d.get("balances", {})
+    if user_id not in bals:
+        bals[user_id] = STARTING_GOLD
+        d["balances"] = bals
+        save_json(GOLD_FILE, d)
+    return bals[user_id]
+
+
+def _add_gold(user_id: str, delta: int, reason: str = "") -> int:
+    d = load_json(GOLD_FILE, default={"balances": {}, "log": []})
+    bals = d.setdefault("balances", {})
+    bals[user_id] = bals.get(user_id, STARTING_GOLD) + delta
+    d.setdefault("log", []).append({
+        "ts": _now(), "user_id": user_id, "delta": delta,
+        "balance": bals[user_id], "reason": reason,
+    })
+    save_json(GOLD_FILE, d)
+    return bals[user_id]
+
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -118,7 +150,14 @@ def get_session(user_id: str) -> dict:
 
 
 def get_stats(user_id: str) -> dict:
-    return _get_stats(user_id)
+    """v6_rps_battle_001 — verrijk met battles + goud."""
+    s = _get_stats(user_id)
+    return {
+        **s,
+        "battles_won": s.get("battles_won", 0),
+        "battles_lost": s.get("battles_lost", 0),
+        "gold": _get_gold(user_id),
+    }
 
 
 def stop_session(user_id: str) -> dict:
@@ -190,6 +229,32 @@ def play_round(user_id: str, player_choice: str) -> dict:
         stats["ties"] += 1
     stats["longest_streak"] = max(stats["longest_streak"], session["current_streak"])
 
+    # v6_rps_battle_001 — Battle-evaluatie elke 10 rondes
+    battle_event = None
+    rounds_total = session["wins"] + session["losses"] + session["ties"]
+    if rounds_total > 0 and rounds_total % BATTLE_ROUNDS == 0:
+        battle_idx = rounds_total // BATTLE_ROUNDS
+        # Tel wins in deze "batch" — verschil tussen huidige sessie-wins en
+        # eerder geboekt voor battles
+        wins_in_batch = session["wins"] - session.get("_battles_wins_accounted", 0)
+        battle_won = wins_in_batch >= BATTLE_WIN_THRESHOLD
+        session["_battles_wins_accounted"] = session["wins"]
+        if battle_won:
+            stats["battles_won"] = stats.get("battles_won", 0) + 1
+            new_gold = _add_gold(user_id, GOLD_PER_BATTLE_WIN,
+                                 reason=f"rps_battle_won_{battle_idx}")
+        else:
+            stats["battles_lost"] = stats.get("battles_lost", 0) + 1
+            new_gold = _get_gold(user_id)
+        battle_event = {
+            "won": battle_won,
+            "battle_index": battle_idx,
+            "wins_in_battle": wins_in_batch,
+            "gold_delta": GOLD_PER_BATTLE_WIN if battle_won else 0,
+            "new_gold": new_gold,
+        }
+        _save_session(user_id, session)
+
     # Achievements
     new_achievements = []
     achievements = stats.setdefault("achievements", {})
@@ -234,6 +299,10 @@ def play_round(user_id: str, player_choice: str) -> dict:
         "lifetime_losses": stats["losses"],
         "lifetime_ties": stats["ties"],
         "longest_streak": stats["longest_streak"],
+        "battles_won": stats.get("battles_won", 0),
+        "battles_lost": stats.get("battles_lost", 0),
+        "battle_event": battle_event,
+        "gold": _get_gold(user_id),
         "xp_delta": xp_delta,
         "new_xp": new_xp,
         "new_achievements": new_achievements,

@@ -4,13 +4,29 @@
  * Opent via window event 'spark:open-rps' (gedispatched vanuit chat-trigger).
  * Toont KB-kaarten als keuze-thumbnails, score, en learning-indicator.
  */
-import React, { useState, useEffect, useRef } from 'react';
-import { X, RotateCcw, Trophy, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, RotateCcw, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
+import { UserAvatar } from '../common/UserAvatar';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
 const LABEL = { steen: 'Steen', papier: 'Papier', schaar: 'Schaar' };
+
+// v6_rps_layout_002 — Cached user-lookup voor avatar
+const _userCache = {};
+async function fetchUserById(uid) {
+  if (!uid) return null;
+  if (_userCache[uid]) return _userCache[uid];
+  try {
+    const r = await fetch(`${API}/api/auth/users/${uid}`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    const u = d.user || d;
+    _userCache[uid] = u;
+    return u;
+  } catch { return null; }
+}
 
 export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
   const [cards, setCards] = useState(null);
@@ -19,6 +35,9 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
   const [lastRound, setLastRound] = useState(null);
   const [thinking, setThinking] = useState(false);
   const [playerPick, setPlayerPick] = useState(null);
+  // v6_rps_layout_002 — Avatars voor zijkant
+  const [playerUser, setPlayerUser] = useState(null);
+  const [opponentUser, setOpponentUser] = useState(null);
 
   // v6_rps_001b — Init: start nieuwe sessie met juiste opponent + load stats
   useEffect(() => {
@@ -28,8 +47,16 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
       .then(d => {
         setCards(d.cards);
         setSession(d.session || {});
+        // Update opponent als backend ander random bot koos
+        if (d.session?.opponent && d.session.opponent !== opponent) {
+          fetchUserById(d.session.opponent).then(u => setOpponentUser(u));
+        }
       });
     fetch(`${API}/api/games/rps/stats?user_id=${userId}`).then(r => r.json()).then(d => setLifetime(d.stats || {}));
+    // Avatars laden — speler altijd, opponent: spark of bot
+    fetchUserById(userId).then(u => setPlayerUser(u));
+    const oppId = opponent === 'spark' ? 'user-000' : opponent;
+    fetchUserById(oppId).then(u => setOpponentUser(u));
   }, [open, userId, opponent]);
 
   const play = async (choice) => {
@@ -46,12 +73,30 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
         }).then(x => x.json());
         if (!r.success && r.detail) { toast.error(r.detail); return; }
         setSession(r.session || session);
-        setLifetime({ wins: r.lifetime_wins, losses: r.lifetime_losses, ties: r.lifetime_ties, longest_streak: r.longest_streak });
+        setLifetime({
+          wins: r.lifetime_wins, losses: r.lifetime_losses, ties: r.lifetime_ties,
+          longest_streak: r.longest_streak,
+          battles_won: r.battles_won, battles_lost: r.battles_lost,
+          gold: r.gold,
+        });
         setLastRound(r);
         // Achievement-toasts
         (r.new_achievements || []).forEach(a => {
           toast.success(`🏆 ${a.title} (+${a.bonus_xp} XP)`, { description: a.text, duration: 5000 });
         });
+        // v6_rps_battle_001 — Battle-toast (elke 10 rondes)
+        if (r.battle_event) {
+          const e = r.battle_event;
+          if (e.won) {
+            toast.success(`⚔️ Battle ${e.battle_index} gewonnen! ${e.wins_in_battle}/10 wins → +${e.gold_delta} goud`, {
+              description: `Saldo: ${e.new_gold} goud`, duration: 6000,
+            });
+          } else {
+            toast(`💔 Battle ${e.battle_index} verloren — ${e.wins_in_battle}/10 wins. Geen goud.`, {
+              description: 'Volgende keer beter!', duration: 4500,
+            });
+          }
+        }
       } catch (e) {
         toast.error('Spel-fout: ' + e.message);
       } finally {
@@ -123,37 +168,89 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
           </button>
         </div>
 
-        {/* Game area */}
-        <div className="p-5 space-y-4">
-          {/* Spark status */}
-          <div className="text-center">
-            {thinking ? (
-              <p className="text-sm text-amber-300 italic animate-pulse">Spark denkt na…</p>
-            ) : lastRound ? (
-              <div className="space-y-2">
-                <div className="flex items-center justify-center gap-6">
-                  <ChoiceBadge label="Jij" choice={lastRound.player_choice} cards={cards} />
-                  <span className="text-2xl">vs</span>
-                  <ChoiceBadge label={oppLabel} choice={lastRound.opponent_choice || lastRound.spark_choice} cards={cards} />
+        {/* Game area — v6_rps_layout_002 — 3-koloms layout */}
+        <div className="p-5">
+          {/* Top rij: [Opponent avatar] [Midden status] [User avatar] */}
+          <div className="grid grid-cols-[1fr_1.4fr_1fr] gap-4 items-center mb-4">
+
+            {/* LINKS — Tegenstander avatar */}
+            <div data-testid="rps-opponent-avatar-block" className="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+              <UserAvatar
+                user={opponentUser || { id: opponent, naam: oppLabel }}
+                size="xl" rounded="rounded-2xl"
+              />
+              <p className="text-xs font-bold text-amber-200 text-center truncate w-full">{oppLabel}</p>
+              {lastRound?.opponent_choice && (
+                <div className="flex items-center gap-1.5 mt-1 px-2 py-1 rounded-md bg-slate-900/60">
+                  {cards[lastRound.opponent_choice]?.image ? (
+                    <img src={`${API}${cards[lastRound.opponent_choice].image}`} alt={lastRound.opponent_choice}
+                      className="w-8 h-8 rounded object-cover" />
+                  ) : null}
+                  <span className="text-[10px] text-slate-300 capitalize">{lastRound.opponent_choice}</span>
                 </div>
-                {outcomeCard && (
-                  <div className="flex items-center justify-center gap-2 pt-1">
-                    <img src={`${API}${outcomeCard.image}`} alt={lastRound.outcome}
-                      className="w-16 h-16 rounded-lg object-cover ring-2 ring-amber-400/50" />
-                    <div className="text-left">
-                      <p className={`text-sm font-bold ${lastRound.outcome === 'gewonnen' ? 'text-emerald-300' : lastRound.outcome === 'verloren' ? 'text-rose-300' : 'text-slate-300'}`}>
-                        {lastRound.outcome === 'gewonnen' ? 'Je hebt gewonnen!'
-                         : lastRound.outcome === 'verloren' ? 'Je hebt verloren'
-                         : 'Gelijkspel'}
-                      </p>
-                      {lastRound.xp_delta > 0 && <p className="text-[11px] text-amber-300">+{lastRound.xp_delta} XP</p>}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">Kies je zet hieronder.</p>
-            )}
+              )}
+            </div>
+
+            {/* MIDDEN — Status: denkt na / outcome */}
+            <div className="flex flex-col items-center justify-center min-h-[140px]">
+              {thinking ? (
+                // "Denkt na" KB-kaart — laat afbeelding zien, niet alleen tekst
+                <div className="flex flex-col items-center gap-2 animate-pulse">
+                  {cards.denkt_na?.image ? (
+                    <img src={`${API}${cards.denkt_na.image}`} alt="Denkt na"
+                      className="w-24 h-24 rounded-xl object-cover ring-2 ring-amber-400/40" />
+                  ) : (
+                    <div className="w-24 h-24 rounded-xl bg-slate-700/40 flex items-center justify-center text-4xl">?</div>
+                  )}
+                  <p className="text-xs text-amber-300 italic">{oppLabel} denkt na…</p>
+                </div>
+              ) : outcomeCard ? (
+                // Gewonnen/verloren-kaart afbeelding centraal
+                <div className="flex flex-col items-center gap-2">
+                  <img src={`${API}${outcomeCard.image}`} alt={lastRound.outcome}
+                    className="w-24 h-24 rounded-xl object-cover ring-2 ring-amber-400/50" />
+                  <p className={`text-sm font-bold ${lastRound.outcome === 'gewonnen' ? 'text-emerald-300' : 'text-rose-300'}`}>
+                    {lastRound.outcome === 'gewonnen' ? 'Gewonnen!' : 'Verloren'}
+                  </p>
+                  {lastRound.xp_delta > 0 && <p className="text-[11px] text-amber-300">+{lastRound.xp_delta} XP</p>}
+                </div>
+              ) : lastRound?.outcome === 'gelijkspel' ? (
+                <div className="flex flex-col items-center gap-2">
+                  <div className="text-3xl">🤝</div>
+                  <p className="text-sm text-slate-300 font-medium">Gelijkspel</p>
+                  <p className="text-[11px] text-amber-300">+{lastRound.xp_delta} XP</p>
+                </div>
+              ) : (
+                // Idle: "VS" indicator
+                <div className="flex flex-col items-center gap-2">
+                  {cards.maak_een_keus?.image ? (
+                    <img src={`${API}${cards.maak_een_keus.image}`} alt="Maak een keus"
+                      className="w-20 h-20 rounded-xl object-cover opacity-60" />
+                  ) : (
+                    <div className="text-3xl text-slate-500">VS</div>
+                  )}
+                  <p className="text-[11px] text-slate-400">Maak je keuze</p>
+                </div>
+              )}
+            </div>
+
+            {/* RECHTS — User avatar */}
+            <div data-testid="rps-player-avatar-block" className="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-amber-500/30">
+              <UserAvatar
+                user={playerUser || { id: userId, naam: 'Jij' }}
+                size="xl" rounded="rounded-2xl"
+              />
+              <p className="text-xs font-bold text-amber-100 text-center truncate w-full">{playerUser?.naam || 'Jij'}</p>
+              {lastRound?.player_choice && (
+                <div className="flex items-center gap-1.5 mt-1 px-2 py-1 rounded-md bg-slate-900/60">
+                  {cards[lastRound.player_choice]?.image ? (
+                    <img src={`${API}${cards[lastRound.player_choice].image}`} alt={lastRound.player_choice}
+                      className="w-8 h-8 rounded object-cover" />
+                  ) : null}
+                  <span className="text-[10px] text-slate-300 capitalize">{lastRound.player_choice}</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Choice buttons */}
@@ -181,14 +278,29 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
             ))}
           </div>
 
-          {/* Lifetime stats */}
-          <div className="border-t border-slate-800 pt-3 flex items-center justify-between text-[11px] text-slate-400">
-            <span className="flex items-center gap-1">
-              <Trophy className="w-3 h-3 text-amber-400" />
-              <strong className="text-slate-200" data-testid="rps-lifetime-wins">{lifetime.wins || 0}</strong> totaal gewonnen
-              · <strong className="text-slate-300" data-testid="rps-lifetime-losses">{lifetime.losses || 0}</strong> verloren
-              {lifetime.longest_streak > 0 && (
-                <> · langste streak <strong className="text-amber-300">{lifetime.longest_streak}</strong></>
+          {/* Lifetime stats — v6_rps_battle_001 — toont nu ook battles + goud */}
+          <div className="mt-4 border-t border-slate-800 pt-3 flex items-center justify-between flex-wrap gap-y-2 text-[11px] text-slate-400">
+            <span className="flex items-center gap-3 flex-wrap">
+              <span className="flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <strong className="text-slate-200" data-testid="rps-lifetime-wins">{lifetime.wins || 0}</strong> gew.
+                <span className="text-slate-600 mx-0.5">·</span>
+                <strong className="text-slate-300" data-testid="rps-lifetime-losses">{lifetime.losses || 0}</strong> verl.
+              </span>
+              <span className="flex items-center gap-1" data-testid="rps-battles">
+                <span className="text-amber-400">⚔️</span>
+                <strong className="text-emerald-300">{lifetime.battles_won || 0}</strong>
+                <span className="text-slate-600">/</span>
+                <strong className="text-rose-300">{lifetime.battles_lost || 0}</strong>
+                <span className="text-[9px] text-slate-500">battles</span>
+              </span>
+              <span className="flex items-center gap-1" data-testid="rps-gold">
+                <span className="text-yellow-400">🪙</span>
+                <strong className="text-yellow-300">{lifetime.gold ?? 1000}</strong>
+                <span className="text-[9px] text-slate-500">goud</span>
+              </span>
+              {lifetime.longest_streak > 1 && (
+                <span className="text-[10px] text-amber-300">🔥 streak {lifetime.longest_streak}</span>
               )}
             </span>
             <span className={lastRound?.spark_is_learning ? 'text-cyan-400' : 'text-purple-400'}>
@@ -201,19 +313,7 @@ export function RpsBark({ userId, open, onClose, opponent = 'spark' }) {
   );
 }
 
-function ChoiceBadge({ label, choice, cards }) {
-  const card = cards[choice];
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <p className="text-[10px] uppercase text-slate-500 tracking-wider">{label}</p>
-      {card?.image ? (
-        <img src={`${API}${card.image}`} alt={choice} className="w-14 h-14 object-cover rounded-lg ring-1 ring-slate-700" />
-      ) : (
-        <div className="w-14 h-14 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">?</div>
-      )}
-      <span className="text-[10px] text-slate-300 capitalize">{choice}</span>
-    </div>
-  );
-}
+function ChoiceBadge() { return null; } // v6_rps_layout_002 — niet meer gebruikt, behouden voor backwards-import compat
+export { ChoiceBadge };
 
 export default RpsBark;

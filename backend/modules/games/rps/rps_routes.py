@@ -102,3 +102,50 @@ def get_session(user_id: str):
 @router.get("/stats")
 def get_stats(user_id: str):
     return {"stats": rps_service.get_stats(user_id)}
+
+
+# v6_rps_leaderboard_001 — Public leaderboard van alle spelers
+@router.get("/leaderboard")
+def get_leaderboard(limit: int = 50):
+    """
+    Returneert ranglijst gesorteerd op aantal gewonnen potjes (lifetime).
+    Verrijkt met user-naam + avatar + win/loss ratio.
+    """
+    from modules.core.storage import load_json as _lj
+    from pathlib import Path as _P
+
+    # Load all stats
+    stats_data = _lj(_P(__file__).parent.parent.parent.parent / "data" / "games" / "rps" / "stats.json",
+                     default={"stats": {}})
+    all_stats = stats_data.get("stats", {})
+
+    # Load users for naam/avatar
+    users_data = _lj(_P(__file__).parent.parent.parent.parent / "data" / "system" / "users.json",
+                     default={"users": []})
+    users_by_id = {u["id"]: u for u in users_data.get("users", [])}
+
+    rows = []
+    for uid, st in all_stats.items():
+        u = users_by_id.get(uid, {})
+        total = st.get("total", 0)
+        wins = st.get("wins", 0)
+        losses = st.get("losses", 0)
+        win_rate = (wins / total * 100) if total > 0 else 0
+        rows.append({
+            "user_id": uid,
+            "naam": u.get("naam") or uid,
+            "avatar_ref": u.get("avatar"),
+            "gradatie": u.get("gradatie"),
+            "is_bot": bool(u.get("is_bot")),
+            "wins": wins,
+            "losses": losses,
+            "ties": st.get("ties", 0),
+            "total": total,
+            "longest_streak": st.get("longest_streak", 0),
+            "win_rate": round(win_rate, 1),
+            "achievements_count": len(st.get("achievements", {})),
+        })
+
+    # Sorteer op wins desc, dan win_rate desc
+    rows.sort(key=lambda r: (r["wins"], r["win_rate"]), reverse=True)
+    return {"leaderboard": rows[:limit], "total_players": len(rows)}

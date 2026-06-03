@@ -5,6 +5,72 @@
 ---
 
 
+## 🚀 ACTIVE ROADMAP (post-sessie 22/23, 3 juni 2026)
+
+### ✅ Compleet in sessie 22-23 (klaar voor redeploy)
+
+#### v6_pre_deploy_reset_001 — Admin endpoint pre/post-deploy schoonmaak
+- [x] `POST /api/admin/system/pre-deploy-reset` — set shadow_flag.enabled=false + reset ROAR balances in één call
+- [x] `GET /api/admin/system/health-status` — huidige stand checken
+- [x] Admin-only (403 voor non-admins)
+
+#### v6_shadow_hide_001 — Shadow Trader UI verborgen
+- [x] `SHADOW_UI_HIDDEN = true` constant in TraderPage.js — banner + safety-controls + per-pot decoraties weg
+- [x] `shadow_flag.json` enabled=false zodat backend ook geen shadows koopt
+- [x] Code blijft staan voor toekomstige reparatie
+
+#### v6_shop_card_redesign_001/002 — Winkelstraat redesign
+- [x] Naam BOVEN banner, grote banner met bedrijfslogo (h-32), edit-knop owner linksboven
+- [x] Filosofie/commissie verwijderd uit kaart (komt op bon + in voorwaarden)
+- [x] Owner-avatar klein in footer (8x8 round met accent-ring)
+- [x] Logo cache-buster via `updated_at` zodat nieuwe upload meteen zichtbaar wordt
+- [x] Admin verwijder-knop (rode X) rechtsboven in banner, niet bij founder-shop
+- [x] Backend `SHOPS_FILE` constant bug gefixed (was lokale var)
+- [x] Test-shops (TEST_AdminShop, TEST_PatchShop, TEST_CloseMe) verwijderd uit JSON
+
+#### v6_help_001/001b — Help-knop uit sidebar, "help" chat-trigger opent HelpBark
+- [x] Sidebar Help-button weg (avatar staat weer goed)
+- [x] Backend chat-trigger "help" returnt `action:'open_help_bark'` met kort bericht
+- [x] MainLayout luistert naar `spark:open-help` window event
+- [x] GesprekkenPage dispatcht event bij action
+
+#### v6_gradatie_visibility_003 — Spark-items blijven verborgen na drag-drop
+- [x] `triggers`, `emotions`, `emotion-routing`, `connections` toegevoegd aan per-item `hide` array
+- [x] Bug fix: items zichtbaar voor grad 7 nadat user ze via drag-drop verplaatste
+
+#### v6_dashboard_fin_001 — Saldo & Vermogen widget verwijderd
+- [x] Dashboard-widget weg (financiële info zit al in /wallet en /trade)
+
+#### v6_spark_shop_001 — Spark Shop opgezet (sessie 23)
+- [x] Spark Shop toegevoegd: owner=Spark (user-000), is_founder_shop=true, subtabs=[digitaal], commissie 2%
+- [x] Roadkillshop: merch-only, commissie verhoogd 0% → 2% (user-beslissing: alle shops dragen 2% af voor token-community groei)
+- [x] Producten gemigreerd: `donatie-spark-ai-eab152` + `storage-1gb` → Spark Shop
+- [x] Boekhouding-koppeling: Roadkillshop kasboek_id="roadkillshop", Spark Shop kasboek_id="spark_core"
+- [x] Product delete-knop (rode Trash) toegevoegd náást edit-knop in WinkelPage voor admins
+
+#### v6_rps_leaderboard_001 — SPS Leaderboard tab
+- [x] Backend `GET /api/games/rps/leaderboard` sorted op wins desc, dan win_rate
+- [x] Frontend LeaderboardPage: modus-selector "Algemeen / SPS" — toont win/loss/streak/win-rate per speler
+- [x] Test-data opgeruimd (8 fictieve test-users weg)
+- [x] User-001 RPS stats gereset (testdata van 4-5 verloren potjes weg)
+
+### ⏳ Te doen — boekhouding per shop split (SEPA-blokker)
+
+#### v6_shop_kasboek_routing — Checkout naar juiste kasboek per shop
+**Context**: shops.json heeft nu `kasboek_id` veld, MAAR de checkout/order-routes gebruiken nog steeds default `entity_id="spark_core"` voor alle verkopen. Dus Roadkillshop-verkopen landen nog in spark_core boekhouding ipv roadkillshop.
+
+**Te doen bij SEPA-implementatie**:
+- [ ] In `modules/shop/checkout_routes.py`: lookup `shops[shop_id].kasboek_id` en pass aan `accounting.record_transaction(entity_id=...)`
+- [ ] Migratie-script: bestaande Roadkillshop-transacties verplaatsen van spark_core → roadkillshop entity
+- [ ] In SEPA-export per kasboek apart genereren (1 bestand per shop-eigenaar)
+- [ ] Frontend: wallet/boekhouding views moeten kasboek-filter krijgen voor multi-shop owners
+
+**Reden uitstel**: SEPA komt erbij, dat is een grotere implementatie waarin commissie-betaling + IBAN-routing van klantbetalingen → shop-eigenaars netjes geregeld moet. Splitsen we nu de boekhouding zonder SEPA, dan moet alles dadelijk weer aangepakt.
+
+---
+
+
+
 ## 🚀 ACTIVE ROADMAP (post-sessie 21D/E, 2 juni 2026)
 
 ### ✅ Compleet in sessie 21 (klaar voor redeploy)

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   ShoppingBag, Coins, Plus, Minus, ShoppingCart, X,
   Package, Tag, Truck, CreditCard, Loader2, Check,
-  TrendingUp, ChevronRight, HardDrive, Gift, Pencil
+  TrendingUp, ChevronRight, HardDrive, Gift, Pencil, Trash2
 } from 'lucide-react';
 import { ProductEditModal } from './ProductEditModal';
 import { WinkelstraatTab } from './WinkelstraatTab';
@@ -59,6 +59,24 @@ export function WinkelPage({ onNavigate }) {
   const isAdminViewer = (user?.gradatie ?? 7) <= 2;
   const [editingProduct, setEditingProduct] = useState(null);
   const [newProductTab, setNewProductTab] = useState(null);
+
+  // v6_shop_admin_product_delete_001 — Verwijder product (admin)
+  const deleteProduct = async (product) => {
+    if (!window.confirm(`Product "${product.name}" definitief verwijderen?`)) return;
+    try {
+      const r = await fetch(`${API}/api/shop/admin/products/${product.id}?viewer_id=${encodeURIComponent(userId)}`, {
+        method: 'DELETE',
+      });
+      const d = await r.json();
+      if (!r.ok || d.success === false) {
+        alert(`Verwijderen mislukt: ${d.detail || d.error || 'onbekende fout'}`);
+        return;
+      }
+      loadData();
+    } catch (e) {
+      alert(`Verwijderen mislukt: ${e.message}`);
+    }
+  };
 
   const loadData = useCallback(() => {
     Promise.all([
@@ -266,13 +284,20 @@ export function WinkelPage({ onNavigate }) {
               {merchProducts.map(product => (
                 <div key={product.id} data-testid={`product-${product.id}`}
                   className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-all group relative">
-                  {/* Admin: edit knop top-right (los van image-overlay) */}
+                  {/* Admin: edit + delete knoppen top-right (los van image-overlay) */}
                   {isAdminViewer && (
-                    <button onClick={() => setEditingProduct(product)} data-testid={`product-edit-${product.id}`}
-                      title="Product bewerken"
-                      className="absolute top-2 right-2 z-10 w-8 h-8 rounded-lg bg-slate-900/80 backdrop-blur border border-amber-500/40 flex items-center justify-center text-amber-300 hover:bg-amber-500/20">
-                      <Pencil className="w-4 h-4" />
-                    </button>
+                    <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
+                      <button onClick={() => setEditingProduct(product)} data-testid={`product-edit-${product.id}`}
+                        title="Product bewerken"
+                        className="w-8 h-8 rounded-lg bg-slate-900/80 backdrop-blur border border-amber-500/40 flex items-center justify-center text-amber-300 hover:bg-amber-500/20">
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => deleteProduct(product)} data-testid={`product-delete-${product.id}`}
+                        title="Product verwijderen"
+                        className="w-8 h-8 rounded-lg bg-slate-900/80 backdrop-blur border border-red-500/40 flex items-center justify-center text-red-300 hover:bg-red-500/20">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   )}
                   <ProductImageArea product={product} isAdmin={isAdminViewer} userId={user?.id} onUpdated={loadData} />
                   {/* Product info */}

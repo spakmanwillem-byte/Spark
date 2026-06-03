@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-06-03T13:04:30.855965",
+      "last_active": "2026-06-03T13:25:20.001959",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1010,11 +1010,44 @@
             "icon": "🖼️",
             "rarity": "common",
             "unlocked_at": "2026-05-22T21:00:54.539954+00:00"
+          },
+          {
+            "id": "rps_first_win",
+            "name": "Ik won Steen-Papier-Schaar",
+            "description": "Je hebt voor het eerst een rondje SPS gewonnen.",
+            "milestone": 1,
+            "xp_reward": 25,
+            "icon": "🥇",
+            "rarity": "common",
+            "type": "rps",
+            "unlocked_at": "2026-06-03T13:24:34.628848+00:00"
+          },
+          {
+            "id": "rps_first_loss",
+            "name": "Ik verloor Steen-Papier-Schaar",
+            "description": "Verlies is ook winst — je hebt voor het eerst verloren.",
+            "milestone": 1,
+            "xp_reward": 10,
+            "icon": "💀",
+            "rarity": "common",
+            "type": "rps",
+            "unlocked_at": "2026-06-03T13:24:34.628861+00:00"
+          },
+          {
+            "id": "rps_wins_10",
+            "name": "10 keer gewonnen",
+            "description": "Je hebt 10 SPS-rondes gewonnen.",
+            "milestone": 10,
+            "xp_reward": 100,
+            "icon": "🏆",
+            "rarity": "uncommon",
+            "type": "rps",
+            "unlocked_at": "2026-06-03T13:24:34.628864+00:00"
           }
         ],
-        "total_xp_from_achievements": 17200
+        "total_xp_from_achievements": 17335
       },
-      "xp": 27301,
+      "xp": 27533,
       "credits": 0,
       "contact": {
         "telefoon": ""
@@ -1129,6 +1162,78 @@
           "reason": "rps_gewonnen",
           "granted_at": "2026-06-02T21:11:52.385454+00:00",
           "total_after": 27301
+        },
+        {
+          "amount": 35,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:15:03.399593+00:00",
+          "total_after": 27336
+        },
+        {
+          "amount": 10,
+          "reason": "rps_verloren",
+          "granted_at": "2026-06-03T13:18:34.858149+00:00",
+          "total_after": 27346
+        },
+        {
+          "amount": 1,
+          "reason": "rps_gelijkspel",
+          "granted_at": "2026-06-03T13:24:33.020822+00:00",
+          "total_after": 27347
+        },
+        {
+          "amount": 1,
+          "reason": "rps_gelijkspel",
+          "granted_at": "2026-06-03T13:24:33.160535+00:00",
+          "total_after": 27348
+        },
+        {
+          "amount": 10,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:24:33.326643+00:00",
+          "total_after": 27358
+        },
+        {
+          "amount": 10,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:24:33.490845+00:00",
+          "total_after": 27368
+        },
+        {
+          "amount": 10,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:24:33.776965+00:00",
+          "total_after": 27378
+        },
+        {
+          "amount": 10,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:24:33.905557+00:00",
+          "total_after": 27388
+        },
+        {
+          "amount": 10,
+          "reason": "rps_gewonnen",
+          "granted_at": "2026-06-03T13:24:34.488558+00:00",
+          "total_after": 27398
+        },
+        {
+          "amount": 25,
+          "reason": "Achievement: Ik won Steen-Papier-Schaar",
+          "granted_at": "2026-06-03T13:24:34.636832+00:00",
+          "total_after": 27423
+        },
+        {
+          "amount": 10,
+          "reason": "Achievement: Ik verloor Steen-Papier-Schaar",
+          "granted_at": "2026-06-03T13:24:34.643706+00:00",
+          "total_after": 27433
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: 10 keer gewonnen",
+          "granted_at": "2026-06-03T13:24:34.650913+00:00",
+          "total_after": 27533
         }
       ],
       "gradatie_titel": "Beheerder",

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { MainLayout } from '../layout/MainLayout';
 import { useAuth } from '../../context/AuthContext';
+import { UserAvatar } from '../common/UserAvatar';
 import {
   Trophy, Star, Lock, Sparkles, Target, Zap, Crown,
-  ChevronRight, Award, TrendingUp, BookOpen
+  ChevronRight, Award, TrendingUp, BookOpen, Pencil, X as XIcon, Upload as UploadIcon
 } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -22,8 +23,11 @@ export function AchievementsPage({ onNavigate }) {
   const [allAch, setAllAch] = useState([]);
   const [progress, setProgress] = useState(null);
   const [loading, setLoading] = useState(true);
+  // v6_achievements_admin_edit_001
+  const isAdmin = !!user?.admin;
+  const [editingAch, setEditingAch] = useState(null);
 
-  useEffect(() => {
+  const refreshAll = () => {
     const userId = user?.id || 'user-001';
     Promise.all([
       fetch(`${API}/api/achievements/all`).then(r => r.json()),
@@ -33,6 +37,11 @@ export function AchievementsPage({ onNavigate }) {
       setProgress(prog);
       setLoading(false);
     }).catch(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    refreshAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   if (loading) {
@@ -63,11 +72,13 @@ export function AchievementsPage({ onNavigate }) {
         <div className="relative overflow-hidden rounded-2xl border border-amber-500/20" style={{ background: 'linear-gradient(135deg, #1a1333 0%, #0f172a 50%, #1a1333 100%)' }}>
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #f59e0b 0%, transparent 50%), radial-gradient(circle at 80% 50%, #a855f7 0%, transparent 50%)' }} />
           <div className="relative p-6 flex flex-col md:flex-row items-center gap-6">
-            {/* Avatar */}
+            {/* Avatar — v6_achievements_avatar_001 — toont speler-avatar i.p.v. eerste letter */}
             <div className="relative">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white" style={{ background: 'linear-gradient(135deg, #f59e0b, #ea580c)' }}>
-                {userName[0]}
-              </div>
+              <UserAvatar
+                user={{ id: user?.id, naam: userName, avatar: user?.avatar, gradatie: user?.gradatie }}
+                size="xl"
+                rounded="rounded-2xl"
+              />
               <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center text-[10px] font-bold text-white border-2 border-slate-900">
                 {Math.floor(totalXp / 100)}
               </div>
@@ -130,7 +141,8 @@ export function AchievementsPage({ onNavigate }) {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {unlocked.map(ach => (
-                <AchievementCard key={ach.id} ach={ach} unlocked />
+                <AchievementCard key={ach.id} ach={ach} unlocked
+                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(ach)} />
               ))}
             </div>
           </div>
@@ -146,30 +158,64 @@ export function AchievementsPage({ onNavigate }) {
               const isUnlocked = unlockedIds.includes(ach.id);
               const userAch = unlocked.find(u => u.id === ach.id);
               return (
-                <AchievementCard key={ach.id} ach={userAch || ach} unlocked={isUnlocked} />
+                <AchievementCard key={ach.id} ach={userAch || ach} unlocked={isUnlocked}
+                  isAdmin={isAdmin} onAdminEdit={() => setEditingAch(userAch || ach)} />
               );
             })}
           </div>
         </div>
       </div>
+      {/* v6_achievements_admin_edit_001 — Admin Edit modal */}
+      {editingAch && (
+        <AchievementEditModal
+          ach={editingAch}
+          byUser={user?.id}
+          onClose={() => setEditingAch(null)}
+          onSaved={() => { setEditingAch(null); refreshAll(); }}
+        />
+      )}
     </MainLayout>
   );
 }
 
-function AchievementCard({ ach, unlocked }) {
+function AchievementCard({ ach, unlocked, isAdmin, onAdminEdit }) {
   const rarity = rarityConfig[ach.rarity] || rarityConfig.common;
+  // v6_achievements_admin_edit_001 — icon kan emoji of URL zijn
+  const isUrl = typeof ach.icon === 'string' && (ach.icon.startsWith('/') || ach.icon.startsWith('http'));
+  const iconSrc = isUrl ? (ach.icon.startsWith('http') ? ach.icon : `${API}${ach.icon}`) : null;
+  // Voor RPS-achievements toon "X potjes" i.p.v. "X woorden"
+  const isRps = ach.type === 'rps';
+  const milestoneLabel = ach.milestone != null
+    ? (isRps
+        ? (ach.stat_field === 'losses' ? `${ach.milestone} verloren` : `${ach.milestone} gewonnen`)
+        : `${ach.milestone?.toLocaleString()} woorden`)
+    : null;
   return (
     <div
       data-testid={`achievement-${ach.id}`}
-      className={`p-4 rounded-xl border-2 transition-all ${unlocked ? 'hover:scale-[1.02]' : 'opacity-40 grayscale'}`}
+      className={`relative p-4 rounded-xl border-2 transition-all ${unlocked ? 'hover:scale-[1.02]' : 'opacity-40 grayscale'}`}
       style={{
         background: unlocked ? `${rarity.bg}30` : '#0f172a',
         borderColor: unlocked ? `${rarity.ring}50` : '#1e293b',
         boxShadow: unlocked ? rarity.glow : 'none',
       }}
     >
+      {/* Admin edit-knop (alleen voor admin, hover-effect) */}
+      {isAdmin && (
+        <button data-testid={`achievement-admin-edit-${ach.id}`}
+          onClick={(e) => { e.stopPropagation(); onAdminEdit && onAdminEdit(); }}
+          title="Bewerk titel/icon (admin)"
+          className="absolute top-2 right-2 z-10 w-7 h-7 rounded-lg bg-slate-900/80 backdrop-blur border border-amber-500/40 flex items-center justify-center text-amber-300 hover:bg-amber-500/20">
+          <Pencil className="w-3 h-3" />
+        </button>
+      )}
       <div className="flex items-start justify-between mb-2">
-        <span className="text-3xl">{ach.icon}</span>
+        {iconSrc ? (
+          <img src={iconSrc} alt={ach.name}
+            className="w-12 h-12 rounded-lg object-cover border border-slate-700/50" />
+        ) : (
+          <span className="text-3xl">{ach.icon}</span>
+        )}
         {unlocked ? (
           <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-green-500/15 text-green-400">Behaald</span>
         ) : (
@@ -183,8 +229,12 @@ function AchievementCard({ ach, unlocked }) {
           {rarity.label}
         </span>
         <div className="flex items-center gap-1">
-          <span className="text-[10px] text-slate-500">{ach.milestone?.toLocaleString()} woorden</span>
-          <span className="text-slate-700 mx-1">|</span>
+          {milestoneLabel && (
+            <>
+              <span className="text-[10px] text-slate-500">{milestoneLabel}</span>
+              <span className="text-slate-700 mx-1">|</span>
+            </>
+          )}
           <span className="text-[10px] font-medium" style={{ color: rarity.ring }}>+{ach.xp_reward?.toLocaleString()} XP</span>
         </div>
       </div>
@@ -193,6 +243,93 @@ function AchievementCard({ ach, unlocked }) {
           {new Date(ach.unlocked_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' })}
         </p>
       )}
+    </div>
+  );
+}
+
+// v6_achievements_admin_edit_001 — Modal voor titel + icon (emoji of upload)
+function AchievementEditModal({ ach, byUser, onClose, onSaved }) {
+  const [name, setName] = useState(ach.name || '');
+  const [iconEmoji, setIconEmoji] = useState(
+    typeof ach.icon === 'string' && !ach.icon.startsWith('/') && !ach.icon.startsWith('http') ? ach.icon : ''
+  );
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
+
+  const saveTitleEmoji = async () => {
+    setBusy(true); setErr('');
+    const body = { name };
+    if (iconEmoji) body.icon = iconEmoji;
+    const r = await fetch(`${API}/api/achievements/admin/${ach.id}?by_user=${encodeURIComponent(byUser)}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    setBusy(false);
+    if (!r.ok || d.success === false) { setErr(d.detail || 'Opslaan mislukt'); return; }
+    onSaved && onSaved();
+  };
+
+  const uploadIcon = async (file) => {
+    if (!file) return;
+    setBusy(true); setErr('');
+    const fd = new FormData();
+    fd.append('by_user', byUser);
+    fd.append('file', file);
+    const r = await fetch(`${API}/api/achievements/admin/${ach.id}/icon-upload`, { method: 'POST', body: fd });
+    const d = await r.json();
+    setBusy(false);
+    if (!r.ok || d.success === false) { setErr(d.detail || 'Upload mislukt'); return; }
+    onSaved && onSaved();
+  };
+
+  return (
+    <div data-testid="achievement-edit-modal"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      onClick={onClose}>
+      <div className="bg-slate-900 border border-amber-500/40 rounded-2xl max-w-md w-full p-6 space-y-4"
+        onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-start justify-between">
+          <h3 className="text-base font-bold text-white">Achievement bewerken</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-white"><XIcon className="w-4 h-4" /></button>
+        </div>
+        <p className="text-[11px] text-slate-500 -mt-2">ID: <code>{ach.id}</code></p>
+
+        <div className="space-y-2">
+          <label className="block text-[10px] uppercase tracking-wider text-slate-500">Titel</label>
+          <input data-testid="achievement-edit-name" type="text" value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white outline-none focus:border-amber-500/50" />
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-[10px] uppercase tracking-wider text-slate-500">Icon (emoji of upload)</label>
+          <div className="flex items-center gap-2">
+            <input data-testid="achievement-edit-emoji" type="text" value={iconEmoji} maxLength={4}
+              onChange={(e) => setIconEmoji(e.target.value)}
+              placeholder="🏆"
+              className="w-20 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-2xl text-center text-white outline-none focus:border-amber-500/50" />
+            <span className="text-xs text-slate-500">of</span>
+            <label className="flex-1 flex items-center gap-2 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-slate-300 hover:border-amber-500/50 cursor-pointer">
+              <UploadIcon className="w-3.5 h-3.5" />
+              <span>Upload afbeelding (PNG/JPG)</span>
+              <input data-testid="achievement-edit-upload" type="file" accept="image/*" className="hidden"
+                onChange={(e) => uploadIcon(e.target.files?.[0])} />
+            </label>
+          </div>
+          <p className="text-[10px] text-slate-600">Huidige icon: {ach.icon || '—'}</p>
+        </div>
+
+        {err && <p className="text-[11px] text-red-400">{err}</p>}
+
+        <div className="flex items-center justify-end gap-2 pt-2">
+          <button onClick={onClose}
+            className="px-3 py-1.5 text-xs text-slate-400 hover:text-white">Annuleer</button>
+          <button data-testid="achievement-edit-save" onClick={saveTitleEmoji} disabled={busy}
+            className="px-4 py-1.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded-lg disabled:opacity-50">
+            {busy ? 'Bezig…' : 'Opslaan'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

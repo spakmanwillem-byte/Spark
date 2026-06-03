@@ -89,3 +89,93 @@ async def get_leaderboard(period: str = "alltime", limit: int = 25):
     for i, r in enumerate(results[:limit], start=1):
         r["rank"] = i
     return {"period": period, "leaderboard": results[:limit], "total_users": len(results)}
+
+
+
+# v6_achievements_admin_edit_001 — Admin: titel + icon bewerken
+from fastapi import UploadFile, File, Form
+from pydantic import BaseModel
+from typing import Optional
+from modules.admin.admin_service import is_admin
+from modules.core.storage import save_json
+
+
+class AchievementPatch(BaseModel):
+    name: Optional[str] = None
+    icon: Optional[str] = None  # emoji of URL-pad
+
+
+ACHIEVEMENTS_FILE = Path(__file__).parent.parent.parent / "data" / "achievements.json"
+
+
+@router.patch("/admin/{achievement_id}")
+async def admin_patch_achievement(achievement_id: str, body: AchievementPatch, by_user: str):
+    """Admin: pas naam en/of icon van een achievement aan."""
+    if not is_admin(by_user):
+        raise HTTPException(403, "Alleen admins mogen achievements bewerken.")
+    data = load_json(ACHIEVEMENTS_FILE, default={"achievements": []})
+    achs = data.get("achievements", [])
+    target = next((a for a in achs if a.get("id") == achievement_id), None)
+    if not target:
+        raise HTTPException(404, f"Achievement '{achievement_id}' niet gevonden")
+    updated = []
+    if body.name is not None and body.name.strip():
+        target["name"] = body.name.strip()
+        updated.append("name")
+    if body.icon is not None:
+        target["icon"] = body.icon
+        updated.append("icon")
+    save_json(ACHIEVEMENTS_FILE, data)
+    return {"success": True, "updated": updated, "achievement": target}
+
+
+@router.post("/admin/{achievement_id}/icon-upload")
+async def admin_upload_achievement_icon(
+    achievement_id: str,
+    by_user: str = Form(...),
+    file: UploadFile = File(...),
+):
+    """Admin: upload afbeelding als icon — slaat op via system-archive."""
+    if not is_admin(by_user):
+        raise HTTPException(403, "Alleen admins mogen achievement-iconen wijzigen.")
+    # Inline opslaan in system-archive (zelfde struct als /api/system-archive/upload)
+    import uuid
+    from datetime import datetime, timezone as _tz
+    from modules.system_archive.routes import (
+        ARCHIVE_DIR, _ensure_dirs, _detect_category, _load_index, _save_index, MAX_SIZE_BYTES,
+    )
+    _ensure_dirs()
+    raw = await file.read()
+    if len(raw) > MAX_SIZE_BYTES:
+        raise HTTPException(413, "Icon te groot")
+    if len(raw) == 0:
+        raise HTTPException(400, "Leeg bestand")
+    original = file.filename or "icon.png"
+    cat = _detect_category(original)
+    ext = Path(original).suffix.lower() or ".png"
+    file_id = uuid.uuid4().hex[:12]
+    safe = f"{file_id}{ext}"
+    dest = ARCHIVE_DIR / cat / safe
+    dest.write_bytes(raw)
+    entry = {
+        "id": file_id, "filename": safe, "original_name": original,
+        "category": cat, "extension": ext,
+        "mime_type": file.content_type or "image/png",
+        "size_bytes": len(raw),
+        "description": f"achievement-icon:{achievement_id}",
+        "tags": ["achievement-icon"],
+        "uploaded_at": datetime.now(_tz.utc).isoformat(),
+        "uploaded_by": by_user, "path": str(dest),
+        "scan_status": None, "scan_results": None,
+    }
+    idx = _load_index()
+    idx.append(entry)
+    _save_index(idx)
+    icon_url = f"/api/system-archive/file/{file_id}"
+    data = load_json(ACHIEVEMENTS_FILE, default={"achievements": []})
+    target = next((a for a in data.get("achievements", []) if a.get("id") == achievement_id), None)
+    if not target:
+        raise HTTPException(404, f"Achievement '{achievement_id}' niet gevonden")
+    target["icon"] = icon_url
+    save_json(ACHIEVEMENTS_FILE, data)
+    return {"success": True, "icon": icon_url, "archive_id": file_id}

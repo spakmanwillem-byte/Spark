@@ -109,14 +109,21 @@ class AchievementService:
             print(f"[achievements] grant_xp failed: {ex}")
         return {"success": True, "already_unlocked": False, "achievement": entry, "xp_granted": target.get("xp_reward", 0)}
 
+    def _get_rps_stats(self, user_id: str) -> dict:
+        """v6_achievements_rps_001 — Lees RPS lifetime stats voor user."""
+        rps_file = DATA_DIR / "games" / "rps" / "stats.json"
+        d = load_json(rps_file, default={"stats": {}})
+        return d.get("stats", {}).get(user_id, {"wins": 0, "losses": 0, "ties": 0, "total": 0})
+
     def get_user_progress(self, user_id):
-        """Calculate user's achievement progress based on knowledge count"""
+        """Calculate user's achievement progress based on knowledge count + rps stats"""
         user = self._get_user(user_id)
         if not user:
             return None
 
         achievements = self._get_achievements()
         word_count = self._get_word_count(user_id)
+        rps_stats = self._get_rps_stats(user_id)
 
         # Get unlocked from user data
         user_ach = user.get("achievements", {})
@@ -124,22 +131,35 @@ class AchievementService:
         unlocked_ids = [a.get("id") for a in unlocked]
         total_xp = user_ach.get("total_xp_from_achievements", 0)
 
-        # Check retroactive: auto-unlock any milestone that word_count already passed
+        # Check retroactive: auto-unlock any milestone die de progress al gepasseerd is.
         # v5_milestone_unlocks_001: skip trigger-based milestones (geen "milestone" int veld)
+        # v6_achievements_rps_001: voor type='rps' gebruik stat_field tegen rps_stats
         newly_unlocked = []
-        word_milestones = [a for a in achievements if isinstance(a.get("milestone"), int)]
-        for ach in sorted(word_milestones, key=lambda a: a.get("milestone", 0)):
-            if ach["id"] not in unlocked_ids and word_count >= ach.get("milestone", 0):
-                unlock_entry = {
-                    "id": ach["id"], "name": ach["name"], "description": ach["description"],
-                    "milestone": ach["milestone"], "xp_reward": ach.get("xp_reward", 0),
-                    "icon": ach.get("icon", ""), "rarity": ach.get("rarity", "common"),
-                    "unlocked_at": datetime.now(timezone.utc).isoformat(),
-                }
-                unlocked.append(unlock_entry)
-                unlocked_ids.append(ach["id"])
-                total_xp += ach.get("xp_reward", 0)
-                newly_unlocked.append(unlock_entry)
+        milestone_achs = [a for a in achievements if isinstance(a.get("milestone"), int)]
+        for ach in sorted(milestone_achs, key=lambda a: a.get("milestone", 0)):
+            if ach["id"] in unlocked_ids:
+                continue
+            if ach.get("type") == "rps":
+                # RPS-achievement: vergelijk milestone tegen rps_stats[stat_field]
+                stat_field = ach.get("stat_field", "wins")
+                current = rps_stats.get(stat_field, 0)
+                if current < ach.get("milestone", 0):
+                    continue
+            else:
+                # Default: word-based
+                if word_count < ach.get("milestone", 0):
+                    continue
+            unlock_entry = {
+                "id": ach["id"], "name": ach["name"], "description": ach["description"],
+                "milestone": ach["milestone"], "xp_reward": ach.get("xp_reward", 0),
+                "icon": ach.get("icon", ""), "rarity": ach.get("rarity", "common"),
+                "type": ach.get("type", "words"),
+                "unlocked_at": datetime.now(timezone.utc).isoformat(),
+            }
+            unlocked.append(unlock_entry)
+            unlocked_ids.append(ach["id"])
+            total_xp += ach.get("xp_reward", 0)
+            newly_unlocked.append(unlock_entry)
 
         # Save if new unlocks
         # ⚠ FIX 2026-05-19: voorheen overschreef "xp": total_xp de totale user.xp,
@@ -162,7 +182,8 @@ class AchievementService:
             except Exception as ex:
                 print(f"[achievements] grant_xp failed: {ex}")
 
-        # Find next milestone (alleen word-based)
+        # Find next milestone (alleen word-based: skip rps voor "volgende mijlpaal" preview)
+        word_milestones = [a for a in milestone_achs if a.get("type") != "rps"]
         next_milestone = None
         for ach in sorted(word_milestones, key=lambda a: a.get("milestone", 0)):
             if ach["id"] not in unlocked_ids:

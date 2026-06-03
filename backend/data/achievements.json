@@ -21,6 +21,12 @@
       "description": "Eenmalige mijlpalen (avatar, tokens, eerste handelingen)",
       "icon": "🏁",
       "xp_multiplier": 1.0
+    },
+    "rps": {
+      "name": "Steen-Papier-Schaar",
+      "description": "Achievements voor SPS-mini-game potjes",
+      "icon": "✊",
+      "xp_multiplier": 1.0
     }
   },
   "achievements": [
@@ -224,6 +230,50 @@
       "xp_reward": 50,
       "icon": "🪙",
       "rarity": "uncommon"
+    },
+    {
+      "id": "rps_first_win",
+      "type": "rps",
+      "name": "Ik won Steen-Papier-Schaar",
+      "description": "Je hebt voor het eerst een rondje SPS gewonnen.",
+      "milestone": 1,
+      "stat_field": "wins",
+      "xp_reward": 25,
+      "icon": "🥇",
+      "rarity": "common"
+    },
+    {
+      "id": "rps_first_loss",
+      "type": "rps",
+      "name": "Ik verloor Steen-Papier-Schaar",
+      "description": "Verlies is ook winst — je hebt voor het eerst verloren.",
+      "milestone": 1,
+      "stat_field": "losses",
+      "xp_reward": 10,
+      "icon": "💀",
+      "rarity": "common"
+    },
+    {
+      "id": "rps_wins_10",
+      "type": "rps",
+      "name": "10 keer gewonnen",
+      "description": "Je hebt 10 SPS-rondes gewonnen.",
+      "milestone": 10,
+      "stat_field": "wins",
+      "xp_reward": 100,
+      "icon": "🏆",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "rps_losses_10",
+      "type": "rps",
+      "name": "10 keer verloren",
+      "description": "Je hebt 10 SPS-rondes verloren. Volhouder!",
+      "milestone": 10,
+      "stat_field": "losses",
+      "xp_reward": 50,
+      "icon": "🪦",
+      "rarity": "common"
     }
   ],
   "meta": {

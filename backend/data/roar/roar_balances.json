@@ -4,13 +4,13 @@
   "cleaned_by": "user-001",
   "previous_tx_count": 13,
   "balances": {
-    "user-000": 19,
-    "user-001": 15,
+    "user-000": 5,
+    "user-001": 5,
     "user-a0ee2d7e": 2,
     "user-c609d7d1": 0,
-    "user-1996fa59": 1,
-    "user-5dd295db": 1,
-    "user-4d9b59aa": 1
+    "user-1996fa59": 0,
+    "user-5dd295db": 0,
+    "user-4d9b59aa": 0
   },
   "transactions": [
     {
@@ -62,6 +62,21 @@
       "to_user_id": "user-000",
       "amount": 1,
       "gift_id": "6bba5b27-48b4-46b2-a391-92f0abf2afea"
+    },
+    {
+      "ts": "2026-06-03T12:04:57.407379+00:00",
+      "action": "manual_balance_reset",
+      "by": "user-001",
+      "reason": "Pre-redeploy schoonmaak — Willem/Spark naar 5, Gerben/Lotus/Roadkill naar 0",
+      "new_balances": {
+        "user-000": 5,
+        "user-001": 5,
+        "user-a0ee2d7e": 2,
+        "user-c609d7d1": 0,
+        "user-1996fa59": 0,
+        "user-5dd295db": 0,
+        "user-4d9b59aa": 0
+      }
     }
   ],
   "_clean_slate_1juni": {

@@ -175,10 +175,14 @@ export function TraderPage({ onNavigate }) {
   }, [userId]);
 
   // v6_shadow_pot_001 — Shadow potje status (idle/active/closed per pot)
+  // v6_shadow_hide_001 — UI tijdelijk verborgen na productiebugs (sessie 22).
+  // Backend SHADOW_ENABLED staat ook UIT. Zet HIDDEN=false om UI weer te tonen.
+  const SHADOW_UI_HIDDEN = true;
   const [shadowStatus, setShadowStatus] = useState(null);
   const loadShadowStatus = useCallback(() => {
+    if (SHADOW_UI_HIDDEN) return Promise.resolve();
     return fetch(`${API}/api/trade/shadow/status/${userId}`).then(r => r.json()).then(d => setShadowStatus(d)).catch(() => {});
-  }, [userId]);
+  }, [userId, SHADOW_UI_HIDDEN]);
 
   // v6_shadow_safety_001 — Master-flag (default UIT) + cleanup
   const [shadowFlag, setShadowFlag] = useState(null);
@@ -659,8 +663,9 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     </div>
-                    {/* v6_shadow_cascade_002 — Shadow Potje status banner (3-slot piramide) */}
-                    {shadowStatus?.summary && (
+                    {/* v6_shadow_cascade_002 — Shadow Potje status banner (3-slot piramide)
+                        v6_shadow_hide_001 — verborgen via SHADOW_UI_HIDDEN flag */}
+                    {!SHADOW_UI_HIDDEN && shadowStatus?.summary && (
                       <div className="px-4 py-2 border-b border-slate-800 bg-purple-500/5 flex items-center justify-between text-[10px]" data-testid="shadow-status-banner">
                         <div className="flex items-center gap-2 text-purple-300">
                           <span className="text-base">🌑</span>
@@ -682,8 +687,9 @@ export function TraderPage({ onNavigate }) {
                         </button>
                       </div>
                     )}
-                    {/* v6_shadow_safety_001 — Admin-only flag toggle + cleanup */}
-                    {isAdmin && (
+                    {/* v6_shadow_safety_001 — Admin-only flag toggle + cleanup
+                        v6_shadow_hide_001 — verborgen via SHADOW_UI_HIDDEN flag */}
+                    {!SHADOW_UI_HIDDEN && isAdmin && (
                       <div
                         className="px-4 py-1.5 border-b border-slate-800 bg-slate-900/40 flex items-center justify-between text-[10px]"
                         data-testid="shadow-safety-controls"

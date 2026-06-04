@@ -1930,6 +1930,26 @@
       "requested_amount": 10.0,
       "effective_amount": 10.0,
       "proxied_via_spark": false
+    },
+    {
+      "trade_id": "00000000-0000-041f-0100-00082b67a05b",
+      "run_id": "manual",
+      "timestamp": "2026-06-04T12:51:50.779866+00:00",
+      "action": "SELL",
+      "market": "BCH-EUR",
+      "order_id": "00000000-0000-041f-0100-00082b67a05b",
+      "amount": 0.04731533,
+      "price": 215.04,
+      "filled": 0.04731533,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0346885632,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.04731533,
+      "proxied_via_spark": false
     }
   ]
 }

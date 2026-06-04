@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 845,
+    "card_count": 874,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T19:47:14.907406+00:00",
+    "last_updated": "2026-06-04T15:57:03.900358+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -107911,6 +107911,2373 @@
       "media": [],
       "needs": [],
       "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-1a32f423",
+      "begrip": "woont",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Woont betekent dat iemand op een bepaalde plaats leeft en verblijft.",
+        "laag2": "Mensen wonen op een plek waar zij slapen, leven en een deel van hun dagelijks leven doorbrengen.",
+        "laag3": "Woont is de tegenwoordige tijd van wonen. Het beschrijft de relatie tussen een persoon en een verblijfplaats, zoals een huis, appartement, woonboot of andere woonruimte. Wonen kan tijdelijk of langdurig zijn en speelt een belangrijke rol in het dagelijks leven en de sociale omgeving.",
+        "laag4": "Woont beschrijft het verblijven op een vaste of tijdelijke locatie die als leefomgeving dient."
+      },
+      "ws5": {
+        "wie": "Mensen en soms dieren.",
+        "wat": "Het verblijven op een woonlocatie.",
+        "wanneer": "Wanneer iemand een plek gebruikt als leefomgeving.",
+        "waar": "In huizen, appartementen, woonvoorzieningen, dorpen, steden of andere verblijfplaatsen.",
+        "waarom": "Om een veilige en geschikte plek te hebben om te leven.",
+        "hoe": "Door zich op een locatie te vestigen en daar regelmatig te verblijven."
+      },
+      "tags": [
+        "woont",
+        "wonen",
+        "woonplaats",
+        "huis",
+        "thuis",
+        "verblijf",
+        "leefomgeving",
+        "bewoner",
+        "adres",
+        "woning",
+        "locatie",
+        "verblijfplaats",
+        "huishouden",
+        "omgeving",
+        "samenleving",
+        "gemeenschap",
+        "leven",
+        "vestigen",
+        "onderdak",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-fc353b53",
+          "begrip": "wonen",
+          "lade": "doen",
+          "overlap": 11,
+          "shared_tags": [
+            "emotie",
+            "gemeenschap",
+            "huis",
+            "leefomgeving",
+            "leven"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4775e64e",
+          "begrip": "openbare",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gemeenschap",
+            "neutraal",
+            "omgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f2c86cd8",
+          "begrip": "huizen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "omgeving",
+            "thuis",
+            "wonen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6507fdfc",
+          "begrip": "Utrecht",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "locatie",
+            "neutraal",
+            "omgeving",
+            "samenleving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-174b0e40",
+          "begrip": "dat is een openbare ruimte",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gemeenschap",
+            "neutraal",
+            "omgeving"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T13:50:01.736448+00:00",
+        "vorige_versie_v1": "snap-059eb83c",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-03T17:01:22.816074+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T13:49:59.946583+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:50:00.434252+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:50:00.446497+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:50:02.659537+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:50:02.716383+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a2c2aaee",
+      "begrip": "kopen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kopen betekent iets verkrijgen door ervoor te betalen.",
+        "laag2": "Mensen kopen goederen, diensten of rechten wanneer zij iets willen gebruiken of bezitten.",
+        "laag3": "Kopen is een economische handeling waarbij geld of een andere vorm van waarde wordt uitgewisseld voor een product, dienst of eigendom. Het komt voor in winkels, markten, online platforms en tussen personen. Bij kopen spelen behoefte, prijs, beschikbaarheid en keuze vaak een rol.",
+        "laag4": "Kopen is het verkrijgen van eigendom of gebruiksrecht door middel van een overeengekomen uitwisseling van waarde."
+      },
+      "ws5": {
+        "wie": "Mensen, bedrijven, organisaties en overheden.",
+        "wat": "Het verkrijgen van een product, dienst of recht door betaling.",
+        "wanneer": "Wanneer iemand iets nodig heeft, wil bezitten of wil gebruiken.",
+        "waar": "In winkels, markten, webshops en tussen personen.",
+        "waarom": "Om een behoefte, wens of doel te vervullen.",
+        "hoe": "Door geld of een andere vorm van waarde uit te wisselen."
+      },
+      "tags": [
+        "kopen",
+        "aankoop",
+        "betalen",
+        "betaling",
+        "geld",
+        "product",
+        "dienst",
+        "eigendom",
+        "bezit",
+        "winkel",
+        "webshop",
+        "markt",
+        "consument",
+        "transactie",
+        "handel",
+        "economie",
+        "waarde",
+        "keuze",
+        "uitwisseling",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-41551734",
+          "begrip": "verkoop",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "blij",
+            "dienst",
+            "economie",
+            "emotie",
+            "handel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e42de930",
+          "begrip": "inkomsten",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "economie",
+            "emotie",
+            "geld",
+            "handel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-def12c88",
+          "begrip": "aankoop",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "aankoop",
+            "betaling",
+            "handel",
+            "keuze",
+            "kopen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1ee335bd",
+          "begrip": "bezit",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bezit",
+            "blij",
+            "eigendom",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f052a17f",
+          "begrip": "Geld",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "betaling",
+            "economie",
+            "geld",
+            "handel",
+            "transactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T13:52:55.270681+00:00",
+        "vorige_versie_v1": "kb-skel-a2c2aaee",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:21.368491+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:52:54.358358+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:52:54.421968+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:52:56.341969+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:52:56.354605+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T13:52:53.814944+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-115bd0c5",
+      "begrip": "volgen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Volgen betekent achter iets of iemand aangaan of aandachtig meebewegen.",
+        "laag2": "Mensen volgen personen, gebeurtenissen, instructies, routes of ontwikkelingen om informatie te krijgen of een doel te bereiken.",
+        "laag3": "Volgen kan letterlijk betekenen dat iemand achter een persoon, voertuig of route aan gaat. Figuurlijk betekent volgen dat iemand informatie, onderwijs, nieuws, regels of ontwikkelingen bijhoudt. Volgen speelt een belangrijke rol bij leren, navigeren, communicatie en samenwerking.",
+        "laag4": "Volgen is het richten van aandacht, beweging of ontwikkeling op iets dat richting, informatie of voorbeeld "
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, organisaties en systemen.",
+        "wat": "Het achteraan gaan, observeren of bijhouden van iets of iemand.",
+        "wanneer": "Wanneer richting, informatie, begeleiding of interesse aanwezig is.",
+        "waar": "In verkeer, onderwijs, communicatie, sociale media, werk en het dagelijks leven.",
+        "waarom": "Om te leren, informatie te verkrijgen, een doel te bereiken of verbonden te blijven.",
+        "hoe": "Door aandacht te geven, mee te bewegen, instructies op te volgen of ontwikkelingen bij te houden."
+      },
+      "tags": [
+        "volgen",
+        "opvolgen",
+        "observeren",
+        "begeleiden",
+        "aandacht",
+        "informatie",
+        "route",
+        "richting",
+        "leren",
+        "onderwijs",
+        "instructie",
+        "navigatie",
+        "ontwikkeling",
+        "communicatie",
+        "verbinding",
+        "waarnemen",
+        "bijhouden",
+        "interesse",
+        "beweging",
+        "emotie",
+        "neutraal",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-84f2ceda",
+          "begrip": "docent",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-770a03a1",
+          "begrip": "instructie",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "instructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d0e02013",
+          "begrip": "luisteren",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-097c2cb9",
+          "begrip": "brengen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "blij",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T13:54:12.447922+00:00",
+        "vorige_versie_v1": "kb-skel-115bd0c5",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:22.589351+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:54:11.818700+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:54:11.830980+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:54:13.420903+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:54:13.433340+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T13:54:11.239306+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8c1f60dc",
+      "begrip": "stroever",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Stroever betekent dat iets minder soepel, moeilijker of met meer weerstand verloopt.",
+        "laag2": "Stroever wordt gebruikt wanneer beweging, communicatie of een proces niet meer zo gemakkelijk gaat als voorheen.",
+        "laag3": "Stroever kan verwijzen naar fysieke beweging, zoals een deur die moeilijk opent, maar ook naar gesprekken, samenwerking of processen die meer moeite kosten. Het begrip geeft aan dat er meer weerstand, wrijving of moeite aanwezig is dan normaal.",
+        "laag4": "Stroever beschrijft een toename van weerstand waardoor beweging, interactie of ontwikkeling minder soepel verloopt."
+      },
+      "ws5": {
+        "wie": "Mensen, objecten, systemen, processen en organisaties.",
+        "wat": "Een toestand van verminderde soepelheid of verhoogde weerstand.",
+        "wanneer": "Wanneer iets meer moeite kost dan gebruikelijk.",
+        "waar": "In bewegingen, gesprekken, samenwerking, machines en processen.",
+        "waarom": "Door weerstand, wrijving, obstakels, slijtage of misverstanden.",
+        "hoe": "Doordat de voortgang of werking minder soepel verloopt."
+      },
+      "tags": [
+        "stroever",
+        "stroef",
+        "weerstand",
+        "wrijving",
+        "moeite",
+        "moeilijker",
+        "vertraging",
+        "obstakel",
+        "belemmering",
+        "samenwerking",
+        "communicatie",
+        "beweging",
+        "proces",
+        "ontwikkeling",
+        "slijtage",
+        "remming",
+        "voortgang",
+        "interactie",
+        "spanning",
+        "emotie",
+        "boos",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-eab440c4",
+          "begrip": "werkt",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb188771",
+          "begrip": "activiteiten",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bb0b2435",
+          "begrip": "begin",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8cd74bf5",
+          "begrip": "voorgesteld",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b58fb199",
+          "begrip": "processen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T11:21:58.718087+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T13:59:12.549017+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Waarom voelt het stroever?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T13:59:10.750657+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:59:11.239233+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:59:11.252782+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T13:59:13.538698+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T13:59:13.551444+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e96db3a0",
+      "begrip": "initiatief",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Initiatief is het uit jezelf beginnen met een actie of idee.",
+        "laag2": "Iemand toont initiatief door niet af te wachten, maar zelf een stap te zetten.",
+        "laag3": "Initiatief speelt een belangrijke rol bij leren, werken, samenwerken en persoonlijke ontwikkeling. Mensen die initiatief nemen, herkennen kansen, signaleren problemen of zien mogelijkheden en ondernemen vervolgens actie zonder dat dit eerst gevraagd hoeft te worden. Initiatief kan leiden tot vooruitgang, verandering en nieuwe ontwikkelingen.\n",
+        "laag4": "Initiatief is het vermogen en de bereidheid om zelfstandig een handeling, idee of ontwikkeling in gang te zetten.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en systemen.",
+        "wat": "Het zelfstandig starten van een actie, plan of ontwikkeling.",
+        "wanneer": "Wanneer iemand kansen, behoeften of mogelijkheden ziet.",
+        "waar": "In werk, onderwijs, relaties, projecten en het dagelijks leven.",
+        "waarom": "Om vooruitgang te creëren, problemen op te lossen of doelen te bereiken.",
+        "hoe": "Door zelf verantwoordelijkheid te nemen en actie te ondernemen zonder af te wachten."
+      },
+      "tags": [
+        "initiatief",
+        "beginnen",
+        "starten",
+        "actie",
+        "ondernemen",
+        "zelfstandig",
+        "verantwoordelijkheid",
+        "motivatie",
+        "ontwikkeling",
+        "vooruitgang",
+        "leiderschap",
+        "doel",
+        "kans",
+        "keuze",
+        "besluit",
+        "betrokkenheid",
+        "creativiteit",
+        "oplossing",
+        "doorzetten",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-dcaf2f12",
+          "begrip": "motiveert",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "blij",
+            "doel",
+            "doorzetten",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-dff0a76b",
+          "begrip": "probleemoplossing",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "creativiteit",
+            "doel",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "keuze",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-25112e01",
+          "begrip": "wens",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "keuze",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-15354e23",
+          "begrip": "mogelijkheid",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "kans",
+            "keuze",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T14:49:15.047829+00:00",
+        "vorige_versie_v1": "kb-skel-e96db3a0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.243223+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T14:49:14.336661+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T14:49:14.352411+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T14:49:16.133915+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T14:49:16.147616+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T14:49:13.809129+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2ffb935b",
+      "begrip": "zelfstandig",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Zelfstandig betekent dat iemand iets zonder hulp of afhankelijkheid van anderen kan doen.",
+        "laag2": "Een zelfstandig persoon neemt eigen beslissingen en voert taken uit op eigen verantwoordelijkheid.",
+        "laag3": "Zelfstandigheid komt voor in leren, werken, wonen en het dagelijks leven. Het betekent niet dat iemand nooit hulp nodig heeft, maar dat iemand in staat is om veel zaken zelf te regelen, problemen op te lossen en verantwoordelijkheid te dragen voor keuzes en handelingen.\n",
+        "laag4": "Zelfstandigheid komt voor in leren, werken, wonen en het dagelijks leven. Het betekent niet dat iemand nooit hulp nodig heeft, maar dat iemand in staat is om veel zaken zelf te regelen, problemen op te lossen en verantwoordelijkheid te dragen voor keuzes en handelingen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Het vermogen om zelf te handelen en beslissingen te nemen.",
+        "wanneer": "Wanneer taken, keuzes of verantwoordelijkheden zonder directe hulp worden uitgevoerd.",
+        "waar": "In werk, onderwijs, wonen, relaties en het dagelijks leven.",
+        "waarom": "Om eigen doelen te bereiken en verantwoordelijkheid te dragen voor handelingen en keuzes.",
+        "hoe": "Door kennis, vaardigheden, ervaring en eigen besluitvorming toe te passen."
+      },
+      "tags": [
+        "zelfstandig",
+        "onafhankelijk",
+        "autonomie",
+        "zelfredzaam",
+        "verantwoordelijkheid",
+        "initiatief",
+        "beslissen",
+        "keuze",
+        "zelfsturing",
+        "vrijheid",
+        "ontwikkeling",
+        "zelfvertrouwen",
+        "handelen",
+        "eigen regie",
+        "zelfbeheer",
+        "volwassenheid",
+        "onafhankelijkheid",
+        "doorzetten",
+        "autonomie",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e96db3a0",
+          "begrip": "initiatief",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "blij",
+            "doorzetten",
+            "emotie",
+            "initiatief",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f3706a89",
+          "begrip": "vrij",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "autonomie",
+            "blij",
+            "emotie",
+            "keuze",
+            "onafhankelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-64ebd4db",
+          "begrip": "advies",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "autonomie",
+            "blij",
+            "emotie",
+            "keuze",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-15354e23",
+          "begrip": "mogelijkheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:00:08.883305+00:00",
+        "vorige_versie_v1": "kb-skel-2ffb935b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:57.835875+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:00:07.948227+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:00:08.005943+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:00:09.938636+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:00:09.951630+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:00:07.443532+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f8d95315",
+      "begrip": "doorgaan",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Doorgaan betekent verdergaan met iets dat al begonnen is.",
+        "laag2": "Niet stoppen maar een activiteit, proces of beweging voortzetten.",
+        "laag3": "Doorgaan betekent dat iets blijft gebeuren of wordt voortgezet richting een doel",
+        "laag4": "Het behouden van beweging of ontwikkeling ondanks obstakels."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, organisaties of systemen.",
+        "wat": "Het voortzetten van een activiteit, proces of beweging.",
+        "wanneer": "Na een beginpunt en voordat iets stopt.",
+        "waar": "Overal waar acties, processen of ontwikkelingen plaatsvinden.",
+        "waarom": "Om een doel te bereiken, iets af te maken of vooruitgang te boeken.",
+        "hoe": "Door te blijven handelen, bewegen of ontwikkelen."
+      },
+      "tags": [
+        "doorgaan",
+        "doorzetten",
+        "voortzetten",
+        "volhouden",
+        "beweging",
+        "ontwikkeling",
+        "proces",
+        "groei",
+        "motivatie",
+        "discipline",
+        "actie",
+        "doel",
+        "vooruitgang",
+        "volharding",
+        "inspanning",
+        "activiteit",
+        "continuïteit",
+        "vasthouden",
+        "doorwerken",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e96db3a0",
+          "begrip": "initiatief",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "actie",
+            "doel",
+            "doorzetten",
+            "emotie",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb188771",
+          "begrip": "activiteiten",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "activiteit",
+            "beweging",
+            "doel",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dcaf2f12",
+          "begrip": "motiveert",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "doel",
+            "doorzetten",
+            "emotie",
+            "groei"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ac08d46",
+          "begrip": "visie",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "groei",
+            "motivatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf4fb7bc",
+          "begrip": "groeien",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "groei",
+            "neutraal",
+            "ontwikkeling",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:03:11.930515+00:00",
+        "vorige_versie_v1": "kb-skel-f8d95315",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:00.416054+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:03:10.746666+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:03:10.760780+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:03:12.934220+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:03:12.947545+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:03:10.249194+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6dc5d44b",
+      "begrip": "verzorgen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verzorgen betekent aandacht geven aan iemands of iets' welzijn, gezondheid of behoeften.",
+        "laag2": "Verzorgen houdt in dat iemand zorgt voor onderhoud, ondersteuning, bescherming of herstel.",
+        "laag3": "Verzorgen kan betrekking hebben op mensen, dieren, planten, voorwerpen of omgevingen. Het omvat activiteiten zoals voeden, schoonmaken, begeleiden, beschermen, behandelen en ondersteunen. Verzorging draagt bij aan gezondheid, ontwikkeling, comfort en behoud.\n",
+        "laag4": "Verzorgen is het bewust uitvoeren van handelingen die gericht zijn op het welzijn, onderhoud of de ontwikkeling van een persoon, dier, object of omgeving.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, verzorgers, ouders, hulpverleners, dierenverzorgers en organisaties.",
+        "wat": "Het geven van zorg, aandacht, ondersteuning of onderhoud.",
+        "wanneer": "Wanneer welzijn, gezondheid, groei of behoud aandacht nodig heeft.",
+        "waar": "Thuis, in zorginstellingen, scholen, bedrijven, tuinen en andere leefomgevingen.",
+        "waarom": "Om gezondheid, veiligheid, comfort, ontwikkeling of behoud te bevorderen.",
+        "hoe": "Door te helpen, ondersteunen, voeden, beschermen, behandelen of onderhouden."
+      },
+      "tags": [
+        "verzorgen",
+        "verzorging",
+        "zorg",
+        "helpen",
+        "ondersteunen",
+        "beschermen",
+        "begeleiden",
+        "onderhouden",
+        "gezondheid",
+        "welzijn",
+        "aandacht",
+        "verzorgen",
+        "behandeling",
+        "voeding",
+        "hygiëne",
+        "ontwikkeling",
+        "behoud",
+        "verantwoordelijkheid",
+        "hulp",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6a93e38e",
+          "begrip": "zorg",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "hulp",
+            "neutraal",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e2a20efd",
+          "begrip": "behandeling",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "behandeling",
+            "blij",
+            "emotie",
+            "gezondheid",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d261ebd3",
+          "begrip": "ondersteunen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "hulp",
+            "neutraal",
+            "ondersteunen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "hulp",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5a2ab536",
+          "begrip": "groente",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "gezondheid",
+            "neutraal",
+            "verzorging"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:12:34.673127+00:00",
+        "vorige_versie_v1": "kb-skel-6dc5d44b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:14.064629+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:12:33.953835+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:12:34.015736+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:12:35.732986+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:12:35.746794+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:12:33.414070+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3d2b8110",
+      "begrip": "pakken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Pakken betekent iets vastnemen, grijpen of meenemen.",
+        "laag2": "Pakken is het verkrijgen van controle over een voorwerp, kans, situatie of persoon door een handeling uit te voeren.",
+        "laag3": "Het begrip pakken wordt zowel letterlijk als figuurlijk gebruikt. Letterlijk gaat het om het vastgrijpen of oppakken van een object. Figuurlijk kan het betekenen dat iemand een kans pakt, verantwoordelijkheid neemt of een doel bereikt. De betekenis draait steeds om het actief verkrijgen of in bezit nemen van iets.",
+        "laag4": "Pakken is het doelgericht verkrijgen, vastgrijpen of overnemen van een object, mogelijkheid, positie of situatie door middel van actie."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en soms machines.",
+        "wat": "Het grijpen, vastnemen of verkrijgen van iets.",
+        "wanneer": "Wanneer iets moet worden verplaatst, gebruikt, meegenomen of benut.",
+        "waar": "In dagelijkse handelingen, werk, sport, spel en sociale situaties.",
+        "waarom": "Om iets te gebruiken, verplaatsen, bezitten of benutten.",
+        "hoe": "Door fysieke actie, besluitvorming of doelgericht handelen."
+      },
+      "tags": [
+        "pakken",
+        "grijpen",
+        "vastnemen",
+        "oppakken",
+        "meenemen",
+        "verkrijgen",
+        "benutten",
+        "kans",
+        "actie",
+        "handelen",
+        "vasthouden",
+        "verplaatsen",
+        "controle",
+        "initiatief",
+        "bereiken",
+        "nemen",
+        "gebruiken",
+        "doelgericht",
+        "handeling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-63a5d91b",
+          "begrip": "nemen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "handeling",
+            "meenemen",
+            "nemen",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e96db3a0",
+          "begrip": "initiatief",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "initiatief",
+            "kans",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b58f3af5",
+          "begrip": "acties",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c97ad0a",
+          "begrip": "doen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1f0f86ae",
+          "begrip": "handelingen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:24:36.978088+00:00",
+        "vorige_versie_v1": "kb-skel-3d2b8110",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:37.285323+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:24:31.935247+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:24:31.948515+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:24:37.932800+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:24:37.946316+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:24:31.421463+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-boekhouder-acteur",
+      "begrip": "De Boekhouder",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "De Boekhouder is een actor binnen Spark die financiële gebeurtenissen registreert en rapporteert.",
+        "laag2": "De Boekhouder bewaakt geld-, token- en waardebewegingen tussen entiteiten en zorgt voor transparante registratie.",
+        "laag3": "De Boekhouder publiceert trade-events naar verschillende doelgroepen. Administratieve gegevens worden helder gerapporteerd aan beheerders, terwijl communityberichten begrijpelijk en toegankelijk worden gepresenteerd. Daarnaast bewaart de Boekhouder een volledige audit-trail van transacties, fees, beloningen en waardeverplaatsingen.\n",
+        "laag4": "Binnen het Spark Actor Systeem vertegenwoordigt De Boekhouder de financiële observatielaag. Door financiële logica te delegeren aan een gespecialiseerde actor blijft Spark zelf domein-onafhankelijk, terwijl transparantie, controleerbaarheid en historische verantwoording behouden blijven.\n"
+      },
+      "ws5": {
+        "wie": "De Boekhouder, Spark, beheerders, communityleden en gekoppelde entiteiten.",
+        "wat": "Een actor die financiële gebeurtenissen registreert, controleert en rapporteert.",
+        "wanneer": "Bij transacties, trades, tokenbewegingen, fees, beloningen en waardeveranderingen.",
+        "waar": "Binnen het Spark-ecosysteem en gekoppelde economische systemen.",
+        "waarom": "Om transparantie, controle, auditbaarheid en financiële verantwoording te waarborgen.",
+        "hoe": "Door transacties vast te leggen, audit-logs op te bouwen en gebeurtenissen te publiceren naar de juiste doelgroep."
+      },
+      "tags": [
+        "bboekhouder",
+        "actor",
+        "spark",
+        "financiën",
+        "trade",
+        "token",
+        "audit",
+        "logging",
+        "administratie",
+        "economie",
+        "wallet",
+        "fee",
+        "transacties",
+        "transparantie",
+        "rapportage",
+        "governance",
+        "monitoring",
+        "controle"
+      ],
+      "topic": "Persona/Acteurs",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e56bcc4d",
+          "begrip": "uitgaven",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "administratie",
+            "economie",
+            "financiën"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-58842b5a",
+          "begrip": "kasboek",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "administratie",
+            "financiën",
+            "transacties"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59f307c9",
+          "begrip": "Boekhouden",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "administratie",
+            "economie",
+            "financiën"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fcf453dc",
+          "begrip": "Boekhouding",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "administratie",
+            "economie",
+            "financiën"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b89797b",
+          "begrip": "morgen wil ik mijn administratie op orde brengen.",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "administratie",
+            "controle",
+            "financiën"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:39:51.734373+00:00",
+        "vorige_versie_v1": "kb-boekhouder-acteur",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:45.250445+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:39:36.737443+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:39:36.749379+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:39:52.744014+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:39:52.755942+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:39:36.251919+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/5c508385edd5"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e840ddf7",
+      "begrip": "klaar",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Klaar betekent dat iets is afgerond, voltooid of gereed voor gebruik.",
+        "laag2": "Iets is klaar wanneer het beoogde werk, proces of doel voldoende is voltooid.",
+        "laag3": "Het begrip klaar wordt gebruikt bij taken, projecten, producten, gebeurtenissen en persoonlijke activiteiten. Wat als klaar wordt beschouwd hangt af van de gestelde eisen, verwachtingen en context. Klaar betekent niet altijd perfect, maar wel dat aan de noodzakelijke voorwaarden is voldaan om verder te gaan of af te ronden.\n",
+        "laag4": "Klaar is een toestand waarin een activiteit, proces of ontwikkeling een niveau van voltooiing heeft bereikt dat verdere uitvoering niet direct noodzakelijk maakt.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, teams, organisaties, systemen en processen.",
+        "wat": "Een toestand van voltooiing of gereedheid.",
+        "wanneer": "Wanneer een taak, doel of proces voldoende is afgerond.",
+        "waar": "In werk, onderwijs, projecten, productie en het dagelijks leven.",
+        "waarom": "Om aan te geven dat een gewenste uitkomst is bereikt of dat iets gereed is voor de volgende stap.",
+        "hoe": "Door werkzaamheden, handelingen of processen succesvol af te ronden."
+      },
+      "tags": [
+        "klaar",
+        "voltooid",
+        "afgerond",
+        "gereed",
+        "afgemaakt",
+        "beëindigd",
+        "voltooiing",
+        "resultaat",
+        "doel",
+        "prestatie",
+        "gereedheid",
+        "afronden",
+        "succesvol",
+        "afwerking",
+        "eindpunt",
+        "proces",
+        "ontwikkeling",
+        "taak",
+        "project",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96180cc8",
+          "begrip": "uitgevoerd",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "afgerond",
+            "neutraal",
+            "proces",
+            "resultaat",
+            "taak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13f67b4e",
+          "begrip": "Gereed",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "gereed",
+            "klaar",
+            "proces",
+            "resultaat",
+            "voltooid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a4096d6",
+          "begrip": "productiviteit",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "neutraal",
+            "ontwikkeling",
+            "prestatie",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4dc20127",
+          "begrip": "gedaan",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "afgerond",
+            "doel",
+            "neutraal",
+            "proces",
+            "voltooiing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a7447e6f",
+          "begrip": "resultaten",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "neutraal",
+            "prestatie",
+            "proces",
+            "resultaat"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:49:09.376497+00:00",
+        "vorige_versie_v1": "kb-skel-e840ddf7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:31.974759+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:49:08.733920+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:49:08.746591+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:49:10.353495+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:49:10.410279+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:49:08.259849+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-993bd9d8",
+      "begrip": "geboren",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Geboren betekent dat een levend wezen het begin van zijn leven buiten de moeder bereikt.",
+        "laag2": "Geboorte markeert het moment waarop een nieuw individu zelfstandig deel gaat uitmaken van de wereld.",
+        "laag3": "Geboren worden is een biologisch proces waarbij een mens of dier vanuit de moeder in een zelfstandige levensfase komt. Het begrip wordt ook figuurlijk gebruikt voor het ontstaan van ideeën, organisaties, projecten of ontwikkelingen. Geboorte wordt vaak gezien als het beginpunt van een levensloop of bestaansgeschiedenis.\n",
+        "laag4": "Geboren beschrijft de overgang van ontstaan naar zelfstandig bestaan, waarbij een nieuw organisme, systeem of ontwikkeling een herkenbaar beginpunt bereikt.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en figuurlijk ook ideeën, organisaties en projecten.",
+        "wat": "Het begin van een nieuw zelfstandig bestaan.",
+        "wanneer": "Op het moment van geboorte of ontstaan.",
+        "waar": "In een biologische omgeving of figuurlijk binnen een ontwikkeling of proces.",
+        "waarom": "Omdat nieuw leven of een nieuwe ontwikkeling ontstaat en zichtbaar wordt.",
+        "hoe": "Door geboorte, creatie, vorming of het ontstaan van een nieuw geheel."
+      },
+      "tags": [
+        "geboren",
+        "geboorte",
+        "leven",
+        "ontstaan",
+        "begin",
+        "start",
+        "baby",
+        "kind",
+        "mens",
+        "dier",
+        "ontwikkeling",
+        "levensloop",
+        "oorsprong",
+        "creatie",
+        "vorming",
+        "bestaan",
+        "nieuw",
+        "levensbegin",
+        "groei",
+        "ontstaan"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "geboorte",
+            "leven",
+            "mens",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e2137213",
+          "begrip": "oorsprong",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "begin",
+            "ontstaan",
+            "ontwikkeling",
+            "oorsprong",
+            "start"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-223c88a1",
+          "begrip": "creatie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "begin",
+            "creatie",
+            "ontstaan",
+            "ontwikkeling",
+            "start"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7134aeb5",
+          "begrip": "kinderen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "groei",
+            "kind",
+            "mens",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7657df14",
+          "begrip": "Baby",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "geboorte",
+            "kind",
+            "mens",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:50:42.840461+00:00",
+        "vorige_versie_v1": "snap-6d0f7c2d",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-03T16:56:07.729307+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:50:40.247089+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:50:40.765642+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:50:40.813005+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:50:43.923505+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:50:43.935099+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e6b6d202",
+      "begrip": "wachten",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Wachten betekent dat iemand of iets tijdelijk geen actie onderneemt totdat een gebeurtenis of moment plaatsvindt.",
+        "laag2": "Tijdens het wachten wordt tijd overbrugd totdat een doel, persoon, signaal of situatie beschikbaar is.",
+        "laag3": "Wachten komt voor in het dagelijks leven, communicatie, werk, verkeer en technische systemen. Het kan bewust of onvrijwillig zijn. Tijdens het wachten wordt vaak uitgekeken naar een verandering, beslissing, reactie of gebeurtenis. De ervaring van wachten kan variëren van rustig en geduldig tot ongeduldig en frustrerend.\n",
+        "laag4": "Wachten is een toestand van tijdelijke inactiviteit of uitgestelde actie waarbij wordt uitgezien naar een toekomstige gebeurtenis, voorwaarde of mogelijkheid voordat verdere handelingen plaatsvinden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, organisaties en systemen.",
+        "wat": "Het tijdelijk uitstellen van actie totdat iets gebeurt.",
+        "wanneer": "Wanneer een gebeurtenis, reactie, tijdstip of voorwaarde nog niet beschikbaar is.",
+        "waar": "In het dagelijks leven, werk, verkeer, communicatie en processen.",
+        "waarom": "Omdat een volgende stap afhankelijk is van een gebeurtenis, beslissing of beschikbaarheid.",
+        "hoe": "Door tijd te overbruggen zonder de gewenste actie direct uit te voeren."
+      },
+      "tags": [
+        "wachten",
+        "geduld",
+        "afwachten",
+        "vertraging",
+        "tijd",
+        "verwachting",
+        "pauze",
+        "rust",
+        "uitstel",
+        "reactie",
+        "gebeurtenis",
+        "beschikbaarheid",
+        "proces",
+        "planning",
+        "voorbereiding",
+        "onzekerheid",
+        "observatie",
+        "wachttijd",
+        "moment",
+        "geduld",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "geduld",
+            "neutraal",
+            "reactie",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5f415b05",
+          "begrip": "afwachten",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "afwachten",
+            "geduld",
+            "neutraal",
+            "observatie",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f5f6eda5",
+          "begrip": "afwachtend",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "neutraal",
+            "observatie",
+            "onzekerheid",
+            "rust",
+            "verwachting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b999a5d6",
+          "begrip": "straks",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "tijd",
+            "uitstel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff2554fe",
+          "begrip": "later",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "planning",
+            "proces",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:53:11.422940+00:00",
+        "vorige_versie_v1": "kb-skel-e6b6d202",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:03.784647+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:53:10.441342+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:53:10.528949+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:53:12.430994+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:53:12.443623+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:53:09.834884+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-043ba9c4",
+      "begrip": "toezicht",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Toezicht is het controleren, volgen of bewaken van mensen, activiteiten of systemen.",
+        "laag2": "Toezicht helpt ervoor te zorgen dat regels, afspraken en processen correct worden nageleefd.",
+        "laag3": "Toezicht komt voor in onderwijs, zorg, werk, verkeer, overheid en technologie. Het kan worden uitgevoerd door personen, organisaties of geautomatiseerde systemen. Het doel van toezicht is vaak het bevorderen van veiligheid, kwaliteit, verantwoordelijkheid en naleving van afspraken. De mate van toezicht kan variëren van lichte observatie tot intensieve controle.\n",
+        "laag4": "Toezicht is een proces van observatie, controle en beoordeling waarmee gedrag, activiteiten of systemen worden gevolgd om veiligheid, kwaliteit, naleving en stabiliteit te waarborgen.\n"
+      },
+      "ws5": {
+        "wie": "Toezichthouders, ouders, leraren, hulpverleners, organisaties, overheden en systemen.",
+        "wat": "Het bewaken, observeren en controleren van gedrag, processen of activiteiten.",
+        "wanneer": "Wanneer veiligheid, kwaliteit, naleving of verantwoordelijkheid belangrijk zijn.",
+        "waar": "In scholen, bedrijven, zorginstellingen, openbare ruimtes, verkeer en digitale systemen.",
+        "waarom": "Om risico's te beperken, regels na te leven en gewenste resultaten te ondersteunen.",
+        "hoe": "Door observatie, controle, rapportage, begeleiding en evaluatie."
+      },
+      "tags": [
+        "toezicht",
+        "controle",
+        "bewaking",
+        "observatie",
+        "monitoring",
+        "begeleiding",
+        "veiligheid",
+        "verantwoordelijkheid",
+        "naleving",
+        "regels",
+        "afspraken",
+        "toezicht houden",
+        "kwaliteit",
+        "evaluatie",
+        "organisatie",
+        "inspectie",
+        "handhaving",
+        "beheer",
+        "bescherming",
+        "emotie",
+        "rustig",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f5bd2d1c",
+          "begrip": "check",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "inspectie",
+            "kwaliteit",
+            "monitoring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f38f1b98",
+          "begrip": "betrouwbaar",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "afspraken",
+            "emotie",
+            "kwaliteit",
+            "rustig",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-976db1ee",
+          "begrip": "bedrijfsleider",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "kwaliteit",
+            "neutraal",
+            "organisatie",
+            "toezicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4c6931a1",
+          "begrip": "verplichting",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "afspraken",
+            "controle",
+            "emotie",
+            "neutraal",
+            "regels"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9e2ba57c",
+          "begrip": "bestuur",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "emotie",
+            "neutraal",
+            "organisatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:57:03.900317+00:00",
+        "vorige_versie_v1": "kb-skel-043ba9c4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.621393+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:57:02.439746+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:57:02.454719+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:57:05.031080+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:57:05.057182+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:57:01.903561+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ]
 }

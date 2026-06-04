@@ -1,5 +1,38 @@
 # Spark Core 2.0 — PRD
 
+## Merge productie → preview (2026-06-04, sessie 27)
+
+### 📥 Data-merge uit productie-backup
+- ZIP: `spark_backup_changes_20260604_160152.zip` (60 files, 45.7 MB)
+- **Backup** preview-staat → `/app/backend/data/_backups/pre_prod_merge_20260604_160547/` (86 files)
+- **56 overschreven** + **4 nieuw aangemaakt** = 60/60 succesvol gemerged
+
+### Belangrijkste wijzigingen (gebracht uit productie naar preview)
+- **KB v2 nieuwe kaarten (12)**: Jan, bank, Bank medewerker, medewerker, bedrijfsleider, personeel, schedel, skeletstelsel, Benizinepomp, stroever, voelt, "Waarom voelt het stroever?"
+- **64 inbox-kaarten ingevuld + ingedeeld** (woont, kopen, volgen, initiatief, De Boekhouder, Spakman, brandweer, Joy, Wouter, neefjes, hersenen, etc.)
+- **1 kaart verplaatst** zonder edit: adel (inbox → weten)
+
+### Eindstand KB v2 na merge
+- Voelen: 392 · Spreken: 493 · Weten: 1413 · Doen: 874 · Inbox: 2228 · **Totaal: 5400**
+
+### Andere gemergde data
+- chat_sessions, community/messages, users.json, intent_log, login_counters
+- accounting/transactions, roar/balances + price_snapshots, financial/user_potjes
+- wallet/trade_history/user-001, dnd/characters/user-9aa6d874
+- games/rps/stats, system_archive (incl. foto's), audit_log
+- emotions pipeline_shadow + pipeline_ab van 4 juni
+- graph/nodes + edges (refresh), personality/spark_vocab (1.5MB)
+- shadow stats + events 4 juni
+- system/logs voor 4 juni (auth, chat, barks, kb_v2, kbv2_hooks)
+
+### Verificatie (curl via REACT_APP_BACKEND_URL)
+- `lookup/stroever` → kbv2-8c1f60dc met laag1 ✓
+- `lookup/Joy` → kbv2-266152ea met laag1 ✓
+- KB v2 stats endpoint: 5400 totaal ✓
+
+---
+
+
 ## Completed (2026-06-04 — sessie 27 — KB Unificatie: snap_service leest direct uit V2)
 
 ### 🧠 v6_kbv2_unify_snap_001 — KB v1→v2 single source of truth

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 489,
+    "card_count": 493,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T17:24:19.646861+00:00",
+    "last_updated": "2026-06-04T15:16:40.940883+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -63389,6 +63389,352 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-03T08:15:47.298184+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2b90d9cd",
+      "begrip": "compliment",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een compliment is een positieve opmerking waarmee waardering of erkenning wordt gegeven.",
+        "laag2": "Mensen geven complimenten om waardering uit te spreken voor gedrag, prestaties, eigenschappen of inspanningen.",
+        "laag3": "Een compliment versterkt vaak positieve gevoelens, motivatie en sociale verbinding. Complimenten kunnen gaan over wat iemand doet, bereikt of wie iemand is. Ze spelen een belangrijke rol in communicatie, opvoeding, onderwijs, werk en relaties. De waarde van een compliment hangt vaak af van oprechtheid en context.",
+        "laag4": "Een compliment is een uiting van positieve waardering die erkenning geeft aan een persoon, eigenschap, handeling of resultaat."
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en systemen.",
+        "wat": "Een positieve uiting van waardering of erkenning.",
+        "wanneer": "Wanneer iets wordt gewaardeerd, bewonderd of positief beoordeeld.",
+        "waar": "In gesprekken, relaties, onderwijs, werk en sociale situaties.",
+        "waarom": "Om waardering te tonen, motivatie te versterken en verbinding te bevorderen.",
+        "hoe": "Door positieve woorden, feedback, gebaren of erkenning te geven."
+      },
+      "tags": [
+        "compliment",
+        "waardering",
+        "erkenning",
+        "positief",
+        "lof",
+        "bewondering",
+        "respect",
+        "feedback",
+        "motivatie",
+        "aanmoediging",
+        "waarderen",
+        "prestatie",
+        "eigenschap",
+        "succes",
+        "verbinding",
+        "communicatie",
+        "sociaal",
+        "vriendelijkheid",
+        "dankbaarheid",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "erkenning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "erkenning",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bewondering",
+            "blij",
+            "communicatie",
+            "compliment",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "erkenning",
+            "feedback"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T14:25:02.464906+00:00",
+        "vorige_versie_v1": "kb-skel-2b90d9cd",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.238670+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T14:25:01.648736+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T14:25:01.705313+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T14:25:03.344786+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T14:25:03.398989+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T14:25:01.182430+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e2c7d584",
+      "begrip": "overdreven",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Overdreven betekent dat iets groter, sterker of belangrijker wordt voorgesteld dan het werkelijk is.",
+        "laag2": "Iets is overdreven wanneer de beschrijving, reactie of voorstelling niet in verhouding staat tot de werkelijkheid.",
+        "laag3": "Overdrijving wordt gebruikt in taal, verhalen, emoties en meningen. Soms gebeurt dit bewust om nadruk te leggen of humor te creëren, maar het kan ook onbewust ontstaan door sterke gevoelens of een vertekende waarneming. Wat als overdreven wordt gezien, hangt vaak af van de context en het perspectief van de betrokkenen.\n",
+        "laag4": "Overdreven beschrijft een situatie waarin een eigenschap, gebeurtenis of reactie buiten proportie wordt weergegeven ten opzichte van de feitelijke werkelijkheid.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, media, organisaties en systemen.",
+        "wat": "Een voorstelling of reactie die groter of sterker is dan de werkelijkheid.",
+        "wanneer": "Wanneer feiten, gevoelens of gebeurtenissen buiten proportie worden weergegeven.",
+        "waar": "In communicatie, verhalen, emoties, media en dagelijkse situaties.",
+        "waarom": "Om nadruk te leggen, aandacht te trekken, te overtuigen of door een vertekende inschatting.",
+        "hoe": "Door eigenschappen, gevolgen, gevoelens of gebeurtenissen sterker voor te stellen dan ze zijn."
+      },
+      "tags": [
+        "overdreven",
+        "overdrijving",
+        "buitenproportioneel",
+        "uitvergroten",
+        "benadrukken",
+        "vergroten",
+        "overmatig",
+        "extreem",
+        "reactie",
+        "emotie",
+        "communicatie",
+        "verhaal",
+        "mening",
+        "perspectief",
+        "waarneming",
+        "interpretatie",
+        "nadruk",
+        "verhouding",
+        "context",
+        "emotie",
+        "neutraal",
+        "bang",
+        "boos"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "communicatie",
+            "context",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4b5f83b4",
+          "begrip": "emotieverwerking",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "context",
+            "emotie",
+            "interpretatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T15:16:40.940840+00:00",
+        "vorige_versie_v1": "kb-skel-e2c7d584",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:26.054808+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:16:40.223611+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:16:40.237452+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T15:16:41.720648+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T15:16:41.735229+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T15:16:39.735030+00:00"
       },
       "media": {
         "voice_url": null,

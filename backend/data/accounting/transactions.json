@@ -1,5 +1,33 @@
 {
-  "transactions": [],
+  "transactions": [
+    {
+      "id": "0a3872d5-1f9a-4a6e-bf82-9575f4a8fe7b",
+      "type": "income",
+      "category": "Donations",
+      "amount": 19.57,
+      "description": "Storting auto-detect via deposit_watcher (Bitvavo EUR €1.17→€20.74)",
+      "entity_id": "spark_core",
+      "date": "2026-06-04T11:14:38.498534+00:00",
+      "btw_percentage": 0,
+      "btw_amount": 0,
+      "created_at": "2026-06-04T11:14:38.498534+00:00",
+      "source": "deposit_watcher"
+    },
+    {
+      "id": "22b1dded-cb51-45d6-bb61-74c984f9b6f3",
+      "type": "income",
+      "category": "Crypto Profit",
+      "amount": 0.05,
+      "description": "Trade WINST BCH-EUR: De Willem sloot positie (€10.00 → €10.05)",
+      "entity_id": "spark_core",
+      "date": "2026-06-04T12:51:50.840609+00:00",
+      "btw_percentage": 0.0,
+      "btw_amount": 0,
+      "created_at": "2026-06-04T12:51:50.840609+00:00",
+      "tx_ref": "trade_result_sell_pot-001_1780577510.840375",
+      "source": "auto_hook"
+    }
+  ],
   "_cleared_at": "2026-06-03T14:02:40.643985+00:00",
   "_cleared_by": "user-001"
 }

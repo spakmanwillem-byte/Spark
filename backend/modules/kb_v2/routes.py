@@ -58,6 +58,48 @@ async def admin_dedupe_inbox(dry_run: bool = False):
     return service.dedupe_inbox(dry_run=dry_run)
 
 
+# v6_kbv2_text_importer_001 — Bulk import van rijke txt-kaarten
+class TextImportBody(BaseModel):
+    text: str
+    user_id: str = "user-001"
+    overwrite_existing: bool = False
+    dry_run: bool = False
+
+
+@router.post("/admin/import-text")
+async def admin_import_text(body: TextImportBody):
+    """Parse rijke txt-dump (zoals jouw verlorenkaarten.txt) en voeg kaarten toe
+    aan KB v1 + KB v2. Idempotent — slaat bestaande gevulde kaarten over tenzij
+    overwrite_existing=true.
+
+    Format ondersteund (auto-detect):
+      Begrip-titel → Laag 1..4 → 5W (Wie/Wat/...) → Tags → Lade → Emotie → Kernzin
+    """
+    from .text_importer import parse_text_to_cards, apply_cards_to_kb
+    cards = parse_text_to_cards(body.text)
+    if body.dry_run:
+        return {
+            "success": True,
+            "dry_run": True,
+            "parsed_count": len(cards),
+            "preview": [
+                {"begrip": c["begrip"], "lade": c["lade"], "emotie": c["emotie"],
+                 "has_lagen": [k for k, v in c["lagen"].items() if v],
+                 "tag_count": len(c["tags"])}
+                for c in cards
+            ],
+        }
+    summary = apply_cards_to_kb(cards, user_id=body.user_id,
+                                overwrite_existing=body.overwrite_existing)
+    # Invalidate snap-cache zodat chat de nieuwe kaarten direct ziet
+    try:
+        from modules.chat.snap_service import SnapService
+        SnapService().invalidate_cache()
+    except Exception:
+        pass
+    return {"success": True, **summary, "parsed_count": len(cards)}
+
+
 @router.get("/lade/{lade}")
 async def get_lade(lade: str,
                    limit: int = Query(50, ge=1, le=500),

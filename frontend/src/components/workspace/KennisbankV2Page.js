@@ -43,6 +43,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [reasonFilter, setReasonFilter] = useState('');
   // v6_kbv2_priority_001 — Top 50 prio modus
   const [priorityMode, setPriorityMode] = useState(false);
+  // v6_kbv2_text_importer_001 — bulk-import modal state
+  const [showImporter, setShowImporter] = useState(false);
   const [priorityMeta, setPriorityMeta] = useState(null);
   const [page, setPage] = useState(0);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -418,6 +420,13 @@ export function KennisbankV2Page({ onNavigate }) {
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
               <RefreshCw className="w-3.5 h-3.5" /> Verversen
             </button>
+            {/* v6_kbv2_text_importer_001 — Bulk import knop */}
+            <button
+              data-testid="kbv2-import-text-btn"
+              onClick={() => setShowImporter(true)}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-sky-500/40 text-sky-300 hover:bg-sky-500/10 flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5" /> Importeer txt
+            </button>
           </div>
         </div>
 
@@ -589,8 +598,116 @@ export function KennisbankV2Page({ onNavigate }) {
         )}
         </>
         )}
+
+      {/* v6_kbv2_text_importer_001 — Bulk-import modal */}
+      {showImporter && (
+        <TextImporterModal
+          onClose={() => setShowImporter(false)}
+          onSuccess={() => { setShowImporter(false); loadStats(); loadItems(); }}
+        />
+      )}
       </div>
     </MainLayout>
+  );
+}
+
+// v6_kbv2_text_importer_001 — modal voor bulk-tekst-import
+function TextImporterModal({ onClose, onSuccess }) {
+  const [text, setText] = useState('');
+  const [dryRun, setDryRun] = useState(true);
+  const [overwrite, setOverwrite] = useState(false);
+  const [result, setResult] = useState(null);
+  const [busy, setBusy] = useState(false);
+
+  const run = async () => {
+    setBusy(true);
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/kb/v2/admin/import-text`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, dry_run: dryRun, overwrite_existing: overwrite }),
+      });
+      const data = await res.json();
+      setResult(data);
+      if (!dryRun && data.success) {
+        setTimeout(() => { onSuccess(); }, 1500);
+      }
+    } catch (err) {
+      setResult({ error: String(err) });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" data-testid="kbv2-importer-modal">
+      <div className="bg-slate-900 border border-sky-500/40 rounded-xl p-5 max-w-3xl w-full mx-4 max-h-[90vh] flex flex-col">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-lg font-semibold text-white">Bulk import — txt-kaarten</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-white" data-testid="kbv2-importer-close"><X className="w-5 h-5" /></button>
+        </div>
+        <p className="text-xs text-slate-400 mb-3">
+          Plak rijke kaart-dumps (Begrip → Laag 1..4 → 5W → Tags → Lade → Emotie). Parser detecteert auto en
+          slaat over wat al gevuld is. Klik eerst <strong>dry-run</strong> om te zien wat hij vindt.
+        </p>
+        <textarea
+          data-testid="kbv2-importer-text"
+          value={text}
+          onChange={e => setText(e.target.value)}
+          placeholder="Plak hier de txt-inhoud..."
+          className="w-full h-56 bg-slate-950 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 font-mono mb-3"
+        />
+        <div className="flex flex-wrap gap-3 mb-3 text-xs text-slate-300">
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" checked={dryRun} onChange={e => setDryRun(e.target.checked)} className="accent-sky-500" data-testid="kbv2-importer-dryrun" />
+            Dry-run (alleen tonen, niets opslaan)
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" checked={overwrite} onChange={e => setOverwrite(e.target.checked)} className="accent-rose-500" data-testid="kbv2-importer-overwrite" />
+            Overschrijf bestaande (gevulde) kaarten
+          </label>
+        </div>
+        <div className="flex gap-2 mb-3">
+          <button
+            data-testid="kbv2-importer-run"
+            onClick={run}
+            disabled={!text.trim() || busy}
+            className="px-4 py-2 rounded-lg text-sm bg-sky-500/20 text-sky-200 border border-sky-500/40 hover:bg-sky-500/30 disabled:opacity-40"
+          >
+            {busy ? 'Bezig...' : (dryRun ? 'Test parse' : 'Importeer nu')}
+          </button>
+          <button onClick={onClose} className="px-4 py-2 rounded-lg text-sm text-slate-300 bg-slate-800 hover:bg-slate-700">
+            Annuleer
+          </button>
+        </div>
+        {result && (
+          <div className="bg-slate-950/60 border border-slate-800 rounded-lg p-3 text-xs text-slate-200 overflow-auto max-h-64" data-testid="kbv2-importer-result">
+            {result.error && <p className="text-rose-400">Fout: {result.error}</p>}
+            {result.parsed_count !== undefined && (
+              <>
+                <p className="mb-2">📦 <strong>{result.parsed_count}</strong> kaarten gevonden{result.dry_run ? ' (dry-run)' : ''}</p>
+                {!result.dry_run && (
+                  <p className="mb-2 text-emerald-300">
+                    ✓ v2 toegevoegd: {result.added_v2} · v1 toegevoegd: {result.added_v1} · v1 bijgewerkt: {result.updated_v1} · overgeslagen: {result.skipped}
+                  </p>
+                )}
+                <ul className="space-y-0.5">
+                  {(result.preview || result.details || []).slice(0, 50).map((p, i) => (
+                    <li key={i} className="text-[10.5px] text-slate-400">
+                      • {p.begrip || JSON.stringify(p)}
+                      {p.lade && <span className="text-sky-400"> → {p.lade}</span>}
+                      {p.emotie && <span className="text-purple-400"> ({p.emotie})</span>}
+                      {p.v2_action && <span className="text-amber-400"> [{p.v2_action}]</span>}
+                      {p.reason && <span className="text-rose-400"> ⓘ {p.reason}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

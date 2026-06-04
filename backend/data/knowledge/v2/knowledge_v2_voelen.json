@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 393,
+    "card_count": 398,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T16:50:32.427578+00:00",
+    "last_updated": "2026-06-04T18:50:54.401293+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -53189,6 +53189,874 @@
         ]
       },
       "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b4da7aba",
+      "begrip": "somber",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Somber betekent dat iemand zich verdrietig, neerslachtig of weinig opgewekt voelt.",
+        "laag2": "Een sombere stemming gaat vaak gepaard met minder energie, minder enthousiasme en een gevoel van zwaarte.",
+        "laag3": "Somberheid is een emotionele toestand die kan ontstaan door teleurstelling, verlies, zorgen, stress, eenzaamheid of moeilijke omstandigheden. De intensiteit kan variëren van lichte neerslachtigheid tot een diep gevoel van verdriet. Somberheid is een normale menselijke emotie die vaak tijdelijk is en kan veranderen door gebeurtenissen, steun of tijd.\n",
+        "laag4": "Somber beschrijft een emotionele toestand waarin positieve gevoelens verminderd aanwezig zijn en gevoelens van verdriet, zwaarte of neerslachtigheid de beleving beïnvloeden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen van alle leeftijden.",
+        "wat": "Een emotionele toestand van verdriet of neerslachtigheid.",
+        "wanneer": "Bij verlies, teleurstelling, stress, zorgen of moeilijke omstandigheden.",
+        "waar": "In persoonlijke ervaringen, relaties, werk, school en het dagelijks leven.",
+        "waarom": "Omdat emoties reageren op gebeurtenissen, gedachten en omstandigheden.",
+        "hoe": "Door gevoelens van verdriet, zwaarte, leegte of verminderde motivatie te ervaren."
+      },
+      "tags": [
+        "somber",
+        "verdrietig",
+        "neerslachtig",
+        "bedroefd",
+        "emotie",
+        "gevoel",
+        "teleurstelling",
+        "verlies",
+        "stress",
+        "zorgen",
+        "eenzaamheid",
+        "stemming",
+        "melancholie",
+        "verdriet",
+        "motivatie",
+        "welzijn",
+        "mentaal",
+        "gevoelens",
+        "zwaarmoedig",
+        "emotie",
+        "bedroefd"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c1f016d2",
+          "begrip": "down",
+          "lade": "voelen",
+          "overlap": 16,
+          "shared_tags": [
+            "bedroefd",
+            "eenzaamheid",
+            "emotie",
+            "gevoel",
+            "gevoelens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d7b700b",
+          "begrip": "neerslachtig",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "bedroefd",
+            "eenzaamheid",
+            "emotie",
+            "gevoelens",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8af2fbf4",
+          "begrip": "verdrietig",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedroefd",
+            "eenzaamheid",
+            "emotie",
+            "gevoel",
+            "somber"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoelens",
+            "motivatie",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf66c3a6",
+          "begrip": "waar wordt jij verdrietig van",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "somber",
+            "verdriet"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T18:21:23.434456+00:00",
+        "vorige_versie_v1": "kb-skel-b4da7aba",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.490859+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:21:22.723987+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:21:22.733838+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 16
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:21:24.145751+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:21:24.154635+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 16
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T18:21:22.204242+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-028cb626",
+      "begrip": "warm",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Warm betekent dat iets een aangename of hoge temperatuur heeft.",
+        "laag2": "Warm kan verwijzen naar temperatuur, maar ook naar gevoelens van vriendelijkheid, genegenheid of verbondenheid.",
+        "laag3": "Warmte wordt waargenomen wanneer een voorwerp, omgeving of lichaam meer warmte-energie bevat dan de directe omgeving. Daarnaast wordt warm vaak figuurlijk gebruikt om positieve sociale eigenschappen te beschrijven, zoals een warme persoonlijkheid, een warme ontvangst of een warme sfeer. Hierdoor heeft het begrip zowel een fysieke als emotionele betekenis.\n",
+        "laag4": "Warm beschrijft een toestand waarin temperatuur of sociale beleving wordt ervaren als aangenaam, uitnodigend of boven een neutraal niveau van energie of betrokkenheid.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, voorwerpen, omgevingen en sociale groepen.",
+        "wat": "Een toestand van verhoogde temperatuur of positieve gevoelsmatige betrokkenheid.",
+        "wanneer": "Wanneer warmte wordt waargenomen of wanneer vriendelijkheid en verbondenheid worden ervaren.",
+        "waar": "In het lichaam, de natuur, gebouwen, relaties en sociale situaties.",
+        "waarom": "Door warmte-energie, lichamelijke processen of positieve sociale interacties.",
+        "hoe": "Door overdracht van warmte of door gedrag dat zorg, aandacht en verbondenheid uitstraalt."
+      },
+      "tags": [
+        "warm",
+        "warmte",
+        "temperatuur",
+        "heet",
+        "aangenaam",
+        "comfort",
+        "gezellig",
+        "vriendelijk",
+        "zorgzaam",
+        "verbondenheid",
+        "sfeer",
+        "energie",
+        "lichaam",
+        "omgeving",
+        "gevoel",
+        "welzijn",
+        "ontvangst",
+        "genegenheid",
+        "sociaal",
+        "emotie",
+        "blij",
+        "comfortabel"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1ef01b9b",
+          "begrip": "vriendelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "sociaal",
+            "verbondenheid",
+            "vriendelijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a07a1351",
+          "begrip": "fijn",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "aangenaam",
+            "blij",
+            "comfort",
+            "emotie",
+            "gevoel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39b62f77",
+          "begrip": "Zacht",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "aangenaam",
+            "blij",
+            "comfort",
+            "comfortabel",
+            "vriendelijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "energie",
+            "sfeer",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f1c65b0a",
+          "begrip": "ik ben zo blij met je. jij motiveert mij om bezig te zijn.",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "energie",
+            "sociaal",
+            "verbondenheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T18:22:45.738854+00:00",
+        "vorige_versie_v1": "kb-skel-028cb626",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.086322+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:22:44.625899+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:22:44.635332+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:22:46.504902+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:22:46.513366+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T18:22:44.141080+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a1e1689c",
+      "begrip": "stemming",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Stemming is de emotionele toestand of sfeer die iemand, een groep of een situatie kenmerkt.",
+        "laag2": "Een stemming beïnvloedt hoe mensen denken, voelen en reageren gedurende een bepaalde periode.",
+        "laag3": "Stemmingen kunnen positief, negatief of neutraal zijn en duren vaak langer dan een kortdurende emotie. Voorbeelden zijn vrolijkheid, somberheid, rust, spanning of enthousiasme. Het woord stemming wordt ook gebruikt voor een officiële keuzeprocedure waarbij mensen stemmen uitbrengen over een voorstel, persoon of beslissing.\n",
+        "laag4": "Stemmingen kunnen positief, negatief of neutraal zijn en duren vaak langer dan een kortdurende emotie. Voorbeelden zijn vrolijkheid, somberheid, rust, spanning of enthousiasme. Het woord stemming wordt ook gebruikt voor een officiële keuzeprocedure waarbij mensen stemmen uitbrengen over een voorstel, persoon of beslissing.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en gemeenschappen.",
+        "wat": "Een emotionele toestand, sfeer of keuzeproces.",
+        "wanneer": "Tijdens gevoelens, sociale situaties of besluitvormingsprocessen.",
+        "waar": "In het dagelijks leven, werk, politiek, organisaties en sociale groepen.",
+        "waarom": "Omdat emoties invloed hebben op gedrag en omdat groepen soms gezamenlijk beslissingen moeten nemen.",
+        "hoe": "Door gevoelens, omstandigheden, ervaringen of door het uitbrengen van stemmen."
+      },
+      "tags": [
+        "stemming",
+        "emotie",
+        "gevoel",
+        "sfeer",
+        "gemoedstoestand",
+        "humeur",
+        "vrolijk",
+        "somber",
+        "enthousiast",
+        "gespannen",
+        "rustig",
+        "beleving",
+        "gedrag",
+        "sociale interactie",
+        "stemming maken",
+        "keuze",
+        "besluitvorming",
+        "stemmen",
+        "verkiezing",
+        "oordeel",
+        "emotie",
+        "neutraal",
+        "blij",
+        "boos",
+        "bedroefd",
+        "bang"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 11,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "beleving",
+            "blij",
+            "boos"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "beleving",
+            "blij",
+            "boos"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96055b6a",
+          "begrip": "Gevoelens",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "blij",
+            "boos",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T18:46:40.192475+00:00",
+        "vorige_versie_v1": "kb-skel-a1e1689c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:02.408961+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:46:38.706036+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:46:38.718497+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:46:41.009272+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:46:41.019994+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T18:46:38.164221+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7a0a2d32",
+      "begrip": "vreugde",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vreugde is een sterk gevoel van blijdschap, geluk of plezier.",
+        "laag2": "Vreugde ontstaat wanneer iemand iets positiefs, waardevols of wenselijks ervaart.",
+        "laag3": "Vreugde is een positieve emotie die kan ontstaan door succes, liefde, vriendschap, plezier, dankbaarheid, verbondenheid of het bereiken van een doel. Vreugde kan kortdurend zijn, zoals bij een leuke gebeurtenis, maar ook langdurig aanwezig zijn als gevoel van geluk en tevredenheid. Het versterkt vaak sociale verbindingen en welzijn.\n",
+        "laag4": "Vreugde is een positieve emotionele toestand die wordt gekenmerkt door gevoelens van geluk, tevredenheid, enthousiasme en waardering als reactie op betekenisvolle of plezierige ervaringen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en sommige diersoorten.",
+        "wat": "Een sterke positieve emotie van geluk en blijdschap.",
+        "wanneer": "Bij prettige gebeurtenissen, successen, verbinding of het vervullen van wensen.",
+        "waar": "In persoonlijke ervaringen, relaties, werk, spel, vieringen en het dagelijks leven.",
+        "waarom": "Omdat positieve ervaringen en betekenisvolle gebeurtenissen gevoelens van geluk oproepen.",
+        "hoe": "Door emotionele reacties op situaties die als waardevol, prettig of wenselijk worden ervaren."
+      },
+      "tags": [
+        "vreugde",
+        "blijheid",
+        "geluk",
+        "blijdschap",
+        "enthousiasme",
+        "tevredenheid",
+        "plezier",
+        "genieten",
+        "vreugdevol",
+        "euforie",
+        "waardering",
+        "dankbaarheid",
+        "verbondenheid",
+        "succes",
+        "vieren",
+        "emotie",
+        "gevoel",
+        "welzijn",
+        "positiviteit",
+        "lach",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-66e253db",
+          "begrip": "Happy",
+          "lade": "voelen",
+          "overlap": 11,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gevoel",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e7bd2cf1",
+          "begrip": "dankbaarheid",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "dankbaarheid",
+            "emotie",
+            "geluk",
+            "tevredenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-614a038b",
+          "begrip": "lachen",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "blijheid",
+            "emotie",
+            "geluk",
+            "genieten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a07a1351",
+          "begrip": "fijn",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gevoel",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-25251bf6",
+          "begrip": "tevreden",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "tevredenheid",
+            "waardering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T18:49:19.028841+00:00",
+        "vorige_versie_v1": "kb-skel-7a0a2d32",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.444258+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:49:18.035597+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:49:18.045299+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:49:19.636668+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:49:19.647287+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T18:49:17.689730+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3593cc49",
+      "begrip": "geluk",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Geluk is een gevoel van tevredenheid, blijdschap of welzijn.",
+        "laag2": "Geluk ontstaat wanneer iemand het leven of een situatie als positief, waardevol of vervullend ervaart.",
+        "laag3": "Geluk kan voortkomen uit plezierige gebeurtenissen, goede relaties, gezondheid, succes, veiligheid of persoonlijke groei. Het kan een kort moment van blijdschap zijn, maar ook een langdurig gevoel van tevredenheid met het leven. Wat geluk betekent verschilt per persoon en wordt beïnvloed door ervaringen, waarden en omstandigheden.\n",
+        "laag4": "Geluk is een positieve emotionele en mentale toestand waarin een persoon tevredenheid, welzijn, voldoening en een betekenisvolle waardering van het leven ervaart.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en sommige diersoorten.",
+        "wat": "Een toestand van welzijn, tevredenheid en positieve gevoelens.",
+        "wanneer": "Bij positieve ervaringen, betekenisvolle relaties, succes of persoonlijke vervulling.",
+        "waar": "In het dagelijks leven, relaties, werk, vrije tijd en persoonlijke ontwikkeling.",
+        "waarom": "Omdat behoeften, wensen, doelen of waarden worden vervuld of als vervuld worden ervaren.",
+        "hoe": "Door positieve ervaringen, gedachten, emoties en omstandigheden die bijdragen aan welzijn."
+      },
+      "tags": [
+        "geluk",
+        "gelukkig",
+        "welzijn",
+        "tevredenheid",
+        "blijdschap",
+        "vreugde",
+        "plezier",
+        "genieten",
+        "voldoening",
+        "succes",
+        "verbondenheid",
+        "liefde",
+        "waardering",
+        "positiviteit",
+        "levenskwaliteit",
+        "motivatie",
+        "gevoel",
+        "emotie",
+        "tevreden",
+        "dankbaarheid",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7a0a2d32",
+          "begrip": "vreugde",
+          "lade": "voelen",
+          "overlap": 15,
+          "shared_tags": [
+            "blij",
+            "blijdschap",
+            "dankbaarheid",
+            "emotie",
+            "geluk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-66e253db",
+          "begrip": "Happy",
+          "lade": "voelen",
+          "overlap": 12,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gevoel",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e7bd2cf1",
+          "begrip": "dankbaarheid",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "dankbaarheid",
+            "emotie",
+            "geluk",
+            "tevredenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a07a1351",
+          "begrip": "fijn",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "gevoel",
+            "plezier"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-25251bf6",
+          "begrip": "tevreden",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "geluk",
+            "tevreden",
+            "tevredenheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T18:50:54.401256+00:00",
+        "vorige_versie_v1": "kb-skel-3593cc49",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.563233+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:50:53.771517+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:50:53.796816+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 15
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T18:50:55.457824+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T18:50:55.469395+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 15
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T18:50:53.282310+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
       "needs": [
         "voice",
         "image"

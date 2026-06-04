@@ -32936,11 +32936,267 @@
         "session_id": "default",
         "gesprek_nummer": 1250
       }
+    },
+    {
+      "id": "conv-542ed628",
+      "timestamp": "2026-06-04T18:53:04.712790+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er? _(laatst sprak je me 2 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1251
+      }
+    },
+    {
+      "id": "conv-52658415",
+      "timestamp": "2026-06-04T18:53:26.401094+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "IK trek mij zelf er door heen",
+      "spark_response": "**zelf**: Zelf verwijst naar een persoon, identiteit of systeem als eigen individu of eigen kern.\n\n**door**: Door betekent via, dankzij, langs of verdergaan binnen een proces, beweging of oorzaak.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **trek, heen** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "zelf",
+            "door"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zelf"
+          },
+          {
+            "begrip": "door"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "trek",
+          "heen"
+        ],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1252
+      }
+    },
+    {
+      "id": "conv-b5270956",
+      "timestamp": "2026-06-04T18:54:15.005658+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik deelde het alleen",
+      "spark_response": "Ik ken deze woorden nog niet: **deelde**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nIk ken 'deelde' niet als geheel, maar herken 'deel' erin. Is een 'deelde' een soort 'deel'? Of betekent het iets heel anders?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "deelde"
+        ],
+        "snap_suggestions": [
+          "deelde"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1253
+      }
+    },
+    {
+      "id": "conv-91d76519",
+      "timestamp": "2026-06-04T18:54:40.330738+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "je bent goed op weg",
+      "spark_response": "Wat fijn om te horen! 😊\n\n**bent**: “Bent” is een vorm van het werkwoord “zijn” en wordt gebruikt om identiteit, toestand of aanwezigheid aan te geven.\n\n**Weg**: Een weg is een route of pad waarlangs mensen, voertuigen of informatie zich kunnen verplaatsen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "goed"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "bent"
+          },
+          {
+            "begrip": "Weg"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1254
+      }
+    },
+    {
+      "id": "conv-d8eebc64",
+      "timestamp": "2026-06-04T18:55:53.796205+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Elke woensdag avond komt Lotus bij mij eten.",
+      "spark_response": "Ik hoorde dat je woensdag gaat eten. Zal ik het noteren?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "agenda_proposal",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "agenda_proposal"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1255
+      }
+    },
+    {
+      "id": "conv-b71263f5",
+      "timestamp": "2026-06-04T18:56:24.632625+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Lotus komt elke woensdag",
+      "spark_response": "**Lotus Martens is mijn Dochter**: Een uitspraak die aangeeft dat Lotus Martens de dochter is van de spreker.\n\nNieuw geleerd: **woensdag** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Lotus Martens is mijn Dochter"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "woensdag"
+        ],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1256
+      }
+    },
+    {
+      "id": "conv-a0bd317a",
+      "timestamp": "2026-06-04T18:57:26.206301+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Meestal is Lotus bij haar moeder of bij haar vriendje.",
+      "spark_response": "**Lotus Martens is mijn Dochter**: Een uitspraak die aangeeft dat Lotus Martens de dochter is van de spreker.\n\n**Moeder**: Een moeder is een vrouwelijke ouder van een kind.\n\n**vriend**: Een vriend is iemand met wie een persoon een sociale, persoonlijke of emotionele band heeft.\n\nNieuw geleerd: **meestal** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Lotus Martens is mijn Dochter"
+          },
+          {
+            "begrip": "Moeder"
+          },
+          {
+            "begrip": "vriend"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "meestal"
+        ],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1257
+      }
+    },
+    {
+      "id": "conv-ae2b0bd4",
+      "timestamp": "2026-06-04T18:57:58.072568+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Dank je wel",
+      "spark_response": "Leuk! Vertel me meer\n\n**dank**: Dank is waardering of erkenning voor iets wat iemand heeft gedaan, gegeven of betekend.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dank"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dank"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1258
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1250,
-    "last_updated": "2026-06-04T16:44:31.573590+00:00"
+    "total_conversations": 1258,
+    "last_updated": "2026-06-04T18:57:58.072568+00:00"
   }
 }

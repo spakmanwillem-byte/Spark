@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 493,
+    "card_count": 500,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T15:16:40.940883+00:00",
+    "last_updated": "2026-06-04T20:37:15.359363+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -63735,6 +63735,1170 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-04T15:16:39.735030+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3e763012",
+      "begrip": "Ik deelde het alleen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ik deelde het alleen betekent dat ik iets met anderen heb gedeeld zonder verdere bedoeling of actie.",
+        "laag2": "De uitdrukking benadrukt dat het delen van informatie, een mening of een ervaring het enige was dat werd gedaan.",
+        "laag3": "Mensen gebruiken deze zin vaak om duidelijk te maken dat zij ergens niet verantwoordelijk voor zijn, geen invloed hebben uitgeoefend of geen verdere betrokkenheid hadden. De nadruk ligt op het overbrengen van informatie of het beschikbaar maken van iets aan anderen, zonder extra verwachtingen, verplichtingen of gevolgen.\n",
+        "laag4": "\"Ik deelde het alleen\" is een uitdrukking waarmee iemand aangeeft dat zijn of haar bijdrage beperkt bleef tot het verspreiden, tonen of communiceren van informatie, zonder verdere actieve rol in de situatie.\n"
+      },
+      "ws5": {
+        "wie": "Iemand die informatie, een bericht, een ervaring of een object met anderen heeft gedeeld.",
+        "wat": "Het delen van iets zonder verdere betrokkenheid of actie.",
+        "wanneer": "Wanneer iemand wil verduidelijken wat zijn of haar rol was.",
+        "waar": "In gesprekken, sociale media, werk, onderwijs en persoonlijke situaties.",
+        "waarom": "Om duidelijk te maken dat de bijdrage beperkt bleef tot het delen.",
+        "hoe": "Door informatie, een bericht, een mening of een ervaring aan anderen door te geven."
+      },
+      "tags": [
+        "delen",
+        "gedeeld",
+        "informatie",
+        "communicatie",
+        "bericht",
+        "ervaring",
+        "doorgeven",
+        "verspreiden",
+        "uitleg",
+        "verduidelijken",
+        "betrokkenheid",
+        "verantwoordelijkheid",
+        "gesprek",
+        "mening",
+        "sociale interactie",
+        "uitwisseling",
+        "communicatieproces",
+        "overdracht",
+        "context zin",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c5b31925",
+          "begrip": "uitwisseling",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "betrokkenheid",
+            "communicatie",
+            "delen",
+            "emotie",
+            "ervaring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betrokkenheid",
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4ef4f1ed",
+          "begrip": "deelde",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "gedeeld",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3a46ccb8",
+          "begrip": "delen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "delen",
+            "emotie",
+            "ervaring",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T18:54:10.841029+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T19:07:57.916487+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik deelde het alleen",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T19:07:55.713131+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:07:56.822635+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:07:56.833046+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:07:59.163248+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:07:59.173861+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a36518da",
+      "begrip": "Is Gerben vandaag online geweest?",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Deze vraag gaat over het controleren of Gerben vandaag actief of ingelogd is geweest.",
+        "laag2": "De vraag wordt gebruikt om informatie te verkrijgen over de aanwezigheid of activiteit van een persoon binnen een bepaalde periode.",
+        "laag3": "Mensen stellen deze vraag vaak binnen online platforms, games, sociale netwerken, werkomgevingen of communities. Het doel is meestal om te weten of iemand recent actief is geweest, beschikbaar was of een systeem heeft gebruikt. Het antwoord vereist toegang tot een activiteitsoverzicht, statusinformatie of loggegevens.\n",
+        "laag4": "Mensen stellen deze vraag vaak binnen online platforms, games, sociale netwerken, werkomgevingen of communities. Het doel is meestal om te weten of iemand recent actief is geweest, beschikbaar was of een systeem heeft gebruikt. Het antwoord vereist toegang tot een activiteitsoverzicht, statusinformatie of loggegevens.\n"
+      },
+      "ws5": {
+        "wie": "Iemand die informatie zoekt over de activiteit van Gerben.",
+        "wat": "Een vraag naar online aanwezigheid of recente activiteit.",
+        "wanneer": "Met betrekking tot vandaag.",
+        "waar": "Binnen een online platform, systeem, community of digitale omgeving.",
+        "waarom": "Om te weten of iemand recent actief of beschikbaar is geweest.",
+        "hoe": "Door statusinformatie, loggegevens of activiteitshistorie te controleren."
+      },
+      "tags": [
+        "vraag",
+        "online",
+        "activiteit",
+        "aanwezigheid",
+        "gebruiker",
+        "status",
+        "naam",
+        "user",
+        "vandaag",
+        "controle",
+        "informatie",
+        "account",
+        "login",
+        "community",
+        "systeem",
+        "log",
+        "zoeken",
+        "informatie",
+        "beschikbaarheid",
+        "waarneming",
+        "monitoring",
+        "activiteit",
+        "overzicht",
+        "communicatie",
+        "emotie",
+        "nieuwsgierig"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-01e41321",
+          "begrip": "scanning",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "informatie",
+            "monitoring",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16ec458f",
+          "begrip": "status",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beschikbaarheid",
+            "communicatie",
+            "controle",
+            "emotie",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8a996a",
+          "begrip": "user",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "account",
+            "communicatie",
+            "emotie",
+            "gebruiker",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96b52c55",
+          "begrip": "Toegang verleend",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beschikbaarheid",
+            "controle",
+            "emotie",
+            "gebruiker",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5b4bc7c7",
+          "begrip": "scan",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "controle",
+            "emotie",
+            "informatie",
+            "systeem",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T16:41:51.788962+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T19:12:00.983068+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Is Gerben vandaag online geweest?",
+        "is_sentence": true,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:12:02.549671+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:12:02.614025+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fc6f3912",
+      "begrip": "hoeveel meisjes namen ken jij",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Deze vraag gaat over het aantal meisjesnamen dat iemand kent of kan noemen.",
+        "laag2": "De vraag wordt gebruikt om informatie te krijgen over kennis van voornamen die aan meisjes worden gegeven.",
+        "laag3": "Mensen stellen deze vraag uit nieuwsgierigheid, voor naamkeuze, onderzoek, spelletjes of gesprekken over namen. Het exacte aantal is vaak niet vast te stellen, omdat er wereldwijd honderdduizenden meisjesnamen bestaan uit verschillende talen, culturen en tijdsperiodes. De vraag richt zich daarom meestal op kennis of beschikbaarheid van voorbeelden.\n",
+        "laag4": "\"Hoeveel meisjesnamen ken jij?\" is een informatievraag die de omvang van kennis over vrouwelijke voornamen onderzoekt binnen een bepaalde taal, cultuur of verzameling namen.\n"
+      },
+      "ws5": {
+        "wie": "Iemand die informatie zoekt over meisjesnamen.",
+        "wat": "Een vraag naar kennis of aantal bekende meisjesnamen.",
+        "wanneer": "Tijdens gesprekken, naamkeuze, onderzoek of nieuwsgierigheid.",
+        "waar": "In gesprekken, databases, families, scholen en culturele contexten.",
+        "waarom": "Om inzicht te krijgen in beschikbare namen of kennis over namen.",
+        "hoe": "Door namen te verzamelen, op te noemen of te tellen."
+      },
+      "tags": [
+        "vraag",
+        "meisjesnaam",
+        "voornaam",
+        "naam",
+        "persoon",
+        "identiteit",
+        "taal",
+        "cultuur",
+        "naamgeving",
+        "kind",
+        "meisje",
+        "informatie",
+        "kennis",
+        "verzamelen",
+        "lijst",
+        "overzicht",
+        "communicatie",
+        "vraagstelling",
+        "onderzoek",
+        "nieuwsgierigheid",
+        "emotie",
+        "nieuwsgierig"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "meisjesnaam",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "meisjesnaam",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d84954c",
+          "begrip": "Maurice",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "cultuur",
+            "emotie",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b915197e",
+          "begrip": "willie",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "cultuur",
+            "emotie",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "meisje",
+            "naam"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T16:43:49.071195+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T19:13:49.240739+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "hoeveel meisjes namen ken jij ?",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T19:13:47.378715+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:13:47.734430+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:13:47.746231+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:13:49.857081+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:13:49.867297+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-de727f73",
+      "begrip": "Waarom voelt het stroever?",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Deze vraag gaat over de oorzaak van een gevoel van meer weerstand, moeite of minder soepelheid.",
+        "laag2": "De vraag wordt gesteld wanneer iets minder gemakkelijk verloopt dan voorheen of dan verwacht.",
+        "laag3": "\"Waarom voelt het stroever?\" kan betrekking hebben op fysieke bewegingen, sociale contacten, communicatie, samenwerking, techniek of persoonlijke ervaringen. Het woord stroever verwijst vaak naar meer weerstand, minder soepel functioneren of een verminderde doorstroming. De vraag zoekt naar de oorzaak van die verandering.\n",
+        "laag4": "\"Waarom voelt het stroever?\" is een onderzoekende vraag waarmee iemand probeert te begrijpen waarom een proces, situatie, relatie of ervaring meer weerstand, inspanning of complexiteit lijkt te bevatten dan eerder het geval was.\n"
+      },
+      "ws5": {
+        "wie": "Iemand die een verandering of weerstand ervaart.",
+        "wat": "Een vraag naar de oorzaak van verminderde soepelheid of verhoogde weerstand.",
+        "wanneer": "Wanneer iets moeilijker, langzamer of minder prettig verloopt dan verwacht.",
+        "waar": "In beweging, techniek, communicatie, relaties, werk en persoonlijke ervaringen.",
+        "waarom": "Om de oorzaak van een ervaren verandering of probleem te begrijpen.",
+        "hoe": "Door waarneming van weerstand, vertraging, ongemak of verminderde efficiëntie."
+      },
+      "tags": [
+        "vraag",
+        "waarom",
+        "stroef",
+        "stroever",
+        "weerstand",
+        "wrijving",
+        "probleem",
+        "oorzaak",
+        "verandering",
+        "ervaring",
+        "gevoel",
+        "waarneming",
+        "analyse",
+        "onderzoek",
+        "communicatie",
+        "samenwerking",
+        "proces",
+        "vertraging",
+        "efficiëntie",
+        "inzicht",
+        "emotie",
+        "nieuwsgierig"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8c1f60dc",
+          "begrip": "stroever",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "proces",
+            "samenwerking",
+            "stroef"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9fb4bf15",
+          "begrip": "dieper",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "analyse",
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "gevoel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68625774",
+          "begrip": "waarom",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "communicatie",
+            "emotie",
+            "oorzaak",
+            "waarom"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e6db9df8",
+          "begrip": "Men kan een blind persoon niet vragen om mee te kijken naar wat jij doet.",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "nieuwsgierig",
+            "vraag",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T11:22:02.447072+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T19:15:22.197470+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Waarom voelt het stroever?",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T19:15:20.066818+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:15:20.430181+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:15:20.440872+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:15:22.931867+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:15:22.944131+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f234fa5c",
+      "begrip": "heen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Heen betekent in de richting van een plaats, punt of doel.",
+        "laag2": "Heen wordt gebruikt om beweging, voortgang of een overgang van de ene situatie naar een andere aan te geven.",
+        "laag3": "Het woord heen komt vaak voor in combinatie met werkwoorden zoals gaan, lopen, rijden, trekken en brengen. Het geeft aan dat iets zich verplaatst naar een bestemming of door een situatie beweegt. In uitdrukkingen zoals \"ik trek mijzelf erdoorheen\" verwijst heen naar het volledig doorlopen of overbruggen van een moeilijke periode of uitdaging.\n",
+        "laag4": "Heen is een richtingsaanduiding die beweging, voortgang of overgang beschrijft van een beginpunt naar een bestemming, doel of eindtoestand.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, voertuigen, objecten en processen.",
+        "wat": "Een aanduiding van richting, voortgang of overgang.",
+        "wanneer": "Wanneer sprake is van beweging, verplaatsing of het doorlopen van een situatie.",
+        "waar": "In taal, communicatie, bewegingen, reizen en figuurlijke uitdrukkingen.",
+        "waarom": "Om een richting, doel of eindpunt aan te geven.",
+        "hoe": "Door een beweging of ontwikkeling van een beginpunt naar een andere plaats of toestand te beschrijven."
+      },
+      "tags": [
+        "heen",
+        "richting",
+        "bestemming",
+        "doel",
+        "beweging",
+        "voortgang",
+        "overgang",
+        "verplaatsing",
+        "doorlopen",
+        "ontwikkeling",
+        "proces",
+        "traject",
+        "reizen",
+        "gaan",
+        "lopen",
+        "trekken",
+        "verandering",
+        "eindpunt",
+        "route",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-8b1b1907",
+          "begrip": "route",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bestemming",
+            "doel",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-72e8d59b",
+          "begrip": "fase",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ontwikkeling",
+            "overgang",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4cc3043d",
+          "begrip": "overgang",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "neutraal",
+            "ontwikkeling",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2978363e",
+          "begrip": "trekken",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "neutraal",
+            "proces",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ontwikkeling",
+            "overgang",
+            "verandering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T18:53:19.505796+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T19:25:19.655139+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "IK trek mij zelf er door heen",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T19:25:17.301847+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:25:18.327775+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:25:18.338528+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T19:25:21.185294+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T19:25:21.199294+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6eb8d3f4",
+      "begrip": "iedereen",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Iedereen betekent alle mensen binnen een bepaalde groep of context.",
+        "laag2": "Het woord iedereen wordt gebruikt om naar alle betrokken personen te verwijzen zonder uitzonderingen te noemen.",
+        "laag3": "Iedereen komt veel voor in gesprekken, regels, uitnodigingen en algemene uitspraken. Het kan verwijzen naar alle mensen in een ruimte, een organisatie, een gemeenschap of zelfs de gehele bevolking, afhankelijk van de context. Wie precies onder iedereen valt, wordt bepaald door de situatie waarin het woord wordt gebruikt.\n",
+        "laag4": "Iedereen is een verzamelbegrip dat alle personen omvat die behoren tot een bepaalde groep, omgeving of context, zonder onderscheid tussen individuele leden.\n"
+      },
+      "ws5": {
+        "wie": "Alle personen binnen een bepaalde groep of context.",
+        "wat": "Een aanduiding voor alle betrokken mensen.",
+        "wanneer": "Wanneer naar een volledige groep mensen wordt verwezen.",
+        "waar": "In gesprekken, teksten, organisaties, gemeenschappen en samenlevingen.",
+        "waarom": "Om alle personen gezamenlijk aan te duiden zonder individuen apart te noemen.",
+        "hoe": "Door een groep mensen als geheel te beschrijven."
+      },
+      "tags": [
+        "iedereen",
+        "allen",
+        "allemaal",
+        "mensen",
+        "persoon",
+        "groep",
+        "gemeenschap",
+        "samenleving",
+        "bevolking",
+        "deelnemers",
+        "betrokkenen",
+        "collectief",
+        "gezamenlijk",
+        "inclusie",
+        "universeel",
+        "algemeen",
+        "communicatie",
+        "sociale groep",
+        "mens",
+        "identiteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0c54d949",
+          "begrip": "allemaal",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "algemeen",
+            "allemaal",
+            "communicatie",
+            "gezamenlijk",
+            "groep"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-444c9aa9",
+          "begrip": "eenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "collectief",
+            "emotie",
+            "gemeenschap",
+            "gezamenlijk",
+            "groep"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "mens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "mens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-974744e9",
+          "begrip": "publiek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gemeenschap",
+            "groep",
+            "mensen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T20:27:20.326984+00:00",
+        "vorige_versie_v1": "kb-skel-6eb8d3f4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:37.058253+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T20:27:19.300047+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T20:27:19.319402+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T20:27:22.107893+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T20:27:22.127385+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T20:27:18.359422+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6e9d3b4a",
+      "begrip": "verklaring",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een verklaring is een uitleg, beschrijving of mededeling die iets verduidelijkt.",
+        "laag2": "Een verklaring helpt om de oorzaak, betekenis, reden of achtergrond van iets begrijpelijk te maken.",
+        "laag3": "Verklaringen worden gebruikt in gesprekken, wetenschap, rechtspraak, onderwijs en administratie. Iemand kan een verklaring geven over een gebeurtenis, een keuze, een waarneming of een probleem. Een verklaring kan mondeling, schriftelijk of digitaal worden vastgelegd. Het doel is meestal om begrip, duidelijkheid of bewijs te bieden.\n",
+        "laag4": "Een verklaring is een gestructureerde weergave van informatie waarmee een persoon, organisatie of systeem betekenis, oorzaak, motivatie, achtergrond of bewijs geeft voor een situatie, gebeurtenis, waarneming of beslissing.\n"
+      },
+      "ws5": {
+        "wie": "Personen, organisaties, getuigen, onderzoekers, systemen en deskundigen.",
+        "wat": "Een uitleg, beschrijving of toelichting.",
+        "wanneer": "Wanneer iets verduidelijkt, verantwoord of onderbouwd moet worden.",
+        "waar": "In gesprekken, documenten, onderzoeken, rechtszaken, onderwijs en administratie.",
+        "waarom": "Om begrip, duidelijkheid, bewijs of inzicht te geven.",
+        "hoe": "Door informatie, argumenten, feiten, observaties of redenen te beschrijven."
+      },
+      "tags": [
+        "verklaring",
+        "uitleg",
+        "toelichting",
+        "beschrijving",
+        "betekenis",
+        "oorzaak",
+        "reden",
+        "motivatie",
+        "achtergrond",
+        "informatie",
+        "verduidelijking",
+        "bewijs",
+        "argument",
+        "observatie",
+        "conclusie",
+        "communicatie",
+        "document",
+        "rapport",
+        "onderbouwing",
+        "inzicht",
+        "emotie",
+        "nieuwsgierig"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "beschrijving",
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68625774",
+          "begrip": "waarom",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "motivatie",
+            "oorzaak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ea845482",
+          "begrip": "reden",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "argument",
+            "emotie",
+            "motivatie",
+            "oorzaak",
+            "reden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bd71cd23",
+          "begrip": "benieuwd",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "motivatie",
+            "nieuwsgierig"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T20:37:15.359324+00:00",
+        "vorige_versie_v1": "kb-skel-6e9d3b4a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.547355+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T20:37:11.620808+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T20:37:11.633761+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T20:37:15.964637+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T20:37:15.996646+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T20:37:11.185669+00:00"
       },
       "media": {
         "voice_url": null,

@@ -66,6 +66,16 @@ class TextImportBody(BaseModel):
     dry_run: bool = False
 
 
+# v6_kbv2_v1_drift_sync_001 — Trek nieuwe begrippen uit KB v1 naar v2 inbox
+@router.post("/admin/sync-v1-drift")
+async def admin_sync_v1_drift(dry_run: bool = False):
+    """Vindt KB v1 drafts (chat-detected) die NIET in KB v2 staan en kopieert
+    ze naar v2 inbox zodat de user ze in de UI kan invullen.
+    Idempotent en filtert hele zinnen/emoji-only entries eruit."""
+    from .v1_drift_sync import sync_v1_drafts_to_v2_inbox
+    return sync_v1_drafts_to_v2_inbox(dry_run=dry_run)
+
+
 @router.post("/admin/import-text")
 async def admin_import_text(body: TextImportBody):
     """Parse rijke txt-dump (zoals jouw verlorenkaarten.txt) en voeg kaarten toe

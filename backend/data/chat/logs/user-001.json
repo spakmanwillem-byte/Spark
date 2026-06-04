@@ -31718,11 +31718,118 @@
         "session_id": "default",
         "gesprek_nummer": 1206
       }
+    },
+    {
+      "id": "conv-ccb31dba",
+      "timestamp": "2026-06-04T10:23:55.233727+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is mijn moeder",
+      "spark_response": "Jouw **moeder**:\n- **Heidi Spakman**\n- **Jarig**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1207
+      }
+    },
+    {
+      "id": "conv-831c3a07",
+      "timestamp": "2026-06-04T10:23:55.389345+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe oud is Lotus",
+      "spark_response": "Ik ken **Lotus**, maar geen geboortedatum. Vertel eens — bv. 'Lotus is 11 februari 2009 geboren'.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1208
+      }
+    },
+    {
+      "id": "conv-e7217d06",
+      "timestamp": "2026-06-04T10:23:55.546842+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "heb ik morgen afspraken",
+      "spark_response": "📅 Geen afspraken morgen. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heb"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1209
+      }
+    },
+    {
+      "id": "conv-aca9b993",
+      "timestamp": "2026-06-04T10:23:55.721267+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "amusement",
+      "spark_response": "**amusement**: Amusement is vermaak dat bedoeld is om plezier, ontspanning of plezierige afleiding te bieden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "amusement"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1210
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1206,
-    "last_updated": "2026-06-04T09:56:30.896371+00:00"
+    "total_conversations": 1210,
+    "last_updated": "2026-06-04T10:23:55.721267+00:00"
   }
 }

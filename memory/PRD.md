@@ -1,5 +1,41 @@
 # Spark Core 2.0 — PRD
 
+## v6_homonym_audit_001 — Homoniem-curatie endpoint (2026-06-04, sessie 27)
+
+### Endpoint
+`GET /api/kb/v2/homonyms` — toont alle begrippen die in 2+ kaarten voorkomen,
+geanalyseerd op kwaliteit van disambig-tags.
+
+### Query params
+- `min_count=2` (default) — minimum aantal kaarten per begrip
+- `include_unique_tags_only=true` — alleen problematische groepen tonen
+- (omgekeerd default false = alles)
+
+### Per groep wordt geretourneerd
+- `shared_tags` — tags die ALLE kaarten delen (= geen disambig-signaal)
+- `kaarten[].unique_tags` — tags uniek voor die kaart (= goed disambig-signaal)
+- `status`:
+  - `goed_geannoteerd` — elke kaart heeft ≥2 unieke tags
+  - `gedeeltelijk` — minstens 1 kaart heeft 0-1 unieke tags
+  - `slecht` — alle kaarten delen vrijwel alle tags (= duplicaat-verdacht)
+
+### Sortering
+Slecht eerst (urgentie), dan gedeeltelijk, dan goed-geannoteerd.
+
+### Resultaat op huidige preview-data (na prod-merge)
+- 12 homoniem-groepen ontdekt
+- 1 SLECHT: "Frank Arjava Petter" (2 identieke kaarten — gewoon duplicaat)
+- 11 GOED: bank, Balk, Bord, drift, etc. (de nieuwe tag-resolver werkt
+  automatisch voor deze)
+
+### Use case
+Na redeploy: hit dit endpoint om te zien welke homoniemen wél/niet
+goede tag-disambiguation hebben. Direct actionable: voeg unique_tags toe
+of merge duplicaten.
+
+---
+
+
 ## v6_homonym_tag_disambig_001 — Homoniem-resolver via tags (2026-06-04, sessie 27)
 
 ### Probleem

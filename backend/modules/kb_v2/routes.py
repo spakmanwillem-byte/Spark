@@ -164,6 +164,129 @@ async def get_audit():
     return {"success": True, **service.audit()}
 
 
+# v6_homonym_audit_001 — detecteer homoniemen en analyseer of disambig-tags goed staan
+@router.get("/homonyms")
+async def list_homonyms(min_count: int = Query(2, ge=2, le=10),
+                        include_unique_tags_only: bool = Query(False)):
+    """v6_homonym_audit_001 — Lijst van begrippen die in 2+ kaarten voorkomen
+    (homoniemen). Per groep:
+      - kaarten: id, lade, laag1-preview, alle tags
+      - shared_tags: tags die ALLE kaarten in deze groep delen (= geen signaal voor disambig)
+      - unique_tags_per_card: tags die UNIEK zijn voor 1 kaart (= goed disambig-signaal)
+      - status:
+          • 'goed_geannoteerd' — elke kaart heeft >=2 unieke tags die de andere niet heeft
+          • 'gedeeltelijk' — minstens 1 kaart heeft 0 of 1 unieke tags
+          • 'slecht' — alle kaarten delen vrijwel alle tags
+
+    Query params:
+      min_count: minimum aantal kaarten per begrip (default 2)
+      include_unique_tags_only: alleen groepen tonen waar uniqueness scheef is
+    """
+    import json as _json
+    from pathlib import Path as _P
+    from collections import defaultdict
+
+    V2 = _P(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+    files = [
+        ("inbox", V2 / "knowledge_inbox.json"),
+        ("voelen", V2 / "knowledge_v2_voelen.json"),
+        ("spreken", V2 / "knowledge_v2_spreken.json"),
+        ("weten", V2 / "knowledge_v2_weten.json"),
+        ("doen", V2 / "knowledge_v2_doen.json"),
+    ]
+
+    # Groepeer per begrip.lower()
+    by_begrip: Dict[str, List[Dict]] = defaultdict(list)
+    for lade, fp in files:
+        if not fp.exists():
+            continue
+        try:
+            d = _json.load(open(fp))
+        except Exception:
+            continue
+        for k in d.get("kaarten", []) or []:
+            b = (k.get("begrip") or "").strip().lower()
+            if not b:
+                continue
+            by_begrip[b].append({
+                "id": k.get("id"),
+                "begrip": k.get("begrip"),
+                "lade": lade,
+                "laag1": ((k.get("lagen") or {}).get("laag1") or "").strip(),
+                "tags": [t for t in (k.get("tags") or []) if isinstance(t, str)],
+            })
+
+    groups = []
+    for begrip, cards in by_begrip.items():
+        if len(cards) < min_count:
+            continue
+        # Shared tags: in elke kaart aanwezig
+        tag_sets = [set(t.lower() for t in c["tags"]) for c in cards]
+        shared = set.intersection(*tag_sets) if tag_sets else set()
+        # Begrip zelf telt niet
+        shared.discard(begrip.lower())
+        # Unique tags per card: tags in deze kaart die in geen andere kaart van deze groep zitten
+        unique_per_card = []
+        for i, c in enumerate(cards):
+            mine = set(t.lower() for t in c["tags"])
+            others = set()
+            for j, ts in enumerate(tag_sets):
+                if j != i:
+                    others |= ts
+            uniq = sorted(mine - others - {begrip.lower()})
+            unique_per_card.append({
+                "id": c["id"],
+                "lade": c["lade"],
+                "unique_tag_count": len(uniq),
+                "unique_tags": uniq[:10],
+            })
+
+        # Status
+        min_unique = min(u["unique_tag_count"] for u in unique_per_card) if unique_per_card else 0
+        if min_unique >= 2:
+            status = "goed_geannoteerd"
+        elif min_unique >= 1:
+            status = "gedeeltelijk"
+        else:
+            status = "slecht"
+
+        if include_unique_tags_only and status == "goed_geannoteerd":
+            continue
+
+        groups.append({
+            "begrip": cards[0]["begrip"],
+            "card_count": len(cards),
+            "status": status,
+            "min_unique_tags": min_unique,
+            "shared_tags": sorted(shared)[:15],
+            "kaarten": [
+                {
+                    "id": c["id"],
+                    "lade": c["lade"],
+                    "laag1_preview": (c["laag1"][:90] + "…") if len(c["laag1"]) > 90 else c["laag1"],
+                    "unique_tags": next((u["unique_tags"] for u in unique_per_card if u["id"] == c["id"]), []),
+                    "all_tags": c["tags"][:20],
+                }
+                for c in cards
+            ],
+        })
+
+    # Sorteer: slecht eerst (meest urgent), dan gedeeltelijk, dan goed
+    prio = {"slecht": 0, "gedeeltelijk": 1, "goed_geannoteerd": 2}
+    groups.sort(key=lambda g: (prio[g["status"]], -g["card_count"], g["begrip"].lower()))
+
+    return {
+        "success": True,
+        "total_homonym_groups": len(groups),
+        "by_status": {
+            "slecht": sum(1 for g in groups if g["status"] == "slecht"),
+            "gedeeltelijk": sum(1 for g in groups if g["status"] == "gedeeltelijk"),
+            "goed_geannoteerd": sum(1 for g in groups if g["status"] == "goed_geannoteerd"),
+        },
+        "groups": groups,
+    }
+
+
 # ---------- Write ----------
 
 @router.post("/classify")

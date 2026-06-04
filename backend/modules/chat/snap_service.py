@@ -216,24 +216,80 @@ class SnapNLPService:
 
     # ========== KNOWLEDGE LOOKUP ==========
 
-    def lookup(self, query):
+    def _score_by_tag_context(self, entry, context_words):
+        """v6_homonym_tag_disambig_001 — geef een score aan een kaart op basis
+        van hoeveel van zijn tags voorkomen in de user-zin (context_words).
+        Returnt tuple (score, matched_tags). Hogere score = beter passend."""
+        if not context_words:
+            return (0, [])
+        tags = [(t or "").lower().strip() for t in (entry.get("tags") or [])]
+        # Begrip zelf telt niet als context-signaal (anders krijgt elke kaart +1)
+        begrip = (entry.get("begrip") or "").lower().strip()
+        matched = []
+        for t in tags:
+            if not t or t == begrip or len(t) < 3:
+                continue
+            # Tag-token komt voor in context-woorden (exacte match of tag is multi-word in zin)
+            if t in context_words:
+                matched.append(t)
+            elif " " in t and t in " ".join(context_words):
+                matched.append(t)
+        return (len(matched), matched)
+
+    def lookup(self, query, context_text=None):
         """
         Zoek een begrip in de kennisbank.
         Geeft de beste match terug met lagen antwoord.
+
+        v6_homonym_tag_disambig_001 — als er meerdere exacte matches zijn
+        (homoniemen, zoals 'bank' = geld OF meubel), gebruik dan tags uit
+        elke kaart vs context_text om de juiste te kiezen. Bij gelijkspel:
+        return de eerste maar voeg `homonym_candidates` toe zodat de chat
+        kan vragen welke betekenis user bedoelt.
         """
         index = self._get_index()
         q = query.lower().strip()
+        ctx_words = set()
+        if context_text:
+            ctx_words = set(self._extract_meaningful_words(context_text))
+
+        def _pick_best(matches, match_type):
+            """Disambig: bij 2+ kaarten met zelfde begrip → tag-context-score."""
+            if len(matches) == 1:
+                return self._format_result(matches[0], match_type)
+            # Score elke kaart op tag-overlap met context
+            scored = []
+            for e in matches:
+                s, mt = self._score_by_tag_context(e, ctx_words)
+                # Tiebreaker: belangrijkheid
+                scored.append((s, e.get("belangrijkheid", 0), mt, e))
+            scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+            best_score, _, best_tags, best_entry = scored[0]
+            res = self._format_result(best_entry, match_type)
+            # Annoteer met andere kandidaten als er een echte tie is of geen winnaar
+            second_score = scored[1][0] if len(scored) > 1 else -1
+            if best_score == 0 or best_score == second_score:
+                # Geen overtuigende winnaar → caller kan disambig vraag stellen
+                res["homonym_candidates"] = [
+                    {
+                        "id": e.get("id"),
+                        "begrip": e.get("begrip"),
+                        "laag1": (e.get("lagen") or {}).get("laag1", ""),
+                        "tags_preview": [t for t in (e.get("tags") or []) if t and t.lower() != (e.get("begrip") or "").lower()][:5],
+                    }
+                    for _, _, _, e in scored
+                ]
+                res["homonym_ambiguous"] = True
+            else:
+                res["homonym_matched_tags"] = best_tags
+            return res
 
         # 1. Exacte match (incl. ascii-fold fallback voor umlaut/accenten — v4_snap_dedupe_002)
         if q in index:
-            matches = index[q]
-            best = max(matches, key=lambda e: e.get("belangrijkheid", 0))
-            return self._format_result(best, "exact")
+            return _pick_best(index[q], "exact")
         q_fold = _ascii_fold(q)
         if q_fold != q and q_fold in index:
-            matches = index[q_fold]
-            best = max(matches, key=lambda e: e.get("belangrijkheid", 0))
-            return self._format_result(best, "exact")
+            return _pick_best(index[q_fold], "exact")
 
         # 2. Woorden uit de zin matchen
         words = self._extract_meaningful_words(q)
@@ -247,10 +303,29 @@ class SnapNLPService:
                     break
 
         if found:
-            # Sorteer op belangrijkheid
-            found.sort(key=lambda x: x[1].get("belangrijkheid", 0), reverse=True)
-            best_word, best_entry = found[0]
-            return self._format_result(best_entry, "word_match", matched_word=best_word)
+            # Per matched_word: bij meerdere kaarten same begrip → tag-disambig
+            from collections import defaultdict
+            by_word = defaultdict(list)
+            for w, e in found:
+                by_word[w].append(e)
+            # Pak de winnaar (hoogste belangrijkheid over alle matched_words)
+            best_result = None
+            best_belang = -1
+            for w, entries in by_word.items():
+                if len(entries) > 1:
+                    # Disambig nodig op deze homoniem
+                    r = _pick_best(entries, "word_match")
+                    r["matched_word"] = w
+                    cand_belang = r.get("belangrijkheid", 0)
+                    if cand_belang > best_belang:
+                        best_belang = cand_belang
+                        best_result = r
+                else:
+                    e = entries[0]
+                    if e.get("belangrijkheid", 0) > best_belang:
+                        best_belang = e.get("belangrijkheid", 0)
+                        best_result = self._format_result(e, "word_match", matched_word=w)
+            return best_result
 
         # 3. Startswith zoeken (strikter dan substring)
         if len(q) >= 5:
@@ -264,24 +339,54 @@ class SnapNLPService:
         """
         Zoek ALLE begrippen die in een zin voorkomen.
         Retourneert lijst van matches.
+
+        v6_homonym_tag_disambig_001 — bij homoniemen (zelfde begrip, meerdere
+        kaarten) wordt de juiste kaart gekozen op basis van tag-overlap met
+        de hele user-zin. Bij gelijkspel → markeer match met
+        `homonym_ambiguous=True` + `homonym_candidates`.
         """
         index = self._get_index()
         words = self._extract_meaningful_words(text.lower())
+        ctx_words = set(words)
         results = []
         seen = set()
+
+        def _disambig(entries, match_type, matched_word):
+            if len(entries) == 1:
+                return self._format_result(entries[0], match_type, matched_word=matched_word)
+            scored = []
+            for e in entries:
+                s, mt = self._score_by_tag_context(e, ctx_words)
+                scored.append((s, e.get("belangrijkheid", 0), mt, e))
+            scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+            best_score, _, best_tags, best_entry = scored[0]
+            res = self._format_result(best_entry, match_type, matched_word=matched_word)
+            second_score = scored[1][0] if len(scored) > 1 else -1
+            if best_score == 0 or best_score == second_score:
+                res["homonym_candidates"] = [
+                    {
+                        "id": e.get("id"),
+                        "begrip": e.get("begrip"),
+                        "laag1": (e.get("lagen") or {}).get("laag1", ""),
+                        "tags_preview": [t for t in (e.get("tags") or []) if t and t.lower() != (e.get("begrip") or "").lower()][:5],
+                    }
+                    for _, _, _, e in scored
+                ]
+                res["homonym_ambiguous"] = True
+            else:
+                res["homonym_matched_tags"] = best_tags
+            return res
 
         for w in words:
             if w in index and w not in seen:
                 seen.add(w)
-                best = max(index[w], key=lambda e: e.get("belangrijkheid", 0))
-                results.append(self._format_result(best, "word_match", matched_word=w))
+                results.append(_disambig(index[w], "word_match", w))
             elif w not in seen:
                 # Substring match
                 found = self._find_in_index(w, index)
                 if found:
                     seen.add(w)
-                    best = max(found, key=lambda e: e.get("belangrijkheid", 0))
-                    results.append(self._format_result(best, "partial", matched_word=w))
+                    results.append(_disambig(found, "partial", w))
 
         return results
 

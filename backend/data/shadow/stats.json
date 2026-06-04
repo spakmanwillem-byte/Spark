@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 981,
+    "events": 984,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 378
+    "knowledge_matches": 384
   },
   "triggers_used": {
     "wedervraag_done": 28,
@@ -102,10 +102,11 @@
     "age_lookup": 14,
     "profile_lookup_ambiguous": 2,
     "personalia_save": 7,
-    "personalia_intrek": 2
+    "personalia_intrek": 2,
+    "homonym_disambig": 1
   },
   "response_types": {
-    "knowledge": 197,
+    "knowledge": 199,
     "unknown": 24,
     "wedervraag_done": 28,
     "wedervraag": 44,
@@ -208,7 +209,8 @@
     "age_lookup": 14,
     "profile_lookup_ambiguous": 2,
     "personalia_save": 7,
-    "personalia_intrek": 2
+    "personalia_intrek": 2,
+    "homonym_disambig": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -305,7 +307,7 @@
     "koekjes": 1,
     "kookt": 1,
     "Praten": 1,
-    "Geld": 1,
+    "Geld": 2,
     "delen": 1,
     "Agenda afspraak maken": 1,
     "oke": 3,
@@ -407,12 +409,15 @@
     "Analoog": 1,
     "Afspraak": 1,
     "aanpassen": 3,
-    "Systemen": 1
+    "Systemen": 1,
+    "bank": 3,
+    "Woonkamer": 1,
+    "Zacht": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-06-04T16:11:27.129198+00:00",
+  "last_event_at": "2026-06-04T16:17:45.383691+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

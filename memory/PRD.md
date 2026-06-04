@@ -1,5 +1,39 @@
 # Spark Core 2.0 — PRD
 
+## v6_homonym_tag_disambig_001 — Homoniem-resolver via tags (2026-06-04, sessie 27)
+
+### Probleem
+Twee kaarten met hetzelfde begrip "bank" (geld vs meubel) — Spark koos
+willekeurig de eerste in het bestand en negeerde de tweede. User moest
+de truc met tussenhaakjes "bank (meubel)" gebruiken om ze uit elkaar te
+houden, maar dat brak de chat-lookup.
+
+### Oplossing
+- `snap_service._score_by_tag_context(entry, context_words)` — geeft een
+  kaart een score op basis van hoeveel van zijn tags voorkomen in de
+  user-zin.
+- `lookup(query, context_text)` en `multi_lookup(text)` gebruiken nu deze
+  score bij meerdere matches op hetzelfde begrip.
+- Bij overtuigende winnaar → automatisch gekozen, `homonym_matched_tags`
+  toegevoegd aan het result.
+- Bij gelijkspel of geen winnaar → `homonym_ambiguous=true` +
+  `homonym_candidates[]` met `tags_preview` per kandidaat.
+- Chat-route in `routes.py` herkent ambiguous result en stelt user de
+  disambig-vraag i.p.v. willekeurig te kiezen.
+
+### Verificatie (3 test-scenario's via curl)
+- "ik heb geld op de bank" → kiest financiële instelling ✓
+- "mijn bank in de woonkamer is zacht" → kiest meubel (matched: woonkamer) ✓
+- alleen "bank" → vraagt user welke betekenis (toont beide met tag-preview) ✓
+
+### Gevolg voor gebruiker
+Geen tussenhaakjes-truc meer nodig. Maak 2 kaarten met zelfde begrip,
+geef ze elk hun eigen tags (bv. "gebouw" vs "meubel"), het systeem regelt
+de rest via context.
+
+---
+
+
 ## Merge productie → preview (2026-06-04, sessie 27)
 
 ### 📥 Data-merge uit productie-backup

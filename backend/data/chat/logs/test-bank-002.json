@@ -1,0 +1,43 @@
+{
+  "user_id": "test-bank-002",
+  "conversations": [
+    {
+      "id": "conv-c3658526",
+      "timestamp": "2026-06-04T16:17:45.192118+00:00",
+      "user_id": "test-bank-002",
+      "user_naam": "TestUser",
+      "user_message": "mijn bank in de woonkamer is zacht",
+      "spark_response": "**bank**: Een bank is een meubel waarop mensen kunnen zitten of liggen.\n\n**Woonkamer**: Een woonkamer is een ruimte in een woning waar mensen samenkomen, ontspannen en tijd doorbrengen.\n\n**Zacht**: Zacht betekent dat iets weinig hardheid, kracht of scherpte heeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "bank"
+          },
+          {
+            "begrip": "Woonkamer"
+          },
+          {
+            "begrip": "Zacht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-bank-002",
+    "total_conversations": 1,
+    "last_updated": "2026-06-04T16:17:45.192118+00:00"
+  }
+}

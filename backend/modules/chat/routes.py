@@ -1361,6 +1361,28 @@ async def process_message(req: ChatMessage):
         prefix = ""
         if emotion and emotion.get("empathic_response"):
             prefix = emotion["empathic_response"] + "\n\n"
+
+        # v6_homonym_tag_disambig_001 — als de eerste match ambigu is (2+
+        # kaarten met zelfde begrip, geen overtuigende tag-context-winnaar),
+        # vraag user welke betekenis bedoeld is i.p.v. willekeurig kiezen.
+        if best.get("homonym_ambiguous") and best.get("homonym_candidates"):
+            cands = best["homonym_candidates"]
+            lines = [f"{prefix}Ik ken meerdere '{best['begrip']}' — welke bedoel je?"]
+            for i, c in enumerate(cands, 1):
+                tags_hint = ", ".join(c.get("tags_preview") or [])
+                preview = (c.get("laag1") or "").strip()
+                if preview:
+                    preview = preview[:80] + ("…" if len(preview) > 80 else "")
+                    lines.append(f"  {i}. **{c['begrip']}** ({tags_hint}) — {preview}")
+                else:
+                    lines.append(f"  {i}. **{c['begrip']}** ({tags_hint})")
+            lines.append("\n_(Geef wat context: bv. 'de bank waar ik op zit' of 'mijn bank-rekening'.)_")
+            response["message"] = "\n".join(lines)
+            response["type"] = "homonym_disambig"
+            response["homonym_candidates"] = cands
+            _save_log(req, response, "homonym_disambig")
+            return response
+
         if laag1:
             if len(matches) == 1:
                 response["message"] = f"{prefix}**{best['begrip']}**: {laag1}"

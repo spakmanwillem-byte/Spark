@@ -327,7 +327,7 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
             })
             summary["added_v1"] += 1
 
-        # --- KB V2 — check binnen alle lades op duplicate ---
+        # --- KB V2 — check binnen alle lades + INBOX op duplicate ---
         v2_found = None
         v2_found_lade = None
         for lade_key, lade_data in v2_data.items():
@@ -338,6 +338,21 @@ def apply_cards_to_kb(cards: List[Dict], user_id: str = "user-001",
                     break
             if v2_found:
                 break
+
+        # v6_text_importer_002 — check inbox ook, en VERWIJDER inbox-versie
+        # zodat top-50 niet meer toont wat al gevuld is.
+        inbox_f = KB_V2 / "knowledge_inbox.json"
+        try:
+            inbox_data = load_json(inbox_f, default={"kaarten": []})
+            new_inbox = [k for k in inbox_data.get("kaarten", [])
+                         if (k.get("begrip") or "").lower().strip() != b_lc]
+            removed_from_inbox = len(inbox_data.get("kaarten", [])) - len(new_inbox)
+            if removed_from_inbox > 0:
+                inbox_data["kaarten"] = new_inbox
+                save_json(inbox_f, inbox_data)
+                summary["details"].append({"begrip": b, "inbox_removed": removed_from_inbox})
+        except Exception:
+            pass
 
         if v2_found:
             cur_l1 = (v2_found.get("lagen") or {}).get("laag1", "")

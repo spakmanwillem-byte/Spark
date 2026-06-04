@@ -1,5 +1,42 @@
 # Spark Core 2.0 — PRD
 
+## Completed (2026-06-04 — sessie 27 — KB Unificatie: snap_service leest direct uit V2)
+
+### 🧠 v6_kbv2_unify_snap_001 — KB v1→v2 single source of truth
+
+**Probleem**: `snap_service.py` (chat-lookup) las uit `learned_knowledge/knowledge_base.json` (V1),
+terwijl de UI uit `/data/knowledge/v2/` werkt. Dit veroorzaakte regelmatig "kaart niet gevonden" (zoals
+"januari") en vereiste een aparte drift-sync tool om beide stores synchroon te houden.
+
+**Refactor** (`/app/backend/modules/chat/snap_service.py`):
+- `_load_knowledge()` leest nu uit **V2 als autoritatieve bron** (4 lades + inbox), met V1 als
+  legacy-fallback ALLEEN voor begrippen die nog niet in V2 staan. V2 wint altijd bij conflict.
+- `_v2_to_entry()` adapter: converteert V2 schema (lade/status/footnote) naar V1-compatibele
+  shape (lagen/ws5/tags/belangrijkheid) zodat de rest van snap_service onveranderd blijft werken.
+- `create_word_snap` / `create_sentence_snap` / `create_homonym_variant` schrijven nu rechtstreeks
+  naar V2 Inbox (geen V1-writes meer). V1 `knowledge_base.json` wordt nooit meer aangeraakt door
+  snap_service.
+- Module-level cache (`_GLOBAL_KNOWLEDGE_INDEX`) zodat ALLE callers (chat + UI hooks) dezelfde
+  cache-staat delen — anders zou een UI-edit niet doorwerken in de chat-singleton.
+
+**Bijwerk**:
+- `kb_v2/service.py:_fire_post_classify_hooks` invalideert nu snap-cache na elke classify/edit
+  → chat ziet UI-bewerkingen direct.
+- `kb_v2/routes.py` import-typo gefixt (`SnapService` → `SnapNLPService`).
+
+**Verificatie**:
+- `lookup('analoog')` → `kbv2-5cc8b12e` uit V2 lade `weten` ✓
+- `lookup('januari')` → `kbv2-1c0cba87` uit V2 Inbox (drift-synced kaart) ✓
+- Nieuwe snap via `/api/chat/snap` belandt in V2 Inbox, V1 blijft ongewijzigd ✓
+- Edit in UI → cache-invalidatie → chat-lookup direct geüpdatet ✓
+- 5388 V2 entries + 28 unique V1 legacy entries (vs 5364 totaal V1) → V2 is dominant ✓
+
+**Resultaat**: V2 is nu de enige bron-van-waarheid voor chat-kennis. V1 `knowledge_base.json`
+is effectief deprecated voor snap-creatie (kan in een latere sessie volledig gemigreerd worden).
+
+---
+
+
 ## Completed (2026-06-03 — sessie 26 — Pre-deploy Reset uitgebreid + RPS basisklassen + char-userId fix)
 
 ### 🔄 v6_pre_deploy_reset_002 — Schone-lei knop voor redeploy

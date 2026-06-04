@@ -2,12 +2,17 @@
 Snap & NLP Service - Standalone (geen spaCy/Levenshtein nodig)
 
 Functionaliteit:
-1. Knowledge lookup: zoek begrippen in knowledge_base.json
-2. Snap creatie: maak placeholder kaarten voor onbekende woorden
-3. Zin snap: sla context zinnen op
-4. Dubbele woorden check: voorkom duplicaten
+1. Knowledge lookup: zoek begrippen in KB V2 (primaire bron) + V1 (legacy fallback)
+2. Snap creatie: maak placeholder kaarten in KB V2 Inbox voor onbekende woorden
+3. Zin snap: sla context-zinnen op (V2 Inbox met 'context-zin' tag)
+4. Dubbele woorden check: voorkom duplicaten over V2 + V1 heen
 5. Sentiment detectie: positief/negatief/neutraal
 6. Commando detectie: help, dagboek, triggers etc.
+
+v6_kbv2_unify_snap_001 — KB-unificatie:
+- Read-pad leest direct uit /data/knowledge/v2/ (4 lades + inbox)
+- Write-pad maakt nieuwe snaps in V2 Inbox (niet meer in V1 knowledge_base.json)
+- Legacy V1-kaarten worden alleen meegelezen als fallback (geen schrijfacties)
 """
 import re
 import secrets
@@ -25,6 +30,13 @@ def _ascii_fold(s: str) -> str:
     if not s:
         return ""
     return "".join(c for c in _ud.normalize("NFD", s) if _ud.category(c) != "Mn")
+
+# v6_kbv2_unify_snap_001 — KB v2 paden (nieuwe primaire bron)
+V2_DIR = DATA_DIR / "knowledge" / "v2"
+V2_LADES = ("voelen", "spreken", "weten", "doen")
+V2_INBOX_FILE = V2_DIR / "knowledge_inbox.json"
+
+# Legacy V1-bestand (alleen-lezen, alleen voor fallback)
 KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 KEYWORDS_FILE = DATA_DIR / "keywords.json"
 TRIGGERS_FILE = DATA_DIR / "conversation_triggers.json"
@@ -53,6 +65,81 @@ STOPWOORDEN = {
 }
 
 
+# ===========================================================================
+# v6_kbv2_unify_snap_001 — V2-formaat normalisatie
+# ===========================================================================
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _v2_to_entry(card: dict, source_lade: str | None) -> dict:
+    """Converteer een V2 kaart naar de V1-compatibele entry-shape die de
+    rest van snap_service verwacht (lagen, ws5, tags, belangrijkheid, etc.).
+    """
+    tags = list(card.get("tags") or [])
+    status = card.get("status") or ("active" if source_lade else "draft")
+    # Belangrijkheid: V2 heeft dit veld niet → afleiden uit status + lagen
+    lagen = card.get("lagen") or {}
+    filled = sum(1 for k in ("laag1", "laag2", "laag3", "laag4") if (lagen.get(k) or "").strip())
+    if status == "active" and filled >= 1:
+        belangrijkheid = 5
+    elif filled >= 1:
+        belangrijkheid = 4
+    else:
+        belangrijkheid = 2
+    is_sentence = "context-zin" in tags
+    return {
+        "id": card.get("id"),
+        "begrip": card.get("begrip") or "",
+        "lagen": {
+            "laag1": (lagen.get("laag1") or ""),
+            "laag2": (lagen.get("laag2") or ""),
+            "laag3": (lagen.get("laag3") or ""),
+            "laag4": (lagen.get("laag4") or ""),
+        },
+        "ws5": dict(card.get("ws5") or {}),
+        "tags": tags,
+        "topic": (card.get("topic") or source_lade or ""),
+        "belangrijkheid": belangrijkheid,
+        "status": status,
+        "lade": source_lade,
+        "metadata": {"is_sentence": is_sentence, "source": "kbv2"},
+        "_v2_source": "lade" if source_lade else "inbox",
+    }
+
+
+def _load_v2_entries() -> list:
+    """Laad alle V2 kaarten (4 lades + inbox) als V1-compatible entries."""
+    entries: list = []
+    for lade in V2_LADES:
+        d = load_json(V2_DIR / f"knowledge_v2_{lade}.json", default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            entries.append(_v2_to_entry(c, lade))
+    inbox = load_json(V2_INBOX_FILE, default={"kaarten": []})
+    for c in inbox.get("kaarten", []):
+        entries.append(_v2_to_entry(c, None))
+    return entries
+
+
+def _load_v1_entries() -> list:
+    """Laad legacy V1 entries (alleen-lezen, voor fallback op kaarten die
+    nog niet naar V2 gemigreerd zijn)."""
+    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    return data.get("knowledge_entries", []) or []
+
+
+# v6_kbv2_unify_snap_001 — module-level cache zodat ALLE callers (chat + kb_v2 hooks)
+# dezelfde state delen. Anders zou SnapNLPService() in de UI-hook een verse instance
+# bouwen en de chat-singleton's cache niet invalideren.
+_GLOBAL_KNOWLEDGE_INDEX: dict | None = None
+
+
+def _invalidate_global_cache() -> None:
+    global _GLOBAL_KNOWLEDGE_INDEX
+    _GLOBAL_KNOWLEDGE_INDEX = None
+
+
 class SnapNLPService:
     def __init__(self):
         self._keywords = None
@@ -73,8 +160,30 @@ class SnapNLPService:
         return self._triggers
 
     def _load_knowledge(self):
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        return data.get("knowledge_entries", [])
+        """v6_kbv2_unify_snap_001 — V2 is autoritatief, V1 is legacy-fallback.
+
+        Strategie:
+          1. Laad V2 entries (alle 4 lades + inbox)
+          2. Voeg V1 entries toe ALLEEN als hun begrip nog niet in V2 zit
+             (lowercase + ascii-fold vergelijking). Zo verliezen we geen
+             historische kennis terwijl V2 wel de bron-van-waarheid is.
+        """
+        v2 = _load_v2_entries()
+        v2_begrip_set = set()
+        for e in v2:
+            b = (e.get("begrip") or "").lower().strip()
+            if b:
+                v2_begrip_set.add(b)
+                v2_begrip_set.add(_ascii_fold(b))
+        merged = list(v2)
+        for e in _load_v1_entries():
+            b = (e.get("begrip") or "").lower().strip()
+            if not b:
+                continue
+            if b in v2_begrip_set or _ascii_fold(b) in v2_begrip_set:
+                continue  # V2 wint
+            merged.append(e)
+        return merged
 
     def _build_index(self, entries):
         """Bouw een snelle lookup index op begrip (lowercase).
@@ -94,14 +203,15 @@ class SnapNLPService:
         return index
 
     def _get_index(self):
-        if self._knowledge_index is None:
+        global _GLOBAL_KNOWLEDGE_INDEX
+        if _GLOBAL_KNOWLEDGE_INDEX is None:
             entries = self._load_knowledge()
-            self._knowledge_index = self._build_index(entries)
-        return self._knowledge_index
+            _GLOBAL_KNOWLEDGE_INDEX = self._build_index(entries)
+        return _GLOBAL_KNOWLEDGE_INDEX
 
     def invalidate_cache(self):
-        """Call na save/delete operaties"""
-        self._knowledge_index = None
+        """Call na save/delete operaties (gedeeld over alle instances)."""
+        _invalidate_global_cache()
         self._knowledge_cache = None
 
     # ========== KNOWLEDGE LOOKUP ==========
@@ -204,11 +314,10 @@ class SnapNLPService:
     # ========== DEEP LAYERS & SENTENCE-SNAP MATCH (v4_011) ==========
 
     def get_entry_by_id(self, entry_id):
-        """Haal een kaart op id uit de kennisbank."""
+        """Haal een kaart op id uit de kennisbank (V2 + V1 fallback)."""
         if not entry_id:
             return None
-        entries = self._load_knowledge()
-        for e in entries:
+        for e in self._load_knowledge():
             if e.get("id") == entry_id:
                 return e
         return None
@@ -322,12 +431,35 @@ class SnapNLPService:
                     return entries
         return None
 
-    # ========== SNAP CREATION ==========
+    # ========== SNAP CREATION (v6_kbv2_unify_snap_001 — naar V2 Inbox) ==========
+
+    def _save_v2_inbox_card(self, card: dict) -> dict:
+        """Append een kaart aan V2 Inbox en update de V2 index. Idempotent
+        is de verantwoordelijkheid van de caller (we doen al een dup-check
+        bovenstrooms via _get_index)."""
+        inbox = load_json(V2_INBOX_FILE, default={"version": 1, "kaarten": []})
+        inbox.setdefault("kaarten", []).append(card)
+        inbox["card_count"] = len(inbox["kaarten"])
+        inbox.setdefault("metadata", {})["last_updated"] = _now()
+        save_json(V2_INBOX_FILE, inbox)
+        # V2 index bijwerken
+        idx_path = V2_DIR / "knowledge_index.json"
+        idx = load_json(idx_path, default={"version": 1, "entries": {}})
+        idx.setdefault("entries", {})[(card.get("begrip") or "").lower().strip()] = {
+            "kaart_id": card["id"],
+            "lade": None,
+            "has_lagen": [],
+            "last_updated": _now(),
+        }
+        idx["entry_count"] = len(idx["entries"])
+        save_json(idx_path, idx)
+        return card
 
     def create_word_snap(self, concept, context, user_naam, extra_tags=None, decomposed_from=None):
         """
-        Maak een woord-snap: placeholder kaart voor onbekend begrip.
-        Checkt duplicaten. Retourneert None als het al bestaat of een stopwoord is.
+        Maak een woord-snap: placeholder kaart in V2 Inbox voor onbekend begrip.
+        Checkt duplicaten over V2+V1 heen. Retourneert None als het al bestaat
+        of een stopwoord is.
 
         extra_tags: extra tags die overgeërfd worden (bv. van decompositie)
         decomposed_from: list van begrippen waar dit woord uit is afgeleid
@@ -340,7 +472,7 @@ class SnapNLPService:
         if concept.lower() in STOPWOORDEN:
             return None
 
-        # Duplicate check (exact + ascii-fold voor accenten/umlaut — v4_snap_dedupe_002)
+        # Duplicate check over V2+V1 (exact + ascii-fold voor accenten/umlaut)
         index = self._get_index()
         if concept.lower() in index:
             return None
@@ -356,46 +488,53 @@ class SnapNLPService:
         if decomposed_from:
             tags.append("compositional")
 
-        # Maak snap entry (zelfde structuur als oude systeem)
-        entry = {
-            "id": f"snap-{uuid.uuid4().hex[:8]}",
+        # V2 Inbox-kaart (V2 schema: id 'kbv2-...', lade=None, status=draft, footnote{...})
+        now = _now()
+        card = {
+            "id": f"kbv2-{uuid.uuid4().hex[:8]}",
             "begrip": concept,
-            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
-            "tags": tags,
-            "bron": "auto-detected",
-            "detected_by": user_naam,
-            "detected_at": datetime.now(timezone.utc).isoformat(),
+            "lade": None,
             "status": "draft",
-            "belangrijkheid": 3,
-            "usage_count": 0,
+            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": {},
+            "tags": tags,
             "topic": "",
-            "snap_context": context[:200] if context else "",
-            "metadata": {
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "created_via": "snap",
-                "is_sentence": False,
+            "verbanden": [],
+            "footnote": {
+                "bron": "snap-auto",
+                "aangemaakt_door": user_naam,
+                "aangemaakt_op": now,
+                "ingedeeld_door": None,
+                "ingedeeld_op": None,
+                "vertrouwen": 0.3,
+                "snap_context": (context or "")[:200],
                 **({"decomposed_from": decomposed_from} if decomposed_from else {}),
             },
+            "media": {"voice_url": None, "voice_transcript": None, "image_urls": []},
+            "needs": ["laag1", "ws5", "voice", "image"],
+            "_inbox_reason": "missing_laag1",
         }
-
-        # Opslaan
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        data["knowledge_entries"].append(entry)
-        save_json(KNOWLEDGE_FILE, data)
+        self._save_v2_inbox_card(card)
         self.invalidate_cache()
+
+        # V1-compatibele shape voor caller + graph sync
+        entry_compat = _v2_to_entry(card, None)
+        entry_compat["snap_context"] = (context or "")[:200]
+        entry_compat["bron"] = "auto-detected"
+        entry_compat["detected_by"] = user_naam
+        entry_compat["detected_at"] = now
 
         # Graph auto-sync: voeg node toe + bereken edges via shared tags
         try:
-            upsert_node_from_entry(entry)
+            upsert_node_from_entry(entry_compat)
         except Exception as ex:
             print(f"[graph-sync] word-snap upsert failed: {ex}")
 
-        return entry
+        return entry_compat
 
     def create_sentence_snap(self, sentence, context, user_naam):
         """
-        Maak een zin-snap: context zin opslaan (geen duplicate check behalve exact).
+        Maak een zin-snap: context-zin opslaan in V2 Inbox (tag 'context-zin').
         """
         sentence = sentence.strip()
         if not sentence or len(sentence) < 5:
@@ -406,35 +545,46 @@ class SnapNLPService:
         if sentence.lower() in index:
             return None
 
-        entry = {
-            "id": f"snap-{uuid.uuid4().hex[:8]}",
+        now = _now()
+        card = {
+            "id": f"kbv2-{uuid.uuid4().hex[:8]}",
             "begrip": sentence,
-            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
-            "tags": ["knowledge-snap", "auto-generated", "context-zin"],
-            "bron": "auto-detected",
-            "detected_by": user_naam,
-            "detected_at": datetime.now(timezone.utc).isoformat(),
+            "lade": None,
             "status": "draft",
-            "belangrijkheid": 2,
-            "usage_count": 0,
+            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": {},
+            "tags": ["knowledge-snap", "auto-generated", "context-zin"],
             "topic": "",
-            "snap_context": context[:200] if context else "",
-            "metadata": {"created_at": datetime.now(timezone.utc).isoformat(), "created_via": "snap", "is_sentence": True},
+            "verbanden": [],
+            "footnote": {
+                "bron": "snap-sentence",
+                "aangemaakt_door": user_naam,
+                "aangemaakt_op": now,
+                "ingedeeld_door": None,
+                "ingedeeld_op": None,
+                "vertrouwen": 0.2,
+                "snap_context": (context or "")[:200],
+                "is_sentence": True,
+            },
+            "media": {"voice_url": None, "voice_transcript": None, "image_urls": []},
+            "needs": ["laag1", "ws5", "voice", "image"],
+            "_inbox_reason": "missing_laag1",
         }
-
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        data["knowledge_entries"].append(entry)
-        save_json(KNOWLEDGE_FILE, data)
+        self._save_v2_inbox_card(card)
         self.invalidate_cache()
 
-        # Graph auto-sync
+        entry_compat = _v2_to_entry(card, None)
+        entry_compat["snap_context"] = (context or "")[:200]
+        entry_compat["bron"] = "auto-detected"
+        entry_compat["detected_by"] = user_naam
+        entry_compat["detected_at"] = now
+
         try:
-            upsert_node_from_entry(entry)
+            upsert_node_from_entry(entry_compat)
         except Exception as ex:
             print(f"[graph-sync] sentence-snap upsert failed: {ex}")
 
-        return entry
+        return entry_compat
 
     # ========== SENTIMENT & TRIGGERS ==========
 
@@ -526,42 +676,49 @@ class SnapNLPService:
 
     def create_homonym_variant(self, begrip, user_naam, original_id=None):
         """
-        Maak een duplicate snap voor een bestaand begrip (homoniem).
+        Maak een duplicate snap voor een bestaand begrip (homoniem) in V2 Inbox.
         Geeft de nieuwe kaart een 'homonym_variant' tag + link naar origineel.
         """
-        entry = {
-            "id": f"snap-{uuid.uuid4().hex[:8]}",
+        now = _now()
+        card = {
+            "id": f"kbv2-{uuid.uuid4().hex[:8]}",
             "begrip": begrip,
-            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
-            "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
-            "tags": ["knowledge-snap", "homonym_variant", "auto-generated"],
-            "bron": "homonym-disambiguation",
-            "detected_by": user_naam,
-            "detected_at": datetime.now(timezone.utc).isoformat(),
+            "lade": None,
             "status": "draft",
-            "belangrijkheid": 2,
-            "usage_count": 0,
+            "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
+            "ws5": {},
+            "tags": ["knowledge-snap", "homonym_variant", "auto-generated"],
             "topic": "",
-            "snap_context": f"Homoniem van '{begrip}' — user gaf aan andere betekenis te bedoelen",
-            "related_to": original_id,
-            "metadata": {
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "created_via": "homonym_flow",
-                "is_sentence": False,
+            "verbanden": [],
+            "footnote": {
+                "bron": "homonym-disambiguation",
+                "aangemaakt_door": user_naam,
+                "aangemaakt_op": now,
+                "ingedeeld_door": None,
+                "ingedeeld_op": None,
+                "vertrouwen": 0.2,
+                "snap_context": f"Homoniem van '{begrip}' — user gaf aan andere betekenis te bedoelen",
+                "related_to": original_id,
             },
+            "media": {"voice_url": None, "voice_transcript": None, "image_urls": []},
+            "needs": ["laag1", "ws5", "voice", "image"],
+            "_inbox_reason": "missing_laag1",
         }
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        data["knowledge_entries"].append(entry)
-        save_json(KNOWLEDGE_FILE, data)
+        self._save_v2_inbox_card(card)
         self.invalidate_cache()
 
-        # Graph auto-sync (homonym variant — krijgt sterke 'homonym_variant' edge)
+        entry_compat = _v2_to_entry(card, None)
+        entry_compat["related_to"] = original_id
+        entry_compat["bron"] = "homonym-disambiguation"
+        entry_compat["detected_by"] = user_naam
+        entry_compat["detected_at"] = now
+
         try:
-            upsert_node_from_entry(entry)
+            upsert_node_from_entry(entry_compat)
         except Exception as ex:
             print(f"[graph-sync] homonym-variant upsert failed: {ex}")
 
-        return entry
+        return entry_compat
 
     def get_trigger_response(self, trigger_type):
         """Geeft een random response voor een trigger type"""

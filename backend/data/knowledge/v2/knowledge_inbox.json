@@ -12,7 +12,8 @@
     "last_dedupe_at": "2026-06-04T10:03:10.032631+00:00",
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
-    "last_v1_drift_sync_added": 54
+    "last_v1_drift_sync_added": 54,
+    "last_updated": "2026-06-04T10:34:05.384590+00:00"
   },
   "kaarten": [
     {
@@ -127520,11 +127521,51 @@
         "vorige_versie_v1": "snap-6142df25",
         "vertrouwen": 0.3,
         "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-03T17:00:14.390679+00:00"
+        "aangemaakt_op": "2026-06-03T17:00:14.390679+00:00",
+        "laatst_bewerkt_door": "user-000",
+        "laatst_bewerkt_op": "2026-06-04T10:33:22.395461+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T10:32:40.394818+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T10:32:40.398532+00:00",
+            "result": {
+              "n_found": 1,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T10:33:22.314564+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T10:33:22.318204+00:00",
+            "result": {
+              "n_found": 1,
+              "top_overlap": 2
+            }
+          }
+        ]
       },
       "media": [],
-      "needs": [],
-      "_inbox_reason": "missing_laag1"
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ]
     },
     {
       "id": "kbv2-1a32f423",

@@ -519,6 +519,13 @@ def classify_card(card_id: str, lade: str, updates: Optional[Dict] = None,
 def _fire_post_classify_hooks(card: Dict, lade: str) -> None:
     """v6_kbv2_hooks_landing_001 — fire hooks 1/3/4 na succesvolle classify/edit.
     Faalt graceful (try/except per hook) zodat 1 broken hook nooit een save blokkeert."""
+    # v6_kbv2_unify_snap_001 — Invalidate snap-cache zodat chat direct
+    # de nieuwe/bewerkte V2-kaart kan vinden (lookup-pad leest nu uit V2).
+    try:
+        from modules.chat.snap_service import SnapNLPService
+        SnapNLPService().invalidate_cache()
+    except Exception:
+        pass
     try:
         from . import hooks as kbv2_hooks
     except Exception:

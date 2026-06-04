@@ -103,8 +103,8 @@ async def admin_import_text(body: TextImportBody):
                                 overwrite_existing=body.overwrite_existing)
     # Invalidate snap-cache zodat chat de nieuwe kaarten direct ziet
     try:
-        from modules.chat.snap_service import SnapService
-        SnapService().invalidate_cache()
+        from modules.chat.snap_service import SnapNLPService
+        SnapNLPService().invalidate_cache()
     except Exception:
         pass
     return {"success": True, **summary, "parsed_count": len(cards)}

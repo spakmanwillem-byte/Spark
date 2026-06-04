@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1006,
+    "events": 1007,
     "corrections": 2,
     "confirmations": 0,
     "fallbacks": 0,
-    "knowledge_matches": 408
+    "knowledge_matches": 410
   },
   "triggers_used": {
     "wedervraag_done": 28,
@@ -106,7 +106,7 @@
     "homonym_disambig": 1
   },
   "response_types": {
-    "knowledge": 212,
+    "knowledge": 213,
     "unknown": 25,
     "wedervraag_done": 28,
     "wedervraag": 44,
@@ -342,7 +342,7 @@
     "Gezondheid": 1,
     "check": 1,
     "draaien": 2,
-    "annuleer": 2,
+    "annuleer": 3,
     "starten": 3,
     "Verhaal": 1,
     "antwoord": 2,
@@ -418,12 +418,13 @@
     "hoeveel": 3,
     "Gerben": 1,
     "meisje": 1,
-    "jongen": 1
+    "jongen": 1,
+    "Betekent": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-06-04T18:57:58.198434+00:00",
+  "last_event_at": "2026-06-04T20:47:22.321248+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

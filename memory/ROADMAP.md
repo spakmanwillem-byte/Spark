@@ -1,5 +1,51 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+---
+
+## 🔎 REALITY CHECK — Sessie 27 (2026-06-04)
+> Schone foto van wat er **echt** in de codebase staat, niet wat in oude notes staat.
+> Doel: jij kan tijdens redeploy snel zien wat klopt, wat half is, en wat nog open is.
+
+### ✅ Bevestigd AF (in code geverifieerd)
+- **KB Unificatie** — `snap_service.py` leest direct uit `/data/knowledge/v2/` (5388 V2 entries primair, V1 legacy-fallback). Nieuwe snaps → V2 Inbox. Cache shared over alle callers. ✓ End-to-end getest via curl.
+- **Pre-deploy reset** — `POST /api/admin/system/pre-deploy-reset` + UI panel werkt (12 potjes, ROAR=0, kasboek leeg, baseline weg). ✓
+- **Smart Intents (Relaties + Personalia)** — `relation_extraction_service.py` + `personalia_extraction_service.py` + `_intrek_service.py` actief in chat-flow. ✓
+- **RPS 3 basisklassen** — `EditMetaModal` dropdown met Handgevecht / Boog / Magie. `STARTING_GOLD = 1000`. ✓
+- **Bitvavo Pot-guard** — monitor weigert start als pots=0. ✓
+- **BarkModal voor wachtwoord-reset** — UserAdminPage gebruikt nu BarkModal i.p.v. JS alert/confirm. ✓
+- **KB Text Importer** — `text_importer.py` backend + UI modal in KennisbankV2Page. ✓
+- **V1→V2 Drift Sync** — `v1_drift_sync.py` + admin endpoint. ✓
+- **Spark Shop existeert** — `shop-spark` in shops.json, kasboek=spark_core, status=active. ✓
+- **D&D Event Feed (basis)** — ringbuffer max 50 in `character.py::event_feed`. ✓ (Spec was uitbreiden met `[SYSTEEM]/[WERELD]/[HANDEL]` categorieën — basis staat, categorisering nog niet.)
+
+### 🟡 HALF AF / GEDEELTELIJK (heeft nog werk nodig)
+- **Spark als Gastheer / Onboarding** — alleen `handle_free_choice_first_time()` bestaat in `dank_service.py`. Volledige first-run handholding-flow (5+ scenarios uit ROADMAP P1) is **niet** geïmplementeerd.
+- **Shadow-vragen queue (User-B verificatie)** — lege folder `data/persons/shadow_questions/` bestaat maar **geen code/endpoints**. Concept staat in PRD, implementatie 0%.
+- **RPS Audio koppeling** — KB-kaarten hebben `sps` tag, maar `rps_service.py` heeft geen audio-lookup of sound_url in de response. Frontend RpsBark speelt geen geluid af.
+
+### ❌ NIET AF (nog niet aangeraakt)
+- **Spark Shop avatar/logo** — `shop-spark.logo_url = NONE`. Upload of seed nodig.
+- **Checkout-routing per shop kasboek** — `shop/routes.py` gebruikt nog default `spark_core`. Roadkill-orders landen in verkeerd kasboek. Geblokkeerd op SEPA-implementatie.
+- **Drill-down Help Barks** — geen code in `help_per_gradatie/`. Concept is "klik op help-topic → opent dieper bark".
+- **SVG Province Map** — frontend gebruikt nog bitmap-dots, geen SVG path tags.
+
+### 📋 Gradatie per task (post-deploy prioriteit)
+| Status | Task | Effort | Aanrader |
+|---|---|---|---|
+| ❌ P1 | Spark Shop logo | 5min | doe ik graag voor je — upload of icoon-gen |
+| 🟡 P1 | RPS audio koppelen | 30min | quick win, cards zijn al getagd |
+| ❌ P1 | Checkout kasboek-split | 2u | wacht op SEPA, niet urgent |
+| ❌ P1 | Shadow-vragen queue | 4u | grotere feature, eerst flow ontwerpen |
+| ❌ P2 | SVG Province Map | 3u | UX polish |
+| ❌ P2 | Drill-down Help Barks | 1u | UX polish |
+| 🟡 P2 | Spark als Gastheer | 4u | UX warmte, geen blocker |
+
+> 💡 **Voor De Willem na redeploy**: bekijk dit kort, vink in een PM aan wat je gevoel zegt "doe maar" of "wacht nog". Dan pak ik het bij volgende sessie systematisch op.
+
+---
+
+
+
 > **Zie ook**: `MISSION.md` voor missie/visie/identiteit/privacy (DNA-laag).
 
 ---

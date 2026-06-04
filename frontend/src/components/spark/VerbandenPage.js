@@ -205,7 +205,7 @@ export function VerbandenPage({ onNavigate }) {
                 {/* Selected node + neighborhood */}
                 {selectedNode ? (
                   <>
-                    <NodeDetail node={selectedNode} onClose={() => { setSelectedNode(null); setNeighborhood(null); }} />
+                    <NodeDetail node={selectedNode} onClose={() => { setSelectedNode(null); setNeighborhood(null); }} onNavigate={onNavigate} />
                     {loadingNeighborhood ? (
                       <div className="flex items-center justify-center py-8">
                         <div className="w-6 h-6 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
@@ -369,8 +369,19 @@ export function VerbandenPage({ onNavigate }) {
   );
 }
 
-function NodeDetail({ node, onClose }) {
+function NodeDetail({ node, onClose, onNavigate }) {
   const color = getColor(node.tags);
+  // v6_kbv2_open_by_id_001 — id-format herkenning: kbv2-... = KB v2 kaart
+  const isKbV2 = typeof node.id === 'string' && node.id.startsWith('kbv2-');
+  const openInKennisbank = () => {
+    // Dispatch eerst (zodat KennisbankV2Page de listener triggert wanneer hij mount)
+    window.dispatchEvent(new CustomEvent('spark:open-kbv2-card', {
+      detail: { cardId: node.id, begrip: node.label },
+    }));
+    if (typeof onNavigate === 'function') {
+      onNavigate('knowledge-v2', '/knowledge');
+    }
+  };
   return (
     <div data-testid="node-detail" className="p-5 rounded-xl border" style={{ borderColor: `${color}30`, background: `${color}06` }}>
       <div className="flex items-start justify-between mb-3">
@@ -383,7 +394,20 @@ function NodeDetail({ node, onClose }) {
             <p className="text-[10px] text-slate-500">{node.type || 'knowledge'} | {node.id?.slice(0, 8)}...</p>
           </div>
         </div>
-        <button onClick={onClose} className="p-1.5 hover:bg-slate-800 rounded-lg"><X className="w-4 h-4 text-slate-400" /></button>
+        <div className="flex items-center gap-1.5">
+          {isKbV2 && (
+            <button
+              data-testid="node-open-in-kennisbank"
+              onClick={openInKennisbank}
+              title="Open deze kaart in de Kennisbank om in te vullen of te bewerken"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 text-[11px] font-medium transition-colors"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              Open in Kennisbank
+            </button>
+          )}
+          <button onClick={onClose} className="p-1.5 hover:bg-slate-800 rounded-lg"><X className="w-4 h-4 text-slate-400" /></button>
+        </div>
       </div>
       {node.description && <p className="text-sm text-slate-300 leading-relaxed mb-3">{node.description}</p>}
       {node.tags?.length > 0 && (

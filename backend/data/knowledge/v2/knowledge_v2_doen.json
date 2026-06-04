@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 874,
+    "card_count": 877,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T15:57:03.900358+00:00",
+    "last_updated": "2026-06-04T17:30:02.388250+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -110268,6 +110268,514 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-04T15:57:01.903561+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5d14246a",
+      "begrip": "annuleer",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Annuleer betekent dat een geplande actie, afspraak of gebeurtenis wordt stopgezet of ongeldig gemaakt.",
+        "laag2": "Door iets te annuleren wordt besloten dat het niet doorgaat of geen effect meer heeft.",
+        "laag3": "Annuleren komt voor bij reserveringen, afspraken, bestellingen, evenementen, opdrachten en digitale processen. Wanneer iets wordt geannuleerd, vervallen eerder gemaakte plannen of afspraken. De reden kan variëren van veranderde omstandigheden tot fouten, onvoorziene gebeurtenissen of een bewuste keuze.",
+        "laag4": "Annuleren is het bewust beëindigen, intrekken of ongeldig verklaren van een geplande handeling, overeenkomst of gebeurtenis voordat deze volledig wordt uitgevoerd."
+      },
+      "ws5": {
+        "wie": "Personen, klanten, organisaties, bedrijven en systemen.",
+        "wat": "Het stopzetten of ongeldig maken van een afspraak, handeling of gebeurtenis.",
+        "wanneer": "Wanneer een gepland proces niet meer gewenst, mogelijk of noodzakelijk is.",
+        "waar": "Bij reserveringen, bestellingen, afspraken, evenementen, projecten en digitale systemen.",
+        "waarom": "Om ongewenste, onjuiste of niet-uitvoerbare plannen te beëindigen.",
+        "hoe": "Door een officiële melding, actie of beslissing waarmee het plan wordt ingetrokken."
+      },
+      "tags": [
+        "annuleer",
+        "annuleren",
+        "annulering",
+        "stopzetten",
+        "intrekken",
+        "afzeggen",
+        "beëindigen",
+        "ongeldig maken",
+        "reservering",
+        "afspraak",
+        "bestelling",
+        "planning",
+        "evenement",
+        "wijziging",
+        "beslissing",
+        "proces",
+        "beëindiging",
+        "keuze",
+        "handeling",
+        "emotie",
+        "neutraal",
+        "teleurstelling",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2e13cf93",
+          "begrip": "opties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beslissing",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eca51fcb",
+          "begrip": "beslissingen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beslissing",
+            "emotie",
+            "keuze",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2a7c59d4",
+          "begrip": "uitvoeren",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "handeling",
+            "neutraal",
+            "planning",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "beslissing",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63a5d91b",
+          "begrip": "nemen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beslissing",
+            "handeling",
+            "keuze",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T16:47:29.410831+00:00",
+        "vorige_versie_v1": "snap-707952b5",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Gebruiker",
+        "aangemaakt_op": "2026-05-28T17:02:50.476414+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T16:47:23.351401+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T16:47:23.888860+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T16:47:23.901376+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T16:47:30.411185+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T16:47:30.466165+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-db1856ca",
+      "begrip": "competitie",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Competitie is een situatie waarin personen of groepen met elkaar strijden om een beter resultaat te behalen.",
+        "laag2": "Bij een competitie proberen deelnemers elkaar te overtreffen volgens afgesproken regels.",
+        "laag3": "Competitie komt voor in sport, onderwijs, werk, economie, spellen en andere sociale situaties. Deelnemers vergelijken prestaties en proberen een doel te bereiken, zoals winnen, verbeteren of een hogere positie behalen. Competitie kan motivatie, ontwikkeling en innovatie stimuleren, maar kan ook spanning en rivaliteit veroorzaken.\n",
+        "laag4": "Competitie is een gestructureerd proces waarbij meerdere deelnemers binnen dezelfde voorwaarden streven naar een relatief betere prestatie, positie of uitkomst dan anderen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, teams, organisaties, bedrijven en soms systemen.",
+        "wat": "Een vorm van strijd, vergelijking of wedstrijd tussen deelnemers.",
+        "wanneer": "Wanneer meerdere partijen hetzelfde doel, dezelfde prijs of dezelfde positie nastreven.",
+        "waar": "In sport, werk, onderwijs, economie, politiek en spelomgevingen.",
+        "waarom": "Om prestaties te meten, doelen te bereiken, te winnen of ontwikkeling te stimuleren.",
+        "hoe": "Door prestaties te vergelijken volgens regels, criteria of afspraken."
+      },
+      "tags": [
+        "competitie",
+        "wedstrijd",
+        "concurrentie",
+        "strijd",
+        "prestatie",
+        "vergelijken",
+        "winnen",
+        "verliezen",
+        "ranking",
+        "score",
+        "uitdaging",
+        "motivatie",
+        "ontwikkeling",
+        "sport",
+        "spel",
+        "team",
+        "doel",
+        "rivaliteit",
+        "prestatiemeting",
+        "regels",
+        "emotie",
+        "enthousiast",
+        "gespannen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3cd997a3",
+          "begrip": "punten",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "competitie",
+            "emotie",
+            "motivatie",
+            "prestatie",
+            "ranking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2248bad7",
+          "begrip": "Gewonnen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "competitie",
+            "doel",
+            "emotie",
+            "prestatie",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "motivatie",
+            "prestatie",
+            "score",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e9b7f0e",
+          "begrip": "High Score",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "competitie",
+            "motivatie",
+            "prestatie",
+            "ranking",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-df8ad401",
+          "begrip": "inspanning",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling",
+            "prestatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T17:28:31.046149+00:00",
+        "vorige_versie_v1": "kb-skel-db1856ca",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.946643+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T17:28:30.007045+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T17:28:30.057462+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T17:28:32.081309+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T17:28:32.099893+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T17:28:29.457402+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e504f5a3",
+      "begrip": "onderbreking",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een onderbreking is een tijdelijke stop of verstoring van een activiteit, proces of gebeurtenis.",
+        "laag2": "Tijdens een onderbreking wordt iets dat bezig is tijdelijk stilgelegd voordat het wordt hervat of beëindigd.",
+        "laag3": "Onderbrekingen komen voor in gesprekken, werkzaamheden, lessen, processen, systemen en communicaties. Ze kunnen gepland zijn, zoals een pauze, of onverwacht optreden door storingen, gebeurtenissen of externe invloeden. Een onderbreking kan invloed hebben op concentratie, voortgang en efficiëntie.\n",
+        "laag4": "Een onderbreking is een tijdelijke onderbreking van de continuïteit van een handeling, proces of gebeurtenis, waarbij de normale voortgang wordt gestopt of verstoord.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, systemen, apparaten en processen.",
+        "wat": "Een tijdelijke stop of verstoring van een lopende activiteit.",
+        "wanneer": "Wanneer een proces, handeling of gebeurtenis wordt stilgelegd of verstoord.",
+        "waar": "In gesprekken, werk, onderwijs, techniek, communicatie en dagelijkse situaties.",
+        "waarom": "Door een pauze, storing, externe gebeurtenis, keuze of noodzakelijke aanpassing.",
+        "hoe": "Door het tijdelijk stoppen, vertragen of afbreken van de normale voortgang."
+      },
+      "tags": [
+        "onderbreking",
+        "onderbreken",
+        "pauze",
+        "verstoring",
+        "stop",
+        "stilstand",
+        "vertraging",
+        "storing",
+        "afleiding",
+        "voortgang",
+        "proces",
+        "gebeurtenis",
+        "communicatie",
+        "gesprek",
+        "werk",
+        "concentratie",
+        "hervatten",
+        "continuïteit",
+        "tijd",
+        "emotie",
+        "neutraal",
+        "frustratie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e6b6d202",
+          "begrip": "wachten",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "gebeurtenis",
+            "neutraal",
+            "pauze",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b08da05",
+          "begrip": "eindelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "frustratie",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gebeurtenis",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-72e8d59b",
+          "begrip": "fase",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gebeurtenis",
+            "neutraal",
+            "proces",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c1f60dc",
+          "begrip": "stroever",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "proces",
+            "vertraging"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T17:30:02.388216+00:00",
+        "vorige_versie_v1": "kb-skel-e504f5a3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.396100+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T17:30:00.856595+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T17:30:00.871368+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T17:30:03.399941+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T17:30:03.412302+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T17:30:00.324941+00:00"
       },
       "media": {
         "voice_url": null,

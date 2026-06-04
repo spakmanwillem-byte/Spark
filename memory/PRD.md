@@ -1,5 +1,32 @@
 # Spark Core 2.0 — PRD
 
+## v6_kbv2_open_by_id_001 — Graph → Kennisbank direct openen (2026-06-04, sessie 27)
+
+### Probleem
+In VerbandenPage (Knowledge Graph) klik je op een node "annuleren", zie
+een NodeDetail kaartje, maar geen knop om die kaart in de Kennisbank te
+openen om in te vullen of bewerken. User moest handmatig terug naar
+Kennisbank → zoeken → openen.
+
+### Oplossing
+- **VerbandenPage `NodeDetail`** krijgt nieuwe knop "Open in Kennisbank"
+  (alleen voor nodes met id-prefix `kbv2-`). Dispatcht window-event
+  `spark:open-kbv2-card` met cardId + begrip, daarna `onNavigate('knowledge-v2')`.
+- **KennisbankV2Page** luistert op dit event: scant inbox + 4 lades op
+  matching id of begrip, switch naar de juiste tab, en zet `selectedCard`
+  zodat de detail-paneel direct open staat.
+- Idempotent: werkt ook wanneer KennisbankV2Page nog niet gemount is
+  (event dispatch wordt afgehandeld op de mount-trigger via useEffect-listener).
+
+### Merge productie → preview
+- ZIP `spark_backup_changes_20260604_173238.zip` (31 files) gemerged.
+- Backup: `/app/backend/data/_backups/pre_prod_merge2_20260604_173449/`
+- KB stats nu: Voelen 393 · Spreken 493 · Weten 1429 · Doen 877 · Inbox 2226 = 5418 totaal
+- Nieuwe kaart "annuleer" (kbv2-5d14246a, lade=doen, alle 4 lagen gevuld) zit nu in V2.
+
+---
+
+
 ## v6_homonym_audit_001 — Homoniem-curatie endpoint (2026-06-04, sessie 27)
 
 ### Endpoint

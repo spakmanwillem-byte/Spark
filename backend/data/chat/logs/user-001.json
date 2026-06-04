@@ -32510,11 +32510,437 @@
         "session_id": "default",
         "gesprek_nummer": 1236
       }
+    },
+    {
+      "id": "conv-b3f25139",
+      "timestamp": "2026-06-04T16:33:45.297039+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1237
+      }
+    },
+    {
+      "id": "conv-4fcb053e",
+      "timestamp": "2026-06-04T16:34:19.288557+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Door er te zijn.",
+      "spark_response": "**door**: Door betekent via, dankzij, langs of verdergaan binnen een proces, beweging of oorzaak.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "door"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "door"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1238
+      }
+    },
+    {
+      "id": "conv-66c03c32",
+      "timestamp": "2026-06-04T16:35:07.570212+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil je gewoon wat vragen stellen.",
+      "spark_response": "Wat mooi om te horen\n\n**vragen**: Vragen betekent informatie, uitleg, hulp of een reactie proberen te krijgen.\n\n**stellen**: Stellen betekent iets plaatsen, formuleren, bepalen of samenbrengen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "vragen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "vragen"
+          },
+          {
+            "begrip": "stellen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1239
+      }
+    },
+    {
+      "id": "conv-e82f317b",
+      "timestamp": "2026-06-04T16:35:43.350956+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat weet jij over mijn moeder?",
+      "spark_response": "Ik ken geen 'mijn moeder' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1240
+      }
+    },
+    {
+      "id": "conv-eea085a4",
+      "timestamp": "2026-06-04T16:37:30.621778+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is mijn zusje?",
+      "spark_response": "Jouw **zusje** is **Maaike Spakman**.\n\n_Zus_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1241
+      }
+    },
+    {
+      "id": "conv-7867bd12",
+      "timestamp": "2026-06-04T16:37:42.331670+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat weet je over maaike",
+      "spark_response": "**Maaike Spakman** is jouw **zus** — woont in Groningen · heeft: online winkel.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1242
+      }
+    },
+    {
+      "id": "conv-40a3df80",
+      "timestamp": "2026-06-04T16:37:55.917119+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat weet je over heidi",
+      "spark_response": "**Heidi Spakman** is jouw **moeder** — ~69 jaar · interesses: katten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "heidi"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1243
+      }
+    },
+    {
+      "id": "conv-fc6ae9fc",
+      "timestamp": "2026-06-04T16:38:09.727620+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe oud is heidi?",
+      "spark_response": "**Heidi Spakman** is **69 jaar** (geboren op 28 januari 1957).",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "age_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "age_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1244
+      }
+    },
+    {
+      "id": "conv-40fd81a5",
+      "timestamp": "2026-06-04T16:38:29.788349+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kan jij rekenen?",
+      "spark_response": "**rekenen**: Rekenen is het uitvoeren van bewerkingen met getallen om een uitkomst te bepalen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "rekenen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1245
+      }
+    },
+    {
+      "id": "conv-996c1f7b",
+      "timestamp": "2026-06-04T16:39:07.490992+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoeveel is tien plus 10",
+      "spark_response": "**hoeveel**: Hoeveel is een vraagwoord dat gebruikt wordt om naar een hoeveelheid, aantal of mate te vragen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **tien, plus** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hoeveel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "tien",
+          "plus"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1246
+      }
+    },
+    {
+      "id": "conv-767d2ec0",
+      "timestamp": "2026-06-04T16:40:49.395178+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "oke",
+      "spark_response": "**oke**: De gebruiker geeft een korte bevestiging.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oke"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1247
+      }
+    },
+    {
+      "id": "conv-a52f4046",
+      "timestamp": "2026-06-04T16:41:56.795261+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Is Gerben vandaag online geweest?",
+      "spark_response": "**Gerben**: Gerben is een voornaam die wordt gebruikt om een persoon aan te duiden.\n\n**vandaag**: Vandaag betekent de huidige dag waarop iemand leeft of spreekt.\n\n**Online**: Online betekent dat iets verbonden is met internet en bereikbaar is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **geweest** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Gerben"
+          },
+          {
+            "begrip": "vandaag"
+          },
+          {
+            "begrip": "Online"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "geweest"
+        ],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1248
+      }
+    },
+    {
+      "id": "conv-09a9cf48",
+      "timestamp": "2026-06-04T16:43:54.450834+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoeveel meisjes namen ken jij ?",
+      "spark_response": "**hoeveel**: Hoeveel is een vraagwoord dat gebruikt wordt om naar een hoeveelheid, aantal of mate te vragen.\n\n**ken**: Ken betekent dat iemand bekend is met een persoon, situatie of informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **namen** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hoeveel"
+          },
+          {
+            "begrip": "meisje"
+          },
+          {
+            "begrip": "ken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "namen"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1249
+      }
+    },
+    {
+      "id": "conv-db10d0c3",
+      "timestamp": "2026-06-04T16:44:31.573590+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoeveel jongensnamen ken jij ?",
+      "spark_response": "**hoeveel**: Hoeveel is een vraagwoord dat gebruikt wordt om naar een hoeveelheid, aantal of mate te vragen.\n\n**ken**: Ken betekent dat iemand bekend is met een persoon, situatie of informatie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hoeveel"
+          },
+          {
+            "begrip": "jongen"
+          },
+          {
+            "begrip": "ken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1250
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1236,
-    "last_updated": "2026-06-04T13:43:33.743529+00:00"
+    "total_conversations": 1250,
+    "last_updated": "2026-06-04T16:44:31.573590+00:00"
   }
 }

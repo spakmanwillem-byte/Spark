@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 392,
+    "card_count": 393,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T16:00:22.079032+00:00",
+    "last_updated": "2026-06-04T16:50:32.427578+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -53029,6 +53029,166 @@
         "voice_transcript": null,
         "image_urls": []
       },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c1f016d2",
+      "begrip": "down",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Down betekent dat iemand zich verdrietig, somber of emotioneel minder goed voelt.",
+        "laag2": "Wanneer iemand down is, ervaart die persoon vaak minder energie, motivatie of positiviteit",
+        "laag3": "Het woord down wordt vaak gebruikt om een tijdelijke emotionele toestand te beschrijven. Iemand kan zich down voelen door teleurstelling, verlies, stress, eenzaamheid of vermoeidheid. De intensiteit kan variëren van lichte somberheid tot een sterke emotionele dip. Down zijn is een normale menselijke ervaring en verschilt van een langdurige psychische aandoening.\n",
+        "laag4": "Down is een emotionele toestand die wordt gekenmerkt door verminderde stemming, energie of motivatie als reactie op persoonlijke, sociale of lichamelijke omstandigheden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen van alle leeftijden.",
+        "wat": "Een toestand van somberheid, neerslachtigheid of verminderde energie.",
+        "wanneer": "Na teleurstellingen, verlies, stress, vermoeidheid of moeilijke situaties.",
+        "waar": "In persoonlijke ervaringen, relaties, werk, school en het dagelijks leven.",
+        "waarom": "Omdat emoties reageren op gebeurtenissen, gedachten of omstandigheden.",
+        "hoe": "Door gevoelens van verdriet, leegte, vermoeidheid of gebrek aan motivatie te ervaren."
+      },
+      "tags": [
+        "down",
+        "somber",
+        "verdrietig",
+        "neerslachtig",
+        "emotie",
+        "gevoel",
+        "teleurstelling",
+        "stress",
+        "vermoeidheid",
+        "eenzaamheid",
+        "motivatie",
+        "stemming",
+        "dip",
+        "melancholie",
+        "verlies",
+        "welzijn",
+        "mentaal",
+        "gevoelens",
+        "reactie",
+        "emotie",
+        "bedroefd"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1d7b700b",
+          "begrip": "neerslachtig",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "bedroefd",
+            "eenzaamheid",
+            "emotie",
+            "gevoelens",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8af2fbf4",
+          "begrip": "verdrietig",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bedroefd",
+            "eenzaamheid",
+            "emotie",
+            "gevoel",
+            "somber"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoelens",
+            "motivatie",
+            "reactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c30e2ec",
+          "begrip": "irritatie",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoelens",
+            "reactie",
+            "stress"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf66c3a6",
+          "begrip": "waar wordt jij verdrietig van",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "somber",
+            "verdrietig"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T16:50:32.427531+00:00",
+        "vorige_versie_v1": "snap-37c419c5",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:16:54.056184+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-04T16:50:30.996593+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T16:50:31.486502+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T16:50:31.500391+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-04T16:50:33.276558+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-04T16:50:33.288626+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": [],
       "needs": [
         "voice",
         "image"

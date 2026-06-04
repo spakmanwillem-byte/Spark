@@ -118,6 +118,51 @@ export function KennisbankV2Page({ onNavigate }) {
     setEditForm(null);
   };
 
+  // v6_kbv2_open_by_id_001 — luister naar window-event om een kaart direct
+  // te openen via id (bv. vanuit VerbandenPage NodeDetail). Zoekt eerst in
+  // alle lades + inbox, switch naar de juiste tab, en opent de kaart.
+  useEffect(() => {
+    const handler = async (e) => {
+      const id = e?.detail?.cardId;
+      if (!id) return;
+      // Probeer eerst via /find?begrip= (snelste pad als begrip bekend is)
+      const begrip = e?.detail?.begrip;
+      const tryFetch = async () => {
+        // Strategie: scan inbox + alle lades op id
+        const buckets = [
+          { tab: 'inbox', url: `${API}/api/kb/v2/inbox?limit=10000` },
+          { tab: 'voelen', url: `${API}/api/kb/v2/lade/voelen?limit=10000` },
+          { tab: 'spreken', url: `${API}/api/kb/v2/lade/spreken?limit=10000` },
+          { tab: 'weten', url: `${API}/api/kb/v2/lade/weten?limit=10000` },
+          { tab: 'doen', url: `${API}/api/kb/v2/lade/doen?limit=10000` },
+        ];
+        for (const b of buckets) {
+          try {
+            const r = await fetch(b.url).then(x => x.json());
+            const found = (r.kaarten || []).find(k => k.id === id || (begrip && (k.begrip || '').toLowerCase() === begrip.toLowerCase()));
+            if (found) {
+              setActiveTab(b.tab);
+              setPage(0);
+              setSearch('');
+              setReasonFilter('');
+              setPriorityMode(false);
+              setTimeout(() => {
+                setSelectedCard(found);
+                setEditMode(false);
+                setEditForm(null);
+              }, 50);
+              return true;
+            }
+          } catch {}
+        }
+        return false;
+      };
+      tryFetch();
+    };
+    window.addEventListener('spark:open-kbv2-card', handler);
+    return () => window.removeEventListener('spark:open-kbv2-card', handler);
+  }, []);
+
   const startEdit = () => {
     setEditMode(true);
     setEditForm({

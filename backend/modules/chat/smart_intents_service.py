@@ -949,6 +949,9 @@ def detect_age_lookup(text: str, user_id: str) -> Optional[Dict]:
 
 _PROFILE_PATTERNS = [
     r"\bwie is\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
+    # v6_profile_wat_weet_001 — "wat weet jij/je over X"
+    r"\bwat\s+weet\s+(?:jij|je)\s+over\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
+    r"\bwat\s+weet\s+ik\s+over\s+([A-ZÀ-ŸÄ-Üa-zà-ÿä-ü][\w\- ']{1,30})\??",
     # "wat is X achternaam" / "wat is Willems achternaam"
     r"\b(wat|hoe)(\s+is)?\s+([A-ZÀ-Ÿa-zà-ÿ][\w\- ']{1,30})['\u2019]?s?\s+(achternaam|email|telefoon|leeftijd|geboortedatum|rang|gradatie)\??",
     # "wat is de achternaam van X"
@@ -1091,6 +1094,18 @@ def detect_profile_lookup(text: str, viewer_id: str = "") -> Optional[Dict]:
         pc = person.get("_persons_card", {})
         naam = pc.get("volledige_naam") or pc.get("naam") or "?"
         rel = pc.get("relatie") or "—"
+        sources = pc.get("_fact_sources") or {}
+
+        def _marker(field: str, val=None):
+            """Geef ' (?)' terug als fact niet bevestigd is door target-user zelf."""
+            if val is not None:
+                s = (sources.get(field) or {}).get(val) if isinstance(sources.get(field), dict) and val in (sources.get(field) or {}) else None
+            else:
+                s = sources.get(field)
+            if s and isinstance(s, dict) and not s.get("verified"):
+                return " ⚠️"
+            return ""
+
         parts = [f"**{naam}**"]
         if rel and rel != "—":
             parts.append(f"jouw **{rel}**")
@@ -1101,27 +1116,36 @@ def detect_profile_lookup(text: str, viewer_id: str = "") -> Optional[Dict]:
                 d = datetime.strptime(pc["geboortedatum"], "%Y-%m-%d")
                 today = datetime.now()
                 age = today.year - d.year - ((today.month, today.day) < (d.month, d.day))
-                info_bits.append(f"{age} jaar")
+                info_bits.append(f"{age} jaar{_marker('geboortedatum')}")
             except ValueError:
                 pass
         elif pc.get("geboortejaar"):
             try:
                 from datetime import datetime
                 age = datetime.now().year - int(pc["geboortejaar"])
-                info_bits.append(f"~{age} jaar")
+                info_bits.append(f"~{age} jaar{_marker('geboortejaar')}")
             except (ValueError, TypeError):
                 pass
         if pc.get("woonplaats"):
-            info_bits.append(f"woont in {pc['woonplaats']}")
+            info_bits.append(f"woont in {pc['woonplaats']}{_marker('woonplaats')}")
         if pc.get("beroep"):
-            info_bits.append(f"werkt als {pc['beroep']}")
+            info_bits.append(f"werkt als {pc['beroep']}{_marker('beroep')}")
         bezit = pc.get("bezittingen") or []
         if bezit:
-            info_bits.append(f"heeft: {', '.join(bezit[:5])}")
+            shown = []
+            for b in bezit[:5]:
+                shown.append(f"{b}{_marker('bezittingen', b)}")
+            info_bits.append(f"heeft: {', '.join(shown)}")
         interesses = pc.get("interesses") or []
         if interesses:
-            info_bits.append(f"interesses: {', '.join(interesses[:5])}")
+            shown = []
+            for i in interesses[:5]:
+                shown.append(f"{i}{_marker('interesses', i)}")
+            info_bits.append(f"interesses: {', '.join(shown)}")
         msg = " is ".join(parts) + ("." if not info_bits else " — " + " · ".join(info_bits) + ".")
+        # Verificatie-disclaimer als er ⚠️ in zit
+        if "⚠️" in msg:
+            msg += "\n\n_⚠️ = nog niet door {naam} zelf bevestigd. Spark kan het hem/haar later vragen._".replace("{naam}", naam.split()[0])
         return {
             "type": "profile_lookup",
             "person_id": pc.get("id"),

@@ -383,6 +383,17 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[age-lookup] failed: {ex}")
 
+    # v6_fact_intrek_001 (3 jun) — Intrek facts ("vergeet/wis/geen") vóór personalia-save
+    try:
+        from . import personalia_intrek_service as _pi
+        intrek = _pi.detect_and_apply_intrek(req.user_id or "", text)
+        if intrek:
+            response.update(intrek)
+            _save_log(req, response, "personalia_intrek")
+            return response
+    except Exception as ex:
+        print(f"[personalia-intrek] failed: {ex}")
+
     # v6_personalia_extract_001 (3 jun) — Sla personalia op (geboortedatum, woonplaats, beroep,
     # bezittingen, interesses). Als gevonden, return DIRECT met bevestiging i.p.v. door te lopen
     # naar de KB-lookup (anders krijgt user "ik ken 'januari'" als hoofd-antwoord).

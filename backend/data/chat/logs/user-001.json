@@ -30558,11 +30558,1144 @@
         "session_id": "default",
         "gesprek_nummer": 1164
       }
+    },
+    {
+      "id": "conv-790a7429",
+      "timestamp": "2026-06-03T17:31:32.212922+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is gerben",
+      "spark_response": "**Gerben** is jouw **neef** — werkt als loodgieter · heeft: hond · interesses: vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1165
+      }
+    },
+    {
+      "id": "conv-2b6bc4e7",
+      "timestamp": "2026-06-03T17:31:52.142634+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat weet jij over gerben",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1166
+      }
+    },
+    {
+      "id": "conv-4d57a6e5",
+      "timestamp": "2026-06-03T17:32:48.789689+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "gerben neef, ik niet niet als hij van vissen houd. En weet ook niet als hij een hond heeft. dat moet jij hem vragem.",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **houd, vragem** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          },
+          {
+            "begrip": "Neef"
+          },
+          {
+            "begrip": "Vissen"
+          },
+          {
+            "begrip": "Hond"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "houd",
+          "vragem"
+        ],
+        "word_count": 24,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1167
+      }
+    },
+    {
+      "id": "conv-4df688d6",
+      "timestamp": "2026-06-03T17:39:03.348802+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat weet jij over gerben",
+      "spark_response": "**Gerben** is jouw **neef** — werkt als loodgieter · heeft: hond · interesses: vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1168
+      }
+    },
+    {
+      "id": "conv-08846920",
+      "timestamp": "2026-06-03T17:39:05.274440+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vergeet dat Gerben een hond heeft",
+      "spark_response": "Ik ken 'gerben' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **vergeet** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "gerben"
+          },
+          {
+            "begrip": "Hond"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "vergeet"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1169
+      }
+    },
+    {
+      "id": "conv-c58fa583",
+      "timestamp": "2026-06-03T17:39:05.427088+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben houdt niet van vissen",
+      "spark_response": "🗑️ Vergeten: **Gerben**: interesses=vissen ✗.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "houdt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "personalia_intrek",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "personalia_intrek"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1170
+      }
+    },
+    {
+      "id": "conv-c1f29ea3",
+      "timestamp": "2026-06-03T17:39:05.607551+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Gerben heeft op het moment geen werk",
+      "spark_response": "🗑️ Vergeten: **Gerben**: beroep=loodgieter ✗.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "personalia_intrek",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "personalia_intrek"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1171
+      }
+    },
+    {
+      "id": "conv-f23d6d12",
+      "timestamp": "2026-06-03T17:39:05.862360+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wie is Gerben",
+      "spark_response": "**Gerben** is jouw **neef** — werkt als loodgieter · heeft: hond · interesses: vissen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1172
+      }
+    },
+    {
+      "id": "conv-48a9ee1b",
+      "timestamp": "2026-06-03T17:40:37.799520+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1173
+      }
+    },
+    {
+      "id": "conv-5e8f025d",
+      "timestamp": "2026-06-03T17:40:37.834817+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1174
+      }
+    },
+    {
+      "id": "conv-b081ede4",
+      "timestamp": "2026-06-03T17:40:50.754848+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo even een rest van gesperk.",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1175
+      }
+    },
+    {
+      "id": "conv-2d0e0271",
+      "timestamp": "2026-06-03T17:41:05.813136+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is Heidi?",
+      "spark_response": "**Heidi Spakman** is jouw **moeder** — ~69 jaar · interesses: katten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1176
+      }
+    },
+    {
+      "id": "conv-93d5f749",
+      "timestamp": "2026-06-03T17:41:38.082537+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee, ik weet niet als zij van katten houd. Dit was test input.",
+      "spark_response": "Ik ken 'houd' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?\n\nNieuw geleerd: **katten** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "houd"
+          },
+          {
+            "begrip": "Test"
+          },
+          {
+            "begrip": "Input"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "katten"
+        ],
+        "word_count": 13,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1177
+      }
+    },
+    {
+      "id": "conv-adc1b9fa",
+      "timestamp": "2026-06-03T17:41:58.084436+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "dankje",
+      "spark_response": "Leuk! Vertel me meer\n\n**dankje**: Een dankje is een korte uiting van waardering of dankbaarheid naar iemand anders.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "dankje"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dankje"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1178
+      }
+    },
+    {
+      "id": "conv-df636fdc",
+      "timestamp": "2026-06-03T17:42:22.880972+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is maaike",
+      "spark_response": "**Maaike Spakman** is jouw **zus** — woont in Groningen · heeft: online winkel.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1179
+      }
+    },
+    {
+      "id": "conv-a93ca642",
+      "timestamp": "2026-06-03T17:42:39.146560+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe heet haar online winkel?",
+      "spark_response": "**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n**Online**: Online betekent dat iets verbonden is met internet en bereikbaar is.\n\n**Winkel**: Een winkel is een plaats waar goederen of diensten worden verkocht aan klanten.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "Online"
+          },
+          {
+            "begrip": "Winkel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1180
+      }
+    },
+    {
+      "id": "conv-41274a1a",
+      "timestamp": "2026-06-03T17:44:46.117985+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe heet haar online winkel",
+      "spark_response": "**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n**Online**: Online betekent dat iets verbonden is met internet en bereikbaar is.\n\n**Winkel**: Een winkel is een plaats waar goederen of diensten worden verkocht aan klanten.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "Online"
+          },
+          {
+            "begrip": "Winkel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1181
+      }
+    },
+    {
+      "id": "conv-f46067c5",
+      "timestamp": "2026-06-03T17:45:16.238820+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe heet haar winkel",
+      "spark_response": "**Heet**: Heet betekent dat iets een hoge temperatuur heeft en warmte afgeeft.\n\n**Winkel**: Een winkel is een plaats waar goederen of diensten worden verkocht aan klanten.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Heet"
+          },
+          {
+            "begrip": "Winkel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1182
+      }
+    },
+    {
+      "id": "conv-d18dc2ab",
+      "timestamp": "2026-06-03T17:46:08.785814+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat is de naam van maaike haar winkel",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "maaike"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1183
+      }
+    },
+    {
+      "id": "conv-89561b15",
+      "timestamp": "2026-06-04T09:45:20.466174+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat is amusement?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1184
+      }
+    },
+    {
+      "id": "conv-832e7c32",
+      "timestamp": "2026-06-04T09:45:32.393170+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "amusement",
+      "spark_response": "Ik ken 'amusement' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "amusement"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1185
+      }
+    },
+    {
+      "id": "conv-e1ca9689",
+      "timestamp": "2026-06-04T09:45:32.542382+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kwetsbaarheden",
+      "spark_response": "Ik ken 'kwetsbaarheden' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "kwetsbaarheden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1186
+      }
+    },
+    {
+      "id": "conv-66f038b7",
+      "timestamp": "2026-06-04T09:47:40.966444+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "amusement",
+      "spark_response": "Ik ken 'amusement' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "amusement"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1187
+      }
+    },
+    {
+      "id": "conv-a020a599",
+      "timestamp": "2026-06-04T09:47:41.181694+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "versterken",
+      "spark_response": "Ik ken 'versterken' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "versterken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1188
+      }
+    },
+    {
+      "id": "conv-6024966d",
+      "timestamp": "2026-06-04T09:47:41.364805+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "toepassing",
+      "spark_response": "Ik ken 'toepassing' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "toepassing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1189
+      }
+    },
+    {
+      "id": "conv-d8280159",
+      "timestamp": "2026-06-04T09:49:53.817746+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "amusement",
+      "spark_response": "Ik ken 'amusement' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "amusement"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1190
+      }
+    },
+    {
+      "id": "conv-b3ed3f12",
+      "timestamp": "2026-06-04T09:49:53.977496+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "versterken",
+      "spark_response": "Ik ken 'versterken' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "versterken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1191
+      }
+    },
+    {
+      "id": "conv-c405dcaf",
+      "timestamp": "2026-06-04T09:49:54.195126+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "toepassing",
+      "spark_response": "Ik ken 'toepassing' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "toepassing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1192
+      }
+    },
+    {
+      "id": "conv-588a656f",
+      "timestamp": "2026-06-04T09:49:54.360201+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "prestaties",
+      "spark_response": "Ik ken 'prestaties' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "prestaties"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1193
+      }
+    },
+    {
+      "id": "conv-082e632b",
+      "timestamp": "2026-06-04T09:49:54.513338+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "zacht",
+      "spark_response": "Ik ken 'zacht' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zacht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1194
+      }
+    },
+    {
+      "id": "conv-52f3529d",
+      "timestamp": "2026-06-04T09:49:54.698890+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "oefenen",
+      "spark_response": "Ik ken 'oefenen' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oefenen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1195
+      }
+    },
+    {
+      "id": "conv-768c6291",
+      "timestamp": "2026-06-04T09:49:54.921222+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kwetsbaarheden",
+      "spark_response": "Ik ken 'kwetsbaarheden' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "kwetsbaarheden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1196
+      }
+    },
+    {
+      "id": "conv-2fc573d7",
+      "timestamp": "2026-06-04T09:49:55.114953+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "opening",
+      "spark_response": "Ik ken 'opening' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "opening"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1197
+      }
+    },
+    {
+      "id": "conv-6c28b4ac",
+      "timestamp": "2026-06-04T09:50:34.354064+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "amusement",
+      "spark_response": "**amusement**: Amusement is vermaak dat bedoeld is om plezier, ontspanning of plezierige afleiding te bieden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "amusement"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1198
+      }
+    },
+    {
+      "id": "conv-e753435b",
+      "timestamp": "2026-06-04T09:50:34.523657+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "versterken",
+      "spark_response": "**versterken**: Versterken is iets sterker, beter of krachtiger maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "versterken"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1199
+      }
+    },
+    {
+      "id": "conv-aa25e932",
+      "timestamp": "2026-06-04T09:50:34.672626+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "toepassing",
+      "spark_response": "**toepassing**: Een toepassing is het gebruiken van iets voor een bepaald doel.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "toepassing"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1200
+      }
+    },
+    {
+      "id": "conv-00af29dd",
+      "timestamp": "2026-06-04T09:50:34.837710+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "prestaties",
+      "spark_response": "**prestaties**: Prestaties zijn resultaten die worden bereikt door inspanning, vaardigheden of activiteiten.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "prestaties"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1201
+      }
+    },
+    {
+      "id": "conv-0f4d6018",
+      "timestamp": "2026-06-04T09:50:35.007312+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "zacht",
+      "spark_response": "**zacht**: Zacht betekent dat iets weinig hardheid, kracht of scherpte heeft.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zacht"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1202
+      }
+    },
+    {
+      "id": "conv-3bebcb1f",
+      "timestamp": "2026-06-04T09:50:35.157436+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "oefenen",
+      "spark_response": "**oefenen**: Oefenen is het herhaald uitvoeren van een activiteit om vaardigheden, kennis of prestaties te verbeteren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "oefenen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1203
+      }
+    },
+    {
+      "id": "conv-85756417",
+      "timestamp": "2026-06-04T09:50:35.315817+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "kwetsbaarheden",
+      "spark_response": "**kwetsbaarheden**: Kwetsbaarheden zijn zwakke punten waardoor schade, problemen of negatieve gevolgen kunnen ontstaan.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "kwetsbaarheden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1204
+      }
+    },
+    {
+      "id": "conv-d6a90671",
+      "timestamp": "2026-06-04T09:50:35.463372+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "opening",
+      "spark_response": "**opening**: Een opening is een beginpunt, toegang of ruimte waardoor iets kan starten, binnenkomen of doorgaan.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "opening"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1205
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1164,
-    "last_updated": "2026-06-03T17:30:52.601459+00:00"
+    "total_conversations": 1205,
+    "last_updated": "2026-06-04T09:50:35.463372+00:00"
   }
 }

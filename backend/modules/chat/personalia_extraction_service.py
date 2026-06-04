@@ -439,6 +439,13 @@ def save_personalia(user_id: str, findings: List[Dict]) -> List[Dict]:
                         continue
                     cur_list.append(value)
                     p[field] = cur_list
+                    # v6_personalia_source_001 — track herkomst en verificatie-status per fact
+                    sources = p.setdefault("_fact_sources", {})
+                    sources.setdefault(field, {})[value] = {
+                        "by": user_id,
+                        "verified": False,  # niet bevestigd door target-user zelf
+                        "at": _now(),
+                    }
                     p["updated_at"] = _now()
                     applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
                                     "field": field, "value": value, "appended": True})
@@ -446,6 +453,12 @@ def save_personalia(user_id: str, findings: List[Dict]) -> List[Dict]:
                     if current == value:
                         continue
                     p[field] = value
+                    sources = p.setdefault("_fact_sources", {})
+                    sources[field] = {
+                        "by": user_id,
+                        "verified": False,
+                        "at": _now(),
+                    }
                     p["updated_at"] = _now()
                     applied.append({"person_id": p.get("id"), "naam": p.get("naam"),
                                     "field": field, "value": value})

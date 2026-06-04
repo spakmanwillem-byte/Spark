@@ -126410,18 +126410,18 @@
       ]
     },
     {
-      "id": "kbv2-36c7a566",
-      "begrip": "Gerben",
+      "id": "kbv2-a51fd680",
+      "begrip": "heet",
       "lade": null,
       "status": "draft",
       "lagen": {
-        "laag1": "Gerben is een voornaam die wordt gebruikt om een persoon aan te duiden.",
-        "laag2": "Gerben is een persoonlijke naam waarmee iemand kan worden herkend en aangesproken.",
+        "laag1": "Heet is een voornaam die wordt gebruikt om een persoon aan te duiden.",
+        "laag2": "Heet is een persoonlijke naam waarmee iemand kan worden herkend en aangesproken.",
         "laag3": "Voornamen ondersteunen identificatie, communicatie en sociale interactie tussen mensen.",
-        "laag4": "Binnen Spark is Gerben een persoonsnaam die wordt gebruikt om een specifiek individu te identificeren, onderscheiden en aanspreken binnen communicatie, registraties en relaties."
+        "laag4": "Binnen Spark is Heet een persoonsnaam die wordt gebruikt om een specifiek individu te identificeren, onderscheiden en aanspreken binnen communicatie, registraties en relaties."
       },
       "ws5": {
-        "wie": "een persoon met de naam Gerben",
+        "wie": "een persoon met de naam Heet",
         "wat": "een voornaam",
         "wanneer": "bij identificatie en aanspreken van een persoon",
         "waar": "in communicatie, documenten en registraties",
@@ -126429,7 +126429,7 @@
         "hoe": "door de naam te gebruiken als persoonlijke aanduiding"
       },
       "tags": [
-        "gerben",
+        "heet",
         "voornaam",
         "naam",
         "persoon",
@@ -126448,9 +126448,27 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-06-03T17:31:12.605264+00:00",
+        "aangemaakt_op": "2026-06-03T17:44:23.958798+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-03T17:31:12.889924+00:00"
+        "laatst_bewerkt_op": "2026-06-03T17:44:32.300663+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T17:44:24.366616+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T17:44:24.370648+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

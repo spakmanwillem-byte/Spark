@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1314,
+    "card_count": 1362,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-02T15:12:04.558953+00:00",
+    "last_updated": "2026-06-03T17:31:18.400492+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -169124,6 +169124,315 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-36c7a566",
+      "begrip": "Gerben",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gerben is een voornaam die wordt gebruikt om een persoon aan te duiden.",
+        "laag2": "Gerben is een persoonlijke naam waarmee iemand kan worden herkend en aangesproken.",
+        "laag3": "Voornamen ondersteunen identificatie, communicatie en sociale interactie tussen mensen.",
+        "laag4": "Binnen Spark is Gerben een persoonsnaam die wordt gebruikt om een specifiek individu te identificeren, onderscheiden en aanspreken binnen communicatie, registraties en relaties."
+      },
+      "ws5": {
+        "wie": "een persoon met de naam Gerben",
+        "wat": "een voornaam",
+        "wanneer": "bij identificatie en aanspreken van een persoon",
+        "waar": "in communicatie, documenten en registraties",
+        "waarom": "om personen van elkaar te onderscheiden",
+        "hoe": "door de naam te gebruiken als persoonlijke aanduiding"
+      },
+      "tags": [
+        "gerben",
+        "voornaam",
+        "naam",
+        "persoon",
+        "identiteit",
+        "identificatie",
+        "aanspreken",
+        "registratie",
+        "individu",
+        "mens"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "naam",
+            "persoon",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "naam",
+            "persoon",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b915197e",
+          "begrip": "willie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "naam",
+            "persoon",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "naam",
+            "persoon",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "identiteit",
+            "naam",
+            "persoon",
+            "voornaam"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-03T17:31:18.400472+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-03T17:31:12.605264+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-03T17:31:12.889924+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T17:31:13.017431+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T17:31:13.021456+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-03T17:31:18.689128+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-03T17:31:18.693194+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9768caa4",
+      "begrip": "Kwetsbaarheden",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kwetsbaarheden zijn zwakke punten waardoor schade, problemen of negatieve gevolgen kunnen ontstaan.",
+        "laag2": "Kwetsbaarheden maken mensen, systemen of situaties gevoeliger voor risico's, fouten of invloeden van buitenaf.",
+        "laag3": "Kwetsbaarheden kunnen fysiek, emotioneel, sociaal, financieel of technisch zijn. Ze ontstaan door beperkingen, afhankelijkheden, tekortkomingen of omstandigheden die bescherming verminderen. Het herkennen van kwetsbaarheden helpt bij het voorkomen van problemen en het vergroten van veiligheid, stabiliteit en weerbaarheid.",
+        "laag4": "Kwetsbaarheden zijn eigenschappen of omstandigheden die de kans vergroten dat een persoon, systeem of situatie wordt beïnvloed, beschadigd of verstoord."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, organisaties, systemen en gemeenschappen.",
+        "wat": "Zwakke punten of gevoeligheden die risico's vergroten.",
+        "wanneer": "Wanneer bescherming, stabiliteit of weerstand beperkt is.",
+        "waar": "In mensen, relaties, organisaties, technologie, financiën en de natuur.",
+        "waarom": "Omdat geen enkel systeem of individu volledig beschermd of perfect is.",
+        "hoe": "Door beperkingen, afhankelijkheden, fouten, tekortkomingen of omstandigheden."
+      },
+      "tags": [
+        "kwetsbaarheden",
+        "kwetsbaarheid",
+        "zwakte",
+        "risico",
+        "gevoeligheid",
+        "beperking",
+        "afhankelijkheid",
+        "fout",
+        "tekortkoming",
+        "veiligheid",
+        "bescherming",
+        "bedreiging",
+        "verstoring",
+        "schade",
+        "risicoanalyse",
+        "weerbaarheid",
+        "stabiliteit",
+        "invloed",
+        "onzekerheid",
+        "bang",
+        "bedroefd"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "verlorenkaarten_zip",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T09:45:03.159990+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-e860534c",
+      "begrip": "Prestaties",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Prestaties zijn resultaten die worden bereikt door inspanning, vaardigheden of activiteiten.",
+        "laag2": "Een prestatie laat zien wat iemand, een groep of een systeem heeft gedaan, bereikt of voltooid.",
+        "laag3": "Prestaties kunnen klein of groot zijn en komen voor in werk, sport, onderwijs, technologie en het dagelijks leven. Een prestatie ontstaat vaak door inzet, kennis, oefening, samenwerking of doorzettingsvermogen. Prestaties worden soms gemeten aan de hand van doelen, resultaten of kwaliteit.",
+        "laag4": "Binnen Spark zijn prestaties zichtbare uitkomsten van acties, keuzes en ontwikkeling. Prestaties kunnen worden gebruikt om voortgang, groei, ervaring en behaalde doelen inzichtelijk te maken. Ze vormen een belangrijke bron van feedback en kunnen bijdragen aan motivatie, erkenning en verdere ontwikkeling."
+      },
+      "ws5": {
+        "wie": "mensen, teams, organisaties, systemen",
+        "wat": "behaalde resultaten of successen",
+        "wanneer": "na een activiteit, inspanning of proces",
+        "waar": "in werk, school, sport, projecten en systemen",
+        "waarom": "om doelen te bereiken en voortgang zichtbaar te maken",
+        "hoe": "door inzet, vaardigheden, samenwerking of oefening"
+      },
+      "tags": [
+        "prestaties",
+        "resultaat",
+        "succes",
+        "doel",
+        "voortgang",
+        "ontwikkeling",
+        "groei",
+        "inspanning",
+        "kwaliteit",
+        "behalen",
+        "prestatie",
+        "ervaring",
+        "feedback",
+        "motivatie"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "verlorenkaarten_zip",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T09:45:03.159990+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
+    },
+    {
+      "id": "kbv2-6fd4e7d7",
+      "begrip": "Opening",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een opening is een beginpunt, toegang of ruimte waardoor iets kan starten, binnenkomen of doorgaan.",
+        "laag2": "Een opening maakt toegang, communicatie, beweging of een nieuwe fase mogelijk.",
+        "laag3": "Een opening kan fysiek zijn, zoals een deur, raam of gat, maar ook figuurlijk, zoals de opening van een gesprek, evenement, winkel of kans. Een opening markeert vaak het begin van iets nieuws of het beschikbaar komen van toegang.",
+        "laag4": "Binnen Spark is een opening een moment, plaats of mogelijkheid waardoor toegang ontstaat tot informatie, communicatie, acties of nieuwe ontwikkelingen. Openingen creëren verbindingen tussen systemen, mensen, ideeën of processen en vormen vaak het startpunt van verandering of groei."
+      },
+      "ws5": {
+        "wie": "mensen, organisaties, systemen",
+        "wat": "een toegang, beginpunt of beschikbare mogelijkheid",
+        "wanneer": "aan het begin van een proces, activiteit of toegangsmoment",
+        "waar": "in gebouwen, gesprekken, systemen, evenementen en processen",
+        "waarom": "om toegang, verbinding of voortgang mogelijk te maken",
+        "hoe": "door een doorgang, startpunt of mogelijkheid te creëren"
+      },
+      "tags": [
+        "opening",
+        "begin",
+        "toegang",
+        "ingang",
+        "start",
+        "doorgang",
+        "kans",
+        "mogelijkheid",
+        "verbinding",
+        "entree",
+        "communicatie",
+        "proces",
+        "ontwikkeling",
+        "toegangspunt"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "verlorenkaarten_zip",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-04T09:45:03.159990+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 1.0,
+        "belangrijkheid": 0.5,
+        "hooks_fired": []
+      },
+      "media": [],
+      "needs": [],
+      "emotie": "neutraal"
     }
   ]
 }

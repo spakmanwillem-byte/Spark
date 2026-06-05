@@ -54548,6 +54548,155 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-c6fb078b",
+      "begrip": "Arent Pelster is mijn jeugdvriend",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een uitspraak die aangeeft dat Arent Pelster een vriend is uit de jeugd van de spreker.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "jeugdvriend",
+        "vriend",
+        "vriendschap",
+        "arent",
+        "pelster",
+        "jeugd",
+        "sociale relatie",
+        "Herinnering",
+        "verbondenheid",
+        "identiteit",
+        "mens",
+        "communicatie",
+        "sociaal",
+        "emotie",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7784634a",
+          "begrip": "Maurice Maas is een goede vriend",
+          "lade": "voelen",
+          "overlap": 11,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "herinnering",
+            "identiteit",
+            "mens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0e95d34a",
+          "begrip": "zusje",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "herinnering",
+            "identiteit",
+            "jeugd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "herinnering",
+            "identiteit",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "herinnering",
+            "identiteit",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8beecf5",
+          "begrip": "Riet",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "herinnering",
+            "identiteit",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system-recovery",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-02T11:16:57.542711+00:00",
+        "vorige_versie_v1": "snap-1a5f40a3",
+        "vertrouwen": 0.6,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:42.768874+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-02T11:16:57.743981+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-02T11:16:57.748336+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
+        "voice",
+        "image"
+      ]
     }
   ]
 }

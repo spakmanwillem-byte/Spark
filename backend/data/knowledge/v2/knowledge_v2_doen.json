@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 897,
+    "card_count": 901,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T08:49:32.120615+00:00",
+    "last_updated": "2026-06-05T12:28:19.759944+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -114203,6 +114203,642 @@
         "voice_transcript": null,
         "image_urls": []
       },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d4ea2f35",
+      "begrip": "durf",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Durf is de bereidheid om iets te doen ondanks onzekerheid of angst.",
+        "laag2": "Durf helpt mensen om actie te ondernemen wanneer iets spannend, moeilijk of onbekend is.",
+        "laag3": "Durf betekent niet dat iemand geen angst voelt, maar dat iemand toch handelt ondanks die angst. Durf speelt een rol bij leren, veranderen, groeien, spreken, ontdekken en het aangaan van uitdagingen.\n",
+        "laag4": "Durf vormt een belangrijke schakel tussen gedachte en actie. Zonder durf blijven mogelijkheden vaak ongebruikt. Door durf kunnen mensen grenzen verleggen, ervaringen opdoen en persoonlijke ontwikkeling stimuleren.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die keuzes maken, uitdagingen aangaan of nieuwe situaties ervaren.",
+        "wat": "De bereidheid om te handelen ondanks risico, onzekerheid of angst.",
+        "wanneer": "Wanneer iemand iets spannends, moeilijks of onbekends tegenkomt.",
+        "waar": "In het dagelijks leven, op school, werk, relaties, sport en persoonlijke ontwikkeling.",
+        "waarom": "Om doelen te bereiken, ervaringen op te doen of persoonlijke groei mogelijk te maken.",
+        "hoe": "Door angst te erkennen en toch actie te ondernemen."
+      },
+      "tags": [
+        "durf",
+        "moed",
+        "lef",
+        "vertrouwen",
+        "uitdaging",
+        "risico",
+        "onzekerheid",
+        "actie",
+        "groei",
+        "ontwikkeling",
+        "keuze",
+        "doorzetten",
+        "zelfvertrouwen",
+        "initiatief",
+        "vastberadenheid",
+        "emotie",
+        "neutraal",
+        "bang",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e96db3a0",
+          "begrip": "initiatief",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "actie",
+            "blij",
+            "doorzetten",
+            "emotie",
+            "initiatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2ffb935b",
+          "begrip": "zelfstandig",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "doorzetten",
+            "emotie",
+            "initiatief",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "groei",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-aeb96200",
+          "begrip": "kans",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "groei",
+            "keuze",
+            "ontwikkeling",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dcaf2f12",
+          "begrip": "motiveert",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "blij",
+            "doorzetten",
+            "emotie",
+            "groei"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:44:52.903509+00:00",
+        "vorige_versie_v1": "snap-5760a043",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:14:02.984514+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:44:46.043748+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:44:46.521697+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:44:46.569320+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:44:53.938118+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:44:53.952522+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a8aa1876",
+      "begrip": "trader",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een trader is iemand die handelt in financiële producten.",
+        "laag2": "Een trader koopt en verkoopt activa met als doel winst te maken op prijsverschillen.",
+        "laag3": "Traders handelen bijvoorbeeld in aandelen, valuta, grondstoffen, cryptovaluta of andere financiële instrumenten. Zij analyseren markten, volgen prijsbewegingen en nemen beslissingen op basis van informatie, strategieën en verwachtingen over toekomstige ontwikkelingen.\n",
+        "laag4": "Trading speelt een belangrijke rol binnen financiële markten doordat traders zorgen voor liquiditeit en prijsontdekking. Het succes van een trader hangt vaak af van kennis, discipline, risicobeheer, emotionele controle en het vermogen om kansen en risico's te beoordelen.\n"
+      },
+      "ws5": {
+        "wie": "Beleggers, handelaren, professionals en particuliere investeerders.",
+        "wat": "Een persoon die financiële producten koopt en verkoopt.",
+        "wanneer": "Tijdens handelsuren of op markten die continu geopend zijn.",
+        "waar": "Op financiële markten, beurzen en handelsplatformen.",
+        "waarom": "Om winst te maken, risico's af te dekken of kapitaal te beheren.",
+        "hoe": "Door marktinformatie te analyseren en koop- of verkoopbeslissingen te nemen."
+      },
+      "tags": [
+        "trader",
+        "handelaar",
+        "trading",
+        "handel",
+        "markt",
+        "beurs",
+        "aandelen",
+        "valuta",
+        "forex",
+        "crypto",
+        "investering",
+        "beleggen",
+        "winst",
+        "verlies",
+        "risico",
+        "analyse",
+        "strategie",
+        "koers",
+        "liquiditeit",
+        "financieel",
+        "emotie",
+        "bang",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 11,
+          "shared_tags": [
+            "aandelen",
+            "bang",
+            "blij",
+            "crypto",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e26fb2",
+          "begrip": "traden",
+          "lade": "doen",
+          "overlap": 10,
+          "shared_tags": [
+            "aandelen",
+            "analyse",
+            "crypto",
+            "emotie",
+            "handel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "bang",
+            "blij",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e9f46c42",
+          "begrip": "vrees",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "risico",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45a9d6ce",
+          "begrip": "voorkomen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "blij",
+            "emotie",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:05:41.815503+00:00",
+        "vorige_versie_v1": "snap-c0fc3887",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-05-30T08:43:03.978319+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:05:39.819935+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:05:40.319864+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:05:40.335744+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:05:43.017422+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:05:43.030703+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-09f5d08e",
+      "begrip": "build",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Build betekent bouwen of een constructie maken.",
+        "laag2": "Build wordt gebruikt voor het maken, samenstellen of ontwikkelen van iets.",
+        "laag3": "Het woord build komt uit het Engels en betekent bouwen. Het kan verwijzen naar fysieke constructies, zoals gebouwen en objecten, maar ook naar digitale creaties zoals software, spellen, machines of systemen. In games wordt build vaak gebruikt voor een ontwerp, strategie of constructie die door een speler is gemaakt.\n",
+        "laag4": "Het woord build komt uit het Engels en betekent bouwen. Het kan verwijzen naar fysieke constructies, zoals gebouwen en objecten, maar ook naar digitale creaties zoals software, spellen, machines of systemen. In games wordt build vaak gebruikt voor een ontwerp, strategie of constructie die door een speler is gemaakt.\n"
+      },
+      "ws5": {
+        "wie": "Bouwers, ontwerpers, programmeurs, spelers en makers.",
+        "wat": "Een constructie, ontwerp of het proces van bouwen.",
+        "wanneer": "Wanneer iets wordt gemaakt, samengesteld of ontwikkeld.",
+        "waar": "In bouwprojecten, software, spellen, techniek en creatieve projecten.",
+        "waarom": "Om iets nieuws te creëren of een doel te bereiken.",
+        "hoe": "Door onderdelen, materialen, ideeën of systemen samen te voegen"
+      },
+      "tags": [
+        "build",
+        "bouwen",
+        "constructie",
+        "ontwerp",
+        "creatie",
+        "ontwikkeling",
+        "samenstellen",
+        "project",
+        "structuur",
+        "architectuur",
+        "techniek",
+        "programmeren",
+        "maker",
+        "planning",
+        "strategie",
+        "systeem",
+        "constructeren",
+        "creëren",
+        "gaming",
+        "emotie",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4d4337f1",
+          "begrip": "architectuur",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "architectuur",
+            "blij",
+            "creatie",
+            "emotie",
+            "ontwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-42f010f5",
+          "begrip": "techniek",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "constructie",
+            "emotie",
+            "ontwikkeling",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7f9cf141",
+          "begrip": "bouw",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "constructie",
+            "emotie",
+            "ontwerp",
+            "ontwikkeling",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ontwikkeling",
+            "strategie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e13cf93",
+          "begrip": "opties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "planning",
+            "strategie",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:14:26.671828+00:00",
+        "vorige_versie_v1": "snap-a18a781c",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Thomas",
+        "aangemaakt_op": "2026-05-24T08:28:36.490205+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:14:25.107255+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:14:25.625308+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:14:25.639728+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:14:27.698103+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:14:27.713428+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4273240c",
+      "begrip": "bedroeft",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bedroeft betekent dat iets of iemand verdriet veroorzaakt.",
+        "laag2": "Bedroeft beschrijft een handeling of gebeurtenis waardoor iemand zich verdrietig voelt.",
+        "laag3": "Het woord bedroeft is een vervoeging van het werkwoord bedroeven. Iets bedroeft iemand wanneer het pijn, teleurstelling, verlies of verdriet veroorzaakt. Het kan gaan om nieuws, gebeurtenissen, herinneringen, woorden of omstandigheden.\n",
+        "laag4": "Bedroeft beschrijft de overgang van oorzaak naar emotie. Waar bedroefd een toestand is, verwijst bedroeft naar datgene wat die toestand veroorzaakt. Het begrip helpt om relaties te leggen tussen gebeurtenissen, ervaringen en gevoelens.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, gebeurtenissen, situaties of omstandigheden.",
+        "wat": "Het veroorzaken van verdriet of droefheid.",
+        "wanneer": "Wanneer iets emotionele pijn, verlies of teleurstelling oproept.",
+        "waar": "In persoonlijke relaties, nieuws, herinneringen, werk, school en het dagelijks leven.",
+        "waarom": "Omdat iets als pijnlijk, verliesgevend of teleurstellend wordt ervaren.",
+        "hoe": "Door een gebeurtenis, ervaring, gedachte of boodschap die verdriet oproept."
+      },
+      "tags": [
+        "bedroeft",
+        "bedroeven",
+        "verdriet",
+        "bedroefd",
+        "droefheid",
+        "teleurstelling",
+        "verlies",
+        "pijn",
+        "gemis",
+        "rouw",
+        "emotie",
+        "gevoel",
+        "oorzaak",
+        "gebeurtenis",
+        "reactie",
+        "kwetsen",
+        "raken",
+        "menselijk",
+        "emotie",
+        "bedroefd"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8af2fbf4",
+          "begrip": "verdrietig",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gemis",
+            "gevoel",
+            "menselijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf66c3a6",
+          "begrip": "waar wordt jij verdrietig van",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gemis",
+            "gevoel",
+            "pijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "reactie",
+            "teleurstelling",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48696dca",
+          "begrip": "verschrikkelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "pijn",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca84a67a",
+          "begrip": "tranen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "pijn",
+            "reactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:28:19.759899+00:00",
+        "vorige_versie_v1": "kb-skel-95ed8af0",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "system_repair",
+        "aangemaakt_op": "2026-05-21T10:58:15.548119+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:28:17.411315+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:28:17.922864+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:28:17.936620+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:28:20.794132+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:28:20.806780+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": [],
       "needs": [
         "voice",
         "image"

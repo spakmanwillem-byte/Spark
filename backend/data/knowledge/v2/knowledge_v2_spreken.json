@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 500,
+    "card_count": 506,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T20:37:15.359363+00:00",
+    "last_updated": "2026-06-05T12:19:01.985366+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -64905,6 +64905,962 @@
         "voice_transcript": null,
         "image_urls": []
       },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-486bd0a4",
+      "begrip": "chat",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een chat is een gesprek via digitale berichten.",
+        "laag2": "Met een chat kunnen mensen in realtime of vertraagd tekstberichten uitwisselen via een computer, telefoon of ander apparaat.",
+        "laag3": "Chats worden gebruikt voor communicatie tussen personen, groepen en systemen. Een chat kan bestaan uit tekst, afbeeldingen, video's, bestanden of spraakberichten. Chats komen voor in sociale media, websites, apps, klantenservice en AI-systemen.\n",
+        "laag4": "Een chat is een digitale communicatievorm waarbij informatie wordt uitgewisseld via berichten binnen een gedeelde omgeving. Chats ondersteunen interactie, samenwerking, kennisdeling en sociale verbinding tussen mensen of tussen mens en systeem.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties, klanten, vrienden en AI-systemen.",
+        "wat": "Een digitaal gesprek via berichten.",
+        "wanneer": "Wanneer informatie, vragen, ideeën of ervaringen worden uitgewisseld.",
+        "waar": "In apps, websites, sociale media, games en communicatiesystemen.",
+        "waarom": "Om te communiceren, samenwerken, informeren of contact te onderhouden.",
+        "hoe": "Door tekst, afbeeldingen, bestanden, emoji's, spraak- of videoberichten uit te wisselen."
+      },
+      "tags": [
+        "chat",
+        "gesprek",
+        "communicatie",
+        "bericht",
+        "interactie",
+        "digitaal",
+        "tekst",
+        "informatie",
+        "sociaal",
+        "contact",
+        "app",
+        "internet",
+        "gesprekspartner",
+        "berichten",
+        "technologie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-72778c24",
+          "begrip": "belt",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "gesprek",
+            "informatie",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e315ddd0",
+          "begrip": "zegt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "digitaal",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e7d5301",
+          "begrip": "begroeten",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "gesprek",
+            "interactie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:02:53.948868+00:00",
+        "vorige_versie_v1": "kb-skel-486bd0a4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.041962+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:02:52.723529+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:02:52.761162+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:02:54.879187+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:02:54.895085+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:02:52.133825+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e58d9767",
+      "begrip": "geweest",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Geweest betekent dat iets in het verleden heeft plaatsgevonden of bestond.",
+        "laag2": "Geweest is een vorm van het werkwoord zijn en verwijst naar een eerdere situatie, plaats of gebeurtenis.",
+        "laag3": "Mensen gebruiken geweest om aan te geven dat iemand ergens was, iets heeft meegemaakt of dat een situatie eerder heeft bestaan. Bijvoorbeeld: \"Ik ben in Groningen geweest\" of \"Het is druk geweest.\" Het woord verwijst altijd naar het verleden.\n",
+        "laag4": "Geweest is het voltooid deelwoord van het werkwoord zijn en wordt gebruikt om ervaringen, locaties, toestanden en gebeurtenissen uit het verleden te beschrijven. Het speelt een belangrijke rol in de voltooid tegenwoordige en voltooid verleden tijd.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, objecten, situaties of gebeurtenissen.",
+        "wat": "Een aanduiding dat iets in het verleden heeft plaatsgevonden of bestaan.",
+        "wanneer": "Na een gebeurtenis, ervaring, toestand of bezoek.",
+        "waar": "In gesprekken, verhalen, herinneringen en beschrijvingen van het verleden.",
+        "waarom": "Om aan te geven dat iets eerder heeft plaatsgevonden.",
+        "hoe": "Door het voltooid deelwoord van zijn te gebruiken."
+      },
+      "tags": [
+        "geweest",
+        "zijn",
+        "verleden",
+        "voltooid deelwoord",
+        "tijd",
+        "gebeurtenis",
+        "ervaring",
+        "herinnering",
+        "grammatica",
+        "taal",
+        "toestand",
+        "geschiedenis",
+        "verleden tijd",
+        "communicatie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3a29cf22",
+          "begrip": "waren",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "communicatie",
+            "grammatica",
+            "herinnering",
+            "taal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "grammatica",
+            "herinnering",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a95e0b4e",
+          "begrip": "geleden",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "geschiedenis",
+            "herinnering",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d915b9e4",
+          "begrip": "keer",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "ervaring",
+            "gebeurtenis",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "gebeurtenis",
+            "neutraal",
+            "taal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T16:41:47.995399+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:15:20.519048+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Is Gerben vandaag online geweest?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:15:18.984359+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:15:19.469919+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:15:19.495585+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:15:21.344005+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:15:21.400968+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5113a6b4",
+      "begrip": "vertelde",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Vertelde betekent dat iemand iets heeft gezegd of uitgelegd.",
+        "laag2": "Vertelde is een vorm van het werkwoord vertellen en verwijst naar het overbrengen van informatie in het verleden.",
+        "laag3": "Mensen gebruiken vertelde wanneer iemand een verhaal, ervaring, uitleg of boodschap heeft gedeeld. Bijvoorbeeld: \"Hij vertelde een verhaal\" of \"Zij vertelde wat er was gebeurd.\" Het woord geeft aan dat de communicatie eerder heeft plaatsgevonden.\n",
+        "laag4": "Vertelde is de verleden tijd van het werkwoord vertellen. Het beschrijft een handeling waarbij informatie, kennis, ervaringen of gebeurtenissen mondeling of schriftelijk zijn overgebracht. Vertellen speelt een belangrijke rol in communicatie, onderwijs, geschiedenis en sociale interactie.\n"
+      },
+      "ws5": {
+        "wie": "Een spreker, schrijver, verteller of boodschapper.",
+        "wat": "Het overbrengen van informatie, een verhaal of een boodschap.",
+        "wanneer": "Wanneer iemand in het verleden iets heeft gedeeld of uitgelegd.",
+        "waar": "In gesprekken, verhalen, lessen, boeken en andere vormen van communicatie.",
+        "waarom": "Om informatie, kennis, ervaringen of gebeurtenissen over te dragen.",
+        "hoe": "Door te spreken, schrijven of op een andere manier te communiceren."
+      },
+      "tags": [
+        "vertelde",
+        "vertellen",
+        "communicatie",
+        "gesprek",
+        "verhaal",
+        "boodschap",
+        "informatie",
+        "uitleg",
+        "verleden",
+        "taal",
+        "spreken",
+        "kennis",
+        "ervaring",
+        "interactie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a10a7334",
+          "begrip": "spreken",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "boodschap",
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f25aada8",
+          "begrip": "vroeg",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:16:55.148563+00:00",
+        "vorige_versie_v1": "snap-be543835",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-03T17:07:06.150494+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:16:53.639423+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:16:54.161759+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:16:54.175975+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:16:55.983569+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:16:55.996816+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bad64238",
+      "begrip": "helemaal",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Helemaal betekent volledig of compleet.",
+        "laag2": "Helemaal wordt gebruikt om aan te geven dat iets zonder uitzondering, volledig of in zijn geheel geldt.",
+        "laag3": "Mensen gebruiken helemaal om nadruk te leggen op een toestand, mening, hoeveelheid of handeling. Het woord kan betekenen dat iets compleet is afgerond, volledig aanwezig is of volledig waar wordt gevonden.\n",
+        "laag4": "Helemaal is een versterkend woord binnen de taal. Het helpt om gradaties van zekerheid, volledigheid of instemming uit te drukken. De betekenis hangt vaak af van de context waarin het wordt gebruikt.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die spreken of schrijven.",
+        "wat": "Een woord dat volledigheid of nadruk aangeeft.",
+        "wanneer": "Wanneer iets compleet, volledig of geheel bedoeld wordt.",
+        "waar": "In gesprekken, teksten, meningen en beschrijvingen.",
+        "waarom": "Om duidelijk te maken dat iets zonder uitzondering of volledig geldt.",
+        "hoe": "Door het woord te gebruiken als versterking of aanduiding van volledigheid."
+      },
+      "tags": [
+        "helemaal",
+        "volledig",
+        "compleet",
+        "geheel",
+        "totaal",
+        "volledigerwijs",
+        "compleetheid",
+        "afronding",
+        "nadruk",
+        "bevestiging",
+        "zekerheid",
+        "instemming",
+        "omvang",
+        "taal",
+        "betekenis",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-aa89bb62",
+          "begrip": "volledig",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "compleet",
+            "compleetheid",
+            "emotie",
+            "geheel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7d6abafd",
+          "begrip": "spraak",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:01:34.476065+00:00",
+        "vorige_versie_v1": "snap-e0d495c1",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Gebruiker",
+        "aangemaakt_op": "2026-05-25T23:16:53.763499+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:01:32.744005+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:01:33.568853+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:01:33.603370+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:01:35.842793+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:01:35.861612+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7bbe0c6a",
+      "begrip": "tips",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Tips zijn adviezen of aanwijzingen die kunnen helpen.",
+        "laag2": "Tips geven praktische informatie om iets beter, makkelijker of sneller te doen.",
+        "laag3": "Mensen geven tips op basis van kennis, ervaring of inzicht. Tips kunnen betrekking hebben op werk, hobby's, gezondheid, leren, problemen oplossen en vele andere onderwerpen. Een tip hoeft niet verplicht opgevolgd te worden.\n",
+        "laag4": "Tips zijn een vorm van kennisoverdracht waarbij bruikbare informatie wordt gedeeld om anderen te ondersteunen. Ze helpen bij leren, verbeteren van vaardigheden en het maken van keuzes, zonder dat ze formele regels of instructies zijn.\n"
+      },
+      "ws5": {
+        "wie": "Mensen met kennis, ervaring of advies.",
+        "wat": "Een advies, aanwijzing of aanbeveling.",
+        "wanneer": "Wanneer iemand hulp, verbetering of extra informatie kan gebruiken.",
+        "waar": "In gesprekken, onderwijs, werk, handleidingen en dagelijkse situaties.",
+        "waarom": "Om anderen te helpen iets beter of makkelijker te doen.",
+        "hoe": "Door kennis, ervaring of suggesties te delen."
+      },
+      "tags": [
+        "tips",
+        "tip",
+        "advies",
+        "aanbeveling",
+        "aanwijzing",
+        "suggestie",
+        "hulp",
+        "ondersteuning",
+        "kennis",
+        "ervaring",
+        "leren",
+        "verbetering",
+        "informatie",
+        "communicatie",
+        "begeleiding",
+        "keuze",
+        "oplossing",
+        "inzicht",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-136b414d",
+          "begrip": "Help",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "advies",
+            "begeleiding",
+            "communicatie",
+            "emotie",
+            "hulp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "advies",
+            "communicatie",
+            "emotie",
+            "hulp",
+            "keuze"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "begeleiding",
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-84f2ceda",
+          "begrip": "docent",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "begeleiding",
+            "communicatie",
+            "emotie",
+            "ervaring",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-64ebd4db",
+          "begrip": "advies",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "advies",
+            "begeleiding",
+            "emotie",
+            "inzicht",
+            "keuze"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:02:58.648232+00:00",
+        "vorige_versie_v1": "snap-0a554207",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Thomas",
+        "aangemaakt_op": "2026-05-24T08:29:07.613029+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:02:56.993696+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:02:57.526327+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:02:57.544746+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:02:59.516458+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:02:59.569386+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0b1bc109",
+      "begrip": "zeggen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Zeggen betekent iets uitspreken of meedelen.",
+        "laag2": "Zeggen is het gebruiken van woorden om informatie, gedachten, gevoelens of boodschappen over te brengen.",
+        "laag3": "Mensen zeggen dingen om te communiceren met anderen. Wat wordt gezegd kan een feit, mening, vraag, opdracht, emotie of idee zijn. Zeggen kan mondeling gebeuren, maar wordt soms ook gebruikt voor het overbrengen van een boodschap in bredere zin.\n",
+        "laag4": "Zeggen is een fundamenteel onderdeel van menselijke communicatie. Door te zeggen kunnen mensen kennis delen, relaties opbouwen, samenwerken, gevoelens uiten en informatie doorgeven. Het begrip vormt de basis van gesprekken, taal en sociale interactie.\n"
+      },
+      "ws5": {
+        "wie": " Mensen, sprekers en communicerende wezens.",
+        "wat": "Het uitspreken of overbrengen van woorden en boodschappen.",
+        "wanneer": "Tijdens communicatie en gesprekken.",
+        "waar": "In gesprekken, vergaderingen, onderwijs, media en sociale situaties.",
+        "waarom": "Om informatie, gedachten, gevoelens of instructies over te brengen.",
+        "hoe": "Door woorden, taal, stemgeluid of andere vormen van communicatie te gebruiken."
+      },
+      "tags": [
+        "zeggen",
+        "spreken",
+        "praten",
+        "communicatie",
+        "taal",
+        "woorden",
+        "boodschap",
+        "informatie",
+        "uitspreken",
+        "vertellen",
+        "mededelen",
+        "uitleggen",
+        "gesprek",
+        "dialoog",
+        "stem",
+        "luisteren",
+        "betekenis",
+        "interactie",
+        "uitdrukken",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a10a7334",
+          "begrip": "spreken",
+          "lade": "spreken",
+          "overlap": 13,
+          "shared_tags": [
+            "boodschap",
+            "communicatie",
+            "dialoog",
+            "emotie",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 11,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7d6abafd",
+          "begrip": "spraak",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5113a6b4",
+          "begrip": "vertelde",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "boodschap",
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interactie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e315ddd0",
+          "begrip": "zegt",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "interactie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:19:01.985315+00:00",
+        "vorige_versie_v1": "snap-87e3c0d1",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-05-24T00:42:41.657409+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:19:00.546229+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:19:01.010142+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:19:01.061056+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:19:02.971723+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:19:03.002360+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          }
+        ]
+      },
+      "media": [],
       "needs": [
         "voice",
         "image"

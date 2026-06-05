@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1510,
+    "card_count": 1538,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T09:31:11.272528+00:00",
+    "last_updated": "2026-06-05T12:24:25.075857+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -193945,6 +193945,4536 @@
         "voice_transcript": null,
         "image_urls": []
       },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c0b82cf9",
+      "begrip": "waarheid",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Waarheid is wat overeenkomt met de werkelijkheid.",
+        "laag2": "Waarheid betekent dat een uitspraak, waarneming of beschrijving klopt met wat werkelijk is of als werkelijk wordt beschouwd.",
+        "laag3": "Waarheid speelt een belangrijke rol in kennis, communicatie, wetenschap, rechtspraak en persoonlijke relaties. Wat als waarheid wordt gezien kan soms veranderen wanneer nieuwe informatie beschikbaar komt. Daarom wordt vaak onderscheid gemaakt tussen feiten, meningen, overtuigingen en interpretaties.",
+        "laag4": "Waarheid is het streven naar een zo nauwkeurig mogelijke overeenstemming tussen kennis, waarneming, beschrijving en werkelijkheid. In veel systemen vormt waarheid de basis voor vertrouwen, begrip, besluitvorming en samenwerking. Volledige zekerheid is niet altijd mogelijk, waardoor eerlijkheid over onzekerheid vaak onderdeel is van waarheidsvinding."
+      },
+      "ws5": {
+        "wie": "Mensen, onderzoekers, getuigen, rechters, wetenschappers en filosofen.",
+        "wat": "Een overeenstemming tussen een uitspraak en de werkelijkheid.",
+        "wanneer": "Bij het beoordelen van feiten, kennis, ervaringen en gebeurtenissen.",
+        "waar": "In communicatie, wetenschap, recht, onderwijs en het dagelijks leven.",
+        "waarom": "Om betrouwbare kennis, begrip en vertrouwen op te bouwen.",
+        "hoe": "Door waarnemen, onderzoeken, controleren, vergelijken en verifiëren."
+      },
+      "tags": [
+        "waarheid",
+        "werkelijkheid",
+        "feit",
+        "kennis",
+        "informatie",
+        "eerlijkheid",
+        "vertrouwen",
+        "verificatie",
+        "waarneming",
+        "wetenschap",
+        "filosofie",
+        "communicatie",
+        "begrip",
+        "inzicht",
+        "neutraal",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-11840f86",
+          "begrip": "juist",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "begrip",
+            "blij",
+            "kennis",
+            "neutraal",
+            "verificatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "informatie",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-db366369",
+          "begrip": "Kennis",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "blij",
+            "informatie",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-22a641b0",
+          "begrip": "informatiebron",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "informatie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "informatie",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T10:53:22.841978+00:00",
+        "vorige_versie_v1": "kb-skel-c0b82cf9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.655948+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:53:20.730550+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:53:20.803131+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:53:24.306947+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:53:24.323317+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T10:53:20.230828+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-70efee15",
+      "begrip": "feit",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een feit is iets dat daadwerkelijk is gebeurd of bestaat.",
+        "laag2": "Een feit is informatie die controleerbaar is en onafhankelijk van persoonlijke meningen waar of onwaar kan worden vastgesteld.",
+        "laag3": "Feiten worden gebruikt om kennis op te bouwen en uitspraken te onderbouwen. Voorbeelden zijn: \"Water kookt bij ongeveer 100 graden Celsius op zeeniveau\" of \"Amsterdam is de hoofdstad van Nederland.\" Feiten verschillen van meningen, verwachtingen en overtuigingen omdat ze controleerbaar zijn.\n",
+        "laag4": "Een feit is een vaststelbare eigenschap, gebeurtenis of situatie die door waarneming, meting, documentatie of bewijs kan worden bevestigd. Feiten vormen een belangrijke basis voor wetenschap, journalistiek, rechtspraak, onderwijs en besluitvorming.\n\n"
+      },
+      "ws5": {
+        "wie": "Mensen, onderzoekers, wetenschappers, journalisten en waarnemers.",
+        "wat": "Controleerbare informatie over de werkelijkheid.",
+        "wanneer": "Wanneer iets kan worden vastgesteld of bewezen.",
+        "waar": "In wetenschap, onderwijs, rechtspraak, communicatie en het dagelijks leven.",
+        "waarom": "Om betrouwbare kennis en onderbouwing te bieden.",
+        "hoe": "Door waarneming, meting, onderzoek, documentatie of bewijs."
+      },
+      "tags": [
+        "feit",
+        "waarheid",
+        "werkelijkheid",
+        "bewijs",
+        "informatie",
+        "kennis",
+        "waarneming",
+        "onderzoek",
+        "wetenschap",
+        "verificatie",
+        "objectief",
+        "controleerbaar",
+        "communicatie",
+        "inzicht",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c0b82cf9",
+          "begrip": "waarheid",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "feit",
+            "informatie",
+            "inzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-22a641b0",
+          "begrip": "informatiebron",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "informatie",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-38b878b2",
+          "begrip": "onderzoek",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "informatie",
+            "inzicht",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b2beb9a",
+          "begrip": "ontdekken",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "inzicht",
+            "kennis",
+            "neutraal",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-11840f86",
+          "begrip": "juist",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "kennis",
+            "neutraal",
+            "verificatie",
+            "waarheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T10:55:15.734909+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T10:55:11.489126+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T10:55:12.190502+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:55:12.775917+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:55:12.805945+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:55:16.985510+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:55:17.007084+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-4af7ede8",
+      "begrip": "meditatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Meditatie is het bewust richten van aandacht.",
+        "laag2": "Meditatie is een oefening waarbij iemand aandacht geeft aan het huidige moment, gedachten, gevoelens of waarnemingen.",
+        "laag3": "Tijdens meditatie observeert iemand ervaringen zonder er direct op te reageren. Dit kan helpen bij ontspanning, concentratie, zelfinzicht en bewustwording. Er bestaan veel vormen van meditatie, zoals mindfulness, ademhalingsmeditatie en visualisatie.\n",
+        "laag4": "Meditatie is een methode voor het ontwikkelen van bewustzijn, aandacht en innerlijke rust. Het wordt toegepast binnen spirituele tradities, persoonlijke ontwikkeling, gezondheidszorg en stressvermindering. Meditatie richt zich vaak op waarnemen zonder oordeel en het vergroten van inzicht in gedachten, emoties en ervaringen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, meditatiebeoefenaars, coaches, therapeuten en spirituele leraren.",
+        "wat": "Een oefening voor aandacht, bewustzijn en zelfobservatie.",
+        "wanneer": "Tijdens rustmomenten, trainingen, reflectie of persoonlijke ontwikkeling.",
+        "waar": "Thuis, in de natuur, meditatiecentra, zorginstellingen of andere rustige plaatsen.",
+        "waarom": "Om bewustzijn, concentratie, rust of zelfinzicht te ontwikkelen.",
+        "hoe": "Door aandacht bewust te richten op bijvoorbeeld ademhaling, gedachten, gevoelens, geluiden of waarnemingen."
+      },
+      "tags": [
+        "meditatie",
+        "bewustzijn",
+        "aandacht",
+        "mindfulness",
+        "rust",
+        "concentratie",
+        "zelfinzicht",
+        "reflectie",
+        "ademhaling",
+        "focus",
+        "waarneming",
+        "ontwikkeling",
+        "gezondheid",
+        "geest",
+        "ontspanning",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-57911ff4",
+          "begrip": "Ambient uit",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "concentratie",
+            "focus",
+            "neutraal",
+            "rust",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "focus",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewustzijn",
+            "neutraal",
+            "ontwikkeling",
+            "reflectie",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "geest",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "focus",
+            "neutraal",
+            "ontspanning",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T10:59:11.767910+00:00",
+        "vorige_versie_v1": "kb-skel-4af7ede8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.240390+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:59:10.111537+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:59:10.125607+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T10:59:13.278407+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T10:59:13.290880+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T10:59:09.581267+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-896e7510",
+      "begrip": "mindfulness",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Mindfulness is bewust aandacht geven aan het huidige moment.",
+        "laag2": "Mindfulness betekent opmerken wat je denkt, voelt en ervaart zonder direct te oordelen.",
+        "laag3": "Bij mindfulness richt iemand de aandacht op het hier en nu. Gedachten, gevoelens en lichamelijke sensaties worden waargenomen zonder ze vast te houden of weg te duwen. Mindfulness wordt gebruikt voor ontspanning, stressvermindering, zelfinzicht en aandachtstraining.\n",
+        "laag4": "Mindfulness is een methode voor bewust aanwezig zijn in het huidige moment met een open en accepterende houding. Het combineert aandacht, waarneming en zelfbewustzijn en wordt toegepast binnen meditatie, gezondheidszorg, psychologie en persoonlijke ontwikkeling.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, coaches, therapeuten, meditatiebeoefenaars en zorgverleners.",
+        "wat": "Een vorm van bewuste aandacht voor het huidige moment.",
+        "wanneer": "Tijdens meditatie, dagelijkse activiteiten, stressvolle situaties of persoonlijke ontwikkeling.",
+        "waar": "Overal waar aandacht bewust kan worden gericht op ervaringen in het moment.",
+        "waarom": "Om bewustzijn, rust, concentratie en zelfinzicht te ontwikkelen.",
+        "hoe": "Door gedachten, gevoelens, lichamelijke sensaties en waarnemingen bewust op te merken zonder oordeel."
+      },
+      "tags": [
+        "mindfulness",
+        "aandacht",
+        "bewustzijn",
+        "meditatie",
+        "waarneming",
+        "focus",
+        "concentratie",
+        "rust",
+        "zelfinzicht",
+        "reflectie",
+        "ademhaling",
+        "bewust",
+        "gezondheid",
+        "ontwikkeling",
+        "aanwezig",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4af7ede8",
+          "begrip": "meditatie",
+          "lade": "weten",
+          "overlap": 14,
+          "shared_tags": [
+            "aandacht",
+            "ademhaling",
+            "bewustzijn",
+            "concentratie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-57911ff4",
+          "begrip": "Ambient uit",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "concentratie",
+            "focus",
+            "neutraal",
+            "rust",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "focus",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3db2c213",
+          "begrip": "bewustwording",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bewustzijn",
+            "neutraal",
+            "ontwikkeling",
+            "reflectie",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewust",
+            "bewustzijn",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:00:59.769936+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:00:55.967695+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:00:56.761400+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:00:57.378224+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:00:57.391313+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 14
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:01:01.171061+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:01:01.208202+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 14
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1b0ea10d",
+      "begrip": "concentratie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Concentratie is het richten van aandacht op één onderwerp of taak.",
+        "laag2": "Concentratie helpt om informatie beter te verwerken en afleiding te verminderen.",
+        "laag3": "Mensen gebruiken concentratie tijdens leren, werken, lezen, sporten en probleemoplossing. Een goede concentratie maakt het mogelijk om aandacht langere tijd bij een taak te houden. Vermoeidheid, stress, geluid en afleiding kunnen concentratie verminderen.\n",
+        "laag4": "Concentratie is een cognitief proces waarbij aandacht bewust wordt gericht en vastgehouden op een specifieke activiteit, gedachte of waarneming. Het speelt een belangrijke rol bij leren, geheugen, prestaties, besluitvorming en persoonlijke ontwikkeling.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, leerlingen, studenten, werknemers, sporters en onderzoekers.",
+        "wat": "Het gericht vasthouden van aandacht.",
+        "wanneer": "Tijdens leren, werken, trainen, lezen of andere taken.",
+        "waar": "Overal waar aandacht nodig is om een doel te bereiken.",
+        "waarom": "Om informatie beter te verwerken, taken uit te voeren en doelen te behalen.",
+        "hoe": "Door aandacht bewust op één taak, onderwerp of waarneming te richten en afleiding te beperken."
+      },
+      "tags": [
+        "concentratie",
+        "aandacht",
+        "focus",
+        "bewustzijn",
+        "leren",
+        "geheugen",
+        "denken",
+        "waarneming",
+        "prestatie",
+        "ontwikkeling",
+        "taak",
+        "informatie",
+        "cognitief",
+        "mindfulness",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4af7ede8",
+          "begrip": "meditatie",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "concentratie",
+            "focus",
+            "mindfulness"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-896e7510",
+          "begrip": "mindfulness",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "concentratie",
+            "focus",
+            "mindfulness"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "focus",
+            "informatie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "denken",
+            "geheugen",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aa9da354",
+          "begrip": "vergeet",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "geheugen",
+            "informatie",
+            "leren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:04:35.076329+00:00",
+        "vorige_versie_v1": "kb-skel-1b0ea10d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.168021+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:04:32.126145+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:04:32.142162+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:04:36.479305+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:04:36.499417+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:04:31.589552+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e398a3f0",
+      "begrip": "spieren",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Spieren zijn delen van het lichaam die beweging mogelijk maken.",
+        "laag2": "Spieren trekken samen en ontspannen om het lichaam te laten bewegen en ondersteunen.",
+        "laag3": "Mensen en dieren gebruiken spieren voor lopen, tillen, praten, ademhalen en vele andere bewegingen. Sommige spieren worden bewust aangestuurd, terwijl andere automatisch werken, zoals de hartspier. Regelmatig gebruik en training kunnen spieren sterker maken.\n",
+        "laag4": "Mensen en dieren gebruiken spieren voor lopen, tillen, praten, ademhalen en vele andere bewegingen. Sommige spieren worden bewust aangestuurd, terwijl andere automatisch werken, zoals de hartspier. Regelmatig gebruik en training kunnen spieren sterker maken.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, sporters, fysiotherapeuten en artsen.",
+        "wat": "Lichaamsweefsel dat kracht en beweging produceert.",
+        "wanneer": "Tijdens beweging, inspanning, houding en lichaamsfuncties.",
+        "waar": "Door het hele lichaam, verbonden aan botten, organen en andere structuren.",
+        "waarom": "Om beweging, stabiliteit en lichaamsfuncties mogelijk te maken.",
+        "hoe": "Door samen te trekken en te ontspannen onder invloed van signalen uit het zenuwstelsel."
+      },
+      "tags": [
+        "spieren",
+        "spier",
+        "lichaam",
+        "beweging",
+        "kracht",
+        "gezondheid",
+        "anatomie",
+        "weefsel",
+        "zenuwstelsel",
+        "botten",
+        "houding",
+        "training",
+        "sport",
+        "mens",
+        "biologie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4a9b9315",
+          "begrip": "skelet",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "anatomie",
+            "beweging",
+            "biologie",
+            "botten",
+            "houding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfd08477",
+          "begrip": "skeletstelsel",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "anatomie",
+            "beweging",
+            "biologie",
+            "botten",
+            "houding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ca8725a",
+          "begrip": "schedel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "anatomie",
+            "biologie",
+            "lichaam",
+            "mens",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ded1f53b",
+          "begrip": "benen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "anatomie",
+            "botten",
+            "houding",
+            "lichaam",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6186e3db",
+          "begrip": "Wat weet jij over het lichaam",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "gezondheid",
+            "lichaam",
+            "mens",
+            "spieren"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:06:13.901908+00:00",
+        "vorige_versie_v1": "kb-skel-e398a3f0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.265498+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:06:11.120781+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:06:11.134425+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:06:15.340067+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:06:15.394978+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:06:10.600824+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-415b68a6",
+      "begrip": "zenuwstelsel",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Het zenuwstelsel is het communicatiesysteem van het lichaam.",
+        "laag2": "Het zenuwstelsel ontvangt, verwerkt en verstuurt signalen tussen de hersenen, het ruggenmerg en de rest van het lichaam.",
+        "laag3": "Dankzij het zenuwstelsel kunnen mensen voelen, denken, bewegen en reageren op hun omgeving. Het bestaat uit miljarden zenuwcellen die elektrische signalen doorgeven. Het zenuwstelsel regelt zowel bewuste handelingen, zoals lopen en praten, als automatische processen zoals ademhaling en hartslag.\n",
+        "laag4": "Het zenuwstelsel is een biologisch netwerk van hersenen, ruggenmerg en zenuwen dat informatie verzamelt, verwerkt en verspreidt. Het vormt de verbinding tussen waarneming, denken, emoties, geheugen, beweging en lichaamsfuncties. Het zenuwstelsel speelt een centrale rol in het functioneren en overleven van mens en dier.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, artsen, biologen en neurologen.",
+        "wat": "Een netwerk dat signalen door het lichaam verwerkt en doorgeeft.",
+        "wanneer": "Voortdurend, tijdens denken, voelen, bewegen en lichaamsfuncties.",
+        "waar": "In de hersenen, het ruggenmerg en de zenuwen door het hele lichaam.",
+        "waarom": "Om informatie te verwerken en het lichaam aan te sturen.",
+        "hoe": "Door elektrische en chemische signalen tussen zenuwcellen door te geven."
+      },
+      "tags": [
+        "zenuwstelsel",
+        "zenuwen",
+        "hersenen",
+        "ruggenmerg",
+        "zenuwcel",
+        "neuron",
+        "communicatie",
+        "lichaam",
+        "signaal",
+        "waarneming",
+        "beweging",
+        "denken",
+        "geheugen",
+        "biologie",
+        "gezondheid",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c86dca8c",
+          "begrip": "hersenen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "hersenen",
+            "lichaam",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e398a3f0",
+          "begrip": "spieren",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "biologie",
+            "gezondheid",
+            "lichaam",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ca8725a",
+          "begrip": "schedel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "hersenen",
+            "lichaam",
+            "neutraal",
+            "zenuwstelsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d0b3fd0f",
+          "begrip": "horen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "neutraal",
+            "signaal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9c7f4a5",
+          "begrip": "ziekte",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "gezondheid",
+            "lichaam",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:08:52.350141+00:00",
+        "vorige_versie_v1": "kb-skel-415b68a6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:05.733281+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:08:50.827060+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:08:50.842492+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:08:53.814039+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:08:53.864290+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:08:50.298792+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fd5ef8bc",
+      "begrip": "neuron",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een neuron is een zenuwcel die informatie doorgeeft.",
+        "laag2": "Neuronen ontvangen, verwerken en versturen signalen binnen het zenuwstelsel.",
+        "laag3": "Neuronen vormen de basis van de communicatie in de hersenen en het zenuwstelsel. Ze geven elektrische en chemische signalen door aan andere neuronen, spieren of klieren. Dankzij neuronen kunnen mensen denken, voelen, leren, onthouden en bewegen.\n",
+        "laag4": "Een neuron is een gespecialiseerde zenuwcel die informatie verwerkt en transporteert binnen biologische netwerken. Neuronen werken samen in complexe systemen die verantwoordelijk zijn voor waarneming, geheugen, emoties, besluitvorming en lichaamscontrole. Het menselijk brein bevat miljarden neuronen die via synapsen met elkaar verbonden zijn.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, biologen, neurologen en onderzoekers.",
+        "wat": "Een zenuwcel die signalen ontvangt, verwerkt en doorgeeft.",
+        "wanneer": "Voortdurend tijdens denken, voelen, leren, bewegen en waarnemen.",
+        "waar": "In de hersenen, het ruggenmerg en het zenuwstelsel.",
+        "waarom": "Om informatie binnen het lichaam te verwerken en te verspreiden.",
+        "hoe": "Door elektrische impulsen en chemische signalen via verbindingen met andere cellen."
+      },
+      "tags": [
+        "neuron",
+        "zenuwcel",
+        "zenuwstelsel",
+        "hersenen",
+        "synaps",
+        "signaal",
+        "communicatie",
+        "geheugen",
+        "leren",
+        "denken",
+        "waarneming",
+        "biologie",
+        "neurologie",
+        "lichaam",
+        "gezondheid",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-415b68a6",
+          "begrip": "zenuwstelsel",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "biologie",
+            "communicatie",
+            "denken",
+            "geheugen",
+            "gezondheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c86dca8c",
+          "begrip": "hersenen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "hersenen",
+            "leren",
+            "lichaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ca8725a",
+          "begrip": "schedel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biologie",
+            "hersenen",
+            "lichaam",
+            "neutraal",
+            "zenuwstelsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "leren",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b0ea10d",
+          "begrip": "concentratie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "leren",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:10:36.319338+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:10:32.201574+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:10:33.076132+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:10:33.713348+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:10:33.760115+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:10:37.630427+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:10:37.646456+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7d17cbe3",
+      "begrip": "zenuwcel",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een zenuwcel is een cel die informatie doorgeeft.",
+        "laag2": "Zenuwcellen ontvangen, verwerken en versturen signalen binnen het zenuwstelsel.",
+        "laag3": "Zenuwcellen, ook wel neuronen genoemd, vormen de basis van communicatie in het lichaam. Ze geven signalen door tussen de hersenen, het ruggenmerg, spieren, organen en andere zenuwcellen. Hierdoor kunnen mensen denken, voelen, leren, onthouden en bewegen.\n",
+        "laag4": "Een zenuwcel is een gespecialiseerde biologische cel die informatie verwerkt en transporteert via elektrische impulsen en chemische signalen. Zenuwcellen vormen samen complexe netwerken die verantwoordelijk zijn voor waarneming, geheugen, emoties, besluitvorming en lichaamsfuncties.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, biologen, artsen en neurologen.",
+        "wat": "Een cel die signalen ontvangt, verwerkt en doorgeeft.",
+        "wanneer": "Voortdurend tijdens denken, voelen, leren, bewegen en waarnemen.",
+        "waar": "In de hersenen, het ruggenmerg en het zenuwstelsel.",
+        "waarom": "Om informatie binnen het lichaam te verwerken en te verspreiden.",
+        "hoe": "Door elektrische impulsen en chemische signalen via verbindingen met andere cellen."
+      },
+      "tags": [
+        "zenuwcel",
+        "neuron",
+        "zenuwstelsel",
+        "hersenen",
+        "ruggenmerg",
+        "synaps",
+        "signaal",
+        "communicatie",
+        "geheugen",
+        "leren",
+        "denken",
+        "waarneming",
+        "neurologie",
+        "biologie",
+        "gezondheid",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fd5ef8bc",
+          "begrip": "neuron",
+          "lade": "weten",
+          "overlap": 15,
+          "shared_tags": [
+            "biologie",
+            "communicatie",
+            "denken",
+            "geheugen",
+            "gezondheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-415b68a6",
+          "begrip": "zenuwstelsel",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "biologie",
+            "communicatie",
+            "denken",
+            "geheugen",
+            "gezondheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c86dca8c",
+          "begrip": "hersenen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "hersenen",
+            "leren",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d2d884",
+          "begrip": "geest",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "leren",
+            "neutraal",
+            "waarneming"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b0ea10d",
+          "begrip": "concentratie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "denken",
+            "geheugen",
+            "leren",
+            "neutraal",
+            "waarneming"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:12:16.684923+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:12:13.045272+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:12:13.756998+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:12:14.286042+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:12:14.299150+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 15
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:12:17.934006+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:12:17.971392+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 15
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7b0d1163",
+      "begrip": "neurologie",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Neurologie is de studie van het zenuwstelsel.",
+        "laag2": "Neurologie onderzoekt hoe de hersenen, zenuwen en het ruggenmerg functioneren en wat er gebeurt wanneer deze systemen ziek of beschadigd raken.\n",
+        "laag3": "Neurologen behandelen aandoeningen van het zenuwstelsel, zoals epilepsie, migraine, beroertes, Parkinson en multiple sclerose. Neurologie helpt bij het begrijpen van denken, bewegen, voelen, geheugen en bewustzijn.\n",
+        "laag4": "Neurologie is een medisch vakgebied dat zich richt op de structuur, werking en aandoeningen van het zenuwstelsel. Het combineert kennis uit geneeskunde, biologie en neurowetenschappen om te begrijpen hoe signalen in het lichaam worden verwerkt en hoe neurologische ziekten ontstaan, worden vastgesteld en behandeld.\n"
+      },
+      "ws5": {
+        "wie": "Neurologen, artsen, onderzoekers, patiënten en zorgverleners.",
+        "wat": "Een medisch vakgebied dat het zenuwstelsel bestudeert.",
+        "wanneer": "Bij onderzoek, diagnose en behandeling van neurologische aandoeningen.",
+        "waar": "In ziekenhuizen, onderzoekscentra, universiteiten en zorginstellingen.",
+        "waarom": "Om het functioneren van het zenuwstelsel te begrijpen en aandoeningen te behandelen.",
+        "hoe": "Door onderzoek, observatie, hersenscans, neurologische testen en medische behandeling."
+      },
+      "tags": [
+        "neurologie",
+        "zenuwstelsel",
+        "hersenen",
+        "zenuwen",
+        "ruggenmerg",
+        "neurologie",
+        "neuroloog",
+        "geneeskunde",
+        "gezondheid",
+        "onderzoek",
+        "diagnose",
+        "behandeling",
+        "neurologische aandoeningen",
+        "wetenschap",
+        "lichaam",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-05c970d6",
+          "begrip": "medisch",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "behandeling",
+            "diagnose",
+            "geneeskunde",
+            "gezondheid",
+            "lichaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-415b68a6",
+          "begrip": "zenuwstelsel",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "gezondheid",
+            "hersenen",
+            "lichaam",
+            "neutraal",
+            "ruggenmerg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fd5ef8bc",
+          "begrip": "neuron",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "gezondheid",
+            "hersenen",
+            "lichaam",
+            "neurologie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7d17cbe3",
+          "begrip": "zenuwcel",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "gezondheid",
+            "hersenen",
+            "neurologie",
+            "neutraal",
+            "ruggenmerg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9c7f4a5",
+          "begrip": "ziekte",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "behandeling",
+            "geneeskunde",
+            "gezondheid",
+            "lichaam",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:13:53.334124+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:13:49.600888+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:13:50.293978+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:13:50.872818+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:13:50.905462+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:13:54.633097+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:13:54.670390+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-400bdaa8",
+      "begrip": "grip",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Grip is controle of houvast op iets.",
+        "laag2": "Grip betekent dat iemand iets goed kan vasthouden, begrijpen of beheersen.",
+        "laag3": "Grip kan zowel fysiek als figuurlijk zijn. Fysieke grip gaat over stevig vasthouden, zoals grip op een stuur of gereedschap. Figuurlijke grip gaat over overzicht, controle of begrip van een situatie, probleem of proces.\n",
+        "laag4": "Grip kan zowel fysiek als figuurlijk zijn. Fysieke grip gaat over stevig vasthouden, zoals grip op een stuur of gereedschap. Figuurlijke grip gaat over overzicht, controle of begrip van een situatie, probleem of proces.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, bestuurders, sporters, leerlingen, organisaties en systemen.",
+        "wat": "Houvast, controle of beheersing.",
+        "wanneer": "Wanneer iets wordt vastgehouden, begrepen of beheerst.",
+        "waar": "Bij fysieke handelingen, situaties, processen, kennis en besluitvorming",
+        "waarom": "Om controle, veiligheid, stabiliteit of begrip te behouden.",
+        "hoe": "Door vasthouden, oefenen, organiseren, begrijpen of sturen."
+      },
+      "tags": [
+        "grip",
+        "controle",
+        "houvast",
+        "beheersing",
+        "begrip",
+        "stabiliteit",
+        "overzicht",
+        "invloed",
+        "veiligheid",
+        "kennis",
+        "leren",
+        "proces",
+        "structuur",
+        "zelfvertrouwen",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "neutraal",
+            "overzicht",
+            "stabiliteit",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c90ef458",
+          "begrip": "voorspelbaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "neutraal",
+            "proces",
+            "stabiliteit",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6b89797b",
+          "begrip": "morgen wil ik mijn administratie op orde brengen.",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "neutraal",
+            "overzicht",
+            "stabiliteit",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4d5d548e",
+          "begrip": "defensie",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "neutraal",
+            "stabiliteit",
+            "structuur",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5c916c83",
+          "begrip": "Schild",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "controle",
+            "neutraal",
+            "stabiliteit",
+            "structuur",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:18:43.493014+00:00",
+        "vorige_versie_v1": "kb-skel-400bdaa8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.108909+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:18:36.476488+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:18:36.507845+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:18:45.039346+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:18:45.099506+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:18:35.927723+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2c948a03",
+      "begrip": "toevoeging",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een toevoeging is iets dat ergens extra aan wordt toegevoegd.",
+        "laag2": "Een toevoeging zorgt ervoor dat bestaande informatie, een object of een situatie wordt uitgebreid of aangevuld.",
+        "laag3": "Toevoegingen kunnen bestaan uit woorden, onderdelen, functies, materialen of ideeën. Ze worden gebruikt om iets completer, duidelijker, beter of uitgebreider te maken. Een toevoeging verandert vaak niet de basis, maar vult deze aan.\n",
+        "laag4": "Een toevoeging is een aanvulling op een bestaand geheel. Toevoegingen spelen een rol in communicatie, techniek, ontwikkeling, kennisopbouw en ontwerp. Door toevoegingen kunnen systemen, teksten, producten of processen meer mogelijkheden, details of functionaliteit krijgen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, ontwerpers, schrijvers, ontwikkelaars en systemen.",
+        "wat": "Een aanvulling op iets dat al bestaat.",
+        "wanneer": "Wanneer extra informatie, onderdelen of functies worden toegevoegd.",
+        "waar": "In teksten, gesprekken, systemen, producten, plannen en processen.",
+        "waarom": "Om iets uit te breiden, te verbeteren of te verduidelijken.",
+        "hoe": "Door nieuwe elementen aan een bestaand geheel toe te voegen."
+      },
+      "tags": [
+        "toevoeging",
+        "aanvulling",
+        "uitbreiding",
+        "toevoeging",
+        "extra",
+        "verbetering",
+        "ontwikkeling",
+        "informatie",
+        "onderdeel",
+        "functie",
+        "proces",
+        "systeem",
+        "kennis",
+        "structuur",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9a89e376",
+          "begrip": "toevoegen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "neutraal",
+            "ontwikkeling",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-691230f4",
+          "begrip": "systeemanalyse",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "informatie",
+            "neutraal",
+            "ontwikkeling",
+            "proces",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5a80c066",
+          "begrip": "bouwstenen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "kennis",
+            "neutraal",
+            "onderdeel",
+            "ontwikkeling",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b8cd194f",
+          "begrip": "aanvulling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aanvulling",
+            "informatie",
+            "kennis",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00205cb5",
+          "begrip": "studie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "neutraal",
+            "ontwikkeling",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:25:31.600113+00:00",
+        "vorige_versie_v1": "kb-skel-2c948a03",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.442758+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:25:30.828535+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:25:30.868588+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:25:33.022561+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:25:33.042657+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:25:30.287278+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5ce723b6",
+      "begrip": "Toegevoegd",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Toegevoegd betekent dat iets ergens bij is geplaatst.",
+        "laag2": "Toegevoegd geeft aan dat een aanvulling, verandering of uitbreiding al heeft plaatsgevonden.",
+        "laag3": "Mensen gebruiken toegevoegd om aan te geven dat nieuwe informatie, onderdelen, functies of objecten aan een bestaand geheel zijn gekoppeld. Het woord beschrijft een afgeronde handeling waarbij iets extra's onderdeel is geworden van wat al bestond.\n",
+        "laag4": "Toegevoegd is de voltooide vorm van toevoegen en beschrijft de toestand waarin een aanvulling succesvol is geïntegreerd in een systeem, proces, document, gesprek of kennisstructuur. Het benadrukt dat de handeling is uitgevoerd en dat het nieuwe onderdeel nu deel uitmaakt van het geheel.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, ontwikkelaars, schrijvers, organisaties en gebruikers.",
+        "wat": "Een aanvulling die al is opgenomen in een bestaand geheel.",
+        "wanneer": "Nadat een toevoeging heeft plaatsgevonden.",
+        "waar": "In systemen, documenten, gesprekken, kennisnetwerken, processen en objecten.",
+        "waarom": "Om een geheel uit te breiden, verbeteren of verrijken.",
+        "hoe": "Door iets nieuws aan een bestaand geheel toe te voegen en op te nemen."
+      },
+      "tags": [
+        "toegevoegd",
+        "toevoegen",
+        "toevoeging",
+        "aanvulling",
+        "uitbreiding",
+        "integratie",
+        "verwerkt",
+        "opgenomen",
+        "verandering",
+        "kennis",
+        "informatie",
+        "systeem",
+        "proces",
+        "ontwikkeling",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2c948a03",
+          "begrip": "toevoeging",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "aanvulling",
+            "informatie",
+            "kennis",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9a89e376",
+          "begrip": "toevoegen",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "neutraal",
+            "ontwikkeling",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf4fb7bc",
+          "begrip": "groeien",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "neutraal",
+            "ontwikkeling",
+            "proces",
+            "systeem",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b8cd194f",
+          "begrip": "aanvulling",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "aanvulling",
+            "informatie",
+            "kennis",
+            "toevoeging",
+            "uitbreiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00205cb5",
+          "begrip": "studie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "neutraal",
+            "ontwikkeling",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:27:44.795196+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:27:40.626284+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:27:41.393732+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:27:41.915564+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:27:41.929322+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:27:46.121732+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:27:46.137649+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-76ca4c7b",
+      "begrip": "opbrengst",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Opbrengst is wat iets oplevert.\n",
+        "laag2": "Een opbrengst is het resultaat, voordeel of product dat ontstaat uit een activiteit, investering, inspanning of proces.",
+        "laag3": "Opbrengst kan verwijzen naar geld, goederen, kennis, ervaring, groei of andere resultaten. Een boer heeft bijvoorbeeld opbrengst van een oogst, een bedrijf van verkoop en een leerling van leren. De opbrengst laat zien wat een inspanning heeft voortgebracht.\n",
+        "laag4": "Opbrengst is het meetbare of merkbare resultaat van een handeling, proces of investering. Het begrip wordt gebruikt in economie, landbouw, onderwijs, techniek en persoonlijke ontwikkeling om de waarde, effecten of gevolgen van een activiteit te beschrijven.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, bedrijven, boeren, leerlingen, organisaties en systemen.",
+        "wat": "Het resultaat of voordeel van een activiteit of proces.",
+        "wanneer": "Na een inspanning, investering, handeling of ontwikkeling.",
+        "waar": "In werk, onderwijs, landbouw, economie, projecten en persoonlijke groei.",
+        "waarom": "Om te bepalen wat een activiteit heeft opgeleverd.",
+        "hoe": "Door de resultaten, effecten of waarde van een proces te beoordelen."
+      },
+      "tags": [
+        "opbrengst",
+        "resultaat",
+        "opbrengsten",
+        "voordeel",
+        "effect",
+        "uitkomst",
+        "prestatie",
+        "ontwikkeling",
+        "groei",
+        "waarde",
+        "investering",
+        "proces",
+        "product",
+        "rendement",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a7447e6f",
+          "begrip": "resultaten",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "effect",
+            "neutraal",
+            "opbrengst",
+            "prestatie",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eab440c4",
+          "begrip": "werkt",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "effect",
+            "neutraal",
+            "ontwikkeling",
+            "proces",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-52bcdb65",
+          "begrip": "voordeel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "groei",
+            "neutraal",
+            "opbrengst",
+            "resultaat",
+            "voordeel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a4096d6",
+          "begrip": "productiviteit",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "groei",
+            "neutraal",
+            "ontwikkeling",
+            "prestatie",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e840ddf7",
+          "begrip": "klaar",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "neutraal",
+            "ontwikkeling",
+            "prestatie",
+            "proces",
+            "resultaat"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:33:57.189080+00:00",
+        "vorige_versie_v1": "kb-skel-76ca4c7b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.648689+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:33:56.386398+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:33:56.401351+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:33:58.520193+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:33:58.534723+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:33:55.867984+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d15777d4",
+      "begrip": "Woeste Willem",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Woeste Willem is een persoon die erg boos lijkt.",
+        "laag2": "Woeste Willem wordt gebruikt als naam voor iemand die bekendstaat om zijn sterke boosheid, drift of felle reacties.\n",
+        "laag3": "De naam Woeste Willem roept het beeld op van iemand die snel kwaad wordt, luid reageert of een imposante uitstraling heeft. Afhankelijk van de context kan de naam serieus, beschrijvend of humoristisch bedoeld zijn.\n",
+        "laag4": "Woeste Willem is een voorbeeld van hoe mensen eigenschappen verwerken in bijnamen. Zulke namen maken gedrag of karakter snel herkenbaar en kunnen zowel bewondering als humor oproepen.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon, karakter of bijnaam.",
+        "wat": "Een naam die verwijst naar iemand met een woest karakter.",
+        "wanneer": "Wanneer iemand vaak boos, fel of temperamentvol wordt gezien.",
+        "waar": "In verhalen, gesprekken, bijnamen en fictie.",
+        "waarom": "Om een opvallende eigenschap te benadrukken.",
+        "hoe": "Door de naam te koppelen aan gedrag of uitstraling."
+      },
+      "tags": [
+        "woeste willem",
+        "bijnaam",
+        "persoon",
+        "karakter",
+        "boosheid",
+        "woede",
+        "temperament",
+        "drift",
+        "uitstraling",
+        "gedrag",
+        "humor",
+        "naam",
+        "emotie",
+        "boos"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2066a5e5",
+          "begrip": "drift",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "boos",
+            "boosheid",
+            "drift",
+            "emotie",
+            "gedrag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9c8ce21",
+          "begrip": "razernij",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "boosheid",
+            "emotie",
+            "gedrag",
+            "woede"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ca43ea1b",
+          "begrip": "boosheid",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "boosheid",
+            "emotie",
+            "gedrag",
+            "woede"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "boos",
+            "boosheid",
+            "emotie",
+            "gedrag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfcd6bf7",
+          "begrip": "kwaad",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "boos",
+            "boosheid",
+            "emotie",
+            "gedrag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:55:10.277047+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:54:58.880275+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:54:59.681553+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:55:00.206668+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:55:00.228480+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:55:11.724818+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:55:11.770677+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bd9cdea9",
+      "begrip": "Kapitein Iglo",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kapitein Iglo is een fictieve kapitein die bekend is van een vismerk.",
+        "laag2": "Kapitein Iglo is een reclamefiguur die wordt gebruikt om visproducten van het merk Iglo te vertegenwoordigen.",
+        "laag3": "Kapitein Iglo wordt meestal afgebeeld als een vriendelijke oude zeekapitein met een witte baard. Het personage staat voor vis, zeevaart, kwaliteit en vertrouwen. Door jarenlang gebruik in reclamecampagnes is Kapitein Iglo uitgegroeid tot een bekend figuur in veel landen.",
+        "laag4": "Kapitein Iglo is een voorbeeld van een merkmascotte: een personage dat wordt gebruikt om een merk herkenbaar te maken. Het karakter verbindt reclame, voedsel, vertrouwen en nostalgie en helpt consumenten producten sneller te herkennen."
+      },
+      "ws5": {
+        "wie": "Een fictieve kapitein en reclamefiguur.",
+        "wat": "Een merkmascotte voor visproducten.",
+        "wanneer": "Sinds de twintigste eeuw in reclamecampagnes.",
+        "waar": "Op verpakkingen, advertenties, televisie en in winkels.",
+        "waarom": "Om het merk en de producten herkenbaar te maken.",
+        "hoe": "Door een vriendelijk en betrouwbaar personage te gebruiken in marketing en reclame."
+      },
+      "tags": [
+        "kapitein iglo",
+        "kapitein",
+        "iglo",
+        "merk",
+        "a-merk",
+        "product",
+        "mascotte",
+        "reclame",
+        "marketing",
+        "vis",
+        "vissticks",
+        "diepvries",
+        "voedsel",
+        "zee",
+        "schip",
+        "visser",
+        "avontuur",
+        "nostalgie",
+        "vertrouwen",
+        "personage",
+        "emotie",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6a5bac94",
+          "begrip": "visserij",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "vis",
+            "visser",
+            "voedsel",
+            "zee"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-89dca1fe",
+          "begrip": "geloof",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "vertrouwen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "vertrouwen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:58:25.712876+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:56:05.421487+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:58:22.724648+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:56:06.627979+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:56:06.641787+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:58:23.333324+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:58:23.363963+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:58:27.026657+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:58:27.039636+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/a7130dd1de1d"
+        ]
+      },
+      "needs": [
+        "voice"
+      ]
+    },
+    {
+      "id": "kbv2-30697706",
+      "begrip": "Iglo",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Iglo is een merk dat bekendstaat om diepvriesvoeding.",
+        "laag2": "Iglo verkoopt verschillende diepvriesproducten, waaronder vis, groenten en kant-en-klare maaltijden.",
+        "laag3": "Iglo is een voedingsmerk dat in veel landen bekend is door zijn diepvriesproducten. Het merk wordt vaak geassocieerd met vissticks, diepvriesgroenten, gemak en langdurige houdbaarheid van voedsel. Kapitein Iglo wordt gebruikt als mascotte om het merk herkenbaar te maken.\n",
+        "laag4": "Iglo is een voorbeeld van een consumentenmerk binnen de voedingsindustrie. Het merk laat zien hoe merkherkenning, marketing, productkwaliteit en distributie samen kunnen zorgen voor een sterke positie in de markt.\n"
+      },
+      "ws5": {
+        "wie": "Een voedingsmerk.",
+        "wat": "Een producent en verkoper van diepvriesproducten.",
+        "wanneer": "Sinds de twintigste eeuw actief.",
+        "waar": "In supermarkten en winkels in verschillende landen.",
+        "waarom": "Om consumenten diepvriesvoeding aan te bieden.",
+        "hoe": " Door voedsel te produceren, verpakken, invriezen en distribueren."
+      },
+      "tags": [
+        "iglo",
+        "merk",
+        "a-merk",
+        "product",
+        "voedsel",
+        "voeding",
+        "diepvries",
+        "supermarkt",
+        "vis",
+        "vissticks",
+        "groenten",
+        "maaltijd",
+        "fabrikant",
+        "marketing",
+        "reclame",
+        "kapitein iglo",
+        "consument",
+        "kwaliteit",
+        "houdbaarheid",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bd9cdea9",
+          "begrip": "Kapitein Iglo",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "a-merk",
+            "diepvries",
+            "emotie",
+            "iglo",
+            "kapitein iglo"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-798d8fb0",
+          "begrip": "snack",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "maaltijd",
+            "voeding",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-11bfe35b",
+          "begrip": "pannekoek",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "maaltijd",
+            "voeding",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "maaltijd",
+            "voeding",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "maaltijd",
+            "voeding",
+            "voedsel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:59:56.076170+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T11:59:51.829541+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:59:52.747373+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:59:53.599263+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:59:53.618962+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:59:57.986018+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:59:58.003291+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-59c44894",
+      "begrip": "ding",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een ding is een object, voorwerp of zaak.",
+        "laag2": "Ding is een algemeen woord voor iets waarvan de naam onbekend, vergeten of niet belangrijk is.",
+        "laag3": "Mensen gebruiken het woord ding om te verwijzen naar voorwerpen, onderwerpen, gebeurtenissen of abstracte zaken. Het woord heeft een brede betekenis en krijgt zijn precieze betekenis meestal uit de context.\n",
+        "laag4": "Ding is een van de meest algemene woorden in de taal. Het fungeert als tijdelijke aanduiding wanneer een specifiek begrip niet beschikbaar, niet bekend of niet nodig is. Daardoor kan het zowel naar fysieke objecten als naar ideeën, situaties of concepten verwijzen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die spreken of schrijven.",
+        "wat": "Een algemene aanduiding voor een object, zaak of begrip.",
+        "wanneer": "Wanneer de exacte naam onbekend, vergeten of onbelangrijk is.",
+        "waar": "In gesprekken, teksten en dagelijkse communicatie.",
+        "waarom": "Om naar iets te verwijzen zonder een specifieke naam te gebruiken.",
+        "hoe": "Door het woord als vervanging van een specifiek begrip te gebruiken."
+      },
+      "tags": [
+        "ding",
+        "object",
+        "voorwerp",
+        "zaak",
+        "iets",
+        "begrip",
+        "onderwerp",
+        "item",
+        "element",
+        "entiteit",
+        "naam",
+        "verwijzing",
+        "context",
+        "taal",
+        "communicatie",
+        "algemeen",
+        "abstract",
+        "concreet",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69c7326b",
+          "begrip": "Arent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "naam",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "begrip",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "naam",
+            "neutraal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "naam",
+            "neutraal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:04:10.292943+00:00",
+        "vorige_versie_v1": "snap-220ce196",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:11:45.303158+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:04:08.518079+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:04:09.030972+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:04:09.045732+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:04:11.563574+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:04:11.603568+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-eaa509fe",
+      "begrip": "leverage",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Leverage betekent het gebruiken van een hefboom om een groter effect te bereiken.",
+        "laag2": "Leverage wordt gebruikt wanneer iemand met beperkte middelen een groter resultaat probeert te behalen.",
+        "laag3": "In de financiële wereld betekent leverage dat iemand geleend geld gebruikt om een grotere positie in te nemen dan met eigen vermogen mogelijk zou zijn. Hierdoor kunnen winsten groter worden, maar verliezen ook. Buiten financiën wordt leverage gebruikt voor elke vorm van versterking waarbij een kleine inzet een groot effect veroorzaakt.\n",
+        "laag4": "Leverage is gebaseerd op het principe van vermenigvuldiging van invloed, kracht of middelen. Het begrip komt oorspronkelijk van de fysieke hefboom, maar wordt tegenwoordig gebruikt in economie, handel, technologie, marketing en strategie. Goed gebruik van leverage kan groei versnellen, terwijl verkeerd gebruik risico's sterk kan vergroten.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers, bedrijven, ondernemers en strategen.",
+        "wat": "Een hefboom die invloed, vermogen of resultaat vergroot.",
+        "wanneer": "Wanneer iemand meer resultaat wil behalen met beperkte middelen.",
+        "waar": "In financiën, handel, economie, technologie, marketing en strategie.",
+        "waarom": "Om rendement, bereik, invloed of effect te vergroten.",
+        "hoe": "Door middelen, kapitaal, kennis, technologie of systemen te gebruiken als versterker."
+      },
+      "tags": [
+        "leverage",
+        "hefboom",
+        "hefboomwerking",
+        "versterking",
+        "kapitaal",
+        "lening",
+        "margin",
+        "trader",
+        "beleggen",
+        "investering",
+        "risico",
+        "rendement",
+        "winst",
+        "verlies",
+        "positie",
+        "strategie",
+        "invloed",
+        "groei",
+        "vermenigvuldiging",
+        "effect",
+        "financieel",
+        "emotie",
+        "bang",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a8aa1876",
+          "begrip": "trader",
+          "lade": "doen",
+          "overlap": 11,
+          "shared_tags": [
+            "bang",
+            "beleggen",
+            "blij",
+            "emotie",
+            "financieel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "blij",
+            "emotie",
+            "investering",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e26fb2",
+          "begrip": "traden",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "investering",
+            "risico",
+            "strategie",
+            "winst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e92b9dea",
+          "begrip": "versterking",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "groei",
+            "invloed",
+            "versterking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a5abec7c",
+          "begrip": "sterker",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "groei",
+            "invloed",
+            "versterking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:06:58.176719+00:00",
+        "vorige_versie_v1": "snap-b106b480",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Gerben",
+        "aangemaakt_op": "2026-05-29T15:41:48.240021+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:06:56.771039+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:06:57.300551+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:06:57.314171+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:06:59.482748+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:06:59.495781+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-83bc8035",
+      "begrip": "minecraft",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Minecraft is een computerspel waarin spelers blokken kunnen plaatsen, verwijderen en gebruiken om een wereld te bouwen.",
+        "laag2": "Minecraft is een computerspel waarin spelers blokken kunnen plaatsen, verwijderen en gebruiken om een wereld te bouwen.",
+        "laag3": "Minecraft is een sandbox-videospel waarin spelers grondstoffen verzamelen, gebouwen maken, gereedschappen vervaardigen en vijanden kunnen bestrijden. Het spel bevat verschillende speelmodi, waaronder Survival, Creative, Adventure en Hardcore. Door de open structuur kunnen spelers hun eigen doelen bepalen.\n",
+        "laag4": "Minecraft is een van de meest invloedrijke videogames ter wereld. Het spel stimuleert creativiteit, probleemoplossend denken, samenwerking en verkenning. Daarnaast wordt Minecraft gebruikt voor onderwijs, programmeren, ontwerp en het bouwen van virtuele gemeenschappen.\n"
+      },
+      "ws5": {
+        "wie": "Gamers, leerlingen, docenten, bouwers, programmeurs en creatieve spelers.",
+        "wat": "Een sandbox-videospel gebaseerd op blokken.",
+        "wanneer": "Sinds 2009 en nog steeds actief gespeeld.",
+        "waar": "Op computers, consoles, mobiele apparaten en servers.",
+        "waarom": "Voor vermaak, creativiteit, samenwerking, leren en avontuur.",
+        "hoe": "Door blokken te verzamelen, plaatsen, verwijderen, combineren en gebruiken."
+      },
+      "tags": [
+        "minecraft",
+        "spel",
+        "videogame",
+        "sandbox",
+        "blokken",
+        "bouwen",
+        "crafting",
+        "survival",
+        "creative",
+        "avontuur",
+        "ontdekken",
+        "grondstoffen",
+        "gereedschap",
+        "wereld",
+        "server",
+        "multiplayer",
+        "redstone",
+        "creativiteit",
+        "programmeren",
+        "educatie",
+        "mojang",
+        "emotie",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-761b05aa",
+          "begrip": "entertainment",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7aacfc7",
+          "begrip": "nieuwsgierigheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "ontdekken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8205b15f",
+          "begrip": "spelen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aac950e2",
+          "begrip": "Creëren",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:08:22.498979+00:00",
+        "vorige_versie_v1": "snap-71fd2615",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Thomas",
+        "aangemaakt_op": "2026-05-24T08:28:57.321261+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:08:21.026773+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:08:21.525553+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:08:21.539583+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:08:23.909894+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:08:23.923576+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2351592c",
+      "begrip": "endlantis",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Endlantis is een plaats, wereld of naam binnen Minecraft.",
+        "laag2": "Endlantis verwijst meestal naar een door spelers gemaakte locatie, server, stad, wereld of project binnen Minecraft.",
+        "laag3": "De betekenis van Endlantis hangt af van de context waarin de naam wordt gebruikt. De naam lijkt een combinatie van \"End\" (de Minecraft-dimensie The End) en \"Atlantis\" (de legendarische verzonken stad). Daardoor roept Endlantis beelden op van een mysterieuze, fantasierijke of door spelers gebouwde wereld.\n",
+        "laag4": "Endlantis laat zien hoe spelers nieuwe begrippen en locaties creëren door bestaande concepten te combineren. Zulke namen helpen bij wereldbouw, storytelling, gemeenschappen en het ontwikkelen van een eigen identiteit binnen een spelomgeving.\n"
+      },
+      "ws5": {
+        "wie": "Spelers, bouwers, communities of serverbeheerders.",
+        "wat": "Een zelfbedachte naam voor een locatie, wereld, project of gemeenschap.",
+        "wanneer": "Tijdens het bouwen, spelen of ontwikkelen van een Minecraft-wereld.",
+        "waar": "Binnen Minecraft of een andere virtuele omgeving.",
+        "waarom": "Om een unieke identiteit of sfeer te creëren.",
+        "hoe": "Door bestaande begrippen en fantasie te combineren tot een nieuwe naam."
+      },
+      "tags": [
+        "endlantis",
+        "minecraft",
+        "wereld",
+        "stad",
+        "server",
+        "project",
+        "fantasie",
+        "atlantis",
+        "end",
+        "bouwen",
+        "avontuur",
+        "creativiteit",
+        "community",
+        "locatie",
+        "naam",
+        "identiteit",
+        "storytelling",
+        "virtueel",
+        "spel",
+        "emotie",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-83bc8035",
+          "begrip": "minecraft",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "avontuur",
+            "blij",
+            "bouwen",
+            "creativiteit",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-23253e0a",
+          "begrip": "ga je geld verdienen voor redrum_w?",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "fantasie",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-018e3d9a",
+          "begrip": "joël",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "identiteit",
+            "naam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-761b05aa",
+          "begrip": "entertainment",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "creativiteit",
+            "emotie",
+            "spel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:09:53.306420+00:00",
+        "vorige_versie_v1": "snap-750b3128",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Thomas",
+        "aangemaakt_op": "2026-05-24T08:28:46.712587+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:09:49.612028+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:09:50.120217+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:09:50.133560+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:09:54.647641+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:09:54.704716+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ec657949",
+      "begrip": "Atlantis",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Atlantis is een legendarische verloren stad of beschaving.",
+        "laag2": "Atlantis wordt beschreven als een machtig eilandrijk dat volgens verhalen in zee verdween.",
+        "laag3": "Atlantis komt oorspronkelijk uit de geschriften van Plato. Hij beschreef Atlantis als een geavanceerde beschaving die door hoogmoed ten onder ging en door de zee werd verzwolgen. Tot op heden is niet bewezen dat Atlantis echt heeft bestaan, maar het onderwerp blijft populair in verhalen, films, boeken en speculaties.\n",
+        "laag4": "Atlantis is uitgegroeid tot een cultureel symbool voor verloren kennis, verdwenen beschavingen en verborgen mysteries. Het begrip wordt vaak gebruikt als metafoor voor een verloren paradijs, vergeten geschiedenis of een geavanceerde samenleving die ten onder is gegaan.\n"
+      },
+      "ws5": {
+        "wie": "Volgens de verhalen werd Atlantis bewoond door een machtige beschaving.",
+        "wat": "Een legendarisch eilandrijk of verloren stad.",
+        "wanneer": "Volgens Plato zou Atlantis duizenden jaren vóór zijn tijd hebben bestaan.",
+        "waar": "Volgens de verhalen lag Atlantis voorbij de Zuilen van Hercules (de Straat van Gibraltar).",
+        "waarom": "Atlantis wordt gebruikt om verhalen over macht, hoogmoed en ondergang te vertellen.",
+        "hoe": "Door oude geschriften, mythen, speculaties en moderne interpretaties."
+      },
+      "tags": [
+        "atlantis",
+        "legende",
+        "mythe",
+        "verloren stad",
+        "beschaving",
+        "eiland",
+        "oceaan",
+        "zee",
+        "geschiedenis",
+        "filosofie",
+        "plato",
+        "mysterie",
+        "archeologie",
+        "cultuur",
+        "verhaal",
+        "ondergang",
+        "hoogmoed",
+        "kennis",
+        "fantasie",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-659ac2e1",
+          "begrip": "etymologie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "kennis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-267ae513",
+          "begrip": "overleden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7d09f26c",
+          "begrip": "draken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "fantasie",
+            "mysterie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-87326e60",
+          "begrip": "fictie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "fantasie",
+            "neutraal",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "geschiedenis",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:11:22.846824+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T12:11:17.810089+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:11:18.631145+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:11:19.121670+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:11:19.137568+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:11:24.220772+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:11:24.273157+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-971b77ef",
+      "begrip": "end",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "End betekent einde of het laatste deel van iets.",
+        "laag2": "End wordt gebruikt om aan te geven dat iets stopt, voltooid is of zijn laatste punt bereikt.",
+        "laag3": "Het woord end komt uit het Engels en betekent einde. Het kan verwijzen naar het einde van een gebeurtenis, proces, periode, verhaal, route of object. In verschillende contexten krijgt het woord een specifieke betekenis, zoals in spellen, programmeren of communicatie.\n",
+        "laag4": "End is een fundamenteel begrip dat helpt om grenzen, afronding en overgangen te beschrijven. Het concept speelt een belangrijke rol in tijd, processen, verhalen, systemen en doelen, omdat het aangeeft waar iets ophoudt en iets anders kan beginnen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, processen en gebeurtenissen.",
+        "wat": "Het laatste punt of de afronding van iets.",
+        "wanneer": "Wanneer iets stopt, voltooid is of wordt afgesloten.",
+        "waar": "In tijd, ruimte, verhalen, processen, spellen en communicatie.",
+        "waarom": "Om het einde of de grens van iets aan te geven.",
+        "hoe": "Door een proces, gebeurtenis of reeks af te sluiten."
+      },
+      "tags": [
+        "end",
+        "einde",
+        "afsluiting",
+        "afronding",
+        "grens",
+        "laatste",
+        "stoppen",
+        "voltooiing",
+        "overgang",
+        "proces",
+        "tijd",
+        "verhaal",
+        "doel",
+        "resultaat",
+        "conclusie",
+        "eindepunt",
+        "terminatie",
+        "afsluiten",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2110e3cd",
+          "begrip": "einde",
+          "lade": "doen",
+          "overlap": 11,
+          "shared_tags": [
+            "afronding",
+            "afsluiting",
+            "einde",
+            "emotie",
+            "grens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f4a8d9de",
+          "begrip": "afsluiting",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "afronding",
+            "afsluiting",
+            "einde",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48596675",
+          "begrip": "Uiteindelijk",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "afronding",
+            "conclusie",
+            "einde",
+            "proces",
+            "resultaat"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3ba58c24",
+          "begrip": "afronding",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "afronding",
+            "afsluiting",
+            "emotie",
+            "neutraal",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a2ca029",
+          "begrip": "voltooid",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "afronding",
+            "doel",
+            "emotie",
+            "proces",
+            "resultaat"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:12:51.184903+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T12:12:47.355022+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:12:48.276910+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:12:48.903057+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:12:48.920226+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:12:52.828476+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:12:52.869830+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9e0ce62a",
+      "begrip": "collega",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een collega is iemand met wie je samenwerkt.",
+        "laag2": "Een collega is een persoon die binnen dezelfde organisatie, groep of werkomgeving actief is.",
+        "laag3": "Collega's werken vaak samen aan taken, projecten of doelen. Zij kunnen kennis delen, elkaar ondersteunen, overleggen en verantwoordelijkheden verdelen. De relatie tussen collega's kan professioneel, sociaal of beide zijn.\n",
+        "laag4": "Collega's vormen een belangrijk onderdeel van samenwerking binnen organisaties. Goede samenwerking tussen collega's kan bijdragen aan productiviteit, kennisuitwisseling, vertrouwen, werkplezier en het behalen van gezamenlijke doelen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die binnen dezelfde organisatie, afdeling of groep werken.",
+        "wat": " Een persoon met wie iemand samenwerkt.",
+        "wanneer": "Tijdens werk, projecten of gezamenlijke activiteiten.",
+        "waar": "Op de werkplek, binnen organisaties, bedrijven, instellingen en teams.",
+        "waarom": "Om taken uit te voeren en gezamenlijke doelen te bereiken.",
+        "hoe": "Door samen te werken, te communiceren en kennis of verantwoordelijkheden te delen."
+      },
+      "tags": [
+        "collega",
+        "samenwerking",
+        "team",
+        "werk",
+        "werknemer",
+        "medewerker",
+        "organisatie",
+        "bedrijf",
+        "communicatie",
+        "overleg",
+        "ondersteuning",
+        "kennisdeling",
+        "verantwoordelijkheid",
+        "project",
+        "vertrouwen",
+        "relatie",
+        "werkplek",
+        "professionaliteit",
+        "sociaal",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-01810699",
+          "begrip": "medewerker",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "bedrijf",
+            "collega",
+            "emotie",
+            "medewerker",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c922de8",
+          "begrip": "werkgever",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedrijf",
+            "emotie",
+            "neutraal",
+            "organisatie",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5333b8b2",
+          "begrip": "personeel",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bedrijf",
+            "collega",
+            "emotie",
+            "neutraal",
+            "organisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5c41cd27",
+          "begrip": "community",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "ondersteuning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ondersteuning",
+            "relatie",
+            "samenwerking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:15:57.745053+00:00",
+        "vorige_versie_v1": "snap-14a83a38",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-05-24T00:45:48.405138+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:15:55.456146+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:15:55.994560+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:15:56.012553+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:15:59.126470+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:15:59.170288+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-61ed6e32",
+      "begrip": "dragon",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een dragon is een mythisch wezen dat vaak wordt afgebeeld als een grote vliegende reptielachtige.",
+        "laag2": "Dragons komen voor in verhalen, mythen, spellen en fantasiewerelden en worden vaak geassocieerd met kracht, magie en avontuur.\n",
+        "laag3": "In verschillende culturen hebben dragons verschillende betekenissen. In veel westerse verhalen zijn dragons machtige wezens die vuur spuwen en schatten bewaken. In veel oosterse tradities worden dragons juist gezien als wijze, krachtige of beschermende wezens die verbonden zijn met natuurkrachten.\n",
+        "laag4": "De dragon is een van de bekendste mythische wezens ter wereld. Het wezen symboliseert vaak macht, wijsheid, gevaar, bescherming, magie of het overwinnen van uitdagingen. Dragons spelen een belangrijke rol in folklore, literatuur, films, games en kunst.\n"
+      },
+      "ws5": {
+        "wie": "Een mythisch wezen uit verhalen en legendes.",
+        "wat": "Een grote draakachtige creatuur.",
+        "wanneer": "In mythen, fantasieverhalen, spellen en culturele tradities.",
+        "waar": "In verhalen, boeken, films, games en folklore over de hele wereld.",
+        "waarom": "Om kracht, magie, gevaar of avontuur uit te beelden.",
+        "hoe": "Door verhalen, afbeeldingen, spellen en culturele overlevering."
+      },
+      "tags": [
+        "dragon",
+        "draak",
+        "mythe",
+        "legende",
+        "fantasie",
+        "wezen",
+        "monster",
+        "magie",
+        "vuur",
+        "vliegen",
+        "schat",
+        "avontuur",
+        "kracht",
+        "wijsheid",
+        "bescherming",
+        "gevaar",
+        "folklore",
+        "verhaal",
+        "fantasy",
+        "emotie",
+        "bang",
+        "blij"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8dd4dc0e",
+          "begrip": "Monster",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "fantasie",
+            "gevaar",
+            "monster",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-61769f61",
+          "begrip": "Staf met steen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "fantasy",
+            "kracht",
+            "magie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19b876f3",
+          "begrip": "Wapen",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "blij",
+            "emotie",
+            "gevaar",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ec657949",
+          "begrip": "Atlantis",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "fantasie",
+            "legende",
+            "mythe",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58fe509b",
+          "begrip": "Bang",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "bescherming",
+            "emotie",
+            "gevaar"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:17:16.614761+00:00",
+        "vorige_versie_v1": "snap-d7c030d7",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Thomas",
+        "aangemaakt_op": "2026-05-24T08:28:24.797070+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:17:15.267032+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:17:15.785129+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:17:15.799250+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:17:17.933166+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:17:17.946587+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-640b79e6",
+      "begrip": "Gijs",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gijs is een voornaam die aan een persoon wordt gegeven.",
+        "laag2": "Gijs is een Nederlandse jongensnaam die wordt gebruikt om iemand aan te duiden of aan te spreken.",
+        "laag3": "Gijs is een verkorte vorm van namen zoals Gijsbert, Gijsbrecht of Gijsbrand. De naam wordt al eeuwenlang gebruikt in Nederland en andere Nederlandstalige gebieden. Een naam helpt om personen van elkaar te onderscheiden binnen een groep of samenleving.\n",
+        "laag4": "Voornamen spelen een belangrijke rol in identiteit, communicatie en sociale interactie. Een naam kan verbonden zijn aan familie, cultuur, geschiedenis en persoonlijke ervaringen. De betekenis van een naam wordt vaak beïnvloed door de personen die deze dragen.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon met de voornaam Gijs.",
+        "wat": "Een voornaam.",
+        "wanneer": "Vanaf de geboorte of naamgeving.",
+        "waar": "In Nederland en andere Nederlandstalige gebieden.",
+        "waarom": "Om een persoon een unieke aanspreekvorm en identiteit te geven.",
+        "hoe": "Door de naam te gebruiken in communicatie en registratie."
+      },
+      "tags": [
+        "gijs",
+        "naam",
+        "voornaam",
+        "persoon",
+        "identiteit",
+        "aanspreken",
+        "communicatie",
+        "mens",
+        "jongen",
+        "nederland",
+        "cultuur",
+        "familie",
+        "individu",
+        "herkenning",
+        "registratie",
+        "taal",
+        "betekenis",
+        "sociaal",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-47da5ba3",
+          "begrip": "Wouter",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "aanspreken",
+            "communicatie",
+            "emotie",
+            "familie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25b5908d",
+          "begrip": "Jan",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "aanspreken",
+            "communicatie",
+            "emotie",
+            "familie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04b0d8bf",
+          "begrip": "namen",
+          "lade": "weten",
+          "overlap": 13,
+          "shared_tags": [
+            "aanspreken",
+            "communicatie",
+            "cultuur",
+            "emotie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b915197e",
+          "begrip": "willie",
+          "lade": "spreken",
+          "overlap": 12,
+          "shared_tags": [
+            "communicatie",
+            "cultuur",
+            "emotie",
+            "familie",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-266152ea",
+          "begrip": "Joy",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "aanspreken",
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "herkenning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:20:24.776099+00:00",
+        "vorige_versie_v1": "snap-ab7d2ad0",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-05-24T00:45:57.617217+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:20:23.291562+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:20:23.819171+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:20:23.835692+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:20:26.081087+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:20:26.097133+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 13
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ea8a899d",
+      "begrip": "De Bruin",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De Bruin is een achternaam.",
+        "laag2": "De Bruin wordt gebruikt als familienaam om personen en families van elkaar te onderscheiden.",
+        "laag3": "De Bruin is een veelvoorkomende Nederlandse achternaam. De naam verwijst oorspronkelijk vaak naar een uiterlijk kenmerk, zoals bruin haar, een donkere huidskleur of een bruine kledingstijl. Achternamen werden vroeger gebruikt om mensen binnen een gemeenschap beter herkenbaar te maken.\n",
+        "laag4": "Achternamen spelen een belangrijke rol in identiteit, familiegeschiedenis, administratie en genealogie. Ze worden vaak van generatie op generatie doorgegeven en kunnen informatie bevatten over afkomst, beroep, uiterlijk of woonplaats.\n"
+      },
+      "ws5": {
+        "wie": "Personen en families met de achternaam De Bruin.",
+        "wat": "Een familienaam of achternaam.",
+        "wanneer": "Vanaf het gebruik van vaste familienamen",
+        "waar": "Vooral in Nederland en Nederlandstalige gebieden.",
+        "waarom": "Om families en personen van elkaar te onderscheiden.",
+        "hoe": "Door de naam over generaties door te geven."
+      },
+      "tags": [
+        "de bruin",
+        "achternaam",
+        "familienaam",
+        "naam",
+        "familie",
+        "identiteit",
+        "afkomst",
+        "genealogie",
+        "registratie",
+        "administratie",
+        "nederland",
+        "cultuur",
+        "geschiedenis",
+        "herkenning",
+        "persoon",
+        "geslacht",
+        "stamboom",
+        "erfgoed",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-2af74cfb",
+          "begrip": "Spakman",
+          "lade": "weten",
+          "overlap": 16,
+          "shared_tags": [
+            "achternaam",
+            "administratie",
+            "afkomst",
+            "emotie",
+            "familie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 13,
+          "shared_tags": [
+            "achternaam",
+            "administratie",
+            "afkomst",
+            "cultuur",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-01cacea4",
+          "begrip": "familienaam",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "achternaam",
+            "administratie",
+            "emotie",
+            "familie",
+            "familienaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04b0d8bf",
+          "begrip": "namen",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "achternaam",
+            "administratie",
+            "cultuur",
+            "emotie",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-640b79e6",
+          "begrip": "Gijs",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "cultuur",
+            "emotie",
+            "familie",
+            "herkenning",
+            "identiteit"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:22:42.773848+00:00",
+        "vorige_versie_v1": "snap-293cf0b0",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-05-24T00:48:09.597399+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:22:41.069445+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:22:41.583379+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:22:41.605071+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 16
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:22:44.218719+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:22:44.267433+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 16
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2b71033a",
+      "begrip": "gele",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Geel is een kleur.",
+        "laag2": "Geel is een kleur die vaak wordt geassocieerd met licht, zonneschijn en opvallendheid.",
+        "laag3": "Geel bevindt zich in het kleurenspectrum tussen groen en oranje. De kleur komt veel voor in de natuur, bijvoorbeeld bij bloemen, vruchten en zonlicht. Geel wordt vaak gebruikt om aandacht te trekken, zoals bij verkeersborden, waarschuwingen en markeringen.\n",
+        "laag4": "Geel heeft in verschillende culturen en contexten uiteenlopende betekenissen. De kleur wordt vaak verbonden met energie, optimisme, warmte en creativiteit, maar kan ook waarschuwen voor gevaar of voorzichtigheid. De betekenis van geel hangt sterk af van de situatie en cultuur.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die kleuren waarnemen en gebruiken.",
+        "wat": "Een kleur uit het zichtbare spectrum.",
+        "wanneer": "Bij waarneming van licht met een gele kleur.",
+        "waar": "In de natuur, kunst, design, verkeer, kleding en communicatie.",
+        "waarom": "Om objecten te onderscheiden, aandacht te trekken of betekenis over te brengen.",
+        "hoe": "Door licht met een golflengte die als geel wordt waargenomen."
+      },
+      "tags": [
+        "geel",
+        "gele",
+        "kleur",
+        "licht",
+        "zon",
+        "zonlicht",
+        "warmte",
+        "energie",
+        "opvallend",
+        "zichtbaar",
+        "natuur",
+        "bloem",
+        "fruit",
+        "verkeer",
+        "waarschuwing",
+        "creativiteit",
+        "optimisme",
+        "kleurenspectrum",
+        "waarneming",
+        "emotie",
+        "blij",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "energie",
+            "licht",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cec3ea8c",
+          "begrip": "Zomer",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "natuur",
+            "warmte",
+            "zon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5fe1e09",
+          "begrip": "zichtbaar",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "neutraal",
+            "waarneming",
+            "zichtbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "kleur",
+            "neutraal",
+            "waarneming",
+            "zichtbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5a2ab536",
+          "begrip": "groente",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "energie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T12:24:25.075799+00:00",
+        "vorige_versie_v1": "snap-b24dca01",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-03T17:21:51.839209+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T12:24:22.320454+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:24:22.918802+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:24:22.937862+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T12:24:26.622697+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T12:24:26.668803+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": [],
       "needs": [
         "voice",
         "image"

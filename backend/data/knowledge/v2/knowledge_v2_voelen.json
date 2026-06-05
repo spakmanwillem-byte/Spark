@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 398,
+    "card_count": 402,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T18:50:54.401293+00:00",
+    "last_updated": "2026-06-05T11:49:04.844640+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -46563,155 +46563,6 @@
       ]
     },
     {
-      "id": "kbv2-c6fb078b",
-      "begrip": "Arent Pelster is mijn jeugdvriend",
-      "lade": "voelen",
-      "status": "draft",
-      "lagen": {
-        "laag1": "Een uitspraak die aangeeft dat Arent Pelster een vriend is uit de jeugd van de spreker.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "jeugdvriend",
-        "vriend",
-        "vriendschap",
-        "arent",
-        "pelster",
-        "jeugd",
-        "sociale relatie",
-        "Herinnering",
-        "verbondenheid",
-        "identiteit",
-        "mens",
-        "communicatie",
-        "sociaal",
-        "emotie",
-        "positief"
-      ],
-      "topic": "",
-      "verbanden": [
-        {
-          "kaart_id": "kbv2-7784634a",
-          "begrip": "Maurice Maas is een goede vriend",
-          "lade": "voelen",
-          "overlap": 11,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "mens"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-0e95d34a",
-          "begrip": "zusje",
-          "lade": "voelen",
-          "overlap": 6,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "jeugd"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b7ffd5a0",
-          "begrip": "lotte",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "sociaal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-465561f8",
-          "begrip": "klaas",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "sociaal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-d8beecf5",
-          "begrip": "Riet",
-          "lade": "voelen",
-          "overlap": 5,
-          "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "sociaal"
-          ]
-        }
-      ],
-      "footnote": {
-        "bron": "system-recovery",
-        "ingedeeld_door": "user-001",
-        "ingedeeld_op": "2026-06-02T11:16:57.542711+00:00",
-        "vorige_versie_v1": "snap-1a5f40a3",
-        "vertrouwen": 0.6,
-        "belangrijkheid": 3,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:42.768874+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          },
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-06-02T11:16:57.743981+00:00",
-            "result": {
-              "active": true,
-              "is_new": false
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-06-02T11:16:57.748336+00:00",
-            "result": {
-              "n_found": 5,
-              "top_overlap": 11
-            }
-          }
-        ]
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-f1c65b0a",
       "begrip": "ik ben zo blij met je. jij motiveert mij om bezig te zijn.",
       "lade": "voelen",
@@ -54078,6 +53929,621 @@
         "voice_transcript": null,
         "image_urls": []
       },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8aaee330",
+      "begrip": "hopeloos",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hopeloos betekent zonder hoop.",
+        "laag2": "Hopeloos beschrijft een situatie of gevoel waarbij iemand denkt dat verbetering of succes niet meer mogelijk is.",
+        "laag3": "Mensen kunnen zich hopeloos voelen wanneer problemen groot lijken, oplossingen ontbreken of verwachtingen steeds niet uitkomen. Het woord wordt gebruikt voor emoties, situaties en soms ook voor personen die als moeilijk of onmogelijk worden gezien.\n",
+        "laag4": "Hopeloos is een emotionele beoordeling van een situatie waarin vertrouwen in een positieve uitkomst sterk verminderd of verdwenen is. Het gevoel kan invloed hebben op motivatie, besluitvorming en welzijn. Wat hopeloos lijkt, hoeft echter niet daadwerkelijk onmogelijk te zijn.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die te maken hebben met tegenslag, verlies, onzekerheid of langdurige problemen.",
+        "wat": "Een gevoel of beoordeling waarbij hoop ontbreekt.",
+        "wanneer": "Wanneer iemand geen verbetering, oplossing of succes meer verwacht.",
+        "waar": "In persoonlijke situaties, relaties, werk, gezondheid, studie of andere uitdagingen.",
+        "waarom": "Omdat iemand denkt dat een gewenste uitkomst niet meer haalbaar is.",
+        "hoe": "Door ervaringen, gedachten of omstandigheden die het vertrouwen in een positieve toekomst verminderen."
+      },
+      "tags": [
+        "hopeloos",
+        "hoop",
+        "wanhoop",
+        "onzekerheid",
+        "tegenslag",
+        "verlies",
+        "verdriet",
+        "emotie",
+        "bedroefd",
+        "bang",
+        "verwachting",
+        "motivatie",
+        "probleem",
+        "toekomst",
+        "pessimisme",
+        "gevoel",
+        "menselijk"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "hoop",
+            "motivatie",
+            "onzekerheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8af2fbf4",
+          "begrip": "verdrietig",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "menselijk",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e9f46c42",
+          "begrip": "vrees",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "gevoel",
+            "onzekerheid",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b4da7aba",
+          "begrip": "somber",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "motivatie",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c976ebd2",
+          "begrip": "Bedroefd",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "verdriet",
+            "verlies"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:38:24.207017+00:00",
+        "vorige_versie_v1": "snap-ad28e6dc",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:16:11.081490+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:38:22.692558+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:38:23.231588+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:38:23.262853+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:38:25.017731+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:38:25.030915+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ea6ba15b",
+      "begrip": "klote",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Klote is een informeel woord dat gebruikt wordt om iets als vervelend of slecht aan te duiden.",
+        "laag2": "Mensen gebruiken klote vaak wanneer zij ontevreden, teleurgesteld, gefrustreerd of boos zijn over een situatie.",
+        "laag3": "Klote is een krachtterm uit de spreektaal. Het woord wordt gebruikt om negatieve emoties of beoordelingen uit te drukken, zoals bij pech, tegenslag, fouten of frustraties. De betekenis hangt sterk af van de context en de manier waarop het wordt uitgesproken.\n",
+        "laag4": "Klote functioneert vooral als emotionele uitdrukking. Het woord geeft vaak direct weer hoe iemand een gebeurtenis, situatie of ervaring beleeft. In informele communicatie kan het dienen als uitlaatklep voor spanning, teleurstelling of boosheid.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die informele taal gebruiken.",
+        "wat": "Een negatieve krachtterm of uitroep.",
+        "wanneer": "Bij teleurstelling, frustratie, pech of ontevredenheid.",
+        "waar": "In informele gesprekken en dagelijkse communicatie.",
+        "waarom": "Om negatieve gevoelens of een negatieve beoordeling uit te drukken.",
+        "hoe": "Door het woord te gebruiken als beschrijving of uitroep."
+      },
+      "tags": [
+        "klote",
+        "vervelend",
+        "slecht",
+        "pech",
+        "tegenslag",
+        "frustratie",
+        "teleurstelling",
+        "ontevredenheid",
+        "uitroep",
+        "krachtterm",
+        "spreektaal",
+        "emotie",
+        "boos",
+        "bedroefd"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-aae48394",
+          "begrip": "gefrustreerd",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7e2610bd",
+          "begrip": "frustrerend",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a78b08ce",
+          "begrip": "ambetant",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "vervelend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8561e6bb",
+          "begrip": "Teleurgesteld",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfcd6bf7",
+          "begrip": "kwaad",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "frustratie",
+            "slecht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:46:12.324980+00:00",
+        "vorige_versie_v1": "snap-0d0b71ad",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:11:44.467031+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:46:10.814707+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:46:11.340731+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:46:11.353852+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:46:13.316744+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:46:13.329767+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fce9b1d3",
+      "begrip": "verdomme",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verdomme is een uitroep die wordt gebruikt om sterke emoties uit te drukken.",
+        "laag2": "Mensen zeggen verdomme vaak wanneer zij boos, gefrustreerd, geschrokken of teleurgesteld zijn",
+        "laag3": "Verdomme is een krachtterm uit de Nederlandse spreektaal. Het woord wordt meestal gebruikt als spontane reactie op een gebeurtenis die onverwacht, vervelend of ongewenst is. De emotionele lading kan verschillen afhankelijk van de situatie en intonatie.\n",
+        "laag4": "Verdomme functioneert als een emotionele uitlaatklep. Het woord helpt mensen om spanning, frustratie, boosheid of teleurstelling direct te uiten. In sommige situaties kan het ook verbazing of schrik versterken.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die sterke emoties uiten in informele communicatie.",
+        "wat": "Een uitroep of krachtterm.",
+        "wanneer": "Bij frustratie, boosheid, teleurstelling, schrik of tegenslag.",
+        "waar": "In informele gesprekken en dagelijkse situaties.",
+        "waarom": "Om emoties krachtig uit te drukken.",
+        "hoe": "Door het woord als uitroep of nadruk te gebruiken."
+      },
+      "tags": [
+        "verdomme",
+        "krachtterm",
+        "uitroep",
+        "frustratie",
+        "boosheid",
+        "teleurstelling",
+        "schrik",
+        "ergernis",
+        "spanning",
+        "emotie",
+        "spreektaal",
+        "tegenslag",
+        "boos",
+        "bedroefd"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ea6ba15b",
+          "begrip": "klote",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "emotie",
+            "frustratie",
+            "krachtterm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8c30e2ec",
+          "begrip": "irritatie",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "emotie",
+            "ergernis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f86e417b",
+          "begrip": "ergernis",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "emotie",
+            "ergernis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aae48394",
+          "begrip": "gefrustreerd",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "emotie",
+            "frustratie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7e2610bd",
+          "begrip": "frustrerend",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "emotie",
+            "frustratie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:47:33.185426+00:00",
+        "vorige_versie_v1": "snap-23f547d7",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Willem",
+        "aangemaakt_op": "2026-05-31T09:11:43.622523+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:47:30.770502+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:47:31.282111+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:47:31.295259+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:47:34.119458+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:47:34.132661+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f73fc94f",
+      "begrip": "woest",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Woest betekent heel boos.",
+        "laag2": "Woest beschrijft een sterke vorm van boosheid waarbij iemand veel ergernis, frustratie of woede ervaart.",
+        "laag3": "Mensen kunnen woest zijn wanneer zij zich onrechtvaardig behandeld voelen, wanneer verwachtingen ernstig worden geschonden of wanneer iets veel schade, pijn of frustratie veroorzaakt. Woest kan zichtbaar zijn in woorden, houding, gezichtsuitdrukking of gedrag.\n",
+        "laag4": "Woest behoort tot de sterkste vormen van boosheid. De emotie ontstaat vaak als reactie op ervaren onrecht, verlies van controle, bedreiging of ernstige teleurstelling. Woede kan energie geven om te reageren of grenzen te stellen, maar kan ook leiden tot impulsief handelen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die sterke boosheid ervaren.",
+        "wat": "Een intense vorm van boosheid of woede.",
+        "wanneer": "Wanneer iemand zich ernstig gefrustreerd, gekwetst of onrechtvaardig behandeld voelt.",
+        "waar": "In persoonlijke relaties, werk, school, sport en andere sociale situaties.",
+        "waarom": "Omdat iemand iets als onacceptabel, bedreigend of zeer oneerlijk ervaart.",
+        "hoe": "Door een sterke emotionele reactie op een gebeurtenis of situatie."
+      },
+      "tags": [
+        "woest",
+        "woede",
+        "boosheid",
+        "kwaad",
+        "razend",
+        "frustratie",
+        "ergernis",
+        "onrecht",
+        "conflict",
+        "emotie",
+        "reactie",
+        "spanning",
+        "agressie",
+        "onmacht",
+        "boos",
+        "bedroefd"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8c30e2ec",
+          "begrip": "irritatie",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "conflict",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9c8ce21",
+          "begrip": "razernij",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "agressie",
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "conflict"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f86e417b",
+          "begrip": "ergernis",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "bedroefd",
+            "boos",
+            "boosheid",
+            "conflict",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31165336",
+          "begrip": "haat",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "agressie",
+            "boos",
+            "boosheid",
+            "conflict",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfcd6bf7",
+          "begrip": "kwaad",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "agressie",
+            "boos",
+            "boosheid",
+            "conflict",
+            "emotie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "v1_drift_sync",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T11:49:04.844578+00:00",
+        "vorige_versie_v1": "snap-a5c392c6",
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "Gebruiker",
+        "aangemaakt_op": "2026-05-25T23:16:54.365028+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T11:49:03.280858+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:49:03.881750+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:49:03.903241+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T11:49:05.682203+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T11:49:05.696109+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": [],
       "needs": [
         "voice",
         "image"

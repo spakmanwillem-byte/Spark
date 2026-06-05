@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 513,
+    "card_count": 519,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T17:13:09.379083+00:00",
+    "last_updated": "2026-06-05T22:41:43.170360+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -66904,6 +66904,908 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-032ee3ec",
+      "begrip": "je geeft 2 verschillende antwoorden op de zelfde vraag",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Iemand geeft verschillende antwoorden op dezelfde vraag.",
+        "laag2": "Een vraag kan meerdere antwoorden krijgen afhankelijk van hoe iemand de vraag begrijpt.",
+        "laag3": "Mensen kunnen een vraag op verschillende manieren interpreteren. Daardoor ontstaan soms antwoorden die van elkaar verschillen, ook al gaat het over dezelfde vraag.\n",
+        "laag4": "Communicatie verloopt niet altijd exact zoals bedoeld. Verschillen in context, perspectief of interpretatie kunnen ervoor zorgen dat dezelfde vraag meerdere antwoorden oplevert.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon die een vraag stelt of beantwoordt",
+        "wat": "Verschillende antwoorden geven op dezelfde vraag.",
+        "wanneer": "Wanneer een vraag op meerdere manieren kan worden uitgelegd.",
+        "waar": "In gesprekken, discussies, onderwijs en digitale communicatie.",
+        "waarom": "Omdat mensen dezelfde informatie verschillend kunnen interpreteren.",
+        "hoe": "Door een andere uitleg, context of betekenis aan de vraag te geven."
+      },
+      "tags": [
+        "vraag",
+        "antwoord",
+        "interpretatie",
+        "context",
+        "communicatie",
+        "perspectief",
+        "betekenis",
+        "misverstand",
+        "uitleg",
+        "gesprek"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d809154",
+          "begrip": "Dat vroeg ik niet",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "antwoord",
+            "betekenis",
+            "communicatie",
+            "context",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "gesprek",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "gesprek",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-662e8bca",
+          "begrip": "misverstand",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "context",
+            "interpretatie",
+            "misverstand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d33d9371",
+          "begrip": "onbegrip",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "interpretatie",
+            "misverstand",
+            "uitleg"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T17:40:58.325572+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T19:08:51.564007+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "je geeft 2 verschillende antwoorden op de zelfde vraag",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T19:08:49.974869+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T19:08:50.601916+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T19:08:50.662175+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T19:08:52.493976+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T19:08:52.511448+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a49d550d",
+      "begrip": "ik kom hier op terug. Dit is een test gesprek",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Later opnieuw aandacht geven aan een onderwerp.",
+        "laag2": "Terugkeren naar een eerder besproken onderwerp of taak.",
+        "laag3": "Wanneer iemand zegt dat hij ergens op terugkomt, betekent dit dat het onderwerp nu wordt uitgesteld maar later opnieuw zal worden behandeld. Het gesprek, idee of probleem blijft relevant voor de toekomst.\n",
+        "laag4": "Deze uitdrukking wordt vaak gebruikt bij planning, communicatie en besluitvorming. Het geeft aan dat een onderwerp niet vergeten wordt, maar op een later moment opnieuw bekeken of besproken zal worden.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon, AI, gebruiker of gesprekspartner.",
+        "wat": "Op een later moment terugkeren naar een onderwerp.",
+        "wanneer": "Nadat een onderwerp tijdelijk is uitgesteld.",
+        "waar": "In gesprekken, vergaderingen, plannen en communicatie.",
+        "waarom": "Omdat er later meer tijd, informatie of aandacht beschikbaar is.",
+        "hoe": "Door het onderwerp later opnieuw te bespreken of te behandelen."
+      },
+      "tags": [
+        "terugkomen",
+        "vervolg",
+        "uitstellen",
+        "gesprek",
+        "onderwerp",
+        "later",
+        "planning",
+        "herinnering",
+        "opvolging",
+        "communicatie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d8a0e593",
+          "begrip": "Wat zullen wij doen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-052874b0",
+          "begrip": "Toen jij vroeg als jij mij kon helpen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "herinnering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9c0965c8",
+          "begrip": "ik ga bijna slapen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-14a62795",
+          "begrip": "Is het al weer zo lang geleden dat we spraken.",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "herinnering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "planning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T13:15:22.739422+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T21:49:57.662508+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik kom hier op terug. Dit is een test gesprek",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T21:49:55.304831+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:49:55.787542+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:49:55.837045+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:49:58.600088+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:49:58.626148+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-63b5df6c",
+      "begrip": "wil weten wat jij leuk vindt",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Iemand vraagt naar een voorkeur, interesse of mening.",
+        "laag2": "De spreker wil weten wat een ander graag doet, waardeert of interessant vindt.",
+        "laag3": "Deze zin wordt gebruikt om informatie te verkrijgen over persoonlijke voorkeuren, interesses of meningen. Het is een vraag die gericht is op het beter leren kennen van een ander.\n",
+        "laag4": "Vragen naar voorkeuren helpt bij communicatie, samenwerking en sociale interactie. Het geeft inzicht in wat iemand motiveert, waardeert of belangrijk vindt.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon, gebruiker of gesprekspartner.",
+        "wat": "Een vraag naar voorkeuren of interesses.",
+        "wanneer": "Tijdens een gesprek of kennismaking.",
+        "waar": "In gesprekken, interviews, sociale situaties of communicatie",
+        "waarom": "Om meer te weten te komen over iemand.",
+        "hoe": "Door een vraag te stellen over voorkeuren, interesses of meningen."
+      },
+      "tags": [
+        "vraag",
+        "voorkeur",
+        "interesse",
+        "mening",
+        "nieuwsgierigheid",
+        "gesprek",
+        "kennismaking",
+        "communicatie",
+        "persoon",
+        "informatie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bc672f4f",
+          "begrip": "Vraagwoord",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "nieuwsgierigheid",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b93a4be4",
+          "begrip": "vertel eens meer",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "informatie",
+            "interesse",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc6f3912",
+          "begrip": "hoeveel meisjes namen ken jij",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "nieuwsgierigheid",
+            "persoon",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-93df6ac5",
+          "begrip": "Vertel me meer",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "interesse",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c039f74b",
+          "begrip": "Wat wil jij over mij weten",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "gesprek",
+            "interesse",
+            "vraag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T13:16:52.821625+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T21:51:29.387072+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wil weten wat jij leuk vindt",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T21:51:27.179824+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:51:27.775776+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:51:27.792337+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:51:30.382493+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:51:30.400629+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e4fde6df",
+      "begrip": "Had vandaag met mijn vriend Maurice gebeld. Wij bellen bijna dagelijks.",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Er heeft een telefoongesprek plaatsgevonden.",
+        "laag2": "De spreker heeft telefonisch contact gehad met iemand.",
+        "laag3": "De zin beschrijft een gebeurtenis uit het verleden waarbij twee personen met elkaar hebben gesproken via de telefoon. Daarnaast geeft de zin aan dat dit contact regelmatig voorkomt.\n",
+        "laag4": "Telefonisch contact is een vorm van communicatie waarmee mensen relaties onderhouden, informatie uitwisselen en contact houden. De toevoeging \"wij bellen bijna dagelijks\" geeft aan dat het om een terugkerende gewoonte gaat en niet om een eenmalige gebeurtenis.\n"
+      },
+      "ws5": {
+        "wie": "De spreker en Maurice.",
+        "wat": "Een telefoongesprek tussen twee personen.",
+        "wanneer": "Vandaag.",
+        "waar": "Via de telefoon of een communicatiedienst.",
+        "waarom": "Om contact te houden en met elkaar te praten.",
+        "hoe": "Door elkaar te bellen en een gesprek te voeren."
+      },
+      "tags": [
+        "gebeld",
+        "bellen",
+        "telefoongesprek",
+        "contact",
+        "communicatie",
+        "vriend",
+        "gesprek",
+        "dagelijks",
+        "relatie",
+        "contactmoment"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-586786cb",
+          "begrip": "gebeld",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "bellen",
+            "communicatie",
+            "contact",
+            "contactmoment",
+            "gebeld"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e7d5301",
+          "begrip": "begroeten",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "gesprek",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d316c9a7",
+          "begrip": "Ik wilde je alleen begroeten.",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "gesprek",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72778c24",
+          "begrip": "belt",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "bellen",
+            "communicatie",
+            "contact",
+            "gesprek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "contact",
+            "gesprek",
+            "relatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T13:18:51.150331+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T21:55:48.501788+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Had vandaag met mijn vriend Maurice gebeld. Wij bellen bijna dagelijks.",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T21:55:45.968650+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:55:46.498959+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:55:46.513996+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T21:55:49.379489+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T21:55:49.424618+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-efba3f7d",
+      "begrip": "Bad joke",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een bad joke is een grap die slecht, flauw of niet grappig wordt gevonden.",
+        "laag2": "Soms is een grap zo simpel of voorspelbaar dat mensen hem eerder slecht dan grappig vinden.",
+        "laag3": "Bad jokes bevatten vaak woordspelingen, simpele humor of een voorspelbare punchline. Mensen reageren soms met zuchten, stilte of juist ironisch applaus.",
+        "laag4": "Hoewel bad jokes niet altijd echt grappig zijn, kunnen ze toch humor hebben omdat ze bewust flauw zijn. In sommige groepen worden ze juist gewaardeerd vanwege hun eenvoud of ongemakkelijke humor."
+      },
+      "ws5": {
+        "wie": "Mensen die grappen vertellen of beluisteren.",
+        "wat": "Een grap die als flauw, voorspelbaar of slecht wordt ervaren.",
+        "wanneer": "Tijdens gesprekken, optredens, bijeenkomsten of informele momenten.",
+        "waar": "Overal waar mensen met elkaar communiceren.",
+        "waarom": "Om humor te maken, een gesprek luchtiger te maken of juist bewust flauw te zijn.",
+        "hoe": "Door een woordspeling, eenvoudige grap, voorspelbare punchline of ongemakkelijke humor te gebruiken."
+      },
+      "tags": [
+        "humor",
+        "grap",
+        "bad joke",
+        "flauw",
+        "woordspeling",
+        "punchline",
+        "komedie",
+        "lachen",
+        "humoristisch",
+        "communicatie"
+      ],
+      "topic": "humor",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d535c2a7",
+          "begrip": "Slechte grap",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "flauw",
+            "grap",
+            "humor",
+            "woordspeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0d2b4a",
+          "begrip": "hahaha",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "humor",
+            "lachen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-614a038b",
+          "begrip": "lachen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "humor",
+            "lachen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5e9681a6",
+          "begrip": "Waar mijn hoofd staat vandaag? hahaha op mijn lijf",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "humor",
+            "woordspeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19972ad4",
+          "begrip": "Grappige",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "humor",
+            "lachen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T22:39:09.412751+00:00",
+        "vorige_versie_v1": "snap-f05ce65d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.912779+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T22:39:07.972190+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T22:39:07.987329+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T22:39:10.370330+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T22:39:10.384335+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T22:39:07.448348+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fbf36801",
+      "begrip": "Ben jij een vlees eter",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een vraag naar iemands eetvoorkeur of dieet.",
+        "laag2": "De vraag wordt gebruikt om te weten te komen of iemand vlees eet.",
+        "laag3": "De zin \"Ben jij een vleeseter?\" is een vraag over iemands voedingsgewoonten. Het antwoord kan informatie geven over voorkeuren, leefstijl of voedingskeuzes, zoals vegetarisch, veganistisch of omnivoor eten.\n",
+        "laag4": "Deze vraag wordt vaak gebruikt om meer te weten te komen over iemands gewoonten of voorkeuren. In een systeem zoals Spark kan de vraag worden gezien als een verzoek om informatie over een persoonlijke eigenschap of voorkeur.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon die een ander iets wil vragen over voeding.",
+        "wat": "Een vraag naar eetgewoonten of voedingsvoorkeuren.",
+        "wanneer": "Tijdens gesprekken over eten, gezondheid of leefstijl",
+        "waar": "In sociale gesprekken, interviews of digitale communicatie.",
+        "waarom": "Om meer te weten te komen over iemands voedingskeuzes.",
+        "hoe": "Door rechtstreeks te vragen of iemand vlees eet."
+      },
+      "tags": [
+        "eten",
+        "vleeseter",
+        "dieet",
+        "voorkeur",
+        "leefstijl",
+        "voeding",
+        "vraag",
+        "communicatie",
+        "vegetarisch",
+        "veganistisch"
+      ],
+      "topic": "voorkeur",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-63b5df6c",
+          "begrip": "wil weten wat jij leuk vindt",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "voorkeur",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf66c3a6",
+          "begrip": "waar wordt jij verdrietig van",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c760a1f1",
+          "begrip": "leuke",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "voorkeur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81d57f08",
+          "begrip": "Krijg ik geen punten?",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8b1053d",
+          "begrip": "koekjes",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "eten",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T22:41:43.170274+00:00",
+        "vorige_versie_v1": "snap-c9c709b9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:35.373793+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T22:41:41.145936+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T22:41:41.169269+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T22:41:44.163041+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T22:41:44.176770+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T22:41:40.598058+00:00"
       },
       "media": {
         "voice_url": null,

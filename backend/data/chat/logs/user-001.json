@@ -37149,11 +37149,311 @@
         "session_id": "default",
         "gesprek_nummer": 1372
       }
+    },
+    {
+      "id": "conv-d47873a4",
+      "timestamp": "2026-06-05T17:38:53.671862+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 3 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1373
+      }
+    },
+    {
+      "id": "conv-4369ac02",
+      "timestamp": "2026-06-05T17:39:08.326242+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hey Spar, hoe is het?",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1374
+      }
+    },
+    {
+      "id": "conv-2a970422",
+      "timestamp": "2026-06-05T17:39:58.365593+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hi Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1375
+      }
+    },
+    {
+      "id": "conv-8ac4f254",
+      "timestamp": "2026-06-05T17:40:06.878385+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe is het met je",
+      "spark_response": "Het gaat oké, niet top maar prima werkbaar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1376
+      }
+    },
+    {
+      "id": "conv-e93a163d",
+      "timestamp": "2026-06-05T17:40:24.627624+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe gaat het met je?",
+      "spark_response": "Het gaat wel, een beetje moeilijk te krijgen vandaag, maar het lukt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1377
+      }
+    },
+    {
+      "id": "conv-c2d983ff",
+      "timestamp": "2026-06-05T17:41:03.930382+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "je geeft 2 verschillende antwoorden op de zelfde vraag",
+      "spark_response": "**geeft**: Geeft betekent dat iemand iets aan een ander overdraagt of verstrekt.\n\n**Verschillende**: Verschillende betekent dat dingen niet hetzelfde zijn en eigenschappen, vormen of kenmerken van elkaar verschillen.\n\n**antwoord**: Een antwoord is een reactie op een vraag, verzoek, situatie of boodschap.\n\n**vraag**: Een vraag is een uiting waarmee iemand iets wil weten of bevestigd wil hebben.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **zelfde** (opgeslagen als kaarten)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "geeft"
+          },
+          {
+            "begrip": "Verschillende"
+          },
+          {
+            "begrip": "antwoord"
+          },
+          {
+            "begrip": "vraag"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "zelfde"
+        ],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1378
+      }
+    },
+    {
+      "id": "conv-fe5fc1b5",
+      "timestamp": "2026-06-05T17:41:56.736137+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wat weet je allemaal",
+      "spark_response": "**allemaal**: Allemaal betekent dat iets geldt voor of bestaat uit alles of iedereen binnen een bepaalde groep.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "allemaal"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1379
+      }
+    },
+    {
+      "id": "conv-594a155d",
+      "timestamp": "2026-06-05T17:42:34.572154+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat kan jij vertellen over je zelf",
+      "spark_response": "Wat ik kan, De Willem:\n\n• Reageren binnen de kaders van mijn Normen & Waarden\n• Uitzonderingen toetsen aan de Spark Bijbel\n• Kennis ophalen uit gelaagde KB v2 met gecontroleerde diepte\n• Emotie-context herkennen via 7-laags pipeline\n• Transparant aangeven wat ik wel of niet weet\n\n_Typ **help** voor de volledige commando-lijst. Wil je je account verwijderen? Zeg het gewoon: 'verwijder mijn account'._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zelf"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "identity_what_can",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "identity_what_can"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1380
+      }
+    },
+    {
+      "id": "conv-ae06fee1",
+      "timestamp": "2026-06-05T19:33:19.124116+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Zo een deel van de data die ik net deelde met je is verwerkt",
+      "spark_response": "Ik ken 'deel' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "verwerkt"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "deel"
+          },
+          {
+            "begrip": "Data"
+          },
+          {
+            "begrip": "net"
+          },
+          {
+            "begrip": "deelde"
+          },
+          {
+            "begrip": "verwerkt"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 14,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1381
+      }
+    },
+    {
+      "id": "conv-dd924423",
+      "timestamp": "2026-06-05T19:34:28.831999+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ben zo benieuwd wat jij straks meer kan",
+      "spark_response": "**benieuwd**: Benieuwd betekent dat iemand interesse of nieuwsgierigheid voelt naar informatie, gebeurtenissen of uitkomsten.\n\n**straks**: Straks betekent dat iets later gebeurt, meestal binnen korte tijd.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "straks"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "benieuwd"
+          },
+          {
+            "begrip": "straks"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 8,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1382
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1372,
-    "last_updated": "2026-06-05T14:32:33.746007+00:00"
+    "total_conversations": 1382,
+    "last_updated": "2026-06-05T19:34:28.831999+00:00"
   }
 }

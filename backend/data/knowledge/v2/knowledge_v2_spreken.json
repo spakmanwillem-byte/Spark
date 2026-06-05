@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 511,
+    "card_count": 513,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T16:41:43.417227+00:00",
+    "last_updated": "2026-06-05T17:13:09.379083+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -66652,6 +66652,257 @@
             "result": {
               "n_found": 5,
               "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-71aaade6",
+      "begrip": "semantiek",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Semantiek is de leer van betekenis van woorden en zinnen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "semantiek",
+        "betekenis",
+        "taal",
+        "woord",
+        "context",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "semantiek",
+            "taal",
+            "woord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea50eab8",
+          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "semantiek",
+            "taal",
+            "woord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63373119",
+          "begrip": "Dit",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "semantiek",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "taal",
+            "woord"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99597d34",
+          "begrip": "Maak van de woorden die je niet kent een snap",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "context",
+            "taal",
+            "woord"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:09.115161+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:08.995723+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:09.322564+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:09.327479+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-715cc19b",
+      "begrip": "vraag",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een vraag is een uiting waarmee iemand iets wil weten of bevestigd wil hebben.",
+        "laag2": "Vraag bepaalt samen met aanbod de prijs en hoeveel er geproduceerd wordt.",
+        "laag3": "Vraag is een economisch begrip dat aangeeft hoeveel consumenten bereid zijn te kopen van een bepaald product of dienst tegen een bepaalde prijs. De vraag wordt beïnvloed door factoren zoals prijs, inkomen, behoeften en trends. Wanneer de vraag hoog is en het aanbod laag, stijgt vaak de prijs. Andersom, bij lage vraag en hoog aanbod, daalt de prijs. Vraag speelt een centrale rol in hoe markten functioneren en bepaalt indirect wat er geproduceerd en verkocht wordt.",
+        "laag4": "Laat zien hoe behoefte van mensen richting geeft aan productie en waarde binnen het systeem."
+      },
+      "ws5": {
+        "wie": "Consumenten, bedrijven",
+        "wat": "De behoefte aan producten of diensten",
+        "wanneer": "Continu aanwezig en veranderend",
+        "waar": "Markten en economie",
+        "waarom": "Bepaalt wat geproduceerd en verkocht wordt",
+        "hoe": "Door koopgedrag en voorkeuren van mensen"
+      },
+      "tags": [
+        "vraag",
+        "uiting",
+        "antwoord",
+        "nieuwsgierig",
+        "communicatie",
+        "fundering"
+      ],
+      "topic": "economie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2e869608",
+          "begrip": "Beantwoorden",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d809154",
+          "begrip": "Dat vroeg ik niet",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e628516e",
+          "begrip": "antwoord",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-25f75433",
+          "begrip": "verzoek",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "antwoord",
+            "communicatie",
+            "vraag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "nieuwsgierig",
+            "vraag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Ron",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:09.379070+00:00",
+        "vorige_versie_v1": "snap-1591a042",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.945389+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:09.589299+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:09.593991+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
             }
           }
         ]

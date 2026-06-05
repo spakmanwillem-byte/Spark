@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1575,
+    "card_count": 1577,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T16:43:17.097176+00:00",
+    "last_updated": "2026-06-05T17:13:09.766552+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -204352,6 +204352,241 @@
         "image_urls": []
       },
       "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d1571789",
+      "begrip": "informatie",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Informatie is kennis of gegeven die betekenis heeft voor iemand.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "informatie",
+        "kennis",
+        "gegeven",
+        "betekenis",
+        "communicatie",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-abdf4d2d",
+          "begrip": "Context",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56f183f0",
+          "begrip": "ken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-595cef85",
+          "begrip": "woord",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51a8a639",
+          "begrip": "Ken je het woord meteorologisch?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:07.797132+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:07.658183+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:08.139594+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:08.144494+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4d2c07a7",
+      "begrip": "begrip",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Begrip is het vermogen om iets te snappen, te plaatsen of te erkennen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "begrip",
+        "snappen",
+        "kennis",
+        "inzicht",
+        "concept",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "begrip",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7ab0915",
+          "begrip": "Begrippen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "begrip",
+            "concept",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d4b9942",
+          "begrip": "Wijsheid",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "begrip",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-db366369",
+          "begrip": "Kennis",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "begrip",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a83c8b55",
+          "begrip": "Inzicht",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "begrip",
+            "inzicht",
+            "kennis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:09.766533+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:09.646924+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:10.066101+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:10.070823+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
         "voice",
         "image"
       ]

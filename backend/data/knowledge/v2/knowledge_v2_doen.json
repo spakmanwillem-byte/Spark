@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 934,
+    "card_count": 938,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T16:48:20.868252+00:00",
+    "last_updated": "2026-06-05T17:13:11.128116+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -120051,6 +120051,470 @@
         "image_urls": []
       },
       "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-da5d9cf1",
+      "begrip": "analyse",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Analyse is het uiteenrafelen van iets om de delen en samenhang te begrijpen.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "analyse",
+        "onderzoeken",
+        "uiteenrafelen",
+        "begrijpen",
+        "methode",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "begrijpen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-06ddd28d",
+          "begrip": "begrijpen",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "begrijpen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-23c9d0c5",
+          "begrip": "methode",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "methode"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "onderzoeken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:08.660851+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:08.540167+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:08.901920+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:08.906585+00:00",
+            "result": {
+              "n_found": 4,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-daaba7ba",
+      "begrip": "Doel",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een doel is iets dat iemand wil bereiken of waar een actie op gericht is.",
+        "laag2": "Doelen geven richting aan acties en helpen mensen om ergens naartoe te werken.",
+        "laag3": "Een doel is een gewenste uitkomst of resultaat waar iemand naar streeft. Mensen stellen doelen om hun activiteiten te richten en vooruitgang te maken. Doelen kunnen klein en persoonlijk zijn, of groot en gezamenlijk, zoals in projecten of organisaties.",
+        "laag4": "Doelen helpen bij motivatie en planning. Wanneer een doel duidelijk is, kunnen mensen strategieën en plannen maken om het te bereiken. Doelen kunnen op korte termijn zijn, zoals een taak afronden, of op lange termijn, zoals een carrière of persoonlijke ontwikkeling."
+      },
+      "ws5": {
+        "wie": "Mensen, teams, organisaties",
+        "wat": "Een gewenste uitkomst of resultaat",
+        "wanneer": "Wanneer iemand iets wil bereiken of verbeteren",
+        "waar": "In werk, studie, projecten en persoonlijke ontwikkeling",
+        "waarom": "Om richting te geven aan acties en vooruitgang te maken",
+        "hoe": "Door plannen te maken, stappen te volgen en inspanning te leveren"
+      },
+      "tags": [
+        "doel",
+        "intentie",
+        "richting",
+        "actie",
+        "plan",
+        "fundering"
+      ],
+      "topic": "ontwikkeling",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-99643696",
+          "begrip": "Om te",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "doel",
+            "intentie",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f0145c80",
+          "begrip": "wilt",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "doel",
+            "intentie",
+            "plan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0d2a7e9d",
+          "begrip": "besloten",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "actie",
+            "doel",
+            "plan",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "doel",
+            "intentie",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "doel",
+            "intentie",
+            "richting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:10.216348+00:00",
+        "vorige_versie_v1": "060f0319",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:29.540356+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:10.457570+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:10.462313+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-abd20f0c",
+      "begrip": "herkenning",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Herkenning is het opmerken dat iets bekend is uit eerdere ervaring.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "herkenning",
+        "herkennen",
+        "patroon",
+        "geheugen",
+        "ervaring",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-7852b92c",
+          "begrip": "herkennen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "ervaring",
+            "geheugen",
+            "herkennen",
+            "herkenning",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "herkenning",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56f183f0",
+          "begrip": "ken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "geheugen",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6714443e",
+          "begrip": "kent",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "ervaring",
+            "geheugen",
+            "herkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9856595",
+          "begrip": "nee, jij herkent denk ik laten niet.",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "herkennen",
+            "herkenning",
+            "patroon"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:10.670927+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:10.552106+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:10.913599+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:10.918307+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ee2a13d5",
+      "begrip": "observatie",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Observatie is het bewust waarnemen van wat er gebeurt of bestaat.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "observatie",
+        "waarnemen",
+        "kijken",
+        "aandacht",
+        "bewustzijn",
+        "fundering"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "kijken",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3f9170b4",
+          "begrip": "waarnemen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bewustzijn",
+            "observatie",
+            "waarnemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-261ac6a3",
+          "begrip": "Aandacht",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05e928b9",
+          "begrip": "Bewustzijn",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bewustzijn",
+            "waarnemen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "anker-fundering",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:11.128103+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-05T17:13:11.008664+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:11.370670+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:11.375387+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "ws5",
         "voice",
         "image"
       ]

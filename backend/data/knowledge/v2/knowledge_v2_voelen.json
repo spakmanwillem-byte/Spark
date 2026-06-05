@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 407,
+    "card_count": 408,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T16:37:14.297494+00:00",
+    "last_updated": "2026-06-05T17:13:08.291627+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -55491,6 +55491,137 @@
             "result": {
               "n_found": 5,
               "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-588c0bb3",
+      "begrip": "Mens",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een mens is een levend wezen dat denkt, voelt en in relatie staat met anderen.",
+        "laag2": "Mensen behoren tot de dieren, maar hebben een sterk ontwikkeld vermogen om taal, cultuur en technologie te gebruiken.",
+        "laag3": "Mensen lopen rechtop, gebruiken hun handen om dingen te maken en kunnen complexe ideeën delen via taal. Mensen leven vaak in groepen en bouwen samenlevingen met regels, kennis en tradities.",
+        "laag4": "De wetenschappelijke naam van de mens is Homo sapiens. Mensen hebben een grote invloed op de aarde doordat ze technologie ontwikkelen, natuur veranderen en complexe culturen vormen."
+      },
+      "ws5": {
+        "wie": "Mensen, samenleving",
+        "wat": "Een denkend en sociaal levend organisme",
+        "wanneer": "Sinds honderdduizenden jaren op aarde",
+        "waar": "Over de hele aarde",
+        "waarom": "Om te leven, te leren, samen te werken en zich voort te planten",
+        "hoe": "Door denken, communiceren, leren en samenwerken"
+      },
+      "tags": [
+        "mens",
+        "persoon",
+        "levend",
+        "relatie",
+        "identiteit",
+        "fundering"
+      ],
+      "topic": "natuur",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-dd24f036",
+          "begrip": "Maaike Spakman is mijn Zusje",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "persoon",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cf5fadd7",
+          "begrip": "voornaam",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "persoon",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "identiteit",
+            "mens",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "identiteit",
+            "persoon",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "identiteit",
+            "persoon",
+            "relatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T17:13:08.291613+00:00",
+        "vorige_versie_v1": "d8922879",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:29.362907+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T17:13:08.491241+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T17:13:08.495979+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
             }
           }
         ]

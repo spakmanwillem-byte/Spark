@@ -33192,11 +33192,161 @@
         "session_id": "default",
         "gesprek_nummer": 1258
       }
+    },
+    {
+      "id": "conv-39aec415",
+      "timestamp": "2026-06-05T07:25:41.196451+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 12 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1259
+      }
+    },
+    {
+      "id": "conv-927f445e",
+      "timestamp": "2026-06-05T07:26:18.797518+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedemorgen",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1260
+      }
+    },
+    {
+      "id": "conv-fd8376de",
+      "timestamp": "2026-06-05T07:27:32.922785+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik wil kijken als ik met samen met je wat kan verbeteren aan je systemen.",
+      "spark_response": "Wat fijn om te horen! 😊\n\n**kijken**: Kijken is het bewust richten van aandacht of waarneming op iets via de ogen of interpretatie.\n\n**Verbeteren**: Verbeteren betekent iets beter maken dan het eerst was.\n\n**Systemen**: Systemen zijn onderdelen die samenwerken als één geheel om een functie of doel uit te voeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "samen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "kijken"
+          },
+          {
+            "begrip": "Verbeteren"
+          },
+          {
+            "begrip": "Systemen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 15,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1261
+      }
+    },
+    {
+      "id": "conv-89e66dda",
+      "timestamp": "2026-06-05T07:28:19.265313+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Welke dag is het vandaag?",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1262
+      }
+    },
+    {
+      "id": "conv-091b4657",
+      "timestamp": "2026-06-05T07:29:47.737981+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Wanneer begint de zomervakantie dit jaar in Noord Nederland",
+      "spark_response": "**Wanneer**: “Wanneer” vraagt naar een moment in de tijd.\n\n**begin**: Begin is het startpunt van een actie, proces, gebeurtenis of periode.\n\n**Zomer**: Zomer is het seizoen dat volgt op de lente en voorafgaat aan de herfst.\n\n**Jaar**: Een jaar is de tijd die de aarde nodig heeft om één keer om de zon te draaien.\n\n**Noordelijk halfrond**: Het noordelijk halfrond is de helft van de aarde die ten noorden van de evenaar ligt.\n\n**nederland**: Nederland is een land in West-Europa dat bekendstaat om waterbeheer, handel, technologie, cultuur en een parlementaire democratie.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Wanneer"
+          },
+          {
+            "begrip": "begin"
+          },
+          {
+            "begrip": "Zomer"
+          },
+          {
+            "begrip": "Jaar"
+          },
+          {
+            "begrip": "Noordelijk halfrond"
+          },
+          {
+            "begrip": "nederland"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1263
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1258,
-    "last_updated": "2026-06-04T18:57:58.072568+00:00"
+    "total_conversations": 1263,
+    "last_updated": "2026-06-05T07:29:47.737981+00:00"
   }
 }

@@ -46257,102 +46257,105 @@
       "status": "draft",
       "lagen": {
         "laag1": "Utrecht is een stad en provincie in Nederland.",
-        "laag2": "Plaatsen helpen mensen locaties herkennen, verbinden met herinneringen en gebruiken voor wonen, reizen, werk en sociale interactie.",
-        "laag3": "Utrecht is een centraal gelegen stad en provincie in Nederland met een belangrijke rol in geschiedenis, vervoer, cultuur en onderwijs. De stad staat bekend om haar grachten, Domtoren en centrale treinverbindingen. Plaatsnamen dragen vaak sociale, culturele en persoonlijke betekenis omdat mensen locaties koppelen aan ervaringen, herinneringen, relaties en identiteit.",
-        "laag4": "Spark ziet locaties als knooppunten van herinnering, verbinding, interactie en context binnen menselijke netwerken en ervaringen."
+        "laag2": "Utrecht is de hoofdstad van de provincie Utrecht en een belangrijk centrum voor bestuur, onderwijs en vervoer.",
+        "laag3": "De stad Utrecht staat bekend om de Domtoren, de grachten met werfkelders, de universiteit en haar centrale ligging. Utrecht is een belangrijk spoorwegknooppunt van Nederland en speelt een grote rol in onderwijs, economie, cultuur en dienstverlening.\n",
+        "laag4": "Utrecht is een stedelijk centrum in Midden-Nederland dat functioneert als hoofdstad van de provincie Utrecht. De stad vormt een belangrijk knooppunt voor bestuur, onderwijs, cultuur, economie en vervoer binnen Nederland.\n"
       },
       "ws5": {
-        "wie": "Mensen die in Utrecht wonen, werken, reizen of ermee verbonden zijn",
-        "wat": "Een stad en provincie in Nederland",
-        "wanneer": "Bij wonen, reizen, werken, studeren of sociale interactie",
-        "waar": "In het midden van Nederland",
-        "waarom": "Om een geografische, sociale en culturele locatie aan te duiden",
-        "hoe": "Door plaatsnamen te gebruiken binnen communicatie, navigatie en identiteit"
+        "wie": "Inwoners, studenten, bedrijven, organisaties, bezoekers en overheden.",
+        "wat": "Een stad en provinciehoofdstad.",
+        "wanneer": "Het hele jaar door als woon-, werk-, studie- en bezoeklocatie.",
+        "waar": "In de provincie Utrecht, in het midden van Nederland.",
+        "waarom": "Voor wonen, werken, studeren, cultuur, vervoer en bestuur.",
+        "hoe": "Door voorzieningen, onderwijsinstellingen, bedrijven, infrastructuur en overheidsdiensten."
       },
       "tags": [
-        "Utrecht",
+        "utrecht",
         "stad",
-        "provincie",
+        "gemeente",
+        "provincie utrecht",
+        "hoofdstad",
+        "provinciehoofdstad",
+        "midden-nederland",
         "nederland",
-        "locatie",
-        "plaats",
-        "identiteit",
-        "reizen",
-        "Herinnering",
-        "Verbinding",
+        "domtoren",
+        "gracht",
+        "universiteit",
+        "student",
+        "onderwijs",
+        "bestuur",
+        "economie",
         "cultuur",
-        "geschiedenis",
-        "omgeving",
-        "samenleving",
-        "communicatie",
-        "emotie",
-        "neutraal"
+        "vervoer",
+        "spoorwegen",
+        "regio",
+        "geografie"
       ],
       "topic": "locatie",
       "verbanden": [
         {
-          "kaart_id": "kbv2-267ae513",
-          "begrip": "overleden",
-          "lade": "voelen",
-          "overlap": 7,
+          "kaart_id": "kbv2-73113cb7",
+          "begrip": "Groningen",
+          "lade": "weten",
+          "overlap": 14,
           "shared_tags": [
-            "communicatie",
+            "bestuur",
             "cultuur",
-            "emotie",
-            "geschiedenis",
-            "herinnering"
+            "economie",
+            "gemeente",
+            "geografie"
           ]
         },
         {
-          "kaart_id": "kbv2-018e3d9a",
-          "begrip": "joël",
-          "lade": "voelen",
-          "overlap": 7,
+          "kaart_id": "kbv2-59f8a644",
+          "begrip": "Zwolle",
+          "lade": "weten",
+          "overlap": 12,
           "shared_tags": [
-            "communicatie",
+            "bestuur",
             "cultuur",
-            "emotie",
-            "herinnering",
-            "identiteit"
+            "economie",
+            "gemeente",
+            "geografie"
           ]
         },
         {
-          "kaart_id": "kbv2-0e95d34a",
-          "begrip": "zusje",
-          "lade": "voelen",
-          "overlap": 6,
+          "kaart_id": "kbv2-0500db3b",
+          "begrip": "Arnhem",
+          "lade": "weten",
+          "overlap": 12,
           "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "neutraal"
+            "bestuur",
+            "cultuur",
+            "economie",
+            "gemeente",
+            "geografie"
           ]
         },
         {
-          "kaart_id": "kbv2-b7ffd5a0",
-          "begrip": "lotte",
-          "lade": "voelen",
-          "overlap": 6,
+          "kaart_id": "kbv2-7724c353",
+          "begrip": "Leeuwarden",
+          "lade": "weten",
+          "overlap": 11,
           "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "neutraal"
+            "bestuur",
+            "cultuur",
+            "economie",
+            "gemeente",
+            "geografie"
           ]
         },
         {
-          "kaart_id": "kbv2-465561f8",
-          "begrip": "klaas",
-          "lade": "voelen",
-          "overlap": 6,
+          "kaart_id": "kbv2-60451868",
+          "begrip": "Assen",
+          "lade": "weten",
+          "overlap": 11,
           "shared_tags": [
-            "communicatie",
-            "emotie",
-            "herinnering",
-            "identiteit",
-            "neutraal"
+            "bestuur",
+            "cultuur",
+            "economie",
+            "gemeente",
+            "geografie"
           ]
         }
       ],
@@ -46387,8 +46390,26 @@
               "n_found": 5,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T08:24:19.753736+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T08:24:19.814816+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 14
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T08:24:18.506755+00:00"
       },
       "media": {
         "voice_url": null,

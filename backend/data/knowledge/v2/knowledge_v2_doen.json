@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 896,
+    "card_count": 897,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-04T20:28:51.214235+00:00",
+    "last_updated": "2026-06-05T08:49:32.120615+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -114046,6 +114046,157 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-04T20:28:49.511493+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-85ffc65f",
+      "begrip": "Lotus komt elke woensdag",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Lotus komt regelmatig.",
+        "laag2": "De zin geeft aan dat Lotus iedere woensdag komt.",
+        "laag3": "Het komen van Lotus vindt wekelijks plaats op woensdag. Dit beschrijft een terugkerende afspraak of gewoonte.",
+        "laag4": "Terugkerende bezoeken op een vaste dag zorgen voor structuur, planning en voorspelbaarheid binnen relaties en gezinnen."
+      },
+      "ws5": {
+        "wie": "Lotus",
+        "wat": "Komt",
+        "wanneer": "Elke woensdag",
+        "waar": "Bij de spreker",
+        "waarom": "Familiebezoek",
+        "hoe": "Door wekelijks langs te komen"
+      },
+      "tags": [
+        "lotus",
+        "dochter",
+        "woensdag",
+        "bezoek",
+        "familie",
+        "regelmatig",
+        "wekelijks",
+        "afspraak",
+        "planning",
+        "aanwezigheid",
+        "gezin",
+        "routine",
+        "relatie",
+        "komen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-28f77d08",
+          "begrip": "Lotus Martens is mijn Dochter",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "dochter",
+            "familie",
+            "gezin",
+            "lotus",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0e95d34a",
+          "begrip": "zusje",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "familie",
+            "gezin",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00552819",
+          "begrip": "Heidi Spakman is mijn Moeder",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "familie",
+            "gezin",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dd24f036",
+          "begrip": "Maaike Spakman is mijn Zusje",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "familie",
+            "gezin",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5855e9cc",
+          "begrip": "Willie Bakker is mijn Vader",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "familie",
+            "gezin",
+            "relatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-sentence",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-04T18:56:20.603252+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T08:49:32.120561+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Lotus komt elke woensdag",
+        "is_sentence": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T08:49:30.714058+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T08:49:31.314383+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T08:49:31.329141+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T08:49:33.538545+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T08:49:33.601195+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

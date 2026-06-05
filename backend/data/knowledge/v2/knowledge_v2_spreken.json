@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 506,
+    "card_count": 511,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T12:19:01.985366+00:00",
+    "last_updated": "2026-06-05T16:41:43.417227+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -65861,6 +65861,806 @@
         ]
       },
       "media": [],
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-227bf64e",
+      "begrip": "hoort",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hoort betekent dat iets passend, juist of verbonden is met iets anders.",
+        "laag2": "Het woord wordt gebruikt om aan te geven wat bij iets past of waar iets onderdeel van is.",
+        "laag3": "Mensen gebruiken \"hoort\" vaak om normen, verwachtingen of verbanden uit te drukken.",
+        "laag4": "\"Hoort\" beschrijft de relatie tussen dingen binnen een systeem van betekenis, regels of samenhang"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, objecten, ideeën of systemen.",
+        "wat": "Een aanduiding van verbondenheid, passendheid of verwachting.",
+        "wanneer": "Wanneer iets wordt gekoppeld aan een plaats, groep, regel of situatie.",
+        "waar": "In gesprekken, regels, uitleg en beschrijvingen.",
+        "waarom": "Om verbanden, verwachtingen of passendheid aan te geven.",
+        "hoe": "Door taal, uitleg of afspraken."
+      },
+      "tags": [
+        "hoort",
+        "horen",
+        "behoort",
+        "passend",
+        "verbinding",
+        "relatie",
+        "verwachting",
+        "regel",
+        "norm",
+        "koppeling",
+        "onderdeel",
+        "spreken",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-de6ae178",
+          "begrip": "afhankelijkheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "koppeling",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-83fa163c",
+          "begrip": "gekoppeld",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "koppeling",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-079b90c2",
+          "begrip": "tussen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39a76f23",
+          "begrip": "netwerken",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "relatie",
+            "verbinding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T13:53:13.840894+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T14:51:11.990522+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dit hoort in de wereld van Spark",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T14:51:10.699089+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T14:51:11.240338+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T14:51:11.255821+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T14:51:12.840019+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T14:51:12.852937+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a1e57110",
+      "begrip": "jou",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Jou verwijst naar de persoon tegen wie gesproken of geschreven wordt.",
+        "laag2": "Het woord maakt directe communicatie tussen mensen mogelijk.",
+        "laag3": "Jou wordt gebruikt in gesprekken, teksten, vragen en opdrachten om iemand rechtstreeks aan te spreken.",
+        "laag4": "Jou is een taalkundige verwijzing naar de ontvanger van een boodschap en helpt bij het leggen van een directe communicatieve relatie."
+      },
+      "ws5": {
+        "wie": "De persoon die wordt aangesproken.",
+        "wat": "Een persoonlijk voornaamwoord.",
+        "wanneer": "Tijdens gesprekken, teksten en communicatie.",
+        "waar": "In gesproken en geschreven taal.",
+        "waarom": "Om duidelijk te maken tegen wie een boodschap gericht is.",
+        "hoe": "Door rechtstreeks naar de ontvanger van de boodschap te verwijzen."
+      },
+      "tags": [
+        "jou",
+        "jij",
+        "jouw",
+        "u",
+        "aangesprokene",
+        "persoon",
+        "communicatie",
+        "taal",
+        "gesprek",
+        "spreken",
+        "verwijzing",
+        "voornaamwoord",
+        "ontvanger",
+        "relatie",
+        "sociaal",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69c7326b",
+          "begrip": "Arent",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e7d5301",
+          "begrip": "begroeten",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "persoon",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:29:05.314608+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:01:59.531491+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Laat andermans mening over jou niet jouw realiteit worden.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:01:57.903227+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:01:58.517369+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:01:58.537829+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:02:00.451314+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:02:00.467374+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ddd33f25",
+      "begrip": "boekdelen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Boekdelen betekent dat iets heel duidelijk veel informatie of betekenis laat zien.",
+        "laag2": "Wanneer iets boekdelen spreekt, is extra uitleg vaak niet nodig.",
+        "laag3": "Mensen gebruiken deze uitdrukking wanneer gedrag, resultaten of feiten duidelijk bewijs geven.",
+        "laag4": "Boekdelen verwijst naar communicatie die zoveel betekenis bevat dat de boodschap vanzelf duidelijk wordt zonder uitgebreide toelichting."
+      },
+      "ws5": {
+        "wie": "Mensen, situaties, resultaten of gebeurtenissen.",
+        "wat": "Een uitdrukking voor iets dat veel betekenis of bewijs bevat.",
+        "wanneer": "Wanneer iets zeer duidelijk zichtbaar of begrijpelijk is.",
+        "waar": "In gesprekken, teksten, analyses en beschrijvingen.",
+        "waarom": "Om aan te geven dat de feiten voor zichzelf spreken.",
+        "hoe": "Door gedrag, resultaten, signalen of omstandigheden die een duidelijke boodschap overbrengen."
+      },
+      "tags": [
+        "boekdelen",
+        "spreekt",
+        "betekenis",
+        "boodschap",
+        "bewijs",
+        "duidelijk",
+        "communicatie",
+        "uitdrukking",
+        "conclusie",
+        "interpretatie",
+        "signaal",
+        "informatie",
+        "taal",
+        "spreken",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ee93bf44",
+          "begrip": "uitdrukking",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "boodschap",
+            "communicatie",
+            "emotie",
+            "interpretatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4fe0ed50",
+          "begrip": "boodschap",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "boodschap",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0b1bc109",
+          "begrip": "zeggen",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "betekenis",
+            "boodschap",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "betekenis",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "spreken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:29:44.535392+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:06:07.640913+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Wat je doet spreekt boekdelen, waardoor ik niet kan horen wat je zegt.",
+        "decomposed_from": [
+          "boek",
+          "delen"
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:06:06.004774+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:06:06.458024+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:06:06.519309+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:06:08.552676+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:06:08.567579+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-37f21d78",
+      "begrip": "onszelf",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Onszelf betekent wij zelf.",
+        "laag2": "Het woord verwijst naar een groep mensen die over zichzelf spreekt.",
+        "laag3": "Onszelf wordt gebruikt wanneer een handeling of eigenschap betrekking heeft op de groep die spreekt.",
+        "laag4": "Onszelf is een taalkundige verwijzing waarmee een groep zichzelf als onderwerp of ontvanger van een handeling aanduidt."
+      },
+      "ws5": {
+        "wie": "Wij, de groep die spreekt.",
+        "wat": "Een wederkerend persoonlijk voornaamwoord.",
+        "wanneer": "Wanneer een groep naar zichzelf verwijst.",
+        "waar": "In gesprekken, teksten en communicatie.",
+        "waarom": "Om duidelijk te maken dat iets betrekking heeft op de sprekende groep.",
+        "hoe": "Door het woord onszelf te gebruiken als verwijzing naar de eigen groep."
+      },
+      "tags": [
+        "onszelf",
+        "wij",
+        "ons",
+        "zelf",
+        "groep",
+        "personen",
+        "voornaamwoord",
+        "taal",
+        "communicatie",
+        "verwijzing",
+        "wederkerend",
+        "identiteit",
+        "spreken",
+        "sociaal",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a1e57110",
+          "begrip": "jou",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69c7326b",
+          "begrip": "Arent",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8b5b4990",
+          "begrip": "Maaike",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "identiteit",
+            "neutraal",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:25:08.142387+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:29:48.099381+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Als we proberen onszelf te verbeteren, verbetert alles om ons heen ook.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:29:46.464296+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:29:47.002264+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:29:47.038193+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:29:49.043694+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:29:49.059827+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a6721a65",
+      "begrip": "degenen",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Degenen verwijst naar bepaalde personen binnen een groep.",
+        "laag2": "Het woord wordt gebruikt om mensen aan te wijzen zonder hun namen te noemen.",
+        "laag3": "Degenen helpt om groepen mensen te beschrijven in gesprekken, regels en teksten.\n",
+        "laag4": "Degenen is een taalkundige verwijzing waarmee specifieke personen binnen een grotere groep worden aangeduid."
+      },
+      "ws5": {
+        "wie": "Een bepaalde groep mensen.",
+        "wat": "Een verwijzend voornaamwoord.",
+        "wanneer": "Wanneer naar specifieke personen wordt verwezen.",
+        "waar": "In gesproken taal, teksten, regels en beschrijvingen.",
+        "waarom": "Om een groep aan te duiden zonder iedereen afzonderlijk te benoemen.",
+        "hoe": "Door het woord degenen te gebruiken als verwijzing naar personen."
+      },
+      "tags": [
+        "degenen",
+        "diegenen",
+        "personen",
+        "mensen",
+        "groep",
+        "verwijzing",
+        "voornaamwoord",
+        "taal",
+        "communicatie",
+        "aanspreken",
+        "beschrijving",
+        "verwijzend",
+        "spreken",
+        "sociaal",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-37f21d78",
+          "begrip": "onszelf",
+          "lade": "spreken",
+          "overlap": 10,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "groep",
+            "neutraal",
+            "personen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a1e57110",
+          "begrip": "jou",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-69c7326b",
+          "begrip": "Arent",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-964bb409",
+          "begrip": "Heidi",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:21:47.742733+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:41:43.417187+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Succes komt meestal naar degenen die het te druk hebben met zoeken.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:41:42.057763+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:41:42.550842+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:41:42.567000+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:41:44.264750+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:41:44.316144+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
       "needs": [
         "voice",
         "image"

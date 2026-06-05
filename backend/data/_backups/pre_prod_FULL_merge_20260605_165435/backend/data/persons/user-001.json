@@ -1,0 +1,320 @@
+{
+  "persons": [
+    {
+      "id": "person-6c47506a",
+      "naam": "Lotus",
+      "volledige_naam": "Lotus Spakman",
+      "relatie": "dochter",
+      "gradatie": 2,
+      "is_user": true,
+      "linked_user_id": "user-lotus",
+      "tags": [
+        "familie",
+        "dochter"
+      ],
+      "notes": "",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-03-15T17:03:38.247993",
+      "updated_at": "2026-06-03T17:21:54.734972+00:00",
+      "body_slots": {
+        "chest": {
+          "label": "Houten ketting",
+          "color": null,
+          "icon": "📿",
+          "note": null,
+          "ts": "2026-05-29T10:23:53.916657+00:00"
+        }
+      },
+      "bezittingen": [
+        "scooter",
+        "fiets"
+      ]
+    },
+    {
+      "id": "person-e92653b6",
+      "naam": "Maurice Maas",
+      "volledige_naam": "Maurice Maas",
+      "relatie": "vriend",
+      "gradatie": 3,
+      "is_user": true,
+      "linked_user_id": "user-maurice",
+      "tags": [
+        "collega",
+        "oud-collega",
+        "vriend"
+      ],
+      "notes": "Goede vriend, oud-collega",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-03-15T17:03:38.248244",
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
+    },
+    {
+      "id": "person-fac9edb5",
+      "naam": "Heidi Spakman",
+      "volledige_naam": "Heidi Spakman",
+      "relatie": "moeder",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "moeder"
+      ],
+      "notes": "",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-03-21T18:20:38.611808",
+      "updated_at": "2026-06-03T17:16:12.785150+00:00",
+      "geboortedag": 28,
+      "geboortemaand": 1,
+      "geboortejaar": 1957,
+      "interesses": [
+        "katten"
+      ]
+    },
+    {
+      "id": "person-1f566774",
+      "naam": "Maaike Spakman",
+      "volledige_naam": "Maaike Spakman",
+      "relatie": "zus",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "zus"
+      ],
+      "notes": "",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-03-21T18:21:14.868666",
+      "updated_at": "2026-06-03T17:28:01.357528+00:00",
+      "woonplaats": "Groningen",
+      "bezittingen": [
+        "online winkel"
+      ]
+    },
+    {
+      "id": "person-1d1cfbe4",
+      "naam": "Arent Pelster",
+      "volledige_naam": "Arent Pelster",
+      "relatie": "jeugdvriend",
+      "gradatie": 3,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "vriend",
+        "jeugdvriend"
+      ],
+      "notes": "Jeugdvriend",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-05-19T12:06:48.982489+00:00",
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
+    },
+    {
+      "id": "person-b3e48369",
+      "naam": "Willie Bakker",
+      "volledige_naam": "Willie Bakker",
+      "relatie": "vader",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "vader",
+        "overleden"
+      ],
+      "notes": "Vader. Overleden.",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "created_at": "2026-05-19T12:06:48.982489+00:00",
+      "updated_at": "2026-05-19T12:06:48.982489+00:00"
+    },
+    {
+      "id": "person-787aa53c",
+      "naam": "Joel",
+      "volledige_naam": "Joel",
+      "relatie": "bekende",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "bekende",
+        "kennis"
+      ],
+      "notes": "Auto-detected uit chat (2026-05-20)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-05-20T19:13:15.666260+00:00",
+      "updated_at": "2026-05-20T19:13:15.666260+00:00"
+    },
+    {
+      "id": "person-ae4535e4",
+      "naam": "Bartholomeus",
+      "volledige_naam": "Bartholomeus",
+      "relatie": "bekende",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "bekende",
+        "kennis"
+      ],
+      "notes": "Auto-detected uit chat (2026-05-20)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-05-20T19:13:53.057063+00:00",
+      "updated_at": "2026-05-20T19:13:53.057063+00:00"
+    },
+    {
+      "id": "person-2ba23b45",
+      "naam": "Lotus Martens",
+      "volledige_naam": "Lotus Martens",
+      "relatie": "dochter",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "dochter",
+        "familie"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T16:37:12.504829+00:00",
+      "updated_at": "2026-06-03T17:21:54.734977+00:00",
+      "geboortedatum": "2009-02-11",
+      "bezittingen": [
+        "scooter",
+        "fiets"
+      ]
+    },
+    {
+      "id": "person-9cf5657e",
+      "naam": "Gerben",
+      "volledige_naam": "Gerben",
+      "relatie": "neef",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "neef"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T16:41:20.464598+00:00",
+      "updated_at": "2026-06-03T17:17:43.069153+00:00",
+      "beroep": "loodgieter",
+      "bezittingen": [
+        "hond"
+      ],
+      "interesses": [
+        "vissen"
+      ]
+    },
+    {
+      "id": "person-5c7efbbe",
+      "naam": "Joy",
+      "volledige_naam": "Joy",
+      "relatie": "nicht",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "nicht"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T16:46:14.031639+00:00",
+      "updated_at": "2026-06-03T16:46:14.031639+00:00"
+    },
+    {
+      "id": "person-b1424098",
+      "naam": "Joy Spakman",
+      "volledige_naam": "Joy Spakman",
+      "relatie": "nicht",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "nicht"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T16:46:14.031639+00:00",
+      "updated_at": "2026-06-03T16:46:14.031639+00:00"
+    },
+    {
+      "id": "person-d3d1b8ac",
+      "naam": "Jarig",
+      "volledige_naam": "Jarig",
+      "relatie": "moeder",
+      "gradatie": 2,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "moeder"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T17:00:14.362757+00:00",
+      "updated_at": "2026-06-03T17:00:14.362757+00:00"
+    },
+    {
+      "id": "person-f316cc69",
+      "naam": "Wouter",
+      "volledige_naam": "Wouter",
+      "relatie": "neef",
+      "gradatie": 5,
+      "is_user": false,
+      "linked_user_id": null,
+      "tags": [
+        "familie",
+        "neef"
+      ],
+      "notes": "Auto-detected uit chat (2026-06-03)",
+      "created_by": "user-001",
+      "conversation_refs": [],
+      "knowledge_refs": [],
+      "auto_detected": true,
+      "created_at": "2026-06-03T17:30:52.573494+00:00",
+      "updated_at": "2026-06-03T17:30:52.573494+00:00"
+    }
+  ],
+  "metadata": {
+    "user_id": "user-001",
+    "total_persons": 14,
+    "last_updated": "2026-06-03T17:30:52.573494+00:00"
+  }
+}

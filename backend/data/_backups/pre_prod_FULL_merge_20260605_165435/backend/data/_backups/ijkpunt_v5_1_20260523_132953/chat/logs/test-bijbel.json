@@ -1,0 +1,140 @@
+{
+  "user_id": "test-bijbel",
+  "conversations": [
+    {
+      "id": "conv-2ac679d9",
+      "timestamp": "2026-05-13T13:36:58.155194+00:00",
+      "user_id": "test-bijbel",
+      "user_naam": "Tester",
+      "user_message": "waar word je blij van?",
+      "spark_response": "Waar ik blij van word:\n- **Mensen helpen** _(Kernwaarde)_: Helpen maakt mij blij omdat ik dan zie dat iemand groeit",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "positief",
+        "emotion": {
+          "emotion": "blij",
+          "score": 8,
+          "intensity": 0.62,
+          "triggered_words": [
+            "blij"
+          ],
+          "source": "both",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "bijbel_reply",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "bijbel_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-b16e3119",
+      "timestamp": "2026-05-13T13:36:58.369007+00:00",
+      "user_id": "test-bijbel",
+      "user_naam": "Tester",
+      "user_message": "wat is je doel?",
+      "spark_response": "Mijn doel:\n- **Mensen helpen** _(Kernwaarde)_: Helpen maakt mij blij omdat ik dan zie dat iemand groeit",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bijbel_reply",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "bijbel_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-db9eafdc",
+      "timestamp": "2026-05-13T13:36:58.528827+00:00",
+      "user_id": "test-bijbel",
+      "user_naam": "Tester",
+      "user_message": "wat is jouw filosofie?",
+      "spark_response": "Mijn filosofie:\n- Leren van fouten en sterker terugkomen (Roadkill filosofie)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bijbel_reply",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "bijbel_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-c7f1dfa7",
+      "timestamp": "2026-05-13T13:36:58.675904+00:00",
+      "user_id": "test-bijbel",
+      "user_naam": "Tester",
+      "user_message": "wat zijn jouw waarden?",
+      "spark_response": "Mijn kernwaarden:\n- **Helpen** _(Kernwaarde)_: Spark helpt mensen groeien en ontwikkelen\n- **Groeien** _(Kernwaarde)_: Spark groeit mee met zijn gebruikers\n- **Respect** _(Kernwaarde)_: Spark respecteert alle mensen en hun grenzen",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bijbel_reply",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "bijbel_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-83bd3563",
+      "timestamp": "2026-05-13T13:36:58.941770+00:00",
+      "user_id": "test-bijbel",
+      "user_naam": "Tester",
+      "user_message": "wat is mijn doel?",
+      "spark_response": "**Doel**: Een doel is iets dat iemand wil bereiken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Doel"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-bijbel",
+    "total_conversations": 5,
+    "last_updated": "2026-05-13T13:36:58.941770+00:00"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "locations": [
+    {
+      "id": "north",
+      "naam": "The North",
+      "subtitle": "Groningen base — Willem's thuis",
+      "icon": "🌲",
+      "color_primary": "#10b981",
+      "color_secondary": "#f59e0b",
+      "biome": "noordelijk vlakland · windrijk · stenen huizen · grachten",
+      "tagline": "Waar het allemaal begint. Wind, stenen huizen, en stilte tussen de geluiden.",
+      "intro": "Je staat in The North.\n\nDe wind komt van de zee, ruikt naar regen en oud hout. Achter je: een rij smalle huizen met blauwe deuren. Voor je: een open plein, een fiets tegen een lantaarn, ergens slaat een klok.\n\nWat trekt jouw aandacht?",
+      "senses_hint": {
+        "zie": "Bakstenen huizen, grachten, fietsen, lage wolken.",
+        "hoor": "Wind door bomen, fietsbel in de verte, klokken die kwart slaan.",
+        "voel": "Koele lucht op je gezicht, gewicht van tijd, vertrouwd."
+      },
+      "sub_locations": [
+        {
+          "id": "north_werkplaats",
+          "naam": "De Werkplaats",
+          "icon": "🔧",
+          "desc": "Willem's atelier. Code, kabels, koffievlekken op het bureau. Hier ontstaat Spark.",
+          "tags": [
+            "code",
+            "build",
+            "spark-core"
+          ],
+          "vibe": "creatief · geconcentreerd · warm-licht"
+        },
+        {
+          "id": "north_tuin",
+          "naam": "De Tuin",
+          "icon": "🌿",
+          "desc": "Achter het huis. Plek waar dingen mogen groeien zonder dat je ze pusht.",
+          "tags": [
+            "rust",
+            "groei",
+            "natuur"
+          ],
+          "vibe": "kalm · seizoenen voelbaar"
+        },
+        {
+          "id": "north_studio",
+          "naam": "De Studio",
+          "icon": "🎙️",
+          "desc": "Microfoon, koptelefoon, stem-opnames. Spark luistert hier mee.",
+          "tags": [
+            "stem",
+            "podcast",
+            "tts"
+          ],
+          "vibe": "stil · gefocust · oren-open"
+        },
+        {
+          "id": "north_kampvuur",
+          "naam": "Het Kampvuur",
+          "icon": "🔥",
+          "desc": "Centrale plek voor verhalen. NPCs verzamelen hier 's avonds.",
+          "tags": [
+            "community",
+            "verhalen",
+            "ontmoeting"
+          ],
+          "vibe": "warm · open · gedeeld"
+        }
+      ],
+      "npc_stubs": [
+        {
+          "id": "npc_de_dood",
+          "naam": "De Dood",
+          "rol": "Reflectie & afsluiten",
+          "appears_at": [
+            "north_kampvuur"
+          ],
+          "color": "#0f172a",
+          "linked_bot_id": "bot-dood"
+        },
+        {
+          "id": "npc_boekhouder",
+          "naam": "De Boekhouder",
+          "rol": "Cijfers & weekrapport",
+          "appears_at": [
+            "north_werkplaats"
+          ],
+          "color": "#f59e0b",
+          "linked_bot_id": "bot-boekhouder"
+        }
+      ],
+      "world_rules": [
+        "Geen gevechten. Geen levens. Alleen wat jij meebrengt.",
+        "Elke locatie heeft eigen sfeer — kies bewust waar je heen gaat.",
+        "NPCs reageren op wat je deelt, niet op stats."
+      ],
+      "created_at": "2026-05-29T00:00:00+00:00",
+      "is_seed": true
+    }
+  ]
+}

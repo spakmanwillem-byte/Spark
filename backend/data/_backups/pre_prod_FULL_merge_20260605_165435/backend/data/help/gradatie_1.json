@@ -1,0 +1,26 @@
+{
+  "gradatie": 1,
+  "label": "Beheerder",
+  "intro": "Beheerder / Eigenaar. Je ziet alles, behalve de admin-specifieke beheertools (die staan in de Admin-help).",
+  "inherits_from": "gradatie_2",
+  "extra_topics": [
+    {
+      "id": "spark-overzicht",
+      "label": "Brein-overzicht",
+      "korte_uitleg": "Een dashboard van Spark's interne staat: hoeveel kaarten in elke lade, vocab-grootte, emotie-balans, recente intent-activiteit.",
+      "deep_uitleg": "Dit is het 'kpi-bord' van Spark. Op gradatie 1 zie je ook de gezondheids-indicatoren: zijn alle hooks gerund, zijn er corrupt-meldingen, etc.",
+      "nav_path": "/spark/overzicht",
+      "nav_testid": "nav-spark-overzicht",
+      "synonyms": ["brein-overzicht", "brein", "overzicht", "kpi", "dashboard spark"]
+    },
+    {
+      "id": "spark-brain",
+      "label": "Spark Brain",
+      "korte_uitleg": "De technische brain-laag — neurons, hooks, capabilities-registry. Voor gevorderden.",
+      "deep_uitleg": "Hier kan je per begrip zien welke neurons getriggerd worden en welke responses Spark daaruit destilleert. Goed om onverwacht-gedrag te debuggen.",
+      "nav_path": "/spark/brain",
+      "nav_testid": "nav-spark-brain",
+      "synonyms": ["brain", "spark brain", "neurons", "hooks"]
+    }
+  ]
+}

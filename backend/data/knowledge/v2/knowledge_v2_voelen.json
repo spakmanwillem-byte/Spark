@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 402,
+    "card_count": 407,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T11:49:04.844640+00:00",
+    "last_updated": "2026-06-05T16:37:14.297494+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -54694,6 +54694,813 @@
       },
       "needs": [
         "ws5",
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-4bde22a2",
+      "begrip": "vervelend",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vervelend betekent dat iets niet prettig wordt ervaren.",
+        "laag2": "Een situatie, gebeurtenis of ervaring kan als vervelend worden gevoeld.",
+        "laag3": "Wat vervelend is verschilt per persoon en hangt af van verwachtingen, behoeften en omstandigheden.",
+        "laag4": "Vervelendheid ontstaat wanneer iets botst met comfort, wensen, rust of welzijn."
+      },
+      "ws5": {
+        "wie": "Mensen en soms dieren.",
+        "wat": "Een gevoel of beoordeling dat iets onaangenaam is.",
+        "wanneer": "Wanneer een situatie als storend, lastig of onaangenaam wordt ervaren.",
+        "waar": "In dagelijkse situaties, relaties, werk, school en persoonlijke ervaringen.",
+        "waarom": "Omdat iets niet voldoet aan verwachtingen of ongemak veroorzaakt.",
+        "hoe": "Door ervaringen, gebeurtenissen, gedrag of omstandigheden."
+      },
+      "tags": [
+        "vervelend",
+        "vervelendheid",
+        "onaangenaam",
+        "lastig",
+        "storend",
+        "irritant",
+        "ongemak",
+        "gevoel",
+        "ervaring",
+        "emotie",
+        "beoordeling",
+        "negatief",
+        "verdrietig",
+        "boos",
+        "voelen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a78b08ce",
+          "begrip": "ambetant",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "lastig",
+            "negatief",
+            "vervelend"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3978e800",
+          "begrip": "voelt",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "voelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48696dca",
+          "begrip": "verschrikkelijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "ervaring",
+            "gevoel",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-46ac9b1e",
+          "begrip": "Boos",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "gevoel",
+            "negatief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "boos",
+            "emotie",
+            "ervaring",
+            "gevoel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T15:18:52.066276+00:00",
+        "vorige_versie_v1": "kb-skel-4bde22a2",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:43.387042+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:18:51.267859+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:18:51.321145+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:18:52.869699+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:18:52.924541+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T15:18:50.790671+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-60a54642",
+      "begrip": "verbeelding",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verbeelding is het vermogen om dingen in gedachten voor te stellen.",
+        "laag2": "Met verbeelding kun je situaties, beelden, ideeën of mogelijkheden bedenken die niet direct aanwezig zijn.",
+        "laag3": "Verbeelding helpt bij creativiteit, verhalen, plannen maken en het begrijpen van nieuwe mogelijkheden.",
+        "laag4": "Verbeelding verbindt ervaringen, emoties en kennis tot nieuwe ideeën en werelden die nog niet bestaan."
+      },
+      "ws5": {
+        "wie": "Mensen en creatieve denkers.",
+        "wat": "Het vermogen om beelden, ideeën of situaties voor te stellen.",
+        "wanneer": "Tijdens dromen, fantaseren, creëren, plannen of nadenken.",
+        "waar": "In gedachten, kunst, verhalen, spel en innovatie.",
+        "waarom": "Om mogelijkheden te ontdekken, problemen op te lossen of iets nieuws te creëren.",
+        "hoe": "Door herinneringen, emoties, kennis en fantasie te combineren."
+      },
+      "tags": [
+        "verbeelding",
+        "fantasie",
+        "voorstellen",
+        "creativiteit",
+        "dromen",
+        "ideeën",
+        "gedachte",
+        "voorstelling",
+        "inspiratie",
+        "innovatie",
+        "creatief",
+        "fantaseren",
+        "emotie",
+        "voelen",
+        "mogelijkheden",
+        "beeldvorming"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3df2c212",
+          "begrip": "creatief",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "creatief",
+            "dromen",
+            "emotie",
+            "fantasie",
+            "innovatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d2ee2d13",
+          "begrip": "fantasie",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "dromen",
+            "emotie",
+            "fantasie",
+            "innovatie",
+            "verbeelding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-066c93ff",
+          "begrip": "ik wil met je brainstormen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "creativiteit",
+            "emotie",
+            "ideeën",
+            "innovatie",
+            "inspiratie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-40d24f63",
+          "begrip": "brainstormen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "creativiteit",
+            "emotie",
+            "ideeën",
+            "innovatie",
+            "inspiratie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-86777294",
+          "begrip": "inspiratie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "creativiteit",
+            "emotie",
+            "gedachte",
+            "inspiratie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T15:29:35.642679+00:00",
+        "vorige_versie_v1": "kb-skel-60a54642",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.962006+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:29:34.636665+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:29:34.649124+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:29:36.536245+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:29:36.548222+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T15:29:34.117716+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2a67907f",
+      "begrip": "nederlaag",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een nederlaag betekent dat iemand een wedstrijd, strijd of poging heeft verloren.",
+        "laag2": "Een nederlaag ontstaat wanneer het gewenste doel of de overwinning niet wordt bereikt",
+        "laag3": "Nederlagen kunnen leiden tot teleurstelling, maar ook tot leren, groei en nieuwe inzichten.",
+        "laag4": "Een nederlaag is een ervaring waarbij verwachtingen en werkelijkheid niet overeenkomen, waardoor emotionele en praktische gevolgen kunnen ontstaan.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, teams, organisaties of landen.",
+        "wat": "Het verliezen van een wedstrijd, strijd, conflict of doel.",
+        "wanneer": "Wanneer een gewenste uitkomst niet wordt behaald.",
+        "waar": "In sport, werk, politiek, spel, oorlog of het dagelijks leven.",
+        "waarom": "Omdat een tegenstander sterker was, omstandigheden tegenzaten of doelen niet werden bereikt.",
+        "hoe": "Door verlies, mislukking of het niet behalen van een doel."
+      },
+      "tags": [
+        "nederlaag",
+        "verlies",
+        "verloren",
+        "teleurstelling",
+        "mislukking",
+        "falen",
+        "frustratie",
+        "verdriet",
+        "tegenvaller",
+        "wedstrijd",
+        "conflict",
+        "resultaat",
+        "ervaring",
+        "emotie",
+        "voelen",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-89ce9289",
+          "begrip": "Verloren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "mislukking",
+            "nederlaag",
+            "negatief",
+            "resultaat",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "frustratie",
+            "teleurstelling",
+            "verdriet",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-31165336",
+          "begrip": "haat",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "conflict",
+            "emotie",
+            "frustratie",
+            "negatief",
+            "teleurstelling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48696dca",
+          "begrip": "verschrikkelijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "negatief",
+            "teleurstelling",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c976ebd2",
+          "begrip": "Bedroefd",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "negatief",
+            "verdriet",
+            "verlies"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:31:00.548354+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T15:57:57.943268+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik verlies niet, want zelfs uit nederlaag leer ik een waardevolle les, en dat maakt het goed voor mij.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T15:57:56.052902+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:57:56.559868+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:57:56.572906+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T15:57:58.778406+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T15:57:58.835706+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bb128def",
+      "begrip": "treurt",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Treurt betekent dat iemand verdriet heeft om iets of iemand.",
+        "laag2": "Mensen treuren wanneer zij verlies, teleurstelling of pijn ervaren.",
+        "laag3": "Treuren helpt bij het verwerken van moeilijke gebeurtenissen, afscheid en veranderingen.",
+        "laag4": "Treuren is een emotioneel proces waarbij gevoelens van verlies, gemis of verdriet worden ervaren en verwerkt."
+      },
+      "ws5": {
+        "wie": "Mensen en soms dieren",
+        "wat": "Het ervaren van verdriet of rouw.",
+        "wanneer": "Na verlies, afscheid, teleurstelling of een pijnlijke gebeurtenis.",
+        "waar": "In persoonlijke relaties, families, gemeenschappen en het dagelijks leven.",
+        "waarom": "Omdat iets waardevols verloren is gegaan of gemist wordt.",
+        "hoe": "Door gevoelens van verdriet, gemis, stilte, huilen of nadenken."
+      },
+      "tags": [
+        "treurt",
+        "treuren",
+        "verdriet",
+        "rouw",
+        "gemis",
+        "verlies",
+        "pijn",
+        "emotie",
+        "gevoelens",
+        "afscheid",
+        "verwerken",
+        "droevig",
+        "huilen",
+        "missen",
+        "voelen",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4273240c",
+          "begrip": "bedroeft",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gemis",
+            "pijn",
+            "rouw",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8af2fbf4",
+          "begrip": "verdrietig",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gemis",
+            "pijn",
+            "verdriet",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-267ae513",
+          "begrip": "overleden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "afscheid",
+            "emotie",
+            "rouw",
+            "verdriet",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2a67907f",
+          "begrip": "nederlaag",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "negatief",
+            "verdriet",
+            "verlies",
+            "voelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c976ebd2",
+          "begrip": "Bedroefd",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "negatief",
+            "verdriet",
+            "verlies"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:26:48.728673+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:22:20.528897+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Een wijze persoon treurt niet om wat hij mist, maar is blij met wat hij heeft.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:22:19.145892+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:22:19.661660+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:22:19.674597+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:22:21.362078+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:22:21.374550+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bc8d8b5d",
+      "begrip": "falen",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Falen betekent dat iets niet lukt of niet het gewenste resultaat bereikt.",
+        "laag2": "Mensen ervaren falen wanneer een doel, verwachting of plan niet wordt gehaald.",
+        "laag3": "Falen kan leiden tot teleurstelling, frustratie, inzicht en uiteindelijk groei.",
+        "laag4": "Falen is een ervaring waarbij de werkelijke uitkomst afwijkt van het gewenste resultaat, waardoor emotionele en leergerichte reacties kunnen ontstaan.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en systemen.",
+        "wat": "Het niet behalen van een doel of verwachting.",
+        "wanneer": "Wanneer een poging niet slaagt.",
+        "waar": "In werk, school, sport, relaties en het dagelijks leven.",
+        "waarom": "Door fouten, omstandigheden, gebrek aan kennis of onverwachte gebeurtenissen.",
+        "hoe": "Door een actie of proces dat niet het gewenste resultaat oplevert."
+      },
+      "tags": [
+        "falen",
+        "mislukken",
+        "mislukking",
+        "verlies",
+        "teleurstelling",
+        "frustratie",
+        "fout",
+        "tekortschieten",
+        "leren",
+        "ervaring",
+        "groei",
+        "emotie",
+        "verdriet",
+        "voelen",
+        "negatief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2a67907f",
+          "begrip": "nederlaag",
+          "lade": "voelen",
+          "overlap": 10,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "falen",
+            "frustratie",
+            "mislukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68fe9f72",
+          "begrip": "teleurstelling",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "frustratie",
+            "teleurstelling",
+            "verdriet",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48696dca",
+          "begrip": "verschrikkelijk",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "negatief",
+            "teleurstelling",
+            "verdriet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bb128def",
+          "begrip": "treurt",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "negatief",
+            "verdriet",
+            "verlies",
+            "voelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-56413e4e",
+          "begrip": "Mislukking",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "ervaring",
+            "fout",
+            "groei",
+            "leren",
+            "mislukking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-05T14:23:29.944822+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-05T16:37:14.297419+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Je leert meer van falen dan van succes. Laat het je niet tegenhouden. Falen bepaalt je karakter.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-05T16:37:12.790548+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:37:13.263260+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:37:13.319976+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-05T16:37:15.133120+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-05T16:37:15.150638+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
         "voice",
         "image"
       ]

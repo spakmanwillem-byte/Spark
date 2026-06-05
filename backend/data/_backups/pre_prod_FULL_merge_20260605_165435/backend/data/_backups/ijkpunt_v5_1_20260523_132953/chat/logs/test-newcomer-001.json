@@ -1,0 +1,240 @@
+{
+  "user_id": "test-newcomer-001",
+  "conversations": [
+    {
+      "id": "conv-58cd039e",
+      "timestamp": "2026-05-18T12:00:53.814441+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Hoi! Wie ben jij?",
+      "spark_response": "Hallo Nieuwe Gebruiker! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-588758c6",
+      "timestamp": "2026-05-18T12:00:54.204837+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat kan jij?",
+      "spark_response": "Dat weet ik (nog) niet. Wil je dat ik dit onthoud voor later?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "question"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-8c6c6d09",
+      "timestamp": "2026-05-18T12:00:54.382355+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat is jouw missie?",
+      "spark_response": "Mijn missie:\n_(Mijn Spark Bijbel heeft hier nog geen items voor. Voeg ze toe via Spark Brain → Normen & Waarden of Spark Bijbel.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "bijbel_reply",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "bijbel_reply"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-0f6a53d1",
+      "timestamp": "2026-05-18T12:00:54.545909+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat is de visie van Spark?",
+      "spark_response": "**visie**: Visie is een beeld of idee over hoe iemand de toekomst, richting of betekenis van iets ziet.\n\n**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "visie"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "visie"
+          },
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-23f63bdf",
+      "timestamp": "2026-05-18T12:00:54.776161+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat is jouw core?",
+      "spark_response": "**Core**: Core betekent de kern, basis of fundamentele structuur van een systeem, persoon of concept.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Core"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-b8c02f58",
+      "timestamp": "2026-05-18T12:00:55.035588+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Waarom besta jij?",
+      "spark_response": "**waarom**: “Waarom” is een vraagwoord dat gebruikt wordt om naar een reden, oorzaak of motivatie te vragen.\n\n**Bestand**: Een bestand is een verzameling gegevens die op een computer of opslagmedium wordt opgeslagen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "waarom"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "waarom"
+          },
+          {
+            "begrip": "Bestand"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-4dc3f5aa",
+      "timestamp": "2026-05-18T12:00:56.392542+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat is de bedoeling van Spark?",
+      "spark_response": "**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_\n\nNieuw geleerd: **bedoeling** (opgeslagen als kaarten)\n\nWat betekent 'bedoeling' voor jou?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [
+          "bedoeling"
+        ],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-52851b9e",
+      "timestamp": "2026-05-18T12:00:56.845490+00:00",
+      "user_id": "test-newcomer-001",
+      "user_naam": "Nieuwe Gebruiker",
+      "user_message": "Wat maakt jou anders dan andere AI?",
+      "spark_response": "Dank je! Genoteerd. Wanneer kwam 'bedoeling' ter sprake?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "wedervraag",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "wedervraag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-newcomer-001",
+    "total_conversations": 8,
+    "last_updated": "2026-05-18T12:00:56.845490+00:00"
+  }
+}

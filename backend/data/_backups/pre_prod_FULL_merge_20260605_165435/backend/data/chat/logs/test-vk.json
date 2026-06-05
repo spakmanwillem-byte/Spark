@@ -1,0 +1,40 @@
+{
+  "user_id": "test-vk",
+  "conversations": [
+    {
+      "id": "conv-8a0092ea",
+      "timestamp": "2026-06-04T20:47:22.318008+00:00",
+      "user_id": "test-vk",
+      "user_naam": "TestUser",
+      "user_message": "wat betekent annuleer",
+      "spark_response": "**Betekent**: Betekent geeft aan wat iets inhoudt, voorstelt of duidelijk maakt.\n\n**annuleer**: Annuleer betekent dat een geplande actie, afspraak of gebeurtenis wordt stopgezet of ongeldig gemaakt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Betekent"
+          },
+          {
+            "begrip": "annuleer"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "test-vk",
+    "total_conversations": 1,
+    "last_updated": "2026-06-04T20:47:22.318008+00:00"
+  }
+}

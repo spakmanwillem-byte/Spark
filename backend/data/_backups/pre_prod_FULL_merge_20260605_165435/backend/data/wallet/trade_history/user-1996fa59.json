@@ -1,0 +1,59 @@
+{
+  "trades": [
+    {
+      "trade_id": "53014653",
+      "run_id": "manual",
+      "timestamp": "2026-05-20T23:49:09.075382+00:00",
+      "action": "BUY",
+      "market": "ADA-EUR",
+      "order_id": "MOCK-BUY-53014653",
+      "amount": 5.08,
+      "price": 0.21426,
+      "filled": 5.08,
+      "status": "filled",
+      "mock": true,
+      "success": true,
+      "error": null
+    },
+    {
+      "trade_id": "00000000-0000-047b-0100-0007fe10bd63",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T19:09:51.126546+00:00",
+      "action": "BUY",
+      "market": "ETH-EUR",
+      "order_id": "00000000-0000-047b-0100-0007fe10bd63",
+      "amount": 9.97,
+      "price": 1724.9910895645826,
+      "filled": 0.00577974,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.0300062974,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 10.0,
+      "proxied_via_spark": true
+    },
+    {
+      "trade_id": "00000000-0000-047b-0100-0007fe10c76a",
+      "run_id": "manual",
+      "timestamp": "2026-05-29T19:09:53.546541+00:00",
+      "action": "SELL",
+      "market": "ETH-EUR",
+      "order_id": "00000000-0000-047b-0100-0007fe10c76a",
+      "amount": 0.0058051,
+      "price": 1724.98,
+      "filled": 0.0058051,
+      "status": "filled",
+      "mock": false,
+      "success": true,
+      "error": null,
+      "fee": 0.033681398,
+      "fee_currency": "EUR",
+      "requested_amount": 10.0,
+      "effective_amount": 0.0058051,
+      "proxied_via_spark": true
+    }
+  ]
+}

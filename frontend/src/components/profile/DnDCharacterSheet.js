@@ -18,7 +18,7 @@ import {
   Activity, FileText, Settings, Upload, ChevronDown, ChevronUp, Send,
 } from 'lucide-react';
 import { StormhavenMapView } from './StormhavenMapView';
-import { FractiesKaderPanel } from './FractiesTab';
+import { FractiesKaderPanel, LandkaartBark, StadDetailBark } from './FractiesTab';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -1432,12 +1432,21 @@ function MiniMapPanel({ char, userId, isAdmin }) {
   const [editMode, setEditMode] = useState(false);
   const [dragging, setDragging] = useState(null);
   const [selectedProv, setSelectedProv] = useState(null);
+  // v6_spark_world_kaart_btn_001 — "Kaart Bekijken" knop opent zelfde NL-bark als Fracties
+  const [showLandkaart, setShowLandkaart] = useState(false);
+  const [steden, setSteden] = useState([]);
+  const [openStad, setOpenStad] = useState(null);
   const svgRef = useRef(null);
 
   const reload = useCallback(() => {
     fetch(`${API}/api/dnd/world/provincies`)
       .then(r => r.json())
       .then(d => { setProvincies(d.provincies || []); setFracties(d.fracties || []); })
+      .catch(() => {});
+    // v6_spark_world_kaart_btn_001 — steden voor de Kaart Bekijken bark
+    fetch(`${API}/api/dnd/world/steden`)
+      .then(r => r.json())
+      .then(d => setSteden(d.steden || []))
       .catch(() => {});
     // Basis dorp + Basis stad als avatars per provincie (groei-logica: spark hoofdstad = stad, rest = dorp)
     fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`)
@@ -1515,20 +1524,27 @@ function MiniMapPanel({ char, userId, isAdmin }) {
 
   return (
     <PaperPanel>
-      <PaperHeader right={isAdmin && (
-        <div className="flex gap-1">
-          <button data-testid="map-edit-toggle" onClick={() => setEditMode(!editMode)}
-            className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30'}`}>
-            {editMode ? '✓ klaar' : '✏ sleep'}
+      <PaperHeader right={
+        <div className="flex items-center gap-1">
+          {/* v6_spark_world_kaart_btn_001 — Kaart Bekijken voor iedereen */}
+          <button data-testid="map-kaart-bekijken-btn" onClick={() => setShowLandkaart(true)}
+            className="text-[9px] px-1.5 py-0.5 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200">
+            Kaart Bekijken
           </button>
-          {editMode && (
+          {isAdmin && (
+            <button data-testid="map-edit-toggle" onClick={() => setEditMode(!editMode)}
+              className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30'}`}>
+              {editMode ? '✓ klaar' : '✏ sleep'}
+            </button>
+          )}
+          {isAdmin && editMode && (
             <button data-testid="map-reset-btn" onClick={resetAll}
               className="text-[9px] px-1.5 py-0.5 rounded border border-red-700/40 text-red-300 hover:bg-red-900/30">
               reset
             </button>
           )}
         </div>
-      )}>SPARK WORLD · 12 PROVINCIES</PaperHeader>
+      }>SPARK WORLD · 12 PROVINCIES</PaperHeader>
 
       <div className="relative p-2 select-none">
         <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-72"
@@ -1661,6 +1677,20 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           </div>
         )}
       </div>
+
+      {/* v6_spark_world_kaart_btn_001 — Landkaart-bark (zelfde als in Fracties-kader) */}
+      {showLandkaart && (
+        <LandkaartBark
+          provincies={provincies}
+          steden={steden}
+          fracties={fracties}
+          onClose={() => setShowLandkaart(false)}
+          onOpenStad={(s) => { setShowLandkaart(false); setOpenStad(s); }}
+        />
+      )}
+      {openStad && (
+        <StadDetailBark stadId={openStad.id} onClose={() => setOpenStad(null)} />
+      )}
     </PaperPanel>
   );
 }

@@ -230,7 +230,7 @@ function MiniStat({ icon: Icon, label, value, accent }) {
 // ============================================================
 // STAD DETAIL BARK
 // ============================================================
-function StadDetailBark({ stadId, onClose }) {
+export function StadDetailBark({ stadId, onClose }) {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetch(`${API}/api/dnd/world/steden/${stadId}`).then(r => r.json()).then(setData);
@@ -330,7 +330,7 @@ function StadDetailBark({ stadId, onClose }) {
 // ============================================================
 // LANDKAART BARK (NL provincie-map)
 // ============================================================
-function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
+export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
   const [selectedProv, setSelectedProv] = useState(null);
   const fractieById = Object.fromEntries(fracties.map(f => [f.id, f]));
 

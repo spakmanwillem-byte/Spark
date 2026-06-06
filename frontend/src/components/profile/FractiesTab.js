@@ -18,11 +18,12 @@ import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X } from 'l
 const API = process.env.REACT_APP_BACKEND_URL;
 
 // v6_spark_world_kaart_btn_001 — eigen modal-wrapper (BarkModal is te smal voor kaart)
-function MapModal({ title, onClose, maxWidth = 'max-w-3xl', children }) {
+function MapModal({ title, onClose, maxWidth = 'max-w-3xl', zIndex = 50, children }) {
   return (
     <div
       data-testid="map-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      style={{ zIndex }}
       onClick={onClose}
     >
       <div
@@ -89,7 +90,6 @@ export function FractiesKaderPanel() {
         setProvincies(s.provincies || []);
       });
   }, []);
-
   const active = fracties.find(f => f.id === activeFid) || fracties[0];
   const activeColor = active?.kleur || '#94a3b8';
   const stedenVanFractie = steden.filter(s => s.leidende_fractie_id === activeFid);
@@ -232,7 +232,7 @@ export function FractiesKaderPanel() {
           steden={steden}
           fracties={fracties}
           onClose={() => setOpenLandkaart(false)}
-          onOpenStad={(s) => { setOpenLandkaart(false); setOpenStad(s); }}
+          onOpenStad={(s) => setOpenStad(s)}
         />
       )}
     </PaperPanel>
@@ -263,13 +263,13 @@ export function StadDetailBark({ stadId, onClose }) {
     fetch(`${API}/api/dnd/world/steden/${stadId}`).then(r => r.json()).then(setData);
   }, [stadId]);
 
-  if (!data?.stad) return <MapModal title="Laden..." onClose={onClose} maxWidth="max-w-2xl"><div /></MapModal>;
+  if (!data?.stad) return <MapModal title="Laden..." onClose={onClose} maxWidth="max-w-2xl" zIndex={60}><div /></MapModal>;
   const s = data.stad;
   const leid = data.leidende_fractie || {};
   const color = leid.kleur || '#94a3b8';
 
   return (
-    <MapModal title={`${s.type.toUpperCase()} · ${s.naam.toUpperCase()}`} onClose={onClose} maxWidth="max-w-3xl">
+    <MapModal title={`${s.type.toUpperCase()} · ${s.naam.toUpperCase()}`} onClose={onClose} maxWidth="max-w-3xl" zIndex={60}>
       <div className="space-y-3">
         {/* Hoofd-blok: avatar (banner/logo of initiaal) + info — zoals BewonerHandelPanel */}
         <div className="flex gap-3 items-start">
@@ -361,9 +361,15 @@ const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-1
 
 export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
   const [selectedProv, setSelectedProv] = useState(null);
+  const [pulsingStadId, setPulsingStadId] = useState(null);
   const fractieById = Object.fromEntries(fracties.map(f => [f.id, f]));
   const stedenInProv = selectedProv ? steden.filter(s => s.provincie_id === selectedProv.id) : [];
   const heersFractie = selectedProv ? fractieById[selectedProv.fractie_id] : null;
+
+  const handleStadClick = (s) => {
+    setPulsingStadId(s.id);
+    setTimeout(() => onOpenStad(s), 300); // korte pulse vóór bark opent
+  };
 
   return (
     <MapModal title="LANDKAART · STORMHAVEN" onClose={onClose} maxWidth="max-w-5xl">
@@ -371,11 +377,13 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
         {/* LINKS: grote kaart (col-span 8) */}
         <div className="lg:col-span-8">
           <p className="text-[11px] text-amber-300/60 mb-1.5">
-            Klik op een provincie om de steden te zien. De marker-kleur toont de leidende fractie.
+            Klik op een gebied om de steden te zien. De marker-kleur toont de leidende fractie.
           </p>
           <div className="relative aspect-[3/4] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden">
             <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-stone-900/20 to-stone-950/40" />
+            <div className="absolute inset-0 bg-gradient-to-br from-stone-900/15 to-stone-950/30" />
+
+            {/* Gebied markers (provincies) */}
             {provincies.map(p => {
               const f = fractieById[p.fractie_id];
               const color = f?.kleur || '#94a3b8';
@@ -392,18 +400,45 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
                   title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
                 >
                   <div
-                    className={`w-4 h-4 rounded-full border-2 transition-all ${
+                    className={`w-3 h-3 rounded-full border transition-all ${
                       isSelected ? 'scale-150 border-amber-200' : 'border-stone-900 group-hover:scale-125'
                     }`}
-                    style={{ background: color, boxShadow: isSelected ? `0 0 12px ${color}` : '0 0 4px rgba(0,0,0,0.6)' }}
+                    style={{ background: color }}
                   />
-                  <span className={`text-[10px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
+                  <span className={`text-[9px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
                     isSelected
-                      ? 'opacity-100 bg-stone-950 text-amber-200 shadow-lg'
-                      : 'opacity-90 bg-stone-950/70 text-stone-100'
+                      ? 'opacity-100 bg-stone-950 text-amber-200'
+                      : 'opacity-80 bg-stone-950/60 text-stone-100'
                   }`}>
                     {p.naam}
                   </span>
+                </button>
+              );
+            })}
+
+            {/* Stad markers — alleen voor geselecteerd gebied of alle bij geen selectie */}
+            {(selectedProv ? stedenInProv : steden).map(s => {
+              const leid = fractieById[s.leidende_fractie_id];
+              const color = leid?.kleur || '#94a3b8';
+              const isPulsing = pulsingStadId === s.id;
+              const x = s.kaart?.x_pct ?? 50;
+              const y = s.kaart?.y_pct ?? 50;
+              const isStad = s.type === 'hoofdstad' || s.type === 'stad';
+              return (
+                <button
+                  key={s.id}
+                  data-testid={`stad-marker-${s.id}`}
+                  onClick={() => handleStadClick(s)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 group"
+                  style={{ left: `${x}%`, top: `${y + 3}%` }} // iets onder provincie-marker
+                  title={`${s.naam} — ${leid?.naam || 'Neutraal'}`}
+                >
+                  <div
+                    className={`rounded-sm border transition-all overflow-hidden ${
+                      isPulsing ? 'animate-pulse scale-150' : 'group-hover:scale-125'
+                    } ${isStad ? 'w-3 h-3 border-amber-300' : 'w-2 h-2 border-stone-900'}`}
+                    style={{ background: color }}
+                  />
                 </button>
               );
             })}
@@ -413,9 +448,8 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
         {/* RECHTS: info-paneel (col-span 4) */}
         <div className="lg:col-span-4 flex flex-col">
           {!selectedProv ? (
-            // Leeg-staat: lijst van alle provincies met fractie
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">Provincies ({provincies.length})</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">Gebieden ({provincies.length})</div>
               <div className="space-y-1 max-h-[60vh] overflow-y-auto pr-1">
                 {provincies.map(p => {
                   const f = fractieById[p.fractie_id];
@@ -436,7 +470,6 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
               </div>
             </div>
           ) : (
-            // Geselecteerde provincie + steden
             <div className="space-y-2.5">
               <div
                 className="p-2.5 rounded border-2"
@@ -447,7 +480,7 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
               >
                 <div className="flex items-start justify-between mb-1">
                   <div>
-                    <div className="text-[9px] uppercase tracking-wider text-amber-300/60">Provincie</div>
+                    <div className="text-[9px] uppercase tracking-wider text-amber-300/60">Gebied</div>
                     <div className="text-base font-bold text-amber-100 font-serif">{selectedProv.naam}</div>
                   </div>
                   <button
@@ -473,7 +506,7 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
                       <button
                         key={s.id}
                         data-testid={`landkaart-stad-${s.id}`}
-                        onClick={() => onOpenStad(s)}
+                        onClick={() => handleStadClick(s)}
                         className="w-full text-left p-2 rounded bg-stone-900/50 hover:bg-stone-900 transition-colors flex items-center justify-between border border-stone-800 hover:border-amber-900/40"
                       >
                         <div className="flex items-center gap-2 min-w-0">
@@ -488,7 +521,7 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
                     );
                   })}
                   {stedenInProv.length === 0 && (
-                    <p className="text-[11px] italic text-amber-400/40">Geen steden in deze provincie.</p>
+                    <p className="text-[11px] italic text-amber-400/40">Geen steden in dit gebied.</p>
                   )}
                 </div>
               </div>

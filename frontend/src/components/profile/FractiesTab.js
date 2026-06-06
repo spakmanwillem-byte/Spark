@@ -13,10 +13,37 @@
  * Geen edit-flow. Data komt uit fracties.json + steden.json.
  */
 import React, { useState, useEffect } from 'react';
-import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles } from 'lucide-react';
-import { BarkModal } from '../shared/BarkModal';
+import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+
+// v6_spark_world_kaart_btn_001 — eigen modal-wrapper (BarkModal is te smal voor kaart)
+function MapModal({ title, onClose, maxWidth = 'max-w-3xl', children }) {
+  return (
+    <div
+      data-testid="map-modal"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <div
+        className={`relative ${maxWidth} w-full max-h-[90vh] overflow-y-auto bg-stone-950 border-2 border-amber-900/40 rounded-lg shadow-2xl`}
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="sticky top-0 z-10 flex items-center justify-between px-3 py-2 bg-gradient-to-r from-amber-950/60 to-stone-950 border-b border-amber-900/40">
+          <h2 className="text-xs uppercase tracking-[0.25em] text-amber-300 font-serif font-bold">{title}</h2>
+          <button
+            data-testid="map-modal-close"
+            onClick={onClose}
+            className="text-amber-300 hover:text-amber-100 p-1 rounded hover:bg-amber-900/30"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="p-3">{children}</div>
+      </div>
+    </div>
+  );
+}
 
 // ============================================================
 // PAPER STYLE HELPERS (zelfde look als DnDCharacterSheet)
@@ -236,13 +263,13 @@ export function StadDetailBark({ stadId, onClose }) {
     fetch(`${API}/api/dnd/world/steden/${stadId}`).then(r => r.json()).then(setData);
   }, [stadId]);
 
-  if (!data?.stad) return <BarkModal isOpen={true} onClose={onClose} title="Laden..."><div /></BarkModal>;
+  if (!data?.stad) return <MapModal title="Laden..." onClose={onClose} maxWidth="max-w-2xl"><div /></MapModal>;
   const s = data.stad;
   const leid = data.leidende_fractie || {};
   const color = leid.kleur || '#94a3b8';
 
   return (
-    <BarkModal isOpen={true} onClose={onClose} title="" maxWidth="max-w-2xl">
+    <MapModal title={data.stad.naam.toUpperCase()} onClose={onClose} maxWidth="max-w-2xl">
       <div className="space-y-3">
         {/* Header */}
         <div className="flex items-start justify-between border-b-2 border-amber-900/40 pb-2">
@@ -323,47 +350,55 @@ export function StadDetailBark({ stadId, onClose }) {
           </div>
         </div>
       </div>
-    </BarkModal>
+    </MapModal>
   );
 }
 
 // ============================================================
-// LANDKAART BARK (NL provincie-map)
+// LANDKAART BARK (NL provincie-map met dezelfde foto als MiniMap)
 // ============================================================
+const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
+
 export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
   const [selectedProv, setSelectedProv] = useState(null);
   const fractieById = Object.fromEntries(fracties.map(f => [f.id, f]));
 
   return (
-    <BarkModal isOpen={true} onClose={onClose} title="Landkaart van Stormhaven" maxWidth="max-w-3xl">
+    <MapModal title="LANDKAART · STORMHAVEN" onClose={onClose} maxWidth="max-w-3xl">
       <div className="space-y-2">
         <p className="text-[11px] text-stone-400">
           Klik op een provincie om de steden te zien. De marker-kleur toont de leidende fractie.
         </p>
 
+        {/* v6_spark_world_kaart_btn_001 — zelfde NL-foto als MiniMap, alleen groter */}
         <div className="relative aspect-[3/4] max-h-[55vh] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-800/40 to-stone-950/80" />
+          <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-900/30 to-stone-950/50" />
           {provincies.map(p => {
             const f = fractieById[p.fractie_id];
             const color = f?.kleur || '#94a3b8';
             const isSelected = selectedProv?.id === p.id;
+            const x = p.x_pct ?? 50;
+            const y = p.y_pct ?? 50;
             return (
               <button
                 key={p.id}
                 data-testid={`prov-marker-${p.id}`}
                 onClick={() => setSelectedProv(p)}
                 className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group"
-                style={{ left: `${p.x_pct}%`, top: `${p.y_pct}%` }}
+                style={{ left: `${x}%`, top: `${y}%` }}
                 title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
               >
                 <div
-                  className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${
+                  className={`w-4 h-4 rounded-full border-2 transition-all ${
                     isSelected ? 'scale-150 border-amber-200' : 'border-stone-900 group-hover:scale-125'
                   }`}
-                  style={{ background: color, boxShadow: isSelected ? `0 0 12px ${color}` : 'none' }}
+                  style={{ background: color, boxShadow: isSelected ? `0 0 12px ${color}` : '0 0 4px rgba(0,0,0,0.6)' }}
                 />
-                <span className={`text-[9px] mt-0.5 px-1 rounded whitespace-nowrap transition-opacity ${
-                  isSelected ? 'opacity-100 bg-stone-900 text-amber-200' : 'opacity-70 text-stone-400'
+                <span className={`text-[10px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
+                  isSelected
+                    ? 'opacity-100 bg-stone-950 text-amber-200 shadow-lg'
+                    : 'opacity-90 bg-stone-950/70 text-stone-100'
                 }`}>
                   {p.naam}
                 </span>
@@ -412,6 +447,6 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
           </div>
         )}
       </div>
-    </BarkModal>
+    </MapModal>
   );
 }

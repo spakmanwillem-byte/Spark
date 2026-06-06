@@ -1,0 +1,34 @@
+{
+  "summary": "Backend testing of NEW D&D world endpoints (v6_dnd_resources_001 + v6_dnd_steden_drag_001). All 18 pytest tests passed (100%): resources CRUD (admin happy path, non-admin 403, not-found 404), image upload + fetch via /api/system-archive/file/{id}, auto-creation of game-card (with class='game', kind='resource', image_urls) AND KB v2 inbox card (with begrip + 'grondstof' tag), Leeuwarden drag PATCH + admin enforcement, plus regression on existing /fracties, /provincies, /steden endpoints. Teardown restored Leeuwarden coords and deleted all TEST_-prefixed resources.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_dnd_world_resources.py",
+    "/app/test_reports/pytest/iter26_dnd_world.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "world.py is 597 lines — approaching split threshold (>700). Consider extracting resources sub-module (RESOURCE_TYPES + create/patch/delete handlers + helpers) into modules/dnd/world_resources.py.",
+    "POST /resources: failures in _create_game_card_for_resource or _create_kb_inbox_card_for_resource are silently swallowed (try/except: pass returns None). If KB inbox write fails the API still returns success with linked_kb_card_id=null. Consider logging via logger.warning so silent failures are observable.",
+    "DELETE /resources/{id}: docstring says 'linked card blijft staan, image blijft in archive' — by design, but this leaks orphan game/KB cards + archive files. Add a cascade option or at minimum a cleanup helper.",
+    "_save_image_to_system_archive uses uuid.uuid4().hex[:12] for file IDs — 48 bits of entropy is fine, but collisions aren't checked against SA_INDEX before writing. Cheap to add: `while any(e['id']==file_id for e in idx['files']): file_id = uuid.uuid4().hex[:12]`.",
+    "MAX_IMAGE_MB = 8 is hardcoded; consider env var. Also: image content is loaded fully into memory via await image.read() — fine for 8MB cap but worth a note for future video/larger media."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_dnd_world_resources.py (new file)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "not tested (skipped per request)"},
+  "test_credentials": "Admin user-001 (gradatie 1), Non-admin user-574ac78e (gradatie 5) — confirmed in /app/backend/data/system/users.json",
+  "seed_data_creation": "Test created 2 TEST_-prefixed resources (TEST_Visgrond_Noord, TEST_DeleteForbidden) during the run; both were cleaned up by module-scoped fixture teardown. Pre-existing non-test resource 'res-da140174 Vis resource' (likely from main agent's earlier smoke test) was left intact. Leeuwarden coords saved pre-test and restored post-test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Test file /app/backend/tests/test_dnd_world_resources.py is reusable as regression suite for /api/dnd/world/* endpoints. Uses 1x1 PNG (base64-embedded) so no external assets needed. The pre-existing resource 'res-da140174 Vis resource' is leftover from a prior smoke test — feel free to delete via DELETE /api/dnd/world/resources/res-da140174?user_id=user-001 if a clean slate is needed. Frontend (FractiesTab.js LandkaartBark + AddResourceModal) was intentionally NOT tested this round.",
+  "rca of the issue": "N/A — all endpoints behave correctly per spec."
+}

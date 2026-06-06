@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-07T00:00:00+00:00",
+  "updated_at": "2026-06-06T23:36:02.670067+00:00",
   "steden": [
     {
       "id": "stormhaven",
@@ -8,7 +8,11 @@
       "type": "hoofdstad",
       "provincie_id": "groningen",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 78, "y_pct": 18, "marker_icon": "castle"},
+      "kaart": {
+        "x_pct": 78,
+        "y_pct": 18,
+        "marker_icon": "castle"
+      },
       "introductie": "Stormhaven is de hoofdstad van Spark. Gebouwd op de drempel tussen licht en schaduw. Hier wordt niet gevochten om de zon noch om de nacht — hier wordt gewaakt over beide.",
       "banner_image_url": null,
       "logo_url": null,
@@ -20,32 +24,100 @@
         "tax_rate_fracties": 0.05
       },
       "fractie_invloed": {
-        "spark":    {"aanhangers": 50, "gebouwen": 5, "tevredenheid": 80},
-        "licht":    {"aanhangers": 10, "gebouwen": 1, "tevredenheid": 60},
-        "schaduw":  {"aanhangers": 10, "gebouwen": 1, "tevredenheid": 60},
-        "vuur":     {"aanhangers": 5,  "gebouwen": 0, "tevredenheid": 50},
-        "lucht":    {"aanhangers": 5,  "gebouwen": 0, "tevredenheid": 50},
-        "water":    {"aanhangers": 5,  "gebouwen": 0, "tevredenheid": 50},
-        "aarde":    {"aanhangers": 5,  "gebouwen": 0, "tevredenheid": 50},
-        "natuur":   {"aanhangers": 8,  "gebouwen": 0, "tevredenheid": 55},
-        "barbaren": {"aanhangers": 2,  "gebouwen": 0, "tevredenheid": 40}
+        "spark": {
+          "aanhangers": 50,
+          "gebouwen": 5,
+          "tevredenheid": 80
+        },
+        "licht": {
+          "aanhangers": 10,
+          "gebouwen": 1,
+          "tevredenheid": 60
+        },
+        "schaduw": {
+          "aanhangers": 10,
+          "gebouwen": 1,
+          "tevredenheid": 60
+        },
+        "vuur": {
+          "aanhangers": 5,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 5,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 5,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 5,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 8,
+          "gebouwen": 0,
+          "tevredenheid": 55
+        },
+        "barbaren": {
+          "aanhangers": 2,
+          "gebouwen": 0,
+          "tevredenheid": 40
+        }
       },
       "leidende_fractie_id": "spark",
       "functies": {
-        "leger":          {"niveau": 2, "kapitein": "Lotus", "soldaten": 24},
-        "opslag":         {"niveau": 2, "capaciteit": 2000, "inhoud": {}},
-        "bank":           {"niveau": 2, "rente_per_dag": 0.001},
-        "forum":          {"niveau": 2},
-        "stadsmuur":      {"niveau": 3, "verdediging_bonus": 12},
-        "infrastructuur": {"niveau": 2, "handel_modifier": 1.1},
-        "handelskantoor": {"niveau": 2, "import_export_slots": 3},
-        "tempel":         {"niveau": 1, "fractie_id": "spark"},
-        "markt":          {"niveau": 2},
-        "herberg":        {"niveau": 1}
+        "leger": {
+          "niveau": 2,
+          "kapitein": "Lotus",
+          "soldaten": 24
+        },
+        "opslag": {
+          "niveau": 2,
+          "capaciteit": 2000,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 2,
+          "rente_per_dag": 0.001
+        },
+        "forum": {
+          "niveau": 2
+        },
+        "stadsmuur": {
+          "niveau": 3,
+          "verdediging_bonus": 12
+        },
+        "infrastructuur": {
+          "niveau": 2,
+          "handel_modifier": 1.1
+        },
+        "handelskantoor": {
+          "niveau": 2,
+          "import_export_slots": 3
+        },
+        "tempel": {
+          "niveau": 1,
+          "fractie_id": "spark"
+        },
+        "markt": {
+          "niveau": 2
+        },
+        "herberg": {
+          "niveau": 1
+        }
       },
       "leider_bonus": {
         "beschrijving": "Spark-leden in Stormhaven krijgen +2 Wijsheid en +1 op handelacties.",
-        "effect": {"wijsheid": 2, "handel": 1}
+        "effect": {
+          "wijsheid": 2,
+          "handel": 1
+        }
       }
     },
     {
@@ -54,36 +126,114 @@
       "type": "hoofdstad",
       "provincie_id": "friesland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 61, "y_pct": 18, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 61.82347251057758,
+        "y_pct": 18.594680632215123,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "lucht",
       "functies": {
-        "leger":          {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag":         {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank":           {"niveau": 0, "rente_per_dag": 0},
-        "forum":          {"niveau": 0},
-        "stadsmuur":      {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel":         {"niveau": 0, "fractie_id": null},
-        "markt":          {"niveau": 0},
-        "herberg":        {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "assen",
@@ -91,36 +241,114 @@
       "type": "hoofdstad",
       "provincie_id": "drenthe",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 78, "y_pct": 36, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 78,
+        "y_pct": 36,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "neutraal",
       "functies": {
-        "leger":          {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag":         {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank":           {"niveau": 0, "rente_per_dag": 0},
-        "forum":          {"niveau": 0},
-        "stadsmuur":      {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel":         {"niveau": 0, "fractie_id": null},
-        "markt":          {"niveau": 0},
-        "herberg":        {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "zwolle",
@@ -128,36 +356,114 @@
       "type": "hoofdstad",
       "provincie_id": "overijssel",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 77, "y_pct": 54, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 77,
+        "y_pct": 54,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "natuur",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "lelystad",
@@ -165,36 +471,114 @@
       "type": "hoofdstad",
       "provincie_id": "flevoland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 56, "y_pct": 46, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 56,
+        "y_pct": 46,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "licht",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "arnhem",
@@ -202,36 +586,114 @@
       "type": "hoofdstad",
       "provincie_id": "gelderland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 65, "y_pct": 71, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 65,
+        "y_pct": 71,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "aarde",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "utrecht",
@@ -239,36 +701,114 @@
       "type": "hoofdstad",
       "provincie_id": "utrecht",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 40, "y_pct": 61, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 40,
+        "y_pct": 61,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "neutraal",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "haarlem",
@@ -276,36 +816,114 @@
       "type": "hoofdstad",
       "provincie_id": "noord-holland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 34, "y_pct": 41, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 34,
+        "y_pct": 41,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "neutraal",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "den-haag",
@@ -313,36 +931,114 @@
       "type": "hoofdstad",
       "provincie_id": "zuid-holland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 25, "y_pct": 60, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 25,
+        "y_pct": 60,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "water",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "middelburg",
@@ -350,36 +1046,114 @@
       "type": "hoofdstad",
       "provincie_id": "zeeland",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 14, "y_pct": 80, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 14,
+        "y_pct": 80,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "neutraal",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "den-bosch",
@@ -387,36 +1161,114 @@
       "type": "hoofdstad",
       "provincie_id": "noord-brabant",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 48, "y_pct": 76, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 48,
+        "y_pct": 76,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "vuur",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     },
     {
       "id": "maastricht",
@@ -424,36 +1276,114 @@
       "type": "hoofdstad",
       "provincie_id": "limburg",
       "is_hoofdstad_provincie": true,
-      "kaart": {"x_pct": 56, "y_pct": 92, "marker_icon": "town"},
+      "kaart": {
+        "x_pct": 56,
+        "y_pct": 92,
+        "marker_icon": "town"
+      },
       "introductie": "",
       "banner_image_url": null,
       "logo_url": null,
-      "kas": {"goud": 0, "tax_inkomsten_dag": 0, "tax_uitgaven_dag": 0, "tax_rate_inwoners": 0.03, "tax_rate_fracties": 0.05},
+      "kas": {
+        "goud": 0,
+        "tax_inkomsten_dag": 0,
+        "tax_uitgaven_dag": 0,
+        "tax_rate_inwoners": 0.03,
+        "tax_rate_fracties": 0.05
+      },
       "fractie_invloed": {
-        "spark": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "licht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "schaduw": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "vuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "lucht": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "water": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "aarde": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "natuur": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50},
-        "barbaren": {"aanhangers": 0, "gebouwen": 0, "tevredenheid": 50}
+        "spark": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "licht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "schaduw": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "vuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "lucht": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "water": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "aarde": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "natuur": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        },
+        "barbaren": {
+          "aanhangers": 0,
+          "gebouwen": 0,
+          "tevredenheid": 50
+        }
       },
       "leidende_fractie_id": "schaduw",
       "functies": {
-        "leger": {"niveau": 0, "kapitein": null, "soldaten": 0},
-        "opslag": {"niveau": 0, "capaciteit": 0, "inhoud": {}},
-        "bank": {"niveau": 0, "rente_per_dag": 0},
-        "forum": {"niveau": 0},
-        "stadsmuur": {"niveau": 0, "verdediging_bonus": 0},
-        "infrastructuur": {"niveau": 0, "handel_modifier": 1.0},
-        "handelskantoor": {"niveau": 0, "import_export_slots": 0},
-        "tempel": {"niveau": 0, "fractie_id": null},
-        "markt": {"niveau": 0},
-        "herberg": {"niveau": 0}
+        "leger": {
+          "niveau": 0,
+          "kapitein": null,
+          "soldaten": 0
+        },
+        "opslag": {
+          "niveau": 0,
+          "capaciteit": 0,
+          "inhoud": {}
+        },
+        "bank": {
+          "niveau": 0,
+          "rente_per_dag": 0
+        },
+        "forum": {
+          "niveau": 0
+        },
+        "stadsmuur": {
+          "niveau": 0,
+          "verdediging_bonus": 0
+        },
+        "infrastructuur": {
+          "niveau": 0,
+          "handel_modifier": 1.0
+        },
+        "handelskantoor": {
+          "niveau": 0,
+          "import_export_slots": 0
+        },
+        "tempel": {
+          "niveau": 0,
+          "fractie_id": null
+        },
+        "markt": {
+          "niveau": 0
+        },
+        "herberg": {
+          "niveau": 0
+        }
       },
-      "leider_bonus": {"beschrijving": "", "effect": {}}
+      "leider_bonus": {
+        "beschrijving": "",
+        "effect": {}
+      }
     }
   ]
 }

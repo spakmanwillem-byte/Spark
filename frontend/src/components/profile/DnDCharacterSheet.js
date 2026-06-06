@@ -415,7 +415,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
           <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
           {/* v6_dnd_fracties_kader_001 — Fracties + Landkaart bark */}
-          <FractiesKaderPanel />
+          <FractiesKaderPanel userId={userId} isAdmin={isAdmin} />
           {/* v6_bewoners_layout_002 — Handel-kader onder Spark World map (geopend bij selectie) */}
           {activeBewoner && (
             <BewonerHandelPanel
@@ -1660,6 +1660,8 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           provincies={provincies}
           steden={steden}
           fracties={fracties}
+          userId={userId}
+          isAdmin={isAdmin}
           onClose={() => setShowLandkaart(false)}
           onOpenStad={(s) => setOpenStad(s)}
         />

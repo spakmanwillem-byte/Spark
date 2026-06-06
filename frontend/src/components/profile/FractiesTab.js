@@ -12,8 +12,8 @@
  *
  * Geen edit-flow. Data komt uit fracties.json + steden.json.
  */
-import React, { useState, useEffect } from 'react';
-import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -71,7 +71,7 @@ function PaperHeader({ children, right }) {
 // ============================================================
 // MAIN PANEL — tabs-stijl zoals CharInfo (horizontaal, fractie per tab)
 // ============================================================
-export function FractiesKaderPanel() {
+export function FractiesKaderPanel({ userId, isAdmin }) {
   const [fracties, setFracties] = useState([]);
   const [steden, setSteden] = useState([]);
   const [provincies, setProvincies] = useState([]);
@@ -231,6 +231,8 @@ export function FractiesKaderPanel() {
           provincies={provincies}
           steden={steden}
           fracties={fracties}
+          userId={userId}
+          isAdmin={isAdmin}
           onClose={() => setOpenLandkaart(false)}
           onOpenStad={(s) => setOpenStad(s)}
         />
@@ -356,19 +358,111 @@ export function StadDetailBark({ stadId, onClose }) {
 
 // ============================================================
 // LANDKAART BARK (NL provincie-map met dezelfde foto als MiniMap)
+// v6_dnd_resources_001 — admin: drag-and-drop voor steden + "+ Resource"
 // ============================================================
 const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
 
-export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
+export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId, isAdmin, onClose, onOpenStad }) {
   const [selectedProv, setSelectedProv] = useState(null);
   const [pulsingStadId, setPulsingStadId] = useState(null);
+  // v6_dnd_steden_drag_001 — lokale overrides voor drag, valt anders terug op prop
+  const [stedenOverride, setStedenOverride] = useState(null);
+  const steden = stedenOverride ?? stedenProp ?? [];
+  const setSteden = (updater) => {
+    setStedenOverride(prev => {
+      const base = prev ?? stedenProp ?? [];
+      return typeof updater === 'function' ? updater(base) : updater;
+    });
+  };
+
+  // v6_dnd_resources_001 — resources state + types
+  const [resources, setResources] = useState([]);
+  const [resourceTypes, setResourceTypes] = useState([]);
+  const [addOpen, setAddOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false); // admin-drag toggle
+  const [dragging, setDragging] = useState(null);  // {kind:'stad'|'resource', id}
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    fetch(`${API}/api/dnd/world/resources`).then(r => r.json()).then(d => {
+      setResources(d.resources || []);
+      setResourceTypes(d.types || []);
+    }).catch(() => {});
+  }, []);
+
   const fractieById = Object.fromEntries(fracties.map(f => [f.id, f]));
   const stedenInProv = selectedProv ? steden.filter(s => s.provincie_id === selectedProv.id) : [];
   const heersFractie = selectedProv ? fractieById[selectedProv.fractie_id] : null;
 
   const handleStadClick = (s) => {
+    if (editMode) return; // tijdens drag-mode geen detail openen
     setPulsingStadId(s.id);
-    setTimeout(() => onOpenStad(s), 300); // korte pulse vóór bark opent
+    setTimeout(() => onOpenStad(s), 300);
+  };
+
+  // v6_dnd_steden_drag_001 — drag helpers
+  const pctFromEvent = (clientX, clientY) => {
+    const el = mapRef.current;
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    return { x_pct: Math.max(1, Math.min(99, x)), y_pct: Math.max(1, Math.min(99, y)) };
+  };
+
+  const onPointerDown = (e, kind, id) => {
+    if (!editMode) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging({ kind, id });
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    const p = pctFromEvent(e.clientX, e.clientY);
+    if (!p) return;
+    if (dragging.kind === 'stad') {
+      setSteden(prev => prev.map(s => s.id === dragging.id
+        ? { ...s, kaart: { ...(s.kaart || {}), x_pct: p.x_pct, y_pct: p.y_pct } } : s));
+    } else if (dragging.kind === 'resource') {
+      setResources(prev => prev.map(r => r.id === dragging.id
+        ? { ...r, kaart: { ...(r.kaart || {}), x_pct: p.x_pct, y_pct: p.y_pct } } : r));
+    }
+  };
+
+  const onPointerUp = async () => {
+    if (!dragging) return;
+    const cur = dragging;
+    setDragging(null);
+    if (cur.kind === 'stad') {
+      const s = steden.find(x => x.id === cur.id);
+      if (!s) return;
+      await fetch(`${API}/api/dnd/world/steden/${cur.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, x_pct: s.kaart?.x_pct, y_pct: s.kaart?.y_pct }),
+      }).catch(() => {});
+    } else if (cur.kind === 'resource') {
+      const r = resources.find(x => x.id === cur.id);
+      if (!r) return;
+      await fetch(`${API}/api/dnd/world/resources/${cur.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, x_pct: r.kaart?.x_pct, y_pct: r.kaart?.y_pct }),
+      }).catch(() => {});
+    }
+  };
+
+  const handleResourceCreated = (newRes) => {
+    setResources(prev => [...prev, newRes]);
+    setAddOpen(false);
+  };
+
+  const handleResourceDelete = async (rid) => {
+    if (!window.confirm('Verwijder deze grondstof van de kaart?')) return;
+    await fetch(`${API}/api/dnd/world/resources/${rid}?user_id=${encodeURIComponent(userId)}`, {
+      method: 'DELETE',
+    }).catch(() => {});
+    setResources(prev => prev.filter(r => r.id !== rid));
   };
 
   return (
@@ -376,12 +470,46 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
         {/* LINKS: grote kaart (col-span 8) */}
         <div className="lg:col-span-8">
-          <p className="text-[11px] text-amber-300/60 mb-1.5">
-            Klik op een gebied om de steden te zien. De marker-kleur toont de leidende fractie.
-          </p>
-          <div className="relative aspect-[3/4] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden">
-            <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-stone-900/15 to-stone-950/30" />
+          <div className="flex items-center justify-between mb-1.5">
+            <p className="text-[11px] text-amber-300/60">
+              Klik op een gebied om de steden te zien. De marker-kleur toont de leidende fractie.
+            </p>
+            {isAdmin && (
+              <div className="flex items-center gap-1.5">
+                <button
+                  data-testid="landkaart-edit-toggle"
+                  onClick={() => setEditMode(v => !v)}
+                  className={`text-[10px] px-2 py-1 rounded border transition-colors ${
+                    editMode
+                      ? 'border-emerald-400 bg-emerald-900/40 text-emerald-200'
+                      : 'border-amber-700/60 bg-stone-950 text-amber-200 hover:bg-amber-900/30'
+                  }`}
+                  title="Sleep steden & resources naar nieuwe positie"
+                >
+                  {editMode ? '✓ Sleep-modus aan' : '✎ Bewerk posities'}
+                </button>
+                <button
+                  data-testid="landkaart-add-resource-btn"
+                  onClick={() => setAddOpen(true)}
+                  className="text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950 text-amber-200 hover:bg-amber-900/30 flex items-center gap-1"
+                  title="Voeg een grondstof toe op de kaart"
+                >
+                  <Plus className="w-3 h-3" />
+                  Resource
+                </button>
+              </div>
+            )}
+          </div>
+          <div
+            ref={mapRef}
+            className="relative aspect-[3/4] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden"
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerLeave={onPointerUp}
+            style={{ touchAction: dragging ? 'none' : 'auto', cursor: dragging ? 'grabbing' : 'default' }}
+          >
+            <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-stone-900/15 to-stone-950/30 pointer-events-none" />
 
             {/* Gebied markers (provincies) */}
             {provincies.map(p => {
@@ -394,7 +522,7 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
                 <button
                   key={p.id}
                   data-testid={`prov-marker-${p.id}`}
-                  onClick={() => setSelectedProv(p)}
+                  onClick={() => !editMode && setSelectedProv(p)}
                   className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group"
                   style={{ left: `${x}%`, top: `${y}%` }}
                   title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
@@ -424,22 +552,75 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
               const x = s.kaart?.x_pct ?? 50;
               const y = s.kaart?.y_pct ?? 50;
               const isStad = s.type === 'hoofdstad' || s.type === 'stad';
+              const isDraggingThis = dragging?.kind === 'stad' && dragging?.id === s.id;
               return (
                 <button
                   key={s.id}
                   data-testid={`stad-marker-${s.id}`}
+                  onPointerDown={(e) => onPointerDown(e, 'stad', s.id)}
                   onClick={() => handleStadClick(s)}
                   className="absolute -translate-x-1/2 -translate-y-1/2 group"
-                  style={{ left: `${x}%`, top: `${y + 3}%` }} // iets onder provincie-marker
-                  title={`${s.naam} — ${leid?.naam || 'Neutraal'}`}
+                  style={{ left: `${x}%`, top: `${y + 3}%`, cursor: editMode ? (isDraggingThis ? 'grabbing' : 'grab') : 'pointer' }}
+                  title={`${s.naam} — ${leid?.naam || 'Neutraal'}${editMode ? ' (sleep om te verplaatsen)' : ''}`}
                 >
                   <div
                     className={`rounded-sm border transition-all overflow-hidden ${
                       isPulsing ? 'animate-pulse scale-150' : 'group-hover:scale-125'
-                    } ${isStad ? 'w-3 h-3 border-amber-300' : 'w-2 h-2 border-stone-900'}`}
+                    } ${isStad ? 'w-3 h-3 border-amber-300' : 'w-2 h-2 border-stone-900'} ${
+                      editMode ? 'ring-1 ring-emerald-400/70' : ''
+                    }`}
                     style={{ background: color }}
                   />
+                  {editMode && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[8px] bg-stone-950/90 text-emerald-200 px-1 rounded whitespace-nowrap font-bold">
+                      {s.naam}
+                    </span>
+                  )}
                 </button>
+              );
+            })}
+
+            {/* v6_dnd_resources_001 — Resource markers */}
+            {resources.map(r => {
+              const typeMeta = resourceTypes.find(t => t.id === r.type) || {};
+              const color = typeMeta.kleur || '#94a3b8';
+              const x = r.kaart?.x_pct ?? 50;
+              const y = r.kaart?.y_pct ?? 50;
+              const isDraggingThis = dragging?.kind === 'resource' && dragging?.id === r.id;
+              return (
+                <div
+                  key={r.id}
+                  data-testid={`resource-marker-${r.id}`}
+                  onPointerDown={(e) => onPointerDown(e, 'resource', r.id)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 group"
+                  style={{ left: `${x}%`, top: `${y}%`, cursor: editMode ? (isDraggingThis ? 'grabbing' : 'grab') : 'pointer' }}
+                  title={`${r.naam} (${typeMeta.naam || r.type})${editMode ? ' — sleep om te verplaatsen' : ''}`}
+                >
+                  <div
+                    className={`w-4 h-4 rounded-md border-2 overflow-hidden transition-all group-hover:scale-125 ${
+                      editMode ? 'ring-1 ring-emerald-400/70' : ''
+                    }`}
+                    style={{ borderColor: color, background: r.image_url ? '#000' : color }}
+                  >
+                    {r.image_url ? (
+                      <img src={`${API}${r.image_url}`} alt={r.naam} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full" />
+                    )}
+                  </div>
+                  {editMode && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleResourceDelete(r.id); }}
+                      className="absolute -top-2 -right-2 w-4 h-4 bg-red-700 hover:bg-red-600 rounded-full flex items-center justify-center"
+                      title="Verwijder"
+                    >
+                      <Trash2 className="w-2.5 h-2.5 text-white" />
+                    </button>
+                  )}
+                  <span className="absolute top-full left-1/2 -translate-x-1/2 mt-0.5 text-[8px] whitespace-nowrap font-bold bg-stone-950/80 text-amber-100 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    {r.naam}
+                  </span>
+                </div>
               );
             })}
           </div>
@@ -468,6 +649,32 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
                   );
                 })}
               </div>
+              {/* v6_dnd_resources_001 — resources lijst in side-panel */}
+              {resources.length > 0 && (
+                <div className="mt-3">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">
+                    Grondstoffen ({resources.length})
+                  </div>
+                  <div className="space-y-1 max-h-40 overflow-y-auto pr-1">
+                    {resources.map(r => {
+                      const t = resourceTypes.find(x => x.id === r.type) || {};
+                      return (
+                        <div key={r.id} className="flex items-center gap-2 p-1.5 rounded bg-stone-900/40 border border-stone-800">
+                          {r.image_url ? (
+                            <img src={`${API}${r.image_url}`} alt={r.naam} className="w-6 h-6 object-cover rounded" />
+                          ) : (
+                            <div className="w-6 h-6 rounded" style={{ background: t.kleur || '#94a3b8' }} />
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[11px] font-bold text-amber-100 truncate">{r.naam}</div>
+                            <div className="text-[9px] text-amber-400/60">{t.naam || r.type}</div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="space-y-2.5">
@@ -527,6 +734,193 @@ export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenSta
               </div>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Add Resource modal */}
+      {addOpen && (
+        <AddResourceModal
+          onClose={() => setAddOpen(false)}
+          onCreated={handleResourceCreated}
+          types={resourceTypes}
+          fracties={fracties}
+          userId={userId}
+        />
+      )}
+    </MapModal>
+  );
+}
+
+// ============================================================
+// ADD RESOURCE MODAL (v6_dnd_resources_001)
+// ============================================================
+function AddResourceModal({ onClose, onCreated, types, fracties, userId }) {
+  const [naam, setNaam] = useState('');
+  const [type, setType] = useState('bos');
+  const [beschrijving, setBeschrijving] = useState('');
+  const [fractieId, setFractieId] = useState('');
+  const [createKbCard, setCreateKbCard] = useState(true);
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+
+  const onPick = (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setFile(f);
+    setPreview(URL.createObjectURL(f));
+  };
+
+  const submit = async () => {
+    setError(null);
+    if (!file) { setError('Kies eerst een afbeelding.'); return; }
+    if (!naam.trim()) { setError('Geef de grondstof een naam.'); return; }
+    setBusy(true);
+    const fd = new FormData();
+    fd.append('image', file);
+    fd.append('naam', naam.trim());
+    fd.append('type', type);
+    fd.append('beschrijving', beschrijving);
+    if (fractieId) fd.append('fractie_id', fractieId);
+    fd.append('x_pct', '50');     // initieel midden; admin sleept hem op zijn plek
+    fd.append('y_pct', '50');
+    fd.append('user_id', userId || '');
+    fd.append('create_kb_card', createKbCard ? 'true' : 'false');
+    try {
+      const r = await fetch(`${API}/api/dnd/world/resources`, { method: 'POST', body: fd });
+      if (!r.ok) {
+        const txt = await r.text();
+        throw new Error(`${r.status}: ${txt}`);
+      }
+      const d = await r.json();
+      onCreated(d.resource);
+    } catch (e) {
+      setError(`Upload mislukt: ${e.message}`);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <MapModal title="GRONDSTOF · TOEVOEGEN AAN KAART" onClose={onClose} maxWidth="max-w-md" zIndex={70}>
+      <div className="space-y-3 text-amber-100">
+        <p className="text-[11px] italic text-amber-300/70">
+          Upload een afbeelding voor de grondstof. Na opslaan verschijnt er een marker in het midden van de kaart;
+          zet daarna &ldquo;Bewerk posities&rdquo; aan en sleep hem op zijn plek.
+        </p>
+
+        {/* Upload */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Afbeelding</span>
+          <div className="mt-1 flex items-center gap-2">
+            <label className="flex-1 cursor-pointer">
+              <div className="flex items-center justify-center gap-1.5 px-3 py-2 rounded border border-amber-900/40 bg-stone-950 hover:bg-stone-900 text-[11px] text-amber-200">
+                <Upload className="w-3.5 h-3.5" />
+                {file ? file.name : 'Kies bestand…'}
+              </div>
+              <input
+                data-testid="resource-file-input"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={onPick}
+              />
+            </label>
+            {preview && (
+              <img src={preview} alt="preview" className="w-12 h-12 object-cover rounded border border-amber-900/40" />
+            )}
+          </div>
+        </label>
+
+        {/* Naam */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Naam</span>
+          <input
+            data-testid="resource-naam-input"
+            value={naam}
+            onChange={e => setNaam(e.target.value)}
+            placeholder="bijv. Zuiderzee visgrond"
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100 placeholder-amber-500/40"
+          />
+        </label>
+
+        {/* Type */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Type</span>
+          <select
+            data-testid="resource-type-select"
+            value={type}
+            onChange={e => setType(e.target.value)}
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100"
+          >
+            {types.map(t => (
+              <option key={t.id} value={t.id}>{t.naam}</option>
+            ))}
+          </select>
+        </label>
+
+        {/* Fractie (optioneel) */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Fractie (optioneel)</span>
+          <select
+            data-testid="resource-fractie-select"
+            value={fractieId}
+            onChange={e => setFractieId(e.target.value)}
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100"
+          >
+            <option value="">— geen —</option>
+            {fracties.map(f => (
+              <option key={f.id} value={f.id}>{f.naam}</option>
+            ))}
+          </select>
+        </label>
+
+        {/* Beschrijving */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Beschrijving</span>
+          <textarea
+            data-testid="resource-desc-input"
+            value={beschrijving}
+            onChange={e => setBeschrijving(e.target.value)}
+            placeholder="Korte beschrijving (komt op de kaart in laag-1)"
+            rows={2}
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100 placeholder-amber-500/40"
+          />
+        </label>
+
+        {/* KB checkbox */}
+        <label className="flex items-center gap-2 text-[11px] text-amber-200/80">
+          <input
+            type="checkbox"
+            data-testid="resource-kb-checkbox"
+            checked={createKbCard}
+            onChange={e => setCreateKbCard(e.target.checked)}
+          />
+          Maak ook een KennisBank-inbox kaart aan (zodat Spark de grondstof kent)
+        </label>
+
+        {error && (
+          <div className="text-[11px] text-red-300 bg-red-950/40 border border-red-900/60 rounded px-2 py-1">
+            {error}
+          </div>
+        )}
+
+        <div className="flex justify-end gap-2 pt-1">
+          <button
+            onClick={onClose}
+            className="text-[11px] px-3 py-1.5 rounded border border-stone-700 text-stone-300 hover:bg-stone-900"
+          >
+            Annuleer
+          </button>
+          <button
+            data-testid="resource-submit-btn"
+            onClick={submit}
+            disabled={busy}
+            className="text-[11px] px-3 py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold disabled:opacity-50"
+          >
+            {busy ? 'Uploaden…' : 'Toevoegen'}
+          </button>
         </div>
       </div>
     </MapModal>

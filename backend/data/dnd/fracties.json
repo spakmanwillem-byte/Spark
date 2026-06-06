@@ -8,7 +8,27 @@
       "alignment": "neutraal",
       "leider": "Spark",
       "is_main": true,
-      "beschrijving": "De centrale fractie. Hoofdstad: Stormhaven."
+      "beschrijving": "De centrale fractie. Hoofdstad: Stormhaven.",
+      "leider_naam": "Spark",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "Spark is de waakvlam tussen licht en schaduw. Geboren uit beide krachten, gekozen door geen. Wie zich bij Spark voegt, kiest balans boven dogma en groei boven gelijk.",
+      "tagline": "Bewaker van de Balans",
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 1000
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {"wijsheid": 2, "snelheid": 0, "kracht": 0, "gold_per_dag": 0},
+        "beschrijving": "Spark-leden in een leidende stad krijgen +2 Wijsheid."
+      },
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "licht",
@@ -18,7 +38,17 @@
       "alignment": "licht",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Hoofd-fractie van het licht."
+      "beschrijving": "Hoofd-fractie van het licht.",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "schaduw",
@@ -28,7 +58,17 @@
       "alignment": "schaduw",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Hoofd-fractie van de schaduw."
+      "beschrijving": "Hoofd-fractie van de schaduw.",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "vuur",
@@ -38,7 +78,17 @@
       "alignment": "licht",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Element Vuur (Licht-aligned)."
+      "beschrijving": "Element Vuur (Licht-aligned).",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "lucht",
@@ -48,7 +98,17 @@
       "alignment": "licht",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Element Lucht (Licht-aligned)."
+      "beschrijving": "Element Lucht (Licht-aligned).",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "water",
@@ -58,7 +118,17 @@
       "alignment": "schaduw",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Element Water (Schaduw-aligned)."
+      "beschrijving": "Element Water (Schaduw-aligned).",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "aarde",
@@ -68,7 +138,17 @@
       "alignment": "schaduw",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Element Aarde (Schaduw-aligned)."
+      "beschrijving": "Element Aarde (Schaduw-aligned).",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "natuur",
@@ -78,7 +158,17 @@
       "alignment": "licht",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Natuur (Licht-aligned, niet-element). Tegenpool van Barbaren."
+      "beschrijving": "Natuur (Licht-aligned, niet-element). Tegenpool van Barbaren.",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "barbaren",
@@ -88,7 +178,17 @@
       "alignment": "schaduw",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Barbaren (Schaduw-aligned, niet-element). Tegenpool van Natuur."
+      "beschrijving": "Barbaren (Schaduw-aligned, niet-element). Tegenpool van Natuur.",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.05,
+      "tax_rate_leden": 0.02
     },
     {
       "id": "neutraal",
@@ -98,7 +198,17 @@
       "alignment": "—",
       "leider": "—",
       "is_main": false,
-      "beschrijving": "Veroverbare regio. Nog geen fractie geclaimd."
+      "beschrijving": "Veroverbare regio. Nog geen fractie geclaimd.",
+      "leider_naam": "",
+      "leider_user_id": null,
+      "banner_image_url": null,
+      "icon_image_url": null,
+      "introductie": "Een gebied zonder eigenaar. Wachtend op de eerste vlag in de grond.",
+      "tagline": "",
+      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
+      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "tax_rate_stad": 0.0,
+      "tax_rate_leden": 0.0
     }
   ]
 }

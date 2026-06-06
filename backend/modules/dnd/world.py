@@ -90,6 +90,43 @@ def _load_provincies() -> List[dict]:
     return data.get("provincies", [])
 
 
+STEDEN_FILE = DATA_ROOT / "dnd" / "steden.json"
+
+
+def _load_steden() -> List[dict]:
+    """v6_dnd_fracties_tab_001 — laad steden.json (kan leeg zijn)."""
+    STEDEN_FILE.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(STEDEN_FILE, default={"steden": []})
+    return data.get("steden", []) or []
+
+
+def _compute_fractie_stats(fracties: List[dict], steden: List[dict]) -> List[dict]:
+    """Aggregeer fractie-stats over alle steden:
+    - aanhangers_total = sum van fractie_invloed[f.id].aanhangers over alle steden
+    - leidende_steden_count = aantal steden waar leidende_fractie_id == f.id
+    - gebouwen_total = sum gebouwen die deze fractie bezit
+    Eigen 'goud' blijft uit fracties.json (treasury), niet auto-overschreven.
+    """
+    out = []
+    for f in fracties:
+        fid = f.get("id")
+        aanh = 0
+        geb = 0
+        for s in steden:
+            inv = (s.get("fractie_invloed") or {}).get(fid) or {}
+            aanh += int(inv.get("aanhangers") or 0)
+            geb += int(inv.get("gebouwen") or 0)
+        leidend = sum(1 for s in steden if s.get("leidende_fractie_id") == fid)
+        f2 = dict(f)
+        stats = dict(f.get("stats") or {})
+        stats["aanhangers_total"] = aanh
+        stats["leidende_steden_count"] = leidend
+        stats["gebouwen_total"] = geb
+        f2["stats"] = stats
+        out.append(f2)
+    return out
+
+
 # ===== MODELS =====
 class ProvincieUpdate(BaseModel):
     id: str
@@ -113,6 +150,59 @@ async def get_rarities():
 @router.get("/fracties")
 async def get_fracties():
     return {"fracties": _load_fracties()}
+
+
+# v6_dnd_fracties_tab_001 — fracties met live-aggregated stats vanuit steden.json
+@router.get("/fracties/full")
+async def get_fracties_full():
+    """Fracties + automatisch berekende stats (aanhangers, leidende steden, gebouwen).
+    Voor de Fracties-tab UI."""
+    fracties = _load_fracties()
+    steden = _load_steden()
+    fracties_enriched = _compute_fractie_stats(fracties, steden)
+    return {
+        "fracties": fracties_enriched,
+        "steden_count": len(steden),
+    }
+
+
+# v6_dnd_fracties_tab_001 — steden lijst
+@router.get("/steden")
+async def get_steden():
+    """Alle steden + minimal provincie/fractie info voor map en lijsten."""
+    steden = _load_steden()
+    provincies = _load_provincies()
+    prov_by_id = {p["id"]: p for p in provincies}
+    out = []
+    for s in steden:
+        prov = prov_by_id.get(s.get("provincie_id")) or {}
+        out.append({
+            **s,
+            "provincie_naam": prov.get("naam", ""),
+        })
+    return {"steden": out, "provincies": provincies, "fracties": _load_fracties()}
+
+
+@router.get("/steden/{stad_id}")
+async def get_stad(stad_id: str):
+    """Volledig detail van één stad, inclusief fractie-info."""
+    steden = _load_steden()
+    s = next((x for x in steden if x.get("id") == stad_id), None)
+    if not s:
+        raise HTTPException(404, f"Stad '{stad_id}' niet gevonden")
+    fracties = {f["id"]: f for f in _load_fracties()}
+    invloed_ranked = sorted(
+        ((fid, inv) for fid, inv in (s.get("fractie_invloed") or {}).items()),
+        key=lambda x: -(x[1].get("aanhangers", 0) or 0)
+    )
+    return {
+        "stad": s,
+        "leidende_fractie": fracties.get(s.get("leidende_fractie_id")),
+        "fractie_ranking": [
+            {"fractie": fracties.get(fid), "invloed": inv}
+            for fid, inv in invloed_ranked
+        ],
+    }
 
 
 @router.get("/provincies")

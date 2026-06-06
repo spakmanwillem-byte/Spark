@@ -1524,27 +1524,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
 
   return (
     <PaperPanel>
-      <PaperHeader right={
-        <div className="flex items-center gap-1">
-          {/* v6_spark_world_kaart_btn_001 — Kaart Bekijken voor iedereen */}
-          <button data-testid="map-kaart-bekijken-btn" onClick={() => setShowLandkaart(true)}
-            className="text-[9px] px-1.5 py-0.5 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200">
-            Kaart Bekijken
-          </button>
-          {isAdmin && (
-            <button data-testid="map-edit-toggle" onClick={() => setEditMode(!editMode)}
-              className={`text-[9px] px-1.5 py-0.5 rounded border ${editMode ? 'border-amber-400 bg-amber-500/30 text-amber-100' : 'border-amber-700/40 text-amber-300 hover:bg-amber-900/30'}`}>
-              {editMode ? '✓ klaar' : '✏ sleep'}
-            </button>
-          )}
-          {isAdmin && editMode && (
-            <button data-testid="map-reset-btn" onClick={resetAll}
-              className="text-[9px] px-1.5 py-0.5 rounded border border-red-700/40 text-red-300 hover:bg-red-900/30">
-              reset
-            </button>
-          )}
-        </div>
-      }>SPARK WORLD · 12 PROVINCIES</PaperHeader>
+      <PaperHeader>SPARK WORLD · 12 PROVINCIES</PaperHeader>
 
       <div className="relative p-2 select-none">
         <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-72"
@@ -1558,9 +1538,10 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           {/* Provincie shields — v6_map_avatars_001: avatar-circle als beschikbaar, anders shield */}
           {provincies.map(p => {
             const f = fractieOf(p.fractie_id);
+            // v6_map_markers_uniform_001 — alle markers zelfde grootte, geen glow
             const isMain = p.fractie_id === 'spark';
+            const baseR = 4.0;
             const isSelected = selectedProv === p.id;
-            const baseR = isMain ? 5.5 : 4.2;
             const glowColor = f.kleur || '#94a3b8';
             // v6_map_avatars_002 — Dorp/Stad avatar per provincie. Groei-logica:
             //   spark hoofdstad → 'basis stad' avatar (groot/hoofdstad)
@@ -1573,13 +1554,12 @@ function MiniMapPanel({ char, userId, isAdmin }) {
               <g key={p.id} data-testid={`prov-${p.id}`}
                 onPointerDown={(e) => onPointerDown(e, p.id)}
                 style={{ cursor: editMode ? 'grab' : 'pointer' }}>
-                {/* Buitenring (gloeie kring fractie-kleur) */}
-                <circle cx={p.x_pct} cy={p.y_pct} r={baseR + 1.8}
+                {/* Buitenring (subtiel, geen drop-shadow glow) */}
+                <circle cx={p.x_pct} cy={p.y_pct} r={baseR + 1.2}
                   fill="none"
                   stroke={glowColor}
-                  strokeWidth="0.6"
-                  opacity="0.5"
-                  style={{ filter: `drop-shadow(0 0 ${isMain ? 5 : 3}px ${glowColor})` }} />
+                  strokeWidth="0.4"
+                  opacity="0.35" />
                 {/* Avatar-circle als bewoner aanwezig, anders fractie-shield */}
                 {avatarUrl ? (
                   <>
@@ -1596,20 +1576,19 @@ function MiniMapPanel({ char, userId, isAdmin }) {
                     <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
                       fill="none"
                       stroke={isSelected ? '#fde68a' : glowColor}
-                      strokeWidth={isSelected ? 0.9 : 0.6}
-                      style={{ filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})` }} />
+                      strokeWidth={isSelected ? 0.8 : 0.5}
+                      opacity="0.75" />
                   </>
                 ) : (
                   <>
                     <circle cx={p.x_pct} cy={p.y_pct} r={baseR}
                       fill={glowColor}
                       stroke={isSelected ? '#fde68a' : '#000'}
-                      strokeWidth={isSelected ? 0.9 : 0.5}
-                      opacity={p.fractie_id === 'neutraal' ? 0.6 : 0.95}
-                      style={{ filter: `drop-shadow(0 0 ${isMain ? 6 : 3}px ${glowColor})` }} />
-                    <circle cx={p.x_pct} cy={p.y_pct} r={isMain ? 1.8 : 1.3}
-                      fill={isMain ? '#fde68a' : '#fef3c7'}
-                      opacity="0.9" />
+                      strokeWidth={isSelected ? 0.8 : 0.4}
+                      opacity={p.fractie_id === 'neutraal' ? 0.55 : 0.85} />
+                    <circle cx={p.x_pct} cy={p.y_pct} r={1.3}
+                      fill="#fef3c7"
+                      opacity="0.85" />
                   </>
                 )}
                 {/* Speler-glow-dot — pulse op huidige locatie */}
@@ -1626,7 +1605,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
                 )}
                 {/* Label */}
                 <text x={p.x_pct} y={p.y_pct + baseR + 2.4} textAnchor="middle"
-                  fill="#fde68a" fontSize={isMain ? 2.6 : 2.0}
+                  fill="#fde68a" fontSize={2.2}
                   fontFamily="serif" fontWeight={isMain ? 'bold' : 'normal'}
                   style={{ paintOrder: 'stroke', stroke: '#000', strokeWidth: 0.5, pointerEvents: 'none' }}>
                   {p.hoofdstad}
@@ -1665,15 +1644,14 @@ function MiniMapPanel({ char, userId, isAdmin }) {
         )}
 
         {!selProv && (
-          <div className="border-t border-amber-900/40 pt-1.5 mt-1">
-            <p className="text-[9px] uppercase tracking-wider text-amber-500/70">Huidige Locatie</p>
-            <p data-testid="nl-current-location" className="text-[11px] text-amber-100 font-serif">
-              {char.locatie_naam || 'Stormhaven'} · Fractie Spark
-            </p>
-            <p className="text-[8px] text-amber-400/60 italic mt-0.5">
-              {editMode ? '🖱 Sleep shields om te verplaatsen · klik = selecteren' :
-               (isAdmin ? '✏ om te slepen · klik shield voor fractie-toewijzing' : 'Klik een provincie voor info')}
-            </p>
+          <div className="border-t border-amber-900/40 pt-1.5 mt-1 flex justify-end">
+            <button
+              data-testid="map-kaart-bekijken-btn"
+              onClick={() => setShowLandkaart(true)}
+              className="text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200 font-bold uppercase tracking-wider"
+            >
+              Kaart Bekijken
+            </button>
           </div>
         )}
       </div>

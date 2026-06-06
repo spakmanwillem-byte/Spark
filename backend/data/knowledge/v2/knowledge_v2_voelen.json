@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 415,
+    "card_count": 421,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-05T22:53:18.066977+00:00",
+    "last_updated": "2026-06-06T20:33:41.611214+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -56691,6 +56691,942 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-05T22:53:16.156007+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-25dba075",
+      "begrip": "Lastig",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Lastig betekent dat iets moeilijk te begrijpen, uit te voeren of op te lossen is.",
+        "laag2": "Het geeft aan dat iets extra moeite, aandacht of tijd kost.",
+        "laag3": "Lastig beschrijft een situatie, taak, probleem of onderwerp dat niet direct eenvoudig is. Dit kan komen door complexiteit, gebrek aan ervaring, onduidelijke informatie of hoge eisen. Wat voor de ene persoon lastig is, kan voor een ander eenvoudig zijn, afhankelijk van kennis, vaardigheden en omstandigheden.",
+        "laag4": "Lastig is een signaal dat extra inspanning of ondersteuning nodig kan zijn. Het betekent niet dat iets onmogelijk is, maar dat er een obstakel of uitdaging aanwezig is. Door te oefenen, informatie te verzamelen of hulp te krijgen kan iets dat lastig was later makkelijker worden. Binnen Spark kan \"lastig\" gebruikt worden als indicator voor weerstand, leermomenten of verhoogde complexiteit binnen een proces."
+      },
+      "ws5": {
+        "wie": "Mensen, gebruikers, leerlingen, systemen",
+        "wat": "Een ervaring van moeilijkheid of uitdaging",
+        "wanneer": "Bij onbekende, complexe of veeleisende situaties",
+        "waar": "Tijdens leren, werken, communiceren en probleemoplossing",
+        "waarom": "Omdat iets extra kennis, vaardigheid, tijd of inspanning vraagt",
+        "hoe": "Door obstakels, complexiteit, onduidelijkheid of gebrek aan ervaringren"
+      },
+      "tags": [
+        "lastig",
+        "moeilijk",
+        "uitdaging",
+        "complexiteit",
+        "inspanning",
+        "weerstand",
+        "probleem",
+        "leren",
+        "begrip",
+        "obstakel",
+        "aandacht",
+        "moeite"
+      ],
+      "topic": "bewustzijn",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b2186d7c",
+          "begrip": "Moeilijk",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "inspanning",
+            "leren",
+            "moeilijk",
+            "probleem",
+            "uitdaging"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5d80886",
+          "begrip": "moeite",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "inspanning",
+            "leren",
+            "moeite",
+            "uitdaging"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-948732a8",
+          "begrip": "uitdaging",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "inspanning",
+            "leren",
+            "uitdaging"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d0e02013",
+          "begrip": "luisteren",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "begrip",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c6cc6198",
+          "begrip": "Moeizaam",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "inspanning",
+            "lastig",
+            "moeite"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T19:05:16.703132+00:00",
+        "vorige_versie_v1": "snap-82f6d508",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:38.702920+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:05:14.593496+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:05:14.603236+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:05:17.209514+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:05:17.249687+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T19:05:14.293920+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d2fcdfb7",
+      "begrip": "Ik hou van stroopwafels",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "\"Ik hou van stroopwafels\" betekent dat iemand stroopwafels erg lekker vindt.",
+        "laag2": "De zin wordt gebruikt om een persoonlijke voorkeur of smaak uit te drukken.",
+        "laag3": "\"Ik hou van stroopwafels\" is een uitspraak waarmee iemand aangeeft positieve gevoelens of waardering te hebben voor stroopwafels. Het beschrijft een persoonlijke voorkeur en vertelt iets over wat iemand graag eet of waardeert.",
+        "laag4": "Deze uitspraak bevat informatie over iemands smaak en voorkeuren. In systemen zoals Spark kan dit worden opgeslagen als persoonlijke kennis, zodat voorkeuren later kunnen worden herkend en gebruikt. Vergelijkbare uitspraken zijn bijvoorbeeld \"Ik hou van pizza\" of \"Ik hou van muziek\"."
+      },
+      "ws5": {
+        "wie": "Een persoon die zijn voorkeur uitspreekt.",
+        "wat": "Een uitspraak over een persoonlijke voorkeur.",
+        "wanneer": "Wanneer iemand vertelt wat hij lekker of prettig vindt.",
+        "waar": "In gesprekken, profielen of persoonlijke communicatie.",
+        "waarom": "Door te zeggen waar men van houdt.",
+        "hoe": "Door aan te geven waar men van houdt"
+      },
+      "tags": [
+        "voorkeur",
+        "smaak",
+        "eten",
+        "stroopwafel",
+        "uitspraak",
+        "persoonlijk",
+        "lekker",
+        "waardering",
+        "gevoel"
+      ],
+      "topic": "voorkeur",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-03ddb67c",
+          "begrip": "Trots",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gevoel",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-aedfb395",
+          "begrip": "Leuk",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gevoel",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf66c3a6",
+          "begrip": "waar wordt jij verdrietig van",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gevoel",
+            "persoonlijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c760a1f1",
+          "begrip": "leuke",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "voorkeur",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8b1053d",
+          "begrip": "koekjes",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "eten",
+            "smaak"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T19:27:30.471194+00:00",
+        "vorige_versie_v1": "snap-23041db1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:35.501801+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:27:29.187757+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:27:29.197953+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:27:31.014107+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:27:31.024249+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T19:27:28.778974+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f936813b",
+      "begrip": "arrogantie",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Arrogantie is het gevoel of gedrag waarbij iemand zichzelf beter vindt dan anderen.",
+        "laag2": "Een arrogant persoon toont vaak weinig respect voor de kennis, mening of waarde van anderen.",
+        "laag3": "Arrogantie is een houding waarbij iemand zichzelf als belangrijker, slimmer of waardevoller beschouwt dan andere mensen. Dit kan zichtbaar worden door opscheppen, neerbuigend gedrag of het niet serieus nemen van anderen. Arrogantie wordt vaak als negatief ervaren omdat het samenwerking en wederzijds respect kan verstoren.\n",
+        "laag4": "Arrogantie ontstaat soms uit zelfvertrouwen, status of succes, maar kan ook een manier zijn om onzekerheid te verbergen. In sociale groepen kan arrogantie leiden tot conflicten, afstand of wantrouwen. Het tegenovergestelde van arrogantie wordt vaak gezien als bescheidenheid of nederigheid. Binnen Spark kan arrogantie worden gezien als een verstoring van gelijkwaardige informatie-uitwisseling doordat één perspectief zichzelf boven andere perspectieven plaatst.\n\n"
+      },
+      "ws5": {
+        "wie": "Mensen die zichzelf boven anderen plaatsen",
+        "wat": "Een houding van overdreven eigenwaarde of superioriteit",
+        "wanneer": "Wanneer iemand zichzelf belangrijker of beter vindt dan anderen",
+        "waar": "In sociale situaties, werk, onderwijs en groepen",
+        "waarom": "Door zelfoverschatting, statusgevoel of soms verborgen onzekerheid",
+        "hoe": "Door neerbuigend gedrag, opscheppen of het negeren van anderen"
+      },
+      "tags": [
+        "arrogantie",
+        "superioriteit",
+        "ego",
+        "trots",
+        "zelfoverschatting",
+        "houding",
+        "gedrag",
+        "respect",
+        "bescheidenheid",
+        "nederigheid",
+        "emotie",
+        "bang",
+        "boos"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c82f3134",
+          "begrip": "beledigd",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "gedrag",
+            "respect"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3772ab5a",
+          "begrip": "IJdelheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "ego",
+            "emotie",
+            "trots"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-009fbf90",
+          "begrip": "menselijk",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "gedrag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1bd85df1",
+          "begrip": "personen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "gedrag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-91e7fb2c",
+          "begrip": "gevoel",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "bang",
+            "boos",
+            "emotie",
+            "gedrag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T19:42:41.537727+00:00",
+        "vorige_versie_v1": "kb-skel-f936813b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:23.736580+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:42:39.603934+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:42:39.615042+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:42:42.095837+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:42:42.106217+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T19:42:39.272405+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-4ee498e7",
+      "begrip": "serieus",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Serieus betekent dat iets belangrijk is of zonder grap bedoeld wordt.",
+        "laag2": "Het geeft aan dat iemand aandachtig, oprecht of verantwoordelijk met iets omgaat.",
+        "laag3": "Serieus beschrijft een houding, situatie of onderwerp waarbij de nadruk ligt op ernst, betrouwbaarheid of belang. Iemand die serieus is, neemt een taak, gesprek of probleem aandachtig en verantwoordelijk op. Het tegenovergestelde van serieus is vaak speels, luchtig of grappig.\n",
+        "laag4": "Serieus zijn helpt bij het nemen van verantwoordelijkheid, het oplossen van problemen en het maken van belangrijke beslissingen. In communicatie kan het aangeven dat een uitspraak letterlijk bedoeld wordt en niet als grap. De mate van serieusheid verschilt per situatie; een noodsituatie vraagt meestal meer ernst dan een informeel gesprek.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, groepen of organisaties",
+        "wat": "Een houding van ernst, aandacht of verantwoordelijkheid",
+        "wanneer": "Bij belangrijke onderwerpen, taken of situaties",
+        "waar": "In gesprekken, werk, onderwijs en het dagelijks leven",
+        "waarom": "Om iets zorgvuldig, oprecht of verantwoord te behandelen",
+        "hoe": "Door aandachtig, eerlijk en geconcentreerd te handelen of communiceren"
+      },
+      "tags": [
+        "serieus",
+        "ernst",
+        "aandacht",
+        "verantwoordelijkheid",
+        "oprecht",
+        "belangrijk",
+        "concentratie",
+        "houding",
+        "betrouwbaar",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0742c1ed",
+          "begrip": "sorry",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-10d97373",
+          "begrip": "betrokkenheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "emotie",
+            "neutraal",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b090f8b",
+          "begrip": "houding",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "houding",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T19:57:04.554830+00:00",
+        "vorige_versie_v1": "kb-skel-4ee498e7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.337593+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:57:03.407653+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:57:03.449698+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T19:57:05.096955+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T19:57:05.151638+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T19:57:03.065154+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-51b7ca12",
+      "begrip": "verwondering",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verwondering is het gevoel van nieuwsgierige verbazing over iets bijzonders, onverwachts of indrukwekkends.",
+        "laag2": "Verwondering ontstaat wanneer iets je aandacht trekt en je meer wilt begrijpen of ontdekken.",
+        "laag3": "Verwondering is een emotionele en mentale reactie op iets dat nieuw, mooi, bijzonder of moeilijk te verklaren lijkt. Het kan ontstaan door natuur, kunst, wetenschap, verhalen, gebeurtenissen of inzichten. Verwondering stimuleert nieuwsgierigheid, leren en onderzoek doordat het mensen motiveert om vragen te stellen en verder te kijken.\n",
+        "laag4": "Verwondering vormt vaak het begin van leren, ontdekken en creativiteit. Veel wetenschappelijke ontdekkingen, kunstwerken en ideeën beginnen met de vraag: \"Hoe kan dat?\" of \"Waarom gebeurt dit?\". Verwondering helpt mensen open te staan voor nieuwe ervaringen en kennis.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die iets bijzonders of nieuws ervaart.",
+        "wat": "Een gevoel van nieuwsgierige verbazing.",
+        "wanneer": "Bij onverwachte, mooie of bijzondere ervaringen.",
+        "waar": "Overal waar mensen nieuwe dingen ontdekken of beleven.",
+        "waarom": "Omdat iets aandacht trekt en vragen oproept.",
+        "hoe": "Door iets waar te nemen dat verrast, inspireert of nieuwsgierig maakt."
+      },
+      "tags": [
+        "verwondering",
+        "verbazing",
+        "nieuwsgierigheid",
+        "ontdekking",
+        "verwonderen",
+        "inspiratie",
+        "leren",
+        "beleving",
+        "emotie",
+        "fascinatie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-c7aacfc7",
+          "begrip": "nieuwsgierigheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "fascinatie",
+            "leren",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-86777294",
+          "begrip": "inspiratie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "inspiratie",
+            "leren",
+            "nieuwsgierigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "leren",
+            "nieuwsgierigheid",
+            "ontdekking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-87deb2fd",
+          "begrip": "Kan jij een verhaal vertellen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "inspiratie",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-621c2a20",
+          "begrip": "openheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "leren",
+            "nieuwsgierigheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T20:30:47.823692+00:00",
+        "vorige_versie_v1": "kb-skel-51b7ca12",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.849890+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T20:30:46.195777+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T20:30:46.208078+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T20:30:48.463223+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T20:30:48.474322+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T20:30:45.863290+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-47d985eb",
+      "begrip": "mensgericht",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Mensgericht betekent dat de behoeften, ervaringen en belangen van mensen centraal staan.",
+        "laag2": "Bij een mensgerichte aanpak wordt rekening gehouden met wat mensen nodig hebben, voelen en ervaren",
+        "laag3": "Mensgericht verwijst naar een manier van denken, ontwerpen of handelen waarbij de mens centraal staat. Beslissingen, producten, diensten of processen worden afgestemd op gebruiksgemak, welzijn, veiligheid en de behoeften van mensen. Een mensgerichte benadering wordt veel toegepast in zorg, onderwijs, dienstverlening, technologie en ontwerp.\n",
+        "laag4": "Mensgericht werken helpt systemen en organisaties beter aan te sluiten op de mensen waarvoor ze bedoeld zijn. Door aandacht te geven aan ervaringen, wensen en beperkingen van gebruikers ontstaat vaak meer betrokkenheid, begrip en effectiviteit. Binnen complexe systemen vormt mensgerichtheid een balans tussen techniek, processen en menselijke behoeften.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, gebruikers, klanten, patiënten, leerlingen of medewerkers",
+        "wat": "Een benadering waarbij de mens centraal staat",
+        "wanneer": "Bij ontwerp, besluitvorming, dienstverlening en samenwerking",
+        "waar": "In organisaties, zorg, onderwijs, technologie en dagelijks leven",
+        "waarom": "Om beter aan te sluiten bij menselijke behoeften en ervaringen",
+        "hoe": "Door rekening te houden met wensen, gedrag, mogelijkheden en welzijn van mensen"
+      },
+      "tags": [
+        "mensgericht",
+        "gebruiker",
+        "mens",
+        "behoeften",
+        "welzijn",
+        "empathie",
+        "gebruiksvriendelijk",
+        "dienstverlening",
+        "ontwerp",
+        "samenwerking",
+        "ervaring",
+        "betrokkenheid",
+        "communicatie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-f55b8561",
+          "begrip": "sociale interactie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betrokkenheid",
+            "communicatie",
+            "ervaring",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c5b31925",
+          "begrip": "uitwisseling",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betrokkenheid",
+            "communicatie",
+            "ervaring",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1dabc101",
+          "begrip": "Empathie",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "empathie",
+            "mens"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8d9261ff",
+          "begrip": "verbondenheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "betrokkenheid",
+            "samenwerking",
+            "welzijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c25c50b",
+          "begrip": "Persoonlijk",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "ervaring",
+            "mens"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-06T20:33:41.611157+00:00",
+        "vorige_versie_v1": "kb-skel-47d985eb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.207310+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T20:33:40.640505+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T20:33:40.673042+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-06T20:33:42.150234+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-06T20:33:42.171256+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-06T20:33:40.301979+00:00"
       },
       "media": {
         "voice_url": null,

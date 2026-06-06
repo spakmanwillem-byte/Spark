@@ -1,0 +1,2268 @@
+{
+  "users": {
+    "user-001": {
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.05,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.05
+          },
+          "created_at": "2026-06-03T14:02:40.628836+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-06-03T16:00:12.515814+00:00",
+              "side": "BUY",
+              "price": 212.91003600678152,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-000821a24e48",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "SELL @ €215.04 | netto €+0.050",
+          "live_value": 10.05,
+          "unrealized_pnl": 0.0576,
+          "unrealized_pnl_pct": 1.076,
+          "current_price": 215.2
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628848+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628852+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628856+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628859+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628862+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628864+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628868+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628870+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628873+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628876+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628878+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "overflow_pool": 0.0,
+      "last_buy_cycle": 1,
+      "user_id": "user-001",
+      "market": "BCH-EUR",
+      "created_at": "2026-05-28T17:23:18.391617+00:00"
+    },
+    "user-1996fa59": {
+      "user_id": "user-1996fa59",
+      "market": "BCH",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628889+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628891+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628893+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628896+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628898+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628900+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628902+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628903+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628906+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628908+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628910+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628912+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-19T15:26:14.306311+00:00"
+    },
+    "user-000": {
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": true,
+          "lock_reason": "staking_anchor",
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628916+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628918+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628920+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628922+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628925+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628927+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628930+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628932+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628934+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628936+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628938+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628941+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "overflow_pool": 0.0,
+      "last_buy_cycle": null,
+      "user_id": "user-000",
+      "market": "BCH-EUR",
+      "created_at": "2026-05-28T17:23:18.391617+00:00",
+      "_clean_slate": "28-mei-2026: was 10 potjes van €5.08 → nu 5 base potjes van €10 (per Willem)",
+      "eur_reserve_bitvavo": 72.4,
+      "_bitvavo_synced_at": "2026-05-28T17:27:21.724710+00:00",
+      "_bitvavo_total_eur": 122.33
+    },
+    "user-a0ee2d7e": {
+      "user_id": "user-a0ee2d7e",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628950+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628952+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628954+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628956+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628958+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628960+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628961+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628963+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628966+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628968+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628970+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628972+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-23T22:25:24.072168+00:00"
+    },
+    "user-c609d7d1": {
+      "user_id": "user-c609d7d1",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628975+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628977+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628979+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628981+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628983+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628985+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628987+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628989+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628991+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628994+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628995+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.628998+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-28T14:08:14.265031+00:00"
+    },
+    "user-5dd295db": {
+      "user_id": "user-5dd295db",
+      "market": "BCH",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629001+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629003+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629005+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629007+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629009+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629011+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629013+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629015+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629017+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629019+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629021+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629023+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-29T12:18:09.536768+00:00"
+    },
+    "user-4d9b59aa": {
+      "user_id": "user-4d9b59aa",
+      "market": "BCH-EUR",
+      "potjes": [
+        {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629031+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629033+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629035+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629227+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629231+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629233+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629235+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629237+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629239+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629241+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629244+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        },
+        {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 10.0,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": null,
+          "stats": {
+            "trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "total_pnl": 0.0
+          },
+          "created_at": "2026-06-03T14:02:40.629246+00:00",
+          "trade_log": [],
+          "last_action": "",
+          "live_value": 10.0
+        }
+      ],
+      "last_buy_cycle": null,
+      "overflow_pool": 0.0,
+      "created_at": "2026-05-29T15:30:24.727439+00:00"
+    }
+  },
+  "_pre_deploy_reset_at": "2026-06-03T14:02:40.629249+00:00"
+}

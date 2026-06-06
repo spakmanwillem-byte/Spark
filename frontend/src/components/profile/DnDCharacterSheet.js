@@ -1386,7 +1386,7 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
   return (
     <PaperPanel>
       <PaperHeader>DORP</PaperHeader>
-      <div className="relative h-52 overflow-hidden">
+      <div className="relative h-52 overflow-hidden rounded-md m-2 group">
         {dorpImg ? (
           <img src={dorpImg} alt={dorpNaam}
             className="absolute inset-0 w-full h-full object-cover" />
@@ -1413,7 +1413,7 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
         <button
           data-testid="dorp-kaart-btn"
           onClick={onNavigateMap}
-          className="absolute bottom-2 right-2 text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200">
+          className="absolute bottom-2 right-2 text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
           Kaart Bekijken
         </button>
       </div>
@@ -1527,11 +1527,12 @@ function MiniMapPanel({ char, userId, isAdmin }) {
       <PaperHeader>SPARK WORLD · 12 PROVINCIES</PaperHeader>
 
       <div className="relative p-2 select-none">
-        <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-72"
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerLeave={onPointerUp}
-          style={{ touchAction: 'none', cursor: dragging ? 'grabbing' : 'default' }}>
+        <div className="relative rounded-md overflow-hidden group">
+          <svg ref={svgRef} viewBox="0 0 100 100" className="w-full h-72 block"
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerLeave={onPointerUp}
+            style={{ touchAction: 'none', cursor: dragging ? 'grabbing' : 'default' }}>
           <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
             preserveAspectRatio="xMidYMid slice" />
 
@@ -1614,6 +1615,15 @@ function MiniMapPanel({ char, userId, isAdmin }) {
             );
           })}
         </svg>
+          {/* v6_map_hover_btn_001 — Kaart Bekijken bij hover, net als Dorp */}
+          <button
+            data-testid="map-kaart-bekijken-btn"
+            onClick={() => setShowLandkaart(true)}
+            className="absolute bottom-2 right-2 text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            Kaart Bekijken
+          </button>
+        </div>
 
         {/* Selected provincie detail */}
         {selProv && (
@@ -1640,18 +1650,6 @@ function MiniMapPanel({ char, userId, isAdmin }) {
                 ))}
               </div>
             )}
-          </div>
-        )}
-
-        {!selProv && (
-          <div className="border-t border-amber-900/40 pt-1.5 mt-1 flex justify-end">
-            <button
-              data-testid="map-kaart-bekijken-btn"
-              onClick={() => setShowLandkaart(true)}
-              className="text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200 font-bold uppercase tracking-wider"
-            >
-              Kaart Bekijken
-            </button>
           </div>
         )}
       </div>

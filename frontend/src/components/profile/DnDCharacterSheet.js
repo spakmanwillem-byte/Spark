@@ -380,7 +380,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             />
           </PaperPanel>
           {/* v6_dnd_layout_v2 — CharInfo verplaatst onder Body+Equipment (Willem 31 mei) */}
-          <CharInfoPanel char={char} activeTab={infoTab} setActiveTab={setInfoTab} />
+          <CharInfoPanel char={char} userId={userId} activeTab={infoTab} setActiveTab={setInfoTab} />
         </div>
 
         {/* === KOLOM MIDDEN: Karakter + Stats + Overig + Bewoners (2x3) === */}
@@ -393,9 +393,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             xpPerLvl={xpPerLvl}
             onOpenAvatarSettings={onOpenAvatarSettings}
           />
-          <StatsPanel title="STATISTIEKEN" stats={char.statistieken || {}} accent="#f59e0b" />
-          <StatsPanel title="AANVAL & VERDEDIGING" stats={char.aanval_verdediging || {}} accent="#dc2626" />
-          <OverigPanel char={char} userId={userId} />
+          {/* v6_charinfo_consolidate_001 — Stats/Aanval/Overig samengevoegd in CharInfoPanel-tabs */}
           {/* v6_dice_001 — Dobbelsteen-paneel met jouw 2 D&D-kaart-avatars */}
           <DiceRollerPanel userId={userId} stats={char.statistieken || {}} onRolled={reload} />
           {/* v6_bewoners_layout_002 — Bewoners-strip compact 2x3=6 in MID-kolom onder Overig */}
@@ -1707,13 +1705,52 @@ function EventFeedPanel({ feed, draft, setDraft, onSend }) {
   );
 }
 
-function CharInfoPanel({ char, activeTab, setActiveTab }) {
+function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
+  // v6_charinfo_consolidate_001 — tabs hernoemd + Aanval/Stats samengevouwen
   const tabs = [
     { id: 'char_info', label: 'CHAR INFO' },
-    { id: 'lore',      label: 'LORE' },
-    { id: 'quest_log', label: 'QUEST LOG' },
+    { id: 'aanval',    label: 'AANVAL & VERDEDIGING' },
+    { id: 'stats',     label: 'STATISTIEKEN' },
     { id: 'notas',     label: 'Notas' },
   ];
+
+  // RPS-battles/goud (was OverigPanel-content, nu in CHAR INFO tab)
+  const [rps, setRps] = React.useState({ battles_won: 0, battles_lost: 0, gold: 1000 });
+  React.useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/games/rps/stats?user_id=${userId}`)
+      .then(r => r.json())
+      .then(d => setRps({
+        battles_won: d.stats?.battles_won || 0,
+        battles_lost: d.stats?.battles_lost || 0,
+        gold: d.stats?.gold ?? 1000,
+      }))
+      .catch(() => {});
+  }, [userId]);
+
+  const STAT_ICONS = {
+    'Kracht': '✦', 'Behendigheid': '✕', 'Intelligentie': '☉',
+    'Conditie': '♥', 'Wilskracht': '⚑', 'Geluk': '✧',
+    'Aanvalskracht': '⚔', 'Verdediging': '🛡', 'Magie Kracht': '✺',
+    'Crit. Kans': '✷', 'Beweging': '➤', 'Initiatief': '⟳',
+  };
+  const renderStats = (stats, accent) => (
+    <div className="space-y-1.5">
+      {Object.entries(stats || {}).map(([k, v]) => (
+        <div key={k} data-testid={`stat-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
+          className="flex items-center justify-between text-xs">
+          <span className="flex items-center gap-1.5 text-amber-200/90">
+            <span style={{ color: accent }}>{STAT_ICONS[k] || '•'}</span>
+            {k}
+          </span>
+          <span className="font-mono font-bold text-amber-100">
+            {typeof v === 'number' && k.includes('Kans') ? `${v}%` : v}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <PaperPanel>
       <div className="flex border-b border-amber-900/40">
@@ -1738,6 +1775,8 @@ function CharInfoPanel({ char, activeTab, setActiveTab }) {
             <Row k="Beroep"  v={char.beroep  || '—'} />
             <Row k="Fractie" v={char.fractie || '—'} />
             <Row k="Locatie" v={char.locatie_naam || '—'} />
+            <Row k="Battles" v={`${rps.battles_won} W · ${rps.battles_lost} L`} />
+            <Row k="Goud"    v={`${rps.gold}`} />
             {char.bio && (
               <>
                 <p className="text-amber-400/70 mt-2 mb-0.5">Bio:</p>
@@ -1746,12 +1785,8 @@ function CharInfoPanel({ char, activeTab, setActiveTab }) {
             )}
           </div>
         )}
-        {activeTab === 'lore' && (
-          <p className="italic text-amber-400/60">Lore-fragmenten verschijnen hier zodra je ze ontdekt in Spark World.</p>
-        )}
-        {activeTab === 'quest_log' && (
-          <p className="italic text-amber-400/60">Geen actieve quests. Spark zal er een aanbieden bij gedragspatronen.</p>
-        )}
+        {activeTab === 'aanval' && renderStats(char.aanval_verdediging, '#dc2626')}
+        {activeTab === 'stats' && renderStats(char.statistieken, '#f59e0b')}
         {activeTab === 'notas' && (
           <p className="italic text-amber-400/60">Persoonlijke aantekeningen — komt binnenkort.</p>
         )}

@@ -41,13 +41,13 @@ function PaperHeader({ children, right }) {
 }
 
 // ============================================================
-// MAIN PANEL
+// MAIN PANEL — tabs-stijl zoals CharInfo (horizontaal, fractie per tab)
 // ============================================================
 export function FractiesKaderPanel() {
   const [fracties, setFracties] = useState([]);
   const [steden, setSteden] = useState([]);
   const [provincies, setProvincies] = useState([]);
-  const [openFractie, setOpenFractie] = useState(null);
+  const [activeFid, setActiveFid] = useState('spark');
   const [openStad, setOpenStad] = useState(null);
   const [openLandkaart, setOpenLandkaart] = useState(false);
 
@@ -63,39 +63,139 @@ export function FractiesKaderPanel() {
       });
   }, []);
 
+  const active = fracties.find(f => f.id === activeFid) || fracties[0];
+  const activeColor = active?.kleur || '#94a3b8';
+  const stedenVanFractie = steden.filter(s => s.leidende_fractie_id === activeFid);
+
   return (
     <PaperPanel>
-      <PaperHeader right={
+      {/* Tab-rij: 10 fracties als horizontale tabs (kleur-strip onder) */}
+      <div className="flex border-b border-amber-900/40 overflow-x-auto">
+        {fracties.map(f => {
+          const a = f.id === activeFid;
+          const color = f.kleur || '#94a3b8';
+          return (
+            <button
+              key={f.id}
+              data-testid={`fractie-tab-${f.id}`}
+              onClick={() => setActiveFid(f.id)}
+              className={`flex-shrink-0 px-2.5 py-1.5 text-[10px] uppercase tracking-wider transition-colors relative ${
+                a ? 'text-amber-100 bg-amber-900/20' : 'text-amber-500/60 hover:text-amber-300'
+              }`}
+              title={f.naam}
+            >
+              {f.naam}
+              {a && (
+                <span
+                  className="absolute bottom-0 left-0 right-0 h-[2px]"
+                  style={{ background: color }}
+                />
+              )}
+            </button>
+          );
+        })}
+        {/* Landkaart-knop rechts */}
         <button
           data-testid="fracties-open-landkaart-btn"
           onClick={() => setOpenLandkaart(true)}
-          className="flex items-center gap-1.5 px-2 py-0.5 rounded border border-amber-700/40 bg-amber-900/20 text-amber-300 hover:bg-amber-900/40 text-[10px] font-bold uppercase tracking-wider transition-colors"
+          className="ml-auto flex-shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-[10px] uppercase tracking-wider text-amber-300 hover:text-amber-100 hover:bg-amber-900/20 border-l border-amber-900/40 transition-colors"
         >
           <Map className="w-3 h-3" />
           Landkaart
         </button>
-      }>FRACTIES · STORMHAVEN ({fracties.length})</PaperHeader>
-
-      <div className="p-2 space-y-1.5">
-        {fracties.map(f => (
-          <FractieRij
-            key={f.id}
-            fractie={f}
-            stedenCount={steden.filter(s => s.leidende_fractie_id === f.id).length}
-            onClick={() => setOpenFractie(f)}
-          />
-        ))}
       </div>
 
-      {/* Modals */}
-      {openFractie && (
-        <FractieDetailBark
-          fractie={openFractie}
-          steden={steden.filter(s => s.leidende_fractie_id === openFractie.id)}
-          onClose={() => setOpenFractie(null)}
-          onOpenStad={(s) => { setOpenFractie(null); setOpenStad(s); }}
-        />
+      {/* Content — actieve fractie */}
+      {active && (
+        <div className="p-3 text-[11px] text-amber-100/90 leading-relaxed min-h-[180px]">
+          {/* Header: banner-strip met naam, tagline, leider, kleur-icoon */}
+          <div
+            className="flex items-center gap-3 mb-3 p-2 rounded border-2"
+            style={{
+              background: `linear-gradient(90deg, ${activeColor}30, ${activeColor}05)`,
+              borderColor: `${activeColor}50`,
+            }}
+          >
+            <div
+              className="w-10 h-10 rounded flex items-center justify-center text-lg font-bold flex-shrink-0"
+              style={{ background: activeColor, color: '#0f172a' }}
+            >
+              {active.icon_image_url ? (
+                <img src={`${API}${active.icon_image_url}`} alt="" className="w-full h-full object-cover rounded" />
+              ) : active.naam[0]}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-bold text-amber-100 font-serif">{active.naam}</div>
+              {active.tagline && (
+                <div className="text-[10px] italic text-amber-300/70 truncate">{active.tagline}</div>
+              )}
+            </div>
+          </div>
+
+          {/* Intro */}
+          {active.introductie ? (
+            <p className="text-[11px] text-amber-100/85 mb-3 italic">{active.introductie}</p>
+          ) : (
+            <p className="text-[11px] italic text-amber-400/40 mb-3">Geen introductie ingevuld in fracties.json</p>
+          )}
+
+          {/* Stats-rij (horizontaal) */}
+          <div className="grid grid-cols-4 gap-1.5 mb-3">
+            <MiniStat icon={Crown} label="Leider" value={active.leider_naam || active.leider || '—'} accent={activeColor} />
+            <MiniStat icon={Users} label="Aanhangers" value={active.stats?.aanhangers_total ?? 0} accent={activeColor} />
+            <MiniStat icon={Building} label="Steden" value={stedenVanFractie.length} accent={activeColor} />
+            <MiniStat icon={Coins} label="Goud" value={active.stats?.goud ?? 0} accent={activeColor} />
+          </div>
+
+          {/* Stads-bonus + leidende steden naast elkaar */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {/* Bonus */}
+            {active.stads_bonus?.beschrijving ? (
+              <div className="p-2 rounded border" style={{ borderColor: `${activeColor}40`, background: `${activeColor}10` }}>
+                <div className="flex items-center gap-1 mb-1">
+                  <Sparkles className="w-3 h-3" style={{ color: activeColor }} />
+                  <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: activeColor }}>Stads-bonus</span>
+                </div>
+                <p className="text-[11px] text-amber-100/85">{active.stads_bonus.beschrijving}</p>
+              </div>
+            ) : (
+              <div className="p-2 rounded border border-stone-800 bg-stone-950/30">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-stone-500">Stads-bonus</span>
+                <p className="text-[11px] italic text-stone-600 mt-1">Niet ingesteld</p>
+              </div>
+            )}
+
+            {/* Leidende steden */}
+            <div className="p-2 rounded border border-stone-800 bg-stone-950/30">
+              <div className="text-[9px] font-bold uppercase tracking-wider text-amber-300/70 mb-1">
+                Leidende steden ({stedenVanFractie.length})
+              </div>
+              {stedenVanFractie.length === 0 ? (
+                <p className="text-[11px] italic text-stone-600">Geen.</p>
+              ) : (
+                <div className="space-y-1 max-h-32 overflow-y-auto">
+                  {stedenVanFractie.map(s => (
+                    <button
+                      key={s.id}
+                      data-testid={`leidende-stad-${s.id}`}
+                      onClick={() => setOpenStad(s)}
+                      className="w-full text-left px-1.5 py-1 rounded bg-stone-900/40 hover:bg-stone-900/80 border border-stone-800 hover:border-stone-700 transition-colors flex items-center justify-between"
+                    >
+                      <div className="min-w-0">
+                        <div className="text-[11px] font-bold text-amber-100 truncate">{s.naam}</div>
+                        <div className="text-[9px] text-stone-500 truncate">{s.provincie_naam}</div>
+                      </div>
+                      <ChevronRight className="w-3 h-3 text-stone-600 flex-shrink-0" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
+
+      {/* Modals */}
       {openStad && (
         <StadDetailBark stadId={openStad.id} onClose={() => setOpenStad(null)} />
       )}
@@ -113,145 +213,8 @@ export function FractiesKaderPanel() {
 }
 
 // ============================================================
-// FRACTIE RIJ (compact strip)
+// MINI STAT (4-stats grid blok)
 // ============================================================
-function FractieRij({ fractie, stedenCount, onClick }) {
-  const color = fractie.kleur || '#94a3b8';
-  const stats = fractie.stats || {};
-  return (
-    <button
-      data-testid={`fractie-rij-${fractie.id}`}
-      onClick={onClick}
-      className="w-full flex items-center gap-2 px-2 py-1.5 rounded border border-stone-800 bg-stone-900/40 hover:bg-stone-900/80 transition-colors text-left group"
-    >
-      {/* Kleur-strip + initiaal */}
-      <div
-        className="w-7 h-7 rounded-sm flex items-center justify-center text-xs font-bold flex-shrink-0"
-        style={{ background: color, color: '#0f172a' }}
-      >
-        {fractie.icon_image_url ? (
-          <img src={`${API}${fractie.icon_image_url}`} alt="" className="w-full h-full object-cover rounded-sm" />
-        ) : fractie.naam[0]}
-      </div>
-
-      {/* Naam + leider */}
-      <div className="flex-1 min-w-0">
-        <div className="text-xs font-bold text-stone-100 truncate">{fractie.naam}</div>
-        <div className="text-[10px] text-stone-500 truncate">
-          {fractie.leider_naam || fractie.leider || '—'}
-          {fractie.tagline && <span className="text-stone-600 italic"> · {fractie.tagline}</span>}
-        </div>
-      </div>
-
-      {/* Stats grid */}
-      <div className="flex items-center gap-2 text-[10px] text-stone-400">
-        <span className="flex items-center gap-0.5" title="Aanhangers">
-          <Users className="w-3 h-3 text-stone-500" />{stats.aanhangers_total ?? 0}
-        </span>
-        <span className="flex items-center gap-0.5" title="Leidende steden">
-          <Building className="w-3 h-3 text-stone-500" />{stedenCount}
-        </span>
-        <span className="flex items-center gap-0.5" title="Goud">
-          <Coins className="w-3 h-3 text-amber-500" />{stats.goud ?? 0}
-        </span>
-      </div>
-
-      <ChevronRight className="w-3 h-3 text-stone-600 group-hover:text-stone-300 transition-colors flex-shrink-0" />
-    </button>
-  );
-}
-
-// ============================================================
-// FRACTIE DETAIL BARK
-// ============================================================
-function FractieDetailBark({ fractie, steden, onClose, onOpenStad }) {
-  const color = fractie.kleur || '#94a3b8';
-  const stats = fractie.stats || {};
-  const bonus = fractie.stads_bonus || {};
-
-  return (
-    <BarkModal isOpen={true} onClose={onClose} title="" maxWidth="max-w-2xl">
-      <div className="space-y-3">
-        {/* Banner */}
-        <div
-          className="h-20 rounded-lg flex items-center justify-between px-4 relative overflow-hidden border-2"
-          style={{
-            background: `linear-gradient(135deg, ${color}40, ${color}10)`,
-            borderColor: `${color}60`,
-          }}
-        >
-          {fractie.banner_image_url && (
-            <img src={`${API}${fractie.banner_image_url}`} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-          )}
-          <div className="relative z-10">
-            <h2 className="text-xl font-bold text-white font-serif">{fractie.naam}</h2>
-            {fractie.tagline && <p className="text-xs text-white/70 italic mt-0.5">{fractie.tagline}</p>}
-          </div>
-          <div
-            className="relative z-10 w-12 h-12 rounded-lg flex items-center justify-center text-lg font-bold"
-            style={{ background: color, color: '#0f172a' }}
-          >
-            {fractie.naam[0]}
-          </div>
-        </div>
-
-        {/* Intro */}
-        <div className="p-2.5 rounded border border-stone-800 bg-stone-950/40">
-          <p className="text-xs text-stone-300 leading-relaxed">
-            {fractie.introductie || <span className="italic text-stone-500">Geen introductie ingevuld in fracties.json</span>}
-          </p>
-        </div>
-
-        {/* Stats row */}
-        <div className="grid grid-cols-4 gap-1.5">
-          <MiniStat icon={Crown} label="Leider" value={fractie.leider_naam || fractie.leider || '—'} accent={color} />
-          <MiniStat icon={Users} label="Aanhangers" value={stats.aanhangers_total ?? 0} accent={color} />
-          <MiniStat icon={Building} label="Gebouwen" value={stats.gebouwen_total ?? 0} accent={color} />
-          <MiniStat icon={Coins} label="Goud" value={stats.goud ?? 0} accent={color} />
-        </div>
-
-        {/* Stads-bonus */}
-        {bonus.beschrijving && (
-          <div className="p-2.5 rounded border" style={{ borderColor: `${color}40`, background: `${color}10` }}>
-            <div className="flex items-center gap-1.5 mb-1">
-              <Sparkles className="w-3.5 h-3.5" style={{ color }} />
-              <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color }}>Stads-bonus</span>
-            </div>
-            <p className="text-xs text-stone-300">{bonus.beschrijving}</p>
-          </div>
-        )}
-
-        {/* Leidende steden */}
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">
-            Leidende steden ({steden.length})
-          </div>
-          {steden.length === 0 ? (
-            <p className="text-xs italic text-stone-600">Geen steden waar deze fractie leidt.</p>
-          ) : (
-            <div className="grid grid-cols-2 gap-1.5">
-              {steden.map(s => (
-                <button
-                  key={s.id}
-                  data-testid={`leidende-stad-${s.id}`}
-                  onClick={() => onOpenStad(s)}
-                  className="text-left p-2 rounded border border-stone-800 bg-stone-900/40 hover:bg-stone-900/80 transition-colors flex items-center justify-between"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-stone-100">{s.naam}</div>
-                    <div className="text-[10px] text-stone-500">{s.provincie_naam} · {s.type}</div>
-                  </div>
-                  <ChevronRight className="w-3 h-3 text-stone-600" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </BarkModal>
-  );
-}
-
 function MiniStat({ icon: Icon, label, value, accent }) {
   return (
     <div className="p-1.5 rounded border border-stone-800 bg-stone-950/40">

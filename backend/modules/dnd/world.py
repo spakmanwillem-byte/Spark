@@ -307,14 +307,18 @@ MAX_IMAGE_MB = 8
 
 # Resource types met default-config (icon hint, kleur, beschrijving)
 RESOURCE_TYPES = [
-    {"id": "vis",    "naam": "Visgrond",  "kleur": "#3b82f6", "icon": "fish",       "beschrijving": "Visrijke wateren — kustlijn of meer."},
-    {"id": "bos",    "naam": "Bos",       "kleur": "#15803d", "icon": "tree",       "beschrijving": "Hout en wildbestand — duurzame oogst."},
-    {"id": "akker",  "naam": "Akker",     "kleur": "#ca8a04", "icon": "wheat",      "beschrijving": "Vruchtbare grond — graan en gewassen."},
-    {"id": "mijn",   "naam": "Mijn",      "kleur": "#737373", "icon": "pickaxe",    "beschrijving": "Ondergrondse rijkdom — erts en edelstenen."},
-    {"id": "weide",  "naam": "Weide",     "kleur": "#65a30d", "icon": "grass",      "beschrijving": "Grasland voor vee — wol en melk."},
-    {"id": "kruid",  "naam": "Kruidenveld","kleur": "#a3e635","icon": "leaf",       "beschrijving": "Geneeskrachtige kruiden — alchemie."},
-    {"id": "steen",  "naam": "Steengroeve","kleur": "#a8a29e","icon": "rock",       "beschrijving": "Bouwsteen voor stadsmuren en gebouwen."},
-    {"id": "anders", "naam": "Anders",    "kleur": "#94a3b8", "icon": "star",       "beschrijving": "Onbekende grondstof — admin om in te vullen."},
+    {"id": "vis",         "naam": "Visgrond",      "kleur": "#3b82f6", "icon": "fish",     "beschrijving": "Visrijke wateren — kustlijn of meer."},
+    {"id": "bos",         "naam": "Bos",           "kleur": "#15803d", "icon": "tree",     "beschrijving": "Hout en wildbestand — duurzame oogst."},
+    {"id": "akker",       "naam": "Akker",         "kleur": "#ca8a04", "icon": "wheat",    "beschrijving": "Vruchtbare grond — graan en gewassen."},
+    {"id": "mijn",        "naam": "Mijn",          "kleur": "#737373", "icon": "pickaxe",  "beschrijving": "Ondergrondse rijkdom — erts en edelstenen."},
+    {"id": "weide",       "naam": "Weide",         "kleur": "#65a30d", "icon": "grass",    "beschrijving": "Grasland voor vee — wol en melk."},
+    {"id": "kruid",       "naam": "Kruidenveld",   "kleur": "#a3e635", "icon": "leaf",     "beschrijving": "Geneeskrachtige kruiden — alchemie."},
+    {"id": "steen",       "naam": "Steengroeve",   "kleur": "#a8a29e", "icon": "rock",     "beschrijving": "Bouwsteen voor stadsmuren en gebouwen."},
+    {"id": "wild",        "naam": "Wildgebied",    "kleur": "#b45309", "icon": "boar",     "beschrijving": "Jachtterrein — vlees, vacht en gewei."},
+    {"id": "haven",       "naam": "Zeehaven",      "kleur": "#0e7490", "icon": "anchor",   "beschrijving": "Aanlegplaats voor schepen — handel over zee."},
+    {"id": "handelspost", "naam": "Handelspost",   "kleur": "#9333ea", "icon": "scale",    "beschrijving": "Knooppunt voor karavanen — handel over land."},
+    {"id": "rovers",      "naam": "Roverskamp",    "kleur": "#7f1d1d", "icon": "skull",    "beschrijving": "Schuilplaats van rovers — gevaarlijk terrein."},
+    {"id": "anders",      "naam": "Anders",        "kleur": "#94a3b8", "icon": "star",     "beschrijving": "Onbekende grondstof — admin om in te vullen."},
 ]
 
 
@@ -594,3 +598,57 @@ async def delete_resource(resource_id: str, user_id: str):
     resources = [r for r in resources if r.get("id") != resource_id]
     _save_resources(resources, user_id=user_id)
     return {"success": True, "deleted": resource_id}
+
+
+class ResourceDuplicateBody(BaseModel):
+    user_id: str
+    naam: Optional[str] = None       # default = "{originele naam} (kopie)"
+    x_pct: Optional[float] = None    # default = origineel + 4% offset
+    y_pct: Optional[float] = None
+    create_kb_card: bool = True
+
+
+@router.post("/resources/{resource_id}/duplicate")
+async def duplicate_resource(resource_id: str, body: ResourceDuplicateBody):
+    """v6_dnd_resources_dup_001 — Dupliceer een grondstof.
+    Hergebruikt de image-archive-entry (geen tweede upload nodig) en maakt
+    een nieuwe game-card + KB inbox-kaart aan."""
+    if not _is_admin(body.user_id):
+        raise HTTPException(403, "Alleen admin")
+    resources = _load_resources()
+    src = next((r for r in resources if r.get("id") == resource_id), None)
+    if not src:
+        raise HTTPException(404, f"Grondstof '{resource_id}' niet gevonden")
+
+    new_id = f"res-{uuid.uuid4().hex[:8]}"
+    src_kaart = src.get("kaart") or {}
+    new_x = body.x_pct if body.x_pct is not None else min(99.0, float(src_kaart.get("x_pct", 50)) + 4.0)
+    new_y = body.y_pct if body.y_pct is not None else min(99.0, float(src_kaart.get("y_pct", 50)) + 4.0)
+    new_naam = (body.naam or f"{src.get('naam', 'Grondstof')} (kopie)").strip()
+
+    resource = {
+        "id": new_id,
+        "naam": new_naam,
+        "type": src.get("type", "anders"),
+        "beschrijving": src.get("beschrijving", ""),
+        "fractie_id": src.get("fractie_id"),
+        "kaart": {"x_pct": new_x, "y_pct": new_y},
+        "image_url": src.get("image_url"),     # hergebruik bestaande image
+        "archive_id": src.get("archive_id"),   # zelfde archive entry
+        "linked_card_id": None,
+        "linked_kb_card_id": None,
+        "aangemaakt_op": _now_iso(),
+        "aangemaakt_door": body.user_id,
+        "duplicated_from": resource_id,
+    }
+
+    # Auto-create kaarten (nieuw, NIET hergebruikt; anders verwijst kaart naar verkeerde resource)
+    game_card_id = _create_game_card_for_resource(resource, resource["image_url"], body.user_id)
+    resource["linked_card_id"] = game_card_id
+    if body.create_kb_card:
+        kb_card_id = _create_kb_inbox_card_for_resource(resource, resource["image_url"], body.user_id)
+        resource["linked_kb_card_id"] = kb_card_id
+
+    resources.append(resource)
+    _save_resources(resources, user_id=body.user_id)
+    return {"success": True, "resource": resource}

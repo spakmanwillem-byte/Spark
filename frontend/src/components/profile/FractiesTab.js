@@ -13,7 +13,7 @@
  * Geen edit-flow. Data komt uit fracties.json + steden.json.
  */
 import React, { useState, useEffect, useRef } from 'react';
-import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload } from 'lucide-react';
+import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload, Copy } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -465,6 +465,21 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
     setResources(prev => prev.filter(r => r.id !== rid));
   };
 
+  // v6_dnd_resources_dup_001 — dupliceer resource (hergebruikt image, maakt nieuwe kaarten)
+  const handleResourceDuplicate = async (rid) => {
+    try {
+      const r = await fetch(`${API}/api/dnd/world/resources/${rid}/duplicate`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId }),
+      });
+      if (!r.ok) throw new Error(`${r.status}`);
+      const d = await r.json();
+      if (d.resource) setResources(prev => [...prev, d.resource]);
+    } catch (e) {
+      window.alert(`Dupliceren mislukt: ${e.message}`);
+    }
+  };
+
   return (
     <MapModal title="LANDKAART · STORMHAVEN" onClose={onClose} maxWidth="max-w-5xl">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
@@ -511,38 +526,9 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
             <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-br from-stone-900/15 to-stone-950/30 pointer-events-none" />
 
-            {/* Gebied markers (provincies) */}
-            {provincies.map(p => {
-              const f = fractieById[p.fractie_id];
-              const color = f?.kleur || '#94a3b8';
-              const isSelected = selectedProv?.id === p.id;
-              const x = p.x_pct ?? 50;
-              const y = p.y_pct ?? 50;
-              return (
-                <button
-                  key={p.id}
-                  data-testid={`prov-marker-${p.id}`}
-                  onClick={() => !editMode && setSelectedProv(p)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group"
-                  style={{ left: `${x}%`, top: `${y}%` }}
-                  title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
-                >
-                  <div
-                    className={`w-3 h-3 rounded-full border transition-all ${
-                      isSelected ? 'scale-150 border-amber-200' : 'border-stone-900 group-hover:scale-125'
-                    }`}
-                    style={{ background: color }}
-                  />
-                  <span className={`text-[9px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
-                    isSelected
-                      ? 'opacity-100 bg-stone-950 text-amber-200'
-                      : 'opacity-80 bg-stone-950/60 text-stone-100'
-                  }`}>
-                    {p.naam}
-                  </span>
-                </button>
-              );
-            })}
+            {/* v6_dnd_steden_only_001 — Geen aparte provincie-markers meer:
+                de stad IS de hoofdstad van de provincie, 2 containers was verwarrend.
+                Dorpen binnen een provincie worden later eigen markers. */}
 
             {/* Stad markers — alleen voor geselecteerd gebied of alle bij geen selectie */}
             {(selectedProv ? stedenInProv : steden).map(s => {
@@ -553,29 +539,32 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
               const y = s.kaart?.y_pct ?? 50;
               const isStad = s.type === 'hoofdstad' || s.type === 'stad';
               const isDraggingThis = dragging?.kind === 'stad' && dragging?.id === s.id;
+              const isSelectedProv = selectedProv?.id === s.provincie_id;
               return (
                 <button
                   key={s.id}
                   data-testid={`stad-marker-${s.id}`}
                   onPointerDown={(e) => onPointerDown(e, 'stad', s.id)}
                   onClick={() => handleStadClick(s)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 group"
-                  style={{ left: `${x}%`, top: `${y + 3}%`, cursor: editMode ? (isDraggingThis ? 'grabbing' : 'grab') : 'pointer' }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 group flex flex-col items-center"
+                  style={{ left: `${x}%`, top: `${y}%`, cursor: editMode ? (isDraggingThis ? 'grabbing' : 'grab') : 'pointer' }}
                   title={`${s.naam} — ${leid?.naam || 'Neutraal'}${editMode ? ' (sleep om te verplaatsen)' : ''}`}
                 >
                   <div
                     className={`rounded-sm border transition-all overflow-hidden ${
                       isPulsing ? 'animate-pulse scale-150' : 'group-hover:scale-125'
-                    } ${isStad ? 'w-3 h-3 border-amber-300' : 'w-2 h-2 border-stone-900'} ${
-                      editMode ? 'ring-1 ring-emerald-400/70' : ''
-                    }`}
+                    } ${isStad ? 'w-3 h-3' : 'w-2 h-2'} ${
+                      isSelectedProv ? 'border-amber-200 scale-150' : 'border-amber-300'
+                    } ${editMode ? 'ring-1 ring-emerald-400/70' : ''}`}
                     style={{ background: color }}
                   />
-                  {editMode && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[8px] bg-stone-950/90 text-emerald-200 px-1 rounded whitespace-nowrap font-bold">
-                      {s.naam}
-                    </span>
-                  )}
+                  <span className={`text-[9px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
+                    isSelectedProv
+                      ? 'opacity-100 bg-stone-950 text-amber-200'
+                      : 'opacity-80 bg-stone-950/60 text-stone-100 group-hover:opacity-100'
+                  }`}>
+                    {s.naam}
+                  </span>
                 </button>
               );
             })}
@@ -609,13 +598,24 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
                     )}
                   </div>
                   {editMode && (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleResourceDelete(r.id); }}
-                      className="absolute -top-2 -right-2 w-4 h-4 bg-red-700 hover:bg-red-600 rounded-full flex items-center justify-center"
-                      title="Verwijder"
-                    >
-                      <Trash2 className="w-2.5 h-2.5 text-white" />
-                    </button>
+                    <>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleResourceDelete(r.id); }}
+                        className="absolute -top-2 -right-2 w-4 h-4 bg-red-700 hover:bg-red-600 rounded-full flex items-center justify-center"
+                        title="Verwijder"
+                        data-testid={`resource-delete-${r.id}`}
+                      >
+                        <Trash2 className="w-2.5 h-2.5 text-white" />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleResourceDuplicate(r.id); }}
+                        className="absolute -top-2 -left-2 w-4 h-4 bg-amber-700 hover:bg-amber-600 rounded-full flex items-center justify-center"
+                        title="Dupliceer"
+                        data-testid={`resource-duplicate-${r.id}`}
+                      >
+                        <Copy className="w-2.5 h-2.5 text-white" />
+                      </button>
+                    </>
                   )}
                   <span className="absolute top-full left-1/2 -translate-x-1/2 mt-0.5 text-[8px] whitespace-nowrap font-bold bg-stone-950/80 text-amber-100 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
                     {r.naam}

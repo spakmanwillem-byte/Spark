@@ -413,7 +413,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           {/* v6_dnd_layout_v2 — Huis & Opslag is stilstaand (500 slots, geen kg) */}
           <HuisOpslagPanel gameCards={gameCards} inventory={inventory} onTransfer={transferItem} isHome={isHome} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
-          {/* v6_spark_world_kaart_btn_001 — SPARK WORLD mini-map kader verwijderd; landkaart zit nu in pop-up via Fracties-kader */}
+          <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
           {/* v6_dnd_fracties_kader_001 — Fracties + Landkaart bark */}
           <FractiesKaderPanel />
           {/* v6_bewoners_layout_002 — Handel-kader onder Spark World map (geopend bij selectie) */}

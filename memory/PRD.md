@@ -1,5 +1,54 @@
 # Spark Core 2.0 — PRD
 
+
+## v6_dnd_resources_001 + v6_dnd_steden_drag_001 — Grondstoffen op de kaart + Leeuwarden drag (2026-06-06, sessie 28)
+
+### Probleem
+1. Leeuwarden stond op de verkeerde plek op de NL-map (x_pct=61,y_pct=18 = te ver naar het noordoosten).
+2. Geen manier om grondstoffen (vis/bos/akker/mijn/…) op de wereldkaart te plaatsen.
+
+### Oplossing
+**Backend (`/app/backend/modules/dnd/world.py`)**
+- `PATCH /api/dnd/world/steden/{stad_id}` (admin) — drag-and-drop save voor stad-coördinaten + naam/introductie/leidende_fractie_id/banner/logo.
+- `GET /api/dnd/world/resources` — lijst grondstoffen + 8 resource-types (vis, bos, akker, mijn, weide, kruid, steen, anders) met kleur/icon/beschrijving.
+- `POST /api/dnd/world/resources` (admin, multipart) — image + naam + type + beschrijving + x_pct + y_pct + fractie_id + create_kb_card → opslag image in `system_archive/foto` met tag `dnd_resource`, auto-create D&D game-card in `cards/dnd/game.json` (class='game', kind='resource', image_urls gevuld) + (optioneel) KB v2 inbox-kaart in `knowledge/v2/inbox.json` met tag 'grondstof'.
+- `PATCH /api/dnd/world/resources/{id}` (admin) — drag-save voor resource positie + metadata.
+- `DELETE /api/dnd/world/resources/{id}` (admin).
+- Admin-check via `_is_admin` (gradatie ≤ 2). Non-admin → 403.
+
+**Frontend (`/app/frontend/src/components/profile/FractiesTab.js`)**
+- `LandkaartBark` accepteert nu `userId` + `isAdmin`.
+- Admin krijgt 2 knoppen in de map-header: **"✎ Bewerk posities"** (toggle drag-modus) en **"+ Resource"** (open `AddResourceModal`).
+- In drag-modus zijn stad-markers EN resource-markers sleepbaar (pointer events op de map-container schalen naar % coordinaten). Bij `onPointerUp` PATCH naar backend.
+- Resource-markers tonen de geüploade afbeelding (object-cover) met type-kleur als border. Trash-knop in drag-modus voor delete.
+- `AddResourceModal`: file-input + preview, naam, type-select (8 opties), fractie-select (optioneel), beschrijving, KB-checkbox. POST naar backend; nieuwe resource verschijnt in midden van de kaart (x_pct=50, y_pct=50), daarna sleepbaar.
+- Resources lijst in side-panel (default view) toont alle grondstoffen met thumbnail.
+
+### Data
+- Nieuw bestand: `/app/backend/data/dnd/grondstoffen.json` (resources: [], version: 1).
+- `steden.json` updates worden weggeschreven met `updated_at` + `updated_by`.
+
+### Auto-card creatie
+Bij POST resource worden 1 OF 2 kaarten aangemaakt:
+- **Game-card** (`cards/dnd/game.json`): class=game, kind=resource, image_urls=[image_url], game_meta.resource_type/resource_id link terug naar grondstof.
+- **KB v2 inbox-kaart** (alleen als create_kb_card=true): begrip = grondstof-naam, tags=['dnd','grondstof', type], image_urls gevuld. Zo kan Spark de grondstof herkennen in NLP/intent flows.
+
+### Tests
+- `/app/backend/tests/test_dnd_world_resources.py` — 18 pytest-tests, 100% pass:
+  - CRUD happy-path (admin)
+  - 403 op non-admin POST/PATCH/DELETE
+  - 404 op niet-bestaande resource/stad
+  - Image fetch via `/api/system-archive/file/{id}`
+  - Game-card + KB inbox-card creatie geverifieerd
+  - Leeuwarden drag PATCH werkt en is permanent
+  - Regressie: bestaande `/fracties`, `/provincies`, `/steden` endpoints onaangetast.
+
+### Critical code review (nog niet geadresseerd, P2)
+- `world.py` is 597 regels — bij groei boven 700 splits worth doing (extract `world_resources.py`).
+- Silent except in `_create_game_card_for_resource` / `_create_kb_inbox_card_for_resource` — kan beter loggen.
+- DELETE resource laat orphan kaarten + archive-files staan (by design, cascade is optionele toekomstige feature).
+
+
 ## v6_kbv2_open_by_id_001 — Graph → Kennisbank direct openen (2026-06-04, sessie 27)
 
 ### Probleem

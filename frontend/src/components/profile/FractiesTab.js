@@ -255,7 +255,7 @@ function MiniStat({ icon: Icon, label, value, accent }) {
 }
 
 // ============================================================
-// STAD DETAIL BARK
+// STAD DETAIL BARK (bewoner-bark stijl: avatar links, info rechts)
 // ============================================================
 export function StadDetailBark({ stadId, onClose }) {
   const [data, setData] = useState(null);
@@ -269,51 +269,51 @@ export function StadDetailBark({ stadId, onClose }) {
   const color = leid.kleur || '#94a3b8';
 
   return (
-    <MapModal title={data.stad.naam.toUpperCase()} onClose={onClose} maxWidth="max-w-2xl">
+    <MapModal title={`${s.type.toUpperCase()} · ${s.naam.toUpperCase()}`} onClose={onClose} maxWidth="max-w-3xl">
       <div className="space-y-3">
-        {/* Header */}
-        <div className="flex items-start justify-between border-b-2 border-amber-900/40 pb-2">
-          <div>
-            <div className="text-[10px] uppercase tracking-wider text-stone-500">{s.type} · {s.provincie_id}</div>
-            <h2 className="text-xl font-bold text-stone-100 font-serif mt-0.5">{s.naam}</h2>
+        {/* Hoofd-blok: avatar (banner/logo of initiaal) + info — zoals BewonerHandelPanel */}
+        <div className="flex gap-3 items-start">
+          <div
+            className="w-24 h-24 rounded-lg overflow-hidden border-2 flex-shrink-0 flex items-center justify-center text-4xl font-serif font-bold"
+            style={{
+              borderColor: `${color}80`,
+              background: `linear-gradient(135deg, ${color}30, ${color}10)`,
+              color: color,
+              boxShadow: `0 0 16px ${color}40`,
+            }}
+          >
+            {s.logo_url || s.banner_image_url ? (
+              <img src={`${API}${s.logo_url || s.banner_image_url}`} alt={s.naam} className="w-full h-full object-cover" />
+            ) : (
+              s.naam[0]
+            )}
           </div>
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-wider text-stone-500">Leidende fractie</div>
-            <div className="text-sm font-bold" style={{ color }}>{leid.naam || '—'}</div>
+          <div className="flex-1 min-w-0">
+            <p className="text-base font-serif font-bold text-amber-100 leading-tight">{s.naam}</p>
+            <p className="text-[10px] text-amber-400/70 capitalize">
+              {s.type} · {s.provincie_id} · leidt: <span style={{ color }}>{leid.naam || '—'}</span>
+            </p>
+            <p className="text-[11px] text-yellow-300 font-mono mt-1">💰 {s.kas?.goud ?? 0}g · 👥 {Object.values(s.fractie_invloed || {}).reduce((a, b) => a + (b.aanhangers || 0), 0)} aanhangers</p>
+            {s.introductie ? (
+              <p className="text-[11px] italic text-amber-200/80 mt-1 leading-snug">&ldquo;{s.introductie}&rdquo;</p>
+            ) : (
+              <p className="text-[11px] italic text-amber-200/40 mt-1">&ldquo;(Geen introductie ingevuld)&rdquo;</p>
+            )}
           </div>
         </div>
 
-        {s.introductie && (
-          <div className="p-2.5 rounded border border-stone-800 bg-stone-950/40">
-            <p className="text-xs text-stone-300 leading-relaxed">{s.introductie}</p>
+        {/* Stads-bonus (als beschikbaar) */}
+        {s.leider_bonus?.beschrijving && (
+          <div className="p-2.5 rounded border" style={{ borderColor: `${color}40`, background: `${color}10` }}>
+            <div className="flex items-center gap-1.5 mb-1">
+              <Sparkles className="w-3.5 h-3.5" style={{ color }} />
+              <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color }}>Stads-bonus</span>
+            </div>
+            <p className="text-[11px] text-amber-100/85 italic">&ldquo;{s.leider_bonus.beschrijving}&rdquo;</p>
           </div>
         )}
 
-        {/* Kas + leider-bonus */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div className="p-2.5 rounded border border-amber-900/40 bg-amber-950/10">
-            <div className="flex items-center gap-1.5 mb-1">
-              <Coins className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80">Stadskas</span>
-            </div>
-            <div className="text-xl font-bold text-stone-100">{s.kas?.goud ?? 0}</div>
-            <div className="text-[10px] text-stone-500">
-              Tax {Math.round((s.kas?.tax_rate_inwoners ?? 0) * 100)}% inwoners · {Math.round((s.kas?.tax_rate_fracties ?? 0) * 100)}% fracties
-            </div>
-          </div>
-
-          {s.leider_bonus?.beschrijving && (
-            <div className="p-2.5 rounded border" style={{ borderColor: `${color}40`, background: `${color}10` }}>
-              <div className="flex items-center gap-1.5 mb-1">
-                <Sparkles className="w-3.5 h-3.5" style={{ color }} />
-                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color }}>Stads-bonus</span>
-              </div>
-              <p className="text-xs text-stone-300">{s.leider_bonus.beschrijving}</p>
-            </div>
-          )}
-        </div>
-
-        {/* Stadsfuncties */}
+        {/* Stadsfuncties als grid */}
         <div>
           <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">Stadsfuncties</div>
           <div className="grid grid-cols-5 gap-1.5">
@@ -321,8 +321,8 @@ export function StadDetailBark({ stadId, onClose }) {
               <div key={key} className={`p-1.5 rounded border text-center ${
                 (f.niveau || 0) > 0 ? 'border-amber-900/40 bg-stone-900/60' : 'border-stone-900 bg-stone-950/30 opacity-40'
               }`}>
-                <div className="text-[9px] uppercase text-stone-500 mb-0.5 truncate">{key}</div>
-                <div className="text-base font-bold text-stone-100">{f.niveau || 0}</div>
+                <div className="text-[9px] uppercase text-amber-300/60 mb-0.5 truncate">{key}</div>
+                <div className="text-base font-bold text-amber-100">{f.niveau || 0}</div>
                 <div className="text-[8px] text-stone-600">niveau</div>
               </div>
             ))}
@@ -339,10 +339,10 @@ export function StadDetailBark({ stadId, onClose }) {
               return (
                 <div key={f.id} className="flex items-center gap-2 px-2 py-1 rounded bg-stone-950/40 border border-stone-800">
                   <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: f.kleur || '#94a3b8' }} />
-                  <div className="flex-1 text-xs text-stone-100 truncate">{f.naam}</div>
-                  <div className="text-[10px] text-stone-400 flex items-center gap-2 flex-shrink-0">
-                    <span><Users className="w-3 h-3 inline mr-0.5 text-stone-500" />{inv.aanhangers ?? 0}</span>
-                    <span><Building className="w-3 h-3 inline mr-0.5 text-stone-500" />{inv.gebouwen ?? 0}</span>
+                  <div className="flex-1 text-xs text-amber-100 truncate">{f.naam}</div>
+                  <div className="text-[10px] text-amber-200/70 flex items-center gap-2 flex-shrink-0">
+                    <span><Users className="w-3 h-3 inline mr-0.5 text-amber-400/60" />{inv.aanhangers ?? 0}</span>
+                    <span><Building className="w-3 h-3 inline mr-0.5 text-amber-400/60" />{inv.gebouwen ?? 0}</span>
                   </div>
                 </div>
               );
@@ -362,90 +362,139 @@ const NL_MAP_URL = 'https://customer-assets.emergentagent.com/job_question-hub-1
 export function LandkaartBark({ provincies, steden, fracties, onClose, onOpenStad }) {
   const [selectedProv, setSelectedProv] = useState(null);
   const fractieById = Object.fromEntries(fracties.map(f => [f.id, f]));
+  const stedenInProv = selectedProv ? steden.filter(s => s.provincie_id === selectedProv.id) : [];
+  const heersFractie = selectedProv ? fractieById[selectedProv.fractie_id] : null;
 
   return (
-    <MapModal title="LANDKAART · STORMHAVEN" onClose={onClose} maxWidth="max-w-3xl">
-      <div className="space-y-2">
-        <p className="text-[11px] text-stone-400">
-          Klik op een provincie om de steden te zien. De marker-kleur toont de leidende fractie.
-        </p>
-
-        {/* v6_spark_world_kaart_btn_001 — zelfde NL-foto als MiniMap, alleen groter */}
-        <div className="relative aspect-[3/4] max-h-[55vh] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden">
-          <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-900/30 to-stone-950/50" />
-          {provincies.map(p => {
-            const f = fractieById[p.fractie_id];
-            const color = f?.kleur || '#94a3b8';
-            const isSelected = selectedProv?.id === p.id;
-            const x = p.x_pct ?? 50;
-            const y = p.y_pct ?? 50;
-            return (
-              <button
-                key={p.id}
-                data-testid={`prov-marker-${p.id}`}
-                onClick={() => setSelectedProv(p)}
-                className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group"
-                style={{ left: `${x}%`, top: `${y}%` }}
-                title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full border-2 transition-all ${
-                    isSelected ? 'scale-150 border-amber-200' : 'border-stone-900 group-hover:scale-125'
-                  }`}
-                  style={{ background: color, boxShadow: isSelected ? `0 0 12px ${color}` : '0 0 4px rgba(0,0,0,0.6)' }}
-                />
-                <span className={`text-[10px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
-                  isSelected
-                    ? 'opacity-100 bg-stone-950 text-amber-200 shadow-lg'
-                    : 'opacity-90 bg-stone-950/70 text-stone-100'
-                }`}>
-                  {p.naam}
-                </span>
-              </button>
-            );
-          })}
+    <MapModal title="LANDKAART · STORMHAVEN" onClose={onClose} maxWidth="max-w-5xl">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+        {/* LINKS: grote kaart (col-span 8) */}
+        <div className="lg:col-span-8">
+          <p className="text-[11px] text-amber-300/60 mb-1.5">
+            Klik op een provincie om de steden te zien. De marker-kleur toont de leidende fractie.
+          </p>
+          <div className="relative aspect-[3/4] bg-stone-950 rounded-lg border-2 border-amber-900/40 overflow-hidden">
+            <img src={NL_MAP_URL} alt="Nederland kaart" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-stone-900/20 to-stone-950/40" />
+            {provincies.map(p => {
+              const f = fractieById[p.fractie_id];
+              const color = f?.kleur || '#94a3b8';
+              const isSelected = selectedProv?.id === p.id;
+              const x = p.x_pct ?? 50;
+              const y = p.y_pct ?? 50;
+              return (
+                <button
+                  key={p.id}
+                  data-testid={`prov-marker-${p.id}`}
+                  onClick={() => setSelectedProv(p)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group"
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                  title={`${p.naam} — ${f?.naam || 'Neutraal'}`}
+                >
+                  <div
+                    className={`w-4 h-4 rounded-full border-2 transition-all ${
+                      isSelected ? 'scale-150 border-amber-200' : 'border-stone-900 group-hover:scale-125'
+                    }`}
+                    style={{ background: color, boxShadow: isSelected ? `0 0 12px ${color}` : '0 0 4px rgba(0,0,0,0.6)' }}
+                  />
+                  <span className={`text-[10px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
+                    isSelected
+                      ? 'opacity-100 bg-stone-950 text-amber-200 shadow-lg'
+                      : 'opacity-90 bg-stone-950/70 text-stone-100'
+                  }`}>
+                    {p.naam}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {selectedProv && (
-          <div className="p-2.5 rounded border-2 border-amber-900/40 bg-stone-950/60">
-            <div className="flex items-center justify-between mb-1.5">
-              <div>
-                <div className="text-[9px] uppercase tracking-wider text-stone-500">Provincie</div>
-                <div className="text-sm font-bold text-stone-100">{selectedProv.naam}</div>
+        {/* RECHTS: info-paneel (col-span 4) */}
+        <div className="lg:col-span-4 flex flex-col">
+          {!selectedProv ? (
+            // Leeg-staat: lijst van alle provincies met fractie
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">Provincies ({provincies.length})</div>
+              <div className="space-y-1 max-h-[60vh] overflow-y-auto pr-1">
+                {provincies.map(p => {
+                  const f = fractieById[p.fractie_id];
+                  return (
+                    <button
+                      key={p.id}
+                      onClick={() => setSelectedProv(p)}
+                      className="w-full text-left p-1.5 rounded bg-stone-900/40 hover:bg-stone-900 border border-stone-800 hover:border-amber-900/40 transition-colors flex items-center gap-2"
+                    >
+                      <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: f?.kleur || '#94a3b8' }} />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[11px] font-bold text-amber-100 truncate">{p.naam}</div>
+                        <div className="text-[9px] text-amber-400/60 truncate">{f?.naam || '—'}</div>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
-              <div className="text-right">
-                <div className="text-[9px] uppercase tracking-wider text-stone-500">Heerst</div>
-                <div className="text-sm font-bold" style={{ color: fractieById[selectedProv.fractie_id]?.kleur }}>
-                  {fractieById[selectedProv.fractie_id]?.naam || '—'}
+            </div>
+          ) : (
+            // Geselecteerde provincie + steden
+            <div className="space-y-2.5">
+              <div
+                className="p-2.5 rounded border-2"
+                style={{
+                  borderColor: `${heersFractie?.kleur || '#94a3b8'}60`,
+                  background: `linear-gradient(135deg, ${heersFractie?.kleur || '#94a3b8'}20, transparent)`,
+                }}
+              >
+                <div className="flex items-start justify-between mb-1">
+                  <div>
+                    <div className="text-[9px] uppercase tracking-wider text-amber-300/60">Provincie</div>
+                    <div className="text-base font-bold text-amber-100 font-serif">{selectedProv.naam}</div>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProv(null)}
+                    className="text-[9px] px-1.5 py-0.5 rounded border border-amber-700/40 text-amber-300/80 hover:bg-amber-900/30"
+                  >
+                    × terug
+                  </button>
+                </div>
+                <div className="text-[10px] text-amber-200/80">
+                  Heerst: <span className="font-bold" style={{ color: heersFractie?.kleur }}>{heersFractie?.naam || '—'}</span>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300/70 mb-1.5">
+                  Steden ({stedenInProv.length})
+                </div>
+                <div className="space-y-1.5">
+                  {stedenInProv.map(s => {
+                    const leid = fractieById[s.leidende_fractie_id];
+                    return (
+                      <button
+                        key={s.id}
+                        data-testid={`landkaart-stad-${s.id}`}
+                        onClick={() => onOpenStad(s)}
+                        className="w-full text-left p-2 rounded bg-stone-900/50 hover:bg-stone-900 transition-colors flex items-center justify-between border border-stone-800 hover:border-amber-900/40"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: leid?.kleur || '#94a3b8' }} />
+                          <div className="min-w-0">
+                            <div className="text-[11px] font-bold text-amber-100 truncate">{s.naam}</div>
+                            <div className="text-[9px] text-amber-400/60 uppercase">{s.type}</div>
+                          </div>
+                        </div>
+                        <ChevronRight className="w-3.5 h-3.5 text-amber-400/60 flex-shrink-0" />
+                      </button>
+                    );
+                  })}
+                  {stedenInProv.length === 0 && (
+                    <p className="text-[11px] italic text-amber-400/40">Geen steden in deze provincie.</p>
+                  )}
                 </div>
               </div>
             </div>
-            <div className="space-y-1">
-              {steden.filter(s => s.provincie_id === selectedProv.id).map(s => {
-                const leid = fractieById[s.leidende_fractie_id];
-                return (
-                  <button
-                    key={s.id}
-                    data-testid={`landkaart-stad-${s.id}`}
-                    onClick={() => onOpenStad(s)}
-                    className="w-full text-left p-1.5 rounded bg-stone-900/50 hover:bg-stone-900 transition-colors flex items-center justify-between border border-stone-800"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ background: leid?.kleur || '#94a3b8' }} />
-                      <span className="text-xs text-stone-100">{s.naam}</span>
-                      <span className="text-[9px] uppercase text-stone-500">{s.type}</span>
-                    </div>
-                    <ChevronRight className="w-3 h-3 text-stone-500" />
-                  </button>
-                );
-              })}
-              {steden.filter(s => s.provincie_id === selectedProv.id).length === 0 && (
-                <p className="text-[11px] italic text-stone-600">Geen steden in deze provincie.</p>
-              )}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </MapModal>
   );

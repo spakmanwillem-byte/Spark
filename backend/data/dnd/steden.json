@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-07T00:38:41.069602+00:00",
+  "updated_at": "2026-06-07T02:10:58.162911+00:00",
   "steden": [
     {
       "id": "stormhaven",
@@ -122,7 +122,7 @@
     },
     {
       "id": "leeuwarden",
-      "naam": "Leeuwarden",
+      "naam": "Breez",
       "type": "hoofdstad",
       "provincie_id": "friesland",
       "is_hoofdstad_provincie": true,
@@ -131,7 +131,7 @@
         "y_pct": 18.594680632215123,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Breez — hoofdstad van Horron, zetel van Avaton.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -352,7 +352,7 @@
     },
     {
       "id": "zwolle",
-      "naam": "Zwolle",
+      "naam": "Eikenhart",
       "type": "hoofdstad",
       "provincie_id": "overijssel",
       "is_hoofdstad_provincie": true,
@@ -361,7 +361,7 @@
         "y_pct": 54,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Eikenhart — hoofdstad van De Oerbossen, zetel van Laviers.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -467,7 +467,7 @@
     },
     {
       "id": "lelystad",
-      "naam": "Lelystad",
+      "naam": "Lumis",
       "type": "hoofdstad",
       "provincie_id": "flevoland",
       "is_hoofdstad_provincie": true,
@@ -476,7 +476,7 @@
         "y_pct": 46,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Lumis — hoofdstad van Het Morgenland, zetel van Auranen.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -812,7 +812,7 @@
     },
     {
       "id": "haarlem",
-      "naam": "Haarlem",
+      "naam": "Umbros",
       "type": "hoofdstad",
       "provincie_id": "noord-holland",
       "is_hoofdstad_provincie": true,
@@ -821,7 +821,7 @@
         "y_pct": 41,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Umbros — hoofdstad van De Sluierlanden, zetel van Noctari.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -878,7 +878,7 @@
           "tevredenheid": 50
         }
       },
-      "leidende_fractie_id": "neutraal",
+      "leidende_fractie_id": "schaduw",
       "functies": {
         "leger": {
           "niveau": 0,
@@ -927,7 +927,7 @@
     },
     {
       "id": "den-haag",
-      "naam": "Den Haag",
+      "naam": "Extros",
       "type": "hoofdstad",
       "provincie_id": "zuid-holland",
       "is_hoofdstad_provincie": true,
@@ -936,7 +936,7 @@
         "y_pct": 60,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Extros — hoofdstad van De Waterlanden, zetel van Dwalters.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -1272,7 +1272,7 @@
     },
     {
       "id": "maastricht",
-      "naam": "Maastricht",
+      "naam": "Brezerk",
       "type": "hoofdstad",
       "provincie_id": "limburg",
       "is_hoofdstad_provincie": true,
@@ -1281,7 +1281,7 @@
         "y_pct": 92,
         "marker_icon": "town"
       },
-      "introductie": "",
+      "introductie": "Brezerk — hoofdstad van De Wilder Landen, zetel van Gulier.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -1338,7 +1338,7 @@
           "tevredenheid": 50
         }
       },
-      "leidende_fractie_id": "schaduw",
+      "leidende_fractie_id": "barbaren",
       "functies": {
         "leger": {
           "niveau": 0,
@@ -1384,6 +1384,23 @@
         "beschrijving": "",
         "effect": {}
       }
+    },
+    {
+      "id": "oerrak",
+      "naam": "Oerrak",
+      "type": "stad",
+      "provincie_id": "groningen",
+      "provincie_naam": "Bazin",
+      "leidende_fractie_id": "neutraal",
+      "kaart": {
+        "x_pct": 65,
+        "y_pct": 14
+      },
+      "introductie": "Oerrak — krijgsstad in Bazin, woonplaats van de Spartanen, geleid door Oracel Spark.",
+      "stadsfuncties": [],
+      "kas": 0,
+      "banner_image_url": null,
+      "logo_url": null
     }
   ]
 }

@@ -75,7 +75,8 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
   const [fracties, setFracties] = useState([]);
   const [steden, setSteden] = useState([]);
   const [provincies, setProvincies] = useState([]);
-  const [activeFid, setActiveFid] = useState('spark');
+  // v6_dnd_fracties_kader_001 — start op Spartanen (was 'spark', maar Spark = Spartanen-leider)
+  const [activeFid, setActiveFid] = useState('neutraal');
   const [openStad, setOpenStad] = useState(null);
   const [openLandkaart, setOpenLandkaart] = useState(false);
   // v6_dnd_fractie_edit_001 — admin edit modal

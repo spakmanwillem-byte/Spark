@@ -408,10 +408,15 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
 
         {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Handel === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
-          {/* v6_rugzak_kader_001 — Rugzak als eigen kader naast Huis & Opslag (mobile carry, met kg) */}
-          <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} onTransfer={transferItem} isHome={isHome} />
-          {/* v6_dnd_layout_v2 — Huis & Opslag is stilstaand (500 slots, geen kg) */}
-          <HuisOpslagPanel gameCards={gameCards} inventory={inventory} onTransfer={transferItem} isHome={isHome} />
+          {/* v6_dnd_rugzak_huis_tabs_001 — Rugzak + Huis & Opslag in 1 kader met 2 tabs */}
+          <RugzakHuisKaderPanel
+            inventory={inventory}
+            userId={userId}
+            gameCards={gameCards}
+            onChange={reload}
+            onTransfer={transferItem}
+            isHome={isHome}
+          />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
           {/* v6_dnd_fracties_fullwidth_001 — MiniMapPanel verwijderd uit avatar-tab;
               FractiesKaderPanel is verplaatst naar volle breedte onder de grid (zie hieronder).
@@ -1164,7 +1169,7 @@ function InventoryGridPanel({ userId, inventory: invProp }) {
 
 // v6_rugzak_kader_002 — Eigen kader voor de Rugzak (mobile carry, met kg-limiet)
 // 32-slot grid (8×4), items tonen jouw 512x512 D&D-kaart images (geen emojis), vullen via gameplay
-function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, onTransfer, isHome = true }) {
+function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, onTransfer, isHome = true, embedded = false }) {
   // Filter alleen rugzak-items (location !== 'huis')
   const allSlots = inventory?.slots || [];
   const slots = allSlots.filter(s => (s.location || 'rugzak') !== 'huis');
@@ -1193,70 +1198,80 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, 
     await onTransfer?.('rugzak', 'huis', { slot_id });
   };
 
-  return (
-    <PaperPanel>
-      <PaperHeader right={
+  const body = (
+    <div className="p-3 space-y-2.5">
+      <div className="flex items-center justify-between -mt-0.5">
+        <p className="text-[10px] text-amber-300/70 italic">
+          🎒 Wat je meeneemt op pad. Meer kg = langzamer.
+        </p>
         <span className="text-[10px] font-mono font-bold" data-testid="rugzak-kg-counter" style={{ color: kgColor }}>
           {kgUsed.toFixed(1)} / {kgMax.toFixed(0)} kg
         </span>
-      }>RUGZAK · ONDERWEG</PaperHeader>
-      <div className="p-3 space-y-2.5">
-        <p className="text-[10px] text-amber-300/70 italic -mt-0.5">
-          🎒 Wat je meeneemt op pad. Meer kg = langzamer. Items vullen de slots wanneer je ze vindt of koopt.
-        </p>
+      </div>
 
-        {/* Kg progress bar */}
-        <div data-testid="rugzak-kg-bar" className="space-y-1">
-          <div className="h-2 rounded-full bg-black/70 border border-amber-900/40 overflow-hidden">
-            <div className="h-full transition-all" style={{ width: `${kgPct}%`, background: kgColor }} />
-          </div>
-          <div className="flex justify-between text-[9px]">
-            <span className="text-amber-400/80">Slots: <span className="font-mono text-amber-200">{cap.slots_used || 0}/{cap.slots_total || 0}</span></span>
-            <span style={{ color: kgColor }} className="italic font-medium">{speedLabel}</span>
-          </div>
+      {/* Kg progress bar */}
+      <div data-testid="rugzak-kg-bar" className="space-y-1">
+        <div className="h-2 rounded-full bg-black/70 border border-amber-900/40 overflow-hidden">
+          <div className="h-full transition-all" style={{ width: `${kgPct}%`, background: kgColor }} />
         </div>
-
-        {/* 32-slot grid (8x4) — items tonen 512x512 D&D images */}
-        <div data-testid="rugzak-grid" className="grid grid-cols-8 gap-1">
-          {Array.from({ length: VISIBLE_SLOTS }).map((_, i) => {
-            const item = slots[i];
-            const img = item ? itemImage(item, gameCards) : null;
-            return (
-              <div key={i} data-testid={`rugzak-slot-${i}`}
-                title={item ? `${item.naam} · ${item.weight || 0}kg${item.value_goud ? ` · ${item.value_goud}g` : ''}` : ''}
-                className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/40' : 'border-amber-900/30 bg-stone-950/50'}`}>
-                {item && img && (
-                  <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
-                )}
-                {item && !img && (
-                  <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
-                )}
-                {item && (
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex flex-col items-center justify-center gap-0.5 transition-opacity">
-                    {isHome && (
-                      <button data-testid={`rugzak-tohome-${i}`} onClick={(e) => moveToHuis(e, item.id)}
-                        className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
-                        → Huis
-                      </button>
-                    )}
-                    <button data-testid={`rugzak-drop-${i}`} onClick={() => removeItem(item.id)}
-                      className="text-[8px] px-1 py-0.5 bg-red-700 hover:bg-red-600 text-stone-100 rounded">
-                      Drop
-                    </button>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+        <div className="flex justify-between text-[9px]">
+          <span className="text-amber-400/80">Slots: <span className="font-mono text-amber-200">{cap.slots_used || 0}/{cap.slots_total || 0}</span></span>
+          <span style={{ color: kgColor }} className="italic font-medium">{speedLabel}</span>
         </div>
       </div>
+
+      {/* 32-slot grid (8x4) — items tonen 512x512 D&D images */}
+      <div data-testid="rugzak-grid" className="grid grid-cols-8 gap-1">
+        {Array.from({ length: VISIBLE_SLOTS }).map((_, i) => {
+          const item = slots[i];
+          const img = item ? itemImage(item, gameCards) : null;
+          return (
+            <div key={i} data-testid={`rugzak-slot-${i}`}
+              title={item ? `${item.naam} · ${item.weight || 0}kg${item.value_goud ? ` · ${item.value_goud}g` : ''}` : ''}
+              className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/40' : 'border-amber-900/30 bg-stone-950/50'}`}>
+              {item && img && (
+                <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
+              )}
+              {item && !img && (
+                <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
+              )}
+              {item && (
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex flex-col items-center justify-center gap-0.5 transition-opacity">
+                  {isHome && (
+                    <button data-testid={`rugzak-tohome-${i}`} onClick={(e) => moveToHuis(e, item.id)}
+                      className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
+                      → Huis
+                    </button>
+                  )}
+                  <button data-testid={`rugzak-drop-${i}`} onClick={() => removeItem(item.id)}
+                    className="text-[8px] px-1 py-0.5 bg-red-700 hover:bg-red-600 text-stone-100 rounded">
+                    Drop
+                  </button>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  if (embedded) return body;
+  return (
+    <PaperPanel>
+      <PaperHeader right={
+        <span className="text-[10px] font-mono font-bold" style={{ color: kgColor }}>
+          {kgUsed.toFixed(1)} / {kgMax.toFixed(0)} kg
+        </span>
+      }>RUGZAK · ONDERWEG</PaperHeader>
+      {body}
     </PaperPanel>
   );
 }
 
 
 
-function HuisOpslagPanel({ gameCards = [], inventory = null, onTransfer, isHome = true }) {
+function HuisOpslagPanel({ gameCards = [], inventory = null, onTransfer, isHome = true, embedded = false }) {
   const HUIS_TAGS = ['huis', 'gebouw', 'opslag', 'locatie'];
   const MEUBEL_TAGS = ['meubel'];
   const STORAGE_MAX = 500;
@@ -1292,85 +1307,52 @@ function HuisOpslagPanel({ gameCards = [], inventory = null, onTransfer, isHome 
     await onTransfer?.('huis', 'rugzak', { slot_id });
   };
 
-  return (
-    <PaperPanel>
-      <PaperHeader right={
-        <span className="text-[10px] font-mono text-amber-300/80" data-testid="opslag-cap-counter">
-          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX} · <span className="text-emerald-300/80 italic">geen kg-limiet</span>
-        </span>
-      }>HUIS &amp; OPSLAG · STILSTAAND</PaperHeader>
-      <div className="space-y-3 p-3">
-        <p className="text-[10px] text-emerald-300/70 italic -mt-1">
-          🏠 Hier staat alles stil — bereid eten, sla loot op, geen gewicht-restrictie. Pak in je rugzak wat je meeneemt op pad.
+  const body = (
+    <div className="space-y-3 p-3">
+      <div className="flex items-center justify-between -mt-1">
+        <p className="text-[10px] text-emerald-300/70 italic">
+          🏠 Hier staat alles stil — bereid eten, sla loot op, geen gewicht-restrictie.
         </p>
-        {/* Rij 1: Huis + Meubel slots */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Huis sloten</p>
-            <div className="grid grid-cols-5 gap-1.5">
-              {[0, 1, 2, 3, 4].map(i => {
-                const card = huisCards[i];
-                const img = cardFirstImage(card);
-                return (
-                  <div key={i} data-testid={`huis-slot-${i}`}
-                    className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
-                    title={card?.begrip || ''}>
-                    {img ? (
-                      <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
-                    ) : (
-                      <span>{fallbackHuis[i]}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Meubel sloten</p>
-            <div className="grid grid-cols-5 gap-1.5">
-              {[0, 1, 2, 3, 4].map(i => {
-                const card = meubelCards[i];
-                const img = cardFirstImage(card);
-                return (
-                  <div key={i} data-testid={`meubel-slot-${i}`}
-                    className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
-                    title={card?.begrip || ''}>
-                    {img ? (
-                      <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
-                    ) : (
-                      <span>{fallbackMeubel[i]}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+        <span className="text-[10px] font-mono text-amber-300/80">
+          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX}
+        </span>
+      </div>
+      {/* Rij 1: Huis + Meubel slots */}
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Huis sloten</p>
+          <div className="grid grid-cols-5 gap-1.5">
+            {[0, 1, 2, 3, 4].map(i => {
+              const card = huisCards[i];
+              const img = cardFirstImage(card);
+              return (
+                <div key={i} data-testid={`huis-slot-${i}`}
+                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
+                  title={card?.begrip || ''}>
+                  {img ? (
+                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <span>{fallbackHuis[i]}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
-
-        {/* Rij 2: Opslag grid (master inventory) */}
         <div>
-          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Opslag (eerste {VISIBLE_STORAGE_SLOTS} van {STORAGE_MAX})</p>
-          <div data-testid="opslag-grid" className="grid grid-cols-8 gap-1">
-            {Array.from({ length: VISIBLE_STORAGE_SLOTS }).map((_, i) => {
-              const item = storageItems[i];
-              const img = item ? itemImage(item, gameCards) : null;
+          <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Meubel sloten</p>
+          <div className="grid grid-cols-5 gap-1.5">
+            {[0, 1, 2, 3, 4].map(i => {
+              const card = meubelCards[i];
+              const img = cardFirstImage(card);
               return (
-                <div key={i} data-testid={`opslag-slot-${i}`}
-                  className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/30' : 'border-amber-900/30 bg-stone-950/50'}`}
-                  title={item?.naam || ''}>
-                  {item && img && (
-                    <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
-                  )}
-                  {item && !img && (
-                    <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
-                  )}
-                  {item && isHome && (
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex items-center justify-center transition-opacity">
-                      <button data-testid={`opslag-torug-${i}`} onClick={(e) => moveToRugzak(e, item.id)}
-                        className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
-                        → Rugzak
-                      </button>
-                    </div>
+                <div key={i} data-testid={`meubel-slot-${i}`}
+                  className="aspect-square min-h-[56px] rounded border border-amber-900/40 bg-stone-950/60 flex items-center justify-center text-2xl text-amber-300/70 overflow-hidden relative"
+                  title={card?.begrip || ''}>
+                  {img ? (
+                    <img src={img} alt={card.begrip} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <span>{fallbackMeubel[i]}</span>
                   )}
                 </div>
               );
@@ -1378,6 +1360,108 @@ function HuisOpslagPanel({ gameCards = [], inventory = null, onTransfer, isHome 
           </div>
         </div>
       </div>
+
+      {/* Rij 2: Opslag grid (master inventory) */}
+      <div>
+        <p className="text-[10px] uppercase tracking-wider text-amber-500/70 mb-1.5 text-center">Opslag (eerste {VISIBLE_STORAGE_SLOTS} van {STORAGE_MAX})</p>
+        <div data-testid="opslag-grid" className="grid grid-cols-8 gap-1">
+          {Array.from({ length: VISIBLE_STORAGE_SLOTS }).map((_, i) => {
+            const item = storageItems[i];
+            const img = item ? itemImage(item, gameCards) : null;
+            return (
+              <div key={i} data-testid={`opslag-slot-${i}`}
+                className={`aspect-square rounded border overflow-hidden relative group ${item ? 'border-amber-700/60 bg-amber-950/30' : 'border-amber-900/30 bg-stone-950/50'}`}
+                title={item?.naam || ''}>
+                {item && img && (
+                  <img src={img} alt={item.naam} className="absolute inset-0 w-full h-full object-cover" />
+                )}
+                {item && !img && (
+                  <span className="absolute inset-0 flex items-center justify-center text-sm text-amber-200">{item.naam?.charAt(0)}</span>
+                )}
+                {item && isHome && (
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black/75 flex items-center justify-center transition-opacity">
+                    <button data-testid={`opslag-torug-${i}`} onClick={(e) => moveToRugzak(e, item.id)}
+                      className="text-[8px] px-1 py-0.5 bg-amber-600 hover:bg-amber-500 text-stone-950 rounded font-bold">
+                      → Rugzak
+                    </button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (embedded) return body;
+  return (
+    <PaperPanel>
+      <PaperHeader right={
+        <span className="text-[10px] font-mono text-amber-300/80" data-testid="opslag-cap-counter">
+          Opslag <span className="text-amber-200">{storageUsed}</span>/{STORAGE_MAX} · <span className="text-emerald-300/80 italic">geen kg-limiet</span>
+        </span>
+      }>HUIS &amp; OPSLAG · STILSTAAND</PaperHeader>
+      {body}
+    </PaperPanel>
+  );
+}
+
+// v6_dnd_rugzak_huis_tabs_001 — Rugzak + Huis & Opslag samengevoegd in 1 kader met 2 tabs
+function RugzakHuisKaderPanel(props) {
+  const [activeTab, setActiveTab] = useState('rugzak');
+  const cap = props.inventory?.capacity || { weight_used: 0, weight_max: 0, slots_used: 0, slots_total: 0 };
+  const kgUsed = cap.weight_used || 0;
+  const kgMax = cap.weight_max || 0;
+  const kgPct = kgMax > 0 ? Math.min(100, Math.round((kgUsed / kgMax) * 100)) : 0;
+  const kgColor = kgPct >= 90 ? '#dc2626' : kgPct >= 70 ? '#eab308' : '#22c55e';
+  const storageUsed = (props.inventory?.slots || []).filter(s => s.location === 'huis').length;
+
+  return (
+    <PaperPanel>
+      {/* Tab-rij met header-info rechts */}
+      <div className="flex items-stretch border-b border-amber-900/40 bg-gradient-to-b from-amber-950/40 to-stone-950">
+        <button
+          data-testid="tab-rugzak"
+          onClick={() => setActiveTab('rugzak')}
+          className={`flex-1 px-3 py-2 text-[11px] uppercase tracking-wider font-bold transition-colors border-r border-amber-900/40 ${
+            activeTab === 'rugzak'
+              ? 'text-amber-100 bg-amber-900/30 border-b-2 border-b-amber-400'
+              : 'text-amber-500/70 hover:text-amber-300 hover:bg-amber-900/15'
+          }`}
+        >
+          🎒 Rugzak · Onderweg
+        </button>
+        <button
+          data-testid="tab-huis"
+          onClick={() => setActiveTab('huis')}
+          className={`flex-1 px-3 py-2 text-[11px] uppercase tracking-wider font-bold transition-colors ${
+            activeTab === 'huis'
+              ? 'text-amber-100 bg-amber-900/30 border-b-2 border-b-amber-400'
+              : 'text-amber-500/70 hover:text-amber-300 hover:bg-amber-900/15'
+          }`}
+        >
+          🏠 Huis &amp; Opslag · Stilstaand
+        </button>
+      </div>
+      {/* Counter-strip — toont actieve tab's kerncijfer */}
+      <div className="px-3 py-1 flex justify-end items-center text-[10px] font-mono border-b border-amber-900/20 bg-stone-950/40">
+        {activeTab === 'rugzak' ? (
+          <span style={{ color: kgColor }} className="font-bold">
+            {kgUsed.toFixed(1)} / {kgMax.toFixed(0)} kg
+          </span>
+        ) : (
+          <span className="text-amber-300/80">
+            Opslag <span className="text-amber-200">{storageUsed}</span>/500 · <span className="text-emerald-300/80 italic">geen kg-limiet</span>
+          </span>
+        )}
+      </div>
+      {/* Body — embedded versie van de juiste panel */}
+      {activeTab === 'rugzak' ? (
+        <RugzakKaderPanel {...props} embedded />
+      ) : (
+        <HuisOpslagPanel {...props} embedded />
+      )}
     </PaperPanel>
   );
 }

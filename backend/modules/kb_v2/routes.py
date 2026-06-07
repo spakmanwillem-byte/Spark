@@ -341,6 +341,81 @@ class DedupeInboxBody(BaseModel):
     dry_run: bool = True
 
 
+@router.post("/admin/rebuild-index")
+@traced(intent="Herbouw knowledge_index.json vanuit lade-bestanden + inbox", module="kb_v2")
+async def rebuild_knowledge_index(body: DedupeInboxBody):
+    """v6_kbv2_rebuild_index_001 — Bouw knowledge_index.json vers op uit huidige
+    lade-bestanden + inbox-cards met gevulde laag1. Verwijdert stale entries die
+    naar verwijderde kaarten verwezen. Default dry_run=true."""
+    import shutil as _shutil
+    from pathlib import Path as _P
+    DATA = _P(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+    idx_p = DATA / "knowledge_index.json"
+    old = load_json(idx_p, default={"entries": {}})
+    old_count = len(old.get("entries", {}))
+
+    new_entries = {}
+    for cat in ("weten", "doen", "voelen", "spreken"):
+        fp = DATA / f"knowledge_v2_{cat}.json"
+        if not fp.exists():
+            continue
+        d = load_json(fp, default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            begrip = (c.get("begrip") or "").lower().strip()
+            if not begrip:
+                continue
+            lagen = c.get("lagen") or {}
+            fn = c.get("footnote") or {}
+            new_entries[begrip] = {
+                "kaart_id": c["id"], "lade": cat,
+                "has_lagen": [k for k, v in lagen.items() if (v or "").strip()],
+                "tags": (c.get("tags") or [])[:8],
+                "last_updated": fn.get("laatst_bewerkt_op") or fn.get("ingedeeld_op", ""),
+            }
+    # Inbox-cards met laag1 ook indexeren
+    inbox_fp = DATA / "knowledge_inbox.json"
+    inbox_added = 0
+    if inbox_fp.exists():
+        inb = load_json(inbox_fp, default={"kaarten": []})
+        for c in inb.get("kaarten", []):
+            begrip = (c.get("begrip") or "").lower().strip()
+            if not begrip or begrip in new_entries:
+                continue
+            lagen = c.get("lagen") or {}
+            if (lagen.get("laag1") or "").strip():
+                new_entries[begrip] = {
+                    "kaart_id": c["id"], "lade": "inbox",
+                    "has_lagen": [k for k, v in lagen.items() if (v or "").strip()],
+                    "tags": (c.get("tags") or [])[:8],
+                    "last_updated": (c.get("footnote") or {}).get("laatst_bewerkt_op", ""),
+                }
+                inbox_added += 1
+
+    if body.dry_run:
+        return {
+            "success": True, "dry_run": True,
+            "old_size": old_count, "new_size": len(new_entries),
+            "delta": len(new_entries) - old_count,
+            "inbox_added": inbox_added,
+        }
+
+    ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    backup = idx_p.with_suffix(f".json.backup_rebuild_{ts}")
+    _shutil.copy(str(idx_p), str(backup))
+    save_json(idx_p, {
+        "entries": new_entries,
+        "rebuilt_at": _dt.now(_tz.utc).isoformat(),
+        "rebuilt_by": body.user_id,
+        "total": len(new_entries),
+    })
+    return {
+        "success": True, "dry_run": False,
+        "old_size": old_count, "new_size": len(new_entries),
+        "inbox_added": inbox_added,
+        "backup_file": backup.name,
+    }
+
+
 @router.post("/admin/dedupe-inbox-vs-lade")
 @traced(intent="Verwijder inbox-kaarten die qua id ook al in een lade staan", module="kb_v2")
 async def dedupe_inbox_vs_lade(body: DedupeInboxBody):

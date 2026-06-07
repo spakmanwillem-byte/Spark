@@ -13,7 +13,7 @@
  * Geen edit-flow. Data komt uit fracties.json + steden.json.
  */
 import React, { useState, useEffect, useRef } from 'react';
-import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload, Copy, Pencil, Image as ImageIcon, Save, Link as LinkIcon } from 'lucide-react';
+import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload, Copy, Pencil, Image as ImageIcon, Save, Link as LinkIcon, Home, Warehouse, Sword, Shield, Hammer, Banknote } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -392,6 +392,163 @@ function MiniStat({ icon: Icon, label, value, accent }) {
 // ============================================================
 // STAD DETAIL BARK (bewoner-bark stijl: avatar links, info rechts)
 // ============================================================
+// ============================================================
+// v6_dnd_stad_economy_001 — Stad-economy display blocks
+// ============================================================
+function StadEconomyBlock({ stad, accent }) {
+  const e = stad.economy || {};
+  const wh = e.warehouse || {};
+  const tier = wh.tier || 1;
+  const cap = wh.capacity_total || (wh.capacity_per_tier?.[tier] ?? 50000);
+  const used = wh.units_used || 0;
+  const pct = cap > 0 ? Math.min(100, Math.round((used / cap) * 100)) : 0;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      {/* Stadsbank */}
+      <div className="p-2.5 rounded border border-amber-900/40 bg-stone-950/40">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <Banknote className="w-3.5 h-3.5 text-yellow-400" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80">Stadsbank (tier {e.bank_tier || 1})</span>
+        </div>
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-xl font-mono font-bold text-yellow-300">{(e.goud_in_bank ?? e.goud ?? 0).toLocaleString('nl-NL')}</span>
+          <span className="text-[10px] text-amber-400/60">goud in kluis</span>
+        </div>
+        <p className="text-[9px] italic text-amber-400/60 mt-0.5">Bron van leningen, belasting-opslag, stadsproject-kas.</p>
+      </div>
+      {/* Warehouse */}
+      <div className="p-2.5 rounded border border-amber-900/40 bg-stone-950/40">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <Warehouse className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80">Warehouse · Tier {tier}/4</span>
+        </div>
+        <div className="flex items-baseline gap-1.5 mb-1">
+          <span className="text-xl font-mono font-bold text-amber-200">{used.toLocaleString('nl-NL')}</span>
+          <span className="text-[10px] text-amber-400/60">/ {cap.toLocaleString('nl-NL')} units</span>
+        </div>
+        <div className="h-1.5 rounded-full bg-black/70 border border-amber-900/30 overflow-hidden">
+          <div className="h-full transition-all" style={{ width: `${pct}%`, background: accent }} />
+        </div>
+        <p className="text-[9px] italic text-amber-400/60 mt-1">Stadsvoorraad. Units × waarde = totale economische waarde. Upgrade T1→T4 vergroot capaciteit.</p>
+      </div>
+    </div>
+  );
+}
+
+function StadBevolkingLegerBlock({ stad, accent }) {
+  const b = stad.bevolking || {};
+  const leger = stad.leger || {};
+  const sl = leger.stad || {};
+  const ex = leger.expeditie || {};
+  const totaal = b.totaal || 0;
+  const huizen = b.huizen ?? (totaal ? Math.floor(totaal / 2) : 0);
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      {/* Bevolking */}
+      <div className="p-2.5 rounded border border-amber-900/40 bg-stone-950/40">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <Users className="w-3.5 h-3.5" style={{ color: accent }} />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80">Bevolking</span>
+        </div>
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-xl font-mono font-bold text-amber-100">{totaal.toLocaleString('nl-NL')}</span>
+          <span className="text-[10px] text-amber-400/60">inwoners</span>
+        </div>
+        <div className="grid grid-cols-3 gap-1 mt-1.5 text-[10px]">
+          <div className="px-1.5 py-0.5 rounded bg-blue-950/30 border border-blue-900/40">
+            <span className="text-blue-300/80">♂</span> <span className="text-amber-100 font-mono">{(b.man || 0).toLocaleString('nl-NL')}</span>
+          </div>
+          <div className="px-1.5 py-0.5 rounded bg-pink-950/30 border border-pink-900/40">
+            <span className="text-pink-300/80">♀</span> <span className="text-amber-100 font-mono">{(b.vrouw || 0).toLocaleString('nl-NL')}</span>
+          </div>
+          <div className="px-1.5 py-0.5 rounded bg-stone-900/60 border border-amber-900/30 flex items-center gap-1">
+            <Home className="w-2.5 h-2.5 text-amber-400/70" />
+            <span className="text-amber-100 font-mono">{huizen.toLocaleString('nl-NL')}</span>
+          </div>
+        </div>
+        <p className="text-[9px] italic text-amber-400/60 mt-1">2 bewoners per huis. Bouw huizen om bevolking te laten groeien.</p>
+      </div>
+      {/* Leger */}
+      <div className="p-2.5 rounded border border-red-900/40 bg-stone-950/40">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <Sword className="w-3.5 h-3.5 text-red-400" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-red-300/80">Leger</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-[11px]">
+          <div>
+            <div className="flex items-center gap-1 text-[9px] uppercase tracking-wider text-amber-400/70">
+              <Shield className="w-2.5 h-2.5" />
+              Stadsleger
+            </div>
+            <div className="font-mono font-bold text-amber-100 text-base">{(sl.man || 0).toLocaleString('nl-NL')}</div>
+            <div className="text-[9px] text-amber-400/60">auto · {sl.auto_pct || 5}% van bev.</div>
+          </div>
+          <div>
+            <div className="flex items-center gap-1 text-[9px] uppercase tracking-wider text-amber-400/70">
+              <Sword className="w-2.5 h-2.5" />
+              Expeditie
+            </div>
+            <div className="font-mono font-bold text-amber-100 text-base">{(ex.man || 0).toLocaleString('nl-NL')} <span className="text-[10px] text-stone-500">/ {(ex.max || 200).toLocaleString('nl-NL')}</span></div>
+            <div className="text-[9px] text-amber-400/60">onderhoud: {ex.onderhoud_goud_per_dag || 0}g/dag</div>
+          </div>
+        </div>
+        {ex.generaal_user_id ? (
+          <p className="text-[9px] italic text-emerald-300/80 mt-1">⚔ Generaal: {ex.generaal_user_id}</p>
+        ) : (
+          <p className="text-[9px] italic text-amber-400/60 mt-1">Geen generaal — fractie bestuurt direct.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StadGebouwenBlock({ stad, accent }) {
+  const gebouwen = stad.gebouwen || [];
+  if (!gebouwen.length) return null;
+  // Aggregate by type
+  const byType = {};
+  for (const g of gebouwen) {
+    const t = g.type || 'overig';
+    if (!byType[t]) byType[t] = { type: t, naam: g.naam, count: 0, beroep_count: 0 };
+    byType[t].count += g.count || 0;
+    byType[t].beroep_count += g.beroep_count || 0;
+  }
+  const rows = Object.values(byType);
+  const TYPE_META = {
+    bank:      { emoji: '🏦', label: 'Bank' },
+    bakker:    { emoji: '🥖', label: 'Bakker' },
+    slager:    { emoji: '🥩', label: 'Slager' },
+    smid:      { emoji: '🔨', label: 'Smederij' },
+    herberg:   { emoji: '🍺', label: 'Herberg' },
+    tempel:    { emoji: '⛪', label: 'Tempel' },
+    kazerne:   { emoji: '🛡️', label: 'Kazerne' },
+    trader:    { emoji: '⚖️', label: 'Handelspost' },
+    overig:    { emoji: '🏛️', label: 'Overig' },
+  };
+  return (
+    <div className="p-2.5 rounded border border-amber-900/40 bg-stone-950/40">
+      <div className="flex items-center gap-1.5 mb-1.5">
+        <Hammer className="w-3.5 h-3.5" style={{ color: accent }} />
+        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300/80">Gebouwen ({rows.reduce((a, r) => a + r.count, 0)})</span>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
+        {rows.map(r => {
+          const meta = TYPE_META[r.type] || TYPE_META.overig;
+          const active = r.count > 0;
+          return (
+            <div key={r.type} className={`p-1.5 rounded border text-center transition-opacity ${active ? 'border-amber-900/40 bg-stone-900/60' : 'border-stone-900 bg-stone-950/30 opacity-40'}`}>
+              <div className="text-base">{meta.emoji}</div>
+              <div className="text-[10px] font-bold text-amber-100 truncate">{meta.label}</div>
+              <div className="text-[9px] text-amber-400/60">×{r.count} · {r.beroep_count} beroep</div>
+            </div>
+          );
+        })}
+      </div>
+      <p className="text-[9px] italic text-amber-400/60 mt-1.5">Elke &ldquo;Trader&rdquo; houdt prijs/aanbod bij. Voeg &ldquo;Generaal&rdquo; toe via een D&amp;D-beroep om expeditie-leger aan te sturen.</p>
+    </div>
+  );
+}
+
 export function StadDetailBark({ stadId, onClose }) {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -450,6 +607,11 @@ export function StadDetailBark({ stadId, onClose }) {
             <p className="text-[11px] text-amber-100/85 italic">&ldquo;{s.leider_bonus.beschrijving}&rdquo;</p>
           </div>
         )}
+
+        {/* v6_dnd_stad_economy_001 — Economy + Bevolking + Warehouse + Leger */}
+        <StadEconomyBlock stad={s} accent={color} />
+        <StadBevolkingLegerBlock stad={s} accent={color} />
+        <StadGebouwenBlock stad={s} accent={color} />
 
         {/* Stadsfuncties als grid */}
         <div>

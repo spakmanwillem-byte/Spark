@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-07T02:16:23.620655+00:00",
+  "updated_at": "2026-06-07T02:35:44.303952+00:00",
   "steden": [
     {
       "id": "stormhaven",
@@ -118,6 +118,99 @@
           "wijsheid": 2,
           "handel": 1
         }
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -233,6 +326,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -348,6 +534,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -463,6 +742,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -578,6 +950,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -693,6 +1158,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -808,6 +1366,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -923,6 +1574,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -1038,6 +1782,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -1153,6 +1990,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -1268,6 +2198,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     },
     {
@@ -1383,6 +2406,99 @@
       "leider_bonus": {
         "beschrijving": "",
         "effect": {}
+      },
+      "economy": {
+        "goud": 5000,
+        "goud_in_bank": 5000,
+        "bank_tier": 1,
+        "warehouse": {
+          "tier": 1,
+          "units_used": 0,
+          "capacity_per_tier": {
+            "1": 50000,
+            "2": 100000,
+            "3": 200000,
+            "4": 400000
+          },
+          "capacity_total": 50000
+        }
+      },
+      "bevolking": {
+        "totaal": 1000,
+        "man": 500,
+        "vrouw": 500,
+        "huizen_per_2_bewoners": 1,
+        "huizen": 500
+      },
+      "gebouwen": [
+        {
+          "id": "bank-1",
+          "type": "bank",
+          "naam": "Stadsbank",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "bakker-1",
+          "type": "bakker",
+          "naam": "Bakker",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "slager-1",
+          "type": "slager",
+          "naam": "Slager",
+          "count": 1,
+          "beroep_count": 1
+        },
+        {
+          "id": "smid-1",
+          "type": "smid",
+          "naam": "Smederij",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "herberg-1",
+          "type": "herberg",
+          "naam": "Herberg",
+          "count": 1,
+          "beroep_count": 2
+        },
+        {
+          "id": "tempel-1",
+          "type": "tempel",
+          "naam": "Tempel",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "kazerne-1",
+          "type": "kazerne",
+          "naam": "Kazerne",
+          "count": 0,
+          "beroep_count": 0
+        },
+        {
+          "id": "trader-1",
+          "type": "trader",
+          "naam": "Handelspost",
+          "count": 0,
+          "beroep_count": 0
+        }
+      ],
+      "leger": {
+        "stad": {
+          "auto_pct": 5,
+          "man": 50
+        },
+        "expeditie": {
+          "man": 0,
+          "max": 200,
+          "onderhoud_goud_per_dag": 0,
+          "generaal_user_id": null
+        }
       }
     }
   ]

@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "updated_at": "2026-06-07T02:10:58.162911+00:00",
+  "updated_at": "2026-06-07T02:13:28.419838+00:00",
   "steden": [
     {
       "id": "stormhaven",
-      "naam": "Stormhaven",
+      "naam": "Oerrak",
       "type": "hoofdstad",
       "provincie_id": "groningen",
       "is_hoofdstad_provincie": true,
@@ -13,7 +13,7 @@
         "y_pct": 18,
         "marker_icon": "castle"
       },
-      "introductie": "Stormhaven is de hoofdstad van Spark. Gebouwd op de drempel tussen licht en schaduw. Hier wordt niet gevochten om de zon noch om de nacht — hier wordt gewaakt over beide.",
+      "introductie": "Oerrak — krijgsstad in Bazin, hoofdstad van de Spartanen, geleid door Oracel Spark.",
       "banner_image_url": null,
       "logo_url": null,
       "kas": {
@@ -70,7 +70,7 @@
           "tevredenheid": 40
         }
       },
-      "leidende_fractie_id": "spark",
+      "leidende_fractie_id": "neutraal",
       "functies": {
         "leger": {
           "niveau": 2,
@@ -1384,23 +1384,6 @@
         "beschrijving": "",
         "effect": {}
       }
-    },
-    {
-      "id": "oerrak",
-      "naam": "Oerrak",
-      "type": "stad",
-      "provincie_id": "groningen",
-      "provincie_naam": "Bazin",
-      "leidende_fractie_id": "neutraal",
-      "kaart": {
-        "x_pct": 65,
-        "y_pct": 14
-      },
-      "introductie": "Oerrak — krijgsstad in Bazin, woonplaats van de Spartanen, geleid door Oracel Spark.",
-      "stadsfuncties": [],
-      "kas": 0,
-      "banner_image_url": null,
-      "logo_url": null
     }
   ]
 }

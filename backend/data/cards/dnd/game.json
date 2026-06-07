@@ -1,6 +1,133 @@
 {
   "cards": [
     {
+      "id": "game-4b4b4698",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Leider Solnieten",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Naam Leider Grumper Zandbank",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "leider",
+        "soilnieten",
+        "avatar",
+        "fantasie"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/ed5b64e5a94b"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0.0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "klasse": "Meester der Soilnieten",
+          "beroep": "",
+          "fractie": "aarde",
+          "locatie": "Grondheim, De Soilvelden"
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": "fractie_leider"
+      },
+      "status": "kaart",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.45,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-07T00:28:34.346603+00:00",
+        "laatst_bewerkt_op": "2026-06-07T00:30:24.460600+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
+      "id": "game-8fbd533d",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Fractie Soilnieten",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "🌱 Soilnieten\n\n+ Voedsel\n+ Ervaring\n+ Loyaliteit\n+ Verdediging\n+ Levensduur\n\n- Snelheid\n- Innovatie\n- Onderzoek\n- Aanpassing\n\nLeider:\nMeester der Soilnieten\nStads naam : Grondheim",
+        "laag2": "+25% productie van metaal\n+25% steenwinning\n+15% gebouwsnelheid\n\n-10% natuur\n-10% landbouw\n+ vervuiling",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "banner",
+        "soilnieten",
+        "fantasie"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/a90a2ffcd2f6"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0.0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "klasse": "",
+          "beroep": "",
+          "fractie": "aarde",
+          "locatie": "Grondheim, De Soilvelden"
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": "fractie_banner"
+      },
+      "status": "kaart",
+      "footnote": {
+        "bron": "manual",
+        "vertrouwen": 0.6,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-07T00:16:23.195459+00:00",
+        "laatst_bewerkt_op": "2026-06-07T00:36:40.890073+00:00",
+        "laatst_bewerkt_door": "user-001"
+      },
+      "needs": [
+        "ws5",
+        "voice"
+      ]
+    },
+    {
       "id": "game-647a3413",
       "class": "game",
       "type": "dnd_resource_card",
@@ -3811,5 +3938,5 @@
       ]
     }
   ],
-  "updated_at": "2026-06-06T23:47:22.357381+00:00"
+  "updated_at": "2026-06-07T00:38:41.071656+00:00"
 }

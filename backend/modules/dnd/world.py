@@ -47,7 +47,7 @@ PROVINCIES_BASELINE = [
     {"id": "drenthe",       "naam": "Drenthe",       "hoofdstad": "Assen",            "fractie_id": "aarde",    "x_pct": 76, "y_pct": 32},
     {"id": "overijssel",    "naam": "Overijssel",    "hoofdstad": "Zwolle",           "fractie_id": "natuur",   "x_pct": 72, "y_pct": 44},
     {"id": "flevoland",     "naam": "Flevoland",     "hoofdstad": "Lelystad",         "fractie_id": "water",    "x_pct": 58, "y_pct": 42},
-    {"id": "gelderland",    "naam": "Gelderland",    "hoofdstad": "Arnhem",           "fractie_id": "vuur",     "x_pct": 68, "y_pct": 55},
+    {"id": "gelderland",    "naam": "De Soilvelden", "hoofdstad": "Grondheim",        "fractie_id": "aarde",    "x_pct": 68, "y_pct": 55},
     {"id": "utrecht",       "naam": "Utrecht",       "hoofdstad": "Utrecht",          "fractie_id": "licht",    "x_pct": 55, "y_pct": 55},
     {"id": "noord-holland", "naam": "Noord-Holland", "hoofdstad": "Haarlem",          "fractie_id": "neutraal", "x_pct": 44, "y_pct": 40},
     {"id": "zuid-holland",  "naam": "Zuid-Holland",  "hoofdstad": "Den Haag",         "fractie_id": "neutraal", "x_pct": 42, "y_pct": 58},
@@ -757,3 +757,173 @@ async def duplicate_resource(resource_id: str, body: ResourceDuplicateBody):
     resources.append(resource)
     _save_resources(resources, user_id=body.user_id)
     return {"success": True, "resource": resource}
+
+
+
+# ===========================================================================
+# v6_dnd_fractie_import_001 — Importeer fractie-data uit een D&D game-kaart
+# Parses laag1/laag2 met simpele heuristieken zodat user gewoon in de
+# kaart kan schrijven en die data één-klik doorzet naar fracties.json
+# ===========================================================================
+import re  # noqa: E402
+
+GAME_FILE_PATH = DATA_ROOT / "cards" / "dnd" / "game.json"
+
+
+def _find_game_card(card_id: str) -> Optional[dict]:
+    if not GAME_FILE_PATH.exists():
+        return None
+    data = load_json(GAME_FILE_PATH, default={"cards": []})
+    return next((c for c in data.get("cards", []) if c.get("id") == card_id), None)
+
+
+def _parse_fractie_card(card: dict) -> dict:
+    """Parse de laag1+laag2 tekst van een fractie-kaart naar gestructureerde velden.
+
+    Verwacht format (vrij flexibel):
+        🌱 <Fractie-naam>            ← regel 1 (emoji optioneel)
+        + <bonus 1>                  ← bonussen
+        - <malus 1>                  ← malussen
+        Leider:
+        <leider titel>
+        Stads naam : <stad>
+    laag2 mag extra getal-bonussen bevatten (zelfde + / − format).
+    """
+    lagen = card.get("lagen", {}) or {}
+    laag1 = (lagen.get("laag1") or "").strip()
+    laag2 = (lagen.get("laag2") or "").strip()
+    media = card.get("media", {}) or {}
+    image_urls = media.get("image_urls") or []
+
+    out = {
+        "naam": None, "tagline": None,
+        "kernwaarden": [], "bonussen": [], "malussen": [],
+        "leider_naam": None, "leider_titel": None, "stad_naam": None,
+        "banner_image_url": image_urls[0] if image_urls else None,
+        "icon_image_url": image_urls[0] if image_urls else None,
+    }
+    if not laag1:
+        return out
+
+    lines = [ln.rstrip() for ln in laag1.split("\n")]
+    for ln in lines:
+        if ln.strip():
+            out["naam"] = re.sub(r"^[^\w]+", "", ln).strip() or None
+            break
+
+    section = None
+    for ln in lines:
+        s = ln.strip()
+        if not s:
+            continue
+        low = s.lower()
+        if low.startswith("leider"):
+            section = "leider"
+            after = s.split(":", 1)[-1].strip() if ":" in s else ""
+            if after and after.lower() not in ("leider", ""):
+                out["leider_titel"] = after
+            continue
+        if low.startswith(("stads naam", "stadsnaam", "stad:", "hoofdstad")):
+            after = s.split(":", 1)[-1].strip() if ":" in s else ""
+            if after:
+                out["stad_naam"] = after
+            section = None
+            continue
+        if s.startswith("+"):
+            out["bonussen"].append(s[1:].strip())
+            section = None
+        elif s.startswith(("-", "−", "–")):
+            out["malussen"].append(s.lstrip("-−– ").strip())
+            section = None
+        elif section == "leider":
+            if not out["leider_titel"]:
+                out["leider_titel"] = s
+            elif not out["leider_naam"]:
+                out["leider_naam"] = s
+
+    for ln in laag2.split("\n"):
+        s = ln.strip()
+        if not s:
+            continue
+        if s.startswith("+"):
+            out["bonussen"].append(s[1:].strip())
+        elif s.startswith(("-", "−", "–")):
+            out["malussen"].append(s.lstrip("-−– ").strip())
+
+    # Tagline = eerste regel na de naam die geen bonus/malus/leider is
+    for ln in lines[1:]:
+        s = ln.strip()
+        if not s or s.startswith(("+", "-", "−", "–")) or s.lower().startswith(("leider", "stads", "hoofdstad")):
+            continue
+        out["tagline"] = s
+        break
+
+    return out
+
+
+class FractieImportBody(BaseModel):
+    user_id: str
+    card_id: str            # bv. game-8fbd533d (Fractie X kaart)
+    leider_card_id: Optional[str] = None  # bv. game-4b4b4698 (Leider kaart, optioneel)
+    apply: bool = True      # apply=False → alleen parse-preview
+    overwrite_existing: bool = True
+
+
+@router.post("/fracties/{fractie_id}/import-from-card")
+async def import_fractie_from_card(fractie_id: str, body: FractieImportBody):
+    """v6_dnd_fractie_import_001 — Lees fractie-velden uit een D&D-kaart en
+    pas ze toe op de fractie. Met apply=False krijg je alleen een preview."""
+    if not _is_admin(body.user_id):
+        raise HTTPException(403, "Alleen admin")
+    card = _find_game_card(body.card_id)
+    if not card:
+        raise HTTPException(404, f"D&D-kaart '{body.card_id}' niet gevonden")
+    parsed = _parse_fractie_card(card)
+
+    leider_card = _find_game_card(body.leider_card_id) if body.leider_card_id else None
+    if leider_card:
+        l1 = (leider_card.get("lagen", {}) or {}).get("laag1", "")
+        m = re.search(r"naam\s*leider[:\s]*(.+)", l1, re.IGNORECASE)
+        if m:
+            parsed["leider_naam"] = m.group(1).strip()
+        else:
+            last = [ln for ln in l1.split("\n") if ln.strip()]
+            if last:
+                parsed["leider_naam"] = last[-1].replace("Naam Leider", "").strip(": ").strip() or parsed["leider_naam"]
+        leider_imgs = (leider_card.get("media", {}) or {}).get("image_urls") or []
+        if leider_imgs:
+            parsed["leider_avatar_url"] = leider_imgs[0]
+
+    if not body.apply:
+        return {"success": True, "preview": parsed, "card_id": body.card_id}
+
+    fracties = _load_fracties()
+    target = next((f for f in fracties if f.get("id") == fractie_id), None)
+    if not target:
+        raise HTTPException(404, f"Fractie '{fractie_id}' niet gevonden")
+
+    def maybe_set(key, val):
+        if val is None:
+            return
+        if not body.overwrite_existing and target.get(key):
+            return
+        target[key] = val
+
+    maybe_set("naam", parsed.get("naam"))
+    maybe_set("tagline", parsed.get("tagline"))
+    maybe_set("leider_naam", parsed.get("leider_naam"))
+    maybe_set("leider_titel", parsed.get("leider_titel"))
+    maybe_set("banner_image_url", parsed.get("banner_image_url"))
+    maybe_set("icon_image_url", parsed.get("icon_image_url"))
+    if parsed.get("bonussen"):
+        target["bonussen"] = parsed["bonussen"] if body.overwrite_existing else (target.get("bonussen") or []) + parsed["bonussen"]
+    if parsed.get("malussen"):
+        target["malussen"] = parsed["malussen"] if body.overwrite_existing else (target.get("malussen") or []) + parsed["malussen"]
+    target["linked_game_card_id"] = body.card_id
+    if body.leider_card_id:
+        target["linked_leider_card_id"] = body.leider_card_id
+    if parsed.get("leider_avatar_url"):
+        target["leider_avatar_url"] = parsed["leider_avatar_url"]
+
+    _save_fracties(fracties, user_id=body.user_id)
+    return {"success": True, "fractie": target, "applied": parsed, "stad_suggestion": parsed.get("stad_naam")}

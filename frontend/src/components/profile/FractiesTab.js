@@ -1131,9 +1131,10 @@ function ListEditor({ label, items, setItems, placeholder, accent = '#f59e0b', t
   );
 }
 
-function GameCardPicker({ value, onChange, testid }) {
+function GameCardPicker({ value, onChange, testid, fractieId, userId, onImported }) {
   const [cards, setCards] = useState([]);
   const [query, setQuery] = useState('');
+  const [importing, setImporting] = useState(false);
   useEffect(() => {
     fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`).then(r => r.json()).then(d => {
       setCards(d.cards || []);
@@ -1143,6 +1144,26 @@ function GameCardPicker({ value, onChange, testid }) {
     ? cards.filter(c => (c.begrip || '').toLowerCase().includes(query.toLowerCase().trim()))
     : cards.slice(0, 20);
   const linked = cards.find(c => c.id === value);
+
+  const handleImport = async () => {
+    if (!value || !fractieId || !userId) return;
+    if (!window.confirm(`Importeer alle velden uit "${linked?.begrip}" naar deze fractie? Bestaande waarden worden overschreven.`)) return;
+    setImporting(true);
+    try {
+      const r = await fetch(`${API}/api/dnd/world/fracties/${fractieId}/import-from-card`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, card_id: value, apply: true, overwrite_existing: true }),
+      });
+      if (!r.ok) throw new Error(`${r.status}`);
+      const d = await r.json();
+      if (onImported) onImported(d);
+    } catch (e) {
+      window.alert(`Import mislukt: ${e.message}`);
+    } finally {
+      setImporting(false);
+    }
+  };
+
   return (
     <div className="space-y-1">
       <div className="text-[10px] uppercase tracking-wider text-amber-300/70">D&amp;D archief kaart (optioneel)</div>
@@ -1159,6 +1180,18 @@ function GameCardPicker({ value, onChange, testid }) {
             <div className="text-[11px] font-bold text-amber-100 truncate">{linked.begrip}</div>
             <div className="text-[9px] text-stone-500 font-mono">{linked.id}</div>
           </div>
+          {fractieId && userId && (
+            <button
+              data-testid="fractie-import-from-card-btn"
+              onClick={handleImport}
+              disabled={importing}
+              className="text-[10px] px-2 py-0.5 rounded border border-emerald-700/60 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-900/60 disabled:opacity-50 flex items-center gap-1"
+              title="Lees alle velden (naam, leider, bonussen, malussen, banner) uit deze kaart"
+            >
+              <Upload className="w-3 h-3 rotate-180" />
+              {importing ? 'Importeren…' : 'Importeer'}
+            </button>
+          )}
           <button
             onClick={() => onChange(null)}
             className="text-[10px] px-1.5 py-0.5 rounded border border-red-700/60 text-red-300 hover:bg-red-900/30"
@@ -1190,6 +1223,11 @@ function GameCardPicker({ value, onChange, testid }) {
             <p className="text-[10px] italic text-stone-500 px-1">Geen kaarten gevonden.</p>
           )}
         </div>
+      )}
+      {linked && fractieId && (
+        <p className="text-[9px] italic text-amber-400/60">
+          Tip: schrijf de fractie-info in deze kaart (laag1 = + bonussen, − malussen, &ldquo;Leider:&rdquo;, &ldquo;Stads naam: X&rdquo;). Klik dan op <span className="text-emerald-300">Importeer</span> en de velden worden automatisch ingevuld.
+        </p>
       )}
     </div>
   );
@@ -1436,11 +1474,14 @@ function FractieEditModal({ fractie, userId, onClose, onSaved }) {
           />
         </div>
 
-        {/* Koppel D&D-kaart */}
+        {/* Koppel D&D-kaart + Importeer */}
         <GameCardPicker
           value={form.linked_game_card_id}
           onChange={(v) => setForm(f => ({ ...f, linked_game_card_id: v }))}
           testid="fractie-cardpicker-input"
+          fractieId={fractie.id}
+          userId={userId}
+          onImported={() => { onSaved(); }}
         />
 
         {error && (

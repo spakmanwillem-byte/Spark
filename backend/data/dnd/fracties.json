@@ -244,19 +244,19 @@
     },
     {
       "id": "aarde",
-      "naam": "Aarde",
-      "kleur": "#78350f",
+      "naam": "Soilnieten",
+      "kleur": "#65a30d",
       "element": "aarde",
       "alignment": "schaduw",
-      "leider": "—",
+      "leider": "Grumper Zandbank — Meester der Soilnieten",
       "is_main": false,
-      "beschrijving": "Element Aarde (Schaduw-aligned).",
-      "leider_naam": "",
+      "beschrijving": "De Soilnieten — geworteld volk van de aarde. Trouwe verdedigers, gedijend op tijd, voedsel en gemeenschap.",
+      "leider_naam": "Grumper Zandbank",
       "leider_user_id": null,
-      "banner_image_url": null,
-      "icon_image_url": null,
-      "introductie": "",
-      "tagline": "",
+      "banner_image_url": "/api/system-archive/file/a90a2ffcd2f6",
+      "icon_image_url": "/api/system-archive/file/a90a2ffcd2f6",
+      "introductie": "Waar de Soilnieten lopen, groeit gras. Ze haasten zich nooit, maar wat ze planten, blijft. Hun loyaliteit is onwankelbaar als steen, hun ervaring rijker dan elke oogst. De wereld verandert; de Soilnieten blijven.",
+      "tagline": "Geworteld in de grond, geduldig als de aarde.",
       "stats": {
         "aanhangers_total": 0,
         "leidende_steden_count": 0,
@@ -271,12 +271,36 @@
       },
       "tax_rate_stad": 0.05,
       "tax_rate_leden": 0.02,
-      "leider_titel": "",
-      "kernwaarden": [],
-      "kleuren": [],
-      "bonussen": [],
-      "malussen": [],
-      "linked_game_card_id": null
+      "leider_titel": "Meester der Soilnieten",
+      "kernwaarden": [
+        "🌱 Voedsel",
+        "📜 Ervaring",
+        "🤝 Loyaliteit",
+        "🛡️ Verdediging",
+        "⏳ Levensduur"
+      ],
+      "kleuren": [
+        "Aardebruin",
+        "Mosgroen",
+        "Stengelgeel",
+        "Klei-oker"
+      ],
+      "bonussen": [
+        "+ Voedsel-productie",
+        "+ Ervaringswinst",
+        "+ Loyaliteit van bewoners",
+        "+ Verdediging van steden",
+        "+ Levensduur (langer leven)"
+      ],
+      "malussen": [
+        "− Snelheid (langzame eenheden)",
+        "− Innovatie-tempo",
+        "− Onderzoekspunten",
+        "− Aanpassingsvermogen aan verandering"
+      ],
+      "linked_game_card_id": "game-8fbd533d",
+      "leider_avatar_url": "/api/system-archive/file/ed5b64e5a94b",
+      "linked_leider_card_id": "game-4b4b4698"
     },
     {
       "id": "natuur",
@@ -387,6 +411,6 @@
       "linked_game_card_id": null
     }
   ],
-  "updated_at": "2026-06-06T23:59:16.578993+00:00",
+  "updated_at": "2026-06-07T00:38:41.068790+00:00",
   "updated_by": "user-001"
 }

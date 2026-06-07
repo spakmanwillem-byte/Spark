@@ -335,6 +335,73 @@ class BackfillMigrationBody(BaseModel):
     require_laag1: bool = True   # alleen mark als v2-kaart een gevulde laag1 heeft
 
 
+# v6_kbv2_dedupe_inbox_lade_001 — verwijder inbox-duplicaten die ook in een lade zitten
+class DedupeInboxBody(BaseModel):
+    user_id: str = "user-001"
+    dry_run: bool = True
+
+
+@router.post("/admin/dedupe-inbox-vs-lade")
+@traced(intent="Verwijder inbox-kaarten die qua id ook al in een lade staan", module="kb_v2")
+async def dedupe_inbox_vs_lade(body: DedupeInboxBody):
+    """v6_kbv2_dedupe_inbox_lade_001 — Verwijder kaarten uit `knowledge_inbox.json`
+    waarvan de ID al voorkomt in een lade-bestand. Lade is canoniek.
+
+    Met `dry_run=true` (default) krijg je alleen een telling. Backup wordt automatisch
+    gemaakt bij `dry_run=false`.
+    """
+    import shutil as _shutil
+    from pathlib import Path as _P
+    DATA = _P(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+
+    # Verzamel alle lade-IDs
+    lade_ids = set()
+    for cat in ("weten", "doen", "voelen", "spreken"):
+        fp = DATA / f"knowledge_v2_{cat}.json"
+        if not fp.exists():
+            continue
+        d = load_json(fp, default={"kaarten": []})
+        for c in d.get("kaarten", []):
+            if c.get("id"):
+                lade_ids.add(c["id"])
+
+    inbox_p = DATA / "knowledge_inbox.json"
+    if not inbox_p.exists():
+        raise HTTPException(404, "knowledge_inbox.json niet gevonden")
+    inbox = load_json(inbox_p, default={"kaarten": []})
+    kaarten = inbox.get("kaarten", []) or []
+    duplicates = [c for c in kaarten if c.get("id") in lade_ids]
+    keep = [c for c in kaarten if c.get("id") not in lade_ids]
+
+    if body.dry_run:
+        return {
+            "success": True, "dry_run": True,
+            "would_remove": len(duplicates),
+            "inbox_before": len(kaarten),
+            "inbox_after": len(keep),
+            "sample": [{"id": c.get("id"), "begrip": c.get("begrip")} for c in duplicates[:20]],
+        }
+
+    ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    backup = inbox_p.with_suffix(f".json.backup_dedupe_{ts}")
+    _shutil.copy(str(inbox_p), str(backup))
+
+    inbox["kaarten"] = keep
+    inbox["updated_at"] = _dt.now(_tz.utc).isoformat()
+    inbox["last_dedupe"] = {
+        "at": inbox["updated_at"], "removed": len(duplicates),
+        "by": body.user_id, "reason": "ids_also_in_lade",
+    }
+    save_json(inbox_p, inbox)
+    return {
+        "success": True, "dry_run": False,
+        "removed": len(duplicates),
+        "inbox_before": len(kaarten),
+        "inbox_after": len(keep),
+        "backup_file": backup.name,
+    }
+
+
 @router.post("/admin/backfill-v1-migration")
 @traced(intent="Backfill v1.migrated_to_v2 flag voor v1-entries met bestaande v2-kaart", module="kb_v2")
 async def backfill_v1_migration(body: BackfillMigrationBody):

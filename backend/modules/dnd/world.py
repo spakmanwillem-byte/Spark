@@ -600,6 +600,111 @@ async def delete_resource(resource_id: str, user_id: str):
     return {"success": True, "deleted": resource_id}
 
 
+# ===========================================================================
+# v6_dnd_fractie_edit_001 — Fractie admin-edit (PATCH + banner upload)
+# ===========================================================================
+class FractiePatchBody(BaseModel):
+    user_id: str
+    naam: Optional[str] = None
+    kleur: Optional[str] = None
+    leider: Optional[str] = None
+    leider_naam: Optional[str] = None
+    leider_titel: Optional[str] = None
+    leider_user_id: Optional[str] = None
+    tagline: Optional[str] = None
+    beschrijving: Optional[str] = None
+    introductie: Optional[str] = None
+    kernwaarden: Optional[List[str]] = None
+    kleuren: Optional[List[str]] = None
+    bonussen: Optional[List[str]] = None
+    malussen: Optional[List[str]] = None
+    banner_image_url: Optional[str] = None
+    icon_image_url: Optional[str] = None
+    linked_game_card_id: Optional[str] = None
+
+
+def _save_fracties(fracties: List[dict], user_id: Optional[str] = None) -> None:
+    data = {
+        "fracties": fracties,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "updated_by": user_id,
+    }
+    save_json(FRACTIES_FILE, data)
+
+
+@router.patch("/fracties/{fractie_id}")
+async def patch_fractie(fractie_id: str, body: FractiePatchBody):
+    """Admin: update fractie-metadata (naam, leider, kleuren, kernwaarden, bonussen, ...)."""
+    if not _is_admin(body.user_id):
+        raise HTTPException(403, "Alleen admin")
+    fracties = _load_fracties()
+    target = next((f for f in fracties if f.get("id") == fractie_id), None)
+    if not target:
+        raise HTTPException(404, f"Fractie '{fractie_id}' niet gevonden")
+    update_fields = body.model_dump(exclude_unset=True, exclude={"user_id"})
+    for k, v in update_fields.items():
+        target[k] = v
+    _save_fracties(fracties, user_id=body.user_id)
+    return {"success": True, "fractie": target}
+
+
+@router.post("/fracties/{fractie_id}/banner")
+async def upload_fractie_banner(
+    fractie_id: str,
+    image: UploadFile = File(...),
+    kind: str = Form("banner"),        # "banner" of "icon"
+    user_id: str = Form(...),
+):
+    """Admin: upload banner of icon afbeelding voor een fractie."""
+    if not _is_admin(user_id):
+        raise HTTPException(403, "Alleen admin")
+    if kind not in ("banner", "icon"):
+        raise HTTPException(400, "kind moet 'banner' of 'icon' zijn")
+    ext = Path(image.filename or "").suffix.lower()
+    if ext not in ALLOWED_IMAGE:
+        raise HTTPException(400, f"Image-type '{ext}' niet toegestaan")
+    data = await image.read()
+    if len(data) > MAX_IMAGE_MB * 1024 * 1024:
+        raise HTTPException(413, f"Image te groot (>{MAX_IMAGE_MB}MB)")
+
+    fracties = _load_fracties()
+    target = next((f for f in fracties if f.get("id") == fractie_id), None)
+    if not target:
+        raise HTTPException(404, f"Fractie '{fractie_id}' niet gevonden")
+
+    # Save to system_archive
+    SA_DIR.mkdir(parents=True, exist_ok=True)
+    (SA_DIR / "foto").mkdir(parents=True, exist_ok=True)
+    file_id = uuid.uuid4().hex[:12]
+    safe_name = f"{file_id}{ext}"
+    dest = SA_DIR / "foto" / safe_name
+    dest.write_bytes(data)
+    entry = {
+        "id": file_id, "filename": safe_name,
+        "original_name": image.filename or f"fractie_{fractie_id}_{kind}{ext}",
+        "category": "foto", "extension": ext,
+        "mime_type": image.content_type or "image/png",
+        "size_bytes": len(data),
+        "description": f"Fractie {kind} voor {target.get('naam')}",
+        "tags": ["dnd", f"fractie_{kind}", f"fractie_{fractie_id}"],
+        "uploaded_at": datetime.now(timezone.utc).isoformat(),
+        "uploaded_by": user_id,
+        "path": str(dest),
+        "source": "fractie_image_upload",
+        "linked_fractie_id": fractie_id,
+    }
+    idx = load_json(SA_INDEX, default={"files": []})
+    idx.setdefault("files", []).append(entry)
+    idx["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(SA_INDEX, idx)
+
+    image_url = f"/api/system-archive/file/{file_id}"
+    field = "banner_image_url" if kind == "banner" else "icon_image_url"
+    target[field] = image_url
+    _save_fracties(fracties, user_id=user_id)
+    return {"success": True, "fractie_id": fractie_id, "kind": kind, "image_url": image_url, "archive_id": file_id}
+
+
 class ResourceDuplicateBody(BaseModel):
     user_id: str
     naam: Optional[str] = None       # default = "{originele naam} (kopie)"

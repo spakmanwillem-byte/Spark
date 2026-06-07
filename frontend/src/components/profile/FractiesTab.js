@@ -13,7 +13,7 @@
  * Geen edit-flow. Data komt uit fracties.json + steden.json.
  */
 import React, { useState, useEffect, useRef } from 'react';
-import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload, Copy } from 'lucide-react';
+import { Crown, Users, Building, Coins, Map, ChevronRight, Sparkles, X, Plus, Trash2, Upload, Copy, Pencil, Image as ImageIcon, Save, Link as LinkIcon } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -78,6 +78,14 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
   const [activeFid, setActiveFid] = useState('spark');
   const [openStad, setOpenStad] = useState(null);
   const [openLandkaart, setOpenLandkaart] = useState(false);
+  // v6_dnd_fractie_edit_001 — admin edit modal
+  const [editingFid, setEditingFid] = useState(null);
+
+  const reloadFracties = () => {
+    fetch(`${API}/api/dnd/world/fracties/full`).then(r => r.json()).then(f => {
+      setFracties(f.fracties || []);
+    });
+  };
 
   useEffect(() => {
     Promise.all([
@@ -135,44 +143,151 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
       {/* Content — actieve fractie */}
       {active && (
         <div className="p-3 text-[11px] text-amber-100/90 leading-relaxed min-h-[180px]">
-          {/* Header: banner-strip met naam, tagline, leider, kleur-icoon */}
-          <div
-            className="flex items-center gap-3 mb-3 p-2 rounded border-2"
-            style={{
-              background: `linear-gradient(90deg, ${activeColor}30, ${activeColor}05)`,
-              borderColor: `${activeColor}50`,
-            }}
-          >
-            <div
-              className="w-10 h-10 rounded flex items-center justify-center text-lg font-bold flex-shrink-0"
-              style={{ background: activeColor, color: '#0f172a' }}
-            >
-              {active.icon_image_url ? (
-                <img src={`${API}${active.icon_image_url}`} alt="" className="w-full h-full object-cover rounded" />
-              ) : active.naam[0]}
+          {/* v6_dnd_fractie_edit_001 — Banner (als beschikbaar) */}
+          {active.banner_image_url && (
+            <div className="relative mb-3 -mx-1 rounded overflow-hidden border-2" style={{ borderColor: `${activeColor}60` }}>
+              <img
+                src={`${API}${active.banner_image_url}`}
+                alt={`${active.naam} banner`}
+                className="w-full h-32 object-cover"
+                data-testid={`fractie-banner-${active.id}`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/30 to-transparent" />
+              <div className="absolute bottom-1.5 left-2 right-2 flex items-end justify-between">
+                <div className="min-w-0">
+                  <div className="text-sm font-bold text-amber-100 font-serif drop-shadow-lg truncate">{active.naam}</div>
+                  {active.tagline && (
+                    <div className="text-[10px] italic text-amber-200/90 drop-shadow truncate">{active.tagline}</div>
+                  )}
+                </div>
+                {isAdmin && (
+                  <button
+                    data-testid={`fractie-edit-btn-${active.id}`}
+                    onClick={() => setEditingFid(active.id)}
+                    className="flex-shrink-0 flex items-center gap-1 px-2 py-0.5 rounded bg-stone-950/80 border border-amber-700/60 text-amber-200 hover:bg-amber-900/40 text-[10px]"
+                    title="Bewerk fractie-gegevens"
+                  >
+                    <Pencil className="w-3 h-3" />
+                    Bewerk
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-bold text-amber-100 font-serif">{active.naam}</div>
-              {active.tagline && (
-                <div className="text-[10px] italic text-amber-300/70 truncate">{active.tagline}</div>
+          )}
+
+          {/* Header-strip (kleur + naam + leider) — alleen tonen als geen banner */}
+          {!active.banner_image_url && (
+            <div
+              className="flex items-center gap-3 mb-3 p-2 rounded border-2"
+              style={{
+                background: `linear-gradient(90deg, ${activeColor}30, ${activeColor}05)`,
+                borderColor: `${activeColor}50`,
+              }}
+            >
+              <div
+                className="w-10 h-10 rounded flex items-center justify-center text-lg font-bold flex-shrink-0"
+                style={{ background: activeColor, color: '#0f172a' }}
+              >
+                {active.icon_image_url ? (
+                  <img src={`${API}${active.icon_image_url}`} alt="" className="w-full h-full object-cover rounded" />
+                ) : active.naam[0]}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-bold text-amber-100 font-serif">{active.naam}</div>
+                {active.tagline && (
+                  <div className="text-[10px] italic text-amber-300/70 truncate">{active.tagline}</div>
+                )}
+              </div>
+              {isAdmin && (
+                <button
+                  data-testid={`fractie-edit-btn-${active.id}`}
+                  onClick={() => setEditingFid(active.id)}
+                  className="flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded border border-amber-700/60 text-amber-200 hover:bg-amber-900/40 text-[10px]"
+                  title="Bewerk fractie-gegevens"
+                >
+                  <Pencil className="w-3 h-3" />
+                  Bewerk
+                </button>
               )}
             </div>
-          </div>
+          )}
+
+          {/* Leider-titel (boven intro) */}
+          {(active.leider_titel || active.leider) && (
+            <div className="mb-2 flex items-center gap-1.5">
+              <Crown className="w-3 h-3" style={{ color: activeColor }} />
+              <span className="text-[10px] uppercase tracking-wider" style={{ color: activeColor }}>Leider:</span>
+              <span className="text-[11px] text-amber-100 font-bold">
+                {active.leider_naam ? `${active.leider_naam}` : ''}
+                {active.leider_titel ? ` — ${active.leider_titel}` : (active.leider && active.leider !== '—' && !active.leider_naam ? active.leider : '')}
+              </span>
+            </div>
+          )}
 
           {/* Intro */}
           {active.introductie ? (
             <p className="text-[11px] text-amber-100/85 mb-3 italic">{active.introductie}</p>
           ) : (
-            <p className="text-[11px] italic text-amber-400/40 mb-3">Geen introductie ingevuld in fracties.json</p>
+            <p className="text-[11px] italic text-amber-400/40 mb-3">Geen introductie ingevuld.</p>
           )}
 
           {/* Stats-rij (horizontaal) */}
           <div className="grid grid-cols-4 gap-1.5 mb-3">
-            <MiniStat icon={Crown} label="Leider" value={active.leider_naam || active.leider || '—'} accent={activeColor} />
+            <MiniStat icon={Crown} label="Leider" value={active.leider_naam || active.leider_titel || active.leider || '—'} accent={activeColor} />
             <MiniStat icon={Users} label="Aanhangers" value={active.stats?.aanhangers_total ?? 0} accent={activeColor} />
             <MiniStat icon={Building} label="Steden" value={stedenVanFractie.length} accent={activeColor} />
             <MiniStat icon={Coins} label="Goud" value={active.stats?.goud ?? 0} accent={activeColor} />
           </div>
+
+          {/* v6_dnd_fractie_edit_001 — Kernwaarden + Kleuren-palet */}
+          {(active.kernwaarden?.length || active.kleuren?.length) ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
+              {active.kernwaarden?.length > 0 && (
+                <div className="p-2 rounded border border-stone-800 bg-stone-950/40">
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-amber-300/70 mb-1">Kernwaarden</div>
+                  <div className="flex flex-wrap gap-1">
+                    {active.kernwaarden.map((k, i) => (
+                      <span key={i} className="text-[10px] px-1.5 py-0.5 rounded-full border" style={{ borderColor: `${activeColor}60`, background: `${activeColor}15`, color: '#fef3c7' }}>
+                        {k}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {active.kleuren?.length > 0 && (
+                <div className="p-2 rounded border border-stone-800 bg-stone-950/40">
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-amber-300/70 mb-1">Kleuren-palet</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {active.kleuren.map((k, i) => (
+                      <span key={i} className="text-[10px] text-amber-100/85">{k}{i < active.kleuren.length - 1 ? ' ·' : ''}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : null}
+
+          {/* v6_dnd_fractie_edit_001 — Bonussen + Malussen */}
+          {(active.bonussen?.length || active.malussen?.length) ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
+              {active.bonussen?.length > 0 && (
+                <div className="p-2 rounded border border-emerald-900/40 bg-emerald-950/20">
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-300/80 mb-1">Bonussen</div>
+                  <ul className="text-[11px] text-emerald-100/90 space-y-0.5">
+                    {active.bonussen.map((b, i) => <li key={i}>• {b}</li>)}
+                  </ul>
+                </div>
+              )}
+              {active.malussen?.length > 0 && (
+                <div className="p-2 rounded border border-red-900/40 bg-red-950/20">
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-red-300/80 mb-1">Malussen</div>
+                  <ul className="text-[11px] text-red-100/90 space-y-0.5">
+                    {active.malussen.map((m, i) => <li key={i}>• {m}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ) : null}
 
           {/* Stads-bonus + leidende steden naast elkaar */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -219,6 +334,14 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
               )}
             </div>
           </div>
+
+          {/* Link naar D&D archief kaart */}
+          {active.linked_game_card_id && (
+            <div className="mt-2 flex items-center gap-1.5 text-[10px] text-amber-300/70">
+              <LinkIcon className="w-3 h-3" />
+              Gekoppeld aan D&D-kaart: <span className="font-mono text-amber-200">{active.linked_game_card_id}</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -235,6 +358,15 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
           isAdmin={isAdmin}
           onClose={() => setOpenLandkaart(false)}
           onOpenStad={(s) => setOpenStad(s)}
+        />
+      )}
+      {editingFid && (
+        <FractieEditModal
+          key={editingFid}
+          fractie={fracties.find(f => f.id === editingFid)}
+          userId={userId}
+          onClose={() => setEditingFid(null)}
+          onSaved={() => { reloadFracties(); setEditingFid(null); }}
         />
       )}
     </PaperPanel>
@@ -920,6 +1052,399 @@ function AddResourceModal({ onClose, onCreated, types, fracties, userId }) {
             className="text-[11px] px-3 py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold disabled:opacity-50"
           >
             {busy ? 'Uploaden…' : 'Toevoegen'}
+          </button>
+        </div>
+      </div>
+    </MapModal>
+  );
+}
+
+
+// ============================================================
+// v6_dnd_fractie_edit_001 — FRACTIE EDIT MODAL
+// Admin paneel voor naam, leider, tagline, intro, beschrijving,
+// kernwaarden / kleuren / bonussen / malussen (lijsten), kleur,
+// banner upload, link naar D&D game-card.
+// ============================================================
+function ListEditor({ label, items, setItems, placeholder, accent = '#f59e0b', testid }) {
+  const [draft, setDraft] = useState('');
+  const add = () => {
+    const v = draft.trim();
+    if (!v) return;
+    setItems([...items, v]);
+    setDraft('');
+  };
+  return (
+    <div className="space-y-1">
+      <div className="text-[10px] uppercase tracking-wider text-amber-300/70">{label}</div>
+      <div className="flex flex-wrap gap-1">
+        {items.map((it, i) => (
+          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded-full border flex items-center gap-1" style={{ borderColor: `${accent}60`, background: `${accent}15`, color: '#fef3c7' }}>
+            {it}
+            <button
+              onClick={() => setItems(items.filter((_, idx) => idx !== i))}
+              className="hover:text-red-300"
+              title="Verwijder"
+            >
+              <X className="w-2.5 h-2.5" />
+            </button>
+          </span>
+        ))}
+        {items.length === 0 && <span className="text-[10px] italic text-stone-500">Nog leeg.</span>}
+      </div>
+      <div className="flex gap-1">
+        <input
+          data-testid={testid}
+          value={draft}
+          onChange={e => setDraft(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), add())}
+          placeholder={placeholder}
+          className="flex-1 px-2 py-1 bg-stone-950 border border-amber-900/40 rounded text-[11px] text-amber-100 placeholder-amber-500/40"
+        />
+        <button
+          onClick={add}
+          className="px-2 py-1 text-[10px] rounded bg-amber-800 hover:bg-amber-700 text-amber-50 font-bold"
+        >
+          + Toevoegen
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function GameCardPicker({ value, onChange, testid }) {
+  const [cards, setCards] = useState([]);
+  const [query, setQuery] = useState('');
+  useEffect(() => {
+    fetch(`${API}/api/dnd/spark-world/game-cards?limit=500`).then(r => r.json()).then(d => {
+      setCards(d.cards || []);
+    });
+  }, []);
+  const filtered = query.trim()
+    ? cards.filter(c => (c.begrip || '').toLowerCase().includes(query.toLowerCase().trim()))
+    : cards.slice(0, 20);
+  const linked = cards.find(c => c.id === value);
+  return (
+    <div className="space-y-1">
+      <div className="text-[10px] uppercase tracking-wider text-amber-300/70">D&amp;D archief kaart (optioneel)</div>
+      {linked && (
+        <div className="flex items-center gap-2 p-1.5 rounded border border-amber-900/40 bg-stone-950/60">
+          {linked.media?.image_urls?.[0] ? (
+            <img src={`${API}${linked.media.image_urls[0]}`} alt="" className="w-8 h-8 object-cover rounded" />
+          ) : (
+            <div className="w-8 h-8 rounded bg-stone-900 flex items-center justify-center">
+              <LinkIcon className="w-4 h-4 text-amber-400/60" />
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            <div className="text-[11px] font-bold text-amber-100 truncate">{linked.begrip}</div>
+            <div className="text-[9px] text-stone-500 font-mono">{linked.id}</div>
+          </div>
+          <button
+            onClick={() => onChange(null)}
+            className="text-[10px] px-1.5 py-0.5 rounded border border-red-700/60 text-red-300 hover:bg-red-900/30"
+            title="Ontkoppel"
+          >
+            × Ontkoppel
+          </button>
+        </div>
+      )}
+      <input
+        data-testid={testid}
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder={linked ? 'Zoek een andere kaart…' : 'Zoek D&D-kaart…'}
+        className="w-full px-2 py-1 bg-stone-950 border border-amber-900/40 rounded text-[11px] text-amber-100 placeholder-amber-500/40"
+      />
+      {query.trim() && (
+        <div className="max-h-36 overflow-y-auto space-y-0.5 border border-amber-900/30 rounded bg-stone-950/40 p-1">
+          {filtered.slice(0, 30).map(c => (
+            <button
+              key={c.id}
+              onClick={() => { onChange(c.id); setQuery(''); }}
+              className="w-full text-left px-1.5 py-0.5 text-[10px] rounded hover:bg-amber-900/30 text-amber-200 truncate"
+            >
+              {c.begrip} <span className="text-stone-500 font-mono">({c.id})</span>
+            </button>
+          ))}
+          {filtered.length === 0 && (
+            <p className="text-[10px] italic text-stone-500 px-1">Geen kaarten gevonden.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FractieEditModal({ fractie, userId, onClose, onSaved }) {
+  const [form, setForm] = useState(() => ({
+    naam: fractie?.naam || '',
+    kleur: fractie?.kleur || '#94a3b8',
+    leider_naam: fractie?.leider_naam || '',
+    leider_titel: fractie?.leider_titel || (fractie?.leider && fractie?.leider !== '—' ? fractie.leider : ''),
+    tagline: fractie?.tagline || '',
+    beschrijving: fractie?.beschrijving || '',
+    introductie: fractie?.introductie || '',
+    kernwaarden: Array.isArray(fractie?.kernwaarden) ? [...fractie.kernwaarden] : [],
+    kleuren: Array.isArray(fractie?.kleuren) ? [...fractie.kleuren] : [],
+    bonussen: Array.isArray(fractie?.bonussen) ? [...fractie.bonussen] : [],
+    malussen: Array.isArray(fractie?.malussen) ? [...fractie.malussen] : [],
+    banner_image_url: fractie?.banner_image_url || null,
+    icon_image_url: fractie?.icon_image_url || null,
+    linked_game_card_id: fractie?.linked_game_card_id || null,
+  }));
+  const [bannerFile, setBannerFile] = useState(null);
+  const [bannerPreview, setBannerPreview] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+
+  if (!fractie) return null;
+
+  const onPickBanner = (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setBannerFile(f);
+    setBannerPreview(URL.createObjectURL(f));
+  };
+
+  const save = async () => {
+    setError(null);
+    setBusy(true);
+    try {
+      // 1. Upload banner if changed
+      let bannerUrl = form.banner_image_url;
+      if (bannerFile) {
+        const fd = new FormData();
+        fd.append('image', bannerFile);
+        fd.append('kind', 'banner');
+        fd.append('user_id', userId);
+        const r = await fetch(`${API}/api/dnd/world/fracties/${fractie.id}/banner`, { method: 'POST', body: fd });
+        if (!r.ok) throw new Error(`Banner upload ${r.status}`);
+        const d = await r.json();
+        bannerUrl = d.image_url;
+      }
+      // 2. PATCH fractie
+      const body = {
+        user_id: userId,
+        naam: form.naam,
+        kleur: form.kleur,
+        leider_naam: form.leider_naam,
+        leider_titel: form.leider_titel,
+        tagline: form.tagline,
+        beschrijving: form.beschrijving,
+        introductie: form.introductie,
+        kernwaarden: form.kernwaarden,
+        kleuren: form.kleuren,
+        bonussen: form.bonussen,
+        malussen: form.malussen,
+        banner_image_url: bannerUrl,
+        linked_game_card_id: form.linked_game_card_id,
+      };
+      const r2 = await fetch(`${API}/api/dnd/world/fracties/${fractie.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!r2.ok) {
+        const txt = await r2.text();
+        throw new Error(`PATCH ${r2.status}: ${txt}`);
+      }
+      onSaved();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <MapModal title={`FRACTIE BEWERKEN · ${(fractie.naam || '').toUpperCase()}`} onClose={onClose} maxWidth="max-w-3xl" zIndex={70}>
+      <div className="space-y-3 text-amber-100">
+        {/* Banner upload + preview */}
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-amber-300/70 mb-1">Banner-afbeelding</div>
+          <div className="flex gap-2 items-start">
+            <div className="flex-shrink-0 w-32 h-20 rounded border-2 overflow-hidden bg-stone-950" style={{ borderColor: `${form.kleur}60` }}>
+              {bannerPreview || form.banner_image_url ? (
+                <img
+                  src={bannerPreview || `${API}${form.banner_image_url}`}
+                  alt="banner"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-stone-600">
+                  <ImageIcon className="w-8 h-8" />
+                </div>
+              )}
+            </div>
+            <div className="flex-1 space-y-1">
+              <label className="cursor-pointer block">
+                <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded border border-amber-900/40 bg-stone-950 hover:bg-stone-900 text-[11px] text-amber-200">
+                  <Upload className="w-3.5 h-3.5" />
+                  {bannerFile ? bannerFile.name : 'Vervang banner…'}
+                </div>
+                <input
+                  data-testid="fractie-banner-input"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={onPickBanner}
+                />
+              </label>
+              <p className="text-[10px] italic text-amber-400/60">Max 8MB. Aanbevolen: 1024×512 of breder.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Naam + Kleur */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <label className="block md:col-span-2">
+            <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Fractie-naam</span>
+            <input
+              data-testid="fractie-naam-input"
+              value={form.naam}
+              onChange={e => setForm(f => ({ ...f, naam: e.target.value }))}
+              className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100"
+            />
+          </label>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Kleur</span>
+            <div className="mt-1 flex gap-1">
+              <input
+                type="color"
+                value={form.kleur}
+                onChange={e => setForm(f => ({ ...f, kleur: e.target.value }))}
+                className="w-12 h-8 bg-stone-950 border border-amber-900/40 rounded cursor-pointer"
+              />
+              <input
+                value={form.kleur}
+                onChange={e => setForm(f => ({ ...f, kleur: e.target.value }))}
+                className="flex-1 px-2 py-1 bg-stone-950 border border-amber-900/40 rounded text-[11px] text-amber-100 font-mono"
+              />
+            </div>
+          </label>
+        </div>
+
+        {/* Leider naam + titel */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Leider — Naam</span>
+            <input
+              data-testid="fractie-leider-naam"
+              value={form.leider_naam}
+              onChange={e => setForm(f => ({ ...f, leider_naam: e.target.value }))}
+              placeholder="(naam van de huidige leider)"
+              className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100 placeholder-amber-500/40"
+            />
+          </label>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Leider — Titel</span>
+            <input
+              data-testid="fractie-leider-titel"
+              value={form.leider_titel}
+              onChange={e => setForm(f => ({ ...f, leider_titel: e.target.value }))}
+              placeholder="bv. Koning der Rijk van Aschen"
+              className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100 placeholder-amber-500/40"
+            />
+          </label>
+        </div>
+
+        {/* Tagline */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Tagline / Bijnaam</span>
+          <input
+            data-testid="fractie-tagline-input"
+            value={form.tagline}
+            onChange={e => setForm(f => ({ ...f, tagline: e.target.value }))}
+            placeholder="bv. Het Smeedverbond"
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100 placeholder-amber-500/40"
+          />
+        </label>
+
+        {/* Beschrijving + Introductie */}
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Korte beschrijving (1 zin)</span>
+          <input
+            value={form.beschrijving}
+            onChange={e => setForm(f => ({ ...f, beschrijving: e.target.value }))}
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100"
+          />
+        </label>
+        <label className="block">
+          <span className="text-[10px] uppercase tracking-wider text-amber-300/70">Introductie (lyrische tekst)</span>
+          <textarea
+            data-testid="fractie-introductie"
+            value={form.introductie}
+            onChange={e => setForm(f => ({ ...f, introductie: e.target.value }))}
+            rows={3}
+            className="mt-1 w-full px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-[12px] text-amber-100"
+          />
+        </label>
+
+        {/* List editors: kernwaarden, kleuren, bonussen, malussen */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <ListEditor
+            label="Kernwaarden"
+            items={form.kernwaarden}
+            setItems={(v) => setForm(f => ({ ...f, kernwaarden: v }))}
+            placeholder="bv. 🔥 Vuur"
+            accent={form.kleur}
+            testid="fractie-kernwaarden-input"
+          />
+          <ListEditor
+            label="Kleuren-palet (namen)"
+            items={form.kleuren}
+            setItems={(v) => setForm(f => ({ ...f, kleuren: v }))}
+            placeholder="bv. Dieprood"
+            accent={form.kleur}
+            testid="fractie-kleuren-input"
+          />
+          <ListEditor
+            label="Bonussen (+)"
+            items={form.bonussen}
+            setItems={(v) => setForm(f => ({ ...f, bonussen: v }))}
+            placeholder="bv. +25% productie van metaal"
+            accent="#22c55e"
+            testid="fractie-bonussen-input"
+          />
+          <ListEditor
+            label="Malussen (−)"
+            items={form.malussen}
+            setItems={(v) => setForm(f => ({ ...f, malussen: v }))}
+            placeholder="bv. -10% landbouw"
+            accent="#dc2626"
+            testid="fractie-malussen-input"
+          />
+        </div>
+
+        {/* Koppel D&D-kaart */}
+        <GameCardPicker
+          value={form.linked_game_card_id}
+          onChange={(v) => setForm(f => ({ ...f, linked_game_card_id: v }))}
+          testid="fractie-cardpicker-input"
+        />
+
+        {error && (
+          <div className="text-[11px] text-red-300 bg-red-950/40 border border-red-900/60 rounded px-2 py-1">
+            {error}
+          </div>
+        )}
+
+        <div className="flex justify-end gap-2 pt-1 sticky bottom-0 bg-stone-950 pb-1">
+          <button
+            onClick={onClose}
+            className="text-[11px] px-3 py-1.5 rounded border border-stone-700 text-stone-300 hover:bg-stone-900"
+          >
+            Annuleer
+          </button>
+          <button
+            data-testid="fractie-save-btn"
+            onClick={save}
+            disabled={busy}
+            className="text-[11px] px-3 py-1.5 rounded bg-amber-700 hover:bg-amber-600 text-stone-950 font-bold disabled:opacity-50 flex items-center gap-1"
+          >
+            <Save className="w-3 h-3" />
+            {busy ? 'Opslaan…' : 'Opslaan'}
           </button>
         </div>
       </div>

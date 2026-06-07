@@ -24,11 +24,22 @@
       "stads_bonus": {
         "type": "stat_modifier",
         "scope": "alle_leden",
-        "effect": {"wijsheid": 2, "snelheid": 0, "kracht": 0, "gold_per_dag": 0},
+        "effect": {
+          "wijsheid": 2,
+          "snelheid": 0,
+          "kracht": 0,
+          "gold_per_dag": 0
+        },
         "beschrijving": "Spark-leden in een leidende stad krijgen +2 Wijsheid."
       },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "licht",
@@ -45,10 +56,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "schaduw",
@@ -65,30 +92,83 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "vuur",
-      "naam": "Vuur",
-      "kleur": "#dc2626",
+      "naam": "Het Aschenrijk",
+      "kleur": "#7f1d1d",
       "element": "vuur",
       "alignment": "licht",
-      "leider": "—",
+      "leider": "Koning der Rijk van Aschen",
       "is_main": false,
-      "beschrijving": "Element Vuur (Licht-aligned).",
+      "beschrijving": "Het Aschenrijk — heerschappij van het smeedvuur en de ijzeren berg. Vooruitgang gemeten in geslagen ambachten, zelfs als de hemel grijs wordt van rook.",
       "leider_naam": "",
       "leider_user_id": null,
-      "banner_image_url": null,
-      "icon_image_url": null,
-      "introductie": "",
-      "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "banner_image_url": "/api/system-archive/file/e1991a62be8a",
+      "icon_image_url": "/api/system-archive/file/e1991a62be8a",
+      "introductie": "In de aderen van de bergen brandt eeuwig vuur. Het Aschenrijk smeedt de toekomst uit erts en hamerslag. Wie hier knielt voor de Vuurkroon, kiest ambacht boven natuur, industrie boven idylle, en de vooruitgang die slechts vlammen kunnen brengen.",
+      "tagline": "Het Smeedverbond",
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "Koning der Rijk van Aschen",
+      "kernwaarden": [
+        "🔥 Vuur",
+        "⛰️ Bergen",
+        "⚒️ Industrie",
+        "⛏️ Grondstoffen",
+        "👑 Sterk leiderschap",
+        "🌫️ Vervuiling als prijs van vooruitgang"
+      ],
+      "kleuren": [
+        "Dieprood",
+        "Zwart",
+        "Donkergrijs",
+        "Gesmolten goud",
+        "Oranje accenten"
+      ],
+      "bonussen": [
+        "+25% productie van metaal",
+        "+25% steenwinning",
+        "+15% gebouwsnelheid"
+      ],
+      "malussen": [
+        "-10% natuur",
+        "-10% landbouw",
+        "+ vervuiling"
+      ],
+      "linked_game_card_id": null
     },
     {
       "id": "lucht",
@@ -105,10 +185,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "water",
@@ -125,10 +221,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "aarde",
@@ -145,10 +257,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "natuur",
@@ -165,10 +293,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "barbaren",
@@ -185,10 +329,26 @@
       "icon_image_url": null,
       "introductie": "",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.05,
-      "tax_rate_leden": 0.02
+      "tax_rate_leden": 0.02,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     },
     {
       "id": "neutraal",
@@ -205,10 +365,28 @@
       "icon_image_url": null,
       "introductie": "Een gebied zonder eigenaar. Wachtend op de eerste vlag in de grond.",
       "tagline": "",
-      "stats": {"aanhangers_total": 0, "leidende_steden_count": 0, "gebouwen_total": 0, "goud": 0},
-      "stads_bonus": {"type": "stat_modifier", "scope": "alle_leden", "effect": {}, "beschrijving": ""},
+      "stats": {
+        "aanhangers_total": 0,
+        "leidende_steden_count": 0,
+        "gebouwen_total": 0,
+        "goud": 0
+      },
+      "stads_bonus": {
+        "type": "stat_modifier",
+        "scope": "alle_leden",
+        "effect": {},
+        "beschrijving": ""
+      },
       "tax_rate_stad": 0.0,
-      "tax_rate_leden": 0.0
+      "tax_rate_leden": 0.0,
+      "leider_titel": "",
+      "kernwaarden": [],
+      "kleuren": [],
+      "bonussen": [],
+      "malussen": [],
+      "linked_game_card_id": null
     }
-  ]
+  ],
+  "updated_at": "2026-06-06T23:59:16.578993+00:00",
+  "updated_by": "user-001"
 }

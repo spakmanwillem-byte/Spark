@@ -68904,6 +68904,922 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-7db9af58",
+      "begrip": "Het is bewolkt buiten",
+      "lade": "spreken",
+      "status": "guest_contribution",
+      "lagen": {
+        "laag1": "Het is bewolkt buiten.",
+        "laag2": "Niet het zonnigste weer, maar nog steeds prima om iets te doen.",
+        "laag3": "De gebruiker geeft aan dat het bewolkt is. Dit zegt iets over de omstandigheden buiten, wat invloed kan hebben op activiteiten of stemming.",
+        "laag4": "Spark gebruikt dit om rekening te houden met het weer bij voorstellen of reacties."
+      },
+      "ws5": {
+        "wie": "De gebruiker",
+        "wat": "Beschrijft het weer (bewolkt)",
+        "wanneer": "Op het moment van waarnemen",
+        "waar": "Buiten",
+        "waarom": "Om context te geven over omgeving",
+        "hoe": "Door een observatie te delen"
+      },
+      "tags": [
+        "context",
+        "weer",
+        "bewolkt",
+        "buiten",
+        "observatie",
+        "omgeving",
+        "uitspraak",
+        "stemming"
+      ],
+      "topic": "weer",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d65e84a9",
+          "begrip": "weer (buiten)",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bewolkt",
+            "buiten",
+            "context",
+            "omgeving",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f5cae3a7",
+          "begrip": "De zon schijnt vandaag",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "buiten",
+            "context",
+            "observatie",
+            "uitspraak",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "stemming",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c0f1080f",
+          "begrip": "buiten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "buiten",
+            "context",
+            "omgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ffc93aeb",
+          "begrip": "werkelijkheid",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "observatie",
+            "omgeving"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:48:49.385926+00:00",
+        "vorige_versie_v1": "snap-6c627250",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:40.245273+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:48:48.413816+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:48:48.426352+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:48:50.135985+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:48:50.162129+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:48:47.958187+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-70f124f2",
+      "begrip": "Het is na middennacht",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Het is na middennacht.",
+        "laag2": "Het is nacht en de nieuwe dag is begonnen.",
+        "laag3": "De gebruiker geeft aan dat het na middennacht is. Dit duidt op een late fase van de dag waarin rust, slaap of nachtelijke activiteiten centraal staan.",
+        "laag4": "Goed.\n\nSpark kan inderdaad rekening houden met:\n\ntijdstip\nvermoeidheid\nslaapritme\nnachtcontext"
+      },
+      "ws5": {
+        "wie": "De gebruiker",
+        "wat": "Geeft tijdstip aan (na middennacht)",
+        "wanneer": "In de nacht",
+        "waar": "Algemene tijdscontext",
+        "waarom": "Om context te geven over moment",
+        "hoe": "Door tijd te benoemen"
+      },
+      "tags": [
+        "context",
+        "tijd",
+        "nacht",
+        "middennacht",
+        "tijdstip",
+        "slaap",
+        "rust",
+        "observatie"
+      ],
+      "topic": "tijd",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f16db426",
+          "begrip": "Het is na 2 uur nacht",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "nacht",
+            "rust",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-77d5122f",
+          "begrip": "Welk tijdstip is het?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "tijd",
+            "tijdstip"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "tijd",
+            "tijdstip"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-35577bc3",
+          "begrip": "Avond",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "nacht",
+            "rust",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5f415b05",
+          "begrip": "afwachten",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "observatie",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:50:12.466299+00:00",
+        "vorige_versie_v1": "snap-1d1d684e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:40.185993+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:50:11.790241+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:50:11.803066+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:50:13.202995+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:50:13.214123+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:50:11.376816+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-683bb367",
+      "begrip": "Het wordt langzaam donker",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Het wordt langzaam donker.",
+        "laag2": "De hoeveelheid licht neemt af terwijl de avond nadert.",
+        "laag3": "De gebruiker observeert dat het langzaam donker wordt. Dit geeft een tijdsverloop aan en kan invloed hebben op sfeer, energie of activiteiten.",
+        "laag4": "Spark kan hieruit afleiden:\n\navondcontext\nveranderende lichtomstandigheden\nmogelijk naderende nacht"
+      },
+      "ws5": {
+        "wie": "De gebruiker",
+        "wat": "Beschrijft verandering van licht (donker worden)",
+        "wanneer": "Aan het einde van de dag",
+        "waar": "Buiten / omgeving",
+        "waarom": "Om context te geven over moment van de dag",
+        "hoe": "Door observatie te delen"
+      },
+      "tags": [
+        "context",
+        "tijd",
+        "avond",
+        "donker",
+        "licht",
+        "overgang",
+        "observatie",
+        "omgeving"
+      ],
+      "topic": "tijd",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "overgang",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7db9af58",
+          "begrip": "Het is bewolkt buiten",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "observatie",
+            "omgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-70f124f2",
+          "begrip": "Het is na middennacht",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "observatie",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5ce822aa",
+          "begrip": "zonnewende",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "donker",
+            "licht",
+            "overgang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ffc93aeb",
+          "begrip": "werkelijkheid",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "observatie",
+            "omgeving"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:53:03.580664+00:00",
+        "vorige_versie_v1": "snap-5b7315d0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:40.145401+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:52:58.309230+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:52:58.320963+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:53:04.234091+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:53:04.265953+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:52:57.929194+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-89bc3d60",
+      "begrip": "Ik ga de bloemetjes buiten zetten",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ik ga de bloemetjes buiten zetten.",
+        "laag2": "De spreker geeft aan dat hij gaat genieten of uitgaan.",
+        "laag3": "“De bloemetjes buiten zetten” betekent dat je iets leuks gaat doen, vaak uitgaan of gezellig tijd doorbrengen. Het is een informele manier om aan te geven dat je gaat genieten.",
+        "laag4": "Laat zien dat taal vaak figuurlijke uitdrukkingen gebruikt waarvan de betekenis niet letterlijk uit de woorden af te leiden is."
+      },
+      "ws5": {
+        "wie": "De gebruiker",
+        "wat": "Aangeven dat hij iets leuks gaat doen",
+        "wanneer": "Bij plannen om uit te gaan of te ontspannen",
+        "waar": "Buiten, sociaal of uitgaanscontext",
+        "waarom": "Voor plezier en ontspanning",
+        "hoe": "Door iets leuks of gezelligs te gaan doen"
+      },
+      "tags": [
+        "context",
+        "uitdrukking",
+        "gezegde",
+        "figuurlijk",
+        "uitgaan",
+        "plezier",
+        "sociaal",
+        "ontspanning",
+        "feest",
+        "gezellig"
+      ],
+      "topic": "sociaal",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b8d1c9a4",
+          "begrip": "leuks",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "gezellig",
+            "plezier",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b24b74c0",
+          "begrip": "Amusement",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "ontspanning",
+            "plezier",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-614a038b",
+          "begrip": "lachen",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "ontspanning",
+            "plezier",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "sociaal",
+            "uitdrukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "ontspanning"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:59:02.158828+00:00",
+        "vorige_versie_v1": "snap-7d3574fc",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:40.225124+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:58:57.740030+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:58:57.749658+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:59:02.780202+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:59:02.790597+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:58:57.401064+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-562266b1",
+      "begrip": "Om 2 uur begint het spoken uur",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Het spoken uur is een informele uitdrukking voor een mysterieus moment in de nacht.",
+        "laag2": "Mensen gebruiken deze uitdrukking vaak als grap of om een mysterieuze sfeer te beschrijven.",
+        "laag3": "Het \"spoken uur\" is een populaire uitdrukking die verwijst naar een laat tijdstip in de nacht, vaak rond 2 of 3 uur. Het wordt geassocieerd met stilte, mysterie, horrorverhalen en bovennatuurlijke gebeurtenissen. De betekenis verschilt per cultuur en wordt meestal niet letterlijk bedoeld.",
+        "laag4": "Laat zien hoe mensen symbolische betekenis koppelen aan tijdstippen. Het spoken uur is vooral een cultureel en verhalend begrip dat sfeer, spanning of humor oproept."
+      },
+      "ws5": {
+        "wie": "Mensen die de uitdrukking gebruiken",
+        "wat": "Een symbolische of informele benaming voor een moment in de nacht",
+        "wanneer": "Meestal rond 2 of 3 uur 's nachts",
+        "waar": "In gesprekken, verhalen en populaire cultuur",
+        "waarom": "Om sfeer, humor of mysterie uit te drukken",
+        "hoe": "Door een symbolische uitdrukking te gebruiken"
+      },
+      "tags": [
+        "nacht",
+        "spoken uur",
+        "uitdrukking",
+        "mysterie",
+        "sfeer",
+        "humor",
+        "folklore",
+        "cultuur",
+        "symboliek",
+        "context"
+      ],
+      "topic": "tijd",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d14fa2d8",
+          "begrip": "mythisch",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "folklore",
+            "symboliek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-637e116f",
+          "begrip": "Mythologie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "folklore",
+            "symboliek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "sfeer",
+            "symboliek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f16db426",
+          "begrip": "Het is na 2 uur nacht",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "nacht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-46805938",
+          "begrip": "twist",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "humor"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T19:15:12.704028+00:00",
+        "vorige_versie_v1": "snap-4ac8ac6b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:40.205906+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T19:15:09.943380+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T19:15:09.967073+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T19:15:13.248559+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T19:15:13.267476+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T19:15:09.592693+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e9c139c0",
+      "begrip": "Ik ben net wakker. even landen en koffie drinken.",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ik ben net wakker en wil eerst rustig opstarten met een kop koffie.",
+        "laag2": "De zin laat een natuurlijk overgangsmoment zien tussen slapen en actief worden. “Landen” betekent hier rustig bewust worden van de situatie en jezelf voorbereiden op de dag. Koffie drinken ondersteunt voor veel mensen dit proces van wakker worden en focus opbouwen.",
+        "laag3": "“Ik ben net wakker. Even landen en koffie drinken.” beschrijft een dagelijks menselijk proces waarbij iemand van een slapende toestand naar een bewuste en productieve toestand gaat.\n\nIn deze context betekent:\n\nwakker → bewust worden\nlanden → mentaal stabiliseren en in het moment komen\nkoffie drinken → energie, routine en focus ondersteunen\n\nDe zin bevat meerdere verbonden processen:\n\novergang van rust naar activiteit\nprikkelverwerking\nopbouwen van energie\nochtendroutine\nvoorbereiding op productiviteit\n\nDit soort contextzinnen zijn belangrijk omdat ze laten zien hoe woorden samen betekenis vormen binnen een situatie.",
+        "laag4": "Spark gebruikt contextzinnen om verbanden te leren tussen losse begrippen. Hierdoor leert Spark dat wakker worden, landen, koffie, energie en productiviteit vaak samen voorkomen binnen dezelfde menselijke ervaring."
+      },
+      "ws5": {
+        "wie": "Iemand die net wakker is geworden en rustig wil opstarten.",
+        "wat": "Een overgangsmoment van slapen naar bewust en actief worden.",
+        "wanneer": "In de ochtend of direct na het wakker worden.",
+        "waar": "Thuis of in een rustige omgeving tijdens het opstarten van de dag.",
+        "waarom": "Om rustig te wennen aan de nieuwe situatie en energie op te bouwen.",
+        "hoe": "Door te landen, bewust wakker te worden en bijvoorbeeld koffie te drinken als routine of ondersteuning."
+      },
+      "tags": [
+        "wakker",
+        "landen",
+        "koffie",
+        "energie",
+        "ochtend",
+        "routine",
+        "bewustzijn",
+        "focus",
+        "productiviteit",
+        "context",
+        "opstarten"
+      ],
+      "topic": "context",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-171bdfd7",
+          "begrip": "wakker",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bewustzijn",
+            "energie",
+            "focus",
+            "ochtend",
+            "productiviteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "energie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bewustzijn",
+            "context"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6c1cd198",
+          "begrip": "emotie",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bewustzijn",
+            "context"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:57:54.684188+00:00",
+        "vorige_versie_v1": "snap-c35f4fa6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:42.436236+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:57:53.984160+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:57:53.995196+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:57:55.650811+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:57:55.660473+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T21:01:22.198480+00:00",
+        "moves": [
+          {
+            "from": "spreken",
+            "to": "weten",
+            "by": "user-001",
+            "op": "2026-06-07T21:01:21.774042+00:00"
+          },
+          {
+            "from": "weten",
+            "to": "spreken",
+            "by": "user-001",
+            "op": "2026-06-07T21:01:22.198485+00:00"
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
-  ]
+  ],
+  "updated_at": "2026-06-07T20:59:40.524232+00:00"
 }

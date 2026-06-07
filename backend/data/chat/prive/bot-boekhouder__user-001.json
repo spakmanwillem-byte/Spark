@@ -2278,6 +2278,53 @@
       "netto": 0.05004056328986882,
       "spark_fee": 0.0,
       "user_id": "user-001"
+    },
+    {
+      "id": "bh-5c5f7702",
+      "from_user_id": "bot-boekhouder",
+      "from_naam": "De Boekhouder 🎩",
+      "to_user_id": "user-001",
+      "text": "🌱 **Boekhouder weekrapport** (7 dagen)\n\n⚓ **Anchors**: 1 stuks, totaal capital €10.00\n   → Geen rente deze week (interval 30 dagen)\n\n💼 **Trade-potjes**: 11 stuks\n\n💰 **Trade resultaat**: €+0.05\n   → Winst €0.05 · Verlies €0.00\n\n🌊 **Overflow pool**: €0.00\n\n📈 _Nog geen tempo te meten — wacht op eerste winstronde._",
+      "ts": "2026-06-07T20:43:30.086395+00:00",
+      "unread_by": [],
+      "system": true,
+      "kind": "boekhouder_weekly_report",
+      "report": {
+        "period": {
+          "from": "2026-05-31T20:43:30.083689+00:00",
+          "to": "2026-06-07T20:43:30.083689+00:00",
+          "days": 7
+        },
+        "anchors": {
+          "count": 1,
+          "total_capital": 10.0,
+          "weekly_growth": 0.0,
+          "changes": []
+        },
+        "trade_pots": {
+          "count": 11,
+          "minted_this_week": []
+        },
+        "overflow_pool": {
+          "now": 0.0
+        },
+        "trade_results": {
+          "winst_total": 0.05,
+          "verlies_total": 0,
+          "netto": 0.05
+        },
+        "roar_activity": {
+          "tokens_bought": 0,
+          "tokens_sold_back": 0,
+          "eur_in": 0,
+          "eur_out": 0
+        },
+        "projection": "Nog geen tempo te meten — wacht op eerste winstronde.",
+        "generated_at": "2026-06-07T20:43:30.083689+00:00",
+        "recipients": [
+          "user-001"
+        ]
+      }
     }
   ]
 }

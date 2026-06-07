@@ -12,7 +12,7 @@ POST /api/kb/v2/edit                      bewerk kaart in een lade
 POST /api/kb/v2/inbox/add                 nieuwe kaart in inbox
 """
 from typing import Optional, Dict, List
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, HTTPException
 from pydantic import BaseModel
 
 from . import service
@@ -299,6 +299,29 @@ async def classify(body: ClassifyBody):
 @traced(intent="KB v2 kaart bewerken", module="kb_v2")
 async def edit(body: EditBody):
     return service.edit_card(body.card_id, body.lade, updates=body.updates, user_id=body.user_id)
+
+
+# v6_kbv2_move_card_001 — verplaats een v2-kaart van de ene lade naar de andere
+class MoveCardBody(BaseModel):
+    card_id: str
+    from_lade: str           # 'weten' | 'doen' | 'voelen' | 'spreken' | 'inbox'
+    to_lade: str             # idem
+    user_id: str = "user-001"
+
+
+@router.post("/move")
+@traced(intent="KB v2 kaart verplaatsen tussen lades", module="kb_v2")
+async def move(body: MoveCardBody):
+    """v6_kbv2_move_card_001 — Verplaats een kaart van b.v. 'voelen' naar 'weten'
+    wanneer hij per ongeluk in de verkeerde lade beland is. Behoudt id + alle velden,
+    wijzigt alleen `lade` en verplaatst tussen de bron-JSON-bestanden.
+    """
+    valid = {"weten", "doen", "voelen", "spreken", "inbox"}
+    if body.from_lade not in valid or body.to_lade not in valid:
+        raise HTTPException(400, f"lade moet één van {sorted(valid)} zijn")
+    if body.from_lade == body.to_lade:
+        raise HTTPException(400, "from_lade en to_lade zijn hetzelfde")
+    return service.move_card(body.card_id, body.from_lade, body.to_lade, user_id=body.user_id)
 
 
 # v6_kbv2_autoresolve_001 — bulk auto-classify van inbox-kaarten via topic+tags
@@ -738,7 +761,8 @@ def _auto_lade(topic: Optional[str], tags: Optional[List[str]]) -> str:
     """
     import re as _re
     pool = []
-    if topic: pool.append(str(topic).lower())
+    if topic:
+        pool.append(str(topic).lower())
     pool.extend([str(t).lower() for t in (tags or [])])
     for token in pool:
         for key, lade in _TOPIC_LADE_MAP.items():
@@ -761,9 +785,12 @@ async def herzien_promote(body: HerzienPromoteBody):
     card_id = r["kaart"]["id"]
     # 2. Updates toepassen
     updates = {}
-    if body.lagen: updates["lagen"] = body.lagen
-    if body.ws5:   updates["ws5"]   = body.ws5
-    if body.tags:  updates["tags"]  = body.tags
+    if body.lagen:
+        updates["lagen"] = body.lagen
+    if body.ws5:
+        updates["ws5"] = body.ws5
+    if body.tags:
+        updates["tags"] = body.tags
     if updates:
         service.edit_card(card_id, "inbox", updates=updates, user_id=body.user_id)
     # 3. Classify naar lade

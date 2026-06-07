@@ -57637,6 +57637,590 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-skel-dbe5d5f3",
+      "begrip": "vermaak",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vermaak is iets dat plezier, ontspanning of amusement geeft.",
+        "laag2": "Mensen zoeken vermaak om zich te ontspannen, te genieten of verveling tegen te gaan.",
+        "laag3": "Vermaak omvat activiteiten, gebeurtenissen of media die bedoeld zijn om mensen te amuseren of bezig te houden. Dit kan bijvoorbeeld muziek, films, games, sport, verhalen, humor of evenementen zijn. Wat als vermaak wordt gezien verschilt per persoon, cultuur en situatie.\n",
+        "laag4": "Vermaak speelt een belangrijke rol in het dagelijks leven en de samenleving. Het kan ontspanning bieden, sociale contacten versterken, creativiteit stimuleren en emoties oproepen. Door de geschiedenis heen hebben mensen verschillende vormen van vermaak ontwikkeld, van verhalen rond een kampvuur tot moderne digitale media en interactieve games.\n"
+      },
+      "ws5": {
+        "wie": "Mensen die plezier, ontspanning of amusement zoeken",
+        "wat": "Een vorm van plezier, amusement of ontspanning",
+        "wanneer": "In vrije tijd of tijdens recreatieve activiteiten",
+        "waar": "Thuis, buiten, online, op evenementen of in sociale situaties",
+        "waarom": "Voor plezier, ontspanning, afleiding of sociale verbinding",
+        "hoe": "Door deel te nemen aan activiteiten of media die amusement bieden"
+      },
+      "tags": [
+        "vermaak",
+        "amusement",
+        "ontspanning",
+        "plezier",
+        "recreatie",
+        "hobby",
+        "entertainment",
+        "vrije",
+        "tijd",
+        "activiteit",
+        "media",
+        "spel",
+        "genieten",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-761b05aa",
+          "begrip": "entertainment",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "amusement",
+            "blij",
+            "emotie",
+            "entertainment",
+            "media"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b24b74c0",
+          "begrip": "Amusement",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "activiteit",
+            "amusement",
+            "entertainment",
+            "genieten",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-614a038b",
+          "begrip": "lachen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "amusement",
+            "blij",
+            "emotie",
+            "genieten",
+            "ontspanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-44dea6c8",
+          "begrip": "speels",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "ontspanning",
+            "plezier",
+            "spel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c7b2ad34",
+          "begrip": "kermis",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "entertainment",
+            "ontspanning",
+            "recreatie",
+            "spel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:32:27.851236+00:00",
+        "vorige_versie_v1": "kb-skel-dbe5d5f3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:00.112016+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:32:14.419775+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:32:14.453245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:32:28.496433+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:32:28.513224+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:32:14.022169+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-dc9f00cf",
+      "begrip": "Handig",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Handig betekent dat iets praktisch, bruikbaar of makkelijk in gebruik is.",
+        "laag2": "Wordt gebruikt voor dingen die helpen om iets sneller of makkelijker te doen.",
+        "laag3": "Als iets handig is, maakt het een taak eenvoudiger of efficiënter. Dit kan gaan om tools, oplossingen, vaardigheden of manieren van werken. Het woord wordt ook gebruikt voor personen die vaardig zijn in het uitvoeren van praktische taken.",
+        "laag4": "Deze kaart is best sterk. Ik zou hem zelf nauwelijks aanpassen.\n\nLade\n\n🌸 Voelen\n\nWaarom niet 🧠 Weten?\n\nOmdat handig geen objectief feit is zoals een hamer of een gitaar. Het is een beoordeling van nut en gemak.\n\nVergelijk:\n\nHamer → 🧠 Weten\nSchroevendraaier → 🧠 Weten\nHandig → 🌸 Voelen\n\nWant \"handig\" is hoe iemand iets ervaart.\n\nTags\n\nJe huidige tags:\n\npraktisch, bruikbaar, efficiëntie, vaardigheid\n\nzijn goed, maar ik zou iets uitbreiden:\n\nhandig, praktisch, bruikbaar, nuttig, gemakkelijk, vaardigheid, hulpmiddel, toepasbaar, efficiëntie\n\nVoor Spark lijkt handig zelf als tag belangrijk, omdat mensen vaak zoeken op het woord zelf.\n\nKleine verbetering Laag 4\n\nIk zou het verschil iets strakker maken:\n\nVerschil:\n\nHandig → makkelijk en praktisch bruikbaar\nEfficiënt → bereikt een doel met weinig tijd of middelen\nSlim → goed bedacht of intelligent opgelost"
+      },
+      "ws5": {
+        "wie": "Mensen of dingen",
+        "wat": "Een eigenschap van bruikbaarheid",
+        "wanneer": "Wanneer iets helpt of makkelijker maakt",
+        "waar": "In dagelijks leven, werk, systemen",
+        "waarom": "Om taken eenvoudiger en sneller te maken",
+        "hoe": "Door praktische toepassing of slimme oplossing"
+      },
+      "tags": [
+        "handig",
+        "praktisch",
+        "bruikbaar",
+        "nuttig",
+        "gemakkelijk",
+        "vaardigheid",
+        "hulpmiddel",
+        "toepasbaar",
+        "efficiëntie"
+      ],
+      "topic": "eigenschap",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-904af4d1",
+          "begrip": "bruikbaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bruikbaar",
+            "hulpmiddel",
+            "nuttig",
+            "praktisch",
+            "toepasbaar"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be38b110",
+          "begrip": "toepassen",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "hulpmiddel",
+            "vaardigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-03e3f703",
+          "begrip": "Hulpmiddelen",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "efficiëntie",
+            "hulpmiddel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:41:56.748392+00:00",
+        "vorige_versie_v1": "snap-926e19e1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:32.828576+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:41:55.677122+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:41:55.688361+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:41:57.296488+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:41:57.310337+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T18:41:55.341152+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b89b8e38",
+      "begrip": "Held",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een held is een persoon of personage dat bekendstaat om moed, bijzondere daden of het helpen van anderen.",
+        "laag2": "Helden komen vaak voor in verhalen, mythologie en geschiedenis en worden bewonderd vanwege hun acties.",
+        "laag3": "Een held is iemand die moeilijke of gevaarlijke situaties aangaat om anderen te helpen, een probleem op te lossen of iets goeds te bereiken. Helden kunnen echte mensen zijn, maar ook personages uit verhalen, films of mythologie. Vaak tonen zij moed, doorzettingsvermogen en opoffering.",
+        "laag4": "In mythologie zijn helden vaak halfgoddelijke figuren of uitzonderlijke mensen die grote opdrachten uitvoeren, zoals monsters verslaan of mensen beschermen. In moderne verhalen zijn helden ook superhelden met speciale krachten. Het idee van een held helpt mensen nadenken over waarden zoals moed, rechtvaardigheid en verantwoordelijkheid."
+      },
+      "ws5": {
+        "wie": "Helden uit mythologie, geschiedenis en verhalen",
+        "wat": "Een persoon of personage dat bijzondere of moedige daden verricht",
+        "wanneer": "In verhalen, geschiedenis en mythologie uit verschillende tijden",
+        "waar": "In culturen, verhalen, boeken, films en legendes over de hele wereld",
+        "waarom": "Om anderen te helpen, problemen op te lossen of het goede te beschermen",
+        "hoe": "Door moedige acties, doorzettingsvermogen en het nemen van risico’s voor anderen"
+      },
+      "tags": [
+        "held",
+        "moed",
+        "heldhaftig",
+        "verhaal",
+        "mythologie",
+        "persoon",
+        "karakter",
+        "opoffering",
+        "bescherming",
+        "rechtvaardigheid"
+      ],
+      "topic": "mythologie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3a95278d",
+          "begrip": "superheld",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bescherming",
+            "held",
+            "moed",
+            "rechtvaardigheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6d16e10e",
+          "begrip": "Goden beïnvloeden verhalen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "held",
+            "mythologie",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8dd4dc0e",
+          "begrip": "Monster",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "mythologie",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cf1699da",
+          "begrip": "Schurk",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "karakter",
+            "verhaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0ea13913",
+          "begrip": "Mythologie zijn oude verhalen",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "mythologie",
+            "verhaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T18:44:32.807832+00:00",
+        "vorige_versie_v1": "de488591",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:29.475154+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T18:44:33.546523+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T18:44:33.564968+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-cb21f0b4",
+      "begrip": "thuis",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Thuis is de plek waar iemand woont of zich thuis voelt.",
+        "laag2": "Thuis biedt vaak veiligheid, rust en een gevoel van vertrouwdheid.",
+        "laag3": "Thuis is meestal de woonplek van een persoon of gezin. Het kan een huis, appartement, kamer of andere verblijfplaats zijn. Naast een fysieke locatie kan thuis ook verwijzen naar een gevoel van verbondenheid, comfort en acceptatie. Mensen gebruiken het woord zowel letterlijk als figuurlijk.\n",
+        "laag4": "Thuis heeft een fysieke, sociale en emotionele betekenis.\n\nFysiek:\n\nwoonplaats\nverblijfplaats\npersoonlijke omgeving\n\nSociaal:\n\ngezin\nfamilie\nsamenleven\n\nEmotioneel:\n\nveiligheid\nrust\nverbondenheid\nvertrouwdheid\n\nEen thuis hoeft niet altijd een gebouw te zijn. Mensen kunnen zich ook thuis voelen bij bepaalde personen, groepen of plekken.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, gezinnen en huishoudens",
+        "wat": "Een woonplek of gevoel van verbondenheid",
+        "wanneer": "Tijdens wonen, rusten en dagelijks leven",
+        "waar": "In een huis, woning, kamer of andere vertrouwde omgeving",
+        "waarom": "Voor veiligheid, comfort, rust en verbondenheid",
+        "hoe": "Door een plek of omgeving als eigen en vertrouwd te ervaren"
+      },
+      "tags": [
+        "thuis",
+        "wonen",
+        "huis",
+        "woning",
+        "gezin",
+        "familie",
+        "veiligheid",
+        "rust",
+        "comfort",
+        "vertrouwdheid",
+        "verbondenheid",
+        "omgeving"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-fc353b53",
+          "begrip": "wonen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "comfort",
+            "huis",
+            "omgeving",
+            "thuis",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1a32f423",
+          "begrip": "woont",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "huis",
+            "omgeving",
+            "thuis",
+            "wonen",
+            "woning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6af272ea",
+          "begrip": "gezin",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "familie",
+            "gezin",
+            "veiligheid",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-49ed0a68",
+          "begrip": "Slaapkamer",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "rust",
+            "wonen",
+            "woning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9054e758",
+          "begrip": "comfort",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "comfort",
+            "rust",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-07T19:22:06.342161+00:00",
+        "vorige_versie_v1": "kb-skel-cb21f0b4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:00.290595+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T19:22:04.385950+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T19:22:04.395755+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-07T19:22:06.892562+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-07T19:22:06.912971+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-07T19:22:04.054689+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
-  ]
+  ],
+  "updated_at": "2026-06-07T20:59:40.524232+00:00"
 }

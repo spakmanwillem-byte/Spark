@@ -634,6 +634,58 @@ def edit_card(card_id: str, lade: str, updates: Dict, user_id: str = "user-000")
     return {"success": False, "message": f"Kaart '{card_id}' niet gevonden in lade '{lade}'"}
 
 
+# v6_kbv2_move_card_001 — verplaats een kaart van de ene lade naar de andere
+@traced(intent="kaart verplaatsen tussen lades", module="kbv2")
+def move_card(card_id: str, from_lade: str, to_lade: str, user_id: str = "user-000") -> Dict:
+    """Verplaats een kaart (incl. id, lagen, ws5, tags, media, footnote) van
+    `from_lade` naar `to_lade`. Werkt voor alle combinaties van weten/doen/voelen/spreken/inbox.
+    """
+    def _path_for(lade_name):
+        return _inbox_path() if lade_name == "inbox" else _lade_path(lade_name)
+
+    if from_lade == to_lade:
+        return {"success": False, "message": "Bron- en doel-lade zijn gelijk"}
+    if from_lade not in LADES and from_lade != "inbox":
+        return {"success": False, "message": f"Onbekende from_lade '{from_lade}'"}
+    if to_lade not in LADES and to_lade != "inbox":
+        return {"success": False, "message": f"Onbekende to_lade '{to_lade}'"}
+
+    src_path = _path_for(from_lade)
+    dst_path = _path_for(to_lade)
+    with _lock:
+        src_data = load_json(src_path, default={"kaarten": []})
+        dst_data = load_json(dst_path, default={"kaarten": []})
+        kaarten = src_data.get("kaarten", [])
+        idx = next((i for i, k in enumerate(kaarten) if k.get("id") == card_id), -1)
+        if idx < 0:
+            return {"success": False, "message": f"Kaart '{card_id}' niet in lade '{from_lade}'"}
+        card = kaarten.pop(idx)
+        card["lade"] = to_lade
+        fn = card.get("footnote") or {}
+        fn["laatst_bewerkt_door"] = user_id
+        fn["laatst_bewerkt_op"] = _now()
+        fn.setdefault("moves", []).append({
+            "from": from_lade, "to": to_lade, "by": user_id, "op": _now(),
+        })
+        card["footnote"] = fn
+        # Voorkom duplicaat op doel
+        dst_data.setdefault("kaarten", [])
+        if not any(k.get("id") == card_id for k in dst_data["kaarten"]):
+            dst_data["kaarten"].append(card)
+        src_data["kaarten"] = kaarten
+        save_json(src_path, src_data)
+        save_json(dst_path, dst_data)
+        # Update index
+        idx_data = load_json(_index_path(), default={"entries": {}})
+        idx_data.setdefault("entries", {})[(card.get("begrip") or "").lower().strip()] = {
+            "kaart_id": card_id, "lade": to_lade,
+            "has_lagen": [kk for kk, vv in (card.get("lagen") or {}).items() if vv],
+            "last_updated": _now(),
+        }
+        save_json(_index_path(), idx_data)
+    return {"success": True, "kaart": card, "from": from_lade, "to": to_lade}
+
+
 @traced(intent="nieuwe kaart toevoegen aan inbox", module="kbv2")
 def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000") -> Dict:
     """Maak een lege kaart in de inbox (bv. wanneer Spark een onbekend woord tegenkomt).

@@ -406,16 +406,16 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           />
         </div>
 
-        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Map + Handel === */}
+        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Handel === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           {/* v6_rugzak_kader_001 — Rugzak als eigen kader naast Huis & Opslag (mobile carry, met kg) */}
           <RugzakKaderPanel inventory={inventory} userId={userId} gameCards={gameCards} onChange={reload} onTransfer={transferItem} isHome={isHome} />
           {/* v6_dnd_layout_v2 — Huis & Opslag is stilstaand (500 slots, geen kg) */}
           <HuisOpslagPanel gameCards={gameCards} inventory={inventory} onTransfer={transferItem} isHome={isHome} />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
-          <MiniMapPanel char={char} userId={userId} isAdmin={isAdmin} />
-          {/* v6_dnd_fracties_kader_001 — Fracties + Landkaart bark */}
-          <FractiesKaderPanel userId={userId} isAdmin={isAdmin} />
+          {/* v6_dnd_fracties_fullwidth_001 — MiniMapPanel verwijderd uit avatar-tab;
+              FractiesKaderPanel is verplaatst naar volle breedte onder de grid (zie hieronder).
+              Landkaart-bark blijft bereikbaar via de "Landkaart"-knop in FractiesKaderPanel. */}
           {/* v6_bewoners_layout_002 — Handel-kader onder Spark World map (geopend bij selectie) */}
           {activeBewoner && (
             <BewonerHandelPanel
@@ -430,6 +430,11 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             />
           )}
         </div>
+      </div>
+
+      {/* v6_dnd_fracties_fullwidth_001 — Fracties + Landkaart op volle beeldbreedte */}
+      <div className="mt-3">
+        <FractiesKaderPanel userId={userId} isAdmin={isAdmin} />
       </div>
 
       {/* (Bewoners-strip + Handel zijn verplaatst naar MID resp. RIGHT kolom hierboven) */}

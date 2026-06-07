@@ -46,7 +46,10 @@ function findCardFor(keywords, cards) {
   return null;
 }
 
-export function StormhavenMapView({ dorpCard, gameCards, char, onClose }) {
+export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam, fractieNaam }) {
+  // v6_dnd_stad_minimap_001 — labels nu dynamisch ipv hardcoded 'Stormhaven/Spark'
+  const displayNaam = stadNaam || char?.dorp || dorpCard?.begrip || 'Onbekend';
+  const displayFractie = fractieNaam || char?.fractie_naam || char?.fractie || 'Neutraal';
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const dorpImg = dorpCard?.media?.image_urls?.[0] ? `${API}${dorpCard.media.image_urls[0]}` : null;
 
@@ -70,8 +73,8 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose }) {
               <Sparkles className="w-5 h-5 text-amber-400" />
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-amber-500/70">Hoofdstad — Fractie Spark</p>
-              <h2 className="text-2xl font-serif font-bold text-amber-100">Stormhaven</h2>
+              <p className="text-[10px] uppercase tracking-[0.25em] text-amber-500/70">Hoofdstad — Fractie {displayFractie}</p>
+              <h2 className="text-2xl font-serif font-bold text-amber-100">{displayNaam}</h2>
               <p className="text-[11px] text-amber-300/70 italic">Layout: Level {char?.dorp_level ?? 1} · Fog of War: {char?.fog_of_war_pct ?? 0}%</p>
             </div>
           </div>
@@ -86,11 +89,11 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose }) {
           <div className="relative w-full" style={{ paddingBottom: '70%' }}>
             <div className="absolute inset-0">
               {dorpImg ? (
-                <img src={dorpImg} alt="Stormhaven plattegrond"
+                <img src={dorpImg} alt={`${displayNaam} plattegrond`}
                   className="absolute inset-0 w-full h-full object-contain" />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-b from-stone-800 to-stone-950 flex items-center justify-center text-amber-400/40 italic">
-                  Geen dorpskaart geüpload — maak een D&amp;D-kaart "Basis dorp"
+                  Geen dorpskaart geüpload — maak een D&amp;D-kaart &ldquo;Basis dorp&rdquo;
                 </div>
               )}
               {/* Vignet voor leesbaarheid */}
@@ -137,7 +140,7 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose }) {
             ))}
           </div>
           <p className="text-[10px] text-amber-400/60 italic mt-2">
-            💡 Tip: maak een D&amp;D-kaart met begrip "Tempel" of "Markt" om deze plekken in te kleuren. Later wordt dit een aankleed-bare map zoals Zuid-Nederland.
+            💡 Tip: maak een D&amp;D-kaart met begrip &ldquo;Tempel&rdquo; of &ldquo;Markt&rdquo; om deze plekken in te kleuren. Later wordt dit een aankleed-bare map zoals Zuid-Nederland.
           </p>
         </div>
       </div>

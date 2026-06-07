@@ -85,9 +85,12 @@ DEFAULT_CHARACTER = {
     "rang_progress_pct": 0,
     "klasse": "",
     "beroep": "",
-    "fractie": "",
-    "locatie_naam": "Stormhaven",
-    "dorp": "Stormhaven",
+    # v6_dnd_default_fractie_001 — alle nieuwe avatars beginnen bij de Spartanen (neutraal slot),
+    # in hoofdstad Oerrak. Later wijzigbaar via quest of verzoek.
+    "fractie": "neutraal",
+    "fractie_naam": "Spartanen",
+    "locatie_naam": "Oerrak",
+    "dorp": "Oerrak",
     "dorp_level": 1,
     "fog_of_war_pct": 0,
     "bio": "",
@@ -128,7 +131,7 @@ def _load_or_init(user_id: str) -> dict:
                 {
                     "ts": datetime.now(timezone.utc).isoformat(),
                     "kind": "SYSTEEM",
-                    "text": f"Welkom in Spark Emergent, {u.get('naam') or 'reiziger'}!",
+                    "text": f"Welkom in Spark Emergent, {u.get('naam') or 'reiziger'}! Je begint als Spartaan in Oerrak, hoofdstad van Bazin.",
                 }
             ],
             "updated_at": datetime.now(timezone.utc).isoformat(),

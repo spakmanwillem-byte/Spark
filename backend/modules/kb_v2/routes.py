@@ -12,11 +12,14 @@ POST /api/kb/v2/edit                      bewerk kaart in een lade
 POST /api/kb/v2/inbox/add                 nieuwe kaart in inbox
 """
 from typing import Optional, Dict, List
+from datetime import datetime as _dt, timezone as _tz
+from pathlib import Path as _Path  # noqa: F401
 from fastapi import APIRouter, Query, HTTPException
 from pydantic import BaseModel
 
 from . import service
 from modules.core.spark_logger import traced
+from modules.core.storage import load_json, save_json
 
 router = APIRouter(prefix="/kb/v2", tags=["kb-v2"])
 
@@ -322,6 +325,86 @@ async def move(body: MoveCardBody):
     if body.from_lade == body.to_lade:
         raise HTTPException(400, "from_lade en to_lade zijn hetzelfde")
     return service.move_card(body.card_id, body.from_lade, body.to_lade, user_id=body.user_id)
+
+
+# v6_kbv2_migration_backfill_001 — Sync v1.migrated_to_v2 flag voor entries
+# waarvoor al een v2-kaart bestaat (zodat ze niet meer in "te bewerken" verschijnen)
+class BackfillMigrationBody(BaseModel):
+    user_id: str = "user-001"
+    dry_run: bool = True
+    require_laag1: bool = True   # alleen mark als v2-kaart een gevulde laag1 heeft
+
+
+@router.post("/admin/backfill-v1-migration")
+@traced(intent="Backfill v1.migrated_to_v2 flag voor v1-entries met bestaande v2-kaart", module="kb_v2")
+async def backfill_v1_migration(body: BackfillMigrationBody):
+    """v6_kbv2_migration_backfill_001 — Markeer v1-entries als gemigreerd zodra
+    er een v2-kaart bestaat met dezelfde 'begrip' (case-insensitief). Voorkomt dat
+    dezelfde concepten dubbel in 'te bewerken'-lijst verschijnen na promote/import.
+    Standaard dry_run=True (preview)."""
+    import shutil as _shutil
+    from pathlib import Path as _P
+    DATA = _P(__file__).parent.parent.parent / "data"
+    v1_path = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+    if not v1_path.exists():
+        raise HTTPException(404, "KB v1 niet gevonden")
+
+    # Build v2-index (begrip lower → {card_id, lade, has_laag1})
+    v2_idx = {}
+    for cat in ("weten", "doen", "voelen", "spreken"):
+        fp = DATA / "knowledge" / "v2" / f"knowledge_v2_{cat}.json"
+        if not fp.exists():
+            continue
+        try:
+            d = load_json(fp, default={"kaarten": []})
+        except Exception:
+            continue
+        for c in d.get("kaarten", []):
+            b = (c.get("begrip") or "").lower().strip()
+            has_l1 = bool((c.get("lagen") or {}).get("laag1", "").strip())
+            if b and (has_l1 or not body.require_laag1):
+                v2_idx[b] = {"card_id": c["id"], "lade": cat, "has_laag1": has_l1}
+
+    v1 = load_json(v1_path, default={"knowledge_entries": []})
+    entries = v1.get("knowledge_entries", []) or []
+    candidates = []
+    for e in entries:
+        if e.get("migrated_to_v2") or e.get("_v2_migrated"):
+            continue
+        b = (e.get("begrip") or e.get("term") or "").lower().strip()
+        if b in v2_idx:
+            candidates.append((e, v2_idx[b]))
+
+    if body.dry_run:
+        return {
+            "success": True, "dry_run": True,
+            "would_mark": len(candidates),
+            "total_v1": len(entries),
+            "already_marked": sum(1 for e in entries if e.get("migrated_to_v2")),
+            "sample": [{"v1_id": e.get("id"), "begrip": e.get("begrip") or e.get("term"),
+                        "v2_id": m["card_id"], "v2_lade": m["lade"]}
+                       for e, m in candidates[:20]],
+        }
+
+    # Apply — eerst backup
+    ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    backup = v1_path.with_suffix(f".json.backup_backfill_{ts}")
+    _shutil.copy(str(v1_path), str(backup))
+    now = _dt.now(_tz.utc).isoformat()
+    for e, m in candidates:
+        e["migrated_to_v2"] = True
+        e["v2_card_id"] = m["card_id"]
+        e["v2_lade"] = m["lade"]
+        e["migrated_at"] = now
+        e["migrated_by"] = f"backfill_endpoint:{body.user_id}"
+    v1["last_backfill"] = now
+    save_json(v1_path, v1)
+    return {
+        "success": True, "dry_run": False,
+        "marked": len(candidates),
+        "total_v1": len(entries),
+        "backup_file": backup.name,
+    }
 
 
 # v6_kbv2_autoresolve_001 — bulk auto-classify van inbox-kaarten via topic+tags
@@ -685,9 +768,7 @@ async def backfill_hooks(limit_per_lade: int = Query(0, ge=0, description="0 = a
 # Trekt 1 KB v1 kaart die nog niet gemigreerd is en presenteert hem voor
 # herziening + promotion naar KB v2 lade.
 import random as _random
-from pathlib import Path as _Path
 import json as _json
-from datetime import datetime as _dt, timezone as _tz
 
 _KB_V1_FILE = _Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
 

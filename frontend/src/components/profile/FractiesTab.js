@@ -405,7 +405,7 @@ export function StadDetailBark({ stadId, onClose }) {
   return (
     <MapModal title={`${s.type.toUpperCase()} · ${s.naam.toUpperCase()}`} onClose={onClose} maxWidth="max-w-3xl" zIndex={60}>
       <div className="space-y-3">
-        {/* Hoofd-blok: avatar (banner/logo of initiaal) + info — zoals BewonerHandelPanel */}
+        {/* Hoofd-blok: avatar (fractie-logo voor hoofdstad, anders stad-banner/logo of initiaal) + info */}
         <div className="flex gap-3 items-start">
           <div
             className="w-24 h-24 rounded-lg overflow-hidden border-2 flex-shrink-0 flex items-center justify-center text-4xl font-serif font-bold"
@@ -416,7 +416,10 @@ export function StadDetailBark({ stadId, onClose }) {
               boxShadow: `0 0 16px ${color}40`,
             }}
           >
-            {s.logo_url || s.banner_image_url ? (
+            {/* v6_dnd_fractie_marker_001 — hoofdstad toont avatar van leidende fractie */}
+            {(s.type === 'hoofdstad' && (leid.icon_image_url || leid.banner_image_url)) ? (
+              <img src={`${API}${leid.icon_image_url || leid.banner_image_url}`} alt={leid.naam} className="w-full h-full object-cover" />
+            ) : (s.logo_url || s.banner_image_url) ? (
               <img src={`${API}${s.logo_url || s.banner_image_url}`} alt={s.naam} className="w-full h-full object-cover" />
             ) : (
               s.naam[0]
@@ -672,6 +675,9 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
               const isStad = s.type === 'hoofdstad' || s.type === 'stad';
               const isDraggingThis = dragging?.kind === 'stad' && dragging?.id === s.id;
               const isSelectedProv = selectedProv?.id === s.provincie_id;
+              // v6_dnd_fractie_marker_001 — toon fractie-icon in marker als beschikbaar
+              const fractieIcon = leid?.icon_image_url || leid?.banner_image_url;
+              const markerSize = isStad ? 24 : 16; // px (was 12/8 als CSS classes)
               return (
                 <button
                   key={s.id}
@@ -683,13 +689,26 @@ export function LandkaartBark({ provincies, steden: stedenProp, fracties, userId
                   title={`${s.naam} — ${leid?.naam || 'Neutraal'}${editMode ? ' (sleep om te verplaatsen)' : ''}`}
                 >
                   <div
-                    className={`rounded-sm border transition-all overflow-hidden ${
+                    className={`rounded-md border-2 transition-all overflow-hidden ${
                       isPulsing ? 'animate-pulse scale-150' : 'group-hover:scale-125'
-                    } ${isStad ? 'w-3 h-3' : 'w-2 h-2'} ${
-                      isSelectedProv ? 'border-amber-200 scale-150' : 'border-amber-300'
-                    } ${editMode ? 'ring-1 ring-emerald-400/70' : ''}`}
-                    style={{ background: color }}
-                  />
+                    } ${isSelectedProv ? 'scale-150' : ''} ${
+                      editMode ? 'ring-1 ring-emerald-400/70' : ''
+                    }`}
+                    style={{
+                      width: markerSize, height: markerSize,
+                      borderColor: isSelectedProv ? '#fde68a' : color,
+                      background: fractieIcon ? '#000' : color,
+                      boxShadow: isStad ? `0 0 6px ${color}80` : 'none',
+                    }}
+                  >
+                    {fractieIcon ? (
+                      <img
+                        src={`${API}${fractieIcon}`}
+                        alt={leid?.naam || ''}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : null}
+                  </div>
                   <span className={`text-[9px] mt-0.5 px-1 rounded whitespace-nowrap font-bold transition-all ${
                     isSelectedProv
                       ? 'opacity-100 bg-stone-950 text-amber-200'

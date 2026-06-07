@@ -1536,7 +1536,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
           <image href={NL_MAP_URL} x="0" y="0" width="100" height="100"
             preserveAspectRatio="xMidYMid slice" />
 
-          {/* Provincie shields — v6_map_avatars_001: avatar-circle als beschikbaar, anders shield */}
+          {/* Provincie shields — v6_dnd_fractie_marker_001: fractie-avatar voorrang boven dorp/stad */}
           {provincies.map(p => {
             const f = fractieOf(p.fractie_id);
             // v6_map_markers_uniform_001 — alle markers zelfde grootte, geen glow
@@ -1544,24 +1544,19 @@ function MiniMapPanel({ char, userId, isAdmin }) {
             const baseR = 4.0;
             const isSelected = selectedProv === p.id;
             const glowColor = f.kleur || '#94a3b8';
-            // v6_map_avatars_002 — Dorp/Stad avatar per provincie. Groei-logica:
-            //   spark hoofdstad → 'basis stad' avatar (groot/hoofdstad)
-            //   alle andere     → 'Basis dorp' avatar (kleiner dorp)
-            // Bewoner-avatars zijn NIET op de wereldkaart (alleen in dorp-popup zichtbaar)
+            // v6_dnd_fractie_marker_001 — Marker-avatar prioriteit:
+            //   1. fractie icon/banner (uit fracties.json) als ingevuld
+            //   2. fallback naar basis-stad/basis-dorp avatar
+            //   3. anders fractie-shield (gevulde cirkel)
             const isStad = p.fractie_id === 'spark';
-            const avatarUrl = isStad ? (stadAvatarUrl || dorpAvatarUrl) : dorpAvatarUrl;
+            const fallbackAvatar = isStad ? (stadAvatarUrl || dorpAvatarUrl) : dorpAvatarUrl;
+            const avatarUrl = f.icon_image_url || f.banner_image_url || fallbackAvatar;
             const isPlayerHere = (char?.dorp || '').toLowerCase() === (p.hoofdstad || '').toLowerCase();
             return (
               <g key={p.id} data-testid={`prov-${p.id}`}
                 onPointerDown={(e) => onPointerDown(e, p.id)}
                 style={{ cursor: editMode ? 'grab' : 'pointer' }}>
-                {/* Buitenring (subtiel, geen drop-shadow glow) */}
-                <circle cx={p.x_pct} cy={p.y_pct} r={baseR + 1.2}
-                  fill="none"
-                  stroke={glowColor}
-                  strokeWidth="0.4"
-                  opacity="0.35" />
-                {/* Avatar-circle als bewoner aanwezig, anders fractie-shield */}
+                {/* Avatar-circle als beschikbaar, anders fractie-shield */}
                 {avatarUrl ? (
                   <>
                     <defs>
@@ -1578,7 +1573,7 @@ function MiniMapPanel({ char, userId, isAdmin }) {
                       fill="none"
                       stroke={isSelected ? '#fde68a' : glowColor}
                       strokeWidth={isSelected ? 0.8 : 0.5}
-                      opacity="0.75" />
+                      opacity="0.85" />
                   </>
                 ) : (
                   <>
@@ -2040,7 +2035,7 @@ function BewonerHandelPanel({ bewoner, playerInventory, playerGoud, onBuy, onSel
             <p className="text-[10px] text-amber-400/70">{bewoner.beroep} · {bewoner.rang || 'Burger'}</p>
             <p className="text-[10px] text-yellow-300 font-mono mt-1">💰 {bewoner.wallet?.goud || 0}g</p>
             {bewoner.beschrijving && (
-              <p className="text-[10px] italic text-amber-200/70 mt-1 leading-snug line-clamp-3">"{bewoner.beschrijving}"</p>
+              <p className="text-[10px] italic text-amber-200/70 mt-1 leading-snug line-clamp-3">&ldquo;{bewoner.beschrijving}&rdquo;</p>
             )}
           </div>
         </div>

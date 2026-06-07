@@ -52,7 +52,7 @@ PROVINCIES_BASELINE = [
     {"id": "noord-holland", "naam": "Noord-Holland", "hoofdstad": "Haarlem",          "fractie_id": "neutraal", "x_pct": 44, "y_pct": 40},
     {"id": "zuid-holland",  "naam": "Zuid-Holland",  "hoofdstad": "Den Haag",         "fractie_id": "neutraal", "x_pct": 42, "y_pct": 58},
     {"id": "zeeland",       "naam": "Zeeland",       "hoofdstad": "Middelburg",       "fractie_id": "neutraal", "x_pct": 38, "y_pct": 74},
-    {"id": "noord-brabant", "naam": "Noord-Brabant", "hoofdstad": "'s-Hertogenbosch", "fractie_id": "schaduw",  "x_pct": 56, "y_pct": 76},
+    {"id": "noord-brabant", "naam": "De Aschvallei", "hoofdstad": "Asher",          "fractie_id": "vuur",     "x_pct": 56, "y_pct": 76},
     {"id": "limburg",       "naam": "Limburg",       "hoofdstad": "Maastricht",       "fractie_id": "barbaren", "x_pct": 70, "y_pct": 88},
 ]
 

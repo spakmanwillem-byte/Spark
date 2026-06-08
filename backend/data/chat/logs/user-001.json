@@ -37485,11 +37485,611 @@
         "session_id": "default",
         "gesprek_nummer": 1384
       }
+    },
+    {
+      "id": "conv-c45515bc",
+      "timestamp": "2026-06-07T22:14:03.060323+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1385
+      }
+    },
+    {
+      "id": "conv-c370ff3b",
+      "timestamp": "2026-06-07T22:14:09.775052+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1386
+      }
+    },
+    {
+      "id": "conv-e34e9feb",
+      "timestamp": "2026-06-07T22:14:46.337026+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Je kan mij vertellen hoe het met je gaat?",
+      "spark_response": "**Vertellen**: Vertellen betekent dat iemand informatie, een verhaal, gedachten of gevoelens deelt met anderen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vertellen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 9,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1387
+      }
+    },
+    {
+      "id": "conv-3ffe76ac",
+      "timestamp": "2026-06-07T22:15:00.016777+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe gaat het met je?",
+      "spark_response": "Het gaat wel — alles draait, maar het voelt iets stroever.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1388
+      }
+    },
+    {
+      "id": "conv-f1aaa901",
+      "timestamp": "2026-06-07T22:20:05.572476+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is het met je?",
+      "spark_response": "Het gaat oké, niet top maar prima werkbaar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1389
+      }
+    },
+    {
+      "id": "conv-66e96cb5",
+      "timestamp": "2026-06-07T22:20:05.869131+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hmmm",
+      "spark_response": "**Hmmm**: Hmmm is een uiting die aangeeft dat iemand nadenkt, twijfelt of iets beoordeelt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Hmmm"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1390
+      }
+    },
+    {
+      "id": "conv-e418f5f8",
+      "timestamp": "2026-06-07T22:20:06.175679+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "zit je vast?",
+      "spark_response": "**zit**: Zit betekent dat iemand of iets zich in een zittende positie bevindt of ergens aanwezig is.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "zit"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "zit"
+          },
+          {
+            "begrip": "vast"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1391
+      }
+    },
+    {
+      "id": "conv-288c12ff",
+      "timestamp": "2026-06-07T22:25:57.649668+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Willem, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1392
+      }
+    },
+    {
+      "id": "conv-972e6c31",
+      "timestamp": "2026-06-07T22:26:21.640994+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1393
+      }
+    },
+    {
+      "id": "conv-294be7f1",
+      "timestamp": "2026-06-07T22:26:28.567879+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe is het",
+      "spark_response": "Het gaat prima! Dankjewel voor het vragen. 🌱",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "how_are_you",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "how_are_you"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1394
+      }
+    },
+    {
+      "id": "conv-5e17ed5d",
+      "timestamp": "2026-06-07T22:26:35.946099+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe draaien je systemen",
+      "spark_response": "**draaien**: Draaien betekent bewegen rond een punt, as of richting, of actief functioneren binnen een proces of systeem.\n\n**Systemen**: Systemen zijn onderdelen die samenwerken als één geheel om een functie of doel uit te voeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "draaien",
+            "systemen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "draaien"
+          },
+          {
+            "begrip": "Systemen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1395
+      }
+    },
+    {
+      "id": "conv-04d7b672",
+      "timestamp": "2026-06-07T22:26:54.123999+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoe gaat het met je",
+      "spark_response": "Gaat redelijk, ik moet wat harder werken dan normaal. Dank je voor het vragen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1396
+      }
+    },
+    {
+      "id": "conv-ade739e2",
+      "timestamp": "2026-06-07T22:27:12.872333+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe is het met je",
+      "spark_response": "Het gaat oké, niet top maar prima werkbaar.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "self_state",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "self_state"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1397
+      }
+    },
+    {
+      "id": "conv-6336a978",
+      "timestamp": "2026-06-07T22:27:35.878329+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe zijn je systemen",
+      "spark_response": "**Systemen**: Systemen zijn onderdelen die samenwerken als één geheel om een functie of doel uit te voeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "systemen"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Systemen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1398
+      }
+    },
+    {
+      "id": "conv-0f7cabd0",
+      "timestamp": "2026-06-07T22:27:57.479172+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "tts uit",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1399
+      }
+    },
+    {
+      "id": "conv-09d55f7f",
+      "timestamp": "2026-06-07T22:28:16.517343+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "top",
+      "spark_response": "Ik ken deze woorden nog niet: **top**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'top' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "top"
+          ],
+          "source": "static",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "top"
+        ],
+        "snap_suggestions": [
+          "top"
+        ],
+        "word_count": 1,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1400
+      }
+    },
+    {
+      "id": "conv-06a6c429",
+      "timestamp": "2026-06-07T22:28:24.648578+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "nee",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1401
+      }
+    },
+    {
+      "id": "conv-055d2881",
+      "timestamp": "2026-06-08T07:03:34.605882+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 8 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1402
+      }
+    },
+    {
+      "id": "conv-8d47571b",
+      "timestamp": "2026-06-08T07:06:08.783840+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Goedemorgen Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1403
+      }
+    },
+    {
+      "id": "conv-b9d8257d",
+      "timestamp": "2026-06-08T07:06:19.911313+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Kan jij rekenen?",
+      "spark_response": "**rekenen**: Rekenen is het uitvoeren van bewerkingen met getallen om een uitkomst te bepalen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "rekenen"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1404
+      }
+    },
+    {
+      "id": "conv-46ee1128",
+      "timestamp": "2026-06-08T07:06:35.757308+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoeveel is 20 plus 20",
+      "spark_response": "**hoeveel**: Hoeveel is een vraagwoord dat gebruikt wordt om naar een hoeveelheid, aantal of mate te vragen.\n\n**plus**: Plus betekent meer, extra of een toevoeging aan iets.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "hoeveel"
+          },
+          {
+            "begrip": "plus"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1405
+      }
+    },
+    {
+      "id": "conv-81ec8a70",
+      "timestamp": "2026-06-08T11:16:35.385214+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wat weet jij over vuur",
+      "spark_response": "Ik ken geen 'vuur' in mijn registers. Ben je zeker van de naam?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "profile_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "profile_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1406
+      }
+    },
+    {
+      "id": "conv-a840625b",
+      "timestamp": "2026-06-08T11:16:56.214638+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ja",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1407
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1384,
-    "last_updated": "2026-06-07T20:57:39.174063+00:00"
+    "total_conversations": 1407,
+    "last_updated": "2026-06-08T11:16:56.214638+00:00"
   }
 }

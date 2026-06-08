@@ -69819,7 +69819,167 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-20ad28fd",
+      "begrip": "Ik ben morgen vrij",
+      "lade": "spreken",
+      "status": "active",
+      "lagen": {
+        "laag1": "De gebruiker geeft aan dat hij morgen beschikbaar is.",
+        "laag2": "Wordt gebruikt om aan te geven dat er geen verplichtingen of werk gepland zijn.",
+        "laag3": "“Ik ben morgen vrij” is een persoonlijke statusmelding over beschikbaarheid in de toekomst. Het geeft aan dat de gebruiker geen vaste verplichtingen heeft en ruimte heeft voor afspraken, taken of ontspanning. Het kan ook impliciet een uitnodiging zijn om iets te plannen.",
+        "laag4": "Spark herkent beschikbaarheid en kan voorstellen doen, plannen of deze informatie opslaan voor context."
+      },
+      "ws5": {
+        "wie": "Gebruiker",
+        "wat": "Beschikbaarheid (vrij zijn)",
+        "wanneer": "Morgen",
+        "waar": "Agenda / persoonlijke planning",
+        "waarom": "Om beschikbaarheid te delen of ruimte aan te geven",
+        "hoe": "Door expliciet te benoemen dat er geen verplichtingen zijn"
+      },
+      "tags": [
+        "beschikbaarheid",
+        "planning",
+        "agenda",
+        "vrij",
+        "morgen",
+        "gebruiker",
+        "context",
+        "tijd",
+        "afspraak",
+        "beschikbaar",
+        "status",
+        "persoonlijke planning",
+        "toekomst",
+        "vrije tijd"
+      ],
+      "topic": "planning",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-77d5122f",
+          "begrip": "Welk tijdstip is het?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "agenda",
+            "context",
+            "planning",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6e150cd1",
+          "begrip": "en dacht mss schrijf je het op in de agenda",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "afspraak",
+            "agenda",
+            "context",
+            "planning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c9395a04",
+          "begrip": "vandaag",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "agenda",
+            "context",
+            "planning",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8186fef0",
+          "begrip": "Morgen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "morgen",
+            "planning",
+            "tijd",
+            "toekomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbdbca23",
+          "begrip": "tijdstip",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "agenda",
+            "context",
+            "planning",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:07:49.548598+00:00",
+        "vorige_versie_v1": "snap-20657720",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:35.874722+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:07:46.353580+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:07:46.371085+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:07:50.491261+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:07:50.553182+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:07:45.855057+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-06-07T20:59:40.524232+00:00"
+  "updated_at": "2026-06-08T12:02:52.797970+00:00"
 }

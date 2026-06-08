@@ -5,7 +5,7 @@
         {
           "id": "pot-001",
           "index": 0,
-          "capital": 10.05,
+          "capital": 10.1311,
           "max_size": 50.0,
           "pot_locked": false,
           "lock_reason": null,
@@ -18,10 +18,10 @@
           },
           "market": "BCH-EUR",
           "stats": {
-            "trades": 2,
-            "wins": 1,
+            "trades": 4,
+            "wins": 2,
             "losses": 0,
-            "total_pnl": 0.05
+            "total_pnl": 0.1311
           },
           "created_at": "2026-06-03T14:02:40.628836+00:00",
           "trade_log": [
@@ -32,13 +32,21 @@
               "amount_eur": 10.0,
               "trade_id": "00000000-0000-041f-0100-000821a24e48",
               "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-06-08T05:13:53.912702+00:00",
+              "side": "BUY",
+              "price": 191.26002755136963,
+              "amount_eur": 10.05,
+              "trade_id": "00000000-0000-041f-0100-00084dbf223a",
+              "market": "BCH-EUR"
             }
           ],
-          "last_action": "SELL @ €215.04 | netto €+0.050",
-          "live_value": 10.05,
-          "unrealized_pnl": 0.0576,
-          "unrealized_pnl_pct": 1.076,
-          "current_price": 215.2
+          "last_action": "SELL @ €193.76 | netto €+0.081",
+          "live_value": 10.1311,
+          "unrealized_pnl": 0.0769,
+          "unrealized_pnl_pct": 1.265,
+          "current_price": 193.68
         },
         {
           "id": "pot-002",
@@ -48,23 +56,36 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 192.1100017630958,
+            "highest_price": 194.2,
+            "trailing_active": true,
+            "entry_time": "2026-06-08T05:18:56.940033+00:00",
+            "amount_eur": 10.0
           },
-          "market": null,
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-06-03T14:02:40.628848+00:00",
-          "trade_log": [],
-          "last_action": "",
-          "live_value": 10.0
+          "trade_log": [
+            {
+              "ts": "2026-06-08T05:18:56.940033+00:00",
+              "side": "BUY",
+              "price": 192.1100017630958,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-00084dc72c6d",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "BUY @ €192.11",
+          "live_value": 9.2806,
+          "unrealized_pnl": -0.7194,
+          "unrealized_pnl_pct": -6.694,
+          "current_price": 179.25
         },
         {
           "id": "pot-003",
@@ -74,23 +95,36 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 192.01003305384353,
+            "highest_price": 194.2,
+            "trailing_active": true,
+            "entry_time": "2026-06-08T05:23:59.734912+00:00",
+            "amount_eur": 10.0
           },
-          "market": null,
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-06-03T14:02:40.628852+00:00",
-          "trade_log": [],
-          "last_action": "",
-          "live_value": 10.0
+          "trade_log": [
+            {
+              "ts": "2026-06-08T05:23:59.734912+00:00",
+              "side": "BUY",
+              "price": 192.01003305384353,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-00084dcd4622",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "BUY @ €192.01",
+          "live_value": 9.2854,
+          "unrealized_pnl": -0.7146,
+          "unrealized_pnl_pct": -6.646,
+          "current_price": 179.25
         },
         {
           "id": "pot-004",
@@ -100,23 +134,36 @@
           "pot_locked": false,
           "lock_reason": null,
           "position": {
-            "is_open": false,
-            "entry_price": null,
-            "highest_price": null,
-            "trailing_active": false,
-            "entry_time": null
+            "is_open": true,
+            "entry_price": 192.09001449826843,
+            "highest_price": 194.2,
+            "trailing_active": true,
+            "entry_time": "2026-06-08T05:29:03.152635+00:00",
+            "amount_eur": 10.0
           },
-          "market": null,
+          "market": "BCH-EUR",
           "stats": {
-            "trades": 0,
+            "trades": 1,
             "wins": 0,
             "losses": 0,
             "total_pnl": 0.0
           },
           "created_at": "2026-06-03T14:02:40.628856+00:00",
-          "trade_log": [],
-          "last_action": "",
-          "live_value": 10.0
+          "trade_log": [
+            {
+              "ts": "2026-06-08T05:29:03.152635+00:00",
+              "side": "BUY",
+              "price": 192.09001449826843,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-00084dd40c76",
+              "market": "BCH-EUR"
+            }
+          ],
+          "last_action": "BUY @ €192.09",
+          "live_value": 9.2816,
+          "unrealized_pnl": -0.7184,
+          "unrealized_pnl_pct": -6.684,
+          "current_price": 179.25
         },
         {
           "id": "pot-005",
@@ -328,7 +375,7 @@
         }
       ],
       "overflow_pool": 0.0,
-      "last_buy_cycle": 1,
+      "last_buy_cycle": 436,
       "user_id": "user-001",
       "market": "BCH-EUR",
       "created_at": "2026-05-28T17:23:18.391617+00:00"

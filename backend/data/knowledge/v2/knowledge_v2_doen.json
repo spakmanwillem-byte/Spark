@@ -13961,10 +13961,10 @@
         "laag1": "Een pendel is een voorwerp dat vrij heen en weer kan zwaaien rond een vast punt.",
         "laag2": "Pendels worden gebruikt in natuurkunde, klokken en soms in spirituele praktijken.",
         "laag3": "Een pendel bestaat meestal uit een gewicht dat aan een touw, draad of staaf hangt. Door zwaartekracht en beweging zwaait het gewicht heen en weer. De beweging kan regelmatig en herhalend zijn, afhankelijk van lengte, massa en zwaartekracht.",
-        "laag4": "Pendels worden vaak gebruikt in slingerklokken om tijd te meten, omdat hun beweging een vrij constante periode kan hebben. In de natuurkunde wordt de pendel gebruikt om beweging, zwaartekracht en energieoverdracht te bestuderen. In sommige tradities wordt een kleine handpendel ook gebruikt bij meditatie of wichelpraktijken."
+        "laag4": "Een pendel laat zien hoe energie voortdurend wordt omgezet tussen beweging en positie. Daardoor wordt de pendel gebruikt om ritme, tijd, zwaartekracht en evenwicht te bestuderen. De herhalende beweging maakt hem bruikbaar voor zowel technische als symbolische toepassingen."
       },
       "ws5": {
-        "wie": "Wetenschappers, klokkenmakers en gebruikers van pendels.",
+        "wie": "Wetenschappers, klokkenmakers, studenten en spirituele beoefenaars.",
         "wat": "Een gewicht dat heen en weer beweegt aan een ophangpunt.",
         "wanneer": "Wanneer een pendel wordt losgelaten of in beweging wordt gebracht.",
         "waar": "In klokken, experimenten en soms spirituele toepassingen.",
@@ -13972,14 +13972,77 @@
         "hoe": "Door een gewicht aan een draad of staaf te laten zwaaien onder invloed van zwaartekracht."
       },
       "tags": [
+        "pendel",
         "beweging",
         "zwaartekracht",
         "slinger",
         "klok",
-        "oscillatie"
+        "oscillatie",
+        "ritme",
+        "energie",
+        "tijd",
+        "evenwicht",
+        "intuïtie",
+        "spiritueel"
       ],
       "topic": "natuurkunde",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7310ce47",
+          "begrip": "pendelen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "energie",
+            "intuïtie",
+            "pendel",
+            "spiritueel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f17a264d",
+          "begrip": "trilling",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beweging",
+            "energie",
+            "ritme"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e5692755",
+          "begrip": "Kracht",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beweging",
+            "energie",
+            "zwaartekracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-88b8ebd7",
+          "begrip": "ritme",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "beweging",
+            "ritme",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "energie",
+            "tijd"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "Willem Spakman",
         "ingedeeld_door": "kbv2_migratie",
@@ -13995,8 +14058,42 @@
               "active": true,
               "is_new": true
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:39:53.127241+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:39:53.147672+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:41:00.209222+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:41:00.230669+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:40:59.295430+00:00"
       },
       "media": {
         "voice_url": null,
@@ -133166,7 +133263,2406 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-fix-bc6c33e66b",
+      "begrip": "Monitor pauzeren: pause monitor",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Met \"pause monitor\" kan de gebruiker de monitoring tijdelijk pauzeren of later hervatten.",
+        "laag2": "Wordt gebruikt om een actieve monitoringservice tijdelijk stop te zetten zonder het systeem volledig af te sluiten.",
+        "laag3": "\"Pause monitor\" is een systeemcommando waarmee een gebruiker de achtergrondmonitoring tijdelijk kan onderbreken. Tijdens de pauze blijft het systeem actief, maar worden monitorfuncties niet uitgevoerd totdat de monitoring wordt hervat.\n\nDit kan nuttig zijn voor:\n\nonderhoud\ntesten\ndebugging\nprestatiebeheer\ntijdelijke rustperiodes\n\nDe monitoring kan later weer worden ingeschakeld zonder een volledige herstart van het systeem.\n\nBinnen Spark kan dit betrekking hebben op:\n\nachtergrondprocessen\nobservatieservices\nmonitoringmodules\nsysteemcontrole\nautomatische controles",
+        "laag4": "Een commando om monitoring tijdelijk te stoppen en later weer voort te zetten zonder het systeem uit te schakelen."
+      },
+      "ws5": {
+        "wie": "Gebruiker of beheerder.",
+        "wat": "Een commando om monitoring te pauzeren of hervatten.",
+        "wanneer": "Wanneer monitoring tijdelijk niet nodig is.",
+        "waar": "Binnen monitoringservices, achtergrondprocessen of systeemmodules.",
+        "waarom": "Om tijdelijk belasting, observatie of automatische controles te stoppen.",
+        "hoe": "Door het commando \"pause monitor\" of een vergelijkbaar systeemcommando uit te voeren."
+      },
+      "tags": [
+        "monitor",
+        "pause",
+        "systeembeheer",
+        "resume",
+        "monitoring",
+        "commando",
+        "systeem",
+        "beheer",
+        "service",
+        "achtergrondproces",
+        "controle",
+        "onderhoud",
+        "debugging"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-65f07fef",
+          "begrip": "Help Admin",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "onderhoud",
+            "systeem",
+            "systeembeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "monitoring",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4ffd2497",
+          "begrip": "commando",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "commando",
+            "controle",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d68bab22",
+          "begrip": "Beheerd",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "onderhoud"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c8ccd2a",
+          "begrip": "Auditing tools",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "monitoring"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:48:36.961575+00:00",
+        "vorige_versie_v1": "kb-fix-bc6c33e66b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:41.736313+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:48:35.603770+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:48:35.662188+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:48:38.079831+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:48:38.096583+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:48:35.156913+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8f9509bf",
+      "begrip": "Repareren",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Repareren betekent iets herstellen zodat het weer correct functioneert.",
+        "laag2": "Het gaat om het oplossen van een defect, fout of beschadiging om de oorspronkelijke werking terug te brengen.",
+        "laag3": "Repareren is het proces waarbij een probleem, defect of beschadiging wordt onderzocht en hersteld zodat een object, systeem of proces weer bruikbaar wordt.\n\nRepareren kan betrekking hebben op:\n\napparaten\nvoertuigen\nmeubels\nkleding\nmachines\nsoftware\ntechnische systemen\n\nHet reparatieproces bestaat vaak uit:\n\nprobleem herkennen\noorzaak vinden\noplossing uitvoeren\nresultaat testen\n\nBinnen techniek en software wordt repareren vaak aangeduid als:\n\nbugfix\nonderhoud\nfoutcorrectie\nherstelwerk\n\nHet doel van repareren is om functionaliteit, betrouwbaarheid of bruikbaarheid terug te brengen zonder volledige vervanging.",
+        "laag4": "Repareren is het opsporen en herstellen van een probleem zodat iets weer goed werkt."
+      },
+      "ws5": {
+        "wie": "Monteurs, programmeurs, technici, gebruikers of beheerders.",
+        "wat": "Het herstellen van een defect, fout of beschadiging.",
+        "wanneer": "Wanneer iets niet goed werkt of beschadigd is.",
+        "waar": "Bij apparaten, objecten, software, systemen en processen.",
+        "waarom": "Om de werking, betrouwbaarheid of bruikbaarheid terug te brengen.",
+        "hoe": "Door het probleem te analyseren, op te lossen en het resultaat te testen."
+      },
+      "tags": [
+        "repareren",
+        "herstel",
+        "fix",
+        "oplossing",
+        "onderhoud",
+        "defect",
+        "fout",
+        "diagnose",
+        "techniek",
+        "software",
+        "reparatie",
+        "testen",
+        "verbetering"
+      ],
+      "topic": "techniek",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d1e9414d",
+          "begrip": "fixes",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "herstel",
+            "onderhoud",
+            "oplossing",
+            "software",
+            "verbetering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c12ed5dd",
+          "begrip": "loodgieter",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "onderhoud",
+            "reparatie",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9c6cb9d0",
+          "begrip": "Onderhoud",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "onderhoud",
+            "reparatie",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e1b36b71",
+          "begrip": "Schoenlapper",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "herstel",
+            "onderhoud",
+            "reparatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "fout",
+            "verbetering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:54:20.190225+00:00",
+        "vorige_versie_v1": "snap-b06e229b",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:33.077426+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:54:18.873789+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:54:18.890461+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:54:21.555248+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:54:21.573864+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:54:18.369388+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-60f1f68d",
+      "begrip": "vergroten",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vergroten betekent iets groter maken.",
+        "laag2": "Door vergroten neemt de omvang, hoeveelheid, afstand of betekenis van iets toe.",
+        "laag3": "Vergroten is het proces waarbij iets in grootte, volume, aantal, bereik of invloed toeneemt. Dit kan fysiek zijn, zoals een afbeelding vergroten, maar ook abstract, zoals kennis vergroten, een bedrijf uitbreiden of een probleem groter maken.\n",
+        "laag4": "Vergroten komt voor in veel gebieden:\n\nFysiek:\n\neen foto vergroten\neen gebouw uitbreiden\neen object uitvergroten\n\nAbstract:\n\nkennis vergroten\ninvloed vergroten\nwinst vergroten\nbereik vergroten\n\nKenmerken:\n\ntoename\nuitbreiding\nmeer ruimte of effect\nverandering van schaal\n\nVerschil:\n\nvergroten → groter maken\ngroeien → zelf groter worden\nuitbreiden → meer onderdelen toevoegen\n\nBinnen Spark:\n\n👉 Vergroten = schaalverandering omhoog\n\nKan betrekking hebben op:\n\ngrootte\nhoeveelheid\ninvloed\nbereik\nkennis\nkracht\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, systemen of natuurlijke processen",
+        "wat": "Het groter maken van iets",
+        "wanneer": "Wanneer meer omvang, bereik of effect gewenst is",
+        "waar": "In fysieke en abstracte situaties",
+        "waarom": "Om meer ruimte, invloed, capaciteit of zichtbaarheid te krijgen",
+        "hoe": "Door uitbreiding, toevoeging, groei of schaalverandering"
+      },
+      "tags": [
+        "vergroten",
+        "groter",
+        "uitbreiding",
+        "schaal",
+        "groei",
+        "toename",
+        "ontwikkeling",
+        "verandering"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8d612974",
+          "begrip": "plus",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "groei",
+            "ontwikkeling",
+            "toename",
+            "uitbreiding",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf4fb7bc",
+          "begrip": "groeien",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "groei",
+            "ontwikkeling",
+            "uitbreiding",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9a89e376",
+          "begrip": "toevoegen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "groei",
+            "ontwikkeling",
+            "uitbreiding",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-948732a8",
+          "begrip": "uitdaging",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "groei",
+            "ontwikkeling",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4f277524",
+          "begrip": "Curve",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "groei",
+            "ontwikkeling",
+            "verandering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T07:08:58.763945+00:00",
+        "vorige_versie_v1": "kb-skel-60f1f68d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:12.042548+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T07:08:57.362294+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T07:08:57.383057+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T07:09:00.094851+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T07:09:00.150137+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T07:08:56.651245+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-cba8dace",
+      "begrip": "schillen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Schillen is het verwijderen van de buitenste laag van een vrucht, groente of ander materiaal.",
+        "laag2": "Mensen schillen voedsel vaak om de eetbare binnenkant toegankelijk te maken.",
+        "laag3": "Schillen is een handeling waarbij de buitenste laag van een object wordt verwijderd. Dit gebeurt vaak bij fruit, groenten en aardappelen, maar kan ook bij andere materialen worden toegepast. Hiervoor worden hulpmiddelen zoals een schilmesje of dunschiller gebruikt.\n",
+        "laag4": "Schillen is een vorm van voorbereiding en bewerking. Het verandert een object door een beschermende of ongewenste buitenlaag te verwijderen, zodat het beter gebruikt, verwerkt of gegeten kan worden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, koks, voedselverwerkers",
+        "wat": "Het verwijderen van een buitenste laag.",
+        "wanneer": "Tijdens voorbereiding, verwerking of onderhoud.",
+        "waar": "In keukens, voedselindustrie en huishoudens.",
+        "waarom": "Om de binnenkant toegankelijk, bruikbaar of eetbaar te maken.",
+        "hoe": "Door een buitenlaag weg te snijden, schrapen of los te maken."
+      },
+      "tags": [
+        "schillen",
+        "verwijderen",
+        "buitenlaag",
+        "voedsel",
+        "fruit",
+        "groente",
+        "aardappel",
+        "bereiden",
+        "bewerken",
+        "keuken",
+        "dunschiller",
+        "schilmesje",
+        "voorbereiding",
+        "verwerking",
+        "handeling",
+        "doen",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0d7ebdfb",
+          "begrip": "Schilmesje",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "bereiden",
+            "emotie",
+            "fruit",
+            "groente",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-82839a8d",
+          "begrip": "bereiden",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bereiden",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "verwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a7fcaeb8",
+          "begrip": "Dunschiller",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "dunschiller",
+            "fruit",
+            "groente",
+            "keuken",
+            "schillen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ad5da357",
+          "begrip": "gegraven",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "verwerking",
+            "voorbereiding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b8b1a542",
+          "begrip": "sla",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "groente",
+            "neutraal",
+            "voedsel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T10:04:05.155440+00:00",
+        "vorige_versie_v1": "kb-skel-cba8dace",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:01.753448+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:04:03.563415+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:04:03.638081+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:04:06.294276+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:04:06.354219+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T10:04:03.010813+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d188c8e0",
+      "begrip": "Pendelen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Pendelen is het regelmatig heen en weer bewegen tussen twee plaatsen.",
+        "laag2": "Het woord wordt vaak gebruikt voor mensen die dagelijks tussen hun woonplaats en werk of school reizen.",
+        "laag3": "Pendelen betekent dat iemand steeds dezelfde route heen en terug aflegt. Dit gebeurt meestal dagelijks, bijvoorbeeld van huis naar werk en weer terug. Het kan gebeuren met verschillende vervoermiddelen zoals auto, fiets, trein of bus.",
+        "laag4": "De term pendelen komt van de beweging van een pendel die heen en weer zwaait. In moderne samenlevingen pendelen veel mensen omdat wonen en werken vaak op verschillende plekken plaatsvinden. Grote steden en regio’s hebben vaak speciale infrastructuur zoals spoorlijnen en snelwegen om pendelverkeer mogelijk te maken."
+      },
+      "ws5": {
+        "wie": "Werknemers, studenten, forenzen en reizigers",
+        "wat": "Regelmatig heen en weer reizen tussen vaste locaties",
+        "wanneer": "Dagelijks of op vaste momenten",
+        "waar": "Tussen woonplaats, werk, school of andere vaste bestemmingen",
+        "waarom": "Omdat activiteiten en verblijfplaatsen zich op verschillende locaties bevinden",
+        "hoe": "Door steeds dezelfde route heen en terug af te leggen met een vervoermiddel"
+      },
+      "tags": [
+        "pendelen",
+        "reizen",
+        "beweging",
+        "transport",
+        "wonen",
+        "werk",
+        "verkeer",
+        "route",
+        "heen",
+        "t verkeer",
+        "forens",
+        "dagelijks",
+        "terug"
+      ],
+      "topic": "vervoer",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f234fa5c",
+          "begrip": "heen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "beweging",
+            "heen",
+            "reizen",
+            "route"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4af6ad26",
+          "begrip": "vervoer",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "beweging",
+            "route",
+            "transport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a933c396",
+          "begrip": "Weg",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "route",
+            "transport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96d9c6f8",
+          "begrip": "langs",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "beweging",
+            "route"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-097c2cb9",
+          "begrip": "brengen",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "beweging",
+            "transport"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T08:34:31.006797+00:00",
+        "vorige_versie_v1": "3a3048c9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:32.030368+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:34:29.518915+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:34:29.547567+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:34:32.268474+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:34:32.316396+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:34:28.648608+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a35313ac",
+      "begrip": "Kurkentrekker",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een kurkentrekker is een hulpmiddel om een kurk uit een fles te halen.",
+        "laag2": "Het wordt gebruikt om flessen, zoals wijnflessen, te openen zonder de kurk te beschadigen.",
+        "laag3": "Een kurkentrekker is een gereedschap met een spiraalvormige pin die in de kurk wordt gedraaid. Door te trekken of een hefboom te gebruiken, wordt de kurk uit de fles gehaald. Er zijn verschillende soorten, zoals de klassieke spiraal en hefboommodellen.",
+        "laag4": "Zet draaikracht en hefboomwerking om in trekkracht, waardoor een kurk gecontroleerd uit een fles kan worden verwijderd."
+      },
+      "ws5": {
+        "wie": "Iedereen die flessen met kurk opent",
+        "wat": "Een hulpmiddel om een kurk uit een fles te trekken",
+        "wanneer": "Bij het openen van bijvoorbeeld wijn",
+        "waar": "In de keuken of aan tafel",
+        "waarom": "Om de fles te openen zonder de kurk te breken",
+        "hoe": "Door de spiraal in de kurk te draaien en deze eruit te trekken"
+      },
+      "tags": [
+        "openen",
+        "keuken",
+        "gereedschap",
+        "fles",
+        "kurk",
+        "wijn",
+        "draaien",
+        "hefboom",
+        "toegang",
+        "trekken"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c49a87bc",
+          "begrip": "Blikopener",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gereedschap",
+            "keuken",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-38f9806d",
+          "begrip": "Breekijzer",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "hefboom"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd81b038",
+          "begrip": "Boren",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "draaien",
+            "gereedschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8f6ff70",
+          "begrip": "boor",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "draaien",
+            "gereedschap"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4e195f29",
+          "begrip": "Schroevendraaier",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "draaien",
+            "gereedschap"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T08:25:01.336766+00:00",
+        "vorige_versie_v1": "snap-ca66aeac",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.228444+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:24:59.328133+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:24:59.349463+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:25:02.631776+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:25:02.650343+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:24:58.725599+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fix-5725b7230e",
+      "begrip": "Monitor starten: run monitor",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Met \"run monitor\" kan de gebruiker de monitoringservice starten zodat achtergrondtaken weer actief worden.",
+        "laag2": "Wordt gebruikt om een monitoringservice of achtergrondproces in te schakelen dat zelfstandig controles, observaties of taken uitvoert.",
+        "laag3": "\"Run monitor\" is een systeemcommando waarmee een gebruiker monitoring activeert binnen een systeem of applicatie. Na het starten kan de monitor zelfstandig blijven draaien en gebeurtenissen, statussen of voorwaarden controleren.\n\nDe monitor kan gebruikt worden voor:\n\nachtergrondtaken\nsysteembewaking\ntrading alerts\nstatuscontroles\nautomatische acties\ngebeurtenisdetectie\n\nBinnen Spark kan monitoring helpen bij het observeren van processen zonder dat de gebruiker voortdurend handmatig hoeft te controleren.\n\nHet starten van monitoring betekent niet noodzakelijk dat er direct actie wordt uitgevoerd; het systeem begint eerst met observeren, controleren of wachten op relevante gebeurtenissen.",
+        "laag4": "Een commando waarmee monitoring en achtergrondobservatie worden geactiveerd zodat automatische controles kunnen plaatsvinden."
+      },
+      "ws5": {
+        "wie": "Gebruiker of beheerder.",
+        "wat": "Een commando om monitoring te starten.",
+        "wanneer": "Wanneer automatische observatie of achtergrondtaken gewenst zijn.",
+        "waar": "Binnen monitoringservices, systeemmodules of achtergrondprocessen.",
+        "waarom": "Om gebeurtenissen, statussen of voorwaarden automatisch te volgen.",
+        "hoe": "Via chat 'run monitor' of 'start monitor'"
+      },
+      "tags": [
+        "systeembeheer",
+        "monitor",
+        "run",
+        "start",
+        "monitoring",
+        "systeem",
+        "beheer",
+        "service",
+        "observatie",
+        "achtergrondproces",
+        "automatisering",
+        "controle",
+        "trading",
+        "alerts",
+        "core"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fix-bc6c33e66b",
+          "begrip": "Monitor pauzeren: pause monitor",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "achtergrondproces",
+            "beheer",
+            "controle",
+            "monitor",
+            "monitoring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-01e41321",
+          "begrip": "scanning",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "controle",
+            "monitoring",
+            "observatie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-65f07fef",
+          "begrip": "Help Admin",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "systeem",
+            "systeembeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-043ba9c4",
+          "begrip": "toezicht",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "monitoring",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "monitoring",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:50:37.211656+00:00",
+        "vorige_versie_v1": "kb-fix-5725b7230e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:41.695183+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:50:32.998690+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:50:33.058182+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:50:38.340651+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:50:38.356834+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:50:32.551406+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-67c4cc83",
+      "begrip": "EHBO’ers beoordelen de toestand van een slachtoffer.",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "EHBO beoordeelt slachtoffers.",
+        "laag2": "EHBO’ers kijken hoe ernstig de situatie is.",
+        "laag3": "EHBO’ers beginnen met het beoordelen van de toestand van een slachtoffer. Ze controleren bijvoorbeeld bewustzijn, ademhaling en zichtbare verwondingen. Op basis hiervan bepalen ze welke hulp nodig is en in welke volgorde ze handelen.",
+        "laag4": "Herkent het belang van inschatting en kan prioriteiten bepalen op basis van de situatie."
+      },
+      "ws5": {
+        "wie": "EHBO’er",
+        "wat": "beoordelen van toestand",
+        "wanneer": "bij eerste contact",
+        "waar": "op locatie",
+        "waarom": "om juiste hulp te bepalen",
+        "hoe": "door controle van vitale functies"
+      },
+      "tags": [
+        "ehbo",
+        "eerste hulp",
+        "beoordelen",
+        "beoordeling",
+        "inschatting",
+        "slachtoffer",
+        "toestand",
+        "bewustzijn",
+        "ademhaling",
+        "verwonding",
+        "controle",
+        "observatie",
+        "prioriteit",
+        "triage",
+        "hulpverlening",
+        "veiligheid",
+        "gezondheid",
+        "analyse",
+        "besluitvorming",
+        "handelen"
+      ],
+      "topic": "ehbo",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7508a5d9",
+          "begrip": "EHBO verleent eerste hulp bij ongelukken en letsel.",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "eerste hulp",
+            "ehbo",
+            "gezondheid",
+            "hulpverlening",
+            "slachtoffer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b453caf8",
+          "begrip": "EHBO voorkomt verergering van letsel.",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eerste hulp",
+            "ehbo",
+            "gezondheid",
+            "hulpverlening",
+            "slachtoffer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-33fbe333",
+          "begrip": "EHBO",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "eerste hulp",
+            "ehbo",
+            "gezondheid",
+            "hulpverlening",
+            "slachtoffer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c7790860",
+          "begrip": "vergelijken",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "beoordelen",
+            "beoordeling",
+            "besluitvorming",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58e62d0e",
+          "begrip": "beoordelen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "beoordelen",
+            "beoordeling",
+            "controle"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T10:47:01.422125+00:00",
+        "vorige_versie_v1": "fa1a8391",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:36.967995+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:47:00.538105+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:47:00.564253+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:47:02.542833+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:47:02.558916+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T10:47:00.023679+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3c9c4350",
+      "begrip": "Ik moet schoonmaken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ik moet schoonmaken betekent dat iemand aangeeft een ruimte, omgeving of object schoon te moeten maken.",
+        "laag2": "Wordt gebruikt wanneer iemand een taak, verantwoordelijkheid of verplichting benoemt die gericht is op netheid, orde of onderhoud.",
+        "laag3": "De uitspraak \"ik moet schoonmaken\" geeft aan dat iemand van plan is een schoonmaaktaak uit te voeren of zich verplicht voelt dit te doen.\n\nDeze verplichting kan voortkomen uit:\n\nhygiëne\nafspraken\nverantwoordelijkheid\nonderhoud\nstructuur\npersoonlijke normen\n\nDe uitspraak bevat vaak zowel een taak als een intentie tot uitvoering.\n\nSchoonmaken kan betrekking hebben op:\n\neen woning\neen kamer\neen werkplek\neen voertuig\ngereedschap\nandere objecten of ruimtes\n\nBinnen communicatie geeft de uitspraak aan dat tijd, aandacht of energie naar deze taak zal gaan.",
+        "laag4": "Door schoonmaak- of opruimwerkzaamheden uit te voeren."
+      },
+      "ws5": {
+        "wie": "Een persoon die een schoonmaaktaak moet uitvoeren.",
+        "wat": "Een taak gericht op reinigen, opruimen of onderhouden.",
+        "wanneer": "Wanneer iets vies, rommelig of onderhoudsgevoelig is.",
+        "waar": "In huis, op het werk of in een andere omgeving.",
+        "waarom": "Voor hygiëne, orde, onderhoud of comfort.",
+        "hoe": "Door schoonmaakactiviteiten uit te voeren"
+      },
+      "tags": [
+        "schoonmaken",
+        "taak",
+        "verplichting",
+        "huishouden",
+        "verantwoordelijkheid",
+        "onderhoud",
+        "hygiëne",
+        "orde",
+        "planning",
+        "activiteit",
+        "opruimen"
+      ],
+      "topic": "verplichting",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-eb4d81eb",
+          "begrip": "schoonmaken",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "onderhoud",
+            "opruimen",
+            "orde",
+            "schoonmaken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-567c8e74",
+          "begrip": "Jij moet werken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "taak",
+            "verantwoordelijkheid",
+            "verplichting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78653561",
+          "begrip": "Ik moet werken",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "taak",
+            "verantwoordelijkheid",
+            "verplichting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5c497d06",
+          "begrip": "vuil",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "hygiëne",
+            "onderhoud",
+            "schoonmaken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-20123f7a",
+          "begrip": "Plicht",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "taak",
+            "verantwoordelijkheid",
+            "verplichting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:46:44.350196+00:00",
+        "vorige_versie_v1": "snap-f8273b7d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:35.465283+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:46:42.653655+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:46:42.711053+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:46:45.466248+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:46:45.481682+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:46:42.205110+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a94de7f3",
+      "begrip": "Rijstkoker",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een rijstkoker is een apparaat om rijst te koken.",
+        "laag2": "Het wordt gebruikt om rijst automatisch te garen met de juiste hoeveelheid water en warmte.",
+        "laag3": "Een rijstkoker is een elektrisch apparaat dat rijst kookt door water te verwarmen tot het wordt opgenomen of verdampt. Zodra de rijst gaar is, schakelt het apparaat automatisch over naar warmhouden. Dit zorgt voor consistente en goed gekookte rijst zonder toezicht.",
+        "laag4": "Automatiseert het kookproces en schakelt zelfstandig over naar warmhouden zodra het gewenste resultaat is bereikt."
+      },
+      "ws5": {
+        "wie": "Iedereen die rijst bereidt",
+        "wat": "Een apparaat om rijst te koken",
+        "wanneer": "Bij het bereiden van rijstgerechten",
+        "waar": "In de keuken",
+        "waarom": "Voor gemak en consistente resultaten",
+        "hoe": "Door rijst en water te verhitten tot de rijst gaar is en automatisch te stoppen"
+      },
+      "tags": [
+        "ririjstkoker",
+        "rijst",
+        "keuken",
+        "apparaat",
+        "koken",
+        "automatisch",
+        "water",
+        "temperatuur",
+        "bereiden",
+        "gemak",
+        "warmhouden",
+        "elektriciteit",
+        "voedsel"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6b97f9b4",
+          "begrip": "Elektrische kookplaat",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "apparaat",
+            "bereiden",
+            "elektriciteit",
+            "keuken",
+            "koken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken",
+            "temperatuur",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0dc36b33",
+          "begrip": "Vriezer",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken",
+            "temperatuur",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d65893ba",
+          "begrip": "Magnetron",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken",
+            "koken",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7556e370",
+          "begrip": "IJsblokjesmachine",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "automatisch",
+            "keuken",
+            "temperatuur",
+            "water"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T08:56:36.135957+00:00",
+        "vorige_versie_v1": "snap-0f47c0b0",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.441123+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:56:35.357825+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:56:35.372946+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:56:37.279400+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:56:37.312484+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:56:34.884015+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fix-895b205e7a",
+      "begrip": "Monitor stoppen: stop monitor",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Met \"stop monitor\" kan de gebruiker de monitoringservice volledig stoppen.",
+        "laag2": "Wordt gebruikt om een actieve monitoringservice of achtergrondproces af te sluiten zodat er geen verdere controles of automatische taken meer worden uitgevoerd.",
+        "laag3": "\"Stop monitor\" is een systeemcommando waarmee een gebruiker een actieve monitor beëindigt. Na het stoppen worden achtergrondcontroles, observaties en geautomatiseerde monitorfuncties uitgeschakeld.\n\nDit kan gebruikt worden voor:\n\nonderhoud\nsysteembeheer\nconfiguratiewijzigingen\ntesten\nprestatiebeheer\nhet beëindigen van niet langer benodigde processen\n\nIn tegenstelling tot een pauze wordt de monitor volledig afgesloten. Om opnieuw te monitoren moet de service later opnieuw worden gestart.\n\nBinnen Spark kan dit betrekking hebben op:\n\nmonitoringservices\nachtergrondtaken\nobservatieprocessen\ntrading monitors\ngebeurteniscontrole\nautomatische workflows",
+        "laag4": "Een commando waarmee een actieve monitoringservice volledig wordt beëindigd totdat deze opnieuw gestart wordt."
+      },
+      "ws5": {
+        "wie": "Gebruiker of beheerder.",
+        "wat": "Een commando om monitoring te stoppen.",
+        "wanneer": "Wanneer monitoring niet meer nodig is of beëindigd moet worden.",
+        "waar": "Binnen monitoringservices, systeemmodules of achtergrondprocessen.",
+        "waarom": "Om automatische controles en achtergrondverwerking te beëindigen.",
+        "hoe": "Door het commando \"stop monitor\" uit te voeren."
+      },
+      "tags": [
+        "monitor",
+        "stop",
+        "systeembeheer",
+        "monitoring",
+        "systeem",
+        "beheer",
+        "service",
+        "achtergrondproces",
+        "observatie",
+        "automatisering",
+        "controle",
+        "uitschakelen",
+        "beëindigen",
+        "core"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fix-5725b7230e",
+          "begrip": "Monitor starten: run monitor",
+          "lade": "doen",
+          "overlap": 11,
+          "shared_tags": [
+            "achtergrondproces",
+            "automatisering",
+            "beheer",
+            "controle",
+            "core"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fix-bc6c33e66b",
+          "begrip": "Monitor pauzeren: pause monitor",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "achtergrondproces",
+            "beheer",
+            "controle",
+            "monitor",
+            "monitoring"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30d45e45",
+          "begrip": "Stop",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beëindigen",
+            "controle",
+            "stop",
+            "systeem",
+            "uitschakelen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-01e41321",
+          "begrip": "scanning",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "controle",
+            "monitoring",
+            "observatie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-65f07fef",
+          "begrip": "Help Admin",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "beheer",
+            "controle",
+            "systeem",
+            "systeembeheer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T11:52:39.273333+00:00",
+        "vorige_versie_v1": "kb-fix-895b205e7a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:41.715487+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:52:36.234762+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:52:36.253549+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T11:52:40.474721+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T11:52:40.507627+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T11:52:35.702667+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f34658aa",
+      "begrip": "Mixer",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een mixer is een apparaat om ingrediënten te mengen.",
+        "laag2": "Het wordt gebruikt om bijvoorbeeld beslag of deeg te mixen tot een geheel.",
+        "laag3": "Een mixer is een elektrisch apparaat met draaiende kloppers of gardes die ingrediënten mengen. Het wordt vaak gebruikt voor het kloppen van beslag, room of deeg. In tegenstelling tot een blender gebruikt een mixer geen messen maar kloppers, waardoor het vooral geschikt is voor luchtige of dikkere mengsels.",
+        "laag4": "Zet draaiende beweging om in een gelijkmatige verdeling van ingrediënten, waardoor losse onderdelen één samenhangend mengsel vormen."
+      },
+      "ws5": {
+        "wie": "Koks, bakkers, thuiskoks",
+        "wat": "Een elektrisch apparaat om ingrediënten te mengen en te kloppen",
+        "wanneer": "Bij het bereiden van beslag, deeg, room of andere mengsels",
+        "waar": "In de keuken",
+        "waarom": "Om ingrediënten sneller en gelijkmatiger te mengen",
+        "hoe": "Door draaiende kloppers of gardes die ingrediënten door elkaar bewegen"
+      },
+      "tags": [
+        "mixer",
+        "mixen",
+        "mengen",
+        "kloppen",
+        "keuken",
+        "apparaat",
+        "beslag",
+        "deeg",
+        "garde",
+        "elektriciteit"
+      ],
+      "topic": "keuken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c45135d3",
+          "begrip": "Blender",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken",
+            "mengen",
+            "mixen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7775e898",
+          "begrip": "Garde",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "garde",
+            "keuken",
+            "kloppen",
+            "mengen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f2ba087",
+          "begrip": "Keukenmachine",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "keuken",
+            "kloppen",
+            "mengen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d8d35bd",
+          "begrip": "Koelkast",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0dc36b33",
+          "begrip": "Vriezer",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "elektriciteit",
+            "keuken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T08:30:49.064893+00:00",
+        "vorige_versie_v1": "snap-9dee84c3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:39.382495+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:30:32.145703+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:30:32.163494+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:30:47.228292+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:30:47.255827+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:30:50.311539+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:30:50.358710+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:30:46.698423+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a051e542",
+      "begrip": "ophalen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ophalen is iets verkrijgen, meenemen of terugbrengen vanaf een andere locatie.",
+        "laag2": "Bij ophalen wordt een object, persoon of informatie van een plek naar een andere plek gebracht.",
+        "laag3": "Ophalen is een handeling waarbij iets wordt verzameld, meegenomen of opgevraagd. Dit kan gaan om fysieke voorwerpen, personen, gegevens of herinneringen. Het doel is om iets beschikbaar te maken op de gewenste locatie of in de gewenste situatie.",
+        "laag4": "Ophalen speelt een belangrijke rol in logistiek, communicatie en informatieverwerking. Mensen halen goederen op, computers halen gegevens op en het geheugen kan herinneringen ophalen. Het concept verbindt zoeken, verkrijgen en beschikbaar maken."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, systemen en computers.",
+        "wat": "Het verkrijgen, meenemen of opvragen van iets.",
+        "wanneer": "Wanneer iets nodig is of beschikbaar moet worden gemaakt.",
+        "waar": "Bij locaties, opslagplaatsen, databases, netwerken of herinneringen.",
+        "waarom": "Om toegang te krijgen tot een object, persoon of informatie.",
+        "hoe": "Door erheen te gaan, het op te vragen of het te verzamelen."
+      },
+      "tags": [
+        "ophalen",
+        "verkrijgen",
+        "verzamelen",
+        "meenemen",
+        "opvragen",
+        "transport",
+        "logistiek",
+        "gegevens",
+        "informatie",
+        "geheugen",
+        "toegang",
+        "beschikbaar maken",
+        "handeling",
+        "actie",
+        "doen",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3d2b8110",
+          "begrip": "pakken",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "meenemen",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0346ff68",
+          "begrip": "bijgewerkt",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "doen",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-458f5f21",
+          "begrip": "container",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gegevens",
+            "logistiek",
+            "neutraal",
+            "transport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c97ad0a",
+          "begrip": "doen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "doen",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2978363e",
+          "begrip": "trekken",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "transport"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T10:34:19.801853+00:00",
+        "vorige_versie_v1": "kb-skel-a051e542",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:22.499979+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:34:15.717826+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:34:15.739650+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:34:21.032916+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:34:21.051206+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T10:34:15.217779+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-9bde8fe4",
+      "begrip": "Moker",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een moker is een zware hamer die wordt gebruikt om met grote kracht te slaan.",
+        "laag2": "Wordt vaak gebruikt bij sloopwerk, steenbewerking, metaalbewerking en zware constructiewerkzaamheden.",
+        "laag3": "Een moker heeft een korte steel en een zware metalen kop. Door het gewicht van de kop kan veel kracht worden overgebracht op het object waarop wordt geslagen, zoals steen, metaal of beitels.",
+        "laag4": "Een moker zet spierkracht om in een krachtige slag. Door het hoge gewicht van de kop kan veel energie worden overgebracht op harde materialen zoals steen, beton en metaal."
+      },
+      "ws5": {
+        "wie": "Bouwvakkers, metselaars, steenhouwers, sloopwerkers",
+        "wat": "Een zwaar slaggereedschap",
+        "wanneer": "Bij sloopwerk, steenbewerking of zware constructie",
+        "waar": "Bouwplaatsen, werkplaatsen, slooplocaties",
+        "waarom": "Om harde materialen te breken of grote kracht over te brengen",
+        "hoe": "Door met de zware kop krachtig op een object te slaan"
+      },
+      "tags": [
+        "moker",
+        "gereedschap",
+        "hamer",
+        "slaan",
+        "kracht",
+        "sloopwerk",
+        "bouw",
+        "beitel",
+        "breken",
+        "metaal"
+      ],
+      "topic": "gereedschap",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b0c0a550",
+          "begrip": "Spijker",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bouw",
+            "gereedschap",
+            "hamer",
+            "metaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f83bd1db",
+          "begrip": "Hamer",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "bouw",
+            "gereedschap",
+            "hamer",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19b876f3",
+          "begrip": "Wapen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d7bc1088",
+          "begrip": "Energie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "kracht",
+            "metaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1020b265",
+          "begrip": "IJzerzaag",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gereedschap",
+            "metaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T08:31:49.537278+00:00",
+        "vorige_versie_v1": "ae93b462",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.512706+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:31:48.854219+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:31:48.875574+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T08:31:50.784347+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T08:31:50.823633+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T08:31:48.252405+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d67f776a",
+      "begrip": "meenemen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Meenemen is iets of iemand van de ene plaats naar een andere plaats brengen.",
+        "laag2": "Meenemen is iets of iemand van de ene plaats naar een andere plaats brengen.",
+        "laag3": "Meenemen is een handeling waarbij iets wordt gedragen, vervoerd of begeleid naar een andere locatie. Het kan gaan om fysieke voorwerpen, mensen, dieren of zelfs abstracte zaken zoals ideeën, kennis of ervaringen.",
+        "laag4": "Meenemen verbindt bezit, transport en verplaatsing. Het speelt een rol in het dagelijks leven, logistiek, reizen en communicatie. In figuurlijke zin kan meenemen ook betekenen dat informatie, ervaringen of gevoelens worden meegenomen naar een nieuwe situatie."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en transportsystemen.",
+        "wat": "Het verplaatsen van iets of iemand naar een andere plek.",
+        "wanneer": "Wanneer iets nodig is op een andere locatie.",
+        "waar": "Tussen locaties, gebouwen, voertuigen of situaties.",
+        "waarom": "Om iets beschikbaar te hebben of te verplaatsen.",
+        "hoe": "Door het te dragen, vervoeren, begeleiden of transporteren."
+      },
+      "tags": [
+        "meenemen",
+        "verplaatsen",
+        "vervoeren",
+        "dragen",
+        "transport",
+        "begeleiden",
+        "verplaatsing",
+        "logistiek",
+        "object",
+        "persoon",
+        "dier",
+        "reis",
+        "bezit",
+        "actie",
+        "handeling",
+        "doen",
+        "neutraal",
+        "emotie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-a051e542",
+          "begrip": "ophalen",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "actie",
+            "doen",
+            "emotie",
+            "handeling",
+            "logistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2978363e",
+          "begrip": "trekken",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "neutraal",
+            "transport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3d2b8110",
+          "begrip": "pakken",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "handeling",
+            "meenemen",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2c97ad0a",
+          "begrip": "doen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "doen",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-40c01cdb",
+          "begrip": "toegepast",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "doen",
+            "emotie",
+            "handeling",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T10:37:34.460331+00:00",
+        "vorige_versie_v1": "kb-skel-d67f776a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:37.350333+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:37:31.035113+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:37:31.064815+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T10:37:35.766933+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T10:37:35.786097+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T10:37:30.528771+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-06-07T20:59:40.524232+00:00"
+  "updated_at": "2026-06-08T12:02:52.606227+00:00"
 }

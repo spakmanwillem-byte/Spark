@@ -38085,11 +38085,135 @@
         "session_id": "default",
         "gesprek_nummer": 1407
       }
+    },
+    {
+      "id": "conv-fb6bef22",
+      "timestamp": "2026-06-08T12:26:43.675983+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken? _(laatst sprak je me 1 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1408
+      }
+    },
+    {
+      "id": "conv-4c1dbc99",
+      "timestamp": "2026-06-08T12:27:04.093408+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Zo dat was weer een kleine update in je kennisbank",
+      "spark_response": "**update**: Een update is een aanpassing, verbetering of vernieuwing van bestaande informatie, software, kennis of systemen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "update"
+          },
+          {
+            "begrip": "kennisbank"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1409
+      }
+    },
+    {
+      "id": "conv-ae63cb1c",
+      "timestamp": "2026-06-08T12:28:03.307018+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1410
+      }
+    },
+    {
+      "id": "conv-0ab90dbb",
+      "timestamp": "2026-06-08T12:28:16.889367+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Zo dat was weer een kleine update in je kennisbank",
+      "spark_response": "**update**: Een update is een aanpassing, verbetering of vernieuwing van bestaande informatie, software, kennis of systemen.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "update"
+          },
+          {
+            "begrip": "kennisbank"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 10,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1411
+      }
+    },
+    {
+      "id": "conv-981f7080",
+      "timestamp": "2026-06-08T12:28:33.828149+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "tts uit",
+      "spark_response": "Text-to-Speech uit. Ik schrijf, maar zwijg verder 🤐",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_off",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_off"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1412
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1407,
-    "last_updated": "2026-06-08T11:16:56.214638+00:00"
+    "total_conversations": 1412,
+    "last_updated": "2026-06-08T12:28:33.828149+00:00"
   }
 }

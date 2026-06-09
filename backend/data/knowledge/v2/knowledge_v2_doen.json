@@ -135662,7 +135662,638 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-360da45e",
+      "begrip": "Koken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Koken is het bereiden van voedsel door warmte te gebruiken.",
+        "laag2": "Mensen koken om voedsel smakelijker, veiliger en makkelijker te eten te maken.",
+        "laag3": "Koken is een proces waarbij ingrediënten worden bereid met technieken zoals bakken, koken in water, stomen of braden. Door warmte veranderen structuur, smaak en soms ook voedingswaarde van voedsel. Koken is zowel een dagelijkse activiteit als een culinaire kunst.",
+        "laag4": "Koken is het omzetten van ingrediënten in een maaltijd door warmte en bereidingstechnieken toe te passen."
+      },
+      "ws5": {
+        "wie": "Mensen koken voedsel voor zichzelf, familie of anderen.",
+        "wat": "Het proces van voedsel bereiden met warmte.",
+        "wanneer": "Wanneer mensen maaltijden bereiden, vaak dagelijks.",
+        "waar": "In keukens, restaurants, huizen en andere plaatsen waar voedsel wordt bereid.",
+        "waarom": "Om voedsel veilig, smakelijk en makkelijker verteerbaar te maken.",
+        "hoe": "Door ingrediënten te combineren en te verhitten met technieken zoals koken, bakken, stomen of braden."
+      },
+      "tags": [
+        "koken",
+        "voeding",
+        "eten",
+        "bereiden",
+        "warmte",
+        "keuken",
+        "maaltijd",
+        "bakken",
+        "stomen",
+        "braden",
+        "ingrediënten"
+      ],
+      "topic": "voeding & dranken",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bakken",
+            "bereiden",
+            "eten",
+            "ingrediënten",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bakken",
+            "bereiden",
+            "eten",
+            "ingrediënten",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e8a9ed",
+          "begrip": "recept",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bakken",
+            "bereiden",
+            "ingrediënten",
+            "koken",
+            "maaltijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1306a75f",
+          "begrip": "Koekenpan",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bakken",
+            "bereiden",
+            "keuken",
+            "koken",
+            "warmte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b1caa0f8",
+          "begrip": "Fornuis",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bakken",
+            "braden",
+            "keuken",
+            "koken",
+            "warmte"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T15:20:28.994406+00:00",
+        "vorige_versie_v1": "43ea55b6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:29.346338+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:20:24.020373+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:20:24.183216+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:20:30.062757+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:20:30.079066+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T15:20:23.275230+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1e7a4007",
+      "begrip": "gewoonten",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gewoonten zijn handelingen die iemand regelmatig herhaalt.",
+        "laag2": "Door herhaling worden gewoonten steeds vanzelfsprekender en kosten ze minder bewuste aandacht.",
+        "laag3": "Een gewoonte is een gedragspatroon dat door herhaling automatisch of bijna automatisch wordt uitgevoerd. Gewoonten kunnen bewust ontstaan, maar ontwikkelen zich vaak doordat een handeling regelmatig wordt herhaald in dezelfde situatie.\n\nVoorbeelden van gewoonten:\n\nTanden poetsen voor het slapen\nKoffie drinken in de ochtend\nDagelijks wandelen\nOp vaste tijden eten\nEen telefoon controleren bij meldingen\n\nGewoonten kunnen positief, neutraal of negatief zijn. Ze spelen een belangrijke rol in hoe mensen hun dagelijks leven organiseren.",
+        "laag4": "Gewoonten helpen om gedrag voorspelbaar en efficiënt te maken doordat veel handelingen automatisch verlopen zonder steeds opnieuw een keuze te hoeven maken."
+      },
+      "ws5": {
+        "wie": "Mensen en soms groepen of organisaties.",
+        "wat": "Regelmatig herhaald gedrag of handelingen.",
+        "wanneer": "Wanneer een handeling vaak wordt herhaald.",
+        "waar": "In het dagelijks leven, thuis, op school, op het werk en in sociale situaties.",
+        "waarom": "Om taken makkelijker, sneller of vertrouwder te maken.",
+        "hoe": "Door herhaling waardoor gedrag steeds meer automatisch wordt."
+      },
+      "tags": [
+        "gewoonte",
+        "gewoonten",
+        "gedrag",
+        "routine",
+        "herhaling",
+        "patroon",
+        "discipline",
+        "automatisme",
+        "dagelijks leven",
+        "ontwikkeling"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e5fffdc2",
+          "begrip": "Gewoonte",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "automatisme",
+            "discipline",
+            "gedrag",
+            "gewoonte",
+            "herhaling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c90ef458",
+          "begrip": "voorspelbaar",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "gedrag",
+            "herhaling",
+            "patroon",
+            "routine"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f7b12281",
+          "begrip": "Routine",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "gedrag",
+            "herhaling",
+            "patroon",
+            "routine"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-79b58df4",
+          "begrip": "herhaling",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gedrag",
+            "herhaling",
+            "routine"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-691230f4",
+          "begrip": "systeemanalyse",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gedrag",
+            "ontwikkeling",
+            "patroon"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-09T08:07:24.578596+00:00",
+        "vorige_versie_v1": "kb-skel-1e7a4007",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.399237+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T08:07:21.998092+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T08:07:22.057722+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T08:07:25.382370+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T08:07:25.394943+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-09T08:07:21.679452+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-3f999747",
+      "begrip": "Meditatieoefeningen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Meditatieoefeningen zijn praktische technieken om meditatie toe te passen en te trainen.",
+        "laag2": "Meditatieoefeningen helpen om rust, aandacht, focus en bewustzijn stap voor stap te ontwikkelen.",
+        "laag3": "Meditatieoefeningen zijn concrete methoden waarmee iemand meditatie kan beoefenen. Ze bieden structuur en maken meditatie toegankelijk voor beginners en gevorderden.\n\nVoorbeelden zijn:\n\nademhalingsoefeningen\nbodyscans\nmindfulnessoefeningen\ngeleide meditaties\nobservatie van gedachten\naandachtsoefeningen\n\nDoor regelmatig te oefenen kunnen meditatieoefeningen bijdragen aan ontspanning, concentratie, zelfbewustzijn en emotionele balans.\n\nMeditatieoefeningen kunnen zelfstandig worden uitgevoerd of onder begeleiding plaatsvinden binnen zorg, onderwijs, coaching of persoonlijke ontwikkeling.",
+        "laag4": "Meditatieoefeningen bieden een praktische manier om aandacht, rust en bewustzijn te trainen door regelmatige oefening."
+      },
+      "ws5": {
+        "wie": "Iedereen die meditatie wil beoefenen of aanleren.",
+        "wat": "Praktische technieken en oefeningen voor meditatie.",
+        "wanneer": "Dagelijks of op momenten van behoefte aan rust, focus of reflectie.",
+        "waar": "In een rustige omgeving, thuis, in de natuur, op school, in de zorg of tijdens begeleiding.",
+        "waarom": "Om aandacht, ontspanning, bewustzijn en concentratie te ontwikkelen.",
+        "hoe": "Door gestructureerde oefeningen zoals ademhaling, mindfulness, observatie en geleide meditatie."
+      },
+      "tags": [
+        "meditatie",
+        "oefening",
+        "mindfulness",
+        "rust",
+        "focus",
+        "aandacht",
+        "bewustzijn",
+        "ontspanning",
+        "ademhaling",
+        "training",
+        "concentratie",
+        "zelfreflectie"
+      ],
+      "topic": "gezondheid",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-4af7ede8",
+          "begrip": "meditatie",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "aandacht",
+            "ademhaling",
+            "bewustzijn",
+            "concentratie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-896e7510",
+          "begrip": "mindfulness",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "ademhaling",
+            "bewustzijn",
+            "concentratie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1b0ea10d",
+          "begrip": "concentratie",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "concentratie",
+            "focus",
+            "mindfulness"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9baee9bd",
+          "begrip": "Gassho meditatie",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "focus",
+            "meditatie",
+            "oefening",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0178f2bb",
+          "begrip": "Ambient",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "focus",
+            "meditatie",
+            "ontspanning",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T15:22:27.332575+00:00",
+        "vorige_versie_v1": "snap-d72a57d7",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:32.794003+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:22:24.774989+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:22:24.791884+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:22:28.085800+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:22:28.099192+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T15:22:24.467730+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2f42a00e",
+      "begrip": "Slopen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Slopen betekent iets afbreken, ontmantelen of kapotmaken.",
+        "laag2": "Het woord wordt gebruikt wanneer een object, constructie of systeem bewust wordt verwijderd, afgebroken of onbruikbaar gemaakt.",
+        "laag3": "Slopen is het proces waarbij een gebouw, constructie, object of ander geheel wordt afgebroken of ontmanteld. Dit gebeurt vaak omdat het verouderd, beschadigd, onveilig of niet meer nodig is.\n\nSlopen kan betrekking hebben op:\n\ngebouwen\nbruggen\nvoertuigen\nmachines\ninfrastructuur\ntechnische systemen\n\nBij sloopwerk worden materialen soms gescheiden voor hergebruik of recycling.\n\nHet woord wordt ook figuurlijk gebruikt, bijvoorbeeld:\n\n\"Hij sloopte mijn argument.\"\n\"Dat spel sloopt mijn computer.\"\n\"Die training sloopt je conditie.\"\n\nHierbij betekent slopen dat iets sterk wordt beschadigd, uitgeput of afgebroken.",
+        "laag4": "Slopen is het gecontroleerd of doelbewust afbreken van iets om het te verwijderen, vervangen of ontmantelen."
+      },
+      "ws5": {
+        "wie": "Sloopbedrijven, bouwvakkers, monteurs, technici of gebruikers.",
+        "wat": "Het afbreken, ontmantelen of vernietigen van een object of constructie.",
+        "wanneer": "Wanneer iets vervangen, verwijderd of buiten gebruik gesteld moet worden.",
+        "waar": "Op bouwplaatsen, bij infrastructuur, in werkplaatsen of andere locaties.",
+        "waarom": "Om ruimte te maken, veiligheid te verbeteren, materialen te hergebruiken of iets te vervangen.",
+        "hoe": "Met gereedschap, machines, handmatige arbeid of gespecialiseerde slooptechnieken."
+      },
+      "tags": [
+        "slopen",
+        "sloop",
+        "afbreken",
+        "ontmantelen",
+        "bouw",
+        "constructie",
+        "renovatie",
+        "techniek",
+        "recycling",
+        "verwijderen",
+        "demontage",
+        "infrastructuur"
+      ],
+      "topic": "bouw",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "infrastructuur",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5d467d5c",
+          "begrip": "er moet weer een sleuf gegraven worden",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "infrastructuur",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-13a248d1",
+          "begrip": "Gebouwen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "constructie",
+            "infrastructuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc9f9d35",
+          "begrip": "gebouw",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "constructie",
+            "infrastructuur",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f83c658d",
+          "begrip": "bouwindustrie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bouw",
+            "constructie",
+            "infrastructuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-08T15:25:12.264150+00:00",
+        "vorige_versie_v1": "snap-3b5e6c26",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:31.870669+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:25:11.306691+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:25:11.361729+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-08T15:25:13.182110+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-08T15:25:13.196225+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-08T15:25:10.944721+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-06-08T12:02:52.606227+00:00"
+  "updated_at": "2026-06-09T08:11:37.289063+00:00"
 }

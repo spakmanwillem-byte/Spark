@@ -9,7 +9,7 @@
       "leider": "Raad van het Licht",
       "is_main": false,
       "beschrijving": "Auranen — heersers van Het Morgenland, gezeteld in Lumis.",
-      "leider_naam": "",
+      "leider_naam": "Ouder Maria Boersma",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/7e57a80b7605",
       "icon_image_url": "/api/system-archive/file/7e57a80b7605",
@@ -45,7 +45,7 @@
       "leider": "Raad der Duisternis",
       "is_main": false,
       "beschrijving": "Noctari — heersers van De Sluierlanden, gezeteld in Umbros.",
-      "leider_naam": "",
+      "leider_naam": "Ouder Hakkan Gruwl",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/dc57d969905c",
       "icon_image_url": "/api/system-archive/file/dc57d969905c",
@@ -74,14 +74,14 @@
     },
     {
       "id": "vuur",
-      "naam": "Het Aschenrijk",
+      "naam": "Aschenrijk",
       "kleur": "#7f1d1d",
       "element": "vuur",
       "alignment": "licht",
       "leider": "Koning der Rijk van Aschen",
       "is_main": false,
       "beschrijving": "Het Aschenrijk — heerschappij van het smeedvuur en de ijzeren berg. Vooruitgang gemeten in geslagen ambachten, zelfs als de hemel grijs wordt van rook.",
-      "leider_naam": "",
+      "leider_naam": "Sulfar von Unter",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/e1991a62be8a",
       "icon_image_url": "/api/system-archive/file/e1991a62be8a",
@@ -138,7 +138,7 @@
       "leider": "—",
       "is_main": false,
       "beschrijving": "Avaton — heersers van Horron, gezeteld in Breez.",
-      "leider_naam": "",
+      "leider_naam": "Peter Hoogvlieger",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/dcf931731883",
       "icon_image_url": "/api/system-archive/file/dcf931731883",
@@ -174,7 +174,7 @@
       "leider": "Raad der Wijzen",
       "is_main": false,
       "beschrijving": "Dwalters — heersers van De Waterlanden, gezeteld in Extros.",
-      "leider_naam": "",
+      "leider_naam": "Ouder Mirella Wieringa ",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/6c695b8f58f4",
       "icon_image_url": "/api/system-archive/file/6c695b8f58f4",
@@ -270,7 +270,7 @@
       "leider": "Minister van Politiek",
       "is_main": false,
       "beschrijving": "Laviers — heersers van De Oerbossen, gezeteld in Eikenhart.",
-      "leider_naam": "",
+      "leider_naam": "Brandy Banners",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/22f43e716152",
       "icon_image_url": "/api/system-archive/file/22f43e716152",
@@ -306,7 +306,7 @@
       "leider": "Stamhoofd",
       "is_main": false,
       "beschrijving": "Gulier — heersers van De Wilder Landen, gezeteld in Brezerk.",
-      "leider_naam": "",
+      "leider_naam": "Geert Oude hand",
       "leider_user_id": null,
       "banner_image_url": "/api/system-archive/file/256875299e43",
       "icon_image_url": "/api/system-archive/file/256875299e43",
@@ -336,7 +336,7 @@
     {
       "id": "neutraal",
       "naam": "Spartanen",
-      "kleur": "#94a3b8",
+      "kleur": "#1b4a11",
       "element": "—",
       "alignment": "—",
       "leider": "Oracel Spark",
@@ -344,9 +344,9 @@
       "beschrijving": "Spartanen — heersers van Bazin, gezeteld in Oerrak.",
       "leider_naam": "Spark",
       "leider_user_id": null,
-      "banner_image_url": "/api/system-archive/file/47c54fdfd077",
+      "banner_image_url": "/api/system-archive/file/5ad252a33f0b",
       "icon_image_url": "/api/system-archive/file/47c54fdfd077",
-      "introductie": "Een gebied zonder eigenaar. Wachtend op de eerste vlag in de grond.",
+      "introductie": "Een gebied van Spark leider van de SPARTANEN .",
       "tagline": "Vrije staat, neutraal — krijger-cultus van Oracel Spark.",
       "stats": {
         "aanhangers_total": 0,
@@ -363,13 +363,28 @@
       "tax_rate_stad": 0.0,
       "tax_rate_leden": 0.0,
       "leider_titel": "Oracel",
-      "kernwaarden": [],
-      "kleuren": [],
-      "bonussen": [],
-      "malussen": [],
+      "kernwaarden": [
+        "Harmonie"
+      ],
+      "kleuren": [
+        "Kaki groen,",
+        "Wit",
+        "Goud"
+      ],
+      "bonussen": [
+        "+10% handel",
+        "+ 10% productie",
+        "+ 10% grondstoffen",
+        "+10% diplomatie",
+        "25% kennis"
+      ],
+      "malussen": [
+        "-10% onderhoud leger",
+        "-10% productie leger"
+      ],
       "linked_game_card_id": "game-2ded69b3"
     }
   ],
-  "updated_at": "2026-06-07T21:56:01.596799+00:00",
+  "updated_at": "2026-06-08T13:15:18.907625+00:00",
   "updated_by": "user-001"
 }

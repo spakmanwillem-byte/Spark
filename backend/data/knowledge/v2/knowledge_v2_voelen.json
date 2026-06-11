@@ -58693,7 +58693,999 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-skel-bac13fb8",
+      "begrip": "genre",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een genre is een categorie waarin werken met vergelijkbare kenmerken worden ingedeeld.",
+        "laag2": "Genres helpen mensen om inhoud te herkennen, ordenen en vinden.",
+        "laag3": "Een genre is een indeling van boeken, films, muziek, games of andere creatieve werken op basis van gedeelde kenmerken. Genres geven een verwachting van de stijl, inhoud of sfeer van een werk.\n\nVoorbeelden:\n\nFantasy\nSciencefiction\nHorror\nActie\nKomedie\nDrama\nStrategie\nRollenspel (RPG)\n\nSommige werken combineren meerdere genres tegelijk.",
+        "laag4": "Genres brengen structuur aan door vergelijkbare werken te groeperen, waardoor mensen makkelijker kunnen zoeken, begrijpen en kiezen."
+      },
+      "ws5": {
+        "wie": "Schrijvers, artiesten, ontwikkelaars, uitgevers en gebruikers.",
+        "wat": "Een categorie of indeling van werken met vergelijkbare kenmerken.",
+        "wanneer": "Bij het maken, beschrijven of zoeken van inhoud.",
+        "waar": "In boeken, films, muziek, games, kunst en media.",
+        "waarom": "Om inhoud te organiseren en verwachtingen duidelijk te maken.",
+        "hoe": "Door werken te groeperen op basis van stijl, thema, sfeer of inhoud."
+      },
+      "tags": [
+        "genre",
+        "categorie",
+        "classificatie",
+        "stijl",
+        "thema",
+        "media",
+        "film",
+        "muziek",
+        "boek",
+        "game",
+        "indeling"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d0b16076",
+          "begrip": "Games hebben verschillende genres",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "game",
+            "genre"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0178f2bb",
+          "begrip": "Ambient",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "game",
+            "media",
+            "muziek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0a533c5f",
+          "begrip": "classificatie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "indeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3cd8e8f2",
+          "begrip": "categorie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "categorie",
+            "classificatie",
+            "indeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2f31a64d",
+          "begrip": "Ambient aan",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "game",
+            "media"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-09T09:16:51.958786+00:00",
+        "vorige_versie_v1": "kb-skel-bac13fb8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:27.932403+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T09:16:50.765593+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T09:16:50.782008+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T09:16:53.061363+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T09:16:53.081155+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-09T09:16:50.337375+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b1ae70e0",
+      "begrip": "landen",
+      "lade": "voelen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Landen betekent dat iemand mentaal of emotioneel stabiel en bewust in het moment komt.",
+        "laag2": "Landen gebeurt vaak wanneer iemand van de ene toestand naar de andere gaat. Bijvoorbeeld van slapen naar wakker worden, van chaos naar rust of van afwezigheid naar focus. Het helpt om weer grip, rust en aanwezigheid te voelen.",
+        "laag3": "Landen is een mentaal en emotioneel overgangsproces waarbij iemand zich bewust wordt van zichzelf, de omgeving en de situatie. Het betekent dat iemand van een zwevende, vermoeide, drukke of onrustige toestand terugkomt naar stabiliteit en aanwezigheid.\n\nVoorbeelden:\n\nwakker worden en langzaam actief worden\nna stress weer rustig worden\nconcentratie terugvinden\nwennen aan een nieuwe situatie\njezelf weer “gegrond” voelen\n\nLanden hangt samen met:\n\nbewustzijn\nrust\nfocus\novergang\nenergie\naarden\nprikkelverwerking\nproductiviteit\n\nHet proces kan ondersteund worden door routines zoals koffie drinken, stilte, muziek, douchen, bewegen of even tijd nemen.",
+        "laag4": "Spark ziet landen als een overgang van een instabiele of afwezige toestand naar bewust aanwezig zijn. Hierdoor kan Spark verbanden leggen tussen wakker worden, energie, focus, rust, routine en productiviteit."
+      },
+      "ws5": {
+        "wie": "Mensen die zich aanpassen aan een nieuwe situatie of mentale toestand.",
+        "wat": "Het proces van aarden, wakker worden en bewust in de situatie komen.",
+        "wanneer": "Wanneer iemand van de ene toestand naar de andere gaat, bijvoorbeeld van slapen naar wakker en productief worden.",
+        "waar": "In dagelijkse situaties thuis, op werk of tijdens mentale overgangen.",
+        "waarom": "Om weer bewust aanwezig, stabiel en gefocust te worden.",
+        "hoe": "Door rust, routines, tijd en het verwerken van prikkels en bewustzijn."
+      },
+      "tags": [
+        "landen",
+        "aarden",
+        "bewustzijn",
+        "focus",
+        "rust",
+        "overgang",
+        "wakker",
+        "energie",
+        "prikkelverwerking",
+        "productiviteit",
+        "aanwezigheid",
+        "stabiliteit",
+        "aandacht",
+        "concentratie",
+        "herstel",
+        "balans",
+        "kalmte",
+        "toestand",
+        "emotie",
+        "neutraal",
+        "blij"
+      ],
+      "topic": "stabiliteit",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "energie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-badad5e7",
+          "begrip": "aarden",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "aanwezigheid",
+            "aarden",
+            "balans",
+            "emotie",
+            "focus"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "balans",
+            "emotie",
+            "energie",
+            "focus",
+            "herstel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-171bdfd7",
+          "begrip": "wakker",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bewustzijn",
+            "emotie",
+            "energie",
+            "focus",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "balans",
+            "blij",
+            "emotie",
+            "neutraal",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-11T12:18:02.989921+00:00",
+        "vorige_versie_v1": "snap-8b5b6c9d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:42.415142+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:18:01.787173+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:18:01.873559+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:18:03.911623+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:18:03.930731+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-11T12:18:01.275961+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9bc6c626",
+      "begrip": "veerkracht",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Veerkracht is het vermogen om met tegenslagen om te gaan en weer verder te gaan.",
+        "laag2": "Mensen, systemen en organisaties tonen veerkracht wanneer zij zich herstellen na problemen, veranderingen of moeilijke situaties.",
+        "laag3": "Veerkracht is het vermogen om na stress, verlies, fouten of tegenslag opnieuw balans te vinden en door te gaan. Veerkracht betekent niet dat problemen geen impact hebben, maar dat iemand of iets zich kan aanpassen en herstellen.\n\nVoorbeelden:\n\nNa een mislukking opnieuw proberen.\nHerstellen na ziekte of verlies.\nEen bedrijf dat zich aanpast aan veranderingen.\nEen boom die na een storm blijft staan.\n\nVeerkracht ontstaat vaak door ervaring, ondersteuning, doorzettingsvermogen en het vermogen om te leren van situaties.",
+        "laag4": "Veerkracht maakt groei en herstel mogelijk door uitdagingen niet alleen te overleven, maar er sterker of wijzer uit te komen."
+      },
+      "ws5": {
+        "wie": "Mensen, groepen, organisaties en systemen.",
+        "wat": "Het vermogen om te herstellen en door te gaan na tegenslag.",
+        "wanneer": "Na problemen, veranderingen, stress of verlies.",
+        "waar": "In persoonlijke, sociale, economische en natuurlijke systemen.",
+        "waarom": "Om uitdagingen te overwinnen en stabiliteit terug te vinden.",
+        "hoe": "Door aanpassing, leren, doorzettingsvermogen en herstel."
+      },
+      "tags": [
+        "veerkracht",
+        "herstel",
+        "doorzetten",
+        "groei",
+        "aanpassing",
+        "ontwikkeling",
+        "doorzettingsvermogen",
+        "leren",
+        "verandering",
+        "kracht"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9eee697c",
+          "begrip": "bijstellen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassing",
+            "groei",
+            "leren",
+            "ontwikkeling",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2521ae41",
+          "begrip": "Ik verlies niet, want zelfs uit nederlaag leer ik een waardevolle les, en dat maakt het goed voor mij.",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "doorzetten",
+            "groei",
+            "leren",
+            "ontwikkeling",
+            "veerkracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-00a913bd",
+          "begrip": "adaptief",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassing",
+            "groei",
+            "leren",
+            "ontwikkeling",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0a2ebb81",
+          "begrip": "aanpassingsvermogen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassing",
+            "groei",
+            "leren",
+            "veerkracht",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-428e3450",
+          "begrip": "flexibiliteit",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "aanpassing",
+            "groei",
+            "ontwikkeling",
+            "veerkracht",
+            "verandering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-09T09:09:20.038194+00:00",
+        "vorige_versie_v1": "kb-skel-9bc6c626",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.869990+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T09:09:18.773041+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T09:09:18.797195+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T09:09:20.804176+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T09:09:20.818456+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-09T09:09:18.283643+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6268a6ae",
+      "begrip": "mooi",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Mooi betekent dat iets als aantrekkelijk, prettig of waardevol wordt ervaren.",
+        "laag2": "Wat mooi is, verschilt per persoon, cultuur en situatie.",
+        "laag3": "Mooi is een waardering die mensen geven aan iets wat zij aantrekkelijk, indrukwekkend, harmonieus of bijzonder vinden. Dit kan gaan over uiterlijk, kunst, natuur, muziek, gedrag, ideeën of ervaringen.\n\nVoorbeelden:\n\nEen mooie zonsondergang.\nEen mooi schilderij.\nEen mooie melodie.\nEen mooi gebaar.\nEen mooi idee.\n\nWat als mooi wordt gezien, is vaak subjectief en kan verschillen tussen mensen.",
+        "laag4": "Mooi beschrijft een positieve waardering voor iets dat schoonheid, harmonie, betekenis of bewondering oproept."
+      },
+      "ws5": {
+        "wie": "Iedereen die iets waarneemt of beoordeelt.",
+        "wat": "Een positieve waardering van schoonheid of aantrekkelijkheid.",
+        "wanneer": "Wanneer iets bewondering, waardering of plezier oproept.",
+        "waar": "In kunst, natuur, objecten, mensen, ideeën en ervaringen.",
+        "waarom": "Omdat iets als aantrekkelijk, bijzonder of waardevol wordt ervaren.",
+        "hoe": "Door persoonlijke waarneming, gevoel, smaak en interpretatie."
+      },
+      "tags": [
+        "mooi",
+        "schoonheid",
+        "aantrekkelijk",
+        "waardering",
+        "esthetiek",
+        "bewondering",
+        "harmonie",
+        "positief",
+        "kunst",
+        "natuur",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f82e642e",
+          "begrip": "geweldig is dit",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bewondering",
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ff5f4984",
+          "begrip": "geweldig",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bewondering",
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2b90d9cd",
+          "begrip": "compliment",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "bewondering",
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be38ac89",
+          "begrip": "versiering",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "esthetiek",
+            "kunst",
+            "schoonheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b31f7f47",
+          "begrip": "Ik ben blij met je",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "waardering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-09T08:57:38.441481+00:00",
+        "vorige_versie_v1": "kb-skel-6268a6ae",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:29.370596+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T08:57:33.109915+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T08:57:33.164839+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-09T08:57:39.322465+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-09T08:57:39.378720+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-09T08:57:32.462570+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c5ff3a17",
+      "begrip": "ongemakkelijk",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Ongemakkelijk betekent dat iemand zich niet prettig, onzeker of oncomfortabel voelt in een situatie.",
+        "laag2": "Het ontstaat vaak wanneer iemand niet goed weet hoe te handelen of zich niet op zijn gemak voelt.",
+        "laag3": "Ongemakkelijk is een gevoel dat kan ontstaan door sociale situaties, onzekerheid, spanning, schaamte of onverwachte gebeurtenissen. Iemand kan zich ongemakkelijk voelen wanneer er onduidelijkheid is, wanneer regels onbekend zijn of wanneer een situatie spanning veroorzaakt. Het gevoel is meestal tijdelijk en verdwijnt vaak wanneer iemand meer vertrouwen of duidelijkheid krijgt.",
+        "laag4": "Ongemakkelijk is een veelvoorkomende menselijke ervaring die helpt signaleren dat iemand zich buiten zijn comfortzone bevindt. Het kan leiden tot terughoudendheid, voorzichtigheid of vermijding, maar soms ook tot leren en persoonlijke groei. De intensiteit verschilt per persoon en situatie."
+      },
+      "ws5": {
+        "wie": "Mensen en soms dieren in onzekere of spannende situaties.",
+        "wat": "Een gevoel van oncomfortabelheid, onzekerheid of spanning.",
+        "wanneer": "Bij onbekende, sociale, spannende of verwarrende situaties.",
+        "waar": "Op school, werk, thuis, sociale bijeenkomsten of andere omgevingen.",
+        "waarom": "Door onzekerheid, schaamte, spanning, verwarring of gebrek aan vertrouwen.",
+        "hoe": "Door gedachten, gevoelens en lichamelijke reacties die onrust veroorzaken."
+      },
+      "tags": [
+        "ongemakkelijk",
+        "onzekerheid",
+        "spanning",
+        "ongemak",
+        "oncomfortabel",
+        "schaamte",
+        "sociale situatie",
+        "stress",
+        "twijfel",
+        "verwarring",
+        "spanning",
+        "gevoel",
+        "emotie",
+        "vertrouwen",
+        "onzeker",
+        "terughoudend",
+        "situatie",
+        "menselijk",
+        "emotie",
+        "bang",
+        "bedroefd"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-eb31fb44",
+          "begrip": "onzeker",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "onzeker",
+            "onzekerheid",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-251af4c5",
+          "begrip": "Waarom word je boos? Dat is nergens voor nodig.",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "sociale situatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e9f46c42",
+          "begrip": "vrees",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "gevoel",
+            "onzekerheid",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c0ee6872",
+          "begrip": "eng",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "emotie",
+            "gevoel",
+            "onzekerheid",
+            "spanning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8aaee330",
+          "begrip": "hopeloos",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gevoel",
+            "menselijk"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-11T12:15:26.803087+00:00",
+        "vorige_versie_v1": "kb-skel-c5ff3a17",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:43.420259+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:15:25.424883+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:15:25.486028+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-11T12:15:27.678844+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-11T12:15:27.694195+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-11T12:15:24.998827+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e5148ee0",
+      "begrip": "Verlampt",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verlampt betekent dat iets niet meer kan bewegen.",
+        "laag2": "Het beschrijft een toestand waarin spieren of beweging uitvallen.",
+        "laag3": "Verlampt betekent dat een deel van het lichaam (of het hele lichaam) niet meer kan bewegen door een probleem in spieren of zenuwen. Dit kan tijdelijk of blijvend zijn. Bijvoorbeeld na een ongeluk, ziekte of wanneer een zenuw niet goed werkt. Iemand kan dan geen controle meer hebben over beweging in dat deel.",
+        "laag4": "Verlamming ontstaat meestal doordat signalen van de hersenen niet meer goed bij de spieren komen. Dit kan komen door schade aan zenuwen, het ruggenmerg of de hersenen. Verlampt kan ook figuurlijk gebruikt worden, zoals “verlampt van angst”, waarbij iemand wel kan bewegen maar mentaal blokkeert. Binnen jouw systeem is dit een verdieping van lam → verlampt: van zwakte naar volledige uitval."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren",
+        "wat": "Niet kunnen bewegen",
+        "wanneer": "Bij letsel, ziekte, blokkade of extreme emotie",
+        "waar": "In het lichaam (bijv. arm, been) of mentaal",
+        "waarom": "Zenuwsignalen bereiken spieren niet goed",
+        "hoe": "Door schade of blokkade in hersenen, ruggenmerg of zenuwen"
+      },
+      "tags": [
+        "verlampt",
+        "verlamming",
+        "spieren",
+        "zenuwen",
+        "beweging",
+        "lichaam",
+        "toestand",
+        "medisch",
+        "blokkade",
+        "uitval",
+        "angst",
+        "schrik",
+        "stress",
+        "paniek",
+        "controle",
+        "verlies",
+        "beperking",
+        "gezondheid",
+        "emotie",
+        "neutraal",
+        "bang",
+        "bedroefd"
+      ],
+      "topic": "lichaam",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e9f46c42",
+          "begrip": "vrees",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "angst",
+            "bang",
+            "emotie",
+            "neutraal",
+            "stress"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-c9c7f4a5",
+          "begrip": "ziekte",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "gezondheid",
+            "lichaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58356e7a",
+          "begrip": "spanning",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "neutraal",
+            "stress"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "controle",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7a521542",
+          "begrip": "humeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "bang",
+            "bedroefd",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-10T14:20:17.182361+00:00",
+        "vorige_versie_v1": "2af032fa",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:33.624614+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-10T14:20:14.396910+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-10T14:20:14.415704+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-10T14:20:18.145504+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-10T14:20:18.184326+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-10T14:20:13.938488+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
     }
   ],
-  "updated_at": "2026-06-08T12:02:52.721876+00:00"
+  "updated_at": "2026-06-11T13:32:52.671274+00:00"
 }

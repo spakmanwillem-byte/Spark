@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 421,
+    "card_count": 436,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-06T20:33:41.611214+00:00",
+    "last_updated": "2026-06-16T19:58:01.264787+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -59675,6 +59675,298 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-10T14:20:13.938488+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-887b1176",
+      "begrip": "Werking van gif hangt af van hoeveelheid en type",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "De werking van een giftige stof hangt af van het soort stof en de hoeveelheid die wordt opgenomen.",
+        "laag2": "Verschillende giftige stoffen hebben verschillende effecten. Ook bepaalt de dosis hoe sterk die effecten zijn.",
+        "laag3": "Wanneer een organisme wordt blootgesteld aan een giftige stof, hangt het effect af van het type stof, de hoeveelheid, de duur van blootstelling en de eigenschappen van het organisme. Sommige stoffen zijn al in zeer kleine hoeveelheden schadelijk, terwijl andere pas gevaarlijk worden bij hogere doses.",
+        "laag4": "Dit principe wordt veel gebruikt in toxicologie, geneeskunde en milieukunde. Het laat zien dat gevaar niet alleen wordt bepaald door de stof zelf, maar ook door de dosis en de omstandigheden. Daarom wordt vaak gezegd: \"De dosis maakt het vergif.\""
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en andere organismen",
+        "wat": "De invloed van een giftige stof op een organisme",
+        "wanneer": "Bij blootstelling aan een giftige stof",
+        "waar": "In het lichaam of een biologisch systeem",
+        "waarom": "Omdat verschillende stoffen en doseringen verschillende effecten veroorzaken",
+        "hoe": "Door de werking van de stof op organen, cellen of lichaamsprocessen"
+      },
+      "tags": [
+        "gif",
+        "toxicologie",
+        "dosis",
+        "vergiftiging",
+        "stof",
+        "risico",
+        "gezondheid"
+      ],
+      "topic": "gif",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fab0e44d",
+          "begrip": "Vergiftiging",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "stof",
+            "vergiftiging"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-90288059",
+          "begrip": "Gif kan lichaam binnenkomen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "gif",
+            "stof"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b9148cc5",
+          "begrip": "Door afbraak en uitscheiding van stoffen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dosis",
+            "gezondheid",
+            "gif"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-100af515",
+          "begrip": "Kennis van gif wordt gebruikt voor medicijnen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dosis",
+            "gezondheid",
+            "gif"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-26a94bd8",
+          "begrip": "Gif beïnvloedt organen en systemen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "gif",
+            "vergiftiging"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T19:42:49.552684+00:00",
+        "vorige_versie_v1": "0f9b367e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 5,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:37.623340+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:42:47.910747+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:42:47.918873+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:42:49.778004+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:42:49.784578+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-16T19:42:47.789555+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e3bdb2a2",
+      "begrip": "Verlosser",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een verlosser is iemand die anderen redt of bevrijdt van een probleem, gevaar of lijden.",
+        "laag2": "Het woord wordt gebruikt voor iemand die mensen helpt uit een moeilijke situatie, zowel in religie als in het dagelijks taalgebruik.",
+        "laag3": "In religieuze context verwijst een verlosser vaak naar een persoon die mensen bevrijdt van zonde, lijden of kwaad. In bredere betekenis kan een verlosser ook iemand zijn die een oplossing brengt voor een groot probleem of mensen helpt wanneer zij zelf niet meer verder kunnen.",
+        "laag4": "Het idee van een verlosser komt in veel religies en verhalen voor. Zo wordt in sommige religies geloofd dat een bijzondere persoon of figuur de mensheid helpt of redt. In gewone taal kan het woord ook figuurlijk worden gebruikt voor iemand die op het juiste moment hulp of een oplossing brengt."
+      },
+      "ws5": {
+        "wie": "Een persoon, figuur of leider die anderen helpt of redt",
+        "wat": "Iemand die bevrijding of een oplossing brengt",
+        "wanneer": "Wanneer mensen in een moeilijke of gevaarlijke situatie zitten",
+        "waar": "In religie, verhalen, geschiedenis of dagelijks taalgebruik",
+        "waarom": "Omdat mensen hulp nodig hebben om uit problemen of lijden te komen",
+        "hoe": "Door hulp, leiding, bescherming of het bieden van een oplossing"
+      },
+      "tags": [
+        "verlosser",
+        "redding",
+        "hulp",
+        "bevrijding",
+        "held",
+        "religie",
+        "bescherming",
+        "hoop"
+      ],
+      "topic": "religie",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-111928dd",
+          "begrip": "vredesduif",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "hoop",
+            "religie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9980c280",
+          "begrip": "steun",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bescherming",
+            "hulp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6a93e38e",
+          "begrip": "zorg",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bescherming",
+            "hulp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b89b8e38",
+          "begrip": "Held",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "bescherming",
+            "held"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-092b6478",
+          "begrip": "brandweer",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "bescherming",
+            "redding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T19:58:01.264772+00:00",
+        "vorige_versie_v1": "snap-5fa96f50",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 2,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:31.815813+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:57:59.901509+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:57:59.907175+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:58:01.459642+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:58:01.465325+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-16T19:57:59.796202+00:00"
       },
       "media": {
         "voice_url": null,

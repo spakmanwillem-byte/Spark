@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1009,
+    "card_count": 1061,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-06T21:20:18.100552+00:00",
+    "last_updated": "2026-06-16T20:06:04.584372+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -138983,6 +138983,469 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-11T13:21:35.815624+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2f7fad7e",
+      "begrip": "Tekenen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Tekenen is het maken van een afbeelding met lijnen, vormen en schaduwen.",
+        "laag2": "Tekenen wordt gebruikt om ideeën, voorwerpen, mensen of fantasieën zichtbaar te maken.",
+        "laag3": "Bij tekenen gebruik je materialen zoals potlood, pen, houtskool of een digitaal tekenprogramma. Door lijnen, vormen en details te combineren ontstaat een afbeelding.",
+        "laag4": "Tekenen is een belangrijke vaardigheid binnen kunst, ontwerp, architectuur en techniek. Het helpt bij het ontwikkelen van creativiteit, observatievermogen, concentratie en fijne motoriek. Tekenen kan zowel een hobby als een professioneel beroep zijn."
+      },
+      "ws5": {
+        "wie": "Kunstenaars, ontwerpers, illustratoren, kinderen en hobbyisten",
+        "wat": "Het maken van afbeeldingen met lijnen, vormen en details",
+        "wanneer": "Tijdens creatieve activiteiten, studie, ontwerpwerk of ontspanning",
+        "waar": "Op papier, doek, muren of digitale schermen",
+        "waarom": "Om ideeën, gevoelens, informatie of fantasieën uit te beelden",
+        "hoe": "Door tekenmaterialen of digitale hulpmiddelen te gebruiken om lijnen, vormen en schaduwen te maken"
+      },
+      "tags": [
+        "Tekenen",
+        "kunst",
+        "creatief",
+        "schets",
+        "lijn",
+        "vorm",
+        "ontwerp",
+        "illustratie"
+      ],
+      "topic": "handeling",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1ff71e45",
+          "begrip": "Schets",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "creatief",
+            "illustratie",
+            "kunst",
+            "lijn",
+            "ontwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-13c2c6dc",
+          "begrip": "beeld",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "illustratie",
+            "kunst",
+            "vorm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-27514be6",
+          "begrip": "hoeken",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "lijn",
+            "ontwerp",
+            "vorm"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-df79097d",
+          "begrip": "ai-kunst",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "illustratie",
+            "kunst",
+            "ontwerp"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-811cff8b",
+          "begrip": "Atelier",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "creatief",
+            "kunst",
+            "ontwerp"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T19:40:55.137574+00:00",
+        "vorige_versie_v1": "2ac17f19",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:33.426628+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:40:21.381024+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:40:21.386755+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:40:47.070425+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:40:47.080049+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T19:40:55.439366+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T19:40:55.445825+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-16T19:40:46.934614+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-965eeed8",
+      "begrip": "uitzetten",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Uitzetten betekent iets stoppen of uitschakelen.",
+        "laag2": "Mensen zetten apparaten, functies of processen uit wanneer deze niet meer nodig zijn.",
+        "laag3": "Uitzetten is de handeling waarbij iets van een actieve naar een inactieve toestand gaat. Dit kan bijvoorbeeld een lamp, televisie, alarm, computer of functie zijn. Door iets uit te zetten stopt de werking, het geluid, de stroomvoorziening of de activiteit.",
+        "laag4": "Uitzetten is een vorm van controle over een systeem of proces. Het wordt gebruikt voor veiligheid, energiebesparing, rust of het beëindigen van een taak. Het tegenovergestelde van uitzetten is aanzetten of inschakelen."
+      },
+      "ws5": {
+        "wie": "Mensen of systemen die controle hebben over een apparaat, functie of proces",
+        "wat": "Het uitschakelen of stoppen van iets dat actief is",
+        "wanneer": "Wanneer iets niet meer nodig is of moet stoppen",
+        "waar": "Bij apparaten, systemen, programma's en dagelijkse activiteiten",
+        "waarom": "Om activiteit te beëindigen, energie te besparen, veiligheid te vergroten of rust te creëren",
+        "hoe": "Door een schakelaar, knop, instelling of opdracht te gebruiken"
+      },
+      "tags": [
+        "uitzetten",
+        "uitschakelen",
+        "stoppen",
+        "apparaat",
+        "functie",
+        "proces",
+        "controle",
+        "toestand"
+      ],
+      "topic": "toestand",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d5bd2c52",
+          "begrip": "aanzetten",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "functie",
+            "proces",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f2c036d2",
+          "begrip": "inschakelen",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "apparaat",
+            "controle",
+            "functie",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16ec458f",
+          "begrip": "status",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "proces",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01e9ff34",
+          "begrip": "Ik heb gecontroleerd of de versheid nog goed was.",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "proces",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-30d45e45",
+          "begrip": "Stop",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "controle",
+            "proces",
+            "uitschakelen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "De Willem",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:03:11.582139+00:00",
+        "vorige_versie_v1": "snap-c112ce31",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:42.477843+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:03:06.110996+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:03:06.116755+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:03:11.835696+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:03:11.841670+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-16T20:03:06.006801+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fbd58fd5",
+      "begrip": "Wegen (gewicht)",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Wegen is het meten van hoe zwaar iets is.",
+        "laag2": "Met wegen bepaal je het gewicht of de massa van een object met behulp van een meetinstrument.",
+        "laag3": "Bij wegen wordt een object op een weegschaal of ander meetinstrument geplaatst. Het instrument meet vervolgens het gewicht of de massa en geeft dit weer in een eenheid zoals gram, kilogram of ton.",
+        "laag4": "Wegen is een belangrijke meetmethode die wordt gebruikt in het dagelijks leven, de handel, wetenschap, industrie en gezondheidszorg. Nauwkeurige metingen helpen bij eerlijke handel, veilige processen en betrouwbare resultaten."
+      },
+      "ws5": {
+        "wie": "Mensen, bedrijven, onderzoekers en meetinstrumenten",
+        "wat": "Het meten van het gewicht of de massa van een object",
+        "wanneer": "Wanneer men wil weten hoe zwaar iets is",
+        "waar": "Thuis, in winkels, laboratoria, fabrieken en transportsectoren",
+        "waarom": "Om gewicht of massa vast te stellen voor controle, berekening of vergelijking",
+        "hoe": "Door een object met een weegschaal of ander meetinstrument te meten"
+      },
+      "tags": [
+        "wegen",
+        "gewicht",
+        "massa",
+        "meten",
+        "weegschaal",
+        "kilogram",
+        "gram",
+        "meting"
+      ],
+      "topic": "meting",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-d2e2b153",
+          "begrip": "eenheden",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gewicht",
+            "kilogram",
+            "meten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-337c6196",
+          "begrip": "Massa",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gewicht",
+            "massa"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5e4a5bb3",
+          "begrip": "Gewicht",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gewicht",
+            "massa"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5e7cc6ee",
+          "begrip": "Weegschaal",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "gewicht",
+            "meten"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-51ed4e0b",
+          "begrip": "Tarra",
+          "lade": "doen",
+          "overlap": 2,
+          "shared_tags": [
+            "gewicht",
+            "meting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "onbekend",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-16T20:06:04.584357+00:00",
+        "vorige_versie_v1": "5779d149",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 4,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:30.645686+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:06:02.217578+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:06:02.223276+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-16T20:06:04.836017+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-16T20:06:04.841890+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-16T20:06:02.112911+00:00"
       },
       "media": {
         "voice_url": null,

@@ -6,7 +6,7 @@
     "Ervaring maakt betekenis",
     "Betekenis maakt lore",
     "Lore verandert de wereld",
-    "De wereld be\u00efnvloedt nieuwe spelers"
+    "De wereld beïnvloedt nieuwe spelers"
   ],
   "avatars_as_functions": [
     {
@@ -201,16 +201,61 @@
     },
     {
       "kind": "particles",
-      "rule": "Tags uit recente acties \u2192 kleine zwevende elementen (klok-deeltjes voor tijd, runen voor kennis, mist voor stilte)"
+      "rule": "Tags uit recente acties → kleine zwevende elementen (klok-deeltjes voor tijd, runen voor kennis, mist voor stilte)"
     }
   ],
   "world_growth_rules": [
     "Avatars-as-functions groeien op basis van AANTAL events met passende growth_trigger",
     "Sterkte van een entiteit wordt gemeten als percentage van totaal-events (1-100)",
-    "Top 3 entiteiten be\u00efnvloeden: kleurschema dashboard, NPC-frequenties, beschikbare quests",
+    "Top 3 entiteiten beïnvloeden: kleurschema dashboard, NPC-frequenties, beschikbare quests",
     "Wanneer een entiteit > 60% domineert: speciale 'aspect-bark' wordt getriggerd (de wereld waarschuwt of viert)"
   ],
   "stats_are_hyperlinks": true,
-  "stats_origin": "Stats zijn niet direct gekozen \u2014 ze ontstaan uit gedrag-tellers in /data/users/{user_id}/behavior.json. De Persoonskaart leest die counters en berekent live: top behavior, aura, unlocks.",
-  "lore": []
+  "stats_origin": "Stats zijn niet direct gekozen — ze ontstaan uit gedrag-tellers in /data/users/{user_id}/behavior.json. De Persoonskaart leest die counters en berekent live: top behavior, aura, unlocks.",
+  "lore": [
+    {
+      "kbv2_card_id": "kbv2-5cd66b24",
+      "begrip": "Persoonskaart Rugzak",
+      "lade": "weten",
+      "type": "lore",
+      "trigger": null,
+      "unlocks": [],
+      "tags": [
+        "rugzak",
+        "persoonskaart",
+        "inventory",
+        "carry",
+        "d&d",
+        "stat",
+        "slots",
+        "gewicht",
+        "body-slot",
+        "spark world"
+      ],
+      "linked_at": "2026-06-16T20:27:53.411844+00:00"
+    },
+    {
+      "kbv2_card_id": "kbv2-c5847d4a",
+      "begrip": "Base Line",
+      "lade": "weten",
+      "type": "lore",
+      "trigger": null,
+      "unlocks": [],
+      "tags": [
+        "base line",
+        "spark world",
+        "lore",
+        "d&d",
+        "oorsprong",
+        "ad",
+        "puls",
+        "licht",
+        "schaduw",
+        "fracties",
+        "elementen",
+        "fantasie"
+      ],
+      "linked_at": "2026-06-16T20:27:56.542712+00:00"
+    }
+  ]
 }

@@ -1,6 +1,57 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 28 (2026-06-17) — Spark krijgt handen + zelfbewustzijn-light
+
+### Probleem
+1. Spark heeft 1659 doe-kaarten in z'n kennisbank, maar geen brug tussen "weet dat optellen bestaat" en "kan optellen". Op `hoeveel is 1+1` gaf hij geen antwoord.
+2. Geen manier voor Willem om expliciet een doe-kaart te koppelen aan een capability ("dit woord ↔ deze actie").
+3. Geen quick command voor Spark om over z'n eigen toestand te rapporteren (KB-status, vocab, recente activiteit).
+
+### Oplossing
+**Backend nieuw**
+- `modules/chat/math_eval.py` — veilige Nederlandse rekenmachine via `ast` (geen `eval`). Ondersteunt `+ - * / % **`, NL-woorden (plus, min, keer, maal, gedeeld door, kwadraat, wortel van, modulo), NL-komma als decimaal, en haakjes.
+- `_handle_reken_uit` in `capability_handler_service.py` — chat-handler die `math_eval.format_answer` aanroept.
+- `_handle_zelfscan` — bouwt rapport uit KB-stats (`kb_v2.service.get_stats`), vocab (`spark_vocab.json`), intent-log (24u window), capabilities-tellingen, link-tellingen en shadow-errors.
+- Pre-filter in `route_capability`: als `looks_like_math(text)` → direct naar `reken_uit` (zodat "wat is 12 keer 7" niet door `zoeken_kennisbank` met `wat is .*` wordt opgeëist).
+- `modules/admin/capabilities_routes.py` uitgebreid met 3 link-endpoints (GET/POST/DELETE `/admin/capabilities/links`). Verrijkt response met card-begrip + capability-naam + handler-status.
+
+**Backend data**
+- `data/personality/spark_capabilities.json` — 2 nieuwe entries (`reken_uit`, `zelfscan`), beide `status=live`, totaal 19 capabilities.
+- `data/personality/capability_links.json` — nieuwe JSON-store voor `{card_id: capability_id}` koppelingen.
+
+**Frontend**
+- `KennisbankV2Page.js` — nieuwe `CapabilityCoupling` sub-component. Render-conditie: alleen voor doe-lade kaarten (`!inInbox && currentLade === 'doen'`). 
+- UI: paars-omrand kader met dropdown (alle capabilities), badge "● handler live / ○ geen handler" voor huidige koppeling. Onmiddellijke save bij selectie.
+
+### Tests (curl, smoke)
+- `1+1` → `🧮 \`1+1\` = **2**`
+- `hoeveel is 1 plus 1` → `🧮 \`1+1\` = **2**`
+- `wat is 12 keer 7` → `🧮 \`12*7\` = **84**` (math pre-filter pakt voorrang)
+- `100 gedeeld door 4` → `🧮 \`100/4\` = **25**`
+- `wortel van 81` → `🧮 \`sqrt(81)\` = **9**`
+- `5 in het kwadraat` → `🧮 \`5**2\` = **25**`
+- `(3+4)*2` → `🧮 \`(3+4)*2\` = **14**`
+- `7,5 plus 2,3` → `🧮 \`7.5+2.3\` = **9,8**`
+- `scan jezelf` → multi-line rapport met KB-stats, vocab, capabilities, activiteit
+- Link-endpoints: POST/GET/DELETE allemaal werkend, verrijking toont kaart-begrip + handler-status
+
+### Files changed
+- `backend/modules/chat/math_eval.py` (nieuw, 140 regels)
+- `backend/modules/chat/capability_handler_service.py` (+~120 regels, 2 handlers + math pre-filter in route)
+- `backend/modules/admin/capabilities_routes.py` (+~80 regels, 3 link-endpoints)
+- `backend/data/personality/spark_capabilities.json` (+2 entries)
+- `backend/data/personality/capability_links.json` (nieuw, leeg start)
+- `frontend/src/components/workspace/KennisbankV2Page.js` (+~90 regels, CapabilityCoupling component)
+
+### Open follow-ups (nieuw uit deze sessie)
+- **Bulk-overzicht** van alle doe-kaart↔capability koppelingen (admin tab) — nu nog alleen per-kaart UI.
+- **Suggesties** — kaart-begrip matchen op capability-naam ("rekenen" → suggereer `reken_uit`).
+- **Doe-kaart filter** in KennisbankV2Page op "wel/niet gekoppeld" zodat Willem ongekoppelde kaarten kan vinden.
+- **Lade-drift detector** (apart open uit eerder gesprek) — vinden van werkwoorden in voelen/weten en aanbieden verplaatsen naar doen.
+
+
+
 ## v6_dnd_resources_001 + v6_dnd_steden_drag_001 — Grondstoffen op de kaart + Leeuwarden drag (2026-06-06, sessie 28)
 
 ### Probleem

@@ -1,7 +1,7 @@
 {
-  "_arch_ref": "DSP-007 \u2014 capability registry. Centrale lijst van wat Spark KAN. Triggers (NL patterns) \u2192 module-paden. Status: live/placeholder/idea. Zie ARCHITECTURE.md.",
+  "_arch_ref": "DSP-007 — capability registry. Centrale lijst van wat Spark KAN. Triggers (NL patterns) → module-paden. Status: live/placeholder/idea. Zie ARCHITECTURE.md.",
   "metadata": {
-    "purpose": "Natural-language capability matching voor Spark. User zegt 'kan jij X?' of 'wil je voor mij X kijken?' \u2192 Spark matcht naar een capability en doet hem of geeft eerlijk placeholder-antwoord.",
+    "purpose": "Natural-language capability matching voor Spark. User zegt 'kan jij X?' of 'wil je voor mij X kijken?' → Spark matcht naar een capability en doet hem of geeft eerlijk placeholder-antwoord.",
     "beschrijving": "Layer voor 'Spark's handen'. Integratie-tab + bestanden-tab worden hier aangeroepen. Elke capability heeft NL-triggers (varianten van hoe je het kan vragen), een module-pad (waar de echte code zit) en een status.",
     "patroon_user_zinnen": [
       "kan jij [X]",
@@ -15,7 +15,7 @@
     "regels": [
       "Elke capability heeft minstens 3 NL-trigger varianten.",
       "Status live = werkt en heeft echte functie. Placeholder = wel matchbaar, geeft eerlijke 'kan ik nog niet'-bark.",
-      "Capability ID is snake_case en stabiel \u2014 UI/code mag erop bouwen.",
+      "Capability ID is snake_case en stabiel — UI/code mag erop bouwen.",
       "Module-pad is relatief vanaf /app/backend/modules/."
     ],
     "version": "1.0",
@@ -29,6 +29,14 @@
           "speel_geluid"
         ],
         "reason": "v6_capabilities_handlers_001"
+      },
+      {
+        "ts": "2026-06-12T09:00:00+00:00",
+        "promoted": [
+          "reken_uit",
+          "zelfscan"
+        ],
+        "reason": "v6_capability_reken_001 + v6_capability_zelfscan_001"
       }
     ]
   },
@@ -64,10 +72,10 @@
       "module": "chat/history_service.py",
       "endpoint": null,
       "data_source": "/app/backend/data/chat/*.json",
-      "placeholder_response": "Ik kan nog niet door oude gesprekken zoeken \u2014 dat staat op de roadmap. Wel kan ik je huidige sessie zien.",
+      "placeholder_response": "Ik kan nog niet door oude gesprekken zoeken — dat staat op de roadmap. Wel kan ik je huidige sessie zien.",
       "handler": "_handle_gesprek_lezen",
       "promoted_to_live_at": "2026-05-25T22:56:37.919253+00:00",
-      "promotion_reason": "v6_capabilities_handlers_001 \u2014 handlers live in capability_handler_service"
+      "promotion_reason": "v6_capabilities_handlers_001 — handlers live in capability_handler_service"
     },
     {
       "id": "winst_verlies_overzicht",
@@ -123,7 +131,7 @@
       "id": "agenda_lezen",
       "naam": "Agenda raadplegen",
       "categorie": "memory",
-      "beschrijving": "Wat staat er in mijn agenda \u2014 vandaag, deze week, op een datum.",
+      "beschrijving": "Wat staat er in mijn agenda — vandaag, deze week, op een datum.",
       "triggers": [
         "(mijn |de )?agenda",
         "wat staat er (op|vandaag|morgen|deze week)",
@@ -153,7 +161,7 @@
     },
     {
       "id": "zoeken_kennisbank",
-      "naam": "Zoek in kennisbank (Spark's handen \u2014 ogen)",
+      "naam": "Zoek in kennisbank (Spark's handen — ogen)",
       "categorie": "search",
       "beschrijving": "Spark gebruikt integratie/bestanden-tab om kennis op te halen. Eerste 'hand' van Spark.",
       "triggers": [
@@ -170,7 +178,7 @@
     },
     {
       "id": "toon_afbeelding",
-      "naam": "Toon afbeelding (Spark's handen \u2014 beeld)",
+      "naam": "Toon afbeelding (Spark's handen — beeld)",
       "categorie": "media",
       "beschrijving": "Spark zoekt of genereert een afbeelding bij een onderwerp.",
       "triggers": [
@@ -182,14 +190,14 @@
       "status": "live",
       "module": "media/image_service.py",
       "endpoint": null,
-      "placeholder_response": "Ik kan nog geen afbeeldingen tonen \u2014 staat in roadmap als 'Spark's handen \u2014 beeld' laag.",
+      "placeholder_response": "Ik kan nog geen afbeeldingen tonen — staat in roadmap als 'Spark's handen — beeld' laag.",
       "handler": "_handle_toon_afbeelding",
       "promoted_to_live_at": "2026-05-25T22:56:37.919267+00:00",
-      "promotion_reason": "v6_capabilities_handlers_001 \u2014 handlers live in capability_handler_service"
+      "promotion_reason": "v6_capabilities_handlers_001 — handlers live in capability_handler_service"
     },
     {
       "id": "speel_geluid",
-      "naam": "Speel geluid (Spark's handen \u2014 oren/stem)",
+      "naam": "Speel geluid (Spark's handen — oren/stem)",
       "categorie": "media",
       "beschrijving": "Spark speelt een audio-sample bij een onderwerp (bv. appel happen, vogel fluiten).",
       "triggers": [
@@ -202,7 +210,7 @@
       "placeholder_response": "Geluiden afspelen kan ik nog niet. Komt bij de multi-modale laag (kenniskaart 2.0).",
       "handler": "_handle_speel_geluid",
       "promoted_to_live_at": "2026-05-25T22:56:37.919269+00:00",
-      "promotion_reason": "v6_capabilities_handlers_001 \u2014 handlers live in capability_handler_service"
+      "promotion_reason": "v6_capabilities_handlers_001 — handlers live in capability_handler_service"
     },
     {
       "id": "taken_lijst",
@@ -312,10 +320,45 @@
       "status": "live",
       "module": "notes/routes.py",
       "endpoint": "/api/notes/all"
+    },
+    {
+      "id": "reken_uit",
+      "naam": "Rekenen",
+      "categorie": "skill",
+      "beschrijving": "Veilige rekenmachine. Optellen, aftrekken, vermenigvuldigen, delen, wortels, kwadraten.",
+      "triggers": [
+        "\\bhoeveel\\s+is\\s+\\d",
+        "\\bwat\\s+is\\s+\\d.*[+\\-*/x]",
+        "\\bbereken\\b",
+        "\\breken(\\s+uit)?\\b",
+        "\\d+\\s*[+\\-*/x]\\s*\\d",
+        "\\d+\\s+(plus|min|minus|keer|maal|gedeeld\\s+door|modulo|vermenigvuldigd)\\s+\\d",
+        "\\bwortel\\s+van\\s+\\d",
+        "\\d+\\s+(in\\s+het\\s+)?kwadraat\\b"
+      ],
+      "status": "live",
+      "module": "chat/math_eval.py"
+    },
+    {
+      "id": "zelfscan",
+      "naam": "Zelfscan",
+      "categorie": "self",
+      "beschrijving": "Spark kijkt naar zichzelf: kennis-status, woordenschat, recente activiteit, capabilities, koppelingen, recente fouten.",
+      "triggers": [
+        "\\bscan\\s+(jezelf|jouwzelf|je\\s+zelf)\\b",
+        "\\bzelfscan\\b",
+        "\\bdoe\\s+(een\\s+)?zelfscan\\b",
+        "\\bhoe\\s+gaat\\s+het\\s+met\\s+je(zelf)?\\b",
+        "\\bhoe\\s+sta\\s+je\\s+er(\\s+voor)?\\b",
+        "\\bwat\\s+is\\s+je\\s+(status|stand)\\b",
+        "\\bspark\\s+stand\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py"
     }
   ],
   "_lege_categorieen_voor_later": {
-    "code": "Kan jij dit fixen / programmeren \u2014 Spark als ontwikkel-assistent (idee)",
+    "code": "Kan jij dit fixen / programmeren — Spark als ontwikkel-assistent (idee)",
     "afbeelding_maken": "Genereer een nieuwe afbeelding van X (vereist integratie)",
     "rapport_genereren": "Maak PDF/Word rapport van X data",
     "agenda_toevoegen": "Voeg afspraak toe in agenda via natural language",

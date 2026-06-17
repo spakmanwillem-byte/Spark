@@ -38281,11 +38281,321 @@
         "session_id": "default",
         "gesprek_nummer": 1416
       }
+    },
+    {
+      "id": "conv-79d900a5",
+      "timestamp": "2026-06-17T09:46:12.693163+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel is 1 plus 1",
+      "spark_response": "🧮 `1+1` = **2**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1417
+      }
+    },
+    {
+      "id": "conv-c0483b07",
+      "timestamp": "2026-06-17T09:46:12.868949+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is 12 keer 7",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1418
+      }
+    },
+    {
+      "id": "conv-c4018e2f",
+      "timestamp": "2026-06-17T09:46:13.262838+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "scan jezelf",
+      "spark_response": "🪞 **Zelfscan van Spark** — even kijken hoe ik er voor sta:\n\n🧠 **Kennis**: 0 kaarten in lades · **1659** wachten in inbox\n   __\n🗣️ **Woordenschat**: 5627 woorden bekend · **3881** actief in gebruik\n💬 **Activiteit**: 0 berichten verwerkt in laatste 24u\n🤲 **Handen**: 19/19 capabilities live (acties die ik echt kan)\n\n_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1419
+      }
+    },
+    {
+      "id": "conv-b89d2716",
+      "timestamp": "2026-06-17T09:47:03.973738+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "1+1",
+      "spark_response": "🧮 `1+1` = **2**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1420
+      }
+    },
+    {
+      "id": "conv-3a6724d8",
+      "timestamp": "2026-06-17T09:47:04.144051+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel is 1 plus 1",
+      "spark_response": "🧮 `1+1` = **2**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1421
+      }
+    },
+    {
+      "id": "conv-b75b1159",
+      "timestamp": "2026-06-17T09:47:04.349382+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wat is 12 keer 7",
+      "spark_response": "🧮 `12*7` = **84**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1422
+      }
+    },
+    {
+      "id": "conv-38f93623",
+      "timestamp": "2026-06-17T09:47:04.520972+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "100 gedeeld door 4",
+      "spark_response": "🧮 `100/4` = **25**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "door"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1423
+      }
+    },
+    {
+      "id": "conv-e207341a",
+      "timestamp": "2026-06-17T09:47:04.716644+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "wortel van 81",
+      "spark_response": "🧮 `sqrt(81)` = **9**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1424
+      }
+    },
+    {
+      "id": "conv-a6b74f0d",
+      "timestamp": "2026-06-17T09:47:04.919500+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "5 in het kwadraat",
+      "spark_response": "🧮 `5**2` = **25**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1425
+      }
+    },
+    {
+      "id": "conv-a37f848b",
+      "timestamp": "2026-06-17T09:47:05.064807+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "(3+4)*2",
+      "spark_response": "🧮 `(3+4)*2` = **14**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1426
+      }
+    },
+    {
+      "id": "conv-42233c27",
+      "timestamp": "2026-06-17T09:47:05.432753+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "scan jezelf",
+      "spark_response": "🪞 **Zelfscan van Spark** — even kijken hoe ik er voor sta:\n\n🧠 **Kennis**: 4017 kaarten in lades · **1659** wachten in inbox\n   _Voelen=436 · Spreken=545 · Weten=1975 · Doen=1061_\n🗣️ **Woordenschat**: 5627 woorden bekend · **3881** actief in gebruik\n💬 **Activiteit**: 0 berichten verwerkt in laatste 24u\n🤲 **Handen**: 19/19 capabilities live (acties die ik echt kan)\n\n_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1427
+      }
+    },
+    {
+      "id": "conv-e0241579",
+      "timestamp": "2026-06-17T09:53:23.232302+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "3 keer 7 plus 1",
+      "spark_response": "🧮 `3*7+1` = **22**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1428
+      }
+    },
+    {
+      "id": "conv-edf39175",
+      "timestamp": "2026-06-17T09:53:23.685303+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoe sta je er voor",
+      "spark_response": "🪞 **Zelfscan van Spark** — even kijken hoe ik er voor sta:\n\n🧠 **Kennis**: 4017 kaarten in lades · **1659** wachten in inbox\n   _Voelen=436 · Spreken=545 · Weten=1975 · Doen=1061_\n🗣️ **Woordenschat**: 5627 woorden bekend · **3881** actief in gebruik\n💬 **Activiteit**: 0 berichten verwerkt in laatste 24u\n🤲 **Handen**: 19/19 capabilities live (acties die ik echt kan)\n\n_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1429
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1416,
-    "last_updated": "2026-06-16T20:34:04.821342+00:00"
+    "total_conversations": 1429,
+    "last_updated": "2026-06-17T09:53:23.685303+00:00"
   }
 }

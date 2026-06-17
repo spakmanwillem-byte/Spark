@@ -398,6 +398,123 @@ def _handle_audit_health(user_id):
                 "message": f"Audit niet beschikbaar: {ex}"}
 
 
+# v6_capability_reken_001 — Spark krijgt z'n eerste reken-skill
+def _handle_reken_uit(user_id, user_text: str = ""):
+    """Veilige rekenmachine. Pakt '1+1', 'hoeveel is 12 keer 7', 'wortel van 81' enz."""
+    from .math_eval import format_answer
+    out = format_answer(user_text or "")
+    if not out:
+        return {
+            "type": "capability_response",
+            "capability_id": "reken_uit",
+            "message": "🧮 Ik herken dat als rekensom, maar kreeg het niet uitgerekend. Probeer iets als `12 keer 7` of `wortel van 81`.",
+        }
+    return {
+        "type": "capability_response",
+        "capability_id": "reken_uit",
+        "message": out,
+    }
+
+
+# v6_capability_zelfscan_001 — Spark scant zijn eigen toestand
+def _handle_zelfscan(user_id):
+    """Self-reflection scan: KB-status, vocab-actives, recente intents, capability-aantal."""
+    from pathlib import Path
+    from modules.core.storage import load_json
+    from datetime import datetime, timezone
+    import json as _json
+
+    DATA = Path(__file__).parent.parent.parent / "data"
+    lines = ["🪞 **Zelfscan van Spark** — even kijken hoe ik er voor sta:", ""]
+
+    # 1. KB-stats
+    try:
+        from modules.kb_v2 import service as kbv2
+        stats = kbv2.get_stats()
+        lades = stats.get("lades", {}) or stats.get("by_lade", {})
+        inbox = stats.get("inbox_count", 0)
+        total_lades = sum((v.get("count", 0) if isinstance(v, dict) else v) for v in lades.values())
+        lines.append(f"🧠 **Kennis**: {total_lades} kaarten in lades · **{inbox}** wachten in inbox")
+        per_lade = " · ".join(
+            f"{(v.get('naam') if isinstance(v, dict) else l)}={v.get('count', 0) if isinstance(v, dict) else v}"
+            for l, v in lades.items()
+        )
+        if per_lade:
+            lines.append(f"   _{per_lade}_")
+    except Exception as ex:
+        lines.append(f"🧠 Kennis-status onbeschikbaar ({ex})")
+
+    # 2. Vocab-actives
+    try:
+        vdata = load_json(DATA / "personality" / "spark_vocab.json", default={"vocab": {}})
+        vocab = vdata.get("vocab", {})
+        total_words = len(vocab)
+        active = sum(1 for v in vocab.values() if isinstance(v, dict) and v.get("active"))
+        lines.append(f"🗣️ **Woordenschat**: {total_words} woorden bekend · **{active}** actief in gebruik")
+    except Exception:
+        pass
+
+    # 3. Recente intents (laatste 24h)
+    try:
+        intent_log = DATA / "system" / "intent_log.jsonl"
+        if intent_log.exists():
+            with open(intent_log) as f:
+                tail = f.readlines()[-500:]
+            cutoff = datetime.now(timezone.utc).timestamp() - 24 * 3600
+            recent = 0
+            for line in tail:
+                try:
+                    obj = _json.loads(line)
+                    ts = obj.get("ts") or 0
+                    if isinstance(ts, (int, float)) and ts > cutoff:
+                        recent += 1
+                except Exception:
+                    continue
+            lines.append(f"💬 **Activiteit**: {recent} berichten verwerkt in laatste 24u")
+    except Exception:
+        pass
+
+    # 4. Capabilities
+    try:
+        caps_file = DATA / "personality" / "spark_capabilities.json"
+        caps_data = load_json(caps_file, default={"capabilities": []})
+        caps = caps_data.get("capabilities", [])
+        live = sum(1 for c in caps if c.get("status") == "live")
+        lines.append(f"🤲 **Handen**: {live}/{len(caps)} capabilities live (acties die ik echt kan)")
+    except Exception:
+        pass
+
+    # 5. Doe-kaart koppelingen
+    try:
+        links_file = DATA / "personality" / "capability_links.json"
+        links = load_json(links_file, default={"links": {}}).get("links", {})
+        if links:
+            lines.append(f"🔗 **Doe-koppelingen**: {len(links)} doe-kaarten zijn aan een actie gekoppeld")
+    except Exception:
+        pass
+
+    # 6. Recente errors uit shadow_observations
+    try:
+        shadow_log = DATA / "system" / "logs" / "shadow_observations.jsonl"
+        if shadow_log.exists():
+            with open(shadow_log) as f:
+                tail = f.readlines()[-200:]
+            errors = sum(1 for ln in tail if '"error"' in ln or '"kind":"error"' in ln)
+            if errors:
+                lines.append(f"⚠️ **Recente fouten**: {errors} in laatste shadow-observaties — even kijken waard")
+    except Exception:
+        pass
+
+    lines.append("")
+    lines.append("_Vraag 'wat staat er nog open' voor de roadmap-stand of 'gezondheidscheck' voor diepere audit._")
+
+    return {
+        "type": "capability_response",
+        "capability_id": "zelfscan",
+        "message": "\n".join(lines),
+    }
+
+
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
     "tellen_bestanden":          _handle_tellen_bestanden,
@@ -415,6 +532,9 @@ _HANDLERS = {
     "kennis_inbox_status":       _handle_kennis_inbox_status,
     "bots_status":               _handle_bots_status,
     "audit_health":              _handle_audit_health,
+    # v6_capability_reken_001 + v6_capability_zelfscan_001
+    "reken_uit":                 _handle_reken_uit,
+    "zelfscan":                  _handle_zelfscan,
 }
 
 
@@ -423,6 +543,24 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
 
     Alle hits worden gelogd (capabilities module) voor observability.
     """
+    # v6_capability_reken_001 — math krijgt voorrang. "wat is 12 keer 7" zou anders
+    # door zoeken_kennisbank gevangen worden via 'wat is .'-trigger.
+    try:
+        from .math_eval import looks_like_math
+        if looks_like_math(text or ""):
+            handler = _HANDLERS.get("reken_uit")
+            if handler:
+                log_event("capabilities", "capability_matched", intent="Rekenen", detail={
+                    "capability_id": "reken_uit",
+                    "confidence": 1.0,
+                    "trigger": "math_pre_filter",
+                    "user_id": user_id,
+                    "has_handler": True,
+                })
+                return handler(user_id, text)
+    except Exception as ex:
+        log_event("capabilities", "math_prefilter_error", detail={"error": str(ex)})
+
     from . import intent_matcher_service
     match = intent_matcher_service.match_capability(text)
     if not match or match.get("confidence", 0) < 0.3:
@@ -451,6 +589,9 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
         # v6_agenda_dayfocus_001 — geef user-tekst mee aan agenda-handler
         import inspect
         if cap_id in ("agenda_vandaag", "agenda_lezen"):
+            return handler(user_id, text)
+        # v6_capability_reken_001 — reken-handler heeft user-tekst nodig
+        if cap_id == "reken_uit":
             return handler(user_id, text)
         return handler(user_id)
     except Exception as ex:

@@ -881,6 +881,11 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
         testIdPrefix="kbv2-edit"
       />
 
+      {/* v6_capability_links_001 — alleen voor doe-lade: koppel deze kaart aan een capability */}
+      {!inInbox && currentLade === 'doen' && (
+        <CapabilityCoupling cardId={card.id} cardBegrip={card.begrip} />
+      )}
+
       {/* v5_kbv2_media_001 — Voice & Image upload */}
       <MediaSection card={card} currentLade={inInbox ? null : currentLade} onUpdated={onMediaUpdated} />
 
@@ -1033,6 +1038,92 @@ function CardFormFields({ editForm, setEditForm, editable, testIdPrefix, openWs5
         )}
       </div>
     </>
+  );
+}
+
+// v6_capability_links_001 — koppel een doe-kaart aan een Spark capability
+function CapabilityCoupling({ cardId, cardBegrip }) {
+  const [caps, setCaps] = React.useState([]);
+  const [currentLink, setCurrentLink] = React.useState(null); // { capability_id, capability_naam, has_handler }
+  const [loading, setLoading] = React.useState(true);
+  const [saving, setSaving] = React.useState(false);
+
+  const reload = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const [capsR, linksR] = await Promise.all([
+        fetch(`${API}/api/admin/capabilities`).then(r => r.json()),
+        fetch(`${API}/api/admin/capabilities/links`).then(r => r.json()),
+      ]);
+      setCaps(capsR.capabilities || []);
+      const mine = (linksR.links || []).find(l => l.card_id === cardId);
+      setCurrentLink(mine || null);
+    } catch (e) {
+      console.warn('capability load failed', e);
+    } finally {
+      setLoading(false);
+    }
+  }, [cardId]);
+
+  React.useEffect(() => { reload(); }, [reload]);
+
+  const saveLink = async (capabilityId) => {
+    setSaving(true);
+    try {
+      if (!capabilityId) {
+        // Ontkoppel
+        await fetch(`${API}/api/admin/capabilities/links/${cardId}`, { method: 'DELETE' });
+      } else {
+        await fetch(`${API}/api/admin/capabilities/links`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ card_id: cardId, capability_id: capabilityId }),
+        });
+      }
+      await reload();
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="border border-purple-500/20 bg-purple-500/5 rounded-lg p-2">
+        <p className="text-[10px] uppercase text-purple-300 tracking-wide">🤲 Capability-koppeling</p>
+        <p className="text-[11px] text-slate-500 mt-0.5">Laden…</p>
+      </div>
+    );
+  }
+
+  return (
+    <div data-testid="kbv2-capability-coupling" className="border border-purple-500/20 bg-purple-500/5 rounded-lg p-2 space-y-1">
+      <div className="flex items-center justify-between">
+        <p className="text-[10px] uppercase text-purple-300 tracking-wide">🤲 Capability-koppeling</p>
+        {currentLink && (
+          <span className={`text-[10px] px-1.5 py-0.5 rounded ${currentLink.has_handler ? 'bg-emerald-500/15 text-emerald-300' : 'bg-amber-500/15 text-amber-300'}`}>
+            {currentLink.has_handler ? '● handler live' : '○ geen handler'}
+          </span>
+        )}
+      </div>
+      <p className="text-[10px] text-slate-500 leading-tight">
+        Koppel {cardBegrip ? <strong>{cardBegrip}</strong> : 'deze kaart'} aan een actie die Spark daadwerkelijk kan uitvoeren.
+        Zo wordt een doe-woord een echte vaardigheid.
+      </p>
+      <select
+        data-testid="kbv2-capability-select"
+        value={currentLink?.capability_id || ''}
+        disabled={saving}
+        onChange={(e) => saveLink(e.target.value || null)}
+        className="w-full text-xs text-slate-200 bg-slate-800/80 border border-slate-700 rounded px-2 py-1 focus:outline-none focus:border-purple-500/40"
+      >
+        <option value="">— niet gekoppeld —</option>
+        {caps.map(c => (
+          <option key={c.id} value={c.id}>
+            {c.has_handler ? '● ' : '○ '}{c.naam || c.id} ({c.categorie || '?'})
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 

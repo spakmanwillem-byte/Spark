@@ -2,6 +2,53 @@
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 28 (2026-06-17)
+
+### ✅ Nieuw in deze sessie
+- **v6_capability_reken_001** — **Rekenmachine capability** in chat. Spark kan nu rekenen:
+  - `1+1` → 2
+  - `hoeveel is 12 keer 7` → 84
+  - `100 gedeeld door 4` → 25
+  - `wortel van 81` → 9
+  - `5 in het kwadraat` → 25
+  - `(3+4)*2` → 14
+  - `7,5 plus 2,3` → 9,8 (NL-komma)
+  - Veilige math via `ast` parser (geen `eval`), in `modules/chat/math_eval.py`
+  - Pre-filter in `route_capability` zodat math voorrang krijgt op `wat is ...`-trigger
+- **v6_capability_zelfscan_001** — **Zelfscan command**. Triggers: "scan jezelf" / "zelfscan" / "hoe gaat het met je" / "wat is je status". Rapport bevat:
+  - 🧠 KB-kaarten per lade + inbox-stand
+  - 🗣️ Vocab actief vs totaal
+  - 💬 Recente activiteit (24u intents)
+  - 🤲 Capabilities live-count
+  - 🔗 Aantal doe-kaart koppelingen
+  - ⚠️ Recente shadow-errors
+- **v6_capability_links_001** — **Doe-kaart ↔ Capability koppelingen** infrastructuur:
+  - JSON store: `/data/personality/capability_links.json`
+  - Endpoints: `GET /api/admin/capabilities/links` · `POST /api/admin/capabilities/links` · `DELETE /api/admin/capabilities/links/{card_id}`
+  - Frontend: dropdown "🤲 Capability-koppeling" in CardDetail bewerk-modal, alleen voor doe-lade kaarten
+  - Verrijkte response toont kaart-begrip + capability-naam + handler-status (● live / ○ geen handler)
+- Totaal capabilities: **17 → 19** (reken_uit + zelfscan toegevoegd, beide live met handler)
+
+### 🟡 HALF AF (uit deze sessie nog te volgen)
+- **Doe-kaart bulk-mapping** — UI is per-kaart in bewerk-modal. Een bulk-overzicht "welke doe-kaarten zijn aan welke capability gekoppeld?" kan later in Beheer→Capabilities tab.
+- **Capability-suggesties** — Spark zou autocomplete-suggesties kunnen geven bij koppelen ("kaart 'rekenen' lijkt op capability `reken_uit`"). Nu nog handmatig kiezen uit dropdown.
+
+### 📋 Status per task (post-sessie 28)
+| Status | Task | Effort | Aanrader |
+|---|---|---|---|
+| ❌ P1 | Spark Shop logo | 5min | nog open |
+| 🟡 P1 | RPS audio koppelen | 30min | nog open |
+| ❌ P1 | Checkout kasboek-split | 2u | wacht op SEPA |
+| ❌ P1 | Shadow-vragen queue | 4u | nog open |
+| ❌ P1 | KB Admin UI Dashboard (dedupe/move/health UI) | 1u | nog open |
+| ❌ P1 | Bulk-edit UI voor 37 lore-kaarten | 1.5u | nog open |
+| 🟡 P2 | Lade-drift detector + verplaats-knop in modal | 1u | nog open (Willem komt later terug) |
+| ❌ P2 | SVG Province Map | 3u | UX polish |
+| 🟡 P2 | Spark als Gastheer | 4u | UX warmte |
+| ❌ P3 | Doe-kaart bulk-mapping overzicht | 1u | nieuwe sessie-28 follow-up |
+
+---
+
 ## 🔎 REALITY CHECK — Sessie 27 (2026-06-04)
 > Schone foto van wat er **echt** in de codebase staat, niet wat in oude notes staat.
 > Doel: jij kan tijdens redeploy snel zien wat klopt, wat half is, en wat nog open is.

@@ -59977,6 +59977,81 @@
         "voice",
         "image"
       ]
+    },
+    {
+      "id": "kbv2-skel-6fec0000",
+      "begrip": "indruk",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een indruk is het beeld, gevoel of oordeel dat ontstaat door een waarneming of ervaring.",
+        "laag2": "Een indruk ontstaat wanneer iemand iets ziet, hoort, ervaart of meemaakt en daar betekenis aan geeft.",
+        "laag3": "Een indruk is de eerste of algemene beleving die iemand krijgt van een persoon, object, gebeurtenis of situatie. Deze ontstaat door waarneming, communicatie en eerdere ervaringen. Een indruk kan positief, negatief of neutraal zijn en kan veranderen wanneer nieuwe informatie beschikbaar komt.",
+        "laag4": "Binnen Spark is een indruk een mentale en emotionele interpretatie van waarnemingen. Indrukken helpen mensen en AI om situaties snel te beoordelen, maar zijn niet altijd volledig of juist. Ze vormen vaak de basis voor verwachtingen, beslissingen en vervolginteracties."
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen.",
+        "wat": "Een beeld, gevoel of oordeel dat ontstaat door een waarneming of ervaring.",
+        "wanneer": "Wanneer iets wordt gezien, gehoord of ervaren.",
+        "waar": "In sociale situaties, communicatie en dagelijkse ervaringen.",
+        "waarom": "Om een situatie, persoon of object snel te beoordelen en te begrijpen.",
+        "hoe": "Door waarnemingen te verwerken en deze te combineren met kennis, ervaringen en context."
+      },
+      "tags": [
+        "indruk",
+        "waarneming",
+        "beleving",
+        "oordeel",
+        "ervaring",
+        "interpretatie",
+        "observatie",
+        "communicatie",
+        "sociaal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-6fec0000",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.487596+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:38:00.617546+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:38:00.617546+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt",
+          "lade": "voelen"
+        }
+      ]
     }
   ],
   "updated_at": "2026-06-11T13:32:52.671274+00:00"

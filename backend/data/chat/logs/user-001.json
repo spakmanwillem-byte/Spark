@@ -38591,11 +38591,116 @@
         "session_id": "default",
         "gesprek_nummer": 1429
       }
+    },
+    {
+      "id": "conv-a45b3fa4",
+      "timestamp": "2026-06-18T20:16:38.811647+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Waar staat je hoofd vandaag? _(het is 1 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1430
+      }
+    },
+    {
+      "id": "conv-2da916ff",
+      "timestamp": "2026-06-18T20:16:38.850811+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1431
+      }
+    },
+    {
+      "id": "conv-ea857c4a",
+      "timestamp": "2026-06-18T20:16:42.874088+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hallo Spark",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1432
+      }
+    },
+    {
+      "id": "conv-38df01b1",
+      "timestamp": "2026-06-18T20:16:59.496896+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Hoeveel is 10 plus 123",
+      "spark_response": "🧮 `10+123` = **133**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1433
+      }
+    },
+    {
+      "id": "conv-36316022",
+      "timestamp": "2026-06-18T20:17:34.743684+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "8 konijnen plus 5 wolven",
+      "spark_response": "🧮 Ik herken dat als rekensom, maar kreeg het niet uitgerekend. Probeer iets als `12 keer 7` of `wortel van 81`.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1434
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1429,
-    "last_updated": "2026-06-17T09:53:23.685303+00:00"
+    "total_conversations": 1434,
+    "last_updated": "2026-06-18T20:17:34.743684+00:00"
   }
 }

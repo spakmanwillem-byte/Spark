@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 1975,
+    "card_count": 1996,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-16T20:27:56.004965+00:00",
+    "last_updated": "2026-06-26T23:12:32.636971+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -262545,6 +262545,2686 @@
           "ts": "2026-06-26T22:41:47.846157+00:00",
           "actie": "filled_from_doc",
           "bron": "verlorenkennis.txt (batch 2)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-ca520898",
+      "begrip": "recht",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Recht is een lijn zonder bochten of krommingen.",
+        "laag2": "Een rechte lijn loopt in één richting zonder af te buigen.",
+        "laag3": "Recht beschrijft een vorm of richting zonder kromming. Een rechte lijn is de kortste afstand tussen twee punten in de meetkunde. Het begrip wordt gebruikt in wiskunde, techniek, bouw, tekenen en het dagelijks leven om een lijn, rand of beweging zonder bochten aan te geven.\n",
+        "laag4": "Rechte lijnen vormen de basis van veel constructies, ontwerpen en meetkundige berekeningen. Ze worden gebruikt om nauwkeurig te bouwen, meten en uitlijnen. Binnen Spark is recht een ruimtelijke eigenschap van een object of richting en staat los van het begrip recht als wet of regelgeving.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, ontwerpers, bouwers, tekenaars en meetkundigen.",
+        "wat": "Een lijn of richting zonder bochten.",
+        "wanneer": "Bij meten, tekenen, bouwen of bewegen in een rechte richting.",
+        "waar": "In meetkunde, bouw, techniek, kaarten en de fysieke wereld.",
+        "waarom": "Om nauwkeurig te kunnen meten, bouwen of oriënteren.",
+        "hoe": "Door een constante richting aan te houden zonder af te buigen."
+      },
+      "tags": [
+        "recht",
+        "lijn",
+        "vorm",
+        "richting",
+        "meetkunde",
+        "geometrie",
+        "bouw",
+        "structuur",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4828fd48",
+          "begrip": "Een cirkel heeft geen hoeken.",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "geometrie",
+            "lijn",
+            "neutraal",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68430d92",
+          "begrip": "zijde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "meetkunde",
+            "neutraal",
+            "richting",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-27514be6",
+          "begrip": "hoeken",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "geometrie",
+            "lijn",
+            "meetkunde",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-872d1b2b",
+          "begrip": "kromme",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "geometrie",
+            "lijn",
+            "neutraal",
+            "richting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1522cf22",
+          "begrip": "Niet alles zonder hoeken is een cirkel.",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geometrie",
+            "neutraal",
+            "structuur",
+            "vorm"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T22:45:48.414130+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-26T22:44:27.719518+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T22:45:45.684592+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:45:45.788033+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:45:45.794854+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:45:48.746959+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:45:48.753689+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7918f57a",
+      "begrip": "recht",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Recht is het geheel van wetten en regels die bepalen wat is toegestaan en verplicht.",
+        "laag2": "Recht helpt om de samenleving eerlijk, veilig en geordend te laten functioneren.",
+        "laag3": "Recht bestaat uit wetten, regels en juridische afspraken die bepalen welke rechten en plichten mensen, bedrijven en overheden hebben. Het recht wordt toegepast door onder andere rechters, advocaten en overheidsinstanties om conflicten op te lossen en de wet te handhaven.\n",
+        "laag4": "Recht vormt de basis van een rechtsstaat. Het beschermt vrijheden, regelt verantwoordelijkheden en biedt een manier om geschillen eerlijk te behandelen. Binnen Spark is recht een systeem van regels dat gedrag, bevoegdheden en relaties tussen personen en organisaties structureert.\n"
+      },
+      "ws5": {
+        "wie": "Burgers, rechters, advocaten, overheden en organisaties.",
+        "wat": "Een systeem van wetten, regels en juridische rechten en plichten.",
+        "wanneer": "Wanneer wetten worden toegepast of juridische situaties ontstaan.",
+        "waar": "Binnen landen, rechtbanken, overheden en de samenleving.",
+        "waarom": "Om orde, rechtvaardigheid en bescherming van rechten te waarborgen.",
+        "hoe": "Door wetten op te stellen, toe te passen en te handhaven via juridische procedures."
+      },
+      "tags": [
+        "recht",
+        "wet",
+        "wetgeving",
+        "juridisch",
+        "rechtsstaat",
+        "rechtbank",
+        "rechter",
+        "regelgeving",
+        "overheid",
+        "samenleving",
+        "rechten",
+        "plichten",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-31904fa9",
+          "begrip": "rechtbank",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "emotie",
+            "juridisch",
+            "neutraal",
+            "overheid",
+            "recht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-507794d5",
+          "begrip": "criminaliteit",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "recht",
+            "rechtbank",
+            "regelgeving",
+            "samenleving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-42398f45",
+          "begrip": "overheid",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overheid",
+            "regelgeving",
+            "samenleving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-46cb7ae6",
+          "begrip": "belasting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "overheid",
+            "samenleving",
+            "wetgeving"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-14613751",
+          "begrip": "Rechter",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "recht",
+            "rechtbank",
+            "rechter",
+            "wet"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T22:47:05.069879+00:00",
+        "vorige_versie_v1": "kb-skel-7918f57a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.462942+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:47:02.784066+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:47:02.790807+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:47:05.406069+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:47:05.412923+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T22:47:02.680117+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b3902839",
+      "begrip": "getal",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een getal is een symbool of waarde waarmee een hoeveelheid, volgorde of grootte wordt aangegeven.",
+        "laag2": "Getallen worden gebruikt om te tellen, meten, rekenen en informatie vast te leggen.",
+        "laag3": "Een getal is een wiskundig begrip dat een hoeveelheid, positie of waarde weergeeft. Getallen worden gebruikt in berekeningen, metingen, statistiek, wetenschap en het dagelijks leven. Er bestaan verschillende soorten getallen, zoals natuurlijke getallen, gehele getallen, breuken, decimalen en negatieve getallen.\n",
+        "laag4": "Getallen vormen de basis van wiskunde en veel andere vakgebieden. Ze maken het mogelijk om hoeveelheden te vergelijken, patronen te herkennen, berekeningen uit te voeren en gegevens nauwkeurig vast te leggen. Binnen Spark vertegenwoordigt een getal een meetbare waarde die kan worden gebruikt in systemen, logica en analyses.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die rekent, meet of gegevens gebruikt.",
+        "wat": "Een wiskundige waarde die een hoeveelheid, volgorde of grootte weergeeft.",
+        "wanneer": "Bij tellen, meten, rekenen en het verwerken van gegevens.",
+        "waar": "In wiskunde, wetenschap, techniek, economie en het dagelijks leven.",
+        "waarom": "Om hoeveelheden, waarden en relaties nauwkeurig te beschrijven en te berekenen.",
+        "hoe": "Door cijfers en wiskundige notatie te gebruiken om waarden weer te geven."
+      },
+      "tags": [
+        "getal",
+        "wiskunde",
+        "rekenen",
+        "hoeveelheid",
+        "waarde",
+        "cijfer",
+        "meten",
+        "tellen",
+        "statistiek",
+        "logica",
+        "kennis",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-286cd065",
+          "begrip": "Verdubbelen ",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "getal",
+            "hoeveelheid",
+            "neutraal",
+            "rekenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5a6ade75",
+          "begrip": "wiskunde",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "kennis",
+            "logica",
+            "neutraal",
+            "rekenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-de7b2988",
+          "begrip": "hoeveelheid",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "hoeveelheid",
+            "meten",
+            "neutraal",
+            "statistiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-38cd0b20",
+          "begrip": "berekening",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "logica",
+            "neutraal",
+            "rekenen",
+            "wiskunde"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4393e066",
+          "begrip": "rekenen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "logica",
+            "neutraal",
+            "rekenen",
+            "wiskunde"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T22:48:34.246845+00:00",
+        "vorige_versie_v1": "kb-skel-b3902839",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:51.857648+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:48:26.917547+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:48:26.924627+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:48:34.578441+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:48:34.585093+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T22:48:26.813396+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-83f01c99",
+      "begrip": "fles",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een fles is een afsluitbare verpakking voor het bewaren en vervoeren van vloeistoffen.",
+        "laag2": "Een fles beschermt de inhoud en maakt het mogelijk om vloeistoffen veilig op te slaan, te vervoeren en uit te schenken.",
+        "laag3": "Een fles is een hol voorwerp met een smalle opening dat wordt gebruikt voor het bewaren van vloeistoffen. Flessen kunnen gemaakt zijn van glas, kunststof of metaal en worden afgesloten met een dop, kurk of andere sluiting. Ze worden gebruikt voor onder andere water, frisdrank, olie, melk, schoonmaakmiddelen en medicijnen.",
+        "laag4": "Flessen spelen een belangrijke rol in opslag, transport en distributie van vloeistoffen. De vorm, inhoud en het materiaal worden afgestemd op het gebruik. Binnen Spark is een fles een object dat dient als verpakking en bescherming van een inhoud, en onderdeel kan zijn van logistieke en gebruikssystemen."
+      },
+      "ws5": {
+        "wie": "Consumenten, producenten, winkels en bedrijven.",
+        "wat": "Een afsluitbare verpakking voor vloeistoffen.",
+        "wanneer": "Bij het bewaren, vervoeren of gebruiken van vloeistoffen.",
+        "waar": "In huishoudens, winkels, horeca, laboratoria en industrie.",
+        "waarom": "Om vloeistoffen veilig te bewaren, beschermen en eenvoudig te gebruiken.",
+        "hoe": "Door vloeistoffen in een afsluitbare verpakking met een opening en sluiting te bewaren."
+      },
+      "tags": [
+        "fles",
+        "verpakking",
+        "object",
+        "vloeistof",
+        "opslag",
+        "transport",
+        "glas",
+        "kunststof",
+        "metaal",
+        "verpakkingstechniek",
+        "container",
+        "inhoud",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-83f01c99",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:01.831564+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-ec57347a",
+      "begrip": "verpakking",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een verpakking is een omhulsel dat een product beschermt, bewaart of presenteert.",
+        "laag2": "Verpakkingen maken het mogelijk om producten veilig op te slaan, te vervoeren, te verkopen en te gebruiken.",
+        "laag3": "Een verpakking is een omhulsel of container waarin een product wordt geplaatst. Verpakkingen kunnen gemaakt zijn van karton, papier, kunststof, glas, metaal of andere materialen. Ze beschermen de inhoud tegen beschadiging, vervuiling en bederf en geven vaak informatie over het product, zoals de inhoud, gebruiksinstructies en houdbaarheid.",
+        "laag4": "Verpakkingen vormen een belangrijke schakel tussen productie, transport, opslag en gebruik. De keuze van het materiaal en de vorm hangt af van de eigenschappen van het product. Binnen Spark is een verpakking een object dat bescherming, informatie en logistiek met elkaar verbindt."
+      },
+      "ws5": {
+        "wie": "Producenten, vervoerders, winkels en consumenten.",
+        "wat": "Een omhulsel of container voor een product.",
+        "wanneer": "Tijdens opslag, transport, verkoop en gebruik van producten.",
+        "waar": "In fabrieken, magazijnen, winkels en huishoudens.",
+        "waarom": "Om producten te beschermen, bewaren, vervoeren en presenteren.",
+        "hoe": "Door een passend materiaal en ontwerp te gebruiken dat aansluit bij het product en het gebruik."
+      },
+      "tags": [
+        "verpakking",
+        "verpakkingstechniek",
+        "verpakkingmateriaal",
+        "bescherming",
+        "opslag",
+        "transport",
+        "product",
+        "container",
+        "logistiek",
+        "presentatie",
+        "object",
+        "materiaal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-ec57347a",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.514231+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-7d42b530",
+      "begrip": "basisschool",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een basisschool is een school waar kinderen het basisonderwijs volgen.",
+        "laag2": "Op de basisschool leren kinderen basisvaardigheden zoals lezen, schrijven, rekenen en samenwerken.",
+        "laag3": "Een basisschool is een onderwijsinstelling waar kinderen meestal vanaf vier jaar onderwijs krijgen. Tijdens het basisonderwijs ontwikkelen zij kennis, sociale vaardigheden en persoonlijke vaardigheden. Naast vakken zoals taal, rekenen en wereldoriëntatie leren kinderen ook samenwerken, communiceren en zelfstandig werken.",
+        "laag4": "De basisschool vormt de basis van het onderwijssysteem en bereidt kinderen voor op het voortgezet onderwijs. Binnen Spark is de basisschool een onderwijsomgeving waarin kennis, vaardigheden, gedrag en sociale ontwikkeling samenkomen."
+      },
+      "ws5": {
+        "wie": "Leerlingen, leerkrachten, ouders en schoolmedewerkers.",
+        "wat": "Een school waar kinderen basisonderwijs volgen.",
+        "wanneer": "Tijdens de eerste jaren van de schoolloopbaan.",
+        "waar": "In onderwijsinstellingen voor basisonderwijs.",
+        "waarom": "Om kinderen basiskennis, vaardigheden en sociale ontwikkeling mee te geven.",
+        "hoe": "Door lessen, oefeningen, opdrachten, spel en begeleiding van leerkrachten."
+      },
+      "tags": [
+        "basisschool",
+        "school",
+        "onderwijs",
+        "leerling",
+        "leerkracht",
+        "leren",
+        "ontwikkeling",
+        "educatie",
+        "kennis",
+        "kind",
+        "onderwijsinstelling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-7d42b530",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:26.938086+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-2062b1ed",
+      "begrip": "draagkracht",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Draagkracht is de maximale belasting die iets of iemand kan dragen of verwerken.",
+        "laag2": "Draagkracht bepaalt hoeveel gewicht, druk of belasting zonder problemen kan worden opgevangen.",
+        "laag3": "Draagkracht is het vermogen van een object, constructie, persoon of systeem om een bepaalde belasting te dragen zonder te bezwijken of overbelast te raken. In de bouw gaat het om het maximale gewicht dat een constructie veilig kan dragen. Bij mensen kan draagkracht ook verwijzen naar de fysieke, mentale of financiële belasting die iemand aankan.",
+        "laag4": "Draagkracht is afhankelijk van de eigenschappen van het object of systeem en de omstandigheden waarin het wordt gebruikt. Binnen Spark is draagkracht een capaciteitseigenschap die aangeeft hoeveel belasting een object, persoon of systeem veilig kan verwerken voordat prestaties afnemen of schade ontstaat."
+      },
+      "ws5": {
+        "wie": "Constructies, objecten, mensen en systemen.",
+        "wat": "Het maximale vermogen om een belasting te dragen of verwerken.",
+        "wanneer": "Wanneer gewicht, druk of andere belasting wordt uitgeoefend.",
+        "waar": "In de bouw, techniek, natuur en het dagelijks leven.",
+        "waarom": "Om veiligheid, stabiliteit en goed functioneren te waarborgen.",
+        "hoe": "Door de sterkte, capaciteit en eigenschappen van het object, de persoon of het systeem te bepalen."
+      },
+      "tags": [
+        "draagkracht",
+        "belasting",
+        "capaciteit",
+        "kracht",
+        "constructie",
+        "gewicht",
+        "stabiliteit",
+        "sterkte",
+        "systeem",
+        "techniek",
+        "eigenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-2062b1ed",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:36.960016+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-c051d551",
+      "begrip": "oogst",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een oogst is de verzameling gewassen of producten die van het land zijn gehaald.",
+        "laag2": "Een oogst is het resultaat van het verbouwen en binnenhalen van landbouwgewassen.",
+        "laag3": "Een oogst bestaat uit gewassen, fruit, groenten of andere landbouwproducten die rijp zijn en worden verzameld. De hoeveelheid en kwaliteit van de oogst hangen af van factoren zoals het weer, de bodem, verzorging en het tijdstip van oogsten. Oogsten kunnen met de hand of met machines worden binnengehaald.",
+        "laag4": "Een oogst vormt het eindresultaat van een groeiproces in de landbouw en tuinbouw. De opbrengst is belangrijk voor voedselvoorziening, handel en economie. Binnen Spark is een oogst een product of resultaat dat ontstaat na een periode van groei en verzorging."
+      },
+      "ws5": {
+        "wie": "Boeren, tuinders en landbouwbedrijven.",
+        "wat": "De verzamelde opbrengst van gewassen of landbouwproducten.",
+        "wanneer": "Wanneer gewassen rijp zijn om binnen te halen.",
+        "waar": "Op akkers, weilanden, boomgaarden en in kassen.",
+        "waarom": "Om voedsel en andere landbouwproducten te verkrijgen.",
+        "hoe": "Door rijpe gewassen te verzamelen met de hand of met landbouwmachines."
+      },
+      "tags": [
+        "oogst",
+        "landbouw",
+        "gewas",
+        "opbrengst",
+        "voedsel",
+        "akker",
+        "boerderij",
+        "natuur",
+        "productie",
+        "resultaat",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-c051d551",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:32.417935+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-d1d3f404",
+      "begrip": "assistent",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een assistent is iemand of iets dat helpt bij het uitvoeren van taken.",
+        "laag2": "Een assistent ondersteunt een persoon of systeem door werkzaamheden over te nemen of te vergemakkelijken.",
+        "laag3": "Een assistent is een persoon of een digitaal systeem dat ondersteuning biedt bij bepaalde taken. Een assistent kan informatie geven, werkzaamheden uitvoeren, plannen maken of helpen bij het oplossen van problemen. Er bestaan menselijke assistenten, zoals onderwijs- of zorgassistenten, en digitale assistenten, zoals AI-assistenten en spraakassistenten.",
+        "laag4": "Assistenten vergroten de efficiëntie door ondersteuning te bieden zonder de hoofdverantwoordelijkheid over te nemen. Binnen Spark is een assistent een ondersteunende rol die gebruikers of systemen helpt met informatie, communicatie, besluitvorming of uitvoering van taken."
+      },
+      "ws5": {
+        "wie": "Mensen, AI-systemen en digitale hulpmiddelen.",
+        "wat": "Een persoon of systeem dat ondersteuning biedt.",
+        "wanneer": "Wanneer hulp of ondersteuning nodig is.",
+        "waar": "Op het werk, op school, thuis, in organisaties en in digitale omgevingen.",
+        "waarom": "Om taken makkelijker, sneller of beter uit te voeren.",
+        "hoe": "Door informatie te geven, taken uit te voeren of ondersteuning te bieden aan een gebruiker of systeem."
+      },
+      "tags": [
+        "assistent",
+        "ondersteuning",
+        "hulp",
+        "rol",
+        "samenwerking",
+        "gebruiker",
+        "systeem",
+        "kunstmatige_intelligentie",
+        "communicatie",
+        "taak",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-d1d3f404",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:46.576547+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-5e76077a",
+      "begrip": "groepsgedrag",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Groepsgedrag is het gedrag dat ontstaat wanneer mensen of dieren als groep met elkaar omgaan.",
+        "laag2": "Groepsgedrag laat zien hoe individuen elkaar binnen een groep beïnvloeden.",
+        "laag3": "Groepsgedrag beschrijft hoe mensen of dieren zich gedragen wanneer zij deel uitmaken van een groep. Binnen een groep kunnen samenwerking, communicatie, leiderschap, sociale regels en onderlinge beïnvloeding ontstaan. Groepsgedrag verschilt vaak van het gedrag dat iemand alleen laat zien.",
+        "laag4": "Groepsgedrag speelt een belangrijke rol in gezinnen, scholen, organisaties, sportteams en samenlevingen. Binnen Spark is groepsgedrag een sociaal proces waarbij de interactie tussen meerdere individuen invloed heeft op beslissingen, emoties en gezamenlijke acties."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en groepen.",
+        "wat": "Het gedrag dat ontstaat binnen een groep.",
+        "wanneer": "Wanneer meerdere individuen met elkaar samenwerken of samenleven.",
+        "waar": "In gezinnen, scholen, organisaties, sportteams en de samenleving.",
+        "waarom": "Omdat groepsleden elkaar beïnvloeden en gezamenlijk doelen of regels ontwikkelen.",
+        "hoe": "Door communicatie, samenwerking, sociale interactie en onderlinge beïnvloeding."
+      },
+      "tags": [
+        "groepsgedrag",
+        "groep",
+        "gedrag",
+        "samenwerking",
+        "interactie",
+        "communicatie",
+        "sociaal",
+        "invloed",
+        "samenleving",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-5e76077a",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.374384+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-e5c38ee4",
+      "begrip": "vezel",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een vezel is een dunne, langwerpige structuur waaruit materialen of weefsels kunnen bestaan.",
+        "laag2": "Vezels vormen de basis van veel natuurlijke en kunstmatige materialen, zoals wol, katoen en kunststof.",
+        "laag3": "Een vezel is een dunne draadachtige structuur die afzonderlijk voorkomt of samen met andere vezels een materiaal vormt. Natuurlijke vezels, zoals wol, katoen en vlas, komen uit planten of dieren. Kunstmatige vezels worden door mensen gemaakt, bijvoorbeeld van kunststof. Vezels worden gebruikt voor kleding, touw, papier, isolatie en vele andere toepassingen.",
+        "laag4": "Vezels verschillen in sterkte, flexibiliteit, dikte en duurzaamheid. Binnen Spark is een vezel een basismateriaal dat kan worden verwerkt tot producten of onderdeel vormt van biologische en technische structuren."
+      },
+      "ws5": {
+        "wie": "Planten, dieren, mensen en industrie.",
+        "wat": "Een dunne, langwerpige structuur die materialen vormt.",
+        "wanneer": "Bij de productie of opbouw van natuurlijke en kunstmatige materialen.",
+        "waar": "In planten, dieren, textiel, papier, touw en composietmaterialen.",
+        "waarom": "Om materialen sterkte, structuur of flexibiliteit te geven.",
+        "hoe": "Door natuurlijke groei of industriële productie van vezelmaterialen."
+      },
+      "tags": [
+        "vezel",
+        "materiaal",
+        "textiel",
+        "wol",
+        "katoen",
+        "kunststof",
+        "structuur",
+        "grondstof",
+        "natuur",
+        "industrie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-e5c38ee4",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.591503+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-dd080167",
+      "begrip": "noodsituatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een noodsituatie is een situatie waarin direct hulp of ingrijpen nodig is.",
+        "laag2": "Een noodsituatie brengt mensen, dieren, eigendommen of de omgeving in gevaar en vraagt om snel handelen.",
+        "laag3": "Een noodsituatie is een onverwachte situatie waarbij gezondheid, veiligheid of eigendommen ernstig worden bedreigd. Voorbeelden zijn brand, een ernstig ongeval, een overstroming of een medische noodsituatie. In een noodsituatie is snel en doelgericht optreden belangrijk om schade te beperken en levens te beschermen.",
+        "laag4": "Noodsituaties kunnen ontstaan door natuurlijke gebeurtenissen, technische storingen of menselijk handelen. Binnen Spark is een noodsituatie een toestand met hoge prioriteit die directe aandacht en passende acties van mensen of systemen vereist."
+      },
+      "ws5": {
+        "wie": "Mensen, hulpdiensten, organisaties en systemen.",
+        "wat": "Een gevaarlijke situatie die direct ingrijpen vereist.",
+        "wanneer": "Wanneer veiligheid, gezondheid of eigendommen ernstig worden bedreigd.",
+        "waar": "Overal waar een onverwacht gevaar ontstaat.",
+        "waarom": "Om schade te beperken en mensen, dieren of eigendommen te beschermen.",
+        "hoe": "Door een gevaarlijke situatie te herkennen en snel passende maatregelen te nemen."
+      },
+      "tags": [
+        "noodsituatie",
+        "nood",
+        "gevaar",
+        "veiligheid",
+        "hulp",
+        "hulpdiensten",
+        "crisis",
+        "risico",
+        "bescherming",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-571055ff",
+          "begrip": "gevaar",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "gevaar",
+            "neutraal",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e9f46c42",
+          "begrip": "vrees",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "gevaar",
+            "neutraal",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45a9d6ce",
+          "begrip": "voorkomen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "neutraal",
+            "risico",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-092b6478",
+          "begrip": "brandweer",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "neutraal",
+            "noodsituatie",
+            "risico"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a24f0c30",
+          "begrip": "nee dank je, maak mij sterker avp!",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bescherming",
+            "emotie",
+            "hulp",
+            "neutraal",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-dd080167",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.261001+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T22:58:20.282439+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T22:58:20.289088+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T22:58:20.012465+00:00"
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-9d9febf2",
+      "begrip": "precisie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Precisie is de mate waarin iets nauwkeurig en zorgvuldig wordt uitgevoerd of gemeten.",
+        "laag2": "Precisie zorgt ervoor dat metingen, handelingen of resultaten zo exact mogelijk zijn.",
+        "laag3": "Precisie beschrijft hoe nauwkeurig een meting, berekening of handeling wordt uitgevoerd. Een hoge precisie betekent dat resultaten weinig van elkaar verschillen en zeer consistent zijn. Precisie is belangrijk in wetenschap, techniek, geneeskunde, productie en vakmanschap, waar kleine afwijkingen grote gevolgen kunnen hebben.",
+        "laag4": "Precisie verschilt van nauwkeurigheid. Iets kan zeer precies zijn, maar toch afwijken van de juiste waarde. Binnen Spark is precisie een eigenschap die aangeeft hoe klein de variatie of afwijking is bij metingen, processen of handelingen."
+      },
+      "ws5": {
+        "wie": "Mensen, machines en meetsystemen.",
+        "wat": "De mate van nauwkeurigheid en consistentie.",
+        "wanneer": "Bij meten, produceren, berekenen of uitvoeren van taken.",
+        "waar": "In wetenschap, techniek, industrie, geneeskunde en dagelijks gebruik.",
+        "waarom": "Om betrouwbare en consistente resultaten te verkrijgen.",
+        "hoe": "Door zorgvuldig te werken, geschikte hulpmiddelen te gebruiken en afwijkingen te minimaliseren."
+      },
+      "tags": [
+        "precisie",
+        "nauwkeurigheid",
+        "meting",
+        "consistentie",
+        "kwaliteit",
+        "techniek",
+        "wetenschap",
+        "eigenschap",
+        "proces",
+        "resultaat",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-9d9febf2",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.170489+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-311c5f83",
+      "begrip": "event",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een event is een gebeurtenis die op een bepaald moment plaatsvindt.",
+        "laag2": "Een event markeert een verandering, actie of gebeurtenis binnen een systeem of omgeving.",
+        "laag3": "Een event is een gebeurtenis die door mensen of systemen wordt herkend en geregistreerd. Het kan gaan om een handeling, een verandering van toestand of een gepland moment. In software wordt een event gebruikt om processen te starten, terwijl het in het dagelijks leven bijvoorbeeld een vergadering, concert of andere gebeurtenis kan zijn.",
+        "laag4": "Events vormen belangrijke schakels binnen systemen omdat ze veranderingen zichtbaar maken en reacties kunnen veroorzaken. Binnen Spark is een event een geregistreerde gebeurtenis die context toevoegt en andere processen, beslissingen of acties kan activeren."
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, programma's of objecten.",
+        "wat": "Een gebeurtenis die plaatsvindt of wordt geregistreerd.",
+        "wanneer": "Op een specifiek moment of tijdens een verandering.",
+        "waar": "In de fysieke wereld, digitale systemen of sociale omgevingen.",
+        "waarom": "Om veranderingen, acties of belangrijke momenten vast te leggen.",
+        "hoe": "Door een gebeurtenis te herkennen, registreren of genereren."
+      },
+      "tags": [
+        "event",
+        "gebeurtenis",
+        "systeem",
+        "verandering",
+        "registratie",
+        "proces",
+        "actie",
+        "trigger",
+        "informatie",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-311c5f83",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:24.366758+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-05747634",
+      "begrip": "verkeer",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "\nVerkeer is het verplaatsen van mensen, dieren of voertuigen over wegen, water, spoor of door de lucht.\n",
+        "laag2": "Verkeer zorgt ervoor dat mensen, goederen en diensten zich van de ene plaats naar de andere kunnen verplaatsen.\n",
+        "laag3": "Verkeer omvat alle bewegingen van voetgangers, fietsers, voertuigen, schepen, treinen en vliegtuigen binnen een vervoerssysteem. Om verkeer veilig en efficiënt te laten verlopen zijn er regels, verkeersborden, verkeerslichten en infrastructuur. Verkeer speelt een belangrijke rol in mobiliteit, economie en dagelijks leven.\n",
+        "laag4": "Verkeer is een dynamisch systeem waarin veel deelnemers tegelijkertijd met elkaar omgaan. Binnen Spark is verkeer een interactiesysteem waarbij beweging, communicatie, regels en veiligheid samen bepalen hoe mensen en voertuigen zich verplaatsen.\n"
+      },
+      "ws5": {
+        "wie": "Voetgangers, fietsers, bestuurders, reizigers en vervoerssystemen.",
+        "wat": "Het verplaatsen van mensen, dieren en goederen.",
+        "wanneer": "Wanneer mensen of goederen van de ene naar de andere plaats gaan.",
+        "waar": "Op wegen, spoorwegen, water en in de lucht.",
+        "waarom": "Om bestemmingen te bereiken en vervoer mogelijk te maken.",
+        "hoe": "Door gebruik te maken van vervoermiddelen, infrastructuur en verkeersregels."
+      },
+      "tags": [
+        "verkeer",
+        "vervoer",
+        "mobiliteit",
+        "beweging",
+        "weg",
+        "voertuig",
+        "infrastructuur",
+        "veiligheid",
+        "regels",
+        "interactie",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d41e3189",
+          "begrip": "Handschoenen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-52fe6787",
+          "begrip": "bewegen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb925241",
+          "begrip": "voeten",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-db7993fc",
+          "begrip": "benzine",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "mobiliteit",
+            "neutraal",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb188771",
+          "begrip": "activiteiten",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "interactie",
+            "neutraal",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:01:10.725565+00:00",
+        "vorige_versie_v1": "kb-skel-05747634",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.876514+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:01:07.554666+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:01:07.562001+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:01:11.062813+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:01:11.069920+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:01:07.451485+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-558b2443",
+      "begrip": "kwijt",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kwijt betekent dat iets of iemand niet meer gevonden of beschikbaar is.",
+        "laag2": "Iets is kwijt wanneer je niet weet waar het is of er geen toegang meer toe hebt.",
+        "laag3": "Kwijt is een toestand waarbij een voorwerp, persoon of ander bezit niet meer op de verwachte plaats is of niet meer bereikbaar is. Iets kan tijdelijk kwijt zijn doordat het is zoekgeraakt, vergeten of verloren. Zodra het wordt teruggevonden of teruggekregen, is het niet meer kwijt.\n",
+        "laag4": "Kwijt beschrijft een verandering in de relatie tussen een eigenaar en een object. Binnen Spark is het een status die aangeeft dat een object niet meer beschikbaar of vindbaar is. De oorzaak kan verschillen, zoals verliezen, vergeten, stelen of verkeerd opbergen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties of systemen die iets bezitten of beheren.",
+        "wat": "De toestand waarin iets niet meer beschikbaar of vindbaar is.",
+        "wanneer": "Wanneer de locatie of toegang onbekend is.",
+        "waar": "Overal waar objecten, personen of gegevens kunnen zoekraken.",
+        "waarom": "Door verlies, vergeten, diefstal of verkeerd opbergen.",
+        "hoe": "Doordat de verbinding tussen de eigenaar en het object tijdelijk of blijvend is verbroken."
+      },
+      "tags": [
+        "kwijt",
+        "toestand",
+        "verlies",
+        "zoek",
+        "object",
+        "verdwenen",
+        "niet aanwezig",
+        "eigendom",
+        "locatie",
+        "beschikbaarheid",
+        "status",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2b80d498",
+          "begrip": "Ring",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "eigendom",
+            "emotie",
+            "neutraal",
+            "object",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16ec458f",
+          "begrip": "status",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "beschikbaarheid",
+            "emotie",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-10a73247",
+          "begrip": "staat",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f5dbe5ba",
+          "begrip": "staan",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "locatie",
+            "neutraal",
+            "status",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b71890dd",
+          "begrip": "zit",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "locatie",
+            "neutraal",
+            "toestand"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:06:38.157409+00:00",
+        "vorige_versie_v1": "kb-skel-558b2443",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.715155+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:06:36.369229+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:06:36.376234+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:06:38.491416+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:06:38.498377+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:06:36.264645+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-d98ba14c",
+      "begrip": "email",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een e-mail is een digitaal bericht dat via internet wordt verzonden en ontvangen.",
+        "laag2": "E-mail wordt gebruikt om informatie, bestanden en berichten tussen mensen of systemen uit te wisselen.",
+        "laag3": "Een e-mail is een vorm van digitale communicatie waarbij een afzender een bericht verstuurt naar één of meer ontvangers via een e-mailadres. Een e-mail kan tekst, afbeeldingen, documenten en andere bijlagen bevatten. E-mail wordt veel gebruikt voor persoonlijke communicatie, zakelijke correspondentie, nieuwsbrieven en automatische meldingen.\n",
+        "laag4": "E-mail is een wereldwijd communicatiesysteem dat onafhankelijk van tijd en locatie werkt. Berichten worden verzonden via mailservers en kunnen worden opgeslagen, doorgestuurd en gearchiveerd. Binnen Spark is een e-mail een digitaal communicatieobject dat informatie overdraagt tussen gebruikers of systemen.\n"
+      },
+      "ws5": {
+        "wie": "Gebruikers, organisaties, bedrijven en computersystemen.",
+        "wat": "Een digitaal bericht dat via internet wordt verzonden.",
+        "wanneer": "Wanneer informatie digitaal moet worden uitgewisseld.",
+        "waar": "Via internet, e-maildiensten en computers of mobiele apparaten.",
+        "waarom": "Om snel, betrouwbaar en digitaal te communiceren.",
+        "hoe": "Door een bericht via een e-mailadres te verzenden en te ontvangen met een e-maildienst."
+      },
+      "tags": [
+        "email",
+        "e-mail",
+        "bericht",
+        "communicatie",
+        "internet",
+        "digitaal",
+        "mail",
+        "e-mailadres",
+        "informatie",
+        "technologie",
+        "communicatiekanaal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-486bd0a4",
+          "begrip": "chat",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "digitaal",
+            "informatie",
+            "internet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e442a120",
+          "begrip": "inbox",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "digitaal",
+            "e-mail",
+            "email"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "digitaal",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ec201ab8",
+          "begrip": "E-mail",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "e-mail",
+            "email",
+            "internet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9efa37bc",
+          "begrip": "website",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "internet",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:08:15.789765+00:00",
+        "vorige_versie_v1": "kb-skel-d98ba14c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.218117+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:08:13.614417+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:08:13.621597+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:08:16.126308+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:08:16.133352+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:08:13.512004+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-43f3e2c4",
+      "begrip": "bouwmateriaal",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bouwmateriaal is een materiaal dat wordt gebruikt om gebouwen en constructies te maken.",
+        "laag2": "Bouwmaterialen vormen de basis voor het bouwen, onderhouden en repareren van bouwwerken.",
+        "laag3": "Bouwmateriaal is een verzamelnaam voor materialen die worden gebruikt in de bouw. Voorbeelden zijn hout, baksteen, beton, staal, glas, gips en isolatiemateriaal. Elk materiaal heeft eigenschappen zoals sterkte, duurzaamheid, gewicht of isolatie, waardoor het geschikt is voor specifieke toepassingen.\n",
+        "laag4": "Bouwmaterialen bepalen de sterkte, veiligheid, levensduur en eigenschappen van een bouwwerk. Binnen Spark vormen bouwmaterialen de grondstoffen waaruit objecten en gebouwen worden opgebouwd en onderhouden.\n"
+      },
+      "ws5": {
+        "wie": "Bouwers, aannemers, architecten en doe-het-zelvers.",
+        "wat": "Materialen die worden gebruikt voor het bouwen van constructies.",
+        "wanneer": "Tijdens nieuwbouw, verbouwing, onderhoud en reparatie.",
+        "waar": "Op bouwplaatsen, in woningen, gebouwen en andere constructies.",
+        "waarom": "Om veilige, stevige en duurzame bouwwerken te maken.",
+        "hoe": "Door materialen te selecteren, te verwerken en samen te voegen tot een constructie."
+      },
+      "tags": [
+        "bouwmateriaal",
+        "bouw",
+        "materiaal",
+        "grondstof",
+        "constructie",
+        "gebouw",
+        "beton",
+        "hout",
+        "staal",
+        "baksteen",
+        "techniek",
+        "object",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f83c658d",
+          "begrip": "bouwindustrie",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "beton",
+            "bouw",
+            "constructie",
+            "emotie",
+            "grondstof"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1f2e2e31",
+          "begrip": "Materiaal",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "constructie",
+            "grondstof",
+            "materiaal",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3db3db1b",
+          "begrip": "materialen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "constructie",
+            "emotie",
+            "grondstof",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc9f9d35",
+          "begrip": "gebouw",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "constructie",
+            "emotie",
+            "gebouw",
+            "neutraal",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9af13eb5",
+          "begrip": "legering",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "materiaal",
+            "neutraal",
+            "staal",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:10:04.902488+00:00",
+        "vorige_versie_v1": "kb-skel-43f3e2c4",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.587679+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:10:02.349054+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:10:02.356137+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:10:05.242417+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:10:05.249785+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:10:02.244869+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-18c0f167",
+      "begrip": "waterbeheer",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Waterbeheer is het beheren van water om veiligheid, beschikbaarheid en kwaliteit te waarborgen.",
+        "laag2": "Waterbeheer zorgt voor voldoende schoon water en beschermt tegen wateroverlast en droogte.",
+        "laag3": "Waterbeheer omvat alle maatregelen om water op een veilige en duurzame manier te gebruiken en te beheersen. Het gaat onder andere om drinkwatervoorziening, afvoer van regenwater, bescherming tegen overstromingen, irrigatie en het bewaken van de waterkwaliteit. Overheden, waterschappen en andere organisaties werken samen om watersystemen goed te laten functioneren.\n",
+        "laag4": "Waterbeheer omvat alle maatregelen om water op een veilige en duurzame manier te gebruiken en te beheersen. Het gaat onder andere om drinkwatervoorziening, afvoer van regenwater, bescherming tegen overstromingen, irrigatie en het bewaken van de waterkwaliteit. Overheden, waterschappen en andere organisaties werken samen om watersystemen goed te laten functioneren.\n"
+      },
+      "ws5": {
+        "wie": "Waterschappen, overheden, waterbedrijven en gebruikers.",
+        "wat": "Het beheren van water en watersystemen.",
+        "wanneer": "Voortdurend en bij droogte, neerslag of overstromingsgevaar.",
+        "waar": "In rivieren, kanalen, dijken, polders, steden en natuurgebieden.",
+        "waarom": "Om water veilig, schoon en beschikbaar te houden.",
+        "hoe": "Door monitoring, waterkeringen, zuivering, opslag en regulering van waterstromen."
+      },
+      "tags": [
+        "waterbeheer",
+        "water",
+        "beheer",
+        "systeem",
+        "infrastructuur",
+        "veiligheid",
+        "natuur",
+        "duurzaamheid",
+        "waterkwaliteit",
+        "overstroming",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c9e1fa92",
+          "begrip": "de Maas",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "infrastructuur",
+            "natuur",
+            "neutraal",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9d48f5da",
+          "begrip": "grond",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "infrastructuur",
+            "natuur",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6a5169f7",
+          "begrip": "riet (plant)",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal",
+            "water",
+            "waterbeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-87972be7",
+          "begrip": "nederland",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "infrastructuur",
+            "neutraal",
+            "systeem",
+            "water",
+            "waterbeheer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-571055ff",
+          "begrip": "gevaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal",
+            "systeem",
+            "veiligheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:12:32.636954+00:00",
+        "vorige_versie_v1": "kb-skel-18c0f167",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.988746+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:12:31.178871+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:12:31.186134+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:12:32.971714+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:12:32.978803+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:12:31.075052+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-4f8a3c1b",
+      "begrip": "bevoegdheid",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bevoegdheid is het officiële recht of de toestemming om een bepaalde taak of beslissing uit te voeren.",
+        "laag2": "Bevoegdheden bepalen wie verantwoordelijk is voor bepaalde handelingen of besluiten.",
+        "laag3": "Een bevoegdheid is een recht, toestemming of wettelijke bevoegdheid die aan een persoon, functie of organisatie is toegekend. Alleen iemand met de juiste bevoegdheid mag bepaalde handelingen uitvoeren of beslissingen nemen. Bevoegdheden komen voor in onder andere onderwijs, zorg, overheid, rechtspraak en bedrijven.",
+        "laag4": "Bevoegdheden zorgen voor duidelijke verantwoordelijkheden, veiligheid en een goede taakverdeling. Binnen Spark is een bevoegdheid een eigenschap of autorisatie die bepaalt welke acties, beslissingen of functies een persoon of systeem mag uitvoeren."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties en systemen.",
+        "wat": "Het recht of de toestemming om iets te doen.",
+        "wanneer": "Wanneer een taak, beslissing of verantwoordelijkheid moet worden uitgevoerd.",
+        "waar": "Binnen organisaties, overheden, bedrijven, onderwijs en digitale systemen.",
+        "waarom": "Om verantwoordelijkheden, veiligheid en bevoegdheden duidelijk vast te leggen.",
+        "hoe": "Door regels, wetgeving, afspraken of autorisaties toe te kennen."
+      },
+      "tags": [
+        "bevoegdheid",
+        "autorisatie",
+        "toestemming",
+        "verantwoordelijkheid",
+        "recht",
+        "regels",
+        "organisatie",
+        "systeem",
+        "functie",
+        "besluit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-4f8a3c1b",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.352457+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-4476293c",
+      "begrip": "tempo",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Tempo is de snelheid waarmee iets gebeurt of wordt uitgevoerd.",
+        "laag2": "Tempo bepaalt hoe snel een proces, beweging of activiteit verloopt.",
+        "laag3": "Tempo geeft aan hoe snel of langzaam een handeling, proces of gebeurtenis plaatsvindt. Het begrip wordt gebruikt in muziek, sport, verkeer, werk en het dagelijks leven. Een hoog tempo betekent dat iets snel verloopt, terwijl een laag tempo juist wijst op een langzamere uitvoering.",
+        "laag4": "Tempo beïnvloedt prestaties, efficiëntie en belasting. Het juiste tempo hangt af van de situatie en het doel. Binnen Spark is tempo een eigenschap van processen en activiteiten die aangeeft met welke snelheid iets zich ontwikkelt of wordt uitgevoerd."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, machines en systemen.",
+        "wat": "De snelheid waarmee iets gebeurt of wordt uitgevoerd.",
+        "wanneer": "Tijdens een activiteit, proces of beweging.",
+        "waar": "In muziek, sport, verkeer, werk en dagelijkse situaties.",
+        "waarom": "Om de snelheid van een proces of handeling te beschrijven of aan te passen.",
+        "hoe": "Door sneller of langzamer te bewegen, werken of een proces te laten verlopen."
+      },
+      "tags": [
+        "tempo",
+        "snelheid",
+        "proces",
+        "beweging",
+        "activiteit",
+        "tijd",
+        "ritme",
+        "prestatie",
+        "systeem",
+        "eigenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-4476293c",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.418419+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-111e9236",
+      "begrip": "zicht",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Zicht is het vermogen om met de ogen waar te nemen.",
+        "laag2": "Zicht maakt het mogelijk om de omgeving, objecten en bewegingen te zien.",
+        "laag3": "Zicht is het vermogen om licht, vormen, kleuren en bewegingen met de ogen waar te nemen en door de hersenen te verwerken. Goed zicht helpt mensen en dieren bij oriëntatie, communicatie en het uitvoeren van dagelijkse activiteiten. De kwaliteit van het zicht kan worden beïnvloed door licht, afstand, gezondheid of hulpmiddelen zoals een bril of contactlenzen.",
+        "laag4": "Zicht is één van de belangrijkste zintuigen voor het verzamelen van informatie uit de omgeving. Binnen Spark is zicht een vorm van waarneming waarmee een gebruiker of systeem visuele informatie ontvangt en gebruikt voor herkenning, interpretatie en besluitvorming."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en visuele systemen.",
+        "wat": "Het vermogen om visuele informatie waar te nemen.",
+        "wanneer": "Wanneer er voldoende licht en een werkend gezichtsvermogen aanwezig is.",
+        "waar": "Overal waar visuele waarneming mogelijk is.",
+        "waarom": "Om de omgeving te herkennen, te begrijpen en veilig te kunnen handelen.",
+        "hoe": "Doordat licht via de ogen wordt opgevangen en door de hersenen wordt verwerkt."
+      },
+      "tags": [
+        "zicht",
+        "zien",
+        "waarneming",
+        "zintuig",
+        "ogen",
+        "informatie",
+        "omgeving",
+        "observatie",
+        "herkenning",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-111e9236",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.882061+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-8332a5b7",
+      "begrip": "stroming",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een stroming is een beweging van een vloeistof, gas of groep in een bepaalde richting.",
+        "laag2": "Stromingen verplaatsen water, lucht, energie, mensen of ideeën van de ene plaats naar de andere.",
+        "laag3": "Een stroming is een voortdurende beweging in een bepaalde richting. In de natuur komt een stroming voor in water, lucht of magma. In de samenleving kan een stroming ook een groep mensen of ideeën zijn met dezelfde overtuigingen of doelen, zoals een politieke, religieuze of artistieke stroming. De betekenis hangt af van de context, maar draait altijd om richting en beweging.",
+        "laag4": "Stromingen beïnvloeden hun omgeving door energie, materialen of ideeën te verplaatsen. Binnen Spark is een stroming een proces waarbij iets zich door een systeem beweegt en daardoor verandering of interactie veroorzaakt."
+      },
+      "ws5": {
+        "wie": "Water, lucht, mensen, energie of ideeën.",
+        "wat": "Een beweging in een bepaalde richting.",
+        "wanneer": "Wanneer iets zich voortdurend verplaatst.",
+        "waar": "In rivieren, zeeën, de atmosfeer, leidingen of de samenleving.",
+        "waarom": "Door natuurkundige krachten of gedeelde overtuigingen.",
+        "hoe": "Door een voortdurende verplaatsing in een bepaalde richting."
+      },
+      "tags": [
+        "stroming",
+        "beweging",
+        "richting",
+        "water",
+        "lucht",
+        "energie",
+        "proces",
+        "systeem",
+        "natuur",
+        "samenleving",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-8332a5b7",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.905600+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-6c124e21",
+      "begrip": "uitrusting",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Uitrusting is de verzameling van hulpmiddelen, kleding en materialen die nodig zijn voor een bepaalde taak of activiteit.",
+        "laag2": "Een uitrusting helpt mensen om veilig, efficiënt of comfortabel een activiteit uit te voeren.",
+        "laag3": "Een uitrusting bestaat uit alle voorwerpen die iemand meeneemt of draagt voor een specifieke situatie. Dit kunnen gereedschappen, beschermende kleding, wapens, medische materialen, kampeeruitrusting of sportartikelen zijn. De inhoud van een uitrusting hangt af van het doel en de omgeving waarin deze wordt gebruikt.",
+        "laag4": "Een goede uitrusting vergroot veiligheid, prestaties en voorbereiding. Binnen Spark is een uitrusting een verzameling objecten die aan een persoon, rol of systeem gekoppeld zijn om bepaalde taken of functies mogelijk te maken."
+      },
+      "ws5": {
+        "wie": "Mensen, hulpdiensten, militairen, sporters en reizigers.",
+        "wat": "Een verzameling hulpmiddelen, kleding en materialen.",
+        "wanneer": "Voor of tijdens een taak, activiteit of missie.",
+        "waar": "Op het werk, in de natuur, tijdens sport, reizen of noodsituaties.",
+        "waarom": "Om goed voorbereid, veilig en effectief te kunnen handelen.",
+        "hoe": "Door de benodigde materialen te verzamelen, mee te nemen en te gebruiken."
+      },
+      "tags": [
+        "uitrusting",
+        "materiaal",
+        "gereedschap",
+        "hulpmiddel",
+        "bescherming",
+        "voorbereiding",
+        "object",
+        "taak",
+        "veiligheid",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-6c124e21",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.403030+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-781813b4",
+      "begrip": "service",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Service is het verlenen van hulp, ondersteuning of dienstverlening aan anderen.",
+        "laag2": "Service zorgt ervoor dat mensen of organisaties worden geholpen bij het gebruiken van een product of dienst.",
+        "laag3": "Service is het geheel van handelingen waarmee iemand ondersteuning, hulp of dienstverlening biedt aan een klant, gebruiker of andere persoon. Goede service bestaat uit behulpzaamheid, duidelijke communicatie, betrouwbaarheid en het oplossen van vragen of problemen. Service komt voor in winkels, bedrijven, zorg, horeca, overheid en digitale systemen.",
+        "laag4": "Service draagt bij aan tevredenheid, vertrouwen en een goede samenwerking. Binnen Spark is service een proces waarbij een persoon of systeem ondersteuning biedt om een behoefte te vervullen, een probleem op te lossen of een taak gemakkelijker te maken."
+      },
+      "ws5": {
+        "wie": "Medewerkers, organisaties, systemen en klanten.",
+        "wat": "Het verlenen van hulp of dienstverlening.",
+        "wanneer": "Wanneer ondersteuning, informatie of hulp nodig is.",
+        "waar": "Bij bedrijven, organisaties, winkels, zorginstellingen en digitale diensten.",
+        "waarom": "Om gebruikers of klanten te helpen en hun ervaring te verbeteren.",
+        "hoe": "Door vragen te beantwoorden, problemen op te lossen en ondersteuning te bieden."
+      },
+      "tags": [
+        "service",
+        "dienstverlening",
+        "ondersteuning",
+        "hulp",
+        "communicatie",
+        "samenwerking",
+        "klant",
+        "organisatie",
+        "proces",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-781813b4",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.086845+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
           "lade": "weten"
         }
       ]

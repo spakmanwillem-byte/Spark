@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 436,
+    "card_count": 440,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-16T19:58:01.264787+00:00",
+    "last_updated": "2026-06-26T23:03:29.033973+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -60049,6 +60049,618 @@
           "ts": "2026-06-26T22:38:00.617546+00:00",
           "actie": "filled_from_doc",
           "bron": "verlorenkennis.txt",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-941bc1b1",
+      "begrip": "liefde",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Liefde is een sterke positieve emotie van verbondenheid, zorg en genegenheid.",
+        "laag2": "Liefde zorgt ervoor dat mensen zich verbonden voelen en om elkaar geven.",
+        "laag3": "Liefde is een diepe emotie die kan bestaan tussen partners, familieleden, vrienden of andere mensen. Liefde uit zich vaak in zorg, vertrouwen, respect, aandacht en het verlangen naar het welzijn van de ander. Liefde kent verschillende vormen, zoals romantische liefde, ouderliefde, vriendschap en naastenliefde.",
+        "laag4": "Liefde speelt een belangrijke rol in relaties, sociale ontwikkeling en welzijn. De manier waarop liefde wordt ervaren en geuit verschilt per persoon, cultuur en situatie. Binnen Spark is liefde een fundamentele emotie die gedrag, keuzes en sociale verbinding beïnvloedt."
+      },
+      "ws5": {
+        "wie": "Mensen en soms ook dieren.",
+        "wat": "Een sterke emotie van verbondenheid, zorg en genegenheid.",
+        "wanneer": "Wanneer een sterke band of affectie ontstaat.",
+        "waar": "In relaties, gezinnen, vriendschappen en sociale omgevingen.",
+        "waarom": "Om verbondenheid, zorg en vertrouwen tussen individuen te versterken.",
+        "hoe": "Door aandacht, respect, zorg, steun en genegenheid te tonen."
+      },
+      "tags": [
+        "liefde",
+        "emotie",
+        "blij",
+        "verbondenheid",
+        "genegenheid",
+        "zorg",
+        "vertrouwen",
+        "relatie",
+        "sociaal",
+        "affectie",
+        "welzijn",
+        "ontwikkeling"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-941bc1b1",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:23.197601+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-0c8d93d2",
+      "begrip": "voorkeur",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een voorkeur is wat iemand liever kiest of prettiger vindt.",
+        "laag2": "Een voorkeur helpt mensen keuzes te maken tussen verschillende mogelijkheden.",
+        "laag3": "Een voorkeur is een persoonlijke neiging om de ene optie boven een andere te kiezen. Voorkeuren kunnen gebaseerd zijn op ervaringen, behoeften, smaak, overtuigingen of gevoelens. Ze kunnen betrekking hebben op eten, muziek, mensen, activiteiten of andere onderwerpen en kunnen in de loop van de tijd veranderen.",
+        "laag4": "Voorkeuren verschillen per persoon en zijn een belangrijk onderdeel van gedrag en besluitvorming. Binnen Spark is een voorkeur een persoonlijke eigenschap die invloed heeft op keuzes, aanbevelingen en interacties. Voorkeuren zijn niet goed of fout, maar beschrijven wat iemand het liefst heeft."
+      },
+      "ws5": {
+        "wie": "Mensen en soms intelligente systemen.",
+        "wat": "Een persoonlijke keuze of favoriete optie.",
+        "wanneer": "Wanneer er meerdere mogelijkheden zijn om uit te kiezen.",
+        "waar": "In het dagelijks leven, op school, op het werk en in digitale systemen.",
+        "waarom": "Omdat mensen verschillende behoeften, ervaringen en interesses hebben.",
+        "hoe": "Door een optie te kiezen die beter aansluit bij persoonlijke wensen of gevoelens."
+      },
+      "tags": [
+        "voorkeur",
+        "keuze",
+        "voorkeuren",
+        "gedrag",
+        "persoonlijk",
+        "interesse",
+        "wens",
+        "besluit",
+        "ontwikkeling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-0c8d93d2",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:47.216049+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T22:56:24.996369+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T22:56:24.996369+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 3)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-870f6b5d",
+      "begrip": "moed",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Moed is de bereidheid om iets te doen ondanks angst of risico.",
+        "laag2": "Moed helpt mensen om moeilijke, spannende of gevaarlijke situaties aan te gaan.",
+        "laag3": "Moed is de innerlijke kracht om te handelen terwijl er angst, onzekerheid of risico aanwezig is. Iemand met moed durft op te komen voor zichzelf of anderen, nieuwe uitdagingen aan te gaan of moeilijke beslissingen te nemen. Moed betekent niet dat iemand geen angst voelt, maar dat die angst het handelen niet tegenhoudt.\n",
+        "laag4": "Moed speelt een belangrijke rol in persoonlijke ontwikkeling, leiderschap en sociale situaties. Wat moed vraagt verschilt per persoon en situatie. Binnen Spark is moed een emotionele eigenschap die invloed heeft op keuzes, gedrag en doorzettingsvermogen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen en soms dieren.",
+        "wat": "De bereidheid om ondanks angst of risico te handelen.",
+        "wanneer": "Bij moeilijke, spannende of gevaarlijke situaties.",
+        "waar": "In het dagelijks leven, werk, school, sport en noodsituaties.",
+        "waarom": "Om doelen te bereiken, anderen te helpen of obstakels te overwinnen.",
+        "hoe": "Door angst te erkennen en toch bewust actie te ondernemen."
+      },
+      "tags": [
+        "moed",
+        "emotie",
+        "dapper",
+        "vertrouwen",
+        "doorzettingsvermogen",
+        "karakter",
+        "ontwikkeling",
+        "gedrag",
+        "keuze",
+        "veerkracht",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-428e3450",
+          "begrip": "flexibiliteit",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d4ea2f35",
+          "begrip": "durf",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "moed",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-74c6dbff",
+          "begrip": "behoefte",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-0c8d93d2",
+          "begrip": "voorkeur",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-efc79cce",
+          "begrip": "mogelijkheden",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "keuze",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-26T23:03:29.033954+00:00",
+        "vorige_versie_v1": "kb-skel-870f6b5d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:05.033161+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:03:21.677181+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:03:21.684285+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-26T23:03:29.225331+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-26T23:03:29.232510+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-26T23:03:21.571704+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-851e9eef",
+      "begrip": "bewondering",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bewondering is een gevoel van respect of waardering voor iemand of iets.",
+        "laag2": "Bewondering ontstaat wanneer iemand positieve eigenschappen, prestaties of schoonheid herkent.",
+        "laag3": "Bewondering is een positieve emotie waarbij iemand respect, waardering of ontzag voelt voor een persoon, dier, object of gebeurtenis. Dit gevoel kan ontstaan door talent, moed, vriendelijkheid, schoonheid, kennis of bijzondere prestaties. Bewondering kan mensen inspireren om zelf te leren, te groeien of doelen na te streven.",
+        "laag4": "Bewondering speelt een belangrijke rol in motivatie, leren en sociale relaties. Binnen Spark is bewondering een positieve emotionele toestand die kan ontstaan door observatie of ervaring en invloed heeft op aandacht, waardering en gedrag."
+      },
+      "ws5": {
+        "wie": "Mensen.",
+        "wat": "Een gevoel van respect, waardering of ontzag.",
+        "wanneer": "Wanneer iemand iets bijzonders, moois of indrukwekkends ervaart.",
+        "waar": "In sociale situaties, de natuur, kunst, sport, wetenschap en het dagelijks leven.",
+        "waarom": "Omdat iemand positieve eigenschappen of prestaties herkent.",
+        "hoe": "Door iets waar te nemen dat indruk maakt of inspireert."
+      },
+      "tags": [
+        "bewondering",
+        "waardering",
+        "respect",
+        "ontzag",
+        "emotie",
+        "blij",
+        "gevoel",
+        "inspiratie",
+        "motivatie",
+        "sociaal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-851e9eef",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.104366+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-6eac9d9d",
+      "begrip": "vriendelijkheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Vriendelijkheid is de bereidheid om aardig, behulpzaam en respectvol met anderen om te gaan.",
+        "laag2": "Vriendelijkheid zorgt voor positieve sociale interacties en een prettige omgang tussen mensen.",
+        "laag3": "Vriendelijkheid is een positieve houding waarbij iemand rekening houdt met anderen en zich behulpzaam, beleefd en respectvol opstelt. Vriendelijke mensen tonen vaak begrip, aandacht en geduld. Vriendelijkheid kan worden uitgedrukt door woorden, gedrag of kleine gebaren en draagt bij aan vertrouwen en samenwerking.",
+        "laag4": "Vriendelijkheid versterkt sociale relaties en bevordert een veilige en prettige omgeving. Binnen Spark is vriendelijkheid een positieve emotionele eigenschap die invloed heeft op communicatie, samenwerking en het welzijn van anderen."
+      },
+      "ws5": {
+        "wie": "Mensen.",
+        "wat": "Een positieve houding van aardig, behulpzaam en respectvol gedrag.",
+        "wanneer": "Tijdens sociale interacties en samenwerking.",
+        "waar": "Thuis, op school, op het werk en in het dagelijks leven.",
+        "waarom": "Om prettig met anderen om te gaan en positieve relaties op te bouwen.",
+        "hoe": "Door respect, aandacht, behulpzaamheid en beleefdheid te tonen."
+      },
+      "tags": [
+        "vriendelijkheid",
+        "aardig",
+        "behulpzaam",
+        "respect",
+        "sociaal",
+        "samenwerking",
+        "communicatie",
+        "gedrag",
+        "houding",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-6eac9d9d",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.663261+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-b63cd623",
+      "begrip": "slaap",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Slaap is een natuurlijke toestand van rust waarin lichaam en hersenen herstellen.",
+        "laag2": "Tijdens de slaap herstellen lichaam en geest zich en worden energie en informatie verwerkt.",
+        "laag3": "Slaap is een terugkerende biologische toestand waarin het bewustzijn afneemt en het lichaam tot rust komt. Tijdens de slaap herstellen spieren en organen zich, worden herinneringen verwerkt en krijgt het lichaam nieuwe energie. Voldoende slaap is belangrijk voor gezondheid, concentratie, leren en emotioneel welzijn.",
+        "laag4": "Slaap bestaat uit verschillende fasen, waaronder lichte slaap, diepe slaap en droomslaap (REM-slaap). Binnen Spark is slaap een biologische toestand die herstel, energie, geheugenverwerking en emotionele balans ondersteunt."
+      },
+      "ws5": {
+        "wie": "Mensen en dieren.",
+        "wat": "Een natuurlijke toestand van rust en herstel.",
+        "wanneer": "Meestal dagelijks volgens een slaapritme.",
+        "waar": "Op een veilige en geschikte rustplaats.",
+        "waarom": "Om lichaam en geest te laten herstellen en energie aan te vullen.",
+        "hoe": "Door in slaap te vallen en verschillende slaapfasen te doorlopen."
+      },
+      "tags": [
+        "slaap",
+        "rust",
+        "herstel",
+        "gezondheid",
+        "energie",
+        "lichaam",
+        "hersenen",
+        "biologisch",
+        "ritme",
+        "welzijn",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-b63cd623",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.470270+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-7a56e09b",
+      "begrip": "enthousiasme",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Enthousiasme is een gevoel van sterke interesse, energie en motivatie.",
+        "laag2": "Enthousiasme zorgt ervoor dat mensen met plezier en inzet ergens aan beginnen of mee doorgaan.",
+        "laag3": "Enthousiasme is een positieve emotie waarbij iemand veel belangstelling, energie of opwinding voelt voor een activiteit, idee of doel. Enthousiaste mensen tonen vaak initiatief, betrokkenheid en doorzettingsvermogen. Enthousiasme kan aanstekelijk werken en anderen motiveren om mee te doen.",
+        "laag4": "Enthousiasme bevordert motivatie, creativiteit en samenwerking. Binnen Spark is enthousiasme een positieve emotionele toestand die invloed heeft op gedrag, communicatie, leren en het behalen van doelen."
+      },
+      "ws5": {
+        "wie": "Mensen.",
+        "wat": "Een gevoel van sterke interesse, energie en motivatie.",
+        "wanneer": "Wanneer iemand ergens veel plezier of interesse in heeft.",
+        "waar": "Op school, op het werk, tijdens hobby's, sport en in het dagelijks leven.",
+        "waarom": "Omdat een activiteit, doel of onderwerp inspireert of motiveert.",
+        "hoe": "Door positieve ervaringen, interesse, succes of inspiratie."
+      },
+      "tags": [
+        "enthousiasme",
+        "motivatie",
+        "energie",
+        "interesse",
+        "betrokkenheid",
+        "gedrag",
+        "gevoel",
+        "inspiratie",
+        "positief",
+        "emotie",
+        "blij"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-7a56e09b",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.244408+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:20:01.717914+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:20:01.717914+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 4)",
           "lade": "voelen"
         }
       ]

@@ -139606,6 +139606,559 @@
           "lade": "doen"
         }
       ]
+    },
+    {
+      "id": "kbv2-skel-2979ecba",
+      "begrip": "reizen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Reizen is het verplaatsen van de ene plaats naar een andere.",
+        "laag2": "Mensen reizen om een bestemming te bereiken, bijvoorbeeld voor werk, vakantie of bezoek.",
+        "laag3": "Reizen is de handeling waarbij iemand zich verplaatst tussen verschillende locaties. Dit kan te voet of met vervoermiddelen zoals een auto, fiets, trein, vliegtuig of schip. Mensen reizen om uiteenlopende redenen, zoals werk, onderwijs, vakantie, familiebezoek of handel.",
+        "laag4": "Reizen verbindt mensen, plaatsen en culturen en speelt een belangrijke rol in mobiliteit en economie. Binnen Spark is reizen een activiteit waarbij een persoon of groep zich doelgericht verplaatst van een vertrekpunt naar een bestemming."
+      },
+      "ws5": {
+        "wie": "Mensen en reizigers.",
+        "wat": "Het verplaatsen van de ene plaats naar een andere.",
+        "wanneer": "Wanneer iemand een andere bestemming wil bereiken.",
+        "waar": "Tussen steden, landen of andere locaties.",
+        "waarom": "Voor werk, studie, vakantie, bezoek of andere doelen.",
+        "hoe": "Te voet of met een vervoermiddel zoals een fiets, auto, trein, schip of vliegtuig."
+      },
+      "tags": [
+        "reizen",
+        "verplaatsen",
+        "vervoer",
+        "mobiliteit",
+        "bestemming",
+        "route",
+        "activiteit",
+        "beweging",
+        "transport",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-2979ecba",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.492483+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-2e0a0e99",
+      "begrip": "Rijzen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Rijzen is het groter worden van deeg door de vorming van gas.",
+        "laag2": "Tijdens het rijzen wordt deeg luchtiger en neemt het in volume toe.",
+        "laag3": "Rijzen is het proces waarbij deeg groter en luchtiger wordt. Dit gebeurt meestal doordat gist suikers omzet in koolstofdioxide. De gasbelletjes blijven in het deeg zitten, waardoor het uitzet. Ook andere rijsmiddelen, zoals bakpoeder of zuurdesem, kunnen ervoor zorgen dat deeg rijst.",
+        "laag4": "Rijzen is een belangrijk onderdeel van het bakken van brood, pizza en andere deegproducten. Binnen Spark is rijzen een biologisch of chemisch proces waarbij een materiaal in volume toeneemt door de vorming van gas."
+      },
+      "ws5": {
+        "wie": "Bakkers, koks en thuisbakkers.",
+        "wat": "Het groter en luchtiger worden van deeg.",
+        "wanneer": "Na het mengen van het deeg en vóór het bakken.",
+        "waar": "In bakkerijen, keukens en andere plaatsen waar deeg wordt bereid.",
+        "waarom": "Om een luchtige structuur en betere smaak te krijgen.",
+        "hoe": "Door gist, zuurdesem of een ander rijsmiddel dat gas vormt waardoor het deeg uitzet."
+      },
+      "tags": [
+        "rijzen",
+        "deeg",
+        "bakken",
+        "gist",
+        "zuurdesem",
+        "bakpoeder",
+        "gas",
+        "volume",
+        "proces",
+        "voedsel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "voeding",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-7da29bc0",
+          "begrip": "Gist",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "brood",
+            "fermentatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "Willem Spakman",
+        "ingedeeld_door": "kbv2_migratie",
+        "ingedeeld_op": "2026-05-23T12:02:15.267539+00:00",
+        "vorige_versie_v1": "snap-5eae3841",
+        "vertrouwen": 0.85,
+        "belangrijkheid": 3,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:07.739291+00:00",
+            "result": {
+              "active": true,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-05-25T15:24:07.741516+00:00",
+            "result": {
+              "n_found": 1,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": true
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-5e84ebd5",
+      "begrip": "verdelen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verdelen is het opsplitsen van iets in meerdere delen.",
+        "laag2": "Verdelen wordt gebruikt om middelen, taken, ruimte of hoeveelheden over meerdere personen of onderdelen te verspreiden.",
+        "laag3": "Verdelen is de handeling waarbij een geheel wordt opgesplitst en over meerdere personen, objecten of plaatsen wordt verspreid. Dit kan gaan om het verdelen van voedsel, geld, werk, tijd, ruimte of informatie. Het doel van verdelen is vaak om iets eerlijk, efficiënt of doelgericht toe te wijzen.",
+        "laag4": "Verdelen is een fundamenteel proces in samenwerking, logistiek, economie en organisatie. Binnen Spark is verdelen een actie waarbij een hoeveelheid of verzameling systematisch wordt toegewezen aan meerdere ontvangers of onderdelen volgens bepaalde regels of keuzes."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Het opsplitsen en toewijzen van een geheel.",
+        "wanneer": "Wanneer iets over meerdere personen of onderdelen moet worden verdeeld.",
+        "waar": "In huishoudens, bedrijven, scholen, logistiek en digitale systemen.",
+        "waarom": "Om middelen, taken of informatie eerlijk of efficiënt te verdelen.",
+        "hoe": "Door een geheel op te splitsen en de delen toe te wijzen aan verschillende ontvangers of locaties."
+      },
+      "tags": [
+        "verdelen",
+        "verdeling",
+        "toewijzen",
+        "verspreiden",
+        "proces",
+        "samenwerking",
+        "organisatie",
+        "systeem",
+        "actie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-5e84ebd5",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.172367+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-4477615d",
+      "begrip": "fijnmaken",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Fijnmaken is het kleiner maken van een materiaal of voedingsmiddel.",
+        "laag2": "Bij fijnmaken wordt een voorwerp of stof verdeeld in kleinere stukjes of deeltjes.",
+        "laag3": "Fijnmaken is de handeling waarbij een materiaal, voedsel of andere stof wordt verkleind door te snijden, malen, raspen, hakken, pletten of vermalen. Het doel kan zijn om de verwerking, bereiding, menging of opname te verbeteren. Fijnmaken wordt toegepast in koken, industrie, landbouw en productie.",
+        "laag4": "Fijnmaken is een bewerkingsproces waarbij de structuur van een materiaal verandert door het op te delen in kleinere delen. Binnen Spark is fijnmaken een fysieke actie die de grootte en vorm van een object of stof wijzigt zonder de samenstelling direct te veranderen."
+      },
+      "ws5": {
+        "wie": "Mensen, machines en systemen.",
+        "wat": "Het kleiner maken van een materiaal of voedingsmiddel.",
+        "wanneer": "Tijdens bereiding, verwerking of productie.",
+        "waar": "In keukens, fabrieken, laboratoria en werkplaatsen.",
+        "waarom": "Om een materiaal beter te verwerken, mengen of gebruiken.",
+        "hoe": "Door te snijden, hakken, malen, raspen, pletten of vermalen."
+      },
+      "tags": [
+        "fijnmaken",
+        "verkleinen",
+        "malen",
+        "hakken",
+        "raspen",
+        "pletten",
+        "vermalen",
+        "bewerken",
+        "materiaal",
+        "voedsel",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-4477615d",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.532844+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-b51a0224",
+      "begrip": "vervolg",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een vervolg is datgene wat na iets anders komt of erop aansluit.",
+        "laag2": "Een vervolg bouwt voort op een eerdere gebeurtenis, handeling of situatie.",
+        "laag3": "Een vervolg is de volgende stap, fase of gebeurtenis die aansluit op iets wat eerder heeft plaatsgevonden. Het kan gaan om een gesprek, verhaal, proces, onderzoek, behandeling of activiteit. Een vervolg zorgt ervoor dat een ontwikkeling of reeks gebeurtenissen wordt voortgezet.",
+        "laag4": "Een vervolg maakt continuïteit en ontwikkeling mogelijk. Binnen Spark is een vervolg een opeenvolgende stap binnen een proces, gebeurtenis of interactie, waarbij eerdere informatie of acties als basis dienen voor wat daarna gebeurt."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "De volgende stap of voortzetting van iets.",
+        "wanneer": "Na een eerdere gebeurtenis, actie of fase.",
+        "waar": "In gesprekken, processen, verhalen, projecten en activiteiten.",
+        "waarom": "Om een ontwikkeling voort te zetten of een doel verder te bereiken.",
+        "hoe": "Door aan te sluiten op wat eerder is gebeurd of besloten."
+      },
+      "tags": [
+        "vervolg",
+        "voortzetting",
+        "opvolging",
+        "proces",
+        "ontwikkeling",
+        "tijd",
+        "gebeurtenis",
+        "planning",
+        "systeem",
+        "continuiteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-b51a0224",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.690002+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-289fc9dd",
+      "begrip": "verzorging",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verzorging is het zorgen voor het welzijn, de gezondheid of het onderhoud van iemand of iets.",
+        "laag2": "Verzorging helpt mensen, dieren, planten of objecten gezond, schoon en in goede staat te houden.",
+        "laag3": "Verzorging omvat alle handelingen die bijdragen aan het welzijn, de gezondheid of het onderhoud van een persoon, dier, plant of object. Dit kan bestaan uit wassen, voeden, behandelen, schoonmaken, onderhouden of beschermen. Goede verzorging voorkomt achteruitgang en bevordert herstel, groei en kwaliteit.",
+        "laag4": "Verzorging is een belangrijk onderdeel van gezondheid, opvoeding, natuurbeheer en onderhoud. Binnen Spark is verzorging een doelgerichte activiteit waarbij aandacht en handelingen worden ingezet om het functioneren of de conditie van een levend wezen of object te behouden of te verbeteren."
+      },
+      "ws5": {
+        "wie": "Mensen, verzorgers, zorgverleners en eigenaren.",
+        "wat": "Het zorgen voor gezondheid, welzijn of onderhoud.",
+        "wanneer": "Wanneer iemand of iets zorg of onderhoud nodig heeft.",
+        "waar": "Thuis, in de zorg, op school, in de natuur en op de werkplek.",
+        "waarom": "Om gezondheid, veiligheid, groei of een goede conditie te behouden of te verbeteren.",
+        "hoe": "Door te verzorgen, schoon te maken, te voeden, te behandelen of te onderhouden."
+      },
+      "tags": [
+        "verzorging",
+        "zorg",
+        "onderhoud",
+        "gezondheid",
+        "welzijn",
+        "hygiëne",
+        "ondersteuning",
+        "bescherming",
+        "proces",
+        "hulp",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-289fc9dd",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.767303+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-e4065891",
+      "begrip": "inschatting",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een inschatting is een beoordeling of verwachting op basis van beschikbare informatie.",
+        "laag2": "Een inschatting wordt gemaakt om een situatie, risico, kans of uitkomst te beoordelen wanneer niet alle informatie bekend is.",
+        "laag3": "Een inschatting is het proces waarbij beschikbare informatie, ervaring en observaties worden gebruikt om een verwachting of oordeel te vormen. Een inschatting helpt bij het nemen van beslissingen, het plannen van acties en het beoordelen van kansen of risico's. Een inschatting is nooit volledig zeker en kan veranderen wanneer nieuwe informatie beschikbaar komt.",
+        "laag4": "Binnen Spark is een inschatting een denkactie die voorafgaat aan een beslissing of reactie. Zowel mensen als AI-systemen maken voortdurend inschattingen om situaties te begrijpen, prioriteiten te bepalen en passende acties te kiezen. Een goede inschatting combineert kennis, context, ervaring en waarschijnlijkheid."
+      },
+      "ws5": {
+        "wie": "Mensen, AI-systemen en organisaties.",
+        "wat": "Het beoordelen of voorspellen van een situatie op basis van beschikbare informatie.",
+        "wanneer": "Wanneer een beslissing, verwachting of beoordeling nodig is.",
+        "waar": "In het dagelijks leven, werk, wetenschap, games en digitale systemen.",
+        "waarom": "Om betere keuzes te maken en risico's, kansen of gevolgen te beoordelen.",
+        "hoe": "Door informatie, ervaring, context en observaties te analyseren en daaruit een verwachting te vormen."
+      },
+      "tags": [
+        "inschatting",
+        "beoordelen",
+        "voorspellen",
+        "analyse",
+        "besluitvorming",
+        "verwachting",
+        "risico",
+        "context",
+        "informatie",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-e4065891",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.698387+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "doen",
+          "overwrite": false
+        }
+      ]
     }
   ],
   "updated_at": "2026-06-11T13:32:52.554444+00:00"

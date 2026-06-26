@@ -33241,81 +33241,6 @@
       ]
     },
     {
-      "id": "kbv2-2e0a0e99",
-      "begrip": "Rijzen",
-      "lade": "weten",
-      "status": "active",
-      "lagen": {
-        "laag1": "Rijzen betekent dat deeg groter en luchtiger wordt door gasvorming.",
-        "laag2": "Het rijzen van deeg gebeurt meestal door gist of andere rijsmiddelen. Tijdens dit proces ontstaan gasbelletjes die het deeg laten uitzetten.",
-        "laag3": "Wanneer deeg rijst, produceren micro-organismen zoals gist gas terwijl zij suikers afbreken. Dit gas blijft in het deeg gevangen en vormt kleine luchtkamers. Hierdoor neemt het volume van het deeg toe en wordt het lichter en luchtiger. Dit proces is belangrijk bij het maken van brood, pizza en andere bakproducten.",
-        "laag4": "Het rijzen van deeg gebeurt tijdens een proces dat fermentatie wordt genoemd. De koolstofdioxide die ontstaat, wordt vastgehouden door het gluten-netwerk in het deeg. Hierdoor kan het deeg uitzetten zonder direct in te zakken. Temperatuur, vocht en tijd hebben grote invloed op hoe goed deeg rijst. In sommige recepten worden ook chemische rijsmiddelen gebruikt, zoals bakpoeder, die gas vormen tijdens het bakken."
-      },
-      "ws5": {
-        "wie": "Bakkers, koks en mensen die deegproducten maken.",
-        "wat": "Het proces waarbij deeg groter en luchtiger wordt.",
-        "wanneer": "Tijdens het rusten van deeg voordat het wordt gebakken.",
-        "waar": "In keukens, bakkerijen en voedselproductie.",
-        "waarom": "Om deeg luchtiger en zachter te maken.",
-        "hoe": "Door gasvorming van gist of andere rijsmiddelen die het deeg laten uitzetten."
-      },
-      "tags": [
-        "akken",
-        "deeg",
-        "fermentatie",
-        "Gist",
-        "brood"
-      ],
-      "topic": "voeding",
-      "verbanden": [
-        {
-          "kaart_id": "kbv2-7da29bc0",
-          "begrip": "Gist",
-          "lade": "weten",
-          "overlap": 2,
-          "shared_tags": [
-            "brood",
-            "fermentatie"
-          ]
-        }
-      ],
-      "footnote": {
-        "bron": "Willem Spakman",
-        "ingedeeld_door": "kbv2_migratie",
-        "ingedeeld_op": "2026-05-23T12:02:15.267539+00:00",
-        "vorige_versie_v1": "snap-5eae3841",
-        "vertrouwen": 0.85,
-        "belangrijkheid": 3,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:07.739291+00:00",
-            "result": {
-              "active": true,
-              "is_new": true
-            }
-          },
-          {
-            "hook": "compute_verbanden",
-            "fired_at": "2026-05-25T15:24:07.741516+00:00",
-            "result": {
-              "n_found": 1,
-              "top_overlap": 2
-            }
-          }
-        ]
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-5389bb62",
       "begrip": "Honing",
       "lade": "weten",
@@ -265226,6 +265151,542 @@
           "actie": "filled_from_doc",
           "bron": "verlorenkennis.txt (batch 4)",
           "lade": "weten"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-58147fb2",
+      "begrip": "scheiding",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een scheiding is het uit elkaar gaan of verdelen van mensen, materialen of onderdelen.",
+        "laag2": "Een scheiding zorgt ervoor dat één geheel wordt opgesplitst in twee of meer afzonderlijke delen.",
+        "laag3": "Een scheiding is het proces of de toestand waarbij een verbinding wordt verbroken of een geheel wordt verdeeld. Dit kan gaan om een relatie tussen mensen, een juridische echtscheiding, het scheiden van afval, het scheiden van stoffen in de natuurkunde of het verdelen van ruimtes door een wand of grens. De betekenis hangt af van de context, maar draait steeds om het uit elkaar brengen van een geheel.",
+        "laag4": "Scheidingen komen voor in sociale, juridische, technische en natuurkundige systemen. Binnen Spark is een scheiding een verandering waarbij bestaande verbindingen of onderdelen worden losgemaakt, waardoor nieuwe afzonderlijke eenheden ontstaan."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties, materialen of systemen.",
+        "wat": "Het uit elkaar gaan of verdelen van een geheel.",
+        "wanneer": "Wanneer een verbinding wordt verbroken of onderdelen worden gescheiden.",
+        "waar": "In relaties, huishoudens, industrie, wetenschap en de natuur.",
+        "waarom": "Om onderdelen van elkaar te onderscheiden, te verdelen of een relatie te beëindigen.",
+        "hoe": "Door een verbinding te verbreken of een geheel op te splitsen in afzonderlijke delen."
+      },
+      "tags": [
+        "scheiding",
+        "verdeling",
+        "verbinding",
+        "relatie",
+        "proces",
+        "verandering",
+        "systeem",
+        "structuur",
+        "juridisch",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-58147fb2",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.559333+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-68a83f90",
+      "begrip": "behoud",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Behoud is het in stand houden of beschermen van iets.",
+        "laag2": "Behoud zorgt ervoor dat iets waardevols blijft bestaan of niet verloren gaat.",
+        "laag3": "Behoud is het bewust beschermen, onderhouden of bewaren van mensen, objecten, natuur, kennis of andere waardevolle zaken. Het doel is om te voorkomen dat iets verdwijnt, beschadigt of achteruitgaat. Behoud speelt een belangrijke rol in natuurbeheer, cultureel erfgoed, gezondheid, techniek en informatiebeheer.",
+        "laag4": "Behoud is essentieel voor duurzaamheid en continuïteit. Binnen Spark is behoud een proces of doel waarbij eigenschappen, informatie, objecten of systemen zoveel mogelijk onveranderd of bruikbaar worden gehouden ondanks veranderingen in de omgeving."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Het beschermen of in stand houden van iets.",
+        "wanneer": "Wanneer iets waardevol of belangrijk is om te behouden.",
+        "waar": "In de natuur, cultuur, techniek, organisaties en digitale systemen.",
+        "waarom": "Om verlies, schade of achteruitgang te voorkomen.",
+        "hoe": "Door onderhoud, bescherming, beheer en zorgvuldig gebruik."
+      },
+      "tags": [
+        "behoud",
+        "bescherming",
+        "behouden",
+        "onderhoud",
+        "duurzaamheid",
+        "continuiteit",
+        "beheer",
+        "waarde",
+        "systeem",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-68a83f90",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.145186+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-ec210aff",
+      "begrip": "saus",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Saus is een vloeibare of halfvloeibare toevoeging die smaak, structuur of vocht aan voedsel geeft.",
+        "laag2": "Saus wordt gebruikt om gerechten smaakvoller, smeuïger of aantrekkelijker te maken.",
+        "laag3": "Saus is een mengsel van ingrediënten dat als aanvulling op voedsel wordt gebruikt. Sauzen kunnen warm of koud zijn en bestaan uit bijvoorbeeld olie, water, room, tomaat, kruiden of specerijen. Bekende voorbeelden zijn tomatensaus, mayonaise, mosterd en currysaus. De samenstelling en smaak verschillen per keuken en toepassing.",
+        "laag4": "Sauzen spelen een belangrijke rol in veel keukens en kunnen de smaak, textuur en presentatie van een gerecht veranderen. Binnen Spark is saus een voedingsmiddel dat als toevoeging wordt gebruikt om andere voedingsmiddelen aan te vullen of te verrijken."
+      },
+      "ws5": {
+        "wie": "Koks, producenten en consumenten.",
+        "wat": "Een vloeibare of halfvloeibare toevoeging aan voedsel.",
+        "wanneer": "Tijdens of na het bereiden en serveren van gerechten.",
+        "waar": "In keukens, restaurants en voedselproductie.",
+        "waarom": "Om smaak, textuur of vocht aan een gerecht toe te voegen.",
+        "hoe": "Door ingrediënten te mengen, te bereiden en over of naast voedsel te serveren."
+      },
+      "tags": [
+        "saus",
+        "voedsel",
+        "smaak",
+        "koken",
+        "ingrediënt",
+        "voeding",
+        "keuken",
+        "bereiding",
+        "toevoeging",
+        "product",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-ec210aff",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:49.826897+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-b2c07e1c",
+      "begrip": "consistentie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Consistentie is de mate waarin iets hetzelfde of voorspelbaar blijft.",
+        "laag2": "Consistentie zorgt ervoor dat gedrag, eigenschappen of resultaten over langere tijd gelijk blijven.",
+        "laag3": "Consistentie betekent dat iets op een stabiele en samenhangende manier verloopt zonder onnodige tegenstrijdigheden. Dit kan betrekking hebben op gedrag, kwaliteit, informatie, processen of materialen. Een consistente aanpak maakt resultaten voorspelbaarder en betrouwbaarder. In de voedingsindustrie kan consistentie ook verwijzen naar de dikte of structuur van een product, zoals een saus of deeg.",
+        "laag4": "Consistentie is belangrijk voor vertrouwen, kwaliteit en efficiëntie. Binnen Spark is consistentie een eigenschap die aangeeft hoe stabiel, logisch en gelijkmatig informatie, gedrag, processen of systemen over de tijd blijven."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "De mate waarin iets stabiel en gelijk blijft.",
+        "wanneer": "Wanneer gedrag, informatie of processen herhaald worden.",
+        "waar": "In communicatie, organisaties, wetenschap, techniek en het dagelijks leven.",
+        "waarom": "Om betrouwbaarheid, kwaliteit en voorspelbaarheid te vergroten.",
+        "hoe": "Door dezelfde regels, werkwijzen of eigenschappen consequent toe te passen."
+      },
+      "tags": [
+        "consistentie",
+        "stabiliteit",
+        "betrouwbaarheid",
+        "kwaliteit",
+        "structuur",
+        "proces",
+        "gedrag",
+        "informatie",
+        "systeem",
+        "eigenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-b2c07e1c",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.236443+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-88ec335a",
+      "begrip": "uitzondering",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een uitzondering is een situatie die afwijkt van de algemene regel.",
+        "laag2": "Uitzonderingen komen voor wanneer een regel of patroon niet op een specifiek geval van toepassing is.",
+        "laag3": "Een uitzondering is een geval dat niet voldoet aan de normale regel, verwachting of werkwijze. Hoewel regels meestal voor veel situaties gelden, kunnen er omstandigheden zijn waarin een andere aanpak nodig is. Uitzonderingen komen voor in wetgeving, taal, wetenschap, techniek, programmeren en het dagelijks leven.",
+        "laag4": "Uitzonderingen maken systemen flexibeler en realistischer, omdat niet iedere situatie hetzelfde is. Binnen Spark is een uitzondering een speciale conditie waarbij de standaardregel tijdelijk of blijvend niet wordt toegepast en een afwijkende behandeling nodig is."
+      },
+      "ws5": {
+        "wie": "Mensen, organisaties en systemen.",
+        "wat": "Een situatie die afwijkt van een algemene regel.",
+        "wanneer": "Wanneer een standaardregel niet van toepassing is.",
+        "waar": "In wetgeving, taal, wetenschap, techniek, programmeren en het dagelijks leven.",
+        "waarom": "Omdat sommige situaties bijzondere voorwaarden of omstandigheden hebben.",
+        "hoe": "Door een afwijkende regel of behandeling toe te passen op een specifiek geval."
+      },
+      "tags": [
+        "uitzondering",
+        "regel",
+        "afwijking",
+        "conditie",
+        "systeem",
+        "structuur",
+        "besluit",
+        "logica",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-88ec335a",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.351290+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-5361f98a",
+      "begrip": "verspreiding",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Verspreiding is het zich uitbreiden of verdelen van iets over een groter gebied of meerdere plaatsen.",
+        "laag2": "Verspreiding beschrijft hoe mensen, objecten, stoffen, informatie of organismen zich verplaatsen of worden verdeeld.",
+        "laag3": "Verspreiding is het proces waarbij iets zich over een gebied, groep of systeem uitbreidt. Dit kan gaan om de verspreiding van planten en dieren, ziekten, informatie, warmte, geluid, licht of technologie. Verspreiding kan vanzelf plaatsvinden door natuurlijke processen of bewust worden veroorzaakt door mensen of systemen.",
+        "laag4": "Verspreiding speelt een belangrijke rol in natuur, wetenschap, communicatie en logistiek. Binnen Spark is verspreiding een proces waarbij informatie, energie, materialen of organismen zich van één bron naar meerdere locaties of ontvangers verplaatsen."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, organismen, systemen en natuurlijke processen.",
+        "wat": "Het uitbreiden of verdelen van iets over meerdere plaatsen.",
+        "wanneer": "Wanneer iets zich verplaatst of wordt doorgegeven.",
+        "waar": "In de natuur, samenleving, netwerken en digitale systemen.",
+        "waarom": "Door natuurlijke processen, communicatie, transport of bewuste verspreiding.",
+        "hoe": "Door beweging, overdracht, transport, groei of communicatie."
+      },
+      "tags": [
+        "verspreiding",
+        "verspreiden",
+        "uitbreiding",
+        "beweging",
+        "overdracht",
+        "informatie",
+        "natuur",
+        "systeem",
+        "groei",
+        "oppervlakte",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-5361f98a",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.419446+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-02a39418",
+      "begrip": "uiterlijk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Uiterlijk is hoe iemand of iets er aan de buitenkant uitziet.",
+        "laag2": "Het uiterlijk bestaat uit zichtbare kenmerken zoals vorm, kleur, grootte en stijl.",
+        "laag3": "Uiterlijk beschrijft de waarneembare eigenschappen van een persoon, dier, object of omgeving. Het gaat om kenmerken zoals lichaamsbouw, gezichtskenmerken, kleding, kleur, vorm, materiaal en afwerking. Het uiterlijk geeft een eerste indruk, maar zegt niet altijd iets over de eigenschappen, kwaliteit of het karakter van iemand of iets.",
+        "laag4": "Het uiterlijk speelt een belangrijke rol bij herkenning, communicatie en waarneming. Binnen Spark is uiterlijk een verzameling zichtbare eigenschappen waarmee mensen en systemen objecten, personen en andere entiteiten kunnen herkennen, onderscheiden en beschrijven."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, objecten en systemen.",
+        "wat": "De zichtbare buitenkant of verschijningsvorm.",
+        "wanneer": "Wanneer iets wordt waargenomen of beschreven.",
+        "waar": "Overal waar visuele waarneming mogelijk is.",
+        "waarom": "Om iets of iemand te herkennen, te onderscheiden of te beschrijven.",
+        "hoe": "Door zichtbare kenmerken zoals vorm, kleur, grootte, materiaal en stijl waar te nemen."
+      },
+      "tags": [
+        "uiterlijk",
+        "uiterlijkkenmerken",
+        "verschijning",
+        "vorm",
+        "kleur",
+        "waarneming",
+        "herkenning",
+        "eigenschappen",
+        "object",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-02a39418",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:50.802935+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-26T23:30:17.835861+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-26T23:30:17.835861+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 5)",
+          "lade": "weten",
+          "overwrite": false
         }
       ]
     }

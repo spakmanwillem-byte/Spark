@@ -208,6 +208,26 @@ async def compose_response(
         msg = UserMessage(text=user_prompt)
         response = await chat.send_message(msg)
         text = response if isinstance(response, str) else getattr(response, "content", str(response))
+
+        # v6_response_composer_001 — persisteer multi-turn memory per session_id
+        # Zodat volgende call _load_recent_turns() echte context heeft.
+        if session_id:
+            try:
+                from modules.core.storage import save_json
+                turns_dir = Path(bp["paths"]["turns_dir"])
+                turns_dir.mkdir(parents=True, exist_ok=True)
+                fp = turns_dir / f"{session_id}.json"
+                existing = load_json(fp, default={"messages": []})
+                msgs = existing.get("messages", [])
+                ts = datetime.now(timezone.utc).isoformat()
+                msgs.append({"role": "user", "text": user_text, "ts": ts, "user_id": user_id})
+                msgs.append({"role": "spark", "text": text, "ts": ts, "model": f"{model_provider}/{model_name}"})
+                # Beperk tot laatste 50 turns om bestand klein te houden
+                msgs = msgs[-50:]
+                save_json(fp, {"messages": msgs, "session_id": session_id, "user_id": user_id, "updated_at": ts})
+            except Exception:
+                pass  # Multi-turn memory is best-effort, faalt geen response op
+
         return {
             "success": True,
             "message": text,

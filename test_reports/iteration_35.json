@@ -1,0 +1,56 @@
+{
+  "summary": "v6_help_patterns_strict_001 iter_35 — main fix is GREEN. 14/15 tests pass (93%). De strikte regex `^\\s*/?help[\\s.!?]*$` in smart_intents_service.py:227 (was: `^/?help\\b`) elimineert de iter_34 minor false-positive: 'help me met begrijpen wat trade is', 'help haar even met de auto' en 'help mij Spark, ik snap dit niet' triggeren GEEN open_help_bark meer. Alle pure help-messages ('help', 'help.', 'help!', 'Help?', '/help') matchen nog steeds. Natuurlijke fraseringen ('open help kader', 'ik wil de help', 'toon help', 'help nodig') werken via aparte patterns. Regressies: Diep fast-path /api/spark/compose en capability-router /api/chat/message blijven groen. 1 test faalt — 'wat kan je?' wordt onderschept door een 'identity_what_can' handler (pre-existing routing precedence, NIET door iter_35 regex-fix veroorzaakt; antwoord is functioneel helpful en bevat zelf hint 'typ help voor commando-lijst').",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "'wat kan je?' returnt type='identity_what_can' i.p.v. 'open_help_bark'. Een identity-handler (waarschijnlijk geadded in latere PR's na iter_34) fired voor de help-intent detectie. De _HELP_PATTERNS regex `\\bwat kan je\\b` is correct, maar wordt overruled door upstream routing. Niet door iter_35 fix veroorzaakt. Response is overigens functioneel en bevat zelf de hint 'Typ help voor de volledige commando-lijst'."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_results": {
+    "TestFalsePositivesGone::test_help_me_met_X": "PASS — iter_34 minor IS NU OPGELOST",
+    "TestFalsePositivesGone::test_help_haar_even": "PASS",
+    "TestFalsePositivesGone::test_help_mij_spark": "PASS",
+    "TestExactHelpPositives::test_help_basis": "PASS",
+    "TestExactHelpPositives::test_help_dot": "PASS",
+    "TestExactHelpPositives::test_help_exclaim": "PASS",
+    "TestExactHelpPositives::test_help_question": "PASS — 'Help?' (met hoofdletter) matcht door .lower() in detect_help_intent",
+    "TestExactHelpPositives::test_slash_help": "PASS",
+    "TestNaturalPhrasingPositives::test_open_help_kader": "PASS",
+    "TestNaturalPhrasingPositives::test_ik_wil_de_help": "PASS",
+    "TestNaturalPhrasingPositives::test_wat_kan_je": "FAIL — type=identity_what_can (routing intercept upstream, NIET door iter_35 regex-fix)",
+    "TestNaturalPhrasingPositives::test_toon_help": "PASS",
+    "TestNaturalPhrasingPositives::test_help_nodig": "PASS",
+    "TestRegressions::test_compose_help_fastpath": "PASS — fast_path=true + open_help_bark blijft groen",
+    "TestRegressions::test_capability_hoeveel_users": "PASS — capability_response, geen valse help-trigger"
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_help_priority_iter35.py",
+    "/app/test_reports/pytest/iter35_results.xml"
+  ],
+  "action_items": [
+    "OPTIONAL — onderzoek waarom 'wat kan je?' niet meer in detect_help_intent terechtkomt maar in 'identity_what_can'. Waarschijnlijk is er een nieuwere identity-router die VOOR smart_intents draait. Niet door iter_35 veroorzaakt; antwoord blijft functioneel. Als positive op help gewenst is, verplaats identity-check NA help-priority-check in routes.py."
+  ],
+  "critical_code_review_comments": [
+    "GOOD — `^\\s*/?help[\\s.!?]*$` is precies de juiste verstrenging: dekt 'help', '/help', '  help  ', 'help.', 'help!', 'help?' en combinaties, maar geen 'help X'. Comment in code (regels 225-226) verklaart de keuze duidelijk.",
+    "GOOD — andere natuurlijke fraseringen blijven via aparte expliciete patterns werken (open/toon/laat zien help, ik wil de help, help nodig, help kader). Geen verlies van coverage voor legitieme help-aanvragen.",
+    "MINOR — een vergelijkbaar te-breed pattern is mogelijk nog `\\bhelp(\\s+(kader|overzicht|menu|popup|venster|paneel))\\b` op regel 232. Dit is OK want de keywords zijn specifieke help-kader-termen. Geen actie nodig.",
+    "MINOR — `.lower()` in detect_help_intent (regel 239) maakt 'Help?' case-insensitive, daarom matcht de strikte regex zonder re.IGNORECASE flag prima."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_help_priority_iter35.py (NEW, 15 testcases)"
+  ],
+  "success_rate": {
+    "backend": "93% (14/15) — main fix 100% (3/3 false-positives weg + 5/5 exact help matches + 2/2 regressies)",
+    "frontend": "n/a (backend-only)"
+  },
+  "test_credentials": "user-001 (Willem) met sleutelwoord='Appelsap' werkt; EMERGENT_LLM_KEY actief.",
+  "seed_data_creation": "Geen — bestaande data voldoende.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "iter_35 verstrengde _HELP_PATTERNS van `^/?help\\b` naar `^\\s*/?help[\\s.!?]*$` in smart_intents_service.py:227. False-positive 'help me met X' is WEG. Alle pure 'help'-messages matchen nog (inclusief Help? case-insensitive via .lower()). 1 onverwachte side-issue ontdekt (niet door deze iter): 'wat kan je?' wordt nu door een 'identity_what_can'-handler beantwoord i.p.v. open_help_bark. Routing precedence issue upstream van smart_intents. Niet blockend.",
+  "rca of the issue": "Iter_34 minor RCA: oude pattern `^/?help\\b` had \\b (word boundary) — matchte óók 'help me met X' want 'help' is een compleet woord en \\b zit tussen 'help' en de spatie. Iter_35 fix: vervangen door `^\\s*/?help[\\s.!?]*$` — het $ anker dwingt af dat na 'help' alleen whitespace en/of leestekens mogen komen, geen ander woord. Validatie: 3/3 false-positives WEG, 5/5 exact help positives BEHOUDEN, 4/5 natural phrasings (1 onverwante issue: 'wat kan je?' wordt door identity-router opgevangen)."
+}

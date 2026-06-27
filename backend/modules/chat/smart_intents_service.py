@@ -222,11 +222,12 @@ _HELP_PATTERNS = [
     r"\bwat kan je\b",
     r"\bwat kun je\b",
     r"\bhoe werk je\b",
-    r"\bhelp\b\s*$",
-    r"^/?help\b",
+    # v6_help_patterns_strict_001: 'help' moet de HELE message zijn (optionele leestekens),
+    # anders matchen "help me met X" / "help haar" als false-positive.
+    r"^\s*/?help[\s.!?]*$",
     r"\bwelke (commands|opdrachten|functies)\b",
     r"\bwat zijn je (mogelijkheden|capaciteiten)\b",
-    # v6_help_patterns_extend_001 — natuurlijker frasering
+    # v6_help_patterns_extend_001 — natuurlijker frasering (alleen mét help-kader-context)
     r"\b(open|toon|laat zien|geef|opent?)\s+(de\s+|het\s+)?help(\s+(kader|overzicht|menu|popup|venster|paneel))?\b",
     r"\bhelp(\s+(kader|overzicht|menu|popup|venster|paneel))\b",
     r"\bik wil de? help\b",

@@ -42477,11 +42477,860 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1599
       }
+    },
+    {
+      "id": "conv-36b46723",
+      "timestamp": "2026-06-27T21:19:35.908344+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat goed je stelt een notitie voor dat maakt mij blij. nu opende hij help net niet. maar wel als help aan het einde van een zin staat lijkt het. ik vraag mij af kan jij bug raports maken?",
+      "spark_response": "Fijn dat het blij maakt — dat is precies wat het moet doen.\n\nOver die bug: ja, ik zie het patroon ook. \"Help\" aan het einde van een zin triggert anders dan \"help\" in het midden of alleen. Dat is een afstelling-kwestie in de intent-matching.\n\n**Bugrapporten maken** — eerlijk gezegd: niet als formeel bestand dat ik zelf wegschrijf. Ik kan wel:\n\n- Het probleem helder beschrijven\n- Reproductiestappen formuleren\n- Verwacht vs. werkelijk gedrag benoemen\n\nZodat jij of iemand anders het direct als issue kan plakken.\n\nWil je dat ik dat nu doe voor dit help-probleem?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "goed",
+        "used_cards": [
+          "kbv2-445449b8",
+          "kbv2-10a73247",
+          "kbv2-skel-2110e3cd",
+          "kbv2-136b414d",
+          "kbv2-4d0111cb"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1600
+      }
+    },
+    {
+      "id": "conv-784f5dd5",
+      "timestamp": "2026-06-27T21:19:53.268849+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "🔮 Help-overzicht geopend. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1601
+      }
+    },
+    {
+      "id": "conv-f61bc4f6",
+      "timestamp": "2026-06-27T21:19:53.454800+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help.",
+      "spark_response": "🔮 Help-overzicht geopend. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1602
+      }
+    },
+    {
+      "id": "conv-0409088d",
+      "timestamp": "2026-06-27T21:19:53.673195+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help!",
+      "spark_response": "🔮 Help-overzicht geopend. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1603
+      }
+    },
+    {
+      "id": "conv-b753ec7e",
+      "timestamp": "2026-06-27T21:19:53.836790+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "Help?",
+      "spark_response": "🔮 Help-overzicht geopend. Laat maar weten als je verder wilt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1604
+      }
+    },
+    {
+      "id": "conv-ee221fa6",
+      "timestamp": "2026-06-27T21:19:53.983982+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "/help",
+      "spark_response": "🔮 Help-overzicht geopend. Vertel het me als ik iets moet aanvullen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1605
+      }
+    },
+    {
+      "id": "conv-a94a7bb3",
+      "timestamp": "2026-06-27T21:19:54.138875+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "open help kader",
+      "spark_response": "🔮 Help-overzicht geopend. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1606
+      }
+    },
+    {
+      "id": "conv-343a0f6a",
+      "timestamp": "2026-06-27T21:20:55.131068+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "ik twijvel. zie jij echt een help openen. op speculeer jij dat uit de context die ik je geef",
+      "spark_response": "Eerlijke vraag — en ik ga er eerlijk op antwoorden.\n\nIk **specculeer**. Ik zie geen live logs, geen console, geen echte intent-triggers. Wat ik zie is alleen wat jij mij vertelt in dit gesprek.\n\nDus toen jij zei \"hij opende help\" — nam ik dat als gegeven en redeneerde ik daaromheen. Dat is iets anders dan het zelf waarnemen.\n\nIk kan *denken* over patronen, maar ik *kijk* niet mee in het systeem tenzij ik een capability aanroep zoals `audit_health` of `gesprek_lezen`. En dat deed ik niet.\n\nWil je dat ik dat wél doe — dan kan ik proberen verder te snuffelen. Maar blinde speculatie als observatie verkopen — dat wil ik niet.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "open",
+        "used_cards": [
+          "kbv2-136b414d",
+          "kbv2-1a204b1b",
+          "kbv2-73a708a6",
+          "kbv2-b5af1c60",
+          "kbv2-ad377718"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1607
+      }
+    },
+    {
+      "id": "conv-74e36498",
+      "timestamp": "2026-06-27T21:21:04.925597+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "ik wil de help",
+      "spark_response": "🔮 Help-overzicht geopend. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1608
+      }
+    },
+    {
+      "id": "conv-cd0a323b",
+      "timestamp": "2026-06-27T21:21:15.547433+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "🔮 Help-overzicht geopend. Zeg het maar als je iets wilt veranderen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1609
+      }
+    },
+    {
+      "id": "conv-5bebb0b0",
+      "timestamp": "2026-06-27T21:21:15.769194+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help me met begrijpen wat trade is",
+      "spark_response": "**Help**: Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.\n\n**begrijpen**: Begrijpen betekent dat iemand de betekenis, werking of samenhang van iets kan herkennen en verwerken.\n\n**traden**: Traden betekent het kopen en verkopen van producten, aandelen, crypto of andere waarde-objecten om winst te maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "begrijpen",
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Help"
+          },
+          {
+            "begrip": "begrijpen"
+          },
+          {
+            "begrip": "traden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1610
+      }
+    },
+    {
+      "id": "conv-be6de335",
+      "timestamp": "2026-06-27T21:21:15.948351+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "help haar even",
+      "spark_response": "**Help**: Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Help"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1611
+      }
+    },
+    {
+      "id": "conv-81d1d722",
+      "timestamp": "2026-06-27T21:22:38.463453+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "hahahah jij zei snuffelen. leuk komt uit een andere sessie. Nee je zei het zelf al jij kan je logs niet niet of shadowlogs.",
+      "spark_response": "Haha ja, \"snuffelen\" — dat is inderdaad een van mijn eigen woorden geworden. Fijn dat het overkomt.\n\nEn jij hebt gelijk: ik zei het zelf al. Ik kan geen live logs zien, geen shadowlogs, geen echte intent-triggers. Wat ik deed was redeneren vanuit wat jij beschreef — en dat noemde ik speculatie. Dat blijft zo.\n\nDus als jij zegt \"help opende niet\" — geloof ik je. Maar ik *zie* het niet. Ik kan er alleen over meedenken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "help",
+        "used_cards": [
+          "kbv2-bc7bf5bf",
+          "kbv2-3c6fb9fe",
+          "kbv2-a73cbea7",
+          "kbv2-db901282",
+          "kbv2-dda3a042"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1612
+      }
+    },
+    {
+      "id": "conv-a5ed64ea",
+      "timestamp": "2026-06-27T21:22:38.883058+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help me met begrijpen wat trade is",
+      "spark_response": "Leuk! Vertel me meer\n\n**Help**: Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.\n\n**begrijpen**: Begrijpen betekent dat iemand de betekenis, werking of samenhang van iets kan herkennen en verwerken.\n\n**traden**: Traden betekent het kopen en verkopen van producten, aandelen, crypto of andere waarde-objecten om winst te maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "begrijpen"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Leuk! Vertel me meer"
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Help"
+          },
+          {
+            "begrip": "begrijpen"
+          },
+          {
+            "begrip": "traden"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1613
+      }
+    },
+    {
+      "id": "conv-48a0ed33",
+      "timestamp": "2026-06-27T21:22:44.945021+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help haar even met de auto",
+      "spark_response": "**Help**: Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.\n\n**Auto**: Een auto is een voertuig met een motor dat wordt gebruikt om mensen of goederen over de weg te vervoeren.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Help"
+          },
+          {
+            "begrip": "Auto"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1614
+      }
+    },
+    {
+      "id": "conv-0df14b7e",
+      "timestamp": "2026-06-27T21:22:45.138344+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help mij Spark, ik snap dit niet",
+      "spark_response": "**Help**: Help is een verzoek om ondersteuning of een actie waarbij ondersteuning wordt geboden.\n\n**Spark**: Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die communicatie, kennis, structuur en ondersteuning combineert.\n\n**snap**: Snap is een alcoholisch drankje, meestal een sterke drank zoals schnaps.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Help"
+          },
+          {
+            "begrip": "Spark"
+          },
+          {
+            "begrip": "snap"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 7,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1615
+      }
+    },
+    {
+      "id": "conv-e6a27112",
+      "timestamp": "2026-06-27T21:22:45.294132+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help",
+      "spark_response": "🔮 Help-overzicht geopend. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1616
+      }
+    },
+    {
+      "id": "conv-2aef5314",
+      "timestamp": "2026-06-27T21:22:45.446488+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help.",
+      "spark_response": "🔮 Help-overzicht geopend. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1617
+      }
+    },
+    {
+      "id": "conv-e4231cf0",
+      "timestamp": "2026-06-27T21:22:45.595757+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help!",
+      "spark_response": "🔮 Help-overzicht geopend. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1618
+      }
+    },
+    {
+      "id": "conv-9779d742",
+      "timestamp": "2026-06-27T21:22:45.747140+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "Help?",
+      "spark_response": "🔮 Help-overzicht geopend. Geef een seintje als je verder gaat.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1619
+      }
+    },
+    {
+      "id": "conv-181627ca",
+      "timestamp": "2026-06-27T21:22:45.910872+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "/help",
+      "spark_response": "🔮 Help-overzicht geopend. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1620
+      }
+    },
+    {
+      "id": "conv-cea4209e",
+      "timestamp": "2026-06-27T21:22:46.099209+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "open help kader",
+      "spark_response": "🔮 Help-overzicht geopend. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1621
+      }
+    },
+    {
+      "id": "conv-67e873bc",
+      "timestamp": "2026-06-27T21:22:46.256671+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ik wil de help",
+      "spark_response": "🔮 Help-overzicht geopend. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1622
+      }
+    },
+    {
+      "id": "conv-21ec4877",
+      "timestamp": "2026-06-27T21:22:46.412774+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat kan je?",
+      "spark_response": "Wat ik kan, Willem:\n\n• Reageren binnen de kaders van mijn Normen & Waarden\n• Uitzonderingen toetsen aan de Spark Bijbel\n• Kennis ophalen uit gelaagde KB v2 met gecontroleerde diepte\n• Emotie-context herkennen via 7-laags pipeline\n• Transparant aangeven wat ik wel of niet weet\n\n_Typ **help** voor de volledige commando-lijst. Wil je je account verwijderen? Zeg het gewoon: 'verwijder mijn account'._",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "identity_what_can",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "identity_what_can"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1623
+      }
+    },
+    {
+      "id": "conv-069ec775",
+      "timestamp": "2026-06-27T21:22:46.578252+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "toon help",
+      "spark_response": "🔮 Help-overzicht geopend. Ik blijf in de buurt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "help",
+            "toon"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1624
+      }
+    },
+    {
+      "id": "conv-b1fed287",
+      "timestamp": "2026-06-27T21:22:46.763875+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "help nodig",
+      "spark_response": "🔮 Help-overzicht geopend. Klaar voor je volgende vraag.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 6,
+          "intensity": 0.54,
+          "triggered_words": [
+            "help",
+            "nodig"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1625
+      }
+    },
+    {
+      "id": "conv-236b4eb4",
+      "timestamp": "2026-06-27T21:22:46.910669+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "help",
+      "spark_response": "🔮 Help-overzicht geopend.",
+      "channel": "spark-deep-help",
+      "analysis": {
+        "action": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "iter35-fp-1",
+        "gesprek_nummer": 1626
+      }
+    },
+    {
+      "id": "conv-d3b3533c",
+      "timestamp": "2026-06-27T21:22:47.058640+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoeveel users hebben we",
+      "spark_response": "📊 We zijn met **19 mensen** en **5 bots** in Spark Core.\n_Mensen: De Willem, Spark, Nick Teeuwen, Roadkill, Heidi, Marieke, Ron, joel123…_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "hebben"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1627
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1599,
-    "last_updated": "2026-06-27T21:17:45.712921+00:00"
+    "total_conversations": 1627,
+    "last_updated": "2026-06-27T21:22:47.058640+00:00"
   }
 }

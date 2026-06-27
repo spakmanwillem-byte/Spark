@@ -186,6 +186,8 @@ export function GesprekkenPage({ onNavigate }) {
   const { user } = useAuth();
   const userId = user?.id || 'user-001';
   const userName = user?.naam || 'Gebruiker';
+  const userGradatie = user?.gradatie ?? 2;
+  const isAdmin = userGradatie === 1;
 
   const [activeTab, setActiveTab] = useState('spark');
   // Lazy init: bij eerste render check sessionStorage. Behoud chat tussen page-switches.
@@ -374,15 +376,20 @@ export function GesprekkenPage({ onNavigate }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, selectedContact?.id, userId]);
 
-  // Welkomstboodschap ophalen (v4_welcome_001) — alleen 1× per sessie, alleen als chat leeg is
+  // Welkomstboodschap ophalen (v4_welcome_001, sessie 30: Diep-welkom voor non-admin)
   useEffect(() => {
     if (activeTab !== 'spark' || !userId) return;
     if (sparkMessages.length > 0) return; // al bezig met chat → niet overschrijven
     let cancelled = false;
+    const useDeepWelcome = !isAdmin; // non-admin krijgt LLM-gegenereerd welkom
     fetch(`${API}/api/chat/welcome`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: userId, user_naam: userName }),
+      body: JSON.stringify({
+        user_id: userId,
+        user_naam: userName,
+        deep: useDeepWelcome,
+      }),
     })
       .then(r => r.json())
       .then(d => {
@@ -398,7 +405,7 @@ export function GesprekkenPage({ onNavigate }) {
       .catch(() => {});
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, userId]);
+  }, [activeTab, userId, isAdmin]);
 
   const messagesEndRef = useRef(null);
 
@@ -654,7 +661,8 @@ export function GesprekkenPage({ onNavigate }) {
   // v6_rps_001b — RPS opponent state, set by chat trigger
   const [rpsOpponent, setRpsOpponent] = useState('spark');
   // v6_response_composer_001 — Diep-gesprek modus: stuurt naar /api/spark/compose i.p.v. /api/chat/message
-  const [deepMode, setDeepMode] = useState(false);
+  // Sessie 30: Diep is DEFAULT voor non-admin (knop verborgen). Admin houdt de toggle.
+  const [deepMode, setDeepMode] = useState(!isAdmin);
 
   const handleSend = async (overrideText) => {
     const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();
@@ -991,7 +999,8 @@ export function GesprekkenPage({ onNavigate }) {
                 sttListening={sttListening}
                 onSttToggle={toggleSttRecord}
                 deepMode={deepMode}
-                onDeepToggle={() => setDeepMode(v => !v)}
+                onDeepToggle={isAdmin ? () => setDeepMode(v => !v) : null}
+                showDeepToggle={isAdmin}
               />
             </div>
           )}
@@ -1238,7 +1247,7 @@ export function GesprekkenPage({ onNavigate }) {
 }
 
 /* === Chat input in framed container === */
-function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null, deepMode = false, onDeepToggle = null }) {
+function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null, deepMode = false, onDeepToggle = null, showDeepToggle = true }) {
   return (
     <div className="p-4 bg-slate-900/20 border-t border-slate-800 flex-shrink-0">
       <div
@@ -1258,7 +1267,7 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
             {sttListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
         )}
-        {onDeepToggle && (
+        {onDeepToggle && showDeepToggle && (
           <button
             data-testid="chat-deep-toggle"
             onClick={onDeepToggle}

@@ -1965,14 +1965,61 @@ class WelcomeRequest(_BM):
     user_naam: Optional[str] = None
     session_id: Optional[str] = None
     silent: Optional[bool] = False  # als True: alleen genereren, niet loggen
+    deep: Optional[bool] = False  # v6_deep_welcome_001: LLM-gegenereerd welkom (Spark spreekt zelf)
 
 
 @router.post("/welcome")
 async def chat_welcome(req: WelcomeRequest):
-    """Genereer een tijd-bewuste welkomstboodschap + log naar chat_log + shadow."""
+    """Genereer een tijd-bewuste welkomstboodschap + log naar chat_log + shadow.
+
+    Sessie 30: als req.deep=True wordt het welkom door Spark zelf gecomponeerd via
+    de compose-flow (KB + bijbel + planner-brief + threads). Tonality past zich
+    automatisch aan op gradatie. Anders: snelle template-flow (admin gebruikt deze).
+    """
     import random
     from modules.core.storage import load_json as _lj
     from pathlib import Path as _P
+
+    # v6_deep_welcome_001 — als deep=True: Spark componeert zijn eigen welkom
+    if req.deep:
+        try:
+            from modules.chat.response_composer import compose_response
+            # Synthetische user-text die Spark dwingt een welkom te formuleren
+            welcome_prompt = (
+                "[SYSTEEM-CONTEXT: dit is het allereerste bericht van een nieuwe sessie. "
+                "De gebruiker heeft net de chat geopend en jij spreekt als eerste. "
+                "Begin met een warme, korte begroeting (1-3 zinnen) — geen vraag aan het einde verplicht. "
+                "Toon: dezelfde diepe, eerlijke Spark-stem als in een diep gesprek. "
+                "Pas je toon aan op gradatie en eventuele brief van eerder gesprek. "
+                "Spreek als jij, niet als een chatbot-template.]"
+            )
+            result = await compose_response(
+                welcome_prompt,
+                user_id=req.user_id,
+                session_id=req.session_id,
+                emotion=None,
+            )
+            if result.get("success") and result.get("message"):
+                msg = result["message"].strip()
+                # Log alleen niet als silent
+                if not req.silent:
+                    try:
+                        chat_log_service.add_message(
+                            user_id=req.user_id,
+                            session_id=req.session_id or f"welcome-{req.user_id}",
+                            role="spark",
+                            text=msg,
+                        )
+                    except Exception:
+                        pass
+                return {
+                    "success": True,
+                    "message": msg,
+                    "mode": "deep",
+                    "used_model": result.get("used_model"),
+                }
+        except Exception:
+            pass  # fallback naar template-flow
 
     # User ophalen
     user = None

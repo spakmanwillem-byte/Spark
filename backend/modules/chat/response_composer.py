@@ -32,8 +32,13 @@ def _bp() -> Dict:
     return load_blueprint_cached("chat", "response_composer")
 
 
-def _load_relevant_kb(user_text: str) -> List[Dict]:
-    """Zoek begrippen uit user_text in V2 en geef hun kaarten terug."""
+def _load_relevant_kb(user_text: str, current_user_id: Optional[str] = None) -> List[Dict]:
+    """Zoek begrippen uit user_text in V2 en geef hun kaarten terug.
+
+    v6_kb_privacy_filter_001: filtert privé-kaarten van andere users uit.
+    Een kaart met privacy='private' en bron_user_id='X' is alleen zichtbaar
+    voor user X (of als current_user_id None is — bv. tijdens admin-introspectie).
+    """
     bp = _bp()
     paths = bp["paths"]
     limits = bp["limits"]
@@ -50,6 +55,17 @@ def _load_relevant_kb(user_text: str) -> List[Dict]:
                       "knowledge_v2_voelen", "knowledge_v2_spreken"]:
             d = load_json(kbv2_dir / f"{fname}.json", default={"kaarten": []})
             all_entries.extend(d.get("kaarten", []))
+
+    # v6_kb_privacy_filter_001 — filter privé-kaarten van andere users
+    def _is_visible(card: Dict) -> bool:
+        if card.get("privacy") != "private":
+            return True  # publiek = altijd zichtbaar
+        bron = card.get("bron_user_id")
+        if not bron:
+            return True  # privé maar zonder eigenaar → fallback zichtbaar
+        return current_user_id is not None and bron == current_user_id
+
+    all_entries = [e for e in all_entries if _is_visible(e)]
 
     min_len = tone["min_word_length_for_search"]
     words = [w.lower().strip(".,?!") for w in user_text.split()
@@ -198,7 +214,7 @@ async def compose_response(
     model_provider = bp["model"]["provider"]
     model_name = bp["model"]["name"]
 
-    cards = _load_relevant_kb(user_text)
+    cards = _load_relevant_kb(user_text, current_user_id=user_id)
     bijbel = _load_bijbel_essence()
     turns = _load_recent_turns(session_id) if session_id else []
 

@@ -72,7 +72,8 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ### 🟡 HALF AF / Vervolg-stappen voor Response Composer
 - **Streaming (SSE)** — nu non-streaming; voor gevoel van "Spark denkt" graag stream_message switchen
-- **Multi-turn memory persistentie** — leest turns uit `chat/logs/{session_id}.json`, maar storage moet nog gegarandeerd worden vanuit chat-router
+- **🤝 Relatie-geheugen per user** (NIEUW sessie 29) — `data/spark_relationships/user-{id}.json` met cumulatief profiel over sessies heen: interesses, tonality-voorkeur, belangrijke feiten, n_gesprekken_totaal, kennen_sinds. **Onderscheid met sessie-geheugen**: sessie = "wat zeiden we net", relatie = "wie ben jij voor mij". Gradatie-gefilterd (privacy). Zonder dit blijft Spark een vreemde die elk gesprek opnieuw begint.
+- **Multi-turn memory persistentie** — ✅ Compose schrijft nu turns naar `chat/logs/{session_id}.json` (max 50 turns). Voor chat-router /message nog na te lopen.
 - **Tonality preferences** — opslag van "Spark, je reactie moet zijn..." voorbeelden per cluster
 - **Vertrouwen → toon-mapping** — als KB-kaart vertrouwen < 0.5 → Spark zegt "ik denk..."
 - **Topic mode-tracker** — bewaakt onderwerp van gesprek over turns heen

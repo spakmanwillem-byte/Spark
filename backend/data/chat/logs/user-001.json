@@ -39331,11 +39331,47 @@
         "session_id": "default",
         "gesprek_nummer": 1455
       }
+    },
+    {
+      "id": "conv-b40b3b75",
+      "timestamp": "2026-06-27T10:45:39.201660+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1456
+      }
+    },
+    {
+      "id": "conv-37bb110e",
+      "timestamp": "2026-06-27T10:45:39.249544+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1457
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1455,
-    "last_updated": "2026-06-27T09:56:54.558442+00:00"
+    "total_conversations": 1457,
+    "last_updated": "2026-06-27T10:45:39.249544+00:00"
   }
 }

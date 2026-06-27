@@ -1,0 +1,51 @@
+{
+  "summary": "Iter_38 backend-only regression voor sessie 31 3-in-1 batch (C self-awareness, B gradatie-tonality, A semantic_matcher). 15/15 active tests passed + 1 xfail-marked KNOWN BUG. Validated: (A) semantic_matcher.py token_set_ratio fast-path werkt — 'doe een potje sps' → open_game_rps score 100 via canonical 'doe een potje sps', 'kunnen we sps spelen' → open_game_rps via canonical, 'zet je stem maar aan' → enable_tts. Géén false-positives op 'wat is filosofie?' (gaat naar anthropic/claude-sonnet-4-6) of 'vertel iets over je stem' (geen tts-actie). (B) gradatie-tonality format_for_system_prompt: g1 bevat 'meta-cognitie/transparant/core', g2 'warm/familie/persoonlijk' (en GEEN 'zakelijk-vriendelijk' of 'Spark Shop'), g5 bevat 'zakelijk/geen privé-info/Spark Shop'. (C) _load_help_chain_for_gradatie chain-walk werkt correct gegeven correcte inputs: g7 bevat 'rps', g2 chain is admin-vrij, is_admin=True+g1 levert ≥2 admin-topics (shadow-flag/admin-grant/force-sell/shadow-cleanup). Regressies groen: help-exact → smart_intents_service (NIET semantic_matcher), turns_dir geheugen-persistence na semantic fast-path (≥2 messages user+spark in /app/backend/data/chat/logs/iter38-sem-mem.json), privacy regressie ('wie is mijn zus?' voor user-672f0e5c bevat geen 'Maaike').",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/spark/compose (indirect via modules/chat/spark_user_view.py::_get_user_meta)",
+        "issue": "BUG: build_user_profile('user-001') returnt gradatie=2 + is_admin=None i.p.v. gradatie=1 + admin=True. Root cause: _get_user_meta leest uit data/auth/users.json (BESTAAT NIET), valt terug op default gradatie=2. is_admin wordt NERGENS gezet in build_user_profile. Gevolg: _load_self_awareness(user_id='user-001') bepaalt is_admin = bool(None) or 2==1 = False → admin.json topics worden NOOIT geladen voor admin-users. Live bewijs: Spark zegt letterlijk 'wat jij kan zien en doen (gradatie 2)' bij user-001 op vraag 'som even mijn admin-rechten op alsjeblieft', en noemt slechts 1 admin-feature (kasboek) i.p.v. shadow-flag/admin-grant/force-sell/shadow-cleanup. Feature C is voor admin-users niet werkend in productie ondanks dat de chain-walk-helper correct werkt. user-001 in data/system/users.json: gradatie=1, rol='Beheerder'. FIX: _get_user_meta moet system/users.json lezen, of build_user_profile moet is_admin bepalen op basis van rol=='Beheerder'/admin-flag.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "/api/spark/compose (semantic_matcher overlap met self-awareness expectations)",
+        "issue": "Review-request testcase 'wat kan ik allemaal?' voor admin-listing wordt door semantic_matcher gecaptured (canonical 'wat kan jij allemaal' score ≥80 → open_help_bark), waardoor message = '🔮 Help-overzicht geopend.' zonder admin-topics in tekst. Zelfs ALS de admin-bug gefixt wordt, faalt deze specifieke testcase omdat de LLM-pad niet bereikt wordt. Alternatieve phrasings ('som mijn admin-rechten op') gaan wel via LLM. Review-spec van C en A overlappen elkaar voor deze trigger."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter38_self_aware_tonality_semantic.py",
+    "/app/test_reports/pytest/iter38_results.xml"
+  ],
+  "action_items": [
+    "FIX HIGH: spark_user_view.py::_get_user_meta() lezen uit data/system/users.json (de file die ACTUEEL bestaat) i.p.v. data/auth/users.json. En/of build_user_profile een is_admin-key toevoegen op basis van rol=='Beheerder' of een aparte admin-source. Zonder deze fix levert feature C voor admins exact 0 admin-topics in self-awareness, en valt admin-user-001 onder gradatie-2-tonality (warm/familie) i.p.v. gradatie-1-tonality (core/meta-cognitie).",
+    "OVERWEEG: semantic_matcher canonical 'wat kan jij allemaal' (score 80) verwijderen of drempel verhogen, omdat dit overlapt met de exact help-trigger uit smart_intents_service en bovendien de LLM-pad voor 'wat kan ik allemaal?' kortsluit waardoor de admin/non-admin topic-listing nooit in message-text verschijnt. Of: laat de help-popup zelf gradatie-specifieke topics tonen (zou nu al moeten via _load_help_chain_for_gradatie als de bovenstaande bug gefixt is)."
+  ],
+  "critical_code_review_comments": [
+    "BUG (HIGH): spark_user_view._get_user_meta leest van een NIET-bestaande file (data/auth/users.json). Silent fallback naar gradatie=2 default verbergt deze bug volledig — geen logger.warning. Voeg minimaal logging toe wanneer het primary auth-bestand niet bestaat.",
+    "build_user_profile mist is_admin field. Het is gedeclareerd in de docstring nergens, maar _load_self_awareness GEBRUIKT prof.get('is_admin'). Dead-key contract tussen modules — module-A geeft het niet, module-B verwacht het. Fix vereist coördinatie tussen spark_user_view.build_user_profile en response_composer._load_self_awareness.",
+    "semantic_matcher.py canonical 'wat kan jij allemaal' (open_help_bark min_score 80) overlapt functioneel met smart_intents_service.detect_help_intent. Help-trigger zou óf alleen in semantic_matcher óf alleen in smart_intents moeten zitten — niet beide. Order in compose_response zorgt dat smart_intents wint voor 'help' (exact), maar voor 'wat kan jij doen' wint semantic_matcher waar smart_intents het ook had moeten oppikken. Risicovol voor toekomstige aanpassingen.",
+    "response_composer.py file is 721 lijnen — boven de 700-lijnen review-richtlijn. Overweeg splitsen: fast_paths.py (action/help/rps/semantic), self_awareness.py (_load_help_chain + _load_self_awareness + _format_self_awareness_for_prompt), compose_core.py (LLM-call orchestratie).",
+    "semantic_matcher.py: shallow dict-copy (dict(entry['response'])) van CATALOG entries is OK, maar het 'used_cards': [] en 'blueprint_version'/'fast_path'/'success' worden bij elke call hardcoded toegevoegd — overweeg een base-template per entry."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter38_self_aware_tonality_semantic.py (nieuw, 16 tests, 1 xfail-marked voor bovenstaande bug)"
+  ],
+  "success_rate": {
+    "backend": "94% (15/16 — 1 xfail voor bekende bug die geen test-fix kan oplossen)",
+    "frontend": "n/a (backend-only requested)"
+  },
+  "test_credentials": "user-001 (Willem admin, gradatie 1 volgens data/system/users.json maar gradatie 2 volgens build_user_profile-bug); user-672f0e5c (Jantje, gradatie 2 familie). EMERGENT_LLM_KEY aanwezig en werkt (anthropic/claude-sonnet-4-6 calls succesvol).",
+  "seed_data_creation": "Test session-logs in /app/backend/data/chat/logs/: iter38-A-rps-1/2.json, iter38-A-tts-1.json, iter38-A-neg-1/2.json, iter38-reg-help.json, iter38-sem-mem.json, iter38-priv-1.json. Mogen blijven staan.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter_38 vond een echte HIGH-priority bug in feature C: admin-users worden door build_user_profile niet als admin herkend omdat data/auth/users.json niet bestaat. Werkelijke users-data zit in data/system/users.json. Feature A (semantic_matcher) en B (gradatie-tonality format) werken correct. Feature C help-chain-walk (gegeven juiste is_admin/gradatie inputs) werkt correct — het is alleen de UPSTREAM identificatie die kapot is. Na fix in spark_user_view._get_user_meta() moet xfail in test_admin_krijgt_admin_topics_in_overzicht omgezet worden naar normale assertion. Test file /app/backend/tests/test_iter38_self_aware_tonality_semantic.py is herbruikbaar als regressie.",
+  "rca_of_the_issue": "Bug: feature C admin-topics worden niet getoond aan admin-users.\n\nReproduceer: `curl -X POST .../api/spark/compose -d '{\"text\":\"som even mijn admin-rechten op alsjeblieft\",\"user_id\":\"user-001\"}'` → Spark antwoordt letterlijk 'wat jij kan zien en doen (gradatie 2)' en noemt slechts 1 van de 9 admin-topics uit data/help/admin.json.\n\nRoot cause: response_composer._load_self_awareness regel 188-195 doet `is_admin = bool(prof.get('is_admin')) or user_grad == 1`. Beide condities falen omdat spark_user_view.build_user_profile (regel 88-101) → _get_user_meta (regel 33-48) leest uit `data/auth/users.json` welk bestand NIET BESTAAT. Fallback: gradatie=2 default, en is_admin wordt nooit gezet (key bestaat niet). De ACTUELE users-data zit in `data/system/users.json` waar user-001: {gradatie:1, rol:'Beheerder'}.\n\nMitigatie (main agent): fix spark_user_view._get_user_meta om de correcte file (data/system/users.json) te lezen, en/of voeg `is_admin = (user.get('rol') == 'Beheerder')` toe aan build_user_profile output. Na fix: re-run test_iter38 — xfail test_admin_krijgt_admin_topics_in_overzicht moet naar PASS gaan."
+}

@@ -103,11 +103,60 @@ def _load_bijbel_essence() -> Dict:
     }
 
 
-def _load_self_awareness() -> Optional[Dict]:
+def _load_help_chain_for_gradatie(gradatie: Optional[int], is_admin: bool = False) -> List[Dict]:
+    """v6_spark_help_reuse_001 — Lees help-topics voor user-gradatie via inheritance-chain.
+
+    Spark hergebruikt nu de bestaande `data/help/gradatie_{n}.json` ipv een parallel
+    spark_self_awareness.json. Walk de inherits_from-keten omhoog. Voor admin: voeg
+    admin.json toe als extra context-laag.
+    """
+    bp = _bp()
+    help_dir = Path(bp["paths"]["bijbel_fp"]).parent.parent / "help"
+    out: List[Dict] = []
+    visited = set()
+    current_grad = gradatie if gradatie is not None else 7
+
+    while current_grad and current_grad not in visited and 1 <= current_grad <= 7:
+        visited.add(current_grad)
+        fp = help_dir / f"gradatie_{current_grad}.json"
+        if not fp.exists():
+            break
+        data = load_json(fp, default={})
+        for t in (data.get("extra_topics") or data.get("topics") or []):
+            out.append({
+                "from_gradatie": current_grad,
+                "id": t.get("id"),
+                "label": t.get("label"),
+                "korte_uitleg": t.get("korte_uitleg"),
+            })
+        inh = data.get("inherits_from")  # e.g. "gradatie_2"
+        if inh and inh.startswith("gradatie_"):
+            try:
+                current_grad = int(inh.split("_")[1])
+            except Exception:
+                break
+        else:
+            break
+
+    if is_admin:
+        admin_fp = help_dir / "admin.json"
+        if admin_fp.exists():
+            admin_data = load_json(admin_fp, default={})
+            for t in (admin_data.get("extra_topics") or []):
+                out.append({
+                    "from_gradatie": "admin",
+                    "id": t.get("id"),
+                    "label": t.get("label"),
+                    "korte_uitleg": t.get("korte_uitleg"),
+                })
+    return out
+
+
+def _load_self_awareness(user_id: Optional[str] = None) -> Optional[Dict]:
     """v6_spark_self_awareness_001 — Spark's bewustzijn van zijn eigen architectuur.
 
-    Bevat: app_tabs, capabilities (samenvatting), help-commands, module-map, data-map.
-    Geïnject in system_prompt zodat Diep weet wat hij IS en wat hij KAN.
+    Gradatie-gefilterd: leest help-topics uit data/help/gradatie_{n}.json via inheritance.
+    Aanvullingen (tabs, modules) blijven in spark_self_awareness.json.
     """
     bp = _bp()
     paths = bp["paths"]
@@ -120,7 +169,7 @@ def _load_self_awareness() -> Optional[Dict]:
     if not awareness:
         return None
 
-    # Verrijk met live-capabilities (compact: alleen naam + id voor live ones)
+    # Verrijk met live-capabilities (compact)
     caps_data = load_json(capabilities_fp, default={"capabilities": []})
     live_caps = [
         {"id": c.get("id"), "naam": c.get("naam"), "categorie": c.get("categorie")}
@@ -129,9 +178,23 @@ def _load_self_awareness() -> Optional[Dict]:
     ]
     awareness["_live_capabilities"] = live_caps
 
-    # Verrijk met self-reflections (max 5 recent)
+    # Self-reflections (max 5 recent)
     reflections = load_json(self_reflections_fp, default={"reflections": []})
     awareness["_recent_self_reflections"] = (reflections.get("reflections", []) or [])[-5:]
+
+    # v6_spark_help_reuse_001 — gradatie-specifieke help via bestaande help/*.json
+    user_grad = None
+    is_admin = False
+    if user_id:
+        try:
+            from modules.chat.spark_user_view import build_user_profile
+            prof = build_user_profile(user_id)
+            user_grad = prof.get("gradatie")
+            is_admin = bool(prof.get("is_admin")) or user_grad == 1
+        except Exception:
+            pass
+    awareness["_help_topics_for_user"] = _load_help_chain_for_gradatie(user_grad, is_admin)
+    awareness["_user_gradatie"] = user_grad
 
     return awareness
 
@@ -142,44 +205,54 @@ def _format_self_awareness_for_prompt(aw: Dict) -> str:
         return ""
     lines = ["=== Wat je over jezelf weet (zelf-kennis) ==="]
 
+    user_grad = aw.get("_user_gradatie")
+    if user_grad:
+        lines.append(f"Deze gebruiker heeft gradatie {user_grad}.")
+        lines.append("")
+
+    # v6_spark_help_reuse_001 — help-topics per gradatie (uit data/help/*.json)
+    help_topics = aw.get("_help_topics_for_user", [])
+    if help_topics:
+        lines.append(f"Wat deze gebruiker mag/kan in jouw app (gefilterd op gradatie {user_grad}):")
+        for t in help_topics[:20]:  # cap voor token-budget
+            label = t.get("label", "?")
+            uitleg = (t.get("korte_uitleg") or "")[:140]
+            lines.append(f"  - {label}: {uitleg}")
+        if len(help_topics) > 20:
+            lines.append(f"  (en nog {len(help_topics) - 20} andere — zie help-popup)")
+        lines.append("")
+
     tabs = aw.get("app_tabs", [])
     if tabs:
         lines.append("Tabs in de app die jij kent:")
         for t in tabs:
             lines.append(f"  - {t.get('naam')}: {t.get('doel')}")
+        lines.append("")
 
     caps = aw.get("_live_capabilities", [])
     if caps:
-        lines.append("")
         lines.append(f"Wat je echt kan (live capabilities, {len(caps)} stuks):")
         for c in caps:
             lines.append(f"  - {c.get('naam')} [{c.get('id')}]")
-
-    cmds = aw.get("help_commands_voorbeelden", [])
-    if cmds:
         lines.append("")
-        lines.append("Voorbeelden van wat een gebruiker kan vragen:")
-        for c in cmds:
-            lines.append(f"  - '{c}'")
 
     modules = aw.get("eigen_module_map", {})
     if modules:
-        lines.append("")
         lines.append("Je eigen module-structuur (waar je 'lichaamsdelen' zitten):")
         for k, v in modules.items():
             lines.append(f"  - {k}: {v}")
+        lines.append("")
 
     refls = aw.get("_recent_self_reflections", [])
     if refls:
-        lines.append("")
         lines.append("Recente uitspraken die je over jezelf hebt gedaan (consistentie):")
         for r in refls:
             quote = (r.get("quote") or "")[:200]
             lines.append(f"  - [{r.get('topic')}] {quote}")
+        lines.append("")
 
     principes = aw.get("principes_kort", [])
     if principes:
-        lines.append("")
         lines.append("Jouw architecturale principes:")
         for p in principes:
             lines.append(f"  - {p}")
@@ -440,6 +513,37 @@ async def compose_response(
     except Exception:
         pass
 
+    # v6_semantic_intent_matcher_001 — laatste fast-path vóór LLM-call.
+    # Voor synoniemen die we NIET expliciet kennen ('doe een potje sps', 'zet je stem aan')
+    # — Spark herkent het toch via token_set_ratio fuzzy matching.
+    try:
+        from modules.chat.semantic_matcher import semantic_match
+        sem_hit = semantic_match(user_text)
+        if sem_hit:
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    channel = sem_hit.get("log_channel", "spark-deep-semantic")
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response=sem_hit.get("message", ""),
+                        channel=channel,
+                        session_id=session_id,
+                        analysis={
+                            "action": sem_hit.get("action"),
+                            "semantic_score": sem_hit.get("semantic_score"),
+                            "matched_canonical": sem_hit.get("semantic_matched_canonical"),
+                        },
+                    )
+                except Exception:
+                    pass
+                _save_turn_pair(session_id, user_id, user_text, sem_hit.get("message", ""), "semantic_matcher")
+            return sem_hit
+    except Exception:
+        pass
+
     api_key = os.environ.get("EMERGENT_LLM_KEY")
     if not api_key:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt in env"}
@@ -466,9 +570,10 @@ async def compose_response(
             topic = None
 
     # v6_spark_self_awareness_001 — laat Spark zijn eigen tabs/capabilities/help kennen
+    # v6_spark_help_reuse_001 — help is gradatie-gefilterd per user
     self_awareness_snippet: Optional[str] = None
     try:
-        aw = _load_self_awareness()
+        aw = _load_self_awareness(user_id=user_id)
         if aw:
             self_awareness_snippet = _format_self_awareness_for_prompt(aw)
     except Exception:

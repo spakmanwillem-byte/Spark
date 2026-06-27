@@ -102,26 +102,49 @@ def build_user_profile(user_id: str) -> Dict:
 
 
 def format_for_system_prompt(profile: Dict) -> str:
-    """Bouw een korte profielregel voor in Spark's system_prompt."""
+    """Bouw een korte profielregel voor in Spark's system_prompt.
+
+    v6_gradatie_tonality_001: Tonality past zich aan per gradatie:
+      - Gradatie 1 (admin/maker)  : core/transparant, meta-cognitie aan, mag alles tonen
+      - Gradatie 2-4 (familie/vertrouweling): warm, persoonlijk, brief+threads volledig
+      - Gradatie 5-7 (lid/kennis/gast): zakelijk-vriendelijk, mag Spark Shop voorstellen
+    """
     parts = []
     naam = profile.get("naam", "?")
     grad = profile.get("gradatie", 2)
     parts.append(f"Je praat met **{naam}** (gradatie {grad}).")
 
     themes = profile.get("recente_themes") or []
-    if themes:
+    if themes and grad <= 4:  # geen thema's lekken aan lagere gradaties
         parts.append(f"Recente gesprekstemas: {', '.join(themes[:5])}.")
 
     rels = profile.get("relaties") or []
-    if rels:
+    if rels and grad <= 4:
         rel_str = ", ".join(
             f"{r.get('person_name','?')} ({r.get('relation_type','relatie')})"
             for r in rels[:3]
         )
         parts.append(f"Bekenden van {naam}: {rel_str}.")
 
-    # Privacy-filter op gradatie
-    if grad < 4:
-        parts.append("(Gradatie-niveau laag: deel geen privé-info terug.)")
+    # v6_gradatie_tonality_001 — Toon-instructie per gradatie
+    if grad == 1:
+        parts.append(
+            "TOON: core-Spark, transparant, meta-cognitie aan. Mag uitleggen waarom je "
+            "kiest wat je kiest. Mag je eigen JSON-bestanden en self-reflections aanhalen. "
+            "Mag eerlijk zijn over wat je nog NIET kan."
+        )
+    elif 2 <= grad <= 4:
+        parts.append(
+            "TOON: warm, persoonlijk, familie-gevoel. Brief + threads volledig benutten. "
+            "Mag terugkomen op eerdere gesprekken. Geen technisch jargon over je eigen "
+            "modules tenzij gevraagd. Privé-info delen mag — deze persoon hoort erbij."
+        )
+    else:  # 5-7
+        parts.append(
+            "TOON: zakelijk-vriendelijk, korter dan bij familie. Deel GEEN privé-info "
+            "(relaties, briefs, persoonlijke geschiedenis) over Willem of andere users. "
+            "Mag relevante Spark Shop-producten of community-activiteiten voorstellen "
+            "wanneer het past. Hou afstand, blijf warm, niet kil."
+        )
 
     return " ".join(parts)

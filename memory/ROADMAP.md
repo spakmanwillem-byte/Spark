@@ -58,6 +58,11 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
   - Gradatie 4-2 (vriend/familie): warm, persoonlijk, geheugen-rijk (briefs + threads volledig)
   - Gradatie 1 (admin/maker): core-Spark, transparant, meta-cognitie zichtbaar
   - Past goed bovenop bestaande `spark_user_view.py` (gradatie wordt al gelezen).
+  - **BELANGRIJK (sessie 30 reflectie)**: er bestaat al een steiger — GEEN nieuw module bouwen:
+    - `modules/chat/spark_user_view.py::format_for_system_prompt` heeft al `if grad < 4` filter — uitbreiden met tonality-injectie
+    - `data/personality/willem_personality.json` is een lege placeholder ("Wordt automatisch gevuld door Spark's learning engine") — auto-fill bouwen (log+behavior scan, NIET forceren)
+    - `data/personality/spark_profile.json` mag Spark zelf bijwerken (geslacht/voorkeuren) met audit-log naast — meta-cognitie geactiveerd
+  - **Veiligheids-laag voor regelgeving**: alle waardes in human-readable JSON, audit-log per wijziging, Willem kan altijd handmatig overschrijven (eigenschap, geen bug). Transparantie-by-design.
 - **P1 — Cross-user boodschap (Antwoord-apparaat)**: chat-command "[boodschap voor X]" → opslag in `data/spark_planner/pending_messages/{target_user}.json`, bij eerstvolgende login zegt Spark het zachtjes. Sub-features:
   - Welkomstgroet doorgeven aan nieuwe accounts ("de maker laat groeten")
   - "Willem is er nu niet, kijkt in agenda…" → vereist agenda-lookup-laag in compose

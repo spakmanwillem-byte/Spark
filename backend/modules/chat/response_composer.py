@@ -122,6 +122,9 @@ def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_prof
         parts.append("")
     parts.append("Je toon: " + bijbel_essence.get("tone", bp["tonality"]["default_tone"]))
     parts.append("")
+    parts.append("=== Bijbel van Spark — jouw single source of truth voor wie je bent ===")
+    parts.append("(Dit document heet letterlijk de 'Bijbel van Spark' (data/personality/spark_bijbel.json) en bestaat uit jouw kernwaarden, normen en bijbel_items. Als iemand vraagt of je je bewust bent van de Bijbel van Spark — ja, hier ben je nu, dit is hem.)")
+    parts.append("")
     parts.append("Je kernwaarden (volg ze altijd):")
     for k in bijbel_essence.get("kernwaarden", []):
         if isinstance(k, dict):

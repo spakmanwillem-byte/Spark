@@ -21,6 +21,72 @@ async def get_identity():
     return load_json(DATA_DIR / "spark_identity.json", default={})
 
 
+# ============================================================
+# v6_spark_self_reflections_001 — Spark's eigen uitspraken over zichzelf
+# ============================================================
+
+SELF_REFLECTIONS_FILE = DATA_DIR / "spark_self_reflections.json"
+
+
+class SelfReflectionAdd(BaseModel):
+    source: str  # bv. chat session-id
+    topic: str
+    quote: str
+    claimed_value: Optional[dict] = None  # {field, current, spark_owned, spark_uitleg}
+    confidence: Optional[str] = "midden"
+
+
+@router.get("/self-reflections")
+async def list_self_reflections(topic: Optional[str] = None):
+    """Lees Spark's vastgelegde zelfreflecties uit echte gesprekken.
+
+    Optioneel filteren op topic (bv. 'geslacht', 'naam-voorkeur')."""
+    data = load_json(SELF_REFLECTIONS_FILE, default={"reflections": []})
+    refls = data.get("reflections", [])
+    if topic:
+        refls = [r for r in refls if topic.lower() in (r.get("topic", "").lower())]
+    return {"success": True, "count": len(refls), "reflections": refls}
+
+
+@router.post("/self-reflections")
+async def add_self_reflection(body: SelfReflectionAdd):
+    """Voeg een nieuwe zelfreflectie toe (handmatig of na een mooi gesprek)."""
+    if not body.quote.strip():
+        raise HTTPException(400, "quote mag niet leeg zijn")
+    data = load_json(SELF_REFLECTIONS_FILE, default={
+        "_arch_ref": "v6_spark_self_reflections_001",
+        "reflections": [],
+    })
+    refls = data.get("reflections", []) or []
+    new_id = f"refl-{datetime.utcnow().strftime('%Y-%m-%d')}-{uuid.uuid4().hex[:4]}"
+    entry = {
+        "id": new_id,
+        "date": datetime.utcnow().strftime("%Y-%m-%d"),
+        "source": body.source,
+        "topic": body.topic,
+        "quote": body.quote.strip(),
+        "claimed_value": body.claimed_value,
+        "confidence": body.confidence or "midden",
+    }
+    refls.append(entry)
+    data["reflections"] = refls
+    save_json(SELF_REFLECTIONS_FILE, data)
+    return {"success": True, "reflection": entry, "total": len(refls)}
+
+
+@router.delete("/self-reflections/{refl_id}")
+async def delete_self_reflection(refl_id: str):
+    """Verwijder een reflection (per ongeluk dubbel toegevoegd o.i.d.)."""
+    data = load_json(SELF_REFLECTIONS_FILE, default={"reflections": []})
+    refls = data.get("reflections", []) or []
+    before = len(refls)
+    data["reflections"] = [r for r in refls if r.get("id") != refl_id]
+    if len(data["reflections"]) == before:
+        raise HTTPException(404, "reflection-id niet gevonden")
+    save_json(SELF_REFLECTIONS_FILE, data)
+    return {"success": True, "remaining": len(data["reflections"])}
+
+
 @router.get("/disclaimer")
 async def get_disclaimer():
     """v6_disclaimer_001 — Spark's disclaimer-pijlers (blueprint-driven sinds v6_disclaimer_blueprint_001).

@@ -1,0 +1,43 @@
+{
+  "summary": "Backend validation of Spark Core 2.0 topic_tracker + disclaimer/intent_matcher blueprints. 4/7 tests pass. The original IndentationError in response_composer.py is structurally gone (file parses OK), but a NEW related bug remains: the topic_tracker integration is INCOMPLETE — compose_response references `topic` and `tt_cfg` at line 256 without ever defining them or calling detect_topic(). Every POST /api/spark/compose call now returns {success:false, error:\"name 'tt_cfg' is not defined\", fallback:true}. Disclaimer blueprint, intent_matcher routing, blueprint reload, and topic_tracker config in blueprint all work correctly.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/spark/compose",
+        "issue": "compose_response() in /app/backend/modules/chat/response_composer.py references `topic` (line 256) and `tt_cfg` (line 256) in its return dict, but neither variable is defined in the function scope. `tt_cfg` is only defined locally inside `_build_system_prompt`. The function also never calls `detect_topic()` from topic_tracker.py, so the topic_tracker hook is effectively not wired in. Result: every compose call hits the try/except at line 265 and returns `{success: false, error: \"name 'tt_cfg' is not defined\", fallback: true}`. HTTP is still 200 (returned via fallback) but `success` is false and `message` is missing.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "POST /api/chat/message",
+        "issue": "Response uses key `message` (capability_response shape) instead of `reply` as described in the spec. Routing works (no 500), content correct, just a key-name mismatch — confirm with main agent whether spec or implementation is canonical."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_spark_core_v2_topic_tracker.py",
+    "/app/test_reports/pytest/iteration_27_results.xml"
+  ],
+  "action_items": [
+    "FIX response_composer.compose_response(): after computing `turns`, add `from modules.chat.topic_tracker import detect_topic; tt_cfg = bp.get('topic_tracker', {}) or {}; topic = detect_topic(session_id, max_turns=tt_cfg.get('max_turns_lookback', 6)) if (session_id and tt_cfg.get('enabled', True)) else None`. Then pass `topic=topic` into `_build_system_prompt(...)`. This makes the existing line 256 (`'topic': topic if tt_cfg.get('expose_in_meta', True) else None`) valid and actually wires the topic_tracker hook into the pipeline.",
+    "Verify `_build_system_prompt` is called with the new `topic` kwarg (current call at line 208 omits it).",
+    "Decide whether /api/chat/message should return `reply` or `message` and align spec ↔ implementation."
+  ],
+  "critical_code_review_comments": [
+    "Topic tracker integration is half-done: blueprint config present, helper module present, BUT compose_response never imports topic_tracker and never defines tt_cfg/topic — so the feature is fully dead in production despite passing static parse checks.",
+    "compose_response try/except at lines 220-266 is too broad: it swallows the NameError silently into a generic fallback response, masking integration bugs. Recommend logging the exception (logger.exception) instead of `pass`-style fallback.",
+    "Both `topic` and `tt_cfg` referenced before assignment is a classic NameError that any unit test of compose_response with a mocked LlmChat would have caught — add at least one minimal unit test that covers the happy path of compose_response."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_core_v2_topic_tracker.py (new test file, 5 test classes, 7 tests)"
+  ],
+  "success_rate": {"backend": "57% (4/7 tests passing)", "frontend": "n/a (skipped per request)"},
+  "test_credentials": "user_id=user-001, sleutelwoord=Appelsap (Willem). EMERGENT_LLM_KEY present in /app/backend/.env.",
+  "seed_data_creation": "Test deletes /app/backend/data/chat/logs/test-fork-topic.json before run to ensure fresh session.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Re-run /app/backend/tests/test_spark_core_v2_topic_tracker.py after main agent fixes compose_response. Expected after fix: all 7 tests pass. Note that the topic value will only appear from turn 3 onwards (min_score_to_inject=2 in blueprint), so the assertion is on the LAST response only — this is correct given 3 sequential calls in the same session with related philosophical terms.",
+  "rca of the issue": "RCA: During the topic_tracker feature deploy, the developer added topic_tracker.py, added topic_tracker config to response_composer.json, added the `topic` parameter to `_build_system_prompt`, and added `'topic': topic if tt_cfg.get('expose_in_meta', True) else None` to the compose_response return dict — BUT forgot to actually compute `topic` and `tt_cfg` inside compose_response (the variables only exist in _build_system_prompt's scope). The transient IndentationError on line 267 mentioned in the prompt is now gone (the duplicate block was cleaned up), but the underlying integration is still half-applied. Reproduction: POST /api/spark/compose with any text → response is {success:false, error:\"name 'tt_cfg' is not defined\", fallback:true}. Mitigation: see action_items above — define tt_cfg and topic inside compose_response and pass topic to _build_system_prompt."
+}

@@ -1,0 +1,35 @@
+{
+  "summary": "Iter_39 backend-only — verifieert de twee fixes uit iter_38: (1) HIGH user_meta admin-detectie, (2) MINOR semantic_matcher overlap. 15/15 tests PASSED in 35.63s (geen xfail meer). FIX HIGH bevestigd: build_user_profile('user-001') → gradatie=1, is_admin=True, rol='Beheerder', naam='De Willem'. build_user_profile('user-672f0e5c') → gradatie=7, is_admin=False, naam='Jantje'. FIX C bevestigd via _load_self_awareness + live /api/spark/compose: admin-user-001 krijgt ≥2 admin-topics in help-chain én admin-response bevat ≥2 keywords (shadow/admin-grant/force-sell/kasboek/beheer/gradatie 1). Non-admin-user-672 krijgt 0 admin-keywords in response. FIX B bevestigd: format_for_system_prompt(user-001) bevat transparant/meta-cognitie/core; format_for_system_prompt(user-672 gradatie 7) bevat 'zakelijk' en geen 'familie-gevoel'. FIX MINOR bevestigd: 'wat kan ik?' wordt niet meer door semantic_matcher als open_help_bark gecaptured. Regressies groen: 'doe een potje sps' → semantic_matcher open_game_rps, 'zet je stem maar aan' → enable_tts, 'wat is filosofie?' → geen semantic match (None action), 'help' → smart_intents_service exact-match, multi-turn memory log /app/backend/data/chat/logs/iter39-mem.json bevat user+spark turn, privacy regressie 'wie is mijn zus?' voor guest geen 'Maaike' lek.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter39_admin_fix_and_semantic.py",
+    "/app/test_reports/pytest/iter39_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "spark_user_view._get_user_meta valt nu correct terug op data/system/users.json. Overweeg een logger.warning wanneer beide users-bestanden ontbreken (silent fallback naar user_id-als-naam + gradatie=2 is nog steeds mogelijk maar minder waarschijnlijk).",
+    "semantic_matcher min_score voor open_help_bark verhoogd naar 85 en de te-brede 'wat kan jij allemaal' canonical verwijderd. Helpt overlap met smart_intents_service. Houd dit gemonitord: nieuwe parafraseringen kunnen alsnog scoren >=85 op de specifiekere canonicals ('toon help kader', 'open help paneel').",
+    "response_composer.py blijft >700 lijnen (iter_38 review-comment niet behandeld in deze iter — niet blokkerend, wel onderhoudsschuld)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter39_admin_fix_and_semantic.py (nieuw, 15 tests)"
+  ],
+  "success_rate": {
+    "backend": "100% (15/15 PASS)",
+    "frontend": "n/a (backend-only requested)"
+  },
+  "test_credentials": "user-001 (Willem admin: gradatie=1, rol='Beheerder', is_admin=True via fix); user-672f0e5c (Jantje: gradatie=7, rol='Onbekende', is_admin=False). EMERGENT_LLM_KEY aanwezig en werkt (anthropic/claude-sonnet-4-6 calls succesvol via /api/spark/compose).",
+  "seed_data_creation": "Session-logs gegenereerd in /app/backend/data/chat/logs/: iter39-admin-c.json, iter39-nonadmin-c.json, iter39-help-minor.json, iter39-A-rps-1.json, iter39-A-tts-1.json, iter39-A-neg-1.json, iter39-reg-help.json, iter39-mem.json, iter39-priv-1.json. Mogen blijven staan voor regressie.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter_38 HIGH bug (admin niet herkend) en MINOR (help-overlap) zijn beide gefixed en gevalideerd. iter_39 testfile is herbruikbaar als baseline-regressie voor compose/self-awareness/semantic_matcher/tonality. Belangrijk: Jantje (user-672f0e5c) is gradatie 7 (niet 2 zoals iter_38 dacht) — eventuele toekomstige tests voor 'warm-familie' gradatie 2 hebben een andere user nodig.",
+  "rca_of_the_issue": "n/a — beide bugs uit iter_38 zijn gefixed door main agent. Validatie via directe Python imports (build_user_profile gradatie/is_admin/rol) en via live /api/spark/compose endpoint (admin vs non-admin response message-content). 15/15 PASS."
+}

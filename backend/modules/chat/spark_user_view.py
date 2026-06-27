@@ -31,20 +31,39 @@ def _safe_load(fp: Path, default):
 
 
 def _get_user_meta(user_id: str) -> Dict:
-    """Naam + gradatie uit auth/users."""
-    auth = _safe_load(DATA / "auth" / "users.json", {"users": []})
-    users = auth.get("users") or auth.get("entries") or []
-    for u in users:
-        if u.get("id") == user_id or u.get("user_id") == user_id:
-            return {
-                "naam": u.get("naam") or u.get("name") or "?",
-                "gradatie": u.get("gradatie") or u.get("grade") or 2,
-            }
+    """v6_user_meta_fix_001 — Lees naam + gradatie + is_admin uit primary store.
+
+    Primary: data/system/users.json (de file die actueel bestaat).
+    Secondary: data/auth/users.json (legacy, mogelijk niet aanwezig).
+    Fallback: data/users/{id}/_meta.json
+    """
+    for fp_rel in ("system/users.json", "auth/users.json"):
+        store = _safe_load(DATA / fp_rel, {"users": []})
+        users = store.get("users") or store.get("entries") or []
+        for u in users:
+            if u.get("id") == user_id or u.get("user_id") == user_id:
+                grad = u.get("gradatie") or u.get("grade") or 2
+                rol = (u.get("rol") or u.get("role") or "").lower()
+                is_admin = (
+                    grad == 1
+                    or "beheerder" in rol
+                    or "admin" in rol
+                    or bool(u.get("is_admin"))
+                )
+                return {
+                    "naam": u.get("naam") or u.get("name") or "?",
+                    "gradatie": grad,
+                    "rol": u.get("rol") or u.get("role"),
+                    "is_admin": is_admin,
+                }
     # Fallback uit users-dir _meta
     meta = _safe_load(DATA / "users" / user_id / "_meta.json", {})
+    grad = meta.get("gradatie") or 2
     return {
         "naam": meta.get("naam") or user_id,
-        "gradatie": meta.get("gradatie") or 2,
+        "gradatie": grad,
+        "rol": meta.get("rol"),
+        "is_admin": grad == 1,
     }
 
 
@@ -95,6 +114,8 @@ def build_user_profile(user_id: str) -> Dict:
         "user_id": user_id,
         "naam": meta["naam"],
         "gradatie": meta["gradatie"],
+        "is_admin": meta.get("is_admin", False),
+        "rol": meta.get("rol"),
         "relaties": rels,
         "recente_themes": themes,
         "behavior": behavior,

@@ -87,13 +87,13 @@ _CATALOG: List[Dict[str, Any]] = [
     {
         "action": "open_help_bark",
         "canonical": [
-            "wat kan jij allemaal",
-            "wat kun je voor mij doen",
-            "geef me een overzicht",
+            "geef me een overzicht van commando's",
             "ik wil een commando-lijst",
             "welke mogelijkheden zijn er",
+            "toon help kader",
+            "open help paneel",
         ],
-        "min_score": 80,
+        "min_score": 85,
         "response": {
             "type": "open_help_bark",
             "action": "open_help_bark",

@@ -44904,11 +44904,59 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1704
       }
+    },
+    {
+      "id": "conv-ef35a5e1",
+      "timestamp": "2026-06-27T21:42:35.349718+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat staat er in mijn agenda?",
+      "spark_response": "[agenda_lezen]",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "begin",
+        "used_cards": [
+          "kbv2-10a73247",
+          "kbv2-skel-d6a76349",
+          "kbv2-971b77ef",
+          "kbv2-skel-727fbd96",
+          "kbv2-5ef2981b"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1705
+      }
+    },
+    {
+      "id": "conv-28df632b",
+      "timestamp": "2026-06-27T21:42:58.523887+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "niks gevonden?",
+      "spark_response": "Klopt — de agenda-query gaf niks terug.\n\nDat kan betekenen: leeg, of nog niet gevuld. Wil je iets toevoegen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "begin",
+        "used_cards": [
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-b5e46060",
+          "kbv2-19e442a0",
+          "kbv2-28feae55"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1706
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1704,
-    "last_updated": "2026-06-27T21:42:21.727625+00:00"
+    "total_conversations": 1706,
+    "last_updated": "2026-06-27T21:42:58.523887+00:00"
   }
 }

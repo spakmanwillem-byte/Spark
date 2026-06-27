@@ -2,30 +2,6 @@
   "messages": [
     {
       "role": "user",
-      "text": "speel steen papier schaar",
-      "ts": "2026-06-27T21:12:01.163068+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "[speel_geluid] of [games_rps] — ik roep de RPS-module aan.\n\n---\n\nJouw beurt, Willem. Kies: **steen, papier of schaar?**\n\n*(Ik wacht — geen hints, geen lekken. Belofte.)*",
-      "ts": "2026-06-27T21:12:01.163068+00:00",
-      "model": "anthropic/claude-sonnet-4-6"
-    },
-    {
-      "role": "user",
-      "text": "speel sps",
-      "ts": "2026-06-27T21:12:16.547531+00:00",
-      "user_id": "user-001"
-    },
-    {
-      "role": "spark",
-      "text": "Steen, papier of schaar — ik wacht op jouw keuze.\n\nZodra jij kiest, doe ik dat ook. Blind. Eerlijk.\n\nWat wordt het?",
-      "ts": "2026-06-27T21:12:16.547531+00:00",
-      "model": "anthropic/claude-sonnet-4-6"
-    },
-    {
-      "role": "user",
       "text": "je zou die pop up moeten openen soort front bij spelen game",
       "ts": "2026-06-27T21:13:01.944731+00:00",
       "user_id": "user-001"
@@ -299,9 +275,33 @@
       "text": "Dank ontvangen. 🙂\n\nEn ja — dit werkt nu zoals het hoort.",
       "ts": "2026-06-27T21:42:21.722858+00:00",
       "model": "anthropic/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "wat staat er in mijn agenda?",
+      "ts": "2026-06-27T21:42:35.344388+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "[agenda_lezen]",
+      "ts": "2026-06-27T21:42:35.344388+00:00",
+      "model": "anthropic/claude-sonnet-4-6"
+    },
+    {
+      "role": "user",
+      "text": "niks gevonden?",
+      "ts": "2026-06-27T21:42:58.519245+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Klopt — de agenda-query gaf niks terug.\n\nDat kan betekenen: leeg, of nog niet gevuld. Wil je iets toevoegen?",
+      "ts": "2026-06-27T21:42:58.519245+00:00",
+      "model": "anthropic/claude-sonnet-4-6"
     }
   ],
   "session_id": "deep-user-001",
   "user_id": "user-001",
-  "updated_at": "2026-06-27T21:42:21.722858+00:00"
+  "updated_at": "2026-06-27T21:42:58.519245+00:00"
 }

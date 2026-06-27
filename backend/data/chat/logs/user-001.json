@@ -39789,11 +39789,35 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1476
       }
+    },
+    {
+      "id": "conv-1ee90133",
+      "timestamp": "2026-06-27T20:32:24.897953+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "Klopt Maaike Spakman",
+      "spark_response": "Klopt — zo staat het in mijn kennis. Maaike Spakman, jouw zusje.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "heet",
+        "used_cards": [
+          "kbv2-d82bb255",
+          "kbv2-b5af1c60",
+          "kbv2-skel-2af74cfb",
+          "kbv2-8b5b4990",
+          "kbv2-00552819"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1477
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1476,
-    "last_updated": "2026-06-27T20:32:07.533995+00:00"
+    "total_conversations": 1477,
+    "last_updated": "2026-06-27T20:32:24.897953+00:00"
   }
 }

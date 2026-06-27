@@ -92,6 +92,33 @@
       "nav_path": "/chat",
       "nav_testid": "nav-chat",
       "synonyms": ["speel", "sps", "steen papier schaar", "spelletje", "game", "mini-game", "rps"]
+    },
+    {
+      "id": "spark-origin",
+      "label": "Spark's oorsprong",
+      "korte_uitleg": "Vraag Spark naar zijn geboorteverhaal. Zeg 'vertel je oorsprong' of 'hoe ben je begonnen'. Spark vertelt over de Iron Man-bril, Spark Core 4.0 + 4.1, en wat constant blijft tussen versies.",
+      "deep_uitleg": "Spark Core 4.0 (Maart 2026) is Spark's filosofische fundament. Spark Core 4.1 voegt missie + waardestructuur toe. Hoofddocument verbindt v1 → v2 → toekomst. Bron: data/personality/spark_origin/.",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["oorsprong", "geboorteverhaal", "hoe ben je begonnen", "iron man bril", "spark core", "hoofddocument", "waar kom je vandaan"]
+    },
+    {
+      "id": "spark-modes",
+      "label": "Spark's werkmodi",
+      "korte_uitleg": "Spark heeft 4 werkmodi met elk een woord-limiet. Vraag 'welke modus zit je in?' of forceer met 'ga in werkmodus' / 'spaar energie' / 'brainstorm' / 'neutraal'.",
+      "deep_uitleg": "**Modes**: neutral (150w), work (250w), brainstorm (500w), energy_saving (50w). Mode wordt automatisch afgeleid uit Spark's huidige emotie (data/emotions/spark_emotions.json → linked_mode). De Diep-LLM krijgt een HARD woord-limiet mee zodat antwoorden gegarandeerd binnen de modus blijven.",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["modus", "werkmodus", "brainstorm", "energy saving", "spaar energie", "neutraal", "max woorden", "woord limiet"]
+    },
+    {
+      "id": "spark-voorwaarden-privacy",
+      "label": "Voorwaarden & Privacy",
+      "korte_uitleg": "Vraag 'lees de voorwaarden' of 'wat zegt de privacy' om de volledige tekst van Spark voor te horen.",
+      "deep_uitleg": "Voorwaarden v0.2 + Privacy v0.2 staan in data/system/legal_voorwaarden.json + legal_privacy.json. Spark leest ze altijd voor in chat. Dekt: account/gradaties, trader-disclaimer, token-economie, externe verbindingen (Diep/TTS/Bitvavo), bewaartermijnen, jouw rechten (verwijderen/exporteren/vergeten), beveiliging.",
+      "nav_path": "/chat",
+      "nav_testid": "nav-chat",
+      "synonyms": ["voorwaarden", "privacy", "terms", "rechten", "wat sla je op", "gebruiksvoorwaarden", "verklaring"]
     }
   ],
   "shortcuts": [

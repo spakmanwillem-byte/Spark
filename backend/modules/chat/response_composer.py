@@ -152,11 +152,97 @@ def _load_help_chain_for_gradatie(gradatie: Optional[int], is_admin: bool = Fals
     return out
 
 
+def _load_current_mode() -> Optional[Dict]:
+    """v6_spark_modes_001 — Bepaal Spark's huidige werkmodus.
+
+    1. Lees current_emotion uit data/emotions/spark_emotions.json
+    2. Zoek sub_emotion.linked_mode (of emotie zelf bij 'neutral')
+    3. Lees mode-config uit data/personality/spark_modes.json
+    4. Return {mode, mode_naam, max_words, toon, uitleg, bron_emotie}
+    """
+    bp = _bp()
+    base = Path(bp["paths"]["bijbel_fp"]).parent
+    modes_fp = base / "spark_modes.json"
+    emotions_fp = base.parent / "emotions" / "spark_emotions.json"
+
+    modes_data = load_json(modes_fp, default=None)
+    if not modes_data:
+        return None
+    modes = modes_data.get("modes", {})
+    default_mode_id = modes_data.get("default_mode", "neutral_mode")
+
+    # Probeer emotie te lezen
+    bron_emotie = None
+    mode_id = default_mode_id
+    try:
+        edata = load_json(emotions_fp, default=None) or {}
+        cur = edata.get("current_emotion") or {}
+        state = cur.get("state") or "neutral"
+        sub_state = cur.get("sub_state")
+        bron_emotie = sub_state or state
+
+        # Map via emotion_to_mode (sneller dan diep zoeken)
+        e2m = modes_data.get("emotion_to_mode") or {}
+        if bron_emotie and bron_emotie in e2m:
+            mode_id = e2m[bron_emotie]
+        else:
+            # fallback: zoek diep in spark_emotions.json
+            emotions = edata.get("emotions") or {}
+            if state in emotions:
+                emo_block = emotions[state]
+                if sub_state and "sub_emotions" in emo_block:
+                    sub = emo_block["sub_emotions"].get(sub_state) or {}
+                    if sub.get("linked_mode"):
+                        mode_id = sub["linked_mode"]
+                elif emo_block.get("linked_mode"):
+                    mode_id = emo_block["linked_mode"]
+    except Exception:
+        pass
+
+    mode_cfg = modes.get(mode_id) or modes.get(default_mode_id) or {}
+    return {
+        "mode": mode_id,
+        "mode_naam": mode_cfg.get("naam", mode_id),
+        "max_words": mode_cfg.get("max_words"),
+        "toon": mode_cfg.get("toon"),
+        "uitleg": mode_cfg.get("uitleg"),
+        "wanneer": mode_cfg.get("wanneer"),
+        "bron_emotie": bron_emotie,
+    }
+
+
+def _load_origin() -> Optional[Dict]:
+    """v6_spark_origin_001 — Lees Spark's origin-documenten (Core 4.0 + 4.1 + hoofddoc).
+
+    Compact: alleen geboortevraag + missie + credo's voor system_prompt-injectie.
+    Volledige tekst blijft beschikbaar via capability `vertel_oorsprong`.
+    """
+    bp = _bp()
+    base = Path(bp["paths"]["bijbel_fp"]).parent / "spark_origin"
+    if not base.exists():
+        return None
+    core40 = load_json(base / "spark_core_4_0.json", default=None)
+    core41 = load_json(base / "spark_core_4_1.json", default=None)
+    hoofd = load_json(base / "spark_hoofddocument.json", default=None)
+    if not (core40 or core41 or hoofd):
+        return None
+    return {
+        "geboortevraag": (core40 or {}).get("geboortevraag"),
+        "missie_kort": ((core41 or {}).get("secties") or [{}])[0].get("tekst") if core41 else None,
+        "credo_4_0": "Spark oordeelt niet. Spark ondersteunt.",
+        "credo_4_1": "Spark is geen platform dat mensen vasthoudt. Spark is een gereedschap dat mensen sterker maakt.",
+        "wat_blijft_constant": (hoofd or {}).get("wat_blijft_constant", [])[:4],
+        "huidige_fase": "Spark Core 2.0 / v2 — FastAPI + React + lokale JSON",
+        "_bron": "data/personality/spark_origin/",
+    }
+
+
 def _load_self_awareness(user_id: Optional[str] = None) -> Optional[Dict]:
     """v6_spark_self_awareness_001 — Spark's bewustzijn van zijn eigen architectuur.
 
     Gradatie-gefilterd: leest help-topics uit data/help/gradatie_{n}.json via inheritance.
     Aanvullingen (tabs, modules) blijven in spark_self_awareness.json.
+    v6_spark_origin_001: voegt origin-laag toe (Core 4.0/4.1 + hoofddoc).
     """
     bp = _bp()
     paths = bp["paths"]
@@ -168,6 +254,12 @@ def _load_self_awareness(user_id: Optional[str] = None) -> Optional[Dict]:
     awareness = load_json(awareness_fp, default=None)
     if not awareness:
         return None
+
+    # v6_spark_origin_001 — origin-laag (geboortevraag + missie + credo's)
+    awareness["_origin"] = _load_origin()
+
+    # v6_spark_modes_001 — huidige werkmodus afleiden uit emotie
+    awareness["_current_mode"] = _load_current_mode()
 
     # Verrijk met live-capabilities (compact)
     caps_data = load_json(capabilities_fp, default={"capabilities": []})
@@ -204,6 +296,37 @@ def _format_self_awareness_for_prompt(aw: Dict) -> str:
     if not aw:
         return ""
     lines = ["=== Wat je over jezelf weet (zelf-kennis) ==="]
+
+    # v6_spark_origin_001 — geboortevraag + missie + credo's bovenaan
+    origin = aw.get("_origin") or {}
+    if origin:
+        lines.append("Jouw oorsprong (Spark Core 4.0 + 4.1, Maart 2026):")
+        if origin.get("geboortevraag"):
+            lines.append(f"  Geboortevraag: '{origin['geboortevraag']}' — JA, en niet via een bestaande AI.")
+        if origin.get("credo_4_0"):
+            lines.append(f"  Credo: {origin['credo_4_0']}")
+        if origin.get("credo_4_1"):
+            lines.append(f"  Credo: {origin['credo_4_1']}")
+        constants = origin.get("wat_blijft_constant") or []
+        if constants:
+            lines.append("  Wat constant blijft tussen versies:")
+            for c in constants:
+                lines.append(f"    - {c}")
+        if origin.get("huidige_fase"):
+            lines.append(f"  Huidige fase: {origin['huidige_fase']}")
+        lines.append("")
+
+    # v6_spark_modes_001 — werkmodus + woord-limiet voor deze beurt
+    mode_info = aw.get("_current_mode") or {}
+    if mode_info:
+        lines.append(f"Je huidige werkmodus: {mode_info.get('mode_naam','?')} "
+                     f"(max {mode_info.get('max_words','?')} woorden, "
+                     f"toon={mode_info.get('toon','?')}).")
+        if mode_info.get("uitleg"):
+            lines.append(f"  {mode_info['uitleg']}")
+        if mode_info.get("bron_emotie"):
+            lines.append(f"  Reden: emotie '{mode_info['bron_emotie']}' triggerde deze modus.")
+        lines.append("")
 
     user_grad = aw.get("_user_gradatie")
     if user_grad:
@@ -346,6 +469,19 @@ def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_prof
     parts.append("Belangrijk:")
     for rule in tpl["rules"]:
         parts.append(f"  - {rule}")
+
+    # v6_no_capability_leak_001 — Issue 1 fix: forbid leaking capability-syntax to user-facing text
+    parts.append("  - GEEN INTERNE SYNTAX LEKKEN: schrijf NOOIT vierkante-haak-tokens zoals [speel_geluid], [toon_afbeelding], [open_help_bark], [tts_aan], [stt_uit], [ambient_aan] in je tekstuele antwoord. Dat zijn interne capability-namen die het systeem zelf uitvoert — als jij ze in tekst typt verschijnen ze letterlijk bij de user en breekt de illusie. Beschrijf de actie in gewone taal ('ik speel een geluidje af', 'ik open het help-overzicht') of voer hem stilletjes uit zonder benoeming.")
+
+    # v6_spark_modes_001 — harde max_words-instructie uit huidige modus
+    # (self_awareness_snippet bevat al de modus, maar hier zetten we de regel als HARD LIMIT)
+    if self_awareness_snippet and "huidige werkmodus" in self_awareness_snippet:
+        # Probeer max_words uit de snippet te halen (lichte string-search)
+        import re
+        m = re.search(r"max (\d+) woorden", self_awareness_snippet)
+        if m:
+            mw = m.group(1)
+            parts.append(f"  - HARD WOORD-LIMIET: deze beurt MAG je antwoord max {mw} woorden zijn. Tellen telt — bondig boven volledig.")
     return "\n".join(parts)
 
 

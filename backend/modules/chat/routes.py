@@ -153,6 +153,22 @@ async def process_message(req: ChatMessage):
     # 0b. HOMONIEM-FLOW (v3_012) — check session state eerst
     state = session_state.get_state(req.user_id) if req.user_id else {}
 
+    # 0b0. HELP-INTENT PRIORITY (v6_help_priority_002) — "wat kan je / wat kun je / help" etc.
+    # MOET voor identity_intent_service draaien, anders pakt 'wat_kan' van identity het op
+    # en krijgt user 'identity_what_can' i.p.v. de Help-Bark popup.
+    try:
+        from . import smart_intents_service as _si_help_pre
+        if _si_help_pre.detect_help_intent(text):
+            response.update({
+                "type": "open_help_bark",
+                "action": "open_help_bark",
+                "message": "🔮 Help-overzicht geopend.",
+            })
+            _save_log(req, response, "help_overview")
+            return response
+    except Exception as _hex:
+        print(f"[help-priority-pre] failed: {_hex}")
+
     # 0b1. IDENTITY-INTENT (v4_identity_001) — vragen over Spark zelf ("wie ben je", "wat kan je",
     # "jouw missie/visie/core/doel/waarden") krijgen voorrang vóór alle pending flows.
     # Dit voorkomt ook dat een stale pending_wedervraag een identity-vraag opvreet.

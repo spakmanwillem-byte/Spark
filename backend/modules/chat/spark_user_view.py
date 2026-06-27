@@ -14,11 +14,13 @@ Output: compact profiel-snippet voor inject in compose system_prompt:
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Dict, List, Optional
 from collections import Counter
 
 DATA = Path(__file__).parent.parent.parent / "data"
+logger = logging.getLogger(__name__)
 
 
 def _safe_load(fp: Path, default):
@@ -26,7 +28,10 @@ def _safe_load(fp: Path, default):
         return default
     try:
         return json.loads(fp.read_text(encoding="utf-8"))
-    except Exception:
+    except Exception as ex:
+        # v6_spark_logger_001 — Issue 3 fix: log silent fallbacks zodat we
+        # data-corruptie en read-errors kunnen debuggen.
+        logger.warning("[spark_user_view._safe_load] kon %s niet lezen: %s — gebruik default", fp, ex)
         return default
 
 

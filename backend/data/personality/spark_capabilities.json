@@ -355,6 +355,89 @@
       ],
       "status": "live",
       "module": "chat/capability_handler_service.py"
+    },
+    {
+      "id": "vertel_oorsprong",
+      "naam": "Vertel je oorsprong",
+      "categorie": "self",
+      "beschrijving": "Spark vertelt zijn geboorteverhaal — Spark Core 4.0 + 4.1 (Maart 2026), Iron Man-bril, missie, credo's.",
+      "triggers": [
+        "\\bvertel\\s+(je|over)\\s+(je\\s+)?oorsprong\\b",
+        "\\bwat\\s+is\\s+je\\s+(oorsprong|geboorteverhaal)\\b",
+        "\\bhoe\\s+ben\\s+je\\s+(begonnen|ontstaan)\\b",
+        "\\bwaar\\s+kom\\s+je\\s+vandaan\\b",
+        "\\b(spark\\s+)?core\\s+4(\\.0|\\.1)?\\b",
+        "\\biron\\s*man\\s*bril\\b",
+        "\\b(spark\\s+)?(hoofd)?document\\b",
+        "\\bje\\s+(geboorte|geboortevraag|dna)\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "data_source": "/app/backend/data/personality/spark_origin/"
+    },
+    {
+      "id": "welke_modus",
+      "naam": "Welke modus zit je in",
+      "categorie": "self",
+      "beschrijving": "Spark toont zijn huidige werkmodus (neutral/work/brainstorm/energy_saving), max woorden, toon en bron-emotie.",
+      "triggers": [
+        "\\bwelke\\s+modus\\b",
+        "\\bin\\s+welke\\s+modus\\s+zit\\s+je\\b",
+        "\\bje\\s+huidige\\s+(modus|stand)\\b",
+        "\\bwat\\s+is\\s+je\\s+modus\\b",
+        "\\bspark\\s+modus\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "data_source": "/app/backend/data/personality/spark_modes.json"
+    },
+    {
+      "id": "wissel_modus",
+      "naam": "Wissel modus",
+      "categorie": "self",
+      "beschrijving": "Forceer Spark in een werkmodus (werkmodus / brainstorm / energie-sparen / neutraal).",
+      "triggers": [
+        "\\bga\\s+in\\s+(werkmodus|brainstorm|energie(\\s+)?sparen|neutrale\\s+modus|neutraal)\\b",
+        "\\bwissel\\s+(naar\\s+)?(werkmodus|brainstorm|energie|neutraal)\\b",
+        "\\bschakel\\s+(over\\s+)?naar\\s+(werkmodus|brainstorm|energie|neutraal)\\b",
+        "\\b(zet|maak)\\s+je(zelf)?\\s+(in|op)\\s+(werkmodus|brainstorm|energie|neutraal)\\b",
+        "\\bspaar\\s+energie\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "data_source": "/app/backend/data/emotions/spark_emotions.json"
+    },
+    {
+      "id": "lees_voorwaarden",
+      "naam": "Lees de voorwaarden",
+      "categorie": "legal",
+      "beschrijving": "Spark leest de gebruiksvoorwaarden voor.",
+      "triggers": [
+        "\\blees\\s+(de\\s+)?voorwaarden\\b",
+        "\\bwat\\s+(zijn|staan\\s+er\\s+in)\\s+de\\s+voorwaarden\\b",
+        "\\b(toon|laat\\s+zien)\\s+(de\\s+)?voorwaarden\\b",
+        "\\bgebruiksvoorwaarden\\b",
+        "\\bterms\\s+(of\\s+)?(use|service)\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "data_source": "/app/backend/data/system/legal_voorwaarden.json"
+    },
+    {
+      "id": "lees_privacy",
+      "naam": "Lees de privacy",
+      "categorie": "legal",
+      "beschrijving": "Spark leest de privacy-verklaring voor.",
+      "triggers": [
+        "\\blees\\s+(de\\s+)?privacy\\b",
+        "\\bwat\\s+(zegt|staat\\s+er\\s+in)\\s+(de\\s+)?privacy\\b",
+        "\\bhoe\\s+zit\\s+het\\s+met\\s+(de\\s+)?privacy\\b",
+        "\\b(toon|laat\\s+zien)\\s+(de\\s+)?privacy(\\s*verklaring)?\\b",
+        "\\bprivacy\\s+(beleid|policy|verklaring)\\b"
+      ],
+      "status": "live",
+      "module": "chat/capability_handler_service.py",
+      "data_source": "/app/backend/data/system/legal_privacy.json"
     }
   ],
   "_lege_categorieen_voor_later": {

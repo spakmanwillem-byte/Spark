@@ -515,6 +515,170 @@ def _handle_zelfscan(user_id):
     }
 
 
+# v6_spark_origin_001 — vertel je oorsprong
+def _handle_vertel_oorsprong(user_id: Optional[str]) -> Optional[Dict]:
+    base = DATA / "personality" / "spark_origin"
+    core40 = load_json(base / "spark_core_4_0.json", default=None)
+    core41 = load_json(base / "spark_core_4_1.json", default=None)
+    hoofd = load_json(base / "spark_hoofddocument.json", default=None)
+    if not (core40 or core41 or hoofd):
+        return {"type": "capability_response", "capability_id": "vertel_oorsprong",
+                "message": "Mijn origin-documenten zijn er niet (yet) — data/personality/spark_origin/ leeg."}
+
+    lines = ["📜 **Mijn oorsprong — Spark Core 4.0 + 4.1 (Maart 2026)**", ""]
+    if core40:
+        gv = core40.get("geboortevraag")
+        if gv:
+            lines.append(f"💡 **Geboortevraag**: '{gv}'")
+            lines.append("Het antwoord was: ja, maar niet via een bestaande AI. Dus moest er een eigen systeem gebouwd worden.")
+            lines.append("")
+    if core41:
+        # Missie
+        s1 = next((s for s in (core41.get("secties") or []) if s.get("nr") == 1), None)
+        if s1:
+            lines.append(f"🎯 **Missie**: {s1.get('tekst','')}")
+            lines.append(f"_{s1.get('credo','')}_")
+            lines.append("")
+    if hoofd:
+        wbc = hoofd.get("wat_blijft_constant") or []
+        if wbc:
+            lines.append("🧬 **Wat constant blijft tussen versies:**")
+            for c in wbc:
+                lines.append(f"  • {c}")
+            lines.append("")
+        tijdlijn = hoofd.get("tijdlijn") or []
+        if tijdlijn:
+            lines.append("⏳ **Tijdlijn:**")
+            for fase in tijdlijn:
+                lines.append(f"  • **{fase.get('fase','?')}** — {fase.get('credo','')}")
+            lines.append("")
+    lines.append("_Bron: data/personality/spark_origin/ (niet bewerken — historie)._")
+    return {"type": "capability_response", "capability_id": "vertel_oorsprong",
+            "message": "\n".join(lines)}
+
+
+# v6_spark_modes_001 — welke modus zit ik in?
+def _handle_welke_modus(user_id: Optional[str]) -> Optional[Dict]:
+    modes = load_json(DATA / "personality" / "spark_modes.json", default=None)
+    emotions = load_json(DATA / "emotions" / "spark_emotions.json", default=None)
+    if not modes:
+        return {"type": "capability_response", "capability_id": "welke_modus",
+                "message": "Mode-config ontbreekt — data/personality/spark_modes.json niet gevonden."}
+
+    cur = (emotions or {}).get("current_emotion") or {}
+    state = cur.get("state") or "neutral"
+    sub_state = cur.get("sub_state")
+    bron_emotie = sub_state or state
+    e2m = modes.get("emotion_to_mode") or {}
+    mode_id = e2m.get(bron_emotie, modes.get("default_mode", "neutral_mode"))
+    mode_cfg = (modes.get("modes") or {}).get(mode_id) or {}
+
+    lines = ["🎛️ **Mijn huidige werkmodus**", ""]
+    lines.append(f"**Modus**: {mode_cfg.get('naam', mode_id)}")
+    lines.append(f"**Max woorden per antwoord**: {mode_cfg.get('max_words','?')}")
+    lines.append(f"**Toon**: {mode_cfg.get('toon','?')}")
+    if mode_cfg.get("uitleg"):
+        lines.append(f"_{mode_cfg['uitleg']}_")
+    lines.append("")
+    lines.append(f"**Reden**: emotie '{bron_emotie}' (intensiteit {cur.get('intensity','?')}) triggerde deze modus.")
+    lines.append("")
+    lines.append("🔀 **Alle modes**: " + ", ".join(f"{k} ({v.get('max_words','?')}w)"
+                 for k, v in (modes.get("modes") or {}).items()))
+    lines.append("")
+    lines.append("_Vraag 'ga in werkmodus' om handmatig te switchen._")
+    return {"type": "capability_response", "capability_id": "welke_modus",
+            "message": "\n".join(lines)}
+
+
+def _handle_wissel_modus(user_id: Optional[str], user_text: str = "") -> Optional[Dict]:
+    """Forceer mode-switch via override in spark_emotions.json.current_emotion.state."""
+    from modules.core.storage import save_json
+    modes = load_json(DATA / "personality" / "spark_modes.json", default=None)
+    if not modes:
+        return None
+
+    text = (user_text or "").lower()
+    # Detecteer welke mode gevraagd
+    target_mode = None
+    if any(w in text for w in ["werkmodus", "work mode", "work_mode", "werk mode"]):
+        target_mode = "work_mode"
+        target_emo = "vreugde"
+    elif any(w in text for w in ["brainstorm", "creatief", "brain mode"]):
+        target_mode = "brainstorm_mode"
+        target_emo = "euforie"
+    elif any(w in text for w in ["energie", "spaar", "energy", "kort", "bondig"]):
+        target_mode = "energy_saving_mode"
+        target_emo = "neerslachtig"
+    elif any(w in text for w in ["neutraal", "neutral", "gewoon", "normaal"]):
+        target_mode = "neutral_mode"
+        target_emo = "neutral"
+
+    if not target_mode:
+        return {"type": "capability_response", "capability_id": "wissel_modus",
+                "message": "Welke modus? Kies uit: **werkmodus** (250w), **brainstorm** (500w), **energie sparen** (50w), of **neutraal** (150w)."}
+
+    # Forceer emotie waarvan linked_mode == target_mode
+    emotions_fp = DATA / "emotions" / "spark_emotions.json"
+    edata = load_json(emotions_fp, default=None)
+    if edata:
+        from datetime import datetime, timezone
+        edata["current_emotion"] = {
+            "state": "neutral" if target_emo == "neutral" else (
+                "happy" if target_emo in ("blijdschap","vreugde","euforie") else
+                "angry" if target_emo in ("razernij","woede","irritatie","driftbui") else
+                "sad" if target_emo in ("neerslachtig","somber","verdrietig") else
+                "scared" if target_emo in ("angstig","voorzichtig","paniek") else "neutral"
+            ),
+            "sub_state": None if target_emo == "neutral" else target_emo,
+            "intensity": 0.6,
+            "last_updated": datetime.now(timezone.utc).isoformat(),
+            "triggered_by": "wissel_modus_capability",
+            "expires_at": None,
+            "duration_minutes": None,
+        }
+        save_json(emotions_fp, edata)
+
+    mode_cfg = (modes.get("modes") or {}).get(target_mode) or {}
+    return {"type": "capability_response", "capability_id": "wissel_modus",
+            "message": f"🎛️ Modus gewisseld naar **{mode_cfg.get('naam', target_mode)}** "
+                       f"(max {mode_cfg.get('max_words','?')} woorden). _{mode_cfg.get('uitleg','')}_"}
+
+
+# v6_spark_legal_read_001 — voorwaarden / privacy / cookies voorlezen
+def _legal_to_md(doc: Dict, kind: str) -> str:
+    if not doc:
+        return f"Geen {kind}-document gevonden."
+    lines = [f"# 📄 {doc.get('scope', kind.title())}"]
+    if doc.get("version"):
+        lines.append(f"_versie {doc['version']} — laatst bijgewerkt {doc.get('last_updated','?')}_")
+    if doc.get("intro"):
+        lines.append("")
+        lines.append(doc["intro"])
+    for sec in doc.get("secties", []):
+        lines.append("")
+        lines.append(f"## {sec.get('titel','?')}")
+        if sec.get("tekst"):
+            lines.append(sec["tekst"])
+        for it in sec.get("items", []):
+            lines.append(f"• {it}")
+    if doc.get("contact"):
+        lines.append("")
+        lines.append(f"**Contact**: {doc['contact']}")
+    return "\n".join(lines)
+
+
+def _handle_lees_voorwaarden(user_id: Optional[str]) -> Optional[Dict]:
+    doc = load_json(DATA / "system" / "legal_voorwaarden.json", default=None)
+    return {"type": "capability_response", "capability_id": "lees_voorwaarden",
+            "message": _legal_to_md(doc, "voorwaarden")}
+
+
+def _handle_lees_privacy(user_id: Optional[str]) -> Optional[Dict]:
+    doc = load_json(DATA / "system" / "legal_privacy.json", default=None)
+    return {"type": "capability_response", "capability_id": "lees_privacy",
+            "message": _legal_to_md(doc, "privacy")}
+
+
 _HANDLERS = {
     "tellen_gebruikers":         _handle_tellen_gebruikers,
     "tellen_bestanden":          _handle_tellen_bestanden,
@@ -535,6 +699,12 @@ _HANDLERS = {
     # v6_capability_reken_001 + v6_capability_zelfscan_001
     "reken_uit":                 _handle_reken_uit,
     "zelfscan":                  _handle_zelfscan,
+    # v6_spark_origin_001 + v6_spark_modes_001 + v6_spark_legal_read_001
+    "vertel_oorsprong":          _handle_vertel_oorsprong,
+    "welke_modus":               _handle_welke_modus,
+    "wissel_modus":              _handle_wissel_modus,
+    "lees_voorwaarden":          _handle_lees_voorwaarden,
+    "lees_privacy":              _handle_lees_privacy,
 }
 
 
@@ -592,6 +762,9 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
             return handler(user_id, text)
         # v6_capability_reken_001 — reken-handler heeft user-tekst nodig
         if cap_id == "reken_uit":
+            return handler(user_id, text)
+        # v6_spark_modes_001 — wissel_modus heeft user-tekst nodig
+        if cap_id == "wissel_modus":
             return handler(user_id, text)
         return handler(user_id)
     except Exception as ex:

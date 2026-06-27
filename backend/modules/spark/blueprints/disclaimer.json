@@ -1,0 +1,31 @@
+{
+  "_arch_ref": "v6_disclaimer_blueprint_001",
+  "_schema_version": "1.0",
+  "_blueprint_for": "spark/disclaimer",
+  "_doel": "Configuratie voor /api/spark/disclaimer endpoint. Identity + Bijbel + Capabilities tellingen.",
+
+  "paths": {
+    "identity_fp": "{DATA}/personality/spark_identity.json",
+    "bijbel_fp": "{DATA}/personality/spark_bijbel.json",
+    "capabilities_fp": "{DATA}/personality/spark_capabilities.json"
+  },
+
+  "counts": {
+    "include_kernwaarden": true,
+    "include_normen": true,
+    "include_bijbel_items": true,
+    "include_bijbel_alias": true,
+    "include_capabilities_live": true,
+    "include_capabilities_total": true,
+    "live_status_value": "live"
+  },
+
+  "labels": {
+    "kernwaarden": "kernwaarden",
+    "normen": "normen",
+    "bijbel_items": "bijbel_items",
+    "bijbel_alias": "bijbel",
+    "capabilities_live": "capabilities",
+    "capabilities_total": "capabilities_total"
+  }
+}

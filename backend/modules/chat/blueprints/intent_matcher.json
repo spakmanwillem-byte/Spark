@@ -1,0 +1,34 @@
+{
+  "_arch_ref": "v6_intent_matcher_blueprint_001",
+  "_schema_version": "1.0",
+  "_blueprint_for": "chat/intent_matcher_service",
+  "_doel": "Configuratie voor Layer 3 capability-matcher. Patronen, scoring en bron-file.",
+
+  "paths": {
+    "caps_fp": "{DATA}/personality/spark_capabilities.json"
+  },
+
+  "preprocessing": {
+    "strip_prefix_regex": "^(hey |hoi |hallo )?spark[,!.]?\\s*",
+    "lowercase": true,
+    "strip_whitespace": true
+  },
+
+  "scoring": {
+    "min_input_len_divider": 8,
+    "multiword_trigger_boost": 0.15,
+    "max_score": 1.0,
+    "confidence_decimals": 2
+  },
+
+  "status_levels": {
+    "live": "live",
+    "placeholder": "placeholder",
+    "idea": "idea",
+    "default_when_missing": "idea"
+  },
+
+  "cache": {
+    "use_mtime_invalidation": true
+  }
+}

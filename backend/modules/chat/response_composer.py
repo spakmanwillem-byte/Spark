@@ -103,14 +103,19 @@ def _load_recent_turns(session_id: str) -> List[Dict]:
         return []
 
 
-def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None) -> str:
+def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
+    tt_cfg = bp.get("topic_tracker", {}) or {}
     parts = list(tpl["intro"])
     parts.append("")
     if user_profile_snippet:
         parts.append("Over de gebruiker (relatie-context):")
         parts.append(f"  {user_profile_snippet}")
+        parts.append("")
+    if topic and tt_cfg.get("enabled", True):
+        label = tt_cfg.get("inject_label", "Gespreks-onderwerp van dit moment")
+        parts.append(f"{label}: '{topic}' — houd dit losjes vast als rode draad, dwing er niet naartoe.")
         parts.append("")
     parts.append("Je toon: " + bijbel_essence.get("tone", bp["tonality"]["default_tone"]))
     parts.append("")
@@ -248,6 +253,7 @@ async def compose_response(
             "used_cards": [c.get("id") for c in cards],
             "used_model": f"{model_provider}/{model_name}",
             "blueprint_version": bp.get("_schema_version", "?"),
+            "topic": topic if tt_cfg.get("expose_in_meta", True) else None,
             "user_profile": {
                 "naam": user_profile.get("naam"),
                 "gradatie": user_profile.get("gradatie"),

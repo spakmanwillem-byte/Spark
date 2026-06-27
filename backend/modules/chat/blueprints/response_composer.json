@@ -36,6 +36,15 @@
     "tag_match_score": 1
   },
 
+  "topic_tracker": {
+    "enabled": true,
+    "mode": "subtle",
+    "max_turns_lookback": 6,
+    "min_score_to_inject": 2,
+    "inject_label": "Gespreks-onderwerp van dit moment",
+    "expose_in_meta": true
+  },
+
   "system_prompt_template": {
     "intro": [
       "Je bent Spark — een persoonlijke, lokale AI-companion. Je bent GEEN ChatGPT.",

@@ -23,25 +23,41 @@ async def get_identity():
 
 @router.get("/disclaimer")
 async def get_disclaimer():
-    """v6_disclaimer_001 — Spark's disclaimer-pijlers.
-    Verwijst naar Normen & Waarden + Spark Bijbel als leidende contextlagen."""
-    identity = load_json(DATA_DIR / "spark_identity.json", default={})
+    """v6_disclaimer_001 — Spark's disclaimer-pijlers (blueprint-driven sinds v6_disclaimer_blueprint_001).
+    Verwijst naar Normen & Waarden + Spark Bijbel als leidende contextlagen.
+    Configuratie: modules/spark/blueprints/disclaimer.json"""
+    from modules.core.blueprint import load_blueprint_cached
+    bp = load_blueprint_cached("spark", "disclaimer")
+    paths = bp["paths"]
+    counts_cfg = bp["counts"]
+    labels = bp["labels"]
+
+    identity = load_json(Path(paths["identity_fp"]), default={})
     disclaimer = identity.get("disclaimer") or {}
-    bijbel = load_json(BIJBEL_FILE, default={})
-    # v6_brein_counts_001 — voeg capabilities-tellingen toe voor brein-overzicht
-    caps_data = load_json(DATA_DIR / "spark_capabilities.json", default={"capabilities": []})
-    caps_live = sum(1 for c in caps_data.get("capabilities", []) if c.get("status") == "live")
+    bijbel = load_json(Path(paths["bijbel_fp"]), default={})
+    caps_data = load_json(Path(paths["capabilities_fp"]), default={"capabilities": []})
+    caps_live = sum(1 for c in caps_data.get("capabilities", [])
+                    if c.get("status") == counts_cfg["live_status_value"])
+
+    leidende: dict = {}
+    if counts_cfg.get("include_kernwaarden", True):
+        leidende[labels["kernwaarden"]] = len(bijbel.get("kernwaarden", []))
+    if counts_cfg.get("include_normen", True):
+        leidende[labels["normen"]] = len(bijbel.get("normen", []))
+    if counts_cfg.get("include_bijbel_items", True):
+        leidende[labels["bijbel_items"]] = len(bijbel.get("bijbel_items", []))
+    if counts_cfg.get("include_bijbel_alias", True):
+        leidende[labels["bijbel_alias"]] = len(bijbel.get("bijbel_items", []))
+    if counts_cfg.get("include_capabilities_live", True):
+        leidende[labels["capabilities_live"]] = caps_live
+    if counts_cfg.get("include_capabilities_total", True):
+        leidende[labels["capabilities_total"]] = len(caps_data.get("capabilities", []))
+
     return {
         "success": True,
         "disclaimer": disclaimer,
-        "leidende_lagen_counts": {
-            "kernwaarden": len(bijbel.get("kernwaarden", [])),
-            "normen": len(bijbel.get("normen", [])),
-            "bijbel_items": len(bijbel.get("bijbel_items", [])),
-            "bijbel": len(bijbel.get("bijbel_items", [])),  # alias voor frontend-leesgemak
-            "capabilities": caps_live,
-            "capabilities_total": len(caps_data.get("capabilities", [])),
-        },
+        "leidende_lagen_counts": leidende,
+        "blueprint_version": bp.get("_schema_version", "?"),
     }
 
 

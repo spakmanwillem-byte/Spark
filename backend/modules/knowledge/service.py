@@ -6,7 +6,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from modules.core.storage import load_json, save_json
 
-KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
 
 
 def _now_iso():
@@ -15,14 +17,27 @@ def _now_iso():
 
 class KnowledgeService:
     def _load_entries(self):
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        return data.get("knowledge_entries", [])
+        """v6_v2_first_001 — V2 lades + inbox als platte lijst (V1-vorm)."""
+        out = []
+        for fname in [f"knowledge_v2_{l}" for l in KBV2_LADES] + ["knowledge_inbox"]:
+            d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+            out.extend(d.get("kaarten", []) or [])
+        return out
 
     def _save_entries(self, entries):
-        # Preserve root metadata (schema_version, valid_kaart_types, etc.)
-        data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-        data["knowledge_entries"] = entries
-        save_json(KNOWLEDGE_FILE, data)
+        """v6_v2_first_001 — schrijf per V2-lade-bestand. snap-* (V1) overslaan."""
+        by_lade = {l: [] for l in KBV2_LADES + ["inbox"]}
+        for e in entries:
+            eid = e.get("id") or ""
+            if eid.startswith("snap-"):
+                continue  # V1 = archief
+            lade = (e.get("lade") or "").lower().strip()
+            if lade not in KBV2_LADES:
+                lade = "inbox"
+            by_lade[lade].append(e)
+        for lade, items in by_lade.items():
+            fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+            save_json(KBV2_DIR / f"{fname}.json", {"kaarten": items})
 
     def _is_answered(self, entry):
         lagen = entry.get("lagen", {})

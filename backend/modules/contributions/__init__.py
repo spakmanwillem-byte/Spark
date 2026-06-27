@@ -15,7 +15,35 @@ from modules.core.storage import load_json, save_json
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 CLAIMS_FILE = DATA_DIR / "contributions_claims.json"
-KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_DIR / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
+
+
+def _load_kb_v2():
+    """v6_v2_first_001 — V2 lades + inbox in V1-vorm zodat downstream code blijft werken."""
+    entries = []
+    for fname in [f"knowledge_v2_{l}" for l in KBV2_LADES] + ["knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        entries.extend(d.get("kaarten", []) or [])
+    return {"knowledge_entries": entries}
+
+
+def _save_kb_v2(data):
+    """Schrijf elke kaart terug naar z'n V2-lade-bestand. snap-* (V1) overslaan."""
+    entries = data.get("knowledge_entries", []) if isinstance(data, dict) else (data or [])
+    by_lade = {l: [] for l in KBV2_LADES + ["inbox"]}
+    for e in entries:
+        eid = e.get("id") or ""
+        if eid.startswith("snap-"):
+            continue
+        lade = (e.get("lade") or "").lower().strip()
+        if lade not in KBV2_LADES:
+            lade = "inbox"
+        by_lade[lade].append(e)
+    for lade, items in by_lade.items():
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        save_json(KBV2_DIR / f"{fname}.json", {"kaarten": items})
 
 CLAIM_TTL_SECONDS = 24 * 3600  # 24 uur
 FIELDS = ["wat", "wanneer", "waar", "wie", "waarom", "hoe"]
@@ -47,7 +75,7 @@ def _list_eligible_card_ids():
     - Minstens 1 leeg ws5-veld
     - Niet 'pending-review' (al ingediend)
     """
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     eligible = []
     for e in data.get("knowledge_entries", []):
         tags = e.get("tags") or []
@@ -133,7 +161,7 @@ def release_claim(user_id: str, reason: str = "released") -> bool:
 
 def get_card(card_id: str) -> dict:
     """Haal kaart op."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     for e in data.get("knowledge_entries", []):
         if e.get("id") == card_id:
             return e
@@ -142,7 +170,7 @@ def get_card(card_id: str) -> dict:
 
 def save_partial(card_id: str, field_updates: dict, lagen_updates: dict = None, belangrijkheid: int = None) -> dict:
     """Sla partial ws5 + lagen + belangrijkheid updates op. Return updated card."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     entries = data.get("knowledge_entries", [])
     target = None
     for e in entries:
@@ -173,7 +201,7 @@ def save_partial(card_id: str, field_updates: dict, lagen_updates: dict = None, 
                 target["belangrijkheid"] = n
         except (ValueError, TypeError):
             pass
-    save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+    _save_kb_v2({"knowledge_entries": entries})
     return target
 
 
@@ -191,7 +219,7 @@ def submit_for_review(user_id: str, card_id: str, ws5_data: dict, lagen_data: di
     total_max = len(FIELDS) + 4 + 1  # 6 ws5 + 4 lagen + 1 belangrijkheid = 11
     percentage = round(total_filled / total_max * 100)
 
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     for e in data["knowledge_entries"]:
         if e.get("id") == card_id:
             tags = e.get("tags") or []
@@ -212,7 +240,7 @@ def submit_for_review(user_id: str, card_id: str, ws5_data: dict, lagen_data: di
             }
             e["metadata"] = meta
             break
-    save_json(KNOWLEDGE_FILE, data)
+    _save_kb_v2(data)
     release_claim(user_id, reason="submitted")
     return {
         "success": True,
@@ -224,7 +252,7 @@ def submit_for_review(user_id: str, card_id: str, ws5_data: dict, lagen_data: di
 
 def list_pending_for_admin() -> list:
     """Lijst van kaarten die wachten op admin-goedkeuring."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     out = []
     for e in data.get("knowledge_entries", []):
         tags = e.get("tags") or []
@@ -246,7 +274,7 @@ def list_pending_for_admin() -> list:
 
 def approve(card_id: str, admin_id: str) -> dict:
     """Keur kaart goed: verwijder pending-review en auto-generated tags. Return contribution info."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     for e in data["knowledge_entries"]:
         if e.get("id") == card_id:
             tags = [t for t in (e.get("tags") or []) if t not in ("pending-review", "auto-generated", "scan-discovered")]
@@ -258,7 +286,7 @@ def approve(card_id: str, admin_id: str) -> dict:
             contrib["approved_by"] = admin_id
             meta["contribution"] = contrib
             e["metadata"] = meta
-            save_json(KNOWLEDGE_FILE, data)
+            _save_kb_v2(data)
             return {
                 "success": True,
                 "contributor_user_id": contrib.get("user_id"),
@@ -270,7 +298,7 @@ def approve(card_id: str, admin_id: str) -> dict:
 
 def reject(card_id: str, admin_id: str, reason: str = "") -> dict:
     """Wijs kaart af: verwijder pending-review tag, kaart blijft in pool."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     for e in data["knowledge_entries"]:
         if e.get("id") == card_id:
             tags = [t for t in (e.get("tags") or []) if t != "pending-review"]
@@ -282,14 +310,14 @@ def reject(card_id: str, admin_id: str, reason: str = "") -> dict:
             contrib["reject_reason"] = reason
             meta["contribution"] = contrib
             e["metadata"] = meta
-            save_json(KNOWLEDGE_FILE, data)
+            _save_kb_v2(data)
             return {"success": True}
     return {"success": False, "error": "card_not_found"}
 
 
 def user_stats(user_id: str) -> dict:
     """Stats voor user dashboard."""
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
+    data = _load_kb_v2()
     submitted = 0
     pending = 0
     approved = 0

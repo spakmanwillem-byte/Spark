@@ -160,30 +160,12 @@ class SnapNLPService:
         return self._triggers
 
     def _load_knowledge(self):
-        """v6_kbv2_unify_snap_001 — V2 is autoritatief, V1 is legacy-fallback.
-
-        Strategie:
-          1. Laad V2 entries (alle 4 lades + inbox)
-          2. Voeg V1 entries toe ALLEEN als hun begrip nog niet in V2 zit
-             (lowercase + ascii-fold vergelijking). Zo verliezen we geen
-             historische kennis terwijl V2 wel de bron-van-waarheid is.
+        """v6_kbv2_unify_snap_001 — V2 is autoritatief.
+        v6_v1_fallback_off_001 — V1-fallback uitgeschakeld. V1 is archief sinds
+        26-06-2026 (ghost-cleanup); de overgebleven 32 V1-only items zijn
+        chat-zinnen, geen kennis. Geen merge meer.
         """
-        v2 = _load_v2_entries()
-        v2_begrip_set = set()
-        for e in v2:
-            b = (e.get("begrip") or "").lower().strip()
-            if b:
-                v2_begrip_set.add(b)
-                v2_begrip_set.add(_ascii_fold(b))
-        merged = list(v2)
-        for e in _load_v1_entries():
-            b = (e.get("begrip") or "").lower().strip()
-            if not b:
-                continue
-            if b in v2_begrip_set or _ascii_fold(b) in v2_begrip_set:
-                continue  # V2 wint
-            merged.append(e)
-        return merged
+        return _load_v2_entries()
 
     def _build_index(self, entries):
         """Bouw een snelle lookup index op begrip (lowercase).

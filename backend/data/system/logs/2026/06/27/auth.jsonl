@@ -1,2 +1,4 @@
 {"ts": "2026-06-27T02:57:13.561765+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-001"}}
 {"ts": "2026-06-27T02:57:13.566977+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 5.0}
+{"ts": "2026-06-27T09:32:17.107287+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-06-27T09:32:17.127630+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 20.42}

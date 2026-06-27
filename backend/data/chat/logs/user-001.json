@@ -39193,11 +39193,47 @@
         "session_id": "default",
         "gesprek_nummer": 1450
       }
+    },
+    {
+      "id": "conv-b7ed6ef9",
+      "timestamp": "2026-06-27T09:34:48.745705+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemorgen Willem. Waar staat je hoofd vandaag? _(laatst sprak je me 6 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1451
+      }
+    },
+    {
+      "id": "conv-6695ecef",
+      "timestamp": "2026-06-27T09:34:48.812185+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "ochtend"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1452
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1450,
-    "last_updated": "2026-06-27T02:55:15.103052+00:00"
+    "total_conversations": 1452,
+    "last_updated": "2026-06-27T09:34:48.812185+00:00"
   }
 }

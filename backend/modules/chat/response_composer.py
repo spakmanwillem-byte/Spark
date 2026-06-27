@@ -196,6 +196,19 @@ async def compose_response(
     bijbel = _load_bijbel_essence()
     turns = _load_recent_turns(session_id) if session_id else []
 
+    # v6_topic_tracker_001 — detecteer dominant onderwerp over recente turns
+    tt_cfg = bp.get("topic_tracker", {}) or {}
+    topic: Optional[str] = None
+    if session_id and tt_cfg.get("enabled", True):
+        try:
+            from modules.chat.topic_tracker import detect_topic
+            topic = detect_topic(
+                session_id,
+                max_turns=int(tt_cfg.get("max_turns_lookback", 6)),
+            )
+        except Exception:
+            topic = None
+
     # v6_spark_user_view_001 — relatie-context per user
     try:
         from modules.chat.spark_user_view import build_user_profile, format_for_system_prompt
@@ -205,7 +218,7 @@ async def compose_response(
         user_profile = {}
         user_snippet = None
 
-    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet)
+    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic)
 
     user_prompt = (
         "## Relevante KB-kaarten uit Spark's eigen kennis:\n"

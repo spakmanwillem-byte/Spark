@@ -39297,11 +39297,45 @@
         "session_id": "default",
         "gesprek_nummer": 1454
       }
+    },
+    {
+      "id": "conv-8fcd7200",
+      "timestamp": "2026-06-27T09:56:54.558442+00:00",
+      "user_id": "user-001",
+      "user_naam": "Gebruiker",
+      "user_message": "hoeveel gebruikers hebben we?",
+      "spark_response": "📊 We zijn met **18 mensen** en **5 bots** in Spark Core.\n_Mensen: De Willem, Spark, Nick Teeuwen, Roadkill, Heidi, Marieke, Ron, joel123…_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "hebben"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "capability_response",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_response"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1455
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1454,
-    "last_updated": "2026-06-27T09:54:07.212397+00:00"
+    "total_conversations": 1455,
+    "last_updated": "2026-06-27T09:56:54.558442+00:00"
   }
 }

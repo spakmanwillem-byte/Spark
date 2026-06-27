@@ -1,0 +1,32 @@
+{
+  "summary": "Re-test of Spark Core 2.0 topic_tracker fix. ALL 7 TESTS PASS (7/7). The previously reported NameError 'tt_cfg not defined' in compose_response() is fully resolved: tt_cfg and topic are now defined before _build_system_prompt() is called, detect_topic() is invoked correctly, and topic is passed through to the system prompt builder. 3 sequential POST /api/spark/compose calls all return success=true with non-empty message, and the 3rd call returns a non-empty topic string. Disclaimer, intent_matcher, blueprint reload + topic_tracker config all remain green.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "POST /api/chat/message",
+        "issue": "Still uses key 'message' instead of 'reply' as in original spec — test accepts both. Confirm with main agent which key is canonical."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_spark_core_v2_topic_tracker.py",
+    "/app/test_reports/pytest/iteration_28_results.xml"
+  ],
+  "action_items": [
+    "No blocking action items. (Optional) align /api/chat/message response key with spec ('reply' vs 'message')."
+  ],
+  "critical_code_review_comments": [
+    "Fix is correctly applied: tt_cfg + topic are defined right after turns load (lines 200-210) and topic is passed into _build_system_prompt (line 221). detect_topic() is imported lazily inside a try/except so a missing topic_tracker module won't break compose.",
+    "compose_response try/except at line 278 still swallows exceptions into a generic fallback — consider logger.exception() so future integration bugs surface faster (non-blocking suggestion)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (7/7 tests passing)", "frontend": "n/a (skipped per request)"},
+  "test_credentials": "user_id=user-001, sleutelwoord=Appelsap (Willem). EMERGENT_LLM_KEY present in /app/backend/.env.",
+  "seed_data_creation": "Test deletes /app/backend/data/chat/logs/test-fork-topic.json before run for fresh session.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "iteration_27 critical bug (NameError tt_cfg in compose_response) is resolved. Test file /app/backend/tests/test_spark_core_v2_topic_tracker.py is now the regression suite for Spark Core 2.0 topic_tracker.",
+  "rca of the issue": "Original bug RCA from iter_27: compose_response referenced tt_cfg/topic in its return dict without defining them. Fix applied in this iteration: lines 200-210 of response_composer.py now compute `tt_cfg = bp.get('topic_tracker', {}) or {}` and `topic = detect_topic(session_id, max_turns=...)` inside compose_response, and line 221 passes topic into _build_system_prompt(). Validated by 3 sequential live LLM calls returning success=true with topic populated on the 3rd turn."
+}

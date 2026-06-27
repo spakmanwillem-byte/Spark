@@ -70,7 +70,7 @@ export function SparkOverviewPage({ onNavigate }) {
       stats: [
         { label: 'Kernwaarden', value: brainCounts.kernwaarden ?? '-' },
         { label: 'Normen', value: brainCounts.normen ?? '-' },
-        { label: 'Bijbel', value: brainCounts.bijbel ?? '-' },
+        { label: 'Bijbel', value: brainCounts.bijbel ?? brainCounts.bijbel_items ?? '-' },
         { label: 'Capabilities', value: brainCounts.capabilities ?? '-' },
       ],
     },
@@ -130,7 +130,7 @@ export function SparkOverviewPage({ onNavigate }) {
     {
       id: 'connections',
       title: 'Verbanden',
-      subtitle: 'Knowledge graph (v1+v2)',
+      subtitle: 'Knowledge graph (v2)',
       icon: Link2,
       accent: '#ec4899',
       stats: [

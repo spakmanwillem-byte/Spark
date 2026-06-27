@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1061,
+    "card_count": 1081,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-16T20:06:04.584372+00:00",
+    "last_updated": "2026-06-27T00:56:26.060704+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -140920,6 +140920,161 @@
           "bron": "verlorenkennis.txt (batch 7)",
           "lade": "doen"
         }
+      ]
+    },
+    {
+      "id": "kbv2-a73cbea7",
+      "begrip": "snuffelen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Snuffelen is met de neus of uit nieuwsgierigheid iets onderzoeken of verkennen.",
+        "laag2": "Snuffelen wordt gebruikt om geuren waar te nemen, informatie te zoeken of iets te ontdekken.",
+        "laag3": "Snuffelen is de handeling waarbij een mens of dier actief geuren waarneemt of ergens nieuwsgierig onderzoek naar doet. Dieren snuffelen vooral om informatie over hun omgeving te verzamelen. Mensen gebruiken het woord ook voor rondkijken, bladeren of zoeken zonder een vast doel, bijvoorbeeld in een winkel of op internet.",
+        "laag4": "Binnen Spark is snuffelen een verkennende actie waarbij informatie uit de omgeving wordt verzameld door observatie, geur of nieuwsgierig onderzoek. Snuffelen ondersteunt oriëntatie, ontdekking en het herkennen van objecten, situaties of gegevens. De exacte betekenis wordt bepaald door de context."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en systemen.",
+        "wat": "Het verkennen of onderzoeken van de omgeving of informatie.",
+        "wanneer": "Wanneer informatie of geuren worden gezocht of onderzocht.",
+        "hoe": "Door te ruiken, rond te kijken, te bladeren of gericht onderzoek te doen.",
+        "waarom": "Om informatie te verzamelen, iets te ontdekken of de omgeving te verkennen.",
+        "waar": "In de natuur, winkels, woningen, digitale omgevingen en andere locaties."
+      },
+      "tags": [
+        "snuffelen",
+        "onderzoeken",
+        "verkennen",
+        "zoeken",
+        "nieuwsgierigheid",
+        "geur",
+        "observatie",
+        "informatie",
+        "ontdekking",
+        "gedrag",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-da0b170e",
+          "begrip": "zoeken",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "nieuwsgierigheid",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-371b9df4",
+          "begrip": "Verkennen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "nieuwsgierigheid",
+            "observatie",
+            "onderzoeken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5f608502",
+          "begrip": "zintuig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "geur",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5cf93abb",
+          "begrip": "patronen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-27T00:56:26.060685+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-27T00:55:16.017802+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-27T00:56:21.434373+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-27T00:56:21.534364+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-27T00:56:21.541339+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-27T00:56:26.304454+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-27T00:56:26.311713+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
       ]
     }
   ],

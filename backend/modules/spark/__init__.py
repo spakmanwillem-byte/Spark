@@ -28,6 +28,9 @@ async def get_disclaimer():
     identity = load_json(DATA_DIR / "spark_identity.json", default={})
     disclaimer = identity.get("disclaimer") or {}
     bijbel = load_json(BIJBEL_FILE, default={})
+    # v6_brein_counts_001 — voeg capabilities-tellingen toe voor brein-overzicht
+    caps_data = load_json(DATA_DIR / "spark_capabilities.json", default={"capabilities": []})
+    caps_live = sum(1 for c in caps_data.get("capabilities", []) if c.get("status") == "live")
     return {
         "success": True,
         "disclaimer": disclaimer,
@@ -35,6 +38,9 @@ async def get_disclaimer():
             "kernwaarden": len(bijbel.get("kernwaarden", [])),
             "normen": len(bijbel.get("normen", [])),
             "bijbel_items": len(bijbel.get("bijbel_items", [])),
+            "bijbel": len(bijbel.get("bijbel_items", [])),  # alias voor frontend-leesgemak
+            "capabilities": caps_live,
+            "capabilities_total": len(caps_data.get("capabilities", [])),
         },
     }
 

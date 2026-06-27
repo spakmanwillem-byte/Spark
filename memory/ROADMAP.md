@@ -49,6 +49,25 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 31 (2026-06-27, avond)
+
+### ✅ Nieuw in deze sessie (na de redeploy van sessie 30)
+- **Diep multi-fix (iter_30-37)**: log-bug, self-awareness, tab-switch persist, TTS/STT/ambient action-pipeline, Help-Bark in Diep, RPS in Diep, multi-turn memory na fast-path, "begin/start sps" synonyms.
+- **C – self-awareness 3rd-wheel opruimen (iter_38-39)**: leest nu bestaande `data/help/gradatie_{n}.json` via inherits-chain + `admin.json` voor admins. RPS in g7-base zodat iedereen het ziet.
+- **B – Gradatie-tonality (iter_38-39)**: g1=core/transparant/meta-cognitie, g2-4=warm/familie/brief-volledig, g5-7=zakelijk-vriendelijk/géén privé-info/mag Spark Shop voorstellen.
+- **A – Semantic intent matcher (iter_38-39)**: rapidfuzz token_set_ratio. Spark begrijpt synoniemen ('doe een potje sps', 'kunnen we sps spelen', 'zet je stem aan') zonder hardcoded lijsten.
+- **HIGH bug-fix**: `_get_user_meta` las niet-bestaand `data/auth/users.json` → user-001 kreeg gradatie 2. Nu primary `data/system/users.json` + is_admin-detectie via rol='Beheerder'.
+
+### 🟡 Backlog (uit code-reviews iter_38+39)
+- `response_composer.py` 721 regels → splitsen in fast_paths/self_awareness/compose_core. P2.
+- Logger.warning bij silent fallback `_get_user_meta`. P3.
+- `rps_open_triggers` duplicated in routes.py + response_composer.py → extract naar `modules/games/rps/rps_triggers.py`. P2.
+- Auto-daily-brief scheduler (P1) niet aangepakt.
+- Frontend "Spark's geheugen" tab — niet aangepakt.
+
+---
+
+
 ## 🔎 REALITY CHECK — Sessie 30 (2026-06-27)
 
 ### 💡 Nieuwe ideeën uit sessie 30 (brainfarts, voor latere sessies)

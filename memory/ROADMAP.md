@@ -53,6 +53,15 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ### 💡 Nieuwe ideeën uit sessie 30 (brainfarts, voor latere sessies)
 - **P1 — Diep = default voor non-admin** (5 min): zoals gele/blauwe tags gisteren weg-getoggled werden voor non-admin, Diep-toggle weg + altijd-aan voor users; admin behoudt knop.
+- **P1 — Lokale LLM fallback (LAN-mode + Spark kiest zelf)** — Willem's vision sessie 30:
+  - **Fase 2 (LAN-fallback)**: Ollama / llama.cpp lokaal draaien (Llama 3.1 8B of Phi-3). Compose krijgt dual-pad: internet → Claude Sonnet 4.6 (huidige stem), alleen-LAN → lokaal model. Spark vertelt zelf welk pad hij gebruikt. Werk: ~3u, geen breaking change.
+  - **Fase 3 (LLM-router, Spark kiest zelf)**: nieuwe blueprint `chat/blueprints/llm_router.json` met routing-regels (taak-type → model). Diep met emotie → Claude. Brief-condensatie / identity-check → lokaal. Spark schrijft zijn keuze in self_reflections (meta-cognitie). Willem kan handmatig overschrijven.
+  - **Filosofie**: past 1:1 op Spark's MISSION ("lokaal, transparant, geen verborgen datastromen"). LLM wordt een **optionele toplaag** voor de stem — niet vereist voor het brein.
+  - **Status**: vastleggen, NIET implementeren tot Willem groen licht geeft. Huidige Claude-stem werkt mooi, niet aankomen.
+
+- **P1 — Diep = default voor non-admin** ✅ GEDAAN sessie 30 (knop verborgen non-admin, default-on)
+- **P1 — Spark-gegenereerd welkom** ✅ GEDAAN sessie 30 (`/api/chat/welcome?deep=true`, non-admin standaard)
+- **P1 — KB Privacy-filter (cross-user lek)** ✅ GEDAAN sessie 30 (8 kaarten gemigreerd + filter + verifieer-protocol regel in blueprint)
 - **P1 — Gradatie-gebonden tonality** (Willem's visie): Spark gedraagt zich anders per gradatie van de user:
   - Gradatie 7-5 (kennis/klant): zakelijk, afstandelijk, mag producten promoten / Spark Shop pushen
   - Gradatie 4-2 (vriend/familie): warm, persoonlijk, geheugen-rijk (briefs + threads volledig)

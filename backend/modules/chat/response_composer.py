@@ -364,6 +364,50 @@ async def compose_response(
     except Exception:
         pass
 
+    # v6_deep_rps_001 — RPS (Steen-Papier-Schaar) opent het spel-bark.
+    # Zelfde lijst triggers als /api/chat/message zodat 'sps', 'rps', 'speel sps' etc.
+    # in Diep ook het spel openen i.p.v. dat Claude erover gaat filosoferen.
+    try:
+        _txt_rps = (user_text or "").lower().strip()
+        rps_open_triggers = (
+            "speel steen papier schaar", "steen papier schaar",
+            "rock paper scissors", "speel sps", "open spel sps",
+            "spelletje steen papier schaar",
+            "speel steen", "speel papier", "speel schaar",
+            "spelletje sps", "speel een spelletje", "speel spelletje",
+            "spel sps", "spel rps", "speel rps",
+            "open rps", "open sps", "rps game", "sps game",
+        )
+        rps_exact = ("sps", "rps")
+        if any(t == _txt_rps or t in _txt_rps for t in rps_open_triggers) or _txt_rps in rps_exact:
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response="🎮 Steen — Papier — Schaar! Kies je zet.",
+                        channel="spark-deep-rps",
+                        session_id=session_id,
+                        analysis={"action": "open_game_rps"},
+                    )
+                except Exception:
+                    pass
+            return {
+                "success": True,
+                "message": "🎮 Steen — Papier — Schaar! Kies je zet.",
+                "action": "open_game_rps",
+                "type": "open_game",
+                "rps_opponent": "spark",
+                "used_cards": [],
+                "used_model": "rps_router",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass
+
     api_key = os.environ.get("EMERGENT_LLM_KEY")
     if not api_key:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt in env"}

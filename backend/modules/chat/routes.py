@@ -239,7 +239,12 @@ async def process_message(req: ChatMessage):
             "spelletje steen papier schaar",
             "speel steen", "speel papier", "speel schaar",
             "spelletje sps", "speel een spelletje", "speel spelletje",
+            "spel sps", "spel rps", "speel rps",
+            "open rps", "open sps", "rps game", "sps game",
         )
+        # v6_rps_short_001 — korte aanroepen alleen ALS hele bericht (geen substring),
+        # anders false positives in zinnen als "ik heb een rps strategie".
+        rps_exact_only_triggers = ("sps", "rps")
         rps_reset_triggers = (
             "reset score steen papier schaar", "reset sps", "reset score sps",
         )
@@ -248,7 +253,7 @@ async def process_message(req: ChatMessage):
             "score sps", "stand sps", "stand steen papier schaar",
             "mijn rps stats", "rps stats",
         )
-        if any(t == _txt or t in _txt for t in rps_open_triggers):
+        if any(t == _txt or t in _txt for t in rps_open_triggers) or _txt in rps_exact_only_triggers:
             # context bepaalt opponent: 'spark' (chat met Spark) of 'bot' (community)
             ch = (getattr(req, "channel", None) or "").lower()
             opponent = "bot" if ch == "community" else "spark"

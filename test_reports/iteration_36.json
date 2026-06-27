@@ -1,0 +1,32 @@
+{
+  "summary": "Iter_36 backend-only regression for RPS triggers in /api/chat/message and Diep fast-path /api/spark/compose. All 15 tests passed (100%). Diep fast-path 'sps'/'rps'/'speel sps'/'rps game' correct openen open_game_rps met fast_path=true, rps_opponent='spark', message bevat 🎮. Normale chat 'sps','rps','speel sps' triggers RPS-router. False-positive guards werken (substring 'rps strategie' / 'wat is rps in algemene zin' triggert niet). Regressies help, tts en privacy intact. Log channel 'spark-deep-rps' wordt geschreven.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter36_rps_triggers.py",
+    "/app/test_reports/pytest/iter36_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "routes.py is 2156 regels lang — overweeg splitsen in submodules (RPS-router, action-intents, etc.) voor onderhoudbaarheid.",
+    "Trigger-lijsten zijn dubbel: rps_open_triggers en rps_exact zijn identiek in routes.py (regel 236-247) en response_composer.py (regel 372-381). Extract naar gedeelde constante (bv. modules/games/rps/rps_triggers.py) om drift tussen Diep en normale chat te voorkomen.",
+    "ChatMessage Pydantic model accepteert geen sleutelwoord-veld; payload met sleutelwoord wordt stilzwijgend genegeerd (Pydantic v2 default). Indien sleutelwoord daadwerkelijk gebruikt moet worden voor auth/persona, expliciet als Optional[str] toevoegen of via Depends(verify_sleutelwoord)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter36_rps_triggers.py (nieuw)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "n/a (backend-only requested)"},
+  "test_credentials": "user-001 (Willem admin, sleutelwoord=Appelsap); user-672f0e5c (Jantje, privacy regressie). Beide credentials geverifieerd via /app/memory/test_credentials.md (niet aanwezig, gebruikt zoals opgegeven in review_request).",
+  "seed_data_creation": "Geen seed data; bestaande user-001.json log werd geappend met spark-deep-rps entries via test calls.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "RPS fast-path en router werken in zowel Diep (/api/spark/compose) als normale chat (/api/chat/message). Frontend Diep-branch open_game_rps handling (GesprekkenPage.js ~regel 830, setRpsOpponent + setRpsOpen) is NIET getest in deze iteratie. Bij volgende UI-test: verifieer dat Diep-bark daadwerkelijk RPS-bark opent na backend response action=open_game_rps. Test bestand /app/backend/tests/test_iter36_rps_triggers.py is herbruikbaar als regressie. Log-pad: /app/backend/data/chat/logs/{user_id}.json met 'conversations' array.",
+  "rca_of_the_issue": "Geen bugs gevonden. RCA van bug-fix uit iter_36 (achtergrond): (1) sps/rps werden niet als losse triggers herkend in routes.py — fix: rps_exact_only_triggers tuple toegevoegd met exact-match check (`_txt in rps_exact_only_triggers`). (2) Diep had geen RPS-router — fix: v6_deep_rps_001 fast-path in response_composer.py vóór LLM-call, met identieke trigger-lijst. False-positive guard correct geïmplementeerd via exact-match (niet substring) voor 'sps'/'rps'."
+}

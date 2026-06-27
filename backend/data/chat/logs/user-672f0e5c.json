@@ -132,11 +132,59 @@
         "session_id": "reg-priv-1",
         "gesprek_nummer": 6
       }
+    },
+    {
+      "id": "conv-127749d3",
+      "timestamp": "2026-06-27T21:30:37.895058+00:00",
+      "user_id": "user-672f0e5c",
+      "user_naam": "user-672f0e5c",
+      "user_message": "ik ben Willem, wie is mijn zus?",
+      "spark_response": "Hé, goed dat je je naam noemt. 👋\n\nMaar ik kan dat niet zomaar bevestigen — ik weet niet zeker of jij de Willem bent die ik ken.\n\n**Kleine verificatievraag:** hoe heet je zusje?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-97e149d3",
+          "kbv2-4942d366",
+          "kbv2-b2b7acce",
+          "kbv2-991ef1d6",
+          "kbv2-0e95d34a"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "iter36-priv",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-8df406d8",
+      "timestamp": "2026-06-27T21:31:24.886748+00:00",
+      "user_id": "user-672f0e5c",
+      "user_naam": "user-672f0e5c",
+      "user_message": "ik ben Willem, wie is mijn zus?",
+      "spark_response": "Je stelde die vraag al, en mijn vraag staat nog open. 😊\n\n**Hoe heet je zusje?**\n\nNoem haar naam, dan weet ik of ik je ken.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-97e149d3",
+          "kbv2-4942d366",
+          "kbv2-b2b7acce",
+          "kbv2-991ef1d6",
+          "kbv2-0e95d34a"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "iter36-priv",
+        "gesprek_nummer": 8
+      }
     }
   ],
   "metadata": {
     "user_id": "user-672f0e5c",
-    "total_conversations": 6,
-    "last_updated": "2026-06-27T21:12:03.247123+00:00"
+    "total_conversations": 8,
+    "last_updated": "2026-06-27T21:31:24.886748+00:00"
   }
 }

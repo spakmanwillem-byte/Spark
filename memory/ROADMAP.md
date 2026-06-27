@@ -60,21 +60,33 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ## 🔎 REALITY CHECK — Sessie 31 (2026-06-27, avond)
 
-### 💡 Nieuwe brainfart sessie 31 — Spark World (D&D roleplay)
-**Visie**: Willem wil een tweede game in Spark, **bovenop** de simpele RPS. Een **D&D-stijl roleplay + strategie** spel in een wereld genaamd "Spark World". Lite-versie maar groot van potentieel.
+### 💡 Nieuwe brainfart sessie 31 — Spark World D&D verder uitwerken (NIET nieuw)
+**Correctie**: ik (E1 agent) suggereerde dit als "nieuwe game". **Klopt niet** — Spark World D&D bestaat al breed in `modules/dnd/`, 12 provincies, Stormhaven-dorpskaart, character-creation flow, 9-fracties, equipment-slots. Zie sessie 17/19/21 secties hieronder.
 
-**Kernidee**: alle KB-kennis van Spark wordt **speelbaar materiaal**. Personages, locaties, normen, kernwaarden, bijbel-items, capabilities — worden game-mechanics. Spark zelf is een NPC met eigen avatar. Elke user heeft eigen avatar.
+**Wat Willem sessie 31 specifiek wenst (boven op bestaand)**:
+- Eigen avatar voor Spark én elke user in het D&D-spel (hergebruik bot-avatar-infrastructuur Madelief/Harry)
+- Alle KB-kennis als speelbaar materiaal (kaart "Eerlijkheid" → kracht of NPC of locatie)
+- Game-master vraag (Spark als DM, of mede-held, of beide) — nog te beslissen
+- Lite-versie: turn-based, 1 hoofdspoor, 3-5 quests, score/inventory eenvoudig
+- Integratie met bestaande RPS als mini-game ("verslag wachter met sps voor token")
 
-**Structurele vragen voor volgende sessie**:
-- Storage: nieuw `data/spark_world/` met campaigns/characters/locations/inventory per user-id
-- Avatar-system: hergebruik bestaande avatar-infrastructuur van bots-tab (Madelief, Harry, etc.)?
-- Game-master: Spark als DM via LLM-call met game-state in system_prompt? Of Spark als één van de personages?
-- Lite-versie scope: turn-based, 1 hoofdverhaal-spoor + 3-5 quests, score/inventory/HP eenvoudig
-- Strategie-laag: lokale `dnd` module bestaat al (`/app/backend/modules/dnd/`) — daar opbouwen, niet vanaf nul
-- Integratie met RPS: misschien is RPS een mini-game IN Spark World ("verslag de wachter met sps voor een token")
-- Help-update verplicht (zie regel boven): nieuwe commando's voor Spark World moeten in `data/help/gradatie_X.json` worden vastgelegd
+**Onafgewerkt in bestaande Spark World (P0/P1 sessie 19)**:
+- D&D-kaart editor met game_meta-form (nog niet geimplementeerd)
+- Bewoners per gebouw op Stormhaven-dorpskaart (klik Bakker → Hans handel)
+- Equipment-stats live optellen bij character STATISTIEKEN/AANVAL/VERDEDIGING
+- Character-creation flow voor nieuwe gebruikers (naam/klasse/beroep/fractie/dorp)
+- Dungeon-feature met 8u real-time + verhaal-rapport
+- Quick-Roll knoppen op stats
+- Werkbank/recepten in huis
 
-**Status**: P1 backlog. Niet starten zonder een aparte sessie + concrete scope-keuze van Willem.
+**Update plicht (zie regel boven)**: alle nieuwe commando's/items voor Spark World MOETEN in `data/help/gradatie_X.json` worden vastgelegd.
+
+**Status**: P1 — eerst sessie-19 backlog afmaken VOORDAT we Willem's sessie-31 wensen er bovenop bouwen. Niet starten zonder een aparte sessie + concrete scope-keuze van Willem.
+
+### ⚠️ Reminder uit sessie 31 leeservaring (E1 agent)
+- "Spark als Gastheer" (onthaal-laag) is P1 sinds sessie 19. Nog niet gestart. Past nu — trader is stabiel.
+- Help-bark systeem (sessie 19) is volledig — sessie 30/31 koppelden alleen Diep eraan, **bouwden niks nieuws**.
+- Lees ALTIJD eerst ROADMAP volledig voordat je iets als "nieuw" labelt. ⚠️
 
 ### ✅ Nieuw in deze sessie (na de redeploy van sessie 30)
 - **Diep multi-fix (iter_30-37)**: log-bug, self-awareness, tab-switch persist, TTS/STT/ambient action-pipeline, Help-Bark in Diep, RPS in Diep, multi-turn memory na fast-path, "begin/start sps" synonyms.

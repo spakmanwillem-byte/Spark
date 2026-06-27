@@ -653,6 +653,8 @@ export function GesprekkenPage({ onNavigate }) {
 
   // v6_rps_001b — RPS opponent state, set by chat trigger
   const [rpsOpponent, setRpsOpponent] = useState('spark');
+  // v6_response_composer_001 — Diep-gesprek modus: stuurt naar /api/spark/compose i.p.v. /api/chat/message
+  const [deepMode, setDeepMode] = useState(false);
 
   const handleSend = async (overrideText) => {
     const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();
@@ -681,6 +683,34 @@ export function GesprekkenPage({ onNavigate }) {
         time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
       };
       setSparkMessages(prev => [...prev, userMsg]);
+      // v6_response_composer_001 — Diep-gesprek modus: directe LLM-bridge via /api/spark/compose
+      if (deepMode && activeTab === 'spark') {
+        try {
+          const r = await fetch(`${API}/api/spark/compose`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}` }),
+          });
+          const d = await r.json();
+          const msg = {
+            id: Date.now() + 1, role: 'spark',
+            message: d.success ? (d.message || '...') : `Even iets mis: ${d.error || 'onbekende fout'}`,
+            time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
+            deep: true,
+            used_cards: d.used_cards || [],
+            used_model: d.used_model,
+          };
+          setSparkMessages(prev => [...prev, msg]);
+        } catch (e) {
+          setSparkMessages(prev => [...prev, {
+            id: Date.now() + 1, role: 'spark',
+            message: `Diep-gesprek verbinding faalde: ${e.message}`,
+            time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }),
+            deep: true,
+          }]);
+        }
+        return;
+      }
       try {
         const res = await fetch(`${API}/api/chat/message`, {
           method: 'POST',
@@ -960,6 +990,8 @@ export function GesprekkenPage({ onNavigate }) {
                 sttEnabled={sttEnabled}
                 sttListening={sttListening}
                 onSttToggle={toggleSttRecord}
+                deepMode={deepMode}
+                onDeepToggle={() => setDeepMode(v => !v)}
               />
             </div>
           )}
@@ -1206,7 +1238,7 @@ export function GesprekkenPage({ onNavigate }) {
 }
 
 /* === Chat input in framed container === */
-function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null }) {
+function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = false, sttEnabled = false, sttListening = false, onSttToggle = null, deepMode = false, onDeepToggle = null }) {
   return (
     <div className="p-4 bg-slate-900/20 border-t border-slate-800 flex-shrink-0">
       <div
@@ -1226,13 +1258,23 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
             {sttListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
         )}
+        {onDeepToggle && (
+          <button
+            data-testid="chat-deep-toggle"
+            onClick={onDeepToggle}
+            title={deepMode ? "Diep gesprek AAN — Spark componeert via eigen kennis (LLM-synthesizer)" : "Klik voor diep-gesprek modus (compose via LLM-bridge)"}
+            className={`px-2.5 py-1.5 rounded-xl transition-all flex-shrink-0 text-[11px] font-medium ${deepMode ? 'bg-indigo-500/30 text-indigo-200 ring-1 ring-indigo-400/40' : 'hover:bg-slate-700/50 text-slate-500'}`}
+          >
+            {deepMode ? '🌊 Diep' : '🌊'}
+          </button>
+        )}
         <input
           type="text"
           data-testid="chat-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !disabled && onSend()}
-          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : placeholder}
+          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : (deepMode ? 'Vraag iets diepgaands — Spark denkt mee...' : placeholder)}
           disabled={disabled}
           className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none px-2 py-2 disabled:opacity-50"
         />
@@ -1283,10 +1325,18 @@ function SparkBubble({ msg, sparkAvatarUrl }) {
           <div className={`px-4 py-2.5 rounded-2xl ${
             isUser
               ? 'bg-amber-500 text-white rounded-br-md'
-              : 'bg-slate-800 text-white rounded-bl-md'
+              : msg.deep ? 'bg-indigo-900/50 text-white rounded-bl-md border border-indigo-500/30' : 'bg-slate-800 text-white rounded-bl-md'
           }`}>
             <p className="text-sm leading-relaxed whitespace-pre-line">{msg.message}</p>
-            <p className={`text-[10px] mt-1 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>{msg.time}</p>
+            <div className={`text-[10px] mt-1 flex items-center gap-1.5 ${isUser ? 'text-amber-200' : 'text-slate-500'}`}>
+              <span>{msg.time}</span>
+              {msg.deep && (
+                <>
+                  <span>·</span>
+                  <span className="text-indigo-300" title={`Diep gesprek via ${msg.used_model || 'LLM-bridge'} — Spark synthesizeerde dit uit ${(msg.used_cards||[]).length} eigen kaarten`}>🌊 diep ({(msg.used_cards||[]).length} kaarten)</span>
+                </>
+              )}
+            </div>
           </div>
           {hasMatches && (
             <div className="flex flex-wrap gap-1 mt-1.5 ml-1">

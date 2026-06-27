@@ -52,18 +52,18 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 ## 🔎 REALITY CHECK — Sessie 29 (2026-06-27)
 
 ### ✅ Nieuw in deze sessie
-- **v6_v2_first_001** — 13 modules gemigreerd van V1 naar V2-first (chat-services + supporting + legacy API)
-- **v6_v1_fallback_off_001** — `snap_service` V1-fallback uitgeschakeld; V1 = archief sinds 26-06
+- **v6_response_composer_ui_001** — **Frontend toggle "🌊 Diep gesprek"** in chat-input van GesprekkenPage:
+  - Klein knopje naast mic, schakelt deep-mode aan/uit
+  - Als aan: messages gaan naar `/api/spark/compose` i.p.v. `/api/chat/message`
+  - Spark-bubble krijgt indigo accent + "🌊 diep (N kaarten)" badge met tooltip "Spark synthesizeerde dit uit N eigen kaarten via {model}"
+  - Geen breaking change — normale chat blijft default
+- **v6_v2_first_001** — 13 modules gemigreerd van V1 naar V2-first
+- **v6_v1_fallback_off_001** — `snap_service` V1-fallback uitgeschakeld
 - **v6_graph_ghost_cleanup_001** — 2298 V1 ghost-nodes opgeschoond + rebuild-graph hard naar V2-only
-- **v6_brein_counts_001** — `/api/spark/disclaimer` voegt nu `bijbel` (alias), `capabilities` + `capabilities_total` toe; frontend mismatch opgelost
-- **v6_kb_diff_v2_001** — Integraties-tab kb-diff export+import nu V2-aware (schema "v2", schrijft per kaart naar juiste lade)
-- **v6_response_composer_001** — **Spark Response Composer** (LLM-bridge) operationeel:
-  - `modules/chat/response_composer.py` — pipeline: KB-snuffel → bijbel → turns → emotion → Claude Sonnet 4.6
-  - Endpoint: `POST /api/spark/compose` (`text`, `session_id`, optionele `emotion`)
-  - Spark spreekt in eigen stem (kort, warm, vragend), niet ChatGPT-stijl
-  - LLM = synthesizer/mond, niet brein. KB blijft bron-van-waarheid
-- 57 KB-kaarten ingevuld door Willem in 7 batches (verlorenkennis.txt)
-- 421MB schoongemaakt aan oude backup-files (`_backups/`, V1 backups)
+- **v6_brein_counts_001** — Brein-overzicht bijbel + capabilities counts correct
+- **v6_kb_diff_v2_001** — Integraties-tab kb-diff V2-aware
+- **v6_response_composer_001** — Spark Response Composer (LLM-bridge): `modules/chat/response_composer.py` + `POST /api/spark/compose` — Spark spreekt in eigen stem via Claude Sonnet 4.6 (Emergent LLM Key), KB blijft bron
+- 57 KB-kaarten gevuld in 7 batches, 421MB backups opgeruimd
 
 ### 🟡 HALF AF / Vervolg-stappen voor Response Composer
 - **Streaming (SSE)** — nu non-streaming; voor gevoel van "Spark denkt" graag stream_message switchen

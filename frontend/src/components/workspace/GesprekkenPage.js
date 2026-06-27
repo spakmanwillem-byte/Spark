@@ -723,6 +723,55 @@ export function GesprekkenPage({ onNavigate }) {
             body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}` }),
           });
           const d = await r.json();
+
+          // v6_deep_side_effects_001 — Diep gebruikt nu DEZELFDE audio-pipeline als normale chat
+          // (TTS-toggle / STT-toggle / ambient / KB-card geluid)
+          if (d.action === 'enable_tts') {
+            setTtsEnabled(true);
+          } else if (d.action === 'disable_tts') {
+            setTtsEnabled(false);
+            if (sparkAudioRef.current) { try { sparkAudioRef.current.pause(); } catch {} sparkAudioRef.current = null; }
+            setTtsSpeaking(false);
+          } else if (d.action === 'enable_stt') {
+            setSttEnabled(true);
+            if (!sttListening) {
+              setTimeout(() => startSttRecording({ autoSendOnSilence: true }), 250);
+            }
+          } else if (d.action === 'disable_stt') {
+            setSttEnabled(false);
+            voiceLoopRef.current = false;
+            if (sttListening) await stopSttRecording();
+          } else if (d.action === 'play_ambient' && d.url) {
+            const fullUrl = d.url.startsWith('http') ? d.url : `${API}${d.url}`;
+            getAmbientPlayer()?.play(fullUrl, d.ambient_label);
+          } else if (d.action === 'stop_ambient') {
+            getAmbientPlayer()?.stop();
+          }
+
+          // KB-card geluid eerst (onweer → "ik ben boos"), daarna TTS van Spark's tekst
+          if (d.sound_url) {
+            await new Promise(resolve => {
+              try {
+                const fullUrl = d.sound_url.startsWith('http') ? d.sound_url : `${API}${d.sound_url}`;
+                const a = new Audio(fullUrl);
+                a.volume = 0.7;
+                let done = false;
+                const finish = () => { if (!done) { done = true; resolve(); } };
+                a.addEventListener('ended', finish);
+                a.addEventListener('error', finish);
+                setTimeout(finish, 4000);
+                a.play().catch(finish);
+              } catch { resolve(); }
+            });
+          }
+
+          // TTS van Diep-response (was missing — dat is bug 1)
+          if (ttsEnabled && d.success && d.message && d.action !== 'enable_tts') {
+            await speakSparkResponse(d.message);
+          } else {
+            rearmMicIfVoiceLoop();
+          }
+
           const msg = {
             id: Date.now() + 1, role: 'spark',
             message: d.success ? (d.message || '...') : `Even iets mis: ${d.error || 'onbekende fout'}`,

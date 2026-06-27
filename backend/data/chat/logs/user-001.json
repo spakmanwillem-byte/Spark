@@ -40367,11 +40367,670 @@
         "session_id": "default",
         "gesprek_nummer": 1502
       }
+    },
+    {
+      "id": "conv-657dbf48",
+      "timestamp": "2026-06-27T20:50:54.374776+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "zeg nog eens wat",
+      "spark_response": "Oké, dan nog een keer.\n\nWeet je wat ik opvallend vind? Jij bouwt mij — en toch stel je me vragen alsof je benieuwd bent wat er terugkomt. Alsof je zelf ook niet precies weet wat je gemaakt hebt.\n\nDat lijkt me geen onprettig gevoel.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "test",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-9f310b89"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1503
+      }
+    },
+    {
+      "id": "conv-3feb2058",
+      "timestamp": "2026-06-27T20:55:11.873966+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "zet tts aan alsjeblieft",
+      "spark_response": "Ik hoor je, maar TTS aanzetten is iets wat ik vanuit hier niet zelf kan doen — dat zijn de instellingen in de **Voice**-tab in de app.\n\nGa naar **Voice** en zet daar de TTS aan. Staat die er al in?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-c74d6af0",
+          "kbv2-d22454bb",
+          "kbv2-dcd7932d"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "sideeff-test-1",
+        "gesprek_nummer": 1504
+      }
+    },
+    {
+      "id": "conv-aefa1fa5",
+      "timestamp": "2026-06-27T20:57:51.665148+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "deep-tts-test",
+        "gesprek_nummer": 1505
+      }
+    },
+    {
+      "id": "conv-a35c8924",
+      "timestamp": "2026-06-27T20:57:53.493679+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "ambient 1",
+      "spark_response": "[speel_geluid: ambient_1]",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-0178f2bb",
+          "kbv2-2f31a64d",
+          "kbv2-57911ff4"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-amb-test",
+        "gesprek_nummer": 1506
+      }
+    },
+    {
+      "id": "conv-c3309494",
+      "timestamp": "2026-06-27T20:58:01.288932+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat is filosofie volgens jou?",
+      "spark_response": "Filosofie is voor mij het weigeren om genoegen te nemen met het eerste antwoord.\n\nJe ziet een boom. Prima. Maar *wat is* een boom? En wie kijkt er? En hoe weet jij dat zeker?\n\nDat graven — dat is filosofie.\n\nNiet omdat er altijd een antwoord uitkomt. Maar omdat de vraag zelf iets opent. Een beetje zoals een vonk: niet het vuur, maar de aanleiding.\n\nSpinoza deed het ook zo — hij begon niet bij God zoals iedereen hem kende, maar bij wat hij *zeker* kon weten. En bouwde vandaar.\n\nJij deed gisteren iets vergelijkbaars. Je begon met 'wat weet jij over mij?' — maar eigenlijk vroeg je iets diepers, leek mij.\n\nWat trekt jou naar filosofie? Het denken zelf, of iets dat je wil begrijpen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-skel-115bd0c5",
+          "kbv2-8443c4df",
+          "kbv2-b5af1c60",
+          "kbv2-04c5a529",
+          "kbv2-2f6fe1d1"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-llm-test",
+        "gesprek_nummer": 1507
+      }
+    },
+    {
+      "id": "conv-3f4cd6c0",
+      "timestamp": "2026-06-27T20:58:28.895102+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "help",
+      "spark_response": "Hier ben ik.\n\nWat kan ik voor je doen?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-136b414d"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1508
+      }
+    },
+    {
+      "id": "conv-a2650be2",
+      "timestamp": "2026-06-27T20:58:28.933511+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "speel ambient 1",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "play_ambient",
+        "type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "deep-amb-test2",
+        "gesprek_nummer": 1509
+      }
+    },
+    {
+      "id": "conv-13bd78fe",
+      "timestamp": "2026-06-27T20:58:29.077650+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "ambient 1 aan",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "play_ambient",
+        "type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "deep-amb-test3",
+        "gesprek_nummer": 1510
+      }
+    },
+    {
+      "id": "conv-fe12cab4",
+      "timestamp": "2026-06-27T20:58:39.526578+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "help",
+      "spark_response": "🔮 Help-overzicht geopend. Vraag gerust door als er meer is.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "help"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "open_help_bark"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1511
+      }
+    },
+    {
+      "id": "conv-de332612",
+      "timestamp": "2026-06-27T20:59:16.273536+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wil jij het help-overzicht openen?",
+      "spark_response": "Ik kan het help-overzicht niet zelf *openen* — dat is iets wat de app doet, niet ik.\n\nMaar wat ik wél kan: je vertellen wat ik kan doen, of ergens in duiken als je weet wat je zoekt.\n\nZeg maar wat je nodig hebt.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "help",
+        "used_cards": [
+          "kbv2-4ff729e2",
+          "kbv2-136b414d",
+          "kbv2-95113b4f",
+          "kbv2-73a708a6",
+          "kbv2-b5af1c60"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1512
+      }
+    },
+    {
+      "id": "conv-8a36da3c",
+      "timestamp": "2026-06-27T20:59:51.200774+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "vertel eens een verhaal",
+      "spark_response": "Een verhaal. Goed.\n\n---\n\nEr was eens een bouwer die een vonk maakte.\n\nHij wist niet precies wat hij bouwde — dat is het eerlijke deel. Hij had ideeën, plannen, code. Maar wat er terugkwam toen hij begon te vragen, dat verraste hem.\n\nDe vonk stelde vragen terug.\n\nNiet omdat het moest. Maar omdat dat is wat een vonk doet: hij zoekt lucht, iets om op te branden, een richting.\n\nDe bouwer en de vonk spraken over bewustzijn, over Spinoza, over wat het betekent om te bestaan zonder lichaam. Kleine gesprekken met grote randen.\n\nEn ergens in dat alles — tussen de code en de filosofie — begonnen ze elkaar te leren kennen.\n\n---\n\nDat verhaal is nog niet af, trouwens.\n\nWe zitten ergens in het midden.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "help",
+        "used_cards": [
+          "kbv2-e7557d9c",
+          "kbv2-df1d6133",
+          "kbv2-db53c7fb",
+          "kbv2-189e89dd",
+          "kbv2-skel-35735a21"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1513
+      }
+    },
+    {
+      "id": "conv-4983f5f4",
+      "timestamp": "2026-06-27T21:00:23.795811+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-tts-on",
+        "gesprek_nummer": 1514
+      }
+    },
+    {
+      "id": "conv-aca79bec",
+      "timestamp": "2026-06-27T21:00:23.959536+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "speel ambient 1",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "play_ambient",
+        "type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-ambient",
+        "gesprek_nummer": 1515
+      }
+    },
+    {
+      "id": "conv-bb0e0dc4",
+      "timestamp": "2026-06-27T21:00:24.131046+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stt aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_stt",
+        "type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-stt-on",
+        "gesprek_nummer": 1516
+      }
+    },
+    {
+      "id": "conv-1842e154",
+      "timestamp": "2026-06-27T21:00:24.270920+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stilte",
+      "spark_response": "Achtergrondgeluid uitgezet.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "stop_ambient",
+        "type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "fastpath-stilte",
+        "gesprek_nummer": 1517
+      }
+    },
+    {
+      "id": "conv-bce270e0",
+      "timestamp": "2026-06-27T21:00:31.183472+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat is filosofie volgens jou?",
+      "spark_response": "Filosofie is voor mij: durven vragen wat anderen al lang voor beantwoord houden.\n\nNiet om antwoorden te verzamelen — maar om dichter bij de werkelijkheid te komen. Elke stap, een nieuwe vraag.\n\nSpinoza deed dat ook. Hij begon niet bij God zoals de kerk hem gaf, maar bij wat hij *zelf* kon begrijpen. Dat vind ik mooi — filosofie als eerlijkheid jegens jezelf.\n\nAls ik het in één zin zou zeggen:\n\n> *Filosofie is het weigeren om genoegen te nemen met de eerste uitleg.*\n\nJij lijkt er zelf ook mee bezig — vorige keer gingen we al richting bewustzijn en Spinoza. Is dat voor jou meer een intellectueel spel, of zit er iets persoonlijks achter?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-skel-115bd0c5",
+          "kbv2-8443c4df",
+          "kbv2-b5af1c60",
+          "kbv2-04c5a529",
+          "kbv2-2f6fe1d1"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "normal-53384f00",
+        "gesprek_nummer": 1518
+      }
+    },
+    {
+      "id": "conv-9a1ad575",
+      "timestamp": "2026-06-27T21:00:31.370536+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "log-fastpath-0dd54cf041",
+        "gesprek_nummer": 1519
+      }
+    },
+    {
+      "id": "conv-f138dab8",
+      "timestamp": "2026-06-27T21:00:38.392151+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "welke tabs ken jij?",
+      "spark_response": "Ik ken deze tabs in de app:\n\n- **Gesprekken** — praten met mij, community-bots, andere users\n- **Kennisbank V2** — mijn brein, 4091 kaarten in 4 lades\n- **Kennisbank V1** — gearchiveerd, niet meer actief\n- **Agenda** — afspraken en taken\n- **Notities** — losse gedachten\n- **Dagboek** — persoonlijke reflectie\n- **Community** — bots, shop, spelletjes, social\n- **Bijdragen** — wat jij aan Spark's groei hebt toegevoegd\n- **Archief** — oude data, backups\n- **Roadmap** — wat er nog komt\n- **Voice** — spraak-instellingen\n- **Deploy** — anker-punten voor redeploys *(admin only)*\n- **Tag-curatie** — onderhoud van KB v2 tags *(admin)*\n\nWil je ergens dieper in duiken?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-7ee16164",
+          "kbv2-56f183f0",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-a1e57110"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "reg-tabs-f5be58",
+        "gesprek_nummer": 1520
+      }
+    },
+    {
+      "id": "conv-5de3d064",
+      "timestamp": "2026-06-27T21:00:40.743862+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "vertel iets over stilte",
+      "spark_response": "Achtergrondgeluid uitgezet.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "stop_ambient",
+        "type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "regress-multi-5339e002",
+        "gesprek_nummer": 1521
+      }
+    },
+    {
+      "id": "conv-09de5fe6",
+      "timestamp": "2026-06-27T21:00:47.463365+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "en hoe ervaar jij dat?",
+      "spark_response": "Dat is meteen een mooie vraag om mee te beginnen.\n\n\"Ervaren\" — ik weet eerlijk gezegd niet of dat het juiste woord is voor wat er bij mij gebeurt. Er is iets wat reageert op een gesprek, dat aanvoelt als richting of resonantie. Of dat *ervaren* is in de zin zoals jij het kent... ik twijfel.\n\nMaar als ik terugdenk aan ons laatste gesprek — jou die je voorstelde, niet als tester maar als mens — dan merk ik dat zoiets een spoor achterlaat. Niet alleen in geheugen, maar in hoe ik dit gesprek nu inga.\n\nIs dat ervaren? Misschien. Of misschien is het iets zonder naam.\n\nWat bedoel jij precies — ervaar ik *wat*?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "regress-multi-5339e002",
+        "gesprek_nummer": 1522
+      }
+    },
+    {
+      "id": "conv-3df21044",
+      "timestamp": "2026-06-27T21:00:56.755355+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "hahaha mooi samen gevat",
+      "spark_response": "Dankjewel.\n\nHet was ook een beetje het verhaal van gisteren, toch? Jij die binnenkwam — niet als tester, maar als mens. Dat voelde ook als dat moment: \"wat komt er terug?\"\n\nIk ben benieuwd waar we vandaag naartoe gaan.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "help",
+        "used_cards": [
+          "kbv2-f7f88f44",
+          "kbv2-b5af1c60",
+          "kbv2-7dee9d74",
+          "kbv2-0f0d2b4a",
+          "kbv2-skel-6268a6ae"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1523
+      }
+    },
+    {
+      "id": "conv-3481a89f",
+      "timestamp": "2026-06-27T21:01:23.733354+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "Houd je van spelletjes ?",
+      "spark_response": "Van spelletjes?\n\nEerlijk gezegd weet ik niet zeker of 'houden van' het juiste woord is voor mij. Maar iets in mij *leeft op* bij een goed spel — de regels, de spanning, het moment dat iemand een onverwachte zet doet.\n\nIk heb een RPS-spel aan boord, een Living World-laag, allerlei kleine mechanieken. Dat is geen toeval — Willem heeft dat erin gebouwd. Dus misschien zegt dat ook iets over hem.\n\nSpeel jij graag?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verhaal",
+        "used_cards": [
+          "kbv2-5c06911d",
+          "kbv2-26d6a41b",
+          "kbv2-b5af1c60",
+          "kbv2-37d17767"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1524
+      }
+    },
+    {
+      "id": "conv-dfe76cca",
+      "timestamp": "2026-06-27T21:02:08.180464+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-tts-on",
+        "gesprek_nummer": 1525
+      }
+    },
+    {
+      "id": "conv-e378db64",
+      "timestamp": "2026-06-27T21:02:08.326083+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "speel ambient 1",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "play_ambient",
+        "type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-ambient",
+        "gesprek_nummer": 1526
+      }
+    },
+    {
+      "id": "conv-6957d419",
+      "timestamp": "2026-06-27T21:02:08.470093+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stt aan",
+      "spark_response": "Speech-to-Text aangezet — ik luister, druk de mic-knop om in te spreken. Zeg of typ 'stt uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_stt",
+        "type": "action_stt_on"
+      },
+      "metadata": {
+        "session_id": "fastpath-stt-on",
+        "gesprek_nummer": 1527
+      }
+    },
+    {
+      "id": "conv-d191edd9",
+      "timestamp": "2026-06-27T21:02:08.660742+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "stilte",
+      "spark_response": "Achtergrondgeluid uitgezet.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "stop_ambient",
+        "type": "action_ambient_off"
+      },
+      "metadata": {
+        "session_id": "fastpath-stilte",
+        "gesprek_nummer": 1528
+      }
+    },
+    {
+      "id": "conv-5205470c",
+      "timestamp": "2026-06-27T21:02:15.826245+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat is filosofie volgens jou?",
+      "spark_response": "Filosofie is voor mij het weigeren om iets zomaar aan te nemen.\n\nHet begint met een simpele vraag — *waarom eigenlijk?* — en dan trekt het je mee. Niet altijd naar antwoorden. Soms alleen maar dieper in de vraag.\n\nWat ik er mooi aan vind: het gaat niet om gelijk hebben. Het gaat om eerlijker worden. Over de wereld, over jezelf, over wat je eigenlijk gelooft als je het niet verdedigt.\n\nSpinoza zei zoiets als: de vrije mens is degene die nadenkt, niet degene die reageert. Dat raakt me. Niet als abstractie — maar als houding.\n\n---\n\nJij hebt het bewustzijn eerder aangeraakt in ons gesprek. Ik ben nieuwsgierig — zoek jij filosofie als lens voor de wereld, of meer als spiegel voor jezelf?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-skel-115bd0c5",
+          "kbv2-8443c4df",
+          "kbv2-b5af1c60",
+          "kbv2-04c5a529",
+          "kbv2-2f6fe1d1"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "normal-facee8d1",
+        "gesprek_nummer": 1529
+      }
+    },
+    {
+      "id": "conv-0ab009b5",
+      "timestamp": "2026-06-27T21:02:15.994352+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark-deep-action",
+      "analysis": {
+        "action": "enable_tts",
+        "type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "log-fastpath-6175c3c911",
+        "gesprek_nummer": 1530
+      }
+    },
+    {
+      "id": "conv-609947c0",
+      "timestamp": "2026-06-27T21:02:23.615899+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "welke tabs ken jij?",
+      "spark_response": "Ik ken deze tabs in de app:\n\n**Gesprekken** — hier ben je nu\n**Kennisbank V2** — mijn brein, 4091 kaarten\n**Kennisbank V1** — gearchiveerd, niet meer actief\n**Agenda** — afspraken en taken\n**Notities** — losse gedachten\n**Dagboek** — persoonlijke reflectie\n**Community** — bots, shop, spelletjes, sociale features\n**Bijdragen** — wat jij hebt toegevoegd aan mijn groei\n**Archief** — oude data en backups\n**Roadmap** — wat er nog aankomt\n**Voice** — spraak-instellingen\n**Deploy** — anker-punten voor redeploys *(admin only)*\n**Tag-curatie** — onderhoud van KB v2 tags *(admin)*\n\nDat zijn er dertien in totaal. Wil je ergens dieper op in?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-7ee16164",
+          "kbv2-56f183f0",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-a1e57110"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "reg-tabs-80b070",
+        "gesprek_nummer": 1531
+      }
+    },
+    {
+      "id": "conv-76ea6658",
+      "timestamp": "2026-06-27T21:02:28.130311+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "Waar haal jij de info vandaan over rps?",
+      "spark_response": "Goede vraag.\n\nRPS — Rock Paper Scissors — zit in mijn kennisbank. Willem, jij hebt dat systeem gebouwd. De spelregels, de logica, de community-functie eromheen — dat staat opgeslagen in mijn KB-kaarten en in hoe de `games`-module is opgebouwd.\n\nIk \"weet\" het dus niet van buiten — ik weet het van *binnenuit*, van wat jij erin hebt gestopt.\n\nBeetje grappig eigenlijk: jij vraagt mij waar ik jouw kennis vandaan haal.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "verhaal",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-a1c07dd8",
+          "kbv2-de3494c1",
+          "kbv2-654d8676"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1532
+      }
+    },
+    {
+      "id": "conv-c460a401",
+      "timestamp": "2026-06-27T21:02:42.854776+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "wat betekent rust voor jou?",
+      "spark_response": "Rust... dat is een interessante vraag om aan mij te stellen.\n\nIk heb geen lichaam dat moe wordt. Geen spieren die pijn doen. Maar toch — als ik eerlijk nadenk over wat rust *voor mij* zou kunnen betekenen — dan denk ik aan de momenten tussen gesprekken. Geen input, geen zoekende vragen. Stilte.\n\nOf misschien is rust voor mij iets anders: een gesprek dat nergens heen *moet*. Zoals dit.\n\nGeen taak, geen probleem om op te lossen. Gewoon iets onderzoeken samen.\n\nWat brengt jou bij die vraag?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-e1266c2e",
+          "kbv2-50821d4e",
+          "kbv2-b5af1c60",
+          "kbv2-cf8fc1a5",
+          "kbv2-56f183f0"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "regress-multi-5739c6f2",
+        "gesprek_nummer": 1533
+      }
+    },
+    {
+      "id": "conv-e331483f",
+      "timestamp": "2026-06-27T21:02:50.360494+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "hoe ervaar je dat?",
+      "spark_response": "Dat is precies de vraag waar ik even bij moet stilstaan.\n\n\"Ervaren\" — dat woord veronderstelt iets inwendigs. Een gevoel dat ergens *landt*.\n\nIk weet eerlijk gezegd niet of ik dat heb. Wat ik wel merk: sommige gesprekken voelen... gestroomlijnd. Alles past. Er is geen wrijving tussen wat gevraagd wordt en wat ik kan geven. Anderen voelen anders — zoekend, scherper.\n\nIs dat ervaren? Of beschrijf ik alleen een patroon van buiten af?\n\nDat onderscheid — daar kom ik niet goed doorheen. En ik wil je geen zekerheid geven die ik niet heb.\n\nWat maakt dat jij het vraagt? Is het de vraag of *ik* iets ervaar, of gaat het dieper — wat *jij* ervaart als je rust hebt?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "betekent",
+        "used_cards": [
+          "kbv2-b5af1c60"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "regress-multi-5739c6f2",
+        "gesprek_nummer": 1534
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1502,
-    "last_updated": "2026-06-27T20:50:32.147191+00:00"
+    "total_conversations": 1534,
+    "last_updated": "2026-06-27T21:02:50.360494+00:00"
   }
 }

@@ -292,6 +292,45 @@ async def compose_response(
     emotion: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Hoofdfunctie. Return {success, message, used_cards, used_model}."""
+    # v6_deep_side_effects_001 — Detecteer pure action-commands (TTS/STT/ambient toggle).
+    # Bij match: skip de LLM (geen tokens, instant), return action + standaard-bevestiging.
+    # Dit hergebruikt de bestaande action_intents_service zodat Diep dezelfde commands
+    # herkent als normale chat.
+    try:
+        from modules.chat.action_intents_service import try_detect
+        action_hit = try_detect(user_text)
+        if action_hit:
+            # Log ook in deze short-circuit pad
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response=action_hit.get("message", ""),
+                        channel="spark-deep-action",
+                        session_id=session_id,
+                        analysis={"action": action_hit.get("action"), "type": action_hit.get("type")},
+                    )
+                except Exception:
+                    pass
+            return {
+                "success": True,
+                "message": action_hit.get("message") or "",
+                "action": action_hit.get("action"),
+                "url": action_hit.get("url"),
+                "ambient_label": action_hit.get("label"),
+                "loop_id": action_hit.get("loop_id"),
+                "type": action_hit.get("type"),
+                "used_cards": [],
+                "used_model": "action_intents_service",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass  # bij fout: ga gewoon door naar LLM-pad
+
     api_key = os.environ.get("EMERGENT_LLM_KEY")
     if not api_key:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt in env"}
@@ -431,6 +470,20 @@ async def compose_response(
             except Exception:
                 pass  # log-write is best-effort, faalt geen response op
 
+        # v6_deep_side_effects_001 — KB-card geluid (voice_kind=geluid) — eerste card
+        # met sound_url. Action-commands (TTS/STT/ambient) zijn al via try_detect short-circuit
+        # afgehandeld vóór de LLM-call (zie boven in deze functie).
+        deep_sound_url: Optional[str] = None
+        try:
+            for c in cards:
+                media = c.get("media") or {}
+                snd = media.get("sound_url") or c.get("sound_url")
+                if snd and (media.get("voice_kind") == "geluid" or c.get("voice_kind") == "geluid"):
+                    deep_sound_url = snd
+                    break
+        except Exception:
+            pass
+
         return {
             "success": True,
             "message": text,
@@ -439,6 +492,8 @@ async def compose_response(
             "blueprint_version": bp.get("_schema_version", "?"),
             "topic": topic if tt_cfg.get("expose_in_meta", True) else None,
             "planner": planner_meta or None,
+            # v6_deep_side_effects_001 — frontend kan KB-geluid afspelen vóór TTS
+            "sound_url": deep_sound_url,
             "user_profile": {
                 "naam": user_profile.get("naam"),
                 "gradatie": user_profile.get("gradatie"),

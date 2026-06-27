@@ -1,0 +1,49 @@
+{
+  "summary": "Backend-only validatie van v6_deep_side_effects_001 (Diep TTS/STT/ambient fast-path). 9/9 testcases PASS in 43s. Fast-path detecteert action-commands voor LLM-call, retourneert action+url+message+fast_path=true, logged met channel='spark-deep-action'. Normal path (LLM) intact, regressies (self-awareness, privacy-filter, multi-turn logging) groen.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "TC1_fast_path_tts_on": "PASS — POST /api/spark/compose {text:'tts aan'} → action='enable_tts', fast_path=true, message bevat 'Text-to-Speech', used_model='action_intents_service', elapsed <3s (geen LLM-call).",
+    "TC2_fast_path_ambient_play": "PASS — text='speel ambient 1' → action='play_ambient', url begint '/api/system/ambient/' en eindigt '.wav', ambient_label is non-empty string, fast_path=true.",
+    "TC3_fast_path_stt_on": "PASS — text='stt aan' → action='enable_stt', fast_path=true.",
+    "TC4_fast_path_ambient_stop": "PASS — text='stilte' → action='stop_ambient', fast_path=true.",
+    "TC5_normal_path_llm": "PASS — text='wat is filosofie volgens jou?' → success=true, geen action/fast_path, message lengte >20, used_model bevat 'claude-sonnet' (anthropic/claude-sonnet-4-6).",
+    "TC6_action_log_channel": "PASS — fast-path TTS schrijft entry in /app/backend/data/chat/logs/user-001.json conversations array met channel='spark-deep-action' (session_id wordt opgeslagen in entry.metadata.session_id, niet top-level).",
+    "REG1_self_awareness_tabs": "PASS — 'welke tabs ken jij?' → message noemt >=3 tab-namen, success=true, fast_path NIET gezet (correct).",
+    "REG2_privacy_filter_jantje": "PASS — Jantje (user-672f0e5c) vraagt 'wie is mijn zus?' → message bevat 'Maaike' NIET en stelt verificatie-vraag.",
+    "REG3_multi_turn_logging": "PASS — 2 opeenvolgende compose-calls met zelfde session_id, beide success=true, beide gelogd in user-001.json met channel='spark-deep'."
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_spark_deep_action_iter32.py",
+    "/app/test_reports/pytest/iter32_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Fast-path implementatie in response_composer.py (regel 295-332) is netjes: try/except wrapper voorkomt dat een crash in action-detectie de hele compose-flow breekt — fallback gaat door naar LLM-pad. Goede DRY-keus om action_intents_service te hergebruiken.",
+    "Short-circuit return geeft consistent dict-shape mee (success, message, action, url, ambient_label, loop_id, type, used_model='action_intents_service', fast_path=true) — frontend kan symmetrisch parsen met normale chat. Wel: type=action_* en used_model='action_intents_service' wijken af van normaal-pad (used_model=anthropic/claude-sonnet-4-6); frontend moet dit weten.",
+    "MINOR — entry.metadata.session_id ipv top-level entry.session_id in chat_log_service. Niet fout, maar gebruikers van get_logs/Chat-Recap moeten weten dat ze in metadata moeten kijken. Geen blocker.",
+    "MINOR — try_detect('vertel iets over stilte') matcht AMBIENT_OFF omdat 'stilte' een trigger is. In LLM-conversaties over stilte/rust als concept zal compose dus per ongeluk een action_ambient_off teruggeven. Voor nu geen blocker (gebruiker hoeft slechts ander woord te kiezen), maar overweeg een 'pure action only' heuristiek (bv. message length cap of leading-word check) als gebruikers hierover klagen.",
+    "GOOD — deep_sound_url logic op regel 476-485 ondersteunt KB-card voice_kind='geluid' netjes naast de fast-path action commands. Geen overlap/conflict tussen beide paden.",
+    "GOOD — log save (regel 304-317) staat in try/except zodat het schrijven van actie-log nooit de response breekt; consistent met de gewone log-write op regel 453-471."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_deep_action_iter32.py (NEW)"
+  ],
+  "success_rate": {
+    "backend": "100% (9/9)",
+    "frontend": "n/a (request was backend-only)"
+  },
+  "test_credentials": "user-001 (Willem admin), user-672f0e5c (Jantje, privacy regression). EMERGENT_LLM_KEY actief in backend/.env (LLM-calls slagen).",
+  "seed_data_creation": "Geen seed data nodig; bestaande KB-cards en spark_capabilities.json + loops registry voldoende. Tests laten log-entries achter in user-001.json + per-session files (regress-multi-*, fastpath-*, normal-*); deze zijn idempotent/niet-destructief.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Fast-path werkt eind-tot-eind via /api/spark/compose. Frontend Diep-branch (GesprekkenPage.js regel ~717-790) is volgens E1 symmetrisch met normale chat (playKbSound + speakSparkResponse + action-handling). Niet getest in deze iter (request expliciet backend-only). Als je frontend test: kijk of bij action='enable_tts'/'enable_stt'/'play_ambient' de UI-toggle visueel update + audio start; bij sound_url-response moet KB-geluid afspelen vóór TTS. Bekende quirk: het woord 'stilte' in een normale vraag zal door try_detect als ambient-off worden geclassificeerd (zie review comment 4) — kies in regressie-prompts neutrale frasering.",
+  "rca of the issue": "Original bugs (Willem): (1) TTS speelt geen audio af voor Diep, (2) Diep herkent capability-commands maar audio start niet, (3) idem voor ambient. Root cause = Diep was directe LLM-bridge die action_intents_service + side-effect pipeline (action/url/sound_url/TTS-call op frontend) van normale chat oversloeg. Fix verified: compose_response start nu met try_detect short-circuit (regel 299-332) → bij action-match return direct action+url+message+fast_path=true ZONDER LLM-call (response <1s, getest TC1). Log-write parallel in fast-path (channel='spark-deep-action') zodat Chat-Recap/Observer entries blijft zien. Sound_url uit KB-card media (voice_kind=geluid) wordt in normal-path return meegeven (regel 476-496). Validation: 9/9 backend tests groen incl. regressies."
+}

@@ -241,6 +241,9 @@ async def process_message(req: ChatMessage):
             "spelletje sps", "speel een spelletje", "speel spelletje",
             "spel sps", "spel rps", "speel rps",
             "open rps", "open sps", "rps game", "sps game",
+            # v6_rps_more_triggers_001: begin/start varianten
+            "begin sps", "begin rps", "start sps", "start rps",
+            "start spel sps", "start spel rps", "begin spel sps", "begin spel rps",
         )
         # v6_rps_short_001 — korte aanroepen alleen ALS hele bericht (geen substring),
         # anders false positives in zinnen als "ik heb een rps strategie".

@@ -1,0 +1,33 @@
+{
+  "summary": "Iter_37 backend-only regression. 15/15 tests passed (100%). Validated: (1) Nieuwe RPS-triggers ('begin sps', 'begin rps', 'start sps', 'start rps', 'begin spel sps', 'begin spel rps', 'start spel sps') op /api/spark/compose geven action=open_game_rps + fast_path=true + rps_opponent=spark + 🎮 message. (2) 'begin sps' op /api/chat/message → action=open_game_rps. (3) MEMORY FIX bevestigd: fast-path help schrijft naar /app/backend/data/chat/logs/{session_id}.json (2 messages: user='help', spark='🔮 Help-overzicht geopend.'); na follow-up LLM-call wordt het bestand uitgebreid (≥4 messages). Idem voor fast-path RPS 'sps' (2 messages, user='sps', spark bevat 🎮). (4) Regressies: help fast-path, tts aan → enable_tts fast-path, normale LLM Diep ('wat is filosofie?') geeft success=true + fast_path None + non-empty message, privacy ('wie is mijn zus?' voor user-672f0e5c) bevat 'maaike' NIET. (5) False-positive guard: 'ik begin met sps oefenen' triggert NIET open_game_rps (woord 'met' tussen 'begin' en 'sps' — substring 'begin sps' niet aanwezig).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter37_triggers_and_memory.py",
+    "/app/test_reports/pytest/iter37_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Trigger-lijst dupliceerd nog steeds in routes.py (regel 236-247) én response_composer.py (regel 401-411). Iter_36 noemde dit al — bij iedere nieuwe trigger moeten beide bestanden updated, en iter_37 was exact zo'n geval. Extract naar gedeelde module modules/games/rps/rps_triggers.py.",
+    "_save_turn_pair() catched alle exceptions stilzwijgend (pass). Indien turns_dir read-only of disk-full faalt geheugen-persistence silent. Overweeg logger.warning() in except-block voor observability.",
+    "Substring-matching pattern 'any(t == _txt or t in _txt for t in rps_open_triggers)' blijft kwetsbaar voor false-positives bij toekomstige triggers. 'begin sps' werkt nu correct omdat 'ik begin met sps' het exacte 2-woord-substring niet bevat, maar 'ik wil beginnen vandaag begin sps oefenen' zou wel matchen. Voor langere/zelden gebruikte triggers volstaat exact-match; substring laten staan voor de generieke phrases.",
+    "_save_turn_pair() cap (msgs[-50:]) hard-coded; zou via _bp()['limits']['max_session_turns'] gestuurd moeten worden voor consistentie met _load_recent_turns die wel uit blueprint leest."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter37_triggers_and_memory.py (nieuw)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "n/a (backend-only requested)"},
+  "test_credentials": "user-001 (Willem admin, sleutelwoord=Appelsap); user-672f0e5c (privacy regressie). Geverifieerd via /app/memory/test_credentials.md.",
+  "seed_data_creation": "Test session-log bestanden achtergelaten in /app/backend/data/chat/logs/: iter37-trig-*.json (7x), iter37-chat-begin-sps.json, iter37-memtest-1.json, iter37-memtest-rps.json, iter37-reg-*.json, iter37-fp-guard.json. Mogen blijven staan zoals user aangaf in review_request.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter_37 fixes (nieuwe RPS-triggers + _save_turn_pair memory fix) zijn volledig groen. Voor volgende iteratie: frontend Diep-branch open_game_rps handling (GesprekkenPage.js ~regel 752) is NIET getest in deze backend-only run en moet via UI-test geverifieerd worden zodra Willem heeft geredeployed. Test file /app/backend/tests/test_iter37_triggers_and_memory.py is herbruikbaar als regressie. Multi-turn memory persisteert in /app/backend/data/chat/logs/{session_id}.json (turns_dir), NIET in /app/backend/data/chat/logs/{user_id}.json (chat_log_service). Beide paths bestaan parallel.",
+  "rca_of_the_issue": "Bevestigd: voor iter_37 schreef fast-path (action/help/rps) alleen naar chat_log_service ({user_id}.json met 'conversations' array), nooit naar turns_dir ({session_id}.json met 'messages' array). _load_recent_turns() leest exclusief uit turns_dir, dus na elke fast-path call kreeg de volgende LLM-call een lege history → Spark vroeg 'wat heb je me uitgelegd?'. Fix in response_composer.py _save_turn_pair() helper (regel 205-228) die in alle 3 fast-path branches wordt aangeroepen (action regel 345, help regel 382, rps regel 428). Test_memory_fast_path_help_writes_turns bewijst nu dat na 'help' het bestand 2 messages bevat en na een follow-up LLM-call ≥4 messages, dus multi-turn context blijft intact."
+}

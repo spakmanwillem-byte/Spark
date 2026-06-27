@@ -202,6 +202,32 @@ def _load_recent_turns(session_id: str) -> List[Dict]:
         return []
 
 
+def _save_turn_pair(session_id: str, user_id: str, user_text: str, spark_text: str, model_label: str = "") -> None:
+    """v6_deep_memory_001 — Schrijf user+spark turn-pair naar de session-log.
+
+    Gebruikt door zowel fast-path (action/help/rps) als LLM-pad zodat
+    multi-turn memory consistent blijft. Zonder deze schrijf in fast-path zou
+    Spark de gebruiker 'vergeten' direct na elke command.
+    """
+    if not session_id:
+        return
+    try:
+        from modules.core.storage import save_json
+        bp = _bp()
+        turns_dir = Path(bp["paths"]["turns_dir"])
+        turns_dir.mkdir(parents=True, exist_ok=True)
+        fp = turns_dir / f"{session_id}.json"
+        existing = load_json(fp, default={"messages": []})
+        msgs = existing.get("messages", [])
+        ts = datetime.now(timezone.utc).isoformat()
+        msgs.append({"role": "user", "text": user_text, "ts": ts, "user_id": user_id})
+        msgs.append({"role": "spark", "text": spark_text, "ts": ts, "model": model_label})
+        msgs = msgs[-50:]  # cap
+        save_json(fp, {"messages": msgs, "session_id": session_id, "user_id": user_id, "updated_at": ts})
+    except Exception:
+        pass  # best-effort, faalt geen response op
+
+
 def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None, self_awareness_snippet: Optional[str] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
@@ -315,6 +341,8 @@ async def compose_response(
                     )
                 except Exception:
                     pass
+                # v6_deep_memory_001: ook turns_dir bijhouden zodat geheugen niet kapot gaat
+                _save_turn_pair(session_id, user_id, user_text, action_hit.get("message", ""), "action_intents_service")
             return {
                 "success": True,
                 "message": action_hit.get("message") or "",
@@ -351,6 +379,7 @@ async def compose_response(
                     )
                 except Exception:
                     pass
+                _save_turn_pair(session_id, user_id, user_text, "🔮 Help-overzicht geopend.", "smart_intents_service")
             return {
                 "success": True,
                 "message": "🔮 Help-overzicht geopend.",
@@ -377,6 +406,8 @@ async def compose_response(
             "spelletje sps", "speel een spelletje", "speel spelletje",
             "spel sps", "spel rps", "speel rps",
             "open rps", "open sps", "rps game", "sps game",
+            "begin sps", "begin rps", "start sps", "start rps",
+            "start spel sps", "start spel rps", "begin spel sps", "begin spel rps",
         )
         rps_exact = ("sps", "rps")
         if any(t == _txt_rps or t in _txt_rps for t in rps_open_triggers) or _txt_rps in rps_exact:
@@ -394,6 +425,7 @@ async def compose_response(
                     )
                 except Exception:
                     pass
+                _save_turn_pair(session_id, user_id, user_text, "🎮 Steen — Papier — Schaar! Kies je zet.", "rps_router")
             return {
                 "success": True,
                 "message": "🎮 Steen — Papier — Schaar! Kies je zet.",

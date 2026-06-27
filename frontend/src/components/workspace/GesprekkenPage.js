@@ -749,6 +749,10 @@ export function GesprekkenPage({ onNavigate }) {
           } else if (d.action === 'open_help_bark') {
             // v6_deep_help_001 — open HelpBark via global window event (MainLayout luistert)
             window.dispatchEvent(new CustomEvent('spark:open-help'));
+          } else if (d.action === 'open_game_rps') {
+            // v6_deep_rps_001 — open Steen-Papier-Schaar bark
+            setRpsOpponent(d.rps_opponent || 'spark');
+            setRpsOpen(true);
           }
 
           // KB-card geluid eerst (onweer → "ik ben boos"), daarna TTS van Spark's tekst

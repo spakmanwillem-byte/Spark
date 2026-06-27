@@ -24,7 +24,8 @@ from modules.core.storage import load_json, save_json
 router = APIRouter(prefix="/audit", tags=["audit"])
 
 DATA = Path("/app/backend/data")
-KNOWLEDGE_FILE = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA / "knowledge" / "v2"
 SHADOW_OBSERVATIONS = DATA / "system" / "shadow_observations.jsonl"
 AUDIT_REPORTS = DATA / "system" / "audit_reports"
 
@@ -36,21 +37,29 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _load_kbv2_entries():
+    """v6_v2_first_001 — V2 lades + inbox als platte lijst."""
+    out = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
+
+
 # ============================================================
 # WEAK TRIGGER SCAN
 # ============================================================
 def weak_trigger_scan() -> Dict[str, Any]:
-    """Scan KB v1 entries voor zwakke responses (< MIN_RESPONSE_LEN of generiek).
+    """Scan KB v2 entries voor zwakke responses (< MIN_RESPONSE_LEN of generiek).
 
-    KB v1 structuur: `knowledge_entries` = list of {begrip, lagen: {laag1, laag2, ...}, tags, ...}
+    v6_v2_first_001 — V2 is bron. Kaart-structuur: {begrip, lade, lagen, tags, ...}
     "Response" = lagen.laag1 (de korte uitleg).
     """
-    if not KNOWLEDGE_FILE.exists():
-        return {"error": "Knowledge base niet gevonden", "scanned": 0}
-    kb = load_json(KNOWLEDGE_FILE, default={})
-    entries = kb.get("knowledge_entries") or []
-    if not isinstance(entries, list):
-        return {"error": "knowledge_entries niet als list gevonden", "scanned": 0}
+    entries = _load_kbv2_entries()
+    if not entries:
+        return {"error": "V2 kennisbank leeg/niet gevonden", "scanned": 0}
     weak: List[Dict[str, Any]] = []
     generic: List[Dict[str, Any]] = []
     no_tags: List[str] = []

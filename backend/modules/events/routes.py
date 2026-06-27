@@ -18,9 +18,21 @@ router = APIRouter(prefix="/events", tags=["events"])
 
 DATA = Path(__file__).parent.parent.parent / "data"
 EVENTS_FILE = DATA / "system" / "active_events.json"
-KB_FILE = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KB_FILE = DATA / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA / "knowledge" / "v2"
 
 VALID_TARGETS = {"community", "spark_feed", "spark_prive", "test"}
+
+
+def _load_kbv2_entries():
+    """v6_v2_first_001 — V2 kaarten als platte lijst."""
+    out = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
 
 
 class TriggerEventRequest(BaseModel):
@@ -41,6 +53,10 @@ def _now_ms() -> int:
 
 
 def _get_card(card_id: str) -> Optional[dict]:
+    # v6_v2_first_001 — V2 + V1 fallback
+    for e in _load_kbv2_entries():
+        if e.get("id") == card_id:
+            return e
     data = load_json(KB_FILE, default={"knowledge_entries": []})
     entries = data.get("knowledge_entries", [])
     return next((e for e in entries if e.get("id") == card_id), None)
@@ -107,10 +123,11 @@ async def clear_events(target: Optional[str] = None):
 
 @router.get("/sensory-cards")
 async def list_sensory_cards():
-    """Lijst alle KB-kaarten met media (voor event-trigger UI)."""
-    data = load_json(KB_FILE, default={"knowledge_entries": []})
+    """Lijst alle KB-kaarten met media (voor event-trigger UI).
+    v6_v2_first_001 — V2 bron + V1 fallback."""
+    entries = _load_kbv2_entries() + load_json(KB_FILE, default={"knowledge_entries": []}).get("knowledge_entries", [])
     rows = []
-    for e in data.get("knowledge_entries", []):
+    for e in entries:
         media = e.get("media")
         if media and (media.get("image_url") or media.get("sound_url")):
             rows.append({

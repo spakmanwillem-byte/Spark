@@ -29,8 +29,23 @@ router = APIRouter(prefix="/spark/insights", tags=["insights"])
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 SHADOW_EVENTS_DIR = DATA_ROOT / "shadow" / "events"
 VOCAB_FILE = DATA_ROOT / "personality" / "spark_vocab.json"
-KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_ROOT / "knowledge" / "v2"
 TRIGGERS_DIR = DATA_ROOT / "triggers"
+
+
+def _load_kb_with_v2():
+    """v6_v2_first_001 — V1-vorm dict met V2-kaarten erin, plus V1-fallback."""
+    out = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    # V1 fallback
+    v1 = load_json(KB_FILE, default={"knowledge_entries": []})
+    out.extend(v1.get("knowledge_entries", []) or [])
+    return {"knowledge_entries": out}
 
 # Stopwoorden — frequent maar niet zinvol als vocab-kandidaat
 STOPWORDS = {
@@ -128,7 +143,7 @@ def _collect_vocab_words() -> Set[str]:
     _walk(vocab.get("algemeen", {}))
 
     # 2) Knowledge base: begrip + tags + topic
-    kb = load_json(KB_FILE, default={})
+    kb = _load_kb_with_v2()
     for entry in kb.get("knowledge_entries", []):
         for tok in _tokenize(entry.get("begrip", "")):
             known.add(tok)
@@ -299,7 +314,7 @@ async def vocab_from_knowledge(
     Scan alle knowledge cards en geef kandidaat-woorden terug die niet in
     vocab/triggers zitten. Spark kan deze leren om zijn taal te laten groeien.
     """
-    kb = load_json(KB_FILE, default={})
+    kb = _load_kb_with_v2()
     entries = kb.get("knowledge_entries", []) or []
     if not entries:
         return {
@@ -357,7 +372,7 @@ async def vocab_from_knowledge(
 @router.get("/tags-without-card")
 async def tags_without_card(min_count: int = Query(1, ge=1), limit: int = Query(200, ge=1, le=2000)):
     """Welke tags worden gebruikt in de KB maar hebben GEEN eigen begrip-kaart?"""
-    kb = load_json(KB_FILE, default={})
+    kb = _load_kb_with_v2()
     entries = kb.get("knowledge_entries", []) or []
     if not entries:
         return {"entries_scanned": 0, "candidates": [], "summary": "Geen kaarten gevonden."}

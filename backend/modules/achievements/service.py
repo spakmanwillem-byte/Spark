@@ -8,8 +8,20 @@ from datetime import datetime, timezone
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 ACHIEVEMENTS_FILE = DATA_DIR / "achievements.json"
-KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_DIR / "knowledge" / "v2"
 USERS_FILE = DATA_DIR / "system" / "users.json"
+
+
+def _load_kbv2_entries():
+    """v6_v2_first_001 — V2 kaarten (4 lades + inbox) als platte lijst."""
+    out = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
 
 
 class AchievementService:
@@ -28,6 +40,8 @@ class AchievementService:
         """
         data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
         entries = data.get("knowledge_entries", [])
+        # v6_v2_first_001 — voeg V2 toe (bron-van-waarheid)
+        entries = entries + _load_kbv2_entries()
         active = [e for e in entries if e.get("status", "active") in ("active", "draft")]
         if not user_id:
             return len(active)

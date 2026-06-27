@@ -1,0 +1,40 @@
+{
+  "_arch_ref": "v6_spark_planner_001",
+  "_schema_version": "1.0",
+  "_blueprint_for": "spark_planner",
+  "_doel": "Configuratie voor de Gesprekplanner. Laag A: Daagse Brief (LLM-condensaat). Laag B: Open Draden. Beide worden in Diep-gesprek-system_prompt geïnjecteerd zodat Spark cross-day continuïteit heeft.",
+
+  "model": {
+    "provider": "anthropic",
+    "name": "claude-sonnet-4-6"
+  },
+
+  "paths": {
+    "briefs_dir": "{DATA}/spark_planner/daily_briefs",
+    "threads_fp": "{DATA}/spark_planner/open_threads.json",
+    "chat_logs_dir": "{DATA}/chat/logs"
+  },
+
+  "brief": {
+    "enabled": true,
+    "max_chars_per_turn": 240,
+    "max_turns_in_prompt": 40,
+    "auto_generate_on_first_compose_of_day": true,
+    "min_user_turns_required": 3,
+    "inject_label": "Wat je nog weet van het laatste gesprek"
+  },
+
+  "threads": {
+    "enabled": true,
+    "max_active_to_inject": 3,
+    "inject_label": "Open gespreksdraden die nog leven",
+    "intensity_decay_days": 7,
+    "auto_close_after_days": 30,
+    "statuses": ["open", "sluimerend", "afgesloten"]
+  },
+
+  "system_prompt_template": {
+    "intro_when_brief_present": "Je herinnert je het laatste gesprek met deze persoon. Begin niet als vreemde — voel de draad alsof je gister doorgesproken hebt.",
+    "intro_no_brief": null
+  }
+}

@@ -103,7 +103,7 @@ def _load_recent_turns(session_id: str) -> List[Dict]:
         return []
 
 
-def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None) -> str:
+def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
     tt_cfg = bp.get("topic_tracker", {}) or {}
@@ -112,6 +112,9 @@ def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_prof
     if user_profile_snippet:
         parts.append("Over de gebruiker (relatie-context):")
         parts.append(f"  {user_profile_snippet}")
+        parts.append("")
+    if planner_snippet:
+        parts.append(planner_snippet)
         parts.append("")
     if topic and tt_cfg.get("enabled", True):
         label = tt_cfg.get("inject_label", "Gespreks-onderwerp van dit moment")
@@ -218,7 +221,39 @@ async def compose_response(
         user_profile = {}
         user_snippet = None
 
-    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic)
+    # v6_spark_planner_001 — Laag A (Daagse Brief) + Laag B (Open Draden) cross-day continuity
+    planner_snippet: Optional[str] = None
+    planner_meta: Dict[str, Any] = {}
+    try:
+        from modules.spark_planner.brief_builder import latest_brief as _latest_brief
+        from modules.spark_planner.threads_service import active_threads_for_inject, format_for_system_prompt as _fmt_threads
+        from modules.core.blueprint import load_blueprint_cached as _bp_load
+        pbp = _bp_load("spark_planner", "planner")
+        snippet_lines = []
+        latest = _latest_brief(user_id)
+        if latest and pbp.get("brief", {}).get("enabled", True):
+            label = pbp["brief"].get("inject_label", "Wat je nog weet van het laatste gesprek")
+            snippet_lines.append(f"{label} (van {latest.get('date')}):")
+            snippet_lines.append(f"  {latest.get('summary', '')}")
+            if latest.get("emotional_tone"):
+                snippet_lines.append(f"  Toon van die dag: {latest['emotional_tone']}")
+            planner_meta["brief_date"] = latest.get("date")
+        if pbp.get("threads", {}).get("enabled", True):
+            active = active_threads_for_inject(user_id)
+            if active:
+                tlabel = pbp["threads"].get("inject_label", "Open gespreksdraden die nog leven")
+                snippet_lines.append("")
+                snippet_lines.append(f"{tlabel}:")
+                fmt = _fmt_threads(active)
+                if fmt:
+                    snippet_lines.append(fmt)
+                planner_meta["active_threads"] = [t.get("topic") for t in active]
+        if snippet_lines:
+            planner_snippet = "\n".join(snippet_lines)
+    except Exception:
+        planner_snippet = None
+
+    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic, planner_snippet)
 
     user_prompt = (
         "## Relevante KB-kaarten uit Spark's eigen kennis:\n"
@@ -267,6 +302,7 @@ async def compose_response(
             "used_model": f"{model_provider}/{model_name}",
             "blueprint_version": bp.get("_schema_version", "?"),
             "topic": topic if tt_cfg.get("expose_in_meta", True) else None,
+            "planner": planner_meta or None,
             "user_profile": {
                 "naam": user_profile.get("naam"),
                 "gradatie": user_profile.get("gradatie"),

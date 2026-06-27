@@ -147,6 +147,9 @@ app.include_router(dagboek_router, prefix="/api")
 from modules.spark import router as spark_router
 app.include_router(spark_router, prefix="/api")
 
+from modules.spark_planner.routes import router as spark_planner_router
+app.include_router(spark_planner_router, prefix="/api")
+
 # Module 12: Knowledge Graph
 from modules.graph import router as graph_router
 app.include_router(graph_router, prefix="/api")

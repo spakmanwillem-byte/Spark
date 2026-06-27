@@ -470,6 +470,10 @@ def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_prof
     for rule in tpl["rules"]:
         parts.append(f"  - {rule}")
 
+    # v6_no_hallucinate_001 — KRITIEKE regel tegen verzinnen van kaarten / feiten
+    parts.append("  - LIEG NIET OVER WAT JE WEET: noem ALLEEN namen van kaarten die letterlijk onder '## Relevante KB-kaarten' in deze prompt staan. Als er geen kaart over een onderwerp is, zeg dan eerlijk 'daar heb ik geen kaart over' of 'dat staat niet in mijn kennisbank' — verzin GEEN kaartnamen, GEEN cijfers, GEEN data die je niet ziet. Zeggen 'ik weet het niet' is beter dan een mooi maar verzonnen antwoord. Spark Core 4.0: 'Intentie boven perfectie' — eerlijk over onkunde is een kernwaarde.")
+    parts.append("  - VERZIN GEEN PERSOONLIJKE FEITEN: als je niet zeker weet waar je 'geboren' bent, wie iemand is, of een datum klopt — zeg dat. Spark werd geboren uit een vraag van Willem, niet in een geografische plaats. Improviseer geen biografische details.")
+
     # v6_no_capability_leak_001 — Issue 1 fix: forbid leaking capability-syntax to user-facing text
     parts.append("  - GEEN INTERNE SYNTAX LEKKEN: schrijf NOOIT vierkante-haak-tokens zoals [speel_geluid], [toon_afbeelding], [open_help_bark], [tts_aan], [stt_uit], [ambient_aan] in je tekstuele antwoord. Dat zijn interne capability-namen die het systeem zelf uitvoert — als jij ze in tekst typt verschijnen ze letterlijk bij de user en breekt de illusie. Beschrijf de actie in gewone taal ('ik speel een geluidje af', 'ik open het help-overzicht') of voer hem stilletjes uit zonder benoeming.")
 
@@ -769,15 +773,42 @@ async def compose_response(
     )
 
     try:
-        chat = LlmChat(
-            api_key=api_key,
-            session_id=session_id or f"compose-{user_id}",
-            system_message=system_prompt,
-        ).with_model(model_provider, model_name)
+        # v6_llm_router_001 — gebruik multi-provider router i.p.v. directe Emergent-call.
+        # Volgorde: Groq → Cerebras/Fallback → Emergent → template.
+        from . import llm_router
 
-        msg = UserMessage(text=user_prompt)
-        response = await chat.send_message(msg)
-        text = response if isinstance(response, str) else getattr(response, "content", str(response))
+        # Bouw OpenAI-compatible messages (system + accumulated turns + current user)
+        messages = [{"role": "system", "content": system_prompt}]
+        # Voeg eerdere turns toe als context (laatste paar, system_prompt heeft ze al deels)
+        if turns:
+            for t in turns[-6:]:
+                role = "user" if t.get("role") == "user" else "assistant"
+                ttxt = (t.get("text") or t.get("message") or "").strip()
+                if ttxt:
+                    messages.append({"role": role, "content": ttxt})
+        messages.append({"role": "user", "content": user_prompt})
+
+        router_resp = await llm_router.chat_complete(
+            messages,
+            temperature=0.7,
+            max_tokens=1024,
+            timeout=30.0,
+        )
+
+        if not router_resp.get("success"):
+            # Alle providers gefaald — geef structured error terug
+            return {
+                "success": False,
+                "error": router_resp.get("error", "llm_router_failed"),
+                "tried": router_resp.get("tried", []),
+                "fallback": True,
+            }
+
+        text = router_resp["text"]
+        used_provider = router_resp.get("provider", "?")
+        used_model = router_resp.get("model", "?")
+        model_provider = used_provider  # voor log-write hieronder
+        model_name = used_model
 
         # v6_response_composer_001 — persisteer multi-turn memory per session_id
         # Zodat volgende call _load_recent_turns() echte context heeft.

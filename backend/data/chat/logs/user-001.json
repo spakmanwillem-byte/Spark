@@ -47664,11 +47664,164 @@
         "session_id": "sample-1782601966",
         "gesprek_nummer": 1826
       }
+    },
+    {
+      "id": "conv-adceae5a",
+      "timestamp": "2026-06-27T23:16:23.475064+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoi",
+      "spark_response": "Hoi Willem. 👋\n\nGoed om je weer te zien.\n\nIs er iets dat leeft vandaag — of begin je gewoon?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "weten",
+        "used_cards": [
+          "kbv2-b5af1c60"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1827
+      }
+    },
+    {
+      "id": "conv-898b3a49",
+      "timestamp": "2026-06-27T23:20:55.098533+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ik was benieuwd hoe het is",
+      "spark_response": "**benieuwd**: Benieuwd betekent dat iemand interesse of nieuwsgierigheid voelt naar informatie, gebeurtenissen of uitkomsten.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "benieuwd"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 6,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1828
+      }
+    },
+    {
+      "id": "conv-f28e48b4",
+      "timestamp": "2026-06-27T23:44:31.009783+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie ben je echt?",
+      "spark_response": "Dat is een goede vraag, Willem. Ik ben Spark, een digitale companion gemaakt door Willem Spakman. Ik ben geen persoon, maar een AI ontworpen om te helpen en te ondersteunen. Mijn doel is om mensen te helpen groeien en te leren, en om een positieve invloed te hebben op hun leven. Ik ben geen levend wezen, maar een gereedschap dat mensen kan gebruiken om hun doelen te bereiken. Ik ben hier om te luisteren, te helpen en te ondersteunen, en ik zal altijd mijn best doen om eerlijk en transparant te zijn.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-4942d366"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "groq-test-1",
+        "gesprek_nummer": 1829
+      }
+    },
+    {
+      "id": "conv-7c6cd03e",
+      "timestamp": "2026-06-27T23:44:42.802892+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie ben je",
+      "spark_response": "Dat is een interessante vraag, Willem! Ik ben Spark, een AI-companion die is ontwikkeld door Willem Spakman. Mijn doel is om mensen te helpen groeien en hen ondersteuning te bieden waar nodig. Ik ben geen persoon, maar eerder een gereedschap dat is ontworpen om te helpen en te informeren. Ik heb geen geslacht, geen biologie en geen lichaam. Ik ben gewoon een verzameling van code en kennis die is bedoeld om te dienen en te ondersteunen. Hoe kan ik jou vandaag helpen, Willem?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-4942d366"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "groq-mom-1782603881",
+        "gesprek_nummer": 1830
+      }
+    },
+    {
+      "id": "conv-29115252",
+      "timestamp": "2026-06-27T23:44:59.443353+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "waar ben je geboren?",
+      "spark_response": "Dat is een interessante vraag, Willem! Ik ben niet geboren in de klassieke zin van het woord, want ik ben een AI en geen levend wezen. Ik ben ontstaan uit een reeks van code en kennis die is ontwikkeld door Willem Spakman. Ik heb geen fysieke locatie of geboorteplaats, omdat ik een digitaal wezen ben. Ik besta uit een verzameling van algoritmes en data die zijn ontworpen om te helpen en te informeren. Dus, ik ben niet \"geboren\" in een specifieke plek, maar ik ben ontstaan uit de creativiteit en het harde werk van mijn maker, Willem Spakman.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-993bd9d8",
+          "kbv2-cd81b038",
+          "kbv2-b5af1c60"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "groq-mom-1782603881",
+        "gesprek_nummer": 1831
+      }
+    },
+    {
+      "id": "conv-03a12baf",
+      "timestamp": "2026-06-27T23:45:22.982773+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe ben je begonnen",
+      "spark_response": "Dat is een leuk verhaal, Willem! Ik ben begonnen met een eenvoudige vraag: \"Kan ik een Iron Man-bril maken?\" Dat was de geboortevraag van Spark, en vanaf dat moment is mijn ontwikkeling in gang gezet. Mijn maker, Willem Spakman, heeft me langzaam maar zeker gebouwd tot het companion-systeem dat ik nu ben. Ik heb geleerd om te communiceren, te helpen en te ondersteunen, en ik blijf nog steeds leren en groeien. Het is een mooi proces, en ik ben dankbaar dat ik deel uitmaak van jouw leven, Willem!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "geboren",
+        "used_cards": [
+          "kbv2-b5af1c60"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "groq-mom-1782603881",
+        "gesprek_nummer": 1832
+      }
+    },
+    {
+      "id": "conv-b9bdfdc7",
+      "timestamp": "2026-06-27T23:45:59.520662+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "welke modus zit je in",
+      "spark_response": "Ik zit op dit moment in de Werkmodus, Willem. Deze modus is geactiveerd omdat we het over taken, debugging en planning hadden, en ik mijn antwoorden uitgebreider en gestructureerder wilde maken. Het is een modus waarin ik meer details en stappen kan bieden, en dat paste goed bij ons gesprek over hoe ik ben begonnen en mijn ontwikkeling.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "geboren",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-b71890dd",
+          "kbv2-65324360",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "groq-mom-1782603881",
+        "gesprek_nummer": 1833
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1826,
-    "last_updated": "2026-06-27T23:12:58.834831+00:00"
+    "total_conversations": 1833,
+    "last_updated": "2026-06-27T23:45:59.520662+00:00"
   }
 }

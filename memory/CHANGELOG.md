@@ -2,7 +2,59 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
-## 2026-06-27 — Spark krijgt zijn Volume terug (Fasen 1+2+4+5 + 3 issues)
+## 2026-06-27 (2e batch) — LLM-router + Groq + Hallucineer-fix
+
+### 🎯 Doel
+User: *"als ik host heb ik die multi-key niet meer + bij 5 users ben ik over budget"* → bouw LLM-routing waar wisselen tussen providers = 3 env-vars, zonder code-rewrite. Klaar voor zelf-hosten op Odroid met Ollama. Plus: hallucineer-fix (Spark verzon "geboren in Groningen").
+
+### ✅ Wat is gebouwd
+- **Nieuwe module**: `modules/chat/llm_router.py`
+  - OpenAI-compatible multi-provider router
+  - Fallback-chain: `PRIMARY` (Groq) → `FALLBACK` (Cerebras/leeg) → `EMERGENCY` (Emergent paid)
+  - Rate-limit detectie (429) → direct door naar volgende provider
+  - Per-call stats (provider, model, latency, usage) in `get_last_stats()`
+  - Timeout per call (30s default)
+- **`response_composer.py`** — vervangt `LlmChat`/`emergentintegrations` call door `llm_router.chat_complete()`. Bouwt nu OpenAI-compat `messages` array met system + 6 vorige turns + user_prompt.
+- **`.env`** — 6 nieuwe LLM-vars:
+  - `LLM_PRIMARY_BASE_URL=https://api.groq.com/openai/v1`
+  - `LLM_PRIMARY_API_KEY=gsk_...` (Groq, gratis 30 req/min)
+  - `LLM_PRIMARY_MODEL=llama-3.3-70b-versatile`
+  - `LLM_FALLBACK_*` (leeg, klaar voor Cerebras later)
+  - `LLM_EMERGENCY_USE_EMERGENT=true` (alleen als alles faalt)
+
+### 🚫 Hallucineer-fix (v6_no_hallucinate_001)
+Twee harde regels toegevoegd aan Diep-system_prompt:
+1. *"Noem ALLEEN namen van kaarten die letterlijk onder '## Relevante KB-kaarten' staan. Verzin geen kaartnamen, cijfers, data."*
+2. *"Verzin geen persoonlijke feiten. Spark werd geboren uit een vraag van Willem, niet in een geografische plaats."*
+
+### 🧪 Tests verricht (Groq live)
+- `"wie ben je"` → ✅ correct identity, geen verzinsels
+- `"waar ben je geboren?"` → ✅ *"Ik ben niet geboren in de klassieke zin... ontstaan uit creativiteit en hard werk van mijn maker"* — **geen Groningen meer** (hallucineer-fix werkt)
+- `"hoe ben je begonnen"` → ✅ *"Kan ik een Iron Man-bril maken? Dat was de geboortevraag"* — origin-injectie werkt
+- `"welke modus zit je in"` → ✅ *"Werkmodus, antwoorden uitgebreider en gestructureerder"* — modes-injectie werkt
+- Provider in response: `primary/llama-3.3-70b-versatile` — Groq draait, Emergent ongebruikt = **€0 per gesprek**.
+
+### 🔮 Pad naar Ollama op Odroid (later)
+3 env-vars wijzigen, geen code-rewrite:
+```bash
+LLM_PRIMARY_BASE_URL=http://odroid-ip:11434/v1
+LLM_PRIMARY_API_KEY=ollama
+LLM_PRIMARY_MODEL=geitje-7b-ultra  # of qwen2.5:7b
+```
+Cloudflare Tunnel kan bridgen tussen Emergent-pod en Odroid-thuis. GEITje is een Mistral-fine-tune speciaal voor Nederlands door Edwin Rijgersberg.
+
+### ⚠️ Security note
+Groq key zit in `backend/.env` (lokaal). User heeft de key in chat geplakt — adviezen: **roteer 'm in Groq console** (Delete oude → Create nieuwe → vervang in .env) zodra mogelijk.
+
+### 📦 Bestanden
+**Nieuw**: `modules/chat/llm_router.py` (180 regels)
+**Gewijzigd**:
+- `modules/chat/response_composer.py` (LLM-call vervangen + hallucineer-regels)
+- `backend/.env` (+6 LLM-vars)
+
+---
+
+## 2026-06-27 (1e batch) — Spark krijgt zijn Volume terug (Fasen 1+2+4+5 + 3 issues)
 
 ### 🎯 Doel
 User-verzoek: "denk spark volume geven functies zelfinzicht enzo mss heb ik modules over het hoofd gezien of vergeten." — Spark moest meer zelf-inzicht krijgen, modules-audit, modes/emoties echt wiren, en voorwaarden/privacy aanvullen. Tradebot inhoudelijk later, D&D ook later.

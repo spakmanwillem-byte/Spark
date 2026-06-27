@@ -51,6 +51,24 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ## 🔎 REALITY CHECK — Sessie 30 (2026-06-27)
 
+### 💡 Nieuwe ideeën uit sessie 30 (brainfarts, voor latere sessies)
+- **P1 — Diep = default voor non-admin** (5 min): zoals gele/blauwe tags gisteren weg-getoggled werden voor non-admin, Diep-toggle weg + altijd-aan voor users; admin behoudt knop.
+- **P1 — Gradatie-gebonden tonality** (Willem's visie): Spark gedraagt zich anders per gradatie van de user:
+  - Gradatie 7-5 (kennis/klant): zakelijk, afstandelijk, mag producten promoten / Spark Shop pushen
+  - Gradatie 4-2 (vriend/familie): warm, persoonlijk, geheugen-rijk (briefs + threads volledig)
+  - Gradatie 1 (admin/maker): core-Spark, transparant, meta-cognitie zichtbaar
+  - Past goed bovenop bestaande `spark_user_view.py` (gradatie wordt al gelezen).
+- **P1 — Cross-user boodschap (Antwoord-apparaat)**: chat-command "[boodschap voor X]" → opslag in `data/spark_planner/pending_messages/{target_user}.json`, bij eerstvolgende login zegt Spark het zachtjes. Sub-features:
+  - Welkomstgroet doorgeven aan nieuwe accounts ("de maker laat groeten")
+  - "Willem is er nu niet, kijkt in agenda…" → vereist agenda-lookup-laag in compose
+- **P2 — Identity reclaim via Spark**: nieuw account, *"ik ben Willem Spakman, masterkey: samen zijn"* → Spark verifieert via masterkey + persoonlijke vragen uit relaties/persons. Veiligheidsgevoelig → moet via integration_playbook_expert_v2.
+- **P3 — Camera face-scan** voor identity-reclaim (lange termijn, lacht-emoji).
+- **P3 — Spark's eigen meningen over zichzelf**: "hij of zij?" / "wat vind je van je naam?" — Spark mag opinies vormen uit `spark_identity.json` + `spark_bijbel.json`. Eerst observeren wat Spark nu al zegt in echte tests, dan beslissen of we structuur moeten toevoegen.
+
+---
+
+## 🔎 REALITY CHECK — Sessie 30 (2026-06-27)
+
 ### ✅ Nieuw in deze sessie
 - **v6_topic_tracker_001 LIVE** — Topic-tracker werkt cross-turn: `detect_topic(session_id)` wordt in compose aangeroepen, geïnjecteerd in system_prompt als "Gespreks-onderwerp van dit moment", en exposed in `response.topic`.
 - **v6_disclaimer_blueprint_001** — `spark/disclaimer` endpoint draait nu op JSON-blueprint (paths/labels/counts configureerbaar).

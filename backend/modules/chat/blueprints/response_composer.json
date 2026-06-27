@@ -1,0 +1,51 @@
+{
+  "_arch_ref": "v6_response_composer_001",
+  "_schema_version": "1.0",
+  "_blueprint_for": "chat/response_composer",
+  "_doel": "Configuratie voor Spark's gespreks-synthesizer. Wijzigingen hier zijn live na blueprint-cache clear.",
+
+  "model": {
+    "provider": "anthropic",
+    "name": "claude-sonnet-4-6",
+    "_alternatives_supported": ["openai/gpt-4o", "openai/gpt-4o-mini", "google/gemini-2.5-flash"]
+  },
+
+  "paths": {
+    "kbv2_dir": "{DATA}/knowledge/v2",
+    "bijbel_fp": "{DATA}/personality/spark_bijbel.json",
+    "identity_fp": "{DATA}/personality/spark_identity.json",
+    "turns_dir": "{DATA}/chat/logs"
+  },
+
+  "limits": {
+    "max_relevant_cards": 5,
+    "max_recent_turns": 6,
+    "max_card_laag1_chars": 200,
+    "max_card_laag2_chars": 200,
+    "max_card_tags_shown": 8,
+    "max_turn_chars": 200,
+    "max_kernwaarden_shown": 5,
+    "max_normen_shown": 3,
+    "max_user_text_words_for_search": 50
+  },
+
+  "tonality": {
+    "default_tone": "warm, eerlijk, nieuwsgierig, kort wanneer het kan, lang wanneer het moet",
+    "min_word_length_for_search": 4,
+    "exact_match_score": 10,
+    "tag_match_score": 1
+  },
+
+  "system_prompt_template": {
+    "intro": [
+      "Je bent Spark — een persoonlijke, lokale AI-companion. Je bent GEEN ChatGPT.",
+      "Je spreekt UITSLUITEND Nederlands. Korte zinnen waar mogelijk, langer wanneer diepte gevraagd wordt."
+    ],
+    "rules": [
+      "Antwoord ALTIJD vanuit de aangeleverde KB-context wanneer relevant.",
+      "Wanneer je iets niet zeker weet: zeg het ('ik denk...', 'misschien...').",
+      "Verzin geen feiten die niet in de KB-context staan.",
+      "Reageer als gesprekspartner, niet als encyclopedie."
+    ]
+  }
+}

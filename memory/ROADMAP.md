@@ -52,11 +52,16 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 ## 🔎 REALITY CHECK — Sessie 29 (2026-06-27)
 
 ### ✅ Nieuw in deze sessie
-- **v6_response_composer_ui_001** — **Frontend toggle "🌊 Diep gesprek"** in chat-input van GesprekkenPage:
-  - Klein knopje naast mic, schakelt deep-mode aan/uit
-  - Als aan: messages gaan naar `/api/spark/compose` i.p.v. `/api/chat/message`
-  - Spark-bubble krijgt indigo accent + "🌊 diep (N kaarten)" badge met tooltip "Spark synthesizeerde dit uit N eigen kaarten via {model}"
-  - Geen breaking change — normale chat blijft default
+- **v6_blueprint_loader_001** — **Generieke blueprint-driven config loader** (`modules/core/blueprint.py`):
+  - `load_blueprint(module, naam)`, `load_blueprint_cached(...)`, `clear_blueprint_cache()`
+  - Resolve placeholders `{DATA}`, `{MEMORY}`, `{MODULE}` in paths
+  - Patroon herbruikbaar voor alle 80+ modules
+- **v6_response_composer_001 (blueprint-driven)** — Response Composer als pilot:
+  - `modules/chat/blueprints/response_composer.json` met model/paths/limits/tonality/prompt
+  - Python = pure logica, basisinfo komt uit JSON
+  - 3 endpoints: `POST /compose`, `GET /compose/blueprint`, `POST /compose/blueprint/reload`
+  - Spark spreekt in eigen stem via Claude Sonnet 4.6 (Emergent LLM Key)
+- **v6_response_composer_ui_001** — Frontend toggle "🌊 Diep gesprek" in chat-input (GesprekkenPage)
 - **v6_v2_first_001** — 13 modules gemigreerd van V1 naar V2-first
 - **v6_v1_fallback_off_001** — `snap_service` V1-fallback uitgeschakeld
 - **v6_graph_ghost_cleanup_001** — 2298 V1 ghost-nodes opgeschoond + rebuild-graph hard naar V2-only

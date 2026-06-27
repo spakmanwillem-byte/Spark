@@ -163,30 +163,59 @@ async def import_kb_diff(file: UploadFile = File(...)):
     if not diff_entries:
         return {"success": True, "merged_existing": 0, "new_added": 0, "message": "Geen kaarten in diff-bestand"}
 
-    # Backup huidige KB
-    backup_ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
-    backup_path = _KB.with_suffix(f".backup_pre_diff_import_{backup_ts}.json")
-    try:
-        backup_path.write_text(_KB.read_text(encoding="utf-8"), encoding="utf-8")
-    except Exception:
-        pass
+    # v6_v2_first_001 — schrijf nu naar V2 lade-bestanden (niet meer V1)
+    v2_dir = _Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+    KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
 
-    kb = _load(_KB, default={"knowledge_entries": []})
-    entries = kb.get("knowledge_entries", [])
-    by_id = {e.get("id"): e for e in entries if e.get("id")}
-    by_begrip = {(e.get("begrip") or "").strip().lower(): e for e in entries if e.get("begrip")}
+    # 1. Laad alle V2 kaarten verdeeld per lade-bestand
+    lade_data = {}
+    for lade in KBV2_LADES + ["inbox"]:
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        fp = v2_dir / f"{fname}.json"
+        lade_data[lade] = {
+            "fp": fp,
+            "data": _load(fp, default={"kaarten": []}),
+        }
+
+    # Backup elk V2 lade-bestand
+    backup_ts = _dt.now(_tz.utc).strftime("%Y%m%d_%H%M%S")
+    for lade, info in lade_data.items():
+        fname = info["fp"].name
+        backup = info["fp"].with_suffix(f".backup_pre_diff_import_{backup_ts}.json")
+        try:
+            backup.write_text(info["fp"].read_text(encoding="utf-8"), encoding="utf-8")
+        except Exception:
+            pass
+
+    # Bouw lookup over ALLE V2 kaarten (kan in elke lade staan)
+    by_id = {}
+    by_begrip = {}
+    location = {}  # id → lade
+    for lade, info in lade_data.items():
+        for k in info["data"].get("kaarten", []):
+            kid = k.get("id")
+            if kid:
+                by_id[kid] = k
+                location[kid] = lade
+            b = (k.get("begrip") or "").strip().lower()
+            if b:
+                by_begrip.setdefault(b, (k, lade))
 
     merged_existing = 0
     new_added = 0
     now_iso = _dt.now(_tz.utc).isoformat()
 
     for d in diff_entries:
-        did = d.get("id")
+        # Skip V1 ghosts in import payload
+        did = d.get("id") or ""
+        if did.startswith("snap-"):
+            continue
         dbegrip = (d.get("begrip") or "").strip().lower()
-        target = by_id.get(did) or (by_begrip.get(dbegrip) if dbegrip else None)
+        target = by_id.get(did)
+        if target is None and dbegrip in by_begrip:
+            target, _ = by_begrip[dbegrip]
         if target is not None:
-            # Update inhoud (lagen, ws5, tags, belangrijkheid, topic)
-            for key in ("lagen", "ws5", "tags", "belangrijkheid", "topic"):
+            for key in ("lagen", "ws5", "tags", "belangrijkheid", "topic", "lade", "footnote"):
                 if key in d and d[key] is not None:
                     target[key] = d[key]
             md = target.setdefault("metadata", {})
@@ -196,22 +225,24 @@ async def import_kb_diff(file: UploadFile = File(...)):
             md["last_diff_import_at"] = now_iso
             merged_existing += 1
         else:
-            entries.append(d)
+            # Nieuwe kaart — voeg toe aan juiste lade (uit kaart.lade, anders inbox)
+            new_lade = (d.get("lade") or "").lower().strip()
+            if new_lade not in KBV2_LADES:
+                new_lade = "inbox"
+            lade_data[new_lade]["data"].setdefault("kaarten", []).append(d)
             new_added += 1
 
-    kb["knowledge_entries"] = entries
-    kb.setdefault("metadata", {})["last_diff_import"] = {
-        "ts": now_iso,
-        "merged_existing": merged_existing,
-        "new_added": new_added,
-        "source_marker": payload.get("deploy_marker"),
-    }
-    _save(_KB, kb)
+    # Schrijf alle lade-bestanden
+    total_after = 0
+    for lade, info in lade_data.items():
+        _save(info["fp"], info["data"])
+        total_after += len(info["data"].get("kaarten", []))
 
     return {
         "success": True,
+        "schema": "v2",
         "merged_existing": merged_existing,
         "new_added": new_added,
-        "total_after": len(entries),
-        "backup_path": str(backup_path),
+        "total_after": total_after,
+        "backup_ts": backup_ts,
     }

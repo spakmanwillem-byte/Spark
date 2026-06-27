@@ -268,37 +268,45 @@ async def download_full():
 
 @router.get("/kb-changed-since-deploy")
 async def kb_changed_since_deploy():
-    """v5_kb_diff_export_001 — Export alleen kennis-kaarten die gewijzigd zijn na laatste deploy.
-    Veel kleiner dan de hele knowledge_base.json (paar KB ipv 11MB).
-    Detecteert wijziging via metadata.updated_at vs deploy-marker.
-    Output: klein JSON-bestand met alleen die kaarten + metadata, geschikt om in preview te mergen.
+    """v5_kb_diff_export_001 — Export kennis-kaarten gewijzigd na laatste deploy.
+    v6_v2_first_001 — Leest nu V2 (4 lades + inbox), niet meer V1.
+    Detecteert wijziging via updated_at (top-level of metadata) vs deploy-marker.
     """
     marker = _read_marker()
     marker_iso = marker.get("marked_at") or "1970-01-01T00:00:00+00:00"
 
-    kb_file = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
-    if not kb_file.exists():
-        raise HTTPException(404, "knowledge_base.json niet gevonden")
+    v2_dir = DATA_ROOT / "knowledge" / "v2"
+    all_entries = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        fp = v2_dir / f"{fname}.json"
+        if not fp.exists():
+            continue
+        try:
+            data = json.loads(fp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        all_entries.extend(data.get("kaarten", []) or [])
 
-    kb_data = json.loads(kb_file.read_text(encoding="utf-8"))
-    entries = kb_data.get("knowledge_entries", []) if isinstance(kb_data, dict) else []
+    if not all_entries:
+        raise HTTPException(404, "Geen V2 kaarten gevonden")
 
     changed = []
-    for e in entries:
-        md = e.get("metadata") or {}
-        upd = md.get("updated_at") or e.get("updated_at") or ""
-        created = e.get("created_at") or md.get("created_at") or ""
-        # Recent als upd > marker OF created > marker
+    for e in all_entries:
+        upd = e.get("updated_at") or (e.get("metadata") or {}).get("updated_at") or ""
+        created = e.get("created_at") or (e.get("metadata") or {}).get("created_at") or ""
         if (upd and upd > marker_iso) or (created and created > marker_iso):
             changed.append(e)
 
     payload = {
         "type": "kb_diff_since_deploy",
+        "schema": "v2",
         "exported_at": _iso_now(),
         "deploy_marker": marker_iso,
-        "total_entries_in_kb": len(entries),
+        "total_entries_in_kb": len(all_entries),
         "changed_count": len(changed),
-        "note": "Alleen knowledge_entries met updated_at OF created_at NA deploy. Merge in preview via /api/knowledge/import-diff.",
+        "note": "V2 kaarten met updated_at OF created_at NA deploy. Merge in preview via /api/knowledge/import-diff.",
         "knowledge_entries": changed,
     }
 
@@ -312,7 +320,7 @@ async def kb_changed_since_deploy():
         headers={
             "Content-Disposition": f'attachment; filename="{fname}"',
             "X-KB-Changed-Count": str(len(changed)),
-            "X-KB-Total": str(len(entries)),
+            "X-KB-Total": str(len(all_entries)),
             "Cache-Control": "no-store",
         },
     )

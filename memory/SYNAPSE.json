@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-06-03T16:32:36.193354+00:00",
+  "generated_at": "2026-06-27T00:51:37.113912+00:00",
   "summary": {
     "total_containers": 104,
     "by_status": {
@@ -12,7 +12,7 @@
       "dir": 70,
       "data": 34
     },
-    "total_endpoints_detected": 528
+    "total_endpoints_detected": 550
   },
   "tree": {
     "backend_modules": {
@@ -100,15 +100,18 @@
         "split_from": null,
         "children_max": 4,
         "endpoints": [
+          "DELETE /admin/capabilities/links/{card_id}",
           "GET /admin/capabilities/bark-image",
           "GET /admin/capabilities/download",
           "GET /admin/capabilities/health-status",
           "GET /admin/capabilities/index",
           "GET /admin/capabilities/is-admin/{user_id}",
+          "GET /admin/capabilities/links",
           "GET /admin/capabilities/list",
           "GET /admin/capabilities/read",
           "POST /admin/capabilities/grant",
           "POST /admin/capabilities/help-bark",
+          "POST /admin/capabilities/links",
           "POST /admin/capabilities/password/reset",
           "POST /admin/capabilities/pre-deploy-reset",
           "POST /admin/capabilities/purge",
@@ -516,7 +519,7 @@
         "created_at": "2026-05-26T15:54:32.167435+00:00",
         "last_touched": "2026-05-26T16:13:26.963707+00:00",
         "activity_count": 0,
-        "file_count": 33,
+        "file_count": 36,
         "subdir_count": 0,
         "extra": {}
       },
@@ -762,6 +765,7 @@
         "endpoints": [
           "DELETE /dnd/body-layout/cards/{card_id}",
           "DELETE /dnd/body-layout/game-cards/{card_id}",
+          "DELETE /dnd/body-layout/resources/{resource_id}",
           "DELETE /dnd/body-layout/{bewoner_id}",
           "DELETE /dnd/body-layout/{bewoner_id}/slot/{slot_index}",
           "GET /dnd/body-layout/",
@@ -769,6 +773,7 @@
           "GET /dnd/body-layout/cards",
           "GET /dnd/body-layout/cards/{card_id}",
           "GET /dnd/body-layout/fracties",
+          "GET /dnd/body-layout/fracties/full",
           "GET /dnd/body-layout/game-cards",
           "GET /dnd/body-layout/game-cards/{card_id}",
           "GET /dnd/body-layout/game-items",
@@ -777,17 +782,25 @@
           "GET /dnd/body-layout/observations/{user_id}",
           "GET /dnd/body-layout/provincies",
           "GET /dnd/body-layout/rarities",
+          "GET /dnd/body-layout/resources",
           "GET /dnd/body-layout/slots/config",
           "GET /dnd/body-layout/spark-greeting/{user_id}",
+          "GET /dnd/body-layout/steden",
+          "GET /dnd/body-layout/steden/{stad_id}",
           "GET /dnd/body-layout/world-state",
           "GET /dnd/body-layout/{bewoner_id}",
           "GET /dnd/body-layout/{location_id}",
           "GET /dnd/body-layout/{user_id}",
+          "PATCH /dnd/body-layout/fracties/{fractie_id}",
           "PATCH /dnd/body-layout/provincies",
+          "PATCH /dnd/body-layout/resources/{resource_id}",
+          "PATCH /dnd/body-layout/steden/{stad_id}",
           "PATCH /dnd/body-layout/{bewoner_id}",
           "PATCH /dnd/body-layout/{user_id}",
           "POST /dnd/body-layout/",
           "POST /dnd/body-layout/cards/{card_id}/lock",
+          "POST /dnd/body-layout/fracties/{fractie_id}/banner",
+          "POST /dnd/body-layout/fracties/{fractie_id}/import-from-card",
           "POST /dnd/body-layout/game-cards",
           "POST /dnd/body-layout/game-cards/edit",
           "POST /dnd/body-layout/game-cards/lock",
@@ -798,6 +811,8 @@
           "POST /dnd/body-layout/observe",
           "POST /dnd/body-layout/provincies/reset",
           "POST /dnd/body-layout/reset",
+          "POST /dnd/body-layout/resources",
+          "POST /dnd/body-layout/resources/{resource_id}/duplicate",
           "POST /dnd/body-layout/respond",
           "POST /dnd/body-layout/roll",
           "POST /dnd/body-layout/seed",
@@ -1204,6 +1219,7 @@
           "GET /kb/v2/fallback",
           "GET /kb/v2/find",
           "GET /kb/v2/herzien/next",
+          "GET /kb/v2/homonyms",
           "GET /kb/v2/image/file/{filename}",
           "GET /kb/v2/inbox",
           "GET /kb/v2/lade/{lade}",
@@ -1215,7 +1231,12 @@
           "GET /kb/v2/voice/file/{filename}",
           "PATCH /kb/v2/voice/kind/{card_id}",
           "PATCH /kb/v2/voice/secondary/kind/{card_id}",
+          "POST /kb/v2/admin/backfill-v1-migration",
           "POST /kb/v2/admin/dedupe-inbox",
+          "POST /kb/v2/admin/dedupe-inbox-vs-lade",
+          "POST /kb/v2/admin/import-text",
+          "POST /kb/v2/admin/rebuild-index",
+          "POST /kb/v2/admin/sync-v1-drift",
           "POST /kb/v2/backfill-hooks",
           "POST /kb/v2/classify",
           "POST /kb/v2/delete",
@@ -1225,6 +1246,7 @@
           "POST /kb/v2/image",
           "POST /kb/v2/inbox/add",
           "POST /kb/v2/inbox/auto-resolve",
+          "POST /kb/v2/move",
           "POST /kb/v2/tags/merge",
           "POST /kb/v2/tags/normalize-batch",
           "POST /kb/v2/vocab/sync",
@@ -1241,7 +1263,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-05-26T16:13:27.020693+00:00",
         "activity_count": 0,
-        "file_count": 7,
+        "file_count": 9,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2377,7 +2399,7 @@
         "created_at": "2026-05-26T15:54:32.296770+00:00",
         "last_touched": "2026-05-26T15:54:32.296770+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2539,8 +2561,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.304583+00:00",
-        "last_touched": "2026-06-03T16:08:48.504479+00:00",
-        "activity_count": 132,
+        "last_touched": "2026-06-04T12:51:50.843739+00:00",
+        "activity_count": 134,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2566,8 +2588,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.306301+00:00",
-        "last_touched": "2026-05-26T16:13:27.087375+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-06-05T13:13:09.202299+00:00",
+        "activity_count": 2,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -2593,8 +2615,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-31T23:48:37.354567+00:00",
-        "last_touched": "2026-05-31T23:48:37.354567+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-06-07T20:43:30.098312+00:00",
+        "activity_count": 1,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2647,8 +2669,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.309307+00:00",
-        "last_touched": "2026-05-31T06:53:42.451686+00:00",
-        "activity_count": 2,
+        "last_touched": "2026-06-07T21:02:44.879759+00:00",
+        "activity_count": 6,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2674,8 +2696,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.311044+00:00",
-        "last_touched": "2026-05-31T23:37:55.543069+00:00",
-        "activity_count": 161,
+        "last_touched": "2026-06-07T02:01:31.289218+00:00",
+        "activity_count": 212,
         "file_count": 5,
         "subdir_count": 2,
         "extra": {}
@@ -2701,9 +2723,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-06-03T16:30:41.049471+00:00",
-        "activity_count": 419,
-        "file_count": 29,
+        "last_touched": "2026-06-27T00:48:39.988488+00:00",
+        "activity_count": 778,
+        "file_count": 38,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2728,8 +2750,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-06-03T14:10:29.888553+00:00",
-        "activity_count": 82,
+        "last_touched": "2026-06-26T22:37:02.844233+00:00",
+        "activity_count": 103,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2809,9 +2831,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-06-03T13:16:23.028392+00:00",
-        "activity_count": 108,
-        "file_count": 13,
+        "last_touched": "2026-06-16T20:27:56.545050+00:00",
+        "activity_count": 170,
+        "file_count": 16,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2838,7 +2860,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-05-26T16:13:27.111780+00:00",
         "activity_count": 0,
-        "file_count": 20,
+        "file_count": 30,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2863,8 +2885,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-06-03T16:31:59.680851+00:00",
-        "activity_count": 113014,
+        "last_touched": "2026-06-27T00:50:39.770949+00:00",
+        "activity_count": 115000,
         "file_count": 8,
         "subdir_count": 0,
         "extra": {}
@@ -2890,8 +2912,8 @@
           "key_holder": null
         },
         "created_at": "2026-06-03T13:57:41.086997+00:00",
-        "last_touched": "2026-06-03T13:57:41.086997+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-06-04T12:43:25.110115+00:00",
+        "activity_count": 124,
         "file_count": 6,
         "subdir_count": 1,
         "extra": {}
@@ -2917,9 +2939,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-06-03T16:23:09.460603+00:00",
-        "activity_count": 82,
-        "file_count": 4,
+        "last_touched": "2026-06-27T00:16:26.037566+00:00",
+        "activity_count": 632,
+        "file_count": 6,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2971,9 +2993,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-06-03T16:21:24.252417+00:00",
-        "activity_count": 2189,
-        "file_count": 39,
+        "last_touched": "2026-06-27T00:07:54.702160+00:00",
+        "activity_count": 5898,
+        "file_count": 14,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2998,8 +3020,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.325005+00:00",
-        "last_touched": "2026-05-26T16:13:27.124284+00:00",
-        "activity_count": 2,
+        "last_touched": "2026-06-05T11:32:06.326222+00:00",
+        "activity_count": 3,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3052,9 +3074,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-06-03T16:32:35.852535+00:00",
-        "activity_count": 6780,
-        "file_count": 8,
+        "last_touched": "2026-06-26T23:12:32.969719+00:00",
+        "activity_count": 11125,
+        "file_count": 9,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3079,10 +3101,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.329074+00:00",
-        "last_touched": "2026-05-29T10:23:54.075952+00:00",
-        "activity_count": 2,
+        "last_touched": "2026-06-05T13:18:47.210307+00:00",
+        "activity_count": 32,
         "file_count": 2,
-        "subdir_count": 0,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/data/roar": {
@@ -3106,8 +3128,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-06-03T16:26:11.250749+00:00",
-        "activity_count": 810,
+        "last_touched": "2026-06-27T00:44:06.281623+00:00",
+        "activity_count": 1721,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3162,7 +3184,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 21,
+        "file_count": 28,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3241,9 +3263,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-06-03T16:32:36.103249+00:00",
-        "activity_count": 14584,
-        "file_count": 164,
+        "last_touched": "2026-06-27T00:51:36.916178+00:00",
+        "activity_count": 26053,
+        "file_count": 194,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3268,10 +3290,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.338797+00:00",
-        "last_touched": "2026-06-02T20:51:43.056924+00:00",
-        "activity_count": 66,
-        "file_count": 120,
-        "subdir_count": 5,
+        "last_touched": "2026-06-07T02:01:06.033551+00:00",
+        "activity_count": 89,
+        "file_count": 144,
+        "subdir_count": 2,
         "extra": {}
       },
       "backend/data/trade": {
@@ -3295,9 +3317,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-06-03T14:10:11.326712+00:00",
-        "activity_count": 790,
-        "file_count": 18,
+        "last_touched": "2026-06-26T22:24:44.885471+00:00",
+        "activity_count": 799,
+        "file_count": 17,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3349,8 +3371,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.343028+00:00",
-        "last_touched": "2026-05-26T16:13:27.163762+00:00",
-        "activity_count": 0,
+        "last_touched": "2026-06-04T10:34:34.862504+00:00",
+        "activity_count": 1,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3376,10 +3398,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.345126+00:00",
-        "last_touched": "2026-06-03T13:41:32.480177+00:00",
-        "activity_count": 53,
-        "file_count": 76,
-        "subdir_count": 24,
+        "last_touched": "2026-06-04T20:47:22.195917+00:00",
+        "activity_count": 63,
+        "file_count": 83,
+        "subdir_count": 30,
         "extra": {}
       },
       "backend/data/wallet": {
@@ -3403,8 +3425,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-06-03T16:00:12.512918+00:00",
-        "activity_count": 199,
+        "last_touched": "2026-06-04T12:51:50.789704+00:00",
+        "activity_count": 200,
         "file_count": 14,
         "subdir_count": 1,
         "extra": {}

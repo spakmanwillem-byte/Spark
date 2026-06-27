@@ -22,7 +22,26 @@ from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
 from .snap_service import STOPWOORDEN
 
-KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
+
+
+def _load_all_kbv2():
+    """v6_v2_first_001 — alle V2 kaarten (4 lades + inbox)."""
+    out = []
+    for fname in [f"knowledge_v2_{l}" for l in KBV2_LADES] + ["knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
+
+
+def _append_to_inbox(new_kaarten: list):
+    """Voeg nieuwe kaarten toe aan V2 inbox."""
+    inbox_fp = KBV2_DIR / "knowledge_inbox.json"
+    inbox = load_json(inbox_fp, default={"kaarten": []})
+    inbox.setdefault("kaarten", []).extend(new_kaarten)
+    save_json(inbox_fp, inbox)
 
 
 def _extract_words(text: str):
@@ -37,9 +56,9 @@ def scan_for_new_subjects(user_naam: str = "Spark", max_create: int = 100):
     """
     Scan alle ws5-velden + tags van alle entries. Maak nieuwe draft-snaps voor
     onbekende woorden. Return rapport-dict.
+    v6_v2_first_001 — V2 is bron; nieuwe kaarten gaan naar V2 inbox.
     """
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-    entries = data.get("knowledge_entries", [])
+    entries = _load_all_kbv2()
 
     # Bestaande begrippen-index
     existing = set()
@@ -86,38 +105,42 @@ def scan_for_new_subjects(user_naam: str = "Spark", max_create: int = 100):
     )
     to_create = ranked[:max_create]
 
-    # Maak snaps aan (zonder duplicate check — die deden we al)
+    # Maak skelet-kaarten in V2-vorm (gaan naar inbox)
     created_entries = []
     now_iso = datetime.now(timezone.utc).isoformat()
     for word, info in to_create:
         sample_parent = next(iter(info["parent_begrippen"]), "")
         entry = {
-            "id": f"snap-{uuid.uuid4().hex[:8]}",
+            "id": f"kbv2-skel-{uuid.uuid4().hex[:8]}",
             "begrip": word,
+            "lade": "",  # nog in inbox
+            "status": "draft",
             "lagen": {"laag1": "", "laag2": "", "laag3": "", "laag4": ""},
             "ws5": {"wie": "", "wat": "", "wanneer": "", "waar": "", "waarom": "", "hoe": ""},
             "tags": ["knowledge-snap", "auto-generated", "scan-discovered"],
-            "bron": f"scan-from-existing-cards (bron: {sample_parent[:50]})",
-            "detected_by": user_naam,
-            "detected_at": now_iso,
-            "status": "draft",
-            "belangrijkheid": 2,
-            "usage_count": 0,
             "topic": "",
-            "snap_context": f"Gevonden in {len(info['parent_begrippen'])} kaart(en) via {', '.join(sorted(info['sources']))}",
+            "verbanden": [],
+            "media": {},
+            "needs": [],
+            "footnote": {
+                "bron": f"scan-from-existing-cards (bron: {sample_parent[:50]})",
+                "ingedeeld_door": user_naam,
+                "ingedeeld_op": now_iso,
+                "vertrouwen": 0.5,
+                "belangrijkheid": 2,
+            },
             "metadata": {
                 "created_at": now_iso,
                 "created_via": "knowledge_scan",
-                "is_sentence": False,
                 "source_count": len(info["sources"]),
                 "source_card_count": len(info["parent_begrippen"]),
+                "snap_context": f"Gevonden in {len(info['parent_begrippen'])} kaart(en) via {', '.join(sorted(info['sources']))}",
             },
         }
-        entries.append(entry)
         created_entries.append(entry)
 
     if created_entries:
-        save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+        _append_to_inbox(created_entries)
         # Graph sync per nieuwe node
         try:
             from modules.graph.sync_service import upsert_node_from_entry
@@ -127,7 +150,7 @@ def scan_for_new_subjects(user_naam: str = "Spark", max_create: int = 100):
             print(f"[scan] graph sync warning: {ex}")
 
     return {
-        "scanned_cards": len(entries) - len(created_entries),
+        "scanned_cards": len(entries),
         "candidates_found": len(candidates),
         "new_snaps_created": len(created_entries),
         "sample_words": [e["begrip"] for e in created_entries[:10]],

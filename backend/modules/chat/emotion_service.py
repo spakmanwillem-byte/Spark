@@ -14,7 +14,20 @@ from modules.core.storage import load_json
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 TRIGGERS_FILE = DATA_DIR / "emotions" / "emotion_triggers.json"
 SPARK_EMOTIONS_FILE = DATA_DIR / "emotions" / "spark_emotions.json"
-KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy fallback
+KBV2_DIR = DATA_DIR / "knowledge" / "v2"
+
+
+def _load_all_kb_entries() -> list:
+    """v6_v2_first_001 — V2 is bron. Verzamel alle kaarten uit 4 lades + inbox.
+    V1 wordt overgeslagen omdat het sinds 26-06-2026 archief is."""
+    entries = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        data = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        entries.extend(data.get("kaarten", []) or [])
+    return entries
 
 
 class EmotionDetectionService:
@@ -46,6 +59,8 @@ class EmotionDetectionService:
 
         data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
         entries = data.get("knowledge_entries", [])
+        # v6_v2_first_001 — voeg V2 kaarten toe (bron-van-waarheid)
+        entries = entries + _load_all_kb_entries()
 
         learned = {"blij": {}, "boos": {}, "bang": {}, "bedroefd": {}, "neutraal": {}}
         valid_emotions = set(learned.keys())

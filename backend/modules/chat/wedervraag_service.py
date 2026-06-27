@@ -15,7 +15,9 @@ import secrets
 import re
 from modules.core.storage import load_json, save_json
 
-KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
 
 # v6_wedervraag_disable_001 — Globale toggle. User vult kaarten zelf sneller in
 # dan de vraag-flow biedt; uitgezet om chat-flow niet te verstoren.
@@ -106,11 +108,29 @@ def should_throttle(last_wv_at_count: int, current_count: int) -> bool:
 
 
 def _load_entries():
-    return load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []}).get("knowledge_entries", [])
+    """v6_v2_first_001 — laad alle V2 kaarten (4 lades + inbox) als platte lijst."""
+    out = []
+    for fname in [f"knowledge_v2_{l}" for l in KBV2_LADES] + ["knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
 
 
 def _save_entries(entries):
-    save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+    """v6_v2_first_001 — schrijf elke entry terug naar de V2 lade die hij claimt.
+    Onbekende lade → inbox. V1-stijl entries (snap-*) worden overgeslagen."""
+    by_lade = {l: [] for l in KBV2_LADES + ["inbox"]}
+    for e in entries:
+        eid = e.get("id") or ""
+        if eid.startswith("snap-"):
+            continue  # V1 is archief
+        lade = (e.get("lade") or "").lower().strip()
+        if lade not in KBV2_LADES:
+            lade = "inbox"
+        by_lade[lade].append(e)
+    for lade, items in by_lade.items():
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        save_json(KBV2_DIR / f"{fname}.json", {"kaarten": items})
 
 
 def _find_entry(entry_id):

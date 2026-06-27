@@ -442,7 +442,19 @@ _TOPIC_PATTERNS = [
     r"\bwat weet je over\s+(.+)\?",
     r"\boverzicht\s+(van )?(.+)$",
 ]
-KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_ROOT / "knowledge" / "v2"
+
+
+def _load_kbv2_entries() -> list:
+    """v6_v2_first_001 — alle V2 kaarten (4 lades + inbox) als platte lijst."""
+    out = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
 
 
 def detect_topic_intent(text: str):
@@ -461,8 +473,8 @@ def detect_topic_intent(text: str):
 
 def handle_topic_overview(topic_query: str) -> Dict:
     """Zoek kaarten met topic of tag matching topic_query. Case-insensitive."""
-    kb = load_json(KB_FILE, default={"knowledge_entries": []})
-    entries = kb.get("knowledge_entries") or kb.get("entries") or []
+    # v6_v2_first_001 — V2 is bron; V1 wordt overgeslagen (archief)
+    entries = _load_kbv2_entries()
     q = topic_query.lower().strip()
 
     # Match op topic OR tag

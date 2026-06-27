@@ -21,7 +21,25 @@ from datetime import datetime
 from modules.core.storage import load_json, save_json
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
-KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = DATA_DIR / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_DIR / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
+
+
+def _find_entry_in_kbv2(entry_id: str):
+    """v6_v2_first_001 — vind kaart in V2 lades + inbox. Return (kaart, lade_naam) of (None, None)."""
+    for lade in KBV2_LADES + ["inbox"]:
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        for k in d.get("kaarten", []) or []:
+            if k.get("id") == entry_id:
+                return k, lade
+    return None, None
+
+
+def _save_lade(lade: str, kaarten: list):
+    fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+    save_json(KBV2_DIR / f"{fname}.json", {"kaarten": kaarten})
 
 DAGEN_NL = {
     "maandag", "dinsdag", "woensdag", "donderdag",
@@ -123,13 +141,8 @@ def apply_to_active_card(last_entry_id: str, fields: dict) -> dict:
     """
     if not last_entry_id or not fields:
         return {}
-    data = load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []})
-    entries = data.get("knowledge_entries", [])
-    target = None
-    for e in entries:
-        if e.get("id") == last_entry_id:
-            target = e
-            break
+    # v6_v2_first_001 — V2 is bron
+    target, lade = _find_entry_in_kbv2(last_entry_id)
     if not target:
         return {}
     if not _is_card_unapproved(target):
@@ -147,7 +160,15 @@ def apply_to_active_card(last_entry_id: str, fields: dict) -> dict:
         if "spontaan-verrijkt" not in tags:
             tags.append("spontaan-verrijkt")
         target["tags"] = tags
-        save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+        # Herlees alle kaarten van die lade, vervang, schrijf
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        kaarten = d.get("kaarten", [])
+        for i, k in enumerate(kaarten):
+            if k.get("id") == last_entry_id:
+                kaarten[i] = target
+                break
+        _save_lade(lade, kaarten)
     return filled
 
 

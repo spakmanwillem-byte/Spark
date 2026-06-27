@@ -17,7 +17,9 @@ Alleen voor admin (gradatie 1 of 2). Sessie-state in session_state.
 from pathlib import Path
 from modules.core.storage import load_json, save_json
 
-KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KNOWLEDGE_FILE = Path(__file__).parent.parent.parent / "data" / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = Path(__file__).parent.parent.parent / "data" / "knowledge" / "v2"
+KBV2_LADES = ["doen", "weten", "voelen", "spreken"]
 
 # Vraag-volgorde + sjablonen (vriendelijk, korte vragen)
 FIELDS_ORDER = ["wat", "wanneer", "waar", "wie", "waarom", "hoe"]
@@ -103,11 +105,29 @@ def is_skip(text: str) -> bool:
 
 
 def _load_entries():
-    return load_json(KNOWLEDGE_FILE, default={"knowledge_entries": []}).get("knowledge_entries", [])
+    """v6_v2_first_001 — alle V2 kaarten (4 lades + inbox) als platte lijst."""
+    out = []
+    for fname in [f"knowledge_v2_{l}" for l in KBV2_LADES] + ["knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        out.extend(d.get("kaarten", []) or [])
+    return out
 
 
 def _save_entries(entries):
-    save_json(KNOWLEDGE_FILE, {"knowledge_entries": entries})
+    """v6_v2_first_001 — schrijf elke entry terug naar de V2 lade die hij claimt.
+    Onbekende lade → inbox. V1-stijl entries (snap-*) overgeslagen."""
+    by_lade = {l: [] for l in KBV2_LADES + ["inbox"]}
+    for e in entries:
+        eid = e.get("id") or ""
+        if eid.startswith("snap-"):
+            continue
+        lade = (e.get("lade") or "").lower().strip()
+        if lade not in KBV2_LADES:
+            lade = "inbox"
+        by_lade[lade].append(e)
+    for lade, items in by_lade.items():
+        fname = "knowledge_inbox" if lade == "inbox" else f"knowledge_v2_{lade}"
+        save_json(KBV2_DIR / f"{fname}.json", {"kaarten": items})
 
 
 def build_queue(max_items: int = 50) -> list:

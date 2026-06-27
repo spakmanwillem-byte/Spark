@@ -20,7 +20,19 @@ DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 IDENTITY_FILE = DATA_ROOT / "personality" / "spark_identity.json"
 PROFILE_FILE = DATA_ROOT / "personality" / "spark_profile.json"
 BIJBEL_FILE = DATA_ROOT / "personality" / "spark_bijbel.json"
-KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"
+KB_FILE = DATA_ROOT / "knowledge" / "learned_knowledge" / "knowledge_base.json"  # V1 legacy
+KBV2_DIR = DATA_ROOT / "knowledge" / "v2"
+
+
+def _load_kbv2_as_v1_shape() -> dict:
+    """v6_v2_first_001 — V2 lades + inbox in V1-vorm zodat downstream lookup blijft werken."""
+    entries = []
+    for fname in ["knowledge_v2_doen", "knowledge_v2_weten",
+                  "knowledge_v2_voelen", "knowledge_v2_spreken",
+                  "knowledge_inbox"]:
+        d = load_json(KBV2_DIR / f"{fname}.json", default={"kaarten": []})
+        entries.extend(d.get("kaarten", []) or [])
+    return {"knowledge_entries": entries}
 
 
 # Patterns per intent — order = priority (first match wins)
@@ -45,7 +57,7 @@ def _load_all():
         "identity": load_json(IDENTITY_FILE, default={}),
         "profile": (load_json(PROFILE_FILE, default={}) or {}).get("spark_profiel", {}),
         "bijbel": load_json(BIJBEL_FILE, default={}),
-        "kb": load_json(KB_FILE, default={}),
+        "kb": _load_kbv2_as_v1_shape(),
     }
 
 

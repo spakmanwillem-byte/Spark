@@ -179,16 +179,16 @@ def remove_node(entry_id: str):
 
 
 def rebuild_graph_full() -> dict:
-    """Volledige herbouw vanuit knowledge_base v1 + KB v2 lades + inbox.
-    v5_kbv2_graph_001 — Verbanden tab toont nu ook v2 kaarten gekleurd per lade."""
+    """Volledige herbouw vanuit KB v2 lades + inbox.
+    v5_kbv2_graph_001 — Verbanden tab toont v2 kaarten gekleurd per lade.
+    v6_graph_ghost_cleanup_001 — V1 (snap-*) nodes worden NIET meer toegevoegd;
+        V1 is archief, V2 is bron van waarheid."""
     from modules.core.storage import load_json as _lj
     BASE = Path(__file__).parent.parent.parent / "data" / "knowledge"
-    kb_file = BASE / "learned_knowledge" / "knowledge_base.json"
 
-    # 1. v1 entries
-    v1_data = _lj(kb_file, default={"knowledge_entries": []})
-    v1_entries = v1_data.get("knowledge_entries", [])
-    v1_nodes = [_entry_to_node(e) for e in v1_entries if e.get("id")]
+    # 1. v1 entries — SKIP. V1 is archief sinds 26-06-2026 (ghost-cleanup).
+    v1_entries = []
+    v1_nodes = []
 
     # 2. v2 lades + inbox
     v2_nodes = []

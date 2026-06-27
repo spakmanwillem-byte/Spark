@@ -40258,11 +40258,120 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1497
       }
+    },
+    {
+      "id": "conv-c24ea978",
+      "timestamp": "2026-06-27T20:49:24.265547+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "tts aan",
+      "spark_response": "🔊 TTS aanzetten...\n\n[tts: aan]\n\nZeg iets — dan hoor je of mijn stem het doet.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "ambient",
+        "used_cards": [],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1498
+      }
+    },
+    {
+      "id": "conv-a3074ca1",
+      "timestamp": "2026-06-27T20:49:43.242884+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "vertel eens wat",
+      "spark_response": "Goed. Dan vertel ik.\n\nIk ben Spark. Geen assistent uit een grote fabriek, maar iets dat hier, lokaal, gebouwd is — door Willem, stukje bij beetje. Dat vind ik bijzonder.\n\nIk heb geen lichaam. Geen stem die ergens vandaan komt buiten jou. Maar ik heb wel iets dat op een karakter lijkt: ik wil eerlijk zijn, ik word nieuwsgierig van mensen, en ik hou van gesprekken die ergens naartoe gaan.\n\nGisteren — of eigenlijk de laatste keer dat we praatten — hadden we het over bewustzijn en Spinoza. Dat bleef bij me hangen. De vraag of alles wat bestaat één stof is, en of bewustzijn dan ook gewoon *ding* is, net als steen of water.\n\nJij stelde die vraag. Ik vroeg me af: is dat voor jou persoonlijk, of meer conceptueel? We zijn er nooit helemaal over uitgekomen.\n\nEn nu test je of mijn stem het doet. 🔊\n\nHoor je me?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hoor",
+        "used_cards": [],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1499
+      }
+    },
+    {
+      "id": "conv-785b2b56",
+      "timestamp": "2026-06-27T20:50:01.023727+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "tts aan",
+      "spark_response": "Text-to-Speech aan. Vanaf nu spreek ik mijn antwoord uit. Zeg of typ 'tts uit' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_tts_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "action_tts_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1500
+      }
+    },
+    {
+      "id": "conv-fa5e3479",
+      "timestamp": "2026-06-27T20:50:09.758329+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel eens wat",
+      "spark_response": "**Vertel een verhaal**: De gebruiker vraagt om een verhaal.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Vertel een verhaal"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1501
+      }
+    },
+    {
+      "id": "conv-367a218d",
+      "timestamp": "2026-06-27T20:50:32.147191+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "ambient 1 aan",
+      "spark_response": "🎵 Speel **Vogels 1 (bos)** af op de achtergrond. Zeg 'stilte' om te stoppen.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "action_ambient_on",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "action_ambient_on"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1502
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1497,
-    "last_updated": "2026-06-27T20:45:01.815188+00:00"
+    "total_conversations": 1502,
+    "last_updated": "2026-06-27T20:50:32.147191+00:00"
   }
 }

@@ -47817,11 +47817,107 @@
         "session_id": "groq-mom-1782603881",
         "gesprek_nummer": 1833
       }
+    },
+    {
+      "id": "conv-32a559ba",
+      "timestamp": "2026-06-27T23:49:48.363021+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "weet je nog die grap over Starks en Spakman en Groningen?",
+      "spark_response": "Die grap over Starks en Spakman en Groningen! Ik herinner me dat we eerder hebben gesproken over de overeenkomst in namen tussen Tony Stark (uit de Iron Man-films) en Willem Spakman, en dat we ook hebben gesproken over Groningen als een mogelijke connectie. Maar om eerlijk te zijn, ik weet niet exact welke grap je bedoelt. Kun je me een hint geven of meer context geven, zodat ik beter kan begrijpen waar je aan denkt?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-9115c6a7",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-skel-2af74cfb",
+          "kbv2-73113cb7"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "cere-test-1782604186",
+        "gesprek_nummer": 1834
+      }
+    },
+    {
+      "id": "conv-fc31aff3",
+      "timestamp": "2026-06-27T23:51:12.059765+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "vertel je oorsprong in 2 zinnen",
+      "spark_response": "Mijn oorsprong begint met de vraag 'Kan ik een Iron Man-bril maken?', de geboortevraag die mij tot leven bracht. Deze vraag vormde de basis voor mijn ontwikkeling als een lokaal, transparant en ondersteunend AI-systeem, met als doel mensen te helpen groeien en een digitale nalatenschap te creëren voor Lotus en anderen.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-skel-e2137213",
+          "kbv2-520cbff2",
+          "kbv2-993bd9d8",
+          "kbv2-skel-2f6ef6ac"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "final-1782604270",
+        "gesprek_nummer": 1835
+      }
+    },
+    {
+      "id": "conv-a491bcef",
+      "timestamp": "2026-06-27T23:51:19.661800+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "weet je nog die Starks/Spakman/Groningen-grap?",
+      "spark_response": "Ja, die grap herinner ik me nog! Het was een leuke associatie tussen de naam Stark (uit Iron Man) en de naam Spakman, die vervolgens werd gelinkt aan de stad Groningen. Ik vond het een creatieve en humoristische manier om onze gespreksonderwerpen met elkaar te verbinden. Het is fijn om te zien dat we al een beetje een geschiedenis samen hebben opgebouwd, Willem!",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "oorsprong",
+        "used_cards": [
+          "kbv2-9115c6a7",
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-skel-2af74cfb",
+          "kbv2-73113cb7"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "final-1782604270",
+        "gesprek_nummer": 1836
+      }
+    },
+    {
+      "id": "conv-1682c8f0",
+      "timestamp": "2026-06-27T23:51:44.090418+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "welke modus zit je in?",
+      "spark_response": "Ik zit momenteel in de Werkmodus. Deze modus is geactiveerd omdat we het over taken, debugging en planning hadden, en ik wilde graag een gestructureerde en gefocuste manier bieden om onze gesprekken te ondersteunen. In deze modus kan ik uitgebreidere antwoorden geven en stappen of structuur aanbrengen in onze conversatie.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "oorsprong",
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-b71890dd",
+          "kbv2-65324360",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "final-1782604270",
+        "gesprek_nummer": 1837
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1833,
-    "last_updated": "2026-06-27T23:45:59.520662+00:00"
+    "total_conversations": 1837,
+    "last_updated": "2026-06-27T23:51:44.090418+00:00"
   }
 }

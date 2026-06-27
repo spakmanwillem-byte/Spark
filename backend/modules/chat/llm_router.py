@@ -148,8 +148,7 @@ async def _try_emergent_emergency(
         last_user = next((m["content"] for m in reversed(messages) if m["role"] == "user"), "")
         chat = (LlmChat(api_key=key, session_id=f"emergency-{int(time.time())}",
                         system_message=sys_msg)
-                .with_model("anthropic", "claude-sonnet-4-6")
-                .with_max_tokens(max_tokens))
+                .with_model("anthropic", "claude-sonnet-4-6"))
         t0 = time.time()
         msg = UserMessage(text=last_user)
         text = await chat.send_message(msg)

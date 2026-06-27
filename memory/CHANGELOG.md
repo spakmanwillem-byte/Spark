@@ -2,6 +2,38 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-27 (3e batch) — Cerebras fallback + Hallucineer-fix verfijnd
+
+### 🎯 Doel
+1. Cerebras key toevoegen als gratis fallback → totaal **60 req/min** capaciteit (Groq 30 + Cerebras 30)
+2. Hallucineer-fix verfijnen: **Spark hallucineerde Groningen niet** — Willem had hem dat verteld via Starks/Spakman/noorden-wordplay. Vorige fix was te strak, kon contextueel geheugen breken.
+
+### ✅ Wat gefixt
+- **Cerebras toegevoegd** als FALLBACK met model `gpt-oss-120b` (Cerebras heeft géén Llama 3.3 70B beschikbaar op gratis tier — alleen `zai-glm-4.7` en `gpt-oss-120b`). gpt-oss-120b geverifieerd, doet Nederlands prima.
+- **Hallucineer-fix v002** (verfijnd):
+  - ✅ Blokkeert: verzinnen van KB-kaartnamen, cijfers, exacte data
+  - ✅ Vereist: eerlijkheid bij onzekerheid ("ik weet het niet" > mooi-maar-verzonnen)
+  - ✅ **NIET geblokkeerd**: terugverwijzen naar wat user eerder heeft verteld, contextuele associaties (Stark/Spakman/Groningen), running jokes uit eerdere sessies
+  - ✅ Speelse biografische riffs zijn OK zolang ze niet als HARDE FEITEN worden geponeerd
+- **Emergency-fallback bug**: `LlmChat.with_max_tokens()` bestond niet → verwijderd uit emergency-path
+
+### 🧪 Test-resultaten
+Sample gesprek toonde alle 3 lagen werkend:
+- Origin-vraag → *"Iron Man-bril... nalatenschap voor Lotus"* ✅
+- Groningen-grap → *"Ja, die grap herinner ik me nog! Stark + Spakman + Groningen, leuke associatie"* ✅ (geheugen OK)
+- Modus-vraag → *"Werkmodus... uitgebreidere antwoorden"* ✅
+- Cerebras-fallback (test met invalide Groq-key) → ✅ `fallback/gpt-oss-120b` antwoordt in Nederlands
+
+### 📊 Capaciteit nu
+| Provider | Req/min | Model | Voor wie |
+|---|---|---|---|
+| Groq (primary) | 30 | Llama 3.3 70B | iedereen |
+| Cerebras (fallback) | 30 | gpt-oss-120b | bij Groq-piek/fail |
+| **Totaal** | **60** | | tot ~10 actieve users |
+| Emergent (emergency) | budget | Claude Sonnet 4.6 | laatste redmiddel |
+
+---
+
 ## 2026-06-27 (2e batch) — LLM-router + Groq + Hallucineer-fix
 
 ### 🎯 Doel

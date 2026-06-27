@@ -331,6 +331,39 @@ async def compose_response(
     except Exception:
         pass  # bij fout: ga gewoon door naar LLM-pad
 
+    # v6_deep_help_001 — Help-intent ('help', 'wat kan je', etc.) opent de HelpBark popup
+    # via een UI-event. Diep heeft deze short-circuit nodig anders blijft de LLM lekker
+    # filosofisch antwoorden i.p.v. de popup te openen.
+    try:
+        from modules.chat.smart_intents_service import detect_help_intent
+        if detect_help_intent(user_text):
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response="🔮 Help-overzicht geopend.",
+                        channel="spark-deep-help",
+                        session_id=session_id,
+                        analysis={"action": "open_help_bark"},
+                    )
+                except Exception:
+                    pass
+            return {
+                "success": True,
+                "message": "🔮 Help-overzicht geopend.",
+                "action": "open_help_bark",
+                "type": "open_help_bark",
+                "used_cards": [],
+                "used_model": "smart_intents_service",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass
+
     api_key = os.environ.get("EMERGENT_LLM_KEY")
     if not api_key:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt in env"}

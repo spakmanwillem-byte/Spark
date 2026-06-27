@@ -226,6 +226,11 @@ _HELP_PATTERNS = [
     r"^/?help\b",
     r"\bwelke (commands|opdrachten|functies)\b",
     r"\bwat zijn je (mogelijkheden|capaciteiten)\b",
+    # v6_help_patterns_extend_001 — natuurlijker frasering
+    r"\b(open|toon|laat zien|geef|opent?)\s+(de\s+|het\s+)?help(\s+(kader|overzicht|menu|popup|venster|paneel))?\b",
+    r"\bhelp(\s+(kader|overzicht|menu|popup|venster|paneel))\b",
+    r"\bik wil de? help\b",
+    r"\bhelp\s+nodig\b",
 ]
 
 

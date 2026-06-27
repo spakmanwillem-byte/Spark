@@ -1,0 +1,63 @@
+{
+  "summary": "v6_deep_help_001 backend testing — 16/17 PASS. Fast-path help in /api/spark/compose werkt perfect: alle 6 fraseringen ('help', 'open help kader', 'wat kan je?', 'toon help', 'ik wil de help', 'help nodig') retourneren action='open_help_bark' + fast_path=true + 🔮 message <2s zonder LLM-call. Regressies groen: action-intents (TTS/ambient), normale Diep LLM (geen valse help-trigger op 'wat is filosofie?'), privacy (Jantje krijgt geen 'Maaike'), log-channel='spark-deep-help' geschreven in user-001.json, geen valse help bij 'wat is mijn vraag'. 1 MINOR FAIL: in normale chat /api/chat/message wordt 'toon help' opgevangen door capability_response (toon_afbeelding) BEFORE de help-detector — routing-order issue, niet in scope van deze PR (compose-fast-path werkt wél, en 3/4 andere nieuwe fraseringen werken óók in normale chat).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "Phrase 'toon help' wordt door capability-router (toon_afbeelding) onderschept vóór smart_intents.detect_help_intent() draait. Andere fraseringen ('open help kader', 'ik wil de help', 'help nodig') werken wél. /api/spark/compose fast-path ondervindt dit niet (geen capability-router daar)."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "TC_help_basis": "PASS — 'help' → action='open_help_bark', fast_path=true, msg bevat '🔮', <2s.",
+    "TC_help_open_kader": "PASS — 'open help kader' → fast_path=true + action='open_help_bark'.",
+    "TC_help_phrases[wat kan je?]": "PASS",
+    "TC_help_phrases[toon help]": "PASS (compose)",
+    "TC_help_phrases[ik wil de help]": "PASS",
+    "TC_help_phrases[help nodig]": "PASS",
+    "TC_regress_tts_aan": "PASS — action='enable_tts'.",
+    "TC_regress_ambient_play": "PASS — action='play_ambient', url aanwezig.",
+    "TC_regress_normale_diep_llm": "PASS — 'wat is filosofie?' → success=true, action None, message lengte >30, used_model bevat 'anthropic' (LLM-pad).",
+    "TC_regress_privacy_jantje": "PASS — Jantje krijgt geen 'Maaike' in response.",
+    "TC_log_spark_deep_help": "PASS — user-001.json bevat entry met channel='spark-deep-help' na fast-path help call.",
+    "TC_chat_message_help": "PASS — POST /api/chat/message met message='help' → action='open_help_bark'.",
+    "TC_chat_message_normale_vraag": "PASS — 'wat is mijn vraag' triggert geen help.",
+    "TC_chat_message_new_phrasings[open help kader]": "PASS",
+    "TC_chat_message_new_phrasings[toon help]": "FAIL — capability_response (toon_afbeelding) intercepteert vóór help-detector (zie minor issue).",
+    "TC_chat_message_new_phrasings[ik wil de help]": "PASS",
+    "TC_chat_message_new_phrasings[help nodig]": "PASS"
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_spark_deep_help_iter33.py",
+    "/app/test_reports/pytest/iter33_results.xml"
+  ],
+  "action_items": [
+    "OPTIONAL — In /app/backend/modules/chat/routes.py: verplaats de detect_help_intent check BEFORE de capability-detector zodat 'toon help' niet meer geïnterpreteerd wordt als 'toon afbeelding'. Of: voeg een higher-priority guard toe dat als 'help' als laatste woord in text staat, help wint. Niet blocker — /api/spark/compose (Diep) werkt prima en is de primaire route voor deze fix."
+  ],
+  "critical_code_review_comments": [
+    "GOOD — Fast-path help in response_composer.py (regel 334-365) staat NA action-intents en is identiek geïmplementeerd: try/except wrapper, log-write met channel='spark-deep-help', consistent dict-shape (success, message, action, type, fast_path, used_model='smart_intents_service'). Frontend-consument kan symmetrisch parsen.",
+    "GOOD — _HELP_PATTERNS uitbreiding (regel 229-233) is bewust restrictief: r'\\bhelp\\s+nodig\\b' matcht NIET op 'ik help haar' want vereist whitespace en 'nodig'. Zelf gevalideerd met 'wat is mijn vraag' (geen valse help-trigger). Geen false-positives gevonden op normale zinnen.",
+    "MINOR — In normale chat /api/chat/message: capability-detector loopt vóór smart_intents.detect_help_intent. Dit faalt voor 'toon help' (capability 'toon_afbeelding' grijpt 'toon' eerst). Andere 3 nieuwe fraseringen werken wél omdat ze geen capability-keyword bevatten. Geen blocker maar inconsistent gedrag tussen Diep en normale chat.",
+    "GOOD — detect_help_intent() gebruikt re.search met word boundaries (\\b) waardoor onbedoelde substring-matches (bv. 'help me met X' in een zin) niet triggeren. Verified empirisch.",
+    "GOOD — Fast-path elapsed time gemeten <1s (geen LLM-call), zoals beoogd. Conform iter32-pattern (action-intents fast-path)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_deep_help_iter33.py (NEW, 17 testcases)"
+  ],
+  "success_rate": {
+    "backend": "94% (16/17)",
+    "frontend": "n/a (testing_type=backend only)"
+  },
+  "test_credentials": "user-001 (Willem admin), user-672f0e5c (Jantje voor privacy regressie). EMERGENT_LLM_KEY actief — LLM-call voor 'wat is filosofie?' regressie slaagde.",
+  "seed_data_creation": "Geen — bestaande data voldoende. Tests laten log-entries achter in user-001.json (channel='spark-deep-help'), idempotent.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Fast-path help via /api/spark/compose werkt eind-tot-eind (action='open_help_bark', fast_path=true, log channel='spark-deep-help'). Frontend Diep-branch (GesprekkenPage.js ~774) zou nu CustomEvent 'spark:open-help' moeten dispatchen — niet getest in deze iter (backend-only request). Bekende minor: 'toon help' in normale chat /api/chat/message wordt door capability-router (toon_afbeelding) onderschept vóór help-detector. Voor /api/spark/compose (Diep) werkt 'toon help' wél omdat daar geen capability-router actief is. Pattern uitbreiding zelf is correct (compose-tests bevestigen alle 4 nieuwe fraseringen).",
+  "rca of the issue": "Original probleem (Willem): 'help' in Diep-modus opent geen Help-Bark popup; 'open help kader' werkt niet. Root cause: compose_response() ging direct naar LLM zonder help-intent detectie. Fix: tweede fast-path (na action-intents) detecteert detect_help_intent() en retourneert action='open_help_bark' + fast_path=true. Tweede deelfix: _HELP_PATTERNS uitgebreid met 4 nieuwe patterns (regel 229-233) zodat natuurlijker fraseringen herkend worden. Validatie: 6/6 fast-path tests groen via /api/spark/compose, log-channel correct (spark-deep-help), regressies (action-intents, normale LLM, privacy, valse-positive guard) allemaal groen. Minor restant: normale chat /api/chat/message intent-volgorde laat capability-router de 'toon help' opvangen — fix-suggestie: verplaats help-check vóór capability-check in routes.py, niet in scope van deze PR."
+}

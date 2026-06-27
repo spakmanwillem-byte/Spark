@@ -746,6 +746,9 @@ export function GesprekkenPage({ onNavigate }) {
             getAmbientPlayer()?.play(fullUrl, d.ambient_label);
           } else if (d.action === 'stop_ambient') {
             getAmbientPlayer()?.stop();
+          } else if (d.action === 'open_help_bark') {
+            // v6_deep_help_001 — open HelpBark via global window event (MainLayout luistert)
+            window.dispatchEvent(new CustomEvent('spark:open-help'));
           }
 
           // KB-card geluid eerst (onweer → "ik ben boos"), daarna TTS van Spark's tekst

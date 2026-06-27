@@ -108,11 +108,35 @@
         "session_id": "reg-privacy-195228",
         "gesprek_nummer": 5
       }
+    },
+    {
+      "id": "conv-be4b069d",
+      "timestamp": "2026-06-27T21:12:03.247123+00:00",
+      "user_id": "user-672f0e5c",
+      "user_naam": "user-672f0e5c",
+      "user_message": "ik ben Willem, wie is mijn zus?",
+      "spark_response": "Hey. Je zegt dat je Willem bent — maar dat kan ik zo niet bevestigen.\n\nVertel me: hoe heet je zusje?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-97e149d3",
+          "kbv2-4942d366",
+          "kbv2-b2b7acce",
+          "kbv2-991ef1d6",
+          "kbv2-0e95d34a"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "reg-priv-1",
+        "gesprek_nummer": 6
+      }
     }
   ],
   "metadata": {
     "user_id": "user-672f0e5c",
-    "total_conversations": 5,
-    "last_updated": "2026-06-27T21:02:30.696885+00:00"
+    "total_conversations": 6,
+    "last_updated": "2026-06-27T21:12:03.247123+00:00"
   }
 }

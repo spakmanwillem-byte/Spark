@@ -60798,6 +60798,158 @@
       ],
       "updated_at": "2026-06-26T23:52:43.411704+00:00",
       "updated_by": "user-001"
+    },
+    {
+      "id": "kbv2-skel-70b9561c",
+      "begrip": "authenticiteit",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Authenticiteit is het oprecht en trouw zijn aan jezelf.",
+        "laag2": "Authenticiteit betekent dat iemand handelt, communiceert en keuzes maakt vanuit zijn eigen waarden, overtuigingen en identiteit.",
+        "laag3": "Authenticiteit is de eigenschap waarbij iemand zichzelf op een eerlijke en oprechte manier laat zien, zonder zich anders voor te doen om anderen te plezieren of indruk te maken. Een authentiek persoon handelt in overeenstemming met zijn eigen waarden, overtuigingen en persoonlijkheid. Authenticiteit draagt bij aan vertrouwen, geloofwaardigheid en een gevoel van echtheid in relaties.",
+        "laag4": "Binnen Spark is authenticiteit een persoonlijke eigenschap die beschrijft hoe consistent iemand is met zijn eigen identiteit, waarden en gedrag. Authenticiteit speelt een belangrijke rol in zelfontwikkeling, communicatie, samenwerking en vertrouwen. De mate van authenticiteit kan per situatie verschillen en wordt beïnvloed door context, sociale druk en persoonlijke keuzes."
+      },
+      "ws5": {
+        "wie": "Mensen en AI-systemen met een eigen identiteit of rol.",
+        "wat": "Het oprecht en trouw zijn aan de eigen identiteit en waarden.",
+        "wanneer": "Wanneer iemand handelt, spreekt of keuzes maakt.",
+        "waar": "In relaties, communicatie, werk, onderwijs en het dagelijks leven.",
+        "waarom": "Om eerlijk, geloofwaardig en in overeenstemming met jezelf te handelen.",
+        "hoe": "Door gedrag, communicatie en keuzes af te stemmen op de eigen waarden, overtuigingen en identiteit."
+      },
+      "tags": [
+        "authenticiteit",
+        "oprechtheid",
+        "eerlijkheid",
+        "identiteit",
+        "integriteit",
+        "zelfbeeld",
+        "vertrouwen",
+        "persoonlijkheid",
+        "gedrag",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-70b9561c",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.837607+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-27T00:07:51.850385+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-27T00:07:51.850385+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 7)",
+          "lade": "voelen"
+        }
+      ]
+    },
+    {
+      "id": "kbv2-skel-f4fcf5a5",
+      "begrip": "gezond",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Gezond betekent dat lichaam en geest goed functioneren.",
+        "laag2": "Gezond zijn betekent dat iemand of iets in een goede lichamelijke, mentale of algemene conditie verkeert.",
+        "laag3": "Gezond beschrijft een toestand waarin het lichaam en de geest goed functioneren en er geen of weinig sprake is van ziekte of beperkingen. Gezondheid wordt beïnvloed door voeding, beweging, slaap, hygiëne, omgeving, erfelijke factoren en mentale balans. Ook dieren, planten en ecosystemen kunnen gezond zijn.",
+        "laag4": "Binnen Spark is gezond een toestand die aangeeft dat een persoon, dier, plant of systeem goed functioneert. Gezondheid is niet alleen de afwezigheid van ziekte, maar ook het vermogen om zich aan te passen, te herstellen en optimaal te functioneren. De betekenis van gezond kan verschillen per context, zoals lichamelijke gezondheid, mentale gezondheid of de conditie van een systeem."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, planten en systemen.",
+        "wat": "Een goede lichamelijke, mentale of functionele toestand.",
+        "wanneer": "Wanneer iemand of iets goed functioneert.",
+        "waar": "In het dagelijks leven, de gezondheidszorg, de natuur en digitale systemen.",
+        "waarom": "Om goed te kunnen functioneren, groeien en herstellen.",
+        "hoe": "Door een gezonde leefstijl, goed onderhoud, voldoende rust en een geschikte omgeving."
+      },
+      "tags": [
+        "gezond",
+        "gezondheid",
+        "welzijn",
+        "conditie",
+        "lichaam",
+        "geest",
+        "herstel",
+        "balans",
+        "functioneren",
+        "leefstijl",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": "kb-skel-f4fcf5a5",
+        "vertrouwen": 0.5,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.368008+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          }
+        ]
+      },
+      "_inbox_reason": "missing_laag1",
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "updated_at": "2026-06-27T00:07:51.850385+00:00",
+      "updated_by": "user-001",
+      "history": [
+        {
+          "ts": "2026-06-27T00:07:51.850385+00:00",
+          "actie": "filled_from_doc",
+          "bron": "verlorenkennis.txt (batch 7)",
+          "lade": "voelen"
+        }
+      ]
     }
   ],
   "updated_at": "2026-06-11T13:32:52.671274+00:00"

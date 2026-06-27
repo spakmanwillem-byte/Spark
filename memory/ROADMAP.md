@@ -7,6 +7,15 @@
 Willem heeft een **growth path** en risico is dat een nieuw agent (incl. GPT) terugvalt op een
 "oud-systeem" oplossing omdat de huidige denkwijze al verder is. **Deze sectie is anti-regressie.**
 
+### 📜 REGEL — Help-data is single source of truth
+**Elke keer als een nieuwe command, action, capability of feature wordt toegevoegd, MOET deze ook worden vastgelegd in:**
+1. `data/help/gradatie_X.json` op de juiste gradatie (lage gradatie = brede zichtbaarheid via inheritance, hoge gradatie = exclusief)
+2. `data/help/admin.json` als de feature admin-only is
+3. Spark leest hier zijn zelfkennis uit — geen parallel bestand bouwen, geen 3rd wheel.
+
+**Waarom**: Spark's "wat kan je?"-antwoord, de Help-Bark popup, EN zijn Diep-mode self-awareness komen allemaal uit deze help-files. Als een nieuwe trigger niet wordt vastgelegd hier, "weet" Spark er niet van, en geeft hij die nooit door aan een gebruiker die het vraagt.
+
+
 ### 🪞 Layered response: line ≠ laag (groot misverstand-risico)
 De huidige KB heeft `laag1..laag4` (kennis-diepte). Dat is **niet** hetzelfde als de chat-response.
 
@@ -50,6 +59,22 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 ---
 
 ## 🔎 REALITY CHECK — Sessie 31 (2026-06-27, avond)
+
+### 💡 Nieuwe brainfart sessie 31 — Spark World (D&D roleplay)
+**Visie**: Willem wil een tweede game in Spark, **bovenop** de simpele RPS. Een **D&D-stijl roleplay + strategie** spel in een wereld genaamd "Spark World". Lite-versie maar groot van potentieel.
+
+**Kernidee**: alle KB-kennis van Spark wordt **speelbaar materiaal**. Personages, locaties, normen, kernwaarden, bijbel-items, capabilities — worden game-mechanics. Spark zelf is een NPC met eigen avatar. Elke user heeft eigen avatar.
+
+**Structurele vragen voor volgende sessie**:
+- Storage: nieuw `data/spark_world/` met campaigns/characters/locations/inventory per user-id
+- Avatar-system: hergebruik bestaande avatar-infrastructuur van bots-tab (Madelief, Harry, etc.)?
+- Game-master: Spark als DM via LLM-call met game-state in system_prompt? Of Spark als één van de personages?
+- Lite-versie scope: turn-based, 1 hoofdverhaal-spoor + 3-5 quests, score/inventory/HP eenvoudig
+- Strategie-laag: lokale `dnd` module bestaat al (`/app/backend/modules/dnd/`) — daar opbouwen, niet vanaf nul
+- Integratie met RPS: misschien is RPS een mini-game IN Spark World ("verslag de wachter met sps voor een token")
+- Help-update verplicht (zie regel boven): nieuwe commando's voor Spark World moeten in `data/help/gradatie_X.json` worden vastgelegd
+
+**Status**: P1 backlog. Niet starten zonder een aparte sessie + concrete scope-keuze van Willem.
 
 ### ✅ Nieuw in deze sessie (na de redeploy van sessie 30)
 - **Diep multi-fix (iter_30-37)**: log-bug, self-awareness, tab-switch persist, TTS/STT/ambient action-pipeline, Help-Bark in Diep, RPS in Diep, multi-turn memory na fast-path, "begin/start sps" synonyms.

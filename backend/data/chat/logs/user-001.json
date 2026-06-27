@@ -46027,11 +46027,29 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1758
       }
+    },
+    {
+      "id": "conv-ef836128",
+      "timestamp": "2026-06-27T22:17:43.417753+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "deze zin start game sps",
+      "spark_response": "🎮 Steen — Papier — Schaar! Kies je zet.",
+      "channel": "spark-deep-rps-sem",
+      "analysis": {
+        "action": "open_game_rps",
+        "semantic_score": 100.0,
+        "matched_canonical": "start sps"
+      },
+      "metadata": {
+        "session_id": "sem-test-zin",
+        "gesprek_nummer": 1759
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1758,
-    "last_updated": "2026-06-27T22:12:32.636666+00:00"
+    "total_conversations": 1759,
+    "last_updated": "2026-06-27T22:17:43.417753+00:00"
   }
 }

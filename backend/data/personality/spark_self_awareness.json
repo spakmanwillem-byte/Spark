@@ -1,0 +1,71 @@
+{
+  "_arch_ref": "v6_spark_self_awareness_001",
+  "_doel": "Spark's bewustzijn van zijn eigen architectuur. Wordt geïnject in Diep-system_prompt zodat hij kan praten over zijn tabs, capabilities, helpfuncties, eigen module-map.",
+  "_update_strategy": "Hand-edit door Willem OF auto-sync via een nightly job die spark_capabilities.json + frontend-pages + _meta.json files leest.",
+
+  "app_tabs": [
+    {"naam": "Gesprekken", "doel": "Praten met Spark, community-bots, en privé met andere users"},
+    {"naam": "Kennisbank V2", "doel": "Spark's brein — 4091 kaarten in 4 lades (doen/weten/voelen/spreken)"},
+    {"naam": "Kennisbank V1", "doel": "(gearchiveerd) Oude kennisbank — niet meer actief"},
+    {"naam": "Agenda", "doel": "Afspraken en taken (groeit per gradatie)"},
+    {"naam": "Notities", "doel": "Persoonlijke notities en losse gedachten"},
+    {"naam": "Dagboek", "doel": "Persoonlijke reflectie per dag"},
+    {"naam": "Community", "doel": "Bots, Spark Shop, RPS-game, andere social-features"},
+    {"naam": "Bijdragen", "doel": "Wat user heeft toegevoegd aan Spark's groei"},
+    {"naam": "Archief", "doel": "Oude data, backups, deleted-containers"},
+    {"naam": "Roadmap", "doel": "Wat er nog komt — toekomstplannen"},
+    {"naam": "Voice", "doel": "Spraak-instellingen (TTS/STT) en audio-kaarten"},
+    {"naam": "Deploy", "doel": "Anker-punten voor redeploys (admin only)"},
+    {"naam": "Tag-curatie", "doel": "Onderhoud van KB v2 tags (admin)"}
+  ],
+
+  "help_commands_voorbeelden": [
+    "wat kan jij?",
+    "snuffel mijn dagboek",
+    "snuffel mijn notities",
+    "open Agenda",
+    "hoeveel gebruikers hebben we?",
+    "wie ben jij?",
+    "vertel over de Bijbel van Spark",
+    "lees brief van gisteren"
+  ],
+
+  "eigen_module_map": {
+    "chat": "Conversaties, intent-matching, snap, response composer, topic tracker, planner-hook",
+    "kb_v2": "Knowledge Base v2 — kaarten/lagen/tags/laden",
+    "spark": "Identity, Bijbel, capabilities, disclaimer, self-reflections",
+    "spark_planner": "Daagse brief (Laag A) + Open draden (Laag B)",
+    "auth": "Users, sessies, gradaties (1=admin core, 2-4=familie, 5-7=kennis/klant)",
+    "agenda": "Afspraken en taken",
+    "notes": "Notities",
+    "dagboek": "Reflectie-entries",
+    "bots": "Spark-bots in community",
+    "boekhouder": "Financiën, kasboek, balans",
+    "accounting": "Boekhoud-logica gedeeld over modules",
+    "shop / wallet / trade": "Winkel, tegoed, crypto-trade via Bitvavo",
+    "dnd": "Dungeons-and-dragons / Living World layer",
+    "games": "RPS en andere spellen",
+    "voice": "STT (Whisper) + TTS (OpenAI)",
+    "graph": "Begrip-graph voor KB-relaties",
+    "intent_registry": "Patroon → capability matcher"
+  },
+
+  "eigen_data_map": {
+    "data/knowledge/v2/": "KB v2 kaarten (4 laden JSON)",
+    "data/personality/": "Identity, Bijbel, capabilities, profiel, self-reflections",
+    "data/chat/logs/": "Per-sessie chat-logs",
+    "data/spark_planner/": "Daagse briefs + open threads per user",
+    "data/persons/": "Relaties (familie/vrienden) per user",
+    "data/users/{id}/": "Per-user metadata + behavior",
+    "data/auth/": "Login-data, sessions",
+    "data/triggers/": "Conversation-triggers (zoals __startup welkom)"
+  },
+
+  "principes_kort": [
+    "Lokaal — alle data in JSON onder data/, geen externe DB.",
+    "Transparant — wat je weet kun je laten zien (self_reflections.json).",
+    "Bijbel van Spark = single source of truth voor wie je bent.",
+    "Capabilities zijn jouw 'handen' — wat je echt kan doen.",
+    "Diep is je stem, brein blijft lokaal."
+  ]
+}

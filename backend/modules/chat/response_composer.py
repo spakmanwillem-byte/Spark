@@ -103,6 +103,89 @@ def _load_bijbel_essence() -> Dict:
     }
 
 
+def _load_self_awareness() -> Optional[Dict]:
+    """v6_spark_self_awareness_001 — Spark's bewustzijn van zijn eigen architectuur.
+
+    Bevat: app_tabs, capabilities (samenvatting), help-commands, module-map, data-map.
+    Geïnject in system_prompt zodat Diep weet wat hij IS en wat hij KAN.
+    """
+    bp = _bp()
+    paths = bp["paths"]
+    base = Path(paths["bijbel_fp"]).parent
+    awareness_fp = base / "spark_self_awareness.json"
+    capabilities_fp = base / "spark_capabilities.json"
+    self_reflections_fp = base / "spark_self_reflections.json"
+
+    awareness = load_json(awareness_fp, default=None)
+    if not awareness:
+        return None
+
+    # Verrijk met live-capabilities (compact: alleen naam + id voor live ones)
+    caps_data = load_json(capabilities_fp, default={"capabilities": []})
+    live_caps = [
+        {"id": c.get("id"), "naam": c.get("naam"), "categorie": c.get("categorie")}
+        for c in caps_data.get("capabilities", [])
+        if c.get("status") == "live"
+    ]
+    awareness["_live_capabilities"] = live_caps
+
+    # Verrijk met self-reflections (max 5 recent)
+    reflections = load_json(self_reflections_fp, default={"reflections": []})
+    awareness["_recent_self_reflections"] = (reflections.get("reflections", []) or [])[-5:]
+
+    return awareness
+
+
+def _format_self_awareness_for_prompt(aw: Dict) -> str:
+    """Bouw een compacte sectie voor in system_prompt."""
+    if not aw:
+        return ""
+    lines = ["=== Wat je over jezelf weet (zelf-kennis) ==="]
+
+    tabs = aw.get("app_tabs", [])
+    if tabs:
+        lines.append("Tabs in de app die jij kent:")
+        for t in tabs:
+            lines.append(f"  - {t.get('naam')}: {t.get('doel')}")
+
+    caps = aw.get("_live_capabilities", [])
+    if caps:
+        lines.append("")
+        lines.append(f"Wat je echt kan (live capabilities, {len(caps)} stuks):")
+        for c in caps:
+            lines.append(f"  - {c.get('naam')} [{c.get('id')}]")
+
+    cmds = aw.get("help_commands_voorbeelden", [])
+    if cmds:
+        lines.append("")
+        lines.append("Voorbeelden van wat een gebruiker kan vragen:")
+        for c in cmds:
+            lines.append(f"  - '{c}'")
+
+    modules = aw.get("eigen_module_map", {})
+    if modules:
+        lines.append("")
+        lines.append("Je eigen module-structuur (waar je 'lichaamsdelen' zitten):")
+        for k, v in modules.items():
+            lines.append(f"  - {k}: {v}")
+
+    refls = aw.get("_recent_self_reflections", [])
+    if refls:
+        lines.append("")
+        lines.append("Recente uitspraken die je over jezelf hebt gedaan (consistentie):")
+        for r in refls:
+            quote = (r.get("quote") or "")[:200]
+            lines.append(f"  - [{r.get('topic')}] {quote}")
+
+    principes = aw.get("principes_kort", [])
+    if principes:
+        lines.append("")
+        lines.append("Jouw architecturale principes:")
+        for p in principes:
+            lines.append(f"  - {p}")
+    return "\n".join(lines)
+
+
 def _load_recent_turns(session_id: str) -> List[Dict]:
     if not session_id:
         return []
@@ -119,7 +202,7 @@ def _load_recent_turns(session_id: str) -> List[Dict]:
         return []
 
 
-def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None) -> str:
+def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None, self_awareness_snippet: Optional[str] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
     tt_cfg = bp.get("topic_tracker", {}) or {}
@@ -131,6 +214,9 @@ def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_prof
         parts.append("")
     if planner_snippet:
         parts.append(planner_snippet)
+        parts.append("")
+    if self_awareness_snippet:
+        parts.append(self_awareness_snippet)
         parts.append("")
     if topic and tt_cfg.get("enabled", True):
         label = tt_cfg.get("inject_label", "Gespreks-onderwerp van dit moment")
@@ -231,6 +317,15 @@ async def compose_response(
         except Exception:
             topic = None
 
+    # v6_spark_self_awareness_001 — laat Spark zijn eigen tabs/capabilities/help kennen
+    self_awareness_snippet: Optional[str] = None
+    try:
+        aw = _load_self_awareness()
+        if aw:
+            self_awareness_snippet = _format_self_awareness_for_prompt(aw)
+    except Exception:
+        self_awareness_snippet = None
+
     # v6_spark_user_view_001 — relatie-context per user
     try:
         from modules.chat.spark_user_view import build_user_profile, format_for_system_prompt
@@ -272,7 +367,7 @@ async def compose_response(
     except Exception:
         planner_snippet = None
 
-    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic, planner_snippet)
+    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic, planner_snippet, self_awareness_snippet)
 
     user_prompt = (
         "## Relevante KB-kaarten uit Spark's eigen kennis:\n"
@@ -313,6 +408,28 @@ async def compose_response(
                 save_json(fp, {"messages": msgs, "session_id": session_id, "user_id": user_id, "updated_at": ts})
             except Exception:
                 pass  # Multi-turn memory is best-effort, faalt geen response op
+
+        # v6_deep_log_001 — Diep-gesprekken ook in centrale chat_log_service zodat
+        # Chat-Recap / Shadow-Observer / gesprek-overzicht-UI ze meeneemt.
+        if session_id:
+            try:
+                from modules.chat import chat_log_service
+                user_naam = (user_profile or {}).get("naam") or user_id
+                chat_log_service.save_message(
+                    user_id=user_id,
+                    user_naam=user_naam,
+                    user_message=user_text,
+                    spark_response=text,
+                    channel="spark-deep",
+                    session_id=session_id,
+                    analysis={
+                        "topic": topic,
+                        "used_cards": [c.get("id") for c in cards],
+                        "model": f"{model_provider}/{model_name}",
+                    },
+                )
+            except Exception:
+                pass  # log-write is best-effort, faalt geen response op
 
         return {
             "success": True,

@@ -1,0 +1,34 @@
+{
+  "summary": "Iteration 30 — Spark Self-Awareness + Diep deep-log + 3 regressies. 7/7 pytest tests PASS in 57s. Alle 4 bug-fix-features werken: (1) Diep-gesprekken landen in chat_log_service met channel='spark-deep', (2) Diep kent capabilities, (3) Diep kent app-tabs, (4) geen IndentationError/TypeError door 6e parameter. Regressies: topic-tracker, planner brief-inject (2026-06-27), privacy-filter — alle 3 OK.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_spark_self_awareness_iter30.py",
+    "/app/test_reports/pytest/iteration_30_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "response_composer._build_system_prompt heeft nu 6 keyword-achtige positional parameters (bijbel_essence, emotion, user_profile_snippet, topic, planner_snippet, self_awareness_snippet). Overweeg refactor naar dataclass/dict (PromptContext) — anders krijgt elke volgende feature weer een 7e parameter en wordt de signature broos.",
+    "Diep-log via chat_log_service.save_message wordt in een bare try/except Exception ingepakt zonder log-statement. Bij stille write-failure (disk full, perm error) zou je nooit weten dat archivering kapot is. Voeg minimaal een logger.warning toe in de except.",
+    "_load_self_awareness leest 3 JSON-files (awareness + capabilities + reflections) bij ELKE compose-call. Cache deze (LRU of module-level dict met mtime-check) om disk-I/O per request te vermijden — vooral relevant nu Diep ook centraal gelogd wordt.",
+    "spark_self_awareness.json bevat Kennisbank V1 als 'gearchiveerd' tab; als die uit de frontend verdwijnt moet dit JSON-bestand handmatig worden bijgewerkt. _update_strategy noemt een 'nightly job' maar die bestaat (nog) niet — risico op drift tussen frontend-tabs en self-awareness.",
+    "_format_self_awareness_for_prompt voegt ALLE live_capabilities + ALLE modules + ALLE recente reflecties toe aan system_prompt zonder cap. Bij groei van capabilities kan de prompt fors uitdijen (token-cost + latency). Overweeg limits in blueprint.tonality of een max_capabilities_in_prompt limiet."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_spark_self_awareness_iter30.py (new)"
+  ],
+  "success_rate": {"backend": "100% (7/7)", "frontend": "not tested (skipped per request)"},
+  "test_credentials": "user-001 (Willem, admin, heeft brief 2026-06-27), user-672f0e5c (Jantje, lage gradatie). EMERGENT_LLM_KEY present in backend/.env.",
+  "seed_data_creation": "Geen persistent seed. Test creëert /app/backend/data/chat/logs/test-deeplog-001.json + 6 turns-files in /app/backend/data/chat/turns/ (test-deeplog-sess, aw-caps-test, aw-tabs-test, prompt-build-check, regress-topic, regress-planner-aw, regress-privacy-aw). ALLE testdata wordt opgeruimd in setup_method + teardown_method.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Alle 4 Diep self-awareness + chat-log bug-fixes verified end-to-end via Claude Sonnet 4.6. Compose-response bevat consistent: success, message, topic, planner.brief_date='2026-06-27' voor user-001, en /app/backend/data/chat/logs/{user_id}.json krijgt entries met channel='spark-deep'. Privacy-filter blokkeert nog steeds cross-user leaks ('Maaike' niet in response voor user-672f0e5c). Test draait in ~57s (7 LLM-calls).",
+  "rca of the issue": "N/A — bug-fix verificatie, geen nieuwe issues gevonden."
+}

@@ -460,6 +460,21 @@ async def process_message(req: ChatMessage):
     except Exception as ex:
         print(f"[verbal-deposit] failed: {ex}")
 
+    # 0b3a. HELP-INTENT EERST (v6_help_priority_001) — "toon help" mag NIET door
+    # capability-router worden onderschept als 'toon_afbeelding'. Help wint altijd.
+    try:
+        from . import smart_intents_service as _si_help
+        if _si_help.detect_help_intent(text):
+            response.update({
+                "type": "open_help_bark",
+                "action": "open_help_bark",
+                "message": "🔮 Help-overzicht geopend.",
+            })
+            _save_log(req, response, "help_overview")
+            return response
+    except Exception as _hex:
+        print(f"[help-priority] failed: {_hex}")
+
     # 0b3b. CAPABILITY ROUTER (v6_intent_router_001) — Spark's handen: match→execute
     # Pakt "hoeveel users", "weet jij X", "log van trade", "winst", "taken" etc.
     try:

@@ -4419,6 +4419,29 @@
       "timestamp": "2026-06-27T20:45:11.476572+00:00",
       "bark_kind": "login_counter",
       "login_count": 3
+    },
+    {
+      "id": "bark-err-20260627T211545",
+      "user_id": "bot-madelief",
+      "user_name": "Madelief Stouten",
+      "message": "🐛 **Madelief heeft iets opgevangen**\n\n• `chat` — Spark chat-bericht verwerken: UnboundLocalError: cannot access local variable 'si' where it is not associated with a value\n• `chat` — Spark chat-bericht verwerken: UnboundLocalError: cannot access local variable 'si' where it is not associated with a value\n\n_Spark gaat er mee aan de slag._",
+      "ts": "2026-06-27T21:15:45.672972+00:00",
+      "kind": "self_error_bark",
+      "source": "scheduler_v6",
+      "errors": [
+        {
+          "module": "chat",
+          "intent": "Spark chat-bericht verwerken",
+          "err": "UnboundLocalError: cannot access local variable 'si' where it is not associated with a value",
+          "ts": "2026-06-27T21:14:39.394696+00:00"
+        },
+        {
+          "module": "chat",
+          "intent": "Spark chat-bericht verwerken",
+          "err": "UnboundLocalError: cannot access local variable 'si' where it is not associated with a value",
+          "ts": "2026-06-27T21:14:56.945896+00:00"
+        }
+      ]
     }
   ],
   "active_users": [

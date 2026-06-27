@@ -1,0 +1,54 @@
+{
+  "summary": "v6_help_priority_001 iter_34 — main fix is GREEN. 7/9 tests pass. De HELP-PRIORITY check op regels 463-476 van routes.py (BEFORE capability-router op 477) werkt: 'toon help' (de bug uit iter_33), 'help' en 'open help kader' geven nu allemaal type='open_help_bark' + action='open_help_bark' in normale chat /api/chat/message. Capability-router (hoeveel users), agenda-route (planning), Diep fast-path (compose) en normale conversatie (fotosynthese) blijven werken — geen regressies geintroduceerd. 2 failures (geen blocker): (1) 'log van trade' returnt type='capability_placeholder' i.p.v. 'capability_response' — capability-router werkt nog wel, alleen ander type-label, niet door deze PR veroorzaakt; (2) edge case 'help me met begrijpen wat trade is' triggert WEL open_help_bark — false-positive door bestaand patroon `^/?help\\b` in _HELP_PATTERNS (smart_intents_service.py:226). Pre-existing, niet door iter_34-fix geintroduceerd. Per problem statement gemarkeerd als MINOR.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/chat/message + /api/spark/compose",
+        "issue": "FALSE POSITIVE in detect_help_intent(): zinnen die met 'help' beginnen ('help me met begrijpen wat trade is') triggeren open_help_bark door pattern `^/?help\\b` in smart_intents_service.py:226. Spark geeft een 'Help-overzicht geopend' i.p.v. echte uitleg over trade. Pre-existing — niet door iter_34-fix geintroduceerd. Suggestie: vervang `^/?help\\b` door `^/?help\\s*$` (alleen exact 'help' of '/help' op zichzelf), of vereis dat 'help' NIET gevolgd wordt door een woord dat geen help-kader-term is."
+      },
+      {
+        "endpoint": "/api/chat/message",
+        "issue": "'log van trade' returnt type='capability_placeholder' i.p.v. 'capability_response' (zoals genoemd in test-spec). Capability-router werkt — maar deze capability is een placeholder. Niet door iter_34-fix veroorzaakt; cosmetisch."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_results": {
+    "TestHelpPriorityFix::test_toon_help_normal_chat": "PASS — type+action=open_help_bark (FIX GREEN)",
+    "TestHelpPriorityFix::test_help_basis_normal_chat": "PASS",
+    "TestHelpPriorityFix::test_open_help_kader_normal_chat": "PASS",
+    "TestCapabilityRouterRegression::test_hoeveel_users": "PASS — type=capability_response, capability_id bevat 'user' (tellen_gebruikers)",
+    "TestCapabilityRouterRegression::test_log_van_trade": "FAIL — type=capability_placeholder (verwacht: capability_response). Geen help-trigger; capability-router actief. Cosmetisch type-label issue.",
+    "TestOtherIntentRegression::test_agenda_planning": "PASS — agenda-flow blijft werken, geen help-trigger",
+    "TestDeepFastPathStillWorks::test_compose_help": "PASS — /api/spark/compose fast_path=true + action=open_help_bark blijft groen (uit iter_33)",
+    "TestNormalConversationRegression::test_wat_is_fotosynthese": "PASS — geen valse help-trigger",
+    "TestHelpEdgeCase::test_help_me_met_X": "FAIL (MINOR per problem-statement) — 'help me met begrijpen wat trade is' triggert open_help_bark (false positive door `^/?help\\b` pattern)"
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_help_priority_iter34.py",
+    "/app/test_reports/pytest/iter34_results.xml"
+  ],
+  "action_items": [
+    "MINOR — Restrict pattern `^/?help\\b` in smart_intents_service.py:226 zodat 'help me met X' niet meer false-positive triggert. Voorstel: `^/?help\\s*[?.!]?\\s*$` (alleen exact 'help' alleen) of toevoegen negative lookahead: `^/?help\\b(?!\\s+(me|mij|je|ons))`.",
+    "OPTIONAL — Onderzoek waarom 'log van trade' capability_placeholder retourneert i.p.v. een echte log-capability; niet gerelateerd aan deze iter."
+  ],
+  "critical_code_review_comments": [
+    "GOOD — HELP-PRIORITY check op regels 463-476 is precies op de juiste plek geplaatst: NA personalia/profile/relay/deposit (die specifieker zijn) en VÓÓR capability-router (477) waar de bug zat. Try/except wrapper is correct, en geeft type+action=open_help_bark + 🔮-emoji message, consistent met de duplicate-check op regel 767-774 (smart_intents pad).",
+    "MINOR DRY — Identieke help-handling staat nu op 2 plaatsen in routes.py: regel 463-476 (priority) en regel 767-774 (via smart_intents pad). Helft van regel 767-774 wordt nooit meer geraakt omdat priority-block al eerder return't. Overweeg de oude check te verwijderen om dead code te vermijden.",
+    "MINOR — `^/?help\\b` pattern is te breed: matcht ook 'help me met X' wat een echte vraag is, geen help-overzicht-verzoek. Zie action_items."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_help_priority_iter34.py (NEW, 9 testcases)"
+  ],
+  "success_rate": {
+    "backend": "78% (7/9) — main fix 100% (3/3 help-priority tests pass); 2 minor pre-existing issues",
+    "frontend": "n/a (backend-only)"
+  },
+  "test_credentials": "user-001 (Willem) met sleutelwoord='Appelsap' werkt; EMERGENT_LLM_KEY actief.",
+  "seed_data_creation": "Geen — bestaande data voldoende.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "iter_34 HELP-PRIORITY fix in routes.py:463-476 is GROEN. 'toon help' wordt niet meer onderschept door capability-router. 2 pre-existing minor issues blijven: (1) `^/?help\\b` patroon in smart_intents_service.py:226 is te breed (false-positive op 'help me met X'); (2) 'log van trade' returnt capability_placeholder. Geen blockers. Help-handling staat nu dubbel in routes.py (regel 463 + regel 767) — overweeg refactor.",
+  "rca of the issue": "Original (iter_33 minor): in /api/chat/message intercepteerde capability-router (line 477) 'toon help' als capability 'toon_afbeelding' VOORDAT smart_intents.detect_help_intent kon draaien (line 767). Fix in iter_34: HELP-PRIORITY block toegevoegd op regel 463-476, VOOR capability-router. Validatie: alle 3 help-priority tests groen, geen regressies in capability-router/agenda/Diep/normale chat."
+}

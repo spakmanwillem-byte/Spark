@@ -2,6 +2,53 @@
 
 ---
 
+## 🚨 PERMANENT GUARDRAILS — LEES DIT EERST (Voor elk volgend agent)
+
+Willem heeft een **growth path** en risico is dat een nieuw agent (incl. GPT) terugvalt op een
+"oud-systeem" oplossing omdat de huidige denkwijze al verder is. **Deze sectie is anti-regressie.**
+
+### 🪞 Layered response: line ≠ laag (groot misverstand-risico)
+De huidige KB heeft `laag1..laag4` (kennis-diepte). Dat is **niet** hetzelfde als de chat-response.
+
+| Concept | Bron | Wie ziet het |
+|---|---|---|
+| chat `line 1` | gegenereerd uit `laag1 + ws5`, in **gesprek-toon** | Iedereen |
+| chat `line 2` | uit `laag2` of extra ws5, op verzoek "vertel meer" | Iedereen |
+| chat `line 3` | uit `laag3`, samengesteld met clusters | "Vertel uitgebreid" |
+| 🍳 recept/blauwdruk | aparte kaart-type (procedure-format, niet prose) | Iedereen |
+| 🟨 tags / 🟦 snaps / clusters / footnote / vertrouwen | metadata | **Admin only** (inspector-modus) |
+
+**Belangrijk**: NIET line1..4 = laag1..4. Een nieuw agent dat ze gelijkschakelt, breekt het concept.
+
+### 🐕 "Snuffelen" als commando-werkwoord
+Spark zoekt door eigen graph/KB/vocab. Output: rapport-stijl ("ik ruik 3 verwante clusters",
+niet één antwoord). Sluit aan op bestaande `zelfscan`-capability. Lade `doen`, kaart bestaat al.
+
+### 🧮 "5 kippen + 3 koeien" — semantische telling
+Rekenmodule kan getallen + operatoren. Maar `kip + koe` is geen rekensom — vereist KB-brug
+naar gemeenschappelijke ouder (`dieren`). Bridge tussen capability ↔ KB-graph.
+
+### 🎤 Tonality leren via voorbeeld in spreektaal
+Willem leert Spark stijl niet via config maar via voorbeelden:
+"Spark, je reactie moet zijn iets als '...'". Opslag als tonality-preference per cluster of
+globaal. Beïnvloedt line-1 generatie. Geen hard-coded antwoorden.
+
+### 🧠 Meta-cognitie: Spark legt eigen keuzes uit
+"Ik koos tag `troost` omdat ..." — admin-feature voor onderzoek/debugging. Geen black box.
+
+### ⛔ V1 is **archief sinds 26-06-2026**
+13 modules gemigreerd naar V2-first (chat-services + supporting). V1 wordt nog gelezen in:
+- `knowledge/routes.py /import-diff` (legit — zip-merge tool)
+- `kb_v2/text_importer.py`, `kb_v2/v1_drift_sync.py` (migratie-helpers — mogen)
+- `backup/routes.py` (backup-tooling)
+- Voor de rest: **gebruik altijd V2** (4 lades: doen/weten/voelen/spreken + inbox)
+
+### 🪟 Admin-view vs User-view
+Eindgebruikers zien **alleen line 1 (en uitvouwbaar 2-3)**. Inspector-modus met tags/snaps/
+clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat schoon blijft.
+
+---
+
 ## 🔎 REALITY CHECK — Sessie 28 (2026-06-17)
 
 ### ✅ Nieuw in deze sessie

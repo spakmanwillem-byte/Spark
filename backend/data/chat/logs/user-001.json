@@ -40143,11 +40143,126 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1491
       }
+    },
+    {
+      "id": "conv-d7b0c2b7",
+      "timestamp": "2026-06-27T20:40:42.227515+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "hoor niks",
+      "spark_response": "Hmm. Dan speelt het geluid niet door.\n\nKan aan twee dingen liggen: het bestand staat er niet, of de audio-route klopt nog niet in jouw setup.\n\nWeet je — staat je volume aan? 🔇",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "staat",
+        "used_cards": [
+          "kbv2-f9f2179e",
+          "kbv2-b5af1c60",
+          "kbv2-28feae55",
+          "kbv2-e0eb254a"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1492
+      }
+    },
+    {
+      "id": "conv-30ee3d41",
+      "timestamp": "2026-06-27T20:44:55.341690+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1493
+      }
+    },
+    {
+      "id": "conv-ec19cd7d",
+      "timestamp": "2026-06-27T20:44:55.379291+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1494
+      }
+    },
+    {
+      "id": "conv-d83faf80",
+      "timestamp": "2026-06-27T20:44:55.556428+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1495
+      }
+    },
+    {
+      "id": "conv-678e9f5f",
+      "timestamp": "2026-06-27T20:44:55.611846+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Willem. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1496
+      }
+    },
+    {
+      "id": "conv-0fca225f",
+      "timestamp": "2026-06-27T20:45:01.815188+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "test-diep-persist-iter31",
+      "spark_response": "Begrepen. Iter 31 — test loopt.\n\nIk ben er. Wat controleer je nu precies?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "ambient",
+        "used_cards": [
+          "kbv2-23684ad1"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1497
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1491,
-    "last_updated": "2026-06-27T20:40:26.530728+00:00"
+    "total_conversations": 1497,
+    "last_updated": "2026-06-27T20:45:01.815188+00:00"
   }
 }

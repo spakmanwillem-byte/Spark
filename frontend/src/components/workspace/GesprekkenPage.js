@@ -182,6 +182,25 @@ const saveStoredMessages = (userId, messages) => {
   }
 };
 
+// v6_deep_persist_001 — Diep-modus blijft staan over tab-switches heen
+const deepModeKey = (userId) => `spark_deep_mode_${userId || 'guest'}`;
+const loadDeepMode = (userId, fallback) => {
+  try {
+    const raw = sessionStorage.getItem(deepModeKey(userId));
+    if (raw === null) return fallback;
+    return raw === '1' || raw === 'true';
+  } catch {
+    return fallback;
+  }
+};
+const saveDeepMode = (userId, value) => {
+  try {
+    sessionStorage.setItem(deepModeKey(userId), value ? '1' : '0');
+  } catch {
+    // graceful fail
+  }
+};
+
 export function GesprekkenPage({ onNavigate }) {
   const { user } = useAuth();
   const userId = user?.id || 'user-001';
@@ -662,7 +681,11 @@ export function GesprekkenPage({ onNavigate }) {
   const [rpsOpponent, setRpsOpponent] = useState('spark');
   // v6_response_composer_001 — Diep-gesprek modus: stuurt naar /api/spark/compose i.p.v. /api/chat/message
   // Sessie 30: Diep is DEFAULT voor non-admin (knop verborgen). Admin houdt de toggle.
-  const [deepMode, setDeepMode] = useState(!isAdmin);
+  // v6_deep_persist_001: persist over tab-switches heen via sessionStorage.
+  const [deepMode, setDeepMode] = useState(() => loadDeepMode(userId, !isAdmin));
+  useEffect(() => {
+    saveDeepMode(userId, deepMode);
+  }, [deepMode, userId]);
 
   const handleSend = async (overrideText) => {
     const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();

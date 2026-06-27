@@ -18,3 +18,9 @@
 {"ts": "2026-06-27T20:25:55.704742+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 22.96}
 {"ts": "2026-06-27T20:28:37.768542+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
 {"ts": "2026-06-27T20:28:37.790915+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 22.42}
+{"ts": "2026-06-27T20:44:51.598606+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-06-27T20:44:51.620661+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'id': 'user-001', 'naam': 'De Willem', 'volledige_naam': 'Wi…", "duration_ms": 22.15}
+{"ts": "2026-06-27T20:45:10.615088+00:00", "module": "auth", "fn": "logout", "phase": "pre", "intent": "user uitloggen + sessie eindigen", "args": {"user_id": "user-001"}}
+{"ts": "2026-06-27T20:45:10.618252+00:00", "module": "auth", "fn": "logout", "phase": "post", "intent": "user uitloggen + sessie eindigen", "result": "dict(success=True, keys=success,message)", "duration_ms": 3.0}
+{"ts": "2026-06-27T20:45:11.468393+00:00", "module": "auth", "fn": "login", "phase": "pre", "intent": "user inlog verifieren"}
+{"ts": "2026-06-27T20:45:11.488449+00:00", "module": "auth", "fn": "login", "phase": "post", "intent": "user inlog verifieren", "result": "LoginResponse(success=True, message='Welkom terug!', user={'naam': 'Marieke', 'volledige_naam': 'Marieke', 'sleutelwoor…", "duration_ms": 19.94}

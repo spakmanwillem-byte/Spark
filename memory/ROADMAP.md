@@ -53,6 +53,13 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ### 💡 Nieuwe ideeën uit sessie 30 (brainfarts, voor latere sessies)
 - **P1 — Diep = default voor non-admin** (5 min): zoals gele/blauwe tags gisteren weg-getoggled werden voor non-admin, Diep-toggle weg + altijd-aan voor users; admin behoudt knop.
+- **P1 — Semantic intent matcher (Spark legt zelf verbanden)** — Willem's observatie sessie 30 (na iter_37):
+  - Probleem: fast-path triggers ('sps', 'begin sps', 'start sps') zijn nu statisch — bij elke nieuwe frasering moet ik handmatig toevoegen. Willem hoopte dat Spark zelf zou snappen dat "begin sps" hetzelfde betekent als "speel sps".
+  - Oplossing: lichte tussenlaag met **sentence-transformers** (lokaal embedding-model ~80MB, geen LLM-kosten). Spark berekent cosine-similarity tussen user-input en bekende trigger-zinnen. Bij >0.85 → dezelfde action.
+  - Past in fast-path filosofie: blijft snel + lokaal + voorspelbaar, maar wel semantisch.
+  - Past op de lokale-LLM-roadmap: zelfde dependency-bouwsteen, zelfde principe.
+  - Werk: ~2-3u. Geen breaking change.
+
 - **P1 — Lokale LLM fallback (LAN-mode + Spark kiest zelf)** — Willem's vision sessie 30:
   - **Fase 2 (LAN-fallback)**: Ollama / llama.cpp lokaal draaien (Llama 3.1 8B of Phi-3). Compose krijgt dual-pad: internet → Claude Sonnet 4.6 (huidige stem), alleen-LAN → lokaal model. Spark vertelt zelf welk pad hij gebruikt. Werk: ~3u, geen breaking change.
   - **Fase 3 (LLM-router, Spark kiest zelf)**: nieuwe blueprint `chat/blueprints/llm_router.json` met routing-regels (taak-type → model). Diep met emotie → Claude. Brief-condensatie / identity-check → lokaal. Spark schrijft zijn keuze in self_reflections (meta-cognitie). Willem kan handmatig overschrijven.

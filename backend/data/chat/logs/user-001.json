@@ -44952,11 +44952,34 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1706
       }
+    },
+    {
+      "id": "conv-c709f202",
+      "timestamp": "2026-06-27T21:44:36.333761+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-user-001",
+      "user_message": "tien plus vijfendertig",
+      "spark_response": "45.",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "staat",
+        "used_cards": [
+          "kbv2-dda3a042",
+          "kbv2-8d612974",
+          "kbv2-971b77ef",
+          "kbv2-166276ac"
+        ],
+        "model": "anthropic/claude-sonnet-4-6"
+      },
+      "metadata": {
+        "session_id": "deep-user-001",
+        "gesprek_nummer": 1707
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1706,
-    "last_updated": "2026-06-27T21:42:58.523887+00:00"
+    "total_conversations": 1707,
+    "last_updated": "2026-06-27T21:44:36.333761+00:00"
   }
 }

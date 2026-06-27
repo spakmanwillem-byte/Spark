@@ -66,10 +66,24 @@ def _collect_turns_for_date(user_id: str, target_date: str) -> List[Dict]:
     return out
 
 
-def _format_turns_for_prompt(turns: List[Dict], max_chars: int) -> str:
+def _user_display_name(user_id: str) -> str:
+    """Lees naam uit users.json. Fallback = 'Gebruiker'."""
+    try:
+        from pathlib import Path
+        users_fp = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+        users = load_json(users_fp, default={"users": []})
+        for u in users.get("users", []):
+            if u.get("id") == user_id or u.get("user_id") == user_id:
+                return u.get("naam") or u.get("display_name") or "Gebruiker"
+    except Exception:
+        pass
+    return "Gebruiker"
+
+
+def _format_turns_for_prompt(turns: List[Dict], max_chars: int, user_name: str = "Gebruiker") -> str:
     lines = []
     for t in turns:
-        role = "Willem" if t.get("role") == "user" else "Spark"
+        role = user_name if t.get("role") == "user" else "Spark"
         text = (t.get("text") or t.get("message") or "")[:max_chars]
         if text:
             lines.append(f"  {role}: {text}")
@@ -143,7 +157,8 @@ async def build_daily_brief(user_id: str, target_date: Optional[str] = None) -> 
 
     max_turns = brief_cfg.get("max_turns_in_prompt", 40)
     max_chars = brief_cfg.get("max_chars_per_turn", 240)
-    turns_block = _format_turns_for_prompt(turns[-max_turns:], max_chars)
+    user_name = _user_display_name(user_id)
+    turns_block = _format_turns_for_prompt(turns[-max_turns:], max_chars, user_name)
 
     system_prompt = (
         "Je bent Spark, een persoonlijke AI-companion. "

@@ -49,6 +49,27 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 30 (2026-06-27)
+
+### ✅ Nieuw in deze sessie
+- **v6_topic_tracker_001 LIVE** — Topic-tracker werkt cross-turn: `detect_topic(session_id)` wordt in compose aangeroepen, geïnjecteerd in system_prompt als "Gespreks-onderwerp van dit moment", en exposed in `response.topic`.
+- **v6_disclaimer_blueprint_001** — `spark/disclaimer` endpoint draait nu op JSON-blueprint (paths/labels/counts configureerbaar).
+- **v6_intent_matcher_blueprint_001** — Layer 3 capability-matcher draait nu op blueprint (caps_fp/preprocessing/scoring).
+- **v6_spark_planner_001 LIVE — Gesprekplanner Laag A + B**:
+  - **Laag A — Daagse Brief**: LLM-condensaat (Claude Sonnet 4.6) van een dag chat-turns naar 3-5 zinnen brief + themes + open_questions + emotional_tone. Per-user opslag in `data/spark_planner/daily_briefs/{user_id}/{date}.json`.
+  - **Laag B — Open Draden**: cross-day onderwerpen-stack. Threads worden auto-aangemaakt uit brief.themes + brief.open_questions. Statuses: open/sluimerend/afgesloten. Decay: open→sluimerend na 7d, →afgesloten na 30d.
+  - **Compose-integratie**: response_composer injecteert latest brief + top-3 actieve threads in system_prompt. Cross-day continuïteit voelbaar in productie: Spark begon spontaan met *"Ons laatste gesprek eindigde met een open gevoel — Spinoza, bewustzijn..."*.
+  - 11 endpoints onder `/api/spark/planner/`. 13/13 backend-tests pass.
+
+### 🟡 HALF AF / Vervolg-stappen
+- **Laag C (Audio-coördinatie)** — wachten op user-keuze, komt als aparte batch (audio per kaart bestaat al via `voice_kind=geluid` + `sound_url`).
+- **Auto-daily scheduler** — dagelijks brief bouwen voor alle users met activiteit (nu handmatig).
+- **Frontend UI tab "Spark's geheugen"** — brief-lijst + threads-management.
+- **Streaming (SSE)** voor Diep-gesprek — nog niet aangepakt.
+- **Tonality preferences per cluster** — uit Permanente Guardrails sectie, nog niet aangepakt.
+
+---
+
 ## 🔎 REALITY CHECK — Sessie 29 (2026-06-27)
 
 ### ✅ Nieuw in deze sessie

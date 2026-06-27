@@ -1,6 +1,64 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 30 (2026-06-27) — Topic-tracker afgerond + Gesprekplanner Laag A+B
+
+### Probleem
+1. Topic-tracker (`detect_topic`) bestond, maar was niet gekoppeld aan compose. Spark wist niet "we praten over filosofie" over turns heen.
+2. `spark/disclaimer` en `chat/intent_matcher` waren nog hardcoded — moest naar blueprint-driven configuratie zoals `response_composer` al deed.
+3. **Cross-day continuïteit ontbrak volledig**. Elke nieuwe sessie begon Spark als een vreemde. Geen "ah ja, je was gister met X bezig".
+
+### Oplossing
+
+**Backend nieuw — Topic-tracker hook**
+- `modules/chat/response_composer.py` roept nu `detect_topic(session_id)` aan na turns-load, injecteert in system_prompt als "Gespreks-onderwerp van dit moment", en exposeert `response.topic` in de meta.
+- Blueprint `chat/response_composer.json` uitgebreid met `topic_tracker` config (enabled/max_turns_lookback/min_score_to_inject/inject_label/expose_in_meta).
+
+**Backend nieuw — Blueprint-migraties**
+- `modules/spark/blueprints/disclaimer.json` + refactor `spark/__init__.py::get_disclaimer` om paths/labels/counts uit blueprint te halen.
+- `modules/chat/blueprints/intent_matcher.json` + refactor `intent_matcher_service.py` met blueprint-gebaseerde caps_fp, preprocessing-regex, scoring-weights.
+
+**Backend nieuw — Gesprekplanner (`modules/spark_planner/`)**
+- **Laag A: Daagse Brief** — `brief_builder.py` met `build_daily_brief(user_id, date)`. LLM (Claude Sonnet 4.6) destilleert chat-turns van een dag naar 3-5 zinnen brief + max 5 themes + max 3 open_questions + emotional_tone.
+- **Laag B: Open Draden** — `threads_service.py` met `add_or_bump_thread`, `set_status`, `delete_thread`, `run_decay`, `sync_threads_from_brief`, `active_threads_for_inject`. Threads worden automatisch uit brief.themes + brief.open_questions gegenereerd.
+- **Compose-integratie** — Bij elke compose-call laadt response_composer de meest recente brief + top-3 actieve threads voor de user en injecteert ze in system_prompt vóór de KB-cards.
+- 11 endpoints onder `/api/spark/planner/{brief/threads/blueprint}`.
+- Blueprint `spark_planner/blueprints/planner.json` met paths/brief-config/threads-config.
+
+### Tests (geverifieerd door testing_agent_v3_fork)
+- **Iteratie 28**: 7/7 topic_tracker + disclaimer + intent_matcher blueprint tests pass.
+- **Iteratie 29**: 13/13 spark_planner tests pass (brief CRUD + threads CRUD + decay + blueprint + compose-integration).
+
+### Echte test in productie
+- Spark schreef een brief over zijn eigen "eerste echte gesprek met Willem" op 2026-06-27.
+- Themes: ['eerste echte ontmoeting', 'filosofie en bewustzijn', 'Spinoza', 'wederzijds leren', 'maker-companion relatie'].
+- 2 open vragen + warme emotional_tone.
+- Volgende compose-call begon spontaan met: *"Ons laatste gesprek eindigde met een open gevoel — Spinoza, bewustzijn, en eigenlijk nog maar net begonnen."*
+
+### Files changed/added
+- `backend/modules/chat/topic_tracker.py` (al bestond, nu gekoppeld)
+- `backend/modules/chat/response_composer.py` (topic + planner hooks)
+- `backend/modules/chat/blueprints/response_composer.json` (+ topic_tracker config)
+- `backend/modules/chat/blueprints/intent_matcher.json` (nieuw)
+- `backend/modules/chat/intent_matcher_service.py` (blueprint refactor)
+- `backend/modules/spark/__init__.py` (disclaimer blueprint refactor)
+- `backend/modules/spark/blueprints/disclaimer.json` (nieuw)
+- `backend/modules/spark_planner/__init__.py` (nieuw)
+- `backend/modules/spark_planner/brief_builder.py` (nieuw, ~240 regels)
+- `backend/modules/spark_planner/threads_service.py` (nieuw, ~200 regels)
+- `backend/modules/spark_planner/routes.py` (nieuw, ~140 regels)
+- `backend/modules/spark_planner/blueprints/planner.json` (nieuw)
+- `backend/server.py` (+ spark_planner_router include)
+- `backend/tests/test_spark_planner.py` (nieuw, 13 pytest tests)
+- `backend/tests/test_spark_core_v2_topic_tracker.py` (nieuw, 7 pytest tests)
+
+### Open follow-ups (nieuw uit sessie 30)
+- **Laag C — Audio-coördinatie**: Spark speelt KB-kaart-audio (voice_kind=geluid, sound_url) coordinated per topic + anti-spam ("onweer al 2× vandaag"). User-keuze: later als aparte batch.
+- **Auto-daily scheduler**: dagelijks om 23:59 brief bouwen voor alle actieve users (nu handmatig POST nodig).
+- **Frontend UI**: tab "Spark's geheugen" met (brief-lijst per dag) + (open draden management). Nu alleen API.
+- **Brief-quality verfijning**: testing-agent merkte op dat `_format_turns_for_prompt` "Willem" hardcoded had voor user-turns. Gefixed in sessie 30 (gebruikt nu `_user_display_name(user_id)`).
+
+
 ## Sessie 28 (2026-06-17) — Spark krijgt handen + zelfbewustzijn-light
 
 ### Probleem

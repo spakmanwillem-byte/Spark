@@ -39046,11 +39046,158 @@
         "session_id": "default",
         "gesprek_nummer": 1444
       }
+    },
+    {
+      "id": "conv-271f3f13",
+      "timestamp": "2026-06-27T02:53:59.983115+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Wat wil je in beweging zetten? _(laatst sprak je me 2 uur geleden)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1445
+      }
+    },
+    {
+      "id": "conv-b9526bd3",
+      "timestamp": "2026-06-27T02:54:00.020442+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenacht Willem. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "nacht"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1446
+      }
+    },
+    {
+      "id": "conv-43433848",
+      "timestamp": "2026-06-27T02:54:11.720638+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Weltrusten Spark",
+      "spark_response": "Ik ken meerdere 'Spark' — welke bedoel je?\n  1. **Spark** (ai, assistent, context, communicatie, semantiek) — Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die com…\n  2. **Spark** (dnd, leider, fractie, neutraal) — Spark is Oracel van Spartanen. Hij/zij regeert vanuit Oerrak.\n\n_(Geef wat context: bv. 'de bank waar ik op zit' of 'mijn bank-rekening'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "homonym_disambig",
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "homonym_disambig"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1447
+      }
+    },
+    {
+      "id": "conv-53459395",
+      "timestamp": "2026-06-27T02:54:40.394270+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "Ik bedoel jouw.",
+      "spark_response": "Ik begrijp je, maar kan daar nog niet specifiek op reageren. Mijn kennis groeit elke dag!",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1448
+      }
+    },
+    {
+      "id": "conv-f1c4a3bb",
+      "timestamp": "2026-06-27T02:54:53.579614+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "is niet erg.",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 3,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1449
+      }
+    },
+    {
+      "id": "conv-6422aeaf",
+      "timestamp": "2026-06-27T02:55:15.103052+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "tot straks",
+      "spark_response": "**straks**: Straks betekent dat iets later gebeurt, meestal binnen korte tijd.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "neutraal",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "straks"
+          ],
+          "source": "learned",
+          "emoji": "😐",
+          "color": "#94a3b8",
+          "empathic_response": null
+        },
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "straks"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 2,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1450
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1444,
-    "last_updated": "2026-06-27T00:53:08.693221+00:00"
+    "total_conversations": 1450,
+    "last_updated": "2026-06-27T02:55:15.103052+00:00"
   }
 }

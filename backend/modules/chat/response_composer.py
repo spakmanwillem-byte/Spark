@@ -103,11 +103,15 @@ def _load_recent_turns(session_id: str) -> List[Dict]:
         return []
 
 
-def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str]) -> str:
+def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
     parts = list(tpl["intro"])
     parts.append("")
+    if user_profile_snippet:
+        parts.append("Over de gebruiker (relatie-context):")
+        parts.append(f"  {user_profile_snippet}")
+        parts.append("")
     parts.append("Je toon: " + bijbel_essence.get("tone", bp["tonality"]["default_tone"]))
     parts.append("")
     parts.append("Je kernwaarden (volg ze altijd):")
@@ -186,7 +190,17 @@ async def compose_response(
     cards = _load_relevant_kb(user_text)
     bijbel = _load_bijbel_essence()
     turns = _load_recent_turns(session_id) if session_id else []
-    system_prompt = _build_system_prompt(bijbel, emotion)
+
+    # v6_spark_user_view_001 — relatie-context per user
+    try:
+        from modules.chat.spark_user_view import build_user_profile, format_for_system_prompt
+        user_profile = build_user_profile(user_id)
+        user_snippet = format_for_system_prompt(user_profile)
+    except Exception:
+        user_profile = {}
+        user_snippet = None
+
+    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet)
 
     user_prompt = (
         "## Relevante KB-kaarten uit Spark's eigen kennis:\n"
@@ -234,6 +248,12 @@ async def compose_response(
             "used_cards": [c.get("id") for c in cards],
             "used_model": f"{model_provider}/{model_name}",
             "blueprint_version": bp.get("_schema_version", "?"),
+            "user_profile": {
+                "naam": user_profile.get("naam"),
+                "gradatie": user_profile.get("gradatie"),
+                "themes_count": len(user_profile.get("recente_themes") or []),
+                "relaties_count": len(user_profile.get("relaties") or []),
+            } if user_profile else None,
             "ts": datetime.now(timezone.utc).isoformat(),
         }
     except Exception as ex:

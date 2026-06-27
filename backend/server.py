@@ -305,6 +305,12 @@ app.include_router(admin_logs_router, prefix="/api")
 # v6_capabilities_admin_001 — Spark's capabilities overzicht voor Analytics → CAPABILITIES tab
 from modules.admin import capabilities_router as admin_capabilities_router
 app.include_router(admin_capabilities_router, prefix="/api")
+# v6_response_composer_001 — Spark's gespreks-synthesizer
+try:
+    from modules.chat.compose_routes import router as compose_router
+    app.include_router(compose_router, prefix="/api")
+except Exception as ex:
+    print(f"[compose-router] failed: {ex}")
 
 # v6_admin_role_001 — Admin role grant/revoke + bark-image lookup
 from modules.admin import role_router as admin_role_router

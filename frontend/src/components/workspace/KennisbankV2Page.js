@@ -805,7 +805,8 @@ function CardListItem({ card, active, onClick, showReason }) {
 }
 
 function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCancelEdit,
-                     onClassify, onSaveEdit, saving, inInbox, currentLade, onMediaUpdated }) {
+                     onClassify, onSaveEdit, saving, inInbox, currentLade, onMediaUpdated,
+                     onDeleteCard }) {
   const lagen = editMode ? editForm.lagen : (card.lagen || {});
   const ws5 = editMode ? editForm.ws5 : (card.ws5 || {});
   const tags = editMode ? editForm.tags : (card.tags || []);

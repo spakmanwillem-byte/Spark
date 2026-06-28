@@ -1100,6 +1100,14 @@ async def compose_response(
         except Exception:
             pass
 
+        # v6_trigger_learner_001 — non-blocking LLM-driven trigger-learning
+        # Spark leert welke triggers vragen had kunnen matchen voor fast-path next time
+        try:
+            from modules.chat.trigger_learner import schedule_learn
+            schedule_learn(user_text, text, user_id=user_id, session_id=session_id)
+        except Exception:
+            pass
+
         # v6_deep_side_effects_001 — KB-card geluid (voice_kind=geluid) — eerste card
         # met sound_url. Action-commands (TTS/STT/ambient) zijn al via try_detect short-circuit
         # afgehandeld vóór de LLM-call (zie boven in deze functie).

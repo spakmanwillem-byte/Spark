@@ -2,6 +2,86 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-27 (6e batch) — Diep altijd aan + LLM-driven trigger-learning
+
+### 🎯 Doel
+1. **Diep-toggle weg**: Groq is gratis, Ollama komt later — toggle is overbodig en verwarrend (vooral voor mama).
+2. **Self-improving NLP**: na elke Diep-call achtergrond-LLM-analyse die voorstelt welke triggers/keywords de vraag had kunnen matchen. Spark wordt zelfsturend slimmer over tijd.
+
+### ✅ Wat is gebouwd
+
+#### 1) Diep altijd aan
+- `GesprekkenPage.js`: `const deepMode = true` (hardcoded), sessionStorage-persist verwijderd
+- Toggle-button (🌊 Diep) uit ChatInput verwijderd
+- Placeholder voor input geneutraliseerd ("Praat met Spark — vraag of vertel iets...")
+- Backwards-compat: `setDeepMode` blijft als no-op (child-component verwacht 'm)
+
+#### 2) Trigger-learner module
+**Nieuw**: `modules/chat/trigger_learner.py`
+- Non-blocking: `schedule_learn()` start een asyncio-task, wacht NOOIT op LLM-call
+- Skip-filters: te kort (<8 chars), groet-zinnen ("hoi", "ja"), pre-existing hash
+- LLM-prompt vraagt strict JSON terug:
+  ```
+  { topic, categorie, intent, trigger_phrases[3-5], keywords[3-5] }
+  ```
+- Categorieën: praktisch / filosofisch / technisch / emotioneel / sociaal / admin / games / kb-vraag / legal
+- Dedupe op `text_hash` + recent-topic-match
+- Opslag in `data/triggers/learned_triggers.json` met `status: pending`
+- Cap retention op 500 voorstellen
+
+**Hook**: in `response_composer.py` na elke succesvolle compose:
+```python
+from modules.chat.trigger_learner import schedule_learn
+schedule_learn(user_text, text, user_id=user_id, session_id=session_id)
+```
+
+**Admin endpoints** in `compose_routes.py`:
+- `GET /api/spark/compose/learned-triggers?limit=50&status=pending`
+- `POST /api/spark/compose/learned-triggers/{id}/approve`
+- `POST /api/spark/compose/learned-triggers/{id}/reject`
+
+### 🧪 Test
+1. Stuur *"wat doe je als ik je vraag hoe een raket werkt?"* → Spark antwoordt instant
+2. 3 sec later (achtergrond) → Groq analyseert → opgeslagen:
+   ```json
+   {
+     "topic": "raket werking",
+     "categorie": "technisch",
+     "trigger_phrases": ["hoe werkt een raket", "raket werking", "uitleg over raketten"],
+     "keywords": ["raket", "werking", "techniek", "ruimte"],
+     "status": "pending"
+   }
+   ```
+3. `GET /api/spark/compose/learned-triggers` → ✅ levert voorstel terug
+
+### 🌱 Self-improving loop
+- Iteratie 1 — user vraagt "X" → LLM-call (kost req) → antwoord + voorstel pending
+- Iteratie 2 — admin keurt goed → trigger toegevoegd aan spark_capabilities.json
+- Iteratie 3 — volgende user vraagt zelfde-soort vraag → fast-path treft, GEEN LLM-call meer
+- Spark's vocab + intent-matcher groeit door gebruik. Past bij Core 4.0 *"Groei volgt ruimte"*.
+
+### 💰 Credits
+**0 Emergent-credits**. Beide tasks uitgevoerd binnen Willem's budget van 10. Self-improving loop gebruikt Groq (gratis).
+
+### 📦 Bestanden
+**Nieuw**:
+- `modules/chat/trigger_learner.py` (~220 regels)
+- `data/triggers/learned_triggers.json` (auto-gemaakt bij eerste call)
+
+**Gewijzigd**:
+- `frontend/src/components/workspace/GesprekkenPage.js` (deepMode hardcoded, toggle weg)
+- `modules/chat/response_composer.py` (`schedule_learn()` hook na compose-success)
+- `modules/chat/compose_routes.py` (+3 admin endpoints)
+
+### 🔭 Wat hierna kan
+- Admin-UI tab "Learned Triggers" met approve/reject knoppen (~30 min)
+- Auto-migratie: goedgekeurde voorstellen automatisch naar `spark_capabilities.json` (~20 min)
+- Categorie-filters in admin lijst (~10 min)
+- WhatsApp antwoordapparaat (Twilio, ~2u + $1 setup)
+- Kasboek SEPA (specificeer bank/import-formaat)
+
+---
+
 ## 2026-06-27 (5e batch) — Cross-session topics + Norm-matcher
 
 ### 🎯 Doel

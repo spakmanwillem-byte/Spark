@@ -54,3 +54,42 @@ async def reload_blueprint():
     """Clear blueprint-cache na handmatige edit van het JSON-bestand."""
     clear_blueprint_cache()
     return {"success": True, "msg": "Blueprint cache cleared. Volgende /compose-call gebruikt verse JSON."}
+
+
+# v6_trigger_learner_001 — admin endpoints voor learned triggers
+@router.get("/learned-triggers")
+async def list_learned_triggers(limit: int = 50, status: Optional[str] = None):
+    """Lijst van LLM-voorgestelde triggers wachtend op admin-review."""
+    try:
+        from modules.chat.trigger_learner import _load_learned
+        data = _load_learned()
+        voorstellen = data.get("voorstellen", [])
+        if status:
+            voorstellen = [v for v in voorstellen if v.get("status") == status]
+        # Nieuwste eerst
+        return {
+            "success": True,
+            "totaal": len(voorstellen),
+            "voorstellen": voorstellen[-limit:][::-1],
+            "statistieken": data.get("statistieken", {}),
+        }
+    except Exception as ex:
+        raise HTTPException(500, str(ex))
+
+
+@router.post("/learned-triggers/{voorstel_id}/approve")
+async def approve_trigger(voorstel_id: str):
+    from modules.chat.trigger_learner import approve
+    ok = approve(voorstel_id)
+    if not ok:
+        raise HTTPException(404, f"Voorstel {voorstel_id} niet gevonden")
+    return {"success": True, "voorstel_id": voorstel_id, "status": "approved"}
+
+
+@router.post("/learned-triggers/{voorstel_id}/reject")
+async def reject_trigger(voorstel_id: str):
+    from modules.chat.trigger_learner import reject
+    ok = reject(voorstel_id)
+    if not ok:
+        raise HTTPException(404, f"Voorstel {voorstel_id} niet gevonden")
+    return {"success": True, "voorstel_id": voorstel_id, "status": "rejected"}

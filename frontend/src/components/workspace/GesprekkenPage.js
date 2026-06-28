@@ -679,13 +679,10 @@ export function GesprekkenPage({ onNavigate }) {
 
   // v6_rps_001b — RPS opponent state, set by chat trigger
   const [rpsOpponent, setRpsOpponent] = useState('spark');
-  // v6_response_composer_001 — Diep-gesprek modus: stuurt naar /api/spark/compose i.p.v. /api/chat/message
-  // Sessie 30: Diep is DEFAULT voor non-admin (knop verborgen). Admin houdt de toggle.
-  // v6_deep_persist_001: persist over tab-switches heen via sessionStorage.
-  const [deepMode, setDeepMode] = useState(() => loadDeepMode(userId, !isAdmin));
-  useEffect(() => {
-    saveDeepMode(userId, deepMode);
-  }, [deepMode, userId]);
+  // v6_diep_always_on_001 — Diep is ALTIJD aan (Groq is gratis, Ollama komt later)
+  // Toggle weggehaald — gebruikers (incl. mama) verwarrende UX bespaard.
+  const deepMode = true;
+  const setDeepMode = () => { /* no-op: Diep is always on */ };
 
   const handleSend = async (overrideText) => {
     const raw = (typeof overrideText === 'string' ? overrideText : newMessage).trim();
@@ -1346,23 +1343,14 @@ function ChatInput({ value, onChange, onSend, placeholder, accent, disabled = fa
             {sttListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
         )}
-        {onDeepToggle && showDeepToggle && (
-          <button
-            data-testid="chat-deep-toggle"
-            onClick={onDeepToggle}
-            title={deepMode ? "Diep gesprek AAN — Spark componeert via eigen kennis (LLM-synthesizer)" : "Klik voor diep-gesprek modus (compose via LLM-bridge)"}
-            className={`px-2.5 py-1.5 rounded-xl transition-all flex-shrink-0 text-[11px] font-medium ${deepMode ? 'bg-indigo-500/30 text-indigo-200 ring-1 ring-indigo-400/40' : 'hover:bg-slate-700/50 text-slate-500'}`}
-          >
-            {deepMode ? '🌊 Diep' : '🌊'}
-          </button>
-        )}
+        {/* v6_diep_always_on_001 — toggle weggehaald, Diep is altijd aan */}
         <input
           type="text"
           data-testid="chat-input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !disabled && onSend()}
-          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : (deepMode ? 'Vraag iets diepgaands — Spark denkt mee...' : placeholder)}
+          placeholder={sttListening ? 'Luistert... druk mic om te stoppen' : (placeholder || 'Praat met Spark — vraag of vertel iets...')}
           disabled={disabled}
           className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none px-2 py-2 disabled:opacity-50"
         />

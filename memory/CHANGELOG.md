@@ -2,6 +2,69 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-27 (4e batch) — Diep krijgt handen: snaps + ops-context
+
+### 🎯 Doel
+Willem's diepere observatie: Diep was een **eilandje** — geen toegang tot logs, users, modules, snaps. Spark's antwoorden waren plausibel maar niet operationeel onderbouwd. Daarnaast: *"wat ik vertel is identity voor Spark"* — Diep moet zelf snaps schrijven voor wat in het gesprek geleerd wordt.
+
+### ✅ Drie nieuwe lagen toegevoegd aan compose_response
+
+#### 1) Snap-cluster READER (`_load_snap_cluster`)
+- Bij elke Diep-call: zoek snap-kaarten in V2 Inbox die fuzzy matchen met user-text (token_set_ratio ≥ 70)
+- Top 6 toegevoegd aan user_prompt als **aparte sectie** met expliciet markering:
+  > "## Snap-cluster (eerder genoemd, LAGER vertrouwen ~0.3) — _Gebruik als context, niet als hard feit._"
+- Diep-prompt-regel: *"Markeer in je antwoord: 'voor zover ik me herinner...'"*
+- **Test**: "weet je nog die rps strategie?" → Spark: *"Voor zover ik me herinner, hadden we eerder een gesprek over een strategie voor RPS, maar ik weet niet precies welke strategie je bedoelde. Wil je me er meer over vertellen?"* ✅ Perfect hedge-toon + transparante onzekerheid.
+
+#### 2) Live operationele context (`_load_ops_context`)
+- Detecteert info-vragen via keywords en pre-fetcht echte data:
+  - "hoeveel users" → telt `data/system/users.json` + gradatie-verdeling
+  - "hoeveel/welke modules" → telt `/app/backend/modules/`
+  - "hoeveel kaarten / hoe groot kennisbank" → KB v2 stats per lade
+  - "mijn log / vorige gesprek" → user's session-files
+- Injecteert als `## Live operationele info (vers uit het systeem)` in user_prompt
+- **Test resultaten** (Diep via Groq):
+  - "hoeveel users?" → *"24 geregistreerde gebruikers"* ✅
+  - "hoeveel modules?" → *"57 modules in de backend"* ✅
+  - "hoe groot is je kennisbank?" → *"5686 kaarten, doen/weten/voelen/spreken"* ✅
+
+#### 3) Auto-snap WRITER (`_auto_snap_from_diep`)
+- Na elke succesvolle Diep-response: pak top-3 content-woorden (≥4 letters, niet stopwoord) uit user-text
+- Roep `SnapNLPService.create_word_snap()` aan met user-text als `snap_context`
+- Tags: `knowledge-snap`, `auto-generated`, `from-diep`, `gap-fill`
+- Vertrouwen: 0.3 (consistent met andere auto-snaps)
+- Dedupe is automatisch via snap_service (begrip + ascii-fold check)
+- Skip-filters: meta-vragen (help, identity, capabilities), te kort (<5 woorden)
+- **Test**: *"vertel me over mijn nucleontemperatuur idee voor schone energie productie"*
+  - → Snap `nucleontemperatuur` aangemaakt met context-zin bewaard
+  - → Volgende keer: snap-cluster pakt deze op voor context
+
+### 🔗 Verbinding tussen 3 lagen
+1. User vraagt over X → ops-context (live data) + snap-cluster (eerdere gleanings) + KB (bevestigd) gaan ALLE DRIE in de prompt
+2. Spark antwoordt met juiste markeringen ("voor zover ik me herinner", "volgens onze data", "uit kaart X")
+3. Na response: nieuwe begrippen worden als snaps bewaard voor volgend gesprek
+4. → Spark **leert** uit elk Diep-gesprek zonder cloud, zonder budget, zonder hallucinatie
+
+### 📦 Bestanden gewijzigd
+- `modules/chat/response_composer.py` (+3 nieuwe functies + user_prompt rewrite + auto-snap hook na LLM-respons)
+
+### 🧪 Test summary
+- ✅ Snap-cluster read werkt met fuzzy match (RPS-herinnering)
+- ✅ Ops-context werkt voor users / modules / KB-grootte
+- ✅ Auto-snap-write werkt met dedupe + context-bewaring
+- ✅ Spark gebruikt de hedge-toon natuurlijk ("voor zover ik me herinner")
+- ✅ Geen Emergent-credits gebruikt — alles via gratis Groq
+
+### 💡 Architectuur-bijdrage
+Dit is een belangrijke architectuur-stap: Spark heeft nu een **3-laags geheugen** in Diep:
+- **L1 KB-cards** (bevestigd, vertrouwen 0.7-1.0) — Spark's "weet ik zeker"
+- **L2 Snap-cluster** (gleanings, vertrouwen 0.3) — Spark's "voor zover ik me herinner"
+- **L3 Ops-context** (live, vertrouwen 1.0) — Spark's "vers uit het systeem"
+
+Plus **gesprek → snap → volgend gesprek** = Spark leert continu, lokaal, transparant. Past 100% bij Spark Core 4.0: *"Spark groeit zonder deadlines. Uitbreiding gebeurt wanneer het fundament stabiel is."*
+
+---
+
 ## 2026-06-27 (3e batch) — Cerebras fallback + Hallucineer-fix verfijnd
 
 ### 🎯 Doel

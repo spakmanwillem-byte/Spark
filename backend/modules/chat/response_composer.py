@@ -291,6 +291,192 @@ def _load_self_awareness(user_id: Optional[str] = None) -> Optional[Dict]:
     return awareness
 
 
+def _load_snap_cluster(user_text: str, max_snaps: int = 6) -> List[Dict]:
+    """v6_diep_snaps_001 — Lees snap-cluster (lager-vertrouwen Inbox-kaarten) die
+    matchen met user-vraag. Fuzzy match (rapidfuzz) op begrip + substring op context.
+
+    Returns lijst van dicts met {begrip, context, vertrouwen, bron, score}.
+    """
+    if not user_text or len(user_text.strip()) < 3:
+        return []
+    try:
+        bp = _bp()
+        v2_dir = Path(bp["paths"]["kbv2_dir"])
+        inbox = load_json(v2_dir / "knowledge_inbox.json", default={"kaarten": []})
+        cards = inbox.get("kaarten") or []
+    except Exception:
+        return []
+    if not cards:
+        return []
+
+    user_lower = user_text.lower()
+    try:
+        from rapidfuzz import fuzz
+        def _score(begrip: str, ctx: str) -> float:
+            b = (begrip or "").lower()
+            if not b:
+                return 0.0
+            # Exacte substring = topscore
+            if b in user_lower:
+                return 100.0
+            # Fuzzy ratio op begrip
+            return float(fuzz.token_set_ratio(b, user_lower))
+    except Exception:
+        def _score(begrip: str, ctx: str) -> float:
+            b = (begrip or "").lower()
+            return 100.0 if (b and b in user_lower) else 0.0
+
+    scored = []
+    for c in cards:
+        begrip = c.get("begrip", "")
+        fn = c.get("footnote") or {}
+        ctx = fn.get("snap_context", "")
+        s = _score(begrip, ctx)
+        if s >= 70:
+            scored.append({
+                "begrip": begrip,
+                "context": ctx[:150],
+                "vertrouwen": fn.get("vertrouwen", 0.3),
+                "bron": fn.get("bron", "snap-auto"),
+                "aangemaakt_op": fn.get("aangemaakt_op", ""),
+                "score": s,
+            })
+    scored.sort(key=lambda x: (-x["score"], x.get("aangemaakt_op", "")), reverse=False)
+    return scored[:max_snaps]
+
+
+def _format_snap_cluster(snaps: List[Dict]) -> str:
+    if not snaps:
+        return "(geen relevante snaps gevonden — Spark heeft nog niets over dit onderwerp ge-noteerd)"
+    lines = []
+    for s in snaps:
+        line = f"• '{s['begrip']}' (vertrouwen={s['vertrouwen']}, score={int(s['score'])}/100)"
+        if s.get("context"):
+            line += f" — context: \"{s['context']}\""
+        lines.append(line)
+    return "\n".join(lines)
+
+
+def _load_ops_context(user_text: str, user_id: Optional[str]) -> Optional[str]:
+    """v6_diep_ops_context_001 — Pre-fetch operationele info als de vraag dat suggereert.
+
+    Detecteert keywords zoals 'hoeveel users', 'welke modules', 'log',
+    en injecteert het antwoord direct als context — zo hoeft Diep niet
+    te hallucineren over runtime-data.
+    """
+    if not user_text:
+        return None
+    t = user_text.lower()
+    bp = _bp()
+    base = Path(bp["paths"]["bijbel_fp"]).parent.parent
+
+    lines: List[str] = []
+
+    # Users-count
+    if any(w in t for w in ["hoeveel user", "aantal user", "hoeveel gebruiker", "aantal gebruiker",
+                            "hoeveel mensen", "aantal mensen"]):
+        try:
+            users = load_json(base / "system" / "users.json", default={"users": []}).get("users", [])
+            lines.append(f"OPERATIONEEL: Er zijn momenteel {len(users)} geregistreerde gebruikers in het systeem.")
+            grad_count: Dict[int, int] = {}
+            for u in users:
+                g = u.get("gradatie") or u.get("grade") or 7
+                grad_count[g] = grad_count.get(g, 0) + 1
+            if grad_count:
+                lines.append("  Gradatie-verdeling: " + ", ".join(f"G{g}={n}" for g, n in sorted(grad_count.items())))
+        except Exception:
+            pass
+
+    # Modules-count
+    if any(w in t for w in ["hoeveel module", "aantal module", "welke module", "welke modules",
+                            "wat voor module", "welke onderdel"]):
+        try:
+            modules_dir = base.parent / "modules"
+            mod_count = sum(1 for p in modules_dir.iterdir() if p.is_dir() and p.name != "__pycache__")
+            lines.append(f"OPERATIONEEL: Er zijn {mod_count} modules in de backend ({modules_dir.name}/).")
+        except Exception:
+            pass
+
+    # KB-stats
+    if any(w in t for w in ["hoeveel kaart", "aantal kaart", "kb groot", "knowledge base groot",
+                            "hoeveel kennis", "hoe groot is je kennis"]):
+        try:
+            v2_dir = Path(bp["paths"]["kbv2_dir"])
+            totals = {}
+            for lade in ["doen", "weten", "voelen", "spreken"]:
+                d = load_json(v2_dir / f"knowledge_v2_{lade}.json", default={"kaarten": []})
+                totals[lade] = len(d.get("kaarten") or [])
+            inbox = load_json(v2_dir / "knowledge_inbox.json", default={"kaarten": []})
+            totals["inbox"] = len(inbox.get("kaarten") or [])
+            total = sum(totals.values())
+            lines.append(f"OPERATIONEEL: KB v2 telt {total} kaarten — "
+                         + ", ".join(f"{k}={v}" for k, v in totals.items()))
+        except Exception:
+            pass
+
+    # Sessions / logs voor deze user
+    if any(w in t for w in ["mijn log", "vorige gesprek", "wat hebben we besproken", "mijn sessie",
+                            "hoeveel keer", "mijn geschiedenis"]):
+        try:
+            logs_dir = base / "chat" / "logs"
+            if logs_dir.exists():
+                user_logs = [p for p in logs_dir.glob("*.json")
+                             if user_id and (user_id in p.name)]
+                lines.append(f"OPERATIONEEL: Voor user {user_id}: {len(user_logs)} sessie-bestanden in logs/.")
+        except Exception:
+            pass
+
+    return "\n".join(lines) if lines else None
+
+
+def _auto_snap_from_diep(user_text: str, user_naam: str, had_kb_match: bool = False) -> None:
+    """v6_diep_snap_write_002 — Schrijf snaps vanuit Diep voor alle inhoudelijke vragen.
+
+    Voor 'echte' inhoudsvragen (>= 5 woorden, geen meta-vraag) altijd snappen.
+    Dedupe in snap_service filtert al bestaande begrippen. had_kb_match wordt
+    niet meer gebruikt als gate — Willem: 'wat ik vertel is identity voor Spark'.
+    """
+    _ = had_kb_match  # bewust onbenut; gehouden voor backwards-compat
+    if not user_text or len(user_text.split()) < 5:
+        return
+    t = user_text.lower()
+    # Sla over: meta-vragen, capability-triggers, identity-vragen
+    meta_skip = ["wat kan je", "wat kun je", "wie ben je", "welke modus", "help",
+                 "speel sps", "vertel je oorsprong", "lees de voorwaarden"]
+    if any(m in t for m in meta_skip):
+        return
+    try:
+        from modules.chat.snap_service import SnapNLPService, STOPWOORDEN
+        svc = SnapNLPService()
+        # Pak content-woorden uit user_text (>= 4 letters, niet stopwoord)
+        words = []
+        for w in user_text.split():
+            cw = w.strip(".,?!:;'\"()").lower()
+            if len(cw) >= 4 and cw not in STOPWOORDEN and not cw.isdigit():
+                words.append(cw)
+        # Top 3 unieke
+        seen = set()
+        unique_words = []
+        for w in words:
+            if w not in seen:
+                seen.add(w)
+                unique_words.append(w)
+            if len(unique_words) >= 3:
+                break
+        for concept in unique_words:
+            try:
+                svc.create_word_snap(
+                    concept=concept,
+                    context=user_text[:200],
+                    user_naam=user_naam,
+                    extra_tags=["from-diep", "gap-fill"],
+                )
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+
 def _format_self_awareness_for_prompt(aw: Dict) -> str:
     """Bouw een compacte sectie voor in system_prompt."""
     if not aw:
@@ -764,15 +950,39 @@ async def compose_response(
 
     system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic, planner_snippet, self_awareness_snippet)
 
-    user_prompt = (
-        "## Relevante KB-kaarten uit Spark's eigen kennis:\n"
-        f"{_format_kb_cards(cards)}\n\n"
-        "## Recente gesprek-turns:\n"
-        f"{_format_turns(turns)}\n\n"
-        "## Huidige vraag van Willem:\n"
-        f"{user_text}\n\n"
-        "Reageer in Spark's stem, in het Nederlands."
-    )
+    # v6_diep_snaps_001 + v6_diep_ops_context_001 — extra context-lagen voor Diep
+    snap_cluster = _load_snap_cluster(user_text)
+    ops_context = _load_ops_context(user_text, user_id)
+
+    user_prompt_parts = [
+        "## KB-kaarten (hoge betrouwbaarheid, uit bevestigde kennis):",
+        _format_kb_cards(cards),
+    ]
+    if snap_cluster:
+        user_prompt_parts += [
+            "",
+            "## Snap-cluster (eerder genoemd in gesprekken, LAGER vertrouwen ~0.3):",
+            "_Gebruik deze als context, niet als hard feit. Markeer in je antwoord:_",
+            "_'voor zover ik me herinner...' of 'volgens onze eerdere gesprekken...'_",
+            _format_snap_cluster(snap_cluster),
+        ]
+    if ops_context:
+        user_prompt_parts += [
+            "",
+            "## Live operationele info (vers uit het systeem):",
+            ops_context,
+        ]
+    user_prompt_parts += [
+        "",
+        "## Recente gesprek-turns:",
+        _format_turns(turns),
+        "",
+        "## Huidige vraag van Willem:",
+        user_text,
+        "",
+        "Reageer in Spark's stem, in het Nederlands.",
+    ]
+    user_prompt = "\n".join(user_prompt_parts)
 
     try:
         # v6_llm_router_001 — gebruik multi-provider router i.p.v. directe Emergent-call.
@@ -852,6 +1062,14 @@ async def compose_response(
                 )
             except Exception:
                 pass  # log-write is best-effort, faalt geen response op
+
+        # v6_diep_snap_write_001 — auto-snap bij kennisgat (Diep doet 'snap' net als normale chat)
+        try:
+            had_kb = bool(cards) and len(cards) >= 2
+            user_naam_for_snap = (user_profile or {}).get("naam") or user_id or "diep-user"
+            _auto_snap_from_diep(user_text, user_naam_for_snap, had_kb_match=had_kb)
+        except Exception:
+            pass
 
         # v6_deep_side_effects_001 — KB-card geluid (voice_kind=geluid) — eerste card
         # met sound_url. Action-commands (TTS/STT/ambient) zijn al via try_detect short-circuit

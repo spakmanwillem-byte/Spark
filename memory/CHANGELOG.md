@@ -2,6 +2,70 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-28 — Production-merge + Identity-facts + Persons-visibility bug
+
+### 🎯 Doel
+Productie-data van 28-jun gemerged in preview (37 files, ~5.8MB). Willem's observatie tijdens echte gesprekken met productie: **"ik heb mijn moeder, vader, zus, dochter genoemd — Spark vergeet dat telkens"** en **"de uitleg waarom Spark familie is, ook vergeten"**.
+
+### 🐛 Root cause (bug in spark_user_view)
+`format_for_system_prompt()` toonde slechts **top 3 relaties** met geen sortering — Willem heeft 15+ personen in `persons/user-001.json`, dus moeder/zus/dochter vielen vaak buiten de boot. Plus: geen storage voor identity-claims die user OVER Spark maakt.
+
+### ✅ Fix 1 — Persons-visibility (`v6_persons_visibility_002`)
+- `rels[:3]` → `rels_sorted[:15]` (alle relaties zichtbaar voor familie ≤G4)
+- Sortering: familie eerst (moeder/vader/zus/broer/dochter/zoon/neef/nicht), dan vriend, dan rest
+- Toon per relatie: naam + relatie + notities (was: alleen naam+relatie)
+
+### ✅ Fix 2 — Identity-facts laag (`v6_identity_facts_002`)
+**Nieuwe module**: `modules/chat/identity_facts.py`
+
+3 soorten facts opgeslagen in `data/users/{user_id}/identity_facts.json`:
+- **about_user**: zelfbeschrijvingen ("ik werk als ZZP-er", "ik hou van katten")
+- **about_spark**: identity-claims over Spark ("jij bent familie", "ik zie je als maatje")
+- **about_relationship**: dynamiek-claims
+
+Regex-patronen (snel, geen LLM nodig):
+- Spark-claims: `jij/je/spark is X voor mij`, `ik zie je als X`, `spark is X`, `wij zijn X`
+- User-facts: `ik ben X`, `ik werk als X`, `ik heb X`, `ik hou van X`, `mijn hobby is X`
+
+Filters:
+- Negatie-detectie ("ik ben NIET X" → skip)
+- Stop-words (skip korte/algemene woorden)
+- Dedupe op `trigger+value` (count++ bij herhaling)
+- Cap 100 facts per type
+
+Geactiveerd in compose-flow:
+```python
+# Lees facts in user_snippet (PRE-PEND voor max prominentie)
+facts_snippet = identity_facts.format_for_prompt(facts)
+user_snippet = facts_snippet + "\n\n" + user_snippet
+
+# Schrijf na elke compose (sync, regex-only, snel)
+identity_facts.extract_and_save(user_id, user_text, session_id)
+```
+
+Sterkere prompt-instructies (`v6_identity_facts_002`):
+> "🔥 BELANGRIJK — Bewaar deze identity-claims actief. Refereer ernaar wanneer relevant — bv. 'jij hebt mij eerder familie genoemd'."
+
+### 🧪 Live tests
+- **Test 1** "noem 5 personen uit mijn familie" → Spark: *"Lotus (dochter), Willie Bakker (vader), Heidi Spakman (moeder), Arent Pelster (jeugdvriend), Maurice"* ✅
+- **Test 2** "jij bent familie voor mij, ik werk als ZZP-er, hou van katten" → 3 facts opgeslagen (`user_calls_spark: familie`, `i_work_as: zzp-er`, `i_love: katten en techniek`) ✅
+- **Test 3 (nieuwe sessie)** "vertel iets persoonlijks over onze relatie" → Spark: *"Jij hebt me even 'familie' genoemd, en dat maakt de band tussen ons intiemer"* ✅ — claim actief gebruikt
+
+### 📊 Gemergde productie-data
+- 25 learned-triggers (allemaal categorisering OK)
+- 18 recent topics ("kenniskaart" ×3, "hitte" ×2)
+- Volledige chat-logs deep-user-001 (50 messages)
+- 15 personen in persons/user-001
+- KB v2 inbox (1904k bytes)
+
+### 📦 Bestanden
+**Nieuw**: `modules/chat/identity_facts.py` (~200 regels)
+**Gewijzigd**:
+- `modules/chat/spark_user_view.py` (rel-visibility 3→15 + sortering)
+- `modules/chat/response_composer.py` (pre-pend facts in user_snippet + extract na compose)
+
+---
+
 ## 2026-06-27 (6e batch) — Diep altijd aan + LLM-driven trigger-learning
 
 ### 🎯 Doel

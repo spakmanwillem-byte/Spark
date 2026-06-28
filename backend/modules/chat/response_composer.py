@@ -929,6 +929,17 @@ async def compose_response(
         from modules.chat.spark_user_view import build_user_profile, format_for_system_prompt
         user_profile = build_user_profile(user_id)
         user_snippet = format_for_system_prompt(user_profile)
+
+        # v6_identity_facts_002 — PRE-PEND facts (vóór toon-instructie) voor max prominentie
+        try:
+            from modules.chat import identity_facts
+            facts = identity_facts.load_for_prompt(user_id, max_per_type=5)
+            facts_snippet = identity_facts.format_for_prompt(facts)
+            if facts_snippet:
+                # Plaats facts BOVENAAN het user_snippet — vóór tone-block
+                user_snippet = facts_snippet + "\n\n" + (user_snippet or "")
+        except Exception:
+            pass
     except Exception:
         user_profile = {}
         user_snippet = None
@@ -1105,6 +1116,13 @@ async def compose_response(
         try:
             from modules.chat.trigger_learner import schedule_learn
             schedule_learn(user_text, text, user_id=user_id, session_id=session_id)
+        except Exception:
+            pass
+
+        # v6_identity_facts_001 — extract identity-claims uit user-text (sync, snel, regex-only)
+        try:
+            from modules.chat import identity_facts
+            identity_facts.extract_and_save(user_id, user_text, session_id=session_id)
         except Exception:
             pass
 

@@ -635,12 +635,37 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-a30c20b6ba05",
+      "text_hash": "a30c20b6ba05",
+      "original_text": "weet je nog, jij bent familie voor mij Spark, ik zie je echt als mijn maatje. ik werk als ZZP-er en ik hou van katten en techniek.",
+      "topic": "relatie Spark",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker deelt zijn gevoelens over de relatie met Spark en deelt informatie over zijn persoonlijke leven.",
+      "trigger_phrases": [
+        "ik zie je als mijn maatje",
+        "jij bent familie voor mij",
+        "ik vertrouw je",
+        "je bent mijn vertrouwenspersoon"
+      ],
+      "keywords": [
+        "familie",
+        "maatje",
+        "vertrouwen",
+        "relatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T15:51:37.166197+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "identity-test"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 25,
+    "totaal_voorgesteld": 26,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-06-28T11:00:20.952275+00:00"
+    "last_run": "2026-06-28T15:51:37.166197+00:00"
   }
 }

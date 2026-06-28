@@ -1,0 +1,41 @@
+{
+  "_arch_ref": "v6_identity_facts_001",
+  "_doel": "Per-user facts over zichzelf, Spark, en hun relatie",
+  "user_id": "user-001",
+  "about_user": [
+    {
+      "trigger": "i_work_as",
+      "value": "zzp-er en ik hou van katten en techniek",
+      "context": "weet je nog, jij bent familie voor mij Spark, ik zie je echt als mijn maatje. ik werk als ZZP-er en ik hou van katten en techniek.",
+      "first_seen": "2026-06-28T15:51:36.682290+00:00",
+      "last_seen": "2026-06-28T15:51:36.682290+00:00",
+      "count": 1,
+      "session_id": "identity-test"
+    },
+    {
+      "trigger": "i_love",
+      "value": "katten en techniek",
+      "context": "weet je nog, jij bent familie voor mij Spark, ik zie je echt als mijn maatje. ik werk als ZZP-er en ik hou van katten en techniek.",
+      "first_seen": "2026-06-28T15:51:36.682290+00:00",
+      "last_seen": "2026-06-28T15:51:36.682290+00:00",
+      "count": 1,
+      "session_id": "identity-test"
+    }
+  ],
+  "about_spark": [
+    {
+      "trigger": "user_calls_spark",
+      "value": "familie",
+      "context": "weet je nog, jij bent familie voor mij Spark, ik zie je echt als mijn maatje. ik werk als ZZP-er en ik hou van katten en techniek.",
+      "first_seen": "2026-06-28T15:51:36.682290+00:00",
+      "last_seen": "2026-06-28T15:51:36.682290+00:00",
+      "count": 1,
+      "session_id": "identity-test"
+    }
+  ],
+  "about_relationship": [],
+  "stats": {
+    "totaal": 3,
+    "last_update": "2026-06-28T15:51:36.682290+00:00"
+  }
+}

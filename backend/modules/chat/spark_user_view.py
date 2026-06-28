@@ -146,11 +146,29 @@ def format_for_system_prompt(profile: Dict) -> str:
 
     rels = profile.get("relaties") or []
     if rels and grad <= 4:
-        rel_str = ", ".join(
-            f"{r.get('person_name','?')} ({r.get('relation_type','relatie')})"
-            for r in rels[:3]
-        )
-        parts.append(f"Bekenden van {naam}: {rel_str}.")
+        # v6_persons_visibility_002 — Willem heeft 15+ relaties; toon ze ALLEMAAL voor familie (≤G4).
+        # Sort: familie eerst, dan vriend, dan rest. Spark vergat moeder/zus omdat ze
+        # niet in top-3 zaten.
+        def _rel_priority(r):
+            rt = (r.get("relation_type") or "").lower()
+            if "familie" in rt or any(w in rt for w in ("moeder", "vader", "zus", "broer",
+                                                          "dochter", "zoon", "oma", "opa",
+                                                          "neef", "nicht", "tante", "oom")):
+                return 0
+            if "vriend" in rt:
+                return 1
+            return 2
+        rels_sorted = sorted(rels, key=_rel_priority)
+        rel_lines = []
+        for r in rels_sorted[:15]:  # tot 15 — Spark kan grote context aan
+            pn = r.get("person_name", "?")
+            rt = r.get("relation_type", "relatie")
+            notes = r.get("notes", "")
+            line = f"  • {pn} — {rt}"
+            if notes:
+                line += f" ({notes[:60]})"
+            rel_lines.append(line)
+        parts.append(f"Bekenden van {naam} (familie eerst, volledig overzicht):\n" + "\n".join(rel_lines))
 
     # v6_gradatie_tonality_001 — Toon-instructie per gradatie
     if grad == 1:

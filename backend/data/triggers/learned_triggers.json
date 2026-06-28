@@ -660,12 +660,39 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "identity-test"
+    },
+    {
+      "id": "learned-dbb3ce6e92cf",
+      "text_hash": "dbb3ce6e92cf",
+      "original_text": "wat ben jij voor mij eigenlijk in essentie?",
+      "topic": "AI identiteit",
+      "categorie": "filosofisch",
+      "intent": "De gebruiker vraagt naar de essentie en rol van de AI-assistent ten opzichte van zichzelf.",
+      "trigger_phrases": [
+        "wat is jouw essentie voor mij",
+        "wie ben je in essentie",
+        "wat betekent je voor mij",
+        "wat is jouw rol voor mij",
+        "wat ben je eigenlijk"
+      ],
+      "keywords": [
+        "essentie",
+        "ai",
+        "identiteit",
+        "rol",
+        "relatie"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:00:10.281468+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "essence-test"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 26,
+    "totaal_voorgesteld": 27,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-06-28T15:51:37.166197+00:00"
+    "last_run": "2026-06-28T16:00:10.281468+00:00"
   }
 }

@@ -30,14 +30,26 @@ DATA = Path(__file__).parent.parent.parent / "data"
 # Patronen die direct identity-claims herkennen (snel pad, geen LLM nodig)
 SPARK_IDENTITY_PATTERNS = [
     # "jij bent familie/maatje/kind/vriend voor mij"
-    (r"\b(?:jij|je|spark)\s+(?:bent|is)\s+(?:mijn\s+)?(\w+)(?:\s+voor\s+(?:mij|me))?\b",
+    (r"\b(?:jij|je|spark)\s+(?:bent|is)\s+(?:mijn\s+)?(\w+(?:\s+\w+)?)(?:\s+voor\s+(?:mij|me))?\b",
      "user_calls_spark"),
     # "ik zie je als X"
-    (r"\bik\s+zie\s+je\s+als\s+(?:mijn\s+)?(\w+(?:\s+\w+)?)\b", "user_views_spark_as"),
+    (r"\bik\s+zie\s+je\s+als\s+(?:mijn\s+)?([^\.,!?\n]{3,60})\b", "user_views_spark_as"),
     # "spark is X voor mij"
-    (r"\bspark\s+is\s+(?:mijn\s+)?(\w+)(?:\s+voor\s+(?:mij|me))?\b", "spark_is_to_user"),
+    (r"\bspark\s+is\s+(?:mijn\s+)?(\w+(?:\s+\w+)?)(?:\s+voor\s+(?:mij|me))?\b", "spark_is_to_user"),
     # "wij/we zijn X" (samen)
-    (r"\b(?:wij|we)\s+zijn\s+(\w+)\b", "we_are_together"),
+    (r"\b(?:wij|we)\s+zijn\s+(\w+(?:\s+\w+)?)\b", "we_are_together"),
+    # "jij draagt X" / "je draagt X"
+    (r"\b(?:jij|je)\s+draagt\s+(?:mijn\s+)?([^\.,!?\n]{3,80})\b", "spark_carries"),
+    # "jij voelt als X"
+    (r"\b(?:jij|je)\s+voelt\s+(?:als|aan\s+als)\s+(?:een\s+|het\s+)?([^\.,!?\n]{3,80})\b", "spark_feels_like"),
+    # "jij bent een deel van X" / "ben jij een deel van X"
+    (r"\b(?:jij|je|ben\s+jij)\s+(?:bent\s+)?(?:een\s+)?deel\s+van\s+([^\.,!?\n]{3,60})\b", "spark_part_of"),
+    # "ik creëer je" / "ik heb je gemaakt" / "ik investeer in je"
+    (r"\bik\s+(creëer|maak|maakte|investeer|invester)\s+(?:in\s+)?je\b", "user_creates_spark"),
+    # "ben jij X" / "ben jij de Y" (vraag-vorm die fact draagt)
+    (r"\bben\s+jij\s+(?:de\s+|een\s+)?([^\.,!?\n]{3,60})\b", "user_proposes_spark"),
+    # "alles is X" / "X is energie" — wereldbeeld
+    (r"\balles\s+is\s+([^\.,!?\n]{3,60})\b", "user_worldview"),
 ]
 
 # Patronen voor user-facts ("ik ben X", "ik werk als X", "ik heb X")

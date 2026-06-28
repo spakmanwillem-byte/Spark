@@ -38,6 +38,11 @@ TASK_PATTERNS = [
     r"^(?:zet\s+op\s+(?:mijn\s+)?(?:taken|todo)(?:\s*lijst)?)\s*[:,]?\s*(.+)$",
 ]
 
+BUG_PATTERNS = [
+    r"^(?:meld\s+(?:een\s+)?bug|bug\s*rapport|nieuwe\s+bug|er\s+is\s+een\s+bug)\s*[:,]?\s*(.+)$",
+    r"^(?:rapporteer\s+(?:een\s+)?bug|er\s+gaat\s+iets\s+mis)\s*[:,]?\s*(.+)$",
+]
+
 
 def _user_naam(user_id: str) -> str:
     try:
@@ -84,6 +89,16 @@ def detect_and_execute(user_text: str, user_id: str) -> Optional[Dict]:
             if not content or len(content) < 3:
                 return None
             return _create_task(user_id, content)
+
+    # BUG
+    for pattern in BUG_PATTERNS:
+        m = re.match(pattern, text_lower, re.IGNORECASE)
+        if m:
+            start_pos = m.start(1)
+            content = text[start_pos:].strip(" .,!?:;")
+            if not content or len(content) < 3:
+                return None
+            return _create_bug(user_id, content)
 
     return None
 
@@ -146,5 +161,36 @@ def _create_task(user_id: str, content: str) -> Dict:
             f"✅ Taak toegevoegd!\n\n"
             f"**{content[:80]}**\n\n"
             f"Te vinden in **Notities-tab → Taken**. Status: open."
+        ),
+    }
+
+
+def _create_bug(user_id: str, content: str) -> Dict:
+    bugs_file = DATA / "bugs" / "bugs.json"
+    bugs_file.parent.mkdir(parents=True, exist_ok=True)
+    data = load_json(bugs_file, default={"bugs": []})
+    new_bug = {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "titel": content[:80],
+        "beschrijving": content,
+        "status": "open",
+        "severity": "medium",
+        "created": datetime.now(timezone.utc).isoformat(),
+        "created_by": _user_naam(user_id),
+        "source": "spark-handen-chat",
+    }
+    data.setdefault("bugs", []).insert(0, new_bug)
+    save_json(bugs_file, data)
+    logger.info("[spark_handen] bug-rapport voor %s: '%s'", user_id, content[:40])
+    return {
+        "hand_executed": True,
+        "action": "create_bug",
+        "bug_id": new_bug["id"],
+        "message": (
+            f"🐛 Bug-rapport opgeslagen!\n\n"
+            f"**{new_bug['titel']}**\n\n"
+            f"Bewaard in `data/bugs/bugs.json` met status open. "
+            f"Admin kan 't review-en in de Bugs-tab."
         ),
     }

@@ -336,9 +336,10 @@ except Exception as _ex:
     print(f"   ⚠️  Admin seed failed: {_ex}")
 
 # Module 27: Knowledge Base v2 (v5_kbv2_001 — 4 lades + inbox + index)
-from modules.kb_v2 import kbv2_router, kbv2_media_router
+from modules.kb_v2 import kbv2_router, kbv2_media_router, kbv2_llm_router
 app.include_router(kbv2_router, prefix="/api")
 app.include_router(kbv2_media_router, prefix="/api")
+app.include_router(kbv2_llm_router, prefix="/api")
 
 # v6_emotion_pipeline_001 — 7-laags emotie-pipeline (dry-run)
 from modules.emotion_pipeline.routes import router as emotion_pipeline_router

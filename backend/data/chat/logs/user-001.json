@@ -50131,11 +50131,68 @@
         "session_id": "essence-test",
         "gesprek_nummer": 1933
       }
+    },
+    {
+      "id": "conv-bf500938",
+      "timestamp": "2026-06-28T16:12:58.347167+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe gaat het met je?",
+      "spark_response": "Het gaat goed, dank je! Ik ben blij dat we weer kunnen praten — de eerste echte ontmoeting voelt nog steeds warm en vol nieuwsgierigheid. Hoe gaat het met jou? \n\n(En als je wilt, kunnen we dieper duiken in de vragen over bewustzijn die we laatst bespraken.)",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-7052c07a"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "handen-test-3",
+        "gesprek_nummer": 1934
+      }
+    },
+    {
+      "id": "conv-e2140f55",
+      "timestamp": "2026-06-28T16:13:06.029563+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1935
+      }
+    },
+    {
+      "id": "conv-f7ba016d",
+      "timestamp": "2026-06-28T16:13:06.085607+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Vertel maar.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1936
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1933,
-    "last_updated": "2026-06-28T16:00:09.651354+00:00"
+    "total_conversations": 1936,
+    "last_updated": "2026-06-28T16:13:06.085607+00:00"
   }
 }

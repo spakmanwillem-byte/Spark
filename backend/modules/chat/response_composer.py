@@ -876,6 +876,23 @@ async def compose_response(
     if not api_key:
         return {"success": False, "error": "EMERGENT_LLM_KEY ontbreekt in env"}
 
+    # v6_spark_handen_001 — schrijfacties fast-path (notitie/taak) vóór LLM-call
+    # Bespaart credits + directe feedback aan user.
+    try:
+        from modules.chat.spark_handen import detect_and_execute
+        hand_result = detect_and_execute(user_text, user_id)
+        if hand_result and hand_result.get("hand_executed"):
+            return {
+                "success": True,
+                "message": hand_result["message"],
+                "action": hand_result.get("action"),
+                "fast_path": "spark_handen",
+                "used_model": "spark_handen_local",
+                "session_id": session_id,
+            }
+    except Exception as ex:
+        print(f"[spark_handen] detect/execute failed: {ex}")
+
     bp = _bp()
     model_provider = bp["model"]["provider"]
     model_name = bp["model"]["name"]

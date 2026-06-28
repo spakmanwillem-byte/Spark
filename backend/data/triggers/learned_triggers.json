@@ -687,12 +687,37 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "essence-test"
+    },
+    {
+      "id": "learned-4efccc11eb27",
+      "text_hash": "4efccc11eb27",
+      "original_text": "hoe gaat het met je?",
+      "topic": "gezondheid",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de emotionele staat van de AI-assistent.",
+      "trigger_phrases": [
+        "hoe gaat het",
+        "hoe is het met je",
+        "gaat het goed",
+        "ben je ok"
+      ],
+      "keywords": [
+        "gezondheid",
+        "emotie",
+        "welzijn",
+        "staat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:12:58.838993+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "handen-test-3"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 27,
+    "totaal_voorgesteld": 28,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-06-28T16:00:10.281468+00:00"
+    "last_run": "2026-06-28T16:12:58.838993+00:00"
   }
 }

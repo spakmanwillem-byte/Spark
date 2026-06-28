@@ -22,7 +22,10 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from modules.core.storage import load_json, save_json
-from modules.kb_v2.service import _v2_dir  # bestaande helper
+from modules.kb_v2.service import V2_DIR as _V2_DIR_PATH
+
+def _v2_dir():
+    return _V2_DIR_PATH
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/kb/v2/cards", tags=["kb-v2-llm"])

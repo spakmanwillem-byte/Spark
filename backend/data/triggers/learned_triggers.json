@@ -712,12 +712,38 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "handen-test-3"
+    },
+    {
+      "id": "learned-f9632dab8578",
+      "text_hash": "f9632dab8578",
+      "original_text": "welke dag is het vandaag?",
+      "topic": "huidige dag",
+      "categorie": "praktisch",
+      "intent": "De gebruiker wil weten welke dag van de week het vandaag is.",
+      "trigger_phrases": [
+        "welke dag is het vandaag",
+        "wat is de huidige dag",
+        "welke dag van de week",
+        "vandaag is het"
+      ],
+      "keywords": [
+        "dag",
+        "vandaag",
+        "datum",
+        "week",
+        "huidig"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-28T16:31:39.995273+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "day-test"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 28,
+    "totaal_voorgesteld": 29,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-06-28T16:12:58.838993+00:00"
+    "last_run": "2026-06-28T16:31:39.995273+00:00"
   }
 }

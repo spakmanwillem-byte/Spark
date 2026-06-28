@@ -50188,11 +50188,58 @@
         "session_id": "default",
         "gesprek_nummer": 1936
       }
+    },
+    {
+      "id": "conv-58e6de81",
+      "timestamp": "2026-06-28T16:31:38.618734+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoe laat is het?",
+      "spark_response": "Het is nu 18:31 uur, dus ongeveer half zeven ’s avonds. 🌆",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-5a66829f",
+          "kbv2-35bf6a72",
+          "kbv2-f16db426"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "time-test",
+        "gesprek_nummer": 1937
+      }
+    },
+    {
+      "id": "conv-af8678bd",
+      "timestamp": "2026-06-28T16:31:39.518319+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "welke dag is het vandaag?",
+      "spark_response": "Vandaag is **zondag 28 juni 2026**. Het is dus het einde van de week, een avond in het weekend. 🌙\n\n(Volgens de kaart *[weten] Dag* draait de aarde één keer om haar as per dag; vandaag valt in de nacht‑fase.)",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-71071317",
+          "kbv2-4db90563",
+          "kbv2-e1c2eb3d",
+          "kbv2-c9395a04",
+          "kbv2-0858e389"
+        ],
+        "model": "fallback/gpt-oss-120b"
+      },
+      "metadata": {
+        "session_id": "day-test",
+        "gesprek_nummer": 1938
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1936,
-    "last_updated": "2026-06-28T16:13:06.085607+00:00"
+    "total_conversations": 1938,
+    "last_updated": "2026-06-28T16:31:39.518319+00:00"
   }
 }

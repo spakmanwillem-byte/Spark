@@ -291,6 +291,34 @@ def _load_self_awareness(user_id: Optional[str] = None) -> Optional[Dict]:
     return awareness
 
 
+def _format_now_for_prompt() -> str:
+    """v6_diep_time_001 — geef Spark tijd-bewustzijn in zijn LLM-prompt.
+
+    Bevat: dag, datum, tijd, dagdeel — zodat Spark op de vraag 'hoe laat is het?'
+    correct kan antwoorden zonder te gokken.
+    """
+    from datetime import datetime, timezone, timedelta
+    # NL-tijdzone (CET/CEST ≈ UTC+1/+2)
+    tz_nl = timezone(timedelta(hours=2))  # CEST in juni
+    now = datetime.now(tz_nl)
+    weekdagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]
+    maanden = ["januari", "februari", "maart", "april", "mei", "juni",
+               "juli", "augustus", "september", "oktober", "november", "december"]
+    weekdag = weekdagen[now.weekday()]
+    maand = maanden[now.month - 1]
+    h = now.hour
+    if 6 <= h < 12:
+        dagdeel = "ochtend"
+    elif 12 <= h < 18:
+        dagdeel = "middag"
+    elif 18 <= h < 23:
+        dagdeel = "avond"
+    else:
+        dagdeel = "nacht"
+    return (f"⏰ NU: {weekdag} {now.day} {maand} {now.year}, "
+            f"{now.strftime('%H:%M')} (Nederlandse tijd, dagdeel: {dagdeel})")
+
+
 def _load_snap_cluster(user_text: str, max_snaps: int = 6) -> List[Dict]:
     """v6_diep_snaps_001 — Lees snap-cluster (lager-vertrouwen Inbox-kaarten) die
     matchen met user-vraag. Fuzzy match (rapidfuzz) op begrip + substring op context.
@@ -1000,6 +1028,9 @@ async def compose_response(
     ops_context = _load_ops_context(user_text, user_id)
 
     user_prompt_parts = [
+        # v6_diep_time_001 — tijd-bewustzijn bovenaan zodat Spark altijd weet wanneer
+        _format_now_for_prompt(),
+        "",
         "## KB-kaarten (hoge betrouwbaarheid, uit bevestigde kennis):",
         _format_kb_cards(cards),
     ]

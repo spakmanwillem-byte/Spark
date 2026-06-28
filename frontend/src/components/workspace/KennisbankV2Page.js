@@ -5,7 +5,7 @@ import {
   Inbox, BookOpen, Search, Save, X, AlertTriangle,
   ChevronRight, RefreshCw, Eye, Edit3, ArrowRightLeft,
   Mic, Square, Image as ImageIcon, Upload, Trash2, CheckCircle2, Plus, Merge,
-  Volume2
+  Volume2, Sparkles
 } from 'lucide-react';
 import { KbV2TagCuration } from './KbV2TagCuration';
 
@@ -63,6 +63,8 @@ export function KennisbankV2Page({ onNavigate }) {
   const [savingClassify, setSavingClassify] = useState(false);
   const [showAudit, setShowAudit] = useState(false);
   const [auditData, setAuditData] = useState(null);
+  // v6_kb_llm_generate_001 — LLM-genereer status
+  const [llmGenerating, setLlmGenerating] = useState(false);
 
   const PAGE = 25;
 
@@ -171,6 +173,51 @@ export function KennisbankV2Page({ onNavigate }) {
       tags:  [...(selectedCard.tags || [])],
       begrip: selectedCard.begrip || '',
     });
+  };
+
+  // v6_kb_llm_generate_001 — LLM vult lege/onvolledige kaart en opent edit-mode voor review
+  const generateWithLLM = async () => {
+    if (!selectedCard) return;
+    setLlmGenerating(true);
+    try {
+      const r = await fetch(`${API}/api/kb/v2/cards/${selectedCard.id}/llm-generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      }).then(x => x.json());
+      if (!r.success) {
+        toast.error(r.detail || r.error || 'LLM-genereer mislukt');
+        return;
+      }
+      const p = r.proposal || {};
+      const existing = selectedCard.lagen || {};
+      const existingWs5 = selectedCard.ws5 || {};
+      const mergedTags = [...new Set([...(selectedCard.tags || []), ...(p.extra_tags || [])])];
+      setEditForm({
+        begrip: selectedCard.begrip || '',
+        lagen: {
+          laag1: existing.laag1 || p.laag1 || '',
+          laag2: existing.laag2 || p.laag2 || '',
+          laag3: existing.laag3 || p.laag3 || '',
+          laag4: existing.laag4 || p.laag4 || '',
+        },
+        ws5: {
+          wie:     existingWs5.wie     || p.ws5?.wie     || '',
+          wat:     existingWs5.wat     || p.ws5?.wat     || '',
+          wanneer: existingWs5.wanneer || p.ws5?.wanneer || '',
+          waar:    existingWs5.waar    || p.ws5?.waar    || '',
+          waarom:  existingWs5.waarom  || p.ws5?.waarom  || '',
+          hoe:     existingWs5.hoe     || p.ws5?.hoe     || '',
+        },
+        tags: mergedTags,
+      });
+      setEditMode(true);
+      const lade = p.voorgestelde_lade ? ` · voorstel: ${p.voorgestelde_lade}` : '';
+      toast.success(`LLM voorstel ingevuld (${r.llm_provider}, ${(r.llm_latency_s || 0).toFixed(1)}s)${lade}`, { duration: 6000 });
+    } catch (e) {
+      toast.error('Fout: ' + e.message);
+    }
+    setLlmGenerating(false);
   };
 
   const classifyTo = async (lade) => {
@@ -595,6 +642,7 @@ export function KennisbankV2Page({ onNavigate }) {
                 onClassify={classifyTo} onSaveEdit={saveEdit}
                 saving={savingClassify} inInbox={activeTab === 'inbox'} currentLade={activeTab}
                 onMediaUpdated={loadItems}
+                onGenerateLLM={generateWithLLM} llmGenerating={llmGenerating}
                 onDeleteCard={() => setConfirmDelete(selectedCard)} />
             )}
           </div>
@@ -806,6 +854,7 @@ function CardListItem({ card, active, onClick, showReason }) {
 
 function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCancelEdit,
                      onClassify, onSaveEdit, saving, inInbox, currentLade, onMediaUpdated,
+                     onGenerateLLM, llmGenerating,
                      onDeleteCard }) {
   const lagen = editMode ? editForm.lagen : (card.lagen || {});
   const ws5 = editMode ? editForm.ws5 : (card.ws5 || {});
@@ -858,6 +907,16 @@ function CardDetail({ card, editMode, editForm, setEditForm, onStartEdit, onCanc
               className="px-2 py-1 text-xs border border-slate-700 rounded text-slate-300 hover:bg-slate-800 flex items-center gap-1">
               <Edit3 className="w-3 h-3" /> Bewerken
             </button>
+            {/* v6_kb_llm_generate_001 — LLM vult lege/onvolledige kaart automatisch */}
+            {onGenerateLLM && (
+              <button data-testid="kbv2-llm-generate-btn"
+                onClick={onGenerateLLM}
+                disabled={!!llmGenerating}
+                title="LLM vult laag1-4 + 5W in (review verplicht voor opslaan)"
+                className="px-2 py-1 text-xs border border-amber-500/40 rounded text-amber-300 hover:bg-amber-500/15 flex items-center gap-1 disabled:opacity-50 disabled:cursor-wait">
+                <Sparkles className="w-3 h-3" /> {llmGenerating ? 'Bezig...' : 'Genereer'}
+              </button>
+            )}
             {/* v6_kbv2_delete_001 — permanent delete-knop */}
             <button data-testid="kbv2-delete-btn"
               onClick={() => onDeleteCard && onDeleteCard()}

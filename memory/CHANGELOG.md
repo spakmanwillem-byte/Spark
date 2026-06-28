@@ -2,6 +2,24 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — KB v2 "Genereer (LLM)" knop + login-fix
+
+### 🐛 Login bleef hangen
+`backend/modules/kb_v2/llm_generate_routes.py` importeerde `_v2_dir` uit `service.py` — die naam bestaat niet (alleen `V2_DIR`-constant). Backend laadde dus niet, uvicorn luisterde wel op :8001 maar gaf geen response → login bleef "zoeken".
+**Fix**: import vervangen door `V2_DIR` met kleine wrapper-functie.
+
+### ✅ Genereer-knop (`v6_kb_llm_generate_001`)
+In `KennisbankV2Page.js CardDetail`:
+- Nieuwe knop `data-testid="kbv2-llm-generate-btn"` naast "Bewerken"
+- Roept `POST /api/kb/v2/cards/{id}/llm-generate` aan (Groq via `llm_router`)
+- LLM-voorstel wordt in `editForm` geladen (bestaande velden hebben voorrang)
+- Edit-mode opent automatisch → admin reviewt → klassieke "Sla op + classify naar lade" flow
+- Loading-state via `llmGenerating`, toast bevestigt provider/latency/voorgestelde lade
+
+### 📊 Backend endpoint geverifieerd
+`roofdier` test-call: success in ~2s via Groq, geldige laag1-4 + 5W + extra_tags.
+
+
 ## 2026-06-28 — Production-merge + Identity-facts + Persons-visibility bug
 
 ### 🎯 Doel

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1081,
+    "card_count": 1093,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-27T00:56:26.060704+00:00",
+    "last_updated": "2026-06-28T14:26:26.922134+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -137272,7 +137272,7 @@
     },
     {
       "id": "kbv2-3edc37d1",
-      "begrip": "Peren (techniek)",
+      "begrip": "Peren",
       "lade": "doen",
       "status": "active",
       "lagen": {
@@ -137403,10 +137403,26 @@
               "n_found": 5,
               "top_overlap": 3
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:29:02.876096+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:29:02.886768+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-06-11T13:20:17.606995+00:00"
+        "laatst_bewerkt_op": "2026-06-28T13:29:02.352205+00:00"
       },
       "media": {
         "voice_url": null,
@@ -141066,6 +141082,1919 @@
             "result": {
               "n_found": 5,
               "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-b39ad146",
+      "begrip": "zetten",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Zetten is het plaatsen, verplaatsen of in een bepaalde toestand brengen van iets.",
+        "laag2": "Zetten wordt gebruikt om een object, persoon of situatie een nieuwe plaats, positie of toestand te geven.",
+        "laag3": "Zetten is een handeling waarbij iets bewust wordt geplaatst, verplaatst, ingesteld of veranderd. Het woord heeft veel betekenissen, zoals een glas op tafel zetten, een apparaat aanzetten, een stap in een spel zetten of iemand aan het werk zetten. De exacte betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is zetten een algemene actie waarbij een object, waarde, toestand of relatie wordt gewijzigd of toegewezen. Zetten kan betrekking hebben op fysieke objecten, digitale gegevens, instellingen, processen of interacties en vormt een basisactie binnen veel systemen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, systemen, robots en AI.",
+        "wat": "Het plaatsen, verplaatsen, instellen of veranderen van iets.",
+        "wanneer": "Wanneer een object, waarde of situatie moet worden gewijzigd.",
+        "waar": "In de fysieke wereld, digitale systemen, spellen en dagelijkse situaties.",
+        "waarom": "Om een gewenste positie, toestand of configuratie te bereiken.",
+        "hoe": "Door iets bewust te plaatsen, toe te wijzen, in te stellen of te veranderen."
+      },
+      "tags": [
+        "zetten",
+        "plaatsen",
+        "verplaatsen",
+        "instellen",
+        "wijzigen",
+        "toewijzen",
+        "positie",
+        "actie",
+        "proces",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d22454bb",
+          "begrip": "zet",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "actie",
+            "instellen",
+            "plaatsen",
+            "positie",
+            "verplaatsen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5e84ebd5",
+          "begrip": "verdelen",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "neutraal",
+            "proces",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16ec458f",
+          "begrip": "status",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "proces",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4a899f80",
+          "begrip": "plaatsen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "plaatsen",
+            "positie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-311c5f83",
+          "begrip": "event",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "emotie",
+            "neutraal",
+            "proces",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:31:52.881521+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T10:53:20.248747+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee je kan mijn wekker niet zetten. wel een lief voorstel. ik log morgen weer in. dan meldt ik mij eigelijk. hoe laat geen idee,",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T10:53:16.847118+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T10:53:17.167003+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T10:53:17.184783+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T10:53:20.993554+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T10:53:21.041116+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7badb7d5",
+      "begrip": "kijkt",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kijkt is het waarnemen of observeren met de ogen.",
+        "laag2": "Kijkt beschrijft de handeling waarbij iemand of iets bewust naar een persoon, object of gebeurtenis kijkt.",
+        "laag3": "Kijkt is de tegenwoordige tijd van het werkwoord kijken. Het beschrijft de handeling waarbij iemand of iets visuele aandacht richt op een persoon, object, gebeurtenis of omgeving. Kijken kan gericht of ongericht zijn en ook figuurlijk worden gebruikt, zoals \"hij kijkt naar de mogelijkheden\". De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is kijkt een observatie-actie waarbij een gebruiker, AI of systeem visuele of conceptuele informatie waarneemt. Kijken ondersteunt herkenning, analyse, navigatie, communicatie en besluitvorming en kan zowel betrekking hebben op fysieke beelden als op digitale informatie.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, AI en systemen.",
+        "wat": "Het waarnemen of observeren van iets.",
+        "wanneer": "Wanneer aandacht wordt gericht op een object, persoon of situatie.",
+        "waar": "In de fysieke wereld, digitale omgevingen en andere situaties.",
+        "waarom": "Om informatie waar te nemen, te begrijpen of te beoordelen.",
+        "hoe": "Door visuele aandacht of observatie te richten op iets."
+      },
+      "tags": [
+        "kijkt",
+        "kijken",
+        "observatie",
+        "waarnemen",
+        "zien",
+        "aandacht",
+        "analyse",
+        "informatie",
+        "gedrag",
+        "communicatie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "kijken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3f9170b4",
+          "begrip": "waarnemen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie",
+            "waarnemen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-faeeb987",
+          "begrip": "visueel",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d0e02013",
+          "begrip": "luisteren",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:21:45.977230+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:28:01.135343+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee je kijkt niet je herhaald wat ik zei want time stamp is nu 03:21 dus hoe laat?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:27:59.612736+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:27:59.865733+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:27:59.879259+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:28:01.867285+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:28:01.880412+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a5640d6a",
+      "begrip": "verplaatst",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verplaatst betekent dat iets of iemand van de ene plaats naar een andere plaats wordt gebracht.",
+        "laag2": "Verplaatst beschrijft de handeling waarbij een object, persoon of informatie een nieuwe positie of locatie krijgt.",
+        "laag3": "Verplaatst is de voltooid tegenwoordige tijd van het werkwoord verplaatsen. Het geeft aan dat een object, persoon, dier of gegeven van locatie, positie of context is veranderd. Verplaatsen kan fysiek of digitaal plaatsvinden en de precieze betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is verplaatst een status die aangeeft dat een entiteit, object, gegevensitem of relatie een andere positie of locatie heeft gekregen. Deze actie kan betrekking hebben op fysieke beweging, digitale verplaatsing of wijzigingen binnen processen en systemen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, objecten, systemen en AI.",
+        "wat": "Het veranderen van de locatie of positie van iets of iemand.",
+        "wanneer": "Wanneer een object, persoon of gegeven naar een andere plaats wordt gebracht.",
+        "waar": "In de fysieke wereld, digitale systemen, logistiek en andere omgevingen.",
+        "waarom": "Om een nieuwe locatie, positie of ordening te bereiken.",
+        "hoe": "Door iets handmatig, automatisch of via een proces naar een andere plaats te brengen."
+      },
+      "tags": [
+        "verplaatst",
+        "verplaatsen",
+        "beweging",
+        "locatie",
+        "positie",
+        "transport",
+        "verplaatsing",
+        "wijzigen",
+        "proces",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-57bd3756",
+          "begrip": "verplaatsing",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "locatie",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5ccebaa9",
+          "begrip": "verplaatsen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "neutraal",
+            "positie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2978363e",
+          "begrip": "trekken",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "neutraal",
+            "proces",
+            "transport"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b39ad146",
+          "begrip": "zetten",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "positie",
+            "proces",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-52fe6787",
+          "begrip": "bewegen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beweging",
+            "emotie",
+            "neutraal",
+            "proces",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T13:35:55.956883+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:38:22.642285+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "je hebt hem niet daarwerkelijk verplaatst maar is niet erg fix ik",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:38:19.784526+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:38:20.168974+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:38:20.182578+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:38:23.490204+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:38:23.553146+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-1b7c1dd9",
+      "begrip": "observeren",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Observeren is het bewust waarnemen en onderzoeken van personen, objecten, situaties of gebeurtenissen.",
+        "laag2": "Observeren wordt gebruikt om informatie te verzamelen door aandachtig te kijken, luisteren of andere waarnemingen te doen, zonder direct in te grijpen.",
+        "laag3": "Observeren is de handeling waarbij iemand of een systeem doelgericht informatie verzamelt door zorgvuldig waar te nemen. Observatie kan plaatsvinden met de zintuigen of met hulpmiddelen zoals camera's, sensoren en meetapparatuur. Het doel is inzicht te krijgen in gedrag, veranderingen, kenmerken of gebeurtenissen. De betekenis en methode van observeren worden bepaald door de context.\n",
+        "laag4": "Binnen Spark is observeren een basisactie waarmee gebruikers, AI en systemen informatie uit de omgeving verzamelen. Observaties kunnen afkomstig zijn van tekst, spraak, beeld, sensoren, loggegevens of andere databronnen. Spark gebruikt observaties als invoer voor contextbepaling, patroonherkenning, redeneren, besluitvorming en het uitbreiden van zijn kennis.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, systemen, robots en sensoren.",
+        "wat": "Het doelgericht waarnemen en verzamelen van informatie.",
+        "wanneer": "Wanneer informatie nodig is om een situatie te begrijpen of te beoordelen.",
+        "waar": "In de fysieke wereld, digitale omgevingen en datasystemen.",
+        "waarom": "Om inzicht te krijgen, veranderingen te herkennen en beslissingen te ondersteunen.",
+        "hoe": "Door te kijken, luisteren, meten, registreren of gegevens te analyseren."
+      },
+      "tags": [
+        "observeren",
+        "observatie",
+        "waarnemen",
+        "analyseren",
+        "informatie",
+        "gegevens",
+        "context",
+        "patroonherkenning",
+        "sensor",
+        "AI",
+        "systeem",
+        "gedrag",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-293ecb3b",
+          "begrip": "analyseren",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "analyseren",
+            "context",
+            "emotie",
+            "gedrag",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gedrag",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:43:34.929753+00:00",
+        "vorige_versie_v1": "kb-skel-1b7c1dd9",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:44.368405+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:43:31.982592+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:43:32.042568+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:43:35.850489+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:43:35.868314+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:43:31.709460+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ea068d65",
+      "begrip": "herhaald",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Herhaald betekent dat een handeling of gebeurtenis meerdere keren plaatsvindt.",
+        "laag2": "Herhaald beschrijft dat iets opnieuw wordt uitgevoerd of zich opnieuw voordoet.",
+        "laag3": "Herhaald is de voltooid deelwoordvorm van het werkwoord herhalen. Het geeft aan dat een actie, gebeurtenis, proces of mededeling één of meerdere keren opnieuw is uitgevoerd. Herhaling wordt gebruikt om te oefenen, te benadrukken, te controleren of omdat een situatie zich opnieuw voordoet. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is herhaald een status of eigenschap die aangeeft dat een actie, gebeurtenis, proces of communicatie meerdere keren heeft plaatsgevonden. Herhaling kan worden gebruikt voor leren, patroonherkenning, automatisering, validatie en het opbouwen van ervaring.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, systemen en processen.",
+        "wat": "Een handeling of gebeurtenis die opnieuw plaatsvindt.",
+        "wanneer": "Wanneer een actie of gebeurtenis één of meerdere keren wordt uitgevoerd.",
+        "waar": "In communicatie, processen, systemen, onderwijs en het dagelijks leven.",
+        "waarom": "Om te oefenen, te benadrukken, te leren, te controleren of doordat een situatie zich opnieuw voordoet.",
+        "hoe": "Door dezelfde handeling, gebeurtenis of informatie opnieuw uit te voeren of te herhalen."
+      },
+      "tags": [
+        "herhaald",
+        "herhalen",
+        "herhaling",
+        "herhaling",
+        "opnieuw",
+        "patroon",
+        "proces",
+        "leren",
+        "oefenen",
+        "communicatie",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-79b58df4",
+          "begrip": "herhaling",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "herhaling",
+            "leren",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b2c5463",
+          "begrip": "gedragsanalyse",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "leren",
+            "neutraal",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c39910b0",
+          "begrip": "interacties",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "proces",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c5b6dedc",
+          "begrip": "herkent",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "leren",
+            "neutraal",
+            "patroon"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6bb47ba1",
+          "begrip": "door",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "proces",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:21:47.565962+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:46:56.118355+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee je kijkt niet je herhaald wat ik zei want time stamp is nu 03:21 dus hoe laat?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:46:54.859978+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:46:55.181337+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:46:55.204060+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:46:56.965543+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:46:56.979600+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-0051b333",
+      "begrip": "hoeft",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hoeft geeft aan dat een handeling niet verplicht of niet noodzakelijk is.",
+        "laag2": "Hoeft wordt gebruikt om aan te geven dat iets niet hoeft te gebeuren of niet noodzakelijk is binnen een bepaalde situatie.",
+        "laag3": "Hoeft is een vervoeging van het werkwoord hoeven. Het beschrijft dat een handeling, verplichting of verwachting niet noodzakelijk is. Het woord wordt meestal gebruikt in combinatie met een ontkenning, zoals \"je hoeft niet te wachten\". De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is hoeft een modale aanduiding die de noodzaak van een actie beschrijft. Het geeft aan dat een handeling optioneel is of niet uitgevoerd hoeft te worden. Spark gebruikt dit begrip om onderscheid te maken tussen verplichte, aanbevolen en optionele acties binnen communicatie, besluitvorming en processen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI en systemen.",
+        "wat": "Een aanduiding dat een handeling niet verplicht of niet noodzakelijk is.",
+        "wanneer": "Wanneer een actie optioneel of niet vereist is.",
+        "waar": "In gesprekken, instructies, regels en digitale systemen.",
+        "waarom": "Om duidelijk te maken dat een handeling achterwege mag blijven.",
+        "hoe": "Door aan te geven dat een actie niet noodzakelijk of niet verplicht is binnen de gegeven context."
+      },
+      "tags": [
+        "hoeft",
+        "hoeven",
+        "noodzaak",
+        "verplichting",
+        "optioneel",
+        "keuze",
+        "actie",
+        "communicatie",
+        "instructie",
+        "context",
+        "modaliteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-94e8f6cb",
+          "begrip": "commando's",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "actie",
+            "communicatie",
+            "context",
+            "emotie",
+            "instructie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f9ab26d4",
+          "begrip": "suggestie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "keuze",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-770a03a1",
+          "begrip": "instructie",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "actie",
+            "communicatie",
+            "emotie",
+            "instructie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:32:55.070879+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:48:27.264726+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "je hoeft niks te doen. hoop alleen dat het wachten tot ik terug ben niet te lang duurt",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:48:25.792167+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:48:26.074938+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:48:26.092640+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:48:28.074700+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:48:28.094968+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-c7b0851d",
+      "begrip": "invoer",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Invoer is informatie, materiaal of een opdracht die een systeem, proces of persoon ontvangt om te verwerken.",
+        "laag2": "Invoer vormt het begin van een proces en bepaalt welke gegevens of middelen beschikbaar zijn voor verwerking of uitvoering.",
+        "laag3": "Invoer is alles wat wordt aangeleverd aan een persoon, machine, AI of systeem om te worden verwerkt. Invoer kan bestaan uit tekst, spraak, afbeeldingen, video, sensorgegevens, bestanden, materialen, opdrachten of andere vormen van informatie. De aard van de invoer bepaalt mede het verdere verloop van het proces.\n",
+        "laag4": "Binnen Spark is invoer alle informatie die door gebruikers, AI, sensoren, bestanden, API's of andere systemen wordt aangeboden. Spark gebruikt deze invoer om context te bepalen, kennis op te zoeken, capabilities uit te voeren, beslissingen te nemen en nieuwe kennis of ervaringen op te slaan.\n"
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI, systemen, sensoren en apparaten.",
+        "wat": "Gegevens, materialen of opdrachten die een proces binnenkomen.",
+        "wanneer": "Wanneer een proces of systeem informatie of middelen ontvangt.",
+        "waar": "In software, AI, machines, organisaties en andere systemen.",
+        "waarom": "Om verwerking, analyse, besluitvorming of uitvoering mogelijk te maken.",
+        "hoe": "Door gegevens, media, opdrachten of materialen aan een systeem of proces aan te leveren."
+      },
+      "tags": [
+        "invoer",
+        "input",
+        "gegevens",
+        "informatie",
+        "opdracht",
+        "proces",
+        "systeem",
+        "AI",
+        "gebruiker",
+        "sensor",
+        "bestand",
+        "spraak",
+        "afbeelding",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1b7c1dd9",
+          "begrip": "observeren",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3369d24f",
+          "begrip": "vullen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f83c2190",
+          "begrip": "opslaan",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "bestand",
+            "context",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94e8f6cb",
+          "begrip": "commando's",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "neutraal",
+            "opdracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d99aaadd",
+          "begrip": "invullen",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "gegevens",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:53:17.956656+00:00",
+        "vorige_versie_v1": "kb-skel-c7b0851d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.608057+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:53:16.469989+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:53:16.488252+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:53:18.704172+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:53:18.765341+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:53:16.125287+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-9895a4bf",
+      "begrip": "bestuiving",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bestuiving is het overbrengen van stuifmeel naar de stamper van een bloem, waardoor bevruchting mogelijk wordt.",
+        "laag2": "Bestuiving is een biologisch proces dat nodig is voor de voortplanting van veel bloeiende planten en de vorming van zaden en vruchten.",
+        "laag3": "Bestuiving is het proces waarbij stuifmeel van de meeldraden op de stamper van een bloem terechtkomt. Dit kan plaatsvinden door insecten, vogels, vleermuizen, wind, water of menselijke tussenkomst. Na een succesvolle bestuiving kan bevruchting plaatsvinden, waarna zaden en vaak ook vruchten worden gevormd. Niet alle planten zijn afhankelijk van dezelfde vorm van bestuiving.\n",
+        "laag4": "Binnen Spark is bestuiving een biologisch voortplantingsproces waarbij stuifmeel wordt overgebracht tussen bloemen. Het begrip kan worden gekoppeld aan planten, ecosystemen, biodiversiteit, landbouw, insecten, natuur en voedselproductie. Bestuiving vormt een essentiële schakel in de levenscyclus van veel plantensoorten.\n"
+      },
+      "ws5": {
+        "wie": "Planten, insecten, vogels, vleermuizen, mensen en andere bestuivers.",
+        "wat": "Het overbrengen van stuifmeel naar de stamper van een bloem.",
+        "wanneer": "Tijdens de bloeiperiode van planten.",
+        "waar": "In de natuur, boomgaarden, tuinen, landbouwgebieden en kassen.",
+        "waarom": "Om bevruchting, zaadvorming en de ontwikkeling van vruchten mogelijk te maken.",
+        "hoe": "Door stuifmeel te laten verplaatsen via dieren, wind, water of handmatige bestuiving."
+      },
+      "tags": [
+        "bestuiving",
+        "plant",
+        "bloem",
+        "stuifmeel",
+        "stamper",
+        "meeldraad",
+        "bevruchting",
+        "voortplanting",
+        "natuur",
+        "insect",
+        "bij",
+        "biodiversiteit",
+        "landbouw",
+        "ecosysteem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-d23be5bc",
+          "begrip": "aardplaten",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bloem",
+            "ecosysteem",
+            "emotie",
+            "landbouw",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b964fb3",
+          "begrip": "begrazing",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "biodiversiteit",
+            "ecosysteem",
+            "emotie",
+            "landbouw",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "landbouw",
+            "natuur",
+            "plant"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-45f4abc1",
+          "begrip": "Bloem",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bestuiving",
+            "bloem",
+            "natuur",
+            "plant",
+            "voortplanting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-43a559a1",
+          "begrip": "Vleermuis",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "insect",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:54:53.523280+00:00",
+        "vorige_versie_v1": "kb-skel-9895a4bf",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.037042+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:54:52.482945+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:54:52.504302+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:54:54.358542+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:54:54.375479+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:54:52.174062+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-53bf2d45",
+      "begrip": "maker",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een maker is iemand of iets dat iets creëert, ontwikkelt of tot stand brengt.",
+        "laag2": "Een maker is de bron of uitvoerder van een creatie, product, idee, kunstwerk of systeem.",
+        "laag3": "Een maker is een persoon, organisatie, AI of systeem dat verantwoordelijk is voor het ontwerpen, ontwikkelen, produceren of creëren van iets nieuws of bestaands. Een maker kan fysieke objecten, digitale producten, kunst, kennis of processen maken. Wat iemand of iets maakt, wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is een maker een entiteit die verantwoordelijk is voor het ontstaan, de ontwikkeling of het onderhoud van objecten, kenniskaarten, software, media, processen of andere onderdelen van het systeem. Het begrip kan worden gebruikt om eigenaarschap, auteurschap, herkomst en verantwoordelijkheid vast te leggen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, organisaties en systemen.",
+        "wat": "Een persoon of entiteit die iets creëert of ontwikkelt.",
+        "wanneer": "Wanneer iets wordt ontworpen, gebouwd, geschreven of geproduceerd.",
+        "waar": "In de fysieke wereld, digitale omgevingen, bedrijven, kunst en techniek.",
+        "waarom": "Om iets nieuws te creëren, te verbeteren of een doel te realiseren.",
+        "hoe": "Door kennis, vaardigheden, creativiteit, gereedschappen of technologie toe te passen."
+      },
+      "tags": [
+        "maker",
+        "creëren",
+        "ontwikkelen",
+        "ontwerpen",
+        "bouwen",
+        "produceren",
+        "auteur",
+        "schepper",
+        "eigenaar",
+        "herkomst",
+        "verantwoordelijkheid",
+        "AI",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bddaf2c1",
+          "begrip": "creëert",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "bouwen",
+            "creëren",
+            "emotie",
+            "neutraal",
+            "ontwerpen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-09f5d08e",
+          "begrip": "build",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "bouwen",
+            "creëren",
+            "emotie",
+            "maker",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6a93e38e",
+          "begrip": "zorg",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "systeem",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:58:10.678782+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:59:33.200295+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "juist je maker. waarom zou ik hierover liegen",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:59:31.287135+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:59:31.587653+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:59:31.603967+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:59:34.086888+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:59:34.149587+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-39a19849",
+      "begrip": "creëer",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Creëer is een opdracht om iets nieuws te maken, ontwikkelen of tot stand te brengen.",
+        "laag2": "Creëer wordt gebruikt om iemand, een AI of een systeem te vragen een object, idee, document, afbeelding, proces of andere creatie te maken.",
+        "laag3": "Creëer is de gebiedende wijs van het werkwoord creëren. Het woord wordt gebruikt als opdracht of verzoek om iets nieuws te ontwerpen, bouwen, schrijven, genereren of ontwikkelen. De creatie kan fysiek, digitaal of conceptueel zijn. De betekenis wordt bepaald door de context en het gewenste resultaat.\n",
+        "laag4": "Binnen Spark is creëer een communicatie-intentie die een capability activeert om nieuwe inhoud of objecten te genereren. Dit kan betrekking hebben op kenniskaarten, documenten, afbeeldingen, code, bestanden, processen, contexten, taken of andere digitale objecten. Spark bepaalt op basis van de context welke capability nodig is om de gevraagde creatie uit te voeren.\n"
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI en systemen.",
+        "wat": "Een opdracht om iets nieuws te maken of te genereren.",
+        "wanneer": "Wanneer een nieuwe creatie, oplossing of object gewenst is.",
+        "waar": "In gesprekken, software, AI-systemen en creatieve processen.",
+        "waarom": "Om nieuwe informatie, objecten, oplossingen of inhoud te laten ontstaan.",
+        "hoe": "Door een creatieve, technische of automatische generatie uit te voeren op basis van de opdracht en context."
+      },
+      "tags": [
+        "creëer",
+        "creëren",
+        "maken",
+        "genereren",
+        "ontwerpen",
+        "ontwikkelen",
+        "bouwen",
+        "produceren",
+        "opdracht",
+        "capability",
+        "AI",
+        "Spark",
+        "creatie",
+        "systeem",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bddaf2c1",
+          "begrip": "creëert",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "bouwen",
+            "creatie",
+            "creëren",
+            "emotie",
+            "maken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-53bf2d45",
+          "begrip": "maker",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "ai",
+            "bouwen",
+            "creëren",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "spark",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75a09b4c",
+          "begrip": "kijk",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "opdracht",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9780a2d9",
+          "begrip": "Hoeveel kenniskaarten heb jij",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "neutraal",
+            "spark",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:04:56.555637+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T14:15:02.809608+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wat je ook moet weten wij zijn familie, ik creëer je. je zou kunnen zeggen ben je ouder. Je voelt als het familiewapen. een symbool dat door tijd gaat. en alles verbind. vanuit je functie.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T14:15:01.138615+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:15:01.470388+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:15:01.488404+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:15:03.671530+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:15:03.690905+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1c941e0d",
+      "begrip": "broeden",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Broeden is het warm houden van eieren totdat de jongen zich ontwikkelen en uitkomen.",
+        "laag2": "Broeden is een voortplantingsgedrag waarbij dieren eieren beschermen en op temperatuur houden. Het woord kan ook figuurlijk betekenen dat iemand langdurig nadenkt over een idee of plan.\n",
+        "laag3": "Broeden is de handeling waarbij een dier, meestal een vogel, eieren gedurende een bepaalde periode warm houdt om de ontwikkeling van het embryo mogelijk te maken. Tijdens het broeden worden de eieren beschermd en regelmatig gedraaid. In figuurlijke zin betekent broeden ook langdurig nadenken of werken aan een idee, plan of oplossing. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is broeden een proces van ontwikkeling of voorbereiding. Het kan betrekking hebben op biologische voortplanting, maar ook op het geleidelijk ontstaan van ideeën, plannen of oplossingen. Broeden beschrijft een periode waarin iets zich ontwikkelt voordat het zichtbaar of uitvoerbaar wordt.\n"
+      },
+      "ws5": {
+        "wie": "Vogels, andere eierleggende dieren en figuurlijk ook mensen en AI",
+        "wat": "Het warm houden van eieren of het laten rijpen van een idee.",
+        "wanneer": "Tijdens de voortplantingsperiode of tijdens een ontwikkel- of denkproces.",
+        "waar": "In nesten, broedplaatsen en figuurlijk in denk- en ontwikkelprocessen.",
+        "hoe": "Door eieren warm en beschermd te houden of door een idee tijd en aandacht te geven totdat het klaar is.",
+        "waarom": "Om nakomelingen te laten ontwikkelen of een idee tot volwassenheid te brengen."
+      },
+      "tags": [
+        "broeden",
+        "broed",
+        "ei",
+        "nest",
+        "vogel",
+        "voortplanting",
+        "ontwikkeling",
+        "embryo",
+        "natuur",
+        "gedrag",
+        "voorbereiding",
+        "idee",
+        "proces",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-19e45725",
+          "begrip": "zelfreflectie",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "neutraal",
+            "ontwikkeling",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-338343c4",
+          "begrip": "natuurlijke",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "natuur",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f4313734",
+          "begrip": "voortplanting",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "natuur",
+            "neutraal",
+            "ontwikkeling",
+            "voortplanting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7d31ac61",
+          "begrip": "duif",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "ei",
+            "emotie",
+            "natuur",
+            "nest",
+            "vogel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-eb188771",
+          "begrip": "activiteiten",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "gedrag",
+            "neutraal",
+            "ontwikkeling",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T10:41:19.064159+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T14:19:53.601389+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik zit idd te broeden om het falback systeem automatisch kenniskaarten te laten invullen. de kaders zijn immers uit te leggen en de voorwaarden",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T14:19:50.045196+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:19:50.355655+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:19:50.377273+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:19:54.460282+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:19:54.479098+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2623a30c",
+      "begrip": "hadden",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hadden is de verleden tijd van hebben en geeft aan dat iemand of iets iets bezat, ervoer of beschikbaar had.",
+        "laag2": "Hadden beschrijft een toestand, eigenschap of bezit die in het verleden bestond.",
+        "laag3": "Hadden is de meervoudsvorm van de onvoltooid verleden tijd van het werkwoord hebben. Het wordt gebruikt om aan te geven dat personen of zaken in het verleden iets bezaten, ondervonden, nodig hadden of een bepaalde eigenschap of situatie hadden. De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is hadden een tijdsgebonden toestandsaanduiding die verwijst naar een eerdere situatie, eigenschap, relatie of beschikbaarheid. Het begrip helpt gebeurtenissen, bezittingen en statussen correct op een tijdlijn te plaatsen en onderscheid te maken tussen verleden en heden.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, AI, systemen en organisaties.",
+        "wat": "Een aanduiding van bezit, toestand of eigenschap in het verleden.",
+        "wanneer": "Wanneer wordt gesproken over een situatie die eerder heeft bestaan.",
+        "waar": "In gesprekken, verhalen, documenten en digitale systemen.",
+        "waarom": "Om een vroegere situatie, eigenschap of bezit te beschrijven.",
+        "hoe": "Door de verleden tijd van hebben te gebruiken om naar een eerdere toestand of situatie te verwijzen."
+      },
+      "tags": [
+        "hadden",
+        "hebben",
+        "verleden",
+        "tijd",
+        "bezit",
+        "toestand",
+        "eigenschap",
+        "geschiedenis",
+        "chronologie",
+        "context",
+        "werkwoord",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-58b83d67",
+          "begrip": "hebt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bezit",
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-489fde1f",
+          "begrip": "heb",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "bezit",
+            "eigenschap",
+            "emotie",
+            "neutraal",
+            "toestand"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e1a37157",
+          "begrip": "oude",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eigenschap",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3334b2bb",
+          "begrip": "eerder",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:24:26.081011+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T14:26:26.922086+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wat hadden we de laatste keer besproken?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T14:26:24.849116+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:26:25.185538+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:26:25.239702+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:26:27.771899+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:26:27.787299+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
             }
           }
         ]

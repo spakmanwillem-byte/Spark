@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 526,
+    "card_count": 547,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-06T21:10:00.415618+00:00",
+    "last_updated": "2026-06-28T13:56:25.617550+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -71875,6 +71875,321 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-09T08:55:15.484246+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cfc6c027",
+      "begrip": "vertel",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Vertel is een opdracht of verzoek om informatie, een verhaal of uitleg te geven.",
+        "laag2": "Vertel wordt gebruikt om iemand te vragen iets te beschrijven, uit te leggen of mee te delen.",
+        "laag3": "Vertel is de gebiedende wijs van het werkwoord vertellen. Het woord wordt gebruikt als opdracht, uitnodiging of verzoek om informatie, ervaringen, kennis, gevoelens of een verhaal te delen. De betekenis wordt bepaald door de context en de inhoud van wat verteld wordt.\n",
+        "laag4": "Binnen Spark is vertel een communicatie-opdracht waarmee een gebruiker of systeem vraagt om kennis, uitleg, informatie, ervaringen of verhalen te delen. Het woord fungeert als een intentie die een reactie of toelichting activeert.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI en systemen.",
+        "wat": "Een verzoek of opdracht om iets te vertellen.",
+        "wanneer": "Wanneer informatie, uitleg of een verhaal wordt gevraagd.",
+        "waar": "In gesprekken, onderwijs, communicatie en digitale systemen.",
+        "waarom": "Om kennis, ervaringen of informatie uit te wisselen.",
+        "hoe": "Door mondelinge, schriftelijke of digitale communicatie."
+      },
+      "tags": [
+        "vertel",
+        "vertellen",
+        "communicatie",
+        "spreken",
+        "uitleg",
+        "informatie",
+        "verhaal",
+        "opdracht",
+        "verzoek",
+        "dialoog",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5113a6b4",
+          "begrip": "vertelde",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "neutraal",
+            "spreken",
+            "uitleg"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0b1bc109",
+          "begrip": "zeggen",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "dialoog",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-a10a7334",
+          "begrip": "spreken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "dialoog",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal",
+            "spreken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59cd1e64",
+          "begrip": "Vertellen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "informatie",
+            "uitleg",
+            "verhaal",
+            "vertellen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:07:58.791298+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T10:54:49.480250+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "vertel me over mijn nucleontemperatuur idee voor schone energie productie",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T10:54:47.430268+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T10:54:47.683165+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T10:54:47.740154+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T10:54:50.007349+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T10:54:50.065135+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-75a09b4c",
+      "begrip": "kijk",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Kijk is een opdracht of uitnodiging om ergens aandacht aan te besteden of iets te observeren.",
+        "laag2": "Kijk wordt gebruikt om iemand te vragen ergens naar te kijken, iets te beoordelen of ergens aandacht op te richten.",
+        "laag3": "Kijk is de gebiedende wijs van het werkwoord kijken. Het wordt gebruikt als opdracht, verzoek of uitnodiging om visuele aandacht of focus te richten op een persoon, object, situatie of informatie. Het kan zowel letterlijk als figuurlijk worden gebruikt, zoals in \"kijk naar de cijfers\" of \"kijk eens hoe dit werkt\". De betekenis wordt bepaald door de context.\n",
+        "laag4": "Binnen Spark is kijk een communicatie-intentie waarmee een gebruiker de AI vraagt om iets te observeren, analyseren of beoordelen. Dit kan betrekking hebben op afbeeldingen, video's, documenten, tekst, systemen of gebeurtenissen. De opdracht activeert de observatie- en analysecapabilities van Spark.\n"
+      },
+      "ws5": {
+        "wie": "Gebruikers, AI en systemen.",
+        "wat": "Een opdracht of verzoek om iets te observeren of te analyseren.",
+        "wanneer": "Wanneer aandacht of beoordeling van iets wordt gevraagd.",
+        "waar": "In gesprekken, digitale systemen en de fysieke wereld.",
+        "waarom": "Om informatie waar te nemen, te begrijpen of te beoordelen.",
+        "hoe": "Door de aandacht te richten op een object, situatie of informatiebron en deze te observeren of analyseren."
+      },
+      "tags": [
+        "kijk",
+        "kijken",
+        "opdracht",
+        "verzoek",
+        "observatie",
+        "analyse",
+        "aandacht",
+        "communicatie",
+        "afbeelding",
+        "document",
+        "informatie",
+        "AI",
+        "Spark",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "ai",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7badb7d5",
+          "begrip": "kijkt",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "aandacht",
+            "analyse",
+            "communicatie",
+            "emotie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6db88117",
+          "begrip": "noem",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "aandacht",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-be9fa48b",
+          "begrip": "beschrijving",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "communicatie",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:55:11.362029+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:56:25.617514+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Kijk eens in mijn relaties",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:56:23.501493+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:56:23.795567+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:56:23.855791+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:56:26.254679+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:56:26.276393+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

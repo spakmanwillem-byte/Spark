@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 440,
+    "card_count": 452,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-26T23:03:29.033973+00:00",
+    "last_updated": "2026-06-28T14:09:53.075745+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -60967,6 +60967,667 @@
           "bron": "verlorenkennis.txt (batch 7)",
           "lade": "voelen"
         }
+      ]
+    },
+    {
+      "id": "kbv2-skel-b365c569",
+      "begrip": "trouw",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Trouw is het gevoel of de houding van blijvende verbondenheid, loyaliteit en betrouwbaarheid tegenover iemand, een groep of een overtuiging.",
+        "laag2": "Trouw uit zich door betrokkenheid, loyaliteit en het nakomen van afspraken, ook wanneer dat moeilijk is.",
+        "laag3": "Trouw is een emotionele en sociale eigenschap waarbij iemand zich langdurig verbonden voelt met een persoon, relatie, familie, groep, organisatie of overtuiging. Trouw gaat vaak samen met vertrouwen, verantwoordelijkheid en toewijding, maar de manier waarop trouw wordt ervaren en getoond verschilt per persoon en situatie.\n",
+        "laag4": "Binnen Spark is trouw een gevoelsmatige waarde die de mate van verbondenheid, loyaliteit en toewijding tussen personen, AI, groepen of doelen beschrijft. Trouw kan invloed hebben op relaties, samenwerking, besluitvorming en langdurige interacties en wordt altijd geïnterpreteerd binnen de context van de situatie.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, dieren, groepen en organisaties.",
+        "wat": "Een gevoel en houding van loyaliteit en blijvende verbondenheid.",
+        "wanneer": "Wanneer een langdurige relatie, afspraak of betrokkenheid bestaat.",
+        "waar": "In persoonlijke relaties, families, vriendschappen, organisaties en gemeenschappen.",
+        "waarom": "Om vertrouwen, stabiliteit en duurzame relaties te behouden.",
+        "hoe": "Door betrouwbaar te handelen, afspraken na te komen en betrokken te blijven."
+      },
+      "tags": [
+        "trouw",
+        "loyaliteit",
+        "verbondenheid",
+        "vertrouwen",
+        "toewijding",
+        "relatie",
+        "betrouwbaarheid",
+        "respect",
+        "verantwoordelijkheid",
+        "samenwerking",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "relatie",
+            "samenwerking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8d9261ff",
+          "begrip": "verbondenheid",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "relatie",
+            "samenwerking",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1ef01b9b",
+          "begrip": "vriendelijk",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "respect",
+            "verbondenheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9e0ce62a",
+          "begrip": "collega",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "relatie",
+            "samenwerking",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd89acb2",
+          "begrip": "akkoord",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "positief",
+            "samenwerking",
+            "vertrouwen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:45:32.580876+00:00",
+        "vorige_versie_v1": "kb-skel-b365c569",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.634511+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:45:31.209199+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:45:31.265150+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:45:33.165330+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:45:33.182793+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:45:30.871632+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-7c48a9d8",
+      "begrip": "betrouwbaarheid",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Betrouwbaarheid is de mate waarin iemand of iets consistent eerlijk, correct en voorspelbaar is.",
+        "laag2": "Betrouwbaarheid ontstaat wanneer afspraken worden nagekomen en informatie, gedrag of prestaties consequent blijken te kloppen.",
+        "laag3": "Betrouwbaarheid is een eigenschap die aangeeft in hoeverre een persoon, organisatie, systeem of object vertrouwen verdient doordat het consistent doet wat verwacht wordt. Betrouwbaarheid kan betrekking hebben op gedrag, informatie, resultaten, apparatuur of processen. De beoordeling van betrouwbaarheid is afhankelijk van ervaringen, bewijs en de context.\n",
+        "laag4": "Binnen Spark is betrouwbaarheid een eigenschap die de mate van vertrouwen in personen, AI, systemen, gegevens of bronnen beschrijft. Spark kan betrouwbaarheid beoordelen op basis van eerdere ervaringen, verificatie, consistentie, bronkwaliteit en resultaten. Betrouwbaarheid kan veranderen wanneer nieuwe informatie of ervaringen beschikbaar komen.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, systemen, organisaties, objecten en informatiebronnen.",
+        "wat": "De mate waarin iets of iemand consequent betrouwbaar is.",
+        "wanneer": "Wanneer gedrag, informatie of prestaties over tijd worden beoordeeld.",
+        "waar": "In relaties, communicatie, techniek, organisaties en digitale systemen.",
+        "waarom": "Om vertrouwen op te bouwen en de kwaliteit van beslissingen en samenwerking te vergroten.",
+        "hoe": "Door consequent eerlijk, correct, voorspelbaar en controleerbaar te handelen of te functioneren."
+      },
+      "tags": [
+        "betrouwbaarheid",
+        "vertrouwen",
+        "consistentie",
+        "eerlijkheid",
+        "voorspelbaarheid",
+        "kwaliteit",
+        "verificatie",
+        "reputatie",
+        "ervaring",
+        "relatie",
+        "systeem",
+        "bron",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-51dd8529",
+          "begrip": "validatie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "consistentie",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e3a02076",
+          "begrip": "correct",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "consistentie",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-11840f86",
+          "begrip": "juist",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "consistentie",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b2c07e1c",
+          "begrip": "consistentie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "consistentie",
+            "emotie",
+            "kwaliteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-93b1e1c1",
+          "begrip": "verhalen",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "ervaring",
+            "neutraal",
+            "relatie",
+            "systeem"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T13:50:04.159520+00:00",
+        "vorige_versie_v1": "kb-skel-7c48a9d8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:48.485041+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:50:00.769810+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:50:00.791475+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T13:50:04.726655+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T13:50:04.767362+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T13:50:00.430503+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-f39d2548",
+      "begrip": "streven",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Streven is het verlangen en de inzet om een doel of gewenste situatie te bereiken.",
+        "laag2": "Streven beschrijft de motivatie om jezelf, een situatie of een resultaat te verbeteren door ergens naartoe te werken.",
+        "laag3": "Streven is de bewuste gerichtheid op het bereiken van een doel, ideaal of verbetering. Het gaat niet alleen om de handeling, maar ook om de innerlijke motivatie en intentie om ergens naartoe te groeien. Streven kan betrekking hebben op persoonlijke ontwikkeling, prestaties, relaties, kennis of maatschappelijke doelen. De richting en betekenis worden bepaald door de context.\n",
+        "laag4": "Binnen Spark is streven een interne drijfveer of intentie die richting geeft aan gedrag, keuzes en ontwikkeling. Een gebruiker, AI of systeem kan streven naar een bepaald doel, een hogere kwaliteit, meer kennis, betere samenwerking of een gewenste toestand. Streven ondersteunt doelgericht handelen en langdurige ontwikkeling.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, organisaties en systemen.",
+        "wat": "De motivatie en intentie om een doel of gewenste situatie te bereiken.",
+        "wanneer": "Wanneer een doel, verbetering of ontwikkeling wordt nagestreefd.",
+        "waar": "In persoonlijke ontwikkeling, werk, onderwijs, organisaties en digitale systemen.",
+        "waarom": "Om groei, verbetering, succes of een gewenste uitkomst te bereiken.",
+        "hoe": "Door doelgericht keuzes te maken, inspanning te leveren en vol te houden."
+      },
+      "tags": [
+        "streven",
+        "doel",
+        "motivatie",
+        "intentie",
+        "ambitie",
+        "ontwikkeling",
+        "groei",
+        "verbetering",
+        "doorzetten",
+        "toewijding",
+        "richting",
+        "doelgericht",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-dcaf2f12",
+          "begrip": "motiveert",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "doorzetten",
+            "emotie",
+            "groei"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e92b9dea",
+          "begrip": "versterking",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "emotie",
+            "groei",
+            "motivatie",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16db0d8a",
+          "begrip": "5-jarenplan",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "ambitie",
+            "blij",
+            "doel",
+            "emotie",
+            "groei"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-b15201f2",
+          "begrip": "vooruitgang",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "groei",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-55375854",
+          "begrip": "zingeving",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T14:04:58.554489+00:00",
+        "vorige_versie_v1": "kb-skel-f39d2548",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.447046+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:04:56.105322+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:04:56.166487+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:04:59.165019+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:04:59.180578+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T14:04:55.765138+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-bc92a2dc",
+      "begrip": "inzet",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Inzet is de bereidheid en motivatie om tijd, energie of middelen te besteden aan een doel of taak.",
+        "laag2": "Inzet beschrijft de mate waarin iemand zich actief en gemotiveerd inspant om iets te bereiken of bij te dragen.",
+        "laag3": "Inzet is de toewijding waarmee een persoon, groep of systeem zich richt op een taak, doel of verantwoordelijkheid. Inzet kan bestaan uit tijd, energie, kennis, vaardigheden, aandacht of andere middelen. De hoeveelheid en kwaliteit van de inzet verschillen per situatie en worden bepaald door de context.\n",
+        "laag4": "Binnen Spark is inzet een eigenschap die de mate van betrokkenheid en toewijding beschrijft waarmee een gebruiker, AI of systeem aan een taak, proces of doel werkt. Inzet kan invloed hebben op samenwerking, prestaties, leerprocessen en het behalen van resultaten.\n"
+      },
+      "ws5": {
+        "wie": "Mensen, AI, teams, organisaties en systemen.",
+        "wat": "De bereidheid en inspanning om een doel of taak te ondersteunen.",
+        "wanneer": "Wanneer een taak, proces of doel aandacht en inspanning vraagt.",
+        "waar": "In werk, onderwijs, sport, relaties, projecten en digitale systemen.",
+        "waarom": "Om doelen te bereiken, problemen op te lossen of een bijdrage te leveren.",
+        "hoe": "Door tijd, energie, kennis, aandacht of andere middelen actief in te zetten."
+      },
+      "tags": [
+        "inzet",
+        "motivatie",
+        "betrokkenheid",
+        "toewijding",
+        "inspanning",
+        "bijdrage",
+        "verantwoordelijkheid",
+        "focus",
+        "samenwerking",
+        "doel",
+        "prestatie",
+        "ontwikkeling",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-df8ad401",
+          "begrip": "inspanning",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "inspanning",
+            "inzet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e4b0eaa",
+          "begrip": "betrokken",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "emotie",
+            "motivatie",
+            "positief"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f39d2548",
+          "begrip": "streven",
+          "lade": "voelen",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "doel",
+            "emotie",
+            "motivatie",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e96db3a0",
+          "begrip": "initiatief",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "betrokkenheid",
+            "blij",
+            "doel",
+            "emotie",
+            "motivatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5243d9ac",
+          "begrip": "verdienen",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "bijdrage",
+            "blij",
+            "emotie",
+            "inzet",
+            "motivatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-28T14:09:53.075718+00:00",
+        "vorige_versie_v1": "kb-skel-bc92a2dc",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:59.351772+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:09:51.768681+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:09:51.785531+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-28T14:09:53.696875+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-28T14:09:53.763288+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-28T14:09:51.440966+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
       ]
     }
   ],

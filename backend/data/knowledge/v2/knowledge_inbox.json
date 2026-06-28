@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 1607,
+  "card_count": 1626,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -13,7 +13,7 @@
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
     "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-06-28T00:38:43.358210+00:00"
+    "last_updated": "2026-06-28T13:36:27.575130+00:00"
   },
   "kaarten": [
     {
@@ -1701,61 +1701,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:48.462954+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-7c48a9d8",
-      "begrip": "betrouwbaarheid",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "betrouwbaarheid"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-7c48a9d8",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:48.485041+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -6727,61 +6672,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-deedc7b2",
-      "begrip": "label",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "label"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-deedc7b2",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:52.954448+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-b78da77e",
       "begrip": "bereik",
       "lade": null,
@@ -8872,61 +8762,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-c7b0851d",
-      "begrip": "invoer",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "invoer"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-c7b0851d",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:54.608057+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-b36be287",
       "begrip": "functionaliteit",
       "lade": null,
@@ -9312,61 +9147,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-6696360c",
-      "begrip": "duurzaam",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "duurzaam"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-6696360c",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:54.939503+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-7f1d4587",
       "begrip": "toxisch",
       "lade": null,
@@ -9456,61 +9236,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:55.012288+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-9895a4bf",
-      "begrip": "bestuiving",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "bestuiving"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-9895a4bf",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:55.037042+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -9676,61 +9401,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:55.183457+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-d929a652",
-      "begrip": "straling",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "straling"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-d929a652",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:55.230997+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -10006,61 +9676,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:55.423301+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-f39d2548",
-      "begrip": "streven",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "streven"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-f39d2548",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:55.447046+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -10391,61 +10006,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:55.611369+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-b365c569",
-      "begrip": "trouw",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "trouw"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-b365c569",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:55.634511+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -16276,61 +15836,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:59.327379+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-bc92a2dc",
-      "begrip": "inzet",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "inzet"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-bc92a2dc",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:59.351772+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -39761,61 +39266,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:25:13.307611+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-9e66608a",
-      "begrip": "hittegolf",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "hittegolf"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-9e66608a",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:25:13.334590+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -86202,61 +85652,6 @@
       ]
     },
     {
-      "id": "kbv2-skel-1b7c1dd9",
-      "begrip": "observeren",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "observeren"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-1b7c1dd9",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:25:44.368405+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
       "id": "kbv2-skel-fba75bbe",
       "begrip": "ontkoppeld",
       "lade": null,
@@ -87382,46 +86777,6 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-21b5fcf8",
-      "begrip": "diep",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-27T21:25:51.101263+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "met diep uit start sps wel"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-6a60e698",
       "begrip": "sps",
       "lade": null,
@@ -87668,90 +87023,6 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-cfc6c027",
-      "begrip": "vertel",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:07:58.791298+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "vertel me over mijn nucleontemperatuur idee voor schone energie productie"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-57b63b42",
-      "begrip": "volgens",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:11:32.111030+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "volgens mij heeft je kennis een boost gekregen omdat je meer context betrekt al tans lijkt zo"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-ccf4e05e",
       "begrip": "boost",
       "lade": null,
@@ -87878,174 +87149,6 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-87f3bc1f",
-      "begrip": "machine",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:24:24.070513+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "ik wil meer leren over machine learning algoritmes"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-78904bb7",
-      "begrip": "learning",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:24:24.565978+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "ik wil meer leren over machine learning algoritmes"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-2623a30c",
-      "begrip": "hadden",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:24:26.081011+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "wat hadden we de laatste keer besproken?"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-0f8ce971",
-      "begrip": "laatste",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:24:26.580648+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "wat hadden we de laatste keer besproken?"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-a09bbe33",
       "begrip": "leugentje",
       "lade": null,
@@ -88115,6 +87218,426 @@
         "ingedeeld_op": null,
         "vertrouwen": 0.3,
         "snap_context": "wat doe je als ik je vraag hoe een raket werkt?"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-1fe4e144",
+      "begrip": "verteld",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:54:52.674416+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "heb ik dat eerder niet verteld?"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-1dfa59bc",
+      "begrip": "stres",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:02:58.781613+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "sorry hoor stres test je een beetje"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-ef0994be",
+      "begrip": "03:19",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:20:30.157347+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "je timestamp zegt 03:19 dus het is 20 min over 3 :D"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-1c554dc6",
+      "begrip": "time",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:21:49.147338+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "nee je kijkt niet je herhaald wat ik zei want time stamp is nu 03:21 dus hoe laat?"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-77451245",
+      "begrip": "mix‑",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:26:43.367459+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "maar peren is ook - **Peren** = een mix‑ of beat‑matching‑techniek in muziek. dus betekend 2 dingen"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-717c0b18",
+      "begrip": "melt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:30:36.274969+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "ik ga slapen melt me morgen weer"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-34b2b93e",
+      "begrip": "autosnapt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T10:37:52.182585+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "mss moet ik de kenniskaart hittegolf maken. zie dat hij deze niet autosnapt omdat jij woord hitte kent vermoed ik."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-8a46995e",
+      "begrip": "falback",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T10:41:20.602755+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "ik zit idd te broeden om het falback systeem automatisch kenniskaarten te laten invullen. de kaders zijn immers uit te leggen en de voorwaarden"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-e8b41289",
+      "begrip": "daarwerkelijk",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T13:35:51.758869+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "je hebt hem niet daarwerkelijk verplaatst maar is niet erg fix ik"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-93b38729",
+      "begrip": "bedankte",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T13:36:27.574963+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "ik zei dank omdat ik je bedankte voor je reactie"
       },
       "media": {
         "voice_url": null,

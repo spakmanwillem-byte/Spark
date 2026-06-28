@@ -897,6 +897,23 @@ async def compose_response(
         except Exception:
             topic = None
 
+    # v6_diep_memory_layers_001 — cross-session topics + norm-matcher
+    recent_topics: List[Dict] = []
+    relevant_norms: List[Dict] = []
+    try:
+        from modules.chat import diep_memory
+        recent_topics = diep_memory.load_recent_topics(user_id, max_n=5)
+        relevant_norms = diep_memory.find_relevant_norms(user_text, max_n=3)
+        # Schrijf huidige topic naar recent_topics (voor volgende sessie)
+        if topic:
+            diep_memory.record_topic(user_id, topic, session_id=session_id)
+        else:
+            fallback_topic = diep_memory.extract_topic_from_text(user_text)
+            if fallback_topic:
+                diep_memory.record_topic(user_id, fallback_topic, session_id=session_id)
+    except Exception:
+        pass
+
     # v6_spark_self_awareness_001 — laat Spark zijn eigen tabs/capabilities/help kennen
     # v6_spark_help_reuse_001 — help is gradatie-gefilterd per user
     self_awareness_snippet: Optional[str] = None
@@ -958,6 +975,18 @@ async def compose_response(
         "## KB-kaarten (hoge betrouwbaarheid, uit bevestigde kennis):",
         _format_kb_cards(cards),
     ]
+
+    # v6_diep_memory_layers_001 — recent topics (cross-session) + relevant norms
+    try:
+        from modules.chat import diep_memory
+        rt_snippet = diep_memory.format_recent_topics_for_prompt(recent_topics)
+        if rt_snippet:
+            user_prompt_parts += ["", rt_snippet]
+        norm_snippet = diep_memory.format_norms_for_prompt(relevant_norms)
+        if norm_snippet:
+            user_prompt_parts += ["", norm_snippet]
+    except Exception:
+        pass
     if snap_cluster:
         user_prompt_parts += [
             "",

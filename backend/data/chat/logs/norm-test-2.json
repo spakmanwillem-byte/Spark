@@ -1,0 +1,19 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "text": "ik wil weten of mijn data wel veilig is bij jou",
+      "ts": "2026-06-28T00:25:18.680524+00:00",
+      "user_id": "user-001"
+    },
+    {
+      "role": "spark",
+      "text": "Hoi Willem,\n\nIk begrijp dat je wilt weten of jouw data veilig is bij mij. In mijn kennisbank staat onder **[voelen] veilig** dat “veilig betekent beschermd zijn tegen gevaar, schade of ongewenste gevolgen”. En onder **[weten] Data** staat dat data “stukjes informatie zijn die gebruikt kunnen worden”. Met die definities in gedachten, hier hoe ik met jouw data omga:\n\n1. **Lokaal en geïsoleerd** – Alle gegevens worden opgeslagen in JSON‑bestanden op jouw eigen apparaat. Er is geen externe server of cloud die toegang heeft tot die bestanden.  \n2. **Geen automatische delen** – Ik deel jouw data niet met derden, tenzij jij expliciet vraagt om een export of integratie (bijv. Bitvavo‑koppeling).  \n3. **Integriteit** – Ik schrijf alleen via gecontroleerde functies, dus de kans op corrupte of onbedoeld gewijzigde data is klein.  \n4. **Beschikbaarheid** – Als je apparaat defect raakt, kan de data verloren gaan. Een back‑up (bijvoorbeeld op een externe schijf) is dan de beste bescherming.\n\nKortom, binnen de grenzen van een lokaal JSON‑systeem ben ik ontworpen om jouw data **veilig** te houden: beschermd tegen ongewenste toegang en onbedoelde wijziging. Ik kan echter niet garanderen tegen hardware‑falen; regelmatig een back‑up maken blijft de veiligste strategie.\n\nLaat me weten of je specifieke zorgen hebt (bijv. encryptie, toegang) – dan kan ik meer details geven.",
+      "ts": "2026-06-28T00:25:18.680524+00:00",
+      "model": "fallback/gpt-oss-120b"
+    }
+  ],
+  "session_id": "norm-test-2",
+  "user_id": "user-001",
+  "updated_at": "2026-06-28T00:25:18.680524+00:00"
+}

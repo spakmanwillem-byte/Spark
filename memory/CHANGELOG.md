@@ -2,6 +2,57 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-27 (5e batch) — Cross-session topics + Norm-matcher
+
+### 🎯 Doel
+Willem: *"laatste onderwerpen invullen, context kaarten invullen, meer normen en waarden geven aan de hand van context, zelf leren door gesprek"*. Bouwen op het 3-laags geheugen uit batch 4.
+
+### ✅ Nieuwe module: `modules/chat/diep_memory.py`
+**1) Cross-session "laatste onderwerpen"**
+- Per user opgeslagen in `data/users/{user_id}/recent_topics.json`
+- Max 50 retained, top 5 in elke Diep-prompt
+- Per topic: `count`, `first_seen`, `last_seen`, `sessions[]`
+- Dedupe binnen last-3 (count++ ipv duplicate entry)
+- Geïnject als `## Laatste onderwerpen (cross-session)` in user_prompt
+- Auto-record: topic_tracker-output + fallback (`extract_topic_from_text`) — beide zorgen dat elke Diep-call iets registreert
+
+**2) Norm-matcher**
+- Bij elke Diep-call: fuzzy match user-vraag tegen `spark_bijbel.json` (kernwaarden + normen + bijbel_items)
+- token_set_ratio ≥ 50 → top 3 in prompt
+- Geïnject als `## Relevante normen/waarden uit jouw Bijbel`
+- Spark krijgt zo contextueel de juiste normen aangereikt i.p.v. willekeurig
+
+**3) `extract_topic_from_text()` fallback**
+- Als topic_tracker.detect_topic() niets returnt (sessie te kort, geen KB-match), pak zwaarst-wegend content-woord (≥5 letters, niet in uitgebreide STOP-set)
+- Uitgebreide STOP-set: +20 woorden voor minder ruis ("vertel", "graag", "misschien", etc.)
+
+### 📐 Volledig 4-laags geheugen-architectuur (na batch 4 + 5)
+```
+L1 KB-cards (vertrouwen 0.7-1.0)       — "weet ik zeker, kaart [Y]"
+L2 Snap-cluster (vertrouwen 0.3)       — "voor zover ik me herinner"
+L3 Ops-context (live, 1.0)             — "vers uit het systeem"
+L4 Recent topics (cross-session)       — "we hadden het laatst over X"
+L4b Relevant norms (uit Bijbel)        — "hier past kernwaarde [Z]"
+```
+PLUS auto-snap WRITE na elke Diep-call → Spark leert continu.
+
+### 🧪 Tests
+- **3 vragen in sessie A** (crypto/zonne-energie/ML) → topic "crypto" opgeslagen met count=2 (dedupe werkt)
+- **Nieuwe sessie B**: *"wat hadden we laatst besproken?"* → Spark: *"voor zover ik me herinner kwam er kort iets over **crypto** en een 'vertel-moment' aan bod"* ✅ cross-session werkt
+- **Norm-vraag**: *"mag ik een leugentje vertellen?"* → Spark gebruikt KB-kaart **[weten] vriend** + analyseert intentie/vertrouwen → contextueel norm-bewust ✅
+- **Privacy-vraag**: *"is mijn data veilig?"* → Spark refereert **[voelen] veilig** + **[weten] Data** + legt lokale architectuur uit ✅
+
+### 📦 Bestanden
+- **Nieuw**: `modules/chat/diep_memory.py` (~220 regels)
+- **Gewijzigd**: `modules/chat/response_composer.py` (load + inject in user_prompt)
+
+### 🔭 Wat is hierna logisch?
+- **Snap-promotion**: snaps met count ≥ 3 promoten naar echte KB-kaart (admin-approval flow)
+- **Identity-facts laag**: aparte file voor "wat Willem over zichzelf vertelt"
+- **Norm-zachte-druk**: als norm-score > 80, een micro-cue toevoegen aan prompt ("blijf bij kernwaarde [X]")
+
+---
+
 ## 2026-06-27 (4e batch) — Diep krijgt handen: snaps + ops-context
 
 ### 🎯 Doel

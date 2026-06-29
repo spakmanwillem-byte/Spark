@@ -396,14 +396,8 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           {/* v6_charinfo_consolidate_001 — Stats/Aanval/Overig samengevoegd in CharInfoPanel-tabs */}
           {/* v6_dice_001 — Dobbelsteen-paneel met jouw 2 D&D-kaart-avatars */}
           <DiceRollerPanel userId={userId} stats={char.statistieken || {}} onRolled={reload} />
-          {/* v6_bewoners_layout_002 — Bewoners-strip compact 2x3=6 in MID-kolom onder Overig */}
-          <BewonersStripPanel
-            bewoners={bewoners}
-            activeBewonerId={activeBewonerId}
-            onSelect={setActiveBewonerId}
-            char={char}
-            compact={true}
-          />
+          {/* v6_bewoners_remove_001 — Bewoners-strip verwijderd op user-verzoek.
+              Bewoners zelf blijven in data; alleen UI-paneel weg. */}
         </div>
 
         {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Handel === */}

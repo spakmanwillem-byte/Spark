@@ -738,12 +738,37 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "day-test"
+    },
+    {
+      "id": "learned-384c7943655c",
+      "text_hash": "384c7943655c",
+      "original_text": "laat eens zien",
+      "topic": "voorbeeld",
+      "categorie": "praktisch",
+      "intent": "De gebruiker vraagt om een voorbeeld of demonstratie van iets.",
+      "trigger_phrases": [
+        "laat zien",
+        "geef een voorbeeld",
+        "toon een voorbeeld",
+        "demo"
+      ],
+      "keywords": [
+        "voorbeeld",
+        "demonstratie",
+        "show",
+        "laat"
+      ],
+      "status": "pending",
+      "first_seen": "2026-06-29T19:32:52.389421+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": "test-tab"
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 29,
+    "totaal_voorgesteld": 30,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-06-28T16:31:39.995273+00:00"
+    "last_run": "2026-06-29T19:32:52.389421+00:00"
   }
 }

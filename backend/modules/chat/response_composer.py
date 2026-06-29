@@ -57,6 +57,7 @@ async def compose_response(
     user_id: str = "user-001",
     session_id: Optional[str] = None,
     emotion: Optional[str] = None,
+    active_tab: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Hoofdfunctie. Return {success, message, used_cards, used_model}."""
     # v6_deep_side_effects_001 — Detecteer pure action-commands (TTS/STT/ambient toggle).
@@ -347,6 +348,22 @@ async def compose_response(
         # v6_diep_time_001 — tijd-bewustzijn bovenaan zodat Spark altijd weet wanneer
         _format_now_for_prompt(),
         "",
+    ]
+    # v6_tab_context_001 — welke UI-tab kijkt de user nu naar?
+    if active_tab:
+        tab_labels = {
+            "chat": "Gesprekken", "dashboard": "Dashboard", "kennisbank": "Kennisbank V2",
+            "kennisbank-v2": "Kennisbank V2", "agenda": "Agenda", "notities": "Notities",
+            "dagboek": "Dagboek", "community": "Community", "bijdragen": "Bijdragen",
+            "archief": "Archief", "roadmap": "Roadmap", "voice": "Voice",
+            "trader": "Trade-bot", "wallet": "Wallet", "winkel": "Winkelstraat",
+            "boekhouding": "Boekhouding", "settings": "Instellingen",
+            "deploy": "Deploy", "tag-curatie": "Tag-curatie",
+        }
+        tab_label = tab_labels.get(active_tab.lower(), active_tab)
+        user_prompt_parts.append(f"📍 GEBRUIKER KIJKT NU NAAR TAB: **{tab_label}** — als ze vagere vragen stellen zoals 'laat zien' of 'wat is dit', interpreteer dat in de context van deze tab.")
+        user_prompt_parts.append("")
+    user_prompt_parts += [
         "## KB-kaarten (hoge betrouwbaarheid, uit bevestigde kennis):",
         _format_kb_cards(cards),
     ]

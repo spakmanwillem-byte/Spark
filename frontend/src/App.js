@@ -85,7 +85,15 @@ function AppContent() {
 
   // Sync activePage with URL
   useEffect(() => {
-    setActivePage(getPageIdFromPath(location.pathname));
+    const newPage = getPageIdFromPath(location.pathname);
+    setActivePage(newPage);
+    // v6_tab_context_001 — track laatste niet-chat tab voor Spark compose-context
+    try {
+      if (newPage && newPage !== 'chat') {
+        sessionStorage.setItem('spark_last_non_chat_tab', newPage);
+      }
+      sessionStorage.setItem('spark_active_tab', newPage);
+    } catch {}
   }, [location.pathname]);
 
   // Handle navigation from sidebar

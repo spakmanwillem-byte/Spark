@@ -276,9 +276,74 @@ async def _maybe_weekly_report():
         send_weekly_report(also_community=False)
         state["weekly_report_last"] = now.isoformat()
         _save_state(state)
-        print(f"[scheduler] weekly boekhouder report sent")
+        print("[scheduler] weekly boekhouder report sent")
     except Exception as ex:
         print(f"[scheduler] weekly report failed: {ex}")
+
+
+async def _maybe_daily_brief():
+    """v6_daily_brief_scheduler_001 — 1× per dag een Daagse Brief genereren voor
+    elke user die vandaag activiteit had (>= 3 chat-turns). Trigger om 03:00 UTC
+    (rustige uren). Idempotent: state-file voorkomt dubbele run.
+    """
+    now = datetime.now(timezone.utc)
+    # Trigger alleen tussen 02:00-04:00 UTC (rustige uren)
+    if now.hour not in (2, 3):
+        return
+    today = now.date().isoformat()
+    state = _load_state()
+    if state.get("daily_brief_date") == today:
+        return  # al gedraaid vandaag
+
+    try:
+        from modules.spark_planner.brief_builder import build_daily_brief
+        # Vind users met activiteit vandaag
+        chat_logs_dir = DATA / "chat" / "logs"
+        if not chat_logs_dir.exists():
+            return
+
+        # Bron 1: per-user JSON files (user-001.json bv.)
+        active_users = set()
+        for fp in chat_logs_dir.glob("user-*.json"):
+            try:
+                user_id = fp.stem
+                with open(fp, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                # Tel turns van vandaag (ruwe heuristiek: laatste mtime <= 1 dag)
+                mtime = datetime.fromtimestamp(fp.stat().st_mtime, tz=timezone.utc)
+                if (now - mtime).total_seconds() < 86400:
+                    convs = data.get("conversations", []) if isinstance(data, dict) else []
+                    if len(convs) >= 3:
+                        active_users.add(user_id)
+            except Exception:
+                continue
+
+        if not active_users:
+            state["daily_brief_date"] = today
+            state["daily_brief_users"] = 0
+            _save_state(state)
+            return
+
+        # Genereer briefs (max 30 users/dag om budget te bewaken)
+        results = {"success": 0, "skipped": 0, "errors": 0}
+        for user_id in list(active_users)[:30]:
+            try:
+                r = await build_daily_brief(user_id)
+                if r.get("success"):
+                    results["success"] += 1
+                else:
+                    results["skipped"] += 1
+            except Exception as ex:
+                results["errors"] += 1
+                print(f"[scheduler] daily-brief {user_id} failed: {ex}")
+
+        state["daily_brief_date"] = today
+        state["daily_brief_users"] = results["success"]
+        state["daily_brief_results"] = results
+        _save_state(state)
+        print(f"[scheduler] daily briefs: {results}")
+    except Exception as ex:
+        print(f"[scheduler] daily-brief loop failed: {ex}")
 
 
 async def scheduler_loop():
@@ -291,6 +356,7 @@ async def scheduler_loop():
             await _maybe_roar_price_snapshot()
             await _maybe_staking_growth()
             await _maybe_weekly_report()
+            await _maybe_daily_brief()
         except Exception as ex:
             print(f"[scheduler] loop iteration error: {ex}")
         await asyncio.sleep(300)  # 5 min

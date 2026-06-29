@@ -2,6 +2,41 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — Tab-context + Daily-brief scheduler + 3-file refactor + UI schoonmaak
+
+### 🧹 UI Schoonmaak (KennisbankV2Page.js)
+- **Herzien (KB v1) knop verwijderd** — KB v1 is archief sinds 26-06, knop was vestigial
+- **Self-audit knop verwijderd** — endpoint hangde >60s op huidige KB-grootte, info ook via Spark trigger "audit kennis"
+
+### 📍 Tab-context naar Spark compose (`v6_tab_context_001`)
+- `App.js` tracked actieve tab in `sessionStorage.spark_active_tab` + `spark_last_non_chat_tab`
+- `GesprekkenPage.js` stuurt `active_tab` mee in `POST /api/spark/compose`
+- `ComposeRequest` (compose_routes.py) krijgt `active_tab: Optional[str]`
+- `compose_response()` injecteert `📍 GEBRUIKER KIJKT NU NAAR TAB: **{label}**` in user_prompt
+- Live getest: vraag *"laat eens zien"* met `active_tab=agenda` → Spark: *"je bent in de Agenda-tab — wil je overzicht van afspraken?"*
+
+### 📅 Auto-daily-brief scheduler (`v6_daily_brief_scheduler_001`)
+- `modules/scheduler/__init__.py` krijgt `_maybe_daily_brief()` task
+- Trigger om 02:00-04:00 UTC, idempotent via `scheduler_state.daily_brief_date`
+- Scant `chat/logs/user-*.json` op activiteit (≥3 turns, mtime <24h)
+- Genereert per actieve user 1 brief via `build_daily_brief()` (max 30/dag voor budget)
+- Resultaten in `scheduler_state.daily_brief_results: {success, skipped, errors}`
+
+### 🧹 Refactor `smart_intents_service.py` (1205 → 769 regels)
+- Nieuwe `smart_intents_profile.py` (462 regels) bevat: relation_lookup, age_lookup, profile_lookup, _users_data, _resolve_person
+- `smart_intents_service.py` re-exporteert profile-functies onderaan voor backwards-compat
+- Geen caller-updates nodig — `si.detect_profile_lookup()` blijft werken
+- Live getest: *"wie is mijn moeder"* → `Heidi Spakman` ✓
+
+### 🧹 Refactor `chat/routes.py` (2174 → 1845 regels)
+- Nieuwe `chat_extra_routes.py` (365 regels) bevat: logs (GET/DELETE), intent matching, snap, lookup, emotions, shadow observer, welcome, relay-inbox
+- Eigen APIRouter met `/chat` prefix — FastAPI merged op app-level
+- `chat/__init__.py` exporteert `chat_extra_router`
+- `server.py` registreert beide routers met `/api` prefix
+- Live getest: `/api/chat/logs/user-001/stats`, `/api/chat/emotions/state`, `/api/chat/welcome`, `/api/chat/shadow/stats`, `/api/chat/message` — alle 5 werken
+- Lint clean
+
+
 ## 2026-06-29 — Identity-lek fix + Genereer-tunes + response_composer refactor
 
 ### 🚨 BUG (P0) — Identity-lek

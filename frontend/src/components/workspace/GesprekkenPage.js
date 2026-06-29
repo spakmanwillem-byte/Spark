@@ -714,10 +714,13 @@ export function GesprekkenPage({ onNavigate }) {
       // v6_response_composer_001 — Diep-gesprek modus: directe LLM-bridge via /api/spark/compose
       if (deepMode && activeTab === 'spark') {
         try {
+          // v6_tab_context_001 — stuur laatst-bekeken tab mee zodat Spark context heeft
+          let lastTab = null;
+          try { lastTab = sessionStorage.getItem('spark_last_non_chat_tab') || sessionStorage.getItem('spark_active_tab'); } catch {}
           const r = await fetch(`${API}/api/spark/compose`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}` }),
+            body: JSON.stringify({ text, user_id: userId, session_id: `deep-${userId}`, active_tab: lastTab || undefined }),
           });
           const d = await r.json();
 

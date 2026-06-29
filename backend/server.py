@@ -117,8 +117,9 @@ from modules.achievements import achievements_router
 app.include_router(achievements_router, prefix="/api")
 
 # Module 5: Chat (Snap + NLP + Knowledge Lookup)
-from modules.chat import chat_router
+from modules.chat import chat_router, chat_extra_router
 app.include_router(chat_router, prefix="/api")
+app.include_router(chat_extra_router, prefix="/api")
 
 from modules.contributions.routes import router as contributions_router
 app.include_router(contributions_router)

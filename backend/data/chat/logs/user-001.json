@@ -50235,11 +50235,81 @@
         "session_id": "day-test",
         "gesprek_nummer": 1938
       }
+    },
+    {
+      "id": "conv-fa250e5e",
+      "timestamp": "2026-06-29T19:32:51.727124+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "laat eens zien",
+      "spark_response": "De Willem, je bent nu in de Agenda-tab. Als je \"laat eens zien\" zegt, neem ik aan dat je wilt weten wat er in je agenda staat. Wil je een overzicht van je afspraken of taken voor vandaag of morgen? Of wil je iets specifieks zien?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-3f69e8d4",
+          "kbv2-3f69e8d4",
+          "kbv2-2363b526",
+          "kbv2-5a66829f",
+          "kbv2-7badb7d5"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "test-tab",
+        "gesprek_nummer": 1939
+      }
+    },
+    {
+      "id": "conv-0cc8f3c5",
+      "timestamp": "2026-06-29T19:34:35.272085+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "wie is mijn moeder",
+      "spark_response": "Jouw **moeder**:\n- **Heidi Spakman**\n- **Jarig**",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "my_relation_lookup",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "my_relation_lookup"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1940
+      }
+    },
+    {
+      "id": "conv-2cde35bb",
+      "timestamp": "2026-06-29T19:37:12.624247+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo De Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1941
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1938,
-    "last_updated": "2026-06-28T16:31:39.518319+00:00"
+    "total_conversations": 1941,
+    "last_updated": "2026-06-29T19:37:12.624247+00:00"
   }
 }

@@ -95,6 +95,18 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 - **A – Semantic intent matcher (iter_38-39)**: rapidfuzz token_set_ratio. Spark begrijpt synoniemen ('doe een potje sps', 'kunnen we sps spelen', 'zet je stem aan') zonder hardcoded lijsten.
 - **HIGH bug-fix**: `_get_user_meta` las niet-bestaand `data/auth/users.json` → user-001 kreeg gradatie 2. Nu primary `data/system/users.json` + is_admin-detectie via rol='Beheerder'.
 
+### 🟢 Sessie 32 (2026-06-29) — Schoonmaak + tab-context + scheduler + 3-file refactor
+- ✅ **Identity-lek (P0)** — Spark sprak nieuwe users aan met "Willem" (zie CHANGELOG)
+- ✅ **Genereer (LLM) knop in KennisbankV2** — inbox-kaarten auto-invullen via Groq
+- ✅ **Genereer prompt-tunes** — minimum word counts, max_tokens 800→1800, 4 systeem-tags beschermd
+- ✅ **Herzien (KB v1) knop weg** uit Kennisbank-toolbar (v1 archief sinds 26-06)
+- ✅ **Self-audit knop weg** (endpoint hangde >60s; functionaliteit blijft via Spark-trigger)
+- ✅ **Tab-context naar Spark compose** (v6_tab_context_001) — actieve tab in sessionStorage → payload → system_prompt
+- ✅ **Auto-daily-brief scheduler** (v6_daily_brief_scheduler_001) — 02:00-04:00 UTC, max 30 users/dag
+- ✅ **`response_composer.py` refactor** 1212 → **528** regels + composer_helpers.py (695)
+- ✅ **`smart_intents_service.py` refactor** 1205 → **769** regels + smart_intents_profile.py (462)
+- ✅ **`chat/routes.py` refactor** 2174 → **1845** regels + chat_extra_routes.py (365) — eigen router met zelfde /chat prefix
+
 ### 🟡 Backlog (uit code-reviews iter_38+39)
 - `response_composer.py` 721 regels → splitsen in fast_paths/self_awareness/compose_core. P2.
 - Logger.warning bij silent fallback `_get_user_meta`. P3.

@@ -23,6 +23,7 @@ class ComposeRequest(BaseModel):
     user_id: Optional[str] = "user-001"
     session_id: Optional[str] = None
     emotion: Optional[str] = None
+    active_tab: Optional[str] = None  # v6_tab_context_001 — welke tab user nu bekijkt
 
 
 @router.post("")
@@ -35,6 +36,7 @@ async def compose(req: ComposeRequest):
         user_id=req.user_id or "user-001",
         session_id=req.session_id,
         emotion=req.emotion,
+        active_tab=req.active_tab,
     )
     return result
 

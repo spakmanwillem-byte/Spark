@@ -394,8 +394,9 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             onOpenAvatarSettings={onOpenAvatarSettings}
           />
           {/* v6_charinfo_consolidate_001 — Stats/Aanval/Overig samengevoegd in CharInfoPanel-tabs */}
-          {/* v6_dice_001 — Dobbelsteen-paneel met jouw 2 D&D-kaart-avatars */}
-          <DiceRollerPanel userId={userId} stats={char.statistieken || {}} onRolled={reload} />
+          {/* v6_dice_panel_remove_001 — DiceRollerPanel verwijderd op user-verzoek
+              (avatar-only kader was overbodig; functionaliteit komt later terug in andere vorm).
+              Stats blijven in CharInfoPanel "STATISTIEKEN" tab. */}
           {/* v6_bewoners_remove_001 — Bewoners-strip verwijderd op user-verzoek.
               Bewoners zelf blijven in data; alleen UI-paneel weg. */}
         </div>
@@ -1084,8 +1085,9 @@ function OverigPanel({ char, userId }) {
     fetch(`${API}/api/games/rps/stats?user_id=${userId}`)
       .then(r => r.json())
       .then(d => setRps({
-        battles_won: d.stats?.battles_won || 0,
-        battles_lost: d.stats?.battles_lost || 0,
+        // v6_charsheet_rps_correct_001 — gebruik echte wins/losses ipv legacy battles_*
+        battles_won: d.stats?.wins ?? d.stats?.battles_won ?? 0,
+        battles_lost: d.stats?.losses ?? d.stats?.battles_lost ?? 0,
         gold: d.stats?.gold ?? 1000,
       }))
       .catch(() => {});
@@ -1879,8 +1881,9 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
     fetch(`${API}/api/games/rps/stats?user_id=${userId}`)
       .then(r => r.json())
       .then(d => setRps({
-        battles_won: d.stats?.battles_won || 0,
-        battles_lost: d.stats?.battles_lost || 0,
+        // v6_charsheet_rps_correct_001 — gebruik echte wins/losses ipv legacy battles_*
+        battles_won: d.stats?.wins ?? d.stats?.battles_won ?? 0,
+        battles_lost: d.stats?.losses ?? d.stats?.battles_lost ?? 0,
         gold: d.stats?.gold ?? 1000,
       }))
       .catch(() => {});

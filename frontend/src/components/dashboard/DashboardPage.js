@@ -183,10 +183,10 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <QuickStat icon={BookOpen} value={kbTotal.toLocaleString()} label="Kaarten" color="#f59e0b" />
+            {isAdminUser && <QuickStat icon={BookOpen} value={kbTotal.toLocaleString()} label="Kaarten" color="#f59e0b" />}
             {isAdminUser && <QuickStat icon={Zap} value="156" label="Triggers" color="#22c55e" />}
             {isAdminUser && <QuickStat icon={Users} value={totalUsers} label="Users" color="#3b82f6" />}
-            <QuickStat icon={FolderOpen} value={totalFiles} label="Bestanden" color="#a855f7" />
+            {isAdminUser && <QuickStat icon={FolderOpen} value={totalFiles} label="Bestanden" color="#a855f7" />}
           </div>
         </div>
 
@@ -198,7 +198,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
 
           {/* === Col 1: Knowledge Base (span 4) === */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            {/* KB Overview */}
+            {/* v6_dash_privacy_001 — KB Overview alleen voor admin */}
+            {isAdminUser && (
             <Card title="Kennisbank" icon={Brain} accent="#f59e0b" badge={`${kbPercent}% compleet`} badgeColor="#22c55e" onClick={() => onNavigate('knowledge', '/knowledge')}>
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <MiniStat label="Totaal" value={kbTotal.toLocaleString()} color="#f59e0b" />
@@ -217,6 +218,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 </div>
               </div>
             </Card>
+            )}
 
             {/* v5_dashboard_kbv2_001 — KB v2 Lades verdeling (ADMIN gradatie ≤ 2) */}
             {isAdminUser && kbv2Stats && (
@@ -280,7 +282,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </Card>
             )}
 
-            {/* Emoties */}
+            {/* Emoties — v6_dash_privacy_001 ADMIN ONLY */}
+            {isAdminUser && (
             <Card title="Emotie Systeem" icon={Sparkles} accent="#ec4899" onClick={() => onNavigate('emotions', '/spark/emotions')}>
               <div className="flex items-center justify-between">
                 {[
@@ -298,6 +301,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 ))}
               </div>
             </Card>
+            )}
           </div>
 
           {/* === Col 2: System + Verbanden (span 5) === */}
@@ -331,7 +335,8 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
             </Card>
             )}
 
-            {/* Verbanden / Knowledge Graph */}
+            {/* Verbanden / Knowledge Graph — v6_dash_privacy_001 ADMIN ONLY */}
+            {isAdminUser && (
             <Card title="Verbanden" icon={Network} accent="#06b6d4" badge={`${kbTotal} nodes`} badgeColor="#06b6d4" onClick={() => onNavigate('connections', '/spark/connections')}>
               <div className="aspect-[16/9] bg-slate-800/30 rounded-xl border border-slate-700/50 relative overflow-hidden">
                 {/* Simulated knowledge graph nodes */}
@@ -353,6 +358,7 @@ export function DashboardPage({ activePage = 'dashboard', onNavigate }) {
                 </svg>
               </div>
             </Card>
+            )}
           </div>
 
           {/* === Col 3: Users + Files + Agenda (span 3) === */}

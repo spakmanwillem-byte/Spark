@@ -81,10 +81,12 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
   const dorpImg = dorpCard?.media?.image_urls?.[0] ? `${API}${dorpCard.media.image_urls[0]}` : null;
 
   // Resolve each building to a card from gameCards
+  // v6_dnd_card_lookup_002 — altijd lookup; placeholder is dynamic afhankelijk van
+  // of we een matching kaart vinden (niet meer een statische flag).
   const buildings = BUILDING_LAYOUT.map(b => {
-    const card = b.placeholder ? null : findCardFor(b.keywords, gameCards);
+    const card = findCardFor(b.keywords, gameCards);
     const img = card?.media?.image_urls?.[0] ? `${API}${card.media.image_urls[0]}` : null;
-    return { ...b, card, img };
+    return { ...b, card, img, placeholder: !card && !b.central };
   });
 
   return (

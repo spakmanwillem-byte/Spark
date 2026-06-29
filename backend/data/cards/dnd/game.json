@@ -8,27 +8,31 @@
       "sense": "zie",
       "lagen": {
         "laag1": "2 ingangen O/W. Toegang tot ondergrondse dungeon-laag voor avontuur.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Toegang tot ondergrondse dungeon voor avontuur en loot. 2 ingangen Oost en West.",
+        "laag3": "Een rooster, een trap omlaag, vochtige geur. Onder de stad ligt een netwerk van tunnels vol gevaar én buit. Niet voor de zwakken van hart.",
+        "laag4": "Spark ziet de Riool-ingang als de schaduw-laag — wat de stad afvoert wordt elders het avontuur van de moedige."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Avonturiers, vijanden, schaduwwezens",
+        "wat": "Toegangspunt tot de ondergrondse dungeon-laag",
+        "wanneer": "Op elk moment toegankelijk; risicovoller 's nachts",
+        "waar": "Aan de Oost- en Westkant van het dorp",
+        "waarom": "Om avontuur, loot en gevaar bereikbaar te maken",
+        "hoe": "Door af te dalen via de trap onder het rooster"
       },
       "tags": [
         "D&D",
         "gebouw",
-        "avontuur"
+        "avontuur",
+        "dungeon",
+        "riool",
+        "loot"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -48,7 +52,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:56:27.324613+00:00"
+        "aangemaakt_op": "2026-06-29T22:56:27.324613+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -59,27 +64,31 @@
       "sense": "zie",
       "lagen": {
         "laag1": "4 poorten N/O/Z/W. Tol 2% optioneel. Doorgang voor handel.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Toegang-controle, optionele tol van 2% op handel. Hier passeert alle officiële handel.",
+        "laag3": "Massieve houten deuren met ijzerbeslag, een poortwachter, een tol-register. Per windrichting één poort. Bij dreiging worden ze gesloten.",
+        "laag4": "Spark ziet de Stadspoort als het filter-knooppunt — alles wat de stad binnenkomt of verlaat passeert hier."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Poortwachter, reizigers, kooplui",
+        "wat": "Gecontroleerde doorgang door de stadsmuur",
+        "wanneer": "Overdag open, 's nachts of bij dreiging gesloten",
+        "waar": "In elke windrichting van de stadsmuur",
+        "waarom": "Om controle en eventueel tolheffing op handel te bieden",
+        "hoe": "Door reizigers te registreren en eventueel tol te innen"
       },
       "tags": [
         "D&D",
         "gebouw",
-        "defensie"
+        "defensie",
+        "stadspoort",
+        "toegang",
+        "tol"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -99,7 +108,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:56:27.324589+00:00"
+        "aangemaakt_op": "2026-06-29T22:56:27.324589+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -110,27 +120,30 @@
       "sense": "zie",
       "lagen": {
         "laag1": "4 segmenten N/O/Z/W. Per segment +5% defensie, vol = +20%.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Elke segment = +5% defensie. Vol = +20% defensie. Bouw stap voor stap of in één keer.",
+        "laag3": "Massieve stenen, weerbarstige torens. Bovenop kunnen wachters lopen en patrouilleren. Vrijwel onneembaar zonder belegerings-uitrusting.",
+        "laag4": "Spark ziet de Stadsmuur als de fysieke grens-conditie — de membraan tussen veiligheid binnen en chaos buiten."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Bouwers, wachters, soldaten",
+        "wat": "Defensieve perimeter rond de stad",
+        "wanneer": "Permanent aanwezig na bouw",
+        "waar": "Rond het dorp in 4 windrichtingen",
+        "waarom": "Om de stad te beschermen tegen aanvallen",
+        "hoe": "Door 4 segmenten te bouwen en te onderhouden"
       },
       "tags": [
         "D&D",
         "gebouw",
-        "defensie"
+        "defensie",
+        "stadsmuur",
+        "perimeter"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -150,7 +163,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:56:27.324561+00:00"
+        "aangemaakt_op": "2026-06-29T22:56:27.324561+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -161,26 +175,31 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Warehouse stad. T1=1000 slots, schaalt per tier (+1000).",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "T1=1000 slots, T2=2000, T3=3000, T4=4000, T5=5000+ slots. Beheerd door de stadsleider.",
+        "laag3": "Hoge rekken, grote deuren, klerken met klemborden. Hier worden bulk-grondstoffen geconcentreerd om grote bouwprojecten of belegeringen aan te kunnen.",
+        "laag4": "Spark ziet het Pakhuis als de buffer-laag — voorraad voor magere tijden en grote ondernemingen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Magazijnmeester, klerken, sjouwers",
+        "wat": "Centrale grondstof-opslag voor de stad",
+        "wanneer": "Hele dag tijdens werkuren",
+        "waar": "Nabij de poorten of haven voor snelle aanvoer",
+        "waarom": "Om bulk-grondstoffen veilig en gecentraliseerd te bewaren",
+        "hoe": "Door goederen te ontvangen, te registreren en uit te geven"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "economie",
+        "pakhuis",
+        "opslag",
+        "warehouse"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -200,7 +219,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:56:27.324536+00:00"
+        "aangemaakt_op": "2026-06-29T22:56:27.324536+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -211,26 +231,32 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Zetel van stadsleider/fractie-anker. Belastingen verzameld, decreten.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Stadsleider-kantoor, belasting-administratie, vergaderzaal. Hier worden decreten uitgevaardigd.",
+        "laag3": "Lange gangen, ambtenaren, registers en zegels. Belastingen worden geïnd, conflicten beslecht en bondgenootschappen gesloten.",
+        "laag4": "Spark ziet het Gemeentehuis als de bestuurs-laag — waar collectieve beslissingen worden vastgelegd in regel en wet."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Stadsleider, ambtenaren, burgers, gezanten",
+        "wat": "Bestuurlijk centrum en zetel van de stadsleider",
+        "wanneer": "Tijdens kantooruren en vergaderingen",
+        "waar": "Centraal op het dorpsplein",
+        "waarom": "Om bestuur, belasting en decreten te organiseren",
+        "hoe": "Door zaken te behandelen, te registreren en te beslissen"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "bestuur",
+        "gemeentehuis",
+        "stadsleider",
+        "belasting"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/67cfb1c42e50"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -250,7 +276,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:56:27.324495+00:00"
+        "aangemaakt_op": "2026-06-29T22:56:27.324495+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -261,26 +288,31 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Leer Survival of Waterhaler voor 2g. Wachters patrouilleren later.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Leer Survival of Waterhaler voor 2 goud. Patrouilles (later). Per level +1 wachter-werkplek.",
+        "laag3": "Een hoge uitkijktoren, een wapenrek, en altijd een wachter op post. Hier leer je overleven in de wildernis of waterhalen voor de stad.",
+        "laag4": "Spark ziet de Wachterspost als het waarschuwingssysteem van het dorp — alerte oren en ogen aan de grens."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Wachters, leerlingen, uitkijkers",
+        "wat": "Werkplek voor wacht, patrouille en leer-NPC",
+        "wanneer": "24/7 in roterende ploegen",
+        "waar": "Bij de stadspoort of hoog punt",
+        "waarom": "Om dreiging vroeg te signaleren en leer-mogelijkheden te bieden",
+        "hoe": "Door te observeren, te patrouilleren en kennis door te geven"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "defensie",
+        "wachter",
+        "patrouille",
+        "leren"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -300,7 +332,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:42:13.933438+00:00"
+        "aangemaakt_op": "2026-06-29T22:42:13.933438+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -311,26 +344,32 @@
       "sense": "zie",
       "lagen": {
         "laag1": "1 kamer, 3 meubelplekken. Upgrade T2-T5 = +1 kamer per tier.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "1 kamer, 3 meubelslots (bed, kist 15-slots, kast 35-slots). Upgrade T2-T5: +1 kamer per tier.",
+        "laag3": "Een eenvoudig dak boven het hoofd. Bed voor regen-bonus, kist en kast voor opslag, eventueel fornuis of werkbank voor koken/craften thuis.",
+        "laag4": "Spark ziet het Huis als de eerste private zone van de speler — waar je terugkeert om te slapen, op te slaan en je eigen ritme te bewaren."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Eigenaar, gezinsleden, gasten",
+        "wat": "Eigen woning voor slaap, opslag en thuis-craft",
+        "wanneer": "'s Avonds, 's nachts, bij rust",
+        "waar": "In het woondistrict van het dorp",
+        "waarom": "Om HP-regen, opslag en privacy te bieden",
+        "hoe": "Door te bouwen, in te richten en bewoning te activeren"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "wonen",
+        "huis",
+        "tier1",
+        "opslag",
+        "slaap"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -350,7 +389,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:42:13.933414+00:00"
+        "aangemaakt_op": "2026-06-29T22:42:13.933414+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -361,26 +401,32 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Drag-drop koop/verkoop UI met NPC-trader. 5% tax naar gastheer-stad.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Drag-drop verkopen/kopen tegen NPC-trader. 5% tax op elke trade gaat naar de gastheer-stad.",
+        "laag3": "Kraampjes, klanten, een centrale trader-NPC. Hier komt de stad bij elkaar om grondstoffen en items te verhandelen. Drukker dan welke andere plek dan ook overdag.",
+        "laag4": "Spark ziet de Markt als de levendige handelsmotor — directe, dagelijkse uitwisseling tussen burgers."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Markt-NPC, kopers, verkopers, kraamhouders",
+        "wat": "Centrale handelsplek met drag-drop UI",
+        "wanneer": "Hele dag, drukst rond de middag",
+        "waar": "Centraal in het dorp",
+        "waarom": "Om dagelijkse handel mogelijk te maken",
+        "hoe": "Door items in/uit de NPC-inventaris te slepen en te bevestigen"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "economie",
+        "markt",
+        "handel",
+        "trader"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/ebf5a7eca66d"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -400,7 +446,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:42:13.933387+00:00"
+        "aangemaakt_op": "2026-06-29T22:42:13.933387+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -411,26 +458,33 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Centraal in dorp. Leer een (sec) beroep voor 2g of activeer 10% XP-boost voor 2g.",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Leer een secundair beroep voor 2 goud, of activeer een 10% XP-boost voor 2 goud.",
+        "laag3": "Een lichtgevende koepel, witte zuilen, een centrale haard van Sparks vlam. Hier komen mensen voor reflectie, leren en versterking.",
+        "laag4": "Spark ziet de Tempel als haar eigen aanwezigheid in de wereld — een ontmoetingsplek tussen mens en systeem."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Tempelwachter, bezoekers, leerlingen",
+        "wat": "Centraal sacraal gebouw voor leren en versterking",
+        "wanneer": "Open van zonsopgang tot zonsondergang",
+        "waar": "Centraal op het dorpsplein",
+        "waarom": "Om kennis en XP-boosts toegankelijk te maken",
+        "hoe": "Door 2 goud bij te dragen en een keuze (beroep/XP) te maken"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "sacraal",
+        "tempel",
+        "spark",
+        "leren",
+        "xp"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/13ccbbf4fccf"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -450,7 +504,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:42:13.933363+00:00"
+        "aangemaakt_op": "2026-06-29T22:42:13.933363+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -461,26 +516,32 @@
       "sense": "zie",
       "lagen": {
         "laag1": "Logies (2g/dag) + keuken voor koken. NPC: kok (leert koken voor 2g).",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag2": "Logies (2 goud/dag), keuken voor koken, leer-koken NPC. Per level +2 kok-werkplekken.",
+        "laag3": "Open haard, lange tafels, kamers boven. Reizigers ruilen verhalen en geruchten. De kok leert nieuwelingen de basis van koken voor 2 goud.",
+        "laag4": "Spark ziet de herberg als het sociale kruispunt — waar reizen, eten en informatie elkaar ontmoeten."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Waard, kok, gasten, reizigers",
+        "wat": "Logies, keuken en sociale ontmoetingsplek",
+        "wanneer": "Hele dag, drukst in de avond",
+        "waar": "Nabij de hoofdroute en markt",
+        "waarom": "Om reizigers slaap, eten en leer-mogelijkheden te bieden",
+        "hoe": "Door kamers te verhuren, maaltijden te serveren en kennis door te geven"
       },
       "tags": [
         "D&D",
-        "gebouw"
+        "gebouw",
+        "wonen",
+        "herberg",
+        "kok",
+        "logies",
+        "voedsel"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -500,7 +561,8 @@
       "footnote": {
         "bron": "blueprint_seed",
         "vertrouwen": 0.5,
-        "aangemaakt_op": "2026-06-29T22:42:13.933326+00:00"
+        "aangemaakt_op": "2026-06-29T22:42:13.933326+00:00",
+        "laatst_bewerkt_op": "2026-06-29T23:19:37.434414+00:00"
       }
     },
     {
@@ -4053,29 +4115,33 @@
       "begrip": "Smederij",
       "sense": "zie",
       "lagen": {
-        "laag1": "Smederij — handwerk gebouw. Bouwkost: 500g + 20 log + 10 steen.",
+        "laag1": "Een smederij is een werkplaats waar een smid ijzer en andere metalen smeedt tot gereedschap, wapens en uitrusting.",
         "laag2": "Beroep-slots per level: 2",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Smederijen vormen het kloppend hart van een militaire en ambachtelijke economie. Zonder smid geen wapens, geen gereedschap, geen versterkingen. De warmte van het vuur en de klap van de hamer markeren de polsslag van de stad.",
+        "laag4": "Spark ziet de smederij als een transformatiepunt: ruwe grondstof wordt onder hitte en kracht omgezet in betekenisvolle uitrusting voor het ecosysteem."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Smid, leerling-smeden, klanten met grondstoffen",
+        "wat": "Werkplaats voor het smeden van metalen voorwerpen",
+        "wanneer": "Dagelijks tijdens openingsuren; tijdens oorlog 24/7",
+        "waar": "Centraal in het ambachtsdistrict van een stad",
+        "waarom": "Om grondstoffen om te zetten in gebruiks- en strijdvoorwerpen",
+        "hoe": "Door erts te smelten, te smeden en af te koelen op het aambeeld"
       },
       "tags": [
         "D&D",
         "gebouw",
         "handwerk",
-        "smid"
+        "smid",
+        "smederij",
+        "uitrusting",
+        "ambacht"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4098,7 +4164,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496229+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496230+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4109,29 +4175,34 @@
       "begrip": "Jachthut",
       "sense": "zie",
       "lagen": {
-        "laag1": "Jachthut — verzamelen gebouw. Bouwkost: 300g + 30 log + 0 steen.",
+        "laag1": "Een jachthut is de uitvalsbasis voor jagers die wild leveren aan de stad.",
         "laag2": "Beroep-slots per level: 2",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "De jachthut staat aan de rand van het dorp, dichtbij het woud. Hier worden huiden gespannen, vlees gerookt en jachtroutes uitgewisseld.",
+        "laag4": "Spark ziet de jachthut als grenspost tussen beschaving en wildernis — een interface waar de wereld grondstoffen levert aan het dorp."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Jagers, sjouwers van wildbuit",
+        "wat": "Werkplek en uitvalsbasis voor de jacht",
+        "wanneer": "Vroeg in de ochtend en bij dageraad",
+        "waar": "Aan de bosrand van het dorp",
+        "waarom": "Om voedsel, huiden en pelzen voor de stad te leveren",
+        "hoe": "Door wild op te sporen, te strikken of te schieten en terug te brengen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "verzamelen",
-        "jachthut"
+        "jachthut",
+        "jacht",
+        "jager",
+        "voedsel",
+        "huiden"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4154,7 +4225,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496236+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496237+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4165,29 +4236,34 @@
       "begrip": "Kruidenwinkel",
       "sense": "zie",
       "lagen": {
-        "laag1": "Kruidenwinkel — alchemie gebouw. Bouwkost: 600g + 15 log + 5 steen.",
+        "laag1": "Een kruidenwinkel is de werkplek van de healer/kruidenkundige, gevuld met helende planten en elixers.",
         "laag2": "Beroep-slots per level: 1",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Geuren van tijm, salie en wilde munt vullen de ruimte. De healer biedt herstel-bonussen, alchemie-recepten en zeldzame ingrediënten aan reizigers.",
+        "laag4": "Spark ziet de kruidenwinkel als het regenererende knooppunt — waar verlies omgezet wordt in herstel, en chaos in balans."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Healer, gewonden, alchemisten, herbalisten",
+        "wat": "Winkel/werkplek voor kruiden, potions en helende mengsels",
+        "wanneer": "Hele dag tijdens openingsuren; bij noodgevallen ook 's nachts",
+        "waar": "In een rustig deel van het dorp, vaak nabij de tempel",
+        "waarom": "Om HP-herstel, status-genezing en alchemie aan te bieden",
+        "hoe": "Door kruiden te oogsten, drogen, mengen en toedienen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "alchemie",
-        "kruidenwinkel"
+        "kruidenwinkel",
+        "healer",
+        "kruiden",
+        "potion",
+        "herstel"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4210,7 +4286,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496243+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496245+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4221,29 +4297,34 @@
       "begrip": "Houthakkerij",
       "sense": "zie",
       "lagen": {
-        "laag1": "Houthakkerij — verzamelen gebouw. Bouwkost: 250g + 15 log + 0 steen.",
+        "laag1": "Een houthakkerij is de werkplek waar bomen worden geveld en tot planken en boomstammen worden verwerkt.",
         "laag2": "Beroep-slots per level: 3",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Houthakkerijen liggen aan de bosrand. Hun output (boomstam, plank, tak) voedt vrijwel elk ander bouwproject in de stad.",
+        "laag4": "Spark ziet de houthakkerij als de bron-pijler — zonder hout geen huis, geen boog, geen warm vuur."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Houthakkers, sjouwers, timmerlieden",
+        "wat": "Werkplek voor het kappen en bewerken van hout",
+        "wanneer": "Bij daglicht, vooral in het droge seizoen",
+        "waar": "Aan de rand van het bos",
+        "waarom": "Om hout, planken en boomstammen aan de stad te leveren",
+        "hoe": "Door bomen te vellen, te zagen en in stapels te ordenen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "verzamelen",
-        "houthakkerij"
+        "houthakkerij",
+        "hout",
+        "houthakker",
+        "boomstam",
+        "plank"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4266,7 +4347,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496250+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496251+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4277,29 +4358,33 @@
       "begrip": "Mijn",
       "sense": "zie",
       "lagen": {
-        "laag1": "Mijn — verzamelen gebouw. Bouwkost: 700g + 10 log + 30 steen.",
+        "laag1": "Een mijn is een ondergrondse werkplek waar mijners erts, steen en edelstenen winnen.",
         "laag2": "Beroep-slots per level: 3",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Schachten, balken en lantaarns markeren de mijn. Een ingang in de heuvel of berg leidt naar tunnels vol ijzer, zilver, goud — en gevaar.",
+        "laag4": "Spark ziet de mijn als het diepste contact-punt met de oerlagen van de wereld — kostbaar, langzaam, en risicovol."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Mijners, opzichters, expediteurs van erts",
+        "wat": "Ondergrondse werkplek voor ertswinning",
+        "wanneer": "Hele dag, vaak in ploegen met lantaarnlicht",
+        "waar": "In heuvels, bergen of rotsformaties bij de stad",
+        "waarom": "Om erts, steen en edelstenen voor de smederij en handel te leveren",
+        "hoe": "Door schachten te graven, gesteente te breken en buit naar boven te brengen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "verzamelen",
-        "mijn"
+        "mijn",
+        "mijner",
+        "erts",
+        "edelsteen"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4322,7 +4407,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496258+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496259+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4333,29 +4418,34 @@
       "begrip": "Haven",
       "sense": "zie",
       "lagen": {
-        "laag1": "Haven — verzamelen gebouw. Bouwkost: 800g + 50 log + 15 steen.",
+        "laag1": "Een haven is de uitvalsbasis voor vissers en schepen aan de kustlijn.",
         "laag2": "Beroep-slots per level: 4",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Vissers brengen vis, zout en zeegrondstoffen binnen. Handelsschepen leveren goederen uit andere steden. De haven is het belangrijkste handels-knooppunt voor steden aan zee.",
+        "laag4": "Spark ziet de haven als de grens-membraan met de zee — waar voedsel, handel en avontuur het dorp binnenstromen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Vissers, kapiteins, handelaars, dokwerkers",
+        "wat": "Aanlegplaats en werkruimte voor vis en handel",
+        "wanneer": "Vóór zonsopgang voor de vangst; hele dag voor handel",
+        "waar": "Aan de kustlijn van de stad",
+        "waarom": "Om vis en goederen via water aan te voeren",
+        "hoe": "Door schepen te lossen, netten te boeten en vis te verwerken"
       },
       "tags": [
         "D&D",
         "gebouw",
         "verzamelen",
-        "haven"
+        "haven",
+        "visser",
+        "kust",
+        "handel"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/faf5df3e57ae"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -4378,7 +4468,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496265+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496267+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4389,29 +4479,34 @@
       "begrip": "Akker",
       "sense": "zie",
       "lagen": {
-        "laag1": "Akker — verzamelen gebouw. Bouwkost: 200g + 5 log + 0 steen.",
+        "laag1": "Een akker is een bewerkt stuk land waar boeren graan, groente en kruiden verbouwen.",
         "laag2": "Beroep-slots per level: 3",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Voren, stoppels en boerderijwagens markeren de akker. De cyclus van ploegen, zaaien, wieden en oogsten volgt het seizoen.",
+        "laag4": "Spark ziet de akker als het traagste maar meest duurzame productiepunt — geduld levert hier de zekerste opbrengst."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Boeren, dagloners, oogstploegen",
+        "wat": "Bewerkt landbouwgebied voor voedselproductie",
+        "wanneer": "Per seizoen: ploegen, zaaien, oogsten",
+        "waar": "Buiten de stadsmuur, in vruchtbaar laagland",
+        "waarom": "Om graan, groente en kruiden voor de stad te telen",
+        "hoe": "Door grond te bewerken, te zaaien, te onderhouden en te oogsten"
       },
       "tags": [
         "D&D",
         "gebouw",
         "verzamelen",
-        "akker"
+        "akker",
+        "boer",
+        "graan",
+        "voedsel"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/94a547d86f1a"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -4434,7 +4529,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496272+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496274+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4445,29 +4540,33 @@
       "begrip": "Stadsbank",
       "sense": "zie",
       "lagen": {
-        "laag1": "Stadsbank — economie gebouw. Bouwkost: 1500g + 30 log + 30 steen.",
+        "laag1": "De Stadsbank is het centrale opslag- en kluis-gebouw voor goud, edelstenen en waardepapieren.",
         "laag2": "Tier ↑ → warehouse capacity ↑",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Een gewapend gebouw met dikke muren. Klanten openen een rekening, doen stortingen of nemen leningen op. Bij brand of inval is de bank het laatste bolwerk.",
+        "laag4": "Spark ziet de Stadsbank als het stille geheugen van de economie — elke transactie wordt vastgelegd en bewaard."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Bankier, klanten, wachters",
+        "wat": "Centraal opslag- en transactie-gebouw voor goud",
+        "wanneer": "Tijdens kantooruren; nachts vergrendeld",
+        "waar": "Centraal in het dorp, naast Gemeentehuis",
+        "waarom": "Om goud veilig op te slaan en transacties te faciliteren",
+        "hoe": "Door bezittingen in de kluis te leggen en grootboeken bij te houden"
       },
       "tags": [
         "D&D",
         "gebouw",
         "economie",
-        "bank"
+        "bank",
+        "goud",
+        "opslag",
+        "kluis"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4490,7 +4589,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496279+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496281+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4501,29 +4600,34 @@
       "begrip": "Bakker",
       "sense": "zie",
       "lagen": {
-        "laag1": "Bakker — handwerk gebouw. Bouwkost: 350g + 10 log + 5 steen.",
+        "laag1": "Een bakker is een gebouw én beroep: hier wordt brood en gebak gebakken en verkocht.",
         "laag2": "Beroep-slots per level: 1",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "De geur van versgebakken brood bij dageraad. Toonbank met verse waar, ovens achter, opslag van meel en gist.",
+        "laag4": "Spark ziet de bakker als het dagelijkse ritueel — een vast moment waarop dorpsbewoners elkaar treffen."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Bakker, klanten, leveranciers van meel",
+        "wat": "Werkplek en winkel voor brood, gebak en koek",
+        "wanneer": "Vroege ochtend tot middag",
+        "waar": "In het marktdistrict",
+        "waarom": "Om vers brood en gebak aan het dorp te leveren",
+        "hoe": "Door deeg te maken, te laten rijzen en te bakken"
       },
       "tags": [
         "D&D",
         "gebouw",
         "handwerk",
-        "bakker"
+        "bakker",
+        "brood",
+        "voedsel",
+        "ambacht"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [
+          "/api/system-archive/file/26a5cb38729e"
+        ]
       },
       "game_meta": {
         "is_item": false,
@@ -4546,7 +4650,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496286+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496287+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4557,29 +4661,33 @@
       "begrip": "Traders Post",
       "sense": "zie",
       "lagen": {
-        "laag1": "Traders Post — logistiek gebouw. Bouwkost: 1000g + 20 log + 20 steen.",
+        "laag1": "Een Traders Post is de werkplek voor autonome handelaars die routes tussen steden afleggen.",
         "laag2": "Plaats werkloze burgers hier → autonomous trader cycle (zie scheduler). Per level +1 trader-slot + +1 cargo-volume.",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Karren, lastdieren en koopwaar staan klaar. Traders kopen goedkoop in de ene stad en verkopen duur in de andere. Een succesvolle trader brengt rijkdom én nieuws.",
+        "laag4": "Spark ziet de Traders Post als de mobiele arm van het dorp — een uitstrekking die ver weg waarde haalt."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Traders, karrenmenners, hulpjes",
+        "wat": "Vertrek- en aankomstpunt voor handelsroutes",
+        "wanneer": "Per cyclus (dagelijks of meer)",
+        "waar": "Bij de hoofdpoort van het dorp",
+        "waarom": "Om autonome inter-stad handel te faciliteren",
+        "hoe": "Door routes te plannen, goederen te kopen en elders te verkopen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "logistiek",
-        "trader_post"
+        "trader_post",
+        "trader",
+        "handel",
+        "autonoom"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4602,7 +4710,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496292+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496293+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4613,29 +4721,33 @@
       "begrip": "Auction House",
       "sense": "zie",
       "lagen": {
-        "laag1": "Auction House — economie gebouw. Bouwkost: 2000g + 25 log + 25 steen.",
+        "laag1": "Het Auction House is de centrale veilingplaats waar burgers en steden goederen verhandelen.",
         "laag2": "Auction listings van burgers en steden. Tax 5% van elke trade naar gastheer-stad.",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Een hal met podia, klokken en biedlijsten. Hier worden zeldzame items, partijen erts en heel soms huizen geveild. Een ervaren veilingmeester is goud waard.",
+        "laag4": "Spark ziet het Auction House als de prijs-ontdekkings-engine van de wereld — vraag en aanbod ontmoeten elkaar publiekelijk."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Veilingmeester, bieders, verkopers, klerken",
+        "wat": "Centrale veilingplaats met openbare prijsvorming",
+        "wanneer": "Volgens veilings-schema (cyclisch)",
+        "waar": "Centraal nabij de markt",
+        "waarom": "Om eerlijke prijsvorming voor zeldzame items te bieden",
+        "hoe": "Door biedingen te accepteren en aan hoogste bieder toe te wijzen"
       },
       "tags": [
         "D&D",
         "gebouw",
         "economie",
-        "auctionhouse"
+        "auctionhouse",
+        "auction",
+        "veiling",
+        "handel"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4658,7 +4770,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496298+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496300+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },
@@ -4669,29 +4781,33 @@
       "begrip": "Kazerne",
       "sense": "zie",
       "lagen": {
-        "laag1": "Kazerne — leger gebouw. Bouwkost: 1200g + 20 log + 40 steen.",
+        "laag1": "De Kazerne is het militaire kwartier waar legereenheden worden gehuurd of getraind.",
         "laag2": "Hier huur je legereenheden of (later) recruteer je leger-beroep-soldaten.",
-        "laag3": "",
-        "laag4": ""
+        "laag3": "Trainingsveld, wapenrek, slaapvertrekken voor soldaten. De Kazerne bepaalt mede de verdedigingskracht van het dorp.",
+        "laag4": "Spark ziet de Kazerne als het defensie-knooppunt — discipline en kracht gebundeld voor bescherming van de gemeenschap."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Kapitein, soldaten, rekruten",
+        "wat": "Militair kwartier voor training en huur van leger",
+        "wanneer": "Dagelijkse drills, oproep bij dreiging",
+        "waar": "Nabij de stadsmuur of stadspoort",
+        "waarom": "Om de stad te verdedigen en aanvallen te coördineren",
+        "hoe": "Door soldaten te trainen, uit te rusten en uit te zenden"
       },
       "tags": [
         "D&D",
         "gebouw",
         "leger",
-        "barracks"
+        "barracks",
+        "kazerne",
+        "soldaten",
+        "verdediging"
       ],
       "media": {
         "voice_url": null,
         "voice_transcript": null,
-        "image_urls": []
+        "image_urls": [],
+        "placeholder": true
       },
       "game_meta": {
         "is_item": false,
@@ -4714,7 +4830,7 @@
         "vertrouwen": 0.5,
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-06-29T21:36:09.496307+00:00",
-        "laatst_bewerkt_op": "2026-06-29T21:36:09.496308+00:00"
+        "laatst_bewerkt_op": "2026-06-29T23:21:04.585192+00:00"
       },
       "needs": []
     },

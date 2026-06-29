@@ -1,6 +1,27 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 41 (2026-06-29) — D&D Gebouw-kaarten verrijkt + StormhavenMapView fix
+
+### Probleem
+1. 22 D&D gebouw-`game.json`-kaarten waren auto-geseed met alleen `laag1: "X — categorie gebouw. Bouwkost: Yg + Z log + W steen."` — geen ws5, geen avatar-foto, lege laag2-4.
+2. `StormhavenMapView.js` blokkeerde de card-lookup met een statische `placeholder: true` flag op alle 23 entries in `BUILDING_LAYOUT`. Gevolg: **0/23 gebouwen** werden ooit gematcht aan een kaart, ondanks dat de kaarten bestonden.
+
+### Oplossing
+- **`backend/scripts/seed_building_cards.py`** — idempotent verrijking-script:
+  - Vervangt laag1 als die het auto-seed-pattern bevat (`" — " in laag1 and "Bouwkost:" in laag1`)
+  - Vult lege laag2/laag3/laag4 + ws5 + extra tags
+  - Koppelt avatar-foto's uit `system_archive/foto/` waar een bestand bestaat (6 gebouwen)
+  - Markeert overige 16 gebouwen met `media.placeholder=true` voor latere admin drag/drop
+- **`StormhavenMapView.js` fix** — statische `placeholder: true` blokkade verwijderd. `findCardFor()` wordt nu altijd uitgevoerd; placeholder-state is dynamisch (`!card && !b.central`).
+
+### Verificatie
+- Backend curl `/api/dnd/spark-world/game-cards?limit=300` → 22 gebouwen met rijke lagen + tags.
+- Frontend screenshot van mini-map: "Gebouwen in deze laag · **23/23**". Avatar-icoontjes zichtbaar voor Tempel/Gemeentehuis/Markt/Akker/Bakker; `+`-placeholder voor de rest.
+- Script idempotent: 2e run → 0 updates.
+
+
+
 ## Sessie 30 (2026-06-27) — Topic-tracker afgerond + Gesprekplanner Laag A+B
 
 ### Probleem

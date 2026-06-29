@@ -2,6 +2,25 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — D&D Gebouw-kaarten verrijkt (`v6_seed_building_cards_001`)
+
+### 🏛️ Stormhaven mini-map gebouwen volledig aangekleed
+- 22 gebouw-`game.json` kaarten verrijkt: laag1-4, ws5, tags + avatar-foto's
+- Auto-seed pattern (`X — categorie gebouw. Bouwkost: …`) op laag1 vervangen door rijke beschrijvingen
+- 6 gebouwen direct gekoppeld aan archief-foto's:
+  - Haven → Haven.png, Akker → Akkers.png, Bakker → Bakker huis.png
+  - Tempel van Spark → Spark wit logo, Markt → Voedsel Marktkraam.png
+  - Gemeentehuis → basis stad.png, Waterput → Waterput.png
+- 16 overige gebouwen krijgen `media.placeholder=true` flag voor latere admin drag/drop
+- Script `backend/scripts/seed_building_cards.py` is idempotent (overschrijft alleen lege velden)
+
+### 🐛 Bugfix: StormhavenMapView card lookup
+- Statische `placeholder: true` flag in `BUILDING_LAYOUT` blokkeerde card-lookup
+- `findCardFor()` wordt nu altijd uitgevoerd; placeholder-state is dynamisch op basis van match
+- Resultaat: mini-map toont nu **23/23 gebouwen gekoppeld** i.p.v. 0/23
+
+
+
 ## 2026-06-29 — KB → D&D Brug (`v6_kb_to_dnd_link_001`) + Archief schoonmaak
 
 ### 🗑️ Archief duplicaten opgeruimd

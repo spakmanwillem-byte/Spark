@@ -492,10 +492,6 @@ export function KennisbankV2Page({ onNavigate }) {
             <p className="text-xs text-slate-400 mt-0.5">4 Lades + Inbox · Piramide-laag 3 (Geheugen) · v2 schema</p>
           </div>
           <div className="flex items-center gap-2">
-            <button data-testid="kbv2-audit-btn" onClick={runAudit}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 flex items-center gap-1.5">
-              <AlertTriangle className="w-3.5 h-3.5" /> Self-audit
-            </button>
             <button data-testid="kbv2-new-card-btn" onClick={() => {
                 // v6_kbv2_inline_new_001 — open leeg formulier in rechter paneel
                 setSelectedCard(null);
@@ -505,11 +501,6 @@ export function KennisbankV2Page({ onNavigate }) {
               }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5" /> Nieuwe kaart
-            </button>
-            {/* v6_kbv2_herzien_001 — Herzien knop trekt 1 oude KB v1 kaart */}
-            <button data-testid="kbv2-herzien-btn" onClick={loadHerzienEntry}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium border border-purple-500/40 text-purple-300 hover:bg-purple-500/10 flex items-center gap-1.5">
-              <RefreshCw className="w-3.5 h-3.5" /> Herzien (KB v1)
             </button>
             <button data-testid="kbv2-refresh-btn" onClick={() => { loadStats(); loadItems(); }}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">

@@ -15,8 +15,8 @@
  *   W             — Smederij (placeholder)   (22%, 50%)
  *   NW            — Waterput #3              (28%, 32%)
  */
-import React, { useState } from 'react';
-import { X, MapPin, Sparkles, Plus } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, MapPin, Sparkles, Plus, Move, Save, Lock } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -73,12 +73,55 @@ function findCardFor(keywords, cards) {
   return null;
 }
 
-export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam, fractieNaam }) {
+export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam, fractieNaam, isAdmin = false }) {
   // v6_dnd_stad_minimap_001 — labels nu dynamisch ipv hardcoded 'Stormhaven/Spark'
   const displayNaam = stadNaam || char?.dorp || dorpCard?.begrip || 'Onbekend';
   const displayFractie = fractieNaam || char?.fractie_naam || char?.fractie || 'Neutraal';
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const dorpImg = dorpCard?.media?.image_urls?.[0] ? `${API}${dorpCard.media.image_urls[0]}` : null;
+
+  // v6_dorp_layout_overrides_001 — admin kan posities slepen
+  const [editMode, setEditMode] = useState(false);
+  const [overrides, setOverrides] = useState({});   // {building_id: {x, y}}
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    fetch(`${API}/api/dnd/spark-world/dorp-layout-overrides`)
+      .then(r => r.json())
+      .then(d => setOverrides(d.overrides || {}))
+      .catch(() => {});
+  }, []);
+
+  const updateOverride = (buildingId, x, y) => {
+    setOverrides(prev => ({ ...prev, [buildingId]: { x, y } }));
+    setDirty(true);
+  };
+
+  const saveOverrides = async () => {
+    setSaving(true);
+    try {
+      const r = await fetch(`${API}/api/dnd/spark-world/dorp-layout-overrides`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ overrides }),
+      });
+      if (r.ok) setDirty(false);
+    } catch (e) {
+      // negeer fout — gebruiker ziet "Opslaan" knop blijven en kan opnieuw klikken
+    }
+    finally { setSaving(false); }
+  };
+
+  const resetOverride = (buildingId) => {
+    setOverrides(prev => {
+      const next = { ...prev };
+      delete next[buildingId];
+      return next;
+    });
+    setDirty(true);
+  };
 
   // Resolve each building to a card from gameCards
   // v6_dnd_card_lookup_002 — altijd lookup; placeholder is dynamic afhankelijk van
@@ -86,7 +129,9 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
   const buildings = BUILDING_LAYOUT.map(b => {
     const card = findCardFor(b.keywords, gameCards);
     const img = card?.media?.image_urls?.[0] ? `${API}${card.media.image_urls[0]}` : null;
-    return { ...b, card, img, placeholder: !card && !b.central };
+    const override = overrides[b.id];
+    const pos = override ? [override.x, override.y] : b.pos;
+    return { ...b, card, img, pos, hasOverride: !!override, placeholder: !card && !b.central };
   });
 
   return (
@@ -107,19 +152,47 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
               <p className="text-[11px] text-amber-300/70 italic">Layout: Level {char?.dorp_level ?? 1} · Fog of War: {char?.fog_of_war_pct ?? 0}%</p>
             </div>
           </div>
-          <button data-testid="stormhaven-close-btn" onClick={onClose}
-            className="w-9 h-9 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40">
-            <X className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <>
+                <button
+                  data-testid="stormhaven-edit-toggle"
+                  onClick={() => setEditMode(v => !v)}
+                  title={editMode ? 'Bewerken uit' : 'Bewerken aan — sleep gebouwen naar nieuwe positie'}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider border transition-colors ${
+                    editMode
+                      ? 'border-emerald-500/70 bg-emerald-900/40 text-emerald-200 hover:bg-emerald-900/60'
+                      : 'border-amber-700/60 bg-stone-900 text-amber-300 hover:bg-amber-900/30'
+                  }`}>
+                  {editMode ? <Move className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
+                  {editMode ? 'Bewerken AAN' : 'Bewerken'}
+                </button>
+                {editMode && dirty && (
+                  <button
+                    data-testid="stormhaven-save-layout"
+                    onClick={saveOverrides}
+                    disabled={saving}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider border border-amber-500 bg-amber-600 text-stone-950 hover:bg-amber-500 disabled:opacity-50">
+                    <Save className="w-3.5 h-3.5" />
+                    {saving ? 'Opslaan…' : 'Opslaan'}
+                  </button>
+                )}
+              </>
+            )}
+            <button data-testid="stormhaven-close-btn" onClick={onClose}
+              className="w-9 h-9 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Map area */}
         <div className="relative flex-1 overflow-hidden bg-stone-950">
-          <div className="relative w-full" style={{ paddingBottom: '70%' }}>
+          <div ref={mapRef} className="relative w-full" style={{ paddingBottom: '70%' }}>
             <div className="absolute inset-0">
               {dorpImg ? (
                 <img src={dorpImg} alt={`${displayNaam} plattegrond`}
-                  className="absolute inset-0 w-full h-full object-contain" />
+                  className="absolute inset-0 w-full h-full object-contain" draggable={false} />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-b from-stone-800 to-stone-950 flex items-center justify-center text-amber-400/40 italic">
                   Geen dorpskaart geüpload — maak een D&amp;D-kaart &ldquo;Basis dorp&rdquo;
@@ -132,8 +205,12 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
               {/* Building hotspots */}
               {buildings.map(b => (
                 <BuildingHotspot key={b.id} building={b}
-                  onClick={() => setSelectedBuilding(b)}
-                  active={selectedBuilding?.id === b.id} />
+                  onClick={() => !editMode && setSelectedBuilding(b)}
+                  active={selectedBuilding?.id === b.id}
+                  editMode={editMode}
+                  mapRef={mapRef}
+                  onMove={(x, y) => updateOverride(b.id, x, y)}
+                  onReset={() => resetOverride(b.id)} />
               ))}
 
               {/* v6_player_glow_001 — Speler-avatar met groene puls op centrum (default) */}
@@ -177,28 +254,62 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
   );
 }
 
-function BuildingHotspot({ building, onClick, active }) {
+function BuildingHotspot({ building, onClick, active, editMode = false, mapRef = null, onMove = null, onReset = null }) {
   const [x, y] = building.pos;
   const size = building.central ? 64 : 44;
   const filled = !!building.card;
+  const [dragging, setDragging] = useState(false);
+
+  const startDrag = (e) => {
+    if (!editMode || !mapRef?.current) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(true);
+    const rect = mapRef.current.getBoundingClientRect();
+    const move = (ev) => {
+      const cx = (ev.touches ? ev.touches[0].clientX : ev.clientX);
+      const cy = (ev.touches ? ev.touches[0].clientY : ev.clientY);
+      const px = Math.max(0, Math.min(100, ((cx - rect.left) / rect.width) * 100));
+      const py = Math.max(0, Math.min(100, ((cy - rect.top) / rect.height) * 100));
+      onMove?.(px, py);
+    };
+    const stop = () => {
+      setDragging(false);
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', stop);
+      window.removeEventListener('touchmove', move);
+      window.removeEventListener('touchend', stop);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+    window.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', stop);
+  };
+
   return (
     <button
       data-testid={`hotspot-${building.id}`}
-      onClick={onClick}
-      title={building.label}
+      onClick={editMode ? (e) => { e.preventDefault(); } : onClick}
+      onMouseDown={startDrag}
+      onTouchStart={startDrag}
+      onDoubleClick={editMode ? (e) => { e.stopPropagation(); onReset?.(); } : undefined}
+      title={editMode ? `${building.label} — sleep om te verplaatsen (dubbelklik = reset)` : building.label}
       style={{
         left: `${x}%`, top: `${y}%`,
         width: size, height: size,
         transform: 'translate(-50%, -50%)',
+        cursor: editMode ? (dragging ? 'grabbing' : 'grab') : 'pointer',
       }}
       className={`absolute rounded-full overflow-hidden border-2 transition-all duration-200 ${
-        active ? 'ring-4 ring-amber-300/60 scale-110' : 'hover:scale-110'
+        active ? 'ring-4 ring-amber-300/60 scale-110' : (editMode ? '' : 'hover:scale-110')
       } ${
-        building.central
-          ? 'border-amber-300 shadow-[0_0_24px_rgba(245,158,11,0.6)]'
-          : filled
-            ? 'border-amber-500/80 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
-            : 'border-amber-700/40 bg-stone-900/70 border-dashed'
+        editMode
+          ? (building.hasOverride ? 'border-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.6)]' : 'border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.5)]')
+          : building.central
+            ? 'border-amber-300 shadow-[0_0_24px_rgba(245,158,11,0.6)]'
+            : filled
+              ? 'border-amber-500/80 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
+              : 'border-amber-700/40 bg-stone-900/70 border-dashed'
       }`}>
       {building.img ? (
         <img src={building.img} alt={building.label} className="w-full h-full object-cover" />
@@ -272,9 +383,9 @@ function PlayerOnMap({ char }) {
       .then(d => setAvatarUrl(d.url ? `${API}${d.url}` : null))
       .catch(() => {});
   }, [userId]);
-  // Default: centrum van het dorp (50%, 50%). Later: per gebouw waar speler is.
-  const px = char?.player_x_pct ?? 50;
-  const py = char?.player_y_pct ?? 50;
+  // Default: net ten zuidoosten van het centrum (53%, 53%) zodat Tempel-avatar zichtbaar blijft.
+  const px = char?.player_x_pct ?? 53;
+  const py = char?.player_y_pct ?? 53;
   return (
     <div
       data-testid="player-on-map"

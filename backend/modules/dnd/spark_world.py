@@ -779,6 +779,49 @@ async def seed_missing_game_items(user_id: str = "user-001"):
     }
 
 
+# ---------------------------------------------------------------------------
+# v6_dorp_layout_overrides_001 — admin kan gebouw-posities slepen op de mini-map
+# ---------------------------------------------------------------------------
+DORP_LAYOUT_OVERRIDES_PATH = DATA_ROOT / "dnd" / "dorp_layout_overrides.json"
+
+
+class DorpLayoutOverride(BaseModel):
+    overrides: Dict[str, Dict[str, float]]  # {building_id: {"x":pct, "y":pct}}
+
+
+@router.get("/dorp-layout-overrides")
+async def get_dorp_layout_overrides():
+    """Lees admin-gedragen building-position overrides voor de Stormhaven mini-map."""
+    if not DORP_LAYOUT_OVERRIDES_PATH.exists():
+        return {"overrides": {}}
+    try:
+        data = json.loads(DORP_LAYOUT_OVERRIDES_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"overrides": {}}
+    return {"overrides": data.get("overrides", {})}
+
+
+@router.put("/dorp-layout-overrides")
+async def put_dorp_layout_overrides(body: DorpLayoutOverride):
+    """Sla admin-gedragen building-position overrides op."""
+    # Clamp percentages naar [0, 100]
+    cleaned: Dict[str, Dict[str, float]] = {}
+    for bid, pos in (body.overrides or {}).items():
+        x = max(0.0, min(100.0, float(pos.get("x", 50))))
+        y = max(0.0, min(100.0, float(pos.get("y", 50))))
+        cleaned[str(bid)] = {"x": x, "y": y}
+    DORP_LAYOUT_OVERRIDES_PATH.parent.mkdir(parents=True, exist_ok=True)
+    DORP_LAYOUT_OVERRIDES_PATH.write_text(
+        json.dumps({
+            "overrides": cleaned,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    return {"success": True, "count": len(cleaned)}
+
+
+
 
 
 

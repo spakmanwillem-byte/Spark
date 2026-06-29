@@ -466,6 +466,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
           dorpCard={dorpCard}
           gameCards={gameCards}
           char={char}
+          isAdmin={isAdmin}
           onClose={() => setShowMapView(false)}
         />
       )}

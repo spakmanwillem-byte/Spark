@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "_doc": "v6_trade_bark_spec_001 — drag-drop trade UI spec voor markt-bark.",
+  "bark_layout": {
+    "panel_left": {
+      "title": "Jij",
+      "velden": [
+        "avatar_url",
+        "naam",
+        "goud_balance",
+        "rugzak_items"
+      ]
+    },
+    "panel_right": {
+      "title": "Trader",
+      "velden": [
+        "avatar_url",
+        "naam",
+        "kas",
+        "inboedel_items"
+      ]
+    }
+  },
+  "interactie": {
+    "click_eigen_item": "glow + voeg toe aan te_verkopen[]",
+    "click_trader_item": "glow + voeg toe aan te_kopen[]",
+    "berekening_live": "som(te_verkopen) - som(te_kopen) - 5%_tax = netto_goud",
+    "accept_btn": "voer transactie uit; emit events naar beide feeds"
+  },
+  "tax_logica": {
+    "pct": 5,
+    "naar": "stad_kas_destination"
+  }
+}

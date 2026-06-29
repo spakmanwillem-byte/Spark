@@ -1,0 +1,110 @@
+{
+  "version": "0.1",
+  "_doc": "v6_dorp_layout_001 — basis-dorp T5 heeft 8 wedge-slots + 1 centrum. Lege wedge = ?-avatar, builded = building-avatar.",
+  "image_ref": "User uploaded aerial — ronde stad met 8 wedges + cathedral center",
+  "slot_layout": {
+    "center": {
+      "x": 50,
+      "y": 50,
+      "label": "Centrum",
+      "default_building": "tempel_spark",
+      "icon": "✠"
+    },
+    "wedge_n": {
+      "x": 50,
+      "y": 16,
+      "label": "Noord",
+      "default_building": null,
+      "compass": "N"
+    },
+    "wedge_ne": {
+      "x": 78,
+      "y": 26,
+      "label": "NoordOost",
+      "default_building": null,
+      "compass": "NE"
+    },
+    "wedge_e": {
+      "x": 87,
+      "y": 50,
+      "label": "Oost",
+      "default_building": null,
+      "compass": "E"
+    },
+    "wedge_se": {
+      "x": 78,
+      "y": 74,
+      "label": "ZuidOost",
+      "default_building": null,
+      "compass": "SE"
+    },
+    "wedge_s": {
+      "x": 50,
+      "y": 84,
+      "label": "Zuid",
+      "default_building": null,
+      "compass": "S"
+    },
+    "wedge_sw": {
+      "x": 22,
+      "y": 74,
+      "label": "ZuidWest",
+      "default_building": null,
+      "compass": "SW"
+    },
+    "wedge_w": {
+      "x": 13,
+      "y": 50,
+      "label": "West",
+      "default_building": null,
+      "compass": "W"
+    },
+    "wedge_nw": {
+      "x": 22,
+      "y": 26,
+      "label": "NoordWest",
+      "default_building": null,
+      "compass": "NW"
+    }
+  },
+  "default_t5_distribution": {
+    "_doc": "Bij alle bestaande dorpen (allen T5 nu) worden deze 9 plekken auto-toegewezen.",
+    "center": "tempel_spark",
+    "wedge_n": "markt",
+    "wedge_ne": "smid",
+    "wedge_e": "herberg",
+    "wedge_se": "wachterspost",
+    "wedge_s": "akker",
+    "wedge_sw": "houthakkerij",
+    "wedge_w": "kruidenwinkel",
+    "wedge_nw": "jachthut"
+  },
+  "buiten_dorp_resource_tiles": {
+    "_doc": "Locaties buiten dorp-muren waar je heen kunt voor resource-actie.",
+    "akkerveld": {
+      "label": "Akkerveld",
+      "resource": "graan",
+      "actie": "oogsten"
+    },
+    "bos": {
+      "label": "Bos",
+      "resource": "log",
+      "actie": "hakken"
+    },
+    "rivier": {
+      "label": "Rivier",
+      "resource": "vis",
+      "actie": "vissen"
+    },
+    "mijngrot": {
+      "label": "Mijngrot",
+      "resource": "ijzererts-tier1",
+      "actie": "mijnen"
+    },
+    "wildernis": {
+      "label": "Wildernis",
+      "resource": "plant-helend",
+      "actie": "survival_zoeken"
+    }
+  }
+}

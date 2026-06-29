@@ -285,6 +285,79 @@
         "healing_bonus_pct": 0
       },
       "_doc": "Huis-meubel. Slapen → HP-regen (default 2%/uur tijdens 2h-bonus)."
+    },
+    {
+      "id": "gemeentehuis",
+      "naam": "Gemeentehuis",
+      "categorie": "bestuur",
+      "beroep": null,
+      "build_cost_goud": 2500,
+      "build_cost_log": 40,
+      "build_cost_steen": 60,
+      "diensten": {
+        "stadsleider_kantoor": true,
+        "belasting_administratie": true,
+        "vergadering": true
+      },
+      "_doc": "Zetel van de stadsleider/fractie-anker. Belastingen verzameld, decreten uitgevaardigd."
+    },
+    {
+      "id": "warehouse",
+      "naam": "Stedelijk Pakhuis",
+      "categorie": "economie",
+      "beroep": null,
+      "build_cost_goud": 1200,
+      "build_cost_log": 40,
+      "build_cost_steen": 40,
+      "diensten": {
+        "warehouse_capacity_base": 1000,
+        "upgrade_per_level": 1000
+      },
+      "_doc": "Stad-warehouse voor grondstoffen. Tier 1=1000, T2=2000, T3=3000, T4=4000, T5=5000+ slots."
+    },
+    {
+      "id": "stadsmuur",
+      "naam": "Stadsmuur",
+      "categorie": "defensie",
+      "beroep": null,
+      "build_cost_goud": 800,
+      "build_cost_log": 20,
+      "build_cost_steen": 80,
+      "diensten": {
+        "defensie_bonus_pct": 20,
+        "perimeter": true,
+        "_segments": 4
+      },
+      "_doc": "4 segmenten (N/O/Z/W). Elke segment = +5% defensie. Vol = +20%."
+    },
+    {
+      "id": "stadspoort",
+      "naam": "Stadspoort",
+      "categorie": "defensie",
+      "beroep": null,
+      "build_cost_goud": 400,
+      "build_cost_log": 15,
+      "build_cost_steen": 30,
+      "diensten": {
+        "toegang_controle": true,
+        "tol_pct": 2,
+        "_count": 4
+      },
+      "_doc": "4 poorten (N/O/Z/W). Hier passeert handel. Tol 2% optioneel."
+    },
+    {
+      "id": "riool",
+      "naam": "Riool-ingang",
+      "categorie": "avontuur",
+      "beroep": null,
+      "build_cost_goud": 300,
+      "build_cost_log": 5,
+      "build_cost_steen": 30,
+      "diensten": {
+        "dungeon_entry": true,
+        "_count": 2
+      },
+      "_doc": "2 riool-ingangen (Oost + West). Toegang tot ondergrondse dungeon-laag voor avontuur/loot."
     }
   ],
   "regels": {

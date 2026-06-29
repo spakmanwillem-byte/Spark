@@ -70,7 +70,7 @@
   "default_t5_distribution": {
     "_doc": "Bij alle bestaande dorpen (allen T5 nu) worden deze 9 plekken auto-toegewezen.",
     "center": "tempel_spark",
-    "wedge_n": "markt",
+    "wedge_n": "gemeentehuis",
     "wedge_ne": "smid",
     "wedge_e": "herberg",
     "wedge_se": "wachterspost",
@@ -106,5 +106,82 @@
       "resource": "plant-helend",
       "actie": "survival_zoeken"
     }
+  },
+  "perimeter_slots": {
+    "muur_n": {
+      "x": 50,
+      "y": 7,
+      "label": "Stadsmuur N",
+      "building": "stadsmuur",
+      "segment": "N"
+    },
+    "muur_o": {
+      "x": 93,
+      "y": 50,
+      "label": "Stadsmuur O",
+      "building": "stadsmuur",
+      "segment": "O"
+    },
+    "muur_z": {
+      "x": 50,
+      "y": 93,
+      "label": "Stadsmuur Z",
+      "building": "stadsmuur",
+      "segment": "Z"
+    },
+    "muur_w": {
+      "x": 7,
+      "y": 50,
+      "label": "Stadsmuur W",
+      "building": "stadsmuur",
+      "segment": "W"
+    },
+    "poort_n": {
+      "x": 50,
+      "y": 4,
+      "label": "Stadspoort N",
+      "building": "stadspoort",
+      "compass": "N"
+    },
+    "poort_o": {
+      "x": 96,
+      "y": 50,
+      "label": "Stadspoort O",
+      "building": "stadspoort",
+      "compass": "O"
+    },
+    "poort_z": {
+      "x": 50,
+      "y": 96,
+      "label": "Stadspoort Z",
+      "building": "stadspoort",
+      "compass": "Z"
+    },
+    "poort_w": {
+      "x": 4,
+      "y": 50,
+      "label": "Stadspoort W",
+      "building": "stadspoort",
+      "compass": "W"
+    },
+    "riool_o": {
+      "x": 80,
+      "y": 62,
+      "label": "Riool Oost",
+      "building": "riool",
+      "entry": "O"
+    },
+    "riool_w": {
+      "x": 20,
+      "y": 62,
+      "label": "Riool West",
+      "building": "riool",
+      "entry": "W"
+    }
+  },
+  "extra_wedge_buildings": {
+    "_doc": "Standaard T5-dorp heeft naast de 8 wedges + center ook deze 'placed' gebouwen op aanvullende locaties. Worden meegerekend bij dorp-render.",
+    "warehouse_locatie": "naast_markt",
+    "barracks_locatie": "naast_wachterspost"
   }
 }

@@ -1,6 +1,259 @@
 {
   "cards": [
     {
+      "id": "game-cab06f03",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Riool-ingang",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "2 ingangen O/W. Toegang tot ondergrondse dungeon-laag voor avontuur.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "gebouw",
+        "avontuur"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Riool-ingang",
+          "build_cost_goud": 300
+        },
+        "value_goud": 300,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:56:27.324613+00:00"
+      }
+    },
+    {
+      "id": "game-cc2da910",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Stadspoort",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "4 poorten N/O/Z/W. Tol 2% optioneel. Doorgang voor handel.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "gebouw",
+        "defensie"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Stadspoort",
+          "build_cost_goud": 400
+        },
+        "value_goud": 400,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:56:27.324589+00:00"
+      }
+    },
+    {
+      "id": "game-eeaf274d",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Stadsmuur",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "4 segmenten N/O/Z/W. Per segment +5% defensie, vol = +20%.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "gebouw",
+        "defensie"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Stadsmuur",
+          "build_cost_goud": 800
+        },
+        "value_goud": 800,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:56:27.324561+00:00"
+      }
+    },
+    {
+      "id": "game-96095d58",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Stedelijk Pakhuis",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Warehouse stad. T1=1000 slots, schaalt per tier (+1000).",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "gebouw"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Stedelijk Pakhuis",
+          "build_cost_goud": 1200
+        },
+        "value_goud": 1200,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:56:27.324536+00:00"
+      }
+    },
+    {
+      "id": "game-48a346aa",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Gemeentehuis",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Zetel van stadsleider/fractie-anker. Belastingen verzameld, decreten.",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "gebouw"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Gemeentehuis",
+          "build_cost_goud": 2500
+        },
+        "value_goud": 2500,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:56:27.324495+00:00"
+      }
+    },
+    {
       "id": "game-40ea09e0",
       "class": "game",
       "type": "dnd_game_card",

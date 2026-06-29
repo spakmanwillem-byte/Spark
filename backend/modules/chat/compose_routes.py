@@ -58,6 +58,21 @@ async def reload_blueprint():
     return {"success": True, "msg": "Blueprint cache cleared. Volgende /compose-call gebruikt verse JSON."}
 
 
+# v6_snuffel_bestand_001 — directe API voor file-search
+class SnuffelRequest(BaseModel):
+    query: str
+    viewer_id: Optional[str] = None
+    scope: Optional[list] = None  # ['kb', 'notes', 'personality', 'chat']
+
+
+@router.post("/snuffel")
+async def snuffel_bestand(req: SnuffelRequest):
+    """Spark doorzoekt eigen JSON-data en geeft hits per bron."""
+    from modules.chat.spark_snuffel import execute_snuffel
+    result = execute_snuffel(req.query, viewer_id=req.viewer_id, scope=req.scope)
+    return result
+
+
 # v6_trigger_learner_001 — admin endpoints voor learned triggers
 @router.get("/learned-triggers")
 async def list_learned_triggers(limit: int = 50, status: Optional[str] = None):

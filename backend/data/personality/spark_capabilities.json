@@ -438,6 +438,16 @@
       "status": "live",
       "module": "chat/capability_handler_service.py",
       "data_source": "/app/backend/data/system/legal_privacy.json"
+    },
+    {
+      "id": "snuffel_bestand",
+      "naam": "Snuffel-bestand",
+      "categorie": "kennis",
+      "status": "live",
+      "module": "modules/chat/spark_snuffel.py",
+      "uitleg": "Spark doorzoekt eigen JSON-data (KB v2, notes, personality, chat-logs) op verzoek. Triggers: 'snuffel naar X', 'zoek in bestanden naar Y', 'waar staat info over Z'.",
+      "voorbeeld": "snuffel naar emoties",
+      "added": "2026-06-29"
     }
   ],
   "_lege_categorieen_voor_later": {

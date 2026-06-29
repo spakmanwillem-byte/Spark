@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2040,
+    "card_count": 2063,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-28T14:24:52.358445+00:00",
+    "last_updated": "2026-06-29T20:03:18.700370+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -272030,6 +272030,1127 @@
             "result": {
               "n_found": 5,
               "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2c19ce25",
+      "begrip": "niet aanwezig",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Niet aanwezig betekent dat iets of iemand ontbreekt of zich niet op de verwachte plaats bevindt.",
+        "laag2": "Niet aanwezig geeft aan dat een persoon, object, eigenschap of gegeven op een bepaald moment of op een bepaalde locatie ontbreekt.",
+        "laag3": "Niet aanwezig wordt gebruikt wanneer iets niet beschikbaar, zichtbaar of bereikbaar is. Dit kan betrekking hebben op personen, voorwerpen, informatie, functies of digitale gegevens. De betekenis is afhankelijk van de context waarin het wordt gebruikt.\n",
+        "laag4": "Binnen Spark geeft niet aanwezig aan dat een gebruiker, object, functie, module, gegeven of gebeurtenis momenteel ontbreekt of niet beschikbaar is. Spark kan deze status gebruiken om alternatieve acties te kiezen, meldingen te geven of te wachten totdat de betreffende informatie of functie weer beschikbaar is.\n"
+      },
+      "ws5": {
+        "wie": "Personen, AI, systemen, objecten of gegevens.",
+        "wat": "De afwezigheid van iets of iemand.",
+        "wanneer": "Wanneer iets ontbreekt of niet beschikbaar is.",
+        "waar": "In de fysieke wereld, digitale systemen of gesprekken.",
+        "waarom": "Omdat iets niet bestaat, is verwijderd, buiten bereik is of nog niet beschikbaar is.",
+        "hoe": "Door vast te stellen dat iets niet gevonden of waargenomen wordt."
+      },
+      "tags": [
+        "niet aanwezig",
+        "afwezig",
+        "ontbreekt",
+        "beschikbaarheid",
+        "status",
+        "detectie",
+        "systeem",
+        "gebruiker",
+        "object",
+        "informatie",
+        "context",
+        "controle",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "beschikbaarheid",
+            "controle",
+            "emotie",
+            "gebruiker",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-558b2443",
+          "begrip": "kwijt",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "beschikbaarheid",
+            "context",
+            "emotie",
+            "neutraal",
+            "niet aanwezig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96b52c55",
+          "begrip": "Toegang verleend",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "beschikbaarheid",
+            "controle",
+            "emotie",
+            "gebruiker",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-450a882a",
+          "begrip": "toegang",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "beschikbaarheid",
+            "controle",
+            "emotie",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16ec458f",
+          "begrip": "status",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "beschikbaarheid",
+            "controle",
+            "emotie",
+            "neutraal",
+            "status"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:44:57.287328+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-29T19:43:55.700901+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:44:55.257887+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:44:55.358718+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:44:55.366288+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:44:57.622818+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:44:57.630255+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-233d77f3",
+      "begrip": "familiewapen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een familiewapen is binnen Spark een digitaal symbool dat de identiteit, geschiedenis, waarden en nalatenschap van een familie of gemeenschap vertegenwoordigt.\n",
+        "laag2": "Binnen Spark kan een familiewapen uitgroeien tot een levend digitaal profiel. Het verbindt generaties, bewaart gedeelde kennis, normen, waarden, herinneringen en ervaringen, en symboliseert de gezamenlijke identiteit van een familie.\n",
+        "laag3": "Traditioneel vertegenwoordigt een familiewapen de afkomst en geschiedenis van een familie. Binnen Spark krijgt dit een moderne, digitale betekenis. Het familiewapen wordt een herkenbaar symbool dat gekoppeld is aan kenniskaarten, verhalen, foto's, documenten, stambomen, herinneringen en de AI van de familie. Hierdoor blijft kennis en vakmanschap behouden en kan deze veilig worden doorgegeven aan volgende generaties.\n",
+        "laag4": "Binnen het Spark-ecosysteem vormt het familiewapen een identiteitslaag. Het is geen statisch logo, maar een toegangspunt tot het collectieve geheugen van een familie. Spark kan hierdoor relaties leggen tussen personen, gebeurtenissen, documenten, waarden, tradities en ervaringen. Het familiewapen vertegenwoordigt de digitale nalatenschap van de familie en groeit mee met iedere nieuwe generatie.\n"
+      },
+      "ws5": {
+        "wie": "Families, familieleden en hun Spark-AI.",
+        "wat": "Een digitaal symbool van identiteit, geschiedenis en nalatenschap.",
+        "wanneer": "Wanneer een familie haar kennis, herinneringen en waarden wil bewaren en doorgeven.",
+        "waar": "Binnen het Spark-ecosysteem en gekoppelde familieomgevingen.",
+        "waarom": "Om identiteit, verbondenheid, vakmanschap en familiegeschiedenis over generaties te behouden",
+        "hoe": "Door het familiewapen te koppelen aan kenniskaarten, context, archieven, media, herinneringen en de Spark Core."
+      },
+      "tags": [
+        "familiewapen",
+        "familie",
+        "identiteit",
+        "nalatenschap",
+        "generaties",
+        "Spark",
+        "AI",
+        "kenniskaarten",
+        "geschiedenis",
+        "traditie",
+        "waarden",
+        "normen",
+        "geheugen",
+        "archief",
+        "verbinding",
+        "community",
+        "digitaal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-b6e9fc26",
+          "begrip": "achternaam",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "familie",
+            "geschiedenis",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25b237ba",
+          "begrip": "Ik dacht dat jij binnen de gesprekken van de user jij de onderliggende relaties van de user bij hield.",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "geheugen",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-21b5fcf8",
+          "begrip": "diep",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "geheugen",
+            "kenniskaarten",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0e95d34a",
+          "begrip": "zusje",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "familie",
+            "identiteit",
+            "neutraal",
+            "verbinding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-267ae513",
+          "begrip": "overleden",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "familie",
+            "geschiedenis",
+            "identiteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T16:00:08.337807+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:46:55.409602+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "weet je nog dat we het hadden over wolven en het familiewapen?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:46:50.273703+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:46:50.375343+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:46:50.382760+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:46:55.754471+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:46:55.761907+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1c554dc6",
+      "begrip": "Smoking Gun",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een Smoking Gun is een doorslaggevend bewijs dat een bewering, gebeurtenis of schuld overtuigend aantoont.",
+        "laag2": "De uitdrukking Smoking Gun verwijst naar bewijs dat zo sterk is dat er nauwelijks twijfel over de conclusie bestaat. Het wordt veel gebruikt in journalistiek, rechtspraak, onderzoek en politiek.\n",
+        "laag3": "De term Smoking Gun komt uit het Engels en verwijst oorspronkelijk naar iemand die wordt aangetroffen met een nog rokend vuurwapen direct na een schietincident. Tegenwoordig wordt de uitdrukking figuurlijk gebruikt voor elk overtuigend bewijs dat een gebeurtenis, handeling of verantwoordelijkheid vrijwel onweerlegbaar aantoont. Een Smoking Gun kan bestaan uit documenten, foto's, video's, logbestanden, getuigenissen of andere controleerbare gegevens.\n",
+        "laag4": "Binnen Spark vertegenwoordigt een Smoking Gun de hoogste mate van bewijs. Spark kan verschillende aanwijzingen, feiten en bronnen combineren, maar spreekt pas van een Smoking Gun wanneer de beschikbare informatie een conclusie met zeer hoge betrouwbaarheid ondersteunt. De term kan worden gebruikt bij analyses, logboeken, gebeurtenissen, onderzoeken en besluitvorming.\n"
+      },
+      "ws5": {
+        "wie": "Onderzoekers, journalisten, juristen, AI-systemen en iedereen die bewijs beoordeelt.",
+        "wat": "Doorslaggevend of vrijwel onweerlegbaar bewijs.",
+        "wanneer": "Wanneer een conclusie met sterke zekerheid kan worden onderbouwd.",
+        "waar": "Bij onderzoeken, rechtspraak, journalistiek, wetenschap en digitale analyses.",
+        "waarom": "Om een bewering of gebeurtenis overtuigend te bewijzen.",
+        "hoe": "Door controleerbare feiten of bewijsstukken die vrijwel geen redelijke twijfel overlaten."
+      },
+      "tags": [
+        "smoking gun",
+        "bewijs",
+        "doorslaggevend",
+        "onderzoek",
+        "rechtspraak",
+        "journalistiek",
+        "analyse",
+        "feiten",
+        "betrouwbaarheid",
+        "logboek",
+        "conclusie",
+        "verificatie",
+        "context",
+        "Engels",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-107749df",
+          "begrip": "bewijs",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bewijs",
+            "conclusie",
+            "emotie",
+            "neutraal",
+            "onderzoek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fcaf76c8",
+          "begrip": "oordeel",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "analyse",
+            "conclusie",
+            "emotie",
+            "neutraal",
+            "rechtspraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bf0ed078",
+          "begrip": "onjuist",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "analyse",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-7c48a9d8",
+          "begrip": "betrouwbaarheid",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "betrouwbaarheid",
+            "emotie",
+            "neutraal",
+            "verificatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T01:21:49.147338+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:52:03.682263+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee je kijkt niet je herhaald wat ik zei want time stamp is nu 03:21 dus hoe laat?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:52:00.016932+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:52:00.119716+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:52:00.127073+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:52:04.029311+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:52:04.036612+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e57a33f4",
+      "begrip": "wolven",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Wolven zijn sociale roofdieren die in roedels leven en samenwerken om te overleven.",
+        "laag2": "Wolven leven in familiegroepen waarin samenwerking, communicatie, zorg voor de jongen en gezamenlijke jacht centraal staan. Ze spelen een belangrijke rol in het ecosysteem.\n",
+        "laag3": "De wolf (Canis lupus) is een intelligent zoogdier uit de hondenfamilie. Wolven communiceren met lichaamstaal, geur, geluid en gehuil. Een roedel bestaat meestal uit een ouderpaar en hun nakomelingen. Samen jagen, beschermen ze hun territorium en zorgen ze voor elkaar. Hun sociale structuur is gebaseerd op samenwerking en ervaring, waardoor kennis over generaties wordt doorgegeven.\n",
+        "laag4": "Binnen Spark kunnen wolven symbool staan voor samenwerking, loyaliteit, familie, leiderschap, kennisoverdracht en gezamenlijke groei. De roedel laat zien hoe individuele leden bijdragen aan het geheel, terwijl ervaringen en vaardigheden van generatie op generatie worden doorgegeven. Dit sluit aan bij Spark's visie op gemeenschap, vakmanschap en gedeelde ontwikkeling.\n"
+      },
+      "ws5": {
+        "wie": "Wolven en hun roedel.",
+        "wat": "Sociale roofdieren uit de hondenfamilie.",
+        "wanneer": "Dag en nacht, afhankelijk van voedsel, seizoen en omgeving.",
+        "waar": "Bossen, bergen, toendra's, steppen en andere natuurlijke leefgebieden.",
+        "waarom": "Om te overleven, voedsel te vinden, jongen groot te brengen en de roedel te beschermen.",
+        "hoe": "Door samenwerking, communicatie, jacht, territoriumbewaking en zorg voor elkaar."
+      },
+      "tags": [
+        "wolven",
+        "wolf",
+        "roedel",
+        "familie",
+        "samenwerking",
+        "loyaliteit",
+        "communicatie",
+        "leiderschap",
+        "natuur",
+        "roofdier",
+        "ecosysteem",
+        "kennisoverdracht",
+        "vakmanschap",
+        "gemeenschap",
+        "Spark",
+        "dier",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-bcdc549f",
+          "begrip": "Ganzen",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "ecosysteem",
+            "emotie",
+            "leiderschap",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ec6b4809",
+          "begrip": "roofdieren",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8cbee41",
+          "begrip": "Duiven",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d64b1b71",
+          "begrip": "Spinnenweb",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T16:00:07.818705+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:53:53.311184+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "weet je nog dat we het hadden over wolven en het familiewapen?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:53:49.489466+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:53:49.592701+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:53:49.600273+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:53:53.659336+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:53:53.666917+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-ccf4e05e",
+      "begrip": "Canis lupus",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Canis lupus is de wetenschappelijke naam van de grijze wolf.",
+        "laag2": "Canis lupus behoort tot de hondenfamilie (Canidae) en is de voorouder van de gedomesticeerde hond. De soort leeft in verschillende leefgebieden over de wereld.",
+        "laag3": "Canis lupus is een sociaal roofdier dat in roedels leeft en samenwerkt bij jacht, opvoeding van jongen en territoriumverdediging. De soort kent verschillende ondersoorten en heeft een belangrijke ecologische rol als toppredator. De huishond (Canis lupus familiaris) wordt algemeen beschouwd als een ondersoort van de grijze wolf.\n",
+        "laag4": "Binnen Spark kan Canis lupus dienen als biologisch referentiepunt voor kennis over wolven, roedelgedrag, samenwerking, leiderschap, communicatie en evolutie. De soort kan daarnaast symbolisch worden gekoppeld aan thema's zoals familie, vakmanschap, kennisoverdracht en gemeenschap, zonder de wetenschappelijke betekenis te vervangen.\n"
+      },
+      "ws5": {
+        "wie": "De grijze wolf.",
+        "wat": "Een zoogdiersoort uit de hondenfamilie.",
+        "wanneer": "Sinds de prehistorie tot heden.",
+        "waar": "Europa, Azië, Noord-Amerika en andere geschikte leefgebieden.",
+        "waarom": "Als toppredator draagt de soort bij aan het evenwicht van ecosystemen.",
+        "hoe": "Door in roedels samen te leven, te communiceren en gezamenlijk te jagen."
+      },
+      "tags": [
+        "Canis lupus",
+        "grijze wolf",
+        "wolf",
+        "Canidae",
+        "zoogdier",
+        "roofdier",
+        "roedel",
+        "biologie",
+        "taxonomie",
+        "natuur",
+        "ecosysteem",
+        "evolutie",
+        "samenwerking",
+        "familie",
+        "Spark",
+        "wetenschap",
+        "dier",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e57a33f4",
+          "begrip": "wolven",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "familie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ac0761e3",
+          "begrip": "Muis",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-ec6b4809",
+          "begrip": "roofdieren",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-43a559a1",
+          "begrip": "Vleermuis",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "dier",
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:11:32.617536+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:58:23.698015+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "volgens mij heeft je kennis een boost gekregen omdat je meer context betrekt al tans lijkt zo",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:58:20.419758+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:58:20.523495+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:58:20.530814+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:58:24.048195+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:58:24.055849+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-34b2b93e",
+      "begrip": "autosnap",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Autosnap is een automatische functie die zelfstandig informatie of kennis vastlegt.",
+        "laag2": "Autosnap verzamelt en slaat automatisch gegevens, gebeurtenissen of begrippen op zonder dat de gebruiker alles handmatig hoeft in te voeren.\n",
+        "laag3": "Binnen Spark is Autosnap een automatiseringsfunctie die tijdens gesprekken, documenten, media of gebeurtenissen relevante informatie herkent en hiervan automatisch een concept of kenniskaart kan maken. Autosnap helpt de gebruiker sneller kennis op te bouwen, waarna de gebruiker of Spark de inhoud verder kan controleren, aanvullen of verbeteren.\n",
+        "laag4": "Binnen het Spark-ecosysteem vormt Autosnap de eerste stap van automatische kennisopbouw. De functie kan begrippen herkennen, lagen genereren, tags voorstellen, media koppelen, context opslaan en relaties met bestaande kenniskaarten leggen. De gebruiker behoudt de controle door de gegenereerde inhoud te beoordelen, aan te passen of goed te keuren. Hierdoor groeit de kennisbank sneller terwijl de kwaliteit door mens en AI gezamenlijk wordt bewaakt.\n"
+      },
+      "ws5": {
+        "wie": "Spark, de gebruiker en automatische AI-processen.",
+        "wat": "Een functie die automatisch kennis en informatie vastlegt.",
+        "wanneer": "Tijdens gesprekken, documenten, media of andere gebeurtenissen",
+        "waar": "Binnen het Spark-ecosysteem en gekoppelde modules",
+        "waarom": "Om kennisopbouw te versnellen, handmatig werk te verminderen en relevante informatie niet verloren te laten gaan.",
+        "hoe": "Door AI automatisch begrippen, context, tags, relaties en conceptkaarten te laten genereren."
+      },
+      "tags": [
+        "autosnap",
+        "automatische generatie",
+        "kenniskaart",
+        "AI",
+        "Spark",
+        "kennisbank",
+        "detectie",
+        "context",
+        "tags",
+        "metadata",
+        "relatie",
+        "automatisering",
+        "ML",
+        "LLM",
+        "workflow",
+        "productiviteit",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-0a96599b",
+          "begrip": "kenniskaarten",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "kennisbank",
+            "kenniskaart"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c1ee5231",
+          "begrip": "kenniskaart",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "kenniskaart",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-21b5fcf8",
+          "begrip": "diep",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "llm",
+            "ml"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "neutraal",
+            "relatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9780a2d9",
+          "begrip": "Hoeveel kenniskaarten heb jij",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "kennisbank",
+            "kenniskaart",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T10:37:52.182585+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T20:00:16.206587+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "mss moet ik de kenniskaart hittegolf maken. zie dat hij deze niet autosnapt omdat jij woord hitte kent vermoed ik.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T20:00:14.217937+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T20:00:14.320666+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T20:00:14.327989+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T20:00:16.551183+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T20:00:16.558584+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 10
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-03cf84ab",
+      "begrip": "raket",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een raket is een voertuig of projectiel dat zich voortbeweegt door stuwkracht uit een eigen motor.",
+        "laag2": "Raketten worden gebruikt voor ruimtevaart, wetenschap, defensie en onderzoek. Ze werken volgens de wet van actie en reactie: uitgestoten gassen zorgen voor voorwaartse beweging.",
+        "laag3": "Raketten worden gebruikt voor ruimtevaart, wetenschap, defensie en onderzoek. Ze werken volgens de wet van actie en reactie: uitgestoten gassen zorgen voor voorwaartse beweging.",
+        "laag4": "Binnen Spark kan een raket zowel een fysiek object als een metafoor zijn voor snelle ontwikkeling, groei of het starten van een nieuw project. Spark kan het begrip koppelen aan natuurkunde, techniek, ruimtevaart, innovatie en voortgang. Afhankelijk van de context herkent Spark of het over een voertuig, een speelgoedraket, een vuurpijl of een symbolische betekenis gaat.\n"
+      },
+      "ws5": {
+        "wie": "Ruimtevaartorganisaties, ingenieurs, onderzoekers en overheden.",
+        "wat": "Een voertuig of projectiel dat zich voortbeweegt door stuwkracht.",
+        "wanneer": "Bij ruimtevluchten, lanceringen, onderzoek of andere toepassingen.",
+        "waar": "Op aarde, in de atmosfeer en in de ruimte.",
+        "waarom": "Om ladingen, mensen of instrumenten te vervoeren of onderzoek uit te voeren.",
+        "hoe": "Door brandstof te verbranden en stuwkracht op te wekken via uitgestoten gassen."
+      },
+      "tags": [
+        "kraket",
+        "ruimtevaart",
+        "stuwkracht",
+        "motor",
+        "brandstof",
+        "lancering",
+        "satelliet",
+        "ruimte",
+        "techniek",
+        "natuurkunde",
+        "innovatie",
+        "voertuig",
+        "voortstuwing",
+        "wetenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-db7993fc",
+          "begrip": "benzine",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "brandstof",
+            "emotie",
+            "motor",
+            "neutraal",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-18b848cf",
+          "begrip": "Benizinepomp",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "brandstof",
+            "emotie",
+            "motor",
+            "neutraal",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d887d5a0",
+          "begrip": "sleuf",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ruimte",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-060367cc",
+          "begrip": "fysieke",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "natuurkunde",
+            "neutraal",
+            "ruimte"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cc9f9d35",
+          "begrip": "gebouw",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "neutraal",
+            "ruimte",
+            "techniek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:38:43.358149+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T20:03:18.700352+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "wat doe je als ik je vraag hoe een raket werkt?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T20:03:17.543727+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T20:03:17.644529+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T20:03:17.651971+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T20:03:19.043277+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T20:03:19.050588+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
             }
           }
         ]

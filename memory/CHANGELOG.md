@@ -2,6 +2,40 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — Snuffel-bestand capability (`v6_snuffel_bestand_001`)
+
+### 🔍 Spark Internal File Search
+Nieuw: Spark kan op verzoek zijn eigen JSON-data doorzoeken en hits gestructureerd terugmelden.
+
+**Doorzochte bronnen:**
+- KB v2 (alle 4 lades + inbox) — privacy-filter op `bron_user_id` voor private kaarten
+- Notes — alleen van viewer of zonder owner
+- Personality (bijbel, self_awareness, capabilities, modes, origin docs)
+- Chat-logs (alleen viewer's eigen logs, laatste 50 conversaties)
+
+**Triggers (fast-path in `response_composer`):**
+- `snuffel [naar] X`
+- `zoek in (je) bestand(en) naar X`
+- `doorzoek je geheugen op X`
+- `waar staat info over X?`
+- `vind X in je bestanden`
+- `kan je snuffelen naar X`
+
+**API:** `POST /api/spark/compose/snuffel` met `{query, viewer_id, scope?}`
+
+**Scoring:** Eenvoudige substring + token-overlap (geen rapidfuzz overhead per file). Begrip krijgt +20 score-boost. Threshold ≥50.
+
+**Performance:** Test "emoties" → 8 hits in 132ms (chat fast-path) / 399ms (directe API).
+
+**Files:**
+- `modules/chat/spark_snuffel.py` (290 regels) — detect + execute + format
+- `modules/chat/response_composer.py` — fast-path integratie vóór Help-intent
+- `modules/chat/compose_routes.py` — `/snuffel` endpoint
+- `data/personality/spark_capabilities.json` — capability geregistreerd (status: live)
+
+**Live getest met 4 trigger-varianten:** alle returnen `action=snuffel_bestand` + relevante hits.
+
+
 ## 2026-06-29 — Tab-context + Daily-brief scheduler + 3-file refactor + UI schoonmaak
 
 ### 🧹 UI Schoonmaak (KennisbankV2Page.js)

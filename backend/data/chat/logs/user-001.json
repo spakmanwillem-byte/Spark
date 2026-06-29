@@ -50305,11 +50305,101 @@
         "session_id": "default",
         "gesprek_nummer": 1941
       }
+    },
+    {
+      "id": "conv-2b5900fc",
+      "timestamp": "2026-06-29T20:06:40.113771+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "snuffel naar emoties",
+      "spark_response": "🔍 **Snuffel-resultaat voor 'emoties'** — 8 hits in 132ms\n\n**KB-kaarten (5):**\n  • [doen] **Emoties** `[emotie, gevoel, gedrag, reactie, mens]`\n    Emoties zijn gevoelens die laten zien hoe iemand zich voelt.\n  • [doen] **Conflict** `[ruzie, spanning, meningsverschil, interactie, sociaal]`\n    Een conflict is een situatie waarin mensen of groepen het niet met elkaar eens zijn en daardoor spanning of strijd ontst\n  • [doen] **Bubbelen** `[bubbelen, Gas, vloeistof, koken, bruisen]`\n    Bubbelen betekent dat er kleine lucht- of gasbelletjes ontstaan in een vloeistof.\n  • [doen] **Menigte** `[menigte, groep, mens, publiek, gedrag]`\n    Een menigte is een grote groep mensen bij elkaar.\n  • [doen] **Artiesten** `[artiest, kunst, creatie, expressie, optreden]`\n    Artiesten zijn mensen die kunst maken of uitvoeren.\n\n**Personality/Bijbel (3):**\n  • [bijbel] kernwaarden[8].voorbeelden[0]: Een tragere maar begrijpelijke oplossing is waardevoller dan een snelle ondoorzichtige automatisering. AI dient de mens.\n  • [modes] _doel: Spark's werkmodi. Elke modus heeft een woord-limiet en toon. Wordt gekoppeld aan emoties via spark_emotions.json (sub_em\n  • [self_awareness] _doel: Spark's bewustzijn van zijn eigen architectuur. Wordt geïnject in Diep-system_prompt zodat hij kan praten over zijn tabs\n",
+      "channel": "spark-snuffel",
+      "analysis": {
+        "action": "snuffel_bestand",
+        "query": "emoties",
+        "total_hits": 8
+      },
+      "metadata": {
+        "session_id": "test-snuffel",
+        "gesprek_nummer": 1942
+      }
+    },
+    {
+      "id": "conv-f37e97c2",
+      "timestamp": "2026-06-29T20:06:52.029081+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "zoek in je bestanden naar trade",
+      "spark_response": "🔍 **Snuffel-resultaat voor 'trade'** — 7 hits in 141ms\n\n**KB-kaarten (5):**\n  • [doen] **traden** `[traden, handel, aandelen, crypto, markt]`\n    Traden betekent het kopen en verkopen van producten, aandelen, crypto of andere waarde-objecten om winst te maken.\n  • [doen] **trader** `[trader, handelaar, trading, handel, markt]`\n    Een trader is iemand die handelt in financiële producten.\n  • [doen] **De Boekhouder** `[bboekhouder, actor, spark, financiën, trade]`\n    De Boekhouder is een actor binnen Spark die financiële gebeurtenissen registreert en rapporteert.\n  • [voelen] **Heb jij winst gemaakt vandaag met traden?** `[traden, informatie, winst, trading, geld]`\n    Een vraag of iemand vandaag geld of voordeel heeft verdiend met handelen op financiële markten.\n  • [doen] **achtergrondproces** `[achtergrondproces, systeemproces, automatisering, synchronisatie, monitoring]`\n    Een proces dat op de achtergrond actief is zonder direct zichtbaar of centraal merkbaar te zijn.\n\n**Personality/Bijbel (2):**\n  • [self_awareness] eigen_data_map.data/trade/: Trade-bot state (potjes, monitor, deposits)\n  • [capabilities] capabilities[0].id: trade_logs_ophalen\n",
+      "channel": "spark-snuffel",
+      "analysis": {
+        "action": "snuffel_bestand",
+        "query": "trade",
+        "total_hits": 7
+      },
+      "metadata": {
+        "session_id": "test-snuf",
+        "gesprek_nummer": 1943
+      }
+    },
+    {
+      "id": "conv-d5487224",
+      "timestamp": "2026-06-29T20:06:52.236497+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "doorzoek je geheugen op willem",
+      "spark_response": "🔍 **Snuffel-resultaat voor 'willem'** — 8 hits in 140ms\n\n**KB-kaarten (5):**\n  • [weten] **Woeste Willem** `[woeste willem, bijnaam, persoon, karakter, boosheid]`\n    Woeste Willem is een persoon die erg boos lijkt.\n  • [voelen] **Ik ben Willem, sparx123** `[reiki, lijn, overdracht, traditie, stamboom]`\n    Een Reiki-lijn is de specifieke overdrachtsketen van Reiki-meesters en leerlingen.\n  • [voelen] **Roadkill** `[roadkill, gamertag, identiteit, gaming, community]`\n    Roadkill is de online identiteit en gamertag van Willem Spakman, uitgegroeid van gamingnaam naar community- en identitei\n  • [weten] **Roadkill (dier)** `[roadkill, definitie, algemeen, wikipedia]`\n    Roadkill is een Engels woord voor dieren die zijn aangereden en dood zijn op de weg.\n  • [spreken] **Ik ga slapen** `[slaap, afsluiting, rust, communicatie, intentie]`\n    Aankondiging dat iemand gaat slapen en het gesprek afsluit\n\n**Personality/Bijbel (3):**\n  • [bijbel] kernwaarden[0].ws5.who: Willem, Spark gebruikers, Community\n  • [self_awareness] _update_strategy: Hand-edit door Willem OF auto-sync via een nightly job die spark_capabilities.json + frontend-pages + _meta.json files l\n  • [origin/spark_hoofddocument] auteur: Willem Spakman (Roadkill)\n",
+      "channel": "spark-snuffel",
+      "analysis": {
+        "action": "snuffel_bestand",
+        "query": "willem",
+        "total_hits": 8
+      },
+      "metadata": {
+        "session_id": "test-snuf",
+        "gesprek_nummer": 1944
+      }
+    },
+    {
+      "id": "conv-47aa9dd4",
+      "timestamp": "2026-06-29T20:06:52.437551+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "waar staat info over conflict",
+      "spark_response": "🔍 **Snuffel-resultaat voor 'conflict'** — 6 hits in 135ms\n\n**KB-kaarten (5):**\n  • [doen] **Conflict** `[ruzie, spanning, meningsverschil, interactie, sociaal]`\n    Een conflict is een situatie waarin mensen of groepen het niet met elkaar eens zijn en daardoor spanning of strijd ontst\n  • [doen] **Conflict ontstaat door vuur** `[conflict, emotie, vuur, gedrag, spanning]`\n    Conflict komt vaak voort uit emotie en spanning.\n  • [spreken] **Conflictoplossing** `[conflict, Oplossing, communicatie, bemiddeling, relatie]`\n    Conflictoplossing is het oplossen van een conflict tussen mensen of partijen.\n  • [doen] **Facties** `[factie, groep, macht, invloed, politiek]`\n    Een factie is een groep mensen binnen een groter geheel die dezelfde belangen, ideeën of doelen delen.\n  • [doen] **Emotionele menigte** `[menigte, emotie, gedrag, groep, dynamiek]`\n    Emotionele menigte\n\n**Personality/Bijbel (1):**\n  • [bijbel] bijbel_items[0].ws5.waar: In gesprekken, relaties, conflicten, observaties en meningsvorming\n",
+      "channel": "spark-snuffel",
+      "analysis": {
+        "action": "snuffel_bestand",
+        "query": "conflict",
+        "total_hits": 6
+      },
+      "metadata": {
+        "session_id": "test-snuf",
+        "gesprek_nummer": 1945
+      }
+    },
+    {
+      "id": "conv-d86c2009",
+      "timestamp": "2026-06-29T20:06:52.638770+00:00",
+      "user_id": "user-001",
+      "user_naam": "user-001",
+      "user_message": "vind D&D in je bestanden",
+      "spark_response": "🔍 **Snuffel-resultaat voor 'd&d'** — 3 hits in 134ms\n\n**KB-kaarten (2):**\n  • [weten] **Persoonskaart Rugzak** `[rugzak, persoonskaart, inventory, carry, d&d]`\n    Persoonskaart-rugzak = inventory-slot dat bonus draagkracht geeft (D&D-laag van Spark).\n  • [weten] **Base Line** `[base line, spark world, lore, d&d, oorsprong]`\n    Base Line is het oorsprongspunt van Spark World — Spark's eigen 3D universum (X=0, Y=0, Z=0).\n\n**Personality/Bijbel (1):**\n  • [origin/spark_hoofddocument] tijdlijn[4].wat: Lokale LLM fallback (Ollama), volledige offline-werking, Spark World D&D-laag, semantisch lerend zonder cloud.\n",
+      "channel": "spark-snuffel",
+      "analysis": {
+        "action": "snuffel_bestand",
+        "query": "d&d",
+        "total_hits": 3
+      },
+      "metadata": {
+        "session_id": "test-snuf",
+        "gesprek_nummer": 1946
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1941,
-    "last_updated": "2026-06-29T19:37:12.624247+00:00"
+    "total_conversations": 1946,
+    "last_updated": "2026-06-29T20:06:52.638770+00:00"
   }
 }

@@ -106,6 +106,7 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 - ✅ **`response_composer.py` refactor** 1212 → **528** regels + composer_helpers.py (695)
 - ✅ **`smart_intents_service.py` refactor** 1205 → **769** regels + smart_intents_profile.py (462)
 - ✅ **`chat/routes.py` refactor** 2174 → **1845** regels + chat_extra_routes.py (365) — eigen router met zelfde /chat prefix
+- ✅ **Snuffel-bestand capability** (v6_snuffel_bestand_001) — Spark doorzoekt eigen JSON-data (KB+notes+personality+chat) op verzoek; 6 trigger-varianten; privacy-filter; live API + fast-path
 
 ### 🟡 Backlog (uit code-reviews iter_38+39)
 - `response_composer.py` 721 regels → splitsen in fast_paths/self_awareness/compose_core. P2.

@@ -50,7 +50,9 @@
     "POST /kb/v2/tags/normalize-batch",
     "POST /kb/v2/vocab/sync",
     "POST /kb/v2/voice",
-    "POST /kb/v2/voice/secondary"
+    "POST /kb/v2/voice/secondary",
+    "POST /kb/v2/{card_id}/llm-approve",
+    "POST /kb/v2/{card_id}/llm-generate"
   ],
   "tags": [],
   "encryption": {
@@ -62,7 +64,7 @@
   "created_at": "2026-05-26T15:54:32.222447+00:00",
   "last_touched": "2026-05-26T16:13:27.020693+00:00",
   "activity_count": 0,
-  "file_count": 9,
+  "file_count": 10,
   "subdir_count": 0,
   "extra": {}
 }

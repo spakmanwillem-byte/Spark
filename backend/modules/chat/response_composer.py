@@ -101,6 +101,44 @@ async def compose_response(
     except Exception:
         pass  # bij fout: ga gewoon door naar LLM-pad
 
+    # v6_snuffel_bestand_001 — Spark doorzoekt eigen JSON-data op verzoek
+    try:
+        from modules.chat.spark_snuffel import detect_snuffel_intent, execute_snuffel, format_snuffel_result_for_chat
+        snuffel_query = detect_snuffel_intent(user_text)
+        if snuffel_query:
+            result = execute_snuffel(snuffel_query, viewer_id=user_id)
+            spark_msg = format_snuffel_result_for_chat(result)
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response=spark_msg,
+                        channel="spark-snuffel",
+                        session_id=session_id,
+                        analysis={"action": "snuffel_bestand", "query": snuffel_query, "total_hits": result.get("total_hits", 0)},
+                    )
+                except Exception:
+                    pass
+                _save_turn_pair(session_id, user_id, user_text, spark_msg, "spark_snuffel")
+            return {
+                "success": True,
+                "message": spark_msg,
+                "action": "snuffel_bestand",
+                "type": "snuffel_result",
+                "snuffel_query": snuffel_query,
+                "snuffel_total": result.get("total_hits", 0),
+                "snuffel_data": result.get("results", {}),
+                "used_cards": [],
+                "used_model": "spark_snuffel",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass
+
     # v6_deep_help_001 — Help-intent ('help', 'wat kan je', etc.) opent de HelpBark popup
     # via een UI-event. Diep heeft deze short-circuit nodig anders blijft de LLM lekker
     # filosofisch antwoorden i.p.v. de popup te openen.

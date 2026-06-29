@@ -1,18 +1,18 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-06-27T01:18:16.810110+00:00",
+  "generated_at": "2026-06-29T20:01:16.387826+00:00",
   "summary": {
-    "total_containers": 104,
+    "total_containers": 106,
     "by_status": {
-      "active": 90,
+      "active": 92,
       "skeleton": 14
     },
     "by_container_type": {
-      "dir": 70,
-      "data": 34
+      "dir": 71,
+      "data": 35
     },
-    "total_endpoints_detected": 550
+    "total_endpoints_detected": 571
   },
   "tree": {
     "backend_modules": {
@@ -488,10 +488,12 @@
         "children_max": 4,
         "endpoints": [
           "DELETE /chat/logs/{user_id}/{conv_id}",
+          "GET /chat/blueprint",
           "GET /chat/emotions/all",
           "GET /chat/emotions/learned",
           "GET /chat/emotions/state",
           "GET /chat/intent/capabilities",
+          "GET /chat/learned-triggers",
           "GET /chat/logs",
           "GET /chat/logs/{user_id}",
           "GET /chat/logs/{user_id}/stats",
@@ -501,8 +503,11 @@
           "GET /chat/shadow/recent",
           "GET /chat/shadow/stats",
           "GET /chat/shadow/unused",
+          "POST /chat/blueprint/reload",
           "POST /chat/emotions/detect",
           "POST /chat/intent/match",
+          "POST /chat/learned-triggers/{voorstel_id}/approve",
+          "POST /chat/learned-triggers/{voorstel_id}/reject",
           "POST /chat/message",
           "POST /chat/relay/inbox/{user_id}/read/{message_id}",
           "POST /chat/shadow/reset",
@@ -519,8 +524,8 @@
         "created_at": "2026-05-26T15:54:32.167435+00:00",
         "last_touched": "2026-05-26T16:13:26.963707+00:00",
         "activity_count": 0,
-        "file_count": 36,
-        "subdir_count": 0,
+        "file_count": 51,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/modules/contacts": {
@@ -651,7 +656,7 @@
         "created_at": "2026-05-26T15:54:32.177651+00:00",
         "last_touched": "2026-05-26T16:13:26.978184+00:00",
         "activity_count": 0,
-        "file_count": 3,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1251,7 +1256,9 @@
           "POST /kb/v2/tags/normalize-batch",
           "POST /kb/v2/vocab/sync",
           "POST /kb/v2/voice",
-          "POST /kb/v2/voice/secondary"
+          "POST /kb/v2/voice/secondary",
+          "POST /kb/v2/{card_id}/llm-approve",
+          "POST /kb/v2/{card_id}/llm-generate"
         ],
         "tags": [],
         "encryption": {
@@ -1263,7 +1270,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-05-26T16:13:27.020693+00:00",
         "activity_count": 0,
-        "file_count": 9,
+        "file_count": 10,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1602,13 +1609,16 @@
         "children_max": 4,
         "endpoints": [
           "DELETE /spark/bijbel/{section}/{identifier}",
+          "DELETE /spark/self-reflections/{refl_id}",
           "DELETE /spark/vocab/{group}/{key:path}/{word}",
           "GET /spark/bijbel",
           "GET /spark/disclaimer",
           "GET /spark/full",
           "GET /spark/identity",
+          "GET /spark/self-reflections",
           "GET /spark/vocab",
           "POST /spark/bijbel/{section}",
+          "POST /spark/self-reflections",
           "POST /spark/vocab/approve-growth",
           "POST /spark/vocab/{group}/{key:path}/add",
           "PUT /spark/bijbel/{section}/{identifier}",
@@ -1624,8 +1634,8 @@
         "created_at": "2026-05-26T15:54:32.244033+00:00",
         "last_touched": "2026-05-26T16:13:27.040491+00:00",
         "activity_count": 0,
-        "file_count": 1,
-        "subdir_count": 0,
+        "file_count": 2,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/modules/spark_kasboek": {
@@ -1722,6 +1732,45 @@
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
+        "extra": {}
+      },
+      "backend/modules/spark_planner": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "spark_planner",
+        "doel": "(spark_planner — geen doel-omschrijving)",
+        "container_type": "dir",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [
+          "DELETE /spark/planner/threads/{thread_id}",
+          "GET /spark/planner/blueprint",
+          "GET /spark/planner/brief/latest",
+          "GET /spark/planner/brief/list",
+          "GET /spark/planner/brief/{user_id}/{date}",
+          "GET /spark/planner/threads",
+          "PATCH /spark/planner/threads/{thread_id}/status",
+          "POST /spark/planner/blueprint/reload",
+          "POST /spark/planner/brief/build",
+          "POST /spark/planner/threads",
+          "POST /spark/planner/threads/decay"
+        ],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-29T20:01:15.746405+00:00",
+        "last_touched": "2026-06-29T20:01:15.746405+00:00",
+        "activity_count": 0,
+        "file_count": 5,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/modules/synapse": {
@@ -2723,9 +2772,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-06-27T00:53:08.726225+00:00",
-        "activity_count": 779,
-        "file_count": 38,
+        "last_touched": "2026-06-29T19:37:12.666302+00:00",
+        "activity_count": 1670,
+        "file_count": 85,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2750,8 +2799,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-06-26T22:37:02.844233+00:00",
-        "activity_count": 103,
+        "last_touched": "2026-06-29T19:01:03.895624+00:00",
+        "activity_count": 119,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2831,9 +2880,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-06-16T20:27:56.545050+00:00",
-        "activity_count": 170,
-        "file_count": 16,
+        "last_touched": "2026-06-27T20:45:11.573051+00:00",
+        "activity_count": 172,
+        "file_count": 17,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2858,9 +2907,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.319273+00:00",
-        "last_touched": "2026-05-26T16:13:27.111780+00:00",
-        "activity_count": 0,
-        "file_count": 30,
+        "last_touched": "2026-06-27T23:00:41.216091+00:00",
+        "activity_count": 2,
+        "file_count": 34,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2885,9 +2934,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-06-27T01:18:08.970308+00:00",
-        "activity_count": 115093,
-        "file_count": 8,
+        "last_touched": "2026-06-29T20:01:12.899500+00:00",
+        "activity_count": 120077,
+        "file_count": 9,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2912,8 +2961,8 @@
           "key_holder": null
         },
         "created_at": "2026-06-03T13:57:41.086997+00:00",
-        "last_touched": "2026-06-04T12:43:25.110115+00:00",
-        "activity_count": 124,
+        "last_touched": "2026-06-27T22:12:42.304477+00:00",
+        "activity_count": 164,
         "file_count": 6,
         "subdir_count": 1,
         "extra": {}
@@ -2939,8 +2988,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-06-27T00:16:26.037566+00:00",
-        "activity_count": 632,
+        "last_touched": "2026-06-28T16:13:20.320945+00:00",
+        "activity_count": 750,
         "file_count": 6,
         "subdir_count": 0,
         "extra": {}
@@ -2993,9 +3042,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-06-27T00:56:26.411822+00:00",
-        "activity_count": 5905,
-        "file_count": 14,
+        "last_touched": "2026-06-29T20:00:16.754187+00:00",
+        "activity_count": 6328,
+        "file_count": 15,
         "subdir_count": 2,
         "extra": {}
       },
@@ -3020,8 +3069,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.325005+00:00",
-        "last_touched": "2026-06-05T11:32:06.326222+00:00",
-        "activity_count": 3,
+        "last_touched": "2026-06-28T16:12:56.947328+00:00",
+        "activity_count": 6,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3074,10 +3123,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-06-27T00:56:26.302243+00:00",
-        "activity_count": 11127,
-        "file_count": 9,
-        "subdir_count": 0,
+        "last_touched": "2026-06-29T20:00:16.549261+00:00",
+        "activity_count": 11233,
+        "file_count": 15,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/data/persons": {
@@ -3128,8 +3177,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-06-27T01:16:00.552512+00:00",
-        "activity_count": 1726,
+        "last_touched": "2026-06-29T19:58:00.746077+00:00",
+        "activity_count": 2030,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3184,7 +3233,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 28,
+        "file_count": 30,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3242,6 +3291,33 @@
         "subdir_count": 9,
         "extra": {}
       },
+      "backend/data/spark_planner": {
+        "_arch_ref": "v6_synapse_001",
+        "schema_version": "1.0",
+        "naam": "spark_planner",
+        "doel": "(spark_planner — geen doel-omschrijving)",
+        "container_type": "data",
+        "status": "active",
+        "owner": "spark-system",
+        "blueprint_ref": null,
+        "footnote": "",
+        "split_from": null,
+        "children_max": 4,
+        "endpoints": [],
+        "tags": [],
+        "encryption": {
+          "enabled": false,
+          "algorithm": null,
+          "key_id": null,
+          "key_holder": null
+        },
+        "created_at": "2026-06-29T20:01:15.844742+00:00",
+        "last_touched": "2026-06-29T20:01:15.844742+00:00",
+        "activity_count": 0,
+        "file_count": 2,
+        "subdir_count": 1,
+        "extra": {}
+      },
       "backend/data/system": {
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
@@ -3263,9 +3339,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-06-27T01:18:16.606900+00:00",
-        "activity_count": 26165,
-        "file_count": 196,
+        "last_touched": "2026-06-29T20:01:15.935023+00:00",
+        "activity_count": 29857,
+        "file_count": 201,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3293,7 +3369,7 @@
         "last_touched": "2026-06-07T02:01:06.033551+00:00",
         "activity_count": 89,
         "file_count": 144,
-        "subdir_count": 2,
+        "subdir_count": 5,
         "extra": {}
       },
       "backend/data/trade": {
@@ -3317,8 +3393,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-06-26T22:24:44.885471+00:00",
-        "activity_count": 799,
+        "last_touched": "2026-06-29T18:56:03.872879+00:00",
+        "activity_count": 802,
         "file_count": 17,
         "subdir_count": 1,
         "extra": {}
@@ -3346,7 +3422,7 @@
         "created_at": "2026-05-26T15:54:32.341521+00:00",
         "last_touched": "2026-05-26T16:13:27.160754+00:00",
         "activity_count": 0,
-        "file_count": 5,
+        "file_count": 6,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3398,10 +3474,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.345126+00:00",
-        "last_touched": "2026-06-04T20:47:22.195917+00:00",
-        "activity_count": 63,
-        "file_count": 83,
-        "subdir_count": 30,
+        "last_touched": "2026-06-27T11:57:14.909903+00:00",
+        "activity_count": 70,
+        "file_count": 87,
+        "subdir_count": 31,
         "extra": {}
       },
       "backend/data/wallet": {

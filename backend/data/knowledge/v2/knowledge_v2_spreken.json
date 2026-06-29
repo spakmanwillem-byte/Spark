@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 547,
+    "card_count": 551,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-28T13:56:25.617550+00:00",
+    "last_updated": "2026-06-29T19:56:27.727980+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72190,6 +72190,641 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-06-03T08:15:47.298184+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-4b7d981f",
+      "begrip": "Gezegd",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "is de voltooid deelwoordvorm van zeggen en betekent dat iets is uitgesproken of meegedeeld.",
+        "laag2": "Gezegd wordt gebruikt om aan te geven dat woorden, informatie of een boodschap eerder mondeling of schriftelijk zijn geuit.",
+        "laag3": "Gezegd verwijst naar een uitspraak, mededeling of opmerking die al is gedaan. Het woord wordt gebruikt om terug te verwijzen naar eerdere communicatie of om aan te geven dat een boodschap is overgebracht. In gesprekken helpt het om eerdere informatie of afspraken opnieuw te betrekken.\n",
+        "laag4": "Binnen Spark verwijst gezegd naar informatie die eerder in een gesprek, notitie, spraakopname of bericht is geuit. Spark kan eerder gezegde informatie herkennen, koppelen aan context of kenniskaarten en deze gebruiken om gesprekken consistenter en betekenisvoller te maken.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon, AI of systeem dat iets uitspreekt.",
+        "wat": "Een eerder uitgesproken of meegedeelde boodschap.",
+        "wanneer": "Nadat iets is uitgesproken of geschreven",
+        "waar": "In gesprekken, berichten, documenten, spraakopnames en digitale communicatie.",
+        "waarom": "Om te verwijzen naar eerdere communicatie of een uitspraak",
+        "hoe": "Door woorden uit te spreken, te schrijven of vast te leggen."
+      },
+      "tags": [
+        "gezegd",
+        "zeggen",
+        "uitspraak",
+        "communicatie",
+        "gesprek",
+        "spraak",
+        "taal",
+        "context",
+        "herinnering",
+        "informatie",
+        "bericht",
+        "verleden",
+        "werkwoord",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "gesprek",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-05777c12",
+          "begrip": "spraken",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "informatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "context",
+            "emotie",
+            "informatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:42:57.681217+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-06-29T19:41:59.006062+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:42:54.981426+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:42:55.083310+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:42:55.090706+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:42:57.878504+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:42:57.885934+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-1fe4e144",
+      "begrip": "verteld",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verteld is een veelvoorkomende vervoegingsfout van vertelt of vertelde, afhankelijk van de context.",
+        "laag2": "In correct Nederlands is verteld meestal het voltooid deelwoord van vertellen (bijvoorbeeld: heeft verteld). Als werkwoord in de tegenwoordige tijd is de juiste vorm vertelt.",
+        "laag3": "Het woord verteld wordt vaak gebruikt in spreektaal, chats en spraaktranscripties waar eigenlijk vertelt of vertelde wordt bedoeld. Binnen taalverwerking is het belangrijk om de context te gebruiken om de juiste betekenis en vervoeging te bepalen. Als voltooid deelwoord is verteld wel correct, bijvoorbeeld: Hij heeft het verhaal verteld.\n",
+        "laag4": "Binnen Spark wordt verteld contextafhankelijk geïnterpreteerd. Spark herkent of het woord een voltooid deelwoord is (heeft verteld) of een foutieve vervoeging van vertelt of vertelde. Hierdoor blijven gesprekken en spraaktranscripties begrijpelijk zonder de betekenis te verliezen.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen die spreekt, schrijft of verhalen deelt.",
+        "wat": "Een vervoeging of voltooid deelwoord van het werkwoord vertellen.",
+        "wanneer": "Tijdens gesprekken, verhalen, uitleg of communicatie.",
+        "waar": "In gesproken taal, geschreven tekst en digitale communicatie.",
+        "waarom": "Om informatie, ervaringen of verhalen over te brengen.",
+        "hoe": "Door iets mondeling of schriftelijk te vertellen."
+      },
+      "tags": [
+        "verteld",
+        "vertelt",
+        "vertelde",
+        "vertellen",
+        "werkwoord",
+        "taal",
+        "grammatica",
+        "communicatie",
+        "verhaal",
+        "spraak",
+        "transcriptie",
+        "context",
+        "Nederlands",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2acb2921",
+          "begrip": "houdt",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ba3a044",
+          "begrip": "hield",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b7d981f",
+          "begrip": "Gezegd",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "spraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a66829f",
+          "begrip": "laat",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "grammatica",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:54:52.674416+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:48:39.483984+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "heb ik dat eerder niet verteld?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:48:37.306738+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:48:37.409080+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:48:37.416720+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:48:39.683016+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:48:39.690502+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a09bbe33",
+      "begrip": "leugentje",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een leugentje is een kleine of onschuldige leugen die vaak wordt verteld om iemand te beschermen, ongemak te voorkomen of een situatie makkelijker te maken.",
+        "laag2": "Een leugentje is een bewust onware uitspraak die meestal als minder ernstig wordt gezien dan een grote leugen. De beoordeling hangt af van de intentie, de gevolgen en de context.",
+        "laag3": "Een leugentje wordt gebruikt om gevoelens te sparen, conflicten te vermijden of sociale situaties soepeler te laten verlopen. Hoewel het vaak als onschuldig wordt beschouwd, blijft het een vorm van onwaarheid. Wat als een leugentje wordt gezien, verschilt per persoon, cultuur en situatie.\n",
+        "laag4": "Binnen Spark wordt een leugentje niet alleen herkend als een onware uitspraak, maar ook beoordeeld op context, intentie en gevolg. Spark maakt onderscheid tussen feitelijke onjuistheid, humor, sarcasme, beleefdheid, fantasie en bewuste misleiding. Hierdoor kan Spark genuanceerder omgaan met menselijke communicatie.\n"
+      },
+      "ws5": {
+        "wie": "Iedereen kan een leugentje vertellen.",
+        "wat": "Een kleine of onschuldige onwaarheid.",
+        "wanneer": "Wanneer iemand iets bewust anders weergeeft dan de werkelijkheid.",
+        "waar": "In gesprekken, berichten en sociale situaties.",
+        "waarom": "Om iemand te beschermen, ongemak te voorkomen, beleefd te zijn of een situatie te vergemakkelijken.",
+        "hoe": "Door bewust iets te zeggen dat niet volledig overeenkomt met de werkelijkheid."
+      },
+      "tags": [
+        "leugentje",
+        "leugen",
+        "waarheid",
+        "communicatie",
+        "intentie",
+        "context",
+        "ethiek",
+        "vertrouwen",
+        "misleiding",
+        "beleefdheid",
+        "sociaal",
+        "taal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-35bf6a72",
+          "begrip": "Hoe laat is het?",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "sociaal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-520cbff2",
+          "begrip": "zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea50eab8",
+          "begrip": "De betekenis van vraag is onjuist in deze zin",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "intentie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0cfd731e",
+          "begrip": "excuus ik was even weg",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "beleefdheid",
+            "communicatie",
+            "emotie",
+            "neutraal",
+            "sociaal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T00:25:17.005824+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:50:15.644550+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "mag ik mijn vriend een leugentje vertellen voor zijn verjaardag?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:50:13.279089+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:50:13.381629+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:50:13.389081+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:50:15.850348+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:50:15.858109+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-93b38729",
+      "begrip": "bedankte",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bedankte is de verleden tijd van bedanken en betekent dat iemand zijn of haar dank heeft uitgesproken.",
+        "laag2": "Bedankte geeft aan dat iemand in het verleden waardering of dankbaarheid heeft geuit voor een persoon, hulp, gebaar of gebeurtenis.",
+        "laag3": "Het werkwoord bedanken wordt gebruikt wanneer iemand zijn waardering uitspreekt. Bedankte is de enkelvoudige verleden tijd en komt voor in situaties zoals gesprekken, berichten, toespraken en sociale interacties. Bedanken versterkt vaak onderlinge relaties en laat erkenning zien voor iets wat iemand heeft gedaan.\n",
+        "laag4": "Binnen Spark wordt bedankte gekoppeld aan een eerdere interactie waarin dankbaarheid is uitgesproken. Spark kan deze informatie gebruiken om de context van gesprekken, sociale relaties en positieve interacties beter te begrijpen en eventueel als gebeurtenis of herinnering vast te leggen.\n"
+      },
+      "ws5": {
+        "wie": "Een persoon, AI of organisatie die dank uitspreekt.",
+        "wat": "Het uitspreken van dank of waardering in het verleden",
+        "wanneer": "Nadat hulp, steun, een cadeau, informatie of een dienst is ontvangen.",
+        "waar": "In gesprekken, berichten, e-mails, toespraken en digitale communicatie.",
+        "waarom": "Om waardering, respect of dankbaarheid te tonen.",
+        "hoe": "Door iemand mondeling of schriftelijk te bedanken."
+      },
+      "tags": [
+        "bedankte",
+        "bedanken",
+        "dank",
+        "dankbaarheid",
+        "waardering",
+        "communicatie",
+        "gesprek",
+        "sociaal",
+        "verleden tijd",
+        "werkwoord",
+        "relatie",
+        "beleefdheid",
+        "erkenning",
+        "emotie",
+        "blij",
+        "positief"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-990fe083",
+          "begrip": "fijn, dank je wel",
+          "lade": "voelen",
+          "overlap": 9,
+          "shared_tags": [
+            "beleefdheid",
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-369f8921",
+          "begrip": "dank",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dank",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e02ff1c",
+          "begrip": "dankje",
+          "lade": "voelen",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dank",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2b90d9cd",
+          "begrip": "compliment",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "dankbaarheid",
+            "emotie",
+            "erkenning"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d316c9a7",
+          "begrip": "Ik wilde je alleen begroeten.",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "blij",
+            "communicatie",
+            "emotie",
+            "gesprek",
+            "positief"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-06-28T13:36:27.574963+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-06-29T19:56:27.727941+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik zei dank omdat ik je bedankte voor je reactie",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-06-29T19:56:22.304331+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:56:22.406511+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:56:22.413762+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-06-29T19:56:27.931569+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-06-29T19:56:27.938710+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,

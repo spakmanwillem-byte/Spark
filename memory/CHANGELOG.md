@@ -2,6 +2,32 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — KB → D&D Brug (`v6_kb_to_dnd_link_001`) + Archief schoonmaak
+
+### 🗑️ Archief duplicaten opgeruimd
+- 2 verweesde archive-entries verwijderd (`cc532201b553` Score.png, `d5f30bd8b6b9` High Score.png)
+- 2 fysieke `.png` bestanden gewist (~5.9 MB)
+- `kbv2-2e9b7f0e` (High Score) `image_urls[]` van 3 → 2 (1 dubbele eruit)
+- Archief 153 → 151 entries
+- Hidden duplicate: Help.png × 2 echte kaarten (helpen + Help) — laten staan tot user keuze
+
+### 🔗 KB → D&D Brug — 63 KB-kaarten met afbeelding gescand
+Mapping-script `v6_kb_to_dnd_link_001` koppelt KB-kennis met game-systeem:
+- Detecteert game-relevante concepten via begrip + tags (kleding/wapens/voedsel/schild/etc.)
+- Smart slot-detectie: Schoenen→voeten, Broek→broek, Riem→riem, Schild→offhand, Handzwaard→rechterhand, Medaillon→nek
+- Smart kind/value: voedsel/wapens/armor/drink/material
+- **Geen file-duplicatie**: game-cards verwijzen naar dezelfde `/api/system-archive/file/{id}`
+- Bi-directional links: KB heeft `linked_game_card_id`, game-card heeft `footnote.linked_kb_card_id`
+
+**Resultaten:**
+- 4 bestaande game-cards verrijkt met KB-afbeelding
+- 19 nieuwe game-cards aangemaakt vanuit KB
+- 40 KB-kaarten met image overgeslagen (filosofische/abstracte concepten — geen game-meta)
+- Totaal D&D game-cards nu: **145**
+
+⚠️ Admin-review nodig in DnD Gallery voor false-positives (bv. "Bakker (gebouw)" kreeg `kind=food` via brood-tag) — kan via bestaande `/api/dnd/spark-world/game-cards/edit` endpoint.
+
+
 ## 2026-06-29 — D&D Economie Fundament (`v6_dnd_economy_001`)
 
 ### 🏰 Land/Spark World preview kader (`v6_spark_world_preview_001`)

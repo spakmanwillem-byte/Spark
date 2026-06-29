@@ -20,16 +20,43 @@ import { X, MapPin, Sparkles, Plus } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
+// v6_dorp_buildings_full_001 — alle gebouwen uit blueprint dnd_dorp_layout.json
+// Posities op octagonal-layout. Lege wedges krijgen ?-marker via placeholder.
 const BUILDING_LAYOUT = [
-  { id: 'tempel',        pos: [50, 50], label: 'Tempel van Spark', keywords: ['tempel', 'spark'],            badge: 'CENTER',     central: true },
-  { id: 'waterput-n',    pos: [50, 22], label: 'Waterput Noord',   keywords: ['waterput', 'water', 'put'] },
-  { id: 'slager',        pos: [72, 32], label: 'Slager',           keywords: ['slager gebouw', 'slager'] },
-  { id: 'markt',         pos: [78, 50], label: 'Markt',            keywords: ['markt', 'marktplaats'],       placeholder: true },
-  { id: 'bakker',        pos: [72, 68], label: 'Bakker',           keywords: ['bakker gebouw', 'bakker'] },
-  { id: 'waterput-z',    pos: [50, 78], label: 'Waterput Zuid',    keywords: ['waterput', 'water', 'put'] },
-  { id: 'straat',        pos: [28, 68], label: 'Kleine straat',    keywords: ['kleine straat', 'straat'] },
-  { id: 'smederij',      pos: [22, 50], label: 'Smederij',         keywords: ['smederij', 'smid'],           placeholder: true },
-  { id: 'waterput-w',    pos: [28, 32], label: 'Waterput West',    keywords: ['waterput', 'water', 'put'] },
+  // ===== CENTER =====
+  { id: 'tempel_spark',  pos: [50, 50], label: 'Tempel van Spark',  keywords: ['tempel van spark', 'tempel', 'spark'], badge: 'CENTER', central: true, placeholder: true },
+
+  // ===== 8 WEDGES =====
+  { id: 'gemeentehuis',  pos: [50, 18], label: 'Gemeentehuis',      keywords: ['gemeentehuis'],            placeholder: true },
+  { id: 'smederij',      pos: [76, 28], label: 'Smederij',          keywords: ['smederij', 'smid'],         placeholder: true },
+  { id: 'herberg',       pos: [85, 50], label: 'Herberg',           keywords: ['herberg'],                  placeholder: true },
+  { id: 'wachterspost',  pos: [76, 72], label: 'Wachterspost',      keywords: ['wachterspost', 'wachter'],  placeholder: true },
+  { id: 'akker',         pos: [50, 82], label: 'Akker',             keywords: ['akker', 'akkerveld'],       placeholder: true },
+  { id: 'houthakkerij',  pos: [24, 72], label: 'Houthakkerij',      keywords: ['houthakkerij'],             placeholder: true },
+  { id: 'kruidenwinkel', pos: [15, 50], label: 'Kruidenwinkel',     keywords: ['kruidenwinkel'],            placeholder: true },
+  { id: 'jachthut',      pos: [24, 28], label: 'Jachthut',          keywords: ['jachthut'],                 placeholder: true },
+
+  // ===== EXTRA WEDGES (markt + warehouse + auction + barracks) =====
+  { id: 'markt',         pos: [62, 38], label: 'Markt',             keywords: ['markt', 'marktplaats'],     placeholder: true },
+  { id: 'warehouse',     pos: [38, 38], label: 'Stedelijk Pakhuis', keywords: ['stedelijk pakhuis', 'warehouse', 'pakhuis'], placeholder: true },
+  { id: 'auctionhouse',  pos: [62, 62], label: 'Auction House',     keywords: ['auction house', 'auctionhouse'], placeholder: true },
+  { id: 'barracks',      pos: [38, 62], label: 'Kazerne',           keywords: ['kazerne', 'barracks'],      placeholder: true },
+
+  // ===== PERIMETER (4 muren) =====
+  { id: 'muur_n', pos: [50, 7],  label: 'Stadsmuur N', keywords: ['stadsmuur'], small: true, placeholder: true },
+  { id: 'muur_o', pos: [93, 50], label: 'Stadsmuur O', keywords: ['stadsmuur'], small: true, placeholder: true },
+  { id: 'muur_z', pos: [50, 93], label: 'Stadsmuur Z', keywords: ['stadsmuur'], small: true, placeholder: true },
+  { id: 'muur_w', pos: [7,  50], label: 'Stadsmuur W', keywords: ['stadsmuur'], small: true, placeholder: true },
+
+  // ===== PERIMETER (4 poorten) =====
+  { id: 'poort_n', pos: [50, 4],  label: 'Stadspoort N', keywords: ['stadspoort'], small: true, placeholder: true },
+  { id: 'poort_o', pos: [96, 50], label: 'Stadspoort O', keywords: ['stadspoort'], small: true, placeholder: true },
+  { id: 'poort_z', pos: [50, 96], label: 'Stadspoort Z', keywords: ['stadspoort'], small: true, placeholder: true },
+  { id: 'poort_w', pos: [4,  50], label: 'Stadspoort W', keywords: ['stadspoort'], small: true, placeholder: true },
+
+  // ===== RIOLEN (avontuur) =====
+  { id: 'riool_o', pos: [70, 65], label: 'Riool Oost', keywords: ['riool', 'riool-ingang'], small: true, placeholder: true },
+  { id: 'riool_w', pos: [30, 65], label: 'Riool West', keywords: ['riool', 'riool-ingang'], small: true, placeholder: true },
 ];
 
 function findCardFor(keywords, cards) {

@@ -1,0 +1,28 @@
+{
+  "summary": "Frontend-only visual/click test of StormhavenMapView (v6_dorp_buildings_full_001) fix. Logged in as De Willem → Mijn Profiel → Avatar tab → DorpPreviewPanel → clicked 'KAART BEKIJKEN'. Verified all 23 hotspots (1 central tempel + 22 buildings) render on the dorp-aerial map, and that clicking a hotspot or chip opens the BuildingTooltip with active ring state.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "StormhavenMapView", "issues": ["BuildingHotspot label <span> uses absolute positioning at top:100%, but parent <button> has 'overflow-hidden' (line ~192 in StormhavenMapView.js) causing the building name text under each marker to be clipped/invisible. Labels are only visible via tooltip and footer chips. Consider moving the label out of the overflow-hidden button or removing overflow-hidden (image already has rounded-full via wrapper)."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: fix hotspot label clipping — labels under each marker on the map are hidden because parent button has 'overflow-hidden'. Move <span> label outside the button, or wrap the image in an inner div with overflow-hidden instead of putting it on the button."
+  ],
+  "critical_code_review_comments": [
+    "StormhavenMapView.js line 192: 'overflow-hidden' on the hotspot button clips the absolute-positioned label span. Functionally correct (markers + tooltip work), but visual labels under markers are not shown to user.",
+    "BUILDING_LAYOUT contains 23 entries (1 central + 22 wedges/perimeter/riolen). Task description text says '22' but enumeration in the same request actually lists 23. Implementation matches the enumeration — OK.",
+    "Header comment block (lines 7-17) still describes the OLD 9-entry layout (waterputten/slager/bakker etc.). Update the comment to reflect the new full 23-building layout."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "100%"},
+  "test_credentials": "Willem / Appelsap (user-001)",
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "StormhavenMapView modal opens from Avatar tab → DorpPreviewPanel → data-testid='dorp-kaart-btn'. All hotspots have data-testid='hotspot-{id}' where id is one of: tempel_spark, gemeentehuis, smederij, herberg, wachterspost, akker, houthakkerij, kruidenwinkel, jachthut, markt, warehouse, auctionhouse, barracks, muur_n/o/z/w, poort_n/o/z/w, riool_o, riool_w. Chips have data-testid='building-chip-{id}'. Tooltip has data-testid='building-tooltip'. Footer counter shows '0/23' (no cards filled because all placeholders).",
+  "rca of the issue": "Old BUILDING_LAYOUT only had 9 entries. Fix replaced array with 23 entries matching blueprint dnd_dorp_layout.json. Verified all entries render via DOM queries (23/23) and that click + tooltip behavior is wired through React useState 'selectedBuilding'."
+}

@@ -258,9 +258,10 @@
           "vis-magisch"
         ]
       },
-      "leer_kosten_goud": 5,
+      "leer_kosten_goud": 2,
       "leer_bij_npc": "visser",
-      "leer_locatie": "haven"
+      "leer_locatie": "haven",
+      "_tax_excl": true
     },
     {
       "id": "waterhaler",
@@ -286,7 +287,8 @@
       },
       "leer_kosten_goud": 2,
       "leer_bij_npc": "wachter_dorp",
-      "leer_locatie": "put"
+      "leer_locatie": "put",
+      "_tax_excl": true
     },
     {
       "id": "boer",
@@ -329,7 +331,7 @@
       "categorie": "secondary",
       "klasse_affinity": null,
       "is_secondary": true,
-      "leer_kosten_goud": 5,
+      "leer_kosten_goud": 2,
       "leer_bij_npc": "wachter_dorp",
       "leer_locatie": "wachterspost",
       "daily_output_basis": [],
@@ -374,6 +376,114 @@
         "tier_3": [
           "edelsteen-zeldzaam",
           "antieke_munt"
+        ]
+      },
+      "_tax_excl": true
+    },
+    {
+      "id": "koken",
+      "naam": "Koken",
+      "categorie": "secondary",
+      "klasse_affinity": null,
+      "is_secondary": true,
+      "leer_kosten_goud": 2,
+      "_tax_excl": true,
+      "leer_bij_npc": "kok_herberg",
+      "leer_locatie": "herberg",
+      "daily_output_basis": [],
+      "vrije_tijd_output": [],
+      "recepten": [
+        {
+          "id": "gebakken-vis",
+          "input": [
+            {
+              "resource": "vis",
+              "qty": 1
+            }
+          ],
+          "output": [
+            {
+              "resource": "gebakken-vis",
+              "qty": 1
+            }
+          ],
+          "minuten": 15,
+          "voedingswaarde_units": 1,
+          "vereist_gebouw": "fornuis"
+        }
+      ],
+      "_doc": "Koken bespaart voedsel-kosten: 1 vis → 1 gebakken vis (1 voedseleenheid) in 15min. Vereist fornuis (huis-meubel of herberg-keuken).",
+      "tier_unlocks": {
+        "tier_2": [
+          {
+            "id": "gegrild-vlees",
+            "input": [
+              {
+                "resource": "vlees-wild",
+                "qty": 1
+              }
+            ],
+            "output": [
+              {
+                "resource": "gegrild-vlees",
+                "qty": 1
+              }
+            ],
+            "minuten": 20,
+            "voedingswaarde_units": 2
+          }
+        ],
+        "tier_3": [
+          {
+            "id": "kruidenbrood",
+            "input": [
+              {
+                "resource": "graan",
+                "qty": 2
+              },
+              {
+                "resource": "plant-helend",
+                "qty": 1
+              }
+            ],
+            "output": [
+              {
+                "resource": "kruidenbrood",
+                "qty": 1
+              }
+            ],
+            "minuten": 30,
+            "voedingswaarde_units": 3,
+            "hp_regen_bonus_pct": 1
+          }
+        ],
+        "tier_4": [
+          {
+            "id": "festijn-maaltijd",
+            "input": [
+              {
+                "resource": "gegrild-vlees",
+                "qty": 1
+              },
+              {
+                "resource": "kruidenbrood",
+                "qty": 1
+              },
+              {
+                "resource": "appel",
+                "qty": 2
+              }
+            ],
+            "output": [
+              {
+                "resource": "festijn-maaltijd",
+                "qty": 1
+              }
+            ],
+            "minuten": 60,
+            "voedingswaarde_units": 6,
+            "hp_regen_bonus_pct": 3
+          }
         ]
       }
     }

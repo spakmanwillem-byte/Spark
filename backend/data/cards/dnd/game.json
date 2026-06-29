@@ -1,6 +1,264 @@
 {
   "cards": [
     {
+      "id": "game-9b16f0f4",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Koken",
+      "sense": "doe",
+      "lagen": {
+        "laag1": "Koken — secondary beroep, geleerd bij kok in herberg voor 2 goud.",
+        "laag2": "Bespaart voedsel-kosten. Vereist fornuis (huis-meubel of herberg-keuken). 1 vis → gebakken vis in 15 min.",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "beroep",
+        "secondary",
+        "koken"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "beroep_id": "koken",
+          "is_secondary": true,
+          "leer_kosten_goud": 2,
+          "leer_bij_npc": "kok_herberg"
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": "beroep"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:26:38.624452+00:00"
+      }
+    },
+    {
+      "id": "game-41fbf297",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Gebakken vis",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "1 vis + fornuis → 1 voedseleenheid in 15 min",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "voedsel",
+        "koken-output"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": true,
+        "slot": "",
+        "weight": 0.5,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "voedingswaarde_units": 1,
+          "cooked": true
+        },
+        "value_goud": 7,
+        "rarity": "common",
+        "kind": "food"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:26:38.624490+00:00"
+      }
+    },
+    {
+      "id": "game-19158a57",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Gegrild vlees",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "1 wildvlees + fornuis → 2 voedseleenheden in 20 min (tier 2)",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "voedsel",
+        "koken-output"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": true,
+        "slot": "",
+        "weight": 0.5,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "voedingswaarde_units": 2,
+          "cooked": true
+        },
+        "value_goud": 12,
+        "rarity": "common",
+        "kind": "food"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:26:38.624514+00:00"
+      }
+    },
+    {
+      "id": "game-2564d8fa",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Kruidenbrood",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "2 graan + 1 kruid + fornuis → 3 voedseleenheden (tier 3, +1% HP-regen)",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "voedsel",
+        "koken-output"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": true,
+        "slot": "",
+        "weight": 0.5,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "voedingswaarde_units": 3,
+          "cooked": true
+        },
+        "value_goud": 20,
+        "rarity": "common",
+        "kind": "food"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:26:38.624545+00:00"
+      }
+    },
+    {
+      "id": "game-05688bc7",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Festijn-maaltijd",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "gegrild vlees + kruidenbrood + 2 appel + fornuis → 6 eenheden (tier 4, +3% HP-regen)",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "voedsel",
+        "koken-output"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": true,
+        "slot": "",
+        "weight": 0.5,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "voedingswaarde_units": 6,
+          "cooked": true
+        },
+        "value_goud": 80,
+        "rarity": "common",
+        "kind": "food"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:26:38.624568+00:00"
+      }
+    },
+    {
       "id": "game-e1cefea8",
       "class": "game",
       "type": "dnd_game_card",

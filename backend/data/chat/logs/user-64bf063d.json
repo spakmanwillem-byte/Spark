@@ -335,11 +335,32 @@
         "session_id": "default",
         "gesprek_nummer": 14
       }
+    },
+    {
+      "id": "conv-0580aac9",
+      "timestamp": "2026-06-29T19:12:31.392968+00:00",
+      "user_id": "user-64bf063d",
+      "user_naam": "Heidi",
+      "user_message": "Hoi, hoe gaat het?",
+      "spark_response": "Hoi Heidi! Het gaat goed, dank je voor het vragen! Ik ben blij dat je even tijd neemt om te chatten. Hoe gaat het met jou? Was het een leuke dag?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-b5af1c60",
+          "kbv2-7052c07a"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "test-heidi-leak3",
+        "gesprek_nummer": 15
+      }
     }
   ],
   "metadata": {
     "user_id": "user-64bf063d",
-    "total_conversations": 14,
-    "last_updated": "2026-05-18T17:28:34.245251+00:00"
+    "total_conversations": 15,
+    "last_updated": "2026-06-29T19:12:31.392968+00:00"
   }
 }

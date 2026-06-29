@@ -638,12 +638,18 @@ def _save_turn_pair(session_id: str, user_id: str, user_text: str, spark_text: s
         pass  # best-effort, faalt geen response op
 
 
-def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None, self_awareness_snippet: Optional[str] = None) -> str:
+def _build_system_prompt(bijbel_essence: Dict, emotion: Optional[str], user_profile_snippet: Optional[str] = None, topic: Optional[str] = None, planner_snippet: Optional[str] = None, self_awareness_snippet: Optional[str] = None, current_user_naam: Optional[str] = None, current_user_gradatie: Optional[int] = None) -> str:
     bp = _bp()
     tpl = bp["system_prompt_template"]
     tt_cfg = bp.get("topic_tracker", {}) or {}
     parts = list(tpl["intro"])
     parts.append("")
+    # v6_identity_leak_fix_001 — Expliciete identity-anchor BOVENAAN zodat LLM nooit
+    # de verkeerde naam plakt op de huidige user, ook al staat in history "Willem: ..."
+    if current_user_naam:
+        grad_part = f" (gradatie {current_user_gradatie})" if current_user_gradatie else ""
+        parts.append(f"⚠️ WIE JE NU SPREEKT: **{current_user_naam}**{grad_part}. NIET Willem (tenzij dit Willem zelf is). Spreek deze persoon ALTIJD aan met hun eigen naam '{current_user_naam}', NOOIT met een andere naam — ook niet als oudere gespreks-turns toevallig 'Willem' als label hadden, dat was een historische bug.")
+        parts.append("")
     if user_profile_snippet:
         parts.append("Over de gebruiker (relatie-context):")
         parts.append(f"  {user_profile_snippet}")
@@ -727,13 +733,14 @@ def _format_kb_cards(cards: List[Dict]) -> str:
     return "\n".join(lines)
 
 
-def _format_turns(turns: List[Dict]) -> str:
+def _format_turns(turns: List[Dict], user_naam: str = "Gebruiker") -> str:
     if not turns:
         return "(geen eerdere berichten in deze sessie)"
     max_chars = _bp()["limits"]["max_turn_chars"]
     out = []
     for t in turns:
-        role = "Willem" if t.get("role") == "user" else "Spark"
+        # v6_identity_leak_fix_001 — gebruik naam van huidige user, niet hardcoded "Willem"
+        role = user_naam if t.get("role") == "user" else "Spark"
         text = (t.get("text") or t.get("message") or "")[:max_chars]
         if text:
             out.append(f"  {role}: {text}")
@@ -1021,7 +1028,11 @@ async def compose_response(
     except Exception:
         planner_snippet = None
 
-    system_prompt = _build_system_prompt(bijbel, emotion, user_snippet, topic, planner_snippet, self_awareness_snippet)
+    system_prompt = _build_system_prompt(
+        bijbel, emotion, user_snippet, topic, planner_snippet, self_awareness_snippet,
+        current_user_naam=(user_profile or {}).get("naam") or "Gebruiker",
+        current_user_gradatie=(user_profile or {}).get("gradatie"),
+    )
 
     # v6_diep_snaps_001 + v6_diep_ops_context_001 — extra context-lagen voor Diep
     snap_cluster = _load_snap_cluster(user_text)
@@ -1060,12 +1071,14 @@ async def compose_response(
             "## Live operationele info (vers uit het systeem):",
             ops_context,
         ]
+    # v6_identity_leak_fix_001 — gebruik echte naam ipv hardcoded "Willem"
+    _current_user_naam = (user_profile or {}).get("naam") or "Gebruiker"
     user_prompt_parts += [
         "",
         "## Recente gesprek-turns:",
-        _format_turns(turns),
+        _format_turns(turns, user_naam=_current_user_naam),
         "",
-        "## Huidige vraag van Willem:",
+        f"## Huidige vraag van {_current_user_naam}:",
         user_text,
         "",
         "Reageer in Spark's stem, in het Nederlands.",

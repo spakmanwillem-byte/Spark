@@ -157,10 +157,22 @@ def _load_or_init(user_id: str) -> dict:
         "trust": u.get("trust", 0),
     }
 
-    # Default placeholder stat-block (basis 10, kan later gemodificeerd worden)
-    ch["statistieken"] = {
-        "Kracht": 10, "Behendigheid": 10, "Intelligentie": 10,
-        "Conditie": 10, "Wilskracht": 10, "Geluk": 10,
+    # v6_stat_points_001 — per stat extra punten verdiend via levels
+    BASE_STAT = 10
+    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]
+    spent = ch.get("stat_points_spent") or {}
+    spent = {k: int(spent.get(k, 0)) for k in STAT_NAMES}
+    used = sum(spent.values())
+    available = max(0, level - used)
+
+    # Default placeholder stat-block (basis 10 + bestede punten)
+    ch["statistieken"] = {k: BASE_STAT + spent[k] for k in STAT_NAMES}
+    ch["stat_points"] = {
+        "base": BASE_STAT,
+        "spent": spent,
+        "used": used,
+        "total": level,        # 1 punt per level
+        "available": available,
     }
     ch["aanval_verdediging"] = {
         "Aanvalskracht": 0, "Verdediging": 0, "Magie Kracht": 0,
@@ -196,6 +208,10 @@ class EquipReq(BaseModel):
 class EventReq(BaseModel):
     kind: str
     text: str
+
+
+class StatSpendReq(BaseModel):
+    stat_name: str
 
 
 # ============== ROUTES ==============
@@ -274,10 +290,41 @@ async def push_event(user_id: str, req: EventReq):
     return _load_or_init(user_id)
 
 
+@router.post("/{user_id}/stats/spend")
+async def spend_stat_point(user_id: str, req: StatSpendReq):
+    """Besteed 1 stat-punt aan een specifieke stat. 1 punt per level beschikbaar."""
+    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]
+    if req.stat_name not in STAT_NAMES:
+        raise HTTPException(400, f"Onbekende stat: {req.stat_name}")
+    ch = _load_or_init(user_id)
+    level = (ch.get("derived") or {}).get("level", 0)
+    spent = ch.get("stat_points_spent") or {k: 0 for k in STAT_NAMES}
+    spent = {k: int(spent.get(k, 0)) for k in STAT_NAMES}
+    used = sum(spent.values())
+    if used >= level:
+        raise HTTPException(400, f"Geen punten beschikbaar (used={used}, level={level})")
+    spent[req.stat_name] = spent[req.stat_name] + 1
+    ch["stat_points_spent"] = spent
+    ch["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(_char_path(user_id), _strip_derived(ch))
+    return _load_or_init(user_id)
+
+
+@router.post("/{user_id}/stats/reset")
+async def reset_stat_points(user_id: str):
+    """Reset alle bestede stat-punten (admin/debug)."""
+    ch = _load_or_init(user_id)
+    ch["stat_points_spent"] = {k: 0 for k in ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]}
+    ch["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(_char_path(user_id), _strip_derived(ch))
+    return _load_or_init(user_id)
+
+
 def _strip_derived(ch: dict) -> dict:
     """Verwijder runtime-derived velden voor we naar disk schrijven."""
     out = dict(ch)
     out.pop("derived", None)
     out.pop("statistieken", None)
     out.pop("aanval_verdediging", None)
+    out.pop("stat_points", None)
     return out

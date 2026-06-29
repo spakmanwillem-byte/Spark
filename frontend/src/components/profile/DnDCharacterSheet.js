@@ -380,7 +380,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             />
           </PaperPanel>
           {/* v6_dnd_layout_v2 — CharInfo verplaatst onder Body+Equipment (Willem 31 mei) */}
-          <CharInfoPanel char={char} userId={userId} activeTab={infoTab} setActiveTab={setInfoTab} />
+          <CharInfoPanel char={char} userId={userId} activeTab={infoTab} setActiveTab={setInfoTab} onReload={reload} />
         </div>
 
         {/* === KOLOM MIDDEN: Karakter + Stats + Overig + Bewoners (2x3) === */}
@@ -1840,7 +1840,7 @@ function EventFeedPanel({ feed, draft, setDraft, onSend }) {
   );
 }
 
-function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
+function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
   // v6_charinfo_consolidate_001 — tabs hernoemd + Aanval/Stats samengevouwen
   const tabs = [
     { id: 'char_info', label: 'CHAR INFO' },
@@ -1851,6 +1851,7 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
 
   // RPS-battles/goud (was OverigPanel-content, nu in CHAR INFO tab)
   const [rps, setRps] = React.useState({ battles_won: 0, battles_lost: 0, gold: 1000 });
+  const [spending, setSpending] = React.useState(null);  // welke stat zit in een spend-call
   React.useEffect(() => {
     if (!userId) return;
     fetch(`${API}/api/games/rps/stats?user_id=${userId}`)
@@ -1870,20 +1871,76 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
     'Aanvalskracht': '⚔', 'Verdediging': '🛡', 'Magie Kracht': '✺',
     'Crit. Kans': '✷', 'Beweging': '➤', 'Initiatief': '⟳',
   };
-  const renderStats = (stats, accent) => (
+
+  const spendStatPoint = async (statName) => {
+    if (!userId || spending) return;
+    setSpending(statName);
+    try {
+      const r = await fetch(`${API}/api/dnd/character/${userId}/stats/spend`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stat_name: statName }),
+      });
+      if (r.ok) onReload?.();
+    } catch (e) {
+      // negeer fout — gebruiker kan opnieuw klikken
+    } finally {
+      setSpending(null);
+    }
+  };
+
+  const sp = char.stat_points || { available: 0, used: 0, total: 0, spent: {} };
+
+  const renderStats = (stats, accent, allowSpend = false) => (
     <div className="space-y-1.5">
-      {Object.entries(stats || {}).map(([k, v]) => (
-        <div key={k} data-testid={`stat-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
-          className="flex items-center justify-between text-xs">
-          <span className="flex items-center gap-1.5 text-amber-200/90">
-            <span style={{ color: accent }}>{STAT_ICONS[k] || '•'}</span>
-            {k}
-          </span>
-          <span className="font-mono font-bold text-amber-100">
-            {typeof v === 'number' && k.includes('Kans') ? `${v}%` : v}
+      {allowSpend && (
+        <div data-testid="stat-points-header"
+          className="flex items-center justify-between mb-2 px-2 py-1.5 rounded border border-amber-700/40 bg-amber-950/30">
+          <span className="text-[10px] uppercase tracking-wider text-amber-400/80">Stat-punten</span>
+          <span className="text-xs font-mono">
+            <span className="text-emerald-300 font-bold">{sp.available}</span>
+            <span className="text-amber-400/60"> beschikbaar · </span>
+            <span className="text-amber-200">{sp.used}</span>
+            <span className="text-amber-400/60">/{sp.total} besteed</span>
           </span>
         </div>
-      ))}
+      )}
+      {Object.entries(stats || {}).map(([k, v]) => {
+        const spentOnStat = sp.spent?.[k] || 0;
+        return (
+          <div key={k} data-testid={`stat-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
+            className="flex items-center justify-between text-xs">
+            <span className="flex items-center gap-1.5 text-amber-200/90">
+              <span style={{ color: accent }}>{STAT_ICONS[k] || '•'}</span>
+              {k}
+            </span>
+            <span className="flex items-center gap-2">
+              {allowSpend && spentOnStat > 0 && (
+                <span className="text-[9px] font-mono text-emerald-400/70" title={`+${spentOnStat} besteed`}>
+                  +{spentOnStat}
+                </span>
+              )}
+              <span className="font-mono font-bold text-amber-100">
+                {typeof v === 'number' && k.includes('Kans') ? `${v}%` : v}
+              </span>
+              {allowSpend && (
+                <button
+                  data-testid={`stat-plus-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
+                  onClick={() => spendStatPoint(k)}
+                  disabled={sp.available <= 0 || spending !== null}
+                  title={sp.available > 0 ? `+1 ${k}` : 'Geen punten beschikbaar — verdien meer XP'}
+                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold border transition-colors ${
+                    sp.available > 0
+                      ? 'border-emerald-500/70 bg-emerald-900/40 text-emerald-200 hover:bg-emerald-700/60 cursor-pointer'
+                      : 'border-stone-700 bg-stone-900/60 text-stone-600 cursor-not-allowed'
+                  } ${spending === k ? 'opacity-50' : ''}`}>
+                  +
+                </button>
+              )}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -1922,7 +1979,7 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab }) {
           </div>
         )}
         {activeTab === 'aanval' && renderStats(char.aanval_verdediging, '#dc2626')}
-        {activeTab === 'stats' && renderStats(char.statistieken, '#f59e0b')}
+        {activeTab === 'stats' && renderStats(char.statistieken, '#f59e0b', true)}
         {activeTab === 'notas' && (
           <p className="italic text-amber-400/60">Persoonlijke aantekeningen — komt binnenkort.</p>
         )}

@@ -69,24 +69,26 @@ def _build_prompt(card: Dict, target_lade: Optional[str]) -> list:
         f"Bestaande laag1: \"{bestaande_laag1}\"\n"
         f"Bestaande laag2: \"{bestaande_laag2}\"\n"
         f"{lade_hint}\n"
-        "Vul de volgende velden in (kort, Nederlands, geen ChatGPT-clichés):\n\n"
+        "Vul de volgende velden in (Nederlands, helder, geen ChatGPT-clichés). "
+        "Wees INHOUDELIJK — vermijd te beknopte antwoorden. Vul ALLE velden volledig:\n\n"
         "{\n"
-        '  "laag1": "1 zin — kernbetekenis (max 20 woorden)",\n'
-        '  "laag2": "2-3 zinnen — context/uitleg (max 50 woorden)",\n'
-        '  "laag3": "max 200 woorden — diepere achtergrond",\n'
-        '  "laag4": "max 300 woorden — uitgebreid",\n'
+        '  "laag1": "1 krachtige zin — kernbetekenis (12-25 woorden, geen lege beweringen)",\n'
+        '  "laag2": "3-4 zinnen — context, voorbeelden, hoe het gebruikt wordt (50-90 woorden)",\n'
+        '  "laag3": "uitgebreide achtergrond met meerdere alineas (150-220 woorden) — werking, varianten, plaats binnen breder geheel",\n'
+        '  "laag4": "diepere reflectie + nuances + tegenstellingen + raakvlakken (220-320 woorden)",\n'
         '  "ws5": {\n'
-        '    "wie": "subject",\n'
-        '    "wat": "kerneigenschap",\n'
-        '    "wanneer": "tijd/context",\n'
-        '    "waar": "plaats",\n'
-        '    "waarom": "reden/doel",\n'
-        '    "hoe": "werking"\n'
+        '    "wie": "concreet subject of actor (geen \\"persoon\\")",\n'
+        '    "wat": "specifieke kerneigenschap of essentie",\n'
+        '    "wanneer": "concrete tijd/situatie waarin het speelt",\n'
+        '    "waar": "concrete plaats, context of domein",\n'
+        '    "waarom": "doel, motivatie of functie",\n'
+        '    "hoe": "concrete werking, mechanisme of methode"\n'
         "  },\n"
         '  "voorgestelde_lade": "doen|weten|voelen|spreken",\n'
-        '  "extra_tags": ["max 5 nieuwe tags"]\n'
+        '  "extra_tags": ["3-7 inhoudelijke tags — NOOIT systeem-tags zoals knowledge-snap, auto-generated, from-diep, gap-fill"]\n'
         "}\n\n"
-        "Houd het feitelijk en compact. Geen 'Hier zijn 3 punten...' en geen excuses."
+        "Houd het feitelijk maar NIET schraal. Liever iets meer woorden dan te weinig. "
+        "Geen 'Hier zijn 3 punten...' en geen excuses. Vul ALLE 4 lagen in, NIET overslaan."
     )
     return [{"role": "system", "content": sys}, {"role": "user", "content": user}]
 
@@ -100,7 +102,7 @@ async def llm_generate_card(card_id: str, req: GenerateRequest):
 
     from modules.chat import llm_router
     messages = _build_prompt(card, req.target_lade)
-    resp = await llm_router.chat_complete(messages, temperature=0.3, max_tokens=800, timeout=20.0)
+    resp = await llm_router.chat_complete(messages, temperature=0.4, max_tokens=1800, timeout=30.0)
 
     if not resp.get("success"):
         raise HTTPException(503, f"LLM-call mislukt: {resp.get('error')}")

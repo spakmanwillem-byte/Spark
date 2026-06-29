@@ -192,7 +192,10 @@ export function KennisbankV2Page({ onNavigate }) {
       const p = r.proposal || {};
       const existing = selectedCard.lagen || {};
       const existingWs5 = selectedCard.ws5 || {};
-      const mergedTags = [...new Set([...(selectedCard.tags || []), ...(p.extra_tags || [])])];
+      // v6_kb_llm_generate_002 — Beschermde systeem-tags die NOOIT mogen verdwijnen
+      const PROTECTED_TAGS = ['knowledge-snap', 'auto-generated', 'from-diep', 'gap-fill'];
+      const llmTags = (p.extra_tags || []).filter(t => !PROTECTED_TAGS.includes(t));
+      const mergedTags = [...new Set([...(selectedCard.tags || []), ...llmTags])];
       setEditForm({
         begrip: selectedCard.begrip || '',
         lagen: {

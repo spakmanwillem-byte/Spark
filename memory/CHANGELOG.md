@@ -2,6 +2,39 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — Identity-lek fix + Genereer-tunes + response_composer refactor
+
+### 🚨 BUG (P0) — Identity-lek
+Spark sprak nieuwe users aan met "Willem" tijdens gradatie-test.
+
+**Root cause** (`response_composer.py`):
+1. Regel 736 `_format_turns()`: `role = "Willem" if t.get("role") == "user"` — ALLE user turns gelabeld als "Willem" in history die naar LLM gaat
+2. Regel 1068 `## Huidige vraag van Willem:` — hardcoded in user_prompt
+3. Geen expliciete "wie spreek je nu" header in system_prompt → LLM nam Willem over uit history
+
+**Fix** (`v6_identity_leak_fix_001`):
+- `_format_turns()` neemt nu `user_naam` parameter
+- `## Huidige vraag van {naam}:` dynamisch
+- System-prompt krijgt `⚠️ WIE JE NU SPREEKT: **{naam}** (gradatie X). NIET Willem...` header bovenaan
+- Test bevestigd: `user-ceeba762` (Ron) → "Hoi Ron!"; `user-64bf063d` (Heidi) → "Hoi Heidi!"
+
+### ✨ Genereer (LLM) tunes (`v6_kb_llm_generate_002`)
+- Prompt herzien: minimum-eisen ipv alleen max ("12-25 woorden" / "50-90" / "150-220" / "220-320")
+- max_tokens 800 → 1800 (voorkomt truncate laag3+4)
+- Temperature 0.3 → 0.4 (iets meer variatie)
+- Frontend beschermt 4 systeem-tags (`knowledge-snap`, `auto-generated`, `from-diep`, `gap-fill`) bij merge
+- LLM kreeg expliciete instructie deze tags NIET in extra_tags te returneren
+- Resultaat: 15/37/134/129 woorden ipv ~5/15/50/50
+
+### 🧹 Refactor `response_composer.py` (1212 → 528 regels)
+Nieuwe `modules/chat/composer_helpers.py` (695 regels) bevat:
+- Alle `_load_*` loaders (KB, bijbel, mode, origin, awareness, help-chain)
+- Alle `_format_*` formatters (snap-cluster, self-awareness, KB-cards, turns)
+- `_build_system_prompt`, `_load_recent_turns`, `_save_turn_pair`, `_auto_snap_from_diep`, `_load_ops_context`
+
+`response_composer.py` blijft de orkestrator met alleen `compose_response()`. Pure code-move, geen logic changes. Lint clean.
+
+
 ## 2026-06-29 — KB v2 "Genereer (LLM)" knop + login-fix
 
 ### 🐛 Login bleef hangen

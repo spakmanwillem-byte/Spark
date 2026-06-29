@@ -206,11 +206,35 @@
         "session_id": "default",
         "gesprek_nummer": 8
       }
+    },
+    {
+      "id": "conv-14abaafa",
+      "timestamp": "2026-06-29T19:23:20.490422+00:00",
+      "user_id": "user-ceeba762",
+      "user_naam": "Ron",
+      "user_message": "Hoi Spark, kan ik je iets vragen?",
+      "spark_response": "Hoi Ron! Ja, natuurlijk, ga gerust je gang! Ik ben hier om te helpen en te praten. Wat wil je weten of bespreken?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-9be16a2a",
+          "kbv2-b5af1c60",
+          "kbv2-69d781cc",
+          "kbv2-aaf81efb",
+          "kbv2-9be16a2a"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "test-ron-refactor",
+        "gesprek_nummer": 9
+      }
     }
   ],
   "metadata": {
     "user_id": "user-ceeba762",
-    "total_conversations": 8,
-    "last_updated": "2026-05-18T20:02:03.690911+00:00"
+    "total_conversations": 9,
+    "last_updated": "2026-06-29T19:23:20.490422+00:00"
   }
 }

@@ -441,21 +441,9 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
 
       {/* (Bewoners-strip + Handel zijn verplaatst naar MID resp. RIGHT kolom hierboven) */}
 
-      {/* ===== HANDEL-KADER VOORBEREIDING (rest van flow nog te bouwen) ===== */}
-      <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3" data-testid="dnd-trade-prep">
-        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">🏪 Warehouse</p>
-          <p className="text-[10px] text-amber-200/60 italic">Per stad/fractie · opslag voor handelaren · binnenkort</p>
-        </div>
-        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">⚖️ Auction House</p>
-          <p className="text-[10px] text-amber-200/60 italic">Loot kopen / verkopen · prijs per fractie · binnenkort</p>
-        </div>
-        <div className="p-3 border border-dashed border-amber-900/40 rounded-lg bg-stone-950/50">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400/80 mb-1">🍞 Werkbank</p>
-          <p className="text-[10px] text-amber-200/60 italic">Thuis koken/maken · brood, vlees, drank · binnenkort</p>
-        </div>
-      </div>
+      {/* v6_dnd_trade_prep_remove_001 — Warehouse/Auction House/Werkbank cards verwijderd:
+          deze gebouwen worden weergegeven op de dorp mini-map. Click op gebouw daar
+          start de "5 min lopen" countdown → avatar arriveert → bark popup opent. */}
 
       {/* (EventFeed + CharInfo zijn verplaatst — EventFeed bovenaan breed, CharInfo onder Body+Equipment) */}
 
@@ -1844,22 +1832,8 @@ function EventFeedPanel({ feed, draft, setDraft, onSend }) {
             <p className="text-[11px] text-amber-400/50 italic">Nog geen meldingen.</p>
           )}
         </div>
-        <div className="mt-2 flex gap-1">
-          <input
-            data-testid="event-input"
-            value={draft}
-            onChange={e => setDraft(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && onSend(draft)}
-            placeholder="Typ hier je bericht…"
-            className="flex-1 px-2 py-1.5 bg-stone-950 border border-amber-900/40 rounded text-xs text-amber-100 placeholder-amber-500/40"
-          />
-          <button
-            data-testid="event-send"
-            onClick={() => onSend(draft)}
-            className="px-2.5 py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-stone-950 font-bold flex items-center gap-1">
-            <Send className="w-3 h-3" /> Verstuur
-          </button>
-        </div>
+        {/* v6_event_feed_readonly_001 — input/verstuur weg: feed is alleen info-display.
+            Meldingen komen van systeem/wereld events, niet user-input. */}
       </div>
     </PaperPanel>
   );

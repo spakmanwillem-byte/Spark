@@ -130,15 +130,9 @@ export function FractiesKaderPanel({ userId, isAdmin }) {
             </button>
           );
         })}
-        {/* Landkaart-knop rechts */}
-        <button
-          data-testid="fracties-open-landkaart-btn"
-          onClick={() => setOpenLandkaart(true)}
-          className="ml-auto flex-shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-[10px] uppercase tracking-wider text-amber-300 hover:text-amber-100 hover:bg-amber-900/20 border-l border-amber-900/40 transition-colors"
-        >
-          <Map className="w-3 h-3" />
-          Landkaart
-        </button>
+        {/* v6_spark_world_preview_001 — Landkaart-knop verplaatst naar LandPreviewPanel
+            in avatar/profile-tab (zelfde stijl als DorpPreviewPanel hover "Kaart Bekijken").
+            Deze knop is verwijderd om dubbele toegang te vermijden. */}
       </div>
 
       {/* Content — actieve fractie */}

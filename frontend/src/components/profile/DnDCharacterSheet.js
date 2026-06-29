@@ -418,6 +418,8 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             isHome={isHome}
           />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
+          {/* v6_spark_world_preview_001 — Land/Spark World preview kader naast Dorp-kader */}
+          <LandPreviewPanel char={char} gameCards={gameCards} />
           {/* v6_dnd_fracties_fullwidth_001 — MiniMapPanel verwijderd uit avatar-tab;
               FractiesKaderPanel is verplaatst naar volle breedte onder de grid (zie hieronder).
               Landkaart-bark blijft bereikbaar via de "Landkaart"-knop in FractiesKaderPanel. */}
@@ -1507,6 +1509,76 @@ function DorpPreviewPanel({ char, gameCards = [], onNavigateMap }) {
         </button>
       </div>
     </PaperPanel>
+  );
+}
+
+// v6_spark_world_preview_001 — Land/Spark World preview kader naast DorpPreviewPanel.
+// Zelfde stijl als DorpPreviewPanel: visueel kader met NL-kaart achtergrond + hover "KAART BEKIJKEN" knop
+// die de bestaande LandkaartBark opent. Vervangt de verstopte tab-bar Landkaart-knop in FractiesKaderPanel.
+function LandPreviewPanel({ char, gameCards = [] }) {
+  const [showLandkaart, setShowLandkaart] = useState(false);
+  const [provincies, setProvincies] = useState([]);
+  const [steden, setSteden] = useState([]);
+  const [fracties, setFracties] = useState([]);
+
+  useEffect(() => {
+    Promise.all([
+      fetch(`${API}/api/dnd/world/provincies`).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/dnd/world/steden`).then(r => r.json()).catch(() => ({})),
+      fetch(`${API}/api/dnd/world/fracties/full`).then(r => r.json()).catch(() => ({})),
+    ]).then(([p, s, f]) => {
+      setProvincies(p.provincies || []);
+      setSteden(s.steden || []);
+      setFracties(f.fracties || []);
+    });
+  }, []);
+
+  // Achtergrond: bij voorkeur de Spark-World/land-kaart D&D-card; fallback = NL-map url
+  const landCard = findCardByKeywords(gameCards, ['spark world', 'sparkworld', 'landkaart', 'wereld', 'nederland']);
+  const landImg = cardFirstImage(landCard) || 'https://customer-assets.emergentagent.com/job_question-hub-160/artifacts/pkw3x971_Nederland%20map%20kaal.jpeg';
+  const landNaam = landCard?.begrip || 'Spark World';
+
+  // Stats voor label
+  const aantalProvincies = provincies.length || 12;
+  const aantalSteden = steden.length;
+  const aantalFracties = fracties.length;
+
+  return (
+    <>
+      <PaperPanel>
+        <PaperHeader>SPARK WORLD</PaperHeader>
+        <div className="relative h-52 overflow-hidden rounded-md m-2 group">
+          <img src={landImg} alt={landNaam}
+            className="absolute inset-0 w-full h-full object-cover" />
+          {/* Vignet */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 pointer-events-none" />
+
+          <div className="absolute top-2 right-2 text-right">
+            <p className="text-[9px] uppercase tracking-wider text-amber-300/90">Land</p>
+            <p data-testid="land-naam" className="text-sm font-serif font-bold text-amber-100">{landNaam}</p>
+            <p className="text-[10px] text-amber-200/85">{aantalProvincies} provincies · {aantalSteden} steden</p>
+            <p className="text-[10px] text-amber-200/85">{aantalFracties} fracties</p>
+          </div>
+          <button
+            data-testid="land-kaart-btn"
+            onClick={() => setShowLandkaart(true)}
+            className="absolute bottom-2 right-2 text-[10px] px-2 py-1 rounded border border-amber-700/60 bg-stone-950/80 hover:bg-amber-900/40 text-amber-200 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+            Kaart Bekijken
+          </button>
+        </div>
+      </PaperPanel>
+      {showLandkaart && (
+        <LandkaartBark
+          provincies={provincies}
+          steden={steden}
+          fracties={fracties}
+          userId={char?.user_id}
+          isAdmin={false}
+          onClose={() => setShowLandkaart(false)}
+          onOpenStad={() => {}}
+        />
+      )}
+    </>
   );
 }
 

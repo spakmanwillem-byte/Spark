@@ -50395,11 +50395,47 @@
         "session_id": "test-snuf",
         "gesprek_nummer": 1946
       }
+    },
+    {
+      "id": "conv-3d339b1b",
+      "timestamp": "2026-06-29T20:28:05.432098+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1947
+      }
+    },
+    {
+      "id": "conv-09930e85",
+      "timestamp": "2026-06-29T20:28:05.479615+00:00",
+      "user_id": "user-001",
+      "user_naam": "De Willem",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Willem. Wat speelt er?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1948
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1946,
-    "last_updated": "2026-06-29T20:06:52.638770+00:00"
+    "total_conversations": 1948,
+    "last_updated": "2026-06-29T20:28:05.479615+00:00"
   }
 }

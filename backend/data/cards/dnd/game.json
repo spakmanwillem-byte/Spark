@@ -1,6 +1,60 @@
 {
   "cards": [
     {
+      "id": "game-e1cefea8",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Survival",
+      "sense": "doe",
+      "lagen": {
+        "laag1": "Survival — secondary beroep, te leren bij wachter voor 5 goud. Zoek planten, stenen en items in vrije tijd.",
+        "laag2": "Vrije-tijd actie: 1 zoek-poging/uur. 60% kans helende plant, 70% kans tak, 40% kans steen, 15% kans vuursteen, 2% kans edelsteen. 0.5% kans op event (huisdier-companion).",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {
+        "wie": "",
+        "wat": "",
+        "wanneer": "",
+        "waar": "",
+        "waarom": "",
+        "hoe": ""
+      },
+      "tags": [
+        "D&D",
+        "beroep",
+        "secondary",
+        "survival"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "beroep_id": "survival",
+          "is_secondary": true,
+          "leer_kosten_goud": 5,
+          "leer_bij_npc": "wachter_dorp"
+        },
+        "value_goud": 0,
+        "rarity": "common",
+        "kind": "beroep"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-29T22:23:01.194171+00:00"
+      }
+    },
+    {
       "id": "game-ebc0436d",
       "class": "game",
       "type": "dnd_game_card",

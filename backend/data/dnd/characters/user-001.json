@@ -4,8 +4,8 @@
   "ondertitel": "Zoeker",
   "rang_titel": "Generaal",
   "rang_progress_pct": 0,
-  "klasse": "",
-  "beroep": "",
+  "klasse": "voet",
+  "beroep": "smid",
   "fractie": "neutraal",
   "locatie_naam": "Oerrak",
   "dorp": "Oerrak",
@@ -84,5 +84,48 @@
       "source": "dice_roll"
     }
   ],
-  "fractie_naam": "Spartanen"
+  "fractie_naam": "Spartanen",
+  "klasse_gekozen_op": "2026-06-29T22:23:01.190073+00:00",
+  "beroep_gekozen_op": "2026-06-29T22:23:01.190085+00:00",
+  "xp_per_beroep": {
+    "smid": 0,
+    "vissen": 0,
+    "survival": 0
+  },
+  "sub_beroepen": [
+    {
+      "id": "vissen",
+      "geleerd_op": "2026-06-29T22:23:01.190088+00:00",
+      "leer_kosten_betaald": 5,
+      "tier": 1,
+      "xp": 0
+    },
+    {
+      "id": "survival",
+      "geleerd_op": "2026-06-29T22:23:01.190090+00:00",
+      "leer_kosten_betaald": 5,
+      "tier": 1,
+      "xp": 0
+    }
+  ],
+  "stats_start": {
+    "kracht": 12,
+    "behendigheid": 9,
+    "intelligentie": 7,
+    "conditie": 13,
+    "wilskracht": 10,
+    "geluk": 8
+  },
+  "hp": {
+    "max": 100,
+    "current": 100,
+    "hp_regen_during_sleep_pct": 2
+  },
+  "daily_time_budget": {
+    "totaal_uren": 24,
+    "slaap_uren_default": 6,
+    "slaap_uren_healing": 8,
+    "werk_uren_primary": 6,
+    "vrije_tijd_uren": "rest"
+  }
 }

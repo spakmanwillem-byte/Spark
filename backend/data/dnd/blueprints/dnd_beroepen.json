@@ -1,23 +1,52 @@
 {
   "version": "0.1",
   "_doc": "v6_dnd_beroepen_001 — beroepen + daily output + XP-curves + tier-unlocks. Speler kan 1 primary + 1 secondary (1-2u IRL reservatie/dag).",
+  "tier_definities": {
+    "_doc": "5 tiers — XP-drempels en welke blueprints/recepten unlocken per tier.",
+    "tier_1": {
+      "xp_min": 0,
+      "label": "Beginner",
+      "blueprint_count_unlock": 3
+    },
+    "tier_2": {
+      "xp_min": 500,
+      "label": "Leerling",
+      "blueprint_count_unlock": 6
+    },
+    "tier_3": {
+      "xp_min": 2500,
+      "label": "Gezel",
+      "blueprint_count_unlock": 12
+    },
+    "tier_4": {
+      "xp_min": 10000,
+      "label": "Meester",
+      "blueprint_count_unlock": 24
+    },
+    "tier_5": {
+      "xp_min": 50000,
+      "label": "Grootmeester",
+      "blueprint_count_unlock": 48
+    }
+  },
   "regels": {
     "primary_max": 1,
     "secondary_max": 1,
-    "secondary_unlock_xp_in_primary": 500,
+    "_doc_secondary": "Secondary beroepen MOETEN geleerd worden bij hun teacher-NPC tegen leer-kosten. Vissen via visser. Survival via wachter/jager. Alchemy mss later via kruidenkundige.",
     "daily_uren_primary": 6,
     "daily_uren_secondary": 2,
-    "xp_per_succesvolle_actie": 10,
+    "xp_per_succesvolle_actie_primary": 10,
+    "xp_per_actie_vrije_tijd_secondary": 0.25,
     "items_per_dag_basis": 1,
-    "items_per_dag_bonus_per_500_xp": 1
-  },
-  "tier_definities": {
-    "_doc": "5 tiers — XP-drempels en welke blueprints/recepten unlocken per tier.",
-    "tier_1": { "xp_min": 0,      "label": "Beginner",  "blueprint_count_unlock": 3 },
-    "tier_2": { "xp_min": 500,    "label": "Leerling",  "blueprint_count_unlock": 6 },
-    "tier_3": { "xp_min": 2500,   "label": "Gezel",     "blueprint_count_unlock": 12 },
-    "tier_4": { "xp_min": 10000,  "label": "Meester",   "blueprint_count_unlock": 24 },
-    "tier_5": { "xp_min": 50000,  "label": "Grootmeester", "blueprint_count_unlock": 48 }
+    "items_per_dag_bonus_per_500_xp": 1,
+    "vrije_tijd_acties_per_uur": {
+      "vissen": 2,
+      "survival_zoeken": 1
+    },
+    "events_in_vrije_tijd": {
+      "_doc": "Tijdens survival/vissen kleine kans op event-trigger (huisdier-companion vinden, zeldzaam item, edelsteen)",
+      "kans_per_actie_pct": 0.5
+    }
   },
   "beroepen": [
     {
@@ -25,14 +54,40 @@
       "naam": "Smid",
       "categorie": "handwerk",
       "klasse_affinity": "voet",
-      "daily_output_basis": [{"resource": "wapen-zwaard-tier1", "qty": 1}],
-      "input_per_dag": [{"resource": "ijzer", "qty": 2}, {"resource": "steen", "qty": 1}],
+      "daily_output_basis": [
+        {
+          "resource": "wapen-zwaard-tier1",
+          "qty": 1
+        }
+      ],
+      "input_per_dag": [
+        {
+          "resource": "ijzer",
+          "qty": 2
+        },
+        {
+          "resource": "steen",
+          "qty": 1
+        }
+      ],
       "gebouw_required": "smid",
       "tier_unlocks": {
-        "tier_2": ["wapen-bijl-tier1", "schild-hout-tier1"],
-        "tier_3": ["wapen-zwaard-tier2", "armor-mail-tier2"],
-        "tier_4": ["wapen-zwaard-tier3", "wapen-strijdhamer-tier3", "schild-staal-tier3"],
-        "tier_5": ["wapen-legendarisch-tier5"]
+        "tier_2": [
+          "wapen-bijl-tier1",
+          "schild-hout-tier1"
+        ],
+        "tier_3": [
+          "wapen-zwaard-tier2",
+          "armor-mail-tier2"
+        ],
+        "tier_4": [
+          "wapen-zwaard-tier3",
+          "wapen-strijdhamer-tier3",
+          "schild-staal-tier3"
+        ],
+        "tier_5": [
+          "wapen-legendarisch-tier5"
+        ]
       }
     },
     {
@@ -40,14 +95,38 @@
       "naam": "Jager",
       "categorie": "verzamelen",
       "klasse_affinity": "afstand",
-      "daily_output_basis": [{"resource": "vlees-wild", "qty": 2}, {"resource": "leer-ruw", "qty": 1}],
-      "input_per_dag": [{"resource": "pijlen", "qty": 3}],
+      "daily_output_basis": [
+        {
+          "resource": "vlees-wild",
+          "qty": 2
+        },
+        {
+          "resource": "leer-ruw",
+          "qty": 1
+        }
+      ],
+      "input_per_dag": [
+        {
+          "resource": "pijlen",
+          "qty": 3
+        }
+      ],
       "gebouw_required": "jachthut",
       "tier_unlocks": {
-        "tier_2": ["leer-zacht", "trofee-gewei"],
-        "tier_3": ["pels-zeldzaam", "wapen-jager-mes-tier3"],
-        "tier_4": ["legendarisch-trofee"],
-        "tier_5": ["mythisch-beest-trofee"]
+        "tier_2": [
+          "leer-zacht",
+          "trofee-gewei"
+        ],
+        "tier_3": [
+          "pels-zeldzaam",
+          "wapen-jager-mes-tier3"
+        ],
+        "tier_4": [
+          "legendarisch-trofee"
+        ],
+        "tier_5": [
+          "mythisch-beest-trofee"
+        ]
       }
     },
     {
@@ -55,14 +134,39 @@
       "naam": "Healer / Kruidenkundige",
       "categorie": "alchemie",
       "klasse_affinity": "support",
-      "daily_output_basis": [{"resource": "drank-genezing-tier1", "qty": 1}],
-      "input_per_dag": [{"resource": "plant-helend", "qty": 2}, {"resource": "water-puur", "qty": 1}],
+      "daily_output_basis": [
+        {
+          "resource": "drank-genezing-tier1",
+          "qty": 1
+        }
+      ],
+      "input_per_dag": [
+        {
+          "resource": "plant-helend",
+          "qty": 2
+        },
+        {
+          "resource": "water-puur",
+          "qty": 1
+        }
+      ],
       "gebouw_required": "kruidenwinkel",
       "tier_unlocks": {
-        "tier_2": ["drank-mana-tier1", "zalf-genezing"],
-        "tier_3": ["drank-genezing-tier3", "antidote"],
-        "tier_4": ["drank-resurrectie", "elixer-stats"],
-        "tier_5": ["drank-onsterfelijkheid"]
+        "tier_2": [
+          "drank-mana-tier1",
+          "zalf-genezing"
+        ],
+        "tier_3": [
+          "drank-genezing-tier3",
+          "antidote"
+        ],
+        "tier_4": [
+          "drank-resurrectie",
+          "elixer-stats"
+        ],
+        "tier_5": [
+          "drank-onsterfelijkheid"
+        ]
       }
     },
     {
@@ -70,14 +174,29 @@
       "naam": "Houthakker",
       "categorie": "verzamelen",
       "klasse_affinity": "voet",
-      "daily_output_basis": [{"resource": "log", "qty": 5}],
+      "daily_output_basis": [
+        {
+          "resource": "log",
+          "qty": 5
+        }
+      ],
       "input_per_dag": [],
       "gebouw_required": "houthakkerij",
       "tier_unlocks": {
-        "tier_2": ["plank", "tak"],
-        "tier_3": ["boomstam-zeldzaam", "houtskool"],
-        "tier_4": ["hardhout"],
-        "tier_5": ["wereld-boom-hout"]
+        "tier_2": [
+          "plank",
+          "tak"
+        ],
+        "tier_3": [
+          "boomstam-zeldzaam",
+          "houtskool"
+        ],
+        "tier_4": [
+          "hardhout"
+        ],
+        "tier_5": [
+          "wereld-boom-hout"
+        ]
       }
     },
     {
@@ -85,14 +204,36 @@
       "naam": "Mijner",
       "categorie": "verzamelen",
       "klasse_affinity": "voet",
-      "daily_output_basis": [{"resource": "steen", "qty": 3}, {"resource": "ijzererts-tier1", "qty": 1}],
+      "daily_output_basis": [
+        {
+          "resource": "steen",
+          "qty": 3
+        },
+        {
+          "resource": "ijzererts-tier1",
+          "qty": 1
+        }
+      ],
       "input_per_dag": [],
       "gebouw_required": "mijn",
       "tier_unlocks": {
-        "tier_2": ["vuursteen", "kolen"],
-        "tier_3": ["ijzererts-tier2", "zilvererts-tier2"],
-        "tier_4": ["ijzererts-tier3", "gouderts-tier3", "edelsteen-ruw"],
-        "tier_5": ["mythril-erts", "adamantine-erts"]
+        "tier_2": [
+          "vuursteen",
+          "kolen"
+        ],
+        "tier_3": [
+          "ijzererts-tier2",
+          "zilvererts-tier2"
+        ],
+        "tier_4": [
+          "ijzererts-tier3",
+          "gouderts-tier3",
+          "edelsteen-ruw"
+        ],
+        "tier_5": [
+          "mythril-erts",
+          "adamantine-erts"
+        ]
       }
     },
     {
@@ -101,13 +242,25 @@
       "categorie": "verzamelen-secondary",
       "klasse_affinity": "afstand",
       "is_secondary": true,
-      "daily_output_basis": [{"resource": "vis", "qty": 3}],
+      "daily_output_basis": [
+        {
+          "resource": "vis",
+          "qty": 3
+        }
+      ],
       "input_per_dag": [],
       "gebouw_required": "haven",
       "tier_unlocks": {
-        "tier_2": ["vis-zeldzaam"],
-        "tier_3": ["vis-magisch"]
-      }
+        "tier_2": [
+          "vis-zeldzaam"
+        ],
+        "tier_3": [
+          "vis-magisch"
+        ]
+      },
+      "leer_kosten_goud": 5,
+      "leer_bij_npc": "visser",
+      "leer_locatie": "haven"
     },
     {
       "id": "waterhaler",
@@ -115,25 +268,48 @@
       "categorie": "secondary",
       "klasse_affinity": "support",
       "is_secondary": true,
-      "daily_output_basis": [{"resource": "water-puur", "qty": 5}],
+      "daily_output_basis": [
+        {
+          "resource": "water-puur",
+          "qty": 5
+        }
+      ],
       "input_per_dag": [],
       "gebouw_required": "put",
       "tier_unlocks": {
-        "tier_2": ["water-helder"],
-        "tier_3": ["water-bron-zuiver"]
-      }
+        "tier_2": [
+          "water-helder"
+        ],
+        "tier_3": [
+          "water-bron-zuiver"
+        ]
+      },
+      "leer_kosten_goud": 2,
+      "leer_bij_npc": "wachter_dorp",
+      "leer_locatie": "put"
     },
     {
       "id": "boer",
       "naam": "Boer",
       "categorie": "verzamelen",
       "klasse_affinity": "support",
-      "daily_output_basis": [{"resource": "graan", "qty": 5}],
+      "daily_output_basis": [
+        {
+          "resource": "graan",
+          "qty": 5
+        }
+      ],
       "input_per_dag": [],
       "gebouw_required": "akker",
       "tier_unlocks": {
-        "tier_2": ["graan-zeldzaam", "fruit"],
-        "tier_3": ["graan-magisch", "kruid-keuken"]
+        "tier_2": [
+          "graan-zeldzaam",
+          "fruit"
+        ],
+        "tier_3": [
+          "graan-magisch",
+          "kruid-keuken"
+        ]
       }
     },
     {
@@ -146,6 +322,60 @@
       "daily_output_basis": [],
       "input_per_dag": [],
       "gebouw_required": "trader_post"
+    },
+    {
+      "id": "survival",
+      "naam": "Survival",
+      "categorie": "secondary",
+      "klasse_affinity": null,
+      "is_secondary": true,
+      "leer_kosten_goud": 5,
+      "leer_bij_npc": "wachter_dorp",
+      "leer_locatie": "wachterspost",
+      "daily_output_basis": [],
+      "vrije_tijd_output": [
+        {
+          "resource": "plant-helend",
+          "qty_per_uur": 1,
+          "kans_pct": 60
+        },
+        {
+          "resource": "steen",
+          "qty_per_uur": 1,
+          "kans_pct": 40
+        },
+        {
+          "resource": "tak",
+          "qty_per_uur": 1,
+          "kans_pct": 70
+        },
+        {
+          "resource": "vuursteen",
+          "qty_per_uur": 1,
+          "kans_pct": 15
+        },
+        {
+          "resource": "edelsteen-ruw",
+          "qty_per_uur": 1,
+          "kans_pct": 2
+        }
+      ],
+      "event_trigger_kans_pct": 0.5,
+      "event_pool": [
+        "huisdier_companion",
+        "zeldzaam_item",
+        "geheim_pad"
+      ],
+      "tier_unlocks": {
+        "tier_2": [
+          "plant-zeldzaam",
+          "kruid-magisch"
+        ],
+        "tier_3": [
+          "edelsteen-zeldzaam",
+          "antieke_munt"
+        ]
+      }
     }
   ]
 }

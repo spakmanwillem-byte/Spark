@@ -258,6 +258,9 @@ app.include_router(shadow_pot_router, prefix="/api")
 # v6_dnd_world_001 — 9 fracties + 12 provincies + 5 rarity tiers (WoW-style)
 from modules.dnd.world import router as dnd_world_router
 app.include_router(dnd_world_router, prefix="/api")
+# v6_dnd_economy_001 — economy blueprints + prijscurve + trader AI
+from modules.dnd.economy import router as dnd_economy_router
+app.include_router(dnd_economy_router, prefix="/api")
 
 # v6_dnd_body_layout_001 — Sleepbare body-slot posities over lijf-avatar
 from modules.dnd.body_layout import router as dnd_body_layout_router

@@ -2,6 +2,45 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-06-29 — D&D Economie Fundament (`v6_dnd_economy_001`)
+
+### 🏰 Land/Spark World preview kader (`v6_spark_world_preview_001`)
+Nieuwe `LandPreviewPanel` in `DnDCharacterSheet.js` naast `DorpPreviewPanel`:
+- Eigen `PaperPanel` met header "SPARK WORLD"
+- Achtergrond = D&D-kaart "Spark World"/landkaart (of NL-map fallback)
+- Label: `Spark World · 12 provincies · 12 steden · 9 fracties`
+- Hover-only "KAART BEKIJKEN" knop → opent bestaande `LandkaartBark`
+- Verstopte Landkaart-knop in `FractiesKaderPanel` tab-bar verwijderd
+
+### 🎮 D&D Economie Blueprints (Fase 0)
+Nieuwe map `data/dnd/blueprints/` met 6 blauwdruk-JSONs:
+
+1. **`dnd_klassen.json`** — 3 base klassen (voet/afstand/support) met stats_start, beroep_affinity, starting_equipment, hybrid_unlock via beroep-XP
+2. **`dnd_beroepen.json`** — 9 beroepen (smid/jager/healer/houthakker/mijner/visser/waterhaler/boer/trader). XP tier 1-5 (0→500→2500→10k→50k), blueprint-unlocks per tier, primary+secondary mechaniek (1 primary + 1 secondary onder uren-budget)
+3. **`dnd_grondstoffen.json`** — 24 grondstoffen met `base_value` (basis-prijs in goud), `weight`, `stack_max`, ore-tiers 1-5 (mythril+adamantine)
+4. **`dnd_prijscurve.json`** — piecewise-linear: voorraad 0%→10× / 50%→1× / 80%→0.4× / 100%→0.1×, stad_streven 80%, trade_tax 5% naar destination-city
+5. **`dnd_dorp_income.json`** — basis 10 vis/graan/log/steen + 5 ijzererts per dorp_level
+6. **`dnd_buildings.json`** — 14 gebouw-types (smid/jachthut/kruidenwinkel/houthakkerij/mijn/haven/put/akker/bank/bakker/slager/**trader_post**/**auctionhouse**/barracks) met build_cost en beroep_slots_per_level
+
+### 🃏 Game-cards auto-gegenereerd
+48 nieuwe D&D-kaarten in `data/cards/dnd/game.json` met status=draft (placeholder image leeg, admin kan via DnD Gallery editen):
+- 24 grondstoffen
+- 3 klassen
+- 9 beroepen
+- 12 gebouwen
+Totaal nu 126 game-cards.
+
+### 🛠 Module `modules/dnd/economy.py`
+Nieuwe service met endpoints:
+- `GET /api/dnd/economy/blueprints` — alle blauwdrukken in 1 call
+- `GET /api/dnd/economy/blueprints/{name}` — losse blueprint
+- `GET /api/dnd/economy/price/{resource_id}/{voorraad_pct}` — prijscurve-check
+- `GET /api/dnd/economy/trader-decision/{stad_id}` — trader-AI advies (idle/buy/sell + score)
+- `POST /api/dnd/economy/admin/grant-daily-income` — handmatig daily-tick triggeren
+
+Live getest: 12 steden ontvingen 10/10/10/10/5 in `warehouse_resources`. Prijscurve klopt exact (0%=600g, 50%=60g, 80%=24g, 100%=6g voor ijzererts-T3). Trader-decision = idle want alle steden gelijk → wacht op productie-differentiatie.
+
+
 ## 2026-06-29 — Snuffel-bestand capability (`v6_snuffel_bestand_001`)
 
 ### 🔍 Spark Internal File Search

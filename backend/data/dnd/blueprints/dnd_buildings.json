@@ -1,0 +1,20 @@
+{
+  "version": "0.1",
+  "_doc": "v6_dnd_buildings_001 — gebouw-types die in een stad geplaatst kunnen worden. Linkt aan beroepen (gebouw_required) en aan trader-AI.",
+  "buildings": [
+    { "id": "smid",          "naam": "Smederij",       "categorie": "handwerk",  "beroep": "smid",        "build_cost_goud": 500,  "build_cost_log": 20, "build_cost_steen": 10, "beroep_slots_per_level": 2 },
+    { "id": "jachthut",      "naam": "Jachthut",       "categorie": "verzamelen","beroep": "jager",       "build_cost_goud": 300,  "build_cost_log": 30, "build_cost_steen": 0,  "beroep_slots_per_level": 2 },
+    { "id": "kruidenwinkel", "naam": "Kruidenwinkel",  "categorie": "alchemie",  "beroep": "healer",      "build_cost_goud": 600,  "build_cost_log": 15, "build_cost_steen": 5,  "beroep_slots_per_level": 1 },
+    { "id": "houthakkerij",  "naam": "Houthakkerij",   "categorie": "verzamelen","beroep": "houthakker",  "build_cost_goud": 250,  "build_cost_log": 15, "build_cost_steen": 0,  "beroep_slots_per_level": 3 },
+    { "id": "mijn",          "naam": "Mijn",           "categorie": "verzamelen","beroep": "mijner",      "build_cost_goud": 700,  "build_cost_log": 10, "build_cost_steen": 30, "beroep_slots_per_level": 3 },
+    { "id": "haven",         "naam": "Haven",          "categorie": "verzamelen","beroep": "visser",      "build_cost_goud": 800,  "build_cost_log": 50, "build_cost_steen": 15, "beroep_slots_per_level": 4, "vereist_locatie": "kustlijn" },
+    { "id": "put",           "naam": "Waterput",       "categorie": "secondary", "beroep": "waterhaler",  "build_cost_goud": 100,  "build_cost_log": 5,  "build_cost_steen": 10, "beroep_slots_per_level": 1 },
+    { "id": "akker",         "naam": "Akker",          "categorie": "verzamelen","beroep": "boer",        "build_cost_goud": 200,  "build_cost_log": 5,  "build_cost_steen": 0,  "beroep_slots_per_level": 3 },
+    { "id": "bank",          "naam": "Stadsbank",      "categorie": "economie",  "beroep": null,          "build_cost_goud": 1500, "build_cost_log": 30, "build_cost_steen": 30, "_doc": "Tier ↑ → warehouse capacity ↑" },
+    { "id": "bakker",        "naam": "Bakker",         "categorie": "handwerk",  "beroep": "bakker",      "build_cost_goud": 350,  "build_cost_log": 10, "build_cost_steen": 5,  "beroep_slots_per_level": 1 },
+    { "id": "slager",        "naam": "Slager",         "categorie": "handwerk",  "beroep": "slager",      "build_cost_goud": 350,  "build_cost_log": 10, "build_cost_steen": 5,  "beroep_slots_per_level": 1 },
+    { "id": "trader_post",   "naam": "Traders Post",   "categorie": "logistiek", "beroep": "trader",      "build_cost_goud": 1000, "build_cost_log": 20, "build_cost_steen": 20, "beroep_slots_per_level": 2, "_doc": "Plaats werkloze burgers hier → autonomous trader cycle (zie scheduler). Per level +1 trader-slot + +1 cargo-volume." },
+    { "id": "auctionhouse",  "naam": "Auction House",  "categorie": "economie",  "beroep": null,          "build_cost_goud": 2000, "build_cost_log": 25, "build_cost_steen": 25, "_doc": "Auction listings van burgers en steden. Tax 5% van elke trade naar gastheer-stad." },
+    { "id": "barracks",      "naam": "Kazerne",        "categorie": "leger",     "beroep": null,          "build_cost_goud": 1200, "build_cost_log": 20, "build_cost_steen": 40, "_doc": "Hier huur je legereenheden of (later) recruteer je leger-beroep-soldaten." }
+  ]
+}

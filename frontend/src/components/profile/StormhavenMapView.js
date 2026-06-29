@@ -77,7 +77,6 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
   // v6_dnd_stad_minimap_001 — labels nu dynamisch ipv hardcoded 'Stormhaven/Spark'
   const displayNaam = stadNaam || char?.dorp || dorpCard?.begrip || 'Onbekend';
   const displayFractie = fractieNaam || char?.fractie_naam || char?.fractie || 'Neutraal';
-  const [selectedBuilding, setSelectedBuilding] = useState(null);
   const dorpImg = dorpCard?.media?.image_urls?.[0] ? `${API}${dorpCard.media.image_urls[0]}` : null;
 
   // v6_dorp_layout_overrides_001 — admin kan posities slepen
@@ -86,6 +85,12 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const mapRef = useRef(null);
+
+  // v6_dorp_walk_to_building_001 — avatar loopt naar gebouw + trade-bark opent
+  const startPos = { x: char?.player_x_pct ?? 53, y: char?.player_y_pct ?? 53 };
+  const [playerPos, setPlayerPos] = useState(startPos);
+  const [tradeBark, setTradeBark] = useState(null);   // {building} of null
+  const [walking, setWalking] = useState(false);
 
   useEffect(() => {
     fetch(`${API}/api/dnd/spark-world/dorp-layout-overrides`)
@@ -122,6 +127,21 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
     });
     setDirty(true);
   };
+
+  // v6_dorp_walk_to_building_001 — start "loop"-animatie van speler naar gebouw, daarna trade-bark
+  const walkToBuilding = (building) => {
+    if (editMode || walking) return;
+    const [bx, by] = building.pos;
+    setWalking(true);
+    setPlayerPos({ x: bx, y: by });
+    // 1.6s loop-animatie → daarna bark openen
+    setTimeout(() => {
+      setWalking(false);
+      setTradeBark({ building });
+    }, 1600);
+  };
+
+  const closeTradeBark = () => setTradeBark(null);
 
   // Resolve each building to a card from gameCards
   // v6_dnd_card_lookup_002 — altijd lookup; placeholder is dynamic afhankelijk van
@@ -205,8 +225,8 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
               {/* Building hotspots */}
               {buildings.map(b => (
                 <BuildingHotspot key={b.id} building={b}
-                  onClick={() => !editMode && setSelectedBuilding(b)}
-                  active={selectedBuilding?.id === b.id}
+                  onClick={() => walkToBuilding(b)}
+                  active={tradeBark?.building?.id === b.id}
                   editMode={editMode}
                   mapRef={mapRef}
                   onMove={(x, y) => updateOverride(b.id, x, y)}
@@ -214,11 +234,11 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
               ))}
 
               {/* v6_player_glow_001 — Speler-avatar met groene puls op centrum (default) */}
-              <PlayerOnMap char={char} />
+              <PlayerOnMap char={char} pos={playerPos} walking={walking} />
 
-              {/* Selected building tooltip */}
-              {selectedBuilding && (
-                <BuildingTooltip building={selectedBuilding} onClose={() => setSelectedBuilding(null)} />
+              {/* Trade-bark modal voor aangeklikt gebouw */}
+              {tradeBark && (
+                <BuildingTradeBark building={tradeBark.building} onClose={closeTradeBark} />
               )}
             </div>
           </div>
@@ -230,10 +250,11 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
           <div className="flex flex-wrap gap-1.5">
             {buildings.map(b => (
               <button key={b.id} data-testid={`building-chip-${b.id}`}
-                onClick={() => setSelectedBuilding(b)}
+                onClick={() => walkToBuilding(b)}
+                disabled={editMode || walking}
                 className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-[11px] border ${
                   b.card ? 'border-amber-700/60 text-amber-200 bg-amber-950/30 hover:bg-amber-900/40'
-                         : 'border-stone-700 text-stone-500 bg-stone-900/40 italic'}`}>
+                         : 'border-stone-700 text-stone-500 bg-stone-900/40 italic'} ${(editMode || walking) ? 'opacity-50 cursor-not-allowed' : ''}`}>
                 {b.img ? (
                   <img src={b.img} alt="" className="w-4 h-4 rounded-sm object-cover" />
                 ) : b.central ? (
@@ -334,46 +355,77 @@ function BuildingHotspot({ building, onClick, active, editMode = false, mapRef =
   );
 }
 
-function BuildingTooltip({ building, onClose }) {
+function BuildingTradeBark({ building, onClose }) {
+  // v6_dorp_walk_to_building_001 — bark-stijl trade-venster nadat avatar bij gebouw is aangekomen
+  const desc = building.card?.lagen?.laag1 || (building.placeholder ? `Maak een D&D-kaart "${building.label}" om deze plek in te kleuren.` : '');
+  const detail = building.card?.lagen?.laag2 || building.card?.lagen?.laag3 || '';
   return (
-    <div data-testid="building-tooltip"
-      className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-stone-950/95 border-2 border-amber-600/60 rounded-lg p-3 max-w-xs shadow-2xl backdrop-blur"
-      onClick={e => e.stopPropagation()}>
-      <div className="flex items-start gap-3">
-        {building.img ? (
-          <img src={building.img} alt="" className="w-16 h-16 rounded object-cover border border-amber-600/60 flex-shrink-0" />
-        ) : (
-          <div className="w-16 h-16 rounded border border-amber-700/40 bg-stone-900 flex items-center justify-center flex-shrink-0">
-            {building.central ? <Sparkles className="w-7 h-7 text-amber-400" /> : <Plus className="w-7 h-7 text-amber-400/40" />}
-          </div>
-        )}
-        <div className="flex-1 min-w-0">
-          <p className="text-[9px] uppercase tracking-[0.2em] text-amber-500/70">
-            {building.central ? 'Heilig Centrum' : building.placeholder ? 'Vacant — bouwen!' : 'Gebouw'}
-          </p>
-          <h4 className="text-sm font-serif font-bold text-amber-100">{building.label}</h4>
-          {building.card ? (
-            <p className="text-[11px] text-amber-200/80 italic mt-0.5">
-              {building.card.lagen?.laag1 || building.card.begrip}
-            </p>
+    <div
+      data-testid="building-trade-bark"
+      className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-30"
+      onClick={onClose}>
+      <div
+        className="relative bg-stone-950 border-2 border-amber-500/70 rounded-xl w-[min(92%,440px)] shadow-[0_0_40px_rgba(245,158,11,0.4)] overflow-hidden"
+        onClick={e => e.stopPropagation()}>
+        {/* Header met afbeelding */}
+        <div className="flex items-center gap-3 p-4 border-b border-amber-900/40 bg-gradient-to-r from-amber-950/60 to-stone-950">
+          {building.img ? (
+            <img src={building.img} alt="" className="w-16 h-16 rounded-lg object-cover border border-amber-600/60 flex-shrink-0" />
           ) : (
-            <p className="text-[10px] text-amber-400/60 italic mt-0.5">
-              {building.placeholder
-                ? `Maak een D&D-kaart "${building.label}" om hier in te vullen.`
-                : 'Vacant'}
-            </p>
+            <div className="w-16 h-16 rounded-lg border border-amber-700/40 bg-stone-900 flex items-center justify-center flex-shrink-0">
+              {building.central ? <Sparkles className="w-8 h-8 text-amber-400" /> : <Plus className="w-8 h-8 text-amber-400/40" />}
+            </div>
           )}
+          <div className="flex-1 min-w-0">
+            <p className="text-[9px] uppercase tracking-[0.25em] text-amber-500/70">
+              Je bent aangekomen bij
+            </p>
+            <h3 className="text-lg font-serif font-bold text-amber-100 leading-tight">{building.label}</h3>
+            <p className="text-[10px] text-emerald-400/80 italic">Handel · Bark</p>
+          </div>
+          <button data-testid="trade-bark-close" onClick={onClose}
+            className="w-8 h-8 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40 flex-shrink-0">
+            <X className="w-4 h-4" />
+          </button>
         </div>
-        <button onClick={onClose} className="text-amber-400/60 hover:text-amber-200">
-          <X className="w-4 h-4" />
-        </button>
+
+        {/* Body: beschrijving + handel-placeholder */}
+        <div className="p-4 space-y-3">
+          {desc && (
+            <p className="text-[12px] text-amber-200/90 italic leading-relaxed">{desc}</p>
+          )}
+          {detail && (
+            <p className="text-[11px] text-amber-300/70 leading-relaxed">{detail}</p>
+          )}
+
+          {/* Handel-stub */}
+          <div className="mt-3 p-3 rounded-lg border border-amber-700/40 bg-amber-950/30">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-amber-400/70 mb-2">Handel</p>
+            {building.card ? (
+              <p className="text-[11px] text-amber-200/80">
+                Handelaar voor <span className="font-bold text-amber-100">{building.label}</span> is nog niet beschikbaar. De Trader-AI gaat dit gebouw straks autonoom bevoorraden.
+              </p>
+            ) : (
+              <p className="text-[11px] text-stone-400 italic">
+                Dit gebouw heeft nog geen kaart. Maak eerst een D&amp;D-kaart om handel te starten.
+              </p>
+            )}
+            <button
+              data-testid="trade-bark-start"
+              disabled
+              className="mt-2 w-full px-3 py-1.5 rounded-md border border-amber-600/40 bg-stone-900 text-amber-400/60 text-[11px] uppercase tracking-wider font-bold cursor-not-allowed">
+              Handel openen (binnenkort)
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 // v6_player_glow_001 — Speler-avatar met groene puls-glow op de dorpskaart
-function PlayerOnMap({ char }) {
+// v6_dorp_walk_to_building_001 — pos kan dynamisch zijn; tijdens "walking" smooth CSS-transition.
+function PlayerOnMap({ char, pos, walking = false }) {
   const userId = char?.user_id;
   const [avatarUrl, setAvatarUrl] = useState(null);
   React.useEffect(() => {
@@ -383,30 +435,36 @@ function PlayerOnMap({ char }) {
       .then(d => setAvatarUrl(d.url ? `${API}${d.url}` : null))
       .catch(() => {});
   }, [userId]);
-  // Default: net ten zuidoosten van het centrum (53%, 53%) zodat Tempel-avatar zichtbaar blijft.
-  const px = char?.player_x_pct ?? 53;
-  const py = char?.player_y_pct ?? 53;
+  const px = pos?.x ?? char?.player_x_pct ?? 53;
+  const py = pos?.y ?? char?.player_y_pct ?? 53;
   return (
     <div
       data-testid="player-on-map"
-      title={`${char?.titel || 'Speler'} — Jij bent hier`}
+      title={`${char?.titel || 'Speler'} — ${walking ? 'Onderweg…' : 'Jij bent hier'}`}
       className="absolute"
       style={{
         left: `${px}%`,
         top: `${py}%`,
         transform: 'translate(-50%, -50%)',
         zIndex: 20,
+        transition: 'left 1.5s ease-in-out, top 1.5s ease-in-out',
       }}>
       <div className="relative">
         {/* Pulse-ring */}
         <div className="absolute -inset-2 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(34,197,94,0.55) 0%, rgba(34,197,94,0) 70%)',
-            animation: 'spark-player-pulse 1.8s ease-in-out infinite',
+            background: walking
+              ? 'radial-gradient(circle, rgba(56,189,248,0.7) 0%, rgba(56,189,248,0) 70%)'
+              : 'radial-gradient(circle, rgba(34,197,94,0.55) 0%, rgba(34,197,94,0) 70%)',
+            animation: `spark-player-pulse ${walking ? '0.8s' : '1.8s'} ease-in-out infinite`,
           }} />
         {/* Avatar circle */}
-        <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-400"
-          style={{ boxShadow: '0 0 10px rgba(34,197,94,0.9), 0 0 18px rgba(34,197,94,0.4)' }}>
+        <div className={`relative w-8 h-8 rounded-full overflow-hidden border-2 ${walking ? 'border-sky-300' : 'border-emerald-400'}`}
+          style={{
+            boxShadow: walking
+              ? '0 0 12px rgba(56,189,248,0.95), 0 0 22px rgba(56,189,248,0.5)'
+              : '0 0 10px rgba(34,197,94,0.9), 0 0 18px rgba(34,197,94,0.4)',
+          }}>
           {avatarUrl ? (
             <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
           ) : (

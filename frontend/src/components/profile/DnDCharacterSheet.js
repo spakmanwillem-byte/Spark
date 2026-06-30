@@ -389,8 +389,6 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             avatarUrl={avatarUrl}
             level={char.derived?.level ?? 0}
             xpPct={xpPct}
-            xpInLvl={xpInLvl}
-            xpPerLvl={xpPerLvl}
             hp={char.hp}
             onOpenAvatarSettings={onOpenAvatarSettings}
           />
@@ -1007,10 +1005,8 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
 }
 
 // ----- KARAKTER PORTRET -----
-function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, hp, onOpenAvatarSettings }) {
+function KarakterPortretPanel({ avatarUrl, level, xpPct, hp, onOpenAvatarSettings }) {
   const hpPct = hp?.pct ?? 100;
-  const hpCurrent = hp?.current ?? 10;
-  const hpMax = hp?.max ?? 10;
   // Kleur-keuze op basis van HP-percentage
   const hpColor =
     hpPct >= 60 ? 'from-emerald-700 to-emerald-400'
@@ -1038,9 +1034,8 @@ function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, hp, 
         </button>
         {/* v6_hp_bar_001 — Gezondheidsbalk tussen portret en niveau */}
         <div data-testid="char-hp-bar" className="mt-2 w-full">
-          <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
-            <span className="text-rose-300/90 flex items-center gap-1"><span className="text-rose-400">♥</span> HP</span>
-            <span className="text-amber-100">{hpCurrent} / {hpMax}</span>
+          <div className="text-[10px] font-mono mb-0.5 text-rose-300/90 flex items-center gap-1">
+            <span className="text-rose-400">♥</span> HP
           </div>
           <div className="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden border border-rose-900/40">
             <div className={`h-full bg-gradient-to-r ${hpColor} transition-all`} style={{ width: `${hpPct}%` }} />
@@ -1048,9 +1043,8 @@ function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, hp, 
         </div>
         {/* v6_xp_bar_label_001 — Level (was 'Niveau'), zelfde stijl als HP-label */}
         <div data-testid="char-xp-bar" className="mt-2 w-full">
-          <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
-            <span className="text-amber-300/90 flex items-center gap-1"><span className="text-amber-400">✦</span> Level {level}</span>
-            <span className="text-amber-100">{xpInLvl} / {xpPerLvl}</span>
+          <div className="text-[10px] font-mono mb-0.5 text-amber-300/90 flex items-center gap-1">
+            <span className="text-amber-400">✦</span> Level {level}
           </div>
           <div className="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden border border-amber-900/40">
             <div className="h-full bg-gradient-to-r from-amber-700 to-yellow-300 transition-all" style={{ width: `${xpPct}%` }} />

@@ -366,7 +366,19 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
 
       {/* ===== HOOFD 3-KOLOMS LAYOUT ===== */}
       <div className="mt-3 grid grid-cols-12 gap-3">
-        {/* === KOLOM LINKS: Body silhouet met slots + CharInfo === */}
+        {/* === KOLOM LINKS: Karakter portret + CharInfo (samen — natuurlijke koppeling) === */}
+        <div className="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
+          <KarakterPortretPanel
+            avatarUrl={avatarUrl}
+            level={char.derived?.level ?? 0}
+            xpPct={xpPct}
+            hp={char.hp}
+            onOpenAvatarSettings={onOpenAvatarSettings}
+          />
+          <CharInfoPanel char={char} userId={userId} activeTab={infoTab} setActiveTab={setInfoTab} onReload={reload} />
+        </div>
+
+        {/* === KOLOM MIDDEN: Body silhouet — het hoofdscherm === */}
         <div className="col-span-12 lg:col-span-5 space-y-3">
           <PaperPanel>
             <PaperHeader>BODY · EQUIPMENT</PaperHeader>
@@ -379,28 +391,9 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
               capacity={inventory?.capacity || null}
             />
           </PaperPanel>
-          {/* v6_dnd_layout_v2 — CharInfo verplaatst onder Body+Equipment (Willem 31 mei) */}
-          <CharInfoPanel char={char} userId={userId} activeTab={infoTab} setActiveTab={setInfoTab} onReload={reload} />
         </div>
 
-        {/* === KOLOM MIDDEN: Karakter + Stats + Overig + Bewoners (2x3) === */}
-        <div className="col-span-12 md:col-span-6 lg:col-span-3 space-y-3">
-          <KarakterPortretPanel
-            avatarUrl={avatarUrl}
-            level={char.derived?.level ?? 0}
-            xpPct={xpPct}
-            hp={char.hp}
-            onOpenAvatarSettings={onOpenAvatarSettings}
-          />
-          {/* v6_charinfo_consolidate_001 — Stats/Aanval/Overig samengevoegd in CharInfoPanel-tabs */}
-          {/* v6_dice_panel_remove_001 — DiceRollerPanel verwijderd op user-verzoek
-              (avatar-only kader was overbodig; functionaliteit komt later terug in andere vorm).
-              Stats blijven in CharInfoPanel "STATISTIEKEN" tab. */}
-          {/* v6_bewoners_remove_001 — Bewoners-strip verwijderd op user-verzoek.
-              Bewoners zelf blijven in data; alleen UI-paneel weg. */}
-        </div>
-
-        {/* === KOLOM RECHTS: Rugzak + Huis & Opslag + Dorp + Handel === */}
+        {/* === KOLOM RECHTS: Rugzak + Dorp + Spark World === */}
         <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-3">
           {/* v6_dnd_rugzak_huis_tabs_001 — Rugzak + Huis & Opslag in 1 kader met 2 tabs */}
           <RugzakHuisKaderPanel
@@ -412,12 +405,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             isHome={isHome}
           />
           <DorpPreviewPanel char={char} gameCards={gameCards} onNavigateMap={() => setShowMapView(true)} />
-          {/* v6_spark_world_preview_001 — Land/Spark World preview kader naast Dorp-kader */}
           <LandPreviewPanel char={char} gameCards={gameCards} />
-          {/* v6_dnd_fracties_fullwidth_001 — MiniMapPanel verwijderd uit avatar-tab;
-              FractiesKaderPanel is verplaatst naar volle breedte onder de grid (zie hieronder).
-              Landkaart-bark blijft bereikbaar via de "Landkaart"-knop in FractiesKaderPanel. */}
-          {/* v6_bewoners_layout_002 — Handel-kader onder Spark World map (geopend bij selectie) */}
           {activeBewoner && (
             <BewonerHandelPanel
               bewoner={activeBewoner}

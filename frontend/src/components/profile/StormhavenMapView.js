@@ -359,12 +359,45 @@ function BuildingHotspot({ building, onClick, active, editMode = false, mapRef =
 }
 
 // v6_trade_bark_002 — 2-paneel trade bark (Jij + NPC) op basis van dnd_trade_bark_spec.
-// NPC-avatar mapping: archief-foto's voor bakker/slager/jager/tempel; rest = ?-placeholder.
-const NPC_IMAGES = {
-  bakker:          '4e8404edfcbf',  // Bakker Persoon.png
-  slager:          '053982d483e4',  // De Slager.png
-  jachthut:        'e82426dc658d',  // icoon jager.png
-  tempel_spark:    '13ccbbf4fccf',  // Spark logo
+// NPC-avatar mapping → echte persoon-avatars uit /api/avatar/gallery/.
+// "Vraag" avatar = de officiële vraagteken-avatar (id 31c6dc04a2fd).
+const QUESTION_AVATAR_URL = `${API}/api/avatar/gallery/31c6dc04a2fd/image`;
+const galleryAvatar = (id) => `${API}/api/avatar/gallery/${id}/image`;
+
+const NPC_AVATARS = {
+  smederij:       galleryAvatar('735f902e9d84'),  // Soldaat (krijger met wapens — past bij smid)
+  jachthut:       galleryAvatar('bcc61f9c7f98'),  // Wood Elf Male = Jager
+  kruidenwinkel:  galleryAvatar('344cbce0dd9b'),  // Shaman = Healer/Kruidenkundige
+  houthakkerij:   galleryAvatar('83b7481b0ad1'),  // Knecht 1 = werker
+  mijn:           galleryAvatar('bac532875374'),  // Kencht 2 = werker
+  haven:          galleryAvatar('2367c0735dbb'),  // Bar man = Havenmeester
+  waterput:       galleryAvatar('5a48ea93cb8a'),  // Oude Mira = waterhaler
+  akker:          galleryAvatar('83b7481b0ad1'),  // Knecht 1 = boer
+  stadsbank:      galleryAvatar('6252db7c9ecd'),  // De Burgermeester (bestuurder)
+  bakker:         galleryAvatar('6caaed01d0c6'),  // De Bakker
+  slager:         galleryAvatar('90896cd2fd96'),  // De Slager
+  trader_post:    galleryAvatar('0ef0b726773e'),  // De Trader
+  auctionhouse:   galleryAvatar('0ef0b726773e'),  // De Trader
+  kazerne:        galleryAvatar('735f902e9d84'),  // Soldaat = Kapitein
+  herberg:        galleryAvatar('9331f27d4fd8'),  // Bar vrouw = Waardin
+  tempel_spark:   galleryAvatar('cf2141a0bc0c'),  // Spark
+  markt:          galleryAvatar('0ef0b726773e'),  // De Trader
+  huis_t1:        galleryAvatar('c4d90890a46d'),  // Bakkers Dochter (bewoner)
+  wachterspost:   galleryAvatar('cf90e9ea6393'),  // Black Knight
+  gemeentehuis:   galleryAvatar('6252db7c9ecd'),  // De Burgermeester
+  warehouse:      galleryAvatar('bac532875374'),  // Knecht 2 = magazijnwerker
+  // Riolen: Lost Gobelin
+  riool_o:        galleryAvatar('7c5f443506b4'),
+  riool_w:        galleryAvatar('7c5f443506b4'),
+  // Muren + Poorten: Black Knight als wachter
+  muur_n:         galleryAvatar('cf90e9ea6393'),
+  muur_o:         galleryAvatar('cf90e9ea6393'),
+  muur_z:         galleryAvatar('cf90e9ea6393'),
+  muur_w:         galleryAvatar('cf90e9ea6393'),
+  poort_n:        galleryAvatar('cf90e9ea6393'),
+  poort_o:        galleryAvatar('cf90e9ea6393'),
+  poort_z:        galleryAvatar('cf90e9ea6393'),
+  poort_w:        galleryAvatar('cf90e9ea6393'),
 };
 
 const NPC_NAMES = {
@@ -455,8 +488,7 @@ function BuildingTradeBark({ building, char, onClose }) {
       .catch(() => {});
   }, [userId]);
 
-  const npcImgId = NPC_IMAGES[building.id];
-  const npcImg = npcImgId ? `${API}/api/system-archive/file/${npcImgId}` : null;
+  const npcImg = NPC_AVATARS[building.id] || QUESTION_AVATAR_URL;
   const npcNaam = NPC_NAMES[building.id] || building.label;
   const traderInv = MOCK_TRADER_INVENTORY[building.id] || [];
 
@@ -559,19 +591,16 @@ function BuildingTradeBark({ building, char, onClose }) {
 function TraderAvatar({ label, naam, sub, img, accent }) {
   const ring = accent === 'emerald' ? 'border-emerald-500/70 shadow-[0_0_16px_rgba(52,211,153,0.4)]' : 'border-amber-500/70 shadow-[0_0_16px_rgba(245,158,11,0.4)]';
   const labelClr = accent === 'emerald' ? 'text-emerald-300/80' : 'text-amber-300/80';
+  const finalImg = img || QUESTION_AVATAR_URL;
   return (
     <div className="flex-1 flex items-center gap-3 p-3">
-      <div className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${ring} bg-stone-900 flex-shrink-0 flex items-center justify-center`}>
-        {img ? (
-          <img src={img} alt="" className="w-full h-full object-cover" />
-        ) : (
-          <span className="text-3xl font-serif font-bold text-amber-400/60">?</span>
-        )}
+      <div className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${ring} bg-stone-900 flex-shrink-0`}>
+        <img src={finalImg} alt="" className="w-full h-full object-cover" />
       </div>
       <div className="flex-1 min-w-0">
         <p className={`text-[9px] uppercase tracking-[0.25em] ${labelClr}`}>{label}</p>
-        <h4 className="text-sm font-serif font-bold text-amber-100 leading-tight truncate">{naam}</h4>
-        <p className="text-[10px] text-amber-400/70 italic truncate">{sub}</p>
+        <h4 className="text-sm font-serif font-bold text-amber-100 leading-tight truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{naam}</h4>
+        <p className="text-[10px] text-amber-100/80 italic truncate drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{sub}</p>
       </div>
     </div>
   );
@@ -592,7 +621,7 @@ function InventoryPanel({ title, subtitle, items, selected, onToggle, accent }) 
       ) : (
         <div className="space-y-1.5">
           {items.map(it => {
-            const itImg = it.img ? `${API}${it.img}` : null;
+            const itImg = it.img ? `${API}${it.img}` : QUESTION_AVATAR_URL;
             return (
               <button key={it.id}
                 data-testid={`trade-item-${it.id}`}
@@ -600,12 +629,8 @@ function InventoryPanel({ title, subtitle, items, selected, onToggle, accent }) 
                 className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-md border text-left transition-all text-[11px] ${
                   isSel(it.id) ? selRing : 'border-stone-700 bg-stone-900/40 hover:bg-stone-800/60 text-amber-200/90'
                 }`}>
-                <span className="w-8 h-8 rounded border border-amber-700/40 bg-stone-900 flex-shrink-0 overflow-hidden flex items-center justify-center">
-                  {itImg ? (
-                    <img src={itImg} alt="" className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-base font-serif font-bold text-amber-400/60">?</span>
-                  )}
+                <span className="w-8 h-8 rounded border border-amber-700/40 bg-stone-900 flex-shrink-0 overflow-hidden">
+                  <img src={itImg} alt="" className="w-full h-full object-cover" />
                 </span>
                 <span className="flex-1 truncate">{it.naam}</span>
                 <span className="font-mono text-amber-100">{it.price}g</span>

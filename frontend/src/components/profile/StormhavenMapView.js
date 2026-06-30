@@ -238,7 +238,10 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
 
               {/* Trade-bark modal voor aangeklikt gebouw */}
               {tradeBark && (
-                <BuildingTradeBark building={tradeBark.building} onClose={closeTradeBark} />
+                <BuildingTradeBark
+                  building={tradeBark.building}
+                  char={char}
+                  onClose={closeTradeBark} />
               )}
             </div>
           </div>
@@ -355,70 +358,222 @@ function BuildingHotspot({ building, onClick, active, editMode = false, mapRef =
   );
 }
 
-function BuildingTradeBark({ building, onClose }) {
-  // v6_dorp_walk_to_building_001 — bark-stijl trade-venster nadat avatar bij gebouw is aangekomen
-  const desc = building.card?.lagen?.laag1 || (building.placeholder ? `Maak een D&D-kaart "${building.label}" om deze plek in te kleuren.` : '');
-  const detail = building.card?.lagen?.laag2 || building.card?.lagen?.laag3 || '';
+// v6_trade_bark_002 — 2-paneel trade bark (Jij + NPC) op basis van dnd_trade_bark_spec.
+// NPC-avatar mapping: archief-foto's voor bakker/slager/jager/tempel; rest = ?-placeholder.
+const NPC_IMAGES = {
+  bakker:          '4e8404edfcbf',  // Bakker Persoon.png
+  slager:          '053982d483e4',  // De Slager.png
+  jachthut:        'e82426dc658d',  // icoon jager.png
+  tempel_spark:    '13ccbbf4fccf',  // Spark logo
+};
+
+const NPC_NAMES = {
+  smederij:       'Smid',
+  jachthut:       'Jager',
+  kruidenwinkel:  'Kruidenkundige',
+  houthakkerij:   'Houthakker',
+  mijn:           'Mijner',
+  haven:          'Havenmeester',
+  waterput:       'Waterhaler',
+  akker:          'Boer',
+  stadsbank:      'Bankier',
+  bakker:         'Bakker',
+  slager:         'Slager',
+  trader_post:    'Karavaanleider',
+  auctionhouse:   'Veilingmeester',
+  kazerne:        'Kapitein',
+  herberg:        'Waard',
+  tempel_spark:   'Tempelwachter',
+  markt:          'Markt-NPC',
+  huis_t1:        'Bewoner',
+  wachterspost:   'Wachter',
+  gemeentehuis:   'Stadsleider',
+  warehouse:      'Magazijnmeester',
+  stadsmuur:      'Muurwachter',
+  stadspoort:     'Poortwachter',
+  riool_o:        '???',
+  riool_w:        '???',
+  poort_n:        'Poortwachter',
+  poort_o:        'Poortwachter',
+  poort_z:        'Poortwachter',
+  poort_w:        'Poortwachter',
+  muur_n:         'Muurwachter',
+  muur_o:         'Muurwachter',
+  muur_z:         'Muurwachter',
+  muur_w:         'Muurwachter',
+};
+
+// Mock-rugzak items om de trade-UI te demonstreren. Echte rugzak komt straks uit /api/inventory.
+const MOCK_TRADER_INVENTORY = {
+  bakker:        [{ id: 'brood', naam: 'Brood', price: 6, icon: '🍞' }, { id: 'koekje', naam: 'Koekje', price: 3, icon: '🍪' }],
+  slager:        [{ id: 'vlees', naam: 'Vlees', price: 8, icon: '🥩' }, { id: 'worst', naam: 'Worst', price: 12, icon: '🌭' }],
+  smederij:      [{ id: 'zwaard', naam: 'Handzwaard', price: 150, icon: '⚔️' }, { id: 'schild', naam: 'Schild', price: 100, icon: '🛡️' }],
+  kruidenwinkel: [{ id: 'kruid', naam: 'Helende kruiden', price: 15, icon: '🌿' }, { id: 'potion', naam: 'Healing Potion', price: 40, icon: '🧪' }],
+  herberg:       [{ id: 'kamer', naam: 'Kamer/nacht', price: 2, icon: '🛏️' }, { id: 'maaltijd', naam: 'Maaltijd', price: 4, icon: '🍲' }],
+  markt:         [{ id: 'appel', naam: 'Appel', price: 4, icon: '🍎' }, { id: 'vis', naam: 'Vis', price: 5, icon: '🐟' }, { id: 'kaas', naam: 'Kaas', price: 7, icon: '🧀' }],
+  haven:         [{ id: 'vis', naam: 'Verse vis', price: 5, icon: '🐟' }],
+  akker:         [{ id: 'graan', naam: 'Graan', price: 3, icon: '🌾' }, { id: 'appel', naam: 'Appel', price: 4, icon: '🍎' }],
+};
+
+
+function BuildingTradeBark({ building, char, onClose }) {
+  const userId = char?.user_id;
+  const [userAvatar, setUserAvatar] = React.useState(null);
+  const [verkopen, setVerkopen] = React.useState([]);  // jouw items te verkopen
+  const [kopen, setKopen] = React.useState([]);        // trader items te kopen
+
+  React.useEffect(() => {
+    if (!userId) return;
+    fetch(`${API}/api/avatar/current/${userId}`)
+      .then(r => r.json())
+      .then(d => setUserAvatar(d.url ? `${API}${d.url}` : null))
+      .catch(() => {});
+  }, [userId]);
+
+  const npcImgId = NPC_IMAGES[building.id];
+  const npcImg = npcImgId ? `${API}/api/system-archive/file/${npcImgId}` : null;
+  const npcNaam = NPC_NAMES[building.id] || building.label;
+  const traderInv = MOCK_TRADER_INVENTORY[building.id] || [];
+
+  // Mock-rugzak (later: uit /api/inventory). Voor nu: stub items voor demo.
+  const userInv = [
+    { id: 'goud-pouch', naam: 'Goud-pouch', price: 0, icon: '💰' },
+    { id: 'hp-potion', naam: 'HP-Potion (oud)', price: 5, icon: '🧪' },
+  ];
+
+  const TAX_PCT = 5;
+  const sumKopen = kopen.reduce((a, b) => a + b.price, 0);
+  const sumVerkopen = verkopen.reduce((a, b) => a + b.price, 0);
+  const tax = Math.round((sumKopen * TAX_PCT) / 100);
+  const netto = sumVerkopen - sumKopen - tax;
+
+  const toggle = (list, setter, item) => {
+    setter(list.find(x => x.id === item.id) ? list.filter(x => x.id !== item.id) : [...list, item]);
+  };
+
   return (
     <div
       data-testid="building-trade-bark"
-      className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-30"
+      className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-30"
       onClick={onClose}>
       <div
-        className="relative bg-stone-950 border-2 border-amber-500/70 rounded-xl w-[min(92%,440px)] shadow-[0_0_40px_rgba(245,158,11,0.4)] overflow-hidden"
+        className="relative bg-stone-950 border-2 border-amber-500/70 rounded-xl w-[min(96%,720px)] shadow-[0_0_40px_rgba(245,158,11,0.4)] overflow-hidden flex flex-col max-h-[88%]"
         onClick={e => e.stopPropagation()}>
-        {/* Header met afbeelding */}
-        <div className="flex items-center gap-3 p-4 border-b border-amber-900/40 bg-gradient-to-r from-amber-950/60 to-stone-950">
-          {building.img ? (
-            <img src={building.img} alt="" className="w-16 h-16 rounded-lg object-cover border border-amber-600/60 flex-shrink-0" />
-          ) : (
-            <div className="w-16 h-16 rounded-lg border border-amber-700/40 bg-stone-900 flex items-center justify-center flex-shrink-0">
-              {building.central ? <Sparkles className="w-8 h-8 text-amber-400" /> : <Plus className="w-8 h-8 text-amber-400/40" />}
-            </div>
-          )}
-          <div className="flex-1 min-w-0">
-            <p className="text-[9px] uppercase tracking-[0.25em] text-amber-500/70">
-              Je bent aangekomen bij
-            </p>
-            <h3 className="text-lg font-serif font-bold text-amber-100 leading-tight">{building.label}</h3>
-            <p className="text-[10px] text-emerald-400/80 italic">Handel · Bark</p>
-          </div>
+
+        {/* Header met 2 avatar-kaders */}
+        <div className="flex items-stretch border-b border-amber-900/40 bg-gradient-to-r from-amber-950/60 to-stone-950">
+          <TraderAvatar
+            label="Jij"
+            naam={char?.titel || 'Speler'}
+            sub={`${char?.currency?.goud ?? 0} g`}
+            img={userAvatar}
+            accent="emerald" />
+          <div className="flex items-center justify-center px-3 text-amber-500/70 font-serif text-xl">↔</div>
+          <TraderAvatar
+            label="Locatie · NPC"
+            naam={npcNaam}
+            sub={building.label}
+            img={npcImg}
+            accent="amber" />
           <button data-testid="trade-bark-close" onClick={onClose}
-            className="w-8 h-8 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40 flex-shrink-0">
+            className="self-start mt-2 mr-2 w-8 h-8 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40 flex-shrink-0">
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Body: beschrijving + handel-placeholder */}
-        <div className="p-4 space-y-3">
-          {desc && (
-            <p className="text-[12px] text-amber-200/90 italic leading-relaxed">{desc}</p>
-          )}
-          {detail && (
-            <p className="text-[11px] text-amber-300/70 leading-relaxed">{detail}</p>
-          )}
+        {/* 2 kolommen inventaris */}
+        <div className="grid grid-cols-2 gap-0 flex-1 overflow-hidden">
+          <InventoryPanel
+            title="Jouw rugzak"
+            subtitle="Klik items om te verkopen"
+            items={userInv}
+            selected={verkopen}
+            onToggle={item => toggle(verkopen, setVerkopen, item)}
+            accent="emerald" />
+          <InventoryPanel
+            title={`${npcNaam} · inboedel`}
+            subtitle="Klik items om te kopen"
+            items={traderInv}
+            selected={kopen}
+            onToggle={item => toggle(kopen, setKopen, item)}
+            accent="amber" />
+        </div>
 
-          {/* Handel-stub */}
-          <div className="mt-3 p-3 rounded-lg border border-amber-700/40 bg-amber-950/30">
-            <p className="text-[9px] uppercase tracking-[0.2em] text-amber-400/70 mb-2">Handel</p>
-            {building.card ? (
-              <p className="text-[11px] text-amber-200/80">
-                Handelaar voor <span className="font-bold text-amber-100">{building.label}</span> is nog niet beschikbaar. De Trader-AI gaat dit gebouw straks autonoom bevoorraden.
-              </p>
-            ) : (
-              <p className="text-[11px] text-stone-400 italic">
-                Dit gebouw heeft nog geen kaart. Maak eerst een D&amp;D-kaart om handel te starten.
-              </p>
-            )}
-            <button
-              data-testid="trade-bark-start"
-              disabled
-              className="mt-2 w-full px-3 py-1.5 rounded-md border border-amber-600/40 bg-stone-900 text-amber-400/60 text-[11px] uppercase tracking-wider font-bold cursor-not-allowed">
-              Handel openen (binnenkort)
-            </button>
+        {/* Footer met berekening */}
+        <div className="border-t border-amber-900/40 bg-stone-950/80 p-3">
+          <div className="grid grid-cols-3 gap-2 text-[11px] font-mono mb-2">
+            <div className="text-emerald-300/90">Verkoop <span className="float-right text-amber-100">+{sumVerkopen}g</span></div>
+            <div className="text-amber-300/90">Koop <span className="float-right text-amber-100">−{sumKopen}g</span></div>
+            <div className="text-rose-300/80">Tax ({TAX_PCT}%) <span className="float-right text-amber-100">−{tax}g</span></div>
           </div>
+          <div className="flex items-center justify-between border-t border-amber-900/40 pt-2">
+            <span className="text-[11px] uppercase tracking-wider text-amber-400/80">Netto</span>
+            <span className={`font-mono font-bold text-base ${netto >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
+              {netto >= 0 ? '+' : ''}{netto} g
+            </span>
+          </div>
+          <button
+            data-testid="trade-bark-accept"
+            disabled
+            className="mt-3 w-full px-3 py-2 rounded-md border border-amber-500/40 bg-stone-900 text-amber-400/60 text-xs uppercase tracking-wider font-bold cursor-not-allowed">
+            Aanbod accepteren (binnenkort — Trader-AI koppeling)
+          </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+
+function TraderAvatar({ label, naam, sub, img, accent }) {
+  const ring = accent === 'emerald' ? 'border-emerald-500/70 shadow-[0_0_16px_rgba(52,211,153,0.4)]' : 'border-amber-500/70 shadow-[0_0_16px_rgba(245,158,11,0.4)]';
+  const labelClr = accent === 'emerald' ? 'text-emerald-300/80' : 'text-amber-300/80';
+  return (
+    <div className="flex-1 flex items-center gap-3 p-3">
+      <div className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${ring} bg-stone-900 flex-shrink-0 flex items-center justify-center`}>
+        {img ? (
+          <img src={img} alt="" className="w-full h-full object-cover" />
+        ) : (
+          <span className="text-3xl font-serif font-bold text-amber-400/60">?</span>
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className={`text-[9px] uppercase tracking-[0.25em] ${labelClr}`}>{label}</p>
+        <h4 className="text-sm font-serif font-bold text-amber-100 leading-tight truncate">{naam}</h4>
+        <p className="text-[10px] text-amber-400/70 italic truncate">{sub}</p>
+      </div>
+    </div>
+  );
+}
+
+
+function InventoryPanel({ title, subtitle, items, selected, onToggle, accent }) {
+  const isSel = id => selected.some(s => s.id === id);
+  const selRing = accent === 'emerald'
+    ? 'border-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)] bg-emerald-950/40'
+    : 'border-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] bg-amber-950/40';
+  return (
+    <div className="p-3 overflow-y-auto" style={{ borderLeft: accent === 'amber' ? '1px solid rgba(146,64,14,0.4)' : 'none' }}>
+      <p className="text-[9px] uppercase tracking-[0.2em] text-amber-400/70">{title}</p>
+      <p className="text-[10px] text-amber-300/60 italic mb-2">{subtitle}</p>
+      {items.length === 0 ? (
+        <p className="text-[11px] text-stone-500 italic">Geen items beschikbaar.</p>
+      ) : (
+        <div className="space-y-1.5">
+          {items.map(it => (
+            <button key={it.id}
+              data-testid={`trade-item-${it.id}`}
+              onClick={() => onToggle(it)}
+              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-md border text-left transition-all text-[11px] ${
+                isSel(it.id) ? selRing : 'border-stone-700 bg-stone-900/40 hover:bg-stone-800/60 text-amber-200/90'
+              }`}>
+              <span className="text-base">{it.icon}</span>
+              <span className="flex-1 truncate">{it.naam}</span>
+              <span className="font-mono text-amber-100">{it.price}g</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

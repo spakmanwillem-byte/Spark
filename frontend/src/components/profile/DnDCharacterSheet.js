@@ -391,6 +391,7 @@ export function DnDCharacterSheet({ userId, isAdmin, onOpenAvatarSettings }) {
             xpPct={xpPct}
             xpInLvl={xpInLvl}
             xpPerLvl={xpPerLvl}
+            hp={char.hp}
             onOpenAvatarSettings={onOpenAvatarSettings}
           />
           {/* v6_charinfo_consolidate_001 — Stats/Aanval/Overig samengevoegd in CharInfoPanel-tabs */}
@@ -1006,7 +1007,15 @@ function EquipSlotModal({ slot, item, userId, onClose, onSaved, previewCard, gam
 }
 
 // ----- KARAKTER PORTRET -----
-function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, onOpenAvatarSettings }) {
+function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, hp, onOpenAvatarSettings }) {
+  const hpPct = hp?.pct ?? 100;
+  const hpCurrent = hp?.current ?? 10;
+  const hpMax = hp?.max ?? 10;
+  // Kleur-keuze op basis van HP-percentage
+  const hpColor =
+    hpPct >= 60 ? 'from-emerald-700 to-emerald-400'
+    : hpPct >= 30 ? 'from-amber-700 to-amber-400'
+    : 'from-red-800 to-red-500';
   return (
     <PaperPanel>
       <PaperHeader>KARAKTER</PaperHeader>
@@ -1027,6 +1036,16 @@ function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, onOp
             <Upload className="w-6 h-6 text-amber-300" />
           </div>
         </button>
+        {/* v6_hp_bar_001 — Gezondheidsbalk tussen portret en niveau */}
+        <div data-testid="char-hp-bar" className="mt-2 w-full">
+          <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
+            <span className="text-rose-300/90 flex items-center gap-1"><span className="text-rose-400">♥</span> HP</span>
+            <span className="text-amber-100">{hpCurrent} / {hpMax}</span>
+          </div>
+          <div className="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden border border-rose-900/40">
+            <div className={`h-full bg-gradient-to-r ${hpColor} transition-all`} style={{ width: `${hpPct}%` }} />
+          </div>
+        </div>
         <p className="mt-2 text-amber-100 font-serif text-base">Niveau {level}</p>
         <div className="mt-1 w-full h-2 bg-stone-900 rounded-full overflow-hidden border border-amber-900/40">
           <div className="h-full bg-gradient-to-r from-amber-700 to-yellow-300" style={{ width: `${xpPct}%` }} />
@@ -1868,6 +1887,7 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
   const STAT_ICONS = {
     'Kracht': '✦', 'Behendigheid': '✕', 'Intelligentie': '☉',
     'Conditie': '♥', 'Wilskracht': '⚑', 'Geluk': '✧',
+    'Gezondheid': '✚',
     'Aanvalskracht': '⚔', 'Verdediging': '🛡', 'Magie Kracht': '✺',
     'Crit. Kans': '✷', 'Beweging': '➤', 'Initiatief': '⟳',
   };
@@ -1907,12 +1927,19 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
       )}
       {Object.entries(stats || {}).map(([k, v]) => {
         const spentOnStat = sp.spent?.[k] || 0;
+        const cost = sp.costs?.[k] || 1;
+        const cap = sp.caps?.[k];
+        const atCap = cap != null && v >= cap;
+        const canSpend = sp.available >= cost && !atCap;
         return (
           <div key={k} data-testid={`stat-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
             className="flex items-center justify-between text-xs">
             <span className="flex items-center gap-1.5 text-amber-200/90">
               <span style={{ color: accent }}>{STAT_ICONS[k] || '•'}</span>
               {k}
+              {cap != null && (
+                <span className="text-[9px] text-amber-500/60">(max {cap})</span>
+              )}
             </span>
             <span className="flex items-center gap-2">
               {allowSpend && spentOnStat > 0 && (
@@ -1927,14 +1954,14 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
                 <button
                   data-testid={`stat-plus-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
                   onClick={() => spendStatPoint(k)}
-                  disabled={sp.available <= 0 || spending !== null}
-                  title={sp.available > 0 ? `+1 ${k}` : 'Geen punten beschikbaar — verdien meer XP'}
-                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold border transition-colors ${
-                    sp.available > 0
+                  disabled={!canSpend || spending !== null}
+                  title={atCap ? `${k} is op de cap van ${cap}` : (canSpend ? `+1 ${k} (kost ${cost})` : `Kost ${cost} punten — niet genoeg`)}
+                  className={`min-w-[28px] h-5 px-1.5 rounded-full flex items-center justify-center text-[10px] font-bold border transition-colors ${
+                    canSpend
                       ? 'border-emerald-500/70 bg-emerald-900/40 text-emerald-200 hover:bg-emerald-700/60 cursor-pointer'
                       : 'border-stone-700 bg-stone-900/60 text-stone-600 cursor-not-allowed'
                   } ${spending === k ? 'opacity-50' : ''}`}>
-                  +
+                  {cost > 1 ? `+${cost}` : '+'}
                 </button>
               )}
             </span>

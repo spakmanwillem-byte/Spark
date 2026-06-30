@@ -158,11 +158,14 @@ def _load_or_init(user_id: str) -> dict:
     }
 
     # v6_stat_points_001 — per stat extra punten verdiend via levels
+    # v6_stat_gezondheid_001 — extra stat Gezondheid (kost 5 punten per +1) + Geluk cap 25
     BASE_STAT = 10
-    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]
+    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk", "Gezondheid"]
+    STAT_COSTS = {"Gezondheid": 5}   # default = 1
+    STAT_CAPS = {"Geluk": 25}         # max waarde (base+spent), default = unlimited
     spent = ch.get("stat_points_spent") or {}
     spent = {k: int(spent.get(k, 0)) for k in STAT_NAMES}
-    used = sum(spent.values())
+    used = sum(spent.get(k, 0) * STAT_COSTS.get(k, 1) for k in STAT_NAMES)
     available = max(0, level - used)
 
     # Default placeholder stat-block (basis 10 + bestede punten)
@@ -173,7 +176,15 @@ def _load_or_init(user_id: str) -> dict:
         "used": used,
         "total": level,        # 1 punt per level
         "available": available,
+        "costs": {k: STAT_COSTS.get(k, 1) for k in STAT_NAMES},
+        "caps": {k: STAT_CAPS.get(k) for k in STAT_NAMES if k in STAT_CAPS},
     }
+    # v6_hp_bar_001 — health bar in KARAKTER paneel; max_hp = Gezondheid (start 10 = 100%)
+    max_hp = ch["statistieken"]["Gezondheid"]
+    current_hp = ch.get("current_hp")
+    if current_hp is None or current_hp > max_hp:
+        current_hp = max_hp
+    ch["hp"] = {"current": int(current_hp), "max": int(max_hp), "pct": int(round(current_hp / max_hp * 100)) if max_hp > 0 else 0}
     ch["aanval_verdediging"] = {
         "Aanvalskracht": 0, "Verdediging": 0, "Magie Kracht": 0,
         "Crit. Kans": 5, "Beweging": 100, "Initiatief": 0,
@@ -292,17 +303,27 @@ async def push_event(user_id: str, req: EventReq):
 
 @router.post("/{user_id}/stats/spend")
 async def spend_stat_point(user_id: str, req: StatSpendReq):
-    """Besteed 1 stat-punt aan een specifieke stat. 1 punt per level beschikbaar."""
-    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]
+    """Besteed stat-punten aan een specifieke stat.
+    Gezondheid kost 5 punten per +1, andere stats 1 per +1.
+    Geluk heeft een cap van 25 (base 10 + max 15 punten).
+    """
+    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk", "Gezondheid"]
+    STAT_COSTS = {"Gezondheid": 5}
+    STAT_CAPS = {"Geluk": 25}
+    BASE_STAT = 10
     if req.stat_name not in STAT_NAMES:
         raise HTTPException(400, f"Onbekende stat: {req.stat_name}")
     ch = _load_or_init(user_id)
     level = (ch.get("derived") or {}).get("level", 0)
     spent = ch.get("stat_points_spent") or {k: 0 for k in STAT_NAMES}
     spent = {k: int(spent.get(k, 0)) for k in STAT_NAMES}
-    used = sum(spent.values())
-    if used >= level:
-        raise HTTPException(400, f"Geen punten beschikbaar (used={used}, level={level})")
+    cost = STAT_COSTS.get(req.stat_name, 1)
+    used = sum(spent.get(k, 0) * STAT_COSTS.get(k, 1) for k in STAT_NAMES)
+    if used + cost > level:
+        raise HTTPException(400, f"Niet genoeg punten (kost {cost}, beschikbaar {level - used})")
+    cap = STAT_CAPS.get(req.stat_name)
+    if cap is not None and (BASE_STAT + spent[req.stat_name] + 1) > cap:
+        raise HTTPException(400, f"{req.stat_name} is al op de cap van {cap}")
     spent[req.stat_name] = spent[req.stat_name] + 1
     ch["stat_points_spent"] = spent
     ch["updated_at"] = datetime.now(timezone.utc).isoformat()
@@ -314,7 +335,7 @@ async def spend_stat_point(user_id: str, req: StatSpendReq):
 async def reset_stat_points(user_id: str):
     """Reset alle bestede stat-punten (admin/debug)."""
     ch = _load_or_init(user_id)
-    ch["stat_points_spent"] = {k: 0 for k in ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]}
+    ch["stat_points_spent"] = {k: 0 for k in ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk", "Gezondheid"]}
     ch["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_json(_char_path(user_id), _strip_derived(ch))
     return _load_or_init(user_id)
@@ -327,4 +348,5 @@ def _strip_derived(ch: dict) -> dict:
     out.pop("statistieken", None)
     out.pop("aanval_verdediging", None)
     out.pop("stat_points", None)
+    out.pop("hp", None)
     return out

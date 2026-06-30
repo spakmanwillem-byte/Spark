@@ -274,6 +274,11 @@ app.include_router(dnd_bewoner_router, prefix="/api")
 from modules.dnd.dice import router as dnd_dice_router
 app.include_router(dnd_dice_router, prefix="/api")
 
+# v6_daily_event_001 — Dagelijks SPS-gevecht voor 10g
+from modules.dnd.daily_event import router as dnd_daily_event_router
+app.include_router(dnd_daily_event_router, prefix="/api")
+
+
 # v6_reconcile_001 — Reconciliation: potje-saldo vs Bitvavo (alleen Spark)
 from modules.trade.reconcile import router as trade_reconcile_router
 app.include_router(trade_reconcile_router, prefix="/api")

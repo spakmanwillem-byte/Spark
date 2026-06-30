@@ -404,15 +404,40 @@ const NPC_NAMES = {
 };
 
 // Mock-rugzak items om de trade-UI te demonstreren. Echte rugzak komt straks uit /api/inventory.
+// img = path naar D&D-kaart avatar (game.json media); null = toont ?-placeholder.
 const MOCK_TRADER_INVENTORY = {
-  bakker:        [{ id: 'brood', naam: 'Brood', price: 6, icon: '🍞' }, { id: 'koekje', naam: 'Koekje', price: 3, icon: '🍪' }],
-  slager:        [{ id: 'vlees', naam: 'Vlees', price: 8, icon: '🥩' }, { id: 'worst', naam: 'Worst', price: 12, icon: '🌭' }],
-  smederij:      [{ id: 'zwaard', naam: 'Handzwaard', price: 150, icon: '⚔️' }, { id: 'schild', naam: 'Schild', price: 100, icon: '🛡️' }],
-  kruidenwinkel: [{ id: 'kruid', naam: 'Helende kruiden', price: 15, icon: '🌿' }, { id: 'potion', naam: 'Healing Potion', price: 40, icon: '🧪' }],
-  herberg:       [{ id: 'kamer', naam: 'Kamer/nacht', price: 2, icon: '🛏️' }, { id: 'maaltijd', naam: 'Maaltijd', price: 4, icon: '🍲' }],
-  markt:         [{ id: 'appel', naam: 'Appel', price: 4, icon: '🍎' }, { id: 'vis', naam: 'Vis', price: 5, icon: '🐟' }, { id: 'kaas', naam: 'Kaas', price: 7, icon: '🧀' }],
-  haven:         [{ id: 'vis', naam: 'Verse vis', price: 5, icon: '🐟' }],
-  akker:         [{ id: 'graan', naam: 'Graan', price: 3, icon: '🌾' }, { id: 'appel', naam: 'Appel', price: 4, icon: '🍎' }],
+  bakker:        [
+    { id: 'brood',   naam: 'Brood',           price: 6,   img: '/api/system-archive/file/11b24741b018' },
+    { id: 'koekje',  naam: 'Koekje',          price: 3,   img: null },
+  ],
+  slager:        [
+    { id: 'vlees',   naam: 'Vlees',           price: 8,   img: '/api/system-archive/file/e5d69e8b2623' },
+    { id: 'worst',   naam: 'Worst',           price: 12,  img: null },
+  ],
+  smederij:      [
+    { id: 'zwaard',  naam: 'Handzwaard',      price: 150, img: '/api/system-archive/file/2f8465e433f0' },
+    { id: 'schild',  naam: 'Schild',          price: 100, img: '/api/system-archive/file/597e0c430666' },
+  ],
+  kruidenwinkel: [
+    { id: 'kruid',   naam: 'Helende kruiden', price: 15,  img: null },
+    { id: 'potion',  naam: 'Healing Potion',  price: 40,  img: null },
+  ],
+  herberg:       [
+    { id: 'kamer',    naam: 'Kamer/nacht',    price: 2,   img: null },
+    { id: 'maaltijd', naam: 'Maaltijd',       price: 4,   img: null },
+  ],
+  markt:         [
+    { id: 'appel',   naam: 'Appel',           price: 4,   img: '/api/system-archive/file/39cd0666d8cf' },
+    { id: 'vis',     naam: 'Vis',             price: 5,   img: '/api/system-archive/file/e22164f8f7fc' },
+    { id: 'kaas',    naam: 'Kaas',            price: 7,   img: null },
+  ],
+  haven:         [
+    { id: 'vis',     naam: 'Verse vis',       price: 5,   img: '/api/system-archive/file/e22164f8f7fc' },
+  ],
+  akker:         [
+    { id: 'graan',   naam: 'Graan',           price: 3,   img: null },
+    { id: 'appel',   naam: 'Appel',           price: 4,   img: '/api/system-archive/file/39cd0666d8cf' },
+  ],
 };
 
 
@@ -437,8 +462,8 @@ function BuildingTradeBark({ building, char, onClose }) {
 
   // Mock-rugzak (later: uit /api/inventory). Voor nu: stub items voor demo.
   const userInv = [
-    { id: 'goud-pouch', naam: 'Goud-pouch', price: 0, icon: '💰' },
-    { id: 'hp-potion', naam: 'HP-Potion (oud)', price: 5, icon: '🧪' },
+    { id: 'goud-pouch',  naam: 'Goud-pouch',     price: 0, img: null },
+    { id: 'hp-potion',   naam: 'HP-Potion (oud)', price: 5, img: null },
   ];
 
   const TAX_PCT = 5;
@@ -460,15 +485,21 @@ function BuildingTradeBark({ building, char, onClose }) {
         className="relative bg-stone-950 border-2 border-amber-500/70 rounded-xl w-[min(96%,720px)] shadow-[0_0_40px_rgba(245,158,11,0.4)] overflow-hidden flex flex-col max-h-[88%]"
         onClick={e => e.stopPropagation()}>
 
-        {/* Header met 2 avatar-kaders */}
-        <div className="flex items-stretch border-b border-amber-900/40 bg-gradient-to-r from-amber-950/60 to-stone-950">
+        {/* Header met 2 avatar-kaders + building-image als achtergrond */}
+        <div
+          className="flex items-stretch border-b border-amber-900/40 relative overflow-hidden"
+          style={building.img ? {
+            backgroundImage: `linear-gradient(to right, rgba(28,25,23,0.85), rgba(28,25,23,0.55), rgba(28,25,23,0.85)), url(${building.img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          } : { background: 'linear-gradient(to right, rgba(120,53,15,0.4), rgba(28,25,23,0.95))' }}>
           <TraderAvatar
             label="Jij"
             naam={char?.titel || 'Speler'}
             sub={`${char?.currency?.goud ?? 0} g`}
             img={userAvatar}
             accent="emerald" />
-          <div className="flex items-center justify-center px-3 text-amber-500/70 font-serif text-xl">↔</div>
+          <div className="flex items-center justify-center px-3 text-amber-300 font-serif text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">↔</div>
           <TraderAvatar
             label="Locatie · NPC"
             naam={npcNaam}
@@ -476,7 +507,7 @@ function BuildingTradeBark({ building, char, onClose }) {
             img={npcImg}
             accent="amber" />
           <button data-testid="trade-bark-close" onClick={onClose}
-            className="self-start mt-2 mr-2 w-8 h-8 rounded-full bg-stone-900 hover:bg-amber-900/30 text-amber-300 flex items-center justify-center border border-amber-900/40 flex-shrink-0">
+            className="self-start mt-2 mr-2 w-8 h-8 rounded-full bg-stone-900/80 hover:bg-amber-900/50 text-amber-300 flex items-center justify-center border border-amber-900/40 flex-shrink-0 backdrop-blur">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -560,18 +591,27 @@ function InventoryPanel({ title, subtitle, items, selected, onToggle, accent }) 
         <p className="text-[11px] text-stone-500 italic">Geen items beschikbaar.</p>
       ) : (
         <div className="space-y-1.5">
-          {items.map(it => (
-            <button key={it.id}
-              data-testid={`trade-item-${it.id}`}
-              onClick={() => onToggle(it)}
-              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-md border text-left transition-all text-[11px] ${
-                isSel(it.id) ? selRing : 'border-stone-700 bg-stone-900/40 hover:bg-stone-800/60 text-amber-200/90'
-              }`}>
-              <span className="text-base">{it.icon}</span>
-              <span className="flex-1 truncate">{it.naam}</span>
-              <span className="font-mono text-amber-100">{it.price}g</span>
-            </button>
-          ))}
+          {items.map(it => {
+            const itImg = it.img ? `${API}${it.img}` : null;
+            return (
+              <button key={it.id}
+                data-testid={`trade-item-${it.id}`}
+                onClick={() => onToggle(it)}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-md border text-left transition-all text-[11px] ${
+                  isSel(it.id) ? selRing : 'border-stone-700 bg-stone-900/40 hover:bg-stone-800/60 text-amber-200/90'
+                }`}>
+                <span className="w-8 h-8 rounded border border-amber-700/40 bg-stone-900 flex-shrink-0 overflow-hidden flex items-center justify-center">
+                  {itImg ? (
+                    <img src={itImg} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-base font-serif font-bold text-amber-400/60">?</span>
+                  )}
+                </span>
+                <span className="flex-1 truncate">{it.naam}</span>
+                <span className="font-mono text-amber-100">{it.price}g</span>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

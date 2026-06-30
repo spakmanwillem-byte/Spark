@@ -21,7 +21,7 @@ router = APIRouter(prefix="/dnd/daily-event", tags=["dnd-daily-event"])
 
 DATA_ROOT = Path(__file__).parent.parent.parent / "data"
 EVENTS_PATH = DATA_ROOT / "dnd" / "daily_events.json"
-USERS_PATH = DATA_ROOT / "users.json"
+USERS_PATH = DATA_ROOT / "system" / "users.json"
 CHOICES = ["steen", "papier", "schaar"]
 WIN_GOUD = 10
 

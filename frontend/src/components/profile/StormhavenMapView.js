@@ -16,9 +16,10 @@
  *   NW            — Waterput #3              (28%, 32%)
  */
 import React, { useState, useEffect, useRef } from 'react';
-import { X, MapPin, Sparkles, Plus, Move, Save, Lock } from 'lucide-react';
+import { X, MapPin, Sparkles, Move, Save, Lock } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL;
+const VRAAG_AVATAR_URL = `${API}/api/avatar/gallery/31c6dc04a2fd/image`;
 
 // v6_dorp_buildings_full_001 — alle gebouwen uit blueprint dnd_dorp_layout.json
 // Posities op octagonal-layout. Lege wedges krijgen ?-marker via placeholder.
@@ -41,6 +42,15 @@ const BUILDING_LAYOUT = [
   { id: 'warehouse',     pos: [38, 38], label: 'Stedelijk Pakhuis', keywords: ['stedelijk pakhuis', 'warehouse', 'pakhuis'], placeholder: true },
   { id: 'auctionhouse',  pos: [62, 62], label: 'Auction House',     keywords: ['auction house', 'auctionhouse'], placeholder: true },
   { id: 'barracks',      pos: [38, 62], label: 'Kazerne',           keywords: ['kazerne', 'barracks'],      placeholder: true },
+
+  // ===== EXTRA GEBOUWEN (op user-verzoek toegevoegd: bakker/slager/waterput/mijn/haven/huis/trader) =====
+  { id: 'bakker',        pos: [70, 45], label: 'Bakker',            keywords: ['bakker'],                   placeholder: true },
+  { id: 'slager',        pos: [30, 45], label: 'Slager',            keywords: ['slager'],                   placeholder: true },
+  { id: 'waterput',      pos: [55, 60], label: 'Waterput',          keywords: ['waterput'],                 placeholder: true },
+  { id: 'mijn',          pos: [80, 65], label: 'Mijn',              keywords: ['mijn'],                     placeholder: true },
+  { id: 'haven',         pos: [20, 65], label: 'Haven',             keywords: ['haven'],                    placeholder: true },
+  { id: 'huis_t1',       pos: [45, 60], label: 'Huis (T1)',         keywords: ['huis (t1)', 'huis t1', 'huis'], placeholder: true },
+  { id: 'trader_post',   pos: [55, 28], label: 'Traders Post',      keywords: ['traders post', 'trader post', 'trader_post'], placeholder: true },
 
   // ===== PERIMETER (4 muren) =====
   { id: 'muur_n', pos: [50, 7],  label: 'Stadsmuur N', keywords: ['stadsmuur'], small: true, placeholder: true },
@@ -263,7 +273,7 @@ export function StormhavenMapView({ dorpCard, gameCards, char, onClose, stadNaam
                 ) : b.central ? (
                   <Sparkles className="w-3 h-3 text-amber-400" />
                 ) : (
-                  <Plus className="w-3 h-3" />
+                  <img src={VRAAG_AVATAR_URL} alt="?" className="w-4 h-4 rounded-sm object-cover opacity-80" />
                 )}
                 {b.label}
               </button>
@@ -342,9 +352,7 @@ function BuildingHotspot({ building, onClick, active, editMode = false, mapRef =
           <Sparkles className="w-7 h-7 text-stone-950" />
         </div>
       ) : (
-        <div className="w-full h-full flex items-center justify-center">
-          <Plus className="w-4 h-4 text-amber-300/60" />
-        </div>
+        <img src={VRAAG_AVATAR_URL} alt="?" className="w-full h-full object-cover opacity-80" />
       )}
       {/* Label */}
       <span className="absolute left-1/2 -translate-x-1/2 mt-1 text-[9px] font-serif font-bold uppercase tracking-wider text-amber-100 whitespace-nowrap"
@@ -360,8 +368,8 @@ function BuildingHotspot({ building, onClick, active, editMode = false, mapRef =
 
 // v6_trade_bark_002 — 2-paneel trade bark (Jij + NPC) op basis van dnd_trade_bark_spec.
 // NPC-avatar mapping → echte persoon-avatars uit /api/avatar/gallery/.
-// "Vraag" avatar = de officiële vraagteken-avatar (id 31c6dc04a2fd).
-const QUESTION_AVATAR_URL = `${API}/api/avatar/gallery/31c6dc04a2fd/image`;
+// "Vraag" avatar = de officiële vraagteken-avatar (id 31c6dc04a2fd) → VRAAG_AVATAR_URL.
+const QUESTION_AVATAR_URL = VRAAG_AVATAR_URL;
 const galleryAvatar = (id) => `${API}/api/avatar/gallery/${id}/image`;
 
 const NPC_AVATARS = {

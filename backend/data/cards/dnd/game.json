@@ -9242,6 +9242,119 @@
         "ws5",
         "voice"
       ]
+    },
+    {
+      "id": "game-9c3863d2",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Slager",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Een slagerij is een winkel waar vlees wordt bereid, gesneden en verkocht.",
+        "laag2": "Per level +1 slager-werkplek. Vraagt wildvlees van de jachthut en vlees van de boer.",
+        "laag3": "Haken, snijbanken en koeling. De slager weet hoe elk dier het beste verwerkt wordt.",
+        "laag4": "Spark ziet de slager als het ontleed-knooppunt — één groot object opgesplitst in vele bruikbare delen."
+      },
+      "ws5": {
+        "wie": "Slager, klanten, jagers en boeren",
+        "wat": "Werkplek voor vleesverwerking",
+        "wanneer": "Hele dag",
+        "waar": "Marktdistrict",
+        "waarom": "Vlees veilig leveren",
+        "hoe": "Door ontleden, snijden en verkopen"
+      },
+      "tags": [
+        "D&D",
+        "gebouw",
+        "handwerk",
+        "slager",
+        "vlees",
+        "voedsel",
+        "ambacht"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/b17172e651e0"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Slager",
+          "build_cost_goud": 350
+        },
+        "value_goud": 350,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed_v2",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-30T00:36:00.715659+00:00"
+      }
+    },
+    {
+      "id": "game-07d877eb",
+      "class": "game",
+      "type": "dnd_game_card",
+      "begrip": "Waterput",
+      "sense": "zie",
+      "lagen": {
+        "laag1": "Een waterput is de drinkwater-bron van het dorp.",
+        "laag2": "Een waterhaler tapt puur water voor het dorp. Per level +1 waterhaler-werkplek.",
+        "laag3": "De put is een ontmoetingsplek waar nieuws en geruchten zich verspreiden.",
+        "laag4": "Spark ziet de waterput als het stille knooppunt — onmisbaar maar onopvallend."
+      },
+      "ws5": {
+        "wie": "Waterhaler, dorpsbewoners",
+        "wat": "Ondergronds zoet water",
+        "wanneer": "Dagelijks",
+        "waar": "Centraal dorpsplein",
+        "waarom": "Drinkwater leveren",
+        "hoe": "Door emmer neerlaten en boven halen"
+      },
+      "tags": [
+        "D&D",
+        "gebouw",
+        "secondary",
+        "waterput",
+        "waterhaler",
+        "drinkwater"
+      ],
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": [
+          "/api/system-archive/file/3131dfc4360b"
+        ]
+      },
+      "game_meta": {
+        "is_item": false,
+        "slot": "",
+        "weight": 0,
+        "stats_bonus": {},
+        "combat_bonus": {},
+        "meta": {
+          "building_naam": "Waterput",
+          "build_cost_goud": 100
+        },
+        "value_goud": 100,
+        "rarity": "common",
+        "kind": "gebouw"
+      },
+      "status": "draft",
+      "footnote": {
+        "bron": "blueprint_seed_v2",
+        "vertrouwen": 0.5,
+        "aangemaakt_op": "2026-06-30T00:36:00.715659+00:00"
+      }
     }
   ],
   "updated_at": "2026-06-29T21:42:40.172586+00:00"

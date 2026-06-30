@@ -1225,6 +1225,23 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, 
           <span className="text-amber-400/80">Slots: <span className="font-mono text-amber-200">{cap.slots_used || 0}/{cap.slots_total || 0}</span></span>
           <span style={{ color: kgColor }} className="italic font-medium">{speedLabel}</span>
         </div>
+        {/* v6_encumbrance_001 — Behendigheid-penalty door dracht, deels gecanceld door Intelligentie */}
+        {cap.behendigheid != null && (
+          <div data-testid="rugzak-encumbrance" className="flex justify-between text-[9px] mt-0.5">
+            <span className="text-amber-400/70">
+              ✕ Behendigheid:
+              <span className={`font-mono ml-1 ${cap.encumbrance_penalty_pct > 0 ? 'text-rose-300' : 'text-emerald-300'}`}>
+                {cap.behendigheid_effective}
+              </span>
+              <span className="text-amber-500/60"> / {cap.behendigheid}</span>
+            </span>
+            <span className="text-amber-400/70" title={`Ruwe penalty ${cap.encumbrance_raw_pct}% − Int-cancel ${cap.intelligentie_cancel_pct}%`}>
+              {cap.encumbrance_penalty_pct > 0
+                ? <span className="text-rose-300/90">−{cap.encumbrance_penalty_pct}%</span>
+                : <span className="text-emerald-400/80">geen penalty</span>}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* 32-slot grid (8x4) — items tonen 512x512 D&D images */}

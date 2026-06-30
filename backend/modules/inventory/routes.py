@@ -269,41 +269,58 @@ def _get_user(user_id: str) -> Optional[dict]:
     return next((u for u in data.get("users", []) if u.get("id") == user_id), None)
 
 
-def _get_kracht(user_id: str) -> int:
-    """Lees Kracht stat-value (base 10 + spent_points) uit de D&D-character JSON.
-
-    Wordt gebruikt voor de carry-capacity formule (+0.5 kg per +1 Kracht).
-    Returnt 10 als character-bestand niet bestaat.
-    """
+def _get_stat(user_id: str, stat_name: str, base: int = 10) -> int:
+    """Lees een stat-value (base + spent_points) uit de D&D-character JSON."""
     fp = DATA_ROOT / "dnd" / "characters" / f"{user_id}.json"
     if not fp.exists():
-        return 10
+        return base
     try:
         ch = json.loads(fp.read_text(encoding="utf-8"))
-        spent = (ch.get("stat_points_spent") or {}).get("Kracht", 0)
-        return 10 + int(spent)
+        spent = (ch.get("stat_points_spent") or {}).get(stat_name, 0)
+        return base + int(spent)
     except (json.JSONDecodeError, OSError, TypeError, ValueError):
-        return 10
+        return base
 
 
-def _compute_capacity(slots: List[dict], kracht: int = 10) -> dict:
-    """Bereken capacity uit slots + Kracht-bonus.
+def _get_kracht(user_id: str) -> int:
+    return _get_stat(user_id, "Kracht")
 
-    v6_carry_capacity_001 — +0.5 kg per +1 Kracht boven base 10. Een Kracht-20 speler
-    krijgt dus +5 kg, Kracht-100 → +45 kg extra draagkracht.
+
+def _compute_capacity(slots: List[dict], kracht: int = 10, behendigheid: int = 10, intelligentie: int = 10) -> dict:
+    """Bereken capacity + encumbrance-impact.
+
+    v6_carry_capacity_001 — +0.5 kg per +1 Kracht boven base 10.
+    v6_encumbrance_001 — per 10% van je drachtcap verlies je 1% Behendigheid.
+        Per 10 Intelligentie cancel je 0.5% van die penalty.
     """
     cap_bonus = sum(s.get("capacity_bonus", 0) for s in slots)
     weight_bonus = sum(s.get("weight_bonus", 0.0) for s in slots)
     weight_used = sum(s.get("weight", 0.0) for s in slots)
     kracht_bonus_kg = max(0, (kracht - 10)) * 0.5
+    weight_max = round(BASE_WEIGHT_MAX + weight_bonus + kracht_bonus_kg, 2)
+
+    # Encumbrance-formule
+    load_pct = (weight_used / weight_max * 100) if weight_max > 0 else 0
+    raw_penalty = (load_pct / 10) * 1.0                 # 1% per 10% load
+    int_cancel = (intelligentie / 10) * 0.5             # 0.5% per 10 int
+    net_penalty = max(0.0, raw_penalty - int_cancel)
+    beh_effective = round(behendigheid * (1 - net_penalty / 100), 1)
+
     return {
         "slots_base": BASE_SLOTS,
         "slots_used": len(slots),
         "slots_total": BASE_SLOTS + cap_bonus,
         "weight_used": round(weight_used, 2),
-        "weight_max": round(BASE_WEIGHT_MAX + weight_bonus + kracht_bonus_kg, 2),
+        "weight_max": weight_max,
         "kracht": kracht,
         "kracht_bonus_kg": round(kracht_bonus_kg, 2),
+        "behendigheid": behendigheid,
+        "intelligentie": intelligentie,
+        "load_pct": round(load_pct, 1),
+        "encumbrance_penalty_pct": round(net_penalty, 2),
+        "encumbrance_raw_pct": round(raw_penalty, 2),
+        "intelligentie_cancel_pct": round(int_cancel, 2),
+        "behendigheid_effective": beh_effective,
     }
 
 
@@ -345,7 +362,12 @@ def _load_or_init(user_id: str) -> dict:
         "achievements": inv.get("achievements", []),
         "is_bot": (user_id or "").startswith("bot-") or u.get("type") == "bot",
     }
-    inv["capacity"] = _compute_capacity(inv.get("slots", []), kracht=_get_kracht(user_id))
+    inv["capacity"] = _compute_capacity(
+        inv.get("slots", []),
+        kracht=_get_stat(user_id, "Kracht"),
+        behendigheid=_get_stat(user_id, "Behendigheid"),
+        intelligentie=_get_stat(user_id, "Intelligentie"),
+    )
     return inv
 
 
@@ -425,7 +447,12 @@ async def add_item(user_id: str, req: AddItemReq):
     """Voeg item toe aan inventory (uit catalog of custom)."""
     inv = _load_or_init(user_id)
     slots = inv.get("slots", [])
-    cap = _compute_capacity(slots, kracht=_get_kracht(user_id))
+    cap = _compute_capacity(
+        slots,
+        kracht=_get_stat(user_id, "Kracht"),
+        behendigheid=_get_stat(user_id, "Behendigheid"),
+        intelligentie=_get_stat(user_id, "Intelligentie"),
+    )
     if cap["slots_used"] >= cap["slots_total"]:
         raise HTTPException(400, f"Inventory vol: {cap['slots_used']}/{cap['slots_total']} slots gebruikt")
 

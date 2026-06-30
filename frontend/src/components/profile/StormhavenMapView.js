@@ -444,49 +444,26 @@ const NPC_NAMES = {
   muur_w:         'Muurwachter',
 };
 
-// Mock-rugzak items om de trade-UI te demonstreren. Echte rugzak komt straks uit /api/inventory.
-// img = path naar D&D-kaart avatar (game.json media); null = toont ?-placeholder.
-const MOCK_TRADER_INVENTORY = {
-  bakker:        [
-    { id: 'brood',   naam: 'Brood',           price: 6,   img: '/api/system-archive/file/11b24741b018' },
-    { id: 'koekje',  naam: 'Koekje',          price: 3,   img: null },
-  ],
-  slager:        [
-    { id: 'vlees',   naam: 'Vlees',           price: 8,   img: '/api/system-archive/file/e5d69e8b2623' },
-    { id: 'worst',   naam: 'Worst',           price: 12,  img: null },
-  ],
-  smederij:      [
-    { id: 'zwaard',  naam: 'Handzwaard',      price: 150, img: '/api/system-archive/file/2f8465e433f0' },
-    { id: 'schild',  naam: 'Schild',          price: 100, img: '/api/system-archive/file/597e0c430666' },
-  ],
-  kruidenwinkel: [
-    { id: 'kruid',   naam: 'Helende kruiden', price: 15,  img: null },
-    { id: 'potion',  naam: 'Healing Potion',  price: 40,  img: null },
-  ],
-  herberg:       [
-    { id: 'kamer',    naam: 'Kamer/nacht',    price: 2,   img: null },
-    { id: 'maaltijd', naam: 'Maaltijd',       price: 4,   img: null },
-  ],
-  markt:         [
-    { id: 'appel',   naam: 'Appel',           price: 4,   img: '/api/system-archive/file/39cd0666d8cf' },
-    { id: 'vis',     naam: 'Vis',             price: 5,   img: '/api/system-archive/file/e22164f8f7fc' },
-    { id: 'kaas',    naam: 'Kaas',            price: 7,   img: null },
-  ],
-  haven:         [
-    { id: 'vis',     naam: 'Verse vis',       price: 5,   img: '/api/system-archive/file/e22164f8f7fc' },
-  ],
-  akker:         [
-    { id: 'graan',   naam: 'Graan',           price: 3,   img: null },
-    { id: 'appel',   naam: 'Appel',           price: 4,   img: '/api/system-archive/file/39cd0666d8cf' },
-  ],
+// Trader-inboedel per gebouw: refs naar items-blueprint id's.
+// De volledige item-details (image, weight_kg, price etc.) komen uit /api/dnd/spark-world/items-blueprint.
+const TRADER_OFFERS = {
+  bakker:        ['brood', 'koekje'],
+  slager:        ['vlees', 'worst'],
+  smederij:      ['handzwaard', 'schild'],
+  kruidenwinkel: ['helende_kruiden', 'healing_potion'],
+  herberg:       ['kamer', 'maaltijd'],
+  markt:         ['appel', 'vis', 'kaas'],
+  haven:         ['vis', 'recipe_vissen'],   // Haven verkoopt recept: vissen
+  akker:         ['graan', 'appel'],
 };
 
 
 function BuildingTradeBark({ building, char, onClose }) {
   const userId = char?.user_id;
   const [userAvatar, setUserAvatar] = React.useState(null);
-  const [verkopen, setVerkopen] = React.useState([]);  // jouw items te verkopen
-  const [kopen, setKopen] = React.useState([]);        // trader items te kopen
+  const [itemsBp, setItemsBp] = React.useState({});       // {id: {naam,kind,image,weight_kg,slots,value_goud,...}}
+  const [verkopen, setVerkopen] = React.useState([]);     // jouw items te verkopen
+  const [kopen, setKopen] = React.useState([]);           // trader items te kopen
 
   React.useEffect(() => {
     if (!userId) return;
@@ -496,14 +473,38 @@ function BuildingTradeBark({ building, char, onClose }) {
       .catch(() => {});
   }, [userId]);
 
+  // v6_dnd_items_001 — itemregister ophalen
+  React.useEffect(() => {
+    fetch(`${API}/api/dnd/spark-world/items-blueprint`)
+      .then(r => r.json())
+      .then(d => setItemsBp(d.items || {}))
+      .catch(() => {});
+  }, []);
+
   const npcImg = NPC_AVATARS[building.id] || QUESTION_AVATAR_URL;
   const npcNaam = NPC_NAMES[building.id] || building.label;
-  const traderInv = MOCK_TRADER_INVENTORY[building.id] || [];
+
+  // Bouw concrete trader-items op uit blueprint refs
+  const buildItem = (itemId) => {
+    const bp = itemsBp[itemId];
+    if (!bp) return null;
+    return {
+      id: itemId,
+      naam: bp.naam,
+      kind: bp.kind,
+      img: bp.image,
+      weight_kg: bp.weight_kg ?? 0,
+      slots: bp.slots ?? 1,
+      price: bp.value_goud ?? 0,
+      unlocks_beroep: bp.unlocks_beroep,
+    };
+  };
+  const traderInv = (TRADER_OFFERS[building.id] || []).map(buildItem).filter(Boolean);
 
   // Mock-rugzak (later: uit /api/inventory). Voor nu: stub items voor demo.
   const userInv = [
-    { id: 'goud-pouch',  naam: 'Goud-pouch',     price: 0, img: null },
-    { id: 'hp-potion',   naam: 'HP-Potion (oud)', price: 5, img: null },
+    { id: 'goud-pouch',  naam: 'Goud-pouch',     price: 0, weight_kg: 0.1, slots: 0, img: null },
+    { id: 'hp-potion',   naam: 'HP-Potion (oud)', price: 5, weight_kg: 0.3, slots: 1, img: null },
   ];
 
   const TAX_PCT = 5;
@@ -511,6 +512,9 @@ function BuildingTradeBark({ building, char, onClose }) {
   const sumVerkopen = verkopen.reduce((a, b) => a + b.price, 0);
   const tax = Math.round((sumKopen * TAX_PCT) / 100);
   const netto = sumVerkopen - sumKopen - tax;
+
+  // v6_carry_capacity_001 — gewicht-impact van trade tonen
+  const kgInChange = kopen.reduce((a, b) => a + (b.weight_kg || 0), 0) - verkopen.reduce((a, b) => a + (b.weight_kg || 0), 0);
 
   const toggle = (list, setter, item) => {
     setter(list.find(x => x.id === item.id) ? list.filter(x => x.id !== item.id) : [...list, item]);
@@ -583,6 +587,14 @@ function BuildingTradeBark({ building, char, onClose }) {
               {netto >= 0 ? '+' : ''}{netto} g
             </span>
           </div>
+          {kgInChange !== 0 && (
+            <div className="flex items-center justify-between text-[10px] font-mono mt-1">
+              <span className="text-amber-400/70">Rugzak verandering</span>
+              <span className={kgInChange > 0 ? 'text-amber-300' : 'text-emerald-300'}>
+                {kgInChange > 0 ? '+' : ''}{kgInChange.toFixed(2)} kg
+              </span>
+            </div>
+          )}
           <button
             data-testid="trade-bark-accept"
             disabled
@@ -640,7 +652,15 @@ function InventoryPanel({ title, subtitle, items, selected, onToggle, accent }) 
                 <span className="w-8 h-8 rounded border border-amber-700/40 bg-stone-900 flex-shrink-0 overflow-hidden">
                   <img src={itImg} alt="" className="w-full h-full object-cover" />
                 </span>
-                <span className="flex-1 truncate">{it.naam}</span>
+                <span className="flex-1 truncate">
+                  {it.naam}
+                  {it.unlocks_beroep && (
+                    <span className="ml-1 text-[9px] uppercase tracking-wider text-emerald-400/80">recept</span>
+                  )}
+                </span>
+                {it.weight_kg > 0 && (
+                  <span className="text-[9px] font-mono text-amber-400/60 tabular-nums">{it.weight_kg}kg</span>
+                )}
                 <span className="font-mono text-amber-100">{it.price}g</span>
               </button>
             );

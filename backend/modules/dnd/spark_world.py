@@ -823,6 +823,36 @@ async def put_dorp_layout_overrides(body: DorpLayoutOverride):
 
 
 
+# ---------------------------------------------------------------------------
+# v6_dnd_items_001 — item-blueprint registry voor trade-bark + rugzak.
+# Bron: data/dnd/blueprints/dnd_items.json
+# ---------------------------------------------------------------------------
+ITEMS_BLUEPRINT_PATH = DATA_ROOT / "dnd" / "blueprints" / "dnd_items.json"
+
+
+@router.get("/items-blueprint")
+async def get_items_blueprint():
+    """Volledige item-registry. Frontend gebruikt dit voor trade-bark en rugzak-rendering."""
+    if not ITEMS_BLUEPRINT_PATH.exists():
+        return {"_meta": {}, "items": {}}
+    try:
+        return json.loads(ITEMS_BLUEPRINT_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"_meta": {}, "items": {}}
+
+
+@router.get("/items-blueprint/{item_id}")
+async def get_item_blueprint(item_id: str):
+    """Eén item uit het register."""
+    data = json.loads(ITEMS_BLUEPRINT_PATH.read_text(encoding="utf-8")) if ITEMS_BLUEPRINT_PATH.exists() else {"items": {}}
+    item = (data.get("items") or {}).get(item_id)
+    if not item:
+        raise HTTPException(404, f"Item '{item_id}' niet in blueprint")
+    return {"id": item_id, **item}
+
+
+
+
 
 
 

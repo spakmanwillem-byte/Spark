@@ -1207,7 +1207,9 @@ function RugzakKaderPanel({ inventory = null, userId, gameCards = [], onChange, 
     <div className="p-3 space-y-2.5">
       <div className="flex items-center justify-between -mt-0.5">
         <p className="text-[10px] text-amber-300/70 italic">
-          🎒 Wat je meeneemt op pad. Meer kg = langzamer.
+          🎒 Wat je meeneemt op pad. Meer kg = langzamer. {cap.kracht_bonus_kg > 0 && (
+            <span className="text-emerald-400/80" title={`+${cap.kracht_bonus_kg}kg uit Kracht ${cap.kracht}`}>+{cap.kracht_bonus_kg}kg uit Kracht</span>
+          )}
         </p>
         <span className="text-[10px] font-mono font-bold" data-testid="rugzak-kg-counter" style={{ color: kgColor }}>
           {kgUsed.toFixed(1)} / {kgMax.toFixed(0)} kg

@@ -29,6 +29,7 @@ JSON Schema (/app/backend/data/users/{user_id}/inventory.json):
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
+import json
 import uuid
 
 from fastapi import APIRouter, HTTPException
@@ -268,17 +269,41 @@ def _get_user(user_id: str) -> Optional[dict]:
     return next((u for u in data.get("users", []) if u.get("id") == user_id), None)
 
 
-def _compute_capacity(slots: List[dict]) -> dict:
-    """Bereken capacity uit slots."""
+def _get_kracht(user_id: str) -> int:
+    """Lees Kracht stat-value (base 10 + spent_points) uit de D&D-character JSON.
+
+    Wordt gebruikt voor de carry-capacity formule (+0.5 kg per +1 Kracht).
+    Returnt 10 als character-bestand niet bestaat.
+    """
+    fp = DATA_ROOT / "dnd" / "characters" / f"{user_id}.json"
+    if not fp.exists():
+        return 10
+    try:
+        ch = json.loads(fp.read_text(encoding="utf-8"))
+        spent = (ch.get("stat_points_spent") or {}).get("Kracht", 0)
+        return 10 + int(spent)
+    except (json.JSONDecodeError, OSError, TypeError, ValueError):
+        return 10
+
+
+def _compute_capacity(slots: List[dict], kracht: int = 10) -> dict:
+    """Bereken capacity uit slots + Kracht-bonus.
+
+    v6_carry_capacity_001 — +0.5 kg per +1 Kracht boven base 10. Een Kracht-20 speler
+    krijgt dus +5 kg, Kracht-100 → +45 kg extra draagkracht.
+    """
     cap_bonus = sum(s.get("capacity_bonus", 0) for s in slots)
     weight_bonus = sum(s.get("weight_bonus", 0.0) for s in slots)
     weight_used = sum(s.get("weight", 0.0) for s in slots)
+    kracht_bonus_kg = max(0, (kracht - 10)) * 0.5
     return {
         "slots_base": BASE_SLOTS,
         "slots_used": len(slots),
         "slots_total": BASE_SLOTS + cap_bonus,
         "weight_used": round(weight_used, 2),
-        "weight_max": round(BASE_WEIGHT_MAX + weight_bonus, 2),
+        "weight_max": round(BASE_WEIGHT_MAX + weight_bonus + kracht_bonus_kg, 2),
+        "kracht": kracht,
+        "kracht_bonus_kg": round(kracht_bonus_kg, 2),
     }
 
 
@@ -320,7 +345,7 @@ def _load_or_init(user_id: str) -> dict:
         "achievements": inv.get("achievements", []),
         "is_bot": (user_id or "").startswith("bot-") or u.get("type") == "bot",
     }
-    inv["capacity"] = _compute_capacity(inv.get("slots", []))
+    inv["capacity"] = _compute_capacity(inv.get("slots", []), kracht=_get_kracht(user_id))
     return inv
 
 
@@ -400,7 +425,7 @@ async def add_item(user_id: str, req: AddItemReq):
     """Voeg item toe aan inventory (uit catalog of custom)."""
     inv = _load_or_init(user_id)
     slots = inv.get("slots", [])
-    cap = _compute_capacity(slots)
+    cap = _compute_capacity(slots, kracht=_get_kracht(user_id))
     if cap["slots_used"] >= cap["slots_total"]:
         raise HTTPException(400, f"Inventory vol: {cap['slots_used']}/{cap['slots_total']} slots gebruikt")
 

@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "version": "v6_dnd_items_001",
+    "doc": "Item-register voor de D&D-laag. Elk item heeft een unieke id en wordt door trade-bark, rugzak en recepten gerefereerd.",
+    "schema": {
+      "id":         "uniek snake_case identifier",
+      "naam":       "weergavenaam (NL)",
+      "kind":       "food | weapon | armor | tool | material | resource | recipe | trinket | drink | service",
+      "image":      "/api/system-archive/file/<id> of /api/avatar/gallery/<id>/image — null = ?-avatar fallback",
+      "weight_kg":  "gewicht per stuk in kg",
+      "slots":      "aantal rugzakslots dat dit item inneemt (default 1)",
+      "value_goud": "richtprijs in goud",
+      "description":"korte tekst",
+      "tags":       "lijst trefwoorden",
+      "unlocks_beroep": "optioneel: bij 'kind=recipe' het beroep dat ontgrendeld wordt"
+    },
+    "default_carry": {
+      "base_kg": 10,
+      "kracht_bonus_per_point_kg": 0.5,
+      "base_slots": 4
+    }
+  },
+
+  "items": {
+    "brood": {
+      "naam": "Brood",          "kind": "food",   "image": "/api/system-archive/file/11b24741b018",
+      "weight_kg": 0.3,  "slots": 1, "value_goud": 6,   "tags": ["bakker","voedsel","ambacht"],
+      "description": "Een vers gebakken brood uit de bakkerij. Vult de maag, geeft kort HP-herstel."
+    },
+    "koekje": {
+      "naam": "Koekje",         "kind": "food",   "image": null,
+      "weight_kg": 0.05, "slots": 1, "value_goud": 3,   "tags": ["bakker","voedsel","snack"],
+      "description": "Krokant koekje. Klein maar lekker."
+    },
+    "vlees": {
+      "naam": "Vlees",          "kind": "food",   "image": "/api/system-archive/file/e5d69e8b2623",
+      "weight_kg": 0.8,  "slots": 1, "value_goud": 8,   "tags": ["slager","voedsel","rauw"],
+      "description": "Rauw vlees van de slager. Kookbaar tot maaltijd."
+    },
+    "worst": {
+      "naam": "Worst",          "kind": "food",   "image": null,
+      "weight_kg": 0.4,  "slots": 1, "value_goud": 12,  "tags": ["slager","voedsel","bewerkt"],
+      "description": "Gerookte worst. Houdbaar onderweg."
+    },
+    "appel": {
+      "naam": "Appel",          "kind": "food",   "image": "/api/system-archive/file/39cd0666d8cf",
+      "weight_kg": 0.15, "slots": 1, "value_goud": 4,   "tags": ["fruit","akker","voedsel"],
+      "description": "Sappige appel. Geneest een beetje HP."
+    },
+    "vis": {
+      "naam": "Vis",            "kind": "food",   "image": "/api/system-archive/file/e22164f8f7fc",
+      "weight_kg": 0.5,  "slots": 1, "value_goud": 5,   "tags": ["haven","markt","voedsel"],
+      "description": "Verse vis. Bron van Omega-3 (en hoofdvoedsel voor vissers)."
+    },
+    "kaas": {
+      "naam": "Kaas",           "kind": "food",   "image": null,
+      "weight_kg": 0.4,  "slots": 1, "value_goud": 7,   "tags": ["markt","voedsel","bewerkt"],
+      "description": "Gerijpte kaas — onderweg een feestje."
+    },
+    "graan": {
+      "naam": "Graan",          "kind": "material","image": null,
+      "weight_kg": 1.0,  "slots": 1, "value_goud": 3,   "tags": ["akker","ruwgrondstof"],
+      "description": "Ruwe graan-bundel. Wordt brood bij de bakker."
+    },
+
+    "handzwaard": {
+      "naam": "Handzwaard",     "kind": "weapon", "image": "/api/system-archive/file/2f8465e433f0",
+      "weight_kg": 2.5,  "slots": 1, "value_goud": 150, "tags": ["smederij","wapen","melee"],
+      "description": "Eenhandig zwaard, gesmeed door de smid."
+    },
+    "schild": {
+      "naam": "Schild",         "kind": "armor",  "image": "/api/system-archive/file/597e0c430666",
+      "weight_kg": 3.0,  "slots": 1, "value_goud": 100, "tags": ["smederij","armor","verdediging"],
+      "description": "Houten schild met ijzeren rand. +Verdediging."
+    },
+
+    "helende_kruiden": {
+      "naam": "Helende kruiden","kind": "material","image": null,
+      "weight_kg": 0.1,  "slots": 1, "value_goud": 15,  "tags": ["kruidenwinkel","alchemie"],
+      "description": "Bundel helende kruiden. Ingrediënt voor potions."
+    },
+    "healing_potion": {
+      "naam": "Healing Potion", "kind": "drink",  "image": null,
+      "weight_kg": 0.3,  "slots": 1, "value_goud": 40,  "tags": ["kruidenwinkel","alchemie","potion"],
+      "description": "Drink om snel HP te herstellen."
+    },
+
+    "kamer": {
+      "naam": "Kamer/nacht",    "kind": "service","image": null,
+      "weight_kg": 0,    "slots": 0, "value_goud": 2,   "tags": ["herberg","logies"],
+      "description": "Eén nacht in de herberg. Geen item — direct verbruikt."
+    },
+    "maaltijd": {
+      "naam": "Maaltijd",       "kind": "food",   "image": null,
+      "weight_kg": 0.6,  "slots": 1, "value_goud": 4,   "tags": ["herberg","kok","voedsel"],
+      "description": "Warme maaltijd uit de keuken van de waardin."
+    },
+
+    "recipe_vissen": {
+      "naam": "Recept: Vissen", "kind": "recipe", "image": null,
+      "weight_kg": 0.1,  "slots": 1, "value_goud": 50,
+      "tags": ["recipe","unlock","beroep"],
+      "unlocks_beroep": "visser",
+      "description": "Leer-rol: ontgrendelt het beroep Visser bij activatie."
+    }
+  }
+}

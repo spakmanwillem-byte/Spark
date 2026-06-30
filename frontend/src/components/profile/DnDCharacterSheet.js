@@ -1046,11 +1046,16 @@ function KarakterPortretPanel({ avatarUrl, level, xpPct, xpInLvl, xpPerLvl, hp, 
             <div className={`h-full bg-gradient-to-r ${hpColor} transition-all`} style={{ width: `${hpPct}%` }} />
           </div>
         </div>
-        <p className="mt-2 text-amber-100 font-serif text-base">Niveau {level}</p>
-        <div className="mt-1 w-full h-2 bg-stone-900 rounded-full overflow-hidden border border-amber-900/40">
-          <div className="h-full bg-gradient-to-r from-amber-700 to-yellow-300" style={{ width: `${xpPct}%` }} />
+        {/* v6_xp_bar_label_001 — Level (was 'Niveau'), zelfde stijl als HP-label */}
+        <div data-testid="char-xp-bar" className="mt-2 w-full">
+          <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
+            <span className="text-amber-300/90 flex items-center gap-1"><span className="text-amber-400">✦</span> Level {level}</span>
+            <span className="text-amber-100">{xpInLvl} / {xpPerLvl}</span>
+          </div>
+          <div className="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden border border-amber-900/40">
+            <div className="h-full bg-gradient-to-r from-amber-700 to-yellow-300 transition-all" style={{ width: `${xpPct}%` }} />
+          </div>
         </div>
-        <p className="text-[10px] text-amber-400/60 mt-0.5 font-mono">{xpInLvl} / {xpPerLvl}</p>
       </div>
     </PaperPanel>
   );
@@ -1926,11 +1931,17 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
         </div>
       )}
       {Object.entries(stats || {}).map(([k, v]) => {
-        const spentOnStat = sp.spent?.[k] || 0;
         const cost = sp.costs?.[k] || 1;
         const cap = sp.caps?.[k];
         const atCap = cap != null && v >= cap;
-        const canSpend = sp.available >= cost && !atCap;
+        const enoughPoints = sp.available >= cost;
+        const canSpend = enoughPoints && !atCap;
+        // Knop-stijl: groen wanneer kan, rood wanneer niet genoeg punten, grijs wanneer cap bereikt
+        const btnCls = atCap
+          ? 'border-stone-700 bg-stone-900/60 text-stone-600 cursor-not-allowed'
+          : enoughPoints
+            ? 'border-emerald-500/70 bg-emerald-900/40 text-emerald-200 hover:bg-emerald-700/60 cursor-pointer'
+            : 'border-rose-500/70 bg-rose-950/50 text-rose-300/80 cursor-not-allowed';
         return (
           <div key={k} data-testid={`stat-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
             className="flex items-center justify-between text-xs">
@@ -1942,11 +1953,6 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
               )}
             </span>
             <span className="flex items-center gap-2">
-              {allowSpend && spentOnStat > 0 && (
-                <span className="text-[9px] font-mono text-emerald-400/70" title={`+${spentOnStat} besteed`}>
-                  +{spentOnStat}
-                </span>
-              )}
               <span className="font-mono font-bold text-amber-100">
                 {typeof v === 'number' && k.includes('Kans') ? `${v}%` : v}
               </span>
@@ -1955,13 +1961,13 @@ function CharInfoPanel({ char, userId, activeTab, setActiveTab, onReload }) {
                   data-testid={`stat-plus-${k.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`}
                   onClick={() => spendStatPoint(k)}
                   disabled={!canSpend || spending !== null}
-                  title={atCap ? `${k} is op de cap van ${cap}` : (canSpend ? `+1 ${k} (kost ${cost})` : `Kost ${cost} punten — niet genoeg`)}
-                  className={`min-w-[28px] h-5 px-1.5 rounded-full flex items-center justify-center text-[10px] font-bold border transition-colors ${
-                    canSpend
-                      ? 'border-emerald-500/70 bg-emerald-900/40 text-emerald-200 hover:bg-emerald-700/60 cursor-pointer'
-                      : 'border-stone-700 bg-stone-900/60 text-stone-600 cursor-not-allowed'
-                  } ${spending === k ? 'opacity-50' : ''}`}>
-                  {cost > 1 ? `+${cost}` : '+'}
+                  title={atCap
+                    ? `${k} is op de cap van ${cap}`
+                    : enoughPoints
+                      ? `+1 ${k}${cost > 1 ? ` (kost ${cost})` : ''}`
+                      : `Kost ${cost} punten — niet genoeg beschikbaar`}
+                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold border transition-colors ${btnCls} ${spending === k ? 'opacity-50' : ''}`}>
+                  +
                 </button>
               )}
             </span>

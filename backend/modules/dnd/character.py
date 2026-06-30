@@ -160,7 +160,8 @@ def _load_or_init(user_id: str) -> dict:
     # v6_stat_points_001 — per stat extra punten verdiend via levels
     # v6_stat_gezondheid_001 — extra stat Gezondheid (kost 5 punten per +1) + Geluk cap 25
     BASE_STAT = 10
-    STAT_NAMES = ["Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk", "Gezondheid"]
+    # Volgorde: Gezondheid bovenaan, dan reguliere stats
+    STAT_NAMES = ["Gezondheid", "Kracht", "Behendigheid", "Intelligentie", "Conditie", "Wilskracht", "Geluk"]
     STAT_COSTS = {"Gezondheid": 5}   # default = 1
     STAT_CAPS = {"Geluk": 25}         # max waarde (base+spent), default = unlimited
     spent = ch.get("stat_points_spent") or {}

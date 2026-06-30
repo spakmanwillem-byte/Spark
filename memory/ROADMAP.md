@@ -58,6 +58,64 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 33 (2026-06-30) — D&D-laag uitgebouwd + system snuffel
+
+### ✅ Nieuw in deze sessie
+
+**🏛️ Spark World D&D — concrete invulling**
+- **22 gebouw-game-kaarten verrijkt** met laag1-4, ws5, tags + 6 archief-foto's gekoppeld (Bakker, Slager, Haven, Akker, Tempel, Markt, Gemeentehuis, Waterput).
+- **`backend/scripts/seed_building_cards.py`** — idempotent script dat lege velden vult, auto-seed pattern (`X — categorie gebouw. Bouwkost: …`) op laag1 vervangt.
+- **`StormhavenMapView.js` bugfix** — statische `placeholder: true` blokkade verwijderd; `findCardFor()` wordt nu altijd uitgevoerd → 23/23 (later 30/30) gebouwen-mapping i.p.v. 0/23.
+- **7 extra gebouwen toegevoegd** aan layout: Bakker, Slager, Waterput, Mijn, Haven, Huis (T1), Traders Post. Slager + Waterput ook als nieuwe `kind=gebouw` cards in `game.json` gezet.
+- **Admin drag-toggle** op de mini-map: knop "Bewerken" → sleep gebouwen, "Opslaan" persisteert naar `data/dnd/dorp_layout_overrides.json`. Dubbelklik = reset positie. Verplaatste gebouwen krijgen groene rand.
+- **Speler-avatar walk-to-building**: klik gebouw → 1.6s glijdt avatar smooth naar gebouw (sky-blauwe glow tijdens reis) → trade-bark opent automatisch.
+- **Trade-bark v2** — 2 avatar-kaders (Jij + NPC), 2 inventaris-kolommen (drag-naar-verkopen/kopen), live-berekening (verkoop/koop/5% tax/netto), gebouw-foto als header-achtergrond.
+- **NPC-avatar mapping**: 30+ buildings → echte persoon-avatars uit `/api/avatar/gallery/` (De Bakker, De Slager, De Trader, Spark, Bar vrouw, Black Knight, Lost Gobelin, etc.).
+- **"Vraag"-avatar** (id `31c6dc04a2fd`) als universele `?`-fallback i.p.v. `+`-icoon op de map én in trade-bark items.
+
+**📦 Items + carry-systeem**
+- **`data/dnd/blueprints/dnd_items.json`** — item-registry met 15 items (id, naam, kind, image, weight_kg, slots, value_goud, tags, description, optional unlocks_beroep).
+- **`GET /api/dnd/spark-world/items-blueprint`** + `/items-blueprint/{id}` endpoints.
+- **Trade-bark leest items uit blueprint** (geen mock-inventory meer); toont gewicht per item + live "Rugzak verandering" kg-impact.
+- **Recipe-items**: badge "recept" op items met `unlocks_beroep`. Haven verkoopt nu `recipe_vissen`.
+- **Carry-capacity formule** (`inventory/routes.py::_compute_capacity`): `weight_max = 10 + rugzak_bonus + (Kracht-10) × 0.5`. Voor Willem (Kracht 32): 21 kg.
+- **Encumbrance**: per 10% load 1% Behendigheid-penalty, deels gecanceld door (Int/20)%. UI in BODY · EQUIPMENT rugzak-bar.
+
+**👤 Karakter-uitbreiding**
+- **Stat-points systeem** — per level 1 punt; `+`-knoppen naast elke stat in STATISTIEKEN-tab. Backend `/api/dnd/character/{id}/stats/spend` + `/stats/reset`. Persistente in `stat_points_spent` per character JSON.
+- **Gezondheid** als nieuwe (bovenaan) stat: kost 5 punten per +1, base 10 = 100% HP. Geluk capped op 25.
+- **HP-bar in KARAKTER paneel** — ♥ HP rood/oranje/groen gradient + ✦ Level X amber bar (zonder X/Y getallen — bar zegt al genoeg).
+- **Layout-herschikking** Avatar-tab: links KARAKTER + CHAR INFO samen, midden BODY · EQUIPMENT, rechts RUGZAK + DORP + SPARK WORLD.
+
+**🎲 Daily event**
+- **`/api/dnd/daily-event/{user_id}`** GET status + POST play (Steen-Papier-Schaar). 1× per dag, win = +10g (direct in `users.json` currency.goud), draw/loss = niks.
+- Rode kader bovenaan Avatar-tab toont "⚔ Vecht voor je leven" — modal opent met 3 grote knoppen → resultaat-modal met bark.
+- **Bugfix**: pad `data/users.json` → `data/system/users.json` (anders kwam reward nooit aan).
+
+**🧹 Sessie-33 cleanup + refactor**
+- **3 test-images verwijderd** uit `system_archive/` (TEST_del, TEST_resource, test_resource) + 2 test-cards uit `game.json` (TEST_DeleteForbidden, TEST_Visgrond_Noord).
+- **Dubbele Plattegrond dorp** opgeruimd (1 image + 1 duplicate Basis Dorp card).
+- **26 MB disk vrijgemaakt** — graph-ghost-backups, knowledge_index rebuild-backups, wallet pre_spark archives. Safety-copies in `/tmp/spark_cleanup_*`.
+- **`chat/routes.py` refactor** 1845 → **1668** regels — helpers (`save_log`, `build_ab_entry`, `get_user_gradatie`, `get_user_for_time`) verhuisd naar `chat/routes_helpers.py` (192 regels). Thin `_`-prefix re-exports in routes.py.
+- **`DnDCharacterSheet.js` refactor** 2570 → **2458** regels — `DailyEventCard` geëxtraheerd naar `profile/DailyEventCard.js` (127 regels).
+
+### 🟡 Backlog (gevonden in deze sessie's snuffel)
+- **`trade/monitor.py` (1493 lines)** — splits in `monitor/core.py` + `alerts.py` + `reporter.py`. Wel testing-agent runnen want raakt live trading.
+- **`kb_v2/routes.py` (1219)** — split writer (POST/PUT) vs reader (GET) endpoints; helpers consolideren in `service.py`.
+- **`UserProfilePage.js` (2023)** — 6 tabs als losse files (`tabs/AlgemeenTab.js`, `tabs/AchtergrondTab.js`, etc.); Avatar-tab inline laten.
+- **Groq rate-limit** (`llama-3.3-70b` 12k TPM): logs vol 429s. Context-trimmer of upgrade Dev Tier of switch primary→8b-instant voor casual.
+- **Mock user-rugzak in trade-bark** moet vervangen door `/api/inventory/{user_id}` koppeling + "Aanbod accepteren" knop werkend (goud + items uitwisselen, 5% tax naar stad_kas).
+- **Leer-knoppen** op Herberg (koken, 2g) / Wachterspost (survival, 5g) / Tempel (secundair beroep, 2g) — `POST /api/dnd/character/{id}/beroep/leer`.
+- **Recipe-items activeren**: `POST /api/dnd/character/{id}/recipe/use` → unlock beroep, verbruik item.
+- **5-min walk-countdown** in INFORMATIE-feed bij gebouw-klik (huidig: 1.6s smooth walk; oorspronkelijk plan was 5-min real-time aankomst).
+- **legacy `knowledge_base.json`** (11 MB v1 KB) — checken of nog actief gelezen; zo nee, archiveren.
+- **`modules/user_archive/`** directory — legacy module-stub, kan opgeruimd worden.
+- **/api/kb/v2/tags/scan** caching — was meegegeven als P0 maar reageert nu in 0.2s; bewaken in productie.
+
+---
+
+
+
 ## 🔎 REALITY CHECK — Sessie 31 (2026-06-27, avond)
 
 ### 💡 Nieuwe brainfart sessie 31 — Spark World D&D verder uitwerken (NIET nieuw)

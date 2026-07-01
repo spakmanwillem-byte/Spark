@@ -251,9 +251,7 @@ app.include_router(dnd_character_router, prefix="/api")
 from modules.dnd.spark_world_map import router as spark_world_map_router
 app.include_router(spark_world_map_router, prefix="/api")
 
-# v6_shadow_pot_001 — Shadow potjes (Willem's idee: no-loss + dubbele winst-kans)
-from modules.trade.shadow_routes import router as shadow_pot_router
-app.include_router(shadow_pot_router, prefix="/api")
+# v7_shadow_removed_001 — Shadow trader is verwijderd (dood spoor, werkte niet betrouwbaar).
 
 # v6_dnd_world_001 — 9 fracties + 12 provincies + 5 rarity tiers (WoW-style)
 from modules.dnd.world import router as dnd_world_router

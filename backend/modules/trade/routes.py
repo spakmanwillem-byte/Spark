@@ -348,6 +348,103 @@ async def sync_bitvavo(user_id: str, market: Optional[str] = None):
     return sync_bitvavo_orders(user_id, market)
 
 
+# v7_treasury_delta_001 — Systeem-treasury delta view
+# Toont verschil tussen totale pot-kapitaal (virtueel geboekt) en Bitvavo saldo (echt).
+# Delta = 0  → boekhouding klopt exact met Bitvavo (huidige staat 03-06-2026)
+# Delta > 0 → er zweeft geld op Bitvavo dat nog niet in pots zit (winkel-inkomst,
+#             trader-winst, rest van dynamic-price aankoop)
+# Delta < 0 → tekort — pot-kapitaal is meer dan Bitvavo aankan (trader-verlies of
+#             pending overboeking die nog moet plaatsvinden)
+@router.get("/delta")
+async def get_treasury_delta():
+    """Systeem-treasury delta: totaal-pot-kapitaal vs Bitvavo saldo.
+
+    Response:
+      pots_capital_eur   — som van alle capital-velden over alle users hun pots
+      bitvavo_actual_eur — live saldo op Bitvavo (EUR + coin-waarde)
+      bitvavo_staking_eur — handmatig ingestelde staking-waarde (Bitvavo Spaar)
+      delta_eur          — bitvavo + staking − pots_capital (0 = in sync)
+      per_user           — breakdown per user (aantal pots + som capital)
+      spark_kasboek      — Spark's boekhoudkundige totalen (gift_in / omzet_in / etc.)
+    """
+    # 1. Som alle pots per user
+    potjes_data = load_json(
+        Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json",
+        default={"users": {}},
+    )
+    per_user = {}
+    total_pots_capital = 0.0
+    for uid, info in potjes_data.get("users", {}).items():
+        pots = info.get("potjes", [])
+        cap = round(sum(float(p.get("capital", 0) or 0) for p in pots), 4)
+        open_positions = sum(1 for p in pots if p.get("position", {}).get("is_open"))
+        per_user[uid] = {
+            "pot_count": len(pots),
+            "capital_eur": cap,
+            "open_positions": open_positions,
+        }
+        total_pots_capital += cap
+    total_pots_capital = round(total_pots_capital, 4)
+
+    # 2. Bitvavo saldo (via Willem's credentials — is de account-holder)
+    try:
+        bv = fetch_bitvavo_balance("user-001") or {}
+        # Voorkeur: total_eur (som van alle coins + EUR in €); fallback: som balances[].value_eur
+        bitvavo_actual = float(bv.get("total_eur") or 0)
+        if not bitvavo_actual:
+            bitvavo_actual = sum(float(b.get("value_eur", 0) or 0) for b in bv.get("balances", []))
+    except Exception:
+        bitvavo_actual = 0.0
+
+    # 3. Staking-adjustment (handmatig ingesteld)
+    extras = load_json(
+        Path(__file__).parent.parent.parent / "data" / "system" / "bitvavo_extras.json",
+        default={},
+    )
+    staking = float(extras.get("bitvavo_staking_eur", 0) or 0)
+
+    # 4. Delta = echt saldo (spot + staking) − geboekt in pots
+    delta = round(bitvavo_actual + staking - total_pots_capital, 4)
+
+    # 5. Spark boekhouding totalen (gift_in / omzet_in / btw_reserve / winst_in / uit)
+    kb = load_json(
+        Path(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json",
+        default={"totals": {}},
+    )
+    kb_totals = kb.get("totals", {})
+
+    # 6. Categoriseer delta
+    if abs(delta) < 0.01:
+        status = "in_sync"
+        toelichting = "Boekhouding klopt exact met Bitvavo saldo."
+    elif delta > 0:
+        status = "zweeft_op_bitvavo"
+        toelichting = (
+            f"€{delta:.2f} staat op Bitvavo maar zit nog niet in pot-kapitaal. "
+            "Bron: winkel-inkomst, trader-winst, of dynamic-price marge bij token-koop."
+        )
+    else:
+        status = "tekort"
+        toelichting = (
+            f"€{abs(delta):.2f} tekort — pot-kapitaal is hoger dan Bitvavo. "
+            "Mogelijk trader-verlies of pending storting die nog moet plaatsvinden."
+        )
+
+    return {
+        "success": True,
+        "pots_capital_eur": total_pots_capital,
+        "bitvavo_actual_eur": round(bitvavo_actual, 4),
+        "bitvavo_staking_eur": round(staking, 4),
+        "delta_eur": delta,
+        "status": status,
+        "toelichting": toelichting,
+        "per_user": per_user,
+        "spark_kasboek": kb_totals,
+        "as_of": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+
 @router.get("/settings/{user_id}")
 async def get_trader_settings(user_id: str):
     settings_file = SETTINGS_DIR / user_id / "settings.json"

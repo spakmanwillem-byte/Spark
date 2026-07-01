@@ -897,18 +897,11 @@ class MonitorService:
                         _persist_registry()
                 except Exception:
                     pass
-            # v6_auto_anchor_001 — Auto-create locked staking-anker voor nieuwe coins (Spark only)
-            anchor_result = None
-            try:
-                from .potjes import ensure_anchors_for_markets
-                anchor_result = ensure_anchors_for_markets(self._user_id, clean)
-                if anchor_result.get("created"):
-                    logger.info(f"Auto-anchors aangemaakt voor {self._user_id}: {anchor_result['created']}")
-            except Exception as ex:
-                logger.warning(f"ensure_anchors_for_markets faalde voor {self._user_id}: {ex}")
+            # v7_anchor_removed_001 — ensure_anchors_for_markets is nu een no-op stub.
+            # Geen locked pots meer aangemaakt bij nieuwe coins. Pots blijven 1-op-1
+            # met ROAR-tokens; verdeling over markten via round-robin in sync_potjes_to_tokens.
             logger.info(f"Markets hot-updated voor {self._user_id}: {clean}")
-            return {"success": True, "markets": clean, "running": self._running,
-                    "anchors_created": (anchor_result or {}).get("created", [])}
+            return {"success": True, "markets": clean, "running": self._running}
 
     # v5_candle_hotswap_001 — wissel candle_interval (15m / 1h / 4h / 1d) zonder restart
     def update_candle_interval(self, candle_interval: str) -> Dict:
@@ -1072,83 +1065,9 @@ class MonitorService:
                             real_price = result.get("trade", {}).get("price") or price
                             close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
                             actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}")
-                            # v6_shadow_cascade_002 — Bij SELL van origineel: sluit ALLE actieve shadows
-                            # (3-laags piramide kan meerdere active shadows hebben — slot 1/2/3)
-                            try:
-                                from modules.trade import shadow_pots as _shadow
-                                active_shadows = _shadow.get_active_shadows(pot["id"], owner_user_id=self._user_id)
-                                for act in active_shadows:
-                                    s_entry = act.get("entry_price") or real_price
-                                    s_capital = float(act.get("capital", 10.0))
-                                    s_profit = (real_price - s_entry) / s_entry * s_capital
-                                    _shadow.close_shadow(act["shadow_id"], real_price, round(s_profit, 4))
-                                    actions_this_cycle.append(
-                                        f"SHADOW-CLOSE {act['shadow_id']} slot {act.get('slot','?')}/{_shadow.MAX_SHADOWS_PER_POT} "
-                                        f"({market}) profit €{s_profit:+.4f}"
-                                    )
-                            except Exception as _ex:
-                                logger.warning(f"shadow-close failed: {_ex}")
+                            # v7_shadow_removed_001 — Shadow-close block removed.
 
-                # v6_shadow_cascade_002 — Shadow-activatie op BODEMDETECTIE (niet puur %)
-                # Willem's idee: 3 shadow-slots per origineel. Bij stabilisatie na een drop
-                # (5 candles vlak + significant onder entry + geen new low) activeer
-                # eerstvolgende idle shadow. Bij alle 3 actief/closed → recycle origineel
-                # als nieuwe cyclus-start ("4e shadow = origineel").
-                #
-                # v6_shadow_safety_001 — MASTER-FLAG check eerst. Default UIT in productie
-                # tot we recycle-bug + data-corruptie hebben opgeruimd.
-                try:
-                    from modules.trade import shadow_pots as _shadow
-                    if _shadow.is_shadow_enabled():
-                        stab = _shadow.is_stabilizing_after_drop(
-                            candles=context_candles,
-                            entry_price=entry,
-                            current_price=price,
-                        )
-                        if stab.get("stable"):
-                            # Eerst kijken of recycle nodig is (geen idle slots meer)
-                            cap = _shadow.shadow_capacity(pot["id"], self._user_id)
-                            if cap["idle"] == 0 and cap["have"] >= _shadow.MAX_SHADOWS_PER_POT:
-                                rec = _shadow.recycle_pot_as_shadow_zero(pot["id"], self._user_id, price)
-                                if rec.get("success"):
-                                    actions_this_cycle.append(
-                                        f"SHADOW-RECYCLE {pot['id']} ({market}) cyclus {rec['archived_cycle']}→{rec['new_cycle']}"
-                                    )
-                            idle = _shadow.get_next_idle_shadow(pot["id"], self._user_id)
-                            if idle and self._auto_trade and not self._use_mock:
-                                shadow_capital = float(idle.get("capital", 10.0))
-                                # v6_shadow_balance_guard_001 — log expliciet welk bedrag
-                                # bovenop het origineel wordt ingezet (4× capital mogelijk).
-                                logger.info(
-                                    f"[shadow] {self._user_id} pot={pot['id']} slot={idle.get('slot')} "
-                                    f"BUY €{shadow_capital:.2f} (extra bovenop origineel — Bitvavo balance check volgt)"
-                                )
-                                sresult = execute_real_trade(self._user_id, market, "BUY", shadow_capital)
-                                if sresult.get("success"):
-                                    real_entry = sresult.get("trade", {}).get("price") or price
-                                    _shadow.activate_shadow(
-                                        pot["id"], real_entry, stab["drop_pct"],
-                                        trade_id=sresult.get("trade", {}).get("trade_id"),
-                                        owner_user_id=self._user_id,
-                                        trigger_reason=stab["reason"],
-                                    )
-                                    actions_this_cycle.append(
-                                        f"SHADOW-ACTIVATE {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
-                                        f"({market}) @ €{real_entry:.4f} (drop {stab['drop_pct']*100:.2f}%, range {stab['range_pct']*100:.2f}%)"
-                                    )
-                            elif idle and self._auto_trade and self._use_mock:
-                                _shadow.activate_shadow(
-                                    pot["id"], price, stab["drop_pct"],
-                                    trade_id="MOCK-SHADOW",
-                                    owner_user_id=self._user_id,
-                                    trigger_reason=stab["reason"],
-                                )
-                                actions_this_cycle.append(
-                                    f"SHADOW-MOCK {idle['shadow_id']} slot {idle['slot']}/{_shadow.MAX_SHADOWS_PER_POT} "
-                                    f"({market}) @ €{price:.4f}"
-                                )
-                except Exception as _ex:
-                    logger.warning(f"shadow-activate failed for {pot['id']}: {_ex}")
+                # v7_shadow_removed_001 — Shadow-activatie block removed (dead code cleanup).
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
             #    v6_buy_cooldown_001 — Plus: minimaal 5 min cooldown per markt tussen 2 BUYs
@@ -1356,12 +1275,7 @@ def auto_provision_bot_for_token_holder(
     except Exception:
         pass
 
-    # v6_shadow_pot_001 — Auto-ensure shadows voor alle non-anchor potjes
-    try:
-        from modules.trade import shadow_pots as _shadow
-        _shadow.auto_ensure_shadows_for_user(user_id)
-    except Exception as e:
-        logger.warning(f"shadow auto-ensure failed for {user_id}: {e}")
+    # v7_shadow_removed_001 — Shadow auto-ensure block removed.
 
     return {
         "success": True,

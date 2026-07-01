@@ -121,56 +121,11 @@ def _load(user_id: str) -> Dict:
         data.setdefault("users", {})[user_id] = user
         save_json(POTJES_FILE, data)
     # v5_potjes_repair_001 — als user fewer than 10 potjes heeft (tier 1), reparate door tot 10 aan te vullen
-    # Voorkomt edge cases waar legacy data slechts 1-2 potjes had
-    # v6_pot1_staking_lock_001: zorg dat pot-001 (index 0) altijd `pot_locked=True` heeft
-    # v6_spark_15slots_001 — Spark krijgt 5 base + 10 trade-slots = 15 totaal
-    # v6_spark_no_autofill_001 (sessie 16) — Spark krijgt GEEN auto-fill meer.
-    # Reden: na rebalance_from_bitvavo() heeft Spark exact 6 locked anchors (1 per coin).
-    # Auto-fill genereerde 9 fantoom BCH-EUR €10-pots uit oude state, ongewenst.
-    # Anchors worden nu beheerd via ensure_anchors_for_markets() + rebalance_from_bitvavo().
-    target_count = DEFAULT_POT_COUNT
-    if is_spark and False and len(user.get("potjes", [])) < target_count:
-        existing = user["potjes"]
-        next_idx = max((p.get("index", i) for i, p in enumerate(existing)), default=-1) + 1
-        now = datetime.now(timezone.utc).isoformat()
-        while len(existing) < target_count:
-            is_locked = (next_idx == LOCKED_POT_INDEX)
-            existing.append({
-                "id": f"pot-{next_idx+1:03d}",
-                "index": next_idx,
-                "capital": START_AMOUNT,
-                "max_size": INITIAL_MAX,
-                "pot_locked": is_locked,
-                "lock_reason": "staking_anchor" if is_locked else None,
-                "position": {
-                    "is_open": False, "entry_price": None, "highest_price": None,
-                    "trailing_active": False, "entry_time": None,
-                },
-                "market": existing[0].get("market", "BCH-EUR") if existing else "BCH-EUR",
-                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
-                "created_at": now,
-                "last_action": None,
-            })
-            next_idx += 1
-        user["potjes"] = existing
-        data["users"][user_id] = user
-        save_json(POTJES_FILE, data)
-    # v6_pot1_staking_lock_only_spark_fix_001 (sessie 14) — backfill van staking-anchor
-    # mag ALLEEN bij Spark (user-000). Non-Spark users hebben "1 token = 1 potje" en
-    # géén anchors. Eerder werd ook bij Willem/Gijs pot-001 telkens auto-gelocked.
-    potjes_list = user.get("potjes", [])
-    if is_spark and potjes_list:
-        # Vind het 'eerste' potje: liefst index==0, anders nummer==1, anders gewoon eerste in lijst
-        def _pot_sort_key(p):
-            return (p.get("index") if p.get("index") is not None else 999,
-                    p.get("nummer") if p.get("nummer") is not None else 999,
-                    p.get("id", "zzz"))
-        first_pot = sorted(potjes_list, key=_pot_sort_key)[0]
-        if not first_pot.get("pot_locked"):
-            first_pot["pot_locked"] = True
-            first_pot["lock_reason"] = "staking_anchor"
-            data["users"][user_id] = user
-            save_json(POTJES_FILE, data)
+    # v7_anchor_removed_001 — Geen auto-lock meer. Spark heeft 10 unlocked pots (1-op-1 met ROAR-tokens).
+    # Auto-fill blijft uit (dead code weg): pot-count wordt beheerd via sync_potjes_to_tokens()
+    # en rebalance_from_bitvavo(). Rest-EUR (Bitvavo saldo - som(pots.capital)) is zichtbaar
+    # via GET /api/trade/delta (systeem-treasury view).
+    # Backfill van staking-anchor lock verwijderd — Spark's eerste pot mag gewoon meehandelen.
     return data
 
 
@@ -294,16 +249,13 @@ def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") 
         return {"success": True, "user_id": user_id, "current": current, "target": target, "added": 0,
                 "message": "Geen potje-uitbreiding nodig."}
 
-    # Voeg potjes toe tot target. Eerste potje (index 0) blijft staking-anker.
-    # v6_potje_market_distribution_001 — verdeel nieuwe potjes round-robin
-    # over user's `bots_registry.markets` lijst (ipv altijd BCH-EUR). Geeft
-    # je direct 2 potjes per coin als je 6 coins hebt.
+    # v7_anchor_removed_001 — Alle nieuwe potjes zijn unlocked. Geen staking-anker meer.
+    # Round-robin market-toewijzing blijft: verdeel over user's bots_registry.markets lijst.
     user_markets = _markets_for_user(user_id) or [market]
     now = datetime.now(timezone.utc).isoformat()
     next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
     added = 0
     while len(potjes) < target:
-        is_locked = (next_idx == LOCKED_POT_INDEX)
         # Round-robin: kies market op basis van totaal aantal potjes
         chosen_market = user_markets[len(potjes) % len(user_markets)] if user_markets else market
         potjes.append({
@@ -311,8 +263,8 @@ def sync_potjes_to_tokens(user_id: str, n_tokens: int, market: str = "BCH-EUR") 
             "index": next_idx,
             "capital": START_AMOUNT,
             "max_size": INITIAL_MAX,
-            "pot_locked": is_locked,
-            "lock_reason": "staking_anchor" if is_locked else None,
+            "pot_locked": False,
+            "lock_reason": None,
             "position": {"is_open": False, "entry_price": None, "highest_price": None,
                          "trailing_active": False, "entry_time": None},
             "market": chosen_market,
@@ -352,77 +304,18 @@ def assign_pot_market(user_id: str, pot_id: str, market: str) -> Dict:
     return {"success": False, "error": f"Pot {pot_id} niet gevonden"}
 
 
-# v6_auto_anchor_001 — Auto-create staking-anchor pot voor nieuwe coins
+# v7_anchor_removed_001 — ensure_anchors_for_markets() volledig verwijderd.
+# Reden: locked anchor-pots deden functioneel niks (werden overal geskipt in open/close),
+# maar bloatten de pot-count. Nieuwe regel: Spark heeft altijd exact DEFAULT_POT_COUNT (10)
+# unlocked pots die 1-op-1 mappen aan zijn ROAR-tokens. Coins worden verdeeld via
+# round-robin market-toewijzing in sync_potjes_to_tokens / rebalance_from_bitvavo.
+# Rest-EUR op Bitvavo is zichtbaar via GET /api/trade/delta (systeem-treasury view).
 def ensure_anchors_for_markets(user_id: str, markets: List[str]) -> Dict:
-    """Zorg dat Spark (user-000) voor elke market in de watchlist een locked
-    staking-anker heeft. Als een coin nog geen anker heeft → maak nieuw potje
-    aan met `pot_locked=True` en `lock_reason='staking_anchor'`, gevuld met
-    €10 capital (zelfde als de bestaande anchors).
-
-    Regel: alleen Spark heeft anchors (zie _load() logica). Andere users
-    krijgen 1 potje per ROAR-token (sync_potjes_to_tokens). Voor non-spark
-    users wordt deze call genegeerd.
-
-    Returns: {success, created: [{id, market}], skipped: [markets met al anker]}.
+    """DEPRECATED — no-op stub gehouden voor backwards-compat met bestaande callers.
+    Returned altijd success zonder pots te muteren.
     """
-    if user_id != "user-000":
-        return {"success": True, "skipped_reason": "alleen Spark heeft anchors",
-                "created": [], "skipped": []}
-
-    if not markets:
-        return {"success": True, "created": [], "skipped": []}
-
-    clean = sorted({(m or "").strip().upper() for m in markets if m and m.strip()})
-    clean = [m for m in clean if m and m != "EUR"]
-    if not clean:
-        return {"success": True, "created": [], "skipped": []}
-
-    data = _load(user_id)
-    user = data["users"][user_id]
-    potjes = user.setdefault("potjes", [])
-
-    # Verzamel markets die al een locked anker hebben
-    existing_anchor_markets = {
-        (p.get("market") or "").upper()
-        for p in potjes
-        if p.get("pot_locked") and p.get("lock_reason") == "staking_anchor"
-    }
-
-    now = datetime.now(timezone.utc).isoformat()
-    next_idx = max((p.get("index", i) for i, p in enumerate(potjes)), default=-1) + 1
-    created = []
-    skipped = []
-    for market in clean:
-        if market in existing_anchor_markets:
-            skipped.append(market)
-            continue
-        new_pot = {
-            "id": f"pot-{next_idx + 1:03d}",
-            "index": next_idx,
-            "capital": START_AMOUNT,
-            "max_size": INITIAL_MAX,
-            "pot_locked": True,
-            "lock_reason": "staking_anchor",
-            "position": {
-                "is_open": False, "entry_price": None, "highest_price": None,
-                "trailing_active": False, "entry_time": None,
-            },
-            "market": market,
-            "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
-            "created_at": now,
-            "last_action": None,
-            "source": "auto_anchor_for_new_coin",
-        }
-        potjes.append(new_pot)
-        existing_anchor_markets.add(market)
-        created.append({"id": new_pot["id"], "market": market})
-        next_idx += 1
-
-    if created:
-        user["potjes"] = potjes
-        _save(data)
-
-    return {"success": True, "created": created, "skipped": skipped}
+    return {"success": True, "created": [], "skipped": list(markets or []),
+            "deprecated": True, "reason": "anchors verwijderd in v7_anchor_removed_001"}
 
 
 # v6_spark_2pots_per_coin_001 — Spark krijgt 2 trade-potjes per coin (naast anchor)
@@ -656,23 +549,21 @@ def trim_potjes_to_tokens(user_id: str, n_tokens: int) -> Dict:
 
 
 def _init_potjes(user_id: str) -> Dict:
-    """Maak initiële 10 potjes à €10 voor user. Pot 1 (index 0) = staking-lock.
+    """Maak initiële 10 unlocked potjes à €10 voor user (Spark).
 
-    v6_potje_size_10_001: nieuwe potjes starten direct op €10 (was €5.08).
-    v6_pot1_staking_lock_001: pot-001 krijgt `pot_locked=True` — wordt geskipt door
-    de trade-bot en quick-buy. Dient als ROAR-token staking-anker.
+    v7_anchor_removed_001: geen locked staking-anker meer. Alle pots handelen mee.
+    Elke pot = 1 ROAR-token (1-op-1 mapping).
     """
     now = datetime.now(timezone.utc).isoformat()
     potjes = []
     for i in range(DEFAULT_POT_COUNT):
-        is_locked = (i == LOCKED_POT_INDEX)
         potjes.append({
             "id": f"pot-{i+1:03d}",
             "index": i,
             "capital": START_AMOUNT,
             "max_size": INITIAL_MAX,
-            "pot_locked": is_locked,  # v6_pot1_staking_lock_001
-            "lock_reason": "staking_anchor" if is_locked else None,
+            "pot_locked": False,
+            "lock_reason": None,
             "position": {
                 "is_open": False,
                 "entry_price": None,

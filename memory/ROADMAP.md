@@ -58,6 +58,24 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 34 (2026-07-01) — Trader schoonmaak + treasury delta
+
+### ✅ Nieuw in deze sessie
+- **Shadow trader gedelete** — files + code refs + backend imports
+- **Anchor logic verwijderd** — `ensure_anchors_for_markets` → no-op stub; `_init_potjes`/`_load`/`sync_potjes_to_tokens`/`rebalance_from_bitvavo` niet meer locked pots
+- **State migratie** — Spark's pot-001 unlocked in `user_potjes.json` (was €5,08 locked staking_anchor)
+- **`GET /api/trade/delta`** — nieuwe systeem-treasury view: `pots_capital_eur` vs `bitvavo_actual_eur` vs `delta_eur` met NL toelichting (`in_sync` / `zweeft_op_bitvavo` / `tekort`)
+- **Regel hersteld**: 1 ROAR token = 1 tradeable pot (Spark 10, Willem 10, Gijs 2)
+- Testing agent iter_42: 100% pass, 17/17
+
+### 🟡 Follow-up (uit iter_42 code review)
+- **P2 — `potjes.py` splitsen** (1107 regels) in `potjes/{mint,rebalance,expansion}.py`
+- **P2 — `TogglePotLockBody` endpoint** kan admin-only worden (nu open API)
+- **P3 — Delta endpoint cache** (30s) als UI dit periodiek polls
+- **P2 — Frontend widget** die `/api/trade/delta` toont op admin-tab (nu alleen backend)
+- **Nog steeds openstaand**: 6 duplicate archive images verwijderen (T-Shirt, Klein Zwaard, Sjaal)
+
+
 ## 🔎 REALITY CHECK — Sessie 33 (2026-06-30) — D&D-laag uitgebouwd + system snuffel
 
 ### ✅ Nieuw in deze sessie

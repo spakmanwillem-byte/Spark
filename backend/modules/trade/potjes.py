@@ -440,9 +440,8 @@ def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
 
     now = datetime.now(timezone.utc).isoformat()
     trader_pots: List[Dict] = list(open_trader_pots)  # behoud
-    anchor_pots: List[Dict] = list(open_anchor_pots)  # behoud
+    anchor_pots: List[Dict] = list(open_anchor_pots)  # behoud (open posities die legacy anchor waren)
     t_idx = max((p.get("index", -1) for p in trader_pots), default=-1) + 1
-    a_idx = max((p.get("index", -1) for p in anchor_pots), default=-1) + 1
     summary = []
 
     for sym in target_coins:
@@ -467,24 +466,14 @@ def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
             })
             t_idx += 1
 
-        # Anchor met restje (alleen aanmaken als > €0.01)
-        if remainder >= 0.01:
-            anchor_pots.append({
-                "id": f"pot-{a_idx+1:03d}", "index": a_idx,
-                "capital": remainder, "max_size": max(remainder * 2, 50.0),
-                "pot_locked": True, "lock_reason": "staking_anchor",
-                "position": {"is_open": False, "entry_price": None, "highest_price": None,
-                             "trailing_active": False, "entry_time": None},
-                "market": market,
-                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
-                "created_at": now, "last_action": None,
-                "source": "rebalance_anchor_remainder",
-            })
-            a_idx += 1
+        # v7_anchor_removed_001 — Anchor met restje wordt niet meer als locked pot aangemaakt.
+        # De restant-EUR (< pot_size) blijft op Bitvavo staan en is zichtbaar via
+        # GET /api/trade/delta (systeem-treasury view). Geen dode locked pot meer nodig.
 
         summary.append({
             "coin": sym, "bitvavo_value": bv_value, "already_open": already_open,
-            "free_value": free_value, "trade_pots_created": n_trade, "anchor_remainder": remainder,
+            "free_value": free_value, "trade_pots_created": n_trade,
+            "remainder_on_bitvavo": remainder,
         })
 
     # 3) Save
@@ -1023,10 +1012,9 @@ def distribute_potjes_over_markets(user_id: str, markets: List[str]) -> Dict:
         if p.get("position", {}).get("is_open"):
             skipped_open += 1
             continue  # niet aanraken
-        # v6_distribute_respect_lock_001 (sessie 14) — locked staking-ankers houden
-        # hun coin-koppeling. Zonder deze guard zou een coin-herverdeling de
-        # 5 anchor-potjes door elkaar gooien (bv. ADA-anker → BCH-anker).
+        # v7_anchor_removed_001 — Geen locked anchor pots meer, dus geen speciale skip.
         if p.get("pot_locked"):
+            # Defensive: legacy pot met pot_locked=True nog in state → laat market ongemoeid
             skipped_locked += 1
             continue
         if p.get("market") != target_market:

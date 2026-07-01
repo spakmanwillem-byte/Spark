@@ -2,6 +2,43 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-01 — Trader schoonmaak: shadow weg, anchors weg, delta-view (`v7_treasury_delta_001`)
+
+### 🧹 Shadow trader compleet verwijderd
+- Files deleted: `modules/trade/shadow_pots.py`, `shadow_routes.py`, `data/trade/shadow_pots.json`, `shadow_flag.json`, `tests/test_shadow_trigger.py`
+- `server.py`: shadow_pot_router import + include verwijderd
+- `monitor.py`: 3 shadow-blocks verwijderd (close-cascade, activate-bodemdetectie, auto-ensure)
+- Reden: dood spoor — werkte niet betrouwbaar, te weinig kapitaal om echt te testen
+
+### ⚓ Anchor logic verwijderd (`v7_anchor_removed_001`)
+- `ensure_anchors_for_markets()` is nu no-op stub (backwards-compat)
+- `_load()`: geen auto-lock van Spark's pot-001 meer bij elke load
+- `_init_potjes()`: geen `pot_locked=True` meer bij initiële 10 pots
+- `sync_potjes_to_tokens()`: geen `LOCKED_POT_INDEX` check bij expansie
+- `rebalance_from_bitvavo()`: geen anchor-remainder pot meer (restant blijft op Bitvavo, zichtbaar via delta)
+- `distribute_potjes_over_markets()`: legacy pot_locked skip als defensive (nieuwe pots hebben dit nooit)
+- `monitor.py update_markets()`: ensure_anchors call verwijderd
+- **State migratie**: Spark's bestaande pot-001 handmatig unlocked in `user_potjes.json`
+- **Resultaat**: Spark heeft nu 10 unlocked pots die 1-op-1 mappen aan 10 ROAR-tokens
+
+### 💰 Nieuw endpoint `GET /api/trade/delta` (systeem-treasury view)
+- Toont: `pots_capital_eur` (som alle pots), `bitvavo_actual_eur` (live), `bitvavo_staking_eur`, `delta_eur`
+- Status categorisering:
+  - `in_sync` (|delta| < €0,01) — boekhouding klopt exact
+  - `zweeft_op_bitvavo` (delta > 0) — geld op Bitvavo niet in pots (winkel-inkomst / trader-winst / dynamic-price marge)
+  - `tekort` (delta < 0) — pot-kapitaal hoger dan Bitvavo (trader-verlies / pending storting)
+- Nederlandse `toelichting` bij elke status
+- `per_user` breakdown: pot_count, capital_eur, open_positions per user
+- `spark_kasboek` totalen (gift_in / omzet_in / btw_reserve / winst_in / uit)
+- **Huidige staat**: pots €122,40 + Bitvavo €131,51 = delta €9,11 (coin-restjes BCH/BTC/ETH)
+
+### ✅ Testing (iteration 42, 100% pass, 17/17)
+- Delta endpoint shape + Dutch messages verified
+- Spark/Willem: exact 10 unlocked pots
+- Shadow endpoints geven 404
+- Alle bestaande trader-flows werken (bitvavo/balance, history, stats, settings, shop/token/*)
+
+
 ## 2026-06-29 — D&D Gebouw-kaarten verrijkt (`v6_seed_building_cards_001`)
 
 ### 🏛️ Stormhaven mini-map gebouwen volledig aangekleed

@@ -348,96 +348,132 @@ async def sync_bitvavo(user_id: str, market: Optional[str] = None):
     return sync_bitvavo_orders(user_id, market)
 
 
-# v7_treasury_delta_001 — Systeem-treasury delta view
-# Toont verschil tussen totale pot-kapitaal (virtueel geboekt) en Bitvavo saldo (echt).
-# Delta = 0  → boekhouding klopt exact met Bitvavo (huidige staat 03-06-2026)
-# Delta > 0 → er zweeft geld op Bitvavo dat nog niet in pots zit (winkel-inkomst,
-#             trader-winst, rest van dynamic-price aankoop)
-# Delta < 0 → tekort — pot-kapitaal is meer dan Bitvavo aankan (trader-verlies of
-#             pending overboeking die nog moet plaatsvinden)
+# v7_treasury_delta_002 — Systeem-treasury delta view (gebruikt bestaand dynamic-price systeem).
+# Toont zowel de INVESTERING (som pot-capital = aankoopprijzen) als de MARKTWAARDE
+# (circulating tokens × live dynamic price, zoals bepaald in shop/routes.py:get_dynamic_price).
+#
+# Bestaande regel (zie shop/routes.py):
+#   - 1 ROAR token = 1 tradeable pot (Spark 10, Willem 10, Gijs 2, etc.)
+#   - Pot.capital = aankoopprijs op moment van kopen (bevroren investering)
+#   - Live token-waarde = get_spark_core_value() / circulating (dynamisch)
+#   - Bitvavo groeit door trading → dynamic price groeit → token waarde groeit
+#     → daardoor stijgt de MARKTWAARDE van elke pot mee (ook al blijft capital vast)
+#
+# Delta interpretatie:
+#   marktwaarde > investering → onrealiseerde winst (tokens meer waard geworden)
+#   marktwaarde ≈ investering → break-even
+#   marktwaarde < investering → onrealiseerd verlies
 @router.get("/delta")
 async def get_treasury_delta():
-    """Systeem-treasury delta: totaal-pot-kapitaal vs Bitvavo saldo.
+    """Systeem-treasury delta: investering (pot-capital) vs live marktwaarde (dynamic price × tokens).
 
     Response:
-      pots_capital_eur   — som van alle capital-velden over alle users hun pots
-      bitvavo_actual_eur — live saldo op Bitvavo (EUR + coin-waarde)
-      bitvavo_staking_eur — handmatig ingestelde staking-waarde (Bitvavo Spaar)
-      delta_eur          — bitvavo + staking − pots_capital (0 = in sync)
-      per_user           — breakdown per user (aantal pots + som capital)
-      spark_kasboek      — Spark's boekhoudkundige totalen (gift_in / omzet_in / etc.)
+      pots_capital_eur     — som van alle capital-velden (aankoopprijzen, bevroren)
+      spark_core_value_eur — live Bitvavo + kasboek (canonical waarde-bron)
+      dynamic_price_eur    — huidige prijs per ROAR-token (spark_core / circulating)
+      circulating_tokens   — som ROAR-balances alle users
+      market_value_eur     — circulating × dynamic_price (= wat alle pots samen waard zijn NU)
+      delta_eur            — market_value - pots_capital (onrealiseerd P&L)
+      per_user             — pot_count, capital_eur (investering), market_value_eur (huidig)
+      spark_kasboek        — Spark's boekhoudkundige totalen
     """
-    # 1. Som alle pots per user
+    # 1. Som alle pots per user (aankoopprijzen)
     potjes_data = load_json(
         Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json",
         default={"users": {}},
     )
+    # 2. ROAR balances (voor pot ↔ token consistentie check)
+    roar_data = load_json(
+        Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json",
+        default={"balances": {}},
+    )
+    roar_balances = roar_data.get("balances", {})
+
+    # 3. Live dynamic price + spark core value (uit bestaand shop-systeem)
+    try:
+        from modules.shop.routes import (
+            get_dynamic_price, get_spark_core_value, get_circulating,
+        )
+        dynamic_price = float(get_dynamic_price() or 0)
+        spark_core_value = float(get_spark_core_value() or 0)
+        circulating = int(get_circulating() or 0)
+    except Exception:
+        dynamic_price = 0.0
+        spark_core_value = 0.0
+        circulating = sum(int(v) for v in roar_balances.values())
+
     per_user = {}
     total_pots_capital = 0.0
+    total_market_value = 0.0
     for uid, info in potjes_data.get("users", {}).items():
         pots = info.get("potjes", [])
         cap = round(sum(float(p.get("capital", 0) or 0) for p in pots), 4)
         open_positions = sum(1 for p in pots if p.get("position", {}).get("is_open"))
+        tokens = int(roar_balances.get(uid, 0))
+        market_value = round(tokens * dynamic_price, 4)
         per_user[uid] = {
             "pot_count": len(pots),
-            "capital_eur": cap,
+            "roar_tokens": tokens,
+            "capital_eur": cap,           # aankoopprijs (investering)
+            "market_value_eur": market_value,  # huidige waarde
+            "unrealized_pnl_eur": round(market_value - cap, 4),
             "open_positions": open_positions,
+            "pots_match_tokens": (len(pots) == tokens),  # regel-check: 1 token = 1 pot
         }
         total_pots_capital += cap
+        total_market_value += market_value
+
     total_pots_capital = round(total_pots_capital, 4)
+    total_market_value = round(total_market_value, 4)
+    delta = round(total_market_value - total_pots_capital, 4)
 
-    # 2. Bitvavo saldo (via Willem's credentials — is de account-holder)
-    try:
-        bv = fetch_bitvavo_balance("user-001") or {}
-        # Voorkeur: total_eur (som van alle coins + EUR in €); fallback: som balances[].value_eur
-        bitvavo_actual = float(bv.get("total_eur") or 0)
-        if not bitvavo_actual:
-            bitvavo_actual = sum(float(b.get("value_eur", 0) or 0) for b in bv.get("balances", []))
-    except Exception:
-        bitvavo_actual = 0.0
-
-    # 3. Staking-adjustment (handmatig ingesteld)
-    extras = load_json(
-        Path(__file__).parent.parent.parent / "data" / "system" / "bitvavo_extras.json",
-        default={},
-    )
-    staking = float(extras.get("bitvavo_staking_eur", 0) or 0)
-
-    # 4. Delta = echt saldo (spot + staking) − geboekt in pots
-    delta = round(bitvavo_actual + staking - total_pots_capital, 4)
-
-    # 5. Spark boekhouding totalen (gift_in / omzet_in / btw_reserve / winst_in / uit)
+    # 4. Spark boekhouding totalen
     kb = load_json(
         Path(__file__).parent.parent.parent / "data" / "system" / "spark_kasboek.json",
         default={"totals": {}},
     )
     kb_totals = kb.get("totals", {})
 
-    # 6. Categoriseer delta
+    # 5. Categoriseer delta
     if abs(delta) < 0.01:
-        status = "in_sync"
-        toelichting = "Boekhouding klopt exact met Bitvavo saldo."
+        status = "break_even"
+        toelichting = "Marktwaarde gelijk aan investering — geen onrealiseerde winst of verlies."
     elif delta > 0:
-        status = "zweeft_op_bitvavo"
+        status = "winst"
         toelichting = (
-            f"€{delta:.2f} staat op Bitvavo maar zit nog niet in pot-kapitaal. "
-            "Bron: winkel-inkomst, trader-winst, of dynamic-price marge bij token-koop."
+            f"€{delta:.2f} onrealiseerde winst: tokens zijn meer waard geworden dan "
+            f"toen ze gekocht werden (dynamic price €{dynamic_price:.2f} > aankoopgemiddelde)."
         )
     else:
-        status = "tekort"
+        status = "verlies"
         toelichting = (
-            f"€{abs(delta):.2f} tekort — pot-kapitaal is hoger dan Bitvavo. "
-            "Mogelijk trader-verlies of pending storting die nog moet plaatsvinden."
+            f"€{abs(delta):.2f} onrealiseerd verlies: tokens zijn minder waard dan "
+            f"toen ze gekocht werden (dynamic price €{dynamic_price:.2f}). "
+            "Kan komen door trader-drawdown."
         )
+
+    # 6. Consistency check: som pots == circulating tokens?
+    total_pots = sum(u["pot_count"] for u in per_user.values())
+    total_tokens = sum(u["roar_tokens"] for u in per_user.values())
+    consistency_ok = (total_pots == total_tokens == circulating)
 
     return {
         "success": True,
+        # Investering vs marktwaarde
         "pots_capital_eur": total_pots_capital,
-        "bitvavo_actual_eur": round(bitvavo_actual, 4),
-        "bitvavo_staking_eur": round(staking, 4),
+        "market_value_eur": total_market_value,
         "delta_eur": delta,
         "status": status,
         "toelichting": toelichting,
+        # Achterliggende waarden
+        "spark_core_value_eur": round(spark_core_value, 4),
+        "dynamic_price_eur": round(dynamic_price, 4),
+        "circulating_tokens": circulating,
+        # Consistency
+        "total_pots": total_pots,
+        "total_roar_tokens": total_tokens,
+        "consistency_ok": consistency_ok,
+        # Per user + kasboek
         "per_user": per_user,
         "spark_kasboek": kb_totals,
         "as_of": datetime.now(timezone.utc).isoformat(),

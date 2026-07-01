@@ -1,0 +1,43 @@
+{
+  "summary": "Pre-deploy safety check voltooid — 15/17 tests PASSED, 2 SKIPPED (geen bugs). KRITIEKE test bevestigd: trader-monitor blijft UIT na `sudo supervisorctl restart backend` + 40s uptime-wait. Alle regressie-checks (potjes-reset, ROAR balances, chat/routes refactor, daily-event path fix, DnD stats caps, items blueprint) groen. Bitvavo live API werkt met success:true. Preview is redeploy-veilig.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/trade/monitor/status", "issue": "In-memory `interval` toont 60 terwijl monitor_state.json op 900 staat. Bij een expliciete start zonder interval-override kan de monitor op 60s draaien i.p.v. de gewenste 15min. NIET blokkerend voor deploy (monitor staat uit), maar main agent moet de default interval-bootstrap uit monitor_state.json laden bij startup (line 720+ __init__)."},
+      {"endpoint": "GET /api/trade/potjes/{user_id}", "issue": "Endpoint auto-created legacy users bij elke GET (user-1996fa59 werd opnieuw aangemaakt door mijn test-call). Dit is per problem statement acceptabel, maar in productie kan een frontend-refresh op een oude URL de legacy user opnieuw materialiseren. Overweeg 404 voor unknown users of expliciete create-flag."},
+      {"endpoint": "/api/roar/*", "issue": "Geen supply/stats endpoint gevonden om total_supply=1000000, treasury=999978, circulating=22 via API te verifiëren. Bestand `/app/backend/data/roar/roar_balances.json` staat wel correct. Overweeg een GET /api/roar/stats voor transparantie."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter41_predeploy_safety.py",
+    "/app/test_reports/pytest/iter41_results.xml"
+  ],
+  "action_items": [
+    "Optioneel: bootstrap `interval` bij monitor __init__ uit monitor_state.json ipv hardcoded 60 (line 720+ in backend/modules/trade/monitor.py). Niet blokkerend want running=false.",
+    "Optioneel: GET /api/trade/potjes/{user_id} — geef 404 voor legacy/onbekende users ipv auto-create. Nu is er data-vervuilingsrisico als iemand oude userIds opvraagt.",
+    "Testagent heeft user-1996fa59 (die door mijn test auto-aangemaakt was) verwijderd uit user_potjes.json — bestand nu clean met 3 users."
+  ],
+  "critical_code_review_comments": [
+    "server.py::startup() resume_if_was_running() fix goed geland — bevestigd via herstart-test dat monitor niet auto-start.",
+    "monitor_state.json interval=900 wordt niet opgepikt bij startup — in-memory default (60) overschrijft. Overweeg _load_state() in __init__.",
+    "chat/routes.py refactor werkt: routes_helpers.py imports (save_log, build_ab_entry) laden zonder errors. POST /api/chat/message returned 200 met message field."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter41_predeploy_safety.py (nieuw)",
+    "/app/backend/data/financial/user_potjes.json (opgeschoond — user-1996fa59 die door test-GET auto-aangemaakt was, verwijderd)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "n/a (backend-only test)"},
+  "test_credentials": "Niet nodig — endpoints zijn public voor test-users",
+  "seed_data_creation": "Geen seed nodig — bestaande reset-data gebruikt (Spark 10×€5.08, Willem 10×€5.08, Gijs 2×€10.40).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Test file `/app/backend/tests/test_iter41_predeploy_safety.py` bevat de CRITICAL restart-safety check (test_monitor_off_after_supervisor_restart) — hergebruik voor toekomstige deploys. Legacy-user cleanup na test-run is nodig omdat GET /api/trade/potjes/{user_id} onbekende users auto-created. `pot-001` (index=0) van user-000 is de staking_anchor met pot_locked=true — dit is by design, niet aanraken.",
+  "rca of the issue": {
+    "original_bug": "Monitor auto-start bij backend-restart",
+    "root_cause": "server.py::startup() -> resume_if_was_running() las monitor_state.json met running=true en startte de monitor thread opnieuw op",
+    "fix_verified": "monitor_state.json.running=false gepersisteerd + supervisorctl restart backend + 40s wait -> API retourneert running:false, thread_alive:false. GEEN auto-start meer.",
+    "reproduction_steps": "1. `curl /api/trade/monitor/status` -> running:false. 2. `sudo supervisorctl restart backend`. 3. Wacht 5-40s. 4. Herhaal curl -> moet running:false blijven.",
+    "mitigation": "Voor productie-deploy: bevestig `cat /app/backend/data/trade/monitor_state.json | grep '\"running\": false'` vóór redeploy."
+  }
+}

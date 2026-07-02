@@ -62,6 +62,22 @@ async def reconcile_spark():
             continue
         per_coin.setdefault(coin, []).append(p)
 
+    # v7_reconcile_all_coins_001 — Ook coins TONEN die WEL op Bitvavo staan
+    # maar GEEN pot hebben. Zonder deze uitbreiding zag je alleen BCH (want alle
+    # Spark pots zijn BCH-EUR); nu zie je alle coin-holdings incl. "verweesde".
+    DUST_THRESHOLD = 0.10  # €
+    for coin, bv in bv_balances.items():
+        if coin == "EUR":
+            continue
+        if coin in per_coin:
+            continue  # al gedekt door pots
+        actual = float(bv.get("available", 0) or 0) + float(bv.get("in_order", 0) or 0)
+        val_eur = float(bv.get("eur_value", bv.get("value_eur", 0)) or 0)
+        if actual <= 0 or val_eur < DUST_THRESHOLD:
+            continue
+        # Registreer als "orphan-coin" — geen pot claimt hem
+        per_coin[coin] = []  # lege pot-lijst signaleert orphan
+
     rows = []
     for coin, lst in sorted(per_coin.items()):
         # Expected: som van capital (free) + open posities (size × price)
@@ -92,7 +108,9 @@ async def reconcile_spark():
         diff_eur = actual_eur_value - (expected_coin_amount * bv_price)
 
         # Status
-        if abs(diff_coin) < 1e-8:
+        if not lst:
+            status = "orphan"  # v7: geen pot claimt deze coin
+        elif abs(diff_coin) < 1e-8:
             status = "exact"
         elif diff_coin > 0:
             status = "overschot"   # meer op Bitvavo dan potjes denken

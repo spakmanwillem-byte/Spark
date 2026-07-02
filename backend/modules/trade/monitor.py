@@ -1072,44 +1072,61 @@ class MonitorService:
             user_potjes = potjes_svc.get_potjes(self._user_id)
             actions_this_cycle = []
 
-            # 1. Voor elke open potje OP DEZE MARKET: check trailing-stop SELL
+            # 1. Voor elke open positie OP DEZE MARKET: check trailing-stop SELL.
+            #    v7_pot_cluster_001 — Pots die tot dezelfde cluster behoren delen entry/highest.
+            #    We processen per uniek cluster_id (of per losse pot als cluster_id=None) om
+            #    te voorkomen dat we 5× dezelfde exit check doen voor 1 cluster.
+            processed_clusters: set = set()
             for pot in user_potjes["potjes"]:
                 if not pot["position"]["is_open"]:
                     continue
                 if pot.get("market") != market:
-                    continue  # andere coin, niet onze price
+                    continue
+                cid = pot["position"].get("cluster_id")
+                if cid and cid in processed_clusters:
+                    continue  # cluster al gecheckt/gesloten in deze cycle
                 potjes_svc.update_pot_tracking(self._user_id, pot["id"], price)
                 pos = pot["position"]
                 entry = pos["entry_price"]
                 if not entry or entry <= 0:
-                    # v6_zerodiv_guard_001 — open positie zonder valide entry-prijs:
-                    # b.v. anchor met manual lock zonder echte BUY fill. Skip SELL-logica;
-                    # admin moet eerst reconcilen via force-close of /api/trade/reconcile/spark.
                     continue
+                # Cluster-aware: aggregate capital voor trailing thresholds
+                if cid:
+                    cluster_pots = potjes_svc.get_pots_by_cluster(self._user_id, cid)
+                    cluster_capital = sum(float(cp.get("capital", 0) or 0) for cp in cluster_pots)
+                else:
+                    cluster_pots = [pot]
+                    cluster_capital = pot["capital"]
                 highest = max(pos.get("highest_price", entry) or entry, price)
                 profit_pct = (price - entry) / entry
-                bruto = pot["capital"] * profit_pct
-                fees = pot["capital"] * BITVAVO_TAKER_FEE * 2
+                bruto = cluster_capital * profit_pct
+                fees = cluster_capital * BITVAVO_TAKER_FEE * 2
                 netto = bruto - fees
-                # v4_sell_trigger_002: cent-niveau triggers ipv vaste percentages
                 trail_threshold = round(fees * 2, 6)
                 exit_min_netto = round(fees * 1, 6)
                 netto_r = round(netto, 6)
                 trailing_active = pos.get("trailing_active", False) or netto_r >= trail_threshold
 
-                # Exit: prijs daalt vanaf piek én netto blijft minstens 1× fees
                 if trailing_active and price < highest and netto_r >= exit_min_netto:
                     if self._auto_trade:
                         if self._use_mock:
-                            result = execute_mock_trade(self._user_id, market, "SELL", pot["capital"])
+                            result = execute_mock_trade(self._user_id, market, "SELL", cluster_capital)
                         else:
-                            result = execute_real_trade(self._user_id, market, "SELL", pot["capital"])
+                            result = execute_real_trade(self._user_id, market, "SELL", cluster_capital)
                         if result.get("success"):
-                            # v6_pot_real_price_001 — gebruik Bitvavo's avg_price (echte fill)
-                            # ipv ticker `price` voor close. Voorkomt drift tussen UI en boek.
                             real_price = result.get("trade", {}).get("price") or price
-                            close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
-                            actions_this_cycle.append(f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}")
+                            if cid:
+                                close_result = potjes_svc.close_cluster(self._user_id, cid, real_price)
+                                actions_this_cycle.append(
+                                    f"SELL cluster {cid[:6]} ({close_result.get('n_pots_closed',0)} pots, {market}) "
+                                    f"@ €{real_price:.4f} netto €{close_result.get('total_netto', 0):+.4f}"
+                                )
+                                processed_clusters.add(cid)
+                            else:
+                                close_result = potjes_svc.close_pot(self._user_id, pot["id"], real_price)
+                                actions_this_cycle.append(
+                                    f"SELL {pot['id']} ({market}) @ €{real_price:.4f} netto €{close_result.get('netto', 0):+.4f}"
+                                )
                             # v7_shadow_removed_001 — Shadow-close block removed.
 
                 # v7_shadow_removed_001 — Shadow-activatie block removed (dead code cleanup).
@@ -1135,28 +1152,39 @@ class MonitorService:
                 buy_decision["reason"] += f" | Skipped: BUY-cooldown {cooldown_left}s op {market}"
                 buy_decision["action"] = "HOLD"
             if buy_decision["action"] == "BUY":
-                # v6_pot_market_match_001 — geef voorrang aan een potje dat al voor deze market is gemarkeerd
-                available = potjes_svc.get_available_pot(self._user_id, self._cycles, prefer_market=market)
-                if available and self._auto_trade:
+                # v7_pot_cluster_001 — Cluster pots samen tot Bitvavo min-order gehaald
+                # is. Voorheen: 1 pot × €5,08 = Bitvavo weigert SOL/ADA orders (min €5-7).
+                # Nu: neem meerdere pots samen zodat Σcapital ≥ min_order.
+                try:
+                    min_order = get_market_min_quote(market)
+                except Exception:
+                    min_order = 5.0
+                cluster = potjes_svc.get_next_buy_cluster(self._user_id, market, min_order)
+                if cluster and self._auto_trade:
                     if self._use_mock:
-                        result = execute_mock_trade(self._user_id, market, "BUY", available["capital"])
+                        result = execute_mock_trade(self._user_id, market, "BUY", cluster["total_capital"])
                     else:
-                        result = execute_real_trade(self._user_id, market, "BUY", available["capital"])
+                        result = execute_real_trade(self._user_id, market, "BUY", cluster["total_capital"])
                     if result.get("success"):
-                        # v6_pot_real_price_001 — entry_price uit Bitvavo fill (avg_price),
-                        # niet uit ticker. Trail-logica baseert op echte entry.
                         real_entry = result.get("trade", {}).get("price") or price
-                        potjes_svc.open_pot(
-                            self._user_id, available["id"], real_entry, self._cycles,
+                        potjes_svc.open_cluster(
+                            self._user_id, cluster["pot_ids"], real_entry,
+                            cluster["cluster_id"], self._cycles,
                             trade_id=result.get("trade", {}).get("trade_id"),
-                            amount_eur=available.get("capital"),
                             market=market,
                         )
-                        # v6_buy_cooldown_001 — registreer ts zodat de 5-min cooldown start
                         self._last_buy_per_market[market] = now
-                        actions_this_cycle.append(f"BUY {available['id']} ({market}) @ €{real_entry:.2f}")
-                elif not available:
-                    buy_decision["reason"] += " | Skipped: geen vrij potje of al gekocht deze cycle"
+                        actions_this_cycle.append(
+                            f"BUY cluster {cluster['cluster_id'][:6]} ({cluster['n_pots']} pots, "
+                            f"€{cluster['total_capital']:.2f}) {market} @ €{real_entry:.4f}"
+                        )
+                    else:
+                        buy_decision["reason"] += f" | BUY faalde: {result.get('error','?')[:80]}"
+                elif not cluster:
+                    buy_decision["reason"] += (
+                        f" | Skipped: geen cluster met ≥€{min_order:.2f} voor {market} "
+                        f"(geen vrije pots of te weinig volume)"
+                    )
 
             decision = buy_decision
             decision["market"] = market

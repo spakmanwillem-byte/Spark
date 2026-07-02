@@ -1028,6 +1028,196 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
     return {}
 
 
+# =============================================================================
+# v7_pot_cluster_001 — Multi-pot clusters om Bitvavo min-order te halen.
+#
+# Concept: 1 token = 1 pot (boekhoudkundig zuiver, capital = aankoopprijs).
+# Maar Bitvavo weigert orders < min-order (€5-7 voor SOL/ADA/etc).
+# Oplossing: cluster N pots samen tot Σcapital ≥ min_order, één Bitvavo-order
+# voor de hele cluster, alle pots delen dezelfde entry_price + cluster_id.
+# Bij SELL: sluit hele cluster tegelijk, netto winst pro-rata over pot.capital.
+#
+# cluster_id = uuid4-hex. None bij legacy single-pot (backwards-compat).
+# =============================================================================
+import uuid as _uuid
+
+
+def get_next_buy_cluster(user_id: str, market: str, min_order_eur: float,
+                         prefer_market: bool = True) -> Optional[Dict]:
+    """Zoek closed pots die samen >= min_order_eur opleveren.
+
+    Selectie-strategie:
+      1. Eerst pots die al voor `market` gemarkeerd zijn
+      2. Anders pots met `market="BCH-EUR"` (default) — mogen omgezet
+      3. Skip open pots, locked pots
+      4. Stop zodra Sigma capital >= min_order_eur
+
+    Returns dict {cluster_id, pot_ids, total_capital, primary_pot_id} of None.
+    """
+    data = _load(user_id)
+    user = data["users"][user_id]
+    all_pots = user.get("potjes", [])
+
+    free = [p for p in all_pots
+            if not p.get("position", {}).get("is_open")
+            and not p.get("pot_locked")]
+    if not free:
+        return None
+
+    def _sort_key(p):
+        m = p.get("market", "")
+        if m == market:
+            group = 0
+        elif m == "BCH-EUR":
+            group = 1
+        else:
+            group = 2
+        return (group, float(p.get("capital", 0) or 0), p.get("id", ""))
+
+    if prefer_market:
+        free.sort(key=_sort_key)
+
+    accumulated: List[Dict] = []
+    total = 0.0
+    for p in free:
+        accumulated.append(p)
+        total += float(p.get("capital", 0) or 0)
+        if total >= min_order_eur:
+            break
+
+    if total < min_order_eur:
+        return None
+
+    cluster_id = _uuid.uuid4().hex[:12]
+    return {
+        "cluster_id": cluster_id,
+        "pot_ids": [p["id"] for p in accumulated],
+        "total_capital": round(total, 4),
+        "primary_pot_id": accumulated[0]["id"],
+        "n_pots": len(accumulated),
+    }
+
+
+def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_id: str,
+                 current_cycle: int, trade_id: Optional[str] = None,
+                 market: Optional[str] = None) -> Dict:
+    """Open alle pots in de cluster gelijktijdig met shared entry + cluster_id."""
+    data = _load(user_id)
+    user = data["users"][user_id]
+    now = datetime.now(timezone.utc).isoformat()
+    opened = []
+    for p in user["potjes"]:
+        if p["id"] in pot_ids and not p.get("pot_locked"):
+            p["position"] = {
+                "is_open": True,
+                "entry_price": entry_price,
+                "highest_price": entry_price,
+                "trailing_active": False,
+                "entry_time": now,
+                "amount_eur": p.get("capital"),
+                "cluster_id": cluster_id,
+                "cluster_size": len(pot_ids),
+            }
+            if market:
+                p["market"] = market
+            if trade_id:
+                p.setdefault("trade_log", []).append({
+                    "ts": now, "action": "BUY", "cluster_id": cluster_id,
+                    "trade_id": trade_id, "entry_price": entry_price,
+                    "amount_eur": p.get("capital"),
+                })
+            p["last_action"] = f"BUY cluster {cluster_id[:6]} @ EUR{entry_price:.4f}"
+            opened.append(p["id"])
+    _save(data)
+    return {"success": True, "cluster_id": cluster_id, "opened_pot_ids": opened}
+
+
+def get_pots_by_cluster(user_id: str, cluster_id: str) -> List[Dict]:
+    """Return alle pots die tot deze cluster behoren (open)."""
+    data = _load(user_id)
+    user = data["users"][user_id]
+    return [p for p in user.get("potjes", [])
+            if p.get("position", {}).get("cluster_id") == cluster_id
+            and p.get("position", {}).get("is_open")]
+
+
+def close_cluster(user_id: str, cluster_id: str, exit_price: float) -> Dict:
+    """Sluit alle pots met matching cluster_id. Netto winst pro-rata over pot.capital."""
+    data = _load(user_id)
+    user = data["users"][user_id]
+    pots_in_cluster = [p for p in user.get("potjes", [])
+                       if p.get("position", {}).get("cluster_id") == cluster_id
+                       and p.get("position", {}).get("is_open")]
+    if not pots_in_cluster:
+        return {"success": False, "error": f"Geen open pots met cluster_id {cluster_id}"}
+
+    total_capital = sum(float(p.get("capital", 0) or 0) for p in pots_in_cluster)
+    entry_price = pots_in_cluster[0]["position"]["entry_price"]
+    profit_pct = (exit_price - entry_price) / entry_price if entry_price else 0
+    total_bruto = total_capital * profit_pct
+    total_fees = total_capital * BITVAVO_TAKER_FEE * 2
+    total_netto = total_bruto - total_fees
+
+    now = datetime.now(timezone.utc).isoformat()
+    closed = []
+    per_pot_netto = {}
+    for p in pots_in_cluster:
+        cap = float(p.get("capital", 0) or 0)
+        share = cap / total_capital if total_capital > 0 else 0
+        pot_netto = round(total_netto * share, 6)
+        new_capital = cap + pot_netto
+        pot_max = p.get("max_size", INITIAL_MAX)
+        overflow = 0.0
+        if new_capital > pot_max:
+            overflow = new_capital - pot_max
+            new_capital = pot_max
+        p["capital"] = round(new_capital, 4)
+        p["stats"]["trades"] += 1
+        if pot_netto > 0:
+            p["stats"]["wins"] += 1
+        else:
+            p["stats"]["losses"] += 1
+        p["stats"]["total_pnl"] = round(p["stats"]["total_pnl"] + pot_netto, 4)
+        p["position"] = {
+            "is_open": False, "entry_price": None, "highest_price": None,
+            "trailing_active": False, "entry_time": None,
+        }
+        p["last_action"] = f"SELL cluster {cluster_id[:6]} @ EUR{exit_price:.4f} | share EUR{pot_netto:+.4f}"
+        user.setdefault("overflow_pool", 0.0)
+        user["overflow_pool"] = round(user["overflow_pool"] + overflow, 4)
+        p.setdefault("trade_log", []).append({
+            "ts": now, "action": "SELL", "cluster_id": cluster_id,
+            "exit_price": exit_price, "netto": pot_netto, "share_pct": round(share*100, 2),
+        })
+        closed.append(p["id"])
+        per_pot_netto[p["id"]] = pot_netto
+
+    _save(data)
+    try:
+        from modules.accounting.hooks import on_trade_result
+        USERS = Path(__file__).parent.parent.parent / "data" / "system" / "users.json"
+        udata = load_json(USERS, default={"users": []})
+        ulist = udata.get("users", []) if isinstance(udata, dict) else udata
+        naam = next((u.get("naam") for u in ulist if u.get("id") == user_id), user_id)
+        on_trade_result(
+            user_id=user_id, user_naam=naam,
+            market=pots_in_cluster[0].get("market") or "?-EUR",
+            buy_amount=total_capital, sell_amount=total_capital + total_netto,
+            trade_id=f"cluster_{cluster_id}",
+        )
+    except Exception:
+        pass
+    return {
+        "success": True, "cluster_id": cluster_id,
+        "closed_pot_ids": closed,
+        "total_netto": round(total_netto, 4),
+        "per_pot_netto": per_pot_netto,
+        "exit_price": exit_price,
+        "n_pots_closed": len(closed),
+    }
+
+
+
 def reset_last_buy_cycle(user_id: str):
     """Reset last_buy_cycle zodat volgende cycle weer mag kopen."""
     data = _load(user_id)

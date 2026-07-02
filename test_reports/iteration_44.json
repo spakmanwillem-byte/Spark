@@ -1,0 +1,36 @@
+{
+  "summary": "Iteratie 44 — Spark Core 2.0 sessie 34 vervolg: pot capital €5.08 + reconcile all-coins + cluster-logica. Alle 16 pytest checks slagen (100%). Cluster helpers get_next_buy_cluster/open_cluster/close_cluster/get_pots_by_cluster werken correct: 10 pots × €5.08, min_order=€10 → cluster van 2 pots (€10.16). Open/close roundtrip test: shared entry_price + cluster_id + cluster_size=2, close met pro-rata pot_netto (gelijke shares bij gelijke capital). Reconcile /api/trade/reconcile/spark toont nu ALLE Bitvavo-coins incl. ADA/ATOM/AXS/CSPR/ETH etc. als 'orphan' (n_pots=0). BCH matched met status overschot/exact. Monitor code check: BUY-flow gebruikt get_next_buy_cluster+open_cluster, SELL-flow gebruikt close_cluster met processed_clusters dedup + backwards-compat close_pot fallback. Delta consistency_ok=true, delta_eur=€11.36, 22 pots × 22 tokens. Regressie iter_43: shadow 404, bot/status success, reconcile/orphans dry-run OK. NIET auto_trade uitgevoerd (safe). Backend logs schoon.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/trade/reconcile/spark", "issue": "bv_price_eur en actual_eur_value zijn 0.0 voor alle orphan coins in de current response — reconcile toont orphans wel correct maar zonder EUR-waarde. Likely oorzaak: fetch_bitvavo_balance geeft geen live prijs mee voor orphans, of DUST_THRESHOLD-filter (val_eur<0.10) staat aan terwijl val_eur al 0 is uit balance. Alle orphans passeren toch de filter — de check `if actual <= 0 or val_eur < DUST_THRESHOLD: continue` is inconsistent (waarom passeren coins mét val_eur=0?). Niet kritisch voor feature (orphans WORDEN getoond), wel voor rapportage-waarde."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter44_cluster_and_reconcile.py",
+    "/app/test_reports/pytest/iter44_results.xml"
+  ],
+  "action_items": [
+    "Optioneel: fix bv_price_eur=0 voor orphan coins in reconcile/spark — controleer of fetch_bitvavo_balance een 'price' key returned voor alle coins (nu lijkt het alleen voor coins met een pot gevuld te worden, of de tickerPrice call faalt). Zonder prijs is de EUR-waarde van orphans €0 in de UI, wat verwarrend is bij 538 CSPR of 7 ADA.",
+    "Optioneel: DUST_THRESHOLD filter in reconcile.py regel 76 wordt momenteel omzeild door orphans met val_eur=0 (want de OR-guard `actual <= 0 or val_eur < DUST_THRESHOLD` zou juist moeten filteren maar doet het niet, want actual>0 en de OR faalt vermoedelijk pas als beide falen — check de logica). Overweeg: eerst live-prijs ophalen als val_eur=0 en dan pas dust-filter toepassen."
+  ],
+  "critical_code_review_comments": [
+    "potjes.py is nu 1423 regels — nog zwaarder dan iter_43 (1200+). Cluster helpers (get_next_buy_cluster/open_cluster/close_cluster/get_pots_by_cluster, regels 1030-1218) zijn een goed samenhangend blok en zouden naar `modules/trade/potjes_cluster.py` gesplitst kunnen worden voor onderhoudbaarheid.",
+    "close_cluster (potjes.py:1144) roept on_trade_result met 1 aggregate call (buy_amount=total_capital, sell_amount=total_capital+total_netto). Dit klopt boekhoudkundig, maar de per-pot trade_log entries in de audit trail zijn nu niet 1-op-1 gelinkt aan losse Bitvavo-orderids. Bij dispuut is alleen `cluster_{cluster_id}` traceerbaar. Overweeg om real_trade_id in elke pot trade_log op te nemen.",
+    "get_next_buy_cluster sorteert `free` op (group, capital, id) → dat is een deterministische sortering, maar zal altijd DEZELFDE pots kiezen (pot-001, pot-002…) totdat die alle open zijn. Dit kan leiden tot ongelijke slijtage/stats-verdeling. Overweeg round-robin of least-recently-traded selectie voor eerlijke pot-rotatie.",
+    "monitor.py cluster-aware trailing (regel 1094-1106): cluster_capital wordt herberekend elke cycle uit get_pots_by_cluster; als 1 pot zijn capital heeft aangepast (bijv. door overflow rebalance mid-flight) kan de bruto/fees mismatch geven. Meestal cluster_capital == cluster_size × entry_capital, dus edge-case.",
+    "close_cluster pot_max cap+overflow logic (regel 1169-1173) knipt pot capital af op max_size en gooit rest in user overflow_pool — dit is correct maar de per_pot_netto dict die je returnt bevat de PRE-cap netto share, niet de effectieve toename. UI kan verwarrend zijn: 'pot kreeg €0.60 netto' terwijl de capital maar €0.20 groeide (rest naar overflow).",
+    "reconcile.py DUST_THRESHOLD hardcoded op €0.10 (regel 68) — zelfde comment als iter_43, nog steeds unresolved. Zou naar config file/env-var mogen."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter44_cluster_and_reconcile.py"
+  ],
+  "success_rate": {"backend": "100% (16/16)", "frontend": "not_tested"},
+  "test_credentials": "n/a — publieke endpoints",
+  "seed_data_creation": "Geen persistente seed. test_open_close_cluster_roundtrip maakt backup van /app/backend/data/financial/user_potjes.json, muteert user-000 pot-001+pot-002 (open→close cluster), restored altijd in finally-block. Post-test state geverifieerd: 10+10+2 pots @ €5.08/€5.08/€10.40, geen open positions.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iter44 valideert 3-in-1 refactor: (1) €5.08 pot capital (was €10 error), (2) reconcile-spark orphan detection, (3) cluster helpers. Test file /app/backend/tests/test_iter44_cluster_and_reconcile.py is idempotent en herbruikbaar. NIET UITGEVOERD: echte auto_trade cycle (zou echte Bitvavo BUY/SELL doen). Cluster helpers zijn geïsoleerd getest via directe Python-imports + backup/restore van user_potjes.json. Bitvavo state ongewijzigd. Enige minor issue: bv_price_eur=0 voor orphan coins in reconcile/spark response (feature werkt, rapportage-waarde beperkt). Alle iter_43 fixes nog steeds groen.",
+  "rca of the issue": "n/a — geen blockers. Één minor: reconcile/spark toont orphans wel maar zonder EUR-prijs (bv_price_eur=0.0 in alle orphan rows). Root cause zeer waarschijnlijk in monitor.fetch_bitvavo_balance: `price` field wordt niet gevuld voor alle balances (mogelijk alleen voor coins met open position/pot). Reproduce: `curl .../api/trade/reconcile/spark | jq '.rows[] | select(.status==\"orphan\") | {coin,bv_price_eur}'` → alle prijzen 0. Mitigatie: in reconcile._reconcile_spark een aparte ticker-lookup toevoegen (bitvavo.tickerPrice()) voor orphan coins om price + val_eur te vullen."
+}

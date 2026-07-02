@@ -387,6 +387,31 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
             fee_paid = float(result.get("feePaid", 0))
             fee_currency = result.get("feeCurrency", "EUR")
 
+            # v7_zero_filled_guard_001 — Bitvavo kan 200 OK teruggeven met
+            # filledAmount=0 (bijv. bij te kleine sell-amount na clamp, of
+            # market-condition rejection). Zonder guard sluiten we het potje
+            # alsof er verkocht is, terwijl de crypto nog op Bitvavo staat.
+            # → Interpreteer 0-fill expliciet als failure.
+            if filled <= 0 or filled_quote <= 0:
+                logger.warning(
+                    f"[{side_l}] {market} Bitvavo 200 OK maar filled=0 → geen crypto verplaatst. "
+                    f"raw={result}"
+                )
+                return {
+                    "success": False,
+                    "error": (
+                        f"Bitvavo accepteerde de {side.upper()} maar er is niets verplaatst "
+                        f"(filled=0). Order geweigerd door markt of amount te klein. "
+                        f"{'Pot blijft open — trader probeert volgende cycle opnieuw.' if side_l == 'sell' else ''}"
+                    ),
+                    "error_code": "ZERO_FILLED",
+                    "market": market,
+                    "requested_amount": amount_eur,
+                    "effective_amount": final_amount,
+                    "bitvavo_status": result.get("status"),
+                    "bitvavo_order_id": result.get("orderId"),
+                }
+
             trade_id = result.get("orderId", str(uuid.uuid4())[:8])
             now = datetime.now(timezone.utc).isoformat()
             trade = {

@@ -2,6 +2,50 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-02 — Trader kritieke bugs vóór productie-redeploy (`v7_trader_stability_001`)
+
+### 🐛 Bug 1: Dubbele MonitorService voor user-001
+- `get_user_monitor("user-001")` maakte een 2e instance in `_registry` met defaults
+- UI polls `/api/trade/bot/status/user-001` kreeg altijd `running: false` terwijl de echte `_monitor` thread wel draaide
+- Fix (`v7_legacy_alias_001`): return altijd de module-singleton `_monitor` voor user-001
+
+### 🐛 Bug 2: Config verloren bij backend restart
+- `MonitorService.__init__` gebruikte defaults (interval=60, market=BCH-EUR, use_potjes=False)
+- Config uit `monitor_state.json` werd alleen via `resume_if_was_running()` geladen — maar die skipt als `running:false`
+- Effect: elke restart wist Willem's interval/markets/auto_trade instellingen
+- Fix (`v7_config_persist_on_init_001`): __init__ leest config uit state file (behalve `running` — die blijft false tot expliciete start)
+
+### 🐛 Bug 3: SELL met filled=0 werd als success gezien
+- Bitvavo gaf 200 OK met `filledAmount: 0` (bij te kleine sell na clamp/rounding)
+- Onze code registreerde het als success → `close_pot` werd aangeroepen → pot leeg gesloten
+- Maar de crypto stond nog op Bitvavo — geld werd "vergeten" in de boekhouding
+- Concreet voorbeeld: BTC BUY €5,06 @ €52.840 (01:43), SELL amount=0 @ €53.759 (14:55). €5,06 aan BTC bleef op Bitvavo
+- Fix (`v7_zero_filled_guard_001`): `execute_real_trade` returned nu `success:False` met `error_code:ZERO_FILLED` als filled≤0, pot blijft open zodat trader het next cycle opnieuw probeert
+
+### ✨ Nieuw: `/api/trade/reconcile/orphans/{user_id}` (`v7_reconcile_orphans_001`)
+- **GET**: dry-run scan — toont per coin op Bitvavo: bv_amount, net_paid_eur (uit trade_history), pnl_after_fee, proposed_action (SELL_PROFIT / REOPEN_POT / SKIP_DUST)
+- **POST** met `execute:false` (default) → dry-run preview met `would_execute[]`
+- **POST** met `execute:true` → daadwerkelijke uitvoering:
+  - `SELL_PROFIT`: verkoop nu + registreer netto in `spark_kasboek` en `pot.stats`
+  - `REOPEN_POT`: heropen closed pot met historische entry_price zodat trader retry
+  - `SKIP_DUST`: laat staan (pnl < €0,02)
+- Safety: `execute` MOET expliciet true zijn om écht te verkopen
+
+### 🔧 Rebalance smart mode (`v7_rebalance_smart_001`)
+- `POST /api/trade/potjes/rebalance-from-bitvavo` uitgebreid met:
+  - `target_pot_count: int` → smart mode, exact N pots
+  - `include_eur_liquide: bool` → EUR-saldo meetellen
+  - `default_market: str` → markt voor EUR-only pots (die geen coin-holding hebben)
+  - `pot_size` blijft aankoopprijs-per-token (default €5,08 anchor)
+- Correcte semantiek: user's tokens × aankoopprijs = pot capital. Rest Bitvavo = systeem-treasury (zichtbaar in `/api/trade/delta`)
+- Insufficient-funds guard: fout bij `total_needed > total_available`
+
+### ✅ Testing (iter_43, 100% pass, 15/15)
+- Alle 5 fixes bevestigd
+- Backend logs schoon, geen tracebacks
+- Delta consistency_ok (22 pots = 22 ROAR tokens = 22 circulating)
+
+
 ## 2026-07-01 — Trader schoonmaak: shadow weg, anchors weg, delta-view (`v7_treasury_delta_001`)
 
 ### 🧹 Shadow trader compleet verwijderd

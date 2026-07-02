@@ -375,7 +375,8 @@ async def scan_orphans(user_id: str):
 
 
 class RecoverOrphansRequest(BaseModel):
-    only_profit: bool = False   # als true: alleen SELL_PROFIT acties uitvoeren, geen REOPEN
+    execute: bool = False              # v7_orphan_safety_001 — MOET expliciet true zijn om echt te verkopen
+    only_profit: bool = False          # als true: alleen SELL_PROFIT acties uitvoeren, geen REOPEN
     coins: Optional[List[str]] = None  # subset, bijv. ["BCH","ETH"] — None = alle
 
 
@@ -383,9 +384,13 @@ class RecoverOrphansRequest(BaseModel):
 async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
     """Execute reconcile: verkoop coins met winst, heropen pots voor coins met verlies.
 
+    ⚠️ SAFETY: `execute` MOET expliciet true zijn — anders krijg je alleen dry-run preview.
+    Dit voorkomt dat een verkeerde curl POST per ongeluk echte crypto verkoopt.
+
     Body:
+      execute: bool     — REQUIRED true om écht te verkopen; false = dry-run preview
       only_profit: bool — als true, alleen verkopen bij winst (skip REOPEN acties)
-      coins: List[str] — beperk tot deze coins, of leeg voor alle
+      coins: List[str]  — beperk tot deze coins, of leeg voor alle
     """
     from .monitor import execute_real_trade
     from . import potjes as potjes_svc
@@ -397,6 +402,29 @@ async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
     if req.coins:
         want = {c.upper() for c in req.coins}
         rows = [r for r in rows if r["coin"] in want]
+
+    # v7_orphan_safety_001 — dry-run als execute niet expliciet true
+    if not req.execute:
+        return {
+            "success": True,
+            "mode": "DRY_RUN",
+            "message": (
+                "⚠️ Dry-run: geen wijzigingen doorgevoerd. "
+                "Stuur {\"execute\": true} om écht te verkopen/heropen."
+            ),
+            "would_execute": [
+                {
+                    "coin": r["coin"],
+                    "action": r["proposed_action"],
+                    "amount": r["bv_amount"],
+                    "current_value_eur": r["bv_value_eur"],
+                    "estimated_profit_eur": r["pnl_after_fee_eur"],
+                }
+                for r in rows if r["proposed_action"] != "SKIP_DUST"
+            ],
+            "totals": scan["totals"],
+            "ts": _now(),
+        }
 
     executed = []
     skipped = []

@@ -58,6 +58,32 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 35 (2026-07-02, avond) — Pot clustering + reconcile all-coins
+
+### ✅ Nieuw in deze sessie
+- **Pot capital semantiek hersteld** — pot.capital = **aankoopprijs per token** (€5,08 anchor voor Spark/Willem, €10,40 dynamic voor Gijs). Niet meer verward met "trader budget".
+- **Cluster-logica in trader** (`v7_pot_cluster_001`):
+  - `get_next_buy_cluster(user_id, market, min_order_eur)` — verzamelt pots samen tot Σcapital ≥ Bitvavo min-order
+  - `open_cluster(user_id, pot_ids, entry_price, cluster_id)` — opent alle pots gelijktijdig met shared entry + cluster_id
+  - `get_pots_by_cluster` / `close_cluster` — sluit hele cluster tegelijk, netto pro-rata over pot.capital
+  - Monitor.py BUY/SELL flow ge-updated: `processed_clusters` set voorkomt dubbele close
+  - Backwards-compat: legacy pots zonder cluster_id gebruiken nog steeds close_pot
+- **Reconcile toont nu ALLE Bitvavo-coins** (`v7_reconcile_all_coins_001`) — was: alleen coins die in pots voorkomen (dus alleen BCH). Nu: orphans met status="orphan" incl. live price + EUR-waarde.
+- Testing iter_44: 100% (16/16), backend logs schoon
+
+### 🎯 Product-model bevestigd
+- **1 ROAR token = 1 pot** (hard boekhouding)
+- **pot.capital = aankoopprijs** (blijft vast, kan €5,08 of €10,40 zijn)
+- **Trader clusteret pots** tot Bitvavo min-order gehaald wordt (SOL/ADA €5-7 minimum)
+- **Dynamic price** = spark_core / circulating (voor huidige marktwaarde)
+
+### 🟡 Follow-up (uit iter_44)
+- **P2** `potjes.py` splitsen: cluster-helpers → `modules/trade/potjes_cluster.py`
+- **P2** `get_next_buy_cluster` gebruikt altijd pot-001/002 eerst → overweeg round-robin voor eerlijke slijtage
+- **P2** `close_cluster` per_pot_netto returnt pre-cap netto — na overflow-cap kan effectieve capital-toename kleiner zijn. UI kan verwarrend zijn.
+- **P2** DUST_THRESHOLD `€0,10` in `reconcile.py` — hardcoded, naar config
+
+
 ## 🔎 REALITY CHECK — Sessie 34 (2026-07-01) — Trader schoonmaak + treasury delta
 
 ### ✅ Nieuw in deze sessie

@@ -2,6 +2,33 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-02b — Pot clustering + reconcile all-coins (`v7_pot_cluster_001`)
+
+### ✨ Nieuw: Cluster-logica voor trader
+- **Pot capital semantiek gecorrigeerd** — pot.capital = **aankoopprijs per token** (€5,08 voor Spark/Willem, €10,40 voor Gijs). Was per ongeluk verward met "trader budget €10".
+- **`get_next_buy_cluster(user_id, market, min_order_eur)`** — verzamelt closed pots tot Σcapital ≥ Bitvavo min-order. Retourneert dict met `cluster_id`, `pot_ids`, `total_capital`, `n_pots`.
+- **`open_cluster(...)`** — opent alle pots in cluster met shared `position.entry_price` + `position.cluster_id` + `position.cluster_size`
+- **`close_cluster(user_id, cluster_id, exit_price)`** — sluit alle pots gelijktijdig, netto winst pro-rata verdeeld op `pot.capital`. Kasboek 1× per cluster geboekt (niet per pot).
+- **`get_pots_by_cluster`** — helper voor status/UI
+
+### 🔧 Monitor _run_cycle aangepast
+- **BUY flow**: `get_next_buy_cluster` + `open_cluster` i.p.v. losse `get_available_pot` + `open_pot`
+- **SELL flow**: `processed_clusters` set voorkomt dat 1 cluster meerdere keren gesloten wordt in dezelfde cycle. Cluster-aware trailing thresholds (op cluster_capital)
+- **Backwards-compat**: legacy pots zonder cluster_id gebruiken nog steeds `close_pot`
+
+### 🔍 Reconcile toont nu alle coins (`v7_reconcile_all_coins_001`)
+- `GET /api/trade/reconcile/spark` scant nu ALLE Bitvavo-coins met balance ≥ €0,10
+- Coins zonder matching pot krijgen status="orphan" met live price + EUR-waarde
+- Was: alleen BCH werd getoond omdat alle Spark pots BCH-EUR markt hebben
+
+### ✅ Testing (iter_44, 100% pass, 16/16)
+- Cluster helpers directe Python-tests: 10 pots × €5,08 + min=€10 → cluster van 2 pots (€10,16)
+- Open/close roundtrip: shared entry + pro-rata netto verdeeld correct
+- Reconcile toont 8 coin-rijen (BCH + 7 orphans) met prijs
+- Delta consistency_ok, +€11,36 winst, 22 pots = 22 tokens
+- Alle iter_43 fixes nog groen (shadow 404, bot/status, ZERO_FILLED guard)
+
+
 ## 2026-07-02 — Trader kritieke bugs vóór productie-redeploy (`v7_trader_stability_001`)
 
 ### 🐛 Bug 1: Dubbele MonitorService voor user-001

@@ -101,7 +101,12 @@ async def reconcile_spark():
         bv = bv_balances.get(coin) or {}
         actual_coin_amount = float(bv.get("available", 0) or 0) + float(bv.get("in_order", 0) or 0)
         bv_price = float(bv.get("price", 0) or 0)
-        actual_eur_value = actual_coin_amount * bv_price
+        # v7_reconcile_all_coins_001 fix: value_eur is al door Bitvavo-adapter uitgerekend
+        # (met ticker-prijs). Gebruik die als bv_price=0 (bv. orphan coins zonder pot).
+        raw_val = float(bv.get("eur_value", bv.get("value_eur", 0)) or 0)
+        if bv_price <= 0 and actual_coin_amount > 0 and raw_val > 0:
+            bv_price = raw_val / actual_coin_amount
+        actual_eur_value = actual_coin_amount * bv_price if bv_price > 0 else raw_val
 
         # Diff
         diff_coin = actual_coin_amount - expected_coin_amount

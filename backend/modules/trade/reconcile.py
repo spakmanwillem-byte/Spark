@@ -233,3 +233,296 @@ async def fix_spark_pot(req: FixPotReq):
         "capital": target.get("capital"),
         "position": target.get("position"),
     }}
+
+
+# =============================================================================
+# v7_reconcile_orphans_001 — Recover coins die op Bitvavo staan maar niet in pots.
+#
+# Achtergrond: fixed sell-bug (v7_zero_filled_guard_001) gaf ooit filled=0 als
+# success terug, waardoor pots gesloten werden terwijl de crypto nog op Bitvavo
+# stond. Dit endpoint scant per user het verschil en repareert:
+#   - PnL positief   → SELL nu + registreer als winst in pot-stats en spark_kasboek
+#   - PnL negatief   → heropen closed pot met correct entry-prijs zodat trader
+#                      volgende cycle opnieuw kan proberen
+#   - PnL ≈ 0 (dust) → skip; te klein om zinvol te reconciliëren
+# =============================================================================
+BITVAVO_FEE_RATE = 0.0025          # Bitvavo taker fee 0.25%
+DUST_THRESHOLD_EUR = 0.10          # onder deze value: skip
+TRADE_HISTORY_DIR = DATA_ROOT / "wallet" / "trade_history"
+
+
+def _compute_net_paid_per_market(user_id: str) -> Dict[str, Dict[str, float]]:
+    """Bereken per market: som(BUY.amount) - som(SELL.effective_amount * price).
+
+    Returns: {market: {"total_buy_eur": X, "total_sell_eur": Y, "net_paid_eur": X-Y}}
+    """
+    fp = TRADE_HISTORY_DIR / f"{user_id}.json"
+    if not fp.exists():
+        return {}
+    data = load_json(fp, default={"trades": []})
+    per_market: Dict[str, Dict[str, float]] = {}
+    for t in data.get("trades", []):
+        if t.get("status") != "filled":
+            continue
+        m = t.get("market")
+        if not m:
+            continue
+        row = per_market.setdefault(m, {"total_buy_eur": 0.0, "total_sell_eur": 0.0, "buys": 0, "sells": 0})
+        action = (t.get("action") or "").upper()
+        if action == "BUY":
+            # amount voor BUY is in EUR (filled_quote)
+            eur = float(t.get("amount", 0) or 0)
+            row["total_buy_eur"] += eur
+            row["buys"] += 1
+        elif action == "SELL":
+            # amount voor SELL is in coin (filled); waarde = filled × price
+            coin_amount = float(t.get("amount", 0) or 0)
+            px = float(t.get("price", 0) or 0)
+            row["total_sell_eur"] += coin_amount * px
+            row["sells"] += 1
+    for m in per_market:
+        per_market[m]["net_paid_eur"] = round(
+            per_market[m]["total_buy_eur"] - per_market[m]["total_sell_eur"], 4
+        )
+    return per_market
+
+
+@router.get("/orphans/{user_id}")
+async def scan_orphans(user_id: str):
+    """Dry-run: toon welke coins op Bitvavo geen matching open pot hebben en of
+    verkopen winst zou opleveren.
+
+    Response.rows[] bevat per coin:
+      coin, bv_amount, bv_value_eur, cur_price_eur
+      net_paid_eur      — historisch EUR uitgegeven aan deze market
+      pnl_eur           — bv_value - net_paid
+      pnl_after_fee_eur — bv_value × (1-fee) - net_paid
+      proposed_action   — "SELL_PROFIT" | "REOPEN_POT" | "SKIP_DUST"
+      matching_closed_pot — pot_id die vrij is voor dit coin
+    """
+    # 1. Bitvavo balance
+    bv_result = fetch_bitvavo_balance(user_id)
+    if not bv_result.get("success"):
+        raise HTTPException(502, f"Bitvavo: {bv_result.get('error', 'onbekend')}")
+    bv_balances = {b.get("symbol", "").upper(): b for b in bv_result.get("balances", [])}
+
+    # 2. Per-market betaalgeschiedenis
+    paid_per_market = _compute_net_paid_per_market(user_id)
+
+    # 3. User's pots (om closed pot te matchen)
+    pot_data = load_json(POTJES_FILE, default={"users": {}})
+    user_pots = pot_data.get("users", {}).get(user_id, {}).get("potjes", [])
+    closed_pots_by_market: Dict[str, List[str]] = {}
+    for p in user_pots:
+        if not p.get("position", {}).get("is_open"):
+            m = p.get("market", "")
+            closed_pots_by_market.setdefault(m, []).append(p.get("id"))
+
+    rows = []
+    for coin, b in bv_balances.items():
+        if coin == "EUR":
+            continue
+        avail = float(b.get("available", 0) or 0)
+        cur_val = float(b.get("value_eur", 0) or 0)
+        cur_price = float(b.get("price", 0) or 0)
+        if avail <= 0 or cur_val < DUST_THRESHOLD_EUR:
+            continue
+        market = f"{coin}-EUR"
+        paid = paid_per_market.get(market, {})
+        net_paid = paid.get("net_paid_eur", 0.0)
+        pnl = round(cur_val - net_paid, 4)
+        pnl_after_fee = round(cur_val * (1 - BITVAVO_FEE_RATE) - net_paid, 4)
+
+        # Bepaal actie
+        if pnl_after_fee >= 0.01:
+            action = "SELL_PROFIT"
+        elif abs(pnl_after_fee) < 0.02:  # binnen 2 cent → dust
+            action = "SKIP_DUST"
+        else:
+            action = "REOPEN_POT"
+
+        matching = closed_pots_by_market.get(market, [])
+        rows.append({
+            "coin": coin,
+            "market": market,
+            "bv_amount": round(avail, 8),
+            "bv_value_eur": round(cur_val, 2),
+            "cur_price_eur": round(cur_price, 6),
+            "total_buy_eur": round(paid.get("total_buy_eur", 0), 2),
+            "total_sell_eur": round(paid.get("total_sell_eur", 0), 2),
+            "net_paid_eur": round(net_paid, 2),
+            "pnl_eur": pnl,
+            "pnl_after_fee_eur": pnl_after_fee,
+            "proposed_action": action,
+            "matching_closed_pot": matching[0] if matching else None,
+            "closed_pots_available": len(matching),
+        })
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "rows": sorted(rows, key=lambda r: -r["pnl_after_fee_eur"]),
+        "totals": {
+            "potential_profit_eur": round(sum(r["pnl_after_fee_eur"] for r in rows if r["proposed_action"] == "SELL_PROFIT"), 2),
+            "underwater_positions_eur": round(sum(r["pnl_after_fee_eur"] for r in rows if r["proposed_action"] == "REOPEN_POT"), 2),
+            "coins_to_sell": sum(1 for r in rows if r["proposed_action"] == "SELL_PROFIT"),
+            "coins_to_reopen": sum(1 for r in rows if r["proposed_action"] == "REOPEN_POT"),
+            "coins_skipped": sum(1 for r in rows if r["proposed_action"] == "SKIP_DUST"),
+        },
+        "note": "Dry-run — geen wijzigingen doorgevoerd. Gebruik POST om uit te voeren.",
+        "ts": _now(),
+    }
+
+
+class RecoverOrphansRequest(BaseModel):
+    only_profit: bool = False   # als true: alleen SELL_PROFIT acties uitvoeren, geen REOPEN
+    coins: Optional[List[str]] = None  # subset, bijv. ["BCH","ETH"] — None = alle
+
+
+@router.post("/orphans/{user_id}")
+async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
+    """Execute reconcile: verkoop coins met winst, heropen pots voor coins met verlies.
+
+    Body:
+      only_profit: bool — als true, alleen verkopen bij winst (skip REOPEN acties)
+      coins: List[str] — beperk tot deze coins, of leeg voor alle
+    """
+    from .monitor import execute_real_trade
+    from . import potjes as potjes_svc
+
+    # Doe eerst scan
+    scan = await scan_orphans(user_id)
+    rows = scan["rows"]
+
+    if req.coins:
+        want = {c.upper() for c in req.coins}
+        rows = [r for r in rows if r["coin"] in want]
+
+    executed = []
+    skipped = []
+    errors = []
+
+    for r in rows:
+        coin = r["coin"]
+        market = r["market"]
+        action = r["proposed_action"]
+
+        if action == "SKIP_DUST":
+            skipped.append({"coin": coin, "reason": "dust (<€0.10 PnL)"})
+            continue
+
+        if action == "REOPEN_POT":
+            if req.only_profit:
+                skipped.append({"coin": coin, "reason": "only_profit=True, verlies-pot skipped"})
+                continue
+            # Heropen matching closed pot met historische entry
+            pot_id = r["matching_closed_pot"]
+            if not pot_id:
+                errors.append({"coin": coin, "error": "geen closed pot beschikbaar om te heropen"})
+                continue
+            pot_data = load_json(POTJES_FILE, default={"users": {}})
+            target = None
+            for p in pot_data.get("users", {}).get(user_id, {}).get("potjes", []):
+                if p.get("id") == pot_id:
+                    target = p
+                    break
+            if not target:
+                errors.append({"coin": coin, "error": f"pot {pot_id} niet gevonden"})
+                continue
+            avg_entry = round(r["net_paid_eur"] / r["bv_amount"], 6) if r["bv_amount"] > 0 else r["cur_price_eur"]
+            target["market"] = market
+            target["position"] = {
+                "is_open": True,
+                "entry_price": avg_entry,
+                "size": r["bv_amount"],
+                "highest_price": max(avg_entry, r["cur_price_eur"]),
+                "trailing_active": False,
+                "entry_time": _now(),
+            }
+            audit = target.setdefault("reconcile_audit", [])
+            audit.append({
+                "ts": _now(),
+                "action": "reopen_orphan",
+                "reason": f"Orphaned {coin} balance reconciled — trader neemt over",
+                "avg_entry_price": avg_entry,
+                "size": r["bv_amount"],
+                "net_paid_eur": r["net_paid_eur"],
+            })
+            save_json(POTJES_FILE, pot_data)
+            executed.append({"coin": coin, "action": "REOPENED", "pot_id": pot_id,
+                             "entry_price": avg_entry, "size": r["bv_amount"]})
+            continue
+
+        # SELL_PROFIT — verkoop nu, registreer als winst
+        if action == "SELL_PROFIT":
+            # 1. Bepaal target pot om winst in te boeken (matching closed pot of eerste vrije)
+            pot_id = r["matching_closed_pot"]
+            pot_data = load_json(POTJES_FILE, default={"users": {}})
+            user_pots_list = pot_data.get("users", {}).get(user_id, {}).get("potjes", [])
+            target = None
+            for p in user_pots_list:
+                if p.get("id") == pot_id:
+                    target = p
+                    break
+            if not target:
+                # Fallback: pak eerste closed pot
+                for p in user_pots_list:
+                    if not p.get("position", {}).get("is_open"):
+                        target = p
+                        break
+            if not target:
+                errors.append({"coin": coin, "error": "geen pot beschikbaar om winst in te boeken"})
+                continue
+
+            # 2. Tijdelijk pot als "open" markeren met de historische entry, dan close_pot() aanroepen
+            #    Dit zorgt dat close_pot de netto-berekening + stats + kasboek-update correct doet.
+            avg_entry = round(r["net_paid_eur"] / r["bv_amount"], 6) if r["bv_amount"] > 0 else r["cur_price_eur"]
+            target["market"] = market
+            target["capital"] = round(r["net_paid_eur"], 4)  # correcte inleg voor P&L
+            target["position"] = {
+                "is_open": True,
+                "entry_price": avg_entry,
+                "size": r["bv_amount"],
+                "highest_price": max(avg_entry, r["cur_price_eur"]),
+                "trailing_active": True,
+                "entry_time": _now(),
+            }
+            save_json(POTJES_FILE, pot_data)
+
+            # 3. Execute REAL sell op Bitvavo — met de nieuwe ZERO_FILLED guard
+            #    execute_real_trade verwacht amount_eur (voor SELL wordt dit intern
+            #    geclamped naar coin balance). We geven de coin-value in EUR mee.
+            sell_result = execute_real_trade(user_id, market, "SELL", r["bv_value_eur"])
+            if not sell_result.get("success"):
+                # Sell mislukt — laat pot open zodat trader het volgende cycle probeert
+                errors.append({
+                    "coin": coin, "error": sell_result.get("error"),
+                    "error_code": sell_result.get("error_code"),
+                    "action": "pot blijft open voor trader-retry",
+                })
+                continue
+
+            # 4. Success — call close_pot voor nette registratie in stats + kasboek
+            real_price = sell_result.get("trade", {}).get("price") or r["cur_price_eur"]
+            close_result = potjes_svc.close_pot(user_id, target["id"], real_price)
+            executed.append({
+                "coin": coin, "action": "SOLD",
+                "pot_id": target["id"],
+                "sold_at_price": real_price,
+                "netto_profit_eur": close_result.get("netto", 0),
+                "trade_id": sell_result.get("trade", {}).get("trade_id"),
+            })
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "executed": executed,
+        "skipped": skipped,
+        "errors": errors,
+        "summary": {
+            "sold": sum(1 for e in executed if e["action"] == "SOLD"),
+            "reopened": sum(1 for e in executed if e["action"] == "REOPENED"),
+            "total_netto_profit_eur": round(sum(e.get("netto_profit_eur", 0) for e in executed if e["action"] == "SOLD"), 2),
+        },
+        "ts": _now(),
+    }

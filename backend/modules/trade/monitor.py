@@ -734,6 +734,26 @@ class MonitorService:
         # v6_buy_cooldown_001 — tijdstempel laatste BUY per markt (voor 5-min cooldown)
         self._last_buy_per_market: Dict[str, datetime] = {}
 
+        # v7_config_persist_on_init_001 — laad config uit state file bij creatie zodat
+        # UI /bot/status altijd de laatste user-configuratie toont (interval, markets,
+        # auto_trade, use_potjes), OOK als de bot momenteel niet draait.
+        # _running blijft False — alleen expliciet start()/resume_if_was_running() zet 'm aan.
+        if user_id == "user-001":
+            try:
+                if MONITOR_STATE_FILE.exists():
+                    with open(MONITOR_STATE_FILE) as f:
+                        st = json.load(f)
+                    self._interval = int(st.get("interval") or self._interval)
+                    self._market = st.get("market") or self._market
+                    self._markets = list(st.get("markets") or [self._market])
+                    self._candle_interval = st.get("candle_interval") or self._candle_interval
+                    self._auto_trade = bool(st.get("auto_trade", self._auto_trade))
+                    self._trade_amount = float(st.get("trade_amount") or self._trade_amount)
+                    self._use_mock = bool(st.get("use_mock", self._use_mock))
+                    self._use_potjes = bool(st.get("use_potjes", self._use_potjes))
+            except Exception as _ex:
+                logger.warning(f"Config init-load faalde voor {user_id}: {_ex}")
+
     def start(self, interval: int = 60, market: str = "BCH-EUR",
               candle_interval: str = "1h", user_id: Optional[str] = None,
               auto_trade: bool = False, trade_amount: float = 5.0, use_mock: bool = False,
@@ -1178,7 +1198,15 @@ def get_monitor() -> MonitorService:
 
 
 def get_user_monitor(user_id: str) -> MonitorService:
-    """v4_per_user_bot_001: haal of maak monitor voor specifieke user."""
+    """v4_per_user_bot_001: haal of maak monitor voor specifieke user.
+
+    v7_legacy_alias_001 — user-001 is de legacy singleton (`_monitor`). Return altijd
+    dezelfde instance zodat status-endpoints en de echt-draaiende thread consistent zijn.
+    Voorheen: get_user_monitor("user-001") maakte een 2e instance in _registry met
+    defaults → UI zag "running:false" terwijl de echte monitor draaide.
+    """
+    if user_id == "user-001":
+        return _monitor
     with _registry_lock:
         if user_id not in _registry:
             _registry[user_id] = MonitorService(user_id=user_id)

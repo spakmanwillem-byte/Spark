@@ -753,24 +753,42 @@ async def redistribute_potjes(user_id: str, body: UpdateMarketsBody = None):
 
 
 # v6_dynamic_pot_split_001 — Rebalance potjes vanaf actuele Bitvavo balance
+# v7_rebalance_smart_001 — Extended met token-count leidend + EUR-liquide meetellen
 class RebalanceBody(BaseModel):
     coins: Optional[List[str]] = None       # default: alle 6 watchlist coins
-    pot_size: float = 10.0                  # vaste schijf
-    trader_user_id: str = "user-001"        # krijgt de €10 trade-pots
-    anchor_user_id: str = "user-000"        # krijgt de restjes als locked anchor
+    pot_size: float = 10.0                  # legacy vaste schijf (modus A)
+    trader_user_id: str = "user-001"        # krijgt de trade-pots
+    anchor_user_id: str = "user-000"        # legacy — niet meer gebruikt voor anchors (v7)
+    # v7 smart mode
+    target_pot_count: Optional[int] = None  # als gezet → smart mode: exact N pots
+    include_eur_liquide: bool = True        # EUR-saldo op Bitvavo meetellen
+    default_market: str = "BCH-EUR"         # markt voor EUR-only pots in smart mode
 
 
 @router.post("/potjes/rebalance-from-bitvavo")
 async def rebalance_from_bitvavo_endpoint(body: RebalanceBody = RebalanceBody()):
-    """Herbalanceer potjes vanaf actuele Bitvavo coin-waardes.
-    Regel: per coin → trader krijgt floor(value/pot_size) × €pot_size aan vrije
-    trade-pots, anchor krijgt het restje (< €pot_size) als locked anchor.
-    Open posities blijven ongemoeid. Idempotent.
+    """Herbalanceer potjes vanaf actuele Bitvavo balance.
+
+    Twee modi:
+      A. Legacy (pot_size vast, target_pot_count=None):
+         Per coin → floor(value/pot_size) pots. EUR wordt genegeerd.
+         Coins <€pot_size geven 0 pots.
+
+      B. Smart v7 (target_pot_count=N):
+         Exact N pots aangemaakt. pot_size = (som(coins) + eur) / N.
+         Coins met genoeg waarde krijgen coin-pots, rest wordt EUR-only op default_market.
+         Werkt ook als je alleen EUR liquide hebt.
+
+    Aanbevolen: token-count leidend → `target_pot_count = aantal ROAR tokens`.
+    Open posities blijven ongemoeid.
     """
     from .potjes import rebalance_from_bitvavo
     return rebalance_from_bitvavo(
         coins=body.coins, pot_size=body.pot_size,
         trader_user_id=body.trader_user_id, anchor_user_id=body.anchor_user_id,
+        include_eur_liquide=body.include_eur_liquide,
+        target_pot_count=body.target_pot_count,
+        default_market=body.default_market,
     )
 
 

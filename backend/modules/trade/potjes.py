@@ -389,22 +389,33 @@ def ensure_spark_trade_pots(markets: List[str], pots_per_coin: int = 2) -> Dict:
 def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
                             pot_size: float = 10.0,
                             trader_user_id: str = "user-001",
-                            anchor_user_id: str = "user-000") -> Dict:
-    """Reset potje-structuur op basis van actuele Bitvavo coin-waardes.
+                            anchor_user_id: str = "user-000",
+                            include_eur_liquide: bool = True,
+                            target_pot_count: Optional[int] = None,
+                            default_market: str = "BCH-EUR") -> Dict:
+    """Reset potje-structuur op basis van actuele Bitvavo waarde.
 
-    Regel per coin:
-      - n_pots = floor(coin_value_eur / pot_size)
-      - Trader (Willem) krijgt n_pots × €pot_size aan vrije trade-potjes
-      - Anchor (Spark) krijgt 1 locked anchor met het restbedrag (value - n_pots × pot_size)
+    Twee modi:
+      A. Vast pot_size (legacy) — per coin: n = floor(value/pot_size) pots.
+         Coins < pot_size geven 0 pots. EUR-saldo genegeerd.
 
-    Open posities blijven ongemoeid — die tellen niet mee in de herverdeling
-    (hun coin-waarde zit al "vast" in een lopende trade).
+      B. Token-count leidend (aanbevolen, v7):
+         set `target_pot_count=N` → exact N pots verdeeld over Bitvavo saldo.
+         - pot_size dynamisch = (som(coin_values) + eur_avail) / N
+         - Coins met genoeg waarde krijgen hun eigen pots
+         - Overige pots worden EUR-only (klaar voor trade-cycle) op default_market
+         - Werkt ook als je alleen EUR liquide hebt en 0 coins
 
-    Idempotent: kan na elke trade/storting opnieuw aangeroepen worden.
+    Args:
+      include_eur_liquide: als True (v7 default), EUR-saldo telt mee in totale waarde.
+      target_pot_count: v7 mode. Als None → legacy per-coin gedrag.
+      default_market: markt voor "EUR-only" pots (die krijgen dus geen coin, alleen budget).
+
+    Open posities blijven ongemoeid.
     """
     from modules.trade.monitor import fetch_bitvavo_balance
 
-    # 1) Haal coin-waardes op via Spark's keys
+    # 1) Haal balances (coin + EUR) op via Spark's keys
     bv = fetch_bitvavo_balance(anchor_user_id)
     if not bv.get("success"):
         return {"success": False, "error": f"Bitvavo balance fetch faalde: {bv.get('error')}"}
@@ -414,6 +425,11 @@ def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
     for sym in target_coins:
         m = next((b for b in bv["balances"] if b["symbol"] == sym), None)
         coin_values[sym] = round(m["value_eur"], 2) if m else 0.0
+
+    eur_liquide = 0.0
+    if include_eur_liquide:
+        eur_entry = next((b for b in bv["balances"] if b["symbol"] == "EUR"), None)
+        eur_liquide = float(eur_entry.get("available", 0) if eur_entry else 0)
 
     # 2) Bouw nieuwe potjes-state
     data = _load(trader_user_id)
@@ -440,10 +456,121 @@ def rebalance_from_bitvavo(coins: Optional[List[str]] = None,
 
     now = datetime.now(timezone.utc).isoformat()
     trader_pots: List[Dict] = list(open_trader_pots)  # behoud
-    anchor_pots: List[Dict] = list(open_anchor_pots)  # behoud (open posities die legacy anchor waren)
+    anchor_pots: List[Dict] = list(open_anchor_pots)  # behoud
     t_idx = max((p.get("index", -1) for p in trader_pots), default=-1) + 1
     summary = []
 
+    # =========================================================================
+    # MODUS B — Token-count leidend (v7_rebalance_smart_001)
+    #
+    # Correcte semantiek: pot_size = aankoopprijs per token (default anchor €5,08).
+    # NIET total_bitvavo/N — dat zou het hele Bitvavo saldo aan één user toewijzen
+    # terwijl dat de systeem-treasury is (visible in /api/trade/delta).
+    # =========================================================================
+    if target_pot_count is not None and target_pot_count > 0:
+        n_existing_open = len(open_trader_pots)
+        n_to_create = max(0, target_pot_count - n_existing_open)
+
+        # pot_size default = anchor prijs (€5,08). User kan overschrijven via body.pot_size.
+        # Dit is de investering per pot, NIET marktwaarde.
+        dyn_pot_size = float(pot_size) if pot_size and pot_size > 0 else 5.08
+        total_needed = n_to_create * dyn_pot_size
+
+        # Beschikbaar = coin-values (excl open) + EUR liquide (indien meetellen)
+        free_coin_value = sum(
+            max(0, coin_values.get(sym, 0) - open_value_per_coin.get(sym, 0))
+            for sym in target_coins
+        )
+        total_available = round(free_coin_value + eur_liquide, 2)
+
+        if total_needed > total_available + 0.01:
+            return {
+                "success": False,
+                "error": (
+                    f"Onvoldoende saldo: {n_to_create} pots × €{dyn_pot_size:.2f} = €{total_needed:.2f} nodig, "
+                    f"maar Bitvavo heeft slechts €{total_available:.2f} (waarvan coins €{free_coin_value:.2f}, "
+                    f"EUR €{eur_liquide:.2f}). Verlaag pot_size of stort meer op Bitvavo."
+                ),
+                "total_needed": total_needed,
+                "total_available": total_available,
+            }
+
+        # 1. Coin-gebonden pots: hoeveel per coin krijgen we?
+        pots_per_coin: Dict[str, int] = {}
+        remaining_slots = n_to_create
+        for sym in target_coins:
+            free_c = max(0, coin_values.get(sym, 0) - open_value_per_coin.get(sym, 0))
+            n = min(int(free_c // dyn_pot_size), remaining_slots)
+            if n > 0:
+                pots_per_coin[sym] = n
+                remaining_slots -= n
+
+        # 2. Maak coin-pots aan
+        for sym, n in pots_per_coin.items():
+            market = f"{sym}-EUR"
+            for _ in range(n):
+                trader_pots.append({
+                    "id": f"pot-{t_idx+1:03d}", "index": t_idx,
+                    "capital": dyn_pot_size, "max_size": max(dyn_pot_size * 5, 50.0),
+                    "pot_locked": False, "lock_reason": None,
+                    "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                                 "trailing_active": False, "entry_time": None},
+                    "market": market,
+                    "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                    "created_at": now, "last_action": None,
+                    "source": "rebalance_smart_coin",
+                })
+                t_idx += 1
+            summary.append({"coin": sym, "bitvavo_value": coin_values.get(sym, 0),
+                            "trade_pots_created": n, "pot_size": dyn_pot_size})
+
+        # 3. Resterende slots → EUR-only pots op default_market
+        for _ in range(remaining_slots):
+            trader_pots.append({
+                "id": f"pot-{t_idx+1:03d}", "index": t_idx,
+                "capital": dyn_pot_size, "max_size": max(dyn_pot_size * 5, 50.0),
+                "pot_locked": False, "lock_reason": None,
+                "position": {"is_open": False, "entry_price": None, "highest_price": None,
+                             "trailing_active": False, "entry_time": None},
+                "market": default_market,
+                "stats": {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0},
+                "created_at": now, "last_action": None,
+                "source": "rebalance_smart_eur",
+            })
+            t_idx += 1
+        if remaining_slots > 0:
+            summary.append({"coin": "EUR", "eur_liquide": eur_liquide,
+                            "trade_pots_created": remaining_slots, "pot_size": dyn_pot_size,
+                            "market": default_market})
+
+        # 4. Save trader state
+        data["users"][trader_user_id]["potjes"] = trader_pots
+        _save(data)
+
+        # 5. Rest op Bitvavo = systeem-treasury (zichtbaar via /api/trade/delta)
+        treasury_overschot = round(total_available - total_needed, 2)
+
+        return {"success": True, "mode": "smart_token_count",
+                "target_pot_count": target_pot_count,
+                "existing_open_kept": n_existing_open,
+                "new_pots_created": n_to_create,
+                "pot_size": dyn_pot_size,
+                "total_needed": total_needed,
+                "total_available_on_bitvavo": total_available,
+                "eur_liquide": eur_liquide,
+                "free_coin_value": free_coin_value,
+                "treasury_overschot_eur": treasury_overschot,
+                "treasury_note": (
+                    f"€{treasury_overschot:.2f} blijft op Bitvavo bovenop pot-capital "
+                    f"(zichtbaar in /api/trade/delta als 'zweeft'). Dit is systeem-treasury "
+                    "of onrealiseerde token-winst."
+                ),
+                "coins_summary": summary,
+                "trader_user_id": trader_user_id}
+
+    # =========================================================================
+    # MODUS A — Legacy vast pot_size (behouden voor backwards-compat)
+    # =========================================================================
     for sym in target_coins:
         market = f"{sym}-EUR"
         bv_value = coin_values.get(sym, 0)

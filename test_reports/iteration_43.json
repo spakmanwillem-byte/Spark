@@ -1,0 +1,39 @@
+{
+  "summary": "Spark Core 2.0 trader bugfix verificatie voor productie-redeploy — alle 15 tests slagen (100%). Alle 5 kritieke fixes bevestigd: (1) MonitorService singleton voor user-001 consistent tussen calls, (2) __init__ laadt config uit monitor_state.json, (3) ZERO_FILLED guard aanwezig en correct geplaatst vóór trade-registratie, (4) /api/trade/reconcile/orphans GET+POST endpoints werken en respecteren only_profit filter, (5) 10 unlocked pots met €5.08 capital voor beide users, delta consistency_ok, smart rebalance werkt inclusief insufficient-funds guard. Shadow endpoints blijven 404. Backend logs schoon zonder tracebacks.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/trade/delta", "issue": "test_v7_treasury_delta.py (vorige iteratie) faalt op 2 tests door schema-drift: verwacht 'bitvavo_actual_eur' key en 'zweeft_op_bitvavo' status, huidige respons gebruikt andere keys en status 'winst'. Endpoint zelf werkt (consistency_ok=true). Alleen tests-verwachtingen out-of-sync met v7-code."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter43_trader_prefixes.py",
+    "/app/test_reports/pytest/iter43_results.xml"
+  ],
+  "action_items": [
+    "Optioneel: update /app/backend/tests/test_v7_treasury_delta.py om nieuwe delta-schema keys ('market_value_eur' i.p.v. 'bitvavo_actual_eur') en status 'winst' te accepteren — het endpoint werkt correct, alleen oude testverwachtingen zijn achterhaald.",
+    "Klaar voor productie-redeploy — geen blockers gevonden."
+  ],
+  "critical_code_review_comments": [
+    "MonitorService is 1461 regels — nog steeds boven 700-regel drempel; execute_real_trade (regel ~370-500) is een goede candidate om te splitsen naar aparte module (bijv. modules/trade/bitvavo_orders.py). ZERO_FILLED guard blijft in tact bij extractie.",
+    "reconcile.py recover_orphans POST endpoint executeert echte Bitvavo verkopen zonder confirmation-token — overweeg een X-Confirm header of dry_run:false expliciete flag om accidental production trigger te voorkomen (nu volstaat een simpele curl POST om echte crypto te verkopen).",
+    "get_user_monitor voor user-001 returned `_monitor` module-level singleton. Correct nu, maar impliceert dat andere users een NIEUWE instance krijgen met defaults (interval=60, market=BCH-EUR) zonder state-file load. Als user-002/user-003 ook persistente config nodig hebben, moet de state-loading logica uit __init__ generieker (per-user state files).",
+    "potjes.rebalance_from_bitvavo smart-mode returned success:false met status 200 bij insufficient-funds — semantiek prima voor UI, maar overweeg 422 Unprocessable Entity voor duidelijker HTTP semantics.",
+    "TrapVoor volgende sessie: DUST_THRESHOLD_EUR=0.10 en 2-cent tolerance in scan_orphans zijn hardcoded — zou naar config file mogen voor tuning zonder redeploy."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter43_trader_prefixes.py"
+  ],
+  "success_rate": {"backend": "100% (15/15)", "frontend": "not_tested"},
+  "test_credentials": "n/a — publieke API endpoints",
+  "seed_data_creation": "geen — gebruikte live state (10 pots user-001, 10 pots user-000, Bitvavo €131 liquide + dust coins)",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iter43 test file /app/backend/tests/test_iter43_trader_prefixes.py dekt de 5 v7-fixes: singleton status, init-config-load, ZERO_FILLED guard code-check, reconcile orphans GET+POST met safe filter (coins=['NONEXISTENTCOIN']), smart rebalance succes+insufficient. NIET GEBRUIKT: POST /api/trade/reconcile/orphans/user-001 met echte coins — dit verkoopt echt op Bitvavo. Test suite is idempotent: rebalance-test roept endpoint 2× (success + insufficient) maar target_pot_count=10 = huidig aantal → geen nieuwe pots. Backend logs schoon, geen tracebacks. Bitvavo state: user-001 heeft 10 pots @ €5.08, user-000 idem, geen locked. Delta consistency_ok=true, status momenteel 'winst' (niet meer 'zweeft_op_bitvavo' zoals in iter42).",
+  "rca of the issue": "n/a — geen bugs gevonden; alle 5 pre-prod fixes zijn correct geïmplementeerd en gedragen zich zoals beloofd in de review-request."
+}

@@ -577,3 +577,221 @@ async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
         },
         "ts": _now(),
     }
+
+
+
+# =============================================================================
+# v7_bitvavo_state_sync_001 — Bidirectionele sync tussen pots en Bitvavo.
+#
+# Probleem: pots kunnen "spook" zijn (claim coin die Bitvavo niet meer heeft,
+# bijv. omdat oude buggy SELL Bitvavo wel verkocht maar pot niet sloot).
+# En orphans: coins op Bitvavo zonder matching open pot.
+#
+# Deze sync:
+#   1. Voor elke OPEN pot: check of Bitvavo genoeg coin heeft (met 5% tolerance)
+#      - Als NEE → "spook" → admin-sluit met exit=entry (netto=0)
+#   2. Voor elke ORPHAN coin: check of er een closed pot beschikbaar is
+#      - Als JA → heropen pot met echte Bitvavo size + avg entry uit trade_history
+# =============================================================================
+
+
+class BitvavoSyncRequest(BaseModel):
+    execute: bool = False              # v7_orphan_safety_001 — MOET expliciet true
+    close_spooks: bool = True          # sluit pots wier coin niet meer op Bitvavo staat
+    reopen_orphans: bool = True        # heropen closed pots voor Bitvavo orphans
+
+
+@router.post("/potjes/{user_id}/sync-with-bitvavo")
+async def sync_potjes_with_bitvavo(user_id: str, req: BitvavoSyncRequest):
+    """Bidirectionele sync: sluit spook-pots + heropen orphans.
+
+    ⚠️ Vereist `execute:true` — anders dry-run preview.
+
+    Response:
+      would_close_spooks[]  — pots die administratief gesloten moeten worden
+      would_reopen_orphans[]— orphan coins die naar closed pots kunnen
+      executed_closes[]     — daadwerkelijk gesloten (bij execute=true)
+      executed_reopens[]    — daadwerkelijk heropend (bij execute=true)
+    """
+    # 1. Bitvavo balances
+    bv_result = fetch_bitvavo_balance(user_id)
+    if not bv_result.get("success"):
+        # Fallback: user-000 keys (Spark) — Willem heeft toch geen eigen keys
+        bv_result = fetch_bitvavo_balance("user-000")
+        if not bv_result.get("success"):
+            raise HTTPException(502, f"Bitvavo: {bv_result.get('error')}")
+    bv_balances = {b.get("symbol", "").upper(): b for b in bv_result.get("balances", [])}
+
+    pot_data = load_json(POTJES_FILE, default={"users": {}})
+    user_pots = pot_data.get("users", {}).get(user_id, {}).get("potjes", [])
+
+    # === Fase 1: identificeer spook-pots ===
+    would_close = []
+    for p in user_pots:
+        pos = p.get("position") or {}
+        if not pos.get("is_open"):
+            continue
+        market = p.get("market") or ""
+        coin = market.split("-")[0].upper()
+        entry = pos.get("entry_price") or 0
+        capital = float(p.get("capital", 0) or 0)
+        expected_size = (capital / entry) if entry > 0 else 0
+
+        bv = bv_balances.get(coin) or {}
+        actual = float(bv.get("available", 0) or 0) + float(bv.get("in_order", 0) or 0)
+
+        # 5% tolerance voor rounding
+        if actual < expected_size * 0.95:
+            would_close.append({
+                "pot_id": p["id"], "market": market, "coin": coin,
+                "entry_price": entry, "expected_coin_size": round(expected_size, 8),
+                "actual_bitvavo_coin": round(actual, 8),
+                "reason": (
+                    f"Pot claimt {expected_size:.6f} {coin} maar Bitvavo heeft {actual:.6f}. "
+                    "Coin al verkocht buiten pot-state om."
+                ),
+            })
+
+    # === Fase 2: identificeer orphans die terug kunnen naar closed pots ===
+    from_market_paid = _compute_net_paid_per_market(user_id)
+    closed_pots = [p for p in user_pots if not p.get("position", {}).get("is_open")]
+    # v7_bitvavo_state_sync_002 — round-robin over closed pots zodat elke orphan
+    # zijn eigen pot krijgt (was: iedereen kreeg pot-001).
+    assigned_pot_ids: set = set()
+
+    would_reopen = []
+    for coin, bv in bv_balances.items():
+        if coin == "EUR":
+            continue
+        actual = float(bv.get("available", 0) or 0) + float(bv.get("in_order", 0) or 0)
+        val_eur = float(bv.get("value_eur", 0) or 0)
+        if actual <= 0 or val_eur < DUST_THRESHOLD_EUR:
+            continue
+        # Skip als reeds matching open pot bestaat
+        has_open = any(
+            (p.get("position", {}).get("is_open")
+             and (p.get("market", "").split("-")[0].upper() == coin))
+            for p in user_pots
+        )
+        if has_open:
+            continue
+        # Zoek een closed pot die nog niet is toegewezen. Prefer matching market.
+        target_pot = None
+        for p in closed_pots:
+            if p["id"] in assigned_pot_ids:
+                continue
+            if p.get("market") == f"{coin}-EUR":
+                target_pot = p
+                break
+        if not target_pot:
+            for p in closed_pots:
+                if p["id"] not in assigned_pot_ids:
+                    target_pot = p
+                    break
+        if not target_pot:
+            continue  # geen vrije pots meer
+        assigned_pot_ids.add(target_pot["id"])
+        market = f"{coin}-EUR"
+        paid = from_market_paid.get(market, {})
+        net_paid = paid.get("net_paid_eur", 0)
+        bv_price = float(bv.get("price", 0) or 0)
+        if bv_price <= 0 and actual > 0 and val_eur > 0:
+            bv_price = val_eur / actual
+        # avg_entry: eerst uit BUY-history, anders current Bitvavo price
+        if net_paid > 0 and actual > 0:
+            avg_entry = round(net_paid / actual, 8)
+            # v7_bitvavo_state_sync_003 — Sanity: als historische avg_entry >3× huidige
+            # prijs, dan is trade_history stale (oude BUYs waarvan meeste al verkocht).
+            # Gebruik current price om trailing-logic niet te misleiden.
+            if bv_price > 0 and avg_entry > bv_price * 3:
+                avg_entry = bv_price
+        else:
+            avg_entry = bv_price  # fallback: geen BUY-log, gebruik huidige prijs
+        if avg_entry <= 0:
+            continue  # kan niet reopen zonder valide entry_price
+        would_reopen.append({
+            "pot_id": target_pot["id"], "coin": coin, "market": market,
+            "bitvavo_coin_amount": round(actual, 8),
+            "bitvavo_value_eur": round(val_eur, 2),
+            "avg_entry_price": avg_entry,
+            "net_paid_eur": round(net_paid, 2),
+        })
+
+    # === Dry-run mode ===
+    if not req.execute:
+        return {
+            "success": True, "mode": "DRY_RUN",
+            "message": "⚠️ Dry-run: stuur {\"execute\": true} om spook-close + orphan-reopen uit te voeren.",
+            "would_close_spooks": would_close if req.close_spooks else [],
+            "would_reopen_orphans": would_reopen if req.reopen_orphans else [],
+            "totals": {
+                "spooks_to_close": len(would_close),
+                "orphans_to_reopen": len(would_reopen),
+            },
+            "ts": _now(),
+        }
+
+    # === Execute mode ===
+    executed_closes = []
+    executed_reopens = []
+    now_iso = _now()
+
+    if req.close_spooks:
+        for spook in would_close:
+            for p in user_pots:
+                if p["id"] == spook["pot_id"]:
+                    entry = spook["entry_price"]
+                    # Sluit administratief zonder Bitvavo call
+                    p["position"] = {
+                        "is_open": False, "entry_price": None, "highest_price": None,
+                        "trailing_active": False, "entry_time": None,
+                    }
+                    p.setdefault("stats", {}).setdefault("trades", 0)
+                    p["stats"]["trades"] += 1  # tellen als admin-close-cycle
+                    p["last_action"] = f"ADMIN CLOSE (spook — coin al weg) @ €{entry}"
+                    p.setdefault("reconcile_audit", []).append({
+                        "ts": now_iso, "action": "spook_close",
+                        "reason": spook["reason"],
+                        "entry_price": entry,
+                    })
+                    executed_closes.append(spook)
+                    break
+
+    if req.reopen_orphans:
+        for orph in would_reopen:
+            for p in user_pots:
+                if p["id"] == orph["pot_id"]:
+                    if p.get("position", {}).get("is_open"):
+                        continue  # net gesloten in vorige stap, nu weer heropen
+                    p["market"] = orph["market"]
+                    p["position"] = {
+                        "is_open": True,
+                        "entry_price": orph["avg_entry_price"],
+                        "highest_price": orph["avg_entry_price"],
+                        "trailing_active": False,
+                        "entry_time": now_iso,
+                        "amount_eur": orph["bitvavo_value_eur"],
+                        "size": orph["bitvavo_coin_amount"],
+                        "cluster_id": None,  # legacy single-pot reopen
+                    }
+                    p["last_action"] = f"ADMIN REOPEN (orphan sync) {orph['coin']} @ €{orph['avg_entry_price']}"
+                    p.setdefault("reconcile_audit", []).append({
+                        "ts": now_iso, "action": "orphan_reopen",
+                        "coin": orph["coin"],
+                        "bitvavo_size": orph["bitvavo_coin_amount"],
+                        "avg_entry": orph["avg_entry_price"],
+                    })
+                    executed_reopens.append(orph)
+                    break
+
+    save_json(POTJES_FILE, pot_data)
+    return {
+        "success": True, "mode": "EXECUTED",
+        "executed_closes": executed_closes,
+        "executed_reopens": executed_reopens,
+        "summary": {
+            "spooks_closed": len(executed_closes),
+            "orphans_reopened": len(executed_reopens),
+        },
+        "ts": now_iso,
+    }

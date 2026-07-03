@@ -58,6 +58,21 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 36 (2026-07-02, laat) — Bitvavo state-sync
+
+### ✅ Nieuw
+- **Spook-pot detectie** — pots die open claimen maar coin al weg is op Bitvavo → admin-close
+- **Orphan-reopen** — Bitvavo coins zonder matching pot → heropen closed pot met echte size
+- **`POST /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo`** — dry-run default, `{execute:true}` voor uitvoering
+- Round-robin over closed pots + entry-price sanity check (>3× current = fallback naar current)
+
+### 🎯 Post-deploy stap voor Willem (productie)
+1. Redeploy naar productie
+2. `POST /api/trade/reconcile/potjes/user-001/sync-with-bitvavo {}` → zie 10 spooks + N orphans
+3. `POST` met `{"execute": true}` → alle spookpots dicht + orphans terug in pots
+4. Trader draait vanaf hier met correcte state
+
+
 ## 🔎 REALITY CHECK — Sessie 35 (2026-07-02, avond) — Pot clustering + reconcile all-coins
 
 ### ✅ Nieuw in deze sessie

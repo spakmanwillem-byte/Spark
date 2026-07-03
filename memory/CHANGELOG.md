@@ -2,6 +2,23 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-02c — Bitvavo state-sync endpoint (`v7_bitvavo_state_sync_001`)
+
+### 🔧 Nieuw: `POST /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo`
+- **Bidirectionele reconcile** tussen pots en Bitvavo:
+  - **Spook-close**: pots die "open" claimen maar Bitvavo heeft die coin niet meer → admin-sluit (geen Bitvavo call, is al verkocht buiten pot om)
+  - **Orphan-reopen**: coins op Bitvavo zonder matching open pot → heropen closed pot met echte size + avg entry
+- Safety: `execute:true` verplicht — anders dry-run preview
+- **Round-robin** over closed pots — elke orphan krijgt eigen pot
+- **Entry-price sanity check**: als historische avg > 3× current price → gebruik current (voorkomt scheve trailing-logic bij legacy dust)
+- Bedoeld voor deze situatie: oude buggy SELLs (pre-`v7_zero_filled_guard_001`) sloten Bitvavo wel maar pot niet → "spookpots"
+
+### Deploy verify na redeploy
+1. `GET /api/trade/reconcile/spark` — bekijk alle coins
+2. `POST /api/trade/reconcile/potjes/user-001/sync-with-bitvavo {}` — dry-run
+3. Als lijst klopt: `{execute:true}` om écht sync te doen
+
+
 ## 2026-07-02b — Pot clustering + reconcile all-coins (`v7_pot_cluster_001`)
 
 ### ✨ Nieuw: Cluster-logica voor trader

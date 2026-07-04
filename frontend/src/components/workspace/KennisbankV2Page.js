@@ -1232,7 +1232,40 @@ function MediaSection({ card, currentLade, onUpdated }) {
   const [recording, setRecording] = useState(false);
   const [uploadingVoice, setUploadingVoice] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  // v7_media_dedup_001 — Image picker uit archief
+  const [showImagePicker, setShowImagePicker] = useState(false);
+  const [archiveImages, setArchiveImages] = useState([]);
+  const [loadingArchive, setLoadingArchive] = useState(false);
+  const [archiveSearch, setArchiveSearch] = useState('');
+
+  useEffect(() => {
+    if (!showImagePicker) return;
+    setLoadingArchive(true);
+    fetch(`${API}/api/kb/v2/media/archive/list?limit=500`)
+      .then(r => r.json())
+      .then(d => setArchiveImages(d.items || []))
+      .catch(() => setArchiveImages([]))
+      .finally(() => setLoadingArchive(false));
+  }, [showImagePicker]);
+
   const [err, setErr] = useState('');
+  const linkArchiveImage = async (archive_id) => {
+    try {
+      const r = await fetch(`${API}/api/kb/v2/media/image/link-existing`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ card_id: card.id, archive_id, lade: currentLade || undefined, user_id: 'user-000' }),
+      }).then(x => x.json());
+      if (r.success && r.image_url) {
+        setShowImagePicker(false);
+        onUpdated && onUpdated();
+      } else {
+        setErr(r.error || 'Kon foto niet koppelen');
+      }
+    } catch (e) {
+      setErr(e.message);
+    }
+  };
   // v6_kbv2_media_audio2_001 — 2e audio
   const [extraKind, setExtraKind] = useState('spraak'); // 'spraak' = transcribe, 'geluid' = alleen opslaan
   const [recordingExtra, setRecordingExtra] = useState(false);
@@ -1504,6 +1537,11 @@ function MediaSection({ card, currentLade, onUpdated }) {
             className="px-2 py-1 text-xs rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 disabled:opacity-50 flex items-center gap-1.5">
             <ImageIcon className="w-3.5 h-3.5" /> {uploadingImage ? 'Uploaden...' : 'Foto toevoegen'}
           </button>
+          <button data-testid="kbv2-image-picker" onClick={() => setShowImagePicker(true)}
+            className="px-2 py-1 text-xs rounded-md bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25 flex items-center gap-1.5"
+            title="Kies uit bestaande foto's in archief (bespaart opslag)">
+            <ImageIcon className="w-3.5 h-3.5" /> Uit archief
+          </button>
           {(media.image_urls || []).filter(Boolean).length > 0 && (
             <span className="text-[10px] text-slate-500">{media.image_urls.filter(Boolean).length} foto's</span>
           )}
@@ -1528,6 +1566,89 @@ function MediaSection({ card, currentLade, onUpdated }) {
       </div>
 
       {err && <p className="text-[10px] text-red-400">{err}</p>}
+
+      {/* v7_media_dedup_001 — Image Archive Picker Modal */}
+      {showImagePicker && (
+        <div
+          data-testid="kbv2-image-picker-modal"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setShowImagePicker(false)}
+        >
+          <div
+            className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-slate-800">
+              <div>
+                <h3 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-cyan-400" /> Kies uit archief
+                </h3>
+                <p className="text-[10px] text-slate-500 mt-0.5">Hergebruik een bestaande foto — bespaart opslag (geen re-upload).</p>
+              </div>
+              <button
+                data-testid="kbv2-image-picker-close"
+                onClick={() => setShowImagePicker(false)}
+                className="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="p-3 border-b border-slate-800">
+              <input
+                data-testid="kbv2-image-picker-search"
+                type="text"
+                placeholder="Zoek op naam..."
+                value={archiveSearch}
+                onChange={(e) => setArchiveSearch(e.target.value)}
+                className="w-full bg-slate-800 border border-slate-700 rounded-md px-3 py-1.5 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-cyan-500"
+              />
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4">
+              {loadingArchive ? (
+                <p className="text-xs text-slate-500 text-center py-8">Archief laden...</p>
+              ) : archiveImages.length === 0 ? (
+                <p className="text-xs text-slate-500 text-center py-8">Geen foto's in archief.</p>
+              ) : (
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                  {archiveImages
+                    .filter(a => !archiveSearch || (a.original_name || '').toLowerCase().includes(archiveSearch.toLowerCase()))
+                    .map((a) => (
+                      <button
+                        key={a.id}
+                        data-testid={`kbv2-image-picker-item-${a.id}`}
+                        onClick={() => linkArchiveImage(a.id)}
+                        className="group relative aspect-square rounded-lg overflow-hidden border border-slate-700 hover:border-cyan-400 transition-colors bg-slate-800"
+                        title={`${a.original_name || a.id} — hergebruikt ${a.reuse_count || 0}x`}
+                      >
+                        <img
+                          src={API + a.url}
+                          alt={a.original_name || a.id}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        {(a.reuse_count || 0) > 0 && (
+                          <span className="absolute top-1 right-1 text-[9px] bg-cyan-500/80 text-white px-1.5 py-0.5 rounded-full font-semibold">
+                            {a.reuse_count}x
+                          </span>
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-[9px] text-white truncate">{a.original_name || a.id}</p>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            <div className="p-3 border-t border-slate-800 text-[10px] text-slate-500 flex items-center justify-between">
+              <span>{archiveImages.length} foto's beschikbaar</span>
+              <span className="text-cyan-400">Klik een foto om te koppelen</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

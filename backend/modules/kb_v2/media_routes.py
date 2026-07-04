@@ -17,10 +17,11 @@ import os
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Dict, List
 
 from dotenv import load_dotenv
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
+from pydantic import BaseModel
 
 from modules.core.spark_logger import traced
 from modules.core.storage import load_json, save_json
@@ -50,12 +51,51 @@ def _save_to_system_archive(
     extra_meta: Optional[dict] = None,
 ) -> dict:
     """Schrijf bytes naar system_archive/{category}/ + voeg index-entry toe.
-    Tagt automatisch met 'kbv2' + 'kbv2_card_<id>' zodat UI kan filteren."""
+    Tagt automatisch met 'kbv2' + 'kbv2_card_<id>' zodat UI kan filteren.
+
+    v7_media_dedup_001 — Content-hash dedup:
+    Als exact dezelfde bytes al bestaan (md5 match), hergebruik dan de bestaande
+    file + entry. We voegen alleen `linked_card_id` extra tag toe zodat het
+    _index.json weet dat meerdere kaarten deze afbeelding delen.
+    """
+    import hashlib as _hashlib
     SA_DIR.mkdir(parents=True, exist_ok=True)
     (SA_DIR / category).mkdir(parents=True, exist_ok=True)
 
+    content_hash = _hashlib.md5(content).hexdigest()
+    idx = load_json(SA_INDEX, default={"files": []})
+    files_list = idx.setdefault("files", [])
+
+    # Zoek bestaande file met dezelfde content-hash
+    existing = None
+    for f in files_list:
+        if f.get("content_md5") == content_hash and f.get("category") == category:
+            # Verifieer file bestaat nog op disk
+            if f.get("path") and Path(f["path"]).exists():
+                existing = f
+                break
+
+    if existing:
+        # Hergebruik: link deze kaart aan bestaande entry
+        card_tag = f"kbv2_card_{card_id}"
+        tags = existing.setdefault("tags", [])
+        if card_tag not in tags:
+            tags.append(card_tag)
+        linked_cards = existing.setdefault("linked_card_ids", [])
+        if existing.get("linked_card_id") and existing["linked_card_id"] not in linked_cards:
+            linked_cards.append(existing["linked_card_id"])
+        if card_id not in linked_cards:
+            linked_cards.append(card_id)
+        existing["last_reused_at"] = datetime.now(timezone.utc).isoformat()
+        existing.setdefault("reuse_count", 0)
+        existing["reuse_count"] += 1
+        idx["updated_at"] = datetime.now(timezone.utc).isoformat()
+        save_json(SA_INDEX, idx)
+        return existing
+
+    # Nieuwe file: opslaan met hash-gebaseerde naam
     ext = Path(original_name).suffix.lower()
-    file_id = uuid.uuid4().hex[:12]
+    file_id = content_hash[:12]  # kortere hash als file_id
     safe_name = f"{file_id}{ext}"
     dest = SA_DIR / category / safe_name
     dest.write_bytes(content)
@@ -68,22 +108,23 @@ def _save_to_system_archive(
         "extension": ext,
         "mime_type": mime_type,
         "size_bytes": len(content),
+        "content_md5": content_hash,
         "description": f"Kennis-kaart media voor kaart {card_id}",
         "tags": ["kbv2", f"kbv2_card_{card_id}"],
         "uploaded_at": datetime.now(timezone.utc).isoformat(),
         "uploaded_by": user_id,
         "path": str(dest),
-        # v5_kbv2_media_002 — kennis-kaart link velden
         "linked_card_id": card_id,
+        "linked_card_ids": [card_id],
         "source": "kbv2_media_upload",
         "scan_status": None,
         "scan_results": None,
+        "reuse_count": 0,
     }
     if extra_meta:
         entry.update(extra_meta)
 
-    idx = load_json(SA_INDEX, default={"files": []})
-    idx.setdefault("files", []).append(entry)
+    files_list.append(entry)
     idx["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_json(SA_INDEX, idx)
 
@@ -532,3 +573,214 @@ async def legacy_image_file(filename: str):
 async def legacy_voice_file(filename: str):
     """Backwards-compat: serve voice van pre-v5_kbv2_media_002 kaarten."""
     return _serve_legacy_media("voice", filename)
+
+
+
+# =============================================================================
+# v7_media_dedup_001 — Archive dedup + picker endpoints
+# =============================================================================
+
+@router.get("/archive/list")
+async def list_archive_images(category: str = "foto", limit: int = 200):
+    """Lijst van beschikbare afbeeldingen in system archive voor UI-picker.
+
+    Response: {items: [{id, url, size_bytes, original_name, reuse_count, linked_cards}]}
+    Sorteert op reuse_count DESC (populair eerst) dan uploaded_at DESC.
+    """
+    idx = load_json(SA_INDEX, default={"files": []})
+    items = []
+    for f in idx.get("files", []):
+        if f.get("category") != category:
+            continue
+        if not f.get("path") or not Path(f["path"]).exists():
+            continue  # skip weesbestanden
+        items.append({
+            "id": f.get("id"),
+            "url": _system_archive_url(f.get("id")),
+            "original_name": f.get("original_name"),
+            "size_bytes": f.get("size_bytes", 0),
+            "extension": f.get("extension"),
+            "uploaded_at": f.get("uploaded_at"),
+            "reuse_count": f.get("reuse_count", 0),
+            "linked_cards": f.get("linked_card_ids") or ([f.get("linked_card_id")] if f.get("linked_card_id") else []),
+        })
+    items.sort(key=lambda x: (-(x["reuse_count"] or 0), x.get("uploaded_at") or ""), reverse=False)
+    items.sort(key=lambda x: -(x["reuse_count"] or 0))  # populair eerst
+    return {"success": True, "category": category, "count": len(items), "items": items[:limit]}
+
+
+class LinkExistingImageRequest(BaseModel):
+    card_id: str
+    archive_id: str
+    lade: Optional[str] = None
+    user_id: str = "user-000"
+
+
+@router.post("/image/link-existing")
+async def link_existing_image(req: LinkExistingImageRequest):
+    """Koppel een bestaande archive-afbeelding aan een kaart (geen re-upload).
+
+    Voor UI-picker: user kiest een bestaande foto → kaart krijgt URL naar die file.
+    """
+    idx = load_json(SA_INDEX, default={"files": []})
+    entry = next((f for f in idx.get("files", []) if f.get("id") == req.archive_id), None)
+    if not entry:
+        raise HTTPException(404, f"Archive-id {req.archive_id} niet gevonden")
+    if not Path(entry.get("path", "")).exists():
+        raise HTTPException(404, f"Bestand voor {req.archive_id} ontbreekt op disk")
+
+    # Update index: kaart-tag + linked_card_ids
+    card_tag = f"kbv2_card_{req.card_id}"
+    tags = entry.setdefault("tags", [])
+    if card_tag not in tags:
+        tags.append(card_tag)
+    linked = entry.setdefault("linked_card_ids", [])
+    if entry.get("linked_card_id") and entry["linked_card_id"] not in linked:
+        linked.append(entry["linked_card_id"])
+    if req.card_id not in linked:
+        linked.append(req.card_id)
+    entry.setdefault("reuse_count", 0)
+    entry["reuse_count"] += 1
+    entry["last_reused_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(SA_INDEX, idx)
+
+    # Update kaart: append URL aan image_urls (inbox OF lade)
+    image_url = _system_archive_url(entry["id"])
+    target_lade = req.lade or _resolve_lade(req.card_id)
+
+    if target_lade and target_lade in service.LADES:
+        # Lade-kaart: lees huidige images, append nieuwe, schrijf complete lijst
+        cur = load_json(service._lade_path(target_lade), default={"kaarten": []})
+        for k in cur.get("kaarten", []):
+            if k.get("id") == req.card_id:
+                images = list((k.get("media") or {}).get("image_urls") or [])
+                if image_url not in images:
+                    images.append(image_url)
+                    service.edit_card(req.card_id, target_lade, {"media": {"image_urls": images}}, user_id=req.user_id)
+                break
+    else:
+        # Inbox-kaart: helper doet extend()
+        _patch_card_media(req.card_id, None, {"image_urls": [image_url]}, user_id=req.user_id)
+
+    return {"success": True, "image_url": image_url, "archive_id": entry["id"],
+            "reuse_count": entry["reuse_count"], "linked_cards": linked}
+
+
+@router.post("/archive/dedup")
+async def dedup_archive(execute: bool = False, category: str = "foto"):
+    """Scan archief op bit-identieke duplicaten en merge ze.
+
+    Dry-run default. Set execute=true om echt te dedupliceren.
+
+    Effect: voor elke groep files met dezelfde md5:
+      - Kies canonical (oudste)
+      - Verwijder overige files van disk
+      - Update _index.json: verwijder duplicate entries
+      - Update kaarten die naar oude URLs verwezen → nieuwe canonical URL
+    """
+    import hashlib as _hashlib
+    idx = load_json(SA_INDEX, default={"files": []})
+    files_list = idx.get("files", [])
+
+    # Bereken md5 per file en groepeer
+    by_hash: Dict[str, List[dict]] = {}
+    for f in files_list:
+        if f.get("category") != category:
+            continue
+        p = f.get("path")
+        if not p or not Path(p).exists():
+            continue
+        h = f.get("content_md5")
+        if not h:
+            # Legacy files zonder md5 → bereken nu
+            try:
+                h = _hashlib.md5(Path(p).read_bytes()).hexdigest()
+                f["content_md5"] = h
+            except Exception:
+                continue
+        by_hash.setdefault(h, []).append(f)
+
+    duplicate_groups = {h: fs for h, fs in by_hash.items() if len(fs) > 1}
+    total_dup_bytes = sum(
+        sum(f.get("size_bytes", 0) for f in fs[1:])
+        for fs in duplicate_groups.values()
+    )
+
+    if not execute:
+        return {
+            "success": True, "mode": "DRY_RUN",
+            "duplicate_groups": len(duplicate_groups),
+            "total_files_scanned": sum(1 for f in files_list if f.get("category") == category),
+            "would_delete_bytes": total_dup_bytes,
+            "would_delete_mb": round(total_dup_bytes / 1024 / 1024, 2),
+            "sample_groups": [
+                {"hash": h, "canonical": fs[0].get("id"),
+                 "duplicates": [dup.get("id") for dup in fs[1:]],
+                 "size_bytes": fs[0].get("size_bytes")}
+                for h, fs in list(duplicate_groups.items())[:5]
+            ],
+        }
+
+    # Execute mode
+    deleted_files = []
+    updated_cards = 0
+    for h, fs in duplicate_groups.items():
+        canonical = sorted(fs, key=lambda f: f.get("uploaded_at") or "")[0]
+        canonical_url = _system_archive_url(canonical["id"])
+        canonical_linked = set(canonical.setdefault("linked_card_ids", []))
+        if canonical.get("linked_card_id"):
+            canonical_linked.add(canonical["linked_card_id"])
+
+        for dup in fs:
+            if dup["id"] == canonical["id"]:
+                continue
+            dup_url = _system_archive_url(dup["id"])
+            # Merge linked_card_ids
+            for cid in (dup.get("linked_card_ids") or []):
+                canonical_linked.add(cid)
+            if dup.get("linked_card_id"):
+                canonical_linked.add(dup["linked_card_id"])
+
+            # Update alle kaarten die naar dup_url wezen
+            for lade in service.LADES:
+                lp = service._lade_path(lade)
+                if not lp.exists():
+                    continue
+                cur = load_json(lp, default={"kaarten": []})
+                changed = False
+                for k in cur.get("kaarten", []):
+                    imgs = (k.get("media") or {}).get("image_urls") or []
+                    if dup_url in imgs:
+                        new_imgs = [canonical_url if u == dup_url else u for u in imgs]
+                        new_imgs = list(dict.fromkeys(new_imgs))  # dedup
+                        k.setdefault("media", {})["image_urls"] = new_imgs
+                        changed = True
+                        updated_cards += 1
+                if changed:
+                    save_json(lp, cur)
+
+            # Verwijder dup file + index-entry
+            try:
+                Path(dup["path"]).unlink()
+                deleted_files.append({"id": dup["id"], "path": dup["path"], "size": dup.get("size_bytes")})
+            except Exception:
+                pass
+
+        canonical["linked_card_ids"] = sorted(canonical_linked)
+        canonical["reuse_count"] = len(canonical_linked)
+
+    # Filter dups uit files_list
+    keep_ids = {fs[0]["id"] for fs in [sorted(g, key=lambda f: f.get("uploaded_at") or "") for g in duplicate_groups.values()]}
+    remove_ids = {dup["id"] for h, fs in duplicate_groups.items() for dup in fs if dup["id"] not in keep_ids}
+    idx["files"] = [f for f in files_list if f.get("id") not in remove_ids]
+    idx["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(SA_INDEX, idx)
+
+    return {
+        "success": True, "mode": "EXECUTED",
+        "duplicate_groups_processed": len(duplicate_groups),
+        "files_deleted": len(deleted_files),
+        "bytes_saved": sum(f.get("size", 0) or 0 for f in deleted_files),
+        "mb_saved": round(sum(f.get("size", 0) or 0 for f in deleted_files) / 1024 / 1024, 2),
+        "cards_updated": updated_cards,
+    }

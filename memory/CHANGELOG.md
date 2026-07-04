@@ -2,6 +2,28 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-04 — KB v2 Image Archive Picker UI voltooid (`v7_media_dedup_001` — final)
+
+### 🎨 Frontend Modal + backend inbox-fix
+1. **Archive Picker Modal in `MediaSection`** (`/app/frontend/src/components/workspace/KennisbankV2Page.js`)
+   - Nieuwe "Uit archief"-knop naast "Foto toevoegen" op elke kaart
+   - Modal toont alle 112 archief-foto's als 3–6 kolom grid met hover-preview
+   - Reuse-count badge (bv. "3x") toont populariteit — populair sorteert vooraan
+   - Zoekveld filtert op `original_name`
+   - Klik = koppel + auto-close + parent refetch → foto verschijnt direct
+
+2. **Backend bug: inbox-kaarten kregen geen image_url** (fix in `media_routes.py::link_existing_image`)
+   - Oude code checkte alleen `service.LADES` (voelen/spreken/weten/doen) → inbox-kaarten werden overgeslagen
+   - Nu: append voor lade-kaarten (via `edit_card` met complete lijst), extend voor inbox (via `_patch_card_media`)
+   - Beide paden getest e2e via UI + curl
+
+### Verificatie
+- ✅ Modal opent + laadt 112 items uit `GET /api/kb/v2/media/archive/list`
+- ✅ Klik-koppel op inbox-kaart: `reuse_count` 2→3, `image_urls` bevat nieuwe URL, voortgangs-badge 13%→25%
+- ✅ Klik-koppel op lade-kaart: image_urls behoudt bestaande foto's en appendt nieuwe
+- ✅ Frontend hot-reload + backend hot-reload beide clean, geen lint errors in nieuwe code
+
+
 ## 2026-07-04 — Trader tuning: 15m default + geen auto-resume + dip-confirmation (`v7_trader_tuning_001`)
 
 ### 🔧 3 fixes

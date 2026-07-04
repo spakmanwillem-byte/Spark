@@ -712,11 +712,41 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
                 "reason": f"Lower band geraakt maar te dicht bij upper ({distance_from_upper*100:.1f}% ruimte) — geen winstpotentieel",
                 "confidence": 0.2,
             }
+
+        # v7_dip_confirmation_001 — voorkom "koop op mini-piek in dalende trend".
+        # Bollinger-lower zakt in dalende markt mee met de mean; dat betekent dat een
+        # BUY-signaal kan afgaan terwijl de prijs eigenlijk nog steeds relatief hoog
+        # is tov. de recente cyclus. Extra guard: prijs moet minimaal 1.5% onder de
+        # recente hoogste (van het candle-window) zitten — dit filtert "hoop op
+        # doorbraak" trades weg en houdt alleen echte dips over.
+        recent_highs = [c.get("high", c.get("close", price)) for c in candles[-20:]]
+        window_high = max(recent_highs) if recent_highs else price
+        drop_from_window_high = (window_high - price) / window_high if window_high > 0 else 0
+        MIN_DIP_PCT = 0.015  # 1.5% onder de recente piek moet er zijn
+        if drop_from_window_high < MIN_DIP_PCT:
+            return {
+                **base,
+                "action": "HOLD",
+                "reason": (
+                    f"Lower band geraakt maar geen echte dip: prijs €{price:.4f} is slechts "
+                    f"{drop_from_window_high*100:.2f}% onder recente piek €{window_high:.4f}. "
+                    f"Wacht op ≥{MIN_DIP_PCT*100:.1f}% terugval voor BUY."
+                ),
+                "confidence": 0.25,
+                "window_high": round(window_high, 4),
+                "drop_from_high_pct": round(drop_from_window_high * 100, 3),
+            }
+
         return {
             **base,
             "action": "BUY",
-            "reason": f"Prijs €{price:.2f} onder lower band €{lower:.2f}. Ruimte tot upper: {distance_from_upper*100:.1f}%",
+            "reason": (
+                f"Prijs €{price:.4f} onder lower band €{lower:.4f} én {drop_from_window_high*100:.2f}% "
+                f"onder recente piek €{window_high:.4f}. Ruimte tot upper: {distance_from_upper*100:.1f}%"
+            ),
             "confidence": min(0.9, (lower - price) / std + 0.5),
+            "window_high": round(window_high, 4),
+            "drop_from_high_pct": round(drop_from_window_high * 100, 3),
             "position_update": {"open": True, "entry_price": price},
         }
 
@@ -745,7 +775,9 @@ class MonitorService:
         self._interval = 60
         self._market = "BCH-EUR"
         self._markets = ["BCH-EUR"]
-        self._candle_interval = "1h"
+        # v7_candle_15m_default_001 — 15m is reactiever bij dalende/volatiele markten.
+        # 1h heeft 20u rollende window → mist intra-day turnarounds. 15m heeft 5u window.
+        self._candle_interval = "15m"
         self._user_id = user_id
         self._decisions = []
         self._last_price = 0
@@ -876,30 +908,31 @@ class MonitorService:
             logger.warning(f"Monitor state persist failed: {e}")
 
     def resume_if_was_running(self) -> Dict:
-        """Herstart monitor na backend restart, als hij draaide."""
-        if not MONITOR_STATE_FILE.exists():
-            return {"resumed": False, "reason": "Geen state file"}
-        try:
-            with open(MONITOR_STATE_FILE) as f:
-                state = json.load(f)
-            if not state.get("running"):
-                return {"resumed": False, "reason": "Was niet running"}
-            result = self.start(
-                interval=state["interval"],
-                market=state["market"],
-                candle_interval=state["candle_interval"],
-                user_id=state["user_id"],
-                auto_trade=state["auto_trade"],
-                trade_amount=state["trade_amount"],
-                use_mock=state["use_mock"],
-                use_potjes=state.get("use_potjes", False),
-                markets=state.get("markets"),
-            )
-            logger.info(f"Monitor auto-resumed: {state['market']} {state['candle_interval']} potjes={state.get('use_potjes')}")
-            return {"resumed": True, "status": result}
-        except Exception as e:
-            logger.error(f"Auto-resume failed: {e}")
-            return {"resumed": False, "error": str(e)}
+        """v7_no_auto_resume_001 — auto-resume UITGESCHAKELD (default).
+
+        Reden: state-mismatches (spookpots, potjes-desync) na deploy/redeploy zijn
+        veroorzaakt door de trader die automatisch herstart met oude state terwijl
+        de actual Bitvavo saldo intussen veranderd is. User moet expliciet trader
+        starten via UI na deploy, ná spookpot-sync via
+        POST /api/trade/reconcile/potjes/user-001/sync-with-bitvavo.
+
+        State-file wordt WEL naar `running: false` gezet zodat de UI zichtbaar toont
+        dat de trader inactief is na restart.
+        """
+        if MONITOR_STATE_FILE.exists():
+            try:
+                with open(MONITOR_STATE_FILE) as f:
+                    state = json.load(f)
+                if state.get("running"):
+                    state["running"] = False
+                    state["_auto_stopped_at"] = datetime.now(timezone.utc).isoformat()
+                    state["_auto_stop_reason"] = "v7_no_auto_resume — safety after (re)deploy"
+                    with open(MONITOR_STATE_FILE, "w") as f:
+                        json.dump(state, f, indent=2)
+                    logger.info("Monitor NIET automatisch geresumeerd (v7_no_auto_resume_001). User moet expliciet starten.")
+            except Exception as e:
+                logger.warning(f"resume_if_was_running state-reset failed: {e}")
+        return {"resumed": False, "reason": "v7_no_auto_resume_001 — trader moet expliciet gestart worden na (re)deploy"}
 
     def stop(self) -> Dict:
         with self._lock:

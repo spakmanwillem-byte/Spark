@@ -2,6 +2,31 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-04 — Trader tuning: 15m default + geen auto-resume + dip-confirmation (`v7_trader_tuning_001`)
+
+### 🔧 3 fixes
+1. **Default candle_interval: `1h` → `15m`** (`v7_candle_15m_default_001`)
+   - 1h heeft 20u rollende window → mist intra-day turnarounds in dalende markt
+   - 15m: 5u window → 4× reactiever, meer buy-signalen bij echte dips, snellere exits
+
+2. **Auto-resume UITGESCHAKELD** (`v7_no_auto_resume_001`)
+   - `resume_if_was_running()` doet nu geen restart meer, alleen `running:false` in state
+   - Reden: state-mismatches (spookpots) na deploy komen door trader die auto-restart met verouderde state
+   - User moet expliciet trader starten via UI na (re)deploy — ná spookpot-sync
+
+3. **Dip-confirmation guard** (`v7_dip_confirmation_001`)
+   - Buy vereist nu: prijs onder lower band ÉN prijs ≥1.5% onder window-high (max van 20 candles)
+   - Voorkomt "koop op mini-piek in dalende trend" (Willem's observatie): Bollinger-lower zakt mee met dalende mean, waardoor mini-opleving een fout BUY-signaal gaf
+   - Response bevat nu `window_high` + `drop_from_high_pct` voor transparantie
+
+### Deploy volgorde na redeploy
+1. **`POST /api/backup/mark-deployed`** — marker persistent zetten (v7_persistent_marker_001)
+2. **`POST /api/trade/reconcile/potjes/user-001/sync-with-bitvavo {execute:false}`** — dry-run spookpots
+3. **Als correct → `{execute:true}`** — sluit spookpots + orphans terug in pots
+4. **Trader UI**: start monitor expliciet met 15m candle, gewenste markets
+5. Monitor start dus niet meer automatisch — dat was voorheen bron van state-drift
+
+
 ## 2026-07-02c — Bitvavo state-sync endpoint (`v7_bitvavo_state_sync_001`)
 
 ### 🔧 Nieuw: `POST /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo`

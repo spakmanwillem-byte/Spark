@@ -34,6 +34,11 @@ APP_ROOT = Path("/app")
 DATA_ROOT = APP_ROOT / "backend" / "data"
 MEMORY_ROOT = APP_ROOT / "memory"
 MARKER_FILE = DATA_ROOT / "system" / ".deploy_marker.json"
+# v7_persistent_marker_001 — /app/backend/data/ wordt bij server-reset gewist,
+# waardoor de marker verdwijnt en "alleen gewijzigd" backup het HELE systeem inpakt.
+# /app/memory/ overleeft resets (bevat PRD/CHANGELOG). Marker eerst daar lezen/schrijven,
+# fallback naar oude locatie voor backwards-compat.
+MARKER_FILE_PERSISTENT = Path("/app/memory") / ".deploy_marker.json"
 
 # Folders/files we never want to ship in a backup
 EXCLUDE_NAMES = {".deploy_marker.json", "__pycache__", ".DS_Store"}
@@ -51,23 +56,34 @@ def _iso_now() -> str:
 
 
 def _read_marker() -> Dict[str, Any]:
-    if not MARKER_FILE.exists():
-        return {"marked_at": None, "marked_at_epoch": 0.0}
-    try:
-        return json.loads(MARKER_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return {"marked_at": None, "marked_at_epoch": 0.0}
+    # v7_persistent_marker_001 — probeer persistent locatie eerst
+    for candidate in (MARKER_FILE_PERSISTENT, MARKER_FILE):
+        if candidate.exists():
+            try:
+                return json.loads(candidate.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+    return {"marked_at": None, "marked_at_epoch": 0.0}
 
 
 def _write_marker() -> Dict[str, Any]:
+    # v7_persistent_marker_001 — schrijf naar BEIDE locaties zodat we backwards-compat
+    # blijven én de marker een server-reset overleeft.
+    MARKER_FILE_PERSISTENT.parent.mkdir(parents=True, exist_ok=True)
     MARKER_FILE.parent.mkdir(parents=True, exist_ok=True)
     now = datetime.now(timezone.utc)
     payload = {
         "marked_at": now.isoformat(),
         "marked_at_epoch": now.timestamp(),
         "note": "Markeert moment van laatste deploy. Bestanden gewijzigd na deze tijd zitten in een 'wijzigingen-backup'.",
+        "written_to": ["persistent (/app/memory/)", "legacy (backend/data/system/)"],
     }
-    MARKER_FILE.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    text = json.dumps(payload, indent=2)
+    MARKER_FILE_PERSISTENT.write_text(text, encoding="utf-8")
+    try:
+        MARKER_FILE.write_text(text, encoding="utf-8")
+    except Exception:
+        pass  # legacy locatie is best-effort
     return payload
 
 
@@ -329,22 +345,34 @@ async def kb_changed_since_deploy():
 
 
 @router.get("/download/changes")
-async def download_changes():
-    """Backup met alleen bestanden gewijzigd na laatste deploy-marker."""
+async def download_changes(fallback_hours: int = 24):
+    """Backup met alleen bestanden gewijzigd na laatste deploy-marker.
+
+    Als er geen marker is (bijv. na server-reset waar de marker-file uit
+    /app/backend/data verloren ging), val terug op `fallback_hours` (default 24u)
+    zodat de zip niet stiekem het hele systeem inpakt.
+    """
     marker = _read_marker()
     since = float(marker.get("marked_at_epoch") or 0.0)
+    marker_missing = since <= 0.0
+    if marker_missing:
+        # v7_persistent_marker_002 — fallback zodat we niet per ongeluk 300MB opsturen
+        fallback_epoch = datetime.now(timezone.utc).timestamp() - (fallback_hours * 3600)
+        since = fallback_epoch
     files = _collect_files(since_epoch=since)
     meta = {
         "type": "changes_since_deploy",
         "created_at": _iso_now(),
         "marker": marker,
+        "marker_missing": marker_missing,
+        "fallback_used_hours": fallback_hours if marker_missing else None,
         "file_count": len(files),
         "sources": [str(r) for _, r in BACKUP_SOURCES],
         "files": [{"path": f["rel"], "size": f["size"], "mtime": f["mtime_iso"]} for f in files],
     }
     zip_path = _make_zip_file(files, meta)
     size = zip_path.stat().st_size
-    label = "changes" if since > 0 else "no_marker_full_like"
+    label = "changes" if not marker_missing else f"changes_fallback_{fallback_hours}h"
     fname = f"spark_backup_{label}_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.zip"
     return FileResponse(
         str(zip_path),
@@ -354,6 +382,8 @@ async def download_changes():
             "Content-Length": str(size),
             "X-Backup-Bytes": str(size),
             "X-Backup-Files": str(len(files)),
+            "X-Marker-Missing": "1" if marker_missing else "0",
+            "X-Fallback-Hours": str(fallback_hours) if marker_missing else "0",
             "Cache-Control": "no-store",
         },
         background=_cleanup_task(zip_path),

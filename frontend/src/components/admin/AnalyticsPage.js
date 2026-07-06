@@ -1670,22 +1670,8 @@ function TradeAnalyticsTab() {
         </div>
       )}
 
-      {/* Trade feed (community) */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
-        <h3 className="text-base font-semibold text-white mb-4">🎩 De Boekhouder — community feed</h3>
-        {feed.length === 0 ? (
-          <p className="text-sm text-slate-500 italic">Nog geen trade-events.</p>
-        ) : (
-          <div className="space-y-2">
-            {feed.map(m => (
-              <div key={m.id} className="bg-slate-800/30 rounded-lg p-3 text-sm text-slate-300">
-                <p className="italic">"{m.text}"</p>
-                <p className="text-[10px] text-slate-500 mt-1">{new Date(m.ts).toLocaleString('nl-NL')} · {m.kind}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* v7_boekhouder_moved_to_logs_001 — Community feed hoort niet in trade-tab.
+          Verhuist later naar Analytics → Logs (roadmap P1). */}
 
       {/* Audit log */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">

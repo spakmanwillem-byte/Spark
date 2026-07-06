@@ -1450,6 +1450,9 @@ function TradeAnalyticsTab() {
       {/* v7_admin_trader_stats_001 — Trader stats verplaatst uit user-facing module */}
       <SparkTraderStatsPanel />
 
+      {/* v7_reconcile_own_panel_001 — Reconciliatie in eigen kader (uit bots-lijst gehaald) */}
+      <ReconcileSparkPanel />
+
       {/* v5_admin_bot_cards_001 — Bot kaarten (uitklap → potjes + history per wallet) */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
@@ -1475,8 +1478,7 @@ function TradeAnalyticsTab() {
           </div>
         </div>
 
-        {/* v6_reconcile_001 — Reconciliatie-panel: Spark potjes vs echte Bitvavo balance */}
-        <ReconcileSparkPanel />
+        {/* v7_reconcile_own_panel_001 — verplaatst uit het bots-kader naar eigen kader onder */}
         {bots.length === 0 ? (
           <p className="text-sm text-slate-500 italic">Geen bots gestart.</p>
         ) : (
@@ -1916,7 +1918,12 @@ function SparkTraderStatsPanel() {
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2 text-xs">
-        <StatMini label="Trades" value={s.total_trades || 0} color="text-cyan-400" />
+        <StatMini
+          label="Trades sinds baseline"
+          value={s.total_trades || 0}
+          sub={s.trades_before_baseline ? `${s.trades_before_baseline} eerder uitgesloten` : (s.lifetime_trades ? `Lifetime: ${s.lifetime_trades}` : 'Geen filter actief')}
+          color="text-cyan-400"
+        />
         <StatMini label="Gekocht" value={`€${(s.total_buy_eur || 0).toFixed(2)}`} sub={`${s.buys || 0} buys`} color="text-emerald-400" />
         <StatMini label="Verkocht" value={`€${(s.total_sell_eur || 0).toFixed(2)}`} sub={`${s.sells || 0} sells`} color="text-red-400" />
         <StatMini label="Fees" value={`€${(s.total_fees_eur || 0).toFixed(2)}`} sub="0.25%" color="text-amber-400" />

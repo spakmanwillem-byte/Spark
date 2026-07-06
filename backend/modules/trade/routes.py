@@ -103,7 +103,25 @@ async def get_trade_history(user_id: str, limit: int = Query(50, ge=1, le=500), 
 @router.get("/stats/{user_id}")
 async def get_trade_stats(user_id: str):
     data = load_json(DATA_DIR / "trade_history" / f"{user_id}.json", default={"trades": []})
-    trades = data.get("trades", [])
+    all_trades = data.get("trades", [])
+
+    # v7_stats_since_baseline_001 — filter trades op baseline.set_at zodat de stats
+    # tellen vanaf het moment van baseline-reset (test-data vóór reset wordt uitgesloten).
+    baseline_data = load_json(DATA_DIR.parent / "trade" / "capital_baseline.json", default={})
+    user_baseline_raw = baseline_data.get(user_id, {})
+    if isinstance(user_baseline_raw, (int, float)):
+        user_baseline = {"baseline_eur": float(user_baseline_raw), "set_at": None, "note": "legacy-float"}
+    elif isinstance(user_baseline_raw, dict):
+        user_baseline = user_baseline_raw
+    else:
+        user_baseline = {}
+    baseline_since = user_baseline.get("set_at")
+
+    if baseline_since:
+        trades = [t for t in all_trades if (t.get("timestamp") or "") >= baseline_since]
+    else:
+        trades = all_trades
+
     buys = [t for t in trades if t.get("action") == "BUY" and t.get("success")]
     sells = [t for t in trades if t.get("action") == "SELL" and t.get("success")]
     markets = list(set(t.get("market", "?") for t in trades))
@@ -116,16 +134,6 @@ async def get_trade_stats(user_id: str):
     bruto_pnl = total_sell_eur - total_buy_eur
     netto_pnl = bruto_pnl - total_fees
 
-    # Live P&L vs baseline kapitaal
-    baseline_data = load_json(DATA_DIR.parent / "trade" / "capital_baseline.json", default={})
-    user_baseline_raw = baseline_data.get(user_id, {})
-    # Backwards-compat: pre-v4 stored as bare float; v4+ stores dict
-    if isinstance(user_baseline_raw, (int, float)):
-        user_baseline = {"baseline_eur": float(user_baseline_raw), "set_at": None, "note": "legacy-float"}
-    elif isinstance(user_baseline_raw, dict):
-        user_baseline = user_baseline_raw
-    else:
-        user_baseline = {}
     baseline_eur = user_baseline.get("baseline_eur")
     live_pnl = None
     live_balance = None
@@ -163,6 +171,12 @@ async def get_trade_stats(user_id: str):
         "live_balance": live_balance,
         "live_pnl": live_pnl,
         "baseline_set_at": user_baseline.get("set_at"),
+        # v7_stats_since_baseline_001 — extra info: hoeveel trades vóór baseline
+        "lifetime_trades": max(
+            len([t for t in all_trades if t.get("action") == "BUY" and t.get("success")]),
+            len([t for t in all_trades if t.get("action") == "SELL" and t.get("success")]),
+        ),
+        "trades_before_baseline": len(all_trades) - len(trades) if baseline_since else 0,
     }
 
 

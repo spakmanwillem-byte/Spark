@@ -1404,3 +1404,88 @@ async def migrate_token_holders():
             results.append({"user_id": uid, "tokens": t, "status": "provision-failed", "error": str(e)})
 
     return {"success": True, "total_users": len(results), "results": results}
+
+
+
+# ============================================================
+# v7_admin_start_all_bots_001 — Admin bulk-start voor alle geregistreerde bots
+# ============================================================
+class StartAllBotsBody(BaseModel):
+    viewer_id: str
+
+
+@router.post("/admin/start-all-bots")
+async def admin_start_all_bots(body: StartAllBotsBody):
+    """Admin-actie: start alle geregistreerde bots (Spark, Geiser, Willem, ...) in één klik.
+
+    Idempotent: bots die al draaien worden overgeslagen. Non-admin krijgt error.
+    """
+    # Admin check
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+    if not viewer or viewer.get("gradatie", 99) > 1:
+        return {"success": False, "error": "Alleen admins (gradatie ≤ 1) mogen alle bots starten"}
+
+    from modules.trade.monitor import get_monitor, get_user_monitor, _load_registered_users
+    results = []
+
+    # 1. Legacy Willem monitor
+    try:
+        m = get_monitor()
+        if not m._running:
+            m.start()
+            results.append({"user_id": "user-001", "action": "started", "running": True})
+        else:
+            results.append({"user_id": "user-001", "action": "already_running", "running": True})
+    except Exception as e:
+        results.append({"user_id": "user-001", "action": "failed", "error": str(e)})
+
+    # 2. Alle registry bots
+    for uid in _load_registered_users():
+        if uid == "user-001":
+            continue
+        try:
+            m = get_user_monitor(uid)
+            if not m._running:
+                m.start()
+                results.append({"user_id": uid, "action": "started", "running": True})
+            else:
+                results.append({"user_id": uid, "action": "already_running", "running": True})
+        except Exception as e:
+            results.append({"user_id": uid, "action": "failed", "error": str(e)})
+
+    started = sum(1 for r in results if r.get("action") == "started")
+    return {"success": True, "started_count": started, "total_bots": len(results), "results": results}
+
+
+@router.post("/admin/stop-all-bots")
+async def admin_stop_all_bots(body: StartAllBotsBody):
+    """Admin-actie: stop alle draaiende bots in één klik."""
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == body.viewer_id), None)
+    if not viewer or viewer.get("gradatie", 99) > 1:
+        return {"success": False, "error": "Alleen admins (gradatie ≤ 1) mogen alle bots stoppen"}
+
+    from modules.trade.monitor import get_monitor, get_user_monitor, _load_registered_users
+    results = []
+    try:
+        m = get_monitor()
+        if m._running:
+            m.stop()
+            results.append({"user_id": "user-001", "action": "stopped"})
+    except Exception as e:
+        results.append({"user_id": "user-001", "action": "failed", "error": str(e)})
+    for uid in _load_registered_users():
+        if uid == "user-001":
+            continue
+        try:
+            m = get_user_monitor(uid)
+            if m._running:
+                m.stop()
+                results.append({"user_id": uid, "action": "stopped"})
+        except Exception as e:
+            results.append({"user_id": uid, "action": "failed", "error": str(e)})
+    stopped = sum(1 for r in results if r.get("action") == "stopped")
+    return {"success": True, "stopped_count": stopped, "results": results}

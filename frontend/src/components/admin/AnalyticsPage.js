@@ -1308,23 +1308,60 @@ function TradeAnalyticsTab() {
     finally { setBusyUser(null); load(); }
   };
 
-  // v5_admin_bot_controls_001 — start/pause vanuit Analytics
+  // v5_admin_bot_controls_001 + v7_bot_defaults_align_001 — start met correcte defaults
   const startBot = async (uid, prevSettings = {}) => {
     setBusyUser(uid);
     try {
+      const defaultMarkets = ['BCH-EUR', 'BTC-EUR', 'ETH-EUR', 'SOL-EUR', 'ADA-EUR', 'ATOM-EUR'];
       await fetch(`${API}/api/trade/bot/start/${uid}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           market: (prevSettings.markets && prevSettings.markets[0]) || prevSettings.market || 'BCH-EUR',
-          markets: prevSettings.markets || ['BCH-EUR'],
-          candle_interval: prevSettings.candle_interval || '1h',
-          interval: 60,
-          auto_trade: prevSettings.auto_trade !== undefined ? prevSettings.auto_trade : (uid === 'user-000'),
-          use_mock: prevSettings.use_mock !== undefined ? prevSettings.use_mock : true,
+          markets: (prevSettings.markets && prevSettings.markets.length >= 3) ? prevSettings.markets : defaultMarkets,
+          candle_interval: prevSettings.candle_interval && prevSettings.candle_interval !== '1h' ? prevSettings.candle_interval : '15m',
+          interval: prevSettings.interval && prevSettings.interval >= 300 ? prevSettings.interval : 300,
+          auto_trade: prevSettings.auto_trade !== undefined ? prevSettings.auto_trade : true,
+          use_mock: prevSettings.use_mock !== undefined ? prevSettings.use_mock : false,
           use_potjes: prevSettings.use_potjes !== undefined ? prevSettings.use_potjes : true,
         }),
       });
     } finally { setBusyUser(null); load(); }
+  };
+
+  // v7_admin_start_all_bots_001 — admin bulk aan/uit
+  const [bulkBusy, setBulkBusy] = React.useState(false);
+  const startAllBots = async () => {
+    if (bulkBusy) return;
+    if (!window.confirm('Alle geregistreerde bots starten? (Willem, Spark, Geiser)')) return;
+    setBulkBusy(true);
+    try {
+      const r = await fetch(`${API}/api/trade/admin/start-all-bots`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: 'user-001' }),
+      }).then(x => x.json());
+      if (r.success) {
+        alert(`✅ ${r.started_count} bot(s) gestart (${r.total_bots} totaal)`);
+      } else {
+        alert('Start-all mislukt: ' + (r.error || 'onbekende fout'));
+      }
+    } catch (e) { alert('Fout: ' + e.message); }
+    finally { setBulkBusy(false); load(); }
+  };
+
+  const stopAllBots = async () => {
+    if (bulkBusy) return;
+    if (!window.confirm('Alle draaiende bots stoppen?')) return;
+    setBulkBusy(true);
+    try {
+      const r = await fetch(`${API}/api/trade/admin/stop-all-bots`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: 'user-001' }),
+      }).then(x => x.json());
+      if (r.success) {
+        alert(`⏹ ${r.stopped_count} bot(s) gestopt`);
+      }
+    } catch (e) { alert('Fout: ' + e.message); }
+    finally { setBulkBusy(false); load(); }
   };
 
   const pauseBot = async (uid) => {
@@ -1416,10 +1453,23 @@ function TradeAnalyticsTab() {
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
             🤖 Trade-bots <span className="text-[11px] font-normal text-slate-500">({bots.filter(b => b.running).length} actief / {bots.length} zichtbaar)</span>
           </h3>
-          <button onClick={load} disabled={loading} data-testid="refresh-bots"
-            className="text-xs text-slate-400 hover:text-white">
-            {loading ? '...' : 'Vernieuwen'}
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={startAllBots} disabled={bulkBusy}
+              data-testid="start-all-bots"
+              title="Start alle geregistreerde bots (Willem, Spark, Geiser)"
+              className="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 disabled:opacity-40 text-emerald-300 rounded text-[11px] font-medium flex items-center gap-1">
+              {bulkBusy ? '⏳' : '▶'} Start alle bots
+            </button>
+            <button onClick={stopAllBots} disabled={bulkBusy}
+              data-testid="stop-all-bots"
+              className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 disabled:opacity-40 text-red-400 rounded text-[11px] font-medium">
+              ⏹ Stop alle
+            </button>
+            <button onClick={load} disabled={loading} data-testid="refresh-bots"
+              className="text-xs text-slate-400 hover:text-white ml-2">
+              {loading ? '...' : 'Vernieuwen'}
+            </button>
+          </div>
         </div>
 
         {/* v6_reconcile_001 — Reconciliatie-panel: Spark potjes vs echte Bitvavo balance */}

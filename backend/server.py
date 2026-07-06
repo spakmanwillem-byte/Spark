@@ -506,9 +506,16 @@ async def startup():
             try:
                 _m = get_monitor()
                 needs_update = False
-                if len(getattr(_m, "_markets", []) or []) < 3:
-                    _m._markets = [f"{c}-EUR" for c in WATCHLIST_COINS]
-                    _m._market = _m._markets[0]
+                target_markets = [f"{c}-EUR" for c in WATCHLIST_COINS]
+                if list(getattr(_m, "_markets", []) or []) != target_markets:
+                    _m._markets = target_markets
+                    _m._market = target_markets[0]
+                    needs_update = True
+                if getattr(_m, "_candle_interval", "1h") != "15m":
+                    _m._candle_interval = "15m"
+                    needs_update = True
+                if int(getattr(_m, "_interval", 60) or 60) != 900:
+                    _m._interval = 900
                     needs_update = True
                 if not getattr(_m, "_auto_trade", False):
                     _m._auto_trade = True
@@ -518,10 +525,10 @@ async def startup():
                     needs_update = True
                 if needs_update:
                     try:
-                        _m._persist_state()  # schrijf monitor_state.json bij
+                        _m._persist_state()
                     except Exception:
                         pass
-                    print(f"   ⚙️  Willem config gealigneerd: markets={_m._markets}, auto_trade={_m._auto_trade}")
+                    print(f"   ⚙️  Willem config gealigneerd: interval=900s, candle=15m, markets={len(_m._markets)}, auto_trade=True")
             except Exception as _we:
                 print(f"   ⚠️  Willem config-align faalde: {_we}")
 
@@ -549,18 +556,47 @@ async def startup():
                         if uid == "user-001":
                             continue  # legacy singleton
                         try:
-                            # v7_multi_user_autostart_001 — alle geregistreerde bots draaien mee
-                            # als Willem's legacy monitor draaide. Zo koopt niet alleen Willem
-                            # bij een BUY-signaal maar ook Spark, Geiser etc. Autostart=True
-                            # zodat elke bot direct actief is na deploy.
+                            # v7_multi_user_autostart_001 + v7_bot_defaults_align_001
+                            # force_reconfigure=True → oude 60s/1h config wordt gecorrigeerd
+                            # naar 300s/15m/-EUR-markets/dynamische trade_amount.
                             auto_provision_bot_for_token_holder(
-                                uid, use_mock=False, auto_trade=True, autostart=True
+                                uid, use_mock=False, auto_trade=True, autostart=True,
+                                force_reconfigure=True,
                             )
                             provisioned += 1
                         except Exception as _pe:
                             print(f"   ⚠️  auto-provision {uid} failed: {_pe}")
                     if provisioned > 0:
                         print(f"   🤖 v7 auto-provisioned + STARTED {provisioned} multi-user bot(s)")
+
+                    # v7_ghost_registry_cleanup_001 — verwijder bots uit registry die
+                    # GEEN pots hebben (oude test-users vervuilen de UI).
+                    try:
+                        from modules.trade.monitor import _persist_registry, _registry as _mons
+                        registry_path = _P(__file__).parent / "data" / "trade" / "bots_registry_state.json"
+                        registered_path = _P(__file__).parent / "data" / "trade" / "registered_users.json"
+                        removed = []
+                        if registry_path.exists():
+                            reg = _json.loads(registry_path.read_text())
+                            keep = []
+                            for b in reg.get("bots", []):
+                                buid = b.get("user_id")
+                                if buid in users_with_pots or buid == "user-001":
+                                    keep.append(b)
+                                else:
+                                    removed.append(buid)
+                                    _mons.pop(buid, None)
+                            if removed:
+                                reg["bots"] = keep
+                                registry_path.write_text(_json.dumps(reg, indent=2))
+                        if registered_path.exists() and removed:
+                            ru = _json.loads(registered_path.read_text())
+                            ru["users"] = [u for u in ru.get("users", []) if u not in removed]
+                            registered_path.write_text(_json.dumps(ru, indent=2))
+                        if removed:
+                            print(f"   🧹 ghost registry cleanup: removed {len(removed)} bots without pots: {removed}")
+                    except Exception as _ce:
+                        print(f"   ⚠️  ghost cleanup skipped: {_ce}")
             except Exception as _me:
                 print(f"   ⚠️  multi-user auto-provision failed: {_me}")
         except Exception as e:

@@ -1445,8 +1445,13 @@ def auto_provision_bot_for_token_holder(
     use_mock: bool = False,
     auto_trade: bool = True,
     autostart: bool = False,
+    force_reconfigure: bool = False,
 ) -> dict:
-    """Idempotent: meerdere calls voor dezelfde user veranderen niets als hij al heeft."""
+    """Idempotent: meerdere calls voor dezelfde user veranderen niets als hij al heeft.
+
+    force_reconfigure=True → overschrijft interval/candle/markets/trade_amount met
+    huidige defaults (voor migratie na code-updates).
+    """
     # 1. Register (idempotent)
     register_user_bot(user_id)
 
@@ -1455,14 +1460,28 @@ def auto_provision_bot_for_token_holder(
 
     # 3. Defaults voor nieuwe bot — alleen toepassen als nog niet expliciet ingesteld
     already_running = bool(getattr(m, "_running", False))
-    has_been_configured = bool(getattr(m, "_user_configured", False))
+    has_been_configured = bool(getattr(m, "_user_configured", False)) and not force_reconfigure
 
     if not has_been_configured:
         try:
-            m._markets = list(WATCHLIST_COINS) if "WATCHLIST_COINS" in globals() else m._markets
+            # v7_bot_defaults_align_001 — alle nieuwe bots identiek geconfigureerd:
+            # - markets: met -EUR suffix (anders vindt Bitvavo ze niet)
+            # - interval: 300s (5 min tick — snel genoeg maar niet spammy)
+            # - candle_interval: 15m (consistent met Willem)
+            # - trade_amount: dynamisch = huidige token-prijs (fallback €6.32)
+            if "WATCHLIST_COINS" in globals():
+                m._markets = [f"{c}-EUR" for c in WATCHLIST_COINS]
+                m._market = m._markets[0] if m._markets else m._market
+            m._interval = 300
+            m._candle_interval = "15m"
             m._auto_trade = bool(auto_trade)
             m._use_mock = bool(use_mock)
-            m._trade_amount = float(getattr(m, "_trade_amount", 10.0) or 10.0)
+            # Trade amount = huidige token-prijs (dynamisch)
+            try:
+                from modules.shop.routes import get_dynamic_price
+                m._trade_amount = float(get_dynamic_price())
+            except Exception:
+                m._trade_amount = float(getattr(m, "_trade_amount", 6.32) or 6.32)
             m._use_potjes = True
             m._user_configured = True
         except Exception as e:

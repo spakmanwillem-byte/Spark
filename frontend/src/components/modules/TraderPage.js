@@ -390,7 +390,7 @@ export function TraderPage({ onNavigate }) {
               <h1 className="text-xl font-bold text-white">Crypto Trader</h1>
               <p className="text-xs text-slate-400">
                 {stats?.total_trades || 0} trades
-                {bvBalance?.success && <span className="ml-2 text-green-400">| Bitvavo: €{bvBalance.total_eur?.toFixed(2)}</span>}
+                {isAdmin && bvBalance?.success && <span className="ml-2 text-green-400">| Bitvavo: €{bvBalance.total_eur?.toFixed(2)}</span>}
                 {' | '}{tickers[0] ? `BCH €${tickers[0].last}` : 'Laden...'}
               </p>
             </div>
@@ -441,42 +441,9 @@ export function TraderPage({ onNavigate }) {
           <BitvavoSettings userId={userId} status={bitvavoStatus} settings={traderSettings} />
         ) : (
           <>
-            {/* Live Bitvavo Portfolio */}
-            {bvBalance?.success && bvBalance.balances?.length > 0 && (
-              <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/5 border border-green-500/20 rounded-2xl p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-green-400" /> Live Bitvavo Portfolio
-                  </h3>
-                  <div className="text-right">
-                    <p className="text-[10px] text-slate-400">Totaal</p>
-                    <p className="text-lg font-bold text-green-400">€{bvBalance.total_eur?.toFixed(2)}</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {bvBalance.balances.filter(b => (b.value_eur ?? 0) >= 0.01 || b.symbol === 'EUR').map(b => (
-                    <div key={b.symbol} data-testid={`balance-${b.symbol}`} className="bg-slate-900/50 rounded-xl p-3">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-bold text-white">{b.symbol}</span>
-                        <span className="text-[10px] text-green-400">€{b.value_eur?.toFixed(2)}</span>
-                      </div>
-                      <p className="text-[10px] text-slate-500">{b.total?.toFixed(6)} {b.symbol}</p>
-                      {b.symbol !== 'EUR' && <p className="text-[9px] text-slate-600">@ €{b.price_eur?.toFixed(2)}</p>}
-                    </div>
-                  ))}
-                </div>
-                {bvBalance.balances.filter(b => (b.value_eur ?? 0) < 0.01 && b.symbol !== 'EUR').length > 0 && (
-                  <p className="text-[10px] text-slate-600 mt-2">
-                    + {bvBalance.balances.filter(b => (b.value_eur ?? 0) < 0.01 && b.symbol !== 'EUR').length} stofjes verborgen (&lt;€0,01)
-                  </p>
-                )}
-              </div>
-            )}
-            {bvBalance && !bvBalance.success && (
-              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-[11px] text-amber-400 flex items-center gap-2">
-                <Key className="w-3.5 h-3.5" /> Live Bitvavo saldo niet beschikbaar: {bvBalance.error}
-              </div>
-            )}
+            {/* v7_bitvavo_widget_admin_only_001 — Live Bitvavo Portfolio verplaatst naar
+                Analytics → Trade tab (admin-only). Niet meer zichtbaar in de user-facing
+                Trade module — dit is admin-info die gebruikers niet aangaat. */}
 
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-6 gap-3">

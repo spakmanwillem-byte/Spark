@@ -494,11 +494,37 @@ async def startup():
     # v4_startup_safe_001: in een thread zodat traag Bitvavo de boot niet blokkeert
     def _resume_in_background():
         try:
-            from modules.trade.monitor import get_monitor, resume_registry_bots, resume_registered_users, auto_provision_bot_for_token_holder
+            from modules.trade.monitor import get_monitor, resume_registry_bots, resume_registered_users, auto_provision_bot_for_token_holder, WATCHLIST_COINS
             # 1. Legacy single monitor
             result = get_monitor().resume_if_was_running()
             if result.get("resumed"):
                 print("   🔄 Trade monitor auto-resumed (legacy)")
+
+            # v7_willem_config_align_001 — Sync Willem's legacy monitor config met de
+            # 6-markt watchlist + auto_trade=True zodat alle bots (Spark, Geiser, Willem)
+            # dezelfde defaults hebben. Idempotent — alleen als config nog op oude default staat.
+            try:
+                _m = get_monitor()
+                needs_update = False
+                if len(getattr(_m, "_markets", []) or []) < 3:
+                    _m._markets = [f"{c}-EUR" for c in WATCHLIST_COINS]
+                    _m._market = _m._markets[0]
+                    needs_update = True
+                if not getattr(_m, "_auto_trade", False):
+                    _m._auto_trade = True
+                    needs_update = True
+                if not getattr(_m, "_use_potjes", False):
+                    _m._use_potjes = True
+                    needs_update = True
+                if needs_update:
+                    try:
+                        _m._persist_state()  # schrijf monitor_state.json bij
+                    except Exception:
+                        pass
+                    print(f"   ⚙️  Willem config gealigneerd: markets={_m._markets}, auto_trade={_m._auto_trade}")
+            except Exception as _we:
+                print(f"   ⚠️  Willem config-align faalde: {_we}")
+
             # 2. Per-user registry bots (Spark + anderen)
             reg_result = resume_registry_bots()
             n = reg_result.get("resumed", 0)

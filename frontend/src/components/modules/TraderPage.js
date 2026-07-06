@@ -387,9 +387,9 @@ export function TraderPage({ onNavigate }) {
               <TrendingUp className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">Crypto Trader</h1>
+              <h1 className="text-xl font-bold text-white">Spark Trader</h1>
               <p className="text-xs text-slate-400">
-                {stats?.total_trades || 0} trades
+                {isAdmin ? (stats?.total_trades || 0) : (stats?.user_trades ?? stats?.total_trades ?? 0)} trades
                 {isAdmin && bvBalance?.success && <span className="ml-2 text-green-400">| Bitvavo: €{bvBalance.total_eur?.toFixed(2)}</span>}
                 {' | '}{tickers[0] ? `BCH €${tickers[0].last}` : 'Laden...'}
               </p>
@@ -445,20 +445,26 @@ export function TraderPage({ onNavigate }) {
                 Analytics → Trade tab (admin-only). Niet meer zichtbaar in de user-facing
                 Trade module — dit is admin-info die gebruikers niet aangaat. */}
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-              <QuickStat label="Totaal Trades" value={stats?.total_trades || 0} icon={Activity} color="#06b6d4" />
-              <QuickStat label="Gekocht" value={`\u20AC${stats?.total_buy_eur || 0}`} subtext={`${stats?.buys || 0} buys`} icon={ArrowDownRight} color="#22c55e" />
-              <QuickStat label="Verkocht" value={`\u20AC${stats?.total_sell_eur || 0}`} subtext={`${stats?.sells || 0} sells`} icon={ArrowUpRight} color="#ef4444" />
-              <QuickStat label="Fees betaald" value={`\u20AC${stats?.total_fees_eur || 0}`} subtext="0.25% per trade" icon={DollarSign} color="#f59e0b" />
-              <QuickStat label="Netto P&L (trades)" value={`\u20AC${stats?.netto_pnl ?? 0}`} subtext={`Bruto: \u20AC${stats?.bruto_pnl ?? 0}`} icon={TrendingUp} color={(stats?.netto_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />
-              <QuickStat
-                label="Live P&L (vs start)"
-                value={stats?.live_pnl != null ? `\u20AC${stats.live_pnl.toFixed(2)}` : '—'}
-                subtext={stats?.baseline_eur ? `Baseline: \u20AC${stats.baseline_eur}` : 'Geen baseline'}
-                icon={Zap}
-                color={(stats?.live_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'}
-              />
+            {/* v7_user_view_stats_001 — Users zien alleen 'Totaal Trades' (eigen).
+                Alle admin-info (Gekocht/Verkocht/Fees/P&L) staat in Analytics → Trade tab. */}
+            <div className={isAdmin ? "grid grid-cols-2 md:grid-cols-6 gap-3" : "grid grid-cols-1 md:grid-cols-2 gap-3"}>
+              <QuickStat label="Totaal Trades" value={(isAdmin ? stats?.total_trades : (stats?.user_trades ?? stats?.total_trades)) || 0} icon={Activity} color="#06b6d4" />
+              {isAdmin && <QuickStat label="Gekocht" value={`\u20AC${stats?.total_buy_eur || 0}`} subtext={`${stats?.buys || 0} buys`} icon={ArrowDownRight} color="#22c55e" />}
+              {isAdmin && <QuickStat label="Verkocht" value={`\u20AC${stats?.total_sell_eur || 0}`} subtext={`${stats?.sells || 0} sells`} icon={ArrowUpRight} color="#ef4444" />}
+              {isAdmin && <QuickStat label="Fees betaald" value={`\u20AC${stats?.total_fees_eur || 0}`} subtext="0.25% per trade" icon={DollarSign} color="#f59e0b" />}
+              {isAdmin && <QuickStat label="Netto P&L (trades)" value={`\u20AC${stats?.netto_pnl ?? 0}`} subtext={`Bruto: \u20AC${stats?.bruto_pnl ?? 0}`} icon={TrendingUp} color={(stats?.netto_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />}
+              {isAdmin && (
+                <QuickStat
+                  label="Live P&L (vs start)"
+                  value={stats?.live_pnl != null ? `\u20AC${stats.live_pnl.toFixed(2)}` : '—'}
+                  subtext={stats?.baseline_eur ? `Baseline: \u20AC${stats.baseline_eur}` : 'Geen baseline'}
+                  icon={Zap}
+                  color={(stats?.live_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'}
+                />
+              )}
+              {!isAdmin && (
+                <QuickStat label="Mijn P&L" value={stats?.user_pnl != null ? `\u20AC${stats.user_pnl.toFixed(2)}` : '—'} subtext="Eigen resultaat" icon={TrendingUp} color={(stats?.user_pnl ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />
+              )}
             </div>
 
             {/* Main 3-col Grid */}

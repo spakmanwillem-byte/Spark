@@ -1447,6 +1447,9 @@ function TradeAnalyticsTab() {
           de Event Overlay test die hier per abuis stond. */}
       <RestwaardePortfolio />
 
+      {/* v7_admin_trader_stats_001 — Trader stats verplaatst uit user-facing module */}
+      <SparkTraderStatsPanel />
+
       {/* v5_admin_bot_cards_001 — Bot kaarten (uitklap → potjes + history per wallet) */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
@@ -1852,6 +1855,133 @@ function StatPill({ label, value, color }) {
 // v6_reconcile_001 — Toont per coin: potje vs echte Bitvavo, met diff + sync-knop
 // v7_restwaarde_portfolio_001 — Toon per coin de EUR-restwaarde op Bitvavo.
 // Dit is admin-info die bij het trader-kader hoort (niet in aparte tab).
+// v7_admin_trader_stats_001 — Trader stats-blok (was in user-facing TraderPage, nu admin-only hier)
+function SparkTraderStatsPanel() {
+  const [stats, setStats] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [selected, setSelected] = useState('user-000');
+  const [baselineEditing, setBaselineEditing] = useState(false);
+  const [baselineInput, setBaselineInput] = useState('');
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  const load = React.useCallback(async () => {
+    try {
+      const r = await fetch(`${API}/api/trade/stats/${selected}`).then(x => x.json());
+      setStats(r);
+    } catch { setStats(null); }
+  }, [API, selected]);
+
+  useEffect(() => {
+    fetch(`${API}/api/trade/admin/bots`).then(r => r.json()).then(d => {
+      const list = (d.bots || []).map(b => ({ id: b.user_id, name: b.user_naam || b.user_id }));
+      setUsers(list);
+    }).catch(() => {});
+  }, [API]);
+
+  useEffect(() => { load(); }, [load]);
+
+  const setBaseline = async () => {
+    const v = parseFloat(baselineInput);
+    if (isNaN(v) || v < 0) { alert('Ongeldig bedrag'); return; }
+    try {
+      const r = await fetch(`${API}/api/trade/baseline/${selected}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ baseline_eur: v, note: 'Manual reset via analytics' }),
+      }).then(x => x.json());
+      if (r.success) {
+        setBaselineEditing(false);
+        setBaselineInput('');
+        load();
+      } else {
+        alert('Baseline zetten mislukt: ' + (r.error || 'onbekend'));
+      }
+    } catch (e) { alert('Fout: ' + e.message); }
+  };
+
+  const setBaselineToNow = async () => {
+    if (!window.confirm(`Baseline resetten naar huidige Bitvavo balance voor ${selected}? P&L begint dan opnieuw vanaf 0.`)) return;
+    try {
+      const bv = await fetch(`${API}/api/trade/bitvavo/balance/${selected}`).then(x => x.json());
+      if (!bv.success) { alert('Bitvavo balance ophalen mislukt'); return; }
+      const total = bv.total_eur;
+      const r = await fetch(`${API}/api/trade/baseline/${selected}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ baseline_eur: total, note: 'Reset to current Bitvavo balance' }),
+      }).then(x => x.json());
+      if (r.success) { load(); alert(`Baseline gezet op €${total.toFixed(2)}`); }
+    } catch (e) { alert('Fout: ' + e.message); }
+  };
+
+  const s = stats || {};
+  const pnl = s.netto_pnl ?? 0;
+  const livePnl = s.live_pnl;
+
+  return (
+    <div data-testid="admin-trader-stats" className="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-4 mb-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-white flex items-center gap-2">📊 Trader stats (admin)</h3>
+        <div className="flex items-center gap-2">
+          <select value={selected} onChange={e => setSelected(e.target.value)}
+            data-testid="admin-stats-user-select"
+            className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-200">
+            {users.map(u => <option key={u.id} value={u.id}>{u.name} ({u.id})</option>)}
+          </select>
+          <button onClick={load} className="text-[11px] text-slate-400 hover:text-white">↻</button>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-2 text-xs">
+        <StatMini label="Trades" value={s.total_trades || 0} color="text-cyan-400" />
+        <StatMini label="Gekocht" value={`€${(s.total_buy_eur || 0).toFixed(2)}`} sub={`${s.buys || 0} buys`} color="text-emerald-400" />
+        <StatMini label="Verkocht" value={`€${(s.total_sell_eur || 0).toFixed(2)}`} sub={`${s.sells || 0} sells`} color="text-red-400" />
+        <StatMini label="Fees" value={`€${(s.total_fees_eur || 0).toFixed(2)}`} sub="0.25%" color="text-amber-400" />
+        <StatMini label="Netto P&L" value={`€${pnl.toFixed(2)}`} sub={`Bruto €${(s.bruto_pnl || 0).toFixed(2)}`} color={pnl >= 0 ? 'text-emerald-400' : 'text-red-400'} />
+        <StatMini
+          label="Live P&L vs start"
+          value={livePnl != null ? `€${livePnl.toFixed(2)}` : '—'}
+          sub={s.baseline_eur ? `Baseline €${s.baseline_eur.toFixed(2)}` : 'Geen baseline'}
+          color={livePnl != null ? (livePnl >= 0 ? 'text-emerald-400' : 'text-red-400') : 'text-slate-500'}
+        />
+      </div>
+      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-800">
+        {!baselineEditing ? (
+          <>
+            <button onClick={() => setBaselineEditing(true)}
+              data-testid="baseline-set-manual"
+              className="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">
+              Baseline zetten (handmatig)
+            </button>
+            <button onClick={setBaselineToNow}
+              data-testid="baseline-reset-now"
+              className="text-[10px] px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded">
+              🔁 Reset baseline naar nu (Bitvavo balance)
+            </button>
+            {s.baseline_set_at && <span className="text-[10px] text-slate-500 ml-auto">Set: {String(s.baseline_set_at).slice(0, 19)}</span>}
+          </>
+        ) : (
+          <>
+            <input type="number" step="0.01" value={baselineInput} onChange={e => setBaselineInput(e.target.value)}
+              placeholder="Baseline in €" className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs w-32 text-slate-200" />
+            <button onClick={setBaseline} className="text-[10px] px-2 py-1 bg-emerald-500/20 text-emerald-300 rounded">Zetten</button>
+            <button onClick={() => { setBaselineEditing(false); setBaselineInput(''); }} className="text-[10px] px-2 py-1 bg-slate-800 text-slate-400 rounded">Annuleer</button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatMini({ label, value, sub, color = 'text-slate-200' }) {
+  return (
+    <div className="bg-slate-800/40 rounded-lg p-2">
+      <p className="text-[9px] uppercase text-slate-500 tracking-wide">{label}</p>
+      <p className={`text-sm font-bold ${color}`}>{value}</p>
+      {sub && <p className="text-[9px] text-slate-600">{sub}</p>}
+    </div>
+  );
+}
+
+
+
 function RestwaardePortfolio() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);

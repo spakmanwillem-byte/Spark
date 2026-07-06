@@ -155,6 +155,9 @@ async def get_trade_stats(user_id: str):
         "netto_pnl": round(netto_pnl, 2),
         "mock_trades": sum(1 for t in trades if t.get("mock")),
         "real_trades": sum(1 for t in trades if not t.get("mock")),
+        # v7_user_view_stats_001 — user's OWN view (buys×sells zonder mock, admin-info verborgen bij front)
+        "user_trades": max(len([t for t in buys if not t.get("mock")]), len([t for t in sells if not t.get("mock")])),
+        "user_pnl": round(netto_pnl, 2),  # per user is dit dezelfde P&L (per user_id file)
         # Nieuwe velden
         "baseline_eur": baseline_eur,
         "live_balance": live_balance,

@@ -523,12 +523,21 @@ async def startup():
                 if not getattr(_m, "_use_potjes", False):
                     _m._use_potjes = True
                     needs_update = True
+                # v7_willem_dynamic_trade_amount_001 — trade_amount dynamisch = token-prijs
+                try:
+                    from modules.shop.routes import get_dynamic_price as _gdp
+                    _dyn_price = float(_gdp())
+                    if _dyn_price > 0 and abs(float(getattr(_m, "_trade_amount", 0) or 0) - _dyn_price) > 0.01:
+                        _m._trade_amount = _dyn_price
+                        needs_update = True
+                except Exception:
+                    pass
                 if needs_update:
                     try:
                         _m._persist_state()
                     except Exception:
                         pass
-                    print(f"   ⚙️  Willem config gealigneerd: interval=900s, candle=15m, markets={len(_m._markets)}, auto_trade=True")
+                    print(f"   ⚙️  Willem config gealigneerd: interval=900s, candle=15m, markets={len(_m._markets)}, auto_trade=True, trade_amount=€{_m._trade_amount:.2f}")
             except Exception as _we:
                 print(f"   ⚠️  Willem config-align faalde: {_we}")
 

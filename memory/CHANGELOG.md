@@ -2,6 +2,38 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-06 (sessie 39) — Trader cleanup + Learning + UI split + KB save perf
+
+### 🐛 Bug fixes
+- **KB v2 `add_to_inbox` perf**: 18MB IO per save (deep scan alle 4 lade-files) → nu ~230ms via index-only. User meldde "moest meerdere keeren invullen" — was HTTP-timeout van slow save. `deep_scan=True` alleen expliciet voor index-repair.
+- **Trader header** geheel opgeruimd: "Bitvavo: €... | BCH €..." weg uit user + admin view. Alleen "trades" telling blijft.
+
+### 🎨 UI/UX
+- Header "Crypto Trader" → **"Spark Trader"**
+- Trader stats-split: users zien "Totaal Trades" + "Mijn P&L"; volledige stats voor admin in Analytics → Trade
+- Nieuw admin-widget `SparkTraderStatsPanel` met user-dropdown + baseline-reset knop ("🔁 Reset baseline naar nu (Bitvavo balance)")
+
+### ⚙️ Trader core (van vorige sessie doorgezet)
+- Force-sell atomair (rollback bij Bitvavo error 212/429)
+- SELL unit-mixing + decimal-precision + min-quote check
+- Multi-user autostart (Spark, Geiser draaien mee)
+- Willem/Spark/Geiser config gealigneerd (300-900s / 15m / 6× -EUR / dynamische trade_amount)
+- Ghost users cleanup (3 test-users weg)
+- Admin bulk: `POST /api/trade/admin/{start,stop}-all-bots`
+- Spark fee 5% → 0% (`SPARK_FEE_RATE = 0.0`)
+
+### 🧠 Learning-uitbreiding
+- Dagelijkse thread `learning-scheduler`: context per markt + market_stats per user
+- Per-markt win-rate uit `trade_history/user-*.json` (bias: trust/neutral/careful)
+- Nieuwe patronen: `month_patterns`, `week_of_month_patterns`, `weekend_vs_weekday`
+- Bias-weging in `apply_context_to_decision` (trust +0.08 / careful -0.10 / maand ±0.03 / week ±0.02)
+
+### 🏷️ Cleanup
+- "spookpot" → "restwaarde pot" overal
+- Alle hardcoded €5/€10/€6.32 defaults vervangen door `_default_trade_amount()` (= huidige token-prijs)
+- Event Overlay-test blok verwijderd uit Analytics → Trade
+
+
 ## 2026-07-06 — Force-Sell atomair + Multi-user + Pot revalue + Restwaarde UI (`v7_trader_hardening_001`)
 
 ### 🐛 Kritieke bug fixes

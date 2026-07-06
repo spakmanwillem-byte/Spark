@@ -390,8 +390,6 @@ export function TraderPage({ onNavigate }) {
               <h1 className="text-xl font-bold text-white">Spark Trader</h1>
               <p className="text-xs text-slate-400">
                 {isAdmin ? (stats?.total_trades || 0) : (stats?.user_trades ?? stats?.total_trades ?? 0)} trades
-                {isAdmin && bvBalance?.success && <span className="ml-2 text-green-400">| Bitvavo: €{bvBalance.total_eur?.toFixed(2)}</span>}
-                {' | '}{tickers[0] ? `BCH €${tickers[0].last}` : 'Laden...'}
               </p>
             </div>
           </div>

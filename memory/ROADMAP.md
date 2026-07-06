@@ -58,6 +58,51 @@ clusters/vertrouwen/etc is **admin-only**. Niet altijd zichtbaar zodat chat scho
 
 ---
 
+## 🔎 REALITY CHECK — Sessie 39 (2026-07-06) — Trader cleanup + Learning + UI split
+
+### ✅ Klaar deze sessie
+- **Force-sell atomair**: bail-out bij Bitvavo error (212/429) → geen close_pot / PnL / bonus meer bij gefaalde sell
+- **SELL unit-mixing fix**: `coin_target = amount_eur / price` ipv min(EUR, coin) hack
+- **Decimal precision**: `_round_amount_for_market()` — voorkomt errorCode 429
+- **Min-quote check**: SELL faalt duidelijk als resulterende quote < min_order
+- **Pot revalue**: elke tick vrije pots → huidige dynamische token-prijs. Handmatige "Herwaardeer"-knop per pot + globaal
+- **Multi-user auto-provision + autostart**: Spark & Geiser starten mee bij backend startup (was fout aan mijn kant — user vroeg dit expliciet)
+- **Willem-config alignment**: interval 900s, candle 15m, 6× -EUR markets, trade_amount dynamisch = token-prijs
+- **Spark & Geiser config align**: interval 300s (5min, user-keuze), candle 15m, 6× -EUR markets, dynamisch trade_amount
+- **Ghost registry cleanup**: 3 test-users zonder pots weg uit `bots_registry_state.json`
+- **Admin bulk controls**: `POST /api/trade/admin/{start,stop}-all-bots` + UI knoppen
+- **Spark fee 5% → 0%**: `SPARK_FEE_RATE = 0.0` constant (user's redenering: winst → Bitvavo → token stijgt vanzelf, geen extra cut)
+- **Alle hardcoded €5/€10/€6.32 defaults** vervangen door `_default_trade_amount()` = `get_dynamic_price()`
+- **Terminologie**: "spookpot" → "restwaarde pot" overal
+- **Restwaarde-portfolio widget** in Analytics → Trade (was Event Overlay test)
+- **Live Bitvavo Portfolio** verplaatst uit user Trade module → alleen admin in Analytics
+- **Learning-uitbreiding**:
+  - Dagelijkse `learning-scheduler` thread refresht context + market_stats per markt
+  - Per-markt win-rate uit eigen `trade_history/user-*.json`
+  - Nieuwe patronen: `month_patterns`, `week_of_month_patterns`, `weekend_vs_weekday`
+  - Bias-weging in `apply_context_to_decision` (trust +0.08 / careful -0.10 / maand ±0.03 / week ±0.02)
+- **Trader UI split (v7)**:
+  - Header "Crypto Trader" → **"Spark Trader"**
+  - User-view: alleen "Totaal Trades" (eigen) + "Mijn P&L"
+  - Admin-view: volledige stats via nieuwe `SparkTraderStatsPanel` in Analytics → Trade
+  - Baseline reset knop: "🔁 Reset baseline naar nu (Bitvavo balance)"
+- **KB v2 save perf fix**: `add_to_inbox` deed 18MB IO per save (deep scan alle lades) → nu ~230ms via index-only. User meldde "moest meerdere keeren invullen" — was HTTP-timeout van slow save.
+
+### 🟡 Backlog na deze sessie (niet gedaan, wél gepland)
+- **P1 — Spark tab-context + trader-intents + tab-glow** (grote feature, eigen sessie):
+  - Spark begrijpt niet welke tab de user aan het bekijken is → beantwoordt niet contextueel
+  - Trader-commando's ("zet monitor aan", "wat verdiend deze week") → geen intent-matching op trader-API
+  - "Waar is trader?" → tab-knop moet visueel glowen/pulsen zodat user het ziet zonder overal een chatbalk te hebben
+- **P1 — Log-archief per dag/week/maand** in Analytics → Logs (categorieën, filters, export)
+- **P1 — Chat-log analyse als kaart-suggestie** (idee-extractie uit user's gesprekken → KB-suggesties)
+- **P2 — Trader Settings-kader** met broker fee / min-order / precisie readout uit Bitvavo API (transparantie)
+- **P2 — 2% fee bij token BUY in Shop** (verhoogt token-prijs; komt bij Boekhouden-module)
+- **P2 — BTW-verwerking** in boekhouden (na Kasboek SEPA)
+- **P2 — Kasboek SEPA integratie** (bestaande wens)
+- **P2 — Position.size bij BUY vullen** (netjes, niet urgent — SELL-fix vangt None op via Bitvavo balance)
+
+
+
 ## 🔎 REALITY CHECK — Sessie 36 (2026-07-02, laat) — Bitvavo state-sync
 
 ### ✅ Nieuw

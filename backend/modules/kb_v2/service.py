@@ -687,13 +687,14 @@ def move_card(card_id: str, from_lade: str, to_lade: str, user_id: str = "user-0
 
 
 @traced(intent="nieuwe kaart toevoegen aan inbox", module="kbv2")
-def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000") -> Dict:
+def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000", deep_scan: bool = False) -> Dict:
     """Maak een lege kaart in de inbox (bv. wanneer Spark een onbekend woord tegenkomt).
     Idempotent: als 'begrip' al ergens bestaat, return existing.
 
-    v6_kbv2_dedupe_001 — Hardened dedup: scant ook lades + inbox direct (niet alleen index),
-    case-insensitief, voorkomt dat dezelfde 'begrip' twee keer in inbox/lades kan landen
-    bij index-corruption of externe imports.
+    v7_kbv2_add_perf_001 — deep_scan default FALSE. Voorheen: bij elke add scanden
+    we alle 4 lade-files (~16MB) + inbox (~2MB) → 18MB IO per POST → langzaam →
+    user klikte opnieuw → race condition. Nu: vertrouw index (snel).
+    Gebruik `deep_scan=True` alleen als je index-corruptie vermoedt.
     """
     if not begrip or not begrip.strip():
         return {"success": False, "message": "Leeg begrip"}
@@ -704,32 +705,32 @@ def add_to_inbox(begrip: str, source: str = "user", user_id: str = "user-000") -
     if existing:
         return {"success": True, "kaart": existing["kaart"], "existing": True, "lade": existing["lade"]}
 
-    # 2. Diepe scan over lades + inbox (defensief tegen index-out-of-sync)
-    for L in LADES:
-        ld = load_json(_lade_path(L), default={"kaarten": []})
-        for k in ld.get("kaarten", []):
+    # 2. Deep scan alleen expliciet aanvragen (was default → grote IO-kosten)
+    if deep_scan:
+        for L in LADES:
+            ld = load_json(_lade_path(L), default={"kaarten": []})
+            for k in ld.get("kaarten", []):
+                if (k.get("begrip") or "").lower().strip() == nb:
+                    idx = load_json(_index_path(), default={"entries": {}})
+                    idx.setdefault("entries", {})[nb] = {
+                        "kaart_id": k.get("id"), "lade": L,
+                        "has_lagen": [kk for kk, vv in (k.get("lagen") or {}).items() if vv],
+                        "last_updated": _now(),
+                    }
+                    save_json(_index_path(), idx)
+                    return {"success": True, "kaart": k, "existing": True, "lade": L,
+                            "repaired_index": True}
+        inbox_check = load_json(_inbox_path(), default={"kaarten": []})
+        for k in inbox_check.get("kaarten", []):
             if (k.get("begrip") or "").lower().strip() == nb:
-                # Repair index meteen
                 idx = load_json(_index_path(), default={"entries": {}})
                 idx.setdefault("entries", {})[nb] = {
-                    "kaart_id": k.get("id"), "lade": L,
-                    "has_lagen": [kk for kk, vv in (k.get("lagen") or {}).items() if vv],
-                    "last_updated": _now(),
+                    "kaart_id": k.get("id"), "lade": None,
+                    "has_lagen": [], "last_updated": _now(),
                 }
                 save_json(_index_path(), idx)
-                return {"success": True, "kaart": k, "existing": True, "lade": L,
+                return {"success": True, "kaart": k, "existing": True, "lade": None,
                         "repaired_index": True}
-    inbox_check = load_json(_inbox_path(), default={"kaarten": []})
-    for k in inbox_check.get("kaarten", []):
-        if (k.get("begrip") or "").lower().strip() == nb:
-            idx = load_json(_index_path(), default={"entries": {}})
-            idx.setdefault("entries", {})[nb] = {
-                "kaart_id": k.get("id"), "lade": None,
-                "has_lagen": [], "last_updated": _now(),
-            }
-            save_json(_index_path(), idx)
-            return {"success": True, "kaart": k, "existing": True, "lade": None,
-                    "repaired_index": True}
 
     with _lock:
         inbox = load_json(_inbox_path(), default={"kaarten": []})

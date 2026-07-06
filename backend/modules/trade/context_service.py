@@ -254,26 +254,81 @@ def _detect_market_state(candles: List[Dict], closes: List[float]) -> Dict:
 
 
 def _analyze_patterns(candles: List[Dict], closes: List[float]) -> Dict:
-    """Weekday patronen + volatility."""
+    """Weekday + maand + week-of-month + volatility."""
     if len(candles) < 100:
         return {}
     weekday_data = {i: [] for i in range(7)}
-    names = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]
+    month_data: Dict[int, List[float]] = {i: [] for i in range(1, 13)}
+    week_of_month_data: Dict[int, List[float]] = {1: [], 2: [], 3: [], 4: [], 5: []}
+    weekend_data: List[float] = []
+    weekday_only_data: List[float] = []
+    weekday_names = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]
+    month_names = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
+
     for i in range(1, len(candles)):
         ts = candles[i].get("timestamp", 0) / 1000
         dt = datetime.fromtimestamp(ts, tz=timezone.utc)
         change = ((candles[i]["close"] - candles[i-1]["close"]) / candles[i-1]["close"]) * 100
-        weekday_data[dt.weekday()].append(change)
-    patterns = {}
+        wd = dt.weekday()
+        weekday_data[wd].append(change)
+        month_data[dt.month].append(change)
+        # week van de maand (1-5)
+        wom = min(5, (dt.day - 1) // 7 + 1)
+        week_of_month_data[wom].append(change)
+        # weekend = za/zo (5,6)
+        if wd >= 5:
+            weekend_data.append(change)
+        else:
+            weekday_only_data.append(change)
+
+    def _bias(avg: float) -> str:
+        return "bullish" if avg > 0.2 else ("bearish" if avg < -0.2 else "neutral")
+
+    weekday_patterns: Dict[str, Dict] = {}
     for day, changes in weekday_data.items():
         if len(changes) < 10:
             continue
         avg = statistics.mean(changes)
-        patterns[names[day]] = {
+        weekday_patterns[weekday_names[day]] = {
             "avg_change_pct": round(avg, 3),
             "samples": len(changes),
-            "bias": "bullish" if avg > 0.2 else ("bearish" if avg < -0.2 else "neutral"),
+            "bias": _bias(avg),
         }
+
+    month_patterns: Dict[str, Dict] = {}
+    for month_num, changes in month_data.items():
+        if len(changes) < 5:
+            continue
+        avg = statistics.mean(changes)
+        month_patterns[month_names[month_num - 1]] = {
+            "avg_change_pct": round(avg, 3),
+            "samples": len(changes),
+            "bias": _bias(avg),
+        }
+
+    week_of_month_patterns: Dict[str, Dict] = {}
+    for wom, changes in week_of_month_data.items():
+        if len(changes) < 5:
+            continue
+        avg = statistics.mean(changes)
+        week_of_month_patterns[f"week_{wom}"] = {
+            "avg_change_pct": round(avg, 3),
+            "samples": len(changes),
+            "bias": _bias(avg),
+        }
+
+    weekend_vs_weekday: Dict = {}
+    if len(weekend_data) >= 10 and len(weekday_only_data) >= 10:
+        we_avg = statistics.mean(weekend_data)
+        wd_avg = statistics.mean(weekday_only_data)
+        weekend_vs_weekday = {
+            "weekend_avg_pct": round(we_avg, 3),
+            "weekday_avg_pct": round(wd_avg, 3),
+            "weekend_bias": _bias(we_avg),
+            "weekday_bias": _bias(wd_avg),
+            "delta_pct": round(we_avg - wd_avg, 3),
+        }
+
     # Volatility
     volatility = {}
     if len(closes) >= 20:
@@ -284,7 +339,14 @@ def _analyze_patterns(candles: List[Dict], closes: List[float]) -> Dict:
             "state": "high" if ratio > 1.2 else ("low" if ratio < 0.8 else "normal"),
             "ratio": round(ratio, 3),
         }
-    return {"weekday_patterns": patterns, "volatility": volatility}
+
+    return {
+        "weekday_patterns": weekday_patterns,
+        "month_patterns": month_patterns,
+        "week_of_month_patterns": week_of_month_patterns,
+        "weekend_vs_weekday": weekend_vs_weekday,
+        "volatility": volatility,
+    }
 
 
 def analyze(candles: List[Dict], market: str = "BCH-EUR") -> Dict:
@@ -385,6 +447,31 @@ def apply_context_to_decision(decision: Dict, context: Dict, current_price: floa
         elif action == "BUY" and bias == "bullish":
             confidence = min(0.99, confidence + 0.05)
             notes.append(f"+0.05 {day_key} bullish pattern")
+
+    # v7_month_and_wom_patterns_001 — nu ook maand + week-van-de-maand + weekend/weekdag
+    now_dt = datetime.now(timezone.utc)
+    month_names = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
+    month_key = month_names[now_dt.month - 1]
+    month_patterns = context.get("patterns", {}).get("month_patterns", {})
+    if action == "BUY" and month_key in month_patterns:
+        mb = month_patterns[month_key]["bias"]
+        if mb == "bearish":
+            confidence = max(0.1, confidence - 0.03)
+            notes.append(f"-0.03 {month_key} maand bearish")
+        elif mb == "bullish":
+            confidence = min(0.99, confidence + 0.03)
+            notes.append(f"+0.03 {month_key} maand bullish")
+
+    wom_key = f"week_{min(5, (now_dt.day - 1) // 7 + 1)}"
+    wom_patterns = context.get("patterns", {}).get("week_of_month_patterns", {})
+    if action == "BUY" and wom_key in wom_patterns:
+        wb = wom_patterns[wom_key]["bias"]
+        if wb == "bearish":
+            confidence = max(0.1, confidence - 0.02)
+            notes.append(f"-0.02 {wom_key} bearish")
+        elif wb == "bullish":
+            confidence = min(0.99, confidence + 0.02)
+            notes.append(f"+0.02 {wom_key} bullish")
 
     # 4. v7_market_stats_learning_001 — eigen trade-history per markt
     market_bias = None

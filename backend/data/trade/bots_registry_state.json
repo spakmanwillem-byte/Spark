@@ -2,7 +2,7 @@
   "bots": [
     {
       "user_id": "user-000",
-      "running": false,
+      "running": true,
       "interval": 60,
       "market": "BCH-EUR",
       "markets": [
@@ -13,7 +13,7 @@
         "ADA",
         "ATOM"
       ],
-      "candle_interval": "15m",
+      "candle_interval": "1h",
       "auto_trade": true,
       "trade_amount": 5.0,
       "use_mock": false,
@@ -67,7 +67,7 @@
     },
     {
       "user_id": "user-a0ee2d7e",
-      "running": false,
+      "running": true,
       "interval": 60,
       "market": "BCH-EUR",
       "markets": [
@@ -78,7 +78,7 @@
         "ADA",
         "ATOM"
       ],
-      "candle_interval": "15m",
+      "candle_interval": "1h",
       "auto_trade": true,
       "trade_amount": 5.0,
       "use_mock": false,
@@ -86,5 +86,5 @@
       "pot_count": 2
     }
   ],
-  "saved_at": "2026-07-06T06:41:01.130925+00:00"
+  "saved_at": "2026-07-06T06:49:37.041557+00:00"
 }

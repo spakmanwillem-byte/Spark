@@ -549,14 +549,18 @@ async def startup():
                         if uid == "user-001":
                             continue  # legacy singleton
                         try:
+                            # v7_multi_user_autostart_001 — alle geregistreerde bots draaien mee
+                            # als Willem's legacy monitor draaide. Zo koopt niet alleen Willem
+                            # bij een BUY-signaal maar ook Spark, Geiser etc. Autostart=True
+                            # zodat elke bot direct actief is na deploy.
                             auto_provision_bot_for_token_holder(
-                                uid, use_mock=False, auto_trade=True, autostart=False
+                                uid, use_mock=False, auto_trade=True, autostart=True
                             )
                             provisioned += 1
                         except Exception as _pe:
                             print(f"   ⚠️  auto-provision {uid} failed: {_pe}")
                     if provisioned > 0:
-                        print(f"   🤖 v7 auto-provisioned {provisioned} multi-user bot(s) (idempotent)")
+                        print(f"   🤖 v7 auto-provisioned + STARTED {provisioned} multi-user bot(s)")
             except Exception as _me:
                 print(f"   ⚠️  multi-user auto-provision failed: {_me}")
         except Exception as e:

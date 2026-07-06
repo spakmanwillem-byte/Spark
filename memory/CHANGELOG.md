@@ -2,6 +2,38 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-06 — Force-Sell atomair + Multi-user + Pot revalue + Restwaarde UI (`v7_trader_hardening_001`)
+
+### 🐛 Kritieke bug fixes
+1. **Force-sell atomair** (`routes.py::force_sell_pot`) — voorheen sloot pot + kende PnL/Spark-bonus toe ook als Bitvavo faalde (errorCode 212/429). Nu: bij `sell_result.success=false` blijft pot open, geen bonus, audit-entry als `force_sell_rejected`.
+2. **SELL unit-mixing fix** (`monitor.py::execute_real_trade` — `v7_sell_units_fix_001`) — clamp `min(amount_eur, actual_avail)` mixte EUR met coin-count. Nu: `coin_target = amount_eur/price`, clamp naar `min(coin_target, actual_avail) * 0.999`, round naar market-specifieke precisie.
+3. **Decimal precision** (`v7_market_precision_001`) — nieuwe `get_market_precision()` + `_round_amount_for_market()` truncate coin-amount voor Bitvavo-orders. Voorkomt errorCode 429.
+4. **Min-quote check** (`v7_sell_min_quote_check_001`) — SELL faalt vroeg met duidelijke error als resulterende quote-value < min_quote (bv. restwaarde-coin).
+
+### ✨ Nieuwe features
+5. **Pot revalue** (`potjes.py::revalue_free_pots` + `revalue_single_pot`) — vrije pots capital = huidige dynamische token-prijs. Automatisch elke monitor-tick + handmatige knop.
+6. **Multi-user auto-provisioning** (`server.py::startup`) — bij backend-start worden alle users met pots automatisch als bot geregistreerd (Spark, Geiser, ...). Nieuwe users krijgen ook auto een bot via `auth/routes.py::create_user`.
+7. **Restwaarde-portfolio widget** (`AnalyticsPage.js`) — nieuw kader in Analytics → Trade tab: toont per coin de Bitvavo EUR-restwaarde, dust <€0.01 uitklapbaar.
+8. **Herwaardeer-knop per pot** (naast Force-sell) én globaal "Herwaardeer vrije pots" per bot.
+
+### 🏷️ Terminologie
+9. **"spookpot" → "restwaarde pot"** — user-friendly benaming voor pots waarvan de coin (bijna) niet meer op Bitvavo staat.
+
+### 🗑️ Opgeschoond
+10. **Event Overlay test verwijderd** uit Analytics → Trade tab (hoorde daar niet, functie via `/api/events/trigger` blijft beschikbaar voor toekomstige devtools).
+
+### API endpoints (nieuw)
+- `POST /api/trade/potjes/{user_id}/revalue-all` — alle vrije pots van user herwaarderen (admin-only)
+- `POST /api/trade/potjes/{user_id}/{pot_id}/revalue` — 1 pot herwaarderen (admin-only)
+
+### Verificatie
+- ✅ Force-sell rejection getest via mock: pot blijft open, audit-entry type=`force_sell_rejected`, geen close_pot/bonus
+- ✅ Revalue: alle 22 pots (Willem 10, Spark 10, Geiser 2) synchroon op €6.26 (was €5.08 en €10.40)
+- ✅ Multi-user: 6 bots zichtbaar in Analytics (was 1: Willem)
+- ✅ Restwaarde portfolio widget rendert €137.70 totaal met 7 coins boven €0.01 + 10 dust
+- ✅ Admin-only check op revalue endpoints
+
+
 ## 2026-07-04 — KB v2 Image Archive Picker UI voltooid (`v7_media_dedup_001` — final)
 
 ### 🎨 Frontend Modal + backend inbox-fix

@@ -3,7 +3,7 @@ Trade Routes - Trade history, positions, Bitvavo credentials, monitoring, candle
 """
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 from pathlib import Path
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
@@ -1164,6 +1164,53 @@ class ForceSellBody(BaseModel):
     reason: Optional[str] = None
 
 
+# ============================================================
+# v7_pot_revalue_001 — Handmatige "Herwaardeer" knop per pot en globaal
+# ============================================================
+class RevalueBody(BaseModel):
+    viewer_id: str
+
+
+def _get_token_price_and_check_admin(viewer_id: str) -> Dict:
+    """Helper: valideer admin + fetch huidige dynamische token-prijs."""
+    users_data = load_json(Path(__file__).parent.parent.parent / "data" / "system" / "users.json", default={})
+    users_list = users_data.get("users", []) if isinstance(users_data, dict) else []
+    viewer = next((u for u in users_list if (u.get("id") or u.get("user_id")) == viewer_id), None)
+    if not viewer or viewer.get("gradatie", 99) > 1:
+        return {"success": False, "error": "Alleen admins (gradatie ≤ 1) mogen herwaarderen"}
+    try:
+        from modules.shop.routes import get_dynamic_price
+        return {"success": True, "price": float(get_dynamic_price())}
+    except Exception as e:
+        return {"success": False, "error": f"Kon token-prijs niet ophalen: {e}"}
+
+
+@router.post("/potjes/{user_id}/revalue-all")
+async def revalue_all_pots(user_id: str, body: RevalueBody):
+    """Zet capital van alle VRIJE pots op de huidige dynamische token-prijs.
+
+    Open pots blijven ongewijzigd. Dit gebeurt automatisch elke monitor-tick,
+    maar dit endpoint is voor de handmatige knop in het trader-kader.
+    """
+    chk = _get_token_price_and_check_admin(body.viewer_id)
+    if not chk["success"]:
+        return chk
+    result = potjes_svc.revalue_free_pots(user_id, chk["price"])
+    result["token_price_used"] = chk["price"]
+    return result
+
+
+@router.post("/potjes/{user_id}/{pot_id}/revalue")
+async def revalue_single_pot_endpoint(user_id: str, pot_id: str, body: RevalueBody):
+    """Handmatig 1 pot op huidige token-prijs zetten (admin-knop naast force-sell)."""
+    chk = _get_token_price_and_check_admin(body.viewer_id)
+    if not chk["success"]:
+        return chk
+    result = potjes_svc.revalue_single_pot(user_id, pot_id, chk["price"])
+    result["token_price_used"] = chk["price"]
+    return result
+
+
 @router.post("/potjes/{user_id}/{pot_id}/force-sell")
 async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
     """Admin-only: sluit een specifiek potje op huidige marktprijs.
@@ -1232,7 +1279,7 @@ async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
             "bitvavo_response": sell_result,
             "market": market,
             "pot_id": pot_id,
-            "hint": "Pot blijft open. Als coin niet meer op Bitvavo staat (out-of-sync), gebruik /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo om spookpots op te ruimen zonder PnL.",
+            "hint": "Pot blijft open. Als coin niet meer op Bitvavo staat (out-of-sync), gebruik /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo om restwaarde-pots op te ruimen zonder PnL.",
         }
 
     real_exit_price = (sell_result.get("trade") or {}).get("price") or exit_price

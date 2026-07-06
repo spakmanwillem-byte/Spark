@@ -583,13 +583,14 @@ async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
 # =============================================================================
 # v7_bitvavo_state_sync_001 — Bidirectionele sync tussen pots en Bitvavo.
 #
-# Probleem: pots kunnen "spook" zijn (claim coin die Bitvavo niet meer heeft,
-# bijv. omdat oude buggy SELL Bitvavo wel verkocht maar pot niet sloot).
+# Probleem: pots kunnen "restwaarde" bevatten (claim coin die Bitvavo niet meer
+# heeft in de gevraagde hoeveelheid, bijv. omdat oude buggy SELL Bitvavo wel
+# verkocht maar pot niet sloot; of coin is stof-restwaarde <€0.01).
 # En orphans: coins op Bitvavo zonder matching open pot.
 #
 # Deze sync:
 #   1. Voor elke OPEN pot: check of Bitvavo genoeg coin heeft (met 5% tolerance)
-#      - Als NEE → "spook" → admin-sluit met exit=entry (netto=0)
+#      - Als NEE → "restwaarde-pot" → admin-sluit met exit=entry (netto=0)
 #   2. Voor elke ORPHAN coin: check of er een closed pot beschikbaar is
 #      - Als JA → heropen pot met echte Bitvavo size + avg entry uit trade_history
 # =============================================================================
@@ -597,21 +598,21 @@ async def recover_orphans(user_id: str, req: RecoverOrphansRequest):
 
 class BitvavoSyncRequest(BaseModel):
     execute: bool = False              # v7_orphan_safety_001 — MOET expliciet true
-    close_spooks: bool = True          # sluit pots wier coin niet meer op Bitvavo staat
+    close_spooks: bool = True          # sluit pots wier coin niet meer op Bitvavo staat (legacy naam voor restwaarde-close)
     reopen_orphans: bool = True        # heropen closed pots voor Bitvavo orphans
 
 
 @router.post("/potjes/{user_id}/sync-with-bitvavo")
 async def sync_potjes_with_bitvavo(user_id: str, req: BitvavoSyncRequest):
-    """Bidirectionele sync: sluit spook-pots + heropen orphans.
+    """Bidirectionele sync: sluit restwaarde-pots + heropen orphans.
 
     ⚠️ Vereist `execute:true` — anders dry-run preview.
 
     Response:
-      would_close_spooks[]  — pots die administratief gesloten moeten worden
-      would_reopen_orphans[]— orphan coins die naar closed pots kunnen
-      executed_closes[]     — daadwerkelijk gesloten (bij execute=true)
-      executed_reopens[]    — daadwerkelijk heropend (bij execute=true)
+      would_close_restwaarde[]  — pots die administratief gesloten moeten worden
+      would_reopen_orphans[]    — orphan coins die naar closed pots kunnen
+      executed_closes[]         — daadwerkelijk gesloten (bij execute=true)
+      executed_reopens[]        — daadwerkelijk heropend (bij execute=true)
     """
     # 1. Bitvavo balances
     bv_result = fetch_bitvavo_balance(user_id)
@@ -721,11 +722,13 @@ async def sync_potjes_with_bitvavo(user_id: str, req: BitvavoSyncRequest):
     if not req.execute:
         return {
             "success": True, "mode": "DRY_RUN",
-            "message": "⚠️ Dry-run: stuur {\"execute\": true} om spook-close + orphan-reopen uit te voeren.",
-            "would_close_spooks": would_close if req.close_spooks else [],
+            "message": "⚠️ Dry-run: stuur {\"execute\": true} om restwaarde-close + orphan-reopen uit te voeren.",
+            "would_close_restwaarde": would_close if req.close_spooks else [],
+            "would_close_spooks": would_close if req.close_spooks else [],  # legacy alias
             "would_reopen_orphans": would_reopen if req.reopen_orphans else [],
             "totals": {
-                "spooks_to_close": len(would_close),
+                "restwaarde_to_close": len(would_close),
+                "spooks_to_close": len(would_close),  # legacy alias
                 "orphans_to_reopen": len(would_reopen),
             },
             "ts": _now(),
@@ -748,9 +751,9 @@ async def sync_potjes_with_bitvavo(user_id: str, req: BitvavoSyncRequest):
                     }
                     p.setdefault("stats", {}).setdefault("trades", 0)
                     p["stats"]["trades"] += 1  # tellen als admin-close-cycle
-                    p["last_action"] = f"ADMIN CLOSE (spook — coin al weg) @ €{entry}"
+                    p["last_action"] = f"ADMIN CLOSE (restwaarde — coin al weg) @ €{entry}"
                     p.setdefault("reconcile_audit", []).append({
-                        "ts": now_iso, "action": "spook_close",
+                        "ts": now_iso, "action": "restwaarde_close",
                         "reason": spook["reason"],
                         "entry_price": entry,
                     })
@@ -790,7 +793,8 @@ async def sync_potjes_with_bitvavo(user_id: str, req: BitvavoSyncRequest):
         "executed_closes": executed_closes,
         "executed_reopens": executed_reopens,
         "summary": {
-            "spooks_closed": len(executed_closes),
+            "restwaarde_closed": len(executed_closes),
+            "spooks_closed": len(executed_closes),  # legacy alias
             "orphans_reopened": len(executed_reopens),
         },
         "ts": now_iso,

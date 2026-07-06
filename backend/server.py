@@ -494,7 +494,7 @@ async def startup():
     # v4_startup_safe_001: in een thread zodat traag Bitvavo de boot niet blokkeert
     def _resume_in_background():
         try:
-            from modules.trade.monitor import get_monitor, resume_registry_bots, resume_registered_users
+            from modules.trade.monitor import get_monitor, resume_registry_bots, resume_registered_users, auto_provision_bot_for_token_holder
             # 1. Legacy single monitor
             result = get_monitor().resume_if_was_running()
             if result.get("resumed"):
@@ -506,6 +506,33 @@ async def startup():
                 print(f"   🤖 {n} registry-bot(s) auto-resumed")
             # 3. Proactief geregistreerde users (zichtbaar in Analytics, niet running)
             resume_registered_users()
+            # 4. v7_multi_user_auto_provision_001 — auto-registreer alle users met pots
+            #    zodat Spark (user-000), Geiser en anderen zichtbaar worden in analytics.
+            #    Idempotent: doet niks als bot al bestaat. autostart=False.
+            try:
+                from pathlib import Path as _P
+                import json as _json
+                potjes_file = _P(__file__).parent / "data" / "financial" / "user_potjes.json"
+                if potjes_file.exists():
+                    pot_data = _json.loads(potjes_file.read_text())
+                    users_with_pots = list((pot_data.get("users") or {}).keys())
+                    provisioned = 0
+                    for uid in users_with_pots:
+                        if not uid.startswith("user-") and not uid.startswith("bot-"):
+                            continue  # skip meta keys
+                        if uid == "user-001":
+                            continue  # legacy singleton
+                        try:
+                            auto_provision_bot_for_token_holder(
+                                uid, use_mock=False, auto_trade=True, autostart=False
+                            )
+                            provisioned += 1
+                        except Exception as _pe:
+                            print(f"   ⚠️  auto-provision {uid} failed: {_pe}")
+                    if provisioned > 0:
+                        print(f"   🤖 v7 auto-provisioned {provisioned} multi-user bot(s) (idempotent)")
+            except Exception as _me:
+                print(f"   ⚠️  multi-user auto-provision failed: {_me}")
         except Exception as e:
             print(f"   ⚠️  Trade monitor resume failed: {e}")
     try:

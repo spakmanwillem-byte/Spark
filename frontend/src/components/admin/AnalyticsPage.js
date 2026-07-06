@@ -1363,48 +1363,52 @@ function TradeAnalyticsTab() {
     }
   };
 
-  // v5_event_overlay_001 — Demo event trigger
-  const [sensoryCards, setSensoryCards] = React.useState([]);
-  React.useEffect(() => {
-    fetch(`${API}/api/events/sensory-cards`).then(r => r.json()).then(d => setSensoryCards(d.cards || [])).catch(() => {});
-  }, []);
-  const triggerDemoEvent = async (cardId, target) => {
-    await fetch(`${API}/api/events/trigger`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ card_id: cardId, target, duration_ms: 8000, triggered_by: 'admin' })
-    });
+  // v7_pot_revalue_001 — Handmatige herwaardeer-knop per pot
+  const revaluePot = async (user_id, pot_id) => {
+    try {
+      const r = await fetch(`${API}/api/trade/potjes/${user_id}/${pot_id}/revalue`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: 'user-001' }),
+      }).then(x => x.json());
+      if (r.success) {
+        loadBotDetails(user_id);
+      } else {
+        alert('Herwaardeer mislukt: ' + (r.error || 'onbekende fout'));
+      }
+    } catch (e) {
+      alert('Herwaardeer error: ' + e.message);
+    }
   };
+
+  // v7_pot_revalue_001 — Globaal alle vrije pots van een user herwaarderen
+  const revalueAllPots = async (user_id) => {
+    if (!window.confirm(`Alle vrije pots van ${user_id} herwaarderen naar huidige token-prijs?`)) return;
+    try {
+      const r = await fetch(`${API}/api/trade/potjes/${user_id}/revalue-all`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ viewer_id: 'user-001' }),
+      }).then(x => x.json());
+      if (r.success) {
+        alert(`✅ ${r.revalued_count} pot(s) herwaardeerd naar €${(r.token_price_used || 0).toFixed(4)}`);
+        loadBotDetails(user_id);
+      } else {
+        alert('Herwaardeer mislukt: ' + (r.error || 'onbekende fout'));
+      }
+    } catch (e) {
+      alert('Herwaardeer error: ' + e.message);
+    }
+  };
+
+  // v7_dead_code_001 — Event overlay demo is verwijderd uit trade-analytics tab.
+  // De trigger-functionaliteit blijft beschikbaar via /api/events/trigger endpoint
+  // voor toekomstig hergebruik (bv. in een eigen KB-devtools tab).
 
   return (
     <div data-testid="analytics-trade-tab" className="space-y-6">
-      {/* v5_event_overlay_001 — Demo Event Trigger */}
-      {sensoryCards.length > 0 && (
-        <div className="bg-slate-900/50 border border-amber-500/30 rounded-2xl p-6">
-          <h3 className="text-base font-semibold text-white mb-3 flex items-center gap-2">
-            🎭 Event Overlay test
-          </h3>
-          <p className="text-xs text-slate-400 mb-4">
-            Klik een knop om een KB-kaart als overlay te tonen op het gekozen kanaal.
-            Werkt nu echt — ga na het klikken naar Community pagina om het te zien.
-          </p>
-          {sensoryCards.map(c => (
-            <div key={c.id} className="flex flex-wrap items-center gap-3 mb-2">
-              <span className="text-sm text-amber-400 font-medium min-w-[140px]">{c.begrip}</span>
-              {c.has_image && <span className="text-[10px] text-cyan-400">🖼️ image</span>}
-              {c.has_sound && <span className="text-[10px] text-pink-400">🔊 sound</span>}
-              <div className="flex gap-2 ml-auto">
-                {['community', 'spark_feed', 'spark_prive'].map(t => (
-                  <button key={t} data-testid={`trigger-event-${c.id}-${t}`}
-                    onClick={() => triggerDemoEvent(c.id, t)}
-                    className="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 rounded-lg text-[10px] font-medium transition-colors">
-                    → {t.replace('_', ' ')}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* v7_restwaarde_portfolio_001 — Live Bitvavo restwaarde-portfolio.
+          Toont per coin de resterende hoeveelheid × huidige prijs. Vervangt
+          de Event Overlay test die hier per abuis stond. */}
+      <RestwaardePortfolio />
 
       {/* v5_admin_bot_cards_001 — Bot kaarten (uitklap → potjes + history per wallet) */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
@@ -1474,6 +1478,12 @@ function TradeAnalyticsTab() {
                             ⏹ Stop bot
                           </button>
                         )}
+                        <button onClick={() => revalueAllPots(b.user_id)}
+                          data-testid={`revalue-all-${b.user_id}`}
+                          title="Herwaardeer alle vrije pots naar huidige dynamische token-prijs"
+                          className="px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 rounded text-[11px] font-medium ml-auto">
+                          ↻ Herwaardeer vrije pots
+                        </button>
                       </div>
 
                       {/* Potjes-tabel */}
@@ -1516,14 +1526,24 @@ function TradeAnalyticsTab() {
                                       <td className="py-1.5 pr-2 text-right text-slate-400">{p.stats?.trades || 0}</td>
                                       <td className={`py-1.5 pr-2 text-right ${pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>€{pnl.toFixed(2)}</td>
                                       <td className="py-1.5 text-right">
-                                        {isOpenPos && (
-                                          <button onClick={() => setForceSelling({ user_id: b.user_id, pot_id: p.id, market: p.market, entry: p.position?.entry_price })}
-                                            data-testid={`force-sell-${b.user_id}-${p.id}`}
-                                            title="Force-sell dit potje (kan verlies geven)"
-                                            className="px-1.5 py-0.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded text-[10px] font-medium">
-                                            🛑 Force-sell
-                                          </button>
-                                        )}
+                                        <div className="flex items-center gap-1 justify-end">
+                                          {!isOpenPos && (
+                                            <button onClick={() => revaluePot(b.user_id, p.id)}
+                                              data-testid={`revalue-${b.user_id}-${p.id}`}
+                                              title="Herwaardeer capital op huidige token-prijs (dynamisch)"
+                                              className="px-1.5 py-0.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded text-[10px] font-medium">
+                                              ↻ Herw.
+                                            </button>
+                                          )}
+                                          {isOpenPos && (
+                                            <button onClick={() => setForceSelling({ user_id: b.user_id, pot_id: p.id, market: p.market, entry: p.position?.entry_price })}
+                                              data-testid={`force-sell-${b.user_id}-${p.id}`}
+                                              title="Force-sell dit potje (kan verlies geven)"
+                                              className="px-1.5 py-0.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded text-[10px] font-medium">
+                                              🛑 Force-sell
+                                            </button>
+                                          )}
+                                        </div>
                                       </td>
                                     </tr>
                                   );
@@ -1780,6 +1800,126 @@ function StatPill({ label, value, color }) {
 
 
 // v6_reconcile_001 — Toont per coin: potje vs echte Bitvavo, met diff + sync-knop
+// v7_restwaarde_portfolio_001 — Toon per coin de EUR-restwaarde op Bitvavo.
+// Dit is admin-info die bij het trader-kader hoort (niet in aparte tab).
+function RestwaardePortfolio() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const API = process.env.REACT_APP_BACKEND_URL;
+
+  const load = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const r = await fetch(`${API}/api/trade/bitvavo/balance/user-000`);
+      const j = await r.json();
+      setData(j);
+    } catch (e) {
+      setData({ success: false, error: String(e) });
+    } finally {
+      setLoading(false);
+    }
+  }, [API]);
+
+  useEffect(() => { load(); }, [load]);
+
+  if (!data || !data.success) {
+    return (
+      <div data-testid="restwaarde-portfolio" className="bg-slate-900/50 border border-cyan-500/30 rounded-2xl p-4 mb-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-cyan-300 flex items-center gap-2">
+            💎 Live restwaarde-portfolio
+          </h3>
+          <button onClick={load} disabled={loading}
+            data-testid="restwaarde-refresh"
+            className="text-[11px] text-slate-400 hover:text-white">
+            {loading ? '...' : 'Vernieuwen'}
+          </button>
+        </div>
+        <p className="text-xs text-slate-500 mt-2">{loading ? 'Bitvavo balance ophalen...' : 'Geen data'}</p>
+      </div>
+    );
+  }
+
+  // Sorteer op EUR-waarde aflopend
+  const balances = (data.balances || []).slice().sort((a, b) => (b.value_eur || 0) - (a.value_eur || 0));
+  const eur = balances.find(b => b.symbol === 'EUR');
+  const nonEur = balances.filter(b => b.symbol !== 'EUR');
+  const above = nonEur.filter(b => (b.value_eur || 0) >= 0.01);
+  const dust = nonEur.filter(b => (b.value_eur || 0) < 0.01);
+  const total = balances.reduce((s, b) => s + (b.value_eur || 0), 0);
+  const nonEurTotal = nonEur.reduce((s, b) => s + (b.value_eur || 0), 0);
+
+  return (
+    <div data-testid="restwaarde-portfolio" className="bg-slate-900/50 border border-cyan-500/30 rounded-2xl p-4 mb-4">
+      <div className="flex items-center justify-between mb-3">
+        <div>
+          <h3 className="text-sm font-semibold text-cyan-300 flex items-center gap-2">
+            💎 Live restwaarde-portfolio
+          </h3>
+          <p className="text-[10px] text-slate-500 mt-0.5">
+            Echte Bitvavo balance per coin. Restwaarde = wat er nog van eerdere trades op Bitvavo staat.
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-[10px] uppercase text-slate-500 tracking-wide">Totaal</p>
+          <p className="text-lg font-bold text-white" data-testid="restwaarde-total">€{total.toFixed(2)}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        {eur && (
+          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-2" data-testid="restwaarde-EUR">
+            <p className="text-[10px] uppercase text-emerald-400 tracking-wide">EUR</p>
+            <p className="text-sm font-bold text-white">€{eur.value_eur.toFixed(2)}</p>
+            <p className="text-[10px] text-slate-500 font-mono">{eur.total.toFixed(2)} EUR</p>
+          </div>
+        )}
+        {above.map(b => (
+          <div key={b.symbol} className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-2" data-testid={`restwaarde-${b.symbol}`}>
+            <p className="text-[10px] uppercase text-cyan-300 tracking-wide">{b.symbol}</p>
+            <p className="text-sm font-bold text-white">€{b.value_eur.toFixed(2)}</p>
+            <p className="text-[10px] text-slate-500 font-mono">{b.total < 0.001 ? b.total.toExponential(2) : b.total.toFixed(6)} {b.symbol}</p>
+            <p className="text-[9px] text-slate-600">@ €{(b.price_eur || 0).toFixed(2)}</p>
+          </div>
+        ))}
+      </div>
+
+      {dust.length > 0 && (
+        <div className="mt-3">
+          <button onClick={() => setExpanded(!expanded)}
+            data-testid="restwaarde-dust-toggle"
+            className="text-[10px] text-slate-500 hover:text-slate-300 flex items-center gap-1">
+            {expanded ? '▾' : '▸'} +{dust.length} dust-restwaarde crypto (&lt;€0,01)
+          </button>
+          {expanded && (
+            <div className="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1.5">
+              {dust.map(b => (
+                <div key={b.symbol} className="bg-slate-900/60 border border-slate-800 rounded p-1.5" data-testid={`restwaarde-dust-${b.symbol}`}>
+                  <p className="text-[9px] uppercase text-slate-500">{b.symbol}</p>
+                  <p className="text-[10px] font-mono text-slate-400">{b.total.toExponential(2)}</p>
+                  <p className="text-[9px] text-slate-600">€{(b.value_eur || 0).toFixed(4)}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="mt-3 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[10px] text-slate-500">
+        <span>Non-EUR crypto: <span className="text-slate-300 font-semibold">€{nonEurTotal.toFixed(2)}</span></span>
+        <button onClick={load} disabled={loading}
+          data-testid="restwaarde-refresh"
+          className="hover:text-white">
+          {loading ? 'Laden...' : 'Vernieuwen ↻'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
 function ReconcileSparkPanel() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);

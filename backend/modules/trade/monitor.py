@@ -95,6 +95,43 @@ def get_market_min_quote(market: str) -> float:
     return KNOWN_MIN_QUOTE_FALLBACK.get(market, 5.0)
 
 
+def get_market_precision(market: str) -> Dict[str, int]:
+    """v7_market_precision_001 — retourneer Bitvavo precisie-instellingen per markt.
+
+    Bitvavo weigert orders (errorCode 429) als amount te veel decimalen heeft t.o.v.
+    de markt-specifieke `amountPrecision`. Gebruikt cache van /markets endpoint.
+
+    Returns: {"amount": int, "price": int} (decimalen). Fallback: 8 dec (Bitvavo default).
+    """
+    now = time.time()
+    cached = _MARKETS_CACHE.get("data")
+    if not cached or (now - _MARKETS_CACHE.get("ts", 0)) > _MARKETS_TTL:
+        # Trigger cache via min_quote-lookup (herbruikt fetch)
+        get_market_min_quote(market)
+        cached = _MARKETS_CACHE.get("data")
+    if cached and market in cached:
+        info = cached[market]
+        try:
+            # Bitvavo doc: /markets returnt `pricePrecision` (int) en soms `minOrderInBaseAsset`.
+            # amountPrecision is `pricePrecision` gerelateerd; fallback op 8.
+            price_prec = int(info.get("pricePrecision") or 8)
+            # Voor amount gebruikt Bitvavo `pricePrecision - 2` of ergens gedocumenteerd
+            # als 8 max. Veilige default: 8. Overschrijven per markt indien nodig.
+            return {"amount": 8, "price": price_prec}
+        except Exception:
+            pass
+    return {"amount": 8, "price": 8}
+
+
+def _round_amount_for_market(amount: float, market: str) -> float:
+    """Round coin amount naar market-specifieke precisie (voorkomt errorCode 429)."""
+    prec = get_market_precision(market)
+    dec = int(prec.get("amount", 8))
+    # Truncate (niet rond) om never boven balance te gaan
+    factor = 10 ** dec
+    return int(amount * factor) / factor
+
+
 def _cache_ttl(interval: str) -> int:
     """Cache TTL = candle-interval (in seconden). Pas vernieuwen als nieuwe candle verwacht."""
     return _INTERVAL_SECONDS.get(interval, 300)
@@ -309,7 +346,10 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
         except Exception as e:
             logger.warning(f"EUR-balance check faalde voor {market}: {e} — door met buy")
 
-    # v6_trade_sell_balance_001 — SELL balance pre-check
+    # v6_trade_sell_balance_001 + v7_sell_units_fix_001 — SELL balance pre-check
+    # Fix: amount_eur is EUR-bedrag, actual_avail is coin count → mixen unit was fout.
+    # Nu: coin_target = amount_eur / price, clamp = min(coin_target, actual_avail),
+    # round naar market-specifieke precisie, check dat resulterende quote-value >= min_quote.
     final_amount = amount_eur
     if side_l == "sell":
         try:
@@ -333,17 +373,56 @@ def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) 
                     "base_asset": base_asset,
                     "actual_balance": actual_avail,
                 }
-            # Clamp naar min(requested, actual) * 0.999 om dust-rounding te vermijden
-            clamped = min(amount_eur, actual_avail) * 0.999
-            # Round naar 8 decimals (Bitvavo standaard)
-            final_amount = round(clamped, 8)
+
+            # v7_sell_units_fix_001 — bereken huidige prijs om EUR → coin te converteren
+            current_price = 0.0
+            try:
+                tickers = fetch_tickers([base_asset])
+                tk = next((t for t in tickers if t.get("market") == market), None)
+                if tk:
+                    current_price = float(tk.get("last") or 0)
+            except Exception:
+                pass
+            if current_price <= 0:
+                logger.warning(f"[sell] geen live prijs voor {market}, val terug op oude clamp-logica")
+                clamped = min(amount_eur, actual_avail) * 0.999
+            else:
+                # Converteer EUR-bedrag naar coin count
+                coin_target = amount_eur / current_price
+                # Clamp naar wat we werkelijk hebben, minus 0.1% dust-buffer
+                clamped = min(coin_target, actual_avail) * 0.999
+
+            # v7_market_precision_001 — round naar market-specifieke decimals
+            final_amount = _round_amount_for_market(clamped, market)
+
             if final_amount <= 0:
                 return {
                     "success": False,
-                    "error": f"Effectief sell-amount is 0 na clamp ({base_asset}: gevraagd {amount_eur}, actueel {actual_avail}).",
+                    "error": f"Effectief sell-amount is 0 na precision-truncatie ({base_asset}: coin_target={coin_target if current_price>0 else 'n/a'}, actueel={actual_avail}).",
                     "error_code": "ZERO_AFTER_CLAMP",
+                    "market": market,
                 }
-            logger.info(f"[sell] {market}: gevraagd {amount_eur} → clamped {final_amount} (api_balance={actual_avail})")
+
+            # v7_sell_min_quote_check_001 — verify dat we boven Bitvavo min-quote zitten
+            if current_price > 0:
+                expected_quote = final_amount * current_price
+                min_quote = get_market_min_quote(market)
+                if expected_quote < min_quote:
+                    return {
+                        "success": False,
+                        "error": (
+                            f"Sell zou €{expected_quote:.3f} opleveren, onder Bitvavo minimum €{min_quote:.2f} "
+                            f"voor {market}. Balance ({actual_avail} {base_asset}) is te klein om te verkopen."
+                        ),
+                        "error_code": "BELOW_MIN_QUOTE",
+                        "market": market,
+                        "expected_quote_eur": round(expected_quote, 4),
+                        "min_quote_eur": min_quote,
+                        "actual_balance": actual_avail,
+                        "hint": "Deze coin is nu 'restwaarde' — verkoop is niet mogelijk. Gebruik sync-with-bitvavo om restwaarde-pot te sluiten zonder PnL.",
+                    }
+
+            logger.info(f"[sell] {market}: EUR gevraagd €{amount_eur} → coin_target {coin_target if current_price>0 else 'legacy'} → clamped {final_amount} (bal={actual_avail}, prec-adj)")
         except Exception as e:
             logger.warning(f"balance pre-check faalde voor {market}: {e} — val terug op gevraagd bedrag")
             final_amount = amount_eur
@@ -910,10 +989,10 @@ class MonitorService:
     def resume_if_was_running(self) -> Dict:
         """v7_no_auto_resume_001 — auto-resume UITGESCHAKELD (default).
 
-        Reden: state-mismatches (spookpots, potjes-desync) na deploy/redeploy zijn
+        Reden: state-mismatches (restwaarde-pots, potjes-desync) na deploy/redeploy zijn
         veroorzaakt door de trader die automatisch herstart met oude state terwijl
         de actual Bitvavo saldo intussen veranderd is. User moet expliciet trader
-        starten via UI na deploy, ná spookpot-sync via
+        starten via UI na deploy, ná restwaarde-sync via
         POST /api/trade/reconcile/potjes/user-001/sync-with-bitvavo.
 
         State-file wordt WEL naar `running: false` gezet zodat de UI zichtbaar toont
@@ -1059,6 +1138,21 @@ class MonitorService:
                 continue
 
             self._cycles += 1
+
+            # v7_pot_revalue_001 — Sync vrije pots met huidige token-prijs (1 keer per tick).
+            # Reden: pot capital moet meebewegen met dynamische ROAR-prijs (die stijgt door
+            # Bitvavo groei / stortingen). Open pots blijven locked op buy-price.
+            try:
+                from modules.shop.routes import get_dynamic_price
+                from modules.trade import potjes as potjes_svc
+                token_price = float(get_dynamic_price())
+                if token_price > 0:
+                    rv = potjes_svc.revalue_free_pots(self._user_id, token_price)
+                    if rv.get("revalued_count", 0) > 0:
+                        logger.info(f"[revalue] user={self._user_id} synced {rv['revalued_count']} free pots to €{token_price:.4f}")
+            except Exception as e:
+                logger.warning(f"pot revalue skipped: {e}")
+
             # v4_multi_market_001: één ticker-call voor ALLE markten samen (anti-rate-limit)
             try:
                 base_symbols = [m.split("-")[0] for m in self._markets]

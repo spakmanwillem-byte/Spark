@@ -169,7 +169,18 @@ async def create_user(user_data: UserCreate, admin_id: Optional[str] = None):
     
     if error:
         raise HTTPException(status_code=400, detail=error)
-    
+
+    # v7_new_user_auto_bot_001 — Elke nieuwe user krijgt automatisch een trader-bot instance
+    # (idempotent). Bot staat op auto_trade=True maar autostart=False → admin start via UI.
+    try:
+        from modules.trade.monitor import auto_provision_bot_for_token_holder
+        uid = user.get("id") or user.get("user_id")
+        if uid and uid != "user-001":  # user-001 is legacy singleton, al aanwezig
+            auto_provision_bot_for_token_holder(uid, use_mock=False, auto_trade=True, autostart=False)
+    except Exception as _e:
+        # Non-fatal — user is aangemaakt, bot-provisioning kan later handmatig
+        pass
+
     return {"success": True, "user": user, "admin_override": admin_override}
 
 

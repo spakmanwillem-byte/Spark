@@ -168,6 +168,63 @@ def _save(data: Dict):
     save_json(POTJES_FILE, data)
 
 
+# v7_pot_revalue_001 — synchroniseer capital van vrije pots met huidige token-prijs.
+# Filosofie: elk potje representeert 1 ROAR-token qua waarde. Als Bitvavo groeit
+# (door stortingen of trading-winst), stijgt de dynamische token-prijs → pots
+# moeten meebewegen. Open pots blijven locked op buy-price want dat is wat er
+# in Bitvavo staat als coin.
+def revalue_free_pots(user_id: str, new_capital: float) -> Dict:
+    """Zet capital van alle VRIJE pots (position.is_open=False) op new_capital.
+
+    Args:
+        user_id: user waarvoor pots geherwaardeerd worden
+        new_capital: nieuwe capital-waarde (typisch = current token-prijs)
+
+    Returns:
+        dict met before/after telling
+    """
+    data = _load(user_id)
+    user = data["users"][user_id]
+    potjes = user.get("potjes", [])
+    changed = 0
+    unchanged_open = 0
+    for p in potjes:
+        if p.get("position", {}).get("is_open"):
+            unchanged_open += 1
+            continue
+        old = p.get("capital", 0)
+        if abs(old - new_capital) < 0.001:
+            continue  # al gelijk
+        p["capital"] = round(float(new_capital), 4)
+        changed += 1
+    if changed:
+        _save(data)
+    return {
+        "success": True,
+        "user_id": user_id,
+        "new_capital_each": round(float(new_capital), 4),
+        "revalued_count": changed,
+        "unchanged_open_count": unchanged_open,
+        "total_potjes": len(potjes),
+    }
+
+
+def revalue_single_pot(user_id: str, pot_id: str, new_capital: float) -> Dict:
+    """Handmatige revalue-knop per pot (admin-actie vanuit UI)."""
+    data = _load(user_id)
+    user = data["users"][user_id]
+    for p in user.get("potjes", []):
+        if p.get("id") != pot_id:
+            continue
+        if p.get("position", {}).get("is_open"):
+            return {"success": False, "error": f"Pot {pot_id} heeft open positie — sluit eerst"}
+        old = p.get("capital", 0)
+        p["capital"] = round(float(new_capital), 4)
+        _save(data)
+        return {"success": True, "pot_id": pot_id, "old_capital": old, "new_capital": p["capital"]}
+    return {"success": False, "error": f"Pot {pot_id} niet gevonden"}
+
+
 def _markets_for_user(user_id: str) -> List[str]:
     """v6_potje_market_distribution_001 — lees user-specifieke markten uit bots_registry.
     Gebruikt door sync_potjes_to_tokens en redistribute_potjes_across_markets.

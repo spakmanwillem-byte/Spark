@@ -1,124 +1,88 @@
 {
   "market": "ADA-EUR",
-  "candles_analyzed": 1000,
+  "candles_analyzed": 180,
   "support_levels": [
     {
-      "price": 0.21,
-      "strength": 0.88,
-      "bounces": 9,
-      "days_ago": 7.9
-    },
-    {
-      "price": 0.21,
-      "strength": 0.593,
-      "bounces": 6,
-      "days_ago": 4.5
-    },
-    {
-      "price": 0.22,
-      "strength": 0.193,
-      "bounces": 2,
-      "days_ago": 13.0
-    },
-    {
-      "price": 0.22,
-      "strength": 0.191,
-      "bounces": 2,
-      "days_ago": 15.7
-    },
-    {
       "price": 0.2,
-      "strength": 0.1,
+      "strength": 0.077,
       "bounces": 1,
-      "days_ago": 1.1
+      "days_ago": 85.3
+    },
+    {
+      "price": 0.19,
+      "strength": 0.059,
+      "bounces": 1,
+      "days_ago": 150.3
     }
   ],
   "resistance_levels": [
     {
-      "price": 0.22,
-      "strength": 1.0,
-      "tests": 12,
-      "days_ago": 5.5
-    },
-    {
-      "price": 0.21,
-      "strength": 0.398,
-      "tests": 4,
-      "days_ago": 1.7
-    },
-    {
-      "price": 0.22,
-      "strength": 0.29,
-      "tests": 3,
-      "days_ago": 11.9
-    },
-    {
       "price": 0.24,
-      "strength": 0.288,
-      "tests": 3,
-      "days_ago": 14.5
+      "strength": 0.084,
+      "tests": 1,
+      "days_ago": 57.3
     },
     {
-      "price": 0.23,
-      "strength": 0.188,
-      "tests": 2,
-      "days_ago": 21.8
+      "price": 0.27,
+      "strength": 0.064,
+      "tests": 1,
+      "days_ago": 131.3
     }
   ],
   "market_state": {
     "trend": "bull",
-    "confidence": 1.0,
-    "momentum_pct": 4.78,
-    "ma_20": 0.22,
-    "ma_50": 0.22,
+    "confidence": 0.667,
+    "momentum_pct": 24.44,
+    "ma_20": 0.32,
+    "ma_50": 0.27,
     "indicators": {
       "ma_cross": "bullish",
-      "higher_highs": true,
+      "higher_highs": false,
       "lower_lows": false
     }
   },
   "patterns": {
     "weekday_patterns": {
       "maandag": {
-        "avg_change_pct": -0.003,
-        "samples": 144,
-        "bias": "neutral"
+        "avg_change_pct": 1.115,
+        "samples": 25,
+        "bias": "bullish"
       },
       "dinsdag": {
-        "avg_change_pct": 0.007,
-        "samples": 144,
+        "avg_change_pct": -0.112,
+        "samples": 25,
         "bias": "neutral"
       },
       "woensdag": {
-        "avg_change_pct": 0.009,
-        "samples": 144,
-        "bias": "neutral"
+        "avg_change_pct": 1.758,
+        "samples": 25,
+        "bias": "bullish"
       },
       "donderdag": {
-        "avg_change_pct": -0.003,
-        "samples": 144,
+        "avg_change_pct": -0.102,
+        "samples": 26,
         "bias": "neutral"
       },
       "vrijdag": {
-        "avg_change_pct": 0.034,
-        "samples": 137,
-        "bias": "neutral"
+        "avg_change_pct": 0.297,
+        "samples": 26,
+        "bias": "bullish"
       },
       "zaterdag": {
-        "avg_change_pct": 0.048,
-        "samples": 144,
-        "bias": "neutral"
+        "avg_change_pct": 1.206,
+        "samples": 26,
+        "bias": "bullish"
       },
       "zondag": {
-        "avg_change_pct": -0.002,
-        "samples": 142,
-        "bias": "neutral"
+        "avg_change_pct": -0.686,
+        "samples": 26,
+        "bias": "bearish"
       }
     },
     "volatility": {
       "state": "low",
-      "ratio": 0.284
+      "ratio": 0.422
     }
   },
-  "generated_at": "2026-05-29T07:48:59.773475+00:00"
+  "generated_at": "2026-07-06T07:50:26.479672+00:00"
 }

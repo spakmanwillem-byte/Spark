@@ -1274,7 +1274,7 @@ class MonitorService:
 
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
             if market_context:
-                buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price)
+                buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price, user_id=self._user_id)
             if buy_decision["action"] == "BUY" and in_cooldown:
                 buy_decision["reason"] += f" | Skipped: BUY-cooldown {cooldown_left}s op {market}"
                 buy_decision["action"] = "HOLD"
@@ -1325,7 +1325,7 @@ class MonitorService:
             market_context = context_service.get_cached(market)
             decision = _simple_decision(context_candles, position=self._position, trade_amount=self._trade_amount)
             if market_context:
-                decision = context_service.apply_context_to_decision(decision, market_context, price)
+                decision = context_service.apply_context_to_decision(decision, market_context, price, user_id=self._user_id)
             decision["market"] = market
             decision["cycle"] = self._cycles
             decision["timestamp"] = datetime.now(timezone.utc).isoformat()
@@ -1476,12 +1476,13 @@ def auto_provision_bot_for_token_holder(
             m._candle_interval = "15m"
             m._auto_trade = bool(auto_trade)
             m._use_mock = bool(use_mock)
-            # Trade amount = huidige token-prijs (dynamisch)
+            # v7_dynamic_defaults_001 — trade_amount = altijd huidige token-prijs
             try:
                 from modules.shop.routes import get_dynamic_price
-                m._trade_amount = float(get_dynamic_price())
+                _p = float(get_dynamic_price())
+                m._trade_amount = _p if _p > 0 else 5.08
             except Exception:
-                m._trade_amount = float(getattr(m, "_trade_amount", 6.32) or 6.32)
+                m._trade_amount = float(getattr(m, "_trade_amount", 5.08) or 5.08)
             m._use_potjes = True
             m._user_configured = True
         except Exception as e:

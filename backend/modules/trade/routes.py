@@ -51,8 +51,19 @@ class BitvavoCredentials(BaseModel):
     api_secret: str
 
 
+# v7_defaults_align_001 — helper voor dynamische trade_amount default
+def _default_trade_amount() -> float:
+    """Huidige token-prijs of bodemprijs fallback. Vermijdt hardcoded €5/€10 defaults."""
+    try:
+        from modules.shop.routes import get_dynamic_price
+        p = float(get_dynamic_price())
+        return p if p > 0 else 5.08
+    except Exception:
+        return 5.08
+
+
 class TraderSettings(BaseModel):
-    trade_amount: Optional[float] = 5.0
+    trade_amount: Optional[float] = None  # None = dynamisch (token-prijs)
     market: Optional[str] = "BCH-EUR"
     # v6_mock_default_off_001 — new users default naar REAL, niet mock
     use_mock: Optional[bool] = False
@@ -60,13 +71,13 @@ class TraderSettings(BaseModel):
 
 
 class MonitorStartRequest(BaseModel):
-    interval: Optional[int] = 60
+    interval: Optional[int] = 300  # v7: minimum 5 min (was 60s = ruis)
     market: Optional[str] = "BCH-EUR"
     markets: Optional[List[str]] = None   # v4_multi_market_001: lijst van coins ipv enkele
-    candle_interval: Optional[str] = "1h"
+    candle_interval: Optional[str] = "15m"  # v7: was "1h" = te traag voor 5min-tick
     user_id: Optional[str] = "user-001"
     auto_trade: Optional[bool] = False
-    trade_amount: Optional[float] = 5.0
+    trade_amount: Optional[float] = None  # None = dynamisch
     use_mock: Optional[bool] = False
     use_potjes: Optional[bool] = False
 
@@ -486,7 +497,7 @@ async def get_trader_settings(user_id: str):
     settings_file = SETTINGS_DIR / user_id / "settings.json"
     settings = load_json(settings_file, default={})
     trader = settings.get("trader", {
-        "trade_amount": 5.0,
+        "trade_amount": _default_trade_amount(),  # v7: dynamisch = token-prijs
         "market": "BCH-EUR",
         "use_mock": False,   # v6_mock_default_off_001 — default REAL voor nieuwe users
         "auto_trade": False,
@@ -636,9 +647,9 @@ async def quick_buy_potje(user_id: str, req: QuickBuyPotjeRequest):
     monitor_started = False
     if not monitor._running:
         monitor.start(
-            interval=60,
+            interval=300,
             market=req.market,
-            candle_interval=req.candle_interval or "1h",
+            candle_interval=req.candle_interval or "15m",
             user_id=user_id,
             auto_trade=True,
             trade_amount=entry_amount,
@@ -840,14 +851,18 @@ async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest
         if tokens < 1:
             return {"success": False, "error": "Je hebt 0 tokens — bot kan niet starten. 1 token = 1 potje slot."}
     mon = get_user_monitor(user_id)
+    # v7_min_interval_300s_001 — clamp interval naar minimum 5 min
+    _interval = max(300, int(req.interval or 300))
+    # v7_defaults_align_001 — trade_amount None → dynamisch fetch
+    _amt = req.trade_amount if req.trade_amount else _default_trade_amount()
     return mon.start(
-        interval=req.interval,
+        interval=_interval,
         market=req.market,
         markets=req.markets,
-        candle_interval=req.candle_interval,
+        candle_interval=req.candle_interval or "15m",
         user_id=user_id,
         auto_trade=req.auto_trade,
-        trade_amount=req.trade_amount,
+        trade_amount=_amt,
         use_mock=req.use_mock,
         use_potjes=req.use_potjes,
     )
@@ -934,12 +949,12 @@ async def admin_list_bots():
             "running": False,
             "paused": False,
             "cycles": 0,
-            "interval": 3600,
-            "candle_interval": "1h",
+            "interval": 300,  # v7: 5 min minimum
+            "candle_interval": "15m",  # v7
             "market": "BCH-EUR",
-            "markets": ["BCH-EUR"],
+            "markets": [f"{c}-EUR" for c in ["BCH", "BTC", "ETH", "SOL", "ADA", "ATOM"]],
             "auto_trade": False,
-            "trade_amount": 5.08,
+            "trade_amount": _default_trade_amount(),  # v7: dynamisch
             "use_mock": False,
             "use_potjes": True,
             "pot_count": _read_pot_count(uid),
@@ -1247,7 +1262,16 @@ async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
     # Voorheen: pot werd gesloten + PnL toegekend + Spark-bonus geactiveerd ook
     # als Bitvavo error 212/429 gaf → interne state raakte uit sync met Bitvavo.
     from .monitor import execute_real_trade
-    sell_result = execute_real_trade(user_id, market, "SELL", pot.get("capital") or 10.0)
+    # v7_dynamic_capital_fallback_001 — geen hardcode €10 meer. Als pot.capital
+    # ontbreekt → val terug op huidige dynamische token-prijs.
+    _cap = pot.get("capital")
+    if not _cap:
+        try:
+            from modules.shop.routes import get_dynamic_price
+            _cap = float(get_dynamic_price())
+        except Exception:
+            _cap = 5.08  # ultieme fallback = bodemprijs
+    sell_result = execute_real_trade(user_id, market, "SELL", _cap)
 
     if not sell_result.get("success", False):
         # Bitvavo weigerde de sell — pot blijft OPEN, geen PnL, geen bonus.

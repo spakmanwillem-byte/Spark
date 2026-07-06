@@ -28,6 +28,110 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 LEARNING_COINS = ["BCH-EUR", "BTC-EUR", "ETH-EUR", "SOL-EUR", "ADA-EUR", "ATOM-EUR"]
 CACHE_FRESH_HOURS = 24
 
+# v7_market_stats_learning_001 — Per-markt win-rate uit trade_history.
+# Wordt cached per user in data/trade/market_stats.json en meegewogen in decisions.
+STATS_FILE = Path(__file__).parent.parent.parent / "data" / "trade" / "market_stats.json"
+STATS_MIN_TRADES = 4  # onder deze n_trades geen bias toepassen (te weinig data)
+
+
+def compute_market_stats(user_id: str = "user-001", max_history: int = 200) -> Dict:
+    """v7_market_stats_learning_001 — leer van eigen trades.
+
+    Kijkt naar de laatste `max_history` gesloten pot-cycles per markt en berekent:
+      - trades: aantal gesloten trades (BUY+SELL paar)
+      - wins: aantal met netto > 0
+      - win_rate: wins / trades
+      - avg_pnl_eur: gemiddelde netto PnL
+      - bias: 'trust' (win_rate ≥ 0.6) / 'neutral' (0.4-0.6) / 'careful' (<0.4)
+
+    Returns dict per markt: { "BCH-EUR": {trades, wins, win_rate, avg_pnl, bias}, ... }
+    """
+    from modules.core.storage import load_json as _lj
+    hist_file = Path(__file__).parent.parent.parent / "data" / "wallet" / "trade_history" / f"{user_id}.json"
+    if not hist_file.exists():
+        return {}
+    data = _lj(hist_file, default={"trades": []})
+    trades = data.get("trades", [])[-max_history:]
+
+    # Groepeer op markt, pair BUY→SELL sequentially per markt/pot
+    per_market: Dict[str, Dict] = {}
+    open_buys: Dict[str, List[Dict]] = {}  # market → list van open buys
+    for t in trades:
+        if not t.get("success") or t.get("mock"):
+            continue
+        market = t.get("market")
+        action = t.get("action")
+        if not market or not action:
+            continue
+        per_market.setdefault(market, {"trades": 0, "wins": 0, "total_pnl": 0.0})
+        if action == "BUY":
+            open_buys.setdefault(market, []).append(t)
+        elif action == "SELL" and open_buys.get(market):
+            buy = open_buys[market].pop(0)  # FIFO
+            # v7_pnl_calc_fix_001 — Bitvavo trade-history unit-mismatch:
+            # BUY:  amount = EUR (kosten), filled = coin ontvangen
+            # SELL: amount = coin, filled = coin verkocht, price = EUR/coin
+            # PnL = (sell_price * sell_filled) - (buy_amount_eur) - fees
+            buy_cost_eur = float(buy.get("amount") or 0)  # EUR
+            buy_coin = float(buy.get("filled") or 0)  # coin ontvangen
+            sell_coin = float(t.get("filled") or t.get("amount") or 0)
+            sell_price = float(t.get("price") or 0)
+            fee_total = float(buy.get("fee", 0)) + float(t.get("fee", 0))
+            if buy_cost_eur > 0 and sell_coin > 0 and sell_price > 0 and buy_coin > 0:
+                # Sell verwerkt max wat gekocht is (kan meer zijn door restwaarde-cumulatie)
+                sell_value_eur = sell_price * min(sell_coin, buy_coin)
+                pnl = sell_value_eur - buy_cost_eur - fee_total
+                per_market[market]["trades"] += 1
+                per_market[market]["total_pnl"] += pnl
+                if pnl > 0:
+                    per_market[market]["wins"] += 1
+
+    # Bereken win-rate + bias per markt
+    result = {}
+    for market, s in per_market.items():
+        n = s["trades"]
+        if n == 0:
+            continue
+        wr = s["wins"] / n
+        avg_pnl = s["total_pnl"] / n
+        if n < STATS_MIN_TRADES:
+            bias = "insufficient_data"
+        elif wr >= 0.6:
+            bias = "trust"
+        elif wr < 0.4:
+            bias = "careful"
+        else:
+            bias = "neutral"
+        result[market] = {
+            "trades": n,
+            "wins": s["wins"],
+            "win_rate": round(wr, 3),
+            "avg_pnl_eur": round(avg_pnl, 4),
+            "bias": bias,
+        }
+
+    # Persist
+    try:
+        all_stats = _lj(STATS_FILE, default={"users": {}})
+        all_stats.setdefault("users", {})[user_id] = {
+            "computed_at": datetime.now(timezone.utc).isoformat(),
+            "per_market": result,
+        }
+        save_json(STATS_FILE, all_stats)
+    except Exception as e:
+        logger.warning(f"market_stats save failed: {e}")
+
+    return result
+
+
+def get_market_bias(user_id: str, market: str) -> Optional[Dict]:
+    """Snelle read uit cached market_stats (geen recompute)."""
+    from modules.core.storage import load_json as _lj
+    if not STATS_FILE.exists():
+        return None
+    data = _lj(STATS_FILE, default={"users": {}})
+    return data.get("users", {}).get(user_id, {}).get("per_market", {}).get(market)
+
 
 def _cache_file(market: str) -> Path:
     return CACHE_DIR / f"{market.replace('-', '_')}.json"
@@ -227,10 +331,11 @@ def save_cache(market: str, context: Dict):
     save_json(_cache_file(market), context)
 
 
-def apply_context_to_decision(decision: Dict, context: Dict, current_price: float) -> Dict:
+def apply_context_to_decision(decision: Dict, context: Dict, current_price: float, user_id: Optional[str] = None) -> Dict:
     """
     Wegen van context op een decision (NOOIT triggering, alleen confidence bijstellen).
-    Returns decision met extra velden: context_boost, near_support, near_resistance, trend_bias.
+    v7_market_stats_learning_001 — nu ook per-markt win-rate uit eigen trade-history.
+    Returns decision met extra velden: context_boost, near_support, near_resistance, trend_bias, market_bias.
     """
     if not context or context.get("error"):
         return decision
@@ -281,10 +386,27 @@ def apply_context_to_decision(decision: Dict, context: Dict, current_price: floa
             confidence = min(0.99, confidence + 0.05)
             notes.append(f"+0.05 {day_key} bullish pattern")
 
+    # 4. v7_market_stats_learning_001 — eigen trade-history per markt
+    market_bias = None
+    if user_id:
+        try:
+            market_bias = get_market_bias(user_id, context.get("market", ""))
+            if market_bias and market_bias.get("bias") != "insufficient_data":
+                if action == "BUY":
+                    if market_bias["bias"] == "trust":
+                        confidence = min(0.99, confidence + 0.08)
+                        notes.append(f"+0.08 markt-vertrouwen (win-rate {market_bias['win_rate']*100:.0f}% over {market_bias['trades']} trades)")
+                    elif market_bias["bias"] == "careful":
+                        confidence = max(0.1, confidence - 0.10)
+                        notes.append(f"-0.10 markt-voorzichtig (win-rate {market_bias['win_rate']*100:.0f}% — pas op)")
+        except Exception:
+            pass
+
     decision["context_applied"] = True
     decision["context_notes"] = notes
     decision["confidence"] = round(confidence, 3)
     decision["near_support"] = near_support
     decision["near_resistance"] = near_resistance
     decision["trend_bias"] = trend
+    decision["market_bias"] = market_bias
     return decision

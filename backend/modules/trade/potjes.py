@@ -22,7 +22,12 @@ SPARK_EXTRA_TRADE_SLOTS = 10  # v6_spark_15slots_001 (28 mei) — Spark krijgt 5
 INITIAL_MAX = 50.0  # tier 1: max €50 (5x growth)
 LOCKED_POT_INDEX = None  # v6_clean_slate_28mei — geen lock-anker; potjes = trade-posities
 BITVAVO_TAKER_FEE = 0.0025
-TOKEN_PRICE = 5.08  # vaste prijs per ROAR token (= 1 bonus token bij €5.08 winst)
+TOKEN_PRICE = 5.08  # vaste bodemprijs per ROAR token (dynamische prijs via shop.get_dynamic_price)
+
+# v7_spark_fee_rate_001 — Spark's cut van netto trading-winst.
+# 0.0 = uit. User's redenering: winst → Bitvavo balance → dynamische token-prijs
+# stijgt automatisch → geen extra cut nodig. Constant hier voor makkelijke tuning.
+SPARK_FEE_RATE = 0.0
 
 
 def _mint_spark_bonus_tokens(netto_profit: float, source_pot: str, user_id: str) -> Optional[Dict]:
@@ -994,11 +999,12 @@ def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
             user.setdefault("overflow_pool", 0.0)
             user["overflow_pool"] = round(user["overflow_pool"] + overflow, 4)
 
-            # v4_spark_fee_001: 5% van netto winst (≥ €0.10) → naar Spark wallet (user-000)
-            # Eigenaarschap-check: Spark's eigen bot (user-000) betaalt geen fee aan zichzelf
+            # v7_spark_fee_rate_001: SPARK_FEE_RATE (default 0.0) → geen cut meer.
+            # Winst gaat volledig naar user's pot capital → Bitvavo balance stijgt →
+            # dynamische token-prijs volgt vanzelf. Constant blijft voor toekomstige tuning.
             spark_fee = 0.0
-            if netto >= 0.10 and user_id != "user-000":
-                spark_fee = round(netto * 0.05, 4)
+            if SPARK_FEE_RATE > 0 and netto >= 0.10 and user_id != "user-000":
+                spark_fee = round(netto * SPARK_FEE_RATE, 4)
                 # Trek af van pot capital
                 p["capital"] = round(p["capital"] - spark_fee, 4)
                 # Voeg toe aan Spark wallet

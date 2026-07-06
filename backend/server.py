@@ -610,6 +610,47 @@ async def startup():
                 print(f"   ⚠️  multi-user auto-provision failed: {_me}")
         except Exception as e:
             print(f"   ⚠️  Trade monitor resume failed: {e}")
+
+        # v7_context_learning_scheduler_001 — dagelijkse context-refresh + win-rate update.
+        # Sync thread (asyncio faalt hier want we zitten al in een resume-thread zonder loop).
+        def _daily_learning_worker():
+            import time as _t
+            from modules.trade import context_service
+            from modules.trade.monitor import fetch_candles
+            try:
+                users_snap = list(users_with_pots) if 'users_with_pots' in locals() else []
+            except Exception:
+                users_snap = ["user-001", "user-000"]
+            # 1e run direct, daarna elke 24u
+            first_run = True
+            while True:
+                if not first_run:
+                    _t.sleep(24 * 3600)
+                first_run = False
+                try:
+                    for m in context_service.LEARNING_COINS:
+                        try:
+                            candles = fetch_candles(m, interval="1d", limit=180)
+                            if candles and len(candles) >= 100:
+                                ctx = context_service.analyze(candles, market=m)
+                                context_service.save_cache(m, ctx)
+                        except Exception as _ce:
+                            print(f"   ⚠️  context refresh {m}: {_ce}")
+                    for uid in ["user-001", "user-000", "user-a0ee2d7e"] + users_snap:
+                        try:
+                            context_service.compute_market_stats(uid)
+                        except Exception:
+                            pass
+                    print("   📚 Daily learning cycle voltooid — context + market_stats vernieuwd")
+                except Exception as _le:
+                    print(f"   ⚠️  learning cycle error: {_le}")
+
+        try:
+            import threading as _thr
+            _thr.Thread(target=_daily_learning_worker, daemon=True, name="learning-scheduler").start()
+            print("   📚 Learning scheduler gestart (context + trade-history, elke 24u)")
+        except Exception as _se:
+            print(f"   ⚠️  learning scheduler start failed: {_se}")
     try:
         import threading
         threading.Thread(target=_resume_in_background, daemon=True).start()

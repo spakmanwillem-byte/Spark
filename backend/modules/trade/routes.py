@@ -1196,11 +1196,48 @@ async def force_sell_pot(user_id: str, pot_id: str, body: ForceSellBody):
     # v6_force_sell_real_001 (sessie 16) — voer echte Bitvavo SELL uit voordat
     # we administratief sluiten. Anders blijft de coin op Bitvavo en raken JSON
     # en realiteit uit sync. execute_real_trade gebruikt Spark's keys via proxy.
+    # v7_force_sell_atomic_001 — Bail out BEFORE close_pot als Bitvavo weigerde.
+    # Voorheen: pot werd gesloten + PnL toegekend + Spark-bonus geactiveerd ook
+    # als Bitvavo error 212/429 gaf → interne state raakte uit sync met Bitvavo.
     from .monitor import execute_real_trade
     sell_result = execute_real_trade(user_id, market, "SELL", pot.get("capital") or 10.0)
+
+    if not sell_result.get("success", False):
+        # Bitvavo weigerde de sell — pot blijft OPEN, geen PnL, geen bonus.
+        # Log toch in audit voor traceerbaarheid.
+        try:
+            audit_file = Path(__file__).parent.parent.parent / "data" / "trade" / "force_sell_audit.json"
+            audit_file.parent.mkdir(parents=True, exist_ok=True)
+            audit = load_json(audit_file, default={"entries": []})
+            audit["entries"].append({
+                "id": f"fs-{len(audit['entries']) + 1:04d}",
+                "ts": datetime.now(timezone.utc).isoformat(),
+                "type": "force_sell_rejected",
+                "user_id": user_id,
+                "pot_id": pot_id,
+                "market": market,
+                "exit_price": exit_price,
+                "by_admin": body.viewer_id,
+                "reason": body.reason or "geen opgegeven",
+                "bitvavo_sell": sell_result,
+                "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend.",
+            })
+            save_json(audit_file, audit)
+        except Exception:
+            pass
+        return {
+            "success": False,
+            "error": f"Bitvavo weigerde force-sell: {sell_result.get('error', 'onbekende fout')}",
+            "bitvavo_error_code": sell_result.get("error_code"),
+            "bitvavo_response": sell_result,
+            "market": market,
+            "pot_id": pot_id,
+            "hint": "Pot blijft open. Als coin niet meer op Bitvavo staat (out-of-sync), gebruik /api/trade/reconcile/potjes/{user_id}/sync-with-bitvavo om spookpots op te ruimen zonder PnL.",
+        }
+
     real_exit_price = (sell_result.get("trade") or {}).get("price") or exit_price
 
-    # Close het potje (administratief) met echte fill-prijs
+    # Close het potje (administratief) met echte fill-prijs — alleen als Bitvavo succes
     result = potjes_svc.close_pot(user_id, pot_id, real_exit_price)
     result["bitvavo_sell"] = sell_result
 

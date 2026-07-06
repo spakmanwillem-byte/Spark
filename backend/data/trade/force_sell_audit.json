@@ -2312,6 +2312,23 @@
           "message": "LIVE SELL uitgevoerd @ €53835.00 (fee €0.0058)"
         }
       }
+    },
+    {
+      "id": "fs-0033",
+      "ts": "2026-07-06T00:24:44.189132+00:00",
+      "type": "force_sell_rejected",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 212.43,
+      "by_admin": "user-001",
+      "reason": "auto-test rejection path",
+      "bitvavo_sell": {
+        "success": false,
+        "error": "Bitvavo API error: 400 - errorCode 212",
+        "error_code": "BITVAVO_HTTP_ERROR"
+      },
+      "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
     }
   ]
 }

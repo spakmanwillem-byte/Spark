@@ -870,8 +870,9 @@ async def bot_start(user_id: str, req: MonitorStartRequest = MonitorStartRequest
     mon = get_user_monitor(user_id)
     # v7_min_interval_300s_001 — clamp interval naar minimum 5 min
     _interval = max(300, int(req.interval or 300))
-    # v7_defaults_align_001 — trade_amount None → dynamisch fetch
-    _amt = req.trade_amount if req.trade_amount else _default_trade_amount()
+    # v7_force_dynamic_trade_amount_001 — negeer UI-input; ALTIJD huidige token-prijs
+    # Reden: UI stuurt vaak legacy 5.0 mee → wordt geaccepteerd → willem koopt met €5 ipv €6.31.
+    _amt = _default_trade_amount()
     return mon.start(
         interval=_interval,
         market=req.market,

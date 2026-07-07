@@ -8,10 +8,28 @@ Regels (Willem's design):
 - Max 1 potje per monitor cycle mag kopen (staggered entry)
 - Elk potje heeft eigen trailing stop + position state
 """
+import threading
+from functools import wraps
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
+
+# v7_potjes_race_fix_001 — Global RLock voor alle read-modify-write cycles.
+# Bug voorheen: Spark's bot en Willem's bot konden gelijktijdig _load() → mutate
+# → _save() doen. De 2e write overschreef de 1e mutation → pots-teller flipte
+# 5↔6 na refresh. Wrap alle mutating functies met @with_lock.
+_POTJES_LOCK = threading.RLock()
+
+
+def with_lock(fn):
+    """Decorator: run fn onder global potjes lock (atomair read-modify-write)."""
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        with _POTJES_LOCK:
+            return fn(*args, **kwargs)
+    return wrapper
+
 
 POTJES_FILE = Path(__file__).parent.parent.parent / "data" / "financial" / "user_potjes.json"
 ROAR_FILE = Path(__file__).parent.parent.parent / "data" / "roar" / "roar_balances.json"
@@ -178,6 +196,7 @@ def _save(data: Dict):
 # (door stortingen of trading-winst), stijgt de dynamische token-prijs → pots
 # moeten meebewegen. Open pots blijven locked op buy-price want dat is wat er
 # in Bitvavo staat als coin.
+@with_lock
 def revalue_free_pots(user_id: str, new_capital: float) -> Dict:
     """Zet capital van alle VRIJE pots (position.is_open=False) op new_capital.
 
@@ -214,6 +233,7 @@ def revalue_free_pots(user_id: str, new_capital: float) -> Dict:
     }
 
 
+@with_lock
 def revalue_single_pot(user_id: str, pot_id: str, new_capital: float) -> Dict:
     """Handmatige revalue-knop per pot (admin-actie vanuit UI)."""
     data = _load(user_id)
@@ -953,6 +973,7 @@ def update_pot_tracking(user_id: str, pot_id: str, current_price: float) -> Dict
     return {}
 
 
+@with_lock
 def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
     """Sluit positie, voeg winst toe aan capital (tot max), update stats.
     v6_lock_enforce_002: hard guard — locked potjes mogen niet gesloten worden.
@@ -1161,6 +1182,7 @@ def get_next_buy_cluster(user_id: str, market: str, min_order_eur: float,
     }
 
 
+@with_lock
 def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_id: str,
                  current_cycle: int, trade_id: Optional[str] = None,
                  market: Optional[str] = None) -> Dict:

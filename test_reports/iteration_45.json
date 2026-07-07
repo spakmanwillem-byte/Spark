@@ -1,0 +1,32 @@
+{
+  "summary": "Iteratie 45 — Race condition fix in /app/backend/modules/trade/potjes.py getest. Alle 8 pytest-tests slagen (100%): (1) 22 concurrent open_cluster calls over 3 users met 20 workers → alle 22 pots correct open, geen lost writes; (2) stress 8 threads × 10 iterations (80 open+close cycles) → JSON blijft valid, geen data loss, alle pot-counts intact (10/10/2); (3) concurrent close+open op user-000 → eind-state precies zoals verwacht (5 pots closed, 5 open); (4) revalue_free_pots + revalue_single_pot persistent en atomair; (5) POST /api/trade/baseline/user-000 met baseline_eur=100 → 200, set_at timestamp, read-back OK; (6) GET /api/trade/stats/user-000 → bevat lifetime_trades én trades_before_baseline (beide int); (7) GET /api/trade/admin/bots → alle 3 users (user-000/user-001/user-a0ee2d7e) aanwezig met candle_interval='15m', interval numeric, trade_amount dynamic >0. State-backup/restore werkt: user_potjes.json en capital_baseline.json onveranderd na alle tests (6.85/6.26/6.85 capital, 137.50 baseline).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter45_race_condition.py",
+    "/app/test_reports/pytest/iter45_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "potjes.py telt nu 1440+ regels — nog steeds boven de 700-limiet uit code-review guidelines. Split-kandidaten: revalue_* + resize_* naar potjes_admin.py; cluster helpers (get_next_buy_cluster/open_cluster/close_cluster/get_pots_by_cluster) naar potjes_cluster.py; overflow/expand naar potjes_growth.py. De @with_lock decorator kan blijven in de core file.",
+    "De @with_lock decorator wordt op 4 functies gezet (revalue_free_pots, revalue_single_pot, close_pot, open_cluster) maar NIET op andere mutating functies zoals open_pot (line 882), assign_pot_market, sync_potjes_to_tokens, rebalance_from_bitvavo, trim_potjes_to_tokens, expand_potjes, distribute_potjes_over_markets, redistribute_potjes_across_markets, ensure_spark_trade_pots, update_pot_tracking, reset_last_buy_cycle. Deze doen ALLEMAAL _load + mutate + _save en zijn dus óók race-vulnerable. Voorbeeld: open_pot (line 882) is de legacy single-pot BUY die door monitor cycles gebruikt kan worden — als 2 bots tegelijk een BUY doen (Spark + Willem in verschillende threads), kan hun 2e write elkaar overschrijven. Zelfde bug-klasse als originele race. Advies: pas @with_lock toe op ALLE functies die _save() aanroepen na een _load().",
+    "close_cluster (line 1229) is NIET @with_lock terwijl het wél _load+mutate+_save doet én tegelijk in ander thread aangeroepen kan worden door monitor. Dit is een gat in de fix.",
+    "_POTJES_LOCK is een process-level RLock; als de app ooit multi-worker draait (bijv. gunicorn --workers 2 of uvicorn met workers>1), dan werkt de lock NIET tussen workers. Voor multi-worker safety moet je een file-lock (fcntl.flock) of een DB-transactie gebruiken. Nu draait supervisor met 1 uvicorn worker dus OK, maar dit is een architecture-risico.",
+    "_load() heeft een side-effect: bij een non-existent user maakt hij een leeg user-record aan + _save() (line 145). Dat betekent dat elke READ-only call ook een write kan triggeren → verhoogd race-oppervlak. Split _load in read-only vs. init-if-missing.",
+    "save_json in load_json/save_json (modules/core/storage) doet vermoedelijk geen atomic replace (write→rename), waardoor een gecrashte write mid-flight de JSON kan corrupten. Als storage.py géén temp-file+os.replace gebruikt, is de RLock alleen bescherming tegen races binnen 1 process — een OS-crash kan alsnog een half-geschreven bestand achterlaten. Aanbeveling: check /app/backend/modules/core/storage.py save_json implementatie.",
+    "open_cluster (line 1185) roept get_pots_by_cluster niet aan om te verifiëren dat cluster_id uniek is — twee tegelijke buys op zelfde cluster_id (uuid collision zeldzaam maar mogelijk, of caller bug) overschrijven elkaar's position dict. Niet urgent."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter45_race_condition.py"
+  ],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "not_tested (skip frontend per request)"},
+  "test_credentials": "n/a — publieke endpoints",
+  "seed_data_creation": "Geen persistente seed. Elke test backupt /app/backend/data/financial/user_potjes.json (fixture backup_potjes) en /app/backend/data/trade/capital_baseline.json (fixture backup_baseline) in-memory (bytes), restored in finally-block. Post-test state geverifieerd: user-000/user-001/user-a0ee2d7e onveranderd (10/10/2 pots @ 6.85/6.26/6.85 capital, alle closed), baseline user-000=€137.50 met original set_at 2026-07-06.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter45 valideert dat _POTJES_LOCK (RLock + @with_lock decorator) de race condition oplost voor de 4 gedecoreerde functies: revalue_free_pots, revalue_single_pot, close_pot, open_cluster. Stress test met 80 open/close cycles op 8 threads bewees zero data loss. BELANGRIJK: de decorator is NIET toegepast op alle andere mutating functies (zie critical_code_review_comments). open_pot (legacy single-pot BUY, line 882) en close_cluster (line 1229) zijn nog steeds race-vulnerable — als monitor.py ooit deze paden gebruikt vanuit meerdere bot-threads, kan de bug terugkomen op die pad. Test file /app/backend/tests/test_iter45_race_condition.py is idempotent en herbruikbaar voor regressietests.",
+  "rca of the issue": "Originele bug: _load(user_potjes.json) → mutate in-memory dict → _save() is niet atomair. 2 threads (Spark bot + Willem bot) konden tegelijk _load doen, dan elk hun eigen user muteren, dan elkaars _save overschrijven omdat _save alle users in 1 file schrijft. Fix (v7_potjes_race_fix_001): module-level threading.RLock() + @with_lock decorator serialiseert de hele read-modify-write cycle. Test bewijs: 22 concurrent open_cluster calls voor 3 users met 20 workers → alle 22 pots correct open (vroeger zou 2-3 lost writes veroorzaken). Reproductie zonder fix: verwijder @with_lock van open_cluster → test_concurrent_open_cluster_no_lost_writes zou wisselend 18-21 open pots tonen ipv 22. Restpuntje: fix is incompleet — zie critical_code_review_comments punt 2 en 3 (open_pot en close_cluster nog niet beschermd)."
+}

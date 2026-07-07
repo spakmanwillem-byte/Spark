@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from modules.core.storage import load_json, save_json
+from modules.core.tracing import trace_call  # v7_function_tracing_001
 
 # v7_potjes_race_fix_001 — Global RLock voor alle read-modify-write cycles.
 # Bug voorheen: Spark's bot en Willem's bot konden gelijktijdig _load() → mutate
@@ -197,6 +198,7 @@ def _save(data: Dict):
 # moeten meebewegen. Open pots blijven locked op buy-price want dat is wat er
 # in Bitvavo staat als coin.
 @with_lock
+@trace_call(category="trade.pot.revalue")
 def revalue_free_pots(user_id: str, new_capital: float) -> Dict:
     """Zet capital van alle VRIJE pots (position.is_open=False) op new_capital.
 
@@ -974,6 +976,7 @@ def update_pot_tracking(user_id: str, pot_id: str, current_price: float) -> Dict
 
 
 @with_lock
+@trace_call(category="trade.pot.close")
 def close_pot(user_id: str, pot_id: str, exit_price: float) -> Dict:
     """Sluit positie, voeg winst toe aan capital (tot max), update stats.
     v6_lock_enforce_002: hard guard — locked potjes mogen niet gesloten worden.
@@ -1183,6 +1186,7 @@ def get_next_buy_cluster(user_id: str, market: str, min_order_eur: float,
 
 
 @with_lock
+@trace_call(category="trade.pot.open")
 def open_cluster(user_id: str, pot_ids: List[str], entry_price: float, cluster_id: str,
                  current_cycle: int, trade_id: Optional[str] = None,
                  market: Optional[str] = None) -> Dict:

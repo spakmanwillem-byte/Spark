@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from typing import Dict, Optional, List
 from pathlib import Path
 from modules.core.storage import load_json, save_json
+from modules.core.tracing import trace_call  # v7_function_tracing_001
 
 logger = logging.getLogger("spark_monitor")
 
@@ -273,6 +274,7 @@ def execute_mock_trade(user_id: str, market: str, side: str, amount_eur: float) 
     return {"success": True, "trade": trade, "message": f"Mock {side.upper()} uitgevoerd @ €{price:.2f}"}
 
 
+@trace_call(category="trade.bitvavo.execute")
 def execute_real_trade(user_id: str, market: str, side: str, amount_eur: float) -> Dict:
     """Execute a real trade via Bitvavo authenticated API.
 

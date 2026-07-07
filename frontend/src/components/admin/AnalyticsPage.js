@@ -1389,14 +1389,50 @@ function TradeAnalyticsTab() {
       }).then(x => x.json());
       if (r.success) {
         loadBotDetails(user_id);
+        setForceSelling(null);
+        setForceSellReason('');
       } else {
-        alert('Force-sell mislukt: ' + (r.error || 'onbekende fout'));
+        // v7_force_sell_rejection_ui_001 — behoud dialog + toon specifieke error + optie
+        // "sluit administratief zonder PnL" wanneer Bitvavo geen/onvoldoende coin heeft.
+        const bcode = r.bitvavo_error_code || '';
+        const bresp = r.bitvavo_response || {};
+        const respCode = bresp.error_code || bresp.errorCode || '';
+        const isRestwaarde = ['NO_BALANCE', 'BELOW_MIN_QUOTE', 'ZERO_AFTER_CLAMP'].includes(respCode)
+          || String(r.error || '').toLowerCase().includes('minimum')
+          || String(r.error || '').toLowerCase().includes('geen') && String(r.error || '').toLowerCase().includes('balance');
+        setForceSelling({
+          ...forceSelling,
+          error: r.error,
+          hint: r.hint,
+          bitvavo_error_code: bcode || respCode,
+          restwaarde_mode: isRestwaarde,
+        });
       }
     } catch (e) {
       alert('Force-sell error: ' + e.message);
-    } finally {
-      setForceSelling(null);
-      setForceSellReason('');
+    }
+  };
+
+  // v7_force_sell_rejection_ui_001 — administratief sluiten (bij restwaarde/no-balance)
+  const adminCloseRestwaarde = async () => {
+    if (!forceSelling) return;
+    const { user_id } = forceSelling;
+    try {
+      const r = await fetch(`${API}/api/trade/reconcile/potjes/${user_id}/sync-with-bitvavo`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ execute: true, close_spooks: true, reopen_orphans: false }),
+      }).then(x => x.json());
+      if (r.success) {
+        const closed = r.summary?.restwaarde_closed ?? r.summary?.spooks_closed ?? 0;
+        alert(`✅ ${closed} restwaarde-pot(s) administratief gesloten (zonder PnL).`);
+        loadBotDetails(user_id);
+        setForceSelling(null);
+        setForceSellReason('');
+      } else {
+        alert('Sync mislukt: ' + (r.error || 'onbekend'));
+      }
+    } catch (e) {
+      alert('Sync error: ' + e.message);
     }
   };
 
@@ -1647,9 +1683,33 @@ function TradeAnalyticsTab() {
             </div>
             <div className="px-5 py-4 space-y-3 text-sm text-slate-300">
               <p>Je staat op het punt om potje <span className="font-mono text-amber-300">{forceSelling.pot_id}</span> van user <span className="font-mono text-amber-300">{forceSelling.user_id}</span> te forceren naar verkoop op de huidige marktprijs ({forceSelling.market || 'onbekende markt'}).</p>
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-[12px] text-red-200">
-                ⚠️ <strong>Let op:</strong> dit kan verlies geven. Bij verlies daalt het bot-vermogen en kunnen ROAR-tokens in waarde minderen voor iedereen. Gebruik alleen als laatste redmiddel.
-              </div>
+
+              {/* v7_force_sell_rejection_ui_001 — toon Bitvavo-error + optie administratief sluiten */}
+              {forceSelling.error && (
+                <div className="bg-amber-500/10 border border-amber-500/40 rounded-lg p-3 text-[12px] text-amber-100 space-y-1" data-testid="force-sell-error">
+                  <p className="font-semibold text-amber-200">⚠️ Bitvavo weigerde de verkoop</p>
+                  <p className="text-amber-100/90">{forceSelling.error}</p>
+                  {forceSelling.bitvavo_error_code && <p className="text-[10px] text-amber-300/70">Code: {forceSelling.bitvavo_error_code}</p>}
+                  {forceSelling.hint && <p className="text-[11px] text-amber-100/80 italic mt-2">💡 {forceSelling.hint}</p>}
+                  {forceSelling.restwaarde_mode && (
+                    <div className="mt-2 pt-2 border-t border-amber-500/30">
+                      <p className="text-[11px] text-amber-100/90 mb-2">Dit lijkt een <strong>restwaarde-pot</strong> — coin staat (bijna) niet meer op Bitvavo. Je kunt het pot administratief sluiten zonder PnL (Spark-bonus wordt niet aangepast).</p>
+                      <button onClick={adminCloseRestwaarde}
+                        data-testid="force-sell-admin-close"
+                        className="w-full px-3 py-1.5 rounded-lg text-xs font-medium text-slate-900 bg-amber-300 hover:bg-amber-200">
+                        📕 Sluit administratief zonder PnL
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!forceSelling.error && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-[12px] text-red-200">
+                  ⚠️ <strong>Let op:</strong> dit kan verlies geven. Bij verlies daalt het bot-vermogen en kunnen ROAR-tokens in waarde minderen voor iedereen. Gebruik alleen als laatste redmiddel.
+                </div>
+              )}
+
               <label className="block text-[11px] text-slate-400">Reden (audit-trail)</label>
               <input type="text" value={forceSellReason} onChange={e => setForceSellReason(e.target.value)}
                 data-testid="force-sell-reason"
@@ -1660,13 +1720,22 @@ function TradeAnalyticsTab() {
               <button onClick={() => { setForceSelling(null); setForceSellReason(''); }}
                 data-testid="force-sell-cancel"
                 className="px-4 py-1.5 rounded-lg text-sm text-slate-300 bg-slate-800 hover:bg-slate-700">
-                Annuleer
+                {forceSelling.error ? 'Sluit' : 'Annuleer'}
               </button>
-              <button onClick={confirmForceSell}
-                data-testid="force-sell-confirm"
-                className="px-4 py-1.5 rounded-lg text-sm font-medium text-white bg-red-500 hover:bg-red-600">
-                Force-sell nu
-              </button>
+              {!forceSelling.error && (
+                <button onClick={confirmForceSell}
+                  data-testid="force-sell-confirm"
+                  className="px-4 py-1.5 rounded-lg text-sm font-medium text-white bg-red-500 hover:bg-red-600">
+                  Force-sell nu
+                </button>
+              )}
+              {forceSelling.error && !forceSelling.restwaarde_mode && (
+                <button onClick={confirmForceSell}
+                  data-testid="force-sell-retry"
+                  className="px-4 py-1.5 rounded-lg text-sm font-medium text-white bg-slate-600 hover:bg-slate-500">
+                  Opnieuw proberen
+                </button>
+              )}
             </div>
           </div>
         </div>

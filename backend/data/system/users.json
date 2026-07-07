@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-07-06T08:39:55.915505+00:00",
+      "last_active": "2026-07-06T16:55:30.551874",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1043,11 +1043,22 @@
             "rarity": "uncommon",
             "type": "rps",
             "unlocked_at": "2026-06-03T13:24:34.628864+00:00"
+          },
+          {
+            "id": "rps_losses_10",
+            "name": "10 keer verloren",
+            "description": "Je hebt 10 SPS-rondes verloren. Volhouder!",
+            "milestone": 10,
+            "xp_reward": 50,
+            "icon": "🪦",
+            "rarity": "common",
+            "type": "rps",
+            "unlocked_at": "2026-07-06T08:45:36.288193+00:00"
           }
         ],
-        "total_xp_from_achievements": 17335
+        "total_xp_from_achievements": 17385
       },
-      "xp": 27784,
+      "xp": 27834,
       "credits": 0,
       "contact": {
         "telefoon": ""
@@ -1426,6 +1437,12 @@
           "reason": "rps_gewonnen",
           "granted_at": "2026-06-27T21:34:09.426640+00:00",
           "total_after": 27784
+        },
+        {
+          "amount": 50,
+          "reason": "Achievement: 10 keer verloren",
+          "granted_at": "2026-07-06T08:45:36.297061+00:00",
+          "total_after": 27834
         }
       ],
       "gradatie_titel": "Beheerder",
@@ -3830,7 +3847,7 @@
       "rol": "Onbekende",
       "id": "user-166437fe",
       "registered_date": "2026-06-30T10:55:01.436488",
-      "last_active": "2026-06-30T10:56:25.096437+00:00",
+      "last_active": "2026-07-06T08:46:13.750266+00:00",
       "gesprekken_count": 0,
       "trust_score": 0,
       "masterkey": null,

@@ -1259,9 +1259,12 @@ class MonitorService:
                 # v7_shadow_removed_001 — Shadow-activatie block removed (dead code cleanup).
 
             # 2. BUY check op deze market — max 1 potje per cycle GLOBAAL (over alle coins)
-            #    v6_buy_cooldown_001 — Plus: minimaal 5 min cooldown per markt tussen 2 BUYs
-            #    (voorkomt 20× BUY in 8 min zoals 30 mei 02:36-02:44)
-            BUY_COOLDOWN_SEC = 300  # 5 minuten
+            #    v6_buy_cooldown_001 — Plus: minimaal cooldown per markt tussen 2 BUYs
+            #    v7_buy_cooldown_15min_001 — verhoogd van 5 min → 15 min matching candle.
+            #    Voorheen: trader kocht binnen 1 kwartier meerdere pots van dezelfde coin
+            #    bij drop → volgende (grotere) dip werd niet benut. 15 min = 1 candle-cycle
+            #    per markt per user (users kopen wel onafhankelijk op zelfde trigger).
+            BUY_COOLDOWN_SEC = 900  # 15 minuten (per markt per user)
             last_buy_ts = self._last_buy_per_market.get(market)
             now = datetime.now(timezone.utc)
             in_cooldown = False

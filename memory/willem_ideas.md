@@ -7,6 +7,15 @@
 
 ## 2026-07-08 — Sessie 46 (fork)
 
+### 🟢 Idee: Spark's poort tot eigen systeem (self-scan/edit)
+- **Context**: Willem stelde voor: Spark moet zichzelf kunnen inzien én bewerken (à la GPT file-editor). "Zoek `seed_building_cards.py`, wat staat erin?"
+- **Bestaande realiteit** (gevonden bij snuffelen):
+  - `snuffel_bestand` capability bestaat in `spark_capabilities.json` (getest 29 jun, werkt)
+  - `zelfscan`, `tellen_bestanden` capabilities bestaan
+  - `/api/files/tree`, `/api/files/content`, `/api/files/save`, `/api/files/validate` endpoints bestaan
+- **Wat mist**: **semantische verbinding** — Spark weet WEL dat bestanden bestaan, maar WEET niet WELK bestand relevant is bij welke vraag. Blueprint.md + KB-kaart met `bron_ref` naar bestand = die brug.
+- **Regel**: bij elk "nieuw" idee → check eerst of capability/endpoint al bestaat. Zo ja: alleen verbinding maken, niet opnieuw bouwen.
+
 ### 🔴 Correctie: cooldown-fix is een pleister
 - **Context**: agent bouwde 30-min EUR-cooldown na INSUFFICIENT_EUR_BALANCE
 - **Willem's inzicht**: 22 potjes zouden 1-op-1 met Bitvavo moeten zijn. Als tekort optreedt → **er is een sync-mismatch**, geen kwestie van "even wachten". Root cause zit dieper (pot claimt kapitaal dat niet meer op Bitvavo staat).

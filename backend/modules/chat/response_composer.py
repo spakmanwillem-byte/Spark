@@ -478,6 +478,21 @@ async def compose_response(
             }
 
         text = router_resp["text"]
+        # v7_tool_leak_sanitizer_001 — strip elke tool-call syntax die de LLM per ongeluk
+        # in de user-reactie plakt (bv. "[agenda_lezen {"date":"2026-05-17"}]" of
+        # "We need to call agenda_lezen with date..."). Deze mogen NOOIT bij de user komen.
+        try:
+            import re as _re
+            # Verwijder bracket-tool-calls: [tool_name {json}] of [tool_name(...)]
+            text = _re.sub(r"\[[a-z_][a-z0-9_]{2,30}\s*[\{\(][^\]]*?[\}\)]\]", "", text)
+            # Verwijder "We need to call X" / "Let me call X" / "I will call X" zinnen tot punt
+            text = _re.sub(r"(?i)\b(we need to|let me|i (?:will|should)|ik moet)\s+call\s+[a-z_]+[^\.\n]*\.\s*", "", text)
+            # Verwijder losse tool-annotaties als "[tool_name]" (zonder args)
+            text = _re.sub(r"\[[a-z_][a-z0-9_]{4,30}\](?=[A-Z\n])", "", text)
+            # Meerdere spaties normaliseren
+            text = _re.sub(r"[ \t]{2,}", " ", text).strip()
+        except Exception:
+            pass  # sanitize is best-effort, faalt geen response op
         used_provider = router_resp.get("provider", "?")
         used_model = router_resp.get("model", "?")
         model_provider = used_provider  # voor log-write hieronder

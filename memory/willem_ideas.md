@@ -7,6 +7,11 @@
 
 ## 2026-07-08 — Sessie 46 (fork)
 
+### 🟢 Idee: Pre-check EUR-balance vóór BUY-try (backlog, geen fix nu)
+- **Context**: cooldown-fix (30 min) is een vangnet. De diepere oorzaak: `execute_real_trade` gaat pas ná Bitvavo API-call kijken of EUR toereikend is.
+- **Betere flow**: eerst `get_balance()` cachen (5-min), dan lokaal beslissen "hebben we EUR? Zo nee: HOLD zonder Bitvavo API-hit".
+- **Waarom nu niet**: geen nieuwe features / afmaken-modus. Cooldown werkt goed als vangnet. Kan later opgepakt.
+
 ### 🟢 Idee: Spark's poort tot eigen systeem (self-scan/edit)
 - **Context**: Willem stelde voor: Spark moet zichzelf kunnen inzien én bewerken (à la GPT file-editor). "Zoek `seed_building_cards.py`, wat staat erin?"
 - **Bestaande realiteit** (gevonden bij snuffelen):

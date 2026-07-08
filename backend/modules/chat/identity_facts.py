@@ -66,6 +66,24 @@ NEGATIVE_TRIGGERS = ["niet", "nooit", "geen"]  # filter: "ik ben NIET X" → ski
 SKIP_WORDS = {"hier", "daar", "nu", "even", "blij", "klaar", "zo", "dat",
               "die", "het", "iets", "wat", "alles"}
 
+# v7_identity_facts_strict_001 — abstracte woorden die géén échte fact zijn.
+# "ik heb een suggestie/voorstel/vraag" → deze value's negeren.
+ABSTRACT_SKIP_VALUES = {
+    "suggestie", "voorstel", "idee", "vraag", "opmerking", "mening",
+    "gevoel", "gedachte", "gedachtes", "gedachten", "moment", "momentje",
+    "hulp", "aandacht", "tijd", "zin", "trek", "moeite", "twijfel",
+    "punt", "puntje", "vermoeden", "hoop", "wens", "plan", "planetje",
+    "probleem", "probleempje", "advies", "voorstellen", "reactie",
+    "gedacht", "bedacht", "geluk", "pech",
+    "benieuwd", "nieuwsgierig", "onzeker", "zeker", "moe", "druk",
+    "bezig", "aan", "af", "op", "over", "in", "uit",
+}
+
+# v7_identity_facts_strict_001 — subordinate-clause indicators.
+# Als value een van deze woorden bevat, is het meestal geen fact maar een bijzin.
+SUBCLAUSE_MARKERS = (" als ", " of ", " want ", " omdat ", " terwijl ", " zodra ",
+                     " maar ", " hoewel ", " tenzij ", " zodat ", " opdat ")
+
 
 def _identity_path(user_id: str) -> Path:
     return DATA / "users" / user_id / "identity_facts.json"
@@ -152,6 +170,19 @@ def extract_and_save(user_id: str, user_text: str, session_id: Optional[str] = N
         for m in re.finditer(pattern, text_lower):
             value = m.group(1).strip(".,!? ")
             if len(value) < 3 or len(value) > 80:
+                continue
+            # v7_identity_facts_strict_001 — extra filters tegen valse positieven
+            #  (voorheen: "ik heb een suggestie" → i_have=suggestie; "ik ben benieuwd of..." → i_am=hele-bijzin)
+            first_word = value.split()[0] if value.split() else ""
+            if first_word in ABSTRACT_SKIP_VALUES:
+                continue
+            if any(marker in f" {value} " for marker in SUBCLAUSE_MARKERS):
+                continue
+            # i_am: strenger — moet kort zijn en niet met vraag/emo beginnen
+            if trigger == "i_am" and (len(value) > 30 or first_word in {"heel", "erg", "een", "de", "het", "ook", "wel", "misschien", "mss"}):
+                continue
+            # i_have: value moet ten minste 4 chars zijn (niet "een" of "af")
+            if trigger == "i_have" and len(value) < 4:
                 continue
             if _is_neg(text_lower, m.start()):
                 continue

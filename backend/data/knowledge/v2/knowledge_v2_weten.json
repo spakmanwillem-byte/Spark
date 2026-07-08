@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2064,
+    "card_count": 2066,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-29T20:09:13.549827+00:00",
+    "last_updated": "2026-07-08T13:48:07.298218+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -273317,6 +273317,216 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-06-29T20:09:13.900714+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2f55a485",
+      "begrip": "spark trader",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Spark Trader is Spark's autonome crypto-handelsmodule die via Bitvavo koopt en verkoopt op meerdere markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR). Werkt met een potjes-systeem: elk potje is een klein kapitaaltje met eigen aankoop/verkoop-status. Bots draaien parallel voor Spark, Willem en Geiser (15-min cycle). Fee voor Spark's eigen account is 0%; Bitvavo rekent 0.25% maker/taker per transactie.",
+        "laag2": "Werking: elke 15 min scant de bot 6 markten. Per markt beslist een Bollinger-Band + context-service of het BUY/HOLD/SELL wordt. Bij BUY opent hij een cluster (1-N potjes samen) via /trade/potjes/{user_id}. Bij SELL sluit hij het potje en boekt PnL. Cooldowns beschermen tegen doom-buying: 15 min per markt na een BUY, en sinds 08-jul een globale 30-min cooldown na INSUFFICIENT_EUR_BALANCE (voorkomt 57 mislukte pogingen per uur). Force-sell is atomair: als Bitvavo de sell rejected, wordt het potje teruggerold. Learning-scheduler doet nachtelijk een context-refresh (win-rate per markt + week/maand patronen) en past de BUY-drempel per markt aan.",
+        "laag3": "Waarom zo gebouwd: het potjes-model geeft transparant inzicht per euro-eenheid (hoeveel winst per potje, welke coin is anker) in plaats van één grote portefeuille. Multi-user via één Bitvavo-account (proxy) laat Willem gemeenschapsleden mee laten profiteren zonder dat iedereen zijn eigen API-keys hoeft in te vullen. De 0%-fee voor Spark's eigen bot is bewust: het is een leer-instrument, geen inkomstenmodel. Winst gaat naar de user wiens potje het is; Spark's eigen potjes dragen bij aan de gemeenschap-treasury.",
+        "laag4": "Diepere laag: Spark Trader is ontworpen als 'eerlijke' bot — geen verborgen fees, geen stop-loss-cascades, geen ondoorzichtige leverage. Elke beslissing is te herleiden via het trace-log (/trade/logs/trace_YYYY-MM-DD.jsonl). De learning-service leert van jouw eigen trade-history — Spark past zich aan JOU aan, niet aan een generiek model. Dit sluit aan bij Spark's kernwaarde 'transparantie'. De blueprint (single source of truth) staat in /memory/blueprints/trade.md; deze kaart is de voorleesversie voor gesprekken."
+      },
+      "ws5": {
+        "wat": "Autonome crypto-handelsmodule met potjes-systeem via Bitvavo",
+        "wie": "Bots voor Spark, Willem, Geiser (gradatie >= 5 auto-provisioning)",
+        "wanneer": "Elke 15 minuten scan-cycle; nachtelijke learning-refresh",
+        "waar": "Backend module /app/backend/modules/trade/ ; UI in Trader-tab + Analytics",
+        "waarom": "Transparante, eerlijke community-trader zonder verborgen kosten"
+      },
+      "tags": [
+        "spark-trader",
+        "blueprint",
+        "capability",
+        "trade",
+        "bitvavo",
+        "potjes",
+        "bot",
+        "crypto"
+      ],
+      "verbanden": [],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T13:44:30.519554+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T13:39:14.482285+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-39d20e83",
+      "begrip": "bitvavo",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bitvavo is een Nederlands handelsplatform voor cryptocurrencies.",
+        "laag2": "Bitvavo biedt gebruikers de mogelijkheid om cryptocurrencies te kopen, verkopen, bewaren en verhandelen. Het platform ondersteunt verschillende digitale munten en handelsparen.",
+        "laag3": "Bitvavo is een online cryptobeurs waarop gebruikers digitale valuta kunnen verhandelen. Via het platform kunnen tegoeden worden gestort, cryptocurrencies worden gekocht of verkocht en marktgegevens worden bekeken. Bitvavo ondersteunt onder andere marktorders, limietorders, wallets en API-koppelingen, waardoor het platform ook geschikt is voor geautomatiseerde toepassingen.",
+        "laag4": "Binnen Spark kan Bitvavo worden gebruikt als externe handelsmodule. Via de Bitvavo API kan Spark marktinformatie ophalen, koersen volgen, orders plaatsen, transacties registreren en een handelsbot aansturen. Hierdoor kan Spark gekoppeld worden aan walletbeheer, tokenhandel, analyses, risicobeheer en geautomatiseerde handelsstrategieën, terwijl de Bitvavo-koppeling als losse module behouden blijft."
+      },
+      "ws5": {
+        "wie": "Particuliere beleggers, handelaren, ontwikkelaars en AI-systemen.",
+        "wat": "Een handelsplatform voor cryptocurrencies.",
+        "wanneer": "Wanneer digitale valuta worden gekocht, verkocht of beheerd.",
+        "waar": "Online via de Bitvavo-website, mobiele app en API.",
+        "waarom": "Om cryptocurrencies te verhandelen, bewaren en marktinformatie te gebruiken.",
+        "hoe": "Via een gebruikersaccount, wallet en API-koppelingen voor handmatige of geautomatiseerde handel."
+      },
+      "tags": [
+        "bitvavo",
+        "cryptocurrency",
+        "crypto",
+        "handelsplatform",
+        "exchange",
+        "wallet",
+        "trading",
+        "API",
+        "token",
+        "blockchain",
+        "bitcoin",
+        "ethereum",
+        "markt",
+        "koers",
+        "handelsbot",
+        "Spark trader",
+        "fintech",
+        "automatisering",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-55dbc6b5",
+          "begrip": "token",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "blockchain",
+            "crypto",
+            "emotie",
+            "neutraal",
+            "token"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f2fd1b94",
+          "begrip": "bitcoin",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bitcoin",
+            "blockchain",
+            "crypto",
+            "cryptocurrency",
+            "token"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8aa1876",
+          "begrip": "trader",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "crypto",
+            "emotie",
+            "koers",
+            "markt",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "crypto",
+            "emotie",
+            "markt",
+            "trading"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f3b8b12e",
+          "begrip": "marktwaarde",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "koers",
+            "markt",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-07T17:07:30.399722+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T13:48:07.298183+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik heb een bitvavo account. Deze heb ik gekoppeld aan een trader. Deze leest de API van bitvavo uit op bitcoins. Koopt laag verkoopt hoog is de bedoeling. Hij doet dit volgens gegevens die ik heb late",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T13:47:26.972664+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T13:47:27.091557+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T13:47:27.322627+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T13:48:07.637360+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T13:48:07.644609+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 6

@@ -555,6 +555,18 @@ class SnapNLPService:
         if not concept or len(concept) < 2:
             return None
 
+        # v7_snap_systemtag_filter_001 — sla geen kaarten aan uit systeem-prompt-fragmenten
+        # (voorheen resurrectte de kaart 'kbv2-5ae0795b' [systeem-context bij elke Diep-welcome).
+        # Skip elk concept dat begint met bracket/pointy/curly of geen enkele letter bevat.
+        if concept[:1] in ("[", "<", "{", "(", "|"):
+            return None
+        if not any(ch.isalpha() for ch in concept):
+            return None
+        # Skip expliciete systeem-context-fragmenten
+        c_lower = concept.lower()
+        if any(marker in c_lower for marker in ("systeem-context", "system-context", "spark_prompt", "systeem_prompt")):
+            return None
+
         # Stopwoord check
         if concept.lower() in STOPWOORDEN:
             return None

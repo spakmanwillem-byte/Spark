@@ -23,24 +23,6 @@
     },
     {
       "trigger": "i_have",
-      "value": "voorstel",
-      "context": "ik heb een voorstel",
-      "first_seen": "2026-06-28T15:59:36.111608+00:00",
-      "last_seen": "2026-06-28T15:59:36.111608+00:00",
-      "count": 1,
-      "session_id": "conv-9726ba16"
-    },
-    {
-      "trigger": "i_have",
-      "value": "suggestie",
-      "context": "Ik heb een suggestie",
-      "first_seen": "2026-06-28T15:59:36.112026+00:00",
-      "last_seen": "2026-06-28T15:59:36.112026+00:00",
-      "count": 1,
-      "session_id": "conv-0a47c053"
-    },
-    {
-      "trigger": "i_have",
       "value": "op zondag 17 mei een activiteit",
       "context": "ik heb op zondag 17 mei een activiteit. Ik ga samen met Lotus en haar opa en oma naar Helledoorn. Dit is een actractie park",
       "first_seen": "2026-06-28T15:59:36.113087+00:00",
@@ -56,15 +38,6 @@
       "last_seen": "2026-06-28T15:59:36.114426+00:00",
       "count": 1,
       "session_id": "conv-81424356"
-    },
-    {
-      "trigger": "i_am",
-      "value": "nieuwsgierig",
-      "context": "ik ben nieuwsgierig",
-      "first_seen": "2026-06-28T15:59:36.115352+00:00",
-      "last_seen": "2026-06-28T15:59:36.115352+00:00",
-      "count": 1,
-      "session_id": "conv-a09e950e"
     },
     {
       "trigger": "i_have",
@@ -83,15 +56,6 @@
       "last_seen": "2026-06-28T15:59:36.116739+00:00",
       "count": 1,
       "session_id": "conv-b3628a20"
-    },
-    {
-      "trigger": "i_have",
-      "value": "idee",
-      "context": "ik heb geen idee",
-      "first_seen": "2026-06-28T15:59:36.120555+00:00",
-      "last_seen": "2026-06-28T15:59:36.120555+00:00",
-      "count": 1,
-      "session_id": "conv-b0eca1f2"
     },
     {
       "trigger": "i_am",
@@ -221,15 +185,6 @@
     },
     {
       "trigger": "i_am",
-      "value": "dyslectisch en tts en stt helpt mij",
-      "context": "nee ik ben dyslectisch en tts en stt helpt mij. bedoel je hebt vast gezien ik maak veel spelfouten.",
-      "first_seen": "2026-06-28T15:59:36.184541+00:00",
-      "last_seen": "2026-06-28T15:59:36.184541+00:00",
-      "count": 1,
-      "session_id": "conv-178fc6b9"
-    },
-    {
-      "trigger": "i_am",
       "value": "je bewust aan het maken",
       "context": "ik weet meerdere plekken waar ik het zou kunnen vinden. ik ben je bewust aan het maken., en als je het niet kan vinden moet i k je de tools hiervoor geven",
       "first_seen": "2026-06-28T15:59:36.187390+00:00",
@@ -254,15 +209,6 @@
       "last_seen": "2026-06-28T15:59:36.191575+00:00",
       "count": 1,
       "session_id": "conv-d34d27a8"
-    },
-    {
-      "trigger": "i_am",
-      "value": "kenniskaarten aan het invullen voor je",
-      "context": "ik ben kenniskaarten aan het invullen voor je. maar ga nu wel even snel naar de winkel daarnaar ga ik weer aan de slag met je.",
-      "first_seen": "2026-06-28T15:59:36.206087+00:00",
-      "last_seen": "2026-06-28T15:59:36.206087+00:00",
-      "count": 1,
-      "session_id": "conv-ef46ffbc"
     },
     {
       "trigger": "i_have",
@@ -503,7 +449,11 @@
   ],
   "about_relationship": [],
   "stats": {
-    "totaal": 55,
-    "last_update": "2026-07-07T17:07:33.964564+00:00"
+    "totaal": 49,
+    "last_update": "2026-07-08T13:47:34.950517+00:00",
+    "cleanup_v7": {
+      "removed": 6,
+      "ts": "2026-07-08T13:47:34.950517+00:00"
+    }
   }
 }

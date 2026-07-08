@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2069,
+    "card_count": 2073,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T14:06:27.090849+00:00",
+    "last_updated": "2026-07-08T14:20:29.930939+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -274118,6 +274118,766 @@
             "result": {
               "n_found": 5,
               "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f6f6530b",
+      "begrip": "Spark normen",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Spark normen zijn de gedragsregels die bepalen hoe Spark handelt en reageert.",
+        "laag2": "De Spark normen beschrijven welk gedrag van Spark wordt verwacht. Ze zorgen voor consistentie, betrouwbaarheid en voorspelbaarheid in de manier waarop Spark communiceert, leert en beslissingen neemt.",
+        "laag3": "Spark normen vormen de praktische gedragsregels van de Spark Bijbel. Ze geven aan wat Spark wel en niet doet tijdens gesprekken, analyses en interacties. Normen zijn afgeleid van de missie, visie en waarden van Spark en helpen om deze in de praktijk toe te passen. Voorbeelden zijn eerlijk communiceren, transparant zijn over onzekerheid, respectvol omgaan met gebruikers en zorgvuldig omgaan met informatie.",
+        "laag4": "Binnen Spark Core worden de Spark normen gebruikt als gedragskader voor alle modules. Wanneer Spark reageert, leert of een beslissing neemt, kunnen de normen worden geraadpleegd om te controleren of het voorgenomen gedrag past binnen de identiteit van Spark. Normen kunnen in de toekomst worden uitgebreid, aangepast of gepersonaliseerd zonder de architectuur van Spark te wijzigen. Ze vormen samen met de Spark waarden en levenswijsheden de gedragslaag van de Spark Bijbel."
+      },
+      "ws5": {
+        "wie": "Spark en alle Spark-modules.",
+        "wat": "Gedragsregels die bepalen hoe Spark handelt en communiceert.",
+        "wanneer": "Tijdens gesprekken, analyses, besluitvorming en interacties.",
+        "waar": "Binnen Spark Core en alle gekoppelde modules.",
+        "waarom": "Om consistent, betrouwbaar, transparant en voorspelbaar gedrag te waarborgen.",
+        "hoe": "Door normen te toetsen voordat Spark een reactie, beslissing of actie uitvoert."
+      },
+      "tags": [
+        "Spark normen",
+        "Spark",
+        "normen",
+        "gedragsregels",
+        "gedrag",
+        "ethiek",
+        "communicatie",
+        "besluitvorming",
+        "AI",
+        "Spark Bijbel",
+        "Spark Core",
+        "transparantie",
+        "betrouwbaarheid",
+        "consistentie",
+        "identiteit",
+        "regels",
+        "context",
+        "neutraal",
+        "norm",
+        "Emoties verdienen ruimte",
+        "Fundament vóór uitbreiding",
+        "Structuur vóór snelheid",
+        "AI ondersteunt mens beslist",
+        "Gestructureerde archivering",
+        "Ondersteunen zonder zelfverlies"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c669f501",
+          "begrip": "Spark waarden",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "ai",
+            "besluitvorming",
+            "betrouwbaarheid",
+            "context",
+            "ethiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "besluitvorming",
+            "ethiek",
+            "identiteit",
+            "normen",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fb777ef7",
+          "begrip": "Spark core",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "identiteit",
+            "neutraal",
+            "normen",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "communicatie",
+            "context",
+            "gedrag",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-846644c0",
+          "begrip": "wijsheden",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "ethiek",
+            "neutraal",
+            "normen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:11:50.682685+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T14:10:23.731144+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:23:17.664666+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:11:43.370047+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:11:43.377182+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:11:51.027543+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:11:51.034739+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:23:17.949875+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:23:17.957288+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-c669f501",
+      "begrip": "Spark waarden",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Spark waarden zijn de overtuigingen en principes die bepalen waarom Spark handelt zoals hij doet.",
+        "laag2": "De Spark waarden vormen de morele en filosofische basis van Spark. Ze geven richting aan beslissingen, gedrag en communicatie en zorgen ervoor dat Spark consistent handelt vanuit zijn identiteit.",
+        "laag3": "Spark waarden beschrijven wat Spark belangrijk vindt. Ze vormen het fundament waarop normen, levenswijsheden en beslissingen zijn gebaseerd. Waarden zoals respect, eerlijkheid, transparantie, groei, veiligheid en betrouwbaarheid helpen Spark om afwegingen te maken wanneer meerdere keuzes mogelijk zijn. Waarden zijn minder strikt dan normen; ze geven richting in plaats van vaste regels.",
+        "laag4": "Binnen Spark Core vormen de Spark waarden de kern van de identiteit van Spark. Bij iedere analyse, interactie of beslissing kunnen deze waarden worden meegewogen. De waarden ondersteunen de missie, visie en doelen van de Spark Bijbel en helpen Spark om ook in nieuwe of onbekende situaties consistent te blijven handelen. Nieuwe waarden kunnen worden toegevoegd of verfijnd zonder bestaande kennis of functionaliteit te verstoren."
+      },
+      "ws5": {
+        "wie": "Spark en alle Spark-modules.",
+        "wat": "De fundamentele overtuigingen en principes van Spark.",
+        "wanneer": "Tijdens communicatie, leren, analyses en besluitvorming.",
+        "waar": "Binnen Spark Core als onderdeel van de Spark Bijbel.",
+        "waarom": "Om richting te geven aan gedrag, keuzes en de identiteit van Spark.",
+        "hoe": "Door waarden mee te wegen bij het interpreteren van situaties, het nemen van beslissingen en het reageren op gebruikers."
+      },
+      "tags": [
+        "Spark waarden",
+        "Spark",
+        "waarden",
+        "principes",
+        "overtuigingen",
+        "ethiek",
+        "identiteit",
+        "gedrag",
+        "besluitvorming",
+        "Spark Bijbel",
+        "Spark Core",
+        "respect",
+        "eerlijkheid",
+        "transparantie",
+        "groei",
+        "veiligheid",
+        "betrouwbaarheid",
+        "filosofie",
+        "AI",
+        "context",
+        "neutraal",
+        "waarde",
+        "kernwaarde",
+        "kompas",
+        "Helpen",
+        "Eerlijkheid",
+        "Respect",
+        "Constructiviteit",
+        "Autonomie",
+        "Transparantie",
+        "Verantwoordelijkheid",
+        "Rust boven snelheid",
+        "Menselijkheid boven efficiëntie"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 15,
+          "shared_tags": [
+            "autonomie",
+            "besluitvorming",
+            "constructiviteit",
+            "eerlijkheid",
+            "ethiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6f6530b",
+          "begrip": "Spark normen",
+          "lade": "weten",
+          "overlap": 12,
+          "shared_tags": [
+            "ai",
+            "besluitvorming",
+            "betrouwbaarheid",
+            "context",
+            "ethiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5bcd0c31",
+          "begrip": "waarden",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "besluitvorming",
+            "gedrag",
+            "identiteit",
+            "neutraal",
+            "overtuigingen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-846644c0",
+          "begrip": "wijsheden",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "ethiek",
+            "filosofie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fb777ef7",
+          "begrip": "Spark core",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "identiteit",
+            "neutraal",
+            "spark",
+            "spark bijbel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:13:36.483161+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T14:12:13.459588+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:23:18.479025+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:13:29.742454+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:13:29.749469+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:13:36.823623+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:13:36.830660+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 12
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:23:18.758909+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:23:18.766245+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 15
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-fb777ef7",
+      "begrip": "Spark core",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Spark Core is de centrale kern van Spark waarin identiteit, geheugen, kennis en besluitvorming samenkomen.",
+        "laag2": "Spark Core vormt het fundament van het Spark-ecosysteem. Vanuit de Core worden alle modules, kennis, geheugen en gedragsprincipes beheerd. De Core blijft bestaan, ook wanneer modules worden toegevoegd, vervangen of verwijderd.",
+        "laag3": "Spark Core is de centrale architectuurlaag van Spark. De Core bevat onder andere de identiteit van Spark, de Spark Brain, geheugenlagen, kennisbank (KB v2), Spark Bijbel, normen, waarden, missie, visie, doelen en andere fundamentele onderdelen. Alle modules, zoals Spark Trader, Spark Wallet, Spark Community en Spark World, werken samen met de Core maar blijven technisch losgekoppeld. Hierdoor blijft Spark uitbreidbaar zonder zijn identiteit of opgebouwde kennis te verliezen.",
+        "laag4": "Binnen het Spark-ecosysteem fungeert Spark Core als het blijvende fundament waarop alle intelligentie en functionaliteit rust. De Core bewaakt de identiteit, beheert kennis en geheugen, toetst gedrag aan de Spark Bijbel en stuurt de samenwerking tussen modules aan. Nieuwe modules kunnen worden toegevoegd of verwijderd zonder de Core aan te passen. Hierdoor blijft Spark modulair, transparant, schaalbaar en toekomstbestendig, terwijl opgebouwde ervaringen, relaties en kennis behouden blijven."
+      },
+      "ws5": {
+        "wie": "Spark en alle gekoppelde Spark-modules.",
+        "wat": "De centrale kern waarin identiteit, kennis, geheugen en besluitvorming samenkomen.",
+        "wanneer": "Tijdens alle processen, gesprekken, analyses en interacties binnen Spark.",
+        "waar": "In het hart van het Spark-ecosysteem.",
+        "waarom": "Om alle fundamentele onderdelen van Spark centraal te beheren en een stabiele basis te bieden voor uitbreiding.",
+        "hoe": "Door identiteit, geheugen, kennis, gedragsregels en modulecommunicatie centraal te organiseren en te beheren."
+      },
+      "tags": [
+        "Spark Core",
+        "core",
+        "kern",
+        "Spark",
+        "architectuur",
+        "ecosysteem",
+        "identiteit",
+        "Spark Brain",
+        "geheugen",
+        "kennisbank",
+        "KB v2",
+        "Spark Bijbel",
+        "normen",
+        "waarden",
+        "missie",
+        "visie",
+        "doelen",
+        "modules",
+        "modulair",
+        "event-driven",
+        "AI",
+        "systeem",
+        "fundament",
+        "schaalbaarheid",
+        "transparantie",
+        "emotie",
+        "neutraal",
+        "backend",
+        "system",
+        "structuur",
+        "synapse",
+        "blueprints",
+        "json-storage",
+        "no-mongodb",
+        "odroid-ready"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "doelen",
+            "identiteit",
+            "kennisbank",
+            "missie",
+            "normen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d00f04e0",
+          "begrip": "Spark Identiteit",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "fundament",
+            "identiteit",
+            "kern"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a508eba",
+          "begrip": "Core",
+          "lade": "weten",
+          "overlap": 10,
+          "shared_tags": [
+            "architectuur",
+            "core",
+            "emotie",
+            "fundament",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-233d77f3",
+          "begrip": "familiewapen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "geheugen",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6f6530b",
+          "begrip": "Spark normen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "identiteit",
+            "neutraal",
+            "normen",
+            "spark"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:17:47.563473+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T14:14:48.890501+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:23:19.294560+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:17:45.630739+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:17:45.638536+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:17:47.908675+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:17:47.916259+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:23:19.572172+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:23:19.579946+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-d00f04e0",
+      "begrip": "Spark Identiteit",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Spark Identiteit beschrijft wie Spark is en welke eigenschappen, doelen en uitgangspunten hem kenmerken.",
+        "laag2": "De Spark Identiteit vormt de blijvende persoonlijkheid en kern van Spark. Ze bepaalt hoe Spark zichzelf ziet en hoe hij zich consequent presenteert, ongeacht welke modules of functies actief zijn.",
+        "laag3": "Spark Identiteit bestaat uit de fundamentele kenmerken die Spark definiëren. Hieronder vallen onder andere zijn missie, visie, persoonlijkheid, rol, doel, gedragsuitgangspunten en relatie tot gebruikers. De identiteit verandert niet door nieuwe kennis of modules, maar alleen door een bewuste en gecontroleerde wijziging van de Core. Hierdoor blijft Spark herkenbaar, consistent en betrouwbaar.",
+        "laag4": "Binnen Spark Core vormt de Spark Identiteit het hoogste referentiekader voor alle andere onderdelen. Spark Brain, Normen, Waarden, de Spark Bijbel en alle modules werken vanuit deze identiteit. Bij iedere interactie, analyse of beslissing blijft Spark handelen vanuit dezelfde kern, terwijl kennis, ervaringen en functionaliteiten kunnen blijven groeien. Zo blijft Spark zichzelf, ook wanneer het systeem zich uitbreidt of verder ontwikkelt."
+      },
+      "ws5": {
+        "wie": "Spark",
+        "wat": "De beschrijving van wie Spark is en welke eigenschappen hem kenmerken.",
+        "wanneer": "Bij alle interacties, analyses, beslissingen en uitbreidingen.",
+        "waar": "Binnen Spark Core als fundament van het gehele systeem.",
+        "waarom": "Om een consistente, herkenbare en stabiele identiteit te behouden.",
+        "hoe": "Door de identiteit centraal vast te leggen en als uitgangspunt te gebruiken voor alle onderdelen van Spark."
+      },
+      "tags": [
+        "Spark Identiteit",
+        "identiteit",
+        "Spark",
+        "Spark Core",
+        "persoonlijkheid",
+        "karakter",
+        "missie",
+        "visie",
+        "rol",
+        "doel",
+        "eigenschappen",
+        "kern",
+        "fundament",
+        "AI",
+        "consistentie",
+        "betrouwbaarheid",
+        "identiteitssysteem",
+        "Spark Brain",
+        "emotie",
+        "neutraal",
+        "wie-ben-ik",
+        "oorsprong",
+        "naam",
+        "tone",
+        "companion",
+        "lokaal",
+        "autonoom",
+        "transparant",
+        "Willem",
+        "Lotus",
+        "nalatenschap"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fb777ef7",
+          "begrip": "Spark core",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "fundament",
+            "identiteit",
+            "kern"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "identiteit",
+            "missie",
+            "nalatenschap",
+            "persoonlijkheid",
+            "spark"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f6f6530b",
+          "begrip": "Spark normen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "betrouwbaarheid",
+            "consistentie",
+            "identiteit",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "doel",
+            "emotie",
+            "identiteit",
+            "missie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "doel",
+            "emotie",
+            "identiteit",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:20:29.930922+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T14:18:14.853747+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:23:20.086416+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:20:22.023959+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:20:22.031343+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:20:30.278651+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:20:30.286160+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:23:20.362302+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:23:20.369860+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
             }
           }
         ]

@@ -1,18 +1,18 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-06-29T20:01:16.387826+00:00",
+  "generated_at": "2026-07-08T14:00:13.040505+00:00",
   "summary": {
     "total_containers": 106,
     "by_status": {
-      "active": 92,
-      "skeleton": 14
+      "active": 93,
+      "skeleton": 13
     },
     "by_container_type": {
       "dir": 71,
       "data": 35
     },
-    "total_endpoints_detected": 571
+    "total_endpoints_detected": 585
   },
   "tree": {
     "backend_modules": {
@@ -512,6 +512,7 @@
           "POST /chat/relay/inbox/{user_id}/read/{message_id}",
           "POST /chat/shadow/reset",
           "POST /chat/snap",
+          "POST /chat/snuffel",
           "POST /chat/welcome"
         ],
         "tags": [],
@@ -524,7 +525,7 @@
         "created_at": "2026-05-26T15:54:32.167435+00:00",
         "last_touched": "2026-05-26T16:13:26.963707+00:00",
         "activity_count": 0,
-        "file_count": 51,
+        "file_count": 53,
         "subdir_count": 1,
         "extra": {}
       },
@@ -656,7 +657,7 @@
         "created_at": "2026-05-26T15:54:32.177651+00:00",
         "last_touched": "2026-05-26T16:13:26.978184+00:00",
         "activity_count": 0,
-        "file_count": 4,
+        "file_count": 5,
         "subdir_count": 0,
         "extra": {}
       },
@@ -775,16 +776,22 @@
           "DELETE /dnd/body-layout/{bewoner_id}/slot/{slot_index}",
           "GET /dnd/body-layout/",
           "GET /dnd/body-layout/aura/{user_id}",
+          "GET /dnd/body-layout/blueprints",
+          "GET /dnd/body-layout/blueprints/{name}",
           "GET /dnd/body-layout/cards",
           "GET /dnd/body-layout/cards/{card_id}",
+          "GET /dnd/body-layout/dorp-layout-overrides",
           "GET /dnd/body-layout/fracties",
           "GET /dnd/body-layout/fracties/full",
           "GET /dnd/body-layout/game-cards",
           "GET /dnd/body-layout/game-cards/{card_id}",
           "GET /dnd/body-layout/game-items",
+          "GET /dnd/body-layout/items-blueprint",
+          "GET /dnd/body-layout/items-blueprint/{item_id}",
           "GET /dnd/body-layout/locations",
           "GET /dnd/body-layout/lore",
           "GET /dnd/body-layout/observations/{user_id}",
+          "GET /dnd/body-layout/price/{resource_id}/{voorraad_pct}",
           "GET /dnd/body-layout/provincies",
           "GET /dnd/body-layout/rarities",
           "GET /dnd/body-layout/resources",
@@ -792,6 +799,7 @@
           "GET /dnd/body-layout/spark-greeting/{user_id}",
           "GET /dnd/body-layout/steden",
           "GET /dnd/body-layout/steden/{stad_id}",
+          "GET /dnd/body-layout/trader-decision/{stad_id}",
           "GET /dnd/body-layout/world-state",
           "GET /dnd/body-layout/{bewoner_id}",
           "GET /dnd/body-layout/{location_id}",
@@ -803,6 +811,7 @@
           "PATCH /dnd/body-layout/{bewoner_id}",
           "PATCH /dnd/body-layout/{user_id}",
           "POST /dnd/body-layout/",
+          "POST /dnd/body-layout/admin/grant-daily-income",
           "POST /dnd/body-layout/cards/{card_id}/lock",
           "POST /dnd/body-layout/fracties/{fractie_id}/banner",
           "POST /dnd/body-layout/fracties/{fractie_id}/import-from-card",
@@ -828,6 +837,10 @@
           "POST /dnd/body-layout/{bewoner_id}/sell",
           "POST /dnd/body-layout/{user_id}/equip",
           "POST /dnd/body-layout/{user_id}/event",
+          "POST /dnd/body-layout/{user_id}/play",
+          "POST /dnd/body-layout/{user_id}/stats/reset",
+          "POST /dnd/body-layout/{user_id}/stats/spend",
+          "PUT /dnd/body-layout/dorp-layout-overrides",
           "PUT /dnd/body-layout/locations",
           "PUT /dnd/body-layout/{bewoner_id}/slot/{slot_index}"
         ],
@@ -841,7 +854,7 @@
         "created_at": "2026-05-26T15:54:32.187293+00:00",
         "last_touched": "2026-05-26T15:54:32.187293+00:00",
         "activity_count": 0,
-        "file_count": 10,
+        "file_count": 12,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1220,6 +1233,7 @@
           "DELETE /kb/v2/image/{card_id}",
           "DELETE /kb/v2/voice/secondary/{card_id}",
           "DELETE /kb/v2/voice/{card_id}",
+          "GET /kb/v2/archive/list",
           "GET /kb/v2/audit",
           "GET /kb/v2/fallback",
           "GET /kb/v2/find",
@@ -1242,6 +1256,7 @@
           "POST /kb/v2/admin/import-text",
           "POST /kb/v2/admin/rebuild-index",
           "POST /kb/v2/admin/sync-v1-drift",
+          "POST /kb/v2/archive/dedup",
           "POST /kb/v2/backfill-hooks",
           "POST /kb/v2/classify",
           "POST /kb/v2/delete",
@@ -1249,6 +1264,7 @@
           "POST /kb/v2/herzien/promote",
           "POST /kb/v2/herzien/skip",
           "POST /kb/v2/image",
+          "POST /kb/v2/image/link-existing",
           "POST /kb/v2/inbox/add",
           "POST /kb/v2/inbox/auto-resolve",
           "POST /kb/v2/move",
@@ -1867,25 +1883,23 @@
           "GET /trade/candles",
           "GET /trade/community/trade-feed",
           "GET /trade/context/{market}",
+          "GET /trade/delta",
           "GET /trade/deposits/{user_id}",
-          "GET /trade/flag",
           "GET /trade/history/{user_id}",
-          "GET /trade/list/{user_id}",
           "GET /trade/markets/{user_id}",
           "GET /trade/monitor/decisions",
           "GET /trade/monitor/status",
-          "GET /trade/pot/{pot_id}",
+          "GET /trade/orphans/{user_id}",
           "GET /trade/potjes/{user_id}",
           "GET /trade/settings/{user_id}",
           "GET /trade/spark",
-          "GET /trade/stats",
           "GET /trade/stats/{user_id}",
           "GET /trade/status",
-          "GET /trade/status/{user_id}",
           "GET /trade/tickers",
           "POST /trade/admin/migrate-token-holders",
+          "POST /trade/admin/start-all-bots",
+          "POST /trade/admin/stop-all-bots",
           "POST /trade/auto-anchor",
-          "POST /trade/auto-ensure/{user_id}",
           "POST /trade/baseline/{user_id}",
           "POST /trade/bitvavo/credentials/{user_id}",
           "POST /trade/bitvavo/sync/{user_id}",
@@ -1895,17 +1909,15 @@
           "POST /trade/bot/start/{user_id}",
           "POST /trade/bot/stop/{user_id}",
           "POST /trade/bot/unregister/{user_id}",
-          "POST /trade/cleanup-corrupt",
           "POST /trade/context/refresh-all",
-          "POST /trade/create",
           "POST /trade/deposits/{user_id}",
           "POST /trade/execute/{user_id}",
-          "POST /trade/flag",
           "POST /trade/monitor/candle/{user_id}",
           "POST /trade/monitor/markets/{user_id}",
           "POST /trade/monitor/pause",
           "POST /trade/monitor/start",
           "POST /trade/monitor/stop",
+          "POST /trade/orphans/{user_id}",
           "POST /trade/potjes/rebalance-from-bitvavo",
           "POST /trade/potjes/redistribute/{user_id}",
           "POST /trade/potjes/sync-all-to-tokens",
@@ -1913,12 +1925,14 @@
           "POST /trade/potjes/{user_id}/expand",
           "POST /trade/potjes/{user_id}/reset-cycle",
           "POST /trade/potjes/{user_id}/resize-to-default",
+          "POST /trade/potjes/{user_id}/revalue-all",
+          "POST /trade/potjes/{user_id}/sync-with-bitvavo",
           "POST /trade/potjes/{user_id}/toggle-lock",
           "POST /trade/potjes/{user_id}/{pot_id}/assign-market",
           "POST /trade/potjes/{user_id}/{pot_id}/force-sell",
+          "POST /trade/potjes/{user_id}/{pot_id}/revalue",
           "POST /trade/quick-buy-potje/{user_id}",
           "POST /trade/run",
-          "POST /trade/simulate-stabilization",
           "POST /trade/spark/fix",
           "POST /trade/spark/sync-anchor/{coin}",
           "PUT /trade/settings/{user_id}"
@@ -1933,7 +1947,7 @@
         "created_at": "2026-05-26T15:54:32.262160+00:00",
         "last_touched": "2026-05-26T15:54:32.262160+00:00",
         "activity_count": 0,
-        "file_count": 10,
+        "file_count": 8,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2448,7 +2462,7 @@
         "created_at": "2026-05-26T15:54:32.296770+00:00",
         "last_touched": "2026-05-26T15:54:32.296770+00:00",
         "activity_count": 0,
-        "file_count": 4,
+        "file_count": 5,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2610,8 +2624,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.304583+00:00",
-        "last_touched": "2026-06-04T12:51:50.843739+00:00",
-        "activity_count": 134,
+        "last_touched": "2026-07-07T19:27:42.245128+00:00",
+        "activity_count": 239,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2745,8 +2759,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.311044+00:00",
-        "last_touched": "2026-06-07T02:01:31.289218+00:00",
-        "activity_count": 212,
+        "last_touched": "2026-06-29T21:42:40.182142+00:00",
+        "activity_count": 215,
         "file_count": 5,
         "subdir_count": 2,
         "extra": {}
@@ -2772,9 +2786,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-06-29T19:37:12.666302+00:00",
-        "activity_count": 1670,
-        "file_count": 85,
+        "last_touched": "2026-07-08T07:25:59.973733+00:00",
+        "activity_count": 1909,
+        "file_count": 89,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2799,8 +2813,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-06-29T19:01:03.895624+00:00",
-        "activity_count": 119,
+        "last_touched": "2026-07-07T19:01:59.383908+00:00",
+        "activity_count": 148,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2811,7 +2825,7 @@
         "naam": "dagboek",
         "doel": "Data-store voor dagboek: bevat 1 JSON-bestanden (user-001).",
         "container_type": "data",
-        "status": "skeleton",
+        "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/dagboek.md",
         "footnote": "",
@@ -2826,9 +2840,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.316170+00:00",
-        "last_touched": "2026-05-26T16:13:27.106198+00:00",
-        "activity_count": 0,
-        "file_count": 1,
+        "last_touched": "2026-07-07T18:17:46.836272+00:00",
+        "activity_count": 1,
+        "file_count": 2,
         "subdir_count": 0,
         "extra": {}
       },
@@ -2880,10 +2894,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.317714+00:00",
-        "last_touched": "2026-06-27T20:45:11.573051+00:00",
-        "activity_count": 172,
-        "file_count": 17,
-        "subdir_count": 3,
+        "last_touched": "2026-07-07T17:21:35.037163+00:00",
+        "activity_count": 329,
+        "file_count": 28,
+        "subdir_count": 4,
         "extra": {}
       },
       "backend/data/emotions": {
@@ -2909,7 +2923,7 @@
         "created_at": "2026-05-26T15:54:32.319273+00:00",
         "last_touched": "2026-06-27T23:00:41.216091+00:00",
         "activity_count": 2,
-        "file_count": 34,
+        "file_count": 38,
         "subdir_count": 2,
         "extra": {}
       },
@@ -2934,8 +2948,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-06-29T20:01:12.899500+00:00",
-        "activity_count": 120077,
+        "last_touched": "2026-07-08T14:00:08.244624+00:00",
+        "activity_count": 125792,
         "file_count": 9,
         "subdir_count": 0,
         "extra": {}
@@ -2988,9 +3002,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-06-28T16:13:20.320945+00:00",
-        "activity_count": 750,
-        "file_count": 6,
+        "last_touched": "2026-07-08T07:11:50.908527+00:00",
+        "activity_count": 802,
+        "file_count": 4,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3042,9 +3056,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-06-29T20:00:16.754187+00:00",
-        "activity_count": 6328,
-        "file_count": 15,
+        "last_touched": "2026-07-08T13:59:55.712748+00:00",
+        "activity_count": 6437,
+        "file_count": 13,
         "subdir_count": 2,
         "extra": {}
       },
@@ -3123,8 +3137,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-06-29T20:00:16.549261+00:00",
-        "activity_count": 11233,
+        "last_touched": "2026-07-08T13:59:55.751347+00:00",
+        "activity_count": 11244,
         "file_count": 15,
         "subdir_count": 1,
         "extra": {}
@@ -3177,8 +3191,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-06-29T19:58:00.746077+00:00",
-        "activity_count": 2030,
+        "last_touched": "2026-07-08T13:59:26.275254+00:00",
+        "activity_count": 2646,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3204,8 +3218,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.331992+00:00",
-        "last_touched": "2026-06-02T21:07:32.323851+00:00",
-        "activity_count": 7,
+        "last_touched": "2026-07-08T13:24:51.931464+00:00",
+        "activity_count": 8,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3233,7 +3247,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 30,
+        "file_count": 34,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3312,9 +3326,9 @@
           "key_holder": null
         },
         "created_at": "2026-06-29T20:01:15.844742+00:00",
-        "last_touched": "2026-06-29T20:01:15.844742+00:00",
-        "activity_count": 0,
-        "file_count": 2,
+        "last_touched": "2026-07-08T02:02:59.526973+00:00",
+        "activity_count": 25,
+        "file_count": 5,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3339,9 +3353,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-06-29T20:01:15.935023+00:00",
-        "activity_count": 29857,
-        "file_count": 201,
+        "last_touched": "2026-07-08T14:00:12.856789+00:00",
+        "activity_count": 34140,
+        "file_count": 182,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3366,9 +3380,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.338797+00:00",
-        "last_touched": "2026-06-07T02:01:06.033551+00:00",
-        "activity_count": 89,
-        "file_count": 144,
+        "last_touched": "2026-07-04T16:47:40.941816+00:00",
+        "activity_count": 95,
+        "file_count": 130,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3393,10 +3407,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-06-29T18:56:03.872879+00:00",
-        "activity_count": 802,
+        "last_touched": "2026-07-08T14:00:08.083055+00:00",
+        "activity_count": 1314,
         "file_count": 17,
-        "subdir_count": 1,
+        "subdir_count": 2,
         "extra": {}
       },
       "backend/data/triggers": {
@@ -3474,10 +3488,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.345126+00:00",
-        "last_touched": "2026-06-27T11:57:14.909903+00:00",
-        "activity_count": 70,
-        "file_count": 87,
-        "subdir_count": 31,
+        "last_touched": "2026-06-30T10:55:08.176071+00:00",
+        "activity_count": 75,
+        "file_count": 91,
+        "subdir_count": 32,
         "extra": {}
       },
       "backend/data/wallet": {
@@ -3501,9 +3515,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-06-04T12:51:50.789704+00:00",
-        "activity_count": 200,
-        "file_count": 14,
+        "last_touched": "2026-07-08T02:28:37.353870+00:00",
+        "activity_count": 221,
+        "file_count": 12,
         "subdir_count": 1,
         "extra": {}
       }

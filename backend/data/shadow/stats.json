@@ -1,10 +1,10 @@
 {
   "totals": {
-    "events": 1337,
+    "events": 1352,
     "corrections": 2,
     "confirmations": 1,
     "fallbacks": 0,
-    "knowledge_matches": 681
+    "knowledge_matches": 684
   },
   "triggers_used": {
     "wedervraag_done": 28,
@@ -18,7 +18,7 @@
     "topic_overview": 14,
     "welcome": 210,
     "recap": 1,
-    "greeting": 34,
+    "greeting": 35,
     "prive": 9,
     "goodbye": 8,
     "knowledge_deeper": 3,
@@ -29,7 +29,7 @@
     "identity_visie": 2,
     "identity_core": 1,
     "identity_doel": 4,
-    "identity_intro_full": 1,
+    "identity_intro_full": 3,
     "identity_maker": 2,
     "identity_waarden": 1,
     "identity_uniek": 1,
@@ -75,7 +75,7 @@
     "kbv2_learn_word": 1,
     "kbv2_make_dnd": 1,
     "capability_response": 81,
-    "capability_placeholder": 20,
+    "capability_placeholder": 24,
     "kbv2_tell_short": 5,
     "kbv2_tell_deep": 4,
     "kbv2_tell_more": 6,
@@ -105,10 +105,11 @@
     "personalia_intrek": 2,
     "homonym_disambig": 2,
     "compositional": 4,
-    "kbv2_neighbor": 1
+    "kbv2_neighbor": 1,
+    "kbv2_direct": 1
   },
   "response_types": {
-    "knowledge": 333,
+    "knowledge": 336,
     "unknown": 33,
     "wedervraag_done": 28,
     "wedervraag": 44,
@@ -121,8 +122,8 @@
     "topic_overview": 13,
     "welcome": 210,
     "recap": 1,
-    "greeting": 34,
-    "general": 39,
+    "greeting": 35,
+    "general": 43,
     "prive_message": 9,
     "goodbye": 8,
     "knowledge_deeper": 3,
@@ -134,7 +135,7 @@
     "identity_visie": 2,
     "identity_core": 1,
     "identity_doel": 4,
-    "identity_intro_full": 1,
+    "identity_intro_full": 3,
     "identity_maker": 2,
     "identity_waarden": 1,
     "identity_uniek": 1,
@@ -182,7 +183,7 @@
     "kbv2_cmd_learned": 1,
     "card_made_dnd": 1,
     "capability_response": 81,
-    "capability_placeholder": 20,
+    "capability_placeholder": 24,
     "kbv2_tell_kort": 5,
     "kbv2_tell_diep": 3,
     "kbv2_tell_meer": 2,
@@ -213,7 +214,8 @@
     "personalia_save": 7,
     "personalia_intrek": 2,
     "homonym_disambig": 2,
-    "compositional": 4
+    "compositional": 4,
+    "kbv2_direct": 1
   },
   "begrip_used": {
     "vroeg": 2,
@@ -241,7 +243,7 @@
     "aanzetten": 1,
     "Hoofd": 2,
     "Lichaam": 1,
-    "Test": 7,
+    "Test": 8,
     "Spark": 11,
     "visie": 1,
     "Core": 1,
@@ -566,12 +568,14 @@
     "Strategie": 3,
     "rps": 2,
     "Zie": 1,
-    "Kind": 1
+    "Kind": 1,
+    "dashboard": 1,
+    "fee": 1
   },
   "fallbacks_by_key": {},
   "lagen_used": {},
   "vocab_used": {},
   "bijbel_used": {},
-  "last_event_at": "2026-07-06T01:00:33.698261+00:00",
+  "last_event_at": "2026-07-08T14:04:05.370320+00:00",
   "first_event_at": "2026-05-15T08:28:31.433396+00:00"
 }

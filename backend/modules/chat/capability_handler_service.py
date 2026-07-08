@@ -746,6 +746,12 @@ def route_capability(text: str, user_id: Optional[str]) -> Optional[Dict]:
     })
     handler = _HANDLERS.get(cap_id)
     if not handler:
+        # v7_capability_kb_passthrough_001 — de "zoeken_kennisbank"-capability
+        # heeft géén expliciete handler nodig: de snap/KB-flow doet dit werk al.
+        # Return None zodat de caller doorloopt naar de gewone KB-lookup.
+        # (Voorheen: "wat is een dashboard?" → placeholder "staat nog op planning".)
+        if cap_id in ("zoeken_kennisbank", "spark_vraag"):
+            return None
         placeholder = match.get("placeholder_response") or (
             f"Ik kan **{match.get('naam') or cap_id}** herkennen ({match.get('status')}), "
             f"maar de uitvoering staat nog op de planning."

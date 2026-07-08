@@ -388,6 +388,7 @@ async def compose_response(
         "",
     ]
     # v6_tab_context_001 — welke UI-tab kijkt de user nu naar?
+    # v7_tab_context_soft_001 — soberder formuleren; NIET als opener gebruiken.
     if active_tab:
         tab_labels = {
             "chat": "Gesprekken", "dashboard": "Dashboard", "kennisbank": "Kennisbank V2",
@@ -399,7 +400,10 @@ async def compose_response(
             "deploy": "Deploy", "tag-curatie": "Tag-curatie",
         }
         tab_label = tab_labels.get(active_tab.lower(), active_tab)
-        user_prompt_parts.append(f"📍 GEBRUIKER KIJKT NU NAAR TAB: **{tab_label}** — als ze vagere vragen stellen zoals 'laat zien' of 'wat is dit', interpreteer dat in de context van deze tab.")
+        user_prompt_parts.append(
+            f"(context: user kijkt naar tab '{tab_label}' — gebruik alleen als de vraag over dat scherm gaat, "
+            f"NOOIT als openingszin of stopwoord. Begin je antwoord NIET met 'je bent nu op X tab' of 'nu je naar X kijkt'.)"
+        )
         user_prompt_parts.append("")
     user_prompt_parts += [
         "## KB-kaarten (hoge betrouwbaarheid, uit bevestigde kennis):",

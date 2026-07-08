@@ -1350,10 +1350,21 @@ async def process_message(req: ChatMessage):
             return response
 
     # 2. Knowledge lookup - zoek alle begrippen in de zin
+    # v7_snap_guard_001 — snap-responses zijn voor UITLEG-vragen, niet voor
+    # korte tests/bevestigingen. Skip snap-branches als text < 6 chars OF geen
+    # vraag-indicator (voorheen: "test" 4x → 4x "Test: Een test is een methode...").
+    _t_norm = text.strip().lower()
+    _t_words = _t_norm.split()
+    _skip_snap = len(_t_norm) < 6 or not (
+        "?" in _t_norm
+        or len(_t_words) >= 3
+        or any(w in _t_words for w in ("wat", "hoe", "waarom", "wanneer", "waar", "wie", "welke", "leg", "vertel", "geef"))
+    )
+
     # 2a. ZIN-SNAP HIGH-CONFIDENCE MATCH (v4_011, Optie B): als 3+ woorden
     # overlappen met een opgeslagen contextzin die gevulde lagen heeft, krijgt
     # die zin voorrang op losse woord-lookup (anders eet 'gisteren' de hele zin op).
-    sent_match_strong = snap.lookup_sentence_match(text, min_overlap=3, min_ratio=0.5)
+    sent_match_strong = None if _skip_snap else snap.lookup_sentence_match(text, min_overlap=3, min_ratio=0.5)
     if sent_match_strong:
         layer_text = ""
         used_depth = 1
@@ -1381,7 +1392,7 @@ async def process_message(req: ChatMessage):
         _save_log(req, response, "sentence_reply")
         return response
 
-    matches = snap.multi_lookup(text)
+    matches = [] if _skip_snap else snap.multi_lookup(text)
 
     if matches:
         response["knowledge_matches"] = matches
@@ -1466,7 +1477,7 @@ async def process_message(req: ChatMessage):
     else:
         # 2b. ZIN-SNAP FUZZY MATCH (v4_011, Optie B): probeer een eerder
         # opgeslagen contextzin te vinden met overlap in betekenisvolle woorden.
-        sent_match = snap.lookup_sentence_match(text)
+        sent_match = None if _skip_snap else snap.lookup_sentence_match(text)
         if sent_match:
             # Pak hoogste gevulde laag (laag1 prioriteit → val terug op hogere)
             layer_text = ""
@@ -1494,35 +1505,37 @@ async def process_message(req: ChatMessage):
 
         # v5_kbv2_001 — #DeWillem Graceful Fallback via KB v2 (stap-terug-en-geef-context)
         # Voor we onbekende woorden gaan snappen, kijk of v2 een buur-kaart kent.
-        try:
-            from modules.kb_v2 import service as kbv2
-            meaningful_first = (snap._extract_meaningful_words(text) or [None])[0]
-            if meaningful_first:
-                fb = kbv2.graceful_fallback(meaningful_first)
-                if fb and fb.get("type") == "direct":
-                    kaart = fb["kaart"]
-                    laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
-                    if laag1:
-                        response["type"] = "kbv2_direct"
-                        response["message"] = f"**{kaart['begrip']}** _(lade: {fb['lade']})_: {laag1}"
+        # v7_snap_guard_001 — skip deze fallback bij korte/niet-vraag inputs (test/ok/etc.)
+        if not _skip_snap:
+            try:
+                from modules.kb_v2 import service as kbv2
+                meaningful_first = (snap._extract_meaningful_words(text) or [None])[0]
+                if meaningful_first:
+                    fb = kbv2.graceful_fallback(meaningful_first)
+                    if fb and fb.get("type") == "direct":
+                        kaart = fb["kaart"]
+                        laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                        if laag1:
+                            response["type"] = "kbv2_direct"
+                            response["message"] = f"**{kaart['begrip']}** _(lade: {fb['lade']})_: {laag1}"
+                            response["kbv2_card_id"] = kaart["id"]
+                            _save_log(req, response, "kbv2_direct")
+                            return response
+                    elif fb and fb.get("type") == "neighbor":
+                        kaart = fb["kaart"]
+                        laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
+                        response["type"] = "kbv2_neighbor"
+                        # #DeWillem: stap terug en geef context
+                        response["message"] = (
+                            f"Ik ken **{meaningful_first}** nog niet specifiek, maar in mijn **{fb['lade']}**-lade "
+                            f"vind ik wel iets over **{kaart['begrip']}**: {laag1}\n\n"
+                            f"_Wil je dat ik **{meaningful_first}** apart leer?_"
+                        )
                         response["kbv2_card_id"] = kaart["id"]
-                        _save_log(req, response, "kbv2_direct")
+                        _save_log(req, response, "kbv2_neighbor")
                         return response
-                elif fb and fb.get("type") == "neighbor":
-                    kaart = fb["kaart"]
-                    laag1 = (kaart.get("lagen") or {}).get("laag1") or ""
-                    response["type"] = "kbv2_neighbor"
-                    # #DeWillem: stap terug en geef context
-                    response["message"] = (
-                        f"Ik ken **{meaningful_first}** nog niet specifiek, maar in mijn **{fb['lade']}**-lade "
-                        f"vind ik wel iets over **{kaart['begrip']}**: {laag1}\n\n"
-                        f"_Wil je dat ik **{meaningful_first}** apart leer?_"
-                    )
-                    response["kbv2_card_id"] = kaart["id"]
-                    _save_log(req, response, "kbv2_neighbor")
-                    return response
-        except Exception:
-            pass  # v2 nog niet beschikbaar of leeg — val door naar normale snap-flow
+            except Exception:
+                pass  # v2 nog niet beschikbaar of leeg — val door naar normale snap-flow
 
         # 3. Geen match - detecteer onbekende woorden en maak automatisch snaps
         meaningful = snap._extract_meaningful_words(text)

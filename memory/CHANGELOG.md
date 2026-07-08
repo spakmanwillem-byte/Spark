@@ -2,53 +2,66 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
-## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB
+## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB + Blueprint-piloot
 
 ### 📇 KB v2 kaart "Spark Trader" gevuld (`kbv2-2f55a485`)
-- Volledig gevulde 4-lagen kaart: laag1 (basis), laag2 (werking + cooldowns), laag3 (waarom-model), laag4 (kernwaarde transparantie)
-- WS5 (wat/wie/wanneer/waar/waarom) ingevuld
-- 6 verbanden: 4× code_ref (monitor.py, potjes.py, context_service.py, routes.py), 1× blueprint_ref (`/memory/blueprints/trade.md`), 1× endpoint-ref
-- Tags: `spark-trader`, `blueprint`, `capability`, `trade`, `bitvavo`, `potjes`, `bot`, `crypto`
-- Verplaatst van inbox → lade `weten` via `POST /api/kb/v2/classify`
-- Doel: Spark kan nu bij trader-gerelateerde vragen inhoudelijk antwoorden uit KB i.p.v. LLM-hallucinatie
+- Volledig gevulde 4-lagen kaart in lade `weten`
+- 24 tags (incl. fee, kosten, commissie, winst, verlies, pnl, cooldown, coins, ...) — gevoelig voor natuurlijke vragen
+- WS5 ingevuld, 6 verbanden (4× code_ref, 1× blueprint_ref, 1× endpoint)
 
-### 🐛 Snap-service "spookkaart" bug (`v7_snap_systemtag_filter_001`)
-**Bug**: kaart `kbv2-5ae0795b` [systeem-context bleef terugkomen na verwijderen. Bron: snap-service extractte het `[SYSTEEM-CONTEXT: ...` welcome-prompt-fragment van Diep-mode als "onbekend begrip" en maakte er telkens een nieuwe kaart van.
+### 📘 Blueprint `/memory/blueprints/trade.md` gevuld (piloot)
+Auto-stub vervangen door volledige documentatie:
+- Doel, wat werkt, fees & drempels tabel, beslissings-flow diagram
+- Bestandsstructuur (7 files), key API endpoints (8), bekende beperkingen
+- Encryption-plan, relaties, TODO's
+- **Verbinding met Spark-brein**: KB-koppeling + voorbeeld-vragen die Spark nu kan beantwoorden
+- Piloot voor de andere 59 lege blueprint-stubs
 
-**Fix in `modules/chat/snap_service.py::create_word_snap`**:
-- Skip concept als begint met `[`, `<`, `{`, `(`, `|`
-- Skip als geen enkele letter (bv. pure bracket/JSON)
-- Skip expliciete markers: `systeem-context`, `system-context`, `spark_prompt`, `systeem_prompt`
-- Bestaande spookkaart eenmalig verwijderd via `POST /api/kb/v2/delete`
+### 🐛 Snap-service "spookkaart" (`v7_snap_systemtag_filter_001`)
+- Kaart `kbv2-5ae0795b` `[systeem-context` bleef terugkomen na verwijderen (welcome-prompt-lek)
+- Fix: `create_word_snap` skipt concepten met bracket-tekens of `systeem-context` markers
+- Spookkaart eenmalig verwijderd
 
 ### 🐛 identity_facts te grof (`v7_identity_facts_strict_001`)
-**Bug**: "ik heb een suggestie" → fact `i_have: suggestie`. "ik ben benieuwd of ..." → fact `i_am: benieuw als deze kennis uit je core komt`. Vervuilde Spark-geheugen bij elke Diep-injectie.
-
-**Fix in `modules/chat/identity_facts.py`**:
-- Nieuwe `ABSTRACT_SKIP_VALUES` set (28 abstracte woorden: suggestie, voorstel, idee, vraag, gevoel, benieuwd, ...)
-- Nieuwe `SUBCLAUSE_MARKERS` — skip als value een bijzin-indicator bevat (als, of, want, omdat, terwijl, maar, ...)
-- `i_am` max 30 chars + skip als eerste woord "heel"/"erg"/"een"/"de"/"het"/"ook"/"wel"/"misschien"
-- `i_have` min 4 chars
-- **Cleanup**: 6 vervuilde facts uit user-001 verwijderd (van 32 → 26)
+- `ABSTRACT_SKIP_VALUES` (28 abstracte woorden) + `SUBCLAUSE_MARKERS` (10 bijzin-indicators)
+- `i_am` max 30 chars + skip als eerste woord filler ("heel", "een", ...)
+- Cleanup: 6 vervuilde facts uit user-001 (van 32 → 26)
 
 ### 🐛 Tool-call leak sanitizer (`v7_tool_leak_sanitizer_001`)
-**Bug**: In Diep-mode plakte LLM tool-planning in user-response: *"We need to call agenda_lezen with date 2026-05-17.[agenda_lezen {"date":"2026-05-17"}]Op zondag 17 mei..."*
+- Post-process regex in `response_composer` strip alle `[tool_name {json}]` + "we need to call X" zinnen
+- Vangnet voor ALLE tools (agenda, notes, trader, ...), niet alleen agenda
 
-**Fix in `modules/chat/response_composer.py`** — post-process regex sanitizer direct na LLM-response:
-- Strip `[tool_name {json}]` bracket-syntax
-- Strip zinnen "we need to call X" / "let me call X" / "ik moet X aanroepen"
-- Strip losse `[tool_name]` markers
-- Normaliseer meerdere spaties
+### 🐛 Snap-guard voor korte inputs (`v7_snap_guard_001`)
+**Bug**: user typt "test" 4× → 4× snap-response "Test: Een test is een methode..."
 
-Werkt voor ALLE tool-leaks (agenda, notes, trader, ...) niet alleen agenda-specifiek. Zero-config vangnet.
+**Fix in `modules/chat/routes.py`**:
+- Nieuwe `_skip_snap` guard: skip alle snap-branches (sentence-match, multi_lookup, graceful_fallback) als text < 6 chars OF geen vraag-indicator ("?"/wat/hoe/waarom/wanneer/wie/welke/leg/vertel/geef, of ≥3 woorden)
+- Effect: "test", "ok", "hoi" → gesprek-flow. "wat is een test?" → snap zoals hoort.
+
+### 🐛 Capability KB-passthrough (`v7_capability_kb_passthrough_001`)
+**Bug**: "wat is een dashboard?" → capability_placeholder "🤖 Zoek in kennisbank... staat nog op planning" i.p.v. de kaart-inhoud
+
+**Fix in `modules/chat/capability_handler_service.py`**:
+- Voor `zoeken_kennisbank` en `spark_vraag` capabilities: return `None` zodat de caller doorloopt naar snap/KB-flow i.p.v. placeholder
+- Andere placeholders blijven werken zoals voorheen
+
+### 🐛 Dashboard-fixatie temperen (`v7_tab_context_soft_001`)
+**Bug** (Roadkill's klacht): Spark begint elke Diep-reactie met *"Nu je naar het dashboard kijkt..."*
+
+**Fix in `modules/chat/response_composer.py`**:
+- Tab-context prompt zachter geformuleerd (kleine letter, tussen haakjes)
+- Expliciete anti-opener regel: "NOOIT als openingszin", "Begin je antwoord NIET met 'je bent nu op X tab'"
 
 ### 🔍 Trader delta-diagnose (root-cause pot vs Bitvavo saldo)
-Bevindingen via `GET /api/trade/delta`:
-- Pots ↔ tokens ↔ Bitvavo: 1-op-1 sync ✅ (`consistency_ok: true`, `pots_match_tokens: true`)
-- Pot-kapitaal: €149.16 totaal (22 pots)
-- Market value: €142.34 (onrealiseerd verlies €6.82)
-- **Root cause van INSUFFICIENT_EUR-loop**: 90% van user-001's kapitaal zit als coin (9/10 posities open), maar liquide EUR was maar €5.17. Bot probeerde €6.76-cluster te BUYen.
-- **Cooldown-fix (30 min) is dus juiste vangnet**. Diepere fix (pre-check EUR-balance vóór BUY-try) → future backlog.
+- Pots ↔ tokens ↔ Bitvavo: 1-op-1 sync ✅ (`consistency_ok: true`)
+- Pot-kapitaal: €149.16 totaal. Market: €142.34. Unrealized: -€6.82
+- Root cause INSUFFICIENT_EUR: 90% kapitaal is coin, €5.17 liquide EUR. Cooldown-fix (30 min) is juiste vangnet.
+
+### 🧪 Live-tests via curl (na fixes)
+- "test" → `general` (was: kbv2_direct) ✅
+- "ok" → `general` (was: kbv2_direct) ✅
+- "wat is een dashboard?" → `knowledge` met dashboard-kaart-tekst ✅
+- "wat is een test?" → `knowledge` met test-kaart ✅
 
 ## 2026-07-08 (sessie 46) — Prod-merge + Trader EUR-cooldown fix
 

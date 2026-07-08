@@ -50924,11 +50924,390 @@
         "session_id": "deep-user-001",
         "gesprek_nummer": 1970
       }
+    },
+    {
+      "id": "conv-8382f620",
+      "timestamp": "2026-07-08T14:01:11.284795+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "test",
+      "spark_response": "**Test** _(lade: doen)_: Een test is een methode om te controleren of iets goed werkt of klopt.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "kbv2_direct",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "kbv2_direct"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1971
+      }
+    },
+    {
+      "id": "conv-df98c3c6",
+      "timestamp": "2026-07-08T14:01:11.442844+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ok",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1972
+      }
+    },
+    {
+      "id": "conv-f4112bcd",
+      "timestamp": "2026-07-08T14:01:11.700593+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "hoi",
+      "spark_response": "Hallo Willem! Hoe kan ik je helpen?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "greeting",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "greeting"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1973
+      }
+    },
+    {
+      "id": "conv-deb6279d",
+      "timestamp": "2026-07-08T14:01:11.932886+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een dashboard?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1974
+      }
+    },
+    {
+      "id": "conv-713d6a5b",
+      "timestamp": "2026-07-08T14:01:12.101235+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over spark trader",
+      "spark_response": "Hoi, Willem! Ik ben **Spark** — een persoonlijke, lerende AI gemaakt door De Willem.\n\nIk ben leergierig, behulpzaam, mensgericht.\n\nMijn doel: menselijke ontwikkeling versterken via transparante, autonome en begrijpelijke ondersteuning..\n\n\nVraag gerust naar mijn _missie_, _visie_, _core_ of _wat ik kan_.\n\n**Missie:** Mensen ondersteunen in hun persoonlijke ontwikkeling door technologie te bouwen die autonomie versterkt in plaats van afhankelijkheid creëert. Spark wil laten zien dat technologie: Begrijpelijk mag zi\n\n**Ik kan onder andere:**\n• Reageren binnen de kaders van mijn Normen & Waarden\n• Uitzonderingen toetsen aan de Spark Bijbel\n• Kennis ophalen uit gelaagde KB v2 met gecontroleerde diepte\n• Emotie-context herkennen via 7-laags pipeline",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "trader"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat fijn om te horen! 😊"
+        },
+        "trigger_type": "identity_intro_full",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "identity_intro_full"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1975
+      }
+    },
+    {
+      "id": "conv-9f37a435",
+      "timestamp": "2026-07-08T14:01:12.277122+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is de fee?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1976
+      }
+    },
+    {
+      "id": "conv-824dec61",
+      "timestamp": "2026-07-08T14:02:59.016951+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "test",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1977
+      }
+    },
+    {
+      "id": "conv-0bc34ce4",
+      "timestamp": "2026-07-08T14:02:59.208558+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "ok",
+      "spark_response": "Daar heb ik nog niet genoeg context voor. Vertel me er meer over?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1978
+      }
+    },
+    {
+      "id": "conv-47a28a76",
+      "timestamp": "2026-07-08T14:02:59.397782+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een dashboard?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1979
+      }
+    },
+    {
+      "id": "conv-6b2811fe",
+      "timestamp": "2026-07-08T14:02:59.579508+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een test?",
+      "spark_response": "🤖 Ik kan **Zoek in kennisbank (Spark's handen — ogen)** herkennen (live), maar de uitvoering staat nog op de planning.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "capability_placeholder",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "capability_placeholder"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1980
+      }
+    },
+    {
+      "id": "conv-4820044e",
+      "timestamp": "2026-07-08T14:04:04.521310+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een dashboard?",
+      "spark_response": "**dashboard**: Een dashboard is een overzicht van beschikbare functies, informatie en modules binnen een systeem.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "dashboard"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1981
+      }
+    },
+    {
+      "id": "conv-727a4852",
+      "timestamp": "2026-07-08T14:04:04.715597+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een test?",
+      "spark_response": "**Test**: Een test is een methode om te controleren of iets goed werkt of klopt.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Test"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1982
+      }
+    },
+    {
+      "id": "conv-1dda9b6e",
+      "timestamp": "2026-07-08T14:04:04.877497+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "vertel over spark trader",
+      "spark_response": "Hoi, Willem! Ik ben **Spark** — een persoonlijke, lerende AI gemaakt door De Willem.\n\nIk ben leergierig, behulpzaam, mensgericht.\n\nMijn doel: menselijke ontwikkeling versterken via transparante, autonome en begrijpelijke ondersteuning..\n\n\nVraag gerust naar mijn _missie_, _visie_, _core_ of _wat ik kan_.\n\n**Missie:** Mensen ondersteunen in hun persoonlijke ontwikkeling door technologie te bouwen die autonomie versterkt in plaats van afhankelijkheid creëert. Spark wil laten zien dat technologie: Begrijpelijk mag zi\n\n**Ik kan onder andere:**\n• Reageren binnen de kaders van mijn Normen & Waarden\n• Uitzonderingen toetsen aan de Spark Bijbel\n• Kennis ophalen uit gelaagde KB v2 met gecontroleerde diepte\n• Emotie-context herkennen via 7-laags pipeline",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": {
+          "emotion": "blij",
+          "score": 3,
+          "intensity": 0.42,
+          "triggered_words": [
+            "trader"
+          ],
+          "source": "learned",
+          "emoji": "😊",
+          "color": "yellow",
+          "empathic_response": "Wat mooi om te horen"
+        },
+        "trigger_type": "identity_intro_full",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "identity_intro_full"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1983
+      }
+    },
+    {
+      "id": "conv-4b631563",
+      "timestamp": "2026-07-08T14:04:05.103032+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is de fee?",
+      "spark_response": "Ik ken 'fee' maar heb nog geen uitleg. Wil je het invullen in de Kennisbank?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "fee"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1984
+      }
+    },
+    {
+      "id": "conv-e037b43b",
+      "timestamp": "2026-07-08T14:04:05.325316+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "test",
+      "spark_response": "Boeiend wat je zegt — ik leer nog. Kun je dieper ingaan?",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "general"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1985
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1970,
-    "last_updated": "2026-07-08T07:25:59.847374+00:00"
+    "total_conversations": 1985,
+    "last_updated": "2026-07-08T14:04:05.325316+00:00"
   }
 }

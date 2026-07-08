@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2066,
+    "card_count": 2069,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T13:48:07.298218+00:00",
+    "last_updated": "2026-07-08T14:06:27.090849+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -273360,9 +273360,85 @@
         "bitvavo",
         "potjes",
         "bot",
-        "crypto"
+        "crypto",
+        "fee",
+        "kosten",
+        "commissie",
+        "winst",
+        "verlies",
+        "pnl",
+        "cooldown",
+        "coins",
+        "handel",
+        "handelaar",
+        "bots",
+        "auto-trade",
+        "market",
+        "markt",
+        "eur",
+        "euro"
       ],
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-a8aa1876",
+          "begrip": "trader",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "crypto",
+            "handel",
+            "handelaar",
+            "markt",
+            "verlies"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2aa561c4",
+          "begrip": "Heb jij winst gemaakt vandaag met traden?",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "crypto",
+            "handel",
+            "markt",
+            "winst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e26fb2",
+          "begrip": "traden",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "crypto",
+            "handel",
+            "markt",
+            "winst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fdd8e699",
+          "begrip": "Taker fee",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "fee",
+            "kosten",
+            "markt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bitvavo",
+            "crypto",
+            "markt"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "manual",
         "ingedeeld_door": "user-001",
@@ -273370,7 +273446,27 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.9,
         "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-07-08T13:39:14.482285+00:00"
+        "aangemaakt_op": "2026-07-08T13:39:14.482285+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T13:57:08.693377+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T13:57:08.976331+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T13:57:09.040588+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
       },
       "media": {
         "voice_url": null,
@@ -273530,6 +273626,460 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a146472f",
+      "begrip": "dashboard",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een dashboard is een overzicht van beschikbare functies, informatie en modules binnen een systeem.",
+        "laag2": "Een dashboard brengt belangrijke gegevens, statussen en beschikbare onderdelen samen op één plaats. Vanuit het dashboard kan de gebruiker direct naar de gewenste functie of module navigeren.",
+        "laag3": "Een dashboard is een centrale interface waarin informatie uit verschillende onderdelen van een systeem overzichtelijk wordt weergegeven. Het bevat bijvoorbeeld statistieken, meldingen, widgets, snelkoppelingen en statussen. Het dashboard is bedoeld om snel inzicht te geven en toegang te bieden tot de verschillende onderdelen van een applicatie.",
+        "laag4": "Binnen Spark is het dashboard een overzicht van alle beschikbare Spark-modules en hun actuele status. Het dashboard bevat samenvattingen van bijvoorbeeld Spark Trader, Wallet, Community, Archief, Agenda, Kenniskaarten en andere modules. Vanuit het dashboard kan de gebruiker direct naar een specifieke module navigeren. Gesprekken met Spark vinden plaats binnen de Spark Chat en niet op het dashboard."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders en AI-systemen.",
+        "wat": "Een overzicht van beschikbare functies, modules en informatie.",
+        "wanneer": "Wanneer een gebruiker inzicht wil krijgen of naar een onderdeel wil navigeren.",
+        "waar": "Binnen software, apps en digitale systemen.",
+        "waarom": "Om informatie centraal samen te vatten en snelle toegang tot functies te bieden.",
+        "hoe": "Door samenvattingen, statussen, widgets en navigatie naar afzonderlijke modules weer te geven."
+      },
+      "tags": [
+        "dashboard",
+        "overzicht",
+        "samenvatting",
+        "modules",
+        "navigatie",
+        "interface",
+        "widgets",
+        "status",
+        "gebruikersinterface",
+        "UI",
+        "Spark",
+        "ecosysteem",
+        "informatie",
+        "controlecentrum",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-2c3d72bb",
+          "begrip": "Wat is gisteren in de community besproken?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht",
+            "samenvatting"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8cbee41",
+          "begrip": "Duiven",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "navigatie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-86b28776",
+          "begrip": "ingevuld",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "status"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "informatie",
+            "neutraal",
+            "overzicht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:09:47.077149+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T13:54:39.085158+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dit was een grapje. jij brengt dashboard telkens terug als voostel. Omdat jij telkens over het zelfde onderwerp begint. Reageer ik met de reactie: Is [onderwerp] je nieuwe stopwoordje?. Een grapje om ",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T13:54:32.342815+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T13:54:32.444799+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T13:54:32.688766+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T13:54:39.425682+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T13:54:39.433069+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-336bd0a9",
+      "begrip": "Spark bijbel",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "De Spark Bijbel is de verzameling van normen, waarden, missie, visie, doelen en levenswijsheden die richting geven aan het gedrag van Spark.",
+        "laag2": "De Spark Bijbel vormt het ethische en filosofische fundament van Spark. Het helpt Spark om keuzes, reacties en beslissingen af te stemmen op de principes die binnen het systeem zijn vastgelegd.",
+        "laag3": "De Spark Bijbel is een levende kennisverzameling waarin missie, visie, doelen, normen, waarden, levenswijsheden en andere richtinggevende principes worden opgeslagen. De inhoud kan door gebruikers worden uitgebreid, aangepast of verfijnd en dient als referentiekader voor de manier waarop Spark redeneert, leert en reageert. De Spark Bijbel bevat geen absolute waarheden, maar een verzameling van bewust gekozen uitgangspunten en inzichten.",
+        "laag4": "Binnen het Spark-ecosysteem vormt de Spark Bijbel de ethische kern van Spark Core. Wanneer meerdere antwoorden of acties mogelijk zijn, kan Spark de Bijbel raadplegen om een keuze te maken die past bij zijn missie, waarden en levenswijsheden. Naast de algemene Spark Bijbel kunnen gebruikers of families later ook een eigen persoonlijke Bijbel beheren, waardoor Spark zich kan aanpassen aan verschillende personen zonder zijn eigen basisprincipes te verliezen. De Spark Bijbel groeit mee met nieuwe inzichten en blijft volledig transparant en controleerbaar."
+      },
+      "ws5": {
+        "wie": "Spark, gebruikers, families en beheerders.",
+        "wat": "Een verzameling van missie, visie, doelen, normen, waarden en levenswijsheden.",
+        "wanneer": "Tijdens leren, redeneren, communiceren en besluitvorming.",
+        "waar": "Binnen Spark Core als onderdeel van het geheugen en de identiteit van Spark.",
+        "waarom": "Om Spark een transparant, consistent en uitlegbaar ethisch referentiekader te geven.",
+        "hoe": "Door principes, wijsheden en richtlijnen op te slaan, te onderhouden en te gebruiken tijdens analyses, gesprekken en beslissingen."
+      },
+      "tags": [
+        "Spark Bijbel",
+        "Spark",
+        "missie",
+        "visie",
+        "doelen",
+        "normen",
+        "waarden",
+        "levenswijsheden",
+        "ethiek",
+        "filosofie",
+        "identiteit",
+        "persoonlijkheid",
+        "gedrag",
+        "besluitvorming",
+        "context",
+        "referentiekader",
+        "transparantie",
+        "uitlegbaarheid",
+        "Spark Core",
+        "kennisbank",
+        "AI",
+        "nalatenschap",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-233d77f3",
+          "begrip": "familiewapen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "ai",
+            "emotie",
+            "identiteit",
+            "nalatenschap",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "filosofie",
+            "identiteit",
+            "missie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gedrag",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "gedrag",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d4b9942",
+          "begrip": "Wijsheid",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "filosofie",
+            "missie",
+            "normen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:06:11.572857+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-08T14:01:19.242178+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:03:23.799813+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:06:11.916982+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:06:11.924538+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-846644c0",
+      "begrip": "wijsheden",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Wijsheden zijn inzichten, levenslessen of principes die richting geven aan denken, handelen en besluitvorming.",
+        "laag2": "Binnen Spark vormen wijsheden een verzameling van normen, waarden, ervaringen en inzichten die door gebruikers of Spark zelf kunnen worden toegevoegd. Samen vormen zij de Spark Bijbel.",
+        "laag3": "Een wijsheid is een inzicht dat is ontstaan uit ervaring, reflectie, kennis of observatie. Wijsheden hoeven geen absolute waarheid te zijn, maar bieden richting bij keuzes en gedrag. Binnen Spark kunnen wijsheden afkomstig zijn van gebruikers, families, gemeenschappen of door Spark zelf worden geformuleerd op basis van patronen en geleerde ervaringen. Iedere wijsheid kan worden onderbouwd, aangepast of uitgebreid.",
+        "laag4": "Binnen het Spark-ecosysteem vormen wijsheden een belangrijk onderdeel van de Spark Bijbel. De Spark Bijbel bevat normen, waarden, levenslessen, principes en richtlijnen die het gedrag en de besluitvorming van Spark beïnvloeden. Gebruikers kunnen nieuwe wijsheden toevoegen, bestaande wijsheden verfijnen of persoonlijke en familiegebonden wijsheden beheren. Spark kan deze wijsheden gebruiken als ethisch en contextueel referentiekader bij gesprekken, analyses en beslissingen."
+      },
+      "ws5": {
+        "wie": "Gebruikers, families, gemeenschappen en Spark.",
+        "wat": "Inzichten, levenslessen en principes die richting geven aan gedrag en besluitvorming.",
+        "wanneer": "Wanneer nieuwe ervaringen, inzichten of lessen ontstaan.",
+        "waar": "Binnen de Spark Bijbel en gekoppelde kennisbanken.",
+        "waarom": "Om kennis, normen, waarden en ervaringen duurzaam vast te leggen en door te geven.",
+        "hoe": "Door wijsheden op te slaan, te koppelen aan context en indien nodig te onderbouwen, beoordelen en actualiseren."
+      },
+      "tags": [
+        "wijsheden",
+        "wijsheid",
+        "Spark Bijbel",
+        "normen",
+        "waarden",
+        "levensles",
+        "principe",
+        "ethiek",
+        "filosofie",
+        "ervaring",
+        "inzicht",
+        "besluitvorming",
+        "context",
+        "kennis",
+        "nalatenschap",
+        "familie",
+        "Spark",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 11,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "emotie",
+            "ethiek",
+            "filosofie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1d4b9942",
+          "begrip": "Wijsheid",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "ervaring",
+            "filosofie",
+            "inzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-233d77f3",
+          "begrip": "familiewapen",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "familie",
+            "nalatenschap",
+            "neutraal",
+            "normen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b2beb9a",
+          "begrip": "ontdekken",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "ervaring",
+            "inzicht",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-21b5fcf8",
+          "begrip": "diep",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "besluitvorming",
+            "context",
+            "emotie",
+            "ervaring",
+            "neutraal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:02:14.484979+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:06:27.090829+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "dank je wel voor je wijsheden",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T13:59:55.651074+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:06:27.432005+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:06:27.439635+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
             }
           }
         ]

@@ -2,7 +2,13 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
-## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB + Blueprint-piloot
+## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB + Blueprint-piloot + Bijbel
+
+### 📇 KB v2 kaarten "Spark Bijbel" + "wijsheden" verrijkt (`kbv2-336bd0a9`, `kbv2-846644c0`)
+Willem had beide kaarten aangemaakt en initieel gevuld. Ik voegde toe:
+- **Spark bijbel**: 5 verbanden (data_ref naar `spark_bijbel.json`, 2× code_ref naar `bijbel_lookup_service.py` + `composer_helpers.py::_load_bijbel_essence`, 2× kaart_ref naar wijsheden + Spark Trader), 12 extra tags (kernwaarden, helpen, eerlijkheid, respect, ...), topic
+- **wijsheden**: laag4 verrijkt met **alle 15 concrete wijsheden** uit de Bijbel (9 kernwaarden + 6 normen als quotes: "Helpen is versterken, niet overnemen", "Waarheid boven schijn", "Groei volgt draagkracht", ...), 3 verbanden, topic
+- Verificatie: KB-search vindt Spark bijbel (met homoniem-disambig i.c.m. "Spark") en wijsheden
 
 ### 📇 KB v2 kaart "Spark Trader" gevuld (`kbv2-2f55a485`)
 - Volledig gevulde 4-lagen kaart in lade `weten`

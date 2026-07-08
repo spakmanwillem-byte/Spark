@@ -20,3 +20,7 @@
 {"ts": "2026-07-08T14:06:12.121365+00:00", "module": "kb_v2", "fn": "classify", "phase": "post", "intent": "KB v2 kaart classificeren (inbox → lade)", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 548.8}
 {"ts": "2026-07-08T14:06:27.090339+00:00", "module": "kb_v2", "fn": "classify", "phase": "pre", "intent": "KB v2 kaart classificeren (inbox → lade)", "args": {"body": "ClassifyBody(card_id='kbv2-846644c0', lade='weten', updates=None, user_id='user…"}}
 {"ts": "2026-07-08T14:06:27.636795+00:00", "module": "kb_v2", "fn": "classify", "phase": "post", "intent": "KB v2 kaart classificeren (inbox → lade)", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 546.25}
+{"ts": "2026-07-08T14:09:37.883998+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-336bd0a9', lade='weten', updates={'verbanden': [{'type':…"}}
+{"ts": "2026-07-08T14:09:38.372106+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 487.88}
+{"ts": "2026-07-08T14:09:38.499684+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-846644c0', lade='weten', updates={'lagen': {'laag1': 'Wi…"}}
+{"ts": "2026-07-08T14:09:38.979788+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 479.88}

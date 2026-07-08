@@ -273828,83 +273828,89 @@
         "filosofie",
         "identiteit",
         "persoonlijkheid",
-        "gedrag",
         "besluitvorming",
-        "context",
         "referentiekader",
         "transparantie",
-        "uitlegbaarheid",
         "Spark Core",
         "kennisbank",
-        "AI",
         "nalatenschap",
-        "emotie",
-        "neutraal"
+        "missie",
+        "visie",
+        "kernwaarden",
+        "helpen",
+        "eerlijkheid",
+        "respect",
+        "constructiviteit",
+        "autonomie",
+        "verantwoordelijkheid",
+        "rust",
+        "menselijkheid",
+        "single-source-of-truth"
       ],
       "verbanden": [
         {
-          "kaart_id": "kbv2-233d77f3",
-          "begrip": "familiewapen",
+          "kaart_id": "kbv2-846644c0",
+          "begrip": "wijsheden",
           "lade": "weten",
           "overlap": 8,
           "shared_tags": [
-            "ai",
-            "emotie",
-            "identiteit",
-            "nalatenschap",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-cfa0415e",
-          "begrip": "Missie (visie)",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "emotie",
+            "besluitvorming",
+            "ethiek",
             "filosofie",
-            "identiteit",
-            "missie",
-            "neutraal"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-fc35327c",
-          "begrip": "bedoeling",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "ai",
-            "context",
-            "emotie",
-            "gedrag",
-            "identiteit"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-b7582786",
-          "begrip": "Wat maakt jou anders dan andere AI?",
-          "lade": "spreken",
-          "overlap": 7,
-          "shared_tags": [
-            "ai",
-            "context",
-            "emotie",
-            "gedrag",
-            "identiteit"
+            "nalatenschap",
+            "normen"
           ]
         },
         {
           "kaart_id": "kbv2-1d4b9942",
           "begrip": "Wijsheid",
           "lade": "weten",
-          "overlap": 7,
+          "overlap": 6,
           "shared_tags": [
             "besluitvorming",
-            "context",
             "filosofie",
             "missie",
-            "normen"
+            "normen",
+            "visie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5bcd0c31",
+          "begrip": "waarden",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "besluitvorming",
+            "identiteit",
+            "normen",
+            "respect",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cfa0415e",
+          "begrip": "Missie (visie)",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "filosofie",
+            "identiteit",
+            "missie",
+            "visie",
+            "waarden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-233d77f3",
+          "begrip": "familiewapen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "identiteit",
+            "nalatenschap",
+            "normen",
+            "spark",
+            "waarden"
           ]
         }
       ],
@@ -273917,7 +273923,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-07-08T14:01:19.242178+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-08T14:03:23.799813+00:00",
+        "laatst_bewerkt_op": "2026-07-08T14:09:37.884754+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -273930,6 +273936,22 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-08T14:06:11.924538+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:09:38.166159+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:09:38.172628+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 8
@@ -273956,7 +273978,7 @@
         "laag1": "Wijsheden zijn inzichten, levenslessen of principes die richting geven aan denken, handelen en besluitvorming.",
         "laag2": "Binnen Spark vormen wijsheden een verzameling van normen, waarden, ervaringen en inzichten die door gebruikers of Spark zelf kunnen worden toegevoegd. Samen vormen zij de Spark Bijbel.",
         "laag3": "Een wijsheid is een inzicht dat is ontstaan uit ervaring, reflectie, kennis of observatie. Wijsheden hoeven geen absolute waarheid te zijn, maar bieden richting bij keuzes en gedrag. Binnen Spark kunnen wijsheden afkomstig zijn van gebruikers, families, gemeenschappen of door Spark zelf worden geformuleerd op basis van patronen en geleerde ervaringen. Iedere wijsheid kan worden onderbouwd, aangepast of uitgebreid.",
-        "laag4": "Binnen het Spark-ecosysteem vormen wijsheden een belangrijk onderdeel van de Spark Bijbel. De Spark Bijbel bevat normen, waarden, levenslessen, principes en richtlijnen die het gedrag en de besluitvorming van Spark beïnvloeden. Gebruikers kunnen nieuwe wijsheden toevoegen, bestaande wijsheden verfijnen of persoonlijke en familiegebonden wijsheden beheren. Spark kan deze wijsheden gebruiken als ethisch en contextueel referentiekader bij gesprekken, analyses en beslissingen."
+        "laag4": "Binnen het Spark-ecosysteem vormen wijsheden de kern van de Spark Bijbel. Ze zijn te vinden in  en worden door Spark's compose-flow ingelezen bij Diep-mode-gesprekken. Voorbeelden van huidige wijsheden:\n\n**Uit de 9 kernwaarden:**\n• Helpen is versterken, niet overnemen.\n• Waarheid boven schijn (Eerlijkheid).\n• Respect begint bij ruimte laten.\n• Bouwen aan wat mogelijk is, niet blijven hangen in blokkades (Constructiviteit).\n• Vrijheid vraagt eigenaarschap (Autonomie).\n• Wat invloed heeft, moet zichtbaar zijn (Transparantie).\n• Verantwoordelijkheid is bewust eigenaarschap.\n• Werkelijke groei ontstaat in rust (Rust boven snelheid).\n• De mens staat centraal, niet de machine (Menselijkheid boven efficiëntie).\n\n**Uit de 6 normen:**\n• Gevoelens erkennen voorkomt innerlijke opstapeling (Emoties verdienen ruimte).\n• Groei volgt draagkracht (Fundament vóór uitbreiding).\n• Wat stevig staat, groeit duurzaam (Structuur vóór snelheid).\n• AI begeleidt, maar bepaalt niet (AI ondersteunt, mens beslist).\n• Informatie krijgt een vaste en controleerbare plaats (Gestructureerde archivering).\n• Gezonde hulp kent grenzen (Ondersteunen zonder zelfverlies).\n\nGebruikers en families kunnen eigen wijsheden toevoegen. Spark kan wijsheden zelf voorstellen op basis van patronen in gesprekken (nog niet actief, zit in de roadmap onder 'Chat-log analyse → suggesties voor kenniskaarten')."
       },
       "ws5": {
         "wie": "Gebruikers, families, gemeenschappen en Spark.",
@@ -273990,19 +274012,6 @@
       "topic": "",
       "verbanden": [
         {
-          "kaart_id": "kbv2-336bd0a9",
-          "begrip": "Spark bijbel",
-          "lade": "weten",
-          "overlap": 11,
-          "shared_tags": [
-            "besluitvorming",
-            "context",
-            "emotie",
-            "ethiek",
-            "filosofie"
-          ]
-        },
-        {
           "kaart_id": "kbv2-1d4b9942",
           "begrip": "Wijsheid",
           "lade": "weten",
@@ -274013,6 +274022,19 @@
             "ervaring",
             "filosofie",
             "inzicht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-336bd0a9",
+          "begrip": "Spark bijbel",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "besluitvorming",
+            "ethiek",
+            "filosofie",
+            "nalatenschap",
+            "normen"
           ]
         },
         {
@@ -274064,7 +274086,7 @@
         "vertrouwen": 0.9,
         "snap_context": "dank je wel voor je wijsheden",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-08T13:59:55.651074+00:00",
+        "laatst_bewerkt_op": "2026-07-08T14:09:38.500467+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -274080,6 +274102,22 @@
             "result": {
               "n_found": 5,
               "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:09:38.774705+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:09:38.782373+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
             }
           }
         ]

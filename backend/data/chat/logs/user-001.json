@@ -51303,11 +51303,92 @@
         "session_id": "default",
         "gesprek_nummer": 1985
       }
+    },
+    {
+      "id": "conv-da450c63",
+      "timestamp": "2026-07-08T14:09:53.250500+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is de spark bijbel?",
+      "spark_response": "Ik ken meerdere 'Spark' — welke bedoel je?\n  1. **Spark** (ai, assistent, context, communicatie, semantiek) — Spark is een persoonlijke en contextbewuste AI-assistent in ontwikkeling die com…\n  2. **Spark** (dnd, leider, fractie, neutraal) — Spark is Oracel van Spartanen. Hij/zij regeert vanuit Oerrak.\n\n_(Geef wat context: bv. 'de bank waar ik op zit' of 'mijn bank-rekening'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "homonym_disambig",
+        "knowledge_matches": [
+          {
+            "begrip": "Spark"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 5,
+        "response_type": "homonym_disambig"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1986
+      }
+    },
+    {
+      "id": "conv-fbad7d9d",
+      "timestamp": "2026-07-08T14:09:53.562802+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "geef eens een wijsheid",
+      "spark_response": "**Wijsheid**: Wijsheid is het vermogen om kennis, ervaring, inzicht en waarden te gebruiken om verstandige keuzes te maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Wijsheid"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1987
+      }
+    },
+    {
+      "id": "conv-7bb291a1",
+      "timestamp": "2026-07-08T14:09:53.755880+00:00",
+      "user_id": "user-001",
+      "user_naam": "Willem",
+      "user_message": "wat is een wijsheid?",
+      "spark_response": "**Wijsheid**: Wijsheid is het vermogen om kennis, ervaring, inzicht en waarden te gebruiken om verstandige keuzes te maken.\n\n_(Wil je een diepere uitleg? Typ 'vertel meer' of 'leg dieper uit'.)_",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [
+          {
+            "begrip": "Wijsheid"
+          }
+        ],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 4,
+        "response_type": "knowledge"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1988
+      }
     }
   ],
   "metadata": {
     "user_id": "user-001",
-    "total_conversations": 1985,
-    "last_updated": "2026-07-08T14:04:05.325316+00:00"
+    "total_conversations": 1988,
+    "last_updated": "2026-07-08T14:09:53.755880+00:00"
   }
 }

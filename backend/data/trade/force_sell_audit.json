@@ -2329,6 +2329,87 @@
         "error_code": "BITVAVO_HTTP_ERROR"
       },
       "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
+    },
+    {
+      "id": "fs-0034",
+      "ts": "2026-07-07T19:11:35.454419+00:00",
+      "type": "force_sell",
+      "user_id": "user-a0ee2d7e",
+      "pot_id": "pot-001",
+      "market": "SOL-EUR",
+      "exit_price": 70.905,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 6.7034,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 1,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1466
+          },
+          "created_at": "2026-07-01T09:17:38.916929+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-07-07T17:26:51.578025+00:00",
+              "action": "BUY",
+              "cluster_id": "36cbf7f5e95e",
+              "trade_id": "00000000-0000-0560-0100-000911ac8c48",
+              "entry_price": 72.07800465288321,
+              "amount_eur": 6.85
+            }
+          ],
+          "last_action": "SELL @ €70.90 | netto €-0.147",
+          "live_value": 10.4,
+          "unrealized_pnl": 0.0,
+          "unrealized_pnl_pct": 0.0,
+          "current_price": null
+        },
+        "netto": -0.1466,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-0560-0100-000912283676",
+            "run_id": "manual",
+            "timestamp": "2026-07-07T19:11:35.397507+00:00",
+            "action": "SELL",
+            "market": "SOL-EUR",
+            "order_id": "00000000-0000-0560-0100-000912283676",
+            "amount": 0.09651152,
+            "price": 70.896,
+            "filled": 0.09651152,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.02228072192,
+            "fee_currency": "EUR",
+            "requested_amount": 6.85,
+            "effective_amount": 0.09651152,
+            "proxied_via_spark": true
+          },
+          "message": "LIVE SELL uitgevoerd @ €70.90 (fee €0.0223)"
+        }
+      }
     }
   ]
 }

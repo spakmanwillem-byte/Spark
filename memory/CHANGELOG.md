@@ -2,6 +2,27 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-08 (sessie 46) — Prod-merge + Trader EUR-cooldown fix
+
+### 📥 Prod → Preview merge
+- Zip `spark_backup_changes_20260708_125909.zip` (64 files, 1.7MB) gemerged via `/api/backup/restore`
+- Backup: `/app/backend/data/_backups/pre_prod_merge_20260708_130739/` (52MB)
+- 10 nieuw + 54 overschreven + 0 skipped/errors
+- KB v2, chat-logs (Willem 1970 msgs + Roadkill 36), trader traces 07/08-jul, identity_facts, planner briefs
+
+### 🐛 Trader EUR-cooldown fix (`v7_eur_cooldown_001`)
+**Bug**: Op 08-jul tussen 05:51 en 06:27 (35 min): **57 mislukte BUY-pogingen** met `INSUFFICIENT_EUR_BALANCE` (BCH 18×, BTC 15×, ETH 15×, SOL 9×). Failrate 92%. Bitvavo API rate-limit risico.
+
+**Root cause**: bij INSUFFICIENT_EUR_BALANCE werd géén cooldown geactiveerd — bot probeerde elke 3-min cycle opnieuw op alle markets.
+
+**Fix in `modules/trade/monitor.py`**:
+- Nieuwe class-attribute `_last_insufficient_eur_ts: Optional[datetime]`
+- Constant `EUR_COOLDOWN_SEC = 1800` (30 min, globaal per user, geldt voor ALLE markets — EUR is EUR)
+- Check in `_run_cycle` vóór BUY-execute: skip als recent insufficient
+- Bij `error_code == INSUFFICIENT_EUR_BALANCE` uit `execute_real_trade`: sla ts op + log waarschuwing
+
+**Effect**: bij lege EUR-portemonnee wacht bot 30 min voor next BUY-attempt (naast bestaande 15-min per-market cooldown). API-spam voorkomen.
+
 ## 2026-07-06 (sessie 39) — Trader cleanup + Learning + UI split + KB save perf
 
 ### 🐛 Bug fixes

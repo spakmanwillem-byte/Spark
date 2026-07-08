@@ -1,26 +1,26 @@
 {
   "users": {
     "user-001": {
-      "computed_at": "2026-07-08T13:01:11.445316+00:00",
+      "computed_at": "2026-07-08T13:09:17.919570+00:00",
       "per_market": {
-        "BTC-EUR": {
+        "ATOM-EUR": {
           "trades": 1,
-          "wins": 0,
-          "win_rate": 0.0,
-          "avg_pnl_eur": -5.0603,
+          "wins": 1,
+          "win_rate": 1.0,
+          "avg_pnl_eur": 1.1814,
           "bias": "insufficient_data"
         },
         "BCH-EUR": {
-          "trades": 4,
+          "trades": 5,
           "wins": 2,
-          "win_rate": 0.5,
-          "avg_pnl_eur": 0.6989,
+          "win_rate": 0.4,
+          "avg_pnl_eur": 0.4187,
           "bias": "neutral"
         }
       }
     },
     "user-000": {
-      "computed_at": "2026-07-08T13:01:11.440876+00:00",
+      "computed_at": "2026-07-08T13:09:17.916455+00:00",
       "per_market": {
         "BCH-EUR": {
           "trades": 1,
@@ -32,13 +32,32 @@
       }
     },
     "user-a0ee2d7e": {
-      "computed_at": "2026-07-08T13:01:11.448959+00:00",
+      "computed_at": "2026-07-08T13:09:17.923550+00:00",
       "per_market": {
         "ATOM-EUR": {
           "trades": 1,
           "wins": 0,
           "win_rate": 0.0,
           "avg_pnl_eur": -0.0924,
+          "bias": "insufficient_data"
+        },
+        "SOL-EUR": {
+          "trades": 1,
+          "wins": 0,
+          "win_rate": 0.0,
+          "avg_pnl_eur": -0.1543,
+          "bias": "insufficient_data"
+        }
+      }
+    },
+    "user-1996fa59": {
+      "computed_at": "2026-07-08T13:09:17.927099+00:00",
+      "per_market": {
+        "ETH-EUR": {
+          "trades": 1,
+          "wins": 0,
+          "win_rate": 0.0,
+          "avg_pnl_eur": -0.0638,
           "bias": "insufficient_data"
         }
       }

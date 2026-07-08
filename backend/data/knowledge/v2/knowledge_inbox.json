@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 1580,
+  "card_count": 1599,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -13,7 +13,7 @@
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
     "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-06-30T10:55:11.691537+00:00"
+    "last_updated": "2026-07-08T07:11:49.406569+00:00"
   },
   "kaarten": [
     {
@@ -14736,61 +14736,6 @@
           {
             "hook": "register_in_vocab",
             "fired_at": "2026-05-25T15:24:58.590554+00:00",
-            "result": {
-              "active": false,
-              "is_new": true
-            }
-          }
-        ]
-      },
-      "_inbox_reason": "missing_laag1",
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ]
-    },
-    {
-      "id": "kbv2-skel-02f23e74",
-      "begrip": "api",
-      "lade": null,
-      "status": "active",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
-      },
-      "tags": [
-        "api"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "system_repair",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vorige_versie_v1": "kb-skel-02f23e74",
-        "vertrouwen": 0.5,
-        "belangrijkheid": 1,
-        "hooks_fired": [
-          {
-            "hook": "register_in_vocab",
-            "fired_at": "2026-05-25T15:24:58.616232+00:00",
             "result": {
               "active": false,
               "is_new": true
@@ -86644,48 +86589,6 @@
       ]
     },
     {
-      "id": "kbv2-431ad8e6",
-      "begrip": "zonne-energie",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "De Willem",
-        "aangemaakt_op": "2026-06-28T00:24:21.618385+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "wat denk je van zonne-energie panelen"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-skel-461674fb",
       "begrip": "autorijden",
       "lade": null,
@@ -86741,90 +86644,6 @@
       ]
     },
     {
-      "id": "kbv2-8e49859e",
-      "begrip": "nucleontemperatuur",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "willem",
-        "aangemaakt_op": "2026-06-28T00:07:14.866147+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "wat denk je van mijn nucleontemperatuur idee voor energie?"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
-      "id": "kbv2-976d84a3",
-      "begrip": "[systeem-context",
-      "lade": null,
-      "status": "draft",
-      "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
-      },
-      "ws5": {},
-      "tags": [
-        "knowledge-snap",
-        "auto-generated",
-        "from-diep",
-        "gap-fill"
-      ],
-      "topic": "",
-      "verbanden": [],
-      "footnote": {
-        "bron": "snap-auto",
-        "aangemaakt_door": "Gert van zeven",
-        "aangemaakt_op": "2026-06-30T10:55:11.168810+00:00",
-        "ingedeeld_door": null,
-        "ingedeeld_op": null,
-        "vertrouwen": 0.3,
-        "snap_context": "[SYSTEEM-CONTEXT: dit is het allereerste bericht van een nieuwe sessie. De gebruiker heeft net de chat geopend en jij spreekt als eerste. Begin met een warme, korte begroeting (1-3 zinnen) — geen vraa"
-      },
-      "media": {
-        "voice_url": null,
-        "voice_transcript": null,
-        "image_urls": []
-      },
-      "needs": [
-        "laag1",
-        "ws5",
-        "voice",
-        "image"
-      ],
-      "_inbox_reason": "missing_laag1"
-    },
-    {
       "id": "kbv2-e03e9294",
       "begrip": "allereerste",
       "lade": null,
@@ -86867,8 +86686,8 @@
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-be016a2c",
-      "begrip": "perftest_28597",
+      "id": "kbv2-39d20e83",
+      "begrip": "bitvavo",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -86878,22 +86697,39 @@
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
       "verbanden": [],
       "footnote": {
-        "bron": "user",
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-07T17:07:30.399722+00:00",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
-        "vorige_versie_v1": null,
         "vertrouwen": 0.3,
-        "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-07-06T08:28:05.297486+00:00"
+        "snap_context": "Ik heb een bitvavo account. Deze heb ik gekoppeld aan een trader. Deze leest de API van bitvavo uit op bitcoins. Koopt laag verkoopt hoog is de bedoeling. Hij doet dit volgens gegevens die ik heb late"
       },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-5d602deb",
-      "begrip": "perftest_26934",
+      "id": "kbv2-34c49def",
+      "begrip": "account",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -86903,22 +86739,39 @@
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
       "verbanden": [],
       "footnote": {
-        "bron": "user",
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-07T17:07:32.396752+00:00",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
-        "vorige_versie_v1": null,
         "vertrouwen": 0.3,
-        "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-07-06T08:28:05.539955+00:00"
+        "snap_context": "Ik heb een bitvavo account. Deze heb ik gekoppeld aan een trader. Deze leest de API van bitvavo uit op bitcoins. Koopt laag verkoopt hoog is de bedoeling. Hij doet dit volgens gegevens die ik heb late"
       },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-566bf6c5",
-      "begrip": "perftest_1600",
+      "id": "kbv2-7e12a528",
+      "begrip": "kopstuk",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -86928,22 +86781,39 @@
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
       "verbanden": [],
       "footnote": {
-        "bron": "user",
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:41:45.988257+00:00",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
-        "vorige_versie_v1": null,
         "vertrouwen": 0.3,
-        "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-07-06T08:28:05.763329+00:00"
+        "snap_context": "ik wil even duidelijk zijn. kopstuk Workspace. met daaronder: Gesprekken,  Agenda, Dagboek, Notities & Taken, Roadmap. Hier waar ik nu met je praat is in gesprekken. Dus wat jij zegt klopt niet."
       },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
       "_inbox_reason": "missing_laag1"
     },
     {
-      "id": "kbv2-a31522ea",
-      "begrip": "__perftest_final__",
+      "id": "kbv2-f62bf8c8",
+      "begrip": "workspace",
       "lade": null,
       "status": "draft",
       "lagen": {
@@ -86953,17 +86823,832 @@
         "laag4": ""
       },
       "ws5": {},
-      "tags": [],
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
       "verbanden": [],
       "footnote": {
-        "bron": "user",
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:41:48.502458+00:00",
         "ingedeeld_door": null,
         "ingedeeld_op": null,
-        "vorige_versie_v1": null,
         "vertrouwen": 0.3,
-        "aangemaakt_door": "user-001",
-        "aangemaakt_op": "2026-07-06T08:29:52.270781+00:00"
+        "snap_context": "ik wil even duidelijk zijn. kopstuk Workspace. met daaronder: Gesprekken,  Agenda, Dagboek, Notities & Taken, Roadmap. Hier waar ik nu met je praat is in gesprekken. Dus wat jij zegt klopt niet."
       },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-89dd4fa3",
+      "begrip": "willem",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:43:08.682274+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Ik ben Willem Spakman Masterkey: samen zijn. Dit is mijn test account. Maak hier anders een bug report van."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-59f119ba",
+      "begrip": "masterkey",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:43:10.194966+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Ik ben Willem Spakman Masterkey: samen zijn. Dit is mijn test account. Maak hier anders een bug report van."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-2953c8d0",
+      "begrip": "genoeg",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:44:24.981089+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Je hebt genoeg gedaan. dank voor je reactie. Ik ga de logs van dit gesprek gebruiken."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-969ab090",
+      "begrip": "welkomsbericht",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:51:16.498918+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Ahh ik zie wat er fout is. Je welkomsbericht is fout ingesteld. Je zou moeten zeggen Nu we in gesprek zijn ipv   nu je naar het dashboard kijkt. En daarna zou je kunnen zeggen je zou op je dashboard k"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-8ae9a89b",
+      "begrip": "ingesteld",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:51:18.001091+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Ahh ik zie wat er fout is. Je welkomsbericht is fout ingesteld. Je zou moeten zeggen Nu we in gesprek zijn ipv   nu je naar het dashboard kijkt. En daarna zou je kunnen zeggen je zou op je dashboard k"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-e27c6f88",
+      "begrip": "verleng",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:58:02.745844+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Waarom zeg ik dit. omdat: het eigenlijk een verleng zin is. Nu we in gesprek zijn. Dit is na een afronding van een gesprek. en opent hiermee, of maakt ruimte voor een vervolg van een gesprek of een ni"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-68966d70",
+      "begrip": "benieuw",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:59:58.862242+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Nou, ik ben benieuw als deze kennis uit je core komt (Spark Core) of uit de llm."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-67ed1384",
+      "begrip": "unitykey",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:01:17.661998+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "weet jij al zo veel, ook geen emergent unitykey"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-846644c0",
+      "begrip": "wijsheden",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:02:14.484979+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "dank je wel voor je wijsheden"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-92ab0496",
+      "begrip": "goei",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:04:52.078088+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-5cd96c0e",
+      "begrip": "station",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:04:53.594455+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-e288cd78",
+      "begrip": "kader",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:04:55.180428+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-85255166",
+      "begrip": "brengt",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:09:45.502201+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "dit was een grapje. jij brengt dashboard telkens terug als voostel. Omdat jij telkens over het zelfde onderwerp begint. Reageer ik met de reactie: Is [onderwerp] je nieuwe stopwoordje?. Een grapje om "
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-a146472f",
+      "begrip": "dashboard",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:09:47.077149+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "dit was een grapje. jij brengt dashboard telkens terug als voostel. Omdat jij telkens over het zelfde onderwerp begint. Reageer ik met de reactie: Is [onderwerp] je nieuwe stopwoordje?. Een grapje om "
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-392335fb",
+      "begrip": "hahah",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:16:19.403505+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "ik vind je wel lief hoor hahah. geen irritatie zo als ik al eerder zei. ik dat dat je het woord dashboard zou weg laten in een tegen bericht. maar dat deed je niet. wel vind ik je voorstel het te uite"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-6c772407",
+      "begrip": "bedacht",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:18:52.282051+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "nee dat hoeft niet. ik heb wel wat anders bedacht."
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-5ae0795b",
+      "begrip": "[systeem-context",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:22:06.687277+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "[SYSTEEM-CONTEXT: dit is het allereerste bericht van een nieuwe sessie. De gebruiker heeft net de chat geopend en jij spreekt als eerste. Begin met een warme, korte begroeting (1-3 zinnen) — geen vraa"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-cf46f679",
+      "begrip": "benoem",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-08T07:11:47.103820+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "waarom benoem jij dit of op wat baseer jij dit?"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-bdd8a092",
+      "begrip": "baseer",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-08T07:11:49.406450+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "waarom benoem jij dit of op wat baseer jij dit?"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
       "_inbox_reason": "missing_laag1"
     }
   ],

@@ -1,0 +1,186 @@
+{
+  "user_id": "user-c609d7d1",
+  "conversations": [
+    {
+      "id": "conv-ae0bc505",
+      "timestamp": "2026-05-18T16:55:45.474686+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Marieke. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 1
+      }
+    },
+    {
+      "id": "conv-1af6d29a",
+      "timestamp": "2026-05-18T16:58:05.691751+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "Wat is een complot?",
+      "spark_response": "Ik ken deze woorden nog niet: **complot**. Ik heb ze als nieuwe kaarten opgeslagen zodat ik ze kan leren!\n\nWil je 6 vragen beantwoorden om 'complot' rijker te maken? (wie/wat/wanneer/waar/waarom/hoe)",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": null,
+        "knowledge_matches": [],
+        "unknown_words": [
+          "complot"
+        ],
+        "snap_suggestions": [
+          "complot"
+        ],
+        "word_count": 4,
+        "response_type": "unknown"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 2
+      }
+    },
+    {
+      "id": "conv-9a03e509",
+      "timestamp": "2026-05-18T17:14:43.660228+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Marieke. Ik luister.",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 3
+      }
+    },
+    {
+      "id": "conv-44910bd6",
+      "timestamp": "2026-05-18T17:15:58.829257+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Goedenavond Marieke. Wat wil je in beweging zetten?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "avond"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 4
+      }
+    },
+    {
+      "id": "conv-f08dac9a",
+      "timestamp": "2026-05-20T10:46:30.960745+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Gebruiker",
+      "user_message": "help",
+      "spark_response": "Hier is wat ik kan:\n  • **Vraag iets over een onderwerp** — _bv. 'wat is fotosynthese?'_\n  • **Leer me een nieuw woord** — _bv. 'voetenbank'_\n  • **Plan een afspraak** — _bv. 'maak afspraak vrijdag 14:00 lunch met Tineke'_\n  • **Wat staat er in mijn agenda?** — _bv. 'wat staat vandaag op de planning'_\n  • **Maak een notitie** — _bv. 'notitie: bel monteur over verwarming'_\n  • **Wat zullen we doen?** — _bv. 'wat zullen we doen?' — ik kijk in agenda + roadmap_\n  • **Recap van eerder gesprek** — _bv. 'wat hebben we gisteren middag besproken?'_\n  • **Mijn tijd / dagdeel** — _bv. 'hoe laat is het?' of 'welk tijdstip is het?'_\n  • **Wie ben ik / wat is Spark** — _bv. 'wie ben jij?', 'jouw missie', 'wat kan je?'_\n  • **Speech-to-Text (jij spreekt)** — _bv. '(stt aan)' / '(stt uit)' of 'spraak naar text aan/uit'_\n  • **Text-to-Speech (Spark spreekt)** — _bv. '(tts aan)' / '(tts uit)' of 'text naar spraak aan/uit'_\n  • **Achtergrondgeluid** — _bv. 'ambient 1 aan', 'ambient 2 aan', 'ambient 3 aan', 'stilte'_\n  • **Relaties noteren** — _bv. 'mijn moeder Anneke is jarig', 'Ron is mijn vriend'_\n  • **Account verwijderen** — _bv. 'verwijder mijn account' — 2× bevestiging, backup 30 dagen_\n  • **Wat is de privacy?** — _bv. 'wat is de privacy beschrijving?' / 'cookies' / 'voorwaarden'_\n  • **Credits** — _bv. 'credits' — wie heeft Spark mogelijk gemaakt_\n\n_Daarnaast reageer ik op 7 trigger-types: __startup, greeting, thanks, how_are_you, goodbye, compliments, metadata._\n\nVraag gerust dieper door bij wat dan ook — ik leer van elk gesprek.",
+      "channel": "spark",
+      "analysis": {
+        "sentiment": "neutraal",
+        "emotion": null,
+        "trigger_type": "help_overview",
+        "knowledge_matches": [],
+        "unknown_words": [],
+        "snap_suggestions": [],
+        "word_count": 1,
+        "response_type": "help_overview"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 5
+      }
+    },
+    {
+      "id": "conv-e6c157b4",
+      "timestamp": "2026-05-23T12:53:56.419502+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Marieke. Wat wil je in beweging zetten? _(het is 3 dagen geleden dat we praatten)_",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 6
+      }
+    },
+    {
+      "id": "conv-75582793",
+      "timestamp": "2026-05-23T12:53:56.425843+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Hoi Marieke, fijn dat je er bent. Waar zullen we mee beginnen?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 7
+      }
+    },
+    {
+      "id": "conv-261adda4",
+      "timestamp": "2026-05-23T12:55:12.807049+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Goedemiddag Marieke. Waar staat je hoofd vandaag?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 8
+      }
+    },
+    {
+      "id": "conv-3fc4e8b9",
+      "timestamp": "2026-05-23T12:55:12.811841+00:00",
+      "user_id": "user-c609d7d1",
+      "user_naam": "Marieke",
+      "user_message": "[system:login]",
+      "spark_response": "Hallo Marieke. Klaar om iets te leren of door te denken?",
+      "channel": "spark",
+      "analysis": {
+        "trigger_type": "welcome",
+        "response_type": "welcome",
+        "dagdeel": "middag"
+      },
+      "metadata": {
+        "session_id": "default",
+        "gesprek_nummer": 9
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "user-c609d7d1",
+    "total_conversations": 9,
+    "last_updated": "2026-05-23T12:55:12.811841+00:00"
+  }
+}

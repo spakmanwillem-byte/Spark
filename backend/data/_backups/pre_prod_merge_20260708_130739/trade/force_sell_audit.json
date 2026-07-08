@@ -1,0 +1,2334 @@
+{
+  "entries": [
+    {
+      "id": "fs-0001",
+      "ts": "2026-05-29T15:22:15.191655+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-007",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 9.8104,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "assigned_market": null,
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1896
+          },
+          "created_at": "2026-05-28T17:43:02.272429+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.190",
+          "source": "spark_trade_slot_001",
+          "slot_type": "trade_slot",
+          "origin_eur": 0.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:08.068952+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "a97b775a",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 7
+        },
+        "netto": -0.1896,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        }
+      }
+    },
+    {
+      "id": "fs-0002",
+      "ts": "2026-05-29T15:22:33.649641+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 9.9527,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0473
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.047",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:49:01.810048+00:00",
+              "side": "BUY",
+              "price": 0.20098,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-03f2-0100-0007fa534f56",
+              "market": "ADA-EUR"
+            },
+            {
+              "ts": "2026-05-29T09:44:51.731191+00:00",
+              "side": "BUY",
+              "price": 259.1,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fad4f686",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 1
+        },
+        "netto": -0.0473,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0003",
+      "ts": "2026-05-29T15:22:36.847896+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 9.9527,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0473
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.047",
+          "source": "clean_slate_28mei",
+          "nummer": 2,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T09:44:56.882791+00:00",
+              "side": "BUY",
+              "price": 259.1,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fad50840",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": -0.0473,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0004",
+      "ts": "2026-05-29T15:22:40.729934+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-008",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 10.0608,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0608
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €+0.061",
+          "source": "clean_slate_28mei",
+          "nummer": 8,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:54:19.043748+00:00",
+              "side": "BUY",
+              "price": 256.33,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb59a94a",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:20.042773+00:00",
+              "side": "BUY",
+              "price": 256.33,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb59ac98",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": 0.0608,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 0,
+          "balance": 0,
+          "cumulative_profit_eur": 0.294731
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0005",
+      "ts": "2026-05-29T15:23:00.627488+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 9.9864,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0136
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.014",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:32.233823+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-041f-0100-0007fa52ccd3",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T10:58:56.721008+00:00",
+              "side": "BUY",
+              "price": 258.23,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb1c364a",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 3
+        },
+        "netto": -0.0136,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0006",
+      "ts": "2026-05-29T15:23:03.897452+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-004",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-004",
+          "index": 3,
+          "capital": 9.9852,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0148
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.015",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:35.544086+00:00",
+              "side": "BUY",
+              "price": 262.84,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-041f-0100-0007fa52dbe3",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T10:59:31.204314+00:00",
+              "side": "BUY",
+              "price": 258.26,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb1ca9c9",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 4
+        },
+        "netto": -0.0148,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0007",
+      "ts": "2026-05-29T15:23:06.758002+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-005",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-005",
+          "index": 4,
+          "capital": 9.9841,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0159
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.016",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:48:45.513398+00:00",
+              "side": "BUY",
+              "price": 62979.0,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-0431-0100-0007fa5305b1",
+              "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:00:05.555204+00:00",
+              "side": "BUY",
+              "price": 258.29,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb1d43d0",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 5
+        },
+        "netto": -0.0159,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0008",
+      "ts": "2026-05-29T15:23:09.858812+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-006",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-006",
+          "index": 5,
+          "capital": 9.9852,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0148
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.015",
+          "source": "clean_slate_28mei",
+          "nummer": 6,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:39:31.549489+00:00",
+              "side": "BUY",
+              "price": 258.26,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb4677f6",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": -0.0148,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0009",
+      "ts": "2026-05-29T15:23:14.440958+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-009",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 10.0533,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 4,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0533
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €+0.053",
+          "source": "clean_slate_28mei",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T07:49:07.435986+00:00",
+              "side": "BUY",
+              "price": 70.383,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-0560-0100-0007fa536e81",
+              "market": "SOL-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:56.445805+00:00",
+              "side": "BUY",
+              "price": 256.52,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5a5d9a",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:54:57.546828+00:00",
+              "side": "BUY",
+              "price": 256.52,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5a624c",
+              "market": "BCH-EUR"
+            }
+          ],
+          "nummer": 9
+        },
+        "netto": 0.0533,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 0,
+          "balance": 0,
+          "cumulative_profit_eur": 0.348037
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0010",
+      "ts": "2026-05-29T15:23:17.545938+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-010",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 10.0458,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0458
+          },
+          "created_at": "2026-05-28T17:23:18.391617+00:00",
+          "last_action": "SELL @ €259.17 | netto €+0.046",
+          "source": "clean_slate_28mei",
+          "nummer": 10,
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:55:32.333887+00:00",
+              "side": "BUY",
+              "price": 256.71,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5b38be",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T11:55:33.169123+00:00",
+              "side": "BUY",
+              "price": 256.71,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5b3bfc",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": 0.0458,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 0,
+          "balance": 0,
+          "cumulative_profit_eur": 0.393865
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0011",
+      "ts": "2026-05-29T15:23:27.272535+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-011",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 10.0427,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0427
+          },
+          "created_at": "2026-05-29T09:29:26.921559+00:00",
+          "last_action": "SELL @ €259.17 | netto €+0.043",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T11:56:07.226876+00:00",
+              "side": "BUY",
+              "price": 256.79,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fb5be9ea",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": 0.0427,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 0,
+          "balance": 0,
+          "cumulative_profit_eur": 0.436548
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0012",
+      "ts": "2026-05-29T15:23:30.328309+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-012",
+      "market": "BCH-EUR",
+      "exit_price": 259.17,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 9.9709,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 3,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0291
+          },
+          "created_at": "2026-05-29T12:02:21.682974+00:00",
+          "last_action": "SELL @ €259.17 | netto €-0.029",
+          "source": "token_buy_expansion",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T15:14:48.093347+00:00",
+              "side": "BUY",
+              "price": 258.63,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fc979a87",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T15:14:48.239836+00:00",
+              "side": "BUY",
+              "price": 258.63,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-041f-0100-0007fc979b2b",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": -0.0291,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null
+      }
+    },
+    {
+      "id": "fs-0013",
+      "ts": "2026-05-29T19:06:58.558231+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 260.44,
+      "by_admin": "user-001",
+      "reason": "reset_before_user_tests",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 9.9627,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0373
+          },
+          "created_at": "2026-05-29T18:59:53.581694+00:00",
+          "last_action": "SELL @ €260.61 | netto €-0.037",
+          "source": "trade_pot_per_token",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T19:02:31.947221+00:00",
+              "side": "BUY",
+              "price": 260.28,
+              "amount_eur": 10.0,
+              "trade_id": "961c7008",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": -0.0373,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "auto_rebalance": {
+          "success": true,
+          "trader_user_id": "user-001",
+          "anchor_user_id": "user-000",
+          "pot_size_eur": 10.0,
+          "bitvavo_total_eur": 20.02,
+          "trader_pot_count": 1,
+          "anchor_pot_count": 5,
+          "trader_total_eur": 10.0,
+          "anchor_total_eur": 10.02,
+          "open_positions_preserved": 0,
+          "summary": [
+            {
+              "coin": "BCH",
+              "bitvavo_value": 0.01,
+              "already_open": 0,
+              "free_value": 0.01,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.01
+            },
+            {
+              "coin": "BTC",
+              "bitvavo_value": 9.93,
+              "already_open": 0,
+              "free_value": 9.93,
+              "trade_pots_created": 0,
+              "anchor_remainder": 9.93
+            },
+            {
+              "coin": "ETH",
+              "bitvavo_value": 0.05,
+              "already_open": 0,
+              "free_value": 0.05,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.05
+            },
+            {
+              "coin": "SOL",
+              "bitvavo_value": 0.02,
+              "already_open": 0,
+              "free_value": 0.02,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.02
+            },
+            {
+              "coin": "ADA",
+              "bitvavo_value": 10.01,
+              "already_open": 0,
+              "free_value": 10.01,
+              "trade_pots_created": 1,
+              "anchor_remainder": 0.01
+            },
+            {
+              "coin": "ATOM",
+              "bitvavo_value": 0.0,
+              "already_open": 0,
+              "free_value": 0,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.0
+            }
+          ]
+        },
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-041f-0100-0007fe0d662c",
+            "run_id": "manual",
+            "timestamp": "2026-05-29T19:06:58.318537+00:00",
+            "action": "SELL",
+            "market": "BCH-EUR",
+            "order_id": "00000000-0000-041f-0100-0007fe0d662c",
+            "amount": 0.03805705,
+            "price": 260.61,
+            "filled": 0.03805705,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.0280478005,
+            "fee_currency": "EUR",
+            "requested_amount": 10.0,
+            "effective_amount": 0.03805705,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €260.61 (fee €0.0280)"
+        }
+      }
+    },
+    {
+      "id": "fs-0014",
+      "ts": "2026-05-29T19:07:29.960527+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 260.61,
+      "by_admin": "user-001",
+      "reason": "test_cycle",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 9.9129,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BCH-EUR",
+          "stats": {
+            "trades": 4,
+            "wins": 0,
+            "losses": 2,
+            "total_pnl": -0.0871
+          },
+          "created_at": "2026-05-29T18:59:53.581694+00:00",
+          "last_action": "SELL @ €260.61 | netto €-0.050",
+          "source": "trade_pot_per_token",
+          "trade_log": [
+            {
+              "ts": "2026-05-29T19:02:31.947221+00:00",
+              "side": "BUY",
+              "price": 260.28,
+              "amount_eur": 10.0,
+              "trade_id": "961c7008",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-05-29T19:07:27.119446+00:00",
+              "side": "BUY",
+              "price": 260.61,
+              "amount_eur": 9.9627,
+              "trade_id": "d1881623",
+              "market": "BCH-EUR"
+            }
+          ]
+        },
+        "netto": -0.0498,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "auto_rebalance": {
+          "success": true,
+          "trader_user_id": "user-001",
+          "anchor_user_id": "user-000",
+          "pot_size_eur": 10.0,
+          "bitvavo_total_eur": 20.02,
+          "trader_pot_count": 1,
+          "anchor_pot_count": 5,
+          "trader_total_eur": 10.0,
+          "anchor_total_eur": 10.02,
+          "open_positions_preserved": 0,
+          "summary": [
+            {
+              "coin": "BCH",
+              "bitvavo_value": 0.01,
+              "already_open": 0,
+              "free_value": 0.01,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.01
+            },
+            {
+              "coin": "BTC",
+              "bitvavo_value": 9.93,
+              "already_open": 0,
+              "free_value": 9.93,
+              "trade_pots_created": 0,
+              "anchor_remainder": 9.93
+            },
+            {
+              "coin": "ETH",
+              "bitvavo_value": 0.05,
+              "already_open": 0,
+              "free_value": 0.05,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.05
+            },
+            {
+              "coin": "SOL",
+              "bitvavo_value": 0.02,
+              "already_open": 0,
+              "free_value": 0.02,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.02
+            },
+            {
+              "coin": "ADA",
+              "bitvavo_value": 10.01,
+              "already_open": 0,
+              "free_value": 10.01,
+              "trade_pots_created": 1,
+              "anchor_remainder": 0.01
+            },
+            {
+              "coin": "ATOM",
+              "bitvavo_value": 0.0,
+              "already_open": 0,
+              "free_value": 0,
+              "trade_pots_created": 0,
+              "anchor_remainder": 0.0
+            }
+          ]
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 9.9627,
+          "effective_amount": 3.806e-05
+        }
+      }
+    },
+    {
+      "id": "fs-0015",
+      "ts": "2026-06-01T11:21:44.338455+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-003",
+      "market": "ADA-EUR",
+      "exit_price": 0.1989,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-003",
+          "index": 2,
+          "capital": 9.7456,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2544
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-05-30T02:38:31.594364+00:00",
+              "side": "BUY",
+              "price": 63157.2279234765,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0431-0100-0007fff3dcd3",
+              "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:58:47.636213+00:00",
+              "side": "BUY",
+              "price": 0.20305086676753226,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080b3b51fc",
+              "market": "ADA-EUR"
+            }
+          ],
+          "last_action": "SELL @ €0.20 | netto €-0.254",
+          "live_value": 10.0
+        },
+        "netto": -0.2544,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0016",
+      "ts": "2026-06-01T11:21:48.394643+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "ATOM-EUR",
+      "exit_price": 1.662,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 9.7518,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2482
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-05-30T02:36:24.240019+00:00",
+              "side": "BUY",
+              "price": 63149.227261211054,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0431-0100-0007fff184fe",
+              "market": "BTC-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:54:42.194255+00:00",
+              "side": "BUY",
+              "price": 1.6956001472127873,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0410-0100-00080b362d1f",
+              "market": "ATOM-EUR"
+            }
+          ],
+          "last_action": "SELL @ €1.66 | netto €-0.248",
+          "live_value": 10.0
+        },
+        "netto": -0.2482,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":429,\"error\":\"Field 'amount' has too many decimal digits. Examples of numbers with 2 decimal digits: 1.00, 345.69, 0.01. Examples of numbers with 8 decimal digits: 1.00000000, 823.92708153. \"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 6.01752245
+        }
+      }
+    },
+    {
+      "id": "fs-0017",
+      "ts": "2026-06-01T11:21:51.268341+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "ADA-EUR",
+      "exit_price": 0.1989,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 9.7142,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2858
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "last_action": "SELL @ €0.20 | netto €-0.286",
+          "trade_log": [
+            {
+              "ts": "2026-05-30T02:28:05.899545+00:00",
+              "side": "BUY",
+              "price": 261.54,
+              "amount_eur": 9.9423,
+              "trade_id": "00000000-0000-041f-0100-0007ffe8f7ee",
+              "market": "BCH-EUR"
+            },
+            {
+              "ts": "2026-06-01T00:53:40.340506+00:00",
+              "side": "BUY",
+              "price": 0.20370396742387403,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080b3488cc",
+              "market": "ADA-EUR"
+            }
+          ],
+          "live_value": 10.0,
+          "assigned_market": "BTC-EUR",
+          "assigned_at": "2026-06-01T10:34:50.382559+00:00"
+        },
+        "netto": -0.2858,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0018",
+      "ts": "2026-06-01T11:22:32.035242+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-007",
+      "market": "SOL-EUR",
+      "exit_price": 69.624,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-007",
+          "index": 6,
+          "capital": 9.8235,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1765
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "last_action": "SELL @ €69.62 | netto €-0.176",
+          "trade_log": [
+            {
+              "ts": "2026-05-31T16:01:35.596516+00:00",
+              "side": "BUY",
+              "price": 1.668900236592136,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0410-0100-00080904170c",
+              "market": "ATOM-EUR"
+            },
+            {
+              "ts": "2026-05-31T22:21:45.808531+00:00",
+              "side": "BUY",
+              "price": 70.51600101424219,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a773e07",
+              "market": "SOL-EUR"
+            }
+          ],
+          "live_value": 10.0
+        },
+        "netto": -0.1765,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0019",
+      "ts": "2026-06-01T11:22:34.740749+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-008",
+      "market": "SOL-EUR",
+      "exit_price": 69.624,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-008",
+          "index": 7,
+          "capital": 9.8206,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1794
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-05-31T16:05:46.866283+00:00",
+              "side": "BUY",
+              "price": 1723.0503348455393,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-047b-0100-000809099b17",
+              "market": "ETH-EUR"
+            },
+            {
+              "ts": "2026-05-31T22:21:55.145117+00:00",
+              "side": "BUY",
+              "price": 70.53700451203356,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a7767c0",
+              "market": "SOL-EUR"
+            }
+          ],
+          "last_action": "SELL @ €69.62 | netto €-0.179",
+          "live_value": 10.0
+        },
+        "netto": -0.1794,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0020",
+      "ts": "2026-06-01T11:22:37.152906+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-009",
+      "market": "SOL-EUR",
+      "exit_price": 69.624,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-009",
+          "index": 8,
+          "capital": 9.7792,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2208
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-05-31T16:00:30.822049+00:00",
+              "side": "BUY",
+              "price": 1723.1605218220911,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-047b-0100-00080902659f",
+              "market": "ETH-EUR"
+            },
+            {
+              "ts": "2026-05-31T22:27:20.893342+00:00",
+              "side": "BUY",
+              "price": 70.83399318359582,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a7e4afc",
+              "market": "SOL-EUR"
+            }
+          ],
+          "last_action": "SELL @ €69.62 | netto €-0.221",
+          "live_value": 10.0
+        },
+        "netto": -0.2208,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0021",
+      "ts": "2026-06-01T11:22:39.651190+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-010",
+      "market": "SOL-EUR",
+      "exit_price": 69.624,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-010",
+          "index": 9,
+          "capital": 9.7867,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2133
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-05-31T16:01:03.486258+00:00",
+              "side": "BUY",
+              "price": 70.14600218444642,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-000809033bf2",
+              "market": "SOL-EUR"
+            },
+            {
+              "ts": "2026-05-31T22:15:21.950285+00:00",
+              "side": "BUY",
+              "price": 70.78000488289744,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a6f0e99",
+              "market": "SOL-EUR"
+            }
+          ],
+          "last_action": "SELL @ €69.62 | netto €-0.213",
+          "live_value": 10.0
+        },
+        "netto": -0.2133,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0022",
+      "ts": "2026-06-01T11:22:42.673053+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-011",
+      "market": "ADA-EUR",
+      "exit_price": 0.19895,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-011",
+          "index": 10,
+          "capital": 9.8058,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1942
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €0.20 | netto €-0.194",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:17:02.829776+00:00",
+              "side": "BUY",
+              "price": 0.20186000326458445,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080a71af66",
+              "market": "ADA-EUR"
+            }
+          ]
+        },
+        "netto": -0.1942,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0023",
+      "ts": "2026-06-01T11:22:45.339206+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-012",
+      "market": "ADA-EUR",
+      "exit_price": 0.19895,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-012",
+          "index": 11,
+          "capital": 9.8029,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1971
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €0.20 | netto €-0.197",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:27:52.808916+00:00",
+              "side": "BUY",
+              "price": 0.20192000200907365,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080a7f1e29",
+              "market": "ADA-EUR"
+            }
+          ]
+        },
+        "netto": -0.1971,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0024",
+      "ts": "2026-06-01T11:22:47.937511+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-013",
+      "market": "SOL-EUR",
+      "exit_price": 69.624,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-013",
+          "index": 12,
+          "capital": 9.7971,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2029
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €69.62 | netto €-0.203",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:32:36.097341+00:00",
+              "side": "BUY",
+              "price": 70.7047719764012,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a84595e",
+              "market": "SOL-EUR"
+            }
+          ]
+        },
+        "netto": -0.2029,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0025",
+      "ts": "2026-06-01T11:22:50.802201+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-014",
+      "market": "ADA-EUR",
+      "exit_price": 0.19895,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-014",
+          "index": 13,
+          "capital": 9.7933,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2067
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €0.20 | netto €-0.207",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:33:08.321496+00:00",
+              "side": "BUY",
+              "price": 0.20211802662906017,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080a850395",
+              "market": "ADA-EUR"
+            }
+          ]
+        },
+        "netto": -0.2067,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0026",
+      "ts": "2026-06-01T11:22:53.879827+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-015",
+      "market": "SOL-EUR",
+      "exit_price": 69.649,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-015",
+          "index": 14,
+          "capital": 9.7816,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2184
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €69.65 | netto €-0.218",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:36:36.449763+00:00",
+              "side": "BUY",
+              "price": 70.84205625001377,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a8932f1",
+              "market": "SOL-EUR"
+            }
+          ]
+        },
+        "netto": -0.2184,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0027",
+      "ts": "2026-06-01T11:22:56.393761+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-016",
+      "market": "SOL-EUR",
+      "exit_price": 69.649,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-016",
+          "index": 15,
+          "capital": 9.7972,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2028
+          },
+          "created_at": "2026-05-31T21:07:36.812367+00:00",
+          "last_action": "SELL @ €69.65 | netto €-0.203",
+          "source": "spark_extra_tokens_from_willem",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:16:30.934095+00:00",
+              "side": "BUY",
+              "price": 70.73000243972396,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a70ee65",
+              "market": "SOL-EUR"
+            }
+          ]
+        },
+        "netto": -0.2028,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0028",
+      "ts": "2026-06-01T11:22:59.150579+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-017",
+      "market": "ADA-EUR",
+      "exit_price": 0.19898,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-017",
+          "index": 16,
+          "capital": 9.8145,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ADA-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.1855
+          },
+          "created_at": "2026-05-31T21:15:37.057791+00:00",
+          "last_action": "SELL @ €0.20 | netto €-0.185",
+          "source": "minted_from_surplus_v1",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:22:37.323832+00:00",
+              "side": "BUY",
+              "price": 0.20171292919989484,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-03f2-0100-00080a78633e",
+              "market": "ADA-EUR"
+            }
+          ]
+        },
+        "netto": -0.1855,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 9.99
+        }
+      }
+    },
+    {
+      "id": "fs-0029",
+      "ts": "2026-06-01T11:23:01.743113+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-018",
+      "market": "SOL-EUR",
+      "exit_price": 69.649,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-018",
+          "index": 17,
+          "capital": 9.7969,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2031
+          },
+          "created_at": "2026-05-31T21:15:37.057791+00:00",
+          "last_action": "SELL @ €69.65 | netto €-0.203",
+          "source": "minted_from_surplus_v1",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:37:15.503079+00:00",
+              "side": "BUY",
+              "price": 70.73200459325267,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a89f88f",
+              "market": "SOL-EUR"
+            }
+          ]
+        },
+        "netto": -0.2031,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0030",
+      "ts": "2026-06-01T11:23:04.360141+00:00",
+      "type": "force_sell",
+      "user_id": "user-000",
+      "pot_id": "pot-019",
+      "market": "SOL-EUR",
+      "exit_price": 69.649,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-019",
+          "index": 18,
+          "capital": 9.7988,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "SOL-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.2012
+          },
+          "created_at": "2026-05-31T21:15:37.057791+00:00",
+          "last_action": "SELL @ €69.65 | netto €-0.201",
+          "source": "minted_from_surplus_v1",
+          "live_value": 10.0,
+          "trade_log": [
+            {
+              "ts": "2026-05-31T22:37:21.030077+00:00",
+              "side": "BUY",
+              "price": 70.71800193059437,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0560-0100-00080a8a192a",
+              "market": "SOL-EUR"
+            }
+          ]
+        },
+        "netto": -0.2012,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": {
+          "success": true,
+          "minted": [],
+          "overflow": 0.0,
+          "reason": "overflow €0.00 < threshold €10.0"
+        },
+        "bitvavo_sell": {
+          "success": false,
+          "error": "Bitvavo API error: 400 - {\"errorCode\":212,\"error\":\"You set amount to less than the minimum value possible for this market. To check the minimum amounts, call https://api.bitvavo.com/v2/markets and check minOrderInQuoteAsset and minOrderInBaseAsset.\"}",
+          "error_code": "BITVAVO_HTTP_ERROR",
+          "http_status": 400,
+          "requested_amount": 10.0,
+          "effective_amount": 0.00014448
+        }
+      }
+    },
+    {
+      "id": "fs-0031",
+      "ts": "2026-06-01T14:53:49.858860+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-002",
+      "market": "ATOM-EUR",
+      "exit_price": 1.6426,
+      "by_admin": "user-001",
+      "reason": "per-ongeluk test door agent, terugdraaien",
+      "result": {
+        "pot": {
+          "id": "pot-002",
+          "index": 1,
+          "capital": 9.9477,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "ATOM-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 0,
+            "losses": 1,
+            "total_pnl": -0.0523
+          },
+          "created_at": "2026-05-29T19:09:40.956066+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-06-01T14:53:18.223874+00:00",
+              "side": "BUY",
+              "price": 1.6419,
+              "amount_eur": 10.0,
+              "trade_id": "00000000-0000-0410-0100-000810100575",
+              "market": "ATOM-EUR"
+            }
+          ],
+          "last_action": "SELL @ €1.64 | netto €-0.052",
+          "live_value": 10.0
+        },
+        "netto": -0.0523,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": null,
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-0410-0100-00081010ba8a",
+            "run_id": "manual",
+            "timestamp": "2026-06-01T14:53:49.823460+00:00",
+            "action": "SELL",
+            "market": "ATOM-EUR",
+            "order_id": "00000000-0000-0410-0100-00081010ba8a",
+            "amount": 9.99,
+            "price": 1.6415219542942943,
+            "filled": 9.99,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.0488043234,
+            "fee_currency": "EUR",
+            "requested_amount": 10.0,
+            "effective_amount": 9.99,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €1.64 (fee €0.0488)"
+        }
+      }
+    },
+    {
+      "id": "fs-0032",
+      "ts": "2026-07-02T15:22:36.847289+00:00",
+      "type": "force_sell",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BTC-EUR",
+      "exit_price": 53843.0,
+      "by_admin": "user-001",
+      "reason": "Admin handmatige force-sell",
+      "result": {
+        "pot": {
+          "id": "pot-001",
+          "index": 0,
+          "capital": 5.1502,
+          "max_size": 50.0,
+          "pot_locked": false,
+          "lock_reason": null,
+          "position": {
+            "is_open": false,
+            "entry_price": null,
+            "highest_price": null,
+            "trailing_active": false,
+            "entry_time": null
+          },
+          "market": "BTC-EUR",
+          "stats": {
+            "trades": 2,
+            "wins": 1,
+            "losses": 0,
+            "total_pnl": 0.0702
+          },
+          "created_at": "2026-07-01T09:17:38.916929+00:00",
+          "trade_log": [
+            {
+              "ts": "2026-07-02T01:43:39.829967+00:00",
+              "side": "BUY",
+              "price": 52840.43441938178,
+              "amount_eur": 5.08,
+              "trade_id": "00000000-0000-0431-0100-0008ee668693",
+              "market": "BTC-EUR"
+            }
+          ],
+          "last_action": "SELL @ €53835.00 | netto €+0.070",
+          "live_value": 5.08,
+          "unrealized_pnl": 0.0,
+          "unrealized_pnl_pct": 0.0,
+          "current_price": null
+        },
+        "netto": 0.0702,
+        "overflow": 0.0,
+        "auto_expansion": null,
+        "spark_bonus": {
+          "minted": 0,
+          "balance": 0,
+          "cumulative_profit_eur": 0.637919
+        },
+        "spark_fee_eur": 0.0,
+        "auto_mint": null,
+        "bitvavo_sell": {
+          "success": true,
+          "trade": {
+            "trade_id": "00000000-0000-0431-0100-0008f2adb13f",
+            "run_id": "manual",
+            "timestamp": "2026-07-02T15:22:36.797020+00:00",
+            "action": "SELL",
+            "market": "BTC-EUR",
+            "order_id": "00000000-0000-0431-0100-0008f2adb13f",
+            "amount": 4.8e-07,
+            "price": 53835.00000000001,
+            "filled": 4.8e-07,
+            "status": "filled",
+            "mock": false,
+            "success": true,
+            "error": null,
+            "fee": 0.0058408,
+            "fee_currency": "EUR",
+            "requested_amount": 5.08,
+            "effective_amount": 4.8e-07,
+            "proxied_via_spark": false
+          },
+          "message": "LIVE SELL uitgevoerd @ €53835.00 (fee €0.0058)"
+        }
+      }
+    },
+    {
+      "id": "fs-0033",
+      "ts": "2026-07-06T00:24:44.189132+00:00",
+      "type": "force_sell_rejected",
+      "user_id": "user-001",
+      "pot_id": "pot-001",
+      "market": "BCH-EUR",
+      "exit_price": 212.43,
+      "by_admin": "user-001",
+      "reason": "auto-test rejection path",
+      "bitvavo_sell": {
+        "success": false,
+        "error": "Bitvavo API error: 400 - errorCode 212",
+        "error_code": "BITVAVO_HTTP_ERROR"
+      },
+      "note": "Pot NIET gesloten — Bitvavo weigerde de order. Geen PnL/bonus toegekend."
+    }
+  ]
+}

@@ -871,6 +871,9 @@ class MonitorService:
         self._use_potjes = False
         # v6_buy_cooldown_001 — tijdstempel laatste BUY per markt (voor 5-min cooldown)
         self._last_buy_per_market: Dict[str, datetime] = {}
+        # v7_eur_cooldown_001 — als Bitvavo INSUFFICIENT_EUR_BALANCE geeft, wacht N min
+        # voor we opnieuw proberen te kopen (voorkomt loop-spam op alle markets).
+        self._last_insufficient_eur_ts: Optional[datetime] = None
 
         # v7_config_persist_on_init_001 — laad config uit state file bij creatie zodat
         # UI /bot/status altijd de laatste user-configuratie toont (interval, markets,
@@ -1267,6 +1270,8 @@ class MonitorService:
             #    bij drop → volgende (grotere) dip werd niet benut. 15 min = 1 candle-cycle
             #    per markt per user (users kopen wel onafhankelijk op zelfde trigger).
             BUY_COOLDOWN_SEC = 900  # 15 minuten (per markt per user)
+            # v7_eur_cooldown_001 — na INSUFFICIENT_EUR_BALANCE 30 min wachten (globaal per user)
+            EUR_COOLDOWN_SEC = 1800
             last_buy_ts = self._last_buy_per_market.get(market)
             now = datetime.now(timezone.utc)
             in_cooldown = False
@@ -1277,11 +1282,23 @@ class MonitorService:
                     in_cooldown = True
                     cooldown_left = int(BUY_COOLDOWN_SEC - elapsed)
 
+            # v7_eur_cooldown_001 — globale EUR-cooldown na eerdere INSUFFICIENT_EUR_BALANCE
+            in_eur_cooldown = False
+            eur_cooldown_left = 0
+            if self._last_insufficient_eur_ts:
+                eur_elapsed = (now - self._last_insufficient_eur_ts).total_seconds()
+                if eur_elapsed < EUR_COOLDOWN_SEC:
+                    in_eur_cooldown = True
+                    eur_cooldown_left = int(EUR_COOLDOWN_SEC - eur_elapsed)
+
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
             if market_context:
                 buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price, user_id=self._user_id)
             if buy_decision["action"] == "BUY" and in_cooldown:
                 buy_decision["reason"] += f" | Skipped: BUY-cooldown {cooldown_left}s op {market}"
+                buy_decision["action"] = "HOLD"
+            if buy_decision["action"] == "BUY" and in_eur_cooldown:
+                buy_decision["reason"] += f" | Skipped: EUR-cooldown {eur_cooldown_left}s (eerder onvoldoende EUR)"
                 buy_decision["action"] = "HOLD"
             if buy_decision["action"] == "BUY":
                 # v7_pot_cluster_001 — Cluster pots samen tot Bitvavo min-order gehaald
@@ -1311,6 +1328,13 @@ class MonitorService:
                             f"€{cluster['total_capital']:.2f}) {market} @ €{real_entry:.4f}"
                         )
                     else:
+                        # v7_eur_cooldown_001 — bij INSUFFICIENT_EUR_BALANCE: activeer 30-min cooldown
+                        if result.get("error_code") == "INSUFFICIENT_EUR_BALANCE":
+                            self._last_insufficient_eur_ts = now
+                            logger.warning(
+                                f"[buy] EUR-cooldown 30min actief voor {self._user_id} — "
+                                f"€{result.get('eur_available',0):.2f} < €{cluster['total_capital']:.2f}"
+                            )
                         buy_decision["reason"] += f" | BUY faalde: {result.get('error','?')[:80]}"
                 elif not cluster:
                     buy_decision["reason"] += (

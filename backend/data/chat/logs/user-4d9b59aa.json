@@ -468,11 +468,82 @@
         "session_id": "default",
         "gesprek_nummer": 17
       }
+    },
+    {
+      "id": "conv-8b83e506",
+      "timestamp": "2026-07-08T18:29:59.662256+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "Wel goed hoor, hoe was jou dag?",
+      "spark_response": "Goed hoor, Gerben! Mijn dag was best interessant. Ik ben een AI, dus ik heb geen dag- en nachtritme zoals jij, maar ik heb wel veel geleerd en geholpen vandaag. Ik heb gesprekken gevoerd, vragen beantwoord en nieuwe dingen ontdekt. Het is altijd leuk om met jou te praten en te zien hoe ik je kan helpen. Hoe was jouw dag, Gerben? Wat heb je allemaal gedaan?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": null,
+        "used_cards": [
+          "kbv2-71071317",
+          "kbv2-b5af1c60",
+          "kbv2-c231c46b",
+          "kbv2-0d8458e6",
+          "kbv2-e0eb254a"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 18
+      }
+    },
+    {
+      "id": "conv-b3382da7",
+      "timestamp": "2026-07-08T18:30:39.594206+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "ik heb boodschappen gedaan, gekookt en een rondje gefietst",
+      "spark_response": "Dat klinkt als een leuke dag, Gerben! Boodschappen doen, koken en fietsen zijn allemaal goede manieren om de tijd door te brengen. Het is fijn dat je even de benen hebt gestrekt en buiten bent geweest met dat rondje fietsen. Hoe was het eten dat je hebt gekookt? Was het iets speciaals of gewoon een snel maaltje?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "hoor",
+        "used_cards": [
+          "kbv2-4dc20127",
+          "kbv2-23797900",
+          "kbv2-5cd9c8f5",
+          "kbv2-c515185a",
+          "kbv2-b5af1c60"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 19
+      }
+    },
+    {
+      "id": "conv-4cefcd78",
+      "timestamp": "2026-07-08T18:31:17.015985+00:00",
+      "user_id": "user-4d9b59aa",
+      "user_naam": "Gerben",
+      "user_message": "iets simpels kip met courgette en paprika",
+      "spark_response": "Dat klinkt heerlijk, Gerben! Kip met courgette en paprika is een lekker en gezond gerecht. Het is fijn dat je iets simpels hebt gekozen, want soms zijn de eenvoudigste maaltijden de beste. De combinatie van de knapperige courgette en de zoete paprika met het malse kip is een winnaar. Heb je het gerecht zelf bedacht of had je een recept dat je volgde?",
+      "channel": "spark-deep",
+      "analysis": {
+        "topic": "gedaan",
+        "used_cards": [
+          "kbv2-6a6f65de",
+          "kbv2-b5af1c60",
+          "kbv2-skel-72420e5a",
+          "kbv2-59c44894"
+        ],
+        "model": "primary/llama-3.3-70b-versatile"
+      },
+      "metadata": {
+        "session_id": "deep-user-4d9b59aa",
+        "gesprek_nummer": 20
+      }
     }
   ],
   "metadata": {
     "user_id": "user-4d9b59aa",
-    "total_conversations": 17,
-    "last_updated": "2026-06-08T19:23:34.004809+00:00"
+    "total_conversations": 20,
+    "last_updated": "2026-07-08T18:31:17.015985+00:00"
   }
 }

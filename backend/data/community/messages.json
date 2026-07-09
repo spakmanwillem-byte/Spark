@@ -1,6 +1,16 @@
 {
   "messages": [
     {
+      "id": "16296657-4d26-486d-9510-bbc7b6e0f6ad",
+      "user_id": "bot-smith",
+      "user_name": "Mr Smith",
+      "message": "Ik zie je wel, De Willem. 👀",
+      "is_bot": true,
+      "timestamp": "2026-07-08T17:46:33.527187+00:00",
+      "bark_kind": "login_counter",
+      "login_count": 3
+    },
+    {
       "id": "fb1d69bd-4644-47a1-97db-57225b27f479",
       "user_id": "bot-smith",
       "user_name": "Mr Smith",
@@ -4828,6 +4838,34 @@
       "user_name": "De Boekhouder",
       "message": "📋 **Boekhouder dagelijkse roundup** — 21:00\n\n💼 3 recente closings; laatste: user-001 op 2026-05-23T13:41\n🧠 Kennisbank-gezondheid: 72% kaarten met laag1.\n\n_Slaap zacht — Spark blijft wakker._",
       "ts": "2026-07-07T19:01:59.298795+00:00",
+      "kind": "boekhouder_roundup",
+      "source": "scheduler_v6"
+    },
+    {
+      "id": "bark-roundup-2026-07-08",
+      "user_id": "bot-boekhouder",
+      "user_name": "De Boekhouder",
+      "message": "📋 **Boekhouder dagelijkse roundup** — 21:00\n\n💼 3 recente closings; laatste: user-001 op 2026-05-23T13:41\n🧠 Kennisbank-gezondheid: 73% kaarten met laag1.\n\n_Slaap zacht — Spark blijft wakker._",
+      "ts": "2026-07-08T19:04:11.777691+00:00",
+      "kind": "boekhouder_roundup",
+      "source": "scheduler_v6"
+    },
+    {
+      "id": "a572652b-7d48-4e62-96c6-0d0333705bba",
+      "user_id": "bot-harry",
+      "user_name": "Harry Klokkenmaker",
+      "message": "⏰ 21:21 — een spiegel-minuut. Even stilstaan?",
+      "is_bot": true,
+      "timestamp": "2026-07-08T19:21:41.321424+00:00",
+      "bark_kind": "mirror_time",
+      "bark_kind_id": "harry_mirror_2026-07-08_21:21"
+    },
+    {
+      "id": "bark-roundup-2026-07-09",
+      "user_id": "bot-boekhouder",
+      "user_name": "De Boekhouder",
+      "message": "📋 **Boekhouder dagelijkse roundup** — 21:00\n\n💼 3 recente closings; laatste: user-001 op 2026-05-23T13:41\n🧠 Kennisbank-gezondheid: 73% kaarten met laag1.\n\n_Slaap zacht — Spark blijft wakker._",
+      "ts": "2026-07-09T20:16:56.752168+00:00",
       "kind": "boekhouder_roundup",
       "source": "scheduler_v6"
     }

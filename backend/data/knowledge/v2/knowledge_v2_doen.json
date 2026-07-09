@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1098,
+    "card_count": 1119,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-28T17:03:35.166058+00:00",
+    "last_updated": "2026-07-08T18:47:34.134111+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -145770,6 +145770,700 @@
             "result": {
               "n_found": 5,
               "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-8ae9a89b",
+      "begrip": "ingesteld",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Ingesteld betekent dat iets is aangepast of geconfigureerd voor een bepaald doel.",
+        "laag2": "Wanneer iets is ingesteld, zijn de gewenste waarden, voorkeuren of functies toegepast zodat het klaar is voor gebruik.",
+        "laag3": "Ingesteld kan verwijzen naar apparaten, software, systemen of personen. Bij systemen betekent het dat configuraties zijn toegepast. Bij mensen kan het betekenen dat iemand een bepaalde houding, verwachting of manier van denken heeft.",
+        "laag4": "Ingesteld beschrijft een toestand die ontstaat na een bewuste keuze of aanpassing. De instellingen bepalen hoe een systeem, apparaat of persoon reageert of functioneert binnen een bepaalde context."
+      },
+      "ws5": {
+        "wie": "Personen, systemen, apparaten of software.",
+        "wat": "Een toestand waarin instellingen of eigenschappen zijn toegepast.",
+        "wanneer": "Nadat iets is aangepast of geconfigureerd.",
+        "waar": "Bij apparaten, software, systemen en menselijke houdingen of verwachtingen.",
+        "waarom": "Om gedrag, werking of voorkeuren af te stemmen op een gewenst doel.",
+        "hoe": "Door instellingen, configuraties of bewuste keuzes toe te passen."
+      },
+      "tags": [
+        "ingesteld",
+        "instellen",
+        "configuratie",
+        "voorkeur",
+        "instelling",
+        "aangepast",
+        "geconfigureerd",
+        "gereed",
+        "systeem",
+        "software",
+        "apparaat",
+        "houding"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-0b365c00",
+          "begrip": "besturingssysteem",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e4522bfc",
+          "begrip": "omgeving is aangepast",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "aangepast",
+            "configuratie",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8787fdc4",
+          "begrip": "mode",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "configuratie",
+            "instelling",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f2c036d2",
+          "begrip": "inschakelen",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "apparaat",
+            "software",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b090f8b",
+          "begrip": "houding",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "houding",
+            "instelling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:51:18.001091+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:28:18.161601+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ahh ik zie wat er fout is. Je welkomsbericht is fout ingesteld. Je zou moeten zeggen Nu we in gesprek zijn ipv   nu je naar het dashboard kijkt. En daarna zou je kunnen zeggen je zou op je dashboard k",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:28:16.917535+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:28:17.018761+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:28:17.025128+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:28:18.416225+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:28:18.422689+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e27c6f88",
+      "begrip": "verleng",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Verleng betekent iets langer maken of de duur ervan vergroten.",
+        "laag2": "Verlengen houdt in dat een bestaande lengte, tijdsduur, geldigheid of afstand wordt uitgebreid.",
+        "laag3": "Verlengen wordt gebruikt in uiteenlopende situaties, zoals het verlengen van een abonnement, contract, vergunning, weg, tijdslimiet of object. Het bestaande blijft behouden, maar wordt uitgebreid.",
+        "laag4": "Verlengen is een handeling waarbij de oorspronkelijke toestand wordt voortgezet zonder opnieuw te beginnen. Door te verlengen blijft continuïteit behouden terwijl de geldigheidsduur, omvang of lengte toeneemt."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties of systemen.",
+        "wat": "Het langer maken of voortzetten van iets dat al bestaat.",
+        "wanneer": "Wanneer extra tijd, lengte of geldigheid nodig is.",
+        "waar": "Bij contracten, abonnementen, documenten, objecten, projecten en digitale systemen.",
+        "waarom": "Om continuïteit te behouden of een bestaande situatie voort te zetten.",
+        "hoe": "Door de duur, lengte of geldigheid formeel of praktisch uit te breiden."
+      },
+      "tags": [
+        "verleng",
+        "verlengen",
+        "uitbreiden",
+        "voortzetten",
+        "geldigheid",
+        "duur",
+        "tijd",
+        "contract",
+        "abonnement",
+        "verlenging",
+        "continuïteit",
+        "uitbreiding"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-cb833960",
+          "begrip": "dagelijkse",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "continuïteit",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e80e80fa",
+          "begrip": "kort",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "duur",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-36fbbd97",
+          "begrip": "2 uur",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "duur",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a8954bfa",
+          "begrip": "Generaties volgen elkaar op in de tijd",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "continuïteit",
+            "tijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6cf67e57",
+          "begrip": "Generaties vormen de tijdslijn van leven",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "continuïteit",
+            "tijd"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:58:02.745844+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:32:54.483318+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Waarom zeg ik dit. omdat: het eigenlijk een verleng zin is. Nu we in gesprek zijn. Dit is na een afronding van een gesprek. en opent hiermee, of maakt ruimte voor een vervolg van een gesprek of een ni",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:32:52.212303+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:32:52.313850+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:32:52.320270+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:32:54.735480+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:32:54.741729+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-6c772407",
+      "begrip": "bedacht",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Bedacht betekent dat een idee, plan of oplossing is verzonnen of ontwikkeld.",
+        "laag2": "Iets dat bedacht is, is ontstaan door nadenken, creativiteit of probleemoplossing.",
+        "laag3": "Bedacht is de voltooide vorm van het werkwoord bedenken. Het beschrijft dat iemand een idee, plan, ontwerp, verhaal of oplossing heeft gevormd door bewust na te denken.",
+        "laag4": "Bedacht markeert het resultaat van een denkproces. Het geeft aan dat een concept of oplossing niet toevallig is ontstaan, maar voortkomt uit bewuste afweging, creativiteit of analyse."
+      },
+      "ws5": {
+        "wie": "Personen of systemen die ideeën ontwikkelen.",
+        "wat": "Het resultaat van iets bedenken.",
+        "wanneer": "Nadat een idee, plan of oplossing is gevormd.",
+        "waar": "In gesprekken, ontwerpen, projecten, wetenschap, kunst en het dagelijks leven.",
+        "waarom": "Om een oplossing, plan of nieuw idee te creëren.",
+        "hoe": "Door na te denken, te analyseren, te combineren of creatief te zijn."
+      },
+      "tags": [
+        "bedacht",
+        "bedenken",
+        "idee",
+        "plan",
+        "creativiteit",
+        "oplossing",
+        "ontwerp",
+        "concept",
+        "analyse",
+        "denken",
+        "innovatie",
+        "resultaat"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-40d24f63",
+          "begrip": "brainstormen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "concept",
+            "creativiteit",
+            "denken",
+            "innovatie",
+            "oplossing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e02cd685",
+          "begrip": "Creativiteit",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "creativiteit",
+            "denken",
+            "idee",
+            "innovatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-066c93ff",
+          "begrip": "ik wil met je brainstormen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "concept",
+            "creativiteit",
+            "denken",
+            "innovatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5a991a03",
+          "begrip": "Idee",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "concept",
+            "creativiteit",
+            "idee",
+            "plan"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1ff71e45",
+          "begrip": "Schets",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "concept",
+            "idee",
+            "ontwerp",
+            "plan"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:18:52.282051+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:34:32.029097+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "nee dat hoeft niet. ik heb wel wat anders bedacht.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:34:30.160663+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:34:30.261329+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:34:30.267769+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:34:32.282455+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:34:32.288854+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-06d4c17a",
+      "begrip": "boodschappen",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Boodschappen zijn producten die worden gekocht voor dagelijks gebruik.",
+        "laag2": "Boodschappen bestaan uit levensmiddelen en andere benodigdheden die mensen kopen om in hun dagelijkse behoeften te voorzien.",
+        "laag3": "Boodschappen kunnen onder andere eten, drinken, schoonmaakmiddelen, verzorgingsproducten en huishoudelijke artikelen omvatten. Ze worden meestal gekocht in supermarkten, winkels of online en vormen een terugkerend onderdeel van het dagelijks leven.",
+        "laag4": "Boodschappen voorzien mensen van de middelen die nodig zijn om te leven, wonen en zorgen. Het doen van boodschappen vraagt planning, keuzes en budgetbeheer en draagt bij aan het dagelijks functioneren van een huishouden."
+      },
+      "ws5": {
+        "wie": "Consumenten, huishoudens en winkels.",
+        "wat": "Producten die worden gekocht voor dagelijks gebruik.",
+        "wanneer": "Wanneer dagelijkse benodigdheden moeten worden aangevuld.",
+        "waar": "Supermarkten, winkels, markten en webwinkels.",
+        "waarom": "Om voedsel en andere noodzakelijke producten in huis te hebben.",
+        "hoe": "Door producten te kiezen, te kopen en mee te nemen of te laten bezorgen."
+      },
+      "tags": [
+        "boodschappen",
+        "boodschappen doen",
+        "supermarkt",
+        "winkelen",
+        "boodschappenlijst",
+        "levensmiddelen",
+        "huishouden",
+        "inkopen",
+        "producten",
+        "voeding",
+        "dagelijks",
+        "kopen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-30697706",
+          "begrip": "Iglo",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "supermarkt",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5d61420d",
+          "begrip": "basisvoedsel",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "dagelijks",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Gerben",
+        "aangemaakt_op": "2026-07-08T18:30:39.605867+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:44:01.398715+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik heb boodschappen gedaan, gekookt en een rondje gefietst",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:43:41.476606+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:43:41.980365+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:43:41.998389+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:44:02.698545+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:44:02.716028+00:00",
+            "result": {
+              "n_found": 2,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-bdd8a092",
+      "begrip": "baseer",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Baseer betekent iets laten steunen op een feit, bron, reden of uitgangspunt.",
+        "laag2": "Wanneer je iets baseert, gebruik je informatie, ervaring of bewijs als fundament voor een conclusie, keuze of mening.",
+        "laag3": "Baseren is het vormen van een oordeel, beslissing, theorie of plan op bestaande kennis, waarnemingen, gegevens of argumenten. Het helpt om keuzes en uitspraken te onderbouwen.",
+        "laag4": "Baseren is een denk- en beslishandeling waarbij informatie wordt omgezet in een onderbouwde conclusie of richting. De kwaliteit van het resultaat hangt af van de betrouwbaarheid en volledigheid van de gebruikte bronnen of ervaringen."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties en systemen.",
+        "wat": "Het onderbouwen van een keuze, mening of conclusie met een uitgangspunt of bron.",
+        "wanneer": "Bij het nemen van beslissingen, vormen van meningen of trekken van conclusies.",
+        "waar": "In het dagelijks leven, onderwijs, wetenschap, beleid en software.",
+        "waarom": "Om keuzes en uitspraken logisch en onderbouwd te maken.",
+        "hoe": "Door feiten, ervaringen, gegevens, bronnen of observaties als fundament te gebruiken."
+      },
+      "tags": [
+        "baseer",
+        "baseren",
+        "onderbouwen",
+        "uitgangspunt",
+        "bron",
+        "bewijs",
+        "argument",
+        "conclusie",
+        "beslissing",
+        "redenering",
+        "analyse",
+        "fundament"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6e9d3b4a",
+          "begrip": "verklaring",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "argument",
+            "bewijs",
+            "conclusie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9a72140f",
+          "begrip": "conclusie",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "conclusie",
+            "redenering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fcaf76c8",
+          "begrip": "oordeel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "beslissing",
+            "conclusie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1c554dc6",
+          "begrip": "Smoking Gun",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "analyse",
+            "bewijs",
+            "conclusie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-75c4086a",
+          "begrip": "uitkomst",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "analyse",
+            "beslissing"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-08T07:11:49.406450+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:47:34.134074+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "waarom benoem jij dit of op wat baseer jij dit?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:47:30.652806+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:47:31.167144+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:47:31.186006+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:47:35.265288+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:47:35.283066+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
             }
           }
         ]

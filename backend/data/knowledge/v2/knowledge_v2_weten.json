@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2073,
+    "card_count": 2087,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T14:20:29.930939+00:00",
+    "last_updated": "2026-07-08T19:17:39.845812+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -274878,6 +274878,2126 @@
             "result": {
               "n_found": 5,
               "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e03e9294",
+      "begrip": "allereerste",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Allereerste betekent het absolute begin of de eerste van alles.",
+        "laag2": "Allereerste verwijst naar het eerste moment, object, persoon of gebeurtenis binnen een reeks. Er ging niets aan vooraf.",
+        "laag3": "Het woord allereerste wordt gebruikt om het begin van een volgorde, ontwikkeling of geschiedenis aan te duiden. Het kan betrekking hebben op een eerste versie, eerste ontmoeting, eerste uitvinding, eerste gebruiker, eerste gebeurtenis of eerste ervaring. De betekenis wordt bepaald door de context waarin het woord wordt gebruikt.",
+        "laag4": "Binnen Spark markeert allereerste het oorspronkelijke beginpunt van een object, proces, kenniskaart, relatie of gebeurtenis. Spark gebruikt dit om de oorsprong van informatie vast te leggen en tijdlijnen, versies en ontwikkelingen correct te reconstrueren. Hierdoor blijft de volledige geschiedenis van gegevens en gebeurtenissen inzichtelijk."
+      },
+      "ws5": {
+        "wie": "Personen, AI-systemen, objecten, gebeurtenissen of processen.",
+        "wat": "Het absolute eerste element of beginpunt van een reeks.",
+        "wanneer": "Aan het begin van een ontwikkeling, tijdlijn of volgorde.",
+        "waar": "In gesprekken, geschiedenis, documenten, projecten, databases en digitale systemen.",
+        "waarom": "Om de oorsprong en het eerste moment van iets vast te leggen.",
+        "hoe": "Door het eerste bekende element binnen een reeks of chronologie te identificeren en te registreren."
+      },
+      "tags": [
+        "allereerste",
+        "eerste",
+        "begin",
+        "oorsprong",
+        "start",
+        "chronologie",
+        "tijdlijn",
+        "geschiedenis",
+        "versie",
+        "ontwikkeling",
+        "context",
+        "volgorde",
+        "herkomst",
+        "registratie",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e2137213",
+          "begrip": "oorsprong",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "begin",
+            "emotie",
+            "geschiedenis",
+            "herkomst",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3334b2bb",
+          "begrip": "eerder",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "geschiedenis",
+            "neutraal",
+            "tijdlijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f8ce971",
+          "begrip": "laatste",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "tijdlijn"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-da45f230",
+          "begrip": "inmiddels",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "chronologie",
+            "context",
+            "emotie",
+            "neutraal",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-2f6ef6ac",
+          "begrip": "afkomst",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "context",
+            "emotie",
+            "herkomst",
+            "neutraal",
+            "oorsprong"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Gert van zeven",
+        "aangemaakt_op": "2026-06-30T10:55:11.691466+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:26:47.259176+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "[SYSTEEM-CONTEXT: dit is het allereerste bericht van een nieuwe sessie. De gebruiker heeft net de chat geopend en jij spreekt als eerste. Begin met een warme, korte begroeting (1-3 zinnen) — geen vraa",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:26:43.958160+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:26:44.061619+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:26:44.069115+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:26:47.603269+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:26:47.610919+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cf46f679",
+      "begrip": "benoem",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Benoemen betekent iets of iemand een naam, aanduiding of omschrijving geven.",
+        "laag2": "Door iets te benoemen krijgt het een herkenbare identiteit of betekenis. Benoemen helpt bij communicatie, classificatie en het delen van informatie.",
+        "laag3": "Benoemen is het geven van een naam, term of beschrijving aan een persoon, object, gebeurtenis, gevoel of begrip. Hierdoor wordt iets herkenbaar en kan er gemakkelijker over worden gesproken, geschreven of nagedacht. Benoemen speelt een belangrijke rol in taal, kennisopbouw en communicatie.",
+        "laag4": "Binnen informatiesystemen en kennisbanken is benoemen essentieel voor het organiseren en terugvinden van informatie. Door objecten, concepten en relaties een duidelijke naam te geven, kunnen ze worden geclassificeerd, gekoppeld en herkend. Binnen Spark vormt benoemen een basisstap voor het opbouwen van kenniskaarten, relaties en semantische structuren."
+      },
+      "ws5": {
+        "wie": "Mensen, AI-systemen en organisaties.",
+        "wat": "Het geven van een naam, term of omschrijving.",
+        "wanneer": "Wanneer iets herkenbaar, bespreekbaar of classificeerbaar moet worden gemaakt.",
+        "waar": "In taal, communicatie, wetenschap, onderwijs, databases en kennisbanken.",
+        "waarom": "Om informatie duidelijk te maken, te ordenen en eenvoudig terug te vinden.",
+        "hoe": "Door een passende naam, term of beschrijving toe te kennen."
+      },
+      "tags": [
+        "benoemen",
+        "naam",
+        "benaming",
+        "aanduiding",
+        "omschrijving",
+        "classificatie",
+        "identificatie",
+        "taal",
+        "communicatie",
+        "kennis",
+        "semantiek",
+        "betekenis",
+        "begrip",
+        "informatie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e64c654b",
+          "begrip": "benoemen",
+          "lade": "spreken",
+          "overlap": 11,
+          "shared_tags": [
+            "begrip",
+            "benoemen",
+            "betekenis",
+            "classificatie",
+            "communicatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ecd1bb38",
+          "begrip": "noemen",
+          "lade": "spreken",
+          "overlap": 9,
+          "shared_tags": [
+            "benoemen",
+            "classificatie",
+            "communicatie",
+            "identificatie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99a85340",
+          "begrip": "betekend",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "begrip",
+            "betekenis",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6db88117",
+          "begrip": "noem",
+          "lade": "spreken",
+          "overlap": 8,
+          "shared_tags": [
+            "benoemen",
+            "classificatie",
+            "communicatie",
+            "informatie",
+            "kennis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04b0d8bf",
+          "begrip": "namen",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "aanduiding",
+            "benoemen",
+            "classificatie",
+            "communicatie",
+            "identificatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-08T07:11:47.103820+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:29:06.257550+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "waarom benoem jij dit of op wat baseer jij dit?",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:29:01.698068+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:29:01.801096+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:29:01.808599+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:29:06.599533+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:29:06.606640+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 11
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-2953c8d0",
+      "begrip": "genoeg",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Genoeg betekent dat iets voldoende is voor een bepaald doel of een bepaalde behoefte.",
+        "laag2": "Genoeg geeft aan dat er niet meer nodig is. Wat als genoeg wordt beschouwd, hangt af van de situatie, het doel en de verwachtingen.",
+        "laag3": "Het woord genoeg wordt gebruikt om aan te geven dat een hoeveelheid, kwaliteit, tijd, inspanning of resultaat voldoet aan de gestelde behoefte of eis. Het begrip is contextafhankelijk: wat voor de één genoeg is, kan voor een ander onvoldoende of juist te veel zijn.",
+        "laag4": "Binnen kennis, communicatie en besluitvorming markeert genoeg het punt waarop een doel, behoefte of voorwaarde als voldoende wordt beschouwd. Systemen kunnen het begrip gebruiken om processen af te ronden, grenzen te bepalen of aan te geven dat verdere uitbreiding of actie niet noodzakelijk is."
+      },
+      "ws5": {
+        "wie": "Mensen, AI-systemen, organisaties en andere entiteiten.",
+        "wat": "Een aanduiding dat iets voldoende is.",
+        "wanneer": "Wanneer een behoefte, doel of voorwaarde is bereikt.",
+        "waar": "In het dagelijks leven, communicatie, werk, onderwijs en digitale systemen.",
+        "waarom": "Om aan te geven dat verdere aanvulling of inspanning niet nodig is.",
+        "hoe": "Door een hoeveelheid, kwaliteit of resultaat te vergelijken met de gewenste behoefte of norm."
+      },
+      "tags": [
+        "genoeg",
+        "voldoende",
+        "hoeveelheid",
+        "behoefte",
+        "grens",
+        "doel",
+        "resultaat",
+        "tevredenheid",
+        "balans",
+        "context",
+        "beoordeling",
+        "norm",
+        "communicatie",
+        "semantiek",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-fc35327c",
+          "begrip": "bedoeling",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "doel",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-165ff5e9",
+          "begrip": "nuance",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "semantiek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-19e442a0",
+          "begrip": "vond",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "beoordeling",
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7582786",
+          "begrip": "Wat maakt jou anders dan andere AI?",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "context",
+            "emotie",
+            "neutraal",
+            "semantiek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:44:24.981089+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T14:35:56.057602+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Je hebt genoeg gedaan. dank voor je reactie. Ik ga de logs van dit gesprek gebruiken.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T14:35:53.395112+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:35:53.497403+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:35:53.505457+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T14:35:56.400210+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T14:35:56.408085+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-34c49def",
+      "begrip": "account",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een account is een persoonlijke toegang tot een systeem of dienst.",
+        "laag2": "Met een account kan een gebruiker zich identificeren, inloggen en persoonlijke gegevens, instellingen of voortgang bewaren.",
+        "laag3": "Een account bestaat meestal uit een unieke identiteit, zoals een gebruikersnaam of e-mailadres, gekoppeld aan een wachtwoord of andere vorm van verificatie. Het bepaalt welke gegevens en functies voor een gebruiker toegankelijk zijn.",
+        "laag4": "Een account vormt de digitale identiteit van een gebruiker binnen een systeem. Het maakt persoonlijke instellingen, rechten, beveiliging en gegevensopslag mogelijk en zorgt ervoor dat informatie aan de juiste persoon gekoppeld blijft."
+      },
+      "ws5": {
+        "wie": "Iedereen die een digitaal systeem gebruikt.",
+        "wat": "Een persoonlijke digitale toegang en identiteit binnen een systeem.",
+        "wanneer": "Bij registratie, inloggen of gebruik van een dienst.",
+        "waar": "Websites, apps, games, computers en online platforms.",
+        "waarom": "Om gegevens, rechten en persoonlijke instellingen veilig aan een gebruiker te koppelen.",
+        "hoe": "Door een unieke identiteit te registreren en te verifiëren met bijvoorbeeld een wachtwoord, pincode of"
+      },
+      "tags": [
+        "account",
+        "gebruiker",
+        "identiteit",
+        "inloggen",
+        "login",
+        "authenticatie",
+        "beveiliging",
+        "profiel",
+        "toegang",
+        "gegevens",
+        "registratie",
+        "gebruikerstoegang"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-37b3a401",
+          "begrip": "login",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "account",
+            "authenticatie",
+            "beveiliging",
+            "gebruiker",
+            "identiteit"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-64122749",
+          "begrip": "Wachtwoorden",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "account",
+            "authenticatie",
+            "beveiliging",
+            "login"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d76c19db",
+          "begrip": "Wachtwoordenkeuze",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "account",
+            "authenticatie",
+            "beveiliging",
+            "login"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2ec1cf5e",
+          "begrip": "Accounts",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "account",
+            "authenticatie",
+            "gebruiker",
+            "login"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-957ec267",
+          "begrip": "uitlog",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "account",
+            "beveiliging",
+            "gebruiker",
+            "toegang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-07T17:07:32.396752+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:19:41.183815+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik heb een bitvavo account. Deze heb ik gekoppeld aan een trader. Deze leest de API van bitvavo uit op bitcoins. Koopt laag verkoopt hoog is de bedoeling. Hij doet dit volgens gegevens die ik heb late",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:19:40.119286+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:19:40.229278+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:19:40.235478+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:19:41.529648+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:19:41.535973+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-7e12a528",
+      "begrip": "kopstuk",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een kopstuk is een belangrijk, invloedrijk of bekend persoon binnen een groep, organisatie of vakgebied.",
+        "laag2": "Een kopstuk vervult vaak een leidende, voorbeeld- of sleutelfunctie en heeft veel invloed op beslissingen of ontwikkelingen.",
+        "laag3": "Het woord kopstuk wordt gebruikt voor personen die door hun kennis, ervaring, positie of prestaties een prominente rol innemen. Het hoeft geen officiële leider te zijn; ook een deskundige of boegbeeld kan een kopstuk zijn.",
+        "laag4": "Een kopstuk vertegenwoordigt vaak de identiteit, visie of richting van een groep of organisatie. Door invloed, ervaring of gezag speelt een kopstuk een belangrijke rol in samenwerking, besluitvorming en beeldvorming."
+      },
+      "ws5": {
+        "wie": "Personen met een belangrijke of invloedrijke rol.",
+        "wat": "Een vooraanstaand of invloedrijk persoon binnen een groep of organisatie.",
+        "wanneer": "Wanneer iemand veel invloed, verantwoordelijkheid of aanzien heeft.",
+        "waar": "In organisaties, politiek, bedrijven, verenigingen, sport, wetenschap en andere samenwerkingsverbanden.",
+        "waarom": "Omdat deze persoon richting geeft, expertise bezit of anderen vertegenwoordigt.",
+        "hoe": "Door kennis, ervaring, prestaties, leiderschap of maatschappelijke invloed."
+      },
+      "tags": [
+        "kopstuk",
+        "leider",
+        "invloed",
+        "gezag",
+        "boegbeeld",
+        "vertegenwoordiger",
+        "expert",
+        "organisatie",
+        "prominent",
+        "voorbeeld",
+        "verantwoordelijkheid"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-303ce20a",
+          "begrip": "macht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "gezag",
+            "invloed",
+            "organisatie",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-4cc173a6",
+          "begrip": "officier",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezag",
+            "organisatie",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f51bb87d",
+          "begrip": "Leiding",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "invloed",
+            "organisatie",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cb9b0653",
+          "begrip": "Taken",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "organisatie",
+            "verantwoordelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5e3218f1",
+          "begrip": "hiërarchie",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "organisatie",
+            "verantwoordelijkheid"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:41:45.988257+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:21:57.047344+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik wil even duidelijk zijn. kopstuk Workspace. met daaronder: Gesprekken,  Agenda, Dagboek, Notities & Taken, Roadmap. Hier waar ik nu met je praat is in gesprekken. Dus wat jij zegt klopt niet.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:21:55.856784+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:21:55.959502+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:21:55.965688+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:21:57.402353+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:21:57.408908+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-f62bf8c8",
+      "begrip": "workspace",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een workspace is een afgebakende werkruimte waarin taken, gegevens en hulpmiddelen samenkomen.",
+        "laag2": "Een workspace helpt gebruikers georganiseerd te werken door informatie, bestanden, instellingen en functies rondom één onderwerp of project te bundelen.",
+        "laag3": "Een workspace is een digitale omgeving waarin mensen of systemen samenwerken aan specifieke activiteiten. Afhankelijk van het systeem kan een workspace documenten, gesprekken, projecten, dashboards, gebruikers en andere hulpmiddelen bevatten.",
+        "laag4": "Een workspace vormt een zelfstandige context binnen een groter systeem. Door gegevens, rechten, instellingen en functionaliteiten te scheiden, kunnen meerdere projecten of gebruikers naast elkaar werken zonder elkaar te beïnvloeden."
+      },
+      "ws5": {
+        "wie": "Gebruikers, teams of systemen.",
+        "wat": "Een digitale werkruimte voor een specifieke taak, project of samenwerking.",
+        "wanneer": "Wanneer informatie, middelen en werkzaamheden georganiseerd moeten worden.",
+        "waar": "In software, cloudomgevingen, ontwikkelplatformen en samenwerkingssystemen.",
+        "waarom": "Om overzicht, structuur, samenwerking en scheiding van gegevens te creëren.",
+        "hoe": "Door een afgebakende omgeving aan te maken met eigen bestanden, instellingen, rechten en functies."
+      },
+      "tags": [
+        "workspace",
+        "werkruimte",
+        "project",
+        "samenwerking",
+        "omgeving",
+        "organisatie",
+        "bestanden",
+        "dashboard",
+        "context",
+        "gebruikers",
+        "structuur",
+        "digitaal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4d3c68af",
+          "begrip": "interface",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "dashboard",
+            "digitaal",
+            "gebruikers",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-444c9aa9",
+          "begrip": "eenheid",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "organisatie",
+            "samenwerking",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-73cfaae7",
+          "begrip": "Systeem",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "organisatie",
+            "samenwerking",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dc5f13f8",
+          "begrip": "Systemen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "organisatie",
+            "samenwerking",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8375ecff",
+          "begrip": "gebieden",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "omgeving",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:41:48.502458+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:24:23.286762+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik wil even duidelijk zijn. kopstuk Workspace. met daaronder: Gesprekken,  Agenda, Dagboek, Notities & Taken, Roadmap. Hier waar ik nu met je praat is in gesprekken. Dus wat jij zegt klopt niet.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:24:21.756763+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:24:21.858970+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:24:21.865255+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:24:23.629407+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:24:23.636153+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-59f119ba",
+      "begrip": "masterkey",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een masterkey is een hoofdsleutel die toegang geeft tot meerdere systemen, functies of omgevingen.",
+        "laag2": "Een masterkey dient als centrale identificatie of autorisatie waarmee meerdere afzonderlijke toegangen kunnen worden beheerd of ontgrendeld.",
+        "laag3": "In digitale systemen is een masterkey een unieke sleutel of combinatie die gebruikt wordt om identiteit vast te stellen of toegang te verlenen tot meerdere onderdelen. Binnen Spark kan een masterkey dienen als persoonlijke herkenning van de eigenaar, zonder dat afzonderlijke inloggegevens telkens opnieuw nodig zijn.",
+        "laag4": "Een masterkey vormt de hoogste vertrouwenslaag binnen een systeem. In plaats van meerdere losse sleutels beheert één centrale sleutel de toegang tot verschillende onderdelen. Hierdoor ontstaat een veilige en consistente manier om identiteit, rechten en autorisatie te koppelen, mits de sleutel goed beschermd blijft."
+      },
+      "ws5": {
+        "wie": "Gebruikers, beheerders of systemen met centrale bevoegdheden.",
+        "wat": "Een hoofdsleutel voor identificatie of toegang tot meerdere onderdelen.",
+        "wanneer": "Wanneer één centrale sleutel meerdere toegangen of rechten beheert.",
+        "waar": "Digitale systemen, beveiligingsomgevingen en softwareplatformen.",
+        "waarom": "Om identiteit en autorisatie centraal, veilig en efficiënt te beheren.",
+        "hoe": "Door een unieke sleutel, code of cryptografische identificatie te gebruiken die gekoppeld is aan meerdere systemen."
+      },
+      "tags": [
+        "masterkey",
+        "hoofdsleutel",
+        "sleutel",
+        "identiteit",
+        "authenticatie",
+        "autorisatie",
+        "beveiliging",
+        "toegang",
+        "rechten",
+        "systeem",
+        "verificatie",
+        "koppeling"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-96b52c55",
+          "begrip": "Toegang verleend",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "authenticatie",
+            "autorisatie",
+            "beveiliging",
+            "rechten",
+            "systeem"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a374c38c",
+          "begrip": "Toegang geweigerd",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "rechten",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-37b3a401",
+          "begrip": "login",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "identiteit",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-dc466fa0",
+          "begrip": "Trusted Hosts",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "authenticatie",
+            "autorisatie",
+            "beveiliging",
+            "systeem",
+            "toegang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34c49def",
+          "begrip": "account",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "identiteit",
+            "toegang"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:43:10.194966+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:31:08.767821+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik ben Willem Spakman Masterkey: samen zijn. Dit is mijn test account. Maak hier anders een bug report van.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:31:07.327551+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:31:07.428892+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:31:07.435144+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:31:09.103838+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:31:09.110585+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e288cd78",
+      "begrip": "kader",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een kader is een afbakening of structuur waarbinnen iets plaatsvindt of wordt beoordeeld.",
+        "laag2": "Een kader geeft richting, grenzen en houvast bij denken, handelen of beslissen.",
+        "laag3": "Een kader kan bestaan uit regels, afspraken, principes, voorwaarden of een denkwijze. Het helpt om situaties te begrijpen, keuzes te maken en onderwerpen op een consistente manier te benaderen.",
+        "laag4": "Een kader vormt de basis waarbinnen vrijheid en keuzes bestaan. Door duidelijke grenzen en uitgangspunten te bepalen, ontstaat structuur, voorspelbaarheid en ruimte voor verantwoord handelen zonder dat elke situatie opnieuw vanaf nul hoeft te worden beoordeeld."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties, systemen en samenwerkingsverbanden.",
+        "wat": "Een afbakening of structuur voor denken, beoordelen of handelen.",
+        "wanneer": "Wanneer richting, regels of uitgangspunten nodig zijn.",
+        "waar": "In beleid, onderwijs, software, organisaties, gesprekken en besluitvorming.",
+        "waarom": "Om overzicht, consistentie en duidelijkheid te creëren.",
+        "hoe": "Door afspraken, principes, regels of voorwaarden vast te leggen."
+      },
+      "tags": [
+        "kader",
+        "structuur",
+        "afbakening",
+        "richtlijn",
+        "uitgangspunt",
+        "grenzen",
+        "context",
+        "regels",
+        "beleid",
+        "organisatie",
+        "besluitvorming",
+        "overzicht"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ab5ea394",
+          "begrip": "ordening",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "context",
+            "organisatie",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-9e2ba57c",
+          "begrip": "bestuur",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "beleid",
+            "besluitvorming",
+            "organisatie",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8d16eb91",
+          "begrip": "orde",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "organisatie",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-193c2f87",
+          "begrip": "moet even na denken hoor. kijken wat is wat.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "overzicht",
+            "structuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-95113b4f",
+          "begrip": "Overzicht",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "organisatie",
+            "overzicht",
+            "structuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:04:55.180428+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:36:46.831844+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:36:45.275704+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:36:45.377404+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:36:45.383750+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:36:47.175270+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:36:47.181772+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e6d1eb8e",
+      "begrip": "archeologie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Archeologie is de wetenschap die oude culturen en samenlevingen onderzoekt aan de hand van materiële overblijfselen.",
+        "laag2": "Archeologen bestuderen voorwerpen, gebouwen, graven en andere resten uit het verleden om te begrijpen hoe mensen vroeger leefden.",
+        "laag3": "Archeologie onderzoekt menselijke geschiedenis door vondsten zoals gereedschap, aardewerk, botten, munten en ruïnes te analyseren. Door opgravingen en onderzoek worden kennis en inzichten verkregen over vroegere beschavingen, leefwijzen en gebeurtenissen.",
+        "laag4": "Archeologie verbindt materiële sporen uit het verleden met de geschiedenis van de mens. Door zorgvuldig onderzoek en interpretatie helpt het vakgebied om verdwenen culturen, maatschappelijke ontwikkelingen en menselijke keuzes beter te begrijpen en te bewaren voor toekomstige generaties."
+      },
+      "ws5": {
+        "wie": "Archeologen, onderzoekers, historici en erfgoedorganisaties.",
+        "wat": "De wetenschap die het menselijk verleden onderzoekt via materiële overblijfselen.",
+        "wanneer": "Bij onderzoek naar vroegere perioden en beschavingen.",
+        "waar": "Op opgravingslocaties, historische plaatsen, musea en onderzoeksinstellingen wereldwijd.",
+        "waarom": "Om kennis te verkrijgen over hoe mensen vroeger leefden en hoe samenlevingen zich ontwikkelden.",
+        "hoe": "Door opgravingen, analyse van vondsten, dateringsmethoden en wetenschappelijk onderzoek."
+      },
+      "tags": [
+        "archeologie",
+        "archeoloog",
+        "geschiedenis",
+        "opgraving",
+        "erfgoed",
+        "cultuur",
+        "oudheid",
+        "vondsten",
+        "beschaving",
+        "onderzoek",
+        "verleden",
+        "wetenschap"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-ec657949",
+          "begrip": "Atlantis",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "archeologie",
+            "beschaving",
+            "cultuur",
+            "geschiedenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b56598d1",
+          "begrip": "Artefacten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "archeologie",
+            "cultuur",
+            "geschiedenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-abc67304",
+          "begrip": "herkomst",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "geschiedenis",
+            "verleden"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ea8a899d",
+          "begrip": "De Bruin",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "erfgoed",
+            "geschiedenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a85de952",
+          "begrip": "Tradities",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "cultuur",
+            "erfgoed",
+            "geschiedenis"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:19:00.153213+00:00",
+        "vorige_versie_v1": "kb-skel-e6d1eb8e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:09.543875+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:18:57.787897+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:18:57.805211+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:19:01.923714+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:19:01.976460+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:18:57.348652+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5cd96c0e",
+      "begrip": "station",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een station is een vaste locatie waar mensen of goederen kunnen in-, uit- of overstappen op vervoer.",
+        "laag2": "Een station vormt een knooppunt waar verschillende vervoersmiddelen of routes samenkomen en reizigers kunnen vertrekken, aankomen of overstappen.",
+        "laag3": "Stations worden gebruikt voor vervoer per trein, metro, bus, tram of andere transportmiddelen. Ze bieden voorzieningen zoals perrons, wachtruimtes, informatie en kaartverkoop om reizen veilig en georganiseerd te laten verlopen.",
+        "laag4": "Een station is meer dan een halte; het is een verbindingspunt binnen een vervoersnetwerk. Het brengt mensen, goederen en routes samen en maakt verplaatsing tussen verschillende bestemmingen efficiënt mogelijk."
+      },
+      "ws5": {
+        "wie": "Reizigers, vervoerders en medewerkers.",
+        "wat": "Een locatie waar vervoer aankomt, vertrekt of overstapt.",
+        "wanneer": "Tijdens het begin, einde of overstappen van een reis.",
+        "waar": "Bij spoorwegen, metro's, trams, bussen en andere vervoersnetwerken.",
+        "waarom": "Om vervoer en reizigers veilig en georganiseerd te laten samenkomen.",
+        "hoe": "Door perrons, haltes, voorzieningen en verbindingen tussen vervoersmiddelen aan te bieden."
+      },
+      "tags": [
+        "station",
+        "vervoer",
+        "trein",
+        "bus",
+        "metro",
+        "tram",
+        "halte",
+        "perron",
+        "reiziger",
+        "overstappen",
+        "transport",
+        "knooppunt"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-723d27fc",
+          "begrip": "Transportmiddel",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "transport",
+            "vervoer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f3c374b3",
+          "begrip": "Locomotief",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "transport",
+            "trein"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a28a4d15",
+          "begrip": "Wagons",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "transport",
+            "trein"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4a0b39e0",
+          "begrip": "Trein",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "transport",
+            "vervoer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-62b71eda",
+          "begrip": "Auto",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "transport",
+            "vervoer"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T18:04:53.594455+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:23:46.452949+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Goei een weer station kader met tijd dag regen zon maken. zodat het klopt wat jij over het dashboard zegt.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:17:10.401091+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:17:10.936126+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:17:11.176617+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:23:48.116870+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:23:48.143847+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-a31ac55a",
+      "begrip": "courgette",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een courgette is een langwerpige groente die behoort tot de komkommerfamilie.",
+        "laag2": "Courgettes worden gegeten als groente en kunnen op verschillende manieren worden bereid, zoals koken, bakken, grillen of vullen.",
+        "laag3": "De courgette is de onrijpe vrucht van een plant uit de pompoenfamilie. Ze heeft een milde smaak en bevat veel water, vezels, vitaminen en mineralen. Courgettes worden wereldwijd gebruikt in uiteenlopende gerechten.",
+        "laag4": "De courgette is een veelzijdige groente die door haar neutrale smaak gemakkelijk te combineren is met andere ingrediënten. Door haar voedingswaarde en brede toepasbaarheid speelt zij een belangrijke rol in een gezonde en gevarieerde voeding."
+      },
+      "ws5": {
+        "wie": "Mensen die groenten verbouwen, bereiden of eten.",
+        "wat": "Een eetbare groente uit de pompoenfamilie.",
+        "wanneer": "Als ingrediënt in maaltijden of als bijgerecht.",
+        "waar": "In moestuinen, landbouw, supermarkten en keukens wereldwijd.",
+        "waarom": "Omdat de courgette voedzaam, veelzijdig en geschikt is voor veel gerechten.",
+        "hoe": "Door de plant te telen, de vrucht te oogsten en te bereiden door bijvoorbeeld te koken, bakken, grillen of vullen."
+      },
+      "tags": [
+        "courgette",
+        "groente",
+        "voeding",
+        "groenteplant",
+        "pompoenfamilie",
+        "gezond",
+        "koken",
+        "bakken",
+        "grillen",
+        "moestuin",
+        "supermarkt",
+        "maaltijd"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "koken",
+            "maaltijd",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e8a9ed",
+          "begrip": "recept",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "koken",
+            "maaltijd",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c85f48ba",
+          "begrip": "Grillplaat",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "grillen",
+            "groente",
+            "koken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-360da45e",
+          "begrip": "Koken",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "koken",
+            "maaltijd",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0415d2a1",
+          "begrip": "Olie (plantaardig)",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bakken",
+            "koken",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Gerben",
+        "aangemaakt_op": "2026-07-08T18:31:19.683070+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:45:52.814068+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "iets simpels kip met courgette en paprika",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:45:44.251986+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:45:44.797263+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:45:44.842702+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:45:54.634556+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:45:54.685247+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-13a5aaab",
+      "begrip": "simpels",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Simpel betekent eenvoudig en gemakkelijk te begrijpen of uit te voeren.",
+        "laag2": "Iets dat simpel is, bevat weinig ingewikkelde onderdelen of stappen en is daardoor overzichtelijk.",
+        "laag3": "Simpel beschrijft een situatie, voorwerp, uitleg of oplossing die zonder veel moeite kan worden begrepen of gebruikt. Simpel betekent niet automatisch minder goed; eenvoud kan juist een kracht zijn.",
+        "laag4": "Eenvoud helpt mensen om informatie sneller te begrijpen, fouten te voorkomen en efficiënter te handelen. Door complexe zaken terug te brengen tot de kern ontstaat overzicht en toegankelijkheid."
+      },
+      "ws5": {
+        "wie": "Iedereen die informatie gebruikt of een taak uitvoert.",
+        "wat": "Een eigenschap die aangeeft dat iets eenvoudig is.",
+        "wanneer": "Wanneer iets weinig uitleg, stappen of complexiteit bevat.",
+        "waar": "In communicatie, ontwerpen, producten, software en het dagelijks leven.",
+        "waarom": "Om iets begrijpelijk, overzichtelijk en toegankelijk te maken.",
+        "hoe": "Door onnodige complexiteit weg te laten en de kern te behouden."
+      },
+      "tags": [
+        "simpel",
+        "eenvoudig",
+        "duidelijk",
+        "overzicht",
+        "begrijpelijk",
+        "helder",
+        "toegankelijk",
+        "eenvoud",
+        "basis",
+        "gebruiksvriendelijk",
+        "kern"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-72420e5a",
+          "begrip": "simpel",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "basis",
+            "begrijpelijk",
+            "duidelijk",
+            "eenvoud",
+            "eenvoudig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-65519728",
+          "begrip": "eenvoudig",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "begrijpelijk",
+            "duidelijk",
+            "eenvoudig",
+            "simpel",
+            "toegankelijk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b9a61f6b",
+          "begrip": "Dummies",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "basis",
+            "begrijpelijk",
+            "eenvoudig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-95726a38",
+          "begrip": "Eenvoud",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "eenvoud",
+            "overzicht",
+            "simpel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72ccf9a5",
+          "begrip": "Samenvattend",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "kern",
+            "overzicht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Gerben",
+        "aangemaakt_op": "2026-07-08T18:31:17.149703+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T18:50:07.794950+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "iets simpels kip met courgette en paprika",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T18:49:06.039826+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:49:06.556389+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:49:06.574088+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T18:50:09.444240+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T18:50:09.476263+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-5b2a2c13",
+      "begrip": "gekookt",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Gekookt betekent dat voedsel is bereid door het te koken of te verhitten.",
+        "laag2": "Gekookt geeft aan dat een gerecht of ingrediënt al is bereid en klaar is om te eten of verder te verwerken.",
+        "laag3": "Gekookt is de voltooide vorm van het werkwoord koken. Het kan verwijzen naar voedsel dat in kokend water is bereid, maar ook naar een maaltijd die door verschillende kooktechnieken is klaargemaakt.",
+        "laag4": "Gekookt beschrijft het resultaat van een bereidingsproces. Door warmte te gebruiken veranderen smaak, structuur en voedselveiligheid, waardoor ingrediënten geschikt worden om te eten."
+      },
+      "ws5": {
+        "wie": "Personen die voedsel bereiden.",
+        "wat": "Het resultaat van het bereiden van voedsel door koken of verhitting.",
+        "wanneer": "Nadat een gerecht of ingrediënt is bereid.",
+        "waar": "In keukens, restaurants en andere kookomgevingen.",
+        "waarom": "Om voedsel eetbaar, veilig en smakelijk te maken.",
+        "hoe": "Door ingrediënten te verhitten met water of een andere kooktechniek."
+      },
+      "tags": [
+        "gekookt",
+        "koken",
+        "bereid",
+        "maaltijd",
+        "voedsel",
+        "verhitten",
+        "keuken",
+        "gerecht",
+        "ingrediënten",
+        "bereiden",
+        "eten"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bereiden",
+            "eten",
+            "gerecht",
+            "ingrediënten",
+            "keuken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "bereiden",
+            "eten",
+            "ingrediënten",
+            "keuken",
+            "maaltijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-78e8a9ed",
+          "begrip": "recept",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bereiden",
+            "gerecht",
+            "ingrediënten",
+            "koken",
+            "maaltijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-360da45e",
+          "begrip": "Koken",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "bereiden",
+            "eten",
+            "ingrediënten",
+            "keuken",
+            "koken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-11bfe35b",
+          "begrip": "pannekoek",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eten",
+            "gerecht",
+            "maaltijd",
+            "voedsel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Gerben",
+        "aangemaakt_op": "2026-07-08T18:30:42.743597+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T19:11:21.046006+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "ik heb boodschappen gedaan, gekookt en een rondje gefietst",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T19:11:05.758283+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T19:11:06.261129+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T19:11:06.284323+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T19:11:22.903927+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T19:11:22.943854+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-89dd4fa3",
+      "begrip": "Willem",
+      "lade": "weten",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Willem is een mannelijke voornaam van Germaanse oorsprong.",
+        "laag2": "De naam Willem betekent \"wilskrachtige beschermer\" of \"vastberaden beschermer\" en wordt al eeuwenlang gebruikt in Nederland en andere Europese landen.",
+        "laag3": "Willem is afgeleid van de Germaanse naam Wilhelm, opgebouwd uit de woorden wil (wil, verlangen, vastberadenheid) en helm (bescherming, helm). De naam is bekend door historische figuren, waaronder verschillende koningen, graven en leiders. In andere talen bestaan varianten zoals William, Wilhelm, Guillaume en Guillermo.",
+        "laag4": "De naam Willem draagt een lange historische en culturele traditie met zich mee. Door de betekenis van wilskracht en bescherming wordt de naam vaak geassocieerd met leiderschap, verantwoordelijkheid en standvastigheid. In de Germaanse naamtraditie werden namen vaak samengesteld uit woorden die gewenste eigenschappen of idealen uitdrukten."
+      },
+      "ws5": {
+        "wie": "Mannen met de voornaam Willem.",
+        "wat": "Een mannelijke voornaam van Germaanse oorsprong.",
+        "wanneer": "Sinds de vroege middeleeuwen tot vandaag.",
+        "waar": "Vooral in Nederland, België en andere Europese landen.",
+        "waarom": "Als persoonsnaam met een historische betekenis van wilskracht en bescherming.",
+        "hoe": "Afgeleid van de Germaanse naam Wilhelm, samengesteld uit wil en helm."
+      },
+      "tags": [
+        "Willem",
+        "voornaam",
+        "naam",
+        "Germaans",
+        "Wilhelm",
+        "William",
+        "betekenis",
+        "wilskracht",
+        "bescherming",
+        "geschiedenis",
+        "persoonsnaam",
+        "etymologie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-659ac2e1",
+          "begrip": "etymologie",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "etymologie",
+            "germaans",
+            "geschiedenis"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-266152ea",
+          "begrip": "Joy",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "betekenis",
+            "naam",
+            "persoonsnaam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b7ffd5a0",
+          "begrip": "lotte",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "betekenis",
+            "naam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-465561f8",
+          "begrip": "klaas",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "betekenis",
+            "naam",
+            "voornaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d8beecf5",
+          "begrip": "Riet",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "betekenis",
+            "naam",
+            "voornaam"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:43:08.682274+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T19:17:39.845742+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik ben Willem Spakman Masterkey: samen zijn. Dit is mijn test account. Maak hier anders een bug report van.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T19:17:33.319592+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T19:17:33.917335+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T19:17:33.955689+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T19:17:41.981427+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T19:17:42.001447+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
             }
           }
         ]

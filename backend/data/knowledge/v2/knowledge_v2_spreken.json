@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 551,
+    "card_count": 552,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-29T19:56:27.727980+00:00",
+    "last_updated": "2026-07-08T16:26:23.326251+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72822,6 +72822,154 @@
             "result": {
               "n_found": 5,
               "top_overlap": 9
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-969ab090",
+      "begrip": "welkomsbericht",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een welkomstbericht is een boodschap waarmee iemand welkom wordt geheten.",
+        "laag2": "Een welkomstbericht begroet een nieuwe gebruiker, bezoeker of deelnemer en geeft vaak een eerste indruk of korte uitleg.",
+        "laag3": "Een welkomstbericht wordt gebruikt bij de start van een gesprek, dienst, website, applicatie of gemeenschap. Het kan informatie geven over wat iemand kan verwachten en helpt om een vriendelijke en duidelijke eerste ervaring te creëren.",
+        "laag4": "Een welkomstbericht vormt vaak het begin van een relatie tussen een persoon en een systeem, organisatie of gemeenschap. Door een duidelijke en gastvrije introductie ontstaat vertrouwen, herkenning en richting voor het verdere gebruik of contact."
+      },
+      "ws5": {
+        "wie": "Organisaties, systemen, bedrijven of personen.",
+        "wat": "Een boodschap waarmee iemand welkom wordt geheten.",
+        "wanneer": "Bij de eerste kennismaking of het eerste gebruik van een dienst of omgeving.",
+        "waar": "Websites, apps, e-mail, chats, communities, games en fysieke locaties.",
+        "waarom": "Om bezoekers welkom te heten, een goede eerste indruk te geven en informatie te verstrekken.",
+        "hoe": "Door middel van tekst, spraak, beeld of een combinatie daarvan."
+      },
+      "tags": [
+        "welkomstbericht",
+        "welkom",
+        "begroeting",
+        "introductie",
+        "communicatie",
+        "eerste indruk",
+        "gebruiker",
+        "onboarding",
+        "ontvangst",
+        "bericht",
+        "informatie",
+        "start"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-cca12a6b",
+          "begrip": "welkom",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "begroeting",
+            "communicatie",
+            "ontvangst",
+            "welkom"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e442a120",
+          "begrip": "inbox",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "gebruiker",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-be4ef430",
+          "begrip": "Hallo Spark",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "begroeting",
+            "communicatie",
+            "gebruiker"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96868b29",
+          "begrip": "tekst",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "bericht",
+            "communicatie",
+            "informatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1e7d5301",
+          "begrip": "begroeten",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "begroeting",
+            "communicatie",
+            "welkom"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "Roadkill",
+        "aangemaakt_op": "2026-07-07T17:51:16.498918+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-08T16:26:23.326233+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ahh ik zie wat er fout is. Je welkomsbericht is fout ingesteld. Je zou moeten zeggen Nu we in gesprek zijn ipv   nu je naar het dashboard kijkt. En daarna zou je kunnen zeggen je zou op je dashboard k",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-08T16:26:22.146056+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:26:22.246972+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:26:22.253628+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-08T16:26:23.527803+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-08T16:26:23.534291+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
             }
           }
         ]

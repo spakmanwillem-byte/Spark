@@ -70,6 +70,9 @@ _WORD_RE = re.compile(r"\b([a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ0-9\-]{1,29})\b")
 
 def _load_recent_user_messages(user_id: str, max_turns: int = 500) -> List[Dict[str, Any]]:
     """Lees laatste N turns uit chat/logs/user-XXX.json. Return [{text, timestamp}]."""
+    # v8_security_001 — path-traversal guard: alleen alfanumeriek + koppelteken toegestaan
+    if not re.match(r"^[a-zA-Z0-9_\-]{1,64}$", user_id or ""):
+        return []
     path = CHAT_LOGS_DIR / f"{user_id}.json"
     d = load_json(path)
     if not d:

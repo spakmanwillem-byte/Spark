@@ -1,35 +1,48 @@
 # Spark Core 2.0 — PRD
 
 
-## Sessie 42 (2026-07-09 laat) — Trader definitief + publieke uitleg-JSON + chat-intents + semantic strategies
+## Sessie 42 (2026-07-09 laat) — Trader definitief + Batch 1 Spark Core
 
 ### Probleem
-1. Trader-loopbugs, ghost pots, misleidende 100% win-rate en gebrek aan transparante uitleg voor bezoekers.
-2. Bot alleen bedienbaar via UI-knoppen — geen chat-commando's.
-3. Strategieën genoemd naar letters (A/D/E) — over jaren onbegrijpelijk, niet eigenschap-gebaseerd, geen confidence-score.
+1. Trader loop-bugs, ghost pots, misleidende 100% win-rate, geen chat-commando's, geen transparante uitleg
+2. Strategieën genoemd naar letters (A/D/E) — onbegrijpelijk, geen confidence-score
+3. Willems Batch 1 wensen: tab-context, chat→KB, strategie synthesizer, Odroid portability, refactor monitor.py
 
 ### Oplossing
-- **48u loss-cut + event-auto-pauze + honest-PnL** — LIVE in `spark_trader.json` + `monitor.py` + `/api/trade/honest-pnl/{user_id}`
-- **Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` (12 secties, alle backtest-resultaten, privacy) + endpoint `GET /api/trade/explained`
-- **Trader-intents fast-path** — `backend/modules/trade/trader_intents.py` met 8 intents. Hook in `response_composer.py` vóór action_intents. Regex-based NL matching.
-- **Semantic strategies (v8_strategy_semantic_001)** — strategieën hernoemd van letters naar `mean_reversion_bollinger` / **`gap_momentum_50` (actief)** / `extreme_oversold`. Elke strategie heeft nu: `display_name`, `properties[]`, `confidence.score + breakdown`, `hypothese_lineage` (H → backtest → resultaat → conclusie → volgende H), `spark_alignment` (waarom/regels/data/hypothese/zekerheid).
-- **Confidence-endpoint** `GET /api/trade/strategy/confidence` — live berekening op basis van blueprint + huidige data (backtest_pass + random + bear + honest_pnl + live_track).
-- **Merge productie chat-data** — 57 nieuwe turns (20 user-001 conversations + 36 deep-user-001 messages + 1 boekhouder-msg) veilig gemerged.
+- Trader kern: 48u loss-cut, event-auto-pauze, honest-PnL endpoint
+- `GET /api/trade/explained` (12 secties, alle backtest-data) voor privacyverklaring
+- 8 trader-intents fast-path in `modules/trade/trader_intents.py`
+- Semantic strategies (hernoemd + properties + confidence + hypothese_lineage + spark_alignment)
+- `GET /api/trade/strategy/confidence` — live scoring
+- Batch 1:
+  - **Trader-glow** — nav-tab pulseert bij trader-intent buiten Trader-tab
+  - **Strategie Synthesizer** — `POST /api/trade/strategy/synthesize` + property catalog + conflict-detectie
+  - **Chat → KB-suggesties** — `GET /api/kb/v2/suggest-from-chat/{user_id}` + accept-endpoint
+  - **Odroid portability** — install.sh + run.sh + PORTABILITY.md + SPARK_DATA_DIR
+  - **Security** — path-traversal guard in chat_analyzer
 
 ### Verificatie
-- 19/19 unit-tests trader_intents pass
-- E2E `POST /api/spark/compose` → `used_model=trader_intents`
-- `GET /api/trade/strategy/confidence` → 3 strategieën met stored+computed scores (gap_momentum_50: 82 stored / 80 computed)
-- `GET /api/trade/explained` sectie 4 toont `Gap Momentum 50` + 8 eigenschappen + confidence 82
+- Iter46 testing_agent: **19/19 backend tests PASS** (100%), geen regressies
+- E2E chat: "hoe staat mijn bot" → intent=trader_status, "leg de trader uit" → intent=trader_explain met "Gap Momentum 50", "wat vind je van muziek" → LLM-fallback werkt
+- Regressie-guard: `/app/backend/tests/test_iter46_sparkcore_v2_features.py`
 
-### Bestanden
-- NEW `backend/modules/trade/trader_intents.py` (277 regels)
-- NEW `backend/data/trade/spark_trader_public.json` (12-sectie public JSON)
-- EDIT `backend/modules/trade/routes.py` — endpoints `GET /explained` + `GET /strategy/confidence`
+### NIET afgerond (bewust uitgesteld)
+- **Refactor monitor.py** (1831 regels) — cyclische dependencies, risk zonder 30+ credits + testing_agent budget. P1 hoogste prio volgende sessie.
+
+### Bestanden gewijzigd/nieuw
+- NEW `backend/modules/trade/trader_intents.py`
+- NEW `backend/data/trade/spark_trader_public.json`
+- NEW `backend/modules/kb_v2/chat_analyzer.py`
+- NEW `install.sh` + `run.sh` + `PORTABILITY.md`
+- NEW `backend/tests/test_iter46_sparkcore_v2_features.py` (regressie-guard)
+- EDIT `backend/modules/trade/routes.py` — endpoints /explained, /confidence, /synthesize, /properties
 - EDIT `backend/modules/chat/response_composer.py` — trader-intents hook
-- EDIT `backend/modules/trade/blueprints/spark_trader.json` — semantic strategies met properties/confidence/lineage/alignment
-- EDIT `backend/data/knowledge/v2/knowledge_v2_weten.json` — Spark Trader KB-kaart alle 4 lagen verrijkt
-- EDIT `memory/ROADMAP.md` — Sessie 40 entry uitgebreid
+- EDIT `backend/modules/kb_v2/routes.py` — suggest-from-chat + suggest-accept
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — semantic strategies structure
+- EDIT `backend/modules/scheduler/__init__.py` — SPARK_DATA_DIR portability
+- EDIT `backend/data/knowledge/v2/knowledge_v2_weten.json` — Spark Trader KB-kaart 4 lagen verrijkt
+- EDIT `frontend/src/components/workspace/GesprekkenPage.js` — trader-intent glow dispatch
+- EDIT `memory/ROADMAP.md` + `memory/PRD.md`
 
 ---
 

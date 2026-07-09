@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2106,
+    "card_count": 2107,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T23:10:47.302345+00:00",
+    "last_updated": "2026-07-09T23:13:10.022956+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -280006,6 +280006,165 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T23:10:43.564390+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-937ebd35",
+      "begrip": "neerslag",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Neerslag is water dat vanuit de atmosfeer op de aarde terechtkomt.",
+        "laag2": "Neerslag ontstaat wanneer waterdamp in de lucht condenseert en als regen, sneeuw, hagel of ijzel naar beneden valt.",
+        "laag3": "Neerslag maakt deel uit van de waterkringloop. Water verdampt uit zeeën, rivieren en planten, vormt wolken en valt uiteindelijk weer terug op de aarde. De hoeveelheid en vorm van de neerslag worden bepaald door temperatuur, luchtvochtigheid en weersomstandigheden.",
+        "laag4": "Neerslag is essentieel voor het leven op aarde. Het vult rivieren, meren en grondwater aan en voorziet planten en dieren van water. Te weinig neerslag kan leiden tot droogte, terwijl te veel neerslag overstromingen en wateroverlast kan veroorzaken. Meteorologen meten neerslag meestal in millimeters."
+      },
+      "ws5": {
+        "wie": "De atmosfeer, wolken en weersystemen.",
+        "wat": "Water dat vanuit de lucht op de aarde valt.",
+        "wanneer": "Wanneer waterdamp condenseert en zwaar genoeg wordt om te vallen.",
+        "waar": "Wereldwijd, overal waar weersystemen voorkomen.",
+        "waarom": "Als onderdeel van de natuurlijke waterkringloop.",
+        "hoe": "Door condensatie van waterdamp tot druppels of ijskristallen die als regen, sneeuw, hagel of ijzel neerkomen."
+      },
+      "tags": [
+        "neerslag",
+        "regen",
+        "sneeuw",
+        "hagel",
+        "ijzel",
+        "waterkringloop",
+        "weer",
+        "klimaat",
+        "wolken",
+        "meteorologie",
+        "water"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-5cd3dd05",
+          "begrip": "wolken",
+          "lade": "weten",
+          "overlap": 9,
+          "shared_tags": [
+            "hagel",
+            "klimaat",
+            "neerslag",
+            "regen",
+            "sneeuw"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3a1dc391",
+          "begrip": "Regen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "regen",
+            "water",
+            "waterkringloop",
+            "weer",
+            "wolken"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6a846774",
+          "begrip": "Sneeuw",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "neerslag",
+            "sneeuw",
+            "waterkringloop",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a5310b4d",
+          "begrip": "meteorologisch",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "klimaat",
+            "meteorologie",
+            "neerslag",
+            "weer"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-f6695ca6",
+          "begrip": "waterdamp",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "klimaat",
+            "water",
+            "waterkringloop",
+            "wolken"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:13:10.022937+00:00",
+        "vorige_versie_v1": "kb-skel-937ebd35",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.279954+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:13:08.202680+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:13:08.208929+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:13:10.367233+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:13:10.373516+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:13:08.098532+00:00"
       },
       "media": {
         "voice_url": null,

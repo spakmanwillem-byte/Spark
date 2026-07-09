@@ -10,19 +10,24 @@
 - **Confidence-endpoint** `GET /api/trade/strategy/confidence` — live berekening
 - **Chat merge** — 57 turns uit prod-zip veilig gemerged
 
-### 🎯 Batch 1 Spark Core (deze sessie)
+### 🎯 Batch 1 Spark Core (deze sessie) — 5/5 afgerond
 - **Trader-glow** — `spark:nav-glow` event bij trader-intent als user niet op Trader-tab (integratie in GesprekkenPage.js)
-- **Strategie Synthesizer** — `POST /api/trade/strategy/synthesize` + `GET /api/trade/strategy/properties` (13-item property catalog, conflict-detectie, persist als draft in blueprint)
+- **Strategie Synthesizer** — `POST /api/trade/strategy/synthesize` + `GET /api/trade/strategy/properties` (13-item property catalog, conflict-detectie)
 - **Chat → KB-suggesties** — `GET /api/kb/v2/suggest-from-chat/{user_id}` + `POST /api/kb/v2/suggest-accept` (word-freq + stopwoorden + KB-known filter)
-- **Odroid portability** — `install.sh` + `run.sh` + `PORTABILITY.md` + `SPARK_DATA_DIR` env-var in scheduler (fallback naar relatief pad)
-- **Security fix** — path-traversal guard in chat_analyzer (regex validatie op user_id)
+- **Odroid portability** — `install.sh` + `run.sh` + `PORTABILITY.md` + `SPARK_DATA_DIR` env-var in scheduler
+- **Security fix** — path-traversal guard in chat_analyzer (regex `^[a-zA-Z0-9_\-]{1,64}$`)
+- **Refactor monitor.py** (v8_refactor_001) — 1831 → 1411 regels (23% reductie):
+  - Nieuwe module `strategy_decision.py` — `_simple_decision`, `_gap_breakout_check`, `_detect_daily_drop`, `_load_trader_blueprint`, `BITVAVO_TAKER_FEE`
+  - Nieuwe module `exchange_data.py` — `fetch_candles`, `fetch_tickers`, `get_market_*`, caches, constanten
+  - `monitor.py` behoudt als facade — alle `from .monitor import X` blijft werken
+  - MonitorService class + registry + order execution BLIJVEN in monitor.py (te complex om nu te verhuizen, risk-averse keuze)
 
 ### ✅ Test-status
-- **Iteratie 46: 19/19 backend tests PASS**, geen regressies
-- Regressie-guard file: `/app/backend/tests/test_iter46_sparkcore_v2_features.py`
+- Iteratie 46 + 47: **39/39 backend tests PASS**, geen regressies
+- Test-files: `test_iter46_sparkcore_v2_features.py` + `test_iter47_refactor_regression.py`
 
 ### 🔴 NIET afgerond
-- **Refactor `trade/monitor.py`** (1831 regels) — cyclische state-dependencies. Vereist testing_agent + eigenstandige sessie met ~30 credits. Verplaatst naar P1 hoogste prio volgende sessie.
+- **Order execution + registry in monitor.py**: ~500 regels order-execution + ~240 regels registry-code blijven in monitor.py. Deze zijn te complex om nu veilig te verhuizen (state-touching, SETTINGS_DIR, trace_call decorator). Verplaatst naar volgende sessie.
 
 ### 🟡 Code-review actie-items (iter46) — P2
 - `modules/trade/routes.py` 2039 regels → split naar `routes_strategy.py` etc.

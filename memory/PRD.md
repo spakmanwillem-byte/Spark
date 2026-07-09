@@ -27,7 +27,14 @@
 - Regressie-guard: `/app/backend/tests/test_iter46_sparkcore_v2_features.py`
 
 ### NIET afgerond (bewust uitgesteld)
-- **Refactor monitor.py** (1831 regels) — cyclische dependencies, risk zonder 30+ credits + testing_agent budget. P1 hoogste prio volgende sessie.
+- **Order execution + registry** (~750 regels) blijft in monitor.py — te complex om nu safe te verhuizen. Volgt in volgende sessie na Batch 2 (financiële laag).
+
+### Refactor v8_refactor_001 details
+- monitor.py: 1831 → 1411 regels (23% reductie)
+- Nieuwe module `strategy_decision.py`: decision engine + gap-breakout + drop-detection + blueprint-loader (~250 regels)
+- Nieuwe module `exchange_data.py`: candles + tickers + market metadata + caches (~200 regels)
+- monitor.py facade: re-exports voor alle publieke symbols zodat `from .monitor import X` blijft werken (backtest-scripts, server.py, shop, trade routes)
+- **39/39 backend tests PASS** (19 iter46 + 20 iter47 regressie-tests)
 
 ### Bestanden gewijzigd/nieuw
 - NEW `backend/modules/trade/trader_intents.py`

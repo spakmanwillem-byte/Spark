@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1120,
+    "card_count": 1121,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T20:57:38.671017+00:00",
+    "last_updated": "2026-07-09T21:14:05.958606+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -146614,6 +146614,165 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-00100f54",
+      "begrip": "archivering",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Archivering is het geordend bewaren van informatie zodat deze later kan worden teruggevonden.",
+        "laag2": "Archivering is het proces waarbij documenten, bestanden, foto's of andere gegevens worden opgeslagen en georganiseerd voor toekomstig gebruik.",
+        "laag3": "Archivering kan zowel fysiek als digitaal plaatsvinden. Door informatie systematisch te ordenen en te bewaren blijft kennis beschikbaar, ook na langere tijd. Een goede archivering maakt het mogelijk om gegevens snel terug te vinden en voorkomt verlies van belangrijke informatie.",
+        "laag4": "Archivering is een belangrijk onderdeel van kennisbeheer, administratie en geschiedenis. Organisaties en personen gebruiken archivering om informatie duurzaam te bewaren, verantwoording af te leggen en kennis over te dragen aan toekomstige generaties. Digitale archivering vraagt daarnaast aandacht voor bestandsformaten, back-ups en langdurige toegankelijkheid."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties en systemen die informatie beheren.",
+        "wat": "Het proces van het ordenen en bewaren van informatie.",
+        "wanneer": "Wanneer informatie voor later behouden moet blijven.",
+        "waar": "In archieven, computers, databases, cloudopslag en fysieke opslagplaatsen.",
+        "waarom": "Om informatie veilig te bewaren en later eenvoudig terug te vinden.",
+        "hoe": "Door gegevens te ordenen, te classificeren, op te slaan en te onderhouden."
+      },
+      "tags": [
+        "archivering",
+        "archief",
+        "bewaren",
+        "opslag",
+        "kennisbeheer",
+        "documentatie",
+        "administratie",
+        "ordenen",
+        "informatie",
+        "terugvinden",
+        "digitaal",
+        "fysiek"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-10d56dc7",
+          "begrip": "Verzamelaar",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "archief",
+            "bewaren",
+            "informatie",
+            "opslag",
+            "ordenen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-44f9b133",
+          "begrip": "bewaren",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "archivering",
+            "bewaren",
+            "informatie",
+            "opslag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3ad926c1",
+          "begrip": "archief",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "archief",
+            "bewaren",
+            "informatie",
+            "opslag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-f69a3ba0",
+          "begrip": "opslagruimte",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "archief",
+            "bewaren",
+            "informatie",
+            "opslag"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4b6d9e1e",
+          "begrip": "opgeslagen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "archief",
+            "bewaren",
+            "informatie",
+            "opslag"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:14:05.958589+00:00",
+        "vorige_versie_v1": "kb-skel-00100f54",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:35.305673+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:14:02.068732+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:14:02.075008+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:14:06.209700+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:14:06.215940+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:14:01.968705+00:00"
       },
       "media": {
         "voice_url": null,

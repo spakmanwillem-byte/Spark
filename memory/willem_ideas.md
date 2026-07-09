@@ -7,6 +7,21 @@
 
 ## 2026-07-09 — Sessie 46 (backtest-driven v8)
 
+### 🟡 Nieuwe hypothesen voor backtest v4 (Willems inzichten)
+**H1: Rebound-strategie** — na 5-10% drop volgt binnen 24-72u vaak een 2-3% herstel.
+- Toets: analyseer de 185 events uit v3-backtest. Wat deed de prijs 24/48/72u erna?
+- Als >70% herstelt met ≥2%: dan is huidige event-pauze verkeerd → BUY-tijdens-drop is beter
+- Anders: pauze-mode blijft, want dead-cat-bounce is geen zekerheid
+- Nieuwe strategie: **Q. Bollinger + gap-body + rebound-BUY** (koopt juist bij event, target 2% winst)
+
+**H2: 2-day force-close met winst-drempel** — na 48u open → verkoop als netto ≥3%, anders trailing behouden.
+- Rationale: wachten op "meer" leidt vaak tot verlies (winst niet gepakt)
+- Nieuwe strategie: **P. D + 2day-timeout-3%**
+- Test tegen D op zelfde 6 markten × 6 maanden
+- Verwacht effect: iets minder gemiddelde winst per trade, maar meer trades = meer omzet
+
+**Leer-element**: alles wat we monitoren is data voor Spark's toekomstige zelf-inzicht. Elke event → koppelen aan open posities → PnL-effect logging. Later kan Spark zeggen "5% drop op SOL kost me gemiddeld €X".
+
 ### 🟢 Bevestigd: contrarian tests bewijzen ons systeem
 - **Random-buy verslaat D alleen bij 4/10 seeds**, mean €+2.43 (stddev €1.64) → D betrouwbaarder
 - **Buy-and-hold verliest €-26.72** → actief traden werkt echt

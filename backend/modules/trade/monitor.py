@@ -32,228 +32,46 @@ def _read_pot_count(user_id: str) -> int:
 
 
 # Bitvavo public API
-BITVAVO_URL = "https://api.bitvavo.com/v2"
+# v8_refactor_001 — Exchange data (candles, tickers, market metadata)
+# verhuisd naar exchange_data.py. Re-export voor externe consumers.
+from .exchange_data import (  # noqa: E402
+    BITVAVO_URL,
+    WATCHLIST_COINS,
+    WATCHLIST_NAMES,
+    KNOWN_MIN_QUOTE_FALLBACK,
+    _CANDLE_CACHE,
+    _INTERVAL_SECONDS,
+    _MARKETS_CACHE,
+    _MARKETS_TTL,
+    _TICKER_CACHE_ALL,
+    get_market_min_quote,
+    get_market_precision,
+    _round_amount_for_market,
+    _cache_ttl,
+    fetch_candles,
+    fetch_tickers,
+)
 
-# Watchlist coins
-WATCHLIST_COINS = ["BCH", "BTC", "ETH", "SOL", "ADA", "ATOM"]
-WATCHLIST_NAMES = {
-    "BCH": "Bitcoin Cash",
-    "BTC": "Bitcoin",
-    "ETH": "Ethereum",
-    "SOL": "Solana",
-    "ADA": "Cardano",
-    "ATOM": "Cosmos",
-}
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
-BLUEPRINT_FILE = Path(__file__).parent / "blueprints" / "spark_trader.json"
 
-_BLUEPRINT_CACHE: Dict = {"data": None, "mtime": 0}
-
-
-def _load_trader_blueprint() -> Dict:
-    """v8_blueprint_config_001 — laad spark_trader.json met simpele cache op mtime."""
-    try:
-        stat = BLUEPRINT_FILE.stat()
-        if _BLUEPRINT_CACHE["mtime"] != stat.st_mtime:
-            _BLUEPRINT_CACHE["data"] = json.loads(BLUEPRINT_FILE.read_text())
-            _BLUEPRINT_CACHE["mtime"] = stat.st_mtime
-        return _BLUEPRINT_CACHE["data"] or {}
-    except Exception:
-        return {}
+# v8_refactor_001 — strategy-decision-logica verhuisd naar strategy_decision.py
+# Re-export voor externe consumers die `from .monitor import X` doen.
+from .strategy_decision import (  # noqa: E402
+    BLUEPRINT_FILE,
+    BITVAVO_TAKER_FEE,
+    _BLUEPRINT_CACHE,
+    _load_trader_blueprint,
+    _simple_decision,
+    _gap_breakout_check,
+    _detect_daily_drop,
+)
 SETTINGS_DIR = DATA_DIR / "users"
 MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 
 # v4_multi_market_001: candle cache → vermijdt Bitvavo rate-limit bij multi-coin monitoring.
 # Per (market, interval, limit) bewaar laatst-opgehaalde candles + timestamp.
 # Cache wordt vers gehouden door candle-interval seconden te respecteren.
-_CANDLE_CACHE: Dict[str, Dict] = {}
-_INTERVAL_SECONDS = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400, "1d": 86400}
-
-# v6_trade_minorder_001: market-info cache (minimumOrderInQuoteAsset per markt).
-# Bitvavo /v2/markets endpoint geeft per markt: minimumOrderInBaseAsset + minimumOrderInQuoteAsset.
-# Geheugen-cache 1u; voorkomt SOL min-buy crashes door te lage amount_eur.
-_MARKETS_CACHE: Dict[str, Dict] = {"data": None, "ts": 0}
-_MARKETS_TTL = 3600
-# Bekende fallback-minimums (gebaseerd op Bitvavo public docs) bij offline / cache-miss.
-# Eenheid: EUR (minimumOrderInQuoteAsset).
-KNOWN_MIN_QUOTE_FALLBACK = {
-    "BTC-EUR": 5.0, "ETH-EUR": 5.0, "SOL-EUR": 5.0,
-    "BCH-EUR": 5.0, "ADA-EUR": 5.0, "XRP-EUR": 5.0,
-}
-
-
-def get_market_min_quote(market: str) -> float:
-    """v6_trade_minorder_001 — Returnt minimumOrderInQuoteAsset voor een markt.
-
-    1. Probeer cache. 2. Fetch /markets als verlopen. 3. Val terug op KNOWN_MIN_QUOTE_FALLBACK
-       of conservatieve 5.0 EUR.
-    """
-    now = time.time()
-    cached = _MARKETS_CACHE.get("data")
-    if not cached or (now - _MARKETS_CACHE.get("ts", 0)) > _MARKETS_TTL:
-        try:
-            resp = requests.get(f"{BITVAVO_URL}/markets", timeout=8)
-            if resp.status_code == 200:
-                arr = resp.json()
-                if isinstance(arr, list):
-                    cached = {m.get("market"): m for m in arr if m.get("market")}
-                    _MARKETS_CACHE["data"] = cached
-                    _MARKETS_CACHE["ts"] = now
-        except Exception as e:
-            logger.warning(f"markets fetch faalde: {e}")
-    if cached and market in cached:
-        info = cached[market]
-        try:
-            return float(info.get("minOrderInQuoteAsset") or info.get("minimumOrderInQuoteAsset") or KNOWN_MIN_QUOTE_FALLBACK.get(market, 5.0))
-        except Exception:
-            pass
-    return KNOWN_MIN_QUOTE_FALLBACK.get(market, 5.0)
-
-
-def get_market_precision(market: str) -> Dict[str, int]:
-    """v7_market_precision_001 — retourneer Bitvavo precisie-instellingen per markt.
-
-    Bitvavo weigert orders (errorCode 429) als amount te veel decimalen heeft t.o.v.
-    de markt-specifieke `amountPrecision`. Gebruikt cache van /markets endpoint.
-
-    Returns: {"amount": int, "price": int} (decimalen). Fallback: 8 dec (Bitvavo default).
-    """
-    now = time.time()
-    cached = _MARKETS_CACHE.get("data")
-    if not cached or (now - _MARKETS_CACHE.get("ts", 0)) > _MARKETS_TTL:
-        # Trigger cache via min_quote-lookup (herbruikt fetch)
-        get_market_min_quote(market)
-        cached = _MARKETS_CACHE.get("data")
-    if cached and market in cached:
-        info = cached[market]
-        try:
-            # Bitvavo doc: /markets returnt `pricePrecision` (int) en soms `minOrderInBaseAsset`.
-            # amountPrecision is `pricePrecision` gerelateerd; fallback op 8.
-            price_prec = int(info.get("pricePrecision") or 8)
-            # Voor amount gebruikt Bitvavo `pricePrecision - 2` of ergens gedocumenteerd
-            # als 8 max. Veilige default: 8. Overschrijven per markt indien nodig.
-            return {"amount": 8, "price": price_prec}
-        except Exception:
-            pass
-    return {"amount": 8, "price": 8}
-
-
-def _round_amount_for_market(amount: float, market: str) -> float:
-    """Round coin amount naar market-specifieke precisie (voorkomt errorCode 429)."""
-    prec = get_market_precision(market)
-    dec = int(prec.get("amount", 8))
-    # Truncate (niet rond) om never boven balance te gaan
-    factor = 10 ** dec
-    return int(amount * factor) / factor
-
-
-def _cache_ttl(interval: str) -> int:
-    """Cache TTL = candle-interval (in seconden). Pas vernieuwen als nieuwe candle verwacht."""
-    return _INTERVAL_SECONDS.get(interval, 300)
-
-
-def fetch_candles(market: str, interval: str = "1h", limit: int = 30) -> List[Dict]:
-    """Fetch candles from Bitvavo public API met TTL-cache.
-    Cache key: (market, interval, limit). Vernieuwing pas na candle-interval seconden."""
-    cache_key = f"{market}:{interval}:{limit}"
-    now = time.time()
-    cached = _CANDLE_CACHE.get(cache_key)
-    if cached and (now - cached["ts"]) < _cache_ttl(interval):
-        return cached["candles"]
-    try:
-        url = f"{BITVAVO_URL}/{market}/candles?interval={interval}&limit={limit}"
-        resp = requests.get(url, timeout=10)
-        if resp.status_code == 200:
-            raw = resp.json()
-            candles = []
-            for c in raw:
-                if len(c) >= 6:
-                    candles.append({
-                        "timestamp": c[0],
-                        "open": float(c[1]),
-                        "high": float(c[2]),
-                        "low": float(c[3]),
-                        "close": float(c[4]),
-                        "volume": float(c[5]),
-                    })
-            _CANDLE_CACHE[cache_key] = {"candles": candles, "ts": now}
-            return candles
-        # Op rate-limit (429) of andere fout: return laatst-bekende cache als die er is
-        if cached:
-            logger.warning(f"Candle fetch HTTP {resp.status_code} voor {market}, gebruik cache ({len(cached['candles'])} candles)")
-            return cached["candles"]
-    except Exception as e:
-        logger.error(f"Candle fetch error {market}: {e}")
-        if cached:
-            return cached["candles"]
-    return []
-
-
-def fetch_tickers(coins: List[str] = None) -> List[Dict]:
-    """Fetch live ticker prices from Bitvavo (public, no auth).
-    v6_ticker_cache_001 — 12s TTL cache: ALL tickers worden gecached na 1e fetch,
-    daarna geserveerd uit cache. Verminder Bitvavo-roundtrips én snellere
-    watchlist-load voor alle users tegelijk.
-    """
-    if coins is None:
-        coins = WATCHLIST_COINS
-    # Normalize: strip "-EUR" suffix if present so caller mag beide formats geven
-    normalized = []
-    for c in coins:
-        if isinstance(c, str) and "-" in c:
-            normalized.append(c.split("-")[0])
-        else:
-            normalized.append(c)
-    coins = normalized
-
-    # v6_ticker_cache_001 — gedeelde cache (12s TTL)
-    now = time.time()
-    global _TICKER_CACHE_ALL
-    try:
-        _TICKER_CACHE_ALL
-    except NameError:
-        _TICKER_CACHE_ALL = {"data": None, "ts": 0}
-    data = None
-    if _TICKER_CACHE_ALL.get("data") and (now - _TICKER_CACHE_ALL["ts"]) < 12:
-        data = _TICKER_CACHE_ALL["data"]
-    if data is None:
-        try:
-            url = f"{BITVAVO_URL}/ticker/24h"
-            resp = requests.get(url, timeout=10)
-            if resp.status_code == 200:
-                data = resp.json()
-                _TICKER_CACHE_ALL = {"data": data, "ts": now}
-            elif _TICKER_CACHE_ALL.get("data"):
-                # rate-limit of fout → cached data hergebruiken
-                data = _TICKER_CACHE_ALL["data"]
-        except Exception as e:
-            logger.error(f"Ticker fetch error: {e}")
-            if _TICKER_CACHE_ALL.get("data"):
-                data = _TICKER_CACHE_ALL["data"]
-
-    results = []
-    if data:
-        wanted = {f"{c}-EUR" for c in coins}
-        for t in data:
-            if t.get("market") in wanted:
-                results.append({
-                    "market": t["market"],
-                    "symbol": t["market"].split("-")[0],
-                    "name": WATCHLIST_NAMES.get(t["market"].split("-")[0], t["market"].split("-")[0]),
-                    "last": float(t.get("last", 0)),
-                    "open": float(t.get("open", 0)),
-                    "high": float(t.get("high", 0)),
-                    "low": float(t.get("low", 0)),
-                    "volume": float(t.get("volume", 0)),
-                    "volumeQuote": float(t.get("volumeQuote", 0)),
-                    "bid": float(t.get("bid", 0)),
-                    "ask": float(t.get("ask", 0)),
-                })
-    # Sort: BCH first, then by market cap (BTC, ETH, SOL, ADA)
-    order = {c: i for i, c in enumerate(coins)}
-    results.sort(key=lambda x: order.get(x["symbol"], 99))
-    return results
 
 
 def execute_mock_trade(user_id: str, market: str, side: str, amount_eur: float) -> Dict:
@@ -705,247 +523,9 @@ def sync_bitvavo_orders(user_id: str, market: Optional[str] = None) -> Dict:
     }
 
 
-# Bitvavo taker fee (market orders)
-BITVAVO_TAKER_FEE = 0.0025  # 0.25%
-
-
-def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade_amount: float = 5.0) -> Dict:
-    """
-    Decision engine with trailing stop + fee-aware profit guard.
-    - Enters LONG bij prijs onder lower Bollinger band (2σ)
-    - Activeert trailing stop bij +1% winst
-    - Verkoopt bij -0.4% drop vanaf hoogste punt, MITS netto winst na fees > €0.01
-    - NOOIT verkopen met verlies (Willem's regel)
-
-    Args:
-        candles: Laatste N candles (min 5)
-        position: Huidige positie state (None = geen positie)
-        trade_amount: EUR bedrag per trade
-    """
-    if len(candles) < 5:
-        return {"action": "HOLD", "reason": "Te weinig data", "confidence": 0}
-
-    closes = [c["close"] for c in candles[-20:]]
-    mean = sum(closes) / len(closes)
-    variance = sum((x - mean) ** 2 for x in closes) / len(closes)
-    std = variance ** 0.5 if variance > 0 else 0.001
-    price = candles[-1]["close"]
-    lower = mean - 2 * std
-    upper = mean + 2 * std
-
-    base = {
-        "price": price,
-        "mean": round(mean, 2),
-        "lower": round(lower, 2),
-        "upper": round(upper, 2),
-    }
-
-    # ========== HEBBEN WE EEN POSITIE? ==========
-    if position and position.get("is_open"):
-        entry = position["entry_price"]
-        highest = max(position.get("highest_price", entry), price)
-        profit_pct = (price - entry) / entry
-        bruto_profit = trade_amount * profit_pct
-        # Fees: 0.25% buy + 0.25% sell = 0.5% van trade amount
-        total_fees = trade_amount * BITVAVO_TAKER_FEE * 2
-        netto_profit = bruto_profit - total_fees
-
-        # v4_sell_trigger_002: cent-niveau triggers ipv vaste percentages
-        # Trail aan: netto winst ≥ 2× fees (= comfortabel boven break-even)
-        # Exit: drop vanaf high WAARBIJ netto na verkoop nog ≥ 1× fees blijft
-        trail_threshold = round(total_fees * 2, 6)      # bv €0.0254 voor €5 pot
-        exit_min_netto = round(total_fees * 1, 6)       # bv €0.0127 voor €5 pot
-        netto_rounded = round(netto_profit, 6)
-        trailing_active = position.get("trailing_active", False) or netto_rounded >= trail_threshold
-        drop_from_high = (highest - price) / highest if highest else 0
-
-        # v6_stop_loss_001 — VERVANGEN door shadow-potje systeem (v6_shadow_pot_001).
-        # Stop-loss verwijderd: we sluiten geen verlies-positie meer. Wachten op recovery + winst
-        # uit andere potjes/overflow streamt terug naar wachtende positie.
-        # Trail-strategie blijft 100% intact (alleen winst-verkoop).
-
-        # v8_time_losscut_001 — Willems H2 hypothese: 48u loss-cut bij ≥3% verlies
-        # Bewezen in backtest v4: €-9.53 (met loss-cut) vs €-13.16 (zonder). Verliezen
-        # zichtbaar realiseren > verlies bevriezen in open positie.
-        # Config via blueprint: parameters.loss_cut_hours + loss_cut_pct.
-        try:
-            _bp = _load_trader_blueprint()
-            _loss_cut_hours = float(_bp.get("parameters", {}).get("loss_cut_hours", 48))
-            _loss_cut_pct = float(_bp.get("parameters", {}).get("loss_cut_pct", -0.03))
-            _loss_cut_enabled = bool(_bp.get("parameters", {}).get("loss_cut_enabled", True))
-        except Exception:
-            _loss_cut_hours, _loss_cut_pct, _loss_cut_enabled = 48, -0.03, True
-
-        if _loss_cut_enabled:
-            _entry_ts_str = position.get("entry_ts")
-            if _entry_ts_str:
-                try:
-                    _entry_ts = datetime.fromisoformat(_entry_ts_str.replace("Z", "+00:00"))
-                    _held_hours = (datetime.now(timezone.utc) - _entry_ts).total_seconds() / 3600
-                    if _held_hours >= _loss_cut_hours and profit_pct <= _loss_cut_pct:
-                        return {
-                            **base,
-                            "action": "SELL",
-                            "reason": (
-                                f"48u loss-cut @ €{price:.4f}. Ingekocht €{entry:.4f} "
-                                f"({profit_pct*100:+.2f}%). Netto €{netto_profit:+.4f}. "
-                                f"Verlies realiseren > geld bevriezen (Willems H2)."
-                            ),
-                            "confidence": 0.85,
-                            "netto_profit": round(netto_profit, 4),
-                            "loss_cut": True,
-                            "held_hours": round(_held_hours, 1),
-                            "position_update": {"close": True, "loss_cut": True},
-                        }
-                except Exception as _e:
-                    logger.warning(f"loss-cut parse error: {_e}")
-
-        if trailing_active and price < highest:
-            if netto_rounded >= exit_min_netto:
-                return {
-                    **base,
-                    "action": "SELL",
-                    "reason": f"Trail exit @ €{price:.4f} (piek €{highest:.4f}, drop -{drop_from_high*100:.3f}%). Netto +€{netto_profit:.4f}",
-                    "confidence": 0.95,
-                    "netto_profit": round(netto_profit, 4),
-                    "bruto_profit": round(bruto_profit, 4),
-                    "fees": round(total_fees, 4),
-                    "position_update": {"close": True, "highest_price": highest, "trailing_active": trailing_active},
-                }
-            else:
-                # Drop is daar maar netto te klein voor exit → wacht op nieuwe piek
-                return {
-                    **base,
-                    "action": "HOLD",
-                    "reason": f"Drop maar netto €{netto_profit:.4f} < €{exit_min_netto:.4f}. Wacht op nieuwe piek.",
-                    "confidence": 0.3,
-                    "netto_profit": round(netto_profit, 4),
-                    "position_update": {"highest_price": highest, "trailing_active": trailing_active},
-                }
-
-        # Nog in positie, nog geen exit signaal
-        return {
-            **base,
-            "action": "HOLD",
-            "reason": f"In positie @ €{entry:.4f}. Nu €{price:.4f} ({profit_pct*100:+.3f}%). Netto €{netto_profit:+.4f}. Trail: {'AAN' if trailing_active else f'wacht op +€{trail_threshold:.4f}'}",
-            "confidence": 0.5,
-            "netto_profit": round(netto_profit, 3),
-            "position_update": {"highest_price": highest, "trailing_active": trailing_active},
-        }
-
-    # ========== GEEN POSITIE: ZOEK BUY SIGNAAL ==========
-    if price <= lower:
-        # Te dicht bij upper? Geen ruimte voor winst
-        distance_from_upper = (upper - price) / upper if upper > 0 else 1
-        if distance_from_upper < 0.015:  # Minder dan 1.5% ruimte tot upper
-            return {
-                **base,
-                "action": "HOLD",
-                "reason": f"Lower band geraakt maar te dicht bij upper ({distance_from_upper*100:.1f}% ruimte) — geen winstpotentieel",
-                "confidence": 0.2,
-            }
-
-        # v7_dip_confirmation_001 — voorkom "koop op mini-piek in dalende trend".
-        # Bollinger-lower zakt in dalende markt mee met de mean; dat betekent dat een
-        # BUY-signaal kan afgaan terwijl de prijs eigenlijk nog steeds relatief hoog
-        # is tov. de recente cyclus. Extra guard: prijs moet minimaal 1.5% onder de
-        # recente hoogste (van het candle-window) zitten — dit filtert "hoop op
-        # doorbraak" trades weg en houdt alleen echte dips over.
-        recent_highs = [c.get("high", c.get("close", price)) for c in candles[-20:]]
-        window_high = max(recent_highs) if recent_highs else price
-        drop_from_window_high = (window_high - price) / window_high if window_high > 0 else 0
-        MIN_DIP_PCT = 0.015  # 1.5% onder de recente piek moet er zijn
-        if drop_from_window_high < MIN_DIP_PCT:
-            return {
-                **base,
-                "action": "HOLD",
-                "reason": (
-                    f"Lower band geraakt maar geen echte dip: prijs €{price:.4f} is slechts "
-                    f"{drop_from_window_high*100:.2f}% onder recente piek €{window_high:.4f}. "
-                    f"Wacht op ≥{MIN_DIP_PCT*100:.1f}% terugval voor BUY."
-                ),
-                "confidence": 0.25,
-                "window_high": round(window_high, 4),
-                "drop_from_high_pct": round(drop_from_window_high * 100, 3),
-            }
-
-        return {
-            **base,
-            "action": "BUY",
-            "reason": (
-                f"Prijs €{price:.4f} onder lower band €{lower:.4f} én {drop_from_window_high*100:.2f}% "
-                f"onder recente piek €{window_high:.4f}. Ruimte tot upper: {distance_from_upper*100:.1f}%"
-            ),
-            "confidence": min(0.9, (lower - price) / std + 0.5),
-            "window_high": round(window_high, 4),
-            "drop_from_high_pct": round(drop_from_window_high * 100, 3),
-            "position_update": {"open": True, "entry_price": price},
-            "_bollinger_action": "BUY",  # v7_gap_merge_001: intern flag voor gap-merge filter
-        }
-
-    band_pos = (price - lower) / (upper - lower) if (upper - lower) > 0 else 0.5
-    return {
-        **base,
-        "action": "HOLD",
-        "reason": f"Prijs €{price:.2f} in band ({band_pos:.0%}). Wacht op lower band.",
-        "confidence": 0.3,
-        "band_position": round(band_pos, 2),
-    }
-
-
-def _gap_breakout_check(candles: List[Dict]) -> Dict:
-    """
-    v7_gap_breakout_001 — Willem's structuur-omslag detector.
-    Geeft BUY als laatste candle bullish (groen) is EN volledig boven de vorige
-    bearish (rode) candle sluit (low_curr > high_prev). Geeft SELL bij inverse.
-    v8: verder aangevuld met gap-body variant (50% ratio) — winnaar backtest.
-    Fungeert als bevestigings-filter voor Bollinger-signaal.
-    """
-    if len(candles) < 2:
-        return {"signal": "NONE", "reason": "te weinig candles"}
-    prev = candles[-2]
-    curr = candles[-1]
-    prev_bearish = prev["close"] < prev["open"]
-    prev_bullish = prev["close"] > prev["open"]
-    curr_bullish = curr["close"] > curr["open"]
-    curr_bearish = curr["close"] < curr["open"]
-
-    # v8_gap_body_default_001 — Bewezen winnaar (backtest v2+v3):
-    # BUY als rood → groen met body-ratio ≥ 50%. Realistisch signaal;
-    # oude 'volledig erboven' variant blokkeerde 100% van signalen.
-    if prev_bearish and curr_bullish:
-        prev_body = abs(prev["open"] - prev["close"])
-        curr_body = abs(curr["close"] - curr["open"])
-        if curr_body >= prev_body * 0.5 and curr_body > 0:
-            return {"signal": "BUY", "reason": f"gap-body: groen body {curr_body:.4f} ≥ 50% van rood body {prev_body:.4f}",
-                    "curr_body": round(curr_body, 4), "prev_body": round(prev_body, 4)}
-    # SELL: vorige groen, huidige rood, body-ratio ≥ 50%
-    if prev_bullish and curr_bearish:
-        prev_body = abs(prev["close"] - prev["open"])
-        curr_body = abs(curr["open"] - curr["close"])
-        if curr_body >= prev_body * 0.5 and curr_body > 0:
-            return {"signal": "SELL", "reason": f"gap-body inverse: rood body ≥ 50% van groen body"}
-    return {"signal": "NONE", "reason": "geen kleuromslag of te kleine body"}
-
-
-def _detect_daily_drop(candles: List[Dict], threshold_pct: float = 5.0) -> Dict:
-    """
-    v8_event_protection_001 — Detecteer 'shock-event' in de laatste 24u (96 candles × 15m).
-    Return {'is_event': True, 'drop_pct': X, 'high': Y, 'low': Z} als drop >= threshold.
-    Data-driven: backtest v3 detecteerde 185 events in 6 mnd × 6 markten.
-    """
-    if len(candles) < 96:
-        return {"is_event": False}
-    last_24h = candles[-96:]
-    peak_high = max(c["high"] for c in last_24h)
-    trough_low = min(c["low"] for c in last_24h[-24:])  # laatste 6u voor recent trough
-    if peak_high <= 0:
-        return {"is_event": False}
-    drop_pct = (peak_high - trough_low) / peak_high * 100
-    if drop_pct >= threshold_pct:
-        return {"is_event": True, "drop_pct": round(drop_pct, 2),
-                "peak_price": round(peak_high, 4), "trough_price": round(trough_low, 4)}
-    return {"is_event": False, "drop_pct": round(drop_pct, 2)}
+# v8_refactor_001 — _simple_decision / _gap_breakout_check / _detect_daily_drop
+# + BITVAVO_TAKER_FEE verhuisd naar strategy_decision.py.
+# Re-exported bovenaan deze file via `from .strategy_decision import ...`.
 
 
 class MonitorService:

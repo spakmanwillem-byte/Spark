@@ -1,0 +1,39 @@
+{
+  "summary": "Iteratie 47 — Pure REGRESSIE-check na v8_refactor_001 (monitor.py 1831→1411 regels, 23% reductie). 2 nieuwe modules geëxtraheerd: strategy_decision.py (_simple_decision, _gap_breakout_check, _detect_daily_drop, _load_trader_blueprint, BITVAVO_TAKER_FEE, _BLUEPRINT_CACHE) en exchange_data.py (fetch_candles, fetch_tickers, get_market_min_quote/precision, _round_amount_for_market, _cache_ttl + WATCHLIST_COINS/NAMES, BITVAVO_URL, KNOWN_MIN_QUOTE_FALLBACK + gedeelde caches). Alle 39 tests slagen (100%): 19/19 iter46 baseline blijft groen + 20/20 nieuwe iter47 regressietests. Facade werkt: (1) import via monitor.py voor alle nieuw-verhuisde symbolen (constants, functions, caches) → PASS; (2) directe import uit nieuwe modules → PASS; (3) STATE-shared check: _mon._BLUEPRINT_CACHE is _sd._BLUEPRINT_CACHE, _mon._CANDLE_CACHE is _ed._CANDLE_CACHE, _mon._TICKER_CACHE_ALL is _ed._TICKER_CACHE_ALL, _mon._MARKETS_CACHE is _ed._MARKETS_CACHE (identity check, geen kopie) → PASS; (4) backtest_v2/v5_360d + server.py imports werken zonder ImportError → PASS; (5) MonitorService + get_user_monitor blijven in monitor.py → PASS; (6) endpoint regressies: /api/trade/history/user-000, /api/trade/explained, /api/trade/strategy/confidence, /api/trade/honest-pnl/user-000 → allemaal 200 OK; (7) /api/spark/compose met 'hoe staat mijn bot' (trader_intents fast-path) → 200 OK; (8) live fetch_tickers via facade en direct module → beide returnen BTC-EUR/ETH-EUR tickers >0. Backend supervisor logs bevatten geen ImportError of AttributeError na de refactor — server startup schoon. _simple_decision([]) returnt HOLD/Te weinig data zoals verwacht. get_market_min_quote('BTC-EUR') returnt >=5.0. _gap_breakout_check([]) returnt {signal: NONE}. _detect_daily_drop([]) returnt {is_event: False}. _load_trader_blueprint() 2x roept mtime-cache correct aan (identieke dict).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter47_refactor_regression.py",
+    "/app/backend/tests/test_iter46_sparkcore_v2_features.py",
+    "/app/test_reports/pytest/iter47_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "monitor.py bevat nu 2 aparte import-blokken van .exchange_data en .strategy_decision met een DATA_DIR-declaratie sandwich ertussenin (regel 37-53 exchange_data, regel 56 DATA_DIR, regel 60-68 strategy_decision). PEP8: alle imports bovenaan. Cosmetisch, maar leesbaarheid lijdt. Advies: verplaats DATA_DIR + SETTINGS_DIR onder alle imports zodat de facade-imports als één blok bovenaan staan.",
+    "exchange_data.py doet gehele import van 'requests' op module-level; goed voor efficiency, maar test-mocking wordt lastiger. Overweeg dependency-injection of een module-level session-object dat te mocken is voor unit tests van fetch_candles/fetch_tickers zonder Bitvavo bereik.",
+    "strategy_decision.py _load_trader_blueprint faalt stil met `except Exception: return {}` — een corrupte spark_trader.json wordt niet gelogd waardoor debug-taken lastig zijn. Advies: logger.warning(f'blueprint load failed: {e}') zodat een JSON-syntax fout zichtbaar wordt in backend.err.log.",
+    "exchange_data.get_market_precision() doet defensief float(cast) rond int-velden (pricePrecision) — als Bitvavo een str returnt is `int(info.get('pricePrecision') or 8)` niet safe voor bv. '8.0'. Werkt in praktijk (Bitvavo returnt int), maar strak type-checken kan crashen op edge-cases.",
+    "monitor.py behoudt nog steeds veel code (1411 regels) — MonitorService class + registry + order execution. Voor toekomstige splitsingen: order_execution kan naar order_executor.py, registry naar registry_service.py. Geen bug maar maintainability-agenda voor v9.",
+    "test_iter46_sparkcore_v2_features.py + test_iter47_refactor_regression.py raken samen 39 tests in ~7s — snelle CI-gate, geen zorg."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter47_refactor_regression.py (nieuw, 20 tests: facade re-exports, direct module imports, state-sharing identity checks, backtest/server import compat, live endpoint regressies, live fetch_tickers)"
+  ],
+  "success_rate": {
+    "backend": "100% (39/39 — 19 iter46 + 20 iter47)",
+    "frontend": "not_tested (per request 'backend only(skip frontend)')"
+  },
+  "test_credentials": "n/a — publieke endpoints; user-000 en user-001 als default test-user zonder auth",
+  "seed_data_creation": "Geen. Regressietests zijn read-only (imports, GET endpoints, en trader_intents compose). Één POST /api/spark/compose (idempotent, geen persistente state-mutation aan de kant van trader_intents fast-path).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter47 valideert de v8_refactor_001 refactor: 2 nieuwe modules (strategy_decision.py 267 regels, exchange_data.py 216 regels) uit monitor.py geëxtraheerd. Facade in monitor.py doet re-exports (regel 37-53 en 60-68). State-sharing via identity checks bevestigd — geen dubbele caches. Test file /app/backend/tests/test_iter47_refactor_regression.py is idempotent en herbruikbaar als regressie-gate voor toekomstige refactors. Live Bitvavo-calls in TestExchangeDataFacade zijn skip-safe bij netwerkuitval (pytest.skip). Voor iteratie 48: (a) overweeg order_execution + registry ook naar aparte modules te tillen (monitor.py nog 1411 regels); (b) atomic-write in synthesize_strategy uit iter46-review is nog open; (c) property_catalog inline in routes.py idem.",
+  "rca of the issue": "Geen bug. Refactor is regressie-vrij: alle imports werken via facade, state-objecten worden gedeeld (identity-check bewezen), endpoints leveren dezelfde responses als pre-refactor. 23% code-reductie (420 regels) zonder gedragswijziging. Enige testrun-hickup was mijn eigen test file: (i) BASE_URL werd niet uit shell env geladen omdat REACT_APP_BACKEND_URL alleen frontend-scope heeft — opgelost met _load_base_url() helper die /app/frontend/.env parseert; (ii) /api/spark/compose payload gebruikt 'text' niet 'message' — opgelost. Beide fixes zijn testcode-only, niet product-code."
+}

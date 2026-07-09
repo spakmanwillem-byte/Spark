@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.314998+00:00",
-    "card_count": 552,
+    "card_count": 553,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T16:26:23.326251+00:00",
+    "last_updated": "2026-07-09T23:18:26.055730+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.192081+00:00",
     "last_zip_merge_added": 2
   },
@@ -72970,6 +72970,144 @@
             "result": {
               "n_found": 5,
               "top_overlap": 4
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-77cc85ac",
+      "begrip": "Dat heeft een neerslag op het moraal",
+      "lade": "spreken",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Hier betekent neerslag de invloed of het gevolg dat iets heeft op een persoon, groep of situatie.",
+        "laag2": "De uitdrukking zijn neerslag hebben op betekent dat een gebeurtenis of situatie merkbare gevolgen heeft.",
+        "laag3": "In deze context wordt neerslag figuurlijk gebruikt en verwijst het niet naar regen of sneeuw. Het beschrijft de uitwerking die een gebeurtenis, beslissing of omstandigheid heeft. Deze uitwerking kan positief of negatief zijn en is vaak zichtbaar in gedrag, prestaties, sfeer of emoties.",
+        "laag4": "Het figuurlijke gebruik van neerslag komt veel voor in de Nederlandse taal. De uitdrukking zijn neerslag hebben op wordt gebruikt om aan te geven dat een oorzaak leidt tot een merkbaar effect. De nadruk ligt op de gevolgen die zichtbaar worden na een gebeurtenis."
+      },
+      "ws5": {
+        "wie": "Personen, groepen of organisaties die gevolgen ervaren.",
+        "wat": "De uitwerking of het gevolg van een gebeurtenis of situatie.",
+        "wanneer": "Nadat een gebeurtenis invloed heeft uitgeoefend.",
+        "waar": "In gesprekken, teksten en situaties waarin gevolgen worden beschreven.",
+        "waarom": "Om aan te geven dat iets merkbare invloed heeft gehad.",
+        "hoe": "Door een gebeurtenis die leidt tot veranderingen in gedrag, prestaties, sfeer of gevoelens."
+      },
+      "tags": [
+        "context",
+        "figuurlijk",
+        "neerslag",
+        "gevolg",
+        "uitwerking",
+        "invloed",
+        "taalgebruik",
+        "uitdrukking",
+        "moraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-89bc3d60",
+          "begrip": "Ik ga de bloemetjes buiten zetten",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "context",
+            "figuurlijk",
+            "uitdrukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1fd3f1dc",
+          "begrip": "Mede [bijnaam]",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "invloed"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e0aed0e1",
+          "begrip": "Wat voor taal spreek je?",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "taalgebruik"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "uitdrukking"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "context",
+            "uitdrukking"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "manual",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:18:26.055709+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-001",
+        "aangemaakt_op": "2026-07-09T23:17:09.015779+00:00",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:17:09.273814+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:17:09.373663+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:17:09.634740+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:18:26.252865+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:18:26.259313+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
             }
           }
         ]

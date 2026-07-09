@@ -41,7 +41,7 @@ SPARK_EXTRA_TRADE_SLOTS = 10  # v6_spark_15slots_001 (28 mei) — Spark krijgt 5
 INITIAL_MAX = 50.0  # tier 1: max €50 (5x growth)
 LOCKED_POT_INDEX = None  # v6_clean_slate_28mei — geen lock-anker; potjes = trade-posities
 BITVAVO_TAKER_FEE = 0.0025
-TOKEN_PRICE = 5.08  # vaste bodemprijs per ROAR token (dynamische prijs via shop.get_dynamic_price)
+TOKEN_PRICE = 10.00  # v8_price_reset_001: bodemprijs €10 per ROAR token (was €5.08, dynamische prijs via shop.get_dynamic_price)
 
 # v7_spark_fee_rate_001 — Spark's cut van netto trading-winst.
 # 0.0 = uit. User's redenering: winst → Bitvavo balance → dynamische token-prijs

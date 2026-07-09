@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2092,
+    "card_count": 2096,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:51:33.046764+00:00",
+    "last_updated": "2026-07-09T22:09:47.188631+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -277823,6 +277823,639 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:51:31.061646+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6750ca62",
+      "begrip": "kalmte",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Kalmte is een toestand van rust, beheersing en innerlijke balans.",
+        "laag2": "Kalmte betekent dat iemand of een situatie rustig blijft, ook wanneer er spanning, druk of emotie aanwezig is.",
+        "laag3": "Kalmte is het vermogen om helder te blijven denken en beheerst te handelen. Een kalm persoon laat zich niet snel meeslepen door stress, boosheid of paniek. Kalmte betekent niet dat er geen emoties zijn, maar dat deze op een evenwichtige manier worden ervaren en geuit.",
+        "laag4": "Kalmte draagt bij aan goede besluitvorming, effectieve communicatie en het oplossen van problemen. In moeilijke situaties helpt kalmte om overzicht te bewaren en weloverwogen keuzes te maken. Kalmte kan worden ontwikkeld door ervaring, zelfreflectie, ontspanning en het bewust omgaan met emoties."
+      },
+      "ws5": {
+        "wie": "Mensen en soms ook dieren of systemen die rustig reageren.",
+        "wat": "Een toestand van rust en beheersing.",
+        "wanneer": "Tijdens rustige momenten of juist onder druk wanneer iemand zichzelf beheerst.",
+        "waar": "In het dagelijks leven, op het werk, thuis, tijdens gesprekken en in stressvolle situaties.",
+        "waarom": "Om helder te blijven denken, verstandig te handelen en spanning te verminderen.",
+        "hoe": "Door emoties te reguleren, rustig te ademen, overzicht te bewaren en bewust te reageren."
+      },
+      "tags": [
+        "kalmte",
+        "rust",
+        "beheersing",
+        "evenwicht",
+        "ontspanning",
+        "zelfcontrole",
+        "sereniteit",
+        "balans",
+        "emoties",
+        "concentratie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b1ae70e0",
+          "begrip": "landen",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "balans",
+            "concentratie",
+            "kalmte",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-67a41cf9",
+          "begrip": "Stabiliteit",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "evenwicht",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-992ca38a",
+          "begrip": "Ontspanning",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "ontspanning",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-fefe6525",
+          "begrip": "Even een pauze nemen.",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "ontspanning",
+            "rust"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ab7a44f1",
+          "begrip": "pauze",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "balans",
+            "ontspanning",
+            "rust"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:01:23.383379+00:00",
+        "vorige_versie_v1": "kb-skel-6750ca62",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.729179+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:01:21.295563+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:01:21.525823+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:01:23.723469+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:01:23.729644+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:01:21.196008+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-668d86b6",
+      "begrip": "articulatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Articulatie is de manier waarop klanken en woorden duidelijk worden uitgesproken.",
+        "laag2": "Articulatie is het vormen van spraakklanken met behulp van onder andere de tong, lippen, tanden en kaak, zodat anderen de woorden goed kunnen verstaan.",
+        "laag3": "Bij articulatie werken verschillende lichaamsdelen samen om klanken te produceren. Een goede articulatie zorgt ervoor dat woorden duidelijk en verstaanbaar zijn. Problemen met de articulatie kunnen ontstaan door een spraakstoornis, gehoorproblemen of een aandoening van de mond of het zenuwstelsel.",
+        "laag4": "Articulatie is belangrijk voor effectieve communicatie. Duidelijke uitspraak vergemakkelijkt gesprekken, voorkomt misverstanden en ondersteunt taalontwikkeling. Logopedisten helpen mensen die moeite hebben met articuleren om hun uitspraak te verbeteren. In bredere zin wordt het woord articulatie ook gebruikt voor het duidelijk verwoorden van gedachten of ideeën."
+      },
+      "ws5": {
+        "wie": "Iedereen die spreekt of leert spreken.",
+        "wat": "Het duidelijk vormen en uitspreken van spraakklanken en woorden.",
+        "wanneer": "Tijdens het spreken en communiceren.",
+        "waar": "In gesprekken, presentaties, onderwijs en andere vormen van mondelinge communicatie.",
+        "waarom": "Om verstaanbaar en duidelijk te communiceren.",
+        "hoe": "Door de tong, lippen, tanden, kaak en stem goed samen te laten werken."
+      },
+      "tags": [
+        "articulatie",
+        "uitspraak",
+        "spraak",
+        "taal",
+        "communicatie",
+        "logopedie",
+        "tong",
+        "lippen",
+        "stem",
+        "verstaanbaarheid",
+        "spreken"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-123be636",
+          "begrip": "uitspreken",
+          "lade": "spreken",
+          "overlap": 6,
+          "shared_tags": [
+            "articulatie",
+            "communicatie",
+            "spreken",
+            "stem",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-934b26c3",
+          "begrip": "speech",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "spraak",
+            "stem",
+            "taal",
+            "uitspraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-01fd351b",
+          "begrip": "spreek",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "spraak",
+            "spreken",
+            "taal",
+            "uitspraak"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9f310b89",
+          "begrip": "zeg",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "spraak",
+            "spreken",
+            "stem",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-25667e42",
+          "begrip": "stem",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "communicatie",
+            "spraak",
+            "spreken",
+            "stem",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:03:52.097242+00:00",
+        "vorige_versie_v1": "kb-skel-668d86b6",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:39.565448+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:03:50.009755+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:03:50.016104+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:03:52.445741+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:03:52.452134+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:03:49.905653+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2d61e1ad",
+      "begrip": "vonk",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een vonk is een klein licht- of vuurverschijnsel dat ontstaat door een plotselinge energieontlading.",
+        "laag2": "Een vonk ontstaat bijvoorbeeld wanneer metaal tegen metaal slaat of bij een elektrische ontlading. Figuurlijk kan een vonk ook het begin van een idee, gevoel of ontwikkeling betekenen.",
+        "laag3": "Een vonk is een kortdurend verschijnsel waarbij licht en vaak warmte vrijkomen. In de natuur en techniek ontstaan vonken door wrijving, elektrische spanning of hoge temperaturen. In de spreektaal staat een vonk vaak symbool voor inspiratie, enthousiasme, liefde of het begin van een verandering.",
+        "laag4": "Vonken spelen een belangrijke rol in techniek, natuurkunde en het dagelijks leven, bijvoorbeeld bij laswerk, ontstekingen en elektrische installaties. Als symbool vertegenwoordigt een vonk het eerste begin van iets groters: een idee, een emotie of een ontwikkeling die kan uitgroeien tot iets betekenisvols."
+      },
+      "ws5": {
+        "wie": "Natuurkundige processen, machines, mensen (figuurlijk) en elektrische systemen.",
+        "wat": "Een kleine energieontlading of het symbolische begin van iets.",
+        "wanneer": "Bij wrijving, elektrische ontlading, verhitting of als inspiratie ontstaat.",
+        "waar": "In de natuur, techniek, elektrische systemen en figuurlijk in gedachten of relaties.",
+        "waarom": "Door het vrijkomen van energie of als symbool voor een nieuw begin.",
+        "hoe": "Door een plotselinge ontlading van energie of als metafoor voor inspiratie of emotie."
+      },
+      "tags": [
+        "vonk",
+        "energie",
+        "elektriciteit",
+        "vuur",
+        "licht",
+        "ontlading",
+        "inspiratie",
+        "idee",
+        "begin",
+        "emotie",
+        "verandering",
+        "symbool"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8ad5b09e",
+          "begrip": "Vuur staat voor energie en verandering",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "energie",
+            "verandering",
+            "vuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d05766e8",
+          "begrip": "Wat betekend Spark",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "energie",
+            "inspiratie",
+            "vonk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6064596c",
+          "begrip": "Wat betekent Spark?",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "emotie",
+            "energie",
+            "inspiratie",
+            "vonk"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3df2c212",
+          "begrip": "creatief",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "begin",
+            "emotie",
+            "idee",
+            "inspiratie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e3d39c19",
+          "begrip": "gloed",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "emotie",
+            "energie",
+            "licht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:06:03.766910+00:00",
+        "vorige_versie_v1": "kb-skel-2d61e1ad",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:03.580356+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:06:00.010710+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:06:00.258371+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:06:04.108069+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:06:04.114692+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:05:59.910645+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-fe60f491",
+      "begrip": "basiskennis",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Basiskennis is de essentiële kennis die nodig is om een onderwerp te begrijpen of een vaardigheid uit te voeren.",
+        "laag2": "Basiskennis vormt het fundament waarop verdere kennis, inzicht en ervaring kunnen worden opgebouwd.",
+        "laag3": "Basiskennis bestaat uit de belangrijkste feiten, begrippen en principes van een onderwerp. Zonder basiskennis is het moeilijk om nieuwe informatie goed te begrijpen of toe te passen. Het niveau van basiskennis verschilt per vakgebied en situatie.",
+        "laag4": "Basiskennis maakt leren efficiënter doordat nieuwe informatie kan worden gekoppeld aan bestaande kennis. Het vormt de basis voor probleemoplossing, kritisch denken en het ontwikkelen van specialistische kennis. Door basiskennis regelmatig te herhalen en toe te passen blijft deze beschikbaar voor toekomstig gebruik."
+      },
+      "ws5": {
+        "wie": "Iedereen die een onderwerp leert of toepast.",
+        "wat": "De fundamentele kennis die nodig is om een onderwerp te begrijpen.",
+        "wanneer": "Aan het begin van een leerproces en als basis voor verdere ontwikkeling.",
+        "waar": "In onderwijs, werk, hobby's en het dagelijks leven.",
+        "waarom": "Om nieuwe kennis beter te begrijpen en vaardigheden op te bouwen.",
+        "hoe": "Door de belangrijkste begrippen, feiten en principes te leren en toe te passen."
+      },
+      "tags": [
+        "basiskennis",
+        "kennis",
+        "fundament",
+        "leren",
+        "onderwijs",
+        "begrip",
+        "informatie",
+        "ontwikkeling",
+        "vaardigheden",
+        "basis",
+        "inzicht"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-295cc864",
+          "begrip": "geleerd",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "begrip",
+            "informatie",
+            "kennis",
+            "leren",
+            "onderwijs"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3b59156c",
+          "begrip": "begreep",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "informatie",
+            "inzicht",
+            "kennis",
+            "leren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99597d34",
+          "begrip": "Maak van de woorden die je niet kent een snap",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "begrip",
+            "informatie",
+            "kennis",
+            "leren",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-68fb65a6",
+          "begrip": "leraar",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "leren",
+            "onderwijs",
+            "ontwikkeling"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-84f2ceda",
+          "begrip": "docent",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "informatie",
+            "kennis",
+            "leren",
+            "onderwijs",
+            "ontwikkeling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:09:47.188613+00:00",
+        "vorige_versie_v1": "kb-skel-fe60f491",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.892783+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:09:45.358888+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:09:45.365588+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:09:47.533602+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:09:47.540234+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:09:45.258688+00:00"
       },
       "media": {
         "voice_url": null,

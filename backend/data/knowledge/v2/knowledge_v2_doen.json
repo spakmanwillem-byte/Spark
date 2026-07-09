@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1122,
+    "card_count": 1123,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:45:20.786700+00:00",
+    "last_updated": "2026-07-09T22:07:57.080287+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -146878,6 +146878,165 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:45:17.869881+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-2556162c",
+      "begrip": "scripting",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Scripting is het schrijven en uitvoeren van scripts om taken te automatiseren of software aan te sturen.",
+        "laag2": "Scripting gebruikt programmeertalen zoals Python, JavaScript of PowerShell om processen eenvoudiger, sneller of automatisch uit te voeren.",
+        "laag3": "Een script is een reeks instructies die door een computer wordt uitgevoerd. Scripting wordt gebruikt voor automatisering, systeembeheer, webontwikkeling, games, AI en het koppelen van verschillende systemen. Scripts zijn vaak korter en eenvoudiger dan volledige softwareprogramma's, maar kunnen krachtige functies uitvoeren.",
+        "laag4": "Scripting maakt het mogelijk om terugkerende taken te automatiseren, fouten te verminderen en systemen met elkaar te laten samenwerken. Binnen softwareontwikkeling wordt scripting gebruikt om applicaties uit te breiden, processen te testen en complexe handelingen te vereenvoudigen. De mogelijkheden hangen af van de gebruikte programmeertaal en de omgeving waarin het script draait."
+      },
+      "ws5": {
+        "wie": "Programmeurs, systeembeheerders, AI-systemen en andere gebruikers die automatiseren.",
+        "wat": "Het schrijven en uitvoeren van scripts om taken uit te voeren.",
+        "wanneer": "Wanneer processen geautomatiseerd of software aangestuurd moet worden.",
+        "waar": "Op computers, servers, websites, applicaties, games en andere digitale systemen.",
+        "waarom": "Om tijd te besparen, processen te automatiseren en software uit te breiden.",
+        "hoe": "Door instructies te schrijven in een scripttaal en deze door een computer te laten uitvoeren."
+      },
+      "tags": [
+        "scripting",
+        "script",
+        "programmeren",
+        "automatisering",
+        "software",
+        "Python",
+        "JavaScript",
+        "PowerShell",
+        "code",
+        "computer",
+        "ontwikkeling",
+        "AI"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-5b5fc090",
+          "begrip": "Perl",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "automatisering",
+            "code",
+            "computer",
+            "ontwikkeling",
+            "programmeren"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-653cc0b4",
+          "begrip": "Programmeren",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "code",
+            "computer",
+            "ontwikkeling",
+            "programmeren",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-88a58bcf",
+          "begrip": "unity",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "ontwikkeling",
+            "programmeren",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6abcb839",
+          "begrip": "bots",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "ai",
+            "automatisering",
+            "computer",
+            "software"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-81be535a",
+          "begrip": "computers",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "automatisering",
+            "computer",
+            "software"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:07:57.080250+00:00",
+        "vorige_versie_v1": "kb-skel-2556162c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:58.590554+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:07:54.298779+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:07:54.537010+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:07:57.330990+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:07:57.337363+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:07:54.198796+00:00"
       },
       "media": {
         "voice_url": null,

@@ -40,7 +40,7 @@ def _shop_products_path(shop_id: str = "shop-roadkill"):
 ACCOUNTING_FILE = DATA_DIR / "accounting" / "transactions.json"
 
 TOTAL_SUPPLY = 1_000_000
-BASE_PRICE = 5.08  # Vaste prijs voor eerste 10 tokens
+BASE_PRICE = 10.00  # v8_price_reset_001 — Willems live-start: €10 bodemprijs (was €5.08). 5 tokens = €50 → past bij zijn Bitvavo test-kapitaal.
 FIXED_PRICE_LIMIT = 10  # Na 10 tokens: dynamische prijs
 
 NOTIF_FILE = DATA_DIR / "notifications" / "notifications.json"

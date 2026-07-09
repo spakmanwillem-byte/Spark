@@ -26,6 +26,29 @@ Willem's voorstel: gap-breakout strategy als bevestigings-filter naast Bollinger
 
 **KB Spark Trader kaart** (`kbv2-2f55a485`) laag2 verrijkt met uitleg van dubbele bevestiging.
 
+## 2026-07-09 (sessie 46 laatste) — Live-start klaar + 360d verificatie
+
+### 🧹 Live-start cleanup
+- Backup: `_backups/pre_live_reset_2026-07-09T*`
+- Alle 22 spookpotten verwijderd, tokens naar treasury
+- **BASE_PRICE €5.08 → €10** (blueprint + code)
+- **5 pots voor Spark (user-000) × €10 = €50** aangemaakt via auto-provisioning
+- Circulating: 0 (nog 10 tokens tot dynamic), price €10 fixed
+- Bitvavo balance user-001: €43.19 EUR + 4.99 ATOM (~€17) + dust → Willem moet ATOM verkopen
+
+### 🧪 Backtest v5 (360 dagen) verificatie
+Op 360d ipv 180d:
+- **373 events** gedetecteerd (2× 180d, proportional)
+- **D**: 62 trades / +€8.84 realized / -€22.30 open DD → **-€13.46 ECHT netto**
+- **P (D + loss-cut)**: 138 trades / 73% winrate / **-€9.24 ECHT netto** = **31% beter dan D**
+- **Rebound-hypothese H1 bevestigd**: 60% van 5%-drops rebounds 24u erna (was 62.5% op 180d — stabiel)
+- Alle strategieën netto negatief zelfs op 360d → trader = educational + protection, geen money-machine
+
+### 🔄 Blueprint & runtime config
+- `spark_trader.json` heeft nu loss-cut params: enabled=true, 48u, -3%
+- Rebound: enabled=false (drempel 5% blokkeert triggers; tuning naar 3% pending)
+- Markten actief: BCH + SOL + ATOM + BTC (data-driven keuze)
+
 ## 2026-07-09 (sessie 46 vervolg) — Spark Trader klaar voor live: eerlijk + slim
 
 ### ⚔️ Backtest v4 — grote onthullingen

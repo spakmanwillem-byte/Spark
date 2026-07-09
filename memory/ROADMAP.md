@@ -1,25 +1,32 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
-## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief afgerond + publieke uitleg-JSON + chat-intents
+## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief afgerond + publieke uitleg-JSON + chat-intents + semantic strategies
 
 ### 🎯 Afgerond
 - **48u loss-cut LIVE** (config in `spark_trader.json` → `loss_cut_hours: 48`, `loss_cut_pct: -0.03`); ingelezen in `monitor.py` regel 770-798
 - **Event-auto-pauze LIVE** (`event_protection.actief: true`, trigger >5% daily drop, 24u pauze); `monitor.py` regel 1309-1348
 - **Honest-PnL endpoint LIVE** `GET /api/trade/honest-pnl/{user_id}` — toont gerealiseerd + open drawdown + ECHT netto + honesty_ratio
-- **NIEUW: Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` — volledige, mensvriendelijke uitleg met alle backtest-resultaten (v2/v3/v4/v5 + random-seed check), risico-beschermingen, privacy-sectie
-- **NIEUW: Publiek endpoint** `GET /api/trade/explained` — geen auth, bedoeld voor privacyverklaring "inhoudelijk bekijken"-link en onafhankelijke auditors
-- **KB-kaart Spark Trader (kbv2-2f55a485) verrijkt** — laag1 vermeldt loss-cut + event-pauze + honest-pnl; laag2 vermeldt intents
-- **NIEUW: Trader-intents fast-path** (`v8_trader_intents_001`) — `backend/modules/trade/trader_intents.py` met 8 intents. Spark begrijpt "start mijn bot" / "wat heb ik verdiend" / "leg de trader uit" etc. zonder LLM-call. Hook in `response_composer.py` vóór action_intents. 19/19 unit-tests pass + E2E via /api/spark/compose bevestigd.
+- **Publieke uitleg-JSON + endpoint** `GET /api/trade/explained` — 12 secties, alle backtest-resultaten, privacy
+- **Trader-intents fast-path** (`v8_trader_intents_001`) — `modules/trade/trader_intents.py` met 8 intents. 19/19 unit-tests + E2E via compose.
+- **Semantic strategies** (`v8_strategy_semantic_001`) — strategieën hernoemd van letters (A/D/E) naar betekenisvolle namen:
+  - `mean_reversion_bollinger` (voormalig A) — confidence 45
+  - **`gap_momentum_50` (voormalig D, ACTIEF)** — confidence 82
+  - `extreme_oversold` (voormalig E, Neef's variant) — confidence 55
+  - Elke strategie heeft nu: `properties[]`, `confidence.score + breakdown`, `hypothese_lineage`, `spark_alignment` (waarom/regels/data/hypothese/zekerheid)
+- **Confidence-endpoint** `GET /api/trade/strategy/confidence` — live berekening (max 100) uit backtest_pass(30) + random_seed(15) + bear_pass(15) + honest_pnl(20) + live_track(0-20)
+- **KB-kaart Spark Trader (kbv2-2f55a485)** verrijkt in alle 4 lagen — nu ook `Gap Momentum 50` als actieve naam
 
 ### 🎯 Post-deploy check voor Willem
-1. `curl {BACKEND_URL}/api/trade/explained` → 12-sectie uitleg-JSON zichtbaar
-2. `curl {BACKEND_URL}/api/trade/honest-pnl/user-000` → Spark's eerlijke PnL
-3. In chat: "hoe staat mijn bot" / "wat heb ik verdiend" / "leg de trader uit"
-4. Link `/api/trade/explained` op je privacy/voorwaarden-pagina
+1. `curl {BACKEND_URL}/api/trade/explained` → 12-sectie uitleg-JSON
+2. `curl {BACKEND_URL}/api/trade/strategy/confidence` → live scores per strategie
+3. `curl {BACKEND_URL}/api/trade/honest-pnl/user-000` → Spark's eerlijke PnL
+4. In chat: "hoe staat mijn bot" / "wat heb ik verdiend" / "leg de trader uit"
+5. Link `/api/trade/explained` + `/api/trade/strategy/confidence` op je privacy/voorwaarden-pagina
 
 ### 🟡 Nog te doen (P1, volgende sessie)
-- **Spark tab-context** — welke tab user open heeft → payload in compose (sessionStorage tracker in GesprekkenPage)
+- **Spark tab-context** — welke tab user open heeft → payload in compose
 - **Tab-glow** — `spark:nav-glow` event in Sidebar wanneer Spark trader-intent detecteert en user niet op Trader-tab is
+- **Strategie switch UI** — Trader-tab knop "Wissel strategie" met live confidence-scores per optie
 
 ---
 

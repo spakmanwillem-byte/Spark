@@ -14,30 +14,146 @@
     "willem_regel_1": "Help-data is single source of truth"
   },
 
-  "actieve_strategie": "D_bollinger_2sigma_plus_gap_body",
+  "actieve_strategie": "gap_momentum_50",
+  "_strategie_naam_migratie": {
+    "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
+    "nieuwe_naam": "gap_momentum_50",
+    "migratie_datum": "2026-07-09",
+    "reden": "Betekenisvolle namen i.p.v. letters (Willems advies): begrijpelijk over jaren, eigenschap-gebaseerd, uitlegbaar door Spark"
+  },
 
   "strategieën": {
-    "A_bollinger_only": {
-      "beschrijving": "Bollinger 2σ mean-reversion zonder gap-filter",
-      "backtest_pnl_180d": 2.31,
-      "backtest_trades": 23,
-      "aanbevolen_voor": "eenvoudig, betrouwbaar, breed marktbereik"
+    "mean_reversion_bollinger": {
+      "display_name": "Mean Reversion Bollinger",
+      "vorige_naam": "A_bollinger_only",
+      "beschrijving": "Bollinger 2σ mean-reversion zonder gap-filter — eenvoudige baseline",
+      "properties": ["bollinger_2sigma", "mean_reversion"],
+      "confidence": {
+        "score": 45,
+        "berekening": "backtest_180d*15 + random_beter_dan_random*10 + bear_pass*5 + honest_pnl*5 + live*10",
+        "gebaseerd_op": {
+          "backtest_dagen": 360,
+          "trades_180d": 23,
+          "gerealiseerd_pnl_180d": 2.31,
+          "echt_netto_180d": -26.15,
+          "honesty_ratio": -11.32,
+          "bear_market_pnl": 0.23,
+          "random_seed_validatie": true,
+          "live_resultaten": "geen — niet actief"
+        },
+        "toelichting": "Geeft gerealiseerd €+2.31 maar €-26 open drawdown (100% win-rate is misleidend). Confidence laag door verstopte verliezen zonder loss-cut."
+      },
+      "hypothese_lineage": {
+        "hypothese": "Bollinger 2σ oversold-signaal is voldoende voor mean-reversion",
+        "backtest_run": "20260709_205003 (v2), 20260709_205846_v3",
+        "resultaat": "€+2.31 gerealiseerd, maar €-28 open drawdown = ECHT netto €-26",
+        "conclusie": "Alleen niet voldoende — filter nodig tegen kopen-op-piek in bear-trend",
+        "volgende_hypothese": "Voeg gap-body confirmation toe → strategie gap_momentum_50"
+      },
+      "spark_alignment": {
+        "waarom": "Baseline om te vergelijken; niet aanbevolen als actieve strategie",
+        "regels": ["Koop bij prijs < Bollinger lower band 2σ", "Verkoop bij trailing stop of winst-signaal"],
+        "data_bronnen": ["Bitvavo public candles 15m 360d"],
+        "onderliggende_hypothese": "Prijs keert altijd terug naar mean — te simpel voor bear-markten",
+        "zekerheid": "45% — bewezen te simpel, houdt verlies verborgen"
+      }
     },
-    "D_bollinger_2sigma_plus_gap_body": {
-      "beschrijving": "Bollinger 2σ + gap-body-momentum (50%) — winnaar backtest v2+v3",
-      "backtest_pnl_180d": 2.63,
-      "backtest_trades": 22,
-      "bear_market_pnl": 1.42,
-      "bull_market_pnl": 0.00,
-      "range_market_pnl": 1.21,
-      "in_event_pnl": 2.18,
-      "aanbevolen_voor": "bear + range markten (grootste voordeel)"
+
+    "gap_momentum_50": {
+      "display_name": "Gap Momentum 50",
+      "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
+      "beschrijving": "Bollinger 2σ + gap-body momentum-bevestiging (50%) + 48u loss-cut + event-pauze",
+      "actief": true,
+      "properties": [
+        "bollinger_2sigma",
+        "mean_reversion",
+        "gap_body_50",
+        "loss_cut_48h_3pct",
+        "event_pause_5pct_24h",
+        "honest_pnl",
+        "trailing_stop",
+        "fee_aware_sell"
+      ],
+      "confidence": {
+        "score": 82,
+        "berekening": "backtest_dagen(30) + random_seed_pass(15) + bear_market_pass(15) + honest_pnl_beschikbaar(20) + live_resultaten(0-20)",
+        "gebaseerd_op": {
+          "backtest_dagen": 360,
+          "trades_180d": 22,
+          "gerealiseerd_pnl_180d": 2.63,
+          "gerealiseerd_pnl_360d": 8.84,
+          "echt_netto_360d": -13.46,
+          "honesty_ratio": 0.30,
+          "bear_market_pnl": 1.42,
+          "bear_vs_baseline_multiplier": 6.2,
+          "random_seed_validatie": true,
+          "random_median_pnl": 1.61,
+          "verschil_vs_random_stddev": "veel lager (systematisch)",
+          "live_resultaten": "wachten op eerste maand data"
+        },
+        "toelichting": "Bewezen winnaar in v2+v3 backtests. 6.2× beter in bear-markten. Honesty ratio nog 0.30 door open posities — met loss-cut wordt dit richting 1.0."
+      },
+      "hypothese_lineage": {
+        "hypothese_h1": "Bollinger alleen koopt te vroeg in dalende trends",
+        "backtest_h1": "20260709_205003 (v2) — B_streng gap 95% blokkeerde 100% signalen, D_gap 50% wint",
+        "resultaat_h1": "D: €+2.63 vs A: €+2.31 gerealiseerd, in bear €1.42 vs €0.23 (6.2×)",
+        "hypothese_h2": "Verliezen zichtbaar realiseren > kapitaal bevriezen",
+        "backtest_h2": "20260709_213151 (v4) — P (D + 48u loss-cut -3%): ECHT netto €-9.53 vs D €-13.16",
+        "resultaat_h2": "Loss-cut werkt: kleinere echte drawdown, kapitaal vrij voor nieuwe kansen",
+        "conclusie": "Gap-body + loss-cut samen = huidige actieve strategie",
+        "volgende_hypothese": "Regime-awareness (v9): dynamisch schakelen tussen strategieën per markt-fase (bull/bear/range)"
+      },
+      "spark_alignment": {
+        "waarom": "Enige strategie die zowel bear-markten wint (6.2× baseline) als eerlijke PnL toont (loss-cut aan)",
+        "regels": [
+          "BUY: prijs < Bollinger lower band 2σ EN laatste groene candle dekt ≥50% van vorige rode body",
+          "SELL trailing stop: activeert +0.5% winst, sluit bij -0.4% terugval vanaf top",
+          "SELL loss-cut: na 48u en ≤-3% verlies → forceer SELL",
+          "PAUZE: markt drop >5% in 24u → 24u stil + notificatie",
+          "COOLDOWN: 15 min per markt na BUY; 30 min na INSUFFICIENT_EUR"
+        ],
+        "data_bronnen": [
+          "Bitvavo public candles 15m (360 dagen historie)",
+          "5 backtest-runs met _meta.json (v2 t/m v5)",
+          "random_seeds_check.json (10 seeds robustness)",
+          "live trade_history per user + market_stats.json"
+        ],
+        "onderliggende_hypothese": "Systematiek + transparantie > verstopping. Verlies zichtbaar > bevroren.",
+        "zekerheid": "82% — hoge score, live-datapunt nog te verzamelen om naar 90+ te gaan"
+      }
     },
-    "E_bollinger_plus_n_red_green": {
-      "beschrijving": "Bollinger 2σ + N-red-then-green (Neef's variant, N=3)",
-      "backtest_pnl_180d": 3.19,
-      "backtest_trades": 21,
-      "aanbevolen_voor": "extreme oversold trend-omslagen"
+
+    "extreme_oversold": {
+      "display_name": "Extreme Oversold (Neef's variant)",
+      "vorige_naam": "E_bollinger_plus_n_red_green",
+      "beschrijving": "Bollinger 2σ + N-red-then-green (N=3) — koopt alleen na 3 rode candles gevolgd door 1 groene",
+      "properties": ["bollinger_2sigma", "n_red_green_pattern", "extreme_oversold"],
+      "confidence": {
+        "score": 55,
+        "berekening": "backtest_pass*20 + smalle_scope*-5 + geen_loss_cut*-10 + geen_live*0",
+        "gebaseerd_op": {
+          "backtest_dagen": 180,
+          "trades_180d": 21,
+          "gerealiseerd_pnl_180d": 3.19,
+          "loss_cut": "niet ingebouwd",
+          "live_resultaten": "geen — niet actief"
+        },
+        "toelichting": "Hoogste ruwe PnL maar smalle scope (alleen extreme dips). Zonder loss-cut niet aanbevolen als hoofdstrategie."
+      },
+      "hypothese_lineage": {
+        "hypothese": "3-rode-dan-groen patroon geeft schoner omkeerpunt dan Bollinger alleen",
+        "backtest_run": "20260709_205003 (v2)",
+        "resultaat": "€+3.19 op 21 trades — beter dan A en D op gerealiseerd, maar 180d only",
+        "conclusie": "Kandidaat voor toekomstige regime-switch (bear-markten met extreme dips)",
+        "volgende_hypothese": "Combineer met loss-cut → nieuwe strategie extreme_oversold_protected"
+      },
+      "spark_alignment": {
+        "waarom": "Backup-strategie voor toekomstige regime-awareness (v9)",
+        "regels": ["3 opeenvolgende rode candles", "1 groene candle die minstens 50% van vorige rode body dekt", "Prijs < Bollinger lower band"],
+        "data_bronnen": ["Bitvavo public candles 15m 180d"],
+        "onderliggende_hypothese": "Meer bevestiging = minder valse signalen",
+        "zekerheid": "55% — belovend maar onvolledig getest, geen loss-cut"
+      }
     }
   },
 

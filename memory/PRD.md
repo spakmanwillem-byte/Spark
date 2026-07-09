@@ -1,32 +1,35 @@
 # Spark Core 2.0 — PRD
 
 
-## Sessie 42 (2026-07-09 laat) — Trader definitief + publieke uitleg-JSON + chat-intents
+## Sessie 42 (2026-07-09 laat) — Trader definitief + publieke uitleg-JSON + chat-intents + semantic strategies
 
 ### Probleem
 1. Trader-loopbugs, ghost pots, misleidende 100% win-rate en gebrek aan transparante uitleg voor bezoekers.
 2. Bot alleen bedienbaar via UI-knoppen — geen chat-commando's.
+3. Strategieën genoemd naar letters (A/D/E) — over jaren onbegrijpelijk, niet eigenschap-gebaseerd, geen confidence-score.
 
 ### Oplossing
 - **48u loss-cut + event-auto-pauze + honest-PnL** — LIVE in `spark_trader.json` + `monitor.py` + `/api/trade/honest-pnl/{user_id}`
-- **Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` (12 secties, alle backtest-resultaten, privacy-sectie) + endpoint `GET /api/trade/explained`
-- **Trader-intents fast-path** — `backend/modules/trade/trader_intents.py` met 8 intents: `trader_start`, `trader_stop`, `trader_status`, `trader_pnl`, `trader_recent`, `trader_baseline_reset`, `trader_events`, `trader_explain`. Hook in `response_composer.py` vóór action_intents. Regex-based NL matching (rapidfuzz niet nodig — patterns zijn scherp).
-- **Merge productie chat-data** — 57 nieuwe turns (20 user-001 conversations + 36 deep-user-001 messages + 1 boekhouder-msg) uit deployed zip veilig gemerged.
+- **Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` (12 secties, alle backtest-resultaten, privacy) + endpoint `GET /api/trade/explained`
+- **Trader-intents fast-path** — `backend/modules/trade/trader_intents.py` met 8 intents. Hook in `response_composer.py` vóór action_intents. Regex-based NL matching.
+- **Semantic strategies (v8_strategy_semantic_001)** — strategieën hernoemd van letters naar `mean_reversion_bollinger` / **`gap_momentum_50` (actief)** / `extreme_oversold`. Elke strategie heeft nu: `display_name`, `properties[]`, `confidence.score + breakdown`, `hypothese_lineage` (H → backtest → resultaat → conclusie → volgende H), `spark_alignment` (waarom/regels/data/hypothese/zekerheid).
+- **Confidence-endpoint** `GET /api/trade/strategy/confidence` — live berekening op basis van blueprint + huidige data (backtest_pass + random + bear + honest_pnl + live_track).
+- **Merge productie chat-data** — 57 nieuwe turns (20 user-001 conversations + 36 deep-user-001 messages + 1 boekhouder-msg) veilig gemerged.
 
 ### Verificatie
-- 19/19 unit-tests pass (direct try_detect)
-- E2E via `POST /api/spark/compose` → `used_model=trader_intents`, correct message per intent
-- Non-trader ("wat vind je van muziek") → LLM-fallback werkt
-- KB-kaart `kbv2-2f55a485` laag1+laag2 geüpdatet met intents en risico-beschermingen
+- 19/19 unit-tests trader_intents pass
+- E2E `POST /api/spark/compose` → `used_model=trader_intents`
+- `GET /api/trade/strategy/confidence` → 3 strategieën met stored+computed scores (gap_momentum_50: 82 stored / 80 computed)
+- `GET /api/trade/explained` sectie 4 toont `Gap Momentum 50` + 8 eigenschappen + confidence 82
 
 ### Bestanden
 - NEW `backend/modules/trade/trader_intents.py` (277 regels)
 - NEW `backend/data/trade/spark_trader_public.json` (12-sectie public JSON)
-- EDIT `backend/modules/trade/routes.py` — endpoint `GET /explained`
+- EDIT `backend/modules/trade/routes.py` — endpoints `GET /explained` + `GET /strategy/confidence`
 - EDIT `backend/modules/chat/response_composer.py` — trader-intents hook
-- EDIT `backend/modules/trade/blueprints/spark_trader.json` — koppelingen bijgewerkt
-- EDIT `backend/data/knowledge/v2/knowledge_v2_weten.json` — Spark Trader KB-kaart verrijkt
-- EDIT `memory/ROADMAP.md` — Sessie 40 entry
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — semantic strategies met properties/confidence/lineage/alignment
+- EDIT `backend/data/knowledge/v2/knowledge_v2_weten.json` — Spark Trader KB-kaart alle 4 lagen verrijkt
+- EDIT `memory/ROADMAP.md` — Sessie 40 entry uitgebreid
 
 ---
 

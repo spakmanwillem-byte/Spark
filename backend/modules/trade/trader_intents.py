@@ -322,12 +322,14 @@ def _do_explain() -> Dict[str, Any]:
     msg = (
         "🤖 **Spark Trader** — kort uitgelegd:\n"
         "• Autonome bot die elke 15 min 6 markten scant (BCH/BTC/ETH/SOL/ADA/ATOM-EUR)\n"
-        "• Strategie: Bollinger 2σ + gap-body 50% filter (winnaar backtest v2+v3)\n"
+        "• Actieve strategie: **Gap Momentum 50** (confidence 82%) — Bollinger 2σ + gap-body 50% filter\n"
+        "• Eigenschappen: mean_reversion · gap_body_50 · loss_cut_48h_3pct · event_pause_5pct_24h · honest_pnl · trailing_stop\n"
         "• Bescherming: 48u loss-cut (-3%), event-auto-pauze bij >5% daily drop, cooldowns\n"
         "• Transparant: eerlijke PnL via `/api/trade/honest-pnl/{user_id}`\n\n"
-        "Voor volledige uitleg met alle test-resultaten: `GET /api/trade/explained`"
+        "Volledige uitleg met alle test-resultaten: `GET /api/trade/explained`\n"
+        "Live confidence-scores: `GET /api/trade/strategy/confidence`"
     )
-    return {"success": True, "message": msg, "data": {"endpoint": "/api/trade/explained"}}
+    return {"success": True, "message": msg, "data": {"endpoints": ["/api/trade/explained", "/api/trade/strategy/confidence"]}}
 
 
 # ============================================================

@@ -64,13 +64,38 @@
   },
 
   "4_actieve_strategie": {
-    "naam": "D — Bollinger 2σ + gap-body-momentum 50%",
-    "waarom_gekozen": "Winnaar backtest v2 én v3: hoogste netto-winst in bear + range markten met acceptabel volume.",
-    "alternatieven_beschikbaar_in_config": [
-      "A_bollinger_only — eenvoudig, breed marktbereik",
-      "D_bollinger_2sigma_plus_gap_body — HUIDIG",
-      "E_bollinger_plus_n_red_green — extreme oversold trend-omslagen (Neef's variant, niet gebruikt)"
-    ]
+    "naam": "Gap Momentum 50",
+    "code_id": "gap_momentum_50",
+    "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
+    "eigenschappen": [
+      "bollinger_2sigma",
+      "mean_reversion",
+      "gap_body_50",
+      "loss_cut_48h_3pct",
+      "event_pause_5pct_24h",
+      "honest_pnl",
+      "trailing_stop",
+      "fee_aware_sell"
+    ],
+    "confidence_score": 82,
+    "waarom_gekozen": "Enige strategie die zowel bear-markten wint (6.2× baseline) als eerlijke PnL toont met loss-cut aan. Winnaar backtest v2 én v3, gevalideerd op 360 dagen.",
+    "alternatieven": [
+      {"naam": "Mean Reversion Bollinger", "code_id": "mean_reversion_bollinger", "confidence": 45, "waarom_niet_actief": "Verstopt verlies zonder loss-cut — honesty ratio -11.32"},
+      {"naam": "Extreme Oversold (Neef's variant)", "code_id": "extreme_oversold", "confidence": 55, "waarom_niet_actief": "Smalle scope, geen loss-cut, alleen 180d getest"}
+    ],
+    "spark_alignment": {
+      "waarom": "Backtest-bewezen beter dan random en baseline in bear-markten",
+      "regels": [
+        "BUY: prijs < Bollinger lower band 2σ EN laatste groene candle dekt ≥50% vorige rode body",
+        "SELL trailing stop: +0.5% activatie, -0.4% terugval sluit",
+        "SELL loss-cut: 48u + ≤-3% verlies → forceer SELL",
+        "PAUZE: >5% daily drop → 24u stil",
+        "COOLDOWN: 15 min per markt na BUY"
+      ],
+      "data_bronnen": ["Bitvavo public candles 15m 360d", "5 backtest-runs", "random-seed check 10 seeds", "live trade_history"],
+      "onderliggende_hypothese": "Systematiek + transparantie > verstopping",
+      "zekerheid_pct": 82
+    }
   },
 
   "5_backtest_resultaten": {

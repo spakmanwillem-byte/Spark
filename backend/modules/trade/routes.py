@@ -3,7 +3,7 @@ Trade Routes - Trade history, positions, Bitvavo credentials, monitoring, candle
 """
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Any
 from pathlib import Path
 from datetime import datetime, timezone
 import json
@@ -1727,3 +1727,85 @@ async def get_trader_explained():
         return data
     except Exception as e:
         return {"success": False, "error": f"kan uitleg niet laden: {e}"}
+
+
+# ============================================================
+# v8_strategy_confidence_001 — Live confidence score per strategie
+# ============================================================
+
+@router.get("/strategy/confidence")
+async def get_strategy_confidence(strategy_id: Optional[str] = None):
+    """Live confidence-score per strategie op basis van blueprint + huidige data.
+
+    Berekening (max 100):
+      backtest_pass    → 30 (heeft ≥180d backtest met positieve gerealiseerd PnL)
+      random_seed_pass → 15 (beter dan random-median of laagvariantie)
+      bear_pass        → 15 (bear-market PnL > 0)
+      honest_pnl_track → 20 (heeft honest_pnl loss-cut mechanisme)
+      live_track       → 0-20 (opgebouwd uit live trade history; 0 = geen data)
+
+    Return: dict per strategie of specifiek voor strategy_id.
+    """
+    try:
+        from modules.core.blueprint import load_blueprint_cached
+        bp = load_blueprint_cached("trade", "spark_trader") or {}
+        strategieën = bp.get("strategieën", {}) or {}
+    except Exception as e:
+        return {"success": False, "error": f"blueprint niet leesbaar: {e}"}
+
+    def score_one(sid: str, s: dict) -> Dict[str, Any]:
+        conf = s.get("confidence", {}) or {}
+        based = conf.get("gebaseerd_op", {}) or {}
+        props = s.get("properties", []) or []
+
+        # Bereken componenten live
+        backtest_pass = 30 if (based.get("gerealiseerd_pnl_180d", 0) > 0 or based.get("gerealiseerd_pnl_360d", 0) > 0) else 10
+        random_pass = 15 if based.get("random_seed_validatie") else 0
+        bear_pass = 15 if based.get("bear_market_pnl", 0) > 0 else 0
+        honest_track = 20 if ("loss_cut_48h_3pct" in props or "honest_pnl" in props) else 0
+        # Live: check of er trade_history is voor deze strategie (proxy: is deze strategie actief?)
+        live_track = 0
+        if s.get("actief"):
+            try:
+                stats = load_json(TRADE_DIR / "market_stats.json", default={}) or {}
+                total_users_trades = sum(u.get("total_trades", 0) for u in stats.get("users", {}).values())
+                if total_users_trades > 0:
+                    live_track = min(20, total_users_trades // 5)
+            except Exception:
+                pass
+
+        computed_score = backtest_pass + random_pass + bear_pass + honest_track + live_track
+        stored_score = conf.get("score", 0)
+
+        return {
+            "strategy_id": sid,
+            "display_name": s.get("display_name", sid),
+            "actief": bool(s.get("actief")),
+            "properties": props,
+            "confidence_score_stored": stored_score,
+            "confidence_score_computed": min(100, computed_score),
+            "breakdown": {
+                "backtest_pass": backtest_pass,
+                "random_seed_pass": random_pass,
+                "bear_market_pass": bear_pass,
+                "honest_pnl_track": honest_track,
+                "live_track": live_track,
+            },
+            "hypothese_lineage": s.get("hypothese_lineage", {}),
+            "spark_alignment": s.get("spark_alignment", {}),
+        }
+
+    if strategy_id:
+        s = strategieën.get(strategy_id)
+        if not s:
+            return {"success": False, "error": f"strategie '{strategy_id}' niet gevonden"}
+        return {"success": True, "strategy": score_one(strategy_id, s)}
+
+    # Alle strategieën
+    result = {sid: score_one(sid, s) for sid, s in strategieën.items()}
+    return {
+        "success": True,
+        "actieve_strategie": bp.get("actieve_strategie"),
+        "strategies": result,
+        "_note": "computed = live berekening, stored = handmatig ingesteld in blueprint. Live groeit als trade_history data binnenkomt.",
+    }

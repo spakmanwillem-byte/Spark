@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2087,
+    "card_count": 2088,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T19:17:39.845812+00:00",
+    "last_updated": "2026-07-09T21:01:12.728090+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -277017,6 +277017,157 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-e7c0c82e",
+      "begrip": "apocalyps",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een apocalyps is een openbaring of een ingrijpende gebeurtenis die het einde van een tijdperk inluidt.",
+        "laag2": "Het woord apocalyps betekent oorspronkelijk openbaring of onthulling. Tegenwoordig wordt het vaak gebruikt voor het einde van de wereld of een wereldwijde ramp.",
+        "laag3": "Apocalyps komt van het Griekse woord apokálypsis, dat \"onthulling\" of \"openbaring\" betekent. In de Bijbel is Openbaring (Apocalyps van Johannes) een boek met visioenen over het einde van een tijdperk, het oordeel en de komst van een nieuwe hemel en een nieuwe aarde. In films, boeken en media wordt apocalyps vaak gebruikt voor grote rampen zoals oorlogen, pandemieën of natuurrampen.",
+        "laag4": "Een apocalyps hoeft niet letterlijk het einde van de wereld te betekenen. In veel religieuze en filosofische tradities staat een apocalyps juist voor een overgang: een oude situatie eindigt zodat een nieuwe kan beginnen. Daarom wordt het begrip vaak verbonden met verandering, waarheid die zichtbaar wordt en een nieuw begin."
+      },
+      "ws5": {
+        "wie": "Gelovigen, filosofen, wetenschappers, schrijvers en andere geïnteresseerden.",
+        "wat": "Een openbaring of een gebeurtenis die het einde van een tijdperk markeert.",
+        "wanneer": "Bij beschrijvingen van grote veranderingen, profetieën of toekomstbeelden.",
+        "waar": "In religieuze teksten, literatuur, films, kunst en populaire cultuur.",
+        "waarom": "Om een grote overgang, onthulling of ingrijpende verandering te beschrijven.",
+        "hoe": "Door visioenen, profetieën, symboliek of verhalen over ingrijpende gebeurtenissen."
+      },
+      "tags": [
+        "apocalyps",
+        "openbaring",
+        "onthulling",
+        "einde der tijden",
+        "Bijbel",
+        "Openbaring",
+        "profetie",
+        "religie",
+        "verandering",
+        "wereld",
+        "symboliek",
+        "toekomst"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-dbf53843",
+          "begrip": "Profetie",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "profetie",
+            "religie",
+            "symboliek",
+            "toekomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-54a215c4",
+          "begrip": "Orakel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "religie",
+            "symboliek",
+            "toekomst"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-111928dd",
+          "begrip": "vredesduif",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "religie",
+            "symboliek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8ad5b09e",
+          "begrip": "Vuur staat voor energie en verandering",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "symboliek",
+            "verandering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-68d36a46",
+          "begrip": "Leef vanuit je verbeelding, niet je geschiedenis.",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "toekomst",
+            "verandering"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:01:12.728064+00:00",
+        "vorige_versie_v1": "kb-skel-e7c0c82e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:10.309115+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:01:07.004390+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:01:07.233075+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:01:13.068629+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:01:13.074864+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:01:06.900767+00:00"
       },
       "media": {
         "voice_url": null,

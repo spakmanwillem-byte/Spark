@@ -1,0 +1,1904 @@
+{
+  "BCH-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.44,
+      "avg_pnl_eur": 0.088,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.15
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.29
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.01
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.43
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.07,
+      "avg_pnl_eur": 0.073,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "range": {
+          "trades": 0,
+          "pnl": 0
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.18,
+      "avg_pnl_eur": 0.177,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.18
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.18
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -5.98,
+      "avg_pnl_eur": -5.977,
+      "max_drawdown_eur": 5.98,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -5.98
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": -5.98
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 241,
+      "wins": 89,
+      "losses": 152,
+      "win_rate": 36.9,
+      "total_pnl_eur": -16.45,
+      "avg_pnl_eur": -0.068,
+      "max_drawdown_eur": 16.77,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 61,
+          "pnl": -4.18
+        },
+        "bear": {
+          "trades": 45,
+          "pnl": -1.67
+        },
+        "range": {
+          "trades": 135,
+          "pnl": -10.6
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 100,
+          "pnl": -6.72
+        },
+        "out_event": {
+          "trades": 141,
+          "pnl": -9.73
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.67,
+      "avg_pnl_eur": 0.135,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.35
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.32
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.01
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.66
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.44,
+      "avg_pnl_eur": 0.088,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.15
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.29
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.01
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.43
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.47,
+      "avg_pnl_eur": 0.117,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.12
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.34
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.03
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.43
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.43,
+      "avg_pnl_eur": 0.108,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.15
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.28
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.43
+        }
+      }
+    }
+  },
+  "BTC-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.09,
+      "avg_pnl_eur": 0.094,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.08,
+      "avg_pnl_eur": 0.077,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.08
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.08,
+      "avg_pnl_eur": 0.08,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.08
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -2.94,
+      "avg_pnl_eur": -2.938,
+      "max_drawdown_eur": 2.94,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -2.94
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": -2.94
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 236,
+      "wins": 61,
+      "losses": 175,
+      "win_rate": 25.8,
+      "total_pnl_eur": -14.51,
+      "avg_pnl_eur": -0.061,
+      "max_drawdown_eur": 14.73,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 49,
+          "pnl": -5.06
+        },
+        "bear": {
+          "trades": 33,
+          "pnl": -2.11
+        },
+        "range": {
+          "trades": 154,
+          "pnl": -7.34
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 45,
+          "pnl": -2.74
+        },
+        "out_event": {
+          "trades": 191,
+          "pnl": -11.77
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.2,
+      "avg_pnl_eur": 0.101,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.2
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 2,
+          "pnl": 0.2
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.06,
+      "avg_pnl_eur": 0.061,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.09,
+      "avg_pnl_eur": 0.094,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.09,
+      "avg_pnl_eur": 0.094,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      }
+    }
+  },
+  "ETH-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.46,
+      "avg_pnl_eur": 0.114,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.39
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.46
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.09,
+      "avg_pnl_eur": 0.092,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.12,
+      "avg_pnl_eur": 0.123,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.12
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 0,
+          "pnl": 0
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.12
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -4.3,
+      "avg_pnl_eur": -4.296,
+      "max_drawdown_eur": 4.3,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -4.3
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": -4.3
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 255,
+      "wins": 81,
+      "losses": 174,
+      "win_rate": 31.8,
+      "total_pnl_eur": -15.35,
+      "avg_pnl_eur": -0.06,
+      "max_drawdown_eur": 15.74,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 78,
+          "pnl": -5.13
+        },
+        "bear": {
+          "trades": 39,
+          "pnl": -3.04
+        },
+        "range": {
+          "trades": 138,
+          "pnl": -7.18
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 126,
+          "pnl": -7.67
+        },
+        "out_event": {
+          "trades": 129,
+          "pnl": -7.67
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.12,
+      "avg_pnl_eur": 0.118,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.12
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.12
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.45,
+      "avg_pnl_eur": 0.113,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.1
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.35
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.45
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.46,
+      "avg_pnl_eur": 0.114,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.39
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 4,
+          "pnl": 0.46
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.3,
+      "avg_pnl_eur": 0.098,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.23
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.3
+        }
+      }
+    }
+  },
+  "SOL-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.42,
+      "avg_pnl_eur": 0.139,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.22
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.2
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.42
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 7,
+      "wins": 7,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 1.06,
+      "avg_pnl_eur": 0.151,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 5,
+          "pnl": 0.88
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.18
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 6,
+          "pnl": 0.95
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.11
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.19,
+      "avg_pnl_eur": 0.097,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.19
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 2,
+          "pnl": 0.19
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -4.21,
+      "avg_pnl_eur": -4.21,
+      "max_drawdown_eur": 4.21,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -4.21
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": -4.21
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 252,
+      "wins": 102,
+      "losses": 150,
+      "win_rate": 40.5,
+      "total_pnl_eur": -9.88,
+      "avg_pnl_eur": -0.039,
+      "max_drawdown_eur": 10.95,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 80,
+          "pnl": -3.66
+        },
+        "bear": {
+          "trades": 49,
+          "pnl": -1.77
+        },
+        "range": {
+          "trades": 123,
+          "pnl": -4.45
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 136,
+          "pnl": -3.81
+        },
+        "out_event": {
+          "trades": 116,
+          "pnl": -6.07
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.53,
+      "avg_pnl_eur": 0.176,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.12
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.4
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.53
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.34,
+      "avg_pnl_eur": 0.114,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.16
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.18
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.34
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.1,
+      "avg_pnl_eur": 0.102,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.1
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 0,
+          "pnl": 0
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.1
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.29,
+      "avg_pnl_eur": 0.097,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.21
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 3,
+          "pnl": 0.29
+        }
+      }
+    }
+  },
+  "ADA-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.46,
+      "avg_pnl_eur": 0.092,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 4,
+          "pnl": 0.4
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 4,
+          "pnl": 0.4
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0,
+      "total_pnl_eur": 0,
+      "avg_pnl_eur": 0,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 0,
+          "pnl": 0
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.25,
+      "avg_pnl_eur": 0.124,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.25
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 2,
+          "pnl": 0.25
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -5.71,
+      "avg_pnl_eur": -5.713,
+      "max_drawdown_eur": 5.71,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -5.71
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": -5.71
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 257,
+      "wins": 102,
+      "losses": 155,
+      "win_rate": 39.7,
+      "total_pnl_eur": -16.9,
+      "avg_pnl_eur": -0.066,
+      "max_drawdown_eur": 17.0,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 83,
+          "pnl": -4.5
+        },
+        "bear": {
+          "trades": 51,
+          "pnl": -2.22
+        },
+        "range": {
+          "trades": 123,
+          "pnl": -10.19
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 161,
+          "pnl": -10.19
+        },
+        "out_event": {
+          "trades": 96,
+          "pnl": -6.7
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.19,
+      "avg_pnl_eur": 0.095,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.19
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": 0.11
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.09
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.65,
+      "avg_pnl_eur": 0.13,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.15
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 4,
+          "pnl": 0.5
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 4,
+          "pnl": 0.59
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.34,
+      "avg_pnl_eur": 0.114,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.34
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 2,
+          "pnl": 0.28
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 3,
+      "wins": 3,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.23,
+      "avg_pnl_eur": 0.076,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 3,
+          "pnl": 0.23
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 2,
+          "pnl": 0.17
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.06
+        }
+      }
+    }
+  },
+  "ATOM-EUR": {
+    "A": {
+      "strategy": "Bollinger 2σ (baseline)",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.44,
+      "avg_pnl_eur": 0.087,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.13
+        },
+        "bear": {
+          "trades": 1,
+          "pnl": 0.23
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 4,
+          "pnl": 0.36
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.07
+        }
+      }
+    },
+    "D": {
+      "strategy": "Bollinger 2σ + gap-body (winnaar v2)",
+      "trades": 12,
+      "wins": 12,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 1.33,
+      "avg_pnl_eur": 0.111,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 4,
+          "pnl": 0.47
+        },
+        "range": {
+          "trades": 8,
+          "pnl": 0.86
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 10,
+          "pnl": 1.08
+        },
+        "out_event": {
+          "trades": 2,
+          "pnl": 0.25
+        }
+      }
+    },
+    "I": {
+      "strategy": "Random buy (chaos-baseline)",
+      "trades": 20,
+      "wins": 20,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 2.16,
+      "avg_pnl_eur": 0.108,
+      "max_drawdown_eur": 0,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 5,
+          "pnl": 0.56
+        },
+        "bear": {
+          "trades": 3,
+          "pnl": 0.27
+        },
+        "range": {
+          "trades": 12,
+          "pnl": 1.34
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 10,
+          "pnl": 0.97
+        },
+        "out_event": {
+          "trades": 10,
+          "pnl": 1.19
+        }
+      }
+    },
+    "J": {
+      "strategy": "Buy-and-hold (1× kopen, houden)",
+      "trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl_eur": -3.58,
+      "avg_pnl_eur": -3.584,
+      "max_drawdown_eur": 3.58,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": -3.58
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 1,
+          "pnl": -3.58
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "K": {
+      "strategy": "Inverse Bollinger (breakout-buy)",
+      "trades": 202,
+      "wins": 88,
+      "losses": 114,
+      "win_rate": 43.6,
+      "total_pnl_eur": -15.49,
+      "avg_pnl_eur": -0.077,
+      "max_drawdown_eur": 15.49,
+      "open_at_end": false,
+      "regime_pnl": {
+        "bull": {
+          "trades": 76,
+          "pnl": -6.88
+        },
+        "bear": {
+          "trades": 38,
+          "pnl": -3.42
+        },
+        "range": {
+          "trades": 88,
+          "pnl": -5.2
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 137,
+          "pnl": -13.1
+        },
+        "out_event": {
+          "trades": 65,
+          "pnl": -2.39
+        }
+      }
+    },
+    "L": {
+      "strategy": "All-red panic (5× rood → BUY)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.03,
+      "avg_pnl_eur": 0.033,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.03
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.03
+        }
+      }
+    },
+    "M": {
+      "strategy": "Baseline + all-green profit-take",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.44,
+      "avg_pnl_eur": 0.087,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 2,
+          "pnl": 0.13
+        },
+        "bear": {
+          "trades": 1,
+          "pnl": 0.23
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 4,
+          "pnl": 0.36
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.07
+        }
+      }
+    },
+    "N": {
+      "strategy": "Baseline + volume-weighted (>1.5×)",
+      "trades": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.27,
+      "avg_pnl_eur": 0.133,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 0,
+          "pnl": 0
+        },
+        "bear": {
+          "trades": 1,
+          "pnl": 0.23
+        },
+        "range": {
+          "trades": 1,
+          "pnl": 0.04
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 2,
+          "pnl": 0.27
+        },
+        "out_event": {
+          "trades": 0,
+          "pnl": 0
+        }
+      }
+    },
+    "O": {
+      "strategy": "Adaptive sigma (1.5/2/3 dynamic)",
+      "trades": 4,
+      "wins": 4,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.26,
+      "avg_pnl_eur": 0.064,
+      "max_drawdown_eur": 0,
+      "open_at_end": true,
+      "regime_pnl": {
+        "bull": {
+          "trades": 1,
+          "pnl": 0.07
+        },
+        "bear": {
+          "trades": 1,
+          "pnl": 0.11
+        },
+        "range": {
+          "trades": 2,
+          "pnl": 0.08
+        }
+      },
+      "event_pnl": {
+        "in_event": {
+          "trades": 3,
+          "pnl": 0.18
+        },
+        "out_event": {
+          "trades": 1,
+          "pnl": 0.07
+        }
+      }
+    }
+  }
+}

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1119,
+    "card_count": 1120,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-08T18:47:34.134111+00:00",
+    "last_updated": "2026-07-09T20:57:38.671017+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -146464,6 +146464,153 @@
             "result": {
               "n_found": 5,
               "top_overlap": 3
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-e6c29317",
+      "begrip": "benoemd",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Benoemd betekent dat iets of iemand officieel of bewust een naam, functie of omschrijving heeft gekregen.",
+        "laag2": "Benoemd geeft aan dat een naam, eigenschap, functie of onderwerp is aangewezen, uitgesproken of vastgesteld.",
+        "laag3": "Benoemd is de voltooide vorm van het werkwoord benoemen. Het wordt gebruikt wanneer iemand een naam geeft, een onderwerp bespreekbaar maakt of iemand officieel aanstelt in een functie. De betekenis hangt af van de context.",
+        "laag4": "Benoemen is een belangrijke vorm van communicatie. Door iets te benoemen krijgt het betekenis, wordt het herkenbaar en kan erover worden gesproken. In sommige situaties is benoemen informeel, zoals het noemen van een eigenschap, en in andere situaties officieel, zoals het benoemen van een directeur of minister."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties of systemen die iets of iemand aanwijzen of beschrijven.",
+        "wat": "Het geven van een naam, functie, eigenschap of omschrijving.",
+        "wanneer": "Wanneer iets bewust wordt aangeduid of officieel wordt vastgesteld.",
+        "waar": "In gesprekken, documenten, organisaties, onderwijs en communicatie.",
+        "waarom": "Om iets herkenbaar, bespreekbaar of officieel vast te leggen.",
+        "hoe": "Door een naam, functie, eigenschap of omschrijving toe te kennen of uit te spreken."
+      },
+      "tags": [
+        "benoemd",
+        "benoemen",
+        "naam",
+        "functie",
+        "eigenschap",
+        "aanduiden",
+        "aanwijzen",
+        "vaststellen",
+        "communicatie",
+        "taal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e64c654b",
+          "begrip": "benoemen",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "benoemen",
+            "communicatie",
+            "naam",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-04b0d8bf",
+          "begrip": "namen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "benoemen",
+            "communicatie",
+            "naam",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cf46f679",
+          "begrip": "benoem",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "benoemen",
+            "communicatie",
+            "naam",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-63373119",
+          "begrip": "Dit",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aanwijzen",
+            "communicatie",
+            "taal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-58b83d67",
+          "begrip": "hebt",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "eigenschap",
+            "taal"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-08T19:26:33.898562+00:00",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T20:57:38.670991+00:00",
+        "vertrouwen": 0.9,
+        "snap_context": "Ik wilde wat voor jouw zijn. Zo als je zelf benoemd jij leert nog.",
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T20:57:36.519186+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T20:57:36.619232+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T20:57:36.625919+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T20:57:38.921247+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T20:57:38.927432+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 4
             }
           }
         ]

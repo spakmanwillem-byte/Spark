@@ -2,6 +2,30 @@
 
 Datums = wanneer de implementatie afgerond is. Nieuwste bovenaan.
 
+## 2026-07-08 (sessie 46) — Gap-breakout merge in trader decision-engine
+
+### 🎯 v7_gap_breakout_001 + v7_gap_merge_001
+Willem's voorstel: gap-breakout strategy als bevestigings-filter naast Bollinger.
+
+**Bug**: Bollinger BUY (prijs onder lower band 2σ) triggerde in dalende markten steeds opnieuw omdat de band met de prijs meezakt → bot koopt op piek van elke lagere lokale top.
+
+**Fix in `modules/trade/monitor.py`**:
+- Nieuwe helper `_gap_breakout_check(candles)`: retourneert `BUY`/`SELL`/`NONE`
+  - BUY = vorige rood, huidige groen, `curr.low > prev.high` (volledig erboven)
+  - SELL = vorige groen, huidige rood, `curr.high < prev.low` (volledig eronder)
+- In `_run_cycle`: Bollinger BUY-signaal wordt **alleen doorgelaten** als gap-check óók BUY zegt. Anders: HOLD met reden "wacht op gap-bevestiging".
+- SELL-logica onaangetast (trailing stop + fee-aware guard blijft, gap-SELL zou trailing te vroeg triggeren).
+- Beslissingslog bevat nu `gap_check` object voor transparantie in trace.
+
+**Getest** (unit-test 3 cases):
+- Green fully above red → `BUY` ✅
+- Red fully below green → `SELL` ✅
+- Overlappende candles → `NONE` ✅
+
+**Effect**: minder trades, hogere hit-rate. Combineert mean-reversion (koop laag) + momentum-confirmation (koop pas bij bevestigde omslag).
+
+**KB Spark Trader kaart** (`kbv2-2f55a485`) laag2 verrijkt met uitleg van dubbele bevestiging.
+
 ## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB + Blueprint-piloot + Bijbel
 
 ### 📇 KB v2 kaarten "Spark Bijbel" + "wijsheden" verrijkt (`kbv2-336bd0a9`, `kbv2-846644c0`)

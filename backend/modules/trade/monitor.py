@@ -829,6 +829,7 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
             "window_high": round(window_high, 4),
             "drop_from_high_pct": round(drop_from_window_high * 100, 3),
             "position_update": {"open": True, "entry_price": price},
+            "_bollinger_action": "BUY",  # v7_gap_merge_001: intern flag voor gap-merge filter
         }
 
     band_pos = (price - lower) / (upper - lower) if (upper - lower) > 0 else 0.5
@@ -839,6 +840,34 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         "confidence": 0.3,
         "band_position": round(band_pos, 2),
     }
+
+
+def _gap_breakout_check(candles: List[Dict]) -> Dict:
+    """
+    v7_gap_breakout_001 — Willem's structuur-omslag detector.
+    Geeft BUY als laatste candle bullish (groen) is EN volledig boven de vorige
+    bearish (rode) candle sluit (low_curr > high_prev). Geeft SELL bij inverse.
+    Anders NONE. Fungeert als bevestigings-filter voor Bollinger-signaal om
+    'kopen op piek' in dalende markt te voorkomen.
+    """
+    if len(candles) < 2:
+        return {"signal": "NONE", "reason": "te weinig candles"}
+    prev = candles[-2]
+    curr = candles[-1]
+    prev_bearish = prev["close"] < prev["open"]
+    prev_bullish = prev["close"] > prev["open"]
+    curr_bullish = curr["close"] > curr["open"]
+    curr_bearish = curr["close"] < curr["open"]
+
+    # BUY: vorige rood, huidige groen, volledig erboven
+    if prev_bearish and curr_bullish and curr["low"] > prev["high"]:
+        gap = curr["low"] - prev["high"]
+        return {"signal": "BUY", "reason": f"groene candle volledig boven rode (gap €{gap:.4f})", "gap": round(gap, 4)}
+    # SELL: vorige groen, huidige rood, volledig eronder
+    if prev_bullish and curr_bearish and curr["high"] < prev["low"]:
+        gap = prev["low"] - curr["high"]
+        return {"signal": "SELL", "reason": f"rode candle volledig onder groene (gap €{gap:.4f})", "gap": round(gap, 4)}
+    return {"signal": "NONE", "reason": "geen volledige candle-omslag"}
 
 
 class MonitorService:
@@ -1292,6 +1321,18 @@ class MonitorService:
                     eur_cooldown_left = int(EUR_COOLDOWN_SEC - eur_elapsed)
 
             buy_decision = _simple_decision(context_candles, position=None, trade_amount=self._trade_amount)
+            # v7_gap_merge_001 — bevestigings-filter: Bollinger BUY alleen doorlaten als
+            # laatste candle een structuur-omslag toont (groene candle volledig boven
+            # vorige rode). Voorkomt 'kopen op piek' in dalende markt zoals Willem meldde.
+            gap_check = _gap_breakout_check(context_candles)
+            if buy_decision.get("action") == "BUY" and gap_check["signal"] != "BUY":
+                buy_decision["action"] = "HOLD"
+                buy_decision["reason"] += f" | Wacht op gap-bevestiging ({gap_check['reason']})"
+                buy_decision["gap_filter_blocked"] = True
+            elif buy_decision.get("action") == "BUY" and gap_check["signal"] == "BUY":
+                buy_decision["reason"] += f" | ✓ gap-bevestigd: {gap_check['reason']}"
+                buy_decision["gap_confirmed"] = True
+            buy_decision["gap_check"] = gap_check
             if market_context:
                 buy_decision = context_service.apply_context_to_decision(buy_decision, market_context, price, user_id=self._user_id)
             if buy_decision["action"] == "BUY" and in_cooldown:

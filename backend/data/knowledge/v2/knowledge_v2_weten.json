@@ -273341,7 +273341,7 @@
       "status": "draft",
       "lagen": {
         "laag1": "Spark Trader is Spark's autonome crypto-handelsmodule die via Bitvavo koopt en verkoopt op meerdere markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR). Werkt met een potjes-systeem: elk potje is een klein kapitaaltje met eigen aankoop/verkoop-status. Bots draaien parallel voor Spark, Willem en Geiser (15-min cycle). Fee voor Spark's eigen account is 0%; Bitvavo rekent 0.25% maker/taker per transactie.",
-        "laag2": "Werking: elke 15 min scant de bot 6 markten. Per markt beslist een Bollinger-Band + context-service of het BUY/HOLD/SELL wordt. Bij BUY opent hij een cluster (1-N potjes samen) via /trade/potjes/{user_id}. Bij SELL sluit hij het potje en boekt PnL. Cooldowns beschermen tegen doom-buying: 15 min per markt na een BUY, en sinds 08-jul een globale 30-min cooldown na INSUFFICIENT_EUR_BALANCE (voorkomt 57 mislukte pogingen per uur). Force-sell is atomair: als Bitvavo de sell rejected, wordt het potje teruggerold. Learning-scheduler doet nachtelijk een context-refresh (win-rate per markt + week/maand patronen) en past de BUY-drempel per markt aan.",
+        "laag2": "Werking: elke 15 min scant de bot 6 markten. Per markt beslist een Bollinger-Band + context-service of het BUY/HOLD/SELL wordt. Bij BUY opent hij een cluster (1-N potjes samen) via /trade/potjes/{user_id}. Bij SELL sluit hij het potje en boekt PnL. Cooldowns beschermen tegen doom-buying: 15 min per markt na een BUY, en sinds 08-jul een globale 30-min cooldown na INSUFFICIENT_EUR_BALANCE (voorkomt 57 mislukte pogingen per uur). Force-sell is atomair: als Bitvavo de sell rejected, wordt het potje teruggerold. Learning-scheduler doet nachtelijk een context-refresh (win-rate per markt + week/maand patronen) en past de BUY-drempel per markt aan.\n\nSinds v7 (08-jul): BUY-signalen worden **dubbel bevestigd** — Bollinger Band-signaal (mean-reversion, koop bij prijs onder lower band 2σ) ÉN gap-breakout-bevestiging (laatste groene candle sluit volledig boven vorige rode candle: low_curr > high_prev). Dit voorkomt 'kopen op piek' in dalende markten want Bollinger alleen kan aanhoudend BUY-signalen geven terwijl de band met de prijs meezakt. De gap-breakout eist een échte structuur-omslag voor er wordt gekocht. SELL-logica blijft trailing stop + fee-aware guard (nooit verkopen met verlies).",
         "laag3": "Waarom zo gebouwd: het potjes-model geeft transparant inzicht per euro-eenheid (hoeveel winst per potje, welke coin is anker) in plaats van één grote portefeuille. Multi-user via één Bitvavo-account (proxy) laat Willem gemeenschapsleden mee laten profiteren zonder dat iedereen zijn eigen API-keys hoeft in te vullen. De 0%-fee voor Spark's eigen bot is bewust: het is een leer-instrument, geen inkomstenmodel. Winst gaat naar de user wiens potje het is; Spark's eigen potjes dragen bij aan de gemeenschap-treasury.",
         "laag4": "Diepere laag: Spark Trader is ontworpen als 'eerlijke' bot — geen verborgen fees, geen stop-loss-cascades, geen ondoorzichtige leverage. Elke beslissing is te herleiden via het trace-log (/trade/logs/trace_YYYY-MM-DD.jsonl). De learning-service leert van jouw eigen trade-history — Spark past zich aan JOU aan, niet aan een generiek model. Dit sluit aan bij Spark's kernwaarde 'transparantie'. De blueprint (single source of truth) staat in /memory/blueprints/trade.md; deze kaart is de voorleesversie voor gesprekken."
       },
@@ -273448,7 +273448,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-07-08T13:39:14.482285+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-08T13:57:08.693377+00:00",
+        "laatst_bewerkt_op": "2026-07-09T20:24:19.206036+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -273461,6 +273461,22 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-08T13:57:09.040588+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T20:24:19.481052+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T20:24:19.542843+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 6

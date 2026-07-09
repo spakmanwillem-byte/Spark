@@ -62,10 +62,44 @@ from .strategy_decision import (  # noqa: E402
     BITVAVO_TAKER_FEE,
     _BLUEPRINT_CACHE,
     _load_trader_blueprint,
-    _simple_decision,
-    _gap_breakout_check,
-    _detect_daily_drop,
+    _simple_decision as _simple_decision_v1,
+    _gap_breakout_check as _gap_breakout_check_v1,
+    _detect_daily_drop as _detect_daily_drop_v1,
 )
+# v8_engine_switch_001 — A/B: kies decision-engine op basis van blueprint config
+from .strategy_decision_v2 import (  # noqa: E402
+    _simple_decision as _simple_decision_v2,
+    _gap_breakout_check as _gap_breakout_check_v2,
+    _detect_daily_drop as _detect_daily_drop_v2,
+)
+
+
+def _active_engine() -> str:
+    """Return 'v1' (default) of 'v2' op basis van blueprint config."""
+    try:
+        bp = _load_trader_blueprint()
+        return str(bp.get("active_decision_engine", "v1"))
+    except Exception:
+        return "v1"
+
+
+def _simple_decision(candles, position=None, trade_amount=5.0):
+    """Dispatcher: routes naar v1 of v2 op basis van blueprint config."""
+    if _active_engine() == "v2":
+        return _simple_decision_v2(candles, position, trade_amount)
+    return _simple_decision_v1(candles, position, trade_amount)
+
+
+def _gap_breakout_check(candles):
+    if _active_engine() == "v2":
+        return _gap_breakout_check_v2(candles)
+    return _gap_breakout_check_v1(candles)
+
+
+def _detect_daily_drop(candles, threshold_pct=5.0):
+    if _active_engine() == "v2":
+        return _detect_daily_drop_v2(candles, threshold_pct)
+    return _detect_daily_drop_v1(candles, threshold_pct)
 SETTINGS_DIR = DATA_DIR / "users"
 MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 

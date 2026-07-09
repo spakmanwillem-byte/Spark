@@ -10,7 +10,7 @@
 - **Confidence-endpoint** `GET /api/trade/strategy/confidence` — live berekening
 - **Chat merge** — 57 turns uit prod-zip veilig gemerged
 
-### 🎯 Batch 1 Spark Core (deze sessie) — 5/5 afgerond
+### 🎯 Batch 1 Spark Core (deze sessie) — 5/5 afgerond + 2 bonus enhancements
 - **Trader-glow** — `spark:nav-glow` event bij trader-intent als user niet op Trader-tab (integratie in GesprekkenPage.js)
 - **Strategie Synthesizer** — `POST /api/trade/strategy/synthesize` + `GET /api/trade/strategy/properties` (13-item property catalog, conflict-detectie)
 - **Chat → KB-suggesties** — `GET /api/kb/v2/suggest-from-chat/{user_id}` + `POST /api/kb/v2/suggest-accept` (word-freq + stopwoorden + KB-known filter)
@@ -20,10 +20,12 @@
   - Nieuwe module `strategy_decision.py` — `_simple_decision`, `_gap_breakout_check`, `_detect_daily_drop`, `_load_trader_blueprint`, `BITVAVO_TAKER_FEE`
   - Nieuwe module `exchange_data.py` — `fetch_candles`, `fetch_tickers`, `get_market_*`, caches, constanten
   - `monitor.py` behoudt als facade — alle `from .monitor import X` blijft werken
-  - MonitorService class + registry + order execution BLIJVEN in monitor.py (te complex om nu te verhuizen, risk-averse keuze)
+- **BONUS: Strategy Compare** (`v8_strategy_compare_001`) — `GET /api/trade/strategy/compare?a=X&b=Y` beoordeelt 5 secties (confidence, protection, bear-market, honesty, maturity) met per-sectie winner en overall winnaar
+- **BONUS: A/B Engine Switch** (`v8_engine_switch_001`) — nieuwe module `strategy_decision_v2.py` (trend-following stub) + `GET/POST /api/trade/engine/status|switch`. Dispatcher in monitor.py routes tussen v1 en v2 op basis van blueprint `active_decision_engine`. Live geswitcht v1→v2→v1 zonder herstart.
 
 ### ✅ Test-status
 - Iteratie 46 + 47: **39/39 backend tests PASS**, geen regressies
+- Bonus enhancements: handmatig geverifieerd via curl — compare toont Gap Momentum 50 4/5 wint, engine-switch v1↔v2 werkt met correcte routing
 - Test-files: `test_iter46_sparkcore_v2_features.py` + `test_iter47_refactor_regression.py`
 
 ### 🔴 NIET afgerond

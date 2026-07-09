@@ -2036,3 +2036,191 @@ async def synthesize_strategy(body: StrategySynthesizeBody):
         "strategy_id": strategy_id,
         "strategy": strategy_obj,
     }
+
+
+
+# ============================================================
+# v8_strategy_compare_001 — Confidence battle: side-by-side twee strategieën
+# ============================================================
+
+@router.get("/strategy/compare")
+async def compare_strategies(a: str, b: str):
+    """Vergelijk twee strategieën op alle relevante velden en bepaal winnaar per sectie."""
+    try:
+        from modules.core.blueprint import load_blueprint_cached
+        bp = load_blueprint_cached("trade", "spark_trader") or {}
+        strategieën = bp.get("strategieën", {}) or {}
+    except Exception as e:
+        return {"success": False, "error": f"blueprint niet leesbaar: {e}"}
+
+    sa = strategieën.get(a)
+    sb = strategieën.get(b)
+    if not sa:
+        return {"success": False, "error": f"strategie '{a}' niet gevonden"}
+    if not sb:
+        return {"success": False, "error": f"strategie '{b}' niet gevonden"}
+
+    def _pick(obj, path, default=None):
+        cur = obj
+        for k in path.split("."):
+            if not isinstance(cur, dict):
+                return default
+            cur = cur.get(k, default)
+            if cur is None:
+                return default
+        return cur
+
+    conf_a = int(_pick(sa, "confidence.score", 0) or 0)
+    conf_b = int(_pick(sb, "confidence.score", 0) or 0)
+    conf_winner = a if conf_a > conf_b else b if conf_b > conf_a else "tie"
+
+    props_a = set(sa.get("properties", []) or [])
+    props_b = set(sb.get("properties", []) or [])
+    prot_props = {"loss_cut_48h_3pct", "event_pause_5pct_24h", "honest_pnl", "fee_aware_sell"}
+    prot_a = len(props_a & prot_props)
+    prot_b = len(props_b & prot_props)
+    prot_winner = a if prot_a > prot_b else b if prot_b > prot_a else "tie"
+
+    based_a = _pick(sa, "confidence.gebaseerd_op", {}) or {}
+    based_b = _pick(sb, "confidence.gebaseerd_op", {}) or {}
+    bear_a = float(based_a.get("bear_market_pnl", 0) or 0)
+    bear_b = float(based_b.get("bear_market_pnl", 0) or 0)
+    bear_winner = a if bear_a > bear_b else b if bear_b > bear_a else "tie"
+
+    honesty_a = based_a.get("honesty_ratio")
+    honesty_b = based_b.get("honesty_ratio")
+
+    def _honesty_score(h):
+        if h is None:
+            return -999
+        return -abs((h or 0) - 1.0) if (h or 0) > 0 else -1000 + (h or 0)
+
+    honesty_winner = (
+        a if _honesty_score(honesty_a) > _honesty_score(honesty_b)
+        else b if _honesty_score(honesty_b) > _honesty_score(honesty_a)
+        else "tie"
+    )
+
+    conc_a = bool(_pick(sa, "hypothese_lineage.conclusie") and _pick(sa, "hypothese_lineage.conclusie") != "TODO")
+    conc_b = bool(_pick(sb, "hypothese_lineage.conclusie") and _pick(sb, "hypothese_lineage.conclusie") != "TODO")
+    maturity_winner = a if conc_a and not conc_b else b if conc_b and not conc_a else "tie"
+
+    winners = [conf_winner, prot_winner, bear_winner, honesty_winner, maturity_winner]
+    scores = {a: winners.count(a), b: winners.count(b), "tie": winners.count("tie")}
+    if scores[a] > scores[b]:
+        overall = a
+    elif scores[b] > scores[a]:
+        overall = b
+    else:
+        overall = "tie"
+
+    return {
+        "success": True,
+        "strategies": {
+            "a": {"id": a, "display_name": sa.get("display_name", a), "actief": bool(sa.get("actief"))},
+            "b": {"id": b, "display_name": sb.get("display_name", b), "actief": bool(sb.get("actief"))},
+        },
+        "sections": {
+            "confidence": {"a_score": conf_a, "b_score": conf_b, "winner": conf_winner},
+            "properties": {
+                "overlap": sorted(props_a & props_b),
+                "unique_a": sorted(props_a - props_b),
+                "unique_b": sorted(props_b - props_a),
+                "protection_count_a": prot_a,
+                "protection_count_b": prot_b,
+                "winner": prot_winner,
+                "toelichting": "Winnaar = meeste beschermings-eigenschappen (loss_cut, event_pause, honest_pnl, fee_aware_sell)",
+            },
+            "bear_market_pnl": {"a_eur": bear_a, "b_eur": bear_b, "winner": bear_winner},
+            "honesty": {
+                "a_ratio": honesty_a, "b_ratio": honesty_b, "winner": honesty_winner,
+                "toelichting": "Ratio dichter bij 1.0 = eerlijker. Negatief = verstopte verliezen.",
+            },
+            "spark_zekerheid": {
+                "a": _pick(sa, "spark_alignment.zekerheid", ""),
+                "b": _pick(sb, "spark_alignment.zekerheid", ""),
+            },
+            "maturity": {
+                "a_has_conclusion": conc_a, "b_has_conclusion": conc_b, "winner": maturity_winner,
+                "toelichting": "Winnaar = heeft afgeronde hypothese_lineage.conclusie (geen TODO)",
+            },
+        },
+        "score": scores,
+        "overall_winner": overall,
+        "advies": (
+            f"'{sa.get('display_name', a) if overall == a else sb.get('display_name', b)}' scoort beter op {scores.get(overall, 0)}/5 secties."
+            if overall != "tie"
+            else "Gelijkspel — beide strategieën scoren identiek. Kies op basis van filosofie."
+        ),
+    }
+
+
+# ============================================================
+# v8_engine_switch_001 — A/B decision-engine switch via blueprint config
+# ============================================================
+
+@router.get("/engine/status")
+async def get_engine_status():
+    """Toon actieve decision-engine + welke opties er zijn."""
+    try:
+        from modules.core.blueprint import load_blueprint_cached
+        bp = load_blueprint_cached("trade", "spark_trader") or {}
+        active = bp.get("active_decision_engine", "v1")
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+    engines_available = {
+        "v1": {
+            "module": "strategy_decision",
+            "beschrijving": "Bollinger 2σ + gap-body 50% + 48u loss-cut + event-pauze (huidige productie)",
+            "status": "productie",
+            "backtest_bewezen": True,
+        },
+        "v2": {
+            "module": "strategy_decision_v2",
+            "beschrijving": "Pure trend-following stub — koopt bij 3 stijgende candles, verkoopt bij 2 dalende. Experimenteel.",
+            "status": "draft",
+            "backtest_bewezen": False,
+        },
+    }
+
+    return {
+        "success": True,
+        "active_engine": active,
+        "engines_available": engines_available,
+        "current_module": engines_available.get(active, {}).get("module"),
+    }
+
+
+class EngineSwitchBody(BaseModel):
+    engine: str
+
+
+@router.post("/engine/switch")
+async def switch_engine(body: EngineSwitchBody):
+    """Wissel actieve decision-engine via blueprint. MonitorService leest bij volgende cycle."""
+    if body.engine not in ("v1", "v2"):
+        return {"success": False, "error": "engine moet 'v1' of 'v2' zijn"}
+
+    bp_path = Path(__file__).parent / "blueprints" / "spark_trader.json"
+    try:
+        bp_data = json.loads(bp_path.read_text(encoding="utf-8"))
+        bp_data["active_decision_engine"] = body.engine
+        # Atomair write via tmp+rename (fix code-review item iter46)
+        tmp = bp_path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(bp_data, ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp.replace(bp_path)
+        try:
+            from modules.core.blueprint import clear_blueprint_cache
+            clear_blueprint_cache()
+        except Exception:
+            pass
+    except Exception as e:
+        return {"success": False, "error": f"blueprint schrijven mislukt: {e}"}
+
+    return {
+        "success": True,
+        "message": f"Engine geswitcht naar {body.engine}.",
+        "active_engine": body.engine,
+        "note": "MonitorService leest engine bij volgende cycle (max 5 min wachttijd).",
+    }

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1121,
+    "card_count": 1122,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:14:05.958606+00:00",
+    "last_updated": "2026-07-09T21:45:20.786700+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -143689,21 +143689,12 @@
           "kaart_id": "kbv2-9523209f",
           "begrip": "Brommer",
           "lade": "weten",
-          "overlap": 3,
+          "overlap": 5,
           "shared_tags": [
+            "bestuurder",
             "mobiliteit",
             "verkeer",
-            "voertuig"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-cd586f6b",
-          "begrip": "Step",
-          "lade": "weten",
-          "overlap": 3,
-          "shared_tags": [
-            "mobiliteit",
-            "verkeer",
+            "vervoer",
             "voertuig"
           ]
         },
@@ -143711,31 +143702,49 @@
           "kaart_id": "kbv2-skel-05747634",
           "begrip": "verkeer",
           "lade": "weten",
-          "overlap": 3,
+          "overlap": 5,
+          "shared_tags": [
+            "mobiliteit",
+            "veiligheid",
+            "verkeer",
+            "vervoer",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-62b71eda",
+          "begrip": "Auto",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "auto",
+            "mobiliteit",
+            "vervoer",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8bf03b8d",
+          "begrip": "Elektrische auto",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "auto",
+            "mobiliteit",
+            "vervoer",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd586f6b",
+          "begrip": "Step",
+          "lade": "weten",
+          "overlap": 4,
           "shared_tags": [
             "mobiliteit",
             "verkeer",
+            "vervoer",
             "voertuig"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-723d27fc",
-          "begrip": "Transportmiddel",
-          "lade": "weten",
-          "overlap": 2,
-          "shared_tags": [
-            "mobiliteit",
-            "voertuig"
-          ]
-        },
-        {
-          "kaart_id": "kbv2-77341415",
-          "begrip": "Om auto te mogen rijden heb je een rijbewijs nodig",
-          "lade": "weten",
-          "overlap": 2,
-          "shared_tags": [
-            "rijbewijs",
-            "verkeer"
           ]
         }
       ],
@@ -143757,7 +143766,7 @@
           },
           {
             "hook": "register_in_vocab",
-            "fired_at": "2026-06-28T17:03:30.103556+00:00",
+            "fired_at": "2026-07-09T21:45:17.969983+00:00",
             "result": {
               "active": false,
               "is_new": false
@@ -143765,15 +143774,15 @@
           },
           {
             "hook": "compute_verbanden",
-            "fired_at": "2026-06-28T17:03:30.109298+00:00",
+            "fired_at": "2026-07-09T21:45:17.976286+00:00",
             "result": {
               "n_found": 5,
-              "top_overlap": 3
+              "top_overlap": 5
             }
           },
           {
             "hook": "register_in_vocab",
-            "fired_at": "2026-06-28T17:03:35.416176+00:00",
+            "fired_at": "2026-07-09T21:45:21.034711+00:00",
             "result": {
               "active": true,
               "is_new": false
@@ -143781,10 +143790,10 @@
           },
           {
             "hook": "compute_verbanden",
-            "fired_at": "2026-06-28T17:03:35.421965+00:00",
+            "fired_at": "2026-07-09T21:45:21.040907+00:00",
             "result": {
               "n_found": 5,
-              "top_overlap": 3
+              "top_overlap": 5
             }
           }
         ],
@@ -146773,6 +146782,102 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:14:01.968705+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-461674fb",
+      "begrip": "autorijden",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Autorijden is het besturen van een auto om jezelf of anderen te verplaatsen.",
+        "laag2": "Autorijden is een vaardigheid waarbij een bestuurder een auto veilig en volgens de verkeersregels bestuurt.",
+        "laag3": "Autorijden vereist kennis van verkeersregels, voertuigbeheersing en aandacht voor de omgeving. Bestuurders nemen voortdurend beslissingen over snelheid, richting en verkeerssituaties om veilig aan het verkeer deel te nemen.",
+        "laag4": "Autorijden is een combinatie van technische vaardigheden, waarneming en verantwoordelijkheid. Een bestuurder moet risico's inschatten, rekening houden met andere weggebruikers en zich aanpassen aan veranderende omstandigheden zoals het weer, verkeersdrukte en wegwerkzaamheden. Veilig autorijden vraagt om ervaring, concentratie en verantwoord gedrag."
+      },
+      "ws5": {
+        "wie": "Personen met een geldig rijbewijs of iemand die onder begeleiding leert rijden.",
+        "wat": "Het besturen van een auto in het verkeer.",
+        "wanneer": "Wanneer iemand zich met een auto verplaatst.",
+        "waar": "Op openbare wegen, parkeerterreinen en andere plaatsen waar auto's mogen rijden.",
+        "waarom": "Om mensen of goederen veilig en efficiënt te vervoeren.",
+        "hoe": "Door een auto te besturen volgens de verkeersregels en met aandacht voor de omgeving."
+      },
+      "tags": [
+        "autorijden",
+        "auto",
+        "rijden",
+        "bestuurder",
+        "verkeer",
+        "rijbewijs",
+        "voertuig",
+        "verkeersregels",
+        "mobiliteit",
+        "vervoer",
+        "veiligheid"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:45:20.786681+00:00",
+        "vorige_versie_v1": "kb-skel-461674fb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:39.665656+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:45:17.969983+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:45:17.976286+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:45:21.034711+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:45:21.040907+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:45:17.869881+00:00"
       },
       "media": {
         "voice_url": null,

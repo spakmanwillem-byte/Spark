@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2091,
+    "card_count": 2092,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:43:20.095259+00:00",
+    "last_updated": "2026-07-09T21:51:33.046764+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -277664,6 +277664,165 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:43:17.185331+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a29d7ab1",
+      "begrip": "milieu",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Het milieu is de natuurlijke en door mensen beïnvloede leefomgeving van mensen, dieren en planten.",
+        "laag2": "Het milieu omvat lucht, water, bodem, natuur, klimaat en alle omgevingsfactoren die invloed hebben op het leven op aarde.",
+        "laag3": "Het milieu bestaat uit alle fysieke, biologische en chemische omstandigheden waarin organismen leven. Menselijke activiteiten, zoals industrie, landbouw en verkeer, kunnen het milieu positief of negatief beïnvloeden. Bescherming van het milieu richt zich op het behouden van een gezonde en duurzame leefomgeving.",
+        "laag4": "Een gezond milieu is belangrijk voor de kwaliteit van leven, biodiversiteit en het voortbestaan van ecosystemen. Milieubeheer richt zich op het verminderen van vervuiling, het duurzaam gebruiken van grondstoffen en het beschermen van natuur en klimaat, zodat ook toekomstige generaties in een gezonde omgeving kunnen leven."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, planten en andere organismen.",
+        "wat": "De leefomgeving en alle omgevingsfactoren die het leven beïnvloeden.",
+        "wanneer": "Altijd; het milieu is voortdurend aanwezig en verandert door natuurlijke processen en menselijk handelen.",
+        "waar": "Overal op aarde, zowel in natuurlijke als door mensen gemaakte omgevingen.",
+        "waarom": "Omdat een gezond milieu essentieel is voor leven, gezondheid en natuur.",
+        "hoe": "Door de wisselwerking tussen lucht, water, bodem, klimaat, natuur en menselijke activiteiten."
+      },
+      "tags": [
+        "milieu",
+        "leefomgeving",
+        "natuur",
+        "klimaat",
+        "lucht",
+        "water",
+        "bodem",
+        "duurzaamheid",
+        "biodiversiteit",
+        "vervuiling",
+        "ecosystemen",
+        "milieubescherming"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4929b4b9",
+          "begrip": "Ecosysteem past zich aan aan veranderingen",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "biodiversiteit",
+            "klimaat",
+            "leefomgeving",
+            "milieu",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-80b37ce3",
+          "begrip": "Ecosysteem bevat levende en niet-levende elementen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bodem",
+            "lucht",
+            "natuur",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-5cd3dd05",
+          "begrip": "wolken",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "klimaat",
+            "lucht",
+            "natuur",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-dbf627b6",
+          "begrip": "vocht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bodem",
+            "klimaat",
+            "natuur",
+            "water"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1140d744",
+          "begrip": "Verstoring van ecosysteem veroorzaakt schade",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biodiversiteit",
+            "milieu",
+            "natuur",
+            "vervuiling"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:51:33.046749+00:00",
+        "vorige_versie_v1": "kb-skel-a29d7ab1",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.814909+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:51:31.163117+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:51:31.169376+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:51:33.389848+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:51:33.396106+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:51:31.061646+00:00"
       },
       "media": {
         "voice_url": null,

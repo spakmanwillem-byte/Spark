@@ -1,0 +1,140 @@
+{
+  "market": "BCH-EUR",
+  "interval": "15m",
+  "days_covered": 180,
+  "n_candles": 16488,
+  "trade_amount_eur": 10.0,
+  "fee_pct_per_side": 0.25,
+  "period_from": "2025-12-30T07:15:00+00:00",
+  "period_to": "2026-07-09T20:30:00+00:00",
+  "sims": [
+    {
+      "name": "A. Bollinger-only",
+      "trades": 5,
+      "wins": 5,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.65,
+      "avg_pnl_eur": 0.13,
+      "max_drawdown_eur": 0,
+      "avg_hold_bars": 174.2,
+      "avg_hold_hours": 43.5,
+      "blocked_by_gap": 0,
+      "allowed_by_gap": 6,
+      "open_position_at_end": true
+    },
+    {
+      "name": "B. Bollinger + gap-streng (v7 huidig)",
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0,
+      "total_pnl_eur": 0,
+      "avg_pnl_eur": 0,
+      "max_drawdown_eur": 0,
+      "avg_hold_bars": 0,
+      "avg_hold_hours": 0.0,
+      "blocked_by_gap": 604,
+      "allowed_by_gap": 0,
+      "open_position_at_end": false
+    },
+    {
+      "name": "C. Bollinger + gap-los",
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0,
+      "total_pnl_eur": 0,
+      "avg_pnl_eur": 0,
+      "max_drawdown_eur": 0,
+      "avg_hold_bars": 0,
+      "avg_hold_hours": 0.0,
+      "blocked_by_gap": 371,
+      "allowed_by_gap": 1,
+      "open_position_at_end": true
+    },
+    {
+      "name": "D. Bollinger + 3-red-then-green (Neef)",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "total_pnl_eur": 0.11,
+      "avg_pnl_eur": 0.112,
+      "max_drawdown_eur": 0,
+      "avg_hold_bars": 94.0,
+      "avg_hold_hours": 23.5,
+      "blocked_by_gap": 25,
+      "allowed_by_gap": 2,
+      "open_position_at_end": true
+    }
+  ],
+  "trades_by_sim": {
+    "A. Bollinger-only": [
+      {
+        "entry_price": 505.37,
+        "exit_price": 516.38,
+        "entry_ts": 1767345300000,
+        "exit_ts": 1767373200000,
+        "gross_pnl": 0.2179,
+        "net_pnl": 0.1679,
+        "hold_bars": 261,
+        "win": true
+      },
+      {
+        "entry_price": 539.18,
+        "exit_price": 548.88,
+        "entry_ts": 1767456000000,
+        "exit_ts": 1767471300000,
+        "gross_pnl": 0.1799,
+        "net_pnl": 0.1299,
+        "hold_bars": 17,
+        "win": true
+      },
+      {
+        "entry_price": 549.6,
+        "exit_price": 557.9,
+        "entry_ts": 1767497400000,
+        "exit_ts": 1767525300000,
+        "gross_pnl": 0.151,
+        "net_pnl": 0.101,
+        "hold_bars": 39,
+        "win": true
+      },
+      {
+        "entry_price": 544.76,
+        "exit_price": 553.18,
+        "entry_ts": 1767544200000,
+        "exit_ts": 1767572100000,
+        "gross_pnl": 0.1546,
+        "net_pnl": 0.1046,
+        "hold_bars": 46,
+        "win": true
+      },
+      {
+        "entry_price": 559.82,
+        "exit_price": 570.76,
+        "entry_ts": 1768079700000,
+        "exit_ts": 1768111200000,
+        "gross_pnl": 0.1954,
+        "net_pnl": 0.1454,
+        "hold_bars": 508,
+        "win": true
+      }
+    ],
+    "B. Bollinger + gap-streng (v7 huidig)": [],
+    "C. Bollinger + gap-los": [],
+    "D. Bollinger + 3-red-then-green (Neef)": [
+      {
+        "entry_price": 549.78,
+        "exit_price": 558.68,
+        "entry_ts": 1767548700000,
+        "exit_ts": 1767576600000,
+        "gross_pnl": 0.1619,
+        "net_pnl": 0.1119,
+        "hold_bars": 94,
+        "win": true
+      }
+    ]
+  }
+}

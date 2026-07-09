@@ -1,0 +1,233 @@
+# Spark Core 2.0 — Portability & Odroid Migratie
+
+## Waarom deze doc?
+De preview-omgeving (Emergent K8s) gebruikt hardcoded paden en supervisor. Voor migratie naar **Odroid** (of andere Linux hardware) heb je nodig:
+1. Portable paden (geen `/app/backend/*` in code)
+2. Non-supervisor start (`run.sh` in dev, systemd in prod)
+3. Duidelijke `.env` scheiding
+4. Ghost-key controle bij restore
+
+Deze doc + `install.sh` + `run.sh` maakt dat mogelijk.
+
+---
+
+## Snelstart Odroid
+
+```bash
+# 1. Clone repo
+git clone <jouw-repo> spark-core
+cd spark-core
+
+# 2. Vul .env in
+cp backend/.env.example backend/.env   # zie config-sectie
+cp frontend/.env.example frontend/.env
+
+# 3. Install (Ubuntu 22.04, arm64 of x86_64)
+./install.sh          # met systemd
+./install.sh --dev    # zonder systemd, foreground
+
+# 4. Start (dev-modus)
+./run.sh              # backend :8001 + frontend :3000
+./run.sh stop         # netjes stoppen
+
+# 5. Prod-modus (na install.sh zonder --dev)
+sudo systemctl start spark-backend spark-frontend
+sudo journalctl -u spark-backend -f
+```
+
+---
+
+## Portable paden (v8_odroid_portability_001)
+
+**Probleem**: veel modules gebruikten `Path("/app/backend/data")` — werkte alleen in Emergent K8s.
+
+**Oplossing**: env-var `SPARK_DATA_DIR` met fallback naar relatief pad:
+
+```python
+DATA = Path(os.environ.get("SPARK_DATA_DIR") or (Path(__file__).parent.parent.parent / "data"))
+```
+
+**Gefixt in deze sessie**:
+- ✅ `modules/scheduler/__init__.py` — DATA path
+- ⏳ Rest volgt in refactor-sessie (comments met `/app/backend/*` zijn onschuldig, alleen code-paths tellen)
+
+**Zelf checken hoeveel hardcoded paden er nog zijn:**
+```bash
+grep -rn "Path(\"/app\|Path('/app" backend/modules --include="*.py" | grep -v "^Binary"
+```
+
+**Fix-pattern per file**:
+```python
+# VOOR
+DATA = Path("/app/backend/data")
+
+# NA (portable)
+import os
+DATA = Path(os.environ.get("SPARK_DATA_DIR") or (Path(__file__).parent.parent.parent / "data"))
+```
+
+---
+
+## .env Config
+
+### `backend/.env`
+```env
+MONGO_URL=                              # LEEG mag — Spark gebruikt alleen JSON
+DB_NAME=spark_core                      # verplicht (framework-check)
+
+# Bitvavo (crypto trading)
+BITVAVO_KEY=
+BITVAVO_SECRET=
+
+# LLM providers (kies wat je gebruikt)
+GROQ_API_KEY=
+CEREBRAS_API_KEY=
+EMERGENT_LLM_KEY=                       # Voor TTS/STT + optionele LLM
+
+# Portable-pad override (optioneel — anders wordt fallback gebruikt)
+SPARK_DATA_DIR=/opt/spark/backend/data
+```
+
+### `frontend/.env`
+```env
+REACT_APP_BACKEND_URL=http://192.168.1.50:8001    # Odroid LAN-IP
+```
+
+---
+
+## Ghost-keys controle
+
+**Probleem**: bij zip-restore van preview → Odroid kunnen er "ghost keys" achterblijven (user_id's die nergens meer bestaan, of blueprints die verwijzen naar files die er niet meer zijn).
+
+**Check script** (voer uit na restore):
+```bash
+cd backend
+python3 -c "
+from pathlib import Path
+import json
+
+DATA = Path('data')
+issues = []
+
+# 1. User_potjes zonder user in users.json
+users = {u['user_id']: u for u in (json.load(open(DATA/'system'/'users.json')).get('users', []))}
+potjes = json.load(open(DATA/'trade'/'user_potjes.json'))
+for uid in potjes.keys():
+    if uid not in users and uid != 'user-000':
+        issues.append(f'GHOST user_potjes: {uid}')
+
+# 2. Blueprint verwijzingen
+bp = json.load(open('modules/trade/blueprints/spark_trader.json'))
+public_path = Path('data/trade/spark_trader_public.json')
+if not public_path.exists():
+    issues.append('MISSING: spark_trader_public.json')
+
+# 3. KB index vs feitelijke lades
+idx = json.load(open(DATA/'knowledge'/'v2'/'knowledge_index.json'))
+for begrip, entry in list(idx.get('entries', {}).items())[:100]:
+    if entry.get('lade') is None:
+        # verwijst naar inbox — check of daar staat
+        inbox = json.load(open(DATA/'knowledge'/'v2'/'inbox.json'))
+        ids = {k['id'] for k in inbox.get('kaarten', [])}
+        if entry.get('kaart_id') not in ids:
+            issues.append(f'GHOST index entry: {begrip} → {entry.get(\"kaart_id\")}')
+
+print(f'Issues: {len(issues)}')
+for i in issues[:20]: print(f'  {i}')
+"
+```
+
+---
+
+## Systemd Templates
+
+Maak in `deploy/spark-backend.service`:
+```ini
+[Unit]
+Description=Spark Core Backend
+After=network.target
+
+[Service]
+Type=simple
+User=spark
+WorkingDirectory=/opt/spark/backend
+Environment=SPARK_DATA_DIR=/opt/spark/backend/data
+ExecStart=/opt/spark/backend/.venv/bin/uvicorn server:app --host 0.0.0.0 --port 8001
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+En `deploy/spark-frontend.service`:
+```ini
+[Unit]
+Description=Spark Core Frontend
+After=network.target
+
+[Service]
+Type=simple
+User=spark
+WorkingDirectory=/opt/spark/frontend
+Environment=PORT=3000
+ExecStart=/usr/bin/yarn start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## Backup & Restore
+
+### Backup vanaf preview
+```bash
+curl -X POST "$PREVIEW_URL/api/backup/create" -o spark_backup_$(date +%Y%m%d).zip
+```
+
+### Restore op Odroid
+```bash
+cd /opt/spark
+unzip spark_backup_20260709.zip
+./run.sh stop
+# valideer via ghost-keys check (hierboven)
+./run.sh
+```
+
+---
+
+## Wat er NOG NIET portable is
+
+**Bewust niet aangeraakt** in v8 (Willems keuze: focus op deployment, niet grote refactor):
+- Docstring-referenties naar `/app/backend/...` in `core/tracing.py`, `user_archive/routes.py`, `backup/routes.py` — puur comments, geen executable paths
+- Sommige tests in `/app/backend/tests/backtest_*.py` hebben absolute paden in output-directories → alleen relevant als je backtests draait
+
+**Volgt in refactor-sessie** (P2):
+- `trade/monitor.py` splitten (1700+ regels → core/alerts/reporter) + alle paden portable
+- Frontend hardcoded ports check (`3000` in enkele plaatsen als fallback)
+
+---
+
+## Test Portability
+
+Voer uit vóór migratie:
+```bash
+# 1. Simuleer andere data-dir
+SPARK_DATA_DIR=/tmp/spark-test-data ./run.sh backend
+# → moet /tmp/spark-test-data aanmaken en initialiseren zonder errors
+
+# 2. Test cold-start zonder existing data
+rm -rf backend/data && mkdir backend/data
+./run.sh backend
+# → moet clean-slate booten met defaults
+```
+
+---
+
+## Support & vragen
+
+Bij problemen: check `journalctl -u spark-backend -n 100` op de Odroid,
+of run `./run.sh backend` in foreground om real-time logs te zien.

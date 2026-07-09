@@ -7,6 +7,7 @@ from typing import Optional, List, Dict, Any
 from pathlib import Path
 from datetime import datetime, timezone
 import json
+import re
 from modules.core.storage import load_json, save_json
 from modules.core.spark_logger import traced
 from .monitor import (
@@ -1808,4 +1809,230 @@ async def get_strategy_confidence(strategy_id: Optional[str] = None):
         "actieve_strategie": bp.get("actieve_strategie"),
         "strategies": result,
         "_note": "computed = live berekening, stored = handmatig ingesteld in blueprint. Live groeit als trade_history data binnenkomt.",
+    }
+
+
+
+# ============================================================
+# v8_strategy_synthesize_001 — Spark synthetiseert nieuwe strategieën uit properties
+# ============================================================
+
+# Property catalog — alle bekende bouwstenen met hun eigenschappen
+_PROPERTY_CATALOG = {
+    "bollinger_2sigma": {
+        "categorie": "signaal",
+        "beschrijving": "BUY-signaal wanneer prijs onder Bollinger lower band 2σ zakt (mean-reversion)",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "mean_reversion": {
+        "categorie": "filosofie",
+        "beschrijving": "Onderneemt kopen bij afwijking van gemiddelde, verwacht terugkeer",
+        "conflicts_with": ["trend_following"],
+        "requires": [],
+    },
+    "trend_following": {
+        "categorie": "filosofie",
+        "beschrijving": "Volgt bestaande momentum-richting (buy-high-sell-higher)",
+        "conflicts_with": ["mean_reversion"],
+        "requires": [],
+    },
+    "gap_body_50": {
+        "categorie": "confirmatie",
+        "beschrijving": "Laatste groene candle moet ≥50% van vorige rode body dekken",
+        "conflicts_with": ["gap_body_95"],
+        "requires": [],
+    },
+    "gap_body_95": {
+        "categorie": "confirmatie",
+        "beschrijving": "Strenge variant: 95% dekking (blokkeerde 100% signalen in backtest — niet aanbevolen)",
+        "conflicts_with": ["gap_body_50"],
+        "requires": [],
+    },
+    "n_red_green_pattern": {
+        "categorie": "confirmatie",
+        "beschrijving": "3 rode candles gevolgd door 1 groene (Neef's variant, extreme oversold)",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "loss_cut_48h_3pct": {
+        "categorie": "bescherming",
+        "beschrijving": "Forceer SELL na 48u als positie ≤-3% verlies staat (verlies zichtbaar realiseren)",
+        "conflicts_with": ["hold_indefinitely"],
+        "requires": [],
+    },
+    "hold_indefinitely": {
+        "categorie": "bescherming",
+        "beschrijving": "Verkoop nooit met verlies — geeft 100% win-rate maar verbergt drawdown",
+        "conflicts_with": ["loss_cut_48h_3pct"],
+        "requires": [],
+    },
+    "event_pause_5pct_24h": {
+        "categorie": "bescherming",
+        "beschrijving": "Bij daily drop >5% → markt 24u pauze + notificatie",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "trailing_stop": {
+        "categorie": "exit",
+        "beschrijving": "Activeert bij +0.5% winst, sluit bij -0.4% terugval vanaf top",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "fee_aware_sell": {
+        "categorie": "exit",
+        "beschrijving": "Weigert SELL als netto na 0.25% Bitvavo-fee < €0.01 winst",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "honest_pnl": {
+        "categorie": "meta",
+        "beschrijving": "Toont gerealiseerd + open drawdown + ECHT netto + honesty ratio",
+        "conflicts_with": [],
+        "requires": [],
+    },
+    "extreme_oversold": {
+        "categorie": "signaal",
+        "beschrijving": "Alleen kopen bij extreme dips (breed onder mean)",
+        "conflicts_with": [],
+        "requires": [],
+    },
+}
+
+
+class StrategySynthesizeBody(BaseModel):
+    display_name: Optional[str] = None
+    properties: List[str] = []
+    author: Optional[str] = "spark"
+    notes: Optional[str] = None
+
+
+@router.get("/strategy/properties")
+async def list_strategy_properties():
+    """Property catalog — alle bouwstenen met categorie + beschrijving + conflicts."""
+    return {"success": True, "properties": _PROPERTY_CATALOG}
+
+
+@router.post("/strategy/synthesize")
+async def synthesize_strategy(body: StrategySynthesizeBody):
+    """Combineer properties tot een nieuwe strategie-blueprint + backtest-plan.
+
+    Valideert conflicts en genereert:
+      - strategy_id (kebab_case van display_name)
+      - beschrijving (autogenereerd uit properties)
+      - spark_alignment (waarom/regels/data/hypothese/zekerheid — placeholder)
+      - hypothese_lineage stub (wachtend op backtest)
+      - backtest_plan met parameters die getest moeten worden
+
+    Persistent: schrijft naar `spark_trader.json.strategieën[strategy_id]` als draft.
+    Backtest zelf wordt niet automatisch gedraaid (dat is een aparte P2-taak).
+    """
+    props = [p.strip() for p in (body.properties or []) if p.strip()]
+    if not props:
+        return {"success": False, "error": "properties[] mag niet leeg zijn"}
+
+    # Validate: onbekende properties
+    unknown = [p for p in props if p not in _PROPERTY_CATALOG]
+    if unknown:
+        return {"success": False, "error": f"onbekende properties: {unknown}", "beschikbaar": list(_PROPERTY_CATALOG.keys())}
+
+    # Validate: conflicts
+    conflicts_found = []
+    for p in props:
+        for c in _PROPERTY_CATALOG[p].get("conflicts_with", []):
+            if c in props:
+                conflicts_found.append((p, c))
+    if conflicts_found:
+        return {"success": False, "error": "conflicterende properties", "conflicts": conflicts_found}
+
+    # Genereer strategy_id
+    disp = body.display_name or " + ".join(props[:3])
+    strategy_id = disp.lower().replace(" ", "_").replace("+", "_plus_").replace("-", "_")
+    strategy_id = re.sub(r"[^a-z0-9_]", "", strategy_id)[:60]
+
+    # Genereer beschrijving
+    signal_props = [p for p in props if _PROPERTY_CATALOG[p]["categorie"] == "signaal"]
+    conf_props = [p for p in props if _PROPERTY_CATALOG[p]["categorie"] == "confirmatie"]
+    prot_props = [p for p in props if _PROPERTY_CATALOG[p]["categorie"] == "bescherming"]
+    exit_props = [p for p in props if _PROPERTY_CATALOG[p]["categorie"] == "exit"]
+
+    beschrijving_parts = []
+    if signal_props: beschrijving_parts.append(f"Signaal: {' + '.join(signal_props)}")
+    if conf_props: beschrijving_parts.append(f"Confirmatie: {' + '.join(conf_props)}")
+    if prot_props: beschrijving_parts.append(f"Bescherming: {' + '.join(prot_props)}")
+    if exit_props: beschrijving_parts.append(f"Exit: {' + '.join(exit_props)}")
+    beschrijving = ". ".join(beschrijving_parts) + "."
+
+    # Genereer regels lijst
+    regels = [_PROPERTY_CATALOG[p]["beschrijving"] for p in props]
+
+    # Backtest plan
+    backtest_plan = {
+        "test_periode_dagen": 360,
+        "vergelijking_met": ["mean_reversion_bollinger (baseline)", "gap_momentum_50 (actieve strategie)"],
+        "success_criteria": {
+            "echt_netto_pnl_beter_dan_baseline": True,
+            "random_seed_check": True,
+            "bear_market_pnl_positief": True,
+            "honest_pnl_beschikbaar": "loss_cut_48h_3pct" in props,
+        },
+        "markten": ["BCH-EUR", "BTC-EUR", "ETH-EUR", "SOL-EUR", "ATOM-EUR"],
+        "trade_bedrag_eur": 10,
+        "bitvavo_fee_pct": 0.25,
+    }
+
+    strategy_obj = {
+        "display_name": disp,
+        "beschrijving": beschrijving,
+        "actief": False,
+        "status": "draft_synthesized",
+        "author": body.author or "spark",
+        "synthesized_at": datetime.now(timezone.utc).isoformat(),
+        "notes": body.notes or "",
+        "properties": props,
+        "confidence": {
+            "score": 0,
+            "berekening": "geen backtest data — draft",
+            "gebaseerd_op": {"backtest_dagen": 0, "live_resultaten": "geen"},
+            "toelichting": "Nieuwe synthese — backtest nodig voor score",
+        },
+        "hypothese_lineage": {
+            "hypothese": f"De combinatie {' + '.join(props)} presteert beter dan de individuele componenten",
+            "backtest_run": "TODO",
+            "resultaat": "TODO",
+            "conclusie": "TODO",
+        },
+        "spark_alignment": {
+            "waarom": f"Synthese door {body.author or 'spark'} — combineert {len(props)} bouwstenen uit property catalog",
+            "regels": regels,
+            "data_bronnen": ["property_catalog v1", "voorgaande backtest-runs v2..v5"],
+            "onderliggende_hypothese": f"Property-combinatie levert emergent gedrag: {beschrijving}",
+            "zekerheid": "0% — draft zonder backtest",
+        },
+        "backtest_plan": backtest_plan,
+    }
+
+    # Persist naar blueprint als draft
+    try:
+        bp_path = Path(__file__).parent / "blueprints" / "spark_trader.json"
+        bp_data = json.loads(bp_path.read_text(encoding="utf-8"))
+        strategies = bp_data.setdefault("strategieën", {})
+        if strategy_id in strategies and not strategies[strategy_id].get("status", "").startswith("draft"):
+            return {"success": False, "error": f"strategy_id '{strategy_id}' bestaat al als niet-draft — kies andere naam"}
+        strategies[strategy_id] = strategy_obj
+        bp_path.write_text(json.dumps(bp_data, ensure_ascii=False, indent=2), encoding="utf-8")
+        # clear cache
+        try:
+            from modules.core.blueprint import clear_blueprint_cache
+            clear_blueprint_cache()
+        except Exception:
+            pass
+    except Exception as e:
+        return {"success": False, "error": f"blueprint schrijven mislukt: {e}", "draft": strategy_obj}
+
+    return {
+        "success": True,
+        "message": f"Draft-strategie '{strategy_id}' opgeslagen. Backtest is nodig voor confidence-score.",
+        "strategy_id": strategy_id,
+        "strategy": strategy_obj,
     }

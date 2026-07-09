@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2099,
+    "card_count": 2106,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T22:28:58.372054+00:00",
+    "last_updated": "2026-07-09T23:10:47.302345+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -278917,6 +278917,1095 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T22:28:56.046636+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-a0df3e74",
+      "begrip": "authenticatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Authenticatie is het controleren of iemand of iets echt is wie of wat het beweert te zijn.",
+        "laag2": "Authenticatie wordt gebruikt om de identiteit van een persoon, apparaat of systeem te verifiëren voordat toegang wordt verleend.",
+        "laag3": "Authenticatie is een beveiligingsproces waarbij een identiteit wordt gecontroleerd. Dit kan gebeuren met een wachtwoord, pincode, vingerafdruk, gezichtsherkenning, beveiligingssleutel of een combinatie hiervan. Pas na succesvolle authenticatie kan een gebruiker of systeem toegang krijgen tot bepaalde functies of gegevens.",
+        "laag4": "Authenticatie vormt een belangrijk onderdeel van digitale beveiliging. Het helpt voorkomen dat onbevoegden toegang krijgen tot systemen of informatie. Moderne systemen gebruiken vaak meervoudige authenticatie (MFA), waarbij meerdere bewijzen van identiteit worden gevraagd. Authenticatie is iets anders dan autorisatie: authenticatie bepaalt wie je bent, autorisatie bepaalt wat je mag doen."
+      },
+      "ws5": {
+        "wie": "Personen, apparaten en systemen die toegang willen krijgen.",
+        "wat": "Het controleren van een identiteit.",
+        "wanneer": "Bij het inloggen of verkrijgen van toegang tot een systeem of dienst.",
+        "waar": "Computers, websites, apps, netwerken en beveiligde systemen.",
+        "waarom": "Om zeker te weten dat alleen bevoegde gebruikers toegang krijgen.",
+        "hoe": "Door identiteit te controleren met bijvoorbeeld een wachtwoord, token, biometrie of beveiligingssleutel."
+      },
+      "tags": [
+        "authenticatie",
+        "identiteit",
+        "inloggen",
+        "beveiliging",
+        "gebruiker",
+        "wachtwoord",
+        "MFA",
+        "verificatie",
+        "toegang",
+        "biometrie",
+        "login"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-37b3a401",
+          "begrip": "login",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "gebruiker",
+            "identiteit",
+            "inloggen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34c49def",
+          "begrip": "account",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "gebruiker",
+            "identiteit",
+            "inloggen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-59f119ba",
+          "begrip": "masterkey",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "identiteit",
+            "toegang",
+            "verificatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-96b52c55",
+          "begrip": "Toegang verleend",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "gebruiker",
+            "toegang",
+            "verificatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a374c38c",
+          "begrip": "Toegang geweigerd",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "authenticatie",
+            "beveiliging",
+            "gebruiker",
+            "toegang",
+            "verificatie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:49:00.525003+00:00",
+        "vorige_versie_v1": "kb-skel-a0df3e74",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:52.181412+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:48:49.351444+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:48:49.601110+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:49:00.870701+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:49:00.876969+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:48:49.250844+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-32f21350",
+      "begrip": "hefboom",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een hefboom is een hulpmiddel of principe waarmee met een kleine kracht een grotere kracht kan worden uitgeoefend.",
+        "laag2": "Een hefboom vergroot de werking van een kracht door gebruik te maken van een draaipunt en de afstand tot dat draaipunt. Figuurlijk betekent een hefboom iets dat een groot effect heeft met relatief weinig inspanning.",
+        "laag3": "In de natuurkunde bestaat een hefboom uit een draaipunt, een last en een kracht. Door de kracht verder van het draaipunt uit te oefenen, is minder kracht nodig om een zware last te verplaatsen. Het hefboomprincipe wordt toegepast in gereedschap, machines en veel dagelijkse voorwerpen. In economie en financiën wordt de term ook gebruikt voor leverage, waarbij met een kleine investering een grotere positie wordt ingenomen.",
+        "laag4": "Het hefboomprincipe laat zien hoe een kleine verandering een groot effect kan hebben. Daarom wordt het begrip ook figuurlijk gebruikt voor strategieën, beslissingen of hulpmiddelen die een grote invloed hebben. De uitkomst van een hefboom hangt af van de verhouding tussen kracht, afstand en weerstand."
+      },
+      "ws5": {
+        "wie": "Mensen, machines en systemen die krachten of middelen efficiënter willen inzetten.",
+        "wat": "Een principe of hulpmiddel waarmee een grotere werking wordt bereikt met relatief weinig inspanning.",
+        "wanneer": "Bij het verplaatsen van lasten, het versterken van effecten of het vergroten van invloed.",
+        "waar": "In natuurkunde, techniek, economie, financiën en het dagelijks leven.",
+        "waarom": "Om efficiënter te werken en meer effect te bereiken met minder inspanning.",
+        "hoe": "Door gebruik te maken van een draaipunt, gunstige verhoudingen of versterkende mechanismen."
+      },
+      "tags": [
+        "hefboom",
+        "hefboomwerking",
+        "kracht",
+        "natuurkunde",
+        "draaipunt",
+        "mechanica",
+        "leverage",
+        "techniek",
+        "efficiëntie",
+        "invloed",
+        "strategie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-eaa509fe",
+          "begrip": "leverage",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "hefboom",
+            "hefboomwerking",
+            "invloed",
+            "leverage",
+            "strategie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b03c8649",
+          "begrip": "Handwapens",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "kracht",
+            "strategie",
+            "techniek"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0f0f46c8",
+          "begrip": "sterke",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "invloed",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94efcc1e",
+          "begrip": "druk",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "invloed",
+            "kracht"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b2dfffd1",
+          "begrip": "Sterk",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "invloed",
+            "kracht"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:51:19.668253+00:00",
+        "vorige_versie_v1": "kb-skel-32f21350",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:57.129053+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:51:16.698040+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:51:16.704352+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:51:20.012872+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:51:20.019163+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:51:16.597217+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-57dff0ea",
+      "begrip": "populatie",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een populatie is een groep individuen of objecten die als geheel wordt beschouwd.",
+        "laag2": "In de biologie bestaat een populatie uit individuen van dezelfde soort die in hetzelfde gebied leven. In statistiek is een populatie de volledige groep waarover onderzoek wordt gedaan.",
+        "laag3": "De betekenis van populatie hangt af van de context. In de ecologie gaat het om alle organismen van één soort binnen een bepaald leefgebied. In statistiek en onderzoek omvat een populatie alle personen, objecten of gegevens waarover uitspraken worden gedaan. Onderzoekers gebruiken vaak een steekproef om eigenschappen van een populatie te onderzoeken.",
+        "laag4": "Populaties veranderen voortdurend door geboorte, sterfte, migratie en andere invloeden. Het bestuderen van populaties helpt bij het begrijpen van ecosystemen, maatschappelijke ontwikkelingen en wetenschappelijk onderzoek. De grootte, samenstelling en ontwikkeling van een populatie kunnen belangrijke informatie geven voor beleid, natuurbeheer en besluitvorming."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, planten of andere objecten die tot dezelfde onderzochte groep behoren.",
+        "wat": "Een groep individuen of objecten die gezamenlijk wordt beschouwd.",
+        "wanneer": "Bij onderzoek, ecologie, demografie en statistiek.",
+        "waar": "In een bepaald gebied of binnen een afgebakende onderzoeksgroep.",
+        "waarom": "Om eigenschappen, ontwikkelingen of verschillen van een groep te bestuderen.",
+        "hoe": "Door de volledige groep of een representatieve steekproef te analyseren."
+      },
+      "tags": [
+        "populatie",
+        "groep",
+        "ecologie",
+        "biologie",
+        "statistiek",
+        "demografie",
+        "onderzoek",
+        "soort",
+        "steekproef",
+        "leefgebied",
+        "gegevens"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-1c6d745f",
+          "begrip": "Leven",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "biologie",
+            "ecologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7865b573",
+          "begrip": "Organismen",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "biologie",
+            "ecologie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cbc11b90",
+          "begrip": "Rassen",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "biologie",
+            "soort"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1a407343",
+          "begrip": "Er zijn verschillende soorten communities",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "groep",
+            "soort"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-4f277524",
+          "begrip": "Curve",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "gegevens",
+            "statistiek"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:00:56.134324+00:00",
+        "vorige_versie_v1": "kb-skel-57dff0ea",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.663316+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:00:53.501177+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:00:53.507612+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:00:56.709976+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:00:56.716212+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 2
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:00:53.398617+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-3506053c",
+      "begrip": "soep",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Soep is een vloeibaar gerecht dat wordt gemaakt door ingrediënten te koken in water, bouillon of een andere vloeistof.",
+        "laag2": "Soep kan worden bereid met groenten, vlees, vis, peulvruchten, kruiden, pasta of andere ingrediënten. Het wordt vaak gegeten als voorgerecht of hoofdgerecht.",
+        "laag3": "Soep is een van de oudste gerechten ter wereld en kent veel verschillende varianten. Er bestaan heldere soepen, gebonden soepen, maaltijdsoepen en pureesoepen. De smaak en voedingswaarde hangen af van de gebruikte ingrediënten en bereidingswijze.",
+        "laag4": "Soep wordt wereldwijd gegeten en past binnen veel verschillende keukens en culturen. Het is een veelzijdig gerecht dat zowel warm als koud kan worden geserveerd. Soep wordt vaak gebruikt om restjes te verwerken, veel groenten binnen te krijgen of een voedzame maaltijd te bereiden."
+      },
+      "ws5": {
+        "wie": "Iedereen die soep bereidt of eet.",
+        "wat": "Een vloeibaar gerecht op basis van een kookvocht met ingrediënten.",
+        "wanneer": "Als voorgerecht, hoofdgerecht of tussendoor.",
+        "waar": "Wereldwijd, thuis, in restaurants en andere eetgelegenheden.",
+        "waarom": "Als voedzame, smaakvolle en veelzijdige maaltijd of aanvulling op een maaltijd.",
+        "hoe": "Door ingrediënten te koken in water, bouillon of een andere vloeistof en eventueel te pureren of te binden."
+      },
+      "tags": [
+        "soep",
+        "voeding",
+        "gerecht",
+        "bouillon",
+        "groenten",
+        "maaltijd",
+        "koken",
+        "keuken",
+        "eten",
+        "culinair"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "eten",
+            "gerecht",
+            "keuken",
+            "koken",
+            "maaltijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-5b2a2c13",
+          "begrip": "gekookt",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "eten",
+            "gerecht",
+            "keuken",
+            "koken",
+            "maaltijd"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-360da45e",
+          "begrip": "Koken",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "eten",
+            "keuken",
+            "koken",
+            "maaltijd",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-11bfe35b",
+          "begrip": "pannekoek",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eten",
+            "gerecht",
+            "maaltijd",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "eten",
+            "keuken",
+            "maaltijd",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:03:09.540421+00:00",
+        "vorige_versie_v1": "kb-skel-3506053c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.969652+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:03:06.584070+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:03:06.846204+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:03:09.884320+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:03:09.890703+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:03:06.483263+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-568a61cb",
+      "begrip": "krokant",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Krokant betekent dat iets stevig, knapperig en breekbaar is tijdens het eten.",
+        "laag2": "Krokant beschrijft een structuur waarbij voedsel een knappend of knisperend gevoel geeft wanneer erop wordt gebeten.",
+        "laag3": "Een krokante structuur ontstaat meestal door bakken, frituren, roosteren of drogen, waardoor vocht verdwijnt en de buitenkant stevig wordt. Krokantheid wordt vaak gewaardeerd omdat het zorgt voor een aangename textuur en eetervaring.",
+        "laag4": "Krokant is een belangrijke eigenschap in de voedingsmiddelenindustrie en de keuken. De mate van krokantheid hangt af van de bereidingswijze, temperatuur, vochtgehalte en gebruikte ingrediënten. Een product kan zijn krokantheid verliezen door vocht op te nemen of verkeerd te worden bewaard."
+      },
+      "ws5": {
+        "wie": "Voedingsmiddelen en de mensen die ze bereiden of eten.",
+        "wat": "Een knapperige en stevige structuur van voedsel.",
+        "wanneer": "Na een geschikte bereidingswijze zoals bakken, frituren of roosteren.",
+        "waar": "In keukens, restaurants, bakkerijen en voedselproductie.",
+        "waarom": "Om de smaakbeleving en textuur van voedsel te verbeteren.",
+        "hoe": "Door vocht te verminderen en een stevige buitenlaag te creëren tijdens de bereiding."
+      },
+      "tags": [
+        "krokant",
+        "knapperig",
+        "textuur",
+        "voedsel",
+        "eten",
+        "bakken",
+        "frituren",
+        "roosteren",
+        "keuken",
+        "structuur"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-e8cb3646",
+          "begrip": "beslag",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bakken",
+            "eten",
+            "frituren",
+            "keuken",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-b61b88fd",
+          "begrip": "Ik heb de airfryer gebruikt om het eten krokant te maken.",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "krokant",
+            "structuur",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3bbbc206",
+          "begrip": "gerecht",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "bakken",
+            "eten",
+            "keuken",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-c079ee89",
+          "begrip": "Oven",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bakken",
+            "keuken",
+            "voedsel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9ced1da6",
+          "begrip": "Roosteren",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "roosteren",
+            "structuur",
+            "voedsel"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:05:53.458394+00:00",
+        "vorige_versie_v1": "kb-skel-568a61cb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.040711+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:05:48.691669+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:05:48.949821+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:05:53.800634+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:05:53.807022+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:05:48.593952+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-19d48ddb",
+      "begrip": "cryptocurrency",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een cryptocurrency is een digitale valuta die gebruikmaakt van cryptografie en blockchaintechnologie om transacties veilig vast te leggen.",
+        "laag2": "Cryptocurrencies functioneren zonder een centrale bank. Transacties worden gecontroleerd en vastgelegd door een netwerk van computers.",
+        "laag3": "Cryptocurrencies functioneren zonder een centrale bank. Transacties worden gecontroleerd en vastgelegd door een netwerk van computers.",
+        "laag4": "Cryptocurrencies vormen een onderdeel van de bredere blockchaintechnologie. Ze bieden mogelijkheden voor snelle internationale betalingen, decentrale toepassingen en digitale eigendommen, maar brengen ook risico's met zich mee, zoals koersschommelingen, beveiligingsrisico's en veranderende regelgeving. Het gebruik verschilt per land en toepassing."
+      },
+      "ws5": {
+        "wie": "Personen, bedrijven en organisaties die digitale valuta gebruiken of ontwikkelen.",
+        "wat": "Een digitale valuta die cryptografie en blockchain gebruikt voor veilige transacties.",
+        "wanneer": "Sinds de introductie van Bitcoin in 2009 en daarna vele andere cryptocurrencies.",
+        "waar": "Wereldwijd via internet en blockchainnetwerken.",
+        "waarom": "Om digitale waarde veilig, decentraal en zonder centrale tussenpartij over te dragen.",
+        "hoe": "Door transacties te registreren en te verifiëren via een blockchain of vergelijkbare gedistribueerde technologie."
+      },
+      "tags": [
+        "cryptocurrency",
+        "crypto",
+        "digitale valuta",
+        "blockchain",
+        "Bitcoin",
+        "Ethereum",
+        "cryptografie",
+        "decentralisatie",
+        "token",
+        "wallet",
+        "financieel"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f2fd1b94",
+          "begrip": "bitcoin",
+          "lade": "weten",
+          "overlap": 8,
+          "shared_tags": [
+            "bitcoin",
+            "blockchain",
+            "crypto",
+            "cryptocurrency",
+            "cryptografie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-39d20e83",
+          "begrip": "bitvavo",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "bitcoin",
+            "blockchain",
+            "crypto",
+            "cryptocurrency",
+            "ethereum"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-55dbc6b5",
+          "begrip": "token",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "blockchain",
+            "crypto",
+            "token",
+            "wallet"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7737c4ea",
+          "begrip": "crypto",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "blockchain",
+            "crypto",
+            "decentralisatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e43a7b74",
+          "begrip": "ETH (Ethereum)",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "blockchain",
+            "crypto",
+            "ethereum"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:08:24.933041+00:00",
+        "vorige_versie_v1": "kb-skel-19d48ddb",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:54.278482+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:08:22.969695+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:08:23.218170+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:08:25.275154+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:08:25.281483+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 8
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:08:22.868578+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-32a481de",
+      "begrip": "shop",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een shop is een fysieke of digitale winkel waar producten of diensten worden aangeboden, gekocht of verkocht.",
+        "laag2": "Een shop biedt een assortiment aan producten of diensten en ondersteunt het bestel-, betaal- en leveringsproces.",
+        "laag3": "Een shop kan een fysieke winkel of een online webshop zijn. Klanten kunnen producten bekijken, vergelijken, bestellen en betalen. Moderne shops bevatten vaak functies zoals een winkelwagen, voorraadbeheer, gebruikersaccounts en betaalmethoden. De inrichting van een shop hangt af van het doel en de doelgroep.",
+        "laag4": "Een shop vormt de verbinding tussen aanbieders en klanten. Naast verkoop ondersteunt een shop vaak administratie, betalingen, facturatie, voorraadbeheer en klantenservice. Digitale shops kunnen worden geïntegreerd met boekhouding, logistiek, betaalproviders en andere systemen om het verkoopproces efficiënt te laten verlopen."
+      },
+      "ws5": {
+        "wie": "Bedrijven, organisaties en personen die producten of diensten aanbieden of kopen.",
+        "wat": "Een fysieke of digitale omgeving voor het verkopen en kopen van producten of diensten.",
+        "wanneer": "Wanneer producten of diensten worden aangeboden of aangeschaft.",
+        "waar": "In fysieke winkels, webshops, apps en online platforms.",
+        "waarom": "Om producten of diensten beschikbaar te maken voor klanten.",
+        "hoe": "Door producten te tonen, bestellingen te verwerken, betalingen te ontvangen en leveringen te organiseren."
+      },
+      "tags": [
+        "shop",
+        "winkel",
+        "webshop",
+        "e-commerce",
+        "verkoop",
+        "producten",
+        "diensten",
+        "bestelling",
+        "betaling",
+        "klant",
+        "winkelwagen",
+        "administratie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-32812f83",
+          "begrip": "webshop",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "bestelling",
+            "betaling",
+            "e-commerce",
+            "klant",
+            "verkoop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-6ae739c7",
+          "begrip": "shopify",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "e-commerce",
+            "producten",
+            "verkoop",
+            "webshop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-49e2be4f",
+          "begrip": "order",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "administratie",
+            "bestelling",
+            "klant",
+            "verkoop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d11affc2",
+          "begrip": "Er zijn nieuwe bestellingen",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "administratie",
+            "bestelling",
+            "verkoop",
+            "webshop"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8442c29d",
+          "begrip": "Bestelling",
+          "lade": "doen",
+          "overlap": 3,
+          "shared_tags": [
+            "bestelling",
+            "klant",
+            "verkoop"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:10:47.302326+00:00",
+        "vorige_versie_v1": "kb-skel-32a481de",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.183457+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:10:43.665204+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:10:43.671682+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:10:47.648092+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:10:47.654759+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:10:43.564390+00:00"
       },
       "media": {
         "voice_url": null,

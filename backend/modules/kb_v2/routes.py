@@ -53,6 +53,47 @@ async def get_stats():
     return {"success": True, **service.get_stats()}
 
 
+# v8_kb_chat_suggest_001 — Chat → KB kaart-suggesties
+@router.get("/suggest-from-chat/{user_id}")
+async def suggest_from_chat(user_id: str, max_turns: int = 500, min_mentions: int = 3, top_n: int = 20):
+    """Analyseer recente user-chatturns en suggereer nieuwe KB-kaarten voor
+    concepten die vaak voorkomen maar nog niet in de kennisbank zitten.
+
+    Query params:
+      - max_turns: aantal laatste chat-turns om te analyseren (default 500)
+      - min_mentions: minimum keer voorkomen voor kandidaat (default 3)
+      - top_n: aantal suggesties in respons (default 20)
+    """
+    from modules.kb_v2 import chat_analyzer
+    return chat_analyzer.analyze_chat_for_kb_suggestions(
+        user_id=user_id,
+        max_turns=max_turns,
+        min_mentions=min_mentions,
+        top_n=top_n,
+    )
+
+
+class SuggestAcceptBody(BaseModel):
+    begrip: str
+    user_id: Optional[str] = "user-000"
+    source: Optional[str] = "chat_suggestion"
+
+
+@router.post("/suggest-accept")
+async def suggest_accept(body: SuggestAcceptBody):
+    """Accepteer een chat-suggestie → voeg als lege kaart toe aan inbox."""
+    if not (body.begrip or "").strip():
+        return {"success": False, "error": "begrip mag niet leeg zijn"}
+    r = service.add_to_inbox(
+        begrip=body.begrip.strip(),
+        source=body.source or "chat_suggestion",
+        user_id=body.user_id or "user-000",
+    )
+    return r
+
+
+
+
 # v6_kbv2_dedupe_001 — Inbox-dedupe knop (admin)
 @router.post("/admin/dedupe-inbox")
 async def admin_dedupe_inbox(dry_run: bool = False):

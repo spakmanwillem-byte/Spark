@@ -10,11 +10,14 @@ Gestart vanuit server.py startup-event. Stille fail.
 """
 import asyncio
 import json
+import os
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
 
-DATA = Path("/app/backend/data")
+# v8_odroid_portability_001 — Portable path: gebruik SPARK_DATA_DIR env-var,
+# fallback op relatieve pad t.o.v. deze file (backend/modules/scheduler/ → backend/data)
+DATA = Path(os.environ.get("SPARK_DATA_DIR") or (Path(__file__).parent.parent.parent / "data"))
 LOG_ROOT = DATA / "system" / "logs"
 STATE_FILE = DATA / "system" / "scheduler_state.json"
 

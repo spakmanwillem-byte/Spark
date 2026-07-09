@@ -788,6 +788,19 @@ export function GesprekkenPage({ onNavigate }) {
             used_model: d.used_model,
           };
           setSparkMessages(prev => [...prev, msg]);
+
+          // v8_trader_intent_glow_001 — Als Spark een trader-intent detecteerde en user
+          // is NIET op de Trader-tab, laat de Trader-nav-tab gloeien zodat user weet waar
+          // hij het live kan bekijken. Werkt alleen in deep/spark-chat context.
+          try {
+            const isTraderIntent = typeof d.intent === 'string' && d.intent.startsWith('trader_');
+            const currentTab = sessionStorage.getItem('spark_active_tab') || '';
+            if (isTraderIntent && currentTab !== 'trade') {
+              window.dispatchEvent(new CustomEvent('spark:nav-glow', {
+                detail: { targetId: 'nav-trade', matchedTab: 'trade' },
+              }));
+            }
+          } catch {}
         } catch (e) {
           setSparkMessages(prev => [...prev, {
             id: Date.now() + 1, role: 'spark',

@@ -13,7 +13,6 @@
     "public_uitleg_endpoint": "GET /api/trade/explained",
     "willem_regel_1": "Help-data is single source of truth"
   },
-
   "actieve_strategie": "gap_momentum_50",
   "_strategie_naam_migratie": {
     "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
@@ -21,13 +20,15 @@
     "migratie_datum": "2026-07-09",
     "reden": "Betekenisvolle namen i.p.v. letters (Willems advies): begrijpelijk over jaren, eigenschap-gebaseerd, uitlegbaar door Spark"
   },
-
   "strategieën": {
     "mean_reversion_bollinger": {
       "display_name": "Mean Reversion Bollinger",
       "vorige_naam": "A_bollinger_only",
       "beschrijving": "Bollinger 2σ mean-reversion zonder gap-filter — eenvoudige baseline",
-      "properties": ["bollinger_2sigma", "mean_reversion"],
+      "properties": [
+        "bollinger_2sigma",
+        "mean_reversion"
+      ],
       "confidence": {
         "score": 45,
         "berekening": "backtest_180d*15 + random_beter_dan_random*10 + bear_pass*5 + honest_pnl*5 + live*10",
@@ -52,13 +53,17 @@
       },
       "spark_alignment": {
         "waarom": "Baseline om te vergelijken; niet aanbevolen als actieve strategie",
-        "regels": ["Koop bij prijs < Bollinger lower band 2σ", "Verkoop bij trailing stop of winst-signaal"],
-        "data_bronnen": ["Bitvavo public candles 15m 360d"],
+        "regels": [
+          "Koop bij prijs < Bollinger lower band 2σ",
+          "Verkoop bij trailing stop of winst-signaal"
+        ],
+        "data_bronnen": [
+          "Bitvavo public candles 15m 360d"
+        ],
         "onderliggende_hypothese": "Prijs keert altijd terug naar mean — te simpel voor bear-markten",
         "zekerheid": "45% — bewezen te simpel, houdt verlies verborgen"
       }
     },
-
     "gap_momentum_50": {
       "display_name": "Gap Momentum 50",
       "vorige_naam": "D_bollinger_2sigma_plus_gap_body",
@@ -83,7 +88,7 @@
           "gerealiseerd_pnl_180d": 2.63,
           "gerealiseerd_pnl_360d": 8.84,
           "echt_netto_360d": -13.46,
-          "honesty_ratio": 0.30,
+          "honesty_ratio": 0.3,
           "bear_market_pnl": 1.42,
           "bear_vs_baseline_multiplier": 6.2,
           "random_seed_validatie": true,
@@ -122,12 +127,15 @@
         "zekerheid": "82% — hoge score, live-datapunt nog te verzamelen om naar 90+ te gaan"
       }
     },
-
     "extreme_oversold": {
       "display_name": "Extreme Oversold (Neef's variant)",
       "vorige_naam": "E_bollinger_plus_n_red_green",
       "beschrijving": "Bollinger 2σ + N-red-then-green (N=3) — koopt alleen na 3 rode candles gevolgd door 1 groene",
-      "properties": ["bollinger_2sigma", "n_red_green_pattern", "extreme_oversold"],
+      "properties": [
+        "bollinger_2sigma",
+        "n_red_green_pattern",
+        "extreme_oversold"
+      ],
       "confidence": {
         "score": 55,
         "berekening": "backtest_pass*20 + smalle_scope*-5 + geen_loss_cut*-10 + geen_live*0",
@@ -149,14 +157,96 @@
       },
       "spark_alignment": {
         "waarom": "Backup-strategie voor toekomstige regime-awareness (v9)",
-        "regels": ["3 opeenvolgende rode candles", "1 groene candle die minstens 50% van vorige rode body dekt", "Prijs < Bollinger lower band"],
-        "data_bronnen": ["Bitvavo public candles 15m 180d"],
+        "regels": [
+          "3 opeenvolgende rode candles",
+          "1 groene candle die minstens 50% van vorige rode body dekt",
+          "Prijs < Bollinger lower band"
+        ],
+        "data_bronnen": [
+          "Bitvavo public candles 15m 180d"
+        ],
         "onderliggende_hypothese": "Meer bevestiging = minder valse signalen",
         "zekerheid": "55% — belovend maar onvolledig getest, geen loss-cut"
       }
+    },
+    "gap_momentum_50__plus__extreme_oversold": {
+      "display_name": "Gap Momentum 50 + Extreme Oversold",
+      "beschrijving": "Signaal: bollinger_2sigma. Confirmatie: gap_body_50 + n_red_green_pattern. Bescherming: loss_cut_48h_3pct + event_pause_5pct_24h. Exit: trailing_stop + fee_aware_sell.",
+      "actief": false,
+      "status": "draft_synthesized",
+      "author": "willem",
+      "synthesized_at": "2026-07-09T23:02:40.861704+00:00",
+      "notes": "Test hybride",
+      "properties": [
+        "bollinger_2sigma",
+        "mean_reversion",
+        "gap_body_50",
+        "n_red_green_pattern",
+        "loss_cut_48h_3pct",
+        "event_pause_5pct_24h",
+        "honest_pnl",
+        "trailing_stop",
+        "fee_aware_sell"
+      ],
+      "confidence": {
+        "score": 0,
+        "berekening": "geen backtest data — draft",
+        "gebaseerd_op": {
+          "backtest_dagen": 0,
+          "live_resultaten": "geen"
+        },
+        "toelichting": "Nieuwe synthese — backtest nodig voor score"
+      },
+      "hypothese_lineage": {
+        "hypothese": "De combinatie bollinger_2sigma + mean_reversion + gap_body_50 + n_red_green_pattern + loss_cut_48h_3pct + event_pause_5pct_24h + honest_pnl + trailing_stop + fee_aware_sell presteert beter dan de individuele componenten",
+        "backtest_run": "TODO",
+        "resultaat": "TODO",
+        "conclusie": "TODO"
+      },
+      "spark_alignment": {
+        "waarom": "Synthese door willem — combineert 9 bouwstenen uit property catalog",
+        "regels": [
+          "BUY-signaal wanneer prijs onder Bollinger lower band 2σ zakt (mean-reversion)",
+          "Onderneemt kopen bij afwijking van gemiddelde, verwacht terugkeer",
+          "Laatste groene candle moet ≥50% van vorige rode body dekken",
+          "3 rode candles gevolgd door 1 groene (Neef's variant, extreme oversold)",
+          "Forceer SELL na 48u als positie ≤-3% verlies staat (verlies zichtbaar realiseren)",
+          "Bij daily drop >5% → markt 24u pauze + notificatie",
+          "Toont gerealiseerd + open drawdown + ECHT netto + honesty ratio",
+          "Activeert bij +0.5% winst, sluit bij -0.4% terugval vanaf top",
+          "Weigert SELL als netto na 0.25% Bitvavo-fee < €0.01 winst"
+        ],
+        "data_bronnen": [
+          "property_catalog v1",
+          "voorgaande backtest-runs v2..v5"
+        ],
+        "onderliggende_hypothese": "Property-combinatie levert emergent gedrag: Signaal: bollinger_2sigma. Confirmatie: gap_body_50 + n_red_green_pattern. Bescherming: loss_cut_48h_3pct + event_pause_5pct_24h. Exit: trailing_stop + fee_aware_sell.",
+        "zekerheid": "0% — draft zonder backtest"
+      },
+      "backtest_plan": {
+        "test_periode_dagen": 360,
+        "vergelijking_met": [
+          "mean_reversion_bollinger (baseline)",
+          "gap_momentum_50 (actieve strategie)"
+        ],
+        "success_criteria": {
+          "echt_netto_pnl_beter_dan_baseline": true,
+          "random_seed_check": true,
+          "bear_market_pnl_positief": true,
+          "honest_pnl_beschikbaar": true
+        },
+        "markten": [
+          "BCH-EUR",
+          "BTC-EUR",
+          "ETH-EUR",
+          "SOL-EUR",
+          "ATOM-EUR"
+        ],
+        "trade_bedrag_eur": 10,
+        "bitvavo_fee_pct": 0.25
+      }
     }
   },
-
   "parameters": {
     "bollinger_sigma": 2.0,
     "bollinger_window": 20,
@@ -176,28 +266,43 @@
     "rebound_target_pct": 2.0,
     "_rebound_note": "Backtest v4: 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Nu uit tot we drempel tunen op 3%."
   },
-
   "sell_regels": {
     "trailing_stop_activatie_pct": 0.5,
     "trailing_stop_drop_pct": 0.4,
     "nooit_verkopen_met_verlies": true,
     "willems_regel": "Netto na fees moet > €0.01 zijn, anders HOLD tot betere prijs"
   },
-
   "markten": {
-    "actief": ["BCH-EUR", "SOL-EUR", "ATOM-EUR", "BTC-EUR"],
-    "geadviseerd_portfolio": ["BCH-EUR", "SOL-EUR", "ATOM-EUR"],
-    "gepauzeerd": ["ADA-EUR"],
+    "actief": [
+      "BCH-EUR",
+      "SOL-EUR",
+      "ATOM-EUR",
+      "BTC-EUR"
+    ],
+    "geadviseerd_portfolio": [
+      "BCH-EUR",
+      "SOL-EUR",
+      "ATOM-EUR"
+    ],
+    "gepauzeerd": [
+      "ADA-EUR"
+    ],
     "reden_pauze": {
       "ADA-EUR": "0 trades in 180 dagen backtest — geen entry-signalen voor onze strategie"
     },
     "correlatie_clusters": {
-      "eth_btc_sol_cluster": ["ETH-EUR", "BTC-EUR", "SOL-EUR"],
-      "onafhankelijk": ["BCH-EUR", "ATOM-EUR"],
+      "eth_btc_sol_cluster": [
+        "ETH-EUR",
+        "BTC-EUR",
+        "SOL-EUR"
+      ],
+      "onafhankelijk": [
+        "BCH-EUR",
+        "ATOM-EUR"
+      ],
       "advies": "Kies max 1 uit ETH/BTC/SOL-cluster + BCH + ATOM voor diversificatie"
     }
   },
-
   "event_protection": {
     "actief": true,
     "trigger_daily_drop_pct": 5.0,
@@ -206,7 +311,6 @@
     "notification_template": "🚨 Ik zag {drop_pct}% drop op {market}. Ik pauzeer je bot 24u om je kapitaal te beschermen. Detectie via 24h-window >{trigger_pct}% peak-to-trough.",
     "backtest_evidence": "185 shock-events over 6 markten × 6 maanden. Bot moest 30× per markt pauzeren."
   },
-
   "regime_awareness": {
     "actief_in_v9_geplant": true,
     "regimes": {
@@ -215,21 +319,18 @@
       "range": "tussen -2% en +2% — beide strategieën gelijk"
     }
   },
-
   "learning_scheduler": {
     "context_refresh_uur": 3,
     "win_rate_recompute_uur": 6,
     "market_bias_toepassen": true,
     "bron_file": "backend/data/trade/market_stats.json"
   },
-
   "safety_limits": {
     "max_open_posities_per_user": 22,
     "max_dagelijkse_buy_amount_eur": 50,
     "min_bitvavo_order_eur": 5.0,
     "bitvavo_maker_taker_fee_pct": 0.25
   },
-
   "spark_awareness": {
     "spark_kan_uitleggen": [
       "welke strategie draait",

@@ -1,0 +1,40 @@
+{
+  "summary": "Iteratie 46 — Spark Core 2.0 4 nieuwe features + regressies. Pure backend (skip frontend per request). Alle 19 pytest-tests SLAGEN (100%). Coverage: (1) Strategy properties catalog: 13 items, 6 categorieën (signaal/filosofie/confirmatie/bescherming/exit/meta) ✓; (2) Synthesize happy-path met 4 properties → success+strategy_id+draft_synthesized status+backtest_plan 360d, blueprint schrijft correct, cleanup werkt; (3) Conflict-detect mean_reversion+trend_following → success=false+conflicts array; (4) Unknown property → error 'onbekende properties'+beschikbaar-lijst (13 items); (5) Confidence all: 3 originele + 1 pre-existing draft, gap_momentum_50 actief=true ✓; (6) Confidence single met breakdown/hypothese_lineage/spark_alignment ✓; (7) Chat suggest user-001: 2000+ turns_analyzed, unique_words>0, suggestions met begrip/mention_count/confidence 0-100 ✓; (8) Filtered min_mentions=10 top_n=5 werkt ✓; (9) Suggest-accept met unique test-begrip UUID → success+inbox card aangemaakt+cleanup via /delete ✓; (10) Empty begrip → success=false ✓; (11) REGRESSIE compose 'hoe staat mijn bot' → used_model='trader_intents', intent='trader_status', fast_path=true ✓; (12) 'leg de trader uit' → intent='trader_explain', message bevat 'Gap Momentum 50' ✓; (13) 'wat vind je van muziek' → used_model='primary/llama-3.3-70b-versatile' (LLM fallback werkt, geen trader-match) ✓; (14) /trade/explained → _versie=v1.0, 4_actieve_strategie.naam='Gap Momentum 50' ✓; (15) /trade/honest-pnl/user-000 → realized+open+echt_netto_eur+honesty_ratio ✓; (16) Portability: subprocess met SPARK_DATA_DIR='/tmp/spark-portable' → scheduler.DATA=/tmp/spark-portable ✓; (17) Default fallback zonder env var → eindigt op /backend/data ✓. Blueprint pollutie: 0 (unique display_name per synthesize test + cleanup na happy-path).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter46_sparkcore_v2_features.py",
+    "/app/test_reports/pytest/iter46_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "modules/trade/routes.py is nu 2039 regels — ver boven de 700-limiet uit code-review guidelines. De 4 blokken (honest-pnl/explained/confidence/synthesize) zijn duidelijk gescheiden en kunnen elk naar een eigen routes-file (routes_pnl.py, routes_explained.py, routes_strategy.py). De blueprint-cache-clear en json-write logica in synthesize_strategy zou naar een strategy_service.py module moeten.",
+    "synthesize_strategy schrijft directly naar spark_trader.json met bp_path.write_text(json.dumps(...)) — dit is NIET atomair (geen tmp+rename). Een gecrashte write mid-flight kan het bestand corrupten. Advies: gebruik modules.core.storage.save_json (als die atomic replace doet) of implementeer write→fsync→rename patroon. Zie ook code-review comment van iteration_45 over storage.save_json.",
+    "chat_analyzer._STOPWORDS bevat duplicaten (bv 'zoals' 2x, 'kunnen' 2x, 'wilde' 2x, 'zullen' 2x, 'wil' 2x, 'wilt' 2x, 'daarnaast' 2x, 'ergens' 2x). Werkt technisch (set dedupliceert) maar toont sloppy source; consolideer de string.",
+    "Property catalog _PROPERTY_CATALOG in routes.py is inline in de route-file (13 items × ~5 velden). Behoort naar een aparte data-file (blueprints/property_catalog.json of yaml) zodat non-dev een property kan toevoegen zonder Python te lezen. Nu is 'onbekende properties'-lijst hardcoded gebonden aan Python-restart.",
+    "SPARK_DATA_DIR fallback in scheduler/__init__.py is portable, maar andere modules gebruiken nog hardcoded Path(__file__).parent... paths (o.a. kb_v2/routes.py regel 233 en 393, kb_v2/chat_analyzer.py regel 25). Voor volledige Odroid-portability moet dezelfde env-var pattern in ALLE data-referenties gebruikt worden. Nu werkt scheduler standalone, maar KB/chat blijven aan /app/backend/data plakken.",
+    "GET /kb/v2/suggest-from-chat/{user_id} heeft geen input-validatie op user_id — een kwaadwillig id met '../' zou een path-traversal-poging kunnen doen naar chat/logs/{user_id}.json. load_json faalt stil (geen exception), maar path-traversal via user_id='../system/users' zou users.json lezen. Advies: valideer user_id met een regex ^user-[a-z0-9]+$ voor het bouwen van CHAT_LOGS_DIR / f'{user_id}.json'.",
+    "In test blijkt dat pre-existing draft 'gap_momentum_50__plus__extreme_oversold' in blueprint blijft staan (van eerdere dev-test). synthesize_strategy heeft geen /strategy/delete endpoint — draft blijft daar tot iemand hem handmatig uit spark_trader.json verwijdert. Voor P2: voeg DELETE /api/trade/strategy/{id} toe die alleen drafts kan verwijderen (niet actieve).",
+    "Chat compose LLM-fallback test toont dat 'wat vind je van muziek' door de LLM (primary/llama-3.3-70b-versatile) beantwoord wordt in ~2-3s — dat is acceptabel maar bevestigt dat elke non-trader-intent een externe LLM-call triggert. Overweeg een KB-first check (kijk of user het woord al vaak besprak → antwoord uit KB) voor sneller & privé antwoord voor bekende concepten."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter46_sparkcore_v2_features.py"
+  ],
+  "success_rate": {
+    "backend": "100% (19/19)",
+    "frontend": "not_tested (skip frontend per request — event dispatch is niet-visueel te valideren zonder browser)"
+  },
+  "test_credentials": "n/a — alle test-endpoints zijn open (user-001 = Willem is default test-user, geen auth)",
+  "seed_data_creation": "Geen persistente seed. Elke synthesize-test gebruikt uniek display_name (TEST_synth_<uuid>) en cleanup: draft strategy_id wordt uit spark_trader.json verwijderd na test. Suggest-accept-test cleant inbox-card via /kb/v2/delete. Blueprint state pre/post identiek qua non-draft strategieën (3 originele: mean_reversion_bollinger, gap_momentum_50, extreme_oversold). Pre-existing draft gap_momentum_50__plus__extreme_oversold blijft ongewijzigd (was al aanwezig — niet van deze test).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter46 valideert 4 features van Spark Core 2.0: strategy synthesizer (13-item property catalog + conflict-detect + persist naar blueprint), chat→KB suggestions (word-freq analyzer over 500 turns, stopword+known-KB filter), regressies (trader-intents fast-path blijft <100ms, LLM-fallback werkt voor non-trader), en SPARK_DATA_DIR portability. Trader-glow (feature 1) is een event dispatch — niet backend-testbaar zonder browser, dus geskipt zoals per request. Test file /app/backend/tests/test_iter46_sparkcore_v2_features.py is idempotent (unique UUIDs + cleanup) en herbruikbaar voor regressietests. Draai met: pytest backend/tests/test_iter46_sparkcore_v2_features.py -v. Response-time van compose met LLM-fallback is 2-6s afhankelijk van llama-3.3-70b — timeout in test staat op 90s, ruimschoots. Nog open puntjes: (a) andere modules gebruiken nog hardcoded /app/backend/data (KB, chat_analyzer) — SPARK_DATA_DIR pattern moet uitgerold naar alle data-refs voor volledige portability; (b) property catalog is inline in routes.py, zou naar JSON moeten; (c) synthesize schrijft niet-atomair naar blueprint.",
+  "rca of the issue": "Geen bug in deze iteratie — alle 19 tests slagen first-run. RCA-relevant voor code-review: (1) atomic-write gap in synthesize_strategy (bp_path.write_text) — bekend risico maar niet reproducable in test-omgeving zonder crash-injection; mitigeer met save_json wrapper. (2) chat_analyzer path-traversal: reproductie GET /api/kb/v2/suggest-from-chat/..%2Fsystem%2Fusers zou users.json kunnen lezen als de FastAPI-router path-decode toestaat — niet getest maar theoretisch mogelijk. Mitigeer: strict regex-validatie op user_id-param. (3) modules/trade/routes.py grootte: geen bug maar maintainability-risico bij verdere features."
+}

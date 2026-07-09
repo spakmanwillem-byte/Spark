@@ -1,5 +1,22 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief afgerond + publieke uitleg-JSON
+
+### 🎯 Afgerond
+- **48u loss-cut LIVE** (config in `spark_trader.json` → `loss_cut_hours: 48`, `loss_cut_pct: -0.03`); ingelezen in `monitor.py` regel 770-798
+- **Event-auto-pauze LIVE** (`event_protection.actief: true`, trigger >5% daily drop, 24u pauze); `monitor.py` regel 1309-1348
+- **Honest-PnL endpoint LIVE** `GET /api/trade/honest-pnl/{user_id}` — toont gerealiseerd + open drawdown + ECHT netto + honesty_ratio
+- **NIEUW: Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` — volledige, mensvriendelijke uitleg met alle backtest-resultaten (v2/v3/v4/v5 + random-seed check), risico-beschermingen, privacy-sectie
+- **NIEUW: Publiek endpoint** `GET /api/trade/explained` — geen auth, bedoeld voor privacyverklaring "inhoudelijk bekijken"-link en onafhankelijke auditors
+- **KB-kaart Spark Trader (kbv2-2f55a485) verrijkt** — laag1 vermeldt nu expliciet loss-cut + event-pauze + honest-pnl status
+
+### 🎯 Post-deploy check voor Willem
+1. `curl {BACKEND_URL}/api/trade/explained` → 12-sectie uitleg-JSON zichtbaar
+2. `curl {BACKEND_URL}/api/trade/honest-pnl/user-000` → Spark's eerlijke PnL
+3. Link deze `/api/trade/explained` op je privacy/voorwaarden-pagina
+
+---
+
 ## 🧪 P1 — Backtest v4 (Willems nieuwe hypothesen, jul 2026)
 - **H1 Rebound-strategie**: analyseer 185 events uit v3 → 24/48/72u recovery-check → wél/niet BUY-tijdens-drop
 - **H2 2-day loss-cut**: nieuwe strategie P = D + 48u tijd-stop-loss (als positie na 2 dagen ≥3% in **verlies** → SELL, herstart). Filosofische breuk met "nooit met verlies"-regel — Willem accepteert klein verlies om kapitaal vrij te maken.

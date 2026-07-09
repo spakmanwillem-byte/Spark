@@ -1703,3 +1703,27 @@ async def get_honest_pnl(user_id: str):
         ),
         "backtest_v4_ref": "20260709_213151_v4 — bewijs dat 100% win-rate misleidend was",
     }
+
+
+# ============================================================
+# v8_trader_explained_001 — Publieke uitleg-JSON voor privacyverklaring
+# ============================================================
+
+@router.get("/explained")
+async def get_trader_explained():
+    """Volledig transparante uitleg van Spark Trader voor bezoekers/auditors.
+
+    Publieke leesroute — geen auth, geen user-id. Bedoeld voor:
+    - Privacyverklaring "inhoudelijk bekijken"-link
+    - Onafhankelijke auditors / journalistiek
+    - Users die willen weten wat de bot precies doet
+
+    Bron: backend/data/trade/spark_trader_public.json (single source of truth,
+    handmatig onderhouden bij elke wezenlijke strategie-wijziging).
+    """
+    try:
+        pad = TRADE_DIR / "spark_trader_public.json"
+        data = load_json(pad) or {}
+        return data
+    except Exception as e:
+        return {"success": False, "error": f"kan uitleg niet laden: {e}"}

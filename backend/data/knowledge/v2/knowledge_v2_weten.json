@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2096,
+    "card_count": 2098,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T22:09:47.188631+00:00",
+    "last_updated": "2026-07-09T22:25:42.507564+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -273340,7 +273340,7 @@
       "lade": "weten",
       "status": "draft",
       "lagen": {
-        "laag1": "Spark Trader is Spark's autonome crypto-handelsmodule die via Bitvavo koopt en verkoopt op meerdere markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR). Werkt met een potjes-systeem: elk potje is een klein kapitaaltje met eigen aankoop/verkoop-status. Bots draaien parallel voor Spark, Willem en Geiser (15-min cycle). Fee voor Spark's eigen account is 0%; Bitvavo rekent 0.25% maker/taker per transactie.",
+        "laag1": "Spark Trader is Spark's autonome crypto-handelsmodule die via Bitvavo koopt en verkoopt op meerdere markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR). Werkt met een potjes-systeem: elk potje is een klein kapitaaltje (€10 base) met eigen aankoop/verkoop-status. Bots draaien parallel voor Spark, Willem en Geiser (15-min cycle). Fee voor Spark's eigen account is 0%; Bitvavo rekent 0.25% maker/taker per transactie. Actief sinds jul-2026: 48u loss-cut (-3%), event-auto-pauze (>5% drop → 24u stil) en eerlijke PnL-metric via /api/trade/honest-pnl/{user_id}.",
         "laag2": "Werking: elke 15 min scant de bot 6 markten. Per markt beslist een Bollinger-Band + context-service of het BUY/HOLD/SELL wordt. Bij BUY opent hij een cluster (1-N potjes samen) via /trade/potjes/{user_id}. Bij SELL sluit hij het potje en boekt PnL. Cooldowns beschermen tegen doom-buying: 15 min per markt na een BUY, en sinds 08-jul een globale 30-min cooldown na INSUFFICIENT_EUR_BALANCE (voorkomt 57 mislukte pogingen per uur). Force-sell is atomair: als Bitvavo de sell rejected, wordt het potje teruggerold. Learning-scheduler doet nachtelijk een context-refresh (win-rate per markt + week/maand patronen) en past de BUY-drempel per markt aan.\n\nSinds v7 (08-jul): BUY-signalen worden **dubbel bevestigd** — Bollinger Band-signaal (mean-reversion, koop bij prijs onder lower band 2σ) ÉN gap-breakout-bevestiging (laatste groene candle sluit volledig boven vorige rode candle: low_curr > high_prev). Dit voorkomt 'kopen op piek' in dalende markten want Bollinger alleen kan aanhoudend BUY-signalen geven terwijl de band met de prijs meezakt. De gap-breakout eist een échte structuur-omslag voor er wordt gekocht. SELL-logica blijft trailing stop + fee-aware guard (nooit verkopen met verlies).",
         "laag3": "Waarom zo gebouwd: het potjes-model geeft transparant inzicht per euro-eenheid (hoeveel winst per potje, welke coin is anker) in plaats van één grote portefeuille. Multi-user via één Bitvavo-account (proxy) laat Willem gemeenschapsleden mee laten profiteren zonder dat iedereen zijn eigen API-keys hoeft in te vullen. De 0%-fee voor Spark's eigen bot is bewust: het is een leer-instrument, geen inkomstenmodel. Winst gaat naar de user wiens potje het is; Spark's eigen potjes dragen bij aan de gemeenschap-treasury.",
         "laag4": "Diepere laag: Spark Trader is ontworpen als 'eerlijke' bot — geen verborgen fees, geen stop-loss-cascades, geen ondoorzichtige leverage. Elke beslissing is te herleiden via het trace-log (/trade/logs/trace_YYYY-MM-DD.jsonl). De learning-service leert van jouw eigen trade-history — Spark past zich aan JOU aan, niet aan een generiek model. Dit sluit aan bij Spark's kernwaarde 'transparantie'. De blueprint (single source of truth) staat in /memory/blueprints/trade.md; deze kaart is de voorleesversie voor gesprekken.\n\n**Backtest-bevestigd (2026-07-09)**: op 6 markten × 6 maanden × 9 strategieën is bewezen: gap-body 50% filter geeft €+2.63 winst (18% beter dan baseline). Random-buy 10-seed check toonde dat systematische strategie D betrouwbaarder is dan chaos. In BEAR-markten is D 6.2× winstgevender. Buy-and-hold zou €26 verlies hebben gegeven — actief traden werkt. 185 shock-events op 6 mnd → Spark heeft nu auto-pauze (>5% daily drop = 24u stil + notification). Data structureel opgeslagen in  met _meta.json (SoT-regel).\n\n**Update 09-jul avond (v8_time_losscut_001)**: Willems H2 hypothese (48u loss-cut bij ≥3% verlies) BEWEZEN beter dan 'nooit met verlies verkopen'. Backtest v4: strategie P (D + loss-cut) heeft ECHT netto €-9.53 vs D €-13.16. Verliezen worden nu ZICHTBAAR gerealiseerd via nieuwe endpoint /api/trade/honest-pnl/{user_id} die realized + open drawdown + ECHT netto toont. Vervangt de misleidende 100% win-rate metric. Willems 100%-visie ('elke maand netto positief = 100% winst-maanden') wordt hierdoor testbaar en eerlijk."
@@ -278456,6 +278456,309 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T22:09:45.258688+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-bea6bb27",
+      "begrip": "gamertag",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een gamertag is een unieke gebruikersnaam waarmee een speler herkenbaar is in games en online platforms.",
+        "laag2": "Een gamertag wordt gebruikt om een speler te identificeren, met anderen te communiceren en prestaties of voortgang aan een account te koppelen.",
+        "laag3": "Een gamertag is een persoonlijke of zelfgekozen naam die wordt gebruikt op gameplatforms zoals Xbox, PlayStation, Steam of andere online diensten. De naam is vaak uniek binnen een platform en kan onderdeel zijn van iemands online identiteit. Veel spelers gebruiken jarenlang dezelfde gamertag, waardoor deze herkenbaar wordt binnen een community.",
+        "laag4": "Een gamertag is meer dan alleen een gebruikersnaam. Voor veel spelers vertegenwoordigt het hun online identiteit, reputatie en geschiedenis. Vrienden, teams en communities herkennen elkaar vaak aan hun gamertag. Sommige mensen gebruiken dezelfde gamertag ook buiten games, bijvoorbeeld op sociale media, forums of binnen eigen projecten."
+      },
+      "ws5": {
+        "wie": "Gamers en gebruikers van online platforms.",
+        "wat": "Een unieke gebruikersnaam voor een speler of account.",
+        "wanneer": "Bij het aanmaken en gebruiken van een game- of online account.",
+        "waar": "Op gameconsoles, pc-platforms, mobiele games en online communities.",
+        "waarom": "Om spelers te identificeren en van elkaar te onderscheiden.",
+        "hoe": "Door een unieke naam te kiezen en deze aan een account te koppelen."
+      },
+      "tags": [
+        "gamertag",
+        "gebruikersnaam",
+        "gamer",
+        "account",
+        "online",
+        "identiteit",
+        "profiel",
+        "community",
+        "nickname",
+        "speler",
+        "gaming"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-b4f1ef99",
+          "begrip": "Roadkill",
+          "lade": "voelen",
+          "overlap": 5,
+          "shared_tags": [
+            "community",
+            "gamertag",
+            "gaming",
+            "identiteit",
+            "online"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-23253e0a",
+          "begrip": "ga je geld verdienen voor redrum_w?",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "account",
+            "gebruikersnaam",
+            "identiteit",
+            "online"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-a36518da",
+          "begrip": "Is Gerben vandaag online geweest?",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "account",
+            "community",
+            "online"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34c49def",
+          "begrip": "account",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "account",
+            "identiteit",
+            "profiel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e10391e7",
+          "begrip": "Flame",
+          "lade": "spreken",
+          "overlap": 2,
+          "shared_tags": [
+            "community",
+            "online"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:23:57.526998+00:00",
+        "vorige_versie_v1": "kb-skel-bea6bb27",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:04.604840+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:23:54.812729+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:23:55.056563+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:23:57.865228+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:23:57.871452+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:23:54.713834+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-b78da77e",
+      "begrip": "bereik",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bereik is de afstand, omvang of het gebied waarbinnen iets kan werken, reiken of invloed heeft.",
+        "laag2": "Bereik geeft aan hoe ver iets komt of hoe groot de invloed, beschikbaarheid of mogelijkheden van iets zijn.",
+        "laag3": "Het begrip bereik wordt gebruikt in veel vakgebieden. Bij communicatie gaat het om hoeveel mensen worden bereikt, bij techniek om de maximale afstand van een signaal of voertuig, bij wiskunde om de verzameling mogelijke uitkomsten en bij mensen om de invloed of toegankelijkheid van een persoon of organisatie.",
+        "laag4": "De betekenis van bereik hangt af van de context, maar draait altijd om de grenzen waarbinnen iets functioneert of effect heeft. Bereik kan fysiek zijn, zoals het bereik van een wifi-signaal, maar ook sociaal, digitaal of abstract, zoals het bereik van een boodschap of de invloed van een idee."
+      },
+      "ws5": {
+        "wie": "Personen, organisaties, systemen en objecten die iets kunnen bereiken of invloed uitoefenen.",
+        "wat": "De afstand, omvang of grenzen waarbinnen iets werkt of effect heeft.",
+        "wanneer": "Wanneer de mogelijkheden of invloed van iets worden beschreven.",
+        "waar": "In techniek, communicatie, wetenschap, wiskunde en het dagelijks leven.",
+        "waarom": "Om aan te geven hoe ver iets reikt of invloed heeft.",
+        "hoe": "Door de maximale afstand, omvang of reikwijdte van iets te bepalen."
+      },
+      "tags": [
+        "bereik",
+        "reikwijdte",
+        "afstand",
+        "invloed",
+        "omvang",
+        "dekking",
+        "communicatie",
+        "techniek",
+        "bereikbaarheid",
+        "effect",
+        "grenzen"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-f2657649",
+          "begrip": "Bekendheid",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bereik",
+            "communicatie",
+            "invloed"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-6b0efa2f",
+          "begrip": "breed",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "afstand",
+            "bereik",
+            "omvang"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-cd980a76",
+          "begrip": "Nagalmen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "effect",
+            "invloed"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bfcd6bf7",
+          "begrip": "kwaad",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "grenzen"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-48404078",
+          "begrip": "grenzen",
+          "lade": "voelen",
+          "overlap": 2,
+          "shared_tags": [
+            "communicatie",
+            "grenzen"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:25:42.507520+00:00",
+        "vorige_versie_v1": "kb-skel-b78da77e",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.027469+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:25:40.534108+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:25:40.773840+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:25:42.846767+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:25:42.853034+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:25:40.434358+00:00"
       },
       "media": {
         "voice_url": null,

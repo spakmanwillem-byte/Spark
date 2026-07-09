@@ -26,6 +26,45 @@ Willem's voorstel: gap-breakout strategy als bevestigings-filter naast Bollinger
 
 **KB Spark Trader kaart** (`kbv2-2f55a485`) laag2 verrijkt met uitleg van dubbele bevestiging.
 
+## 2026-07-09 (sessie 46 vervolg) — Spark Trader klaar voor live: eerlijk + slim
+
+### ⚔️ Backtest v4 — grote onthullingen
+Nieuwe metric **ECHT netto** = gerealiseerd + open drawdown. Ontmaskerde 100% win-rate als selectieve waarheid:
+- D (onze "winnaar"): gerealiseerd +€2.63, open DD -€15.79 → ECHT netto **-€13.16**
+- P (D + loss-cut): ECHT netto **-€9.53** = 27% beter dan D
+- Baseline A: ECHT netto -€26.15
+- **Post-event autopsy**: 62.5% van 5%-drops rebounds 24u later (+1.96% mediaan) → H1 statistisch bewezen
+
+### 🎯 v8_time_losscut_001 — Willems H2 hypothese IN CODE
+`_simple_decision` in `monitor.py` heeft nu 48u loss-cut:
+- Bij open positie: als hold_hours ≥ 48 EN profit_pct ≤ -3% → SELL "loss-cut"
+- Filosofische breuk met "nooit met verlies verkopen" — gecontroleerd verlies pakken
+- Config via blueprint (`spark_trader.json.parameters.loss_cut_*`)
+- Bewezen in v4 backtest: 3.63€ betere netto
+
+### 📊 v8_honest_pnl_001 — Eerlijke metrics endpoint
+Nieuwe `GET /api/trade/honest-pnl/{user_id}` toont:
+- Realized PnL + trades + win-rate (huidige metric)
+- Open positions detail met unrealized PnL per pot + held_hours
+- Total open drawdown
+- **ECHT netto** = realized + open drawdown
+- **Honesty ratio** = ECHT/realized (1.0 = geen verstopping, <1 = illusie, negatief = eigenlijk verlies)
+- Backtest reference voor bewijs
+
+### 🧠 v8_blueprint_config_001 — Runtime config in monitor
+`_load_trader_blueprint()` helper in `monitor.py` — leest `spark_trader.json` met mtime-cache.
+Loss-cut parameters (enabled, hours, pct) nu tuning-baar zonder Python-code.
+
+### 🎯 Live-configuratie ingesteld voor user-001
+Markten geactiveerd: **BCH-EUR + SOL-EUR + ATOM-EUR + BTC-EUR** (4 markten, ADA/ETH weg)
+- BCH: onafhankelijk (corr <0.75)
+- SOL + ATOM: hoogste backtest-winst (€+1.23 + €+1.69)
+- BTC: stabiliteit
+- Loss-cut AAN, rebound uit (drempel te streng zonder tuning)
+
+### 📇 KB Spark Trader kaart geüpdatet
+Laag4 aangevuld met eerlijke-metrics uitleg. 2 nieuwe verbanden: honest-pnl endpoint + v4 backtest data.
+
 ## 2026-07-09 (sessie 46) — Backtest-driven v8: gap-body + event-protection + blueprint
 
 ### 🧪 Backtest v3 stress-test + robustness (9 strategieën, 6 markten, 180 dagen)

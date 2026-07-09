@@ -1588,3 +1588,118 @@ async def get_backtest(run_id: str):
         if f.exists():
             result[name] = json.loads(f.read_text())
     return result
+
+
+# ============================================================
+# v8_honest_pnl_001 — Eerlijke PnL metrics (Willems 100%-check)
+# ============================================================
+
+@router.get("/honest-pnl/{user_id}")
+async def get_honest_pnl(user_id: str):
+    """Eerlijke PnL: gerealiseerd + open drawdown + ECHT netto.
+
+    De 100%-win-rate uit market_stats.json is misleidend omdat verlieslatende
+    posities OPEN blijven staan (Willems 'nooit met verlies verkopen'-regel).
+    Deze endpoint toont het HELE plaatje.
+
+    Backtest v4 (20260709_213151) bewees: D €+2.63 gerealiseerd, €-15.79 open DD
+    = ECHT netto €-13.16. Deze endpoint maakt dat live zichtbaar.
+    """
+    from modules.trade.bitvavo_client import get_price as _bitvavo_get_price
+    try:
+        pots = load_json(DATA_DIR / "trade" / "user_potjes.json") or {}
+    except Exception:
+        pots = {}
+    user_pots = pots.get(user_id, [])
+    if not isinstance(user_pots, list):
+        user_pots = user_pots.get("pots", []) if isinstance(user_pots, dict) else []
+
+    # Realized PnL uit trade history / market_stats
+    try:
+        stats = load_json(DATA_DIR / "trade" / "market_stats.json") or {}
+        user_stats = stats.get("users", {}).get(user_id, {})
+        realized_pnl = user_stats.get("total_pnl_eur", 0.0)
+        realized_trades = user_stats.get("total_trades", 0)
+        realized_wins = user_stats.get("wins", 0)
+    except Exception:
+        realized_pnl, realized_trades, realized_wins = 0.0, 0, 0
+
+    open_positions = []
+    total_open_drawdown = 0.0
+    total_open_value = 0.0
+    total_open_capital = 0.0
+    for pot in user_pots:
+        pos = pot.get("position") or {}
+        if not pos.get("is_open"):
+            continue
+        market = pos.get("market") or pot.get("last_market")
+        entry_price = pos.get("entry_price")
+        size = pos.get("size") or 0
+        capital = pot.get("capital", 0)
+        if not (market and entry_price and size):
+            continue
+        current_price = entry_price
+        try:
+            p = _bitvavo_get_price(market)
+            if p:
+                current_price = float(p)
+        except Exception:
+            pass
+        current_value = size * current_price
+        unrealized = current_value - capital
+        total_open_drawdown += unrealized
+        total_open_value += current_value
+        total_open_capital += capital
+        # Time in position
+        entry_ts = pos.get("entry_ts")
+        held_hours = None
+        if entry_ts:
+            try:
+                et = datetime.fromisoformat(entry_ts.replace("Z", "+00:00"))
+                held_hours = round((datetime.now(timezone.utc) - et).total_seconds() / 3600, 1)
+            except Exception:
+                pass
+        open_positions.append({
+            "pot_id": pot.get("pot_id") or pot.get("id"),
+            "market": market,
+            "entry_price": round(entry_price, 4),
+            "current_price": round(current_price, 4),
+            "capital_eur": round(capital, 2),
+            "current_value_eur": round(current_value, 2),
+            "unrealized_eur": round(unrealized, 2),
+            "unrealized_pct": round((current_value - capital) / capital * 100, 2) if capital else 0,
+            "held_hours": held_hours,
+        })
+
+    echt_netto = realized_pnl + total_open_drawdown
+    honesty_ratio = None
+    if realized_pnl > 0:
+        honesty_ratio = round(echt_netto / realized_pnl, 2)
+
+    return {
+        "success": True,
+        "user_id": user_id,
+        "as_of": datetime.now(timezone.utc).isoformat(),
+        "realized": {
+            "pnl_eur": round(realized_pnl, 2),
+            "trades": realized_trades,
+            "wins": realized_wins,
+            "win_rate_pct": round(100 * realized_wins / realized_trades, 1) if realized_trades else 0,
+            "_note": "Alleen GESLOTEN trades. Verlieslatende posities blijven open en tellen hier niet mee."
+        },
+        "open": {
+            "positions": len(open_positions),
+            "total_capital_eur": round(total_open_capital, 2),
+            "total_current_value_eur": round(total_open_value, 2),
+            "total_unrealized_eur": round(total_open_drawdown, 2),
+            "positions_detail": open_positions,
+        },
+        "echt_netto_eur": round(echt_netto, 2),
+        "honesty_ratio": honesty_ratio,
+        "_honesty_ratio_note": (
+            "Ratio van ECHT netto vs gerealiseerd. 1.0 = geen verstopte verliezen. "
+            "0.5 = helft van 'winst' is illusie (verstopt in open verlies). "
+            "Negatief = ECHT netto is verlies terwijl realized winst toont."
+        ),
+        "backtest_v4_ref": "20260709_213151_v4 — bewijs dat 100% win-rate misleidend was",
+    }

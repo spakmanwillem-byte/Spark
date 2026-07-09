@@ -46,6 +46,21 @@ WATCHLIST_NAMES = {
 }
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
+BLUEPRINT_FILE = Path(__file__).parent / "blueprints" / "spark_trader.json"
+
+_BLUEPRINT_CACHE: Dict = {"data": None, "mtime": 0}
+
+
+def _load_trader_blueprint() -> Dict:
+    """v8_blueprint_config_001 — laad spark_trader.json met simpele cache op mtime."""
+    try:
+        stat = BLUEPRINT_FILE.stat()
+        if _BLUEPRINT_CACHE["mtime"] != stat.st_mtime:
+            _BLUEPRINT_CACHE["data"] = json.loads(BLUEPRINT_FILE.read_text())
+            _BLUEPRINT_CACHE["mtime"] = stat.st_mtime
+        return _BLUEPRINT_CACHE["data"] or {}
+    except Exception:
+        return {}
 SETTINGS_DIR = DATA_DIR / "users"
 MONITOR_STATE_FILE = DATA_DIR / "trade" / "monitor_state.json"
 
@@ -748,6 +763,42 @@ def _simple_decision(candles: List[Dict], position: Optional[Dict] = None, trade
         # Stop-loss verwijderd: we sluiten geen verlies-positie meer. Wachten op recovery + winst
         # uit andere potjes/overflow streamt terug naar wachtende positie.
         # Trail-strategie blijft 100% intact (alleen winst-verkoop).
+
+        # v8_time_losscut_001 — Willems H2 hypothese: 48u loss-cut bij ≥3% verlies
+        # Bewezen in backtest v4: €-9.53 (met loss-cut) vs €-13.16 (zonder). Verliezen
+        # zichtbaar realiseren > verlies bevriezen in open positie.
+        # Config via blueprint: parameters.loss_cut_hours + loss_cut_pct.
+        try:
+            _bp = _load_trader_blueprint()
+            _loss_cut_hours = float(_bp.get("parameters", {}).get("loss_cut_hours", 48))
+            _loss_cut_pct = float(_bp.get("parameters", {}).get("loss_cut_pct", -0.03))
+            _loss_cut_enabled = bool(_bp.get("parameters", {}).get("loss_cut_enabled", True))
+        except Exception:
+            _loss_cut_hours, _loss_cut_pct, _loss_cut_enabled = 48, -0.03, True
+
+        if _loss_cut_enabled:
+            _entry_ts_str = position.get("entry_ts")
+            if _entry_ts_str:
+                try:
+                    _entry_ts = datetime.fromisoformat(_entry_ts_str.replace("Z", "+00:00"))
+                    _held_hours = (datetime.now(timezone.utc) - _entry_ts).total_seconds() / 3600
+                    if _held_hours >= _loss_cut_hours and profit_pct <= _loss_cut_pct:
+                        return {
+                            **base,
+                            "action": "SELL",
+                            "reason": (
+                                f"48u loss-cut @ €{price:.4f}. Ingekocht €{entry:.4f} "
+                                f"({profit_pct*100:+.2f}%). Netto €{netto_profit:+.4f}. "
+                                f"Verlies realiseren > geld bevriezen (Willems H2)."
+                            ),
+                            "confidence": 0.85,
+                            "netto_profit": round(netto_profit, 4),
+                            "loss_cut": True,
+                            "held_hours": round(_held_hours, 1),
+                            "position_update": {"close": True, "loss_cut": True},
+                        }
+                except Exception as _e:
+                    logger.warning(f"loss-cut parse error: {_e}")
 
         if trailing_active and price < highest:
             if netto_rounded >= exit_min_netto:

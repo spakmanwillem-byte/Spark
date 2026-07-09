@@ -48,7 +48,15 @@
     "eur_cooldown_after_insufficient_sec": 1800,
     "trade_amount_eur_default": 10.0,
     "candle_interval": "15m",
-    "candles_window_for_decision": 30
+    "candles_window_for_decision": 30,
+    "loss_cut_enabled": true,
+    "loss_cut_hours": 48,
+    "loss_cut_pct": -0.03,
+    "_loss_cut_rationale": "Willems H2 hypothese: verliezen zichtbaar realiseren > verlies bevriezen. Backtest v4 (20260709_213151): P=€-9.53 vs D=€-13.16 echt netto. Beter.",
+    "rebound_enabled": false,
+    "rebound_drop_threshold_pct": 5.0,
+    "rebound_target_pct": 2.0,
+    "_rebound_note": "Backtest v4: 62.5% van 5%-drops rebounds binnen 24u (mediaan +1.96%). Nu uit tot we drempel tunen op 3%."
   },
 
   "sell_regels": {

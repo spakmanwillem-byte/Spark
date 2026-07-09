@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2089,
+    "card_count": 2090,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:12:05.052602+00:00",
+    "last_updated": "2026-07-09T21:34:29.247525+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -277340,6 +277340,161 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:12:02.327270+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-41f0ade3",
+      "begrip": "argument",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een argument is een reden of onderbouwing om een standpunt of bewering te ondersteunen.",
+        "laag2": "Argumenten worden gebruikt om iemand te overtuigen, een mening te verklaren of een beslissing te onderbouwen.",
+        "laag3": "Een argument is een uitspraak die een conclusie of standpunt ondersteunt. In gesprekken, debatten en wetenschappelijke discussies worden argumenten gebruikt om ideeën logisch te onderbouwen. Een argument kan gebaseerd zijn op feiten, ervaringen, voorbeelden of logische redeneringen.",
+        "laag4": "Argumenteren helpt mensen om informatie kritisch te beoordelen en weloverwogen beslissingen te nemen. De kracht van een argument hangt af van de kwaliteit van de onderbouwing, de betrouwbaarheid van de informatie en de logische samenhang. Goede argumenten dragen bij aan een constructief gesprek, ook wanneer mensen het oneens zijn."
+      },
+      "ws5": {
+        "wie": "Iedereen die een mening, beslissing of conclusie wil onderbouwen.",
+        "wat": "Een reden of onderbouwing voor een standpunt of bewering.",
+        "wanneer": "Tijdens gesprekken, discussies, debatten en besluitvorming.",
+        "waar": "In communicatie, onderwijs, wetenschap, politiek en het dagelijks leven.",
+        "waarom": "Om een standpunt te verduidelijken, te verdedigen of anderen te overtuigen.",
+        "hoe": "Door feiten, voorbeelden, ervaringen of logische redeneringen aan te voeren."
+      },
+      "tags": [
+        "argument",
+        "redenering",
+        "onderbouwing",
+        "standpunt",
+        "overtuigen",
+        "logica",
+        "discussie",
+        "debat",
+        "communicatie",
+        "bewijs",
+        "conclusie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-6e9d3b4a",
+          "begrip": "verklaring",
+          "lade": "spreken",
+          "overlap": 5,
+          "shared_tags": [
+            "argument",
+            "bewijs",
+            "communicatie",
+            "conclusie",
+            "onderbouwing"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-bdd8a092",
+          "begrip": "baseer",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "argument",
+            "bewijs",
+            "conclusie",
+            "redenering"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ddd33f25",
+          "begrip": "boekdelen",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "bewijs",
+            "communicatie",
+            "conclusie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fcaf76c8",
+          "begrip": "oordeel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "communicatie",
+            "conclusie",
+            "standpunt"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-107749df",
+          "begrip": "bewijs",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bewijs",
+            "conclusie",
+            "onderbouwing"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:34:29.247499+00:00",
+        "vorige_versie_v1": "kb-skel-41f0ade3",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:01.043586+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:34:27.189760+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:34:27.413766+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:34:29.585731+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:34:29.591908+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:34:27.089748+00:00"
       },
       "media": {
         "voice_url": null,

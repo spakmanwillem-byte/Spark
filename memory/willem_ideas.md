@@ -5,7 +5,32 @@
 
 ---
 
-## 2026-07-09 — Sessie 46 (backtest-driven v8)
+## 2026-07-09 — Sessie 46 (backtest-driven v8 + v4 waarheid)
+
+### 🚨 KRITISCH: 100% win-rate was ILLUSIE
+Backtest v4 met **ECHT netto** (gerealiseerd + open drawdown):
+- **D (onze "winnaar")**: gerealiseerd €+2.63, open DD €-15.79 → **echt netto -€13.16**
+- **P (D + Willems loss-cut)**: -€9.53 echt netto = **BETER dan D**
+- **Baseline A**: -€26.15 echt netto — sterkste verlies
+- Conclusie: 100% win-rate telde alleen gesloten trades; verliezen zaten verstopt in open posities
+
+### 🟢 Willems H2 loss-cut BEWEZEN BETER
+- Loss-cut trades: 22 van 65 (33.8%)
+- Netto verbetering: €3.63 t.o.v. D zonder loss-cut
+- Filosofische breuk gerechtvaardigd: verlies eerlijk pakken > geld bevriezen
+
+### 🟢 Willems H1 rebound: statistisch onderbouwd, maar drempel te streng
+- Post-event autopsy: **62.5% van 5%-drops is 24u later positief** (mediaan +1.96%)
+- 49.2% herstelt ≥2% binnen 24u
+- Aanbeveling: verlaag rebound-drempel naar 3% drop (nu 5%) → wél triggeren
+
+### 🎯 Nieuwe P0 inzicht: eerlijke UI-metrics
+Bouw endpoint + UI dat toont:
+- Realized PnL
+- Open drawdown (unrealized verlies van open posities)
+- **ECHT netto = som van beide**
+- Time-in-position (hoe lang zit geld vast)
+- Loss-cut ratio (hoeveel % via loss-cut vs trailing)
 
 ### 🟡 Nieuwe hypothesen voor backtest v4 (Willems inzichten)
 **H1: Rebound-strategie** — na 5-10% drop volgt binnen 24-72u vaak een 2-3% herstel.

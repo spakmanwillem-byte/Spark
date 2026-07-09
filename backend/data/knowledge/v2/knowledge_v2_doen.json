@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1123,
+    "card_count": 1124,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T22:07:57.080287+00:00",
+    "last_updated": "2026-07-09T22:33:35.921615+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -147037,6 +147037,66 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T22:07:54.198796+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-73ea6dc8",
+      "begrip": "bevriezen",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Bevriezen is het laten overgaan van een vloeistof of voorwerp naar een vaste toestand door afkoeling.",
+        "laag2": "Bevriezen gebeurt wanneer de temperatuur zo laag wordt dat een stof, zoals water, vast wordt. Het kan ook betekenen dat iets tijdelijk wordt stilgezet of vastgezet.",
+        "laag3": "Bevriezen is een natuurkundig proces waarbij een vloeistof onder het vriespunt komt en overgaat in een vaste stof. Het woord wordt ook figuurlijk gebruikt, bijvoorbeeld bij het bevriezen van een bankrekening, het stilleggen van een project of het tijdelijk stoppen van een proces.",
+        "laag4": "Bevriezen wordt gebruikt in wetenschap, voedselbewaring, techniek en het dagelijks leven. Door bevriezing blijven voedingsmiddelen langer houdbaar en kunnen biologische of technische processen tijdelijk worden stilgezet. De betekenis hangt af van de context, maar draait altijd om het tijdelijk of blijvend stoppen van verandering door afkoeling of blokkering."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, systemen of natuurlijke processen.",
+        "wat": "Het overgaan naar een vaste toestand of het tijdelijk stilzetten van iets.",
+        "wanneer": "Bij temperaturen onder het vriespunt of wanneer een proces bewust wordt stopgezet.",
+        "waar": "In de natuur, huishoudens, laboratoria, computersystemen en organisaties.",
+        "waarom": "Om iets te bewaren, te beschermen of tijdelijk stil te leggen.",
+        "hoe": "Door afkoeling of door een proces administratief of technisch te blokkeren."
+      },
+      "tags": [],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:33:35.921598+00:00",
+        "vorige_versie_v1": "kb-skel-73ea6dc8",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:57.396044+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:33:33.707363+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:33:33.603285+00:00"
       },
       "media": {
         "voice_url": null,

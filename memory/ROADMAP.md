@@ -1,6 +1,6 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
-## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief afgerond + publieke uitleg-JSON
+## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief afgerond + publieke uitleg-JSON + chat-intents
 
 ### 🎯 Afgerond
 - **48u loss-cut LIVE** (config in `spark_trader.json` → `loss_cut_hours: 48`, `loss_cut_pct: -0.03`); ingelezen in `monitor.py` regel 770-798
@@ -8,12 +8,18 @@
 - **Honest-PnL endpoint LIVE** `GET /api/trade/honest-pnl/{user_id}` — toont gerealiseerd + open drawdown + ECHT netto + honesty_ratio
 - **NIEUW: Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` — volledige, mensvriendelijke uitleg met alle backtest-resultaten (v2/v3/v4/v5 + random-seed check), risico-beschermingen, privacy-sectie
 - **NIEUW: Publiek endpoint** `GET /api/trade/explained` — geen auth, bedoeld voor privacyverklaring "inhoudelijk bekijken"-link en onafhankelijke auditors
-- **KB-kaart Spark Trader (kbv2-2f55a485) verrijkt** — laag1 vermeldt nu expliciet loss-cut + event-pauze + honest-pnl status
+- **KB-kaart Spark Trader (kbv2-2f55a485) verrijkt** — laag1 vermeldt loss-cut + event-pauze + honest-pnl; laag2 vermeldt intents
+- **NIEUW: Trader-intents fast-path** (`v8_trader_intents_001`) — `backend/modules/trade/trader_intents.py` met 8 intents. Spark begrijpt "start mijn bot" / "wat heb ik verdiend" / "leg de trader uit" etc. zonder LLM-call. Hook in `response_composer.py` vóór action_intents. 19/19 unit-tests pass + E2E via /api/spark/compose bevestigd.
 
 ### 🎯 Post-deploy check voor Willem
 1. `curl {BACKEND_URL}/api/trade/explained` → 12-sectie uitleg-JSON zichtbaar
 2. `curl {BACKEND_URL}/api/trade/honest-pnl/user-000` → Spark's eerlijke PnL
-3. Link deze `/api/trade/explained` op je privacy/voorwaarden-pagina
+3. In chat: "hoe staat mijn bot" / "wat heb ik verdiend" / "leg de trader uit"
+4. Link `/api/trade/explained` op je privacy/voorwaarden-pagina
+
+### 🟡 Nog te doen (P1, volgende sessie)
+- **Spark tab-context** — welke tab user open heeft → payload in compose (sessionStorage tracker in GesprekkenPage)
+- **Tab-glow** — `spark:nav-glow` event in Sidebar wanneer Spark trader-intent detecteert en user niet op Trader-tab is
 
 ---
 

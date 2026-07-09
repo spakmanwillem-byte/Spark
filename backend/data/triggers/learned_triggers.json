@@ -1473,12 +1473,64 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": "deep-user-001"
+    },
+    {
+      "id": "learned-94b0cd4da63c",
+      "text_hash": "94b0cd4da63c",
+      "original_text": "vertel over Spinoza",
+      "topic": "Spinoza",
+      "categorie": "filosofisch",
+      "intent": "Gebruiker vraagt om informatie over de filosoof Spinoza",
+      "trigger_phrases": [
+        "vertel over Spinoza",
+        "wie is Spinoza",
+        "Spinoza filosoof",
+        "informatie over Spinoza"
+      ],
+      "keywords": [
+        "spinoza",
+        "filosofie",
+        "geschiedenis",
+        "wijsbegeerte",
+        "nederland"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-09T22:40:15.899967+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-297a57dc682c",
+      "text_hash": "297a57dc682c",
+      "original_text": "wat vind je van muziek",
+      "topic": "muziek",
+      "categorie": "emotioneel",
+      "intent": "De gebruiker vraagt naar de mening van de AI-assistent over muziek",
+      "trigger_phrases": [
+        "wat vind je van muziek",
+        "muziek mening",
+        "vind je muziek leuk",
+        "muziek smaak"
+      ],
+      "keywords": [
+        "muziek",
+        "vinden",
+        "mening",
+        "smaken",
+        "leuk"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-09T22:41:35.036534+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 58,
+    "totaal_voorgesteld": 60,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-08T19:26:37.664334+00:00"
+    "last_run": "2026-07-09T22:41:35.036534+00:00"
   }
 }

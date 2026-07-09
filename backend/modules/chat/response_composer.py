@@ -60,6 +60,41 @@ async def compose_response(
     active_tab: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Hoofdfunctie. Return {success, message, used_cards, used_model}."""
+    # v8_trader_intents_001 — Trader-commando's ('start bot', 'wat verdiend', etc.)
+    # Vóór action_intents zodat trader-triggers voorrang krijgen op algemene toggles.
+    try:
+        from modules.trade.trader_intents import try_detect as _trader_detect
+        trader_hit = await _trader_detect(user_text, user_id=user_id)
+        if trader_hit:
+            if session_id:
+                try:
+                    from modules.chat import chat_log_service
+                    chat_log_service.save_message(
+                        user_id=user_id,
+                        user_naam=user_id,
+                        user_message=user_text,
+                        spark_response=trader_hit.get("message", ""),
+                        channel="spark-trader-intent",
+                        session_id=session_id,
+                        analysis={"intent": trader_hit.get("intent"), "action": trader_hit.get("action")},
+                    )
+                except Exception:
+                    pass
+                _save_turn_pair(session_id, user_id, user_text, trader_hit.get("message", ""), "trader_intents")
+            return {
+                "success": trader_hit.get("success", True),
+                "message": trader_hit.get("message", ""),
+                "action": trader_hit.get("action"),
+                "intent": trader_hit.get("intent"),
+                "data": trader_hit.get("data"),
+                "used_cards": [],
+                "used_model": "trader_intents",
+                "blueprint_version": "1.0",
+                "fast_path": True,
+            }
+    except Exception:
+        pass  # bij fout: door naar action_intents / LLM
+
     # v6_deep_side_effects_001 — Detecteer pure action-commands (TTS/STT/ambient toggle).
     # Bij match: skip de LLM (geen tokens, instant), return action + standaard-bevestiging.
     # Dit hergebruikt de bestaande action_intents_service zodat Diep dezelfde commands

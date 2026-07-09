@@ -1,6 +1,36 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 42 (2026-07-09 laat) — Trader definitief + publieke uitleg-JSON + chat-intents
+
+### Probleem
+1. Trader-loopbugs, ghost pots, misleidende 100% win-rate en gebrek aan transparante uitleg voor bezoekers.
+2. Bot alleen bedienbaar via UI-knoppen — geen chat-commando's.
+
+### Oplossing
+- **48u loss-cut + event-auto-pauze + honest-PnL** — LIVE in `spark_trader.json` + `monitor.py` + `/api/trade/honest-pnl/{user_id}`
+- **Publieke uitleg-JSON** `backend/data/trade/spark_trader_public.json` (12 secties, alle backtest-resultaten, privacy-sectie) + endpoint `GET /api/trade/explained`
+- **Trader-intents fast-path** — `backend/modules/trade/trader_intents.py` met 8 intents: `trader_start`, `trader_stop`, `trader_status`, `trader_pnl`, `trader_recent`, `trader_baseline_reset`, `trader_events`, `trader_explain`. Hook in `response_composer.py` vóór action_intents. Regex-based NL matching (rapidfuzz niet nodig — patterns zijn scherp).
+- **Merge productie chat-data** — 57 nieuwe turns (20 user-001 conversations + 36 deep-user-001 messages + 1 boekhouder-msg) uit deployed zip veilig gemerged.
+
+### Verificatie
+- 19/19 unit-tests pass (direct try_detect)
+- E2E via `POST /api/spark/compose` → `used_model=trader_intents`, correct message per intent
+- Non-trader ("wat vind je van muziek") → LLM-fallback werkt
+- KB-kaart `kbv2-2f55a485` laag1+laag2 geüpdatet met intents en risico-beschermingen
+
+### Bestanden
+- NEW `backend/modules/trade/trader_intents.py` (277 regels)
+- NEW `backend/data/trade/spark_trader_public.json` (12-sectie public JSON)
+- EDIT `backend/modules/trade/routes.py` — endpoint `GET /explained`
+- EDIT `backend/modules/chat/response_composer.py` — trader-intents hook
+- EDIT `backend/modules/trade/blueprints/spark_trader.json` — koppelingen bijgewerkt
+- EDIT `backend/data/knowledge/v2/knowledge_v2_weten.json` — Spark Trader KB-kaart verrijkt
+- EDIT `memory/ROADMAP.md` — Sessie 40 entry
+
+---
+
+
 ## Sessie 41 (2026-06-29) — D&D Gebouw-kaarten verrijkt + StormhavenMapView fix
 
 ### Probleem

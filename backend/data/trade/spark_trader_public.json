@@ -203,6 +203,20 @@
       "GET /api/trade/events/notifications — actieve shock-event pauzes"
     ],
     "kb_kaart": "In Spark's kennisbank: kaart 'Spark Trader' (id kbv2-2f55a485), lade 'weten', 4 lagen diep",
-    "code_repo_pad": "backend/modules/trade/ (open leesbaar voor auditors)"
+    "code_repo_pad": "backend/modules/trade/ (open leesbaar voor auditors)",
+    "chat_intents": {
+      "beschrijving": "Spark begrijpt de trader in natuurlijke taal via 8 fast-path intents (geen LLM-call, instant respons)",
+      "code_ref": "backend/modules/trade/trader_intents.py",
+      "intents": {
+        "trader_start": ["start mijn bot", "zet de trader aan", "activeer bot"],
+        "trader_stop": ["stop mijn bot", "pauzeer trader", "trader uit"],
+        "trader_status": ["hoe staat mijn bot", "draait mijn trader?", "trader status"],
+        "trader_pnl": ["wat heb ik verdiend", "eerlijke winst", "mijn PnL"],
+        "trader_recent": ["laatste trades", "wat heb je gekocht", "handelsgeschiedenis"],
+        "trader_baseline_reset": ["reset baseline", "nieuwe baseline"],
+        "trader_events": ["actieve events", "shock events", "welke markten gepauzeerd"],
+        "trader_explain": ["leg de trader uit", "hoe werkt de trader", "vertel over de bot"]
+      }
+    }
   }
 }

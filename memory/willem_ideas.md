@@ -14,11 +14,13 @@
 - Anders: pauze-mode blijft, want dead-cat-bounce is geen zekerheid
 - Nieuwe strategie: **Q. Bollinger + gap-body + rebound-BUY** (koopt juist bij event, target 2% winst)
 
-**H2: 2-day force-close met winst-drempel** — na 48u open → verkoop als netto ≥3%, anders trailing behouden.
-- Rationale: wachten op "meer" leidt vaak tot verlies (winst niet gepakt)
-- Nieuwe strategie: **P. D + 2day-timeout-3%**
+**H2: 2-day loss-cut (tijd-gestuurde stop-loss)** — na 48u open, als positie ≥3% in **verlies** → SELL, herstart.
+- Rationale: verliezen niet realiseren = kapitaal bevriezen. Klein verlies pakken > oneindig hopen.
+- Filosofische breuk: Willem stapt gecontroleerd af van "nooit met verlies verkopen"-regel voor lange-open posities.
+- Nieuwe strategie: **P. D + 2day-loss-cut-3%**
 - Test tegen D op zelfde 6 markten × 6 maanden
-- Verwacht effect: iets minder gemiddelde winst per trade, maar meer trades = meer omzet
+- Verwacht effect: LAGERE win-rate (want klein verlies wordt gerealiseerd) MAAR minder kapitaal vast + eerlijker plaatje
+- Variant later: 3-day, 5-day, 7-day loss-cut om optimale wachttijd te vinden
 
 **Leer-element**: alles wat we monitoren is data voor Spark's toekomstige zelf-inzicht. Elke event → koppelen aan open posities → PnL-effect logging. Later kan Spark zeggen "5% drop op SOL kost me gemiddeld €X".
 

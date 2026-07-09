@@ -2,7 +2,7 @@
 
 ## 🧪 P1 — Backtest v4 (Willems nieuwe hypothesen, jul 2026)
 - **H1 Rebound-strategie**: analyseer 185 events uit v3 → 24/48/72u recovery-check → wél/niet BUY-tijdens-drop
-- **H2 2-day force-close**: nieuwe strategie P = D + 48u timeout bij ≥3% winst
+- **H2 2-day loss-cut**: nieuwe strategie P = D + 48u tijd-stop-loss (als positie na 2 dagen ≥3% in **verlies** → SELL, herstart). Filosofische breuk met "nooit met verlies"-regel — Willem accepteert klein verlies om kapitaal vrij te maken.
 - **H3 Post-event autopsy**: elk event koppelen aan open posities → PnL-impact per markt/coin
 - Doel: bewijzen of onze event-pauze eigenlijk gemiste kansen zijn (contrarian mogelijk)
 

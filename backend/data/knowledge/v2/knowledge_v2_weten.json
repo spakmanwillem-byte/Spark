@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2098,
+    "card_count": 2099,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T22:25:42.507564+00:00",
+    "last_updated": "2026-07-09T22:28:58.372054+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -278759,6 +278759,164 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T22:25:40.434358+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-6f92750c",
+      "begrip": "celdeling",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Celdeling is het proces waarbij één cel zich deelt en nieuwe cellen vormt.",
+        "laag2": "Celdeling zorgt voor groei, herstel van weefsels en voortplanting. Er bestaan verschillende vormen van celdeling, zoals mitose en meiose.",
+        "laag3": "Tijdens celdeling wordt het erfelijk materiaal gekopieerd en verdeeld over nieuwe cellen. Bij mitose ontstaan twee genetisch vrijwel identieke dochtercellen, terwijl bij meiose vier geslachtscellen ontstaan met de helft van het aantal chromosomen. Celdeling is essentieel voor de ontwikkeling, groei en instandhouding van levende organismen.",
+        "laag4": "Celdeling is een van de belangrijkste biologische processen. Het maakt groei, wondgenezing en vervanging van oude of beschadigde cellen mogelijk. Een goed gereguleerde celdeling houdt organismen gezond, terwijl fouten in dit proces kunnen leiden tot genetische afwijkingen of ziekten zoals kanker."
+      },
+      "ws5": {
+        "wie": "Alle levende organismen die uit cellen bestaan.",
+        "wat": "Het proces waarbij een cel zich deelt en nieuwe cellen vormt.",
+        "wanneer": "Tijdens groei, herstel, onderhoud van het lichaam en voortplanting.",
+        "waar": "In cellen van planten, dieren, schimmels en andere organismen.",
+        "waarom": "Om te groeien, beschadigde cellen te vervangen en zich voort te planten.",
+        "hoe": "Door het kopiëren van DNA en het verdelen van de cel in nieuwe dochtercellen."
+      },
+      "tags": [
+        "celdeling",
+        "cel",
+        "mitose",
+        "meiose",
+        "DNA",
+        "chromosomen",
+        "groei",
+        "voortplanting",
+        "herstel",
+        "biologie",
+        "erfelijkheid"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-4f8ed0ab",
+          "begrip": "Cellen kunnen zich delen",
+          "lade": "doen",
+          "overlap": 5,
+          "shared_tags": [
+            "cel",
+            "celdeling",
+            "dna",
+            "groei",
+            "herstel"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-99dcf41b",
+          "begrip": "DNA wordt gekopieerd bij celdeling",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "cel",
+            "celdeling",
+            "dna",
+            "erfelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-8ae05d74",
+          "begrip": "genetica",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "dna",
+            "erfelijkheid",
+            "groei"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-3ee554cc",
+          "begrip": "dna",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "cel",
+            "dna",
+            "erfelijkheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "cel",
+            "groei",
+            "voortplanting"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T22:28:58.372036+00:00",
+        "vorige_versie_v1": "kb-skel-6f92750c",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:53.640396+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:28:56.146839+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:28:56.153053+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T22:28:58.716405+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T22:28:58.722902+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T22:28:56.046636+00:00"
       },
       "media": {
         "voice_url": null,

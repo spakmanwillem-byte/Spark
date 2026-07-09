@@ -1,0 +1,122 @@
+{
+  "_type": "module_blueprint",
+  "_module": "trade",
+  "_versie": "v8_backtest_driven_001",
+  "_bijgewerkt_op": "2026-07-09T21:00:00+00:00",
+  "_bron": "Backtest-runs 20260709_205003 (v2) + 20260709_205846_v3 (v3) + random_seeds_check",
+  "_doel": "Runtime-configuratie voor Spark Trader. Gescheiden van code zodat drempels, coins en filters aangepast kunnen worden zonder Python-wijziging.",
+  "_koppelingen": {
+    "kb_kaart_id": "kbv2-2f55a485",
+    "code_ref": "backend/modules/trade/monitor.py",
+    "backtests_ref": "backend/data/trade/backtests/",
+    "willem_regel_1": "Help-data is single source of truth"
+  },
+
+  "actieve_strategie": "D_bollinger_2sigma_plus_gap_body",
+
+  "strategieën": {
+    "A_bollinger_only": {
+      "beschrijving": "Bollinger 2σ mean-reversion zonder gap-filter",
+      "backtest_pnl_180d": 2.31,
+      "backtest_trades": 23,
+      "aanbevolen_voor": "eenvoudig, betrouwbaar, breed marktbereik"
+    },
+    "D_bollinger_2sigma_plus_gap_body": {
+      "beschrijving": "Bollinger 2σ + gap-body-momentum (50%) — winnaar backtest v2+v3",
+      "backtest_pnl_180d": 2.63,
+      "backtest_trades": 22,
+      "bear_market_pnl": 1.42,
+      "bull_market_pnl": 0.00,
+      "range_market_pnl": 1.21,
+      "in_event_pnl": 2.18,
+      "aanbevolen_voor": "bear + range markten (grootste voordeel)"
+    },
+    "E_bollinger_plus_n_red_green": {
+      "beschrijving": "Bollinger 2σ + N-red-then-green (Neef's variant, N=3)",
+      "backtest_pnl_180d": 3.19,
+      "backtest_trades": 21,
+      "aanbevolen_voor": "extreme oversold trend-omslagen"
+    }
+  },
+
+  "parameters": {
+    "bollinger_sigma": 2.0,
+    "bollinger_window": 20,
+    "drop_from_high_min_pct": 1.0,
+    "gap_body_ratio": 0.5,
+    "buy_cooldown_per_market_sec": 900,
+    "eur_cooldown_after_insufficient_sec": 1800,
+    "trade_amount_eur_default": 10.0,
+    "candle_interval": "15m",
+    "candles_window_for_decision": 30
+  },
+
+  "sell_regels": {
+    "trailing_stop_activatie_pct": 0.5,
+    "trailing_stop_drop_pct": 0.4,
+    "nooit_verkopen_met_verlies": true,
+    "willems_regel": "Netto na fees moet > €0.01 zijn, anders HOLD tot betere prijs"
+  },
+
+  "markten": {
+    "actief": ["BCH-EUR", "SOL-EUR", "ATOM-EUR", "BTC-EUR"],
+    "geadviseerd_portfolio": ["BCH-EUR", "SOL-EUR", "ATOM-EUR"],
+    "gepauzeerd": ["ADA-EUR"],
+    "reden_pauze": {
+      "ADA-EUR": "0 trades in 180 dagen backtest — geen entry-signalen voor onze strategie"
+    },
+    "correlatie_clusters": {
+      "eth_btc_sol_cluster": ["ETH-EUR", "BTC-EUR", "SOL-EUR"],
+      "onafhankelijk": ["BCH-EUR", "ATOM-EUR"],
+      "advies": "Kies max 1 uit ETH/BTC/SOL-cluster + BCH + ATOM voor diversificatie"
+    }
+  },
+
+  "event_protection": {
+    "actief": true,
+    "trigger_daily_drop_pct": 5.0,
+    "actie": "pause_bot_and_notify_user",
+    "pause_duration_hours": 24,
+    "notification_template": "🚨 Ik zag {drop_pct}% drop op {market}. Ik pauzeer je bot 24u om je kapitaal te beschermen. Detectie via 24h-window >{trigger_pct}% peak-to-trough.",
+    "backtest_evidence": "185 shock-events over 6 markten × 6 maanden. Bot moest 30× per markt pauzeren."
+  },
+
+  "regime_awareness": {
+    "actief_in_v9_geplant": true,
+    "regimes": {
+      "bull": "24h prijs stijgt >2% — geen filter nodig, baseline strategie wint",
+      "bear": "24h prijs daalt >2% — gap-body-filter geeft 6.2× betere winst",
+      "range": "tussen -2% en +2% — beide strategieën gelijk"
+    }
+  },
+
+  "learning_scheduler": {
+    "context_refresh_uur": 3,
+    "win_rate_recompute_uur": 6,
+    "market_bias_toepassen": true,
+    "bron_file": "backend/data/trade/market_stats.json"
+  },
+
+  "safety_limits": {
+    "max_open_posities_per_user": 22,
+    "max_dagelijkse_buy_amount_eur": 50,
+    "min_bitvavo_order_eur": 5.0,
+    "bitvavo_maker_taker_fee_pct": 0.25
+  },
+
+  "spark_awareness": {
+    "spark_kan_uitleggen": [
+      "welke strategie draait",
+      "waarom deze coins",
+      "wat gebeurt bij crash",
+      "hoe hij leert van backtests",
+      "wanneer hij pauzeert"
+    ],
+    "companion_gedrag": {
+      "notify_bij_event": true,
+      "notify_bij_daily_win": true,
+      "notify_bij_5_verliezen_op_rij": true,
+      "bron_kaart": "kbv2-2f55a485"
+    }
+  }
+}

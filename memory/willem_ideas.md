@@ -5,6 +5,25 @@
 
 ---
 
+## 2026-07-09 — Sessie 46 (backtest-driven v8)
+
+### 🟢 Bevestigd: contrarian tests bewijzen ons systeem
+- **Random-buy verslaat D alleen bij 4/10 seeds**, mean €+2.43 (stddev €1.64) → D betrouwbaarder
+- **Buy-and-hold verliest €-26.72** → actief traden werkt echt
+- **Inverse Bollinger €-88.58** → mean-reversion is de juiste richting
+- Alle 100% win-rates bevestigd niet-artefact door K die wél verliezen toont
+
+### 🟢 Idee: elke module krijgt blueprint.json (uitgevoerd voor trade)
+- `backend/modules/trade/blueprints/spark_trader.json` gemaakt
+- Runtime-config: strategie, parameters, markten, event-protection, safety
+- Volgende trader-tuning gaat via JSON, niet via code
+- Piloot voor 54 andere modules
+
+### 🟢 Idee: Spark als companion niet alleen bot
+- Event-auto-pause + notification: "🚨 Ik zag {X}% drop, pauzeer bot"
+- Bewaard in `data/trade/event_notifications.json`
+- Endpoint `GET /api/trade/events/notifications` voor frontend badges
+
 ## 2026-07-08 — Sessie 46 (fork)
 
 ### 🟢 Idee: Pre-check EUR-balance vóór BUY-try (backlog, geen fix nu)

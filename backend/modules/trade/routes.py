@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import Optional, List, Dict
 from pathlib import Path
 from datetime import datetime, timezone
+import json
 from modules.core.storage import load_json, save_json
 from modules.core.spark_logger import traced
 from .monitor import (
@@ -1531,3 +1532,59 @@ async def admin_stop_all_bots(body: StartAllBotsBody):
             results.append({"user_id": uid, "action": "failed", "error": str(e)})
     stopped = sum(1 for r in results if r.get("action") == "stopped")
     return {"success": True, "stopped_count": stopped, "results": results}
+
+
+# ============================================================
+# v8_event_protection_001 — Event notifications endpoint
+# ============================================================
+
+@router.get("/events/notifications")
+async def get_event_notifications(user_id: Optional[str] = None, limit: int = 50):
+    """Recente shock-event notificaties (data-driven bot-pauzes).
+    Filter op user_id indien opgegeven, anders alle users."""
+    from pathlib import Path as _P
+    notif_file = _P(__file__).parent.parent.parent / "data" / "trade" / "event_notifications.json"
+    if not notif_file.exists():
+        return {"success": True, "count": 0, "notifications": []}
+    try:
+        all_notifs = json.loads(notif_file.read_text())
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+    if user_id:
+        all_notifs = [n for n in all_notifs if n.get("user_id") == user_id]
+    all_notifs = sorted(all_notifs, key=lambda n: n.get("ts", ""), reverse=True)[:limit]
+    return {"success": True, "count": len(all_notifs), "notifications": all_notifs}
+
+
+@router.get("/backtests")
+async def list_backtests():
+    """Overzicht van alle backtest-runs (voor Spark's introspectie + admin UI)."""
+    from pathlib import Path as _P
+    idx_file = _P(__file__).parent.parent.parent / "data" / "trade" / "backtests" / "_meta.json"
+    if not idx_file.exists():
+        return {"success": True, "runs": []}
+    try:
+        idx = json.loads(idx_file.read_text())
+        return {"success": True, "runs": idx.get("runs", []), "count": len(idx.get("runs", []))}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@router.get("/backtests/{run_id}")
+async def get_backtest(run_id: str):
+    """Specifieke backtest-run: aggregate + meta (voor Spark om over te vertellen)."""
+    from pathlib import Path as _P
+    run_dir = _P(__file__).parent.parent.parent / "data" / "trade" / "backtests" / run_id
+    if not run_dir.exists():
+        # Try with _v3 suffix
+        run_dir_v3 = _P(__file__).parent.parent.parent / "data" / "trade" / "backtests" / f"{run_id}_v3"
+        if run_dir_v3.exists():
+            run_dir = run_dir_v3
+        else:
+            return {"success": False, "error": "Backtest niet gevonden"}
+    result = {"success": True, "run_id": run_id}
+    for name in ("_meta", "aggregate"):
+        f = run_dir / f"{name}.json"
+        if f.exists():
+            result[name] = json.loads(f.read_text())
+    return result

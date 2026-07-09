@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2088,
+    "card_count": 2089,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T21:01:12.728090+00:00",
+    "last_updated": "2026-07-09T21:12:05.052602+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -273343,7 +273343,7 @@
         "laag1": "Spark Trader is Spark's autonome crypto-handelsmodule die via Bitvavo koopt en verkoopt op meerdere markten (BCH-EUR, BTC-EUR, ETH-EUR, SOL-EUR, ADA-EUR, ATOM-EUR). Werkt met een potjes-systeem: elk potje is een klein kapitaaltje met eigen aankoop/verkoop-status. Bots draaien parallel voor Spark, Willem en Geiser (15-min cycle). Fee voor Spark's eigen account is 0%; Bitvavo rekent 0.25% maker/taker per transactie.",
         "laag2": "Werking: elke 15 min scant de bot 6 markten. Per markt beslist een Bollinger-Band + context-service of het BUY/HOLD/SELL wordt. Bij BUY opent hij een cluster (1-N potjes samen) via /trade/potjes/{user_id}. Bij SELL sluit hij het potje en boekt PnL. Cooldowns beschermen tegen doom-buying: 15 min per markt na een BUY, en sinds 08-jul een globale 30-min cooldown na INSUFFICIENT_EUR_BALANCE (voorkomt 57 mislukte pogingen per uur). Force-sell is atomair: als Bitvavo de sell rejected, wordt het potje teruggerold. Learning-scheduler doet nachtelijk een context-refresh (win-rate per markt + week/maand patronen) en past de BUY-drempel per markt aan.\n\nSinds v7 (08-jul): BUY-signalen worden **dubbel bevestigd** — Bollinger Band-signaal (mean-reversion, koop bij prijs onder lower band 2σ) ÉN gap-breakout-bevestiging (laatste groene candle sluit volledig boven vorige rode candle: low_curr > high_prev). Dit voorkomt 'kopen op piek' in dalende markten want Bollinger alleen kan aanhoudend BUY-signalen geven terwijl de band met de prijs meezakt. De gap-breakout eist een échte structuur-omslag voor er wordt gekocht. SELL-logica blijft trailing stop + fee-aware guard (nooit verkopen met verlies).",
         "laag3": "Waarom zo gebouwd: het potjes-model geeft transparant inzicht per euro-eenheid (hoeveel winst per potje, welke coin is anker) in plaats van één grote portefeuille. Multi-user via één Bitvavo-account (proxy) laat Willem gemeenschapsleden mee laten profiteren zonder dat iedereen zijn eigen API-keys hoeft in te vullen. De 0%-fee voor Spark's eigen bot is bewust: het is een leer-instrument, geen inkomstenmodel. Winst gaat naar de user wiens potje het is; Spark's eigen potjes dragen bij aan de gemeenschap-treasury.",
-        "laag4": "Diepere laag: Spark Trader is ontworpen als 'eerlijke' bot — geen verborgen fees, geen stop-loss-cascades, geen ondoorzichtige leverage. Elke beslissing is te herleiden via het trace-log (/trade/logs/trace_YYYY-MM-DD.jsonl). De learning-service leert van jouw eigen trade-history — Spark past zich aan JOU aan, niet aan een generiek model. Dit sluit aan bij Spark's kernwaarde 'transparantie'. De blueprint (single source of truth) staat in /memory/blueprints/trade.md; deze kaart is de voorleesversie voor gesprekken."
+        "laag4": "Diepere laag: Spark Trader is ontworpen als 'eerlijke' bot — geen verborgen fees, geen stop-loss-cascades, geen ondoorzichtige leverage. Elke beslissing is te herleiden via het trace-log (/trade/logs/trace_YYYY-MM-DD.jsonl). De learning-service leert van jouw eigen trade-history — Spark past zich aan JOU aan, niet aan een generiek model. Dit sluit aan bij Spark's kernwaarde 'transparantie'. De blueprint (single source of truth) staat in /memory/blueprints/trade.md; deze kaart is de voorleesversie voor gesprekken.\n\n**Backtest-bevestigd (2026-07-09)**: op 6 markten × 6 maanden × 9 strategieën is bewezen: gap-body 50% filter geeft €+2.63 winst (18% beter dan baseline). Random-buy 10-seed check toonde dat systematische strategie D betrouwbaarder is dan chaos. In BEAR-markten is D 6.2× winstgevender. Buy-and-hold zou €26 verlies hebben gegeven — actief traden werkt. 185 shock-events op 6 mnd → Spark heeft nu auto-pauze (>5% daily drop = 24u stil + notification). Data structureel opgeslagen in  met _meta.json (SoT-regel)."
       },
       "ws5": {
         "wat": "Autonome crypto-handelsmodule met potjes-systeem via Bitvavo",
@@ -273448,7 +273448,7 @@
         "aangemaakt_door": "user-001",
         "aangemaakt_op": "2026-07-08T13:39:14.482285+00:00",
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-09T20:24:19.206036+00:00",
+        "laatst_bewerkt_op": "2026-07-09T21:09:14.541549+00:00",
         "hooks_fired": [
           {
             "hook": "register_in_vocab",
@@ -273477,6 +273477,22 @@
           {
             "hook": "compute_verbanden",
             "fired_at": "2026-07-09T20:24:19.542843+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:09:14.819518+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:09:14.881503+00:00",
             "result": {
               "n_found": 5,
               "top_overlap": 6
@@ -277168,6 +277184,162 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T21:01:06.900767+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-222e445a",
+      "begrip": "arachnide",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Een arachnide is een geleedpotig dier uit de klasse van de spinachtigen.",
+        "laag2": "Arachniden zijn dieren met acht poten en zonder voelsprieten. Tot de arachniden behoren onder andere spinnen, schorpioenen, teken en mijten.",
+        "laag3": "Arachniden vormen de biologische klasse Arachnida binnen de stam van de geleedpotigen (Arthropoda). Ze onderscheiden zich van insecten doordat ze acht poten hebben, een lichaam dat uit twee hoofdgedeelten bestaat en geen antennes of vleugels bezitten. De meeste arachniden leven op het land en zijn roofdieren of parasieten.",
+        "laag4": "Arachniden spelen een belangrijke rol in ecosystemen. Veel soorten helpen de populaties van insecten en andere kleine dieren in balans te houden. Hoewel sommige soorten giftig zijn of ziekten kunnen overbrengen, zijn de meeste ongevaarlijk voor mensen en dragen ze bij aan een gezond ecosysteem."
+      },
+      "ws5": {
+        "wie": "Spinnen, schorpioenen, teken, mijten en andere spinachtigen.",
+        "wat": "Een klasse van geleedpotige dieren met acht poten.",
+        "wanneer": "Sinds honderden miljoenen jaren als onderdeel van het dierenrijk.",
+        "waar": "Wereldwijd, in uiteenlopende leefomgevingen op het land.",
+        "waarom": "Als onderdeel van ecosystemen, onder andere als roofdier of parasiet.",
+        "hoe": "Door zich voort te bewegen met acht poten en te leven volgens de eigenschappen van de klasse Arachnida."
+      },
+      "tags": [
+        "arachnide",
+        "arachnida",
+        "spinachtige",
+        "spin",
+        "schorpioen",
+        "teek",
+        "mijt",
+        "geleedpotige",
+        "dier",
+        "biologie",
+        "natuur",
+        "acht poten"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-c5012bcf",
+          "begrip": "Spinnen",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "arachnide",
+            "dier",
+            "geleedpotige",
+            "natuur",
+            "spin"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-18a2dfda",
+          "begrip": "geleedpotige",
+          "lade": "weten",
+          "overlap": 4,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "geleedpotige",
+            "spin"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ebea5bef",
+          "begrip": "Insect",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "dier",
+            "geleedpotige",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-1185037e",
+          "begrip": "Zoogdier",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-8bdefef6",
+          "begrip": "Reptiel",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "biologie",
+            "dier",
+            "natuur"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T21:12:05.052573+00:00",
+        "vorige_versie_v1": "kb-skel-222e445a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:56.691230+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:12:02.426226+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:12:02.657448+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T21:12:05.391639+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T21:12:05.397982+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 6
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T21:12:02.327270+00:00"
       },
       "media": {
         "voice_url": null,

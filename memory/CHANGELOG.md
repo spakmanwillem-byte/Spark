@@ -26,6 +26,50 @@ Willem's voorstel: gap-breakout strategy als bevestigings-filter naast Bollinger
 
 **KB Spark Trader kaart** (`kbv2-2f55a485`) laag2 verrijkt met uitleg van dubbele bevestiging.
 
+## 2026-07-09 (sessie 46) — Backtest-driven v8: gap-body + event-protection + blueprint
+
+### 🧪 Backtest v3 stress-test + robustness (9 strategieën, 6 markten, 180 dagen)
+- **Bewezen winnaar**: strategie D (Bollinger 2σ + gap-body 50%) — €+2.63 / 22 trades / 100% win-rate
+- **Neef's 3-red-then-green (E)** #2 — €+3.19 (jouw neef had gelijk)
+- **Random-buy 10-seed check**: mean €+2.43, stddev €1.64. Random is variabel — D betrouwbaarder.
+- **Inverse Bollinger CATASTROFE**: €-88.58 met 1443 trades — bewijst mean-reversion beter dan breakout
+- **Buy-and-hold verliest €-26.72** — actief traden werkt
+- **185 shock-events** gedetecteerd in 6 mnd × 6 markten
+- **Correlatie-matrix**: ETH/BTC/SOL cluster (+0.90+), BCH & ATOM zijn onafhankelijk
+- Data: `data/trade/backtests/{run_id}/` met `_meta.json` + `aggregate.json` + `per_market.json` + `events.json` + `correlation.json`
+
+### ⬆️ v8_gap_body_default_001 — gap-check upgrade
+- `_gap_breakout_check` in `monitor.py` gebruikt nu **body-ratio 50%** i.p.v. "volledig erboven"
+- Backtest v7-streng blokkeerde 100% van 604 signalen → 0 trades in 6 mnd
+- v8 gap-body laat winnende signalen door (22 trades, 100% win)
+- SELL-variant ook aangepast naar body-ratio
+
+### 🚨 v8_event_protection_001 — Auto-pauze + companion notification
+Nieuwe `_detect_daily_drop(candles, threshold=5%)` helper:
+- Detecteert >5% drop in laatste 24u (96 × 15m candles)
+- Bij event: 24u pauze voor die markt + notification opgeslagen in `data/trade/event_notifications.json`
+- Message-template: *"🚨 Ik zag {drop_pct}% drop op {market} in de laatste 24u (€X → €Y). Ik pauzeer je bot 24u om je kapitaal te beschermen."*
+- Endpoints: `GET /api/trade/events/notifications`, `GET /api/trade/backtests`, `GET /api/trade/backtests/{run_id}`
+- Data-driven: 185 events op 6 mnd bewees dat dit regelmatig nodig is
+
+### 📘 `spark_trader.json` blueprint — Willem's ROADMAP-regel
+- Runtime-config los van code: `backend/modules/trade/blueprints/spark_trader.json`
+- Bevat: actieve strategie, parameters, sell-regels, markten (actief/gepauzeerd), event-protection, correlatie-advies, safety-limits, spark-awareness
+- Bron-referentie naar backtest-runs + KB-kaart voor Willem's "single source of truth"
+- Volgende trader-tuning gaat via deze JSON, niet meer via Python
+
+### 📇 KB Spark Trader kaart (`kbv2-2f55a485`) uitgebreid
+- Laag4 aangevuld met backtest-bewijs + event-protection
+- 4 nieuwe verbanden: blueprint_ref, data_ref backtests, data_ref event_notifications, code_ref backtest_v3
+- Totaal nu 9 verbanden — Spark kan nu tekst + code + data-referentie geven
+
+### 🎯 Live-configuratie advies (voor Willem's 5 tokens start)
+Data-driven aanbeveling voor `markets`:
+- **Actief**: BCH-EUR, SOL-EUR, ATOM-EUR, BTC-EUR
+- **Gepauzeerd**: ADA-EUR (0 trades in backtest)
+- **Optioneel weglaten**: ETH-EUR (te sterk gecorreleerd met BTC/SOL)
+- Diversificatie: BCH + ATOM zijn de "unieke" markten in ons portfolio
+
 ## 2026-07-08 (sessie 46) — Chat-hygiene sweep + Spark Trader KB + Blueprint-piloot + Bijbel
 
 ### 📇 KB v2 kaarten "Spark Bijbel" + "wijsheden" verrijkt (`kbv2-336bd0a9`, `kbv2-846644c0`)

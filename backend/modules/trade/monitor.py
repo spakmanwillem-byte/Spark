@@ -10,7 +10,7 @@ import uuid
 import hmac
 import hashlib
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Dict, Optional, List
 from pathlib import Path
 from modules.core.storage import load_json, save_json
@@ -847,8 +847,8 @@ def _gap_breakout_check(candles: List[Dict]) -> Dict:
     v7_gap_breakout_001 — Willem's structuur-omslag detector.
     Geeft BUY als laatste candle bullish (groen) is EN volledig boven de vorige
     bearish (rode) candle sluit (low_curr > high_prev). Geeft SELL bij inverse.
-    Anders NONE. Fungeert als bevestigings-filter voor Bollinger-signaal om
-    'kopen op piek' in dalende markt te voorkomen.
+    v8: verder aangevuld met gap-body variant (50% ratio) — winnaar backtest.
+    Fungeert als bevestigings-filter voor Bollinger-signaal.
     """
     if len(candles) < 2:
         return {"signal": "NONE", "reason": "te weinig candles"}
@@ -859,15 +859,42 @@ def _gap_breakout_check(candles: List[Dict]) -> Dict:
     curr_bullish = curr["close"] > curr["open"]
     curr_bearish = curr["close"] < curr["open"]
 
-    # BUY: vorige rood, huidige groen, volledig erboven
-    if prev_bearish and curr_bullish and curr["low"] > prev["high"]:
-        gap = curr["low"] - prev["high"]
-        return {"signal": "BUY", "reason": f"groene candle volledig boven rode (gap €{gap:.4f})", "gap": round(gap, 4)}
-    # SELL: vorige groen, huidige rood, volledig eronder
-    if prev_bullish and curr_bearish and curr["high"] < prev["low"]:
-        gap = prev["low"] - curr["high"]
-        return {"signal": "SELL", "reason": f"rode candle volledig onder groene (gap €{gap:.4f})", "gap": round(gap, 4)}
-    return {"signal": "NONE", "reason": "geen volledige candle-omslag"}
+    # v8_gap_body_default_001 — Bewezen winnaar (backtest v2+v3):
+    # BUY als rood → groen met body-ratio ≥ 50%. Realistisch signaal;
+    # oude 'volledig erboven' variant blokkeerde 100% van signalen.
+    if prev_bearish and curr_bullish:
+        prev_body = abs(prev["open"] - prev["close"])
+        curr_body = abs(curr["close"] - curr["open"])
+        if curr_body >= prev_body * 0.5 and curr_body > 0:
+            return {"signal": "BUY", "reason": f"gap-body: groen body {curr_body:.4f} ≥ 50% van rood body {prev_body:.4f}",
+                    "curr_body": round(curr_body, 4), "prev_body": round(prev_body, 4)}
+    # SELL: vorige groen, huidige rood, body-ratio ≥ 50%
+    if prev_bullish and curr_bearish:
+        prev_body = abs(prev["close"] - prev["open"])
+        curr_body = abs(curr["open"] - curr["close"])
+        if curr_body >= prev_body * 0.5 and curr_body > 0:
+            return {"signal": "SELL", "reason": f"gap-body inverse: rood body ≥ 50% van groen body"}
+    return {"signal": "NONE", "reason": "geen kleuromslag of te kleine body"}
+
+
+def _detect_daily_drop(candles: List[Dict], threshold_pct: float = 5.0) -> Dict:
+    """
+    v8_event_protection_001 — Detecteer 'shock-event' in de laatste 24u (96 candles × 15m).
+    Return {'is_event': True, 'drop_pct': X, 'high': Y, 'low': Z} als drop >= threshold.
+    Data-driven: backtest v3 detecteerde 185 events in 6 mnd × 6 markten.
+    """
+    if len(candles) < 96:
+        return {"is_event": False}
+    last_24h = candles[-96:]
+    peak_high = max(c["high"] for c in last_24h)
+    trough_low = min(c["low"] for c in last_24h[-24:])  # laatste 6u voor recent trough
+    if peak_high <= 0:
+        return {"is_event": False}
+    drop_pct = (peak_high - trough_low) / peak_high * 100
+    if drop_pct >= threshold_pct:
+        return {"is_event": True, "drop_pct": round(drop_pct, 2),
+                "peak_price": round(peak_high, 4), "trough_price": round(trough_low, 4)}
+    return {"is_event": False, "drop_pct": round(drop_pct, 2)}
 
 
 class MonitorService:
@@ -903,6 +930,11 @@ class MonitorService:
         # v7_eur_cooldown_001 — als Bitvavo INSUFFICIENT_EUR_BALANCE geeft, wacht N min
         # voor we opnieuw proberen te kopen (voorkomt loop-spam op alle markets).
         self._last_insufficient_eur_ts: Optional[datetime] = None
+        # v8_event_protection_001 — bij >5% daily drop pauzeert de bot en waarschuwt de user.
+        # Data-driven: backtest v3 detecteerde 185 shock-events over 6 markten × 6 maanden.
+        # Config uit blueprints/spark_trader.json.event_protection.
+        self._event_pause_until: Dict[str, datetime] = {}
+        self._event_notifications: List[Dict] = []
 
         # v7_config_persist_on_init_001 — laad config uit state file bij creatie zodat
         # UI /bot/status altijd de laatste user-configuratie toont (interval, markets,
@@ -1220,6 +1252,49 @@ class MonitorService:
         context_candles = fetch_candles(market, self._candle_interval, 50)
         context_per_market[market] = context_candles
         if not context_candles:
+            return
+
+        # v8_event_protection_001 — check op shock-event (>5% drop 24u)
+        # Als event actief én we zijn in pause-window: skip deze market.
+        now_utc = datetime.now(timezone.utc)
+        paused_until = self._event_pause_until.get(market)
+        if paused_until and now_utc < paused_until:
+            remaining_min = int((paused_until - now_utc).total_seconds() / 60)
+            logger.info(f"[event-pause] {market}: nog {remaining_min}min gepauzeerd vanwege eerdere shock-event")
+            return
+        # Fetch 96 15m-candles voor event-detectie (24u window)
+        event_candles = context_candles if self._candle_interval == "15m" else fetch_candles(market, "15m", 96)
+        event = _detect_daily_drop(event_candles, threshold_pct=5.0) if event_candles else {"is_event": False}
+        if event.get("is_event"):
+            # Pauzeer 24u + log notification
+            pause_hours = 24
+            self._event_pause_until[market] = now_utc + timedelta(hours=pause_hours)
+            notif = {
+                "ts": now_utc.isoformat(),
+                "user_id": self._user_id,
+                "market": market,
+                "drop_pct": event["drop_pct"],
+                "peak_price": event["peak_price"],
+                "trough_price": event["trough_price"],
+                "pause_hours": pause_hours,
+                "message": (
+                    f"🚨 Ik zag {event['drop_pct']}% drop op {market} in de laatste 24u "
+                    f"(€{event['peak_price']} → €{event['trough_price']}). Ik pauzeer je bot {pause_hours}u "
+                    f"om je kapitaal te beschermen."
+                ),
+            }
+            self._event_notifications.append(notif)
+            # Persist naar file (max 200 recent)
+            try:
+                notif_file = DATA_DIR / "trade" / "event_notifications.json"
+                existing = []
+                if notif_file.exists():
+                    existing = json.loads(notif_file.read_text())
+                existing.append(notif)
+                notif_file.write_text(json.dumps(existing[-200:], indent=2, ensure_ascii=False))
+            except Exception as _e:
+                logger.warning(f"event_notifications write error: {_e}")
+            logger.warning(f"[event-pause] {market} — {notif['message']}")
             return
 
         price = live_price if live_price is not None else context_candles[-1]["close"]

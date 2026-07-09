@@ -112,3 +112,5 @@
 {"ts": "2026-07-09T23:18:26.316508+00:00", "module": "kb_v2", "fn": "classify", "phase": "post", "intent": "KB v2 kaart classificeren (inbox → lade)", "result": "dict(success=True, keys=success,kaart,lade)", "duration_ms": 261.12}
 {"ts": "2026-07-09T23:26:37.217171+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "pre", "intent": "KB v2 kaart verwijderen", "args": {"body": "DeleteBody(card_id='kbv2-3d38ce2f', lade='inbox', user_id='user-001', reason='i…"}}
 {"ts": "2026-07-09T23:26:37.322753+00:00", "module": "kb_v2", "fn": "delete_card", "phase": "post", "intent": "KB v2 kaart verwijderen", "result": "dict(success=True, keys=success,message,card_id,begrip,lade,remaining_in_lade)", "duration_ms": 105.38}
+{"ts": "2026-07-09T23:40:35.025402+00:00", "module": "kb_v2", "fn": "edit", "phase": "pre", "intent": "KB v2 kaart bewerken", "args": {"body": "EditBody(card_id='kbv2-skel-5a55ae2d', lade='inbox', updates={'lagen': {'laag1'…"}}
+{"ts": "2026-07-09T23:40:35.391844+00:00", "module": "kb_v2", "fn": "edit", "phase": "post", "intent": "KB v2 kaart bewerken", "result": "dict(success=True, keys=success,kaart)", "duration_ms": 366.21}

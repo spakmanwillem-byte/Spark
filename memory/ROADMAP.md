@@ -23,6 +23,22 @@
 - **BONUS: Strategy Compare** (`v8_strategy_compare_001`) — `GET /api/trade/strategy/compare?a=X&b=Y` beoordeelt 5 secties (confidence, protection, bear-market, honesty, maturity) met per-sectie winner en overall winnaar
 - **BONUS: A/B Engine Switch** (`v8_engine_switch_001`) — nieuwe module `strategy_decision_v2.py` (trend-following stub) + `GET/POST /api/trade/engine/status|switch`. Dispatcher in monitor.py routes tussen v1 en v2 op basis van blueprint `active_decision_engine`. Live geswitcht v1→v2→v1 zonder herstart.
 
+### 🧬 Adaptive Strategy Lab v0.5 (deze sessie — fundament voor v9)
+- **Auto-compare bij synthesize** (`v9_adaptive_lab_001`) — bij elke nieuwe draft roept synthesize intern compare aan met actieve strategie. Response bevat `compared_to_active` + `spark_feedback` (bv. "Bollinger Pure Protection scoort 0/5, voeg loss_cut toe voor honesty")
+- **Rich compare narrative** — elke compare-sectie krijgt nu Spark's inhoudelijke analyse-tekst:
+  - Confidence: "Gap Momentum 50 wint met 82% vs 45%. Verschil van 37p is significant."
+  - Properties: "4 beschermings-eigenschappen vs 0. Verschilmakers: event_pause, fee_aware_sell..."
+  - Bear-market: "€1.42 in bear-markten (6.2× beter). Advies: gebruik bij dalende trend."
+  - Honesty: "⚠️ negatieve honesty ratio — verstopte verliezen. Voeg loss_cut toe."
+  - Overall: "🏆 wint duidelijk (4/5). Aanbevolen om actief te zetten."
+- **Strategy Genome** (`v9_adaptive_lab_002`) — `GET /api/trade/strategy/genome` toont alle strategieën als DNA-matrix: 13 genes × N strategies + inheritance-tracking (draft-strategies → candidate parents via property-overlap detectie). Genen gecategoriseerd naar signaal/bescherming/confirmatie/exit/meta/filosofie.
+
+### 📋 Adaptive Strategy Lab — nog te bouwen voor v9 (P1)
+- **Multi-Engine framework** — generieke `DecisionEngine` interface class waar v1/v2/v3 van erven (nu zit switch direct in monitor.py)
+- **Live A/B testing** — meerdere engines parallel op dezelfde markt met per-engine PnL/winrate/drawdown/confidence tracking
+- **AI Analyse & Advies** — LLM-narrative rond compare-resultaten (nu regel-based, upgrade naar Gemini/Claude)
+- **Automatische Hypothesevorming** — Spark observeert eigen trade-history → detecteert patronen → suggereert nieuwe hypothesis-drafts
+
 ### ✅ Test-status
 - Iteratie 46 + 47: **39/39 backend tests PASS**, geen regressies
 - Bonus enhancements: handmatig geverifieerd via curl — compare toont Gap Momentum 50 4/5 wint, engine-switch v1↔v2 werkt met correcte routing

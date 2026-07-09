@@ -2030,12 +2030,59 @@ async def synthesize_strategy(body: StrategySynthesizeBody):
     except Exception as e:
         return {"success": False, "error": f"blueprint schrijven mislukt: {e}", "draft": strategy_obj}
 
+    # v9_adaptive_lab_001 — Auto-compare met actieve strategie voor directe feedback
+    compared_to_active = None
+    try:
+        actieve = bp_data.get("actieve_strategie")
+        if actieve and actieve != strategy_id:
+            compared_to_active = await compare_strategies(a=strategy_id, b=actieve)
+    except Exception as _e:
+        pass
+
     return {
         "success": True,
         "message": f"Draft-strategie '{strategy_id}' opgeslagen. Backtest is nodig voor confidence-score.",
         "strategy_id": strategy_id,
         "strategy": strategy_obj,
+        "compared_to_active": compared_to_active,
+        "spark_feedback": _build_spark_synthesize_feedback(strategy_id, compared_to_active),
     }
+
+
+def _build_spark_synthesize_feedback(new_id: str, comp: Optional[Dict]) -> str:
+    """Genereer Spark's inhoudelijke feedback over een net gesynthetiseerde strategie."""
+    if not comp or not comp.get("success"):
+        return f"Je nieuwe draft '{new_id}' is opgeslagen. Backtest deze om confidence te bepalen."
+    scores = comp.get("score", {})
+    winner = comp.get("overall_winner")
+    active_name = comp.get("strategies", {}).get("b", {}).get("display_name", "actieve strategie")
+    new_name = comp.get("strategies", {}).get("a", {}).get("display_name", new_id)
+    a_score = scores.get(new_id, 0)
+    if winner == new_id:
+        pref = f"🚀 Je nieuwe draft **{new_name}** scoort **{a_score}/5** secties beter dan **{active_name}**"
+    elif winner == "tie":
+        pref = f"⚖️ **{new_name}** eindigt gelijk met **{active_name}** ({a_score}/5)"
+    else:
+        pref = f"🤔 **{new_name}** scoort {a_score}/5 secties beter dan **{active_name}** — draft heeft nog werk"
+    # Section highlights
+    highlights = []
+    for name, sec in (comp.get("sections", {}) or {}).items():
+        if isinstance(sec, dict) and sec.get("winner") == new_id:
+            label = {
+                "confidence": "hogere confidence",
+                "properties": "meer beschermings-eigenschappen",
+                "bear_market_pnl": "beter in bear-markten",
+                "honesty": "eerlijker (honesty ratio)",
+                "maturity": "afgeronde hypothese",
+            }.get(name, name)
+            highlights.append(label)
+    if highlights:
+        pref += f". Sterk op: {', '.join(highlights)}."
+    if a_score < 3:
+        pref += f" Advies: voeg loss_cut_48h_3pct + event_pause_5pct_24h toe voor honesty."
+    else:
+        pref += f" Klaar voor backtest — draai backtest_v2.py met deze properties om confidence te valideren."
+    return pref
 
 
 
@@ -2121,7 +2168,10 @@ async def compare_strategies(a: str, b: str):
             "b": {"id": b, "display_name": sb.get("display_name", b), "actief": bool(sb.get("actief"))},
         },
         "sections": {
-            "confidence": {"a_score": conf_a, "b_score": conf_b, "winner": conf_winner},
+            "confidence": {
+                "a_score": conf_a, "b_score": conf_b, "winner": conf_winner,
+                "narrative": _narrate_confidence(a, b, conf_a, conf_b, sa, sb),
+            },
             "properties": {
                 "overlap": sorted(props_a & props_b),
                 "unique_a": sorted(props_a - props_b),
@@ -2130,11 +2180,16 @@ async def compare_strategies(a: str, b: str):
                 "protection_count_b": prot_b,
                 "winner": prot_winner,
                 "toelichting": "Winnaar = meeste beschermings-eigenschappen (loss_cut, event_pause, honest_pnl, fee_aware_sell)",
+                "narrative": _narrate_properties(a, b, props_a, props_b, prot_a, prot_b, sa, sb),
             },
-            "bear_market_pnl": {"a_eur": bear_a, "b_eur": bear_b, "winner": bear_winner},
+            "bear_market_pnl": {
+                "a_eur": bear_a, "b_eur": bear_b, "winner": bear_winner,
+                "narrative": _narrate_bear(a, b, bear_a, bear_b, sa, sb),
+            },
             "honesty": {
                 "a_ratio": honesty_a, "b_ratio": honesty_b, "winner": honesty_winner,
                 "toelichting": "Ratio dichter bij 1.0 = eerlijker. Negatief = verstopte verliezen.",
+                "narrative": _narrate_honesty(a, b, honesty_a, honesty_b, sa, sb),
             },
             "spark_zekerheid": {
                 "a": _pick(sa, "spark_alignment.zekerheid", ""),
@@ -2143,6 +2198,7 @@ async def compare_strategies(a: str, b: str):
             "maturity": {
                 "a_has_conclusion": conc_a, "b_has_conclusion": conc_b, "winner": maturity_winner,
                 "toelichting": "Winnaar = heeft afgeronde hypothese_lineage.conclusie (geen TODO)",
+                "narrative": _narrate_maturity(a, b, conc_a, conc_b, sa, sb),
             },
         },
         "score": scores,
@@ -2152,7 +2208,85 @@ async def compare_strategies(a: str, b: str):
             if overall != "tie"
             else "Gelijkspel — beide strategieën scoren identiek. Kies op basis van filosofie."
         ),
+        "spark_advies": _narrate_overall(a, b, overall, scores, sa, sb),
     }
+
+
+# ============================================================
+# v9_adaptive_lab_001 — Narrative helpers voor Spark's inhoudelijke analyse
+# ============================================================
+
+def _narrate_confidence(a, b, ca, cb, sa, sb):
+    if ca == cb:
+        return f"Beide strategieën scoren identiek ({ca}%). Confidence alleen zegt niet welke beter presteert live."
+    winner_name = sa.get("display_name", a) if ca > cb else sb.get("display_name", b)
+    diff = abs(ca - cb)
+    interp = "significant" if diff >= 20 else "beperkt" if diff >= 10 else "marginaal"
+    return f"**{winner_name}** wint met {ca if ca > cb else cb}% vs {min(ca, cb)}%. Verschil van {diff}p is {interp}."
+
+
+def _narrate_properties(a, b, props_a, props_b, prot_a, prot_b, sa, sb):
+    a_name = sa.get("display_name", a)
+    b_name = sb.get("display_name", b)
+    if prot_a == prot_b:
+        return f"Beide hebben {prot_a} beschermings-eigenschappen. Focus op verschillen in signaal-eigenschappen."
+    winner_name = a_name if prot_a > prot_b else b_name
+    unique_pos = sorted(props_a - props_b) if prot_a > prot_b else sorted(props_b - props_a)
+    return (
+        f"**{winner_name}** heeft {max(prot_a, prot_b)} beschermings-eigenschappen vs {min(prot_a, prot_b)}. "
+        f"Verschilmakers: {', '.join(unique_pos[:4]) if unique_pos else 'geen unieke'}."
+    )
+
+
+def _narrate_bear(a, b, bear_a, bear_b, sa, sb):
+    if bear_a == 0 and bear_b == 0:
+        return "Geen bear-market data voor beide — draai backtest v3 voor validatie."
+    winner_name = sa.get("display_name", a) if bear_a > bear_b else sb.get("display_name", b)
+    ratio = round(max(bear_a, bear_b) / max(abs(min(bear_a, bear_b)), 0.001), 1) if min(bear_a, bear_b) != 0 else "∞"
+    return f"**{winner_name}** presteert €{max(bear_a, bear_b):.2f} in bear-markten ({ratio}× beter). Advies: gebruik deze bij dalende trend."
+
+
+def _narrate_honesty(a, b, ha, hb, sa, sb):
+    if ha is None and hb is None:
+        return "Geen honesty-data voor beide (nog geen open posities in backtest)."
+    if ha is None or hb is None:
+        available = a if ha is not None else b
+        val = ha if ha is not None else hb
+        return f"Alleen {sa.get('display_name', a) if available == a else sb.get('display_name', b)} heeft honesty data ({val})."
+    a_name = sa.get("display_name", a)
+    b_name = sb.get("display_name", b)
+    if ha < 0 or hb < 0:
+        loser = a_name if ha < hb else b_name
+        return f"⚠️ **{loser}** heeft negatieve honesty ratio — verstopte verliezen. Voeg loss_cut toe."
+    dist_a = abs(ha - 1.0)
+    dist_b = abs(hb - 1.0)
+    winner_name = a_name if dist_a < dist_b else b_name
+    return f"**{winner_name}** scoort eerlijker (ratio {ha if dist_a < dist_b else hb} — dichter bij 1.0 = geen verstopte verliezen)."
+
+
+def _narrate_maturity(a, b, ca, cb, sa, sb):
+    a_name = sa.get("display_name", a)
+    b_name = sb.get("display_name", b)
+    if ca and cb:
+        return "Beide strategieën hebben afgeronde hypothese_lineage — mature."
+    if not ca and not cb:
+        return "Beide zijn drafts (geen conclusie). Draai backtest voor validatie."
+    mature = a_name if ca else b_name
+    draft = b_name if ca else a_name
+    return f"**{mature}** is mature (backtest-conclusie aanwezig). **{draft}** is nog draft."
+
+
+def _narrate_overall(a, b, overall, scores, sa, sb):
+    if overall == "tie":
+        return "Gelijkspel — kies op basis van filosofie: transparantie (honesty), snelheid (minder cooldowns) of exploratie (nieuwere hypotheses)."
+    winner_name = sa.get("display_name", a) if overall == a else sb.get("display_name", b)
+    loser_name = sb.get("display_name", b) if overall == a else sa.get("display_name", a)
+    s = scores.get(overall, 0)
+    if s >= 4:
+        return f"🏆 **{winner_name}** wint duidelijk ({s}/5). Aanbevolen om deze actief te zetten via `/api/trade/engine/switch` of blueprint.active_strategy update."
+    elif s == 3:
+        return f"**{winner_name}** wint knap ({s}/5). {loser_name} blijft een goede backup — hou beide beschikbaar voor A/B."
+    return f"**{winner_name}** wint nipt ({s}/5). Verschil is klein — draai nog een backtest-ronde voor zekerheid."
 
 
 # ============================================================
@@ -2224,3 +2358,108 @@ async def switch_engine(body: EngineSwitchBody):
         "active_engine": body.engine,
         "note": "MonitorService leest engine bij volgende cycle (max 5 min wachttijd).",
     }
+
+
+# ============================================================
+# v9_adaptive_lab_002 — Strategy Genome view (DNA-matrix per strategie)
+# ============================================================
+
+@router.get("/strategy/genome")
+async def get_strategy_genome():
+    """Toon alle strategieën als 'genoom' — property-matrix waaruit blijkt welke
+    strategie welk gen heeft. Fundament voor Adaptive Strategy Lab v9.
+
+    Return:
+      - genes: alle bekende properties uit blueprint + property catalog
+      - matrix: {strategy_id: {display_name, actief, confidence, gene_count, genes:{gen:bool}}}
+      - inheritance: draft-strategieën met candidate_parents (via property-overlap)
+      - stats: gene usage stats, categorieën
+    """
+    try:
+        from modules.core.blueprint import load_blueprint_cached
+        bp = load_blueprint_cached("trade", "spark_trader") or {}
+        strategieën = bp.get("strategieën", {}) or {}
+    except Exception as e:
+        return {"success": False, "error": f"blueprint niet leesbaar: {e}"}
+
+    # 1. Verzamel alle unieke genen
+    all_genes = set()
+    for sid, s in strategieën.items():
+        for p in (s.get("properties", []) or []):
+            all_genes.add(p)
+    for gen in _PROPERTY_CATALOG.keys():
+        all_genes.add(gen)
+    all_genes = sorted(all_genes)
+
+    # 2. Matrix bouwen
+    matrix = {}
+    for sid, s in strategieën.items():
+        props = set(s.get("properties", []) or [])
+        raw_status = s.get("status", "")
+        status = raw_status if raw_status.startswith("draft") else "productie"
+        matrix[sid] = {
+            "display_name": s.get("display_name", sid),
+            "actief": bool(s.get("actief")),
+            "status": status,
+            "confidence": int((s.get("confidence") or {}).get("score", 0)),
+            "gene_count": len(props),
+            "genes": {gen: (gen in props) for gen in all_genes},
+        }
+
+    # 3. Inheritance tracking
+    inheritance = {}
+    for sid, s in strategieën.items():
+        vorige = s.get("vorige_naam")
+        if vorige and vorige != sid:
+            inheritance[sid] = {
+                "vorige_naam": vorige,
+                "is_migration": True,
+                "beschrijving": "Hernoemd van legacy-code naar semantic name",
+            }
+        if s.get("status", "").startswith("draft"):
+            new_props = set(s.get("properties", []) or [])
+            parents = []
+            for other_id, other_s in strategieën.items():
+                if other_id == sid or other_s.get("status", "").startswith("draft"):
+                    continue
+                other_props = set(other_s.get("properties", []) or [])
+                if other_props and len(new_props & other_props) >= max(2, len(other_props) // 2):
+                    overlap = len(new_props & other_props)
+                    parents.append({
+                        "parent_id": other_id,
+                        "parent_name": other_s.get("display_name", other_id),
+                        "shared_genes": overlap,
+                        "unique_new_genes": sorted(new_props - other_props),
+                    })
+            if parents:
+                inheritance[sid] = {
+                    "is_synthesis": True,
+                    "candidate_parents": sorted(parents, key=lambda x: -x["shared_genes"])[:3],
+                }
+
+    # 4. Stats
+    gene_usage = {g: sum(1 for m in matrix.values() if m["genes"].get(g)) for g in all_genes}
+    most_common = sorted(gene_usage.items(), key=lambda x: -x[1])[:5]
+    unused_genes = [g for g, cnt in gene_usage.items() if cnt == 0]
+
+    genes_by_category = {}
+    for gen in all_genes:
+        cat = (_PROPERTY_CATALOG.get(gen) or {}).get("categorie", "onbekend")
+        genes_by_category.setdefault(cat, []).append(gen)
+
+    return {
+        "success": True,
+        "total_genes": len(all_genes),
+        "total_strategies": len(strategieën),
+        "genes_by_category": genes_by_category,
+        "matrix": matrix,
+        "inheritance": inheritance,
+        "stats": {
+            "most_common_genes": [{"gene": g, "count": c} for g, c in most_common],
+            "unused_genes": unused_genes,
+            "protection_gene_count": len([g for g in all_genes if (_PROPERTY_CATALOG.get(g) or {}).get("categorie") == "bescherming"]),
+            "signal_gene_count": len([g for g in all_genes if (_PROPERTY_CATALOG.get(g) or {}).get("categorie") == "signaal"]),
+        },
+        "_note": "Fundament voor Adaptive Strategy Lab v9. Genes = properties. Inheritance detecteert synthesized-drafts en migraties. Gebruik matrix voor UI DNA-heatmap.",
+    }
+

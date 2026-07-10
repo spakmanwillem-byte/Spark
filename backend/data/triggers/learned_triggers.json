@@ -1525,12 +1525,62 @@
       "count": 1,
       "user_id": "user-001",
       "session_id": null
+    },
+    {
+      "id": "learned-7cdb1307b966",
+      "text_hash": "7cdb1307b966",
+      "original_text": "zou jij eens aan je eigen systemen willen snuffelen",
+      "topic": "systeem",
+      "categorie": "technisch",
+      "intent": "De gebruiker vraagt de AI-assistent om zijn eigen systemen te onderzoeken.",
+      "trigger_phrases": [
+        "snuffel in je systeem",
+        "onderzoek je eigen systemen",
+        "kijk in je eigen code",
+        "analyseer je eigen functionaliteit"
+      ],
+      "keywords": [
+        "systeem",
+        "onderzoek",
+        "analyse",
+        "code"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-10T10:55:34.800194+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
+    },
+    {
+      "id": "learned-90312d62bddc",
+      "text_hash": "90312d62bddc",
+      "original_text": "lees de bitvavo api eens uit",
+      "topic": "Bitvavo API",
+      "categorie": "technisch",
+      "intent": "De gebruiker wil dat de AI-assistent de Bitvavo API uitleest.",
+      "trigger_phrases": [
+        "lees Bitvavo API",
+        "toon Bitvavo gegevens",
+        "geef Bitvavo info",
+        "bekijk Bitvavo API"
+      ],
+      "keywords": [
+        "bitvavo",
+        "api",
+        "lees",
+        "gegevens"
+      ],
+      "status": "pending",
+      "first_seen": "2026-07-10T10:55:36.783496+00:00",
+      "count": 1,
+      "user_id": "user-001",
+      "session_id": null
     }
   ],
   "statistieken": {
-    "totaal_voorgesteld": 60,
+    "totaal_voorgesteld": 62,
     "goedgekeurd": 0,
     "afgewezen": 0,
-    "last_run": "2026-07-09T22:41:35.036534+00:00"
+    "last_run": "2026-07-10T10:55:36.783496+00:00"
   }
 }

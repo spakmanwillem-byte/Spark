@@ -1,14 +1,9 @@
 {
-  "running": false,
-  "interval": 900,
+  "running": true,
+  "interval": 300,
   "market": "BCH-EUR",
   "markets": [
-    "BCH-EUR",
-    "BTC-EUR",
-    "ETH-EUR",
-    "SOL-EUR",
-    "ADA-EUR",
-    "ATOM-EUR"
+    "BCH-EUR"
   ],
   "candle_interval": "15m",
   "user_id": "user-001",
@@ -16,5 +11,5 @@
   "trade_amount": 10.0,
   "use_mock": false,
   "use_potjes": true,
-  "last_persisted": "2026-07-09T22:04:34.387950+00:00"
+  "last_persisted": "2026-07-10T10:57:49.643590+00:00"
 }

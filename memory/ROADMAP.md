@@ -1,5 +1,17 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+## ✅ Sessie 40b (2026-07-10) — Fantoom-fix + Trader terug live
+
+### 🎯 Afgerond
+- **`trader_config` intent toegevoegd** (`v9_anti_hallucination_001`) — Spark leest nu LIVE `spark_trader.json` blueprint bij vragen zoals "wat zijn je fees", "snuffel in je eigen systemen", "lees de bitvavo api uit", "wat is je actieve strategie". Voorkomt LLM-hallucinaties over eigen configuratie. **9 nieuwe regex-patterns** in `trader_intents.py`.
+- **Bots terug live**: user-000 (Spark, 5 potjes × €10) + user-001 (Willem, 3 potjes × €10 geprovisioneerd) draaien nu actief op 6 markten (BCH/BTC/ETH/SOL/ADA/ATOM). Cycle 15 min. Beide staan HOLD (prijzen in-band).
+- **Willem's chatlog gemerged** — 7 nieuwe turns uit prod-zip veilig toegevoegd
+
+### 📊 Diagnose gedaan
+- Voor start: alle bots offline (running=false), 0 potjes voor Willem, laatste trade was 8 juli 02:28 → 2 dagen stil
+- Spark hallucineerde over fees/commissies in chat (LLM viel terug op eigen kennis i.p.v. blueprint)
+- Root cause: `trader_intents.py` miste `trader_config` intent → alles buiten status/pnl/history ging naar LLM
+
 ## ✅ Sessie 40 (2026-07-09 laat) — Trader definitief + Batch 1 Spark Core
 
 ### 🎯 Afgerond

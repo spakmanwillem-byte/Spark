@@ -99,6 +99,21 @@ _EVENTS_PATTERNS = [
     r"\bevent[-\s]?pauze\b",
 ]
 
+# CONFIG / FEES — v9_anti_hallucination_001
+_CONFIG_PATTERNS = [
+    r"\b(fee|fees|kosten|commissie|commissies|tarief|tarieven)\b",
+    r"\bhoe\s*veel\s*(fee|commissie|kost)\b",
+    r"\b(trader|bot)\s+(config|configuratie|instellingen|settings)\b",
+    r"\b(actieve?)\s+(strategie|instellingen)\b",
+    r"\b(loss[-\s]?cut|event[-\s]?pauze|cooldown)\s+(instelling|config|waarde)\b",
+    r"\b(snuffel|kijk|check|lees|zoek|graaf|duik)\b.*\b(eigen|jouw|je)\s+(systemen|systeem|configuratie|blueprint|instellingen|data)\b",
+    r"\b(snuffel|kijk|check|lees|zoek)\s+in\s+(je|jouw|de)\s+(eigen\s+)?(systeem|systemen|config|blueprint)\b",
+    r"\bwat\s+(zijn|staat\s+in)\s+(je|jouw)\s+(config|instellingen|blueprint|systemen)\b",
+    r"\blees\s+(de|je)?\s*bitvavo\s+(api|documentatie|docs?)\s*(eens\s+)?(uit|door|na)?\b",
+    r"\bbitvavo\s+(fees?|kosten|tarieven|api)\b",
+    r"\baan\s+je\s+eigen\s+systemen\s+(willen\s+)?snuffelen\b",
+]
+
 # EXPLAIN
 _EXPLAIN_PATTERNS = [
     r"\b(hoe\s+werkt|leg\s+uit|wat\s+doet|vertel\s+over)\s+(de\s+)?(trader|bot|handelsbot)\b",
@@ -317,6 +332,75 @@ def _do_events() -> Dict[str, Any]:
         return {"success": False, "message": f"Events ophalen mislukt: {e}"}
 
 
+def _do_config() -> Dict[str, Any]:
+    """v9_anti_hallucination_001 — Leest live spark_trader.json blueprint.
+
+    Voorkomt LLM-fantomen: Spark geeft nu ECHTE fees/config uit blueprint,
+    niet uit LLM-hersenspinsels. Als Willem vraagt "wat zijn je fees" of
+    "snuffel in je eigen systemen" → dit endpoint is de bron van waarheid.
+    """
+    try:
+        # v9_anti_hallucination_fix — blueprint zit in modules/trade/blueprints/, niet in data/trade/
+        blueprint_path = Path(__file__).parent / "blueprints" / "spark_trader.json"
+        blueprint = load_json(blueprint_path, default={}) or {}
+        params = blueprint.get("parameters", {}) or {}
+        event_prot = blueprint.get("event_protection", {}) or {}
+        actieve_strategie = blueprint.get("actieve_strategie", "onbekend")
+        engine = blueprint.get("active_decision_engine", "v1")
+
+        # Bitvavo fees (uit strategy_decision.BITVAVO_TAKER_FEE)
+        bitvavo_taker_fee_pct = 0.25  # 0.25% maker/taker
+        spark_own_fee_pct = 0  # Spark rekent geen eigen fee bovenop
+
+        lines = [
+            "🔧 **Spark Trader — LIVE configuratie** (uit `spark_trader.json`, geen fantoom):",
+            "",
+            f"**Actieve strategie:** `{actieve_strategie}`",
+            f"**Actieve decision-engine:** `{engine}` (v1 = productie, v2 = trend-following stub)",
+            "",
+            "**💰 Fees & commissies:**",
+            f"  • Bitvavo taker fee: **{bitvavo_taker_fee_pct}%** per trade (maker/taker gelijk)",
+            f"  • Spark's eigen fee bovenop: **{spark_own_fee_pct}%** (Spark rekent niks extra)",
+            f"  • Fee-aware SELL guard: netto na fees moet > €0.01 winst zijn, anders HOLD",
+            "",
+            "**🛡️ Bescherming (loss-cut):**",
+            f"  • Enabled: {params.get('loss_cut_enabled', True)}",
+            f"  • Uren tot cut: {params.get('loss_cut_hours', 48)}",
+            f"  • Cut trigger: {params.get('loss_cut_pct', -0.03) * 100}%",
+            "",
+            "**⚠️ Event-auto-pauze:**",
+            f"  • Enabled: {event_prot.get('actief', True)}",
+            f"  • Trigger daily drop: {event_prot.get('trigger_daily_drop_pct', 5.0)}%",
+            f"  • Pauze duur: {event_prot.get('pause_duration_hours', 24)}u per markt",
+            "",
+            "**⏱️ Cooldowns:**",
+            f"  • Per markt na BUY: 15 min",
+            f"  • Globaal na INSUFFICIENT_EUR_BALANCE: 30 min",
+            "",
+            "**📊 Markten:** BCH/BTC/ETH/SOL/ADA/ATOM-EUR (6 markten, cycle 15 min)",
+            "",
+            "_Meer details? `GET /api/trade/explained` (12 secties) of `GET /api/trade/strategy/confidence`._",
+        ]
+        return {
+            "success": True,
+            "message": "\n".join(lines),
+            "data": {
+                "actieve_strategie": actieve_strategie,
+                "active_decision_engine": engine,
+                "bitvavo_taker_fee_pct": bitvavo_taker_fee_pct,
+                "spark_own_fee_pct": spark_own_fee_pct,
+                "loss_cut": {
+                    "enabled": params.get("loss_cut_enabled", True),
+                    "hours": params.get("loss_cut_hours", 48),
+                    "pct": params.get("loss_cut_pct", -0.03),
+                },
+                "event_protection": event_prot,
+            },
+        }
+    except Exception as e:
+        return {"success": False, "message": f"Config-lezen mislukt: {e}"}
+
+
 def _do_explain() -> Dict[str, Any]:
     """Korte samenvatting + link naar /api/trade/explained."""
     msg = (
@@ -349,7 +433,9 @@ async def try_detect(text: str, user_id: str = "user-001") -> Optional[Dict[str,
     intent = None
     result = None
 
-    if _match(t, _BASELINE_PATTERNS):
+    if _match(t, _CONFIG_PATTERNS):
+        intent, result = "trader_config", _do_config()
+    elif _match(t, _BASELINE_PATTERNS):
         intent, result = "trader_baseline_reset", _do_baseline_reset(user_id)
     elif _match(t, _EVENTS_PATTERNS):
         intent, result = "trader_events", _do_events()

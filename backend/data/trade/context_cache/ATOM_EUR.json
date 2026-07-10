@@ -4,15 +4,15 @@
   "support_levels": [
     {
       "price": 1.4,
-      "strength": 0.144,
+      "strength": 0.143,
       "bounces": 2,
-      "days_ago": 103.0
+      "days_ago": 103.5
     },
     {
       "price": 1.36,
       "strength": 0.091,
       "bounces": 1,
-      "days_ago": 34.0
+      "days_ago": 34.5
     }
   ],
   "resistance_levels": [
@@ -20,27 +20,27 @@
       "price": 1.98,
       "strength": 0.088,
       "tests": 1,
-      "days_ago": 45.0
+      "days_ago": 45.5
     },
     {
       "price": 1.76,
       "strength": 0.069,
       "tests": 1,
-      "days_ago": 114.0
+      "days_ago": 114.5
     },
     {
       "price": 2.12,
       "strength": 0.061,
       "tests": 1,
-      "days_ago": 142.0
+      "days_ago": 142.5
     }
   ],
   "market_state": {
     "trend": "bull",
     "confidence": 0.667,
-    "momentum_pct": 19.79,
-    "ma_20": 2.02,
-    "ma_50": 1.85,
+    "momentum_pct": 15.69,
+    "ma_20": 2.0,
+    "ma_50": 1.83,
     "indicators": {
       "ma_cross": "bullish",
       "higher_highs": false,
@@ -65,8 +65,8 @@
         "bias": "bullish"
       },
       "donderdag": {
-        "avg_change_pct": -0.437,
-        "samples": 25,
+        "avg_change_pct": -0.505,
+        "samples": 26,
         "bias": "bearish"
       },
       "vrijdag": {
@@ -80,15 +80,15 @@
         "bias": "bullish"
       },
       "zondag": {
-        "avg_change_pct": -0.787,
-        "samples": 26,
+        "avg_change_pct": -0.989,
+        "samples": 25,
         "bias": "bearish"
       }
     },
     "month_patterns": {
       "jan": {
-        "avg_change_pct": 1.584,
-        "samples": 21,
+        "avg_change_pct": 1.45,
+        "samples": 20,
         "bias": "bullish"
       },
       "feb": {
@@ -117,9 +117,9 @@
         "bias": "bullish"
       },
       "jul": {
-        "avg_change_pct": -0.001,
-        "samples": 8,
-        "bias": "neutral"
+        "avg_change_pct": -0.246,
+        "samples": 9,
+        "bias": "bearish"
       }
     },
     "week_of_month_patterns": {
@@ -129,7 +129,7 @@
         "bias": "neutral"
       },
       "week_2": {
-        "avg_change_pct": -0.438,
+        "avg_change_pct": -0.599,
         "samples": 40,
         "bias": "bearish"
       },
@@ -150,16 +150,16 @@
       }
     },
     "weekend_vs_weekday": {
-      "weekend_avg_pct": 0.29,
-      "weekday_avg_pct": 0.337,
+      "weekend_avg_pct": 0.21,
+      "weekday_avg_pct": 0.318,
       "weekend_bias": "bullish",
       "weekday_bias": "bullish",
-      "delta_pct": -0.048
+      "delta_pct": -0.108
     },
     "volatility": {
-      "state": "low",
-      "ratio": 0.792
+      "state": "normal",
+      "ratio": 0.876
     }
   },
-  "generated_at": "2026-07-09T23:39:09.493669+00:00"
+  "generated_at": "2026-07-10T10:49:07.960328+00:00"
 }

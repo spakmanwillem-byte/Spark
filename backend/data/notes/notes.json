@@ -1,6 +1,18 @@
 {
   "notes": [
     {
+      "id": "ab0c1a1b-e093-43eb-84fe-f0c41dabe4c5",
+      "user_id": "user-001",
+      "titel": "Te doen ",
+      "inhoud": "## Notitie – Trader / Adaptive Strategy Lab vervolg\n\n### Architectuur\n\n* De basis van het Adaptive Strategy Lab staat goed.\n* Eerst stabiliseren en live ervaring opdoen voordat er weer grote uitbreidingen komen.\n* Eerst redeployen, data verzamelen en beoordelen waar de architectuur eventueel nog knelt.\n\n---\n\n## P1\n\n### Multi-Engine Framework\n\nMaak een generieke `DecisionEngine` interface.\n\nVoorbeelden:\n\n* MeanReversionEngine\n* TrendFollowingEngine\n* NeuralEngine\n* HybridEngine\n\nNieuwe engines moeten toegevoegd kunnen worden zonder `monitor.py` aan te passen.\n\n---\n\n### Live A/B Testing\n\nLaat meerdere engines parallel dezelfde markt analyseren.\n\nPer engine tonen:\n\n* Trades\n* Winrate\n* Honest PnL\n* Drawdown\n* Confidence\n* Bull/Bear/Range prestaties\n\nZo wordt live-data belangrijker dan alleen backtests.\n\n---\n\n### Strategy Compare uitbreiden\n\nNiet alleen een winnaar tonen.\n\nMaar per eigenschap vergelijken:\n\n* Gap Body\n* Bollinger\n* Loss Cut\n* Event Pause\n* Honest PnL\n* Confidence\n* Transparantie\n\nInclusief uitleg waarom een strategie beter scoort.\n\n---\n\n### Spark Analyse\n\nLaat Spark zelf advies geven.\n\nBijvoorbeeld:\n\n* Welke strategie past beter bij een bear market.\n* Welke strategie stabieler is.\n* Wanneer Spark adviseert om te wisselen.\n\nSpark wordt hiermee strategiecoach.\n\n---\n\n### Automatische hypothesevorming\n\nProces:\n\nObservatie\n\n↓\n\nHypothese\n\n↓\n\nDraft Strategie\n\n↓\n\nBacktest\n\n↓\n\nConfidence\n\n↓\n\nVoorstel\n\nSpark leert hierdoor actief mee.\n\n---\n\n## P2\n\n### Genome Explorer (i.p.v. alleen heatmap)\n\nNiet alleen een DNA-overzicht.\n\nMaar een volledige Genome Explorer.\n\nKlik op een gen en toon:\n\n* Beschrijving\n* Waarom bestaat dit gen\n* Welke strategieën gebruiken dit gen\n* Welke strategieën missen dit gen\n* Gemiddelde bijdrage aan Confidence\n* Historie\n* Hypotheses waarin het voorkomt\n\nDaarnaast filters zoals:\n\n* Toon alle strategieën met Honest PnL.\n* Toon alle strategieën zonder Event Pause.\n* Toon alle strategieën met Confidence >70%.\n\n---\n\n### Mutation Engine (toekomst)\n\nNiet willekeurig muteren.\n\nProces:\n\nStrategie\n\n↓\n\nVoeg gecontroleerd één nieuw gen toe\n\n↓\n\nBacktest\n\n↓\n\nVergelijken\n\n↓\n\nAccepteren of afwijzen\n\nEvolutionair leren in plaats van willekeurige combinaties.\n\n---\n\n## Lange termijn visie\n\nVan:\n\n* Knowledge Genome\n* Strategy Genome\n\nNaar één gezamenlijk:\n\n# Spark Genome\n\nAlle onderdelen van Spark krijgen uiteindelijk dezelfde DNA-structuur.\n\nBijvoorbeeld:\n\n**Knowledge**\n\n* eigenschappen\n* relaties\n* context\n* emoties\n\n**Trader**\n\n* genes\n* confidence\n* lineage\n* hypotheses\n\n**Planner**\n\n* prioriteit\n* context\n* afhankelijkheden\n\n**Modules**\n\n* capabilities\n* dependencies\n* permissions\n\nZo gebruikt de volledige Spark Core uiteindelijk dezelfde manier van denken en structureren.\n\n---\n\n## Belangrijk advies\n\nGeen losse UX-features bouwen als fundamenten nog in ontwikkeling zijn.\n\nWerk voortaan in complete lagen:\n\n1. Core\n2. Trader\n3. Finance (SEPA + Kasboek + BTW + Shop + Boekhouding)\n4. Planner\n5. Wereld\n6. UX-afwerking\n\nDat houdt Spark overzichtelijk, modulair en toekomstbestendig.\n",
+      "categorie": "Taak",
+      "tags": [],
+      "priority": "medium",
+      "datum": "2026-07-09T23:45:08.626288+00:00",
+      "created_by": "De Willem",
+      "updated_at": null
+    },
+    {
       "id": "21c9fe85-a5f3-49ba-9cad-9394f2f04499",
       "user_id": "user-001",
       "titel": "gesprekken verdwijnen als ",

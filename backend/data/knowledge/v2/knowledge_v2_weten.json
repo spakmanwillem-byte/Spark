@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2107,
+    "card_count": 2108,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T23:13:10.022956+00:00",
+    "last_updated": "2026-07-09T23:40:37.057188+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -280165,6 +280165,158 @@
         ],
         "laatst_bewerkt_door": "user-001",
         "laatst_bewerkt_op": "2026-07-09T23:13:08.098532+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-5a55ae2d",
+      "begrip": "calcium",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Calcium is een mineraal en scheikundig element dat belangrijk is voor sterke botten, tanden en verschillende lichaamsfuncties.",
+        "laag2": "Calcium speelt een belangrijke rol bij de opbouw van botten en tanden en is ook nodig voor spierwerking, zenuwprikkels en de bloedstolling.",
+        "laag3": "Calcium is een essentieel mineraal dat in het menselijk lichaam voornamelijk voorkomt in botten en tanden. Het wordt via voeding opgenomen, zoals zuivel, groene bladgroenten, noten en bepaalde vissoorten. Een tekort aan calcium kan leiden tot zwakkere botten en andere gezondheidsproblemen.",
+        "laag4": "Calcium heeft het scheikundige symbool Ca en atoomnummer 20. Het behoort tot de aardalkalimetalen en komt in de natuur niet in zuivere vorm voor, maar in verbindingen zoals kalksteen en krijt. Naast de biologische functie wordt calcium ook gebruikt in de bouw, industrie en landbouw."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren, planten en andere organismen die calcium nodig hebben.",
+        "wat": "Een essentieel mineraal en scheikundig element.",
+        "wanneer": "Gedurende het hele leven voor groei, onderhoud en lichaamsfuncties.",
+        "waar": "In botten, tanden, voeding, gesteenten en mineralen.",
+        "waarom": "Voor sterke botten en tanden en een goede werking van spieren, zenuwen en bloedstolling.",
+        "hoe": "Door opname via voeding en verwerking door het lichaam."
+      },
+      "tags": [
+        "calcium",
+        "mineraal",
+        "element",
+        "Ca",
+        "botten",
+        "tanden",
+        "voeding",
+        "gezondheid",
+        "scheikunde",
+        "aardalkalimetaal",
+        "lichaam"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-801a4222",
+          "begrip": "Gegeten",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "lichaam",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-32256404",
+          "begrip": "eiwit",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "lichaam",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-d04fa52c",
+          "begrip": "vet",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "gezondheid",
+            "lichaam",
+            "voeding"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-e398a3f0",
+          "begrip": "spieren",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "botten",
+            "gezondheid",
+            "lichaam"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-aa83706d",
+          "begrip": "mineralen",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "calcium",
+            "mineraal",
+            "voeding"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:40:37.057152+00:00",
+        "vorige_versie_v1": "kb-skel-5a55ae2d",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:24:55.326791+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:40:35.137355+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:40:35.391506+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:40:37.397326+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:40:37.403656+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:40:35.036610+00:00"
       },
       "media": {
         "voice_url": null,

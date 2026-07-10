@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.307240+00:00",
-    "card_count": 452,
+    "card_count": 453,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-06-28T14:09:53.075745+00:00",
+    "last_updated": "2026-07-09T23:48:18.648553+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.252070+00:00",
     "last_zip_merge_added": 6
   },
@@ -61621,6 +61621,157 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-82afc86f",
+      "begrip": "waakzaam",
+      "lade": "voelen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Waakzaam betekent alert en oplettend zijn om gevaar, veranderingen of belangrijke gebeurtenissen op tijd op te merken.",
+        "laag2": "Iemand die waakzaam is, let bewust op de omgeving en blijft voorbereid op mogelijke risico's of onverwachte situaties.",
+        "laag3": "Waakzaamheid is een toestand van verhoogde aandacht waarbij iemand signalen, veranderingen of bedreigingen actief observeert. Waakzaam zijn betekent niet voortdurend angstig zijn, maar bewust en voorbereid blijven. Waakzaamheid helpt bij het voorkomen van problemen en het tijdig nemen van passende maatregelen.",
+        "laag4": "Waakzaamheid speelt een belangrijke rol in veiligheid, gezondheid, zorg, defensie, techniek en het dagelijks leven. Ook systemen, zoals beveiligingssoftware of AI, kunnen waakzaam zijn door voortdurend gegevens te controleren op afwijkingen of risico's. Een goede balans is belangrijk: te weinig waakzaamheid kan gevaar opleveren, terwijl overmatige waakzaamheid kan leiden tot onrust of stress."
+      },
+      "ws5": {
+        "wie": "Mensen, dieren en systemen die alert moeten blijven.",
+        "wat": "Een toestand van oplettendheid en paraatheid.",
+        "wanneer": "Wanneer risico's, veranderingen of belangrijke gebeurtenissen mogelijk zijn.",
+        "waar": "In het dagelijks leven, op het werk, in de zorg, beveiliging, techniek en digitale systemen.",
+        "waarom": "Om gevaren of veranderingen tijdig te herkennen en erop te reageren.",
+        "hoe": "Door bewust te observeren, signalen te beoordelen en voorbereid te blijven."
+      },
+      "tags": [
+        "waakzaam",
+        "alert",
+        "oplettend",
+        "aandacht",
+        "veiligheid",
+        "risico",
+        "observatie",
+        "paraatheid",
+        "bewustzijn",
+        "preventie"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-75635068",
+          "begrip": "veilig",
+          "lade": "voelen",
+          "overlap": 3,
+          "shared_tags": [
+            "preventie",
+            "risico",
+            "veiligheid"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-261ac6a3",
+          "begrip": "Aandacht",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e15b7d94",
+          "begrip": "kijken",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-16d46c73",
+          "begrip": "gemerkt",
+          "lade": "spreken",
+          "overlap": 3,
+          "shared_tags": [
+            "aandacht",
+            "bewustzijn",
+            "observatie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-0c6b293e",
+          "begrip": "Situatiebewustzijn is essentieel voor effectief beveiligen.",
+          "lade": "weten",
+          "overlap": 3,
+          "shared_tags": [
+            "bewustzijn",
+            "observatie",
+            "risico"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-09T23:48:18.648535+00:00",
+        "vorige_versie_v1": "kb-skel-82afc86f",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:08.574132+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:48:13.737473+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:48:13.743783+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-09T23:48:18.840468+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-09T23:48:18.846646+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 3
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-09T23:48:13.637146+00:00"
       },
       "media": {
         "voice_url": null,

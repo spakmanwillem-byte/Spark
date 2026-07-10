@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-07-08T16:37:54.138925+00:00",
+  "generated_at": "2026-07-09T23:49:42.320626+00:00",
   "summary": {
     "total_containers": 106,
     "by_status": {
@@ -12,7 +12,7 @@
       "dir": 71,
       "data": 35
     },
-    "total_endpoints_detected": 585
+    "total_endpoints_detected": 599
   },
   "tree": {
     "backend_modules": {
@@ -1244,6 +1244,7 @@
           "GET /kb/v2/lade/{lade}",
           "GET /kb/v2/priority/missing-laag1",
           "GET /kb/v2/stats",
+          "GET /kb/v2/suggest-from-chat/{user_id}",
           "GET /kb/v2/tags/normalize",
           "GET /kb/v2/tags/scan",
           "GET /kb/v2/tags/similarity",
@@ -1268,6 +1269,7 @@
           "POST /kb/v2/inbox/add",
           "POST /kb/v2/inbox/auto-resolve",
           "POST /kb/v2/move",
+          "POST /kb/v2/suggest-accept",
           "POST /kb/v2/tags/merge",
           "POST /kb/v2/tags/normalize-batch",
           "POST /kb/v2/vocab/sync",
@@ -1286,7 +1288,7 @@
         "created_at": "2026-05-26T15:54:32.222447+00:00",
         "last_touched": "2026-05-26T16:13:27.020693+00:00",
         "activity_count": 0,
-        "file_count": 10,
+        "file_count": 11,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1874,6 +1876,8 @@
           "DELETE /trade/deposits/{user_id}/{deposit_id}",
           "GET /trade/admin/audit-log",
           "GET /trade/admin/bots",
+          "GET /trade/backtests",
+          "GET /trade/backtests/{run_id}",
           "GET /trade/baseline/{user_id}",
           "GET /trade/bitvavo/balance/{user_id}",
           "GET /trade/bitvavo/status/{user_id}",
@@ -1885,7 +1889,11 @@
           "GET /trade/context/{market}",
           "GET /trade/delta",
           "GET /trade/deposits/{user_id}",
+          "GET /trade/engine/status",
+          "GET /trade/events/notifications",
+          "GET /trade/explained",
           "GET /trade/history/{user_id}",
+          "GET /trade/honest-pnl/{user_id}",
           "GET /trade/markets/{user_id}",
           "GET /trade/monitor/decisions",
           "GET /trade/monitor/status",
@@ -1895,6 +1903,10 @@
           "GET /trade/spark",
           "GET /trade/stats/{user_id}",
           "GET /trade/status",
+          "GET /trade/strategy/compare",
+          "GET /trade/strategy/confidence",
+          "GET /trade/strategy/genome",
+          "GET /trade/strategy/properties",
           "GET /trade/tickers",
           "POST /trade/admin/migrate-token-holders",
           "POST /trade/admin/start-all-bots",
@@ -1911,6 +1923,7 @@
           "POST /trade/bot/unregister/{user_id}",
           "POST /trade/context/refresh-all",
           "POST /trade/deposits/{user_id}",
+          "POST /trade/engine/switch",
           "POST /trade/execute/{user_id}",
           "POST /trade/monitor/candle/{user_id}",
           "POST /trade/monitor/markets/{user_id}",
@@ -1935,6 +1948,7 @@
           "POST /trade/run",
           "POST /trade/spark/fix",
           "POST /trade/spark/sync-anchor/{coin}",
+          "POST /trade/strategy/synthesize",
           "PUT /trade/settings/{user_id}"
         ],
         "tags": [],
@@ -1947,8 +1961,8 @@
         "created_at": "2026-05-26T15:54:32.262160+00:00",
         "last_touched": "2026-05-26T15:54:32.262160+00:00",
         "activity_count": 0,
-        "file_count": 8,
-        "subdir_count": 0,
+        "file_count": 13,
+        "subdir_count": 1,
         "extra": {}
       },
       "backend/modules/trade_help": {
@@ -2786,9 +2800,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-07-08T16:37:48.417673+00:00",
-        "activity_count": 1929,
-        "file_count": 89,
+        "last_touched": "2026-07-08T19:26:33.893960+00:00",
+        "activity_count": 1944,
+        "file_count": 91,
         "subdir_count": 3,
         "extra": {}
       },
@@ -2813,8 +2827,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-07-07T19:01:59.383908+00:00",
-        "activity_count": 148,
+        "last_touched": "2026-07-09T20:51:39.680902+00:00",
+        "activity_count": 153,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2948,8 +2962,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-07-08T16:36:12.354696+00:00",
-        "activity_count": 126017,
+        "last_touched": "2026-07-09T22:02:52.800908+00:00",
+        "activity_count": 127003,
         "file_count": 9,
         "subdir_count": 0,
         "extra": {}
@@ -3002,8 +3016,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-07-08T16:37:02.206325+00:00",
-        "activity_count": 806,
+        "last_touched": "2026-07-09T23:19:51.918824+00:00",
+        "activity_count": 826,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3056,8 +3070,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-07-08T16:36:47.379335+00:00",
-        "activity_count": 6562,
+        "last_touched": "2026-07-09T23:48:18.893126+00:00",
+        "activity_count": 6774,
         "file_count": 13,
         "subdir_count": 2,
         "extra": {}
@@ -3083,8 +3097,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.325005+00:00",
-        "last_touched": "2026-06-28T16:12:56.947328+00:00",
-        "activity_count": 6,
+        "last_touched": "2026-07-09T23:45:08.629648+00:00",
+        "activity_count": 7,
         "file_count": 2,
         "subdir_count": 0,
         "extra": {}
@@ -3110,8 +3124,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.326384+00:00",
-        "last_touched": "2026-05-31T21:03:14.992202+00:00",
-        "activity_count": 18,
+        "last_touched": "2026-07-09T22:02:46.367905+00:00",
+        "activity_count": 19,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -3137,8 +3151,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-07-08T16:36:47.173666+00:00",
-        "activity_count": 11285,
+        "last_touched": "2026-07-09T23:48:18.838536+00:00",
+        "activity_count": 11360,
         "file_count": 15,
         "subdir_count": 1,
         "extra": {}
@@ -3191,9 +3205,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-07-08T16:36:06.063018+00:00",
-        "activity_count": 2668,
-        "file_count": 4,
+        "last_touched": "2026-07-09T23:49:07.922237+00:00",
+        "activity_count": 2747,
+        "file_count": 5,
         "subdir_count": 0,
         "extra": {}
       },
@@ -3353,9 +3367,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-07-08T16:37:53.929697+00:00",
-        "activity_count": 34625,
-        "file_count": 184,
+        "last_touched": "2026-07-09T23:49:41.951084+00:00",
+        "activity_count": 35850,
+        "file_count": 194,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3407,10 +3421,10 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-07-08T16:16:05.429191+00:00",
-        "activity_count": 1393,
-        "file_count": 17,
-        "subdir_count": 2,
+        "last_touched": "2026-07-09T23:39:09.521796+00:00",
+        "activity_count": 2174,
+        "file_count": 46,
+        "subdir_count": 3,
         "extra": {}
       },
       "backend/data/triggers": {
@@ -3490,7 +3504,7 @@
         "created_at": "2026-05-26T15:54:32.345126+00:00",
         "last_touched": "2026-06-30T10:55:08.176071+00:00",
         "activity_count": 75,
-        "file_count": 91,
+        "file_count": 93,
         "subdir_count": 32,
         "extra": {}
       },
@@ -3515,8 +3529,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.346860+00:00",
-        "last_touched": "2026-07-08T02:28:37.353870+00:00",
-        "activity_count": 221,
+        "last_touched": "2026-07-09T22:02:46.378127+00:00",
+        "activity_count": 222,
         "file_count": 12,
         "subdir_count": 1,
         "extra": {}

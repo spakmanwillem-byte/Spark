@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.325174+00:00",
-    "card_count": 2108,
+    "card_count": 2113,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-09T23:40:37.057188+00:00",
+    "last_updated": "2026-07-20T09:21:50.492682+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:58.048522+00:00",
     "last_zip_merge_added": 46
   },
@@ -280632,24 +280632,98 @@
       "lade": "weten",
       "status": "active",
       "lagen": {
-        "laag1": "",
-        "laag2": "",
-        "laag3": "",
-        "laag4": ""
+        "laag1": "Bacteriën zijn microscopisch kleine eencellige organismen die overal op aarde voorkomen.",
+        "laag2": "Bacteriën leven in water, lucht, bodem en in of op levende organismen. Veel bacteriën zijn nuttig, terwijl sommige ziekten kunnen veroorzaken.",
+        "laag3": "Bacteriën bestaan uit één cel zonder celkern en behoren tot de oudste levensvormen op aarde. Ze spelen een belangrijke rol bij processen zoals vertering, afbraak van organisch materiaal en de kringloop van voedingsstoffen. Sommige bacteriën worden gebruikt bij de productie van voedsel, medicijnen en andere biologische processen.",
+        "laag4": "Bacteriën planten zich meestal voort door celdeling en kunnen zich onder gunstige omstandigheden snel vermenigvuldigen. Ze verschillen sterk in vorm, leefomgeving en functie. Het menselijk lichaam bevat biljoenen bacteriën, waarvan de meeste bijdragen aan een gezonde darmflora en het immuunsysteem. Slechts een klein deel van alle bacteriesoorten is ziekteverwekkend."
       },
       "ws5": {
-        "wie": "",
-        "wat": "",
-        "wanneer": "",
-        "waar": "",
-        "waarom": "",
-        "hoe": ""
+        "wie": "Bacteriën en de organismen waarin of waarop zij leven.",
+        "wat": "Microscopisch kleine eencellige organismen zonder celkern.",
+        "wanneer": "Ze leven en vermenigvuldigen zich voortdurend onder geschikte omstandigheden.",
+        "waar": "In bodem, water, lucht, op voorwerpen en in of op levende organismen.",
+        "waarom": "Ze vervullen belangrijke functies in ecosystemen, voedselproductie en het menselijk lichaam.",
+        "hoe": "Door voedingsstoffen op te nemen en zich meestal voort te planten via celdeling."
       },
       "tags": [
-        "bacteriën"
+        "bacteriën",
+        "bacterie",
+        "micro-organisme",
+        "eencellig",
+        "cel",
+        "microbiologie",
+        "gezondheid",
+        "darmflora",
+        "celdeling",
+        "ecosysteem",
+        "natuur",
+        "emotie",
+        "neutraal"
       ],
       "topic": "",
-      "verbanden": [],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-skel-1e8bfb9a",
+          "begrip": "biologisch",
+          "lade": "weten",
+          "overlap": 5,
+          "shared_tags": [
+            "bacterie",
+            "cel",
+            "ecosysteem",
+            "emotie",
+            "natuur"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-e8cbee41",
+          "begrip": "Duiven",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d64b1b71",
+          "begrip": "Spinnenweb",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d15f410c",
+          "begrip": "Zwijn",
+          "lade": "voelen",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-3b964fb3",
+          "begrip": "begrazing",
+          "lade": "spreken",
+          "overlap": 4,
+          "shared_tags": [
+            "ecosysteem",
+            "emotie",
+            "natuur",
+            "neutraal"
+          ]
+        }
+      ],
       "footnote": {
         "bron": "system_repair",
         "ingedeeld_door": "user-001",
@@ -280673,8 +280747,26 @@
               "active": false,
               "is_new": false
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T09:20:14.229845+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T09:20:14.266864+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 5
+            }
           }
-        ]
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T09:20:13.942237+00:00"
       },
       "media": {
         "voice_url": null,
@@ -280682,8 +280774,6 @@
         "image_urls": []
       },
       "needs": [
-        "laag1",
-        "ws5",
         "voice",
         "image"
       ]
@@ -280836,10 +280926,155 @@
               "n_found": 5,
               "top_overlap": 7
             }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T09:24:31.610330+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T09:24:31.617795+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
           }
         ],
         "laatst_bewerkt_door": "user-001",
-        "laatst_bewerkt_op": "2026-07-20T08:21:39.226736+00:00"
+        "laatst_bewerkt_op": "2026-07-20T09:24:31.323288+00:00"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-40c48a0a",
+      "begrip": "autosport",
+      "lade": "weten",
+      "status": "active",
+      "lagen": {
+        "laag1": "Autosport is een sport waarbij coureurs met auto's tegen elkaar racen op snelheid, uithoudingsvermogen of behendigheid.",
+        "laag2": "Autosport kent verschillende disciplines, zoals circuitraces, rally, karting, endurance, drag racing en autocross. Elke discipline heeft eigen regels en voertuigen.",
+        "laag3": "Autosport is een competitieve sport waarin bestuurders en teams proberen de beste prestaties te leveren met speciaal voorbereide voertuigen. Naast de vaardigheden van de coureur spelen techniek, strategie, banden, weersomstandigheden en teamwork een belangrijke rol. Veiligheidsregels zijn essentieel om de risico's van hoge snelheden te beperken.",
+        "laag4": "Autosport wordt wereldwijd georganiseerd, van lokale wedstrijden tot internationale kampioenschappen. Bekende vormen zijn Formule 1, rallysport, Le Mans, NASCAR en karting. Innovaties uit de autosport worden regelmatig toegepast in gewone auto's, zoals verbeteringen op het gebied van veiligheid, aerodynamica en motortechniek."
+      },
+      "ws5": {
+        "wie": "Coureurs, teams, monteurs, officials en organisatoren.",
+        "wat": "Een sport waarbij met auto's wordt geracet volgens vastgestelde regels.",
+        "wanneer": "Tijdens trainingen, kwalificaties en wedstrijden.",
+        "waar": "Op circuits, rallyparcours, dragstrips, onverharde banen en afgesloten wegen.",
+        "waarom": "Voor competitie, sportieve prestaties, techniek en entertainment.",
+        "hoe": "Door met speciaal voorbereide auto's onder vastgestelde regels tegen elkaar te racen."
+      },
+      "tags": [
+        "autosport",
+        "autoracen",
+        "motorsport",
+        "coureur",
+        "race",
+        "circuit",
+        "rally",
+        "karting",
+        "competitie",
+        "snelheid",
+        "voertuig"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-e5894e46",
+          "begrip": "drift",
+          "lade": "doen",
+          "overlap": 4,
+          "shared_tags": [
+            "motorsport",
+            "race",
+            "snelheid",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-fcf15ead",
+          "begrip": "voertuig",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "snelheid",
+            "voertuig"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-9523209f",
+          "begrip": "Brommer",
+          "lade": "weten",
+          "overlap": 2,
+          "shared_tags": [
+            "snelheid",
+            "voertuig"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T09:21:50.492661+00:00",
+        "vorige_versie_v1": "kb-skel-40c48a0a",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:07.071115+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T09:21:44.249996+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T09:21:44.256374+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 4
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T09:21:50.838099+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T09:21:50.844459+00:00",
+            "result": {
+              "n_found": 3,
+              "top_overlap": 4
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T09:21:44.148213+00:00"
       },
       "media": {
         "voice_url": null,

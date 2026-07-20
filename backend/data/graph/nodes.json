@@ -72576,6 +72576,105 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-b2102a93",
+      "label": "historische",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Historische betekent dat iets betrekking heeft op de geschiedenis of op gebeurtenissen uit het verleden.",
+      "tags": [
+        "historische",
+        "geschiedenis",
+        "verleden",
+        "erfgoed",
+        "cultuur",
+        "archeologie",
+        "historisch",
+        "ontwikkeling",
+        "tijd",
+        "geschiedenis emotie neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-67ed1384",
+      "label": "unitykey",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een UnityKey is één API-sleutel waarmee meerdere AI- of LLM-providers kunnen worden gebruikt.",
+      "tags": [
+        "unitykey",
+        "api",
+        "authenticatie",
+        "llm",
+        "ai",
+        "provider",
+        "api-sleutel",
+        "integratie",
+        "toegang",
+        "software",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-skel-e1fcac11",
+      "label": "bacteriën",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Bacteriën zijn microscopisch kleine eencellige organismen die overal op aarde voorkomen.",
+      "tags": [
+        "bacteriën",
+        "bacterie",
+        "micro-organisme",
+        "eencellig",
+        "cel",
+        "microbiologie",
+        "gezondheid",
+        "darmflora",
+        "celdeling",
+        "ecosysteem",
+        "natuur",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.5
+    },
+    {
+      "id": "kbv2-skel-c8a9acfa",
+      "label": "beginner",
+      "type": "knowledge_v2",
+      "lade": "weten",
+      "lade_color": "#f59e0b",
+      "description": "Een beginner is iemand die net begint met het leren of uitvoeren van een nieuwe activiteit.",
+      "tags": [
+        "beginner",
+        "leren",
+        "ervaring",
+        "kennis",
+        "vaardigheid",
+        "ontwikkeling",
+        "oefening",
+        "start",
+        "basis",
+        "leerling",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 1,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-18826611",
       "label": "wandeling",
       "type": "knowledge_v2",
@@ -97803,6 +97902,78 @@
       "vertrouwen": 0.9
     },
     {
+      "id": "kbv2-3f3135a9",
+      "label": "gezet",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Gezet betekent dat iets of iemand op een bepaalde plaats is neergezet of geplaatst.",
+      "tags": [
+        "gezet",
+        "zetten",
+        "geplaatst",
+        "neergezet",
+        "voltooid deelwoord",
+        "handeling",
+        "positie",
+        "doen",
+        "taal",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-30a83485",
+      "label": "balanceer",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Balanceer betekent dat je zorgt dat iets of iemand in evenwicht blijft of komt.",
+      "tags": [
+        "balanceer",
+        "balanceren",
+        "balans",
+        "evenwicht",
+        "afwegen",
+        "stabiliteit",
+        "controle",
+        "doen",
+        "besluitvorming",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
+      "id": "kbv2-956d490e",
+      "label": "lees",
+      "type": "knowledge_v2",
+      "lade": "doen",
+      "lade_color": "#a855f7",
+      "description": "Lees betekent dat je geschreven tekst bekijkt en de betekenis ervan begrijpt.",
+      "tags": [
+        "lees",
+        "lezen",
+        "tekst",
+        "informatie",
+        "begrijpen",
+        "kennis",
+        "communicatie",
+        "taal",
+        "doen",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.9
+    },
+    {
       "id": "kbv2-skel-6a622ba0",
       "label": "roofdier",
       "type": "knowledge_v2",
@@ -119506,7 +119677,9 @@
     {
       "id": "kbv2-956d490e",
       "label": "lees",
-      "type": "knowledge",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
       "description": "",
       "tags": [
         "knowledge-snap",
@@ -119515,7 +119688,56 @@
         "gap-fill"
       ],
       "topic": "",
-      "belangrijkheid": 2
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-8146e5af",
+      "label": "bollinger",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-f1b5a3d5",
+      "label": "sigma",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b8267111",
+      "label": "basis",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
+    },
+    {
+      "id": "kbv2-b332d503",
+      "label": "exit",
+      "type": "knowledge_v2",
+      "lade": null,
+      "lade_color": "#94a3b8",
+      "description": "",
+      "tags": [],
+      "topic": "",
+      "belangrijkheid": 5,
+      "vertrouwen": 0.3
     }
   ]
 }

@@ -34,7 +34,8 @@ class PersonaAgent(BaseFinanceAgent):
         if t.get("drift_detected"):
             lines.append(f"⚠️ Drift: wallet-mirror toont {t.get('user_tokens_wallet_mirror')} — moet ge-synct")
         lines.append(f"📈 Token-prijs (live): €{pr.get('current_price_eur', 0):.2f}"
-                     + (" (floor)" if pr.get("at_floor") else ""))
+                     + (" (base)" if pr.get("at_base") else "")
+                     + f" — mint bij ≥ €{pr.get('next_mint_threshold_eur', 0):.0f}")
         lines.append("")
         lines.append(f"🏺 Potjes: **{p.get('potjes_count', 0)}** × €{pr.get('current_price_eur', 0):.2f} "
                      f"= €{p.get('total_capital_dynamic_eur', 0):.2f}")

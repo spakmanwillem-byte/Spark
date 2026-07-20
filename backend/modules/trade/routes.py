@@ -1060,8 +1060,9 @@ async def get_user_potjes(user_id: str):
         dynamic_price = price_info.get("current_price_eur", 0)
         # v10_finance_hub_ui_sync — summary strings updaten
         summary["current_max_per_pot"] = dynamic_price
-        summary["next_pot_max"] = dynamic_price
-        summary["next_pot_cost"] = round(dynamic_price * 2, 2)  # heuristiek: 2× prijs = drempel
+        summary["next_pot_max"] = price_info.get("base_pot_size_eur", 10.0)
+        summary["next_pot_cost"] = price_info.get("next_mint_threshold_eur",
+                                                  (len(potjes_list) + 1) * 10.0)
         summary["total_capital_dynamic"] = round(len(potjes_list) * dynamic_price, 2)
         summary["token_price_eur"] = dynamic_price
         for p in potjes_list:

@@ -23,10 +23,14 @@
     "price_agent": {
       "topic": "token_prijs",
       "handles": ["dynamic_price", "recompute"],
-      "formula": "max_anchor_or_bitvavo_ratio",
+      "formula": "max_base_or_balance_ratio",
       "formula_params": {
+        "base_pot_size_eur": 10.0,
         "anchor_price_eur": 5.08,
-        "formula_definition": "max(anchor, bitvavo_free_eur / minted_supply)",
+        "_anchor_note": "Anchor €5.08 = ondergrens bij MINTEN (bescherming). Speelt géén rol in dagelijkse pot-waarde.",
+        "formula_definition": "max(base_pot_size, relevant_balance_eur / n_potjes)",
+        "_formula_note": "Bij €60 balance / 5 potjes = €12 per pot. Mint gebeurt bij ≥ (n+1) × base. Zelf-regulerend: na mint terug naar base €10.",
+        "mint_floor_eur": 5.08,
         "recompute_on": ["deposit", "mint", "trade_close", "manual_refresh"]
       }
     },

@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1139,
+    "card_count": 1140,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T12:08:09.647828+00:00",
+    "last_updated": "2026-07-20T12:11:43.218835+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -149533,6 +149533,170 @@
             "result": {
               "n_found": 5,
               "top_overlap": 6
+            }
+          }
+        ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-cd49820b",
+      "begrip": "trade",
+      "lade": "doen",
+      "status": "draft",
+      "lagen": {
+        "laag1": "Een trade is een afzonderlijke koop- of verkooptransactie op een financiële markt.",
+        "laag2": "Een trade begint met een entry en eindigt met een exit. Het resultaat van een trade kan winst, verlies of break-even zijn.",
+        "laag3": "Een trade is één volledige handelsactie waarbij een positie wordt geopend en later weer gesloten. Een trade kan bestaan uit een koop gevolgd door een verkoop (long) of een verkoop gevolgd door een terugkoop (short). Elke trade heeft kenmerken zoals een entryprijs, exitprijs, looptijd, volume, kosten en resultaat. Trades vormen samen de prestaties van een tradingstrategie.\n",
+        "laag4": "Binnen professioneel handelen wordt elke trade geregistreerd en geëvalueerd. Niet één succesvolle trade, maar de prestaties van veel trades bepalen of een strategie winstgevend is. Binnen de Spark Trader bevat iedere trade volledige trace-informatie, waaronder de gebruikte strategie, confidence-score, hypothese, entry, exit, fees en Honest PnL. Hierdoor is elke beslissing achteraf volledig uitlegbaar en controleerbaar.\n"
+      },
+      "ws5": {
+        "wie": "Traders, beleggers en geautomatiseerde handelssystemen.",
+        "wat": "Eén volledige koop- en verkooptransactie of verkoop- en terugkooptransactie",
+        "wanneer": "Vanaf het openen van een positie tot het sluiten ervan.",
+        "waar": "Op financiële markten zoals crypto, aandelen, valuta en grondstoffen.",
+        "waarom": "Om winst te behalen, risico te beheren of een handelsstrategie uit te voeren.",
+        "hoe": "Door een positie te openen via een entry en af te sluiten via een exit volgens vooraf bepaalde regels."
+      },
+      "tags": [
+        "trade",
+        "transactie",
+        "trading",
+        "entry",
+        "exit",
+        "positie",
+        "handel",
+        "strategie",
+        "honest pnl",
+        "spark trader",
+        "emotie",
+        "neutraal"
+      ],
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-8a491bfc",
+          "begrip": "tradingstrategie",
+          "lade": "doen",
+          "overlap": 9,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "exit",
+            "handel",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-ca653c2c",
+          "begrip": "entry",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "handel",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-7b36978b",
+          "begrip": "entrystrategie",
+          "lade": "doen",
+          "overlap": 8,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "handel",
+            "neutraal",
+            "positie"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-d809fc3b",
+          "begrip": "exitstrategie",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "emotie",
+            "exit",
+            "neutraal",
+            "positie",
+            "spark trader"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-72197dd6",
+          "begrip": "positie",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "emotie",
+            "entry",
+            "exit",
+            "neutraal",
+            "positie"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T12:11:43.218814+00:00",
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.9,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T11:56:28.037580+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-8642d3236cd6",
+        "extract_at": "2026-07-20T11:56:28.143457+00:00",
+        "extract_context_snippet": "iskaarten die je hebt toegevoegd:  1. **Trade‑logs ophalen** – ik kan de lijst met uitgevoerde koop‑ en v",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'trade' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true,
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T12:11:40.737226+00:00",
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:11:40.840615+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:11:40.848298+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T12:11:43.480538+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T12:11:43.488157+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 9
             }
           }
         ]

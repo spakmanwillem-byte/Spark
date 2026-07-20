@@ -1,7 +1,7 @@
 {
   "version": "v2",
   "created_at": "2026-05-23T12:02:15.375750+00:00",
-  "card_count": 1528,
+  "card_count": 1545,
   "metadata": {
     "purpose": "Wachtrij van onbeantwoorde of nog-niet-geclassificeerde kennis-kaarten",
     "redenen": {
@@ -13,7 +13,7 @@
     "last_dedupe_removed": 9,
     "last_v1_drift_sync": "2026-06-04T10:16:47.753891+00:00",
     "last_v1_drift_sync_added": 54,
-    "last_updated": "2026-07-20T14:44:04.246814+00:00"
+    "last_updated": "2026-07-20T14:46:06.548462+00:00"
   },
   "kaarten": [
     {
@@ -84338,7 +84338,295 @@
         "vorige_versie_v1": null,
         "vertrouwen": 0.3,
         "aangemaakt_door": "user-000",
-        "aangemaakt_op": "2026-07-20T14:45:25.742072+00:00"
+        "aangemaakt_op": "2026-07-20T14:45:25.742072+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-7740c3b754b9",
+        "extract_at": "2026-07-20T14:45:25.845566+00:00",
+        "extract_context_snippet": "b je een activiteit gepland.  - Je hebt recent een aantal kennis‑kaarten voor me ingevuld.   Over onze rel",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'recent' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-2f5af984",
+      "begrip": "actieve",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T14:46:06.006386+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "hoeveel actieve potjes heeft spark trader"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-88c184ef",
+      "begrip": "potjes",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [
+        "knowledge-snap",
+        "auto-generated",
+        "from-diep",
+        "gap-fill"
+      ],
+      "topic": "",
+      "verbanden": [],
+      "footnote": {
+        "bron": "snap-auto",
+        "aangemaakt_door": "De Willem",
+        "aangemaakt_op": "2026-07-20T14:46:06.548390+00:00",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vertrouwen": 0.3,
+        "snap_context": "hoeveel actieve potjes heeft spark trader"
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "laag1",
+        "ws5",
+        "voice",
+        "image"
+      ],
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-a9ccd63a",
+      "begrip": "potje",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:07.512463+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-0f84cf3a01a3",
+        "extract_at": "2026-07-20T14:46:07.619184+00:00",
+        "extract_context_snippet": "ve potjes in de Spark‑trader staan. Elk potje vertegenwoordigt een apart kapitaal‑pakket dat op dit momen",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'potje' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-457a3535",
+      "begrip": "trades",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:07.619489+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-0f84cf3a01a3",
+        "extract_at": "2026-07-20T14:46:07.724987+00:00",
+        "extract_context_snippet": "akket dat op dit moment open staat voor trades. Als je meer details wilt (bijvoorbeeld de grootte van elk",
+        "extract_count_in_spark": 2,
+        "extract_note": "Spark noemde 'trades' 2× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-7166f914",
+      "begrip": "module",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:07.725293+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-0f84cf3a01a3",
+        "extract_at": "2026-07-20T14:46:07.829655+00:00",
+        "extract_context_snippet": "**De Willem**, ik ga even de trader‑module raadplegen — dat valt onder de kaart **[doen] trader** en *",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'module' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-8a1a2c64",
+      "begrip": "gepassioneerd",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:23.912489+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2168a4847c6f",
+        "extract_at": "2026-07-20T14:46:24.018490+00:00",
+        "extract_context_snippet": "eet.   - Je werkt als zzp‑er en je bent gepassioneerd door zowel katten als techniek.  - Op zondag 17 mei heb je",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'gepassioneerd' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-f89a64f9",
+      "begrip": "zowel",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:24.018799+00:00",
+        "llm_generated": true,
+        "llm_lite": true,
+        "extract_source": "spark_llm_output_scanner_v1",
+        "extract_turn_id": "learned-2168a4847c6f",
+        "extract_at": "2026-07-20T14:46:24.123455+00:00",
+        "extract_context_snippet": "ls zzp‑er en je bent gepassioneerd door zowel katten als techniek.  - Op zondag 17 mei heb je een activit",
+        "extract_count_in_spark": 1,
+        "extract_note": "Spark noemde 'zowel' 1× in eigen LLM-antwoord maar het staat nog niet in KB. Skeleton-kaart, invulling nog nodig.",
+        "needs_review": true
+      },
+      "_inbox_reason": "missing_laag1"
+    },
+    {
+      "id": "kbv2-85d2b504",
+      "begrip": "kaarten",
+      "lade": null,
+      "status": "draft",
+      "lagen": {
+        "laag1": "",
+        "laag2": "",
+        "laag3": "",
+        "laag4": ""
+      },
+      "ws5": {},
+      "tags": [],
+      "verbanden": [],
+      "footnote": {
+        "bron": "llm_auto_extract",
+        "ingedeeld_door": null,
+        "ingedeeld_op": null,
+        "vorige_versie_v1": null,
+        "vertrouwen": 0.3,
+        "aangemaakt_door": "user-000",
+        "aangemaakt_op": "2026-07-20T14:46:24.123752+00:00"
       },
       "_inbox_reason": "missing_laag1"
     }

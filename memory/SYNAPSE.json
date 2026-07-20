@@ -1,7 +1,7 @@
 {
   "_arch_ref": "v6_synapse_001",
   "schema_version": "1.0",
-  "generated_at": "2026-07-09T23:49:42.320626+00:00",
+  "generated_at": "2026-07-20T14:35:54.583242+00:00",
   "summary": {
     "total_containers": 106,
     "by_status": {
@@ -12,7 +12,7 @@
       "dir": 71,
       "data": 35
     },
-    "total_endpoints_detected": 599
+    "total_endpoints_detected": 600
   },
   "tree": {
     "backend_modules": {
@@ -20,12 +20,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "accounting",
-        "doel": "(accounting — geen doel-omschrijving)",
+        "doel": "Accounting Routes - Kasboeken (4 entities) + transacties",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/accounting.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -48,7 +55,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.100010+00:00",
-        "last_touched": "2026-05-26T15:54:32.100010+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -58,22 +65,64 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "achievements",
-        "doel": "Spark Core - Achievements Module",
+        "doel": "Achievements-module — dispatcher/sub-agent architectuur. Elke sub-agent handelt één achievement-type af (KB, RPS, Milestones). Blueprints in `blueprints/` bevatten runtime-config (XP, texts, thresholds) — admin-editable.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/achievements.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "e1_achievement_refactor_v1",
+          "generated_at": "2026-07-20T13:20:00+00:00",
+          "spark_note": "Refactored 2026-07-20: dispatcher-patroon met sub-agents (KBAgent, RPSAgent, MilestoneAgent). Blueprint-JSONs zijn admin-editable via /admin/blueprints.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false,
+          "willem_regel": "Alles kunnen aanpassen behalve script zelf"
+        },
         "split_from": null,
         "children_max": 4,
+        "sub_agents": [
+          {
+            "class": "KBAchievementAgent",
+            "file": "agents/kb_agent.py",
+            "handles_types": [
+              "words",
+              "letter_completion"
+            ],
+            "blueprint": "blueprints/kb_achievements.json"
+          },
+          {
+            "class": "RPSAchievementAgent",
+            "file": "agents/rps_agent.py",
+            "handles_types": [
+              "rps"
+            ],
+            "blueprint": "blueprints/rps_achievements.json"
+          },
+          {
+            "class": "MilestoneAchievementAgent",
+            "file": "agents/milestone_agent.py",
+            "handles_types": [
+              "milestones",
+              "contributions"
+            ],
+            "blueprint": "blueprints/milestone_achievements.json"
+          }
+        ],
         "endpoints": [
+          "GET /achievements/admin/blueprints",
           "GET /achievements/all",
           "GET /achievements/leaderboard",
           "GET /achievements/progress/{user_id}",
           "PATCH /achievements/admin/{achievement_id}",
           "POST /achievements/admin/{achievement_id}/icon-upload"
         ],
-        "tags": [],
+        "tags": [
+          "dispatcher",
+          "agents",
+          "gamification",
+          "xp"
+        ],
         "encryption": {
           "enabled": false,
           "algorithm": null,
@@ -81,11 +130,20 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.104870+00:00",
-        "last_touched": "2026-05-26T16:13:26.923033+00:00",
+        "last_touched": "2026-07-20T13:20:00+00:00",
         "activity_count": 0,
-        "file_count": 3,
-        "subdir_count": 0,
-        "extra": {}
+        "file_count": 11,
+        "subdir_count": 2,
+        "extra": {
+          "refactor_history": [
+            {
+              "date": "2026-07-20",
+              "version": "v7_agent_dispatcher_001",
+              "changes": "Split monolithic service.py in dispatcher + 3 sub-agents (KB/RPS/Milestone). Added blueprints/ folder with admin-editable config. Added GET /admin/blueprints endpoint."
+            }
+          ],
+          "future_admin_ui": "Instellingen → Features → Achievements-tab (placeholder klaar in frontend)"
+        }
       },
       "backend/modules/admin": {
         "_arch_ref": "v6_synapse_001",
@@ -96,7 +154,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/admin.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -127,7 +192,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.109000+00:00",
-        "last_touched": "2026-05-26T16:13:26.928088+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 6,
         "subdir_count": 0,
@@ -137,12 +202,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "agenda",
-        "doel": "(agenda — geen doel-omschrijving)",
+        "doel": "Agenda Routes - Events CRUD per user",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/agenda.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -159,7 +231,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.113277+00:00",
-        "last_touched": "2026-05-26T15:54:32.113277+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -174,7 +246,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/analytics.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -190,7 +269,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.116801+00:00",
-        "last_touched": "2026-05-26T16:13:26.936002+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -200,12 +279,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "audit",
-        "doel": "(audit — geen doel-omschrijving)",
+        "doel": "Audit Service (v6_audit_001) — Maintenance scans voor Spark Core",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -221,7 +307,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-28T19:25:09.360107+00:00",
-        "last_touched": "2026-05-28T19:25:09.360107+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -236,7 +322,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/auth.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -265,7 +358,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.120844+00:00",
-        "last_touched": "2026-05-26T16:13:26.940137+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 4,
         "subdir_count": 0,
@@ -275,12 +368,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "backup",
-        "doel": "(backup — geen doel-omschrijving)",
+        "doel": "Spark Backup Module",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/backup.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -301,7 +401,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.124399+00:00",
-        "last_touched": "2026-05-26T15:54:32.124399+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -316,7 +416,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/boekhouder.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -334,7 +441,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.128125+00:00",
-        "last_touched": "2026-05-26T16:13:26.946872+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 4,
         "subdir_count": 0,
@@ -349,7 +456,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/bonnetjes.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -366,7 +480,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.130331+00:00",
-        "last_touched": "2026-05-26T16:13:26.951286+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -376,12 +490,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "bots",
-        "doel": "(bots — geen doel-omschrijving)",
+        "doel": "Bot & Community Routes - Bots met persoonlijkheden + community chat",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/bots.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -401,7 +522,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.135497+00:00",
-        "last_touched": "2026-05-26T15:54:32.135497+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 5,
         "subdir_count": 0,
@@ -411,12 +532,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "bugs",
-        "doel": "(bugs — geen doel-omschrijving)",
+        "doel": "Bugs Module (v4_bugs_001) — Bug-meldingen door iedereen, beheerd door admins (gradatie ≤ 2).",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/bugs.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -434,7 +562,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.138412+00:00",
-        "last_touched": "2026-05-26T15:54:32.138412+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -449,7 +577,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/cards.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -468,7 +603,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.142216+00:00",
-        "last_touched": "2026-05-26T16:13:26.960008+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -483,7 +618,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/chat.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -523,9 +665,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.167435+00:00",
-        "last_touched": "2026-05-26T16:13:26.963707+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 53,
+        "file_count": 54,
         "subdir_count": 1,
         "extra": {}
       },
@@ -533,12 +675,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "contacts",
-        "doel": "(contacts — geen doel-omschrijving)",
+        "doel": "Contacts Module (v4_contacts_001) — Privé-gesprekken tussen users en bots.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/contacts.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -556,7 +705,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.171134+00:00",
-        "last_touched": "2026-05-26T15:54:32.171134+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -571,7 +720,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/container.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -592,7 +748,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T16:06:21.863389+00:00",
-        "last_touched": "2026-05-26T16:13:26.969714+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 4,
         "subdir_count": 0,
@@ -607,7 +763,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/contributions.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -628,7 +791,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.174279+00:00",
-        "last_touched": "2026-05-26T16:13:26.974290+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -643,7 +806,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/core.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": false,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [],
@@ -655,7 +825,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.177651+00:00",
-        "last_touched": "2026-05-26T16:13:26.978184+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 5,
         "subdir_count": 0,
@@ -665,12 +835,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "dagboek",
-        "doel": "(dagboek — geen doel-omschrijving)",
+        "doel": "Dagboek Routes - Diary entries CRUD per user",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/dagboek.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -687,7 +864,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.180651+00:00",
-        "last_touched": "2026-05-26T15:54:32.180651+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -697,12 +874,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "dashboard",
-        "doel": "(dashboard — geen doel-omschrijving)",
+        "doel": "Dashboard Financial Widget (v6_dashboard_fin_001 — 28 mei 2026)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -716,7 +900,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-28T19:25:09.428065+00:00",
-        "last_touched": "2026-05-28T19:25:09.428065+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -726,12 +910,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "deploy",
-        "doel": "(deploy — geen doel-omschrijving)",
+        "doel": "Update Bark + Anker Systeem (v4_update_bark_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/deploy.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -750,7 +941,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.183912+00:00",
-        "last_touched": "2026-05-26T15:54:32.183912+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -760,12 +951,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "dnd",
-        "doel": "(dnd — geen doel-omschrijving)",
+        "doel": "D&D Module (v4_dnd_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/dnd.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -852,7 +1050,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.187293+00:00",
-        "last_touched": "2026-05-26T15:54:32.187293+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 12,
         "subdir_count": 0,
@@ -862,12 +1060,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "emotion_pipeline",
-        "doel": "(emotion_pipeline — geen doel-omschrijving)",
+        "doel": "v6_emotion_pipeline_001 — endpoints voor 7-laags emotie-pipeline (dry-run modus).",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/emotion_pipeline.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -886,7 +1091,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.190929+00:00",
-        "last_touched": "2026-05-26T15:54:32.190929+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 4,
         "subdir_count": 0,
@@ -901,7 +1106,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/events.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -918,7 +1130,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.193870+00:00",
-        "last_touched": "2026-05-26T16:13:26.993591+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -933,7 +1145,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/files.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -955,7 +1174,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.196823+00:00",
-        "last_touched": "2026-05-26T16:13:26.997533+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -965,12 +1184,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "games",
-        "doel": "(games — geen doel-omschrijving)",
+        "doel": "Mini-games: dobbelsteen, RPS, RPG-events, achievements-linked.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": false,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [],
@@ -982,7 +1208,7 @@
           "key_holder": null
         },
         "created_at": "2026-06-03T13:57:41.012105+00:00",
-        "last_touched": "2026-06-03T13:57:41.012105+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 5,
         "subdir_count": 1,
@@ -997,7 +1223,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/glow_nav.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1013,7 +1246,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.199630+00:00",
-        "last_touched": "2026-05-26T16:13:27.001383+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1028,7 +1261,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/graph.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1050,7 +1290,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.202433+00:00",
-        "last_touched": "2026-05-26T16:13:27.004943+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1060,12 +1300,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "help",
-        "doel": "(help — geen doel-omschrijving)",
+        "doel": "v6_help_001 — Gradatie-help systeem.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1081,7 +1328,7 @@
           "key_holder": null
         },
         "created_at": "2026-06-03T13:57:41.016220+00:00",
-        "last_touched": "2026-06-03T13:57:41.016220+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1096,7 +1343,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/help_per_gradatie.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1111,7 +1365,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.206873+00:00",
-        "last_touched": "2026-05-26T16:13:27.008891+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1121,12 +1375,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "insights",
-        "doel": "(insights — geen doel-omschrijving)",
+        "doel": "Insights Module (v4_016) — Analyser voor Shadow Observer data.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/insights.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1142,7 +1403,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.209979+00:00",
-        "last_touched": "2026-05-26T15:54:32.209979+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1152,12 +1413,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "intent_registry",
-        "doel": "(intent_registry — geen doel-omschrijving)",
+        "doel": "Intent Registry routes (v6_command_registry_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/intent_registry.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1176,7 +1444,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.213878+00:00",
-        "last_touched": "2026-05-26T15:54:32.213878+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 4,
         "subdir_count": 0,
@@ -1186,12 +1454,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "inventory",
-        "doel": "(inventory — geen doel-omschrijving)",
+        "doel": "Inventory Module (v4_inventory_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/inventory.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1211,7 +1486,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.217207+00:00",
-        "last_touched": "2026-05-26T15:54:32.217207+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1226,7 +1501,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/kb_v2.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1286,9 +1568,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.222447+00:00",
-        "last_touched": "2026-05-26T16:13:27.020693+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
-        "file_count": 11,
+        "file_count": 12,
         "subdir_count": 0,
         "extra": {}
       },
@@ -1301,7 +1583,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/knowledge.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1325,7 +1614,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.226007+00:00",
-        "last_touched": "2026-05-26T16:13:27.024427+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -1335,12 +1624,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "notes",
-        "doel": "(notes — geen doel-omschrijving)",
+        "doel": "Notes & Tasks Routes - CRUD",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/notes.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1361,7 +1657,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.228854+00:00",
-        "last_touched": "2026-05-26T15:54:32.228854+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1371,12 +1667,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "perks",
-        "doel": "(perks — geen doel-omschrijving)",
+        "doel": "D&D Perks Service (v6_perks_001) — Aura-gebaseerde feature-gates",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1391,7 +1694,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-28T19:25:09.472278+00:00",
-        "last_touched": "2026-05-28T19:25:09.472278+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -1401,12 +1704,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "persons",
-        "doel": "(persons — geen doel-omschrijving)",
+        "doel": "Persons Routes - Persoonskaarten (relatiebeheer)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/persons.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1427,7 +1737,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.231155+00:00",
-        "last_touched": "2026-05-26T15:54:32.231155+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1442,7 +1752,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/profile.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1492,7 +1809,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.234409+00:00",
-        "last_touched": "2026-05-26T16:13:27.032162+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1507,7 +1824,14 @@
         "status": "skeleton",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": false,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [],
@@ -1519,7 +1843,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-28T19:25:09.478689+00:00",
-        "last_touched": "2026-05-28T19:25:09.478689+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -1529,12 +1853,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "settings",
-        "doel": "(settings — geen doel-omschrijving)",
+        "doel": "Settings Module (v4_settings_001) — System + User instellingen met gradatie-gating.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/settings.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1554,7 +1885,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.237722+00:00",
-        "last_touched": "2026-05-26T15:54:32.237722+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1564,12 +1895,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "shop",
-        "doel": "(shop — geen doel-omschrijving)",
+        "doel": "Shop Routes - Roadkill Winkel + ROAR Token",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/shop.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1607,7 +1945,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.241847+00:00",
-        "last_touched": "2026-05-26T15:54:32.241847+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -1622,7 +1960,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/spark.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1650,7 +1995,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.244033+00:00",
-        "last_touched": "2026-05-26T16:13:27.040491+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 1,
@@ -1665,7 +2010,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/spark_kasboek.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1687,7 +2039,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.246388+00:00",
-        "last_touched": "2026-05-26T16:13:27.043980+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1702,7 +2054,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/spark_leningen.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1717,7 +2076,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.248627+00:00",
-        "last_touched": "2026-05-26T16:13:27.047700+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -1732,7 +2091,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/spark_mint.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1746,7 +2112,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.251030+00:00",
-        "last_touched": "2026-05-26T16:13:27.051847+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -1756,12 +2122,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "spark_planner",
-        "doel": "(spark_planner — geen doel-omschrijving)",
+        "doel": "v6_spark_planner_001 — Gesprekplanner module.",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1785,7 +2158,7 @@
           "key_holder": null
         },
         "created_at": "2026-06-29T20:01:15.746405+00:00",
-        "last_touched": "2026-06-29T20:01:15.746405+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 5,
         "subdir_count": 1,
@@ -1800,7 +2173,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/synapse.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1820,7 +2200,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.252857+00:00",
-        "last_touched": "2026-05-26T16:13:27.055702+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 8,
         "subdir_count": 0,
@@ -1835,7 +2215,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/system_archive.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1854,7 +2241,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.255945+00:00",
-        "last_touched": "2026-05-26T16:13:27.059589+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -1864,12 +2251,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "trade",
-        "doel": "(trade — geen doel-omschrijving)",
+        "doel": "Trade Routes - Trade history, positions, Bitvavo credentials, monitoring, candles, tickers",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/trade.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1959,7 +2353,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.262160+00:00",
-        "last_touched": "2026-05-26T15:54:32.262160+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 13,
         "subdir_count": 1,
@@ -1969,12 +2363,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "trade_help",
-        "doel": "(trade_help — geen doel-omschrijving)",
+        "doel": "Trader Help Service (v6_trade_help_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": null,
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": false,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -1988,7 +2389,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-28T19:25:09.511430+00:00",
-        "last_touched": "2026-05-28T19:25:09.511430+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -1998,12 +2399,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "triggers",
-        "doel": "(triggers — geen doel-omschrijving)",
+        "doel": "Triggers Routes - Read all trigger files from /data/triggers/ and /data/emotions/",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/triggers.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2020,7 +2428,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.265360+00:00",
-        "last_touched": "2026-05-26T15:54:32.265360+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -2030,12 +2438,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "urgent",
-        "doel": "(urgent — geen doel-omschrijving)",
+        "doel": "Urgent Notifications (v4_glow_001) — Welke sidebar-tabs moeten \"glowen\"?",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/urgent.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2051,7 +2466,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.268142+00:00",
-        "last_touched": "2026-05-26T15:54:32.268142+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -2066,7 +2481,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/user_archive.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2087,7 +2509,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.271369+00:00",
-        "last_touched": "2026-05-26T16:13:27.069692+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -2102,7 +2524,14 @@
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/voice.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2118,7 +2547,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.273699+00:00",
-        "last_touched": "2026-05-26T16:13:27.074259+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 1,
         "subdir_count": 0,
@@ -2128,12 +2557,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "wallet",
-        "doel": "(wallet — geen doel-omschrijving)",
+        "doel": "Wallet Routes - User wallets, entities, transactions",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/wallet.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2166,7 +2602,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.277618+00:00",
-        "last_touched": "2026-05-26T15:54:32.277618+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 3,
         "subdir_count": 0,
@@ -2176,12 +2612,19 @@
         "_arch_ref": "v6_synapse_001",
         "schema_version": "1.0",
         "naam": "winkelstraat",
-        "doel": "(winkelstraat — geen doel-omschrijving)",
+        "doel": "Winkelstraat — multi-tenant shop architecture (v6_winkelstraat_001)",
         "container_type": "dir",
         "status": "active",
         "owner": "spark-system",
         "blueprint_ref": "/memory/blueprints/winkelstraat.md",
-        "footnote": "",
+        "footnote": {
+          "generated_by": "v9_meta_enrich_001",
+          "generated_at": "2026-07-20T09:08:07.129452+00:00",
+          "spark_note": "Modulebeschrijving beheerd via meta-verrijking pass. Voor uitleg aan users: gebruik veld 'doel'.",
+          "has_blueprint": true,
+          "has_endpoints": true,
+          "requires_review": false
+        },
         "split_from": null,
         "children_max": 4,
         "endpoints": [
@@ -2202,7 +2645,7 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.281108+00:00",
-        "last_touched": "2026-05-26T15:54:32.281108+00:00",
+        "last_touched": "2026-07-20T09:08:07.129452+00:00",
         "activity_count": 0,
         "file_count": 2,
         "subdir_count": 0,
@@ -2800,8 +3243,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.313046+00:00",
-        "last_touched": "2026-07-08T19:26:33.893960+00:00",
-        "activity_count": 1944,
+        "last_touched": "2026-07-20T13:48:37.638765+00:00",
+        "activity_count": 1966,
         "file_count": 91,
         "subdir_count": 3,
         "extra": {}
@@ -2827,8 +3270,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.314514+00:00",
-        "last_touched": "2026-07-09T20:51:39.680902+00:00",
-        "activity_count": 153,
+        "last_touched": "2026-07-20T13:27:34.142751+00:00",
+        "activity_count": 155,
         "file_count": 1,
         "subdir_count": 0,
         "extra": {}
@@ -2962,8 +3405,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.320717+00:00",
-        "last_touched": "2026-07-09T22:02:52.800908+00:00",
-        "activity_count": 127003,
+        "last_touched": "2026-07-20T08:40:14.872077+00:00",
+        "activity_count": 127049,
         "file_count": 9,
         "subdir_count": 0,
         "extra": {}
@@ -3016,8 +3459,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.322068+00:00",
-        "last_touched": "2026-07-09T23:19:51.918824+00:00",
-        "activity_count": 826,
+        "last_touched": "2026-07-20T14:30:05.715021+00:00",
+        "activity_count": 868,
         "file_count": 4,
         "subdir_count": 0,
         "extra": {}
@@ -3070,9 +3513,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.323687+00:00",
-        "last_touched": "2026-07-09T23:48:18.893126+00:00",
-        "activity_count": 6774,
-        "file_count": 13,
+        "last_touched": "2026-07-20T14:29:59.190652+00:00",
+        "activity_count": 7405,
+        "file_count": 34,
         "subdir_count": 2,
         "extra": {}
       },
@@ -3151,8 +3594,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.327732+00:00",
-        "last_touched": "2026-07-09T23:48:18.838536+00:00",
-        "activity_count": 11360,
+        "last_touched": "2026-07-20T14:29:59.135999+00:00",
+        "activity_count": 11551,
         "file_count": 15,
         "subdir_count": 1,
         "extra": {}
@@ -3205,8 +3648,8 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.330584+00:00",
-        "last_touched": "2026-07-09T23:49:07.922237+00:00",
-        "activity_count": 2747,
+        "last_touched": "2026-07-20T14:34:53.474459+00:00",
+        "activity_count": 2858,
         "file_count": 5,
         "subdir_count": 0,
         "extra": {}
@@ -3261,7 +3704,7 @@
         "created_at": "2026-05-26T15:54:32.333656+00:00",
         "last_touched": "2026-05-26T16:13:27.144544+00:00",
         "activity_count": 0,
-        "file_count": 35,
+        "file_count": 36,
         "subdir_count": 1,
         "extra": {}
       },
@@ -3367,9 +3810,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.337103+00:00",
-        "last_touched": "2026-07-09T23:49:41.951084+00:00",
-        "activity_count": 35850,
-        "file_count": 194,
+        "last_touched": "2026-07-20T14:35:54.384588+00:00",
+        "activity_count": 37379,
+        "file_count": 188,
         "subdir_count": 5,
         "extra": {}
       },
@@ -3421,9 +3864,9 @@
           "key_holder": null
         },
         "created_at": "2026-05-26T15:54:32.340194+00:00",
-        "last_touched": "2026-07-09T23:39:09.521796+00:00",
-        "activity_count": 2174,
-        "file_count": 46,
+        "last_touched": "2026-07-20T14:19:53.266427+00:00",
+        "activity_count": 2604,
+        "file_count": 48,
         "subdir_count": 3,
         "extra": {}
       },

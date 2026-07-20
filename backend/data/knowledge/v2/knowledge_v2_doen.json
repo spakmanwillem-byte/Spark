@@ -6,9 +6,9 @@
   "metadata": {
     "version": "v2",
     "created_at": "2026-05-23T12:02:15.356848+00:00",
-    "card_count": 1148,
+    "card_count": 1149,
     "source": "knowledge_base.json (v1) — auto-classified",
-    "last_updated": "2026-07-20T12:55:34.044179+00:00",
+    "last_updated": "2026-07-20T13:35:01.809207+00:00",
     "last_zip_merge_at": "2026-06-03T16:03:57.899735+00:00",
     "last_zip_merge_added": 13
   },
@@ -150945,6 +150945,171 @@
             }
           }
         ]
+      },
+      "media": {
+        "voice_url": null,
+        "voice_transcript": null,
+        "image_urls": []
+      },
+      "needs": [
+        "voice",
+        "image"
+      ]
+    },
+    {
+      "id": "kbv2-skel-74abfb05",
+      "begrip": "automatiseren",
+      "lade": "doen",
+      "status": "active",
+      "lagen": {
+        "laag1": "Automatiseren is het laten uitvoeren van taken door een systeem of machine met zo min mogelijk menselijke tussenkomst.",
+        "laag2": "Bij automatiseren worden terugkerende of vaste werkzaamheden omgezet in een automatisch proces. Dit bespaart tijd, vermindert fouten en verhoogt de efficiëntie.",
+        "laag3": "Automatiseren is het ontwerpen en implementeren van processen waarbij computers, software, robots of machines zelfstandig vooraf gedefinieerde taken uitvoeren. Dit kan variëren van eenvoudige handelingen, zoals het automatisch versturen van een e-mail, tot complexe industriële productie of kunstmatige intelligentie. Automatisering zorgt voor consistente uitvoering en maakt processen sneller, betrouwbaarder en schaalbaarder.\n",
+        "laag4": "Automatiseren speelt een belangrijke rol binnen bedrijfsvoering, industrie, IT en kunstmatige intelligentie. Binnen Spark betekent automatiseren dat terugkerende taken, zoals gegevens verwerken, kenniskaarten aanmaken, analyses uitvoeren, tradingstrategieën toepassen, rapportages genereren en workflows beheren, zelfstandig worden uitgevoerd volgens vooraf ingestelde regels of intelligente besluitvorming. Hierdoor kan Spark efficiënter werken en blijft de uitvoering consistent en controleerbaar.\n\nPraktijkvoorbeeld – Back-up automatiseren\n\nBenodigdheden\n\nComputer of server\nBack-upsoftware\nOpslaglocatie (lokaal of cloud)\n\nWerkwijze\n\nKies welke bestanden moeten worden opgeslagen.\nStel een automatisch tijdschema in (bijvoorbeeld dagelijks om 02:00 uur).\nLaat de software de back-up zelfstandig uitvoeren.\nControleer regelmatig of de back-ups succesvol zijn voltooid.\nHerstel indien nodig bestanden vanuit de back-up."
+      },
+      "ws5": {
+        "wie": "Bedrijven, programmeurs, systeembeheerders, organisaties en AI-systemen.",
+        "wat": "Het automatisch laten uitvoeren van werkzaamheden of processen.",
+        "wanneer": "Bij terugkerende, voorspelbare of tijdrovende taken.",
+        "waar": "In IT, industrie, bedrijfsprocessen, huishoudens en kunstmatige intelligentie.",
+        "waarom": "Om tijd te besparen, fouten te verminderen, kosten te verlagen en de efficiëntie te verhogen.",
+        "hoe": "Door software, machines of AI taken volgens vooraf ingestelde regels of intelligente beslissingen te laten uitvoeren."
+      },
+      "tags": [
+        "automatiseren",
+        "automatisering",
+        "workflow",
+        "proces",
+        "efficiëntie",
+        "software",
+        "ai",
+        "robotisering",
+        "taak",
+        "it",
+        "bedrijfsvoering",
+        "context",
+        "emotie",
+        "neutraal"
+      ],
+      "topic": "",
+      "verbanden": [
+        {
+          "kaart_id": "kbv2-6abcb839",
+          "begrip": "bots",
+          "lade": "weten",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "automatiseren",
+            "automatisering",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-skel-cd2671e3",
+          "begrip": "automatisering",
+          "lade": "doen",
+          "overlap": 7,
+          "shared_tags": [
+            "ai",
+            "automatiseren",
+            "automatisering",
+            "efficiëntie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-2e85544c",
+          "begrip": "automatisch",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "automatisering",
+            "efficiëntie",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-34b2b93e",
+          "begrip": "autosnap",
+          "lade": "weten",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "automatisering",
+            "context",
+            "emotie",
+            "neutraal"
+          ]
+        },
+        {
+          "kaart_id": "kbv2-94e8f6cb",
+          "begrip": "commando's",
+          "lade": "doen",
+          "overlap": 6,
+          "shared_tags": [
+            "ai",
+            "context",
+            "emotie",
+            "neutraal",
+            "proces"
+          ]
+        }
+      ],
+      "footnote": {
+        "bron": "system_repair",
+        "ingedeeld_door": "user-001",
+        "ingedeeld_op": "2026-07-20T13:35:01.809190+00:00",
+        "vorige_versie_v1": "kb-skel-74abfb05",
+        "vertrouwen": 0.9,
+        "belangrijkheid": 1,
+        "hooks_fired": [
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-05-25T15:25:31.408677+00:00",
+            "result": {
+              "active": false,
+              "is_new": true
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:34:57.085168+00:00",
+            "result": {
+              "active": false,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:34:57.092730+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          },
+          {
+            "hook": "register_in_vocab",
+            "fired_at": "2026-07-20T13:35:02.068228+00:00",
+            "result": {
+              "active": true,
+              "is_new": false
+            }
+          },
+          {
+            "hook": "compute_verbanden",
+            "fired_at": "2026-07-20T13:35:02.075983+00:00",
+            "result": {
+              "n_found": 5,
+              "top_overlap": 7
+            }
+          }
+        ],
+        "laatst_bewerkt_door": "user-001",
+        "laatst_bewerkt_op": "2026-07-20T13:34:56.984775+00:00"
       },
       "media": {
         "voice_url": null,

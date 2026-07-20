@@ -11,7 +11,7 @@
       "rol": "Beheerder",
       "relatie_tot_willem": "Creator",
       "registered_date": "2026-01-15T00:00:00Z",
-      "last_active": "2026-07-20T13:27:59.500753",
+      "last_active": "2026-07-20T13:36:12.372450+00:00",
       "gesprekken_count": 2758,
       "trust_score": 100,
       "onboarding_completed": true,
@@ -1064,11 +1064,23 @@
             "icon": "🪙",
             "rarity": "uncommon",
             "unlocked_at": "2026-07-09T22:02:46.349619+00:00"
+          },
+          {
+            "id": "letter_a",
+            "name": "De Letter A",
+            "description": "Was hier terwijl Spark alle inbox-woorden met de letter A leerde.",
+            "milestone": null,
+            "xp_reward": 100,
+            "icon": "Ⓐ",
+            "rarity": "common",
+            "type": "letter_completion",
+            "unlocked_at": "2026-07-20T13:35:12.470699+00:00",
+            "letter": "A"
           }
         ],
-        "total_xp_from_achievements": 17435
+        "total_xp_from_achievements": 17535
       },
-      "xp": 27884,
+      "xp": 27984,
       "credits": 0,
       "contact": {
         "telefoon": ""
@@ -1459,6 +1471,12 @@
           "reason": "Achievement: I got a ROAR Token",
           "granted_at": "2026-07-09T22:02:46.357348+00:00",
           "total_after": 27884
+        },
+        {
+          "amount": 100,
+          "reason": "Achievement: De Letter A",
+          "granted_at": "2026-07-20T13:35:12.477907+00:00",
+          "total_after": 27984
         }
       ],
       "gradatie_titel": "Beheerder",

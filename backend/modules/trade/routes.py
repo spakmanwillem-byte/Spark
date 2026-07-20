@@ -1044,11 +1044,44 @@ async def get_audit_log(limit: int = Query(100)):
 
 @router.get("/potjes/{user_id}")
 async def get_user_potjes(user_id: str):
-    """Haal potjes overzicht op"""
+    """Haal potjes overzicht op — v10_finance_hub: overlay dynamische capital uit token-prijs.
+
+    Elke pot krijgt `capital_dynamic` = current_token_price, en `live_value` wordt
+    aangevuld als hij ontbreekt. Dit zorgt dat Trader-UI en Analytics de hybride
+    Willem-regel (1 token = 1 pot @ current_price) live tonen.
+    """
+    summary = potjes_svc.get_summary(user_id)
+    potjes_list = potjes_svc.get_potjes(user_id)["potjes"]
+
+    # Overlay dynamic capital uit finance_hub
+    try:
+        from modules.boekhouder.finance_hub import get_hub
+        price_info = get_hub().get_price()
+        dynamic_price = price_info.get("current_price_eur", 0)
+        for p in potjes_list:
+            stored = float(p.get("capital", 0) or 0)
+            p["capital_stored"] = stored
+            p["capital_dynamic"] = dynamic_price
+            # Hybride: als pot idle (geen open positie) → live_value = dynamic_price
+            # Als open positie → laat bestaande live_value (real Bitvavo-waarde) staan
+            position = p.get("position") or {}
+            has_open = position.get("is_open") or position.get("entry_price")
+            if not has_open:
+                p["live_value"] = dynamic_price
+            elif "live_value" not in p or p.get("live_value") is None:
+                p["live_value"] = dynamic_price
+            p["_hybrid_source"] = "finance_hub_v10"
+        # Update summary total_capital naar dynamische som
+        if potjes_list:
+            summary["total_capital_dynamic"] = round(len(potjes_list) * dynamic_price, 2)
+            summary["token_price_eur"] = dynamic_price
+    except Exception as ex:
+        print(f"[potjes] finance_hub overlay failed (non-blocking): {ex}")
+
     return {
         "success": True,
-        "summary": potjes_svc.get_summary(user_id),
-        "potjes": potjes_svc.get_potjes(user_id)["potjes"],
+        "summary": summary,
+        "potjes": potjes_list,
     }
 
 

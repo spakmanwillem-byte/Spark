@@ -197,6 +197,28 @@ async def learn_from_interaction(
     _save_learned(data)
     logger.info("[trigger_learner] +1 voorstel: '%s' (categorie=%s)", topic, analysis.get("categorie"))
 
+    # v9_llm_self_learn_001 — Spark leert van eigen output.
+    # Non-blocking: bij fout gaat trigger-learning gewoon door.
+    try:
+        from modules.chat.llm_output_scanner import scan_spark_response
+        from modules.kb_v2.lite_card_factory import batch_create_from_scan
+        candidates = scan_spark_response(spark_response, user_text=user_text, top_n=6)
+        if candidates:
+            result = batch_create_from_scan(
+                candidates=candidates,
+                turn_id=voorstel["id"],
+                user_id="user-000",  # Spark leert zichzelf
+                max_per_turn=3,
+            )
+            if result.get("created_count", 0) > 0:
+                logger.info(
+                    "[llm_self_learn] +%d lite-kaarten uit Spark's antwoord: %s",
+                    result["created_count"],
+                    [c["begrip"] for c in result["created"]],
+                )
+    except Exception as e:
+        logger.warning("[llm_self_learn] scan/create faalde: %s", e)
+
 
 def schedule_learn(
     user_text: str,

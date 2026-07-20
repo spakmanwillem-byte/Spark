@@ -1,5 +1,44 @@
 # Spark Core 2.0 — Engineering Practices & Backlog
 
+## ✅ Sessie 40c (2026-07-20) — Spark leert van zichzelf (v9_llm_self_learn_001)
+
+### 🎯 Afgerond
+- **NIEUW: `chat/llm_output_scanner.py`** — kleine, pure module (~80 regels). Scant `spark_response` op woorden die (a) NIET in KB v2 staan en (b) NIET in `user_text` zaten. Herbruikt stopwoorden uit `kb_v2/chat_analyzer.py` als single source of truth. Filtert min-lengte, digits, en Spark-specifieke stopwoorden (spark/willem/etc.).
+- **NIEUW: `kb_v2/lite_card_factory.py`** — kleine module (~110 regels). Maakt "lite" (skeleton) inbox-kaarten met VOLLEDIGE `footnote`-metadata: `llm_generated`, `llm_lite`, `extract_source`, `extract_turn_id`, `extract_at`, `extract_context_snippet`, `extract_count_in_spark`, `needs_review`. Herbruikt bestaand footnote-veld (al gebruikt door `llm_generate_routes.py` en `v1_drift_sync.py`).
+- **HOOK: `chat/trigger_learner.py`** — na elke succesvolle `learn_from_interaction()` roept nu ook `scan_spark_response()` → `batch_create_from_scan(max_per_turn=3)`. Non-blocking: bij fout gaat trigger-learning gewoon door. Log-line `[llm_self_learn] +N lite-kaarten uit Spark's antwoord`.
+- **METADATA-standaard** — elke lite-kaart is 100% herleidbaar naar herkomst-turn via footnote. Audit via `GET /api/kb/v2/inbox` toont `footnote.extract_source = "spark_llm_output_scanner_v1"`.
+
+### 📊 Snuffelvondsten (voor bouw)
+- `footnote` veld bestond al op inbox-kaarten (gebruikt door `llm_generate_routes.py:174-178` en `v1_drift_sync.py:131`)
+- `trigger_learner._llm_analyze()` krijgt `spark_response` al binnen maar gebruikte 'm niet in prompt — **gemiste kans**, nu uitgebreid via hook
+- `add_to_inbox(source=...)` bestond al maar `source` werd nergens consistent gezet — nu source=`llm_auto_extract`
+- 2 verschillende inbox-files bestonden: `inbox.json` (oude) vs `knowledge_inbox.json` (echte, gebruikt door `_inbox_path()`) — factory gefixt om juiste te gebruiken
+
+### 🎯 Filosofie geland
+Spark leert nu van 2 bronnen:
+1. **User's chat-input** (bestaand, via `chat_analyzer.py` + `_auto_snap_from_diep`)
+2. **Spark's eigen LLM-output** (NIEUW, via `llm_output_scanner.py` + `lite_card_factory.py`)
+
+Beide voeren `knowledge_inbox.json` met `footnote.needs_review=True` — Willem kan curator zijn zonder dat de KB automatisch vervuild raakt.
+
+### ✅ Test-status
+- Handmatige test: scan van 3-zin Spark-antwoord → 3 kandidaten gedetecteerd → 2 lite-kaarten aangemaakt (1 was al bestaand). Footnote correct gestempeld met alle metadata-velden.
+- Cleanup: test-kaarten (`turn_id="test-*"`) automatisch verwijderd.
+- Regressie: trigger_learner behoudt oude flow, LLM-scan is opt-in via non-blocking try/except.
+
+### 🎯 Post-deploy check voor Willem
+1. Voer een Diep-modus chat uit → check `[llm_self_learn]` in `/var/log/supervisor/backend.err.log`
+2. `GET /api/kb/v2/inbox` → zoek kaarten met `footnote.llm_lite=true`
+3. Handmatig invullen of afkeuren via bestaande KB-UI
+
+### 🟡 Nog te doen (P1, volgende sessie)
+- **KB curator-UI** — toon lite-kaarten apart met "accept lagen / afkeuren"-knoppen (backend werkt, UI mist)
+- **Batch-processing** — als Spark 10× per dag een term noemt, escaleer naar auto-accept (nu: elke turn max 3 kaarten)
+- **Blueprint-koppeling** — lite-kaarten die naar bestaande blueprint-modules verwijzen (bijv. "trader", "monitor") auto-linken via `verbanden`
+- **Neural-engine (v9)** — nog steeds P1 na Adaptive Strategy Lab afronding
+
+---
+
 ## ✅ Sessie 40b (2026-07-10) — Fantoom-fix + Trader terug live
 
 ### 🎯 Afgerond

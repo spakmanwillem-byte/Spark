@@ -1,6 +1,49 @@
 # Spark Core 2.0 — PRD
 
 
+## Sessie 43 (2026-07-20) — Auto-Mint Scheduler afgerond + deployment-ready
+
+### Wat gebouwd
+- **AutoMintScheduler bug gefixt**: ruis-berekening gebruikte `current_price` waardoor ruis altijd ≈ 0 was. Nu correct: `ruis = bitvavo_free − (n_pots × base_pot_size_eur €10)`.
+- **3 admin endpoints toegevoegd** in `modules/boekhouder/routes.py`:
+  - `GET  /api/boekhouder/auto-mint/state` — live ruis + baseline + threshold + history
+  - `POST /api/boekhouder/auto-mint/tick`  — handmatige check (`force=true` skip 24u grace, cooldown blijft)
+  - `POST /api/boekhouder/auto-mint/reset` — reset `condition_met_since` / `last_auto_mint_at` (admin)
+- **Scheduler-hook** in `modules/scheduler/__init__.py::_maybe_auto_mint` — tick elk uur (interne 24u grace + 24u cooldown houden het veilig).
+- **Notify vervangen**: `modules.notifications` bestond niet meer → nu via `boekhouder.service._send_dm` (Willem) + `_post_community` (papertrail-echo).
+- **Snapshot verrijkt** met live cijfers: bitvavo_free, n_potjes_total, baseline_eur, ruis_eur, condition_met_now, next_mint_threshold.
+
+### Verificatie (curl E2E)
+- ✅ `GET /auto-mint/state` → ruis €20.24 / baseline €60 / 6 pots → condition_met_now: true
+- ✅ `POST /auto-mint/tick force=true` → MINTED pot-006 voor user-000 @ €16.048 (log_event `e57404e7…`)
+- ✅ Reserve-kluis correct afgeboekt: dev €0.321 + maint €0.321 + buffer €0.1605 = €0.8025
+- ✅ Hash-chain integrity: beide mint-events herbouwen hun `event_hash` correct
+- ✅ Cooldown-guard: 2e tick met force=true → geen mint (`waiting_for_grace_or_cooldown`)
+- ✅ Admin-guard: non-admin (user-c609d7d1) → HTTP 403
+- ✅ Natural tick (force=false) → `condition_started` (wacht 24u zoals bedoeld)
+
+### Deployment-agent check: PASS
+Geen blockers. Env-vars, CORS, routes, imports allemaal groen.
+
+### Wijzigingen
+- EDIT `backend/modules/boekhouder/agents/auto_mint_scheduler.py` — ruis-fix + `force` param + boekhouder-DM/community-post + verrijkte snapshot
+- EDIT `backend/modules/boekhouder/routes.py` — 3 admin endpoints (`/auto-mint/{state,tick,reset}`)
+- EDIT `backend/modules/scheduler/__init__.py` — `_maybe_auto_mint` uur-tick toegevoegd aan main loop
+
+### NIET afgerond (bewust uitgesteld — Willem's verzoek)
+- Gift-token → pot-eigendom transfer (Issue 2, P2)
+- Sell/Dissolve token flow (Issue 1, P1)
+- Wallet/Shop UI migratie naar `/boekhouder/snapshot` endpoint (P1)
+- SafeguardAgent voor 2-phase delete/rollback (P2)
+- Trader market mismatch (5 pots op BCH-EUR, blueprint monitort 4 markten)
+
+### Open: test-mint (pot-006)
+Tijdens verificatie is 1 echte mint uitgevoerd (`auto_mint_24h_ruis` source). Willem beslist na deploy of hij deze houdt (was terecht: €80.24 bitvavo / 5 pots = €20 ruis) of terugdraait.
+
+---
+
+
+
 ## Sessie 42 (2026-07-09 laat) — Trader definitief + Batch 1 Spark Core
 
 ### Probleem

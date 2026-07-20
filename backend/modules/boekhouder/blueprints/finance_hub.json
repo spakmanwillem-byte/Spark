@@ -41,7 +41,13 @@
       "handles": ["list", "value", "capital", "revalue"],
       "data_files_read": ["data/financial/user_potjes.json"],
       "capital_formula": "current_token_price",
-      "_note": "1 token = 1 pot. Elke pot's capital wordt live berekend uit token_price."
+      "operational_rules": {
+        "one_pot_one_position": true,
+        "_rule_description": "Elk pot houdt max 1 open positie tegelijk. Trader kan pas nieuwe BUY doen als een pot vrij is (is_open=false). Bij alle 5 potjes bezet → Spark wacht tot een SELL uitvoert.",
+        "buy_frequency": "max 1 buy per pot per trader-cycle (15 min)",
+        "code_ref": "modules/trade/monitor.py:982 (if not pot.position.is_open)"
+      },
+      "_note": "1 token = 1 pot. Elke pot's capital wordt live berekend uit token_price. Pot = 1 trading slot."
     },
     "bitvavo_agent": {
       "topic": "bitvavo_saldo",

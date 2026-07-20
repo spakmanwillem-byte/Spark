@@ -14,7 +14,7 @@ Enige bron van waarheid voor de complete finance-economie:
 - **SEPA** (placeholder voor bankkoppeling)
 - **Persona** (Boekhouder chat + weekverslagen)
 
-## 🧬 De hybride token-potje regel (Willem-regel)
+## 🧬 De hybride token-potje regel (hybride regel)
 - `1 token = 1 pot` — hard boekhouding
 - `pot.capital = current_token_price` — leeft mee met prijs
 - Deposits → verhogen Bitvavo → verhogen dynamische prijs → alle potjes stijgen mee

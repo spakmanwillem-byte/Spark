@@ -58,7 +58,7 @@ def mint_tokens(user_id: str, n_tokens: int, source: str = "manual",
                 dry_run: bool = True) -> Dict[str, Any]:
     """Mint N tokens naar user's roar-balance + user_wallets mirror + potje-per-token.
 
-    Hybride regel: 1 token = 1 pot (Willem-regel).
+    Hybride regel: 1 token = 1 pot (hybride regel).
     """
     if n_tokens <= 0:
         return {"success": False, "error": "n_tokens moet > 0"}

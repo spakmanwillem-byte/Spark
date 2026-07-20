@@ -134,7 +134,7 @@ async def sync_wallet_mirror_endpoint(body: SyncBody):
 
 @router.post("/admin/mint")
 async def mint_endpoint(body: MintBody):
-    """Mint N tokens. 1 token = 1 pot (hybride Willem-regel).
+    """Mint N tokens. 1 token = 1 pot (hybride hybride regel).
 
     Bij dry_run=true: alleen preview. Bij dry_run=false: schrijft naar roar_balances,
     user_wallets en user_potjes files.
